@@ -1,0 +1,84 @@
+architecture.common.i18n.Localizer -> architecture.common.i18n.Localizer:
+    java.lang.String PREFIX_DELIM -> PREFIX_DELIM
+    java.lang.String PREFIX -> PREFIX
+    java.lang.String VERSION -> VERSION
+    java.lang.String ID -> ID
+    java.lang.String MESSAGE_BODY -> MESSAGE_BODY
+    java.lang.String CAUSE -> CAUSE
+    java.lang.String ACTION -> ACTION
+    java.text.DecimalFormat decimalformat -> decimalformat
+    java.util.ResourceBundle bundle -> a
+    46:46:java.lang.String getVersion() -> getVersion
+    50:57:java.lang.String getPrefix() -> getPrefix
+    62:62:java.lang.String getBody(java.lang.String) -> getBody
+    66:66:java.lang.String getBody(int) -> getBody
+    70:70:java.lang.String getCause(java.lang.String) -> getCause
+    74:74:java.lang.String getCause(int) -> getCause
+    79:79:java.lang.String getString(java.lang.String,int) -> getString
+    83:83:java.lang.String getString(java.lang.String,java.lang.String) -> getString
+    88:88:java.lang.Object getObject(java.lang.String,java.lang.String) -> getObject
+    92:92:java.lang.Object getObject(java.lang.String,int) -> getObject
+    96:96:java.lang.String get(java.lang.String) -> get
+architecture.common.i18n.LocalizerFactory -> architecture.common.i18n.LocalizerFactory:
+    architecture.common.i18n.LocalizerFactory$Implementation impl -> a
+    46:46:architecture.common.i18n.Localizer getLocalizer(java.lang.String) -> getLocalizer
+    50:50:architecture.common.i18n.Localizer getLocalizer(java.lang.String,java.util.Locale) -> getLocalizer
+    54:54:architecture.common.i18n.Localizer getLocalizer(java.lang.String,java.util.Locale,java.lang.ClassLoader) -> getLocalizer
+architecture.common.i18n.LocalizerFactory$Implementation -> architecture.common.i18n.LocalizerFactory$Implementation:
+    architecture.common.i18n.Localizer getLocalizer(java.lang.String,java.util.Locale,java.lang.ClassLoader) -> getLocalizer
+    architecture.common.i18n.Localizer getLocalizer(java.lang.String,java.util.Locale) -> getLocalizer
+    architecture.common.i18n.Localizer getLocalizer(java.lang.String) -> getLocalizer
+architecture.common.i18n.impl.LocalizerFactoryImpl -> architecture.common.i18n.impl.LocalizerFactoryImpl:
+    124:124:architecture.common.i18n.Localizer getLocalizer(java.lang.String) -> getLocalizer
+    128:128:architecture.common.i18n.Localizer getLocalizer(java.lang.String,java.util.Locale) -> getLocalizer
+    132:133:architecture.common.i18n.Localizer getLocalizer(java.lang.String,java.util.Locale,java.lang.ClassLoader) -> getLocalizer
+architecture.common.i18n.impl.LocalizerFactoryImpl$1 -> architecture.common.i18n.impl.LocalizerFactoryImpl$1:
+architecture.common.i18n.impl.LocalizerFactoryImpl$LocalizerResourceBundleControl -> architecture.common.i18n.impl.LocalizerFactoryImpl$a:
+    java.util.List FORMAT_DEFAULT -> a
+    72:72:java.util.List getFormats(java.lang.String) -> getFormats
+    79:117:java.util.ResourceBundle newBundle(java.lang.String,java.util.Locale,java.lang.String,java.lang.ClassLoader,boolean) -> newBundle
+architecture.common.util.ImplFactory -> architecture.common.util.ImplFactory:
+    java.util.Map _map -> a
+    java.lang.String actualPlatformString -> a
+    299:302:java.lang.Class loadClass(java.lang.String) -> a
+    307:307:java.lang.Class loadClassFromKey(java.lang.Class) -> loadClassFromKey
+    312:321:java.lang.Class loadClassFromKey(java.lang.String) -> loadClassFromKey
+    326:328:java.lang.Object loadImplFromClass(java.lang.Class) -> loadImplFromClass
+    334:337:java.lang.Object loadImplFromClass(java.lang.String) -> loadImplFromClass
+    342:342:java.lang.Object loadImplFromKey(java.lang.Class) -> loadImplFromKey
+    346:347:java.lang.Object loadImplFromKey(java.lang.String) -> loadImplFromKey
+    352:379:java.util.List parseLegacyXmlFile(java.util.List) -> a
+    52:52:java.lang.String access$002(java.lang.String) -> a
+    52:52:java.lang.String access$000() -> a
+architecture.common.util.ImplFactory$Factory -> b:
+    java.lang.String interfaceName -> a
+    java.lang.String implName -> b
+    boolean isOverride -> a
+    java.lang.String platforms -> c
+    71:81:java.lang.String toString() -> toString
+architecture.common.util.ImplFactory$FactoryList -> c:
+    int rank -> a
+    java.util.List factories -> a
+    97:103:java.lang.String toString() -> toString
+architecture.common.util.ImplFactory$ImplFactoryParsingHandler -> d:
+    org.xml.sax.Locator locator -> a
+    int rank -> a
+    java.util.List factories -> a
+    architecture.common.util.ImplFactory$Factory factory -> a
+    java.lang.StringBuffer value -> a
+    116:127:boolean validOn(java.lang.String) -> a
+    147:148:void characters(char[],int,int) -> characters
+    151:151:void endDocument() -> endDocument
+    154:166:void endElement(java.lang.String,java.lang.String,java.lang.String) -> endElement
+    170:171:void error(org.xml.sax.SAXParseException) -> error
+    175:177:void fatalError(org.xml.sax.SAXParseException) -> fatalError
+    181:181:java.util.List getFactories() -> a
+    185:186:void setDocumentLocator(org.xml.sax.Locator) -> setDocumentLocator
+    189:190:void startDocument() -> startDocument
+    193:216:void startElement(java.lang.String,java.lang.String,java.lang.String,org.xml.sax.Attributes) -> startElement
+    220:221:void warning(org.xml.sax.SAXParseException) -> warning
+architecture.common.util.ImplFactory$RankComparator -> a:
+    225:225:int compare(java.lang.Object,java.lang.Object) -> compare
+architecture.common.util.PlatformConstants -> architecture.common.util.PlatformConstants:
+    java.lang.String FILE_SEP -> FILE_SEP
+    java.lang.String EOL -> EOL
