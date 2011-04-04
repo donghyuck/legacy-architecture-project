@@ -44,7 +44,7 @@ import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.recordset.Recordset;
 import architecture.ee.jdbc.recordset.RecordsetException;
 import architecture.ee.jdbc.recordset.RecordsetField;
-import architecture.ee.spring.jdbc.support.ExtendedJdbcTemplate;
+import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public class SqlQueryImpl<T> implements SqlQuery {
 	

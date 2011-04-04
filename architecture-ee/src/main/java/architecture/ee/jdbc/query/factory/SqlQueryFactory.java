@@ -18,7 +18,7 @@ package architecture.ee.jdbc.query.factory;
 import javax.sql.DataSource;
 
 import architecture.ee.jdbc.query.SqlQuery;
-import architecture.ee.spring.jdbc.support.ExtendedJdbcTemplate;
+import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public interface SqlQueryFactory {
 	

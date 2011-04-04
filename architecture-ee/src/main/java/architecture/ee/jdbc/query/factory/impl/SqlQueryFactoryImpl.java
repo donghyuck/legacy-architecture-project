@@ -26,7 +26,7 @@ import org.apache.commons.lang.StringUtils;
 import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
-import architecture.ee.spring.jdbc.support.ExtendedJdbcTemplate;
+import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
