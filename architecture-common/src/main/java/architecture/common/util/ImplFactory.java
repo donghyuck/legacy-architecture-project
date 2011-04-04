@@ -26,8 +26,8 @@ import java.util.Map;
 
 import javax.xml.parsers.SAXParserFactory;
 
-import javolution.util.FastMap;
 import javolution.util.FastList;
+import javolution.util.FastMap;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
