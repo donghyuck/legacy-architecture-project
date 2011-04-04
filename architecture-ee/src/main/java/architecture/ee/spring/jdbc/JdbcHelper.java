@@ -94,6 +94,14 @@ public class JdbcHelper {
     private DatabaseType databaseType = DatabaseType.unknown;
       
     public JdbcHelper(){};
+    
+    public JdbcHelper(DataSource dataSource){    	
+    	try {
+			initialize(dataSource);
+		} catch (MetaDataAccessException e) {
+			e.printStackTrace();
+		}
+    };
         
 	public boolean isTransactionsSupported() {
 		return transactionsSupported;
