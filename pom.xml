@@ -1,11 +1,17 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>architecture</groupId>
-  <artifactId>architecture-build</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>POWER ARCHITECTURE BUILD</name>
-  <description>자바 아케텍처 전체 빌드 파일</description>
-  <url>http://code.google.com/p/power-j/</url>
-  <inceptionYear>1010</inceptionYear>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>architecture</groupId>
+	<artifactId>architecture-build</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>POWER ARCHITECTURE BUILD</name>
+	<description>자바 아키텍처 전체 빌드 파일</description>
+	<url>http://code.google.com/p/power-j/</url>
+
+	<modules>
+		<module>architecture-common</module>
+		<module>architecture-ee</module>
+	</modules>
+
 </project>
