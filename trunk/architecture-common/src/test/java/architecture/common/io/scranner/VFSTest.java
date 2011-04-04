@@ -5,7 +5,9 @@ import org.apache.commons.vfs.FileListener;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemManager;
 import org.apache.commons.vfs.VFS;
-import org.apache.commons.vfs.impl.DefaultFileMonitor;
+import org.junit.Test;
+
+import architecture.common.vfs.ExtendedFileMonitor;
 
 
 public class VFSTest {
@@ -19,9 +21,7 @@ public class VFSTest {
 
 	public static void main(String[] args){
 		
-		System.out.println("-----------");
-
-		
+		System.out.println("-----------");		
 		System.out.println("-----------");
 		try {
 			(new VFSTest()).testLocalFileSystem();
@@ -31,24 +31,10 @@ public class VFSTest {
 		
 	}
 	
-	
+	@Test
 	public void testLocalFileSystem() throws Exception{
-		
-		String path = "file:///C:/TOOLS/workspace/opensource/PowerJ/installableApps/default/WebContent/WEB-INF/config/sql" ;
-	
-		FileSystemManager vmgr = VFS.getManager();
-		FileObject fo = vmgr.resolveFile(path);
-	
-		// List the children of the  file
-		FileObject[] children = fo.getChildren();
-		System.out.println( "Children of " + fo.getName().getURI() );
-		
-		for ( int i = 0; i < children.length; i++ )
-		{
-		    System.out.println( children[ i ].getName().getBaseName() );
-		}
-		
-		DefaultFileMonitor monitor = new DefaultFileMonitor(new FileListener(){
+
+		ExtendedFileMonitor monitor = new ExtendedFileMonitor(new FileListener(){
 
 			public void fileChanged(FileChangeEvent event) throws Exception {		
 				System.out.println(event.getFile().getName() + " changed.");
@@ -65,11 +51,39 @@ public class VFSTest {
 				System.out.println(event.getFile().getContent() + ".");
 			}});
 		
-		
+	    
+		//monitor.setDelay(1000);
 		//monitor.setRecursive(true);
-		//monitor.addFile(fo);
-		//monitor.start();
 		
+		monitor.setRecursive(true);
+		
+		
+		String path = "file:///C:/TOOLS/workspace/opensource/PowerJ/installableApps/default/WebContent/WEB-INF/config/sql/" ;
+	
+		FileSystemManager vmgr = VFS.getManager();
+		FileObject fo = vmgr.resolveFile(path);
+		
+		//System.out.println( fo.getType().hasChildren() );
+		
+		if(fo.getType().hasChildren()){
+		FileObject[] children = fo.getChildren();
+		//System.out.println( "Children of " + fo.getName().getURI() );
+		
+		for ( int i = 0; i < children.length; i++ )
+		{
+		   // System.out.println( children[ i ].getName().getBaseName() );
+		}
+		}
+
+		monitor.addFile(fo);
+		for( FileObject fobj : monitor.getMonitoredFileObjectList()){
+			
+			System.out.println( "obj=" + fobj.getName().getPath());
+		}
+		
+		//monitor.run();
+		//monitor.start();
+		monitor.run();
 		
 		//ScannerThread t = new ScannerThread(true);
 		//t.setDaemon(true);
