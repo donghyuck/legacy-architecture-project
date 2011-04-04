@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factories>
+	<rank>1000</rank>
+	<factory
+		interface="architecture.ee.spring.jdbc.support.JdbcHelperFactory$Implementation"
+		impl="architecture.ee.spring.jdbc.support.internal.JdbcHelperFactoryImpl" />
+		
+</factories>
+
