@@ -1,0 +1,44 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>architecture-parent</artifactId>
+		<groupId>architecture</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../architecture-parent</relativePath>
+	</parent>
+	<packaging>jar</packaging>
+	<groupId>architecture-ws</groupId>
+	<artifactId>architecture-ws</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>ARCHITECTURE WS</name>
+	<description>웹서비스 개발을 위한 컴포넌트</description>
+	<contributors>
+		<contributor>
+			<name>Donghyuch Son</name>
+			<email>andang311@inkium.com</email>
+		</contributor>
+	</contributors>
+	<organization>
+		<name>INKIUM</name>
+		<url>http://www.inkium.com</url>
+	</organization>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+			</plugin>
+		</plugins>
+	</build>	
+	<dependencies>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.6</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+</project>
