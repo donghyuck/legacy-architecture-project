@@ -42,7 +42,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
-import architecture.ee.spring.jdbc.JdbcHelper.DatabaseType;
+import architecture.ee.jdbc.util.JdbcHelper;
+import architecture.ee.jdbc.util.JdbcHelper.DatabaseType;
+import architecture.ee.jdbc.util.JdbcHelperFactory;
 
 /**
  * 스프링프레임워크에서 제공하는 JdbcTemplate 을 확장한 클래스.

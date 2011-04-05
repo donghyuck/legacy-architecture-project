@@ -13,19 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.spring.jdbc.internal;
-import javax.sql.DataSource;
+package architecture.ee.exception;
 
-import architecture.ee.jdbc.util.*;
+public class RuntimeSqlException extends SystemException {
 
-public class JdbcHelperFactoryImpl implements JdbcHelperFactory.Implementation {
-
-	public JdbcHelper getJdbcHelper(DataSource dataSource) {
-		return new JdbcHelperImpl(dataSource);
+	public RuntimeSqlException() {
+		super();
 	}
 
-	public JdbcHelper getJdbcHelper() {
-		return new JdbcHelperImpl();
+	public RuntimeSqlException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public RuntimeSqlException(String msg) {
+		super(msg);
+	}
+
+	public RuntimeSqlException(Throwable cause) {
+		super(cause);
 	}
 
 }
