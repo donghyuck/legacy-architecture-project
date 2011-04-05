@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<factories>
+	<rank>1000</rank>
+	<factory
+		interface="architecture.common.i18n.impl.LocalizerFactory$Implementation"
+		impl="architecture.common.i18n.LocalizerFactoryImpl" />
+		
+</factories>
+
