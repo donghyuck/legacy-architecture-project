@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.spring.jdbc;
+package architecture.ee.jdbc.util;
 
 import javax.sql.DataSource;
 
 import architecture.common.util.ImplFactory;
+import architecture.ee.jdbc.util.JdbcHelper;
 
 public class JdbcHelperFactory {
 
