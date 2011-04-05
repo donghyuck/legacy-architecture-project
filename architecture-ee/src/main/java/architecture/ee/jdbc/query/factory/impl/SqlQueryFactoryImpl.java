@@ -63,15 +63,15 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 		);
 	}
 		
-	public SqlQuery getSqlQuery() {
+	public SqlQuery createSqlQuery() {
 		return new SqlQueryImpl(configuration, defaultDataSource);
 	}
 	
-	public SqlQuery getSqlQuery(DataSource dataSource) {
+	public SqlQuery createSqlQuery(DataSource dataSource) {
 		return new SqlQueryImpl(configuration, dataSource);
 	}
 
-	public SqlQuery getSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
+	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
 		return new SqlQueryImpl(configuration, jdbcTemplate);
 	}
 	

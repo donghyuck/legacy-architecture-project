@@ -15,6 +15,11 @@
  */
 package architecture.ee.jdbc.util;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 public interface JdbcHelper {
 	
 	enum DatabaseType {
@@ -68,6 +73,10 @@ public interface JdbcHelper {
 
 	public boolean isTransactionsSupported();
 	
-	//public DataSource getDataSource();
+	public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException ;
+	
+	public void setFetchSize(ResultSet rs, int fetchSize);
+    
+	public void scrollResultSet(ResultSet rs, int rowNumber) throws SQLException;
 	
 }

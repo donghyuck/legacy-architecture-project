@@ -24,11 +24,11 @@ public interface SqlQueryFactory {
 	
 	public String[] getQueryNames();
 	
-	public SqlQuery getSqlQuery();
+	public SqlQuery createSqlQuery();
 	
-	public SqlQuery getSqlQuery(DataSource dataSource);
+	public SqlQuery createSqlQuery(DataSource dataSource);
 	
-	public SqlQuery getSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
+	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
 	
 	public void setDefaultDataSource(DataSource defaultDataSource);
 	
