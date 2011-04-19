@@ -15,13 +15,11 @@
  */
 package architecture.common.lifecycle;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.event.api.EventPublisher;
+import architecture.common.event.api.EventSource;
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.exception.ConfigurationError;
 import architecture.common.exception.ConfigurationWarning;
@@ -29,13 +27,13 @@ import architecture.common.exception.RuntimeError;
 import architecture.common.exception.RuntimeWarning;
 
 
-public class ComponentImpl implements Component {
+public class ComponentImpl implements Component, EventSource {
     
     protected String name;
     
     protected volatile State state;
-    
-    private PropertyChangeSupport propertyChangeSupport = null;
+            
+    private EventPublisher eventPublisher = null;
     
     protected Log log = LogFactory.getLog(getClass());
     
@@ -66,20 +64,20 @@ public class ComponentImpl implements Component {
     
     public void destroy() {
     	setState(State.DESTROYING);
-    	doDestroy();
+    	destoryInternal();
     	setState(State.DESTROYED);
     }
 
     public void initialize() throws ComponentDisabledException, ConfigurationWarning, ConfigurationError {
     	setState(State.INITIALIZING);
-    	doInitialize();
+    	initializeInternal();
     	setState(State.INITIALIZED);
     }
 
     public void start() throws RuntimeError, RuntimeWarning {
     	if(state == State.INITIALIZED){
 	    	setState(State.STARTING);	    	
-	    	doStart();
+	    	startInternal();
 	    	setState(State.STARTED);
     	}
     }
@@ -87,7 +85,7 @@ public class ComponentImpl implements Component {
     public void stop() {  
     	if(state == State.STARTED || state == State.RUNNING ){
 	    	setState(State.STOPING); 
-	    	doStop();
+	    	stopInternal();
 	    	setState(State.STOPED);
     	}
     }
@@ -96,38 +94,33 @@ public class ComponentImpl implements Component {
     {	
     	State oldValue = getState();
         state = newState;
-        getPropertyChangeSupport().firePropertyChange("state", oldValue, state);
+        fireStateChangeEvent(oldValue, state);  
+    }
+    
+    protected  void startInternal(){}
+    
+    protected  void stopInternal(){}
+    
+    protected  void destoryInternal(){}
+    
+    protected  void initializeInternal(){}
         
+    protected void fireStateChangeEvent(State oldValue, State state){
+       if(eventPublisher != null){
+           eventPublisher.publish(new StateChangeEvent(this, oldValue, state));    	
+       }
     }
     
-    protected  void doStart(){}
-    
-    protected  void doStop(){}
-    
-    protected  void doDestroy(){}
-    
-    protected  void doInitialize(){}
-    
-    protected PropertyChangeSupport getPropertyChangeSupport()
-    {
-        if(propertyChangeSupport == null)
-            propertyChangeSupport = new PropertyChangeSupport(this);
-        return propertyChangeSupport;
+           
+    protected EventPublisher getEventPublisher(){
+    	return eventPublisher;
     }
     
-    public void addPropertyChangeListener(String propertyName, PropertyChangeListener propertyChangeListener)
-    {
-        getPropertyChangeSupport().addPropertyChangeListener(propertyName, propertyChangeListener);
-    }
+    /**
+     * method from EventSource interface!
+     */
+	public void setEventPublisher(EventPublisher eventPublisher) {
+		this.eventPublisher = eventPublisher;		
+	}
 
-    public void removePropertyChangeListener(String propertyName, PropertyChangeListener propertyChangeListener)
-    {
-        getPropertyChangeSupport().removePropertyChangeListener(propertyName, propertyChangeListener);
-    }
-
-    protected void firePropertyChange(PropertyChangeEvent evt)
-    {
-        getPropertyChangeSupport().firePropertyChange(evt);
-    }
-    
 }
