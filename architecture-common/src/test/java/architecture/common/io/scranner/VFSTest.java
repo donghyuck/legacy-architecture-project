@@ -82,8 +82,8 @@ public class VFSTest {
 		}
 		
 		//monitor.run();
-		//monitor.start();
-		monitor.run();
+		monitor.start();
+		//monitor.run();
 		
 		//ScannerThread t = new ScannerThread(true);
 		//t.setDaemon(true);
