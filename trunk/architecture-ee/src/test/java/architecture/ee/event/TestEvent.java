@@ -1,0 +1,61 @@
+/*
+ * Copyright 2010, 2011 INKIUM, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package architecture.ee.event;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import architecture.common.event.api.EventListener;
+import architecture.common.event.api.EventPublisher;
+import architecture.common.lifecycle.ApplicationStateChangeEvent;
+import architecture.common.lifecycle.StateChangeEvent;
+
+
+public class TestEvent {
+	
+private static ApplicationContext context = null ;
+	
+	@Before
+	public void setUp() throws Exception {
+		String resource = "eventSubsystemContext.xml";			
+		if ( context == null){
+			System.out.println( "setup ========================1" );
+			context = new ClassPathXmlApplicationContext(resource);
+		}
+		
+		if ( context == null){
+			System.out.println( "setup ========================2" );
+			context = new ClassPathXmlApplicationContext("/"+resource);
+		}
+
+	}
+	
+	@Test
+	public void testLoadEventContext(){
+		EventPublisher eventPublisher = (EventPublisher)context.getBean("eventPublisher");		
+		eventPublisher.register(this);				
+		eventPublisher.publish(new ApplicationStateChangeEvent(this, architecture.common.lifecycle.State.STARTING, architecture.common.lifecycle.State.STARTED));
+		
+	}	
+	
+	@EventListener
+	 public void onEvent(StateChangeEvent event){
+		 System.out.println( " catch event :: " + event.getClass().getName() );
+	 }
+	
+}
