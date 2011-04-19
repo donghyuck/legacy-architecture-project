@@ -3,7 +3,6 @@
 	<rank>1000</rank>
 	<factory
 		interface="architecture.common.i18n.impl.LocalizerFactory$Implementation"
-		impl="architecture.common.i18n.LocalizerFactoryImpl" />
-		
+		impl="architecture.common.i18n.LocalizerFactoryImpl" />		
 </factories>
 
