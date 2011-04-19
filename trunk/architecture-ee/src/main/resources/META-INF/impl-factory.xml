@@ -3,7 +3,8 @@
 	<rank>1000</rank>
 	<factory
 		interface="architecture.ee.jdbc.util.JdbcHelperFactory$Implementation"
-		impl="architecture.ee.spring.jdbc.internal.JdbcHelperFactoryImpl" />
+		impl="architecture.ee.spring.jdbc.internal.JdbcHelperFactoryImpl" />	
 		
+			
 </factories>
 
