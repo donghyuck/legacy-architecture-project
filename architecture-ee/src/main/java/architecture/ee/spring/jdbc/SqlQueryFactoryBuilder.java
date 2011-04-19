@@ -53,7 +53,7 @@ public class SqlQueryFactoryBuilder {
 	
 	private List<String> resourceLocations;	
 	
-	private SqlResourceDeployer sqlResourceDeployer ;
+	private SqlResourceScanner sqlResourceDeployer ;
 	
 	private boolean isSetSqlResourceDeployer ;
 	
@@ -124,12 +124,12 @@ public class SqlQueryFactoryBuilder {
 						}						
 					}
 				}
-			}		
-
+			}
+			
 			if(isSetSqlResourceDeployer){				
 				if( sqlResourceDeployer.getState() == State.INITIALIZED )
 					sqlResourceDeployer.start();
-				log.debug("SqlResourceDeployer Status:" + sqlResourceDeployer.getState());
+				
 			}
 			
 		} catch (Exception e) {}
@@ -145,7 +145,7 @@ public class SqlQueryFactoryBuilder {
 	
 
 	
-	public void setSqlResourceDeployer(SqlResourceDeployer sqlResourceDeployer) {
+	public void setSqlResourceDeployer(SqlResourceScanner sqlResourceDeployer) {
 		this.sqlResourceDeployer = sqlResourceDeployer;
 		this.isSetSqlResourceDeployer = true;
 	}

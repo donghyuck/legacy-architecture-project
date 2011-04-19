@@ -41,14 +41,11 @@ public class SqlFileListener implements FileListener {
 	}
 
 	public void fileChanged(FileChangeEvent event) throws Exception {
-		// update
 		FileObject fo = event.getFile();
 		String uri = fo.getName().getURI();				
-		log.debug("file changed:" + uri );
-		
+		log.debug("file changed:" + uri );		
 		configuration.removeUriNamespace(uri, true);
-		buildSqlFromInputStream(fo.getContent().getInputStream(), configuration, uri);
-		
+		buildSqlFromInputStream(fo.getContent().getInputStream(), configuration, uri);		
 	}
 
 	public void fileCreated(FileChangeEvent event) throws Exception {
@@ -75,10 +72,7 @@ public class SqlFileListener implements FileListener {
 	
 	protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration, String uri){
 		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, uri);
-		builder.build();
-		
-		//String domain = configuration.getUriNamespace(uri);
-		
+		builder.build();	
 	}
-
+	
 }
