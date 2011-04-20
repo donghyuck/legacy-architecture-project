@@ -15,28 +15,18 @@
  */
 package architecture.ee.bootstrap;
 
-import javax.servlet.ServletContext;
+import org.springframework.beans.factory.access.BeanFactoryReference;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
 
-import architecture.common.util.ImplFactory;
 
 public class BootStrap {
-
-	public static interface Implementation {
-
-		public abstract boolean boot(ServletContext context);
-
-		public abstract void shutdown(ServletContext context);
-		
-	}
 	
-	static final Implementation impl = (Implementation)ImplFactory.loadImplFromKey(Implementation.class);
-    
-	public static boolean boot(ServletContext context){
-		return impl.boot(context);
+	public static final ConfigurableApplicationContext getBootstrapApplicationContext(){
+		//default-server-context
+		// 향후에 프로퍼티에 읽어 올수 있도록 수정.		
+		BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory("default-services-context");
+		return (ConfigurableApplicationContext) parentContextRef.getFactory();
 	}
-
-	public static void shutdown(ServletContext context){
-		impl.shutdown(context);
-	}
-	
+			
 }
