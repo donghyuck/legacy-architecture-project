@@ -171,7 +171,13 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
-	<modules>
-		<module>architecture-ws</module>
-	</modules>
+<!-- 	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>architecture.common</groupId>
+				<artifactId>architecture-common</artifactId>
+				<version>1.0.0-SNAPSHOT</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement> -->
 </project>
