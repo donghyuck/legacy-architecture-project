@@ -37,9 +37,10 @@ public class ComponentImpl implements Component, EventSource {
     
     protected Log log = LogFactory.getLog(getClass());
     
+    
     public ComponentImpl() {
     	state = State.NONE;
-    	setName(getClass().getName());
+    	setName(getClass().getSimpleName());
 	}
 
 	public String getName()
@@ -47,7 +48,7 @@ public class ComponentImpl implements Component, EventSource {
         return name;
     }
 
-    protected void setName(String name)
+	public void setName(String name)
     {
         this.name = name;
     }
@@ -104,14 +105,15 @@ public class ComponentImpl implements Component, EventSource {
     protected  void destoryInternal(){}
     
     protected  void initializeInternal(){}
-        
+    
     protected void fireStateChangeEvent(State oldValue, State state){
+    	//log.debug("%%%%%%%%%%%%" + eventPublisher);
        if(eventPublisher != null){
+    	   //log.debug("fire state event!!");
            eventPublisher.publish(new StateChangeEvent(this, oldValue, state));    	
        }
     }
     
-           
     protected EventPublisher getEventPublisher(){
     	return eventPublisher;
     }
@@ -123,4 +125,19 @@ public class ComponentImpl implements Component, EventSource {
 		this.eventPublisher = eventPublisher;		
 	}
 
+	public void removeStateChangeListener(Object listener){
+		if(eventPublisher != null)
+			eventPublisher.unregister(listener);
+	}
+	
+	public void addStateChangeListener(Object listener){
+		if(eventPublisher != null)
+			eventPublisher.register(listener);
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Component:%s", getName());
+	}
+	
 }

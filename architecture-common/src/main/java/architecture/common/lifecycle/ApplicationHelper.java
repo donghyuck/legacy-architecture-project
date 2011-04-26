@@ -19,6 +19,8 @@ import architecture.common.exception.ComponentNotFoundException;
 
 public interface ApplicationHelper {
 
+	public Application getApplication();
+	
 	/**
 	 * Injection 방식으로 인자로 넘겨진 객체의 프로퍼티를 세닝하여 리턴한다.
 	 * 이 동작은 함수 이름이 보여주듯이 자동으로 처리된다.
@@ -31,10 +33,10 @@ public interface ApplicationHelper {
 	/**
 	 * 인자로 넘겨진 클래스를 생성하고 자동으로 클래스의 프로퍼티를 Injection 방식으로 세팅한다.
 	 * 이를 위하여 클래스는 자바빈즈 스타일을 준수하여야 한다.
-	 * @param clazz
+	 * @param requiredType
 	 * @return
 	 */
-	public Object createComponent(Class clazz);
+	public <T> T createComponent(Class<T> requiredType);
 	
 	/**
 	 * 인자에 해당하는 객체를 검색하여 리턴한다. 인자는 클래스 또는 객체를 구분가능하게 하는 이름이 될 수 있다.
@@ -43,6 +45,8 @@ public interface ApplicationHelper {
 	 * @throws ComponentNotFoundException
 	 */
 	public Object getComponent(Object obj) throws ComponentNotFoundException;
+	
+	public <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException;
 	
 	public Object getInstance(Object obj);
 	
