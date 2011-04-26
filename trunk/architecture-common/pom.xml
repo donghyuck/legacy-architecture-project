@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>architecture.common</groupId>
 	<artifactId>architecture-common</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<!-- <version>1.0.0-SNAPSHOT</version>-->
 	<name>POWER ARCHITECTURE COMMON</name>
 	<description>자바기술 기반의  클라우드 아키텍처 공통 모듈</description>
 	<packaging>jar</packaging>
@@ -190,4 +190,5 @@
 		</plugins>
 	</reporting>
 	-->
+	<version>1.0.0-SNAPSHOT</version>
 </project>
