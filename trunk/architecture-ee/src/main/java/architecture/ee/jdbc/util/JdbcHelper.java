@@ -21,7 +21,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface JdbcHelper {
-	
+
 	enum DatabaseType {
 
 		oracle,
@@ -37,11 +37,11 @@ public interface JdbcHelper {
 		sqlserver,
 
 		interbase,
-		
+
 		derby,
 
 		unknown;
-	}	
+	}
 
 	public boolean isBatchUpdatesSupported();
 
@@ -72,11 +72,13 @@ public interface JdbcHelper {
 	public int getTransactionIsolation();
 
 	public boolean isTransactionsSupported();
-	
-	public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException ;
-	
+
+	public PreparedStatement createScrollablePreparedStatement(Connection con,
+			String sql) throws SQLException;
+
 	public void setFetchSize(ResultSet rs, int fetchSize);
-    
-	public void scrollResultSet(ResultSet rs, int rowNumber) throws SQLException;
-	
+
+	public void scrollResultSet(ResultSet rs, int rowNumber)
+			throws SQLException;
+
 }

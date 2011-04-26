@@ -30,21 +30,22 @@ public class DynamicContext {
 	public static final String ADDITIONAL_PARAMETER_OBJECT_KEY = "_additional_parameter";
 	public static final String PARAMETER_OBJECT_KEY = "_parameter";
 
-	private final Map<String, Object> bindings;	
+	private final Map<String, Object> bindings;
 	private final StringBuilder sqlBuilder = new StringBuilder();
 
 	public DynamicContext(Object parameterObject) {
 		this.bindings = new HashMap<String, Object>();
 		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
-	}	
-	
-	public DynamicContext(Object parameterObject, Map<String, Object> additionalParameters) {
+	}
+
+	public DynamicContext(Object parameterObject,
+			Map<String, Object> additionalParameters) {
 		this.bindings = new HashMap<String, Object>();
 		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
-		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
-	}	
-	
-	
+		this.bindings
+				.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
+	}
+
 	public Map<String, Object> getBindings() {
 		return bindings;
 	}
@@ -61,5 +62,5 @@ public class DynamicContext {
 	public String getSql() {
 		return sqlBuilder.toString().trim();
 	}
-	
+
 }

@@ -17,7 +17,7 @@ package architecture.ee.exception;
 
 import org.apache.commons.lang.exception.NestableException;
 
-public class ApplicationException extends NestableException{
+public class ApplicationException extends NestableException {
 
 	public ApplicationException() {
 		super();

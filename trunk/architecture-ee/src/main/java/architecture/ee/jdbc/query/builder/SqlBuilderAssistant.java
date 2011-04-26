@@ -23,26 +23,25 @@ import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.query.mapping.StatementType;
 import architecture.ee.jdbc.query.sql.SqlSource;
+
 /**
  * MappedStatement 객체 생성을 돕는 클래스.
  * 
  * 
- * @author DongHyuck, Son 
- *
+ * @author DongHyuck, Son
+ * 
  */
-public class SqlBuilderAssistant extends AbstractBuilder{
+public class SqlBuilderAssistant extends AbstractBuilder {
 
 	private String currentNamespace;
 	private String resource;
 	private Log log = LogFactory.getLog(SqlBuilderAssistant.class);
-	
+
 	public SqlBuilderAssistant(Configuration configuration, String resource) {
 		super(configuration);
 		this.resource = resource;
 	}
-		
-	
-	
+
 	/**
 	 * 
 	 * @param id
@@ -51,16 +50,18 @@ public class SqlBuilderAssistant extends AbstractBuilder{
 	 * @param timeout
 	 * @return
 	 */
-	public MappedStatement addMappedStatement(String id, SqlSource sqlSource, StatementType statementType, Integer fetchSize, Integer timeout) {
-		id = applyCurrentNamespace(id);		
-		MappedStatement.Builder statementBuilder = new MappedStatement.Builder(configuration, id, sqlSource, statementType);
-	    statementBuilder.resource(resource);
-	    statementBuilder.fetchSize(fetchSize);	    
-	    setStatementTimeout(timeout, statementBuilder);	    
-	    MappedStatement statement = statementBuilder.build();
-	    configuration.addMappedStatement(statement);
-	    log.debug("mapped statement:" + statement.getID() );
-	    return statement;
+	public MappedStatement addMappedStatement(String id, SqlSource sqlSource,
+			StatementType statementType, Integer fetchSize, Integer timeout) {
+		id = applyCurrentNamespace(id);
+		MappedStatement.Builder statementBuilder = new MappedStatement.Builder(
+				configuration, id, sqlSource, statementType);
+		statementBuilder.resource(resource);
+		statementBuilder.fetchSize(fetchSize);
+		setStatementTimeout(timeout, statementBuilder);
+		MappedStatement statement = statementBuilder.build();
+		configuration.addMappedStatement(statement);
+		log.debug("mapped statement:" + statement.getID());
+		return statement;
 	}
 
 	public String getCurrentNamespace() {
@@ -70,11 +71,12 @@ public class SqlBuilderAssistant extends AbstractBuilder{
 	public void setCurrentNamespace(String currentNamespace) {
 		if (currentNamespace != null) {
 			this.currentNamespace = currentNamespace;
-			if(StringUtils.isNotEmpty(resource))
+			if (StringUtils.isNotEmpty(resource))
 				configuration.addUriNamespace(resource, currentNamespace);
 		}
 		if (this.currentNamespace == null) {
-			throw new BuilderException("The mapper element requires a namespace attribute to be specified.");
+			throw new BuilderException(
+					"The mapper element requires a namespace attribute to be specified.");
 		}
 	}
 
@@ -85,8 +87,9 @@ public class SqlBuilderAssistant extends AbstractBuilder{
 			return base;
 		return currentNamespace + "." + base;
 	}
-	
-	private void setStatementTimeout(Integer timeout, MappedStatement.Builder statementBuilder) {
+
+	private void setStatementTimeout(Integer timeout,
+			MappedStatement.Builder statementBuilder) {
 		if (timeout == null) {
 			timeout = configuration.getDefaultStatementTimeout();
 		}

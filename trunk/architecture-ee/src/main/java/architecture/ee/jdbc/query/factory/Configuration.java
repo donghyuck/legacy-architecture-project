@@ -34,71 +34,67 @@ import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.query.parser.XNode;
 
 public class Configuration {
-	
+
 	protected Integer defaultStatementTimeout;
-	  
+
 	protected Properties variables = new Properties();
-	
+
 	protected final Set<String> loadedResources = new HashSet<String>();
-	
-	
-	
+
 	/**
-	 * 파싱되어 매핑된 스테이트 객체들이 저장되는 위치. 
-	 * 다중키는 아파치 commons-collections 패키지에서 제공하는 MultiKey (namespace + id) 을 사용하여 구현함.
-	 * 다중키를 스트링 조합으로 변경함.
-	 *  **/
+	 * 파싱되어 매핑된 스테이트 객체들이 저장되는 위치. 다중키는 아파치 commons-collections 패키지에서 제공하는
+	 * MultiKey (namespace + id) 을 사용하여 구현함. 다중키를 스트링 조합으로 변경함.
+	 * **/
 	protected final Map<String, MappedStatement> mappedStatements = new HashMap<String, MappedStatement>();
 
 	protected final Map<String, String> uriNamespace = new HashMap<String, String>();
-		
-	
+
 	public String getUriNamespace(String uri) {
 		return uriNamespace.get(uri);
 	}
-	
+
 	public void addUriNamespace(String uri, String namespace) {
 		uriNamespace.put(uri, namespace);
 	}
-	
+
 	public void removeUriNamespace(String uri, boolean forceRemove) {
-		if(uriNamespace.containsKey(uri)){
+		if (uriNamespace.containsKey(uri)) {
 			String namespace = getUriNamespace(uri);
-			if( forceRemove ){			
-				Set<String> keys = mappedStatements.keySet();	
-				for(String key: keys){
-					if(StringUtils.startsWith(key, namespace))
+			if (forceRemove) {
+				Set<String> keys = mappedStatements.keySet();
+				for (String key : keys) {
+					if (StringUtils.startsWith(key, namespace))
 						mappedStatements.remove(key);
 				}
-				
-				if(statementNodesToParse.containsKey(namespace))
+
+				if (statementNodesToParse.containsKey(namespace))
 					statementNodesToParse.remove(namespace);
 			}
-			uriNamespace.remove(namespace);		
+			uriNamespace.remove(namespace);
 		}
 	}
-	
+
 	/** A map holds statement nodes for a namespace. */
 	protected final ConcurrentMap<String, List<XNode>> statementNodesToParse = new ConcurrentHashMap<String, List<XNode>>();
-		
+
 	public void addStatementNodes(String namespace, List<XNode> nodes) {
 		statementNodesToParse.put(namespace, nodes);
-	}	
-	
+	}
+
 	public void addLoadedResource(String resource) {
 		String stringToUse = resource.trim();
-		loadedResources.add(stringToUse);		
+		loadedResources.add(stringToUse);
 	}
 
 	public boolean isResourceLoaded(String resource) {
 		String stringToUse = resource.trim();
 		return loadedResources.contains(stringToUse);
 	}
-	
-	public void removeLoadedResource(String resource){
+
+	public void removeLoadedResource(String resource) {
 		loadedResources.remove(resource);
 	}
-	
+
 	public Properties getVariables() {
 		return variables;
 	}
@@ -116,7 +112,7 @@ public class Configuration {
 	protected String extractNamespace(String statementId) {
 		int lastPeriod = statementId.lastIndexOf('.');
 		return lastPeriod > 0 ? statementId.substring(0, lastPeriod) : null;
-	}	
+	}
 
 	public void setDefaultStatementTimeout(Integer defaultStatementTimeout) {
 		this.defaultStatementTimeout = defaultStatementTimeout;
@@ -131,16 +127,15 @@ public class Configuration {
 		if (!statementNodesToParse.isEmpty()) {
 			Set<String> keySet = statementNodesToParse.keySet();
 			for (String namespace : keySet) {
-				buildStatementsForNamespace(namespace);				
+				buildStatementsForNamespace(namespace);
 			}
 		}
 	}
 
 	public void addMappedStatement(MappedStatement ms) {
-		mappedStatements.put( ms.getID(), ms);
+		mappedStatements.put(ms.getID(), ms);
 	}
-	
-	  
+
 	/**
 	 * Parses cached statement nodes for the specified namespace and stores the
 	 * generated mapped statements.
@@ -151,20 +146,23 @@ public class Configuration {
 		if (namespace != null) {
 			final List<XNode> list = statementNodesToParse.get(namespace);
 			if (list != null) {
-		         final SqlBuilderAssistant builderAssistant = new SqlBuilderAssistant(this, null);
-		         builderAssistant.setCurrentNamespace(namespace);
-				 parseStatementNodes(builderAssistant, list);
-		        // Remove the processed nodes and resource from the cache.
-		        statementNodesToParse.remove(namespace);
+				final SqlBuilderAssistant builderAssistant = new SqlBuilderAssistant(
+						this, null);
+				builderAssistant.setCurrentNamespace(namespace);
+				parseStatementNodes(builderAssistant, list);
+				// Remove the processed nodes and resource from the cache.
+				statementNodesToParse.remove(namespace);
 			}
-		}		
+		}
 	}
 
-	protected void parseStatementNodes(final SqlBuilderAssistant builderAssistant, final List<XNode> list) {
-	    for (XNode context : list) {
-	      final XmlStatementBuilder statementParser = new XmlStatementBuilder(this, builderAssistant);
-	      statementParser.parseStatementNode(context);
-	    }
+	protected void parseStatementNodes(
+			final SqlBuilderAssistant builderAssistant, final List<XNode> list) {
+		for (XNode context : list) {
+			final XmlStatementBuilder statementParser = new XmlStatementBuilder(
+					this, builderAssistant);
+			statementParser.parseStatementNode(context);
+		}
 	}
 
 	public Integer getDefaultStatementTimeout() {
@@ -185,10 +183,10 @@ public class Configuration {
 		if (!mappedStatements.containsKey(id)) {
 			buildStatementsFromId(id);
 		}
-		
-		if(!mappedStatements.containsKey(id))
+
+		if (!mappedStatements.containsKey(id))
 			throw new SqlNotFoundException();
-		
+
 		return mappedStatements.get(id);
 	}
 

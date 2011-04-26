@@ -4,29 +4,27 @@ import architecture.common.util.ImplFactory;
 
 public class RecordsetFactory {
 
-    public static interface Implementation
-    {
-        public abstract Recordset createRecordset(java.sql.ResultSet rs) throws Throwable;
-        
-        public abstract Recordset createRecordset();
-    }
-    
-    private static Implementation impl = null;
-    
-    static 
-    {
-        impl = (Implementation)ImplFactory.loadImplFromKey(RecordsetFactory.Implementation.class);
-    }
-    
+	public static interface Implementation {
+		public abstract Recordset createRecordset(java.sql.ResultSet rs)
+				throws Throwable;
 
-    public static Recordset createRecordset(java.sql.ResultSet rs) throws Throwable
-	{
-	    return impl.createRecordset(rs);
+		public abstract Recordset createRecordset();
 	}
-    
-    public static Recordset createRecordset()
-	{
-	    return impl.createRecordset();
+
+	private static Implementation impl = null;
+
+	static {
+		impl = (Implementation) ImplFactory
+				.loadImplFromKey(RecordsetFactory.Implementation.class);
 	}
-    
+
+	public static Recordset createRecordset(java.sql.ResultSet rs)
+			throws Throwable {
+		return impl.createRecordset(rs);
+	}
+
+	public static Recordset createRecordset() {
+		return impl.createRecordset();
+	}
+
 }

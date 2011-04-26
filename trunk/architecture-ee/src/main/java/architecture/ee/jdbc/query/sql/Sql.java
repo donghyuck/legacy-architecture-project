@@ -16,16 +16,9 @@
 package architecture.ee.jdbc.query.sql;
 
 public interface Sql {
-	
-	
-	public static enum SqlType{
-		UNKNOWN,	
-		SCRIPT,
-		PROCEDURE,
-		FUNCTION,
-		STATEMENT,
-		BATCH;
+
+	public static enum SqlType {
+		UNKNOWN, SCRIPT, PROCEDURE, FUNCTION, STATEMENT, BATCH;
 	}
-	
-	
+
 }

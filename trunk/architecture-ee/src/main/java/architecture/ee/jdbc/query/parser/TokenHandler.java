@@ -16,7 +16,7 @@
 package architecture.ee.jdbc.query.parser;
 
 public interface TokenHandler {
-	
+
 	String handleToken(String content);
 
 }
