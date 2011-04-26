@@ -22,7 +22,7 @@ import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.sql.SqlSource;
 
 public class MappedStatement {
-	
+
 	private String resource;
 	private Configuration configuration;
 	private String ID;
@@ -35,12 +35,14 @@ public class MappedStatement {
 
 		private MappedStatement mappedStatement = new MappedStatement();
 
-		public Builder(Configuration configuration, String id, SqlSource sqlSource, StatementType statementType) {
+		public Builder(Configuration configuration, String id,
+				SqlSource sqlSource, StatementType statementType) {
 			mappedStatement.configuration = configuration;
 			mappedStatement.ID = id;
 			mappedStatement.sqlSource = sqlSource;
 			mappedStatement.statementType = StatementType.PREPARED;
-			mappedStatement.timeout = configuration.getDefaultStatementTimeout();
+			mappedStatement.timeout = configuration
+					.getDefaultStatementTimeout();
 		}
 
 		public Builder resource(String resource) {
@@ -73,13 +75,13 @@ public class MappedStatement {
 			assert mappedStatement.sqlSource != null;
 			return mappedStatement;
 		}
-		
+
 	}
-	
+
 	public String getID() {
 		return this.ID;
 	}
-	
+
 	public String getResource() {
 		return resource;
 	}
@@ -103,7 +105,7 @@ public class MappedStatement {
 	public StatementType getStatementType() {
 		return statementType;
 	}
-	
+
 	public BoundSql getBoundSql(Object parameterObject) {
 		BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
 		return boundSql;
@@ -113,9 +115,11 @@ public class MappedStatement {
 		BoundSql boundSql = sqlSource.getBoundSql(additionalParameters);
 		return boundSql;
 	}
-	
-	public BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters) {
-		BoundSql boundSql = sqlSource.getBoundSql(parameterObject, additionalParameters);
+
+	public BoundSql getBoundSql(Object parameterObject,
+			Map<String, Object> additionalParameters) {
+		BoundSql boundSql = sqlSource.getBoundSql(parameterObject,
+				additionalParameters);
 		return boundSql;
 	}
 }

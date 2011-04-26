@@ -32,54 +32,58 @@ import architecture.ee.jdbc.query.parser.XPathParser;
 
 public class XmlSqlBuilder extends AbstractBuilder {
 
-	
 	private SqlBuilderAssistant builderAssistant;
-	
+
 	private XPathParser parser;
-	
+
 	private Log log = LogFactory.getLog(XmlSqlBuilder.class);
 
-	public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {	
+	public XmlSqlBuilder(InputStream is, Configuration configuration,
+			String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(new InputStreamReader(is), false, configuration.getVariables(), null);
+		this.parser = new XPathParser(new InputStreamReader(is), false,
+				configuration.getVariables(), null);
 	}
-	
-	public XmlSqlBuilder(InputStream is, Configuration configuration) {			
+
+	public XmlSqlBuilder(InputStream is, Configuration configuration) {
 		this(is, configuration, null);
 	}
 
-	public XmlSqlBuilder(Reader reader, Configuration configuration, String resource) {	
+	public XmlSqlBuilder(Reader reader, Configuration configuration,
+			String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(reader, false, configuration.getVariables(), null);
+		this.parser = new XPathParser(reader, false,
+				configuration.getVariables(), null);
 	}
-	
-	public XmlSqlBuilder(Reader reader, Configuration configuration) {	
+
+	public XmlSqlBuilder(Reader reader, Configuration configuration) {
 		this(reader, configuration, null);
 	}
 
 	public void build() {
-		try {						
-			XNode context = parser.evalNode("/sql-queryset");			
-			String namespace = context.getStringAttribute("namespace");	
-			if(StringUtils.isEmpty(namespace))
+		try {
+			XNode context = parser.evalNode("/sql-queryset");
+			String namespace = context.getStringAttribute("namespace");
+			if (StringUtils.isEmpty(namespace))
 				namespace = context.getStringAttribute("name");
-		    String description = context.getStringAttribute("description");	
-		    log.debug(namespace + ":" + description );
-		    builderAssistant.setCurrentNamespace(namespace);
+			String description = context.getStringAttribute("description");
+			log.debug(namespace + ":" + description);
+			builderAssistant.setCurrentNamespace(namespace);
 			sqlElement(context.evalNodes("/sql-queryset/sql-query"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Error parsing Mapper XML. Cause: " + e, e);
+			throw new RuntimeException("Error parsing Mapper XML. Cause: " + e,
+					e);
 		}
 	}
-	
+
 	private void sqlElement(List<XNode> list) throws Exception {
 		String currentNamespace = builderAssistant.getCurrentNamespace();
 		configuration.addStatementNodes(currentNamespace, list);
-				
-        log.debug("" + list.size() + " query defined.");
+
+		log.debug("" + list.size() + " query defined.");
 	}
-	  
+
 }

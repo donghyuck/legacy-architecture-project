@@ -24,5 +24,5 @@ public abstract class AbstractBuilder {
 	public AbstractBuilder(Configuration configuration) {
 		this.configuration = configuration;
 	}
-	
+
 }

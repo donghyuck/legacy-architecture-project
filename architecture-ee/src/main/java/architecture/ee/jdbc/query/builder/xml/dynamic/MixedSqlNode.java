@@ -18,7 +18,7 @@ package architecture.ee.jdbc.query.builder.xml.dynamic;
 import java.util.List;
 
 public class MixedSqlNode implements SqlNode {
-	
+
 	private List<SqlNode> contents;
 
 	public MixedSqlNode(List<SqlNode> contents) {
@@ -26,20 +26,20 @@ public class MixedSqlNode implements SqlNode {
 	}
 
 	public boolean apply(DynamicContext context) {
-	    for (SqlNode sqlNode : contents) {
-	        sqlNode.apply(context);
-	    }
-	    return true;
+		for (SqlNode sqlNode : contents) {
+			sqlNode.apply(context);
+		}
+		return true;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("contents {");
-		for( SqlNode node : contents)
+		for (SqlNode node : contents)
 			sb.append(node.toString());
 		sb.append("}");
 		return sb.toString();
 	}
-	
+
 }

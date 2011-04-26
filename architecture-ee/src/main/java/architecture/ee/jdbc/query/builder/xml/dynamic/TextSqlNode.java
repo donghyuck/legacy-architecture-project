@@ -15,25 +15,23 @@
  */
 package architecture.ee.jdbc.query.builder.xml.dynamic;
 
-
 public class TextSqlNode implements SqlNode {
 
-	  private String text;
+	private String text;
 
-	  public TextSqlNode(String text) {
-	    this.text = text;
-	  }
+	public TextSqlNode(String text) {
+		this.text = text;
+	}
 
 	public boolean apply(DynamicContext context) {
-		context.appendSql(text);		
+		context.appendSql(text);
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		
-		return "text[" + text  + "]";
+
+		return "text[" + text + "]";
 	}
-	  
-	
+
 }

@@ -21,15 +21,15 @@ import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public interface SqlQueryFactory {
-	
+
 	public String[] getQueryNames();
-	
+
 	public SqlQuery createSqlQuery();
-	
+
 	public SqlQuery createSqlQuery(DataSource dataSource);
-	
+
 	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
-	
+
 	public void setDefaultDataSource(DataSource defaultDataSource);
-	
+
 }

@@ -20,9 +20,10 @@ import java.util.Map;
 import architecture.ee.jdbc.query.mapping.BoundSql;
 
 public interface SqlSource {
-	
+
 	BoundSql getBoundSql(Object parameterObject);
-		
-	BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters);
-	
+
+	BoundSql getBoundSql(Object parameterObject,
+			Map<String, Object> additionalParameters);
+
 }

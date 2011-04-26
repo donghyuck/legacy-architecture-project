@@ -24,7 +24,7 @@ import architecture.ee.jdbc.query.sql.SqlSource;
 public class DynamicSqlSource implements SqlSource {
 
 	private Configuration configuration;
-	
+
 	private SqlNode rootSqlNode;
 
 	public DynamicSqlSource(Configuration configuration, SqlNode rootSqlNode) {
@@ -33,13 +33,15 @@ public class DynamicSqlSource implements SqlSource {
 	}
 
 	public BoundSql getBoundSql(Object parameterObject) {
-        DynamicContext context = new DynamicContext(parameterObject);
+		DynamicContext context = new DynamicContext(parameterObject);
 		rootSqlNode.apply(context);
 		return new BoundSql(context.getSql());
 	}
 
-	public BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters) {
-        DynamicContext context = new DynamicContext(parameterObject, additionalParameters);
+	public BoundSql getBoundSql(Object parameterObject,
+			Map<String, Object> additionalParameters) {
+		DynamicContext context = new DynamicContext(parameterObject,
+				additionalParameters);
 		rootSqlNode.apply(context);
 		return new BoundSql(context.getSql());
 	}

@@ -20,23 +20,21 @@ import architecture.ee.jdbc.query.factory.Configuration;
 public class MappedSql implements Sql {
 
 	private String resource;
-	
+
 	private Configuration configuration;
-	
+
 	private String id;
-	
+
 	private Integer fetchSize;
-	
+
 	private Integer timeout;
-	
+
 	private SqlType sqlType;
-	
+
 	private SqlSource source;
 
 	private MappedSql() {
-		
+
 	}
 
-	
-	
 }

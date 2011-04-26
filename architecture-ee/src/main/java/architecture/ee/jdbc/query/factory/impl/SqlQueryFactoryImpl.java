@@ -31,12 +31,12 @@ import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
 	private final Configuration configuration;
-    private DataSource defaultDataSource = null;
+	private DataSource defaultDataSource = null;
 
-    public SqlQueryFactoryImpl(Configuration configuration) {
+	public SqlQueryFactoryImpl(Configuration configuration) {
 		this.configuration = configuration;
 	}
-	
+
 	public Configuration getConfiguration() {
 		return configuration;
 	}
@@ -45,28 +45,25 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 		this.defaultDataSource = defaultDataSource;
 	}
 
-	public String[] getQueryNames(String namespace) {		
+	public String[] getQueryNames(String namespace) {
 		Collection<String> names = configuration.getMappedStatementNames();
 		List<String> list = new ArrayList<String>();
-		for(String name : names){
-			if(StringUtils.startsWith(name, namespace))
+		for (String name : names) {
+			if (StringUtils.startsWith(name, namespace))
 				list.add(name);
 		}
-		return list.toArray(
-		    new String[list.size()]
-		);
+		return list.toArray(new String[list.size()]);
 	}
-	
+
 	public String[] getQueryNames() {
 		return configuration.getMappedStatementNames().toArray(
-		    new String[configuration.getMappedStatementNames().size()]
-		);
+				new String[configuration.getMappedStatementNames().size()]);
 	}
-		
+
 	public SqlQuery createSqlQuery() {
 		return new SqlQueryImpl(configuration, defaultDataSource);
 	}
-	
+
 	public SqlQuery createSqlQuery(DataSource dataSource) {
 		return new SqlQueryImpl(configuration, dataSource);
 	}
@@ -74,5 +71,5 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
 		return new SqlQueryImpl(configuration, jdbcTemplate);
 	}
-	
+
 }

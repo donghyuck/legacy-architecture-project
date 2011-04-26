@@ -44,67 +44,73 @@ import architecture.ee.jdbc.query.sql.SqlSource;
  * 
  */
 public class XmlStatementBuilder extends AbstractBuilder {
-	
+
 	public static final String XML_NODE_DESCRIPTION_TAG = "description";
-	
+
 	public static final String XML_ATTR_STATEMENT_TYPE_TAG = "statementType";
 	public static final String XML_ATTR_FETCH_SIZE_TAG = "fetchSize";
 	public static final String XML_ATTR_TIMEOUT_TAG = "timeout";
 	public static final String XML_ATTR_DYNAMIC_TAG = "dynamic";
-	public static final String XML_ATTR_ID_TAG = "id";	
-	public static final String XML_ATTR_NAME_TAG = "name";	
-	public static final String XML_ATTR_CALLABLE_TAG = "callable" ;
-	public static final String XML_ATTR_FUNCTION_TAG = "function" ;
-	public static final String XML_ATTR_SCRIPT_TAG = "script" ;
-	public static final String XML_ATTR_COMMENT_TAG = "comment" ;
-	
+	public static final String XML_ATTR_ID_TAG = "id";
+	public static final String XML_ATTR_NAME_TAG = "name";
+	public static final String XML_ATTR_CALLABLE_TAG = "callable";
+	public static final String XML_ATTR_FUNCTION_TAG = "function";
+	public static final String XML_ATTR_SCRIPT_TAG = "script";
+	public static final String XML_ATTR_COMMENT_TAG = "comment";
+
 	private Log log = LogFactory.getLog(XmlStatementBuilder.class);
-	
+
 	private SqlBuilderAssistant builderAssistant;
-		
-	public XmlStatementBuilder(Configuration configuration, SqlBuilderAssistant builderAssistant) {
+
+	public XmlStatementBuilder(Configuration configuration,
+			SqlBuilderAssistant builderAssistant) {
 		super(configuration);
 		this.builderAssistant = builderAssistant;
 	}
 
-	public void parseStatementNode(XNode context){
-		
-		String id = context.getStringAttribute(XML_ATTR_ID_TAG);		
+	public void parseStatementNode(XNode context) {
+
+		String id = context.getStringAttribute(XML_ATTR_ID_TAG);
 		String name = context.getStringAttribute(XML_ATTR_NAME_TAG);
-		if(StringUtils.isEmpty(id))
+		if (StringUtils.isEmpty(id))
 			id = name;
-		
-		Integer fetchSize = context.getIntAttribute(XML_ATTR_FETCH_SIZE_TAG, null);
-		Integer timeout = context.getIntAttribute(XML_ATTR_TIMEOUT_TAG, null);		
-		
+
+		Integer fetchSize = context.getIntAttribute(XML_ATTR_FETCH_SIZE_TAG,
+				null);
+		Integer timeout = context.getIntAttribute(XML_ATTR_TIMEOUT_TAG, null);
+
 		// bug!!
-		StatementType statementType = StatementType.valueOf(context.getStringAttribute(XML_ATTR_STATEMENT_TYPE_TAG, StatementType.PREPARED.toString()));		
-		
-		List<SqlNode> contents = parseDynamicTags(context);		
-		MixedSqlNode rootSqlNode = new MixedSqlNode(contents);	
-		
-		SqlSource sqlSource = new DynamicSqlSource(configuration, rootSqlNode);			
-		String nodeName = context.getNode().getNodeName();		
-		builderAssistant.addMappedStatement(id, sqlSource, statementType, fetchSize, timeout);
-		
+		StatementType statementType = StatementType.valueOf(context
+				.getStringAttribute(XML_ATTR_STATEMENT_TYPE_TAG,
+						StatementType.PREPARED.toString()));
+
+		List<SqlNode> contents = parseDynamicTags(context);
+		MixedSqlNode rootSqlNode = new MixedSqlNode(contents);
+
+		SqlSource sqlSource = new DynamicSqlSource(configuration, rootSqlNode);
+		String nodeName = context.getNode().getNodeName();
+		builderAssistant.addMappedStatement(id, sqlSource, statementType,
+				fetchSize, timeout);
+
 	}
-	
-	private List<SqlNode> parseDynamicTags(XNode node) {		
+
+	private List<SqlNode> parseDynamicTags(XNode node) {
 		List<SqlNode> contents = new ArrayList<SqlNode>();
 		NodeList children = node.getNode().getChildNodes();
 		for (int i = 0; i < children.getLength(); i++) {
 			XNode child = node.newXNode(children.item(i));
 			String nodeName = child.getNode().getNodeName();
-			if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE || child.getNode().getNodeType() == Node.TEXT_NODE) {
+			if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE
+					|| child.getNode().getNodeType() == Node.TEXT_NODE) {
 				String data = child.getStringBody("");
 				contents.add(new TextSqlNode(data));
-			} else {	
-				if( "dynamic".equals(nodeName) ){
+			} else {
+				if ("dynamic".equals(nodeName)) {
 					String data = child.getStringBody("");
-					contents.add(new DynamicSqlNode (data));					
+					contents.add(new DynamicSqlNode(data));
 				}
 			}
 		}
 		return contents;
-	}	
+	}
 }

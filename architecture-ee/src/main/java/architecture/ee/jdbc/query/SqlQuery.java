@@ -25,24 +25,24 @@ import architecture.ee.jdbc.recordset.Recordset;
 public interface SqlQuery {
 
 	public static final Class DEFAULT_RETURN_TYPE = Map.class;
-	
-	public SqlQuery setDataSource(DataSource dataSource);	
-	
+
+	public SqlQuery setDataSource(DataSource dataSource);
+
 	public SqlQuery reset();
-	
+
 	public SqlQuery setStatement(String statement);
-	
+
 	public SqlQuery setString(String value);
-	
+
 	/**
-	 * 쿼리 수행후 리턴되는 데이터 타입을 정의한다. 
-	 * uniqueResult(), list() 함수 사용하는 경우는 반듯이 리턴 타입을 정의해야 한다.
+	 * 쿼리 수행후 리턴되는 데이터 타입을 정의한다. uniqueResult(), list() 함수 사용하는 경우는 반듯이 리턴 타입을
+	 * 정의해야 한다.
 	 * 
 	 * @param returnType
 	 * @return
 	 */
 	public SqlQuery setReturnType(Class<?> returnType);
-	
+
 	/**
 	 * 이 파라메터는 다이나믹으로 선언된 부분에만 적용되어 동적 쿼리 생성에 사용된다.
 	 * 
@@ -50,119 +50,145 @@ public interface SqlQuery {
 	 * @param value
 	 * @return
 	 */
-	public SqlQuery setAdditionalParameter(String key, Object value );
-	
+	public SqlQuery setAdditionalParameter(String key, Object value);
+
 	/**
 	 * 
-	 * @param startIndex (0 부터 시작)
+	 * @param startIndex
+	 *            (0 부터 시작)
 	 * @return
 	 */
 	public SqlQuery setStartIndex(int startIndex);
-	
+
 	/**
 	 * 
 	 * @param maxResults
 	 * @return
 	 */
 	public SqlQuery setMaxResults(int maxResults);
-	
+
 	/**
 	 * 
-	 * @param statement 실행할 쿼리 이름
+	 * @param statement
+	 *            실행할 쿼리 이름
 	 * @return
 	 */
 	public List<Map<String, Object>> queryForList(String statement);
 
-	
 	/**
 	 * 
-	 * @param statement 실행할 쿼리 이름
+	 * @param statement
+	 *            실행할 쿼리 이름
 	 * @param elementType
 	 * @return
 	 */
 	public <T> List<T> queryForList(String statement, Class<T> elementType);
-	
+
 	/**
 	 * 
-	 * @param statement 실행할 쿼리 이름
+	 * @param statement
+	 *            실행할 쿼리 이름
 	 * @param elementType
 	 * @param params
 	 * @param types
 	 * @return
 	 */
-	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] types);
+	public List<Map<String, Object>> queryForList(String statement,
+			Object[] params, int[] types);
 
 	/**
 	 * 
-	 * @param statement 실행할 쿼리 이름
+	 * @param statement
+	 *            실행할 쿼리 이름
 	 * @param elementType
 	 * @param params
 	 * @param paramTypes
 	 * @return
 	 */
-	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
-	
-	/**
-	 * 
-	 * 
-	 * @param statement 실행할 쿼리 이름
-	 * @param elementType 
-	 */
-	public Map<String, Object> queryForMap (String statement) ;
+	public <T> List<T> queryForList(String statement, Object[] params,
+			int[] paramTypes, Class<T> elementType);
 
 	/**
 	 * 
-	 * @param statement 실행할 쿼리 이름
-	 * @param params 파라메터 객체 배열값
-	 * @param paramTypes 파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값)
-	 * @return
+	 * 
+	 * @param statement
+	 *            실행할 쿼리 이름
+	 * @param elementType
 	 */
-	public Map<String, Object> queryForMap (String statement, Object[] params, int[] paramTypes) ;
+	public Map<String, Object> queryForMap(String statement);
 
 	/**
-	 * 매핑된  쿼리를 실행하고 결과 객체를 리턴한다. 
 	 * 
-	 * @param statement 실행할 쿼리 이름
-	 * @param elementType 리턴될 결과 객체 타입
+	 * @param statement
+	 *            실행할 쿼리 이름
+	 * @param params
+	 *            파라메터 객체 배열값
+	 * @param paramTypes
+	 *            파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값)
 	 * @return
 	 */
-	public <T> T queryForObject (String statement, Class<T> elementType);
+	public Map<String, Object> queryForMap(String statement, Object[] params,
+			int[] paramTypes);
 
 	/**
-	 * 매핑된  쿼리를 실행하고 결과 객체를 리턴한다. 
+	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.
 	 * 
-	 * @param statement 실행할 쿼리 이름
-	 * @param elementType 리턴될 결과 객체 타입
-	 * @param 파라메터 객체 배열값
-	 * @param paramTypes 파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값
+	 * @param statement
+	 *            실행할 쿼리 이름
+	 * @param elementType
+	 *            리턴될 결과 객체 타입
 	 * @return
 	 */
-	public <T> T queryForObject (String statement, Class<T> elementType, Object[] params, int[] paramTypes);
-	
-	
+	public <T> T queryForObject(String statement, Class<T> elementType);
+
+	/**
+	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.
+	 * 
+	 * @param statement
+	 *            실행할 쿼리 이름
+	 * @param elementType
+	 *            리턴될 결과 객체 타입
+	 * @param 파라메터
+	 *            객체 배열값
+	 * @param paramTypes
+	 *            파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값
+	 * @return
+	 */
+	public <T> T queryForObject(String statement, Class<T> elementType,
+			Object[] params, int[] paramTypes);
+
 	public Object uniqueResult();
-	
+
 	public List list();
-	
+
 	public Object executeScript();
-	
+
 	public SqlQuery addToBatch();
+
 	/**
 	 * SQL 배치를 실행한다.
 	 */
 	public int executeUpdate();
-	
+
 	public int[] executeBatchUpdate();
-	
+
 	/**
 	 * 
-	 * @param statement SQL command to precompile
-	 * @param recordset Recordset containing the values to be set into the prepared statement
-	 * @param params  Array containing the names of the fields to use. The order must match the place holders (those ? marks) in the prepared statement
+	 * @param statement
+	 *            SQL command to precompile
+	 * @param recordset
+	 *            Recordset containing the values to be set into the prepared
+	 *            statement
+	 * @param params
+	 *            Array containing the names of the fields to use. The order
+	 *            must match the place holders (those ? marks) in the prepared
+	 *            statement
 	 * @return The number of records affected
 	 */
-	public int executeUpdate(String statement, Recordset recordset, String[] params);
-	
-	public int[] executeBatchUpdate(String statement, Recordset recordset, String[] params);
-	
+	public int executeUpdate(String statement, Recordset recordset,
+			String[] params);
+
+	public int[] executeBatchUpdate(String statement, Recordset recordset,
+			String[] params);
+
 }

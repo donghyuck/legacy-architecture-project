@@ -4,8 +4,8 @@ import java.sql.ResultSet;
 
 public class RecordsetFactoryImpl implements RecordsetFactory.Implementation {
 
-	public RecordsetFactoryImpl() {}
-	
+	public RecordsetFactoryImpl() {
+	}
 
 	public Recordset createRecordset(ResultSet rs) throws Throwable {
 		return new Recordset(rs);

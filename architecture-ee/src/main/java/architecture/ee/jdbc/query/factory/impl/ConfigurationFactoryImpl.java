@@ -18,10 +18,11 @@ package architecture.ee.jdbc.query.factory.impl;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.ConfigurationFactory;
 
-public class ConfigurationFactoryImpl implements ConfigurationFactory.Implementation {
+public class ConfigurationFactoryImpl implements
+		ConfigurationFactory.Implementation {
 
 	private Configuration configuration = new Configuration();;
-	
+
 	public Configuration getConfiguration() {
 		return configuration;
 	}

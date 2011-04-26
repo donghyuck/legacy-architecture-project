@@ -18,21 +18,22 @@ package architecture.ee.jdbc.query.factory;
 import architecture.ee.jdbc.query.factory.impl.ConfigurationFactoryImpl;
 
 public class ConfigurationFactory {
-	
+
 	public static interface Implementation {
 
 		public Configuration getConfiguration();
 
 	}
-	
+
 	private static Implementation impl = null;
 
 	static {
-		impl = new ConfigurationFactoryImpl(); //(Implementation) ImplFactory.loadImplFromKey(LocalizerFactory.Implementation.class);
+		impl = new ConfigurationFactoryImpl(); // (Implementation)
+												// ImplFactory.loadImplFromKey(LocalizerFactory.Implementation.class);
 	}
-	
-	public static Configuration getConfiguration(){
+
+	public static Configuration getConfiguration() {
 		return impl.getConfiguration();
 	}
-	
+
 }
