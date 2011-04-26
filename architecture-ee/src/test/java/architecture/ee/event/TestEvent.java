@@ -22,40 +22,24 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.event.api.EventPublisher;
+import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ApplicationStateChangeEvent;
 import architecture.common.lifecycle.StateChangeEvent;
 
-
 public class TestEvent {
-	
-private static ApplicationContext context = null ;
-	
-	@Before
-	public void setUp() throws Exception {
-		String resource = "eventSubsystemContext.xml";			
-		if ( context == null){
-			System.out.println( "setup ========================1" );
-			context = new ClassPathXmlApplicationContext(resource);
-		}
+
+	@Test
+	public void testLoadEventContext() {
 		
-		if ( context == null){
-			System.out.println( "setup ========================2" );
-			context = new ClassPathXmlApplicationContext("/"+resource);
-		}
+		EventPublisher eventPublisher = ApplicationHelperFactory.getApplicationHelper().getComponent(EventPublisher.class);
+		eventPublisher.register(this);
+		eventPublisher.publish(new ApplicationStateChangeEvent(this, architecture.common.lifecycle.State.STARTING, architecture.common.lifecycle.State.STARTED));
 
 	}
-	
-	@Test
-	public void testLoadEventContext(){
-		EventPublisher eventPublisher = (EventPublisher)context.getBean("eventPublisher");		
-		eventPublisher.register(this);				
-		eventPublisher.publish(new ApplicationStateChangeEvent(this, architecture.common.lifecycle.State.STARTING, architecture.common.lifecycle.State.STARTED));
-		
-	}	
-	
+
 	@EventListener
-	 public void onEvent(StateChangeEvent event){
-		 System.out.println( " catch event :: " + event.getClass().getName() );
-	 }
-	
+	public void onEvent(StateChangeEvent event) {
+		System.out.println(" catch event :: " + event.getClass().getName());
+	}
+
 }

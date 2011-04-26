@@ -25,49 +25,46 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
 
-
 public class TestSqlFactory {
 
-	private static ApplicationContext context = null ;
-	
-	public static void main(String[] args){		
+	private static ApplicationContext context = null;
+
+	public static void main(String[] args) {
 		TestSqlFactory test = new TestSqlFactory();
 		try {
-			test.setUp();		
+			test.setUp();
 			test.testGetSqlQueryFacory();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	@Before
 	public void setUp() throws Exception {
-		String resource = "databaseSubsystemContext.xml";			
-		if ( context == null){
-			System.out.println( "setup ========================1" );
+		String resource = "classpath*:databaseSubsystemContext.xml";
+		if (context == null) {
+/*			System.out.println("setup ========================1");*/
 			context = new ClassPathXmlApplicationContext(resource);
 		}
-		
-		if ( context == null){
-			System.out.println( "setup ========================2" );
-			context = new ClassPathXmlApplicationContext("/"+resource);
-		}
+/*
+		if (context == null) {
+			System.out.println("setup ========================2");
+			context = new ClassPathXmlApplicationContext("/" + resource);
+		}*/
 	}
 
-	private SqlQueryFactory getSqlQueryFactory(){
-		return (SqlQueryFactory)context.getBean("sqlQueryFactory");
+	private SqlQueryFactory getSqlQueryFactory() {
+		return (SqlQueryFactory) context.getBean("sqlQueryFactory");
 	}
-		
+
 	@Test
-	public void testGetSqlQueryFacory()throws Exception{		
+	public void testGetSqlQueryFacory() throws Exception {
 		SqlQueryFactory factory = (SqlQueryFactory) getSqlQueryFactory();
-		System.out.println( "factory" + "=" + factory);		
+		System.out.println("factory" + "=" + factory);
 		SqlQuery query = getSqlQueryFactory().createSqlQuery();
-		List<String> list = query.reset().queryForList("COMMON.SELECT_TABLE_NAMES", String.class);
-		System.out.println( list.size() );		
+		List<String> list = query.reset().queryForList(
+				"COMMON.SELECT_TABLE_NAMES", String.class);
+		System.out.println(list.size());
 	}
-	
-	
-	
+
 }
