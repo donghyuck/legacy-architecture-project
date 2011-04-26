@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="no" 
+	default-lazy-init="false"
+	default-init-method="init" 
+	default-destroy-method="destroy">
+	<description>
+	<![CDATA[
+        Define Bootstrap Context
+	]]>
+	</description>
+	<!-- ================================================ -->	
+	<!--  Task & Jobs                                     -->
+	<!-- ================================================ -->	
+	<!-- Global Timer for timed execution tasks. -->
+    <bean id="taskTimer" 
+    	class="org.springframework.scheduling.timer.TimerFactoryBean" 
+    	p:daemon="false" />    
+    
+    <!-- Spring task executor replaces the custom task engine. -->
+    <bean id="minuteTaskExecutor" 
+    	class="org.springframework.scheduling.timer.TimerTaskExecutor" 
+    	p:delay="6000" p:timer-ref="taskTimer" />
+
+	<!-- ================================================ -->	
+	<!--  Event                                           -->
+	<!-- ================================================ -->	
+	<bean id="eventThreadPoolConfiguration" 
+		class="architecture.common.event.internal.EventThreadPoolConfigurationImpl" />
+	
+	<bean id="listenerHandlerConfiguration" 
+		class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+
+	<bean id="eventExecutorFactory" 
+		class="architecture.common.event.internal.EventExecutorFactoryImpl" >
+		<constructor-arg ref="eventThreadPoolConfiguration"/>
+	</bean>
+
+	<bean id="eventDispatcher" 
+		class="architecture.common.event.internal.AsynchronousAbleEventDispatcher">
+		<constructor-arg ref="eventExecutorFactory"/>
+    </bean>
+
+	<bean id="eventPublisher" 
+		class="architecture.common.event.internal.EventPublisherImpl" >
+		<constructor-arg ref="eventDispatcher"/>
+		<constructor-arg ref="listenerHandlerConfiguration"/>
+	</bean>
+				
+	<!-- 	 				
+	<bean id="listenerEventRegister" 
+		class="architecture.ee.spring.event.internal.AutoListenerEventRegister"
+		c:eventPublisher-ref="eventPublisher" />
+	-->	
+	<!-- ================================================ -->	
+	<!--  Application                                     -->
+	<!-- ================================================ -->	
+	<bean id="application"
+		class="architecture.ee.spring.lifecycle.internal.ApplicationImpl"
+		init-method="initialize"
+		p:name="AdminService"
+		p:eventPublisher-ref="eventPublisher"
+		p:contextLoader-ref="contextLoader" />
+	
+	<bean id="contextLoader"
+		class="architecture.ee.spring.context.internal.WebApplicationContextLoader" />
+		
+</beans>
