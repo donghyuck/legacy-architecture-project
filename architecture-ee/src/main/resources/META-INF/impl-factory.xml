@@ -2,6 +2,10 @@
 <factories>
 	<rank>1000</rank>
 	<factory
+		interface="architecture.common.lifecycle.ApplicationHelperFactory$Implementation"
+		impl="architecture.ee.spring.context.internal.ApplicationHelperFactoryImpl" />
+		
+	<factory
 		interface="architecture.ee.jdbc.util.JdbcHelperFactory$Implementation"
 		impl="architecture.ee.spring.jdbc.internal.JdbcHelperFactoryImpl" />	
 		
