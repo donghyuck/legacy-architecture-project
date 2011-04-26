@@ -21,6 +21,7 @@
 		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
 		p:url="jdbc:oracle:thin:@//61.250.231.1:1521/ORCL"
 		p:username="womenpro3" p:password="womenpro#3" p:initialSize="1" />
+	
 	<bean id="sqlFileListener" class="architecture.ee.spring.jdbc.SqlFileListener" />
 	
 	<bean id="sqlResourceDeployer"
