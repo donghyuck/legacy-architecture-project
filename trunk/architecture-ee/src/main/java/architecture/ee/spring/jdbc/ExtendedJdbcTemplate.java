@@ -48,46 +48,129 @@ import architecture.ee.jdbc.util.JdbcHelperFactory;
 
 /**
  * 스프링프레임워크에서 제공하는 JdbcTemplate 을 확장한 클래스.
- * @author DongHyuck, Son 
- *
+ * 
+ * @author DongHyuck, Son
+ * 
  */
 public class ExtendedJdbcTemplate extends JdbcTemplate {
-	
+
+	public static class ScrollablePreparedStatementCreator implements
+			PreparedStatementCreator {
+		private String sqlToUse;
+		private Object params[];
+		private int paramTypes[];
+		private final int startIndex;
+		private final int numResults;
+		private JdbcHelper helper;
+
+		public ScrollablePreparedStatementCreator(String sql, int startIndex,
+				int numResults, Object args[], int[] types, JdbcHelper helper) {
+			this.startIndex = startIndex;
+			this.numResults = numResults;
+			this.params = args;
+			this.paramTypes = types;
+			this.sqlToUse = sql;
+			this.helper = helper;
+		}
+
+		/**
+		 * 데이터베이스 제품에 따라 쿼리 결과에 대한 스크롤을 지원하도록 PreparedStatement 다르게 생성한다.
+		 */
+		public PreparedStatement createPreparedStatement(Connection connection)
+				throws SQLException {
+			DatabaseType databaseType = helper.getDatabaseType();
+
+			PreparedStatement ps;
+			if (DatabaseType.mysql == databaseType) {
+				StringBuilder builder = new StringBuilder(sqlToUse);
+				builder.append(" LIMIT ").append(startIndex).append(",").append(numResults);
+				ps = connection.prepareStatement(builder.toString());
+			} else if (DatabaseType.postgresql == databaseType) {
+				StringBuilder builder = new StringBuilder(sqlToUse);
+				builder.append(" LIMIT ").append(numResults).append(" OFFSET ").append(startIndex);
+				ps = connection.prepareStatement(builder.toString());
+			} else {
+				ps = helper.createScrollablePreparedStatement(connection, sqlToUse);
+			}
+			if (params != null) {
+				PreparedStatementCreatorFactory pscf;
+				if (paramTypes != null) {
+					pscf = new PreparedStatementCreatorFactory(sqlToUse, paramTypes);
+				} else {
+					pscf = new PreparedStatementCreatorFactory(sqlToUse);
+				}
+				ps = pscf.newPreparedStatementCreator(params).createPreparedStatement(connection);
+			}
+			return ps;
+		}
+	}
+	/** INNER CLASSES **/
+	public static class ScrollableResultSetExtractor implements ResultSetExtractor {
+		
+		private int startIndex;
+		private int numResults;
+		private RowMapper mapper;
+		private JdbcHelper helper;
+
+		public ScrollableResultSetExtractor(int startIndex, int numResults, RowMapper mapper, JdbcHelper helper) {
+			this.startIndex = startIndex;
+			this.numResults = numResults;
+			this.mapper = mapper;
+			this.helper = helper;
+		}
+
+		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
+			ArrayList<Object> list = new ArrayList<Object>();
+			DatabaseType databaseType = helper.getDatabaseType();
+			if (DatabaseType.mysql == databaseType || DatabaseType.postgresql == databaseType) {
+				for (int count = 0; rs.next(); count++)
+					list.add(mapper.mapRow(rs, count));
+
+			} else {
+				helper.setFetchSize(rs, startIndex + numResults);
+				helper.scrollResultSet(rs, startIndex);
+				for (int i = 0; i < numResults && rs.next(); i++) {
+					Object o = mapper.mapRow(rs, i);
+					list.add(o);
+				}
+			}
+			return list;
+		}
+	}
+
 	public static final int DEFAULT_CACHE_LIMIT = 256;
+
 	private volatile int cacheLimit = DEFAULT_CACHE_LIMIT;
 
 	/** Cache of original SQL String to ParsedSql representation */
-	private final Map<String, ParsedSql> parsedSqlCache = new LinkedHashMap<String, ParsedSql>(DEFAULT_CACHE_LIMIT, 0.75f, true) {
-				
+	private final Map<String, ParsedSql> parsedSqlCache = new LinkedHashMap<String, ParsedSql>(
+			DEFAULT_CACHE_LIMIT, 0.75f, true) {
+
 		@Override
-				protected boolean removeEldestEntry(Map.Entry<String, ParsedSql> eldest) {
-					return size() > getCacheLimit();
-				}
-				
-			};
-				
-	private JdbcHelper jdbcHelper = null;	
+		protected boolean removeEldestEntry(Map.Entry<String, ParsedSql> eldest) {
+			return size() > getCacheLimit();
+		}
+
+	};
+
+	private JdbcHelper jdbcHelper = null;
 
 	public ExtendedJdbcTemplate(DataSource dataSource) {
-		super(dataSource);		
-		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());	
-	}
-	
-	public void setDataSource(DataSource dataSource) {
-		super.setDataSource(dataSource);
-		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());	
-	}
-	
-	public JdbcHelper getJdbcHelper() {
-		return jdbcHelper;
+		super(dataSource);
+		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
 	}
 
-	/**
-	 * Specify the maximum number of entries for this template's SQL cache.
-	 * Default is 256.
-	 */
-	public void setCacheLimit(int cacheLimit) {
-		this.cacheLimit = cacheLimit;
+	public Object executeScript(final boolean stopOnError, final Reader reader) {
+		return execute(new ConnectionCallback<Object>() {
+			public Object doInConnection(Connection connection)
+					throws SQLException, DataAccessException {
+				try {
+					return runScript(connection, stopOnError, reader);
+				} catch (IOException e) {
+					return null;
+				}
+			}
+		});
 	}
 
 	/**
@@ -96,143 +179,23 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public int getCacheLimit() {
 		return this.cacheLimit;
 	}
-	
-	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, Class<T> elementType, Object[] args, int[] argTypes )
-    {
-        ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(sql, startIndex, numResults, args, argTypes, getJdbcHelper());
-        ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(startIndex, numResults, getSingleColumnRowMapper(elementType), getJdbcHelper());
-        return query(creator, extractor);
-    }	
-	
-	public List<Map<String, Object>> queryScrollable(String sql, int startIndex, int numResults, Object[] args, int[] argTypes)
-    {
-        ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(sql, startIndex, numResults, args, argTypes, getJdbcHelper());
-        ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(startIndex, numResults, getColumnMapRowMapper(), getJdbcHelper());
-        return query(creator, extractor);        
-    }
-		
-    /** INNER CLASSES **/
-	public static class ScrollableResultSetExtractor implements ResultSetExtractor
-	{		
-	    private int startIndex;
-	    private int numResults;
-	    private RowMapper mapper;
-	    private JdbcHelper helper;
-	
-	    public ScrollableResultSetExtractor(int startIndex, int numResults, RowMapper mapper, JdbcHelper helper)
-	    {
-	        this.startIndex = startIndex;
-	        this.numResults = numResults;
-	        this.mapper = mapper;
-	        this.helper = helper;
-	    }
-	    
-	    public Object extractData(ResultSet rs)
-	        throws SQLException, DataAccessException
-	    {
-	        ArrayList<Object> list = new ArrayList<Object>();
-	        DatabaseType databaseType = helper.getDatabaseType();
-	        if(DatabaseType.mysql == databaseType || DatabaseType.postgresql == databaseType)
-	        {
-	            for(int count = 0; rs.next(); count++)
-	                list.add(mapper.mapRow(rs, count));
-	
-	        } else
-	        {
-	        	helper.setFetchSize(rs, startIndex + numResults);
-	        	helper.scrollResultSet(rs, startIndex);
-	            for(int i = 0; i < numResults && rs.next(); i++)
-	            {
-	                Object o = mapper.mapRow(rs, i);
-	                list.add(o);
-	            }	
-	        }
-	        return list;
-	    }
+
+	public JdbcHelper getJdbcHelper() {
+		return jdbcHelper;
 	}
-		
-	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator
-	{		
-	    private String sqlToUse;
-	    private Object params[];
-	    private int paramTypes[];
-	    private final int startIndex;
-	    private final int numResults;
-	    private JdbcHelper helper;
-	    
-	    public ScrollablePreparedStatementCreator(String sql, int startIndex, int numResults, Object args[], int[] types, JdbcHelper helper)
-	    {
-	        this.startIndex = startIndex;
-	        this.numResults = numResults;
-	        this.params = args;
-	        this.paramTypes = types;
-	        this.sqlToUse = sql;	        
-	        this.helper = helper;
-	    }	    
-	    
-	    /**
-	     * 데이터베이스 제품에 따라 쿼리 결과에 대한 스크롤을 지원하도록  
-	     * PreparedStatement 다르게 생성한다. 
-	     */
-	    public PreparedStatement createPreparedStatement(Connection connection)
-	        throws SQLException
-	    {	    	
-	    	DatabaseType databaseType = helper.getDatabaseType();
-	    	
-	        PreparedStatement ps;
-	        if(DatabaseType.mysql == databaseType)
-	        {
-	            StringBuilder builder = new StringBuilder(sqlToUse);
-	            builder.append(" LIMIT ").append(startIndex).append(",").append(numResults);
-	            ps = connection.prepareStatement(builder.toString());
-	        } else
-	        if(DatabaseType.postgresql == databaseType)
-	        {
-	            StringBuilder builder = new StringBuilder(sqlToUse);
-	            builder.append(" LIMIT ").append(numResults).append(" OFFSET ").append(startIndex);
-	            ps = connection.prepareStatement(builder.toString());
-	        } else
-	        {
-	            ps = helper.createScrollablePreparedStatement(connection, sqlToUse);
-	        }  
-	        if(params != null){
-	        	PreparedStatementCreatorFactory pscf;
-	        	if( paramTypes != null ){
-	        	    pscf = new PreparedStatementCreatorFactory(sqlToUse, paramTypes);	        	
-	        	}else{
-	        		pscf = new PreparedStatementCreatorFactory(sqlToUse);
-	        	}
-	        	ps = pscf.newPreparedStatementCreator(params).createPreparedStatement(connection);
-	        }
-	        return ps;
-	    }
-	}
-    	
-	/**
-	 * Build a PreparedStatementCreator based on the given SQL and named parameters.
-	 * <p>Note: Not used for the <code>update</code> variant with generated key handling.
-	 * @param sql SQL to execute
-	 * @param paramSource container of arguments to bind
-	 * @return the corresponding PreparedStatementCreator
-	 */
-	protected PreparedStatementCreator getPreparedStatementCreator(String sql, SqlParameterSource paramSource) {
-		ParsedSql parsedSql = getParsedSql(sql);
-		String sqlToUse = NamedParameterUtils.substituteNamedParameters(parsedSql, paramSource);
-		Object[] params = NamedParameterUtils.buildValueArray(parsedSql, paramSource, null);
-		int[] paramTypes = NamedParameterUtils.buildSqlTypeArray(parsedSql, paramSource);
-		PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(sqlToUse, paramTypes);
-		return pscf.newPreparedStatementCreator(params);
-	}	
-	
+
 	/**
 	 * Obtain a parsed representation of the given SQL statement.
-	 * <p>The default implementation uses an LRU cache with an upper limit
-	 * of 256 entries.
-	 * @param sql the original SQL
+	 * <p>
+	 * The default implementation uses an LRU cache with an upper limit of 256
+	 * entries.
+	 * 
+	 * @param sql
+	 *            the original SQL
 	 * @return a representation of the parsed SQL statement
 	 */
-	protected ParsedSql getParsedSql(String sql) {		
-		if ( getCacheLimit() <= 0) {
+	protected ParsedSql getParsedSql(String sql) {
+		if (getCacheLimit() <= 0) {
 			return NamedParameterUtils.parseSqlStatement(sql);
 		}
 		synchronized (this.parsedSqlCache) {
@@ -243,85 +206,142 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 			}
 			return parsedSql;
 		}
-	}	
-	
-	public Object executeScript(final boolean stopOnError, final Reader reader){	
-		return execute(new ConnectionCallback<Object>(){			
-            public Object doInConnection(Connection connection) throws SQLException, DataAccessException {
-				try {
-					return runScript(connection, stopOnError, reader);
-				} catch (IOException e) {
-					return null;
-				}
-            }
-        });		
 	}
-	
+
+	/**
+	 * Build a PreparedStatementCreator based on the given SQL and named
+	 * parameters.
+	 * <p>
+	 * Note: Not used for the <code>update</code> variant with generated key
+	 * handling.
+	 * 
+	 * @param sql
+	 *            SQL to execute
+	 * @param paramSource
+	 *            container of arguments to bind
+	 * @return the corresponding PreparedStatementCreator
+	 */
+	protected PreparedStatementCreator getPreparedStatementCreator(String sql,
+			SqlParameterSource paramSource) {
+		ParsedSql parsedSql = getParsedSql(sql);
+		String sqlToUse = NamedParameterUtils.substituteNamedParameters(parsedSql, paramSource);
+		Object[] params = NamedParameterUtils.buildValueArray(parsedSql,paramSource, null);
+		int[] paramTypes = NamedParameterUtils.buildSqlTypeArray(parsedSql,paramSource);
+		PreparedStatementCreatorFactory pscf = new PreparedStatementCreatorFactory(sqlToUse, paramTypes);
+		return pscf.newPreparedStatementCreator(params);
+	}
+
+	public <T> List<T> queryScrollable(String sql, int startIndex,
+			int numResults, Class<T> elementType, Object[] args, int[] argTypes) {
 		
-	protected Object runScript(Connection conn, boolean stopOnError, Reader reader) throws SQLException, IOException {
-        
-		StringBuffer command = null;  
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(
+				sql, startIndex, numResults, args, argTypes, getJdbcHelper());
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(
+				startIndex, numResults, getSingleColumnRowMapper(elementType),
+				getJdbcHelper());
 		
+		return query(creator, extractor);
+	}
+
+	public List queryScrollable(String sql,
+			int startIndex, int numResults, Object[] args, int[] argTypes) {
+		
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(
+				sql, 
+				startIndex, 
+				numResults, 
+				args, 
+				argTypes, 
+				getJdbcHelper());
+		
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(
+				startIndex, 
+				numResults, 
+				getColumnMapRowMapper(),
+				getJdbcHelper());
+		return query(creator, extractor);
+	}
+
+	protected Object runScript(Connection conn, boolean stopOnError,
+			Reader reader) throws SQLException, IOException {
+
+		StringBuffer command = null;
+
 		List<Object> list = new ArrayList<Object>();
-		
-        try {
-            LineNumberReader lineReader = new LineNumberReader(reader);
-            String line = null;            
-            while ((line = lineReader.readLine()) != null) {
-                if (command == null) {
-                    command = new StringBuffer();
-                }
-                String trimmedLine = line.trim();
-                if (trimmedLine.startsWith("--")) {
-                    if(logger.isDebugEnabled())
-                    	logger.debug(trimmedLine);
-                } else if (trimmedLine.length() < 1 || trimmedLine.startsWith("//")) {
-                    // Do nothing
-                } else if (trimmedLine.length() < 1 || trimmedLine.startsWith("--")) {
-                    // Do nothing
-                } else if (trimmedLine.endsWith(";")) {
-                    command.append(line.substring(0, line.lastIndexOf(";")));
-                    command.append(" ");
-                    
-                    Statement statement = conn.createStatement();           
-            		if (logger.isDebugEnabled()) {
-            			logger.debug("Executing SQL script command [" + command + "]");
-            		}            		
-                    
-                    boolean hasResults = false;
-                    if (stopOnError) {
-                        hasResults = statement.execute(command.toString());
-                    } else {
-                        try {
-                            statement.execute(command.toString());
-                        } catch (SQLException e) {
-                            if(logger.isDebugEnabled())
-                            	logger.error("Error executing: " + command, e);
-                            throw e;
-                        }
-                    }                       
-                    ResultSet rs = statement.getResultSet();
-                    if ( hasResults && rs != null){	  
-                    	RowMapperResultSetExtractor<Map<String, Object>> rse = new RowMapperResultSetExtractor<Map<String, Object>>(getColumnMapRowMapper());
-                        List<Map<String, Object>> rows = rse.extractData(rs);
-                        list.add(rows);
-                    }
-                    command = null;
-                } else {
-                    command.append(line);
-                    command.append(" ");
-                }
-            }            
-            
-            return list;
-        } catch (SQLException e) {
-            logger.error("Error executing: " + command, e);
-            throw e;
-        } catch (IOException e) {
-            logger.error("Error executing: " + command, e);
-            throw e;
-        }
-    }	
-	
-	
+
+		try {
+			LineNumberReader lineReader = new LineNumberReader(reader);
+			String line = null;
+			while ((line = lineReader.readLine()) != null) {
+				if (command == null) {
+					command = new StringBuffer();
+				}
+				String trimmedLine = line.trim();
+				if (trimmedLine.startsWith("--")) {
+					if (logger.isDebugEnabled())
+						logger.debug(trimmedLine);
+				} else if (trimmedLine.length() < 1
+						|| trimmedLine.startsWith("//")) {
+					// Do nothing
+				} else if (trimmedLine.length() < 1
+						|| trimmedLine.startsWith("--")) {
+					// Do nothing
+				} else if (trimmedLine.endsWith(";")) {
+					command.append(line.substring(0, line.lastIndexOf(";")));
+					command.append(" ");
+
+					Statement statement = conn.createStatement();
+					if (logger.isDebugEnabled()) {
+						logger.debug("Executing SQL script command [" + command + "]");
+					}
+
+					boolean hasResults = false;
+					if (stopOnError) {
+						hasResults = statement.execute(command.toString());
+					} else {
+						try {
+							statement.execute(command.toString());
+						} catch (SQLException e) {
+							if (logger.isDebugEnabled())
+								logger.error("Error executing: " + command, e);
+							throw e;
+						}
+					}
+					ResultSet rs = statement.getResultSet();
+					if (hasResults && rs != null) {
+						RowMapperResultSetExtractor<Map<String, Object>> rse = new RowMapperResultSetExtractor<Map<String, Object>>(
+								getColumnMapRowMapper());
+						List<Map<String, Object>> rows = rse.extractData(rs);
+						list.add(rows);
+					}
+					command = null;
+				} else {
+					command.append(line);
+					command.append(" ");
+				}
+			}
+
+			return list;
+		} catch (SQLException e) {
+			logger.error("Error executing: " + command, e);
+			throw e;
+		} catch (IOException e) {
+			logger.error("Error executing: " + command, e);
+			throw e;
+		}
+	}
+
+	/**
+	 * Specify the maximum number of entries for this template's SQL cache.
+	 * Default is 256.
+	 */
+	public void setCacheLimit(int cacheLimit) {
+		this.cacheLimit = cacheLimit;
+	}
+
+	public void setDataSource(DataSource dataSource) {
+		super.setDataSource(dataSource);
+		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
+	}
+
 }

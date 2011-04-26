@@ -31,48 +31,48 @@ public class SqlFileListener implements FileListener {
 
 	private Configuration configuration;
 	private Log log = LogFactory.getLog(getClass());
-		
+
 	public SqlFileListener() {
 		this.configuration = ConfigurationFactory.getConfiguration();
 	}
-	
+
 	public SqlFileListener(Configuration configuration) {
 		this.configuration = configuration;
 	}
 
+	protected void buildSqlFromInputStream(InputStream inputStream,
+			Configuration configuration, String uri) {
+		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, uri);
+		builder.build();
+	}
+
 	public void fileChanged(FileChangeEvent event) throws Exception {
 		FileObject fo = event.getFile();
-		String uri = fo.getName().getURI();				
-		log.debug("file changed:" + uri );		
+		String uri = fo.getName().getURI();
+		log.debug("file changed:" + uri);
 		configuration.removeUriNamespace(uri, true);
-		buildSqlFromInputStream(fo.getContent().getInputStream(), configuration, uri);		
+		buildSqlFromInputStream(fo.getContent().getInputStream(), configuration, uri);
 	}
 
 	public void fileCreated(FileChangeEvent event) throws Exception {
-	    // added
+		// added
 		FileObject fo = event.getFile();
-		String uri = fo.getName().getURI();				
-		log.debug("file added:" + uri );		
-		configuration.removeUriNamespace(uri, true);		
+		String uri = fo.getName().getURI();
+		log.debug("file added:" + uri);
+		configuration.removeUriNamespace(uri, true);
 		buildSqlFromInputStream(fo.getContent().getInputStream(), configuration, uri);
 		configuration.addLoadedResource(fo.getName().getPath());
 	}
 
 	public void fileDeleted(FileChangeEvent event) throws Exception {
-	    // removed
+		// removed
 		FileObject fo = event.getFile();
-		String uri = fo.getName().getURI();		
-		
-		log.debug("file removed:" + uri );		
-		if(configuration.isResourceLoaded(uri)){		
+		String uri = fo.getName().getURI();
+		log.debug("file removed:" + uri);
+		if (configuration.isResourceLoaded(uri)) {
 			configuration.removeUriNamespace(uri, true);
 			configuration.removeLoadedResource(uri);
 		}
 	}
-	
-	protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration, String uri){
-		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, uri);
-		builder.build();	
-	}
-	
+
 }
