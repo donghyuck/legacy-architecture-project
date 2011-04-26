@@ -40,23 +40,23 @@ import architecture.ee.jdbc.query.factory.impl.SqlQueryFactoryImpl;
 /**
  * SqlQueryFactory 객체를 생성하는 클래스.
  * 
- * @author DongHyuck, Son 
- *
+ * @author DongHyuck, Son
+ * 
  */
 public class SqlQueryFactoryBuilder {
-		
+
 	private Log log = LogFactory.getLog(getClass());
-		
-	private ResourceLoader resourceLoader ;
-		
+
+	private ResourceLoader resourceLoader;
+
 	private DataSource defaultDataSource;
-	
-	private List<String> resourceLocations;	
-	
-	private SqlResourceScanner sqlResourceDeployer ;
-	
-	private boolean isSetSqlResourceDeployer ;
-	
+
+	private List<String> resourceLocations;
+
+	private SqlResourceScanner sqlResourceDeployer;
+
+	private boolean isSetSqlResourceDeployer;
+
 	public SqlQueryFactoryBuilder() {
 		this.resourceLoader = new DefaultResourceLoader();
 		this.defaultDataSource = null;
@@ -64,95 +64,102 @@ public class SqlQueryFactoryBuilder {
 		this.isSetSqlResourceDeployer = false;
 	}
 
+	protected void buildSqlFromInputStream(InputStream inputStream,
+			Configuration configuration) {
+		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration);
+		builder.build();
+	}
+
+	public SqlQueryFactory createSqlQueryFactory() {
+		loadResourceLocations();
+		return createSqlQueryFactory(ConfigurationFactory.getConfiguration(),
+				defaultDataSource);
+	}
+
+	public SqlQueryFactory createSqlQueryFactory(Configuration configuration,
+			DataSource dataSource) {
+		SqlQueryFactory factory = new SqlQueryFactoryImpl(configuration);
+		factory.setDefaultDataSource(dataSource);
+		return factory;
+	}
+
+	public ResourceLoader getResourceLoader() {
+		return resourceLoader;
+	}
+
 	public List<String> getResourceLocations() {
 		return resourceLocations;
 	}
-	
-	public void setDefaultDataSource(DataSource dataSource) {		
-		this.defaultDataSource = dataSource;
+
+	protected void loadResourceLocations() {
+
+		try {
+			Configuration configuration = ConfigurationFactory
+					.getConfiguration();
+
+			for (String path : resourceLocations) {
+
+				if (!configuration.isResourceLoaded(path)) {
+					Resource resource = getResourceLoader().getResource(path);
+
+					log.debug("#" + path);
+					log.debug("#" + resource.getClass().getName());
+					log.debug("#" + resource.exists());
+					if (resource.exists()) {
+						if (resource instanceof UrlResource
+								|| resource instanceof FileSystemResource) {
+							if (isSetSqlResourceDeployer) {
+								sqlResourceDeployer.addUri(path);
+								List<FileObject> list = sqlResourceDeployer
+										.getMonitoredFileObjectList();
+								for (FileObject fo : list) {
+									String uri = fo.getName().getURI();
+									if (fo.getType().hasContent()) {
+										log.debug("##deploy:" + uri);
+										sqlResourceDeployer
+												.buildSqlFromInputStream(fo
+														.getContent()
+														.getInputStream(),
+														configuration, uri);
+										configuration.addLoadedResource(uri);
+									}
+								}
+							}
+						} else {
+							buildSqlFromInputStream(resource.getInputStream(),
+									configuration);
+							configuration.addLoadedResource(path);
+						}
+					}
+				}
+			}
+
+			if (isSetSqlResourceDeployer) {
+				if (sqlResourceDeployer.getState() == State.INITIALIZED)
+					sqlResourceDeployer.start();
+
+			}
+
+		} catch (Exception e) {
+		}
+
 	}
 
-	public void setResourceLocations(List<String> resourceLocations) {
-		this.resourceLocations = resourceLocations;
+	public void setDefaultDataSource(DataSource dataSource) {
+		this.defaultDataSource = dataSource;
 	}
 
 	public void setResourceLoader(ResourceLoader loader) {
 		resourceLoader = loader;
 	}
 
-
-	public SqlQueryFactory createSqlQueryFactory() {
-		loadResourceLocations();
-		return createSqlQueryFactory(ConfigurationFactory.getConfiguration(), defaultDataSource);
-	}	
-	
-	public ResourceLoader getResourceLoader() {
-		return resourceLoader;
+	public void setResourceLocations(List<String> resourceLocations) {
+		this.resourceLocations = resourceLocations;
 	}
 
-	
-	protected void loadResourceLocations(){		
-		
-		try {				
-			Configuration configuration = ConfigurationFactory.getConfiguration();
-
-			for(String path : resourceLocations ){			
-				
-				if( !configuration.isResourceLoaded(path) ){					
-					Resource resource = getResourceLoader().getResource(path);	
-					
-					log.debug("#" + path);
-					log.debug("#" + resource.getClass().getName());
-					log.debug("#" + resource.exists());					
-					if(resource.exists()){						
-						if( resource instanceof UrlResource || resource instanceof FileSystemResource ){							
-							if(isSetSqlResourceDeployer){								
-								sqlResourceDeployer.addUri(path);								
-								List<FileObject> list = sqlResourceDeployer.getMonitoredFileObjectList();
-								for( FileObject fo : list ){	
-									String uri = fo.getName().getURI();	
-									if(fo.getType().hasContent()){
-										log.debug("##deploy:" + uri );
-										sqlResourceDeployer.buildSqlFromInputStream(fo.getContent().getInputStream(), configuration, uri);
-										configuration.addLoadedResource(uri);
-									}
-								}								
-							}
-						}else{
-							buildSqlFromInputStream(resource.getInputStream(), configuration);
-							configuration.addLoadedResource(path);
-						}						
-					}
-				}
-			}
-			
-			if(isSetSqlResourceDeployer){				
-				if( sqlResourceDeployer.getState() == State.INITIALIZED )
-					sqlResourceDeployer.start();
-				
-			}
-			
-		} catch (Exception e) {}
-		
-		
-	}	
-	
-	public SqlQueryFactory createSqlQueryFactory(Configuration configuration, DataSource dataSource) {
-		SqlQueryFactory factory = new SqlQueryFactoryImpl(configuration);
-		factory.setDefaultDataSource(dataSource);
-		return factory;
-	}	
-	
-
-	
 	public void setSqlResourceDeployer(SqlResourceScanner sqlResourceDeployer) {
 		this.sqlResourceDeployer = sqlResourceDeployer;
 		this.isSetSqlResourceDeployer = true;
 	}
 
-	protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration){
-		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration);
-		builder.build();
-	}	
-		
 }

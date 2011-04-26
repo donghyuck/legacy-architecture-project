@@ -28,64 +28,64 @@ import architecture.common.vfs.VFSUtils;
 import architecture.ee.jdbc.query.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.query.factory.Configuration;
 
-
 public class SqlResourceScanner extends ComponentImpl {
 
-	private ExtendedFileMonitor fileMonitor ; 
-	
+	private ExtendedFileMonitor fileMonitor;
+
 	public SqlResourceScanner(FileListener listener) {
 		this.fileMonitor = new ExtendedFileMonitor(listener);
 		this.setRecursive(true);
 	}
-			
-	public void setChecksPerRun(int checksPerRun ){
+
+	public void addUri(String uri) {
+		try {
+			FileObject fo = VFSUtils.resolveFile(uri);
+			fileMonitor.addFile(fo);
+
+		} catch (FileSystemException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void buildSqlFromInputStream(InputStream inputStream,
+			Configuration configuration, String resource) {
+		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration,
+				resource);
+		builder.build();
+	}
+
+	public List<FileObject> getMonitoredFileObjectList() {
+		return fileMonitor.getMonitoredFileObjectList();
+	}
+
+	public void removeUri(String uri) {
+		try {
+			FileObject fo = VFSUtils.resolveFile(uri);
+			fileMonitor.removeFile(fo);
+		} catch (FileSystemException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setChecksPerRun(int checksPerRun) {
 		fileMonitor.setChecksPerRun(checksPerRun);
 	}
-	
-	public void setDelay(long delay){
+
+	public void setDelay(long delay) {
 		fileMonitor.setDelay(delay);
 	}
-	
-	public void setRecursive(boolean newRecursive ){
+
+	public void setRecursive(boolean newRecursive) {
 		fileMonitor.setRecursive(newRecursive);
 	}
-	
+
 	@Override
-	protected void startInternal() {		
+	protected void startInternal() {
 		fileMonitor.start();
 	}
 
 	@Override
 	protected void stopInternal() {
 		fileMonitor.stop();
-	}
-
-	public void removeUri(String uri){
-		try {
-			FileObject fo = VFSUtils.resolveFile(uri);
-			fileMonitor.removeFile(fo);
-		} catch (FileSystemException e) {
-			e.printStackTrace();
-		}		
-	}
-	
-	public void addUri(String uri) {
-		try {			
-			FileObject fo = VFSUtils.resolveFile(uri);		
-			fileMonitor.addFile(fo);
-			
-		} catch (FileSystemException e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public List<FileObject> getMonitoredFileObjectList(){
-		return fileMonitor.getMonitoredFileObjectList();
-	}
-	
-	
-	public void buildSqlFromInputStream(InputStream inputStream, Configuration configuration, String resource){
-		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, resource);
-		builder.build();
 	}
 }
