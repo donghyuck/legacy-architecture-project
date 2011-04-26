@@ -61,5 +61,8 @@ public interface Component {
      */
     public abstract void destroy();
     
+    public void removeStateChangeListener(Object listener);
+    public void addStateChangeListener(Object listener);
+    
 }
 

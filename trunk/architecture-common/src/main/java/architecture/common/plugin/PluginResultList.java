@@ -46,9 +46,4 @@ public class PluginResultList extends AbstractList
         return results.size();
     }
 
-/*    public volatile Object get(int x0)
-    {
-        return get(x0);
-    }*/
-
 }
