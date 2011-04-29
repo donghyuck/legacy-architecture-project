@@ -22,27 +22,31 @@
 		p:url="jdbc:oracle:thin:@//61.250.231.1:1521/ORCL"
 		p:username="womenpro3" p:password="womenpro#3" p:initialSize="1" />
 	
-	<bean id="sqlFileListener" class="architecture.ee.spring.jdbc.SqlFileListener" />
 	
-	<bean id="sqlResourceDeployer"
-		class="architecture.ee.spring.jdbc.SqlResourceScanner"
-		init-method="initialize" 
-		destroy-method="destroy" >
-		<constructor-arg ref="sqlFileListener" />
-	</bean>
-
-	<bean id="sqlQueryFactoryBuilder"
-		class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilder"
-		p:defaultDataSource-ref="dataSource" 
-		p:sqlResourceDeployer-ref="sqlResourceDeployer">
+	<!-- =================================================== -->
+	<!-- 1. URLDirectoryScanner                              -->
+	<!-- =================================================== -->
+	<bean id="directoryScanner" 
+	      class="architecture.ee.spring.lifecycle.internal.DirectoryScannerImpl" 
+		  destroy-method="destroy">		  
+		<property name="directoryListenerList">		
+	        <list value-type="architecture.common.scanner.DirectoryListener">
+	        	<ref bean="sqlQueryFactoryBuilder" />
+	        </list>
+		</property>
 		<property name="resourceLocations">
 			<list>
-				<value>file:///C:/TOOLS/workspace\opensource\PowerJ\architecture-ee\src\test\resources\architecture\ee\jdbc\builder\xml</value>
+				<value>file:///C:\TOOLS\workspace\opensource\architecture_v2\architecture-ee\src\test\resources\architecture\ee\jdbc\builder\xml</value>
 			</list>
-		</property>
+		</property>	     
+    </bean>		
+	
+	<bean id="sqlQueryFactoryBuilder"
+		class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilder"
+		p:defaultDataSource-ref="dataSource" >
 	</bean>
 
-	<bean id="sql-QueryFactory" factory-bean="sqlQueryFactoryBuilder"
+	<bean id="sqlQueryFactory" factory-bean="sqlQueryFactoryBuilder"
 		p:defaultDataSource-ref="dataSource" 
 		scope="singleton" 
 		factory-method="createSqlQueryFactory" />

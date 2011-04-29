@@ -26,37 +26,44 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.mock.web.MockServletContext;
 
+import architecture.common.lifecycle.ApplicationHelperFactory;
+import architecture.common.lifecycle.State;
 import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
 import architecture.ee.jdbc.query.mapping.StatementType;
+import architecture.ee.spring.lifecycle.AdminService;
 
 public class TestSqlQuery {
-
-	private static ApplicationContext context = null;
-
-	@Before
-	public void setUp() throws Exception {
-		String resource = "classpath*:databaseSubsystemContext.xml";
-		if (context == null) {
-/*			System.out.println("setup ========================1");*/
-			context = new ClassPathXmlApplicationContext(resource);
-		}
-/*
-		if (context == null) {
-			System.out.println("setup ========================2");
-			context = new ClassPathXmlApplicationContext("/" + resource);
-		}*/
-	
+	public void log(Object obj){
+		System.out.println("# " + obj);
 	}
+	
+	@Test
+	public void testBoot() {		
+		MockServletContext servletContext = new MockServletContext();
+		servletContext.addInitParameter(
+			"contextConfigLocation", 
+			"default-application-context.xml,databaseSubsystemContext.xml"
+		);
+						
+		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
+		if(admin.getState() == State.INITIALIZED){
+			admin.setServletContext(servletContext);
+			log(admin.getState());
+			admin.start();
+		}	
+	}
+	
 
 	private SqlQueryFactory getSqlQueryFactory() {
-		return (SqlQueryFactory) context.getBean("sqlQueryFactory");
+		return ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryFactory.class);
 	}
 
 	@Test
 	public void testGetDatasource() throws Exception {
-		DataSource dataSource = (DataSource) context.getBean("dataSource");
+		DataSource dataSource = ApplicationHelperFactory.getApplicationHelper().getComponent(DataSource.class);
 		System.out.println("dataSource" + "=" + dataSource);
 	}
 

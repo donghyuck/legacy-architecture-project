@@ -3,12 +3,7 @@
 	
 	<sql-query
 		name="SELECT_TABLE_NAMES"
-		comment="테이블 명 조회"
-		cacheable="true"
-		callable="true"
-		fetch-size="10"
-		flush-mode="always"
-		timeout="1000"><![CDATA[
+		comment="테이블 명 조회"><![CDATA[
 		select table_name from tabs
       ]]></sql-query>
 
@@ -35,8 +30,7 @@
         name="SELECT_SCRIPT"
         comment="테이블 데이터 조회  스크립트" ><![CDATA[  
         
-        select * from TZ_TUTORMONITOR ;
-        
+        select * from TZ_TUTORMONITOR ;        
         select count(*) from TZ_TUTORMONITOR ;
         
     ]]></sql-query> 
