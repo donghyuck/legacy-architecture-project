@@ -28,11 +28,11 @@ import architecture.common.vfs.VFSUtils;
 import architecture.ee.jdbc.query.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.query.factory.Configuration;
 
-public class SqlResourceScanner extends ComponentImpl {
+public class SqlFileDeployer extends ComponentImpl {
 
 	private ExtendedFileMonitor fileMonitor;
 
-	public SqlResourceScanner(FileListener listener) {
+	public SqlFileDeployer(FileListener listener) {
 		this.fileMonitor = new ExtendedFileMonitor(listener);
 		this.setRecursive(true);
 	}
@@ -41,16 +41,13 @@ public class SqlResourceScanner extends ComponentImpl {
 		try {
 			FileObject fo = VFSUtils.resolveFile(uri);
 			fileMonitor.addFile(fo);
-
 		} catch (FileSystemException e) {
 			e.printStackTrace();
 		}
 	}
 
-	public void buildSqlFromInputStream(InputStream inputStream,
-			Configuration configuration, String resource) {
-		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration,
-				resource);
+	public void buildSqlFromInputStream(InputStream inputStream, Configuration configuration, String resource) {
+		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, resource);
 		builder.build();
 	}
 

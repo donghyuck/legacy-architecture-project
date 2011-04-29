@@ -74,8 +74,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 			sqlElement(context.evalNodes("/sql-queryset/sql-query"));
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new RuntimeException("Error parsing Mapper XML. Cause: " + e,
-					e);
+			throw new RuntimeException("Error parsing Mapper XML. Cause: " + e, e);
 		}
 	}
 

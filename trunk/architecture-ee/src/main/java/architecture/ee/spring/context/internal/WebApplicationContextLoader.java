@@ -20,79 +20,34 @@ import architecture.ee.bootstrap.Bootstrap;
 
 public class WebApplicationContextLoader extends ContextLoader {
 
-
-	public static final String CONTEXT_LOCATION_PARAM = "contextConfigLocation";		
+	private static final Log log = LogFactory.getLog(WebApplicationContextLoader.class);
+	
+	public static final String CONTEXT_LOCATION_PARAM = CONFIG_LOCATION_PARAM ;		
 	public static final String SETUP_LOCATION_PARAM = "setupContextLocation";
     public static final String UPGRADE_LOCATION_PARAM = "upgradeContextLocation";
     public static final String RUNTIME_LOCATION_PARAM = "runtimeContextLocation";
     public static final String EXTENSION_LOCATION_PARAM = "extensionContextLocation";    
-    public static final String WS_LOCATION_PARAM = "wsContextLocation";
     
-    private static final Log log = LogFactory.getLog(WebApplicationContextLoader.class);
+    
 
 	protected void customizeContext(ServletContext servletContext, ConfigurableWebApplicationContext applicationContext) {		
-		
-//		/log.info(MessageFormatter.format("016101"));		
-		List<String> contextFiles = new LinkedList<String>();
-		
-		try{
-			//String edition = StartupHelper.getBuildProperty("edition");
-		    if( !StringUtils.isWhitespace(servletContext.getInitParameter(CONTEXT_LOCATION_PARAM)))
-		        contextFiles.add(servletContext.getInitParameter(CONTEXT_LOCATION_PARAM));
-		    /*
-			if(!StartupHelper.isSetup()){			
-				// setup processing
-				log.info(LocalizedMessageFormatter.formatLogMessage("006328"));				
-				String configFile = StringUtils.noNull(servletContext.getInitParameter(SETUP_LOCATION_PARAM), "classpath:/services/default-setup-context.xml");				
-				if(configFile == null){
-					log.warn(LocalizedMessageFormatter.formatLogMessage("006321"));					
-				}else{					
-					log.info(LocalizedMessageFormatter.formatLogMessage("006322"));
-                    contextFiles.add(configFile.trim());                    
-				}				
-				
-			}else{				
-				// runtime
-				String configFile = StringUtils.noNull(servletContext.getInitParameter(RUNTIME_LOCATION_PARAM), "file:" +StartupHelper.getWokrspace() + File.separator + "context-config" + File.separator + "*.xml");				
-                if(null == configFile)
-                {
-                    log.warn(LocalizedMessageFormatter.formatLogMessage("006323"));                                        
-                } else
-                {
-                    log.info(LocalizedMessageFormatter.formatLogMessage("006324"));
-                    contextFiles.add(configFile.trim());                    
-                }                
-                // extention
-                String extensionPath = servletContext.getInitParameter(EXTENSION_LOCATION_PARAM);
-                if(null == extensionPath)
-                {
-                    log.info(LocalizedMessageFormatter.formatLogMessage("006325", StartupHelper.getWokrspace() + File.separator + "context-config" + File.separator + "ext"));
-                    addXmlFilesToContextList((new StringBuilder()).append("file:" + StartupHelper.getWokrspace()).append(File.separator + "context-config" + File.separator + "ext" + File.separator + "*.xml" ).toString(), contextFiles);
-                } else
-                {
-                    log.info(LocalizedMessageFormatter.formatLogMessage("006326", extensionPath, StartupHelper.getWokrspace()+ File.separator + "context-config" + File.separator + "ext" + File.separator + "*.xml"));                    		
-                    addXmlFilesToContextList(extensionPath.trim(), contextFiles);
-                }
-			}	
-			*/
-		    
-		    
 			
+		List<String> contextFiles = new LinkedList<String>();		
+		try{
+			
+		    if( !StringUtils.isWhitespace(servletContext.getInitParameter(CONTEXT_LOCATION_PARAM))){
+		    	String [] locations = StringUtils.split(servletContext.getInitParameter(CONTEXT_LOCATION_PARAM), ',');
+		    	for( String location : locations){
+		    		 contextFiles.add(location);
+		    	}
+		    }		
 		} catch(Exception ex){
-			//String msg = MessageFormatter.format("016102");
             throw new IllegalStateException(ex); //msg, ex);
         }
 				
 		String files[] = new String[contextFiles.size()];
-		int counter = 0;
-        for(Iterator<String> iter = contextFiles.iterator(); iter.hasNext();)
-        {
-            String file = iter.next();
-            files[counter++] = file;
-        }
-        
-        applicationContext.setConfigLocations(files);
-        
+		contextFiles.toArray(files);     
+        applicationContext.setConfigLocations(files);        
 	}
 		
     protected void addXmlFilesToContextList(String pathStr, List<String> files)
