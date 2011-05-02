@@ -25,11 +25,16 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class PluginClassLoader 
 {
 
     private URLClassLoader classLoader;
 
+    private Log log = LogFactory.getLog(getClass());
+    
     private final List list = new ArrayList();
 
     public PluginClassLoader()
@@ -60,19 +65,15 @@ public class PluginClassLoader
             
             if(jars != null)
             {
-                File arr$[] = jars;
-                int len$ = arr$.length;
-                for(int i$ = 0; i$ < len$; i$++)
-                {
-                    File jar = arr$[i$];
+            	for(File jar : jars){
                     if(jar != null && jar.isFile())
                         list.add(jar.toURL());
-                }
-
+            	}
             }
         }
         catch(MalformedURLException mue)
         {
+            log.error(mue);
             //Log.error(mue);
         }
     }

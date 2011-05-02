@@ -19,7 +19,6 @@ import java.util.Map;
 
 public interface PluginPropertyDao
 {
-
     public abstract Map<String, String> getProperties(String s);
 
     public abstract void insertProperty(String s, String s1, String s2);
