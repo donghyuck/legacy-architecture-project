@@ -30,7 +30,7 @@ public class TestPlugin {
 			admin.setServletContext(servletContext);
 			log(admin.getState());
 			admin.start();
-		}	
+		}
 	}
 
 }
