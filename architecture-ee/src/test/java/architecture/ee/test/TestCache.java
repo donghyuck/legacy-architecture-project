@@ -1,6 +1,8 @@
-package architecture.ee.plugin;
+package architecture.ee.test;
 
-import static org.junit.Assert.*;
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Element;
 
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
@@ -9,7 +11,7 @@ import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.State;
 import architecture.ee.spring.lifecycle.AdminService;
 
-public class TestPlugin {
+public class TestCache {
 
 
 	public void log(Object obj){
@@ -25,12 +27,29 @@ public class TestPlugin {
 		);
 						
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
-		
 		if(admin.getState() == State.INITIALIZED){
 			admin.setServletContext(servletContext);
 			log(admin.getState());
 			admin.start();
-		}
+		}	
 	}
 
+	@Test
+	public void newCache(){
+		CacheManager manager = ApplicationHelperFactory.getApplicationHelper().getComponent(CacheManager.class);
+		log(manager.getClusterUUID());
+		Cache memoryOnlyCache = new Cache("testCache", 5000, false, false, 5, 2);
+		manager.addCache(memoryOnlyCache);
+		Cache cache = manager.getCache("testCache");
+		cache.put(new Element("a", "aaa"));
+	}
+	
+	@Test
+	public void updateCache(){
+		CacheManager manager = ApplicationHelperFactory.getApplicationHelper().getComponent(CacheManager.class);
+		log(manager.getClusterUUID());
+		Cache cache = manager.getCache("testCache");
+		log( cache.get("a").getObjectValue() );
+		
+	}
 }
