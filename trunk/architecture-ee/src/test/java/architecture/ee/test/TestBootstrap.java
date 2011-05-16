@@ -1,4 +1,4 @@
-package architecture.ee.bootstrap;
+package architecture.ee.test;
 
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;

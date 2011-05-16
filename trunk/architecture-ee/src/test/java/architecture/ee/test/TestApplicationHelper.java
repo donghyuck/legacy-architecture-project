@@ -1,4 +1,4 @@
-package architecture.ee.lifecycle;
+package architecture.ee.test;
 
 import org.junit.Test;
 
