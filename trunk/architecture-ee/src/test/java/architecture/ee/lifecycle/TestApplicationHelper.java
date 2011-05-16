@@ -2,10 +2,11 @@ package architecture.ee.lifecycle;
 
 import org.junit.Test;
 
-import architecture.common.lifecycle.Application;
 import architecture.common.lifecycle.ApplicationHelperFactory;
+import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.State;
 import architecture.ee.bootstrap.Bootstrap;
+import architecture.ee.spring.lifecycle.AdminService;
 
 public class TestApplicationHelper {
 	
@@ -29,7 +30,7 @@ public class TestApplicationHelper {
 	@Test
 	public void testGetApplicationBeforeStart(){		
 		
-		Application app = ApplicationHelperFactory.getApplicationHelper().getApplication();
+		Server app = ApplicationHelperFactory.getApplicationHelper().getServer();
 		
 		log(app.getState());
 	}
@@ -37,19 +38,19 @@ public class TestApplicationHelper {
 	@Test
 	public void testApplicationState(){		
 		
-		Application app = ApplicationHelperFactory.getApplicationHelper().getApplication();
+		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		
-		log(app.getState());
+		log(admin.getState());
 		
-		//app.start();
+		admin.start();
 		
-		log(app.getState());
+		log(admin.getState());
 	}	
 	
 	@Test
 	public void testGetApplicationAfterStart(){		
 		
-		Application app = ApplicationHelperFactory.getApplicationHelper().getApplication();
+		Server app = ApplicationHelperFactory.getApplicationHelper().getServer();
 		
 		log(app.getState());
 		
@@ -59,4 +60,12 @@ public class TestApplicationHelper {
 		}
 	}	
 	
+	@Test
+	public void testGetServerHome(){		
+		
+		Server app = ApplicationHelperFactory.getApplicationHelper().getServer();
+		
+		log( app.getHomePath( ) ) ;
+		
+	}	
 }

@@ -55,11 +55,28 @@
 		class="architecture.ee.spring.event.internal.AutoListenerEventRegister"
 		c:eventPublisher-ref="eventPublisher" />
 	-->	
+
 	<!-- ================================================ -->	
-	<!--  Application                                     -->
+	<!--  Plugin                                          -->
+	<!-- ================================================ -->	
+	<bean id="pluginCacheRegistry" 
+	    class="architecture.common.plugin.internal.PluginCacheRegistryImpl"
+	    depends-on="cacheManager" >
+	    <constructor-arg ref="cacheManager"/>
+	</bean>	
+	<!-- ================================================ -->	
+	<!--  Cache                                           -->
+	<!-- ================================================ -->	
+	<bean id="cacheManager" 
+	    class="net.sf.ehcache.CacheManager"
+		destroy-method="shutdown">
+	</bean>
+	
+	<!-- ================================================ -->	
+	<!--  Application & Server                            -->
 	<!-- ================================================ -->	
 	<bean id="application"
-		class="architecture.ee.spring.lifecycle.internal.ApplicationImpl"
+		class="architecture.ee.spring.lifecycle.internal.AdminServiceImpl"
 		init-method="initialize"
 		p:name="AdminService"
 		p:eventPublisher-ref="eventPublisher"

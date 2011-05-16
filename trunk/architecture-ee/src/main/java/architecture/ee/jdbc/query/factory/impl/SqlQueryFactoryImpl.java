@@ -72,4 +72,16 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 		return new SqlQueryImpl(configuration, jdbcTemplate);
 	}
 
+	public SqlQuery createSqlQuery(String catelogy, String key) {
+		SqlQueryImpl query = new SqlQueryImpl(configuration, defaultDataSource );
+		query.setStatement(catelogy + "." + key); 
+		return query;
+	}
+	
+	public SqlQuery createSqlQuery(String catelogy, String key, DataSource dataSource) {
+		SqlQueryImpl query = new SqlQueryImpl(configuration, dataSource != null ? dataSource : defaultDataSource );
+		query.setStatement(catelogy + "." + key); 
+		return query;
+	}
+
 }

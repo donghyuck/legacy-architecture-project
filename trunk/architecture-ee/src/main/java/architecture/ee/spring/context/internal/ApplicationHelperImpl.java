@@ -30,8 +30,8 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.lifecycle.Application;
 import architecture.common.lifecycle.ApplicationHelper;
+import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.StateChangeEvent;
 import architecture.ee.spring.lifecycle.AdminService;
@@ -68,8 +68,8 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		getBeanFactory().registerSingleton(name, bd);
 	}
 	
-	public Application getApplication() {
-		return (Application)adminService;
+	public Server getServer() {
+		return (Server)adminService;
 	}
 	
 	public AdminService getAdminService() {
@@ -101,6 +101,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		
 	
 	public Object getComponent(Object obj) throws ComponentNotFoundException {
+		
 		if (getConfigurableApplicationContext() == null) {
 			throw new IllegalStateException("");
 		}
@@ -117,11 +118,13 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 			}
 			obj = names[0];
 		}
+		
 		try {
 			return getConfigurableApplicationContext().getBean(obj.toString());
 		} catch (BeansException e) {
 			throw new ComponentNotFoundException("", e);
 		}
+		
 	}
 	
 	public Object getInstance(Object obj) {
@@ -152,12 +155,16 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	public void onEvent(StateChangeEvent event) {		
 		Object source = event.getSource();
 		if( source instanceof AdminService ){
-			this.state = event.getNewState();			
+			this.state = event.getNewState();
+			
+			
+			
 			if(event.getNewState() == State.STARTED)
 			{			
 				//this.applicationContext = adminService.getApplicationContext();
 			}
 		}		
+		log.debug(((AdminService) source).getApplicationContext().getClass().getName());
 		log.debug("[Server] " + event.getOldState().toString() + " > " + event.getNewState().toString());
 	}
 

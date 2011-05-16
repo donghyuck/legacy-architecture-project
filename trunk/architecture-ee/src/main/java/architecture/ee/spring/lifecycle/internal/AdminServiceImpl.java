@@ -7,26 +7,34 @@ import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
+import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.lifecycle.Application;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
+import architecture.common.lifecycle.Server;
+import architecture.common.lifecycle.State;
+import architecture.common.lifecycle.StateChangeEvent;
+import architecture.common.lifecycle.Version;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.ee.spring.lifecycle.AdminService;
 
-public class ApplicationImpl extends ComponentImpl implements AdminService, Application {
+public class AdminServiceImpl extends ComponentImpl implements AdminService, Server {
 
 	private ContextLoader contextLoader;
 	private ServletContext servletContext;
 	private ConfigurableApplicationContext applicationContext;
+	private Version version ;
+	private ApplicationHomeImpl applicationHome;
 	
-	public ApplicationImpl() {
+	public AdminServiceImpl() {
 		super();
-		contextLoader = null;
-		servletContext = null;
-		applicationContext = null;
+		this.contextLoader = null;
+		this.servletContext = null;
+		this.applicationContext = null;
+		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );
+		this.applicationHome = new ApplicationHomeImpl();
 	}
-
+	
 	public boolean isSetApplicationContext(){
 		if(applicationContext != null)
 			return true;		
@@ -56,11 +64,16 @@ public class ApplicationImpl extends ComponentImpl implements AdminService, Appl
 	}
 
 	public boolean isSetServletContext(){
-		if(servletContext!=null)
+		if(servletContext != null)
 			return true;
 		return false;
 	}
-	
+		
+	@Override
+	protected void initializeInternal() {		
+		addStateChangeListener(this);
+	}
+
 	@Override
 	protected void startInternal(){
 		Thread currentThread = Thread.currentThread();
@@ -91,7 +104,6 @@ public class ApplicationImpl extends ComponentImpl implements AdminService, Appl
 			this.applicationContext = null;
 		}
 	}
-
 
 	public ApplicationProperties getApplicationProperties() {
 		return EmptyApplicationProperties.getInstance();
@@ -129,7 +141,42 @@ public class ApplicationImpl extends ComponentImpl implements AdminService, Appl
 			throw new IllegalStateException();
 		}
 		getApplicationContext().refresh();
-	}	
+	}
+
+	public Version getVersion() {
+		return this.version;
+	}
+
+	public String getInstallRootPath() {
+		return applicationHome.getInstallRootPath();
+	}
+
+	public String getHomePath() {
+		return applicationHome.getInstallRootPath();
+	}
 	
+	@EventListener
+	public void onEvent(StateChangeEvent event) {		
+		Object source = event.getSource();
+		if( source instanceof AdminService ){			
+			
+			//log.debug(((AdminService) source).getApplicationContext().getClass().getName());
+			
+			if(isSetServletContext()){
+				
+			}
+			
+			this.state = event.getNewState();			
+			if( event.getNewState() == State.STARTED )
+			{			
+				//log.debug(((AdminService) source).getApplicationContext());
+			}
+			
+			
+			
+		}		
+		log.debug("[Server] " + event.getOldState().toString() + " > " + event.getNewState().toString());
+		
+	}
 
 }

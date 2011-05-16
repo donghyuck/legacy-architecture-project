@@ -14,7 +14,7 @@ public class ApplicationHelperFactoryImpl implements Implementation {
 		if(helper == null){
 			//AdminService adminService = Bootstrap.getBootstrapApplicationContext().getBean(AdminService.class);
 			helper = new ApplicationHelperImpl(Bootstrap.getBootstrapApplicationContext());
-			helper.getComponent(AdminService.class).addStateChangeListener(helper);
+			//helper.getComponent(AdminService.class).addStateChangeListener(helper);
 		}
 		return helper;
 	}
