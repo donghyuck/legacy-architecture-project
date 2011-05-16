@@ -16,7 +16,8 @@
 package architecture.common.lifecycle;
 
 public enum State {
-	NONE("NONE"),
+	
+	NONE("NONE"),	
 	INITIALIZING("INITIALIZING"),
 	INITIALIZED("INITIALIZED"),	
 	STARTING("STARTING"),
