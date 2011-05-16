@@ -17,9 +17,16 @@ package architecture.common.lifecycle;
 
 import architecture.common.exception.ComponentNotFoundException;
 
+/**
+ * 
+ * @author <a href="mailto:andang311@inkium.com">donghyuck son </a>
+ *
+ */
 public interface ApplicationHelper {
 
-	public Application getApplication();
+	public Server getServer();
+	
+	//public Application getApplication();
 	
 	/**
 	 * Injection 방식으로 인자로 넘겨진 객체의 프로퍼티를 세닝하여 리턴한다.
@@ -46,6 +53,13 @@ public interface ApplicationHelper {
 	 */
 	public Object getComponent(Object obj) throws ComponentNotFoundException;
 	
+	/**
+	 * 인자에 해당하는 타입의 객체를 리턴한다. 
+	 * @param <T>
+	 * @param requiredType 서비스 클래스
+	 * @return
+	 * @throws ComponentNotFoundException
+	 */
 	public <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException;
 	
 	public Object getInstance(Object obj);

@@ -20,9 +20,6 @@ public class VFSTest {
 
 
 	public static void main(String[] args){
-		
-		System.out.println("-----------");		
-		System.out.println("-----------");
 		try {
 			(new VFSTest()).testLocalFileSystem();
 		} catch (Exception e) {
