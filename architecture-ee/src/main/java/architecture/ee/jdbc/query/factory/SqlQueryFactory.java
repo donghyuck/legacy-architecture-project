@@ -26,10 +26,14 @@ public interface SqlQueryFactory {
 
 	public SqlQuery createSqlQuery();
 
+	public SqlQuery createSqlQuery(String catelogy, String key);
+	
+	public SqlQuery createSqlQuery(String catelogy, String key, DataSource dataSource);
+	
 	public SqlQuery createSqlQuery(DataSource dataSource);
 
 	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
 
-	public void setDefaultDataSource(DataSource defaultDataSource);
-
+	public void setDefaultDataSource(DataSource defaultDataSource);	
+	
 }

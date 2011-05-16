@@ -19,8 +19,8 @@
 		
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@//61.250.231.1:1521/ORCL"
-		p:username="womenpro3" p:password="womenpro#3" p:initialSize="1" />
+		p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB"
+		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
 	
 	
 	<!-- =================================================== -->
@@ -36,7 +36,7 @@
 		</property>
 		<property name="resourceLocations">
 			<list>
-				<value>file:///C:\TOOLS\workspace\opensource\architecture_v2\architecture-ee\src\test\resources\architecture\ee\jdbc\builder\xml</value>
+				<value>file:///C:\TOOLS\workspace\opensource\architecture_v2\architecture-ee\profile\default\sql</value>
 			</list>
 		</property>	     
     </bean>		

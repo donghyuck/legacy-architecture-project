@@ -34,6 +34,7 @@ import org.apache.commons.collections.primitives.IntList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlTypeValue;
 import org.springframework.jdbc.core.StatementCreatorUtils;
 
@@ -132,6 +133,11 @@ public class SqlQueryImpl<T> implements SqlQuery {
 		this.statement = statement;
 		return reset();
 	}
+	
+	public SqlQuery setStatement(String catelogy, String key) {
+		this.statement = catelogy + "." + key;
+		return reset();
+	}	
 
 	public Class<?> getReturnType() {
 		return returnType;
@@ -172,10 +178,18 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	 * @return
 	 */
 	public SqlQuery setParameters(Object[] values) {
+		
 		Object[] valuesToUse = values;
-		this.values = Arrays.asList(valuesToUse);
+		//this.values = Arrays.asList(valuesToUse);
+				
+		if(!this.values.isEmpty())
+			this.values.clear();				
+		for ( Object value : valuesToUse){
+			log.debug("value=" + value);
+			this.values.add(value);
+		}		
 		for (int i = 0; i < valuesToUse.length; i++)
-			this.types.add(SqlTypeValue.TYPE_UNKNOWN);
+			this.types.add(SqlTypeValue.TYPE_UNKNOWN);	
 		return this;
 	}
 
@@ -186,11 +200,20 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	 * @return
 	 */
 	public SqlQuery setParameters(Object[] values, int[] types) {
-		Object[] valuesToUse = values;
-		int[] typesToUse = types;
-		this.values = Arrays.asList(valuesToUse);
-		for (int i = 0; i < typesToUse.length; i++)
+		//Object[] valuesToUse = values;		
+		int[] typesToUse = types;		
+		if(!this.values.isEmpty())
+			this.values.clear();		
+		
+		for ( Object value : values){
+			//log.debug("value=" + value);
+			this.values.add(value);
+		}
+		
+		for (int i = 0; i < typesToUse.length; i++){
 			this.types.add(typesToUse[i]);
+		}	
+		
 		return this;
 	}
 
@@ -214,8 +237,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 			Object[] params, int[] paramTypes) {
 		BoundSql sql = getBoundSql(statement, params);
 		if (maxResults > 0) {
-			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex,
-					maxResults, params, paramTypes);
+			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes);
 		} else {
 			return jdbcTemplate.queryForList(sql.getSql(), params, paramTypes);
 		}
@@ -242,8 +264,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 			int[] types, Class<T> elementType) {
 		BoundSql sql = getBoundSql(statement, params);
 		if (maxResults > 0) {
-			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex,
-					maxResults, elementType, params, types);
+			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, elementType, params, types);
 		} else {
 			return jdbcTemplate.queryForList(sql.getSql(), params, types,
 					elementType);
@@ -277,8 +298,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	 * @param params
 	 * @param paramTypes
 	 */
-	public Map<String, Object> queryForMap(String statement, Object[] params,
-			int[] paramTypes) {
+	public Map<String, Object> queryForMap(String statement, Object[] params, int[] paramTypes) {
 		BoundSql sql = getBoundSql(statement, params);
 		return jdbcTemplate.queryForMap(sql.getSql(), params, paramTypes);
 	}
@@ -290,41 +310,72 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	 * @param params
 	 * @param paramTypes
 	 */
-	public <T> T queryForObject(String statement, Class<T> elementType,
-			Object[] params, int[] paramTypes) {
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, Class<T> elementType) {
 		BoundSql sql = getBoundSql(statement, params);
-		return jdbcTemplate.queryForObject(sql.getSql(), elementType, params,
-				paramTypes);
+		return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, elementType);
 	}
 
-	public Object uniqueResult() {
-		if (getReturnType().isAssignableFrom(Map.class)) {
+	
+	/**
+	 * 
+	 * @param statement
+	 * @param params
+	 * @param paramTypes
+	 * @param rowMapper
+	 * @return
+	 */
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper ){
+		BoundSql sql = getBoundSql(statement, params);		
+		return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, rowMapper);
+	}
+		
+	
+
+	public <T> T uniqueResult(RowMapper<T> rowMapper) {
+		return queryForObject(getStatement(), values.toArray(), types.toArray(), rowMapper);
+	}
+
+	
+	public Object uniqueResult() {		
+		if (getReturnType().isAssignableFrom(Map.class)) {		
 			if (values.size() > 0)
-				return queryForMap(getStatement(), values.toArray(),
-						types.toArray());
+				return queryForMap(getStatement(), values.toArray(), types.toArray());
 			else
 				return queryForMap(getStatement());
+		
+		}else{		
+			if (values.size() > 0)
+				return queryForObject(getStatement(), values.toArray(), types.toArray(), getReturnType());
+			else
+				return queryForObject(getStatement(), getReturnType());
 		}
-		if (values.size() > 0)
-			return queryForObject(getStatement(), getReturnType(),
-					values.toArray(), types.toArray());
-		else
-			return queryForObject(getStatement(), getReturnType());
 	}
-
+	
+	public <T> T uniqueResult(Class<T> elementType) {	
+		if (elementType.isAssignableFrom(Map.class)) {		
+			if (values.size() > 0)
+				return (T) queryForMap(getStatement(), values.toArray(), types.toArray());
+			else
+				return (T)queryForMap(getStatement());		
+		}else{		
+			if (values.size() > 0)
+				return queryForObject(getStatement(), values.toArray(), types.toArray(), elementType);
+			else
+				return queryForObject(getStatement(), elementType);
+		}
+	}
+	
 	public List list() {
 		if (getReturnType().isAssignableFrom(Map.class)) {
 
 			if (values.size() > 0)
-				return queryForList(getStatement(), values.toArray(),
-						types.toArray());
+				return queryForList(getStatement(), values.toArray(), types.toArray());
 			else
 				return queryForList(getStatement());
 		}
 
 		if (values.size() > 0)
-			return queryForList(getStatement(), values.toArray(),
-					types.toArray(), getReturnType());
+			return queryForList(getStatement(), values.toArray(), types.toArray(), getReturnType());
 		else
 			return queryForList(getStatement(), getReturnType());
 	}
@@ -342,15 +393,27 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	public SqlQuery addToBatch() {
 		if (parameterQueue == null)
 			this.parameterQueue = new LinkedList<Object[]>();
+		
 		this.parameterQueue.add(this.values.toArray());
 		values.clear();
 		return this;
 	}
 
 	public int executeUpdate() {
-		BoundSql sql = getBoundSql(getStatement(), null);
-		return jdbcTemplate.update(sql.getSql(), values.toArray(),
-				types.toArray());
+		
+		if( parameterQueue != null && parameterQueue.size() > 0 )
+		{
+			int [] cnt =  executeBatchUpdate();		
+			int sum = 0 ;
+			for( int c : cnt){
+				sum = sum + c ;
+			}
+			return sum;
+		}
+		else {
+			BoundSql sql = getBoundSql(getStatement(), null);
+			return jdbcTemplate.update( sql.getSql(), values.toArray(), types.toArray());
+		}
 	}
 
 	/**
@@ -360,8 +423,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	 * @param recordset
 	 * @param params
 	 */
-	public int executeUpdate(String statement, Recordset recordset,
-			String[] params) {
+	public int executeUpdate(String statement, Recordset recordset, String[] params) {
 		if (params.length == 0 || params.length > recordset.getFieldCount()) {
 			// 잘못된 파마메터 정보이다.
 		}
@@ -378,8 +440,10 @@ public class SqlQueryImpl<T> implements SqlQuery {
 			return new int[0];
 		}
 		BoundSql sql = getBoundSql(getStatement(), null);
+		
 		return jdbcTemplate.batchUpdate(sql.getSql(),
 				new BatchPreparedStatementSetter() {
+			
 					public int getBatchSize() {
 						return parameterQueue.size();
 					}
@@ -387,25 +451,21 @@ public class SqlQueryImpl<T> implements SqlQuery {
 					public void setValues(PreparedStatement ps, int index)
 							throws SQLException {
 						int sqlColIndx = 1;
-						Object[] params = (Object[]) parameterQueue
-								.removeFirst();
+						Object[] params = (Object[]) parameterQueue.removeFirst();
 						List<Object> parameters = Arrays.asList(params);
 						for (int i = 0; i < parameters.size(); i++) {
 							Object in = parameters.get(i);
-							StatementCreatorUtils
-									.setParameterValue(ps, sqlColIndx++,
-											SqlTypeValue.TYPE_UNKNOWN, in);
+							StatementCreatorUtils.setParameterValue(ps, sqlColIndx++, SqlTypeValue.TYPE_UNKNOWN, in);
 						}
 					}
 				});
 
 	}
 
-	public int[] executeBatchUpdate(String statement, Recordset recordset,
-			String[] params) {
+	public int[] executeBatchUpdate(String statement, Recordset recordset, String[] params) {
 
 		BoundSql sql = getBoundSql(getStatement(), null);
-
+		
 		class RecordsetBatchPreparedStatementSetter implements
 				BatchPreparedStatementSetter {
 
@@ -453,8 +513,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 			}
 
 		}
-		return jdbcTemplate.batchUpdate(sql.getSql(),
-				new RecordsetBatchPreparedStatementSetter(recordset, params));
+		return jdbcTemplate.batchUpdate(sql.getSql(), new RecordsetBatchPreparedStatementSetter(recordset, params));
 	}
 
 	// *********************************************
@@ -499,5 +558,5 @@ public class SqlQueryImpl<T> implements SqlQuery {
 			sql = stmt.getBoundSql(params);
 		return sql;
 	}
-
+	
 }

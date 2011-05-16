@@ -20,19 +20,31 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.RowMapper;
+
 import architecture.ee.jdbc.recordset.Recordset;
 
 public interface SqlQuery {
 
-	public static final Class DEFAULT_RETURN_TYPE = Map.class;
+	public static final Class<Map> DEFAULT_RETURN_TYPE = Map.class;
 
 	public SqlQuery setDataSource(DataSource dataSource);
 
 	public SqlQuery reset();
 
+	public SqlQuery setStatement(String catelogy, String key);
+	
 	public SqlQuery setStatement(String statement);
 
 	public SqlQuery setString(String value);
+	
+	/**
+	 * 
+	 * @param values
+	 * @param types java.sql.Types 에 정의된 데이터 유형
+	 * @return
+	 */
+	public SqlQuery setParameters(Object[] values, int[] types);
 
 	/**
 	 * 쿼리 수행후 리턴되는 데이터 타입을 정의한다. uniqueResult(), list() 함수 사용하는 경우는 반듯이 리턴 타입을
@@ -93,8 +105,7 @@ public interface SqlQuery {
 	 * @param types
 	 * @return
 	 */
-	public List<Map<String, Object>> queryForList(String statement,
-			Object[] params, int[] types);
+	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] types);
 
 	/**
 	 * 
@@ -105,8 +116,7 @@ public interface SqlQuery {
 	 * @param paramTypes
 	 * @return
 	 */
-	public <T> List<T> queryForList(String statement, Object[] params,
-			int[] paramTypes, Class<T> elementType);
+	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
 
 	/**
 	 * 
@@ -127,8 +137,7 @@ public interface SqlQuery {
 	 *            파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값)
 	 * @return
 	 */
-	public Map<String, Object> queryForMap(String statement, Object[] params,
-			int[] paramTypes);
+	public Map<String, Object> queryForMap(String statement, Object[] params, int[] paramTypes);
 
 	/**
 	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.
@@ -142,6 +151,17 @@ public interface SqlQuery {
 	public <T> T queryForObject(String statement, Class<T> elementType);
 
 	/**
+	 * 
+	 * @param statement
+	 * @param params
+	 * @param paramTypes
+	 * @param rowMapper
+	 * @return
+	 */
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper );
+	
+	
+	/**
 	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.
 	 * 
 	 * @param statement
@@ -154,10 +174,13 @@ public interface SqlQuery {
 	 *            파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값
 	 * @return
 	 */
-	public <T> T queryForObject(String statement, Class<T> elementType,
-			Object[] params, int[] paramTypes);
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
 
 	public Object uniqueResult();
+	
+	public <T> T uniqueResult(Class<T> elementType);
+	
+	public <T> T uniqueResult(RowMapper<T> rowMapper);
 
 	public List list();
 
@@ -185,10 +208,8 @@ public interface SqlQuery {
 	 *            statement
 	 * @return The number of records affected
 	 */
-	public int executeUpdate(String statement, Recordset recordset,
-			String[] params);
+	public int executeUpdate(String statement, Recordset recordset, String[] params);
 
-	public int[] executeBatchUpdate(String statement, Recordset recordset,
-			String[] params);
+	public int[] executeBatchUpdate(String statement, Recordset recordset, String[] params);
 
 }

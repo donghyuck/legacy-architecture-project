@@ -17,22 +17,15 @@ package architecture.ee.jdbc.builder.xml;
 
 import java.sql.Types;
 import java.util.List;
-import java.util.Map;
 
-import javax.sql.DataSource;
-
-import org.apache.commons.lang.time.StopWatch;
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.mock.web.MockServletContext;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.State;
 import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
-import architecture.ee.jdbc.query.mapping.StatementType;
 import architecture.ee.spring.lifecycle.AdminService;
 
 public class TestSqlQuery {
@@ -62,18 +55,140 @@ public class TestSqlQuery {
 	}
 
 	@Test
-	public void testGetDatasource() throws Exception {
-		DataSource dataSource = ApplicationHelperFactory.getApplicationHelper().getComponent(DataSource.class);
-		System.out.println("dataSource" + "=" + dataSource);
+	public void testSelectAllFromEntApp() throws Exception {
+		//SELECT_ALL_FROM_ENT_APP
+		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
+		List rows = query.list();
+		System.out.println("rows:" + "=" + rows );
 	}
 
 	@Test
-	public void testGetSqlQueryFactory() throws Exception {
-		// for ( int i = 0 ; i < 100 ; i ++){
-		System.out.println("sqlQueryFactory" + "=" + getSqlQueryFactory());
-		// }
+	public void testBatchUpdate() throws Exception {
+		
+		//INSERT_ENT_APP_PROPERTY
+		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "DELETE_ALL_ENT_APP_PROPERTY" );		
+		int c = query.setString("1").executeUpdate();
+		
+		log( c + " rows are deleted !!" );
+	
+		
+		query.setStatement("COMMON", "INSERT_ENT_APP_PROPERTY");
+		
+		for( int i = 0 ; i < 100 ; i ++ ){
+			query.setParameters(new Object[]{ "1" , "name-" + i , "value-" + i }, new int []{Types.INTEGER, Types.VARCHAR, Types.VARCHAR});
+			query.addToBatch();
+		}
+		int sum = query.executeUpdate();		
+		log( sum + " rows are inserted !!" );
+
+	}
+	
+	@Test
+	public void testQueryForObject() throws Exception {
+		
+		//COUNT_ENT_APP_PROPERTY
+		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "COUNT_ENT_APP_PROPERTY" );		
+		
+		Integer count = query.reset().queryForObject("COMMON.COUNT_ENT_APP_PROPERTY", new Integer[]{1}, new int []{Types.INTEGER}, Integer.class);
+		
+
+		
+		//Integer count = query.queryForObject("COMMON.COUNT_ENT_APP_PROPERTY", new Integer[]{1}, new int []{Types.INTEGER}, new SingleColumnRowMapper(Integer.class));
+				
+				/*
+				new RowMapper<Integer> (){
+			
+			private Class<Integer> requiredType = Integer.class;
+			
+			protected Object getColumnValue(ResultSet rs, int index) throws SQLException {
+				return JdbcUtils.getResultSetValue(rs, index);
+			}
+			protected Object getColumnValue(ResultSet rs, int index, Class requiredType) throws SQLException {
+				if (requiredType != null) {
+					return JdbcUtils.getResultSetValue(rs, index, requiredType);
+				}
+				else {
+					// No required type specified -> perform default extraction.
+					return getColumnValue(rs, index);
+				}
+			}
+			protected Object convertValueToRequiredType(Object value, Class requiredType) {
+				if (String.class.equals(requiredType)) {
+					return value.toString();
+				}
+				else if (Number.class.isAssignableFrom(requiredType)) {
+					if (value instanceof Number) {
+						// Convert original Number to target Number class.
+						return NumberUtils.convertNumberToTargetClass(((Number) value), requiredType);
+					}
+					else {
+						// Convert stringified value to target Number class.
+						return NumberUtils.parseNumber(value.toString(), requiredType);
+					}
+				}
+				else {
+					throw new IllegalArgumentException(
+							"Value [" + value + "] is of type [" + value.getClass().getName() +
+							"] and cannot be converted to required type [" + requiredType.getName() + "]");
+				}
+			}
+
+			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				// Validate column count.
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int nrOfColumns = rsmd.getColumnCount();
+				if (nrOfColumns != 1) {
+					throw new IncorrectResultSetColumnCountException(1, nrOfColumns);
+				}
+
+				// Extract column value from JDBC ResultSet.
+				Object result = getColumnValue(rs, 1, this.requiredType);
+				if (result != null && this.requiredType != null && !this.requiredType.isInstance(result)) {
+					// Extracted value does not match already: try to convert it.
+					try {
+						return (Integer) convertValueToRequiredType(result, this.requiredType);
+					}
+					catch (IllegalArgumentException ex) {
+						throw new TypeMismatchDataAccessException(
+								"Type mismatch affecting row number " + rowNum + " and column type '" +
+								rsmd.getColumnTypeName(1) + "': " + ex.getMessage());
+					}
+				}
+				return (Integer) result;
+			}});*/
+		
+		log("count:" + count);		
+		long result = 0;		
+		/*
+		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
+		List list = query.reset().setMaxResults(10).list();
+		log(list.size());
+		**/
+		
 	}
 
+	//@Test
+	public void testQueryScrollableForList() throws Exception {
+				
+		
+		//COUNT_ENT_APP_PROPERTY
+		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "COUNT_ENT_APP_PROPERTY" );
+		
+				
+		Integer count = query.setParameters(new Object[]{1}, new int []{Types.NUMERIC}).uniqueResult(Integer.class);
+		log("count:" + count);		
+		long result = 0;
+		
+/*
+		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
+		List list = query.reset().setMaxResults(10).list();
+		log(list.size());
+		**/
+		
+		
+	}
+	
+	/*
 	@Test
 	public void testQueryForList() throws Exception {
 
@@ -257,5 +372,5 @@ public class TestSqlQuery {
 		} catch (InterruptedException ex) {
 			ex.printStackTrace();
 		}
-	}
+	}*/
 }
