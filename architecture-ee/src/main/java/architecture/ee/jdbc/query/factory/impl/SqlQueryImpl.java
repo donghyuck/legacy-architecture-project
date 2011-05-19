@@ -34,6 +34,7 @@ import org.apache.commons.collections.primitives.IntList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlTypeValue;
 import org.springframework.jdbc.core.StatementCreatorUtils;
@@ -111,8 +112,9 @@ public class SqlQueryImpl<T> implements SqlQuery {
 		return this;
 	}
 
-	public SqlQuery setDataSource(DataSource dataSource) {
+	public SqlQuery setDataSource(DataSource dataSource) {		
 		this.jdbcTemplate = new ExtendedJdbcTemplate(dataSource);
+		this.jdbcTemplate.initialize();		
 		return this;
 	}
 
@@ -330,11 +332,14 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	}
 		
 	
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, ResultSetExtractor<T> extractor ){
+		BoundSql sql = getBoundSql(statement, params);		
+		return jdbcTemplate.query(sql.getSql(), params, paramTypes, extractor);
+	}
 
 	public <T> T uniqueResult(RowMapper<T> rowMapper) {
 		return queryForObject(getStatement(), values.toArray(), types.toArray(), rowMapper);
 	}
-
 	
 	public Object uniqueResult() {		
 		if (getReturnType().isAssignableFrom(Map.class)) {		
@@ -535,8 +540,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 		setDataSource(dataSource);
 	}
 
-	protected SqlQueryImpl(Configuration configuration,
-			ExtendedJdbcTemplate jdbcTemplate) {
+	protected SqlQueryImpl(Configuration configuration, ExtendedJdbcTemplate jdbcTemplate) {
 		this.configuration = configuration;
 		this.additionalParameters = new HashMap<String, Object>(4);
 		this.values = new ArrayList<Object>(4);

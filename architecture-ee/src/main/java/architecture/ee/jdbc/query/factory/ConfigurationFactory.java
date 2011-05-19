@@ -28,12 +28,10 @@ public class ConfigurationFactory {
 	private static Implementation impl = null;
 
 	static {
-		impl = new ConfigurationFactoryImpl(); // (Implementation)
-												// ImplFactory.loadImplFromKey(LocalizerFactory.Implementation.class);
+		impl = new ConfigurationFactoryImpl(); 
 	}
 
 	public static Configuration getConfiguration() {
 		return impl.getConfiguration();
 	}
-
 }

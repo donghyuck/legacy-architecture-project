@@ -31,7 +31,7 @@ import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
 	private final Configuration configuration;
-	private DataSource defaultDataSource = null;
+	private DataSource dataSource = null;
 
 	public SqlQueryFactoryImpl(Configuration configuration) {
 		this.configuration = configuration;
@@ -41,8 +41,8 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 		return configuration;
 	}
 
-	public void setDefaultDataSource(DataSource defaultDataSource) {
-		this.defaultDataSource = defaultDataSource;
+	public void setDataSource(DataSource defaultDataSource) {
+		this.dataSource = defaultDataSource;
 	}
 
 	public String[] getQueryNames(String namespace) {
@@ -56,12 +56,11 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 	}
 
 	public String[] getQueryNames() {
-		return configuration.getMappedStatementNames().toArray(
-				new String[configuration.getMappedStatementNames().size()]);
+		return configuration.getMappedStatementNames().toArray( new String[configuration.getMappedStatementNames().size()]);
 	}
 
 	public SqlQuery createSqlQuery() {
-		return new SqlQueryImpl(configuration, defaultDataSource);
+		return new SqlQueryImpl(configuration, dataSource);
 	}
 
 	public SqlQuery createSqlQuery(DataSource dataSource) {
@@ -73,13 +72,13 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 	}
 
 	public SqlQuery createSqlQuery(String catelogy, String key) {
-		SqlQueryImpl query = new SqlQueryImpl(configuration, defaultDataSource );
+		SqlQueryImpl query = new SqlQueryImpl(configuration, dataSource );
 		query.setStatement(catelogy + "." + key); 
 		return query;
 	}
 	
 	public SqlQuery createSqlQuery(String catelogy, String key, DataSource dataSource) {
-		SqlQueryImpl query = new SqlQueryImpl(configuration, dataSource != null ? dataSource : defaultDataSource );
+		SqlQueryImpl query = new SqlQueryImpl(configuration, dataSource != null ? dataSource : dataSource );
 		query.setStatement(catelogy + "." + key); 
 		return query;
 	}

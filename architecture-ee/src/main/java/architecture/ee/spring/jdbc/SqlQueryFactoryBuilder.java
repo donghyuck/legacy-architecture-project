@@ -31,11 +31,13 @@ import javax.sql.DataSource;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.vfs.FileObject;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.scanner.DirectoryListener;
+import architecture.common.vfs.VFSUtils;
 import architecture.ee.jdbc.query.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.ConfigurationFactory;
@@ -56,27 +58,41 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 	
 	private String suffix = "queryset.xml";
 	
-	private ResourceLoader resourceLoader;
+	private Configuration configuration;
 
-	private DataSource defaultDataSource;
+	private DataSource dataSource;
 
 	private List<String> resourceLocations;
 
-	public SqlQueryFactoryBuilder() {
-		this.resourceLoader = new DefaultResourceLoader();
-		this.defaultDataSource = null;
-		this.resourceLocations = Collections.EMPTY_LIST;
+	public SqlQueryFactoryBuilder(Configuration configuration) {
+		this.dataSource = null;
+		this.configuration = configuration;
+		this.resourceLocations = Collections.emptyList();
 	}
 	
-
-	public SqlQueryFactory createSqlQueryFactory() { 
-		loadResourceLocations();
-		return createSqlQueryFactory(ConfigurationFactory.getConfiguration(), defaultDataSource);
+	public boolean isSetDataSource() {
+		if( dataSource == null)
+			return false;
+		else
+			return true;		
+	}
+	
+	public void initialize(){
+		if(resourceLocations.size()>0)
+			loadResourceLocations();
+	}
+	
+		
+	public SqlQueryFactory createSqlQueryFactory() { 				
+		SqlQueryFactory factory = new SqlQueryFactoryImpl(configuration);		
+		if(isSetDataSource())
+			factory.setDataSource(dataSource);		
+		return factory;    	
 	}
 
-	public SqlQueryFactory createSqlQueryFactory(Configuration configuration, DataSource dataSource) {
+	public SqlQueryFactory createSqlQueryFactory(DataSource dataSource) {		
 		SqlQueryFactory factory = new SqlQueryFactoryImpl(configuration);
-		factory.setDefaultDataSource(dataSource);
+		factory.setDataSource(dataSource);
 		return factory;
 	}
 	
@@ -85,43 +101,31 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 		builder.build();
 	}
 
-	public ResourceLoader getResourceLoader() {
-		return resourceLoader;
-	}
+/*	public ResourceLoader getResourceLoader() {
+		return this.resourceLoader;
+	}*/
 
 	public List<String> getResourceLocations() {
-		return resourceLocations;
+		return this.resourceLocations;
 	}
 
 	protected void loadResourceLocations() {
 		try {
-			Configuration configuration = ConfigurationFactory.getConfiguration();
-			for (String path : resourceLocations) {
-				if (!configuration.isResourceLoaded(path)) {					
-					Resource resource = getResourceLoader().getResource(path);
-					if (resource.exists()) {
-						
-						URL url = resource.getURL();						
-						if("file".equals(url.getProtocol()) && resource.getFile().exists()){
-							//directoryScanner.addScanURL(url);
-						}else{
-							buildSqlFromInputStream(resource.getInputStream(), configuration);
-							configuration.addLoadedResource(url.getPath());
-						}						
-					}
+			for (String path : resourceLocations) {				
+				FileObject fo = VFSUtils.resolveFile(path);
+				if( fo.exists() ){
+					if (!configuration.isResourceLoaded(fo.getName().getURI())) {						
+						log.debug( fo.getName().getScheme() );						
+						buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
+						configuration.addLoadedResource(fo.getName().getURI());					
+					}					
 				}
 			}
-		} catch (Exception e) {
-		}
-
+		} catch (Exception e) { }
 	}
 
-	public void setDefaultDataSource(DataSource dataSource) {
-		this.defaultDataSource = dataSource;
-	}
-
-	public void setResourceLoader(ResourceLoader loader) {
-		resourceLoader = loader;
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
 	}
 
 	public void setResourceLocations(List<String> resourceLocations) {
@@ -131,6 +135,7 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 	public String getPrefix() {
 		return prefix;
 	}
+	
 	/*
 	 * Set the prefix that gets prepended to view names when building a URL.
 	 */
@@ -148,87 +153,89 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 	public void setSuffix(String suffix) {
 		this.suffix = (suffix != null ? suffix : "");
 	}
+			
+	private Map<URI, DeployedInfo> deployments = Collections.synchronizedMap(new HashMap<URI, DeployedInfo>());
+		
 	
-		
-		private Map<URI, DeployedInfo> deployments = Collections.synchronizedMap(new HashMap<URI, DeployedInfo>());
-		
-		static class DeployedInfo {
-			
-			protected long deployedTime;
-			protected String name;
-			protected URI uri;
-			
-			public DeployedInfo( URI uri, String name, long deployedTime) {
-				this.deployedTime = deployedTime;
-				this.name = name;
-				this.uri = uri;
-			}
+	static class DeployedInfo {
 
-			public DeployedInfo( URI uri, long deployedTime) {
-				this.deployedTime = deployedTime;
-				this.uri = uri;
-			}
+		protected long deployedTime;
+		protected String name;
+		protected URI uri;
+
+		public DeployedInfo(URI uri, String name, long deployedTime) {
+			this.deployedTime = deployedTime;
+			this.name = name;
+			this.uri = uri;
 		}
 
-		public String fileCreated(File file) {
-			try {			
-				buildSqlFromInputStream(new FileInputStream(file), ConfigurationFactory.getConfiguration());
-				DeployedInfo di = new DeployedInfo(file.toURI(), System.currentTimeMillis());
-				deployments.put(di.uri, di);
-			} catch (FileNotFoundException e) {
-			}
-			return "success";
+		public DeployedInfo(URI uri, long deployedTime) {
+			this.deployedTime = deployedTime;
+			this.uri = uri;
+		}
+	}
+
+	public String fileCreated(File file) {
+		try {
+			buildSqlFromInputStream(new FileInputStream(file), configuration);
+			DeployedInfo di = new DeployedInfo(file.toURI(),
+					System.currentTimeMillis());
+			deployments.put(di.uri, di);
+		} catch (FileNotFoundException e) {
+		}
+		return "success";
+	}
+
+	public boolean fileDeleted(File file) {
+		if (configuration.isResourceLoaded(file.toURI().toString())) {
+			configuration.removeUriNamespace(file.toURI().toString(), true);
+			configuration.removeLoadedResource(file.toURI().toString());
+		}
+		DeployedInfo di = deployments.remove(file.toURI());
+		return true;
+	}
+
+	public void fileChanged(File file) {
+		try {
+			buildSqlFromInputStream(new FileInputStream(file), ConfigurationFactory.getConfiguration());
+			DeployedInfo di = deployments.get(file.toURI());
+			di.deployedTime = System.currentTimeMillis();
+			deployments.put(di.uri, di);
+		} catch (FileNotFoundException e) {
+		}
+	}
+
+	public long getDeploymentTime(File file) {
+		if (isFileDeployed(file))
+			return deployments.get(file.toURI()).deployedTime;
+		return 0;
+	}
+
+	public boolean isFileDeployed(File file) {
+		return deployments.containsKey(file.toURI());
+	}
+
+	/**
+	 * 
+	 * 파일이 유요한 형태의 파일인가를 확인하여 true/false 값을 리턴한다.
+	 */
+	public boolean validateFile(File file) {
+
+		boolean readable = file.canRead();
+		boolean flag1 = StringUtils.isEmpty(getSuffix()) ? true : file
+				.getName().endsWith(getSuffix());
+		boolean flag2 = StringUtils.isEmpty(getPrefix()) ? true : file
+				.getName().startsWith(getPrefix());
+		boolean valid = readable && flag1 && flag2;
+
+		if (!valid) {
+			// if (log.isDebugEnabled())
+			// log.info(MessageFormatter.format("011023",
+			// file.getAbsolutePath()));
 		}
 
-		public boolean fileDeleted(File file) {	
-			Configuration configuration = ConfigurationFactory.getConfiguration();
-			if (configuration.isResourceLoaded(file.toURI().toString())) {
-				configuration.removeUriNamespace(file.toURI().toString(), true);
-				configuration.removeLoadedResource(file.toURI().toString());
-			}			
-			DeployedInfo di = deployments.remove(file.toURI());
-			return true;
-		}
+		// log.debug(file.getPath() + "validate:" + valid);
+		return valid;
+	}
 
-		public void fileChanged(File file) {
-			try {
-				buildSqlFromInputStream(new FileInputStream(file), ConfigurationFactory.getConfiguration());
-				DeployedInfo di = deployments.get(file.toURI());
-				di.deployedTime = System.currentTimeMillis(); 
-				deployments.put(di.uri, di);
-			} catch (FileNotFoundException e) {
-			}
-		}
-
-		public long getDeploymentTime(File file) {
-			if(isFileDeployed(file))
-				return deployments.get(file.toURI()).deployedTime;
-			return 0;
-		}
-
-		public boolean isFileDeployed(File file) {
-			return deployments.containsKey(file.toURI());
-		}
-					
-		/**
-		 * 
-		 * 파일이 유요한 형태의 파일인가를 확인하여 true/false 값을 리턴한다.
-		 */
-		public boolean validateFile(File file) {
-			
-						
-			boolean readable = file.canRead();
-			boolean flag1 = StringUtils.isEmpty(getSuffix()) ? true : file.getName().endsWith(getSuffix());
-			boolean flag2 = StringUtils.isEmpty(getPrefix()) ? true : file.getName().startsWith(getPrefix());
-			boolean valid = readable && flag1 && flag2;
-		
-			if (!valid) {
-				//if (log.isDebugEnabled())
-				//	log.info(MessageFormatter.format("011023", file.getAbsolutePath()));
-			}
-			
-			//log.debug(file.getPath() + "validate:" + valid);
-			return valid;
-		}
-//	}
 }

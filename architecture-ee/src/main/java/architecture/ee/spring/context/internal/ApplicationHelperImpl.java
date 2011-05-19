@@ -35,6 +35,7 @@ import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.StateChangeEvent;
 import architecture.ee.spring.lifecycle.AdminService;
+import architecture.ee.spring.lifecycle.internal.AdminServiceImpl;
 
 public class ApplicationHelperImpl implements ApplicationHelper, ApplicationListener<ApplicationEvent> {
 
@@ -97,8 +98,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		} catch (NoSuchBeanDefinitionException e){
 			throw new ComponentNotFoundException(e);
 		}
-	}
-		
+	}		
 	
 	public Object getComponent(Object obj) throws ComponentNotFoundException {
 		
@@ -164,7 +164,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 				//this.applicationContext = adminService.getApplicationContext();
 			}
 		}		
-		log.debug(((AdminService) source).getApplicationContext().getClass().getName());
+		log.debug(((AdminServiceImpl)source).getApplicationContext().getClass().getName());
 		log.debug("[Server] " + event.getOldState().toString() + " > " + event.getNewState().toString());
 	}
 

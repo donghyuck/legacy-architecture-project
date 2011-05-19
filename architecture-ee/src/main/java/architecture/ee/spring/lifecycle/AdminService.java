@@ -6,9 +6,10 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.lifecycle.Component;
+import architecture.common.lifecycle.Application;
+import architecture.common.lifecycle.ConfigRoot;
 
-public interface AdminService extends Component {
+public interface AdminService extends Application {
 
 	/**
 	 * 
@@ -59,5 +60,9 @@ public interface AdminService extends Component {
 	 * @return
 	 */
 	public boolean isSetApplicationContext();
+	
+	public abstract String getInstallRootPath();
+	
+	public abstract ConfigRoot getConfigRoot();
 	
 }

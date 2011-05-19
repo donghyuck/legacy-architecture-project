@@ -34,6 +34,6 @@ public interface SqlQueryFactory {
 
 	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
 
-	public void setDefaultDataSource(DataSource defaultDataSource);	
+	public void setDataSource(DataSource defaultDataSource);	
 	
 }
