@@ -41,6 +41,9 @@ import org.springframework.jdbc.core.RowMapperResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
+import org.springframework.jdbc.support.lob.OracleLobHandler;
 
 import architecture.ee.jdbc.util.JdbcHelper;
 import architecture.ee.jdbc.util.JdbcHelper.DatabaseType;
@@ -54,8 +57,7 @@ import architecture.ee.jdbc.util.JdbcHelperFactory;
  */
 public class ExtendedJdbcTemplate extends JdbcTemplate {
 
-	public static class ScrollablePreparedStatementCreator implements
-			PreparedStatementCreator {
+	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator {
 		private String sqlToUse;
 		private Object params[];
 		private int paramTypes[];
@@ -63,8 +65,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		private final int numResults;
 		private JdbcHelper helper;
 
-		public ScrollablePreparedStatementCreator(String sql, int startIndex,
-				int numResults, Object args[], int[] types, JdbcHelper helper) {
+		public ScrollablePreparedStatementCreator(String sql, int startIndex, int numResults, Object args[], int[] types, JdbcHelper helper) {
 			this.startIndex = startIndex;
 			this.numResults = numResults;
 			this.params = args;
@@ -76,8 +77,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		/**
 		 * 데이터베이스 제품에 따라 쿼리 결과에 대한 스크롤을 지원하도록 PreparedStatement 다르게 생성한다.
 		 */
-		public PreparedStatement createPreparedStatement(Connection connection)
-				throws SQLException {
+		public PreparedStatement createPreparedStatement(Connection connection) throws SQLException {
 			DatabaseType databaseType = helper.getDatabaseType();
 
 			PreparedStatement ps;
@@ -145,21 +145,47 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	/** Cache of original SQL String to ParsedSql representation */
 	private final Map<String, ParsedSql> parsedSqlCache = new LinkedHashMap<String, ParsedSql>(
 			DEFAULT_CACHE_LIMIT, 0.75f, true) {
-
 		@Override
 		protected boolean removeEldestEntry(Map.Entry<String, ParsedSql> eldest) {
 			return size() > getCacheLimit();
 		}
-
 	};
 
 	private JdbcHelper jdbcHelper = null;
-
+	private LobHandler lobHandler = null;
+	
 	public ExtendedJdbcTemplate(DataSource dataSource) {
 		super(dataSource);
-		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
+		
 	}
 
+	
+	public LobHandler getLobHandler() {
+		return lobHandler;
+	}
+
+	public void setLobHandler(LobHandler lobHandler) {
+		this.lobHandler = lobHandler;
+	}
+
+	public void setJdbcHelper(JdbcHelper jdbcHelper) {
+		this.jdbcHelper = jdbcHelper;
+	}
+
+
+	public void initialize(){
+		if(jdbcHelper == null)
+			this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
+		
+		if( lobHandler == null)
+			if ( jdbcHelper.getDatabaseType() == DatabaseType.oracle ){
+				lobHandler = new OracleLobHandler();
+			}else{
+			    lobHandler = new DefaultLobHandler();
+			}
+	}
+	
+	
 	public Object executeScript(final boolean stopOnError, final Reader reader) {
 		return execute(new ConnectionCallback<Object>() {
 			public Object doInConnection(Connection connection)

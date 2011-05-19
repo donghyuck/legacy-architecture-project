@@ -20,6 +20,7 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.jdbc.recordset.Recordset;
@@ -160,6 +161,7 @@ public interface SqlQuery {
 	 */
 	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper );
 	
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, ResultSetExtractor<T> extractor );
 	
 	/**
 	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.

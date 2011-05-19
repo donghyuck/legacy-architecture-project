@@ -29,12 +29,11 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	private Log log = LogFactory.getLog(getClass());
 	
 	public DirectoryScannerImpl() {
-		//name = "URLDirectoryScanner";
 		scanner = new URLDirectoryScanner();
 		scanner.setRecursiveSearch(true);
 		scanner.setScanEnabled(true);
 		this.resourceLoader = new DefaultResourceLoader();
-		this.resourceLocations = Collections.EMPTY_LIST;
+		this.resourceLocations = Collections.emptyList();
 	}
 	
 		
@@ -124,10 +123,7 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	}
 	
 	protected void loadResourceLocations() {
-		try {		
-			
-			log.debug("*************************************");
-			
+		try {					
 			for (String path : resourceLocations) {		
 				FileObject fo = VFSUtils.resolveFile(path);
 				if(fo.exists()){
@@ -136,9 +132,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 					scanner.addScanURL(url);
 				}
 			}
-		} catch (Exception e) {
-		}
-
-	}
-		
+		} catch (Exception e) { }
+	}		
 }

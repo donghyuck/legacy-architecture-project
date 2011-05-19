@@ -116,10 +116,8 @@ public class MappedStatement {
 		return boundSql;
 	}
 
-	public BoundSql getBoundSql(Object parameterObject,
-			Map<String, Object> additionalParameters) {
-		BoundSql boundSql = sqlSource.getBoundSql(parameterObject,
-				additionalParameters);
+	public BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters) {
+		BoundSql boundSql = sqlSource.getBoundSql(parameterObject, additionalParameters);
 		return boundSql;
 	}
 }

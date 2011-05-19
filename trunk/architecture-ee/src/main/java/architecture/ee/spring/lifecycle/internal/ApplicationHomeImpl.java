@@ -13,7 +13,6 @@ import org.springframework.jndi.JndiTemplate;
 
 import architecture.common.lifecycle.ApplicationHome;
 
-
 public class ApplicationHomeImpl implements ApplicationHome {
 	
     public static final String SERVER_ROOT_KEY = "runtime.server.root";
