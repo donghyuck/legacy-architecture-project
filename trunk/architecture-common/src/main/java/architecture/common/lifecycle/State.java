@@ -28,7 +28,7 @@ public enum State {
 	DESTROYING("DESTROYING"),
 	DESTROYED("DESTROYED");
 		
-	private String desc;		
+	private String desc;
 	
 	private State(String desc)
     {
