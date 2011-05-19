@@ -16,73 +16,64 @@
 	<!--  Task & Jobs                                     -->
 	<!-- ================================================ -->	
 	<!-- Global Timer for timed execution tasks. -->
-    <bean id="taskTimer" 
-    	class="org.springframework.scheduling.timer.TimerFactoryBean" 
-    	p:daemon="false" />    
+    <bean id="taskTimer" class="org.springframework.scheduling.timer.TimerFactoryBean" p:daemon="false" />    
     
     <!-- Spring task executor replaces the custom task engine. -->
-    <bean id="minuteTaskExecutor" 
-    	class="org.springframework.scheduling.timer.TimerTaskExecutor" 
-    	p:delay="6000" p:timer-ref="taskTimer" />
+    <bean id="minuteTaskExecutor" class="org.springframework.scheduling.timer.TimerTaskExecutor" p:delay="6000" p:timer-ref="taskTimer"  depends-on="taskTimer" />
 
 	<!-- ================================================ -->	
 	<!--  Event                                           -->
 	<!-- ================================================ -->	
-	<bean id="eventThreadPoolConfiguration" 
-		class="architecture.common.event.internal.EventThreadPoolConfigurationImpl" />
+	<bean id="eventThreadPoolConfiguration" class="architecture.common.event.internal.EventThreadPoolConfigurationImpl" />
 	
-	<bean id="listenerHandlerConfiguration" 
-		class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
 
-	<bean id="eventExecutorFactory" 
-		class="architecture.common.event.internal.EventExecutorFactoryImpl" >
+	<bean id="eventExecutorFactory" class="architecture.common.event.internal.EventExecutorFactoryImpl" depends-on="eventThreadPoolConfiguration" >
 		<constructor-arg ref="eventThreadPoolConfiguration"/>
 	</bean>
 
-	<bean id="eventDispatcher" 
-		class="architecture.common.event.internal.AsynchronousAbleEventDispatcher">
+	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher">
 		<constructor-arg ref="eventExecutorFactory"/>
     </bean>
 
-	<bean id="eventPublisher" 
-		class="architecture.common.event.internal.EventPublisherImpl" >
+	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl" >
 		<constructor-arg ref="eventDispatcher"/>
 		<constructor-arg ref="listenerHandlerConfiguration"/>
 	</bean>
 				
-	<!-- 	 				
-	<bean id="listenerEventRegister" 
-		class="architecture.ee.spring.event.internal.AutoListenerEventRegister"
-		c:eventPublisher-ref="eventPublisher" />
-	-->	
-
 	<!-- ================================================ -->	
 	<!--  Plugin                                          -->
 	<!-- ================================================ -->	
-	<bean id="pluginCacheRegistry" 
-	    class="architecture.common.plugin.internal.PluginCacheRegistryImpl"
-	    depends-on="cacheManager" >
+	<bean id="pluginCacheRegistry" class="architecture.common.plugin.internal.PluginCacheRegistryImpl" depends-on="cacheManager" >
 	    <constructor-arg ref="cacheManager"/>
 	</bean>	
 	<!-- ================================================ -->	
 	<!--  Cache                                           -->
 	<!-- ================================================ -->	
-	<bean id="cacheManager" 
-	    class="net.sf.ehcache.CacheManager"
-		destroy-method="shutdown">
-	</bean>
+	<bean id="cacheManager" class="net.sf.ehcache.CacheManager" destroy-method="shutdown" />
 	
 	<!-- ================================================ -->	
-	<!--  Application & Server                            -->
+	<!--  Application                                     -->
 	<!-- ================================================ -->	
-	<bean id="application"
-		class="architecture.ee.spring.lifecycle.internal.AdminServiceImpl"
-		init-method="initialize"
-		p:name="AdminService"
-		p:eventPublisher-ref="eventPublisher"
-		p:contextLoader-ref="contextLoader" />
+	<bean id="adminService" class="architecture.ee.spring.lifecycle.internal.AdminServiceImpl" init-method="initialize" depends-on="eventPublisher"
+		p:eventPublisher-ref="eventPublisher" p:contextLoader-ref="contextLoader" p:configRootHelper-ref="configRootHelper" />
 	
-	<bean id="contextLoader"
-		class="architecture.ee.spring.context.internal.WebApplicationContextLoader" />
+	<bean id="contextLoader" class="architecture.ee.spring.context.internal.WebApplicationContextLoader" />		
+		
+	<bean id="configRootHelper" class="architecture.ee.spring.lifecycle.internal.ConfigRootHelperImpl"/>
+
+	<!-- ================================================ -->	
+	<!--  Database                                        -->
+	<!-- ================================================ -->	
+	<bean id="sqlConfiguration" class="architecture.ee.jdbc.query.factory.ConfigurationFactory" factory-method="getConfiguration" />
+	
+	<bean id="sqlQueryFactoryBuilder" class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilder" init-method="initialize">
+	    <constructor-arg ref="sqlConfiguration"/>
+		<property name="resourceLocations">
+			<list>
+				<value>res:config/sql/framework-queryset.xml</value>
+			</list>
+		</property>
+	</bean>		
 		
 </beans>
