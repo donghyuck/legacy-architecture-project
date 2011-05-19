@@ -156,7 +156,7 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
             }
         }
         
-        log.debug( "action:" + actions.size() );
+       // log.debug( "action:" + actions.size() );
         
         DirectoryListener[] listeners = getDirectoryListeners();
         
