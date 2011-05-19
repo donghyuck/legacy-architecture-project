@@ -15,4 +15,9 @@
 	]]>
 	</description>
 		
+	<bean id="admin" class="architecture.ee.spring.lifecycle.internal.AdminImpl" init-method="initialize" 
+	    p:eventPublisher-ref="eventPublisher" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource">
+		<constructor-arg ref="adminService"/>
+	</bean>	
+	
 </beans>
