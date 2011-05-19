@@ -16,11 +16,22 @@
 package architecture.common.lifecycle;
 
 public class ApplicationPropertyChangeEvent extends PropertyChangeEvent {
-
-	public ApplicationPropertyChangeEvent(Object source, String propertyName,
-			Object oldValue, Object newValue) {
+       
+    public enum Type {
+        ADDED, 
+        REMOVED, 
+        MODIFIED,
+    }
+    
+    private Type eventType;
+    
+	public ApplicationPropertyChangeEvent(Object source, Type eventType, String propertyName, Object oldValue, Object newValue) {
 		super(source, propertyName, oldValue, newValue);
+		this.eventType = eventType;
 	}
 
+	public Type getEventType() {
+		return eventType;
+	}
 
 }

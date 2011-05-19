@@ -76,7 +76,7 @@ public class ComponentImpl implements Component, EventSource {
     }
 
     public void start() throws RuntimeError, RuntimeWarning {
-    	if(state == State.INITIALIZED){
+    	if(state == State.INITIALIZED || state == State.STOPED){
 	    	setState(State.STARTING);	    	
 	    	startInternal();
 	    	setState(State.STARTED);
@@ -107,9 +107,7 @@ public class ComponentImpl implements Component, EventSource {
     protected  void initializeInternal(){}
     
     protected void fireStateChangeEvent(State oldValue, State state){
-    	//log.debug("%%%%%%%%%%%%" + eventPublisher);
        if(eventPublisher != null){
-    	   //log.debug("fire state event!!");
            eventPublisher.publish(new StateChangeEvent(this, oldValue, state));    	
        }
     }

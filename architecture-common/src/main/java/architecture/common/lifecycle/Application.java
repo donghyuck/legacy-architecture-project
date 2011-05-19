@@ -15,10 +15,15 @@
  */
 package architecture.common.lifecycle;
 
-public interface Application {
 
-	public ApplicationProperties getApplicationProperties();
+public interface Application extends Component {
+	
+	public Version getVersion();
 	
 	public State getState();
+	
+	public boolean isReady();
+			
+	public ApplicationProperties getApplicationProperties();
 	
 }

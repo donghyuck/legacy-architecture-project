@@ -2,10 +2,10 @@ package architecture.common.lifecycle;
 
 public interface Server extends Application {
 	
-	public Version getVersion();
-	
-	public String getInstallRootPath();
-	
-	public String getHomePath();
-	
+    public abstract ConfigRoot getConfigRoot();
+    
+    public abstract String getInstallRootPath();
+    
+    public abstract String getRootURI();
+    
 }

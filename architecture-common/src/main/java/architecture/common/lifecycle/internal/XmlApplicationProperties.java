@@ -53,14 +53,19 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
     private Map<String, String> propertyCache;
     private Lock lock;
     
-    protected XmlApplicationProperties(File file) throws IOException {
+    public XmlApplicationProperties(File fileToUse) throws IOException {
         
     	propertyCache = new HashMap<String, String>();
         
         lock = new ReentrantLock();
+        
+        file = fileToUse;
     	
         if(!file.exists()){
     		  File tempFile = new File(file.getParentFile(), (new StringBuilder()).append(file.getName()).append(".tmp").toString());
+    		  
+    		  log.debug(tempFile.getAbsolutePath());
+    		  
     		  if(tempFile.exists())
               {
                   log.error((new StringBuilder()).append("WARNING: ").append(file.getName()).append(" was not found, but temp file from ").append("previous write operation was. Attempting automatic recovery. Please ").append("check file for data consistency.").toString());
@@ -188,7 +193,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
         buildDoc(reader);
 	}
 
-	protected XmlApplicationProperties(String fileName) throws IOException {
+	public XmlApplicationProperties(String fileName) throws IOException {
 		this(new File(fileName));
 	}
 
@@ -310,6 +315,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	}
 
 	public synchronized String put(String name, String value) {
+
 		propertyCache.put(name, value);
 		String propName[] = parsePropertyName(name);
 		Element element = doc.getRootElement();
