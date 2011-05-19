@@ -1,7 +1,5 @@
 package architecture.ee.test;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
 

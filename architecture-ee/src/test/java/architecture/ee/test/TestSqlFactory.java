@@ -17,10 +17,7 @@ package architecture.ee.test;
 
 import java.util.List;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.mock.web.MockServletContext;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;

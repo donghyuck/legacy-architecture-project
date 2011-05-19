@@ -19,7 +19,6 @@ import java.sql.Types;
 import java.util.List;
 
 import org.junit.Test;
-import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.mock.web.MockServletContext;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;
