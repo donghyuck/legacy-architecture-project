@@ -3,7 +3,6 @@ package architecture.ee.test;
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
 
-import architecture.common.lifecycle.Application;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.State;
 import architecture.ee.spring.lifecycle.AdminService;

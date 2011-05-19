@@ -15,10 +15,7 @@
  */
 package architecture.ee.test;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.event.api.EventPublisher;
