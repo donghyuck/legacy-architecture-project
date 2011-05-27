@@ -1,4 +1,4 @@
-package architecture.ee.spring.context.support;
+package architecture.ee.spring.context;
 
 import java.io.File;
 import java.io.FilenameFilter;

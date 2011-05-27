@@ -1,4 +1,4 @@
-package architecture.ee.spring.context.support;
+package architecture.ee.spring.context;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
