@@ -28,7 +28,8 @@ import architecture.common.lifecycle.StateChangeEvent;
 import architecture.common.lifecycle.Version;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.lifecycle.internal.XmlApplicationProperties;
-import architecture.ee.spring.lifecycle.AdminService;
+import architecture.ee.bootstrap.Bootstrap;
+import architecture.ee.component.AdminService;
 
 public class AdminServiceImpl extends ComponentImpl implements AdminService, Server {
 
@@ -36,10 +37,10 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 	private ServletContext servletContext;
 	private ConfigurableApplicationContext applicationContext;
 	private Version version ;
-	private ConfigRootHelper helper;
-	
+	private ConfigRootHelper helper;	
     private ApplicationProperties setupProperties = null;
-        
+    private String startupFileName = DEFAULT_STARTUP_FILENAME ;
+    
 	public AdminServiceImpl(){		
 		super();
 		setName("AdminService");
@@ -48,6 +49,10 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 		this.servletContext = null;
 		this.applicationContext = null;
 		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );	
+	}
+	
+	protected <T> T getBootstrapComponent(Class<T> requiredType){
+		return Bootstrap.getBootstrapApplicationContext().getBean(requiredType);
 	}
 	
 	public void setConfigRootHelper(ConfigRootHelper configRootHelper){
@@ -103,12 +108,20 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 
 	@Override
 	protected void startInternal(){		
+		
 		Thread currentThread = Thread.currentThread();
-        ClassLoader oldLoader = currentThread.getContextClassLoader();      
+        ClassLoader oldLoader = currentThread.getContextClassLoader();
+
+        if( getApplicationProperties().getBooleanProperty("setup.complete") ){	        
+        	PluginManagerImpl pluginManager = getBootstrapComponent(PluginManagerImpl.class);	        
+	        if( ! pluginManager.isInitialized() ){
+	        	File file = getConfigRoot().getFile("plugins");
+	        	pluginManager.pluginDirectory = file;   	
+	        }
+        }
         
-        log.debug(isSetServletContext() && isSetContextLoader());
         if(isSetServletContext() && isSetContextLoader()){
-			try{				
+			try{
 				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());		
 				this.applicationContext.start();
 			}finally{
@@ -122,8 +135,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 	protected void stopInternal() {
 		if(isSetApplicationContext()){
 			
-			this.applicationContext.stop();
-			
+			this.applicationContext.stop();			
 			if( isSetServletContext() ){
 				contextLoader.closeWebApplicationContext(getServletContext());
 			}else{
@@ -157,7 +169,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 		
 		if( setupProperties == null ){	
 			try {
-				File file = getConfigRoot().getFile("startup-config.xml"); //.getFile("startup-config.xml");				
+				File file = getConfigRoot().getFile(startupFileName);		
 				if(!file.exists()){					
 					boolean error = false;
 				    // create default file...
@@ -166,7 +178,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 					Writer writer = null;
 					try {			
 					writer = new OutputStreamWriter(new FileOutputStream(file), ApplicationConstants.DEFAULT_CHAR_ENCODING);
-					XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());					
+					XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());				
 					
 					StringBuilder sb = new StringBuilder();
 					
@@ -259,7 +271,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService, Ser
 	
 	@EventListener
 	public void onEvent(ApplicationPropertyChangeEvent event) {		
-		log.debug("[Server] " + event );
+		log.debug("[AdminService] " + event );
 	}	
 
 	public ConfigRoot getConfigRoot() {

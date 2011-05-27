@@ -12,13 +12,12 @@ import org.apache.commons.vfs.FileObject;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.vfs.VFSUtils;
-import architecture.ee.spring.lifecycle.DirectoryScanner;
+import architecture.ee.component.DirectoryScanner;
 
 public class DirectoryScannerImpl /** extends SpringLifecycleService **/ implements InitializingBean, DisposableBean, DirectoryScanner {
 
