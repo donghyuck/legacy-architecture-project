@@ -158,7 +158,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		super(dataSource);
 		
 	}
-
 	
 	public LobHandler getLobHandler() {
 		return lobHandler;

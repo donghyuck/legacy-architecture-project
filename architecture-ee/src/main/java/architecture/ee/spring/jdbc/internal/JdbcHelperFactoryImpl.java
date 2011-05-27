@@ -17,7 +17,8 @@ package architecture.ee.spring.jdbc.internal;
 
 import javax.sql.DataSource;
 
-import architecture.ee.jdbc.util.*;
+import architecture.ee.jdbc.util.JdbcHelper;
+import architecture.ee.jdbc.util.JdbcHelperFactory;
 
 public class JdbcHelperFactoryImpl implements JdbcHelperFactory.Implementation {
 
