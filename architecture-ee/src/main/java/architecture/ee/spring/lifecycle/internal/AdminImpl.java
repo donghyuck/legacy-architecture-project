@@ -15,31 +15,26 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
+import architecture.common.event.api.EventSource;
 import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
+import architecture.ee.component.Admin;
+import architecture.ee.component.AdminService;
 import architecture.ee.jdbc.query.factory.Configuration;
-import architecture.ee.spring.lifecycle.Admin;
-import architecture.ee.spring.lifecycle.AdminService;
 import architecture.ee.util.LocaleUtils;
 
-public class AdminImpl implements Admin {
+public class AdminImpl implements Admin, EventSource {
 	
-	private Log log = LogFactory.getLog(getClass());
-	
-	private AdminServiceImpl adminService ;
-	
-	private ApplicationProperties properties = null;
-	
-	private ApplicationProperties localizedProperties = null;
-	
-	private DataSource dataSource = null;
-	
-	private EventPublisher eventPublisher = null;
-	
-	private Configuration configuration = null;	
+	private Log log = LogFactory.getLog(getClass());	
+	private AdminServiceImpl adminService ;	
+	private ApplicationProperties properties = null;	
+	private ApplicationProperties localizedProperties = null;	
+	private DataSource dataSource = null;	
+	private EventPublisher eventPublisher = null;	
+	private PluginManagerImpl pluginManager;
 	
     private Locale locale = null;
     private TimeZone timeZone = null;
@@ -47,6 +42,8 @@ public class AdminImpl implements Admin {
     
 	public AdminImpl(AdminService adminService) {
 		this.adminService = (AdminServiceImpl)adminService;
+		this.eventPublisher = this.adminService.getBootstrapComponent(EventPublisher.class);
+		this.pluginManager = this.adminService.getBootstrapComponent(PluginManagerImpl.class);
 	}
 
 	public State getState() {
@@ -69,13 +66,15 @@ public class AdminImpl implements Admin {
 		this.eventPublisher = eventPublisher;
 	}
 
-	public void setConfiguration(Configuration configuration) {
-		this.configuration = configuration;
-	}
-
 	public void initialize(){
-		this.properties = createApplicationProperties(false);
-		this.localizedProperties = createApplicationProperties(true);
+		
+		this.properties = createApplicationProperties(dataSource, false);
+		this.localizedProperties = createApplicationProperties(dataSource, true);
+		
+		if( this.pluginManager.isInitialized() ){
+			this.pluginManager.setDataSource(dataSource);
+			this.pluginManager.initialize();
+		}
 	}
 	
     public Locale getLocale()
@@ -165,8 +164,7 @@ public class AdminImpl implements Admin {
     {
         String value = newTimeZone.getID();
         String name = "locale.timeZone";
-        setApplicationProperty(name, value);
-        
+        setApplicationProperty(name, value);        
         locale = null;
         timeZone = null;
         characterEncoding = null;
@@ -333,11 +331,6 @@ public class AdminImpl implements Admin {
     	getLocalizedProperties().remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
     }
     
-	
-    
-    
-    
-    
 	private ApplicationProperties getSetupProperties(){
 		return adminService.getApplicationProperties();
 	}
@@ -345,7 +338,7 @@ public class AdminImpl implements Admin {
 	public ApplicationProperties getApplicationProperties() {		
 		if( properties == null){
 			getSetupProperties();
-			this.properties = createApplicationProperties(false); 
+			this.properties = createApplicationProperties(dataSource, false); 
 		}
 		return properties == null ? EmptyApplicationProperties.getInstance() : properties;
 	}
@@ -354,15 +347,15 @@ public class AdminImpl implements Admin {
     {
         if(localizedProperties == null)
         {
-        	localizedProperties = createApplicationProperties(true); 	
+        	localizedProperties = createApplicationProperties(dataSource, true); 	
         }
         return localizedProperties == null ? EmptyApplicationProperties.getInstance() : localizedProperties;
     }
 		
-	private ApplicationProperties createApplicationProperties(boolean localized){		
+	private ApplicationProperties createApplicationProperties(DataSource dataSource, boolean localized){		
 		JdbcApplicationPropertiesImpl impl = new JdbcApplicationPropertiesImpl(localized);
 		impl.setEventPublisher(eventPublisher);
-		impl.setConfiguration(configuration);
+		impl.setConfiguration(adminService.getBootstrapComponent(Configuration.class));
 		impl.setDataSource(dataSource);
 		impl.afterPropertiesSet();
 		return impl;
@@ -371,4 +364,5 @@ public class AdminImpl implements Admin {
 	public boolean isReady() {
 		return adminService.isReady();
 	}
+	
 }
