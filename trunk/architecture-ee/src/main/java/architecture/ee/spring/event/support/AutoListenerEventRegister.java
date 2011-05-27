@@ -1,4 +1,4 @@
-package architecture.ee.spring.event.internal;
+package architecture.ee.spring.event.support;
 
 import java.lang.reflect.Method;
 import java.util.Map;
