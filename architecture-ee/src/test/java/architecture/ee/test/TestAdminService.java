@@ -8,10 +8,10 @@ import org.springframework.mock.web.MockServletContext;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.State;
-import architecture.ee.spring.lifecycle.Admin;
-import architecture.ee.spring.lifecycle.AdminService;
+import architecture.ee.component.Admin;
+import architecture.ee.component.AdminService;
 
-public class TestApplicationHelper {
+public class TestAdminService {
 	
 	public void log(Object obj){
 		System.out.println("# " + obj);
@@ -23,7 +23,7 @@ public class TestApplicationHelper {
 		MockServletContext servletContext = new MockServletContext();
 		servletContext.addInitParameter(
 			"contextConfigLocation", 
-			"default-application-context.xml, databaseSubsystemContext.xml"
+			"default-application-context.xml, databaseSubsystemContext.xml, daoSubsystemContext.xml"
 		);
 		
 		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/opensource/architecture_v2/architecture-ee/profile/default");
@@ -122,6 +122,7 @@ public class TestApplicationHelper {
 		
 		AdminService adminservice = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		log(adminservice.getState());
+		
 		adminservice.start();
 		
 		if(adminservice.isReady()){
