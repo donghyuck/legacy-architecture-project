@@ -17,6 +17,17 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	protected Log log = LogFactory.getLog(getClass());	
 	private Configuration configuration;
 			
+	
+	
+	public ExtendedJdbcDaoSupport() {
+		super();
+	}
+
+	public ExtendedJdbcDaoSupport(Configuration configuration) {
+		super();
+		this.configuration = configuration;
+	}
+
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;
 	}
@@ -52,6 +63,8 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	protected BoundSql getBoundSql(String statement ){
 		return getBoundSql(statement, null);
 	}
+	
+	
 	protected BoundSql getBoundSql(String statement, Object[] params ){		
 		if(isSetConfiguration()){
 			MappedStatement stmt = configuration.getMappedStatement(statement);

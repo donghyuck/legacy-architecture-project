@@ -20,7 +20,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -32,9 +31,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs.FileObject;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.vfs.VFSUtils;
@@ -100,10 +96,6 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration);
 		builder.build();
 	}
-
-/*	public ResourceLoader getResourceLoader() {
-		return this.resourceLoader;
-	}*/
 
 	public List<String> getResourceLocations() {
 		return this.resourceLocations;
