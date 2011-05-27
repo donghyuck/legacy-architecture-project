@@ -9,7 +9,7 @@ import org.springframework.mock.web.MockServletContext;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.State;
-import architecture.ee.spring.lifecycle.AdminService;
+import architecture.ee.component.AdminService;
 
 public class TestCache {
 
