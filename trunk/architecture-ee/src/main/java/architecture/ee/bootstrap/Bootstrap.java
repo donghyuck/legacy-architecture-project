@@ -8,7 +8,7 @@ import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
 import org.springframework.web.context.ContextLoader;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;
-import architecture.ee.spring.lifecycle.AdminService;
+import architecture.ee.component.AdminService;
 
 public class Bootstrap {
 
@@ -30,9 +30,7 @@ public class Bootstrap {
 	}
 	
 	public static final void shutdown(ServletContext servletContext){
-		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);		
 		admin.destroy();
-		
 	}
 }
