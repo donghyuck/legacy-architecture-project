@@ -211,9 +211,13 @@ public class JdbcApplicationPropertiesImpl extends AbstractJdbcApplicationProper
 			if (localized) {
 				String baseKey = StringUtils.substringBeforeLast(name, ".");
 				String localeCode = StringUtils.substringAfterLast(name, ".");
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_LOCALIZED_PROPERTY").getSql(), new Object[]{ baseKey, value, localeCode }, new int []{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR });
+				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_LOCALIZED_PROPERTY").getSql(), 
+						new Object[]{ baseKey, value, localeCode }, 
+						new int []{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR });
 			} else {
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_PROPERTY").getSql(), new Object[]{  name, value }, new int []{Types.VARCHAR, Types.VARCHAR });
+				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_PROPERTY").getSql(), 
+						new Object[]{  name, value }, 
+						new int []{Types.VARCHAR, Types.VARCHAR });
 			}
     	}    	
     }    
@@ -241,11 +245,14 @@ public class JdbcApplicationPropertiesImpl extends AbstractJdbcApplicationProper
     	if (getJdbcTemplate() != null){
 			if (localized) {
 				String baseKey = StringUtils.substringBeforeLast(name, ".");
-	            String localeCode = StringUtils.substringAfterLast(name, ".");
-	            
-	            getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_LOCALIZED_PROPERTY").getSql(), new Object[] { value, baseKey, localeCode }, new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR} );           
+	            String localeCode = StringUtils.substringAfterLast(name, ".");	            
+	            getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_LOCALIZED_PROPERTY").getSql(), 
+	            		new Object[] { value, baseKey, localeCode }, 
+	            		new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR} );           
 			} else {				
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_PROPERTY").getSql(), new Object[] { value, name }, new int[]{ Types.VARCHAR, Types.VARCHAR } );
+				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_PROPERTY").getSql(), 
+						new Object[] { value, name }, 
+						new int[]{ Types.VARCHAR, Types.VARCHAR } );
 			}
     	}
     }    
@@ -259,7 +266,6 @@ public class JdbcApplicationPropertiesImpl extends AbstractJdbcApplicationProper
 				rs = getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_LOCALIZED_PROPERTY").getSql(), new ResultSetExtractor<Map<String, String>>(){
 						public Map<String, String> extractData(ResultSet rs) throws SQLException, DataAccessException {
 							Map<String, String> map = new HashMap<String, String> ();
-							
 							while(rs.next()){					
 		    					String name = (new StringBuilder()).append(rs.getString(1)).append(".").append(rs.getString(3)).toString();
 		    					String value = rs.getString(2);			
@@ -297,8 +303,9 @@ public class JdbcApplicationPropertiesImpl extends AbstractJdbcApplicationProper
     public List<Locale> getLocalesForProperty(String name){    	
     	ArrayList<Locale> list = new ArrayList<Locale>();
     	if( getJdbcTemplate() != null ){  
-    		List<String> locales = getExtendedJdbcTemplate().queryForList(getBoundSql("FRAMEWORK_V2.SELECT_LOCALES").getSql(), new Object[]{name}, new int[]{Types.VARCHAR}, String.class);
-    			
+    		List<String> locales = getExtendedJdbcTemplate().queryForList(getBoundSql("FRAMEWORK_V2.SELECT_LOCALES").getSql(), 
+    				new Object[]{name}, 
+    				new int[]{Types.VARCHAR}, String.class);
     		for(String localeCode : locales){
     			list.add(LocaleUtils.localeCodeToLocale(localeCode));
     		}
