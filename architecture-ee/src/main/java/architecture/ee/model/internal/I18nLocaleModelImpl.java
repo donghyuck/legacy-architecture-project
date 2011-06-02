@@ -3,6 +3,7 @@ package architecture.ee.model.internal;
 import java.io.Serializable;
 import java.util.Date;
 
+import architecture.common.util.StringUtils;
 import architecture.ee.g11n.I18nLocale;
 import architecture.ee.g11n.internal.I18nLocaleImpl;
 import architecture.ee.model.I18nLocaleModel;
@@ -87,7 +88,7 @@ public class I18nLocaleModelImpl extends BaseModelImpl<I18nLocale> implements I1
 	}
 
 	public java.util.Locale toJavaLocale() {
-		return new java.util.Locale(language, country, variant);
+		return new java.util.Locale(language, StringUtils.isNotEmpty(country)?country:"", StringUtils.isNotEmpty(variant)? variant: "");
 	}
 
 	public int hashCode() {
