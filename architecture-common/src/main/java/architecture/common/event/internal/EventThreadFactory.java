@@ -27,7 +27,7 @@ public final class EventThreadFactory implements ThreadFactory
     public Thread newThread(Runnable r)
     {
         final Thread thread = delegateThreadFactory.newThread(r);
-        thread.setName("ArchitectureEvent::" + thread.getName());
+        thread.setName("Event::" + thread.getName());
         return thread;
     }
 }

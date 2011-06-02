@@ -16,7 +16,7 @@
 package architecture.common.lifecycle;
 
 
-public class StateChangeEvent extends ApplicationEvent {
+public class StateChangeEvent extends Event {
    
     private State oldState;
     

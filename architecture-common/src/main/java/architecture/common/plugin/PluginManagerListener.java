@@ -21,7 +21,7 @@ package architecture.common.plugin;
 
 /**
  * Interface to listen for plugin manager events. Use the
- * {@link PluginManager#addPluginManagerListener(PluginManagerListener)}
+ * {@link PluginManagerImpl#addPluginManagerListener(PluginManagerListener)}
  * method to register for events.
  *
  * @author Gaston Dombiak

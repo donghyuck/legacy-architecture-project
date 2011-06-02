@@ -225,4 +225,5 @@ public final class EventPublisherImpl implements EventPublisher
             return new EqualsBuilder().append(key, kli.key).append(invoker, kli.invoker).isEquals();
         }
     }
+
 }
