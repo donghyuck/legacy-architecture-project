@@ -14,32 +14,10 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
      */
     public static Locale localeCodeToLocale(String localeCode) {
     	return toLocale(localeCode);
-    	/**
-        Locale locale = null;
-        if (localeCode != null) {
-            String language = null;
-            String country = null;
-            String variant = null;
-            StringTokenizer tokenizer = new StringTokenizer(localeCode, "_");
-            if (tokenizer.hasMoreTokens()) {
-                language = tokenizer.nextToken();
-                if (tokenizer.hasMoreTokens()) {
-                    country = tokenizer.nextToken();
-                    if (tokenizer.hasMoreTokens()) {
-                        variant = tokenizer.nextToken();
-                    }
-                }
-            }
-            locale = new Locale(language,
-                    ((country != null) ? country : ""),
-                    ((variant != null) ? variant : ""));
-        }
-        return locale;
-        **/
     }
     
     public static boolean isValidCharacterEncoding(String encoding)
-    {    	
+    {    
         boolean valid = true;
         try
         {
@@ -48,7 +26,7 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
         catch(Exception e)
         {
             valid = false;
-        }
+        }        
         return valid;
     }
 }
