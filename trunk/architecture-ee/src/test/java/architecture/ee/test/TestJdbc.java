@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Types;
 import java.util.List;
+import java.util.Locale;
 
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
@@ -54,6 +55,15 @@ public class TestJdbc {
 	@Test
 	public void testSelectAllFromEntApp() throws Exception {
 		//SELECT_ALL_FROM_ENT_APP
+		
+		log( Locale.KOREA.getCountry() ) ;
+		log( Locale.KOREA.getLanguage() ) ;
+		log( Locale.KOREA.getVariant() ) ;
+		log( Locale.KOREA.getISO3Country()) ;
+		log( Locale.KOREA.getISO3Language() ) ;
+		log( Locale.KOREA.getDisplayName() ) ;
+		
+		
 		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
 		List rows = query.list();
 		System.out.println("rows:" + "=" + rows );
@@ -88,80 +98,9 @@ public class TestJdbc {
 		
 		Integer count = query.reset().queryForObject("COMMON.COUNT_ENT_APP_PROPERTY", new Integer[]{1}, new int []{Types.INTEGER}, Integer.class);
 		
-
-		
-		//Integer count = query.queryForObject("COMMON.COUNT_ENT_APP_PROPERTY", new Integer[]{1}, new int []{Types.INTEGER}, new SingleColumnRowMapper(Integer.class));
-				
-				/*
-				new RowMapper<Integer> (){
-			
-			private Class<Integer> requiredType = Integer.class;
-			
-			protected Object getColumnValue(ResultSet rs, int index) throws SQLException {
-				return JdbcUtils.getResultSetValue(rs, index);
-			}
-			protected Object getColumnValue(ResultSet rs, int index, Class requiredType) throws SQLException {
-				if (requiredType != null) {
-					return JdbcUtils.getResultSetValue(rs, index, requiredType);
-				}
-				else {
-					// No required type specified -> perform default extraction.
-					return getColumnValue(rs, index);
-				}
-			}
-			protected Object convertValueToRequiredType(Object value, Class requiredType) {
-				if (String.class.equals(requiredType)) {
-					return value.toString();
-				}
-				else if (Number.class.isAssignableFrom(requiredType)) {
-					if (value instanceof Number) {
-						// Convert original Number to target Number class.
-						return NumberUtils.convertNumberToTargetClass(((Number) value), requiredType);
-					}
-					else {
-						// Convert stringified value to target Number class.
-						return NumberUtils.parseNumber(value.toString(), requiredType);
-					}
-				}
-				else {
-					throw new IllegalArgumentException(
-							"Value [" + value + "] is of type [" + value.getClass().getName() +
-							"] and cannot be converted to required type [" + requiredType.getName() + "]");
-				}
-			}
-
-			public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
-				// Validate column count.
-				ResultSetMetaData rsmd = rs.getMetaData();
-				int nrOfColumns = rsmd.getColumnCount();
-				if (nrOfColumns != 1) {
-					throw new IncorrectResultSetColumnCountException(1, nrOfColumns);
-				}
-
-				// Extract column value from JDBC ResultSet.
-				Object result = getColumnValue(rs, 1, this.requiredType);
-				if (result != null && this.requiredType != null && !this.requiredType.isInstance(result)) {
-					// Extracted value does not match already: try to convert it.
-					try {
-						return (Integer) convertValueToRequiredType(result, this.requiredType);
-					}
-					catch (IllegalArgumentException ex) {
-						throw new TypeMismatchDataAccessException(
-								"Type mismatch affecting row number " + rowNum + " and column type '" +
-								rsmd.getColumnTypeName(1) + "': " + ex.getMessage());
-					}
-				}
-				return (Integer) result;
-			}});*/
-		
 		log("count:" + count);		
 		long result = 0;		
-		/*
-		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
-		List list = query.reset().setMaxResults(10).list();
-		log(list.size());
-		**/
-		
+	
 	}
 
 	//@Test
@@ -175,14 +114,7 @@ public class TestJdbc {
 		Integer count = query.setParameters(new Object[]{1}, new int []{Types.NUMERIC}).uniqueResult(Integer.class);
 		log("count:" + count);		
 		long result = 0;
-		
-/*
-		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
-		List list = query.reset().setMaxResults(10).list();
-		log(list.size());
-		**/
-		
-		
+
 	}
 	
 	/*
