@@ -14,10 +14,26 @@
         Default Application Context
 	]]>
 	</description>
-		
+			
 	<bean id="admin" class="architecture.ee.spring.lifecycle.internal.AdminImpl" init-method="initialize" 
-	    p:eventPublisher-ref="eventPublisher" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource">
+	    p:eventPublisher-ref="eventPublisher" 
+	    p:dataSource-ref="dataSource" >
 		<constructor-arg ref="adminService"/>
 	</bean>	
+	
+	<bean id="adminSupport" abstract="true" depends-on="admin">
+	    <constructor-arg ref="admin"/>
+	</bean>
+
+	<bean id="g11n" class="architecture.ee.component.internal.GlobalizationServiceImpl"
+	    init-method="initialize"
+	    parent="adminSupport"
+	    p:countryDao-ref="countryDao" 
+	    p:i18nTextDao-ref="i18nTextDao" 
+	    p:i18nLocaleDao-ref="i18nLocaleDao">
+	</bean>
+	
+	<bean id="queryService" class="architecture.ee.component.internal.QueryServiceImpl" parent="sqlQuerySupport" p:dataSource-ref="dataSource" ></bean>
+		
 	
 </beans>
