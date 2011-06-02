@@ -4,8 +4,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public interface ApplicationPropertiesService {
-
+public interface ApplicationPropertiesSupport {
 	
 	public ApplicationProperties getApplicationProperties();
 	
@@ -22,8 +21,7 @@ public interface ApplicationPropertiesService {
 	public void setLocalProperties(Map<String, String> map);
 	
 	public void deleteLocalProperty(String name);
-	
-	
+		
 	public String getApplicationProperty(String name);
 	
 	public String getApplicationProperty(String name, String defaultValue);

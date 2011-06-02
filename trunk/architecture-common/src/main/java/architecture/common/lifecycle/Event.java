@@ -18,7 +18,7 @@ package architecture.common.lifecycle;
 import java.util.Date;
 import java.util.UUID;
 
-public abstract class ApplicationEvent extends java.util.EventObject {
+public abstract class Event extends java.util.EventObject {
  
 	private UUID uuid;
 	   
@@ -26,7 +26,7 @@ public abstract class ApplicationEvent extends java.util.EventObject {
     
 	private Date createdDate;
     	
-	public ApplicationEvent(Object source) {
+	public Event(Object source) {
 		super(source);	
 		this.uuid = UUID.randomUUID();
 		this.createdDate = new Date();

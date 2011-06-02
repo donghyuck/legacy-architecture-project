@@ -15,7 +15,7 @@
  */
 package architecture.common.lifecycle;
 
-public class PropertyChangeEvent  extends ApplicationEvent {
+public class PropertyChangeEvent  extends Event {
 
 	/**
 	 * name of the property that changed. May be null, if not known.
