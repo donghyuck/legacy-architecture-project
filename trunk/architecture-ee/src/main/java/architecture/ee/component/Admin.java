@@ -4,11 +4,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.TimeZone;
 
-import architecture.common.lifecycle.ApplicationPropertiesService;
+import architecture.common.lifecycle.ApplicationPropertiesSupport;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.State;
 
-public interface Admin extends ApplicationPropertiesService {
+public interface Admin extends ApplicationPropertiesSupport {
 
 	public abstract State getState();
 	
