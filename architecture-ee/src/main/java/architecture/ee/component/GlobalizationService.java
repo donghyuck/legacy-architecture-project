@@ -17,15 +17,7 @@ public interface GlobalizationService {
 	
 	public Country getCountryByA3(String code); 
 	
-	
-	
-	
-/*	public List<I18nText> getTexts(int objectType, String localeCode);
-	
-	public List<I18nText> getTexts(int objectType, long objectID);
-	
-	public List<I18nText> getTexts(int objectType);*/
-	
+
 	public List<I18nText> getTexts();
 	
 	public I18nText getText(long textID);
