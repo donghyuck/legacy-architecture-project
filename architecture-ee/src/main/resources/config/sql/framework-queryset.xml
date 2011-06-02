@@ -4,67 +4,841 @@
 	<sql-query
 		name="SELECT_ALL_LOCALIZED_PROPERTY"
 		comment="전체 다국어 지원 프로퍼티 값"><![CDATA[
-		select propertyName, propertyValue, locale from localizedApplicationProperty
+		select PROPERTY_NAME, PROPERTY_VALUE, LOCALE_CODE from LOCALIZED_APPLICATION_PROPERTY
       ]]></sql-query>
 	<sql-query
 		name="INSERT_LOCALIZED_PROPERTY"
 		comment="다국어 프로퍼티  저장"><![CDATA[
-		INSERT INTO localizedApplicationProperty (propertyName, propertyValue, locale) VALUES (? ,?, ?) 
+		INSERT INTO LOCALIZED_APPLICATION_PROPERTY (PROPERTY_NAME, PROPERTY_VALUE, LOCALE_CODE) VALUES (? ,?, ?) 
       ]]></sql-query>
 	<sql-query
 		name="DELETE_LOCALIZED_PROPERTY"
 		comment="다국어 프로퍼티 삭제"><![CDATA[
-		DELETE FROM localizedApplicationProperty WHERE propertyName LIKE ? AND locale LIKE ?
+		DELETE FROM LOCALIZED_APPLICATION_PROPERTY WHERE PROPERTY_NAME LIKE ? AND LOCALE_CODE LIKE ?
       ]]></sql-query>
 	<sql-query
 		name="UPDATE_LOCALIZED_PROPERTY"
 		comment="다국어 프로퍼티 업데이트"><![CDATA[
-		UPDATE localizedApplicationProperty SET propertyValue=? WHERE propertyName=? AND locale=? 
-      ]]></sql-query>
-	<sql-query
-		name="SELECT_LOCALES"
-		comment="모든 어플리케이션 정의를 조회"><![CDATA[
-		SELECT locale FROM WHERE propertyName LIKE ? 
+		UPDATE LOCALIZED_APPLICATION_PROPERTY SET PROPERTY_VALUE=? WHERE PROPERTY_NAME=? AND LOCALE_CODE=? 
       ]]></sql-query>
                         
 	<sql-query
 		name="SELECT_ALL_PROPERTY"
 		comment="전체  프로퍼티 값"><![CDATA[
-		select propertyName, propertyValue from applicationProperty
+		select PROPERTY_NAME, PROPERTY_VALUE from APPLICATION_PROPERTY
       ]]></sql-query>
  	<sql-query
 		name="INSERT_PROPERTY"
 		comment="프로퍼티 저장"><![CDATA[
-		INSERT INTO applicationProperty (propertyName, propertyValue) VALUES (? ,?) 
+		INSERT INTO APPLICATION_PROPERTY (PROPERTY_NAME, PROPERTY_VALUE) VALUES (? ,?) 
       ]]></sql-query>
 	<sql-query
 		name="DELETE_PROPERTY"
 		comment="프로퍼티 삭제"><![CDATA[
-		DELETE FROM applicationProperty WHERE propertyName LIKE ?
+		DELETE FROM APPLICATION_PROPERTY WHERE PROPERTY_NAME LIKE ?
       ]]></sql-query>
 	<sql-query
 		name="UPDATE_PROPERTY"
 		comment="프로퍼티 업데이트"><![CDATA[
-		UPDATE applicationProperty SET propertyValue=? WHERE propertyName=?
+		UPDATE APPLICATION_PROPERTY SET PROPERTY_VALUE=? WHERE PROPERTY_NAME=?
       ]]></sql-query>                 	
-                  	                 	                  	
-     <sql-query
-        name="CREATE_TABLE"
-        comment="테이블  생성 스크립트" ><![CDATA[  
+                  	     
+                  	     
+	<sql-query
+		name="INSERT_PLUGIN"
+		comment="플러그인 데이터 추가"><![CDATA[
+		INSERT INTO PLUGIN_DATA (PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE) VALUES (?, ?, ?, ?)
+      ]]></sql-query>                  	     
 
-		CREATE TABLE localizedApplicationProperty (
-		  locale                VARCHAR2(100)   NOT NULL,
-		  propertyName          VARCHAR2(100)   NOT NULL,
-		  propertyValue         VARCHAR2(1024)  NOT NULL,
-		  CONSTRAINT localizedAppProp_pk PRIMARY KEY (locale, propertyName)
+	<sql-query
+		name="INSERT_PLUGIN_WITH_DATA"
+		comment="플러그인 데이터 추가"><![CDATA[
+		INSERT INTO PLUGIN_DATA (PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE, data) 
+		VALUES (?, ?, ?, ?, ?)
+      ]]></sql-query>   
+                        	     
+	<sql-query
+		name="DELETE_PLUGIN_BY_ID"
+		comment="프러그인 아이디로 플러그인 데이터 삭제"><![CDATA[
+		DELETE FROM PLUGIN_DATA WHERE PLUGIN_ID = ?
+      ]]></sql-query> 
+
+	<sql-query
+		name="DELETE_PLUGIN_BY_NAME"
+		comment="플러그인 이름에 해당하는 플러그인 데이터 삭제"><![CDATA[
+		DELETE FROM PLUGIN_DATA WHERE NAME = ?
+      ]]></sql-query> 
+
+	<sql-query
+		name="SELECT_PLUGIN_BY_NAME"
+		comment="플러그인 이름으로 플러그인 데이터 조회"><![CDATA[
+		SELECT PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE FROM PLUGIN_DATA WHERE NAME = ?
+      ]]></sql-query> 
+      
+	<sql-query
+		name="SELECT_ALL_PLUGIN"
+		comment="전체 플러그인 데이터 조회"><![CDATA[
+		SELECT PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE FROM PLUGIN_DATA
+      ]]></sql-query>                  
+      
+	<sql-query
+		name="UPDATE_PLUGIN_DATA"
+		comment="플러드그인 데이터 업데이트"><![CDATA[
+		UPDATE PLUGIN_DATA SET DATA = ?, MODIFIED_DATE = SYSDATE WHERE PLUGIN_ID = ?
+      ]]></sql-query>        
+      
+	<sql-query
+		name="SELECT_PLUGIN_DATA"
+		comment="전체 다국어 지원 프로퍼티 값"><![CDATA[
+		SELECT DATA FROM PLUGIN_DATA WHERE PLUGIN_ID = ?
+      ]]></sql-query>    
+            
+	<sql-query
+		name="EXIST_PLUGIN_DATA_TABLE"
+		comment="전체 다국어 지원 프로퍼티 값"><![CDATA[
+		SELECT 1 FROM PLUGIN_DATA
+      ]]></sql-query> 
+
+	<sql-query
+		name="SELECT_ALL_SEQUENCER" ><![CDATA[
+		SELECT SEQUENCER_ID, NAME, VALUE FROM SEQUENCER
+      ]]></sql-query>  
+      
+
+	<sql-query
+		name="SELECT_SEQUENCER_BY_ID" ><![CDATA[
+		SELECT VALUE FROM SEQUENCER WHERE SEQUENCER_ID = ?
+      ]]></sql-query>       
+    
+	<sql-query
+		name="UPDATE_SEQUENCER" ><![CDATA[
+		UPDATE SEQUENCER SET VALUE = ? WHERE SEQUENCER_ID = ? AND VALUE = ?
+      ]]></sql-query>  
+
+	<sql-query
+		name="SELECT_SEQUENCER_MAX_ID" ><![CDATA[
+		SELECT MAX ( SEQUENCER_ID ) + 1 FROM SEQUENCER 
+      ]]></sql-query> 
+      
+	<sql-query
+		name="INSERT_SEQUENCER" ><![CDATA[
+		INSERT INTO SEQUENCER (VALUE, NAME, SEQUENCER_ID ) VALUES (?, ?, ?)
+      ]]></sql-query> 
+      
+    <!-- COUNTRY -->  
+	<sql-query
+		name="SELECT_COUNTRY_BY_ID" ><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM I18N_COUNTRY 
+		WHERE COUNTRY_ID = ?
+      ]]></sql-query> 
+      
+	<sql-query
+		name="SELECT_COUNTRY_BY_NAME" ><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM I18N_COUNTRY 
+		WHERE NAME = ?
+      ]]></sql-query>
+
+	<sql-query
+		name="SELECT_COUNTRY_BY_A2" ><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM I18N_COUNTRY 
+		WHERE A2 = ?
+      ]]></sql-query>
+      
+	<sql-query
+		name="SELECT_COUNTRY_BY_A3" ><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM I18N_COUNTRY 
+		WHERE A3 = ?
+      ]]></sql-query>
+
+	<sql-query
+		name="SELECT_ALL_COUNTRY" ><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM I18N_COUNTRY 
+      ]]></sql-query>
+            
+	<sql-query
+		name="SELECT_ALL_COUNTRY_WITH_ENABLED" ><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM I18N_COUNTRY 
+		WHERE ENABLED = 1
+      ]]></sql-query>
+      
+	<sql-query
+		name="COUNT_ALL_COUNTRY" ><![CDATA[
+		SELECT count(COUNTRY_ID) FROM I18N_COUNTRY 
+      ]]></sql-query>
+            
+	<sql-query
+		name="COUNT_ALL_COUNTRY_WITH_ENABLED" ><![CDATA[
+		SELECT count(COUNTRY_ID) FROM I18N_COUNTRY 
+		WHERE ENABLED = 1
+      ]]></sql-query>
+
+	<sql-query
+		name="DELETE_COUNTRY_BY_ID" ><![CDATA[
+		DELETE FROM I18N_COUNTRY WHERE COUNTRY_ID = ?
+      ]]></sql-query>
+      
+	<sql-query
+		name="UPDATE_COUNTRY" ><![CDATA[
+		UPDATE I18N_COUNTRY SET NAME = ?, A2 = ?, A3 = ?, NUM = ?, DIAL = ?, ENABLED = ? WHERE COUNTRY_ID = ?
+      ]]></sql-query>
+      
+	<sql-query
+		name="INSERT_COUNTRY" ><![CDATA[
+		INSERT INTO I18N_COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED ) 
+		VALUES (?, ?, ?, ?, ?, ?, ?)
+      ]]></sql-query>      
+                
+    <!-- i18n Text  -->            
+   	<sql-query name="INSERT_I18N_TEXTS" ><![CDATA[
+		INSERT INTO I18N_TEXT (TEXT_ID, LOCALE_CODE, TEXT_KEY, TEXT, CREATION_DATE, MODIFIED_DATE ) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ]]></sql-query>  
+      
+   	<sql-query name="UPDATE_I18N_TEXTS" ><![CDATA[
+		UPDATE I18N_TEXT SET TEXT = ? , MODIFIED_DATE = ? 
+		WHERE TEXT_ID = ?
+    ]]></sql-query> 
+    
+   	<sql-query name="DELETE_I18N_TEXTS" ><![CDATA[
+		DELETE FROM I18N_TEXT WHERE TEXT_ID = ?
+    ]]></sql-query> 
+              
+   	<sql-query name="SELECT_I18N_TEXT_BY_ID" ><![CDATA[
+		SELECT TEXT_ID, LOCALE_CODE, TEXT_KEY, TEXT, CREATION_DATE, MODIFIED_DATE 
+		FROM I18N_TEXT WHERE TEXT_ID = ?
+    ]]></sql-query>   
+        
+   	<sql-query name="SELECT_ALL_I18N_TEXT" ><![CDATA[
+		SELECT TEXT_ID, LOCALE_CODE, TEXT_KEY, TEXT, CREATION_DATE, MODIFIED_DATE 
+		FROM I18N_TEXT
+    ]]></sql-query> 
+    
+   	<sql-query name="SELECT_I18N_TEXT_BY_LOCALE" ><![CDATA[
+		SELECT TEXT_ID, LOCALE_CODE, TEXT_KEY, text, CREATION_DATE, MODIFIED_DATE 
+		FROM I18N_TEXT WHERE LOCALE_CODE = ?
+    ]]></sql-query>   
+          
+   	<sql-query name="COUNT_ALL_LOCALE" ><![CDATA[
+		SELECT count( LOCALE_ID )
+		FROM I18N_LOCALE
+    ]]></sql-query> 
+   	<sql-query name="SELECT_ALL_LOCALE" ><![CDATA[
+		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE 
+		FROM I18N_LOCALE
+    ]]></sql-query> 
+   	<sql-query name="SELECT_LOCALE_BY_ID" ><![CDATA[
+		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
+		FROM I18N_LOCALE WHERE LOCALE_ID = ?
+    ]]></sql-query>
+   	<sql-query name="SELECT_LOCALE_BY_CODE" ><![CDATA[
+		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
+		FROM I18N_LOCALE WHERE LANGUAGE = ? AND COUNTRY = ?
+    ]]></sql-query>
+   	<sql-query name="INSERT_LOCALE" ><![CDATA[
+		INSERT INTO I18N_LOCALE ( LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, CREATION_DATE, MODIFIED_DATE ) 
+		VALUES (?,?,?,?,?,?)
+    ]]></sql-query>   
+   	<sql-query name="DELETE_LOCALE_BY_ID" ><![CDATA[
+		DELETE FROM I18N_LOCALE WHERE LOCALE_ID = ?
+    ]]></sql-query>      
+   	<sql-query name="UPDATE_LOCALE" ><![CDATA[
+		UPDATE I18N_LOCALE SET ENCODING = ?, MODIFIED_DATE = ? 
+		WHERE LOCALE_ID = ? MODIFIED_DATE
+    ]]></sql-query>     
+                                                                                          
+     <sql-query name="CREATE_TABLE" comment="테이블  생성 스크립트" ><![CDATA[ 
+        
+		CREATE TABLE LOCALIZED_APPLICATION_PROPERTY (
+		  LOCALE_CODE            VARCHAR2(100)   NOT NULL,
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT LOCALIZED_APP_PROP_PK PRIMARY KEY (LOCALE_CODE, PROPERTY_NAME)
 		);
 		
-		CREATE TABLE applicationProperty (
-		  propertyName          VARCHAR2(100)   NOT NULL,
-		  propertyValue         VARCHAR2(1024)  NOT NULL,
-		  CONSTRAINT appPorp_pk PRIMARY KEY (propertyName)
+		CREATE TABLE APPLICATION_PROPERTY (
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT APP_PROP_PK PRIMARY KEY (PROPERTY_NAME)
+		);      
+						
+                 
+        CREATE TABLE PLUGIN_DATA (
+            PLUGIN_ID             INTEGER NOT NULL,
+            NAME                  VARCHAR2(200) NOT NULL,
+            CREATION_DATE         DATE DEFAULT SYSDATE NOT NULL,
+            MODIFIED_DATE         DATE DEFAULT SYSDATE NOT NULL,
+            DATA                  BLOB,
+            CONSTRAINT PLUGIN_DATA_PK PRIMARY KEY (PLUGIN_ID)
+        );     
+        
+        CREATE UNIQUE INDEX PLUGIN_DATA_NAME_IDX ON PLUGIN_DATA (NAME);
+		
+		CREATE TABLE SEQUENCER (
+		    SEQUENCER_ID           INTEGER NOT NULL,
+		    NAME                   VARCHAR2(200) NOT NULL,
+		    VALUE                  INTEGER NOT NULL,
+		    CONSTRAINT SEQUENCER_PK PRIMARY KEY (SEQUENCER_ID)
+		); 		
+		     
+		CREATE UNIQUE INDEX SEQUENCER_NAME_IDX ON SEQUENCER (NAME);
+				
+				
+		CREATE TABLE I18N_LOCALE (
+			 LOCALE_ID      INTEGER NOT NULL,
+			 LANGUAGE      VARCHAR2(100),
+			 COUNTRY       VARCHAR2(100),
+			 VARIANT       VARCHAR2(100),
+			 ENCODING      VARCHAR2(100),
+		     CREATION_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     MODIFIED_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     CONSTRAINT I18N_LOCALE_PK PRIMARY KEY (LOCALE_ID)
+    	);
+		
+		
+		INSERT INTO I18N_LOCALE ( LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ) VALUES (1, 'ko', 'KR', NULL, 'UTF-8');
+				
+		CREATE TABLE I18N_TEXT (
+		     TEXT_ID                INTEGER NOT NULL,
+		     LOCALE_CODE            VARCHAR2(100)   NOT NULL,
+		     TEXT_KEY               VARCHAR2(200)   NOT NULL,		    
+		     TEXT                   VARCHAR2(2000)  NOT NULL,	
+			 CREATION_DATE          DATE DEFAULT SYSDATE NOT NULL ,
+		     MODIFIED_DATE          DATE DEFAULT SYSDATE NOT NULL ,
+		     CONSTRAINT I18N_TEXT_PK PRIMARY KEY (TEXT_ID)
 		);
-                
+		
+		
+		CREATE TABLE KOREA_ZIPCODE (
+		    ZIPCODE_ID             INTEGER NOT NULL,
+		    ZIPCODE                CHAR(7),
+		    SIDO                   VARCHAR2(50), 
+		    GUGUN                  VARCHAR2(100),  
+		    DONG                   VARCHAR2(200),
+		    BUNJI		               VARCHAR2(100),
+		    CONSTRAINT ZIPCODE_PK PRIMARY KEY (ZIPCODE_ID)		    
+		);
+				
+		-- load data from excel !!	
+		
+		create table I18N_COUNTRY (
+		    COUNTRY_ID         INTEGER NOT NULL,
+		    NAME               VARCHAR2(300) NULL,
+		    A2                 VARCHAR2(300) NULL,
+		    A3                 VARCHAR2(300) NULL,
+		    NUM                VARCHAR2(300) NULL,
+		    DIAL               VARCHAR2(300) NULL,     
+		    ENABLED            NUMBER(1, 0) DEFAULT 1,
+		    CONSTRAINT I18N_COUNTRY_PK PRIMARY KEY (COUNTRY_ID)
+		);
+      
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (1, 'Canada', 'CA', 'CAN', '124', '001', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (2, 'China', 'CN', 'CHN', '156', '086', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (3, 'France', 'FR', 'FRA', '250', '033', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (4, 'Germany', 'DE', 'DEU', '276', '049', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (5, 'Hong Kong', 'HK', 'HKG', '344', '852', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (6, 'Hungary', 'HU', 'HUN', '348', '036', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (7, 'Israel', 'IL', 'ISR', '376', '972', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (8, 'Italy', 'IT', 'ITA', '380', '039', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (9, 'Japan', 'JP', 'JPN', '392', '081', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (10, 'South Korea', 'KR', 'KOR', '410', '082', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (11, 'Netherlands', 'NL', 'NLD', '528', '031', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (12, 'Portugal', 'PT', 'PRT', '620', '351', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (13, 'Russia', 'RU', 'RUS', '643', '007', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (14, 'Singapore', 'SG', 'SGP', '702', '065', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (15, 'Spain', 'ES', 'ESP', '724', '034', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (16, 'Turkey', 'TR', 'TUR', '792', '090', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (17, 'Vietnam', 'VM', 'VNM', '704', '084', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (18, 'United Kingdom', 'GB', 'GBR', '826', '044', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (19, 'United States', 'US', 'USA', '840', '001', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (20, 'Afghanistan', 'AF', 'AFG', '4', '093', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (21, 'Albania', 'AL', 'ALB', '8', '355', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (22, 'Algeria', 'DZ', 'DZA', '12', '213', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (23, 'American Samoa', 'AS', 'ASM', '16', '684', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (24, 'Andorra', 'AD', 'AND', '20', '376', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (25, 'Angola', 'AO', 'AGO', '24', '244', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (26, 'Anguilla', 'AI', 'AIA', '660', '264', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (27, 'Antarctica', 'AQ', 'ATA', '10', '672', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (28, 'Antigua', 'AG', 'ATG', '28', '268', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (29, 'Argentina', 'AR', 'ARG', '32', '054', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (30, 'Armenia', 'AM', 'ARM', '51', '374', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (31, 'Aruba', 'AW', 'ABW', '533', '297', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (32, 'Australia', 'AU', 'AUS', '36', '061', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (33, 'Austria', 'AT', 'AUT', '40', '043', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (34, 'Azerbaijan', 'AZ', 'AZE', '31', '994', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (35, 'Bahamas', 'BS', 'BHS', '44', '242', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (36, 'Bahrain', 'BH', 'BHR', '48', '973', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (37, 'Bangladesh', 'BD', 'BGD', '50', '880', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (38, 'Barbados', 'BB', 'BRB', '52', '246', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (39, 'Belarus', 'BY', 'BLR', '112', '375', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (40, 'Belgium', 'BE', 'BEL', '56', '032', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (41, 'Belize', 'BZ', 'BLZ', '84', '501', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (42, 'Benin', 'BJ', 'BEN', '204', '229', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (43, 'Bermuda', 'BM', 'BMU', '60', '441', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (44, 'Bhutan', 'BT', 'BTN', '64', '975', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (45, 'Bolivia', 'BO', 'BOL', '68', '591', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (46, 'Bosnia-Herzegovina', 'BA', 'BIH', '70', '387', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (47, 'Botswana', 'BW', 'BWA', '72', '267', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (48, 'Brazil', 'BR', 'BRA', '76', '055', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (49, 'British Virgin Islands', 'VG', 'VGB', '92', '284', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (50, 'Brunei', 'BN', 'BRN', '96', '673', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (51, 'Bulgaria', 'BG', 'BGR', '100', '359', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (52, 'Burkina Faso', 'BF', 'BFA', '854', '226', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (53, 'Burma (Myanmar)', 'MM', 'MMR', '104', '095', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (54, 'Burundi', 'BI', 'BDI', '108', '257', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (55, 'Cambodia', 'KH', 'KHM', '116', '855', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (56, 'Cameroon', 'CM', 'CMR', '120', '237', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (57, 'Cape Verde Island', 'CV', 'CPV', '132', '238', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (58, 'Cayman Islands', 'KY', 'CYM', '136', '345', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (59, 'Central African Republic', 'CF', 'CAF', '140', '236', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (60, 'Chad', 'TD', 'TCD', '148', '235', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (61, 'Chile', 'CL', 'CHL', '152', '056', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (62, 'Christmas Island', 'CX', 'CXR', '162', '061', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (63, 'Cocos Islands', 'CC', 'CCK', '166', '061', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (64, 'Colombia', 'CO', 'COL', '170', '057', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (65, 'Comoros', 'KM', 'COM', '174', '269', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (66, 'Republic of Congo', 'CD', 'COD', '180', '242', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (67, 'Democratic Republic of Congo', 'CG', 'COG', '178', '243', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (68, 'Cook Islands', 'CK', 'COK', '184', '682', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (69, 'Costa Rica', 'CR', 'CRI', '188', '506', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (70, 'Croatia', 'HR', 'HRV', '191', '385', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (71, 'Cuba', 'CU', 'CUB', '192', '053', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (72, 'Cyprus', 'CY', 'CYP', '196', '357', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (73, 'Czech Republic', 'CZ', 'CZE', '203', '420', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (74, 'Denmark', 'DK', 'DNK', '208', '045', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (75, 'Djibouti', 'DJ', 'DJI', '262', '253', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (76, 'Dominica', 'DM', 'DMA', '212', '767', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (77, 'Dominican Republic', 'DO', 'DOM', '214', '809', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (78, 'Ecuador', 'EC', 'ECU', '218', '593', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (79, 'Egypt', 'EG', 'EGY', '818', '020', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (80, 'El Salvador', 'SV', 'SLV', '222', '503', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (81, 'Equatorial Guinea', 'GQ', 'GNQ', '226', '240', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (82, 'Eritrea', 'ER', 'ERI', '232', '291', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (83, 'Estonia', 'EE', 'EST', '233', '372', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (84, 'Ethiopia', 'ET', 'ETH', '231', '251', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (85, 'Faeroe Islands', 'FO', 'FRO', '234', '298', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (86, 'Falkland Islands', 'FK', 'FLK', '238', '500', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (87, 'Fiji Islands', 'FJ', 'FJI', '242', '679', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (88, 'Finland', 'FI', 'FIN', '246', '358', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (89, 'French Guiana', 'GF', 'GUF', '254', '594', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (90, 'French Polynesia', 'PF', 'PYF', '258', '689', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (91, 'Gabon', 'GA', 'GAB', '266', '241', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (92, 'Gambia', 'GM', 'GMB', '270', '220', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (93, 'Georgia', 'GE', 'GEO', '268', '995', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (94, 'Ghana', 'GH', 'GHA', '288', '233', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (95, 'Gibraltar', 'GI', 'GIB', '292', '350', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (96, 'Greece', 'GR', 'GRC', '300', '030', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (97, 'Greenland', 'GL', 'GRL', '304', '299', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (98, 'Grenada', 'GD', 'GRD', '308', '473', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (99, 'Guadeloupe', 'GP', 'GLP', '312', '590', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (100, 'Guam', 'GU', 'GUM', '316', '671', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (101, 'Guatemala', 'GT', 'GTM', '320', '502', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (102, 'Guinea', 'GN', 'GIN', '324', '224', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (103, 'Guinea-Bissau', 'GW', 'GNB', '624', '245', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (104, 'Guyana', 'GY', 'GUY', '328', '592', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (105, 'Haiti', 'HT', 'HTI', '332', '509', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (106, 'Honduras', 'HN', 'HND', '340', '504', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (107, 'Iceland', 'IS', 'ISL', '352', '354', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (108, 'India', 'IN', 'IND', '356', '091', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (109, 'Indonesia', 'ID', 'IDN', '360', '062', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (110, 'Iran', 'IR', 'IRN', '364', '098', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (111, 'Iraq', 'IQ', 'IRQ', '368', '964', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (112, 'Ireland', 'IE', 'IRL', '372', '353', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (113, 'Ivory Coast', 'CI', 'CIV', '384', '225', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (114, 'Jamaica', 'JM', 'JAM', '388', '876', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (115, 'Jordan', 'JO', 'JOR', '400', '962', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (116, 'Kazakhstan', 'KZ', 'KAZ', '398', '007', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (117, 'Kenya', 'KE', 'KEN', '404', '254', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (118, 'Kiribati', 'KI', 'KIR', '408', '686', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (119, 'Kuwait', 'KW', 'KWT', '414', '965', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (120, 'North Korea', 'KP', 'PRK', '408', '850', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (121, 'Kyrgyzstan', 'KG', 'KGZ', '471', '996', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (122, 'Laos', 'LA', 'LAO', '418', '856', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (123, 'Latvia', 'LV', 'LVA', '428', '371', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (124, 'Lebanon', 'LB', 'LBN', '422', '961', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (125, 'Lesotho', 'LS', 'LSO', '426', '266', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (126, 'Liberia', 'LR', 'LBR', '430', '231', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (127, 'Libya', 'LY', 'LBY', '434', '218', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (128, 'Liechtenstein', 'LI', 'LIE', '438', '423', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (129, 'Lithuania', 'LT', 'LTU', '440', '370', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (130, 'Luxembourg', 'LU', 'LUX', '442', '352', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (131, 'Macau', 'MO', 'MAC', '446', '853', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (132, 'Macedonia', 'MK', 'MKD', '807', '389', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (133, 'Madagascar', 'MG', 'MDG', '450', '261', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (134, 'Malawi', 'MW', 'MWI', '454', '265', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (135, 'Malaysia', 'MY', 'MYS', '458', '060', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (136, 'Maldives', 'MV', 'MDV', '462', '960', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (137, 'Mali', 'ML', 'MLI', '466', '223', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (138, 'Malta', 'MT', 'MLT', '470', '356', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (139, 'Marshall Islands', 'MH', 'MHL', '584', '692', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (140, 'Martinique', 'MQ', 'MTQ', '474', '596', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (141, 'Mauritania', 'MR', 'MRT', '478', '222', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (142, 'Mauritius', 'MU', 'MUS', '480', '230', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (143, 'Mayotte Island', 'YT', 'MYT', '175', '269', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (144, 'Mexico', 'MX', 'MEX', '484', '052', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (145, 'Micronesia', 'FM', 'FSM', '583', '691', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (146, 'Moldova', 'MD', 'MDA', '498', '373', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (147, 'Monaco', 'MC', 'MCO', '492', '377', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (148, 'Mongolia', 'MN', 'MNG', '496', '976', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (149, 'Montenegro', 'ME', 'MNE', '499', '382', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (150, 'Montserrat', 'MS', 'MSR', '500', '664', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (151, 'Morocco', 'MA', 'MAR', '504', '212', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (152, 'Mozambique', 'MZ', 'MOZ', '508', '258', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (153, 'Namibia', 'NA', 'NAM', '516', '264', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (154, 'Nauru', 'NR', 'NRU', '520', '674', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (155, 'Nepal', 'NP', 'NPL', '524', '977', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (156, 'Netherlands Antilles', 'AN', 'ANT', '530', '599', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (157, 'New Caledonia', 'NC', 'NCL', '540', '687', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (158, 'New Zealand', 'NZ', 'NZL', '554', '064', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (159, 'Nicaragua', 'NI', 'NIC', '558', '505', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (160, 'Niger', 'NE', 'NER', '562', '227', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (161, 'Nigeria', 'NG', 'NGA', '566', '234', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (162, 'Niue', 'NU', 'NIU', '570', '683', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (163, 'Norfolk Island', 'NF', 'NFK', '574', '672', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (164, 'Norway', 'NO', 'NOR', '578', '047', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (165, 'Oman', 'OM', 'OMN', '512', '968', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (166, 'Pakistan', 'PK', 'PAK', '586', '092', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (167, 'Palau', 'PW', 'PLW', '585', '680', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (168, 'Palestine', 'PS', 'PSE', '275', '970', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (169, 'Panama', 'PA', 'PAN', '591', '507', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (170, 'Papua New Guinea', 'PG', 'PNG', '598', '675', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (171, 'Paraguay', 'PY', 'PRY', '600', '595', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (172, 'Peru', 'PE', 'PER', '604', '051', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (173, 'Philippines', 'PH', 'PHL', '608', '063', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (174, 'Poland', 'PL', 'POL', '616', '048', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (175, 'Puerto Rico', 'PR', 'PRI', '630', '787', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (176, 'Qatar', 'QA', 'QAT', '634', '974', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (177, 'Reunion Island', 'RE', 'REU', '638', '262', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (178, 'Romania', 'RO', 'ROU', '642', '040', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (179, 'Rwanda', 'RW', 'RWA', '646', '250', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (180, 'St. Helena', 'SH', 'SHN', '654', '290', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (181, 'St. Kitts', 'KN', 'KNA', '659', '869', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (182, 'St. Lucia', 'LC', 'LCA', '662', '758', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (183, 'St. Pierre & Miquelon', 'PM', 'SPM', '666', '508', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (184, 'St. Vincent', 'VC', 'VCT', '670', '784', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (185, 'San Marino', 'SM', 'SMR', '674', '378', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (186, 'Sao Tome & Principe', 'ST', 'STP', '678', '239', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (187, 'Saudi Arabia', 'SA', 'SAU', '682', '966', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (188, 'Senegal', 'SN', 'SEN', '686', '221', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (189, 'Serbia', 'RS', 'SRB', '688', '381', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (190, 'Seychelles', 'SC', 'SYC', '690', '248', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (191, 'Sierra Leone', 'SL', 'SLE', '694', '249', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (192, 'Slovakia', 'SK', 'SVK', '703', '421', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (193, 'Slovenia', 'SI', 'SVN', '705', '386', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (194, 'Solomon Islands', 'SB', 'SLB', '90', '677', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (195, 'Somalia', 'SO', 'SOM', '706', '252', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (196, 'South Africa', 'ZA', 'ZAF', '710', '027', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (197, 'Sri Lanka', 'LK', 'LKA', '144', '094', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (198, 'Sudan', 'SD', 'SDN', '736', '095', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (199, 'Suriname', 'SR', 'SUR', '740', '597', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (200, 'Swaziland', 'SZ', 'SWZ', '748', '268', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (201, 'Sweden', 'SE', 'SWE', '752', '046', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (202, 'Switzerland', 'CH', 'CHE', '756', '041', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (203, 'Syria', 'SY', 'SYR', '760', '963', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (204, 'Taiwan', 'TW', 'TWN', '158', '886', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (205, 'Tajikistan', 'TJ', 'TJK', '762', '992', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (206, 'Tanzania', 'TZ', 'TZA', '834', '255', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (207, 'Thailand', 'TH', 'THA', '764', '066', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (208, 'Togo', 'TG', 'TGO', '768', '228', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (209, 'Tonga', 'TO', 'TON', '776', '676', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (210, 'Trinidad & Tobago', 'TT', 'TTO', '780', '868', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (211, 'Tunisia', 'TN', 'TUN', '788', '216', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (212, 'Turkmenistan', 'TM', 'TKM', '795', '993', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (213, 'Turks & Caicos', 'TC', 'TCA', '796', '649', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (214, 'Tuvalu', 'TV', 'TUV', '798', '688', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (215, 'Uganda', 'UG', 'UGA', '800', '256', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (216, 'Ukraine', 'UA', 'UKR', '804', '380', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (217, 'United Arab Emirates', 'AE', 'ARE', '784', '971', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (218, 'Uruguay', 'UY', 'URY', '858', '598', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (219, 'Uzbekistan', 'UZ', 'UZB', '860', '998', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (220, 'Vanuatu', 'VU', 'VUT', '548', '678', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (221, 'Vatican City', 'VA', 'VAT', '336', '039', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (222, 'Venezuela', 'VE', 'VEN', '862', '058', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (223, 'Wallis & Futuna', 'WF', 'WLF', '876', '681', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (224, 'Western Samoa', 'EH', 'ESH', '732', '685', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (225, 'Yemen', 'YE', 'YEM', '887', '967', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (226, 'Zambia', 'ZM', 'ZMB', '894', '260', 1);
+		insert into COUNTRY (COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED) values (227, 'Zimbabwe', 'ZW', 'ZWE', '716', '263', 1);
+			
+		CREATE TABLE REGION (
+		  REGION_ID              INTEGER NOT NULL,
+			COUNTRY_ID             INTEGER,
+			REGION_CODE            VARCHAR2(300) NULL,
+			NAME                   VARCHAR2(300) NULL,
+			ENABLED                NUMBER(1, 0) DEFAULT 1,
+			CONSTRAINT REGION_PK PRIMARY KEY (REGION_ID)
+		);
+
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1001, 1, 'AB', 'Alberta', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1002, 1, 'BC', 'British Columbia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1003, 1, 'MB', 'Manitoba', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1004, 1, 'NB', 'New Brunswick', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1005, 1, 'NL', 'Newfoundland and Labrador', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1006, 1, 'NT', 'Northwest Territories', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1007, 1, 'NS', 'Nova Scotia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1008, 1, 'NU', 'Nunavut', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1009, 1, 'ON', 'Ontario', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1010, 1, 'PE', 'Prince Edward Island', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1011, 1, 'QC', 'Quebec', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1012, 1, 'SK', 'Saskatchewan', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (1013, 1, 'YT', 'Yukon', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3001, 3, 'A', 'Alsace', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3002, 3, 'B', 'Aquitaine', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3003, 3, 'C', 'Auvergne', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3004, 3, 'P', 'Basse-Normandie', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3005, 3, 'D', 'Bourgogne', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3006, 3, 'E', 'Bretagne', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3007, 3, 'F', 'Centre', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3008, 3, 'G', 'Champagne-Ardenne', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3009, 3, 'H', 'Corse', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3010, 3, 'GF', 'Guyane', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3011, 3, 'I', 'Franche Comte', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3012, 3, 'GP', 'Guadeloupe', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3013, 3, 'Q', 'Haute-Normandie', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3014, 3, 'J', 'Ile-de-France', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3015, 3, 'K', 'Languedoc-Roussillon', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3016, 3, 'L', 'Limousin', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3017, 3, 'M', 'Lorraine', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3018, 3, 'MQ', 'Martinique', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3019, 3, 'N', 'Midi-Pyrenees', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3020, 3, 'O', 'Nord Pas de Calais', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3021, 3, 'R', 'Pays de la Loire', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3022, 3, 'S', 'Picardie', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3023, 3, 'T', 'Poitou-Charentes', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3024, 3, 'U', 'Provence-Alpes-Cote-d\'Azur', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3025, 3, 'RE', 'Reunion', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (3026, 3, 'V', 'Rhone-Alpes', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4001, 4, 'BW', 'Baden-Wurttemberg', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4002, 4, 'BY', 'Bayern', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4003, 4, 'BE', 'Berlin', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4004, 4, 'BR', 'Brandenburg', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4005, 4, 'HB', 'Bremen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4006, 4, 'HH', 'Hamburg', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4007, 4, 'HE', 'Hessen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4008, 4, 'MV', 'Mecklenburg-Vorpommern', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4009, 4, 'NI', 'Niedersachsen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4010, 4, 'NW', 'Nordrhein-Westfalen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4011, 4, 'RP', 'Rheinland-Pfalz', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4012, 4, 'SL', 'Saarland', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4013, 4, 'SN', 'Sachsen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4014, 4, 'ST', 'Sachsen-Anhalt', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4015, 4, 'SH', 'Schleswig-Holstein', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (4016, 4, 'TH', 'Thuringen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8001, 8, 'AG', 'Agrigento', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8002, 8, 'AL', 'Alessandria', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8003, 8, 'AN', 'Ancona', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8004, 8, 'AO', 'Aosta', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8005, 8, 'AR', 'Arezzo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8006, 8, 'AP', 'Ascoli Piceno', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8007, 8, 'AT', 'Asti', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8008, 8, 'AV', 'Avellino', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8009, 8, 'BA', 'Bari', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8010, 8, 'BT', 'Barletta-Andria-Trani', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8011, 8, 'BL', 'Belluno', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8012, 8, 'BN', 'Benevento', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8013, 8, 'BG', 'Bergamo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8014, 8, 'BI', 'Biella', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8015, 8, 'BO', 'Bologna', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8016, 8, 'BZ', 'Bolzano', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8017, 8, 'BS', 'Brescia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8018, 8, 'BR', 'Brindisi', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8019, 8, 'CA', 'Cagliari', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8020, 8, 'CL', 'Caltanissetta', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8021, 8, 'CB', 'Campobasso', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8022, 8, 'CI', 'Carbonia-Iglesias', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8023, 8, 'CE', 'Caserta', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8024, 8, 'CT', 'Catania', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8025, 8, 'CZ', 'Catanzaro', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8026, 8, 'CH', 'Chieti', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8027, 8, 'CO', 'Como', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8028, 8, 'CS', 'Cosenza', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8029, 8, 'CR', 'Cremona', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8030, 8, 'KR', 'Crotone', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8031, 8, 'CN', 'Cuneo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8032, 8, 'EN', 'Enna', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8033, 8, 'FM', 'Fermo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8034, 8, 'FE', 'Ferrara', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8035, 8, 'FI', 'Firenze', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8036, 8, 'FG', 'Foggia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8037, 8, 'FC', 'Forli-Cesena', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8038, 8, 'FR', 'Frosinone', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8039, 8, 'GE', 'Genova', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8040, 8, 'GO', 'Gorizia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8041, 8, 'GR', 'Grosseto', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8042, 8, 'IM', 'Imperia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8043, 8, 'IS', 'Isernia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8044, 8, 'AQ', 'L''Aquila', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8045, 8, 'SP', 'La Spezia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8046, 8, 'LT', 'Latina', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8047, 8, 'LE', 'Lecce', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8048, 8, 'LC', 'Lecco', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8049, 8, 'LI', 'Livorno', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8050, 8, 'LO', 'Lodi', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8051, 8, 'LU', 'Lucca', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8052, 8, 'MC', 'Macerata', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8053, 8, 'MN', 'Mantova', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8054, 8, 'MS', 'Massa-Carrara', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8055, 8, 'MT', 'Matera', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8056, 8, 'MA', 'Medio Campidano', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8057, 8, 'ME', 'Messina', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8058, 8, 'MI', 'Milano', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8059, 8, 'MO', 'Modena', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8060, 8, 'MZ', 'Monza', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8061, 8, 'NA', 'Napoli', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8062, 8, 'NO', 'Novara', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8063, 8, 'NU', 'Nuoro', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8064, 8, 'OG', 'Ogliastra', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8065, 8, 'OT', 'Olbia-Tempio', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8066, 8, 'OR', 'Oristano', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8067, 8, 'PD', 'Padova', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8068, 8, 'PA', 'Palermo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8069, 8, 'PR', 'Parma', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8070, 8, 'PV', 'Pavia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8071, 8, 'PG', 'Perugia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8072, 8, 'PU', 'Pesaro e Urbino', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8073, 8, 'PE', 'Pescara', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8074, 8, 'PC', 'Piacenza', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8075, 8, 'PI', 'Pisa', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8076, 8, 'PT', 'Pistoia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8077, 8, 'PN', 'Pordenone', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8078, 8, 'PZ', 'Potenza', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8079, 8, 'PO', 'Prato', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8080, 8, 'RG', 'Ragusa', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8081, 8, 'RA', 'Ravenna', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8082, 8, 'RC', 'Reggio Calabria', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8083, 8, 'RE', 'Reggio Emilia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8084, 8, 'RI', 'Rieti', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8085, 8, 'RN', 'Rimini', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8086, 8, 'RM', 'Roma', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8087, 8, 'RO', 'Rovigo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8088, 8, 'SA', 'Salerno', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8089, 8, 'SS', 'Sassari', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8090, 8, 'SV', 'Savona', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8091, 8, 'SI', 'Siena', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8092, 8, 'SR', 'Siracusa', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8093, 8, 'SO', 'Sondrio', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8094, 8, 'TA', 'Taranto', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8095, 8, 'TE', 'Teramo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8096, 8, 'TR', 'Terni', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8097, 8, 'TO', 'Torino', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8098, 8, 'TP', 'Trapani', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8099, 8, 'TN', 'Trento', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8100, 8, 'TV', 'Treviso', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8101, 8, 'TS', 'Trieste', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8102, 8, 'UD', 'Udine', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8103, 8, 'VA', 'Varese', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8104, 8, 'VE', 'Venezia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8105, 8, 'VB', 'Verbano-Cusio-Ossola', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8106, 8, 'VC', 'Vercelli', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8107, 8, 'VR', 'Verona', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8108, 8, 'VV', 'Vibo Valentia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8109, 8, 'VI', 'Vicenza', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (8110, 8, 'VT', 'Viterbo', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15001, 15, 'AN', 'Andalusia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15002, 15, 'AR', 'Aragon', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15003, 15, 'AS', 'Asturias', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15004, 15, 'IB', 'Balearic Islands', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15005, 15, 'PV', 'Basque COUNTRY', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15006, 15, 'CN', 'Canary Islands', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15007, 15, 'CB', 'Cantabria', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15008, 15, 'CL', 'Castile and Leon', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15009, 15, 'CM', 'Castile-La Mancha', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15010, 15, 'CT', 'Catalonia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15011, 15, 'CE', 'Ceuta', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15012, 15, 'EX', 'Extremadura', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15013, 15, 'GA', 'Galicia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15014, 15, 'LO', 'La Rioja', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15015, 15, 'M', 'Madrid', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15016, 15, 'ML', 'Melilla', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15017, 15, 'MU', 'Murcia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15018, 15, 'NA', 'Navarra', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (15019, 15, 'VC', 'Valencia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19001, 19, 'AL', 'Alabama', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19002, 19, 'AK', 'Alaska', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19003, 19, 'AZ', 'Arizona', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19004, 19, 'AR', 'Arkansas', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19005, 19, 'CA', 'California', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19006, 19, 'CO', 'Colorado', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19007, 19, 'CT', 'Connecticut', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19008, 19, 'DC', 'District of Columbia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19009, 19, 'DE', 'Delaware', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19010, 19, 'FL', 'Florida', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19011, 19, 'GA', 'Georgia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19012, 19, 'HI', 'Hawaii', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19013, 19, 'ID', 'Idaho', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19014, 19, 'IL', 'Illinois', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19015, 19, 'IN', 'Indiana', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19016, 19, 'IA', 'Iowa', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19017, 19, 'KS', 'Kansas', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19018, 19, 'KY', 'Kentucky ', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19019, 19, 'LA', 'Louisiana ', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19020, 19, 'ME', 'Maine', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19021, 19, 'MD', 'Maryland', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19022, 19, 'MA', 'Massachusetts', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19023, 19, 'MI', 'Michigan', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19024, 19, 'MN', 'Minnesota', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19025, 19, 'MS', 'Mississippi', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19026, 19, 'MO', 'Missouri', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19027, 19, 'MT', 'Montana', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19028, 19, 'NE', 'Nebraska', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19029, 19, 'NV', 'Nevada', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19030, 19, 'NH', 'New Hampshire', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19031, 19, 'NJ', 'New Jersey', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19032, 19, 'NM', 'New Mexico', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19033, 19, 'NY', 'New York', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19034, 19, 'NC', 'North Carolina', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19035, 19, 'ND', 'North Dakota', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19036, 19, 'OH', 'Ohio', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19037, 19, 'OK', 'Oklahoma ', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19038, 19, 'OR', 'Oregon', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19039, 19, 'PA', 'Pennsylvania', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19040, 19, 'PR', 'Puerto Rico', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19041, 19, 'RI', 'Rhode Island', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19042, 19, 'SC', 'South Carolina', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19043, 19, 'SD', 'South Dakota', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19044, 19, 'TN', 'Tennessee', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19045, 19, 'TX', 'Texas', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19046, 19, 'UT', 'Utah', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19047, 19, 'VT', 'Vermont', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19048, 19, 'VA', 'Virginia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19049, 19, 'WA', 'Washington', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19050, 19, 'WV', 'West Virginia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19051, 19, 'WI', 'Wisconsin', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (19052, 19, 'WY', 'Wyoming', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32001, 32, 'ACT', 'Australian Capital Territory', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32002, 32, 'NSW', 'New South Wales', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32003, 32, 'NT', 'Northern Territory', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32004, 32, 'QLD', 'Queensland', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32005, 32, 'SA', 'South Australia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32006, 32, 'TAS', 'Tasmania', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32007, 32, 'VIC', 'Victoria', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (32008, 32, 'WA', 'Western Australia', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202001, 202, 'AG', 'Aargau', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202002, 202, 'AR', 'Appenzell Ausserrhoden', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202003, 202, 'AI', 'Appenzell Innerrhoden', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202004, 202, 'BL', 'Basel-Landschaft', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202005, 202, 'BS', 'Basel-Stadt', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202006, 202, 'BE', 'Bern', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202007, 202, 'FR', 'Fribourg', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202008, 202, 'GE', 'Geneva', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202009, 202, 'GL', 'Glarus', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202010, 202, 'GR', 'Graubunden', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202011, 202, 'JU', 'Jura', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202012, 202, 'LU', 'Lucerne', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202013, 202, 'NE', 'Neuchatel', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202014, 202, 'NW', 'Nidwalden', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202015, 202, 'OW', 'Obwalden', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202016, 202, 'SH', 'Schaffhausen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202017, 202, 'SZ', 'Schwyz', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202018, 202, 'SO', 'Solothurn', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202019, 202, 'SG', 'St. Gallen', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202020, 202, 'TG', 'Thurgau', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202021, 202, 'TI', 'Ticino', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202022, 202, 'UR', 'Uri', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202023, 202, 'VS', 'Valais', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202024, 202, 'VD', 'Vaud', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202025, 202, 'ZG', 'Zug', 1);
+		insert into Region (regionId, COUNTRY_ID, regionCode, NAME, ENABLED ) values (202026, 202, 'ZH', 'Zurich', 1);		
+		     
     ]]></sql-query> 
     
       	     
