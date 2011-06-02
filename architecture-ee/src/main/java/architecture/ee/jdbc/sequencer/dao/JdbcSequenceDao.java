@@ -4,9 +4,9 @@ import java.util.Map;
 
 import architecture.ee.jdbc.sequencer.JdbcSequencerFactory;
 import architecture.ee.jdbc.sequencer.Sequencer;
+import architecture.ee.jdbc.sequencer.internal.JdbcSequencer;
 
 public class JdbcSequenceDao implements SequenceDao {
-
 	
 	private JdbcSequencerFactory factory ;	
 	private Map<Integer, Sequencer> sequencers ;
@@ -28,7 +28,10 @@ public class JdbcSequenceDao implements SequenceDao {
 			if( name.equals(sequencer.getName()) )
 				return sequencer.getNext();
 		}
-		return 0;
+		
+		JdbcSequencer sequencer = factory.createJdbcSequencer(0, name, 5);
+		sequencers.put(sequencer.getSequencerId(), sequencer);
+		return sequencer.getNext();		
 	}
 
 	public long currentID(String name) {

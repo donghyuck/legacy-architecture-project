@@ -51,13 +51,14 @@ public class JdbcSequencerFactory {
 		this.dataSource = dataSource;
 	}
 	
-	public JdbcSequencer createJdbcSequencer(int sequenceID, String sequencerName, int blockSize) {		
+	public JdbcSequencer createJdbcSequencer(int sequenceID, String sequencerName, int blockSize) {	
 		JdbcSequencer impl = new JdbcSequencer(sequenceID);
 		impl.setConfiguration(configuration);
 		impl.setDataSource(dataSource);
 		impl.setName(sequencerName);
 		impl.afterPropertiesSet();		
 		return impl;
+		
 	}
 	
 	public Map<Integer, Sequencer> getAllSequencer(){		
@@ -72,9 +73,9 @@ public class JdbcSequencerFactory {
 				List<JdbcSequencer> l = new ArrayList<JdbcSequencer>();
 				while(rs.next())
 				{
-					int sequencerID = rs.getInt(0);
-					String name = rs.getString(1);
-					long value = rs.getLong(2);
+					int sequencerID = rs.getInt(1);
+					String name = rs.getString(2);
+					long value = rs.getLong(3);
 					JdbcSequencer sequencer = new JdbcSequencer(sequencerID);
 					sequencer.setName(name);
 					l.add(sequencer);					
@@ -86,7 +87,7 @@ public class JdbcSequencerFactory {
 		for ( JdbcSequencer sequencer : list ){
 			sequencer.setConfiguration(configuration);
 			sequencer.setDataSource(dataSource);
-			sequencers.put(sequencer.getSequencerID(), sequencer);
+			sequencers.put(sequencer.getSequencerId(), sequencer);
 		}
 		return sequencers;
 	}

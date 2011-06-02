@@ -30,13 +30,12 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 	public JdbcSequencer(int seqType) {
     	super();
         this.type = seqType;
-        this.blockSize = 100;
+        this.blockSize = 10;
         this.currentID = 0L;
-        this.maxID = 0L;    
-        
+        this.maxID = 0L;  
     }    
 	
-	public int getSequencerID(){
+	public int getSequencerId(){
 		return type;
 	}
 	
@@ -71,9 +70,14 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
     }
     
     private long createNewID(int type) {
-    	long newID = 1L ;
+    	long newID = 1L ;    	
         getJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_SEQUENCER").getSql(), new Object[]{newID, name, type}, new int[]{Types.INTEGER, Types.VARCHAR, Types.INTEGER });    
         return newID;
+    }
+    
+    private int getNextSequencerId(){
+    	int max = getJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_MAX_ID").getSql());
+    	return max + 1; 
     }
     
     /**
@@ -88,10 +92,14 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
         boolean success = false;
         long currentID = 1;
         try {
-            currentID = getExtendedJdbcTemplate().queryForLong( getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_BY_ID").getSql(), new Object[] { type }, new int[] { Types.INTEGER });
+            currentID = getExtendedJdbcTemplate().queryForLong( getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_BY_ID").getSql(), new Object[] { this.type }, new int[] { Types.INTEGER });
         } catch (IncorrectResultSizeDataAccessException e) {
             // 해당 값이 없는 경우 생성한다.
-        	currentID = createNewID(type);
+        	this.type = getNextSequencerId();     
+        	
+        	//log.debug("++++++++++++++++++++++++++++++++++++>" + this.type);
+        	
+        	currentID = createNewID(this.type);
         }
 
         // Increment the id to define our block.
@@ -117,14 +125,14 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 				Thread.sleep(75L);
 			} catch (InterruptedException e) {}
 			
-			getNextBlock(count - 1);
+			getNextBlock( count - 1);
         }        
     }
 
 	@Override
 	public boolean equals(Object obj) {
 		JdbcSequencer other = (JdbcSequencer)obj;
-		return other.getSequencerID() == getSequencerID();
+		return other.getSequencerId() == getSequencerId();
 	}
     
 }
