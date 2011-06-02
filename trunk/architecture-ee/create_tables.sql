@@ -1,0 +1,40 @@
+CREATE TABLE ENT_APP (
+    ENT_APP_ID             INTEGER NOT NULL,   
+    ENT_APP_NAME           VARCHAR2(100) NOT NULL,
+    DESCRIPTION            VARCHAR2(3500) NOT NULL,
+    CREATION_DATE          DATE NOT NULL DEFAULT SYSDATE,
+    MODIFIED_DATE          DATE NOT NULL DEFAULT SYSDATE,
+    CONSTRAINT ENT_APP_PK PRIMARY KEY (ENT_APP_ID)
+);
+
+
+CREATE TABLE ENT_APP_PROPERTIES (
+    
+    ENT_APP_ID  INTEGER NOT NULL,   
+    PROPERTY_NAME        VARCHAR2(100) NOT NULL,
+    PROPERTY_VALUE       VARCHAR2(3500) NOT NULL,
+    CONSTRAINT ENT_APP_PROP_PK PRIMARY KEY (ENT_APP_ID, PROPERTY_NAME)
+    
+);
+
+
+
+CREATE TABLE pluginData (
+    pluginID  INTEGER NOT NULL,
+    name                  VARCHAR2(200) NOT NULL,
+    creationDate          DATE NOT NULL DEFAULT SYSDATE,
+    modifiedDate          DATE NOT NULL DEFAULT SYSDATE,
+    data                  BLOB,
+    CONSTRAINT pluginData_pk PRIMARY KEY (pluginID)
+    
+);
+
+
+EntAppProps
+EntApp
+
+// App
+// AppProps
+
+
+
