@@ -4,6 +4,8 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs.FileObject;
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
@@ -21,9 +23,7 @@ import architecture.ee.util.LocaleUtils;
 
 public class TestG11N {
 
-	public void log(Object obj){
-		System.out.println("# " + obj);
-	}
+	private Log log = LogFactory.getLog(getClass());
 	
 	@Test
 	public void testGetBootstrapApplicationContext(){		
@@ -34,7 +34,7 @@ public class TestG11N {
 			"default-application-context.xml, databaseSubsystemContext.xml, daoSubsystemContext.xml"
 		);
 		
-		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/opensource/architecture_v2/architecture-ee/profile/default");
+		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture-ee/profile/default");
 		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		if(admin.getState() == State.INITIALIZED){
@@ -42,7 +42,7 @@ public class TestG11N {
 			admin.start();
 		}	
 		
-		log( Locale.KOREA );
+		log.debug( Locale.KOREA );
 	}
 	
 	//@Test
@@ -51,9 +51,9 @@ public class TestG11N {
 		GlobalizationService g11n = ApplicationHelperFactory.getApplicationHelper().getComponent(GlobalizationService.class);
 		List<Country> list = g11n.getCountries();
 		for( Country c : list){
-			log( c );
+			log.debug( c );
 			Locale locale = LocaleUtils.toLocale( c.getA2().toLowerCase() );
-			log( locale.getDisplayCountry() );
+			log.debug( locale.getDisplayCountry() );
 		}
 	}
 
@@ -63,27 +63,28 @@ public class TestG11N {
 		Locale locale2 = Locale.US ;
 		Locale locale3 = Locale.JAPAN ;
 		GlobalizationService g11n = ApplicationHelperFactory.getApplicationHelper().getComponent(GlobalizationService.class);
-		log( g11n.getLocale(locale, true ) );
-		log( g11n.getLocale(locale2, true ) );
-		log( g11n.getLocale(locale3, true ) );
+		log.debug( g11n.getLocale(locale, true ) );
+		log.debug( g11n.getLocale(locale2, true ) );
+		log.debug( g11n.getLocale(locale3, true ) );
 	}
 	
 	@Test
 	public void testImportFromExcel(){
 		try {
 			
-			FileObject fo = VFSUtils.resolveFile("file:///C:/TOOLS/workspace/opensource/architecture_v2/architecture-ee/profile/default/database/COUNTRY.xls");
+			FileObject fo = VFSUtils.resolveFile("file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/COUNTRY.xls");
 			ExcelReader reader = new ExcelReader(fo.getContent().getInputStream());
-			log("getNumberOfSheets:" + reader.getNumberOfSheets());
-			log("getSheetName:" + reader.getSheetName());
-			log("getPhysicalNumberOfRows:" + reader.getPhysicalNumberOfRows());
-			log("getFirstRowNum:" + reader.getFirstRowNum());
-			log("getLastRowNum:" + reader.getLastRowNum());
-			log("getHeaderFromFirstRow:" + reader.getHeaderFromFirstRow());
-			log("getDataFromRow:" + reader.getDataFromRow(1));
-			log("getDataFromRow:" + reader.getDataFromRow(reader.getLastRowNum()));
+			log.debug("getNumberOfSheets:" + reader.getNumberOfSheets());
+			log.debug("getSheetName:" + reader.getSheetName());
+			log.debug("getPhysicalNumberOfRows:" + reader.getPhysicalNumberOfRows());
+			log.debug("getFirstRowNum:" + reader.getFirstRowNum());
+			log.debug("getLastRowNum:" + reader.getLastRowNum());
+			log.debug("getHeaderFromFirstRow:" + reader.getHeaderFromFirstRow());
+			log.debug("getDataFromRow:" + reader.getDataFromRow(1));
+			log.debug("getDataFromRow:" + reader.getDataFromRow(reader.getLastRowNum()));
 			
 			QueryService service = ApplicationHelperFactory.getApplicationHelper().getComponent(QueryService.class);
+			
 			SqlQuery query = service.getSqlQuery();
 			Integer count = query.setStatement("FRAMEWORK_V2.COUNT_ALL_COUNTRY").uniqueResult(Integer.class);
 			if( count == 0){
