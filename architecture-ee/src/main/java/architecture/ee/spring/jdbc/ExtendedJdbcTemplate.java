@@ -120,6 +120,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		}
 
 		public Object extractData(ResultSet rs) throws SQLException, DataAccessException {
+			
 			ArrayList<Object> list = new ArrayList<Object>();
 			DatabaseType databaseType = helper.getDatabaseType();
 			if (DatabaseType.mysql == databaseType || DatabaseType.postgresql == databaseType) {
@@ -143,8 +144,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	private volatile int cacheLimit = DEFAULT_CACHE_LIMIT;
 
 	/** Cache of original SQL String to ParsedSql representation */
-	private final Map<String, ParsedSql> parsedSqlCache = new LinkedHashMap<String, ParsedSql>(
-			DEFAULT_CACHE_LIMIT, 0.75f, true) {
+	private final Map<String, ParsedSql> parsedSqlCache = new LinkedHashMap<String, ParsedSql>( DEFAULT_CACHE_LIMIT, 0.75f, true) {
 		@Override
 		protected boolean removeEldestEntry(Map.Entry<String, ParsedSql> eldest) {
 			return size() > getCacheLimit();
@@ -246,8 +246,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	 *            container of arguments to bind
 	 * @return the corresponding PreparedStatementCreator
 	 */
-	protected PreparedStatementCreator getPreparedStatementCreator(String sql,
-			SqlParameterSource paramSource) {
+	protected PreparedStatementCreator getPreparedStatementCreator(String sql, SqlParameterSource paramSource) {
 		ParsedSql parsedSql = getParsedSql(sql);
 		String sqlToUse = NamedParameterUtils.substituteNamedParameters(parsedSql, paramSource);
 		Object[] params = NamedParameterUtils.buildValueArray(parsedSql,paramSource, null);
@@ -256,39 +255,26 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		return pscf.newPreparedStatementCreator(params);
 	}
 
-	public <T> List<T> queryScrollable(String sql, int startIndex,
-			int numResults, Class<T> elementType, Object[] args, int[] argTypes) {
+	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, Class<T> elementType, Object[] args, int[] argTypes) {
+		
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, getJdbcHelper());
+		
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor( startIndex, numResults, getSingleColumnRowMapper(elementType), getJdbcHelper());	
+		
+		return (java.util.List<T>)query(creator, extractor);
+	}
+
+	public List queryScrollable(String sql, int startIndex, int numResults, Object[] args, int[] argTypes) {
 		
 		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(
 				sql, startIndex, numResults, args, argTypes, getJdbcHelper());
-		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(
-				startIndex, numResults, getSingleColumnRowMapper(elementType),
-				getJdbcHelper());
-		
-		return query(creator, extractor);
-	}
-
-	public List queryScrollable(String sql,
-			int startIndex, int numResults, Object[] args, int[] argTypes) {
-		
-		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(
-				sql, 
-				startIndex, 
-				numResults, 
-				args, 
-				argTypes, 
-				getJdbcHelper());
 		
 		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(
-				startIndex, 
-				numResults, 
-				getColumnMapRowMapper(),
-				getJdbcHelper());
-		return query(creator, extractor);
+				startIndex, numResults, getColumnMapRowMapper(), getJdbcHelper());
+		return (List) query(creator, extractor);
 	}
 
-	protected Object runScript(Connection conn, boolean stopOnError,
-			Reader reader) throws SQLException, IOException {
+	protected Object runScript(Connection conn, boolean stopOnError, Reader reader) throws SQLException, IOException {
 
 		StringBuffer command = null;
 

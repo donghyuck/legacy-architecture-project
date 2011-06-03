@@ -74,7 +74,7 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 	}
 	
 	public void initialize(){
-		if(resourceLocations.size()>0)
+		if(resourceLocations.size() > 0)
 			loadResourceLocations();
 	}
 	
@@ -103,8 +103,12 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 
 	protected void loadResourceLocations() {
 		try {
+			log.debug("------------------------------------------------------------------------------");
+			
 			for (String path : resourceLocations) {				
 				FileObject fo = VFSUtils.resolveFile(path);
+				log("exists" + fo.exists());
+				log.debug("------------------------------------------------------------------------------");
 				if( fo.exists() ){
 					if (!configuration.isResourceLoaded(fo.getName().getURI())) {						
 						log.debug( fo.getName().getScheme() );						
@@ -114,6 +118,10 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 				}
 			}
 		} catch (Exception e) { }
+	}
+
+	private void log(String string) {
+		
 	}
 
 	public void setDataSource(DataSource dataSource) {

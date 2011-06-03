@@ -40,8 +40,7 @@ public class SqlFileListener implements FileListener {
 		this.configuration = configuration;
 	}
 
-	protected void buildSqlFromInputStream(InputStream inputStream,
-			Configuration configuration, String uri) {
+	protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration, String uri) {
 		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, uri);
 		builder.build();
 	}
