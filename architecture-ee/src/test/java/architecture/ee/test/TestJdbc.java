@@ -1,11 +1,11 @@
 package architecture.ee.test;
 
-import static org.junit.Assert.*;
-
 import java.sql.Types;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
 
@@ -17,22 +17,24 @@ import architecture.ee.jdbc.query.factory.SqlQueryFactory;
 
 public class TestJdbc {
 
-	public void log(Object obj){
-		System.out.println("# " + obj);
-	}
+	private Log log = LogFactory.getLog(getClass());
+	
 	
 	@Test
 	public void testBoot() {		
 		MockServletContext servletContext = new MockServletContext();
 		servletContext.addInitParameter(
 			"contextConfigLocation", 
-			"default-application-context.xml,databaseSubsystemContext.xml"
+			"default-application-context.xml,databaseSubsystemContext.xml,daoSubsystemContext.xml"
 		);
-						
+				
+		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
+		
+		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		if(admin.getState() == State.INITIALIZED){
 			admin.setServletContext(servletContext);
-			log(admin.getState());
+			log.debug(admin.getState());
 			admin.start();
 		}	
 	}
@@ -43,6 +45,12 @@ public class TestJdbc {
 
 	@Test
 	public void testGetSqlQueryFacory() throws Exception {
+		
+		Thread.sleep(1000);
+		
+		log.debug("===testGetSqlQueryFacory====");
+		
+		
 		SqlQueryFactory factory = (SqlQueryFactory) getSqlQueryFactory();
 		
 		SqlQuery query = getSqlQueryFactory().createSqlQuery();
@@ -52,16 +60,16 @@ public class TestJdbc {
 		
 	}
 
-	@Test
+	//@Test
 	public void testSelectAllFromEntApp() throws Exception {
 		//SELECT_ALL_FROM_ENT_APP
 		
-		log( Locale.KOREA.getCountry() ) ;
-		log( Locale.KOREA.getLanguage() ) ;
-		log( Locale.KOREA.getVariant() ) ;
-		log( Locale.KOREA.getISO3Country()) ;
-		log( Locale.KOREA.getISO3Language() ) ;
-		log( Locale.KOREA.getDisplayName() ) ;
+		log.debug( Locale.KOREA.getCountry() ) ;
+		log.debug( Locale.KOREA.getLanguage() ) ;
+		log.debug( Locale.KOREA.getVariant() ) ;
+		log.debug( Locale.KOREA.getISO3Country()) ;
+		log.debug( Locale.KOREA.getISO3Language() ) ;
+		log.debug( Locale.KOREA.getDisplayName() ) ;
 		
 		
 		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "SELECT_ALL_ENT_APP" );
@@ -69,14 +77,14 @@ public class TestJdbc {
 		System.out.println("rows:" + "=" + rows );
 	}
 
-	@Test
+	//@Test
 	public void testBatchUpdate() throws Exception {
 		
 		//INSERT_ENT_APP_PROPERTY
 		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "DELETE_ALL_ENT_APP_PROPERTY" );		
 		int c = query.setString("1").executeUpdate();
 		
-		log( c + " rows are deleted !!" );
+		log.debug( c + " rows are deleted !!" );
 	
 		
 		query.setStatement("COMMON", "INSERT_ENT_APP_PROPERTY");
@@ -86,11 +94,11 @@ public class TestJdbc {
 			query.addToBatch();
 		}
 		int sum = query.executeUpdate();		
-		log( sum + " rows are inserted !!" );
+		log.debug( sum + " rows are inserted !!" );
 
 	}
 	
-	@Test
+	//@Test
 	public void testQueryForObject() throws Exception {
 		
 		//COUNT_ENT_APP_PROPERTY
@@ -98,7 +106,7 @@ public class TestJdbc {
 		
 		Integer count = query.reset().queryForObject("COMMON.COUNT_ENT_APP_PROPERTY", new Integer[]{1}, new int []{Types.INTEGER}, Integer.class);
 		
-		log("count:" + count);		
+		log.debug("count:" + count);		
 		long result = 0;		
 	
 	}
@@ -112,7 +120,7 @@ public class TestJdbc {
 		
 				
 		Integer count = query.setParameters(new Object[]{1}, new int []{Types.NUMERIC}).uniqueResult(Integer.class);
-		log("count:" + count);		
+		log.debug("count:" + count);		
 		long result = 0;
 
 	}

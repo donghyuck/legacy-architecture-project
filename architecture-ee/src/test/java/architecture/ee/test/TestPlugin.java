@@ -21,6 +21,8 @@ public class TestPlugin {
 			"contextConfigLocation", 
 			"default-application-context.xml,databaseSubsystemContext.xml"
 		);
+		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
+		
 						
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		
