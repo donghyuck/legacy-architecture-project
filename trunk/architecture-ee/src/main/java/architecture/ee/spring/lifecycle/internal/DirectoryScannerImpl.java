@@ -24,18 +24,19 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	private URLDirectoryScanner scanner;
 	private List<String> resourceLocations;
 	private ResourceLoader resourceLoader;
-		
+	
 	private Log log = LogFactory.getLog(getClass());
 	
-	public DirectoryScannerImpl() {
-		scanner = new URLDirectoryScanner();
-		scanner.setRecursiveSearch(true);
-		scanner.setScanEnabled(true);
+	public DirectoryScannerImpl() {		
+		
 		this.resourceLoader = new DefaultResourceLoader();
 		this.resourceLocations = Collections.emptyList();
+		
+		try {
+			this.scanner = createURLDirectoryScanner(true);
+		} catch (Exception e) { }
 	}
 	
-		
 	public void setDirectoryListenerList(List<DirectoryListener> directoryListeners) {
 		for(DirectoryListener listener : (List<DirectoryListener>)directoryListeners){
 			scanner.removeDirectoryListener(listener);			
@@ -43,6 +44,15 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 		}
 	}
 
+	private URLDirectoryScanner createURLDirectoryScanner(boolean recursive) throws Exception {
+		URLDirectoryScanner scanner = new URLDirectoryScanner();
+		scanner.setRecursiveSearch(true);
+		scanner.setScanEnabled(true);
+		scanner.create();
+		return scanner;
+	}
+	
+	
 	public ResourceLoader getResourceLoader() {
 		return resourceLoader;
 	}
@@ -112,17 +122,14 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	}
 
 
-	public void afterPropertiesSet() throws Exception {
-		scanner.setRecursiveSearch(true);
-		scanner.setScanEnabled(true);
-		
-		scanner.create();
-		loadResourceLocations();
-		scanner.start();		
+	public void afterPropertiesSet() throws Exception {		
+		loadResourceLocations();		
+		if(!scanner.isStarted())
+		    scanner.start();
 	}
 	
 	protected void loadResourceLocations() {
-		try {					
+		try {
 			for (String path : resourceLocations) {		
 				FileObject fo = VFSUtils.resolveFile(path);
 				if(fo.exists()){
