@@ -1,5 +1,18 @@
 package architecture.ee.component;
 
-public interface SqlQeuryClient extends QueryService {
+import org.springframework.jdbc.support.lob.LobHandler;
 
+import architecture.ee.jdbc.query.SqlQuery;
+import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
+
+public interface SqlQeuryClient {
+
+	public SqlQuery getSqlQuery();
+	
+	public ExtendedJdbcTemplate getExtendedJdbcTemplate();
+	
+	public LobHandler getLobHandler();
+	
+	public String getSql(String statement);
+	
 }
