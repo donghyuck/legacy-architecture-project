@@ -16,7 +16,7 @@
     <bean id="default-services-context" class="org.springframework.context.support.ClassPathXmlApplicationContext">
         <constructor-arg>
             <list>
-                <value>classpath*:config/spring/default-bootstrap-context.xml</value>
+                <value>classpath*:config/services/spring-bootstrap-context.xml</value>
             </list>
         </constructor-arg>
     </bean>    	
