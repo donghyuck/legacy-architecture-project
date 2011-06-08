@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.task.TaskExecutor;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
@@ -35,6 +36,7 @@ public class AdminImpl implements Admin, EventSource {
 	private DataSource dataSource = null;	
 	private EventPublisher eventPublisher = null;	
 	private PluginManagerImpl pluginManager;
+	private TaskExecutor taskExecutor;
 	
     private Locale locale = null;
     private TimeZone timeZone = null;
@@ -44,7 +46,19 @@ public class AdminImpl implements Admin, EventSource {
 		this.adminService = (AdminServiceImpl)adminService;
 		this.eventPublisher = this.adminService.getBootstrapComponent(EventPublisher.class);
 		this.pluginManager = this.adminService.getBootstrapComponent(PluginManagerImpl.class);
+		this.taskExecutor = this.adminService.getBootstrapComponent(TaskExecutor.class);
 	}
+
+	public boolean isSetTaskExecutor(){
+		if(taskExecutor == null)
+			return false;
+		return true;
+	}
+	
+	public void executeTask(Runnable task){
+		taskExecutor.execute(task);
+	}
+
 
 	public State getState() {
 		return adminService.getState();

@@ -103,18 +103,14 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 
 	protected void loadResourceLocations() {
 		try {
-			log.debug("------------------------------------------------------------------------------");
-			
 			for (String path : resourceLocations) {				
 				FileObject fo = VFSUtils.resolveFile(path);
-				log("exists" + fo.exists());
-				log.debug("------------------------------------------------------------------------------");
 				if( fo.exists() ){
 					if (!configuration.isResourceLoaded(fo.getName().getURI())) {						
 						log.debug( fo.getName().getScheme() );						
 						buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
 						configuration.addLoadedResource(fo.getName().getURI());					
-					}					
+					}
 				}
 			}
 		} catch (Exception e) { }
@@ -176,10 +172,9 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 	}
 
 	public String fileCreated(File file) {
-		try {
+		try {			
 			buildSqlFromInputStream(new FileInputStream(file), configuration);
-			DeployedInfo di = new DeployedInfo(file.toURI(),
-					System.currentTimeMillis());
+			DeployedInfo di = new DeployedInfo(file.toURI(), System.currentTimeMillis());
 			deployments.put(di.uri, di);
 		} catch (FileNotFoundException e) {
 		}
@@ -222,12 +217,9 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 	public boolean validateFile(File file) {
 
 		boolean readable = file.canRead();
-		boolean flag1 = StringUtils.isEmpty(getSuffix()) ? true : file
-				.getName().endsWith(getSuffix());
-		boolean flag2 = StringUtils.isEmpty(getPrefix()) ? true : file
-				.getName().startsWith(getPrefix());
+		boolean flag1 = StringUtils.isEmpty(getSuffix()) ? true : file.getName().endsWith(getSuffix());
+		boolean flag2 = StringUtils.isEmpty(getPrefix()) ? true : file.getName().startsWith(getPrefix());
 		boolean valid = readable && flag1 && flag2;
-
 		if (!valid) {
 			// if (log.isDebugEnabled())
 			// log.info(MessageFormatter.format("011023",

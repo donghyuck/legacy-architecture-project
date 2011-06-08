@@ -262,8 +262,7 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	 * @param types
 	 * @return
 	 */
-	public <T> List<T> queryForList(String statement, Object[] params,
-			int[] types, Class<T> elementType) {
+	public <T> List<T> queryForList(String statement, Object[] params, int[] types, Class<T> elementType) {
 		BoundSql sql = getBoundSql(statement, params);
 		if (maxResults > 0) {
 			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, elementType, params, types);

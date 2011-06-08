@@ -1,5 +1,6 @@
 package architecture.ee.spring.lifecycle.internal;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -11,25 +12,26 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs.FileObject;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.vfs.VFSUtils;
 import architecture.ee.component.DirectoryScanner;
+import architecture.ee.spring.jdbc.SqlQueryFactoryBuilder;
 
 public class DirectoryScannerImpl /** extends SpringLifecycleService **/ implements InitializingBean, DisposableBean, DirectoryScanner {
 
 	private URLDirectoryScanner scanner;
 	private List<String> resourceLocations;
-	private ResourceLoader resourceLoader;
+	private boolean fastDeploy = false;
+	
+	//private ResourceLoader resourceLoader;
 	
 	private Log log = LogFactory.getLog(getClass());
 	
 	public DirectoryScannerImpl() {		
 		
-		this.resourceLoader = new DefaultResourceLoader();
+		//this.resourceLoader = new DefaultResourceLoader();
 		this.resourceLocations = Collections.emptyList();
 		
 		try {
@@ -51,19 +53,22 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 		scanner.create();
 		return scanner;
 	}
-	
-	
-	public ResourceLoader getResourceLoader() {
+		
+/*	public ResourceLoader getResourceLoader() {
 		return resourceLoader;
+	}*/
+
+	public void setFastDeploy(boolean fastDeploy) {
+		this.fastDeploy = fastDeploy;
 	}
 
 	public List<String> getResourceLocations() {
 		return resourceLocations;
 	}
 
-	public void setResourceLoader(ResourceLoader loader) {
+/*	public void setResourceLoader(ResourceLoader loader) {
 		resourceLoader = loader;
-	}
+	}*/
 
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
@@ -133,11 +138,40 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 			for (String path : resourceLocations) {		
 				FileObject fo = VFSUtils.resolveFile(path);
 				if(fo.exists()){
+		
 					URL url = fo.getURL();
-					url.openConnection();
+					url.openConnection();					
+					if(fastDeploy){
+						if(log.isDebugEnabled()){
+							log.debug("Fast deploy : " + url );							
+							SqlQueryFactoryBuilder builder = null;							 
+							for(DirectoryListener listener : scanner.getDirectoryListeners()){
+								if(listener instanceof SqlQueryFactoryBuilder ){									
+									builder = (SqlQueryFactoryBuilder)listener;			
+								}
+							}							
+							File file = new File(url.getFile());
+							fastDeploy(file, builder);							
+						}
+					}
 					scanner.addScanURL(url);
 				}
 			}
 		} catch (Exception e) { }
 	}		
+	
+	public void fastDeploy(File file, SqlQueryFactoryBuilder builder){
+
+		if(file.isFile()){
+			if(builder.validateFile(file)){
+	        	builder.fileCreated(file);
+	        }
+		}else{
+			for( File c : file.listFiles() ){
+			    fastDeploy(c, builder);				
+			}		
+		}	
+	}
+	
+	
 }

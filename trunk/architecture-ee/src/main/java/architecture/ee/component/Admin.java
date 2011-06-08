@@ -10,6 +10,8 @@ import architecture.common.lifecycle.State;
 
 public interface Admin extends ApplicationPropertiesSupport {
 
+	public void executeTask(Runnable task);
+	
 	public abstract State getState();
 	
 	public abstract ConfigRoot getConfigRoot();

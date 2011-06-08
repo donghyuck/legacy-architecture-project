@@ -53,4 +53,9 @@ public class SqlQueryDaoSupport extends ExtendedJdbcDaoSupport {
 		return query;
 	}
 	
+	public SqlQuery getSqlQuery(String statement){	
+		SqlQuery query = getSqlQuery().setStatement(statement);
+		return query;
+	}
+	
 }

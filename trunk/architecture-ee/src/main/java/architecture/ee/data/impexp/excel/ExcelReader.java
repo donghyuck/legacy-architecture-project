@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PushbackInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.vfs.FileObject;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.Cell;
@@ -15,13 +18,20 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+import architecture.common.vfs.VFSUtils;
+
 
 public class ExcelReader {
 	
 	private Workbook workbook;
 	
     private int sheetIndex = 0 ;
-    
+
+	public ExcelReader(String uri) throws IOException {
+		FileObject fo = VFSUtils.resolveFile(uri);		
+		this.workbook = read(fo.getContent().getInputStream());
+	}
+	
 	public ExcelReader(File file) throws IOException {
 		this.workbook = read(new FileInputStream(file));
 	}
@@ -131,7 +141,7 @@ public class ExcelReader {
 		return list;
 	}
 
-	public List<String> getDataFromRow (int rownum){
+	public List<String> getDataFromRow(int rownum){
 		Row row = getRow(rownum);
 		int cells = row.getPhysicalNumberOfCells();		
 		List<String> list = new ArrayList<String>(cells);
@@ -141,5 +151,36 @@ public class ExcelReader {
 		}
 		return list;
 	}
+
+	public Map<String, String> getDataAsMapFromRow(int rownum){		
+		Map<String, String> map = new HashMap<String, String>();
+		Row row = getRow(rownum);
+		List<String> keys = getHeaderFromFirstRow();
+		int cells = row.getPhysicalNumberOfCells();		
+		for( int c = 0; c < cells; c++ ){
+			Cell cell = row.getCell(c);
+		    String key = keys.get(c);
+		    String value = cell.toString();
+			map.put(key, value); 
+		}
+		return map;
+	}
 	
+	public List<Map<String, String>> getDataAsList(){
+		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		List<String> keys = getHeaderFromFirstRow();
+		for( int i = 1 ; i < getPhysicalNumberOfRows() ; i ++){
+			Map<String, String> map = new HashMap<String, String>();
+			Row row = getRow(i);
+			int cells = row.getPhysicalNumberOfCells();		
+			for( int c = 0; c < cells; c++ ){
+				Cell cell = row.getCell(c);
+			    String key = keys.get(c);
+			    String value = cell.toString();
+				map.put(key, value); 
+			}
+			list.add(map);
+		}
+		return list;
+	}
 }

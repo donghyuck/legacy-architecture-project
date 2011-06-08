@@ -38,8 +38,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 
 	private Log log = LogFactory.getLog(XmlSqlBuilder.class);
 
-	public XmlSqlBuilder(InputStream is, Configuration configuration,
-			String resource) {
+	public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
 		this.parser = new XPathParser(new InputStreamReader(is), false,
@@ -54,8 +53,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 			String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(reader, false,
-				configuration.getVariables(), null);
+		this.parser = new XPathParser(reader, false, configuration.getVariables(), null);
 	}
 
 	public XmlSqlBuilder(Reader reader, Configuration configuration) {
