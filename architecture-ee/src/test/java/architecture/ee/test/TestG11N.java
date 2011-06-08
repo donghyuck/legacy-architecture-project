@@ -15,7 +15,7 @@ import architecture.common.lifecycle.State;
 import architecture.common.vfs.VFSUtils;
 import architecture.ee.component.AdminService;
 import architecture.ee.component.GlobalizationService;
-import architecture.ee.component.QueryService;
+import architecture.ee.component.SqlQueryClient;
 import architecture.ee.data.impexp.excel.ExcelReader;
 import architecture.ee.g11n.Country;
 import architecture.ee.jdbc.query.SqlQuery;
@@ -45,7 +45,7 @@ public class TestG11N {
 		log.debug( Locale.KOREA );
 	}
 	
-	//@Test
+	@Test
 	public void testGetAllCountry() {
 		Locale lo = Locale.KOREA ;
 		GlobalizationService g11n = ApplicationHelperFactory.getApplicationHelper().getComponent(GlobalizationService.class);
@@ -57,7 +57,7 @@ public class TestG11N {
 		}
 	}
 
-	//@Test
+    @Test
 	public void testSaveUpdateLocale() {
 		Locale locale = Locale.KOREA ;
 		Locale locale2 = Locale.US ;
@@ -68,7 +68,7 @@ public class TestG11N {
 		log.debug( g11n.getLocale(locale3, true ) );
 	}
 	
-	@Test
+	//@Test
 	public void testImportFromExcel(){
 		try {
 			
@@ -83,7 +83,7 @@ public class TestG11N {
 			log.debug("getDataFromRow:" + reader.getDataFromRow(1));
 			log.debug("getDataFromRow:" + reader.getDataFromRow(reader.getLastRowNum()));
 			
-			QueryService service = ApplicationHelperFactory.getApplicationHelper().getComponent(QueryService.class);
+			SqlQueryClient service = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);
 			
 			SqlQuery query = service.getSqlQuery();
 			Integer count = query.setStatement("FRAMEWORK_V2.COUNT_ALL_COUNTRY").uniqueResult(Integer.class);
