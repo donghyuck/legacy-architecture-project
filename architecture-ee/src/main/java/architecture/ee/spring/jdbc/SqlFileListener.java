@@ -40,11 +40,17 @@ public class SqlFileListener implements FileListener {
 		this.configuration = configuration;
 	}
 
+	public void buildSqlFromInputStream(InputStream inputStream, String uri) {
+		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, uri);
+		builder.build();
+	}
+	
 	protected void buildSqlFromInputStream(InputStream inputStream, Configuration configuration, String uri) {
 		XmlSqlBuilder builder = new XmlSqlBuilder(inputStream, configuration, uri);
 		builder.build();
 	}
 
+	
 	public void fileChanged(FileChangeEvent event) throws Exception {
 		FileObject fo = event.getFile();
 		String uri = fo.getName().getURI();

@@ -227,34 +227,35 @@ public class TaskEngine {
         this.mockMode = mockMode;
     }
 
-    public void init()
+    public void initialize()
     {
         synchronized(lock)
         {
-            started = true;
-            lock.notifyAll();
+        	this.started = true;
+        	this.lock.notifyAll();
         }
     }
 
     public TaskEngine(AdminService adminService)
     {
     	this.adminService = adminService;
-        taskQueue = null;
-        workers = null;
-        taskTimer = null;
-        newWorkerTimestamp = System.currentTimeMillis();
-        busyTimestamp = System.currentTimeMillis();
-        mockMode = false;
-        started = false;
-        taskTimer = new Timer(true);
-        taskQueue = new PriorityQueue();
-        threadGroup = new ThreadGroup("Task Engine Workers");
-        workers = new TaskEngineWorker[5];
+    	this.taskQueue = null;
+    	this.workers = null;
+    	this.taskTimer = null;
+    	this.newWorkerTimestamp = System.currentTimeMillis();
+    	this.busyTimestamp = System.currentTimeMillis();
+    	this. mockMode = false;
+    	this. started = false;
+    	this.taskTimer = new Timer(true);
+    	this.taskQueue = new PriorityQueue();
+    	this.threadGroup = new ThreadGroup("Task Engine Workers");
+    	this.workers = new TaskEngineWorker[5];
+        
         for(int i = 0; i < workers.length; i++)
         {
-            workers[i] = new TaskEngineWorker((new StringBuilder()).append("Task Engine Worker ").append(i).toString());
-            workers[i].setDaemon(true);
-            workers[i].start();
+        	this.workers[i] = new TaskEngineWorker((new StringBuilder()).append("Task Engine Worker ").append(i).toString());
+        	this.workers[i].setDaemon(true);
+        	this.workers[i].start();
         }
 
     }

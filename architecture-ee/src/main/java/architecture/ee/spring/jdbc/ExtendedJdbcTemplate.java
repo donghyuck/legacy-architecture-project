@@ -38,6 +38,9 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterBatchUpdateUtils;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -57,6 +60,7 @@ import architecture.ee.jdbc.util.JdbcHelperFactory;
  */
 public class ExtendedJdbcTemplate extends JdbcTemplate {
 
+	
 	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator {
 		private String sqlToUse;
 		private Object params[];
@@ -355,4 +359,21 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
 	}
 
+	
+	// Methods from SimpleJdbcTemplate :
+	public int[] batchUpdate(String sql, Map<String, ?>[] batchValues) {
+		SqlParameterSource[] batchArgs = new SqlParameterSource[batchValues.length];
+		int i = 0;
+		for (Map<String, ?> values : batchValues) {
+			batchArgs[i] = new MapSqlParameterSource(values);
+			i++;
+		}
+		return batchUpdate(sql, batchArgs);
+	}
+	
+	public int[] batchUpdate(String sql, SqlParameterSource[] batchArgs) {
+		ParsedSql parsedSql = this.getParsedSql(sql);
+		return NamedParameterBatchUpdateUtils.executeBatchUpdateWithNamedParameters(parsedSql, batchArgs, this);
+	}
+	
 }
