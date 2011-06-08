@@ -15,8 +15,6 @@
 	]]>
 	</description>
 	
-	<context:property-placeholder location="classpath:*application-properties.properties"/>
-	
 	<!-- ================================================ -->	
 	<!--  Task & Jobs                                     -->
 	<!-- ================================================ -->	
@@ -85,6 +83,7 @@
 	<!--  Database                                        -->
 	<!-- ================================================ -->	
 	<bean id="sqlConfiguration" class="architecture.ee.jdbc.query.factory.ConfigurationFactory" factory-method="getConfiguration" />	
+	
 	<bean id="sqlQueryFactoryBuilder" class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilder" init-method="initialize">
 	    <constructor-arg index="0" ref="sqlConfiguration"/>
 		<property name="resourceLocations">

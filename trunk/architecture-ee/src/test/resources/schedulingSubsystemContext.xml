@@ -14,8 +14,7 @@
 	]]></description>
 
     <bean id="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" 
-        p:schedulerName="QuartzScheduler_1"
-        >
+        p:schedulerName="QuartzScheduler_1">
     </bean>
 
 		

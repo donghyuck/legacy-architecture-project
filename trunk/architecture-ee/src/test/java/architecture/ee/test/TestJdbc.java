@@ -1,8 +1,10 @@
 package architecture.ee.test;
 
+import java.io.IOException;
 import java.sql.Types;
 import java.util.List;
 import java.util.Locale;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,8 +14,10 @@ import org.springframework.mock.web.MockServletContext;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.State;
 import architecture.ee.component.AdminService;
+import architecture.ee.component.SqlQueryClient;
 import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
+import architecture.ee.jdbc.schema.Table;
 
 public class TestJdbc {
 
@@ -22,6 +26,8 @@ public class TestJdbc {
 	
 	@Test
 	public void testBoot() {		
+		
+		
 		MockServletContext servletContext = new MockServletContext();
 		servletContext.addInitParameter(
 			"contextConfigLocation", 
@@ -44,22 +50,55 @@ public class TestJdbc {
 	}
 
 	@Test
-	public void testGetSqlQueryFacory() throws Exception {
-		
-		Thread.sleep(1000);
-		
-		log.debug("===testGetSqlQueryFacory====");
-		
-		
-		SqlQueryFactory factory = (SqlQueryFactory) getSqlQueryFactory();
-		
+	public void testQueryForList() throws Exception {		
 		SqlQuery query = getSqlQueryFactory().createSqlQuery();
 		List<String> list = query.reset().queryForList("COMMON.SELECT_TABLE_NAMES", String.class);
-		System.out.println(list.size());
-		
-		
+		System.out.println("Table Count:" + list.size());
 	}
 
+	@Test
+	public void testQueryForUniqueResult() throws Exception {
+		SqlQuery query = getSqlQueryFactory().createSqlQuery().setStatement("COMMON.COUNT_TABLE_NAMES" );				
+		Integer count = query.uniqueResult(Integer.class);
+		log.debug("Table Count:" + count);		
+	}
+	
+	
+	@Test
+	public void testQueryForDynamic() throws Exception {
+		SqlQuery query = getSqlQueryFactory().createSqlQuery().setStatement("COMMON.SELECT_TABLE_NAMES" ).setReturnType(String.class);
+		
+		for(String name : (List<String>)query.list()){
+			query.setStatement("COMMON.SELECT_ALL_FROM_TABLE").setMaxResults(10).setAdditionalParameter("TABLE_NAME", name);
+			List rows = query.list();			
+			log.debug("TABLE :" + name);
+			int i = 1 ;
+			for( Object obj : rows){
+				log.debug("<"+ (i++) +">" + obj);
+			}
+		}
+	}
+	
+	
+	@Test
+	public void testSqlQueryClientForExport(){	
+		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
+		client.exportToExcel(null, null, "I18N_COUNTRY", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/I18N_COUNTRY.xls");
+		client.exportToExcel(null, null, "I18N_REGION", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/I18N_REGION.xls");
+	}
+	
+	@Test
+	public void testSqlQueryClientForImport(){	
+		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
+		
+		Table table = client.getDatabase(null, null, "I18N_REGION").getTable("I18N_REGION");
+		Integer max = client.getExtendedJdbcTemplate().queryForInt("select count (*) from " + table.getName() );
+		if( max == 0 )
+			client.importFromExcel(null, null, "I18N_REGION", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/REGION.xls");
+		
+	}
+	
+	
 	//@Test
 	public void testSelectAllFromEntApp() throws Exception {
 		//SELECT_ALL_FROM_ENT_APP
@@ -109,20 +148,6 @@ public class TestJdbc {
 		log.debug("count:" + count);		
 		long result = 0;		
 	
-	}
-
-	//@Test
-	public void testQueryScrollableForList() throws Exception {
-				
-		
-		//COUNT_ENT_APP_PROPERTY
-		SqlQuery query = getSqlQueryFactory().createSqlQuery("COMMON", "COUNT_ENT_APP_PROPERTY" );
-		
-				
-		Integer count = query.setParameters(new Object[]{1}, new int []{Types.NUMERIC}).uniqueResult(Integer.class);
-		log.debug("count:" + count);		
-		long result = 0;
-
 	}
 	
 	/*

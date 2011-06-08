@@ -156,10 +156,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	public void onEvent(StateChangeEvent event) {		
 		Object source = event.getSource();
 		if( source instanceof AdminService ){
-			this.state = event.getNewState();
-			
-			
-			
+			this.state = event.getNewState();			
 			if(event.getNewState() == State.STARTED)
 			{			
 				//this.applicationContext = adminService.getApplicationContext();
