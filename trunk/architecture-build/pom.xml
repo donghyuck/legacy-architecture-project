@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>architecture-build</groupId>
 	<artifactId>architecture-build</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>CLOUDING SERVICE ARCHITECTURE BUILD</name>
-	<description>자바 아키텍처 전체 빌드 파일</description>
+	<description>아키텍처 전체 빌드 파일</description>
 	<url>http://code.google.com/p/power-j/</url>
 	<modules>
 		<module>../architecture-common</module>
