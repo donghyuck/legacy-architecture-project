@@ -154,13 +154,22 @@ public class ExcelWriter {
 			int type = table.getColumn(columnName).getType();
 			if( type == java.sql.Types.DECIMAL ){
 				cell.setCellType(Cell.CELL_TYPE_NUMERIC);
-				cell.setCellValue(((BigDecimal)value).doubleValue());				
+				if( value != null)
+					cell.setCellValue(((BigDecimal)value).doubleValue());
+				else 
+					cell.setCellValue(0);
 			}else if (type == java.sql.Types.VARCHAR ){
 				cell.setCellType(Cell.CELL_TYPE_STRING);
-				cell.setCellValue(value.toString());
+				if( value != null)
+					cell.setCellValue(value.toString());
+				else 
+					cell.setCellValue("");
 			}else{
 				cell.setCellType(Cell.CELL_TYPE_STRING);
-				cell.setCellValue(value.toString());
+				if( value != null)
+					cell.setCellValue(value.toString());
+				else 
+					cell.setCellValue("");
 			}
 			column ++ ;
 		}			

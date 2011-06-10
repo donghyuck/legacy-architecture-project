@@ -1,10 +1,8 @@
 package architecture.ee.test;
 
-import java.io.IOException;
 import java.sql.Types;
 import java.util.List;
 import java.util.Locale;
-import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -34,7 +32,7 @@ public class TestJdbc {
 			"default-application-context.xml,databaseSubsystemContext.xml,daoSubsystemContext.xml"
 		);
 				
-		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
+		servletContext.addInitParameter("RUNTIME_APPLICATION_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
 		
 		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
@@ -83,18 +81,42 @@ public class TestJdbc {
 	@Test
 	public void testSqlQueryClientForExport(){	
 		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
-		client.exportToExcel(null, null, "I18N_COUNTRY", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/I18N_COUNTRY.xls");
-		client.exportToExcel(null, null, "I18N_REGION", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/I18N_REGION.xls");
+		client.exportToExcel(null, null, "I18N_COUNTRY", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_I18N_COUNTRY.xls");
+		client.exportToExcel(null, null, "I18N_REGION", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_I18N_REGION.xls");
+		client.exportToExcel(null, null, "V2_ZIPCODE", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_ZIPCODE.xls");
+	}
+	
+		
+	@Test
+	public void testSqlQueryClientForImport1(){	
+		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
+		
+		Table table = client.getDatabase(null, null, "V2_I18N_REGION").getTable("V2_I18N_REGION");
+		Integer max = client.getExtendedJdbcTemplate().queryForInt("select count (*) from " + table.getName() );
+		if( max == 0 )
+			client.importFromExcel(null, null, "V2_I18N_REGION", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_I18N_REGION.xls");
+		
 	}
 	
 	@Test
-	public void testSqlQueryClientForImport(){	
+	public void testSqlQueryClientForImport2(){	
 		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
 		
-		Table table = client.getDatabase(null, null, "I18N_REGION").getTable("I18N_REGION");
+		Table table = client.getDatabase(null, null, "V2_I18N_COUNTRY").getTable("V2_I18N_COUNTRY");
 		Integer max = client.getExtendedJdbcTemplate().queryForInt("select count (*) from " + table.getName() );
 		if( max == 0 )
-			client.importFromExcel(null, null, "I18N_REGION", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/REGION.xls");
+			client.importFromExcel(null, null, "V2_I18N_COUNTRY", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_I18N_COUNTRY.xls");
+		
+	}
+
+	@Test
+	public void testSqlQueryClientForImport3(){	
+		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
+		
+		Table table = client.getDatabase(null, null, "V2_ZIPCODE").getTable("V2_ZIPCODE");
+		Integer max = client.getExtendedJdbcTemplate().queryForInt("select count (*) from " + table.getName() );
+		if( max == 0 )
+			client.importFromExcel(null, null, "V2_ZIPCODE", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_ZIPCODE.xls");
 		
 	}
 	

@@ -6,22 +6,7 @@ import architecture.ee.g11n.I18nText;
 
 public interface I18nTextModel extends BaseModel<I18nText> {
 
-	/**
-	 * Gets the primary key of this account.
-	 * 
-	 * @return the primary key of this account
-	 */
-	public long getPrimaryKey();
 
-	/**
-	 * Sets the primary key of this account
-	 * 
-	 * @param pk
-	 *            the primary key of this account
-	 */
-	public void setPrimaryKey(long pk);
-	
-	
 	public long getTextId();
 	
 	public void setTextId(long textId);
@@ -58,15 +43,9 @@ public interface I18nTextModel extends BaseModel<I18nText> {
 	
 	public void setModifiedDate(Date modifiedDate);
 	
-	//public abstract String getResourceBundleKey();
-		
-	public Object clone();
-
-	public int compareTo(I18nText i18nText);
-
 	public int hashCode();
 
 	public String toString();
 
-	public String toXmlString();
+
 }

@@ -20,12 +20,8 @@ import java.util.Locale;
 import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
 
-import architecture.common.event.api.EventListener;
-import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ApplicationHelperFactory;
-import architecture.common.lifecycle.ApplicationStateChangeEvent;
 import architecture.common.lifecycle.State;
-import architecture.common.lifecycle.StateChangeEvent;
 import architecture.ee.component.AdminService;
 
 public class TestScheduler {
@@ -43,7 +39,7 @@ public class TestScheduler {
 			"default-application-context.xml, databaseSubsystemContext.xml, daoSubsystemContext.xml, schedulingSubsystemContext.xml"
 		);
 		
-		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
+		servletContext.addInitParameter("RUNTIME_APPLICATION_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
 		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		if(admin.getState() == State.INITIALIZED){

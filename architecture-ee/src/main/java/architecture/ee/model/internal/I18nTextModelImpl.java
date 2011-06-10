@@ -62,11 +62,6 @@ public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nTe
 		this.modifiedDate = modifiedDate;
 	}
 	
-
-	public Serializable getPrimaryKeyObj() {
-		return new Long(textId);
-	}
-
 	public int compareTo(I18nText o) {
 		long pk = o.getPrimaryKey();
 

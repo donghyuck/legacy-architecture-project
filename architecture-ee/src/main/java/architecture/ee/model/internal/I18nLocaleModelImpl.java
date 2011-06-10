@@ -69,10 +69,6 @@ public class I18nLocaleModelImpl extends BaseModelImpl<I18nLocale> implements I1
 		this.modifiedDate = modifiedDate;
 	}
 
-	public Serializable getPrimaryKeyObj() {
-		return new Long(localeId);
-	}
-
 	public int compareTo(architecture.ee.g11n.I18nLocale o) {
 		long pk = o.getPrimaryKey();
 

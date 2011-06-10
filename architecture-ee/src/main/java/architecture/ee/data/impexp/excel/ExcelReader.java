@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs.FileObject;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
@@ -23,6 +25,7 @@ import architecture.common.vfs.VFSUtils;
 
 public class ExcelReader {
 	
+	private Log log = LogFactory.getLog(getClass());
 	private Workbook workbook;
 	
     private int sheetIndex = 0 ;
@@ -175,8 +178,14 @@ public class ExcelReader {
 			int cells = row.getPhysicalNumberOfCells();		
 			for( int c = 0; c < cells; c++ ){
 				Cell cell = row.getCell(c);
-			    String key = keys.get(c);
-			    String value = cell.toString();
+			    String key = keys.get(c);	   
+			    String value = null; 			    
+			    try {
+					value = cell.toString();
+				} catch (NullPointerException e) {
+					value = "";
+				}	
+				log.debug(key + "=" + value );
 				map.put(key, value); 
 			}
 			list.add(map);

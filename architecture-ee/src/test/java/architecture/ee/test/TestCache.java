@@ -23,10 +23,10 @@ public class TestCache {
 		MockServletContext servletContext = new MockServletContext();
 		servletContext.addInitParameter(
 			"contextConfigLocation", 
-			"default-application-context.xml,databaseSubsystemContext.xml"
+			"default-application-context.xml,databaseSubsystemContext.xml,daoSubsystemContext.xml"
 		);
 			
-		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
+		servletContext.addInitParameter("RUNTIME_APPLICATION_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
 		
 		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);

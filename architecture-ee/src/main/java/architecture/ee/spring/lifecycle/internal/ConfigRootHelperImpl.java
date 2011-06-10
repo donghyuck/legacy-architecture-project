@@ -1,7 +1,6 @@
 package architecture.ee.spring.lifecycle.internal;
 
 import java.io.File;
-import java.util.concurrent.atomic.AtomicReference;
 
 import javax.servlet.ServletContext;
 
@@ -18,12 +17,15 @@ import architecture.common.vfs.VFSUtils;
 
 public class ConfigRootHelperImpl implements ConfigRootHelper {
 
+	//private static final AtomicReference<ConfigRoot> instance = new AtomicReference<ConfigRoot>();
 	
-    public static final String SERVER_ROOT_KEY = "runtime.server.root";
+    public static final String APPLICATION_HOME_KEY = "runtime.application.home";
 
-    public static final String SERVER_ROOT_ENV_KEY = "RUNTIME_SERVER_HOME";
+    public static final String APPLICATION_CONFIG_ROOT_KEY = "runtime.application.config.root";
     
-    private static final AtomicReference<ConfigRoot> instance = new AtomicReference<ConfigRoot>();
+    public static final String APPLICATION_HOME_ENV_KEY = "RUNTIME_APPLICATION_HOME";
+   
+    public static final String APPLICATION_CONFIG_ROOT_ENV_KEY = "RUNTIME_APPLICATION_CONFIG_ROOT";
     
 	private Log log = LogFactory.getLog(getClass());
 	
@@ -36,7 +38,7 @@ public class ConfigRootHelperImpl implements ConfigRootHelper {
     public ConfigRoot getConfigRoot(){    	
 		try {			
 			FileObject obj = VFSUtils.resolveFile(getRootURI());
-			FileObject child = obj.resolveFile("config");            
+			FileObject child = obj.resolveFile("config");      
 			if(!child.exists()){
                 child.createFolder();	
             }
@@ -77,7 +79,7 @@ public class ConfigRootHelperImpl implements ConfigRootHelper {
     }
         
     public void setServletContext(ServletContext servletContext){
-    	String uri = servletContext.getInitParameter(SERVER_ROOT_ENV_KEY);    	
+    	String uri = servletContext.getInitParameter(APPLICATION_HOME_ENV_KEY);    	
     	if(!StringUtils.isEmpty(uri)){    		
     		FileObject obj;
 			try {
@@ -90,17 +92,17 @@ public class ConfigRootHelperImpl implements ConfigRootHelper {
     
     public String getEnvironmentRootPath()
     {
-        String envRootPath = System.getProperty(SERVER_ROOT_ENV_KEY);
+        String envRootPath = System.getProperty(APPLICATION_HOME_ENV_KEY);
         
         if(envRootPath == null || "".equals(envRootPath))
             try
             {
-            	envRootPath = jndiTemplate.lookup("java:comp/env/" + SERVER_ROOT_ENV_KEY.toLowerCase(), String.class);                
+            	envRootPath = jndiTemplate.lookup("java:comp/env/" + APPLICATION_HOME_ENV_KEY.toLowerCase(), String.class);                
             }
             catch(Exception e) { }
         if(envRootPath == null || "".equals(envRootPath))
         {
-            envRootPath = System.getenv(SERVER_ROOT_ENV_KEY);
+            envRootPath = System.getenv(APPLICATION_HOME_ENV_KEY);
             if(envRootPath != null && !"".equals(envRootPath))
                 log.info((new StringBuilder()).append("Jive root set from system property to '").append(envRootPath).append("'.").toString());
         }

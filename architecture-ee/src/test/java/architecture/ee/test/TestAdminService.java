@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.springframework.mock.web.MockServletContext;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;
-import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.State;
 import architecture.ee.component.Admin;
 import architecture.ee.component.AdminService;
+import architecture.ee.util.ServiceHelper;
 
 public class TestAdminService {
 	
@@ -26,67 +26,39 @@ public class TestAdminService {
 			"default-application-context.xml, databaseSubsystemContext.xml, daoSubsystemContext.xml"
 		);
 		
-		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
+		servletContext.addInitParameter("RUNTIME_APPLICATION_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default");
 		
-		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
+		AdminService admin = ServiceHelper.getAdminService();
 		if(admin.getState() == State.INITIALIZED){
 			admin.setServletContext(servletContext);
 			admin.start();
 		}	
 	}
-	
-	@Test
-	public void testGetApplicationHelper(){		
-		
-		ApplicationHelperFactory.getApplicationHelper();
-	}
 
 	@Test
-	public void testGetApplicationBeforeStart(){		
+	public void testGetApplicationState(){		
 		
-		Server app = ApplicationHelperFactory.getApplicationHelper().getServer();		
-		log(app.getState());
+		AdminService admin = ServiceHelper.getAdminService();
+		log("getState:" + admin.getState());
+		log("isReady:" + admin.isReady());
+		
 	}
 	
-	@Test
-	public void testApplicationState(){		
-		
-		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
-		
-		log(admin.getState());
-		
-		admin.start();
-		
-		log(admin.getState());
-	}	
 	
 	@Test
-	public void testGetApplicationAfterStart(){		
+	public void testGetApplicationHome(){		
 		
-		Server app = ApplicationHelperFactory.getApplicationHelper().getServer();
-		
-		log(app.getState());
-		
-		if(app.getState() == State.STARTED || app.getState() == State.RUNNING ){
-			//app.stop();
-			//app.destroy();
-		}
-	}	
-	
-	@Test
-	public void testGetServerHome(){				
-		Server server = ApplicationHelperFactory.getApplicationHelper().getServer();	
-		log( server.isReady()  ) ;		
-		log( server.getRootURI() ) ;
-		log( server.getInstallRootPath() ) ;
-		log( server.getConfigRoot().getConfigRootPath()) ;
-		server.getApplicationProperties();
+		Admin admin = ServiceHelper.getAdmin();
+		log( "isReady:" + admin.isReady()  ) ;		
+		log( "getInstallRootPath:" + admin.getInstallRootPath() ) ;
+		log( "getConfigRootPath:" + admin.getConfigRoot().getConfigRootPath()) ;
+		log( "getApplicationProperties:" + admin.getApplicationProperties( ) );
 	}	
 	
 	@Test
 	public void testApplicationProperty(){			
 		
-		Admin admin = ApplicationHelperFactory.getApplicationHelper().getComponent(Admin.class);
+		Admin admin = ServiceHelper.getAdmin();
 		log(admin.getLocalProperty("setup.complete"));
 	
 	}
@@ -94,7 +66,7 @@ public class TestAdminService {
 	@Test
 	public void testLocaleAndEncodingProperty(){			
 		//LocaleUtils.
-		Admin admin = ApplicationHelperFactory.getApplicationHelper().getComponent(Admin.class);
+		Admin admin = ServiceHelper.getAdmin();
 		
 		try {
 			admin.setCharacterEncoding("UTF-8");
@@ -110,7 +82,7 @@ public class TestAdminService {
 	
 	@Test
 	public void testStopAdminService(){
-		AdminService adminservice = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
+		AdminService adminservice = ServiceHelper.getAdminService();
 		adminservice.stop();
 		if(adminservice.isReady()){
 			Admin admin = ApplicationHelperFactory.getApplicationHelper().getComponent(Admin.class);
@@ -120,13 +92,13 @@ public class TestAdminService {
 	@Test
 	public void testStartAdminService(){
 		
-		AdminService adminservice = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
+		AdminService adminservice = ServiceHelper.getAdminService();
 		log(adminservice.getState());
 		
 		adminservice.start();
 		
 		if(adminservice.isReady()){
-			Admin admin = ApplicationHelperFactory.getApplicationHelper().getComponent(Admin.class);	
+			Admin admin = ServiceHelper.getAdmin();
 			log( admin.getLocale() );
 			log( admin.getTimeZone() );
 			log( admin.getCharacterEncoding() );

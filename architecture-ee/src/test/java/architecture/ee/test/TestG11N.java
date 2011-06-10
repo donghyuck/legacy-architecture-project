@@ -34,7 +34,7 @@ public class TestG11N {
 			"default-application-context.xml, databaseSubsystemContext.xml, daoSubsystemContext.xml"
 		);
 		
-		servletContext.addInitParameter("RUNTIME_SERVER_HOME", "C:/TOOLS/workspace/architecture-ee/profile/default");
+		servletContext.addInitParameter("RUNTIME_APPLICATION_HOME", "C:/TOOLS/workspace/architecture-ee/profile/default");
 		
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		if(admin.getState() == State.INITIALIZED){
@@ -65,7 +65,7 @@ public class TestG11N {
 		GlobalizationService g11n = ApplicationHelperFactory.getApplicationHelper().getComponent(GlobalizationService.class);
 		log.debug( g11n.getLocale(locale, true ) );
 		log.debug( g11n.getLocale(locale2, true ) );
-		log.debug( g11n.getLocale(locale3, true ) );
+	    log.debug( g11n.getLocale(locale3, true ) );
 	}
 	
 	//@Test
