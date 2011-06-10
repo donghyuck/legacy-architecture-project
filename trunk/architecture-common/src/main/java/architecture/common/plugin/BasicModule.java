@@ -20,7 +20,7 @@
 
 package architecture.common.plugin;
 
-import architecture.common.lifecycle.Server;
+import architecture.common.lifecycle.Application;
 
 /**
  * A default Module implementation that basically avoids subclasses having to implement the whole
@@ -66,7 +66,7 @@ public class BasicModule implements Module {
      *
      * @param server the server hosting this module.
      */
-    public void initialize(Server server) {
+    public void initialize(Application application) {
     }
 
     /**

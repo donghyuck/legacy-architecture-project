@@ -20,7 +20,7 @@
 
 package architecture.common.plugin;
 
-import architecture.common.lifecycle.Server;
+import architecture.common.lifecycle.Application;
 
 /**
  * Logical, server-managed entities must implement this interface. A module
@@ -65,7 +65,7 @@ public interface Module {
      *
      * @param server the server hosting this module.
      */
-    void initialize(Server server);
+    void initialize(Application server);
 
     /**
      * Start the module (must return quickly). Any long running

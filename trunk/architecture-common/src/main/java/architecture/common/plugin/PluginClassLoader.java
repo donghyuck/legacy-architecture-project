@@ -29,7 +29,7 @@ import java.net.URLClassLoader;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.common.lifecycle.Server;
+import architecture.common.lifecycle.Application;
 
 /**
  * ClassLoader for plugins. It searches the plugin directory for classes
@@ -122,7 +122,7 @@ public class PluginClassLoader extends URLClassLoader {
      * @return the best parent classloader to use.
      */
     private static ClassLoader findParentClassLoader() {
-        ClassLoader parent = Server.class.getClassLoader();
+        ClassLoader parent = Application.class.getClassLoader();
         if (parent == null) {
             parent = PluginClassLoader.class.getClassLoader();
         }
