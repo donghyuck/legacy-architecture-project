@@ -62,7 +62,6 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import architecture.common.lifecycle.ApplicationHelperFactory;
-import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.Version;
 
 
@@ -349,7 +348,7 @@ public class PluginManagerImpl implements PluginManager {
                 Element minServerVersion = (Element)pluginXML.selectSingleNode("/plugin/minServerVersion");
                 if (minServerVersion != null) {
                     String requiredVersion = minServerVersion.getTextTrim();
-                    Version version = ApplicationHelperFactory.getApplicationHelper().getComponent(Server.class).getVersion();
+                    Version version = ApplicationHelperFactory.getApplicationHelper().getApplication().getVersion();
                     String hasVersion = version.getMajor() + "." + version.getMinor() + "." + version.getMicro();
                     if (hasVersion.compareTo(requiredVersion) < 0) {
                         String msg = "Ignoring plugin " + pluginDir.getName() + ": requires " +

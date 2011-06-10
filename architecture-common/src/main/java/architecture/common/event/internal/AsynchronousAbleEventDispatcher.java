@@ -44,6 +44,13 @@ public final class AsynchronousAbleEventDispatcher implements EventDispatcher
     {
         this(executorFactory, new AnnotationAsynchronousEventResolver());
     }
+    
+    public AsynchronousAbleEventDispatcher(Executor asynchronousExecutor)
+    {
+        this.asynchronousEventResolver = checkNotNull( new AnnotationAsynchronousEventResolver());
+        this.asynchronousExecutor = checkNotNull(asynchronousExecutor);
+    }
+     
 
     AsynchronousAbleEventDispatcher(EventExecutorFactory executorFactory, AsynchronousEventResolver asynchronousEventResolver)
     {

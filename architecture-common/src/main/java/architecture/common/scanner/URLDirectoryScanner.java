@@ -88,13 +88,12 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 			throw new IllegalStateException(); //MessageFormatter.format("003518"));		
 				
 		HashSet<String> oldList = new HashSet<String>(files.keySet());
-		
 		List<FileAction> actions = new LinkedList<FileAction>();
 				
 		synchronized (urlList) {
-			for (Iterator<URL> iter = urlList.iterator(); iter.hasNext();) {
-				
-				URL url = (URL) iter.next();
+			for(URL url : urlList){
+			//for (Iterator<URL> iter = urlList.iterator(); iter.hasNext();) {				
+			//	URL url = (URL) iter.next();
 				File parent = new File(url.getFile());
 				File[] children = parent.listFiles();				
 				if(!parent.exists() || children == null) {
@@ -102,10 +101,9 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 		            return;
 		        }				
 				for( File child : children){
-
 					if(!child.canRead()) {
 		                continue;
-		            }	
+		            }
 					
 		            FileInfo now = child.isDirectory() ? getDirectoryInfo(child) : getFileInfo(child);
 		            FileInfo then = (FileInfo) files.get(now.getPath());
@@ -143,8 +141,10 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 		}
 		
 		//Look for any files we used to know about but didn't find in this pass
-        for (Iterator<String> it = oldList.iterator(); it.hasNext();) {
-            String name = (String) it.next();
+        //for (Iterator<String> it = oldList.iterator(); it.hasNext();) {
+        //    String name = (String) it.next();
+            
+        for(String name : oldList ){  
             FileInfo info = (FileInfo) files.get(name);
             //if(log.isDebugEnabled())
             //	log.debug(MessageFormatter.format("003523", name ));

@@ -55,7 +55,7 @@ public class VFSTest {
 		monitor.setRecursive(true);
 		
 		
-		String path = "file:///C:/TOOLS/workspace/opensource/PowerJ/installableApps/default/WebContent/WEB-INF/config/sql/" ;
+		String path = "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/sql" ;
 	
 		FileSystemManager vmgr = VFS.getManager();
 		FileObject fo = vmgr.resolveFile(path);

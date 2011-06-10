@@ -18,12 +18,18 @@ package architecture.common.lifecycle;
 
 public interface Application extends Component {
 	
-	public Version getVersion();
+    public abstract ConfigRoot getConfigRoot();
+    
+    public abstract String getInstallRootPath();
+    
+    public abstract String getRootURI();
+    
+	public abstract Version getVersion();
 	
-	public State getState();
+	public abstract State getState();
 	
-	public boolean isReady();
+	public abstract boolean isReady();
 			
-	public ApplicationProperties getApplicationProperties();
+	public abstract ApplicationProperties getApplicationProperties();
 	
 }
