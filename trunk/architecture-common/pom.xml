@@ -11,8 +11,7 @@
 	<artifactId>architecture-common</artifactId>
 	<!-- <version>1.0.0-SNAPSHOT</version>-->
 	<name>POWER ARCHITECTURE COMMON</name>
-	<description>자바기술 기반의  클라우드 아키텍처 공통 모듈</description>
-	<packaging>jar</packaging>
+	<description>자바기술 기반의  아키텍처 공통 모듈</description>
 	<contributors>
 		<contributor>
 			<name>Donghyuch Son</name>
@@ -23,6 +22,8 @@
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>jar</packaging>	
 	<build>
 		<plugins>
 		<!-- 
@@ -201,5 +202,4 @@
 		</plugins>
 	</reporting>
 	-->
-	<version>1.0.0-SNAPSHOT</version>
 </project>
