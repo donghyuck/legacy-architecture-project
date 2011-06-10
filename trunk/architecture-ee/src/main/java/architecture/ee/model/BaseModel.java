@@ -9,7 +9,7 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 *
 	 * @return the primary key of this model instance
 	 */
-	public Serializable getPrimaryKeyObj();
+	public long getPrimaryKey();
 	
 	/**
 	 * Creates a shallow clone of this model instance.

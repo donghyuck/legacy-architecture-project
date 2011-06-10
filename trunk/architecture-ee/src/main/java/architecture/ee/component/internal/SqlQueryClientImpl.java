@@ -2,20 +2,13 @@ package architecture.ee.component.internal;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Types;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.SqlParameterValue;
-import org.springframework.jdbc.core.SqlTypeValue;
-import org.springframework.jdbc.core.StatementCreatorUtils;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.JdbcUtils;
@@ -97,6 +90,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 				}
 			}
 			builder.append(") ");
+			
 			getExtendedJdbcTemplate().batchUpdate(builder.toString(), batchArgs);
 												
 		} catch (IOException e) {

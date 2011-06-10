@@ -30,6 +30,7 @@ import architecture.ee.util.LocaleUtils;
 public class AdminImpl implements Admin, EventSource {
 	
 	private Log log = LogFactory.getLog(getClass());	
+	
 	private AdminServiceImpl adminService ;	
 	private ApplicationProperties properties = null;	
 	private ApplicationProperties localizedProperties = null;	

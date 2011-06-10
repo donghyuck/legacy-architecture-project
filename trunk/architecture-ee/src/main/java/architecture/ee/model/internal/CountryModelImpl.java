@@ -67,10 +67,6 @@ public class CountryModelImpl extends BaseModelImpl<Country> implements CountryM
 		this.enabled = enabled;
 	}
 		
-	public Serializable getPrimaryKeyObj() {
-		return new Long(countryId);
-	}
-
 	public int compareTo(Country o) {
 		long pk = o.getPrimaryKey();
 

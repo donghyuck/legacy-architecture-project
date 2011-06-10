@@ -22,7 +22,6 @@ import architecture.common.lifecycle.ApplicationPropertyChangeEvent;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigRootHelper;
-import architecture.common.lifecycle.Server;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.StateChangeEvent;
 import architecture.common.lifecycle.Version;
@@ -31,7 +30,7 @@ import architecture.common.lifecycle.internal.XmlApplicationProperties;
 import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.component.AdminService;
 
-public class AdminServiceImpl extends ComponentImpl implements AdminService, Server {
+public class AdminServiceImpl extends ComponentImpl implements AdminService {
 
 	private ContextLoader contextLoader;
 	private ServletContext servletContext;

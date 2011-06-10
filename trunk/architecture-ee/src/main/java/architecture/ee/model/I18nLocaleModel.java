@@ -6,10 +6,7 @@ import architecture.ee.g11n.I18nLocale;
 
 public interface I18nLocaleModel extends BaseModel<I18nLocale> {
 
-	public abstract long getPrimaryKey();
 
-	public abstract void setPrimaryKey(long pk);
-	
     public abstract long getLocaleId();
 
     public abstract void setLocaleId(long id) ;
@@ -40,14 +37,8 @@ public interface I18nLocaleModel extends BaseModel<I18nLocale> {
 
     public abstract java.util.Locale toJavaLocale();
         
-	public Object clone();
-
-	public int compareTo(architecture.ee.g11n.I18nLocale locale);
-
 	public int hashCode();
 
 	public String toString();
-
-	public String toXmlString();
 	
 }
