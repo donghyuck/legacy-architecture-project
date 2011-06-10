@@ -11,7 +11,7 @@
 	<artifactId>architecture-ee</artifactId>
 	<name>POWER ARCHITECTURE EE</name>
 	<packaging>jar</packaging>
-	<description>J2EE 개발을 위한 컴포넌트</description>
+	<description>자바기반의 웹 어플리케이션 개발 프레임워크</description>
 	<version>1.0.0-SNAPSHOT</version>	
 	<contributors>
 		<contributor>
@@ -57,11 +57,6 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>freemarker</groupId>
-			<artifactId>freemarker</artifactId>
-			<version>2.3.9</version>
-		</dependency>
-		<dependency>
 			<groupId>commons-primitives</groupId>
 			<artifactId>commons-primitives</artifactId>
 			<version>1.0</version>
@@ -74,11 +69,6 @@
 			<version>1.2.14</version>
 			<type>jar</type>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>architecture.common</groupId>
-			<artifactId>architecture-common</artifactId>
-			<version>1.0.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
@@ -99,6 +89,35 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
 			<version>3.8-beta2</version>
+		</dependency>
+		<dependency>
+			<groupId>architecture.common</groupId>
+			<artifactId>architecture-common</artifactId>
+			<version>1.0.0-SNAPSHOT</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc5</artifactId>
+			<version>11.1.0</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.freemarker</groupId>
+			<artifactId>freemarker</artifactId>
+			<version>2.3.18</version>
+			<type>jar</type>
+			<scope>compile</scope>
 		</dependency>
 	</dependencies>
 
