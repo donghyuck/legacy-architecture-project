@@ -6,46 +6,46 @@ import architecture.ee.g11n.I18nText;
 
 public interface I18nTextModel extends BaseModel<I18nText> {
 
+	public abstract long getTextId();
+	
+	public abstract void setTextId(long textId);
+	
+	public abstract int getObjectType();
+	
+	public abstract void setObjectType(int objectType);
+	
+	public abstract long getObjectId();
 
-	public long getTextId();
+	public abstract void setObjectId(long objectId);
 	
-	public void setTextId(long textId);
+	public abstract int getObjectAttribute();
 	
+	public abstract void setObjectAttribute(int objectAttribute);
+		
+	public abstract String getTextKey();
 	
-	/**
-	public int getObjectType();
+	public abstract void setTextKey(String textKey);
 	
-	public void setObjectType(int objectType);
+	public abstract String getLocaleCode();
 	
-	public int getObjectAttribute();
+	public abstract void setLocaleCode(String localeCode);
 	
-	public void setObjectAttribute(int objectAttribute);
+	public abstract String getText();
 	
-	**/
+	public abstract void setText(String text);
 	
-	public String getTextKey();
+	public abstract Date getCreationDate();
 	
-	public void setTextKey(String textKey);
+	public abstract void setCreationDate(Date creationDate);
 	
-	public String getLocaleCode();
+	public abstract Date getModifiedDate();
 	
-	public void setLocaleCode(String localeCode);
+	public abstract void setModifiedDate(Date modifiedDate);
 	
-	public String getText();
-	
-	public void setText(String text);
-	
-	public Date getCreationDate();
-	
-	public void setCreationDate(Date creationDate);
-	
-	public Date getModifiedDate();
-	
-	public void setModifiedDate(Date modifiedDate);
-	
-	public int hashCode();
+	public abstract int hashCode();
 
-	public String toString();
+	public abstract String toString();
 
+	public abstract String getResourceBundleKey();
 
 }

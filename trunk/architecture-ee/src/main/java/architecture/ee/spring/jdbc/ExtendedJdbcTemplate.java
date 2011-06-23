@@ -31,6 +31,7 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BatchUpdateUtils;
 import org.springframework.jdbc.core.ConnectionCallback;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -38,9 +39,9 @@ import org.springframework.jdbc.core.PreparedStatementCreatorFactory;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterBatchUpdateUtils;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcOperations;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -250,7 +251,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	 *            container of arguments to bind
 	 * @return the corresponding PreparedStatementCreator
 	 */
-	protected PreparedStatementCreator getPreparedStatementCreator(String sql, SqlParameterSource paramSource) {
+	protected PreparedStatementCreator getNamedPreparedStatementCreator(String sql, SqlParameterSource paramSource) {
 		ParsedSql parsedSql = getParsedSql(sql);
 		String sqlToUse = NamedParameterUtils.substituteNamedParameters(parsedSql, paramSource);
 		Object[] params = NamedParameterUtils.buildValueArray(parsedSql,paramSource, null);
@@ -268,13 +269,20 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		return (java.util.List<T>)query(creator, extractor);
 	}
 
+	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, RowMapper<T> rowMapper, Object[] args, int[] argTypes) {
+		
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, getJdbcHelper());
+		
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor( startIndex, numResults, rowMapper, getJdbcHelper());	
+		
+		return (java.util.List<T>)query(creator, extractor);
+	}
+	
 	public List queryScrollable(String sql, int startIndex, int numResults, Object[] args, int[] argTypes) {
 		
-		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(
-				sql, startIndex, numResults, args, argTypes, getJdbcHelper());
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(sql, startIndex, numResults, args, argTypes, getJdbcHelper());
 		
-		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(
-				startIndex, numResults, getColumnMapRowMapper(), getJdbcHelper());
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(startIndex, numResults, getColumnMapRowMapper(), getJdbcHelper());
 		return (List) query(creator, extractor);
 	}
 
@@ -358,9 +366,30 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		super.setDataSource(dataSource);
 		this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
 	}
-
+	
 	
 	// Methods from SimpleJdbcTemplate :
+	public <T> List<T> query(String sql, Map<String, ?> paramMap, RowMapper<T> rowMapper) throws DataAccessException {
+		return query(sql, new MapSqlParameterSource(paramMap), rowMapper);
+	}
+	
+	public <T> List<T> query(String sql, SqlParameterSource paramSource, RowMapper<T> rowMapper) throws DataAccessException {
+		return query(getNamedPreparedStatementCreator(sql, paramSource), rowMapper);
+	}
+
+	public <T> List<T> queryForList(String sql, Map<String, ?> paramMap, Class<T> elementType) throws DataAccessException {
+		return query(sql, new MapSqlParameterSource(paramMap), new SingleColumnRowMapper<T>(elementType));
+	}
+	
+	
+	public int[] batchUpdate(String sql, List<Object[]> batchArgs) {
+		return batchUpdate(sql, batchArgs, new int[0]);
+	}
+
+	public int[] batchUpdate(String sql, List<Object[]> batchArgs, int[] argTypes) {
+		return BatchUpdateUtils.executeBatchUpdate(sql, batchArgs, argTypes, this);
+	}
+	
 	public int[] batchUpdate(String sql, Map<String, ?>[] batchValues) {
 		SqlParameterSource[] batchArgs = new SqlParameterSource[batchValues.length];
 		int i = 0;

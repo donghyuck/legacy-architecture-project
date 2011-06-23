@@ -13,17 +13,16 @@ public interface I18nTextDao {
 
     public abstract void deleteTexts(List<I18nText> list);
 
-    public abstract I18nText getText(long textID);
+    public abstract I18nText getText(long textId);
 
     public abstract List<I18nText> getTexts();
     
     public abstract List<I18nText> getTexts(Locale locale);
     
+    public abstract List<I18nText> getTexts(int objectType);
 
-/*    public abstract List<I18nText> getTexts(int objectType);
+    public abstract List<I18nText> getTexts(int objectType, long objectId);
 
-    public abstract List<I18nText> getTexts(int objectType, long objectID);
-
-    public abstract List<I18nText> getTexts(int objectType, String locale);*/
+    public abstract List<I18nText> getTexts(int objectType, String locale);
 	
 }

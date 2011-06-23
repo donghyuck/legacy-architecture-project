@@ -16,6 +16,7 @@
 
 package architecture.ee.jdbc.query.mapping;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import architecture.ee.jdbc.query.factory.Configuration;
@@ -35,14 +36,12 @@ public class MappedStatement {
 
 		private MappedStatement mappedStatement = new MappedStatement();
 
-		public Builder(Configuration configuration, String id,
-				SqlSource sqlSource, StatementType statementType) {
+		public Builder(Configuration configuration, String id, SqlSource sqlSource, StatementType statementType) {
 			mappedStatement.configuration = configuration;
 			mappedStatement.ID = id;
 			mappedStatement.sqlSource = sqlSource;
 			mappedStatement.statementType = StatementType.PREPARED;
-			mappedStatement.timeout = configuration
-					.getDefaultStatementTimeout();
+			mappedStatement.timeout = configuration.getDefaultStatementTimeout();
 		}
 
 		public Builder resource(String resource) {
@@ -106,18 +105,31 @@ public class MappedStatement {
 		return statementType;
 	}
 
+	
 	public BoundSql getBoundSql(Object parameterObject) {
 		BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
 		return boundSql;
 	}
 
-	public BoundSql getBoundSql(Map<String, Object> additionalParameters) {
-		BoundSql boundSql = sqlSource.getBoundSql(additionalParameters);
+	public BoundSql getBoundSql(Object parameterObject, Object additionalParameters) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(additionalParameters instanceof Map)
+		    return sqlSource.getBoundSql(parameterObject, (Map)additionalParameters);
+		else
+			params.put("additional_parameter", additionalParameters);
+		
+		return sqlSource.getBoundSql(parameterObject, params);
+	}
+	
+	/*public BoundSql getBoundSqlWithAdditionalParameters(Map<String, Object> additionalParameters) {
+		BoundSql boundSql = sqlSource.getBoundSql(null, additionalParameters);
 		return boundSql;
 	}
+	
 
+	
 	public BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters) {
 		BoundSql boundSql = sqlSource.getBoundSql(parameterObject, additionalParameters);
 		return boundSql;
-	}
+	}*/
 }

@@ -51,25 +51,31 @@ public class DynamicSqlNode implements SqlNode {
 	public boolean apply(DynamicContext context) {
 		Map<String, Object> map = new HashMap<String, Object>();
 
-		Object parameterObject = context.getBindings().get(
-				DynamicContext.PARAMETER_OBJECT_KEY);
-		Object additionalParameterObject = context.getBindings().get(
-				DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);
-
+		Object parameterObject = context.getBindings().get(DynamicContext.PARAMETER_OBJECT_KEY);
+		Object additionalParameterObject = context.getBindings().get(DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);
+		
+		
+		
 		if (additionalParameterObject != null) {
-			map.putAll((Map) additionalParameterObject);
+			if( additionalParameterObject instanceof Map )
+				map.putAll((Map) additionalParameterObject);
+			else
+				map.put("additional_parameter", additionalParameterObject);
 		}
 
 		if (parameterObject != null) {
 			if (parameterObject instanceof Map) {
 				map.putAll((Map) parameterObject);
 			} else if (parameterObject instanceof MapSqlParameterSource) {
-				map.put("params",
-						((MapSqlParameterSource) parameterObject).getValues());
+				map.put("parameters",((MapSqlParameterSource) parameterObject).getValues());
 			} else if (parameterObject instanceof Object[]) {
-				map.put("params", parameterObject);
+				map.put("parameters", parameterObject);
 			}
+		}else {
+			
 		}
+		
+		
 		context.appendSql(processTemplate(map));
 
 		return true;
@@ -93,8 +99,7 @@ public class DynamicSqlNode implements SqlNode {
 			populateStatics(map);
 			freemarker.template.SimpleHash root = new freemarker.template.SimpleHash();
 			root.putAll(map);
-			freemarker.template.Template template = new freemarker.template.Template(
-					"dynamic", reader);
+			freemarker.template.Template template = new freemarker.template.Template( "dynamic", reader);
 			template.process(root, writer);
 
 		} catch (IOException e) {

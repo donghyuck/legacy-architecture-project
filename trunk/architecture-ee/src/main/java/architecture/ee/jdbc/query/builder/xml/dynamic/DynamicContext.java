@@ -38,12 +38,10 @@ public class DynamicContext {
 		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
 	}
 
-	public DynamicContext(Object parameterObject,
-			Map<String, Object> additionalParameters) {
+	public DynamicContext(Object parameterObject, Map<String, Object> additionalParameters) {
 		this.bindings = new HashMap<String, Object>();
 		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
-		this.bindings
-				.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
+		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
 	}
 
 	public Map<String, Object> getBindings() {

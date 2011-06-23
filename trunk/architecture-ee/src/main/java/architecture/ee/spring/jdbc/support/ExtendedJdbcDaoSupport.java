@@ -1,5 +1,8 @@
 package architecture.ee.spring.jdbc.support;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -59,13 +62,33 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	} 
 	
 	protected BoundSql getBoundSql(String statement ){
-		return getBoundSql(statement, null);
+		if(isSetConfiguration()){
+			MappedStatement stmt = configuration.getMappedStatement(statement);
+			return stmt.getBoundSql(null);
+		}
+		return null;
 	}
-		
-	protected BoundSql getBoundSql(String statement, Object[] params ){		
+
+	protected BoundSql getBoundSql(String statement, Object ... params ){		
 		if(isSetConfiguration()){
 			MappedStatement stmt = configuration.getMappedStatement(statement);
 			return stmt.getBoundSql(params);
+		}
+		return null;
+	}	
+
+	protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object parameters, Object additionalParameter ){
+		if(isSetConfiguration()){
+			MappedStatement stmt = configuration.getMappedStatement(statement);
+			return stmt.getBoundSql(parameters, additionalParameter);
+		}
+		return null;
+	}
+	
+	protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object additionalParameter ){
+		if(isSetConfiguration()){
+			MappedStatement stmt = configuration.getMappedStatement(statement);
+			return stmt.getBoundSql(null, additionalParameter);
 		}
 		return null;
 	}

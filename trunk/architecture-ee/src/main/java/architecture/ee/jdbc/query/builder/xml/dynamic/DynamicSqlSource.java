@@ -38,10 +38,8 @@ public class DynamicSqlSource implements SqlSource {
 		return new BoundSql(context.getSql());
 	}
 
-	public BoundSql getBoundSql(Object parameterObject,
-			Map<String, Object> additionalParameters) {
-		DynamicContext context = new DynamicContext(parameterObject,
-				additionalParameters);
+	public BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters) {
+		DynamicContext context = new DynamicContext(parameterObject, additionalParameters);
 		rootSqlNode.apply(context);
 		return new BoundSql(context.getSql());
 	}

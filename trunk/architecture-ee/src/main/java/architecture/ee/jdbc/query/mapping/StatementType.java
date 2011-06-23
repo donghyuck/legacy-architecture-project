@@ -16,5 +16,10 @@
 package architecture.ee.jdbc.query.mapping;
 
 public enum StatementType {
-	STATEMENT, PREPARED, FUNCTION, CALLABLE
+	
+	STATEMENT, 
+	PREPARED, 
+	FUNCTION, 
+	CALLABLE
+	
 }

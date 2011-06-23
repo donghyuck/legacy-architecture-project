@@ -1,4 +1,4 @@
-package architecture.ee.g11n.dao;
+package architecture.ee.g11n.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.Country;
+import architecture.ee.g11n.dao.CountryDao;
 import architecture.ee.g11n.internal.CountryImpl;
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
