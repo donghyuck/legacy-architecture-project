@@ -23,7 +23,6 @@ public interface SqlSource {
 
 	BoundSql getBoundSql(Object parameterObject);
 
-	BoundSql getBoundSql(Object parameterObject,
-			Map<String, Object> additionalParameters);
+	BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters);
 
 }

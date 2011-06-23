@@ -9,20 +9,20 @@ public interface BaseModel<T> extends Cloneable, Comparable<T>, Serializable {
 	 *
 	 * @return the primary key of this model instance
 	 */
-	public long getPrimaryKey();
+	public abstract long getPrimaryKey();
 	
 	/**
 	 * Creates a shallow clone of this model instance.
 	 *
 	 * @return the shallow clone of this model instance
 	 */
-	public Object clone();
+	public abstract Object clone();
 	
 	/**
 	 * Gets the XML representation of this model instance.
 	 *
 	 * @return the XML representation of this model instance
 	 */
-	public String toXmlString();
+	public abstract String toXmlString();
 	
 }

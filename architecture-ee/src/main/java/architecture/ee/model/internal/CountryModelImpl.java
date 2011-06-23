@@ -1,7 +1,5 @@
 package architecture.ee.model.internal;
 
-import java.io.Serializable;
-
 import architecture.ee.g11n.Country;
 import architecture.ee.g11n.internal.CountryImpl;
 import architecture.ee.model.CountryModel;

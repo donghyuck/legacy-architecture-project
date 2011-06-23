@@ -1,21 +1,52 @@
 package architecture.ee.model.internal;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import architecture.ee.g11n.I18nText;
 import architecture.ee.g11n.internal.I18nTextImpl;
 import architecture.ee.model.I18nTextModel;
+import architecture.ee.util.I18nTextUtils;
 
 public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nTextModel {
 
-    private String localeCode;
+	private static final long serialVersionUID = -7549630051392257245L;
+	private String localeCode;
+    private int objectAttribute = -1;
+    private int objectType = -1;    
+    private long objectId;
     private long textId = -1L;    
     private String textKey;
     private String textValue; 
     private Date creationDate;
-    private Date modifiedDate;
+    private Date modifiedDate;    
+
+    public I18nTextModelImpl() {
+    	this.textId = -1L;
+	}
     
+	public long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(long objectId) {
+		this.objectId = objectId;
+	}
+
+	public int getObjectAttribute() {
+		return objectAttribute;
+	}
+
+	public void setObjectAttribute(int objectAttribute) {
+		this.objectAttribute = objectAttribute;
+	}
+
+	public int getObjectType() {
+		return objectType;
+	}
+
+	public void setObjectType(int objectType) {
+		this.objectType = objectType;
+	}
 
 	public long getPrimaryKey(){
 		return getTextId();
@@ -79,6 +110,9 @@ public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nTe
 	public Object clone() {
 		I18nTextImpl impl = new I18nTextImpl();
 		impl.setTextId(textId);
+		impl.setObjectId(objectId);
+		impl.setObjectType(objectType);
+		impl.setObjectAttribute(objectAttribute);
 		impl.setLocaleCode(getLocaleCode());
 		impl.setTextKey(getTextKey());
 		impl.setText(getText());
@@ -89,5 +123,9 @@ public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nTe
 	
 	public String toXmlString() {
 		return null;
+	}
+
+	public String getResourceBundleKey() {
+		return I18nTextUtils.generateResourceBundleKey(objectType, objectId, objectAttribute);
 	}
 }

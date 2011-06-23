@@ -1,6 +1,5 @@
 package architecture.ee.model.internal;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import architecture.common.util.StringUtils;

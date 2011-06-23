@@ -1,10 +1,6 @@
 package architecture.ee.spring.lifecycle.internal;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import javax.naming.InitialContext;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -41,6 +37,7 @@ public class ApplicationHomeImpl implements ApplicationHome {
 
     private String startupLogPath = getLogsPath();
     
+    /*
     private void createStartupXmlFile(File startupFile) throws IOException    {
         FileWriter jhWriter = new FileWriter(startupFile);
         jhWriter.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -50,7 +47,7 @@ public class ApplicationHomeImpl implements ApplicationHome {
         jhWriter.flush();
         jhWriter.close();
     }
-    
+    */
 	
 	public String getLogsPath() {
         if(effectiveLogsPath != null)
@@ -118,15 +115,15 @@ public class ApplicationHomeImpl implements ApplicationHome {
             if(!root.exists())
             {
                 if(initialization)
-                    log.warn("Jive root directory does not exist for log configuration. Reverting to JIVE_HOME/logs.");
-                StringBuilder buffer = new StringBuilder(getHomePath());
+                    log.warn("Application root directory does not exist for log configuration. Reverting to APPLICATION_HOME/logs.");
+                StringBuffer buffer = new StringBuffer(getHomePath());
                 buffer.append(File.separator).append("logs");
                 envPath = buffer.toString();
             } else
             {
                 if(initialization)
                     log.warn((new StringBuilder()).append("No explicit configuration of Jive log path. Using system default of: '").append(envPath).append("'.").toString());
-                StringBuilder buffer = new StringBuilder(getInstallRootPath());
+                StringBuffer buffer = new StringBuffer(getInstallRootPath());
                 buffer.append(File.separator).append("var").append(File.separator).append("logs");
                 envPath = buffer.toString();
             }
@@ -154,7 +151,7 @@ public class ApplicationHomeImpl implements ApplicationHome {
         {
             path = System.getProperty(SERVER_ROOT_KEY);
             if(path != null && !"".equals(path))
-                log.info((new StringBuilder()).append("Community home set from system property to '").append(path).append("'.").toString());
+                log.info((new StringBuffer()).append("Community home set from system property to '").append(path).append("'.").toString());
         }
         
         if(path == null || "".equals(path))
@@ -162,17 +159,16 @@ public class ApplicationHomeImpl implements ApplicationHome {
             {
                 path = jndiTemplate.lookup("java:comp/env/" + SERVER_HOME_KEY, String.class);
                 if( !StringUtils.isEmpty (path) && initialization)
-                    log.warn((new StringBuilder()).append("Community home set from legacy JNDI jiveHome setting to '").append(path).append("'. Please upate configuration to use ").append("jive.instance.home").toString());
+                    log.warn((new StringBuffer()).append("Community home set from legacy JNDI jiveHome setting to '").append(path).append("'. Please upate configuration to use ").append("jive.instance.home").toString());
             }
             catch(Exception e) { }
         if(path == null || "".equals(path))
         {
             path = System.getProperty(SERVER_HOME_KEY);
             if(path != null && !"".equals(path) && initialization)
-                log.warn((new StringBuilder()).append("Communuity home set from legacy jiveHome system property to '").append(path).append("'. Please update configuration to use ").append("jive.instance.home").toString());
+                log.warn((new StringBuffer()).append("Communuity home set from legacy jiveHome system property to '").append(path).append("'. Please update configuration to use ").append("jive.instance.home").toString());
         }
-        
-        
+                
         if(path == null || "".equals(path))
         {
             File rootFilePath;
@@ -182,11 +178,11 @@ public class ApplicationHomeImpl implements ApplicationHome {
                 rootFilePath = new File(getEnvironmentRootPath());
             
             String name = System.getProperty("runtime.server.name", "default");
-            StringBuilder buffer = new StringBuilder(rootFilePath.getAbsolutePath());
-            buffer.append(File.separator).append("nodes").append(File.separator).append(name).append(File.separator).append("home");
-            path = buffer.toString();
+            StringBuffer builder = new StringBuffer(rootFilePath.getAbsolutePath());
+            builder.append(File.separator).append("nodes").append(File.separator).append(name).append(File.separator).append("home");
+            path = builder.toString();
             if(initialization)
-                log.warn((new StringBuilder()).append("Attempting to use default community home value in absence of explicit configuration: '").append(path).append("'.").toString());
+                log.warn((new StringBuffer()).append("Attempting to use default community home value in absence of explicit configuration: '").append(path).append("'.").toString());
         }
         return path;
     }
@@ -198,25 +194,24 @@ public class ApplicationHomeImpl implements ApplicationHome {
         if(envRootPath == null || "".equals(envRootPath))
             try
             {
-                InitialContext context = new InitialContext();
-                envRootPath = (String)context.lookup("java:comp/env/" + SERVER_ROOT_ENV_KEY.toLowerCase());
+                envRootPath = jndiTemplate.lookup("java:comp/env/" + SERVER_ROOT_ENV_KEY.toLowerCase(),String.class);
             }
             catch(Exception e) { }
         if(envRootPath == null || "".equals(envRootPath))
         {
             envRootPath = System.getenv(SERVER_ROOT_ENV_KEY);
             if(envRootPath != null && !"".equals(envRootPath))
-                log.info((new StringBuilder()).append("Jive root set from system property to '").append(envRootPath).append("'.").toString());
+                log.info((new StringBuffer()).append("Jive root set from system property to '").append(envRootPath).append("'.").toString());
         }
         if(envRootPath == null || "".equals(envRootPath))
         {
-            StringBuilder buffer = new StringBuilder();
+        	StringBuffer builder = new StringBuffer();
             if(System.getProperty("os.name", "Linux").indexOf("Windows") == -1)
-                buffer.append(File.separator).append("usr").append(File.separator).append("local").append(File.separator).append("fuse");
+                builder.append(File.separator).append("usr").append(File.separator).append("local").append(File.separator).append("fuse");
             else
-                buffer.append("c:").append(File.separator).append("fuse");
-            envRootPath = buffer.toString();
-            log.warn((new StringBuilder()).append("No explicit configuration of Jive root path. Using system default of: '").append(envRootPath).append("'.").toString());
+                builder.append("c:").append(File.separator).append("fuse");
+            envRootPath = builder.toString();
+            log.warn((new StringBuffer()).append("No explicit configuration of Jive root path. Using system default of: '").append(envRootPath).append("'.").toString());
         }
         return envRootPath;
     }

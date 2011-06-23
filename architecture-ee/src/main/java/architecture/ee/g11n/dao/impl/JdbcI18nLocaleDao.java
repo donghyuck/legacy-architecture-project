@@ -1,4 +1,4 @@
-package architecture.ee.g11n.dao;
+package architecture.ee.g11n.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,6 +11,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.I18nLocale;
+import architecture.ee.g11n.dao.I18nLocaleDao;
 import architecture.ee.g11n.internal.I18nLocaleImpl;
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;

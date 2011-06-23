@@ -10,26 +10,26 @@ import architecture.common.lifecycle.State;
 
 public interface Admin extends ApplicationPropertiesSupport {
 
-	public void executeTask(Runnable task);
+	public abstract void executeTask(Runnable task);
 	
 	public abstract State getState();
 	
 	public abstract ConfigRoot getConfigRoot();
 	
-	public String getInstallRootPath();	
+	public abstract String getInstallRootPath();	
 
-    public Locale getLocale();
+    public abstract Locale getLocale();
 
-    public void setLocale(Locale newLocale);
+    public abstract void setLocale(Locale newLocale);
 
-    public String getCharacterEncoding();
+    public abstract String getCharacterEncoding();
 
-    public void setCharacterEncoding(String characterEncoding) throws UnsupportedEncodingException;
+    public abstract void setCharacterEncoding(String characterEncoding) throws UnsupportedEncodingException;
 
-    public TimeZone getTimeZone();
+    public abstract TimeZone getTimeZone();
 
-    public void setTimeZone(TimeZone newTimeZone);
+    public abstract void setTimeZone(TimeZone newTimeZone);
 	
-    public boolean isReady();
+    public abstract boolean isReady();
 	
 }

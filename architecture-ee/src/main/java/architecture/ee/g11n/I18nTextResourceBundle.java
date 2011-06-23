@@ -12,13 +12,13 @@ public class I18nTextResourceBundle extends ListResourceBundle {
 
     private Object contents[][];
     private Locale locale;
-    public final Set keySet;
+    public final Set<String> keySet;
     
     public I18nTextResourceBundle(Locale locale, List<String[]> keyValues)
     {
         this.locale = locale;
         this.contents = new Object[keyValues.size()][2];
-        Set tempKeySet = new HashSet();
+        Set<String> tempKeySet = new HashSet<String>();
         int index = 0;        
         for( String[] keyValue : keyValues ){
             this.contents[index][0] = keyValue[0];
