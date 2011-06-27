@@ -16,7 +16,7 @@ public interface Admin extends ApplicationPropertiesSupport {
 	
 	public abstract ConfigRoot getConfigRoot();
 	
-	public abstract String getInstallRootPath();	
+	public abstract String getEffectiveRootPath();	
 
     public abstract Locale getLocale();
 

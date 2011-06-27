@@ -17,19 +17,19 @@ public interface AdminService extends Application {
 	 * 
 	 * @return
 	 */
-	public ContextLoader getContextLoader();
+	public abstract ContextLoader getContextLoader();
 	
 	/**
 	 * 
 	 * @param servletContext
 	 */
-	public void setServletContext(ServletContext servletContext);
+	public abstract void setServletContext(ServletContext servletContext);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public ConfigurableApplicationContext getApplicationContext();
+	public abstract ConfigurableApplicationContext getApplicationContext();
 	
 	/**
 	 * 
@@ -38,32 +38,32 @@ public interface AdminService extends Application {
 	 * @return
 	 * @throws ComponentNotFoundException
 	 */
-	public <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException;
+	public abstract <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException;
 		
 	/**
 	 * 
 	 */
-	public void refresh();
+	public abstract void refresh();
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean isSetContextLoader();
+	public abstract boolean isSetContextLoader();
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean isSetServletContext();	
+	public abstract boolean isSetServletContext();	
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public boolean isSetApplicationContext();
+	public abstract boolean isSetApplicationContext();
 	
-	public abstract String getInstallRootPath();
+	public abstract String getEffectiveRootPath();
 	
 	public abstract ConfigRoot getConfigRoot();
 		

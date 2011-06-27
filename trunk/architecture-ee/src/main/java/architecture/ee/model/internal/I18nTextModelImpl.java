@@ -3,13 +3,12 @@ package architecture.ee.model.internal;
 import java.util.Date;
 
 import architecture.ee.g11n.I18nText;
-import architecture.ee.g11n.internal.I18nTextImpl;
-import architecture.ee.model.I18nTextModel;
 import architecture.ee.util.I18nTextUtils;
 
-public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nTextModel {
+public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nText {
 
 	private static final long serialVersionUID = -7549630051392257245L;
+	
 	private String localeCode;
     private int objectAttribute = -1;
     private int objectType = -1;    
@@ -108,7 +107,7 @@ public class I18nTextModelImpl extends BaseModelImpl<I18nText> implements I18nTe
 	}
 	
 	public Object clone() {
-		I18nTextImpl impl = new I18nTextImpl();
+		I18nTextModelImpl impl = new I18nTextModelImpl();
 		impl.setTextId(textId);
 		impl.setObjectId(objectId);
 		impl.setObjectType(objectType);

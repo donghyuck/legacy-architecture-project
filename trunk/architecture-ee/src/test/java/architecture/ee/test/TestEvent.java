@@ -24,8 +24,13 @@ import architecture.common.lifecycle.ApplicationStateChangeEvent;
 import architecture.common.lifecycle.StateChangeEvent;
 
 public class TestEvent {
-
 	@Test
+	public void test(){
+		
+		
+		
+	}
+	//@Test
 	public void testLoadEventContext() {
 		
 		EventPublisher eventPublisher = ApplicationHelperFactory.getApplicationHelper().getComponent(EventPublisher.class);
@@ -34,7 +39,7 @@ public class TestEvent {
 
 	}
 
-	@EventListener
+	//@EventListener
 	public void onEvent(StateChangeEvent event) {
 		System.out.println(" catch event :: " + event.getClass().getName());
 	}

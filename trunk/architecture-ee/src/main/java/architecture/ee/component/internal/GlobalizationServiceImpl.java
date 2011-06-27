@@ -133,14 +133,12 @@ public class GlobalizationServiceImpl implements GlobalizationService {
 		 
 		 for(I18nLocale locale :  i18nLocaleDao.getAvailableLocales()){   
 			 Locale l = locale.toJavaLocale();
-			 List<I18nText> textList = i18nTextDao.getTexts(l);
-			 
-			 log.debug( "resource bundle for " + l.toString());
-			 
+			 List<I18nText> textList = i18nTextDao.getTexts(-1, l.toString());			 
+			 log.debug( "resource bundle for " + l.toString());			 
 			 List<String[]> keyValues = new ArrayList<String[]>();
 	         for(I18nText text:textList){
-	          	log.debug( text.getTextKey() + "=" +  text.getText() );
-	              keyValues.add(new String[]{text.getTextKey(), text.getText()});
+	          	log.debug( text.getResourceBundleKey() + "=" +  text.getText() );
+	              keyValues.add(new String[]{text.getResourceBundleKey(), text.getText()});
 	          }
 	          newResourceBundles.put(l, new I18nTextResourceBundle(l, keyValues ) );
 		 }

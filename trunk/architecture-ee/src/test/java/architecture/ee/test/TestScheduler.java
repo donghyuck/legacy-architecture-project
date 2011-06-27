@@ -26,11 +26,18 @@ import architecture.ee.component.AdminService;
 
 public class TestScheduler {
 
+	@Test
+	public void test(){
+		
+		
+		
+	}
+	
 	public void log(Object obj){
 		System.out.println("# " + obj);
 	}
 	
-	@Test
+	//@Test
 	public void testGetBootstrapApplicationContext(){		
 		
 		MockServletContext servletContext = new MockServletContext();

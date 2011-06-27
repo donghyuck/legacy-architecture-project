@@ -4,10 +4,8 @@ import java.util.Date;
 
 import architecture.common.util.StringUtils;
 import architecture.ee.g11n.I18nLocale;
-import architecture.ee.g11n.internal.I18nLocaleImpl;
-import architecture.ee.model.I18nLocaleModel;
 
-public class I18nLocaleModelImpl extends BaseModelImpl<I18nLocale> implements I18nLocaleModel {
+public class I18nLocaleModelImpl extends BaseModelImpl<I18nLocale> implements I18nLocale {
 	
 	private long localeId = -1L;
 	private String language;
@@ -91,7 +89,7 @@ public class I18nLocaleModelImpl extends BaseModelImpl<I18nLocale> implements I1
 	}
 	
 	public Object clone() {
-		I18nLocaleImpl impl = new I18nLocaleImpl();
+		I18nLocaleModelImpl impl = new I18nLocaleModelImpl();
 		impl.setLocaleId(getLocaleId());
 		impl.setLanguage(getLanguage());
 		impl.setCountry(getCountry());

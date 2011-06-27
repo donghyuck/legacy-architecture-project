@@ -11,9 +11,7 @@ public class ApplicationHelperFactoryImpl implements Implementation {
 	public ApplicationHelper getApplicationHelper() {	
 		// 이부분은 숨여야할 필요성이 있다.
 		if(helper == null){
-			//AdminService adminService = Bootstrap.getBootstrapApplicationContext().getBean(AdminService.class);
-			helper = new ApplicationHelperImpl(Bootstrap.getBootstrapApplicationContext());
-			//helper.getComponent(AdminService.class).addStateChangeListener(helper);
+			this.helper = new ApplicationHelperImpl(Bootstrap.getBootstrapApplicationContext());
 		}
 		return helper;
 	}

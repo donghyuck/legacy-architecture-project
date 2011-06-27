@@ -117,8 +117,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 	        	File file = getConfigRoot().getFile("plugins");
 	        	pluginManager.pluginDirectory = file;   	
 	        }
-        }
-        
+        }      
         if(isSetServletContext() && isSetContextLoader()){
 			try{
 				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());		
@@ -168,28 +167,24 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		
 		if( setupProperties == null ){	
 			try {
-				File file = getConfigRoot().getFile(startupFileName);		
+				
+				File file = new File(getEffectiveRootPath(), startupFileName);
 				if(!file.exists()){					
 					boolean error = false;
 				    // create default file...
-					log.debug("no file now create !!");
-					
+					log.debug("No startup file now create !!!");					
 					Writer writer = null;
 					try {			
-					writer = new OutputStreamWriter(new FileOutputStream(file), ApplicationConstants.DEFAULT_CHAR_ENCODING);
-					XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());				
-					
-					StringBuilder sb = new StringBuilder();
-					
-					org.dom4j.Document document = org.dom4j.DocumentHelper.createDocument();    
-					org.dom4j.Element root = document.addElement( "startup-config" );
-					// setup start ------------------------------------------------------------
-					org.dom4j.Element setupNode = root.addElement("setup");
-					setupNode.addElement("complete").setText("false");
-					// setup end --------------------------------------------------------------
-					
-					xmlWriter.write( document );
-					
+						writer = new OutputStreamWriter(new FileOutputStream(file), ApplicationConstants.DEFAULT_CHAR_ENCODING);
+						XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());
+						StringBuilder sb = new StringBuilder();					
+						org.dom4j.Document document = org.dom4j.DocumentHelper.createDocument();    
+						org.dom4j.Element root = document.addElement( "startup-config" );
+						// setup start ------------------------------------------------------------
+						org.dom4j.Element setupNode = root.addElement("setup");
+						setupNode.addElement("complete").setText("false");
+						// setup end --------------------------------------------------------------					
+						xmlWriter.write( document );					
 					}catch(Exception e)
 			        {
 			            log.error((new StringBuilder()).append("Unable to write to file ").append(file.getName()).append(".tmp").append(": ").append(e.getMessage()).toString());
@@ -222,7 +217,6 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 	public ConfigurableApplicationContext getApplicationContext() {
 		return this.applicationContext;
 	}
-
 	
 	public void autowireComponent(Object obj) {
 		if(isSetApplicationContext()){
@@ -235,9 +229,11 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		if (!isSetApplicationContext()) {
 			throw new IllegalStateException("");
 		}
+		
 		if (requiredType == null) {
 			throw new ComponentNotFoundException("");
 		}	
+		
 		try {
 			return getApplicationContext().getBean(requiredType);
 		} catch (NoSuchBeanDefinitionException e){
@@ -269,7 +265,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 	}
 	
 	@EventListener
-	public void onEvent(ApplicationPropertyChangeEvent event) {		
+	public void onEvent(ApplicationPropertyChangeEvent event) {
 		log.debug("[AdminService] " + event );
 	}	
 
@@ -277,8 +273,8 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		return helper.getConfigRoot();
 	}
 
-	public String getInstallRootPath() {
-		return helper.getInstallRootPath();
+	public String getEffectiveRootPath() {
+		return helper.getEffectiveRootPath();
 	}
 
 	public String getRootURI() {
@@ -291,5 +287,5 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		}
 		return false;
 	}
-	
+
 }

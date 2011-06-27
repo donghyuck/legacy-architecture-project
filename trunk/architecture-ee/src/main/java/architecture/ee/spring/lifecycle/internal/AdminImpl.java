@@ -69,8 +69,8 @@ public class AdminImpl implements Admin, EventSource {
 		return adminService.getConfigRoot();
 	}
 	
-	public String getInstallRootPath() {
-		return adminService.getInstallRootPath();
+	public String getEffectiveRootPath() {
+		return adminService.getEffectiveRootPath();
 	}
 	
 	public void setDataSource(DataSource dataSource) {

@@ -24,18 +24,16 @@ public class Bootstrap {
 	}
 
 	public static final void boot(ServletContext servletContext){
-		//default-server-context
-		// 향후에 프로퍼티에 읽어 올수 있도록 수정.		
-		getAdminService().getContextLoader().initWebApplicationContext(servletContext);
-		//ContextLoader contextLoader = ApplicationHelperFactory.getApplicationHelper().getComponent(ContextLoader.class);
-		//contextLoader.initWebApplicationContext(servletContext);
 		
+		getAdminService().setServletContext(servletContext);
+		getAdminService().start();
+		
+		//getAdminService().getContextLoader().initWebApplicationContext(servletContext);
+	
 	}
 	
 	public static final void shutdown(ServletContext servletContext){
 		getAdminService().stop();
 		getAdminService().destroy();
-		//AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);		
-		//admin.destroy();
 	}
 }

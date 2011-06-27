@@ -24,8 +24,13 @@ import architecture.ee.util.LocaleUtils;
 public class TestG11N {
 
 	private Log log = LogFactory.getLog(getClass());
-	
 	@Test
+	public void test(){
+		
+		
+		
+	}
+	//@Test
 	public void testGetBootstrapApplicationContext(){		
 		
 		MockServletContext servletContext = new MockServletContext();
@@ -45,7 +50,7 @@ public class TestG11N {
 		log.debug( Locale.KOREA );
 	}
 	
-	@Test
+	//@Test
 	public void testGetAllCountry() {
 		Locale lo = Locale.KOREA ;
 		GlobalizationService g11n = ApplicationHelperFactory.getApplicationHelper().getComponent(GlobalizationService.class);
@@ -57,7 +62,7 @@ public class TestG11N {
 		}
 	}
 
-    @Test
+    //@Test
 	public void testSaveUpdateLocale() {
 		Locale locale = Locale.KOREA ;
 		Locale locale2 = Locale.US ;
