@@ -109,15 +109,11 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 					if (!configuration.isResourceLoaded(fo.getName().getURI())) {						
 						log.debug( fo.getName().getScheme() );						
 						buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
-						configuration.addLoadedResource(fo.getName().getURI());					
+						configuration.addLoadedResource(fo.getName().getURI());
 					}
 				}
 			}
 		} catch (Exception e) { }
-	}
-
-	private void log(String string) {
-		
 	}
 
 	public void setDataSource(DataSource dataSource) {
@@ -158,12 +154,19 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 		protected long deployedTime;
 		protected String name;
 		protected URI uri;
-
+		protected long timestamp = -1L;
+		
 		public DeployedInfo(URI uri, String name, long deployedTime) {
 			this.deployedTime = deployedTime;
 			this.name = name;
 			this.uri = uri;
 		}
+		public DeployedInfo(URI uri, String name, long deployedTime, long timestamp) {
+			this.deployedTime = deployedTime;
+			this.name = name;
+			this.uri = uri;
+			this.timestamp = timestamp;
+		}		
 
 		public DeployedInfo(URI uri, long deployedTime) {
 			this.deployedTime = deployedTime;
@@ -171,23 +174,36 @@ public class SqlQueryFactoryBuilder implements DirectoryListener {
 		}
 	}
 
-	public String fileCreated(File file) {
-		try {			
-			buildSqlFromInputStream(new FileInputStream(file), configuration);
-			DeployedInfo di = new DeployedInfo(file.toURI(), System.currentTimeMillis());
-			deployments.put(di.uri, di);
-		} catch (FileNotFoundException e) {
-		}
+	public String fileCreated(File file) {		
+		try {	
+			URI uri = file.toURI();
+			if( deployments.containsKey(uri) ){
+				DeployedInfo di = deployments.get(uri);
+				if( di.timestamp == file.lastModified()){
+					return "";
+				}
+			}else{
+				buildSqlFromInputStream(new FileInputStream(file), configuration);
+				DeployedInfo di = new DeployedInfo(file.toURI(), System.currentTimeMillis());
+				di.timestamp = file.lastModified();
+				deployments.put(di.uri, di);
+			}
+		} catch (FileNotFoundException e) {}		
 		return "success";
 	}
 
 	public boolean fileDeleted(File file) {
+		
 		if (configuration.isResourceLoaded(file.toURI().toString())) {
 			configuration.removeUriNamespace(file.toURI().toString(), true);
 			configuration.removeLoadedResource(file.toURI().toString());
 		}
-		DeployedInfo di = deployments.remove(file.toURI());
+		
+		//DeployedInfo di = 
+		deployments.remove(file.toURI());
+		
 		return true;
+		
 	}
 
 	public void fileChanged(File file) {

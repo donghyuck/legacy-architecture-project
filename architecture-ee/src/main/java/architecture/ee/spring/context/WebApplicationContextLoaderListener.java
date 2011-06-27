@@ -18,13 +18,9 @@ public class WebApplicationContextLoaderListener  extends ContextLoaderListener 
 	public void contextInitialized(ServletContextEvent event) {
 		
 		ServletContext useToServletContext = event.getServletContext();
-		/*if(log.isInfoEnabled())
-			log.info(MessageFormatter.format("016002"));*/
-		
 		try {
             Bootstrap.boot(useToServletContext);
 		} catch (Throwable e) {
-			e.printStackTrace();
 			log.error(e);
 		}
 		
@@ -32,15 +28,10 @@ public class WebApplicationContextLoaderListener  extends ContextLoaderListener 
 
 	public void contextDestroyed(ServletContextEvent event)
 	{
-		
-		/*if(log.isInfoEnabled())
-			log.info(MessageFormatter.format("016013"));*/
-		
 		try{
 			ServletContext servletContext = event.getServletContext();
 			Bootstrap.shutdown(servletContext);
 		}catch(Exception ex){
-			//log.warn(MessageFormatter.format("016012"), ex);
 		}
 		super.contextDestroyed(event);
 	}
@@ -50,8 +41,4 @@ public class WebApplicationContextLoaderListener  extends ContextLoaderListener 
         return Bootstrap.getBootstrapApplicationContext().getBean(ContextLoader.class);
     }
 
-/*    public ContextLoader getContextLoader()
-    {
-        return loader;
-    }*/
 }

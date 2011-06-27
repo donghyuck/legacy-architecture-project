@@ -3,7 +3,7 @@ package architecture.ee.util;
 import java.util.List;
 
 import architecture.ee.g11n.I18nText;
-import architecture.ee.g11n.internal.I18nTextImpl;
+import architecture.ee.model.internal.I18nTextModelImpl;
 
 public class I18nTextUtils {
     
@@ -46,7 +46,7 @@ public class I18nTextUtils {
     
     private static I18nText createText(int objectAttribute, String localeCode, String text)
     {
-    	I18nText i18nText = new I18nTextImpl();
+    	I18nText i18nText = new I18nTextModelImpl();
     	i18nText.setTextId(-1L);
     	i18nText.setObjectId(-1L);
     	i18nText.setObjectType(-1);

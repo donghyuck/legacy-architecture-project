@@ -12,8 +12,13 @@ public class TestBootstrap {
 	public void log(Object obj){
 		System.out.println("# " + obj);
 	}
-	
 	@Test
+	public void test(){
+		
+		
+		
+	}
+	//@Test
 	public void testBoot() {		
 		MockServletContext servletContext = new MockServletContext();
 		servletContext.addInitParameter(
@@ -36,7 +41,7 @@ public class TestBootstrap {
 		}	
 	}
 
-	@Test
+	//@Test
 	public void testShutdown() {	
 		AdminService admin = ApplicationHelperFactory.getApplicationHelper().getComponent(AdminService.class);
 		if(admin.getState() == State.STARTED){

@@ -10,12 +10,13 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.web.context.support.ServletContextResource;
 
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigRootHelper;
 import architecture.common.vfs.VFSUtils;
 
-public class ConfigRootHelperImpl implements ConfigRootHelper {
+public class ConfigRootHelperImpl implements ConfigRootHelper{
 
 	//private static final AtomicReference<ConfigRoot> instance = new AtomicReference<ConfigRoot>();
 	
@@ -61,7 +62,7 @@ public class ConfigRootHelperImpl implements ConfigRootHelper {
 		return rootURI;
 	}
        
-    public String getInstallRootPath()
+    public String getEffectiveRootPath()
     {	
         if(!StringUtils.isEmpty(effectiveRootPath))
         {
@@ -79,13 +80,27 @@ public class ConfigRootHelperImpl implements ConfigRootHelper {
     }
         
     public void setServletContext(ServletContext servletContext){
-    	String uri = servletContext.getInitParameter(APPLICATION_HOME_ENV_KEY);    	
-    	if(!StringUtils.isEmpty(uri)){    		
+    	
+    	String value = servletContext.getInitParameter(APPLICATION_HOME_ENV_KEY);    
+    	if(!StringUtils.isEmpty(value)){
+    		try {        		
+    			ServletContextResource resource = new ServletContextResource(servletContext, value);          		
+        		File file = resource.getFile();
+        		log.debug( "HOME PATH         :" + file.getAbsolutePath());        		        		
+				rootURI = file.toURI().toString();				
+			} catch (Throwable e) {
+				rootURI = null;
+			}
+    	}
+   	
+    	if(StringUtils.isEmpty(rootURI)){
     		FileObject obj;
 			try {
-				obj = VFSUtils.resolveFile(uri);
+				obj = VFSUtils.resolveFile(value);
+				log.debug( "HOME PATH         :" +  obj.getName().getURI()); 
 				rootURI = obj.getName().getURI();  
 			} catch (FileSystemException e) {
+				e.printStackTrace();
 			}    		
     	}    	
     }    

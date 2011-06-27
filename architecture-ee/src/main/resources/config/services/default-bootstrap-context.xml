@@ -34,6 +34,7 @@
 		<constructor-arg index="0" ref="taskTimer"/>
 	</bean>
 	-->
+	
 	<bean id="taskEngine" class="architecture.ee.util.task.TaskEngine" init-method="initialize">
 		<constructor-arg index="0" ref="adminService"/>
 	</bean> 
@@ -64,10 +65,12 @@
 	<bean id="pluginManager" class="architecture.ee.spring.lifecycle.internal.PluginManagerImpl" 
 	    p:eventPublisher-ref="eventPublisher" 
 	    p:taskEngine-ref="taskEngine" />	
+	    
 	<!-- ================================================ -->	
 	<!--  Cache                                           -->
 	<!-- ================================================ -->	
 	<bean id="ehcache"      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />	
+	
 	<!-- ================================================ -->	
 	<!--  Application                                     -->
 	<!-- ================================================ -->	
@@ -79,6 +82,7 @@
 		p:eventPublisher-ref="eventPublisher" 
 		p:contextLoader-ref="contextLoader" 
 		p:configRootHelper-ref="configRootHelper" />	
+		
 	<!-- ================================================ -->	
 	<!--  Database                                        -->
 	<!-- ================================================ -->	

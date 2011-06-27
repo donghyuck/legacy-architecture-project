@@ -12,8 +12,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.I18nText;
 import architecture.ee.g11n.dao.I18nTextDao;
-import architecture.ee.g11n.internal.I18nTextImpl;
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
+import architecture.ee.model.internal.I18nTextModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
 public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextDao {
@@ -22,7 +22,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 	class I18nTextRowMapper implements RowMapper<I18nText> {
 
 		public I18nText mapRow(ResultSet rs, int rowNum) throws SQLException {
-			I18nTextImpl c = new I18nTextImpl();			
+			I18nTextModelImpl c = new I18nTextModelImpl();			
 			c.setTextId(rs.getLong(1));
 			c.setObjectType(rs.getInt(2));
 			c.setObjectId(rs.getLong(3));

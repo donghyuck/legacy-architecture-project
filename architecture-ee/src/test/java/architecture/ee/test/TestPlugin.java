@@ -9,12 +9,18 @@ import architecture.ee.component.AdminService;
 
 public class TestPlugin {
 
+	@Test
+	public void test(){
+		
+		
+		
+	}
 
 	public void log(Object obj){
 		System.out.println("# " + obj);
 	}
 	
-	@Test
+	//@Test
 	public void testBoot() {		
 		MockServletContext servletContext = new MockServletContext();
 		servletContext.addInitParameter(

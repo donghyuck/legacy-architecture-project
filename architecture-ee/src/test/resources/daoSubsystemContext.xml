@@ -17,10 +17,22 @@
 		<constructor-arg ref="sequencerFactory"/>
 	</bean>
 	
-	<bean id="countryDao" class="architecture.ee.g11n.dao.JdbcCountryDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
+	<bean id="countryDao" class="architecture.ee.g11n.dao.impl.JdbcCountryDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
 	
-	<bean id="i18nTextDao" class="architecture.ee.g11n.dao.JdbcI18nTextDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
+	<bean id="i18nTextDao" class="architecture.ee.g11n.dao.impl.JdbcI18nTextDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
 	
-	<bean id="i18nLocaleDao" class="architecture.ee.g11n.dao.JdbcI18nLocaleDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
-				
+	<bean id="i18nLocaleDao" class="architecture.ee.g11n.dao.impl.JdbcI18nLocaleDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
+
+    <bean id="extendedPropertyDao" class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" parent="jdbcDaoSupport" />
+    
+	<bean id="userDao" class="architecture.ee.user.dao.impl.JdbcUserDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+	
+	<bean id="groupDao" class="architecture.ee.user.dao.impl.JdbcGroupDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+		
+	<bean id="profileFiledDao" class="architecture.ee.user.dao.impl.JdbcProfileFiledDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao"/>
+	
+	<bean id="userProfileDao" class="architecture.ee.user.dao.impl.JdbcUserProfileDao" parent="jdbcDaoSupport"/>
+	
+	<bean id="roleDao" class="architecture.ee.security.dao.impl.JdbcRoleDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao"/>
+					
 </beans>

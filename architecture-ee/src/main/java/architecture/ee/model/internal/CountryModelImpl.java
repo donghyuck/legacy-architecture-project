@@ -1,10 +1,8 @@
 package architecture.ee.model.internal;
 
 import architecture.ee.g11n.Country;
-import architecture.ee.g11n.internal.CountryImpl;
-import architecture.ee.model.CountryModel;
 
-public class CountryModelImpl extends BaseModelImpl<Country> implements CountryModel {
+public class CountryModelImpl extends BaseModelImpl<Country> implements Country {
 
 	private long countryId ;
 	private String name;
@@ -85,7 +83,7 @@ public class CountryModelImpl extends BaseModelImpl<Country> implements CountryM
 	}
 	
 	public Object clone() {
-		CountryImpl impl = new CountryImpl();
+		CountryModelImpl impl = new CountryModelImpl();
 		return impl;
 	}
 

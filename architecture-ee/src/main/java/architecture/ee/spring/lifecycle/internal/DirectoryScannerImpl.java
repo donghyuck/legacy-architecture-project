@@ -25,18 +25,13 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	private List<String> resourceLocations;
 	private boolean fastDeploy = false;
 	
-	//private ResourceLoader resourceLoader;
-	
 	private Log log = LogFactory.getLog(getClass());
 	
-	public DirectoryScannerImpl() {		
-		
-		//this.resourceLoader = new DefaultResourceLoader();
-		this.resourceLocations = Collections.emptyList();
-		
+	public DirectoryScannerImpl() {				
+		this.resourceLocations = Collections.emptyList();		
 		try {
 			this.scanner = createURLDirectoryScanner(true);
-		} catch (Exception e) { }
+		} catch (Exception e){}
 	}
 	
 	public void setDirectoryListenerList(List<DirectoryListener> directoryListeners) {
@@ -54,10 +49,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 		return scanner;
 	}
 		
-/*	public ResourceLoader getResourceLoader() {
-		return resourceLoader;
-	}*/
-
 	public void setFastDeploy(boolean fastDeploy) {
 		this.fastDeploy = fastDeploy;
 	}
@@ -65,10 +56,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	public List<String> getResourceLocations() {
 		return resourceLocations;
 	}
-
-/*	public void setResourceLoader(ResourceLoader loader) {
-		resourceLoader = loader;
-	}*/
 
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
@@ -161,7 +148,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 	}		
 	
 	public void fastDeploy(File file, SqlQueryFactoryBuilder builder){
-
 		if(file.isFile()){
 			if(builder.validateFile(file)){
 	        	builder.fileCreated(file);
@@ -171,7 +157,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 			    fastDeploy(c, builder);				
 			}		
 		}	
-	}
-	
+	}	
 	
 }

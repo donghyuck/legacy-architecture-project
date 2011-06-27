@@ -20,9 +20,14 @@ import architecture.ee.jdbc.schema.Table;
 public class TestJdbc {
 
 	private Log log = LogFactory.getLog(getClass());
-	
-	
 	@Test
+	public void test(){
+		
+		
+		
+	}
+	
+	//@Test
 	public void testBoot() {		
 		
 		
@@ -41,20 +46,28 @@ public class TestJdbc {
 			log.debug(admin.getState());
 			admin.start();
 		}	
+		
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private SqlQueryFactory getSqlQueryFactory() {
 		return ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryFactory.class);
 	}
 
-	@Test
+	//@Test
 	public void testQueryForList() throws Exception {		
 		SqlQuery query = getSqlQueryFactory().createSqlQuery();
 		List<String> list = query.reset().queryForList("COMMON.SELECT_TABLE_NAMES", String.class);
 		System.out.println("Table Count:" + list.size());
 	}
 
-	@Test
+	//@Test
 	public void testQueryForUniqueResult() throws Exception {
 		SqlQuery query = getSqlQueryFactory().createSqlQuery().setStatement("COMMON.COUNT_TABLE_NAMES" );				
 		Integer count = query.uniqueResult(Integer.class);
@@ -62,7 +75,7 @@ public class TestJdbc {
 	}
 	
 	
-	@Test
+	//@Test
 	public void testQueryForDynamic() throws Exception {
 		SqlQuery query = getSqlQueryFactory().createSqlQuery().setStatement("COMMON.SELECT_TABLE_NAMES" ).setReturnType(String.class);
 		
@@ -78,7 +91,7 @@ public class TestJdbc {
 	}
 	
 	
-	@Test
+	//@Test
 	public void testSqlQueryClientForExport(){	
 		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
 		client.exportToExcel(null, null, "I18N_COUNTRY", "file:///C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/default/database/export/V2_I18N_COUNTRY.xls");
@@ -87,7 +100,7 @@ public class TestJdbc {
 	}
 	
 		
-	@Test
+	//@Test
 	public void testSqlQueryClientForImport1(){	
 		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
 		
@@ -98,7 +111,7 @@ public class TestJdbc {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testSqlQueryClientForImport2(){	
 		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
 		
@@ -109,7 +122,7 @@ public class TestJdbc {
 		
 	}
 
-	@Test
+	//@Test
 	public void testSqlQueryClientForImport3(){	
 		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
 		
@@ -120,7 +133,14 @@ public class TestJdbc {
 		
 	}
 	
-	
+	//@Test
+	public void testDyanmic1()throws Exception {
+		SqlQueryClient client = ApplicationHelperFactory.getApplicationHelper().getComponent(SqlQueryClient.class);		
+		List<Integer> list = client.getSqlQuery("COMMON.SELECT_ALL_USER_ID_BY_STATUS").setReturnType(Integer.class).setAdditionalParameter( "parameters", new Object[]{0,1,2,3}).list();
+	    
+		
+		log.debug(list);
+	}
 	//@Test
 	public void testSelectAllFromEntApp() throws Exception {
 		//SELECT_ALL_FROM_ENT_APP

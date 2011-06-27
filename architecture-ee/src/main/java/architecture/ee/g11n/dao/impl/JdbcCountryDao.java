@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.Country;
 import architecture.ee.g11n.dao.CountryDao;
-import architecture.ee.g11n.internal.CountryImpl;
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
+import architecture.ee.model.internal.CountryModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
 public class JdbcCountryDao extends ExtendedJdbcDaoSupport implements CountryDao {
@@ -18,7 +18,7 @@ public class JdbcCountryDao extends ExtendedJdbcDaoSupport implements CountryDao
 	class CountryRowMapper implements RowMapper<Country> {
 
 		public Country mapRow(ResultSet rs, int rowNum) throws SQLException {	
-			CountryImpl c = new CountryImpl();			
+			CountryModelImpl c = new CountryModelImpl();			
 			c.setCountryId(rs.getLong(1));
 			c.setName(rs.getString(2));
 			c.setA2(rs.getString(3));
