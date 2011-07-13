@@ -26,8 +26,7 @@ public class WebApplicationContextLoader extends ContextLoader {
     public static final String UPGRADE_LOCATION_PARAM = "upgradeContextLocation";
     public static final String RUNTIME_LOCATION_PARAM = "runtimeContextLocation";
     public static final String EXTENSION_LOCATION_PARAM = "extensionContextLocation";    
-    
-    
+        
 
 	protected void customizeContext(ServletContext servletContext, ConfigurableWebApplicationContext applicationContext) {		
 			
@@ -76,13 +75,13 @@ public class WebApplicationContextLoader extends ContextLoader {
 
 	@Override
 	protected ApplicationContext loadParentContext(ServletContext servletContext) throws BeansException {		
-		try {			
-			return Bootstrap.getBootstrapApplicationContext();
-			
+		/*try {			
+			return Bootstrap.getBootstrapApplicationContext();			
 		} catch (Exception e) {
 		    log.error(e);
 		}		
-		return super.loadParentContext(servletContext);
+		return super.loadParentContext(servletContext);*/
+		return Bootstrap.getBootstrapApplicationContext();		
 	}
 	
 }

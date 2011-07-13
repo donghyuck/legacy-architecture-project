@@ -11,6 +11,10 @@ public interface RoleDao {
 	 */
 	public abstract void createRole(Role role);
 	
+	/**
+	 * 롤 정보를 업데이트 한다.
+	 * @param role
+	 */
 	public abstract void update(Role role);
 
 	public abstract Role getRoleById(long roleId);

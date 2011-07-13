@@ -7,4 +7,5 @@ public interface AuthToken extends Serializable {
 	public abstract long getUserId();
 
 	public abstract boolean isAnonymous();
+	
 }
