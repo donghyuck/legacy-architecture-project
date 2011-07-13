@@ -5,7 +5,6 @@ import javax.servlet.ServletContextEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 
 import architecture.ee.bootstrap.Bootstrap;
@@ -19,9 +18,14 @@ public class WebApplicationContextLoaderListener  extends ContextLoaderListener 
 		
 		ServletContext useToServletContext = event.getServletContext();
 		try {
-            Bootstrap.boot(useToServletContext);
+			
+			//Bootstrap.getBootstrapApplicationContext();
+            //Bootstrap.boot(useToServletContext);
+			Bootstrap.boot(useToServletContext);
+            
+            
 		} catch (Throwable e) {
-			log.error(e);
+			log.error("Bootstrap.boot", e);
 		}
 		
 	}
@@ -30,15 +34,14 @@ public class WebApplicationContextLoaderListener  extends ContextLoaderListener 
 	{
 		try{
 			ServletContext servletContext = event.getServletContext();
+			
 			Bootstrap.shutdown(servletContext);
+			//super.contextDestroyed(event);
 		}catch(Exception ex){
+		}finally{
+			//super.contextDestroyed(event);
 		}
-		super.contextDestroyed(event);
+		
 	}
 	
-    protected ContextLoader createContextLoader()
-    {
-        return Bootstrap.getBootstrapApplicationContext().getBean(ContextLoader.class);
-    }
-
 }

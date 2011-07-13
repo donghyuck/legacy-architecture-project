@@ -7,7 +7,6 @@ import java.util.ListResourceBundle;
 import java.util.Locale;
 import java.util.Set;
 
-
 public class I18nTextResourceBundle extends ListResourceBundle {
 
     private Object contents[][];

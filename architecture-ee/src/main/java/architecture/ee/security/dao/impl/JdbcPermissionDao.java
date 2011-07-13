@@ -69,22 +69,21 @@ public class JdbcPermissionDao extends ExtendedJdbcDaoSupport implements Permiss
 	}
 
 	public List<Permission> getGroupPermissions(int objectType, long objectId) {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	public void addUserPermission(int objectType, long objectId, long userId,
 			int permissionType, int permission) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	public void removeUserPermission(int objectType, long objectId,
 			long userId, int permissionType, int permission) {
-		// TODO Auto-generated method stub
 		
 	}
-
+	
+	
 	public void addPermissionMask(String name, int mask) {
 		getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.CREATE_PERMISSION_MASK").getSql(), 
 				new Object[]{name, mask}, 

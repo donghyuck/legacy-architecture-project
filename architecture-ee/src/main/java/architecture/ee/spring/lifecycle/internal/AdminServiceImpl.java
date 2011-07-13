@@ -47,7 +47,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		this.helper = null;
 		this.servletContext = null;
 		this.applicationContext = null;
-		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );	
+		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );
 	}
 	
 	protected <T> T getBootstrapComponent(Class<T> requiredType){
@@ -111,6 +111,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		Thread currentThread = Thread.currentThread();
         ClassLoader oldLoader = currentThread.getContextClassLoader();
 
+        
         if( getApplicationProperties().getBooleanProperty("setup.complete") ){	        
         	PluginManagerImpl pluginManager = getBootstrapComponent(PluginManagerImpl.class);	        
 	        if( ! pluginManager.isInitialized() ){
@@ -118,13 +119,15 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 	        	pluginManager.pluginDirectory = file;   	
 	        }
         }      
+        
         if(isSetServletContext() && isSetContextLoader()){
 			try{
-				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());		
+				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());				
 				this.applicationContext.start();
+
 			}finally{
 				if(oldLoader != null)
-	                currentThread.setContextClassLoader(oldLoader);
+	               currentThread.setContextClassLoader(oldLoader);
 			}
 		}
 	}
@@ -258,15 +261,20 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 		if( source instanceof AdminService ){			
 			this.state = event.getNewState();			
 			if( event.getNewState() == State.STARTED )
-			{			
-			}
-			log.debug("[Server] " + event.getOldState().toString() + " > " + event.getNewState().toString());
+			{
+				
+			}			
+			log.debug(
+				String.format("[STATE] %s > %s", event.getOldState().toString(),  event.getNewState().toString())
+			);
 		}		
 	}
 	
 	@EventListener
 	public void onEvent(ApplicationPropertyChangeEvent event) {
-		log.debug("[AdminService] " + event );
+
+		
+		
 	}	
 
 	public ConfigRoot getConfigRoot() {

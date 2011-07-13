@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ApplicationHelper;
 import architecture.common.lifecycle.ApplicationHelperFactory;
@@ -29,45 +27,70 @@ public class AdminHelper {
 		return getAdminService().getState();
 	}
 		
+	/**
+	 * 
+	 * @return
+	 */
 	public static boolean isReady(){
 		return getAdminService().isReady();
 	}
 	
 	public static boolean isSetupComplete(){
-	    return getAdmin().getApplicationBooleanProperty("setup.complete", false);
+		if(isReady()){
+			return getAdmin().getApplicationBooleanProperty("setup.complete", false);
+		}else{
+			return getAdminService().getApplicationProperties().getBooleanProperty("setup.complete", false);
+		}
 	}	
+
+	
+	public static ConfigRoot getConfigRoot(){
+		return getAdminService().getConfigRoot();
+	}
+	
+	public static String getEffectiveRootPath(){
+		return getAdminService().getEffectiveRootPath();
+	}
 	
 	public static <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException
 	{
-		return getApplicationHelper().getComponent(requiredType);		
+		return getApplicationHelper().getComponent(requiredType);
 	}
 	
 	public static Admin getAdmin() {		
-		if( AdminHelper.references.get(Admin.class) == null){
-			AdminHelper.references.put(Admin.class, new WeakReference<Admin>(getApplicationHelper().getComponent(Admin.class)));
-		}			
-		return (Admin)AdminHelper.references.get(Admin.class).get();
+		return getComponent(Admin.class);
 	}
-
+	
+	
+	public static net.sf.ehcache.Cache getCache(String cacheName){
+		net.sf.ehcache.Cache memoryOnlyCache = getCacheManager().getCache(cacheName);
+		
+		if( memoryOnlyCache == null ){
+			getCacheManager().addCache(cacheName);
+			memoryOnlyCache = getCacheManager().getCache(cacheName);
+		}
+		return memoryOnlyCache;
+	}
+	
+	public static net.sf.ehcache.CacheManager getCacheManager(){
+		return getBootstrapComponent(net.sf.ehcache.CacheManager.class);
+	}
+	
+	public static <T> T getBootstrapComponent(Class<T> requiredType){
+		if( AdminHelper.references.get(requiredType) == null){
+			AdminHelper.references.put(requiredType, new WeakReference<T>( Bootstrap.getBootstrapApplicationContext().getBean(requiredType) ));			
+		}
+		return (T)AdminHelper.references.get(requiredType).get();
+	}
+		
 	public static AdminService getAdminService() {	
-		if( AdminHelper.references.get(AdminService.class) == null){
-			AdminHelper.references.put(AdminService.class, new WeakReference<AdminService>( Bootstrap.getAdminService() ));
-		}		
-		return (AdminService)AdminHelper.references.get(AdminService.class).get();
-	}	
+		return getBootstrapComponent(AdminService.class);
+	}		
 	
 	public static Locale getLocale(){
 		return getAdmin().getLocale();
 	}
-	
-	public static String getEffectiveRootPath(){
-		return getAdmin().getEffectiveRootPath();
-	}
-	
-	public static ConfigRoot getConfigRoot(){
-		return getAdmin().getConfigRoot();
-	}
-	
+		
 	public static String getApplicationProperty(String name, String defaultValue){
 		return getAdmin().getApplicationProperty(name, defaultValue);
 	}
