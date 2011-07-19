@@ -7,7 +7,7 @@ public interface ConfigRootHelper {
 
 	public abstract String getRootURI();
 	
-	public abstract String getInstallRootPath();
+	public abstract String getEffectiveRootPath();
 	
 	public ConfigRoot getConfigRoot();
 	
