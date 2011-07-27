@@ -1,5 +1,5 @@
 package architecture.ee.user.spi;
-import architecture.ee.exception.*;
+import architecture.ee.exception.ApplicationException;
 
 public class AlreadyExistsException extends ApplicationException {
 

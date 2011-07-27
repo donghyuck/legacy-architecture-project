@@ -48,17 +48,21 @@
 		<constructor-arg index="0" ref="eventThreadPoolConfiguration"/>
 	</bean>
 	-->	
+	
 	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher" depends-on="taskExecutor">
 		<constructor-arg index="0" ref="taskExecutor"/>
     </bean>    
+	
 	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+	
 	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl" depends-on="eventDispatcher, listenerHandlerConfiguration">
 		<constructor-arg index="0" ref="eventDispatcher"/>
 		<constructor-arg index="1" ref="listenerHandlerConfiguration"/>
 	</bean>	
+	
 	<!-- ================================================ -->	
 	<!--  Plugin                                          -->
-	<!-- ================================================ -->		
+	<!-- ================================================ -->	
 	<bean id="pluginCacheRegistry" class="architecture.common.plugin.internal.PluginCacheRegistryImpl" depends-on="ehcache" >
 	    <constructor-arg index="0" ref="ehcache"/>
 	</bean>		
@@ -69,13 +73,15 @@
 	<!-- ================================================ -->	
 	<!--  Cache                                           -->
 	<!-- ================================================ -->	
-	<bean id="ehcache"      class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />	
-	
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />	
+		
 	<!-- ================================================ -->	
 	<!--  Application                                     -->
 	<!-- ================================================ -->	
 	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />	
-	<bean id="configRootHelper" class="architecture.ee.spring.lifecycle.internal.ConfigRootHelperImpl"/>	
+	
+	<bean id="configRootHelper" class="architecture.ee.spring.lifecycle.internal.ConfigRootHelperImpl"/>
+		
 	<bean id="adminService" class="architecture.ee.spring.lifecycle.internal.AdminServiceImpl" 
 	    init-method="initialize" 
 	    depends-on="eventPublisher"

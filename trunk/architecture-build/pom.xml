@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>architecture-build</groupId>
+	<groupId>architecture.build</groupId>
 	<artifactId>architecture-build</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0.RELEASE</version>
 	<packaging>pom</packaging>
 	<name>CLOUDING SERVICE ARCHITECTURE BUILD</name>
 	<description>아키텍처 전체 빌드 파일</description>
@@ -12,5 +12,6 @@
 		<module>../architecture-common</module>
 		<module>../architecture-ee</module>
 		<module>../architecture-web</module>
+		<module>../architecture-webapp</module>
 	</modules>
 </project>

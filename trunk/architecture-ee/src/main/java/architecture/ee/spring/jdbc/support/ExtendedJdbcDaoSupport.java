@@ -1,8 +1,5 @@
 package architecture.ee.spring.jdbc.support;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;

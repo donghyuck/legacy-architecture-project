@@ -108,9 +108,11 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		if (obj == null) {
 			throw new ComponentNotFoundException("");
 		}
+		
 		if (obj instanceof Class) {
 			Class requiredType = (Class)obj;
 			String names[] = getConfigurableApplicationContext().getBeanNamesForType(requiredType);
+			
 			if (names == null || names.length == 0) {
 				throw new ComponentNotFoundException("");
 			} else if (names.length > 1) {

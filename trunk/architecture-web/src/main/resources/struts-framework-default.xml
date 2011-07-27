@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="framework-default" extends="struts-default">
+	
+		<!-- Result Type Overrides and Additions -->
+    	<result-types>
+	        <result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" default="true"/>
+	    </result-types>        
+        
+        <!-- Interceptor overrides and additions -->
+        <interceptors>
+
+            <interceptor name="validation" class="architecture.ee.web.struts2.interceptor.ExtendedValidationInterceptor">
+                <param name="excludeMethods">
+                    input,back,cancel,default,withRedirect,removeAttach,doCancel,delete,reply,skip
+                </param>
+            </interceptor>      
+            
+            <!-- Validation interceptor - only registered to executing methods, customized for NoValidation annotation -->      
+ 			<interceptor name="prepare" class="architecture.ee.web.struts2.interceptor.ExtendedMethodFilterInterceptor"/>
+            <!-- sets the current executing action in the session for redirection -->
+            <interceptor name="referer" class="architecture.ee.web.struts2.interceptor.RefererInterceptor"/> 			
+		
+			<!-- 
+		    A complete stack with all the common interceptors in place. Generally, 
+			this stack should be the one you use, though it may do more than you need. 
+			Also, the ordering can be switched around (ex: if you wish to have your prepare() 
+			method called interceptor up.servlet-related. before your servlet related 
+			objects, you need to move the prepare This stack also excludes the validation 
+			and workflow the method names input,back,cancel,default,withRedirect, removeAttach,doCancel, 
+			reply and delete. These typically are associated with requests that should 
+			not be validated. 
+			-->
+	
+			<interceptor-stack name="defaultStack">
+			     <interceptor-ref name="referer"/>
+			     <interceptor-ref name="servletConfig"/>
+			     <interceptor-ref name="prepare"/>
+			</interceptor-stack>
+	            
+	        <interceptor-stack name="includeStack">
+	            <interceptor-ref name="servletConfig"/>
+	            <interceptor-ref name="prepare"/>
+	            <interceptor-ref name="validation"/>
+	        </interceptor-stack>    			
+ 			
+        </interceptors>	
+ 
+            
+        <!-- The default interceptor stack applied to all actions -->
+        <default-interceptor-ref name="defaultStack"/>
+                   
+		<global-results>
+			<result name="login" type="redirect">login.do</result>
+			<result name="none"  type="httpheader">204</result>
+		</global-results>
+    
+        <global-exception-mappings>
+            <exception-mapping exception="architecture.ee.security.UnauthorizedException" result="unauthorized"/>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>  
+        
+        <!-- 
+        Included Actions: These actions do not exist on thier own and are
+        only referenced by an action include tag
+        -->          		
+        	
+	</package>
+        
+	<package name="framework-default-actions-include" extends="framework-default-support" >
+
+		<default-interceptor-ref name="includeStack" />
+		<!--
+			Global results - these are implicit in all action definitions and can
+			be overridden
+		-->
+		<global-results>
+			<result name="login" type="httpheader">403</result>
+			<result name="unauthorized" type="httpheader">403</result>
+			<result name="unauthenticated" type="httpheader">403</result>
+			<result name="notfound" type="httpheader">404</result>
+			<result name="redirect" type="redirect">${url}</result>
+			<result name="error" type="httpheader">500</result>
+			<result name="none" type="httpheader">204</result>
+		</global-results>
+
+		<action name="login" class="architecture.ee.web.struts2.action.LoginAction">
+			<result name="cancel" type="redirect">${cancelURL != null ? cancelURL : "index.do"}</result>
+			<result name="input">/templates/global/login.ftl</result>
+			<result name="unauthenticated">/templates/global/login.ftl</result>
+			<result name="success" type="redirect">${successURL != null ? successURL : "index.do"}</result>
+			<result name="create-profile" type="redirect">create-account.do?username=${username}</result>
+		</action>
+
+		<action name="page" class="architecture.ee.web.struts2.action.ViewPageAction">
+			<result name="success" type="redirect">${path != null ? path : "index.do"}</result>
+			<result name="none" type="httpheader">200</result>
+		</action>
+        
+	</package>   
+		
+	<package name="framework-actions" extends="framework-default"  namespace="/" >
+
+		<action name="login" class="architecture.ee.web.struts2.action.LoginAction">
+			<result name="cancel" type="redirect">${cancelURL != null ? cancelURL : "index.do"}</result>
+			<result name="input">/template/default/login.ftl</result>
+			<result name="unauthenticated">/template/default/login.ftl</result>
+			<result name="success" type="redirect">${successURL != null ? successURL : "index.do"}</result>
+			<result name="create-profile" type="redirect">create-account.do?username=${username}</result>
+		</action>
+
+		<action name="page" class="architecture.ee.web.struts2.action.ViewPageAction">
+			<result name="success" type="redirect">${ url != null ? url : "index.do"}</result>
+			<result name="none" type="httpheader">200</result>
+		</action>			
+
+		<action name="index" class="architecture.ee.web.struts2.action.MainAction">
+			<result name="success">/template/default/main.ftl</result>
+		</action>	
+			
+	</package>	 
+</struts>

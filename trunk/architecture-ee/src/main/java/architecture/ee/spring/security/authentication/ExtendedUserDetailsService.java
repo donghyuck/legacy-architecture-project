@@ -2,11 +2,13 @@ package architecture.ee.spring.security.authentication;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -26,32 +28,15 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 	private boolean caseInsensitive;
 	private UserManager userManager;
 	private RoleManager roleManager;
+	private String grantedAuthority;
 	
-    public ExtendedUserDetailsService(boolean caseInsensitive) {
+    public void setGrantedAuthority(String grantedAuthority) {
+		this.grantedAuthority = grantedAuthority;
+	}
+
+	public ExtendedUserDetailsService(boolean caseInsensitive) {
 		this.caseInsensitive = caseInsensitive;
-	}
-
-	public void setCaseInsensitive(boolean caseInsensitive)
-    {
-        this.caseInsensitive = caseInsensitive;
-    }
-
-	public void setRoleManager(RoleManager roleManager) {
-		this.roleManager = roleManager;
-	}
-
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-		
-		User user = userManager.getUser(new UserTemplate(username), caseInsensitive);
-        if(null == user)
-        {
-            String message = (new StringBuilder()).append("No user found for username '").append(username).append("'.").toString();
-            log.info(message);
-            throw new UsernameNotFoundException(message);
-        } else
-        {
-            return loadByUser(user);
-        }
+		this.grantedAuthority = "";
 	}
 
 	public ExtendedUserDetails loadByUser(User user) {
@@ -69,13 +54,41 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 			builder.append(",");			
 		}
 		
-		List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(builder.toString());
+		List<GrantedAuthority> authorities = AuthorityUtils.commaSeparatedStringToAuthorityList(builder.toString());		
+		if(StringUtils.isNotEmpty(grantedAuthority)){			
+			GrantedAuthorityImpl impl = new GrantedAuthorityImpl(grantedAuthority);
+			if( ! authorities.contains(impl) )
+				authorities.add(impl);
+		}
 		
 		return new ExtendedUserDetails(user, authorities);
 	}
 
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
+		
+		User user = userManager.getUser(new UserTemplate(username), caseInsensitive);
+        if(null == user)
+        {
+            String message = (new StringBuilder()).append("No user found for username '").append(username).append("'.").toString();
+            log.info(message);
+            throw new UsernameNotFoundException(message);
+        } else
+        {
+            return loadByUser(user);
+        }
+	}
+
+	public void setCaseInsensitive(boolean caseInsensitive)
+    {
+        this.caseInsensitive = caseInsensitive;
+    }
+
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
+	}
+
+	public void setRoleManager(RoleManager roleManager) {
+		this.roleManager = roleManager;
 	}
 
 	public void setUserManager(UserManager userManager) {

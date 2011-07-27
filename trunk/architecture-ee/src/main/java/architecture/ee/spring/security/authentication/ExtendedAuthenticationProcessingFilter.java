@@ -58,12 +58,12 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
         
 	}
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	private boolean isAnonymous(Authentication auth){
+		return auth instanceof ExtendedAnonymousAuthenticationToken || auth instanceof ExtendedAnonymousAuthenticationToken;
 	}
 	
-	private boolean isAnonymous(Authentication auth){
-		return auth instanceof AnonymousAuthentication;
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
 	}
 
 }

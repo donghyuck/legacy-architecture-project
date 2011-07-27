@@ -16,7 +16,6 @@ import org.springframework.web.context.ContextLoader;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ApplicationPropertyChangeEvent;
 import architecture.common.lifecycle.ComponentImpl;
@@ -29,6 +28,7 @@ import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.lifecycle.internal.XmlApplicationProperties;
 import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.component.AdminService;
+import architecture.ee.util.ApplicatioinConstants;
 
 public class AdminServiceImpl extends ComponentImpl implements AdminService {
 
@@ -112,7 +112,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
         ClassLoader oldLoader = currentThread.getContextClassLoader();
 
         
-        if( getApplicationProperties().getBooleanProperty("setup.complete") ){	        
+        if( getApplicationProperties().getBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME) ){	        
         	PluginManagerImpl pluginManager = getBootstrapComponent(PluginManagerImpl.class);	        
 	        if( ! pluginManager.isInitialized() ){
 	        	File file = getConfigRoot().getFile("plugins");
@@ -178,7 +178,7 @@ public class AdminServiceImpl extends ComponentImpl implements AdminService {
 					log.debug("No startup file now create !!!");					
 					Writer writer = null;
 					try {			
-						writer = new OutputStreamWriter(new FileOutputStream(file), ApplicationConstants.DEFAULT_CHAR_ENCODING);
+						writer = new OutputStreamWriter(new FileOutputStream(file), ApplicatioinConstants.DEFAULT_CHAR_ENCODING);
 						XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());
 						StringBuilder sb = new StringBuilder();					
 						org.dom4j.Document document = org.dom4j.DocumentHelper.createDocument();    

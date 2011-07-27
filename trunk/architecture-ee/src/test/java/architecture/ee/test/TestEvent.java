@@ -17,7 +17,6 @@ package architecture.ee.test;
 
 import org.junit.Test;
 
-import architecture.common.event.api.EventListener;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ApplicationStateChangeEvent;

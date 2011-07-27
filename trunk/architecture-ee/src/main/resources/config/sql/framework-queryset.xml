@@ -136,14 +136,22 @@
 		VALUES (?, ?, ?, ?, ?, ?, ?)
       ]]></sql-query>
 
-	<!-- i18n Text -->
+	<!-- i18n Text for ResourceBundle -->
 	<sql-query name="INSERT_I18N_TEXTS"><![CDATA[
-		INSERT INTO V2_I18N_TEXT (TEXT_ID, LOCALE_CODE, TEXT_KEY, TEXT, CREATION_DATE, MODIFIED_DATE ) 
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO V2_I18N_TEXT (
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ]]></sql-query>
 
 	<sql-query name="UPDATE_I18N_TEXTS"><![CDATA[
-		UPDATE V2_I18N_TEXT SET TEXT = ? , MODIFIED_DATE = ? 
+		UPDATE V2_I18N_TEXT 
+		    SET TEXT = ? , 
+		    MODIFIED_DATE = ? 
 		WHERE TEXT_ID = ?
     ]]></sql-query>
 
@@ -152,20 +160,53 @@
     ]]></sql-query>
 
 	<sql-query name="SELECT_I18N_TEXT_BY_ID"><![CDATA[
-		SELECT TEXT_ID, LOCALE_CODE, TEXT_KEY, TEXT, CREATION_DATE, MODIFIED_DATE 
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
 		FROM V2_I18N_TEXT WHERE TEXT_ID = ?
     ]]></sql-query>
 
-	<sql-query name="SELECT_ALL_I18N_TEXT"><![CDATA[
-		SELECT TEXT_ID, LOCALE_CODE, TEXT_KEY, TEXT, CREATION_DATE, MODIFIED_DATE 
+	<sql-query name="SELECT_ALL_I18N_TEXT" comment="전체 택스트를 조회한다."><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
 		FROM V2_I18N_TEXT
     ]]></sql-query>
 
-	<sql-query name="SELECT_I18N_TEXT_BY_LOCALE"><![CDATA[
-		SELECT TEXT_ID, LOCALE_CODE, TEXT_KEY, text, CREATION_DATE, MODIFIED_DATE 
+	<sql-query name="SELECT_I18N_TEXT_BY_LOCALE" comment="로케일에 해당하는 전체 택스트를 조회한다."><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
 		FROM V2_I18N_TEXT WHERE LOCALE_CODE = ?
     ]]></sql-query>
     
+	<sql-query name="SELECT_I18N_TEXT_BY_RESOURCE_BUNDLE_KEY_AND_LOCALE" comment="번들 이름에 해당하는 전체 택스트를 조회한다."><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_TEXT WHERE RESOURCE_BUNDLE_KEY = ? AND LOCALE_CODE = ?
+    ]]></sql-query>
+        
     <!-- I18N_OBJECT_TEXT  -->
 	<sql-query name="INSERT_I18N_OBJECT_TEXT"><![CDATA[
 		INSERT INTO V2_I18N_OBJECT_TEXT (TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE ) 
@@ -188,12 +229,27 @@
     ]]></sql-query>
 
 	<sql-query name="SELECT_ALL_I18N_OBJECT_TEXT"><![CDATA[
-		SELECT TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE 
+		SELECT 
+		    TEXT_ID, 
+		    OBJECT_TYPE, 
+		    OBJECT_ID,
+		    OBJECT_ATTRIBUTE, 
+		    LOCALE_CODE, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
 		FROM V2_I18N_OBJECT_TEXT
     ]]></sql-query>
 
 	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_LOCALE"><![CDATA[
-		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		SELECT  
+		    TEXT_ID, 
+		    OBJECT_TYPE, 
+		    OBJECT_ID, 
+		    OBJECT_ATTRIBUTE, 
+		    LOCALE_CODE, TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE
 		FROM V2_I18N_OBJECT_TEXT 
 		WHERE LOCALE_CODE = ?
     ]]></sql-query>
@@ -522,7 +578,7 @@
 	       USERNAME            = ?,
 	       IS_EXTERNAL         = ?,
 	       FEDERATED           = ?,
-	       STATUS              = ?,
+	       STATUS              = ?
        WHERE USER_ID       = ?
     ]]></sql-query>
 
@@ -1028,10 +1084,10 @@
 		
 		CREATE TABLE V2_I18N_LOCALE (
 			 LOCALE_ID      INTEGER NOT NULL,
-			 LANGUAGE      VARCHAR2(100),
-			 COUNTRY       VARCHAR2(100),
-			 VARIANT       VARCHAR2(100),
-			 ENCODING      VARCHAR2(100),
+			 LANGUAGE       VARCHAR2(100),
+			 COUNTRY        VARCHAR2(100),
+			 VARIANT        VARCHAR2(100),
+			 ENCODING       VARCHAR2(100),
 		     CREATION_DATE  DATE DEFAULT SYSDATE NOT NULL,
 		     MODIFIED_DATE  DATE DEFAULT SYSDATE NOT NULL,
 		     CONSTRAINT V2_I18N_LOCALE_PK PRIMARY KEY (LOCALE_ID)
@@ -1042,7 +1098,8 @@
 				
 		CREATE TABLE V2_I18N_TEXT (
 		     TEXT_ID                INTEGER NOT NULL,
-		     LOCALE_CODE            VARCHAR2(100)   NOT NULL,
+		     RESOURCE_BUNDLE_KEY    VARCHAR2(200)   NOT NULL,
+		     LOCALE_CODE            VARCHAR2(100)   NOT NULL,    
 		     TEXT_KEY               VARCHAR2(200)   NOT NULL,		    
 		     TEXT                   VARCHAR2(2000)  NOT NULL,	
 			 CREATION_DATE          DATE DEFAULT SYSDATE NOT NULL ,
@@ -1050,7 +1107,7 @@
 		     CONSTRAINT V2_I18N_TEXT_PK PRIMARY KEY (TEXT_ID)
 		);
 		
-		CREATE INDEX V2_I18N_TEXT_IDX ON V2_I18N_TEXT(LOCALE_CODE, TEXT_KEY) ;
+		CREATE INDEX V2_I18N_TEXT_IDX ON V2_I18N_TEXT(TEXT_ID, RESOURCE_BUNDLE_KEY, LOCALE_CODE) ;
 		
 		
 		

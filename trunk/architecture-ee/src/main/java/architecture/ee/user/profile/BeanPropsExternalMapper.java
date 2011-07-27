@@ -9,26 +9,22 @@ import org.springframework.beans.BeanUtils;
 public abstract class BeanPropsExternalMapper implements ExternalMapper {
 
 	private final Class profileValueObjectClass;
-	private volatile List propertyNames;
+	private volatile List<String> propertyNames;
 	
 	public BeanPropsExternalMapper(Class provileValueObjectClass) {
 		propertyNames = null;
 		profileValueObjectClass = provileValueObjectClass;
 	}
 
-	public List getObjectFieldMappingKeys() {
+	public List<String> getObjectFieldMappingKeys() {
 		if (propertyNames == null) {
-			propertyNames = new ArrayList();
+			propertyNames = new ArrayList<String>();
 			PropertyDescriptor descriptors[] = BeanUtils.getPropertyDescriptors(profileValueObjectClass);
-			PropertyDescriptor arr$[] = descriptors;
-			int len$ = arr$.length;
-			for (int i$ = 0; i$ < len$; i$++) {
-				PropertyDescriptor descriptor = arr$[i$];
-				if (!descriptor.getName().endsWith("String")
-						&& !descriptor.getName().equals("class"))
+			
+			for( PropertyDescriptor descriptor : descriptors){
+				if (!descriptor.getName().endsWith("String") && !descriptor.getName().equals("class"))
 					propertyNames.add(descriptor.getName());
 			}
-
 		}
 		return propertyNames;
 	}

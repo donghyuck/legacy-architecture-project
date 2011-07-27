@@ -31,8 +31,20 @@ public class ExtendedUserDetailsAdapter implements UserDetails {
 		return authorities;
 	}
 
+	public Date getCreationDate(){
+		return user.getCreationDate();
+	}
+
 	public String getPassword() {
 		return user.getPassword();
+	}
+
+	public User getUser(){
+		return user;
+	}
+
+	public long getUserId(){
+		return user.getUserId();
 	}
 
 	public String getUsername() {		
@@ -46,24 +58,12 @@ public class ExtendedUserDetailsAdapter implements UserDetails {
 	public boolean isAccountNonLocked() {
 		return user.isEnabled();
 	}
-
+	
 	public boolean isCredentialsNonExpired() {
 		return user.isEnabled();
 	}
-
+	
 	public boolean isEnabled() {
 		return user.isEnabled();
-	}
-
-	public long getUserId(){
-		return user.getUserId();
-	}
-	
-	public Date getCreationDate(){
-		return user.getCreationDate();
-	}
-	
-	public User getUser(){
-		return user;
 	}
 }

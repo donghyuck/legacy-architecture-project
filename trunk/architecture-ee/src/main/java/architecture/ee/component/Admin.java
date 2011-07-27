@@ -2,6 +2,7 @@ package architecture.ee.component;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 import architecture.common.lifecycle.ApplicationPropertiesSupport;
@@ -31,5 +32,7 @@ public interface Admin extends ApplicationPropertiesSupport {
     public abstract void setTimeZone(TimeZone newTimeZone);
 	
     public abstract boolean isReady();
+    
+    public abstract ResourceBundle getResourceBundle(String baseName);
 	
 }

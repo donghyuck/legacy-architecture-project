@@ -5,7 +5,6 @@
 		<artifactId>architecture-parent</artifactId>
 		<groupId>architecture</groupId>
 		<version>1.0.0.RELEASE</version>
-		<relativePath>../architecture-parent</relativePath>
 	</parent>
 	<groupId>architecture.ext</groupId>
 	<artifactId>architecture-ext</artifactId>
@@ -23,5 +22,26 @@
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
+	<dependencies>
+		<dependency>
+			<groupId>smeapi</groupId>
+			<artifactId>smeapi</artifactId>
+			<version>2.5</version>
+		</dependency>	
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.14</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>3.0.5.RELEASE</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
 
 </project>
