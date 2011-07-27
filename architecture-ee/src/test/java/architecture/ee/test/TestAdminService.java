@@ -23,7 +23,7 @@ public class TestAdminService {
 		
 	}
 	
-    //@Test
+  // @Test
 	public void testGetBootstrapApplicationContext(){		
 		
 		MockServletContext servletContext = new MockServletContext();
@@ -31,7 +31,7 @@ public class TestAdminService {
 			"contextConfigLocation", 
 			"classpath:default-application-context.xml, classpath:databaseSubsystemContext.xml, classpath:daoSubsystemContext.xml"
 		);
-		
+
 		servletContext.addInitParameter("RUNTIME_APPLICATION_HOME", "C:/TOOLS/workspace/architecture_v2/architecture-webapp/target/architecture-webapp/WEB-INF/profile/default");
 		
 		AdminService admin = AdminHelper.getAdminService();

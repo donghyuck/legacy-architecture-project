@@ -12,12 +12,23 @@ import architecture.ee.user.User;
 
 public class AnonymousUser extends BaseModelImpl<User> implements AuthToken, User, Serializable {
 
+	private static final long serialVersionUID = 2198341141233384287L;
+
 	public static final long ANONYMOUS_ID = -1L;
 	
 	public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
 	
+	private String username ;
+	
+	public AnonymousUser() {
+		username = ANONYMOUS_USERNAME ;
+	}
+
+	public AnonymousUser(String username, String password) {
+	}
+	
 	public String getUsername() {
-		return ANONYMOUS_USERNAME;
+		return username;
 	}
 
 	public String getName() {
@@ -37,11 +48,11 @@ public class AnonymousUser extends BaseModelImpl<User> implements AuthToken, Use
 	}
 
 	public String getPasswordHash() throws UnauthorizedException {
-		return null;
+		return "";
 	}
 
 	public String getPassword() throws UnauthorizedException {
-		return null;
+		return "";
 	}
 
 	public String getEmail() {
@@ -121,7 +132,7 @@ public class AnonymousUser extends BaseModelImpl<User> implements AuthToken, Use
 	}
 
 	public Status getStatus() {
-		return null;
+		return Status.none;
 	}
 
 	public long getPrimaryKey() {
@@ -133,9 +144,10 @@ public class AnonymousUser extends BaseModelImpl<User> implements AuthToken, Use
 	}
 
 	public int compareTo(User o) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	
 
 	public long getUserId() {
 		return ANONYMOUS_ID;
@@ -147,8 +159,7 @@ public class AnonymousUser extends BaseModelImpl<User> implements AuthToken, Use
 
 	@Override
 	public Object clone() {
-		// TODO Auto-generated method stub
-		return null;
+		return new AnonymousUser();
 	}
 
 	@Override

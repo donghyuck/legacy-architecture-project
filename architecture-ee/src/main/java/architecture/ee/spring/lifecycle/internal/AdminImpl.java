@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.TimeZone;
 
 import javax.sql.DataSource;
@@ -24,7 +25,9 @@ import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.ee.component.Admin;
 import architecture.ee.component.AdminService;
+import architecture.ee.component.GlobalizationService;
 import architecture.ee.jdbc.query.factory.Configuration;
+import architecture.ee.util.ApplicatioinConstants;
 import architecture.ee.util.LocaleUtils;
 
 public class AdminImpl implements Admin, EventSource {
@@ -38,16 +41,24 @@ public class AdminImpl implements Admin, EventSource {
 	private EventPublisher eventPublisher = null;	
 	private PluginManagerImpl pluginManager;
 	private TaskExecutor taskExecutor;
+	private GlobalizationService globalizationService;
+	
 	
     private Locale locale = null;
     private TimeZone timeZone = null;
     private String characterEncoding = null;
     
 	public AdminImpl(AdminService adminService) {
+		
 		this.adminService = (AdminServiceImpl)adminService;
 		this.eventPublisher = this.adminService.getBootstrapComponent(EventPublisher.class);
 		this.pluginManager = this.adminService.getBootstrapComponent(PluginManagerImpl.class);
 		this.taskExecutor = this.adminService.getBootstrapComponent(TaskExecutor.class);
+	
+	}
+
+	public void setGlobalizationService(GlobalizationService globalizationService) {
+		this.globalizationService = globalizationService;
 	}
 
 	public boolean isSetTaskExecutor(){
@@ -96,10 +107,10 @@ public class AdminImpl implements Admin, EventSource {
     {
         if(locale == null)
         {
-            String language = getApplicationProperties().get("locale.language");
+            String language = getApplicationProperties().get(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
             if(language == null)
                 language = "";
-            String country = getApplicationProperties().get("locale.country");
+            String country = getApplicationProperties().get(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
             if(country == null)
                 country = "";
             if(language.equals("") && country.equals(""))
@@ -125,10 +136,10 @@ public class AdminImpl implements Admin, EventSource {
     {
         if(characterEncoding == null)
         {
-            String encoding = getLocalProperty("locale.characterEncoding");
+            String encoding = getLocalProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
             if(encoding != null)
                 characterEncoding = encoding;
-            String charEncoding = getApplicationProperty("locale.characterEncoding");
+            String charEncoding = getApplicationProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
             if(charEncoding != null)
                 characterEncoding = charEncoding;
             else
@@ -163,7 +174,7 @@ public class AdminImpl implements Admin, EventSource {
         if( timeZone == null)
             if(properties != null)
             {
-                String timeZoneID = (String)properties.get("locale.timeZone");
+                String timeZoneID = (String)properties.get(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME);
                 if(timeZoneID == null)
                     timeZone = TimeZone.getDefault();
                 else
@@ -178,7 +189,7 @@ public class AdminImpl implements Admin, EventSource {
     public void setTimeZone(TimeZone newTimeZone)
     {
         String value = newTimeZone.getID();
-        String name = "locale.timeZone";
+        String name = ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME;
         setApplicationProperty(name, value);        
         locale = null;
         timeZone = null;
@@ -379,5 +390,9 @@ public class AdminImpl implements Admin, EventSource {
 	public boolean isReady() {
 		return adminService.isReady();
 	}
-	
+
+	public ResourceBundle getResourceBundle(String baseName) {
+		return globalizationService.getResourceBundle(baseName, getLocale());
+	}
+
 }

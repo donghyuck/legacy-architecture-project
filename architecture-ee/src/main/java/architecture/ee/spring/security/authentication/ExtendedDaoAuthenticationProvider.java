@@ -23,15 +23,6 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
     
     protected AuthenticationProvider authProvider;
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
-	}
-	
-
-	public void setAuthenticationProvider(AuthenticationProvider authProvider) {
-		this.authProvider = authProvider;
-	}
-
 	@Override
 	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
 		if(authentication.getCredentials() == null)
@@ -39,7 +30,7 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 
 		String enc = this.getPasswordEncoder().encodePassword(userDetails.getPassword(), this.getSaltSource().getSalt(userDetails));
 		
-		log.debug( userDetails.getPassword() + ">>" + enc);
+		//log.debug( userDetails.getPassword() + ">>" + enc);
 		
 		super.additionalAuthenticationChecks(userDetails, authentication);	
 
@@ -64,10 +55,6 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 		
 	}
 	
-    public boolean supports(UserDetails userDetails) {
-        return userDetails instanceof ExtendedUserDetails ;
-    }
-    
 
 	@Override
 	public Authentication authenticate(Authentication authentication)
@@ -88,6 +75,19 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 	            throw e;
 	        }
 	}
+
+	public void setAuthenticationProvider(AuthenticationProvider authProvider) {
+		this.authProvider = authProvider;
+	}
+	
+    public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+    
+
+	public boolean supports(UserDetails userDetails) {
+        return userDetails instanceof ExtendedUserDetails ;
+    }
     
     
 }

@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ApplicationHelper;
@@ -37,9 +38,9 @@ public class AdminHelper {
 	
 	public static boolean isSetupComplete(){
 		if(isReady()){
-			return getAdmin().getApplicationBooleanProperty("setup.complete", false);
+			return getAdmin().getApplicationBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false);
 		}else{
-			return getAdminService().getApplicationProperties().getBooleanProperty("setup.complete", false);
+			return getAdminService().getApplicationProperties().getBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false);
 		}
 	}	
 
@@ -90,7 +91,11 @@ public class AdminHelper {
 	public static Locale getLocale(){
 		return getAdmin().getLocale();
 	}
-		
+	
+	public static String getCharacterEncoding(){
+		return getAdmin().getCharacterEncoding();
+	}
+	
 	public static String getApplicationProperty(String name, String defaultValue){
 		return getAdmin().getApplicationProperty(name, defaultValue);
 	}
@@ -101,6 +106,10 @@ public class AdminHelper {
 	
 	public static boolean getApplicationBooleanProperty(String name, boolean defaultValue){
 		return getAdmin().getApplicationBooleanProperty(name, defaultValue);
+	}
+	
+	public static TimeZone getTimeZone(){
+		return getAdmin().getTimeZone();
 	}
 
 }

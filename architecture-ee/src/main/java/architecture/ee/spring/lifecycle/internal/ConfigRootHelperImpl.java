@@ -17,8 +17,6 @@ import architecture.common.lifecycle.ConfigRootHelper;
 import architecture.common.vfs.VFSUtils;
 
 public class ConfigRootHelperImpl implements ConfigRootHelper{
-
-	//private static final AtomicReference<ConfigRoot> instance = new AtomicReference<ConfigRoot>();
 	
     public static final String APPLICATION_HOME_KEY = "runtime.application.home";
 

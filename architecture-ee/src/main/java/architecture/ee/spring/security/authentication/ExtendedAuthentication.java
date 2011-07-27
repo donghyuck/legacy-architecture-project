@@ -9,10 +9,10 @@ public interface ExtendedAuthentication extends Authentication {
 
 	public abstract AuthToken getAuthToken();
 	
-	public abstract boolean isAnonymous();
+	public abstract User getUser();
 	
 	public abstract long getUserId();
 	
-	public abstract User getUser();
+	public abstract boolean isAnonymous();
 	
 }

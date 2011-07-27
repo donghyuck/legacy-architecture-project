@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>architecture-parent</artifactId>
 		<groupId>architecture</groupId>
-		<version>1.0.0-SNAPSHOT</version>
+		<version>1.0.0.RELEASE</version>
 		<relativePath>../architecture-parent</relativePath>
 	</parent>
 	<groupId>architecture.common</groupId>
@@ -22,66 +22,16 @@
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0.RELEASE</version>
 	<packaging>jar</packaging>	
 	<build>
 		<plugins>
-		<!-- 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<instrumentation>
-						<ignores>
-							<ignore/>
-						</ignores>
-						<excludes>
-							<exclude>architecture/common/**/*Test.class</exclude>
-						</excludes>
-					</instrumentation>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		-->	
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>2.7</version>
 			</plugin>
 		</plugins>
-		<!-- 
-		<resources>
-			<resource>
-				<directory>${basedir}</directory>
-				<targetPath>META-INF</targetPath>
-				<includes>
-					<include>LICENSE</include>
-					<include>NOTICE</include>
-				</includes>
-			</resource>
-			<resource>
-				<directory>${project.build.sourceDirectory}</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</resource>
-		</resources>
-		<testResources>
-			<testResource>
-				<directory>${project.build.testSourceDirectory}</directory>
-				<excludes>
-					<exclude>**/*.java</exclude>
-				</excludes>
-			</testResource>
-		</testResources>
-		-->
 	</build>
 	<dependencies>
 		<dependency>
@@ -108,14 +58,12 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>2.0</version>
 			<type>jar</type>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>aopalliance</groupId>

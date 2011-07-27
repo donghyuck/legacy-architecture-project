@@ -79,43 +79,63 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 	}
 
 	public void deleteTexts(final List<I18nText> list) {
-		getExtendedJdbcTemplate().batchUpdate(getBoundSql("FRAMEWORK_V2.DELETE_I18N_OBJECT_TEXT").getSql(),
-		    new BatchPreparedStatementSetter(){
-				public void setValues(PreparedStatement ps, int i) throws SQLException {
-					for( I18nText text : list){
-						ps.setLong(1, text.getTextId());
+		getExtendedJdbcTemplate().batchUpdate(
+			getBoundSql("FRAMEWORK_V2.DELETE_I18N_OBJECT_TEXT").getSql(),
+		    	new BatchPreparedStatementSetter(){
+					public void setValues(PreparedStatement ps, int i) throws SQLException {
+						for( I18nText text : list){
+							ps.setLong(1, text.getTextId());
+						}
 					}
-				}
-				public int getBatchSize() {
-					return list.size();
+					public int getBatchSize() {
+						return list.size();
 				}});		
 	}
 
 	public I18nText getText(long textID) {
-		return getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_ID").getSql(), new Object[]{textID}, new int[]{Types.INTEGER}, new I18nTextRowMapper());
+		return getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_ID").getSql(), 
+				new Object[]{textID}, 
+				new int[]{Types.INTEGER}, 
+				new I18nTextRowMapper());
 	}
 
 	public List<I18nText> getTexts() {
-		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_I18N_OBJECT_TEXT").getSql(), new I18nTextRowMapper());
+		return getExtendedJdbcTemplate().query(
+				getBoundSql("FRAMEWORK_V2.SELECT_ALL_I18N_OBJECT_TEXT").getSql(), 
+				new I18nTextRowMapper());
 	}
 	
 	public List<I18nText> getTexts(Locale locale) {
-		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_LOCALE").getSql(), 
+		return getExtendedJdbcTemplate().query(
+				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_LOCALE").getSql(), 
 				new Object[]{locale.toString()}, 
 				new int[]{Types.VARCHAR}, 
 				new I18nTextRowMapper());
 	}
 
 	public List<I18nText> getTexts(int objectType) {
-		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE").getSql(), new Object[]{objectType}, new int[]{Types.INTEGER}, new I18nTextRowMapper());
+		return getExtendedJdbcTemplate().query(
+				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE").getSql(), 
+				new Object[]{objectType}, 
+				new int[]{Types.INTEGER}, 
+				new I18nTextRowMapper());
 	}
 
 	public List<I18nText> getTexts(int objectType, long objectID) {
-		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), new Object[]{objectType, objectID}, new int[]{Types.INTEGER, Types.INTEGER}, new I18nTextRowMapper());
+		return getExtendedJdbcTemplate().query(
+				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				new Object[]{objectType, objectID}, 
+				new int[]{Types.INTEGER, Types.INTEGER}, 
+				new I18nTextRowMapper());
 	}
 
 	public List<I18nText> getTexts(int objectType, String locale) {
-		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_LOCALE").getSql(), new Object[]{objectType, locale}, new int[]{Types.INTEGER, Types.VARCHAR}, new I18nTextRowMapper());
+		return getExtendedJdbcTemplate().query(
+				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_LOCALE").getSql(), 
+				new Object[]{objectType, locale}, 
+				new int[]{Types.INTEGER, Types.VARCHAR}, 
+				new I18nTextRowMapper());
 	}
 
 }

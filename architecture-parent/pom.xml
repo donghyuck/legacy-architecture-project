@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>architecture</groupId>
 	<artifactId>architecture-parent</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.0.RELEASE</version>
 	<packaging>pom</packaging>
 	<developers>
 		<developer>
@@ -27,7 +27,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<javac.src.version>1.5</javac.src.version>
-		<javac.target.version>1.5</javac.target.version>
+		<javac.target.version>1.5</javac.target.version>		
+		<project.build.version>1.0.0.RELEASE</project.build.version>
 	</properties>
 
 	<dependencies>
@@ -89,7 +90,8 @@
 						<option>-overloadaggressively</option>
 						<option>-repackageclasses ''</option>
 						<option>-allowaccessmodification</option>
-						<option>-ignorewarnings</option>
+						<option>-dontskipnonpubliclibraryclasses</option>
+						<option>-dontnote</option>
 						<option><![CDATA[ 
 					    
 					    -keepattributes Exceptions,InnerClasses,Signature,Deprecated,SourceFile,LineNumberTable,*Annotation*,EnclosingMethod
@@ -97,7 +99,7 @@
 					    -keep public class * {
 	                         public protected *;
 	                    }
-					    
+	                    					    
 					    -keepclassmembernames class * {
 	                         java.lang.Class class$(java.lang.String);
 	                         java.lang.Class class$(java.lang.String, boolean);
@@ -188,6 +190,9 @@
 			<layout>default</layout>
 		</repository>
 	</repositories>
+	<modules>
+		<module>architecture-ext</module>
+	</modules>
 <!-- 	<dependencyManagement>
 		<dependencies>
 			<dependency>

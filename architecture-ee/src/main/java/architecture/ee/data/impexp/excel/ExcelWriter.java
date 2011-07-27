@@ -11,10 +11,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.hssf.util.HSSFColor;
-import org.apache.poi.ss.usermodel.Color;
-import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -27,15 +26,26 @@ public class ExcelWriter {
 	private Workbook workbook ;
     private int sheetIndex = 0 ;
     private CellStyle style ;
-    
+            
 	public ExcelWriter() {
 		workbook = new HSSFWorkbook();		
 	    this.style = createCellStyle(); 
 	}
+
+	public Cell addCell(int rownum, int column){
+		Cell cell = getRow(rownum).createCell(column);
+		cell.setCellStyle(getStyle());		
+		return cell;
+	}
+
+	public Row addRow(int rownum){		
+		Sheet sheet = getSheetAt(getSheetIndex());
+		return sheet.createRow(rownum);
+	}
 	
-	private Font createFont(){
-		Font font = workbook.createFont();
-		return font;
+	public void addSheet(String name){		
+		Sheet sheet = workbook.createSheet(name);
+		sheetIndex = workbook.getSheetIndex(sheet);		
 	}
 	
 	private CellStyle createCellStyle(){
@@ -54,24 +64,21 @@ public class ExcelWriter {
 	    return style;
 	}
 
-	public Sheet getSheetAt(int sheetIndex){
-		return workbook.getSheetAt(sheetIndex);
+	private Font createFont(){
+		Font font = workbook.createFont();
+		return font;
 	} 
 	
-	public int getNumberOfSheets(){
-		return workbook.getNumberOfSheets();
+	public int getFirstRowNum(){
+		return getSheetAt(getSheetIndex()).getFirstRowNum();
 	}
 	
 	public int getLastRowNum(){
 		return getSheetAt(getSheetIndex()).getLastRowNum();
 	}
 	
-	public int getFirstRowNum(){
-		return getSheetAt(getSheetIndex()).getFirstRowNum();
-	}
-	
-	public Row getRow(int rownum){
-		return getSheetAt(getSheetIndex()).getRow(rownum);
+	public int getNumberOfSheets(){
+		return workbook.getNumberOfSheets();
 	}
 	
 	public int getPhysicalNumberOfCells(int rownum){
@@ -80,68 +87,26 @@ public class ExcelWriter {
 	
 	public int getPhysicalNumberOfRows(){
 		return getSheetAt(getSheetIndex()).getPhysicalNumberOfRows();
+	}
+	
+	public Row getRow(int rownum){
+		return getSheetAt(getSheetIndex()).getRow(rownum);
 	}	
 	
-	public void addSheet(String name){		
-		Sheet sheet = workbook.createSheet(name);
-		sheetIndex = workbook.getSheetIndex(sheet);		
+	public Sheet getSheetAt(int sheetIndex){
+		return workbook.getSheetAt(sheetIndex);
 	}
 	
 	public int getSheetIndex() {
 		return sheetIndex;
 	}
 
-	public void setSheetIndex(int sheetIndex) {
-		this.sheetIndex = sheetIndex;
+	public CellStyle getStyle() {
+		return style;
 	}	
 	
-	public Row addRow(int rownum){		
-		Sheet sheet = getSheetAt(getSheetIndex());
-		return sheet.createRow(rownum);
-	}
-	
-	public Cell addCell(int rownum, int column){
-		Cell cell = getRow(rownum).createCell(column);
-		cell.setCellStyle(getStyle());		
-		return cell;
-	}
-		
-	public void write(File file){
-		FileOutputStream fs = null;
-		try {
-			 fs = new FileOutputStream(file);
-			workbook.write(fs);
-		} catch (IOException e) {
-		} finally {
-            if (fs != null)
-				try {
-					fs.close();
-				} catch (IOException e) {
-				}
-        }
-	}
-	
-	public void setHeaderToFirstRow(Table table){
-		
-		String[] names = table.getColumnNames();
-		int rowNum = getFirstRowNum();
-		Row row = addRow(rowNum);
-		
-		int column = 0;
-		CellStyle style = createCellStyle();
-		//style.setFillBackgroundColor((short)0x16);
-		style.setFillForegroundColor((short)0x16);
-		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
-		Font font = workbook.createFont();
-		font.setBoldweight(Font.BOLDWEIGHT_BOLD);
-		style.setFont(font);
-		for( String name : names ){			
-			Cell cell = getRow(row.getRowNum()).createCell(column);
-			cell.setCellStyle(style);				
-			cell.setCellValue(name);
-			column ++ ;
-		}
-		
+	public Workbook getWorkbook() {
+		return workbook;
 	}
 	
 	public void setDataToRow(Map<String, Object> data, Table table){		
@@ -174,13 +139,55 @@ public class ExcelWriter {
 			column ++ ;
 		}			
 	}
-	
-	public CellStyle getStyle() {
-		return style;
+		
+	public void setHeaderToFirstRow(Table table){
+		
+		String[] names = table.getColumnNames();
+		int rowNum = getFirstRowNum();
+		Row row = addRow(rowNum);
+		
+		int column = 0;
+		CellStyle style = createCellStyle();
+		//style.setFillBackgroundColor((short)0x16);
+		style.setFillForegroundColor((short)0x16);
+		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		Font font = workbook.createFont();
+		font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		style.setFont(font);
+		for( String name : names ){			
+			Cell cell = getRow(row.getRowNum()).createCell(column);
+			cell.setCellStyle(style);				
+			cell.setCellValue(name);
+			column ++ ;
+		}
+		
 	}
-
+	
+	public void setSheetIndex(int sheetIndex) {
+		this.sheetIndex = sheetIndex;
+	}
+	
 	public void setStyle(CellStyle style) {
 		this.style = style;
+	}
+	
+	public void setWorkbook(Workbook workbook) {
+		this.workbook = workbook;
+	}
+
+	public void write(File file){
+		FileOutputStream fs = null;
+		try {
+			 fs = new FileOutputStream(file);
+			workbook.write(fs);
+		} catch (IOException e) {
+		} finally {
+            if (fs != null)
+				try {
+					fs.close();
+				} catch (IOException e) {
+				}
+        }
 	}
 
 	public void write(OutputStream output){

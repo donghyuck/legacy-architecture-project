@@ -21,4 +21,14 @@ public interface ApplicationConstants {
 	
     public static final String DEFAULT_CHAR_ENCODING = "UTF-8";	
     
+    public static final long SECOND = 1000L;
+    
+    public static final long MINUTE = 60000L;
+    
+    public static final long HOUR = 0x36ee80L;
+    
+    public static final long DAY = 0x5265c00L;
+    
+    public static final long WEEK = 0x240c8400L;
+    
 }

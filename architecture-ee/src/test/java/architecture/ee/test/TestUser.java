@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -79,6 +78,7 @@ public class TestUser {
 		int size = dao.getTotalUserCount();
 		log.debug("getTotalUserCount=" + size);
 		if(size == 0){
+			
 			UserTemplate template = new UserTemplate();
 			template.setUsername("andang");
 			template.setName("안당");		
@@ -87,7 +87,8 @@ public class TestUser {
 			Date now = new Date();
 			template.setCreationDate(now);
 			template.setModificationDate(now);
-			template.setStatus(Status.registered);
+			template.setStatus(Status.registered)
+			;
 			template.setLastLoggedIn(now);
 			template.setLastProfileUpdate(now);
 			

@@ -1,15 +1,12 @@
 package architecture.ee.model.internal;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.ee.model.ProfileFieldValueModel;
 import architecture.ee.user.profile.ProfileField;
-import architecture.ee.user.profile.ProfileFieldValue;
 import architecture.ee.user.profile.ProfileFieldValue;
 import architecture.ee.user.profile.TypeConverter;
 import architecture.ee.user.profile.TypeConverter.ConversionException;

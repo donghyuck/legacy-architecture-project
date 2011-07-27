@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ExternalMapper {
 	
-    public abstract List getObjectFieldMappingKeys();
+    public abstract List<String> getObjectFieldMappingKeys();
 
     public abstract boolean isSingleFieldMapper();
     

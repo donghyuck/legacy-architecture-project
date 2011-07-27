@@ -1,6 +1,5 @@
 package architecture.ee.user.profile;
 
-import architecture.ee.user.profile.PhoneNumber;
 
 public class PhoneNumberConverter extends BeanPropsExternalMapper
     implements TypeConverter
