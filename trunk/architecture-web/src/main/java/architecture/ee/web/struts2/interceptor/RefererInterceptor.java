@@ -1,4 +1,4 @@
-package architecture.ee.web.struts2.annotation;
+package architecture.ee.web.struts2.interceptor;
 
 import java.lang.reflect.Method;
 import java.util.Map;
@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.StrutsStatics;
 
+import architecture.ee.web.struts2.annotation.SetReferer;
+import architecture.ee.web.struts2.annotation.SetRefererNotInherited;
 import architecture.ee.web.util.ServletUtils;
 
 import com.opensymphony.xwork2.ActionContext;

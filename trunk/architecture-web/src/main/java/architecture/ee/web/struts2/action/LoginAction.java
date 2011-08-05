@@ -3,7 +3,7 @@ package architecture.ee.web.struts2.action;
 import java.util.Map;
 
 import architecture.ee.util.AdminHelper;
-import architecture.ee.web.struts2.annotation.RefererInterceptor;
+import architecture.ee.web.struts2.interceptor.RefererInterceptor;
 import architecture.ee.web.util.ParamUtils;
 
 import com.opensymphony.xwork2.Validateable;
@@ -31,9 +31,7 @@ public class LoginAction extends ExtendedActionSupport implements Validateable {
 		
 		this.authnFailed = ParamUtils.getBooleanParameter(getRequest(), "authnFailed", false);
 		this.authzFailed = ParamUtils.getBooleanParameter(getRequest(), "authzFailed", false);
-		
-		
-		
+				
 		if(loginBanned)
         {
             addActionError(getText("login.err.banned_login.text"));
