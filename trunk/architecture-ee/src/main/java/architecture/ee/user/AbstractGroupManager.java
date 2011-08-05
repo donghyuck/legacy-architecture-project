@@ -28,6 +28,8 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
         groupCache = AdminHelper.getCache("groupCache");
         groupIdCache = AdminHelper.getCache("groupIDCache");
         groupMemberCache = AdminHelper.getCache("groupMemberCache");
+        
+        
 	}
 	
 	public void setGroupCache(Cache groupCache) {
@@ -60,7 +62,10 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 		String key = (new StringBuilder()).append("userGroups-").append(userId).toString();
 		
 		List<Group> groups;
-		if(groupMemberCache.isKeyInCache(key))
+		
+	    log.debug(groupMemberCache);
+		
+		if(groupMemberCache.get(key) != null)
 		{
 			groups = (List<Group>)groupMemberCache.get(key).getValue();
 		}else{

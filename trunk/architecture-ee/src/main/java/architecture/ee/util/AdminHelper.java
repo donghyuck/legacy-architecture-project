@@ -64,6 +64,7 @@ public class AdminHelper {
 	
 	
 	public static net.sf.ehcache.Cache getCache(String cacheName){
+		
 		net.sf.ehcache.Cache memoryOnlyCache = getCacheManager().getCache(cacheName);
 		
 		if( memoryOnlyCache == null ){
