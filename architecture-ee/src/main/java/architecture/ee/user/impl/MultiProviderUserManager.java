@@ -234,7 +234,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		if(user != null || template.getUsername() != null )
 		{
 			
-			if( userIdCache.isKeyInCache(template.getUsername())){
+			if( userIdCache.get(template.getUsername()) != null ){
 				id = (Long)userIdCache.get(template.getUsername()).getValue();				
 			}
 			

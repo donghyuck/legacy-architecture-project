@@ -11,6 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import architecture.ee.user.UserManager;
@@ -20,7 +22,17 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
 
 	private Log log = LogFactory.getLog(getClass());
 	private UserManager userManager;
-	
+
+	public void setDefaultTargetUrl(String defaultTargetUrl) {		
+		SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
+		handler.setDefaultTargetUrl(defaultTargetUrl);
+		this.setAuthenticationSuccessHandler(handler);
+	}
+
+	public void setAuthenticationFailureUrl(String authenticationFailureUrl) {
+		setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
+	}
+
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 		
