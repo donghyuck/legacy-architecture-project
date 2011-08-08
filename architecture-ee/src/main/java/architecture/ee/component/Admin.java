@@ -34,5 +34,6 @@ public interface Admin extends ApplicationPropertiesSupport {
     public abstract boolean isReady();
     
     public abstract ResourceBundle getResourceBundle(String baseName);
+    
 	
 }
