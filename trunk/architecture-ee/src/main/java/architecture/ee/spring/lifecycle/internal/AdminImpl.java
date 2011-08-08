@@ -338,6 +338,9 @@ public class AdminImpl implements Admin, EventSource {
         getApplicationProperties().remove(name);
     }
     
+    public String getLocalizedApplicationProperty(String name, Locale locale){
+    	return getLocalizedProperties().get((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
+    }
 
     public List<Locale> getLocalizedPropertyLocales(String name)
     {

@@ -18,8 +18,7 @@ import architecture.ee.user.User;
 public class SecurityHelper {
 
 	//private static final Log log = LogFactory.getLog(SecurityHelper.class);
-	
-	
+		
 	public static Authentication getAuthentication(){
 		SecurityContext context = SecurityContextHolder.getContext();
 		Authentication authen = context.getAuthentication();		
