@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.I18nText;
 import architecture.ee.g11n.dao.I18nTextDao;
-import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.model.internal.I18nTextModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
@@ -34,11 +33,6 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 			return c;
 		}};
 		
-	private SequenceDao sequenceDao;
-			 
-	public void setSequenceDao(SequenceDao sequenceDao) {
-			this.sequenceDao = sequenceDao;
-	}
 
 	public void createTexts(final List<I18nText> list) {
 		
@@ -47,7 +41,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 					public void setValues(PreparedStatement ps, int i) throws SQLException {
 						for( I18nText text : list ){
 							long time = System.currentTimeMillis();
-                            ps.setLong(1, sequenceDao.nextID("I18nText"));   
+                            ps.setLong(1, getNextId("I18nText"));   
                             ps.setInt(2, text.getObjectType());
                             ps.setLong(3, text.getObjectId());
                             ps.setInt(4, text.getObjectAttribute());

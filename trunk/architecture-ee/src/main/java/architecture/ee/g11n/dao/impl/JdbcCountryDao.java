@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.Country;
 import architecture.ee.g11n.dao.CountryDao;
-import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.model.internal.CountryModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
@@ -29,11 +28,6 @@ public class JdbcCountryDao extends ExtendedJdbcDaoSupport implements CountryDao
 			return c;
 		}};
 
-	private SequenceDao sequenceDao;
-		 
-	public void setSequenceDao(SequenceDao sequenceDao) {
-		this.sequenceDao = sequenceDao;
-	}
 		
 	private CountryRowMapper getCountryRowMapper () {
 		return new CountryRowMapper();
