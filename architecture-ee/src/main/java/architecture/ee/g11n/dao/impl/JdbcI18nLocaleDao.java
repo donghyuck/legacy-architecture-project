@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.g11n.I18nLocale;
 import architecture.ee.g11n.dao.I18nLocaleDao;
-import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.model.internal.I18nLocaleModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
@@ -33,12 +32,7 @@ public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLoc
 			return c;
 		}};
 		
-	private SequenceDao sequenceDao;
-	
-	public void setSequenceDao(SequenceDao sequenceDao) {
-		this.sequenceDao = sequenceDao;
-	}	
-		
+
 	@Override
 	protected void initDao() throws Exception {
 		super.initDao();
@@ -76,7 +70,7 @@ public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLoc
 	public I18nLocale addLocale(Locale locale) {		
 		long now = System.currentTimeMillis();
 		I18nLocaleModelImpl impl = new I18nLocaleModelImpl();
-		impl.setLocaleId(sequenceDao.nextID("I18nLocale"));
+		impl.setLocaleId(getNextId("I18nLocale"));
 		impl.setLanguage(locale.getLanguage());
 		impl.setCountry(locale.getCountry());
 		impl.setVariant(locale.getVariant());

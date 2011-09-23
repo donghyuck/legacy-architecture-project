@@ -12,7 +12,6 @@ import org.springframework.jdbc.core.RowMapper;
 import architecture.ee.g11n.I18nText;
 import architecture.ee.g11n.I18nTextResourceBundle;
 import architecture.ee.g11n.dao.I18nResourceBundleDao;
-import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.model.internal.I18nTextModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
@@ -31,11 +30,6 @@ public class JdbcI18nResourceBundleDao extends ExtendedJdbcDaoSupport  implement
 			return c;
 		}};
 		
-	private SequenceDao sequenceDao;
-	 
-	public void setSequenceDao(SequenceDao sequenceDao) {
-			this.sequenceDao = sequenceDao;
-	}
 	
 	public I18nTextResourceBundle getResourceBundle(String bundleName, Locale locale) {		
 		
