@@ -12,4 +12,6 @@ public interface ConfigRoot {
     
     public abstract File getFile(String name);
     
+    public String getRootURI();
+    
 }
