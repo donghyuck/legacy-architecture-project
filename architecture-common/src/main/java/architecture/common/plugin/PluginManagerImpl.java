@@ -348,7 +348,7 @@ public class PluginManagerImpl implements PluginManager {
                 Element minServerVersion = (Element)pluginXML.selectSingleNode("/plugin/minServerVersion");
                 if (minServerVersion != null) {
                     String requiredVersion = minServerVersion.getTextTrim();
-                    Version version = ApplicationHelperFactory.getApplicationHelper().getApplication().getVersion();
+                    Version version = ApplicationHelperFactory.getApplicationHelper().getAdminService().getVersion();
                     String hasVersion = version.getMajor() + "." + version.getMinor() + "." + version.getMicro();
                     if (hasVersion.compareTo(requiredVersion) < 0) {
                         String msg = "Ignoring plugin " + pluginDir.getName() + ": requires " +

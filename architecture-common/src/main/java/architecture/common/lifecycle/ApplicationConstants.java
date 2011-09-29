@@ -16,7 +16,17 @@
 package architecture.common.lifecycle;
 
 public interface ApplicationConstants {
+	
+	public static final String DEFAULT_STARTUP_FILENAME = "startup-config.xml";
+
+    public static final String ARCHITECTURE_INSTALL_ROOT_KEY = "architecture.install.root";
+
+    public static final String ARCHITECTURE_CONFIG_ROOT_KEY = "architecture.config.root";
     
+    public static final String ARCHITECTURE_INSTALL_ROOT_ENV_KEY = "ARCHITECTURE_INSTALL_ROOT";
+   
+    public static final String ARCHITECTURE_CONFIG_ROOT_ENV_KEY = "ARCHITECTURE_CONFIG_ROOT";
+    	
 	public static final String EOL = System.getProperty("line.separator");
 	
     public static final String DEFAULT_CHAR_ENCODING = "UTF-8";	

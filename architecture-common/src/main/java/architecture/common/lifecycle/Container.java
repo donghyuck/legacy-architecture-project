@@ -9,8 +9,6 @@ import architecture.common.exception.ComponentNotFoundException;
  */
 public interface Container {
 
-
-
 	/**
 	 * Injection 방식으로 인자로 넘겨진 객체의 프로퍼티를 세닝하여 리턴한다.
 	 * 이 동작은 함수 이름이 보여주듯이 자동으로 처리된다.

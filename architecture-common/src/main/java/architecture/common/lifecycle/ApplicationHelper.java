@@ -22,6 +22,6 @@ package architecture.common.lifecycle;
  */
 public interface ApplicationHelper extends Container {
 
-	public Application getApplication();
+	public AdminService getAdminService();
 			
 }
