@@ -17,7 +17,7 @@ import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.vfs.VFSUtils;
 import architecture.ee.component.DirectoryScanner;
-import architecture.ee.spring.jdbc.SqlQueryFactoryBuilder;
+import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
 
 public class DirectoryScannerImpl /** extends SpringLifecycleService **/ implements InitializingBean, DisposableBean, DirectoryScanner {
 

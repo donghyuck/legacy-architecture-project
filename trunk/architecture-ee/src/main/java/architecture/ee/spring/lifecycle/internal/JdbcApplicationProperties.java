@@ -25,7 +25,7 @@ import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.util.JdbcHelper.DatabaseType;
 import architecture.ee.util.LocaleUtils;
 
-public class JdbcApplicationPropertiesImpl extends AbstractJdbcApplicationProperties implements EventSource  {
+public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties implements EventSource  {
 
 	protected final AtomicBoolean initFlag = new AtomicBoolean(); 
     
@@ -33,7 +33,7 @@ public class JdbcApplicationPropertiesImpl extends AbstractJdbcApplicationProper
 	
     private ConcurrentMap<String, String> properties;
 	
-    protected JdbcApplicationPropertiesImpl(boolean localized)
+    protected JdbcApplicationProperties(boolean localized)
     {
     	this.localized = localized;
     }
