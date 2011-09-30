@@ -49,5 +49,9 @@ public class ConfigRootImpl implements ConfigRoot {
 		}
 		return null;
 	}
+	
+	public String getRootURI(){
+		return rootURL;
+	}
 
 }

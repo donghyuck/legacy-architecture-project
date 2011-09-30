@@ -18,43 +18,49 @@ import org.springframework.core.task.TaskExecutor;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
-import architecture.ee.component.Admin;
-import architecture.ee.component.AdminService;
+import architecture.ee.component.ApplicationService;
 import architecture.ee.component.GlobalizationService;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.util.ApplicatioinConstants;
 import architecture.ee.util.LocaleUtils;
 
-public class AdminImpl implements Admin, EventSource {
+public class ApplicationServiceImpl implements ApplicationService, EventSource {
 	
 	private Log log = LogFactory.getLog(getClass());	
 	
-	private AdminServiceImpl adminService ;	
+	private AdminServiceImpl adminService = null;	
 	private ApplicationProperties properties = null;	
 	private ApplicationProperties localizedProperties = null;	
 	private DataSource dataSource = null;	
 	private EventPublisher eventPublisher = null;	
-	private PluginManagerImpl pluginManager;
-	private TaskExecutor taskExecutor;
-	private GlobalizationService globalizationService;
+	private PluginManagerImpl pluginManager = null;
+	private TaskExecutor taskExecutor = null;
+	private GlobalizationService globalizationService = null;
 	
 	
     private Locale locale = null;
     private TimeZone timeZone = null;
     private String characterEncoding = null;
     
-	public AdminImpl(AdminService adminService) {
+	public ApplicationServiceImpl(AdminService adminService) {
 		
 		this.adminService = (AdminServiceImpl)adminService;
 		this.eventPublisher = this.adminService.getBootstrapComponent(EventPublisher.class);
 		this.pluginManager = this.adminService.getBootstrapComponent(PluginManagerImpl.class);
 		this.taskExecutor = this.adminService.getBootstrapComponent(TaskExecutor.class);
 	
+	}
+	
+	public boolean isSetDataSource(){
+		if(this.dataSource == null )
+			return false;
+		return true;
 	}
 
 	public void setGlobalizationService(GlobalizationService globalizationService) {
@@ -81,7 +87,7 @@ public class AdminImpl implements Admin, EventSource {
 	}
 	
 	public String getEffectiveRootPath() {
-		return adminService.getEffectiveRootPath();
+		return "";
 	}
 	
 	public void setDataSource(DataSource dataSource) {
@@ -93,10 +99,11 @@ public class AdminImpl implements Admin, EventSource {
 	}
 
 	public void initialize(){
-		
-		this.properties = createApplicationProperties(dataSource, false);
-		this.localizedProperties = createApplicationProperties(dataSource, true);
-		
+	
+		if(isSetDataSource()){
+			this.properties = createPropertyMap(dataSource, false);
+			this.localizedProperties = createPropertyMap(dataSource, true);
+		}
 		if( this.pluginManager.isInitialized() ){
 			this.pluginManager.setDataSource(dataSource);
 			this.pluginManager.initialize();
@@ -107,10 +114,10 @@ public class AdminImpl implements Admin, EventSource {
     {
         if(locale == null)
         {
-            String language = getApplicationProperties().get(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
+            String language = getPropertyMap().get(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
             if(language == null)
                 language = "";
-            String country = getApplicationProperties().get(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
+            String country = getPropertyMap().get(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
             if(country == null)
                 country = "";
             if(language.equals("") && country.equals(""))
@@ -125,7 +132,7 @@ public class AdminImpl implements Admin, EventSource {
     {
         String value = newLocale.getCountry();
         String name = "locale.country";
-        setApplicationProperty(name, value);
+        setProperty(name, value);
         
         locale = null;
         timeZone = null;
@@ -139,7 +146,7 @@ public class AdminImpl implements Admin, EventSource {
             String encoding = getLocalProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
             if(encoding != null)
                 characterEncoding = encoding;
-            String charEncoding = getApplicationProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
+            String charEncoding = getProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
             if(charEncoding != null)
                 characterEncoding = charEncoding;
             else
@@ -159,7 +166,7 @@ public class AdminImpl implements Admin, EventSource {
         {
             String value = characterEncoding;
             String name = "locale.characterEncoding";
-            setApplicationProperty(name, value);
+            setProperty(name, value);
 
             locale = null;
             timeZone = null;
@@ -190,11 +197,15 @@ public class AdminImpl implements Admin, EventSource {
     {
         String value = newTimeZone.getID();
         String name = ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME;
-        setApplicationProperty(name, value);        
+        setProperty(name, value);        
         locale = null;
         timeZone = null;
         characterEncoding = null;
     }
+    
+    
+    
+    // propertymap support !!
 	
     public String getLocalProperty(String name)
     {
@@ -227,7 +238,7 @@ public class AdminImpl implements Admin, EventSource {
         Collection<String> propNames = getSetupProperties().getChildrenNames(parent);        
         List<String> values = new ArrayList<String>();
         for( String propName: propNames){
-        	String value = getApplicationProperty((new StringBuilder()).append(parent).append(".").append(propName).toString());
+        	String value = getProperty((new StringBuilder()).append(parent).append(".").append(propName).toString());
         	if(value != null)
                 values.add(value);        	
         }
@@ -257,49 +268,49 @@ public class AdminImpl implements Admin, EventSource {
     }
     
 
-    public String getApplicationProperty(String name)
+    public String getProperty(String name)
     {
-        return (String)getApplicationProperties().get(name);
+        return (String)getPropertyMap().get(name);
     }
     
-    public String getApplicationProperty(String name, String defaultValue)
+    public String getProperty(String name, String defaultValue)
     {
-    	getApplicationProperties();
-        String value = (String)getApplicationProperties().get(name);
+    	getPropertyMap();
+        String value = (String)getPropertyMap().get(name);
         if(value != null)
             return value;
         else
             return defaultValue;
     }    
 
-    public List<String> getApplicationPropertyNames()
+    public List<String> getPropertyNames()
     {
-        return new ArrayList<String>(getApplicationProperties().getPropertyNames());
+        return new ArrayList<String>(getPropertyMap().getPropertyNames());
     }
 
-    public List<String> getApplicationPropertyNames(String parent)
+    public List<String> getPropertyNames(String parent)
     {
-        getApplicationProperties();
-        return new ArrayList<String>(getApplicationProperties().getChildrenNames(parent));
+        getPropertyMap();
+        return new ArrayList<String>(getPropertyMap().getChildrenNames(parent));
     }
 
-    public List<String> getApplicationProperties(String parent)
+    public List<String> getProperties(String parent)
     {
-        getApplicationProperties();
-        Collection<String> propertyNames = getApplicationProperties().getChildrenNames(parent);
+        getPropertyMap();
+        Collection<String> propertyNames = getPropertyMap().getChildrenNames(parent);
                 
         List<String> values = new ArrayList<String>();
         for(String propertyName : propertyNames){
-        	 String value = getApplicationProperty(propertyName);
+        	 String value = getProperty(propertyName);
              if(value != null)
                  values.add(value);
         }
         return values;
     }
 
-    public int getApplicationIntProperty(String name, int defaultValue)
+    public int getIntProperty(String name, int defaultValue)
     {
-        String value = getApplicationProperty(name);
+        String value = getProperty(name);
         if(value != null)
             try
             {
@@ -309,80 +320,80 @@ public class AdminImpl implements Admin, EventSource {
         return defaultValue;
     }
 
-    public boolean getApplicationBooleanProperty(String name)
+    public boolean getBooleanProperty(String name)
     {
-        return Boolean.valueOf(getApplicationProperty(name)).booleanValue();
+        return Boolean.valueOf(getProperty(name)).booleanValue();
     }
 
-    public boolean getApplicationBooleanProperty(String name, boolean defaultValue)
+    public boolean getBooleanProperty(String name, boolean defaultValue)
     {
-        String value = getApplicationProperty(name);
+        String value = getProperty(name);
         if(value != null)
             return Boolean.valueOf(value).booleanValue();
         else
             return defaultValue;
     }
 
-    public void setApplicationProperty(String name, String value)
+    public void setProperty(String name, String value)
     {
-        getApplicationProperties().put(name, value);
+        getPropertyMap().put(name, value);
     }
 
-    public void setApplicationProperties(Map<String, String> propertyMap)
+    public void setProperties(Map<String, String> propertyMap)
     {
-        getApplicationProperties().putAll(propertyMap);
+        getPropertyMap().putAll(propertyMap);
     }
 
-    public void deleteApplicationProperty(String name)
+    public void deleteProperty(String name)
     {
-        getApplicationProperties().remove(name);
+        getPropertyMap().remove(name);
     }
     
-    public String getLocalizedApplicationProperty(String name, Locale locale){
+    public String getLocalizedProperty(String name, Locale locale){
     	return getLocalizedProperties().get((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
     }
 
     public List<Locale> getLocalizedPropertyLocales(String name)
     {
-        if(  getLocalizedProperties() instanceof JdbcApplicationPropertiesImpl )
-            return ((JdbcApplicationPropertiesImpl)getLocalizedProperties()).getLocalesForProperty(name);
+        if(  getLocalizedProperties() instanceof JdbcApplicationProperties )
+            return ((JdbcApplicationProperties)getLocalizedProperties()).getLocalesForProperty(name);
         else
             return Collections.emptyList();
     }
 
-    public void setLocalizedApplicationProperty(String name, String value, Locale locale)
+    public void setLocalizedProperty(String name, String value, Locale locale)
     {
         getLocalizedProperties().put((new StringBuilder()).append(name).append(".").append(locale.toString()).toString(), value);
     }
 
-    public void deleteLocalizedApplicationProperty(String name, Locale locale)
+    public void deleteLocalizedProperty(String name, Locale locale)
     {
     	getLocalizedProperties().remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
     }
     
 	private ApplicationProperties getSetupProperties(){
-		return adminService.getApplicationProperties();
+		return null;
 	}
 	
-	public ApplicationProperties getApplicationProperties() {		
-		if( properties == null){
+	public ApplicationProperties getPropertyMap() {		
+		if( properties == null && isSetDataSource()){
 			getSetupProperties();
-			this.properties = createApplicationProperties(dataSource, false); 
+			this.properties = createPropertyMap(dataSource, false); 
 		}
 		return properties == null ? EmptyApplicationProperties.getInstance() : properties;
 	}
 	    
 	private ApplicationProperties getLocalizedProperties()
     {
-        if(localizedProperties == null)
+        if(localizedProperties == null && isSetDataSource())
         {
-        	localizedProperties = createApplicationProperties(dataSource, true); 	
+        	localizedProperties = createPropertyMap(dataSource, true); 	
         }
         return localizedProperties == null ? EmptyApplicationProperties.getInstance() : localizedProperties;
     }
 		
-	private ApplicationProperties createApplicationProperties(DataSource dataSource, boolean localized){		
-		JdbcApplicationPropertiesImpl impl = new JdbcApplicationPropertiesImpl(localized);
+	private ApplicationProperties createPropertyMap(DataSource dataSource, boolean localized){		
+		JdbcApplicationProperties impl = new JdbcApplicationProperties(localized);
 		impl.setEventPublisher(eventPublisher);
 		impl.setConfiguration(adminService.getBootstrapComponent(Configuration.class));
 		impl.setDataSource(dataSource);
@@ -397,5 +408,6 @@ public class AdminImpl implements Admin, EventSource {
 	public ResourceBundle getResourceBundle(String baseName) {
 		return globalizationService.getResourceBundle(baseName, getLocale());
 	}
+
 
 }
