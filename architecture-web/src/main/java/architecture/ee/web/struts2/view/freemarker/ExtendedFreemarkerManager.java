@@ -17,8 +17,8 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 import org.apache.struts2.views.freemarker.ScopesHashModel;
 
-import architecture.ee.util.AdminHelper;
 import architecture.ee.util.ApplicatioinConstants;
+import architecture.ee.util.ApplicationHelper;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
@@ -96,8 +96,8 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 		config.setCacheStorage(new StrongCacheStorage());
         config.setTemplateExceptionHandler(getTemplateExceptionHandler()); 
-    	config.setOutputEncoding(AdminHelper.getCharacterEncoding());
-    	config.setDefaultEncoding(AdminHelper.getCharacterEncoding());
+    	config.setOutputEncoding(ApplicationHelper.getCharacterEncoding());
+    	config.setDefaultEncoding(ApplicationHelper.getCharacterEncoding());
     	config.addAutoImport("framework", "/template/default/include/framework-macros.ftl");
     	config.setLocalizedLookup(false);  
     	
@@ -110,7 +110,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
         	config.setTemplateUpdateDelay(1);
 	    }else{
 	    
-	    	int dealy = AdminHelper.getApplicationIntProperty(ApplicatioinConstants.FREEMARKER_TEMPLATE_UPDATE_DELAY_PROP_NAME, UPDATE_DELAY);
+	    	int dealy = ApplicationHelper.getApplicationIntProperty(ApplicatioinConstants.FREEMARKER_TEMPLATE_UPDATE_DELAY_PROP_NAME, UPDATE_DELAY);
 	    	config.setTemplateUpdateDelay(dealy);
 	    	log.debug("(update) templateUpdateDelay: " + dealy );
 	    
@@ -128,9 +128,9 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
             return;
         } else
         {
-        	config.setDefaultEncoding(AdminHelper.getCharacterEncoding());
-        	config.setLocale(AdminHelper.getLocale());
-        	config.setTimeZone(AdminHelper.getTimeZone());
+        	config.setDefaultEncoding(ApplicationHelper.getCharacterEncoding());
+        	config.setLocale(ApplicationHelper.getLocale());
+        	config.setTimeZone(ApplicationHelper.getTimeZone());
             return;
         }
 	}
@@ -222,10 +222,9 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			model.put("LocaleUtils",           staticModels.get("architecture.ee.util.LocaleUtils"));
 			model.put("SecurityHelper",        staticModels.get("architecture.ee.util.SecurityHelper"));
 			model.put("ApplicatioinConstants", staticModels.get("architecture.ee.util.ApplicatioinConstants"));
-			
-			
-			model.put("ParamUtils",           staticModels.get("architecture.ee.web.util.ParamUtils"));
-			model.put("ServletUtils",           staticModels.get("architecture.ee.web.util.ServletUtils"));
+			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));			
+			model.put("ParamUtils",            staticModels.get("architecture.ee.web.util.ParamUtils"));
+			model.put("ServletUtils",          staticModels.get("architecture.ee.web.util.ServletUtils"));
 			
 		} catch (TemplateModelException e) {
 			log.error(e);
@@ -237,14 +236,14 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	
     protected boolean isDevMode()
     {
-        return AdminHelper.getApplicationBooleanProperty("devMode", false);
+        return ApplicationHelper.getApplicationBooleanProperty("devMode", false);
     } 
             
     private TemplateExceptionHandler getTemplateExceptionHandler()
     {
         boolean devMode = isDevMode();
         boolean logErrorDefault = !devMode;
-        boolean logError = AdminHelper.getApplicationBooleanProperty(ApplicatioinConstants.FREEMARKER_LOG_ERROR_PROP_NAME, logErrorDefault);
+        boolean logError = ApplicationHelper.getApplicationBooleanProperty(ApplicatioinConstants.FREEMARKER_LOG_ERROR_PROP_NAME, logErrorDefault);
         TemplateExceptionHandler handler;
         
         if(logError)

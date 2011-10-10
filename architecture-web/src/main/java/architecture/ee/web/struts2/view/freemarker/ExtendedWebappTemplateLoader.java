@@ -16,9 +16,10 @@ public class ExtendedWebappTemplateLoader extends WebappTemplateLoader {
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
 		
-		//log.debug( "ExtendedWebappTemplateLoader############################## search:" + name );
+		log.debug( "ExtendedWebappTemplateLoader############################## search:" + name );
 		
 		return super.findTemplateSource(name);
+		
 	}
 
 	@Override
