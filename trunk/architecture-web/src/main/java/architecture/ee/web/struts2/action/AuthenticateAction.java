@@ -1,6 +1,6 @@
 package architecture.ee.web.struts2.action;
 
-import architecture.ee.util.AdminHelper;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.ParamUtils;
 
 import com.opensymphony.xwork2.Validateable;
@@ -82,13 +82,15 @@ public class AuthenticateAction extends ExtendedActionSupport implements Validat
 
 	@Override
 	public String execute() throws Exception {		
+		this.format = ParamUtils.getParameter(getRequest(), "format", "html");
 		this.authnFailed = ParamUtils.getBooleanParameter(getRequest(), "authnFailed", false);
 		this.authzFailed = ParamUtils.getBooleanParameter(getRequest(), "authzFailed", false);		
+		
 		return SUCCESS;
 	}
     
     public boolean isGuestAllowed()
     {
-        return !AdminHelper.getApplicationBooleanProperty("framework.auth.disallowGuest", false);
+        return !ApplicationHelper.getApplicationBooleanProperty("framework.auth.disallowGuest", false);
     }
 }

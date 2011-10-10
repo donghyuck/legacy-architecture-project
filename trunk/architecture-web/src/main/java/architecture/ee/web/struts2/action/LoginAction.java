@@ -2,7 +2,7 @@ package architecture.ee.web.struts2.action;
 
 import java.util.Map;
 
-import architecture.ee.util.AdminHelper;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.struts2.interceptor.RefererInterceptor;
 import architecture.ee.web.util.ParamUtils;
 
@@ -29,15 +29,16 @@ public class LoginAction extends ExtendedActionSupport implements Validateable {
 	@Override
 	public String execute() throws Exception {
 		
+		this.format = ParamUtils.getParameter(getRequest(), "format", "html");
 		this.authnFailed = ParamUtils.getBooleanParameter(getRequest(), "authnFailed", false);
 		this.authzFailed = ParamUtils.getBooleanParameter(getRequest(), "authzFailed", false);
 				
-		if(loginBanned)
+		if(this.loginBanned)
         {
             addActionError(getText("login.err.banned_login.text"));
             return UNAUTHENTICATED;
         }
-        if(authzFailed)
+        if(this.authzFailed)
             if(isGuest())
             {
                 addActionError(getText("login.wrn.notAuthToViewCnt.info"));
@@ -45,14 +46,14 @@ public class LoginAction extends ExtendedActionSupport implements Validateable {
             } else
             {
                 addActionError(getText("login.err.notAuthToViewCnt.info"));
-                return UNAUTHORIZED;
+                return UNAUTHENTICATED;
             }
         if(authnFailed)
         {
             addActionError(getText("login.err.invalid_login.text"));
             return UNAUTHENTICATED;
         }
-        if(accountDisabled)
+        if(this.accountDisabled)
         {
             addActionError(getText("login.err.account_disabled.text"));
             return UNAUTHENTICATED;
@@ -74,6 +75,7 @@ public class LoginAction extends ExtendedActionSupport implements Validateable {
         	
         }else
         {
+        	
             getRedirects();
             return SUCCESS;
         }
@@ -93,6 +95,6 @@ public class LoginAction extends ExtendedActionSupport implements Validateable {
 
     public boolean isGuestAllowed()
     {
-        return !AdminHelper.getApplicationBooleanProperty("framework.auth.disallowGuest", false);
+        return !ApplicationHelper.getApplicationBooleanProperty("framework.auth.disallowGuest", false);
     }
 }

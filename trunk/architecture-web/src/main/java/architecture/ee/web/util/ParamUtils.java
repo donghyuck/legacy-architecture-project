@@ -53,17 +53,14 @@ public class ParamUtils {
         String paramValues[] = request.getParameterValues(name);
         if(paramValues == null || paramValues.length == 0)
             return new String[0];
-        List values = new ArrayList(paramValues.length);
-        String arr$[] = paramValues;
-        int len$ = arr$.length;
-        for(int i$ = 0; i$ < len$; i$++)
-        {
-            String s = arr$[i$];
-            if(s != null && (emptyStringsOK || !"".equals(s)))
-                values.add(s);
+        
+        List<String> values = new ArrayList<String>(paramValues.length);
+        for(String value : paramValues){
+            if(value != null && (emptyStringsOK || !"".equals(value)))
+                values.add(value);
         }
-
-        return (String[])values.toArray(new String[0]);
+        
+        return values.toArray(new String[0]);
     }
 
     public static boolean getBooleanParameter(HttpServletRequest request, String name)

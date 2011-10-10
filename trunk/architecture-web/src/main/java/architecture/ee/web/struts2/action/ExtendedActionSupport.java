@@ -12,12 +12,10 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import architecture.ee.security.AuthToken;
-import architecture.ee.user.User;
-import architecture.ee.util.AdminHelper;
-import architecture.ee.util.SecurityHelper;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.ServletUtils;
 
+@SuppressWarnings("serial")
 public class ExtendedActionSupport extends com.opensymphony.xwork2.ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware {
 
 	public static final String CANCEL = "cancel";
@@ -25,8 +23,11 @@ public class ExtendedActionSupport extends com.opensymphony.xwork2.ActionSupport
 	public static final String UNAUTHORIZED = "unauthorized";
 	public static final String DISABLED = "feature-disabled";
 	public static final String UNAUTHENTICATED = "unauthenticated";
-
-	protected Log log = LogFactory.getLog(getClass());
+    
+	
+	protected String format = OutputFormat.HTML.name().toLowerCase(); 
+	
+	protected final transient Log log = LogFactory.getLog(getClass());
 	
 	protected HttpServletRequest request;
 
@@ -38,7 +39,15 @@ public class ExtendedActionSupport extends com.opensymphony.xwork2.ActionSupport
 
 	private User user;
 
-	
+		
+	public String getFormat() {
+		return format;
+	}
+
+	public void setFormat(String format) {
+		this.format = format.toLowerCase();
+	}
+
 	public void setServletResponse(HttpServletResponse response) {
 		this.response = response;
 	}
@@ -56,7 +65,7 @@ public class ExtendedActionSupport extends com.opensymphony.xwork2.ActionSupport
 			authToken = SecurityHelper.getAuthToke();
 		return authToken;
 	}
-
+	
     public final User getUser()
     {
     	
@@ -75,7 +84,7 @@ public class ExtendedActionSupport extends com.opensymphony.xwork2.ActionSupport
     }
     
     public <T> T getComponnet(Class<T> requiredType) {
-    	return AdminHelper.getApplicationHelper().getComponent(requiredType);
+    	return ApplicationHelper.getComponent(requiredType);
     }
     
     
