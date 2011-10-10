@@ -3,9 +3,11 @@
 
 	<rank>1000</rank>
 
+    <!-- 
 	<factory
 		interface="architecture.ee.bootstrap.Bootstrap$Implementation"
 		impl="architecture.ee.bootstrap.impl.BootstrapImpl" />
+	-->		
 			
 	<factory
 		interface="architecture.common.lifecycle.ApplicationHelperFactory$Implementation"
