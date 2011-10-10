@@ -186,7 +186,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
         }
 	}
 
-	protected XmlApplicationProperties(InputStream in) throws Exception {
+	public XmlApplicationProperties(InputStream in) throws Exception {
         propertyCache = new HashMap<String, String>();
         lock = new ReentrantLock();
         Reader reader = new BufferedReader(new InputStreamReader(in));

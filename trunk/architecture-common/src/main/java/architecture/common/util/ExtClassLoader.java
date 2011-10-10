@@ -226,12 +226,14 @@ public class ExtClassLoader extends URLClassLoader {
      * @return the resulting class
      * @exception ClassNotFoundException if the class could not be found
      */
-    public Class findClass(String name)
+    public Class<?> findClass(String name)
         throws ClassNotFoundException
     {
-        Class class1 = super.findClass(name);
+        Class<?> class1 = super.findClass(name);
+        
         /*if(WSLauncher.debug)
             WSLauncher.out.println("[Loaded " + s + " by ExtClassLoader]");*/
+        
         return class1;
     }
 
@@ -249,23 +251,21 @@ public class ExtClassLoader extends URLClassLoader {
         return s1;
     }
 
-    protected String findLibrary0(String name, ArrayList arraylist)
+    protected String findLibrary0(String name, ArrayList<URL> pathList)
     {
-        final String mappedLib;
-        final ArrayList paths;
-        mappedLib = System.mapLibraryName(name);
-        paths = arraylist;
+        final String mappedLib = System.mapLibraryName(name);
+        final ArrayList<URL> paths = pathList;
         
-        int i = paths.size();
-        for(int j = 0; j < i; j++)
-        {
-            URL url = (URL)paths.get(j);
-            File file = new File(url.getFile());
+        for(URL url : paths){
+        	
+        	File file = new File(url.getFile());
             if(!file.isDirectory())
                 continue;
+            
             File file1 = new File(file, mappedLib);
             if(!file1.exists())
-                continue;            
+                continue;          
+            
             return file1.getPath();
         }
         return null;
