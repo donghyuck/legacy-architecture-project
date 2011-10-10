@@ -19,7 +19,7 @@
 			
 	<context:property-placeholder location="classpath:*application-properties.xml"/>
 			
-	<bean id="admin" class="architecture.ee.spring.lifecycle.internal.AdminImpl" init-method="initialize" 
+	<bean id="admin" class="architecture.ee.spring.lifecycle.internal.ApplicationServiceImpl" init-method="initialize" 
 	    p:eventPublisher-ref="eventPublisher" 
 	    p:dataSource-ref="dataSource" >
 		<constructor-arg ref="adminService"/>
