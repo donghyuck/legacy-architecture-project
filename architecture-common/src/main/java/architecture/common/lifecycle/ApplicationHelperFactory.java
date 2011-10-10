@@ -21,7 +21,9 @@ public class ApplicationHelperFactory {
 
 	public static interface Implementation
     {
-		public abstract ApplicationHelper getApplicationHelper();		
+		
+		public abstract ApplicationHelper getApplicationHelper();
+		
     }
 	
 	private static Implementation impl = null;
