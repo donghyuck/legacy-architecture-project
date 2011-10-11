@@ -7,10 +7,10 @@ import architecture.ee.web.struts2.annotation.NoValidation;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.validator.ValidationInterceptor;
 
+
 public class ExtendedValidationInterceptor extends ValidationInterceptor {
 
-	public ExtendedValidationInterceptor() {
-		
+	public ExtendedValidationInterceptor() {		
 	}
 	
     protected boolean applyInterceptor(ActionInvocation invocation)
@@ -57,5 +57,4 @@ public class ExtendedValidationInterceptor extends ValidationInterceptor {
         }
         return applyMethod;
     }
-
 }
