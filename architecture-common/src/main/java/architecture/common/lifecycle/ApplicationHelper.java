@@ -17,11 +17,19 @@ package architecture.common.lifecycle;
 
 /**
  * 
+ * 
+ * 
  * @author <a href="mailto:andang311@inkium.com">donghyuck son </a>
  *
  */
 public interface ApplicationHelper extends Container {
 
-	public AdminService getAdminService();
+	public abstract AdminService getAdminService();
 			
+	public abstract ConfigService getConfigService();
+	
+	public abstract Repository getRepository();
+	
+	public abstract boolean isReady();
+	
 }
