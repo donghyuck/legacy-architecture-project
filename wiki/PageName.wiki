@@ -1,6 +1,6 @@
-#summary One-sentence summary of this page.
+#개발 아키텍처 솔루션 의존성
 
-= Introduction =
+= Dependencies =
 
 Add your content here.
 
