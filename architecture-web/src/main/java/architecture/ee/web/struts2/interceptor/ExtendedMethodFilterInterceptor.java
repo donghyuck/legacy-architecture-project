@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.Preparable;
 import com.opensymphony.xwork2.interceptor.MethodFilterInterceptor;
 
+
 public class ExtendedMethodFilterInterceptor extends MethodFilterInterceptor {
 	
 	private static final Log log = LogFactory.getLog(ExtendedMethodFilterInterceptor.class);

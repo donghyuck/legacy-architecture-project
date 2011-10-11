@@ -12,7 +12,10 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
+import architecture.ee.security.authentication.AuthToken;
+import architecture.ee.user.User;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.util.SecurityHelper;
 import architecture.ee.web.util.ServletUtils;
 
 @SuppressWarnings("serial")
@@ -23,8 +26,7 @@ public class ExtendedActionSupport extends com.opensymphony.xwork2.ActionSupport
 	public static final String UNAUTHORIZED = "unauthorized";
 	public static final String DISABLED = "feature-disabled";
 	public static final String UNAUTHENTICATED = "unauthenticated";
-    
-	
+    	
 	protected String format = OutputFormat.HTML.name().toLowerCase(); 
 	
 	protected final transient Log log = LogFactory.getLog(getClass());
