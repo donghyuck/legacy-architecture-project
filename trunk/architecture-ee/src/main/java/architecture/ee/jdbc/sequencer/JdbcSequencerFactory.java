@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.mapping.MappedStatement;
-import architecture.ee.jdbc.sequencer.internal.JdbcSequencer;
+import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public class JdbcSequencerFactory {

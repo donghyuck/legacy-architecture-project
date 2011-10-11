@@ -31,6 +31,8 @@ import org.springframework.jdbc.support.MetaDataAccessException;
 
 import architecture.ee.jdbc.util.JdbcHelper;
 
+
+
 public class JdbcHelperImpl implements JdbcHelper {
 
 	// True if the database support transactions.

@@ -2,6 +2,7 @@ package architecture.ee.jdbc.recordset;
 
 import java.sql.ResultSet;
 
+import architecture.ee.jdbc.recordset.Recordset;
 public class RecordsetFactoryImpl implements RecordsetFactory.Implementation {
 
 	public RecordsetFactoryImpl() {

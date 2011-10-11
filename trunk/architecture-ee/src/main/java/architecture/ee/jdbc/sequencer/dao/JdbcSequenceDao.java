@@ -4,7 +4,7 @@ import java.util.Map;
 
 import architecture.ee.jdbc.sequencer.JdbcSequencerFactory;
 import architecture.ee.jdbc.sequencer.Sequencer;
-import architecture.ee.jdbc.sequencer.internal.JdbcSequencer;
+import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 
 public class JdbcSequenceDao implements SequenceDao {
 	
