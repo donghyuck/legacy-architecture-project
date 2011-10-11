@@ -18,6 +18,7 @@ package architecture.ee.jdbc.util;
 import javax.sql.DataSource;
 
 import architecture.common.util.ImplFactory;
+import architecture.ee.jdbc.util.JdbcHelper;
 
 public class JdbcHelperFactory {
 

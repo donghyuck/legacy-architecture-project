@@ -1,4 +1,4 @@
-package architecture.ee.jdbc.sequencer.internal;
+package architecture.ee.jdbc.sequencer.impl;
 
 import java.sql.Types;
 

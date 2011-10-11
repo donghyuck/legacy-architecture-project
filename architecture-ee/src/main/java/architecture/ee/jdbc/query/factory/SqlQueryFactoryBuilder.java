@@ -1,7 +1,7 @@
 package architecture.ee.jdbc.query.factory;
 
 import javax.sql.DataSource;
-
+import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.common.scanner.DirectoryListener;
 
 public interface SqlQueryFactoryBuilder extends DirectoryListener {

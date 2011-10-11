@@ -15,10 +15,12 @@
  */
 package architecture.ee.jdbc.query.factory;
 
+import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.impl.ConfigurationFactoryImpl;
 
 public class ConfigurationFactory {
 
+	
 	public static interface Implementation {
 
 		public Configuration getConfiguration();
