@@ -28,7 +28,7 @@ public interface ApplicationHelper extends Container {
 			
 	public abstract ConfigService getConfigService();
 	
-	public abstract Repository getRepository();
+	//public abstract Repository getRepository();
 	
 	public abstract boolean isReady();
 	

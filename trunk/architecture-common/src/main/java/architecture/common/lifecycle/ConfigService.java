@@ -9,7 +9,7 @@ import java.util.TimeZone;
 
 public interface ConfigService extends Component{
 
-	public Repository getRepository();
+	public Repository getWorkspace();
 	
 	public ConfigRoot getConfigRoot();
 	
@@ -106,7 +106,6 @@ public interface ConfigService extends Component{
 	public void setApplicationProperties(Map<String, String> map);
 
 	public void deleteApplicationProperty(String name);
-
 	
 	public String getLocalizedApplicationProperty(String name, Locale locale);
 
