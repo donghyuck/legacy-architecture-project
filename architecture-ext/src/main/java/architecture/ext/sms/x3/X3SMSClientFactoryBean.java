@@ -4,7 +4,7 @@ import org.springframework.beans.factory.FactoryBean;
 
 import architecture.ext.sms.client.SMSClient;
 
-public class X3SMSClientFactoryBean implements FactoryBean<SMSClient> {
+public class X3SMSClientFactoryBean implements FactoryBean {
 
 	private boolean singleton = false;
 	private String connectionString = "sme://000.000.000.131:20000";
@@ -26,7 +26,7 @@ public class X3SMSClientFactoryBean implements FactoryBean<SMSClient> {
 		return client;
 	}
 
-	public Class<SMSClient> getObjectType() {
+	public Class getObjectType() {
 		return SMSClient.class;
 	}
 
@@ -40,6 +40,10 @@ public class X3SMSClientFactoryBean implements FactoryBean<SMSClient> {
 
 	public String getConnectionString() {
 		return connectionString;
+	}
+
+	public X3SMSClientFactoryBean() {
+		super();
 	}
 
 	public void setConnectionString(String connectionString) {

@@ -32,15 +32,16 @@ public class X3SMSClient implements SMSClient, SMEListener {
 	private boolean receiverCreated = true;
 	private int count = 1;
 	private boolean deliveryReport = false;
-	
-	
+		
 	
 	SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddhhmmss");
 	DecimalFormat numberFormat = new DecimalFormat("0000");
 	
 	private SMEConnectionFactory factory = null;
-	
-	
+		
+	public X3SMSClient() {
+	}
+
 	private SMEConnection connection = null;
 	private SMESession session = null;
 	private SMESender sender = null;
