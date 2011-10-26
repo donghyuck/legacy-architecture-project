@@ -13,9 +13,28 @@
         Dao Subsystem Context
 	]]></description>
 
-	<bean id="smsClient" class="architecture.ext.sms.x3.X3SMSClientFactoryBean"
+	<bean id="smsClient" class="architecture.ext.sms.x3.X3SMSClient" scope="prototype"
 		p:connectionString="sme://000.000.000.131:20000"
 		p:username="forest001" 
-		p:password="forest481" />
+		p:password="forest481" >
+	</bean>
+	<!-- 
+	<bean id="smsListener" class="architecture.ext.sms.x3.X3SMSListener"
+		scope="singleton" 
+		p:connectionString="sme://000.000.000.131:20000"
+		p:username="forest001" 
+		p:password="forest481" 
+		init-method="initialize"
+		destroy-method="distory">
+	</bean>
+-->
+	<bean id="mmsClient" class="architecture.ext.mms.mose.MoseMMSClient"
+		p:timeOut="10000" scope="prototype">
+		<constructor-arg index="0" value="000.000.000.000" />
+		<constructor-arg index="1" value="13000" />
+		<constructor-arg index="2" value="/" />
+		<constructor-arg index="3" value="forest001" />
+		<constructor-arg index="4" value="forest481" />
+	</bean>
 
 </beans>
