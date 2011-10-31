@@ -17,7 +17,6 @@ import org.apache.commons.lang.time.FastDateFormat;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
 
-import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigRoot;
@@ -58,9 +57,9 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	}
 	
 	public void reset(){
-        setupProperties = null;
-        properties = null;
-        localizedProperties = null;
+        this.setupProperties = null;
+        this.properties = null;
+        this.localizedProperties = null;
         //whiteLabel = false;
         //initWhiteLabel = false;        
 		resetL10N();
@@ -72,8 +71,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		this.characterEncoding = null;
 		this.dateFormat = null;
 		this.dateTimeFormat = null;
-	}
-	
+	}	
 
 	public Repository getRepository(){
 		return Bootstrap.getBootstrapComponent(Repository.class);
@@ -112,13 +110,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         return localizedProperties == null ? EmptyApplicationProperties.getInstance() : localizedProperties ;
     }
     
-	private ApplicationProperties getApplicationProperties () {		
+	private ApplicationProperties getApplicationProperties () {
 		if( properties == null ){			
 			getSetupProperties();		
-			
-			if(dataSource != null){
-				this.properties = newApplicationProperties(false); 
-			}
+			this.properties = newApplicationProperties(false); 
 		}
 		return properties == null ? EmptyApplicationProperties.getInstance() : properties;
 	}
@@ -128,22 +123,20 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	}
 	
 	private ApplicationProperties newApplicationProperties(boolean localized){		
-		
-		DataSource dataSourceToUse = dataSource;
-		
+		DataSource dataSourceToUse = this.dataSource;		
 		if(dataSourceToUse == null){
 			getSetupProperties();
 			dataSourceToUse = DataSourceFactory.getDataSource();
-		}
-		
+		}		
 		// 데이터베이스 설정이 완료되지 않았다면 널을 리턴한다.		
-		if(dataSource != null){
+		if(dataSourceToUse != null){			
+			log.debug("Loading properties from database.");
 			JdbcApplicationProperties impl = new JdbcApplicationProperties(localized);
 			impl.setEventPublisher(getEventPublisher());
 			impl.setConfiguration(getSqlQueryFactoryBuilder().getConfiguration());		
-			impl.setDataSource(dataSource);
+			impl.setDataSource(dataSourceToUse);
 			impl.afterPropertiesSet();
-			return impl;
+			return impl;			
 		}
 		return null;
 	}
@@ -227,11 +220,11 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	public void setTimeZone(TimeZone newTimeZone) {
 		String timeZoneId = newTimeZone.getID();
 		setApplicationProperty(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME, timeZoneId);
-		 resetL10N();
+		resetL10N();
 	}
 
 	public String formatDate(Date date) {
-        if(dateFormat == null)
+        if(dateFormat == null){
             if(properties != null)
             {
                 dateFormat = FastDateFormat.getDateInstance(2, getTimeZone(), getLocale());
@@ -240,11 +233,12 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
                 FastDateFormat instance = FastDateFormat.getDateInstance(2, getTimeZone(), getLocale());
                 return instance.format(date);
             }
+        }
         return dateFormat.format(date);
 	}
 
 	public String formatDateTime(Date date) {
-	    if(dateTimeFormat == null)
+	    if(dateTimeFormat == null){
             if(properties != null)
             {
                 dateTimeFormat = FastDateFormat.getDateTimeInstance(2, 2, getTimeZone(), getLocale());
@@ -253,6 +247,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
                 FastDateFormat instance = FastDateFormat.getDateTimeInstance(2, 2, getTimeZone(), getLocale());
                 return instance.format(date);
             }
+	    }
         return dateTimeFormat.format(date);
 	}
 
@@ -263,23 +258,25 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	public int getLocalProperty(String name, int defaultValue) {
         String value = getLocalProperty(name);
-        if(value != null)
+        if(value != null){
             try
             {
                 return Integer.parseInt(value);
             }
             catch(NumberFormatException nfe) { }
+        }
         return defaultValue;
 	}
 
 	public boolean getLocalProperty(String name, boolean defaultValue) {
         String value = getLocalProperty(name);
-        if(value != null)
+        if(value != null){
             try
             {
                 return Boolean.parseBoolean(value);
             }
             catch(NumberFormatException nfe) { }
+        }
         return defaultValue;
 	}
 	
@@ -312,9 +309,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	public void deleteLocalProperty(String name) {
 		getSetupProperties().remove(name);		
-	}
-
-	
+	}	
 	
 	public String getApplicationProperty(String name) {		
 		return getApplicationProperties().get(name);
@@ -352,12 +347,13 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	public int getApplicationIntProperty(String name, int defaultValue) {
 		String value = getApplicationProperty(name);
-        if(value != null)
+        if(value != null){
             try
             {
                 return Integer.parseInt(value);
             }
             catch(NumberFormatException nfe) { }
+        }
         return defaultValue;
 	}
 
@@ -400,10 +396,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	public void setLocalizedApplicationProperty(String name, String value, Locale locale) {		
 		getLocalizedApplicationProperties().put((new StringBuilder()).append(name).append(".").append(locale.toString()).toString(), value);		
 	}
-
+	
 	public void deleteLocalizedApplicationProperty(String name, Locale locale) {
-		getLocalizedApplicationProperties().remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());
-		
+		getLocalizedApplicationProperties().remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());		
 	}
-
 }
