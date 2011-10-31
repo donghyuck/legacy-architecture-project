@@ -19,9 +19,10 @@
 	<!--  Task & Jobs                                     -->
 	<!-- ================================================ -->	
 	<!-- Global Timer for timed execution tasks. -->
-	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" p:corePoolSize="5" p:maxPoolSize="10" p:queueCapacity="25" />
-	
-	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" 
+	    p:corePoolSize="5" 
+	    p:maxPoolSize="10" 
+	    p:queueCapacity="25" />	
 	<!-- Spring task executor replaces the custom task engine. -->
 	<!-- 
 	<bean id="taskTimer" class="org.springframework.scheduling.timer.TimerFactoryBean" p:daemon="false" />   
@@ -29,16 +30,13 @@
     -->
     <!-- 
 	<bean id="taskTimer" class="org.springframework.scheduling.timer.TimerFactoryBean" p:daemon="true" />
-	
-	<bean id="taskEngine" class="architecture.common.util.TaskEngine" > 
-		<constructor-arg index="0" ref="taskTimer"/>
-	</bean>
-	-->
-	
+	-->	
+	<bean id="taskEngine" class="architecture.ee.util.task.TaskEngine" />
+	<!-- 
 	<bean id="taskEngine" class="architecture.ee.util.task.TaskEngine" init-method="initialize">
 		<constructor-arg index="0" ref="adminService"/>
 	</bean> 
-
+    -->    
 	<!-- ================================================ -->	
 	<!--  Event                                           -->
 	<!-- ================================================ -->	
@@ -47,63 +45,69 @@
 	<bean id="eventExecutorFactory" class="architecture.common.event.internal.EventExecutorFactoryImpl" depends-on="eventThreadPoolConfiguration" >
 		<constructor-arg index="0" ref="eventThreadPoolConfiguration"/>
 	</bean>
-	-->	
-	
-	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher" depends-on="taskExecutor">
+	-->		
+	<bean id="eventDispatcher" 
+	    class="architecture.common.event.internal.AsynchronousAbleEventDispatcher" 
+	    depends-on="taskExecutor">
 		<constructor-arg index="0" ref="taskExecutor"/>
-    </bean>    
+    </bean>
+	<bean id="listenerHandlerConfiguration" 
+	    class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />	
 	
-	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
-	
-	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl" depends-on="eventDispatcher, listenerHandlerConfiguration">
+	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl"
+	    depends-on="eventDispatcher, listenerHandlerConfiguration">
 		<constructor-arg index="0" ref="eventDispatcher"/>
 		<constructor-arg index="1" ref="listenerHandlerConfiguration"/>
 	</bean>	
-	
 	<!-- ================================================ -->	
 	<!--  Plugin                                          -->
 	<!-- ================================================ -->	
-	<bean id="pluginCacheRegistry" class="architecture.common.plugin.internal.PluginCacheRegistryImpl" depends-on="ehcache" >
+	<bean id="pluginCacheRegistry" 
+	    class="architecture.common.plugin.impl.PluginCacheRegistryImpl" 
+	    depends-on="ehcache" >
 	    <constructor-arg index="0" ref="ehcache"/>
-	</bean>		
-	<bean id="pluginManager" class="architecture.ee.spring.lifecycle.internal.PluginManagerImpl" 
-	    p:eventPublisher-ref="eventPublisher" 
-	    p:taskEngine-ref="taskEngine" />	
-	    
+	</bean>
+	
+	<bean id="pluginManager" 
+	    class="architecture.common.plugin.impl.PluginManagerImpl" 
+	    p:eventPublisher-ref="eventPublisher"  />	    
+	
 	<!-- ================================================ -->	
 	<!--  Cache                                           -->
 	<!-- ================================================ -->	
-	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />	
-		
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" 
+	    p:shared="false" />		
 	<!-- ================================================ -->	
 	<!--  ConfigService & AdminService                    -->
 	<!-- ================================================ -->	
-	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />	
-	
-	<bean id="configService" class="architecture.ee.spring.lifecycle.internal.ConfigServiceImpl" 
+	<bean id="contextLoader"
+        class="architecture.ee.spring.context.WebApplicationContextLoader" />	
+	<bean id="configService" 
+	    class="architecture.ee.admin.impl.ConfigServiceImpl" 
 	    init-method="initialize"
 	    p:eventPublisher-ref="eventPublisher"
-	    p:sqlQueryFactoryBuilder-ref="sqlQueryFactoryBuilder"
-	/>
-			
-	<bean id="adminService" class="architecture.ee.spring.lifecycle.internal.AdminServiceImpl" 
+	    p:sqlQueryFactoryBuilder-ref="sqlQueryFactoryBuilder" />			
+	<bean id="adminService" 
+	    class="architecture.ee.admin.impl.AdminServiceImpl" 
 	    init-method="initialize"
 	    depends-on="eventPublisher, contextLoader, configService"
 		p:eventPublisher-ref="eventPublisher" 
 		p:contextLoader-ref="contextLoader" 
-		p:configService-ref="configService"/>	
-		
+		p:configService-ref="configService" />			
 	<!-- ================================================ -->	
 	<!--  Database                                        -->
 	<!-- ================================================ -->
-	<bean id="sqlConfiguration" class="architecture.ee.jdbc.query.factory.ConfigurationFactory" factory-method="getConfiguration" />	
-	<bean id="sqlQueryFactoryBuilder" class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilderImpl" init-method="initialize">
+	<bean id="sqlConfiguration" 
+	    class="architecture.ee.jdbc.query.factory.ConfigurationFactory" 
+	    factory-method="getConfiguration" />	
+	<bean id="sqlQueryFactoryBuilder" 
+	    class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilderImpl" 
+	    init-method="initialize">
 	    <constructor-arg index="0" ref="sqlConfiguration"/>
 		<property name="resourceLocations">
 			<list>
 				<value>res:sql/default-framework-queryset.xml</value>
 			</list>
 		</property>
-	</bean>		
-	
+	</bean>	
 </beans>
