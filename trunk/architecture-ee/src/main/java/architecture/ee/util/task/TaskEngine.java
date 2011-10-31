@@ -17,8 +17,7 @@ public class TaskEngine {
 	
     private static class GuardedRunnable
     implements Runnable
-	{
-    	
+	{    	
 	    private Runnable runnable;
 	    private volatile boolean running;
 	
@@ -236,9 +235,8 @@ public class TaskEngine {
         }
     }
 
-    public TaskEngine(AdminService adminService)
+    public TaskEngine()
     {
-    	this.adminService = adminService;
     	this.taskQueue = null;
     	this.workers = null;
     	this.taskTimer = null;
@@ -250,7 +248,7 @@ public class TaskEngine {
     	this.taskQueue = new PriorityQueue();
     	this.threadGroup = new ThreadGroup("Task Engine Workers");
     	this.workers = new TaskEngineWorker[5];
-        
+    	
         for(int i = 0; i < workers.length; i++)
         {
         	this.workers[i] = new TaskEngineWorker((new StringBuilder()).append("Task Engine Worker ").append(i).toString());
@@ -267,14 +265,9 @@ public class TaskEngine {
             started = false;
             if(workers != null)
             {
-                TaskEngineWorker arr$[] = workers;
-                int len$ = arr$.length;
-                for(int i$ = 0; i$ < len$; i$++)
-                {
-                    TaskEngineWorker worker = arr$[i$];
-                    worker.stopWorker();
-                }
-
+            	for(TaskEngineWorker worker : workers){
+            		worker.stopWorker();
+            	}
                 lock.notifyAll();
                 workers = null;
             }

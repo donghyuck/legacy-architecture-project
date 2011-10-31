@@ -27,6 +27,10 @@ public abstract class AbstractJdbcApplicationProperties extends ExtendedJdbcDaoS
 		return NumberUtils.toInt(get(property), defaultValue);
 	}	
 
+	public long getLongProperty(String property, long defaultValue) {
+		return NumberUtils.toLong(get(property), defaultValue);
+	}	
+	
     protected void firePropertyChangeEvent(Object source, ApplicationPropertyChangeEvent.Type eventType, String propertyName, Object oldValue, Object newValue){
        if(eventPublisher != null){
            eventPublisher.publish(new ApplicationPropertyChangeEvent(source, eventType, propertyName, oldValue, newValue));    	

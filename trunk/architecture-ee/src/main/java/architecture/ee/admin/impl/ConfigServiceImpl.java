@@ -1,10 +1,6 @@
 package architecture.ee.admin.impl;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -20,8 +16,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 
 import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
@@ -30,17 +24,15 @@ import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
-import architecture.common.lifecycle.internal.XmlApplicationPropertiesOld;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.bootstrap.Bootstrap;
+import architecture.ee.jdbc.datasource.DataSourceFactory;
 import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
 import architecture.ee.util.ApplicatioinConstants;
 import architecture.ee.util.LocaleUtils;
 
 public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
-	private String startupFileName = ApplicationConstants.DEFAULT_STARTUP_FILENAME ;
-	
 	private ApplicationProperties setupProperties = null;
 	private ApplicationProperties properties = null;	
 	private ApplicationProperties localizedProperties = null;	
@@ -137,8 +129,11 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	
 	private ApplicationProperties newApplicationProperties(boolean localized){		
 		
-		if(dataSource == null){
+		DataSource dataSourceToUse = dataSource;
+		
+		if(dataSourceToUse == null){
 			getSetupProperties();
+			dataSourceToUse = DataSourceFactory.getDataSource();
 		}
 		
 		// 데이터베이스 설정이 완료되지 않았다면 널을 리턴한다.		
