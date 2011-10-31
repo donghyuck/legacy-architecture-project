@@ -1,0 +1,1205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-queryset name="FRAMEWORK_V2" description="Query for Common Componets.">
+
+	<sql-query name="SELECT_ALL_LOCALIZED_PROPERTY" comment="전체 다국어 지원 프로퍼티 값"><![CDATA[
+		select PROPERTY_NAME, PROPERTY_VALUE, LOCALE_CODE from V2_LOCALIZED_PROPERTY
+      ]]></sql-query>
+	<sql-query name="INSERT_LOCALIZED_PROPERTY" comment="다국어 프로퍼티  저장"><![CDATA[
+		INSERT INTO V2_LOCALIZED_PROPERTY (PROPERTY_NAME, PROPERTY_VALUE, LOCALE_CODE) VALUES (? ,?, ?) 
+      ]]></sql-query>
+	<sql-query name="DELETE_LOCALIZED_PROPERTY" comment="다국어 프로퍼티 삭제"><![CDATA[
+		DELETE FROM V2_LOCALIZED_PROPERTY 
+		WHERE PROPERTY_NAME LIKE ? AND LOCALE_CODE LIKE ?
+      ]]></sql-query>
+	<sql-query name="UPDATE_LOCALIZED_PROPERTY" comment="다국어 프로퍼티 업데이트"><![CDATA[
+		UPDATE V2_LOCALIZED_PROPERTY SET PROPERTY_VALUE=? 
+		WHERE PROPERTY_NAME=? AND LOCALE_CODE=? 
+      ]]></sql-query>
+	<sql-query name="SELECT_ALL_PROPERTY" comment="전체  프로퍼티 값"><![CDATA[
+		select PROPERTY_NAME, PROPERTY_VALUE from V2_PROPERTY
+      ]]></sql-query>
+	<sql-query name="INSERT_PROPERTY" comment="프로퍼티 저장"><![CDATA[
+		INSERT INTO V2_PROPERTY (PROPERTY_NAME, PROPERTY_VALUE) VALUES (? ,?) 
+      ]]></sql-query>
+	<sql-query name="DELETE_PROPERTY" comment="프로퍼티 삭제"><![CDATA[
+		DELETE FROM V2_PROPERTY WHERE PROPERTY_NAME LIKE ?
+      ]]></sql-query>
+	<sql-query name="UPDATE_PROPERTY" comment="프로퍼티 업데이트"><![CDATA[
+		UPDATE V2_PROPERTY SET PROPERTY_VALUE=? WHERE PROPERTY_NAME=?
+      ]]></sql-query>
+      
+	<sql-query name="INSERT_PLUGIN" comment="플러그인 데이터 추가"><![CDATA[
+		INSERT INTO V2_PLUGIN_DATA (PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE) VALUES (?, ?, ?, ?)
+      ]]></sql-query>
+
+	<sql-query name="INSERT_PLUGIN_WITH_DATA" comment="플러그인 데이터 추가"><![CDATA[
+		INSERT INTO V2_PLUGIN_DATA (PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE, data) 
+		VALUES (?, ?, ?, ?, ?)
+      ]]></sql-query>
+
+	<sql-query name="DELETE_PLUGIN_BY_ID" comment="프러그인 아이디로 플러그인 데이터 삭제"><![CDATA[
+		DELETE FROM V2_PLUGIN_DATA WHERE PLUGIN_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="DELETE_PLUGIN_BY_NAME" comment="플러그인 이름에 해당하는 플러그인 데이터 삭제"><![CDATA[
+		DELETE FROM V2_PLUGIN_DATA WHERE NAME = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_PLUGIN_BY_NAME" comment="플러그인 이름으로 플러그인 데이터 조회"><![CDATA[
+		SELECT PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE FROM V2_PLUGIN_DATA WHERE NAME = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_PLUGIN" comment="전체 플러그인 데이터 조회"><![CDATA[
+		SELECT PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE FROM V2_PLUGIN_DATA
+      ]]></sql-query>
+
+	<sql-query name="UPDATE_PLUGIN_DATA" comment="플러드그인 데이터 업데이트"><![CDATA[
+		UPDATE V2_PLUGIN_DATA SET DATA = ?, MODIFIED_DATE = SYSDATE WHERE PLUGIN_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_PLUGIN_DATA" comment="전체 다국어 지원 프로퍼티 값"><![CDATA[
+		SELECT DATA FROM V2_PLUGIN_DATA WHERE PLUGIN_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="EXIST_PLUGIN_DATA_TABLE" comment="전체 다국어 지원 프로퍼티 값"><![CDATA[
+		SELECT 1 FROM V2_PLUGIN_DATA
+      ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_SEQUENCER"><![CDATA[
+		SELECT SEQUENCER_ID, NAME, VALUE FROM V2_SEQUENCER
+      ]]></sql-query>
+
+	<sql-query name="SELECT_SEQUENCER_BY_ID"><![CDATA[
+		SELECT VALUE FROM V2_SEQUENCER WHERE SEQUENCER_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="UPDATE_SEQUENCER"><![CDATA[
+		UPDATE V2_SEQUENCER SET VALUE = ? WHERE SEQUENCER_ID = ? AND VALUE = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_SEQUENCER_MAX_ID"><![CDATA[
+		SELECT MAX ( SEQUENCER_ID ) + 1 FROM V2_SEQUENCER 
+      ]]></sql-query>
+
+	<sql-query name="INSERT_SEQUENCER"><![CDATA[
+		INSERT INTO V2_SEQUENCER (VALUE, NAME, SEQUENCER_ID ) VALUES (?, ?, ?)
+      ]]></sql-query>
+
+	<!-- COUNTRY -->
+	<sql-query name="SELECT_COUNTRY_BY_ID"><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+		WHERE COUNTRY_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_COUNTRY_BY_NAME"><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+		WHERE NAME = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_COUNTRY_BY_A2"><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+		WHERE A2 = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_COUNTRY_BY_A3"><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+		WHERE A3 = ?
+      ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_COUNTRY"><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+      ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_COUNTRY_WITH_ENABLED"><![CDATA[
+		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+		WHERE ENABLED = 1
+      ]]></sql-query>
+
+	<sql-query name="COUNT_ALL_COUNTRY"><![CDATA[
+		SELECT count(COUNTRY_ID) FROM V2_I18N_COUNTRY 
+      ]]></sql-query>
+
+	<sql-query name="COUNT_ALL_COUNTRY_WITH_ENABLED"><![CDATA[
+		SELECT count(COUNTRY_ID) FROM V2_I18N_COUNTRY 
+		WHERE ENABLED = 1
+      ]]></sql-query>
+
+	<sql-query name="DELETE_COUNTRY_BY_ID"><![CDATA[
+		DELETE FROM V2_I18N_COUNTRY WHERE COUNTRY_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="UPDATE_COUNTRY"><![CDATA[
+		UPDATE V2_I18N_COUNTRY SET NAME = ?, A2 = ?, A3 = ?, NUM = ?, DIAL = ?, ENABLED = ? WHERE COUNTRY_ID = ?
+      ]]></sql-query>
+
+	<sql-query name="INSERT_COUNTRY"><![CDATA[
+		INSERT INTO V2_I18N_COUNTRY (
+		    COUNTRY_ID, 
+		    NAME, 
+		    A2, 
+		    A3, 
+		    NUM, 
+		    DIAL, 
+		    ENABLED ) VALUES (?, ?, ?, ?, ?, ?, ?)
+      ]]></sql-query>
+
+	<!-- i18n Text for ResourceBundle -->
+	<sql-query name="INSERT_I18N_TEXTS"><![CDATA[
+		INSERT INTO V2_I18N_TEXT (
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ]]></sql-query>
+
+	<sql-query name="UPDATE_I18N_TEXTS"><![CDATA[
+		UPDATE V2_I18N_TEXT 
+		    SET TEXT = ? , 
+		    MODIFIED_DATE = ? 
+		WHERE TEXT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_I18N_TEXTS"><![CDATA[
+		DELETE FROM V2_I18N_TEXT WHERE TEXT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_I18N_TEXT_BY_ID"><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_TEXT WHERE TEXT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_I18N_TEXT" comment="전체 택스트를 조회한다."><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_TEXT
+    ]]></sql-query>
+
+	<sql-query name="SELECT_I18N_TEXT_BY_LOCALE" comment="로케일에 해당하는 전체 택스트를 조회한다."><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_TEXT 
+		WHERE LOCALE_CODE = ?
+    ]]></sql-query>
+    
+	<sql-query name="SELECT_I18N_TEXT_BY_RESOURCE_BUNDLE_KEY_AND_LOCALE" comment="번들 이름에 해당하는 전체 택스트를 조회한다."><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    RESOURCE_BUNDLE_KEY, 
+		    LOCALE_CODE, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_TEXT 
+		WHERE RESOURCE_BUNDLE_KEY = ? AND LOCALE_CODE = ?
+    ]]></sql-query>
+        
+    <!-- I18N_OBJECT_TEXT  -->
+	<sql-query name="INSERT_I18N_OBJECT_TEXT"><![CDATA[
+		INSERT INTO V2_I18N_OBJECT_TEXT (TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE ) 
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ]]></sql-query>
+
+	<sql-query name="UPDATE_I18N_OBJECT_TEXT"><![CDATA[
+		UPDATE V2_I18N_OBJECT_TEXT SET TEXT = ? , MODIFIED_DATE = ? 
+		WHERE TEXT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_I18N_OBJECT_TEXT"><![CDATA[
+		DELETE FROM V2_I18N_OBJECT_TEXT 
+		WHERE TEXT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_ID"><![CDATA[
+		SELECT TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE 
+		FROM V2_I18N_OBJECT_TEXT 
+		WHERE TEXT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_I18N_OBJECT_TEXT"><![CDATA[
+		SELECT 
+		    TEXT_ID, 
+		    OBJECT_TYPE, 
+		    OBJECT_ID,
+		    OBJECT_ATTRIBUTE, 
+		    LOCALE_CODE, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_OBJECT_TEXT
+    ]]></sql-query>
+
+	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_LOCALE"><![CDATA[
+		SELECT  
+		    TEXT_ID, 
+		    OBJECT_TYPE, 
+		    OBJECT_ID, 
+		    OBJECT_ATTRIBUTE, 
+		    LOCALE_CODE, TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_I18N_OBJECT_TEXT 
+		WHERE LOCALE_CODE = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE"><![CDATA[
+		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		FROM V2_I18N_OBJECT_TEXT 
+		WHERE OBJECT_TYPE = ?
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		FROM V2_I18N_OBJECT_TEXT 
+		WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_LOCALE"><![CDATA[
+		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		FROM V2_I18N_OBJECT_TEXT 
+		WHERE OBJECT_TYPE = ? AND LOCALE_CODE = ?
+    ]]></sql-query>
+            
+    <!--  I18N_LOCALE  -->
+	<sql-query name="COUNT_ALL_LOCALE"><![CDATA[
+		SELECT count( LOCALE_ID )
+		FROM V2_I18N_LOCALE
+    ]]></sql-query>
+	<sql-query name="SELECT_ALL_LOCALE"><![CDATA[
+		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE 
+		FROM V2_I18N_LOCALE
+    ]]></sql-query>
+	<sql-query name="SELECT_LOCALE_BY_ID"><![CDATA[
+		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
+		FROM V2_I18N_LOCALE WHERE LOCALE_ID = ?
+    ]]></sql-query>
+	<sql-query name="SELECT_LOCALE_BY_CODE"><![CDATA[
+		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
+		FROM V2_I18N_LOCALE WHERE LANGUAGE = ? AND COUNTRY = ?
+    ]]></sql-query>
+	<sql-query name="INSERT_LOCALE"><![CDATA[
+		INSERT INTO V2_I18N_LOCALE ( LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, CREATION_DATE, MODIFIED_DATE ) 
+		VALUES (?,?,?,?,?,?)
+    ]]></sql-query>
+	<sql-query name="DELETE_LOCALE_BY_ID"><![CDATA[
+		DELETE FROM V2_I18N_LOCALE WHERE LOCALE_ID = ?
+    ]]></sql-query>
+	<sql-query name="UPDATE_LOCALE"><![CDATA[
+		UPDATE V2_I18N_LOCALE SET ENCODING = ?, MODIFIED_DATE = ? 
+		WHERE LOCALE_ID = ? MODIFIED_DATE
+    ]]></sql-query>
+
+    <!-- GROUP -->
+    <sql-query name="SELECT_GROUPS_FOR_USER" comment="사용자의 모든 그룹아이디를 조회"><![CDATA[
+		SELECT GROUP_ID
+		FROM V2_GROUP_MEMBERS 
+		WHERE USER_ID = ? AND ADMINISTRATOR = 0
+    ]]></sql-query>
+    <sql-query name="COUNT_ALL_GROUPS" comment="전체 그룹 수를 조회"><![CDATA[
+		SELECT COUNT(GROUP_ID)
+		FROM V2_GROUPS 
+    ]]></sql-query>
+    <sql-query name="DELETE_ALL_GROUP_MEMBERS" comment="그룹 맴버 삭제"><![CDATA[
+		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ?
+    ]]></sql-query>
+    <sql-query name="DELETE_GROUP" comment="그룹 삭제"><![CDATA[
+		DELETE FROM V2_GROUPS WHERE GROUP_ID = ?
+    ]]></sql-query>
+    <sql-query name="DELETE_MEMBERSHIP_BY_USER" comment="사용자의 모든 그룹 맴버 정보를 삭제"><![CDATA[
+		DELETE FROM V2_GROUP_MEMBERS WHERE USER_ID = ?
+    ]]></sql-query>    
+    <sql-query name="SELECT_ALL_GROUP_ID" comment="모든 그룹 아이디를 조회"><![CDATA[
+		SELECT GROUP_ID FROM V2_GROUPS ORDER BY NAME
+    ]]></sql-query>     
+    <sql-query name="ADD_GROUP_ADMIN" comment="그룹  관리자 추가"><![CDATA[
+		INSERT INTO V2_GROUP_MEMBERS (GROUP_ID, USER_ID, ADMINISTRATOR) VALUES ( ?, ?, 1)
+    ]]></sql-query>      
+    <sql-query name="ADD_GROUP_MEMBER" comment="그룹 맴버 추가"><![CDATA[
+		INSERT INTO V2_GROUP_MEMBERS (GROUP_ID, USER_ID, ADMINISTRATOR) VALUES ( ?, ?, 0)
+    ]]></sql-query>
+
+    <sql-query name="ADD_GROUP_MEMBERSHIP" comment="그룹 맴버 추가"><![CDATA[
+		INSERT INTO V2_GROUP_MEMBERS (GROUP_ID, USER_ID, ADMINISTRATOR) VALUES ( ?, ?, ?)
+    ]]></sql-query>        
+
+    <sql-query name="REMOVE_GROUP_MEMBERSHIP" comment="그룹 맴버 삭제"><![CDATA[
+		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND USER_ID = ? AND ADMINISTRATOR = ? 
+    ]]></sql-query>
+
+       
+    <sql-query name="ADD_GROUP_ADMIN" comment="그룹  관리자 삭제"><![CDATA[
+		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND USER_ID = ? AND ADMINISTRATOR = 1
+    ]]></sql-query>      
+    <sql-query name="ADD_GROUP_MEMBER" comment="그룹 맴버 삭제"><![CDATA[
+		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND USER_ID = ? AND ADMINISTRATOR = 0
+    ]]></sql-query>         
+    <sql-query name="TEST_GROUP_MEMBERSHIP" comment="그룹 맴버 테스트"><![CDATA[
+		SELECT USER_ID FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND USER_ID = ? AND ADMINISTRATOR = 0
+    ]]></sql-query>         
+    <sql-query name="SELECT_ALL_GROUP_MEMBER_ID" comment="그룹 맴버 조회"><![CDATA[
+		SELECT USER_ID FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND ADMINISTRATOR = 0
+    ]]></sql-query>       
+    <sql-query name="SELECT_ALL_GROUP_ADMIN_ID" comment="그룹 맴버 조회"><![CDATA[
+		SELECT USER_ID FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND ADMINISTRATOR = 1
+    ]]></sql-query>   
+    
+    <sql-query name="CREATE_GROUP" comment="그룹 생성"><![CDATA[    
+    	INSERT INTO V2_GROUPS (
+   			GROUP_ID, 
+   			NAME, 
+   			DESCRIPTION, 
+  			CREATION_DATE, 
+  			MODIFIED_DATE
+  		) VALUES ( ?, ?, ?, ?, ?)
+    ]]></sql-query>   
+
+    <sql-query name="SELECT_GROUP_BY_ID" comment="그룹 조회"><![CDATA[    
+        SELECT
+   			GROUP_ID, 
+   			NAME, 
+   			DESCRIPTION, 
+  			CREATION_DATE, 
+  			MODIFIED_DATE
+  		FROM V2_GROUPS WHERE GROUP_ID = ?
+    ]]></sql-query>  
+
+    <sql-query name="SELECT_GROUP_BY_NAME" comment="그룹 조회"><dynamic><![CDATA[
+        SELECT
+   			GROUP_ID, 
+   			NAME, 
+   			DESCRIPTION, 
+  			CREATION_DATE, 
+  			MODIFIED_DATE
+  		FROM V2_GROUPS 
+  		WHERE <#if additional_parameter > LOWER(NAME) = ? <#else> NAME = ? </#if>
+    ]]></dynamic>
+    </sql-query>
+   
+    <sql-query name="UPDATE_GROUP" comment="그룹  수정"><dynamic><![CDATA[        
+        UPDATE V2_GROUPS
+        SET NAME = ?, DESCRIPTION = ? , MODIFIED_DATE = ?
+        WHERE GROUP_ID = ?
+    ]]></dynamic></sql-query>  
+    
+    <sql-query name="UPDATE_GROUP_MODIFIED_DATE" comment="그룹 수정일 업데이트"><![CDATA[        
+        UPDATE V2_GROUPS
+        SET MODIFIED_DATE = ?
+        WHERE GROUP_ID = ?
+    ]]></sql-query>      
+                    
+	<!-- USER -->
+	<sql-query name="SELECT_ALL_USER" comment="전체 사용자를 조회"><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS
+    ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_VISIBLE_USER" comment="전체 사용자를 조회"><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS WHERE VISIBLE = 1
+    ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_ENABLED_USER" comment="전체 로컬 사용자를 조회"><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS WHERE VISIBLE = 1 AND USER_ENABLED =1 AND IS_EXTERNAL = 0
+    ]]></sql-query>
+
+	<sql-query name="SELECT_USER_BY_ID" comment="USER_ID 에 해당하는 사용자를 조회"><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS WHERE USER_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_USER_BY_EMAIL" comment="메일 주소에 해당하는 사용자를 조회"><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS WHERE VISIBLE = 1 AND EMAIL LIKE ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_USER_BY_USERNAME" comment="USERNAME에 해당하는 사용자를 조회."><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS WHERE USERNAME = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_USER_BY_USERNAME_NOCASE"
+		comment="USERNAME에 해당하는 사용자를 조회. USERNAME은 모두 소문자로 비교한다."><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USERS WHERE LOWER(USERNAME) = ?
+    ]]></sql-query>
+
+	<sql-query name="UPDATE_USER" comment="사용자 업데이트"><![CDATA[ 
+       UPDATE V2_USERS SET	  
+	       NAME                = ?,
+	       FIRST_NAME          = ?,
+	       LAST_NAME           = ?,       
+	       NAME_VISIBLE        = ?,
+	       EMAIL               = ?,
+	       EMAIL_VISIBLE       = ?,
+	       MODIFIED_DATE       = ?,
+	       LAST_LOGINED_IN     = ?,
+	       LAST_PROFILE_UPDATE = ?,
+	       USERNAME            = ?,
+	       IS_EXTERNAL         = ?,
+	       FEDERATED           = ?,
+	       STATUS              = ?
+       WHERE USER_ID       = ?
+    ]]></sql-query>
+
+	<sql-query name="CREATE_USER" comment="사용자 추가"><![CDATA[   
+        INSERT INTO V2_USERS (
+   			USER_ID, 
+   			USERNAME, 
+   			PASSWORD_HASH, 
+   			NAME, 
+   			NAME_VISIBLE, 
+   			FIRST_NAME, 
+   			LAST_NAME, 
+   			EMAIL, 
+   			EMAIL_VISIBLE, 
+  			LAST_LOGINED_IN, 
+  			LAST_PROFILE_UPDATE, 
+  			USER_ENABLED, 
+   			VISIBLE, 
+   			IS_EXTERNAL, 
+   			FEDERATED, 
+   			STATUS,
+   			CREATION_DATE, 
+   			MODIFIED_DATE 
+   		) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ]]></sql-query>
+
+	<sql-query name="COUNT_ENABLED_USER" comment="활성화된 내부 사용자 수"><![CDATA[
+		SELECT count( USER_ID ) FROM V2_USERS WHERE VISIBLE = 1 AND USER_ENABLED = 1 AND IS_EXTERNAL = 0
+    ]]></sql-query>
+
+	<sql-query name="COUNT_VISIBLE_USER" comment="활성화 되지 않은  사용자와 외부 사용자를 포함하는 전체 사용자 수 "><![CDATA[
+		SELECT count( USER_ID ) FROM V2_USERS WHERE VISIBLE = 1
+    ]]></sql-query>
+
+	<sql-query name="COUNT_AUTHENTICATED_USER" comment="인증된 전체 사용자 수 "><![CDATA[
+		SELECT count( USER_ID ) FROM V2_USERS WHERE VISIBLE = 1 AND USER_ENABLED = 1 AND IS_EXTERNAL = 0 AND LAST_LOGINED_IN > 0
+    ]]></sql-query>
+
+	<sql-query name="COUNT_RECENT_USER" comment="최근 등록된 사용자 수 "><![CDATA[
+		SELECT count( USER_ID ) FROM V2_USERS WHERE VISIBLE = 1 AND USER_ENABLED = 1 AND IS_EXTERNAL = 0 AND CREATION_DATE > ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_USER_ID_BY_STATUS" comment="상태에 따른 사용자 아이디 조회 ">
+		SELECT USER_ID FROM V2_USERS
+		<dynamic><![CDATA[        
+        <#assign max_idx = additional_parameter?size >
+        <#assign idx = 0 >  
+        <#if 0 < max_idx >WHERE</#if>      
+        <#list additional_parameter as parameter>
+        <#assign idx = idx + 1 > 
+        STATUS = ${additional_parameter} <#if idx < max_idx >OR</#if>
+        </#list>        
+    ]]></dynamic>
+	</sql-query>
+
+	<sql-query name="SELECT_USER_PROFILE_VALUES" comment="사용자 전체 프로파일 값 조회"><![CDATA[
+		SELECT 
+			a.FIELD_ID, 
+			b.FIELD_TYPE, 
+			a.VALUE, 
+			a.PRIMARY_VALUE, 
+			b.IS_LIST 
+		FROM V2_USER_PROFILE a, V2_PROFILE_FIELD b 
+		WHERE a.FIELD_ID = b.FIELD_ID AND USER_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_USER_PROFILE_VALUES_BY_USER" comment="사용자 프로파일 삭제"><![CDATA[
+		DELETE FROM V2_USER_PROFILE
+		WHERE USER_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_USER_PROFILE_VALUES_BY_PROFILE" comment="사용자 프로파일 삭제"><![CDATA[
+		DELETE FROM V2_USER_PROFILE
+		WHERE FIELD_ID = ?
+    ]]></sql-query>
+       
+	<sql-query name="INSERT_USER_PROFILE_VALUE" comment="사용자 프로파일 추가"><![CDATA[
+		INSERT INTO V2_USER_PROFILE (
+		   USER_ID, FIELD_ID, PRIMARY_VALUE, VALUE) 
+		VALUES ( ?, ?, ?, ?)
+    ]]></sql-query>
+        
+	<sql-query name="SELECT_PROFILE_FIELD_DISTINCT_VALUES_PER_FIELD" comment="SELECT_PROFILE_FIELD_DISTINCT_VALUES_PER_FIELD"><dynamic><![CDATA[
+	    SELECT up.FIELD_ID,
+	       pe.FIELD_TYPE, 
+	       up.VALUE, 
+	       COUNT(up.VALUE) as CNT
+	    FROM V2_USERS ju, V2_USER_PROFILE up, V2_PROFILE_FIELD pe 
+	    WHERE pe.FIELD_ID = up.FIELD_ID 
+	    AND ju.USER_ID = up.USER_ID 
+	    AND pe.IS_LIST = 0 
+	    AND up.FIELD_ID = ? 
+	    <#if additional_parameter >
+	    AND ju.USER_ENABLED = 1 
+	    </#if>	    
+	    AND up.VALUE IS NOT NULL 
+	    AND pe.IS_FILTERABLE = 1 
+	GROUP by up.VALUE, pe.FIELD_TYPE, up.FIELD_ID ORDER by LOWER(up.VALUE)
+     ]]></dynamic></sql-query>
+
+	<sql-query name="SELECT_PROFILE_FIELD_DISTINCT_VALUES_PER_USER"
+		comment="SELECT_PROFILE_FIELD_DISTINCT_VALUES_PER_USER "><![CDATA[
+		SELECT 
+			DISTINCT up.FIELD_ID, 
+			pe.FIELD_TYPE, 
+			up.VALUE 
+		FROM V2_USER_PROFILE up, V2_PROFILE_FIELD pe 
+		WHERE pe.FIELD_ID = up.FIELD_ID AND IS_LIST = 0
+		AND up.USER_ID = ? 
+		AND IS_FILTERABLE = 1 
+		AND value IS NOT NULL
+     ]]></sql-query>
+
+	<sql-query name="CREATE_PROFILE_FIELD" comment="SELECT_PROFILE_FIELD_DISTINCT_VALUES_PER_USER "><![CDATA[
+     	INSERT INTO V2_PROFILE_FIELD (
+   		    FIELD_ID, 
+   		    FIELD_TYPE, 
+   		    NAME, 
+   		    IDX, 
+   		    REG_IDX, 
+   		    IS_DEFAULT, 
+   		    IS_EDITABLE, 
+   		    IS_FILTERABLE, 
+   		    IS_LIST, 
+   		    IS_REQUIRED, 
+   		    IS_SEARCHABLE, 
+   		    IS_VISIBLE, 
+   		    EXTERNAL_MANAGED, 
+   		    EXTERNAL_MAPPING 
+   	    ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+     ]]></sql-query>
+
+	<sql-query name="SELECT_PROFILE_FIELD_BY_FIELD_ID" comment="SELECT_PROFILE_FIELD_BY_FIELD_ID "><![CDATA[
+         SELECT 
+		   FIELD_ID, 
+		   FIELD_TYPE, 
+		   NAME, 
+		   IDX, 
+		   REG_IDX, 
+		   IS_DEFAULT, 
+		   IS_EDITABLE, 
+		   IS_FILTERABLE,
+		   IS_LIST, 
+		   IS_REQUIRED, 
+		   IS_SEARCHABLE, 
+		   IS_VISIBLE, 
+		   EXTERNAL_MANAGED, 
+		   EXTERNAL_MAPPING
+	     FROM V2_PROFILE_FIELD WHERE FIELD_ID = ?	 
+     ]]></sql-query>
+
+	<sql-query name="SELECT_ALL_PROFILE_FIELD" comment="SELECT_ALL_PROFILE_FIELD"><![CDATA[
+     SELECT 
+		   FIELD_ID, 
+		   IDX		  
+	 FROM V2_PROFILE_FIELD ORDER BY IDX
+     ]]></sql-query>
+     
+	<sql-query name="UPDATE_PROFILE_FIELD_INDEX" comment="UPDATE_PROFILE_FIELD_INDEX"><![CDATA[
+     UPDATE  V2_PROFILE_FIELD
+     SET IDX = IDX - 1
+     WHERE IDX > ?
+     ]]></sql-query>
+
+	<sql-query name="UPDATE_PROFILE_FIELD_INDEX_1" comment="UPDATE_PROFILE_FIELD_INDEX"><![CDATA[
+     UPDATE  V2_PROFILE_FIELD
+     SET IDX = IDX - 1
+     WHERE IDX > ?
+     ]]></sql-query>
+     
+	<sql-query name="UPDATE_PROFILE_FIELD_INDEX_2" comment="UPDATE_PROFILE_FIELD_INDEX_2"><![CDATA[
+     UPDATE V2_PROFILE_FIELD SET IDX = IDX + 1 WHERE IDX >= ? AND IDX < ?
+     ]]></sql-query>
+
+	<sql-query name="UPDATE_PROFILE_FIELD_INDEX_3" comment="UPDATE_PROFILE_FIELD_INDEX_2"><![CDATA[
+     UPDATE V2_PROFILE_FIELD SET IDX = IDX - 1 WHERE IDX <= ? AND IDX > ?
+     ]]></sql-query>
+
+	<sql-query name="UPDATE_PROFILE_FIELD_INDEX_4" comment="UPDATE_PROFILE_FIELD_INDEX_2"><![CDATA[
+     UPDATE V2_PROFILE_FIELD SET IDX = ? WHERE FIELD_ID = ?
+     ]]></sql-query>
+               
+	<sql-query name="UPDATE_PROFILE_FIELD" comment="UPDATE_PROFILE_FIELD "><![CDATA[
+         UPDATE V2_PROFILE_FIELD
+	     SET    
+	        FIELD_TYPE       = ?,
+	        NAME             = ?,
+	        IDX              = ?,
+	        REG_IDX          = ?,
+	        IS_DEFAULT       = ?,
+	        IS_EDITABLE      = ?,
+	        IS_FILTERABLE    = ?,
+	        IS_LIST          = ?,
+	        IS_REQUIRED      = ?,
+	        IS_SEARCHABLE    = ?,
+	        IS_VISIBLE       = ?,
+	        EXTERNAL_MANAGED = ?,
+	        EXTERNAL_MAPPING = ?
+	     WHERE  FIELD_ID         = ?
+     ]]></sql-query>
+
+	<sql-query name="DELETE_PROFILE_FIELD" comment="DELETE_PROFILE_FIELD"><![CDATA[
+	DELETE FROM V2_PROFILE_FIELD WHERE FIELD_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_PROFILE_FIELD_OPTIONS" comment="DELETE_PROFILE_FIELD_OPTIONS"><![CDATA[
+	DELETE FROM V2_PROFILE_FIELD WHERE FIELD_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="CREATE_PROFILE_FIELD_OPTIONS" comment="CREATE_PROFILE_FIELD_OPTIONS"><![CDATA[                 
+	INSERT INTO V2_PROFILE_FIELD_OPT (
+	   DEFAULT_OPTION, 
+	   FIELD_ID, 
+	   FIELD_VALUE, 
+	   IDX) VALUES ( ?, ?, ?, ?)
+    ]]></sql-query>
+
+	<sql-query name="SELECT_PROFILE_FIELD_OPTIONS" comment="CREATE_PROFILE_FIELD_OPTIONS"><![CDATA[                 
+	SELECT 
+		FIELD_ID, 
+		FIELD_VALUE, 
+		IDX, 
+		DEFAULT_OPTION 
+	FROM V2_PROFILE_FIELD_OPT 
+	WHERE FIELD_ID = ? ORDER BY IDX
+    ]]></sql-query>
+
+
+	<!--  role  -->
+	<sql-query name="CREATE_ROLE" comment="CREATE_ROLE"><![CDATA[                 
+    INSERT INTO V2_ROLES ( 
+    	ROLE_ID, 
+    	NAME, 
+    	DESCRIPTION, 
+    	CREATION_DATE, 
+    	MODIFIED_DATE 
+    ) VALUES ( ?, ?, ?, ?, ? )
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ROLE" comment="CREATE_ROLE"><![CDATA[                 
+    DELETE FROM V2_ROLES WHERE ROLE_ID = ? 
+    ]]></sql-query>
+    
+    <sql-query name="UPDATE_ROLE" comment="CREATE_ROLE"><![CDATA[                 
+    UPDATE V2_ROLES
+	SET    NAME          = ?,
+	       DESCRIPTION   = ?,
+	       MODIFIED_DATE = ?
+	WHERE  ROLE_ID       = ?
+    ]]></sql-query>
+    
+    <sql-query name="SELECT_ROLE_BY_ID" comment="SELECT_ROLE_BY_ID"><![CDATA[                 
+    SELECT 
+        ROLE_ID, 
+        NAME, 
+        DESCRIPTION, 
+        CREATION_DATE, 
+        MODIFIED_DATE
+	FROM V2_ROLES 
+	WHERE ROLE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="SELECT_ROLE_BY_NAME" comment="SELECT_ROLE_BY_NAME"><dynamic><![CDATA[
+    SELECT
+   		ROLE_ID, 
+   		NAME, 
+   		DESCRIPTION, 
+  		CREATION_DATE, 
+  		MODIFIED_DATE
+  	FROM V2_ROLES 
+  	WHERE <#if additional_parameter > LOWER(NAME) = ? <#else> NAME = ? </#if>
+    ]]></dynamic></sql-query> 
+
+	<sql-query name="COUNT_ALL_ROLES" comment="COUNT_ALL_ROLES"><![CDATA[
+    SELECT SELECT(ROLE_ID) FROM V2_ROLES
+    ]]></sql-query> 
+
+	<sql-query name="SELECT_ALL_ROLE_IDS" comment="SELECT_ALL_ROLE_IDS"><![CDATA[
+    SELECT ROLE_ID FROM V2_ROLES
+    ]]></sql-query> 
+
+	<sql-query name="SELECT_USER_ROLE_IDS" comment="SELECT_USER_ROLE_IDS"><![CDATA[
+    SELECT ROLE_ID FROM V2_USER_ROLES WHERE USER_ID = ?
+    ]]></sql-query> 
+
+	<sql-query name="SELECT_GROUP_ROLE_IDS" comment="SELECT_GROUP_ROLE_IDS"><![CDATA[
+    SELECT ROLE_ID FROM V2_GROUP_ROLES WHERE GROUP_ID = ?
+    ]]></sql-query> 
+
+	<sql-query name="DELETE_GROUP_ROLES" comment="DELETE_GROUP_ROLES"><![CDATA[                 
+    DELETE FROM V2_GROUP_ROLES WHERE GROUP_ID = ? 
+    ]]></sql-query>
+
+	<sql-query name="DELETE_USER_ROLES" comment="DELETE_USER_ROLES"><![CDATA[                 
+    DELETE FROM V2_USER_ROLES WHERE USER_ID = ? 
+    ]]></sql-query>
+
+	<sql-query name="DELETE_GROUP_ROLE" comment="DELETE_GROUP_ROLE"><![CDATA[                 
+    DELETE FROM V2_GROUP_ROLES WHERE ROLE_ID = ? AND GROUP_ID = ? 
+    ]]></sql-query>
+
+	<sql-query name="DELETE_USER_ROLE" comment="DELETE_USER_ROLE"><![CDATA[                 
+    DELETE FROM V2_USER_ROLES WHERE ROLE_ID = ? AND USER_ID = ? 
+    ]]></sql-query>
+
+    <sql-query name="CREATE_USER_ROLE" comment="CREATE_USER_ROLE"><![CDATA[   
+	INSERT INTO V2_USER_ROLES (ROLE_ID, USER_ID) VALUES ( ?, ? )
+	]]></sql-query>
+
+    <sql-query name="CREATE_GROUP_ROLE" comment="CREATE_GROUP_ROLE"><![CDATA[   
+	INSERT INTO V2_GROUP_ROLES (ROLE_ID, GROUP_ID) VALUES ( ?, ? )
+	]]></sql-query>
+
+    <sql-query name="SELECT_ALL_PERMISSION_MASK" comment="SELECT_ALL_PERMISSION_MASK"><![CDATA[   
+	    SELECT NAME, MASK FROM V2_PERMISSION_MASK
+	]]></sql-query>
+
+    <sql-query name="SELECT_PERMISSION_MASK_BY_NAME" comment="SELECT_PERMISSION_MASK_BY_NAME"><![CDATA[   
+	    SELECT MASK FROM V2_PERMISSION_MASK 
+	    WHERE NAME = ?
+	]]></sql-query>
+
+    <sql-query name="DELETE_PERMISSION_MASK_BY_NAME" comment="DELETE_PERMISSION_MASK_BY_NAME"><![CDATA[   
+	    DELETE FROM V2_PERMISSION_MASK 
+	    WHERE NAME = ?
+	]]></sql-query>
+
+    <sql-query name="CREATE_PERMISSION_MASK" comment="CREATE_PERMISSION_MASK"><![CDATA[   
+	    INSERT INTO V2_PERMISSION_MASK 
+	    (NAME, MASK) VALUES (?, ?)
+	]]></sql-query>
+
+                    
+           
+	<sql-query name="CREATE_TABLE" comment="테이블  생성 스크립트"><![CDATA[ 
+		
+		<!-- COMMONS -->        
+		
+		CREATE TABLE V2_LOCALIZED_PROPERTY (
+		  LOCALE_CODE            VARCHAR2(100)   NOT NULL,
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT V2_LOCALIZED_PROPERTY_PK PRIMARY KEY (LOCALE_CODE, PROPERTY_NAME)
+		);
+		
+		CREATE TABLE V2_PROPERTY (
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT V2_PROPERTY_PK PRIMARY KEY (PROPERTY_NAME)
+		); 		
+			
+		CREATE TABLE V2_SEQUENCER (
+		    SEQUENCER_ID           INTEGER NOT NULL,
+		    NAME                   VARCHAR2(200) NOT NULL,
+		    VALUE                  INTEGER NOT NULL,
+		    CONSTRAINT V2_SEQUENCER_PK PRIMARY KEY (SEQUENCER_ID)
+		); 				     
+		CREATE UNIQUE INDEX V2_SEQUENCER_NAME_IDX ON V2_SEQUENCER (NAME);		
+                
+        -- User data table.
+        CREATE TABLE V2_USERS (
+		  USER_ID                INTEGER NOT NULL,
+		  USERNAME               VARCHAR2(100) NOT NULL,
+		  PASSWORD_HASH          VARCHAR2(64)  NOT NULL,
+		  NAME                   VARCHAR2(100),		  
+		  NAME_VISIBLE           NUMBER(1, 0)  DEFAULT 1 ,
+		  FIRST_NAME             VARCHAR2(100),		  
+		  LAST_NAME              VARCHAR2(100),		
+		  EMAIL                  VARCHAR2(100) NOT NULL,
+		  EMAIL_VISIBLE          NUMBER(1, 0)  DEFAULT 1,
+		  LAST_LOGINED_IN        DATE DEFAULT  SYSDATE NOT NULL,
+		  LAST_PROFILE_UPDATE    DATE DEFAULT  SYSDATE NOT NULL,
+		  USER_ENABLED           NUMBER(1, 0)  DEFAULT 1, 
+		  VISIBLE                NUMBER(1, 0)  DEFAULT 1, 
+		  IS_EXTERNAL            NUMBER(1, 0)  DEFAULT 0, 
+		  FEDERATED              NUMBER(1, 0)  DEFAULT 0,
+		  STATUS                 NUMBER(1, 0)  DEFAULT 0,
+		  CREATION_DATE          DATE DEFAULT  SYSDATE NOT NULL,
+		  MODIFIED_DATE          DATE DEFAULT  SYSDATE NOT NULL,		    
+		  CONSTRAINT V2_USERS_PK PRIMARY KEY (USER_ID)
+		);		
+		
+		CREATE UNIQUE INDEX V2_USERS_USERNAME_IDX ON V2_USERS (USERNAME);
+	    CREATE INDEX V2_USERS_DATE_IDX ON V2_USERS(CREATION_DATE) ;		
+	    CREATE INDEX V2_USERS_EXTERNAL_IDX ON V2_USERS(VISIBLE, USER_ENABLED, IS_EXTERNAL) ;		
+	      
+		-- User properties data table.		        
+        CREATE TABLE V2_USER_PROPERTY (
+		  USER_ID                INTEGER NOT NULL,
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT V2_USER_PROPERTY_PK PRIMARY KEY (USER_ID, PROPERTY_NAME)
+		);		
+		
+		-- Group data table.
+        CREATE TABLE V2_GROUPS (
+		  GROUP_ID                INTEGER NOT NULL,
+		  NAME                    VARCHAR2(100)   NOT NULL,
+		  DESCRIPTION             VARCHAR2(1000)  NOT NULL,
+		  CREATION_DATE           DATE DEFAULT  SYSDATE NOT NULL,
+		  MODIFIED_DATE           DATE DEFAULT  SYSDATE NOT NULL,	
+		  CONSTRAINT V2_GROUPS_PK PRIMARY KEY (GROUP_ID)
+		);
+		
+		CREATE INDEX V2_GROUPS_DATE_IDX ON V2_GROUPS(CREATION_DATE) ;		
+		CREATE INDEX V2_GROUPS_NAME_IDX ON V2_GROUPS(NAME);			
+		
+		CREATE TABLE V2_GROUP_MEMBERS (
+		  GROUP_ID                INTEGER NOT NULL,
+		  USER_ID                 INTEGER NOT NULL,
+		  ADMINISTRATOR           NUMBER(1, 0)  DEFAULT 0,
+		  CREATION_DATE           DATE DEFAULT  SYSDATE NOT NULL,
+		 --  MODIFIED_DATE           DATE DEFAULT  SYSDATE NOT NULL,	
+		  CONSTRAINT V2_GROUP_MEMBERS_PK PRIMARY KEY (GROUP_ID, USER_ID, ADMINISTRATOR)
+		);
+		
+		CREATE INDEX V2_GROUP_MEMBERS_USER_IDX ON V2_GROUPS(USER_ID) ASC;		
+		
+		CREATE TABLE V2_GROUP_PROPERTY (
+		  GROUP_ID               INTEGER NOT NULL,
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT V2_GROUP_PROPERTY_PK PRIMARY KEY (GROUP_ID, PROPERTY_NAME)
+		);	
+		
+		-- Profile field data table.
+		CREATE TABLE V2_PROFILE_FIELD (
+		    FIELD_ID            INTEGER NOT NULL,
+		    FIELD_TYPE          INTEGER NOT NULL,
+		    NAME                VARCHAR2(200) NOT NULL,		
+		    IDX                 INTEGER NOT NULL,
+		    REG_IDX             INTEGER NOT NULL,
+		    IS_DEFAULT          NUMBER(1, 0)  DEFAULT 1, 
+		    IS_EDITABLE         NUMBER(1, 0)  DEFAULT 1, 
+		    IS_FILTERABLE       NUMBER(1, 0)  DEFAULT 1, 
+		    IS_LIST             NUMBER(1, 0)  DEFAULT 0, 
+		    IS_REQUIRED         NUMBER(1, 0)  DEFAULT 1, 
+		    IS_SEARCHABLE       NUMBER(1, 0)  DEFAULT 1, 
+		    IS_VISIBLE          NUMBER(1, 0)  DEFAULT 1, 
+		    EXTERNAL_MANAGED    NUMBER(1, 0)  DEFAULT 0, 
+		    EXTERNAL_MAPPING    VARCHAR2(2048),
+		    CONSTRAINT V2_PROFILE_FIELD_PK PRIMARY KEY (FIELD_ID)
+		);
+		
+		CREATE UNIQUE INDEX V2_PROFILE_FIELD_NAME_IDX ON V2_PROFILE_FIELD (NAME);
+		
+		-- Profile field option data table.
+		CREATE TABLE V2_PROFILE_FIELD_OPT (
+		    DEFAULT_OPTION      NUMBER(1, 0)  DEFAULT 1, 
+		    FIELD_ID            INTEGER NOT NULL,
+		    FIELD_VALUE         VARCHAR2(255) NOT NULL,	   
+		    IDX                 INTEGER NOT NULL
+		);
+		
+		ALTER TABLE V2_PROFILE_FIELD_OPT ADD CONSTRAINT V2_PROFILE_FIELD_OPT_FK FOREIGN KEY (FIELD_ID) 
+        REFERENCES V2_PROFILE_FIELD (FIELD_ID) DEFERRABLE INITIALLY DEFERRED;
+		
+		-- User profile data table.
+		CREATE TABLE V2_USER_PROFILE (
+		    USER_ID             INTEGER NOT NULL,
+		    FIELD_ID            INTEGER NOT NULL,
+		    PRIMARY_VALUE       NUMBER(1, 0)  DEFAULT 0,   
+		    VALUE               VARCHAR2(3500) NOT NULL	   
+		);
+		ALTER TABLE V2_USER_PROFILE ADD CONSTRAINT V2_USER_PROFILE_FK FOREIGN KEY (FIELD_ID) 
+        REFERENCES V2_PROFILE_FIELD (FIELD_ID) DEFERRABLE INITIALLY DEFERRED;        
+        CREATE INDEX V2_PROFILE_FIELD_IDX ON V2_USER_PROFILE(USER_ID, FIELD_ID) ;		
+		
+		
+		<!-- Role data table -->
+		 
+		 CREATE TABLE V2_ROLES (
+		  ROLE_ID                INTEGER NOT NULL,
+		  NAME                    VARCHAR2(100)   NOT NULL,
+		  DESCRIPTION             VARCHAR2(1000)  NOT NULL,
+		  CREATION_DATE           DATE DEFAULT  SYSDATE NOT NULL,
+		  MODIFIED_DATE           DATE DEFAULT  SYSDATE NOT NULL,	
+		  CONSTRAINT V2_ROLES_PK PRIMARY KEY (ROLE_ID)
+		);
+		
+		CREATE TABLE V2_USER_ROLES (
+		  USER_ID                 INTEGER NOT NULL,
+		  ROLE_ID                 INTEGER NOT NULL,
+		  CONSTRAINT V2_USER_ROLES_PK PRIMARY KEY (USER_ID, ROLE_ID)
+		);
+
+		CREATE TABLE V2_GROUP_ROLES (
+		  GROUP_ID                INTEGER NOT NULL,
+		  ROLE_ID                 INTEGER NOT NULL,
+		  CONSTRAINT V2_GROUP_ROLES_PK PRIMARY KEY (GROUP_ID, ROLE_ID)
+		);
+				
+		<!-- Stores permissions with it's permission mask" -->		
+		CREATE TABLE V2_PERMISSION_MASK (
+		    NAME                 VARCHAR2(255) NOT NULL,
+		    MASK                 INTEGER NOT NULL,
+		    CONSTRAINT V2_PERMISSION_MASK_PK PRIMARY KEY (NAME)
+		);		
+				
+		-- CREATE UNIQUE INDEX V2_PERMISSION_MASK_IDX ON V2_PERMISSION_MASK (NAME)
+       
+
+       <!-- DYNAMIC --> 
+              
+       CREATE TABLE V2_WEB_RESOURCE (
+             RESOURCE_ID    INTEGER NOT NULL,
+             LOCATION       VARCHAR2(255) NOT NULL,
+             CONTENT_TYPE   INTEGER DEFAULT 1 NOT NULL,
+		     CREATION_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     MODIFIED_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     CONSTRAINT V2_WEB_RESOURCE_PK PRIMARY KEY (RESOURCE_ID)
+	   );	     
+		     
+	   CREATE TABLE V2_DYNAMIC_OBJECT_SOURCE (
+	         OBJECT_ID     INTEGER NOT NULL,
+	         OBJECT_TYPE   INTEGER NOT NULL,
+	         LOCATION       VARCHAR2(255) NOT NULL,
+		     CREATION_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     MODIFIED_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     CONSTRAINT V2_DYNAMIC_OBJECT_SOURCE_PK PRIMARY KEY (OBJECT_ID)	         
+	   );	     
+              
+
+		<!-- G11N --> 	
+		
+		CREATE TABLE V2_I18N_LOCALE (
+			 LOCALE_ID      INTEGER NOT NULL,
+			 LANGUAGE       VARCHAR2(100),
+			 COUNTRY        VARCHAR2(100),
+			 VARIANT        VARCHAR2(100),
+			 ENCODING       VARCHAR2(100),
+		     CREATION_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     MODIFIED_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     CONSTRAINT V2_I18N_LOCALE_PK PRIMARY KEY (LOCALE_ID)
+    	);
+				
+		INSERT INTO V2_I18N_LOCALE ( LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ) VALUES (1, 'ko', 'KR', NULL, 'UTF-8');
+			
+				
+		CREATE TABLE V2_I18N_TEXT (
+		     TEXT_ID                INTEGER NOT NULL,
+		     RESOURCE_BUNDLE_KEY    VARCHAR2(200)   NOT NULL,
+		     LOCALE_CODE            VARCHAR2(100)   NOT NULL,    
+		     TEXT_KEY               VARCHAR2(200)   NOT NULL,		    
+		     TEXT                   VARCHAR2(2000)  NOT NULL,	
+			 CREATION_DATE          DATE DEFAULT SYSDATE NOT NULL ,
+		     MODIFIED_DATE          DATE DEFAULT SYSDATE NOT NULL ,
+		     CONSTRAINT V2_I18N_TEXT_PK PRIMARY KEY (TEXT_ID)
+		);
+		
+		CREATE INDEX V2_I18N_TEXT_IDX ON V2_I18N_TEXT(TEXT_ID, RESOURCE_BUNDLE_KEY, LOCALE_CODE) ;
+		
+		
+		
+		-- provides internationalized text for other tables.		
+		CREATE TABLE V2_I18N_OBJECT_TEXT (
+		     TEXT_ID                INTEGER NOT NULL,
+		     OBJECT_TYPE            INTEGER NOT NULL,
+		     OBJECT_ID              INTEGER NOT NULL,
+		     OBJECT_ATTRIBUTE       INTEGER NOT NULL,
+		     LOCALE_CODE            VARCHAR2(100)   NOT NULL,    
+		     TEXT                   VARCHAR2(2000)  NOT NULL,	
+			 CREATION_DATE          DATE DEFAULT SYSDATE NOT NULL ,
+		     MODIFIED_DATE          DATE DEFAULT SYSDATE NOT NULL ,
+		     CONSTRAINT V2_I18N_OBJECT_TEXT_PK PRIMARY KEY (TEXT_ID)
+		);
+		
+		CREATE INDEX V2_I18N_TEXT_IDX ON V2_I18N_TEXT(LOCALE_CODE, TEXT_KEY) ;
+				
+		CREATE TABLE V2_ZIPCODE (
+		    ZIPCODE_ID             INTEGER NOT NULL,
+		    ZIPCODE                CHAR(7),
+		    SIDO                   VARCHAR2(50), 
+		    GUGUN                  VARCHAR2(100),  
+		    DONG                   VARCHAR2(200),
+		    BUNJI		           VARCHAR2(100),
+		    CONSTRAINT V2_ZIPCODE_PK PRIMARY KEY (ZIPCODE_ID)		    
+		);
+				
+	
+		create table V2_I18N_COUNTRY (
+		    COUNTRY_ID         INTEGER NOT NULL,
+		    NAME               VARCHAR2(300) NULL,
+		    A2                 VARCHAR2(300) NULL,
+		    A3                 VARCHAR2(300) NULL,
+		    NUM                VARCHAR2(300) NULL,
+		    DIAL               VARCHAR2(300) NULL,     
+		    ENABLED            NUMBER(1, 0) DEFAULT 1,
+		    CONSTRAINT V2_I18N_COUNTRY_PK PRIMARY KEY (COUNTRY_ID)
+		);
+      			
+		CREATE TABLE V2_I18N_REGION (
+		    REGION_ID              INTEGER NOT NULL,
+			COUNTRY_ID             INTEGER,
+			REGION_CODE            VARCHAR2(300) NULL,
+			NAME                   VARCHAR2(300) NULL,
+			ENABLED                NUMBER(1, 0)  DEFAULT 1,
+			CONSTRAINT V2_I18N_REGION_PK PRIMARY KEY (REGION_ID)
+		);
+		
+        <!-- PLUGIN -->         
+        CREATE TABLE V2_PLUGIN_DATA (
+            PLUGIN_ID             INTEGER NOT NULL,
+            NAME                  VARCHAR2(200) NOT NULL,
+            CREATION_DATE         DATE DEFAULT SYSDATE NOT NULL,
+            MODIFIED_DATE         DATE DEFAULT SYSDATE NOT NULL,
+            DATA                  BLOB,
+            CONSTRAINT V2_PLUGIN_DATA_PK PRIMARY KEY (PLUGIN_ID)
+        );     
+        
+        CREATE UNIQUE INDEX V2_PLUGIN_DATA_NAME_IDX ON V2_PLUGIN_DATA (NAME);
+				     
+    ]]></sql-query>
+
+
+</sql-queryset>
