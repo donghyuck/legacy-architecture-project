@@ -7,7 +7,8 @@ import java.util.Map;
 
 import architecture.ee.user.User;
 
-public class AnonymousUser implements AuthToken, User, Serializable {
+
+public class AnonymousUser implements AuthToken, User {
 
 	private static final long serialVersionUID = 6602216613448436301L;
 
@@ -20,8 +21,18 @@ public class AnonymousUser implements AuthToken, User, Serializable {
 	public AnonymousUser() {
 		username = ANONYMOUS_USERNAME ;
 	}
+		
 
 	public AnonymousUser(String username, String password) {
+	}
+	
+	
+	public Object getPrimaryKey() {		
+		return getUserId();
+	}
+
+	public int getObjectType() {
+		return 1;
 	}
 	
 	public String getUsername() {
@@ -147,6 +158,24 @@ public class AnonymousUser implements AuthToken, User, Serializable {
 	@Override
 	public Object clone() {
 		return new AnonymousUser();
+	}
+
+
+	public boolean isNew() {
+		return false;
+	}
+
+
+	public void setNew(boolean n) {		
+	}
+
+
+	public Serializable getPrimaryKeyObject() {
+		return ANONYMOUS_ID;
+	}
+
+
+	public void setPrimaryKeyObject(Serializable primaryKeyObj) {		
 	}
 
 }

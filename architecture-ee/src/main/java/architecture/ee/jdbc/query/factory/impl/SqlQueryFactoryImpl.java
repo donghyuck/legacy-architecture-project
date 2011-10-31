@@ -31,6 +31,7 @@ import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
 	private final Configuration configuration;
+	
 	private DataSource dataSource = null;
 
 	public SqlQueryFactoryImpl(Configuration configuration) {

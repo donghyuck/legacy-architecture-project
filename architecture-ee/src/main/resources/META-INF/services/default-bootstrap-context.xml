@@ -76,7 +76,7 @@
 	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />	
 		
 	<!-- ================================================ -->	
-	<!--  Application                                     -->
+	<!--  ConfigService & AdminService                    -->
 	<!-- ================================================ -->	
 	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />	
 	
@@ -102,7 +102,7 @@
 	    <constructor-arg index="0" ref="sqlConfiguration"/>
 		<property name="resourceLocations">
 			<list>
-				<value>res:config/sql/framework-queryset.xml</value>
+				<value>res:config/sql/common-framework-queryset.xml</value>
 			</list>
 		</property>
 	</bean>		

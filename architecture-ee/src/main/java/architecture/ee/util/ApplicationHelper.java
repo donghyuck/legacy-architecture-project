@@ -14,7 +14,7 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.State;
 import architecture.ee.bootstrap.Bootstrap;
 
-public class ApplicationHelper {
+public final class ApplicationHelper {
 
 	private static final Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
@@ -25,8 +25,7 @@ public class ApplicationHelper {
 		}
 		return (T)ApplicationHelper.references.get(requiredType).get();
 	}
-	
-	
+		
 	public static void autowireComponent(Object obj){
 		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
 	}
@@ -47,8 +46,7 @@ public class ApplicationHelper {
 		}
 	}
 	
-	public static boolean isReady(){
-		
+	public static boolean isReady(){		
 		return getAdminService().isReady();
 	}
 	
