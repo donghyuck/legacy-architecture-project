@@ -96,13 +96,12 @@
 	<!-- ================================================ -->	
 	<!--  Database                                        -->
 	<!-- ================================================ -->
-	<bean id="sqlConfiguration" class="architecture.ee.jdbc.query.factory.ConfigurationFactory" factory-method="getConfiguration" />
-	
+	<bean id="sqlConfiguration" class="architecture.ee.jdbc.query.factory.ConfigurationFactory" factory-method="getConfiguration" />	
 	<bean id="sqlQueryFactoryBuilder" class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilderImpl" init-method="initialize">
 	    <constructor-arg index="0" ref="sqlConfiguration"/>
 		<property name="resourceLocations">
 			<list>
-				<value>res:config/sql/common-framework-queryset.xml</value>
+				<value>res:sql/default-framework-queryset.xml</value>
 			</list>
 		</property>
 	</bean>		
