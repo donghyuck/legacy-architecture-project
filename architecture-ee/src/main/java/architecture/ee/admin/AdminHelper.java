@@ -3,12 +3,16 @@ package architecture.ee.admin;
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
+import architecture.common.lifecycle.Repository;
 import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.util.ApplicationHelper;
 
 public final class AdminHelper {
 
-		
+	public static Repository getRepository(){
+		return Bootstrap.getBootstrapComponent(Repository.class);
+	}
+	
 	public static boolean isSetupComplete(){
 		return ApplicationHelper.isSetupComplete();
 	}	

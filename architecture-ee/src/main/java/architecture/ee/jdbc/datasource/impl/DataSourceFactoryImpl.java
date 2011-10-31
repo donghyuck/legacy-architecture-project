@@ -1,16 +1,18 @@
 package architecture.ee.jdbc.datasource.impl;
 
+import java.util.Collection;
+
 import javax.sql.DataSource;
 
-import org.apache.commons.dbcp.BasicDataSource;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.commons.pool.impl.GenericObjectPool;
 import org.springframework.jndi.JndiTemplate;
 
-import architecture.common.lifecycle.ConfigService;
+import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.util.StringUtils;
+import architecture.ee.admin.AdminHelper;
 import architecture.ee.jdbc.datasource.DataSourceFactory;
-import architecture.ee.util.ApplicationHelper;
 
 public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 
@@ -22,46 +24,63 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 		
 		DataSource dataSource = null;		
 		
-		ConfigService configService = ApplicationHelper.getConfigService();		
-		
-		String jndiName = configService.getLocalProperty("jdbc-data-source.jndi-data-source.jndi-name");
-		
-		if(StringUtils.isNotEmpty(jndiName)){
-			try{
-				log.debug(jndiName);
-			    dataSource = jndiTemplate.lookup(jndiName, DataSource.class);
-			}catch(Exception e){
-				dataSource = null;
-			}
-		}
-		
-		if( dataSource == null ){	
-			
-			String driverClassName = configService.getLocalProperty("jdbc-data-source.basic-dbcp-data-source.driver-class-name");
-			String url = configService.getLocalProperty("jdbc-data-source.basic-dbcp-data-source.url");
-			String username = configService.getLocalProperty("jdbc-data-source.basic-dbcp-data-source.username");
-			String password = configService.getLocalProperty("jdbc-data-source.basic-dbcp-data-source.password");
-			
-			if(StringUtils.isNotEmpty(url)&StringUtils.isNotEmpty(driverClassName)&StringUtils.isNotEmpty(username)&StringUtils.isNotEmpty(password)){								
+		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
+		String jndiTag = "database.default.pooledDataSourceProvider";
+		if( setupProperties.getChildrenNames(jndiTag).size() > 0 ){
+			String jndiName = setupProperties.get( jndiTag + ".jndiName"); 
+			if(StringUtils.isNotEmpty(jndiName)){
 				try{
-					BasicDataSource basecDataSource = new BasicDataSource();
-					basecDataSource.setDriverClassName(driverClassName);
-					basecDataSource.setUrl(url);
-					basecDataSource.setUsername(username);
-					basecDataSource.setPassword(password);
-					basecDataSource.setPoolPreparedStatements(true);
-					basecDataSource.setInitialSize(3);				
-					dataSource = basecDataSource;
+				    dataSource = jndiTemplate.lookup(jndiName, DataSource.class);
 				}catch(Exception e){
+					log.error("There is no Jndi Object with name [" + jndiName + "]", e);
 					dataSource = null;
 				}
-			}			
-		}				
+			}
+		}		
+		String pooledTag = "database.default.pooledDataSourceProvider";		
+		if( dataSource == null && setupProperties.getChildrenNames(pooledTag).size() > 0 ){
+			String driverClassName = setupProperties.get( pooledTag + ".driverClassName"); 
+			String url = setupProperties.get( pooledTag + ".url"); 
+			String username = setupProperties.get( pooledTag + ".username"); 
+			String password = setupProperties.get( pooledTag + ".password"); 
+
+			int maxIdle = setupProperties.getIntProperty( pooledTag + ".maxIdle", GenericObjectPool.DEFAULT_MAX_IDLE); 
+			int maxActive = setupProperties.getIntProperty( pooledTag + ".maxActive", GenericObjectPool.DEFAULT_MAX_ACTIVE); 
+			long maxWait = setupProperties.getLongProperty( pooledTag + ".maxWait", GenericObjectPool.DEFAULT_MAX_WAIT); 
+			
+			String validationQuery = setupProperties.get( pooledTag + ".validationQuery"); 
+			
+			boolean testOnBorrow = setupProperties.getBooleanProperty( pooledTag + ".testOnBorrow", GenericObjectPool.DEFAULT_TEST_ON_BORROW); 
+			boolean testWhileIdle = setupProperties.getBooleanProperty( pooledTag + ".testWhileIdle", GenericObjectPool.DEFAULT_TEST_WHILE_IDLE); 
+						
+			long timeBetweenEvictionRunsMillis = setupProperties.getLongProperty( pooledTag + ".timeBetweenEvictionRunsMillis", GenericObjectPool.DEFAULT_TIME_BETWEEN_EVICTION_RUNS_MILLIS); 
+			long minEvictableIdleTimeMillis = setupProperties.getLongProperty( pooledTag + ".minEvictableIdleTimeMillis", GenericObjectPool.DEFAULT_MIN_EVICTABLE_IDLE_TIME_MILLIS); 
+			int numTestsPerEvictionRun = setupProperties.getIntProperty( pooledTag + ".numTestsPerEvictionRun", GenericObjectPool.DEFAULT_NUM_TESTS_PER_EVICTION_RUN); 
+			
+			org.apache.commons.dbcp.BasicDataSource basic = new org.apache.commons.dbcp.BasicDataSource();
+			
+			basic.setDriverClassName(driverClassName);
+			basic.setUrl(url);
+			basic.setUsername(username);
+			basic.setPassword(password);
+			
+			basic.setMaxIdle(maxIdle);
+			basic.setMaxActive(maxActive);
+			basic.setMaxWait(maxWait);
+			
+			if(!StringUtils.isEmpty(validationQuery))
+				basic.setValidationQuery(validationQuery);
+			
+			basic.setTestOnBorrow(testOnBorrow);
+			basic.setTestWhileIdle(testWhileIdle);
+						
+			basic.setMinEvictableIdleTimeMillis(minEvictableIdleTimeMillis);
+			basic.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
+			basic.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
+			dataSource = basic;
+		}
+		 				
 		return dataSource;
 	}
 
-	public DataSource getDataSource(ConfigService configService) {
-		// TODO Auto-generated method stub
-		return null;
-	}	
 }
