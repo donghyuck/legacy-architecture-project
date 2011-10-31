@@ -20,9 +20,9 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 	
 	public DataSource getDataSource() {
 		
-		DataSource dataSource = null;
+		DataSource dataSource = null;		
 		
-		ConfigService configService = ApplicationHelper.getConfigService();
+		ConfigService configService = ApplicationHelper.getConfigService();		
 		
 		String jndiName = configService.getLocalProperty("jdbc-data-source.jndi-data-source.jndi-name");
 		
@@ -58,5 +58,10 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			}			
 		}				
 		return dataSource;
+	}
+
+	public DataSource getDataSource(ConfigService configService) {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 }

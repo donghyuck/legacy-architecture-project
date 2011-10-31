@@ -7,10 +7,19 @@ import java.util.Map;
 
 import architecture.ee.user.User;
 
-public class SystemUser implements AuthToken, User, Serializable {
+public class SystemUser implements AuthToken, User {
 	
+	private static final long serialVersionUID = -2371386795832701297L;
 	public static final String SYSTEM_USERNAME = "SYSTEM";
+	
+	public Object getPrimaryKey() {		
+		return getUserId();
+	}
 
+	public int getObjectType() {
+		return 1;
+	}
+	
 	public String getUsername() {
 		return SYSTEM_USERNAME;
 	}
@@ -134,6 +143,23 @@ public class SystemUser implements AuthToken, User, Serializable {
 	@Override
 	public Object clone() {
 		return null;
+	}
+
+	public boolean isNew() {
+		return false;
+	}
+
+
+	public void setNew(boolean n) {		
+	}
+
+
+	public Serializable getPrimaryKeyObject() {
+		return getUserId();
+	}
+
+
+	public void setPrimaryKeyObject(Serializable primaryKeyObj) {		
 	}
 
 }

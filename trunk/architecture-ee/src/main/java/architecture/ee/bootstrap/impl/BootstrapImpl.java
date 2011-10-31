@@ -16,8 +16,8 @@ import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
-import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.spring.lifecycle.SpringAdminService;
+import architecture.ee.bootstrap.Bootstrap;
 
 public class BootstrapImpl implements Bootstrap.Implementation {
 
@@ -27,19 +27,27 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
 	private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
-	private final RepositoryImpl repository = new RepositoryImpl();
+	private RepositoryImpl repository = new RepositoryImpl();
 	
 	public ConfigurableApplicationContext getBootstrapApplicationContext(){
 		BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(BOOTSTRAP_CONTEXT_KEY);
-		return (ConfigurableApplicationContext) parentContextRef.getFactory();
+		return (ConfigurableApplicationContext) parentContextRef.getFactory();	
 	}
 	
-	
+	@SuppressWarnings("unchecked")
 	public <T> T getBootstrapComponent(Class<T> requiredType){	
 		
-		if( requiredType == Repository.class )
-			return (T)repository;
+		log.debug( "BootstrapComponent requiredType = " + requiredType.getName() );
 		
+		if( requiredType == Repository.class ){
+			
+			if( repository.getState() != State.INITIALIZED ){
+				try {
+					repository.initialize();
+				} catch (Throwable e) {}
+			}			
+			return (T)repository;		
+		}
 		if( references.get(requiredType) == null){
 			references.put(requiredType, new WeakReference<T>( getBootstrapApplicationContext().getBean(requiredType) ));			
 		}

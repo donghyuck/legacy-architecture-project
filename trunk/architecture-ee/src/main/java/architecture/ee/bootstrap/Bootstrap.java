@@ -6,7 +6,6 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ConfigService;
-import architecture.common.lifecycle.Repository;
 import architecture.common.util.ImplFactory;
 
 public class Bootstrap {
@@ -39,10 +38,10 @@ public class Bootstrap {
 		return impl.getBootstrapApplicationContext();
 	}
 	
-	public static Repository getRepository() {
+/*	public static Repository getRepository() {
 		return impl.getBootstrapComponent(Repository.class);
 	}
-	
+	*/
 	public static AdminService getAdminService(){
 		return impl.getBootstrapComponent(AdminService.class);
 	}

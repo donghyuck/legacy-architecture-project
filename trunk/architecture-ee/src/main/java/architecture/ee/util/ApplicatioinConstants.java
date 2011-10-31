@@ -22,4 +22,7 @@ public interface ApplicatioinConstants extends architecture.common.lifecycle.App
 	
 	public static final String FREEMARKER_WEAK_TEMPLATE_CACHE_SIZE_PROP_NAME = "framework.freemarker.weakTemplateCacheSize" ;
 
+	public static final int USER = 1;
+	
+	
 }
