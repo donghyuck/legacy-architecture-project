@@ -19,19 +19,21 @@ public class BootstrapTest {
 		Repository repo = Bootstrap.getBootstrapComponent(Repository.class);
 		log.info(" - " + repo.getEffectiveRootPath());
 		log.info(" - " + repo.getConfigRoot().getRootURI());
-	}
-	
+	}	
 	
 	@Test
 	public void testGetDataSource(){
 		log.debug( DataSourceFactory.getDataSource() ) ;
 	}
-
 	
 	@Test
-	public void testGetAdminService(){
-				
+	public void testGetAdminService(){				
 		log.debug( AdminHelper.getAdminService() ) ;
+	}
+	
+	@Test
+	public void testGetConfigService(){				
+		log.debug( AdminHelper.getConfigService().getApplicationPropertyNames() ) ;
 	}
 	
 }
