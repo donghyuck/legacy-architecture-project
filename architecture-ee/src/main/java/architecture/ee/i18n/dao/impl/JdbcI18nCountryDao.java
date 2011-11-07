@@ -25,7 +25,7 @@ public class JdbcI18nCountryDao extends ExtendedJdbcDaoSupport implements I18nCo
 			c.setNumber(rs.getString(5));
 			c.setIdd(rs.getString(6));			
 			c.setEnabled( rs.getInt(7) == 1 ? true : false );			
-			return (I18nCountry)c;
+			return c;
 		}};
 
 		
@@ -58,8 +58,8 @@ public class JdbcI18nCountryDao extends ExtendedJdbcDaoSupport implements I18nCo
 		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_COUNTRY").getSql(), getCountryRowMapper() );	
 	}
 
-	public List<I18nCountry> findAll(int start, int end) {		
-		return getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_COUNTRY)").getSql(), start, end, new Object [] {}, new int [] {});
+	public List<I18nCountry> findAll(int start, int end) {	
+		return (List<I18nCountry>)getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_COUNTRY").getSql(), start, end, getCountryRowMapper(), new Object [] {}, new int [] {});
 	}
 
 	public void deleteCountryById(long ID) {

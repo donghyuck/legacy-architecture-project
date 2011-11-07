@@ -1,24 +1,19 @@
 package architecture.ee.model.impl;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import architecture.common.util.StringUtils;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.model.I18nLocaleModel;
-import architecture.ee.model.ModelConstants;
 
-public class I18nLocaleModelImpl extends AbstractModelObject<I18nLocale>
-implements I18nLocaleModel{
+public class I18nLocaleModelImpl extends BaseModelObject<I18nLocale>
+implements I18nLocaleModel , I18nLocale{
 
 	private long localeId = -1L;
 	private String language;
 	private String country;
 	private String encoding;
 	private String variant;
-	private Date creationDate;
-	private Date modifiedDate;	
-
 
 	public long getLocaleId() {
 		return localeId;
@@ -49,18 +44,6 @@ implements I18nLocaleModel{
 	}
 	public void setVariant(String variant) {
 		this.variant = variant;
-	}
-	public Date getCreationDate() {
-		return creationDate;
-	}
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
 	}
 
 	public int compareTo(architecture.ee.i18n.I18nLocale o) {
@@ -123,8 +106,7 @@ implements I18nLocaleModel{
 		setLocaleId(((Long)primaryKeyObj).longValue());
 	}
 	public int getObjectType() {
-		return ModelConstants.I18N_LOCALE;
+		return 10;
 	}
 	
-
 }

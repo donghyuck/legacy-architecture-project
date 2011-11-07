@@ -2,7 +2,7 @@ package architecture.ee.model;
 
 import architecture.ee.i18n.I18nCountry;
 
-public interface I18nCountryModel  extends ModelObject<I18nCountry> {
+public interface I18nCountryModel extends ModelObject<I18nCountry> {
 
 	public String getName();
 

@@ -1,0 +1,80 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       
+	<description>
+	<![CDATA[
+        Define Bootstrap Context
+	]]>
+	</description>
+	
+	<!-- ================================================ -->
+	<!-- 1. Database                                      -->
+	<!-- ================================================ -->
+	<bean id="dataSource"
+		class="architecture.ee.jdbc.datasource.DataSourceFactory"
+		destroy-method="close"
+		factory-method="getDataSource" />
+			
+	<bean id="sqlConfiguration" 
+	    class="architecture.ee.jdbc.query.factory.ConfigurationFactory"
+		factory-method="getConfiguration" />
+		
+	<bean id="sqlQueryFactoryBuilder" 
+	    class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilderImpl"
+		init-method="initialize">
+		<constructor-arg index="0" ref="sqlConfiguration" />
+		<property name="resourceLocations">
+			<list>
+				<value>res:sql/default-framework-queryset.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<!-- ================================================ -->
+	<!-- 2. Transaction                                   -->
+	<!-- ================================================ -->	
+	<bean id="transactionManager" 
+	    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- =================================================== -->
+	<!-- 3. Sequencer                                        -->
+	<!-- =================================================== -->		
+	<bean id="sequencerFactory" 
+	    class="architecture.ee.jdbc.sequencer.JdbcSequencerFactory" scope="singleton">
+		<constructor-arg index="0" ref="sqlConfiguration"/>
+		<constructor-arg index="1" ref="dataSource"/>
+	</bean>
+		
+	<!-- =================================================== -->
+	<!-- 4. Dao                                              -->
+	<!-- =================================================== -->	
+	<bean id="jdbcDaoSupport" abstract="true" 
+	    p:configuration-ref="sqlConfiguration" 
+	    p:dataSource-ref="dataSource" 
+	    depends-on="sqlConfiguration, dataSource" />	
+	    
+	<bean id="sequenceDao" 
+	    class="architecture.ee.jdbc.sequencer.dao.JdbcSequenceDao" 
+	    init-method="initialize">
+		<constructor-arg ref="sequencerFactory"/>
+	</bean>	    
+	
+ 	<bean id="extendedPropertyDao" 
+ 	    class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" 
+ 	    parent="jdbcDaoSupport" />
+		
+</beans>

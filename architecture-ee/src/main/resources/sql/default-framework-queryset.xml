@@ -108,11 +108,12 @@
 
 	<sql-query name="SELECT_ALL_COUNTRY"><![CDATA[
 		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
+		ORDER BY COUNTRY_ID
       ]]></sql-query>
 
 	<sql-query name="SELECT_ALL_COUNTRY_WITH_ENABLED"><![CDATA[
 		SELECT COUNTRY_ID, NAME, A2, A3, NUM, DIAL, ENABLED FROM V2_I18N_COUNTRY 
-		WHERE ENABLED = 1
+		WHERE ENABLED = 1 ORDER BY COUNTRY_ID
       ]]></sql-query>
 
 	<sql-query name="COUNT_ALL_COUNTRY"><![CDATA[
@@ -142,6 +143,88 @@
 		    DIAL, 
 		    ENABLED ) VALUES (?, ?, ?, ?, ?, ?, ?)
       ]]></sql-query>
+    <!-- ============================================== -->
+    <!--  I18n Localizer                                -->
+    <!-- ============================================== -->    
+    <sql-query name="COUNT_ALL_LOCALIZER"><![CDATA[
+    	SELECT count(LOCALIZER_ID) FROM V2_I18N_LOCALIZER     		     
+    ]]></sql-query>
+    
+    <sql-query name="SELECT_ALL_LOCALIZER"><![CDATA[
+        SELECT 
+            LOCALIZER_ID, 
+            LOCALE_ID,
+            NAME,
+            DESCRIPTION,
+            CREATION_DATE,
+            MODIFIED_DATE
+        FROM V2_I18N_LOCALIZER ORDER BY LOCALIZER_ID
+    ]]></sql-query>
+    
+    <sql-query name="SELECT_LOCALIZER_BY_ID"><![CDATA[
+        SELECT 
+            LOCALIZER_ID, 
+            LOCALE_ID,
+            NAME,
+            DESCRIPTION,
+            CREATION_DATE,
+            MODIFIED_DATE
+        FROM V2_I18N_LOCALIZER
+        WHERE LOCALIZER_ID = ?    
+    ]]></sql-query>
+
+    <sql-query name="SELECT_LOCALIZER_BY_NAME"><![CDATA[
+        SELECT 
+            LOCALIZER_ID, 
+            LOCALE_ID,
+            NAME,
+            DESCRIPTION,
+            CREATION_DATE,
+            MODIFIED_DATE
+        FROM V2_I18N_LOCALIZER
+        WHERE NAME = ?     
+    ]]></sql-query>
+        
+    <sql-query name="INSERT_LOCALIZER"><![CDATA[
+		INSERT INTO V2_I18N_LOCALIZER (
+            LOCALIZER_ID, 
+            LOCALE_ID,
+            NAME,
+            DESCRIPTION,
+            CREATION_DATE,
+            MODIFIED_DATE ) 
+        VALUES (?, ?, ?, ?, ?, ?)    
+    ]]></sql-query>
+    <sql-query name="UPDATE_LOCALIZER"><![CDATA[
+		UPDATE V2_I18N_LOCALIZER
+		SET LOCALE_ID = ?, NAME = ?, DESCRIPTION = ?, MODIFIED_DATE = ? 
+		WHERE LOCALIZER_ID = ?
+    ]]></sql-query>
+    
+    <sql-query name="DELETE_LOCALIZER_BY_ID"><![CDATA[
+        DELETE FROM V2_I18N_LOCALIZER WHERE LOCALIZER_ID = ?
+    ]]></sql-query>
+	
+	
+	<sql-query name="DELETE_I18N_TEXT_BY_LOCALIZER"><![CDATA[
+		DELETE FROM V2_I18N_TEXT WHERE LOCALIZER_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="INSERT_I18N_TEXT"><![CDATA[
+		INSERT INTO V2_I18N_TEXT (LOCALIZER_ID, TEXT_KEY, TEXT ) 
+		VALUES (?, ?, ?)
+    ]]></sql-query>
+    
+	<sql-query name="SELECT_I18N_TEXT_BY_LOCALIZER"><![CDATA[
+		SELECT 
+		    LOCALIZER_ID, 
+		    TEXT_KEY, 
+		    TEXT, 
+		    CREATION_DATE, 
+		    MODIFIED_DATE 
+		FROM V2_I18N_TEXT WHERE LOCALIZER_ID = ?
+    ]]></sql-query>
+    
 
 	<!-- i18n Text for ResourceBundle -->
 	<sql-query name="INSERT_I18N_TEXTS"><![CDATA[
@@ -1124,6 +1207,19 @@
     	);
 				
 		INSERT INTO V2_I18N_LOCALE ( LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ) VALUES (1, 'ko', 'KR', NULL, 'UTF-8');
+
+		CREATE TABLE V2_I18N_LOCALIZER (
+			 LOCALIZER_ID      INTEGER NOT NULL,
+			 LOCALE_ID         INTEGER NOT NULL,
+			 RESOURCE_BUNDLE   VARCHAR2(255) NOT NULL,
+			 DESCRIPTION       VARCHAR2(1000),
+		     CREATION_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     MODIFIED_DATE  DATE DEFAULT SYSDATE NOT NULL,
+		     
+		     CONSTRAINT V2_I18N_LOCALIZER_PK PRIMARY KEY (LOCALIZER_ID)
+    	);
+    				
+			
 			
 				
 		CREATE TABLE V2_I18N_TEXT (

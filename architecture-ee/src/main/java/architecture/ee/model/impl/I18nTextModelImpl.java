@@ -1,60 +1,18 @@
 package architecture.ee.model.impl;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import architecture.ee.i18n.I18nText;
 import architecture.ee.model.I18nTextModel;
-import architecture.ee.util.I18nTextUtils;
 
-public class I18nTextModelImpl extends AbstractModelObject<I18nText> implements I18nTextModel {
+public class I18nTextModelImpl  extends BaseModelObject<I18nText>  implements I18nTextModel, I18nText {
 
-	private String localeCode;
-    private int objectAttribute = -1;
-    private int objectType = -1;    
-    private long objectId;
+	private long localizerId = -1L ;
     private long textId = -1L;    
-    private String textKey;
-    private String textValue; 
-    private Date creationDate;
-    private Date modifiedDate;    
-
-    public I18nTextModelImpl() {
-    	this.textId = -1L;
-	}
-    
-	public long getObjectId() {
-		return objectId;
-	}
-
-	public void setObjectId(long objectId) {
-		this.objectId = objectId;
-	}
-
-	public int getObjectAttribute() {
-		return objectAttribute;
-	}
-
-	public void setObjectAttribute(int objectAttribute) {
-		this.objectAttribute = objectAttribute;
-	}
-
-	public int getObjectType() {
-		return objectType;
-	}
-
-	public void setObjectType(int objectType) {
-		this.objectType = objectType;
-	}
+    private String key;
+    private String text; 
 	
-	public String getLocaleCode() {
-		return localeCode;
-	}
-	
-	public void setLocaleCode(String localeCode) {
-		this.localeCode = localeCode;
-	}
-	
+
 	public long getTextId() {
 		return textId;
 	}
@@ -62,38 +20,44 @@ public class I18nTextModelImpl extends AbstractModelObject<I18nText> implements 
 	public void setTextId(long textId) {
 		this.textId = textId;
 	}
-	
-	public String getTextKey() {
-		return textKey;
+
+	public long getLocalizerId() {
+		return localizerId;
 	}
-	
-	public void setTextKey(String textKey) {
-		this.textKey = textKey;
+
+	public void setLocalizerId(long localizerId) {
+		this.localizerId = localizerId;
 	}
-	
+
+	public String getKey() {
+		return key;
+	}
+
+	public void setKey(String key) {
+		this.key = key;
+	}
+
 	public String getText() {
-		return textValue;
+		return text;
 	}
-	
-	public void setText(String textValue) {
-		this.textValue = textValue;
+
+	public void setText(String text) {
+		this.text = text;
 	}
-	
-	public Date getCreationDate() {
-		return creationDate;
+
+
+	public Serializable getPrimaryKeyObject() {
+		return getTextId();
 	}
-	
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+
+	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
+		this.setTextId(((Long)primaryKeyObj).longValue());
 	}
-	
-	public Date getModifiedDate() {
-		return modifiedDate;
+
+	public int getObjectType() {
+		return 13;
 	}
-	
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
+
 	
 	public int compareTo(I18nText o) {
 		long pk = o.getTextId();
@@ -109,30 +73,9 @@ public class I18nTextModelImpl extends AbstractModelObject<I18nText> implements 
 		}
 	}
 	
+	@Override
 	public Object clone() {
-		I18nTextModelImpl impl = new I18nTextModelImpl();
-		impl.setTextId(textId);
-		impl.setObjectId(objectId);
-		impl.setObjectType(objectType);
-		impl.setObjectAttribute(objectAttribute);
-		impl.setLocaleCode(getLocaleCode());
-		impl.setTextKey(getTextKey());
-		impl.setText(getText());
-		impl.setCreationDate(getCreationDate());
-		impl.setModifiedDate(getModifiedDate());
-		return impl;
+		return null;
 	}
-
-	public String getResourceBundleKey() {
-		return I18nTextUtils.generateResourceBundleKey(objectType, objectId, objectAttribute);
-	}
-
-	public Serializable getPrimaryKeyObject() {
-		return getTextId();
-	}
-
-	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
-		this.setTextId(((Long)primaryKeyObj).longValue());
-	}
-	
+		
 }

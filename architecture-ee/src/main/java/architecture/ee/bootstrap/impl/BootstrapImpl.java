@@ -33,6 +33,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 		BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(BOOTSTRAP_CONTEXT_KEY);
 		return (ConfigurableApplicationContext) parentContextRef.getFactory();	
 	}
+		
 	
 	@SuppressWarnings("unchecked")
 	public <T> T getBootstrapComponent(Class<T> requiredType){	
@@ -49,6 +50,9 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			return (T)repository;		
 		}
 		if( references.get(requiredType) == null){
+			/*for ( String n : getBootstrapApplicationContext().getBeanDefinitionNames())
+				log.debug(n);*/
+			
 			references.put(requiredType, new WeakReference<T>( getBootstrapApplicationContext().getBean(requiredType) ));			
 		}
 		return (T)references.get(requiredType).get();	

@@ -278,10 +278,8 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		return (java.util.List<T>)query(creator, extractor);
 	}
 	
-	public List queryScrollable(String sql, int startIndex, int numResults, Object[] args, int[] argTypes) {
-		
-		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(sql, startIndex, numResults, args, argTypes, getJdbcHelper());
-		
+	public List queryScrollable(String sql, int startIndex, int numResults, Object[] args, int[] argTypes) {		
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(sql, startIndex, numResults, args, argTypes, getJdbcHelper());		
 		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(startIndex, numResults, getColumnMapRowMapper(), getJdbcHelper());
 		return (List) query(creator, extractor);
 	}

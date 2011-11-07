@@ -4,8 +4,11 @@ import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
+import architecture.common.lifecycle.State;
 import architecture.ee.bootstrap.Bootstrap;
-import architecture.ee.util.ApplicationHelper;
+import architecture.ee.i18n.I18nTextManager;
+import architecture.ee.spring.lifecycle.SpringAdminService;
+import architecture.ee.util.ApplicatioinConstants;
 
 public final class AdminHelper {
 
@@ -13,26 +16,52 @@ public final class AdminHelper {
 		return Bootstrap.getBootstrapComponent(Repository.class);
 	}
 	
+	public static boolean isReady(){		
+		return getAdminService().isReady();
+	}
+	
+	public static State getState(){
+		return getAdminService().getState();
+	}
+	
 	public static boolean isSetupComplete(){
-		return ApplicationHelper.isSetupComplete();
-	}	
+		if(isReady()){
+			return getAdminService().getConfigService().getApplicationBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false);
+		}else{
+			return getAdminService().getConfigService().getLocalProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false) ; 
+		}
+	}
 		
+	public static String[] getComponentNames(){
+		SpringAdminService admin = (SpringAdminService)getAdminService();
+		if(isReady()){
+			return admin.getApplicationContext().getBeanDefinitionNames();
+		}else{ 
+		    return Bootstrap.getBootstrapComponentNames();
+		}
+	}
+	
 	public static AdminService getAdminService(){
-		return ApplicationHelper.getAdminService();
+		return Bootstrap.getAdminService();
 	}
 	
 	public static ConfigService getConfigService(){
-		return ApplicationHelper.getConfigService();
+		return Bootstrap.getConfigService();
 	}
 	
 	public static ConfigRoot getConfigRoot(){
-		return ApplicationHelper.getConfigService().getConfigRoot();
+		return getRepository().getConfigRoot();
 	}
 	
 	public static String getEffectiveRootPath(){
-		return ApplicationHelper.getConfigService().getEffectiveRootPath();
+		return getRepository().getEffectiveRootPath();
 	}
 			
+	public static I18nTextManager getI18nTextManager(){
+		return Bootstrap.getBootstrapComponent(I18nTextManager.class);
+	}
+	
+	
 	public static net.sf.ehcache.CacheManager getCacheManager(){		
 		return Bootstrap.getBootstrapComponent(net.sf.ehcache.CacheManager.class);
 	}
@@ -45,6 +74,5 @@ public final class AdminHelper {
 		}
 		return memoryOnlyCache;
 	}	
-
-
+	
 }

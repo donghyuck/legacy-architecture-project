@@ -18,6 +18,7 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	protected Log log = LogFactory.getLog(getClass());	
 	
 	private SequenceDao sequenceDao = null;
+	
 	private Configuration configuration = null;
 		
 

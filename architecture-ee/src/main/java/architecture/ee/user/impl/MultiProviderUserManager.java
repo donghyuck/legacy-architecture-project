@@ -476,7 +476,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         userModel.setFederated(user.isFederated());
         userModel.setLastLoggedIn(user.getLastLoggedIn());
         userModel.setLastProfileUpdate(user.getLastProfileUpdate());
-        userModel.setModificationDate(new Date());
+        userModel.setModifiedDate(new Date());
         userModel.setName(user.getName());
         userModel.setNameVisible(user.isNameVisible());
         userModel.setFirstName(user.getFirstName());
@@ -730,7 +730,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         if( null == ut.getCreationDate() )
             ut.setCreationDate(new Date());
         if(null == ut.getModifiedDate())
-            ut.setModificationDate(new Date());
+            ut.setModifiedDate(new Date());
     }
     
 
