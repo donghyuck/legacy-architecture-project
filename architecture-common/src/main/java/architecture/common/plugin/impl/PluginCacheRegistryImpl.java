@@ -1,4 +1,4 @@
-package architecture.common.plugin.internal;
+package architecture.common.plugin.impl;
 
 
 import java.util.ArrayList;

@@ -22,6 +22,8 @@ package architecture.common.plugin;
 
 import java.io.File;
 
+import architecture.common.plugin.impl.PluginManagerImpl;
+
 /**
  * Plugin interface. Plugins enhance the functionality of Openfire. They can:<ul>
  *
