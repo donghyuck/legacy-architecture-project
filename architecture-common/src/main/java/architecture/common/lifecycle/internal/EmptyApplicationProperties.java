@@ -91,4 +91,5 @@ public class EmptyApplicationProperties extends AbstractApplicationProperties {
 	public boolean isEmpty() {
 		return true;
 	}
+
  }

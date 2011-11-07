@@ -1,6 +1,6 @@
 package architecture.common.lifecycle;
 
-public interface Repository {
+public interface Repository extends Component {
 	
 	public ConfigRoot getConfigRoot();	
 	
@@ -11,5 +11,8 @@ public interface Repository {
 	 */
 	public String getRootURI();
 	
+	public String getEffectiveRootPath();
+	
+	public ApplicationProperties getSetupApplicationProperties();
 	
 }

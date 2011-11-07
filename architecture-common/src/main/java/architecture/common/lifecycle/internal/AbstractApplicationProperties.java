@@ -41,4 +41,7 @@ public abstract class AbstractApplicationProperties implements ApplicationProper
 		return NumberUtils.toInt(get(property), defaultValue);
 	}
 
+	public long getLongProperty(String property, long defaultValue) {
+		return NumberUtils.toLong(get(property), defaultValue);
+	}
 }

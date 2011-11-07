@@ -30,4 +30,6 @@ public interface ApplicationProperties extends Map<String, String> {
 
     public abstract int getIntProperty(String name, int defaultValue);
     
+    public abstract long getLongProperty(String name, long defaultValue);
+    
 }

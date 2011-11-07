@@ -17,13 +17,15 @@ package architecture.common.lifecycle;
 
 public interface ApplicationConstants {
 	
+	public static final String DEFAULT_ARCHITECTURE_RUNTIME_INIT_FILENAME = "architecture-runtime-init.properties";
+	
 	public static final String DEFAULT_STARTUP_FILENAME = "startup-config.xml";
 
-    public static final String ARCHITECTURE_INSTALL_ROOT_KEY = "architecture.install.root";
+    public static final String ARCHITECTURE_RUNTIME_ROOT_KEY = "architecture.runtime.root";
 
     public static final String ARCHITECTURE_CONFIG_ROOT_KEY = "architecture.config.root";
     
-    public static final String ARCHITECTURE_INSTALL_ROOT_ENV_KEY = "ARCHITECTURE_INSTALL_ROOT";
+    public static final String ARCHITECTURE_RUNTIME_ROOT_ENV_KEY = "ARCHITECTURE_RUNTIME_ROOT";
    
     public static final String ARCHITECTURE_CONFIG_ROOT_ENV_KEY = "ARCHITECTURE_CONFIG_ROOT";
     	

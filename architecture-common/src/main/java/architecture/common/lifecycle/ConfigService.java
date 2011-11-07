@@ -9,7 +9,7 @@ import java.util.TimeZone;
 
 public interface ConfigService extends Component{
 
-	public Repository getWorkspace();
+	public Repository getRepository();
 	
 	public ConfigRoot getConfigRoot();
 	
