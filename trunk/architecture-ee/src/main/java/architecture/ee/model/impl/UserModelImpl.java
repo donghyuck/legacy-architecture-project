@@ -17,7 +17,7 @@ import architecture.ee.security.authentication.UnauthorizedException;
 import architecture.ee.user.User;
 import architecture.ee.util.ApplicationHelper;
 
-public class UserModelImpl extends AbstractModelObject <User> implements UserModel {
+public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	private Log log = LogFactory.getLog(getClass());
 
@@ -31,8 +31,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
 	private boolean nameVisible;
 	private String email;
 	private boolean emailVisible;
-	private Date creationDate;
-	private Date modifiedDate;
 	private Map<String, String> properties;
 	private boolean enabled;
 	private Date lastLoggedIn;
@@ -65,8 +63,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         nameVisible = true;
         email = null;
         emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -96,8 +92,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         nameVisible = true;
         email = null;
         emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -129,8 +123,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         nameVisible = true;
         this.email = null;
         emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -164,8 +156,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         this.nameVisible = true;
         this.email = null;
         this.emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -202,8 +192,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         this.nameVisible = true;
         this.email = null;
         this.emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -247,8 +235,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         nameVisible = true;
         email = null;
         emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -279,8 +265,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         nameVisible = true;
         email = null;
         emailVisible = false;
-        creationDate = null;
-        modifiedDate = null;
         properties = null;
         enabled = true;
         lastLoggedIn = null;
@@ -313,8 +297,10 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         nameVisible = user.isNameVisible();
         emailVisible = user.isEmailVisible();
         enabled = user.isEnabled();
-        creationDate = user.getCreationDate();
-        modifiedDate = user.getModifiedDate();
+        
+        setCreationDate(user.getCreationDate());
+        setModifiedDate(user.getModifiedDate());
+        
         lastLoggedIn = user.getLastLoggedIn();
         lastProfileUpdate = user.getLastProfileUpdate();
         external = user.isExternal();
@@ -329,6 +315,7 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
         setUsernameSupported = user.isSetUsernameSupported();
         setPropertyEditSupported = user.isPropertyEditSupported();
         setPasswordSupported = user.isSetPasswordSupported();
+        
         if(user.getProperties() != null)
             properties = new HashMap<String, String>(user.getProperties());
         try
@@ -352,14 +339,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
 
 	public boolean isReadOnly() {
 		return false;
-	}
-
-	public Date getCreationDate() {
-		return creationDate ;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
 	}
 
 	public String getEmail() {
@@ -408,14 +387,6 @@ public class UserModelImpl extends AbstractModelObject <User> implements UserMod
 
 	public void setLastProfileUpdate(Date lastProfileUpdate) {
 		this.lastProfileUpdate = lastProfileUpdate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModificationDate(Date modificationDate) {
-		this.modifiedDate = modificationDate;
 	}
 
 	public String getName() {

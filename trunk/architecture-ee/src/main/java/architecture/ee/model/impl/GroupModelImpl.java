@@ -14,7 +14,7 @@ import architecture.ee.user.Group;
 import architecture.ee.user.User;
 import architecture.ee.user.UserNotFoundException;
 
-public class GroupModelImpl extends AbstractModelObject<Group> implements GroupModel {
+public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel {
 
 	private long groupId;
 	

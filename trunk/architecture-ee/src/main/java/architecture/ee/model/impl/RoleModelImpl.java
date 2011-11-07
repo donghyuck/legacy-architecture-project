@@ -7,7 +7,7 @@ import architecture.ee.model.ModelConstants;
 import architecture.ee.model.RoleModel;
 import architecture.ee.security.role.Role;
 
-public class RoleModelImpl extends AbstractModelObject<Role>  implements RoleModel {
+public class RoleModelImpl extends BaseModelObject<Role>  implements RoleModel {
 
 	private long roleId;
 	private String name;

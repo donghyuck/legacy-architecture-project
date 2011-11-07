@@ -16,6 +16,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.apache.commons.vfs.FileObject;
 import org.apache.commons.vfs.FileSystemException;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
@@ -166,6 +168,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         return locale;
 	}
 
+
 	public void setLocale(Locale newLocale) {
 		String country = newLocale.getCountry();
 		String language = newLocale.getLanguage();
@@ -173,6 +176,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		setApplicationProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME, language);
 		resetL10N();
 	}
+
 
 	public String getCharacterEncoding() {
         if(characterEncoding == null)
@@ -311,6 +315,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		getSetupProperties().remove(name);		
 	}	
 	
+
 	public String getApplicationProperty(String name) {		
 		return getApplicationProperties().get(name);
 	}
@@ -323,11 +328,11 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         else
             return defaultValue;
 	}
-
+	
 	public List<String> getApplicationPropertyNames() {
 		return new ArrayList<String>(getApplicationProperties().getPropertyNames());
 	}
-
+	
 	public List<String> getApplicationPropertyNames(String parent) {
 		getApplicationProperties();
         return new ArrayList<String>(getApplicationProperties().getChildrenNames(parent));
@@ -345,6 +350,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         return values;
 	}
 
+
 	public int getApplicationIntProperty(String name, int defaultValue) {
 		String value = getApplicationProperty(name);
         if(value != null){
@@ -357,9 +363,11 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         return defaultValue;
 	}
 
+
 	public boolean getApplicationBooleanProperty(String name) {
 		return Boolean.valueOf(getApplicationProperty(name)).booleanValue();
 	}
+
 
 	public boolean getApplicationBooleanProperty(String name,
 			boolean defaultValue) {
@@ -370,21 +378,26 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
             return defaultValue;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void setApplicationProperty(String name, String value) {
 		getApplicationProperties().put(name, value);		
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void setApplicationProperties(Map<String, String> map) {
 		getApplicationProperties().putAll(map);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteApplicationProperty(String name) {
 		getApplicationProperties().remove(name);
 	}
 
+
 	public String getLocalizedApplicationProperty(String name, Locale locale) {
 		return (String)getLocalizedApplicationProperties().get((new StringBuilder()).append(name).append(".").append(locale).toString());
 	}
+
 
 	public List<Locale> getLocalizedApplicationPropertyLocales(String name) {
 		if( getLocalizedApplicationProperties() instanceof JdbcApplicationProperties )
@@ -393,10 +406,12 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
             return Collections.emptyList();
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void setLocalizedApplicationProperty(String name, String value, Locale locale) {		
 		getLocalizedApplicationProperties().put((new StringBuilder()).append(name).append(".").append(locale.toString()).toString(), value);		
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteLocalizedApplicationProperty(String name, Locale locale) {
 		getLocalizedApplicationProperties().remove((new StringBuilder()).append(name).append(".").append(locale.toString()).toString());		
 	}

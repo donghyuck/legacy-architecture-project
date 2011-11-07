@@ -6,7 +6,7 @@ import architecture.ee.model.ModelConstants;
 import architecture.ee.model.PermissionMaskModel;
 import architecture.ee.security.permission.PermissionMask;
 
-public class PermissionMaskModelImpl  extends AbstractModelObject<PermissionMask> implements PermissionMaskModel {
+public class PermissionMaskModelImpl  extends BaseModelObject<PermissionMask> implements PermissionMaskModel {
 	
 	private String name;
 	

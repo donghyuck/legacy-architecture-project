@@ -4,10 +4,9 @@ import java.io.Serializable;
 
 import architecture.ee.i18n.I18nCountry;
 import architecture.ee.model.I18nCountryModel;
-import architecture.ee.model.ModelConstants;
 
-public class I18nCountryModelImpl extends AbstractModelObject<I18nCountry>
-		implements I18nCountryModel {
+public class I18nCountryModelImpl extends BaseModelObject<I18nCountry>
+		implements I18nCountryModel, I18nCountry {
 	
 	private long countryId;
 	private String name;
@@ -121,7 +120,7 @@ public class I18nCountryModelImpl extends AbstractModelObject<I18nCountry>
 	}
 
 	public int getObjectType() {
-		return ModelConstants.I18N_COUNTRY;
+		return 11;
 	}
 
 }

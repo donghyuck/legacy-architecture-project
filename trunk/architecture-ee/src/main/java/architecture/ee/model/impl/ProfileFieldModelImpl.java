@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import architecture.ee.i18n.I18nText;
+import architecture.ee.i18n.I18nText2;
 import architecture.ee.model.ModelConstants;
 import architecture.ee.model.ProfileFieldModel;
 import architecture.ee.user.profile.ProfileField;
@@ -16,7 +16,7 @@ import architecture.ee.user.profile.ProfileFieldUtil;
 import architecture.ee.util.I18nTextUtils;
 
 
-public class ProfileFieldModelImpl extends AbstractModelObject<ProfileField> implements ProfileFieldModel {
+public class ProfileFieldModelImpl extends BaseModelObject<ProfileField> implements ProfileFieldModel {
 
 	private static final String SINGLE_VALUE_KEY = "v";
     private String displayNameKey;
@@ -438,7 +438,7 @@ public class ProfileFieldModelImpl extends AbstractModelObject<ProfileField> imp
     }
 
 	public String getDisplayName(String localeCode) {
-		I18nText text = I18nTextUtils.getText(profileFieldText, localeCode, 1);
+		I18nText2 text = I18nTextUtils.getText(profileFieldText, localeCode, 1);
         if(text != null)
             return text.getText();
         else
@@ -450,7 +450,7 @@ public class ProfileFieldModelImpl extends AbstractModelObject<ProfileField> imp
 	}
 
 	public String getDescription(String localeCode) {
-		I18nText text = I18nTextUtils.getText(profileFieldText, localeCode, 2);
+		I18nText2 text = I18nTextUtils.getText(profileFieldText, localeCode, 2);
         if(text != null)
             return text.getText();
         else

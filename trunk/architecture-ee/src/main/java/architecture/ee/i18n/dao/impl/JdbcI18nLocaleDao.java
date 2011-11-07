@@ -37,39 +37,39 @@ public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLoc
 		super.initDao();
 	}
 
-	public int getAvailableLocaleCount() {
+	public int getAvailableI18nLocaleCount() {
 		return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.COUNT_ALL_LOCALE").getSql());
 	}
 
-	public List<I18nLocale> getAvailableLocales() {
+	public List<I18nLocale> getAvailableI18nLocales() {
 		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_LOCALE").getSql(), new I18nLocaleRowMapper() );	
 	}
 
-	public I18nLocale getLocaleById(long localeId) {
+	public I18nLocale getI18nLocaleById(long localeId) {
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_LOCALE_BY_ID").getSql(), new Object[]{localeId}, new int[]{Types.INTEGER}, new I18nLocaleRowMapper());
 	}
 
-	public I18nLocale getLocale(Locale locale, boolean createIfNotExist) {
+	public I18nLocale getI18nLocale(Locale locale, boolean createIfNotExist) {
 		try {
-			return getLocale(locale);
+			return getI18nLocale(locale);
 		} catch (IncorrectResultSizeDataAccessException e) {
 			if(createIfNotExist){
-				return addLocale(locale);
+				return addI18nLocale(locale);
 			}
 			throw e;
 		}
 	}
 
-	public I18nLocale getLocale(Locale locale) {
+	public I18nLocale getI18nLocale(Locale locale) {
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_LOCALE_BY_CODE").getSql(), 
 			new Object[]{locale.getLanguage(), locale.getCountry() }, 
 			new int[]{Types.VARCHAR, Types.VARCHAR}, new I18nLocaleRowMapper());
 	}
 
-	public I18nLocale addLocale(Locale locale) {		
+	public I18nLocale addI18nLocale(Locale locale) {		
 		long now = System.currentTimeMillis();
 		I18nLocaleModelImpl impl = new I18nLocaleModelImpl();
-		impl.setLocaleId(getNextId("I18nLocale"));
+		impl.setLocaleId(getNextId("I18N_LOCALE"));
 		impl.setLanguage(locale.getLanguage());
 		impl.setCountry(locale.getCountry());
 		impl.setVariant(locale.getVariant());
@@ -91,11 +91,11 @@ public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLoc
 		return (I18nLocale)impl;
 	}
 
-	public void deleteLocale(I18nLocale locale) {
+	public void deleteI18nLocale(I18nLocale locale) {
 		getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.DELETE_LOCALE_BY_ID").getSql(), new Object[]{locale.getLocaleId()}, new int[]{Types.INTEGER});
 	}
 
-	public I18nLocale updateLocale(I18nLocale locale) {
+	public I18nLocale updateI18nLocale(I18nLocale locale) {
 		java.sql.Date d = new java.sql.Date(System.currentTimeMillis());
 		locale.setModifiedDate(d);
 		getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_LOCALE").getSql(), 

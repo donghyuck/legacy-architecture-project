@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="no" default-lazy-init="false" default-init-method="init"
+	default-destroy-method="destroy">
+	<description>
+	<![CDATA[
+        Define Bootstrap Context
+	]]>
+	</description>
+
+	<!-- ================================================ -->
+	<!-- Plugin                                           -->
+	<!-- ================================================ -->
+	
+	<bean id="pluginCacheRegistry" class="architecture.common.plugin.impl.PluginCacheRegistryImpl"
+		depends-on="ehcache">
+		<constructor-arg index="0" ref="ehcache" />
+	</bean>
+
+	<bean id="pluginManager" class="architecture.common.plugin.impl.PluginManagerImpl"
+		p:eventPublisher-ref="eventPublisher" />
+
+
+</beans>

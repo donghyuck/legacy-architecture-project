@@ -162,4 +162,14 @@ public class SystemUser implements AuthToken, User {
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {		
 	}
 
+	public void setCreationDate(Date creationDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

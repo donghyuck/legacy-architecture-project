@@ -7,7 +7,7 @@ import architecture.ee.model.ProfileFieldOptionModel;
 import architecture.ee.user.profile.ProfileField;
 import architecture.ee.user.profile.ProfileFieldOption;
 
-public class ProfileFieldOptionModelImpl  extends AbstractModelObject<ProfileFieldOption> implements ProfileFieldOptionModel {
+public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOption> implements ProfileFieldOptionModel {
 
     private long fieldID;
     private String value;

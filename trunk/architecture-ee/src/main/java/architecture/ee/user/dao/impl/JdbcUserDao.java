@@ -40,7 +40,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 			ut.setExternal( rs.getInt("IS_EXTERNAL") == 1 );  
 			ut.setFederated( rs.getInt("FEDERATED") == 1 );
 			ut.setCreationDate( rs.getDate("CREATION_DATE") ); 
-			ut.setModificationDate( rs.getDate("MODIFIED_DATE") ); 			
+			ut.setModifiedDate( rs.getDate("MODIFIED_DATE") ); 			
 			ut.setStatus( UserTemplate.Status.getById( rs.getInt("STATUS") ));
 			return ut;
 		}
@@ -67,7 +67,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 			ut.setExternal( rs.getInt("IS_EXTERNAL") == 1 );  
 			ut.setFederated( rs.getInt("FEDERATED") == 1 );
 			ut.setCreationDate( rs.getDate("CREATION_DATE") ); 
-			ut.setModificationDate( rs.getDate("MODIFIED_DATE") ); 			
+			ut.setModifiedDate( rs.getDate("MODIFIED_DATE") ); 			
 			ut.setStatus( UserTemplate.Status.getById( rs.getInt("STATUS") ));
 			return ut;
 		}

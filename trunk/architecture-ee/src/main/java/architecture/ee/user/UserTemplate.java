@@ -8,9 +8,7 @@ import architecture.ee.model.impl.UserModelImpl;
 /**
  * 
  * @author donghyuck
- *
  */
-
 public class UserTemplate extends UserModelImpl implements User {
 
 	public UserTemplate() {

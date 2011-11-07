@@ -38,10 +38,10 @@ public class Bootstrap {
 		return impl.getBootstrapApplicationContext();
 	}
 	
-/*	public static Repository getRepository() {
-		return impl.getBootstrapComponent(Repository.class);
+	public static String[] getBootstrapComponentNames() {
+		return impl.getBootstrapApplicationContext().getBeanDefinitionNames();
 	}
-	*/
+	
 	public static AdminService getAdminService(){
 		return impl.getBootstrapComponent(AdminService.class);
 	}

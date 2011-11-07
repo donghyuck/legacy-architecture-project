@@ -14,7 +14,7 @@ import architecture.ee.user.profile.ProfileFieldValue;
 import architecture.ee.user.profile.TypeConverter;
 import architecture.ee.user.profile.TypeConverter.ConversionException;
 
-public class ProfileFieldValueModelImpl extends AbstractModelObject<ProfileFieldValue> implements ProfileFieldValueModel {
+public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValue> implements ProfileFieldValueModel {
 
 	private Log log = LogFactory.getLog(getClass());
 	

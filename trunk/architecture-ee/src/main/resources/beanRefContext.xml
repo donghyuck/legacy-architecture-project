@@ -17,7 +17,21 @@
         <constructor-arg>
             <list>
                 <value>classpath*:META-INF/services/default-bootstrap-context.xml</value>
+                <value>classpath*:META-INF/services/default-plugin-subsystem-context.xml</value>
+                <value>classpath*:META-INF/services/default-database-subsystem-context.xml</value>
+                <value>classpath*:META-INF/services/default-i18n-subsystem-context.xml</value>
+                <value>classpath*:META-INF/services/default-security-subsystem-context.xml</value>
             </list>
         </constructor-arg>
     </bean>
+    <!-- 
+    <bean id="default-setup-context" class="org.springframework.context.support.ClassPathXmlApplicationContext">
+        <constructor-arg>
+            <list>
+                <value>classpath*:META-INF/services/default-bootstrap-context.xml</value>
+            </list>
+        </constructor-arg>
+    </bean>
+     -->
+        
 </beans>	

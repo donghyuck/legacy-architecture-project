@@ -12,7 +12,8 @@ import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.State;
-import architecture.ee.bootstrap.Bootstrap;
+import architecture.ee.admin.AdminHelper;
+import architecture.ee.i18n.I18nTextManager;
 
 public final class ApplicationHelper {
 
@@ -31,37 +32,38 @@ public final class ApplicationHelper {
 	}
 	
 	public static ConfigService getConfigService(){
-		return Bootstrap.getConfigService();
+		return AdminHelper.getConfigService();
 	}
 		
 	public static AdminService getAdminService(){
-		return Bootstrap.getAdminService();
+		return AdminHelper.getAdminService();
+	}
+
+	public static I18nTextManager getI18nTextManager(){
+		return AdminHelper.getI18nTextManager();
 	}
 	
 	public static boolean isSetupComplete(){
-		if(isReady()){
-			return getAdminService().getConfigService().getApplicationBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false);
-		}else{
-			return getAdminService().getConfigService().getLocalProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false) ; 
-		}
+		return AdminHelper.isSetupComplete();
 	}
 	
 	public static boolean isReady(){		
-		return getAdminService().isReady();
+		return AdminHelper.isReady();
 	}
 	
 	public static State getState(){
-		return getAdminService().getState();
+		return AdminHelper.getState();
 	}
+	
 	
 	public static Locale getLocale(){
 		if (isReady()) {
-			return getAdminService().getConfigService().getLocale();
+			return getConfigService().getLocale();
 		} else {
-			 String language = getAdminService().getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
+			 String language = getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
 	            if(language == null)
 	                language = "";
-	            String country = getAdminService().getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
+	            String country = getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
 	            if(country == null)
 	                country = "";
 	            if(language.equals("") && country.equals(""))
@@ -73,9 +75,9 @@ public final class ApplicationHelper {
 	
 	public static String getCharacterEncoding(){
 		if(isReady()){
-			return getAdminService().getConfigService().getCharacterEncoding();
+			return getConfigService().getCharacterEncoding();
 		}else{
-			return getAdminService().getConfigService().getLocalProperty(
+			return getConfigService().getLocalProperty(
 				ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME, 
 				ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
 		}
@@ -83,31 +85,31 @@ public final class ApplicationHelper {
 	
 	public static String getApplicationProperty(String name, String defaultValue){		
 		if(isReady()){
-			return getAdminService().getConfigService().getApplicationProperty(name, defaultValue);
+			return getConfigService().getApplicationProperty(name, defaultValue);
 		}else{ 
-			return getAdminService().getConfigService().getLocalProperty(name, defaultValue);
+			return getConfigService().getLocalProperty(name, defaultValue);
 		}
 	}
 	
 	public static int getApplicationIntProperty(String name, int defaultValue){
 		if(isReady())
-			return getAdminService().getConfigService().getApplicationIntProperty(name, defaultValue);
+			return getConfigService().getApplicationIntProperty(name, defaultValue);
 		else 
-			return getAdminService().getConfigService().getLocalProperty(name, defaultValue);
+			return getConfigService().getLocalProperty(name, defaultValue);
 	}
 	
 	public static boolean getApplicationBooleanProperty(String name, boolean defaultValue){
 		if(isReady())
-		    return getAdminService().getConfigService().getApplicationBooleanProperty(name, defaultValue);
+		    return getConfigService().getApplicationBooleanProperty(name, defaultValue);
 		else
-			return getAdminService().getConfigService().getLocalProperty(name, defaultValue);
+			return getConfigService().getLocalProperty(name, defaultValue);
 	}
 	
 	public static TimeZone getTimeZone(){
 		if(isReady()){
-			return getAdminService().getConfigService().getTimeZone();
+			return getConfigService().getTimeZone();
 		}else{
-			String timeZoneID = getAdminService().getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME);
+			String timeZoneID = getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME);
 			if(timeZoneID == null)
 				return TimeZone.getDefault();
 			else
@@ -117,7 +119,7 @@ public final class ApplicationHelper {
 	
 	public static String getLocalizedApplicationProperty(String name, Locale locale){
 		if(isReady())
-			return getAdminService().getConfigService().getLocalizedApplicationProperty(name, locale);
+			return getConfigService().getLocalizedApplicationProperty(name, locale);
 		else 
 			return null;
 	}
