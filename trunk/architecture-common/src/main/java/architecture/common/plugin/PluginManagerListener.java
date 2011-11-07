@@ -19,6 +19,8 @@
  */
 package architecture.common.plugin;
 
+import architecture.common.plugin.impl.PluginManagerImpl;
+
 /**
  * Interface to listen for plugin manager events. Use the
  * {@link PluginManagerImpl#addPluginManagerListener(PluginManagerListener)}

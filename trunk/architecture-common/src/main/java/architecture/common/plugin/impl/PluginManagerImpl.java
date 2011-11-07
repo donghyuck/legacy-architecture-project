@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package architecture.common.plugin;
+package architecture.common.plugin.impl;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -61,8 +61,17 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.Version;
+import architecture.common.plugin.Plugin;
+import architecture.common.plugin.PluginCacheConfigurator;
+import architecture.common.plugin.PluginCacheRegistry;
+import architecture.common.plugin.PluginClassLoader;
+import architecture.common.plugin.PluginDevEnvironment;
+import architecture.common.plugin.PluginListener;
+import architecture.common.plugin.PluginManager;
+import architecture.common.plugin.PluginManagerListener;
 
 
 /**
@@ -99,8 +108,15 @@ public class PluginManagerImpl implements PluginManager {
     private Set<PluginListener> pluginListeners = new CopyOnWriteArraySet<PluginListener>();
     private Set<PluginManagerListener> pluginManagerListeners = new CopyOnWriteArraySet<PluginManagerListener>();
     protected AtomicBoolean initialized;
-    private PluginCacheRegistry pluginCacheRegistry;
+    private PluginCacheRegistry pluginCacheRegistry;    
+    protected EventPublisher eventPublisher;
+    //protected TaskEngine taskEngine;
     
+    
+    
+    public void setEventPublisher(EventPublisher eventPublisher){
+    	this.eventPublisher = eventPublisher;
+    }
     
     public void setPluginCacheRegistry(PluginCacheRegistry pluginCacheRegistry) {
 		this.pluginCacheRegistry = pluginCacheRegistry;
@@ -130,8 +146,7 @@ public class PluginManagerImpl implements PluginManager {
      *
      * @param pluginDir the plugin directory.
      */
-    protected PluginManagerImpl(File pluginDir) {  
-    	
+    protected PluginManagerImpl(File pluginDir) {      	
     	pluginDirectory = pluginDir;        
         plugins = new ConcurrentHashMap<String, Plugin>();
         pluginDirs = new HashMap<Plugin, File>();
@@ -141,8 +156,7 @@ public class PluginManagerImpl implements PluginManager {
         parentPluginMap = new HashMap<Plugin, List<String>>();
         childPluginMap = new HashMap<Plugin, String>();
         devPlugins = new HashSet<String>();
-        pluginMonitor = new PluginMonitor();
-        
+        pluginMonitor = new PluginMonitor();        
     }
     
     public void initialize(){
@@ -169,8 +183,7 @@ public class PluginManagerImpl implements PluginManager {
      * Starts plugins and the plugin monitoring service.
      */
     public void start() {    	
-        executor = new ScheduledThreadPoolExecutor(1);
-        
+        this.executor = new ScheduledThreadPoolExecutor(1);        
         
         // See if we're in development mode. If so, check for new plugins once every 5 seconds.
         // Otherwise, default to every 20 seconds.
@@ -351,8 +364,7 @@ public class PluginManagerImpl implements PluginManager {
                     Version version = ApplicationHelperFactory.getApplicationHelper().getAdminService().getVersion();
                     String hasVersion = version.getMajor() + "." + version.getMinor() + "." + version.getMicro();
                     if (hasVersion.compareTo(requiredVersion) < 0) {
-                        String msg = "Ignoring plugin " + pluginDir.getName() + ": requires " +
-                            "server version " + requiredVersion;
+                        String msg = "Ignoring plugin " + pluginDir.getName() + ": requires " + "server version " + requiredVersion;
                         Log.warn(msg);
                         System.out.println(msg);
                         return;
@@ -407,8 +419,7 @@ public class PluginManagerImpl implements PluginManager {
                                     return;
                                 }
                                 else {
-                                    String msg = "Ignoring plugin " + pluginName + ": parent plugin " +
-                                        parentPlugin + " not present.";
+                                    String msg = "Ignoring plugin " + pluginName + ": parent plugin " + parentPlugin + " not present.";
                                     Log.warn(msg);
                                     System.out.println(msg);
                                     return;
