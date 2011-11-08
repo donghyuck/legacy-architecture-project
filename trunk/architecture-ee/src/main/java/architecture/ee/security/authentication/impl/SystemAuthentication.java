@@ -9,8 +9,15 @@ import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.security.authentication.SystemUser;
 import architecture.ee.user.User;
 
+/**
+ * @author  donghyuck
+ */
 public class SystemAuthentication implements ExtendedAuthentication {
 
+	/**
+	 * @uml.property  name="user"
+	 * @uml.associationEnd  
+	 */
 	private static final SystemUser user = new SystemUser();
 
 	public AuthToken getAuthenticationToken() {
@@ -41,6 +48,10 @@ public class SystemAuthentication implements ExtendedAuthentication {
 		return user;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="user"
+	 */
 	public User getUser() {
 		return user;
 	}

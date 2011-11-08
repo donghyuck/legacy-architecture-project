@@ -19,6 +19,9 @@ import architecture.common.lifecycle.State;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 import architecture.ee.bootstrap.Bootstrap;
 
+/**
+ * @author  donghyuck
+ */
 public class BootstrapImpl implements Bootstrap.Implementation {
 
 	private Log log = LogFactory.getLog(getClass());
@@ -27,6 +30,10 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
 	private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
+	/**
+	 * @uml.property  name="repository"
+	 * @uml.associationEnd  
+	 */
 	private RepositoryImpl repository = new RepositoryImpl();
 	
 	public ConfigurableApplicationContext getBootstrapApplicationContext(){

@@ -18,6 +18,9 @@ import architecture.ee.user.User;
 import architecture.ee.user.UserTemplate;
 import architecture.ee.user.dao.UserDao;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
    
 	private final RowMapper<UserTemplate> userMapper = new RowMapper<UserTemplate>(){
@@ -74,6 +77,10 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		
 	};	
 	
+	/**
+	 * @uml.property  name="extendedPropertyDao"
+	 * @uml.associationEnd  
+	 */
 	private ExtendedPropertyDao extendedPropertyDao;
 	
 	private String sequencerName = "User";
@@ -84,10 +91,18 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
     {
     }
     
+	/**
+	 * @param userPropertyTableName
+	 * @uml.property  name="userPropertyTableName"
+	 */
 	public void setUserPropertyTableName(String userPropertyTableName) {
 		this.userPropertyTableName = userPropertyTableName;
 	}
 
+	/**
+	 * @param userPropertyPrimaryColumnName
+	 * @uml.property  name="userPropertyPrimaryColumnName"
+	 */
 	public void setUserPropertyPrimaryColumnName(
 			String userPropertyPrimaryColumnName) {
 		this.userPropertyPrimaryColumnName = userPropertyPrimaryColumnName;
@@ -95,6 +110,10 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 
 
 	
+	/**
+	 * @param extendedPropertyDao
+	 * @uml.property  name="extendedPropertyDao"
+	 */
 	public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
 		this.extendedPropertyDao = extendedPropertyDao;
 	}

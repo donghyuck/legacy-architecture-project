@@ -26,13 +26,13 @@ import architecture.ee.jdbc.query.sql.SqlSource;
 
 /**
  * MappedStatement 객체 생성을 돕는 클래스.
- * 
- * 
- * @author DongHyuck, Son
- * 
+ * @author  DongHyuck, Son
  */
 public class SqlBuilderAssistant extends AbstractBuilder {
 
+	/**
+	 * @uml.property  name="currentNamespace"
+	 */
 	private String currentNamespace;
 	private String resource;
 	private Log log = LogFactory.getLog(SqlBuilderAssistant.class);
@@ -64,10 +64,18 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 		return statement;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="currentNamespace"
+	 */
 	public String getCurrentNamespace() {
 		return currentNamespace;
 	}
 
+	/**
+	 * @param currentNamespace
+	 * @uml.property  name="currentNamespace"
+	 */
 	public void setCurrentNamespace(String currentNamespace) {
 		if (currentNamespace != null) {
 			this.currentNamespace = currentNamespace;

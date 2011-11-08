@@ -18,12 +18,27 @@ import architecture.ee.user.Group;
 import architecture.ee.user.GroupManager;
 import architecture.ee.user.UserTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class RoleManagerImpl implements ExtendedRoleManager, EventSource {
 
 	private Log log = LogFactory.getLog(getClass());
 	
+	/**
+	 * @uml.property  name="groupManager"
+	 * @uml.associationEnd  
+	 */
 	private GroupManager groupManager;
+	/**
+	 * @uml.property  name="roleDao"
+	 * @uml.associationEnd  
+	 */
 	private RoleDao roleDao;
+	/**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
 	private EventPublisher eventPublisher;
 	
 	private Cache roleCache;
@@ -36,20 +51,40 @@ public class RoleManagerImpl implements ExtendedRoleManager, EventSource {
 	}
 
 		
+	/**
+	 * @param roleCache
+	 * @uml.property  name="roleCache"
+	 */
 	public void setRoleCache(Cache roleCache) {
 		this.roleCache = roleCache;
 	}
 
+	/**
+	 * @param userRoleCache
+	 * @uml.property  name="userRoleCache"
+	 */
 	public void setUserRoleCache(Cache userRoleCache) {
 		this.userRoleCache = userRoleCache;
 	}
 
+	/**
+	 * @param groupManager
+	 * @uml.property  name="groupManager"
+	 */
 	public void setGroupManager(GroupManager groupManager) {
 		this.groupManager = groupManager;
 	}
+	/**
+	 * @param roleDao
+	 * @uml.property  name="roleDao"
+	 */
 	public void setRoleDao(RoleDao roleDao) {
 		this.roleDao = roleDao;
 	}
+	/**
+	 * @param eventPublisher
+	 * @uml.property  name="eventPublisher"
+	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}

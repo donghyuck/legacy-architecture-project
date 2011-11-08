@@ -2,6 +2,9 @@ package architecture.ee.user.profile;
 
 import java.util.Comparator;
 
+/**
+ * @author  donghyuck
+ */
 public class ProfileFieldValueCount {
 	
 	public static class CountComparator implements Comparator<ProfileFieldValueCount> {
@@ -33,7 +36,14 @@ public class ProfileFieldValueCount {
 
 	}
 
+	/**
+	 * @uml.property  name="value"
+	 * @uml.associationEnd  
+	 */
 	private ProfileFieldValue value;
+	/**
+	 * @uml.property  name="count"
+	 */
 	private int count;
 
 	public ProfileFieldValueCount(ProfileFieldValue value, int count) {
@@ -41,10 +51,18 @@ public class ProfileFieldValueCount {
 		this.count = count;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="value"
+	 */
 	public ProfileFieldValue getValue() {
 		return value;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="count"
+	 */
 	public int getCount() {
 		return count;
 	}

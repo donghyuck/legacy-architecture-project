@@ -42,24 +42,39 @@ import architecture.ee.jdbc.query.factory.impl.SqlQueryFactoryImpl;
 
 /**
  * SqlQueryFactory 객체를 생성하는 클래스.
- * 
- * @author DongHyuck, Son
- * 
+ * @author  DongHyuck, Son
  */
 public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 
 	private Log log = LogFactory.getLog(getClass());
 
+	/**
+	 * @uml.property  name="prefix"
+	 */
 	private String prefix = "";
 	
+	/**
+	 * @uml.property  name="suffix"
+	 */
 	private String suffix = "queryset.xml";
 	
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
 
 	private DataSource dataSource;
 
+	/**
+	 * @uml.property  name="resourceLocations"
+	 */
 	private List<String> resourceLocations;
 
+	/**
+	 * @return
+	 * @uml.property  name="configuration"
+	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}
@@ -107,6 +122,10 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 		builder.build();
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="resourceLocations"
+	 */
 	public List<String> getResourceLocations() {
 		return this.resourceLocations;
 	}
@@ -126,14 +145,26 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 		} catch (Exception e) { }
 	}
 
+	/**
+	 * @param dataSource
+	 * @uml.property  name="dataSource"
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}
 
+	/**
+	 * @param resourceLocations
+	 * @uml.property  name="resourceLocations"
+	 */
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="prefix"
+	 */
 	public String getPrefix() {
 		return prefix;
 	}
@@ -141,16 +172,25 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 	/*
 	 * Set the prefix that gets prepended to view names when building a URL.
 	 */
+	/**
+	 * @param prefix
+	 * @uml.property  name="prefix"
+	 */
 	public void setPrefix(String prefix) {
 		this.prefix = (prefix != null ? prefix : "");
 	}
 
+    /**
+	 * @return
+	 * @uml.property  name="suffix"
+	 */
     public String getSuffix() {
 		return suffix;
 	}
     
 	/**
 	 * Set the suffix that gets appended to view names when building a URL.
+	 * @uml.property  name="suffix"
 	 */
 	public void setSuffix(String suffix) {
 		this.suffix = (suffix != null ? suffix : "");

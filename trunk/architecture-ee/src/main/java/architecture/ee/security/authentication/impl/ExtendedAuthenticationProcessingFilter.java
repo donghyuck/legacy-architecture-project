@@ -19,9 +19,16 @@ import architecture.ee.user.UserManager;
 
 import architecture.ee.user.UserTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuthenticationFilter {
 
 	private Log log = LogFactory.getLog(getClass());
+	/**
+	 * @uml.property  name="userManager"
+	 * @uml.associationEnd  
+	 */
 	private UserManager userManager;
 
 	public void setDefaultTargetUrl(String defaultTargetUrl) {		
@@ -75,6 +82,10 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
 		return auth instanceof ExtendedAnonymousAuthenticationToken || auth instanceof ExtendedAnonymousAuthenticationToken;
 	}
 	
+	/**
+	 * @param userManager
+	 * @uml.property  name="userManager"
+	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}

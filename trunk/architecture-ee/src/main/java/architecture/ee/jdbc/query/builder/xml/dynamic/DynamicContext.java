@@ -19,17 +19,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 
- * 
- * 
- * @author DongHyuck, Son
- * 
+ * @author  DongHyuck, Son
  */
 public class DynamicContext {
 
 	public static final String ADDITIONAL_PARAMETER_OBJECT_KEY = "_additional_parameter";
 	public static final String PARAMETER_OBJECT_KEY = "_parameter";
 
+	/**
+	 * @uml.property  name="bindings"
+	 */
 	private final Map<String, Object> bindings;
 	private final StringBuilder sqlBuilder = new StringBuilder();
 
@@ -44,6 +43,10 @@ public class DynamicContext {
 		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="bindings"
+	 */
 	public Map<String, Object> getBindings() {
 		return bindings;
 	}

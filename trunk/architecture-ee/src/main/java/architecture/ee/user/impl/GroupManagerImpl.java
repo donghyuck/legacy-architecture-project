@@ -10,10 +10,21 @@ import architecture.ee.user.User;
 import architecture.ee.user.UserManager;
 import architecture.ee.user.dao.GroupDao;
 
+/**
+ * @author  donghyuck
+ */
 public class GroupManagerImpl extends AbstractGroupManager {
 	
+	/**
+	 * @uml.property  name="groupDao"
+	 * @uml.associationEnd  
+	 */
 	private GroupDao groupDao;
 	
+	/**
+	 * @uml.property  name="userManager"
+	 * @uml.associationEnd  
+	 */
 	private UserManager userManager;
 	
 	public GroupManagerImpl() {
@@ -22,12 +33,20 @@ public class GroupManagerImpl extends AbstractGroupManager {
 	
 	
 
+	/**
+	 * @param groupDao
+	 * @uml.property  name="groupDao"
+	 */
 	public void setGroupDao(GroupDao groupDao) {
 		this.groupDao = groupDao;
 	}
 
 
 
+	/**
+	 * @param userManager
+	 * @uml.property  name="userManager"
+	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}

@@ -18,10 +18,21 @@ package architecture.ee.jdbc.query.factory.impl;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.ConfigurationFactory;
 
+/**
+ * @author  donghyuck
+ */
 public class ConfigurationFactoryImpl implements ConfigurationFactory.Implementation {
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private final Configuration configuration = new Configuration();;
 
+	/**
+	 * @return
+	 * @uml.property  name="configuration"
+	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}

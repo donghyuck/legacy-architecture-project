@@ -9,18 +9,27 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import architecture.ee.jdbc.sequencer.Sequencer;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
    
     private Log log = LogFactory.getLog(getClass());
     
     private int type;
     
+    /**
+	 * @uml.property  name="name"
+	 */
     private String name;
        
     private long currentID;
     
     private long maxID;
     
+    /**
+	 * @uml.property  name="blockSize"
+	 */
     private int blockSize;
    
     public JdbcSequencer() {
@@ -40,18 +49,34 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 	}
 	
 
+    /**
+	 * @return
+	 * @uml.property  name="name"
+	 */
     public String getName() {
 		return name;
 	}
 
+    /**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
     public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="blockSize"
+	 */
 	public int getBlockSize() {
         return blockSize;
     }
 
+    /**
+	 * @param blockSize
+	 * @uml.property  name="blockSize"
+	 */
     public void setBlockSize(int blockSize) {
         this.blockSize = blockSize;
     }

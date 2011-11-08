@@ -7,10 +7,20 @@ import org.springframework.security.core.userdetails.User;
 
 import architecture.ee.security.authentication.AuthToken;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedUserDetails extends User implements AuthToken {
 
 	private static final long serialVersionUID = -6654445173418843563L;
+	/**
+	 * @uml.property  name="userId"
+	 */
 	private final long userId;
+    /**
+	 * @uml.property  name="extUser"
+	 * @uml.associationEnd  
+	 */
     private final architecture.ee.user.User extUser;
     
 	public ExtendedUserDetails(architecture.ee.user.User extUser, List<GrantedAuthority> authorities) {		
@@ -46,6 +56,10 @@ public class ExtendedUserDetails extends User implements AuthToken {
         return extUser;
     }
 	
+    /**
+	 * @return
+	 * @uml.property  name="userId"
+	 */
     public long getUserId() {
 		return userId;
 	}

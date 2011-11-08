@@ -18,6 +18,9 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.user.Group;
 import architecture.ee.user.dao.GroupDao;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcGroupDao extends ExtendedJdbcDaoSupport implements GroupDao {
 
 	private final RowMapper<Group> groupRowMapper = new RowMapper<Group>(){
@@ -31,36 +34,77 @@ public class JdbcGroupDao extends ExtendedJdbcDaoSupport implements GroupDao {
 			return (Group)model;
 		}};
 	 
+	/**
+	 * @uml.property  name="extendedPropertyDao"
+	 * @uml.associationEnd  
+	 */
 	private ExtendedPropertyDao extendedPropertyDao;
 	
+	/**
+	 * @uml.property  name="sequencerName"
+	 */
 	private String sequencerName = "Group";
+	/**
+	 * @uml.property  name="groupPropertyTableName"
+	 */
 	private String groupPropertyTableName = "V2_GROUP_PROPERTY";
+	/**
+	 * @uml.property  name="groupPropertyPrimaryColumnName"
+	 */
 	private String groupPropertyPrimaryColumnName = "GROUP_ID";
 	
+	/**
+	 * @param extendedPropertyDao
+	 * @uml.property  name="extendedPropertyDao"
+	 */
 	public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
 		this.extendedPropertyDao = extendedPropertyDao;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sequencerName"
+	 */
 	public String getSequencerName() {
 		return sequencerName;
 	}
 
+	/**
+	 * @param sequencerName
+	 * @uml.property  name="sequencerName"
+	 */
 	public void setSequencerName(String sequencerName) {
 		this.sequencerName = sequencerName;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="groupPropertyTableName"
+	 */
 	public String getGroupPropertyTableName() {
 		return groupPropertyTableName;
 	}
 
+	/**
+	 * @param groupPropertyTableName
+	 * @uml.property  name="groupPropertyTableName"
+	 */
 	public void setGroupPropertyTableName(String groupPropertyTableName) {
 		this.groupPropertyTableName = groupPropertyTableName;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="groupPropertyPrimaryColumnName"
+	 */
 	public String getGroupPropertyPrimaryColumnName() {
 		return groupPropertyPrimaryColumnName;
 	}
 
+	/**
+	 * @param groupPropertyPrimaryColumnName
+	 * @uml.property  name="groupPropertyPrimaryColumnName"
+	 */
 	public void setGroupPropertyPrimaryColumnName(String groupPropertyPrimaryColumnName) {
 		this.groupPropertyPrimaryColumnName = groupPropertyPrimaryColumnName;
 	}

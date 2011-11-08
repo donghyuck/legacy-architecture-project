@@ -6,21 +6,59 @@ public class Permissions implements Serializable {
 
 	private static final long serialVersionUID = -8195862189097761722L;
 
+	/**
+	 * @author                 donghyuck
+	 */
 	enum PermissionAtom {
+		/**
+		 * @uml.property  name="nONE"
+		 * @uml.associationEnd  
+		 */
 		NONE            (0L),
+        /**
+		 * @uml.property  name="vIEW_ONLINE_STATUS"
+		 * @uml.associationEnd  
+		 */
         VIEW_ONLINE_STATUS       (0x100000000000000L),        
+        /**
+		 * @uml.property  name="uSER_ADMINISTRATION"
+		 * @uml.associationEnd  
+		 */
         USER_ADMINISTRATION      (0x200000000000000L),        
+        /**
+		 * @uml.property  name="gROUP_ADMINISTRATION"
+		 * @uml.associationEnd  
+		 */
         GROUP_ADMINISTRATION     (0x400000000000000L),        
+        /**
+		 * @uml.property  name="sYSTEM_ADMINISTRATION"
+		 * @uml.associationEnd  
+		 */
         SYSTEM_ADMINISTRATION    (0x800000000000000L),
+        /**
+		 * @uml.property  name="hOSTED_ADMINISTRATION"
+		 * @uml.associationEnd  
+		 */
         HOSTED_ADMINISTRATION    (0x10000000L),
+        /**
+		 * @uml.property  name="aCCESS"
+		 * @uml.associationEnd  
+		 */
         ACCESS                   (1L);
 		
+		/**
+		 * @uml.property  name="atomId"
+		 */
 		private long atomId;
         
         private PermissionAtom(long atomId) {
             this.atomId = atomId;
         }
         
+        /**
+		 * @return
+		 * @uml.property  name="atomId"
+		 */
         public long getAtomId()
         {
             return atomId;

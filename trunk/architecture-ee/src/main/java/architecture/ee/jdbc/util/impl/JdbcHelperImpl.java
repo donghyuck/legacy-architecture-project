@@ -33,48 +33,97 @@ import architecture.ee.jdbc.util.JdbcHelper;
 
 
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcHelperImpl implements JdbcHelper {
 
 	// True if the database support transactions.
+	/**
+	 * @uml.property  name="transactionsSupported"
+	 */
 	private boolean transactionsSupported;
 
+	/**
+	 * @uml.property  name="transactionIsolation"
+	 */
 	private int transactionIsolation;
 
 	// True if the database requires large text fields to be streamed.
+	/**
+	 * @uml.property  name="streamTextRequired"
+	 */
 	private boolean streamTextRequired;
 
 	// True if the database supports the Statement.setMaxRows() method.
+	/**
+	 * @uml.property  name="streamBlobRequired"
+	 */
 	private boolean streamBlobRequired;
 
 	// True if the database supports the Statement.setFetchSize() method.
+	/**
+	 * @uml.property  name="fetchSizeSupported"
+	 */
 	private boolean fetchSizeSupported;
 
 	// True if the database supports correlated subqueries.
+	/**
+	 * @uml.property  name="subqueriesSupported"
+	 */
 	private boolean subqueriesSupported;
 
+	/**
+	 * @uml.property  name="maxRowsSupported"
+	 */
 	private boolean maxRowsSupported;
 
+	/**
+	 * @uml.property  name="deleteSubqueriesSupported"
+	 */
 	private boolean deleteSubqueriesSupported;
 
 	// True if the database supports scroll-insensitive results.
+	/**
+	 * @uml.property  name="scrollResultsSupported"
+	 */
 	private boolean scrollResultsSupported;
 
 	// True if the database supports batch updates.
+	/**
+	 * @uml.property  name="batchUpdatesSupported"
+	 */
 	private boolean batchUpdatesSupported;
 
 	// databse product name.
+	/**
+	 * @uml.property  name="databaseProductName"
+	 */
 	private String databaseProductName;
 
 	// database product version.
+	/**
+	 * @uml.property  name="databaseProductVersion"
+	 */
 	private String databaseProductVersion;
 
 	// database jdbc driver name.
+	/**
+	 * @uml.property  name="jdbcDriverName"
+	 */
 	private String jdbcDriverName;
 
 	// jdbc driver version.
+	/**
+	 * @uml.property  name="jdbcDriverVersion"
+	 */
 	private String jdbcDriverVersion;
 
 	// default database type.
+	/**
+	 * @uml.property  name="databaseType"
+	 * @uml.associationEnd  
+	 */
 	private DatabaseType databaseType = DatabaseType.unknown;
 
 	private Log log = LogFactory.getLog(getClass());
@@ -91,62 +140,122 @@ public class JdbcHelperImpl implements JdbcHelper {
 		}
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="batchUpdatesSupported"
+	 */
 	public boolean isBatchUpdatesSupported() {
 		return batchUpdatesSupported;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="databaseProductName"
+	 */
 	public String getDatabaseProductName() {
 		return databaseProductName;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="databaseProductVersion"
+	 */
 	public String getDatabaseProductVersion() {
 		return databaseProductVersion;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="databaseType"
+	 */
 	public DatabaseType getDatabaseType() {
 		return databaseType;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="deleteSubqueriesSupported"
+	 */
 	public boolean isDeleteSubqueriesSupported() {
 		return deleteSubqueriesSupported;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="fetchSizeSupported"
+	 */
 	public boolean isFetchSizeSupported() {
 		return fetchSizeSupported;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="jdbcDriverName"
+	 */
 	public String getJdbcDriverName() {
 		return jdbcDriverName;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="jdbcDriverVersion"
+	 */
 	public String getJdbcDriverVersion() {
 		return jdbcDriverVersion;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="maxRowsSupported"
+	 */
 	public boolean isMaxRowsSupported() {
 		return maxRowsSupported;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="scrollResultsSupported"
+	 */
 	public boolean isScrollResultsSupported() {
 		return scrollResultsSupported;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="streamBlobRequired"
+	 */
 	public boolean isStreamBlobRequired() {
 		return streamBlobRequired;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="streamTextRequired"
+	 */
 	public boolean isStreamTextRequired() {
 		return streamTextRequired;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="subqueriesSupported"
+	 */
 	public boolean isSubqueriesSupported() {
 		return subqueriesSupported;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="transactionIsolation"
+	 */
 	public int getTransactionIsolation() {
 		return transactionIsolation;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="transactionsSupported"
+	 */
 	public boolean isTransactionsSupported() {
 		return transactionsSupported;
 	}

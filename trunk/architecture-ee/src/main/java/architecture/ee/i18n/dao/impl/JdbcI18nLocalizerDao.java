@@ -24,6 +24,9 @@ import architecture.ee.i18n.dao.I18nLocalizerDao;
 import architecture.ee.model.impl.I18nLocalizerModelImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18nLocalizerDao{
 
 	class LocalizerRowMapper implements RowMapper<I18nLocalizer> {
@@ -44,13 +47,25 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 		return new LocalizerRowMapper();
 	}
 	
+	/**
+	 * @uml.property  name="i18nLocaleDao"
+	 * @uml.associationEnd  
+	 */
 	private I18nLocaleDao i18nLocaleDao ;
 	
 		
+	/**
+	 * @return
+	 * @uml.property  name="i18nLocaleDao"
+	 */
 	public I18nLocaleDao getI18nLocaleDao() {
 		return i18nLocaleDao;
 	}
 
+	/**
+	 * @param i18nLocaleDao
+	 * @uml.property  name="i18nLocaleDao"
+	 */
 	public void setI18nLocaleDao(I18nLocaleDao i18nLocaleDao) {
 		this.i18nLocaleDao = i18nLocaleDao;
 	}

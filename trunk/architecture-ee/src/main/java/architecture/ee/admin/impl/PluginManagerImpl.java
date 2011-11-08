@@ -13,6 +13,9 @@ import architecture.common.event.api.EventSource;
 import architecture.common.plugin.PluginManager;
 import architecture.ee.util.task.TaskEngine;
 
+/**
+ * @author  donghyuck
+ */
 public class PluginManagerImpl implements PluginManager, EventSource {
 	
 	private static final Log Log = LogFactory.getLog(PluginManagerImpl.class);
@@ -20,8 +23,16 @@ public class PluginManagerImpl implements PluginManager, EventSource {
 	protected File pluginDirectory ;
 	protected DataSource dataSource;
 	
+    /**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
     private EventPublisher eventPublisher ;
     private AtomicBoolean initialized;
+    /**
+	 * @uml.property  name="taskEngine"
+	 * @uml.associationEnd  
+	 */
     private TaskEngine taskEngine;
 	
     public PluginManagerImpl() { 
@@ -53,14 +64,26 @@ public class PluginManagerImpl implements PluginManager, EventSource {
     	return initialized.get();    	
     }
 
+    /**
+	 * @param eventPublisher
+	 * @uml.property  name="eventPublisher"
+	 */
     public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}
 
+    /**
+	 * @param taskEngine
+	 * @uml.property  name="taskEngine"
+	 */
     public void setTaskEngine(TaskEngine taskEngine) {
 		this.taskEngine = taskEngine;
 	}
 
+    /**
+	 * @param dataSource
+	 * @uml.property  name="dataSource"
+	 */
     public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}

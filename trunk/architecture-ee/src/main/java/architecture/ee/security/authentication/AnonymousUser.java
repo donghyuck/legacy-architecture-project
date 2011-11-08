@@ -8,6 +8,9 @@ import java.util.Map;
 import architecture.ee.user.User;
 
 
+/**
+ * @author  donghyuck
+ */
 public class AnonymousUser implements AuthToken, User {
 
 	private static final long serialVersionUID = 6602216613448436301L;
@@ -16,6 +19,9 @@ public class AnonymousUser implements AuthToken, User {
 	
 	public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
 	
+	/**
+	 * @uml.property  name="username"
+	 */
 	private String username ;
 	
 	public AnonymousUser() {
@@ -35,6 +41,10 @@ public class AnonymousUser implements AuthToken, User {
 		return 1;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="username"
+	 */
 	public String getUsername() {
 		return username;
 	}

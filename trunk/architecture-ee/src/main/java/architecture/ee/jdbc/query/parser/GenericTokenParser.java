@@ -15,10 +15,17 @@
  */
 package architecture.ee.jdbc.query.parser;
 
+/**
+ * @author  donghyuck
+ */
 public class GenericTokenParser {
 
 	private final String openToken;
 	private final String closeToken;
+	/**
+	 * @uml.property  name="handler"
+	 * @uml.associationEnd  
+	 */
 	private final TokenHandler handler;
 
 	public GenericTokenParser(String openToken, String closeToken,
