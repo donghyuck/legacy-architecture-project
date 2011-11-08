@@ -38,11 +38,22 @@ import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.StateChangeEvent;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
+/**
+ * @author  donghyuck
+ */
 public class ApplicationHelperImpl implements ApplicationHelper, ApplicationListener<ApplicationEvent> {
 
 	private Log log = LogFactory.getLog(getClass());
 	private ConfigurableApplicationContext applicationContext;
+    /**
+	 * @uml.property  name="state"
+	 * @uml.associationEnd  
+	 */
     private State state = State.INITIALIZED ; 
+    /**
+	 * @uml.property  name="adminService"
+	 * @uml.associationEnd  
+	 */
     private SpringAdminService adminService;
     
 	protected ApplicationHelperImpl(ConfigurableApplicationContext applicationContext) {
@@ -83,6 +94,10 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		return getAdminService().isReady();
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="adminService"
+	 */
 	public AdminService getAdminService() {
 		return adminService;
 	}

@@ -11,13 +11,35 @@ import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.i18n.I18nTextResourceBundle;
 
+/**
+ * @author  donghyuck
+ */
 public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> implements I18nLocalizer {
 
+	/**
+	 * @uml.property  name="localizerId"
+	 */
 	private long localizerId = -1L ;
+    /**
+	 * @uml.property  name="description"
+	 */
     private String description ;
+	/**
+	 * @uml.property  name="name"
+	 */
 	private String name ;
+	/**
+	 * @uml.property  name="i18nLocale"
+	 * @uml.associationEnd  
+	 */
 	private I18nLocale i18nLocale ;
+	/**
+	 * @uml.property  name="localeId"
+	 */
 	private long localeId = -1L ;
+	/**
+	 * @uml.property  name="resourceBundle"
+	 */
 	private ResourceBundle resourceBundle ;
 	private Map<String, String> texts;
 	
@@ -28,6 +50,10 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 		this.texts = new HashMap<String, String>();
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="resourceBundle"
+	 */
 	public ResourceBundle getResourceBundle() {		
 		if(resourceBundle == null){
 			List<String[]> keyValues = new ArrayList<String[]>();
@@ -42,6 +68,10 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 		}		
 		return resourceBundle;
 	}
+	/**
+	 * @param resourceBundle
+	 * @uml.property  name="resourceBundle"
+	 */
 	public void setResourceBundle(ResourceBundle resourceBundle) {
 		this.resourceBundle = resourceBundle;
 	}
@@ -56,9 +86,17 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 		return 11;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="localeId"
+	 */
 	public long getLocaleId() {
 		return localeId;
 	}
+	/**
+	 * @param localeId
+	 * @uml.property  name="localeId"
+	 */
 	public void setLocaleId(long localeId) {
 		this.localeId = localeId;
 	}
@@ -76,34 +114,66 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 		}
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="localizerId"
+	 */
 	public long getLocalizerId() {
 		return localizerId;
 	}
 
+	/**
+	 * @param localizerId
+	 * @uml.property  name="localizerId"
+	 */
 	public void setLocalizerId(long localizerId) {
 		this.localizerId = localizerId;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="description"
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * @param description
+	 * @uml.property  name="description"
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param resourceBundleName
+	 * @uml.property  name="name"
+	 */
 	public void setName(String resourceBundleName) {
 		this.name = resourceBundleName;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="i18nLocale"
+	 */
 	public I18nLocale getI18nLocale() {
 		return i18nLocale;
 	}
 
+	/**
+	 * @param i18nLocale
+	 * @uml.property  name="i18nLocale"
+	 */
 	public void setI18nLocale(I18nLocale i18nLocale) {
 		this.i18nLocale = i18nLocale;
 	}

@@ -9,8 +9,15 @@ import architecture.ee.security.authentication.AnonymousUser;
 import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedUserAuthehtication implements ExtendedAuthentication {
 	
+	/**
+	 * @uml.property  name="user"
+	 * @uml.associationEnd  
+	 */
 	private final User user;
 	
 	public ExtendedUserAuthehtication(User u) {
@@ -61,6 +68,10 @@ public class ExtendedUserAuthehtication implements ExtendedAuthentication {
 		return user;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="user"
+	 */
 	public User getUser() {
 		return user;
 	}

@@ -12,12 +12,21 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.lifecycle.AdminService;
 import architecture.common.util.CancellableTask;
 
+/**
+ * @author  donghyuck
+ */
 public class TaskEngine {
    
 	
+    /**
+	 * @author  donghyuck
+	 */
     private static class GuardedRunnable
     implements Runnable
 	{    	
+	    /**
+		 * @uml.property  name="runnable"
+		 */
 	    private Runnable runnable;
 	    private volatile boolean running;
 	
@@ -38,6 +47,10 @@ public class TaskEngine {
 	        }
 	    }
 		
+	    /**
+		 * @return
+		 * @uml.property  name="runnable"
+		 */
 	    public Runnable getRunnable()
 	    {
 	        return runnable;
@@ -51,9 +64,16 @@ public class TaskEngine {
 	}
     
 
+    /**
+	 * @author  donghyuck
+	 */
     private static class ScheduledTask extends TimerTask
     {
 
+        /**
+		 * @uml.property  name="engine"
+		 * @uml.associationEnd  
+		 */
         private TaskEngine engine;
         private int priority;
         private Runnable task;
@@ -212,6 +232,10 @@ public class TaskEngine {
     public static final int LOW_PRIORITY = 0;
     private PriorityQueue taskQueue;
     private ThreadGroup threadGroup;
+    /**
+	 * @uml.property  name="workers"
+	 * @uml.associationEnd  multiplicity="(0 -1)"
+	 */
     private TaskEngineWorker workers[];
     private Timer taskTimer;
     private final Object lock = new Object();
@@ -219,8 +243,16 @@ public class TaskEngine {
     private long busyTimestamp;
     private boolean mockMode;
     private boolean started;
+    /**
+	 * @uml.property  name="adminService"
+	 * @uml.associationEnd  
+	 */
     private AdminService adminService;
 
+    /**
+	 * @param mockMode
+	 * @uml.property  name="mockMode"
+	 */
     public void setMockMode(boolean mockMode)
     {
         this.mockMode = mockMode;

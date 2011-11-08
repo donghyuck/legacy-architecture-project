@@ -22,18 +22,52 @@ import java.util.Map;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.sql.SqlSource;
 
+/**
+ * @author  donghyuck
+ */
 public class MappedStatement {
 
+	/**
+	 * @uml.property  name="resource"
+	 */
 	private String resource;
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
+	/**
+	 * @uml.property  name="iD"
+	 */
 	private String ID;
+	/**
+	 * @uml.property  name="fetchSize"
+	 */
 	private Integer fetchSize;
+	/**
+	 * @uml.property  name="timeout"
+	 */
 	private Integer timeout;
+	/**
+	 * @uml.property  name="sqlSource"
+	 * @uml.associationEnd  
+	 */
 	private SqlSource sqlSource;
+	/**
+	 * @uml.property  name="statementType"
+	 * @uml.associationEnd  
+	 */
 	private StatementType statementType;
 
+	/**
+	 * @author  donghyuck
+	 */
 	public static class Builder {
 
+		/**
+		 * @uml.property  name="mappedStatement"
+		 * @uml.associationEnd  
+		 */
 		private MappedStatement mappedStatement = new MappedStatement();
 
 		public Builder(Configuration configuration, String id, SqlSource sqlSource, StatementType statementType) {
@@ -77,30 +111,58 @@ public class MappedStatement {
 
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="iD"
+	 */
 	public String getID() {
 		return this.ID;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="resource"
+	 */
 	public String getResource() {
 		return resource;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="configuration"
+	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="fetchSize"
+	 */
 	public Integer getFetchSize() {
 		return fetchSize;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="timeout"
+	 */
 	public Integer getTimeout() {
 		return timeout;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sqlSource"
+	 */
 	public SqlSource getSqlSource() {
 		return sqlSource;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="statementType"
+	 */
 	public StatementType getStatementType() {
 		return statementType;
 	}

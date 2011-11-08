@@ -9,10 +9,17 @@ import architecture.ee.security.authentication.AnonymousUser;
 import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedAnonymousAuthenticationToken extends AnonymousAuthenticationToken implements ExtendedAuthentication {
 	
 	private static final long serialVersionUID = -6513817885158410340L;
 
+	/**
+	 * @uml.property  name="user"
+	 * @uml.associationEnd  
+	 */
 	private final AnonymousUser user = new AnonymousUser();
 	
 	public ExtendedAnonymousAuthenticationToken(String key, Object principal, List<GrantedAuthority> authorities) {
@@ -23,6 +30,10 @@ public class ExtendedAnonymousAuthenticationToken extends AnonymousAuthenticatio
 		return user;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="user"
+	 */
 	public User getUser() {
 		return user;
 	}

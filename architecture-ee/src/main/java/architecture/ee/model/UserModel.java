@@ -8,16 +8,46 @@ import architecture.ee.user.User;
 
 public interface UserModel extends ModelObject<User> {
 
+	/**
+	 * @author                 donghyuck
+	 */
 	enum Status {
 		
+		/**
+		 * @uml.property  name="none"
+		 * @uml.associationEnd  
+		 */
 		none(0),
+		/**
+		 * @uml.property  name="approved"
+		 * @uml.associationEnd  
+		 */
 		approved(1),
+		/**
+		 * @uml.property  name="rejected"
+		 * @uml.associationEnd  
+		 */
 		rejected(2),
+		/**
+		 * @uml.property  name="validated"
+		 * @uml.associationEnd  
+		 */
 		validated(3),
+		/**
+		 * @uml.property  name="registered"
+		 * @uml.associationEnd  
+		 */
 		registered(4);
 		
+		/**
+		 * @uml.property  name="id"
+		 */
 		int id ;
 		
+		/**
+		 * @return
+		 * @uml.property  name="id"
+		 */
 		public int getId(){
 			return id;
 		}

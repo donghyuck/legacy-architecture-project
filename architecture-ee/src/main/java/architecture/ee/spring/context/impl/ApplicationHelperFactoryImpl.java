@@ -5,8 +5,15 @@ import architecture.common.lifecycle.ApplicationHelperFactory.Implementation;
 
 import architecture.ee.bootstrap.Bootstrap;
 
+/**
+ * @author  donghyuck
+ */
 public class ApplicationHelperFactoryImpl implements Implementation {
 
+	/**
+	 * @uml.property  name="helper"
+	 * @uml.associationEnd  
+	 */
 	private ApplicationHelper helper = null;
 	
 	public ApplicationHelper getApplicationHelper() {	

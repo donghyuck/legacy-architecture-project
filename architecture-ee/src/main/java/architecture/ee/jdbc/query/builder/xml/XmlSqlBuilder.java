@@ -30,10 +30,21 @@ import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.parser.XNode;
 import architecture.ee.jdbc.query.parser.XPathParser;
 
+/**
+ * @author  donghyuck
+ */
 public class XmlSqlBuilder extends AbstractBuilder {
 
+	/**
+	 * @uml.property  name="builderAssistant"
+	 * @uml.associationEnd  
+	 */
 	private SqlBuilderAssistant builderAssistant;
 
+	/**
+	 * @uml.property  name="parser"
+	 * @uml.associationEnd  
+	 */
 	private XPathParser parser;
 
 	private Log log = LogFactory.getLog(XmlSqlBuilder.class);

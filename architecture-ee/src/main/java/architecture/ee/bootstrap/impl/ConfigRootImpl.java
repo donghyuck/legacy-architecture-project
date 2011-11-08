@@ -7,9 +7,15 @@ import org.apache.commons.vfs.FileSystemException;
 
 import architecture.common.lifecycle.ConfigRoot;
 
+/**
+ * @author  donghyuck
+ */
 public class ConfigRootImpl implements ConfigRoot {
 
 	private String rootURL;
+	/**
+	 * @uml.property  name="rootFileObject"
+	 */
 	private FileObject rootFileObject;
 	
 	public ConfigRootImpl(FileObject fileObject) {
@@ -24,6 +30,10 @@ public class ConfigRootImpl implements ConfigRoot {
 		this.rootURL = rootURL;
 	}
 		
+	/**
+	 * @return
+	 * @uml.property  name="rootFileObject"
+	 */
 	private FileObject getRootFileObject() {
 		return rootFileObject;
 	}

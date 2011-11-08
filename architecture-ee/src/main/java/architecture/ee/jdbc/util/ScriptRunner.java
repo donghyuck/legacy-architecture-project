@@ -27,6 +27,9 @@ import java.sql.Statement;
 
 import architecture.ee.exception.SystemException;
 
+/**
+ * @author  donghyuck
+ */
 public class ScriptRunner {
 
 	private static final String LINE_SEPARATOR = System.getProperty(
@@ -51,34 +54,66 @@ public class ScriptRunner {
 		this.connection = connection;
 	}
 
+	/**
+	 * @param characterSetName
+	 * @uml.property  name="characterSetName"
+	 */
 	public void setCharacterSetName(String characterSetName) {
 		this.characterSetName = characterSetName;
 	}
 
+	/**
+	 * @param stopOnError
+	 * @uml.property  name="stopOnError"
+	 */
 	public void setStopOnError(boolean stopOnError) {
 		this.stopOnError = stopOnError;
 	}
 
+	/**
+	 * @param autoCommit
+	 * @uml.property  name="autoCommit"
+	 */
 	public void setAutoCommit(boolean autoCommit) {
 		this.autoCommit = autoCommit;
 	}
 
+	/**
+	 * @param sendFullScript
+	 * @uml.property  name="sendFullScript"
+	 */
 	public void setSendFullScript(boolean sendFullScript) {
 		this.sendFullScript = sendFullScript;
 	}
 
+	/**
+	 * @param logWriter
+	 * @uml.property  name="logWriter"
+	 */
 	public void setLogWriter(PrintWriter logWriter) {
 		this.logWriter = logWriter;
 	}
 
+	/**
+	 * @param errorLogWriter
+	 * @uml.property  name="errorLogWriter"
+	 */
 	public void setErrorLogWriter(PrintWriter errorLogWriter) {
 		this.errorLogWriter = errorLogWriter;
 	}
 
+	/**
+	 * @param delimiter
+	 * @uml.property  name="delimiter"
+	 */
 	public void setDelimiter(String delimiter) {
 		this.delimiter = delimiter;
 	}
 
+	/**
+	 * @param fullLineDelimiter
+	 * @uml.property  name="fullLineDelimiter"
+	 */
 	public void setFullLineDelimiter(boolean fullLineDelimiter) {
 		this.fullLineDelimiter = fullLineDelimiter;
 	}

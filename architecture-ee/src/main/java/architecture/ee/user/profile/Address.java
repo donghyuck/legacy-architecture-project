@@ -1,17 +1,46 @@
 package architecture.ee.user.profile;
 
 
+/**
+ * @author  donghyuck
+ */
 public class Address
 {
+	/**
+	 * @author                 donghyuck
+	 */
 	enum Type {
 		
-		WORK("work"), HOME("home"), PO_BOX("po_box"), OTHER("other");
+		/**
+		 * @uml.property  name="wORK"
+		 * @uml.associationEnd  
+		 */
+		WORK("work"), /**
+		 * @uml.property  name="hOME"
+		 * @uml.associationEnd  
+		 */
+		HOME("home"), /**
+		 * @uml.property  name="pO_BOX"
+		 * @uml.associationEnd  
+		 */
+		PO_BOX("po_box"), /**
+		 * @uml.property  name="oTHER"
+		 * @uml.associationEnd  
+		 */
+		OTHER("other");
+		/**
+		 * @uml.property  name="name"
+		 */
 		private String name;
 
 		private Type(String name) {
 			this.name = name;
 		}
 		
+        /**
+		 * @return
+		 * @uml.property  name="name"
+		 */
         public String getName()
         {
             return name;
@@ -32,83 +61,161 @@ public class Address
         }
 	}
 
+    /**
+	 * @uml.property  name="street1"
+	 */
     private String street1;
+    /**
+	 * @uml.property  name="street2"
+	 */
     private String street2;
+    /**
+	 * @uml.property  name="city"
+	 */
     private String city;
+    /**
+	 * @uml.property  name="stateOrProvince"
+	 */
     private String stateOrProvince;
+    /**
+	 * @uml.property  name="country"
+	 */
     private String country;
+    /**
+	 * @uml.property  name="postalCode"
+	 */
     private String postalCode;
+    /**
+	 * @uml.property  name="type"
+	 * @uml.associationEnd  
+	 */
     private Type type;
 
     public Address()
     {
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="street1"
+	 */
     public String getStreet1()
     {
         return street1;
     }
 
+    /**
+	 * @param street1
+	 * @uml.property  name="street1"
+	 */
     public void setStreet1(String street1)
     {
         this.street1 = street1;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="street2"
+	 */
     public String getStreet2()
     {
         return street2;
     }
 
+    /**
+	 * @param street2
+	 * @uml.property  name="street2"
+	 */
     public void setStreet2(String street2)
     {
         this.street2 = street2;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="country"
+	 */
     public String getCountry()
     {
         return country;
     }
 
+    /**
+	 * @param country
+	 * @uml.property  name="country"
+	 */
     public void setCountry(String country)
     {
         this.country = country;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="city"
+	 */
     public String getCity()
     {
         return city;
     }
 
+    /**
+	 * @param city
+	 * @uml.property  name="city"
+	 */
     public void setCity(String city)
     {
         this.city = city;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="stateOrProvince"
+	 */
     public String getStateOrProvince()
     {
         return stateOrProvince;
     }
 
+    /**
+	 * @param stateOrProvince
+	 * @uml.property  name="stateOrProvince"
+	 */
     public void setStateOrProvince(String stateOrProvince)
     {
         this.stateOrProvince = stateOrProvince;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="postalCode"
+	 */
     public String getPostalCode()
     {
         return postalCode;
     }
 
+    /**
+	 * @param postalCode
+	 * @uml.property  name="postalCode"
+	 */
     public void setPostalCode(String postalCode)
     {
         this.postalCode = postalCode;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="type"
+	 */
     public Type getType()
     {
         return type;
     }
 
+    /**
+	 * @param type
+	 * @uml.property  name="type"
+	 */
     public void setType(Type type)
     {
         this.type = type;

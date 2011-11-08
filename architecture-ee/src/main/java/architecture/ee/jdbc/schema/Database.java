@@ -3,10 +3,19 @@ package architecture.ee.jdbc.schema;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author  donghyuck
+ */
 public class Database {
 
-  private String catalog;
-  private String schema;
+  /**
+ * @uml.property  name="catalog"
+ */
+private String catalog;
+  /**
+ * @uml.property  name="schema"
+ */
+private String schema;
 
   private Map tables = new HashMap();
 
@@ -15,11 +24,19 @@ public class Database {
     this.schema = schema;
   }
 
-  public String getCatalog() {
+  /**
+ * @return
+ * @uml.property  name="catalog"
+ */
+public String getCatalog() {
     return catalog;
   }
 
-  public String getSchema() {
+  /**
+ * @return
+ * @uml.property  name="schema"
+ */
+public String getSchema() {
     return schema;
   }
 

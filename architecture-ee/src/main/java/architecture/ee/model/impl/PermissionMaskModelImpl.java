@@ -6,21 +6,46 @@ import architecture.ee.model.ModelConstants;
 import architecture.ee.model.PermissionMaskModel;
 import architecture.ee.security.permission.PermissionMask;
 
+/**
+ * @author  donghyuck
+ */
 public class PermissionMaskModelImpl  extends BaseModelObject<PermissionMask> implements PermissionMaskModel {
 	
+	/**
+	 * @uml.property  name="name"
+	 */
 	private String name;
 	
+    /**
+	 * @uml.property  name="mask"
+	 */
     private int mask;
     
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName() {
 		return name;
 	}
+	/**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
+	/**
+	 * @return
+	 * @uml.property  name="mask"
+	 */
 	public int getMask() {
 		return mask;
 	}
+	/**
+	 * @param mask
+	 * @uml.property  name="mask"
+	 */
 	public void setMask(int mask) {
 		this.mask = mask;
 	}

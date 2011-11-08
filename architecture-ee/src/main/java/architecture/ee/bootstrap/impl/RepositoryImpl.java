@@ -38,22 +38,35 @@ import architecture.common.xml.XmlProperties;
 import architecture.ee.util.ApplicatioinConstants;
 
 
+/**
+ * @author  donghyuck
+ */
 public class RepositoryImpl extends ComponentImpl implements Repository {
    
 	private Log log = LogFactory.getLog(getClass());
 	
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
+	/**
+	 * @uml.property  name="effectiveRootPath"
+	 */
 	private String effectiveRootPath;
 
     public RepositoryImpl() {
 		super();
 	}
 
+    /**
+	 * @uml.property  name="rootFileObject"
+	 */
     private FileObject rootFileObject = getRootFileObject() ;
     
 	//private String rootURI = getRootURI();             
     
+    /**
+	 * @uml.property  name="setupProperties"
+	 * @uml.associationEnd  
+	 */
     private ApplicationProperties setupProperties = null;
         
 	public String getRootURI() {		
@@ -84,6 +97,10 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     
 
        
+	/**
+	 * @return
+	 * @uml.property  name="rootFileObject"
+	 */
 	private FileObject getRootFileObject(){
 		if( getState() != State.INITIALIZED || getState() != State.INITIALIZING ){			
 			try {
@@ -110,6 +127,10 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 		}		
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="effectiveRootPath"
+	 */
 	public String getEffectiveRootPath()
     {	
         if(!StringUtils.isEmpty(effectiveRootPath))

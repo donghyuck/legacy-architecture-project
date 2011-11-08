@@ -7,9 +7,18 @@ import java.util.ListResourceBundle;
 import java.util.Locale;
 import java.util.Set;
 
+/**
+ * @author  donghyuck
+ */
 public class I18nLocalizerResourceBundle extends ListResourceBundle {
 
+    /**
+	 * @uml.property  name="contents"
+	 */
     private Object contents[][];
+    /**
+	 * @uml.property  name="locale"
+	 */
     private Locale locale;
     private String baseName;
     public final Set<String> keySet;
@@ -45,11 +54,19 @@ public class I18nLocalizerResourceBundle extends ListResourceBundle {
         this.keySet = Collections.unmodifiableSet(tempKeySet);
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="contents"
+	 */
     public Object[][] getContents()
     {
         return contents;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="locale"
+	 */
     public Locale getLocale() {
         return locale;
     }

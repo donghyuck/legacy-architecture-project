@@ -7,22 +7,36 @@ import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
 
 /**
- * 
- * @author Administrator
- *
+ * @author  Administrator
  */
 public class SqlQueryDaoSupport extends ExtendedJdbcDaoSupport {
 	
+	/**
+	 * @uml.property  name="sqlQueryFactory"
+	 * @uml.associationEnd  
+	 */
 	private SqlQueryFactory sqlQueryFactory = null ;
 	
 	protected Log log = LogFactory.getLog(getClass());
 
+	/**
+	 * @uml.property  name="sqlQuery"
+	 * @uml.associationEnd  
+	 */
 	private SqlQuery sqlQuery = null ;
 	
+	/**
+	 * @return
+	 * @uml.property  name="sqlQueryFactory"
+	 */
 	public SqlQueryFactory getSqlQueryFactory() {
 		return sqlQueryFactory;
 	}
 
+	/**
+	 * @param sqlQueryFactory
+	 * @uml.property  name="sqlQueryFactory"
+	 */
 	public void setSqlQueryFactory(SqlQueryFactory sqlQueryFactory) {
 		this.sqlQueryFactory = sqlQueryFactory;
 	}
@@ -40,6 +54,10 @@ public class SqlQueryDaoSupport extends ExtendedJdbcDaoSupport {
 		
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="sqlQuery"
+	 */
 	public SqlQuery getSqlQuery(){
 		if(sqlQuery == null)
 		{

@@ -28,8 +28,15 @@ import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.SqlQueryFactory;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private final Configuration configuration;
 	
 	private DataSource dataSource = null;
@@ -38,10 +45,18 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 		this.configuration = configuration;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="configuration"
+	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}
 
+	/**
+	 * @param defaultDataSource
+	 * @uml.property  name="dataSource"
+	 */
 	public void setDataSource(DataSource defaultDataSource) {
 		this.dataSource = defaultDataSource;
 	}

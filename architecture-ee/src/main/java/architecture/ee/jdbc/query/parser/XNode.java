@@ -26,13 +26,26 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * @author  donghyuck
+ */
 public class XNode {
 
+	/**
+	 * @uml.property  name="node"
+	 */
 	private Node node;
+	/**
+	 * @uml.property  name="name"
+	 */
 	private String name;
 	private String body;
 	private Properties attributes;
 	private Properties variables;
+	/**
+	 * @uml.property  name="xpathParser"
+	 * @uml.associationEnd  
+	 */
 	private XPathParser xpathParser;
 
 	public XNode(XPathParser xpathParser, Node node, Properties variables) {
@@ -112,10 +125,18 @@ public class XNode {
 		return xpathParser.evalNode(node, expression);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="node"
+	 */
 	public Node getNode() {
 		return node;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName() {
 		return name;
 	}

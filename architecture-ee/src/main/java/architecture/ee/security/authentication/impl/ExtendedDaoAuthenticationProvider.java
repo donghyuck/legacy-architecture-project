@@ -15,10 +15,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import architecture.ee.user.UserManager;
 import architecture.ee.user.UserTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider {
 	
 	private Log log = LogFactory.getLog(getClass());
     
+	/**
+	 * @uml.property  name="userManager"
+	 * @uml.associationEnd  
+	 */
 	protected UserManager userManager;
     
     protected AuthenticationProvider authProvider;
@@ -80,6 +87,10 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 		this.authProvider = authProvider;
 	}
 	
+    /**
+	 * @param userManager
+	 * @uml.property  name="userManager"
+	 */
     public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}

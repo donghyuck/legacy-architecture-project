@@ -1,16 +1,41 @@
 package architecture.ee.user.profile;
 
 
+/**
+ * @author  donghyuck
+ */
 public class EmailAddress {
 
-	enum Type { HOME("home"), WORK("work"), OTHER("other");
+	/**
+	 * @author                 donghyuck
+	 */
+	enum Type { /**
+	 * @uml.property  name="hOME"
+	 * @uml.associationEnd  
+	 */
+	HOME("home"), /**
+	 * @uml.property  name="wORK"
+	 * @uml.associationEnd  
+	 */
+	WORK("work"), /**
+	 * @uml.property  name="oTHER"
+	 * @uml.associationEnd  
+	 */
+	OTHER("other");
 		
+		/**
+		 * @uml.property  name="name"
+		 */
 		private String name;
 
 		private Type(String name) {
 			this.name = name;
 		}
 		
+		/**
+		 * @return
+		 * @uml.property  name="name"
+		 */
 		public String getName()
         {
             return name;
@@ -35,7 +60,14 @@ public class EmailAddress {
 	}
 	
 
+    /**
+	 * @uml.property  name="email"
+	 */
     private String email;
+    /**
+	 * @uml.property  name="type"
+	 * @uml.associationEnd  
+	 */
     private Type type;
     
 	public EmailAddress()
@@ -48,21 +80,37 @@ public class EmailAddress {
         this.type = type;
     }
 
+    /**
+	 * @param email
+	 * @uml.property  name="email"
+	 */
     public void setEmail(String email)
     {
         this.email = email;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="email"
+	 */
     public String getEmail()
     {
         return email;
     }
 
+    /**
+	 * @param type
+	 * @uml.property  name="type"
+	 */
     public void setType(Type type)
     {
         this.type = type;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="type"
+	 */
     public Type getType()
     {
         return type;

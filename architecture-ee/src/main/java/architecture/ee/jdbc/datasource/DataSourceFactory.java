@@ -5,6 +5,9 @@ import javax.sql.DataSource;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.util.ImplFactory;
 
+/**
+ * @author  donghyuck
+ */
 public class DataSourceFactory {
 
 	public static interface Implementation {	
@@ -19,6 +22,10 @@ public class DataSourceFactory {
 	
 	}
 	
+	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
+	 */
 	private static Implementation impl = null;
     
     static 

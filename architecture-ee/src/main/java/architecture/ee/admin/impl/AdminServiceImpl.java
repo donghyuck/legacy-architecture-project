@@ -21,12 +21,32 @@ import architecture.common.lifecycle.Version;
 import architecture.ee.bootstrap.impl.RepositoryImpl;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
+/**
+ * @author  donghyuck
+ */
 public class AdminServiceImpl extends ComponentImpl implements SpringAdminService {
 
+	/**
+	 * @uml.property  name="contextLoader"
+	 */
 	private ContextLoader contextLoader;
+	/**
+	 * @uml.property  name="servletContext"
+	 */
 	private ServletContext servletContext;
+	/**
+	 * @uml.property  name="applicationContext"
+	 */
 	private ConfigurableApplicationContext applicationContext;
+	/**
+	 * @uml.property  name="version"
+	 * @uml.associationEnd  
+	 */
 	private Version version ;
+	/**
+	 * @uml.property  name="configService"
+	 * @uml.associationEnd  
+	 */
 	private ConfigService configService;
     
 	public AdminServiceImpl(){		
@@ -44,6 +64,10 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 		return configService.getRepository();
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="configService"
+	 */
 	public ConfigService getConfigService() {
 		return configService;
 	}
@@ -54,6 +78,10 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 	}
 		
 	
+	/**
+	 * @param configService
+	 * @uml.property  name="configService"
+	 */
 	public void setConfigService(ConfigService configService){
 		this.configService = configService ;
 	}
@@ -71,10 +99,18 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 		return false; 
 	}
 	
+	/**
+	 * @param contextLoader
+	 * @uml.property  name="contextLoader"
+	 */
 	public void setContextLoader(ContextLoader contextLoader) {
 		this.contextLoader = contextLoader;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="contextLoader"
+	 */
 	public ContextLoader getContextLoader() {
 		return contextLoader;
 	}
@@ -85,10 +121,18 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 		return false;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="servletContext"
+	 */
 	public ServletContext getServletContext() {
 		return servletContext;
 	}
 
+	/**
+	 * @param servletContext
+	 * @uml.property  name="servletContext"
+	 */
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
 		if(getRepository().getState() != State.INITIALIZED){
@@ -153,6 +197,10 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 	}
 		
 		
+	/**
+	 * @return
+	 * @uml.property  name="applicationContext"
+	 */
 	public ConfigurableApplicationContext getApplicationContext() {
 		return this.applicationContext;
 	}
@@ -188,6 +236,10 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 		getApplicationContext().refresh();
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="version"
+	 */
 	public Version getVersion() {
 		return this.version;
 	}

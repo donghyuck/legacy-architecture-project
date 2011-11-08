@@ -6,8 +6,15 @@ import architecture.ee.jdbc.sequencer.JdbcSequencerFactory;
 import architecture.ee.jdbc.sequencer.Sequencer;
 import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcSequenceDao implements SequenceDao {
 	
+	/**
+	 * @uml.property  name="factory"
+	 * @uml.associationEnd  
+	 */
 	private JdbcSequencerFactory factory ;	
 	private Map<Integer, Sequencer> sequencers ;
 	

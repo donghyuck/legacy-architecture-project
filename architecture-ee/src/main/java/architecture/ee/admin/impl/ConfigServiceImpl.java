@@ -32,20 +32,51 @@ import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
 import architecture.ee.util.ApplicatioinConstants;
 import architecture.ee.util.LocaleUtils;
 
+/**
+ * @author  donghyuck
+ */
 public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
+	/**
+	 * @uml.property  name="setupProperties"
+	 * @uml.associationEnd  
+	 */
 	private ApplicationProperties setupProperties = null;
+	/**
+	 * @uml.property  name="properties"
+	 * @uml.associationEnd  
+	 */
 	private ApplicationProperties properties = null;	
+	/**
+	 * @uml.property  name="localizedProperties"
+	 * @uml.associationEnd  
+	 */
 	private ApplicationProperties localizedProperties = null;	
 	
+    /**
+	 * @uml.property  name="locale"
+	 */
     private Locale locale = null;
+    /**
+	 * @uml.property  name="timeZone"
+	 */
     private TimeZone timeZone = null;
+    /**
+	 * @uml.property  name="characterEncoding"
+	 */
     private String characterEncoding = null;
     private FastDateFormat dateFormat = null;
     private FastDateFormat dateTimeFormat = null;
  
+    /**
+	 * @uml.property  name="sqlQueryFactoryBuilder"
+	 * @uml.associationEnd  
+	 */
     private SqlQueryFactoryBuilder sqlQueryFactoryBuilder = null;   
     private DataSource dataSource = null;    
+    /**
+	 * @uml.property  name="effectiveRootPath"
+	 */
     private String effectiveRootPath = null;
     
 	public ConfigServiceImpl() {
@@ -53,6 +84,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		setName("ConfigService");
 	}
 
+	/**
+	 * @param dataSource
+	 * @uml.property  name="dataSource"
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		reset();
@@ -83,6 +118,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return getRepository().getConfigRoot();
 	}
 	
+    /**
+	 * @return
+	 * @uml.property  name="effectiveRootPath"
+	 */
     public String getEffectiveRootPath()
     {	
         if(!StringUtils.isEmpty(effectiveRootPath))
@@ -120,6 +159,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return properties == null ? EmptyApplicationProperties.getInstance() : properties;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="setupProperties"
+	 */
 	private ApplicationProperties getSetupProperties(){
 		return getRepository().getSetupApplicationProperties();
 	}
@@ -143,14 +186,26 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return null;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sqlQueryFactoryBuilder"
+	 */
 	public SqlQueryFactoryBuilder getSqlQueryFactoryBuilder() {
 		return sqlQueryFactoryBuilder;
 	}
 
+	/**
+	 * @param sqlQueryFactoryBuilder
+	 * @uml.property  name="sqlQueryFactoryBuilder"
+	 */
 	public void setSqlQueryFactoryBuilder(SqlQueryFactoryBuilder sqlQueryFactoryBuilder) {
 		this.sqlQueryFactoryBuilder = sqlQueryFactoryBuilder;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="locale"
+	 */
 	public Locale getLocale() {
         if(this.locale == null)
         {
@@ -169,6 +224,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	}
 
 
+	/**
+	 * @param newLocale
+	 * @uml.property  name="locale"
+	 */
 	public void setLocale(Locale newLocale) {
 		String country = newLocale.getCountry();
 		String language = newLocale.getLanguage();
@@ -178,6 +237,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	}
 
 
+	/**
+	 * @return
+	 * @uml.property  name="characterEncoding"
+	 */
 	public String getCharacterEncoding() {
         if(characterEncoding == null)
         {
@@ -194,6 +257,11 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         return characterEncoding;
 	}
 
+	/**
+	 * @param characterEncoding
+	 * @throws UnsupportedEncodingException
+	 * @uml.property  name="characterEncoding"
+	 */
 	public void setCharacterEncoding(String characterEncoding)
 			throws UnsupportedEncodingException {
 		if(!LocaleUtils.isValidCharacterEncoding(characterEncoding)){
@@ -205,6 +273,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		}
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="timeZone"
+	 */
 	public TimeZone getTimeZone() {
         if(timeZone == null)
             if(properties != null)
@@ -221,6 +293,10 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         return timeZone;
 	}
 
+	/**
+	 * @param newTimeZone
+	 * @uml.property  name="timeZone"
+	 */
 	public void setTimeZone(TimeZone newTimeZone) {
 		String timeZoneId = newTimeZone.getID();
 		setApplicationProperty(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME, timeZoneId);

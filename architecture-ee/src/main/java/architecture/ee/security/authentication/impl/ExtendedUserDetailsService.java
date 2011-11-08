@@ -21,15 +21,34 @@ import architecture.ee.user.User;
 import architecture.ee.user.UserManager;
 import architecture.ee.user.UserTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedUserDetailsService implements UserDetailsService, EventSource {
 
 	private Log log = LogFactory.getLog(getClass());
+	/**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
 	private EventPublisher eventPublisher;	
 	private boolean caseInsensitive;
+	/**
+	 * @uml.property  name="userManager"
+	 * @uml.associationEnd  
+	 */
 	private UserManager userManager;
+	/**
+	 * @uml.property  name="roleManager"
+	 * @uml.associationEnd  
+	 */
 	private RoleManager roleManager;
 	private String grantedAuthority;
 	
+    /**
+	 * @param grantedAuthority
+	 * @uml.property  name="grantedAuthority"
+	 */
     public void setGrantedAuthority(String grantedAuthority) {
 		this.grantedAuthority = grantedAuthority;
 	}
@@ -78,19 +97,35 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
         }
 	}
 
+	/**
+	 * @param caseInsensitive
+	 * @uml.property  name="caseInsensitive"
+	 */
 	public void setCaseInsensitive(boolean caseInsensitive)
     {
         this.caseInsensitive = caseInsensitive;
     }
 
+	/**
+	 * @param eventPublisher
+	 * @uml.property  name="eventPublisher"
+	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}
 
+	/**
+	 * @param roleManager
+	 * @uml.property  name="roleManager"
+	 */
 	public void setRoleManager(RoleManager roleManager) {
 		this.roleManager = roleManager;
 	}
 
+	/**
+	 * @param userManager
+	 * @uml.property  name="userManager"
+	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
 	}

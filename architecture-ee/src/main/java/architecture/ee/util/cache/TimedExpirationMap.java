@@ -15,6 +15,9 @@ import architecture.ee.util.proxy.GenericCollectionProxy;
 import architecture.ee.util.proxy.GenericProxyFactory;
 import architecture.ee.util.proxy.GenericSetProxy;
 
+/**
+ * @author  donghyuck
+ */
 public class TimedExpirationMap implements Cache {
 
 	
@@ -33,6 +36,9 @@ public class TimedExpirationMap implements Cache {
 	}
 	 	
 
+    /**
+	 * @uml.property  name="maxLifetime"
+	 */
     private final AtomicLong maxLifetime = new AtomicLong();
     private final AtomicLong lastChecked = new AtomicLong();
     private final AtomicBoolean expiring = new AtomicBoolean();
@@ -40,6 +46,9 @@ public class TimedExpirationMap implements Cache {
     private final ConcurrentMap map = new ConcurrentHashMap();
     private final Queue expirationQueue = new ConcurrentLinkedQueue();
     
+    /**
+	 * @uml.property  name="name"
+	 */
     private String name;	
 	
 
@@ -97,11 +106,19 @@ public class TimedExpirationMap implements Cache {
         return processWrapper((ExpirableValueWrapper)map.remove(key));
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="name"
+	 */
     public String getName()
     {
         return name;
     }
 
+    /**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
     public void setName(String name)
     {
         this.name = name;
@@ -116,6 +133,10 @@ public class TimedExpirationMap implements Cache {
     {
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="maxLifetime"
+	 */
     public long getMaxLifetime()
     {
         return maxLifetime.get();

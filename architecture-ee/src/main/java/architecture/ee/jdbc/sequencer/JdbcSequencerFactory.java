@@ -20,10 +20,17 @@ import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcSequencerFactory {
 
 	private Log log = LogFactory.getLog(getClass());
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
 
 	private DataSource dataSource;
@@ -38,10 +45,18 @@ public class JdbcSequencerFactory {
 		this.dataSource = dataSource;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="configuration"
+	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}
 
+	/**
+	 * @param configuration
+	 * @uml.property  name="configuration"
+	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;
 	}
@@ -53,6 +68,10 @@ public class JdbcSequencerFactory {
 			return true;
 	}
 
+	/**
+	 * @param dataSource
+	 * @uml.property  name="dataSource"
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}

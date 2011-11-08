@@ -48,26 +48,49 @@ import architecture.ee.jdbc.recordset.RecordsetException;
 import architecture.ee.jdbc.recordset.RecordsetField;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class SqlQueryImpl<T> implements SqlQuery {
 
+	/**
+	 * @uml.property  name="startIndex"
+	 */
 	private int startIndex = 0;
 
+	/**
+	 * @uml.property  name="maxResults"
+	 */
 	private int maxResults = 0;
 
+	/**
+	 * @uml.property  name="jdbcTemplate"
+	 * @uml.associationEnd  
+	 */
 	private ExtendedJdbcTemplate jdbcTemplate;
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
 
 	private Map<String, Object> additionalParameters;
 
 	private List<Object> values;
 
+	/**
+	 * @uml.property  name="returnType"
+	 */
 	private Class<?> returnType = DEFAULT_RETURN_TYPE;
 
 	private IntList types;
 
 	private LinkedList<Object[]> parameterQueue;
 
+	/**
+	 * @uml.property  name="statement"
+	 */
 	private String statement;
 
 	private Log log = LogFactory.getLog(getClass());
@@ -78,6 +101,10 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	// Public Methods
 	// ********************************************
 
+	/**
+	 * @param stopOnError
+	 * @uml.property  name="stopOnError"
+	 */
 	public void setStopOnError(boolean stopOnError) {
 		this.stopOnError = stopOnError;
 	}
@@ -94,19 +121,37 @@ public class SqlQueryImpl<T> implements SqlQuery {
 		return this;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="startIndex"
+	 */
 	public int getStartIndex() {
 		return this.startIndex;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="maxResults"
+	 */
 	public int getMaxResults() {
 		return this.maxResults;
 	}
 
+	/**
+	 * @param startIndex
+	 * @return
+	 * @uml.property  name="startIndex"
+	 */
 	public SqlQuery setStartIndex(int startIndex) {
 		this.startIndex = startIndex;
 		return this;
 	}
 
+	/**
+	 * @param maxResults
+	 * @return
+	 * @uml.property  name="maxResults"
+	 */
 	public SqlQuery setMaxResults(int maxResults) {
 		this.maxResults = maxResults;
 		return this;
@@ -127,10 +172,19 @@ public class SqlQueryImpl<T> implements SqlQuery {
 		return additionalParameters.get(key);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="statement"
+	 */
 	public String getStatement() {
 		return statement;
 	}
 
+	/**
+	 * @param statement
+	 * @return
+	 * @uml.property  name="statement"
+	 */
 	public SqlQuery setStatement(String statement) {
 		this.statement = statement;
 		return reset();
@@ -141,10 +195,19 @@ public class SqlQueryImpl<T> implements SqlQuery {
 		return reset();
 	}	
 
+	/**
+	 * @return
+	 * @uml.property  name="returnType"
+	 */
 	public Class<?> getReturnType() {
 		return returnType;
 	}
 
+	/**
+	 * @param returnType
+	 * @return
+	 * @uml.property  name="returnType"
+	 */
 	public SqlQuery setReturnType(Class<?> returnType) {
 		this.returnType = returnType;
 		return this;

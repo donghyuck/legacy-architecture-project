@@ -33,18 +33,27 @@ import architecture.ee.jdbc.query.builder.xml.XmlStatementBuilder;
 import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.query.parser.XNode;
 
+/**
+ * @author  donghyuck
+ */
 public class Configuration {
 
+	/**
+	 * @uml.property  name="defaultStatementTimeout"
+	 */
 	protected Integer defaultStatementTimeout;
 
+	/**
+	 * @uml.property  name="variables"
+	 */
 	protected Properties variables = new Properties();
 
 	protected final Set<String> loadedResources = new HashSet<String>();
 
 	/**
-	 * 파싱되어 매핑된 스테이트 객체들이 저장되는 위치. 다중키는 아파치 commons-collections 패키지에서 제공하는
-	 * MultiKey (namespace + id) 을 사용하여 구현함. 다중키를 스트링 조합으로 변경함.
-	 * **/
+	 * 파싱되어 매핑된 스테이트 객체들이 저장되는 위치. 다중키는 아파치 commons-collections 패키지에서 제공하는 MultiKey (namespace + id) 을 사용하여 구현함. 다중키를 스트링 조합으로 변경함.
+	 * @uml.property  name="mappedStatements"
+	 */
 	protected final Map<String, MappedStatement> mappedStatements = new HashMap<String, MappedStatement>();
 
 	protected final Map<String, String> uriNamespace = new HashMap<String, String>();
@@ -95,10 +104,18 @@ public class Configuration {
 		loadedResources.remove(resource);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="variables"
+	 */
 	public Properties getVariables() {
 		return variables;
 	}
 
+	/**
+	 * @param variables
+	 * @uml.property  name="variables"
+	 */
 	public void setVariables(Properties variables) {
 		this.variables = variables;
 	}
@@ -114,6 +131,10 @@ public class Configuration {
 		return lastPeriod > 0 ? statementId.substring(0, lastPeriod) : null;
 	}
 
+	/**
+	 * @param defaultStatementTimeout
+	 * @uml.property  name="defaultStatementTimeout"
+	 */
 	public void setDefaultStatementTimeout(Integer defaultStatementTimeout) {
 		this.defaultStatementTimeout = defaultStatementTimeout;
 	}
@@ -165,6 +186,10 @@ public class Configuration {
 		}
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="defaultStatementTimeout"
+	 */
 	public Integer getDefaultStatementTimeout() {
 		return defaultStatementTimeout;
 	}
@@ -174,6 +199,10 @@ public class Configuration {
 		return mappedStatements.keySet();
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="mappedStatements"
+	 */
 	public Collection<MappedStatement> getMappedStatements() {
 		buildAllStatements();
 		return mappedStatements.values();

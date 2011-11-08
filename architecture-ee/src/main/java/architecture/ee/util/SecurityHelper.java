@@ -15,6 +15,9 @@ import architecture.common.util.ImplFactory;
 import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 
+/**
+ * @author  donghyuck
+ */
 public class SecurityHelper {
 
 	public static interface Implementation {
@@ -28,6 +31,10 @@ public class SecurityHelper {
 		public User getUser();
 	}
 	
+	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
+	 */
 	private static Implementation impl = null;
     
     static 

@@ -31,6 +31,9 @@ import architecture.ee.user.UserTemplate;
 import architecture.ee.user.dao.UserDao;
 import architecture.ee.user.spi.UserProvider;
 
+/**
+ * @author  donghyuck
+ */
 public class MultiProviderUserManager implements UserManager, EventSource {
 
 	private Log log = LogFactory.getLog(getClass());
@@ -41,10 +44,27 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	protected SaltSource saltSource;
 	protected PasswordEncoder passwordEncoder;
 	protected List<UserProvider> providers;
+	/**
+	 * @uml.property  name="userDao"
+	 * @uml.associationEnd  
+	 */
 	private UserDao userDao;
+	/**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
 	private EventPublisher eventPublisher;
+	/**
+	 * @uml.property  name="applicationUserCount"
+	 */
 	protected int applicationUserCount;
+	/**
+	 * @uml.property  name="authenticatedUserCount"
+	 */
 	protected int authenticatedUserCount;
+	/**
+	 * @uml.property  name="totalUserCount"
+	 */
 	protected int totalUserCount;
 
 	private Cache userCache;
@@ -63,19 +83,35 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		this.providerCache = AdminHelper.getCache("providerCache");
 	}
 
+	/**
+	 * @param allowApplicationUserCreation
+	 * @uml.property  name="allowApplicationUserCreation"
+	 */
 	public void setAllowApplicationUserCreation(
 			boolean allowApplicationUserCreation) {
 		this.allowApplicationUserCreation = allowApplicationUserCreation;
 	}
 
+	/**
+	 * @param emailAddressCaseSensitive
+	 * @uml.property  name="emailAddressCaseSensitive"
+	 */
 	public void setEmailAddressCaseSensitive(boolean emailAddressCaseSensitive) {
 		this.emailAddressCaseSensitive = emailAddressCaseSensitive;
 	}
 
+	/**
+	 * @param saltSource
+	 * @uml.property  name="saltSource"
+	 */
 	public void setSaltSource(SaltSource saltSource) {
 		this.saltSource = saltSource;
 	}
 
+	/**
+	 * @param passwordEncoder
+	 * @uml.property  name="passwordEncoder"
+	 */
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
 	}
@@ -87,28 +123,52 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         }
 	}
 
+	/**
+	 * @param providers
+	 * @uml.property  name="providers"
+	 */
 	public void setProviders(List<UserProvider> providers) {
         if(null == providers)
             throw new NullPointerException("User provider list cannot be null.");
         this.providers = providers;
 	}
 
+	/**
+	 * @param userDao
+	 * @uml.property  name="userDao"
+	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
 	}
 
+	/**
+	 * @param userCache
+	 * @uml.property  name="userCache"
+	 */
 	public void setUserCache(Cache userCache) {
 		this.userCache = userCache;
 	}
 
+	/**
+	 * @param userIdCache
+	 * @uml.property  name="userIdCache"
+	 */
 	public void setUserIdCache(Cache userIdCache) {
 		this.userIdCache = userIdCache;
 	}
 
+	/**
+	 * @param providerCache
+	 * @uml.property  name="providerCache"
+	 */
 	public void setProviderCache(Cache providerCache) {
 		this.providerCache = providerCache;
 	}
 
+	/**
+	 * @param eventPublisher
+	 * @uml.property  name="eventPublisher"
+	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}
@@ -377,6 +437,10 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         //eventPublisher.publish(event);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="applicationUserCount"
+	 */
 	public int getApplicationUserCount() {
         if(applicationUserCount == -1)
             applicationUserCount = userDao.getApplicationUserCount();
@@ -391,12 +455,20 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		return userDao.getApplicationUsers(startIndex, numResults);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="authenticatedUserCount"
+	 */
 	public int getAuthenticatedUserCount() {
         if(authenticatedUserCount == -1)
             authenticatedUserCount = userDao.getAuthenticatedUserCount();
         return authenticatedUserCount;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="totalUserCount"
+	 */
 	public int getTotalUserCount() {
         if(totalUserCount == -1)
             totalUserCount = userDao.getTotalUserCount();

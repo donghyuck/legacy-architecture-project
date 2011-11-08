@@ -13,9 +13,16 @@ import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.ee.admin.AdminHelper;
 
+/**
+ * @author  donghyuck
+ */
 public abstract class AbstractGroupManager implements GroupManager, EventSource {
 	
 	protected Log log = LogFactory.getLog(getClass());
+	/**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
 	protected EventPublisher eventPublisher;
 	protected Cache groupCache;
 	protected Cache groupIdCache;
@@ -33,27 +40,47 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
         
 	}
 	
+	/**
+	 * @param groupCache
+	 * @uml.property  name="groupCache"
+	 */
 	public void setGroupCache(Cache groupCache) {
 		this.groupCache = groupCache;
 	}
 
 
 
+	/**
+	 * @param groupIdCache
+	 * @uml.property  name="groupIdCache"
+	 */
 	public void setGroupIdCache(Cache groupIdCache) {
 		this.groupIdCache = groupIdCache;
 	}
 
+	/**
+	 * @param groupMemberCache
+	 * @uml.property  name="groupMemberCache"
+	 */
 	public void setGroupMemberCache(Cache groupMemberCache) {
 		this.groupMemberCache = groupMemberCache;
 	}
 
 
+	/**
+	 * @param caseInsensitiveGroupNameMatch
+	 * @uml.property  name="caseInsensitiveGroupNameMatch"
+	 */
 	public void setCaseInsensitiveGroupNameMatch(
 			boolean caseInsensitiveGroupNameMatch) {
 		this.caseInsensitiveGroupNameMatch = caseInsensitiveGroupNameMatch;
 	}
 
 
+	/**
+	 * @param eventPublisher
+	 * @uml.property  name="eventPublisher"
+	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}	

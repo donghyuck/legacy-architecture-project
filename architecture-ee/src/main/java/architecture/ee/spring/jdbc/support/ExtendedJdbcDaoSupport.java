@@ -13,12 +13,23 @@ import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
+/**
+ * @author  donghyuck
+ */
 public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {	
 	
 	protected Log log = LogFactory.getLog(getClass());	
 	
+	/**
+	 * @uml.property  name="sequenceDao"
+	 * @uml.associationEnd  
+	 */
 	private SequenceDao sequenceDao = null;
 	
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration = null;
 		
 
@@ -41,10 +52,18 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
     	return sequenceDao.nextID(name);
     }
     
+	/**
+	 * @param sequenceDao
+	 * @uml.property  name="sequenceDao"
+	 */
 	public void setSequenceDao(SequenceDao sequenceDao) {
 		this.sequenceDao = sequenceDao;
 	}
 	
+	/**
+	 * @param configuration
+	 * @uml.property  name="configuration"
+	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;
 	}

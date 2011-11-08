@@ -17,8 +17,15 @@ package architecture.ee.jdbc.query.builder;
 
 import architecture.ee.jdbc.query.factory.Configuration;
 
+/**
+ * @author  donghyuck
+ */
 public abstract class AbstractBuilder {
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	protected final Configuration configuration;
 
 	public AbstractBuilder(Configuration configuration) {

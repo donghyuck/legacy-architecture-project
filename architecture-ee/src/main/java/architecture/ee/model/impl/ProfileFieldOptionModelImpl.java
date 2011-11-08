@@ -7,11 +7,23 @@ import architecture.ee.model.ProfileFieldOptionModel;
 import architecture.ee.user.profile.ProfileField;
 import architecture.ee.user.profile.ProfileFieldOption;
 
+/**
+ * @author  donghyuck
+ */
 public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOption> implements ProfileFieldOptionModel {
 
     private long fieldID;
+    /**
+	 * @uml.property  name="value"
+	 */
     private String value;
+    /**
+	 * @uml.property  name="index"
+	 */
     private int index;
+    /**
+	 * @uml.property  name="defaultOption"
+	 */
     private boolean defaultOption;
     
     
@@ -25,31 +37,55 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
         this.fieldID = fieldID;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="value"
+	 */
     public String getValue()
     {
         return value;
     }
 
+    /**
+	 * @param value
+	 * @uml.property  name="value"
+	 */
     public void setValue(String value)
     {
         this.value = value;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="index"
+	 */
     public int getIndex()
     {
         return index;
     }
 
+    /**
+	 * @param index
+	 * @uml.property  name="index"
+	 */
     public void setIndex(int index)
     {
         this.index = index;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="defaultOption"
+	 */
     public boolean isDefaultOption()
     {
         return defaultOption;
     }
 
+    /**
+	 * @param defaultOption
+	 * @uml.property  name="defaultOption"
+	 */
     public void setDefaultOption(boolean defaultOption)
     {
         this.defaultOption = defaultOption;

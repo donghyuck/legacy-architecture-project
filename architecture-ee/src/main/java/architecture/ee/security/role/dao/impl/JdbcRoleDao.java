@@ -13,6 +13,9 @@ import architecture.ee.security.role.Role;
 import architecture.ee.security.role.dao.RoleDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
+/**
+ * @author  donghyuck
+ */
 public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 
 	private final RowMapper<Role> roleRowMapper = new RowMapper<Role>(){
@@ -27,12 +30,24 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 		}};
 	
 	private String sequencerName = "Role";
+	/**
+	 * @uml.property  name="sequenceDao"
+	 * @uml.associationEnd  
+	 */
 	private SequenceDao sequenceDao;
 	
+	/**
+	 * @param sequenceDao
+	 * @uml.property  name="sequenceDao"
+	 */
 	public void setSequenceDao(SequenceDao sequenceDao) {
 		this.sequenceDao = sequenceDao;
 	}
 	
+	/**
+	 * @param sequencerName
+	 * @uml.property  name="sequencerName"
+	 */
 	public void setSequencerName(String sequencerName) {
 		this.sequencerName = sequencerName;
 	}

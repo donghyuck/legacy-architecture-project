@@ -41,9 +41,7 @@ import architecture.ee.jdbc.query.builder.BuilderException;
 
 /**
  * org.apache.ibatis.parsing.XPathParser 소스를 리팩토링하였음.
- * 
- * @author DongHyuck, Son
- * 
+ * @author  DongHyuck, Son
  */
 public class XPathParser {
 
@@ -117,6 +115,10 @@ public class XPathParser {
 		this.document = document;
 	}
 
+	/**
+	 * @param variables
+	 * @uml.property  name="variables"
+	 */
 	public void setVariables(Properties variables) {
 		this.variables = variables;
 	}

@@ -14,9 +14,16 @@ import architecture.common.event.api.EventListener;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 
+/**
+ * @author  donghyuck
+ */
 public class AutoListenerEventRegister implements BeanFactoryPostProcessor {
 
 	private Log logger = LogFactory.getLog(getClass());
+	/**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
 	private EventPublisher eventPublisher;
 
 	public AutoListenerEventRegister(EventPublisher eventPublisher) {

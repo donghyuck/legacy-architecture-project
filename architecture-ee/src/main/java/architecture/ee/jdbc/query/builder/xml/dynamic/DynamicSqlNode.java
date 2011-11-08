@@ -29,9 +29,16 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateHashModel;
 
+/**
+ * @author  donghyuck
+ */
 public class DynamicSqlNode implements SqlNode {
 
 	private String text;
+	/**
+	 * @uml.property  name="language"
+	 * @uml.associationEnd  
+	 */
 	private Language language;
 	protected Log log = LogFactory.getLog(getClass());
 
@@ -87,8 +94,19 @@ public class DynamicSqlNode implements SqlNode {
 		return "dynamic[" + text + "]";
 	}
 
+	/**
+	 * @author                 donghyuck
+	 */
 	public enum Language {
-		VELOCITY, FREEMARKER
+		/**
+		 * @uml.property  name="vELOCITY"
+		 * @uml.associationEnd  
+		 */
+		VELOCITY, /**
+		 * @uml.property  name="fREEMARKER"
+		 * @uml.associationEnd  
+		 */
+		FREEMARKER
 	}
 
 	protected String processTemplate(Map<String, Object> map) {

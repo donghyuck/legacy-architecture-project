@@ -15,11 +15,30 @@
  */
 package architecture.ee.jdbc.query.mapping;
 
+/**
+ * @author                 donghyuck
+ */
 public enum StatementType {
 	
+	/**
+	 * @uml.property  name="sTATEMENT"
+	 * @uml.associationEnd  
+	 */
 	STATEMENT, 
+	/**
+	 * @uml.property  name="pREPARED"
+	 * @uml.associationEnd  
+	 */
 	PREPARED, 
+	/**
+	 * @uml.property  name="fUNCTION"
+	 * @uml.associationEnd  
+	 */
 	FUNCTION, 
+	/**
+	 * @uml.property  name="cALLABLE"
+	 * @uml.associationEnd  
+	 */
 	CALLABLE
 	
 }

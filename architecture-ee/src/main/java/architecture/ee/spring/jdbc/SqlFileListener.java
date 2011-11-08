@@ -27,8 +27,15 @@ import architecture.ee.jdbc.query.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.ConfigurationFactory;
 
+/**
+ * @author  donghyuck
+ */
 public class SqlFileListener implements FileListener {
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
 	private Log log = LogFactory.getLog(getClass());
 

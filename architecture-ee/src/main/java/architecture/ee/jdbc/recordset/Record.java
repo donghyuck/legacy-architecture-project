@@ -7,13 +7,8 @@ import java.util.Iterator;
 import java.util.Set;
 
 /**
- * Utility class for Recordset: represents a record inside a recordset <br>
- * Creation date: 10/09/2003<br>
- * Last Update: 29/april/2004<br>
- * (c) 2004 Martin Cordova<br>
- * This code is released under the LGPL license<br>
- * 
- * @author Martin Cordova (dinamica@martincordova.com)
+ * Utility class for Recordset: represents a record inside a recordset <br> Creation date: 10/09/2003<br> Last Update: 29/april/2004<br> (c) 2004 Martin Cordova<br> This code is released under the LGPL license<br>
+ * @author  Martin Cordova (dinamica@martincordova.com)
  */
 public class Record implements Serializable {
 
@@ -25,7 +20,11 @@ public class Record implements Serializable {
 	/** container for field|value pairs */
 	HashMap<String, Object> _record = new HashMap<String, Object>();
 
-	/** every record in a recordset can contain a children recordset */
+	/**
+	 * every record in a recordset can contain a children recordset
+	 * @uml.property  name="_children"
+	 * @uml.associationEnd  
+	 */
 	Recordset _children = null;
 
 	/**

@@ -15,8 +15,14 @@
  */
 package architecture.ee.jdbc.query.mapping;
 
+/**
+ * @author  donghyuck
+ */
 public class BoundSql {
 
+	/**
+	 * @uml.property  name="sql"
+	 */
 	private String sql;
 
 	public BoundSql(String sql) {
@@ -24,6 +30,10 @@ public class BoundSql {
 		this.sql = sql;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sql"
+	 */
 	public String getSql() {
 		return sql;
 	}

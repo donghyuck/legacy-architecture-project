@@ -18,6 +18,9 @@ package architecture.ee.jdbc.query.factory;
 import architecture.ee.jdbc.query.factory.Configuration;
 import architecture.ee.jdbc.query.factory.impl.ConfigurationFactoryImpl;
 
+/**
+ * @author  donghyuck
+ */
 public class ConfigurationFactory {
 
 	
@@ -27,6 +30,10 @@ public class ConfigurationFactory {
 
 	}
 
+	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
+	 */
 	private static Implementation impl = null;
 
 	static {
