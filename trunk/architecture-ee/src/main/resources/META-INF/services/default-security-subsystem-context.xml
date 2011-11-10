@@ -16,31 +16,33 @@
 	<!-- Dao -->
 	<!-- ================================================ -->
 	<bean id="userDao" class="architecture.ee.user.dao.impl.JdbcUserDao"
-		parent="jdbcDaoSupport" depends-on="sequenceDao extendedPropertyDao"
-		p:sequenceDao-ref="sequenceDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+		parent="jdbcDaoSupport" 
+		depends-on="sequenceDao, extendedPropertyDao"
+		p:sequenceDao-ref="sequenceDao" 
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
 
 	<bean id="groupDao" class="architecture.ee.user.dao.impl.JdbcGroupDao"
-		parent="jdbcDaoSupport" depends-on="sequenceDao extendedPropertyDao"
-		p:sequenceDao-ref="sequenceDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+		parent="jdbcDaoSupport" 
+		depends-on="sequenceDao, extendedPropertyDao"
+		p:sequenceDao-ref="sequenceDao" 
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
 
 	<bean id="profileFiledDao" class="architecture.ee.user.dao.impl.JdbcProfileFiledDao"
-		parent="jdbcDaoSupport" depends-on="sequenceDao extendedPropertyDao"
-
+		parent="jdbcDaoSupport" 
+		depends-on="sequenceDao, extendedPropertyDao"
 		p:sequenceDao-ref="sequenceDao" />
 
 	<bean id="userProfileDao" class="architecture.ee.user.dao.impl.JdbcUserProfileDao"
 		parent="jdbcDaoSupport" />
 
 	<bean id="roleDao" class="architecture.ee.security.role.dao.impl.JdbcRoleDao"
-		parent="jdbcDaoSupport" depends-on="sequenceDao" p:sequenceDao-ref="sequenceDao" />
+		parent="jdbcDaoSupport" 
+		depends-on="sequenceDao" 
+		p:sequenceDao-ref="sequenceDao" />
 
 	<!-- ================================================ -->
-	<!-- Manager -->
+	<!-- Cache                                            -->
 	<!-- ================================================ -->
-	<bean id="userManager" class="architecture.ee.user.impl.MultiProviderUserManager"
-		depends-on="userDao, eventPublisher" p:userDao-ref="userDao"
-		p:eventPublisher-ref="eventPublisher" p:userCache-ref="userCache"
-		p:userIdCache-ref="userIDCache" p:userProviderCache-ref="userProviderCache" />
 
 	<bean id="userProviderCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
 		p:cacheName="userProviderCache" p:maxElementsInMemory="5000"
@@ -57,14 +59,6 @@
 		p:overflowToDisk="false" p:timeToIdle="30" p:timeToLive="60"
 		p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
 
-
-	<bean id="groupManager" class="architecture.ee.user.impl.GroupManagerImpl"
-		p:groupDao-ref="groupDao" p:userManager-ref="userManager"
-		p:eventPublisher-ref="eventPublisher"
-		p:groupMemberCache-ref="groupMemberCache"
-		p:groupIdCache-ref="groupIdCache"
-		p:groupCache-ref="groupCache" />
-
 	<bean id="groupMemberCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
 		p:cacheName="groupMemberCache" p:maxElementsInMemory="10000"
 		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
@@ -79,13 +73,7 @@
 		p:cacheName="groupCache" p:maxElementsInMemory="5000"
 		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
 		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="roleManager" class="architecture.ee.security.role.impl.RoleManagerImpl"
-		p:roleDao-ref="roleDao" p:groupManager-ref="groupManager"
-		p:eventPublisher-ref="eventPublisher"
-		p:roleCache-ref="roleCache"
-		p:userRoleCache-ref="userRoleCache" />
-
+	
 	<bean id="roleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
 		p:cacheName="roleCache" p:maxElementsInMemory="5000"
 		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
@@ -95,5 +83,37 @@
 		p:cacheName="userRoleCache" p:maxElementsInMemory="5000"
 		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
 		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+		
+	<!-- ================================================ -->
+	<!-- Manager                                          -->
+	<!-- ================================================ -->
+	<bean id="userManager" class="architecture.ee.user.impl.MultiProviderUserManager"
+		depends-on="userDao, eventPublisher" 
+		p:userDao-ref="userDao"
+		p:eventPublisher-ref="eventPublisher" 
+		p:passwordEncoder-ref="passwordEncoder"
+		p:saltSource-ref="passwordSaltSource"
+		p:userCache-ref="userCache"
+		p:userIdCache-ref="userIDCache" 
+		p:userProviderCache-ref="userProviderCache" />
+
+    <bean id="passwordEncoder" class="architecture.ee.spring.security.authentication.encoding.PasswordEncoderFactory" />
+    <bean id="passwordSaltSource" class="architecture.ee.spring.security.authentication.encoding.SaltSourceFactory" />
+ 
+
+	<bean id="groupManager" class="architecture.ee.user.impl.GroupManagerImpl"
+		p:groupDao-ref="groupDao" p:userManager-ref="userManager"
+		p:eventPublisher-ref="eventPublisher"
+		p:groupMemberCache-ref="groupMemberCache"
+		p:groupIdCache-ref="groupIdCache"
+		p:groupCache-ref="groupCache" />
+
+
+	<bean id="roleManager" class="architecture.ee.security.role.impl.RoleManagerImpl"
+		p:roleDao-ref="roleDao" p:groupManager-ref="groupManager"
+		p:eventPublisher-ref="eventPublisher"
+		p:roleCache-ref="roleCache"
+		p:userRoleCache-ref="userRoleCache" />
+
 		
 </beans>

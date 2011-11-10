@@ -1,7 +1,5 @@
 package architecture.ee.jdbc.datasource.impl;
 
-import java.util.Collection;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
