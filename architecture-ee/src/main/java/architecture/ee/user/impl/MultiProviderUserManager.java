@@ -244,6 +244,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         }
 		UserTemplate userTemplate = new UserTemplate(newUser);
 		
+		// 외부 계정인 경우 처리 방법...
 		if(userTemplate.isFederated() || userTemplate.isExternal()){
 	        byte buffer[] = new byte[64];
 	        entropy.nextBytes(buffer);
