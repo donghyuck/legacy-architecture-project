@@ -6,7 +6,6 @@ import java.util.Map;
  * @author                 donghyuck
  */
 public interface Cache extends Map {
-
 	/**
 	 * @return
 	 * @uml.property  name="name"

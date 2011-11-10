@@ -39,11 +39,14 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	private Log log = LogFactory.getLog(getClass());
 	
 	private static final SecureRandom entropy = new SecureRandom();
+	
+	
 	protected boolean allowApplicationUserCreation;
 	protected boolean emailAddressCaseSensitive;
 	protected SaltSource saltSource;
 	protected PasswordEncoder passwordEncoder;
 	protected List<UserProvider> providers;
+	
 	/**
 	 * @uml.property  name="userDao"
 	 * @uml.associationEnd  
@@ -69,8 +72,9 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	private Cache userCache;
 	private Cache userIdCache;
-	private Cache providerCache;
+	private Cache userProviderCache;
 
+	
 	public MultiProviderUserManager() {
 		this.allowApplicationUserCreation = true;
 		this.emailAddressCaseSensitive = false;
@@ -78,11 +82,15 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		this.applicationUserCount = -1;
 		this.authenticatedUserCount = -1;
 		this.totalUserCount = -1;
-		this.userCache = AdminHelper.getCache("userCache");
-		this.userIdCache = AdminHelper.getCache("userIDCache");
-		this.providerCache = AdminHelper.getCache("providerCache");
+
 	}
 
+	public void initialize(){		
+		this.userCache = AdminHelper.getCache("userCache");
+		this.userIdCache = AdminHelper.getCache("userIDCache");
+		this.userProviderCache = AdminHelper.getCache("userProviderCache");
+	}
+	
 	/**
 	 * @param allowApplicationUserCreation
 	 * @uml.property  name="allowApplicationUserCreation"
@@ -161,8 +169,8 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	 * @param providerCache
 	 * @uml.property  name="providerCache"
 	 */
-	public void setProviderCache(Cache providerCache) {
-		this.providerCache = providerCache;
+	public void setUserProviderCache(Cache providerCache) {
+		this.userProviderCache = providerCache;
 	}
 
 	/**
@@ -402,7 +410,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
                 {
                     log.debug("Deleting user via provider.");
                     up.delete(loadedUser);
-                    providerCache.remove(Long.valueOf(user.getUserId()));
+                    userProviderCache.remove(Long.valueOf(user.getUserId()));
                 }
             }
             catch(Exception ex)
@@ -644,7 +652,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 				log.debug("Creating application user for externally-sourced user.");
 				appUser = userDao.create(sourcedUser);
 			}
-			providerCache.put(new Element(appUser.getUserId(), up.getName()));
+			userProviderCache.put(new Element(appUser.getUserId(), up.getName()));
 			
 			return appUser;
 		}
@@ -742,7 +750,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
              return null;
     	 
         
-    	 String providerName = (String) providerCache.get( user.getUserId() ).getValue();
+    	 String providerName = (String) userProviderCache.get( user.getUserId() ).getValue();
          
     	 for(UserProvider up : providers){
         	 if( up.getName().equals(providerName) )
@@ -752,7 +760,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
     	 for(UserProvider up : providers){
     		 User sourcedUser = up.getUser(user);
     		 if(null != sourcedUser){
-                 providerCache.put( new Element( user.getUserId(), up.getName() ));
+                 userProviderCache.put( new Element( user.getUserId(), up.getName() ));
                  updateCaches(sourcedUser);
                  return up;
     		 }

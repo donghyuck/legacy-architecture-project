@@ -33,11 +33,9 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	public AbstractGroupManager() {
 		
         caseInsensitiveGroupNameMatch = true;
-        groupCache = AdminHelper.getCache("groupCache");
-        groupIdCache = AdminHelper.getCache("groupIDCache");
-        groupMemberCache = AdminHelper.getCache("groupMemberCache");
-        
-        
+        //groupCache = AdminHelper.getCache("groupCache");
+        //groupIdCache = AdminHelper.getCache("groupIDCache");
+        //groupMemberCache = AdminHelper.getCache("groupMemberCache");
 	}
 	
 	/**

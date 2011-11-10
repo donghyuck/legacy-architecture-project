@@ -11,7 +11,8 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.plugin.PluginManager;
-import architecture.ee.util.task.TaskEngine;
+import architecture.common.util.TaskEngine;
+
 
 /**
  * @author  donghyuck
@@ -44,12 +45,8 @@ public class PluginManagerImpl implements PluginManager, EventSource {
 
 	public void initialize(){
     	if(!initialized.get()){    		
-    		taskEngine.addTask(new Runnable() {
-
+    		taskEngine.submit(new Runnable() {
 				public void run() {
-					
-					
-					
 					
 				}
     			

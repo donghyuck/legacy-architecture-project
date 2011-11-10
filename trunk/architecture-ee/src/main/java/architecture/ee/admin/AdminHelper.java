@@ -1,13 +1,21 @@
 package architecture.ee.admin;
 
+import java.util.Locale;
+
+import net.sf.ehcache.Cache;
+
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
+import architecture.common.lifecycle.Version;
 import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.i18n.I18nTextManager;
+import architecture.ee.security.role.RoleManager;
 import architecture.ee.spring.lifecycle.SpringAdminService;
+import architecture.ee.user.GroupManager;
+import architecture.ee.user.UserManager;
 import architecture.ee.util.ApplicatioinConstants;
 
 public final class AdminHelper {
@@ -24,6 +32,10 @@ public final class AdminHelper {
 		return getAdminService().getState();
 	}
 	
+	public static Version getVersion(){
+		return getAdminService().getVersion();
+	}
+	
 	public static boolean isSetupComplete(){
 		if(isReady()){
 			return getAdminService().getConfigService().getApplicationBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false);
@@ -33,12 +45,14 @@ public final class AdminHelper {
 	}
 		
 	public static String[] getComponentNames(){
-		SpringAdminService admin = (SpringAdminService)getAdminService();
+		
+		SpringAdminService adminService = (SpringAdminService)getAdminService();
+		
 		if(isReady()){
-			return admin.getApplicationContext().getBeanDefinitionNames();
+			return adminService.getApplicationContext().getBeanDefinitionNames();
 		}else{ 
 		    return Bootstrap.getBootstrapComponentNames();
-		}
+		}		
 	}
 	
 	public static AdminService getAdminService(){
@@ -66,13 +80,54 @@ public final class AdminHelper {
 		return Bootstrap.getBootstrapComponent(net.sf.ehcache.CacheManager.class);
 	}
 	
-	public static net.sf.ehcache.Cache getCache(String cacheName){		
-		net.sf.ehcache.Cache memoryOnlyCache = getCacheManager().getCache(cacheName);		
-		if( memoryOnlyCache == null ){
-			getCacheManager().addCache(cacheName);
-			memoryOnlyCache = getCacheManager().getCache(cacheName);
-		}
-		return memoryOnlyCache;
+	public static UserManager getUserManager(){
+		return Bootstrap.getBootstrapComponent(UserManager.class);
+	}
+
+	public static GroupManager getGroupManager(){
+		return Bootstrap.getBootstrapComponent(GroupManager.class);
+	}
+
+	public static RoleManager getRoleManager(){
+		return Bootstrap.getBootstrapComponent(RoleManager.class);
+	}
+	
+	public static net.sf.ehcache.Cache getCache(String name){			
+		if(!getCacheManager().cacheExists(name)){
+			
+			int maxElementsInMemory = 5000;
+            boolean overflowToDisk = false;
+            boolean eternal = false;
+            long timeToLiveSeconds = 60;
+            long timeToIdleSeconds = 30;
+            boolean diskPersistent = false;
+            long diskExpiryThreadIntervalSeconds = 0;
+            
+			Cache memoryOnlyCache = new Cache(
+				name, 
+				maxElementsInMemory,
+				overflowToDisk,
+				eternal,
+				timeToLiveSeconds,
+				timeToIdleSeconds,
+				diskPersistent,
+				diskExpiryThreadIntervalSeconds
+			);
+			
+			getCacheManager().addCache(memoryOnlyCache);			
+		}		
+		return getCacheManager().getCache(name);		
 	}	
 	
+	public static String getMessage(String code, Object[] args, Locale locale){	
+		Locale localeToUse = locale ;
+		if(localeToUse==null)
+			localeToUse = getConfigService().getLocale();
+		SpringAdminService adminService = (SpringAdminService)getAdminService();
+		if(isReady()){
+			return adminService.getApplicationContext().getMessage(code, args, localeToUse);
+		}else{ 
+		    return Bootstrap.getBootstrapApplicationContext().getMessage(code, args, localeToUse);
+		}	
+	}
 }

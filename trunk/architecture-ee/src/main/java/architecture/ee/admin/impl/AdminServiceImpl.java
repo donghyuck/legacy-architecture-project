@@ -57,6 +57,9 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 		this.servletContext = null;
 		this.applicationContext = null;
 		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );
+		
+		//log.debug( getName() + " " + version.getVersionString());
+		
 	}
 	
 

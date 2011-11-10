@@ -38,6 +38,17 @@
 		class="architecture.ee.i18n.impl.I18nTextManagerImpl"
 		p:i18nLocaleDao-ref="localeDao" p:i18nLocalizerDao-ref="localizerDao"
 		init-method="initialize" />
-		
-
+				
+	<!-- ================================================ -->
+	<!-- MessageSource                                    -->
+	<!-- ================================================ -->
+	<bean id="messageSource"
+		class="architecture.ee.spring.context.support.I18nTextResourceBundleMessageSource">
+		<property name="localizers">
+			<list>
+				<value>FrameworkLocalizer</value>
+			</list>
+		</property>
+	</bean>
+	  
 </beans>

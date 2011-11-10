@@ -29,9 +29,7 @@ public class GroupManagerImpl extends AbstractGroupManager {
 	
 	public GroupManagerImpl() {
 		super();
-	}
-	
-	
+	}	
 
 	/**
 	 * @param groupDao
