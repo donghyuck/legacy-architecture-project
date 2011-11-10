@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" xmlns:options="options.xmi" name="SqlQueryDaoSupport" size="743,909" id="architecture.ee.spring.jdbc.support" metadata="uml2-1.0" initialized="true" tag="1000" key="32303037303533312D31303030206172636869746563747572652D65652F646F6E67687975636B">
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.3/@sourceConnections.1" name="SqlQueryFactory" location="255,420" size="187,203" id="architecture.ee.jdbc.query.factory/SqlQueryFactory" runTimeClassModel="getQueryNames(),createSqlQuery(Larchitecture.ee.spring.jdbc.ExtendedJdbcTemplate;),createSqlQuery(Ljava.lang.String;Ljava.lang.String;Ljavax.sql.DataSource;),createSqlQuery(Ljavax.sql.DataSource;),setDataSource(Ljavax.sql.DataSource;),createSqlQuery(Ljava.lang.String;Ljava.lang.String;),createSqlQuery()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="108,126">
+      <children xsi:type="editmodel:MethodEditModel" name="createSqlQuery" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#createSqlQuery(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createSqlQuery" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#createSqlQuery(Ljava.lang.String;Ljava.lang.String;Ljavax.sql.DataSource;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createSqlQuery" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#createSqlQuery()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createSqlQuery" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#createSqlQuery(Larchitecture.ee.spring.jdbc.ExtendedJdbcTemplate;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="createSqlQuery" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#createSqlQuery(Ljavax.sql.DataSource;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getQueryNames" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#getQueryNames()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setDataSource" id="architecture.ee.jdbc.query.factory/SqlQueryFactory#setDataSource(Ljavax.sql.DataSource;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="architecture.ee.jdbc.query.factory/SqlQueryFactory@sqlQueryFactory+architecture.ee.spring.jdbc.support/SqlQueryDaoSupport@" source="//@children.0" target="//@children.3" targetEnd="//@children.0/@sourceConnections.0/@children.2" label="//@children.0/@sourceConnections.0/@children.0" sourceEnd="//@children.0/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="sqlQueryFactory" location="10,0" id="architecture.ee.jdbc.query.factory/SqlQueryFactory@sqlQueryFactory+architecture.ee.spring.jdbc.support/SqlQueryDaoSupport@|architecture.ee.jdbc.query.factory/SqlQueryFactory#sqlQueryFactory" attachSource="true" multiplicityLabel="//@children.0/@sourceConnections.0/@children.1/@children.1" roleLabel="//@children.0/@sourceConnections.0/@children.1/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - sqlQueryFactory" location="272,399" size="91,14" anchorKind="FirstPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="252,399" size="6,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,111" id="architecture.ee.jdbc.query.factory/SqlQueryFactory@sqlQueryFactory+architecture.ee.spring.jdbc.support/SqlQueryDaoSupport@|architecture.ee.spring.jdbc.support/SqlQueryDaoSupport#" roleLabel="//@children.0/@sourceConnections.0/@children.2/@children.0">
+        <children xsi:type="editmodel:LabelEditModel" location="228,315" size="0,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="architecture.ee.jdbc.query.factory/SqlQueryFactory-Soyatec::Import->architecture.ee.jdbc.query/SqlQuery" source="//@children.0" target="//@children.1" targetEnd="//@children.0/@sourceConnections.1/@children.2" label="//@children.0/@sourceConnections.1/@children.0" sourceEnd="//@children.0/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import»" size="41,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="187,101" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,491"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" targetConnections="//@children.0/@sourceConnections.1 //@children.3/@sourceConnections.0 //@children.3/@sourceConnections.3" name="SqlQuery" location="510,30" size="262,635" id="architecture.ee.jdbc.query/SqlQuery" runTimeClassModel="setStatement(Ljava.lang.String;),uniqueResult(),setStartIndex(I),queryForList(Ljava.lang.String;[Ljava.lang.Object;[ILjava.lang.Class;),queryForObject(Ljava.lang.String;[Ljava.lang.Object;[ILorg.springframework.jdbc.core.ResultSetExtractor;),executeScript(),queryForList(Ljava.lang.String;[Ljava.lang.Object;[I),queryForMap(Ljava.lang.String;),setAdditionalParameter(Ljava.lang.String;Ljava.lang.Object;),uniqueResult(Lorg.springframework.jdbc.core.RowMapper;),uniqueResult(Ljava.lang.Class;),queryForList(Ljava.lang.String;),setString(Ljava.lang.String;),executeUpdate(),queryForList(Ljava.lang.String;Ljava.lang.Class;),queryForObject(Ljava.lang.String;Ljava.lang.Class;),setParameters([Ljava.lang.Object;[I),executeUpdate(Ljava.lang.String;Larchitecture.ee.jdbc.recordset.Recordset;[Ljava.lang.String;),executeBatchUpdate(),setDataSource(Ljavax.sql.DataSource;),queryForObject(Ljava.lang.String;[Ljava.lang.Object;[ILjava.lang.Class;),setReturnType(Ljava.lang.Class;),list(),addToBatch(),setStatement(Ljava.lang.String;Ljava.lang.String;),queryForObject(Ljava.lang.String;[Ljava.lang.Object;[ILorg.springframework.jdbc.core.RowMapper;),executeBatchUpdate(Ljava.lang.String;Larchitecture.ee.jdbc.recordset.Recordset;[Ljava.lang.String;),dEFAULT_RETURN_TYPE,reset(),setMaxResults(I),queryForMap(Ljava.lang.String;[Ljava.lang.Object;[I)">
+    <children xsi:type="editmodel:CompartmentEditModel" size="239,18">
+      <children xsi:type="editmodel:AttributeEditModel" name="dEFAULT_RETURN_TYPE" id="architecture.ee.jdbc.query/SqlQuery#dEFAULT_RETURN_TYPE"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="141,540">
+      <children xsi:type="editmodel:MethodEditModel" name="addToBatch" id="architecture.ee.jdbc.query/SqlQuery#addToBatch()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="executeBatchUpdate" id="architecture.ee.jdbc.query/SqlQuery#executeBatchUpdate()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="executeBatchUpdate" id="architecture.ee.jdbc.query/SqlQuery#executeBatchUpdate(Ljava.lang.String;Larchitecture.ee.jdbc.recordset.Recordset;[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="executeScript" id="architecture.ee.jdbc.query/SqlQuery#executeScript()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="executeUpdate" id="architecture.ee.jdbc.query/SqlQuery#executeUpdate(Ljava.lang.String;Larchitecture.ee.jdbc.recordset.Recordset;[Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="executeUpdate" id="architecture.ee.jdbc.query/SqlQuery#executeUpdate()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="list" id="architecture.ee.jdbc.query/SqlQuery#list()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForList" id="architecture.ee.jdbc.query/SqlQuery#queryForList(Ljava.lang.String;[Ljava.lang.Object;[ILjava.lang.Class;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForList" id="architecture.ee.jdbc.query/SqlQuery#queryForList(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForList" id="architecture.ee.jdbc.query/SqlQuery#queryForList(Ljava.lang.String;Ljava.lang.Class;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForList" id="architecture.ee.jdbc.query/SqlQuery#queryForList(Ljava.lang.String;[Ljava.lang.Object;[I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForMap" id="architecture.ee.jdbc.query/SqlQuery#queryForMap(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForMap" id="architecture.ee.jdbc.query/SqlQuery#queryForMap(Ljava.lang.String;[Ljava.lang.Object;[I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForObject" id="architecture.ee.jdbc.query/SqlQuery#queryForObject(Ljava.lang.String;[Ljava.lang.Object;[ILorg.springframework.jdbc.core.RowMapper;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForObject" id="architecture.ee.jdbc.query/SqlQuery#queryForObject(Ljava.lang.String;[Ljava.lang.Object;[ILjava.lang.Class;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForObject" id="architecture.ee.jdbc.query/SqlQuery#queryForObject(Ljava.lang.String;Ljava.lang.Class;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="queryForObject" id="architecture.ee.jdbc.query/SqlQuery#queryForObject(Ljava.lang.String;[Ljava.lang.Object;[ILorg.springframework.jdbc.core.ResultSetExtractor;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="reset" id="architecture.ee.jdbc.query/SqlQuery#reset()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setAdditionalParameter" id="architecture.ee.jdbc.query/SqlQuery#setAdditionalParameter(Ljava.lang.String;Ljava.lang.Object;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setDataSource" id="architecture.ee.jdbc.query/SqlQuery#setDataSource(Ljavax.sql.DataSource;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setMaxResults" id="architecture.ee.jdbc.query/SqlQuery#setMaxResults(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setParameters" id="architecture.ee.jdbc.query/SqlQuery#setParameters([Ljava.lang.Object;[I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setReturnType" id="architecture.ee.jdbc.query/SqlQuery#setReturnType(Ljava.lang.Class;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setStartIndex" id="architecture.ee.jdbc.query/SqlQuery#setStartIndex(I)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setStatement" id="architecture.ee.jdbc.query/SqlQuery#setStatement(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setStatement" id="architecture.ee.jdbc.query/SqlQuery#setStatement(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setString" id="architecture.ee.jdbc.query/SqlQuery#setString(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="uniqueResult" id="architecture.ee.jdbc.query/SqlQuery#uniqueResult(Lorg.springframework.jdbc.core.RowMapper;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="uniqueResult" id="architecture.ee.jdbc.query/SqlQuery#uniqueResult()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="uniqueResult" id="architecture.ee.jdbc.query/SqlQuery#uniqueResult(Ljava.lang.Class;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.3/@sourceConnections.2 //@children.3/@sourceConnections.4" name="ExtendedJdbcDaoSupport" location="255,30" size="207,157" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport" runTimeClassModel="getExtendedJdbcTemplate(),isSetConfiguration(),getLobHandler(),setLobHandler(Lorg.springframework.jdbc.support.lob.LobHandler;),ExtendedJdbcDaoSupport(Larchitecture.ee.jdbc.query.factory.Configuration;),ExtendedJdbcDaoSupport()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="155,108">
+      <children xsi:type="editmodel:MethodEditModel" name="ExtendedJdbcDaoSupport" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport#ExtendedJdbcDaoSupport(Larchitecture.ee.jdbc.query.factory.Configuration;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="ExtendedJdbcDaoSupport" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport#ExtendedJdbcDaoSupport()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getExtendedJdbcTemplate" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport#getExtendedJdbcTemplate()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getLobHandler" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport#getLobHandler()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isSetConfiguration" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport#isSetConfiguration()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="setLobHandler" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport#setLobHandler(Lorg.springframework.jdbc.support.lob.LobHandler;)"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" targetConnections="//@children.0/@sourceConnections.0" name="SqlQueryDaoSupport" location="45,225" size="176,121" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport" runTimeClassModel="isSetDataSource(),getSqlQuery(Ljava.lang.String;Ljava.lang.String;),getSqlQuery(Ljava.lang.String;),isSetSqlQueryFactory()">
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="136,72">
+      <children xsi:type="editmodel:MethodEditModel" name="getSqlQuery" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport#getSqlQuery(Ljava.lang.String;Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="getSqlQuery" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport#getSqlQuery(Ljava.lang.String;)"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isSetDataSource" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport#isSetDataSource()"/>
+      <children xsi:type="editmodel:MethodEditModel" name="isSetSqlQueryFactory" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport#isSetSqlQueryFactory()"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel" size="0,0"/>
+    <sourceConnections xsi:type="editmodel:AssociationEditModel" autoLocated="true" id="architecture.ee.jdbc.query/SqlQuery@sqlQuery+architecture.ee.spring.jdbc.support/SqlQueryDaoSupport@" source="//@children.3" target="//@children.1" targetEnd="//@children.3/@sourceConnections.0/@children.2" label="//@children.3/@sourceConnections.0/@children.0" sourceEnd="//@children.3/@sourceConnections.0/@children.1" connectionRouterKind="Manhattan">
+      <children xsi:type="editmodel:WireLabelEditModel" size="0,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,60" id="architecture.ee.jdbc.query/SqlQuery@sqlQuery+architecture.ee.spring.jdbc.support/SqlQueryDaoSupport@|architecture.ee.spring.jdbc.support/SqlQueryDaoSupport#" attachSource="true" roleLabel="//@children.3/@sourceConnections.0/@children.1/@children.0">
+        <children xsi:type="editmodel:LabelEditModel" location="228,264" size="0,14" anchorKind="FirstPart"/>
+      </children>
+      <children xsi:type="editmodel:AssociationEndEditModel" name="sqlQuery" location="0,255" id="architecture.ee.jdbc.query/SqlQuery@sqlQuery+architecture.ee.spring.jdbc.support/SqlQueryDaoSupport@|architecture.ee.jdbc.query/SqlQuery#sqlQuery" multiplicityLabel="//@children.3/@sourceConnections.0/@children.2/@children.1" roleLabel="//@children.3/@sourceConnections.0/@children.2/@children.0" navigable="true">
+        <children xsi:type="editmodel:LabelEditModel" name=" - sqlQuery" location="449,264" size="54,14" anchorKind="LastPart"/>
+        <children xsi:type="editmodel:LabelEditModel" name="1" location="497,292" size="6,14" anchorKind="LastPart"/>
+      </children>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport->Standard::Call" source="//@children.3" target="//@children.0" targetEnd="//@children.3/@sourceConnections.1/@children.2" label="//@children.3/@sourceConnections.1/@children.0" sourceEnd="//@children.3/@sourceConnections.1/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="144,121" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,21"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport-Standard::Derive->architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport" source="//@children.3" target="//@children.2" targetEnd="//@children.3/@sourceConnections.2/@children.2" label="//@children.3/@sourceConnections.2/@children.0" sourceEnd="//@children.3/@sourceConnections.2/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Derive»" size="43,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="164,0" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="3,157"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" autoLocated="true" id="architecture.ee.spring.jdbc.support/SqlQueryDaoSupport->Standard::Call" source="//@children.3" target="//@children.1" targetEnd="//@children.3/@sourceConnections.3/@children.2" label="//@children.3/@sourceConnections.3/@children.0" sourceEnd="//@children.3/@sourceConnections.3/@children.1" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:WireLabelEditModel" name="«Import, Call»" size="64,14" anchorKind="MiddlePart"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,80" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,292"/>
+    </sourceConnections>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" autoLocated="true" id="architecture.ee.spring.jdbc.support/ExtendedJdbcDaoSupport&lt;-architecture.ee.spring.jdbc.support/SqlQueryDaoSupport" source="//@children.3" target="//@children.2" targetEnd="//@children.3/@sourceConnections.4/@children.1" sourceEnd="//@children.3/@sourceConnections.4/@children.0" connectionRouterKind="Manual">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="176,15" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="23,157"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+  </children>
+  <diagramOptions xsi:type="options:ClassDiagramOptions" interactive="false" properties="open=architecture.ee.spring.jdbc.support/SqlQueryDaoSupport;wireOptions=7;Product=eUML2"/>
+  <boardSetting snapToGeometry="true" gridEnabled="true" gridSpacing="15,15" gridOrigin="0,0" rulerUnit="pixel" gridVisibility="false">
+    <leftRuler/>
+    <topRuler/>
+  </boardSetting>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" showPopupBars="true" showConnectionHandles="true" attributeSorter="Natural" methodSorter="Natural" showClassStereotype="true" showPackageStereotype="true" showDependencyStereotype="true" showInterfaceStereotype="true" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showStaticAttributes="true" showPublicMethods="true" showPackageMethods="true" showStaticMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showStaticInnerClasses="true" packageIndication="3" showAttributeProperty="true"/>
+</editmodel:ClassDiagramEditModel>

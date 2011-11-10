@@ -46,8 +46,8 @@ public class RoleManagerImpl implements ExtendedRoleManager, EventSource {
 		
 	
 	public RoleManagerImpl() {
-		this.roleCache = AdminHelper.getCache("roleCache");
-		this.userRoleCache = AdminHelper.getCache("userRoleCache");
+		//this.roleCache = AdminHelper.getCache("roleCache");
+		//this.userRoleCache = AdminHelper.getCache("userRoleCache");
 	}
 
 		

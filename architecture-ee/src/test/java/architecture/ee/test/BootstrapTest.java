@@ -13,7 +13,6 @@ import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.i18n.I18nCountry;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
-import architecture.ee.i18n.I18nTextManager;
 import architecture.ee.i18n.dao.I18nCountryDao;
 import architecture.ee.jdbc.datasource.DataSourceFactory;
 import architecture.ee.model.impl.I18nLocalizerModelImpl;
@@ -21,19 +20,18 @@ import architecture.ee.user.dao.UserDao;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.I18nTextUtils;
 
-
 public class BootstrapTest {
 
 	private Log log = LogFactory.getLog(getClass());
 	
-	@Test
-	public void testGetEffectiveRootPath(){
+	
+	public void testGetEffectiveRootPath() throws Exception{
 		Repository repo = Bootstrap.getBootstrapComponent(Repository.class);
 		log.info(" - " + repo.getEffectiveRootPath());
 		log.info(" - " + repo.getConfigRoot().getRootURI());
 	}	
 	
-	@Test
+
 	public void testGetDataSource(){
 		log.debug( DataSourceFactory.getDataSource() ) ;
 	}
@@ -116,7 +114,7 @@ public class BootstrapTest {
 		
 	}
 	
-	@Test
+
 	public void testGetI18nLocalizer(){
 		for(I18nLocalizer localizer : I18nTextUtils.getI18nLocalizers("framework")){
 			log.debug( ">>>>" + localizer.getResourceBundle() ) ;
@@ -132,6 +130,12 @@ public class BootstrapTest {
 		
 		log.debug( ">>>>" + resourceBundle ) ;		
 		
+	}
+	
+	@Test
+	public void testGetI18nMessage(){
+		String key = "main.page.title";
+		log.debug( ApplicationHelper.getMessage(key, new Object[]{}, null));
 	}
 	
 	

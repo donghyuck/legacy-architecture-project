@@ -64,7 +64,7 @@
 	<!-- ================================================ -->
 	
 	<bean id="ehcache"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"		
 		p:shared="false" />
 		
 	<!-- ================================================ -->

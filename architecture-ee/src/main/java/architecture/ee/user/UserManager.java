@@ -39,9 +39,9 @@ public interface UserManager {
 
 	public abstract int getApplicationUserCount();
 
-	public abstract List getApplicationUsers();
+	public abstract List<User> getApplicationUsers();
 
-	public abstract List getApplicationUsers(int i, int j);
+	public abstract List<User> getApplicationUsers(int i, int j);
 
 	public abstract int getAuthenticatedUserCount();
 
@@ -49,9 +49,9 @@ public interface UserManager {
 
 	public abstract int getRecentUserCount(Date date);
 
-	public abstract List getUsers();
+	public abstract List<User> getUsers();
 
-	public abstract List getUsers(int i, int j);
+	public abstract List<User> getUsers(int i, int j);
 
 	public abstract boolean isCreationSupported();
 

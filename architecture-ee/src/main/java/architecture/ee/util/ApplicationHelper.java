@@ -124,4 +124,8 @@ public final class ApplicationHelper {
 			return null;
 	}
 	
+	public static String getMessage(String code, Object[] args, Locale locale){		
+		return AdminHelper.getMessage(code, args, locale);
+	}
+	
 }

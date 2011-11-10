@@ -69,15 +69,21 @@ public class I18nTextUtils {
 	}	
 
     public static ResourceBundle getResourceBundle(String bundleName, Locale targetLocale){
-    	I18nLocalizer localizer = getI18nLocalizer(bundleName, targetLocale);    	
-    	if( localizer!=null )
-    		return localizer.getResourceBundle();
-    	else
-    		return ResourceBundle.getBundle(bundleName, targetLocale);    	
-	}
-    
-    public static ResourceBundle getResourceBundle(String bundleName){
     	
+    	ResourceBundle bundle = null;
+    	I18nLocalizer localizer = getI18nLocalizer(bundleName, targetLocale);    	
+    	if( localizer!=null ){
+    		bundle = localizer.getResourceBundle();
+    	}else{
+    		if(log.isDebugEnabled())
+    			log.debug(" ... in local file system.");
+    		
+    		bundle = ResourceBundle.getBundle(bundleName , targetLocale);   
+    	}
+    	return bundle;
+    }
+    
+    public static ResourceBundle getResourceBundle(String bundleName){    	
     	Locale targetLocale = AdminHelper.getConfigService().getLocale();    	
     	return getResourceBundle(bundleName, targetLocale);
 	}
