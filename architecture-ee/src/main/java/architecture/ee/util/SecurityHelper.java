@@ -39,7 +39,7 @@ public class SecurityHelper {
     
     static 
     {
-        impl = (Implementation)ImplFactory.loadImplFromKey(ApplicationHelperFactory.Implementation.class);
+        impl = (Implementation)ImplFactory.loadImplFromKey(SecurityHelper.Implementation.class);
     }
 	
     

@@ -18,6 +18,11 @@ import architecture.ee.user.GroupManager;
 import architecture.ee.user.UserManager;
 import architecture.ee.util.ApplicatioinConstants;
 
+/**
+ * 
+ * @author donghyuck son
+ *
+ */
 public final class AdminHelper {
 
 	public static Repository getRepository(){

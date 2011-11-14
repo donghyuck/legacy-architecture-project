@@ -14,15 +14,11 @@
 	<!-- =================================================== -->
 	<!-- 1. DataSource                                       -->
 	<!-- =================================================== -->
-	<bean id="dataSource"
-		class="architecture.ee.jdbc.datasource.DataSourceFactory"
-		destroy-method="close"
-		factory-method="getDataSource" />
 				
 	<!-- =================================================== -->
 	<!-- 2. URLDirectoryScanner                              -->
 	<!-- =================================================== -->
-	<bean id="directoryScanner" class="architecture.ee.spring.lifecycle.internal.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">		  
+	<bean id="directoryScanner" class="architecture.ee.spring.jdbc.impl.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">		  
 		<property name="directoryListenerList">		
 	        <list value-type="architecture.common.scanner.DirectoryListener">
 	        	<ref bean="sqlQueryFactoryBuilder" />
@@ -32,24 +28,19 @@
 			<list>
 				<value>${sql.resource.location}</value>
 			</list>
-		</property>	     
+		</property>	    		 
     </bean>    
+    
 	<!-- =================================================== -->
 	<!-- 3. SqlQuery Factory & Support                       -->
 	<!-- =================================================== -->
-	<bean id="sqlQueryFactory" factory-bean="sqlQueryFactoryBuilder" factory-method="createSqlQueryFactory" p:dataSource-ref="dataSource" scope="singleton"  />
+	<bean id="sqlQueryFactory" factory-bean="sqlQueryFactoryBuilder" factory-method="createSqlQueryFactory" 
+	    p:dataSource-ref="dataSource" 
+	    scope="singleton"  />
 	
 	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
-	<!-- =================================================== -->
-	<!-- 4. Sequencer                                        -->
-	<!-- =================================================== -->		
-	<bean id="sequencerFactory" class="architecture.ee.jdbc.sequencer.JdbcSequencerFactory" scope="singleton">
-		<constructor-arg index="0" ref="sqlConfiguration"/>
-		<constructor-arg index="1" ref="dataSource"/>
-	</bean>	
-	<!-- =================================================== -->
-	<!-- 5. JdbcDaoSupport                                   -->
-	<!-- =================================================== -->	
-	<bean id="jdbcDaoSupport" abstract="true" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource" depends-on="sqlConfiguration, dataSource" />			
 	
+	<bean id="sqlQueryClient"  class="architecture.ee.component.impl.SqlQueryClientImpl" 
+	    parent="sqlQuerySupport" p:dataSource-ref="dataSource" />
+	    	
 </beans>	

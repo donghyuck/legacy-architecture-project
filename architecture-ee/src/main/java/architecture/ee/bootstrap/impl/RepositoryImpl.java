@@ -2,11 +2,9 @@ package architecture.ee.bootstrap.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.concurrent.locks.Lock;
 
 import javax.servlet.ServletContext;
 
@@ -23,8 +21,6 @@ import org.springframework.web.context.support.ServletContextResource;
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.exception.ConfigurationError;
 import architecture.common.exception.ConfigurationWarning;
-import architecture.common.exception.RuntimeError;
-import architecture.common.exception.RuntimeWarning;
 import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
@@ -103,9 +99,25 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	 */
 	private FileObject getRootFileObject(){
 		if( getState() != State.INITIALIZED || getState() != State.INITIALIZING ){			
-			try {
-				ClassLoader threadLoader = Thread.currentThread().getContextClassLoader();			
-				InputStream input = threadLoader.getResourceAsStream("application-init.xml");			
+			
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			
+			/*try {
+				Enumeration<URL> enumeration = classloader.getResources("application-init.xml");
+				do {
+					if (!enumeration.hasMoreElements())
+						break;
+					URL url = (URL) enumeration.nextElement();
+					
+					System.out.println(" - " + url);
+
+				} while (true);
+			} catch (IOException e) {
+			}*/
+			
+			
+			try {		
+				InputStream input = classloader.getResourceAsStream("application-init.xml");			
 				XmlProperties prop = new XmlProperties(input);
 				String envRootPath = prop.getProperty("home");
 				if(!StringUtils.isEmpty(envRootPath)){

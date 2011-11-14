@@ -7,7 +7,7 @@ public class Permissions implements Serializable {
 	private static final long serialVersionUID = -8195862189097761722L;
 
 	/**
-	 * @author                 donghyuck
+	 * @author donghyuck son
 	 */
 	enum PermissionAtom {
 		/**

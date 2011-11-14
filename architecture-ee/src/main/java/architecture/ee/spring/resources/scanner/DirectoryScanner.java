@@ -1,4 +1,4 @@
-package architecture.ee.spring.monitor;
+package architecture.ee.spring.resources.scanner;
 
 import java.net.URI;
 import java.net.URL;

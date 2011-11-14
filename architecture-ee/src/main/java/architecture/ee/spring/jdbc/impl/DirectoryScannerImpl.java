@@ -17,13 +17,13 @@ import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
-import architecture.ee.spring.monitor.DirectoryScanner;
+import architecture.ee.spring.resources.scanner.DirectoryScanner;
 
 
 /**
  * @author  donghyuck
  */
-public class DirectoryScannerImpl /** extends SpringLifecycleService **/ implements InitializingBean, DisposableBean, DirectoryScanner {
+public class DirectoryScannerImpl implements InitializingBean, DisposableBean, DirectoryScanner {
 
 	/**
 	 * @uml.property  name="scanner"
