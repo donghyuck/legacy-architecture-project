@@ -16,8 +16,8 @@ import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
-import architecture.ee.spring.lifecycle.SpringAdminService;
 import architecture.ee.bootstrap.Bootstrap;
+import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
  * @author  donghyuck

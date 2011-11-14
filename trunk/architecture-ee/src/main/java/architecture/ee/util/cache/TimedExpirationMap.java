@@ -43,8 +43,8 @@ public class TimedExpirationMap implements Cache {
     private final AtomicLong lastChecked = new AtomicLong();
     private final AtomicBoolean expiring = new AtomicBoolean();
     private final long expirationPeriod;
-    private final ConcurrentMap map = new ConcurrentHashMap();
-    private final Queue expirationQueue = new ConcurrentLinkedQueue();
+    private final ConcurrentMap<Object, ExpirableValueWrapper> map = new ConcurrentHashMap<Object, ExpirableValueWrapper>();
+    private final Queue<ExpirableValueWrapper> expirationQueue = new ConcurrentLinkedQueue<ExpirableValueWrapper>();
     
     /**
 	 * @uml.property  name="name"
@@ -84,7 +84,7 @@ public class TimedExpirationMap implements Cache {
     public Object get(Object key)
     {
         expireEntries();
-        ExpirableValueWrapper wrapper = (ExpirableValueWrapper)map.get(key);
+        ExpirableValueWrapper wrapper = map.get(key);
         if(wrapper != null)
             return wrapper.value;
         else
@@ -95,7 +95,7 @@ public class TimedExpirationMap implements Cache {
     {
         expireEntries();
         ExpirableValueWrapper wrapper = new ExpirableValueWrapper(key, value);
-        ExpirableValueWrapper oldVal = (ExpirableValueWrapper)map.put(key, wrapper);
+        ExpirableValueWrapper oldVal = map.put(key, wrapper);
         expirationQueue.offer(wrapper);
         return processWrapper(oldVal);
     }
@@ -103,7 +103,7 @@ public class TimedExpirationMap implements Cache {
     public Object remove(Object key)
     {
         expireEntries();
-        return processWrapper((ExpirableValueWrapper)map.remove(key));
+        return processWrapper(map.remove(key));
     }
 
     /**
@@ -187,7 +187,7 @@ public class TimedExpirationMap implements Cache {
         map.clear();
     }
 
-    public Set keySet()
+    public Set<Object> keySet()
     {
         expireEntries();
         return Collections.unmodifiableSet(map.keySet());
@@ -253,7 +253,7 @@ public class TimedExpirationMap implements Cache {
                 ExpirableValueWrapper value = null;
                 do
                 {
-                    if((value = (ExpirableValueWrapper)expirationQueue.peek()) == null || now - value.timestamp < maxLifetime.get())
+                    if((value = expirationQueue.peek()) == null || now - value.timestamp < maxLifetime.get())
                         break;
                     expirationQueue.poll();
                     if(!value.ignore)

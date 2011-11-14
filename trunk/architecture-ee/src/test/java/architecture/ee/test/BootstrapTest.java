@@ -135,7 +135,7 @@ public class BootstrapTest {
 	@Test
 	public void testGetI18nMessage(){
 		String key = "main.page.title";
-		log.debug( ApplicationHelper.getMessage(key, new Object[]{}, null));
+		//log.debug( ApplicationHelper.getMessage(key, new Object[]{}, null));
 	}
 	
 	

@@ -1,6 +1,5 @@
 package architecture.ee.test;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +52,7 @@ public class SecurityTest {
 		
 		
 	}
-	@Test
+	
 	public void testPasswordEncoder(){
 
 		String rawPass = "1234qwer";

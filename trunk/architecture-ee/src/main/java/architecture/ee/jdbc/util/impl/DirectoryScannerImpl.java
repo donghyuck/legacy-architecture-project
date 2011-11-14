@@ -17,7 +17,7 @@ import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
-import architecture.ee.spring.monitor.DirectoryScanner;
+import architecture.ee.spring.resources.scanner.DirectoryScanner;
 
 /**
  * @author  donghyuck
