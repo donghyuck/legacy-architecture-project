@@ -98,9 +98,9 @@
 		p:userProviderCache-ref="userProviderCache" />
 
     <bean id="passwordEncoder" class="architecture.ee.spring.security.authentication.encoding.PasswordEncoderFactory" />
+    
     <bean id="passwordSaltSource" class="architecture.ee.spring.security.authentication.encoding.SaltSourceFactory" />
  
-
 	<bean id="groupManager" class="architecture.ee.user.impl.GroupManagerImpl"
 		p:groupDao-ref="groupDao" p:userManager-ref="userManager"
 		p:eventPublisher-ref="eventPublisher"

@@ -1,4 +1,4 @@
-package architecture.ee.security.authentication.impl;
+package architecture.ee.spring.security.authentication;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

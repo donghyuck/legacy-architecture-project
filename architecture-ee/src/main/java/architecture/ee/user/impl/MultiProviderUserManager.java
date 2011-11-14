@@ -21,7 +21,7 @@ import architecture.common.event.api.EventSource;
 import architecture.ee.admin.AdminHelper;
 import architecture.ee.security.authentication.AnonymousUser;
 import architecture.ee.security.authentication.InvalidProviderUserException;
-import architecture.ee.security.authentication.impl.ExtendedUserDetailsAdapter;
+import architecture.ee.spring.security.authentication.ExtendedUserDetailsAdapter;
 import architecture.ee.user.EmailAlreadyExistsException;
 import architecture.ee.user.User;
 import architecture.ee.user.UserAlreadyExistsException;
