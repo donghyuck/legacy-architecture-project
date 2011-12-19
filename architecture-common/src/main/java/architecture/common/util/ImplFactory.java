@@ -106,6 +106,9 @@ public class ImplFactory {
 	}
 	
 
+	/**
+	 * @author    donghyuck
+	 */
 	private static class ImplFactoryParsingHandler extends DefaultHandler {
 
 		static {
@@ -131,8 +134,15 @@ public class ImplFactory {
 
 		int rank;
 
+		/**
+		 * @uml.property  name="factories"
+		 */
 		List<Factory> factories;
 
+		/**
+		 * @uml.property  name="factory"
+		 * @uml.associationEnd  
+		 */
 		Factory factory;
 
 		StringBuffer value;
@@ -177,6 +187,10 @@ public class ImplFactory {
 			throw saxparseexception;
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="factories"
+		 */
 		public List<Factory> getFactories() {
 			return factories;
 		}

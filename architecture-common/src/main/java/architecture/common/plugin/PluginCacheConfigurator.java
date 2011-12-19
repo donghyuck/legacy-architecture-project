@@ -33,32 +33,7 @@ import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 /**
- * A helper class to read cache configuration data for a plugin and register the defined caches with
- * the cache factory. Definitions should look something like this:
- * <code>
- *
- * <cache-config>
- *     <cache-mapping>
- *           <cache-name>My Cache</cache-name>
- *           <scheme-name>optimistic</scheme-name>
- *           <init-params>
- *               <init-param>
- *                   <param-name>back-size-high</param-name>
- *                   <param-value>131072</param-value>
- *               </init-param>
- *               <init-param>
- *                   <param-name>back-expiry</param-name>
- *                   <param-value>6h</param-value>
- *               </init-param>
- *               <init-param>
- *                   <param-name>back-size-low</param-name>
- *                   <param-value>117965</param-value>
- *               </init-param>
- *           </init-params>
- *     </cache-mapping>
- * </cache-config>
- *
- * </code>
+ * A helper class to read cache configuration data for a plugin and register the defined caches with the cache factory. Definitions should look something like this: <code> <cache-config> <cache-mapping> <cache-name>My Cache</cache-name> <scheme-name>optimistic</scheme-name> <init-params> <init-param> <param-name>back-size-high</param-name> <param-value>131072</param-value> </init-param> <init-param> <param-name>back-expiry</param-name> <param-value>6h</param-value> </init-param> <init-param> <param-name>back-size-low</param-name> <param-value>117965</param-value> </init-param> </init-params> </cache-mapping> </cache-config> </code>
  */
 public class PluginCacheConfigurator {
 
@@ -66,6 +41,10 @@ public class PluginCacheConfigurator {
 
     private InputStream configDataStream;
     
+    /**
+	 * @uml.property  name="cacheRegistry"
+	 * @uml.associationEnd  
+	 */
     private PluginCacheRegistry cacheRegistry;
 
     public void setPluginCacheRegistry(PluginCacheRegistry cacheRegistry){

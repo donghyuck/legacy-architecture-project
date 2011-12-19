@@ -75,21 +75,18 @@ import architecture.common.plugin.PluginManagerListener;
 
 
 /**
- * Loads and manages plugins. The <tt>plugins</tt> directory is monitored for any
- * new plugins, and they are dynamically loaded.<p/>
- *
- * An instance of this class can be obtained using:<p/>
- *
- * <tt>XMPPServer.getInstance().getPluginManager()</tt>
- *
- * @author Matt Tucker
- * @see Plugin
+ * Loads and manages plugins. The <tt>plugins</tt> directory is monitored for any new plugins, and they are dynamically loaded.<p/> An instance of this class can be obtained using:<p/> <tt>XMPPServer.getInstance().getPluginManager()</tt>
+ * @author    Matt Tucker
+ * @see  Plugin
  */
 public class PluginManagerImpl implements PluginManager {
 
 	private static final Log Log = LogFactory.getLog(PluginManagerImpl.class);
 
     private File pluginDirectory = null ;
+    /**
+	 * @uml.property  name="plugins"
+	 */
     private Map<String, Plugin> plugins;
         
     private Map<Plugin, PluginClassLoader> classloaders;
@@ -104,20 +101,40 @@ public class PluginManagerImpl implements PluginManager {
     private Map<Plugin, List<String>> parentPluginMap;
     private Map<Plugin, String> childPluginMap;
     private Set<String> devPlugins;
+    /**
+	 * @uml.property  name="pluginMonitor"
+	 * @uml.associationEnd  
+	 */
     private PluginMonitor pluginMonitor;
     private Set<PluginListener> pluginListeners = new CopyOnWriteArraySet<PluginListener>();
     private Set<PluginManagerListener> pluginManagerListeners = new CopyOnWriteArraySet<PluginManagerListener>();
     protected AtomicBoolean initialized;
+    /**
+	 * @uml.property  name="pluginCacheRegistry"
+	 * @uml.associationEnd  
+	 */
     private PluginCacheRegistry pluginCacheRegistry;    
+    /**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
     protected EventPublisher eventPublisher;
     //protected TaskEngine taskEngine;
     
     
     
+    /**
+	 * @param  eventPublisher
+	 * @uml.property  name="eventPublisher"
+	 */
     public void setEventPublisher(EventPublisher eventPublisher){
     	this.eventPublisher = eventPublisher;
     }
     
+    /**
+	 * @param  pluginCacheRegistry
+	 * @uml.property  name="pluginCacheRegistry"
+	 */
     public void setPluginCacheRegistry(PluginCacheRegistry pluginCacheRegistry) {
 		this.pluginCacheRegistry = pluginCacheRegistry;
 	}
@@ -175,6 +192,10 @@ public class PluginManagerImpl implements PluginManager {
     	return initialized.get();    	
     } 
     
+    /**
+	 * @param  pluginDirectory
+	 * @uml.property  name="pluginDirectory"
+	 */
     public void setPluginDirectory(File pluginDirectory) {
 		this.pluginDirectory = pluginDirectory;
 	}
@@ -275,10 +296,10 @@ public class PluginManagerImpl implements PluginManager {
     }
 
     /**
-     * Returns a Collection of all installed plugins.
-     *
-     * @return a Collection of all installed plugins.
-     */
+	 * Returns a Collection of all installed plugins.
+	 * @return    a Collection of all installed plugins.
+	 * @uml.property  name="plugins"
+	 */
     public Collection<Plugin> getPlugins() {
         return Collections.unmodifiableCollection(plugins.values());
     }
@@ -947,36 +968,39 @@ public class PluginManagerImpl implements PluginManager {
     }
 
     /**
-     * An enumberation for plugin license agreement types.
-     */
+	 * An enumberation for plugin license agreement types.
+	 */
     @SuppressWarnings({"UnnecessarySemicolon"})  // Support for QDox Parser
     public enum License {
 
         /**
-         * The plugin is distributed using a commercial license.
-         */
+		 * @uml.property  name="commercial"
+		 * @uml.associationEnd  
+		 */
         commercial,
 
         /**
-         * The plugin is distributed using the GNU Public License (GPL).
-         */
+		 * @uml.property  name="gpl"
+		 * @uml.associationEnd  
+		 */
         gpl,
 
         /**
-         * The plugin is distributed using the Apache license.
-         */
+		 * @uml.property  name="apache"
+		 * @uml.associationEnd  
+		 */
         apache,
 
         /**
-         * The plugin is for internal use at an organization only and is not re-distributed.
-         */
+		 * @uml.property  name="internal"
+		 * @uml.associationEnd  
+		 */
         internal,
 
         /**
-         * The plugin is distributed under another license agreement not covered by
-         * one of the other choices. The license agreement should be detailed in the
-         * plugin Readme.
-         */
+		 * @uml.property  name="other"
+		 * @uml.associationEnd  
+		 */
         other;
     }
 

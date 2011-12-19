@@ -91,13 +91,15 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 		List<FileAction> actions = new LinkedList<FileAction>();
 				
 		synchronized (urlList) {
+			
 			for(URL url : urlList){
-			//for (Iterator<URL> iter = urlList.iterator(); iter.hasNext();) {				
-			//	URL url = (URL) iter.next();
+				
+				//log.debug("scan:" + url);
+				
 				File parent = new File(url.getFile());
 				File[] children = parent.listFiles();				
 				if(!parent.exists() || children == null) {
-		            //log.error( MessageFormatter.format("003519", url));
+		            log.error( url + " is not exist.");
 		            return;
 		        }				
 				for( File child : children){
@@ -110,6 +112,7 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 		            if(then == null) { // Brand new, wait a bit to make sure it's not still changing
 		                now.setNewFile(true);
 		                files.put(now.getPath(), now);
+		                
 		               // if(log.isDebugEnabled())
 		               // 	log.debug(MessageFormatter.format("003520", now.getPath()));
 		            } else {
@@ -189,7 +192,8 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
                     } else if(action.action == FileAction.UPDATED_FILE) {
                         listener.fileChanged(action.child);
                     }
-                } catch (Exception e) {                	
+                } catch (Exception e) { 
+                	log.error(e);
                     //log.error(MessageFormatter.format("003524", action.getActionName(), action.child.getAbsolutePath()), e);
                 } finally {
                     resolveFile(action);
@@ -249,6 +253,9 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
     ////////////////////////////////////////////////////////////////
     // InnerClass
     ///////////////////////////////////////////////////////////////
+    /**
+	 * @author    donghyuck
+	 */
     private static class FileAction {
     	
         private static int NEW_FILE = 1;
@@ -256,6 +263,10 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
         private static int REMOVED_FILE = 3;
         private int action;
         private File child;
+        /**
+		 * @uml.property  name="info"
+		 * @uml.associationEnd  
+		 */
         private FileInfo info;
 
         public FileAction(int action, File child, FileInfo info) {
@@ -269,13 +280,31 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
         }
     }
         
+    /**
+	 * @author    donghyuck
+	 */
     private static class FileInfo implements Serializable {
     	
 		private static final long serialVersionUID = 2396755457574442311L;
+		/**
+		 * @uml.property  name="path"
+		 */
 		private String path;
+        /**
+		 * @uml.property  name="size"
+		 */
         private long size;
+        /**
+		 * @uml.property  name="modified"
+		 */
         private long modified;
+        /**
+		 * @uml.property  name="newFile"
+		 */
         private boolean newFile;
+        /**
+		 * @uml.property  name="changing"
+		 */
         private boolean changing;
 
         public FileInfo(String path) {
@@ -284,38 +313,74 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
             changing = true;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="path"
+		 */
         public String getPath() {
             return path;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="size"
+		 */
         public long getSize() {
             return size;
         }
 
+        /**
+		 * @param  size
+		 * @uml.property  name="size"
+		 */
         public void setSize(long size) {
             this.size = size;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="modified"
+		 */
         public long getModified() {
             return modified;
         }
 
+        /**
+		 * @param  modified
+		 * @uml.property  name="modified"
+		 */
         public void setModified(long modified) {
             this.modified = modified;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="newFile"
+		 */
         public boolean isNewFile() {
             return newFile;
         }
 
+        /**
+		 * @param  newFile
+		 * @uml.property  name="newFile"
+		 */
         public void setNewFile(boolean newFile) {
             this.newFile = newFile;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="changing"
+		 */
         public boolean isChanging() {
             return changing;
         }
 
+        /**
+		 * @param  changing
+		 * @uml.property  name="changing"
+		 */
         public void setChanging(boolean changing) {
             this.changing = changing;
         }

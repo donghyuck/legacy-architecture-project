@@ -23,29 +23,25 @@ package architecture.common.plugin;
 import java.util.Map;
 
 /**
- * Configuration to use when creating caches. Caches can be used when running stand alone or when
- * running in a cluster. When running in a cluster a few extra parameters might be needed. Read
- * {@link #getParams()} for more information.
- *
- * @author Gaston Dombiak
+ * Configuration to use when creating caches. Caches can be used when running stand alone or when running in a cluster. When running in a cluster a few extra parameters might be needed. Read   {@link #getParams()}    for more information.
+ * @author    Gaston Dombiak
  */
 public class CacheInfo {
     /**
-     * Name of the cache
-     */
+	 * Name of the cache
+	 * @uml.property  name="cacheName"
+	 */
     private String cacheName;
     /**
-     * Type of cache to use when running in a cluster. When not running in a cluster this value is not used.
-     */
+	 * Type of cache to use when running in a cluster. When not running in a cluster this value is not used.
+	 * @uml.property  name="type"
+	 * @uml.associationEnd  
+	 */
     private Type type;
     /**
-     * Map with the configuration of the cache. Openfire expects the following properties to exist:
-     * <ul>
-     *  <li><b>back-size-high</b> - Maximum size of the cache. Size is in bytes. Zero means that there is no limit.</li>
-     *  <li><b>back-size-low</b> - Size in byte of the cache after a clean up. Use zero to place no limit.</li>
-     *  <li><b>back-expiry</b> - minutes, hours or days before content is expired. 10m, 12h or 2d. Zero means never.</li>
-     * </ul>
-     */
+	 * Map with the configuration of the cache. Openfire expects the following properties to exist: <ul> <li><b>back-size-high</b> - Maximum size of the cache. Size is in bytes. Zero means that there is no limit.</li> <li><b>back-size-low</b> - Size in byte of the cache after a clean up. Use zero to place no limit.</li> <li><b>back-expiry</b> - minutes, hours or days before content is expired. 10m, 12h or 2d. Zero means never.</li> </ul>
+	 * @uml.property  name="params"
+	 */
     private Map<String, String> params;
 
     /**
@@ -63,62 +59,54 @@ public class CacheInfo {
         this.params = params;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="cacheName"
+	 */
     public String getCacheName() {
         return cacheName;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="type"
+	 */
     public Type getType() {
         return type;
     }
 
     /**
-     * Returns a map with the configuration to use for the cache. When running standalone the following
-     * properties are required.
-     * <ul>
-     *  <li><b>back-size-high</b> - Maximum size of the cache. Size is in bytes. Zero means that there is no limit.</li>
-     *  <li><b>back-expiry</b> - minutes, hours or days before content is expired. 10m, 12h or 2d. Zero means never.</li>
-     * </ul>
-     * When running in a cluster this extra property is required. More properties can be defined depending on the
-     * clustering solution being used.
-     * <ul>
-     *  <li><b>back-size-low</b> - Size in byte of the cache after a clean up. Use zero to place no limit.</li>
-     * </ul>
-     *
-     * @return map with the configuration to use for the cache.
-     */
+	 * Returns a map with the configuration to use for the cache. When running standalone the following properties are required. <ul> <li><b>back-size-high</b> - Maximum size of the cache. Size is in bytes. Zero means that there is no limit.</li> <li><b>back-expiry</b> - minutes, hours or days before content is expired. 10m, 12h or 2d. Zero means never.</li> </ul> When running in a cluster this extra property is required. More properties can be defined depending on the clustering solution being used. <ul> <li><b>back-size-low</b> - Size in byte of the cache after a clean up. Use zero to place no limit.</li> </ul>
+	 * @return    map with the configuration to use for the cache.
+	 * @uml.property  name="params"
+	 */
     public Map<String, String> getParams() {
         return params;
     }
 
+    /**
+	 * @author               donghyuck
+	 */
     public static enum Type {
         /**
-         * Data is fully replicated to every member in the cluster. Offers the fastest read performance. Clustered,
-         * fault-tolerant cache with linear performance scalability for reads, but poor scalability for writes
-         * (as writes must be processed by every member in the cluster). Because data is replicated to all machines,
-         * adding servers does not increase aggregate cache capacity.
-         */
+		 * @uml.property  name="replicated"
+		 * @uml.associationEnd  
+		 */
         replicated("replicated"),
         /**
-         * OptimisticCache is a clustered cache implementation similar to the ReplicatedCache implementation, but
-         * without any concurrency control. This implementation has the highest possible throughput. It also allows
-         * to use an alternative underlying store for the cached data (for example, a MRU/MFU-based cache). However,
-         * if two cluster members are independently pruning or purging the underlying local stores, it is possible
-         * that a cluster member may have a different store content than that held by another cluster member.
-         * This cache is good for frequent reads and not frequent writes. However, this cache will not scale fine
-         * if it has lot of content that will end up consuming all the JVM memory. For this case a
-         * {@link #distributed} is a better option.
-         */
+		 * @uml.property  name="optimistic"
+		 * @uml.associationEnd  
+		 */
         optimistic("optimistic"),
         /**
-         * An distributed-scheme defines caches where the storage for entries is partitioned across cluster nodes.
-         * A hybrid cache; fronts a fault-tolerant, scalable partitioned cache with a local cache. Near cache
-         * invalidates front cache entries, using configurable invalidation strategy, and provides excellent
-         * performance and synchronization. Near cache backed by a partitioned cache offers zero-millisecond local
-         * access for repeat data access, while enabling concurrency and ensuring coherency and fail-over,
-         * effectively combining the best attributes of replicated and partitioned caches.
-         */
+		 * @uml.property  name="distributed"
+		 * @uml.associationEnd  
+		 */
         distributed("near-distributed");
 
+        /**
+		 * @uml.property  name="name"
+		 */
         private String name;
         Type(String name) {
             this.name = name;
@@ -131,6 +119,10 @@ public class CacheInfo {
             return distributed;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="name"
+		 */
         public String getName() {
             return name;
         }

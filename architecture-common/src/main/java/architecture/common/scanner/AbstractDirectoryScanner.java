@@ -7,19 +7,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 
+/**
+ * @author    donghyuck
+ */
 public abstract class AbstractDirectoryScanner {
 
     protected Log log = LogFactory.getLog(getClass());
 	
 	private static final int DEFAULT_POOL_INTERVAL_MILLIS = 5000;
 	
+	/**
+	 * @uml.property  name="pollIntervalMillis"
+	 */
 	private int pollIntervalMillis = DEFAULT_POOL_INTERVAL_MILLIS;
 	
+	/**
+	 * @uml.property  name="scanEnabled"
+	 */
 	private boolean scanEnabled = true;
     
 	// 이부분을 동기화 되도록 수정한다.
     private final LinkedList<DirectoryListener> listenerList = new LinkedList<DirectoryListener>();
 	
+	/**
+	 * @uml.property  name="scannerThread"
+	 * @uml.associationEnd  
+	 */
 	private ScannerThread scannerThread;
 	
 	// ///////////////////////////////////////////////////////////////////////
@@ -96,18 +109,34 @@ public abstract class AbstractDirectoryScanner {
     }
     
     
+	/**
+	 * @return
+	 * @uml.property  name="pollIntervalMillis"
+	 */
 	public int getPollIntervalMillis() {
         return pollIntervalMillis;
     }
 
+    /**
+	 * @param  pollIntervalMillis
+	 * @uml.property  name="pollIntervalMillis"
+	 */
     public void setPollIntervalMillis(int pollIntervalMillis) {
         this.pollIntervalMillis = pollIntervalMillis;
     }
     
+	/**
+	 * @param  flag
+	 * @uml.property  name="scanEnabled"
+	 */
 	public void setScanEnabled(final boolean flag) {
 		this.scanEnabled = flag;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="scanEnabled"
+	 */
 	public boolean isScanEnabled() {
 		return scanEnabled;
 	}
