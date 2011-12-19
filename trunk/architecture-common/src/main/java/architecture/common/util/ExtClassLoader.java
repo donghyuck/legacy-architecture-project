@@ -10,6 +10,9 @@ import java.util.Enumeration;
 import java.util.StringTokenizer;
 
 
+/**
+ * @author    donghyuck
+ */
 public class ExtClassLoader extends URLClassLoader {
 
     public static interface Gateway
@@ -23,9 +26,17 @@ public class ExtClassLoader extends URLClassLoader {
     }
 
 
+    /**
+	 * @uml.property  name="instance"
+	 * @uml.associationEnd  
+	 */
     private static ExtClassLoader instance;
     
     
+    /**
+	 * @return
+	 * @uml.property  name="instance"
+	 */
     public static ExtClassLoader getInstance()
     {
         if(instance != null)
@@ -38,11 +49,15 @@ public class ExtClassLoader extends URLClassLoader {
         }
     }
 
+    /**
+	 * @uml.property  name="gateway"
+	 * @uml.associationEnd  
+	 */
     private Gateway gateway;
 
     protected ArrayList<URL> containedPaths;
 
-    protected ArrayList nativePaths;
+    protected ArrayList<URL> nativePaths;
 
     String classpath;
 
@@ -63,7 +78,7 @@ public class ExtClassLoader extends URLClassLoader {
         super(new URL[0], classloader);
         gateway = null;
         containedPaths = new ArrayList<URL>();
-        nativePaths = new ArrayList();
+        nativePaths = new ArrayList<URL>();
         classpath = null;
         nativepath = null;
         if(path != null)

@@ -23,16 +23,15 @@ package architecture.common.plugin;
 import architecture.common.lifecycle.Application;
 
 /**
- * A default Module implementation that basically avoids subclasses having to implement the whole
- * Module interface.</p>
- *
- * @author Gaston Dombiak
+ * A default Module implementation that basically avoids subclasses having to implement the whole Module interface.</p>
+ * @author    Gaston Dombiak
  */
 public class BasicModule implements Module {
 
     /**
-     * The name of the module
-     */
+	 * The name of the module
+	 * @uml.property  name="name"
+	 */
     private String name;
 
     /**
@@ -50,10 +49,10 @@ public class BasicModule implements Module {
     }
 
     /**
-     * <p>Obtain the name of the module.</p>
-     *
-     * @return The name of the module
-     */
+	 * <p>Obtain the name of the module.</p>
+	 * @return    The name of the module
+	 * @uml.property  name="name"
+	 */
     public String getName() {
         return name;
     }

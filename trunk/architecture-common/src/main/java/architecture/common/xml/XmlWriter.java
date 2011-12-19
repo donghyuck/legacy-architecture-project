@@ -11,8 +11,7 @@ import java.io.*;
 import java.util.*;
 
 /**
- * Replacement class of the original XMLWriter.java (version: 1.77) since the original is still
- * using StringBuffer which is not fast. 
+ * Replacement class of the original XMLWriter.java (version: 1.77) since the original is still using StringBuffer which is not fast.
  */
 public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
 
@@ -44,7 +43,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
     /** The format used by this writer */
     private OutputFormat format;
 
-    /** whether we should escape text */
+    /**
+	 * whether we should escape text
+	 * @uml.property  name="escapeText"
+	 */
     private boolean escapeText = true;
     /** The initial number of indentations (so you can print a whole
         document indented, if you like) **/
@@ -60,7 +62,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
     /** Whether a flush should occur after writing a document */
     private boolean autoFlush;
 
-    /** Lexical handler we should delegate to */
+    /**
+	 * Lexical handler we should delegate to
+	 * @uml.property  name="lexicalHandler"
+	 */
     private LexicalHandler lexicalHandler;
 
     /** Whether comments should appear inside DTD declarations - defaults to false */
@@ -73,10 +78,9 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
     private Map namespacesMap;
 
     /**
-     * what is the maximum allowed character code
-     * such as 127 in US-ASCII (7 bit) or 255 in ISO-* (8 bit)
-     * or -1 to not escape any characters (other than the special XML characters like < > &)
-     */
+	 * what is the maximum allowed character code such as 127 in US-ASCII (7 bit) or 255 in ISO-* (8 bit) or -1 to not escape any characters (other than the special XML characters like < > &)
+	 * @uml.property  name="maximumAllowedCharacter"
+	 */
     private int maximumAllowedCharacter;
 
     public XmlWriter(Writer writer) {
@@ -117,6 +121,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
 		namespaceStack.push(Namespace.NO_NAMESPACE);
     }
 
+    /**
+	 * @param  writer
+	 * @uml.property  name="writer"
+	 */
     public void setWriter(Writer writer) {
         this.writer = writer;
         this.autoFlush = false;
@@ -128,42 +136,35 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
     }
 
     /**
-     * @return true if text thats output should be escaped.
-     * This is enabled by default. It could be disabled if
-     * the output format is textual, like in XSLT where we can have
-     * xml, html or text output.
-     */
+	 * @return    true if text thats output should be escaped.  This is enabled by default. It could be disabled if  the output format is textual, like in XSLT where we can have  xml, html or text output.
+	 * @uml.property  name="escapeText"
+	 */
     public boolean isEscapeText() {
         return escapeText;
     }
 
     /**
-     * Sets whether text output should be escaped or not.
-     * This is enabled by default. It could be disabled if
-     * the output format is textual, like in XSLT where we can have
-     * xml, html or text output.
-     */
+	 * Sets whether text output should be escaped or not. This is enabled by default. It could be disabled if the output format is textual, like in XSLT where we can have xml, html or text output.
+	 * @uml.property  name="escapeText"
+	 */
     public void setEscapeText(boolean escapeText) {
         this.escapeText = escapeText;
     }
 
 
-    /** Set the initial indentation level.  This can be used to output
-      * a document (or, more likely, an element) starting at a given
-      * indent level, so it's not always flush against the left margin.
-      * Default: 0
-      *
-      * @param indentLevel the number of indents to start with
-      */
+    /**
+	 * Set the initial indentation level.  This can be used to output a document (or, more likely, an element) starting at a given indent level, so it's not always flush against the left margin. Default: 0
+	 * @param indentLevel    the number of indents to start with
+	 * @uml.property  name="indentLevel"
+	 */
     public void setIndentLevel(int indentLevel) {
         this.indentLevel = indentLevel;
     }
 
     /**
-     * Returns the maximum allowed character code that should be allowed
-     * unescaped which defaults to 127 in US-ASCII (7 bit) or
-     * 255 in ISO-* (8 bit).
-     */
+	 * Returns the maximum allowed character code that should be allowed unescaped which defaults to 127 in US-ASCII (7 bit) or 255 in ISO-* (8 bit).
+	 * @uml.property  name="maximumAllowedCharacter"
+	 */
     public int getMaximumAllowedCharacter() {
         if (maximumAllowedCharacter == 0) {
             maximumAllowedCharacter = defaultMaximumAllowedCharacter();
@@ -172,15 +173,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
     }
 
     /**
-     * Sets the maximum allowed character code that should be allowed
-     * unescaped
-     * such as 127 in US-ASCII (7 bit) or 255 in ISO-* (8 bit)
-     * or -1 to not escape any characters (other than the special XML characters like < > &)
-     *
-     * If this is not explicitly set then it is defaulted from the encoding.
-     *
-     * @param maximumAllowedCharacter The maximumAllowedCharacter to set
-     */
+	 * Sets the maximum allowed character code that should be allowed unescaped such as 127 in US-ASCII (7 bit) or 255 in ISO-* (8 bit) or -1 to not escape any characters (other than the special XML characters like < > &) If this is not explicitly set then it is defaulted from the encoding.
+	 * @param maximumAllowedCharacter    The maximumAllowedCharacter to set
+	 * @uml.property  name="maximumAllowedCharacter"
+	 */
     public void setMaximumAllowedCharacter(int maximumAllowedCharacter) {
         this.maximumAllowedCharacter = maximumAllowedCharacter;
     }
@@ -447,6 +443,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
         return super.getProperty(name);
     }
 
+    /**
+	 * @param  handler
+	 * @uml.property  name="lexicalHandler"
+	 */
     public void setLexicalHandler (LexicalHandler handler) {
         if (handler == null) {
             throw new NullPointerException("Null lexical handler");
@@ -456,6 +456,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
         }
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="lexicalHandler"
+	 */
     public LexicalHandler getLexicalHandler(){
         return lexicalHandler;
     }
@@ -1498,6 +1502,10 @@ public class XmlWriter extends XMLFilterImpl implements LexicalHandler {
         return resolveEntityRefs;
     }
 
+    /**
+	 * @param  resolve
+	 * @uml.property  name="resolveEntityRefs"
+	 */
     public void setResolveEntityRefs(boolean resolve) {
         this.resolveEntityRefs = resolve;
     }

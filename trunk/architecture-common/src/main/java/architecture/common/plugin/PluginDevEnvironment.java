@@ -23,45 +23,51 @@ package architecture.common.plugin;
 import java.io.File;
 
 /**
- * Represents the data model used to represent development mode within the Jive
- * Openfire plugin framework.
- *
- * @author Derek DeMoro
+ * Represents the data model used to represent development mode within the Jive Openfire plugin framework.
+ * @author    Derek DeMoro
  */
 public class PluginDevEnvironment {
+    /**
+	 * @uml.property  name="webRoot"
+	 */
     private File webRoot;
+    /**
+	 * @uml.property  name="classesDir"
+	 */
     private File classesDir;
 
     /**
-     * Returns the document root of a plugins web development
-     * application.
-     *
-     * @return the document root of a plugin.
-     */
+	 * Returns the document root of a plugins web development application.
+	 * @return    the document root of a plugin.
+	 * @uml.property  name="webRoot"
+	 */
     public File getWebRoot() {
         return webRoot;
     }
 
     /**
-     * Set the document root of a plugin.
-     * @param webRoot the document root of a plugin.
-     */
+	 * Set the document root of a plugin.
+	 * @param webRoot    the document root of a plugin.
+	 * @uml.property  name="webRoot"
+	 */
     public void setWebRoot(File webRoot) {
         this.webRoot = webRoot;
     }
 
     /**
-     * Returns the classes directory of a plugin in development mode.
-     * @return the classes directory of a plugin in development mode.
-     */
+	 * Returns the classes directory of a plugin in development mode.
+	 * @return    the classes directory of a plugin in development mode.
+	 * @uml.property  name="classesDir"
+	 */
     public File getClassesDir() {
         return classesDir;
     }
 
     /**
-     * Sets the classes directory of a plugin used in development mode.
-     * @param classesDir the classes directory.
-     */
+	 * Sets the classes directory of a plugin used in development mode.
+	 * @param classesDir    the classes directory.
+	 * @uml.property  name="classesDir"
+	 */
     public void setClassesDir(File classesDir) {
         this.classesDir = classesDir;
     }
