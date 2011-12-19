@@ -15,17 +15,60 @@
  */
 package architecture.common.lifecycle;
 
+/**
+ * @author               donghyuck
+ */
 public enum State {
 	
+	/**
+	 * @uml.property  name="nONE"
+	 * @uml.associationEnd  
+	 */
 	NONE("NONE"),	
+	/**
+	 * @uml.property  name="iNITIALIZING"
+	 * @uml.associationEnd  
+	 */
 	INITIALIZING("INITIALIZING"),
+	/**
+	 * @uml.property  name="iNITIALIZED"
+	 * @uml.associationEnd  
+	 */
 	INITIALIZED("INITIALIZED"),	
+	/**
+	 * @uml.property  name="sTARTING"
+	 * @uml.associationEnd  
+	 */
 	STARTING("STARTING"),
+	/**
+	 * @uml.property  name="sTARTED"
+	 * @uml.associationEnd  
+	 */
 	STARTED("STARTED"),	
+	/**
+	 * @uml.property  name="sTOPING"
+	 * @uml.associationEnd  
+	 */
 	STOPING("STOPING"),
+	/**
+	 * @uml.property  name="rUNNING"
+	 * @uml.associationEnd  
+	 */
 	RUNNING("RUNNING"),
+	/**
+	 * @uml.property  name="sTOPED"
+	 * @uml.associationEnd  
+	 */
 	STOPED("STOPED"),	
+	/**
+	 * @uml.property  name="dESTROYING"
+	 * @uml.associationEnd  
+	 */
 	DESTROYING("DESTROYING"),
+	/**
+	 * @uml.property  name="dESTROYED"
+	 * @uml.associationEnd  
+	 */
 	DESTROYED("DESTROYED");
 		
 	private String desc;

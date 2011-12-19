@@ -18,10 +18,19 @@ package architecture.common.lifecycle;
 import java.util.Date;
 import java.util.UUID;
 
+/**
+ * @author    donghyuck
+ */
 public abstract class Event extends java.util.EventObject {
  
+	/**
+	 * @uml.property  name="uuid"
+	 */
 	private UUID uuid;
 	   
+	/**
+	 * @uml.property  name="actor"
+	 */
 	private Object actor;
     
 	private Date createdDate;
@@ -37,10 +46,18 @@ public abstract class Event extends java.util.EventObject {
         return createdDate;
     }
     
+    /**
+	 * @return
+	 * @uml.property  name="actor"
+	 */
     public Object getActor() {
         return actor;
     }
 
+    /**
+	 * @param  actor
+	 * @uml.property  name="actor"
+	 */
     public void setActor(Object actor) {
         this.actor = actor;
     }
@@ -50,6 +67,10 @@ public abstract class Event extends java.util.EventObject {
         this.createdDate = createdDate;
     }
     
+    /**
+	 * @return
+	 * @uml.property  name="uuid"
+	 */
     public UUID getUuid()
     {
         return uuid;

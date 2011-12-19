@@ -23,8 +23,15 @@ import java.util.Set;
 
 public class EmptyApplicationProperties extends AbstractApplicationProperties {
 
+	/**
+	 * @author    donghyuck
+	 */
 	private static class InstanceHolder {
 
+		/**
+		 * @uml.property  name="instance"
+		 * @uml.associationEnd  
+		 */
 		private static final EmptyApplicationProperties instance = new EmptyApplicationProperties();
 
 		private InstanceHolder() {

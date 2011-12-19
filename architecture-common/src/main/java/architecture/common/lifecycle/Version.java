@@ -2,38 +2,44 @@ package architecture.common.lifecycle;
 
 /**
  * Holds version information for Openfire.
- * 
- * @author Iain Shigeoka
+ * @author    Iain Shigeoka
  */
 public class Version {
 
 	/**
 	 * The major number (ie 1.x.x).
+	 * @uml.property  name="major"
 	 */
 	private int major;
 
 	/**
 	 * The minor version number (ie x.1.x).
+	 * @uml.property  name="minor"
 	 */
 	private int minor;
 
 	/**
 	 * The micro version number (ie x.x.1).
+	 * @uml.property  name="micro"
 	 */
 	private int micro;
 
 	/**
 	 * A status release number or -1 to indicate none.
+	 * @uml.property  name="statusVersion"
 	 */
 	private int statusVersion;
 
 	/**
 	 * The release state of the product (Release, Release Candidate).
+	 * @uml.property  name="status"
+	 * @uml.associationEnd  
 	 */
 	private ReleaseStatus status;
 
 	/**
 	 * Cached version string information
+	 * @uml.property  name="versionString"
 	 */
 	private String versionString;
 
@@ -71,10 +77,9 @@ public class Version {
 	}
 
 	/**
-	 * Returns the version number of this instance of Openfire as a String (ie
-	 * major.minor.revision).
-	 * 
-	 * @return The version as a string
+	 * Returns the version number of this instance of Openfire as a String (ie major.minor.revision).
+	 * @return    The version as a string
+	 * @uml.property  name="versionString"
 	 */
 	public String getVersionString() {
 		return versionString;
@@ -82,8 +87,8 @@ public class Version {
 
 	/**
 	 * Returns the release status of this product.
-	 * 
-	 * @return the release status of this product.
+	 * @return    the release status of this product.
+	 * @uml.property  name="status"
 	 */
 	public ReleaseStatus getStatus() {
 		return status;
@@ -91,8 +96,8 @@ public class Version {
 
 	/**
 	 * Obtain the major release number for this product.
-	 * 
-	 * @return The major release number 1.x.x
+	 * @return    The major release number 1.x.x
+	 * @uml.property  name="major"
 	 */
 	public int getMajor() {
 		return major;
@@ -100,8 +105,8 @@ public class Version {
 
 	/**
 	 * Obtain the minor release number for this product.
-	 * 
-	 * @return The minor release number x.1.x
+	 * @return    The minor release number x.1.x
+	 * @uml.property  name="minor"
 	 */
 	public int getMinor() {
 		return minor;
@@ -109,31 +114,43 @@ public class Version {
 
 	/**
 	 * Obtain the micro release number for this product.
-	 * 
-	 * @return The micro release number x.x.1
+	 * @return    The micro release number x.x.1
+	 * @uml.property  name="micro"
 	 */
 	public int getMicro() {
 		return micro;
 	}
 
 	/**
-	 * Obtain the status relase number for this product. For example, if the
-	 * release status is <strong>alpha</strong> the release may be
-	 * <strong>5</strong> resulting in a release status of <strong>Alpha
-	 * 5</strong>.
-	 * 
-	 * @return The status version or -1 if none is set.
+	 * Obtain the status relase number for this product. For example, if the release status is <strong>alpha</strong> the release may be <strong>5</strong> resulting in a release status of <strong>Alpha 5</strong>.
+	 * @return    The status version or -1 if none is set.
+	 * @uml.property  name="statusVersion"
 	 */
 	public int getStatusVersion() {
 		return statusVersion;
 	}
 
 	/**
-	 * A class to represent the release status of the server. Product releases
-	 * are indicated by type safe enum constants.
+	 * A class to represent the release status of the server. Product releases are indicated by type safe enum constants.
 	 */
 	public enum ReleaseStatus {
-		Release(""), Release_Candidate("RC"), Beta("Beta"), Alpha("Alpha");
+		/**
+		 * @uml.property  name="release"
+		 * @uml.associationEnd  
+		 */
+		Release(""), /**
+		 * @uml.property  name="release_Candidate"
+		 * @uml.associationEnd  
+		 */
+		Release_Candidate("RC"), /**
+		 * @uml.property  name="beta"
+		 * @uml.associationEnd  
+		 */
+		Beta("Beta"), /**
+		 * @uml.property  name="alpha"
+		 * @uml.associationEnd  
+		 */
+		Alpha("Alpha");
 
 		private String status;
 

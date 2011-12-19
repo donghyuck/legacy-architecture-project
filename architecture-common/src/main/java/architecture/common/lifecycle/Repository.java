@@ -11,6 +11,8 @@ public interface Repository extends Component {
 	 */
 	public String getRootURI();
 	
+	public String getURI(String name) ;
+	
 	public String getEffectiveRootPath();
 	
 	public ApplicationProperties getSetupApplicationProperties();

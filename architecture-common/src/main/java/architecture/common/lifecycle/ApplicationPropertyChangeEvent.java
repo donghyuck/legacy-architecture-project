@@ -15,14 +15,36 @@
  */
 package architecture.common.lifecycle;
 
+/**
+ * @author    donghyuck
+ */
 public class ApplicationPropertyChangeEvent extends PropertyChangeEvent {
        
+    /**
+	 * @author               donghyuck
+	 */
     public enum Type {
+        /**
+		 * @uml.property  name="aDDED"
+		 * @uml.associationEnd  
+		 */
         ADDED, 
+        /**
+		 * @uml.property  name="rEMOVED"
+		 * @uml.associationEnd  
+		 */
         REMOVED, 
+        /**
+		 * @uml.property  name="mODIFIED"
+		 * @uml.associationEnd  
+		 */
         MODIFIED,
     }
     
+    /**
+	 * @uml.property  name="eventType"
+	 * @uml.associationEnd  
+	 */
     private Type eventType;
     
 	public ApplicationPropertyChangeEvent(Object source, Type eventType, String propertyName, Object oldValue, Object newValue) {
@@ -30,6 +52,10 @@ public class ApplicationPropertyChangeEvent extends PropertyChangeEvent {
 		this.eventType = eventType;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="eventType"
+	 */
 	public Type getEventType() {
 		return eventType;
 	}
