@@ -42,6 +42,5 @@ public class RolesPermissionsAdapter implements PermissionsAdapter {
         }
         return false;
     }
-
-
+    
 }

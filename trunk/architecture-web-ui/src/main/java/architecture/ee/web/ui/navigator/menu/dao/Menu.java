@@ -11,6 +11,7 @@ public class Menu implements Serializable{
     private String name;
     private String description;
     private String xml;
+    
 	public long getId() {
 		return id;
 	}
