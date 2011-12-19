@@ -27,12 +27,26 @@ import architecture.common.exception.RuntimeError;
 import architecture.common.exception.RuntimeWarning;
 
 
+/**
+ * @author    donghyuck
+ */
 public class ComponentImpl implements Component, EventSource {
     
+    /**
+	 * @uml.property  name="name"
+	 */
     protected String name;
     
+    /**
+	 * @uml.property  name="state"
+	 * @uml.associationEnd  
+	 */
     protected volatile State state;
             
+    /**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
+	 */
     private EventPublisher eventPublisher = null;
     
     protected Log log = LogFactory.getLog(getClass());
@@ -43,16 +57,28 @@ public class ComponentImpl implements Component, EventSource {
     	setName(getClass().getSimpleName());
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName()
     {
         return name;
     }
 
+	/**
+	 * @param  name
+	 * @uml.property  name="name"
+	 */
 	public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="state"
+	 */
     public State getState()
     {
         return state;
@@ -91,6 +117,14 @@ public class ComponentImpl implements Component, EventSource {
     	}
     }
 
+    /**
+	 * @param newState
+	 * @throws RuntimeError
+	 * @throws RuntimeWarning
+	 * @throws ConfigurationError
+	 * @throws ConfigurationWarning
+	 * @uml.property  name="state"
+	 */
     protected void setState(State newState) throws RuntimeError, RuntimeWarning, ConfigurationError, ConfigurationWarning
     {	
     	State oldValue = getState();
@@ -112,13 +146,18 @@ public class ComponentImpl implements Component, EventSource {
        }
     }
     
+    /**
+	 * @return
+	 * @uml.property  name="eventPublisher"
+	 */
     protected EventPublisher getEventPublisher(){
     	return eventPublisher;
     }
     
     /**
-     * method from EventSource interface!
-     */
+	 * method from EventSource interface!
+	 * @uml.property  name="eventPublisher"
+	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;		
 	}

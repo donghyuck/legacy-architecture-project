@@ -15,26 +15,29 @@
  */
 package architecture.common.lifecycle;
 
+/**
+ * @author    donghyuck
+ */
 public class PropertyChangeEvent  extends Event {
 
 	/**
 	 * name of the property that changed. May be null, if not known.
-	 * 
 	 * @serial
+	 * @uml.property  name="propertyName"
 	 */
 	private String propertyName;
 
 	/**
 	 * New value for property. May be null if not known.
-	 * 
 	 * @serial
+	 * @uml.property  name="newValue"
 	 */
 	private Object newValue;
 
 	/**
 	 * Previous value for property. May be null if not known.
-	 * 
 	 * @serial
+	 * @uml.property  name="oldValue"
 	 */
 	private Object oldValue;
 
@@ -47,9 +50,8 @@ public class PropertyChangeEvent  extends Event {
 
 	/**
 	 * Gets the programmatic name of the property that was changed.
-	 * 
-	 * @return The programmatic name of the property that was changed. May be
-	 *         null if multiple properties have changed.
+	 * @return    The programmatic name of the property that was changed. May be  null if multiple properties have changed.
+	 * @uml.property  name="propertyName"
 	 */
 	public String getPropertyName() {
 		return propertyName;
@@ -57,9 +59,8 @@ public class PropertyChangeEvent  extends Event {
 
 	/**
 	 * Gets the new value for the property, expressed as an Object.
-	 * 
-	 * @return The new value for the property, expressed as an Object. May be
-	 *         null if multiple properties have changed.
+	 * @return    The new value for the property, expressed as an Object. May be  null if multiple properties have changed.
+	 * @uml.property  name="newValue"
 	 */
 	public Object getNewValue() {
 		return newValue;
@@ -67,9 +68,8 @@ public class PropertyChangeEvent  extends Event {
 
 	/**
 	 * Gets the old value for the property, expressed as an Object.
-	 * 
-	 * @return The old value for the property, expressed as an Object. May be
-	 *         null if multiple properties have changed.
+	 * @return    The old value for the property, expressed as an Object. May be  null if multiple properties have changed.
+	 * @uml.property  name="oldValue"
 	 */
 	public Object getOldValue() {
 		return oldValue;

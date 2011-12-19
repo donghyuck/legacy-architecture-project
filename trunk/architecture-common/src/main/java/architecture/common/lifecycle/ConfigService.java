@@ -7,6 +7,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+/**
+ * @author               donghyuck
+ */
 public interface ConfigService extends Component{
 
 	public Repository getRepository();
@@ -18,18 +21,21 @@ public interface ConfigService extends Component{
 	/**
 	 * 로케일을 리턴한다.	
 	 * @return
+	 * @uml.property  name="locale"
 	 */
 	public Locale getLocale();
 	
 	/**
 	 * 로케일을 지정한다.
-	 * @param newLocale
+	 * @param  newLocale
+	 * @uml.property  name="locale"
 	 */
 	public void setLocale(Locale newLocale);
 	
 	/**
 	 * 인코딩을 리턴한다.
 	 * @return
+	 * @uml.property  name="characterEncoding"
 	 */
 	public String getCharacterEncoding();
 	
@@ -37,18 +43,21 @@ public interface ConfigService extends Component{
 	 * 인코딩을 설정한다.
 	 * @param characterEncoding
 	 * @throws UnsupportedEncodingException
+	 * @uml.property  name="characterEncoding"
 	 */
 	public void setCharacterEncoding(String characterEncoding) throws UnsupportedEncodingException ;
 		
 	/**
 	 * 시간대를 리턴한다.
 	 * @return
+	 * @uml.property  name="timeZone"
 	 */
 	public TimeZone getTimeZone();
 	
 	/**
 	 * 시간대를 설정한다.
-	 * @param newTimeZone
+	 * @param  newTimeZone
+	 * @uml.property  name="timeZone"
 	 */
 	public void setTimeZone(TimeZone newTimeZone);
 	

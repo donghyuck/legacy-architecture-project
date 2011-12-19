@@ -9,8 +9,15 @@ import java.util.Set;
 
 import architecture.common.xml.XmlProperties;
 
+/**
+ * @author    donghyuck
+ */
 public class XmlApplicationProperties extends AbstractApplicationProperties {
 
+	/**
+	 * @uml.property  name="properties"
+	 * @uml.associationEnd  
+	 */
 	private XmlProperties properties;
 
 	public XmlApplicationProperties(File fileToUse) throws IOException {

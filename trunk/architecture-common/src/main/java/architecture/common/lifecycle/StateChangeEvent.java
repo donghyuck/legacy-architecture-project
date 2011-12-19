@@ -16,10 +16,21 @@
 package architecture.common.lifecycle;
 
 
+/**
+ * @author    donghyuck
+ */
 public class StateChangeEvent extends Event {
    
+    /**
+	 * @uml.property  name="oldState"
+	 * @uml.associationEnd  
+	 */
     private State oldState;
     
+    /**
+	 * @uml.property  name="newState"
+	 * @uml.associationEnd  
+	 */
     private State newState;;
     
     public StateChangeEvent(Object source, State oldState, State newState)
@@ -29,10 +40,18 @@ public class StateChangeEvent extends Event {
         this.newState = newState;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="newState"
+	 */
     public State getNewState()
     {
         return newState;
     }
+    /**
+	 * @return
+	 * @uml.property  name="oldState"
+	 */
     public State getOldState()
     {
         return oldState;

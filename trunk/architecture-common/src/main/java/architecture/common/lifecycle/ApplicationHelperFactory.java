@@ -17,6 +17,9 @@ package architecture.common.lifecycle;
 
 import architecture.common.util.ImplFactory;
 
+/**
+ * @author    donghyuck
+ */
 public class ApplicationHelperFactory {
 
 	public static interface Implementation
@@ -24,6 +27,10 @@ public class ApplicationHelperFactory {
 		public abstract ApplicationHelper getApplicationHelper();		
     }
 	
+	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
+	 */
 	private static Implementation impl = null;
     
     static 
