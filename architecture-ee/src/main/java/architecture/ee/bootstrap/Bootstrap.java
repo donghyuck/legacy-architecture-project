@@ -6,7 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ConfigService;
-import architecture.common.util.ImplFactory;
+import architecture.ee.bootstrap.impl.BootstrapImpl;
 
 /**
  * @author  donghyuck
@@ -26,14 +26,12 @@ public class Bootstrap {
 	}
 	
 	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
     
     static 
     {
-        impl = (Implementation)ImplFactory.loadImplFromKey(Bootstrap.Implementation.class);
+        impl = new BootstrapImpl();//ImplFactory.loadImplFromKey(Bootstrap.Implementation.class);
     }
    	
 	public static <T> T getBootstrapComponent(Class<T> requiredType){

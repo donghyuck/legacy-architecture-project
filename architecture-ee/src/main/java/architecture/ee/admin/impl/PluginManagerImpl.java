@@ -25,14 +25,10 @@ public class PluginManagerImpl implements PluginManager, EventSource {
 	protected DataSource dataSource;
 	
     /**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
 	 */
     private EventPublisher eventPublisher ;
     private AtomicBoolean initialized;
     /**
-	 * @uml.property  name="taskEngine"
-	 * @uml.associationEnd  
 	 */
     private TaskEngine taskEngine;
 	
@@ -63,7 +59,6 @@ public class PluginManagerImpl implements PluginManager, EventSource {
 
     /**
 	 * @param eventPublisher
-	 * @uml.property  name="eventPublisher"
 	 */
     public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
@@ -71,7 +66,6 @@ public class PluginManagerImpl implements PluginManager, EventSource {
 
     /**
 	 * @param taskEngine
-	 * @uml.property  name="taskEngine"
 	 */
     public void setTaskEngine(TaskEngine taskEngine) {
 		this.taskEngine = taskEngine;
@@ -79,7 +73,6 @@ public class PluginManagerImpl implements PluginManager, EventSource {
 
     /**
 	 * @param dataSource
-	 * @uml.property  name="dataSource"
 	 */
     public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;

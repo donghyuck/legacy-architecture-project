@@ -49,31 +49,25 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 	private Log log = LogFactory.getLog(getClass());
 
 	/**
-	 * @uml.property  name="prefix"
 	 */
 	private String prefix = "";
 	
 	/**
-	 * @uml.property  name="suffix"
 	 */
 	private String suffix = "queryset.xml";
 	
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration;
 
 	private DataSource dataSource;
 
 	/**
-	 * @uml.property  name="resourceLocations"
 	 */
 	private List<String> resourceLocations;
 
 	/**
 	 * @return
-	 * @uml.property  name="configuration"
 	 */
 	public Configuration getConfiguration() {
 		return configuration;
@@ -124,7 +118,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 
 	/**
 	 * @return
-	 * @uml.property  name="resourceLocations"
 	 */
 	public List<String> getResourceLocations() {
 		return this.resourceLocations;
@@ -147,7 +140,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 
 	/**
 	 * @param dataSource
-	 * @uml.property  name="dataSource"
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -155,7 +147,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 
 	/**
 	 * @param resourceLocations
-	 * @uml.property  name="resourceLocations"
 	 */
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
@@ -163,7 +154,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 
 	/**
 	 * @return
-	 * @uml.property  name="prefix"
 	 */
 	public String getPrefix() {
 		return prefix;
@@ -174,7 +164,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 	 */
 	/**
 	 * @param prefix
-	 * @uml.property  name="prefix"
 	 */
 	public void setPrefix(String prefix) {
 		this.prefix = (prefix != null ? prefix : "");
@@ -182,7 +171,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 
     /**
 	 * @return
-	 * @uml.property  name="suffix"
 	 */
     public String getSuffix() {
 		return suffix;
@@ -190,7 +178,6 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
     
 	/**
 	 * Set the suffix that gets appended to view names when building a URL.
-	 * @uml.property  name="suffix"
 	 */
 	public void setSuffix(String suffix) {
 		this.suffix = (suffix != null ? suffix : "");

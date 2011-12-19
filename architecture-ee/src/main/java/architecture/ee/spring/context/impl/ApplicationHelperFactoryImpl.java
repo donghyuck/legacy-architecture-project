@@ -11,8 +11,6 @@ import architecture.ee.bootstrap.Bootstrap;
 public class ApplicationHelperFactoryImpl implements Implementation {
 
 	/**
-	 * @uml.property  name="helper"
-	 * @uml.associationEnd  
 	 */
 	private ApplicationHelper helper = null;
 	

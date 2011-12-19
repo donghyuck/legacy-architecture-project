@@ -23,8 +23,6 @@ public class DataSourceFactory {
 	}
 	
 	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
     

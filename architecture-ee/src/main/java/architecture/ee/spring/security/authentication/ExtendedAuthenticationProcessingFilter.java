@@ -12,11 +12,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import architecture.ee.user.UserManager;
-
 import architecture.ee.user.UserTemplate;
 
 /**
@@ -26,19 +24,18 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
 
 	private Log log = LogFactory.getLog(getClass());
 	/**
-	 * @uml.property  name="userManager"
-	 * @uml.associationEnd  
 	 */
 	private UserManager userManager;
 
 	public void setDefaultTargetUrl(String defaultTargetUrl) {		
-		SavedRequestAwareAuthenticationSuccessHandler handler = new SavedRequestAwareAuthenticationSuccessHandler();
+		ExtendedSavedRequestAwareAuthenticationSuccessHandler handler = new ExtendedSavedRequestAwareAuthenticationSuccessHandler();
 		handler.setDefaultTargetUrl(defaultTargetUrl);
 		this.setAuthenticationSuccessHandler(handler);
 	}
 
 	public void setAuthenticationFailureUrl(String authenticationFailureUrl) {
-		setAuthenticationFailureHandler(new SimpleUrlAuthenticationFailureHandler(authenticationFailureUrl));
+		ExtendedUrlAuthenticationFailureHandler handler = new ExtendedUrlAuthenticationFailureHandler(authenticationFailureUrl);
+		setAuthenticationFailureHandler(handler);
 	}
 
 	@Override
@@ -84,7 +81,6 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
 	
 	/**
 	 * @param userManager
-	 * @uml.property  name="userManager"
 	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;

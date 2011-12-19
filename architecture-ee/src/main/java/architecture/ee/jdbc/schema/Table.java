@@ -8,21 +8,16 @@ import java.util.Map;
  */
 public class Table {
 	/**
-	 * @uml.property  name="name"
 	 */
 	private String name;
 	/**
-	 * @uml.property  name="catalog"
 	 */
 	private String catalog;
 	/**
-	 * @uml.property  name="schema"
 	 */
 	private String schema;
 	private Map<String, Column> columns = new LinkedHashMap<String, Column>();
 	/**
-	 * @uml.property  name="primaryKey"
-	 * @uml.associationEnd  
 	 */
 	private Column primaryKey;
 
@@ -32,7 +27,6 @@ public class Table {
 
 	/**
 	 * @return
-	 * @uml.property  name="name"
 	 */
 	public String getName() {
 		return name;
@@ -40,7 +34,6 @@ public class Table {
 
 	/**
 	 * @return
-	 * @uml.property  name="catalog"
 	 */
 	public String getCatalog() {
 		return catalog;
@@ -48,7 +41,6 @@ public class Table {
 
 	/**
 	 * @param catalog
-	 * @uml.property  name="catalog"
 	 */
 	public void setCatalog(String catalog) {
 		this.catalog = catalog;
@@ -56,7 +48,6 @@ public class Table {
 
 	/**
 	 * @return
-	 * @uml.property  name="schema"
 	 */
 	public String getSchema() {
 		return schema;
@@ -64,7 +55,6 @@ public class Table {
 
 	/**
 	 * @param schema
-	 * @uml.property  name="schema"
 	 */
 	public void setSchema(String schema) {
 		this.schema = schema;
@@ -84,7 +74,6 @@ public class Table {
 
 	/**
 	 * @param column
-	 * @uml.property  name="primaryKey"
 	 */
 	public void setPrimaryKey(Column column) {
 		primaryKey = column;
@@ -92,7 +81,6 @@ public class Table {
 
 	/**
 	 * @return
-	 * @uml.property  name="primaryKey"
 	 */
 	public Column getPrimaryKey() {
 		return primaryKey;

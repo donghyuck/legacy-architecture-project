@@ -16,8 +16,6 @@ public class RecordsetFactory {
 	}
 
 	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
 

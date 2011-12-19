@@ -32,6 +32,7 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 	class LocalizerRowMapper implements RowMapper<I18nLocalizer> {
 
 		public I18nLocalizer mapRow(ResultSet rs, int rowNum) throws SQLException {	
+			
 			I18nLocalizerModelImpl impl = new I18nLocalizerModelImpl();		
 			impl.setLocalizerId(rs.getLong(1));
 			impl.setLocaleId(rs.getLong(2));
@@ -39,7 +40,10 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 			impl.setDescription(rs.getString(4));
 			impl.setCreationDate(rs.getDate(5));
 			impl.setModifiedDate(rs.getDate(6));
+			
+			log.debug(impl);
 			return impl;
+			
 		}};
 
 				
@@ -48,15 +52,12 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 	}
 	
 	/**
-	 * @uml.property  name="i18nLocaleDao"
-	 * @uml.associationEnd  
 	 */
 	private I18nLocaleDao i18nLocaleDao ;
 	
 		
 	/**
 	 * @return
-	 * @uml.property  name="i18nLocaleDao"
 	 */
 	public I18nLocaleDao getI18nLocaleDao() {
 		return i18nLocaleDao;
@@ -64,7 +65,6 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 
 	/**
 	 * @param i18nLocaleDao
-	 * @uml.property  name="i18nLocaleDao"
 	 */
 	public void setI18nLocaleDao(I18nLocaleDao i18nLocaleDao) {
 		this.i18nLocaleDao = i18nLocaleDao;
@@ -80,6 +80,9 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 			localizer.setI18nLocale(i18nLocaleDao.getI18nLocaleById(localizer.getLocalizerId()));
 			localizer.setI18nTexts(getTexts(localizer.getLocalizerId()));
 		}
+		
+		log.debug(list);
+		
 		return list;
 	}
 
@@ -162,6 +165,7 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 					String value = rs.getString(3);
 					rows.put(key, value);
 				}
+				log.debug(">>" + rows);
 				return rows;
 			}});		
 	}
@@ -188,11 +192,23 @@ public class JdbcI18nLocalizerDao extends ExtendedJdbcDaoSupport implements I18n
 	}
 
 	public List<I18nLocalizer> getI18nLocalizersByName(String name) {
-		List<I18nLocalizer> list = getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_LOCALIZER_BY_NAME").getSql(), new Object[]{name}, getLocalizerRowMapper() );	
+		
+		log.debug("[" + name + "]");
+		
+		List<I18nLocalizer> list = getExtendedJdbcTemplate().query(
+				getBoundSql("FRAMEWORK_V2.SELECT_LOCALIZER_BY_NAME").getSql(), 
+				new Object[]{name}, 
+				getLocalizerRowMapper() 
+		);	
+		
+		log.debug("list<bf>" + list );
+		
 		for(I18nLocalizer localizer : list ){
 			localizer.setI18nLocale(i18nLocaleDao.getI18nLocaleById(localizer.getLocalizerId()));
 			localizer.setI18nTexts(getTexts(localizer.getLocalizerId()));
 		}
+		log.debug("list<af>" + list );
+		
 		return list;
 	}
 

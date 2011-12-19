@@ -31,8 +31,6 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
 	/**
-	 * @uml.property  name="repository"
-	 * @uml.associationEnd  
 	 */
 	private RepositoryImpl repository = new RepositoryImpl();
 	

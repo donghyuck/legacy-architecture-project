@@ -78,8 +78,6 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	};	
 	
 	/**
-	 * @uml.property  name="extendedPropertyDao"
-	 * @uml.associationEnd  
 	 */
 	private ExtendedPropertyDao extendedPropertyDao;
 	
@@ -93,7 +91,6 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
     
 	/**
 	 * @param userPropertyTableName
-	 * @uml.property  name="userPropertyTableName"
 	 */
 	public void setUserPropertyTableName(String userPropertyTableName) {
 		this.userPropertyTableName = userPropertyTableName;
@@ -101,7 +98,6 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 
 	/**
 	 * @param userPropertyPrimaryColumnName
-	 * @uml.property  name="userPropertyPrimaryColumnName"
 	 */
 	public void setUserPropertyPrimaryColumnName(
 			String userPropertyPrimaryColumnName) {
@@ -112,7 +108,6 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	
 	/**
 	 * @param extendedPropertyDao
-	 * @uml.property  name="extendedPropertyDao"
 	 */
 	public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
 		this.extendedPropertyDao = extendedPropertyDao;

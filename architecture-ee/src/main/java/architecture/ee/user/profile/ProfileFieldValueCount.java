@@ -37,12 +37,9 @@ public class ProfileFieldValueCount {
 	}
 
 	/**
-	 * @uml.property  name="value"
-	 * @uml.associationEnd  
 	 */
 	private ProfileFieldValue value;
 	/**
-	 * @uml.property  name="count"
 	 */
 	private int count;
 
@@ -53,7 +50,6 @@ public class ProfileFieldValueCount {
 
 	/**
 	 * @return
-	 * @uml.property  name="value"
 	 */
 	public ProfileFieldValue getValue() {
 		return value;
@@ -61,7 +57,6 @@ public class ProfileFieldValueCount {
 
 	/**
 	 * @return
-	 * @uml.property  name="count"
 	 */
 	public int getCount() {
 		return count;

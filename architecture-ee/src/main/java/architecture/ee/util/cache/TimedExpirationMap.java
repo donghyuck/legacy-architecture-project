@@ -37,7 +37,6 @@ public class TimedExpirationMap implements Cache {
 	 	
 
     /**
-	 * @uml.property  name="maxLifetime"
 	 */
     private final AtomicLong maxLifetime = new AtomicLong();
     private final AtomicLong lastChecked = new AtomicLong();
@@ -47,7 +46,6 @@ public class TimedExpirationMap implements Cache {
     private final Queue<ExpirableValueWrapper> expirationQueue = new ConcurrentLinkedQueue<ExpirableValueWrapper>();
     
     /**
-	 * @uml.property  name="name"
 	 */
     private String name;	
 	
@@ -108,7 +106,6 @@ public class TimedExpirationMap implements Cache {
 
     /**
 	 * @return
-	 * @uml.property  name="name"
 	 */
     public String getName()
     {
@@ -117,7 +114,6 @@ public class TimedExpirationMap implements Cache {
 
     /**
 	 * @param name
-	 * @uml.property  name="name"
 	 */
     public void setName(String name)
     {
@@ -135,7 +131,6 @@ public class TimedExpirationMap implements Cache {
 
     /**
 	 * @return
-	 * @uml.property  name="maxLifetime"
 	 */
     public long getMaxLifetime()
     {

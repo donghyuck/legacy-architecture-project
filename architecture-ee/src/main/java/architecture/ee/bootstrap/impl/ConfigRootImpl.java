@@ -14,7 +14,6 @@ public class ConfigRootImpl implements ConfigRoot {
 
 	private String rootURL;
 	/**
-	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject rootFileObject;
 	
@@ -32,7 +31,6 @@ public class ConfigRootImpl implements ConfigRoot {
 		
 	/**
 	 * @return
-	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject getRootFileObject() {
 		return rootFileObject;
@@ -43,7 +41,7 @@ public class ConfigRootImpl implements ConfigRoot {
 	}
 
 	public File getFile(String name) {
-		try {
+		try {			
 			FileObject obj = getRootFileObject().resolveFile(name);		   
 			return  new File(obj.getURL().getFile());
 		} catch (FileSystemException e) {

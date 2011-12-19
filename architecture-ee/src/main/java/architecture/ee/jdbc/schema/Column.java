@@ -6,11 +6,9 @@ package architecture.ee.jdbc.schema;
 public class Column {
 
   /**
- * @uml.property  name="name"
  */
 private String name;
   /**
- * @uml.property  name="type"
  */
 private int type;
 
@@ -21,7 +19,6 @@ private int type;
 
   /**
  * @return
- * @uml.property  name="name"
  */
 public String getName() {
     return name;
@@ -29,7 +26,6 @@ public String getName() {
 
   /**
  * @return
- * @uml.property  name="type"
  */
 public int getType() {
     return type;

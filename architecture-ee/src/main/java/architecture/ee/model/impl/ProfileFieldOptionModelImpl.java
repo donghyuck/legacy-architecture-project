@@ -14,15 +14,12 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     private long fieldID;
     /**
-	 * @uml.property  name="value"
 	 */
     private String value;
     /**
-	 * @uml.property  name="index"
 	 */
     private int index;
     /**
-	 * @uml.property  name="defaultOption"
 	 */
     private boolean defaultOption;
     
@@ -39,7 +36,6 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     /**
 	 * @return
-	 * @uml.property  name="value"
 	 */
     public String getValue()
     {
@@ -48,7 +44,6 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     /**
 	 * @param value
-	 * @uml.property  name="value"
 	 */
     public void setValue(String value)
     {
@@ -57,7 +52,6 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     /**
 	 * @return
-	 * @uml.property  name="index"
 	 */
     public int getIndex()
     {
@@ -66,7 +60,6 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     /**
 	 * @param index
-	 * @uml.property  name="index"
 	 */
     public void setIndex(int index)
     {
@@ -75,7 +68,6 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     /**
 	 * @return
-	 * @uml.property  name="defaultOption"
 	 */
     public boolean isDefaultOption()
     {
@@ -84,7 +76,6 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 
     /**
 	 * @param defaultOption
-	 * @uml.property  name="defaultOption"
 	 */
     public void setDefaultOption(boolean defaultOption)
     {

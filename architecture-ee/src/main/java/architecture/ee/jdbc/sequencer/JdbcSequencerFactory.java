@@ -28,8 +28,6 @@ public class JdbcSequencerFactory {
 	private Log log = LogFactory.getLog(getClass());
 
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration;
 
@@ -47,7 +45,6 @@ public class JdbcSequencerFactory {
 
 	/**
 	 * @return
-	 * @uml.property  name="configuration"
 	 */
 	public Configuration getConfiguration() {
 		return configuration;
@@ -55,7 +52,6 @@ public class JdbcSequencerFactory {
 
 	/**
 	 * @param configuration
-	 * @uml.property  name="configuration"
 	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;
@@ -70,7 +66,6 @@ public class JdbcSequencerFactory {
 
 	/**
 	 * @param dataSource
-	 * @uml.property  name="dataSource"
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;

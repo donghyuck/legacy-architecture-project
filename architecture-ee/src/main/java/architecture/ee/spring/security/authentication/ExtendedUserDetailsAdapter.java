@@ -18,12 +18,9 @@ public class ExtendedUserDetailsAdapter implements UserDetails {
 	private static final long serialVersionUID = -38812967069360635L;
 
 	/**
-	 * @uml.property  name="user"
-	 * @uml.associationEnd  
 	 */
 	private final User user;
 	/**
-	 * @uml.property  name="authorities"
 	 */
 	private final List<GrantedAuthority> authorities;
 
@@ -39,7 +36,6 @@ public class ExtendedUserDetailsAdapter implements UserDetails {
 
 	/**
 	 * @return
-	 * @uml.property  name="authorities"
 	 */
 	public Collection<GrantedAuthority> getAuthorities() {
 		return authorities;
@@ -55,7 +51,6 @@ public class ExtendedUserDetailsAdapter implements UserDetails {
 
 	/**
 	 * @return
-	 * @uml.property  name="user"
 	 */
 	public User getUser(){
 		return user;

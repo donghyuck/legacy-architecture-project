@@ -48,25 +48,18 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	protected List<UserProvider> providers;
 	
 	/**
-	 * @uml.property  name="userDao"
-	 * @uml.associationEnd  
 	 */
 	private UserDao userDao;
 	/**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
 	 */
 	private EventPublisher eventPublisher;
 	/**
-	 * @uml.property  name="applicationUserCount"
 	 */
 	protected int applicationUserCount;
 	/**
-	 * @uml.property  name="authenticatedUserCount"
 	 */
 	protected int authenticatedUserCount;
 	/**
-	 * @uml.property  name="totalUserCount"
 	 */
 	protected int totalUserCount;
 
@@ -93,7 +86,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	
 	/**
 	 * @param allowApplicationUserCreation
-	 * @uml.property  name="allowApplicationUserCreation"
 	 */
 	public void setAllowApplicationUserCreation(
 			boolean allowApplicationUserCreation) {
@@ -102,7 +94,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param emailAddressCaseSensitive
-	 * @uml.property  name="emailAddressCaseSensitive"
 	 */
 	public void setEmailAddressCaseSensitive(boolean emailAddressCaseSensitive) {
 		this.emailAddressCaseSensitive = emailAddressCaseSensitive;
@@ -110,7 +101,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param saltSource
-	 * @uml.property  name="saltSource"
 	 */
 	public void setSaltSource(SaltSource saltSource) {
 		this.saltSource = saltSource;
@@ -118,7 +108,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param passwordEncoder
-	 * @uml.property  name="passwordEncoder"
 	 */
 	public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
 		this.passwordEncoder = passwordEncoder;
@@ -133,7 +122,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param providers
-	 * @uml.property  name="providers"
 	 */
 	public void setProviders(List<UserProvider> providers) {
         if(null == providers)
@@ -143,7 +131,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param userDao
-	 * @uml.property  name="userDao"
 	 */
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
@@ -151,7 +138,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param userCache
-	 * @uml.property  name="userCache"
 	 */
 	public void setUserCache(Cache userCache) {
 		this.userCache = userCache;
@@ -159,7 +145,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param userIdCache
-	 * @uml.property  name="userIdCache"
 	 */
 	public void setUserIdCache(Cache userIdCache) {
 		this.userIdCache = userIdCache;
@@ -167,7 +152,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param providerCache
-	 * @uml.property  name="providerCache"
 	 */
 	public void setUserProviderCache(Cache providerCache) {
 		this.userProviderCache = providerCache;
@@ -175,7 +159,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @param eventPublisher
-	 * @uml.property  name="eventPublisher"
 	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
@@ -448,7 +431,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @return
-	 * @uml.property  name="applicationUserCount"
 	 */
 	public int getApplicationUserCount() {
         if(applicationUserCount == -1)
@@ -466,7 +448,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @return
-	 * @uml.property  name="authenticatedUserCount"
 	 */
 	public int getAuthenticatedUserCount() {
         if(authenticatedUserCount == -1)
@@ -476,7 +457,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	/**
 	 * @return
-	 * @uml.property  name="totalUserCount"
 	 */
 	public int getTotalUserCount() {
         if(totalUserCount == -1)

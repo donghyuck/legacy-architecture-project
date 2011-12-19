@@ -46,13 +46,9 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	private Log log = LogFactory.getLog(getClass());
 	private ConfigurableApplicationContext applicationContext;
     /**
-	 * @uml.property  name="state"
-	 * @uml.associationEnd  
 	 */
     private State state = State.INITIALIZED ; 
     /**
-	 * @uml.property  name="adminService"
-	 * @uml.associationEnd  
 	 */
     private SpringAdminService adminService;
     
@@ -96,7 +92,6 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	
 	/**
 	 * @return
-	 * @uml.property  name="adminService"
 	 */
 	public AdminService getAdminService() {
 		return adminService;

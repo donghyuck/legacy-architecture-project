@@ -70,8 +70,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		private final int startIndex;
 		private final int numResults;
 		/**
-		 * @uml.property  name="helper"
-		 * @uml.associationEnd  
 		 */
 		private JdbcHelper helper;
 
@@ -123,8 +121,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		private int numResults;
 		private RowMapper mapper;
 		/**
-		 * @uml.property  name="helper"
-		 * @uml.associationEnd  
 		 */
 		private JdbcHelper helper;
 
@@ -158,7 +154,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public static final int DEFAULT_CACHE_LIMIT = 256;
 
 	/**
-	 * @uml.property  name="cacheLimit"
 	 */
 	private volatile int cacheLimit = DEFAULT_CACHE_LIMIT;
 
@@ -171,12 +166,9 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	};
 
 	/**
-	 * @uml.property  name="jdbcHelper"
-	 * @uml.associationEnd  
 	 */
 	private JdbcHelper jdbcHelper = null;
 	/**
-	 * @uml.property  name="lobHandler"
 	 */
 	private LobHandler lobHandler = null;
 	
@@ -187,7 +179,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	
 	/**
 	 * @return
-	 * @uml.property  name="lobHandler"
 	 */
 	public LobHandler getLobHandler() {
 		return lobHandler;
@@ -195,7 +186,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 	/**
 	 * @param lobHandler
-	 * @uml.property  name="lobHandler"
 	 */
 	public void setLobHandler(LobHandler lobHandler) {
 		this.lobHandler = lobHandler;
@@ -203,7 +193,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 	/**
 	 * @param jdbcHelper
-	 * @uml.property  name="jdbcHelper"
 	 */
 	public void setJdbcHelper(JdbcHelper jdbcHelper) {
 		this.jdbcHelper = jdbcHelper;
@@ -238,7 +227,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 	/**
 	 * Return the maximum number of entries for this template's SQL cache.
-	 * @uml.property  name="cacheLimit"
 	 */
 	public int getCacheLimit() {
 		return this.cacheLimit;
@@ -246,7 +234,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 	/**
 	 * @return
-	 * @uml.property  name="jdbcHelper"
 	 */
 	public JdbcHelper getJdbcHelper() {
 		return jdbcHelper;
@@ -392,7 +379,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 	/**
 	 * Specify the maximum number of entries for this template's SQL cache. Default is 256.
-	 * @uml.property  name="cacheLimit"
 	 */
 	public void setCacheLimit(int cacheLimit) {
 		this.cacheLimit = cacheLimit;

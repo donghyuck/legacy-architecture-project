@@ -15,8 +15,6 @@ import architecture.ee.user.User;
 public class ExtendedUserAuthehtication implements ExtendedAuthentication {
 	
 	/**
-	 * @uml.property  name="user"
-	 * @uml.associationEnd  
 	 */
 	private final User user;
 	
@@ -70,7 +68,6 @@ public class ExtendedUserAuthehtication implements ExtendedAuthentication {
 
 	/**
 	 * @return
-	 * @uml.property  name="user"
 	 */
 	public User getUser() {
 		return user;

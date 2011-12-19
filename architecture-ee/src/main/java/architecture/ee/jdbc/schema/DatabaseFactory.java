@@ -16,24 +16,26 @@ public class DatabaseFactory {
 
 	}
 
-public static Database newDatabase(Connection conn, String catalogFilter, String schemaFilter) throws SQLException {
-		
-		return newDatabase(conn, catalogFilter, schemaFilter, null );
+	public static Database newDatabase(Connection conn, String catalogFilter,
+			String schemaFilter) throws SQLException {
+
+		return newDatabase(conn, catalogFilter, schemaFilter, null);
 	}
-	
-	
-	public static Database newDatabase(Connection conn, String catalogFilter, String schemaFilter, String tableNameFilter) throws SQLException {
-		
+
+	public static Database newDatabase(Connection conn, String catalogFilter,
+			String schemaFilter, String tableNameFilter) throws SQLException {
+
 		Database database = new Database(catalogFilter, schemaFilter);
 		ResultSet rs = null;
 
 		try {
-			
+
 			DatabaseMetaData dbmd = conn.getMetaData();
 			try {
-				rs = dbmd.getColumns(catalogFilter, schemaFilter, tableNameFilter, null);
+				rs = dbmd.getColumns(catalogFilter, schemaFilter,
+						tableNameFilter, null);
 				while (rs.next()) {
-					
+
 					String catalogName = rs.getString("TABLE_CAT");
 					String schemaName = rs.getString("TABLE_SCHEM");
 					String tableName = rs.getString("TABLE_NAME");
@@ -45,7 +47,7 @@ public static Database newDatabase(Connection conn, String catalogFilter, String
 						table.setCatalog(catalogName);
 						table.setSchema(schemaName);
 						database.addTable(table);
-					}				
+					}
 					table.addColumn(new Column(columnName, dataType));
 				}
 			} finally {
@@ -57,7 +59,8 @@ public static Database newDatabase(Connection conn, String catalogFilter, String
 				String[] tableNames = database.getTableNames();
 				for (int i = 0; i < tableNames.length; i++) {
 					Table table = database.getTable(tableNames[i]);
-					rs = dbmd.getPrimaryKeys(catalogFilter, schemaFilter, table.getName());
+					rs = dbmd.getPrimaryKeys(catalogFilter, schemaFilter,
+							table.getName());
 					if (rs.next()) {
 						String columnName = rs.getString("COLUMN_NAME");
 						table.setPrimaryKey(table.getColumn(columnName));

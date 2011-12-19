@@ -132,9 +132,13 @@ public class I18nTextResourceBundleMessageSource extends AbstractMessageSource {
 		}
 	}
 	
-	protected ResourceBundle doGetBundle(String basename, Locale locale) throws MissingResourceException {
+	protected ResourceBundle doGetBundle(String basename, Locale locale) throws MissingResourceException {		
 		
+		log.debug( "###############################" );
+		log.debug(basename + ", " + locale );
 		return I18nTextUtils.getResourceBundle(basename, locale);
+		
+		
 		//return ResourceBundle.getBundle(basename, locale, ClassUtils.getDefaultClassLoader());
 	}
 

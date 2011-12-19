@@ -9,11 +9,9 @@ import java.util.Map;
 public class Database {
 
   /**
- * @uml.property  name="catalog"
  */
 private String catalog;
   /**
- * @uml.property  name="schema"
  */
 private String schema;
 
@@ -26,7 +24,6 @@ private String schema;
 
   /**
  * @return
- * @uml.property  name="catalog"
  */
 public String getCatalog() {
     return catalog;
@@ -34,7 +31,6 @@ public String getCatalog() {
 
   /**
  * @return
- * @uml.property  name="schema"
  */
 public String getSchema() {
     return schema;

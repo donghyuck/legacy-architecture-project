@@ -22,16 +22,17 @@ public class I18nTextManagerImpl extends AbstractI18nTextManager {
 	}
 
 	public List<I18nLocalizer> getI18nLocalizers(){
-		return resourceBundles;
+		return this.resourceBundles;
 	}
 	
     protected void reloadResourceBundes()
     {
-    	List<I18nLocalizer> newResourceBundles = new ArrayList<I18nLocalizer>();    	
+    	List<I18nLocalizer> newResourceBundles = new ArrayList<I18nLocalizer>(); 
+    	
     	for( I18nLocalizer localizer : getAvailableI18nLocalizers() ){
     		newResourceBundles.add(localizer);
     	}
-    	resourceBundles = newResourceBundles;
+    	this.resourceBundles = newResourceBundles;
     }
 
     
@@ -78,8 +79,15 @@ public class I18nTextManagerImpl extends AbstractI18nTextManager {
 	public void deleteI18nLocalizer(I18nLocalizer localizer) {
 		getI18nLocalizerDao().deleteI18nLocalizer(localizer);
 	}
-
+	
 	public List<I18nLocalizer> getI18nLocalizersByName(String name) {
+		if( resourceBundles.size() > 0 ){
+	    	List<I18nLocalizer> newResourceBundles = new ArrayList<I18nLocalizer>();    	
+	    	for( I18nLocalizer localizer : resourceBundles  ){
+	    		newResourceBundles.add(localizer);
+	    	}
+			return newResourceBundles;
+		} 
 		return getI18nLocalizerDao().getI18nLocalizersByName(name);
 	}
 		

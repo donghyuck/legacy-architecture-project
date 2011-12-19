@@ -117,7 +117,6 @@ public class XPathParser {
 
 	/**
 	 * @param variables
-	 * @uml.property  name="variables"
 	 */
 	public void setVariables(Properties variables) {
 		this.variables = variables;

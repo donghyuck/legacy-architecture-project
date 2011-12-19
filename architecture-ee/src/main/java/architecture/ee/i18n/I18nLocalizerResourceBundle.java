@@ -13,11 +13,9 @@ import java.util.Set;
 public class I18nLocalizerResourceBundle extends ListResourceBundle {
 
     /**
-	 * @uml.property  name="contents"
 	 */
     private Object contents[][];
     /**
-	 * @uml.property  name="locale"
 	 */
     private Locale locale;
     private String baseName;
@@ -56,7 +54,6 @@ public class I18nLocalizerResourceBundle extends ListResourceBundle {
 
     /**
 	 * @return
-	 * @uml.property  name="contents"
 	 */
     public Object[][] getContents()
     {
@@ -65,7 +62,6 @@ public class I18nLocalizerResourceBundle extends ListResourceBundle {
 
     /**
 	 * @return
-	 * @uml.property  name="locale"
 	 */
     public Locale getLocale() {
         return locale;

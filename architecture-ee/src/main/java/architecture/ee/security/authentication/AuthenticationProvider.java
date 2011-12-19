@@ -1,6 +1,5 @@
 package architecture.ee.security.authentication;
 
-import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 
 public interface AuthenticationProvider {

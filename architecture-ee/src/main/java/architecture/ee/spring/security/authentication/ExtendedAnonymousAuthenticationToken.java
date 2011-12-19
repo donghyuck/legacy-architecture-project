@@ -17,8 +17,6 @@ public class ExtendedAnonymousAuthenticationToken extends AnonymousAuthenticatio
 	private static final long serialVersionUID = -6513817885158410340L;
 
 	/**
-	 * @uml.property  name="user"
-	 * @uml.associationEnd  
 	 */
 	private final AnonymousUser user = new AnonymousUser();
 	
@@ -32,7 +30,6 @@ public class ExtendedAnonymousAuthenticationToken extends AnonymousAuthenticatio
 
 	/**
 	 * @return
-	 * @uml.property  name="user"
 	 */
 	public User getUser() {
 		return user;

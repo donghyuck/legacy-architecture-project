@@ -15,6 +15,12 @@ import architecture.common.lifecycle.State;
 import architecture.ee.admin.AdminHelper;
 import architecture.ee.i18n.I18nTextManager;
 
+/**
+ * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
+ * 
+ * @author donghyuck
+ *
+ */
 public final class ApplicationHelper {
 
 	private static final Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;

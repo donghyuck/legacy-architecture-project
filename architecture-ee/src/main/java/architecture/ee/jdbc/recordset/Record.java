@@ -22,8 +22,6 @@ public class Record implements Serializable {
 
 	/**
 	 * every record in a recordset can contain a children recordset
-	 * @uml.property  name="_children"
-	 * @uml.associationEnd  
 	 */
 	Recordset _children = null;
 

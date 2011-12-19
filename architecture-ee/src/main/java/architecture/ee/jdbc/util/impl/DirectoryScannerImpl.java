@@ -25,12 +25,9 @@ import architecture.ee.spring.resources.scanner.DirectoryScanner;
 public class DirectoryScannerImpl /** extends SpringLifecycleService **/ implements InitializingBean, DisposableBean, DirectoryScanner {
 
 	/**
-	 * @uml.property  name="scanner"
-	 * @uml.associationEnd  
 	 */
 	private URLDirectoryScanner scanner;
 	/**
-	 * @uml.property  name="resourceLocations"
 	 */
 	private List<String> resourceLocations;
 	private boolean fastDeploy = false;
@@ -61,7 +58,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 		
 	/**
 	 * @param fastDeploy
-	 * @uml.property  name="fastDeploy"
 	 */
 	public void setFastDeploy(boolean fastDeploy) {
 		this.fastDeploy = fastDeploy;
@@ -69,7 +65,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 
 	/**
 	 * @return
-	 * @uml.property  name="resourceLocations"
 	 */
 	public List<String> getResourceLocations() {
 		return resourceLocations;
@@ -77,7 +72,6 @@ public class DirectoryScannerImpl /** extends SpringLifecycleService **/ impleme
 
 	/**
 	 * @param resourceLocations
-	 * @uml.property  name="resourceLocations"
 	 */
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;

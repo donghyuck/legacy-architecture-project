@@ -12,8 +12,6 @@ import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 public class JdbcSequenceDao implements SequenceDao {
 	
 	/**
-	 * @uml.property  name="factory"
-	 * @uml.associationEnd  
 	 */
 	private JdbcSequencerFactory factory ;	
 	private Map<Integer, Sequencer> sequencers ;

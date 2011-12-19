@@ -23,8 +23,6 @@ public class GenericTokenParser {
 	private final String openToken;
 	private final String closeToken;
 	/**
-	 * @uml.property  name="handler"
-	 * @uml.associationEnd  
 	 */
 	private final TokenHandler handler;
 

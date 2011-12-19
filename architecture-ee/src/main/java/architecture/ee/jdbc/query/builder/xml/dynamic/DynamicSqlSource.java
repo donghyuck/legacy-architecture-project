@@ -27,14 +27,10 @@ import architecture.ee.jdbc.query.sql.SqlSource;
 public class DynamicSqlSource implements SqlSource {
 
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration;
 
 	/**
-	 * @uml.property  name="rootSqlNode"
-	 * @uml.associationEnd  
 	 */
 	private SqlNode rootSqlNode;
 

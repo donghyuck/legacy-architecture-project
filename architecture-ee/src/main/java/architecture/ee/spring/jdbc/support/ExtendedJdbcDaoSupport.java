@@ -21,14 +21,10 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	protected Log log = LogFactory.getLog(getClass());	
 	
 	/**
-	 * @uml.property  name="sequenceDao"
-	 * @uml.associationEnd  
 	 */
 	private SequenceDao sequenceDao = null;
 	
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration = null;
 		
@@ -54,7 +50,6 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
     
 	/**
 	 * @param sequenceDao
-	 * @uml.property  name="sequenceDao"
 	 */
 	public void setSequenceDao(SequenceDao sequenceDao) {
 		this.sequenceDao = sequenceDao;
@@ -62,7 +57,6 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	
 	/**
 	 * @param configuration
-	 * @uml.property  name="configuration"
 	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;

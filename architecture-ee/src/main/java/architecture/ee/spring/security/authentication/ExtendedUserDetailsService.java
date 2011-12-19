@@ -28,26 +28,19 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 
 	private Log log = LogFactory.getLog(getClass());
 	/**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
 	 */
 	private EventPublisher eventPublisher;	
 	private boolean caseInsensitive;
 	/**
-	 * @uml.property  name="userManager"
-	 * @uml.associationEnd  
 	 */
 	private UserManager userManager;
 	/**
-	 * @uml.property  name="roleManager"
-	 * @uml.associationEnd  
 	 */
 	private RoleManager roleManager;
 	private String grantedAuthority;
 	
     /**
 	 * @param grantedAuthority
-	 * @uml.property  name="grantedAuthority"
 	 */
     public void setGrantedAuthority(String grantedAuthority) {
 		this.grantedAuthority = grantedAuthority;
@@ -99,7 +92,6 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 
 	/**
 	 * @param caseInsensitive
-	 * @uml.property  name="caseInsensitive"
 	 */
 	public void setCaseInsensitive(boolean caseInsensitive)
     {
@@ -108,7 +100,6 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 
 	/**
 	 * @param eventPublisher
-	 * @uml.property  name="eventPublisher"
 	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
@@ -116,7 +107,6 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 
 	/**
 	 * @param roleManager
-	 * @uml.property  name="roleManager"
 	 */
 	public void setRoleManager(RoleManager roleManager) {
 		this.roleManager = roleManager;
@@ -124,7 +114,6 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 
 	/**
 	 * @param userManager
-	 * @uml.property  name="userManager"
 	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;

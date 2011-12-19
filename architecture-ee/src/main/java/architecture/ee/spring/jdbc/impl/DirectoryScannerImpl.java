@@ -16,8 +16,10 @@ import org.springframework.beans.factory.InitializingBean;
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.util.vfs.VFSUtils;
+import architecture.ee.admin.AdminHelper;
 import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
 import architecture.ee.spring.resources.scanner.DirectoryScanner;
+import architecture.ee.util.ApplicatioinConstants;
 
 
 /**
@@ -26,14 +28,12 @@ import architecture.ee.spring.resources.scanner.DirectoryScanner;
 public class DirectoryScannerImpl implements InitializingBean, DisposableBean, DirectoryScanner {
 
 	/**
-	 * @uml.property  name="scanner"
-	 * @uml.associationEnd  
 	 */
 	private URLDirectoryScanner scanner;
 	/**
-	 * @uml.property  name="resourceLocations"
 	 */
 	private List<String> resourceLocations;
+	
 	private boolean fastDeploy = false;
 	
 	private Log log = LogFactory.getLog(getClass());
@@ -62,7 +62,6 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 		
 	/**
 	 * @param fastDeploy
-	 * @uml.property  name="fastDeploy"
 	 */
 	public void setFastDeploy(boolean fastDeploy) {
 		this.fastDeploy = fastDeploy;
@@ -70,7 +69,6 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 
 	/**
 	 * @return
-	 * @uml.property  name="resourceLocations"
 	 */
 	public List<String> getResourceLocations() {
 		return resourceLocations;
@@ -78,7 +76,6 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 
 	/**
 	 * @param resourceLocations
-	 * @uml.property  name="resourceLocations"
 	 */
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
@@ -145,10 +142,20 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 	
 	protected void loadResourceLocations() {
 		try {
-			for (String path : resourceLocations) {		
+			for (String path : resourceLocations) {	
+				if( path.startsWith("${") && path.endsWith("}")){
+					int start = path.indexOf('{') + 1 ;
+					int end = path.indexOf('}');
+					String key = path.substring( start, end );					
+					if( key.equals(ApplicatioinConstants.PLACEHOLDER_SQL_RESOURCE_LOCATION_KEY))
+						path = AdminHelper.getRepository().getURI("sql");
+					else 
+						path = AdminHelper.getRepository().getSetupApplicationProperties().get(key);					
+					
+					log.debug( key + "=" + path );
+				}				
 				FileObject fo = VFSUtils.resolveFile(path);
-				if(fo.exists()){
-		
+				if(fo.exists()){							
 					URL url = fo.getURL();
 					url.openConnection();					
 					if(fastDeploy){
@@ -167,6 +174,7 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 					scanner.addScanURL(url);
 				}
 			}
+			
 		} catch (Exception e) { }
 	}		
 	

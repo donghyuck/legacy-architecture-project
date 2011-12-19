@@ -27,25 +27,18 @@ import architecture.ee.spring.lifecycle.SpringAdminService;
 public class AdminServiceImpl extends ComponentImpl implements SpringAdminService {
 
 	/**
-	 * @uml.property  name="contextLoader"
 	 */
 	private ContextLoader contextLoader;
 	/**
-	 * @uml.property  name="servletContext"
 	 */
 	private ServletContext servletContext;
 	/**
-	 * @uml.property  name="applicationContext"
 	 */
 	private ConfigurableApplicationContext applicationContext;
 	/**
-	 * @uml.property  name="version"
-	 * @uml.associationEnd  
 	 */
 	private Version version ;
 	/**
-	 * @uml.property  name="configService"
-	 * @uml.associationEnd  
 	 */
 	private ConfigService configService;
     
@@ -69,7 +62,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 
 	/**
 	 * @return
-	 * @uml.property  name="configService"
 	 */
 	public ConfigService getConfigService() {
 		return configService;
@@ -83,7 +75,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 	
 	/**
 	 * @param configService
-	 * @uml.property  name="configService"
 	 */
 	public void setConfigService(ConfigService configService){
 		this.configService = configService ;
@@ -104,7 +95,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 	
 	/**
 	 * @param contextLoader
-	 * @uml.property  name="contextLoader"
 	 */
 	public void setContextLoader(ContextLoader contextLoader) {
 		this.contextLoader = contextLoader;
@@ -112,7 +102,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 
 	/**
 	 * @return
-	 * @uml.property  name="contextLoader"
 	 */
 	public ContextLoader getContextLoader() {
 		return contextLoader;
@@ -126,7 +115,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 	
 	/**
 	 * @return
-	 * @uml.property  name="servletContext"
 	 */
 	public ServletContext getServletContext() {
 		return servletContext;
@@ -134,7 +122,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 
 	/**
 	 * @param servletContext
-	 * @uml.property  name="servletContext"
 	 */
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
@@ -202,7 +189,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 		
 	/**
 	 * @return
-	 * @uml.property  name="applicationContext"
 	 */
 	public ConfigurableApplicationContext getApplicationContext() {
 		return this.applicationContext;
@@ -241,7 +227,6 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
 
 	/**
 	 * @return
-	 * @uml.property  name="version"
 	 */
 	public Version getVersion() {
 		return this.version;

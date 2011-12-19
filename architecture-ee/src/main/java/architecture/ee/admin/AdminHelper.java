@@ -4,6 +4,9 @@ import java.util.Locale;
 
 import net.sf.ehcache.Cache;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
@@ -24,6 +27,8 @@ import architecture.ee.util.ApplicatioinConstants;
  *
  */
 public final class AdminHelper {
+
+	private static final Log log = LogFactory.getLog(AdminHelper.class);
 
 	public static Repository getRepository(){
 		return Bootstrap.getBootstrapComponent(Repository.class);
@@ -125,14 +130,16 @@ public final class AdminHelper {
 	}	
 	
 	public static String getMessage(String code, Object[] args, Locale locale){	
+		
 		Locale localeToUse = locale ;
 		if(localeToUse==null)
-			localeToUse = getConfigService().getLocale();
+			localeToUse = getConfigService().getLocale();		
 		SpringAdminService adminService = (SpringAdminService)getAdminService();
 		if(isReady()){
 			return adminService.getApplicationContext().getMessage(code, args, localeToUse);
 		}else{ 
 		    return Bootstrap.getBootstrapApplicationContext().getMessage(code, args, localeToUse);
 		}	
+		
 	}
 }
