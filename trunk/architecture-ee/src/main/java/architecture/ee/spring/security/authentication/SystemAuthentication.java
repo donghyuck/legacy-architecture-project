@@ -15,8 +15,6 @@ import architecture.ee.user.User;
 public class SystemAuthentication implements ExtendedAuthentication {
 
 	/**
-	 * @uml.property  name="user"
-	 * @uml.associationEnd  
 	 */
 	private static final SystemUser user = new SystemUser();
 
@@ -50,7 +48,6 @@ public class SystemAuthentication implements ExtendedAuthentication {
 
 	/**
 	 * @return
-	 * @uml.property  name="user"
 	 */
 	public User getUser() {
 		return user;

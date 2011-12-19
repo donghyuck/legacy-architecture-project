@@ -25,7 +25,6 @@ public class TaskEngine {
     implements Runnable
 	{    	
 	    /**
-		 * @uml.property  name="runnable"
 		 */
 	    private Runnable runnable;
 	    private volatile boolean running;
@@ -49,7 +48,6 @@ public class TaskEngine {
 		
 	    /**
 		 * @return
-		 * @uml.property  name="runnable"
 		 */
 	    public Runnable getRunnable()
 	    {
@@ -71,8 +69,6 @@ public class TaskEngine {
     {
 
         /**
-		 * @uml.property  name="engine"
-		 * @uml.associationEnd  
 		 */
         private TaskEngine engine;
         private int priority;
@@ -233,8 +229,6 @@ public class TaskEngine {
     private PriorityQueue taskQueue;
     private ThreadGroup threadGroup;
     /**
-	 * @uml.property  name="workers"
-	 * @uml.associationEnd  multiplicity="(0 -1)"
 	 */
     private TaskEngineWorker workers[];
     private Timer taskTimer;
@@ -244,14 +238,11 @@ public class TaskEngine {
     private boolean mockMode;
     private boolean started;
     /**
-	 * @uml.property  name="adminService"
-	 * @uml.associationEnd  
 	 */
     private AdminService adminService;
 
     /**
 	 * @param mockMode
-	 * @uml.property  name="mockMode"
 	 */
     public void setMockMode(boolean mockMode)
     {

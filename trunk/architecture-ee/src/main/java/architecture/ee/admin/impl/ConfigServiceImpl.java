@@ -38,44 +38,32 @@ import architecture.ee.util.LocaleUtils;
 public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
-	 * @uml.property  name="setupProperties"
-	 * @uml.associationEnd  
 	 */
 	private ApplicationProperties setupProperties = null;
 	/**
-	 * @uml.property  name="properties"
-	 * @uml.associationEnd  
 	 */
 	private ApplicationProperties properties = null;	
 	/**
-	 * @uml.property  name="localizedProperties"
-	 * @uml.associationEnd  
 	 */
 	private ApplicationProperties localizedProperties = null;	
 	
     /**
-	 * @uml.property  name="locale"
 	 */
     private Locale locale = null;
     /**
-	 * @uml.property  name="timeZone"
 	 */
     private TimeZone timeZone = null;
     /**
-	 * @uml.property  name="characterEncoding"
 	 */
     private String characterEncoding = null;
     private FastDateFormat dateFormat = null;
     private FastDateFormat dateTimeFormat = null;
  
     /**
-	 * @uml.property  name="sqlQueryFactoryBuilder"
-	 * @uml.associationEnd  
 	 */
     private SqlQueryFactoryBuilder sqlQueryFactoryBuilder = null;   
     private DataSource dataSource = null;    
     /**
-	 * @uml.property  name="effectiveRootPath"
 	 */
     private String effectiveRootPath = null;
     
@@ -86,7 +74,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @param dataSource
-	 * @uml.property  name="dataSource"
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
@@ -120,7 +107,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	
     /**
 	 * @return
-	 * @uml.property  name="effectiveRootPath"
 	 */
     public String getEffectiveRootPath()
     {	
@@ -157,16 +143,22 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 			this.properties = newApplicationProperties(false); 
 		}
 		return properties == null ? EmptyApplicationProperties.getInstance() : properties;
+		
 	}
 	
 	/**
 	 * @return
-	 * @uml.property  name="setupProperties"
 	 */
 	private ApplicationProperties getSetupProperties(){
-		return getRepository().getSetupApplicationProperties();
+		if(setupProperties == null)
+			this.setupProperties = getRepository().getSetupApplicationProperties();
+		return setupProperties;
 	}
-	
+		
+	public void setSetupProperties(ApplicationProperties setupProperties) {
+		this.setupProperties = setupProperties;
+	}
+
 	private ApplicationProperties newApplicationProperties(boolean localized){		
 		DataSource dataSourceToUse = this.dataSource;		
 		if(dataSourceToUse == null){
@@ -188,7 +180,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @return
-	 * @uml.property  name="sqlQueryFactoryBuilder"
 	 */
 	public SqlQueryFactoryBuilder getSqlQueryFactoryBuilder() {
 		return sqlQueryFactoryBuilder;
@@ -196,37 +187,50 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @param sqlQueryFactoryBuilder
-	 * @uml.property  name="sqlQueryFactoryBuilder"
 	 */
 	public void setSqlQueryFactoryBuilder(SqlQueryFactoryBuilder sqlQueryFactoryBuilder) {
 		this.sqlQueryFactoryBuilder = sqlQueryFactoryBuilder;
 	}
 
 	/**
-	 * @return
-	 * @uml.property  name="locale"
+	 * @return 로케일 정보를 리턴한다. 기본은 ko_KR 이다.
 	 */
 	public Locale getLocale() {
-        if(this.locale == null)
-        {
-            String language = (String)getApplicationProperties().get(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
-            if(language == null)
-                language = "";
-            String country = (String)getApplicationProperties().get(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
-            if(country == null)
-                country = "";
-            if(language.equals("") && country.equals(""))
-                locale = Locale.getDefault();
-            else
-                locale = new Locale(language, country);
-        }
+		
+		if(this.locale == null)
+		{
+			Locale localeToUse = Locale.getDefault();			
+			
+			String languageToUse = getLocalProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME, null);
+			String countryToUse = getLocalProperty(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME, null);			
+			if(!StringUtils.isEmpty(languageToUse)){
+			    if(StringUtils.isEmpty(countryToUse)){
+			    	localeToUse = new Locale(languageToUse, "", "");
+			    }else{
+			    	localeToUse = new Locale(languageToUse, countryToUse, "");
+			    }	
+			}		
+			
+			languageToUse = (String)getApplicationProperties().get(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
+			countryToUse = (String)getApplicationProperties().get(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
+
+			if(!StringUtils.isEmpty(languageToUse)){
+			    if(StringUtils.isEmpty(countryToUse)){
+			    	localeToUse = new Locale(languageToUse, null, null);
+			    }else{
+			    	localeToUse = new Locale(languageToUse, countryToUse, null);
+			    }	
+			}	
+			this.locale = localeToUse;			
+		}		
         return locale;
 	}
 
 
 	/**
+	 * 로케일을 지정한다.
+	 * 
 	 * @param newLocale
-	 * @uml.property  name="locale"
 	 */
 	public void setLocale(Locale newLocale) {
 		String country = newLocale.getCountry();
@@ -238,8 +242,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 
 	/**
-	 * @return
-	 * @uml.property  name="characterEncoding"
+	 * @return 문자 인코딩을 리턴한다.
 	 */
 	public String getCharacterEncoding() {
         if(characterEncoding == null)
@@ -260,7 +263,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	/**
 	 * @param characterEncoding
 	 * @throws UnsupportedEncodingException
-	 * @uml.property  name="characterEncoding"
 	 */
 	public void setCharacterEncoding(String characterEncoding)
 			throws UnsupportedEncodingException {
@@ -275,7 +277,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @return
-	 * @uml.property  name="timeZone"
 	 */
 	public TimeZone getTimeZone() {
         if(timeZone == null)
@@ -295,7 +296,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @param newTimeZone
-	 * @uml.property  name="timeZone"
 	 */
 	public void setTimeZone(TimeZone newTimeZone) {
 		String timeZoneId = newTimeZone.getID();

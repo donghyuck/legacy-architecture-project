@@ -2,9 +2,12 @@ package architecture.ee.bootstrap.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.net.URL;
+import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 
@@ -44,7 +47,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
 	/**
-	 * @uml.property  name="effectiveRootPath"
 	 */
 	private String effectiveRootPath;
 
@@ -53,15 +55,12 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	}
 
     /**
-	 * @uml.property  name="rootFileObject"
 	 */
     private FileObject rootFileObject = getRootFileObject() ;
     
 	//private String rootURI = getRootURI();             
     
     /**
-	 * @uml.property  name="setupProperties"
-	 * @uml.associationEnd  
 	 */
     private ApplicationProperties setupProperties = null;
         
@@ -95,26 +94,27 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
        
 	/**
 	 * @return
-	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject getRootFileObject(){
+		
 		if( getState() != State.INITIALIZED || getState() != State.INITIALIZING ){			
 			
 			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 			
-			/*try {
+			try {
 				Enumeration<URL> enumeration = classloader.getResources("application-init.xml");
 				do {
 					if (!enumeration.hasMoreElements())
 						break;
 					URL url = (URL) enumeration.nextElement();
 					
-					System.out.println(" - " + url);
-
+					InputStream input = url.openStream();
+					XmlProperties prop = new XmlProperties(input);
+					String home = prop.getProperty("home");					
+					System.out.println( "application:" + home + "(" + url + "");
+					
 				} while (true);
-			} catch (IOException e) {
-			}*/
-			
+			} catch (IOException e) {}		
 			
 			try {		
 				InputStream input = classloader.getResourceAsStream("application-init.xml");			
@@ -141,7 +141,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 
 	/**
 	 * @return
-	 * @uml.property  name="effectiveRootPath"
 	 */
 	public String getEffectiveRootPath()
     {	
@@ -277,4 +276,13 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 		return setupProperties;
 	}
     
+	public String getURI(String name) {
+		try {
+			FileObject obj = getRootFileObject().resolveFile(name);		   
+			return  obj.getName().getURI();
+		} catch (FileSystemException e) {
+		}
+		return null;
+	}
+	
 }

@@ -6,12 +6,8 @@ import java.util.List;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 
-import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.util.ImplFactory;
-
 import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 
@@ -29,11 +25,11 @@ public class SecurityHelper {
 		public  AuthToken getAuthToke();
 		
 		public User getUser();
+		
+		public Authentication getAuthentication();
 	}
 	
 	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
     
@@ -60,9 +56,7 @@ public class SecurityHelper {
     }    
     
 	public static Authentication getAuthentication(){
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authen = context.getAuthentication();		
-		return authen;
+		return impl.getAuthentication();
 	}
 	
 	public static List<String> getUserRoles(){		

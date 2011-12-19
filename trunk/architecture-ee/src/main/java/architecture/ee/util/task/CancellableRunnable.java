@@ -23,7 +23,6 @@ public abstract class CancellableRunnable
 
     /**
 	 * @return
-	 * @uml.property  name="doTask"
 	 */
     public boolean isDoTask()
     {
@@ -32,7 +31,6 @@ public abstract class CancellableRunnable
 
     /**
 	 * @param doTask
-	 * @uml.property  name="doTask"
 	 */
     public void setDoTask(boolean doTask)
     {
@@ -40,7 +38,6 @@ public abstract class CancellableRunnable
     }
 
     /**
-	 * @uml.property  name="doTask"
 	 */
     private boolean doTask;
     

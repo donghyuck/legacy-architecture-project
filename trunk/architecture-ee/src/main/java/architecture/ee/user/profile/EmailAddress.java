@@ -10,21 +10,14 @@ public class EmailAddress {
 	 * @author                 donghyuck
 	 */
 	enum Type { /**
-	 * @uml.property  name="hOME"
-	 * @uml.associationEnd  
 	 */
 	HOME("home"), /**
-	 * @uml.property  name="wORK"
-	 * @uml.associationEnd  
 	 */
 	WORK("work"), /**
-	 * @uml.property  name="oTHER"
-	 * @uml.associationEnd  
 	 */
 	OTHER("other");
 		
 		/**
-		 * @uml.property  name="name"
 		 */
 		private String name;
 
@@ -34,7 +27,6 @@ public class EmailAddress {
 		
 		/**
 		 * @return
-		 * @uml.property  name="name"
 		 */
 		public String getName()
         {
@@ -61,12 +53,9 @@ public class EmailAddress {
 	
 
     /**
-	 * @uml.property  name="email"
 	 */
     private String email;
     /**
-	 * @uml.property  name="type"
-	 * @uml.associationEnd  
 	 */
     private Type type;
     
@@ -82,7 +71,6 @@ public class EmailAddress {
 
     /**
 	 * @param email
-	 * @uml.property  name="email"
 	 */
     public void setEmail(String email)
     {
@@ -91,7 +79,6 @@ public class EmailAddress {
 
     /**
 	 * @return
-	 * @uml.property  name="email"
 	 */
     public String getEmail()
     {
@@ -100,7 +87,6 @@ public class EmailAddress {
 
     /**
 	 * @param type
-	 * @uml.property  name="type"
 	 */
     public void setType(Type type)
     {
@@ -109,7 +95,6 @@ public class EmailAddress {
 
     /**
 	 * @return
-	 * @uml.property  name="type"
 	 */
     public Type getType()
     {

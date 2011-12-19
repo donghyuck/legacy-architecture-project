@@ -12,13 +12,11 @@ public interface Sequencer
 
     /**
 	 * @return
-	 * @uml.property  name="blockSize"
 	 */
     public abstract int getBlockSize();
     
     /**
 	 * @param  blockSize
-	 * @uml.property  name="blockSize"
 	 */
     public abstract void setBlockSize(int blockSize);
     

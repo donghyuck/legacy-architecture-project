@@ -9,12 +9,10 @@ public class TaskWrapper implements Comparable
 {
 
     /**
-	 * @uml.property  name="task"
 	 */
     private Runnable task;
 
     /**
-	 * @uml.property  name="priority"
 	 */
     private int priority;
 
@@ -41,7 +39,6 @@ public class TaskWrapper implements Comparable
 
     /**
 	 * @return
-	 * @uml.property  name="priority"
 	 */
     public int getPriority()
     {
@@ -50,7 +47,6 @@ public class TaskWrapper implements Comparable
 
     /**
 	 * @return
-	 * @uml.property  name="task"
 	 */
     public Runnable getTask()
     {
@@ -59,7 +55,6 @@ public class TaskWrapper implements Comparable
 
     /**
 	 * @param priority
-	 * @uml.property  name="priority"
 	 */
     public void setPriority(int priority)
     {
@@ -67,7 +62,6 @@ public class TaskWrapper implements Comparable
     }
     /**
 	 * @param task
-	 * @uml.property  name="task"
 	 */
     public void setTask(Runnable task)
     {

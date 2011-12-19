@@ -33,8 +33,6 @@ import architecture.ee.jdbc.query.factory.ConfigurationFactory;
 public class SqlFileListener implements FileListener {
 
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration;
 	private Log log = LogFactory.getLog(getClass());

@@ -21,8 +21,6 @@ public class AutoListenerEventRegister implements BeanFactoryPostProcessor {
 
 	private Log logger = LogFactory.getLog(getClass());
 	/**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
 	 */
 	private EventPublisher eventPublisher;
 

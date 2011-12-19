@@ -14,12 +14,9 @@ public class ExtendedUserDetails extends User implements AuthToken {
 
 	private static final long serialVersionUID = -6654445173418843563L;
 	/**
-	 * @uml.property  name="userId"
 	 */
 	private final long userId;
     /**
-	 * @uml.property  name="extUser"
-	 * @uml.associationEnd  
 	 */
     private final architecture.ee.user.User extUser;
     
@@ -58,7 +55,6 @@ public class ExtendedUserDetails extends User implements AuthToken {
 	
     /**
 	 * @return
-	 * @uml.property  name="userId"
 	 */
     public long getUserId() {
 		return userId;

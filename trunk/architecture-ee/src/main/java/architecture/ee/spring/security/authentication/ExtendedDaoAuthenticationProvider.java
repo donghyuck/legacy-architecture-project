@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +24,6 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 	private Log log = LogFactory.getLog(getClass());
     
 	/**
-	 * @uml.property  name="userManager"
-	 * @uml.associationEnd  
 	 */
 	protected UserManager userManager;
     
@@ -34,14 +33,14 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
 		if(authentication.getCredentials() == null)
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
-
-		String enc = this.getPasswordEncoder().encodePassword(userDetails.getPassword(), this.getSaltSource().getSalt(userDetails));
 		
-		//log.debug( userDetails.getPassword() + ">>" + enc);
-		
+		String presentedPassword = authentication.getCredentials().toString();
+		String enc = getPasswordEncoder().encodePassword( presentedPassword, getSaltSource().getSalt(userDetails));		
+		log.debug( "Password:" + presentedPassword );
+		log.debug( " Salt:" + getSaltSource().getSalt(userDetails) );
+		log.debug( "Password (" + ((MessageDigestPasswordEncoder)getPasswordEncoder()).getAlgorithm() + "):" + enc );
+				
 		super.additionalAuthenticationChecks(userDetails, authentication);	
-
-
 		
 		if(!supports(userDetails)){
             log.error("Unable to coerce user detail to ExtendedUserDetailsAdapter.");
@@ -89,7 +88,6 @@ public class ExtendedDaoAuthenticationProvider extends DaoAuthenticationProvider
 	
     /**
 	 * @param userManager
-	 * @uml.property  name="userManager"
 	 */
     public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;

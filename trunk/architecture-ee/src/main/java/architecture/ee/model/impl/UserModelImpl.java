@@ -25,102 +25,77 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	private Log log = LogFactory.getLog(getClass());
 
 	/**
-	 * @uml.property  name="userId"
 	 */
 	private long userId;
 	/**
-	 * @uml.property  name="username"
 	 */
 	private String username;
 	/**
-	 * @uml.property  name="passwordHash"
 	 */
 	private String passwordHash;
 	/**
-	 * @uml.property  name="password"
 	 */
 	private String password;
 	/**
-	 * @uml.property  name="name"
 	 */
 	private String name;
 	/**
-	 * @uml.property  name="firstName"
 	 */
 	private String firstName;
 	/**
-	 * @uml.property  name="lastName"
 	 */
 	private String lastName;
 	/**
-	 * @uml.property  name="nameVisible"
 	 */
 	private boolean nameVisible;
 	/**
-	 * @uml.property  name="email"
 	 */
 	private String email;
 	/**
-	 * @uml.property  name="emailVisible"
 	 */
 	private boolean emailVisible;
 	/**
-	 * @uml.property  name="properties"
 	 */
 	private Map<String, String> properties;
 	/**
-	 * @uml.property  name="enabled"
 	 */
 	private boolean enabled;
 	/**
-	 * @uml.property  name="lastLoggedIn"
 	 */
 	private Date lastLoggedIn;
 	/**
-	 * @uml.property  name="lastProfileUpdate"
 	 */
 	private Date lastProfileUpdate;
 	/**
-	 * @uml.property  name="external"
 	 */
 	private boolean external;
 	/**
-	 * @uml.property  name="federated"
 	 */
 	private boolean federated;
 	/**
-	 * @uml.property  name="setNameVisibleSupported"
 	 */
 	private boolean setNameVisibleSupported;
 	/**
-	 * @uml.property  name="setPasswordSupported"
 	 */
 	private boolean setPasswordSupported;
 	/**
-	 * @uml.property  name="getPasswordHashSupported"
 	 */
 	private boolean getPasswordHashSupported;
 	/**
-	 * @uml.property  name="setEmailVisibleSupported"
 	 */
 	private boolean setEmailVisibleSupported;
 	/**
-	 * @uml.property  name="setNameSupported"
 	 */
 	private boolean setNameSupported;
 	/**
-	 * @uml.property  name="setUsernameSupported"
 	 */
 	private boolean setUsernameSupported;
 	/**
-	 * @uml.property  name="setPasswordHashSupported"
 	 */
 	private boolean setPasswordHashSupported;
 	private boolean setPropertyEditSupported;
 	private boolean setEmailSuppoted;
 	/**
-	 * @uml.property  name="status"
-	 * @uml.associationEnd  
 	 */
 	private User.Status status;
 		
@@ -408,7 +383,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	/**
 	 * @return
 	 * @throws UnauthorizedException
-	 * @uml.property  name="password"
 	 */
 	public String getPassword() throws UnauthorizedException {
 		return password;
@@ -416,7 +390,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param password
-	 * @uml.property  name="password"
 	 */
 	public void setPassword(String password) {
 		this.password = password;
@@ -428,7 +401,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="email"
 	 */
 	public String getEmail() {
 		return email;
@@ -436,7 +408,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param email
-	 * @uml.property  name="email"
 	 */
 	public void setEmail(String email) {
 		this.email = email;
@@ -444,7 +415,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="emailVisible"
 	 */
 	public boolean isEmailVisible() {
 		return emailVisible;
@@ -452,7 +422,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param emailVisible
-	 * @uml.property  name="emailVisible"
 	 */
 	public void setEmailVisible(boolean emailVisible) {
 		this.emailVisible = emailVisible;
@@ -460,7 +429,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="enabled"
 	 */
 	public boolean isEnabled() {
 		return enabled;
@@ -468,7 +436,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param enabled
-	 * @uml.property  name="enabled"
 	 */
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
@@ -476,7 +443,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="userId"
 	 */
 	public long getUserId() {
 		return userId;
@@ -484,7 +450,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param ID
-	 * @uml.property  name="userId"
 	 */
 	public void setUserId(long ID) {
 		this.userId = ID;
@@ -492,7 +457,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="lastLoggedIn"
 	 */
 	public Date getLastLoggedIn() {
 		return lastLoggedIn;
@@ -500,7 +464,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param lastLoggedIn
-	 * @uml.property  name="lastLoggedIn"
 	 */
 	public void setLastLoggedIn(Date lastLoggedIn) {
 		this.lastLoggedIn = lastLoggedIn;
@@ -508,7 +471,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="lastProfileUpdate"
 	 */
 	public Date getLastProfileUpdate() {
 		return lastProfileUpdate ;
@@ -516,7 +478,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param lastProfileUpdate
-	 * @uml.property  name="lastProfileUpdate"
 	 */
 	public void setLastProfileUpdate(Date lastProfileUpdate) {
 		this.lastProfileUpdate = lastProfileUpdate;
@@ -524,7 +485,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="name"
 	 */
 	public String getName() {
 		if (lastName != null && firstName != null) {
@@ -538,7 +498,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param name
-	 * @uml.property  name="name"
 	 */
 	public void setName(String name) {
 		if (lastName != null && firstName != null && name != null) {
@@ -561,7 +520,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="firstName"
 	 */
 	public String getFirstName() {
 		return firstName;
@@ -569,7 +527,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param firstName
-	 * @uml.property  name="firstName"
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -577,7 +534,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="lastName"
 	 */
 	public String getLastName() {
 		return lastName;
@@ -585,7 +541,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param lastName
-	 * @uml.property  name="lastName"
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -593,7 +548,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="nameVisible"
 	 */
 	public boolean isNameVisible() {
 		return nameVisible;
@@ -601,7 +555,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param nameVisible
-	 * @uml.property  name="nameVisible"
 	 */
 	public void setNameVisible(boolean nameVisible) {
 		this.nameVisible = nameVisible;
@@ -609,7 +562,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="passwordHash"
 	 */
 	public String getPasswordHash() {
 		return passwordHash;
@@ -617,7 +569,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param passwordHash
-	 * @uml.property  name="passwordHash"
 	 */
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
@@ -625,7 +576,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="properties"
 	 */
 	public Map<String, String> getProperties() {
 		if (properties == null)
@@ -635,7 +585,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param properties
-	 * @uml.property  name="properties"
 	 */
 	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
@@ -643,7 +592,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="username"
 	 */
 	public String getUsername() {
 		return username;
@@ -651,7 +599,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param username
-	 * @uml.property  name="username"
 	 */
 	public void setUsername(String username) {
 		this.username = formatUsername(username);
@@ -659,7 +606,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="federated"
 	 */
 	public boolean isFederated() {
 		return federated;
@@ -667,7 +613,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param federated
-	 * @uml.property  name="federated"
 	 */
 	public void setFederated(boolean federated) {
 		this.federated = federated;
@@ -675,7 +620,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="external"
 	 */
 	public boolean isExternal() {
 		return external;
@@ -683,7 +627,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param external
-	 * @uml.property  name="external"
 	 */
 	public void setExternal(boolean external) {
 		this.external = external;
@@ -695,7 +638,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param status
-	 * @uml.property  name="status"
 	 */
 	public void setStatus(User.Status status) {
 		this.status = status == null ? User.Status.none : status;
@@ -703,7 +645,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="status"
 	 */
 	public User.Status getStatus() {
 		return status;
@@ -733,7 +674,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="setPasswordSupported"
 	 */
 	public boolean isSetPasswordSupported() {
 		return setPasswordSupported;
@@ -741,7 +681,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="getPasswordHashSupported"
 	 */
 	public boolean isGetPasswordHashSupported() {
 		return getPasswordHashSupported;
@@ -749,7 +688,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="setPasswordHashSupported"
 	 */
 	public boolean isSetPasswordHashSupported() {
 		return setPasswordHashSupported;
@@ -757,7 +695,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="setNameSupported"
 	 */
 	public boolean isSetNameSupported() {
 		return setNameSupported;
@@ -765,7 +702,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="setUsernameSupported"
 	 */
 	public boolean isSetUsernameSupported() {
 		return setUsernameSupported;
@@ -777,7 +713,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="setNameVisibleSupported"
 	 */
 	public boolean isSetNameVisibleSupported() {
 		return setNameVisibleSupported;
@@ -785,7 +720,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @return
-	 * @uml.property  name="setEmailVisibleSupported"
 	 */
 	public boolean isSetEmailVisibleSupported() {
 		return setEmailVisibleSupported;
@@ -797,7 +731,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setNameVisibleSupported
-	 * @uml.property  name="setNameVisibleSupported"
 	 */
 	public void setSetNameVisibleSupported(boolean setNameVisibleSupported) {
 		this.setNameVisibleSupported = setNameVisibleSupported;
@@ -805,7 +738,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setPasswordSupported
-	 * @uml.property  name="setPasswordSupported"
 	 */
 	public void setSetPasswordSupported(boolean setPasswordSupported) {
 		this.setPasswordSupported = setPasswordSupported;
@@ -813,7 +745,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param getPasswordHashSupported
-	 * @uml.property  name="getPasswordHashSupported"
 	 */
 	public void setGetPasswordHashSupported(boolean getPasswordHashSupported) {
 		this.getPasswordHashSupported = getPasswordHashSupported;
@@ -821,7 +752,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setEmailVisibleSupported
-	 * @uml.property  name="setEmailVisibleSupported"
 	 */
 	public void setSetEmailVisibleSupported(boolean setEmailVisibleSupported) {
 		this.setEmailVisibleSupported = setEmailVisibleSupported;
@@ -829,7 +759,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setNameSupported
-	 * @uml.property  name="setNameSupported"
 	 */
 	public void setSetNameSupported(boolean setNameSupported) {
 		this.setNameSupported = setNameSupported;
@@ -837,7 +766,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setUsernameSupported
-	 * @uml.property  name="setUsernameSupported"
 	 */
 	public void setSetUsernameSupported(boolean setUsernameSupported) {
 		this.setUsernameSupported = setUsernameSupported;
@@ -845,7 +773,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setPasswordHashSupported
-	 * @uml.property  name="setPasswordHashSupported"
 	 */
 	public void setSetPasswordHashSupported(boolean setPasswordHashSupported) {
 		this.setPasswordHashSupported = setPasswordHashSupported;
@@ -853,7 +780,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setPropertyEditSupported
-	 * @uml.property  name="setPropertyEditSupported"
 	 */
 	public void setSetPropertyEditSupported(boolean setPropertyEditSupported) {
 		this.setPropertyEditSupported = setPropertyEditSupported;
@@ -861,7 +787,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	/**
 	 * @param setEmailSuppoted
-	 * @uml.property  name="setEmailSuppoted"
 	 */
 	public void setSetEmailSuppoted(boolean setEmailSuppoted) {
 		this.setEmailSuppoted = setEmailSuppoted;

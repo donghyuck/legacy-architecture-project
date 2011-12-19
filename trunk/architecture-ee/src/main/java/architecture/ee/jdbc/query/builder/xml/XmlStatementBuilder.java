@@ -57,8 +57,6 @@ public class XmlStatementBuilder extends AbstractBuilder {
 	private Log log = LogFactory.getLog(XmlStatementBuilder.class);
 
 	/**
-	 * @uml.property  name="builderAssistant"
-	 * @uml.associationEnd  
 	 */
 	private SqlBuilderAssistant builderAssistant;
 

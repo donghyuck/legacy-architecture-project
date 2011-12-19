@@ -19,7 +19,6 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
     private int type;
     
     /**
-	 * @uml.property  name="name"
 	 */
     private String name;
        
@@ -28,7 +27,6 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
     private long maxID;
     
     /**
-	 * @uml.property  name="blockSize"
 	 */
     private int blockSize;
    
@@ -51,7 +49,6 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 
     /**
 	 * @return
-	 * @uml.property  name="name"
 	 */
     public String getName() {
 		return name;
@@ -59,7 +56,6 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 
     /**
 	 * @param name
-	 * @uml.property  name="name"
 	 */
     public void setName(String name) {
 		this.name = name;
@@ -67,7 +63,6 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 
 	/**
 	 * @return
-	 * @uml.property  name="blockSize"
 	 */
 	public int getBlockSize() {
         return blockSize;
@@ -75,7 +70,6 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 
     /**
 	 * @param blockSize
-	 * @uml.property  name="blockSize"
 	 */
     public void setBlockSize(int blockSize) {
         this.blockSize = blockSize;

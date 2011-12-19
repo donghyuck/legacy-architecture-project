@@ -22,28 +22,16 @@ public interface Sql {
 	 */
 	public static enum SqlType {
 		/**
-		 * @uml.property  name="uNKNOWN"
-		 * @uml.associationEnd  
 		 */
 		UNKNOWN, /**
-		 * @uml.property  name="sCRIPT"
-		 * @uml.associationEnd  
 		 */
 		SCRIPT, /**
-		 * @uml.property  name="pROCEDURE"
-		 * @uml.associationEnd  
 		 */
 		PROCEDURE, /**
-		 * @uml.property  name="fUNCTION"
-		 * @uml.associationEnd  
 		 */
 		FUNCTION, /**
-		 * @uml.property  name="sTATEMENT"
-		 * @uml.associationEnd  
 		 */
 		STATEMENT, /**
-		 * @uml.property  name="bATCH"
-		 * @uml.associationEnd  
 		 */
 		BATCH;
 	}

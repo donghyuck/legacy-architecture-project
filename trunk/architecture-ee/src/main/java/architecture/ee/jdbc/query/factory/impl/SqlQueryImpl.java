@@ -54,24 +54,18 @@ import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 public class SqlQueryImpl<T> implements SqlQuery {
 
 	/**
-	 * @uml.property  name="startIndex"
 	 */
 	private int startIndex = 0;
 
 	/**
-	 * @uml.property  name="maxResults"
 	 */
 	private int maxResults = 0;
 
 	/**
-	 * @uml.property  name="jdbcTemplate"
-	 * @uml.associationEnd  
 	 */
 	private ExtendedJdbcTemplate jdbcTemplate;
 
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration;
 
@@ -80,7 +74,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	private List<Object> values;
 
 	/**
-	 * @uml.property  name="returnType"
 	 */
 	private Class<?> returnType = DEFAULT_RETURN_TYPE;
 
@@ -89,7 +82,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	private LinkedList<Object[]> parameterQueue;
 
 	/**
-	 * @uml.property  name="statement"
 	 */
 	private String statement;
 
@@ -103,7 +95,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 
 	/**
 	 * @param stopOnError
-	 * @uml.property  name="stopOnError"
 	 */
 	public void setStopOnError(boolean stopOnError) {
 		this.stopOnError = stopOnError;
@@ -123,7 +114,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 
 	/**
 	 * @return
-	 * @uml.property  name="startIndex"
 	 */
 	public int getStartIndex() {
 		return this.startIndex;
@@ -131,7 +121,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 
 	/**
 	 * @return
-	 * @uml.property  name="maxResults"
 	 */
 	public int getMaxResults() {
 		return this.maxResults;
@@ -140,7 +129,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	/**
 	 * @param startIndex
 	 * @return
-	 * @uml.property  name="startIndex"
 	 */
 	public SqlQuery setStartIndex(int startIndex) {
 		this.startIndex = startIndex;
@@ -150,7 +138,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	/**
 	 * @param maxResults
 	 * @return
-	 * @uml.property  name="maxResults"
 	 */
 	public SqlQuery setMaxResults(int maxResults) {
 		this.maxResults = maxResults;
@@ -174,7 +161,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 
 	/**
 	 * @return
-	 * @uml.property  name="statement"
 	 */
 	public String getStatement() {
 		return statement;
@@ -183,7 +169,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	/**
 	 * @param statement
 	 * @return
-	 * @uml.property  name="statement"
 	 */
 	public SqlQuery setStatement(String statement) {
 		this.statement = statement;
@@ -197,7 +182,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 
 	/**
 	 * @return
-	 * @uml.property  name="returnType"
 	 */
 	public Class<?> getReturnType() {
 		return returnType;
@@ -206,7 +190,6 @@ public class SqlQueryImpl<T> implements SqlQuery {
 	/**
 	 * @param returnType
 	 * @return
-	 * @uml.property  name="returnType"
 	 */
 	public SqlQuery setReturnType(Class<?> returnType) {
 		this.returnType = returnType;

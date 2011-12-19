@@ -20,8 +20,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	
 	protected Log log = LogFactory.getLog(getClass());
 	/**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
 	 */
 	protected EventPublisher eventPublisher;
 	protected Cache groupCache;
@@ -40,7 +38,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	
 	/**
 	 * @param groupCache
-	 * @uml.property  name="groupCache"
 	 */
 	public void setGroupCache(Cache groupCache) {
 		this.groupCache = groupCache;
@@ -50,7 +47,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 
 	/**
 	 * @param groupIdCache
-	 * @uml.property  name="groupIdCache"
 	 */
 	public void setGroupIdCache(Cache groupIdCache) {
 		this.groupIdCache = groupIdCache;
@@ -58,7 +54,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 
 	/**
 	 * @param groupMemberCache
-	 * @uml.property  name="groupMemberCache"
 	 */
 	public void setGroupMemberCache(Cache groupMemberCache) {
 		this.groupMemberCache = groupMemberCache;
@@ -67,7 +62,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 
 	/**
 	 * @param caseInsensitiveGroupNameMatch
-	 * @uml.property  name="caseInsensitiveGroupNameMatch"
 	 */
 	public void setCaseInsensitiveGroupNameMatch(
 			boolean caseInsensitiveGroupNameMatch) {
@@ -77,7 +71,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 
 	/**
 	 * @param eventPublisher
-	 * @uml.property  name="eventPublisher"
 	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;

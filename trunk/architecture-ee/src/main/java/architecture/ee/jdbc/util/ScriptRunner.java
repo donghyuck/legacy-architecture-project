@@ -56,7 +56,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param characterSetName
-	 * @uml.property  name="characterSetName"
 	 */
 	public void setCharacterSetName(String characterSetName) {
 		this.characterSetName = characterSetName;
@@ -64,7 +63,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param stopOnError
-	 * @uml.property  name="stopOnError"
 	 */
 	public void setStopOnError(boolean stopOnError) {
 		this.stopOnError = stopOnError;
@@ -72,7 +70,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param autoCommit
-	 * @uml.property  name="autoCommit"
 	 */
 	public void setAutoCommit(boolean autoCommit) {
 		this.autoCommit = autoCommit;
@@ -80,7 +77,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param sendFullScript
-	 * @uml.property  name="sendFullScript"
 	 */
 	public void setSendFullScript(boolean sendFullScript) {
 		this.sendFullScript = sendFullScript;
@@ -88,7 +84,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param logWriter
-	 * @uml.property  name="logWriter"
 	 */
 	public void setLogWriter(PrintWriter logWriter) {
 		this.logWriter = logWriter;
@@ -96,7 +91,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param errorLogWriter
-	 * @uml.property  name="errorLogWriter"
 	 */
 	public void setErrorLogWriter(PrintWriter errorLogWriter) {
 		this.errorLogWriter = errorLogWriter;
@@ -104,7 +98,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param delimiter
-	 * @uml.property  name="delimiter"
 	 */
 	public void setDelimiter(String delimiter) {
 		this.delimiter = delimiter;
@@ -112,7 +105,6 @@ public class ScriptRunner {
 
 	/**
 	 * @param fullLineDelimiter
-	 * @uml.property  name="fullLineDelimiter"
 	 */
 	public void setFullLineDelimiter(boolean fullLineDelimiter) {
 		this.fullLineDelimiter = fullLineDelimiter;

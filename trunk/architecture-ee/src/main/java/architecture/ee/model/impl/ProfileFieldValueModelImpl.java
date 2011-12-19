@@ -22,31 +22,26 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 	private Log log = LogFactory.getLog(getClass());
 	
 	/**
-	 * @uml.property  name="primaryIndex"
 	 */
 	private int primaryIndex;
 	
 	/**
-	 * @uml.property  name="fieldId"
 	 */
 	private long fieldId;
 	
 	private int fieldType;
 	
 	/**
-	 * @uml.property  name="value"
 	 */
 	private String value;
 	
 	//private boolean isPrimaryValue;
 	
 	/**
-	 * @uml.property  name="isList"
 	 */
 	private boolean isList;
 	
 	/**
-	 * @uml.property  name="values"
 	 */
 	private List<String> values;
 	
@@ -68,7 +63,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
     
 	/**
 	 * @return
-	 * @uml.property  name="fieldId"
 	 */
 	public long getFieldId() {
 		return fieldId;
@@ -76,7 +70,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
 	/**
 	 * @param fieldId
-	 * @uml.property  name="fieldId"
 	 */
 	public void setFieldId(long fieldId) {
 		if(fieldId < 1L)
@@ -106,7 +99,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
 	/**
 	 * @return
-	 * @uml.property  name="values"
 	 */
 	public List<String> getValues() {		
 		return values;
@@ -164,7 +156,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
     /**
 	 * @param values
-	 * @uml.property  name="values"
 	 */
     public void setValues(List<String> values)
     {
@@ -187,7 +178,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 	
 	/**
 	 * @return
-	 * @uml.property  name="value"
 	 */
 	public String getValue() {
 		return value;
@@ -203,7 +193,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
 	/**
 	 * @param value
-	 * @uml.property  name="value"
 	 */
 	public void setValue(String value)
     {
@@ -249,7 +238,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
     /**
 	 * @return
-	 * @uml.property  name="primaryIndex"
 	 */
     public int getPrimaryIndex()
     {
@@ -258,7 +246,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
     
     /**
 	 * @param primaryIndex
-	 * @uml.property  name="primaryIndex"
 	 */
     public void setPrimaryIndex(int primaryIndex){
     	this.primaryIndex = primaryIndex;
@@ -270,7 +257,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
 	/**
 	 * public void setPrimaryValue(boolean isPrimaryValue) { this.isPrimaryValue = isPrimaryValue; }
-	 * @uml.property  name="isList"
 	 */
 
 	public boolean isList() {
@@ -279,7 +265,6 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 
 	/**
 	 * @param isList
-	 * @uml.property  name="isList"
 	 */
 	public void setList(boolean isList) {
 		this.isList = isList;

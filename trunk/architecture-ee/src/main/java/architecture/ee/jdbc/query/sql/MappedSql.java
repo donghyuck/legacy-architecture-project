@@ -25,8 +25,6 @@ public class MappedSql implements Sql {
 	private String resource;
 
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private Configuration configuration;
 
@@ -37,14 +35,10 @@ public class MappedSql implements Sql {
 	private Integer timeout;
 
 	/**
-	 * @uml.property  name="sqlType"
-	 * @uml.associationEnd  
 	 */
 	private SqlType sqlType;
 
 	/**
-	 * @uml.property  name="source"
-	 * @uml.associationEnd  
 	 */
 	private SqlSource source;
 

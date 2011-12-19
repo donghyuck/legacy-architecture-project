@@ -31,14 +31,11 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 	
 	private String sequencerName = "Role";
 	/**
-	 * @uml.property  name="sequenceDao"
-	 * @uml.associationEnd  
 	 */
 	private SequenceDao sequenceDao;
 	
 	/**
 	 * @param sequenceDao
-	 * @uml.property  name="sequenceDao"
 	 */
 	public void setSequenceDao(SequenceDao sequenceDao) {
 		this.sequenceDao = sequenceDao;
@@ -46,7 +43,6 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 	
 	/**
 	 * @param sequencerName
-	 * @uml.property  name="sequencerName"
 	 */
 	public void setSequencerName(String sequencerName) {
 		this.sequencerName = sequencerName;

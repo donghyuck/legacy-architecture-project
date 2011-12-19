@@ -28,56 +28,38 @@ public interface JdbcHelper {
 	enum DatabaseType {
 
 		/**
-		 * @uml.property  name="oracle"
-		 * @uml.associationEnd  
 		 */
 		oracle,
 
 		/**
-		 * @uml.property  name="postgresql"
-		 * @uml.associationEnd  
 		 */
 		postgresql,
 
 		/**
-		 * @uml.property  name="mysql"
-		 * @uml.associationEnd  
 		 */
 		mysql,
 
 		/**
-		 * @uml.property  name="hsqldb"
-		 * @uml.associationEnd  
 		 */
 		hsqldb,
 
 		/**
-		 * @uml.property  name="db2"
-		 * @uml.associationEnd  
 		 */
 		db2,
 
 		/**
-		 * @uml.property  name="sqlserver"
-		 * @uml.associationEnd  
 		 */
 		sqlserver,
 
 		/**
-		 * @uml.property  name="interbase"
-		 * @uml.associationEnd  
 		 */
 		interbase,
 
 		/**
-		 * @uml.property  name="derby"
-		 * @uml.associationEnd  
 		 */
 		derby,
 
 		/**
-		 * @uml.property  name="unknown"
-		 * @uml.associationEnd  
 		 */
 		unknown;
 	}

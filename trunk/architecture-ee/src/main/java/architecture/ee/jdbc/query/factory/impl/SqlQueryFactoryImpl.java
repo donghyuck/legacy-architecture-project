@@ -34,8 +34,6 @@ import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
 	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
 	 */
 	private final Configuration configuration;
 	
@@ -47,7 +45,6 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
 	/**
 	 * @return
-	 * @uml.property  name="configuration"
 	 */
 	public Configuration getConfiguration() {
 		return configuration;
@@ -55,7 +52,6 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 
 	/**
 	 * @param defaultDataSource
-	 * @uml.property  name="dataSource"
 	 */
 	public void setDataSource(DataSource defaultDataSource) {
 		this.dataSource = defaultDataSource;

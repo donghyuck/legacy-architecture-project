@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.i18n.I18nTextResourceBundle;
@@ -16,61 +19,55 @@ import architecture.ee.i18n.I18nTextResourceBundle;
  */
 public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> implements I18nLocalizer {
 
+	private static final Log log = LogFactory.getLog(I18nLocalizerModelImpl.class);
 	/**
-	 * @uml.property  name="localizerId"
 	 */
 	private long localizerId = -1L ;
     /**
-	 * @uml.property  name="description"
 	 */
     private String description ;
 	/**
-	 * @uml.property  name="name"
 	 */
 	private String name ;
 	/**
-	 * @uml.property  name="i18nLocale"
-	 * @uml.associationEnd  
 	 */
 	private I18nLocale i18nLocale ;
 	/**
-	 * @uml.property  name="localeId"
 	 */
 	private long localeId = -1L ;
 	/**
-	 * @uml.property  name="resourceBundle"
 	 */
 	private ResourceBundle resourceBundle ;
+	
 	private Map<String, String> texts;
 	
 	public I18nLocalizerModelImpl() {
 		this.i18nLocale = null;
 		this.description = null;
 		this.resourceBundle = null;
+		this.name = null;
 		this.texts = new HashMap<String, String>();
 	}
 	
 	/**
 	 * @return
-	 * @uml.property  name="resourceBundle"
 	 */
 	public ResourceBundle getResourceBundle() {		
-		if(resourceBundle == null){
+		if(resourceBundle == null){						
 			List<String[]> keyValues = new ArrayList<String[]>();
 			for(String key : texts.keySet()){
 				keyValues.add(new String[]{key, texts.get(key)});
-			}					
+			}			
 			if(getI18nLocale()!=null){
 				this.resourceBundle = new I18nTextResourceBundle(keyValues, getI18nLocale().toJavaLocale()); 	
 			}else{
 				this.resourceBundle = new I18nTextResourceBundle(keyValues);
-			}
+			}			
 		}		
 		return resourceBundle;
 	}
 	/**
 	 * @param resourceBundle
-	 * @uml.property  name="resourceBundle"
 	 */
 	public void setResourceBundle(ResourceBundle resourceBundle) {
 		this.resourceBundle = resourceBundle;
@@ -88,14 +85,12 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @return
-	 * @uml.property  name="localeId"
 	 */
 	public long getLocaleId() {
 		return localeId;
 	}
 	/**
 	 * @param localeId
-	 * @uml.property  name="localeId"
 	 */
 	public void setLocaleId(long localeId) {
 		this.localeId = localeId;
@@ -116,7 +111,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @return
-	 * @uml.property  name="localizerId"
 	 */
 	public long getLocalizerId() {
 		return localizerId;
@@ -124,7 +118,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @param localizerId
-	 * @uml.property  name="localizerId"
 	 */
 	public void setLocalizerId(long localizerId) {
 		this.localizerId = localizerId;
@@ -132,7 +125,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @return
-	 * @uml.property  name="description"
 	 */
 	public String getDescription() {
 		return description;
@@ -140,7 +132,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @param description
-	 * @uml.property  name="description"
 	 */
 	public void setDescription(String description) {
 		this.description = description;
@@ -148,7 +139,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @return
-	 * @uml.property  name="name"
 	 */
 	public String getName() {
 		return name;
@@ -156,7 +146,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @param resourceBundleName
-	 * @uml.property  name="name"
 	 */
 	public void setName(String resourceBundleName) {
 		this.name = resourceBundleName;
@@ -164,7 +153,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @return
-	 * @uml.property  name="i18nLocale"
 	 */
 	public I18nLocale getI18nLocale() {
 		return i18nLocale;
@@ -172,7 +160,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 
 	/**
 	 * @param i18nLocale
-	 * @uml.property  name="i18nLocale"
 	 */
 	public void setI18nLocale(I18nLocale i18nLocale) {
 		this.i18nLocale = i18nLocale;
@@ -182,23 +169,22 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 	public Object clone() {
 		I18nLocalizerModelImpl impl = new I18nLocalizerModelImpl();
 		impl.setLocalizerId(localizerId);
+		impl.setName(name);
 		impl.setDescription(description);
 		impl.setI18nLocale(i18nLocale);
 		impl.setI18nTexts(getI18nTexts());
 		impl.setCreationDate(getCreationDate());
 		impl.setModifiedDate(getModifiedDate());
-
 		return impl;
 	}
 
 	public void setI18nTexts(Map<String, String> texts) {
 		this.texts = texts;
+		this.resourceBundle = null;
+		getResourceBundle();
 	}
 
 	public Map<String, String> getI18nTexts() {
-		if( getResourceBundle() != null){
-			// ..
-		}
 		return texts;
 	}
 

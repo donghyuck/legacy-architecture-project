@@ -11,38 +11,25 @@ public class PhoneNumber {
 	 */
 	enum Type {
 		/**
-		 * @uml.property  name="hOME"
-		 * @uml.associationEnd  
 		 */
 		HOME("home"), 
 		/**
-		 * @uml.property  name="wORK"
-		 * @uml.associationEnd  
 		 */
 		WORK("work"), 
 		/**
-		 * @uml.property  name="fAX"
-		 * @uml.associationEnd  
 		 */
 		FAX("fax"), 
 		/**
-		 * @uml.property  name="mOBILE"
-		 * @uml.associationEnd  
 		 */
 		MOBILE("mobile"), 
 		/**
-		 * @uml.property  name="pAGER"
-		 * @uml.associationEnd  
 		 */
 		PAGER("pager"), 
 		/**
-		 * @uml.property  name="oTHER"
-		 * @uml.associationEnd  
 		 */
 		OTHER("other");
 		
 		/**
-		 * @uml.property  name="name"
 		 */
 		private String name;
 
@@ -52,7 +39,6 @@ public class PhoneNumber {
 		
         /**
 		 * @return
-		 * @uml.property  name="name"
 		 */
         public String getName()
         {
@@ -84,12 +70,9 @@ public class PhoneNumber {
 	}
 	
     /**
-	 * @uml.property  name="phoneNumber"
 	 */
     private String phoneNumber;
     /**
-	 * @uml.property  name="type"
-	 * @uml.associationEnd  
 	 */
     private Type type;	
 
@@ -105,7 +88,6 @@ public class PhoneNumber {
 
     /**
 	 * @param phoneNumber
-	 * @uml.property  name="phoneNumber"
 	 */
     public void setPhoneNumber(String phoneNumber)
     {
@@ -114,7 +96,6 @@ public class PhoneNumber {
 
     /**
 	 * @return
-	 * @uml.property  name="phoneNumber"
 	 */
     public String getPhoneNumber()
     {
@@ -136,7 +117,6 @@ public class PhoneNumber {
 
     /**
 	 * @param type
-	 * @uml.property  name="type"
 	 */
     public void setType(Type type)
     {
@@ -145,7 +125,6 @@ public class PhoneNumber {
 
     /**
 	 * @return
-	 * @uml.property  name="type"
 	 */
     public Type getType()
     {

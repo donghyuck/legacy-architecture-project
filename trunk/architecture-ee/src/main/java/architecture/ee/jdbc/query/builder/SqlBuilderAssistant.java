@@ -31,7 +31,6 @@ import architecture.ee.jdbc.query.sql.SqlSource;
 public class SqlBuilderAssistant extends AbstractBuilder {
 
 	/**
-	 * @uml.property  name="currentNamespace"
 	 */
 	private String currentNamespace;
 	private String resource;
@@ -66,7 +65,6 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 
 	/**
 	 * @return
-	 * @uml.property  name="currentNamespace"
 	 */
 	public String getCurrentNamespace() {
 		return currentNamespace;
@@ -74,7 +72,6 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 
 	/**
 	 * @param currentNamespace
-	 * @uml.property  name="currentNamespace"
 	 */
 	public void setCurrentNamespace(String currentNamespace) {
 		if (currentNamespace != null) {

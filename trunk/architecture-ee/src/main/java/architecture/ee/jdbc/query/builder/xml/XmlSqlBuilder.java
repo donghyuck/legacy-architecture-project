@@ -36,14 +36,10 @@ import architecture.ee.jdbc.query.parser.XPathParser;
 public class XmlSqlBuilder extends AbstractBuilder {
 
 	/**
-	 * @uml.property  name="builderAssistant"
-	 * @uml.associationEnd  
 	 */
 	private SqlBuilderAssistant builderAssistant;
 
 	/**
-	 * @uml.property  name="parser"
-	 * @uml.associationEnd  
 	 */
 	private XPathParser parser;
 

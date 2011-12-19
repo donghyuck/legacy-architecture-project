@@ -20,7 +20,6 @@ public class AnonymousUser implements AuthToken, User {
 	public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
 	
 	/**
-	 * @uml.property  name="username"
 	 */
 	private String username ;
 	
@@ -43,7 +42,6 @@ public class AnonymousUser implements AuthToken, User {
 	
 	/**
 	 * @return
-	 * @uml.property  name="username"
 	 */
 	public String getUsername() {
 		return username;

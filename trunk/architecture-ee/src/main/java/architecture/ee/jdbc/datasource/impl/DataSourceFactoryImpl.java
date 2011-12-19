@@ -35,7 +35,9 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 				}
 			}
 		}		
+		
 		String pooledTag = "database.default.pooledDataSourceProvider";		
+		
 		if( dataSource == null && setupProperties.getChildrenNames(pooledTag).size() > 0 ){
 			String driverClassName = setupProperties.get( pooledTag + ".driverClassName"); 
 			String url = setupProperties.get( pooledTag + ".url"); 

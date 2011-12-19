@@ -16,14 +16,10 @@ import architecture.ee.user.dao.GroupDao;
 public class GroupManagerImpl extends AbstractGroupManager {
 	
 	/**
-	 * @uml.property  name="groupDao"
-	 * @uml.associationEnd  
 	 */
 	private GroupDao groupDao;
 	
 	/**
-	 * @uml.property  name="userManager"
-	 * @uml.associationEnd  
 	 */
 	private UserManager userManager;
 	
@@ -33,7 +29,6 @@ public class GroupManagerImpl extends AbstractGroupManager {
 
 	/**
 	 * @param groupDao
-	 * @uml.property  name="groupDao"
 	 */
 	public void setGroupDao(GroupDao groupDao) {
 		this.groupDao = groupDao;
@@ -43,7 +38,6 @@ public class GroupManagerImpl extends AbstractGroupManager {
 
 	/**
 	 * @param userManager
-	 * @uml.property  name="userManager"
 	 */
 	public void setUserManager(UserManager userManager) {
 		this.userManager = userManager;
