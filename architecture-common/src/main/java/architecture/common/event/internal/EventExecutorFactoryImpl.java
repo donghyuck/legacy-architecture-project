@@ -9,8 +9,15 @@ import java.util.concurrent.ThreadPoolExecutor;
 import architecture.common.event.config.EventThreadPoolConfiguration;
 import architecture.common.event.spi.EventExecutorFactory;
 
+/**
+ * @author    donghyuck
+ */
 public class EventExecutorFactoryImpl implements EventExecutorFactory
 {
+    /**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
     private final EventThreadPoolConfiguration configuration;
 
     public EventExecutorFactoryImpl(EventThreadPoolConfiguration configuration)
