@@ -20,14 +20,18 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 /**
- * 
- * @author DongHyuck, Son 
- *
+ * @author    DongHyuck, Son
  */
 public class Localizer {
 	
 	public static final String PREFIX_DELIM = "-";
+	/**
+	 * @uml.property  name="pREFIX"
+	 */
 	public static final String PREFIX = "prefix";
+	/**
+	 * @uml.property  name="vERSION"
+	 */
 	public static final String VERSION = "version";
 	public static final String ID = "id";
 	public static final String MESSAGE_BODY = "messagebody";
@@ -42,10 +46,19 @@ public class Localizer {
         bundle = resourcebundle;
     }
 	
+    /**
+	 * @return
+	 * @throws MissingResourceException
+	 * @uml.property  name="vERSION"
+	 */
     public String getVersion() throws MissingResourceException {
         return (String) bundle.getObject(VERSION);
     }
 	
+    /**
+	 * @return
+	 * @uml.property  name="pREFIX"
+	 */
     public String getPrefix(){
         String prefix = null;
         try {

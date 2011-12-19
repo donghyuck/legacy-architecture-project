@@ -20,9 +20,7 @@ import java.util.MissingResourceException;
 
 import architecture.common.util.ImplFactory;
 /**
- * 
- * @author DongHyuck, Son 
- *
+ * @author    DongHyuck, Son
  */
 public class LocalizerFactory {
 
@@ -36,6 +34,10 @@ public class LocalizerFactory {
 
 	}
 
+	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
+	 */
 	private static Implementation impl = null;
 
 	static {
