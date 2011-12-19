@@ -9,12 +9,8 @@ import architecture.common.event.spi.EventExecutorFactory;
 import architecture.common.event.spi.ListenerInvoker;
 
 /**
- * This dispatcher will dispatch event asynchronously if:
- * <ul>
- * <li>the event 'is' asynchronous, as resolved by the {@link AsynchronousEventResolver} and</li>
- * <li>the invoker {@link architecture.common.event.api.ListenerInvoker#supportAsynchronousEvents() supports asynchronous events}</li>
- * </ul>
- * @since 2.0
+ * This dispatcher will dispatch event asynchronously if: <ul> <li>the event 'is' asynchronous, as resolved by the    {@link AsynchronousEventResolver}    and</li> <li>the invoker    {@link architecture.common.event.api.ListenerInvoker#supportAsynchronousEvents()    supports asynchronous events}   </li> </ul>
+ * @since    2.0
  */
 public final class AsynchronousAbleEventDispatcher implements EventDispatcher
 {
@@ -34,6 +30,10 @@ public final class AsynchronousAbleEventDispatcher implements EventDispatcher
      */
     private final Executor asynchronousExecutor;
 
+    /**
+	 * @uml.property  name="asynchronousEventResolver"
+	 * @uml.associationEnd  
+	 */
     private final AsynchronousEventResolver asynchronousEventResolver;
 
     /**
