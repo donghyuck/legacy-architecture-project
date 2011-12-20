@@ -27,8 +27,15 @@ public class MoseMMSClient implements MMSClient {
 	private String username = "";			     // ID
 	private String password = "";		         // Password
 	private String soapUrl = "/";                //수정금지
+	private MoseMMSResultReceiver receiver = null ;
 	
 	
+	
+	
+	public void setReceiver(MoseMMSResultReceiver reveiver) {
+		this.receiver = reveiver;
+	}
+
 	public int getPort() {
 		return port;
 	}
@@ -149,7 +156,8 @@ public class MoseMMSClient implements MMSClient {
 				String ststus = response.getStatus();  //  전송요청 상태 정보(200일 경우 성공)
 				log.info( "MMS[ ID=" + messageID + ", status=" + ststus + "] send success.");
 				
-				//MoseMMSServiceHelper.messages.add(messageID);				
+				if(receiver!=null)
+				    receiver.addMessingId(messageID);				
 				
 			}else{				
 				SoapFault soapFault = response.getSoapFault();  //  전송 실패 정보
