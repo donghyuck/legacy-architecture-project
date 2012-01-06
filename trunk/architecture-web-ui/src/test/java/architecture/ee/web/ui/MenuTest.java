@@ -24,12 +24,12 @@ public class MenuTest {
 	
 	@Test
 	public void testGetApplicationContext(){
-		getApplicationContext();
+		//getApplicationContext();
 	}
 	
 	@Test
 	public void testGetMenu(){
-		MenuBuilder builder = (MenuBuilder)getApplicationContext().getBean("menuBuilder");
+		/*MenuBuilder builder = (MenuBuilder)getApplicationContext().getBean("menuBuilder");
 		
 		MenuTree menu = builder.getTreeByName("USER");
 		System.out.println( "" + menu.getRootElement().getData().getTitle() );
@@ -39,6 +39,6 @@ public class MenuTest {
 				System.out.println( "  -" + cc.getData().getTitle() );
 			}
 		}
-		
+		*/
 	}
 }
