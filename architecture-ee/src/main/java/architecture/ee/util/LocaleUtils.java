@@ -27,6 +27,13 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
      * @return The Java Locale that matches the locale code, or <tt>null</tt>.                  
      */
     public static Locale localeCodeToLocale(String localeCode) {
+    	
+		int idx = localeCode.lastIndexOf('_');
+		if( idx > 0 ){
+			String end = localeCode.substring(idx + 1).toUpperCase();
+			String start = localeCode.substring(0, idx + 1);
+			return toLocale(start + end);
+		}    	
     	return toLocale(localeCode);
     }
     

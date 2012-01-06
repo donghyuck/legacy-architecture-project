@@ -35,20 +35,11 @@
 		<property name="resourceLocations">
 			<list>
 				<value>res:sql/default-framework-queryset.xml</value>
+				<value>res:sql/default-web-ui-framework-queryset.xml</value>
 			</list>
 		</property>
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
-	<!-- ================================================ -->
-	<!-- 2. Transaction                                   -->
-	<!-- ================================================ -->	
-	<bean id="transactionManager" 
-	    class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	    <property name="dataSource" ref="dataSource"/>
-	</bean>
-
-	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<!-- =================================================== -->
 	<!-- 3. Sequencer                                        -->

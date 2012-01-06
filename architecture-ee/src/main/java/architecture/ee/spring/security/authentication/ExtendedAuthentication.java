@@ -3,7 +3,6 @@ package architecture.ee.spring.security.authentication;
 import org.springframework.security.core.Authentication;
 
 import architecture.ee.security.authentication.AuthToken;
-
 import architecture.ee.user.User;
 
 public interface ExtendedAuthentication extends Authentication {

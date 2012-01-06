@@ -53,16 +53,19 @@ public class SecurityTest {
 		
 	}
 	
+
 	public void testPasswordEncoder(){
 
+		//77d15fa93b2a3274c76126a3a10abd4d2823308a7018f75998918f7a64642a9a
+		//6bbdf2b028e0a58dcadc17227bc2e8f7d53a8b50aaf5dd08655dbc5fd4681991
 		String rawPass = "1234qwer";
 		MessageDigestPasswordEncoder encoder = (MessageDigestPasswordEncoder) Bootstrap.getBootstrapComponent(PasswordEncoder.class);
 		log.debug("encoding:" + encoder.getAlgorithm());
-		log.debug("1:" + encoder.encodePassword(rawPass, "inkium"));
+		//log.debug("1:" + encoder.encodePassword(rawPass, "inkium"));
 		log.debug("2:" + encoder.encodePassword(rawPass, "andang"));
-		log.debug("3:" + encoder.encodePassword(rawPass, "tristan"));
+		//log.debug("3:" + encoder.encodePassword(rawPass, "tristan"));
 		log.debug("valid :"+
-		encoder.isPasswordValid("fb3434cb7192b801b7605e1aa42ac8e3bab2ad77", rawPass, "andang")
+		encoder.isPasswordValid("77d15fa93b2a3274c76126a3a10abd4d2823308a7018f75998918f7a64642a9a", rawPass, "andang")
 		);
 	}
 	

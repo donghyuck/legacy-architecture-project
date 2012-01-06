@@ -41,6 +41,9 @@ public class ExtendedUrlAuthenticationFailureHandler implements AuthenticationFa
      * the target view.
      */
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    	
+    	
+    	
         if (defaultFailureUrl == null) {
             logger.debug("No failure URL set, sending 401 Unauthorized error");
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication Failed: " + exception.getMessage());

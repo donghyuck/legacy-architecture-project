@@ -182,7 +182,7 @@
             CREATION_DATE,
             MODIFIED_DATE
         FROM V2_I18N_LOCALIZER
-        WHERE NAME = ?     
+        WHERE NAME = ?
     ]]></sql-query>
         
     <sql-query name="INSERT_LOCALIZER"><![CDATA[

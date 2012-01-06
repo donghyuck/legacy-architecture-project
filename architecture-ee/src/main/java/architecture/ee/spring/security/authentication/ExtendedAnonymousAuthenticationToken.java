@@ -10,6 +10,8 @@ import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 
 /**
+ * 
+ * 
  * @author  donghyuck
  */
 public class ExtendedAnonymousAuthenticationToken extends AnonymousAuthenticationToken implements ExtendedAuthentication {
