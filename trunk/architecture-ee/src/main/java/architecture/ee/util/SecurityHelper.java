@@ -57,15 +57,16 @@ public class SecurityHelper {
     
 	public static Authentication getAuthentication(){
 		return impl.getAuthentication();
-	}
+	}	
 	
 	public static List<String> getUserRoles(){		
-		Collection<GrantedAuthority> authorities = getAuthentication().getAuthorities();		
+		
+		Collection< ? extends GrantedAuthority> authorities = getAuthentication().getAuthorities();
 		List<String> list = new ArrayList<String>(authorities.size());		
 		for( GrantedAuthority authority : authorities ){
 			list.add( authority.getAuthority() );
 		}
 		return list;
-	}	
+	}
 	
 }

@@ -7,8 +7,7 @@ import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.user.User;
 import architecture.ee.util.SecurityHelper;
 
-public class SecurityContextAuthenticationProviderImpl implements
-		ExtendedAuthenticationProvider {
+public class SecurityContextAuthenticationProviderImpl implements ExtendedAuthenticationProvider {
 
     public SecurityContextAuthenticationProviderImpl()
     {

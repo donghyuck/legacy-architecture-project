@@ -11,7 +11,6 @@ import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ApplicationPropertyChangeEvent;
 import architecture.common.lifecycle.Component;
-import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
@@ -20,11 +19,12 @@ import architecture.common.lifecycle.StateChangeEvent;
 import architecture.common.lifecycle.Version;
 import architecture.ee.bootstrap.impl.RepositoryImpl;
 import architecture.ee.spring.lifecycle.SpringAdminService;
+import architecture.ee.spring.lifecycle.support.SpringLifecycleSupport;
 
 /**
  * @author  donghyuck
  */
-public class AdminServiceImpl extends ComponentImpl implements SpringAdminService {
+public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAdminService {
 
 	/**
 	 */
@@ -149,7 +149,7 @@ public class AdminServiceImpl extends ComponentImpl implements SpringAdminServic
         
         if(isSetServletContext() && isSetContextLoader()){
 			try{
-				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());				
+				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());			
 				this.applicationContext.start();
 
 			}finally{

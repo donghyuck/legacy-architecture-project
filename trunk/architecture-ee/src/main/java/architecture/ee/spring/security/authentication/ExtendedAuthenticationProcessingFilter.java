@@ -11,7 +11,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import architecture.ee.user.UserManager;
@@ -35,15 +34,20 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
 
 	public void setAuthenticationFailureUrl(String authenticationFailureUrl) {
 		ExtendedUrlAuthenticationFailureHandler handler = new ExtendedUrlAuthenticationFailureHandler(authenticationFailureUrl);
+		
 		setAuthenticationFailureHandler(handler);
 	}
 
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 		
-		log.debug("Beginning form-based authentication attempt.");
+		if(log.isDebugEnabled())
+			log.debug("Beginning form-based authentication attempt.");
+		
         Authentication auth = super.attemptAuthentication(request, response);
-        log.debug("Form-based authentication attempt complete.");        
+        
+        if(log.isDebugEnabled())
+        	log.debug("Form-based authentication attempt complete.");        
         
         UserTemplate user = null;
         try{

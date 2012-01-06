@@ -17,8 +17,7 @@
 	<!-- ================================================ -->
 	<!-- Global Timer for timed execution tasks. -->
 	
-	<bean id="taskExecutor"
-		class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
 		p:corePoolSize="5" 
 		p:maxPoolSize="10" 
 		p:queueCapacity="25" />
@@ -29,17 +28,14 @@
 	<!-- Event                                            -->
 	<!-- ================================================ -->
 
-	<bean id="eventDispatcher"
-		class="architecture.common.event.internal.AsynchronousAbleEventDispatcher"
+	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher"
 		depends-on="taskExecutor">
 		<constructor-arg index="0" ref="taskExecutor" />
 	</bean>
 	
-	<bean id="listenerHandlerConfiguration"
-		class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
+	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
 
-	<bean id="eventPublisher" 
-	    class="architecture.common.event.internal.EventPublisherImpl"
+	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl"
 		depends-on="eventDispatcher, listenerHandlerConfiguration" >
 		<constructor-arg index="0" ref="eventDispatcher" />
 		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
@@ -49,40 +45,34 @@
 	<!-- Plugin                                           -->
 	<!-- ================================================ -->
 	
-	<bean id="pluginCacheRegistry" 
-	    class="architecture.common.plugin.impl.PluginCacheRegistryImpl"
+	<bean id="pluginCacheRegistry" class="architecture.common.plugin.impl.PluginCacheRegistryImpl"
 		depends-on="ehcache">
 		<constructor-arg index="0" ref="ehcache" />
 	</bean>
 
-	<bean id="pluginManager" 
-	    class="architecture.common.plugin.impl.PluginManagerImpl"
+	<bean id="pluginManager" class="architecture.common.plugin.impl.PluginManagerImpl"
 		p:eventPublisher-ref="eventPublisher" />
 
 	<!-- ================================================ -->
 	<!-- Cache                                            -->
 	<!-- ================================================ -->
 	
-	<bean id="ehcache"
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"		
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"		
 		p:shared="false" />
 		
 	<!-- ================================================ -->
 	<!-- ConfigService & AdminService -->
 	<!-- ================================================ -->
 	
-	<bean id="contextLoader"
-		class="architecture.ee.spring.context.WebApplicationContextLoader" />
+	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />
 
-	<bean id="configService" 
-	    class="architecture.ee.admin.impl.ConfigServiceImpl"
+	<bean id="configService" class="architecture.ee.admin.impl.ConfigServiceImpl"
 		init-method="initialize" 
 		p:eventPublisher-ref="eventPublisher"
 		p:sqlQueryFactoryBuilder-ref="sqlQueryFactoryBuilder"
 		p:dataSource-ref="dataSource" />
 
-	<bean id="adminService" 
-	    class="architecture.ee.admin.impl.AdminServiceImpl"
+	<bean id="adminService" class="architecture.ee.admin.impl.AdminServiceImpl"
 		init-method="initialize" 
 		depends-on="eventPublisher, contextLoader, configService"
 		p:eventPublisher-ref="eventPublisher" 

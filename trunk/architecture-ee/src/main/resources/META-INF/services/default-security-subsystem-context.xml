@@ -108,12 +108,10 @@
 		p:groupIdCache-ref="groupIdCache"
 		p:groupCache-ref="groupCache" />
 
-
 	<bean id="roleManager" class="architecture.ee.security.role.impl.RoleManagerImpl"
 		p:roleDao-ref="roleDao" p:groupManager-ref="groupManager"
 		p:eventPublisher-ref="eventPublisher"
 		p:roleCache-ref="roleCache"
 		p:userRoleCache-ref="userRoleCache" />
-
 		
 </beans>
