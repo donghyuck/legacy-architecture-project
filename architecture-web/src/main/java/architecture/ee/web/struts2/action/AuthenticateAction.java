@@ -5,7 +5,7 @@ import architecture.ee.web.util.ParamUtils;
 
 import com.opensymphony.xwork2.Validateable;
 
-public class AuthenticateAction extends ExtendedActionSupport implements Validateable {
+public class AuthenticateAction extends FrameworkActionSupport implements Validateable {
 	
 	protected String successURL;
 	

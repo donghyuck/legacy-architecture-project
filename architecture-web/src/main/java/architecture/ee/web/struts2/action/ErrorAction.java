@@ -4,8 +4,7 @@ import org.apache.commons.lang.StringUtils;
 
 import architecture.ee.web.util.ParamUtils;
 
-public class ErrorAction extends ExtendedActionSupport {
-
+public class ErrorAction extends FrameworkActionSupport {
 	
 	private String status ;
 

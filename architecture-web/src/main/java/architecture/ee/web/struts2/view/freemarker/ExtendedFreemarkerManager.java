@@ -193,15 +193,15 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			Object action, HttpServletRequest request,
 			HttpServletResponse response) {
 		
-		super.populateContext(model, stack, action, request, response);
+		super.populateContext(model, stack, action, request, response);		
 		
-		HashMap map = new HashMap();		
+		HashMap<String, Object> map = new HashMap<String, Object>();		
 		populateStatics(map);		
 		model.putAll(map);
 	
 	}
 
-	public void populateStatics(Map model){
+	public void populateStatics(Map<String, Object> model){
 		
 		BeansWrapper b = (BeansWrapper)wrapper;
 		try {
@@ -217,7 +217,6 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 		TemplateHashModel staticModels = b.getStaticModels();
 		try {
-			model.put("AdminHelper",           staticModels.get("architecture.ee.util.AdminHelper"));
 			model.put("I18nTextUtils",         staticModels.get("architecture.ee.util.I18nTextUtils"));
 			model.put("LocaleUtils",           staticModels.get("architecture.ee.util.LocaleUtils"));
 			model.put("SecurityHelper",        staticModels.get("architecture.ee.util.SecurityHelper"));
@@ -228,8 +227,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			
 		} catch (TemplateModelException e) {
 			log.error(e);
-		}
-		
+		}		
 		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
 
 	}
