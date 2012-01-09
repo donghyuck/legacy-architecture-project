@@ -41,12 +41,11 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 		
 	
 	@SuppressWarnings("unchecked")
-	public <T> T getBootstrapComponent(Class<T> requiredType){	
+	public <T> T getBootstrapComponent(Class<T> requiredType){
 		
-		log.debug( "BootstrapComponent requiredType = " + requiredType.getName() );
+		log.debug( "BootstrapComponent requiredType = " + requiredType.getName() );	
 		
-		if( requiredType == Repository.class ){
-			
+		if( requiredType == Repository.class ){			
 			if( repository.getState() != State.INITIALIZED ){
 				try {
 					repository.initialize();
@@ -55,9 +54,6 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			return (T)repository;		
 		}
 		if( references.get(requiredType) == null){
-			/*for ( String n : getBootstrapApplicationContext().getBeanDefinitionNames())
-				log.debug(n);*/
-			
 			references.put(requiredType, new WeakReference<T>( getBootstrapApplicationContext().getBean(requiredType) ));			
 		}
 		return (T)references.get(requiredType).get();	
