@@ -239,12 +239,10 @@ public class JdbcHelperImpl implements JdbcHelper {
 
 						// Supports transactions?
 						transactionsSupported = metaData.supportsTransactions();
-						transactionIsolation = metaData
-								.getDefaultTransactionIsolation();
+						transactionIsolation = metaData.getDefaultTransactionIsolation();
 
 						// Supports subqueries?
-						subqueriesSupported = metaData
-								.supportsCorrelatedSubqueries();
+						subqueriesSupported = metaData.supportsCorrelatedSubqueries();
 						// Supports scroll insensitive result sets? Try/catch
 						// block is a
 						// workaround for DB2 JDBC driver, which throws an
@@ -252,8 +250,7 @@ public class JdbcHelperImpl implements JdbcHelper {
 						// the method call.
 
 						try {
-							scrollResultsSupported = metaData
-									.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE);
+							scrollResultsSupported = metaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE);
 						} catch (Exception e) {
 							scrollResultsSupported = false;
 						}
@@ -267,15 +264,12 @@ public class JdbcHelperImpl implements JdbcHelper {
 
 						// Get the database name so that we can perform meta
 						// data settings.
-						String dbName = metaData.getDatabaseProductName()
-								.toLowerCase();
-						String driverName = metaData.getDriverName()
-								.toLowerCase();
+						String dbName = metaData.getDatabaseProductName().toLowerCase();
+						String driverName = metaData.getDriverName().toLowerCase();
 						String dbVersion = metaData.getDatabaseProductVersion();
 
 						databaseProductName = metaData.getDatabaseProductName();
-						databaseProductVersion = metaData
-								.getDatabaseProductVersion();
+						databaseProductVersion = metaData.getDatabaseProductVersion();
 						jdbcDriverName = metaData.getDriverName();
 						jdbcDriverVersion = metaData.getDriverVersion();
 
@@ -288,8 +282,7 @@ public class JdbcHelperImpl implements JdbcHelper {
 								streamTextRequired = false;
 								fetchSizeSupported = true;
 								maxRowsSupported = false;
-							} else if (driverName
-									.indexOf("Weblogic, Inc. Java-OCI JDBC Driver") != -1)
+							} else if (driverName.indexOf("Weblogic, Inc. Java-OCI JDBC Driver") != -1)
 								streamTextRequired = false;
 						} else
 						// Postgres properties
@@ -366,5 +359,4 @@ public class JdbcHelperImpl implements JdbcHelper {
 
 		}
 	}
-
 }
