@@ -57,9 +57,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     /**
 	 */
     private FileObject rootFileObject = getRootFileObject() ;
-    
-	//private String rootURI = getRootURI();             
-    
+        
     /**
 	 */
     private ApplicationProperties setupProperties = null;
@@ -101,20 +99,20 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 			
 			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 			
-			try {
+			/*try {
 				Enumeration<URL> enumeration = classloader.getResources("application-init.xml");
 				do {
 					if (!enumeration.hasMoreElements())
 						break;
-					URL url = (URL) enumeration.nextElement();
-					
+					URL url = (URL) enumeration.nextElement();					
 					InputStream input = url.openStream();
 					XmlProperties prop = new XmlProperties(input);
 					String home = prop.getProperty("home");					
 					System.out.println( "application:" + home + "(" + url + "");
-					
 				} while (true);
-			} catch (IOException e) {}		
+			} catch (IOException e) {
+				
+			}	*/	
 			
 			try {		
 				InputStream input = classloader.getResourceAsStream("application-init.xml");			
@@ -162,33 +160,45 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     public void setServletContext(ServletContext servletContext){
     	
     	// 1. 서블릿 컨텍스트에 설정된 프로퍼티 값을 검사 : ARCHITECTURE_INSTALL_ROOT
-    	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY );    
+    	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY );    	
     	if(!StringUtils.isEmpty(value)){
     		try {        		
     			ServletContextResource resource = new ServletContextResource(servletContext, value);          		
         		File file = resource.getFile();
         		log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY + ":" + file.getAbsolutePath());
-
         		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
-				this.rootFileObject = obj;		
-				
-				setState(State.INITIALIZED);				
+				this.rootFileObject = obj;
+				setState(State.INITIALIZED);
     		} catch (Throwable e) {
     			this.rootFileObject = null;
 			}
-    	}
-    	    	    	
+    	}    	    	    	
+    	
+    	
+    	
     	if(rootFileObject == null){
     		FileObject obj;
 			try {
 				obj = VFSUtils.resolveFile(value);
 				log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY + ":" +  obj.getName().getURI()); 
-				this.rootFileObject = obj;
-				
+				this.rootFileObject = obj;				
 				setState(State.INITIALIZED);
 			} catch (Throwable e) {
 				log.error(e);
 			}    		
+    	}
+    	
+    	if(rootFileObject == null){
+    		try {   
+	    		ServletContextResource resource = new ServletContextResource(servletContext, "/WEB-INF");          
+	    		File file = resource.getFile();
+	    		log.debug( "Setting application runtime root with " + file.getAbsolutePath());
+	    		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
+				this.rootFileObject = obj;
+				setState(State.INITIALIZED);
+    		} catch (Throwable e) {
+    			this.rootFileObject = null;
+			}
     	}
     }    
     
@@ -226,7 +236,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     }
     
     
-
 	public ApplicationProperties getSetupApplicationProperties() {
 		if( setupProperties == null ){	
 			try {			
