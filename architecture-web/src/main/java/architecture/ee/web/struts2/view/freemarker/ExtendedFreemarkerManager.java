@@ -98,7 +98,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
         config.setTemplateExceptionHandler(getTemplateExceptionHandler()); 
     	config.setOutputEncoding(ApplicationHelper.getCharacterEncoding());
     	config.setDefaultEncoding(ApplicationHelper.getCharacterEncoding());
-    	config.addAutoImport("framework", "/template/default/include/framework-macros.ftl");
+    	config.addAutoImport("framework", "/template/common/include/framework-macros.ftl");
     	config.setLocalizedLookup(false);  
     	
     	
@@ -112,12 +112,12 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	    
 	    	int dealy = ApplicationHelper.getApplicationIntProperty(ApplicatioinConstants.FREEMARKER_TEMPLATE_UPDATE_DELAY_PROP_NAME, UPDATE_DELAY);
 	    	config.setTemplateUpdateDelay(dealy);
-	    	log.debug("(update) templateUpdateDelay: " + dealy );
+	    	log.debug("[template]UpdateDelay: " + dealy );
 	    
 	    }
         
         if(log.isDebugEnabled()){
-            log.debug("devMode:" + devMode );
+            log.debug("[template]DevMode:" + devMode );
         }
         
         HttpServletRequest request = ServletActionContext.getRequest();
@@ -166,8 +166,8 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
             log.error("Invalid template path specified: " + e.getMessage(), e);
         }
 		
-		return templatePathLoader != null ?
-                new MultiTemplateLoader(
+		return templatePathLoader != null ?                
+				new MultiTemplateLoader(
                 	new TemplateLoader[]{
                         templatePathLoader,
                         new ExtendedWebappTemplateLoader(servletContext),

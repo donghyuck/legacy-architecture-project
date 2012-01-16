@@ -13,8 +13,6 @@
         Template Subsystem Context
 	]]></description>
 				    
-	<bean id="freemarkerManager" 
-	    class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager" 
-	    p:templateUpdateDelay="2" />
+	<bean id="sitemeshFilter"  class="architecture.ee.web.theme.ThemeFilter" />
 			
 </beans>

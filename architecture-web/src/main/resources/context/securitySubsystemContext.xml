@@ -14,12 +14,14 @@
     
 	<security:global-method-security pre-post-annotations="enabled" />
 
-	<security:http auto-config="false" entry-point-ref="formAuthenticationEntryPoint">
-		<security:intercept-url pattern="/images/*" filters="none" />
-		<security:intercept-url pattern="/styles/*" filters="none" />	
-		<security:intercept-url pattern="/scripts/*" filters="none" />	
-		<security:intercept-url pattern="/includes/*" filters="none" />
-		<security:intercept-url pattern="/accounts/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	<security:http pattern="/images/*" security="none" />
+	<security:http pattern="/styles/*" security="none" />
+	<security:http pattern="/scripts/*" security="none" />
+	<security:http pattern="/includes/*" security="none" />
+
+	<security:http auto-config="false" pattern="/**" entry-point-ref="formAuthenticationEntryPoint">
+	    <security:anonymous enabled="false"/>
+	    <security:intercept-url pattern="/accounts/**" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:custom-filter position="ANONYMOUS_FILTER" ref="anonymousAuthenticationFilter" />
 		<security:custom-filter position="FORM_LOGIN_FILTER" ref="formAuthenticationFilter" />
 	</security:http>
@@ -32,7 +34,7 @@
         class="architecture.ee.spring.security.authentication.ExtendedAnonymousAuthenticationFilter">
     	<constructor-arg index="0" value="1234567890abcdefghijklmnopqrstuvwxyz"/> 
     	<constructor-arg index="1" value="ANONYMOUS"/> 
-    	<constructor-arg index="2" value="ROLE_ANONYMOUS"/>    
+    	<constructor-arg index="2" value="ROLE_ANONYMOUS"/>
     </bean>
         
 	<bean id="formAuthenticationFilter" class="architecture.ee.spring.security.authentication.ExtendedAuthenticationProcessingFilter"

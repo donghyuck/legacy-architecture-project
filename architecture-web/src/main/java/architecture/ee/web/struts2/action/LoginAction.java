@@ -10,6 +10,8 @@ import com.opensymphony.xwork2.Validateable;
 
 public class LoginAction extends FrameworkActionSupport implements Validateable {
 	
+	private static final long serialVersionUID = -1349336895281229035L;
+
 	protected String successURL;
     protected boolean loginBanned;
     protected boolean authzFailed;
