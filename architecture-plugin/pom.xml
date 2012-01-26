@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>architecture-parent</artifactId>
+    <groupId>architecture</groupId>
+    <version>1.0.0.RELEASE</version>
+    <relativePath>../architecture-parent</relativePath>
+  </parent>
+  <groupId>architecture.plugin</groupId>
+  <artifactId>architecture-plugin</artifactId>
+  <version>${project.build.version}</version>
+  <name>ARCHITECTURE - PLUGIN FRAMEWORK</name>
+  <scm>
+  	<url>https://power-j.googlecode.com/svn/trunk/architecture-plugin</url>
+  </scm>
+  <organization>
+  	<name>INKIUM</name>
+  	<url>http://www.inkium.com</url>
+  </organization>
+</project>
