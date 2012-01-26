@@ -1,7 +1,5 @@
 package architecture.common.event.api;
 
 public interface EventSource {
-	
-	 public abstract void setEventPublisher(EventPublisher eventPublisher);
-
+	public void setEventPublisher(EventPublisher eventPublisher);
 }

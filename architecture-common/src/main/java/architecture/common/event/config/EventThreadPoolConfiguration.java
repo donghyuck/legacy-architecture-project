@@ -7,11 +7,13 @@ import java.util.concurrent.TimeUnit;
  */
 public interface EventThreadPoolConfiguration
 {
-    int getCorePoolSize();
+	
+	public abstract int getCorePoolSize();
 
-    int getMaximumPoolSize();
+	public abstract int getMaximumPoolSize();
 
-    long getKeepAliveTime();
+	public abstract long getKeepAliveTime();
 
-    TimeUnit getTimeUnit();
+	public abstract TimeUnit getTimeUnit();
+	
 }

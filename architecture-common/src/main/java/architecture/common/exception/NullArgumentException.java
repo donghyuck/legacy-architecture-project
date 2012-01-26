@@ -45,7 +45,12 @@ package architecture.common.exception;
  */
 public class NullArgumentException extends IllegalArgumentException
 {
-   /** The name of the argument that was <tt>null</tt>. */
+   /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3074922704346693006L;
+
+/** The name of the argument that was <tt>null</tt>. */
    protected final String name;
 
    /** The index of the argument or null if no index. */

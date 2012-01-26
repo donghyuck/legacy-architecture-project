@@ -25,6 +25,11 @@ import org.apache.commons.lang.exception.NestableRuntimeException;
  */
 public class ComponentNotFoundException extends NestableRuntimeException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6833205543454491023L;
+
 	public ComponentNotFoundException() {
 		super();
 	}

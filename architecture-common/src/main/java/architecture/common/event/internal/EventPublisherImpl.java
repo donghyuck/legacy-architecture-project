@@ -13,6 +13,8 @@ import java.util.Set;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.config.ListenerHandlersConfiguration;
@@ -29,24 +31,33 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
 /**
- * <p>The default implementation of the    {@link architecture.ee.event.api.EventPublisher}    interface.</p> <p> <p>One can customise the event listening by instantiating with custom   {@link architecture.ee.event.spi.ListenerHandler    listener handlers}    and the event dispatching through   {@link architecture.ee.event.spi.EventDispatcher}   . See the    {@link architecture.ee.event.spi}    package for more information.</p>
+ * <p>
+ * The default implementation of the
+ * {@link architecture.ee.event.api.EventPublisher} interface.
+ * </p>
+ * <p>
+ * <p>
+ * One can customise the event listening by instantiating with custom
+ * {@link architecture.ee.event.spi.ListenerHandler listener handlers} and the
+ * event dispatching through {@link architecture.ee.event.spi.EventDispatcher} .
+ * See the {@link architecture.ee.event.spi} package for more information.
+ * </p>
+ * 
  * @see architecture.ee.event.spi.ListenerHandler
  * @see architecture.ee.event.spi.EventDispatcher
- * @since    2.0
+ * @since 2.0
  */
 public final class EventPublisherImpl implements EventPublisher
 {
-    /**
-	 * @uml.property  name="eventDispatcher"
-	 * @uml.associationEnd  
-	 */
+
+	private final Log log = LogFactory.getLog(getClass());
     private final EventDispatcher eventDispatcher;
     private final List<ListenerHandler> listenerHandlers;
 
     /**
      * <strong>Note:</strong> this field makes this implementation stateful
      */
-    private final Multimap<Class<?>, KeyedListenerInvoker> listenerInvokers;
+    private final Multimap<Class<?>, KeyedListenerInvoker> listenerInvokers = newMultimap();;
 
     /**
      * <p>If you need to customise the asynchronous handling, you should use the
@@ -62,7 +73,6 @@ public final class EventPublisherImpl implements EventPublisher
     {
         this.eventDispatcher = checkNotNull(eventDispatcher);
         this.listenerHandlers = checkNotNull(checkNotNull(listenerHandlersConfiguration).getListenerHandlers());
-        this.listenerInvokers = newMultimap();
     }
 
     public void publish(Object event)
@@ -169,6 +179,8 @@ public final class EventPublisherImpl implements EventPublisher
         }
     }
 
+    
+    
     private Multimap<Class<?>, KeyedListenerInvoker> newMultimap()
     {
         return Multimaps.synchronizedMultimap(
@@ -182,19 +194,12 @@ public final class EventPublisherImpl implements EventPublisher
                         }));
     }
 
-    /**
-	 * @author    donghyuck
-	 */
+
     private static final class KeyedListenerInvoker
     {
-        /**
-		 * @uml.property  name="key"
-		 */
+
         private final String key;
-        /**
-		 * @uml.property  name="invoker"
-		 * @uml.associationEnd  
-		 */
+
         private final ListenerInvoker invoker;
 
         KeyedListenerInvoker(String key, ListenerInvoker invoker)
@@ -203,19 +208,11 @@ public final class EventPublisherImpl implements EventPublisher
             this.key = key;
         }
 
-        /**
-		 * @return
-		 * @uml.property  name="key"
-		 */
         String getKey()
         {
             return key;
         }
 
-        /**
-		 * @return
-		 * @uml.property  name="invoker"
-		 */
         ListenerInvoker getInvoker()
         {
             return invoker;

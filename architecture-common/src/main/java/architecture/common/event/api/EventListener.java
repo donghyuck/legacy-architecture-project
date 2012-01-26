@@ -22,6 +22,7 @@ import java.lang.annotation.Target;
  * @see architecture.ee.event.internal.AnnotatedMethodsListenerHandler
  * @since 2.0
  */
+
 @Retention(RUNTIME)
 @Target(METHOD)
 @Documented

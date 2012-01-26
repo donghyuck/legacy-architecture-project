@@ -33,6 +33,8 @@ public interface ApplicationConstants {
 	
     public static final String DEFAULT_CHAR_ENCODING = "UTF-8";	
     
+    
+    
     public static final long SECOND = 1000L;
     
     public static final long MINUTE = 60000L;

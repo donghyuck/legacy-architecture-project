@@ -9,8 +9,16 @@ import architecture.common.event.spi.EventExecutorFactory;
 import architecture.common.event.spi.ListenerInvoker;
 
 /**
- * This dispatcher will dispatch event asynchronously if: <ul> <li>the event 'is' asynchronous, as resolved by the    {@link AsynchronousEventResolver}    and</li> <li>the invoker    {@link architecture.common.event.api.ListenerInvoker#supportAsynchronousEvents()    supports asynchronous events}   </li> </ul>
- * @since    2.0
+ * This dispatcher will dispatch event asynchronously if:
+ * <ul>
+ * <li>the event 'is' asynchronous, as resolved by the
+ * {@link AsynchronousEventResolver} and</li>
+ * <li>the invoker
+ * {@link architecture.common.event.api.ListenerInvoker#supportAsynchronousEvents()
+ * supports asynchronous events}</li>
+ * </ul>
+ * 
+ * @since 2.0
  */
 public final class AsynchronousAbleEventDispatcher implements EventDispatcher
 {
@@ -36,14 +44,16 @@ public final class AsynchronousAbleEventDispatcher implements EventDispatcher
 	 */
     private final AsynchronousEventResolver asynchronousEventResolver;
 
+    
     /**
-     * The only public constructor, uses an {@link com.atlassian.event.internal.AnnotationAsynchronousEventResolver}
+     * The only public constructor, uses an {@link architecture.common.event.internal.AnnotationAsynchronousEventResolver}
      * @param executorFactory the executor to use for asynchronous event listener invocations
      */
     public AsynchronousAbleEventDispatcher(EventExecutorFactory executorFactory)
     {
         this(executorFactory, new AnnotationAsynchronousEventResolver());
     }
+    
     
     public AsynchronousAbleEventDispatcher(Executor asynchronousExecutor)
     {
