@@ -24,6 +24,11 @@ import org.apache.commons.lang.exception.NestableException;
  */
 public class ComponentDisabledException extends NestableException {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9130521639406869163L;
+
 	public ComponentDisabledException() {
 		super();
 	}

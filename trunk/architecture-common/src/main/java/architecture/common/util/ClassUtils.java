@@ -15,11 +15,67 @@
  */
 package architecture.common.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ClassUtils extends org.apache.commons.lang.ClassUtils {
 
+
+    public static InputStream getResourceAsStream(String name)
+    {    	
+        return loadResource(name);
+    }
+    
+    public static InputStream loadResource(String name)
+    {
+        InputStream in = ClassUtils.class.getResourceAsStream(name);
+        if(in == null)
+        {
+            in = Thread.currentThread().getContextClassLoader().getResourceAsStream(name);
+            if(in == null)
+                in = ClassUtils.class.getClassLoader().getResourceAsStream(name);
+        }
+        if(in == null)
+            try
+            {
+               
+            }
+            catch(Throwable e)
+            {
+                //logger.warn((new StringBuilder()).append("Attempt to Load the resource ").append(name).append(" from plugin classloaders has failed, ").append("perhaps the application has not been initialized.").toString());
+            }
+        return in;
+    }
+
+    
+    public static InputStream getResourceAsStream(String resourceName, Class callingClass)
+    {
+        URL url = getResource(resourceName, callingClass);
+        try
+        {
+            return url == null ? null : url.openStream();
+        }
+        catch(IOException e)
+        {
+            return null;
+        }
+    }
+    
+    public static URL getResource(String resourceName, Class callingClass)
+    {
+        URL url = Thread.currentThread().getContextClassLoader().getResource(resourceName);
+        if(url == null)
+            url = ClassUtils.class.getClassLoader().getResource(resourceName);
+        if(url == null)
+            url = callingClass.getClassLoader().getResource(resourceName);
+        return url;
+    }
+    
+    
+	
 	/**
 	 * Finds all super classes and interfaces for a given class
 	 * 

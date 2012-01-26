@@ -7,5 +7,5 @@ import java.util.concurrent.Executor;
  */
 public interface EventExecutorFactory
 {
-    Executor getExecutor();
+	public abstract Executor getExecutor();
 }

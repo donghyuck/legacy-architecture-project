@@ -40,9 +40,14 @@ final class SingleParameterMethodListenerInvoker implements ListenerInvoker
         {
             throw new RuntimeException(e);
         }
-        catch (InvocationTargetException e)
+        catch(InvocationTargetException e)
         {
-            throw new RuntimeException(e);
+            if(e.getCause() == null)
+                throw new RuntimeException(e);
+            if(e.getCause().getMessage() == null)
+                throw new RuntimeException(e.getCause());
+            else
+                throw new RuntimeException(e.getCause().getMessage(), e.getCause());
         }
     }
 

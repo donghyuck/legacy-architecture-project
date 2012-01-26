@@ -14,5 +14,5 @@ public interface ListenerHandler
      * @param listener the listener object to get invokers for
      * @return a list of invokers linked to the listener object.
      */
-    List<? extends ListenerInvoker> getInvokers(Object listener);
+	public abstract List<? extends ListenerInvoker> getInvokers(Object listener);
 }

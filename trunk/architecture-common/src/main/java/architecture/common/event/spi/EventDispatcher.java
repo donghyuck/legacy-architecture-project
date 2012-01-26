@@ -18,5 +18,5 @@ public interface EventDispatcher {
 	 *             if either the {@code invoker} or the {@code event} is {@code
 	 *             null}
 	 */
-	void dispatch(ListenerInvoker invoker, Object event);
+	public abstract void dispatch(ListenerInvoker invoker, Object event);
 }

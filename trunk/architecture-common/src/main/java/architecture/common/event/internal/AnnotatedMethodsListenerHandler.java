@@ -79,16 +79,15 @@ public final class AnnotatedMethodsListenerHandler implements ListenerHandler
             }
             else
             {
-                throw new RuntimeException("Method <" + method + "> of class <" + method.getDeclaringClass() + "> " +
-                        "is annotated with <" + annotation.getClass().getName() + "> but has 0 or more than 1 parameters! " +
-                        "Listener methods MUST have 1 and only 1 parameter.");
+            	throw new RuntimeException((new StringBuilder()).append("Method <").append(method).append("> of class <").append(method.getDeclaringClass()).append("> ").append("is annotated with <").append(annotation.getClass().getName()).append("> but has 0 or more than 1 parameters! ").append("Listener methods MUST have 1 and only 1 parameter.").toString());
             }
+        }else{
+        	return false;
         }
-        return false;
     }
 
     @SuppressWarnings("unchecked")
-    private boolean isAnnotated(Method method)
+	private boolean isAnnotated(Method method)
     {
         return method.getAnnotation(annotation) != null;
     }

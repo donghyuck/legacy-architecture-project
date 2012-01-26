@@ -1,5 +1,7 @@
 package architecture.common.lifecycle;
 
+import java.io.File;
+
 public interface Repository extends Component {
 	
 	public ConfigRoot getConfigRoot();	
@@ -12,6 +14,8 @@ public interface Repository extends Component {
 	public String getRootURI();
 	
 	public String getURI(String name) ;
+	
+	public File getFile(String name);
 	
 	public String getEffectiveRootPath();
 	

@@ -19,7 +19,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
-import architecture.common.event.api.EventSource;
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.exception.ConfigurationError;
 import architecture.common.exception.ConfigurationWarning;
@@ -30,7 +29,7 @@ import architecture.common.exception.RuntimeWarning;
 /**
  * @author    donghyuck
  */
-public class ComponentImpl implements Component, EventSource {
+public class ComponentImpl implements Component {
     
     /**
 	 * @uml.property  name="name"
