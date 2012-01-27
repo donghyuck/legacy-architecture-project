@@ -1,5 +1,6 @@
 package architecture.ee.util;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -130,4 +131,80 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
     	}
     	return locales;
     }
+    
+    
+    // ***
+    
+
+    public static String getLocalizedString(String key)
+    {
+    	
+        Locale locale = ApplicationHelper.getLocale();
+        String s = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
+        if(s == null)
+            s = getLocalizedString(key, locale, null);
+        return s;
+    }
+
+    public static String getLocalizedString(String key, Locale locale)
+    {
+        String s = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
+        if(s == null)
+            s = getLocalizedString(key, locale, null);
+        return s;
+    }
+
+    public static String getLocalizedString(String key, List arguments)
+    {
+        return getLocalizedString(key, ApplicationHelper.getLocale(), arguments);
+    }
+
+    
+    public static String getLocalizedString(String key, Locale locale, List arguments)
+    {
+        if(key == null)
+            throw new NullPointerException("i18n key cannot be null");
+        if(locale == null)
+            locale = ApplicationHelper.getLocale();
+/*        JiveTextProvider provider = new JiveTextProvider(com/jivesoftware/util/LocaleUtils, new LocaleProviderWrapper(locale));
+        String value = provider.getText(getEditionizedKey(key), arguments);*/
+        String value = null;
+        if(value == null)
+            value = "";
+        return value;
+    }
+
+    public static String getLocalizedNumber(long number)
+    {
+        return NumberFormat.getInstance().format(number);
+    }
+
+    public static String getLocalizedNumber(long number, Locale locale)
+    {
+        return NumberFormat.getInstance(locale).format(number);
+    }
+
+    public static String getLocalizedNumber(double number)
+    {
+        return NumberFormat.getInstance().format(number);
+    }
+
+    public static String getLocalizedNumber(double number, Locale locale)
+    {
+        return NumberFormat.getInstance(locale).format(number);
+    }
+    
+    public static String getLocalizedString(String key, String pluginName)
+    {
+        return getLocalizedString(key, pluginName, null);
+    }
+
+    public static String getLocalizedString(String key, String pluginName, List arguments)
+    {
+       
+        return key;
+    }
+
+    
+
 }

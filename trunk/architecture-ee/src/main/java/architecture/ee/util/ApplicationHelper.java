@@ -7,10 +7,15 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
+import net.sf.ehcache.CacheManager;
+
+import architecture.common.cache.Cache;
+import architecture.common.cache.EhcacheWrapper;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
+import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.ee.admin.AdminHelper;
 import architecture.ee.i18n.I18nTextManager;
@@ -60,7 +65,23 @@ public final class ApplicationHelper {
 	public static State getState(){
 		return AdminHelper.getState();
 	}
+
+	public static Repository getRepository(){
+		return AdminHelper.getRepository();
+	}
 	
+	public static net.sf.ehcache.Cache creatCache(String name, long lifetime){
+		CacheManager cacheManager = AdminHelper.getCacheManager();
+		if( ! cacheManager.cacheExists(name) ){
+			net.sf.ehcache.config.CacheConfiguration config = new net.sf.ehcache.config.CacheConfiguration(name, 0);
+			config.setEternal(false);
+			config.setOverflowToDisk(false);
+			config.setTimeToLiveSeconds(lifetime);
+			net.sf.ehcache.Cache cache = new net.sf.ehcache.Cache(config);
+			cacheManager.addCache(cache);
+		}
+		return cacheManager.getCache(name);
+	}
 	
 	public static Locale getLocale(){
 		if (isReady()) {
