@@ -1,4 +1,4 @@
-package architecture.common.util;
+package architecture.common.task;
 
 import java.util.Date;
 import java.util.Map;
@@ -21,7 +21,7 @@ public class TaskEngine {
      * Constructs a new task engine.
      */
     private TaskEngine() {
-        timer = new Timer("timer-openfire", true);
+        timer = new Timer("timer-taskengine", true);
         executor = Executors.newCachedThreadPool(new ThreadFactory() {
 
             final AtomicInteger threadNumber = new AtomicInteger(1);
