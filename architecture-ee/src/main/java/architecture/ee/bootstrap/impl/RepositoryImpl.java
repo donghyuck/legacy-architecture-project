@@ -2,12 +2,9 @@ package architecture.ee.bootstrap.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.net.URL;
-import java.util.Enumeration;
 
 import javax.servlet.ServletContext;
 
@@ -174,8 +171,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 			}
     	}    	    	    	
     	
-    	
-    	
     	if(rootFileObject == null){
     		FileObject obj;
 			try {
@@ -289,6 +284,18 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 		try {
 			FileObject obj = getRootFileObject().resolveFile(name);		   
 			return  obj.getName().getURI();
+		} catch (FileSystemException e) {
+		}
+		return null;
+	}
+
+	public File getFile(String name) {
+		try {
+			FileObject obj = getRootFileObject().resolveFile(name);		 
+			
+			log.debug( obj.getURL().getFile() );
+			
+			return  new File(obj.getURL().getFile());
 		} catch (FileSystemException e) {
 		}
 		return null;

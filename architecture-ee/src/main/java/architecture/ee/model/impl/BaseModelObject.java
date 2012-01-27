@@ -1,5 +1,6 @@
 package architecture.ee.model.impl;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import architecture.ee.model.ModelObject;
@@ -11,30 +12,23 @@ public abstract class BaseModelObject<T> implements ModelObject<T> {
 
 	/**
 	 */
-	private boolean isNew = false;
-	/**
-	 */
 	private Date creationDate = null;
 	/**
 	 */
 	private Date modifiedDate = null;	
 	
-	public BaseModelObject() {}
-		
-	/**
-	 * @return
-	 */
-	public boolean isNew() {
-		return isNew;
+	public boolean isNew(){		
+		Object object = getPrimaryKeyObject();		
+		if(object == null)
+		{
+			return true;
+		}
+		if( object instanceof Long && ((Long)object) == -1L ){
+			return true;
+		}		
+		return false;		
 	}
 	
-	/**
-	 * @param isNew
-	 */
-	public void setNew(boolean isNew) {
-		this.isNew = isNew;
-	}
-
 	public abstract Object clone();
 	
 	/**
@@ -61,5 +55,6 @@ public abstract class BaseModelObject<T> implements ModelObject<T> {
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
+
+	public abstract Serializable getPrimaryKeyObject();
 }

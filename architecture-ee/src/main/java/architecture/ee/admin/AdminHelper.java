@@ -102,8 +102,13 @@ public final class AdminHelper {
 		return Bootstrap.getBootstrapComponent(RoleManager.class);
 	}
 	
-	public static net.sf.ehcache.Cache getCache(String name){			
-		if(!getCacheManager().cacheExists(name)){
+	public static net.sf.ehcache.Cache getCache(String name){
+	    return 	getCache(name, true);
+	}
+	
+	public static net.sf.ehcache.Cache getCache(String name, boolean createNotExist){			
+		
+		if(!getCacheManager().cacheExists(name) && createNotExist ){
 			
 			int maxElementsInMemory = 5000;
             boolean overflowToDisk = false;
@@ -122,12 +127,15 @@ public final class AdminHelper {
 				timeToIdleSeconds,
 				diskPersistent,
 				diskExpiryThreadIntervalSeconds
-			);
-			
+			);			
 			getCacheManager().addCache(memoryOnlyCache);			
+		}else{
+			return null;
 		}		
 		return getCacheManager().getCache(name);		
 	}	
+
+	
 	
 	public static String getMessage(String code, Object[] args, Locale locale){	
 		

@@ -15,21 +15,9 @@ public interface ModelObject<T> extends Comparable<T>, Serializable {
 	public boolean isNew();
 	
 	/**
-	 * Sets whether this model instance does not yet exist in the database.
-	 * @param n                 whether this model instance does not yet exist in the database
-	 */
-	public void setNew(boolean n);	
-	
-	/**
 	 * @return
 	 */
 	public Serializable getPrimaryKeyObject();	
-	
-	/**
-	 * @param  primaryKeyObj
-	 */
-	public void setPrimaryKeyObject(Serializable primaryKeyObj);	
-	
 	
 	public int getObjectType();
 

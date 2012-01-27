@@ -53,26 +53,6 @@ public interface I18nLocaleModel extends ModelObject<I18nLocale> {
     /**
 	 * @return
 	 */
-    public abstract Date getCreationDate();
-
-    /**
-	 * @param  creationDate
-	 */
-    public abstract void setCreationDate(Date creationDate) ;
-
-    /**
-	 * @return
-	 */
-    public abstract Date getModifiedDate();
-
-    /**
-	 * @param  modifiedDate
-	 */
-    public abstract void setModifiedDate(Date modifiedDate) ;
-        
-    /**
-	 * @return
-	 */
     public abstract String getVariant() ;
 
     /**

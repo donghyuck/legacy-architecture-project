@@ -2,6 +2,7 @@ package architecture.ee.spring.security.authentication;
 
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
@@ -26,7 +27,16 @@ public class ExtendedUserDetails extends User implements AuthToken {
 		this.userId = this.extUser.getUserId();
 	}
 	
-	
+	public ExtendedUserDetails(architecture.ee.user.User extUser, Authentication authen) {
+		super( extUser.getUsername(), extUser.isAnonymous() ? (String)authen.getPrincipal() : extUser.getPasswordHash(), 
+			   true, 
+			   true, 
+			   true, 
+			   true, 
+			   authen.getAuthorities());		
+		this.extUser = extUser;
+		this.userId = extUser.getUserId();
+	}
 
 	public ExtendedUserDetails(ExtendedAuthentication authen) {
 		super( authen.getUser().getUsername(), 
@@ -35,8 +45,7 @@ public class ExtendedUserDetails extends User implements AuthToken {
 			   true, 
 			   true, 
 			   true, 
-			   authen.getAuthorities());	
-		
+			   authen.getAuthorities());		
 		this.extUser = authen.getUser();
 		this.userId = extUser.getUserId();
 	}
