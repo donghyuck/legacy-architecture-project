@@ -38,25 +38,6 @@ public interface RoleModel extends ModelObject<Role> {
 	 * @param  description
 	 */
 	public abstract void setDescription(String description);
-		
-    /**
-	 * @return
-	 */
-    public abstract Date getCreationDate();
 
-    /**
-	 * @return
-	 */
-    public abstract Date getModifiedDate();
-
-    /**
-	 * @param  date
-	 */
-    public abstract void setCreationDate(Date date);
-
-    /**
-	 * @param  date
-	 */
-    public abstract void setModifiedDate(Date date);
     
 }

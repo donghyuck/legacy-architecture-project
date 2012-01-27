@@ -24,7 +24,7 @@ public interface ProfileFieldModel extends ModelObject<ProfileField> {
 
 
 	/**
-	 * @author                 donghyuck
+	 * @author donghyuck
 	 */
 	enum Type {
 		

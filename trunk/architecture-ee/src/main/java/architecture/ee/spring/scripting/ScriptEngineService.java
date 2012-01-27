@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.bsf.BSFManager;
 
 public class ScriptEngineService extends BSFManager {
-
 	
     public void setScriptEngineDefinitions(List<ScriptEngineDefinition> defs)
     {    	

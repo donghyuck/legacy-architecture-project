@@ -78,24 +78,5 @@ public interface I18nTextModel2 extends ModelObject<I18nText2> {
 	 * @param  text
 	 */
 	public abstract void setText(String text);
-	
-	/**
-	 * @return
-	 */
-	public abstract Date getCreationDate();
-	
-	/**
-	 * @param  creationDate
-	 */
-	public abstract void setCreationDate(Date creationDate);
-	
-	/**
-	 * @return
-	 */
-	public abstract Date getModifiedDate();
-	
-	/**
-	 * @param  modifiedDate
-	 */
-	public abstract void setModifiedDate(Date modifiedDate);
+
 }

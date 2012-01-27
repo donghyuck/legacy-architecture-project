@@ -44,32 +44,8 @@ public interface GroupModel extends ModelObject<Group>{
 	 * @throws UnauthorizedException
 	 */
     public abstract void setDescription(String description) throws UnauthorizedException;
-
-    /**
-	 * @return
-	 */
-    public abstract Date getCreationDate();
-
-    /**
-	 * @param date
-	 * @throws UnauthorizedException
-	 */
-    public abstract void setCreationDate(Date date) throws UnauthorizedException;
-
-    /**
-	 * @return
-	 */
-    public abstract Date getModifiedDate();
-
-    /**
-	 * @param date
-	 * @throws UnauthorizedException
-	 */
-    public abstract void setModifiedDate(Date date) throws UnauthorizedException;
-
-    /**
-	 * @return
-	 */
+    
+    
     public abstract Map<String, String> getProperties();
 	
     /**
