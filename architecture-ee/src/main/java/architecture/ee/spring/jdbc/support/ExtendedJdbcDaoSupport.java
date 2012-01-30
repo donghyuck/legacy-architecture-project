@@ -1,5 +1,7 @@
 package architecture.ee.spring.jdbc.support;
 
+import java.io.InputStream;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -89,6 +91,13 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	public void setLobHandler(LobHandler lobHandler){
 		getExtendedJdbcTemplate().setLobHandler(lobHandler);
 	} 
+	
+	protected void insertBlobAsStream(String sql, int contentLength, final InputStream in, final Object args[] ){
+		final LobHandler lobHandler = getLobHandler();
+		
+		
+	};
+	
 	
 	protected BoundSql getBoundSql(String statement ){
 		if(isSetConfiguration()){
