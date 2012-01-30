@@ -16,6 +16,7 @@
 package architecture.ee.spring.jdbc;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.sql.Connection;
@@ -45,7 +46,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterBatchUpdateUtils;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.lob.OracleLobHandler;
 
@@ -64,6 +67,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	 * @author  donghyuck
 	 */
 	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator {
+		
 		private String sqlToUse;
 		private Object params[];
 		private int paramTypes[];
@@ -402,8 +406,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public <T> List<T> queryForList(String sql, Map<String, ?> paramMap, Class<T> elementType) throws DataAccessException {
 		return query(sql, new MapSqlParameterSource(paramMap), new SingleColumnRowMapper<T>(elementType));
 	}
-	
-	
+		
 	public int[] batchUpdate(String sql, List<Object[]> batchArgs) {
 		return batchUpdate(sql, batchArgs, new int[0]);
 	}
@@ -426,5 +429,5 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		ParsedSql parsedSql = this.getParsedSql(sql);
 		return NamedParameterBatchUpdateUtils.executeBatchUpdateWithNamedParameters(parsedSql, batchArgs, this);
 	}
-	
+		
 }
