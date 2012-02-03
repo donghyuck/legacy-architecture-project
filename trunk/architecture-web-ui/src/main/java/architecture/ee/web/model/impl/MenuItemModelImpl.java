@@ -3,11 +3,12 @@ package architecture.ee.web.model.impl;
 import java.io.Serializable;
 import java.util.Map;
 
+import architecture.ee.model.impl.BaseModelObject;
+import architecture.ee.web.model.MenuItemModel;
 import architecture.ee.web.ui.menu.MenuItem;
 
-public class MenuItemModelImpl extends DefaultModelObject implements MenuItem {
-	
-	
+public class MenuItemModelImpl extends BaseModelObject<MenuItem> implements MenuItem, MenuItemModel {
+		
 	private long menuId = -1L;
 	
 	private long menuItemId = -1L;
@@ -111,6 +112,19 @@ public class MenuItemModelImpl extends DefaultModelObject implements MenuItem {
 	public String toString() {
 		return String.format("{ mentId:%s, name:%s, title=%s, location=%s, enabled=%s, parent=%s, index=%s, properties=%s }",
 				this.getMenuId(), getName(), getTitle(), getLocation(), isEnabled(), getParentId(), getIndex(), getProperties());
+	}
+
+	public int getObjectType() {
+		return 0;
+	}
+
+	public int compareTo(MenuItem o) {
+		return 0;
+	}
+
+	@Override
+	public Object clone() {
+		return null;
 	}
 
 }
