@@ -24,6 +24,8 @@ import architecture.common.exception.ConfigurationError;
 import architecture.common.exception.ConfigurationWarning;
 import architecture.common.exception.RuntimeError;
 import architecture.common.exception.RuntimeWarning;
+import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.lifecycle.event.StateChangeEvent;
 
 
 /**
@@ -115,6 +117,14 @@ public class ComponentImpl implements Component {
 	    	setState(State.STOPED);
     	}
     }
+    
+	public Repository getRepository(){
+		return Bootstrap.getBootstrapComponent(Repository.class);
+	}
+	
+	public ConfigRoot getConfigRoot() {
+		return getRepository().getConfigRoot();
+	}
 
     /**
 	 * @param newState

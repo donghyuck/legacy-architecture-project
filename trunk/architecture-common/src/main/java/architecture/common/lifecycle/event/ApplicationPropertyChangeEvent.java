@@ -13,48 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.lifecycle;
-
+package architecture.common.lifecycle.event;
 
 /**
  * @author    donghyuck
  */
-public class StateChangeEvent extends Event {
-   
+public class ApplicationPropertyChangeEvent extends PropertyChangeEvent {
+       
     /**
-	 * @uml.property  name="oldState"
-	 * @uml.associationEnd  
+	 * @author               donghyuck
 	 */
-    private State oldState;
-    
-    /**
-	 * @uml.property  name="newState"
-	 * @uml.associationEnd  
-	 */
-    private State newState;;
-    
-    public StateChangeEvent(Object source, State oldState, State newState)
-    {
-        super(source);
-        this.oldState = oldState;
-        this.newState = newState;
+    public enum Type {
+        ADDED, 
+        REMOVED, 
+        MODIFIED,
     }
 
-    /**
-	 * @return
-	 * @uml.property  name="newState"
+	/**
+	 * 
 	 */
-    public State getNewState()
-    {
-        return newState;
-    }
-    /**
-	 * @return
-	 * @uml.property  name="oldState"
-	 */
-    public State getOldState()
-    {
-        return oldState;
-    }
+	private static final long serialVersionUID = -128656485808459081L;
     
+    /**
+	 * @uml.property  name="eventType"
+	 * @uml.associationEnd  
+	 */
+    private Type eventType;
+    
+	public ApplicationPropertyChangeEvent(Object source, Type eventType, String propertyName, Object oldValue, Object newValue) {
+		super(source, propertyName, oldValue, newValue);
+		this.eventType = eventType;
+	}
+
+	/**
+	 * @return
+	 * @uml.property  name="eventType"
+	 */
+	public Type getEventType() {
+		return eventType;
+	}
+
 }

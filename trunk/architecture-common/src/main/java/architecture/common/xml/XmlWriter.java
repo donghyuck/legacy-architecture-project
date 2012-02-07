@@ -1,14 +1,39 @@
 package architecture.common.xml;
 
-import org.dom4j.*;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.StringTokenizer;
+
+import org.dom4j.Attribute;
+import org.dom4j.CDATA;
+import org.dom4j.Comment;
+import org.dom4j.Document;
+import org.dom4j.DocumentType;
+import org.dom4j.Element;
+import org.dom4j.Entity;
+import org.dom4j.Namespace;
+import org.dom4j.Node;
+import org.dom4j.ProcessingInstruction;
+import org.dom4j.Text;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.tree.NamespaceStack;
-import org.xml.sax.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.InputSource;
+import org.xml.sax.Locator;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXNotRecognizedException;
+import org.xml.sax.SAXNotSupportedException;
+import org.xml.sax.XMLReader;
 import org.xml.sax.ext.LexicalHandler;
 import org.xml.sax.helpers.XMLFilterImpl;
-
-import java.io.*;
-import java.util.*;
 
 /**
  * Replacement class of the original XMLWriter.java (version: 1.77) since the original is still using StringBuffer which is not fast.

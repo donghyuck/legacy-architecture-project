@@ -1,9 +1,12 @@
 package architecture.common.event.internal;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.Executor;
+import java.util.concurrent.ThreadPoolExecutor;
+
 import architecture.common.event.config.EventThreadPoolConfiguration;
 import architecture.common.event.spi.EventExecutorFactory;
-import java.util.concurrent.*;
+
 import com.google.common.base.Preconditions;
 
 public abstract class AbstractEventExecutorFactory implements EventExecutorFactory {

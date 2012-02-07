@@ -26,7 +26,6 @@ import java.util.StringTokenizer;
 import org.apache.commons.lang.StringEscapeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.dom4j.CDATA;
 import org.dom4j.Document;
 import org.dom4j.Element;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.lifecycle;
+package architecture.common.lifecycle.event;
 
 import java.util.Date;
 import java.util.UUID;
@@ -41,17 +41,26 @@ public abstract class Event extends java.util.EventObject {
 		this.createdDate = new Date();
 	}
 
-    public Date getDate()
-    {
-        return createdDate;
-    }
-    
     /**
 	 * @return
 	 * @uml.property  name="actor"
 	 */
     public Object getActor() {
         return actor;
+    }
+    
+    public Date getDate()
+    {
+        return createdDate;
+    }
+
+    /**
+	 * @return
+	 * @uml.property  name="uuid"
+	 */
+    public UUID getUuid()
+    {
+        return uuid;
     }
 
     /**
@@ -61,19 +70,10 @@ public abstract class Event extends java.util.EventObject {
     public void setActor(Object actor) {
         this.actor = actor;
     }
-
+    
     public void setDate(Date createdDate)
     {
         this.createdDate = createdDate;
-    }
-    
-    /**
-	 * @return
-	 * @uml.property  name="uuid"
-	 */
-    public UUID getUuid()
-    {
-        return uuid;
     }
     
     public String toString()
