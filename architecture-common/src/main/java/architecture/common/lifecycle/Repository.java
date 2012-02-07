@@ -4,21 +4,22 @@ import java.io.File;
 
 public interface Repository extends Component {
 	
-	public ConfigRoot getConfigRoot();	
+	public abstract ConfigRoot getConfigRoot();	
 	
 	/**
 	 * 루트 경로를 리턴한다.
 	 * 
 	 * @return
 	 */
-	public String getRootURI();
+	public abstract String getRootURI();
 	
-	public String getURI(String name) ;
+	public abstract String getURI(String name) ;
 	
-	public File getFile(String name);
+	public abstract File getFile(String name);
 	
-	public String getEffectiveRootPath();
+	public abstract String getEffectiveRootPath();
 	
-	public ApplicationProperties getSetupApplicationProperties();
+	public abstract ApplicationProperties getSetupApplicationProperties();
 	
+	public abstract File getLicenseFile();
 }

@@ -41,7 +41,7 @@ public class LockFreeEventPublisher implements EventPublisher {
 			com.google.common.collect.ImmutableList.Builder<ListenerHandler> builder = ImmutableList.builder();
 
 			for (ListenerHandler listenerHandler : listenerHandlers) {
-				builder.addAll((Iterable<ListenerHandler>)listenerHandler.getInvokers(listener));
+				builder.addAll((Iterable)listenerHandler.getInvokers(listener));
 			}
 
 			List<ListenerHandler> invokers = builder.build();

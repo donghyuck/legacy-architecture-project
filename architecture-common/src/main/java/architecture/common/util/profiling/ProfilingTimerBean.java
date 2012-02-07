@@ -9,7 +9,11 @@ public class ProfilingTimerBean
     implements Serializable
 {
 
-    List<ProfilingTimerBean> children;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2544236547702391434L;
+	List<ProfilingTimerBean> children;
     ProfilingTimerBean parent;
     String resource;
     long startTime;

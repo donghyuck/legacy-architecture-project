@@ -13,12 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.lifecycle;
+package architecture.common.lifecycle.event;
+
 
 /**
  * @author    donghyuck
  */
-public class PropertyChangeEvent  extends Event {
+public class PropertyChangeEvent extends Event {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3698156475373981206L;
 
 	/**
 	 * name of the property that changed. May be null, if not known.
@@ -49,15 +55,6 @@ public class PropertyChangeEvent  extends Event {
 	}
 
 	/**
-	 * Gets the programmatic name of the property that was changed.
-	 * @return    The programmatic name of the property that was changed. May be  null if multiple properties have changed.
-	 * @uml.property  name="propertyName"
-	 */
-	public String getPropertyName() {
-		return propertyName;
-	}
-
-	/**
 	 * Gets the new value for the property, expressed as an Object.
 	 * @return    The new value for the property, expressed as an Object. May be  null if multiple properties have changed.
 	 * @uml.property  name="newValue"
@@ -73,6 +70,15 @@ public class PropertyChangeEvent  extends Event {
 	 */
 	public Object getOldValue() {
 		return oldValue;
+	}
+
+	/**
+	 * Gets the programmatic name of the property that was changed.
+	 * @return    The programmatic name of the property that was changed. May be  null if multiple properties have changed.
+	 * @uml.property  name="propertyName"
+	 */
+	public String getPropertyName() {
+		return propertyName;
 	}
 
 }

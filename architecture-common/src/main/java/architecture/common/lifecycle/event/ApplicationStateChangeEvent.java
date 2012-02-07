@@ -13,9 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.lifecycle;
+package architecture.common.lifecycle.event;
+
+import architecture.common.lifecycle.State;
 
 public class ApplicationStateChangeEvent extends StateChangeEvent {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4416955727194560837L;
 
 	public ApplicationStateChangeEvent(Object source, State oldState, State newState) {
 		super(source, oldState, newState);

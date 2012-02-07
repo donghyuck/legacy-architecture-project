@@ -69,8 +69,10 @@ public enum State {
 	 * @uml.property  name="dESTROYED"
 	 * @uml.associationEnd  
 	 */
-	DESTROYED("DESTROYED");
-		
+	DESTROYED("DESTROYED"),
+	
+	POST_UPGRADE_STARTED("POST_UPGRADE_STARTED");
+	
 	private String desc;
 	
 	private State(String desc)
