@@ -15,6 +15,6 @@
 				    
 	<bean id="freemarkerManager" 
 	    class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager" 
-	    p:templateUpdateDelay="2" />
+	    p:templateUpdateDelay="2" />	
 			
 </beans>

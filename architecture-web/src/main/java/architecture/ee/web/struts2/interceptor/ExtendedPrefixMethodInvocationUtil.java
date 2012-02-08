@@ -2,12 +2,13 @@ package architecture.ee.web.struts2.interceptor;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.ee.util.cache.TimedExpirationMap;
+import architecture.common.cache.Cache;
+import architecture.common.cache.EhcacheWrapper;
+import architecture.ee.util.ApplicationHelper;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil;
@@ -16,7 +17,7 @@ public class ExtendedPrefixMethodInvocationUtil extends PrefixMethodInvocationUt
 
     private static final Log log = LogFactory.getLog(ExtendedPrefixMethodInvocationUtil.class);
        
-    private static Map cache = new TimedExpirationMap("Prefix lookup map", 0x1499700L, 0x36ee80L);
+    private static Cache<String, Boolean> cache = new EhcacheWrapper<String, Boolean>( ApplicationHelper.creatCache("Prefix lookup map", 0x1499700L));
     
 	public static void invokePrefixMethod(ActionInvocation actionInvocation, String prefixes[]) throws InvocationTargetException, IllegalAccessException {
 		
@@ -69,6 +70,6 @@ public class ExtendedPrefixMethodInvocationUtil extends PrefixMethodInvocationUt
 
     private static void putCache(String prefix, String methodName, Object action, boolean exists)
     {
-    	cache.put( getCacheKey(prefix, methodName, action), exists);        
+    	cache.put(getCacheKey(prefix, methodName, action), exists);        
     }
 }

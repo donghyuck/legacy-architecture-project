@@ -3,6 +3,7 @@ package architecture.ee.web.struts2.action;
 import java.util.Map;
 
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.util.OutputFormat;
 import architecture.ee.web.struts2.interceptor.RefererInterceptor;
 import architecture.ee.web.util.ParamUtils;
 
@@ -83,7 +84,10 @@ public class LoginAction extends FrameworkActionSupport implements Validateable 
         }else
         {        	
             getRedirects();
-            addActionMessage(getText("login.success.welcome.text", new String[]{ getUser().isNameVisible() ? getUser().getName() : getUser().getUsername() }));
+            addActionMessage(getText("login.success.welcome.text", new String[]{ getUser().isNameVisible() ? getUser().getName() : getUser().getUsername() })); 
+            
+            if( OutputFormat.stingToOutputFormat( getDataType() ) == OutputFormat.XML  )
+            	return "success-ajax";
             
             return SUCCESS;
         }
