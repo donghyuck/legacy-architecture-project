@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sql-queryset name="FRAMEWORK_WEB_V2" description="Query for Web UI Componets.">
+
+	<sql-query name="SELECT_ALL_THEME_MAPS" comment="전체 테마 메핑 정보"><![CDATA[
+    SELECT
+          THEME_NAME,
+		  THEME_MAP_TYPE,
+		  NUM_VALUE,
+		  STRING_VALUE,
+		  CREATION_DATE,
+		  MODIFIED_DATE
+	FROM V2_THEME_MAP ORDER BY THEME_NAME
+    ]]></sql-query>
+      
+
+</sql-queryset>

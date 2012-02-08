@@ -1,7 +1,5 @@
 package architecture.ee.web.struts2.view.freemarker;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,20 +8,18 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 import org.apache.struts2.views.freemarker.ScopesHashModel;
 
-import architecture.ee.util.ApplicatioinConstants;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.theme.ThemeManager;
+import architecture.ee.web.util.ApplicatioinConstants;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
-import freemarker.cache.ClassTemplateLoader;
-import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.StrongCacheStorage;
 import freemarker.cache.TemplateLoader;
@@ -39,11 +35,13 @@ import freemarker.template.TemplateModelException;
 public class ExtendedFreemarkerManager extends FreemarkerManager {
 	
     //private List tagModels;  
+	
+	private static final String THEME_CONFIG_SERVLET_CONTEXT_KEY = "themes.freemarker.Configuration";
 
     private static final Log log = LogFactory.getLog(ExtendedFreemarkerManager.class);
     
     private static final int UPDATE_DELAY = 60;
-        
+            
     public static final TemplateExceptionHandler LOG_DEBUG_HANDLER = new TemplateExceptionHandler() {
 
         public void handleTemplateException(TemplateException te, Environment env, Writer out)
@@ -53,75 +51,86 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
     };    
     
     public ExtendedFreemarkerManager() {
-	//	this.tagModels = Collections.emptyList();
+    	
 	}
+        
+
+    private ThemeManager getThemeManager() {
+		return ApplicationHelper.getComponent(ThemeManager.class);
+	}
+
+	public synchronized Configuration getThemeConfiguration(ServletContext servletContext) throws TemplateException {
+		Configuration config = (Configuration)servletContext.getAttribute(THEME_CONFIG_SERVLET_CONTEXT_KEY);
+        if(config == null)
+            synchronized(servletContext)
+            {
+            	if(wrapper == null)
+            		wrapper = createObjectWrapper(servletContext);
+                config = createThemeConfiguration(servletContext);                
+                servletContext.setAttribute(THEME_CONFIG_SERVLET_CONTEXT_KEY, config);
+            }
+        return config;
+    }
+	
+    protected Configuration createThemeConfiguration(ServletContext servletContext)
+    {	
+        Configuration configuration = new ThemeConfiguration(getThemeManager());
+        configureDefaultConfiguration(configuration, servletContext);
+        configuration.setTemplateLoader(getTemplateLoader(servletContext));
+        configuration.setWhitespaceStripping(true);
+        return configuration;
+    }
     
-    
-	/**
-     *  Create a freemarker Configuration. (1)
-     */
 	@Override
 	protected Configuration createConfiguration(ServletContext servletContext)
-			throws TemplateException {
-
+			throws TemplateException {		
         Configuration configuration = new Configuration();
-        configuration.setTemplateExceptionHandler(LOG_DEBUG_HANDLER);        
-        
-        if(log.isDebugEnabled()){
-            log.debug("mruMaxStrongSize: " + mruMaxStrongSize);
-            log.debug("templateUpdateDelay: " + templateUpdateDelay);
-        }
-        
-        if (mruMaxStrongSize > 0) {
-            configuration.setSetting(Configuration.CACHE_STORAGE_KEY, "strong:" + mruMaxStrongSize);
-        }               
-        if (templateUpdateDelay != null) {
-            configuration.setSetting(Configuration.TEMPLATE_UPDATE_DELAY_KEY, templateUpdateDelay );
-        }  
-                
-        if (encoding != null) {
-            configuration.setDefaultEncoding(encoding);
-        }        
-        
-        configuration.setWhitespaceStripping(true);        
-        
+        configuration.setTemplateLoader(getTemplateLoader(servletContext));
+        configureDefaultConfiguration(configuration, servletContext);
+        configuration.setWhitespaceStripping(true);
         return configuration;
 	}
 
-	/**
-	 * Load freemarker settings, default to freemarker.properties (if found in classpath
-	 */
+    protected void configureDefaultConfiguration(Configuration configuration, ServletContext servletContext)
+    {     
+    	configuration.setCacheStorage(new StrongCacheStorage());        
+    	configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());         
+        configuration.setOutputEncoding(ApplicationHelper.getCharacterEncoding());        
+        configuration.setDefaultEncoding(ApplicationHelper.getCharacterEncoding());        
+        configuration.addAutoImport("framework", "/template/common/include/framework-macros.ftl");        
+        configuration.setLocalizedLookup(false);      
+        configuration.setObjectWrapper(wrapper);
+    }
+    
+    protected TemplateLoader getTemplateLoader(ServletContext servletContext)
+    {    	
+    	log.debug("getTemplateLoader" );
+        return new MultiTemplateLoader(new TemplateLoader[] {
+            new ThemeTemplateLoader(), 
+            new ExtendedWebappTemplateLoader(servletContext), 
+            new ExtendedClassTemplateLoader(ExtendedFreemarkerResult.class, "/")
+        });
+    }
+    
+    
 	@Override
 	protected void loadSettings(ServletContext servletContext) {
-
-		config.setCacheStorage(new StrongCacheStorage());
-        config.setTemplateExceptionHandler(getTemplateExceptionHandler()); 
-    	config.setOutputEncoding(ApplicationHelper.getCharacterEncoding());
-    	config.setDefaultEncoding(ApplicationHelper.getCharacterEncoding());
-    	config.addAutoImport("framework", "/template/common/include/framework-macros.ftl");
-    	config.setLocalizedLookup(false);  
-    	
-    	
-		super.loadSettings(servletContext);   
 		
-        boolean devMode = isDevMode();
-        
+		log.debug("loadSettings" + config ); 
+		
+		super.loadSettings(servletContext);
+		boolean devMode = isDevMode();
+		
         if(devMode){
         	config.setTemplateUpdateDelay(1);
 	    }else{
-	    
 	    	int dealy = ApplicationHelper.getApplicationIntProperty(ApplicatioinConstants.FREEMARKER_TEMPLATE_UPDATE_DELAY_PROP_NAME, UPDATE_DELAY);
 	    	config.setTemplateUpdateDelay(dealy);
-	    	log.debug("[template]UpdateDelay: " + dealy );
-	    
 	    }
-        
-        if(log.isDebugEnabled()){
-            log.debug("[template]DevMode:" + devMode );
-        }
-        
         HttpServletRequest request = ServletActionContext.getRequest();
         HttpServletResponse response = ServletActionContext.getResponse();
+        
+        log.debug("loadSettings end" );  
         
         if( request == null || response == null )
         {
@@ -132,53 +141,15 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
         	config.setLocale(ApplicationHelper.getLocale());
         	config.setTimeZone(ApplicationHelper.getTimeZone());
             return;
-        }
+        }	
+        
 	}
 	
-	/**
-	 * 
-	 * create a freemarker TemplateLoader that loads freemarker template in the
-	 * following order :-
-	 * <ol>
-	 * <li>path defined in ServletContext init parameter named 'templatePath' or
-	 * 'TemplatePath' (must be an absolute path)</li>
-	 * <li>webapp classpath</li>
-	 * <li>struts's static folder (under
-	 * [STRUT2_SOURCE]/org/apache/struts2/static/</li>
-	 * </ol>
-	 * <p/>
-	 * 
-	 */
-	@Override
-	protected TemplateLoader createTemplateLoader(ServletContext servletContext, String templatePath) {
-		
-		TemplateLoader templatePathLoader = null;
-
-		if(! StringUtils.isEmpty(templatePath))
-        try {
-            if (templatePath.startsWith("class://")) {
-                // substring(7) is intentional as we "reuse" the last slash
-                templatePathLoader = new ClassTemplateLoader(getClass(), templatePath.substring(7));
-            } else if (templatePath.startsWith("file://")) {
-                templatePathLoader = new FileTemplateLoader(new File(templatePath));
-            }
-        } catch (IOException e) {
-            log.error("Invalid template path specified: " + e.getMessage(), e);
-        }
-		
-		return templatePathLoader != null ?                
-				new MultiTemplateLoader(
-                	new TemplateLoader[]{
-                        templatePathLoader,
-                        new ExtendedWebappTemplateLoader(servletContext),
-                        new ExtendedClassTemplateLoader(ExtendedFreemarkerResult.class, "/")
-                }): 
-                new MultiTemplateLoader(
-                	new TemplateLoader[]{
-                		new ExtendedWebappTemplateLoader(servletContext),
-                		new ExtendedClassTemplateLoader(ExtendedFreemarkerResult.class, "/")});
-	}
-	
+    protected boolean isDevMode()
+    {
+        return ApplicationHelper.getApplicationBooleanProperty("devMode", false);
+    } 
+    
 	@Override
 	protected ScopesHashModel buildScopesHashModel(
 			ServletContext servletContext, HttpServletRequest request,
@@ -203,7 +174,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 	public void populateStatics(Map<String, Object> model){
 		
-		BeansWrapper b = (BeansWrapper)wrapper;
+		BeansWrapper b = (BeansWrapper) wrapper;
 		try {
 			TemplateHashModel enumModels = b.getEnumModels();
 			try {
@@ -220,23 +191,17 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			model.put("I18nTextUtils",         staticModels.get("architecture.ee.util.I18nTextUtils"));
 			model.put("LocaleUtils",           staticModels.get("architecture.ee.util.LocaleUtils"));
 			model.put("SecurityHelper",        staticModels.get("architecture.ee.util.SecurityHelper"));
-			model.put("ApplicatioinConstants", staticModels.get("architecture.ee.util.ApplicatioinConstants"));
 			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));			
 			model.put("ParamUtils",            staticModels.get("architecture.ee.web.util.ParamUtils"));
 			model.put("ServletUtils",          staticModels.get("architecture.ee.web.util.ServletUtils"));
+			model.put("ApplicatioinConstants", staticModels.get("architecture.ee.web.util.ApplicatioinConstants"));
 			
 		} catch (TemplateModelException e) {
 			log.error(e);
 		}		
 		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
-
 	}
 	
-    protected boolean isDevMode()
-    {
-        return ApplicationHelper.getApplicationBooleanProperty("devMode", false);
-    } 
-            
     private TemplateExceptionHandler getTemplateExceptionHandler()
     {
         boolean devMode = isDevMode();
@@ -251,4 +216,5 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
         return handler;
     }
     
+	
 }

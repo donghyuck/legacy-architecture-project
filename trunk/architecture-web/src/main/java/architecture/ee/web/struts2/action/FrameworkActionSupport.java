@@ -16,8 +16,6 @@ import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 
-import com.opensymphony.xwork2.util.ValueStack;
-
 import architecture.ee.security.authentication.AuthToken;
 import architecture.ee.security.authentication.AuthenticationProvider;
 import architecture.ee.user.User;
@@ -27,6 +25,8 @@ import architecture.ee.util.SecurityHelper;
 import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
+
+import com.opensymphony.xwork2.util.ValueStack;
 
 public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSupport 
         implements SessionAware, ServletRequestAware, ServletResponseAware {
@@ -38,8 +38,7 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 	public static final String UNAUTHENTICATED = "unauthenticated";
 	public static final String JSON = "json";
 	public static final String XML = "xml";
-	
-	
+		
 	protected String dataType = OutputFormat.HTML.name().toLowerCase();
 
 	protected final transient Log log = LogFactory.getLog(getClass());

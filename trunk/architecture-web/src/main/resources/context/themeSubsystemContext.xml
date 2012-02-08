@@ -13,6 +13,18 @@
         Template Subsystem Context
 	]]></description>
 				    
-	<bean id="sitemeshFilter"  class="architecture.ee.web.theme.ThemeFilter" />
-			
+
+	<bean id="sitemeshFilter"  class="architecture.ee.web.theme.sitemesh.ThemeFilter" />
+	    
+	<bean id="themeManager"
+		class="architecture.ee.web.theme.impl.ThemeManagerImpl"
+		init-method="initialize"
+		p:themeDao-ref="themeDao"
+		p:extendedFreemarkerManager-ref="freemarkerManager"
+		depends-on="themeDao, freemarkerManager"  />
+
+	<bean id="themeDao" class="architecture.ee.web.theme.dao.impl.JdbcThemeDao" 
+	    parent="jdbcDaoSupport" 
+	    p:sequenceDao-ref="sequenceDao" />
+	    
 </beans>

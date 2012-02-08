@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.chain.contexts.ServletActionContext;
 
 import architecture.ee.util.ApplicationHelper;
 
@@ -74,7 +73,8 @@ public class FrameworkTextProvider extends TextProviderSupport {
         if(stack == null)
             locale = getLocale();
         else
-        	locale = (Locale) theStack.getContext().get(ServletActionContext.LOCALE_KEY);
+        	locale = (Locale) theStack.getContext().get(ActionContext.LOCALE);
+        
         
         if(locale == null)
             locale = getLocale();

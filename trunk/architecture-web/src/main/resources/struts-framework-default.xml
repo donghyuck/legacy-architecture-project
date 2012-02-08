@@ -8,7 +8,11 @@
 		<!-- Result Type Overrides and Additions -->
 		<result-types>
 			<result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" default="true" />
+			<result-type name="dispatcher" class="architecture.ee.web.struts2.view.servlet.ServletDispatcherResult" />
 			<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+			<result-type name="redirect-action" class="architecture.ee.web.struts2.view.servlet.ServletActionRedirectResult" />
+			
+			
 		</result-types>
         
 		<!-- Interceptor overrides and additions -->
@@ -53,7 +57,9 @@
 		<default-interceptor-ref name="defaultStack" />
 		<global-results>
 			<result name="login" type="redirect">/accounts/login.do</result>
-			<result name="none" type="httpheader">204</result>
+			<result name="unauthenticated" type="redirect">/accounts/login.do</result>
+            <result name="redirect" type="redirect">${url}</result>
+            <result name="none" type="httpheader">204</result>
 		</global-results>
 		<global-exception-mappings>
 			<exception-mapping exception="architecture.ee.security.UnauthorizedException" result="unauthorized" />
@@ -65,19 +71,20 @@
 	
 	<package name="framework-actions" extends="framework-struts-default" namespace="/">		
 		<action name="main" class="architecture.ee.web.struts2.action.MainAction">
-			<result name="success">${ dataType == "html" ? "/template/default/html/main.ftl" : "/template/default/success.ftl" }</result>
+			<result name="success">/template/ui/html/main.ftl</result>
 		</action>				
 		<action name="error" class="architecture.ee.web.struts2.action.ErrorAction">
-			<result name="success">/template/default/error.ftl</result>
+			<result name="success">/template/ui/html/error.ftl</result>
 		</action>		
 	</package>
 	
 	<package name="framework-accounts-actions" extends="framework-struts-default" namespace="/accounts">		
 		<action name="login" class="architecture.ee.web.struts2.action.LoginAction">
-			<result name="cancel" type="redirect">${cancelURL? != null ? cancelURL : "/main.do"}</result>
-			<result name="input">/template/default/html/login.ftl</result>
-			<result name="unauthenticated">${ dataType == "html" ? "/template/default/html/login.ftl" : "/template/default/xml/authenticate-error.ftl" }</result>
-			<result name="success">${ dataType == "html" ? ( successURL != null ? successURL : "/main.do" ) : "/template/default/xml/authenticate-success.ftl" }</result>
+			<result name="cancel" type="redirect">${cancelURL? != null ? cancelURL : "main.do"}</result>
+			<result name="input">/template/ui/html/login.ftl</result>
+			<result name="unauthenticated">${ dataType == "html" ? "/template/ui/html/login.ftl" : "/template/ui/xml/authenticate-error.ftl" }</result>
+			<result name="success" type="redirect" >${successURL != null ? successURL : "main.do"}</result>
+			<result name="success-ajax" >/template/ui/xml/authenticate-success.ftl</result>
 			<result name="create-profile" type="redirect">create-account.do?username=${username}</result>
 		</action>					
 	</package>

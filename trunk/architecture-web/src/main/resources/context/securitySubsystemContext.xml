@@ -43,8 +43,10 @@
 		p:usernameParameter="username"
 		p:passwordParameter="password"
 		p:filterProcessesUrl="/accounts/authenticate"
-		p:authenticationFailureUrl="/accounts/login.do?authnFailed=true"
-		p:defaultTargetUrl="/accounts/login.do" />
+		p:defaultFailureUrl="/accounts/login.do?authnFailed=true"
+		p:defaultTargetUrl="/accounts/login.do" 
+		p:targetUrlParameter="targetUrl"
+		/>
     		                
 	<bean id="formAuthenticationEntryPoint"
 	    class="architecture.ee.spring.security.authentication.ExtendedAuthenticationProcessingFilterEntryPoint"

@@ -1,4 +1,4 @@
-package architecture.ee.web.theme;
+package architecture.ee.web.theme.sitemesh;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,6 +32,8 @@ public class FrameworkDecoratorSelector implements DecoratorSelector {
         HttpServletRequest request = webAppContext.getRequest();
         com.opensymphony.module.sitemesh.Decorator decorator = decoratorMapper.getDecorator(webAppContext.getRequest(), new Content2HTMLPage(content, request));
 
+        log.debug("Apply decorator:" + decorator.getPage() );
+        
         if (decorator == null || decorator.getPage() == null) {
         	diagnostics(content, context);
             return new NoDecorator();

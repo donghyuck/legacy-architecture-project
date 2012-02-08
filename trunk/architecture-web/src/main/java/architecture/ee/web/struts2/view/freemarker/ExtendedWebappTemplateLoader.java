@@ -14,17 +14,14 @@ public class ExtendedWebappTemplateLoader extends WebappTemplateLoader {
 	private Log log = LogFactory.getLog(getClass());
 		
 	@Override
-	public Object findTemplateSource(String name) throws IOException {
-		
-		log.debug( "ExtendedWebappTemplateLoader############################## search:" + name );
-		
+	public Object findTemplateSource(String name) throws IOException {		
+		log.debug("findTemplateSource:"+name);		
 		return super.findTemplateSource(name);
 		
 	}
 
 	@Override
 	public long getLastModified(Object templateSource) {
-		//log.debug( "ExtendedWebappTemplateLoader############################## templateSource:" + templateSource );
 		return super.getLastModified(templateSource);
 	}
 

@@ -30,6 +30,7 @@ public class ExtendedClassTemplateLoader extends ClassTemplateLoader {
 
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
+		log.debug("findTemplateSource:"+name);
 		return super.findTemplateSource(name);
 	}
 }
