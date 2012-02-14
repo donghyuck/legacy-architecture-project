@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import architecture.common.cache.CacheSizes;
+import architecture.common.cache.Cacheable;
+
 /**
  * A simple tree structure for long values. It's nowhere near a complete tree
  * implementation since we don't really need one. However, if anyone is
