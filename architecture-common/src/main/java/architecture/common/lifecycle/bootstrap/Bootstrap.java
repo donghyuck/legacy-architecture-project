@@ -2,6 +2,8 @@ package architecture.common.lifecycle.bootstrap;
 
 import javax.servlet.ServletContext;
 
+import org.springframework.context.ConfigurableApplicationContext;
+
 import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.service.AdminService;
