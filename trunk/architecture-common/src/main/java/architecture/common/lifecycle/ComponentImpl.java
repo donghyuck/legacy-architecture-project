@@ -98,14 +98,14 @@ public class ComponentImpl implements Component {
 
     public void initialize() throws ComponentDisabledException, ConfigurationWarning, ConfigurationError {
     	setState(State.INITIALIZING);
-    	initializeInternal();
+    	doInitialize();
     	setState(State.INITIALIZED);
     }
 
     public void start() throws RuntimeError, RuntimeWarning {
     	if(state == State.INITIALIZED || state == State.STOPED){
 	    	setState(State.STARTING);	    	
-	    	startInternal();
+	    	doStart();
 	    	setState(State.STARTED);
     	}
     }
@@ -113,16 +113,16 @@ public class ComponentImpl implements Component {
     public void stop() {  
     	if(state == State.STARTED || state == State.RUNNING ){
 	    	setState(State.STOPING); 
-	    	stopInternal();
+	    	doStop();
 	    	setState(State.STOPED);
     	}
     }
     
-	public Repository getRepository(){
+	protected Repository getRepository(){
 		return Bootstrap.getBootstrapComponent(Repository.class);
 	}
-	
-	public ConfigRoot getConfigRoot() {
+
+	protected ConfigRoot getConfigRoot(){
 		return getRepository().getConfigRoot();
 	}
 
@@ -141,13 +141,13 @@ public class ComponentImpl implements Component {
         fireStateChangeEvent(oldValue, state);  
     }
     
-    protected  void startInternal(){}
+    protected  void doStart(){}
     
-    protected  void stopInternal(){}
+    protected  void doStop(){}
     
     protected  void destoryInternal(){}
     
-    protected  void initializeInternal(){}
+    protected  void doInitialize(){}
     
     protected void fireStateChangeEvent(State oldValue, State state){
        if(eventPublisher != null){

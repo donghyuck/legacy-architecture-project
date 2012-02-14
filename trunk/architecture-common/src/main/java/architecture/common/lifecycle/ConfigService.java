@@ -12,10 +12,6 @@ import java.util.TimeZone;
  */
 public interface ConfigService extends Component{
 
-	public Repository getRepository();
-	
-	public ConfigRoot getConfigRoot();
-	
 	public String getEffectiveRootPath();
 	
 	/**
