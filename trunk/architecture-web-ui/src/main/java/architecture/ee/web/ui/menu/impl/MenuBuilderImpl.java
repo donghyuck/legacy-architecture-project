@@ -2,12 +2,10 @@ package architecture.ee.web.ui.menu.impl;
 
 import java.util.List;
 
-import architecture.ee.web.model.impl.MenuItemModelImpl;
 import architecture.ee.web.ui.menu.Menu;
 import architecture.ee.web.ui.menu.MenuBuilder;
 import architecture.ee.web.ui.menu.MenuItem;
 import architecture.ee.web.ui.menu.dao.MenuDao;
-import architecture.ee.web.ui.menu.tree.MenuItemNode;
 import architecture.ee.web.ui.menu.tree.MenuTree;
 import architecture.ee.web.util.tree.Node;
 
@@ -34,15 +32,16 @@ public class MenuBuilderImpl implements MenuBuilder {
 	}
 	
 	protected MenuTree getMenuTree(Menu menu) {
-		MenuTree tree = new MenuTree();
-
-		MenuItemNode root = new MenuItemNode(getRootMenuItem(menu));
+		
+		MenuTree tree = new MenuTree(menu);
+		Node<MenuItem> root = tree.getRootElement();
+		
 		List<MenuItem> items = menu.getMenuItems();
 		
 		// depth 1
 		for (MenuItem item : items) {
 			if (item.getParentId() == -1L)
-				root.addChild(new MenuItemNode(item));
+				root.addChild(new Node<MenuItem>(item));
 			//items.remove(item);
 		}
 
@@ -50,7 +49,7 @@ public class MenuBuilderImpl implements MenuBuilder {
 		for (MenuItem item : items) {
 			for (Node<MenuItem> c : root.getChildren()) {
 				if (item.getParentId() == c.getData().getMenuItemId()) {
-					c.addChild(new MenuItemNode(item));
+					c.addChild(new Node<MenuItem>(item));
 					//items.remove(item);
 				}	
 			}
@@ -61,24 +60,31 @@ public class MenuBuilderImpl implements MenuBuilder {
 			for (Node<MenuItem> c : root.getChildren()) {
 				for (Node<MenuItem> cc : c.getChildren()) {
 					if (item.getParentId() == cc.getData().getMenuItemId()) {
-						cc.addChild(new MenuItemNode(item));
+						cc.addChild(new Node<MenuItem>(item));
 						//items.remove(item);
 					}
 				}
 			}
-		}		
+		}
+		
+		// depth 3
+		for (MenuItem item : items) {
+			for (Node<MenuItem> c : root.getChildren()) {
+				for (Node<MenuItem> cc : c.getChildren()) {
+					for (Node<MenuItem> ccc : cc.getChildren()) {
+						if (item.getParentId() == ccc.getData().getMenuItemId()) {
+							ccc.addChild(new Node<MenuItem>(item));
+							//items.remove(item);
+						}
+					}
+				}
+			}
+		}
+		
 		tree.setRootElement(root);		
 		return tree;
 	}
 	
-	protected MenuItem getRootMenuItem(Menu menu){
-		MenuItem model = new MenuItemModelImpl();
-		model.setTitle(menu.getTitle());
-		model.setMenuId(menu.getMenuId());
-		model.setName(menu.getName());
-		model.setLocation(menu.getLocation());
-		return model;
-	}
 
 	public Menu getMenuById(long menuId) {
 		return menuDao.getMenuById(menuId);
