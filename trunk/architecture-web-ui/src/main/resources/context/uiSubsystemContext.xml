@@ -22,5 +22,7 @@
 	<bean id="menuBuilder" class="architecture.ee.web.ui.menu.impl.MenuBuilderImpl" 
 	    p:menuDao-ref="menuDao"/>
 	    
+	    
+	    
 		
 </beans>

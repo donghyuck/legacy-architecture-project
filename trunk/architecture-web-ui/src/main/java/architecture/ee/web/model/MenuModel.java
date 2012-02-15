@@ -6,7 +6,7 @@ import architecture.ee.model.ModelObject;
 import architecture.ee.web.ui.menu.Menu;
 import architecture.ee.web.ui.menu.MenuItem;
 
-public interface MenuModel extends ModelObject <Menu>{
+public interface MenuModel extends ModelObject <Menu> {
 
 	public long getMenuId();
 
@@ -31,5 +31,5 @@ public interface MenuModel extends ModelObject <Menu>{
 	public List<MenuItem> getMenuItems();
 	
 	public void setMenuItems(List<MenuItem> items); 
-	
+		
 }
