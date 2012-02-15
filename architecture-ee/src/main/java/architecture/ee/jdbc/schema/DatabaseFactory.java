@@ -16,14 +16,12 @@ public class DatabaseFactory {
 
 	}
 
-	public static Database newDatabase(Connection conn, String catalogFilter,
-			String schemaFilter) throws SQLException {
+	public static Database newDatabase(Connection conn, String catalogFilter, String schemaFilter) throws SQLException {
 
 		return newDatabase(conn, catalogFilter, schemaFilter, null);
 	}
 
-	public static Database newDatabase(Connection conn, String catalogFilter,
-			String schemaFilter, String tableNameFilter) throws SQLException {
+	public static Database newDatabase(Connection conn, String catalogFilter, String schemaFilter, String tableNameFilter) throws SQLException {
 
 		Database database = new Database(catalogFilter, schemaFilter);
 		ResultSet rs = null;

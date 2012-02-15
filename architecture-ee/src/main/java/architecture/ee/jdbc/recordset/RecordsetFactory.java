@@ -1,7 +1,6 @@
 package architecture.ee.jdbc.recordset;
 
 import architecture.common.util.ImplFactory;
-import architecture.ee.jdbc.recordset.Recordset;
 
 /**
  * @author  donghyuck

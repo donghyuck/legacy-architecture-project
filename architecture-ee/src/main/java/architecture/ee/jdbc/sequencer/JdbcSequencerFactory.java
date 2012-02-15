@@ -15,9 +15,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import architecture.ee.jdbc.datasource.DataSourceFactory;
-import architecture.ee.jdbc.query.factory.Configuration;
-import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
+import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
