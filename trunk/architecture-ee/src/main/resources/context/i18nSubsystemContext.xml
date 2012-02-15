@@ -8,31 +8,27 @@
 	default-destroy-method="destroy">
 	<description>
 	<![CDATA[
-        Define Bootstrap Context
+        I18N subsystem Context
 	]]>
 	</description>
-
 	<!-- ================================================ -->
-	<!-- Dao                                              -->
+	<!-- 1. Dao                                              -->
 	<!-- ================================================ -->
 	<bean id="countryDao" 
 	    class="architecture.ee.i18n.dao.impl.JdbcI18nCountryDao" 
-	    parent="jdbcDaoSupport" 
-	    p:sequenceDao-ref="sequenceDao" />
+	    parent="jdbcDaoSupport" />
 
 	<bean id="localeDao" 
 	    class="architecture.ee.i18n.dao.impl.JdbcI18nLocaleDao" 
-	    parent="jdbcDaoSupport" 
-	    p:sequenceDao-ref="sequenceDao" />
+	    parent="jdbcDaoSupport" />
 	    
 	<bean id="localizerDao" 
 	    class="architecture.ee.i18n.dao.impl.JdbcI18nLocalizerDao" 
-	    parent="jdbcDaoSupport" 
-	    p:sequenceDao-ref="sequenceDao"
+	    parent="jdbcDaoSupport"
 	    p:i18nLocaleDao-ref="localeDao" />	  
 	    
 	<!-- ================================================ -->
-	<!-- Manager                                          -->
+	<!-- 2. Manager                                          -->
 	<!-- ================================================ -->	    
 	<bean id="i18nTextManager"
 		class="architecture.ee.i18n.impl.I18nTextManagerImpl"
@@ -40,7 +36,7 @@
 		init-method="initialize" />
 				
 	<!-- ================================================ -->
-	<!-- MessageSource                                    -->
+	<!-- 3. Utils : MessageSource                         -->
 	<!-- ================================================ -->
 	<bean id="messageSource"
 		class="architecture.ee.spring.context.support.I18nTextResourceBundleMessageSource">

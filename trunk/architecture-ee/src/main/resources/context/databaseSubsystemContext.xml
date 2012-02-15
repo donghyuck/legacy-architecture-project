@@ -10,15 +10,11 @@
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-       	
+			
 	<!-- =================================================== -->
-	<!-- 1. DataSource                                       -->
+	<!-- 1. URLDirectoryScanner                              -->
 	<!-- =================================================== -->
-				
-	<!-- =================================================== -->
-	<!-- 2. URLDirectoryScanner                              -->
-	<!-- =================================================== -->
-	<bean id="directoryScanner" class="architecture.ee.spring.jdbc.impl.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">		  
+	<bean id="directoryScanner" class="architecture.ee.spring.resources.scanner.impl.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">		  
 		<property name="directoryListenerList">		
 	        <list value-type="architecture.common.scanner.DirectoryListener">
 	        	<ref bean="sqlQueryFactoryBuilder" />
@@ -29,19 +25,18 @@
 				<value>${database.sql.location}</value>
 			</list>
 		</property>	    		 
-    </bean>    
-    
+    </bean>        
 	<!-- =================================================== -->
-	<!-- 3. SqlQuery Factory & Support                       -->
+	<!-- 2. SqlQuery Factory & Support                       -->
 	<!-- =================================================== -->
 	<bean id="sqlQueryFactory" factory-bean="sqlQueryFactoryBuilder" factory-method="createSqlQueryFactory" 
 	    p:dataSource-ref="dataSource" 
 	    scope="singleton"  />
 	
-	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
+	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" 
+	    depends-on="sqlQueryFactory" />	
 	
-	<bean id="sqlQueryClient" class="architecture.ee.component.impl.SqlQueryClientImpl" 
+	<bean id="sqlQueryClient" class="architecture.ee.component.data.SqlQueryClientImpl" 
 	    parent="sqlQuerySupport" 
-	    p:dataSource-ref="dataSource" />
-	    	
+	    p:dataSource-ref="dataSource" />	    	
 </beans>	

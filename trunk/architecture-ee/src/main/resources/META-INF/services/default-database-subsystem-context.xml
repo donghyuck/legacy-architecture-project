@@ -17,15 +17,58 @@
 	</description>
 	
 	<!-- ================================================ -->
-	<!-- 1. Database                                      -->
+	<!-- 1. DataSource                                    -->
 	<!-- ================================================ -->
+	
 	<bean id="dataSource"
 		class="architecture.ee.jdbc.datasource.DataSourceFactory"
 		destroy-method="close"
 		factory-method="getDataSource" />
-			
+	
+	<bean id="jdbcHelper"
+		class="architecture.ee.jdbc.util.JdbcHelperFactory" factory-method="getJdbcHelper" 
+		p:databaseMetaData-ref="dataSource"
+		p:nativeJdbcExtractor-ref="automaticJdbcExtractor" />
+		
+	<bean id="automaticJdbcExtractor" class="architecture.ee.spring.jdbc.support.AutomaticJdbcExtractor" lazy-init="true">
+		<property name="defaultJdbcExtractor">
+			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
+		</property>	
+		<property name="extractors">
+			<map>
+				<entry key="org.apache.commons.dbcp">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry key="weblogic">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.WebLogicNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry key="c3p0">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>				
+	
+	<!-- ================================================ -->
+	<!-- 2. SQL                                           -->
+	<!-- ================================================ -->			
+	
 	<bean id="sqlConfiguration" 
-	    class="architecture.ee.jdbc.query.factory.ConfigurationFactory"
+	    class="architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory"
 		factory-method="getConfiguration" />
 		
 	<bean id="sqlQueryFactoryBuilder" 
@@ -35,12 +78,14 @@
 		<property name="resourceLocations">
 			<list>
 				<value>res:sql/default-framework-queryset.xml</value>
+				<value>res:sql/default-plugin-framework-queryset.xml</value>
+				<value>res:sql/default-web-framework-queryset.xml</value>
 				<value>res:sql/default-web-ui-framework-queryset.xml</value>
 			</list>
 		</property>
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
-	
+		
 	<!-- =================================================== -->
 	<!-- 3. Sequencer                                        -->
 	<!-- =================================================== -->		
@@ -48,22 +93,23 @@
 	    class="architecture.ee.jdbc.sequencer.JdbcSequencerFactory" scope="singleton">
 		<constructor-arg index="0" ref="sqlConfiguration"/>
 		<constructor-arg index="1" ref="dataSource"/>
-	</bean>
-		
+	</bean>		
 	<!-- =================================================== -->
 	<!-- 4. Dao                                              -->
 	<!-- =================================================== -->	
-	<bean id="jdbcDaoSupport" abstract="true" 
-	    p:configuration-ref="sqlConfiguration" 
-	    p:dataSource-ref="dataSource" 
-	    depends-on="sqlConfiguration, dataSource" />	
-	    
 	<bean id="sequenceDao" 
 	    class="architecture.ee.jdbc.sequencer.dao.JdbcSequenceDao" 
 	    init-method="initialize">
 		<constructor-arg ref="sequencerFactory"/>
-	</bean>	    
+	</bean>	  
 	
+	<bean id="jdbcDaoSupport" abstract="true" 
+	    p:configuration-ref="sqlConfiguration" 
+	    p:dataSource-ref="dataSource" 
+	    p:jdbcHelper-ref="jdbcHelper"
+	    p:sequenceDao-ref="sequenceDao"
+	    depends-on="sqlConfiguration, dataSource, jdbcHelper, sequenceDao" />
+	    
  	<bean id="extendedPropertyDao" 
  	    class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" 
  	    parent="jdbcDaoSupport" />

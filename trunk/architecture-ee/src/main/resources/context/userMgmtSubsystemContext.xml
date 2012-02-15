@@ -13,7 +13,7 @@
 	</description>
 
 	<!-- ================================================ -->
-	<!-- Dao -->
+	<!-- Dao                                              -->
 	<!-- ================================================ -->
 	<bean id="userDao" class="architecture.ee.user.dao.impl.JdbcUserDao"
 		parent="jdbcDaoSupport" 
@@ -39,51 +39,7 @@
 		parent="jdbcDaoSupport" 
 		depends-on="sequenceDao" 
 		p:sequenceDao-ref="sequenceDao" />
-
-	<!-- ================================================ -->
-	<!-- Cache                                            -->
-	<!-- ================================================ -->
-
-	<bean id="userProviderCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userProviderCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="userIDCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userIDCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="userCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userCache" p:maxElementsInMemory="5000" p:diskPersistent="false"
-		p:overflowToDisk="false" p:timeToIdle="30" p:timeToLive="60"
-		p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="groupMemberCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="groupMemberCache" p:maxElementsInMemory="10000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="groupIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="groupIDCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="groupCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="groupCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-	
-	<bean id="roleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="roleCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="userRoleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userRoleCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-		
+			
 	<!-- ================================================ -->
 	<!-- Manager                                          -->
 	<!-- ================================================ -->
