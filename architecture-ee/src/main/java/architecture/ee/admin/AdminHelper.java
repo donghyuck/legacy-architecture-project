@@ -7,19 +7,16 @@ import net.sf.ehcache.Cache;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.common.lifecycle.AdminService;
+import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.Version;
-import architecture.ee.bootstrap.Bootstrap;
-import architecture.ee.i18n.I18nTextManager;
-import architecture.ee.security.role.RoleManager;
+import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.spring.lifecycle.SpringAdminService;
-import architecture.ee.user.GroupManager;
-import architecture.ee.user.UserManager;
-import architecture.ee.util.ApplicatioinConstants;
+import architecture.ee.util.ApplicationConstants;
 
 /**
  * 
@@ -46,12 +43,16 @@ public final class AdminHelper {
 		return getAdminService().getVersion();
 	}
 	
+	public static EventPublisher getEventPublisher(){
+		return Bootstrap.getEventPublisher();
+	}
+	
 	public static boolean isSetupComplete(){
+		Boolean isSetupComplete = getAdminService().getConfigService().getLocalProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false); 
 		if(isReady()){
-			return getAdminService().getConfigService().getApplicationBooleanProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false);
-		}else{
-			return getAdminService().getConfigService().getLocalProperty(ApplicatioinConstants.SETUP_COMPLETE_PROP_NAME, false) ; 
-		}
+			return getAdminService().getConfigService().getApplicationBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, isSetupComplete);
+		}		
+		return isSetupComplete;
 	}
 		
 	public static String[] getComponentNames(){
@@ -81,27 +82,10 @@ public final class AdminHelper {
 		return getRepository().getEffectiveRootPath();
 	}
 			
-	public static I18nTextManager getI18nTextManager(){
-		return Bootstrap.getBootstrapComponent(I18nTextManager.class);
-	}
-	
-	
 	public static net.sf.ehcache.CacheManager getCacheManager(){		
 		return Bootstrap.getBootstrapComponent(net.sf.ehcache.CacheManager.class);
 	}
-	
-	public static UserManager getUserManager(){
-		return Bootstrap.getBootstrapComponent(UserManager.class);
-	}
-
-	public static GroupManager getGroupManager(){
-		return Bootstrap.getBootstrapComponent(GroupManager.class);
-	}
-
-	public static RoleManager getRoleManager(){
-		return Bootstrap.getBootstrapComponent(RoleManager.class);
-	}
-	
+		
 	public static net.sf.ehcache.Cache getCache(String name){
 	    return 	getCache(name, true);
 	}

@@ -33,12 +33,12 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs.FileObject;
 
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.jdbc.query.builder.xml.XmlSqlBuilder;
-import architecture.ee.jdbc.query.factory.Configuration;
-import architecture.ee.jdbc.query.factory.ConfigurationFactory;
-import architecture.ee.jdbc.query.factory.SqlQueryFactory;
-import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
-import architecture.ee.jdbc.query.factory.impl.SqlQueryFactoryImpl;
+import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
+import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder;
+import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryImpl;
 
 /**
  * SqlQueryFactory 객체를 생성하는 클래스.
@@ -61,7 +61,7 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 	private Configuration configuration;
 
 	private DataSource dataSource;
-
+	
 	/**
 	 */
 	private List<String> resourceLocations;

@@ -7,7 +7,7 @@ import org.springframework.security.authentication.dao.SaltSource;
 
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.ee.admin.AdminHelper;
-import architecture.ee.util.ApplicatioinConstants;
+import architecture.ee.util.ApplicationConstants;
 
 public class SaltSourceFactory implements FactoryBean <SaltSource>{
 
@@ -21,7 +21,7 @@ public class SaltSourceFactory implements FactoryBean <SaltSource>{
 		
 			ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
 			
-			String userPropertyToUse = setupProperties.get(ApplicatioinConstants.SECURITY_AUTHENTICATION_ENCODING_SALT_PROP_NAME);
+			String userPropertyToUse = setupProperties.get(ApplicationConstants.SECURITY_AUTHENTICATION_ENCODING_SALT_PROP_NAME);
 			
 			if(StringUtils.isEmpty(userPropertyToUse))
 			{

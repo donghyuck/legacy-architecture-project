@@ -23,9 +23,9 @@ import org.apache.commons.vfs.FileChangeEvent;
 import org.apache.commons.vfs.FileListener;
 import org.apache.commons.vfs.FileObject;
 
-import architecture.ee.jdbc.query.builder.xml.XmlSqlBuilder;
-import architecture.ee.jdbc.query.factory.Configuration;
-import architecture.ee.jdbc.query.factory.ConfigurationFactory;
+import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
+import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory;
 
 /**
  * @author  donghyuck

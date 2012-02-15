@@ -1,9 +1,9 @@
-package architecture.ee.component;
+package architecture.ee.service;
 
 import org.springframework.jdbc.support.lob.LobHandler;
 
-import architecture.ee.jdbc.query.SqlQuery;
 import architecture.ee.jdbc.schema.Database;
+import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**

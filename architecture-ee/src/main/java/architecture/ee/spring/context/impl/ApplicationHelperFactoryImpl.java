@@ -2,8 +2,8 @@ package architecture.ee.spring.context.impl;
 
 import architecture.common.lifecycle.ApplicationHelper;
 import architecture.common.lifecycle.ApplicationHelperFactory.Implementation;
+import architecture.common.lifecycle.bootstrap.Bootstrap;
 
-import architecture.ee.bootstrap.Bootstrap;
 
 /**
  * @author  donghyuck

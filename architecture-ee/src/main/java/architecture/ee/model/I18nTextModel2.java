@@ -1,7 +1,5 @@
 package architecture.ee.model;
 
-import java.util.Date;
-
 import architecture.ee.i18n.I18nText2;
 
 /**

@@ -14,8 +14,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
+import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.util.StringUtils;
-import architecture.ee.bootstrap.Bootstrap;
 
 public class WebApplicationContextLoader extends ContextLoader {
 

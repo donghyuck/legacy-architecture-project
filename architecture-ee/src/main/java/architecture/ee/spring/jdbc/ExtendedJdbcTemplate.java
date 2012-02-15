@@ -16,7 +16,6 @@
 package architecture.ee.spring.jdbc;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.sql.Connection;
@@ -46,9 +45,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterBatchUpdateUtils;
 import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
 import org.springframework.jdbc.core.namedparam.ParsedSql;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.support.AbstractLobCreatingPreparedStatementCallback;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
-import org.springframework.jdbc.support.lob.LobCreator;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.lob.OracleLobHandler;
 
@@ -172,9 +169,11 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	/**
 	 */
 	private JdbcHelper jdbcHelper = null;
+	
 	/**
 	 */
 	private LobHandler lobHandler = null;
+	
 	
 	public ExtendedJdbcTemplate(DataSource dataSource) {
 		super(dataSource);
@@ -200,19 +199,31 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	 */
 	public void setJdbcHelper(JdbcHelper jdbcHelper) {
 		this.jdbcHelper = jdbcHelper;
+		initialize();
 	}
 
 
 	public void initialize(){
-		if(jdbcHelper == null)
-			this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
 		
-		if( lobHandler == null)
-			if ( jdbcHelper.getDatabaseType() == DatabaseType.oracle ){
-				lobHandler = new OracleLobHandler();
-			}else{
-			    lobHandler = new DefaultLobHandler();
-			}
+		
+		logger.debug("DATABASE HELPER : " + jdbcHelper );
+		if(jdbcHelper == null){
+			this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
+		}
+		
+		
+		logger.debug("DATABASE TYPE : " + jdbcHelper.getDatabaseType());
+		logger.debug("NATIVE JDBC EXTRACTOR CLASS : " + jdbcHelper.getNativeJdbcExtractor().getClass().getName());
+		logger.debug("EXIST NATIVE JDBC EXTRACTOR CLASS : " + getNativeJdbcExtractor());
+		
+		setNativeJdbcExtractor(jdbcHelper.getNativeJdbcExtractor());
+		if (jdbcHelper.getDatabaseType() == DatabaseType.oracle) {
+			OracleLobHandler oracleLobHandler = new OracleLobHandler();
+			oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
+			this.lobHandler = oracleLobHandler;
+		} else {
+			lobHandler = new DefaultLobHandler();
+		}
 	}
 	
 	
@@ -310,7 +321,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public List queryScrollable(String sql, int startIndex, int numResults, Object[] args, int[] argTypes) {		
 		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator(sql, startIndex, numResults, args, argTypes, getJdbcHelper());		
 		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor(startIndex, numResults, getColumnMapRowMapper(), getJdbcHelper());
-		return (List) query(creator, extractor);
+		return (List)query(creator, extractor);
 	}
 
 	protected Object runScript(Connection conn, boolean stopOnError, Reader reader) throws SQLException, IOException {

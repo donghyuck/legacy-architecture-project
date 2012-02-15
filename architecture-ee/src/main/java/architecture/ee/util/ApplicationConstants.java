@@ -1,6 +1,6 @@
 package architecture.ee.util;
 
-public interface ApplicatioinConstants extends architecture.common.lifecycle.ApplicationConstants {
+public interface ApplicationConstants extends architecture.common.lifecycle.ApplicationConstants {
 			
 		
 	/** SETUP PROPERTY KEY */	

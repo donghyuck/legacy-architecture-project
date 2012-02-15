@@ -17,9 +17,9 @@ import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.admin.AdminHelper;
-import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder;
 import architecture.ee.spring.resources.scanner.DirectoryScanner;
-import architecture.ee.util.ApplicatioinConstants;
+import architecture.ee.util.ApplicationConstants;
 
 /**
  * @author  donghyuck
@@ -148,7 +148,7 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 					
 					String key = path.substring( start, end ).trim();	
 					
-					if( key.equals(ApplicatioinConstants.RESOURCE_SQL_LOCATION_PROP_NAME))
+					if( key.equals(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME))
 						path = AdminHelper.getRepository().getURI("sql");
 					else 
 						path = AdminHelper.getRepository().getSetupApplicationProperties().get(key);					

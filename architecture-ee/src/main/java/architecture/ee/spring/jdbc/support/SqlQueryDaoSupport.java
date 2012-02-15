@@ -3,8 +3,8 @@ package architecture.ee.spring.jdbc.support;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.ee.jdbc.query.SqlQuery;
-import architecture.ee.jdbc.query.factory.SqlQueryFactory;
+import architecture.ee.jdbc.sqlquery.SqlQuery;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 
 /**
  * @author  Administrator
