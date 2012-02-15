@@ -33,7 +33,7 @@
 	<!-- 3. SqlQuery Support                                -->
 	<!-- =================================================== -->
 	<bean id="sqlConfiguration" 
-	    class="architecture.ee.jdbc.query.factory.ConfigurationFactory"
+	    class="architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory"
 		factory-method="getConfiguration" />
 		
 	<bean id="sqlQueryFactoryBuilder" 
