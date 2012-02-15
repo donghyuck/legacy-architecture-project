@@ -6,8 +6,8 @@
 		interface="architecture.common.lifecycle.ApplicationHelperFactory$Implementation"
 		impl="architecture.ee.spring.context.impl.ApplicationHelperFactoryImpl" />
 	<factory
-		interface="architecture.ee.bootstrap.Bootstrap$Implementation"
-		impl="architecture.ee.bootstrap.impl.BootstrapImpl" />		
+		interface="architecture.common.lifecycle.bootstrap.Bootstrap$Implementation"
+		impl="architecture.ee.component.data.BootstrapImpl" />		
 	<factory
 		interface="architecture.ee.jdbc.datasource.DataSourceFactory$Implementation"
 		impl="architecture.ee.jdbc.datasource.impl.DataSourceFactoryImpl" />		
@@ -17,6 +17,11 @@
 	<factory
 		interface="architecture.ee.util.SecurityHelper$Implementation"
 		impl="architecture.ee.util.impl.SecurityHelperImpl" />	
+	<factory
+		interface="architecture.common.license.LicenseManagerFactory$Implementation"
+		impl="architecture.ee.license.FrameworkLicenseManagerFactory" />		
+		
+		
 									
 </factories>
 

@@ -13,21 +13,18 @@
 	</description>
 
 	<!-- ================================================ -->
-	<!-- Task & Jobs                                      -->
+	<!-- 1. Task                                          -->
 	<!-- ================================================ -->
-	<!-- Global Timer for timed execution tasks. -->
-	
 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
 		p:corePoolSize="5" 
 		p:maxPoolSize="10" 
 		p:queueCapacity="25" />
 
-	<bean id="taskEngine" class="architecture.ee.util.task.TaskEngine" />
+	<bean id="taskEngine" class="architecture.common.task.TaskEngine" />
 
 	<!-- ================================================ -->
-	<!-- Event                                            -->
+	<!-- 2. Event                                         -->
 	<!-- ================================================ -->
-
 	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher"
 		depends-on="taskExecutor">
 		<constructor-arg index="0" ref="taskExecutor" />
@@ -40,34 +37,20 @@
 		<constructor-arg index="0" ref="eventDispatcher" />
 		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
 	</bean>
-	
-	<!-- ================================================ -->
-	<!-- Plugin                                           -->
-	<!-- ================================================ -->
-	
-	<bean id="pluginCacheRegistry" class="architecture.common.plugin.impl.PluginCacheRegistryImpl"
-		depends-on="ehcache">
-		<constructor-arg index="0" ref="ehcache" />
-	</bean>
-
-	<bean id="pluginManager" class="architecture.common.plugin.impl.PluginManagerImpl"
-		p:eventPublisher-ref="eventPublisher" />
 
 	<!-- ================================================ -->
-	<!-- Cache                                            -->
+	<!-- 3. Cache                                         -->
 	<!-- ================================================ -->
-	
-	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"		
-		p:shared="false" />
-		
+	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />
+
 	<!-- ================================================ -->
-	<!-- ConfigService & AdminService -->
-	<!-- ================================================ -->
-	
+	<!-- 4. Components                                    -->
+	<!-- ================================================ -->	
 	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />
 
 	<bean id="configService" class="architecture.ee.admin.impl.ConfigServiceImpl"
 		init-method="initialize" 
+		depends-on="eventPublisher, sqlQueryFactoryBuilder, dataSource"
 		p:eventPublisher-ref="eventPublisher"
 		p:sqlQueryFactoryBuilder-ref="sqlQueryFactoryBuilder"
 		p:dataSource-ref="dataSource" />
@@ -78,5 +61,8 @@
 		p:eventPublisher-ref="eventPublisher" 
 		p:contextLoader-ref="contextLoader"
 		p:configService-ref="configService" />
+		
+	<bean id="licenseManager" class="architecture.common.license.LicenseManagerFactory" 
+	    factory-method="getLicenseManager" />
 
 </beans>
