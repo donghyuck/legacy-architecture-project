@@ -2,7 +2,6 @@ package architecture.ee.jdbc.datasource;
 
 import javax.sql.DataSource;
 
-import architecture.common.lifecycle.ConfigService;
 import architecture.common.util.ImplFactory;
 
 /**

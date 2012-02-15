@@ -28,6 +28,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.MetaDataAccessException;
+import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
+import org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor;
 
 import architecture.ee.jdbc.util.JdbcHelper;
 
@@ -38,10 +40,14 @@ import architecture.ee.jdbc.util.JdbcHelper;
  */
 public class JdbcHelperImpl implements JdbcHelper {
 
+	private NativeJdbcExtractor automaticJdbcExtractor;
+	
 	// True if the database support transactions.
 	/**
 	 */
 	private boolean transactionsSupported;
+
+
 
 	/**
 	 */
@@ -113,12 +119,13 @@ public class JdbcHelperImpl implements JdbcHelper {
 	private Log log = LogFactory.getLog(getClass());
 
 	protected JdbcHelperImpl() {
-
+		automaticJdbcExtractor = new SimpleNativeJdbcExtractor();
 	}
 
 	protected JdbcHelperImpl(DataSource dataSource) {
 		try {
 			setDatabaseMetaData(dataSource);
+			automaticJdbcExtractor = new SimpleNativeJdbcExtractor();
 		} catch (MetaDataAccessException e) {
 			e.printStackTrace();
 		}
@@ -232,6 +239,8 @@ public class JdbcHelperImpl implements JdbcHelper {
 	public void setDatabaseMetaData(DataSource dataSource)
 			throws MetaDataAccessException {
 
+		
+		
 		JdbcUtils.extractDatabaseMetaData(dataSource,
 				new DatabaseMetaDataCallback() {
 					public Object processMetaData(DatabaseMetaData metaData)
@@ -332,13 +341,13 @@ public class JdbcHelperImpl implements JdbcHelper {
 						return this;
 					}
 				});
+		
+		
 	}
 
-	public PreparedStatement createScrollablePreparedStatement(Connection con,
-			String sql) throws SQLException {
+	public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException {
 		if (isScrollResultsSupported())
-			return con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_READ_ONLY);
+			return con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		else
 			return con.prepareStatement(sql);
 
@@ -367,4 +376,11 @@ public class JdbcHelperImpl implements JdbcHelper {
 		}
 	}
 
+	public NativeJdbcExtractor getNativeJdbcExtractor() {
+		return automaticJdbcExtractor;
+	}
+
+	public void setNativeJdbcExtractor(NativeJdbcExtractor jdbcExtractor) {
+		this.automaticJdbcExtractor = jdbcExtractor;
+	}
 }

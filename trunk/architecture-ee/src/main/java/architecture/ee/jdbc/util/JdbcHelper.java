@@ -20,6 +20,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
+
 public interface JdbcHelper {
 
 	/**
@@ -94,12 +96,11 @@ public interface JdbcHelper {
 
 	public boolean isTransactionsSupported();
 
-	public PreparedStatement createScrollablePreparedStatement(Connection con,
-			String sql) throws SQLException;
+	public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException;
 
 	public void setFetchSize(ResultSet rs, int fetchSize);
 
-	public void scrollResultSet(ResultSet rs, int rowNumber)
-			throws SQLException;
-
+	public void scrollResultSet(ResultSet rs, int rowNumber) throws SQLException;
+	
+	public NativeJdbcExtractor getNativeJdbcExtractor();
 }

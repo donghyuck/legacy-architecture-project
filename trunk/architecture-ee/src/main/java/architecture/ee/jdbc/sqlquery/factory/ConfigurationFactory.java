@@ -13,22 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.jdbc.util;
+package architecture.ee.jdbc.sqlquery.factory;
 
-import javax.sql.DataSource;
-
-import architecture.common.util.ImplFactory;
+import architecture.ee.jdbc.sqlquery.factory.impl.ConfigurationFactoryImpl;
 
 /**
  * @author  donghyuck
  */
-public class JdbcHelperFactory {
+public class ConfigurationFactory {
 
+	
 	public static interface Implementation {
 
-		public JdbcHelper getJdbcHelper(DataSource dataSource);
-
-		public JdbcHelper getJdbcHelper();
+		public Configuration getConfiguration();
 
 	}
 
@@ -37,19 +34,11 @@ public class JdbcHelperFactory {
 	private static Implementation impl = null;
 
 	static {
-		impl = (Implementation) ImplFactory.loadImplFromKey(Implementation.class);
+		impl = new ConfigurationFactoryImpl(); 
 	}
 
-	public static JdbcHelper getJdbcHelper() {
-		return impl.getJdbcHelper();
+	public static Configuration getConfiguration() {
+		return impl.getConfiguration();
 	}
-
-	/**
-	 * @todo 캐쉬를 사용하는 것을 고려한다.
-	 * @param dataSource
-	 * @return
-	 */
-	public static JdbcHelper getJdbcHelper(DataSource dataSource) {
-		return impl.getJdbcHelper(dataSource);
-	}
+	
 }
