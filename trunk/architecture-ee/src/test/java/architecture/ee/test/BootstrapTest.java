@@ -8,8 +8,8 @@ import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
 import architecture.common.lifecycle.Repository;
+import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.ee.admin.AdminHelper;
-import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.i18n.I18nCountry;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
@@ -88,8 +88,8 @@ public class BootstrapTest {
 			log.debug( name ) ;
 		log.debug( "===========================================>" ) ;
 
-		I18nLocale locale = AdminHelper.getI18nTextManager().getI18nLocale(Locale.KOREA, false);		
-		int size = AdminHelper.getI18nTextManager().getAvailableI18nLocalizerCount();
+		I18nLocale locale = ApplicationHelper.getI18nTextManager().getI18nLocale(Locale.KOREA, false);		
+		int size = ApplicationHelper.getI18nTextManager().getAvailableI18nLocalizerCount();
 		
 		log.debug( "count:" + size);
 
@@ -98,17 +98,16 @@ public class BootstrapTest {
 			I18nLocalizerModelImpl n = new I18nLocalizerModelImpl();
 			n.setDescription("");
 			n.setI18nLocale(locale);
-			n.setNew(true);
 			n.setName("framework");			
-			AdminHelper.getI18nTextManager().createI18nLocalizer(n);
+			ApplicationHelper.getI18nTextManager().createI18nLocalizer(n);
 			
 		}else{
-			I18nLocalizer u = AdminHelper.getI18nTextManager().getI18nLocalizerById(1);
+			I18nLocalizer u = ApplicationHelper.getI18nTextManager().getI18nLocalizerById(1);
 			u.getI18nTexts().put("main.page.title", "안녕하세요");
-			AdminHelper.getI18nTextManager().updateI18nLocalizer(u);
+			ApplicationHelper.getI18nTextManager().updateI18nLocalizer(u);
 		}
 		
-		for(I18nLocalizer localizer : AdminHelper.getI18nTextManager().getAvailableI18nLocalizers() ){
+		for(I18nLocalizer localizer : ApplicationHelper.getI18nTextManager().getAvailableI18nLocalizers() ){
 			log.debug( ">>>>" + localizer ) ;
 		}
 		
