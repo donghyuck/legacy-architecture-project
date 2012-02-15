@@ -23,13 +23,11 @@ import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
-import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.jdbc.datasource.DataSourceFactory;
-import architecture.ee.jdbc.query.factory.SqlQueryFactoryBuilder;
-import architecture.ee.util.ApplicatioinConstants;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder;
+import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.LocaleUtils;
 
 /**
@@ -56,12 +54,15 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
     /**
 	 */
     private String characterEncoding = null;
+    
     private FastDateFormat dateFormat = null;
+    
     private FastDateFormat dateTimeFormat = null;
  
     /**
 	 */
     private SqlQueryFactoryBuilder sqlQueryFactoryBuilder = null;   
+    
     private DataSource dataSource = null;    
     /**
 	 */
@@ -83,9 +84,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	public void reset(){
         this.setupProperties = null;
         this.properties = null;
-        this.localizedProperties = null;
-        //whiteLabel = false;
-        //initWhiteLabel = false;        
+        this.localizedProperties = null;   
 		resetL10N();
 	}
 	
@@ -96,14 +95,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		this.dateFormat = null;
 		this.dateTimeFormat = null;
 	}	
-
-	public Repository getRepository(){
-		return Bootstrap.getBootstrapComponent(Repository.class);
-	}
-	
-	public ConfigRoot getConfigRoot() {
-		return getRepository().getConfigRoot();
-	}
 	
     /**
 	 * @return
@@ -201,8 +192,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		{
 			Locale localeToUse = Locale.getDefault();			
 			
-			String languageToUse = getLocalProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME, null);
-			String countryToUse = getLocalProperty(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME, null);			
+			String languageToUse = getLocalProperty(ApplicationConstants.LOCALE_LANGUAGE_PROP_NAME, null);
+			String countryToUse = getLocalProperty(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME, null);			
 			if(!StringUtils.isEmpty(languageToUse)){
 			    if(StringUtils.isEmpty(countryToUse)){
 			    	localeToUse = new Locale(languageToUse, "", "");
@@ -211,8 +202,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 			    }	
 			}		
 			
-			languageToUse = (String)getApplicationProperties().get(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
-			countryToUse = (String)getApplicationProperties().get(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
+			languageToUse = (String)getApplicationProperties().get(ApplicationConstants.LOCALE_LANGUAGE_PROP_NAME);
+			countryToUse = (String)getApplicationProperties().get(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME);
 
 			if(!StringUtils.isEmpty(languageToUse)){
 			    if(StringUtils.isEmpty(countryToUse)){
@@ -235,8 +226,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	public void setLocale(Locale newLocale) {
 		String country = newLocale.getCountry();
 		String language = newLocale.getLanguage();
-		setApplicationProperty(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME, country);
-		setApplicationProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME, language);
+		setApplicationProperty(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME, country);
+		setApplicationProperty(ApplicationConstants.LOCALE_LANGUAGE_PROP_NAME, language);
 		resetL10N();
 	}
 
@@ -247,15 +238,15 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	public String getCharacterEncoding() {
         if(characterEncoding == null)
         {
-            String encoding = getLocalProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
+            String encoding = getLocalProperty(ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
             if(encoding != null)
                 characterEncoding = encoding;
-            String charEncoding = getApplicationProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
+            String charEncoding = getApplicationProperty(ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
             if(charEncoding != null)
                 characterEncoding = charEncoding;
             else
             if(characterEncoding == null)
-                characterEncoding = ApplicatioinConstants.DEFAULT_CHAR_ENCODING ;
+                characterEncoding = ApplicationConstants.DEFAULT_CHAR_ENCODING ;
         }
         return characterEncoding;
 	}
@@ -269,7 +260,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		if(!LocaleUtils.isValidCharacterEncoding(characterEncoding)){
 			throw new UnsupportedEncodingException((new StringBuilder()).append("Invalid character encoding: ").append(characterEncoding).toString());			
 		}else{
-            setApplicationProperty(ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME, characterEncoding);
+            setApplicationProperty(ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME, characterEncoding);
             resetL10N();
             return;
 		}
@@ -282,7 +273,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         if(timeZone == null)
             if(properties != null)
             {
-                String timeZoneID = (String)properties.get(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME);
+                String timeZoneID = (String)properties.get(ApplicationConstants.LOCALE_TIMEZONE_PROP_NAME);
                 if(timeZoneID == null)
                     timeZone = TimeZone.getDefault();
                 else
@@ -299,7 +290,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	 */
 	public void setTimeZone(TimeZone newTimeZone) {
 		String timeZoneId = newTimeZone.getID();
-		setApplicationProperty(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME, timeZoneId);
+		setApplicationProperty(ApplicationConstants.LOCALE_TIMEZONE_PROP_NAME, timeZoneId);
 		resetL10N();
 	}
 

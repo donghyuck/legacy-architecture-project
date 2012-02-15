@@ -4,7 +4,7 @@ import org.apache.commons.lang.math.NumberUtils;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ApplicationProperties;
-import architecture.common.lifecycle.ApplicationPropertyChangeEvent;
+import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
 /**

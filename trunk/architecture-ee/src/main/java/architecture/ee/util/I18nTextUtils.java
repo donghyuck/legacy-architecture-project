@@ -7,7 +7,6 @@ import java.util.ResourceBundle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.ee.admin.AdminHelper;
 import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.i18n.I18nText2;
 import architecture.ee.i18n.I18nTextManager;
@@ -30,11 +29,11 @@ public class I18nTextUtils {
 	}
 	
 	public static I18nLocalizer getI18nLocalizer(String bundleName){ 	
-		return getI18nLocalizer(bundleName, AdminHelper.getConfigService().getLocale());
+		return getI18nLocalizer(bundleName, ApplicationHelper.getConfigService().getLocale());
 	}
 	
 	public static Locale getLocale(){		
-		return  AdminHelper.getConfigService().getLocale();
+		return  ApplicationHelper.getConfigService().getLocale();
 	}
 	
 	public static I18nLocalizer getI18nLocalizer(String bundleName, Locale targetLocale){ 		
@@ -95,7 +94,7 @@ public class I18nTextUtils {
     }
     
     public static ResourceBundle getResourceBundle(String bundleName){    	
-    	Locale targetLocale = AdminHelper.getConfigService().getLocale();    	
+    	Locale targetLocale = ApplicationHelper.getConfigService().getLocale();    	
     	return getResourceBundle(bundleName, targetLocale);
 	}
 	

@@ -18,6 +18,8 @@ public class SecurityHelper {
 
 	public static interface Implementation {
 		
+		public boolean isAnonymous();
+		
 		public boolean isAnonymous(Authentication authen);
 		
 		public  boolean isApplicaitonUser();
@@ -38,6 +40,9 @@ public class SecurityHelper {
         impl = (Implementation)ImplFactory.loadImplFromKey(SecurityHelper.Implementation.class);
     }
 	
+    public static boolean isAnonymous(){
+    	return impl.isAnonymous();
+    }
     
     public static boolean isAnonymous(Authentication authen){
     	return impl.isAnonymous(authen);

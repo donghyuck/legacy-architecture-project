@@ -5,7 +5,7 @@ import javax.servlet.ServletContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.web.context.ContextLoader;
 
-import architecture.common.lifecycle.AdminService;
+import architecture.common.lifecycle.service.AdminService;
 
 public interface SpringAdminService extends AdminService {
 

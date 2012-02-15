@@ -60,9 +60,9 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
     public static Locale getUserLocale(HttpServletRequest request, User user, boolean useDefault)
     {
         Locale locale = null;        
-        if(ApplicationHelper.getApplicationBooleanProperty(ApplicatioinConstants.SKIN_USERS_CHOOSE_LOCALE_PROP_NAME, true))
-            if(user!= null && user.getProperties().get(ApplicatioinConstants.USER_LOCALE_PROP_NAME) != null)
-                locale = localeCodeToLocale((String)user.getProperties().get(ApplicatioinConstants.USER_LOCALE_PROP_NAME));
+        if(ApplicationHelper.getApplicationBooleanProperty(ApplicationConstants.SKIN_USERS_CHOOSE_LOCALE_PROP_NAME, true))
+            if(user!= null && user.getProperties().get(ApplicationConstants.USER_LOCALE_PROP_NAME) != null)
+                locale = localeCodeToLocale((String)user.getProperties().get(ApplicationConstants.USER_LOCALE_PROP_NAME));
             else
                 locale = getLocaleFromRequestHeader(request);        
         if(locale != null)

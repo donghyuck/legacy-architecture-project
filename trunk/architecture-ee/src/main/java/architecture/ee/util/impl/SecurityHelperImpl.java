@@ -18,6 +18,12 @@ public class SecurityHelperImpl implements Implementation {
 
 	private Log log = LogFactory.getLog(SecurityHelperImpl.class);
 	
+	public boolean isAnonymous(){
+		if( getAuthToke().isAnonymous() )
+			return true;
+		return false;
+	}
+	
 	public boolean isAnonymous(Authentication authen) {
 		
 		if( authen instanceof AnonymousAuthenticationToken )

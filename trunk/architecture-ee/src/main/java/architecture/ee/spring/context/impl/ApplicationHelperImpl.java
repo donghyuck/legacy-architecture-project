@@ -28,14 +28,13 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ApplicationHelper;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
-import architecture.common.lifecycle.StateChangeEvent;
+import architecture.common.lifecycle.event.StateChangeEvent;
+import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
@@ -71,6 +70,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		return getConfigurableApplicationContext().getBeanFactory();
 	}
 
+	@SuppressWarnings("rawtypes")
 	protected void addComponent(String name, Class clazz) {
 		GenericBeanDefinition bd = new GenericBeanDefinition();
 		bd.setBeanClass(clazz);
@@ -102,6 +102,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 			getConfigurableApplicationContext().getAutowireCapableBeanFactory().autowireBeanProperties(obj, AutowireCapableBeanFactory.AUTOWIRE_BY_NAME, false);
 	}
 
+	@SuppressWarnings("unchecked")
 	public <T> T createComponent(Class<T> requiredType) {
 		if (getConfigurableApplicationContext() != null)
 			return (T)getConfigurableApplicationContext().getAutowireCapableBeanFactory().createBean(requiredType, AutowireCapableBeanFactory.AUTOWIRE_BY_NAME, false);
@@ -119,6 +120,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		}
 	}		
 	
+	@SuppressWarnings("rawtypes")
 	public Object getComponent(Object obj) throws ComponentNotFoundException {
 		
 		if (getConfigurableApplicationContext() == null) {
@@ -148,6 +150,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public Object getInstance(Object obj) {
 		if (getConfigurableApplicationContext() == null) {
 			throw new IllegalStateException();
@@ -172,7 +175,6 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	}
 	
 	
-	@EventListener
 	public void onEvent(StateChangeEvent event) {		
 		Object source = event.getSource();
 		if( source instanceof AdminService ){

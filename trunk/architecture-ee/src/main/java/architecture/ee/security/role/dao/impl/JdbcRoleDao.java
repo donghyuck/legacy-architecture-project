@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
+
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
 import architecture.ee.model.impl.RoleModelImpl;
 import architecture.ee.security.role.Role;

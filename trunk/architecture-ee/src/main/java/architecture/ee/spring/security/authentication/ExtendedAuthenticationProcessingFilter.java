@@ -27,17 +27,49 @@ public class ExtendedAuthenticationProcessingFilter extends UsernamePasswordAuth
 	private UserManager userManager;
 
 	public void setDefaultTargetUrl(String defaultTargetUrl) {		
-		ExtendedSavedRequestAwareAuthenticationSuccessHandler handler = new ExtendedSavedRequestAwareAuthenticationSuccessHandler();
-		handler.setDefaultTargetUrl(defaultTargetUrl);
-		this.setAuthenticationSuccessHandler(handler);
+		getAuthenticationSuccessHandler().setDefaultTargetUrl(defaultTargetUrl);
 	}
 
-	public void setAuthenticationFailureUrl(String authenticationFailureUrl) {
-		ExtendedUrlAuthenticationFailureHandler handler = new ExtendedUrlAuthenticationFailureHandler(authenticationFailureUrl);
-		
-		setAuthenticationFailureHandler(handler);
+	public void setUseReferer(boolean useReferer) {		
+		getAuthenticationSuccessHandler().setUseReferer(useReferer);
+	}
+	
+	public void setAlwaysUseDefaultTargetUrl(boolean alwaysUseDefaultTargetUrl) {		
+		getAuthenticationSuccessHandler().setAlwaysUseDefaultTargetUrl(alwaysUseDefaultTargetUrl);
+	}
+	
+	public void setTargetUrlParameter(String targetUrlParameter) {		
+		getAuthenticationSuccessHandler().setTargetUrlParameter(targetUrlParameter);
 	}
 
+	protected ExtendedSavedRequestAwareAuthenticationSuccessHandler getAuthenticationSuccessHandler(){
+		Object handler = getSuccessHandler();
+		if( handler instanceof ExtendedSavedRequestAwareAuthenticationSuccessHandler ){
+			return (ExtendedSavedRequestAwareAuthenticationSuccessHandler)handler;
+		}else{
+			ExtendedSavedRequestAwareAuthenticationSuccessHandler successHandler = new ExtendedSavedRequestAwareAuthenticationSuccessHandler();
+			setAuthenticationSuccessHandler(successHandler);
+			return successHandler;
+		}
+	}
+	
+
+	public void setDefaultFailureUrl(String defaultFailureUrl) {
+		getAuthenticationFailureHandler().setDefaultFailureUrl(defaultFailureUrl);
+	}
+
+	protected ExtendedUrlAuthenticationFailureHandler getAuthenticationFailureHandler(){
+		Object handler = getFailureHandler();
+		if( handler instanceof ExtendedUrlAuthenticationFailureHandler ){
+			return (ExtendedUrlAuthenticationFailureHandler)handler;
+		}else{
+			ExtendedUrlAuthenticationFailureHandler failerHandler = new ExtendedUrlAuthenticationFailureHandler();
+			setAuthenticationFailureHandler(failerHandler);
+			return failerHandler;
+		}
+	}	
+	
+	
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 		

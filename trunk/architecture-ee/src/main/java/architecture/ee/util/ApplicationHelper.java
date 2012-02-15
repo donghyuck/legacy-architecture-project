@@ -8,17 +8,18 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import net.sf.ehcache.CacheManager;
-
-import architecture.common.cache.Cache;
-import architecture.common.cache.EhcacheWrapper;
+import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.lifecycle.AdminService;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
+import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.admin.AdminHelper;
 import architecture.ee.i18n.I18nTextManager;
+import architecture.ee.security.role.RoleManager;
+import architecture.ee.user.GroupManager;
+import architecture.ee.user.UserManager;
 
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
@@ -30,6 +31,7 @@ public final class ApplicationHelper {
 
 	private static final Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
+	@SuppressWarnings("unchecked")
 	public static <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException
 	{
 		if( ApplicationHelper.references.get(requiredType) == null){
@@ -51,7 +53,19 @@ public final class ApplicationHelper {
 	}
 
 	public static I18nTextManager getI18nTextManager(){
-		return AdminHelper.getI18nTextManager();
+		return getComponent(I18nTextManager.class);
+	}
+	
+	public static UserManager getUserManager(){
+		return getComponent(UserManager.class);
+	}
+
+	public static GroupManager getGroupManager(){
+		return getComponent(GroupManager.class);
+	}
+	
+	public static RoleManager getRoleManager(){
+		return getComponent(RoleManager.class);
 	}
 	
 	public static boolean isSetupComplete(){
@@ -60,6 +74,10 @@ public final class ApplicationHelper {
 	
 	public static boolean isReady(){		
 		return AdminHelper.isReady();
+	}
+
+	public static EventPublisher getEventPublisher(){		
+		return AdminHelper.getEventPublisher();
 	}
 	
 	public static State getState(){
@@ -87,10 +105,10 @@ public final class ApplicationHelper {
 		if (isReady()) {
 			return getConfigService().getLocale();
 		} else {
-			 String language = getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_LANGUAGE_PROP_NAME);
+			 String language = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_LANGUAGE_PROP_NAME);
 	            if(language == null)
 	                language = "";
-	            String country = getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_COUNTRY_PROP_NAME);
+	            String country = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_COUNTRY_PROP_NAME);
 	            if(country == null)
 	                country = "";
 	            if(language.equals("") && country.equals(""))
@@ -105,8 +123,8 @@ public final class ApplicationHelper {
 			return getConfigService().getCharacterEncoding();
 		}else{
 			return getConfigService().getLocalProperty(
-				ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME, 
-				ApplicatioinConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
+				ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME, 
+				ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
 		}
 	}
 	
@@ -136,7 +154,7 @@ public final class ApplicationHelper {
 		if(isReady()){
 			return getConfigService().getTimeZone();
 		}else{
-			String timeZoneID = getConfigService().getLocalProperty(ApplicatioinConstants.LOCALE_TIMEZONE_PROP_NAME);
+			String timeZoneID = getConfigService().getLocalProperty(ApplicationConstants.LOCALE_TIMEZONE_PROP_NAME);
 			if(timeZoneID == null)
 				return TimeZone.getDefault();
 			else

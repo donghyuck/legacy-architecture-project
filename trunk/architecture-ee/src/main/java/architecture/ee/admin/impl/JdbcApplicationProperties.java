@@ -20,7 +20,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import architecture.common.event.api.EventSource;
-import architecture.common.lifecycle.ApplicationPropertyChangeEvent;
+import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.util.JdbcHelper.DatabaseType;
 import architecture.ee.util.LocaleUtils;

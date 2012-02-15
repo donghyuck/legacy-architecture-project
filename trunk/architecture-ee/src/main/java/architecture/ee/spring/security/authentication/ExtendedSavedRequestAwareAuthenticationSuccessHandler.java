@@ -58,13 +58,19 @@ public class ExtendedSavedRequestAwareAuthenticationSuccessHandler extends Simpl
      */
     protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response) {
     	
+    	logger.debug("isAlwaysUseDefaultTargetUrl:" + isAlwaysUseDefaultTargetUrl() );
+    	logger.debug("defaultTargetUrl:" + getDefaultTargetUrl() );
+    	logger.debug("targetUrlParameter:" + getTargetUrlParameter() );
+    	
         if (isAlwaysUseDefaultTargetUrl()) {        	
             return getDefaultTargetUrl();            
         }
 
         // Check for the parameter and use that if available
         String targetUrl = request.getParameter(getTargetUrlParameter());
-
+        
+        logger.debug("targetUrl:" + targetUrl );
+        
         if (StringUtils.hasText(targetUrl)) {
             try {
             	targetUrl = determineTargetUrl(request, response, targetUrl);
@@ -85,6 +91,8 @@ public class ExtendedSavedRequestAwareAuthenticationSuccessHandler extends Simpl
             targetUrl = getDefaultTargetUrl();
             logger.debug("Using default Url: " + targetUrl);
         }
+        
+        
 
         targetUrl = determineTargetUrl(request, response, targetUrl);
         

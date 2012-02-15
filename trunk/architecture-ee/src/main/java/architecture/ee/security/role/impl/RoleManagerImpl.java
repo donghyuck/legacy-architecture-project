@@ -10,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
-import architecture.ee.admin.AdminHelper;
 import architecture.ee.security.role.ExtendedRoleManager;
 import architecture.ee.security.role.Role;
 import architecture.ee.security.role.dao.RoleDao;

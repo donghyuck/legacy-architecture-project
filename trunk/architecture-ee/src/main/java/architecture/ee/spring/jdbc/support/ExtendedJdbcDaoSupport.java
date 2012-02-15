@@ -1,7 +1,5 @@
 package architecture.ee.spring.jdbc.support;
 
-import java.io.InputStream;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
@@ -9,10 +7,11 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.lob.LobHandler;
 
-import architecture.ee.jdbc.query.factory.Configuration;
-import architecture.ee.jdbc.query.mapping.BoundSql;
-import architecture.ee.jdbc.query.mapping.MappedStatement;
 import architecture.ee.jdbc.sequencer.dao.SequenceDao;
+import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
+import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
+import architecture.ee.jdbc.util.JdbcHelper;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
@@ -92,12 +91,14 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 		getExtendedJdbcTemplate().setLobHandler(lobHandler);
 	} 
 	
-	protected void insertBlobAsStream(String sql, int contentLength, final InputStream in, final Object args[] ){
-		final LobHandler lobHandler = getLobHandler();
-		
-		
-	};
+	public void setJdbcHelper(JdbcHelper jdbcHelper) {
+		getExtendedJdbcTemplate().setJdbcHelper(jdbcHelper);
+	}
 	
+	public void getJdbcHelper(){
+		getExtendedJdbcTemplate().getJdbcHelper();
+	}
+
 	
 	protected BoundSql getBoundSql(String statement ){
 		if(isSetConfiguration()){

@@ -14,10 +14,10 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.JdbcUtils;
 
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.component.SqlQueryClient;
 import architecture.ee.jdbc.schema.Database;
 import architecture.ee.jdbc.schema.DatabaseFactory;
 import architecture.ee.jdbc.schema.Table;
+import architecture.ee.service.SqlQueryClient;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 
 public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryClient {
