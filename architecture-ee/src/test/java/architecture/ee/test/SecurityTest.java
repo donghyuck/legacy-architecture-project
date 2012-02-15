@@ -8,12 +8,13 @@ import org.junit.Test;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.ee.admin.AdminHelper;
-import architecture.ee.bootstrap.Bootstrap;
 import architecture.ee.security.permission.Permissions;
 import architecture.ee.security.role.Role;
 import architecture.ee.user.Group;
 import architecture.ee.user.User;
+import architecture.ee.util.ApplicationHelper;
 
 public class SecurityTest {
 
@@ -40,13 +41,13 @@ public class SecurityTest {
 		
 		AdminHelper.getCache("USER");
 		log.debug("======================================");
-		for( User user : AdminHelper.getUserManager().getApplicationUsers()){
+		for( User user : ApplicationHelper.getUserManager().getApplicationUsers()){
 			log.debug(user);			
 			
-			List<Group> groups = AdminHelper.getGroupManager().getUserGroups(user);			
+			List<Group> groups = ApplicationHelper.getGroupManager().getUserGroups(user);			
 			log.debug(groups);
 			
-			List<Role> roles = AdminHelper.getRoleManager().getFinalUserRoles(user.getUserId());
+			List<Role> roles = ApplicationHelper.getRoleManager().getFinalUserRoles(user.getUserId());
 			log.debug(roles);
 		}
 		
