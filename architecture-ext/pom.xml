@@ -5,11 +5,12 @@
 		<artifactId>architecture-parent</artifactId>
 		<groupId>architecture</groupId>
 		<version>1.0.0.RELEASE</version>
+		<relativePath>../architecture-parent</relativePath>
 	</parent>
 	<groupId>architecture.ext</groupId>
 	<artifactId>architecture-ext</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0.0.RELEASE</version>
+	<version>1.0.5.RELEASE</version>
 	<name>POWER ARCHITECTURE EXTENSION</name>
 
 	<contributors>
@@ -27,18 +28,46 @@
 			<groupId>smeapi</groupId>
 			<artifactId>smeapi</artifactId>
 			<version>2.5</version>
-		</dependency>	
+		</dependency>
+		<dependency>
+			<groupId>com.dkitec.mose</groupId>
+			<artifactId>mose-client</artifactId>
+			<version>1.5.0</version>
+		</dependency>			
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 			<type>jar</type>
 			<scope>test</scope>
-		</dependency>		
+		</dependency>
+				
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>2.5.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>architecture.common</groupId>
+			<artifactId>architecture-common</artifactId>
+			<version>${project.build.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>3.1.5</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-net</groupId>
+			<artifactId>commons-net</artifactId>
+			<version>3.0.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
