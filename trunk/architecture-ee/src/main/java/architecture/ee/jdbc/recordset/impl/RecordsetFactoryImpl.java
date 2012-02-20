@@ -4,7 +4,6 @@ import java.sql.ResultSet;
 
 import architecture.ee.jdbc.recordset.Recordset;
 import architecture.ee.jdbc.recordset.RecordsetFactory;
-import architecture.ee.jdbc.recordset.RecordsetFactory.Implementation;
 public class RecordsetFactoryImpl implements RecordsetFactory.Implementation {
 
 	public RecordsetFactoryImpl() {
