@@ -21,7 +21,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
-import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.vfs.VFSUtils;
