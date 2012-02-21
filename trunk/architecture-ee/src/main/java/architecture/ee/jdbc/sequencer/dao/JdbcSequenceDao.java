@@ -9,7 +9,7 @@ import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 /**
  * @author  donghyuck
  */
-public class JdbcSequenceDao implements SequenceDao {
+public class JdbcSequenceDao implements Sequence {
 	
 	/**
 	 */

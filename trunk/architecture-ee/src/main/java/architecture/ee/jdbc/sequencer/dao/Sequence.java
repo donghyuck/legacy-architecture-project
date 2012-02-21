@@ -1,6 +1,6 @@
 package architecture.ee.jdbc.sequencer.dao;
 
-public interface SequenceDao {
+public interface Sequence {
 	
     public abstract long nextID(int sequenceID);
 
