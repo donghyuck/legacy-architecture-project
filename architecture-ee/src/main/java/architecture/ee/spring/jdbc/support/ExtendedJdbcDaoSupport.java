@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.lob.LobHandler;
 
-import architecture.ee.jdbc.sequencer.dao.SequenceDao;
+import architecture.ee.jdbc.sequencer.dao.Sequence;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
@@ -23,7 +23,7 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	
 	/**
 	 */
-	private SequenceDao sequenceDao = null;
+	private Sequence sequenceDao = null;
 	
 	/**
 	 */
@@ -52,7 +52,7 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 	/**
 	 * @param sequenceDao
 	 */
-	public void setSequenceDao(SequenceDao sequenceDao) {
+	public void setSequenceDao(Sequence sequenceDao) {
 		this.sequenceDao = sequenceDao;
 	}
 	

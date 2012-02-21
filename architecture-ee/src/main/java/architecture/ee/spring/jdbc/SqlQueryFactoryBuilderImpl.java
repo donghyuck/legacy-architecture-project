@@ -124,18 +124,21 @@ public class SqlQueryFactoryBuilderImpl implements SqlQueryFactoryBuilder {
 	}
 
 	protected void loadResourceLocations() {
-		try {
-			for (String path : resourceLocations) {				
+
+		for (String path : resourceLocations) {
+			try {
 				FileObject fo = VFSUtils.resolveFile(path);
-				if( fo.exists() ){
-					if (!configuration.isResourceLoaded(fo.getName().getURI())) {						
-						log.debug( fo.getName().getScheme() );						
+				if (fo.exists()) {
+					if (!configuration.isResourceLoaded(fo.getName().getURI())) {
 						buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
 						configuration.addLoadedResource(fo.getName().getURI());
 					}
 				}
+			} catch (Throwable e) {
+				log.warn(path + " not found.", e);
 			}
-		} catch (Exception e) { }
+		}
+
 	}
 
 	/**

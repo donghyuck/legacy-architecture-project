@@ -12,27 +12,88 @@
 	<description><![CDATA[
         Dao Subsystem Context
 	]]></description>
-			
-	<bean id="sequenceDao" class="architecture.ee.jdbc.sequencer.dao.JdbcSequenceDao" init-method="initialize">
-		<constructor-arg ref="sequencerFactory"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
+		p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB"
+		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
+
+	<bean id="jdbcHelper"
+		class="architecture.ee.jdbc.util.JdbcHelperFactory" factory-method="getJdbcHelper" 
+		p:databaseMetaData-ref="dataSource"
+		p:nativeJdbcExtractor-ref="automaticJdbcExtractor" />
+		
+
+	<bean id="automaticJdbcExtractor" class="architecture.ee.spring.jdbc.support.AutomaticJdbcExtractor" lazy-init="true">
+		<property name="defaultJdbcExtractor">
+			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
+		</property>	
+		<property name="extractors">
+			<map>
+				<entry key="org.apache.commons.dbcp">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry key="weblogic">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.WebLogicNativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+	
+				<entry key="c3p0">
+					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
+						<property name="extractorClass">
+							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor</value>
+						</property>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>	
+
+
+	<bean id="sqlConfiguration" 
+	    class="architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory"
+		factory-method="getConfiguration" />
+		
+	<bean id="sqlQueryFactoryBuilder" 
+	    class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilderImpl"
+		init-method="initialize">
+		<constructor-arg index="0" ref="sqlConfiguration" />
+		<property name="resourceLocations">
+			<list>
+				<value>res:sql/default-framework-queryset.xml</value>
+			</list>
+		</property>
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
-	<bean id="countryDao" class="architecture.ee.g11n.dao.impl.JdbcCountryDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
-	
-	<bean id="i18nTextDao" class="architecture.ee.g11n.dao.impl.JdbcI18nTextDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
-	
-	<bean id="i18nLocaleDao" class="architecture.ee.g11n.dao.impl.JdbcI18nLocaleDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" />
+	<bean id="sequencerFactory" 
+	    class="architecture.ee.jdbc.sequencer.JdbcSequencerFactory" scope="singleton">
+		<constructor-arg index="0" ref="sqlConfiguration"/>
+		<constructor-arg index="1" ref="dataSource"/>
+	</bean>		
 
-    <bean id="extendedPropertyDao" class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" parent="jdbcDaoSupport" />
-    
-	<bean id="userDao" class="architecture.ee.user.dao.impl.JdbcUserDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+	<bean id="sequenceDao" 
+	    class="architecture.ee.jdbc.sequencer.dao.JdbcSequenceDao" 
+	    init-method="initialize">
+		<constructor-arg ref="sequencerFactory"/>
+	</bean>	
 	
-	<bean id="groupDao" class="architecture.ee.user.dao.impl.JdbcGroupDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
-		
-	<bean id="profileFiledDao" class="architecture.ee.user.dao.impl.JdbcProfileFiledDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao"/>
-	
-	<bean id="userProfileDao" class="architecture.ee.user.dao.impl.JdbcUserProfileDao" parent="jdbcDaoSupport"/>
-	
-	<bean id="roleDao" class="architecture.ee.security.dao.impl.JdbcRoleDao" parent="jdbcDaoSupport" p:sequenceDao-ref="sequenceDao"/>
-					
+
+	<bean id="jdbcDaoSupport" abstract="true" 
+	    p:configuration-ref="sqlConfiguration" 
+	    p:dataSource-ref="dataSource" 
+	    p:jdbcHelper-ref="jdbcHelper"
+	    p:sequenceDao-ref="sequenceDao"
+	    depends-on="sqlConfiguration, dataSource, jdbcHelper, sequenceDao" />
+	    		
+	<bean id="sqlQueryClient"
+		class="architecture.ee.component.SqlQueryClientImpl" parent="jdbcDaoSupport" />
 </beans>

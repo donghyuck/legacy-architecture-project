@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import architecture.ee.jdbc.sequencer.dao.SequenceDao;
+import architecture.ee.jdbc.sequencer.dao.Sequence;
 import architecture.ee.model.impl.RoleModelImpl;
 import architecture.ee.security.role.Role;
 import architecture.ee.security.role.dao.RoleDao;
@@ -33,12 +33,12 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 	private String sequencerName = "Role";
 	/**
 	 */
-	private SequenceDao sequenceDao;
+	private Sequence sequenceDao;
 	
 	/**
 	 * @param sequenceDao
 	 */
-	public void setSequenceDao(SequenceDao sequenceDao) {
+	public void setSequenceDao(Sequence sequenceDao) {
 		this.sequenceDao = sequenceDao;
 	}
 	

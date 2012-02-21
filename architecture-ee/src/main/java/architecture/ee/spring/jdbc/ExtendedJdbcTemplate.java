@@ -172,12 +172,10 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	
 	/**
 	 */
-	private LobHandler lobHandler = null;
-	
+	private LobHandler lobHandler = null;	
 	
 	public ExtendedJdbcTemplate(DataSource dataSource) {
-		super(dataSource);
-		
+		super(dataSource);		
 	}
 	
 	/**
@@ -202,16 +200,11 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		initialize();
 	}
 
-
-	public void initialize(){
-		
-		
+	public void initialize(){				
 		logger.debug("DATABASE HELPER : " + jdbcHelper );
 		if(jdbcHelper == null){
 			this.jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
-		}
-		
-		
+		}				
 		logger.debug("DATABASE TYPE : " + jdbcHelper.getDatabaseType());
 		logger.debug("NATIVE JDBC EXTRACTOR CLASS : " + jdbcHelper.getNativeJdbcExtractor().getClass().getName());
 		logger.debug("EXIST NATIVE JDBC EXTRACTOR CLASS : " + getNativeJdbcExtractor());
@@ -225,8 +218,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 			lobHandler = new DefaultLobHandler();
 		}
 	}
-	
-	
+		
 	public Object executeScript(final boolean stopOnError, final Reader reader) {
 		return execute(new ConnectionCallback<Object>() {
 			public Object doInConnection(Connection connection)
@@ -300,21 +292,15 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		return pscf.newPreparedStatementCreator(params);
 	}
 
-	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, Class<T> elementType, Object[] args, int[] argTypes) {
-		
-		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, getJdbcHelper());
-		
-		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor( startIndex, numResults, getSingleColumnRowMapper(elementType), getJdbcHelper());	
-		
+	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, Class<T> elementType, Object[] args, int[] argTypes) {		
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, getJdbcHelper());		
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor( startIndex, numResults, getSingleColumnRowMapper(elementType), getJdbcHelper());			
 		return (java.util.List<T>)query(creator, extractor);
 	}
 
-	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, RowMapper<T> rowMapper, Object[] args, int[] argTypes) {
-		
-		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, getJdbcHelper());
-		
-		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor( startIndex, numResults, rowMapper, getJdbcHelper());	
-		
+	public <T> List<T> queryScrollable(String sql, int startIndex, int numResults, RowMapper<T> rowMapper, Object[] args, int[] argTypes) {		
+		ScrollablePreparedStatementCreator creator = new ScrollablePreparedStatementCreator( sql, startIndex, numResults, args, argTypes, getJdbcHelper());		
+		ScrollableResultSetExtractor extractor = new ScrollableResultSetExtractor( startIndex, numResults, rowMapper, getJdbcHelper());			
 		return (java.util.List<T>)query(creator, extractor);
 	}
 	
@@ -327,9 +313,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	protected Object runScript(Connection conn, boolean stopOnError, Reader reader) throws SQLException, IOException {
 
 		StringBuffer command = null;
-
 		List<Object> list = new ArrayList<Object>();
-
 		try {
 			LineNumberReader lineReader = new LineNumberReader(reader);
 			String line = null;
