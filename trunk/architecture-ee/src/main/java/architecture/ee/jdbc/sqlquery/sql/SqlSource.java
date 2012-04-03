@@ -15,8 +15,10 @@
  */
 package architecture.ee.jdbc.sqlquery.sql;
 
+import java.util.List;
 import java.util.Map;
 
+import architecture.common.jdbc.ParameterMapping;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 
 public interface SqlSource {
