@@ -4,10 +4,21 @@ import architecture.common.util.ImplFactory;
 
 public class ProfilerFactory {
 
+	/**
+	 * @author   donghyuck
+	 */
 	public static interface Implementation
     {		
 		public abstract Profiler getProfiler();		
+		/**
+		 * @return
+		 * @uml.property  name="profilingEnabled"
+		 */
 		public abstract boolean isProfilingEnabled();
+		/**
+		 * @param  enabled
+		 * @uml.property  name="profilingEnabled"
+		 */
 		public abstract void setProfilingEnabled(boolean enabled);
 		
     }

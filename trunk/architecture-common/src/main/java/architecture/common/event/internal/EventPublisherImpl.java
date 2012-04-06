@@ -31,26 +31,19 @@ import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 
 /**
- * <p>
- * The default implementation of the
- * {@link architecture.ee.event.api.EventPublisher} interface.
- * </p>
- * <p>
- * <p>
- * One can customise the event listening by instantiating with custom
- * {@link architecture.ee.event.spi.ListenerHandler listener handlers} and the
- * event dispatching through {@link architecture.ee.event.spi.EventDispatcher} .
- * See the {@link architecture.ee.event.spi} package for more information.
- * </p>
- * 
+ * <p> The default implementation of the {@link architecture.ee.event.api.EventPublisher}  interface. </p> <p> <p> One can customise the event listening by instantiating with custom {@link architecture.ee.event.spi.ListenerHandler  listener handlers}  and the event dispatching through  {@link architecture.ee.event.spi.EventDispatcher}  . See the  {@link architecture.ee.event.spi}  package for more information. </p>
  * @see architecture.ee.event.spi.ListenerHandler
  * @see architecture.ee.event.spi.EventDispatcher
- * @since 2.0
+ * @since  2.0
  */
 public final class EventPublisherImpl implements EventPublisher
 {
 
 	private final Log log = LogFactory.getLog(getClass());
+    /**
+	 * @uml.property  name="eventDispatcher"
+	 * @uml.associationEnd  
+	 */
     private final EventDispatcher eventDispatcher;
     private final List<ListenerHandler> listenerHandlers;
 
@@ -195,11 +188,21 @@ public final class EventPublisherImpl implements EventPublisher
     }
 
 
+    /**
+	 * @author  donghyuck
+	 */
     private static final class KeyedListenerInvoker
     {
 
+        /**
+		 * @uml.property  name="key"
+		 */
         private final String key;
 
+        /**
+		 * @uml.property  name="invoker"
+		 * @uml.associationEnd  
+		 */
         private final ListenerInvoker invoker;
 
         KeyedListenerInvoker(String key, ListenerInvoker invoker)
@@ -208,11 +211,19 @@ public final class EventPublisherImpl implements EventPublisher
             this.key = key;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="key"
+		 */
         String getKey()
         {
             return key;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="invoker"
+		 */
         ListenerInvoker getInvoker()
         {
             return invoker;

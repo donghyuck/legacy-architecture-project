@@ -21,11 +21,23 @@ package architecture.common.lifecycle.event;
 public class ApplicationPropertyChangeEvent extends PropertyChangeEvent {
        
     /**
-	 * @author               donghyuck
+	 * @author                 donghyuck
 	 */
     public enum Type {
+        /**
+		 * @uml.property  name="aDDED"
+		 * @uml.associationEnd  
+		 */
         ADDED, 
+        /**
+		 * @uml.property  name="rEMOVED"
+		 * @uml.associationEnd  
+		 */
         REMOVED, 
+        /**
+		 * @uml.property  name="mODIFIED"
+		 * @uml.associationEnd  
+		 */
         MODIFIED,
     }
 

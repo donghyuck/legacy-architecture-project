@@ -25,14 +25,29 @@ import org.dom4j.Element;
 import architecture.common.exception.LicenseException;
 import architecture.common.lifecycle.ApplicationConstants;
 
+/**
+ * @author  donghyuck
+ */
 public class License {
     
+	/**
+	 * @author  donghyuck
+	 */
 	public static class Client implements Serializable {
 
+		/**
+		 * @uml.property  name="name"
+		 */
 		private String name;
 
+		/**
+		 * @uml.property  name="company"
+		 */
 		private String company;
 
+		/**
+		 * @uml.property  name="url"
+		 */
 		private String url;
 
 		public Client() {
@@ -60,14 +75,26 @@ public class License {
 			return name == null ? client.name == null : name.equals(client.name);
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="company"
+		 */
 		public String getCompany() {
 			return company;
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="name"
+		 */
 		public String getName() {
 			return name;
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="url"
+		 */
 		public String getUrl() {
 			return url;
 		}
@@ -76,14 +103,26 @@ public class License {
 			result = 11 * result + (company == null ? 0 : company.hashCode());
 			return result;
 		}
+		/**
+		 * @param company
+		 * @uml.property  name="company"
+		 */
 		public void setCompany(String company) {
 			this.company = company;
 		}
 
+		/**
+		 * @param name
+		 * @uml.property  name="name"
+		 */
 		public void setName(String name) {
 			this.name = name;
 		}
 
+		/**
+		 * @param url
+		 * @uml.property  name="url"
+		 */
 		public void setUrl(String url) {
 			this.url = url;
 		}
@@ -99,8 +138,14 @@ public class License {
 		}
 	};
 
+	/**
+	 * @author  donghyuck
+	 */
 	public static class Module implements Serializable {
 
+		/**
+		 * @uml.property  name="name"
+		 */
 		private String name;
 
 		public Module() {
@@ -120,6 +165,10 @@ public class License {
 					.equals(module.name);
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="name"
+		 */
 		public String getName() {
 			return name;
 		}
@@ -129,6 +178,10 @@ public class License {
 			return result;
 		}
 
+		/**
+		 * @param name
+		 * @uml.property  name="name"
+		 */
 		public void setName(String name) {
 			this.name = name;
 		}
@@ -142,12 +195,30 @@ public class License {
 		}
 	}
 
+	/**
+	 * @author   donghyuck
+	 */
 	public enum Type {
+		/**
+		 * @uml.property  name="cOMMERCIAL"
+		 * @uml.associationEnd  
+		 */
 		COMMERCIAL,
+		/**
+		 * @uml.property  name="nON_COMMERCIAL"
+		 * @uml.associationEnd  
+		 */
 		NON_COMMERCIAL,
+		/**
+		 * @uml.property  name="eVALUATION"
+		 * @uml.associationEnd  
+		 */
 		EVALUATION
 	}
 	
+	/**
+	 * @author  donghyuck
+	 */
 	public static class Version implements Comparable<Version>, Serializable {
 
 		public static Version parseVersion(String versionString) {
@@ -171,12 +242,24 @@ public class License {
 			return version;
 		}
 
+		/**
+		 * @uml.property  name="major"
+		 */
 		private int major;
 
+		/**
+		 * @uml.property  name="minor"
+		 */
 		private int minor;
 
+		/**
+		 * @uml.property  name="revision"
+		 */
 		private int revision;
 
+		/**
+		 * @uml.property  name="extraVersionInfo"
+		 */
 		private String extraVersionInfo;
 
 		private Version() {
@@ -221,18 +304,34 @@ public class License {
 				return extraVersionInfo == null ? version.extraVersionInfo != null : !extraVersionInfo.equals(version.extraVersionInfo);
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="extraVersionInfo"
+		 */
 		public String getExtraVersionInfo() {
 			return extraVersionInfo;
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="major"
+		 */
 		public int getMajor() {
 			return major;
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="minor"
+		 */
 		public int getMinor() {
 			return minor;
 		}
 
+		/**
+		 * @return
+		 * @uml.property  name="revision"
+		 */
 		public int getRevision() {
 			return revision;
 		}
@@ -274,14 +373,44 @@ public class License {
 	private static final DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
     private static final Log log = LogFactory.getLog(License.class);
     private long id;
+    /**
+	 * @uml.property  name="name"
+	 */
     private String name;
+    /**
+	 * @uml.property  name="edition"
+	 */
     private String edition;
+    /**
+	 * @uml.property  name="creationDate"
+	 */
     private Date creationDate;
+    /**
+	 * @uml.property  name="version"
+	 * @uml.associationEnd  
+	 */
     private Version version;
+    /**
+	 * @uml.property  name="client"
+	 * @uml.associationEnd  
+	 */
     private Client client;
+    /**
+	 * @uml.property  name="modules"
+	 */
     private List<Module> modules;
+    /**
+	 * @uml.property  name="properties"
+	 */
     private Map<String, String> properties;
+    /**
+	 * @uml.property  name="signature"
+	 */
     private String signature;
+    /**
+	 * @uml.property  name="type"
+	 * @uml.associationEnd  
+	 */
     private Type type;
     
     public License()
@@ -308,30 +437,58 @@ public class License {
 		this.id = id;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="name"
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @param name
+	 * @uml.property  name="name"
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="edition"
+	 */
 	public String getEdition() {
 		return edition;
 	}
 
+	/**
+	 * @param edition
+	 * @uml.property  name="edition"
+	 */
 	public void setEdition(String edition) {
 		this.edition = edition;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="creationDate"
+	 */
 	public Date getCreationDate() {
 		return creationDate;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="version"
+	 */
 	public Version getVersion() {
 		return version;
 	}
 
+	/**
+	 * @param version
+	 * @uml.property  name="version"
+	 */
 	public void setVersion(Version version) {
 		this.version = version;
 	}
@@ -340,14 +497,26 @@ public class License {
 		this.version = Version.parseVersion(version);
 	}
 
+	/**
+	 * @param creationDate
+	 * @uml.property  name="creationDate"
+	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="client"
+	 */
 	public Client getClient() {
 		return client;
 	}
 
+	/**
+	 * @param client
+	 * @uml.property  name="client"
+	 */
 	public void setClient(Client client) {
 		this.client = client;
 	}
@@ -357,10 +526,18 @@ public class License {
 		setClient(client);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="modules"
+	 */
 	public List<Module> getModules() {
 		return modules;
 	}
 
+	/**
+	 * @param modules
+	 * @uml.property  name="modules"
+	 */
 	public void setModules(List<Module> modules) {
 		this.modules = modules;
 	}
@@ -375,26 +552,50 @@ public class License {
 		}
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="properties"
+	 */
 	public Map<String, String> getProperties() {
 		return properties;
 	}
 
+	/**
+	 * @param properties
+	 * @uml.property  name="properties"
+	 */
 	public void setProperties(Map<String, String> properties) {
 		this.properties = properties;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="signature"
+	 */
 	public String getSignature() {
 		return signature;
 	}
 
+	/**
+	 * @param signature
+	 * @uml.property  name="signature"
+	 */
 	public void setSignature(String signature) {
 		this.signature = signature;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="type"
+	 */
 	public Type getType() {
 		return type;
 	}
 
+	/**
+	 * @param type
+	 * @uml.property  name="type"
+	 */
 	public void setType(Type type) {
 		this.type = type;
 	}

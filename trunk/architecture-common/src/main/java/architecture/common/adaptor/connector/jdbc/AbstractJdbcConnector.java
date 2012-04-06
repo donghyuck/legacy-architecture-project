@@ -95,6 +95,11 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 								value = "0";
 							
 							return new Long(value);
+						}else if (Integer.class == mapping.getJavaType() ){
+							String value = rs.getString(index);
+							if(StringUtils.isEmpty(value))
+								value = "0";							
+							return new Integer(value);
 						}
 					}
 				}
@@ -170,7 +175,8 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 				for( ParameterMapping mapping : parameterMappings ){     	
                 	JdbcType jdbcType = mapping.getJdbcType();                	
                 	Object value = row.get( mapping.getProperty() );
-                	Object valueToUse = value;                	
+                	Object valueToUse = value;      
+                	
                 	if( valueToUse == null && mapping.getJavaType() == Date.class ){
                 		valueToUse = new Date();
                 	}                 	

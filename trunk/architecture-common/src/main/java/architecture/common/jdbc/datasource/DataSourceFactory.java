@@ -5,7 +5,7 @@ import javax.sql.DataSource;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class DataSourceFactory {
 
@@ -22,6 +22,8 @@ public class DataSourceFactory {
 	}
 	
 	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
     

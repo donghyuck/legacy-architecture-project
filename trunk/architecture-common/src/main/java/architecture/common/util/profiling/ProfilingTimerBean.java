@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author  donghyuck
+ */
 public class ProfilingTimerBean
     implements Serializable
 {
@@ -13,9 +16,19 @@ public class ProfilingTimerBean
 	 */
 	private static final long serialVersionUID = -2544236547702391434L;
 	List<ProfilingTimerBean> children;
+    /**
+	 * @uml.property  name="parent"
+	 * @uml.associationEnd  
+	 */
     ProfilingTimerBean parent;
+    /**
+	 * @uml.property  name="resource"
+	 */
     String resource;
     long startTime;
+    /**
+	 * @uml.property  name="totalTime"
+	 */
     long totalTime;
     long startMem;
     long totalMem;
@@ -34,6 +47,10 @@ public class ProfilingTimerBean
         this.parent = parent;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="parent"
+	 */
     public ProfilingTimerBean getParent()
     {
         return parent;
@@ -66,6 +83,10 @@ public class ProfilingTimerBean
         totalMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory() - startMem;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="resource"
+	 */
     public String getResource()
     {
         return resource;
@@ -100,6 +121,10 @@ public class ProfilingTimerBean
         }
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="totalTime"
+	 */
     public long getTotalTime()
     {
         return totalTime;

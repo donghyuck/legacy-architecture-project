@@ -3,6 +3,9 @@ package architecture.common.util.profiling;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * @author  donghyuck
+ */
 public class TimerStack {
 
 
@@ -14,8 +17,14 @@ public class TimerStack {
     
     public static final String ACTIVATE_MEMORY_PROPERTY = "architecture.common.profile.activate.memory";
     
+    /**
+	 * @uml.property  name="mIN_TIME"
+	 */
     public static final String MIN_TIME = "architecture.common.profile.mintime";
     
+    /**
+	 * @uml.property  name="mIN_TOTAL_TIME"
+	 */
     public static final String MIN_TOTAL_TIME = "architecture.common.profile.mintotaltime";
     
     private static volatile long configuredMinTime = Long.getLong(MIN_TIME, 0L).longValue();
@@ -26,6 +35,10 @@ public class TimerStack {
     
     private static volatile boolean profileMemoryFlag = true; //"true".equalsIgnoreCase(System.getProperty(ACTIVATE_MEMORY_PROPERTY, "false"));
     
+    /**
+	 * @uml.property  name="logger"
+	 * @uml.associationEnd  
+	 */
     private static TimerLogger logger = new TimerLogger() {
 
         public void log(String s)
@@ -85,11 +98,19 @@ public class TimerStack {
             logger.log(printable);
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="mIN_TIME"
+	 */
     private static long getMinTime()
     {
         return configuredMinTime;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="mIN_TOTAL_TIME"
+	 */
     private static long getMinTotalTime()
     {
         return configuredMinTotalTime;
@@ -125,6 +146,10 @@ public class TimerStack {
         profileMemoryFlag = active;
     }
 
+    /**
+	 * @param logger
+	 * @uml.property  name="logger"
+	 */
     public static void setLogger(TimerLogger logger)
     {
         TimerStack.logger = logger;

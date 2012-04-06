@@ -22,10 +22,25 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.MapMaker;
 
+/**
+ * @author  donghyuck
+ */
 public class LockFreeEventPublisher implements EventPublisher {
 
+    /**
+	 * @uml.property  name="invokerBuilder"
+	 * @uml.associationEnd  
+	 */
     private final InvokerBuilder invokerBuilder;
+    /**
+	 * @uml.property  name="publisher"
+	 * @uml.associationEnd  
+	 */
     private final Publisher publisher;
+    /**
+	 * @uml.property  name="listeners"
+	 * @uml.associationEnd  
+	 */
     private final Listeners listeners = new Listeners();
         
 	static final class InvokerBuilder {
@@ -54,11 +69,22 @@ public class LockFreeEventPublisher implements EventPublisher {
 
 	}
 
+    /**
+	 * @author  donghyuck
+	 */
     static final class Publisher
     {
     	 private final Log log = LogFactory.getLog(getClass());
-         private final Listeners listeners;
-         private final EventDispatcher dispatcher;
+         /**
+		 * @uml.property  name="listeners"
+		 * @uml.associationEnd  
+		 */
+        private final Listeners listeners;
+         /**
+		 * @uml.property  name="dispatcher"
+		 * @uml.associationEnd  
+		 */
+        private final EventDispatcher dispatcher;
                   
          private final Function eventClassToInvokersTransformer = new Function() {
 			public Object apply(Object from) {

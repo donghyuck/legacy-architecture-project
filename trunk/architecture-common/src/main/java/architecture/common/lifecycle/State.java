@@ -16,7 +16,7 @@
 package architecture.common.lifecycle;
 
 /**
- * @author               donghyuck
+ * @author                 donghyuck
  */
 public enum State {
 	
@@ -71,6 +71,10 @@ public enum State {
 	 */
 	DESTROYED("DESTROYED"),
 	
+	/**
+	 * @uml.property  name="pOST_UPGRADE_STARTED"
+	 * @uml.associationEnd  
+	 */
 	POST_UPGRADE_STARTED("POST_UPGRADE_STARTED");
 	
 	private String desc;

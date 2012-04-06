@@ -10,7 +10,7 @@ import architecture.common.lifecycle.service.AdminService;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class Bootstrap {
 	
@@ -27,6 +27,8 @@ public class Bootstrap {
 	}
 	
 	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
     

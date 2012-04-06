@@ -6,6 +6,9 @@ import java.util.Stack;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * @author  donghyuck
+ */
 public class Profiler {
 
     
@@ -24,11 +27,27 @@ public class Profiler {
         }
     }
     
+    /**
+	 * @author  donghyuck
+	 */
     public static class ProfileStat
     {
+    	/**
+		 * @uml.property  name="count"
+		 */
     	int count;
+        /**
+		 * @uml.property  name="average"
+		 */
         double average;
+        /**
+		 * @uml.property  name="max"
+		 */
         long max;
+        /**
+		 * @uml.property  name="parent"
+		 * @uml.associationEnd  
+		 */
         ProfileStat parent;
 
         public ProfileStat()
@@ -48,16 +67,28 @@ public class Profiler {
                 max = time;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="count"
+		 */
         public int getCount()
         {
             return count;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="average"
+		 */
         public double getAverage()
         {
             return average;
         }
 
+        /**
+		 * @return
+		 * @uml.property  name="max"
+		 */
         public long getMax()
         {
             return max;
@@ -78,6 +109,9 @@ public class Profiler {
     
     private Log log = LogFactory.getLog(Profiler.class);
     private Stack<ProfileInstance> stack;
+    /**
+	 * @uml.property  name="stats"
+	 */
     private HashMap<String, ProfileStat> stats = new HashMap<String, ProfileStat>();
     private boolean enabled = false;
     
@@ -153,6 +187,10 @@ public class Profiler {
         stats = new HashMap<String, ProfileStat>();
     }
     
+    /**
+	 * @return
+	 * @uml.property  name="stats"
+	 */
     public HashMap<String, ProfileStat> getStats()
     {
         return stats;

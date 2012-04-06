@@ -6,10 +6,17 @@ import java.util.Random;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * @author  donghyuck
+ */
 public class Blowfish {
 
 	private static final Log Log = LogFactory.getLog(Blowfish.class);
 
+	/**
+	 * @uml.property  name="m_bfish"
+	 * @uml.associationEnd  
+	 */
 	private BlowfishCBC m_bfish;
 	private static Random m_rndGen = new Random();
 
