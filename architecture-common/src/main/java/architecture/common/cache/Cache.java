@@ -1,19 +1,22 @@
 package architecture.common.cache;
 
+/**
+ * @author   donghyuck
+ */
 public interface Cache<K,V> extends java.util.Map<K,V> {
 
     /**
-     * Returns the name of the cache.
-     *
-     * @return the name of the cache.
-     */
+	 * Returns the name of the cache.
+	 * @return   the name of the cache.
+	 * @uml.property  name="name"
+	 */
     String getName();
 
     /**
-     * Sets the name of the cache
-     *
-     * @param name the name of the cache
-     */
+	 * Sets the name of the cache
+	 * @param name   the name of the cache
+	 * @uml.property  name="name"
+	 */
     void setName(String name);
 
     /**
@@ -35,23 +38,17 @@ public interface Cache<K,V> extends java.util.Map<K,V> {
     void setMaxCacheSize(int maxSize);
 
     /**
-     * Returns the maximum number of milliseconds that any object can live
-     * in cache. Once the specified number of milliseconds passes, the object
-     * will be automatically expried from cache. If the max lifetime is set
-     * to -1, then objects never expire.
-     *
-     * @return the maximum number of milliseconds before objects are expired.
-     */
+	 * Returns the maximum number of milliseconds that any object can live in cache. Once the specified number of milliseconds passes, the object will be automatically expried from cache. If the max lifetime is set to -1, then objects never expire.
+	 * @return   the maximum number of milliseconds before objects are expired.
+	 * @uml.property  name="maxLifetime"
+	 */
     long getMaxLifetime();
 
     /**
-     * Sets the maximum number of milliseconds that any object can live
-     * in cache. Once the specified number of milliseconds passes, the object
-     * will be automatically expried from cache. If the max lifetime is set
-     * to -1, then objects never expire.
-     *
-     * @param maxLifetime the maximum number of milliseconds before objects are expired.
-     */
+	 * Sets the maximum number of milliseconds that any object can live in cache. Once the specified number of milliseconds passes, the object will be automatically expried from cache. If the max lifetime is set to -1, then objects never expire.
+	 * @param maxLifetime   the maximum number of milliseconds before objects are expired.
+	 * @uml.property  name="maxLifetime"
+	 */
     void setMaxLifetime(long maxLifetime);
 
     /**

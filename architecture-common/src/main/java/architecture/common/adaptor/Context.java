@@ -1,7 +1,13 @@
 package architecture.common.adaptor;
 
+/**
+ * @author  donghyuck
+ */
 public interface Context {
 	
+	/**
+	 * @uml.property  name="tYPE"
+	 */
 	public static final String TYPE = "type";
 	
 	public static final String DATA = "data";
@@ -12,8 +18,19 @@ public interface Context {
 	
 	public static final String QUERY_STRING = "queryString";
 	
+	/**
+	 * @author   donghyuck
+	 */
 	public enum Type {
+		/**
+		 * @uml.property  name="iNPUT"
+		 * @uml.associationEnd  
+		 */
 		INPUT, 
+		/**
+		 * @uml.property  name="oUTPUT"
+		 * @uml.associationEnd  
+		 */
 		OUTPUT;
 	};
 	
@@ -28,6 +45,10 @@ public interface Context {
 	
 	public int size();
 
+	/**
+	 * @return
+	 * @uml.property  name="tYPE"
+	 */
 	public Type getType();
 	
 }

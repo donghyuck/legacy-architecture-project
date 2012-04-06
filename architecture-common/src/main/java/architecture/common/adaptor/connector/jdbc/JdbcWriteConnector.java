@@ -32,6 +32,7 @@ public class JdbcWriteConnector extends AbstractJdbcConnector implements WriteCo
 			return deliver(queryString, parameterMappings, data);
 		}else{
 			Object data = context.getObject("data");
+			log.debug( "row:" + data);
 			if(data instanceof Map)
 				return deliver(queryString, parameterMappings, (Map<String, Object>) data);	
 			else 

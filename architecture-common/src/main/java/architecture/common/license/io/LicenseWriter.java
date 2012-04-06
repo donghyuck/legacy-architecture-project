@@ -16,10 +16,20 @@ import architecture.common.exception.LicenseException;
 import architecture.common.license.License;
 import architecture.common.license.LicenseSigner;
 
+/**
+ * @author  donghyuck
+ */
 public class LicenseWriter {
 
+	/**
+	 * @uml.property  name="license"
+	 * @uml.associationEnd  
+	 */
 	private final License license;
 
+	/**
+	 * @uml.property  name="document"
+	 */
 	private Document document;
 
 	private static final Log log = LogFactory.getLog(LicenseWriter.class);
@@ -40,10 +50,18 @@ public class LicenseWriter {
 		}
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="license"
+	 */
 	public License getLicense() {
 		return license;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="document"
+	 */
 	public Document getDocument() {
 		return document;
 	}

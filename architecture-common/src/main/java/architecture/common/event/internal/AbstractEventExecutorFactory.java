@@ -9,9 +9,20 @@ import architecture.common.event.spi.EventExecutorFactory;
 
 import com.google.common.base.Preconditions;
 
+/**
+ * @author  donghyuck
+ */
 public abstract class AbstractEventExecutorFactory implements EventExecutorFactory {
 
+    /**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
     private final EventThreadPoolConfiguration configuration;
+    /**
+	 * @uml.property  name="eventThreadFactory"
+	 * @uml.associationEnd  
+	 */
     private final EventThreadFactory eventThreadFactory;
     
     public AbstractEventExecutorFactory(EventThreadPoolConfiguration configuration, EventThreadFactory eventThreadFactory)

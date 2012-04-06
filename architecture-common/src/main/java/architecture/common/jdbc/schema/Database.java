@@ -4,15 +4,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author donghyuck
+ * @author  donghyuck
  */
 public class Database {
 
 	/**
- */
+	 * @uml.property  name="catalog"
+	 */
 	private String catalog;
 	/**
- */
+	 * @uml.property  name="schema"
+	 */
 	private String schema;
 
 	private Map tables = new HashMap();
@@ -24,6 +26,7 @@ public class Database {
 
 	/**
 	 * @return
+	 * @uml.property  name="catalog"
 	 */
 	public String getCatalog() {
 		return catalog;
@@ -31,6 +34,7 @@ public class Database {
 
 	/**
 	 * @return
+	 * @uml.property  name="schema"
 	 */
 	public String getSchema() {
 		return schema;

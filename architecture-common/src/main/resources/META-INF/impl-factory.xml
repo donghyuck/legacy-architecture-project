@@ -4,5 +4,10 @@
 	<factory
 		interface="architecture.common.i18n.impl.LocalizerFactory$Implementation"
 		impl="architecture.common.i18n.LocalizerFactoryImpl" />		
+		
+	<factory
+		interface="architecture.common.profile.ProfilerFactory$Implementation"
+		impl="architecture.common.profile.ProfilerFactoryImpl" />		
+				
 </factories>
 
