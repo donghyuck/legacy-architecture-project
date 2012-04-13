@@ -23,6 +23,16 @@
 		</license>
 	</licenses>
 	<inceptionYear>1010</inceptionYear>
+		
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>hadoop-master</id>
+			<name>hadoop-master-releases</name>
+			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+		</repository>
+	</distributionManagement>
+	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -33,6 +43,16 @@
 		<project.dependency.spring-security.version>3.1.0.RELEASE</project.dependency.spring-security.version>
 	</properties>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Donghyuck's Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<dependencies>
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -161,28 +181,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.5</version>
-				<configuration>
-					<parallel>classes</parallel>
-					<threadCount>3</threadCount>
-					<show>public</show>
-				</configuration>
+				<version>2.11</version>
 			</plugin>
 		</plugins>
 	</build>
 	<reporting>
 		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.4</version>
-				<configuration>
-					<formats>
-						<format>html</format>
-						<format>xml</format>
-					</formats>
-				</configuration>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -192,27 +196,14 @@
 					<show>public</show>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>cobertura-maven-plugin</artifactId>
+				<version>2.5.1</version>
+			</plugin>
 		</plugins>
-	</reporting>
-	<repositories>
-		<repository>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-			<id>central</id>
-			<name>Maven Repository Switchboard</name>
-			<url>http://repo1.maven.org/maven2</url>
-		</repository>
-		<repository>
-			<id>maven2-repository.dev.java.net</id>
-			<name>Java.net Repository for Maven</name>
-			<url>http://download.java.net/maven/2/</url>
-			<layout>default</layout>
-		</repository>
-	</repositories>
+	</reporting>	
+
 	<modules>
 	</modules>
-	<!-- <dependencyManagement> <dependencies> <dependency> <groupId>architecture.common</groupId> 
-		<artifactId>architecture-common</artifactId> <version>1.0.0-SNAPSHOT</version> 
-		</dependency> </dependencies> </dependencyManagement> -->
 </project>
