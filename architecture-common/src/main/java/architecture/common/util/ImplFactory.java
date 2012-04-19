@@ -78,7 +78,7 @@ public class ImplFactory {
 			builder.append(',');
 			builder.append(platforms);
 			builder.append(']');
-			return builder.toString(); //'[' + interfaceName + '=' + implName + ',' + isOverride + ',' + platforms + ']';
+			return builder.toString();
 		}
 		
 	}
@@ -100,7 +100,7 @@ public class ImplFactory {
 			builder.append(',');
 			builder.append(factories);
 			builder.append(']');			
-			return builder.toString(); //"[ rank = " + rank + ',' + factories + ']';
+			return builder.toString();
 		}
 		
 	}
@@ -160,14 +160,14 @@ public class ImplFactory {
 		public void endDocument() throws SAXException {
 		}
 
-		public void endElement(String s, String s1, String s2) throws SAXException {
-			if (s2.equals("rank"))
+		public void endElement(String uri, String localName, String qName) throws SAXException {
+			if (qName.equals("rank"))
 				try {
 					rank = Integer.parseInt(value.toString());
 				} catch (NumberFormatException e) {
 					throw new SAXParseException("Problem converting rank to number: " + value.toString(), locator);
 				}
-			else if (s2.equals("factory") && factory != null)
+			else if (qName.equals("factory") && factory != null)
 				if (validOn(factory.platforms))
 					factories.add(factory);
 				else
@@ -175,13 +175,11 @@ public class ImplFactory {
 			value.setLength(0);
 		}
 
-		public void error(SAXParseException saxparseexception)
-				throws SAXException {
+		public void error(SAXParseException saxparseexception) throws SAXException {
 			factory = null;
 		}
 
-		public void fatalError(SAXParseException saxparseexception)
-				throws SAXException {
+		public void fatalError(SAXParseException saxparseexception) throws SAXException {
 			factories.clear();
 			factory = null;
 			throw saxparseexception;
@@ -195,18 +193,18 @@ public class ImplFactory {
 			return factories;
 		}
 
-		public void setDocumentLocator(Locator locator1) {
-			locator = locator1;
+		public void setDocumentLocator(Locator locator) {
+			this.locator = locator;
 		}
 
 		public void startDocument() throws SAXException {
 			factories.clear();
 		}
 
-		public void startElement(String s, String s1, String s2, Attributes attributes) throws SAXException {
+		public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 			value.setLength(0);
-			if (!s2.equals("factories"))
-				if (s2.equals("factory")) {
+			if (!qName.equals("factories"))
+				if (qName.equals("factory")) {
 					factory = new Factory();
 					factory.isOverride = false;
 					int i = attributes.getLength();
@@ -225,8 +223,8 @@ public class ImplFactory {
 							throw new SAXParseException("Invalid attribute: " + s3, locator);
 					}
 
-				} else if (!s2.equals("rank"))
-					throw new SAXParseException("Invalid tag: " + s2, locator);
+				} else if (!qName.equals("rank"))
+					throw new SAXParseException("Invalid tag: " + qName, locator);
 		}
 
 		public void warning(SAXParseException e)
@@ -242,9 +240,10 @@ public class ImplFactory {
 			
 		}
 
-		public int compare(FactoryList factorylist, FactoryList factorylist1) {
-			return factorylist.rank - factorylist1.rank;
+		public int compare(FactoryList factories1, FactoryList factories2) {
+			return factories1.rank - factories2.rank;
 		}
+		
 	}
 
 	private static final String IF_PLUGIN_PATH = "META-INF/impl-factory.xml";
@@ -259,13 +258,11 @@ public class ImplFactory {
 
 	private static String actualPlatformString = null;
 
-	//private static final Log logger = LogFactory.getLog(ImplFactory.class);
-
 	static {
 
 		try {
-			_map = new FastMap<String, String>(); // HashMap<String, String>(); -> using javalotion package!			
-			List<FactoryList> list =  new FastList<FactoryList>(); //new ArrayList<FactoryList>();
+			_map = new FastMap<String, String>(); 
+			List<FactoryList> list =  new FastList<FactoryList>(); 
 			
 			ImplFactory.parseLegacyXmlFile(list);
 			
@@ -304,6 +301,7 @@ public class ImplFactory {
 			return false;
 	}
 
+	
 	private static Class<?> loadClass(Object classname) throws ClassNotFoundException {
 		return loadClass((String) classname);
 	}
@@ -317,22 +315,22 @@ public class ImplFactory {
 		}
 	}
 
-	public static Class<?> loadClassFromKey(Class<?> class1) {
-		return loadClassFromKey(class1.getName());
+	public static Class<?> loadClassFromKey(Class<?> clazz) {
+		return loadClassFromKey(clazz.getName());
 	}
 
 	public static Class<?> loadClassFromKey(String key) {
 		
 		Object obj = _map.get(key);
-		Class<?> class1 = null;
+		Class<?> clazz = null;
 		if (obj == null)
 			throw new NoClassDefFoundError("Invalid Implementation Key, " + key);
 		try {
-			class1 = loadClass(obj);
+			clazz = loadClass(obj);
 		} catch (Exception exception) {	
 			throw new IllegalStateException(exception.getMessage());
 		}
-		return class1;
+		return clazz;
 	}
 
 	public static Object loadImplFromClass(Class<?> objectclass) {
@@ -352,8 +350,8 @@ public class ImplFactory {
 		}
 	}
 
-	public static Object loadImplFromKey(Class<?> class1) {
-		return loadImplFromKey(class1.getName());
+	public static Object loadImplFromKey(Class<?> clazz) {
+		return loadImplFromKey(clazz.getName());
 	}
 
 	public static Object loadImplFromKey(String key) {
@@ -375,7 +373,8 @@ public class ImplFactory {
 		xmlreader.setEntityResolver(implfactoryparsinghandler);		
 		xmlreader.setErrorHandler(implfactoryparsinghandler);
 		
-		System.out.println("Enum:");		
+		System.out.println("Enum:");	
+		
 		do {
 			if (!enumeration.hasMoreElements())
 				break;
