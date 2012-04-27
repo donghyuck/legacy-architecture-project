@@ -5,30 +5,31 @@ import java.sql.Types;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
 import architecture.ee.jdbc.sequencer.Sequencer;
-import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
+import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 
 /**
  * @author  donghyuck
  */
-public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
+public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
    
     private Log log = LogFactory.getLog(getClass());
     
     private int type;
-    
-    /**
-	 */
+
     private String name;
        
     private long currentID;
     
     private long maxID;
     
-    /**
-	 */
     private int blockSize;
+    
+    private Configuration configuration;
    
     public JdbcSequencer() {
 		super();
@@ -42,6 +43,10 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
         this.maxID = 0L;  
     }    
 	
+	public void setConfiguration(Configuration configuration) {
+		this.configuration = configuration;
+	}
+
 	public int getSequencerId(){
 		return type;
 	}
@@ -111,7 +116,7 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
         boolean success = false;
         long currentID = 1;
         try {
-            currentID = getExtendedJdbcTemplate().queryForLong( getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_BY_ID").getSql(), new Object[] { this.type }, new int[] { Types.INTEGER });
+            currentID = getJdbcTemplate().queryForLong( getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_BY_ID").getSql(), new Object[] { this.type }, new int[] { Types.INTEGER });
         } catch (IncorrectResultSizeDataAccessException e) {
             // 해당 값이 없는 경우 생성한다.
         	this.type = getNextSequencerId();     
@@ -126,7 +131,7 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
         // The WHERE clause includes the last value of the id. This ensures
         // that an update will occur only if nobody else has performed an
         // update first.
-        success = (1 == getExtendedJdbcTemplate().update( 
+        success = (1 == getJdbcTemplate().update( 
         		getBoundSql("FRAMEWORK_V2.UPDATE_SEQUENCER").getSql(),
                 new Object[] { newID, type, currentID },
                 new int[] { Types.INTEGER, Types.INTEGER, Types.INTEGER }));
@@ -152,6 +157,11 @@ public class JdbcSequencer extends ExtendedJdbcDaoSupport implements Sequencer {
 	public boolean equals(Object obj) {
 		JdbcSequencer other = (JdbcSequencer)obj;
 		return other.getSequencerId() == getSequencerId();
+	}
+	
+	protected BoundSql getBoundSql(String statement ){
+		MappedStatement stmt = configuration.getMappedStatement(statement);
+		return stmt.getBoundSql(null);
 	}
     
 }
