@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import architecture.ee.jdbc.sequencer.dao.Sequence;
+import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
 import architecture.ee.model.impl.RoleModelImpl;
 import architecture.ee.security.role.Role;
 import architecture.ee.security.role.dao.RoleDao;
@@ -33,12 +33,12 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 	private String sequencerName = "Role";
 	/**
 	 */
-	private Sequence sequenceDao;
+	private MaxValueIncrementer sequenceDao;
 	
 	/**
 	 * @param sequenceDao
 	 */
-	public void setSequenceDao(Sequence sequenceDao) {
+	public void setMaxValueIncrementer(MaxValueIncrementer sequenceDao) {
 		this.sequenceDao = sequenceDao;
 	}
 	
@@ -51,7 +51,7 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 
 	public void createRole(Role role) {
 	
-		long id = sequenceDao.nextID(sequencerName);
+		long id = sequenceDao.nextLongValue(sequencerName);
 		if("".equals(role.getDescription()))
 			role.setDescription(null);	
 		
@@ -131,21 +131,17 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 
 	public List<Long> getRoleIds(int start, int num) {
 		return getExtendedJdbcTemplate().queryScrollable(
-			getBoundSql("FRAMEWORK_V2.SELECT_ALL_ROLE_IDS").getSql(), 
-			start, num, Long.class, new Object[]{}, 
-			new int[]{} );
+			getBoundSql("FRAMEWORK_V2.SELECT_ALL_ROLE_IDS").getSql(), start, num, new Object[0], new int[0], Long.class );
 	}
 		
 	public List<Long> getUserRoleIds(long userId) {
 		return getExtendedJdbcTemplate().queryForList(
-			getBoundSql("FRAMEWORK_V2.SELECT_USER_ROLE_IDS").getSql(), 
-			new Object[]{ userId }, new int[]{Types.INTEGER}, Long.class );
+			getBoundSql("FRAMEWORK_V2.SELECT_USER_ROLE_IDS").getSql(), new Object[]{ userId }, new int[]{Types.INTEGER}, Long.class );
 	}
 
 	public List<Long> getGroupRoleIds(long groupId) {
 		return getExtendedJdbcTemplate().queryForList(
-			getBoundSql("FRAMEWORK_V2.SELECT_GROUP_ROLE_IDS").getSql(), 
-			new Object[]{ groupId }, new int[]{Types.INTEGER}, Long.class );
+			getBoundSql("FRAMEWORK_V2.SELECT_GROUP_ROLE_IDS").getSql(), new Object[]{ groupId }, new int[]{Types.INTEGER}, Long.class );
 	}
 	public void removeUserRole(long roleId, long userId) {
 		getExtendedJdbcTemplate().update(
