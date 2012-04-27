@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import net.sf.ehcache.CacheManager;
+
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ApplicationHelperFactory;
@@ -15,7 +16,8 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.service.AdminService;
-import architecture.ee.admin.AdminHelper;
+
+import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.i18n.I18nTextManager;
 import architecture.ee.security.role.RoleManager;
 import architecture.ee.user.GroupManager;

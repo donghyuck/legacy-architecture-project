@@ -2,10 +2,10 @@ package architecture.ee.util;
 
 import architecture.common.util.StringUtils;
 
+
 public enum OutputFormat {
 	JSON, XML, HTML;
-	
-	
+		
 	public static OutputFormat stingToOutputFormat(String dataTypeString){
         if(StringUtils.isEmpty(dataTypeString))
             return HTML;        

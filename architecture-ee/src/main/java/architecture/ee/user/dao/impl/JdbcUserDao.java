@@ -314,7 +314,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> getApplicationUsers(int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_ENABLED_USER").getSql(), startIndex, numResults, userMapper2, new Object[0], new int[0]);
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_ENABLED_USER").getSql(), startIndex, numResults, new Object[0], new int[0], userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -346,7 +346,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> getAllUsers(int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_VISIBLE_USER").getSql(), startIndex, numResults, userMapper2, new Object[0], new int[0]);
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_VISIBLE_USER").getSql(), startIndex, numResults, new Object[0], new int[0], userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
