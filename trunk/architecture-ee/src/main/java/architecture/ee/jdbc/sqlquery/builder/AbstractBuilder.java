@@ -15,6 +15,7 @@
  */
 package architecture.ee.jdbc.sqlquery.builder;
 
+import architecture.common.jdbc.TypeAliasRegistry;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 
 /**
@@ -29,5 +30,8 @@ public abstract class AbstractBuilder {
 	public AbstractBuilder(Configuration configuration) {
 		this.configuration = configuration;
 	}
-
+	
+	public TypeAliasRegistry getTypeAliasRegistry(){
+		return configuration.getTypeAliasRegistry();
+	}
 }

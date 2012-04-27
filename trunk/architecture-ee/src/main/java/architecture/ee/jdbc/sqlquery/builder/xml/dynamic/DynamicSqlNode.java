@@ -34,13 +34,11 @@ import freemarker.template.TemplateHashModel;
  */
 public class DynamicSqlNode implements SqlNode {
 
-	private String text;
-	/**
-	 */
-	private Language language;
 	protected Log log = LogFactory.getLog(getClass());
-
 	private static BeansWrapper wrapper = new BeansWrapper();
+
+	private String text;
+	private Language language;
 
 	public DynamicSqlNode(String text) {
 		this.text = text;
@@ -50,15 +48,13 @@ public class DynamicSqlNode implements SqlNode {
 	/**
 	 * 다이나믹 구현은 Freemarker 을 사용하여 처리한다. 따라서 나이나믹 처리를 위해서는 반듯이 freemarker 의 규칙을
 	 * 사용하여야 한다.
-	 * 
-	 * 
 	 */
 	public boolean apply(DynamicContext context) {
-		Map<String, Object> map = new HashMap<String, Object>();
-
-		Object parameterObject = context.getBindings().get(DynamicContext.PARAMETER_OBJECT_KEY);
-		Object additionalParameterObject = context.getBindings().get(DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);
 		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Object parameterObject = context.getBindings().get(DynamicContext.PARAMETER_OBJECT_KEY);		
+		Object additionalParameterObject = context.getBindings().get(DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);		
 		
 		
 		if (additionalParameterObject != null) {
@@ -67,22 +63,21 @@ public class DynamicSqlNode implements SqlNode {
 			else
 				map.put("additional_parameter", additionalParameterObject);
 		}
-
+		
+		/**
+		 * 파라메터 객체가 널이 아니면 ..
+		 */
 		if (parameterObject != null) {
 			if (parameterObject instanceof Map) {
-				map.putAll((Map) parameterObject);
+				map.put( "parameters", parameterObject );
 			} else if (parameterObject instanceof MapSqlParameterSource) {
 				map.put("parameters",((MapSqlParameterSource) parameterObject).getValues());
 			} else if (parameterObject instanceof Object[]) {
 				map.put("parameters", parameterObject);
 			}
-		}else {
-			
 		}
 		
-		
 		context.appendSql(processTemplate(map));
-
 		return true;
 	}
 
@@ -92,9 +87,6 @@ public class DynamicSqlNode implements SqlNode {
 		return "dynamic[" + text + "]";
 	}
 
-	/**
-	 * @author                 donghyuck
-	 */
 	public enum Language {
 		/**
 		 */
@@ -111,7 +103,7 @@ public class DynamicSqlNode implements SqlNode {
 			populateStatics(map);
 			freemarker.template.SimpleHash root = new freemarker.template.SimpleHash();
 			root.putAll(map);
-			freemarker.template.Template template = new freemarker.template.Template( "dynamic", reader);
+			freemarker.template.Template template = new freemarker.template.Template( "dynamic", reader, null );
 			template.process(root, writer);
 
 		} catch (IOException e) {
@@ -125,28 +117,12 @@ public class DynamicSqlNode implements SqlNode {
 	protected static void populateStatics(Map<String, Object> model) {
 		try {
 			TemplateHashModel enumModels = wrapper.getEnumModels();
-			model.put("enums", wrapper.getEnumModels());
+			model.put("enums", enumModels );
 		} catch (UnsupportedOperationException e) {
 		}
+		
 		TemplateHashModel staticModels = wrapper.getStaticModels();
-		// try
-		// {
-		// model.put("ApplicationConstants",
-		// staticModels.get("architecture.ee.application.ApplicationConstants")
-		// );
-		// model.put("LocaleUtils",
-		// staticModels.get("architecture.ee.util.LocaleUtils") );
-		// model.put("StringUtils",
-		// staticModels.get("architecture.ee.util.StringUtils") );
-		// model.put("Permissions",
-		// staticModels.get("architecture.ee.security.Permissions") );
-
-		// }
-		// catch(TemplateModelException e)
-		// {
-		// log.error(e);
-		// }
-		model.put("statics", BeansWrapper.getDefaultInstance()
-				.getStaticModels());
+		
+		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
 	}
 }

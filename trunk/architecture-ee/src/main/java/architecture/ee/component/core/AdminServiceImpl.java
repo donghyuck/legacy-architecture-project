@@ -18,7 +18,7 @@ import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.common.lifecycle.event.StateChangeEvent;
 import architecture.common.lifecycle.service.AdminService;
 import architecture.common.lifecycle.service.PluginService;
-import architecture.ee.admin.AdminHelper;
+import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 import architecture.ee.spring.lifecycle.support.SpringLifecycleSupport;
 
@@ -143,7 +143,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		Thread currentThread = Thread.currentThread();
         ClassLoader oldLoader = currentThread.getContextClassLoader();
         
-        MethodInvoker invoker = new MethodInvoker();
+       // MethodInvoker invoker = new MethodInvoker();
         if( AdminHelper.isSetupComplete() ){
         	PluginService pluginService = getBootstrapComponent(PluginService.class);
         	pluginService.prepare();

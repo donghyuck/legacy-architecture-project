@@ -18,7 +18,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
-import architecture.ee.jdbc.schema.Table;
+import architecture.common.jdbc.schema.Table;
 
 public class ExcelWriter {
 

@@ -24,6 +24,7 @@ import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import architecture.common.jdbc.ParameterMapping;
 import architecture.ee.jdbc.sqlquery.builder.AbstractBuilder;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
 import architecture.ee.jdbc.sqlquery.builder.xml.dynamic.DynamicSqlNode;
@@ -42,7 +43,9 @@ import architecture.ee.jdbc.sqlquery.sql.SqlSource;
 public class XmlStatementBuilder extends AbstractBuilder {
 
 	public static final String XML_NODE_DESCRIPTION_TAG = "description";
-
+	public static final String XML_NODE_PARAMETER_MAPPING_TAG = "parameterMapping";
+	public static final String XML_NODE_PARAMETER_MAPPINGS_TAG = "parameterMappings";
+	
 	public static final String XML_ATTR_STATEMENT_TYPE_TAG = "statementType";
 	public static final String XML_ATTR_FETCH_SIZE_TAG = "fetchSize";
 	public static final String XML_ATTR_TIMEOUT_TAG = "timeout";
@@ -53,53 +56,77 @@ public class XmlStatementBuilder extends AbstractBuilder {
 	public static final String XML_ATTR_FUNCTION_TAG = "function";
 	public static final String XML_ATTR_SCRIPT_TAG = "script";
 	public static final String XML_ATTR_COMMENT_TAG = "comment";
+	public static final String XML_ATTR_DESCRIPTION_TAG = "description";
 
 	private Log log = LogFactory.getLog(XmlStatementBuilder.class);
 
-	/**
-	 */
 	private SqlBuilderAssistant builderAssistant;
-
-	public XmlStatementBuilder(Configuration configuration,
-			SqlBuilderAssistant builderAssistant) {
+	
+	private XNode context;
+	
+	public XmlStatementBuilder(Configuration configuration, SqlBuilderAssistant builderAssistant, XNode context) {
 		super(configuration);
 		this.builderAssistant = builderAssistant;
+		this.context = context;
 	}
 
-	public void parseStatementNode(XNode context) {
+	public void parseStatementNode() {
 
-		String id = context.getStringAttribute(XML_ATTR_ID_TAG);
-		String name = context.getStringAttribute(XML_ATTR_NAME_TAG);
-		if (StringUtils.isEmpty(id))
-			id = name;
-
-		Integer fetchSize = context.getIntAttribute(XML_ATTR_FETCH_SIZE_TAG,
-				null);
-		Integer timeout = context.getIntAttribute(XML_ATTR_TIMEOUT_TAG, null);
-
-		// bug!!
-		StatementType statementType = StatementType.valueOf(context
-				.getStringAttribute(XML_ATTR_STATEMENT_TYPE_TAG,
-						StatementType.PREPARED.toString()));
-
+		String idToUse = context.getStringAttribute(XML_ATTR_ID_TAG);
+		String nameToUse = context.getStringAttribute(XML_ATTR_NAME_TAG);
+		if (StringUtils.isEmpty(idToUse))
+			idToUse = nameToUse;
+		String descriptionToUse = context.getStringAttribute(XML_ATTR_DESCRIPTION_TAG);
+		Integer fetchSize = context.getIntAttribute(XML_ATTR_FETCH_SIZE_TAG, 0);
+		Integer timeout = context.getIntAttribute(XML_ATTR_TIMEOUT_TAG, 0);
+		
+		// bug!! 디폴트로 PREPARED !!!
+		StatementType statementType = StatementType.valueOf(context.getStringAttribute(XML_ATTR_STATEMENT_TYPE_TAG, StatementType.PREPARED.toString()));
+				
+		List<ParameterMapping> parameterMappings = parseParameterMappings(context); 
+		
+		// dynamic 해당하는 부분을 검색한다.
 		List<SqlNode> contents = parseDynamicTags(context);
-		MixedSqlNode rootSqlNode = new MixedSqlNode(contents);
-
-		SqlSource sqlSource = new DynamicSqlSource(configuration, rootSqlNode);
-		String nodeName = context.getNode().getNodeName();
-		builderAssistant.addMappedStatement(id, sqlSource, statementType,
-				fetchSize, timeout);
-
+		MixedSqlNode rootSqlNode = new MixedSqlNode(contents);		
+		
+		SqlSource sqlSource = new DynamicSqlSource(configuration, rootSqlNode, parameterMappings);
+		
+		builderAssistant.addMappedStatement(idToUse, descriptionToUse, sqlSource, statementType, fetchSize, timeout);
 	}
-
+	
+	private List<ParameterMapping> parseParameterMappings(XNode node){
+		List<ParameterMapping> parameterMappings = new ArrayList<ParameterMapping>();		
+		
+		NodeList children = node.getNode().getChildNodes();
+		for (int i = 0; i < children.getLength(); i++) {	
+			XNode child = node.newXNode(children.item(i));
+			if( Node.ELEMENT_NODE == child.getNode().getNodeType() && XML_NODE_PARAMETER_MAPPING_TAG.equals(child.getNode().getNodeName())){
+				
+				ParameterMapping.Builder builder = new ParameterMapping.Builder(child.getStringAttribute(XML_ATTR_NAME_TAG));				
+				builder.jdbcTypeName(child.getStringAttribute("jdbcType", null));				
+				String javaTypeString = child.getStringAttribute("javaType", null);	
+			    builder.index(child.getIntAttribute("index", 0));	
+			    builder.primary(child.getBooleanAttribute("primary", false));	
+			    if(StringUtils.isNotEmpty(javaTypeString)){
+			    	builder.jdbcTypeName(javaTypeString);
+			    	builder.javaType(getTypeAliasRegistry().resolveAlias(javaTypeString));
+			    }
+			    builder.encoding(child.getStringAttribute("encoding", null));			    
+			    builder.pattern( child.getStringAttribute("pattern", null) );			    
+				parameterMappings.add(builder.build());
+			}
+		}
+		
+		return parameterMappings;
+	}
+	
 	private List<SqlNode> parseDynamicTags(XNode node) {
 		List<SqlNode> contents = new ArrayList<SqlNode>();
 		NodeList children = node.getNode().getChildNodes();
-		for (int i = 0; i < children.getLength(); i++) {
-			XNode child = node.newXNode(children.item(i));
-			String nodeName = child.getNode().getNodeName();
-			if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE
-					|| child.getNode().getNodeType() == Node.TEXT_NODE) {
+		for (int i = 0; i < children.getLength(); i++) {			
+			XNode child = node.newXNode(children.item(i));			
+			String nodeName = child.getNode().getNodeName();			
+			if (child.getNode().getNodeType() == Node.CDATA_SECTION_NODE || child.getNode().getNodeType() == Node.TEXT_NODE) {
 				String data = child.getStringBody("");
 				contents.add(new TextSqlNode(data));
 			} else {

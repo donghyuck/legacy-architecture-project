@@ -1,18 +1,28 @@
 package architecture.ee.jdbc.sqlquery.factory;
 
-import javax.sql.DataSource;
+import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryBuilderImpl;
 
-import architecture.common.scanner.DirectoryListener;
 
-public interface SqlQueryFactoryBuilder extends DirectoryListener {
+public class SqlQueryFactoryBuilder {
 	
-	public abstract Configuration getConfiguration();
+	public static interface Implementation {
+		
+		public SqlQueryFactory getSqlQueryFactory();
 	
-	public SqlQueryFactory createSqlQueryFactory() ;
+		public SqlQueryFactory getSqlQueryFactory(Configuration configuration);
+	}
+
+	private static Implementation impl = null;
 	
-	public SqlQueryFactory createSqlQueryFactory(DataSource dataSource);
-	
-	public boolean isSetDataSource();
-	
+	static {
+		impl = new SqlQueryFactoryBuilderImpl();
+	}
+
+	public static SqlQueryFactory getSqlQueryFactory() {
+		return impl.getSqlQueryFactory();
+	}
+	public static SqlQueryFactory getSqlQueryFactory(Configuration configuration) {
+		return impl.getSqlQueryFactory(configuration);
+	}
 	
 }

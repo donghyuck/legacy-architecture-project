@@ -20,9 +20,9 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import architecture.common.event.api.EventSource;
+import architecture.common.jdbc.schema.DatabaseType;
 import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.common.util.StringUtils;
-import architecture.ee.jdbc.util.JdbcHelper.DatabaseType;
 import architecture.ee.util.LocaleUtils;
 
 public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties implements EventSource  {
@@ -137,8 +137,8 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
             s = null;
         } else
         {
-        	try {
-    			if( value.equals("") && this.getExtendedJdbcTemplate().getJdbcHelper().getDatabaseType() == DatabaseType.oracle )        	
+        	try {        		
+    			if( value.equals("") && this.getExtendedJdbcTemplate().getDatabaseType() == DatabaseType.oracle )        	
     				value = " ";
     		} catch (Exception e) {
     		}   

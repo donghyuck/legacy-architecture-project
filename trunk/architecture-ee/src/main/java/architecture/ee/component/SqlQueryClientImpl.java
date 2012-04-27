@@ -1,13 +1,11 @@
 package architecture.ee.component;
 
-import java.util.List;
-import java.util.Map;
 
-import architecture.ee.service.SqlQueryClient;
-import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
-public class SqlQueryClientImpl extends ExtendedJdbcDaoSupport implements SqlQueryClient {
-	
+public class SqlQueryClientImpl extends AbstractSqlQueryClient {
+
+
+		/*
 	public <T> T queryForObject(String statement, Class<T> requiredType, Object[] args){
 		String queryString = getBoundSql(statement).getSql();		
 		return getExtendedJdbcTemplate().queryForObject(queryString, requiredType, args);
@@ -17,22 +15,32 @@ public class SqlQueryClientImpl extends ExtendedJdbcDaoSupport implements SqlQue
 		String queryString = getBoundSql(statement).getSql();		
 		return getExtendedJdbcTemplate().queryForMap(queryString, args);		
 	}
-	
+		
 	public List<Map<String, Object>> queryForList(String statement, Object... args){		
 		String queryString = getBoundSql(statement).getSql();		
 		return getExtendedJdbcTemplate().queryForList(queryString, args);
 	}
 
+	public List<Map<String, Object>> scroll(String statement, int startIndex, int maxResults, Object... args) {
+		String queryString = getBoundSql(statement).getSql();		
+		return getExtendedJdbcTemplate().queryScrollable(queryString, startIndex, maxResults, args, new int [0]);
+	}	
+	
 	public <T> List<T> queryForList(String statement, Class<T> elementType) {		
 		String queryString = getBoundSql(statement).getSql();
 		return getExtendedJdbcTemplate().queryForList(queryString, elementType, new Object[]{});
 	}
-	
+			
 	public <T> List<T> queryForList(String statement, Class<T> elementType, Object... args) {		
 		String queryString = getBoundSql(statement).getSql();
 		return getExtendedJdbcTemplate().queryForList(queryString, elementType, args);
 	}
-
+	
+	public <T> List<T> scroll(String statement, Class<T> elementType, int startIndex, int maxResults, Object... args) {		
+		String queryString = getBoundSql(statement).getSql();
+		return getExtendedJdbcTemplate().queryScrollable(queryString, startIndex, maxResults, args, new int[0], elementType);
+	}
+		
 	public int executeUpdate(String statement, Object... args) {
 		String queryString = getBoundSql(statement).getSql();
 		return getExtendedJdbcTemplate().update(queryString, args);
@@ -40,9 +48,9 @@ public class SqlQueryClientImpl extends ExtendedJdbcDaoSupport implements SqlQue
 		
 	public int executeBatchUpdate(String statement, final List<Object[]> batchArgs) {		
 		String queryString = getBoundSql(statement).getSql();		
-		int[] cnt = getExtendedJdbcTemplate().batchUpdate( queryString, batchArgs);
+		int[] count = getExtendedJdbcTemplate().batchUpdate( queryString, batchArgs);
 		int sum = 0 ;
-		for( int c : cnt){
+		for( int c : count){
 			sum = sum + c ;
 		}		
 		return sum;
@@ -50,7 +58,8 @@ public class SqlQueryClientImpl extends ExtendedJdbcDaoSupport implements SqlQue
 	
 	public long getMaxLongId(String incrementerName){
 		return getNextId(incrementerName);
-	}
+	}*/
+	
 	
 /*
 	public String getSql(String statement) {

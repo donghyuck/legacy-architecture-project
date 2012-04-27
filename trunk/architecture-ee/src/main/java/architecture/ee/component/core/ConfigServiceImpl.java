@@ -19,12 +19,13 @@ import org.apache.commons.vfs.FileSystemException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.jdbc.datasource.DataSourceFactory;
+import architecture.ee.component.admin.AdminSqlQueryFactory;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder;
 import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.LocaleUtils;
@@ -60,7 +61,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
  
     /**
 	 */
-    private SqlQueryFactoryBuilder sqlQueryFactoryBuilder = null;   
+    private AdminSqlQueryFactory adminSqlQueryFacotry = null;   
     
     private DataSource dataSource = null;    
     /**
@@ -160,7 +161,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 			log.debug("Loading properties from database.");
 			JdbcApplicationProperties impl = new JdbcApplicationProperties(localized);
 			impl.setEventPublisher(getEventPublisher());
-			impl.setConfiguration(getSqlQueryFactoryBuilder().getConfiguration());		
+			impl.setConfiguration(adminSqlQueryFacotry.getConfiguration());		
 			impl.setDataSource(dataSourceToUse);
 			impl.afterPropertiesSet();
 			return impl;			
@@ -168,18 +169,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return null;
 	}
 
-	/**
-	 * @return
-	 */
-	public SqlQueryFactoryBuilder getSqlQueryFactoryBuilder() {
-		return sqlQueryFactoryBuilder;
-	}
-
-	/**
-	 * @param sqlQueryFactoryBuilder
-	 */
-	public void setSqlQueryFactoryBuilder(SqlQueryFactoryBuilder sqlQueryFactoryBuilder) {
-		this.sqlQueryFactoryBuilder = sqlQueryFactoryBuilder;
+	public void setAdminSqlQueryFactory(AdminSqlQueryFactory adminSqlQueryFacotry) {
+		this.adminSqlQueryFacotry = adminSqlQueryFacotry;
 	}
 
 	/**

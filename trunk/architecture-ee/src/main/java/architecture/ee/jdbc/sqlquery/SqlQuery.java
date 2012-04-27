@@ -20,138 +20,71 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
-
-import architecture.ee.jdbc.recordset.Recordset;
 
 public interface SqlQuery {
 
-	public static final Class<Map> DEFAULT_RETURN_TYPE = Map.class;
-
+	/**
+	 * 사용할 데이터소스를 설정한다.
+	 * @param dataSource
+	 * @return
+	 */
 	public SqlQuery setDataSource(DataSource dataSource);
 
-	public SqlQuery reset();
-
-	public SqlQuery setStatement(String catelogy, String key);
-	
-	public SqlQuery setStatement(String statement);
-
-	public SqlQuery setString(String value);
-	
 	/**
+	 * list(), queryForList() 함수 호출시에 데이터 페이징 처리를 위하여 사용된다.
+	 * 쿼리 결과의 startIndex 부터 데이터를 읽어 데이터를 리턴한다. 쿼리 실행후에 startIndex 값은 0 으로 변경된다.
 	 * 
-	 * @param values
-	 * @param types java.sql.Types 에 정의된 데이터 유형
-	 * @return
-	 */
-	public SqlQuery setParameters(Object[] values, int[] types);
-
-	/**
-	 * 쿼리 수행후 리턴되는 데이터 타입을 정의한다. uniqueResult(), list() 함수 사용하는 경우는 반듯이 리턴 타입을
-	 * 정의해야 한다.
-	 * 
-	 * @param returnType
-	 * @return
-	 */
-	public SqlQuery setReturnType(Class<?> returnType);
-
-	/**
-	 * 이 파라메터는 다이나믹으로 선언된 부분에만 적용되어 동적 쿼리 생성에 사용된다.
-	 * 
-	 * @param key
-	 * @param value
-	 * @return
-	 */
-	public SqlQuery setAdditionalParameter(String key, Object value);
-
-	/**
-	 * 
-	 * @param startIndex
-	 *            (0 부터 시작)
+	 * @param startIndex (0 부터 시작)
 	 * @return
 	 */
 	public SqlQuery setStartIndex(int startIndex);
 
+	
 	/**
-	 * 
+	 * list(), queryForList() 함수 호출시에 데이터 페이징 처리를 위하여 사용된다.
+	 * 쿼리 결과의 startIndex 부터 maxResults 까지의 데이터를 읽어 데이터를 리턴한다. 쿼리 실행후에 maxResults 값은 0 으로 변경된다.
+	 * 따라서 0 으로 값을 지정하는 것은 페이지 처리를 하지 않는 것과 동일한 결과를 가져온다.
+	 *  
 	 * @param maxResults
 	 * @return
 	 */
 	public SqlQuery setMaxResults(int maxResults);
-
+	
 	/**
+	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우, 리턴 컬럼이 하나 이상인 경우 예외가 발생된다. 
 	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @return
-	 */
-	public List<Map<String, Object>> queryForList(String statement);
-
-	/**
-	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
+	 * @param <T>
+	 * @param statement 
 	 * @param elementType
-	 * @return
-	 */
-	public <T> List<T> queryForList(String statement, Class<T> elementType);
-
-	/**
-	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @param elementType
-	 * @param params
-	 * @param types
-	 * @return
-	 */
-	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] types);
-
-	/**
-	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @param elementType
-	 * @param params
-	 * @param paramTypes
-	 * @return
-	 */
-	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
-
-	/**
-	 * 
-	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @param elementType
-	 */
-	public Map<String, Object> queryForMap(String statement);
-
-	/**
-	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @param params
-	 *            파라메터 객체 배열값
-	 * @param paramTypes
-	 *            파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값)
-	 * @return
-	 */
-	public Map<String, Object> queryForMap(String statement, Object[] params, int[] paramTypes);
-
-	/**
-	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.
-	 * 
-	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @param elementType
-	 *            리턴될 결과 객체 타입
 	 * @return
 	 */
 	public <T> T queryForObject(String statement, Class<T> elementType);
-
+	
 	/**
+	 * (rowMapper 에 의하여 매핑되는) 단일 ROW 에 해당하는 객체를 리턴한다. 하나 이상의 ROW 가 존재하는 경우, 리턴 컬럼이 하나 이상인 경우 예외가 발생된다.
+	 * 
+	 * @param statement
+	 * @param rowMapper
+	 * @return
+	 */
+	public <T> T queryForObject(String statement, RowMapper<T> rowMapper);
+	
+	
+	/**
+	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우, 리턴 컬럼이 하나 이상인 경우 예외가 발생된다.
+	 * 
+	 * @param <T>
+	 * @param statement 
+	 * @param params
+	 * @param paramTypes
+	 * @param elementType
+	 * @return
+	 */
+	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
+	
+	/**
+	 * (rowMapper 에 의하여 매핑되는) 단일 ROW 에 해당하는 객체를 리턴한다. 하나 이상의 ROW 가 존재하는 경우, 리턴 컬럼이 하나 이상인 경우 예외가 발생된다.
 	 * 
 	 * @param statement
 	 * @param params
@@ -161,57 +94,114 @@ public interface SqlQuery {
 	 */
 	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper );
 	
-	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, ResultSetExtractor<T> extractor );
 	
 	/**
-	 * 매핑된 쿼리를 실행하고 결과 객체를 리턴한다.
-	 * 
+	 * 단일 ROW 에 해당하는 데이터를 Map 에 넣어 리턴한다. 하나 이상의 ROW 가 존재하는 경우 예외가 발생된다.
 	 * @param statement
-	 *            실행할 쿼리 이름
-	 * @param elementType
-	 *            리턴될 결과 객체 타입
-	 * @param 파라메터
-	 *            객체 배열값
-	 * @param paramTypes
-	 *            파마케터 객체의 데이터 타입 (java.sql.Types 에 정의된 값
 	 * @return
 	 */
-	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
-
-	public Object uniqueResult();
-	
-	public <T> T uniqueResult(Class<T> elementType);
-	
-	public <T> T uniqueResult(RowMapper<T> rowMapper);
-
-	public List list();
-
-	public Object executeScript();
-
-	public SqlQuery addToBatch();
-
+	public Map<String, Object> queryForMap(String statement);
+		
 	/**
-	 * SQL 배치를 실행한다.
-	 */
-	public int executeUpdate();
-
-	public int[] executeBatchUpdate();
-
-	/**
-	 * 
+	 * 단일 ROW 에 해당하는 데이터를 Map 에 넣어 리턴한다. 하나 이상의 ROW 가 존재하는 경우 예외가 발생된다.
 	 * @param statement
-	 *            SQL command to precompile
-	 * @param recordset
-	 *            Recordset containing the values to be set into the prepared
-	 *            statement
-	 * @param params
-	 *            Array containing the names of the fields to use. The order
-	 *            must match the place holders (those ? marks) in the prepared
-	 *            statement
-	 * @return The number of records affected
+	 * @return
 	 */
-	public int executeUpdate(String statement, Recordset recordset, String[] params);
+	public Map<String, Object> queryForMap(String statement, Object[] params, int[] paramTypes);	
 
-	public int[] executeBatchUpdate(String statement, Recordset recordset, String[] params);
+	
+	/**
+	 * statement 에 해당하는 결과 데이터를 List<Map<String, Object>> 형식으로 리턴한다.
+	 * @param statement
+	 * @return
+	 */
+	public List<Map<String, Object>> queryForList(String statement);
+	
+	public List<Map<String, Object>> queryForList(String statement, Object[] params);
+	
+	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] paramTypes);	
+	
+	
+	
+	public <T> List<T> queryForList(String statement, Class<T> elementType);
+	
+	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, Class<T> elementType);
+	
+	
+
+	public <T> List<T> queryForList(String statement, RowMapper<T> rowMapper);
+	
+	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper);
+	
+	
+	/**
+	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우 오류가 리턴된다.
+	 *  
+	 * @param <T>
+	 * @param statement
+	 * @param elementType
+	 * @return
+	 */
+	public <T> T uniqueResult(String statement, Class<T> elementType);
+	
+	/**
+	 * (rowMapper 에 의하여 매핑되는) 단일 ROW 에 해당하는 객체를 리턴한다. 하나 이상의 ROW 가 존재하는 경우 오류가 리턴된다.
+	 * 
+	 * @param <T>
+	 * @param statement
+	 * @param rowMapper
+	 * @return
+	 */
+	public <T> T uniqueResult(String statement, RowMapper<T> rowMapper);
+	
+	/**
+	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우 오류가 리턴된다.
+	 * 
+	 * @param <T>
+	 * @param statement
+	 * @param parameter
+	 * @param elementType
+	 * @return
+	 */
+	public <T> T uniqueResult(String statement, Object parameter, Class<T> elementType);
+	
+	/**
+	 * (rowMapper 에 의하여 매핑되는) 단일 ROW 에 해당하는 객체를 리턴한다. 하나 이상의 ROW 가 존재하는 경우 오류가 리턴된다.
+	 * 
+	 * @param <T>
+	 * @param statement
+	 * @param parameter
+	 * @param rowMapper
+	 * @return
+	 */
+	public <T> T uniqueResult(String statement, Object parameter, RowMapper<T> rowMapper);
+		
+	public List<Map<String, Object>> list(String statement);
+	
+	public <T> List<T> list(String statement, Class<T> elementType);
+		
+	public <T> List<T> list(String statement, RowMapper<T> rowMapper);
+	
+	public List<Map<String, Object>> list(String statement, Object parameter);
+	
+	public <T> List<T> list(String statement, Object parameter, Class<T> elementType);
+	
+	public <T> List<T> list(String statement, Object parameter, RowMapper<T> rowMapper);	
+	
+	
+	
+	public int update (String statement, Object[] values, int[] types );
+	
+	public int executeUpdate(String statement);
+	
+	public int executeUpdate(String statement, Object parameter);
+	
+	/**
+	 * 스크립트 모드로 쿼리를 실행한다.
+	 * @param statement
+	 * @return
+	 */
+	public Object executeScript(String statement);
+	
 
 }

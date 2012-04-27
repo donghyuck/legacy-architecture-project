@@ -17,23 +17,18 @@ package architecture.ee.jdbc.sqlquery.factory;
 
 import javax.sql.DataSource;
 
+import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public interface SqlQueryFactory {
 
-	public String[] getQueryNames();
-
-	public SqlQuery createSqlQuery();
-
-	public SqlQuery createSqlQuery(String catelogy, String key);
+	public abstract SqlQuery createSqlQuery();
 	
-	public SqlQuery createSqlQuery(String catelogy, String key, DataSource dataSource);
-	
-	public SqlQuery createSqlQuery(DataSource dataSource);
+	public abstract SqlQuery createSqlQuery(DataSource dataSource);
 
-	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
-
-	public void setDataSource(DataSource defaultDataSource);	
+	public abstract SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
+		
+	public abstract MaxValueIncrementer getMaxValueIncrementer();
 	
 }

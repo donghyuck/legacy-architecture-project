@@ -7,10 +7,11 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.springframework.jndi.JndiTemplate;
 
+import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.util.StringUtils;
-import architecture.ee.admin.AdminHelper;
-import architecture.ee.jdbc.datasource.DataSourceFactory;
+
+import architecture.ee.component.admin.AdminHelper;
 
 public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 
