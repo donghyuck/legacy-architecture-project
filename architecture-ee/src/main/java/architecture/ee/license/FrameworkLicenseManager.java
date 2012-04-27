@@ -13,7 +13,7 @@ import architecture.common.exception.LicenseException;
 import architecture.common.license.License;
 import architecture.common.license.LicenseManager;
 import architecture.common.license.LicenseProvider;
-import architecture.ee.admin.AdminHelper;
+import architecture.ee.component.admin.AdminHelper;
 
 public class FrameworkLicenseManager extends LicenseManager {
 	

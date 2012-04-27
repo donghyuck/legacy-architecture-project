@@ -15,23 +15,36 @@
  */
 package architecture.ee.jdbc.sqlquery.mapping;
 
+import java.util.List;
+
+import architecture.common.jdbc.ParameterMapping;
+
+
 /**
  * @author  donghyuck
  */
 public class BoundSql {
 
-	/**
-	 */
 	private String sql;
-
-	public BoundSql(String sql) {
-		super();
-		this.sql = sql;
+	
+	private Object parameterObject;
+	
+	private List<ParameterMapping> parameterMappings;
+	
+	public BoundSql(String sql, List<ParameterMapping> parameterMappings, Object parameterObject) {		
+	    this.sql = sql;
+	    this.parameterMappings = parameterMappings;
+	    this.parameterObject = parameterObject; 
+	  }
+		
+	public Object getParameterObject() {
+		return parameterObject;
 	}
 
-	/**
-	 * @return
-	 */
+	public List<ParameterMapping> getParameterMappings() {
+		return parameterMappings;
+	}
+
 	public String getSql() {
 		return sql;
 	}

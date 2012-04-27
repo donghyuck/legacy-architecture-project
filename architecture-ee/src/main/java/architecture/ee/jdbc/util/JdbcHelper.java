@@ -22,46 +22,55 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
+/**
+ * @author donghyuck
+ */
 public interface JdbcHelper {
 
-	/**
-	 * @author                 donghyuck
-	 */
 	enum DatabaseType {
 
 		/**
+		 * ORACLE
 		 */
 		oracle,
 
 		/**
+		 * POSTGRESQL
 		 */
 		postgresql,
 
 		/**
+		 * MYSQL
 		 */
 		mysql,
 
 		/**
+		 * HSQLDB
 		 */
 		hsqldb,
 
 		/**
+		 * DB2
 		 */
 		db2,
 
 		/**
+		 * SQLSERVER
 		 */
 		sqlserver,
 
 		/**
+		 * INTERBASE
 		 */
 		interbase,
 
 		/**
+		 * DERBY
 		 */
 		derby,
 
 		/**
+		 * UNKNOWN
 		 */
 		unknown;
 	}
@@ -101,6 +110,7 @@ public interface JdbcHelper {
 	public void setFetchSize(ResultSet rs, int fetchSize);
 
 	public void scrollResultSet(ResultSet rs, int rowNumber) throws SQLException;
-	
+
 	public NativeJdbcExtractor getNativeJdbcExtractor();
+	
 }

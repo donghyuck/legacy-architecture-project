@@ -20,7 +20,6 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,25 +30,22 @@ import architecture.ee.jdbc.sqlquery.parser.XNode;
 import architecture.ee.jdbc.sqlquery.parser.XPathParser;
 
 /**
+ * 
+ * 
  * @author  donghyuck
  */
 public class XmlSqlBuilder extends AbstractBuilder {
 
-	/**
-	 */
+	private Log log = LogFactory.getLog(XmlSqlBuilder.class);
+	
 	private SqlBuilderAssistant builderAssistant;
 
-	/**
-	 */
 	private XPathParser parser;
-
-	private Log log = LogFactory.getLog(XmlSqlBuilder.class);
 
 	public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(new InputStreamReader(is), false,
-				configuration.getVariables(), null);
+		this.parser = new XPathParser(new InputStreamReader(is), false, configuration.getVariables(), null);
 	}
 
 	public XmlSqlBuilder(InputStream is, Configuration configuration) {
@@ -69,24 +65,42 @@ public class XmlSqlBuilder extends AbstractBuilder {
 
 	public void build() {
 		try {
+			// OLD VERSION : V1
 			XNode context = parser.evalNode("/sql-queryset");
-			String namespace = context.getStringAttribute("namespace");
-			if (StringUtils.isEmpty(namespace))
-				namespace = context.getStringAttribute("name");
-			String description = context.getStringAttribute("description");
-			log.debug(namespace + ":" + description);
-			builderAssistant.setCurrentNamespace(namespace);
-			sqlElement(context.evalNodes("/sql-queryset/sql-query"));
+			
+			String namespace ;
+			String description ;
+			String version ;
+			
+			boolean isNew = false;
+			if( context != null ){
+				namespace = context.getStringAttribute("namespace");
+				description = context.getStringAttribute("description");
+				version = "1.0";
+			}else{
+				// NEW VERSION : V2
+				isNew = true;
+				context = parser.evalNode("/sqlset");					
+				namespace = context.evalString("name");
+				description = context.evalString("description");
+				version = "2.0";
+			}
+
+			log.debug( String.format("Building \n name=%s\n description=%s\n vearion=%s", new Object[]{namespace, description, version}) );			
+			builderAssistant.setCurrentNamespace(namespace);			
+			if(isNew)
+				sqlElement(context.evalNodes("/sqlset/sql-query"));
+			else
+				sqlElement(context.evalNodes("/sql-queryset/sql-query"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Error parsing Mapper XML. Cause: " + e, e);
 		}
 	}
 
-	private void sqlElement(List<XNode> list) throws Exception {
+	private void sqlElement(List<XNode> list) throws Exception {		
 		String currentNamespace = builderAssistant.getCurrentNamespace();
-		configuration.addStatementNodes(currentNamespace, list);
-
+		configuration.addStatementNodes(currentNamespace, list);		
 		log.debug("" + list.size() + " query defined.");
 	}
 

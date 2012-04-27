@@ -58,8 +58,8 @@ public class JdbcI18nCountryDao extends ExtendedJdbcDaoSupport implements I18nCo
 		return getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_COUNTRY").getSql(), getCountryRowMapper() );	
 	}
 
-	public List<I18nCountry> findAll(int start, int end) {	
-		return (List<I18nCountry>)getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_COUNTRY").getSql(), start, end, getCountryRowMapper(), new Object [] {}, new int [] {});
+	public List<I18nCountry> findAll(int start, int end) {
+		return (List<I18nCountry>)getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_COUNTRY").getSql(), start, end, new Object [0], new int [0], getCountryRowMapper());
 	}
 
 	public void deleteCountryById(long ID) {

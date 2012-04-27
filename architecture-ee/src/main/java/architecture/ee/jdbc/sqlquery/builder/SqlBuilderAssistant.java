@@ -49,17 +49,18 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 	 * @param timeout
 	 * @return
 	 */
-	public MappedStatement addMappedStatement(String id, SqlSource sqlSource,
-			StatementType statementType, Integer fetchSize, Integer timeout) {
-		id = applyCurrentNamespace(id);
-		MappedStatement.Builder statementBuilder = new MappedStatement.Builder(
-				configuration, id, sqlSource, statementType);
+	public MappedStatement addMappedStatement(String id, String description, SqlSource sqlSource, StatementType statementType, Integer fetchSize, Integer timeout) {
+		String idToUse = applyCurrentNamespace(id);
+		MappedStatement.Builder statementBuilder = new MappedStatement.Builder( configuration, idToUse, sqlSource, statementType);
 		statementBuilder.resource(resource);
 		statementBuilder.fetchSize(fetchSize);
-		setStatementTimeout(timeout, statementBuilder);
-		MappedStatement statement = statementBuilder.build();
-		configuration.addMappedStatement(statement);
-		log.debug("mapped statement:" + statement.getID());
+		statementBuilder.description(description);		
+		setStatementTimeout(timeout, statementBuilder);		
+		MappedStatement statement = statementBuilder.build();		
+		configuration.addMappedStatement(statement);		
+		
+		//log.debug( String.format("Mapped statement ID=%s, description=%s", new Object[]{statement.getID(), statement.getDescription()}) );		
+		
 		return statement;
 	}
 
@@ -93,8 +94,7 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 		return currentNamespace + "." + base;
 	}
 
-	private void setStatementTimeout(Integer timeout,
-			MappedStatement.Builder statementBuilder) {
+	private void setStatementTimeout(Integer timeout, MappedStatement.Builder statementBuilder) {
 		if (timeout == null) {
 			timeout = configuration.getDefaultStatementTimeout();
 		}

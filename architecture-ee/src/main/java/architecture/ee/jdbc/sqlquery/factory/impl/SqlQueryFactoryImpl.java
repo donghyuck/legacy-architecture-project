@@ -23,42 +23,47 @@ import javax.sql.DataSource;
 
 import org.apache.commons.lang.StringUtils;
 
+import architecture.common.jdbc.datasource.DataSourceFactory;
+import architecture.ee.jdbc.sequencer.SequencerFactory;
+import architecture.ee.jdbc.sequencer.incrementer.JdbcMaxValueIncrementer;
+import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
+ * 
+ * 
  * @author  donghyuck
  */
-public class SqlQueryFactoryImpl implements SqlQueryFactory {
-
-	/**
-	 */
-	private final Configuration configuration;
+public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQueryFactory {
 	
 	private DataSource dataSource = null;
+	
+	private MaxValueIncrementer incrementer = null;
 
+	private boolean incrementerSupported = false;
+	
 	public SqlQueryFactoryImpl(Configuration configuration) {
-		this.configuration = configuration;
+		super(configuration);
 	}
 
-	/**
-	 * @return
-	 */
-	public Configuration getConfiguration() {
-		return configuration;
+	public void setIncrementerSupported(boolean incrementerSupported) {
+		this.incrementerSupported = incrementerSupported;
 	}
 
-	/**
-	 * @param defaultDataSource
-	 */
-	public void setDataSource(DataSource defaultDataSource) {
-		this.dataSource = defaultDataSource;
+	public void initialize(){
+		if(getResourceLocations().size() > 0)
+			loadResourceLocations();
 	}
-
-	public String[] getQueryNames(String namespace) {
-		Collection<String> names = configuration.getMappedStatementNames();
+	
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+	}
+	
+	public String[] getMappedStatementNames(String namespace) {
+		Collection<String> names = getConfiguration().getMappedStatementNames();
 		List<String> list = new ArrayList<String>();
 		for (String name : names) {
 			if (StringUtils.startsWith(name, namespace))
@@ -67,32 +72,33 @@ public class SqlQueryFactoryImpl implements SqlQueryFactory {
 		return list.toArray(new String[list.size()]);
 	}
 
-	public String[] getQueryNames() {
-		return configuration.getMappedStatementNames().toArray( new String[configuration.getMappedStatementNames().size()]);
+	public String[] getMappedStatementNames() {
+		return getConfiguration().getMappedStatementNames().toArray( new String[getConfiguration().getMappedStatementNames().size()]);
 	}
-
+	
 	public SqlQuery createSqlQuery() {
-		return new SqlQueryImpl(configuration, dataSource);
+		return new SqlQueryImpl(getConfiguration(), dataSource, incrementerSupported ? getMaxValueIncrementer() : null );
 	}
 
 	public SqlQuery createSqlQuery(DataSource dataSource) {
-		return new SqlQueryImpl(configuration, dataSource);
+		return new SqlQueryImpl(getConfiguration(), dataSource, incrementerSupported ? getMaxValueIncrementer() : null );
 	}
 
 	public SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate) {
-		return new SqlQueryImpl(configuration, jdbcTemplate);
+		return new SqlQueryImpl(getConfiguration(), jdbcTemplate, incrementerSupported ? getMaxValueIncrementer() : null );
 	}
 
-	public SqlQuery createSqlQuery(String catelogy, String key) {
-		SqlQueryImpl query = new SqlQueryImpl(configuration, dataSource );
-		query.setStatement(catelogy + "." + key); 
-		return query;
+	public MaxValueIncrementer getMaxValueIncrementer(){
+		if(this.incrementer == null  ){			
+			JdbcMaxValueIncrementer incrementerToUse = new JdbcMaxValueIncrementer ( createSequencerFactory() );
+			incrementerToUse.initialize();
+			this.incrementer = incrementerToUse;
+		}
+		return this.incrementer ;
+	}	
+	
+	private SequencerFactory createSequencerFactory() {
+		return new SequencerFactory(getConfiguration(), dataSource == null ? DataSourceFactory.getDataSource() : dataSource );
 	}
 	
-	public SqlQuery createSqlQuery(String catelogy, String key, DataSource dataSource) {
-		SqlQueryImpl query = new SqlQueryImpl(configuration, dataSource != null ? dataSource : dataSource );
-		query.setStatement(catelogy + "." + key); 
-		return query;
-	}
-
 }

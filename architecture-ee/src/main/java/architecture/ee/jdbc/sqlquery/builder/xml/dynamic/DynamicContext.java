@@ -24,14 +24,18 @@ import java.util.Map;
 public class DynamicContext {
 
 	public static final String ADDITIONAL_PARAMETER_OBJECT_KEY = "_additional_parameter";
+	
 	public static final String PARAMETER_OBJECT_KEY = "_parameter";
 
-	/**
-	 */
 	private final Map<String, Object> bindings;
+	
 	private final StringBuilder sqlBuilder = new StringBuilder();
-
-	public DynamicContext(Object parameterObject) {
+	
+	public DynamicContext() {	
+		this.bindings = new HashMap<String, Object>();
+	}
+	
+	public DynamicContext(Object parameterObject) {	
 		this.bindings = new HashMap<String, Object>();
 		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
 	}
@@ -39,12 +43,9 @@ public class DynamicContext {
 	public DynamicContext(Object parameterObject, Map<String, Object> additionalParameters) {
 		this.bindings = new HashMap<String, Object>();
 		this.bindings.put(PARAMETER_OBJECT_KEY, parameterObject);
-		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);
+		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);	
 	}
 
-	/**
-	 * @return
-	 */
 	public Map<String, Object> getBindings() {
 		return bindings;
 	}

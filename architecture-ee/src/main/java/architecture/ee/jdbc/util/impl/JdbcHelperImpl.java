@@ -242,18 +242,56 @@ public class JdbcHelperImpl implements JdbcHelper {
 		
 		
 		JdbcUtils.extractDatabaseMetaData(dataSource,
+				
 				new DatabaseMetaDataCallback() {
-					public Object processMetaData(DatabaseMetaData metaData)
+				
+			private  boolean transactionsSupported;
+			
+			private int transactionIsolation;
+
+			// True if the database requires large text fields to be streamed.
+			private boolean streamTextRequired;
+
+			// True if the database supports the Statement.setMaxRows() method.
+			private boolean streamBlobRequired;
+
+			// True if the database supports the Statement.setFetchSize() method.
+			private boolean fetchSizeSupported;
+
+			// True if the database supports correlated subqueries.
+			private boolean subqueriesSupported;
+
+			private boolean maxRowsSupported;
+
+			private boolean deleteSubqueriesSupported;
+
+			// True if the database supports scroll-insensitive results.
+			private boolean scrollResultsSupported;
+
+			// True if the database supports batch updates.
+			private boolean batchUpdatesSupported;
+
+			// databse product name.
+			private String databaseProductName;
+
+			// database product version.
+			private String databaseProductVersion;
+
+			// database jdbc driver name.
+			private String jdbcDriverName;
+
+			// jdbc driver version.
+			private String jdbcDriverVersion;
+			
+			public Object processMetaData(DatabaseMetaData metaData)
 							throws SQLException, MetaDataAccessException {
 
 						// Supports transactions?
 						transactionsSupported = metaData.supportsTransactions();
-						transactionIsolation = metaData
-								.getDefaultTransactionIsolation();
+						transactionIsolation = metaData.getDefaultTransactionIsolation();
 
 						// Supports subqueries?
-						subqueriesSupported = metaData
-								.supportsCorrelatedSubqueries();
+						subqueriesSupported = metaData.supportsCorrelatedSubqueries();
 						// Supports scroll insensitive result sets? Try/catch
 						// block is a
 						// workaround for DB2 JDBC driver, which throws an
@@ -261,8 +299,7 @@ public class JdbcHelperImpl implements JdbcHelper {
 						// the method call.
 
 						try {
-							scrollResultsSupported = metaData
-									.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE);
+							scrollResultsSupported = metaData.supportsResultSetType(ResultSet.TYPE_SCROLL_INSENSITIVE);
 						} catch (Exception e) {
 							scrollResultsSupported = false;
 						}
@@ -276,15 +313,12 @@ public class JdbcHelperImpl implements JdbcHelper {
 
 						// Get the database name so that we can perform meta
 						// data settings.
-						String dbName = metaData.getDatabaseProductName()
-								.toLowerCase();
-						String driverName = metaData.getDriverName()
-								.toLowerCase();
+						String dbName = metaData.getDatabaseProductName().toLowerCase();
+						String driverName = metaData.getDriverName().toLowerCase();
 						String dbVersion = metaData.getDatabaseProductVersion();
 
 						databaseProductName = metaData.getDatabaseProductName();
-						databaseProductVersion = metaData
-								.getDatabaseProductVersion();
+						databaseProductVersion = metaData.getDatabaseProductVersion();
 						jdbcDriverName = metaData.getDriverName();
 						jdbcDriverVersion = metaData.getDriverVersion();
 
@@ -297,8 +331,7 @@ public class JdbcHelperImpl implements JdbcHelper {
 								streamTextRequired = false;
 								fetchSizeSupported = true;
 								maxRowsSupported = false;
-							} else if (driverName
-									.indexOf("Weblogic, Inc. Java-OCI JDBC Driver") != -1)
+							} else if (driverName.indexOf("Weblogic, Inc. Java-OCI JDBC Driver") != -1)
 								streamTextRequired = false;
 						} else
 						// Postgres properties
@@ -372,7 +405,6 @@ public class JdbcHelperImpl implements JdbcHelper {
 		} else {
 			for (int i = 0; i < rowNumber; i++)
 				rs.next();
-
 		}
 	}
 

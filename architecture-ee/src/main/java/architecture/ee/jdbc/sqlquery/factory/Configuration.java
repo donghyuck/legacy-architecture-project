@@ -27,6 +27,7 @@ import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang.StringUtils;
 
+import architecture.common.jdbc.TypeAliasRegistry;
 import architecture.ee.jdbc.sqlquery.SqlNotFoundException;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlStatementBuilder;
@@ -38,6 +39,8 @@ import architecture.ee.jdbc.sqlquery.parser.XNode;
  */
 public class Configuration {
 
+	protected TypeAliasRegistry DEAFULT_TYPE_ALIAS_REGISTRY =  new TypeAliasRegistry(); 
+	
 	/**
 	 */
 	protected Integer defaultStatementTimeout;
@@ -55,6 +58,11 @@ public class Configuration {
 
 	protected final Map<String, String> uriNamespace = new HashMap<String, String>();
 
+	
+	public TypeAliasRegistry getTypeAliasRegistry(){
+		return DEAFULT_TYPE_ALIAS_REGISTRY;
+	}
+	
 	public String getUriNamespace(String uri) {
 		return uriNamespace.get(uri);
 	}
@@ -161,8 +169,7 @@ public class Configuration {
 		if (namespace != null) {
 			final List<XNode> list = statementNodesToParse.get(namespace);
 			if (list != null) {
-				final SqlBuilderAssistant builderAssistant = new SqlBuilderAssistant(
-						this, null);
+				final SqlBuilderAssistant builderAssistant = new SqlBuilderAssistant( this, null);
 				builderAssistant.setCurrentNamespace(namespace);
 				parseStatementNodes(builderAssistant, list);
 				// Remove the processed nodes and resource from the cache.
@@ -171,12 +178,10 @@ public class Configuration {
 		}
 	}
 
-	protected void parseStatementNodes(
-			final SqlBuilderAssistant builderAssistant, final List<XNode> list) {
-		for (XNode context : list) {
-			final XmlStatementBuilder statementParser = new XmlStatementBuilder(
-					this, builderAssistant);
-			statementParser.parseStatementNode(context);
+	protected void parseStatementNodes( final SqlBuilderAssistant builderAssistant, final List<XNode> list) {
+			for (XNode context : list) {
+				final XmlStatementBuilder statementParser = new XmlStatementBuilder(this, builderAssistant, context);
+				statementParser.parseStatementNode();
 		}
 	}
 
@@ -204,10 +209,8 @@ public class Configuration {
 		if (!mappedStatements.containsKey(id)) {
 			buildStatementsFromId(id);
 		}
-
 		if (!mappedStatements.containsKey(id))
 			throw new SqlNotFoundException();
-
 		return mappedStatements.get(id);
 	}
 
