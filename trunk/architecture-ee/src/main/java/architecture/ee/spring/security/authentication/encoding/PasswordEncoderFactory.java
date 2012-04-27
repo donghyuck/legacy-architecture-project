@@ -6,7 +6,7 @@ import org.springframework.security.authentication.encoding.MessageDigestPasswor
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import architecture.common.lifecycle.ApplicationProperties;
-import architecture.ee.admin.AdminHelper;
+import architecture.ee.component.admin.AdminHelper;
 
 public class PasswordEncoderFactory implements FactoryBean <PasswordEncoder> {
 

@@ -18,7 +18,7 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
-import architecture.ee.admin.AdminHelper;
+import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.security.authentication.AnonymousUser;
 import architecture.ee.security.authentication.InvalidProviderUserException;
 import architecture.ee.spring.security.authentication.ExtendedUserDetailsAdapter;

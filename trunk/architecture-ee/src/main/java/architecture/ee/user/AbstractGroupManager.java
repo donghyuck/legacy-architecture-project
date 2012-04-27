@@ -47,6 +47,7 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	/**
 	 * @param groupIdCache
 	 */
+
 	public void setGroupIdCache(Cache groupIdCache) {
 		this.groupIdCache = groupIdCache;
 	}

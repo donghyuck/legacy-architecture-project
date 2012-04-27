@@ -145,7 +145,7 @@ public class JdbcGroupDao extends ExtendedJdbcDaoSupport implements GroupDao {
 	}
 
 	public List<Long> getGroupIds(int start, int num) {
-		return getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_GROUP_ID").getSql(), start, num, Long.class, new Object[]{}, new int[]{} );
+		return getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_GROUP_ID").getSql(), start, num, new Object[0], new int[0], Long.class );
 	}
 
 	public void createGroup(Group group) {		

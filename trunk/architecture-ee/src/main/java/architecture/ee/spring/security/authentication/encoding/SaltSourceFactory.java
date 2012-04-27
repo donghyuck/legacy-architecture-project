@@ -6,7 +6,7 @@ import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.dao.SaltSource;
 
 import architecture.common.lifecycle.ApplicationProperties;
-import architecture.ee.admin.AdminHelper;
+import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
 
 public class SaltSourceFactory implements FactoryBean <SaltSource>{

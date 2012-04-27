@@ -1,72 +1,80 @@
 package architecture.ee.spring.jdbc.support;
 
+import javax.sql.DataSource;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
+import org.springframework.jdbc.support.lob.LobHandler;
 
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
+import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
- * @author  Administrator
+ * @author  andang, son
  */
-public class SqlQueryDaoSupport extends ExtendedJdbcDaoSupport {
-	
-	/**
-	 */
-	private SqlQueryFactory sqlQueryFactory = null ;
+public class SqlQueryDaoSupport extends JdbcDaoSupport {
 	
 	protected Log log = LogFactory.getLog(getClass());
-
-	/**
-	 */
-	private SqlQuery sqlQuery = null ;
 	
-	/**
-	 * @return
-	 */
+	private SqlQueryFactory sqlQueryFactory = null ;
+
 	public SqlQueryFactory getSqlQueryFactory() {
 		return sqlQueryFactory;
 	}
 
-	/**
-	 * @param sqlQueryFactory
-	 */
 	public void setSqlQueryFactory(SqlQueryFactory sqlQueryFactory) {
 		this.sqlQueryFactory = sqlQueryFactory;
 	}
 
-	public boolean isSetDataSource(){
+	protected ExtendedJdbcTemplate createJdbcTemplate(DataSource dataSource) {
+		return new ExtendedJdbcTemplate(dataSource);
+	}
+	
+	public ExtendedJdbcTemplate getExtendedJdbcTemplate(){
+		return (ExtendedJdbcTemplate) getJdbcTemplate();
+	} 
+	
+	protected void initTemplateConfig() {
+	    log.debug("initTemplateConfig");
+	    getExtendedJdbcTemplate().initialize();
+	}
+	
+	public LobHandler getLobHandler(){
+		return getExtendedJdbcTemplate().getLobHandler();
+	} 
+	
+	public void setLobHandler(LobHandler lobHandler){
+		getExtendedJdbcTemplate().setLobHandler(lobHandler);
+	} 
+
+	private boolean isSetDataSource(){
 		if( getDataSource() != null)
 			return true;
 		return false;		
 	}
-
-	public boolean isSetSqlQueryFactory(){
-		if( getSqlQueryFactory() != null)
+	
+	private boolean isSetSqlQueryFactory(){
+		if( sqlQueryFactory != null )
 			return true;
 		return false;
 		
 	}
-	
-	/**
-	 * @return
-	 */
-	public SqlQuery getSqlQuery(){
-		if(sqlQuery == null)
-		{
-			sqlQuery = sqlQueryFactory.createSqlQuery(getExtendedJdbcTemplate());	
+		
+	protected SqlQuery getSqlQuery(){
+		if(isSetSqlQueryFactory()){
+			if(isSetDataSource())
+				return sqlQueryFactory.createSqlQuery(getExtendedJdbcTemplate());	
+			else 
+				return sqlQueryFactory.createSqlQuery();			
 		}
-		return sqlQuery;
-	}
+		return null;
+	}	
 	
-	public SqlQuery getSqlQuery(String catelogy, String name){	
-		SqlQuery query = getSqlQuery().setStatement(catelogy, name);		
-		return query;
+	protected SqlQuery getSqlQuery(DataSource dataSource){
+		if(isSetSqlQueryFactory())
+			return sqlQueryFactory.createSqlQuery(dataSource);
+		return null;
 	}
-	
-	public SqlQuery getSqlQuery(String statement){	
-		SqlQuery query = getSqlQuery().setStatement(statement);
-		return query;
-	}
-	
 }
