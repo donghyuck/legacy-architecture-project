@@ -12,33 +12,31 @@ import javax.sql.DataSource;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import architecture.ee.jdbc.datasource.DataSourceFactory;
+import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
-import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
  * @author  donghyuck
  */
-public class JdbcSequencerFactory {
+public class SequencerFactory {
 
 	private Log log = LogFactory.getLog(getClass());
 
-	/**
-	 */
 	private Configuration configuration;
 
 	private DataSource dataSource;
 
-	public JdbcSequencerFactory(Configuration configuration) {
+	public SequencerFactory(Configuration configuration) {
 		this.configuration = configuration;
 	    this.dataSource = DataSourceFactory.getDataSource();
 	}
 
-	public JdbcSequencerFactory(Configuration configuration, DataSource dataSource) {
+	public SequencerFactory(Configuration configuration, DataSource dataSource) {
 		this.configuration = configuration;
 		this.dataSource = dataSource;
 	}
@@ -78,20 +76,16 @@ public class JdbcSequencerFactory {
 		impl.setName(sequencerName);
 		impl.afterPropertiesSet();
 		return impl;
-
 	}
 
-	public Map<Integer, Sequencer> getAllSequencer() {
-		
-		Map<Integer, Sequencer> sequencers = new HashMap<Integer, Sequencer>();
-		ExtendedJdbcTemplate template = new ExtendedJdbcTemplate(dataSource);
-		MappedStatement stmt = configuration.getMappedStatement("FRAMEWORK_V2.SELECT_ALL_SEQUENCER");
+	public Map<Integer, Sequencer> getAllSequencer() {		
+		Map<Integer, Sequencer> sequencers = new HashMap<Integer, Sequencer>();		
+		JdbcTemplate template = new JdbcTemplate(dataSource);		
+		MappedStatement stmt = configuration.getMappedStatement("FRAMEWORK_V2.SELECT_ALL_SEQUENCER");		
 		List<JdbcSequencer> list = template.query(
 				stmt.getBoundSql(null).getSql(), 
 				new ResultSetExtractor<List<JdbcSequencer>>() {
-					public List<JdbcSequencer> extractData(ResultSet rs)
-					throws SQLException, DataAccessException {
-
+					public List<JdbcSequencer> extractData(ResultSet rs) throws SQLException, DataAccessException {
 					List<JdbcSequencer> l = new ArrayList<JdbcSequencer>();
 					while (rs.next()) {
 						int sequencerID = rs.getInt(1);
@@ -112,4 +106,5 @@ public class JdbcSequencerFactory {
 		}
 		return sequencers;
 	}
+	
 }
