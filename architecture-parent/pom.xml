@@ -5,16 +5,19 @@
 	<artifactId>architecture-parent</artifactId>
 	<version>1.0.0.RELEASE</version>
 	<packaging>pom</packaging>
+	
 	<developers>
 		<developer>
 			<name>Donghyuch Son</name>
 			<email>andang311@inkium.com</email>
 		</developer>
 	</developers>
+	
 	<organization>
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
+	
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -22,16 +25,17 @@
 			<distribution>repo</distribution>
 		</license>
 	</licenses>
+	
 	<inceptionYear>1010</inceptionYear>
 		
 	<distributionManagement>
-		<repository>
-			<uniqueVersion>false</uniqueVersion>
-			<id>hadoop-master</id>
-			<name>hadoop-master-releases</name>
-			<url>http://222.122.63.146/artifactory/ext-release-local</url>
-		</repository>
+	    <repository>
+	        <id>hadoop-master</id>
+	        <name>hadoop-master-releases</name>
+	        <url>http://222.122.63.146/artifactory/ext-release-local</url>
+	    </repository>
 	</distributionManagement>
+
 	
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -79,6 +83,7 @@
 
 	<build>
 		<plugins>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -90,12 +95,27 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>javadoc</goal>
+							<goal>jar</goal>
 						</goals>
 						<phase>package</phase>
 					</execution>
 				</executions>
 			</plugin>
+						
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<phase>package</phase>
+					</execution>
+				</executions>				
+			</plugin>
+						
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -106,6 +126,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>com.pyx4me</groupId>
 				<artifactId>proguard-maven-plugin</artifactId>
@@ -168,21 +189,15 @@
 					</libs>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.7</version>
-				<configuration>
-					<show>private</show>
-					<nohelp>true</nohelp>
-				</configuration>
-			</plugin>
+
+			
 			<!-- 클래스 단위로 JUnit 을 독립된 3 개 스레드에서 병령로 실행할 수 있도록 설정 -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.11</version>
 			</plugin>
+
 		</plugins>
 	</build>
 	<reporting>
