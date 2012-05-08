@@ -11,7 +11,7 @@
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
        http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
-	<bean id="dataSyncClient" class="architecture.ext.sync.ftp.FTPDataSyncClient">
+	<bean id="dataSyncClient" class="architecture.ext.sync.connector.ftp.FTPDataSyncClient">
 		<property name="hostname" value="61.250.231.50"/>
 		<property name="port" value="21"/>
 		<property name="username" value="developer"/>
