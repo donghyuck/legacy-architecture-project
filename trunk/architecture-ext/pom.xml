@@ -5,7 +5,6 @@
 		<artifactId>architecture-parent</artifactId>
 		<groupId>architecture</groupId>
 		<version>1.0.0.RELEASE</version>
-		<relativePath>../architecture-parent</relativePath>
 	</parent>
 	<groupId>architecture.ext</groupId>
 	<artifactId>architecture-ext</artifactId>
@@ -13,6 +12,8 @@
 	<version>1.0.5.RELEASE</version>
 	<name>POWER ARCHITECTURE EXTENSION</name>
 
+	<description>과거 1.0 기반에서도 동작할 수 있도록 호환성을 보장하는 것을 목표로 한다.</description>
+	
 	<contributors>
 		<contributor>
 			<name>Donghyuch Son</name>
@@ -49,21 +50,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-
-		<dependency>
-			<groupId>architecture.common</groupId>
-			<artifactId>architecture-common</artifactId>
-			<version>${project.build.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.caucho</groupId>
-			<artifactId>hessian</artifactId>
-			<version>3.1.5</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
@@ -71,6 +57,31 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.caucho</groupId>
+			<artifactId>hessian</artifactId>
+			<version>4.0.7</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>architecture</groupId>
+			<artifactId>architecture-common</artifactId>
+			<version>${project.build.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
 	</dependencies>
+	
+	<properties>
+		<project.build.version>1.0.2.RELEASE</project.build.version>
+	</properties>
 
+	<distributionManagement>
+	    <repository>
+	    	<id>hadoop-master</id>
+	        <name>hadoop-master-releases</name>
+	        <url>http://222.122.63.146/artifactory/ext-release-local</url>
+	    </repository>
+	</distributionManagement>
 </project>
