@@ -1,4 +1,4 @@
-package architecture.ee.web.bootstrap;
+package architecture.ee.web.component;
 
 import java.util.concurrent.locks.ReentrantLock;
 
