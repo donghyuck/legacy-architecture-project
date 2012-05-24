@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="framework-ui-setup-default" extends="framework-struts-default" namespace="/services">
+			
+		<action name="ui.i18n" class="architecture.ee.web.struts2.action.I18nAction">
+			<result name="success">/template/ui/html/i18n-main.ftl</result>
+			<result name="xml">/template/ui/xml/localizers.ftl</result>
+			<result name="json" type="json">
+			    <param name="excludeProperties">*resourceBundle*,*primaryKeyObject*,*new*,*objectType*</param>
+				<param name="root">models</param>
+				<param name="enableGZIP">true</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="ui.menu.main" class="architecture.ee.web.struts2.action.MainMenuAction">
+			<result name="success">/template/ui/html/menu-main.ftl</result>
+			<result name="xml">/template/ui/xml/menus.ftl</result>
+			<result name="json" type="json">
+				<param name="root">models</param>
+				<param name="enableGZIP">true</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>				
+
+		<action name="ui.menu" class="architecture.ee.web.struts2.action.ajax.MenuAction">
+			<result name="success">/template/ui/html/menu-tree.ftl</result>
+			<result name="xml">/template/ui/xml/menu-tree.ftl</result>
+			<result name="json" type="json">
+			    <param name="excludeProperties">*resourceBundle*,*primaryKeyObject*,*new*,*objectType*</param>
+				<param name="root">models</param>
+				<param name="enableGZIP">true</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+			
+	</package>
+
+</struts>
