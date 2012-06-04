@@ -38,7 +38,7 @@ public class JdbcReadConnector extends AbstractJdbcConnector implements ReadConn
 			data = new Object[0];
 		}
 		
-		Object output;		
+		//Object output;		
 		
 		return pull(queryString, parameterMappings, data);
 

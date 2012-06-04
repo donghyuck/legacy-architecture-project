@@ -21,4 +21,5 @@ public interface Cacheable extends java.io.Serializable {
      * @return the size of the Object in bytes.
      */
     public int getCachedSize();
+    
 }

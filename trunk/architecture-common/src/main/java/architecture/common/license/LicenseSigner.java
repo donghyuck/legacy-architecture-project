@@ -17,6 +17,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.exception.LicenseException;
+import architecture.common.util.L10NUtils;
 
 public class LicenseSigner
 {
@@ -31,12 +32,12 @@ public class LicenseSigner
         {
             String keyFile = privateKeyPath ; //System.getProperty("jive.private.key");
             if(keyFile == null)
-                log.fatal("Property jive.private.key java env property not specified!");
+                log.fatal(L10NUtils.format("002113"));
             init(new FileReader(keyFile));
         }
         catch(Exception e)
         {
-            log.fatal("Loading private key for license factory failed.", e);
+            log.fatal(L10NUtils.format("002114"), e);
             throw new LicenseException(e);
         }
     }
@@ -49,7 +50,7 @@ public class LicenseSigner
         }
         catch(Exception e)
         {
-            log.fatal("Loading private key for license factory failed.", e);
+            log.fatal(L10NUtils.format("002114"), e);
             throw new LicenseException(e);
         }
     }

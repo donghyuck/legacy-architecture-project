@@ -107,12 +107,14 @@ public class ImplFactory {
 	
 
 	/**
+	 * 
+	 * 
 	 * @author    donghyuck
 	 */
 	private static class ImplFactoryParsingHandler extends DefaultHandler {
 
 		static {
-			ImplFactory.actualPlatformString = "distributed";
+			ImplFactory.actualPlatformString = DISTRIBUTED ;
 		}
 
 		private static boolean validOn(String s) {
@@ -134,15 +136,8 @@ public class ImplFactory {
 
 		int rank;
 
-		/**
-		 * @uml.property  name="factories"
-		 */
 		List<Factory> factories;
 
-		/**
-		 * @uml.property  name="factory"
-		 * @uml.associationEnd  
-		 */
 		Factory factory;
 
 		StringBuffer value;
@@ -175,14 +170,14 @@ public class ImplFactory {
 			value.setLength(0);
 		}
 
-		public void error(SAXParseException saxparseexception) throws SAXException {
+		public void error(SAXParseException e) throws SAXException {
 			factory = null;
 		}
 
-		public void fatalError(SAXParseException saxparseexception) throws SAXException {
+		public void fatalError(SAXParseException e) throws SAXException {
 			factories.clear();
 			factory = null;
-			throw saxparseexception;
+			throw e;
 		}
 
 		/**
@@ -209,18 +204,18 @@ public class ImplFactory {
 					factory.isOverride = false;
 					int i = attributes.getLength();
 					for (int j = 0; j < i; j++) {
-						String s3 = attributes.getQName(j);
-						String s4 = attributes.getValue(j);
-						if (s3.equals("interface"))
-							factory.interfaceName = s4;
-						else if (s3.equals("impl"))
-							factory.implName = s4;
-						else if (s3.equals("override"))
-							factory.isOverride = s4 != null && s4.equalsIgnoreCase("true");
-						else if (s3.equals(PLATFORM))
-							factory.platforms = s4;
+						String name = attributes.getQName(j);
+						String value = attributes.getValue(j);
+						if (name.equals("interface"))
+							factory.interfaceName = value;
+						else if (name.equals("impl"))
+							factory.implName = value;
+						else if (name.equals("override"))
+							factory.isOverride = value != null && value.equalsIgnoreCase("true");
+						else if (name.equals(PLATFORM))
+							factory.platforms = value;
 						else
-							throw new SAXParseException("Invalid attribute: " + s3, locator);
+							throw new SAXParseException("Invalid attribute: " + name, locator);
 					}
 
 				} else if (!qName.equals("rank"))
@@ -235,15 +230,13 @@ public class ImplFactory {
 	
 
 	private static class RankComparator implements Comparator <FactoryList>{
-
 		private RankComparator() {
 			
 		}
-
+		
 		public int compare(FactoryList factories1, FactoryList factories2) {
 			return factories1.rank - factories2.rank;
-		}
-		
+		}		
 	}
 
 	private static final String IF_PLUGIN_PATH = "META-INF/impl-factory.xml";
@@ -255,7 +248,7 @@ public class ImplFactory {
 	static final String ALL = "all";
 
 	static final String PLATFORM = "platform";
-
+	
 	private static String actualPlatformString = null;
 
 	static {
@@ -361,17 +354,17 @@ public class ImplFactory {
 	
 	private static List<FactoryList> parseLegacyXmlFile(List<FactoryList> list) throws Exception {	
 		
-		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-		Enumeration<URL> enumeration = classloader.getResources(IF_PLUGIN_PATH);
+		ClassLoader cl = Thread.currentThread().getContextClassLoader();
+		Enumeration<URL> enumeration = cl.getResources(IF_PLUGIN_PATH);
 				
-		SAXParserFactory saxparserfactory = SAXParserFactory.newInstance();
-		saxparserfactory.setNamespaceAware(true);
-		XMLReader xmlreader = saxparserfactory.newSAXParser().getXMLReader();
-		ImplFactoryParsingHandler implfactoryparsinghandler = new ImplFactoryParsingHandler();
-		xmlreader.setContentHandler(implfactoryparsinghandler);
-		xmlreader.setDTDHandler(implfactoryparsinghandler);
-		xmlreader.setEntityResolver(implfactoryparsinghandler);		
-		xmlreader.setErrorHandler(implfactoryparsinghandler);
+		SAXParserFactory factory = SAXParserFactory.newInstance();
+		factory.setNamespaceAware(true);
+		XMLReader xmlreader = factory.newSAXParser().getXMLReader();
+		ImplFactoryParsingHandler handler = new ImplFactoryParsingHandler();
+		xmlreader.setContentHandler(handler);
+		xmlreader.setDTDHandler(handler);
+		xmlreader.setEntityResolver(handler);		
+		xmlreader.setErrorHandler(handler);
 		
 		System.out.println("Enum:");	
 		
@@ -383,8 +376,8 @@ public class ImplFactory {
 			try {
 				xmlreader.parse(new InputSource(url.openStream()));
 				FactoryList factorylist = new FactoryList();
-				factorylist.rank = implfactoryparsinghandler.rank;
-				factorylist.factories.addAll(implfactoryparsinghandler.getFactories());
+				factorylist.rank = handler.rank;
+				factorylist.factories.addAll(handler.getFactories());
 				list.add(factorylist);
 			} catch (Exception exception) {}
 		} while (true);

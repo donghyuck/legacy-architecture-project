@@ -34,10 +34,6 @@ public class LocalizerFactory {
 
 	}
 
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
 	private static Implementation impl = null;
 
 	static {

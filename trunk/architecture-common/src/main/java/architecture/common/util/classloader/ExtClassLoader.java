@@ -1,4 +1,4 @@
-package architecture.common.util;
+package architecture.common.util.classloader;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.StringTokenizer;
+
+import architecture.common.util.L10NUtils;
 
 
 /**
@@ -103,7 +105,7 @@ public class ExtClassLoader extends URLClassLoader {
         if(path == null)
         {
             //if(WSLauncher.debug)
-            System.out.println("Native path not added: invalid path argument (null)");
+            System.out.println(L10NUtils.format("002201"));
         } else
         {
             File file = null;

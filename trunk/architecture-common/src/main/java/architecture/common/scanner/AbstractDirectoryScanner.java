@@ -6,6 +6,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.util.L10NUtils;
+
 
 /**
  * @author    donghyuck
@@ -182,12 +184,12 @@ public abstract class AbstractDirectoryScanner {
 			synchronized (lock) {
 				lock.notifyAll();
 			}
-			//if(log.isDebugEnabled()){
-				//if(this.enabled.get())
-				//	log.debug(MessageFormatter.format("003510"));
-				//else
-					//log.debug(MessageFormatter.format("003509"));
-			//}
+			if(log.isDebugEnabled()){
+				if(this.enabled.get())
+					log.debug(L10NUtils.format("002084"));
+				else
+					log.debug(L10NUtils.format("002086"));
+			}
 		}
 
 		public void shutdown() {
@@ -196,19 +198,20 @@ public abstract class AbstractDirectoryScanner {
 			synchronized (lock) {
 				lock.notifyAll();
 			}
-			//if(log.isDebugEnabled())
-				//log.debug(MessageFormatter.format("003511"));
+			if(log.isDebugEnabled())
+				log.debug(L10NUtils.format("002085"));
 		}
 
 		public void run() {
 			setPriority(Thread.MIN_PRIORITY);
-			//log.debug(MessageFormatter.format("003502"));
+			if(log.isDebugEnabled())
+				log.debug(L10NUtils.format("002082"));
 			while (!shuttingDown.get()) {
 				// If we are not enabled, then wait
 				if (!enabled.get()) {
 					try {
-						//if(log.isDebugEnabled())
-							//log.debug(MessageFormatter.format("003512"));
+						if(log.isDebugEnabled())
+							log.debug(L10NUtils.format("002086"));
 						synchronized (lock) {
 							lock.wait();
 						}
@@ -219,14 +222,15 @@ public abstract class AbstractDirectoryScanner {
 				}
 				loop();
 			}
-			//log.debug(MessageFormatter.format("003503"));
+			if(log.isDebugEnabled())
+				log.debug(L10NUtils.format("002083"));
 		}
 
 		public void doScan() {
 			try {
 				scan();
 			} catch (Exception e) {
-				//log.error(MessageFormatter.format("003513"), e);
+				log.error(L10NUtils.format("002087"), e);
 			}
 		}
 

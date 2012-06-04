@@ -24,6 +24,7 @@ import org.dom4j.Element;
 
 import architecture.common.exception.LicenseException;
 import architecture.common.lifecycle.ApplicationConstants;
+import architecture.common.util.L10NUtils;
 
 /**
  * @author  donghyuck
@@ -128,13 +129,7 @@ public class License {
 		}
 
 		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("Client");
-			sb.append("{name='").append(name).append('\'');
-			sb.append(", company='").append(company).append('\'');
-			sb.append(", url='").append(url).append('\'');
-			sb.append('}');
-			return sb.toString();
+			return L10NUtils.format("002103", name, company, url);
 		}
 	};
 
@@ -161,8 +156,7 @@ public class License {
 			if (o == null || getClass() != o.getClass())
 				return false;
 			Module module = (Module) o;
-			return name == null ? module.name == null : name
-					.equals(module.name);
+			return name == null ? module.name == null : name.equals(module.name);
 		}
 
 		/**
@@ -187,11 +181,7 @@ public class License {
 		}
 
 		public String toString() {
-			StringBuilder sb = new StringBuilder();
-			sb.append("Module");
-			sb.append("{name='").append(name).append('\'');
-			sb.append('}');
-			return sb.toString();
+			return L10NUtils.format("002104", name);
 		}
 	}
 
@@ -199,20 +189,9 @@ public class License {
 	 * @author   donghyuck
 	 */
 	public enum Type {
-		/**
-		 * @uml.property  name="cOMMERCIAL"
-		 * @uml.associationEnd  
-		 */
+
 		COMMERCIAL,
-		/**
-		 * @uml.property  name="nON_COMMERCIAL"
-		 * @uml.associationEnd  
-		 */
 		NON_COMMERCIAL,
-		/**
-		 * @uml.property  name="eVALUATION"
-		 * @uml.associationEnd  
-		 */
 		EVALUATION
 	}
 	
@@ -752,18 +731,18 @@ public class License {
             License l = new License();
             String id = root.attributeValue("id");
             if(id == null)
-                throw new LicenseException("License must contain an id.");
+                throw new LicenseException(L10NUtils.format("002105"));
             l.setID(Long.parseLong(id));
             String name0 = root.attributeValue("name");
             if(name0 == null)
-                throw new LicenseException("License must contain a name.");
+                throw new LicenseException(L10NUtils.format("002106"));
             l.setName(name0);
             String edition = root.attributeValue("edition");
             if(edition != null)
                 l.setEdition(edition);
             String dateString = root.attributeValue("creationDate");
             if(dateString == null)
-                throw new LicenseException("License must contain a creation date.");
+                throw new LicenseException(L10NUtils.format("002107"));
             try
             {
                 Date date = parseDate(dateString);
@@ -771,11 +750,11 @@ public class License {
             }
             catch(Exception e)
             {
-                throw new LicenseException("License creationDate is invalid.");
+                throw new LicenseException(L10NUtils.format("002108"));
             }
             String license = root.attributeValue("version");
             if(license == null)
-                throw new LicenseException("License must contain a version.");
+                throw new LicenseException(L10NUtils.format("002109"));
             l.setVersion(Version.parseVersion(license));
             try
             {
@@ -783,7 +762,7 @@ public class License {
             }
             catch(IllegalArgumentException e)
             {
-                throw new LicenseException("License must contain a valid type.");
+                throw new LicenseException(L10NUtils.format("002110"));
             }
             Element clientElement = root.element("client");
             Client client = new Client();
@@ -813,7 +792,7 @@ public class License {
         catch(DocumentException e)
         {
             log.fatal(e.getMessage(), e);
-            throw new LicenseException("Illegal XML content!", e);
+            throw new LicenseException(L10NUtils.format("002111"), e);
         }
     }
 

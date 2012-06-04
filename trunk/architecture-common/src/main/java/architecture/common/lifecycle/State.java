@@ -87,7 +87,5 @@ public enum State {
     public String toString()
     {
         return desc;
-    } 
-    
+    }
 }
-

@@ -46,14 +46,10 @@ public class Version {
 	/**
 	 * Create a new version information object.
 	 * 
-	 * @param major
-	 *            the major release number.
-	 * @param minor
-	 *            the minor release number.
-	 * @param micro
-	 *            the micro release number.
-	 * @param status
-	 *            the status of the release.
+	 * @param major  the major release number.
+	 * @param minor the minor release number.
+	 * @param micro the micro release number.
+	 * @param status the status of the release.
 	 */
 	public Version(int major, int minor, int micro, ReleaseStatus status, int statusVersion) {
 		this.major = major;
@@ -114,7 +110,7 @@ public class Version {
 
 	/**
 	 * Obtain the micro release number for this product.
-	 * @return    The micro release number x.x.1
+	 * @return The micro release number x.x.1
 	 * @uml.property  name="micro"
 	 */
 	public int getMicro() {
@@ -123,7 +119,7 @@ public class Version {
 
 	/**
 	 * Obtain the status relase number for this product. For example, if the release status is <strong>alpha</strong> the release may be <strong>5</strong> resulting in a release status of <strong>Alpha 5</strong>.
-	 * @return    The status version or -1 if none is set.
+	 * @return  The status version or -1 if none is set.
 	 * @uml.property  name="statusVersion"
 	 */
 	public int getStatusVersion() {
@@ -134,22 +130,10 @@ public class Version {
 	 * A class to represent the release status of the server. Product releases are indicated by type safe enum constants.
 	 */
 	public enum ReleaseStatus {
-		/**
-		 * @uml.property  name="release"
-		 * @uml.associationEnd  
-		 */
-		Release(""), /**
-		 * @uml.property  name="release_Candidate"
-		 * @uml.associationEnd  
-		 */
-		Release_Candidate("RC"), /**
-		 * @uml.property  name="beta"
-		 * @uml.associationEnd  
-		 */
-		Beta("Beta"), /**
-		 * @uml.property  name="alpha"
-		 * @uml.associationEnd  
-		 */
+
+		Release(""), 
+		Release_Candidate("RC"),
+		Beta("Beta"),
 		Alpha("Alpha");
 
 		private String status;

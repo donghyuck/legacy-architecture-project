@@ -10,6 +10,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
@@ -20,6 +24,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.JdbcUtils;
 
+import sun.misc.BASE64Decoder;
 import architecture.common.adaptor.Connector;
 import architecture.common.jdbc.JdbcType;
 import architecture.common.jdbc.ParameterMapping;
@@ -71,18 +76,45 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 					if(index == mapping.getIndex()){
 						if( String.class == mapping.getJavaType() ){
 							
-							if(!StringUtils.isEmpty( mapping.getEncoding())){							
-								
-								String value = rs.getString(index);
-								if(StringUtils.isEmpty(value))
-									value = "";
-								
+							String value = rs.getString(index);
+							if(StringUtils.isEmpty(value))
+								value = "";
+							
+							if(!StringUtils.isEmpty( mapping.getCipher())){		
+								try {
+									Cipher cipher = Cipher.getInstance(mapping.getCipher());
+									SecretKeySpec skeySpec = new SecretKeySpec(Hex.decodeHex(mapping.getCipherKey().toCharArray()), mapping.getCipherKeyAlg());
+									cipher.init(Cipher.DECRYPT_MODE, skeySpec);
+									
+									byte raw[] ;
+									if(!StringUtils.isEmpty( mapping.getEncoding())){
+										String enc = mapping.getEncoding();
+										if(enc.toUpperCase().equals("BASE64")){
+											BASE64Decoder decoder = new BASE64Decoder();									
+									        raw = decoder.decodeBuffer(value);	
+										}else{
+											raw = value.getBytes();
+										}
+									}else{
+										raw= value.getBytes();
+									}
+							        byte stringBytes[] = cipher.doFinal(raw);
+							        return new String(stringBytes);									
+
+								} catch (Exception e) {
+									LOG.error(e);
+								}								
+								return value;
+							}
+							
+							if(!StringUtils.isEmpty( mapping.getEncoding())){								
 								String[] encoding = StringUtils.split(mapping.getEncoding(), ">");								
 								try {
 									if( encoding.length == 2 )
 										return new String(value.getBytes(encoding[0]), encoding[1]);
-									else if ( encoding.length == 1 )
-										return new String(value.getBytes(), encoding[0]);
+									else if ( encoding.length == 1 ){
+										return new String(value.getBytes(), encoding[0] );
+									}
 								} catch (UnsupportedEncodingException e) {
 									LOG.error(e);
 									return value;
@@ -116,6 +148,8 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 	 * @return
 	 */
 	protected Object deliver(final String queryString, final List<ParameterMapping> parameterMappings, final List<Map<String, Object>> rows) { 
+		
+		log.debug("delivering : " + rows.size());
 		
 		int[] cnt = getJdbcTemplate().batchUpdate(queryString, new BatchPreparedStatementSetter(){
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
@@ -169,7 +203,12 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 	}
 	
 	protected Object deliver(final String queryString, final List<ParameterMapping> parameterMappings, final Map<String, Object> row) { 
+		
+		log.debug("delivering : 1");
+		
 		return getJdbcTemplate().update(queryString, new PreparedStatementSetter(){
+			
+			
 			public void setValues(PreparedStatement ps) throws SQLException {
 				
 				for( ParameterMapping mapping : parameterMappings ){     	

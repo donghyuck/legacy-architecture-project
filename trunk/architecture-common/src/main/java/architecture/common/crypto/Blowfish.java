@@ -95,8 +95,7 @@ public class Blowfish {
 		byte[] newCBCIV = new byte[BlowfishCBC.BLOCKSIZE];
 		longToByteArray(lNewCBCIV, newCBCIV, 0);
 
-		return bytesToBinHex(newCBCIV, 0, BlowfishCBC.BLOCKSIZE)
-				+ bytesToBinHex(buf, 0, buf.length);
+		return bytesToBinHex(newCBCIV, 0, BlowfishCBC.BLOCKSIZE) + bytesToBinHex(buf, 0, buf.length);
 	}
 
 	/**

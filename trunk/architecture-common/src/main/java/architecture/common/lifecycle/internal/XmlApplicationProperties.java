@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
+import architecture.common.util.L10NUtils;
 import architecture.common.xml.XmlProperties;
 
 /**
@@ -41,7 +42,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	}
 
 	public int size() {
-		 throw new UnsupportedOperationException("Not implemented in xml version");
+		throw new UnsupportedOperationException(L10NUtils.format("002051"));
 	}
 
 	public boolean isEmpty() {
@@ -53,7 +54,7 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	}
 
 	public boolean containsValue(Object value) {
-		throw new UnsupportedOperationException("Not implemented in xml version");
+		throw new UnsupportedOperationException(L10NUtils.format("002051"));
 	}
 
 	public String get(Object key) {
@@ -75,19 +76,19 @@ public class XmlApplicationProperties extends AbstractApplicationProperties {
 	}
 
 	public void clear() {
-		throw new UnsupportedOperationException("Not implemented in xml version");
+		throw new UnsupportedOperationException(L10NUtils.format("002051"));
 	}
 
 	public Set<String> keySet() {
-		throw new UnsupportedOperationException("Not implemented in xml version");
+		throw new UnsupportedOperationException(L10NUtils.format("002051"));
 	}
 
 	public Collection<String> values() {
-		throw new UnsupportedOperationException("Not implemented in xml version");
+		throw new UnsupportedOperationException(L10NUtils.format("002051"));
 	}
 
 	public Set<java.util.Map.Entry<String, String>> entrySet() {
-		throw new UnsupportedOperationException("Not implemented in xml version");
+		throw new UnsupportedOperationException(L10NUtils.format("002051"));
 	}
 	
 }

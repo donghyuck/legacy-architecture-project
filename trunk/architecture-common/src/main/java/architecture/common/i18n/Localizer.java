@@ -19,26 +19,21 @@ import java.text.DecimalFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * @author    DongHyuck, Son
  */
 public class Localizer {
 	
 	public static final String PREFIX_DELIM = "-";
-	/**
-	 * @uml.property  name="pREFIX"
-	 */
 	public static final String PREFIX = "prefix";
-	/**
-	 * @uml.property  name="vERSION"
-	 */
 	public static final String VERSION = "version";
 	public static final String ID = "id";
-	public static final String MESSAGE_BODY = "messagebody";
-	public static final String CAUSE = "cause";
-	public static final String ACTION = "action";
+	public static final String MESSAGE = "message";
 	
 	public  static final DecimalFormat decimalformat = new DecimalFormat("000000");
+	
 	
 	private ResourceBundle bundle;
 	
@@ -49,10 +44,9 @@ public class Localizer {
     /**
 	 * @return
 	 * @throws MissingResourceException
-	 * @uml.property  name="vERSION"
 	 */
     public String getVersion() throws MissingResourceException {
-        return (String) bundle.getObject(VERSION);
+        return bundle.getString(VERSION);
     }
 	
     /**
@@ -62,7 +56,7 @@ public class Localizer {
     public String getPrefix(){
         String prefix = null;
         try {
-            prefix = (String) bundle.getObject(PREFIX);
+            prefix = bundle.getString(PREFIX);
             if (prefix != null && prefix.length() == 0)
                 prefix = null;
         } catch (MissingResourceException e) {
@@ -71,22 +65,13 @@ public class Localizer {
 	}
 	
 
-	public String getBody(String id)throws MissingResourceException{
-		return getString(MESSAGE_BODY, id);
+	public String getMessage(String id)throws MissingResourceException{
+		return getString(MESSAGE, id);
 	}
 
-	public String getBody(int id)throws MissingResourceException{
-		return getString(MESSAGE_BODY, id);
+	public String getMessage(int id)throws MissingResourceException{
+		return getString(MESSAGE, id);
 	}
-
-	public String getCause(String id)throws MissingResourceException{
-		return getString(CAUSE, id);
-	}
-
-	public String getCause(int id)throws MissingResourceException{
-		return getString(CAUSE, id);
-	}
-	
 
 	public String getString(String key, int id)throws MissingResourceException{
 		return getObject(key, id).toString();
@@ -98,7 +83,7 @@ public class Localizer {
 	
 
     public Object getObject(String key, String id) throws MissingResourceException {
-        return bundle.getObject((new StringBuilder()).append(key).append( stripPrefix(id)).toString());
+        return bundle.getObject( new StringBuilder().append(key).append(stripPrefix(id)).toString());
     }
 
 	public Object getObject(String key, int id){
@@ -109,11 +94,13 @@ public class Localizer {
         return getString("", id);
     }
     
+    
 	private String stripPrefix(String str) {
+		
 		String prefix = getPrefix();
-		String stringToUse = str;
-		if (prefix != null && str.indexOf((new StringBuilder()).append(prefix).append(PREFIX_DELIM).toString()) != -1)
-			stringToUse = str.substring(prefix.length() + 1);
+		String stringToUse = str;		
+		if (prefix != null && StringUtils.contains(str, new StringBuilder().append(prefix).append(PREFIX_DELIM).toString() ))
+			stringToUse = StringUtils.remove(str, prefix);
 		return stringToUse;
 	}
 	

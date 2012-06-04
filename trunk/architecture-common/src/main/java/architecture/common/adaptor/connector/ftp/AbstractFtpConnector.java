@@ -1,7 +1,6 @@
 package architecture.common.adaptor.connector.ftp;
 
 import java.io.IOException;
-import java.net.SocketException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

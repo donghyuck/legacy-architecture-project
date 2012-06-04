@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import javax.sql.DataSource;
@@ -190,6 +191,15 @@ public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUti
 			if(conn != null)
 				JdbcUtils.closeConnection(conn);
 		}
+	}
+	
+	
+	public static String lookupColumnName(ResultSetMetaData resultSetMetaData, int columnIndex) throws SQLException {
+		String name = resultSetMetaData.getColumnLabel(columnIndex);
+		if (name == null || name.length() < 1) {
+			name = resultSetMetaData.getColumnName(columnIndex);
+		}
+		return name;
 	}
 	
 	
