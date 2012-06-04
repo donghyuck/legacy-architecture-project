@@ -16,6 +16,7 @@ import architecture.common.exception.LicenseException;
 import architecture.common.exception.LicenseInitializationException;
 import architecture.common.license.io.LicenseReader;
 import architecture.common.license.validator.Validator;
+import architecture.common.util.L10NUtils;
 
 /**
  * @author  donghyuck
@@ -45,7 +46,7 @@ public class LicenseManager {
 		License l = licenseReader.read(reader);
 		Collection<LicenseException> exceptions = validate(provider, l);
 		if (!exceptions.isEmpty()) {
-			throw new LicenseInitializationException("License Validation Failed", exceptions);
+			throw new LicenseInitializationException(L10NUtils.format("002112"), exceptions);
 		} else {
 			l.setVersion(provider.getVersion());
 			license = l;

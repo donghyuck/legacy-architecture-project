@@ -28,40 +28,10 @@ import architecture.common.i18n.LocalizerFactory;
 /**
  * 
  * 
- * @author DongHyuck, Son 
- *
+ * @author DongHyuck, Son
  */
 public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
 
-	/**
-    private static class LocalizerResourceBundle extends ListResourceBundle implements Serializable
-    {    
-    	private Locale locale = null;
-        private Object contents[][]; 
-                
-        protected LocalizerResourceBundle(Map<Object, Object> newKeyValues)
-        {
-            contents = new Object[newKeyValues.size()][2];
-            int index = 0;
-            for(Object key:newKeyValues.keySet()){
-                contents[index][0] = key;
-                contents[index][1] = newKeyValues.get(key);
-                index++;
-            }    
-        }
-                
-        public Object[][] getContents()
-        {
-            return contents;
-        }
-        
-		public Locale getLocale() {
-			if(locale != null)
-				return locale;
-			return super.getLocale();
-		}        
-    }
-    **/
     
     private static class LocalizerResourceBundleControl extends ResourceBundle.Control {
         
@@ -73,16 +43,22 @@ public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
             return FORMAT_DEFAULT;
         }
 
-        public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-                throws IllegalAccessException, InstantiationException, IOException 
+        public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload) throws IllegalAccessException, InstantiationException, IOException 
         {        	
         	
             if ((baseName == null) || (locale == null) || (format == null) || (loader == null)) {
                 throw new NullPointerException();
             }
             
-            ResourceBundle bundle = null;            
-            bundle = super.newBundle(baseName, locale, format, loader, reload);
+            ResourceBundle bundle = null;         
+            // System.out.println( baseName + "/" + format);
+            if (format.equals(XML)) {
+            	//bundle = super.newBundle(baseName, locale, format, loader, reload);            	
+            }else{
+            	bundle = super.newBundle(baseName, locale, format, loader, reload);
+            }
+            
+            
             
             /**
             if (format.equals(XML)) {
@@ -115,11 +91,11 @@ public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
                 bundle = super.newBundle(baseName, locale, format, loader, reload);
             }
             **/
+            
             return bundle;
         }
     }
-    
-    // private static final Log log = LogFactory.getLog(LocalizerFactoryImpl.class);    
+       
 
     public Localizer getLocalizer(String baseName){        
         return getLocalizer(baseName, Locale.getDefault(), Thread.currentThread().getContextClassLoader()); 
@@ -130,63 +106,8 @@ public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
     }
     
     public Localizer getLocalizer(String baseName, Locale targetLocale, ClassLoader cl){        
+    	
         ResourceBundle bundle = ResourceBundle.getBundle(baseName, targetLocale, cl, new LocalizerResourceBundleControl());       
         return new Localizer( bundle );    
     }
-        
-    /**
-    private static LocalizerResourceBundle getLocalizerBundle(InputStream in) throws IOException {
-        Reader reader = new BufferedReader(new InputStreamReader(in));
-        try {          	
-        	SAXBuilder builder = new SAXBuilder();
-            // xmlReader.setEncoding("UTF-8");
-            Document document = builder.build(reader);           
-            
-            if( log.isDebugEnabled() )
-            try {
-                XMLOutputter outputter = new XMLOutputter();
-                outputter.output(document, System.out);
-            } catch (java.io.IOException e) {}
-            
-            return getLocalizerBundle(document.getRootElement());            
-        } catch (Exception e) {
-            throw new java.io.IOException (e);
-        } finally {
-            if (in != null) {
-                in.close();
-            }
-        }
-    }
-    **/
-    
-    /**
-	private static LocalizerResourceBundle getLocalizerBundle (Element element){
-    	
-        Map<Object, Object> map = new HashMap<Object, Object>();
-        map.put(Localizer.VERSION, element.getChildTextTrim(Localizer.VERSION));
-        map.put(Localizer.PREFIX, element.getChildTextTrim(Localizer.PREFIX));
-        map.put(Localizer.SUBSYSTEM, element.getChildTextTrim(Localizer.SUBSYSTEM));
-        
-        if(log.isDebugEnabled())
-	        log.debug(
-	                String.format("Localizer [subsystem=%s, version=%s]",
-	                map.get(Localizer.SUBSYSTEM),map.get(Localizer.VERSION))
-	        );        
-        
-        List<Element> list = element.getChildren(Localizer.MESSAGE_BODY);
-        for(Element el : list){            
-            String key = Localizer.MESSAGE_BODY + el.getAttributeValue(Localizer.ID);
-            String value = el.getText();
-            map.put(key, value );
-        }
-        
-        List<Element> list2 = element.getChildren(Localizer.MESSAGE_DETAIL);
-        for(Element el : list2){
-            String key = Localizer.MESSAGE_DETAIL + el.getAttributeValue(Localizer.ID);
-            String value = el.getTextTrim();
-            map.put(key, value);            
-        }                
-        return new LocalizerResourceBundle(map);
-    }
-	*/
 }

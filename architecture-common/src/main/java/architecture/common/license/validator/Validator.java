@@ -5,7 +5,6 @@ import architecture.common.license.License;
 
 public interface Validator
 {
-
     public abstract void validate(License license)
         throws LicenseException;
 }

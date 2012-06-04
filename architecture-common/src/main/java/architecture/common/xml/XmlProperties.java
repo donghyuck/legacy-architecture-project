@@ -34,6 +34,7 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 
 import architecture.common.lifecycle.ApplicationConstants;
+import architecture.common.util.L10NUtils;
 
 public class XmlProperties {
 
@@ -87,23 +88,21 @@ public class XmlProperties {
             File tempFile;
             tempFile = new File(file.getParentFile(), file.getName() + ".tmp");
             if (tempFile.exists()) {
-                log.error("WARNING: " + file.getName() + " was not found, but temp file from " +
-                        "previous write operation was. Attempting automatic recovery." +
-                        " Please check file for data consistency.");
+                log.error( L10NUtils.format("002157",  file.getName()) );
                 tempFile.renameTo(file);
             }
             // There isn't a possible way to recover from the file not
             // being there, so throw an error.
             else {
-                throw new FileNotFoundException("XML properties file does not exist: "  + file.getName());
+                throw new FileNotFoundException(L10NUtils.format("002151", file.getName()));
             }
         }
         // Check read and write privs.
-        if (!file.canRead()) {
-            throw new IOException("XML properties file must be readable: " + file.getName());
+        if (!file.canRead()) {        	
+            throw new IOException(L10NUtils.format("002152", file.getName()));
         }
         if (!file.canWrite()) {
-            throw new IOException("XML properties file must be writable: " + file.getName());
+            throw new IOException(L10NUtils.format("002153", file.getName()));
         }
 
         Reader reader = null;
@@ -113,8 +112,8 @@ public class XmlProperties {
             buildDoc(reader);
         }
         catch(Exception e)
-        {
-        	log.error((new StringBuilder()).append("Error creating XML properties file ").append(file.getName()).append(": ").append(e.getMessage()).toString());
+        {        	
+        	log.error(L10NUtils.format("002154", file.getName(), e.getMessage()));
             throw new IOException(e.getMessage());
         }
         finally
@@ -413,7 +412,7 @@ public class XmlProperties {
      */
     public synchronized void setProperty(String name, String value) {
         if(!StringEscapeUtils.escapeXml(name).equals(name)) {
-            throw new IllegalArgumentException("Property name cannot contain XML entities.");
+            throw new IllegalArgumentException(L10NUtils.getMessage("002155"));
         }
         if (name == null) {
             return;
@@ -550,7 +549,7 @@ public class XmlProperties {
         if (!error) {
             // Delete the old file so we can replace it.
             if (!file.delete()) {
-                log.error("Error deleting property file: " + file.getAbsolutePath());
+                log.error(L10NUtils.format("002156", file.getAbsolutePath()));
                 return;
             }
             // Copy new contents to the file.
@@ -575,7 +574,7 @@ public class XmlProperties {
      * represented as an array of four Strings.
      *
      * @param name the name of the Jive property.
-     * @return an array representation of the given Jive property.
+     * @return an array representation of the given Jive property.f
      */
     private String[] parsePropertyName(String name) {
         List<String> propName = new ArrayList<String>(5);

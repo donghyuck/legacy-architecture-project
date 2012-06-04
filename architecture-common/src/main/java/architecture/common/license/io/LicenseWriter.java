@@ -15,6 +15,7 @@ import org.dom4j.Element;
 import architecture.common.exception.LicenseException;
 import architecture.common.license.License;
 import architecture.common.license.LicenseSigner;
+import architecture.common.util.L10NUtils;
 
 /**
  * @author  donghyuck
@@ -46,7 +47,7 @@ public class LicenseWriter {
 			sig.setText(license.getSignature());
 		} catch (Exception e) {
 			log.fatal(e.getMessage(), e);
-			throw new LicenseException((new StringBuilder()).append("Unable to sign license ").append(e.getMessage()).toString(), e);
+			throw new LicenseException(L10NUtils.format("002101", e.getMessage()), e);
 		}
 	}
 

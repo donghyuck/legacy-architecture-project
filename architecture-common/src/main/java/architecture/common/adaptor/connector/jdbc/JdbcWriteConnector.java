@@ -23,16 +23,15 @@ public class JdbcWriteConnector extends AbstractJdbcConnector implements WriteCo
 		}		
 		List<ParameterMapping> parameterMappings = context.getObject("parameterMappings", List.class);
 		
-		@SuppressWarnings("unchecked")
-				
 		
 		boolean isBatch = context.getObject("batch", Boolean.class);
 		if(isBatch){
 			List<Map<String, Object>> data = context.getObject("data", List.class);
+			
 			return deliver(queryString, parameterMappings, data);
 		}else{
 			Object data = context.getObject("data");
-			log.debug( "row:" + data);
+			
 			if(data instanceof Map)
 				return deliver(queryString, parameterMappings, (Map<String, Object>) data);	
 			else 

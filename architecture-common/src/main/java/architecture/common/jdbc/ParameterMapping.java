@@ -1,54 +1,71 @@
 package architecture.common.jdbc;
 
 import architecture.common.exception.ConfigurationError;
+import architecture.common.util.L10NUtils;
 
 /**
  * @author  donghyuck
  */
 public class ParameterMapping {
+	
+	private String cipher ;
+	
+	private String cipherKey;
+	
+	private String cipherKeyAlg;
 
-	/**
-	 * @uml.property  name="index"
-	 */
+	private int size;
+	
 	private int index;
-
-	/**
-	 * @uml.property  name="property"
-	 */
+	
 	private String property;
 
-	/**
-	 * @uml.property  name="encoding"
-	 */
 	private String encoding;
 	
-	/**
-	 * @uml.property  name="jdbcType"
-	 * @uml.associationEnd  
-	 */
 	private JdbcType jdbcType;
 
-	/**
-	 * @uml.property  name="jdbcTypeName"
-	 */
 	private String jdbcTypeName;
 
-	/**
-	 * @uml.property  name="pattern"
-	 */
 	private String pattern;
 	
-	/**
-	 * @uml.property  name="primary"
-	 */
 	private boolean primary ;
 	
-	/**
-	 * @uml.property  name="javaType"
-	 */
 	private Class<?> javaType = Object.class;
 
 	private ParameterMapping() {}
+	
+	public int getSize() {
+		return size;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public String getCipher() {
+		return cipher;
+	}
+
+	public String getCipherKey() {
+		return cipherKey;
+	}
+
+	public String getCipherKeyAlg() {
+		return cipherKeyAlg;
+	}
+
+	public void setCipher(String cipher) {
+		this.cipher = cipher;
+	}
+
+	public void setCipherKey(String cipherKey) {
+		this.cipherKey = cipherKey;
+	}
+
+	public void setCipherKeyAlg(String cipherKeyAlg) {
+		this.cipherKeyAlg = cipherKeyAlg;
+	}
+
 	
 	/**
 	 * @return
@@ -114,7 +131,6 @@ public class ParameterMapping {
 		return jdbcTypeName;
 	}
 
-
 	/**
 	 * @return
 	 * @uml.property  name="pattern"
@@ -122,7 +138,8 @@ public class ParameterMapping {
 	public String getPattern() {
 		return pattern;
 	}
-
+	
+	
 
 	/**
 	 * @author  donghyuck
@@ -154,11 +171,31 @@ public class ParameterMapping {
 		    return this;
 		}
 
+		public Builder cipher(String cipher) {
+		    parameterMapping.cipher = cipher;		    
+		    return this;
+		}
+
+		public Builder cipherKey(String cipherKey) {
+		    parameterMapping.cipherKey = cipherKey;		    
+		    return this;
+		}
+		
+		public Builder cipherKeyAlg(String cipherKeyAlg) {
+		    parameterMapping.cipherKeyAlg = cipherKeyAlg;		    
+		    return this;
+		}
+		
 		public Builder encoding(String encoding) {
 		    parameterMapping.encoding = encoding;		    
 		    return this;
 		}
 
+		public Builder size(String sizeString) {
+		    parameterMapping.size = Integer.parseInt(sizeString);		    
+		    return this;
+		}
+		
 		public Builder primary(boolean primary) {
 		    parameterMapping.primary = primary;		    
 		    return this;
@@ -187,12 +224,12 @@ public class ParameterMapping {
 		protected JdbcType resolveJdbcType(String alias) {
 			if (alias == null)
 				return null;
+			
 			try {
 				return JdbcType.valueOf(alias.toUpperCase());
-			} catch (IllegalArgumentException e) {
-				throw new ConfigurationError("Error resolving JdbcType. Cause: " + e, e);
+			} catch (IllegalArgumentException e) {				
+				throw new ConfigurationError(L10NUtils.format("002003", e.getMessage()), e);
 			}
 		}
 	}
-
 }

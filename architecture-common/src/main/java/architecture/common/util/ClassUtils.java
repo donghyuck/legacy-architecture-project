@@ -21,9 +21,13 @@ import java.net.URL;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class ClassUtils extends org.apache.commons.lang.ClassUtils {
 
-
+	private static final Log log = LogFactory.getLog(ClassUtils.class);
+	
     public static InputStream getResourceAsStream(String name)
     {    	
         return loadResource(name);
@@ -45,7 +49,7 @@ public class ClassUtils extends org.apache.commons.lang.ClassUtils {
             }
             catch(Throwable e)
             {
-                //logger.warn((new StringBuilder()).append("Attempt to Load the resource ").append(name).append(" from plugin classloaders has failed, ").append("perhaps the application has not been initialized.").toString());
+                log.warn(L10NUtils.format("002202", name), e);
             }
         return in;
     }

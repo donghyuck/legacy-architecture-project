@@ -15,20 +15,20 @@
  */
 package architecture.common.util.vfs;
 
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileSystemException;
-import org.apache.commons.vfs.FileSystemManager;
-import org.apache.commons.vfs.VFS;
+import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSystemException;
+import org.apache.commons.vfs2.FileSystemManager;
+import org.apache.commons.vfs2.VFS;
 
 public class VFSUtils {
 	
 	public static FileObject resolveFile(String uri) throws FileSystemException {
 		try {
 			FileSystemManager vmgr = VFS.getManager();
-			FileObject fo = vmgr.resolveFile(uri);		
+			FileObject fo = vmgr.resolveFile(uri);
 			return fo; 
 		} catch (FileSystemException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
 		return null;		
 	}

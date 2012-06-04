@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import architecture.common.exception.NullArgumentException;
+import architecture.common.util.L10NUtils;
 
 public class URLDirectoryScanner extends AbstractDirectoryScanner {
 	
@@ -40,34 +41,33 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 	
 	public void addScanURL(final URL url) {
 		if (url == null)
-			throw new NullArgumentException(); //MessageFormatter.format("003514"));
+			throw new NullArgumentException(L10NUtils.format("002088"));
 		try {
 			// check if this is a valid url
 			url.openConnection().connect();
 		} catch (IOException e) {
-			e.printStackTrace();
 			// logger a warning in case this is not a transient error
 			// that needs fixing (like a wrong scan url setting)
-			//log.warn(MessageFormatter.format("003515", e.getClass().getName(), e.getMessage()));
-		}
-		urlList.add(url);
-		//if(log.isDebugEnabled())
-		//	log.debug( MessageFormatter.format("003516", url ));
+			log.warn(L10NUtils.format("002089", e.getClass().getName(), e.getMessage()));
+		}		
+		urlList.add(url);		
+		if(log.isDebugEnabled())
+			log.debug( L10NUtils.format("002090", url ));
 	}
 	
 	public void removeScanURL(final URL url) {
 		if (url == null)
-			throw new NullArgumentException(); //MessageFormatter.format("003514"));
+			throw new NullArgumentException(L10NUtils.format("002088"));
 		boolean success = urlList.remove(url);
 		if (success) {
-			//if(log.isDebugEnabled())
-			//	log.debug(MessageFormatter.format("003517", url ));
+			if(log.isDebugEnabled())
+				log.debug(L10NUtils.format("002091", url ));
 		}
 	}
 	
 	public boolean hasScanURL(final URL url) {
 		if (url == null)
-			throw new NullArgumentException(); //MessageFormatter.format("003514"));
+			throw new NullArgumentException(L10NUtils.format("002088"));
 
 		return urlList.contains(url);
 	}
@@ -85,7 +85,7 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 	public void scan() throws Exception {
 		
 		if (urlList == null)
-			throw new IllegalStateException(); //MessageFormatter.format("003518"));		
+			throw new NullArgumentException(L10NUtils.format("002088"));
 				
 		HashSet<String> oldList = new HashSet<String>(files.keySet());
 		List<FileAction> actions = new LinkedList<FileAction>();
@@ -113,14 +113,14 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 		                now.setNewFile(true);
 		                files.put(now.getPath(), now);
 		                
-		               // if(log.isDebugEnabled())
-		               // 	log.debug(MessageFormatter.format("003520", now.getPath()));
+		                if(log.isDebugEnabled())
+		                	log.debug(L10NUtils.format("002094", now.getPath()));
 		            } else {
 		                oldList.remove(then.getPath());
 		                if(now.isSame(then)) { // File is the same as the last time we scanned it
 		                    if(then.isChanging()) {
-		                    	//if(log.isDebugEnabled())
-		                    	//	log.debug(MessageFormatter.format("003521", now.getPath()));
+		                    	if(log.isDebugEnabled())
+		                    		log.debug(L10NUtils.format("002095", now.getPath()));
 		                        // Used to be changing, now in (hopefully) its final state
 		                        if(then.isNewFile()) {
 		                            actions.add(new FileAction(FileAction.NEW_FILE, child, then));
@@ -134,8 +134,8 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 		                    // and later when it stops changing we'll do the add or update as appropriate.
 		                    now.setNewFile(then.isNewFile());
 		                    files.put(now.getPath(), now);
-		                    //if(log.isDebugEnabled())
-		                    //	log.debug(MessageFormatter.format("003522", now.getPath()));
+		                    if(log.isDebugEnabled())
+		                    	log.debug(L10NUtils.format("002096", now.getPath()));
 		                    
 		                }
 		            }
@@ -149,8 +149,8 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
             
         for(String name : oldList ){  
             FileInfo info = (FileInfo) files.get(name);
-            //if(log.isDebugEnabled())
-            //	log.debug(MessageFormatter.format("003523", name ));
+            if(log.isDebugEnabled())
+            	log.debug(L10NUtils.format("002097", name ));
             
             if(info.isNewFile()) { // Was never added, just whack it
                 files.remove(name);
@@ -193,8 +193,8 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
                         listener.fileChanged(action.child);
                     }
                 } catch (Exception e) { 
-                	log.error(e);
-                    //log.error(MessageFormatter.format("003524", action.getActionName(), action.child.getAbsolutePath()), e);
+                	//log.error(e);
+                    log.error(L10NUtils.format("002098", action.getActionName(), action.child.getAbsolutePath()), e);
                 } finally {
                     resolveFile(action);
                 }
@@ -387,7 +387,7 @@ public class URLDirectoryScanner extends AbstractDirectoryScanner {
 
         public boolean isSame(FileInfo info) {
             if(!path.equals(info.path)) {
-                //throw new IllegalArgumentException(MessageFormatter.format("003525"));
+                throw new IllegalArgumentException(L10NUtils.format("002099"));
             }
             return size == info.size && modified == info.modified;
         }

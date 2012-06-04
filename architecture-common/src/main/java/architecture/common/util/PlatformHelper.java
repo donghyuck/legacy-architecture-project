@@ -44,12 +44,8 @@ public class PlatformHelper {
 			stdErr.close();			
 			
 			System.out.println(stdout.toString());
-			System.out.println(errout.toString());
-			
-		} catch (IOException e) {
-
-		}
-		
+			System.out.println(errout.toString());			
+		} catch (IOException e) {}		
 	}
 	
 }

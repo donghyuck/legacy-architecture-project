@@ -8,10 +8,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import architecture.common.exception.ConfigurationError;
 import architecture.common.util.ClassUtils;
+import architecture.common.util.L10NUtils;
 
 /**
  * IBatis org.apache.ibatis.type.TypeAliasRegistry 의 소스에서 가져옴.
@@ -80,6 +82,8 @@ public class TypeAliasRegistry {
 		registerAlias("collection", Collection.class);
 		registerAlias("iterator", Iterator.class);
 
+		registerAlias("locale", Locale.class);
+		
 		registerAlias("ResultSet", ResultSet.class);
 	}
 
@@ -98,20 +102,18 @@ public class TypeAliasRegistry {
 			}
 			return value;
 		} catch (ClassNotFoundException e) {
-			throw new IllegalArgumentException("Could not resolve type alias '" + string + "'.  Cause: " + e, e);
+			throw new IllegalArgumentException( L10NUtils.format("002001", string, e.getMessage()), e);
 		}
 	}
-
 	 
 	public void registerAlias(String alias, Class<?> value) {
 	    assert alias != null;
 	    String key = alias.toLowerCase();
 	    if (TYPE_ALIASES.containsKey(key) && !TYPE_ALIASES.get(key).equals(value.getName()) && TYPE_ALIASES.get(alias) != null) {
 	      if (!value.equals(TYPE_ALIASES.get(alias))) {
-	        throw new ConfigurationError("The alias '" + alias + "' is already mapped to the value '" + TYPE_ALIASES.get(alias).getName() + "'.");
+	        throw new ConfigurationError(L10NUtils.format("002002", alias, TYPE_ALIASES.get(alias).getName()));
 	      }
 	    }
 	    TYPE_ALIASES.put(key, value);
-	  }
-	
+	  }	
 }
