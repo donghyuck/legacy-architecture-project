@@ -11,7 +11,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import architecture.ee.i18n.I18nLocalizer;
-import architecture.ee.user.User;
 
 public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
 
@@ -52,26 +51,6 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
         return valid;
     }
     
-    public static Locale getUserLocale(HttpServletRequest request, User user)
-    {
-        return getUserLocale(request, user, true);
-    }
-    
-    public static Locale getUserLocale(HttpServletRequest request, User user, boolean useDefault)
-    {
-        Locale locale = null;        
-        if(ApplicationHelper.getApplicationBooleanProperty(ApplicationConstants.SKIN_USERS_CHOOSE_LOCALE_PROP_NAME, true))
-            if(user!= null && user.getProperties().get(ApplicationConstants.USER_LOCALE_PROP_NAME) != null)
-                locale = localeCodeToLocale((String)user.getProperties().get(ApplicationConstants.USER_LOCALE_PROP_NAME));
-            else
-                locale = getLocaleFromRequestHeader(request);        
-        if(locale != null)
-            return locale;
-        if(useDefault)
-            return ApplicationHelper.getLocale();
-        else
-            return null;
-    }
     
     public static Locale getLocaleFromRequestHeader(HttpServletRequest request)
     {
