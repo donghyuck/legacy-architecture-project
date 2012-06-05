@@ -5,25 +5,32 @@
 		<artifactId>architecture-parent</artifactId>
 		<groupId>architecture</groupId>
 		<version>1.0.0.RELEASE</version>
-		<relativePath>../architecture-parent</relativePath>
 	</parent>
-	<groupId>architecture.ee</groupId>
+	<groupId>architecture</groupId>
 	<artifactId>architecture-ee</artifactId>
-	<name>POWER ARCHITECTURE EE</name>
+	<name>APPLICATION EE ARCHITECTURE</name>
+	<description>자바기반의 엔터프라이즈 어플리케이션 개발 아키텍처.</description>
+	<version>1.0.2.RELEASE</version>
 	<packaging>jar</packaging>
-	<description>자바기반의 웹 어플리케이션 개발 프레임워크</description>
-	<version>1.0.0.RELEASE</version>
 	<contributors>
 		<contributor>
 			<name>Donghyuch Son</name>
 			<email>andang311@inkium.com</email>
 		</contributor>
 	</contributors>
+	<scm>
+		<url>https://power-j.googlecode.com/svn/trunk/architecture-ee</url>
+	</scm>
 	<organization>
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
 
+	<properties>
+		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
+		<project.test.skip>true</project.test.skip>
+	</properties>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -35,9 +42,9 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>architecture.common</groupId>
+			<groupId>architecture</groupId>
 			<artifactId>architecture-common</artifactId>
-			<version>1.0.0.RELEASE</version>
+			<version>1.0.2.RELEASE</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -48,18 +55,13 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
-			<version>3.0.5.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${project.dependency.spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${project.dependency.spring.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -122,31 +124,87 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${project.dependency.spring-security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${project.dependency.spring-security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${project.dependency.spring-security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-acl</artifactId>
-			<version>3.0.5.RELEASE</version>
+			<version>${project.dependency.spring-security.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>springframework</groupId>
+			<artifactId>spring-mock</artifactId>
+			<version>1.2.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>1.4</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>bsf</groupId>
+			<artifactId>bsf</artifactId>
+			<version>2.4.0</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-oxm</artifactId>
+			<version>${project.dependency.spring.version}</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.2</version>
+			<type>jar</type>
+			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>dom4j</artifactId>
+					<groupId>dom4j</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency>
+			<groupId>net.sourceforge.jtds</groupId>
+			<artifactId>jtds</artifactId>
+			<version>1.2.4</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
+	<distributionManagement>
+		<repository>
+			<id>hadoop-master</id>
+			<name>hadoop-master-releases</name>
+			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+		</repository>
+	</distributionManagement>
 
 </project>
