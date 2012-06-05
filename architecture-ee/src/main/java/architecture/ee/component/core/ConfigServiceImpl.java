@@ -14,8 +14,8 @@ import javax.sql.DataSource;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.FastDateFormat;
-import org.apache.commons.vfs.FileObject;
-import org.apache.commons.vfs.FileSystemException;
+import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSystemException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +26,6 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.component.admin.AdminSqlQueryFactory;
-import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder;
 import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.LocaleUtils;
 

@@ -12,12 +12,11 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.vfs.FileObject;
+import org.apache.commons.vfs2.FileObject;
 
 import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.component.admin.AdminSqlQueryFactory;
-import architecture.ee.jdbc.sequencer.SequencerFactory;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 
