@@ -2,8 +2,8 @@ package architecture.ee.jdbc.sequencer.incrementer;
 
 import java.util.Map;
 
-import architecture.ee.jdbc.sequencer.SequencerFactory;
 import architecture.ee.jdbc.sequencer.Sequencer;
+import architecture.ee.jdbc.sequencer.SequencerFactory;
 import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 
 /**

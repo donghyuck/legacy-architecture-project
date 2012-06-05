@@ -5,7 +5,6 @@ import javax.servlet.ServletContext;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.util.MethodInvoker;
 import org.springframework.web.context.ContextLoader;
 
 import architecture.common.event.api.EventListener;

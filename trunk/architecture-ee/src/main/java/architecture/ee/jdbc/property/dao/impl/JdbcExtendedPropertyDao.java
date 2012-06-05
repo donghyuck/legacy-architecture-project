@@ -14,7 +14,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
 import architecture.common.util.StringUtils;
-
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 

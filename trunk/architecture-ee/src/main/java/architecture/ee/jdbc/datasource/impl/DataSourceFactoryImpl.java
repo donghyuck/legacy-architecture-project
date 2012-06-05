@@ -10,7 +10,6 @@ import org.springframework.jndi.JndiTemplate;
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.util.StringUtils;
-
 import architecture.ee.component.admin.AdminHelper;
 
 public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
