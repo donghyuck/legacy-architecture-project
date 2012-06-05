@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import net.sf.ehcache.CacheManager;
-
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ApplicationHelperFactory;
@@ -16,12 +15,8 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.service.AdminService;
-
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.i18n.I18nTextManager;
-import architecture.ee.security.role.RoleManager;
-import architecture.ee.user.GroupManager;
-import architecture.ee.user.UserManager;
 
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
@@ -56,18 +51,6 @@ public final class ApplicationHelper {
 
 	public static I18nTextManager getI18nTextManager(){
 		return getComponent(I18nTextManager.class);
-	}
-	
-	public static UserManager getUserManager(){
-		return getComponent(UserManager.class);
-	}
-
-	public static GroupManager getGroupManager(){
-		return getComponent(GroupManager.class);
-	}
-	
-	public static RoleManager getRoleManager(){
-		return getComponent(RoleManager.class);
 	}
 	
 	public static boolean isSetupComplete(){
