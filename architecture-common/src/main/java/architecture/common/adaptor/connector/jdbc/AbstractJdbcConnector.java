@@ -25,6 +25,7 @@ import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.JdbcUtils;
 
 import sun.misc.BASE64Decoder;
+
 import architecture.common.adaptor.Connector;
 import architecture.common.jdbc.JdbcType;
 import architecture.common.jdbc.ParameterMapping;
@@ -68,8 +69,6 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 				return columnName;
 			}
 			protected Object getColumnValue(ResultSet rs, int index) throws SQLException {
-				
-				//LOG.debug( "parameterMappings :" + parameterMappings.size());
 				
 				for(ParameterMapping mapping : parameterMappings){					
 					//LOG.debug( index + " mapping match :" + mapping.getIndex());					
@@ -124,14 +123,18 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 						}else if (Long.class == mapping.getJavaType() ){
 							String value = rs.getString(index);
 							if(StringUtils.isEmpty(value))
-								value = "0";
-							
+								value = "0";							
 							return new Long(value);
 						}else if (Integer.class == mapping.getJavaType() ){
 							String value = rs.getString(index);
 							if(StringUtils.isEmpty(value))
 								value = "0";							
 							return new Integer(value);
+						}else if (Double.class == mapping.getJavaType()){
+							String value = rs.getString(index);
+							if(StringUtils.isEmpty(value))
+								value = "0";	
+							return new Double(value);
 						}
 					}
 				}
@@ -185,7 +188,6 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
                 		}
                 	}
                 	
-                	
                 	if (valueToUse == null)
                 		ps.setNull(mapping.getIndex(), jdbcType.TYPE_CODE);
                 	else                	
@@ -207,7 +209,6 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 		log.debug("delivering : 1");
 		
 		return getJdbcTemplate().update(queryString, new PreparedStatementSetter(){
-			
 			
 			public void setValues(PreparedStatement ps) throws SQLException {
 				
