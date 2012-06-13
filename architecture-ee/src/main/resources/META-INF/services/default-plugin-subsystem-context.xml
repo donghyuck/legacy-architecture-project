@@ -15,13 +15,13 @@
         Define Bootstrap Context
 	]]>
 	</description>
-
 	<!-- ================================================ -->
 	<!-- 1. Dao                                           -->
 	<!-- ================================================ -->
 	<bean id="pluginDao" class="architecture.ee.plugin.dao.impl.JdbcPluginDao"
 		parent="jdbcDaoSupport" 
 		depends-on="sequenceDao" />
+		
 	<!-- ================================================ -->
 	<!-- 2. Manager                                       -->
 	<!-- ================================================ -->
@@ -44,5 +44,6 @@
 		p:timeToIdle="30"
 		p:timeToLive="60" 
 		p:eternal="false" 
-		p:diskExpiryThreadIntervalSeconds="0" />			
+		p:diskExpiryThreadIntervalSeconds="0" />
+					
 </beans>
