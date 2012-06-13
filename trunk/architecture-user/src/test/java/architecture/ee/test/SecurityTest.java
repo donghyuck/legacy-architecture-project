@@ -6,7 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
 
-import architecture.ee.security.permission.Permissions;
+import architecture.user.security.permission.Permissions;
 
 public class SecurityTest {
 
