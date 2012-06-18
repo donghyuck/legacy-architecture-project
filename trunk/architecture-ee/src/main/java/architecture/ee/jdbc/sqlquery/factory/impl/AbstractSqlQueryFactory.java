@@ -16,11 +16,11 @@ import org.apache.commons.vfs2.FileObject;
 
 import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.component.admin.AdminSqlQueryFactory;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 
-public abstract class AbstractSqlQueryFactory implements AdminSqlQueryFactory {
+public abstract class AbstractSqlQueryFactory implements SqlQueryFactory {
 	
 	protected Log log = LogFactory.getLog(getClass());
 	

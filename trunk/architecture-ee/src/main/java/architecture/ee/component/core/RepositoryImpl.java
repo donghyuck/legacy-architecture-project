@@ -156,12 +156,12 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     public void setServletContext(ServletContext servletContext){
     	
     	// 1. 서블릿 컨텍스트에 설정된 프로퍼티 값을 검사 : ARCHITECTURE_INSTALL_ROOT
-    	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY );    	
+    	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY );    	
     	if(!StringUtils.isEmpty(value)){
     		try {        		
     			ServletContextResource resource = new ServletContextResource(servletContext, value);          		
         		File file = resource.getFile();
-        		log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY + ":" + file.getAbsolutePath());
+        		log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY + ":" + file.getAbsolutePath());
         		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
 				this.rootFileObject = obj;
 				setState(State.INITIALIZED);
@@ -174,7 +174,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     		FileObject obj;
 			try {
 				obj = VFSUtils.resolveFile(value);
-				log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY + ":" +  obj.getName().getURI()); 
+				log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY + ":" +  obj.getName().getURI()); 
 				this.rootFileObject = obj;				
 				setState(State.INITIALIZED);
 			} catch (Throwable e) {
@@ -200,19 +200,19 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     public String getEnvironmentRootPath()
     {    	
     	// 1. Java System Property 에서 검색: architecture.install.root
-        String envRootPath = System.getProperty(ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_KEY);  
+        String envRootPath = System.getProperty(ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_KEY);  
         
         // 2. Jndi 에서 검색 : architecture_install_root
         if(envRootPath == null || "".equals(envRootPath))
             try
             {
-            	envRootPath = jndiTemplate.lookup("java:comp/env/" + ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_ENV_KEY.toLowerCase(), String.class);                
+            	envRootPath = jndiTemplate.lookup("java:comp/env/" + ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY.toLowerCase(), String.class);                
             }
             catch(Exception e) { }
         // 3.     
         if(envRootPath == null || "".equals(envRootPath))
         {
-            envRootPath = System.getenv(ApplicationConstants.ARCHITECTURE_RUNTIME_ROOT_KEY);
+            envRootPath = System.getenv(ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_KEY);
             if(envRootPath != null && !"".equals(envRootPath))
                 log.info((new StringBuilder()).append("Architecture root set from system property to '").append(envRootPath).append("'.").toString());
         }

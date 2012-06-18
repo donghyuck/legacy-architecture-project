@@ -110,6 +110,11 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
 		return (Collection<String>)new ArrayList(properties.keySet());
 	}
 
+	public String getStringProperty(String property, String defaultValue) {
+		
+		return StringUtils.defaultString(get(property), defaultValue);
+	}
+	
 	public boolean containsKey(Object key) {
 		return properties.containsKey(key);
 	}

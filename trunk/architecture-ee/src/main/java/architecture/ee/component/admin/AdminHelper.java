@@ -44,7 +44,7 @@ public final class AdminHelper {
 	}
 	
 	public static EventPublisher getEventPublisher(){
-		return Bootstrap.getEventPublisher();
+		return Bootstrap.getBootstrapComponent(EventPublisher.class);
 	}
 	
 	public static boolean isSetupComplete(){
@@ -67,11 +67,11 @@ public final class AdminHelper {
 	}
 	
 	public static AdminService getAdminService(){
-		return Bootstrap.getAdminService();
+		return Bootstrap.getBootstrapComponent(AdminService.class);
 	}
 	
 	public static ConfigService getConfigService(){
-		return Bootstrap.getConfigService();
+		return Bootstrap.getBootstrapComponent(ConfigService.class);
 	}
 	
 	public static ConfigRoot getConfigRoot(){
@@ -118,8 +118,6 @@ public final class AdminHelper {
 		}		
 		return getCacheManager().getCache(name);		
 	}	
-
-	
 	
 	public static String getMessage(String code, Object[] args, Locale locale){	
 		

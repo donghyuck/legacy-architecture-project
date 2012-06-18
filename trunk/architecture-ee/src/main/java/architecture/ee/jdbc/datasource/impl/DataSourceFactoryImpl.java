@@ -9,6 +9,7 @@ import org.springframework.jndi.JndiTemplate;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.util.L10NUtils;
 import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 
@@ -19,11 +20,16 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
 	public DataSource getDataSource() {
+		return getDataSource("default");
+	}
+	public DataSource getDataSource(String name) {
 		
-		DataSource dataSource = null;		
+		DataSource dataSource = null;
 		
 		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
-		String jndiTag = "database.default.pooledDataSourceProvider";
+				
+		String jndiTag = "database."+ name + ".pooledDataSourceProvider";
+		
 		if( setupProperties.getChildrenNames(jndiTag).size() > 0 ){
 			String jndiName = setupProperties.get( jndiTag + ".jndiName"); 
 			if(StringUtils.isNotEmpty(jndiName)){
@@ -34,9 +40,11 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 					dataSource = null;
 				}
 			}
+		}else{
+			log.debug(L10NUtils.format("003055", jndiTag));			
 		}		
 		
-		String pooledTag = "database.default.pooledDataSourceProvider";		
+		String pooledTag = "database."+ name + ".pooledDataSourceProvider";		
 		
 		if( dataSource == null && setupProperties.getChildrenNames(pooledTag).size() > 0 ){
 			String driverClassName = setupProperties.get( pooledTag + ".driverClassName"); 
@@ -78,6 +86,8 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			basic.setTimeBetweenEvictionRunsMillis(timeBetweenEvictionRunsMillis);
 			basic.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
 			dataSource = basic;
+		}else{
+			log.debug(L10NUtils.format("003055", pooledTag));		
 		}
 		 				
 		return dataSource;
