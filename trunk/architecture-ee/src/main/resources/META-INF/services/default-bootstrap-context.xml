@@ -14,10 +14,7 @@
 	<!-- ================================================ -->
 	<!-- 1. Task Engine                                   -->
 	<!-- ================================================ -->
-	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor"
-		p:corePoolSize="5" 
-		p:maxPoolSize="10" 
-		p:queueCapacity="25" />
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" p:corePoolSize="5" p:maxPoolSize="10" p:queueCapacity="25" />
 
 	<bean id="taskEngine" class="architecture.common.task.TaskEngine" />
 
@@ -30,8 +27,7 @@
 	
 	<bean id="listenerHandlerConfiguration" class="architecture.common.event.internal.ListenerHandlerConfigurationImpl" />
 
-	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl"
-		depends-on="eventDispatcher, listenerHandlerConfiguration" >
+	<bean id="eventPublisher" class="architecture.common.event.internal.EventPublisherImpl" depends-on="eventDispatcher, listenerHandlerConfiguration" >
 		<constructor-arg index="0" ref="eventDispatcher" />
 		<constructor-arg index="1" ref="listenerHandlerConfiguration" />
 	</bean>
@@ -46,17 +42,9 @@
 	<!-- ================================================ -->	
 	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />
 
-	<bean id="configService" class="architecture.ee.component.core.ConfigServiceImpl" init-method="initialize" 
-		depends-on="eventPublisher, sqlQueryFactory, dataSource"
-		p:eventPublisher-ref="eventPublisher"
-		p:adminSqlQueryFactory-ref="sqlQueryFactory"
-		p:dataSource-ref="dataSource" />
+	<bean id="configService" class="architecture.ee.component.core.lifecycle.ConfigServiceImpl" init-method="initialize" depends-on="eventPublisher, sqlConfiguration, dataSource" p:eventPublisher-ref="eventPublisher" p:sqlConfiguration-ref="sqlConfiguration" p:dataSource-ref="dataSource" />
 
-	<bean id="adminService" class="architecture.ee.component.core.AdminServiceImpl" init-method="initialize" 
-		depends-on="eventPublisher, contextLoader, configService"
-		p:eventPublisher-ref="eventPublisher" 
-		p:contextLoader-ref="contextLoader"
-		p:configService-ref="configService" />
+	<bean id="adminService" class="architecture.ee.component.core.lifecycle.AdminServiceImpl" init-method="initialize" depends-on="eventPublisher, contextLoader, configService" p:eventPublisher-ref="eventPublisher" p:contextLoader-ref="contextLoader" p:configService-ref="configService" />
 		
 	<bean id="licenseManager" class="architecture.common.license.LicenseManagerFactory"  factory-method="getLicenseManager" />
 

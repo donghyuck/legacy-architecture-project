@@ -26,17 +26,5 @@
 			</list>
 		</property>	    		 
     </bean>        
-	<!-- =================================================== -->
-	<!-- 2. SqlQuery Factory & Support                       -->
-	<!-- =================================================== -->
-	<bean id="sqlQueryFactory" factory-bean="sqlQueryFactoryBuilder" factory-method="createSqlQueryFactory" 
-	    p:dataSource-ref="dataSource" 
-	    scope="singleton"  />
-	
-	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" 
-	    depends-on="sqlQueryFactory" />	
-	
-	<bean id="sqlQueryClient" class="architecture.ee.component.data.SqlQueryClientImpl" 
-	    parent="sqlQuerySupport" 
-	    p:dataSource-ref="dataSource" />	    	
+	    
 </beans>	

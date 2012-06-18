@@ -17,28 +17,23 @@
 	<!-- ================================================ -->
 	<bean id="userDao" class="architecture.ee.user.dao.impl.JdbcUserDao"
 		parent="jdbcDaoSupport" 
-		depends-on="sequenceDao, extendedPropertyDao"
-		p:sequenceDao-ref="sequenceDao" 
+		depends-on="extendedPropertyDao"
 		p:extendedPropertyDao-ref="extendedPropertyDao" />
 
 	<bean id="groupDao" class="architecture.ee.user.dao.impl.JdbcGroupDao"
 		parent="jdbcDaoSupport" 
-		depends-on="sequenceDao, extendedPropertyDao"
-		p:sequenceDao-ref="sequenceDao" 
+		depends-on="extendedPropertyDao"
 		p:extendedPropertyDao-ref="extendedPropertyDao" />
 
 	<bean id="profileFiledDao" class="architecture.ee.user.dao.impl.JdbcProfileFiledDao"
 		parent="jdbcDaoSupport" 
-		depends-on="sequenceDao, extendedPropertyDao"
-		p:sequenceDao-ref="sequenceDao" />
+		depends-on="extendedPropertyDao"  />
 
 	<bean id="userProfileDao" class="architecture.ee.user.dao.impl.JdbcUserProfileDao"
 		parent="jdbcDaoSupport" />
 
 	<bean id="roleDao" class="architecture.ee.security.role.dao.impl.JdbcRoleDao"
-		parent="jdbcDaoSupport" 
-		depends-on="sequenceDao" 
-		p:sequenceDao-ref="sequenceDao" />
+		parent="jdbcDaoSupport" />
 			
 	<!-- ================================================ -->
 	<!-- Manager                                          -->

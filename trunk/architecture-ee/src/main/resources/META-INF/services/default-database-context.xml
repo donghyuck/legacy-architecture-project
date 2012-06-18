@@ -8,11 +8,10 @@
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
-       
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">       
 	<description>
 	<![CDATA[
-        Define Bootstrap Context
+        Define Default Datasource Context
 	]]>
 	</description>
 	
@@ -23,7 +22,7 @@
 		class="architecture.common.jdbc.datasource.DataSourceFactory"
 		destroy-method="close"
 		factory-method="getDataSource" />
-			
+					
 	<!-- ================================================ -->
 	<!-- 2. Utils                                         -->
 	<!-- ================================================ -->	
@@ -57,51 +56,5 @@
 			</map>
 		</property>
 	</bean>	
-	<!-- ================================================ -->
-	<!-- 3. SQL                                           -->
-	<!-- ================================================ -->	
-    <bean id="sqlQueryFactory"
-    	class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder"
-    	factory-method="getSqlQueryFactory" init-method="initialize" p:incrementerSupported="false" >
-    	<property name="resourceLocations">
-			<list>
-				<value>res:sql/default-framework-sqlset.xml</value>
-				<value>res:sql/default-plugin-framework-sqlset.xml</value>
-				<value>res:sql/default-web-framework-sqlset.xml</value>
-				<value>res:sql/default-web-ui-framework-sqlset.xml</value>
-			</list>
-    	</property>
-    	<property name="dataSource" ref="dataSource" />
-    </bean>
-	
-	<bean id="sqlConfiguration" factory-bean="sqlQueryFactory" factory-method="getConfiguration" />
-	
-	<!-- =================================================== -->
-	<!-- 3. Sequencer                                        -->
-	<!-- =================================================== -->		
-	<bean id="maxValueIncrementer" factory-bean="sqlQueryFactory" factory-method="getMaxValueIncrementer" />
-			
-	<!-- =================================================== -->
-	<!-- 4. Dao                                              -->
-	<!-- =================================================== -->	
-	<bean id="jdbcDaoSupport" abstract="true" 
-	    p:configuration-ref="sqlConfiguration" 
-	    p:dataSource-ref="dataSource" 
-	    p:maxValueIncrementer-ref="maxValueIncrementer"
-	    depends-on="sqlConfiguration, dataSource, maxValueIncrementer" />
-	    
- 	<bean id="extendedPropertyDao" 
- 	    class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" 
- 	    parent="jdbcDaoSupport" />
- 	    	     	    
-	<bean id="sqlQuerySupport" abstract="true" 
-	    p:maxValueIncrementer-ref="maxValueIncrementer"
-	    p:sqlQueryFactory-ref="sqlQueryFactory" 
-	    depends-on="sqlQueryFactory" />	
-	
-	<bean id="sqlQueryClient" parent="sqlQuerySupport" 
-	    class="architecture.ee.component.SqlQueryClientImpl" 	    
-	    p:dataSource-ref="dataSource" />
-	     	    
 		
 </beans>
