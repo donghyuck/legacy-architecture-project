@@ -43,6 +43,7 @@ import architecture.ee.spring.lifecycle.SpringAdminService;
 public class ApplicationHelperImpl implements ApplicationHelper, ApplicationListener<ApplicationEvent> {
 
 	private Log log = LogFactory.getLog(getClass());
+	
 	private ConfigurableApplicationContext applicationContext;
     /**
 	 */
@@ -172,8 +173,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 			throw new IllegalStateException();
 		}
 		getConfigurableApplicationContext().refresh();
-	}
-	
+	}	
 	
 	public void onEvent(StateChangeEvent event) {		
 		Object source = event.getSource();
