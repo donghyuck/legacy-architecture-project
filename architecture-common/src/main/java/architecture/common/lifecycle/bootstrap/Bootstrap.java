@@ -4,9 +4,7 @@ import javax.servlet.ServletContext;
 
 import org.springframework.context.ConfigurableApplicationContext;
 
-import architecture.common.event.api.EventPublisher;
-import architecture.common.lifecycle.ConfigService;
-import architecture.common.lifecycle.service.AdminService;
+import architecture.common.lifecycle.State;
 import architecture.common.util.ImplFactory;
 
 /**
@@ -24,12 +22,9 @@ public class Bootstrap {
 		
 		public void shutdown(ServletContext servletContext);
 		
+		public State getState();
 	}
 	
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
 	private static Implementation impl = null;
     
     static 
@@ -50,18 +45,6 @@ public class Bootstrap {
 		return impl.getBootstrapApplicationContext().getBeanDefinitionNames();
 	}
 	
-	public static AdminService getAdminService(){
-		return impl.getBootstrapComponent(AdminService.class);
-	}
-
-	public static EventPublisher getEventPublisher(){
-		return impl.getBootstrapComponent(EventPublisher.class);
-	}
-	
-	public static ConfigService getConfigService(){
-		return impl.getBootstrapComponent(ConfigService.class);
-	}
-
 	public static final void boot(ServletContext servletContext){	
 		impl.boot(servletContext);
 	}
@@ -69,5 +52,9 @@ public class Bootstrap {
 	
 	public static final void shutdown(ServletContext servletContext){
 		impl.shutdown(servletContext);
+	}
+	
+	public static final State getState(){
+		return impl.getState();
 	}
 }

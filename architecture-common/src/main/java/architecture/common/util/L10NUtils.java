@@ -198,9 +198,14 @@ public class L10NUtils {
 	
 	public Localizer getLocalizerBundle(String key, Locale locale, ClassLoader classloader ) throws MissingResourceException{
 		
-		LocalizerKey keyToUse = getLocalizerKey(key) ;		
+		LocalizerKey keyToUse = getLocalizerKey(key) ;
+		
+		log.debug("resourcebundle:" + keyToUse.bundleName);
+		
 		if( keyToUse != null )
-			return LocalizerFactory.getLocalizer(keyToUse.bundleName, locale, classloader);		
+			return LocalizerFactory.getLocalizer(keyToUse.bundleName, locale, classloader);	
+		
+		
 		return null;
 	}
 	

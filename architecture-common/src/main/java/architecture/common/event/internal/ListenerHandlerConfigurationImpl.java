@@ -8,7 +8,7 @@ import architecture.common.event.spi.ListenerHandler;
 import com.google.common.collect.Lists;
 
 /**
- * <p>The default configuration that only uses the {@link com.atlassian.event.internal.AnnotatedMethodsListenerHandler}.</p>
+ * <p>The default configuration that only uses the {@link architecture.common.event.internal.AnnotatedMethodsListenerHandler}.</p>
  * <p>Products that need to remain backward compatible will have to override this configuration</p>
  */
 public class ListenerHandlerConfigurationImpl implements ListenerHandlersConfiguration
