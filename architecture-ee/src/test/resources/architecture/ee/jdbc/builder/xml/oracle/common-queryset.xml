@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sql-queryset name="COMMON" description="공통 쿼리문들을 정의하고 있다">
+<sql-query-set name="COMMON" description="공통 쿼리문들을 정의하고 있다">
 	
 	<sql-query
 		name="SELECT_TABLE_NAMES"
@@ -36,4 +36,4 @@
     ]]></sql-query> 
     
       	     
-</sql-queryset>
+</sql-query-set>

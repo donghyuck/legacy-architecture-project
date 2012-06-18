@@ -49,7 +49,7 @@
 	<!-- 4. Sequencer                                        -->
 	<!-- =================================================== -->	
 	<bean id="jdbcDaoSupport" abstract="true" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource" depends-on="sqlConfiguration, dataSource" />		
-	<bean id="sequencerFactory" class="architecture.ee.jdbc.sequencer.JdbcSequencerFactory" scope="singleton">
+	<bean id="sequencerFactory" class="architecture.ee.jdbc.sequencer.SequencerFactory" scope="singleton">
 		<constructor-arg index="0" ref="sqlConfiguration"/>
 		<constructor-arg index="1" ref="dataSource"/>
 	</bean>	

@@ -18,11 +18,6 @@
 		p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB"
 		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
 
-	<bean id="jdbcHelper"
-		class="architecture.ee.jdbc.util.JdbcHelperFactory" factory-method="getJdbcHelper" 
-		p:databaseMetaData-ref="dataSource"
-		p:nativeJdbcExtractor-ref="automaticJdbcExtractor" />
-		
 
 	<bean id="automaticJdbcExtractor" class="architecture.ee.spring.jdbc.support.AutomaticJdbcExtractor" lazy-init="true">
 		<property name="defaultJdbcExtractor">
@@ -63,25 +58,25 @@
 		factory-method="getConfiguration" />
 		
 	<bean id="sqlQueryFactoryBuilder" 
-	    class="architecture.ee.spring.jdbc.SqlQueryFactoryBuilderImpl"
+	    class="architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryBuilderImpl"
 		init-method="initialize">
 		<constructor-arg index="0" ref="sqlConfiguration" />
 		<property name="resourceLocations">
 			<list>
-				<value>res:sql/default-framework-queryset.xml</value>
+				<value>res:common-sqlset.xml</value>
 			</list>
 		</property>
 		<property name="dataSource" ref="dataSource"/>
 	</bean>
 	
 	<bean id="sequencerFactory" 
-	    class="architecture.ee.jdbc.sequencer.JdbcSequencerFactory" scope="singleton">
+	    class="architecture.ee.jdbc.sequencer.SequencerFactory" scope="singleton">
 		<constructor-arg index="0" ref="sqlConfiguration"/>
 		<constructor-arg index="1" ref="dataSource"/>
 	</bean>		
 
 	<bean id="sequenceDao" 
-	    class="architecture.ee.jdbc.sequencer.dao.JdbcSequenceDao" 
+	    class="architecture.ee.jdbc.sequencer.incrementer.JdbcMaxValueIncrementer" 
 	    init-method="initialize">
 		<constructor-arg ref="sequencerFactory"/>
 	</bean>	

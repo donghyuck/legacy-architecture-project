@@ -30,8 +30,7 @@
 	<!-- 1. Dao                                           -->
 	<!-- ================================================ -->
 	<bean id="pluginDao" class="architecture.ee.plugin.dao.impl.JdbcPluginDao"
-		parent="jdbcDaoSupport" 
-		depends-on="sequenceDao" />
+		parent="jdbcDaoSupport" />
 
 	<bean id="pluginCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
 		p:cacheName="pluginCache" 

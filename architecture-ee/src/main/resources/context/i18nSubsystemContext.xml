@@ -32,7 +32,8 @@
 	<!-- ================================================ -->	    
 	<bean id="i18nTextManager"
 		class="architecture.ee.i18n.impl.I18nTextManagerImpl"
-		p:i18nLocaleDao-ref="localeDao" p:i18nLocalizerDao-ref="localizerDao"
+		p:i18nLocaleDao-ref="localeDao" 
+		p:i18nLocalizerDao-ref="localizerDao"
 		init-method="initialize" />
 				
 	<!-- ================================================ -->

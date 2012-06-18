@@ -5,18 +5,17 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
+import org.springframework.context.ConfigurableApplicationContext;
 
+import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
-import architecture.ee.admin.AdminHelper;
+import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.i18n.I18nCountry;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.i18n.dao.I18nCountryDao;
-import architecture.ee.jdbc.datasource.DataSourceFactory;
 import architecture.ee.model.impl.I18nLocalizerModelImpl;
-import architecture.ee.user.dao.UserDao;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.I18nTextUtils;
 
@@ -25,32 +24,46 @@ public class BootstrapTest {
 	private Log log = LogFactory.getLog(getClass());
 	
 	
+	//@Test
 	public void testGetEffectiveRootPath() throws Exception{
 		Repository repo = Bootstrap.getBootstrapComponent(Repository.class);
-		log.info(" - " + repo.getEffectiveRootPath());
-		log.info(" - " + repo.getConfigRoot().getRootURI());
+		log.info(" -1- " + repo.getEffectiveRootPath());
+		log.info(" -2- " + repo.getConfigRoot().getRootURI());
 	}	
 	
 
+	//@Test
 	public void testGetDataSource(){
 		log.debug( DataSourceFactory.getDataSource() ) ;
 	}
 	
+	//@Test
+	public void testContext(){
+		
+		ConfigurableApplicationContext context = Bootstrap.getBootstrapApplicationContext();
+		
+		for( String name : context.getBeanDefinitionNames() ){
+			log.debug(name);
+		}
+	}
 	
+	
+	//@Test
 	public void testGetAdminService(){				
 		log.debug( AdminHelper.getAdminService() ) ;
 	}
 		
-	
+	//@Test
 	public void testIsSetupComplete(){				
 		log.debug( "isSetupComplete:" +  AdminHelper.isSetupComplete() ) ;
 	}
 
+	//@Test
 	public void testGetConfigService(){				
 		log.debug( AdminHelper.getConfigService().getApplicationPropertyNames() ) ;
 	}	
 	
-	
+	//@Test
 	public void testI18nCountryDao(){
 		
 		I18nCountryDao dao = Bootstrap.getBootstrapComponent(I18nCountryDao.class);		
@@ -76,11 +89,7 @@ public class BootstrapTest {
 	}
 
 
-	public void testGetUserDao(){
-		Bootstrap.getBootstrapComponent(UserDao.class).getAllUsers();
-		
-	}
-	
+
 
 	public void testI18nLocalizer(){
 		log.debug( "<===========================================" ) ;
@@ -99,7 +108,7 @@ public class BootstrapTest {
 			n.setDescription("");
 			n.setI18nLocale(locale);
 			n.setName("framework");			
-			ApplicationHelper.getI18nTextManager().createI18nLocalizer(n);
+			//ApplicationHelper.getI18nTextManager().createI18nLocalizer(n);
 			
 		}else{
 			I18nLocalizer u = ApplicationHelper.getI18nTextManager().getI18nLocalizerById(1);
@@ -131,9 +140,9 @@ public class BootstrapTest {
 		
 	}
 	
-	@Test
+	//@Test
 	public void testGetI18nMessage(){
-		String key = "main.page.title";
+		//String key = "main.page.title";
 		//log.debug( ApplicationHelper.getMessage(key, new Object[]{}, null));
 	}
 	

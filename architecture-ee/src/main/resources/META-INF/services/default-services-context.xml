@@ -12,96 +12,41 @@
        
 	<description>
 	<![CDATA[
-        Define Bootstrap Context
+        Define Services Context
 	]]>
 	</description>
+	<!-- ================================================ -->
+	<!-- 1. SQL                                           -->
+	<!-- ================================================ -->	
+	<bean id="sqlConfiguration" factory-bean="sqlQueryFactory" factory-method="getConfiguration" />
 	
-	<!-- ================================================ -->
-	<!-- 1. DataSource                                    -->
-	<!-- ================================================ -->
-	<bean id="dataSource"
-		class="architecture.common.jdbc.datasource.DataSourceFactory"
-		destroy-method="close"
-		factory-method="getDataSource" />
-			
-	<!-- ================================================ -->
-	<!-- 2. Utils                                         -->
-	<!-- ================================================ -->	
-	<bean id="automaticJdbcExtractor" class="architecture.ee.spring.jdbc.support.AutomaticJdbcExtractor" lazy-init="true">
-		<property name="defaultJdbcExtractor">
-			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
-		</property>	
-		<property name="extractors">
-			<map>
-				<entry key="org.apache.commons.dbcp">
-					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
-						<property name="extractorClass">
-							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor</value>
-						</property>
-					</bean>
-				</entry>	
-				<entry key="weblogic">
-					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
-						<property name="extractorClass">
-							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.WebLogicNativeJdbcExtractor</value>
-						</property>
-					</bean>
-				</entry>	
-				<entry key="c3p0">
-					<bean class="architecture.ee.spring.jdbc.support.LazyNativeJdbcExtractor">
-						<property name="extractorClass">
-							<value type="java.lang.Class">org.springframework.jdbc.support.nativejdbc.C3P0NativeJdbcExtractor</value>
-						</property>
-					</bean>
-				</entry>
-			</map>
-		</property>
-	</bean>	
-	<!-- ================================================ -->
-	<!-- 3. SQL                                           -->
-	<!-- ================================================ -->	
-    <bean id="sqlQueryFactory"
-    	class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder"
-    	factory-method="getSqlQueryFactory" init-method="initialize" p:incrementerSupported="false" >
+    <bean id="sqlQueryFactory" class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder" factory-method="getSqlQueryFactory" init-method="initialize" p:incrementerSupported="false" >
     	<property name="resourceLocations">
 			<list>
-				<value>res:sql/default-framework-sqlset.xml</value>
+			   <value>res:sql/default-framework-sqlset.xml</value>
+			   <!-- 
+				
 				<value>res:sql/default-plugin-framework-sqlset.xml</value>
 				<value>res:sql/default-web-framework-sqlset.xml</value>
 				<value>res:sql/default-web-ui-framework-sqlset.xml</value>
+				-->
 			</list>
     	</property>
     	<property name="dataSource" ref="dataSource" />
-    </bean>
-	
-	<bean id="sqlConfiguration" factory-bean="sqlQueryFactory" factory-method="getConfiguration" />
-	
+    </bean>	
+
 	<!-- =================================================== -->
-	<!-- 3. Sequencer                                        -->
-	<!-- =================================================== -->		
+	<!-- 2. Dao Support                                      -->
+	<!-- =================================================== -->
+	
 	<bean id="maxValueIncrementer" factory-bean="sqlQueryFactory" factory-method="getMaxValueIncrementer" />
-			
-	<!-- =================================================== -->
-	<!-- 4. Dao                                              -->
-	<!-- =================================================== -->	
-	<bean id="jdbcDaoSupport" abstract="true" 
-	    p:configuration-ref="sqlConfiguration" 
-	    p:dataSource-ref="dataSource" 
-	    p:maxValueIncrementer-ref="maxValueIncrementer"
-	    depends-on="sqlConfiguration, dataSource, maxValueIncrementer" />
-	    
- 	<bean id="extendedPropertyDao" 
- 	    class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" 
- 	    parent="jdbcDaoSupport" />
- 	    	     	    
-	<bean id="sqlQuerySupport" abstract="true" 
-	    p:maxValueIncrementer-ref="maxValueIncrementer"
-	    p:sqlQueryFactory-ref="sqlQueryFactory" 
-	    depends-on="sqlQueryFactory" />	
 	
-	<bean id="sqlQueryClient" parent="sqlQuerySupport" 
-	    class="architecture.ee.component.SqlQueryClientImpl" 	    
-	    p:dataSource-ref="dataSource" />
-	     	    
+	<bean id="jdbcDaoSupport" abstract="true" p:configuration-ref="sqlConfiguration" p:dataSource-ref="dataSource" p:maxValueIncrementer-ref="maxValueIncrementer" depends-on="dataSource, sqlConfiguration, maxValueIncrementer" />
+	    
+ 	<bean id="extendedPropertyDao" class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" parent="jdbcDaoSupport" />
+ 	    	     	    
+	<bean id="sqlQuerySupport" abstract="true" p:maxValueIncrementer-ref="maxValueIncrementer" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
+	
+	<bean id="sqlQueryClient" parent="sqlQuerySupport" class="architecture.ee.component.SqlQueryClientImpl" p:dataSource-ref="dataSource" />	     	    
 		
 </beans>
