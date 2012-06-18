@@ -41,6 +41,7 @@ public final class ApplicationHelper {
 		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
 	}
 	
+	
 	public static ConfigService getConfigService(){
 		return AdminHelper.getConfigService();
 	}

@@ -75,13 +75,7 @@ public class WebApplicationContextLoader extends ContextLoader {
 
 	@Override
 	protected ApplicationContext loadParentContext(ServletContext servletContext) throws BeansException {		
-		/*try {			
-			return Bootstrap.getBootstrapApplicationContext();			
-		} catch (Exception e) {
-		    log.error(e);
-		}		
-		return super.loadParentContext(servletContext);*/
-		return Bootstrap.getBootstrapApplicationContext();		
+		return Bootstrap.getBootstrapApplicationContext();
 	}
 	
 }

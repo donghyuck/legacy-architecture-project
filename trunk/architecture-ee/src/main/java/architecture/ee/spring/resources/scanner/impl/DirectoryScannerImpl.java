@@ -17,7 +17,7 @@ import architecture.common.scanner.DirectoryListener;
 import architecture.common.scanner.URLDirectoryScanner;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.component.admin.AdminHelper;
-import architecture.ee.component.admin.AdminSqlQueryFactory;
+import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.spring.resources.scanner.DirectoryScanner;
 import architecture.ee.util.ApplicationConstants;
 
@@ -161,10 +161,10 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 					if(fastDeploy){
 						if(log.isDebugEnabled()){
 							log.debug("Fast deploy : " + url );							
-							AdminSqlQueryFactory builder = null;							 
+							SqlQueryFactory builder = null;							 
 							for(DirectoryListener listener : scanner.getDirectoryListeners()){
-								if(listener instanceof AdminSqlQueryFactory ){									
-									builder = (AdminSqlQueryFactory)listener;			
+								if(listener instanceof SqlQueryFactory ){									
+									builder = (SqlQueryFactory)listener;			
 								}
 							}							
 							File file = new File(url.getFile());
@@ -178,7 +178,7 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 		} catch (Exception e) { }
 	}		
 	
-	public void fastDeploy(File file, AdminSqlQueryFactory builder){
+	public void fastDeploy(File file, SqlQueryFactory builder){
 		if(file.isFile()){
 			if(builder.validateFile(file)){
 	        	builder.fileCreated(file);
