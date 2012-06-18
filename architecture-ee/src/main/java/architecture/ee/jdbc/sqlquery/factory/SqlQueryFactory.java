@@ -15,6 +15,8 @@
  */
 package architecture.ee.jdbc.sqlquery.factory;
 
+import java.io.File;
+
 import javax.sql.DataSource;
 
 import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
@@ -30,5 +32,11 @@ public interface SqlQueryFactory {
 	public abstract SqlQuery createSqlQuery(ExtendedJdbcTemplate jdbcTemplate);
 		
 	public abstract MaxValueIncrementer getMaxValueIncrementer();
+	
+	public boolean validateFile(File file);
+	
+	public boolean isFileDeployed(File file);
+	
+	public String fileCreated(File file);
 	
 }

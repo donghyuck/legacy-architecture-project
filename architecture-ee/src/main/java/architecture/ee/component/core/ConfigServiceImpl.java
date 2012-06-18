@@ -25,7 +25,7 @@ import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.util.vfs.VFSUtils;
-import architecture.ee.component.admin.AdminSqlQueryFactory;
+import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.LocaleUtils;
 
@@ -60,7 +60,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
  
     /**
 	 */
-    private AdminSqlQueryFactory adminSqlQueryFacotry = null;   
+    private Configuration sqlConfiguration = null;   
     
     private DataSource dataSource = null;    
     /**
@@ -160,7 +160,7 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 			log.debug("Loading properties from database.");
 			JdbcApplicationProperties impl = new JdbcApplicationProperties(localized);
 			impl.setEventPublisher(getEventPublisher());
-			impl.setConfiguration(adminSqlQueryFacotry.getConfiguration());		
+			impl.setConfiguration(sqlConfiguration);		
 			impl.setDataSource(dataSourceToUse);
 			impl.afterPropertiesSet();
 			return impl;			
@@ -168,8 +168,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return null;
 	}
 
-	public void setAdminSqlQueryFactory(AdminSqlQueryFactory adminSqlQueryFacotry) {
-		this.adminSqlQueryFacotry = adminSqlQueryFacotry;
+	public void setSqlConfiguration(Configuration sqlConfiguration) {
+		this.sqlConfiguration = sqlConfiguration;
 	}
 
 	/**
