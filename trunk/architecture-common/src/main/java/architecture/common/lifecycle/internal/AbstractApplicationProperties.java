@@ -20,6 +20,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.util.StringUtils;
 
 public abstract class AbstractApplicationProperties implements ApplicationProperties {
 
@@ -43,5 +44,10 @@ public abstract class AbstractApplicationProperties implements ApplicationProper
 
 	public long getLongProperty(String property, long defaultValue) {
 		return NumberUtils.toLong(get(property), defaultValue);
+	}
+	
+	public String getStringProperty(String property, String defaultValue) {
+		
+		return StringUtils.defaultString(get(property), defaultValue);
 	}
 }

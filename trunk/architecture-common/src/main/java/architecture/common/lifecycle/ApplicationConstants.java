@@ -21,19 +21,18 @@ public interface ApplicationConstants {
 	
 	public static final String DEFAULT_STARTUP_FILENAME = "startup-config.xml";
 
-    public static final String ARCHITECTURE_RUNTIME_ROOT_KEY = "architecture.runtime.root";
+    public static final String ARCHITECTURE_PROFILE_ROOT_KEY = "architecture.profile.root";
 
     public static final String ARCHITECTURE_CONFIG_ROOT_KEY = "architecture.config.root";
     
-    public static final String ARCHITECTURE_RUNTIME_ROOT_ENV_KEY = "ARCHITECTURE_RUNTIME_ROOT";
+    public static final String ARCHITECTURE_PROFILE_ROOT_ENV_KEY = "ARCHITECTURE_PROFILE_ROOT";
    
     public static final String ARCHITECTURE_CONFIG_ROOT_ENV_KEY = "ARCHITECTURE_CONFIG_ROOT";
     	
 	public static final String EOL = System.getProperty("line.separator");
 	
     public static final String DEFAULT_CHAR_ENCODING = "UTF-8";	
-    
-    
+        
     
     public static final long SECOND = 1000L;
     

@@ -76,10 +76,12 @@ public class AbstractFtpConnector implements Connector  {
 			}
 			
 			if (!ftp.login(username, password)){
-				ftp.logout();				
+				ftp.logout();
 			}
 			
 			log.debug("Remote system is " + ftp.getSystemType());
+			
+			
 			
 			
 		} catch (Exception e) {

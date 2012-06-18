@@ -18,6 +18,8 @@ public class DataSourceFactory {
 		 * @return
 		 */
 		public abstract DataSource getDataSource();
+		
+		public abstract DataSource getDataSource(String name);
 	
 	}
 	
@@ -34,5 +36,9 @@ public class DataSourceFactory {
        
     public static DataSource getDataSource(){
     	return impl.getDataSource();
+    }
+
+    public static DataSource getDataSource(String name){
+    	return impl.getDataSource(name);
     }
 }

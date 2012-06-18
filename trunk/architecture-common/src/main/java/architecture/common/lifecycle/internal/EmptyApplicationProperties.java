@@ -99,4 +99,8 @@ public class EmptyApplicationProperties extends AbstractApplicationProperties {
 		return true;
 	}
 
+	public String getStringProperty(String name, String defaultValue) {
+		return defaultValue;
+	}
+
  }
