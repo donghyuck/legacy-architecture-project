@@ -2,6 +2,7 @@ package architecture.ee.web.util;
 
 public interface ApplicatioinConstants extends architecture.ee.util.ApplicationConstants {
 
+	public static final String MODEL_ATTRIBUTE = "architecture.ee.web.ui.model" ;
 	
 	public static final String THEMES_ROOT_ENV_KEY = "themes.root";
 	
