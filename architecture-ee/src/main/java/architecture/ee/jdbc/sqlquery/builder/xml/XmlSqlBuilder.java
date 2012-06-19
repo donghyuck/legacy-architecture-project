@@ -23,6 +23,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.util.L10NUtils;
 import architecture.ee.jdbc.sqlquery.builder.AbstractBuilder;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
@@ -86,22 +87,23 @@ public class XmlSqlBuilder extends AbstractBuilder {
 				version = "2.0";
 			}
 
-			log.debug( String.format("Building \n name=%s\n description=%s\n vearion=%s", new Object[]{namespace, description, version}) );			
+			log.debug( 
+				L10NUtils.format("003221", namespace, description, version )					
+			);			
 			builderAssistant.setCurrentNamespace(namespace);			
 			if(isNew)
 				sqlElement(context.evalNodes("/sqlset/sql-query"));
 			else
 				sqlElement(context.evalNodes("/sql-queryset/sql-query"));
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException("Error parsing Mapper XML. Cause: " + e, e);
+			throw new RuntimeException( L10NUtils.format("003222", e.getMessage()), e);
 		}
 	}
 
 	private void sqlElement(List<XNode> list) throws Exception {		
 		String currentNamespace = builderAssistant.getCurrentNamespace();
 		configuration.addStatementNodes(currentNamespace, list);		
-		log.debug("" + list.size() + " query defined.");
+		log.debug(L10NUtils.format("003223", list.size()));
 	}
 
 }
