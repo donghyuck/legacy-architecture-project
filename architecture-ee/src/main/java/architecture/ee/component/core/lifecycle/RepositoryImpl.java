@@ -29,6 +29,7 @@ import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.lifecycle.internal.XmlApplicationProperties;
+import architecture.common.util.L10NUtils;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.common.xml.XmlProperties;
 
@@ -89,35 +90,19 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	/**
 	 * @return
 	 */
-	private FileObject getRootFileObject(){
-		
+	private FileObject getRootFileObject(){		
 		if( getState() != State.INITIALIZED || getState() != State.INITIALIZING ){			
-			
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			
-			/*try {
-				Enumeration<URL> enumeration = classloader.getResources("application-init.xml");
-				do {
-					if (!enumeration.hasMoreElements())
-						break;
-					URL url = (URL) enumeration.nextElement();					
-					InputStream input = url.openStream();
-					XmlProperties prop = new XmlProperties(input);
-					String home = prop.getProperty("home");					
-					System.out.println( "application:" + home + "(" + url + "");
-				} while (true);
-			} catch (IOException e) {
-				
-			}	*/	
-			
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();		
 			try {		
 				InputStream input = classloader.getResourceAsStream("application-init.xml");			
 				XmlProperties prop = new XmlProperties(input);
 				String envRootPath = prop.getProperty("home");
 				if(!StringUtils.isEmpty(envRootPath)){
 					FileObject obj = VFSUtils.resolveFile(envRootPath);
-					log.debug( "Setting application home from " + "application-init.xml" + ":" +  obj.getName().getURI()); 
-					this.rootFileObject = obj;
+					log.debug( 
+						L10NUtils.format("003001", obj.getName().getURI())
+					);					
+					this.rootFileObject = obj;					
 					setState(State.INITIALIZED);
 				}
 			} catch (Throwable e) {}
@@ -161,7 +146,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     		try {        		
     			ServletContextResource resource = new ServletContextResource(servletContext, value);          		
         		File file = resource.getFile();
-        		log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY + ":" + file.getAbsolutePath());
+        		log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , file.getAbsolutePath()) );
         		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
 				this.rootFileObject = obj;
 				setState(State.INITIALIZED);
@@ -174,7 +159,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     		FileObject obj;
 			try {
 				obj = VFSUtils.resolveFile(value);
-				log.debug( "Setting install root with " + ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY + ":" +  obj.getName().getURI()); 
+				log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , obj.getName().getURI())	);
 				this.rootFileObject = obj;				
 				setState(State.INITIALIZED);
 			} catch (Throwable e) {
@@ -186,7 +171,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     		try {   
 	    		ServletContextResource resource = new ServletContextResource(servletContext, "/WEB-INF");          
 	    		File file = resource.getFile();
-	    		log.debug( "Setting application runtime root with " + file.getAbsolutePath());
+	    		log.debug( L10NUtils.format("003004", file.getAbsolutePath() ));
 	    		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
 				this.rootFileObject = obj;
 				setState(State.INITIALIZED);
@@ -214,7 +199,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
         {
             envRootPath = System.getenv(ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_KEY);
             if(envRootPath != null && !"".equals(envRootPath))
-                log.info((new StringBuilder()).append("Architecture root set from system property to '").append(envRootPath).append("'.").toString());
+                log.info(L10NUtils.format("003005", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_KEY, envRootPath));
         }
         if(envRootPath == null || "".equals(envRootPath))
         {
@@ -224,7 +209,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
             else
                 buffer.append("c:").append(File.separator).append("apps").append(File.separator).append("framework");
             envRootPath = buffer.toString();
-            log.warn((new StringBuilder()).append("No explicit configuration of application root path. Using system default of: '").append(envRootPath).append("'.").toString());
+            log.warn(L10NUtils.format("003006", envRootPath));
         }        
         return envRootPath;
     }
@@ -247,12 +232,14 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 						org.dom4j.Element root = document.addElement( "startup-config" );						
 						// setup start ------------------------------------------------------------
 						org.dom4j.Element setupNode = root.addElement("setup");
-						setupNode.addElement("complete").setText("false");						
+						setupNode.addElement("complete").setText("false");
+						
+						
 						// setup end --------------------------------------------------------------
 						xmlWriter.write( document );					
 					}catch(Exception e)
 			        {
-			            log.error((new StringBuilder()).append("Unable to write to file ").append(file.getName()).append(".tmp").append(": ").append(e.getMessage()).toString());
+			            log.error(L10NUtils.format("003007", file.getName(), e.getMessage()));
 			            error = true;
 			        }
 			        finally
@@ -290,10 +277,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 
 	public File getFile(String name) {
 		try {
-			FileObject obj = getRootFileObject().resolveFile(name);		 
-			
-			//log.debug( obj.getURL().getFile() );
-			
+			FileObject obj = getRootFileObject().resolveFile(name);		
 			return  new File(obj.getURL().getFile());
 		} catch (FileSystemException e) {
 		}
