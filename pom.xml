@@ -1,17 +1,45 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>architecture</groupId>
-	<artifactId>architecture-build</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
-	<name>POWER ARCHITECTURE BUILD</name>
-	<description>자바 아키텍처 전체 빌드 파일</description>
-	<url>http://code.google.com/p/power-j/</url>
-
-	<modules>
-		<module>architecture-common</module>
-		<module>architecture-ee</module>
-	</modules>
-
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <artifactId>architecture-parent</artifactId>
+    <groupId>architecture</groupId>
+    <version>1.0.0.RELEASE</version>
+  </parent>
+  <groupId>architecture</groupId>
+  <artifactId>architecture-web-struts</artifactId>
+  <version>1.0.0.RELEASE</version>
+  <name>APPLICATION WEB STRUTS SUPPORT</name>
+  <description>웹 어플리케이션 개발을 위한 스트럿츠 지원 모듈</description>
+  <dependencies>
+  	<dependency>
+  		<groupId>architecture</groupId>
+  		<artifactId>architecture-web</artifactId>
+  		<version>1.0.1.RELEASE</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>
+  	<dependency>
+  		<groupId>org.apache.struts</groupId>
+  		<artifactId>struts-core</artifactId>
+  		<version>1.3.8</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency> 
+  	<dependency>
+  		<groupId>org.springframework</groupId>
+  		<artifactId>spring-struts</artifactId>
+  		<version>${project.dependency.spring.version}</version>
+  		<type>jar</type>
+  		<scope>compile</scope>
+  	</dependency>   	 	
+  </dependencies>
+  
+  	<distributionManagement>
+		<repository>
+			<id>hadoop-master</id>
+			<name>hadoop-master-releases</name>
+			<url>http://222.122.63.146/artifactory/ext-release-local</url>
+		</repository>
+	</distributionManagement>	
+	
 </project>
