@@ -24,12 +24,6 @@
     	<property name="resourceLocations">
 			<list>
 			   <value>res:sql/default-framework-sqlset.xml</value>
-			   <!-- 
-				
-				<value>res:sql/default-plugin-framework-sqlset.xml</value>
-				<value>res:sql/default-web-framework-sqlset.xml</value>
-				<value>res:sql/default-web-ui-framework-sqlset.xml</value>
-				-->
 			</list>
     	</property>
     	<property name="dataSource" ref="dataSource" />
@@ -45,8 +39,8 @@
 	    
  	<bean id="extendedPropertyDao" class="architecture.ee.jdbc.property.dao.impl.JdbcExtendedPropertyDao" parent="jdbcDaoSupport" />
  	    	     	    
-	<bean id="sqlQuerySupport" abstract="true" p:maxValueIncrementer-ref="maxValueIncrementer" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
+	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
 	
-	<bean id="sqlQueryClient" parent="sqlQuerySupport" class="architecture.ee.component.SqlQueryClientImpl" p:dataSource-ref="dataSource" />	     	    
+	<bean id="sqlQueryClient" parent="sqlQuerySupport" class="architecture.ee.component.SqlQueryClientImpl" p:dataSource-ref="dataSource" />
 		
 </beans>
