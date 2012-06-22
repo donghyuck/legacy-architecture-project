@@ -11,11 +11,13 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
+import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
@@ -46,17 +48,25 @@ public class TestSqlQuery {
 		SqlQueryFactory factory = context.getBean(SqlQueryFactory.class);
 		
 		SqlQuery query = factory.createSqlQuery();
-		
-		List<Map<String, Object>> list = query.list("COMMON.SELECT_TABLE_NAMES");
+		SqlQueryHelper helper = new SqlQueryHelper();
+		helper.additionalParameter("TABLE_NAME", "V2_I18N_LOCALE");
+		List<Map<String, Object>> list = helper.list(query, "COMMON.SELECT_TABLE_ROWS");
 		for(Map row : list)
 			log.debug(row);
+/*		List<Map<String, Object>> list = query.list("COMMON.SELECT_TABLE_NAMES");
+		for(Map row : list)
+			log.debug(row);*/
 		
-		Integer intValue = query.uniqueResult("COMMON.SELECT_TABLE_COUNT", Integer.class);
+		/*Integer intValue = query.uniqueResult("COMMON.SELECT_TABLE_COUNT", Integer.class);
 		log.debug(intValue);
+		*/
+		/*List<Map<String, Object>> list = query.setStartIndex(19).setMaxResults(6).list("COMMON.SELECT_TABLE_NAMES");
+		for(Map row : list)
+			log.debug(row);*/
 		
-		List<String> list2 = query.setStartIndex(0).setMaxResults(3).queryForList("COMMON.SELECT_TABLE_NAMES_BY_LIKE", new Object[]{ "V2_USER%" }, new int[] {Types.VARCHAR}, String.class);
+		/*List<String> list2 = query.setStartIndex(0).setMaxResults(3).queryForList("COMMON.SELECT_TABLE_NAMES_BY_LIKE", new Object[]{ "V2_USER%" }, new int[] {Types.VARCHAR}, String.class);
 		for(String row : list2)
-			log.debug(row);
+			log.debug(row);*/
 			
 	}
 	
@@ -182,6 +192,17 @@ public class TestSqlQuery {
 		log.debug(" test 3 end -------------------------------------------");
 		log.debug(" test 4 start -------------------------------------------");
 		
+		
+		SqlQueryHelper helper = new SqlQueryHelper();
+		
+		helper.parameters(new Object[]{"1", "name1", "value1"}, new int [] {Types.INTEGER, Types.VARCHAR, Types.VARCHAR}).inqueue();
+		helper.parameters(new Object[]{"2", "name2", "value2"}, new int [] {Types.INTEGER, Types.VARCHAR, Types.VARCHAR}).inqueue();
+		
+		helper.executeBatchUpdate( query, "COMMON.INSERT_ENT_APP_PROPERTY");
+		
+		helper.parameters(new Object[]{"1", "name1", "value1"}, new int [] {Types.INTEGER, Types.VARCHAR, Types.VARCHAR});
+		helper.additionalParameter("state", 3);
+		helper.list(query, "COMMON.INSERT_ENT_APP_PROPERTY");
 		
 		
 		//query.executeUpdate("COMMON.INSERT_GLOBAL_PROPERTY", new Object[]{"hello", "hello kkk"});
