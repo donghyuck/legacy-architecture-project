@@ -1,14 +1,36 @@
 package architecture.ee.upgrade;
 
 
+/**
+ * @author  donghyuck
+ */
 public class ScheduledUpgrade
 {
 
+    /**
+	 * @uml.property  name="task"
+	 * @uml.associationEnd  
+	 */
     private final UpgradeTask task;
+    /**
+	 * @uml.property  name="taskClassName"
+	 */
     private final String taskClassName;
+    /**
+	 * @uml.property  name="previousVersion"
+	 */
     private final int previousVersion;
+    /**
+	 * @uml.property  name="targetVersion"
+	 */
     private final int targetVersion;
+    /**
+	 * @uml.property  name="upgradeName"
+	 */
     private final String upgradeName;
+    /**
+	 * @uml.property  name="order"
+	 */
     private final int order;
     
     public ScheduledUpgrade(UpgradeTask task, String taskClassName, String name, int order, int previousVersion, int targetVersion)
@@ -21,31 +43,55 @@ public class ScheduledUpgrade
         this.targetVersion = targetVersion;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="upgradeName"
+	 */
     public String getUpgradeName()
     {
         return upgradeName;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="order"
+	 */
     public int getOrder()
     {
         return order;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="task"
+	 */
     public UpgradeTask getTask()
     {
         return task;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="taskClassName"
+	 */
     public String getTaskClassName()
     {
         return taskClassName;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="previousVersion"
+	 */
     public int getPreviousVersion()
     {
         return previousVersion;
     }
 
+    /**
+	 * @return
+	 * @uml.property  name="targetVersion"
+	 */
     public int getTargetVersion()
     {
         return targetVersion;

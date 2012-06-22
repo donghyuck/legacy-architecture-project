@@ -58,10 +58,13 @@ import architecture.common.jdbc.schema.DatabaseType;
 
 /**
  * 스프링프레임워크에서 제공하는 JdbcTemplate 을 확장한 클래스.
- * @author  DongHyuck, Son
+ * @author   DongHyuck, Son
  */
 public class ExtendedJdbcTemplate extends JdbcTemplate {
 	
+	/**
+	 * @author  donghyuck
+	 */
 	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator {
 		
 		private String sqlToUse;
@@ -69,6 +72,10 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		private int paramTypes[];
 		private final int startIndex;
 		private final int numResults;
+		/**
+		 * @uml.property  name="databaseType"
+		 * @uml.associationEnd  
+		 */
 		private DatabaseType databaseType;
 		private Log log = LogFactory.getLog(getClass());
 		
@@ -125,6 +132,10 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		private int startIndex;
 		private int numResults;
 		private RowMapper mapper;
+		/**
+		 * @uml.property  name="databaseType"
+		 * @uml.associationEnd  
+		 */
 		private DatabaseType databaseType;
 		private Log log = LogFactory.getLog(getClass());
 
@@ -229,22 +240,41 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		
 	}
 
+	/**
+	 * @uml.property  name="databaseType"
+	 * @uml.associationEnd  
+	 */
 	private DatabaseType databaseType;
 
+	/**
+	 * @uml.property  name="lobHandler"
+	 */
 	private LobHandler lobHandler = null;		
 	
 	public ExtendedJdbcTemplate(DataSource dataSource) {
 		super(dataSource);		
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="lobHandler"
+	 */
 	public LobHandler getLobHandler() {
 		return lobHandler;
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="databaseType"
+	 */
 	public DatabaseType getDatabaseType() {
 		return databaseType;
 	}
 	
+	/**
+	 * @param lobHandler
+	 * @uml.property  name="lobHandler"
+	 */
 	public void setLobHandler(LobHandler lobHandler) {
 		this.lobHandler = lobHandler;
 	}
@@ -254,6 +284,10 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		initialize();
 	}
 	
+	/**
+	 * @param databaseType
+	 * @uml.property  name="databaseType"
+	 */
 	public void setDatabaseType(DatabaseType databaseType){
 		this.databaseType = databaseType;
 	}

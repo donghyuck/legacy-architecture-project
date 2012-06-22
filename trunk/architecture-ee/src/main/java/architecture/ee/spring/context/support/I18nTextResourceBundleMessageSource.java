@@ -14,6 +14,9 @@ import org.springframework.util.Assert;
 
 import architecture.ee.util.I18nTextUtils;
 
+/**
+ * @author  donghyuck
+ */
 public class I18nTextResourceBundleMessageSource extends AbstractMessageSource {
 
 	private String[] localizers = new String[0];
@@ -28,6 +31,10 @@ public class I18nTextResourceBundleMessageSource extends AbstractMessageSource {
 		setLocalizers(new String[] { name });
 	}
 
+	/**
+	 * @param names
+	 * @uml.property  name="localizers"
+	 */
 	public void setLocalizers(String[] names) {
 		if (names != null) {
 			this.localizers = new String[names.length];

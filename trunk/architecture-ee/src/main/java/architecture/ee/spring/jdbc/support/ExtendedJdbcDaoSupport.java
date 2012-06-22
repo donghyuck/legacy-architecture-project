@@ -14,14 +14,22 @@ import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {	
 	
 	protected Log log = LogFactory.getLog(getClass());	
 
+	/**
+	 * @uml.property  name="maxValueIncrementer"
+	 * @uml.associationEnd  
+	 */
 	private MaxValueIncrementer maxValueIncrementer = null;
 	
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration = null;
 
 	public ExtendedJdbcDaoSupport() {
@@ -44,14 +52,16 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
     }
     
 	/**
-	 * @param sequenceDao
+	 * @param  sequenceDao
+	 * @uml.property  name="maxValueIncrementer"
 	 */
 	public void setMaxValueIncrementer(MaxValueIncrementer sequenceDao) {
 		this.maxValueIncrementer = sequenceDao;
 	}
 	
 	/**
-	 * @param configuration
+	 * @param  configuration
+	 * @uml.property  name="configuration"
 	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;

@@ -16,10 +16,17 @@ import architecture.ee.util.ApplicationHelper;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+/**
+ * @author  donghyuck
+ */
 public class PostUpgradeManager {
 
     private static final String UPGRADE_CONFIG_FILENAME = "architecture/ee/upgrade/post/post-upgrade.xml";
     protected static final Log log = LogFactory.getLog(PostUpgradeManager.class);
+    /**
+	 * @uml.property  name="props"
+	 * @uml.associationEnd  
+	 */
     private final ApplicationProperties props;
     
     public PostUpgradeManager(ApplicationProperties properties)

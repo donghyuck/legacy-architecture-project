@@ -5,11 +5,13 @@ import architecture.common.event.api.EventSource;
 import architecture.common.event.spi.EventDispatcher;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class EventSourceSupport implements EventSource {
 
 	/**
+	 * @uml.property  name="dispatcher"
+	 * @uml.associationEnd  
 	 */
 	private EventDispatcher dispatcher;
 	

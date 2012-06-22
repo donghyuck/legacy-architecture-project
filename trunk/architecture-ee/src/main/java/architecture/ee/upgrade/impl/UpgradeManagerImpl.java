@@ -6,14 +6,29 @@ import architecture.ee.upgrade.ScheduledUpgrade;
 import architecture.ee.upgrade.UpgradeManager;
 import architecture.ee.upgrade.dao.UpgradeDao;
 
+/**
+ * @author  donghyuck
+ */
 public class UpgradeManagerImpl implements UpgradeManager {
 
+	/**
+	 * @uml.property  name="uggradeDao"
+	 * @uml.associationEnd  
+	 */
 	private UpgradeDao uggradeDao ;
 
+	/**
+	 * @return
+	 * @uml.property  name="uggradeDao"
+	 */
 	public UpgradeDao getUggradeDao() {
 		return uggradeDao;
 	}
 
+	/**
+	 * @param uggradeDao
+	 * @uml.property  name="uggradeDao"
+	 */
 	public void setUggradeDao(UpgradeDao uggradeDao) {
 		this.uggradeDao = uggradeDao;
 	}

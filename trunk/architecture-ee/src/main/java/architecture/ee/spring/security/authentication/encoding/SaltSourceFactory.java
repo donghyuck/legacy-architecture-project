@@ -9,8 +9,14 @@ import architecture.common.lifecycle.ApplicationProperties;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
 
+/**
+ * @author  donghyuck
+ */
 public class SaltSourceFactory implements FactoryBean <SaltSource>{
 
+	/**
+	 * @uml.property  name="singleton"
+	 */
 	private boolean singleton = true ;
 	
 	private SaltSource saltSource = null;
@@ -40,6 +46,10 @@ public class SaltSourceFactory implements FactoryBean <SaltSource>{
 		return SaltSource.class;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="singleton"
+	 */
 	public boolean isSingleton() {
 		return singleton;
 	}
