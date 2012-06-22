@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class ParamUtils {
+import org.springframework.web.bind.ServletRequestUtils;
+
+public class ParamUtils extends ServletRequestUtils {
 
     public ParamUtils()
     {
