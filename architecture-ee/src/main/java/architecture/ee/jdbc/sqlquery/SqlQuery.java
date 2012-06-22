@@ -54,6 +54,9 @@ public interface SqlQuery {
 	 */
 	public SqlQuery setMaxResults(int maxResults);
 	
+	
+	public SqlQuery setAdditionalParameters(Map<String, Object> additionalParameters);
+	
 	/**
 	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우, 리턴 컬럼이 하나 이상인 경우 예외가 발생된다. 
 	 * 
