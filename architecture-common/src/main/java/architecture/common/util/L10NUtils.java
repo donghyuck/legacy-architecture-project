@@ -200,7 +200,7 @@ public class L10NUtils {
 		
 		LocalizerKey keyToUse = getLocalizerKey(key) ;
 		
-		log.debug("resourcebundle:" + keyToUse.bundleName);
+		//log.debug("resourcebundle:" + keyToUse.bundleName);
 		
 		if( keyToUse != null )
 			return LocalizerFactory.getLocalizer(keyToUse.bundleName, locale, classloader);	
