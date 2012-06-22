@@ -9,11 +9,22 @@ import org.apache.commons.logging.LogFactory;
 import architecture.ee.upgrade.post.PostUpgradeManager;
 
 
+/**
+ * @author  donghyuck
+ */
 public class UpgradeTimerTask extends TimerTask
 {
 
     private static final Log log = LogFactory.getLog(UpgradeTimerTask.class);
+    /**
+	 * @uml.property  name="upgradeManager"
+	 * @uml.associationEnd  
+	 */
     private UpgradeManager upgradeManager;
+    /**
+	 * @uml.property  name="postUpgradeManager"
+	 * @uml.associationEnd  
+	 */
     private PostUpgradeManager postUpgradeManager;
     
     public UpgradeTimerTask()
@@ -53,11 +64,19 @@ public class UpgradeTimerTask extends TimerTask
         return;
     }
 
+    /**
+	 * @param upgradeManager
+	 * @uml.property  name="upgradeManager"
+	 */
     public void setUpgradeManager(UpgradeManager upgradeManager)
     {
         this.upgradeManager = upgradeManager;
     }
 
+    /**
+	 * @param postUpgradeManager
+	 * @uml.property  name="postUpgradeManager"
+	 */
     public void setPostUpgradeManager(PostUpgradeManager postUpgradeManager)
     {
         this.postUpgradeManager = postUpgradeManager;

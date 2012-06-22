@@ -6,11 +6,13 @@ import architecture.common.lifecycle.bootstrap.Bootstrap;
 
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class ApplicationHelperFactoryImpl implements Implementation {
 
 	/**
+	 * @uml.property  name="helper"
+	 * @uml.associationEnd  
 	 */
 	private ApplicationHelper helper = null;
 	

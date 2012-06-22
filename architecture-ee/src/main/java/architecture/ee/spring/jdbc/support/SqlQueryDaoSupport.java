@@ -7,23 +7,37 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.lob.LobHandler;
 
+import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
- * @author  andang, son
+ * @author   andang, son
  */
 public class SqlQueryDaoSupport extends JdbcDaoSupport {
 	
 	protected Log log = LogFactory.getLog(getClass());
 	
+	/**
+	 * @uml.property  name="sqlQueryFactory"
+	 * @uml.associationEnd  
+	 */
 	private SqlQueryFactory sqlQueryFactory = null ;
 
+	/**
+	 * @return
+	 * @uml.property  name="sqlQueryFactory"
+	 */
 	public SqlQueryFactory getSqlQueryFactory() {
+		
 		return sqlQueryFactory;
 	}
-
+	
+	/**
+	 * @param sqlQueryFactory
+	 * @uml.property  name="sqlQueryFactory"
+	 */
 	public void setSqlQueryFactory(SqlQueryFactory sqlQueryFactory) {
 		this.sqlQueryFactory = sqlQueryFactory;
 	}
@@ -35,6 +49,10 @@ public class SqlQueryDaoSupport extends JdbcDaoSupport {
 	public ExtendedJdbcTemplate getExtendedJdbcTemplate(){
 		return (ExtendedJdbcTemplate) getJdbcTemplate();
 	} 
+	
+	protected MaxValueIncrementer getMaxValueIncrementer(){
+		return sqlQueryFactory.getMaxValueIncrementer();
+	}
 	
 	protected void initTemplateConfig() {
 	    log.debug("initTemplateConfig");

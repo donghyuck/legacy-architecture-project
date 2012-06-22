@@ -38,7 +38,7 @@ import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class ApplicationHelperImpl implements ApplicationHelper, ApplicationListener<ApplicationEvent> {
 
@@ -46,9 +46,13 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	
 	private ConfigurableApplicationContext applicationContext;
     /**
+	 * @uml.property  name="state"
+	 * @uml.associationEnd  
 	 */
     private State state = State.INITIALIZED ; 
     /**
+	 * @uml.property  name="adminService"
+	 * @uml.associationEnd  
 	 */
     private SpringAdminService adminService;
     
@@ -93,6 +97,7 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 	
 	/**
 	 * @return
+	 * @uml.property  name="adminService"
 	 */
 	public AdminService getAdminService() {
 		return adminService;

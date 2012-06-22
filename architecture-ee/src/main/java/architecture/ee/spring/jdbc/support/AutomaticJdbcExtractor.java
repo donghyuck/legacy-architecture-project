@@ -12,9 +12,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
+/**
+ * @author  donghyuck
+ */
 public class AutomaticJdbcExtractor implements NativeJdbcExtractor {
 
+	/**
+	 * @uml.property  name="extractors"
+	 */
 	private Map<String, NativeJdbcExtractor> extractors;
+	/**
+	 * @uml.property  name="defaultJdbcExtractor"
+	 */
 	private NativeJdbcExtractor defaultJdbcExtractor;
 	private NativeJdbcExtractor jdbcExtractor;
 	private Log log = LogFactory.getLog(getClass());
@@ -90,18 +99,34 @@ public class AutomaticJdbcExtractor implements NativeJdbcExtractor {
 		return getJdbcExtractor(rs).getNativeResultSet(rs);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="extractors"
+	 */
 	public Map<String, NativeJdbcExtractor> getExtractors() {
 		return extractors;
 	}
 
+	/**
+	 * @param extractors
+	 * @uml.property  name="extractors"
+	 */
 	public void setExtractors(Map<String, NativeJdbcExtractor> extractors) {
 		this.extractors = extractors;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="defaultJdbcExtractor"
+	 */
 	public NativeJdbcExtractor getDefaultJdbcExtractor() {
 		return defaultJdbcExtractor;
 	}
 
+	/**
+	 * @param defaultJdbcExtractor
+	 * @uml.property  name="defaultJdbcExtractor"
+	 */
 	public void setDefaultJdbcExtractor(NativeJdbcExtractor defaultJdbcExtractor) {
 		this.defaultJdbcExtractor = defaultJdbcExtractor;
 	}

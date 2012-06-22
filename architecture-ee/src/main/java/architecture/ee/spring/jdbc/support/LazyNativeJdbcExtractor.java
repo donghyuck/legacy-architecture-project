@@ -10,16 +10,14 @@ import java.sql.Statement;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
 /**
- * A class to lazily instantiate a native JDBC extractor.
- * <p />
- * We need to lazily instantiate it because otherwise Spring will construct it
- * for us, and users might get class not found errors (eg if they're not using
- * Weblogic and Spring tries to load the WeblogicNativeJdbcExtractor, things get
- * ugly).
+ * A class to lazily instantiate a native JDBC extractor. <p /> We need to lazily instantiate it because otherwise Spring will construct it for us, and users might get class not found errors (eg if they're not using Weblogic and Spring tries to load the WeblogicNativeJdbcExtractor, things get ugly).
  */
 
 public class LazyNativeJdbcExtractor implements NativeJdbcExtractor {
 	
+	/**
+	 * @uml.property  name="delegatedExtractor"
+	 */
 	private NativeJdbcExtractor delegatedExtractor;
 	
 	private Class<NativeJdbcExtractor> extractorClass;
@@ -28,10 +26,18 @@ public class LazyNativeJdbcExtractor implements NativeJdbcExtractor {
 
 	}
 
+	/**
+	 * @param extractorClass
+	 * @uml.property  name="extractorClass"
+	 */
 	public void setExtractorClass(Class<NativeJdbcExtractor> extractorClass) {
 		this.extractorClass = extractorClass;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="delegatedExtractor"
+	 */
 	private synchronized NativeJdbcExtractor getDelegatedExtractor() {
 		try {
 			if (delegatedExtractor == null) {

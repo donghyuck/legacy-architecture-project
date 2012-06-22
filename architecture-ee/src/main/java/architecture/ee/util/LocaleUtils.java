@@ -12,10 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 
 import architecture.ee.i18n.I18nLocalizer;
 
+/**
+ * @author  donghyuck
+ */
 public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
 
 	private static Map<Locale, List<Locale>> cachedCandidateLocales = new HashMap<Locale, List<Locale>>();
 	
+	/**
+	 * @uml.property  name="sUPPORTED_LOCALES"
+	 */
 	public static final List<Locale> SUPPORTED_LOCALES = Collections.unmodifiableList(getSupportedLocales());
 	
     /**
@@ -101,6 +107,10 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
         return results;
     }    
     
+    /**
+	 * @return
+	 * @uml.property  name="sUPPORTED_LOCALES"
+	 */
     private static List<Locale> getSupportedLocales(){
     	List<Locale> locales = new ArrayList<Locale>(); 
     	List<I18nLocalizer> list = I18nTextUtils.getI18nLocalizers();

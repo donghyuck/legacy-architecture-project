@@ -3,8 +3,23 @@ package architecture.ee.util;
 import architecture.common.util.StringUtils;
 
 
+/**
+ * @author   donghyuck
+ */
 public enum OutputFormat {
-	JSON, XML, HTML;
+	/**
+	 * @uml.property  name="jSON"
+	 * @uml.associationEnd  
+	 */
+	JSON, /**
+	 * @uml.property  name="xML"
+	 * @uml.associationEnd  
+	 */
+	XML, /**
+	 * @uml.property  name="hTML"
+	 * @uml.associationEnd  
+	 */
+	HTML;
 		
 	public static OutputFormat stingToOutputFormat(String dataTypeString){
         if(StringUtils.isEmpty(dataTypeString))
