@@ -13,7 +13,7 @@ import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
    
@@ -21,14 +21,24 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
     
     private int type;
 
+    /**
+	 * @uml.property  name="name"
+	 */
     private String name;
        
     private long currentID;
     
     private long maxID;
     
+    /**
+	 * @uml.property  name="blockSize"
+	 */
     private int blockSize;
     
+    /**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
     private Configuration configuration;
    
     public JdbcSequencer() {
@@ -43,6 +53,10 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
         this.maxID = 0L;  
     }    
 	
+	/**
+	 * @param configuration
+	 * @uml.property  name="configuration"
+	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;
 	}
@@ -54,13 +68,15 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
 
     /**
 	 * @return
+	 * @uml.property  name="name"
 	 */
     public String getName() {
 		return name;
 	}
 
     /**
-	 * @param name
+	 * @param  name
+	 * @uml.property  name="name"
 	 */
     public void setName(String name) {
 		this.name = name;
@@ -68,13 +84,15 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
 
 	/**
 	 * @return
+	 * @uml.property  name="blockSize"
 	 */
 	public int getBlockSize() {
         return blockSize;
     }
 
     /**
-	 * @param blockSize
+	 * @param  blockSize
+	 * @uml.property  name="blockSize"
 	 */
     public void setBlockSize(int blockSize) {
         this.blockSize = blockSize;

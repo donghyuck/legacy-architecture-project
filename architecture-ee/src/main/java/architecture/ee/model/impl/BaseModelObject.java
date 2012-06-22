@@ -6,14 +6,16 @@ import java.util.Date;
 import architecture.ee.model.ModelObject;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public abstract class BaseModelObject<T> implements ModelObject<T> {
 
 	/**
+	 * @uml.property  name="creationDate"
 	 */
 	private Date creationDate = null;
 	/**
+	 * @uml.property  name="modifiedDate"
 	 */
 	private Date modifiedDate = null;	
 	
@@ -33,24 +35,28 @@ public abstract class BaseModelObject<T> implements ModelObject<T> {
 	
 	/**
 	 * @return
+	 * @uml.property  name="creationDate"
 	 */
 	public Date getCreationDate() {
 		return creationDate;
 	}
 	/**
-	 * @param creationDate
+	 * @param  creationDate
+	 * @uml.property  name="creationDate"
 	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
 	/**
 	 * @return
+	 * @uml.property  name="modifiedDate"
 	 */
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
 	/**
-	 * @param modifiedDate
+	 * @param  modifiedDate
+	 * @uml.property  name="modifiedDate"
 	 */
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;

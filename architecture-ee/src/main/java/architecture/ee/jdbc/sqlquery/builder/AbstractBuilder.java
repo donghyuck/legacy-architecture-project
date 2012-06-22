@@ -19,11 +19,13 @@ import architecture.common.jdbc.TypeAliasRegistry;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public abstract class AbstractBuilder {
 
 	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
 	 */
 	protected final Configuration configuration;
 

@@ -7,83 +7,98 @@ import architecture.ee.i18n.I18nLocale;
 import architecture.ee.model.I18nLocaleModel;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class I18nLocaleModelImpl extends BaseModelObject<I18nLocale>
 implements I18nLocaleModel , I18nLocale{
 
 	/**
+	 * @uml.property  name="localeId"
 	 */
 	private long localeId = -1L;
 	/**
+	 * @uml.property  name="language"
 	 */
 	private String language;
 	/**
+	 * @uml.property  name="country"
 	 */
 	private String country;
 	/**
+	 * @uml.property  name="encoding"
 	 */
 	private String encoding;
 	/**
+	 * @uml.property  name="variant"
 	 */
 	private String variant;
 
 	/**
 	 * @return
+	 * @uml.property  name="localeId"
 	 */
 	public long getLocaleId() {
 		return localeId;
 	}
 	/**
-	 * @param localeId
+	 * @param  localeId
+	 * @uml.property  name="localeId"
 	 */
 	public void setLocaleId(long localeId) {
 		this.localeId = localeId;
 	}
 	/**
 	 * @return
+	 * @uml.property  name="language"
 	 */
 	public String getLanguage() {
 		return language;
 	}
 	/**
-	 * @param language
+	 * @param  language
+	 * @uml.property  name="language"
 	 */
 	public void setLanguage(String language) {
 		this.language = language;
 	}
 	/**
 	 * @return
+	 * @uml.property  name="country"
 	 */
 	public String getCountry() {
 		return country;
 	}
 	/**
-	 * @param country
+	 * @param  country
+	 * @uml.property  name="country"
 	 */
 	public void setCountry(String country) {
 		this.country = country;
 	}
 	/**
 	 * @return
+	 * @uml.property  name="encoding"
 	 */
 	public String getEncoding() {
 		return encoding;
 	}
 	/**
-	 * @param encoding
+	 * @param  encoding
+	 * @uml.property  name="encoding"
 	 */
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 	/**
 	 * @return
+	 * @uml.property  name="variant"
 	 */
 	public String getVariant() {
 		return variant;
 	}
 	/**
-	 * @param variant
+	 * @param  variant
+	 * @uml.property  name="variant"
 	 */
 	public void setVariant(String variant) {
 		this.variant = variant;

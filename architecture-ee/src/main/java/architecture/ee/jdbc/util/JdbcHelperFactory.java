@@ -20,7 +20,7 @@ import javax.sql.DataSource;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class JdbcHelperFactory {
 
@@ -33,6 +33,8 @@ public class JdbcHelperFactory {
 	}
 
 	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
 

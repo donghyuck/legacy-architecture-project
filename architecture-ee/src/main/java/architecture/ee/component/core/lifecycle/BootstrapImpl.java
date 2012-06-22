@@ -24,10 +24,9 @@ import architecture.common.util.L10NUtils;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class BootstrapImpl implements Bootstrap.Implementation {
-
 	
 	private Log log = LogFactory.getLog(getClass());
 	
@@ -35,6 +34,10 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
 	private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
+	/**
+	 * @uml.property  name="repository"
+	 * @uml.associationEnd  
+	 */
 	private RepositoryImpl repository = new RepositoryImpl();
 	
 	private final ReentrantLock lock = new ReentrantLock();
@@ -50,8 +53,10 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 				log.debug("repository not initialized yet.");
 			}
 			
-			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(contextKey);		
-			return (ConfigurableApplicationContext) parentContextRef.getFactory();
+			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(contextKey);	
+			ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();
+			
+			return context;
 		} catch (BeansException e) {
 			log.error( L10NUtils.getMessage("002402") , e );
 					return null;
@@ -65,7 +70,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			throw new ComponentNotFoundException("");
 		}
 		
-		log.debug( "requiredType:" + requiredType.getName() );
+		//log.debug( "requiredType:" + requiredType.getName() );
 		if( requiredType == Repository.class ){			
 			lock.lock();
 			try{
@@ -104,14 +109,25 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			// 1. admin service 가 존재하는 경우 : DOTO
 			
 			
-			AdminService adminService = getBootstrapComponent(AdminService.class);			
+/*			repository.getSetupApplicationProperties();			
+			ConfigurableApplicationContext ctx = getBootstrapApplicationContext();
+			Environment env = ctx.getEnvironment();
+			MutablePropertySources sources = ctx.getEnvironment().getPropertySources();			
+			Map<String, Object> props = (Map)repository.getSetupApplicationProperties();
+			
+			sources.addFirst(new MapPropertySource( "bootstrap", props ));*/
+			
+			AdminService adminService = getBootstrapComponent(AdminService.class);	
+			
+			
 			if(adminService instanceof SpringAdminService ){
 				((SpringAdminService)adminService).setServletContext(servletContext);
 			}
 			adminService.start();
+		} catch (BeansException e) {
+			
 		} catch (ComponentNotFoundException e) { 
 			// 2. admin service 가 존재하지 않는 경우 : DOTO
-			
 			
 		}finally{
 			lock.unlock();

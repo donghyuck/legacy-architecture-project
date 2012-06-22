@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * @author                 donghyuck
+ * @author                   donghyuck
  */
 public interface ModelObject<T> extends Comparable<T>, Serializable {
 
@@ -23,21 +23,25 @@ public interface ModelObject<T> extends Comparable<T>, Serializable {
 
 	/**
 	 * @return
+	 * @uml.property  name="creationDate"
 	 */
 	public Date getCreationDate() ;
 	
 	/**
 	 * @param  creationDate
+	 * @uml.property  name="creationDate"
 	 */
 	public void setCreationDate(Date creationDate);
 	
 	/**
 	 * @return
+	 * @uml.property  name="modifiedDate"
 	 */
 	public Date getModifiedDate();
 	
 	/**
 	 * @param  modifiedDate
+	 * @uml.property  name="modifiedDate"
 	 */
 	public void setModifiedDate(Date modifiedDate);
 	

@@ -10,12 +10,27 @@ import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 
+/**
+ * @author  donghyuck
+ */
 public abstract class AbstractSqlQueryClient extends SqlQueryDaoSupport implements SqlQueryClient {
 	
+	/**
+	 * @uml.property  name="sqlQuery"
+	 * @uml.associationEnd  
+	 */
 	private SqlQuery sqlQuery ;
 	
+	/**
+	 * @uml.property  name="datebase"
+	 * @uml.associationEnd  
+	 */
 	private Database datebase ;
 	
+	/**
+	 * @uml.property  name="incrementer"
+	 * @uml.associationEnd  
+	 */
 	private MaxValueIncrementer incrementer ;
 	
 	public MaxValueIncrementer getMaxValueIncrementer() {
@@ -32,6 +47,10 @@ public abstract class AbstractSqlQueryClient extends SqlQueryDaoSupport implemen
 		this.sqlQuery = getSqlQuery();
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="sqlQuery"
+	 */
 	protected SqlQuery getSqlQuery() {
 		if( this.sqlQuery == null )
 			this.sqlQuery = super.getSqlQuery();

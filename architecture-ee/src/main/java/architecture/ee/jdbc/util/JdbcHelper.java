@@ -27,50 +27,62 @@ import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
  */
 public interface JdbcHelper {
 
+	/**
+	 * @author   donghyuck
+	 */
 	enum DatabaseType {
 
 		/**
-		 * ORACLE
+		 * @uml.property  name="oracle"
+		 * @uml.associationEnd  
 		 */
 		oracle,
 
 		/**
-		 * POSTGRESQL
+		 * @uml.property  name="postgresql"
+		 * @uml.associationEnd  
 		 */
 		postgresql,
 
 		/**
-		 * MYSQL
+		 * @uml.property  name="mysql"
+		 * @uml.associationEnd  
 		 */
 		mysql,
 
 		/**
-		 * HSQLDB
+		 * @uml.property  name="hsqldb"
+		 * @uml.associationEnd  
 		 */
 		hsqldb,
 
 		/**
-		 * DB2
+		 * @uml.property  name="db2"
+		 * @uml.associationEnd  
 		 */
 		db2,
 
 		/**
-		 * SQLSERVER
+		 * @uml.property  name="sqlserver"
+		 * @uml.associationEnd  
 		 */
 		sqlserver,
 
 		/**
-		 * INTERBASE
+		 * @uml.property  name="interbase"
+		 * @uml.associationEnd  
 		 */
 		interbase,
 
 		/**
-		 * DERBY
+		 * @uml.property  name="derby"
+		 * @uml.associationEnd  
 		 */
 		derby,
 
 		/**
-		 * UNKNOWN
+		 * @uml.property  name="unknown"
+		 * @uml.associationEnd  
 		 */
 		unknown;
 	}

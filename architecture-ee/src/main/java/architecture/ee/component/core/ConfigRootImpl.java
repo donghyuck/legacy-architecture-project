@@ -8,12 +8,13 @@ import org.apache.commons.vfs2.FileSystemException;
 import architecture.common.lifecycle.ConfigRoot;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class ConfigRootImpl implements ConfigRoot {
 
 	private String rootURL;
 	/**
+	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject rootFileObject;
 	
@@ -31,6 +32,7 @@ public class ConfigRootImpl implements ConfigRoot {
 		
 	/**
 	 * @return
+	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject getRootFileObject() {
 		return rootFileObject;

@@ -17,11 +17,30 @@ import architecture.ee.component.admin.AdminHelper;
 
 public class FrameworkLicenseManager extends LicenseManager {
 	
+	/**
+	 * @author   donghyuck
+	 */
 	public enum FrameworkLicenseProperty {
 		
+		/**
+		 * @uml.property  name="numSeats"
+		 * @uml.associationEnd  
+		 */
 		numSeats, 
+		/**
+		 * @uml.property  name="numClusterMembers"
+		 * @uml.associationEnd  
+		 */
 		numClusterMembers, 
+		/**
+		 * @uml.property  name="numCopies"
+		 * @uml.associationEnd  
+		 */
 		numCopies, 
+		/**
+		 * @uml.property  name="expirationDate"
+		 * @uml.associationEnd  
+		 */
 		expirationDate ;		
 	};
 		

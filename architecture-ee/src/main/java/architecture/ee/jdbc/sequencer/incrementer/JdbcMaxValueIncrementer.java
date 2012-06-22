@@ -7,11 +7,13 @@ import architecture.ee.jdbc.sequencer.SequencerFactory;
 import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class JdbcMaxValueIncrementer implements MaxValueIncrementer {
 	
 	/**
+	 * @uml.property  name="factory"
+	 * @uml.associationEnd  
 	 */
 	private SequencerFactory factory ;	
 	
