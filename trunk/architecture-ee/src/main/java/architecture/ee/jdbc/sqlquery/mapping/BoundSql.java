@@ -21,14 +21,23 @@ import architecture.common.jdbc.ParameterMapping;
 
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class BoundSql {
 
+	/**
+	 * @uml.property  name="sql"
+	 */
 	private String sql;
 	
+	/**
+	 * @uml.property  name="parameterObject"
+	 */
 	private Object parameterObject;
 	
+	/**
+	 * @uml.property  name="parameterMappings"
+	 */
 	private List<ParameterMapping> parameterMappings;
 	
 	public BoundSql(String sql, List<ParameterMapping> parameterMappings, Object parameterObject) {		
@@ -37,14 +46,26 @@ public class BoundSql {
 	    this.parameterObject = parameterObject; 
 	  }
 		
+	/**
+	 * @return
+	 * @uml.property  name="parameterObject"
+	 */
 	public Object getParameterObject() {
 		return parameterObject;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="parameterMappings"
+	 */
 	public List<ParameterMapping> getParameterMappings() {
 		return parameterMappings;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sql"
+	 */
 	public String getSql() {
 		return sql;
 	}

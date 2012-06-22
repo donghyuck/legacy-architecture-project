@@ -22,8 +22,11 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
+
 public interface SqlQuery {
 
+	
 	/**
 	 * 사용할 데이터소스를 설정한다.
 	 * @param dataSource
@@ -202,6 +205,7 @@ public interface SqlQuery {
 	 * @return
 	 */
 	public Object executeScript(String statement);
+	
 	
 
 }

@@ -3,7 +3,7 @@ package architecture.ee.jdbc.recordset;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class RecordsetFactory {
 
@@ -15,6 +15,8 @@ public class RecordsetFactory {
 	}
 
 	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
 	 */
 	private static Implementation impl = null;
 

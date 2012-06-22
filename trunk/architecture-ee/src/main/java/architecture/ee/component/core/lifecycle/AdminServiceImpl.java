@@ -24,23 +24,30 @@ import architecture.ee.spring.lifecycle.SpringAdminService;
 import architecture.ee.spring.lifecycle.support.SpringLifecycleSupport;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAdminService {
 
 	/**
+	 * @uml.property  name="contextLoader"
 	 */
 	private ContextLoader contextLoader;
 	/**
+	 * @uml.property  name="servletContext"
 	 */
 	private ServletContext servletContext;
 	/**
+	 * @uml.property  name="applicationContext"
 	 */
 	private ConfigurableApplicationContext applicationContext;
 	/**
+	 * @uml.property  name="version"
+	 * @uml.associationEnd  
 	 */
 	private Version version ;
 	/**
+	 * @uml.property  name="configService"
+	 * @uml.associationEnd  
 	 */
 	private ConfigService configService;
     
@@ -57,6 +64,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	
 	/**
 	 * @return
+	 * @uml.property  name="configService"
 	 */
 	public ConfigService getConfigService() {
 		return configService;
@@ -71,7 +79,8 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	}
 		
 	/**
-	 * @param configService
+	 * @param  configService
+	 * @uml.property  name="configService"
 	 */
 	public void setConfigService(ConfigService configService){
 		this.configService = configService ;
@@ -91,7 +100,8 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	}
 	
 	/**
-	 * @param contextLoader
+	 * @param  contextLoader
+	 * @uml.property  name="contextLoader"
 	 */
 	public void setContextLoader(ContextLoader contextLoader) {
 		this.contextLoader = contextLoader;
@@ -99,6 +109,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 
 	/**
 	 * @return
+	 * @uml.property  name="contextLoader"
 	 */
 	public ContextLoader getContextLoader() {
 		return contextLoader;
@@ -112,13 +123,15 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	
 	/**
 	 * @return
+	 * @uml.property  name="servletContext"
 	 */
 	public ServletContext getServletContext() {
 		return servletContext;
 	}
 
 	/**
-	 * @param servletContext
+	 * @param  servletContext
+	 * @uml.property  name="servletContext"
 	 */
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
@@ -195,6 +208,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		
 	/**
 	 * @return
+	 * @uml.property  name="applicationContext"
 	 */
 	public ConfigurableApplicationContext getApplicationContext() {
 		return this.applicationContext;
@@ -233,6 +247,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 
 	/**
 	 * @return
+	 * @uml.property  name="version"
 	 */
 	public Version getVersion() {
 		return this.version;

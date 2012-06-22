@@ -28,7 +28,7 @@ import java.sql.Statement;
 import architecture.ee.exception.SystemException;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class ScriptRunner {
 
@@ -55,56 +55,64 @@ public class ScriptRunner {
 	}
 
 	/**
-	 * @param characterSetName
+	 * @param  characterSetName
+	 * @uml.property  name="characterSetName"
 	 */
 	public void setCharacterSetName(String characterSetName) {
 		this.characterSetName = characterSetName;
 	}
 
 	/**
-	 * @param stopOnError
+	 * @param  stopOnError
+	 * @uml.property  name="stopOnError"
 	 */
 	public void setStopOnError(boolean stopOnError) {
 		this.stopOnError = stopOnError;
 	}
 
 	/**
-	 * @param autoCommit
+	 * @param  autoCommit
+	 * @uml.property  name="autoCommit"
 	 */
 	public void setAutoCommit(boolean autoCommit) {
 		this.autoCommit = autoCommit;
 	}
 
 	/**
-	 * @param sendFullScript
+	 * @param  sendFullScript
+	 * @uml.property  name="sendFullScript"
 	 */
 	public void setSendFullScript(boolean sendFullScript) {
 		this.sendFullScript = sendFullScript;
 	}
 
 	/**
-	 * @param logWriter
+	 * @param  logWriter
+	 * @uml.property  name="logWriter"
 	 */
 	public void setLogWriter(PrintWriter logWriter) {
 		this.logWriter = logWriter;
 	}
 
 	/**
-	 * @param errorLogWriter
+	 * @param  errorLogWriter
+	 * @uml.property  name="errorLogWriter"
 	 */
 	public void setErrorLogWriter(PrintWriter errorLogWriter) {
 		this.errorLogWriter = errorLogWriter;
 	}
 
 	/**
-	 * @param delimiter
+	 * @param  delimiter
+	 * @uml.property  name="delimiter"
 	 */
 	public void setDelimiter(String delimiter) {
 		this.delimiter = delimiter;
 	}
 
 	/**
-	 * @param fullLineDelimiter
+	 * @param  fullLineDelimiter
+	 * @uml.property  name="fullLineDelimiter"
 	 */
 	public void setFullLineDelimiter(boolean fullLineDelimiter) {
 		this.fullLineDelimiter = fullLineDelimiter;

@@ -23,7 +23,7 @@ import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class BootstrapImpl implements Bootstrap.Implementation {
 
@@ -34,6 +34,10 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
 	private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
+	/**
+	 * @uml.property  name="repository"
+	 * @uml.associationEnd  
+	 */
 	private RepositoryImpl repository = new RepositoryImpl();
 	
 	private final ReentrantLock lock = new ReentrantLock();

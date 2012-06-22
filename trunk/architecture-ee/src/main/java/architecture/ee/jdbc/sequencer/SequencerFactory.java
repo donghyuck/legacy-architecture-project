@@ -21,12 +21,16 @@ import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class SequencerFactory {
 
 	private Log log = LogFactory.getLog(getClass());
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
 
 	private DataSource dataSource;
@@ -43,13 +47,15 @@ public class SequencerFactory {
 
 	/**
 	 * @return
+	 * @uml.property  name="configuration"
 	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}
 
 	/**
-	 * @param configuration
+	 * @param  configuration
+	 * @uml.property  name="configuration"
 	 */
 	public void setConfiguration(Configuration configuration) {
 		this.configuration = configuration;
@@ -63,7 +69,8 @@ public class SequencerFactory {
 	}
 
 	/**
-	 * @param dataSource
+	 * @param  dataSource
+	 * @uml.property  name="dataSource"
 	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;

@@ -23,11 +23,17 @@ import org.apache.poi.ss.usermodel.Workbook;
 import architecture.common.util.vfs.VFSUtils;
 
 
+/**
+ * @author  donghyuck
+ */
 public class ExcelReader {
 	
 	private Log log = LogFactory.getLog(getClass());
 	private Workbook workbook;
 	
+    /**
+	 * @uml.property  name="sheetIndex"
+	 */
     private int sheetIndex = 0 ;
 
 	public ExcelReader(File file) throws IOException {
@@ -140,6 +146,10 @@ public class ExcelReader {
 		return workbook.getSheetAt(sheetIndex);
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="sheetIndex"
+	 */
 	public int getSheetIndex() {
 		return sheetIndex;
 	}
@@ -189,6 +199,10 @@ public class ExcelReader {
 		return new HSSFWorkbook (inputStream);
 	}
 	
+	/**
+	 * @param sheetIndex
+	 * @uml.property  name="sheetIndex"
+	 */
 	public void setSheetIndex(int sheetIndex) {
 		this.sheetIndex = sheetIndex;
 	}

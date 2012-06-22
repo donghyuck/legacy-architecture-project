@@ -8,33 +8,41 @@ import architecture.ee.model.I18nTextModel2;
 import architecture.ee.util.I18nTextUtils;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I18nTextModel2 {
 
 	/**
+	 * @uml.property  name="localeCode"
 	 */
 	private String localeCode;
     /**
+	 * @uml.property  name="objectAttribute"
 	 */
     private int objectAttribute = -1;
     /**
+	 * @uml.property  name="objectType"
 	 */
     private int objectType = -1;    
     /**
+	 * @uml.property  name="objectId"
 	 */
     private long objectId;
     /**
+	 * @uml.property  name="textId"
 	 */
     private long textId = -1L;    
     /**
+	 * @uml.property  name="textKey"
 	 */
     private String textKey;
     private String textValue; 
     /**
+	 * @uml.property  name="creationDate"
 	 */
     private Date creationDate;
     /**
+	 * @uml.property  name="modifiedDate"
 	 */
     private Date modifiedDate;    
 
@@ -44,13 +52,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
     
 	/**
 	 * @return
+	 * @uml.property  name="objectId"
 	 */
 	public long getObjectId() {
 		return objectId;
 	}
 
 	/**
-	 * @param objectId
+	 * @param  objectId
+	 * @uml.property  name="objectId"
 	 */
 	public void setObjectId(long objectId) {
 		this.objectId = objectId;
@@ -58,13 +68,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 
 	/**
 	 * @return
+	 * @uml.property  name="objectAttribute"
 	 */
 	public int getObjectAttribute() {
 		return objectAttribute;
 	}
 
 	/**
-	 * @param objectAttribute
+	 * @param  objectAttribute
+	 * @uml.property  name="objectAttribute"
 	 */
 	public void setObjectAttribute(int objectAttribute) {
 		this.objectAttribute = objectAttribute;
@@ -72,13 +84,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 
 	/**
 	 * @return
+	 * @uml.property  name="objectType"
 	 */
 	public int getObjectType() {
 		return objectType;
 	}
 
 	/**
-	 * @param objectType
+	 * @param  objectType
+	 * @uml.property  name="objectType"
 	 */
 	public void setObjectType(int objectType) {
 		this.objectType = objectType;
@@ -86,13 +100,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 	
 	/**
 	 * @return
+	 * @uml.property  name="localeCode"
 	 */
 	public String getLocaleCode() {
 		return localeCode;
 	}
 	
 	/**
-	 * @param localeCode
+	 * @param  localeCode
+	 * @uml.property  name="localeCode"
 	 */
 	public void setLocaleCode(String localeCode) {
 		this.localeCode = localeCode;
@@ -100,13 +116,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 	
 	/**
 	 * @return
+	 * @uml.property  name="textId"
 	 */
 	public long getTextId() {
 		return textId;
 	}
 	
 	/**
-	 * @param textId
+	 * @param  textId
+	 * @uml.property  name="textId"
 	 */
 	public void setTextId(long textId) {
 		this.textId = textId;
@@ -114,13 +132,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 	
 	/**
 	 * @return
+	 * @uml.property  name="textKey"
 	 */
 	public String getTextKey() {
 		return textKey;
 	}
 	
 	/**
-	 * @param textKey
+	 * @param  textKey
+	 * @uml.property  name="textKey"
 	 */
 	public void setTextKey(String textKey) {
 		this.textKey = textKey;
@@ -136,13 +156,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 	
 	/**
 	 * @return
+	 * @uml.property  name="creationDate"
 	 */
 	public Date getCreationDate() {
 		return creationDate;
 	}
 	
 	/**
-	 * @param creationDate
+	 * @param  creationDate
+	 * @uml.property  name="creationDate"
 	 */
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
@@ -150,13 +172,15 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 	
 	/**
 	 * @return
+	 * @uml.property  name="modifiedDate"
 	 */
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
 	
 	/**
-	 * @param modifiedDate
+	 * @param  modifiedDate
+	 * @uml.property  name="modifiedDate"
 	 */
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;

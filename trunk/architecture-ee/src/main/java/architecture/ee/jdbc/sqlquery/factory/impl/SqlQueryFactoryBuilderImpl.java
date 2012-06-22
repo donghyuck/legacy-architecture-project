@@ -22,11 +22,15 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder.Implementati
 
 /**
  * SqlQueryFactory 객체를 생성하는 클래스.
- * @author  DongHyuck, Son
+ * @author   DongHyuck, Son
  */
 
 public class SqlQueryFactoryBuilderImpl implements Implementation {
 
+	/**
+	 * @uml.property  name="factory"
+	 * @uml.associationEnd  
+	 */
 	private SqlQueryFactory factory = null;
 			
 	public SqlQueryFactory getSqlQueryFactory() {		

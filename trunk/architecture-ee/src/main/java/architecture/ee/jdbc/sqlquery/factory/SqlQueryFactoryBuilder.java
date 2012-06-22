@@ -3,6 +3,9 @@ package architecture.ee.jdbc.sqlquery.factory;
 import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryBuilderImpl;
 
 
+/**
+ * @author  donghyuck
+ */
 public class SqlQueryFactoryBuilder {
 	
 	public static interface Implementation {
@@ -12,6 +15,10 @@ public class SqlQueryFactoryBuilder {
 		public SqlQueryFactory getSqlQueryFactory(Configuration configuration);
 	}
 
+	/**
+	 * @uml.property  name="impl"
+	 * @uml.associationEnd  
+	 */
 	private static Implementation impl = null;
 	
 	static {

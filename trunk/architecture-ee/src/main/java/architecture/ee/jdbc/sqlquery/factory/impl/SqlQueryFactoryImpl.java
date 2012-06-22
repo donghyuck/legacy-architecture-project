@@ -33,14 +33,16 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
- * 
- * 
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQueryFactory {
 	
 	private DataSource dataSource = null;
 	
+	/**
+	 * @uml.property  name="incrementer"
+	 * @uml.associationEnd  
+	 */
 	private MaxValueIncrementer incrementer = null;
 
 	private boolean incrementerSupported = false;
@@ -49,15 +51,26 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
 		super(configuration);
 	}
 
+	/**
+	 * @param incrementerSupported
+	 * @uml.property  name="incrementerSupported"
+	 */
 	public void setIncrementerSupported(boolean incrementerSupported) {
 		this.incrementerSupported = incrementerSupported;
 	}
 
 	public void initialize(){
+		
+
+		
 		if(getResourceLocations().size() > 0)
 			loadResourceLocations();
 	}
 	
+	/**
+	 * @param dataSource
+	 * @uml.property  name="dataSource"
+	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}

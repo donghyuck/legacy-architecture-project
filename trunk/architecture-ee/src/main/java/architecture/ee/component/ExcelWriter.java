@@ -20,11 +20,23 @@ import org.apache.poi.ss.usermodel.Workbook;
 
 import architecture.common.jdbc.schema.Table;
 
+/**
+ * @author  donghyuck
+ */
 public class ExcelWriter {
 
 	private Log log = LogFactory.getLog(getClass());
+	/**
+	 * @uml.property  name="workbook"
+	 */
 	private Workbook workbook ;
+    /**
+	 * @uml.property  name="sheetIndex"
+	 */
     private int sheetIndex = 0 ;
+    /**
+	 * @uml.property  name="style"
+	 */
     private CellStyle style ;
             
 	public ExcelWriter() {
@@ -97,14 +109,26 @@ public class ExcelWriter {
 		return workbook.getSheetAt(sheetIndex);
 	}
 	
+	/**
+	 * @return
+	 * @uml.property  name="sheetIndex"
+	 */
 	public int getSheetIndex() {
 		return sheetIndex;
 	}
 
+	/**
+	 * @return
+	 * @uml.property  name="style"
+	 */
 	public CellStyle getStyle() {
 		return style;
 	}	
 	
+	/**
+	 * @return
+	 * @uml.property  name="workbook"
+	 */
 	public Workbook getWorkbook() {
 		return workbook;
 	}
@@ -163,14 +187,26 @@ public class ExcelWriter {
 		
 	}
 	
+	/**
+	 * @param sheetIndex
+	 * @uml.property  name="sheetIndex"
+	 */
 	public void setSheetIndex(int sheetIndex) {
 		this.sheetIndex = sheetIndex;
 	}
 	
+	/**
+	 * @param style
+	 * @uml.property  name="style"
+	 */
 	public void setStyle(CellStyle style) {
 		this.style = style;
 	}
 	
+	/**
+	 * @param workbook
+	 * @uml.property  name="workbook"
+	 */
 	public void setWorkbook(Workbook workbook) {
 		this.workbook = workbook;
 	}

@@ -24,12 +24,20 @@ import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.sql.SqlSource;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class DynamicSqlSource implements SqlSource {
 
+	/**
+	 * @uml.property  name="configuration"
+	 * @uml.associationEnd  
+	 */
 	private Configuration configuration;
 
+	/**
+	 * @uml.property  name="rootSqlNode"
+	 * @uml.associationEnd  
+	 */
 	private SqlNode rootSqlNode;
 
 	private List<ParameterMapping> parameterMappings ;

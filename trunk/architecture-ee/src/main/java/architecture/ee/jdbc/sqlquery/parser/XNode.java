@@ -27,20 +27,24 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class XNode {
 
 	/**
+	 * @uml.property  name="node"
 	 */
 	private Node node;
 	/**
+	 * @uml.property  name="name"
 	 */
 	private String name;
 	private String body;
 	private Properties attributes;
 	private Properties variables;
 	/**
+	 * @uml.property  name="xpathParser"
+	 * @uml.associationEnd  
 	 */
 	private XPathParser xpathParser;
 
@@ -123,6 +127,7 @@ public class XNode {
 
 	/**
 	 * @return
+	 * @uml.property  name="node"
 	 */
 	public Node getNode() {
 		return node;
@@ -130,6 +135,7 @@ public class XNode {
 
 	/**
 	 * @return
+	 * @uml.property  name="name"
 	 */
 	public String getName() {
 		return name;

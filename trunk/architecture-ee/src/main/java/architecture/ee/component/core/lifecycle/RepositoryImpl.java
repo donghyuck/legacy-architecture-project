@@ -15,8 +15,12 @@ import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
+import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.jndi.JndiTemplate;
 import org.springframework.web.context.support.ServletContextResource;
+import org.springframework.web.context.support.ServletContextResourceLoader;
 
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.exception.ConfigurationError;
@@ -35,7 +39,7 @@ import architecture.common.xml.XmlProperties;
 
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class RepositoryImpl extends ComponentImpl implements Repository {
    
@@ -43,7 +47,10 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
+	private ResourceLoader resoruceLoader = new DefaultResourceLoader ();
+	
 	/**
+	 * @uml.property  name="effectiveRootPath"
 	 */
 	private String effectiveRootPath;
 
@@ -52,10 +59,13 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	}
 
     /**
+	 * @uml.property  name="rootFileObject"
 	 */
     private FileObject rootFileObject = getRootFileObject() ;
         
     /**
+	 * @uml.property  name="setupProperties"
+	 * @uml.associationEnd  
 	 */
     private ApplicationProperties setupProperties = null;
         
@@ -89,6 +99,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
        
 	/**
 	 * @return
+	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject getRootFileObject(){		
 		if( getState() != State.INITIALIZED || getState() != State.INITIALIZING ){			
@@ -120,6 +131,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 
 	/**
 	 * @return
+	 * @uml.property  name="effectiveRootPath"
 	 */
 	public String getEffectiveRootPath()
     {	
@@ -143,8 +155,9 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     	// 1. 서블릿 컨텍스트에 설정된 프로퍼티 값을 검사 : ARCHITECTURE_INSTALL_ROOT
     	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY );    	
     	if(!StringUtils.isEmpty(value)){
-    		try {        		
-    			ServletContextResource resource = new ServletContextResource(servletContext, value);          		
+    		try {        	
+    			resoruceLoader = new ServletContextResourceLoader(servletContext);    			
+    			Resource resource = resoruceLoader.getResource(value);	
         		File file = resource.getFile();
         		log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , file.getAbsolutePath()) );
         		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
@@ -233,7 +246,8 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 						// setup start ------------------------------------------------------------
 						org.dom4j.Element setupNode = root.addElement("setup");
 						setupNode.addElement("complete").setText("false");
-						
+						//org.dom4j.Element servicesNode = root.addElement("services");
+						//servicesNode.addElement("");
 						
 						// setup end --------------------------------------------------------------
 						xmlWriter.write( document );					

@@ -38,7 +38,7 @@ import architecture.ee.jdbc.sqlquery.parser.XNode;
 import architecture.ee.jdbc.sqlquery.sql.SqlSource;
 
 /**
- * @author  DongHyuck, Son
+ * @author   DongHyuck, Son
  */
 public class XmlStatementBuilder extends AbstractBuilder {
 
@@ -60,8 +60,16 @@ public class XmlStatementBuilder extends AbstractBuilder {
 
 	private Log log = LogFactory.getLog(XmlStatementBuilder.class);
 
+	/**
+	 * @uml.property  name="builderAssistant"
+	 * @uml.associationEnd  
+	 */
 	private SqlBuilderAssistant builderAssistant;
 	
+	/**
+	 * @uml.property  name="context"
+	 * @uml.associationEnd  
+	 */
 	private XNode context;
 	
 	public XmlStatementBuilder(Configuration configuration, SqlBuilderAssistant builderAssistant, XNode context) {

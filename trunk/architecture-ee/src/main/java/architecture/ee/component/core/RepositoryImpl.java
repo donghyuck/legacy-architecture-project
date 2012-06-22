@@ -34,7 +34,7 @@ import architecture.common.xml.XmlProperties;
 
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class RepositoryImpl extends ComponentImpl implements Repository {
    
@@ -43,6 +43,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
 	/**
+	 * @uml.property  name="effectiveRootPath"
 	 */
 	private String effectiveRootPath;
 
@@ -51,10 +52,13 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	}
 
     /**
+	 * @uml.property  name="rootFileObject"
 	 */
     private FileObject rootFileObject = getRootFileObject() ;
         
     /**
+	 * @uml.property  name="setupProperties"
+	 * @uml.associationEnd  
 	 */
     private ApplicationProperties setupProperties = null;
         
@@ -88,6 +92,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
        
 	/**
 	 * @return
+	 * @uml.property  name="rootFileObject"
 	 */
 	private FileObject getRootFileObject(){
 		
@@ -135,6 +140,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 
 	/**
 	 * @return
+	 * @uml.property  name="effectiveRootPath"
 	 */
 	public String getEffectiveRootPath()
     {	

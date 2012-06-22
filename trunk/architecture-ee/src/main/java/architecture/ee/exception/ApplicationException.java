@@ -15,24 +15,70 @@
  */
 package architecture.ee.exception;
 
+import java.text.DecimalFormat;
+
 import org.apache.commons.lang.exception.NestableException;
 
-public class ApplicationException extends NestableException {
+/**
+ * @author  donghyuck
+ */
+public class ApplicationException extends NestableException implements Codeable {
 
+	private static final DecimalFormat decimalformat = new DecimalFormat("0000000");
+	
+	/**
+	 * error code 값이 60000 이상인 경우는 DB 에서 정보를 가져온다.
+	 * @uml.property  name="errorCode"
+	 */
+	private int errorCode = 60000 ;
+	
 	public ApplicationException() {
 		super();
+	}
+
+	public ApplicationException(int errorCode) {
+		this.errorCode = errorCode;
 	}
 
 	public ApplicationException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
+	
+	public ApplicationException(int errorCode, String msg, Throwable cause) {
+		
+		super(msg, cause);
+		this.errorCode = errorCode;
+	}
+	
 
 	public ApplicationException(String msg) {
 		super(msg);
 	}
 
+	public ApplicationException(int errorCode, String msg) {
+		super(msg);
+		this.errorCode = errorCode;
+	}
+	
 	public ApplicationException(Throwable cause) {
 		super(cause);
+	}
+
+	public ApplicationException(int errorCode, Throwable cause) {
+		super(cause);
+		this.errorCode = errorCode;
+	}
+	
+	/**
+	 * @return
+	 * @uml.property  name="errorCode"
+	 */
+	public int getErrorCode() {
+		return errorCode;
+	}
+
+	public String getErrorCodeString() {
+		return decimalformat.format(errorCode);
 	}
 
 }

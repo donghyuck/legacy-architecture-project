@@ -8,11 +8,13 @@ import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public abstract class AbstractJdbcApplicationProperties extends ExtendedJdbcDaoSupport implements ApplicationProperties {
 
 	/**
+	 * @uml.property  name="eventPublisher"
+	 * @uml.associationEnd  
 	 */
 	private EventPublisher eventPublisher = null;
 		
@@ -44,6 +46,7 @@ public abstract class AbstractJdbcApplicationProperties extends ExtendedJdbcDaoS
     
     /**
 	 * @return
+	 * @uml.property  name="eventPublisher"
 	 */
     protected EventPublisher getEventPublisher(){
     	return eventPublisher;
@@ -51,6 +54,7 @@ public abstract class AbstractJdbcApplicationProperties extends ExtendedJdbcDaoS
     
     /**
 	 * method from EventSource interface!
+	 * @uml.property  name="eventPublisher"
 	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;		

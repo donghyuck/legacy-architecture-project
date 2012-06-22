@@ -30,7 +30,7 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateHashModel;
 
 /**
- * @author  donghyuck
+ * @author   donghyuck
  */
 public class DynamicSqlNode implements SqlNode {
 
@@ -38,6 +38,10 @@ public class DynamicSqlNode implements SqlNode {
 	private static BeansWrapper wrapper = new BeansWrapper();
 
 	private String text;
+	/**
+	 * @uml.property  name="language"
+	 * @uml.associationEnd  
+	 */
 	private Language language;
 
 	public DynamicSqlNode(String text) {
@@ -87,10 +91,17 @@ public class DynamicSqlNode implements SqlNode {
 		return "dynamic[" + text + "]";
 	}
 
+	/**
+	 * @author   donghyuck
+	 */
 	public enum Language {
 		/**
+		 * @uml.property  name="vELOCITY"
+		 * @uml.associationEnd  
 		 */
 		VELOCITY, /**
+		 * @uml.property  name="fREEMARKER"
+		 * @uml.associationEnd  
 		 */
 		FREEMARKER
 	}
