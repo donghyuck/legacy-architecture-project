@@ -23,7 +23,7 @@ public class SqlQueryHelper {
 	
 	public List<Map<String, Object>> list (SqlQuery sqlQuery, String statement){		
 		if( sqlQuery instanceof SqlQueryImpl){
-			return ((SqlQueryImpl)sqlQuery).queryForListWithAdditionalParameters(statement, values.size() == 0 ? null : values.toArray(), null, additionalParameters );			
+			return sqlQuery.setAdditionalParameters(additionalParameters).queryForList(statement, values.size() == 0 ? null : values.toArray(), null );			
 		}
 		return sqlQuery.queryForList( statement, values.size() == 0 ? null : values.toArray());
 	}

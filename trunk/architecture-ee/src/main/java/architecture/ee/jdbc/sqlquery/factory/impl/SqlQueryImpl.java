@@ -16,6 +16,7 @@
 package architecture.ee.jdbc.sqlquery.factory.impl;
 
 import java.io.StringReader;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,24 +43,17 @@ public class SqlQueryImpl implements SqlQuery {
 	
 	private Log log = LogFactory.getLog(getClass());
 	private boolean stopOnError = true;
-	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
-	 */
+
 	private Configuration configuration;
-	/**
-	 * @uml.property  name="jdbcTemplate"
-	 * @uml.associationEnd  
-	 */
+
 	private ExtendedJdbcTemplate jdbcTemplate;
 	private int startIndex = 0;
 	private int maxResults = 0;
-	/**
-	 * @uml.property  name="incrementer"
-	 * @uml.associationEnd  
-	 */
+
 	private MaxValueIncrementer incrementer ;
-		
+	
+	private Map<String, Object> additionalParameters = new HashMap<String, Object>(4);
+	
 	
 	public SqlQuery reset() {
 		this.startIndex = 0;
@@ -67,13 +61,16 @@ public class SqlQueryImpl implements SqlQuery {
 		return this;
 	}
 	
-	/**
-	 * @return
-	 * @uml.property  name="incrementer"
-	 */
 	public MaxValueIncrementer getIncrementer() {
 		return incrementer;
 	}
+
+	public SqlQuery setAdditionalParameters(Map<String, Object> additionalParameters) {
+		this.additionalParameters = additionalParameters;
+		return this;
+	}
+	
+	
 
 	// *********************************************
 	// Protected Methods
@@ -101,13 +98,21 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 	
 	protected BoundSql getBoundSql(String statement, Object parameter) {		
-		MappedStatement stmt = configuration.getMappedStatement(statement);
-		return stmt.getBoundSql(parameter);
+		MappedStatement stmt = configuration.getMappedStatement(statement);	
+		BoundSql sql;
+		if( additionalParameters.size() > 0)
+			sql = stmt.getBoundSql(parameter, additionalParameters);
+		else 
+			sql = stmt.getBoundSql(parameter);
+		
+		additionalParameters.clear();
+		return sql;
 	}
 	
 	protected BoundSql getBoundSql(String statement, Object parameter, Object additionalParameters ) {		
 		MappedStatement stmt = configuration.getMappedStatement(statement);
-		return stmt.getBoundSql(parameter, additionalParameters);
+		BoundSql sql =stmt.getBoundSql(parameter, additionalParameters);
+		return sql;
 	}
 	
 	// *********************************************
@@ -143,59 +148,40 @@ public class SqlQueryImpl implements SqlQuery {
 	
 	// SPRING Style API
 	public <T> T queryForObject(String statement, Class<T> elementType) {
-		BoundSql sql = getBoundSql(statement);
-		return jdbcTemplate.queryForObject(sql.getSql(), elementType );
+		BoundSql sql = getBoundSql(statement);		
+		if( elementType == Map.class  ){
+			return (T) queryForObject(statement, new ColumnMapRowMapper());
+		}else{
+			return jdbcTemplate.queryForObject(sql.getSql(), elementType );
+		}		
 	}
-
-	public <T> T queryForObjectWithAdditionalParameters(String statement, Class<T> elementType, Object additionalParameters) {
-		BoundSql sql = getBoundSql(statement, additionalParameters);
-		return jdbcTemplate.queryForObject(sql.getSql(), elementType );
-	}
-	
 	
 	public <T> T queryForObject(String statement, RowMapper<T> rowMapper) {
 		BoundSql sql = getBoundSql(statement);
 		return jdbcTemplate.queryForObject(sql.getSql(), rowMapper);
 	}
-	
-	public <T> T queryForObjectWithAdditionalParameters(String statement, RowMapper<T> rowMapper, Object additionalParameters) {
-		BoundSql sql = getBoundSql(statement, additionalParameters);
-		return jdbcTemplate.queryForObject(sql.getSql(), rowMapper);
-	}
-	
-	
+
 	
 	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, Class<T> elementType) {
 		BoundSql sql = getBoundSql(statement, params);		
-		return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, elementType);		
+		
+		if( elementType == Map.class  ){
+			return (T)jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, new ColumnMapRowMapper());	
+		}else{
+			return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, elementType);	
+		}
 	}
-	
-	public <T> T queryForObjectWithAdditionalParameters(String statement, Object[] params, int[] paramTypes, Class<T> elementType, Object additionalParameters) {
-		BoundSql sql = getBoundSql(statement, params, additionalParameters);		
-		return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, elementType);		
-	}
-	
+		
 	public <T> T queryForObject(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper) {		
 		BoundSql sql = getBoundSql(statement, params);		
 		return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, rowMapper);		
 	}
 	
-	public <T> T queryForObjectWithAdditionalParameters(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper, Object additionalParameters) {		
-		BoundSql sql = getBoundSql(statement, params, additionalParameters);		
-		return jdbcTemplate.queryForObject(sql.getSql(), params, paramTypes, rowMapper);		
-	}
-
 	public Map<String, Object> queryForMap(String statement) {
 		BoundSql sql = getBoundSql(statement);		
 		return jdbcTemplate.queryForMap(sql.getSql());
 	}
 
-	public Map<String, Object> queryForMapWithAdditionalParameters(String statement, Object additionalParameters) {
-		BoundSql sql = getBoundSql(statement);		
-		return jdbcTemplate.queryForMap(sql.getSql());
-	}
-
-	
 	public Map<String, Object> queryForMap(String statement, Object[] params, int[] paramTypes) {
 		BoundSql sql = getBoundSql(statement, params);		
 		return jdbcTemplate.queryForMap(sql.getSql(), params, paramTypes);
@@ -221,16 +207,6 @@ public class SqlQueryImpl implements SqlQuery {
 		}
 	}
 	
-	public <T> List<T> queryForListWithAdditionalParameters(String statement, Object[] params, int[] paramTypes, Class<T> elementType, Object additionalParameters) {
-		BoundSql sql = getBoundSql(statement, params, additionalParameters);		
-		if( this.maxResults > 0 ){
-				return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes, elementType);
-		}else{
-			return jdbcTemplate.queryForList(sql.getSql(), params, paramTypes, elementType);	
-		}
-	}
-	
-
 	public <T> List<T> queryForList(String statement, RowMapper<T> rowMapper) {
 		return queryForList(statement, new Object[0], new int[0], rowMapper);
 	}
@@ -260,16 +236,7 @@ public class SqlQueryImpl implements SqlQuery {
 			return jdbcTemplate.query(sql.getSql(), params, paramTypes, new ColumnMapRowMapper());	
 		}
 	}
-	public List<Map<String, Object>> queryForListWithAdditionalParameters(String statement, Object[] params, int[] paramTypes, Object additionalParameters) {
-		BoundSql sql = getBoundSql( statement, params, additionalParameters );		
-		if( this.maxResults > 0 ){
-			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes, new ColumnMapRowMapper());			
-		}else{
-			return jdbcTemplate.query(sql.getSql(), params, paramTypes, new ColumnMapRowMapper());	
-		}
-	}
-	
-	
+
 	// New Style API : idea from hibernate 
 	public <T> T uniqueResult(String statement, Class<T> elementType) {
 		return queryForObject(statement, elementType);
@@ -280,6 +247,8 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 
 	public <T> T uniqueResult(String statement, Object parameter, Class<T> elementType) {
+		if(elementType == Map.class )
+			return (T)uniqueResult(statement, parameter,  new ColumnMapRowMapper());
 		return uniqueResult(statement, parameter, new SingleColumnRowMapper<T>(elementType));
 	}
 
@@ -287,7 +256,7 @@ public class SqlQueryImpl implements SqlQuery {
 		BoundSql sql = getBoundSql(statement, parameter);		
 		List<ParameterMapping> parameterMappings = sql.getParameterMappings();		
 		if( parameter instanceof Map )
-			return jdbcTemplate.queryForObject(sql.getSql(), parameterMappings, (Map<String, Object>)parameter, rowMapper );
+			return jdbcTemplate.queryForObject(sql.getSql(), parameterMappings, (Map<String, Object>) parameter, rowMapper );
 		else if (parameter instanceof Object[])
 			return jdbcTemplate.queryForObject(sql.getSql(), (Object[])parameter, rowMapper);
 		else 
