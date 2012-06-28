@@ -13,8 +13,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import architecture.common.user.UserTemplate;
 import architecture.user.UserManager;
-import architecture.user.UserTemplate;
 
 /**
  * @author  donghyuck

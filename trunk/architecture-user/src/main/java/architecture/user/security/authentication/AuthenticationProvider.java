@@ -1,6 +1,8 @@
 package architecture.user.security.authentication;
 
-import architecture.user.User;
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
+
 
 public interface AuthenticationProvider {
 	   

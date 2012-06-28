@@ -8,12 +8,12 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.model.impl.BaseModelObject;
+import architecture.common.user.User;
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.model.ModelConstants;
 import architecture.user.Group;
-import architecture.user.User;
 import architecture.user.UserNotFoundException;
 import architecture.user.model.GroupModel;
-import architecture.user.security.authentication.UnAuthorizedException;
 
 /**
  * @author  donghyuck

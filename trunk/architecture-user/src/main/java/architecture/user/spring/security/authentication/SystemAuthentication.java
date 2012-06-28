@@ -5,9 +5,9 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 
-import architecture.user.User;
-import architecture.user.security.authentication.AuthToken;
-import architecture.user.security.authentication.SystemUser;
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
+import architecture.common.user.authentication.SystemUser;
 
 /**
  * @author  donghyuck

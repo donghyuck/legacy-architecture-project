@@ -3,10 +3,10 @@ package architecture.user.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import architecture.common.user.User;
 import architecture.user.AbstractGroupManager;
 import architecture.user.Group;
 import architecture.user.GroupNotFoundException;
-import architecture.user.User;
 import architecture.user.UserManager;
 import architecture.user.dao.GroupDao;
 
