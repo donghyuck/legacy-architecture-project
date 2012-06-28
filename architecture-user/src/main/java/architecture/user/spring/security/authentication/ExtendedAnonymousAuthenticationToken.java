@@ -5,9 +5,11 @@ import java.util.Collection;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
-import architecture.user.User;
-import architecture.user.security.authentication.AnonymousUser;
-import architecture.user.security.authentication.AuthToken;
+import architecture.common.user.User;
+import architecture.common.user.authentication.AnonymousUser;
+import architecture.common.user.authentication.AuthToken;
+
+
 
 public class ExtendedAnonymousAuthenticationToken implements ExtendedAuthentication {
 

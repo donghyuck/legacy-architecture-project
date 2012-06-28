@@ -15,9 +15,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
-import architecture.user.User;
+import architecture.common.user.User;
+import architecture.common.user.UserTemplate;
 import architecture.user.UserManager;
-import architecture.user.UserTemplate;
 import architecture.user.security.role.Role;
 import architecture.user.security.role.RoleManager;
 

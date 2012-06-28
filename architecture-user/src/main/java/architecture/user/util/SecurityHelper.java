@@ -7,9 +7,9 @@ import java.util.List;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
 import architecture.common.util.ImplFactory;
-import architecture.user.User;
-import architecture.user.security.authentication.AuthToken;
 
 /**
  * @author  donghyuck

@@ -3,9 +3,10 @@ package architecture.user.spring.security.authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-import architecture.user.User;
-import architecture.user.security.authentication.AuthToken;
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
 import architecture.user.util.SecurityHelper;
+
 
 public class SecurityContextAuthenticationProviderImpl implements ExtendedAuthenticationProvider {
 

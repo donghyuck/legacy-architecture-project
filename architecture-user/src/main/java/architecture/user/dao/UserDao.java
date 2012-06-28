@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import architecture.user.User;
+import architecture.common.user.User;
 
 public interface UserDao {
 

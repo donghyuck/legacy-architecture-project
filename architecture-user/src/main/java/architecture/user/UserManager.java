@@ -3,6 +3,8 @@ package architecture.user;
 import java.util.Date;
 import java.util.List;
 
+import architecture.common.user.User;
+
 public interface UserManager {
 	
 	/**

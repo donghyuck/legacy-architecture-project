@@ -1,6 +1,6 @@
 package architecture.user.spi;
 
-import architecture.user.User;
+import architecture.common.user.User;
 
 public interface UserProvider {
 	

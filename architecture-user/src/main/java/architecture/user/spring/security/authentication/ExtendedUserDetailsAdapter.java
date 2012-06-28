@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import architecture.user.User;
+import architecture.common.user.User;
 
 /**
  * @author  donghyuck

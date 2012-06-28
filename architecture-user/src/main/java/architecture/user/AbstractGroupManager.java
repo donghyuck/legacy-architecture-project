@@ -11,6 +11,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import architecture.common.user.User;
 
 /**
  * @author  donghyuck

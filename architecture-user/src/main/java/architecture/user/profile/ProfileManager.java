@@ -4,8 +4,8 @@ import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
-import architecture.user.User;
-import architecture.user.security.authentication.UnAuthorizedException;
+import architecture.common.user.User;
+import architecture.common.user.authentication.UnAuthorizedException;
 
 /**
  * @author                 donghyuck

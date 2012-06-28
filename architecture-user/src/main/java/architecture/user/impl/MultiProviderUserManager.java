@@ -18,15 +18,15 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import architecture.common.user.User;
+import architecture.common.user.UserTemplate;
+import architecture.common.user.authentication.AnonymousUser;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.user.EmailAlreadyExistsException;
-import architecture.user.User;
 import architecture.user.UserAlreadyExistsException;
 import architecture.user.UserManager;
 import architecture.user.UserNotFoundException;
-import architecture.user.UserTemplate;
 import architecture.user.dao.UserDao;
-import architecture.user.security.authentication.AnonymousUser;
 import architecture.user.security.authentication.InvalidProviderUserException;
 import architecture.user.spi.UserProvider;
 import architecture.user.spring.security.authentication.ExtendedUserDetailsAdapter;

@@ -12,10 +12,12 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
+import architecture.common.user.User;
+import architecture.common.user.UserTemplate;
+
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.User;
-import architecture.user.UserTemplate;
+
 import architecture.user.dao.UserDao;
 
 /**

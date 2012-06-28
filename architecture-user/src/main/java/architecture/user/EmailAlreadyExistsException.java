@@ -20,4 +20,21 @@ public class EmailAlreadyExistsException extends ApplicationException {
 		super(cause);
 	}
 
+	public EmailAlreadyExistsException(int errorCode, String msg,
+			Throwable cause) {
+		super(errorCode, msg, cause);
+	}
+
+	public EmailAlreadyExistsException(int errorCode, String msg) {
+		super(errorCode, msg);
+	}
+
+	public EmailAlreadyExistsException(int errorCode, Throwable cause) {
+		super(errorCode, cause);
+	}
+
+	public EmailAlreadyExistsException(int errorCode) {
+		super(errorCode);
+	}
+
 }

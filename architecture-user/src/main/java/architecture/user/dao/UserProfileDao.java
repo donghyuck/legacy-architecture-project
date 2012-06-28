@@ -3,7 +3,7 @@ package architecture.user.dao;
 import java.util.Collection;
 import java.util.Map;
 
-import architecture.user.User;
+import architecture.common.user.User;
 import architecture.user.profile.ProfileFieldValue;
 import architecture.user.profile.ProfileFieldValueCount;
 

@@ -6,7 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import architecture.user.security.authentication.AuthToken;
+import architecture.common.user.authentication.AuthToken;
 
 /**
  * @author  donghyuck
@@ -19,15 +19,15 @@ public class ExtendedUserDetails extends User implements AuthToken {
 	private final long userId;
     /**
 	 */
-    private final architecture.user.User extUser;
+    private final architecture.common.user.User extUser;
     
-	public ExtendedUserDetails(architecture.user.User extUser, List<GrantedAuthority> authorities) {		
+	public ExtendedUserDetails(architecture.common.user.User extUser, List<GrantedAuthority> authorities) {		
 		super(extUser.getUsername(), extUser.getPasswordHash(), true, true, true, true, authorities);		
 		this.extUser = extUser;
 		this.userId = this.extUser.getUserId();
 	}
 	
-	public ExtendedUserDetails(architecture.user.User extUser, Authentication authen) {
+	public ExtendedUserDetails(architecture.common.user.User extUser, Authentication authen) {
 		super( extUser.getUsername(), extUser.isAnonymous() ? (String)authen.getPrincipal() : extUser.getPasswordHash(), 
 			   true, 
 			   true, 
@@ -57,7 +57,7 @@ public class ExtendedUserDetails extends User implements AuthToken {
         return extUser.getCreationDate() != null ? extUser.getCreationDate().getTime() : -1L;
     }
 
-	public architecture.user.User getUser()
+	public architecture.common.user.User getUser()
     {
         return extUser;
     }

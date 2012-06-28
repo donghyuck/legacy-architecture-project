@@ -12,8 +12,8 @@ import java.util.Map;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
+import architecture.common.user.User;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.User;
 import architecture.user.dao.UserProfileDao;
 import architecture.user.model.impl.ProfileFieldValueModelImpl;
 import architecture.user.profile.ProfileField;
