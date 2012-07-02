@@ -9,11 +9,11 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.Group;
-import architecture.user.model.impl.PermissionMaskModelImpl;
-import architecture.user.security.permission.Permission;
-import architecture.user.security.permission.PermissionMask;
-import architecture.user.security.permission.dao.PermissionDao;
+import architecture.security.model.impl.PermissionMaskModelImpl;
+import architecture.security.permission.Permission;
+import architecture.security.permission.PermissionMask;
+import architecture.security.permission.dao.PermissionDao;
+import architecture.security.user.Group;
 
 public class JdbcPermissionDao extends ExtendedJdbcDaoSupport implements PermissionDao {
 

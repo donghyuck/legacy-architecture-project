@@ -1,4 +1,4 @@
-package architecture.security.user.impl;
+package architecture.security.model.impl;
 
 import architecture.user.Group;
 import architecture.user.model.impl.GroupModelImpl;

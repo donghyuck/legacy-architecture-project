@@ -1,4 +1,4 @@
-package architecture.security.user.model.impl;
+package architecture.security.model.impl;
 
 import architecture.user.model.Company;
 

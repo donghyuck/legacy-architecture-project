@@ -1,4 +1,4 @@
-package architecture.security.user.model;
+package architecture.security.model;
 
 import architecture.common.model.ModelObject;
 import architecture.user.security.permission.PermissionMask;

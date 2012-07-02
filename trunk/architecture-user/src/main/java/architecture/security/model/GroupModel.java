@@ -1,4 +1,4 @@
-package architecture.security.user.model;
+package architecture.security.model;
 
 import java.util.List;
 import java.util.Map;
@@ -6,7 +6,7 @@ import java.util.Map;
 import architecture.common.model.ModelObject;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
-import architecture.user.Group;
+import architecture.security.user.Group;
 
 /**
  * @author                 donghyuck

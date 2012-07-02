@@ -1,4 +1,4 @@
-package architecture.security.user.impl;
+package architecture.security.model.impl;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;

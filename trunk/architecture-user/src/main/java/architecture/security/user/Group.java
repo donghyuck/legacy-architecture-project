@@ -1,6 +1,6 @@
 package architecture.security.user;
 
-import architecture.user.model.GroupModel;
+import architecture.security.model.GroupModel;
 
 public interface Group extends GroupModel {
 

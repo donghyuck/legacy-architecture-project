@@ -1,4 +1,4 @@
-package architecture.security.user.model;
+package architecture.security.model;
 
 
 public interface Company extends CompanyModel {
