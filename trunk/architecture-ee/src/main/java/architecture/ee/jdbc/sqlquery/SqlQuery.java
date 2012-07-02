@@ -22,8 +22,6 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
-
 public interface SqlQuery {
 
 	
