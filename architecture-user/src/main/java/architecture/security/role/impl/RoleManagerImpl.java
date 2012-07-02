@@ -11,11 +11,11 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.user.UserTemplate;
-import architecture.user.Group;
-import architecture.user.GroupManager;
-import architecture.user.security.role.ExtendedRoleManager;
-import architecture.user.security.role.Role;
-import architecture.user.security.role.dao.RoleDao;
+import architecture.security.role.ExtendedRoleManager;
+import architecture.security.role.Role;
+import architecture.security.role.dao.RoleDao;
+import architecture.security.user.Group;
+import architecture.security.user.GroupManager;
 
 /**
  * @author  donghyuck

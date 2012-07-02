@@ -11,9 +11,9 @@ import architecture.common.model.impl.BaseModelObject;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.model.ModelConstants;
-import architecture.user.Group;
-import architecture.user.UserNotFoundException;
-import architecture.user.model.GroupModel;
+import architecture.security.model.GroupModel;
+import architecture.security.user.Group;
+import architecture.security.user.UserNotFoundException;
 
 /**
  * @author  donghyuck

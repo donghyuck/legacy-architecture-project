@@ -3,8 +3,8 @@ package architecture.security.model.impl;
 import java.io.Serializable;
 
 import architecture.common.model.impl.BaseModelObject;
-import architecture.user.model.Company;
-import architecture.user.model.CompanyModel;
+import architecture.security.model.Company;
+import architecture.security.model.CompanyModel;
 
 public class CompanyModelImpl extends BaseModelObject<Company> implements CompanyModel {
 

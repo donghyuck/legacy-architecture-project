@@ -9,11 +9,11 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.dao.ProfileFieldDao;
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldOption;
-import architecture.user.profile.impl.ProfileFieldImpl;
-import architecture.user.profile.impl.ProfileFieldOptionImpl;
+import architecture.security.user.dao.ProfileFieldDao;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldOption;
+import architecture.security.user.profile.impl.ProfileFieldImpl;
+import architecture.security.user.profile.impl.ProfileFieldOptionImpl;
 
 public class JdbcProfileFiledDao  extends ExtendedJdbcDaoSupport implements ProfileFieldDao {
 

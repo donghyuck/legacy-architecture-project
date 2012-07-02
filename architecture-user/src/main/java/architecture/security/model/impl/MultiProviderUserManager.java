@@ -22,14 +22,14 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.ee.component.admin.AdminHelper;
-import architecture.user.EmailAlreadyExistsException;
-import architecture.user.UserAlreadyExistsException;
-import architecture.user.UserManager;
-import architecture.user.UserNotFoundException;
-import architecture.user.dao.UserDao;
-import architecture.user.security.authentication.InvalidProviderUserException;
-import architecture.user.spi.UserProvider;
-import architecture.user.spring.security.authentication.ExtendedUserDetailsAdapter;
+import architecture.security.authentication.InvalidProviderUserException;
+import architecture.security.user.EmailAlreadyExistsException;
+import architecture.security.user.UserAlreadyExistsException;
+import architecture.security.user.UserManager;
+import architecture.security.user.UserNotFoundException;
+import architecture.security.user.dao.UserDao;
+import architecture.security.user.spi.UserProvider;
+import architecture.security.user.spring.authentication.ExtendedUserDetailsAdapter;
 
 /**
  * @author  donghyuck

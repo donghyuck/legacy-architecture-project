@@ -3,7 +3,7 @@ package architecture.security.user.dao;
 import java.util.List;
 import java.util.Set;
 
-import architecture.user.Group;
+import architecture.security.user.Group;
 
 public interface GroupDao {
 	

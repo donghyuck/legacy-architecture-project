@@ -14,12 +14,12 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.common.user.User;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.dao.UserProfileDao;
-import architecture.user.model.impl.ProfileFieldValueModelImpl;
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldValue;
-import architecture.user.profile.ProfileFieldValueCount;
-import architecture.user.profile.impl.ProfileFieldValueImpl;
+import architecture.security.model.impl.ProfileFieldValueModelImpl;
+import architecture.security.user.dao.UserProfileDao;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldValue;
+import architecture.security.user.profile.ProfileFieldValueCount;
+import architecture.security.user.profile.impl.ProfileFieldValueImpl;
 
 public class JdbcUserProfileDao extends ExtendedJdbcDaoSupport implements UserProfileDao {
 

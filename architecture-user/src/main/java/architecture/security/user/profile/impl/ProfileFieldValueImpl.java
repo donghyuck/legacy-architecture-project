@@ -1,8 +1,8 @@
 package architecture.security.user.profile.impl;
 
-import architecture.user.model.impl.ProfileFieldValueModelImpl;
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldValue;
+import architecture.security.model.impl.ProfileFieldValueModelImpl;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldValue;
 
 public class ProfileFieldValueImpl extends ProfileFieldValueModelImpl implements ProfileFieldValue{
 

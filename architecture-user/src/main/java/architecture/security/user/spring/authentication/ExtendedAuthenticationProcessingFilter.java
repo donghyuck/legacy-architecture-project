@@ -14,7 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import architecture.common.user.UserTemplate;
-import architecture.user.UserManager;
+import architecture.security.user.UserManager;
 
 /**
  * @author  donghyuck

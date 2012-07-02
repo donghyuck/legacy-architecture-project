@@ -3,7 +3,7 @@ package architecture.security.model;
 import java.util.List;
 
 import architecture.common.model.ModelObject;
-import architecture.user.profile.ProfileFieldValue;
+import architecture.security.user.profile.ProfileFieldValue;
 
 /**
  * @author                 donghyuck

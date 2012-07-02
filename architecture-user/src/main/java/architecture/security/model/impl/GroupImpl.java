@@ -1,7 +1,7 @@
 package architecture.security.model.impl;
 
-import architecture.user.Group;
-import architecture.user.model.impl.GroupModelImpl;
+import architecture.security.user.Group;
+
 
 public class GroupImpl extends GroupModelImpl implements Group {
 

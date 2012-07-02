@@ -14,9 +14,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.Group;
-import architecture.user.dao.GroupDao;
-import architecture.user.impl.GroupImpl;
+import architecture.security.model.impl.GroupImpl;
+import architecture.security.user.Group;
+import architecture.security.user.dao.GroupDao;
 
 /**
  * @author  donghyuck

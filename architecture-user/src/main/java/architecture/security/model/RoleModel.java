@@ -1,7 +1,7 @@
 package architecture.security.model;
 
 import architecture.common.model.ModelObject;
-import architecture.user.security.role.Role;
+import architecture.security.role.Role;
 
 /**
  * @author                 donghyuck

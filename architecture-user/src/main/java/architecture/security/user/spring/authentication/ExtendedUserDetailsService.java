@@ -17,9 +17,9 @@ import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
-import architecture.user.UserManager;
-import architecture.user.security.role.Role;
-import architecture.user.security.role.RoleManager;
+import architecture.security.role.Role;
+import architecture.security.role.RoleManager;
+import architecture.security.user.UserManager;
 
 /**
  * @author  donghyuck
