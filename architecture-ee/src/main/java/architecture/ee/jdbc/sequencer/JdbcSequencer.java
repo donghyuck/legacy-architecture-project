@@ -1,4 +1,4 @@
-package architecture.ee.jdbc.sequencer.impl;
+package architecture.ee.jdbc.sequencer;
 
 import java.sql.Types;
 
@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
-import architecture.ee.jdbc.sequencer.Sequencer;
+import architecture.common.jdbc.sequencer.Sequencer;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;

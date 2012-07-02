@@ -2,9 +2,10 @@ package architecture.ee.jdbc.sequencer.incrementer;
 
 import java.util.Map;
 
-import architecture.ee.jdbc.sequencer.Sequencer;
+import architecture.common.jdbc.incrementer.MaxValueIncrementer;
+import architecture.common.jdbc.sequencer.Sequencer;
+import architecture.ee.jdbc.sequencer.JdbcSequencer;
 import architecture.ee.jdbc.sequencer.SequencerFactory;
-import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
 
 /**
  * @author   donghyuck

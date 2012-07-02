@@ -19,9 +19,9 @@ import java.io.File;
 
 import javax.sql.DataSource;
 
-import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
+import architecture.common.jdbc.incrementer.MaxValueIncrementer;
+import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
-import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public interface SqlQueryFactory {
 

@@ -16,7 +16,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
-import architecture.ee.jdbc.sequencer.impl.JdbcSequencer;
+import architecture.common.jdbc.sequencer.Sequencer;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 
