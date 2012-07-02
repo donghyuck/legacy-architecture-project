@@ -2,9 +2,9 @@ package architecture.security.permission.dao;
 
 import java.util.List;
 
-import architecture.user.Group;
-import architecture.user.security.permission.Permission;
-import architecture.user.security.permission.PermissionMask;
+import architecture.security.permission.Permission;
+import architecture.security.permission.PermissionMask;
+import architecture.security.user.Group;
 
 public interface PermissionDao {
 

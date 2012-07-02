@@ -10,9 +10,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
-import architecture.user.spring.security.authentication.ExtendedAuthentication;
-import architecture.user.spring.security.authentication.ExtendedUserDetails;
-import architecture.user.util.SecurityHelper.Implementation;
+import architecture.security.user.spring.authentication.ExtendedAuthentication;
+import architecture.security.user.spring.authentication.ExtendedUserDetails;
+import architecture.security.util.SecurityHelper.Implementation;
+
 
 public class SecurityHelperImpl implements Implementation {
 

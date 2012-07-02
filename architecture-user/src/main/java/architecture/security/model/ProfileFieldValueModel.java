@@ -1,4 +1,4 @@
-package architecture.security.user.model;
+package architecture.security.model;
 
 import java.util.List;
 
