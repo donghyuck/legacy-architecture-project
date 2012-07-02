@@ -1,171 +1,63 @@
 package architecture.ee.component;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSystemException;
+
+import architecture.common.jdbc.JdbcUtils;
+import architecture.common.jdbc.schema.Database;
+import architecture.common.jdbc.schema.Table;
+import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 
 public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		SqlQueryClient {
 
-	/**
-	 * @param statement
-	 * @param elementType
-	 */
-	public <T> T uniqueResult(String statement, Class<T> elementType) {
-		return getSqlQuery().uniqueResult(statement, elementType);
+	public void exportToExcel(String catalogName, String schemaName, String tableName, String uri) {
+		
+		Database database = JdbcUtils.getDatabase(getConnection(), catalogName, schemaName, tableName);
+		
+		Table table = database.getTable(tableName);
+		int idx = 0;
+		int columnSize = table.getColumnNames().length;
+		Map<String, Integer> types = new HashMap<String, Integer>();
+		StringBuilder builder = new StringBuilder();
+		builder.append("SELECT ");
+		for (String columnName : table.getColumnNames()) {
+			idx++;
+			builder.append(columnName);
+			if (idx < columnSize) {
+				builder.append(", ");
+			}
+			types.put(columnName, table.getColumn(columnName).getType());
+		}
+		builder.append(" FROM " + table.getName());
+		
+		List<Map<String, Object>> list = getExtendedJdbcTemplate().queryForList((builder.toString()));
+		ExcelWriter writer = new ExcelWriter();
+		writer.addSheet(table.getName());
+		writer.getSheetAt(0).setDefaultColumnWidth(15);
+		writer.setHeaderToFirstRow(table);
+		for (Map<String, Object> item : list) {
+			writer.setDataToRow(item, table);
+		}
+		try {
+			FileObject fo = VFSUtils.resolveFile(uri);
+			if (!fo.exists())
+				fo.createFile();
+			writer.write(fo.getContent().getOutputStream());
+		} catch (FileSystemException e) {
+		}
 	}
 
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 * @param additionalParameters
-	 * @return
-	 */
-	public <T> T uniqueResult(String statement, Class<T> elementType,
-			Map<String, Object> additionalParameters) {
-		return getSqlQuery().setAdditionalParameters(additionalParameters)
-				.uniqueResult(statement, elementType);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 * @param parameter
-	 * @return
-	 */
-	public <T> T uniqueResult(String statement, Class<T> elementType,
-			Object parameter) {
-		return getSqlQuery().uniqueResult(statement, parameter, elementType);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 * @param parameter
-	 * @param additionalParameters
-	 * @return
-	 */
-	public <T> T uniqueResult(String statement, Class<T> elementType,
-			Object parameter, Map<String, Object> additionalParameters) {
-		return getSqlQuery().setAdditionalParameters(additionalParameters)
-				.uniqueResult(statement, parameter, elementType);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 */
-	public List<Map<String, Object>> list(String statement) {
-		return getSqlQuery().list(statement);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param additionalParameters
-	 * @return
-	 */
-	public List<Map<String, Object>> list(String statement,
-			Map<String, Object> additionalParameters) {
-		return getSqlQuery().setAdditionalParameters(additionalParameters)
-				.list(statement);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param parameters
-	 * @return
-	 */
-	public List<Map<String, Object>> list(String statement,
-			Object... parameters) {
-		return getSqlQuery().list(statement, parameters);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param additionalParameters
-	 * @param parameters
-	 * @return
-	 */
-	public List<Map<String, Object>> list(String statement,
-			Map<String, Object> additionalParameters, Object... parameters) {
-		return getSqlQuery().setAdditionalParameters(additionalParameters)
-				.list(statement, parameters);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 */
-	public <T> List<T> list(String statement, Class<T> elementType) {
-		return getSqlQuery().list(statement, elementType);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 * @param additionalParameters
-	 * @return
-	 */
-	public <T> List<T> list(String statement, Class<T> elementType,
-			Map<String, Object> additionalParameters) {
-		return getSqlQuery().setAdditionalParameters(additionalParameters)
-				.list(statement, elementType);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 * @param parameters
-	 * @return
-	 */
-	public <T> List<T> list(String statement, Class<T> elementType,
-			Object... parameters) {
-		return getSqlQuery().list(statement, parameters, elementType);
-	}
-
-	/**
-	 * 
-	 * @param statement
-	 * @param elementType
-	 * @param additionalParameters
-	 * @param parameters
-	 * @return
-	 */
-	public <T> List<T> list(String statement, Class<T> elementType,
-			Map<String, Object> additionalParameters, Object... parameters) {
-		return getSqlQuery().setAdditionalParameters(additionalParameters)
-				.list(statement, parameters, elementType);
-	}
-
-	public int executeUpdate(String statement) {
+	public void exportToExcel(String catalog, String schemaName,
+			String tableName) {
 		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public int executeUpdate(String statement, Object parameter) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public Object executeScript(String statement) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public long getNextId(String name) {
-		// TODO Auto-generated method stub
-		return 0;
+		
 	}
 
 	/*
