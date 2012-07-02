@@ -24,13 +24,13 @@ import javax.sql.DataSource;
 import org.apache.commons.lang.StringUtils;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
+import architecture.common.jdbc.incrementer.MaxValueIncrementer;
+import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
 import architecture.ee.jdbc.sequencer.SequencerFactory;
 import architecture.ee.jdbc.sequencer.incrementer.JdbcMaxValueIncrementer;
-import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
-import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
  * @author   donghyuck

@@ -29,12 +29,12 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 
 import architecture.common.jdbc.ParameterMapping;
-import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
+import architecture.common.jdbc.incrementer.MaxValueIncrementer;
+import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
-import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 /**
  * @author   donghyuck
