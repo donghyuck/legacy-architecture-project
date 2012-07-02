@@ -1,6 +1,6 @@
 package architecture.security.user.profile;
 
-import architecture.user.model.ProfileFieldOptionModel;
+import architecture.security.model.ProfileFieldOptionModel;
 
 
 public interface ProfileFieldOption extends ProfileFieldOptionModel {

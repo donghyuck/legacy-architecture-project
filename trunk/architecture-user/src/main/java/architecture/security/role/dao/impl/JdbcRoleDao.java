@@ -8,11 +8,11 @@ import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
+import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.model.impl.RoleModelImpl;
-import architecture.user.security.role.Role;
-import architecture.user.security.role.dao.RoleDao;
+import architecture.security.model.impl.RoleModelImpl;
+import architecture.security.role.Role;
+import architecture.security.role.dao.RoleDao;
 
 /**
  * @author  donghyuck

@@ -2,7 +2,7 @@ package architecture.security.user.spring.authentication;
 
 import org.springframework.security.core.context.SecurityContext;
 
-import architecture.user.security.authentication.AuthenticationProvider;
+import architecture.security.authentication.AuthenticationProvider;
 
 
 public interface ExtendedAuthenticationProvider extends AuthenticationProvider {

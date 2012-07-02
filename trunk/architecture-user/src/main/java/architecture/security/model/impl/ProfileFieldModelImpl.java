@@ -11,10 +11,10 @@ import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.i18n.I18nText2;
 import architecture.ee.model.ModelConstants;
 import architecture.ee.util.I18nTextUtils;
-import architecture.user.model.ProfileFieldModel;
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldOption;
-import architecture.user.profile.ProfileFieldUtil;
+import architecture.security.model.ProfileFieldModel;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldOption;
+import architecture.security.user.profile.ProfileFieldUtil;
 
 
 /**

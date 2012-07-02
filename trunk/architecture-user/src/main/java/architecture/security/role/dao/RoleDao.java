@@ -2,7 +2,7 @@ package architecture.security.role.dao;
 
 import java.util.List;
 
-import architecture.user.security.role.Role;
+import architecture.security.role.Role;
 
 public interface RoleDao {
 

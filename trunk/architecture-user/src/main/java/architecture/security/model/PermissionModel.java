@@ -1,7 +1,7 @@
 package architecture.security.model;
 
 import architecture.common.model.ModelObject;
-import architecture.user.security.permission.Permission;
+import architecture.security.permission.Permission;
 
 public interface PermissionModel extends ModelObject<Permission>{
 

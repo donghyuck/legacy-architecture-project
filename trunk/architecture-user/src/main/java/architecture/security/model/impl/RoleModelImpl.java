@@ -5,8 +5,8 @@ import java.util.Date;
 
 import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.model.ModelConstants;
-import architecture.user.model.RoleModel;
-import architecture.user.security.role.Role;
+import architecture.security.model.RoleModel;
+import architecture.security.role.Role;
 
 /**
  * @author  donghyuck

@@ -2,8 +2,8 @@ package architecture.security.user.dao;
 
 import java.util.List;
 
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldOption;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldOption;
 
 public interface ProfileFieldDao {
 	

@@ -14,11 +14,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
-
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-
-import architecture.user.dao.UserDao;
+import architecture.security.user.dao.UserDao;
 
 /**
  * @author  donghyuck

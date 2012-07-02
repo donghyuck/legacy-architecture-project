@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import architecture.common.user.User;
-import architecture.user.profile.ProfileFieldValue;
-import architecture.user.profile.ProfileFieldValueCount;
+import architecture.security.user.profile.ProfileFieldValue;
+import architecture.security.user.profile.ProfileFieldValueCount;
 
 public interface UserProfileDao {
 	

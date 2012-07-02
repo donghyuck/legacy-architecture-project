@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.model.ModelConstants;
-import architecture.user.model.ProfileFieldOptionModel;
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldOption;
+import architecture.security.model.ProfileFieldOptionModel;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldOption;
 
 /**
  * @author  donghyuck

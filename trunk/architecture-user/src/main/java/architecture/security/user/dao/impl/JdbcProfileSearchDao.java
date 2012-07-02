@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
-import architecture.user.dao.ProfileSearchDao;
+import architecture.security.user.dao.ProfileSearchDao;
 
 public class JdbcProfileSearchDao extends JdbcUserDao implements ProfileSearchDao {
 

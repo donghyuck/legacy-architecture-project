@@ -10,11 +10,11 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.model.ModelConstants;
-import architecture.user.model.ProfileFieldValueModel;
-import architecture.user.profile.ProfileField;
-import architecture.user.profile.ProfileFieldValue;
-import architecture.user.profile.TypeConverter;
-import architecture.user.profile.TypeConverter.ConversionException;
+import architecture.security.model.ProfileFieldValueModel;
+import architecture.security.user.profile.ProfileField;
+import architecture.security.user.profile.ProfileFieldValue;
+import architecture.security.user.profile.TypeConverter;
+import architecture.security.user.profile.TypeConverter.ConversionException;
 
 /**
  * @author  donghyuck

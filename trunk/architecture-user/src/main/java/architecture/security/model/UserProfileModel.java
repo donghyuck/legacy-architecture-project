@@ -1,7 +1,7 @@
 package architecture.security.model;
 
 import architecture.common.model.ModelObject;
-import architecture.user.profile.UserProfile;
+import architecture.security.user.profile.UserProfile;
 
 public interface UserProfileModel extends ModelObject<UserProfile> {
 	

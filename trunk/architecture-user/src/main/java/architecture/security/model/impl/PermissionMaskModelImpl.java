@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.model.ModelConstants;
-import architecture.user.model.PermissionMaskModel;
-import architecture.user.security.permission.PermissionMask;
+import architecture.security.model.PermissionMaskModel;
+import architecture.security.permission.PermissionMask;
 
 /**
  * @author  donghyuck

@@ -1,7 +1,7 @@
 package architecture.security.model;
 
 import architecture.common.model.ModelObject;
-import architecture.user.profile.ProfileFieldOption;
+import architecture.security.user.profile.ProfileFieldOption;
 
 /**
  * @author                 donghyuck
