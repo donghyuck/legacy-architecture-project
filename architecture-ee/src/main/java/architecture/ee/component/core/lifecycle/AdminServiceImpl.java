@@ -9,8 +9,6 @@ import org.springframework.web.context.ContextLoader;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.exception.ConfigurationError;
-import architecture.common.exception.ConfigurationWarning;
 import architecture.common.lifecycle.Component;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.State;
@@ -19,9 +17,9 @@ import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.common.lifecycle.event.StateChangeEvent;
 import architecture.common.lifecycle.service.AdminService;
 import architecture.common.lifecycle.service.PluginService;
+import architecture.common.spring.lifecycle.support.SpringLifecycleSupport;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
-import architecture.ee.spring.lifecycle.support.SpringLifecycleSupport;
 
 /**
  * @author   donghyuck
