@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import architecture.common.jdbc.JdbcUtils;
+import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.common.jdbc.schema.Database;
-import architecture.ee.jdbc.sequencer.incrementer.MaxValueIncrementer;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
