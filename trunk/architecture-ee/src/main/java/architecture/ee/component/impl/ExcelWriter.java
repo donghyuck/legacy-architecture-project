@@ -1,4 +1,4 @@
-package architecture.ee.component;
+package architecture.ee.component.impl;
 
 import java.io.File;
 import java.io.FileOutputStream;
