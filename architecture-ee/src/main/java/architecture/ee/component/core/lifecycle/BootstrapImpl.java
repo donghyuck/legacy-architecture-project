@@ -22,6 +22,7 @@ import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.lifecycle.service.AdminService;
 import architecture.common.util.L10NUtils;
 import architecture.ee.spring.lifecycle.SpringAdminService;
+import architecture.ee.util.ApplicationConstants;
 
 /**
  * @author   donghyuck
@@ -46,20 +47,28 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	
 	public ConfigurableApplicationContext getBootstrapApplicationContext(){		
 		try {
-			String contextKey = BOOTSTRAP_CONTEXT_KEY ;
-			if( repository.getState() == State.INITIALIZED ){				
-				contextKey = repository.getSetupApplicationProperties().getStringProperty("services.bootstrap.contextKey", BOOTSTRAP_CONTEXT_KEY);	
-			}else{
-				log.debug("repository not initialized yet.");
-			}
+			String contextKeyToUse = BOOTSTRAP_CONTEXT_KEY ;
 			
-			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(contextKey);	
+			if( repository.getState() == State.INITIALIZED ){				
+				
+				boolean setupComplete = repository.getSetupApplicationProperties().getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
+				contextKeyToUse = repository.getSetupApplicationProperties().getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);
+				
+				log.info(L10NUtils.format("003008", setupComplete ));
+				
+			}else{
+								
+			}			
+			log.info(L10NUtils.format("003009", contextKeyToUse ));
+			
+			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(contextKeyToUse);	
 			ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();
 			
 			return context;
-		} catch (BeansException e) {
+			
+		} catch (Throwable e) {
 			log.error( L10NUtils.getMessage("002402") , e );
-					return null;
+			return null;
 		}	
 	}		
 	
@@ -67,10 +76,8 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	public <T> T getBootstrapComponent(Class<T> requiredType) throws ComponentNotFoundException {
 
 		if (requiredType == null) {
-			throw new ComponentNotFoundException("");
+			throw new ComponentNotFoundException();
 		}
-		
-		//log.debug( "requiredType:" + requiredType.getName() );
 		if( requiredType == Repository.class ){			
 			lock.lock();
 			try{
@@ -89,12 +96,12 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 		if( references.get(requiredType) == null){			
 			try {
 				
-				if (getBootstrapApplicationContext() == null) {
+				if ( getBootstrapApplicationContext() == null) {
 					throw new IllegalStateException(L10NUtils.getMessage("003051"));
 				}
 				references.put(requiredType, new WeakReference<T>( getBootstrapApplicationContext().getBean(requiredType) ));
 			} catch (BeansException e) {
-				throw new ComponentNotFoundException(e);
+				throw new ComponentNotFoundException(L10NUtils.format("003052", requiredType.getName()), e);
 			}			
 		}
 		return (T)references.get(requiredType).get();
@@ -107,19 +114,8 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 				((RepositoryImpl)repository).setServletContext(servletContext);
 			}						
 			// 1. admin service 가 존재하는 경우 : DOTO
-			
-			
-/*			repository.getSetupApplicationProperties();			
-			ConfigurableApplicationContext ctx = getBootstrapApplicationContext();
-			Environment env = ctx.getEnvironment();
-			MutablePropertySources sources = ctx.getEnvironment().getPropertySources();			
-			Map<String, Object> props = (Map)repository.getSetupApplicationProperties();
-			
-			sources.addFirst(new MapPropertySource( "bootstrap", props ));*/
-			
+						
 			AdminService adminService = getBootstrapComponent(AdminService.class);	
-			
-			
 			if(adminService instanceof SpringAdminService ){
 				((SpringAdminService)adminService).setServletContext(servletContext);
 			}

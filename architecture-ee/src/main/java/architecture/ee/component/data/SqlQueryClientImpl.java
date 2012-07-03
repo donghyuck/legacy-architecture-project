@@ -1,4 +1,4 @@
-package architecture.ee.component.jdbc;
+package architecture.ee.component.data;
 
 import java.io.File;
 import java.io.IOException;
