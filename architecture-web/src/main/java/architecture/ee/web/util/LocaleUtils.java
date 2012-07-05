@@ -10,12 +10,11 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import architecture.common.user.User;
 import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.I18nTextUtils;
-
-import architecture.user.User;
 
 public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
 
