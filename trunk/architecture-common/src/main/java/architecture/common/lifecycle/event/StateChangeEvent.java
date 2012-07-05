@@ -23,9 +23,6 @@ import architecture.common.lifecycle.State;
  */
 public class StateChangeEvent extends Event {
    
-    /**
-	 * 
-	 */
 	private static final long serialVersionUID = -1533891374616205989L;
 
 	/**
