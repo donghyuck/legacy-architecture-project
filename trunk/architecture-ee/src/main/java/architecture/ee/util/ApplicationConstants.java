@@ -8,6 +8,9 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
 	
 	public static final String SETUP_COMPLETE_PROP_NAME = "setup.complete";	
 	
+	public static final String BOOTSTRAP_CONTEXT_PROP_NAME = "bootstrap.context";	
+	
+	
 	
 	
 	/** USER PROPERTY KEY */

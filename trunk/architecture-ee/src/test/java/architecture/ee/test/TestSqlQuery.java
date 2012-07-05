@@ -11,11 +11,11 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlSqlBuilder;
@@ -23,8 +23,6 @@ import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryFactoryImpl;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
-import architecture.ee.services.SqlQueryClient;
-import architecture.ee.spring.jdbc.ExtendedJdbcTemplate;
 
 public class TestSqlQuery {
 	
@@ -109,11 +107,11 @@ public class TestSqlQuery {
 	
 	//@Test
 	public void testSqlQueryClient(){
-		ConfigurableApplicationContext context = Bootstrap.getBootstrapApplicationContext();
+		/*ConfigurableApplicationContext context = Bootstrap.getBootstrapApplicationContext();
 		SqlQueryClient client = (SqlQueryClient)context.getBean("sqlQueryClient");
 		for( Map row : client.list("FRAMEWORK_V2.SELECT_ALL_PROPERTY")){
 			log.debug(row);
-		}
+		}*/
 	}
 	
 	

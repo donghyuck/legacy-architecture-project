@@ -38,11 +38,7 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQueryFactory {
 	
 	private DataSource dataSource = null;
-	
-	/**
-	 * @uml.property  name="incrementer"
-	 * @uml.associationEnd  
-	 */
+
 	private MaxValueIncrementer incrementer = null;
 
 	private boolean incrementerSupported = false;
@@ -51,10 +47,6 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
 		super(configuration);
 	}
 
-	/**
-	 * @param incrementerSupported
-	 * @uml.property  name="incrementerSupported"
-	 */
 	public void setIncrementerSupported(boolean incrementerSupported) {
 		this.incrementerSupported = incrementerSupported;
 	}
@@ -67,10 +59,6 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
 			loadResourceLocations();
 	}
 	
-	/**
-	 * @param dataSource
-	 * @uml.property  name="dataSource"
-	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 	}

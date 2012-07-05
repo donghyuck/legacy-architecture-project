@@ -126,6 +126,17 @@ public class ApplicationHelperImpl implements ApplicationHelper, ApplicationList
 		}
 	}		
 	
+	public <T> T getComponent(String requiredName, Class<T> requiredType){
+		if (requiredType == null) {
+			throw new ComponentNotFoundException("");
+		}	
+		try {
+			return getConfigurableApplicationContext().getBean(requiredName, requiredType);
+		} catch (NoSuchBeanDefinitionException e){
+			throw new ComponentNotFoundException(e);
+		}
+	}	
+	
 	@SuppressWarnings("rawtypes")
 	public Object getComponent(Object obj) throws ComponentNotFoundException {
 		

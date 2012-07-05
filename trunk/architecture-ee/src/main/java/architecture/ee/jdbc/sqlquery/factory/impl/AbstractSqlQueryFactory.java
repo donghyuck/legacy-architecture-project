@@ -36,57 +36,39 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 	
 	private String suffix = DEFAULT_FILE_SUFFIX;
 	
-	/** 
-	 * @uml.property name="configuration"
-	 * @uml.associationEnd 
-	 */
 	private final Configuration configuration;
 	
-	/**
-	 * @uml.property  name="resourceLocations"
-	 */
 	protected List<String> resourceLocations;
 			
 	public AbstractSqlQueryFactory(Configuration configuration) {
 		this.configuration = configuration;
 	}
-	
-	/**
-	 * @param prefix
-	 * @uml.property  name="prefix"
-	 */
+
+
 	public void setPrefix(String prefix) {
 		this.prefix = (prefix != null ? prefix : "");
 	}
 	
-	/**
-	 * @return
-	 * @uml.property  name="resourceLocations"
-	 */
+
+
 	public List<String> getResourceLocations() {
 		return resourceLocations;
 	}
 
-	/**
-	 * @param resourceLocations
-	 * @uml.property  name="resourceLocations"
-	 */
+
+
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
 	}
 	
-	/**
-	 * @param suffix
-	 * @uml.property  name="suffix"
-	 */
+
+
 	public void setSuffix(String suffix) {
 		this.suffix = (suffix != null ? suffix : "");
 	}	
 	
-	/** 
-	 * @return
-	 * @uml.property  name="configuration"
-	 */
+
+
 	public Configuration getConfiguration(){
 		return configuration;
 	}
@@ -165,7 +147,7 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		
 		//DeployedInfo di = 
 		deployments.remove(file.toURI());
-		
+		// ToDo more ...
 		return true;
 		
 	}
@@ -176,6 +158,9 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 			DeployedInfo di = deployments.get(file.toURI());
 			di.deployedTime = System.currentTimeMillis();
 			deployments.put(di.uri, di);
+			
+			configuration.buildAllStatements();
+			
 		} catch (FileNotFoundException e) {
 		}
 	}

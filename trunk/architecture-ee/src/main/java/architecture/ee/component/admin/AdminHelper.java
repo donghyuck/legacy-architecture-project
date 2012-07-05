@@ -6,6 +6,7 @@ import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.task.AsyncTaskExecutor;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.ConfigRoot;
@@ -64,6 +65,10 @@ public final class AdminHelper {
 		}else{ 
 		    return Bootstrap.getBootstrapComponentNames();
 		}		
+	}
+	
+	public static AsyncTaskExecutor getAsyncTaskExecutor(){
+		return Bootstrap.getBootstrapComponent(AsyncTaskExecutor.class);
 	}
 	
 	public static AdminService getAdminService(){
