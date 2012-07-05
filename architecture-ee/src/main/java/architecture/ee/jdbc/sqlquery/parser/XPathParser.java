@@ -103,8 +103,7 @@ public class XPathParser {
 		this.document = createDocument(new StringReader(xml));
 	}
 
-	public XPathParser(Reader reader, boolean validation, Properties variables,
-			EntityResolver entityResolver) {
+	public XPathParser(Reader reader, boolean validation, Properties variables, EntityResolver entityResolver) {
 		commonConstructor(validation, variables, entityResolver);
 		this.document = createDocument(reader);
 	}
@@ -220,10 +219,8 @@ public class XPathParser {
 	private Document createDocument(Reader reader) {
 		// important: this must only be called AFTER common constructor
 		try {
-			DocumentBuilderFactory factory = DocumentBuilderFactory
-					.newInstance();
+			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			factory.setValidating(validation);
-
 			factory.setNamespaceAware(false);
 			factory.setIgnoringComments(true);
 			factory.setIgnoringElementContentWhitespace(false);
@@ -237,25 +234,24 @@ public class XPathParser {
 						throws SAXException {
 					throw exception;
 				}
-
 				public void fatalError(SAXParseException exception)
 						throws SAXException {
 					throw exception;
 				}
-
 				public void warning(SAXParseException exception)
 						throws SAXException {
 				}
 			});
+			
 			return builder.parse(new InputSource(reader));
+		
 		} catch (Exception e) {
 			throw new BuilderException(
 					"Error creating document instance.  Cause: " + e, e);
 		}
 	}
 
-	private void commonConstructor(boolean validation, Properties variables,
-			EntityResolver entityResolver) {
+	private void commonConstructor(boolean validation, Properties variables, EntityResolver entityResolver) {
 		this.validation = validation;
 		this.entityResolver = entityResolver;
 		this.variables = variables;

@@ -30,9 +30,7 @@ import architecture.ee.jdbc.sqlquery.sql.SqlSource;
  */
 public class SqlBuilderAssistant extends AbstractBuilder {
 
-	/**
-	 * @uml.property  name="currentNamespace"
-	 */
+
 	private String currentNamespace;
 	private String resource;
 	private Log log = LogFactory.getLog(SqlBuilderAssistant.class);
@@ -59,24 +57,18 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 		setStatementTimeout(timeout, statementBuilder);		
 		MappedStatement statement = statementBuilder.build();		
 		configuration.addMappedStatement(statement);		
-		
-		//log.debug( String.format("Mapped statement ID=%s, description=%s", new Object[]{statement.getID(), statement.getDescription()}) );		
+		//log.debug( String.format("Mapped statement ID=%s, description=%s", new Object[]{statement.getID(), statement.getDescription()}) );	
 		
 		return statement;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="currentNamespace"
-	 */
+
+
 	public String getCurrentNamespace() {
 		return currentNamespace;
 	}
 
-	/**
-	 * @param  currentNamespace
-	 * @uml.property  name="currentNamespace"
-	 */
+
 	public void setCurrentNamespace(String currentNamespace) {
 		if (currentNamespace != null) {
 			this.currentNamespace = currentNamespace;
@@ -84,8 +76,7 @@ public class SqlBuilderAssistant extends AbstractBuilder {
 				configuration.addUriNamespace(resource, currentNamespace);
 		}
 		if (this.currentNamespace == null) {
-			throw new BuilderException(
-					"The mapper element requires a namespace attribute to be specified.");
+			throw new BuilderException("The mapper element requires a namespace attribute to be specified.");
 		}
 	}
 

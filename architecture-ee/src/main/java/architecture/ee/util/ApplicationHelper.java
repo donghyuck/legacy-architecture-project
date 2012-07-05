@@ -36,6 +36,11 @@ public final class ApplicationHelper {
 		}
 		return (T)ApplicationHelper.references.get(requiredType).get();
 	}
+	
+	public static <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException
+	{
+		return ApplicationHelperFactory.getApplicationHelper().getComponent(requiredName, requiredType);
+	}
 		
 	public static void autowireComponent(Object obj){
 		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);

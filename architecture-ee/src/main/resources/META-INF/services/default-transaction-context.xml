@@ -18,7 +18,8 @@
 	<!-- ================================================ -->
 	<!-- 1. Transaction                                   -->
 	<!-- ================================================ -->	
-	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="dataSource" />
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" depends-on="dataSource" p:dataSource-ref="dataSource" />
+	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	

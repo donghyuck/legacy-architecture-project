@@ -63,26 +63,14 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 		return scanner;
 	}
 		
-	/**
-	 * @param  fastDeploy
-	 * @uml.property  name="fastDeploy"
-	 */
 	public void setFastDeploy(boolean fastDeploy) {
 		this.fastDeploy = fastDeploy;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="resourceLocations"
-	 */
 	public List<String> getResourceLocations() {
 		return resourceLocations;
 	}
 
-	/**
-	 * @param  resourceLocations
-	 * @uml.property  name="resourceLocations"
-	 */
 	public void setResourceLocations(List<String> resourceLocations) {
 		this.resourceLocations = resourceLocations;
 	}

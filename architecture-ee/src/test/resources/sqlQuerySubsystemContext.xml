@@ -34,6 +34,9 @@
 	
     <bean id="sqlQuery" factory-bean="sqlQueryFactory" factory-method="createSqlQuery" />
 
-
+	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
+	
+	<bean id="sqlQueryClient" parent="sqlQuerySupport" class="architecture.ee.component.SqlQueryClientImpl" p:dataSource-ref="dataSource" />
+	
 		
 </beans>

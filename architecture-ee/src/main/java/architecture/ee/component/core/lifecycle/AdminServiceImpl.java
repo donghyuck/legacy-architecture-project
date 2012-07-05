@@ -26,27 +26,20 @@ import architecture.ee.spring.lifecycle.SpringAdminService;
  */
 public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAdminService {
 
-	/**
-	 * @uml.property  name="contextLoader"
-	 */
+
+
 	private ContextLoader contextLoader;
-	/**
-	 * @uml.property  name="servletContext"
-	 */
+
+
 	private ServletContext servletContext;
-	/**
-	 * @uml.property  name="applicationContext"
-	 */
+
+
 	private ConfigurableApplicationContext applicationContext;
-	/**
-	 * @uml.property  name="version"
-	 * @uml.associationEnd  
-	 */
+
+
 	private Version version ;
-	/**
-	 * @uml.property  name="configService"
-	 * @uml.associationEnd  
-	 */
+
+
 	private ConfigService configService;
     
 	
@@ -60,10 +53,8 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );
 	}
 	
-	/**
-	 * @return
-	 * @uml.property  name="configService"
-	 */
+
+
 	public ConfigService getConfigService() {
 		return configService;
 	}
@@ -76,10 +67,8 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		return architecture.common.lifecycle.bootstrap.Bootstrap.getBootstrapComponent(requiredType);
 	}
 		
-	/**
-	 * @param  configService
-	 * @uml.property  name="configService"
-	 */
+
+
 	public void setConfigService(ConfigService configService){
 		this.configService = configService ;
 	}
@@ -97,18 +86,14 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		return false; 
 	}
 	
-	/**
-	 * @param  contextLoader
-	 * @uml.property  name="contextLoader"
-	 */
+
+
 	public void setContextLoader(ContextLoader contextLoader) {
 		this.contextLoader = contextLoader;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="contextLoader"
-	 */
+
+
 	public ContextLoader getContextLoader() {
 		return contextLoader;
 	}
@@ -119,18 +104,14 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		return false;
 	}
 	
-	/**
-	 * @return
-	 * @uml.property  name="servletContext"
-	 */
+
+
 	public ServletContext getServletContext() {
 		return servletContext;
 	}
 
-	/**
-	 * @param  servletContext
-	 * @uml.property  name="servletContext"
-	 */
+
+
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
 		if(getRepository().getState() != State.INITIALIZED){
@@ -203,11 +184,8 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		}
 	}
 		
-		
-	/**
-	 * @return
-	 * @uml.property  name="applicationContext"
-	 */
+
+
 	public ConfigurableApplicationContext getApplicationContext() {
 		return this.applicationContext;
 	}
@@ -243,10 +221,9 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		getApplicationContext().refresh();
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="version"
-	 */
+
+
+	
 	public Version getVersion() {
 		return this.version;
 	}
@@ -270,7 +247,6 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	
 	@EventListener
 	public void onEvent(ApplicationPropertyChangeEvent event) {
-		// 
 		log.debug("property changed " + event.getOldValue() + ">" + event.getNewValue() );
 	}	
 

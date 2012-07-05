@@ -59,8 +59,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 		this(is, configuration, null);
 	}
 
-	public XmlSqlBuilder(Reader reader, Configuration configuration,
-			String resource) {
+	public XmlSqlBuilder(Reader reader, Configuration configuration, String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
 		this.parser = new XPathParser(reader, false, configuration.getVariables(), null);
@@ -80,6 +79,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 			String version ;
 			
 			boolean isNew = false;
+			
 			if( context != null ){
 				namespace = context.getStringAttribute("namespace");
 				description = context.getStringAttribute("description");
@@ -96,7 +96,8 @@ public class XmlSqlBuilder extends AbstractBuilder {
 			log.debug( 
 				L10NUtils.format("003221", namespace, description, version )					
 			);			
-			builderAssistant.setCurrentNamespace(namespace);			
+			builderAssistant.setCurrentNamespace(namespace);		
+			
 			if(isNew)
 				sqlElement(context.evalNodes("/sqlset/sql-query"));
 			else
