@@ -6,7 +6,8 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.ee.web.util.WebApplicationHelper;
 
-public abstract class FrameworkDispatchActionSupport extends org.springframework.web.struts.DispatchActionSupport {
+public abstract class FrameworkDispatchActionSupport extends
+		org.springframework.web.struts.DispatchActionSupport {
 
 	protected Log log;
 
@@ -14,8 +15,14 @@ public abstract class FrameworkDispatchActionSupport extends org.springframework
 		log = LogFactory.getLog(getClass());
 	}
 
-	protected final <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException {
+	protected final <T> T getComponent(Class<T> requiredType)
+			throws ComponentNotFoundException {
 		return WebApplicationHelper.getComponent(requiredType);
+	}
+
+	protected final <T> T getComponent(String requiredName,
+			Class<T> requiredType) throws ComponentNotFoundException {
+		return WebApplicationHelper.getComponent(requiredName, requiredType);
 	}
 
 	protected final void autowireComponent(Object obj) {

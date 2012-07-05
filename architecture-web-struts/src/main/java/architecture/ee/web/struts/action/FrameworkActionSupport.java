@@ -7,26 +7,27 @@ import architecture.common.exception.ComponentNotFoundException;
 import architecture.ee.web.util.WebApplicationHelper;
 
 @SuppressWarnings("deprecation")
-public abstract class FrameworkActionSupport extends org.springframework.web.struts.ActionSupport
-{
-    
-    protected Log log;
-    
-    public FrameworkActionSupport()
-    {
-        log = LogFactory.getLog(getClass());
-    }
+public abstract class FrameworkActionSupport extends
+		org.springframework.web.struts.ActionSupport {
 
-    protected final <T> T getComponent(Class<T> requiredType)
-        throws ComponentNotFoundException
-    {    	
-    	return WebApplicationHelper.getComponent(requiredType);
-    }
+	protected Log log;
 
-    protected final void autowireComponent(Object obj)
-    {
-    	WebApplicationHelper.autowireComponent(obj);
-    }
+	public FrameworkActionSupport() {
+		log = LogFactory.getLog(getClass());
+	}
+
+	protected final <T> T getComponent(Class<T> requiredType)
+			throws ComponentNotFoundException {
+		return WebApplicationHelper.getComponent(requiredType);
+	}
+
+	protected final <T> T getComponent(String requiredName, Class<T> requiredType)
+			throws ComponentNotFoundException {
+		return WebApplicationHelper.getComponent(requiredName, requiredType);
+	}
+
+	protected final void autowireComponent(Object obj) {
+		WebApplicationHelper.autowireComponent(obj);
+	}
 
 }
-
