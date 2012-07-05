@@ -15,7 +15,6 @@
  */
 package architecture.common.lifecycle;
 
-import architecture.common.lifecycle.service.AdminService;
 
 /**
  * 
@@ -26,12 +25,6 @@ import architecture.common.lifecycle.service.AdminService;
  */
 public interface ApplicationHelper extends Container {
 
-/*	public abstract AdminService getAdminService();
-			
-	public abstract ConfigService getConfigService();
-	
-	public abstract Repository getRepository();*/
-	
 	public abstract boolean isReady();
 	
 }

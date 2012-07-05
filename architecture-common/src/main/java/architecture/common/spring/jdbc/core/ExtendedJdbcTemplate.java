@@ -35,7 +35,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -47,6 +46,8 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.lob.OracleLobHandler;
@@ -366,6 +367,8 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public int update (String sql, final List<ParameterMapping> parameterMappings, final Map<String, Object> parameters){
 		return update(sql, newMappedPreparedStatementSetter(parameters, parameterMappings));
 	}
+	
+
 	
 	public int[] batchUpdate(String sql, final List<ParameterMapping> parameterMappings, final List<Map<String, Object>> parameters){		
 		return batchUpdate(sql, new BatchPreparedStatementSetter(){

@@ -330,7 +330,7 @@ public class ImplFactory {
 		try {
 			return objectclass.newInstance();
 		} catch (Throwable throwable) {
-			throw new IllegalStateException(objectclass.getName() + " is not a valid class.");
+			throw new IllegalStateException(objectclass.getName() + " is not a valid class.", throwable );
 		}
 	}
 

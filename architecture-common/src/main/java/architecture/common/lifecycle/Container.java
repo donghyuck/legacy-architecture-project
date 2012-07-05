@@ -34,6 +34,10 @@ public interface Container {
 	 */
 	public Object getComponent(Object obj) throws ComponentNotFoundException;
 	
+	
+	
+	
+	
 	/**
 	 * 인자에 해당하는 타입의 객체를 리턴한다. 
 	 * @param <T>
@@ -43,6 +47,7 @@ public interface Container {
 	 */
 	public <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException;
 	
+	public <T> T getComponent(String requiredName, Class<T> requiredType)throws ComponentNotFoundException;
 	
 	public Object getInstance(Object obj);
 	
