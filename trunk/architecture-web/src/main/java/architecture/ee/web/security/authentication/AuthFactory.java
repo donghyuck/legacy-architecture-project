@@ -1,20 +1,5 @@
 package architecture.ee.web.security.authentication;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import architecture.common.lifecycle.ApplicationProperties;
-import architecture.common.util.ClassUtils;
-import architecture.common.util.StringUtils;
-import architecture.ee.component.admin.AdminHelper;
-
-import architecture.user.security.authentication.AuthToken;
 
 /**
  * Pluggable authentication service. Users of system that wish to change the AuthProvider
