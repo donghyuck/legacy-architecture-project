@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.i18n.I18nTextResourceBundle;
@@ -184,19 +185,6 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 		this.i18nLocale = i18nLocale;
 	}
 
-	@Override
-	public Object clone() {
-		I18nLocalizerModelImpl impl = new I18nLocalizerModelImpl();
-		impl.setLocalizerId(localizerId);
-		impl.setName(name);
-		impl.setDescription(description);
-		impl.setI18nLocale(i18nLocale);
-		impl.setI18nTexts(getI18nTexts());
-		impl.setCreationDate(getCreationDate());
-		impl.setModifiedDate(getModifiedDate());
-		return impl;
-	}
-
 	public void setI18nTexts(Map<String, String> texts) {
 		this.texts = texts;
 		this.resourceBundle = null;
@@ -230,5 +218,7 @@ public class I18nLocalizerModelImpl extends BaseModelObject<I18nLocalizer> imple
 	public String getString(String key) {
 		return texts.get(key);
 	}
-
+	public int getCachedSize() {
+		return 0;
+	}
 }

@@ -137,6 +137,8 @@ public interface SqlQuery {
 	
 	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper);
 	
+	public int update (String statement, Object[] values, int[] types );
+	
 	
 	/**
 	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우 오류가 리턴된다.
@@ -180,25 +182,24 @@ public interface SqlQuery {
 	 */
 	public <T> T uniqueResult(String statement, Object parameter, RowMapper<T> rowMapper);
 		
-	public List<Map<String, Object>> list(String statement);
 	
 	public <T> List<T> list(String statement, Class<T> elementType);
 		
-	public <T> List<T> list(String statement, RowMapper<T> rowMapper);
+	public <T> List<T> list(String statement, Class<T> elementType, Object... parameters);
 	
-	public List<Map<String, Object>> list(String statement, Object parameter);
+	public <T> List<T> list(String statement, Class<T> elementType, Map<String, Object> parameters);
 	
-	public <T> List<T> list(String statement, Object parameter, Class<T> elementType);
+	public List<Map<String, Object>> list(String statement);
 	
-	public <T> List<T> list(String statement, Object parameter, RowMapper<T> rowMapper);	
+    public List<Map<String, Object>> list(String statement, Object... parameter);
 	
+	public List<Map<String, Object>> list(String statement, Map<String, Object> parameters);
 	
-	
-	public int update (String statement, Object[] values, int[] types );
-	
+
+		
 	public int executeUpdate(String statement);
 	
-	public int executeUpdate(String statement, Object parameter);
+	public int executeUpdate(String statement, Object parameters);
 	
 	/**
 	 * 스크립트 모드로 쿼리를 실행한다.
@@ -207,6 +208,6 @@ public interface SqlQuery {
 	 */
 	public Object executeScript(String statement);
 	
-	
+	public Object call(String statement, Object... parameters);
 
 }

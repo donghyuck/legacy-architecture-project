@@ -1,5 +1,6 @@
 package architecture.ee.model;
 
+import architecture.common.model.ModelObject;
 import architecture.ee.i18n.I18nLocale;
 
 

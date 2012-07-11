@@ -3,6 +3,7 @@ package architecture.ee.model;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import architecture.common.model.ModelObject;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.I18nLocalizer;
 

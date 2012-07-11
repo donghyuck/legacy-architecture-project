@@ -98,10 +98,13 @@ public class XmlSqlBuilder extends AbstractBuilder {
 			);			
 			builderAssistant.setCurrentNamespace(namespace);		
 			
+			
 			if(isNew)
 				sqlElement(context.evalNodes("/sqlset/sql-query"));
 			else
 				sqlElement(context.evalNodes("/sql-queryset/sql-query"));
+			
+			
 		} catch (Exception e) {
 			throw new RuntimeException( L10NUtils.format("003222", e.getMessage()), e);
 		}
