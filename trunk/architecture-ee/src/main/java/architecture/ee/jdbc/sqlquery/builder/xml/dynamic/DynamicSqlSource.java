@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import architecture.common.jdbc.ParameterMapping;
+import architecture.common.jdbc.ResultMapping;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.sql.SqlSource;
@@ -28,24 +29,19 @@ import architecture.ee.jdbc.sqlquery.sql.SqlSource;
  */
 public class DynamicSqlSource implements SqlSource {
 
-	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
-	 */
 	private Configuration configuration;
 
-	/**
-	 * @uml.property  name="rootSqlNode"
-	 * @uml.associationEnd  
-	 */
 	private SqlNode rootSqlNode;
 
 	private List<ParameterMapping> parameterMappings ;
 	
-	public DynamicSqlSource(Configuration configuration, SqlNode rootSqlNode, List<ParameterMapping> parameterMappings) {
+	private List<ResultMapping> resultMappings ;
+	
+	public DynamicSqlSource(Configuration configuration, SqlNode rootSqlNode, List<ParameterMapping> parameterMappings, List<ResultMapping> resultMappings) {
 		this.configuration = configuration;
 		this.rootSqlNode = rootSqlNode;
 		this.parameterMappings = parameterMappings;
+		this.resultMappings = resultMappings;
 	}
 
 	public BoundSql getBoundSql(Object parameterObject) {		
@@ -58,7 +54,7 @@ public class DynamicSqlSource implements SqlSource {
 		// 2. 동적 쿼리를 생성한다.
 		rootSqlNode.apply(context);		
 		// 3. 최종 쿼리를 리턴한다.
-		return new BoundSql(context.getSql(), parameterMappings, parameterObject);		
+		return new BoundSql(context.getSql(), parameterMappings, parameterObject, resultMappings);		
 	}
 
 	public BoundSql getBoundSql(Object parameterObject, Map<String, Object> additionalParameters) {
@@ -67,6 +63,6 @@ public class DynamicSqlSource implements SqlSource {
 		// 2. 동적 쿼리를 생성한다.
 		rootSqlNode.apply(context);
 		// 3. 최종 쿼리를 리턴한다.
-		return new BoundSql(context.getSql(), parameterMappings, parameterObject);		
+		return new BoundSql(context.getSql(), parameterMappings, parameterObject, resultMappings);		
 	}
 }

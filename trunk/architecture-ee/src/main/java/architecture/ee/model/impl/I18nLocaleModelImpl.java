@@ -2,6 +2,7 @@ package architecture.ee.model.impl;
 
 import java.io.Serializable;
 
+import architecture.common.model.impl.BaseModelObject;
 import architecture.common.util.StringUtils;
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.model.I18nLocaleModel;
@@ -166,5 +167,7 @@ implements I18nLocaleModel , I18nLocale{
 	public int getObjectType() {
 		return 10;
 	}
-	
+	public int getCachedSize() {
+		return 0;
+	}
 }

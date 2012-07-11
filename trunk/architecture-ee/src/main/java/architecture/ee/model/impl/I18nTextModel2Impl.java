@@ -3,6 +3,7 @@ package architecture.ee.model.impl;
 import java.io.Serializable;
 import java.util.Date;
 
+import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.i18n.I18nText2;
 import architecture.ee.model.I18nTextModel2;
 import architecture.ee.util.I18nTextUtils;
@@ -200,20 +201,6 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 		}
 	}
 	
-	public Object clone() {
-		I18nTextModel2Impl impl = new I18nTextModel2Impl();
-		impl.setTextId(textId);
-		impl.setObjectId(objectId);
-		impl.setObjectType(objectType);
-		impl.setObjectAttribute(objectAttribute);
-		impl.setLocaleCode(getLocaleCode());
-		impl.setTextKey(getTextKey());
-		impl.setText(getText());
-		impl.setCreationDate(getCreationDate());
-		impl.setModifiedDate(getModifiedDate());
-		return impl;
-	}
-
 	public String getResourceBundleKey() {
 		return I18nTextUtils.generateResourceBundleKey(objectType, objectId, objectAttribute);
 	}
@@ -225,5 +212,7 @@ public class I18nTextModel2Impl extends BaseModelObject<I18nText2> implements I1
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
 		this.setTextId(((Long)primaryKeyObj).longValue());
 	}
-	
+	public int getCachedSize() {
+		return 0;
+	}
 }

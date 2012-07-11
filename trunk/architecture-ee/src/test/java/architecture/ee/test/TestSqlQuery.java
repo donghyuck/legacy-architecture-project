@@ -51,7 +51,8 @@ public class TestSqlQuery {
 		List<Map<String, Object>> list = helper.list(query, "COMMON.SELECT_TABLE_ROWS");
 		for(Map row : list)
 			log.debug(row);
-/*		List<Map<String, Object>> list = query.list("COMMON.SELECT_TABLE_NAMES");
+
+		/*		List<Map<String, Object>> list = query.list("COMMON.SELECT_TABLE_NAMES");
 		for(Map row : list)
 			log.debug(row);*/
 		
@@ -65,7 +66,9 @@ public class TestSqlQuery {
 		/*List<String> list2 = query.setStartIndex(0).setMaxResults(3).queryForList("COMMON.SELECT_TABLE_NAMES_BY_LIKE", new Object[]{ "V2_USER%" }, new int[] {Types.VARCHAR}, String.class);
 		for(String row : list2)
 			log.debug(row);*/
-			
+		
+		
+		
 	}
 	
 	//@Test

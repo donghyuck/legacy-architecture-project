@@ -2,6 +2,7 @@ package architecture.ee.model.impl;
 
 import java.io.Serializable;
 
+import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.i18n.I18nCountry;
 import architecture.ee.model.I18nCountryModel;
 
@@ -201,6 +202,10 @@ public class I18nCountryModelImpl extends BaseModelObject<I18nCountry>
 
 	public int getObjectType() {
 		return 11;
+	}
+	
+	public int getCachedSize() {
+		return 0;
 	}
 
 }

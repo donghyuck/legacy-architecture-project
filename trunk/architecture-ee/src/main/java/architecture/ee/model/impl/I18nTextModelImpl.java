@@ -2,6 +2,7 @@ package architecture.ee.model.impl;
 
 import java.io.Serializable;
 
+import architecture.common.model.impl.BaseModelObject;
 import architecture.ee.i18n.I18nText;
 import architecture.ee.model.I18nTextModel;
 
@@ -119,10 +120,8 @@ public class I18nTextModelImpl  extends BaseModelObject<I18nText>  implements I1
 			return 0;
 		}
 	}
-	
-	@Override
-	public Object clone() {
-		return null;
+
+	public int getCachedSize() {
+		return 0;
 	}
-		
 }

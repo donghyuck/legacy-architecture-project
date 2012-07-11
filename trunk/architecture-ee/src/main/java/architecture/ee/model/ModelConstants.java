@@ -19,10 +19,7 @@ public interface ModelConstants {
 	public static final int PROFILE_FIELD_OPTION = 11 ;
 	
 	public static final int PROFILE_FIELD = 11 ;	
-	
-	
-	
-	
+		
 	public static final int I18N_COUNTRY = 11 ;
 	
 	public static final int I18N_LOCALE = 11 ;
