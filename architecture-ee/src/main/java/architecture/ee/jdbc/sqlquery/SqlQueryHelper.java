@@ -6,7 +6,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.jdbc.core.CallableStatementCreatorFactory;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.SqlParameterValue;
 
@@ -15,7 +14,7 @@ import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryImpl;
 
 public class SqlQueryHelper {
 		
-	private CallableStatementCreatorFactory callableStatementFactory;
+	//private CallableStatementCreatorFactory callableStatementFactory;
 	
 	private List<Object> values = new ArrayList<Object>(4);
 	
@@ -23,7 +22,7 @@ public class SqlQueryHelper {
 	
 	private Map<String, Object> additionalParameters = new HashMap<String, Object>(4);
 	
-	private final List<SqlParameter> declaredParameters = new ArrayList<SqlParameter>();
+	//private final List<SqlParameter> declaredParameters = new ArrayList<SqlParameter>();
 	
 	public List<Map<String, Object>> list (SqlQuery sqlQuery, String statement){		
 		if( sqlQuery instanceof SqlQueryImpl){
@@ -93,5 +92,7 @@ public class SqlQueryHelper {
 			parameterQueue.clear();
 		}
 	}
+	
+	
 
 }

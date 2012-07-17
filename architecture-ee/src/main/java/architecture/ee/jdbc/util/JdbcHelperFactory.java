@@ -32,10 +32,6 @@ public class JdbcHelperFactory {
 
 	}
 
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
 	private static Implementation impl = null;
 
 	static {

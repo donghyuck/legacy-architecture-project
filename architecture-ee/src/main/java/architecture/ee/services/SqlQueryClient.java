@@ -17,4 +17,13 @@ public interface SqlQueryClient {
 	
 	public List<Map<String, Object>> list(String statement, Object parameters);
 	
+	
+	/**
+	 * 
+	 * @param statement
+	 * @param parameters
+	 * @return
+	 */
+	public Object call(String statement, Object... parameters);
+	
 }

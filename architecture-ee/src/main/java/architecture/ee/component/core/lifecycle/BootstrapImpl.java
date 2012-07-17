@@ -4,6 +4,7 @@ import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
 import javax.servlet.ServletContext;
@@ -34,36 +35,30 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	private static final String BOOTSTRAP_CONTEXT_KEY = "default-services-context";
 
 	private Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
-	
-	/**
-	 * @uml.property  name="repository"
-	 * @uml.associationEnd  
-	 */
+
 	private RepositoryImpl repository = new RepositoryImpl();
 	
 	private final ReentrantLock lock = new ReentrantLock();
-
+	
+	private final AtomicBoolean initialized = new AtomicBoolean(false); 	
+	
+	private String bootstrapFactoryKey ;
 	
 	
-	public ConfigurableApplicationContext getBootstrapApplicationContext(){		
+	public ConfigurableApplicationContext getBootstrapApplicationContext(){	
+		
 		try {
-			String contextKeyToUse = BOOTSTRAP_CONTEXT_KEY ;
 			
-			if( repository.getState() == State.INITIALIZED ){				
-				
+			// 리파지토리가 준비되어 있고 아직 컨텍스트가 초기화 되지 않았다면 ..		
+			if( repository.getState() == State.INITIALIZED && !initialized.getAndSet(true) ){
 				boolean setupComplete = repository.getSetupApplicationProperties().getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
-				contextKeyToUse = repository.getSetupApplicationProperties().getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);
-				
+				bootstrapFactoryKey = repository.getSetupApplicationProperties().getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);				
 				log.info(L10NUtils.format("003008", setupComplete ));
-				
-			}else{
-								
-			}			
-			log.info(L10NUtils.format("003009", contextKeyToUse ));
+				log.info(L10NUtils.format("003009", bootstrapFactoryKey ));				
+			}
 			
-			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(contextKeyToUse);	
-			ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();
-			
+			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(bootstrapFactoryKey);			
+			ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();			
 			return context;
 			
 		} catch (Throwable e) {
