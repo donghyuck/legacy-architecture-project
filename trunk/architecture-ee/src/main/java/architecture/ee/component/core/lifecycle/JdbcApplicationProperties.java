@@ -308,9 +308,7 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
     public List<Locale> getLocalesForProperty(String name){    	
     	ArrayList<Locale> list = new ArrayList<Locale>();
     	if( getJdbcTemplate() != null ){  
-    		List<String> locales = getExtendedJdbcTemplate().queryForList(getBoundSql("FRAMEWORK_V2.SELECT_LOCALES").getSql(), 
-    				new Object[]{name}, 
-    				new int[]{Types.VARCHAR}, String.class);
+    		List<String> locales = getExtendedJdbcTemplate().queryForList(getBoundSql("FRAMEWORK_V2.SELECT_LOCALES").getSql(), new Object[]{name}, new int[]{Types.VARCHAR}, String.class);
     		for(String localeCode : locales){
     			list.add(LocaleUtils.localeCodeToLocale(localeCode));
     		}

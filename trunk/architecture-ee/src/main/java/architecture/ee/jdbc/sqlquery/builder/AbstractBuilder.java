@@ -23,10 +23,6 @@ import architecture.ee.jdbc.sqlquery.factory.Configuration;
  */
 public abstract class AbstractBuilder {
 
-	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
-	 */
 	protected final Configuration configuration;
 
 	public AbstractBuilder(Configuration configuration) {

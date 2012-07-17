@@ -25,13 +25,13 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.jdbc.core.CallableStatementCreatorFactory;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.SqlOutParameter;
 import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
@@ -221,6 +221,8 @@ public class SqlQueryImpl implements SqlQuery {
 		return queryForList(statement, new Object[0], new int[0], rowMapper);
 	}
 
+	
+	
 	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper) {
 		BoundSql sql = getBoundSql(statement, params);		
 		if( this.maxResults > 0 ){
@@ -229,11 +231,13 @@ public class SqlQueryImpl implements SqlQuery {
 			return jdbcTemplate.query(sql.getSql(), params, paramTypes, rowMapper);	
 		}
 	}	
+		
 	
 	public List<Map<String, Object>> queryForList(String statement) {
 		return queryForList(statement, new Object[0], null);
 	}
 
+	
 	public List<Map<String, Object>> queryForList(String statement, Object[] params) {
 		return queryForList(statement, params, null);
 	}
@@ -241,9 +245,13 @@ public class SqlQueryImpl implements SqlQuery {
 	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] paramTypes) {
 		BoundSql sql = getBoundSql( statement, params );		
 		if( this.maxResults > 0 ){
+			
 			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes, new ColumnMapRowMapper());			
 		}else{
-			return jdbcTemplate.query(sql.getSql(), params, paramTypes, new ColumnMapRowMapper());	
+			if(params.length == 0 )
+			    return jdbcTemplate.query(sql.getSql(), new ColumnMapRowMapper());	
+			else
+			    return jdbcTemplate.query(sql.getSql(), params, paramTypes, new ColumnMapRowMapper());	
 		}
 	}
 
@@ -394,6 +402,7 @@ public class SqlQueryImpl implements SqlQuery {
 		List<SqlParameter> declaredParameters = new ArrayList<SqlParameter>();
 		Map<String, Object> paramsToUse = new HashMap<String, Object>();
 		
+		// 메핑 파라메터에 따라 INPUT 과 OUTPU 을 설정한다.
 		for( ParameterMapping mapping : sql.getParameterMappings()){
 			
 			mapping.getProperty(); 
@@ -409,11 +418,11 @@ public class SqlQueryImpl implements SqlQuery {
 			}else if (mapping.getMode() == ParameterMapping.Mode.OUT){
 				SqlOutParameter output = new SqlOutParameter(mapping.getProperty(), mapping.getJdbcType().ordinal());
 				declaredParameters.add(output);
-			}
-			
+			}			
 		}
 		
 		CallableStatementCreatorFactory callableStatementFactory = new CallableStatementCreatorFactory(sql.getSql(), declaredParameters);		
+		
 		return jdbcTemplate.call(callableStatementFactory.newCallableStatementCreator(paramsToUse), declaredParameters );
 	
 	}

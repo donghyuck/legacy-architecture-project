@@ -222,8 +222,6 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		} catch (IOException e) {
 			log.error(e);
 		}
-
-		
 	}
 
 	public void importFromExcel(String catalogName, String schemaName, String tableName, String uri, boolean asyncMode) {
@@ -240,5 +238,11 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 
 	public List<Map<String, Object>> list(String statement, Object parameters) {
 		return getSqlQuery().list(statement, parameters);
+	}
+
+	public Object call(String statement, Object... parameters) {
+		
+		return getSqlQuery().call(statement, parameters);
+		
 	}
 }
