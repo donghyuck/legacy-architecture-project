@@ -15,7 +15,10 @@ import architecture.common.adaptor.Pipeline;
 import architecture.common.adaptor.ReadConnector;
 import architecture.common.adaptor.WriteConnector;
 import architecture.common.adaptor.processor.ProcessCallback;
+import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.TypeAliasRegistry;
+import architecture.common.util.StringUtils;
+
 import architecture.ext.sync.client.DataSyncClient;
 
 /**
@@ -28,63 +31,31 @@ public class DefaultDataSyncClient implements DataSyncClient {
 	public static final String DEFAULT_READ_CONNECTOR_PREFIX = "READ_";
 	
 	public static final String DEFAULT_WRITE_CONNECTOR_PREFIX = "WRITE_";
-	
-	/**
-	 * @uml.property  name="dEAFULT_TYPE_ALIAS_REGISTRY"
-	 * @uml.associationEnd  
-	 */
+
 	public static final TypeAliasRegistry DEAFULT_TYPE_ALIAS_REGISTRY =  new TypeAliasRegistry(); 
-	
-	//public String extraJobSurfix = "_EXT";
-	
-	/**
-	 * @uml.property  name="processMappings"
-	 */
+
 	private Map<String, DefaultDataSyncMetaInfo> processMappings = new HashMap<String, DefaultDataSyncMetaInfo>();
-	
-	/**
-	 * @uml.property  name="pipelineMappings"
-	 */
+
 	private Map<String, List<String>> pipelineMappings = new HashMap<String, List<String>>();
 		
 	private Map<String, Object> connectors = new HashMap<String, Object>();
-		
-	/**
-	 * @param connectors
-	 * @uml.property  name="connectors"
-	 */
+
 	public void setConnectors(Map<String, Object> connectors) {
 		this.connectors = connectors;
 	}
-	
-	/**
-	 * @return
-	 * @uml.property  name="processMappings"
-	 */
+
 	public Map<String, DefaultDataSyncMetaInfo> getProcessMappings() {
 		return processMappings;
 	}
-	
-	/**
-	 * @return
-	 * @uml.property  name="pipelineMappings"
-	 */
+
 	public Map<String, List<String>> getPipelineMappings() {
 		return pipelineMappings;
 	}
 
-	/**
-	 * @param pipelineMappings
-	 * @uml.property  name="pipelineMappings"
-	 */
 	public void setPipelineMappings(Map<String, List<String>> pipelineMappings) {
 		this.pipelineMappings = pipelineMappings;
 	}
 
-	/**
-	 * @param processMappings
-	 * @uml.property  name="processMappings"
-	 */
 	public void setProcessMappings(Map<String, DefaultDataSyncMetaInfo> processMappings) {		
 		this.processMappings = processMappings;
 	}
@@ -95,35 +66,74 @@ public class DefaultDataSyncClient implements DataSyncClient {
 
 	public Object process(String processName, Object[] args) {		
 		
-		List<DefaultDataSyncMetaInfo> processors = getProcessorMetaInfos(processName);		
+		// STEP 1. 프로세스 이름에 해당하는 전체 프로세스 메타 정보를 가져온다. 
+		List<DefaultDataSyncMetaInfo> processors = getProcessorMetaInfos(processName);
+		
 		List<Map<String, Object>> input = Collections.EMPTY_LIST;
+		// STEP 2. 프로세스를 진행한다.
 		for(DefaultDataSyncMetaInfo processor : processors){
+			
+			// STEP 2.1 프로세스 존재 유무를 검사한다.
 			if( hasConnector( processor.connectorName )){
+				
+				// STEP 2.2 프로세스에 대한 컨택스트를 가져온다.
 				Context context = getContext(processor);
+				
 				if( processor.type == DefaultDataSyncMetaInfo.Type.READ ){
+					
 					context.setObject(Context.DATA, args);
 					input = (List<Map<String, Object>>) getConnector( processor.connectorName, ReadConnector.class).pull(context);
+					
+				}else  if( processor.type == DefaultDataSyncMetaInfo.Type.FILTER ){ 
+					
+					List<Map<String, Object>> inputToUse = new ArrayList<Map<String, Object>>();
+					
+					log.debug("filter applied!!");
+					
+					if ( input.size() > 0 ){
+						List<ParameterMapping> mappings = processor.getParameterMappings();						
+						for( Map<String, Object> row : input ){
+							//log.debug(row);
+							boolean filtered = false;
+							for(ParameterMapping m : mappings){
+								if(m.getJavaType() == String.class ){
+									Object v = row.get(m.getProperty());
+									String valueToUse = (String) v;
+									if( !StringUtils.isEmpty(valueToUse) && (valueToUse.length() > m.getSize()) ){										
+										filtered = true;		
+									}
+								}
+							}
+							if(!filtered){	
+								inputToUse.add(row);
+							}
+						}				
+						
+						input = inputToUse;
+					}
+					
 				} else if( processor.type == DefaultDataSyncMetaInfo.Type.MERGE ){
 
 					// MATCH DATA
 					context.setObject(Context.DATA, args);
 					String primaryKey = processor.getPrimaryParameterMapping().getProperty();
 					
-					List<String> list = new ArrayList<String>();
+					List<String> list = new ArrayList<String>();					
 					for ( Map<String, Object> row : (List<Map<String, Object>>) getConnector( processor.connectorName, ReadConnector.class).pull(context) ){
 						String value = (String)row.get(primaryKey);
 						list.add(value);
 					}
 					
+					log.debug("merge (" + primaryKey + "):" + list.size() + " with " + input.size());
 					
 					List<Map<String, Object>> insert = new ArrayList<Map<String, Object>>();
 					List<Map<String, Object>> update = new ArrayList<Map<String, Object>>();
 					
-					
 					// READ DATA
-					for( Map<String, Object> row : input){
+					for( Map<String, Object> row : input){						
 						String value = (String)row.get(primaryKey);
-						boolean merge = false;
+						boolean merge = false;	
+						
 						for(String no : list )
 						{
 							if(value.equals(no)){
@@ -131,6 +141,7 @@ public class DefaultDataSyncClient implements DataSyncClient {
 				                break;
 							}
 						}	
+						
 						if(merge){
 							update.add(row);
 						}else{
@@ -138,8 +149,13 @@ public class DefaultDataSyncClient implements DataSyncClient {
 						}
 					}
 					
+					log.debug("update:" + update.size() );
+					log.debug("insert`:" + insert.size() );
+					
 					for(Pipeline p : processor.getPipelineMappings())
 					{
+						log.debug( "[Pipeline]"+ p.getName() + ", " + p.getIndex() + ", " + p.isMatch() );
+						
 						if(processMappings.containsKey(p.getName())){
 							DefaultDataSyncMetaInfo subProcessor = processMappings.get(p.getName());
 							Context subContext = getContext(subProcessor);
@@ -204,18 +220,24 @@ public class DefaultDataSyncClient implements DataSyncClient {
 	protected Context getContext(DefaultDataSyncMetaInfo processor){
 		
 		DeaultContext context = new DeaultContext();
+		
 		if( processor != null ){
 			context.setObject("parameterMappings", processor.parameterMappings);
+			context.setObject("properties", processor.getProperties());
+			
 			context.setObject("queryString", processor.queryString);
 			context.setObject("queryName", processor.queryName);
 			context.setObject("batch", processor.isBatch);
+			
 			context.setConnectorName(processor.connectorName);
+			
 			if( processor.type == DefaultDataSyncMetaInfo.Type.READ || 
 				processor.type == DefaultDataSyncMetaInfo.Type.MERGE )
 				context.setObject(Context.TYPE, Context.Type.INPUT);
 			else 
 				context.setObject(Context.TYPE, Context.Type.OUTPUT);
 		}
+		
 		return context;
 	}
 	
@@ -224,10 +246,23 @@ public class DefaultDataSyncClient implements DataSyncClient {
 		return getContext(metaInfo);
 	}
 	
+	
+	/**
+	 * 
+	 * @param name
+	 * @return name 에 해당하는 커넥터 존재 유무를 리턴한다.
+	 */
 	protected boolean hasConnector(String name){
 		return connectors.containsKey(name);
 	}
 	
+	/**
+	 * 
+	 * @param <T>
+	 * @param name
+	 * @param requiredType
+	 * @return name 에 해당하는 커낵터를 requiredType 으로 형변환하여 리턴한다.
+	 */
 	protected <T> T getConnector(String name, Class<T> requiredType){
 		if(connectors.containsKey(name))
 			return (T) connectors.get(name);

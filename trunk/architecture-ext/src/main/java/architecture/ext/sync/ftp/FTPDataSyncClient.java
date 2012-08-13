@@ -12,6 +12,7 @@ import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 
+import architecture.common.adaptor.processor.ProcessCallback;
 import architecture.ext.sync.client.DataSyncClient;
 import architecture.ext.sync.client.DataSyncException;
 
@@ -130,6 +131,42 @@ public class FTPDataSyncClient implements DataSyncClient {
 			} catch (IOException e) {
 			}
 		}
+	}
+
+	public List<Map<String, Object>> read(String processName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public List<Map<String, Object>> read(String processName, Object[] args) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object write(String processName, Map<String, Object> input) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object write(String processName, List<Map<String, Object>> input) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public <T> T process(String processName, Object[] args,
+			ProcessCallback<T> action) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object process(String processName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object process(String processName, Object[] args) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
