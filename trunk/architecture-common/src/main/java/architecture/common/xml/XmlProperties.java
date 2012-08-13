@@ -41,6 +41,7 @@ public class XmlProperties {
 	private static final Log log = LogFactory.getLog(XmlProperties.class);
 
     private File file;
+    
     private Document document;
     
 

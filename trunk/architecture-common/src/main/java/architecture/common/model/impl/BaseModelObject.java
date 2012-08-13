@@ -25,8 +25,6 @@ public abstract class BaseModelObject<T> implements ModelObject<T> {
 		return modifiedDate;
 	}
 
-
-
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}	

@@ -6,11 +6,7 @@ import architecture.common.util.L10NUtils;
 /**
  * @author  donghyuck
  */
-public class ParameterMapping {
-	
-	public enum Mode {
-		IN, OUT, NONE		
-	};
+public class ResultMapping {
 	
 	private String cipher ;
 	
@@ -36,9 +32,7 @@ public class ParameterMapping {
 	
 	private Class<?> javaType = Object.class;
 
-	private Mode mode = Mode.IN ;
-	
-	private ParameterMapping() {}
+	private ResultMapping() {}
 	
 	public int getSize() {
 		return size;
@@ -73,79 +67,90 @@ public class ParameterMapping {
 	}
 
 	
-	
-	public Mode getMode() {
-		return mode;
-	}
-
-	public void setMode(Mode mode) {
-		this.mode = mode;
-	}
-
-
-
+	/**
+	 * @return
+	 * @uml.property  name="property"
+	 */
 	public String getProperty() {
 		return property;
 	}
 
-
-
+	/**
+	 * @return
+	 * @uml.property  name="primary"
+	 */
 	public boolean isPrimary() {
 		return primary;
 	}
 
-
-
+	/**
+	 * @return
+	 * @uml.property  name="encoding"
+	 */
 	public String getEncoding() {
 		return encoding;
 	}
 
-
-
+	/**
+	 * @param encoding
+	 * @uml.property  name="encoding"
+	 */
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 
-
-
+	/**
+	 * @return
+	 * @uml.property  name="javaType"
+	 */
 	public Class<?> getJavaType() {
 		return javaType;
 	}
 
-
-
+	/**
+	 * @return
+	 * @uml.property  name="jdbcType"
+	 */
 	public JdbcType getJdbcType() {
 		return jdbcType;
 	}
 
-
-
+	/**
+	 * @return
+	 * @uml.property  name="index"
+	 */
 	public int getIndex() {
 		return index;
 	}
 	
-
-
+	/**
+	 * @return
+	 * @uml.property  name="jdbcTypeName"
+	 */
 	public String getJdbcTypeName() {
 		return jdbcTypeName;
 	}
 
-
-
+	/**
+	 * @return
+	 * @uml.property  name="pattern"
+	 */
 	public String getPattern() {
 		return pattern;
 	}
 	
 	
 
-
+	/**
+	 * @author  donghyuck
+	 */
 	public static class Builder {
 				
 		/**
 		 * @uml.property  name="parameterMapping"
 		 * @uml.associationEnd  
 		 */
-		private ParameterMapping parameterMapping = new ParameterMapping();
+		private ResultMapping parameterMapping = new ResultMapping();
 		
 		public Builder(String property) {
 			parameterMapping.property = property;
@@ -185,11 +190,6 @@ public class ParameterMapping {
 		    parameterMapping.encoding = encoding;		    
 		    return this;
 		}
-		
-		public Builder mode(String mode) {
-		    parameterMapping.mode = Mode.valueOf(mode);		    
-		    return this;
-		}
 
 		public Builder size(String sizeString) {
 		    parameterMapping.size = Integer.parseInt(sizeString);		    
@@ -217,7 +217,7 @@ public class ParameterMapping {
 		    return this;
 		}
 		
-		public ParameterMapping build() {
+		public ResultMapping build() {
 		   return parameterMapping;
 		}
 				

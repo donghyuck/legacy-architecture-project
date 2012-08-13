@@ -46,8 +46,6 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
-import org.springframework.jdbc.core.namedparam.NamedParameterUtils;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.lob.OracleLobHandler;
@@ -65,7 +63,7 @@ import architecture.common.jdbc.schema.DatabaseType;
 public class ExtendedJdbcTemplate extends JdbcTemplate {
 	
 	/**
-	 * @author  donghyuck
+	 * INNER CLASSES
 	 */
 	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator {
 		
@@ -77,6 +75,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 
 
 		private DatabaseType databaseType;
+		
 		private Log log = LogFactory.getLog(getClass());
 		
 		public ScrollablePreparedStatementCreator(String sql, int startIndex, int numResults, Object args[], int[] types, DatabaseType databaseType) {
@@ -124,9 +123,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		}
 	}	
 	
-	/**
-	 * INNER CLASSES
-	 */
+
 	public static class ScrollableResultSetExtractor implements ResultSetExtractor {
 		
 		private int startIndex;
@@ -184,7 +181,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		}
 	}
 
-	
 	public static class MappedPreparedStatementSetter implements PreparedStatementSetter {
 		
 		private List<ParameterMapping> parameterMappings ;
@@ -236,42 +232,84 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		}
 		
 	}
+	
+	public static class MappedArrayPreparedStatementSetter implements PreparedStatementSetter {
+		
+		private List<ParameterMapping> parameterMappings ;
+		private Object[] parameters;		
+		private Log log = LogFactory.getLog(getClass());
+		
+		private MappedArrayPreparedStatementSetter(Object[] parameters, List<ParameterMapping> parameterMappings) {
+			this.parameters = parameters;
+			this.parameterMappings = parameterMappings;
+		}
 
-	/**
-	 * @uml.property  name="databaseType"
-	 * @uml.associationEnd  
-	 */
+		public void setValues(PreparedStatement ps) throws SQLException {
+						
+			int index = 1 ;
+			for ( Object object : parameters ){
+				//log.debug("parameters [" + index + "]" + object);
+				Object valueToUse = object;
+				
+				int jdbcType = JdbcUtils.TYPE_UNKNOWN;
+				
+				for( ParameterMapping mapping : parameterMappings ){
+					if ( index == mapping.getIndex() ){						
+						jdbcType = mapping.getJdbcType().TYPE_CODE;						
+						if( valueToUse == null && mapping.getJavaType() == Date.class ){
+		            		valueToUse = new Date();
+		            	}     
+						if( valueToUse instanceof Date && mapping.getJdbcType() == JdbcType.VARCHAR ){
+		            		valueToUse = DateFormatUtils.format((Date)valueToUse, mapping.getPattern());
+		            	}
+						if( valueToUse instanceof String && mapping.getJdbcType() == JdbcType.VARCHAR ){
+							String stringValue = (String)valueToUse;
+		            		if(!StringUtils.isEmpty( mapping.getEncoding())){
+								if( !StringUtils.isEmpty(stringValue)){
+									String[] encoding = StringUtils.split(mapping.getEncoding(), ">");		
+									try {
+										if( encoding.length == 2 )
+											valueToUse =  new String(stringValue.getBytes(encoding[0]), encoding[1]);
+										else if ( encoding.length == 1 )
+											valueToUse =  new String(stringValue.getBytes(), encoding[0]);
+									} catch (UnsupportedEncodingException e) {
+										log.error(e);
+									}	
+								}
+		            		}							
+						}
+						break;
+					}
+				}
+				
+				if (valueToUse == null)
+            		ps.setNull(index, jdbcType);
+            	else
+            		ps.setObject(index, valueToUse, jdbcType);         
+				
+				index ++ ;
+			}			
+		}
+		
+	}
+
+	
 	private DatabaseType databaseType;
 
-	/**
-	 * @uml.property  name="lobHandler"
-	 */
 	private LobHandler lobHandler = null;		
 	
 	public ExtendedJdbcTemplate(DataSource dataSource) {
 		super(dataSource);		
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="lobHandler"
-	 */
 	public LobHandler getLobHandler() {
 		return lobHandler;
 	}
-	
-	/**
-	 * @return
-	 * @uml.property  name="databaseType"
-	 */
+
 	public DatabaseType getDatabaseType() {
 		return databaseType;
 	}
 	
-	/**
-	 * @param lobHandler
-	 * @uml.property  name="lobHandler"
-	 */
 	public void setLobHandler(LobHandler lobHandler) {
 		this.lobHandler = lobHandler;
 	}
@@ -281,18 +319,13 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		initialize();
 	}
 	
-	/**
-	 * @param databaseType
-	 * @uml.property  name="databaseType"
-	 */
 	public void setDatabaseType(DatabaseType databaseType){
 		this.databaseType = databaseType;
 	}
 	
 	public void initialize(){				 
 		if(this.databaseType == null && this.getDataSource() != null){
-			this.databaseType = JdbcUtils.getDatabaseType(getDataSource());
-			
+			this.databaseType = JdbcUtils.getDatabaseType(getDataSource());			
 			if (databaseType == DatabaseType.oracle) {
 				OracleLobHandler oracleLobHandler = new OracleLobHandler();
 				oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
@@ -351,10 +384,34 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	protected PreparedStatementSetter newMappedPreparedStatementSetter(Map<String, Object> parameters, List<ParameterMapping> parameterMappings) {
 		return new MappedPreparedStatementSetter( parameters, parameterMappings );
 	}		
+
+	protected PreparedStatementSetter newMappedArrayPreparedStatementSetter(Object[] parameters, List<ParameterMapping> parameterMappings) {
+		return new MappedArrayPreparedStatementSetter( parameters, parameterMappings );
+	}	
+
 	
 	public <T> T queryForObject(String sql, List<ParameterMapping> parameterMappings, Map<String, Object> parameters, RowMapper<T> rowMapper) throws DataAccessException {				
 		List<T> results = query(sql, newMappedPreparedStatementSetter(parameters, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper, 1));		
 		return DataAccessUtils.requiredSingleResult(results);
+	}
+
+	
+	
+	public <T> List<T> query(String sql, List<ParameterMapping> parameterMappings, Object args, RowMapper<T> rowMapper) throws DataAccessException {
+	    if( args instanceof Map ){
+			return query(sql, parameterMappings, (Map<String, Object>)args, rowMapper );
+		}else if (args instanceof Object[]){
+			return query(sql, parameterMappings, (Object[]) args, rowMapper);
+		}else {
+			return query(sql, args == null ? new Object[0]: new Object[]{ args }, rowMapper);
+		}
+	}
+	
+	
+	public <T> List<T> query(String sql, List<ParameterMapping> parameterMappings, Object[] args, RowMapper<T> rowMapper) throws DataAccessException {
+		
+		return query(sql, newMappedArrayPreparedStatementSetter(args, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper));
+		
 	}
 	
 	public <T> List<T> queryForList(String sql, List<ParameterMapping> parameterMappings, Map<String, Object> parameters, RowMapper<T> rowMapper) throws DataAccessException {				
@@ -367,9 +424,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public int update (String sql, final List<ParameterMapping> parameterMappings, final Map<String, Object> parameters){
 		return update(sql, newMappedPreparedStatementSetter(parameters, parameterMappings));
 	}
-	
-
-	
+		
 	public int[] batchUpdate(String sql, final List<ParameterMapping> parameterMappings, final List<Map<String, Object>> parameters){		
 		return batchUpdate(sql, new BatchPreparedStatementSetter(){
 			public void setValues(PreparedStatement ps, int i) throws SQLException {
