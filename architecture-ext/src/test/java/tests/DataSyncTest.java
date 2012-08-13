@@ -1,5 +1,9 @@
 package tests;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
@@ -16,9 +20,11 @@ public class DataSyncTest {
 
 	@Test
 	public void day(){
+		Date now = new Date();
 		
-		
-		
+		DateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
+		System.out.println(df.format(now));
+		log.debug(df.format(now));
 	}
 	
 	private static Log log = LogFactory.getLog(DataSyncTest.class);

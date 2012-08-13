@@ -15,42 +15,15 @@ import architecture.common.jdbc.ParameterMapping;
 public class DefaultDataSyncMetaInfo {
 
 		
-	/**
-	 * @author   donghyuck
-	 */
 	public enum Type {
-		/**
-		 * @uml.property  name="rEAD"
-		 * @uml.associationEnd  
-		 */
 		READ, 
-		/**
-		 * @uml.property  name="wRITE"
-		 * @uml.associationEnd  
-		 */
 		WRITE,
-		/**
-		 * @uml.property  name="fILTER"
-		 * @uml.associationEnd  
-		 */
 		FILTER,
-		/**
-		 * @uml.property  name="mERGE"
-		 * @uml.associationEnd  
-		 */
 		MERGE;
 	};	
 	
-	/**
-	 * @uml.property  name="type"
-	 * @uml.associationEnd  
-	 */
 	protected Type type = Type.READ ;
 	
-	/**
-	 * @return
-	 * @uml.property  name="type"
-	 */
 	public Type getType() {
 		return type;
 	}
@@ -62,27 +35,27 @@ public class DefaultDataSyncMetaInfo {
 	protected String queryName = null;
 	
 	protected String connectorName = null;
-	
-	/**
-	 * @uml.property  name="isBatch"
-	 */
+
 	protected boolean isBatch = true;
 	
-	/**
-	 * @uml.property  name="pipelineMappings"
-	 */
+	protected Properties properties;
+	
 	private List<Pipeline> pipelineMappings = new ArrayList<Pipeline>();
 
-	/**
-	 * @uml.property  name="parameterMappings"
-	 */
 	protected List<ParameterMapping> parameterMappings = new ArrayList<ParameterMapping>();
 		
 	
-	/**
-	 * @return
-	 * @uml.property  name="pipelineMappings"
-	 */
+	
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		if(this.properties == null)
+			this.properties = new Properties(); 
+		this.properties = properties;
+	}
+
 	public List<Pipeline> getPipelineMappings() {
 		return pipelineMappings;
 	}
@@ -90,10 +63,9 @@ public class DefaultDataSyncMetaInfo {
 	public void setPipelineMappings(List<String> pipelineMappings) {
 		for( String pipelineMapping : pipelineMappings ){
 			String[] arr = StringUtils.commaDelimitedListToStringArray(pipelineMapping);
-			Properties props = StringUtils.splitArrayElementsIntoProperties(arr, "=");
-			
+			Properties props = StringUtils.splitArrayElementsIntoProperties(arr, "=");			
 			String name = props.getProperty("name", null);
-			String match = props.getProperty("", "false");
+			String match = props.getProperty("match", "false");
 			if( StringUtils.hasText(name)){
 				DefaultPipeline pipeline = new DefaultPipeline();
 				pipeline.name = name;
@@ -103,10 +75,6 @@ public class DefaultDataSyncMetaInfo {
 		}
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="isBatch"
-	 */
 	public boolean isBatch() {
 		return isBatch;
 	}
@@ -115,42 +83,22 @@ public class DefaultDataSyncMetaInfo {
 		this.type = Type.valueOf(typeString.toUpperCase());	
 	}
 
-	/**
-	 * @param isBatch
-	 * @uml.property  name="isBatch"
-	 */
 	public void setBatch(boolean isBatch) {
 		this.isBatch = isBatch;
 	}
 
-	/**
-	 * @param connectorName
-	 * @uml.property  name="connectorName"
-	 */
 	public void setConnectorName(String connectorName) {
 		this.connectorName = connectorName;
 	}
 
-	/**
-	 * @param queryString
-	 * @uml.property  name="queryString"
-	 */
 	public void setQueryString(String queryString) {
 		this.queryString = queryString;
 	}
 
-	/**
-	 * @param queryName
-	 * @uml.property  name="queryName"
-	 */
 	public void setQueryName(String queryName) {
 		this.queryName = queryName;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="parameterMappings"
-	 */
 	public List<ParameterMapping> getParameterMappings() {
 		return parameterMappings;
 	}
@@ -159,6 +107,7 @@ public class DefaultDataSyncMetaInfo {
 		for( String mappingString : parameterMappings ){
 			
 			String[] arr = StringUtils.commaDelimitedListToStringArray(mappingString);
+			
 			Properties props = StringUtils.splitArrayElementsIntoProperties(arr, "=");
 			
 			String name = props.getProperty("name");
@@ -181,7 +130,10 @@ public class DefaultDataSyncMetaInfo {
 			
 			String cipherKeyAlg = props.getProperty("cipherKeyAlg", null);
 			
+			String sizeString = props.getProperty("size", "0");
+			
 			ParameterMapping.Builder builder = new ParameterMapping.Builder(name);
+						
 			if( index != null )
 			    builder.index(Integer.parseInt(index));
 			if( encoding != null)
@@ -197,10 +149,15 @@ public class DefaultDataSyncMetaInfo {
 			
 			if( cipher != null )
 				builder.cipher(cipher);
+			
 			if( cipherKey != null )
 				builder.cipherKey(cipherKey);
+			
 			if( cipherKeyAlg != null )
 				builder.cipherKeyAlg(cipherKeyAlg);
+			
+			if( sizeString != null )
+				builder.size(sizeString);
 			
 			this.parameterMappings.add(builder.build());			
 		}
