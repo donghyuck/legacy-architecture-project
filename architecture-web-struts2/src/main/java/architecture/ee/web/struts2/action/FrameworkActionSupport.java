@@ -15,16 +15,16 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.security.authentication.AuthenticationProvider;
 
-import architecture.ee.security.authentication.AuthToken;
-import architecture.ee.security.authentication.AuthenticationProvider;
-import architecture.ee.user.User;
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.OutputFormat;
-import architecture.ee.util.SecurityHelper;
 import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
+import architecture.security.util.SecurityHelper;
 
 import com.opensymphony.xwork2.util.ValueStack;
 

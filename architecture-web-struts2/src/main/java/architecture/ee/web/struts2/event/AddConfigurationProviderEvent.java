@@ -1,8 +1,8 @@
 package architecture.ee.web.struts2.event;
 
-import com.opensymphony.xwork2.config.ConfigurationProvider;
-
 import architecture.common.lifecycle.event.Event;
+
+import com.opensymphony.xwork2.config.ConfigurationProvider;
 
 public class AddConfigurationProviderEvent extends Event {
 	
