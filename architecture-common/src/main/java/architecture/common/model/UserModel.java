@@ -8,9 +8,7 @@ import architecture.common.user.authentication.UnAuthorizedException;
 
 public interface UserModel extends ModelObject<User> {
 
-	/**
-	 * @author                 donghyuck
-	 */
+
 	enum Status {
 		
 		/**
