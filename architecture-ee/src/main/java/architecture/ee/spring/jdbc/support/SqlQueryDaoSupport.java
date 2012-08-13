@@ -19,26 +19,14 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 public class SqlQueryDaoSupport extends JdbcDaoSupport {
 	
 	protected Log log = LogFactory.getLog(getClass());
-	
-	/**
-	 * @uml.property  name="sqlQueryFactory"
-	 * @uml.associationEnd  
-	 */
+
 	private SqlQueryFactory sqlQueryFactory = null ;
 
-	/**
-	 * @return
-	 * @uml.property  name="sqlQueryFactory"
-	 */
 	public SqlQueryFactory getSqlQueryFactory() {
 		
 		return sqlQueryFactory;
 	}
 	
-	/**
-	 * @param sqlQueryFactory
-	 * @uml.property  name="sqlQueryFactory"
-	 */
 	public void setSqlQueryFactory(SqlQueryFactory sqlQueryFactory) {
 		this.sqlQueryFactory = sqlQueryFactory;
 	}

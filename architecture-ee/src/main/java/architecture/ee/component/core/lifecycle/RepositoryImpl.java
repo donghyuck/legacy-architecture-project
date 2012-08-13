@@ -2,6 +2,7 @@ package architecture.ee.component.core.lifecycle;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -11,11 +12,10 @@ import javax.servlet.ServletContext;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.vfs2.FileObject;
-import org.apache.commons.vfs2.FileSystemException;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
-import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.FileSystemResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.jndi.JndiTemplate;
@@ -34,7 +34,6 @@ import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.lifecycle.internal.XmlApplicationProperties;
 import architecture.common.util.L10NUtils;
-import architecture.common.util.vfs.VFSUtils;
 import architecture.common.xml.XmlProperties;
 
 
@@ -47,47 +46,49 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	
 	private JndiTemplate jndiTemplate = new JndiTemplate();
 	
-	private ResourceLoader resoruceLoader = new DefaultResourceLoader ();
+	private ResourceLoader resoruceLoader = new FileSystemResourceLoader ();
 	
-	/**
-	 * @uml.property  name="effectiveRootPath"
-	 */
 	private String effectiveRootPath;
 
+	private boolean initailized = false;
+	
+	
     public RepositoryImpl() {
 		super();
 	}
 
-    /**
-	 * @uml.property  name="rootFileObject"
-	 */
-    private FileObject rootFileObject = getRootFileObject() ;
+    //private FileObject rootFileObject = getRootFileObject() ;
         
-    /**
-	 * @uml.property  name="setupProperties"
-	 * @uml.associationEnd  
-	 */
+    private Resource rootResource = getRootResource() ;
+    
     private ApplicationProperties setupProperties = null;
         
-	public String getRootURI() {		
-		 if( rootFileObject == null ){
-			 String uri = getEnvironmentRootPath();
+	public String getRootURI() {
+
+		if (rootResource == null) {
+			String uri = getEnvironmentRootPath();
 			try {
-				FileObject obj = VFSUtils.resolveFile(uri);
-				rootFileObject = obj;
-				return obj.getName().getURI();
-			} catch (Exception e) {		
+				Resource obj = resoruceLoader.getResource(uri);
+				rootResource = obj;
+				return obj.getURI().toString();
+			} catch (Exception e) {
 				return null;
-			}  
-		 }				 
-		return rootFileObject.getName().getURI();
+			}
+		}
+
+		try {
+			return rootResource.getURI().toString();
+		} catch (IOException e) {
+		}
+
+		return null;
 	}
 	
     public ConfigRoot getConfigRoot(){    	
 		try {			
-			FileObject child = getRootFileObject().resolveFile("config");      
+			Resource child = getRootResource().createRelative("config");      
 			if(!child.exists()){
-                child.createFolder();	
+                child.getFile().mkdirs();
             }
 			return new ConfigRootImpl(child);			
 		} catch (Exception e) {
@@ -96,43 +97,41 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     }
     
 
-       
-	/**
-	 * @return
-	 * @uml.property  name="rootFileObject"
-	 */
-	private FileObject getRootFileObject(){		
-		if( getState() != State.INITIALIZED || getState() != State.INITIALIZING ){			
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();		
-			try {		
-				InputStream input = classloader.getResourceAsStream("application-init.xml");			
+    private Resource getRootResource(){    	
+    	
+    	if(initailized)
+    		return rootResource;
+    	
+    	if( getState() != State.INITIALIZED  || getState() == State.INITIALIZING ){
+    		
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
+			try {
+				InputStream input = classloader.getResourceAsStream("application-init.xml");
 				XmlProperties prop = new XmlProperties(input);
-				String envRootPath = prop.getProperty("home");
-				if(!StringUtils.isEmpty(envRootPath)){
-					FileObject obj = VFSUtils.resolveFile(envRootPath);
+				String path = prop.getProperty("home");
+				if(!StringUtils.isEmpty(path)){
+					Resource resource = resoruceLoader.getResource(path);
 					log.debug( 
-						L10NUtils.format("003001", obj.getName().getURI())
-					);					
-					this.rootFileObject = obj;					
+						L10NUtils.format("003001", resource.getURI())
+					);
+					this.rootResource = resource;
 					setState(State.INITIALIZED);
+					initailized = true;
 				}
 			} catch (Throwable e) {}
-		}		
-		return rootFileObject;
-	}
-	
+		}
+    	
+		return rootResource;
+    }
+
 	public void initialize() throws ComponentDisabledException, ConfigurationWarning, ConfigurationError {
 		log.debug("initialize");
 		try {			
-			this.rootFileObject = getRootFileObject();
+			this.rootResource = getRootResource();
 		} catch (Exception e) {
 		}		
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="effectiveRootPath"
-	 */
 	public String getEffectiveRootPath()
     {	
         if(!StringUtils.isEmpty(effectiveRootPath))
@@ -140,56 +139,63 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
             return effectiveRootPath;
         } else
         {
-        	String uri = getRootURI();   	
-        	try {
-        		FileObject obj = VFSUtils.resolveFile(uri);
-        		effectiveRootPath = obj.getName().getPath();   		
-			} catch (FileSystemException e) {
-			}        	
+        	String uri = getRootURI();
+        	effectiveRootPath = uri ;
             return effectiveRootPath;
         }
     }
         
-    public void setServletContext(ServletContext servletContext){
-    	
+    public void setServletContext(ServletContext servletContext){    	
     	// 1. 서블릿 컨텍스트에 설정된 프로퍼티 값을 검사 : ARCHITECTURE_INSTALL_ROOT
+    	
+    	
     	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY );    	
+
+
     	if(!StringUtils.isEmpty(value)){
     		try {        	
-    			resoruceLoader = new ServletContextResourceLoader(servletContext);    			
-    			Resource resource = resoruceLoader.getResource(value);	
-        		File file = resource.getFile();
-        		log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , file.getAbsolutePath()) );
-        		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
-				this.rootFileObject = obj;
-				setState(State.INITIALIZED);
+    			ServletContextResourceLoader servletResoruceLoader = new ServletContextResourceLoader(servletContext);    			
+    			Resource resource = servletResoruceLoader.getResource(value);	    			
+    			if( resource.exists() )
+    			{
+    				log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , resource.getURI() ) );
+    				this.rootResource = resource;
+    				setState(State.INITIALIZED);
+    				initailized = true;
+    			} 
     		} catch (Throwable e) {
-    			this.rootFileObject = null;
+    			this.rootResource = null;
 			}
-    	}    	    	    	
+    	} 
+
     	
-    	if(rootFileObject == null){
-    		FileObject obj;
+    	if( !initailized  && !StringUtils.isEmpty(value) ){
+    		Resource obj;
 			try {
-				obj = VFSUtils.resolveFile(value);
-				log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , obj.getName().getURI())	);
-				this.rootFileObject = obj;				
-				setState(State.INITIALIZED);
+				obj = resoruceLoader.getResource(value);
+				if( obj.exists() ){
+					log.debug( L10NUtils.format("003003", ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY , obj.getURI())	);
+					this.rootResource = obj;				
+					setState(State.INITIALIZED);
+					initailized = true;
+					
+				}
 			} catch (Throwable e) {
 				log.error(e);
 			}    		
     	}
     	
-    	if(rootFileObject == null){
+    	if(!initailized){
     		try {   
-	    		ServletContextResource resource = new ServletContextResource(servletContext, "/WEB-INF");          
+	    		ServletContextResource resource = new ServletContextResource( servletContext, "/WEB-INF");
 	    		File file = resource.getFile();
-	    		log.debug( L10NUtils.format("003004", file.getAbsolutePath() ));
-	    		FileObject obj = VFSUtils.resolveFile(file.toURI().toString());
-				this.rootFileObject = obj;
-				setState(State.INITIALIZED);
+	    		if( file.exists() ){
+	    			this.rootResource = new FileSystemResource(file);
+	    			setState(State.INITIALIZED);
+	    			initailized = true;
+	    		}
     		} catch (Throwable e) {
-    			this.rootFileObject = null;
+    			log.error(e);
 			}
     	}
     }    
@@ -231,7 +237,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	public ApplicationProperties getSetupApplicationProperties() {
 		if( setupProperties == null ){	
 			try {			
-				File file = new File( getEffectiveRootPath(), ApplicationConstants.DEFAULT_STARTUP_FILENAME );
+				File file = getFile(ApplicationConstants.DEFAULT_STARTUP_FILENAME );
 				if(!file.exists()){					
 					boolean error = false;
 				    // create default file...
@@ -282,18 +288,18 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     
 	public String getURI(String name) {
 		try {
-			FileObject obj = getRootFileObject().resolveFile(name);		   
-			return  obj.getName().getURI();
-		} catch (FileSystemException e) {
+			return  getFile(name).toURI().toString();
+		} catch (Exception e) {
 		}
 		return null;
 	}
 
 	public File getFile(String name) {
 		try {
-			FileObject obj = getRootFileObject().resolveFile(name);		
-			return  new File(obj.getURL().getFile());
-		} catch (FileSystemException e) {
+			//Resource obj = getRootResource().createRelative(name);			
+			File file = new File(getRootResource().getFile(), name);
+			return  file ;
+		} catch (IOException e) {
 		}
 		return null;
 	}

@@ -19,11 +19,21 @@ public interface SqlQueryClient {
 	
 	
 	/**
+	 * 단일 컬럼에 대한 데이터를 Map 으로 리턴한다.
+	 * @param statement
+	 * @param parameter
+	 * @return
+	 */
+	public Map<String, Object> uniqueResult(String statement, Object parameter );
+	
+	/**
 	 * 
 	 * @param statement
 	 * @param parameters
 	 * @return
 	 */
 	public Object call(String statement, Object... parameters);
+	
+	public Object update(String statement, Object[] values, int[] types);
 	
 }

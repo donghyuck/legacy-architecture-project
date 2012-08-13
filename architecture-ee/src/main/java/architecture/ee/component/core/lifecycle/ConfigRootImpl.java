@@ -1,9 +1,9 @@
 package architecture.ee.component.core.lifecycle;
 
 import java.io.File;
+import java.io.IOException;
 
-import org.apache.commons.vfs2.FileObject;
-import org.apache.commons.vfs2.FileSystemException;
+import org.springframework.core.io.Resource;
 
 import architecture.common.lifecycle.ConfigRoot;
 
@@ -13,16 +13,14 @@ import architecture.common.lifecycle.ConfigRoot;
 public class ConfigRootImpl implements ConfigRoot {
 
 	private String rootURL;
-	/**
-	 * @uml.property  name="rootFileObject"
-	 */
-	private FileObject rootFileObject;
+
+	private Resource rootFileObject;
 	
-	public ConfigRootImpl(FileObject fileObject) {
+	public ConfigRootImpl(Resource fileObject) {
 		this.rootFileObject = fileObject;
 		try {
-			this.rootURL = fileObject.getURL().toString();
-		} catch (FileSystemException e) {
+			this.rootURL = rootFileObject.getURL().toString();
+		} catch (IOException e) {
 		}
 	}
 
@@ -30,11 +28,7 @@ public class ConfigRootImpl implements ConfigRoot {
 		this.rootURL = rootURL;
 	}
 		
-	/**
-	 * @return
-	 * @uml.property  name="rootFileObject"
-	 */
-	private FileObject getRootFileObject() {
+	private Resource getRootResource() {
 		return rootFileObject;
 	}
 
@@ -44,18 +38,17 @@ public class ConfigRootImpl implements ConfigRoot {
 
 	public File getFile(String name) {
 		try {			
-			FileObject obj = getRootFileObject().resolveFile(name);		   
-			return  new File(obj.getURL().getFile());
-		} catch (FileSystemException e) {
+			return getRootResource().createRelative(name).getFile();
+		} catch (IOException e) {
 		}
 		return null;
 	}
 	
 	public String getURI(String name) {
 		try {
-			FileObject obj = getRootFileObject().resolveFile(name);		   
-			return  obj.getName().getURI();
-		} catch (FileSystemException e) {
+			
+			return  getRootResource().createRelative(name).getURI().toString();
+		} catch (IOException e) {
 		}
 		return null;
 	}

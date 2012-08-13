@@ -226,8 +226,9 @@ public class XPathParser {
 			factory.setIgnoringElementContentWhitespace(false);
 			factory.setCoalescing(false);
 			factory.setExpandEntityReferences(true);
-
+			
 			DocumentBuilder builder = factory.newDocumentBuilder();
+			
 			builder.setEntityResolver(entityResolver);
 			builder.setErrorHandler(new ErrorHandler() {
 				public void error(SAXParseException exception)
@@ -242,12 +243,10 @@ public class XPathParser {
 						throws SAXException {
 				}
 			});
-			
 			return builder.parse(new InputSource(reader));
 		
 		} catch (Exception e) {
-			throw new BuilderException(
-					"Error creating document instance.  Cause: " + e, e);
+			throw new BuilderException( "Error creating document instance.  Cause: " + e, e);
 		}
 	}
 

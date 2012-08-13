@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
@@ -24,11 +25,13 @@ public class BootstrapTest {
 	private Log log = LogFactory.getLog(getClass());
 	
 	
-	//@Test
+	@Test
 	public void testGetEffectiveRootPath() throws Exception{
 		Repository repo = Bootstrap.getBootstrapComponent(Repository.class);
 		log.info(" -1- " + repo.getEffectiveRootPath());
-		log.info(" -2- " + repo.getConfigRoot().getRootURI());
+		log.info(" -1- " + repo.getState());
+		log.info(" -2- " + repo.getFile("andang"));
+		log.info(" -2- " + repo.getSetupApplicationProperties());
 	}	
 	
 

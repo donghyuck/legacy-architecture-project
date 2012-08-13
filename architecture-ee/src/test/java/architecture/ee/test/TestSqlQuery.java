@@ -51,6 +51,8 @@ public class TestSqlQuery {
 		List<Map<String, Object>> list = helper.list(query, "COMMON.SELECT_TABLE_ROWS");
 		for(Map row : list)
 			log.debug(row);
+		
+		
 
 		/*		List<Map<String, Object>> list = query.list("COMMON.SELECT_TABLE_NAMES");
 		for(Map row : list)
