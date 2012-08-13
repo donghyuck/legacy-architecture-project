@@ -83,6 +83,9 @@ public class SqlQueryImpl implements SqlQuery {
 	// *********************************************
 	// Protected Methods
 	// ********************************************
+	protected SqlQueryImpl(Configuration configuration) {
+		this.configuration = configuration;
+	}
 	
 	protected SqlQueryImpl(Configuration configuration, MaxValueIncrementer incrementer) {
 		this.configuration = configuration;
@@ -271,6 +274,7 @@ public class SqlQueryImpl implements SqlQuery {
 		return uniqueResult(statement, parameter, new SingleColumnRowMapper<T>(elementType));
 	}
 
+	
 	public <T> T uniqueResult(String statement, Object parameter, RowMapper<T> rowMapper) {		
 		BoundSql sql = getBoundSql(statement, parameter);		
 		List<ParameterMapping> parameterMappings = sql.getParameterMappings();		
@@ -352,6 +356,10 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 	
 	
+	public int update (String statement, Object[] values){
+		BoundSql sql = getBoundSql(statement, values);
+		return jdbcTemplate.update(sql.getSql(), values) ;
+	}	
 	
 	public int update (String statement, Object[] values, int[] types ){
 		BoundSql sql = getBoundSql(statement, values);
@@ -393,8 +401,6 @@ public class SqlQueryImpl implements SqlQuery {
 		BoundSql sql = getBoundSql(statement);
 		return jdbcTemplate.executeScript(stopOnError, new StringReader(sql.getSql()));
 	}
-
-
 	
 	public Object call(String statement, Object... parameters){
 		BoundSql sql = getBoundSql(statement);
@@ -422,7 +428,6 @@ public class SqlQueryImpl implements SqlQuery {
 		}
 		
 		CallableStatementCreatorFactory callableStatementFactory = new CallableStatementCreatorFactory(sql.getSql(), declaredParameters);		
-		
 		return jdbcTemplate.call(callableStatementFactory.newCallableStatementCreator(paramsToUse), declaredParameters );
 	
 	}

@@ -80,4 +80,5 @@ public interface JdbcHelper {
 
 	public NativeJdbcExtractor getNativeJdbcExtractor();
 	
+	
 }

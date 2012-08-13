@@ -16,6 +16,8 @@ import java.util.concurrent.Callable;
 
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.ColumnMapRowMapper;
+import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
@@ -231,7 +233,11 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 			importFromExcel(catalogName, schemaName, tableName, uri);
 		}
 	}
-
+	
+	public Map<String, Object> uniqueResult(String statement, Object parameter ) {
+		return getSqlQuery().uniqueResult(statement, parameter, new ColumnMapRowMapper());
+	}
+	
 	public List<Map<String, Object>> list(String statement) {
 		return getSqlQuery().list(statement);
 	}
@@ -240,9 +246,11 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		return getSqlQuery().list(statement, parameters);
 	}
 
-	public Object call(String statement, Object... parameters) {
-		
-		return getSqlQuery().call(statement, parameters);
-		
+	public Object call(String statement, Object... parameters) {		
+		return getSqlQuery().call(statement, parameters);		
+	}
+
+	public Object update(String statement, Object[] values, int[] types) {
+		return getSqlQuery().update(statement, values, types);
 	}
 }

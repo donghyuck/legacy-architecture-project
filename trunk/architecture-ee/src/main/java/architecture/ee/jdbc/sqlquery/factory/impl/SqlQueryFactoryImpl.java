@@ -51,10 +51,7 @@ public class SqlQueryFactoryImpl extends AbstractSqlQueryFactory implements SqlQ
 		this.incrementerSupported = incrementerSupported;
 	}
 
-	public void initialize(){
-		
-
-		
+	public void initialize(){		
 		if(getResourceLocations().size() > 0)
 			loadResourceLocations();
 	}
