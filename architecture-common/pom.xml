@@ -23,6 +23,7 @@
 	<scm>
 		<url>https://power-j.googlecode.com/svn/trunk/architecture-common</url>
 	</scm>
+	
 	<organization>
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
@@ -196,6 +197,13 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.tmax</groupId>
+			<artifactId>tibero.jdbc</artifactId>
+			<version>4.0.1</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>		
 	</dependencies>
 
 	<build>
