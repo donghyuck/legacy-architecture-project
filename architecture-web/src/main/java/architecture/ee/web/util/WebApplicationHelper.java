@@ -3,6 +3,7 @@ package architecture.ee.web.util;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.State;
+
 import architecture.ee.util.ApplicationHelper;
 
 public final class WebApplicationHelper 

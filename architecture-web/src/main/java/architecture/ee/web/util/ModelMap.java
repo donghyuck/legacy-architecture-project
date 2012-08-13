@@ -10,6 +10,11 @@ import org.springframework.util.Assert;
 public class ModelMap extends LinkedHashMap<String, Object> {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6386967260849809012L;
+
+	/**
 	 * Construct a new, empty <code>ModelMap</code>.
 	 */
 	public ModelMap() {
