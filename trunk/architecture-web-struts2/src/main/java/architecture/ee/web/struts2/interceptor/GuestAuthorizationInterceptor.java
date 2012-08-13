@@ -3,15 +3,16 @@ package architecture.ee.web.struts2.interceptor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.ee.spring.security.authentication.ExtendedAuthentication;
-import architecture.ee.spring.security.authentication.ExtendedAuthenticationProvider;
 import architecture.ee.web.struts2.annotation.AlwaysAllowAnonymous;
 import architecture.ee.web.struts2.annotation.AlwaysDisallowAnonymous;
+import architecture.security.user.spring.authentication.ExtendedAuthentication;
+import architecture.security.user.spring.authentication.ExtendedAuthenticationProvider;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
+@SuppressWarnings("serial")
 public class GuestAuthorizationInterceptor implements Interceptor {
 
 	private ExtendedAuthenticationProvider authProvider;
