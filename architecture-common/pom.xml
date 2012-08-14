@@ -130,9 +130,8 @@
 		<dependency>
 			<groupId>net.sf.ehcache</groupId>
 			<artifactId>ehcache</artifactId>
-			<version>2.4.6</version>
+			<version>2.6.0</version>
 			<type>pom</type>
-			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
 					<artifactId>ehcache-terracotta</artifactId>
@@ -324,4 +323,5 @@
 			<url>http://222.122.63.146/artifactory/ext-release-local</url>
 		</repository>
 	</distributionManagement>
+
 </project>
