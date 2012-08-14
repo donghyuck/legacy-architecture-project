@@ -209,13 +209,6 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.tmax</groupId>
-			<artifactId>tibero.jdbc</artifactId>
-			<version>4.0.1</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
