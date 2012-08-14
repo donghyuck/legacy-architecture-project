@@ -14,8 +14,7 @@ import architecture.ee.model.impl.I18nTextModel2Impl;
 
 public class I18nTextUtils {
     
-	private static final Log log = LogFactory.getLog(I18nTextUtils.class);
-	
+	private static final Log log = LogFactory.getLog(I18nTextUtils.class);	
 
 	public static List<I18nLocalizer> getI18nLocalizers(){
 		I18nTextManager manager =  ApplicationHelper.getI18nTextManager();
@@ -89,7 +88,7 @@ public class I18nTextUtils {
     			log.debug("Search in local file system.");    		
     		bundle = ResourceBundle.getBundle(bundleName , targetLocale);   
     	}
-    	log.debug("KeySet:" + bundle.keySet());    	
+    	log.debug("KeySet:" + bundle.getKeys());    	
     	return bundle;
     }
     
