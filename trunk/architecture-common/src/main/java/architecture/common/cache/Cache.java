@@ -1,7 +1,7 @@
 package architecture.common.cache;
 
 /**
- * @author   donghyuck
+ * @author   donghyuck, son
  */
 public interface Cache<K,V> extends java.util.Map<K,V> {
 

@@ -206,7 +206,7 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 	
 	protected Object deliver(final String queryString, final List<ParameterMapping> parameterMappings, final Map<String, Object> row) { 
 		
-		log.debug("delivering : 1");
+		//log.debug("delivering : 1");
 		
 		return getJdbcTemplate().update(queryString, new PreparedStatementSetter(){
 			
