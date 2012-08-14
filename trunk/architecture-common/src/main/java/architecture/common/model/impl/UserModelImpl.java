@@ -20,6 +20,7 @@ import architecture.common.util.StringUtils;
 /**
  * @author  donghyuck
  */
+
 public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	private Log log = LogFactory.getLog(getClass());
@@ -93,7 +94,9 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	/**
 	 */
 	private boolean setPasswordHashSupported;
+	
 	private boolean setPropertyEditSupported;
+	
 	private boolean setEmailSuppoted;
 	/**
 	 */

@@ -32,13 +32,11 @@ import architecture.common.i18n.LocalizerFactory;
  */
 public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
 
-	private static class LocalizerResourceBundleControl extends
-			ResourceBundle.Control {
+	private static class LocalizerResourceBundleControl extends ResourceBundle.Control {
 
 		public static final String XML = "xml";
 
-		public static final List<String> FORMAT_DEFAULT = Collections
-				.unmodifiableList(Arrays.asList("java.properties", XML));
+		public static final List<String> FORMAT_DEFAULT = Collections.unmodifiableList(Arrays.asList("java.properties", XML));
 
 		public List<String> getFormats(String baseName) {
 			return FORMAT_DEFAULT;
