@@ -23,11 +23,23 @@
 	<scm>
 		<url>https://power-j.googlecode.com/svn/trunk/architecture-common</url>
 	</scm>
-	
+
 	<organization>
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>FUSE ARCHITECTURE Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</repository>
+	</repositories>
+
 	<properties />
 	<dependencies>
 		<dependency>
@@ -203,7 +215,7 @@
 			<version>4.0.1</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>		
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -255,7 +267,7 @@
 						<goals>
 							<goal>proguard</goal>
 						</goals>
-					</execution>				
+					</execution>
 				</executions>
 				<configuration>
 					<obfuscate>true</obfuscate>
@@ -308,10 +320,10 @@
 					</libs>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>hadoop-master</id>
