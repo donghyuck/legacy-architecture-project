@@ -22,14 +22,11 @@ public class PlatformHelper {
 			//System.out.println(System.getProperty("file.encoding"));
 			
 			InputStream stdOut = proc.getInputStream();
-			InputStream stdErr = proc.getErrorStream();
-			
+			InputStream stdErr = proc.getErrorStream();			
 			BufferedReader stdReader = new BufferedReader(new InputStreamReader(stdOut, "MS949"));
-			BufferedReader errReader = new BufferedReader(new InputStreamReader(stdErr, "UTF-8"));
-			
+			BufferedReader errReader = new BufferedReader(new InputStreamReader(stdErr, "UTF-8"));			
 			StringBuffer stdout = new StringBuffer();
-			StringBuffer errout = new StringBuffer();
-			
+			StringBuffer errout = new StringBuffer();			
 			String line = null ;
 			
 			while( (line = stdReader.readLine()) != null ){

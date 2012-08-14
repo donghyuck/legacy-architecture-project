@@ -35,6 +35,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -68,9 +69,13 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	public static class ScrollablePreparedStatementCreator implements PreparedStatementCreator {
 		
 		private String sqlToUse;
+		
 		private Object params[];
+		
 		private int paramTypes[];
+		
 		private final int startIndex;
+		
 		private final int numResults;
 
 
@@ -128,12 +133,12 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		
 		private int startIndex;
 		private int numResults;
-		private RowMapper mapper;
+		private RowMapper<?> mapper;
 
 		private DatabaseType databaseType;
 		private Log log = LogFactory.getLog(getClass());
 
-		public ScrollableResultSetExtractor(int startIndex, int numResults, RowMapper mapper, DatabaseType databaseType) {			
+		public ScrollableResultSetExtractor(int startIndex, int numResults, RowMapper<?> mapper, DatabaseType databaseType) {			
 			this.startIndex = startIndex;
 			this.numResults = numResults;
 			this.mapper = mapper;

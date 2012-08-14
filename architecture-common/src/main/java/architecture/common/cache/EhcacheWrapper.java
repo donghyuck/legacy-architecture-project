@@ -98,19 +98,14 @@ public class EhcacheWrapper <K, V> implements Cache<K, V> {
 	 */
 	private class EhcacheEntry<K, V> implements Entry<K, V> {
 
-		/**
-		 * @uml.property  name="key"
-		 */
+
 		private final K key;
 
 		public EhcacheEntry(K key) {
 			this.key = key;
 		}
 
-		/**
-		 * @return
-		 * @uml.property  name="key"
-		 */
+
 		public K getKey() {
 			return key;
 		}
