@@ -30,6 +30,7 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 	/**
 	 */
 	private EventPublisher eventPublisher;	
+	
 	private boolean caseInsensitive;
 	/**
 	 */
@@ -37,6 +38,7 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 	/**
 	 */
 	private RoleManager roleManager;
+	
 	private String grantedAuthority;
 	
     /**

@@ -92,4 +92,5 @@ public class ExtendedUserDetails extends User implements AuthToken {
     {
         return extUser.isEnabled();
     }
+    
 }

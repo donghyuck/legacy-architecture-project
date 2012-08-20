@@ -233,7 +233,6 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
 	}
 
 	public int getCachedSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }
