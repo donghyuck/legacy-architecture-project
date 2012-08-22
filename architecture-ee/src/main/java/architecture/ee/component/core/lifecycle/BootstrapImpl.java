@@ -1,6 +1,7 @@
 package architecture.ee.component.core.lifecycle;
 
 import java.lang.ref.WeakReference;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,6 +18,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.access.ContextSingletonBeanFactoryLocator;
 
 import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
@@ -47,14 +49,25 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	
 	public ConfigurableApplicationContext getBootstrapApplicationContext(){	
 		
-		try {
-			
+		try {            			
 			// 리파지토리가 준비되어 있고 아직 컨텍스트가 초기화 되지 않았다면 ..		
+			
 			if( repository.getState() == State.INITIALIZED && !initialized.getAndSet(true) ){
-				boolean setupComplete = repository.getSetupApplicationProperties().getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
-				bootstrapFactoryKey = repository.getSetupApplicationProperties().getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);				
+				
+				ApplicationProperties properties = repository.getSetupApplicationProperties();
+				Collection<String> names = properties.getPropertyNames();
+				
+				log.debug("bootstrap properties from startup-config.xml -- ");
+				for(String name : names){
+					log.debug( name + " = " + properties.get(name));
+				}
+				
+				boolean setupComplete = properties.getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
+				bootstrapFactoryKey = properties.getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);				
+				
 				log.info(L10NUtils.format("003008", setupComplete ));
-				log.info(L10NUtils.format("003009", bootstrapFactoryKey ));				
+				log.info(L10NUtils.format("003009", bootstrapFactoryKey ));
+				
 			}
 			
 			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(bootstrapFactoryKey);			
@@ -159,6 +172,5 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			return repository.getState();
 		}
 	}
-	
 	
 }

@@ -14,9 +14,7 @@ public interface I18nTextManager {
 	public I18nLocale getI18nLocaleById(long localeId);	
 	
 	public List<I18nLocalizer> getI18nLocalizers();
-	
-	
-	
+		
 	public int getAvailableI18nLocalizerCount();
 	
 	public List<I18nLocalizer> getAvailableI18nLocalizers();

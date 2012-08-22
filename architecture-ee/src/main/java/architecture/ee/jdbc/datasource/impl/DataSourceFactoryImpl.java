@@ -7,6 +7,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.springframework.jndi.JndiTemplate;
 
+import architecture.common.exception.RuntimeError;
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.util.L10NUtils;
@@ -22,13 +23,14 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 	public DataSource getDataSource() {
 		return getDataSource("default");
 	}
+	
 	public DataSource getDataSource(String name) {
 		
 		DataSource dataSource = null;
 		
 		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
 				
-		String jndiTag = "database."+ name + ".pooledDataSourceProvider";
+		String jndiTag = "database."+ name + ".jndiDataSourceProvider";
 		
 		if( setupProperties.getChildrenNames(jndiTag).size() > 0 ){
 			String jndiName = setupProperties.get( jndiTag + ".jndiName"); 
@@ -36,12 +38,12 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 				try{
 				    dataSource = jndiTemplate.lookup(jndiName, DataSource.class);
 				}catch(Exception e){
-					log.error("There is no Jndi Object with name [" + jndiName + "]", e);
+					log.warn("There is no Jndi Object with name [" + jndiName + "]", e);
 					dataSource = null;
 				}
 			}
 		}else{
-			log.debug(L10NUtils.format("003055", jndiTag));			
+			log.warn(L10NUtils.format("003055", jndiTag));			
 		}		
 		
 		String pooledTag = "database."+ name + ".pooledDataSourceProvider";		
@@ -87,9 +89,13 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			basic.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
 			dataSource = basic;
 		}else{
-			log.debug(L10NUtils.format("003055", pooledTag));		
+			log.warn(L10NUtils.format("003055", pooledTag));		
+			
 		}
-		 				
+		
+		if( dataSource == null )
+			throw new RuntimeError(L10NUtils.format("003056", name));
+		
 		return dataSource;
 	}
 

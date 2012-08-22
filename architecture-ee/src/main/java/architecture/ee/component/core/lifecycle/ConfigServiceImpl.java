@@ -110,7 +110,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	
     /**
 	 * @return
-	 * @uml.property  name="effectiveRootPath"
 	 */
     public String getEffectiveRootPath()
     {	
@@ -120,11 +119,8 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
         } else
         {
         	String uri = getConfigRoot().getRootURI();   	
-        	try {
-        		FileObject obj = VFSUtils.resolveFile(uri);
-        		effectiveRootPath = obj.getName().getPath();   		
-			} catch (FileSystemException e) {
-			}        	
+       		FileObject obj = VFSUtils.resolveFile(uri);
+       		effectiveRootPath = obj.getName().getPath();
             return effectiveRootPath;
         }
     }
