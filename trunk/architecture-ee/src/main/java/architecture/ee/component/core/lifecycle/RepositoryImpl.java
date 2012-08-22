@@ -147,8 +147,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
         
     public void setServletContext(ServletContext servletContext){    	
     	// 1. 서블릿 컨텍스트에 설정된 프로퍼티 값을 검사 : ARCHITECTURE_INSTALL_ROOT
-    	
-    	
     	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY );    	
 
 

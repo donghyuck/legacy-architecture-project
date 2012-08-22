@@ -36,7 +36,7 @@
 
 	<bean id="sqlQuerySupport" abstract="true" p:sqlQueryFactory-ref="sqlQueryFactory" depends-on="sqlQueryFactory" />	
 	
-	<bean id="sqlQueryClient" parent="sqlQuerySupport" class="architecture.ee.component.SqlQueryClientImpl" p:dataSource-ref="dataSource" />
+	<bean id="sqlQueryClient" parent="sqlQuerySupport" class="architecture.ee.component.impl.SqlQueryClientImpl" p:dataSource-ref="dataSource" />
 	
 		
 </beans>

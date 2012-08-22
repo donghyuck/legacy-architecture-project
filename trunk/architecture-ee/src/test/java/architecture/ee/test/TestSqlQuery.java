@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.junit.Test;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -157,21 +158,7 @@ public class TestSqlQuery {
 	//@Test
 	public void testSqlQueryWithNewStyle(){
 		ClassPathXmlApplicationContext context = createClassPathXmlApplicationContext();
-		//DataSource dataSource = (DataSource)context.getBean("dataSource");		
 		
-		
-		//InputStream is = getClass().getClassLoader().getResourceAsStream("common-sqlset.xml");		
-		//Configuration config = new Configuration();
-		//XmlSqlBuilder builder = new XmlSqlBuilder( is, config);
-		//builder.build();
-		//config.buildAllStatements();		
-		//SqlQueryFactoryImpl factory = new SqlQueryFactoryImpl(config);
-		
-		
-		//factory.setDataSource(dataSource);	
-		
-		//SqlQueryFactory factory = context.getBean(SqlQueryFactory.class);
-		//SqlQuery query = factory.createSqlQuery();
 		SqlQuery query = context.getBean(SqlQuery.class);
 		log.debug(" test 1 start -------------------------------------------");
 		log.debug(

@@ -109,7 +109,6 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
     
     /**
 	 * @return
-	 * @uml.property  name="sUPPORTED_LOCALES"
 	 */
     private static List<Locale> getSupportedLocales(){
     	List<Locale> locales = new ArrayList<Locale>(); 
@@ -121,26 +120,23 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
     	return locales;
     }
     
-    
-    // ***
-    
 
     public static String getLocalizedString(String key)
     {
     	
         Locale locale = ApplicationHelper.getLocale();
-        String s = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
-        if(s == null)
-            s = getLocalizedString(key, locale, null);
-        return s;
+        String str = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
+        if(str == null)
+            str = getLocalizedString(key, locale, null);
+        return str;
     }
 
     public static String getLocalizedString(String key, Locale locale)
     {
-        String s = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
-        if(s == null)
-            s = getLocalizedString(key, locale, null);
-        return s;
+        String str = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
+        if(str == null)
+            str = getLocalizedString(key, locale, null);
+        return str;
     }
 
     public static String getLocalizedString(String key, List arguments)
@@ -155,8 +151,10 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
             throw new NullPointerException("i18n key cannot be null");
         if(locale == null)
             locale = ApplicationHelper.getLocale();
+        
 /*        JiveTextProvider provider = new JiveTextProvider(com/jivesoftware/util/LocaleUtils, new LocaleProviderWrapper(locale));
         String value = provider.getText(getEditionizedKey(key), arguments);*/
+        
         String value = null;
         if(value == null)
             value = "";
@@ -193,7 +191,5 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
        
         return key;
     }
-
-    
 
 }
