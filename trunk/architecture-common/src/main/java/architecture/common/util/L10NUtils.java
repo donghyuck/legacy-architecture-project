@@ -117,8 +117,7 @@ public class L10NUtils {
             InputStream is = null;
             try {
                 is = url.openStream(); 
-                InputSource input = new InputSource(is);
-                
+                InputSource input = new InputSource(is);                
                 SAXParserFactory factory = SAXParserFactory.newInstance();
         		factory.setNamespaceAware(true);
         		XMLReader xmlreader = factory.newSAXParser().getXMLReader();
@@ -198,13 +197,9 @@ public class L10NUtils {
 	
 	public Localizer getLocalizerBundle(String key, Locale locale, ClassLoader classloader ) throws MissingResourceException{
 		
-		LocalizerKey keyToUse = getLocalizerKey(key) ;
-		
-		//log.debug("resourcebundle:" + keyToUse.bundleName);
-		
+		LocalizerKey keyToUse = getLocalizerKey(key) ;				
 		if( keyToUse != null )
-			return LocalizerFactory.getLocalizer(keyToUse.bundleName, locale, classloader);	
-		
+			return LocalizerFactory.getLocalizer(keyToUse.bundleName, locale, classloader);			
 		
 		return null;
 	}

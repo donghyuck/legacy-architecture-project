@@ -15,22 +15,93 @@
  */
 package architecture.common.util.vfs;
 
+import java.io.File;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.vfs2.FileName;
 import org.apache.commons.vfs2.FileObject;
 import org.apache.commons.vfs2.FileSystemException;
 import org.apache.commons.vfs2.FileSystemManager;
+import org.apache.commons.vfs2.FileType;
 import org.apache.commons.vfs2.VFS;
 
 public class VFSUtils {
 	
-	public static FileObject resolveFile(String uri) throws FileSystemException {
+	private static final Log log = LogFactory.getLog(VFSUtils.class);
+	
+	public static FileObject resolveFile(File file, String filename) {
 		try {
-			FileSystemManager vmgr = VFS.getManager();
-			FileObject fo = vmgr.resolveFile(uri);
+			FileSystemManager fsManager = VFS.getManager();
+			FileObject fo = fsManager.resolveFile(file, filename);		
 			return fo; 
 		} catch (FileSystemException e) {
-			//e.printStackTrace();
+		}
+		return null;		
+	}
+
+	public static FileObject resolveFile(FileObject file, String filename) {
+		try {
+			FileSystemManager fsManager = VFS.getManager();
+			FileObject fo = fsManager.resolveFile(file, filename);		
+			return fo; 
+		} catch (FileSystemException e) {
+		}
+		return null;		
+	}
+
+	
+	public static FileObject resolveFile(String uri) {
+		try {
+			FileSystemManager fsManager = VFS.getManager();
+			FileObject fo = fsManager.resolveFile(uri);		
+			return fo; 
+		} catch (FileSystemException e) {
+			log.warn(e);
 		}
 		return null;		
 	}
 	
+	/**
+	 * uri 값을 분석하여 FileName 값을 리턴한다.
+	 * @param uri
+	 * @return
+	 */
+	public static FileName resolveUri(String uri){
+		try {
+			FileSystemManager fsManager = VFS.getManager();
+			return fsManager.resolveURI(uri);
+		} catch (FileSystemException e) {
+		}
+		return null;
+	}
+	
+	public static FileObject toFileObject(File file){
+		try {
+			FileSystemManager fsManager = VFS.getManager();
+			return fsManager.toFileObject(file);
+		} catch (FileSystemException e) {
+		}
+		return null;
+	}
+	
+	public static boolean isFile(FileObject fo){
+		try {
+			if( fo.getType() == FileType.FILE )
+				return true;
+		} catch (FileSystemException e) {
+			log.warn(e);
+		}
+		return false;
+	}
+	
+	public static boolean isFolder(FileObject fo){
+		try {
+			if( fo.getType() == FileType.FOLDER )
+				return true;
+		} catch (FileSystemException e) {
+			log.warn(e);
+		}
+		return false;
+	}
 }

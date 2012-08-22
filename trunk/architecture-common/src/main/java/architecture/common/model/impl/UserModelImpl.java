@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.UserModel;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -26,79 +27,133 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	private Log log = LogFactory.getLog(getClass());
 
 	/**
+	 * 사용자 객체 아이디 값 (내부적으로 사용하는 시스템 아이디)
 	 */
 	private long userId;
+	
 	/**
+	 * 사용자 아이디 (일반적인 로그인 아이디를 의미)
 	 */
 	private String username;
+	
 	/**
+	 * 단방향 암호화 처리된 패스워드
 	 */
 	private String passwordHash;
+	
 	/**
+	 * 패스워드 평문
 	 */
 	private String password;
+	
 	/**
+	 * 전체 이름
 	 */
 	private String name;
+	
 	/**
+	 * 이름
 	 */
+	
 	private String firstName;
+	
 	/**
+	 * 성
 	 */
 	private String lastName;
+	
 	/**
+	 * 이름 공개 여부
 	 */
 	private boolean nameVisible;
+	
 	/**
+	 * 전자메일
 	 */
 	private String email;
+	
 	/**
+	 * 메일 공개 여부
 	 */
 	private boolean emailVisible;
+	
 	/**
+	 * 추가 프로퍼티 값
 	 */
 	private Map<String, String> properties;
+	
 	/**
+	 * 사용 여부
 	 */
 	private boolean enabled;
+	
 	/**
+	 * 마지막 로그인 시간
 	 */
 	private Date lastLoggedIn;
+	
 	/**
+	 * 마지막으로 프로파일을 수정한 시간
 	 */
 	private Date lastProfileUpdate;
+	
 	/**
+	 * 외부 계정 여부
 	 */
 	private boolean external;
+	
 	/**
+	 * 연합 여부 (예를 들어 외부 시스템과 연계를 통하여 생성된 계정 여부 )
 	 */
 	private boolean federated;
+	
 	/**
+	 * 이름 공개 여부 수정 지원  여부
 	 */
 	private boolean setNameVisibleSupported;
+	
 	/**
+	 * 패스워드 변경 지원 여부
 	 */
 	private boolean setPasswordSupported;
+	
 	/**
+	 * 암호화된 페스워드 제공 여부
 	 */
 	private boolean getPasswordHashSupported;
+	
 	/**
+	 * 메일 주소 공겨 여부 수정 지원 여부
 	 */
 	private boolean setEmailVisibleSupported;
+	
 	/**
+	 * 이름 변경 지원 여부
 	 */
 	private boolean setNameSupported;
+	
 	/**
+	 * 사용자 아이디 변경 지원 여부
 	 */
 	private boolean setUsernameSupported;
+	
 	/**
+	 * 암호화된 패스워드 설정 지원 여부
 	 */
 	private boolean setPasswordHashSupported;
 	
-	private boolean setPropertyEditSupported;
-	
-	private boolean setEmailSuppoted;
 	/**
+	 * 사용자 프로퍼티 값 변경 지원 여부
+	 */
+	private boolean setPropertyEditSupported;
+
+	/**
+	 * 메일 주소 변경 지원 여부
+	 */
+	private boolean setEmailSuppoted;
+		
+	/**
+	 * 계정 상태 
 	 */
 	private User.Status status;
 		
@@ -135,10 +190,10 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         status = null;
     }
     
-    public UserModelImpl(String userName)
+    public UserModelImpl(String username)
     {
         userId = -2L;
-        username = null;
+        this.username = null;
         password = null;
         name = null;
         firstName = null;
@@ -162,14 +217,14 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
         status = null;
-        username = formatUsername(userName);
+        this.username = formatUsername(username);
     }
     
 
-    public UserModelImpl(String userName, String password, String email, String name)
+    public UserModelImpl(String username, String password, String email, String name)
     {
         userId = -2L;
-        username = null;
+        this.username = null;
         this.password = null;
         this.name = null;
         firstName = null;
@@ -193,16 +248,16 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
         status = null;
-        username = formatUsername(userName);
+        this.username = formatUsername(username);
         this.password = password;
         this.email = email;
         this.name = name;
     }
     
-    public UserModelImpl(String userName, String password, String email, String name, boolean emailVisible, boolean nameVisible, Map<String, String> props)
+    public UserModelImpl(String username, String password, String email, String name, boolean emailVisible, boolean nameVisible, Map<String, String> props)
     {
-        userId = -2L;
-        username = null;
+    	this.userId = -2L;
+    	this.username = null;
         this.password = null;
         this.name = null;
         firstName = null;
@@ -226,7 +281,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
         status = null;
-        username = formatUsername(userName);
+        this.username = formatUsername(username);
         this.password = password;
         this.email = email;
         this.name = name;
@@ -821,7 +876,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	}
 
 	public int getObjectType() {
-		return User.OBJECT_TYPE;
+		return ModelObjectType.User.getTypeId();
 	}
 
 

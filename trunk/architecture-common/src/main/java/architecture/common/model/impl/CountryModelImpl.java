@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import architecture.common.i18n.Country;
 import architecture.common.model.CountryModel;
+import architecture.common.model.ModelObjectType;
 
 public class CountryModelImpl extends BaseModelObject <Country> implements CountryModel {
 
@@ -19,7 +20,7 @@ public class CountryModelImpl extends BaseModelObject <Country> implements Count
 	}
 
 	public int getObjectType() {
-		return Country.OBJECT_TYPE;
+		return ModelObjectType.Unknown.getTypeId();
 	}
 
 	public int getCachedSize() {
