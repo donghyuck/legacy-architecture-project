@@ -223,10 +223,10 @@ public class ParameterMapping {
 				
 		protected JdbcType resolveJdbcType(String alias) {
 			if (alias == null)
-				return null;
-			
+				return null;			
 			try {
 				return JdbcType.valueOf(alias.toUpperCase());
+				
 			} catch (IllegalArgumentException e) {				
 				throw new ConfigurationError(L10NUtils.format("002003", e.getMessage()), e);
 			}
