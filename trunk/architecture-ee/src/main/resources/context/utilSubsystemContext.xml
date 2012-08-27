@@ -14,16 +14,21 @@
 	<!-- =================================================== -->
 	<!-- 1. URLDirectoryScanner                              -->
 	<!-- =================================================== -->
+
 	<bean id="directoryScanner" class="architecture.ee.spring.resources.scanner.impl.DirectoryScannerImpl" destroy-method="destroy" p:fastDeploy="true">		  
+
 		<property name="directoryListenerList">		
 	        <list value-type="architecture.common.scanner.DirectoryListener">
 	        	<ref bean="sqlQueryFactory" />
 	        </list>
 		</property>
+
 		<property name="resourceLocations">
 			<list>
 				<value>${resource.sql.location}</value>
 			</list>
 		</property>	    		 
+
     </bean>
-</beans>	
+
+</beans>
