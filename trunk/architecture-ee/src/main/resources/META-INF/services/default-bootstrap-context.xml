@@ -38,7 +38,7 @@
 	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />
 
 	<!-- ================================================ -->
-	<!-- 4. Core Lifecycle Components                     -->
+	<!-- 4. Core Components                               -->
 	<!-- ================================================ -->	
 	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />
 

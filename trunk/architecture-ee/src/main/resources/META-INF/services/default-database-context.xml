@@ -24,12 +24,14 @@
 		factory-method="getDataSource" />
 					
 	<!-- ================================================ -->
-	<!-- 2. Utils                                         -->
+	<!-- 2. Jdbc Utils                                    -->
 	<!-- ================================================ -->	
 	<bean id="automaticJdbcExtractor" class="architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor" lazy-init="true">
+		
 		<property name="defaultJdbcExtractor">
 			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
 		</property>	
+		
 		<property name="extractors">
 			<map>
 				<entry key="org.apache.commons.dbcp">
@@ -56,8 +58,7 @@
 			</map>
 		</property>
 	</bean>	
-	
-		
+			
     <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
    
     <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">

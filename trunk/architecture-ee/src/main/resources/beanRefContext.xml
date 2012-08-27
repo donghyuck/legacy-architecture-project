@@ -19,7 +19,7 @@
                 <value>classpath*:META-INF/services/default-bootstrap-context.xml</value>
                 <value>classpath*:META-INF/services/default-database-context.xml</value>
                 <value>classpath*:META-INF/services/default-transaction-context.xml</value>
-                <value>classpath*:META-INF/services/default-services-context.xml</value>
+                <value>classpath*:META-INF/services/default-dao-context.xml</value>
             </list>
         </constructor-arg>
     </bean>
