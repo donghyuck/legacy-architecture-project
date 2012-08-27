@@ -3,7 +3,8 @@
     <name>FRAMEWORK_V2</name>
     <description>Queries for COMMON</description>
     <version></version>
-    
+
+    <!-- V2_LOCALIZED_PROPERTIES -->
 	<sql-query name="SELECT_ALL_LOCALIZED_PROPERTY" description="전체 다국어 지원 프로퍼티 값"><![CDATA[
 	SELECT 
 	    PROPERTY_NAME, 
@@ -13,41 +14,90 @@
     ]]></sql-query>
       
 	<sql-query name="INSERT_LOCALIZED_PROPERTY" description="다국어 프로퍼티  저장"><![CDATA[
-	INSERT INTO V2_LOCALIZED_PROPERTIES (PROPERTY_NAME, PROPERTY_VALUE, LOCALE_CODE) 
-	VALUES (? ,?, ?) 
+	INSERT INTO V2_LOCALIZED_PROPERTIES (
+	    PROPERTY_NAME, 
+	    PROPERTY_VALUE, 
+	    LOCALE_CODE
+	) VALUES (? ,?, ?) 
     ]]></sql-query>
     
 	<sql-query name="DELETE_LOCALIZED_PROPERTY" description="다국어 프로퍼티 삭제"><![CDATA[
-	DELETE FROM V2_LOCALIZED_PROPERTIES 
-	WHERE PROPERTY_NAME LIKE ? AND LOCALE_CODE LIKE ?
+	DELETE FROM V2_LOCALIZED_PROPERTIES
+	WHERE PROPERTY_NAME LIKE ? 
+	    AND LOCALE_CODE LIKE ?
     ]]></sql-query>
     
 	<sql-query name="UPDATE_LOCALIZED_PROPERTY" description="다국어 프로퍼티 업데이트"><![CDATA[
-	UPDATE V2_LOCALIZED_PROPERTIES 
+	UPDATE V2_LOCALIZED_PROPERTIES
 	SET PROPERTY_VALUE=? 
-	WHERE PROPERTY_NAME=? AND LOCALE_CODE=? 
+	WHERE PROPERTY_NAME=? 
+	    AND LOCALE_CODE=? 
     ]]></sql-query>
     
+    <!-- V2_PROPERTIES -->
 	<sql-query name="SELECT_ALL_PROPERTY" description="전체  프로퍼티 값"><![CDATA[
 	SELECT 
-	    PROPERTY_NAME, PROPERTY_VALUE 
+	    PROPERTY_NAME, 
+	    PROPERTY_VALUE 
 	FROM V2_PROPERTIES
-      ]]></sql-query>
+    ]]></sql-query>
       
 	<sql-query name="INSERT_PROPERTY" description="프로퍼티 저장"><![CDATA[
-	INSERT INTO V2_PROPERTIES (PROPERTY_NAME, PROPERTY_VALUE) VALUES (? ,?) 
-      ]]></sql-query>
+	INSERT INTO V2_PROPERTIES (
+	    PROPERTY_NAME, 
+	    PROPERTY_VALUE
+	) VALUES (? ,?) 
+    ]]></sql-query>
       
 	<sql-query name="DELETE_PROPERTY" description="프로퍼티 삭제"><![CDATA[
 	DELETE FROM V2_PROPERTIES 
 	WHERE PROPERTY_NAME LIKE ?
-      ]]></sql-query>
+    ]]></sql-query>
       
 	<sql-query name="UPDATE_PROPERTY" description="프로퍼티 업데이트"><![CDATA[
 	UPDATE V2_PROPERTIES 
 	    SET PROPERTY_VALUE=? 
 	WHERE PROPERTY_NAME=?
-      ]]></sql-query>
+    ]]></sql-query>    
+
+    <!-- V2_SEQUENCERS -->
+	<sql-query name="SELECT_ALL_SEQUENCER"><![CDATA[
+	SELECT 
+	    SEQUENCER_ID, 
+	    NAME, 
+	    VALUE 
+	FROM V2_SEQUENCERS
+    ]]></sql-query>
+
+	<sql-query name="SELECT_SEQUENCER_BY_ID"><![CDATA[
+	SELECT 
+	    VALUE 	
+	FROM V2_SEQUENCERS 
+	WHERE SEQUENCER_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="UPDATE_SEQUENCER"><![CDATA[
+	UPDATE 
+	    V2_SEQUENCERS SET VALUE = ? 
+	WHERE SEQUENCER_ID = ? AND VALUE = ?
+    ]]></sql-query>
+
+	<sql-query name="SELECT_SEQUENCER_MAX_ID"><![CDATA[
+	SELECT 
+	    MAX ( SEQUENCER_ID ) + 1 
+	FROM V2_SEQUENCERS 
+    ]]></sql-query>
+
+	<sql-query name="INSERT_SEQUENCER"><![CDATA[
+	INSERT INTO V2_SEQUENCERS (
+	    VALUE, 
+	    NAME, 
+	    SEQUENCER_ID 
+	) VALUES (?, ?, ?)
+    ]]></sql-query>
+          
+    
+
 
 	<sql-query name="INSERT_PLUGIN" description="플러그인 데이터 추가"><![CDATA[
 	INSERT INTO V2_PLUGIN_DATA (PLUGIN_ID, NAME, CREATION_DATE, MODIFIED_DATE) VALUES (?, ?, ?, ?)
@@ -86,25 +136,6 @@
 		SELECT 1 FROM V2_PLUGIN_DATA
       ]]></sql-query>
 
-	<sql-query name="SELECT_ALL_SEQUENCER"><![CDATA[
-		SELECT SEQUENCER_ID, NAME, VALUE FROM V2_SEQUENCER
-      ]]></sql-query>
-
-	<sql-query name="SELECT_SEQUENCER_BY_ID"><![CDATA[
-		SELECT VALUE FROM V2_SEQUENCER WHERE SEQUENCER_ID = ?
-      ]]></sql-query>
-
-	<sql-query name="UPDATE_SEQUENCER"><![CDATA[
-		UPDATE V2_SEQUENCER SET VALUE = ? WHERE SEQUENCER_ID = ? AND VALUE = ?
-      ]]></sql-query>
-
-	<sql-query name="SELECT_SEQUENCER_MAX_ID"><![CDATA[
-		SELECT MAX ( SEQUENCER_ID ) + 1 FROM V2_SEQUENCER 
-      ]]></sql-query>
-
-	<sql-query name="INSERT_SEQUENCER"><![CDATA[
-		INSERT INTO V2_SEQUENCER (VALUE, NAME, SEQUENCER_ID ) VALUES (?, ?, ?)
-      ]]></sql-query>
 
 	<!-- COUNTRY -->
 	<sql-query name="SELECT_COUNTRY_BY_ID"><![CDATA[
@@ -243,7 +274,8 @@
 		    TEXT, 
 		    CREATION_DATE, 
 		    MODIFIED_DATE 
-		FROM V2_I18N_TEXT WHERE LOCALIZER_ID = ?
+		FROM V2_I18N_TEXT 
+		WHERE LOCALIZER_ID = ?
     ]]></sql-query>
 
 
@@ -256,7 +288,8 @@
 		    TEXT_KEY, 
 		    TEXT, 
 		    CREATION_DATE, 
-		    MODIFIED_DATE ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+		    MODIFIED_DATE 
+		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     ]]></sql-query>
 
 	<sql-query name="UPDATE_I18N_TEXTS"><![CDATA[
@@ -267,7 +300,8 @@
     ]]></sql-query>
 
 	<sql-query name="DELETE_I18N_TEXTS"><![CDATA[
-		DELETE FROM V2_I18N_TEXT WHERE TEXT_ID = ?
+		DELETE FROM V2_I18N_TEXT 
+		WHERE TEXT_ID = ?
     ]]></sql-query>
 
 	<sql-query name="SELECT_I18N_TEXT_BY_ID"><![CDATA[
@@ -279,7 +313,8 @@
 		    TEXT, 
 		    CREATION_DATE, 
 		    MODIFIED_DATE 
-		FROM V2_I18N_TEXT WHERE TEXT_ID = ?
+		FROM V2_I18N_TEXT 
+		WHERE TEXT_ID = ?
     ]]></sql-query>
 
 	<sql-query name="SELECT_ALL_I18N_TEXT" description="전체 택스트를 조회한다."><![CDATA[
@@ -370,38 +405,45 @@
     ]]></sql-query>
 
 	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE"><![CDATA[
-		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		SELECT  
+		    TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
 		FROM V2_I18N_OBJECT_TEXT 
 		WHERE OBJECT_TYPE = ?
     ]]></sql-query>
 
 	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
-		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		SELECT  
+		    TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
 		FROM V2_I18N_OBJECT_TEXT 
 		WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
     ]]></sql-query>
 
 	<sql-query name="SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_LOCALE"><![CDATA[
-		SELECT  TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
+		SELECT  
+		    TEXT_ID, OBJECT_TYPE, OBJECT_ID, OBJECT_ATTRIBUTE, LOCALE_CODE, TEXT, CREATION_DATE, MODIFIED_DATE
 		FROM V2_I18N_OBJECT_TEXT 
 		WHERE OBJECT_TYPE = ? AND LOCALE_CODE = ?
     ]]></sql-query>
 
 	<!-- I18N_LOCALE -->
 	<sql-query name="COUNT_ALL_LOCALE"><![CDATA[
-		SELECT count( LOCALE_ID )
+		SELECT 
+		    count( LOCALE_ID )
 		FROM V2_I18N_LOCALE
     ]]></sql-query>
 	<sql-query name="SELECT_ALL_LOCALE"><![CDATA[
-		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE 
+		SELECT 
+		    LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE 
 		FROM V2_I18N_LOCALE
     ]]></sql-query>
 	<sql-query name="SELECT_LOCALE_BY_ID"><![CDATA[
-		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
+		SELECT 
+		    LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
 		FROM V2_I18N_LOCALE WHERE LOCALE_ID = ?
     ]]></sql-query>
 	<sql-query name="SELECT_LOCALE_BY_CODE"><![CDATA[
-		SELECT LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
+		SELECT 
+		    LOCALE_ID ,LANGUAGE, COUNTRY, VARIANT, ENCODING ,CREATION_DATE, MODIFIED_DATE
 		FROM V2_I18N_LOCALE WHERE LANGUAGE = ? AND COUNTRY = ?
     ]]></sql-query>
 	<sql-query name="INSERT_LOCALE"><![CDATA[
