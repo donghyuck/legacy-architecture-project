@@ -315,8 +315,6 @@ public class SqlQueryImpl implements SqlQuery {
 			return jdbcTemplate.query(sql.getSql(), new SingleColumnRowMapper<T>(elementType));	
 		}
 	}
-
-
 	
 		
 	public List<Map<String, Object>> list(String statement) {
