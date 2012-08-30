@@ -14,29 +14,19 @@
 	<!-- ================================================ -->
 	<!-- 1. Dao                                              -->
 	<!-- ================================================ -->
-	<bean id="countryDao" 
-	    class="architecture.ee.i18n.dao.impl.JdbcI18nCountryDao" 
+	<bean id="i18nTextDao" 
+	    class="architecture.ee.i18n.dao.impl.JdbcI18nTextDao" 
 	    parent="jdbcDaoSupport" />
-
-	<bean id="localeDao" 
-	    class="architecture.ee.i18n.dao.impl.JdbcI18nLocaleDao" 
-	    parent="jdbcDaoSupport" />
-	    
-	<bean id="localizerDao" 
-	    class="architecture.ee.i18n.dao.impl.JdbcI18nLocalizerDao" 
-	    parent="jdbcDaoSupport"
-	    p:i18nLocaleDao-ref="localeDao" />	  
 	    
 	<!-- ================================================ -->
-	<!-- 2. Manager                                          -->
+	<!-- 2. Manager                                                                          -->
 	<!-- ================================================ -->	    
 	<bean id="i18nTextManager"
 		class="architecture.common.i18n.impl.I18nTextManagerImpl"
-		p:i18nTextDao-ref="localeDao" 
-		init-method="initialize" />
+		p:i18nTextDao-ref="i18nTextDao"  />
 				
 	<!-- =================================================== -->
-	<!-- 2. I18nTextMessageSource                                                             -->
+	<!-- 3. I18nTextMessageSource                                                             -->
 	<!-- =================================================== -->   
 	<bean id="messageSource" class="architecture.ee.spring.context.support.I18nTextMessageSource" />
 	 
