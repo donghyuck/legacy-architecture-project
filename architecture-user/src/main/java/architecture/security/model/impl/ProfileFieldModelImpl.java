@@ -8,9 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import architecture.common.model.impl.BaseModelObject;
-import architecture.ee.i18n.I18nText2;
+import architecture.common.util.I18nTextUtils;
 import architecture.ee.model.ModelConstants;
-import architecture.ee.util.I18nTextUtils;
 import architecture.security.model.ProfileFieldModel;
 import architecture.security.user.profile.ProfileField;
 import architecture.security.user.profile.ProfileFieldOption;
@@ -583,31 +582,30 @@ public class ProfileFieldModelImpl extends BaseModelObject<ProfileField> impleme
     }
 
 	public String getDisplayName(String localeCode) {
-		I18nText2 text = I18nTextUtils.getText(profileFieldText, localeCode, 1);
+	/*	I18nText2 text = I18nTextUtils.getText(profileFieldText, localeCode, 1);
         if(text != null)
             return text.getText();
-        else
+        else*/
             return null;
 	}
 
 	public void setDisplayName(String localeCode, String displayName) {
-		I18nTextUtils.setText(profileFieldText, localeCode, 1, displayName);
+	//	I18nTextUtils.setText(profileFieldText, localeCode, 1, displayName);
 	}
 
 	public String getDescription(String localeCode) {
-		I18nText2 text = I18nTextUtils.getText(profileFieldText, localeCode, 2);
+	/*	I18nText2 text = I18nTextUtils.getText(profileFieldText, localeCode, 2);
         if(text != null)
             return text.getText();
-        else
+        else*/
             return null;
 	}
 
 	public void setDescription(String localeCode, String description) {
-		 I18nTextUtils.setText(profileFieldText, localeCode, 2, description);
+		// I18nTextUtils.setText(profileFieldText, localeCode, 2, description);
 	}
 
 	public int getCachedSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
