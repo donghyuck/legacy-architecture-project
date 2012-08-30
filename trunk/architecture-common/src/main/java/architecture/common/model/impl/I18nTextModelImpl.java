@@ -5,26 +5,61 @@ import java.io.Serializable;
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
 import architecture.common.model.I18nTextModel;
-import architecture.common.model.ModelObjectType;
+import architecture.common.util.I18nTextUtils;
 
 public class I18nTextModelImpl extends BaseModelObject <I18nText> implements I18nTextModel {
 	
-	private long textId;
+	private long textId = -1L;
+	
+	private int objectType ;
+	
+	private long objectId ;
+	
+	private int objectAttribute ;
+	
 	private String localeCode;
-	private String textKey;
+		
 	private String text;
+	
+	public String getResourceBundleKey(){
+		return I18nTextUtils.generateResourceBundleKey(objectType, objectId, objectAttribute);
+	}
 	
 	public Serializable getPrimaryKeyObject() {
 		return textId;
 	}
+	
+	public long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(long objectId) {
+		this.objectId = objectId;
+	}
 
 	public int getObjectType() {
-		return ModelObjectType.Unknown.getTypeId();
+		return objectType;
 	}
-	
-	public int getCachedSize() {		
-	
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfInt() + CacheSizes.sizeOfString(localeCode) + CacheSizes.sizeOfString(textKey) + CacheSizes.sizeOfString(text) ;
+
+	public int getObjectAttribute() {
+		return objectAttribute;
+	}
+
+	public void setObjectAttribute(int objectAttribute) {
+		this.objectAttribute = objectAttribute;
+	}
+
+	public void setObjectType(int objectType) {
+		this.objectType = objectType;
+	}
+
+	public int getCachedSize() {
+		int size = 0 ;
+		size += CacheSizes.sizeOfLong();
+		size += CacheSizes.sizeOfInt();
+		size += CacheSizes.sizeOfString(localeCode);
+		size += CacheSizes.sizeOfString(text) ;
+		return size;
 	}
 
 	public long getTextId() {
@@ -41,14 +76,6 @@ public class I18nTextModelImpl extends BaseModelObject <I18nText> implements I18
 
 	public void setLocaleCode(String localeCode) {
 		this.localeCode = localeCode;
-	}
-
-	public String getTextKey() {
-		return textKey;
-	}
-
-	public void setTextKey(String textKey) {
-		this.textKey = textKey;
 	}
 
 	public String getText() {
