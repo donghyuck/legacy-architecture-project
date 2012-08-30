@@ -242,7 +242,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		return getSqlQuery().list(statement);
 	}
 
-	public List<Map<String, Object>> list(String statement, Object parameters) {
+	public List<Map<String, Object>> list(String statement, Object... parameters) {
 		return getSqlQuery().list(statement, parameters);
 	}
 

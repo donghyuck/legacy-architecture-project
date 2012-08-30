@@ -150,6 +150,7 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 					
 					log.debug( key + "=" + path );
 				}				
+				
 				FileObject fo = VFSUtils.resolveFile(path);
 				if(fo.exists()){							
 					URL url = fo.getURL();

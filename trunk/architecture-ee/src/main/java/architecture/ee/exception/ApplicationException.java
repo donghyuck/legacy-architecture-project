@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ * Copyright 2012 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,8 @@ package architecture.ee.exception;
 import java.text.DecimalFormat;
 
 import org.apache.commons.lang.exception.NestableException;
+
+import architecture.common.exception.Codeable;
 
 /**
  * @author  donghyuck
