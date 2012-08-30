@@ -26,12 +26,10 @@
 	<!-- ================================================ -->
 	<!-- 2. Jdbc Utils                                    -->
 	<!-- ================================================ -->	
-	<bean id="automaticJdbcExtractor" class="architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor" lazy-init="true">
-		
+	<bean id="automaticJdbcExtractor" class="architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor" lazy-init="true">		
 		<property name="defaultJdbcExtractor">
 			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
-		</property>	
-		
+		</property>			
 		<property name="extractors">
 			<map>
 				<entry key="org.apache.commons.dbcp">

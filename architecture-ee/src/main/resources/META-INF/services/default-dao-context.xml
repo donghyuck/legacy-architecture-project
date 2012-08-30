@@ -16,7 +16,7 @@
 	]]>
 	</description>
 	<!-- ================================================ -->
-	<!-- 1. SQL Service                                   -->
+	<!-- 1. SQL Service                                                                       -->
 	<!-- ================================================ -->	
 	<bean id="sqlConfiguration" factory-bean="sqlQueryFactory" factory-method="getConfiguration" />
 	
@@ -31,7 +31,7 @@
     </bean>	
 
 	<!-- =================================================== -->
-	<!-- 2. Dao Support                                      -->
+	<!-- 2. Dao Support                                                                           -->
 	<!-- =================================================== -->
 	
 	<bean id="maxValueIncrementer" factory-bean="sqlQueryFactory" factory-method="getMaxValueIncrementer" />

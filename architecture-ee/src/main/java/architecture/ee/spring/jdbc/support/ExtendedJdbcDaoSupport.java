@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.lob.LobHandler;
 
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
+
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.BoundSql;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;

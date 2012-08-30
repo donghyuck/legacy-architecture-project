@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.ee.util;
 
 import java.lang.ref.WeakReference;
@@ -8,15 +23,21 @@ import java.util.Map;
 import java.util.TimeZone;
 
 import net.sf.ehcache.CacheManager;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.i18n.I18nTextManager;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.component.admin.AdminHelper;
-import architecture.ee.i18n.I18nTextManager;
+
 
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
@@ -26,6 +47,8 @@ import architecture.ee.i18n.I18nTextManager;
  */
 public final class ApplicationHelper {
 
+	private static final Log LOG = LogFactory.getLog(ApplicationHelper.class);
+	
 	private static final Map<Class<?>, WeakReference<?>> references = Collections.synchronizedMap(new HashMap<Class<?>, WeakReference<?>>()) ;
 	
 	@SuppressWarnings("unchecked")
@@ -44,8 +67,7 @@ public final class ApplicationHelper {
 		
 	public static void autowireComponent(Object obj){
 		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
-	}
-	
+	}	
 	
 	public static ConfigService getConfigService(){
 		return AdminHelper.getConfigService();
@@ -120,25 +142,30 @@ public final class ApplicationHelper {
 	}
 	
 	public static String getApplicationProperty(String name, String defaultValue){		
+		
+		ConfigService config = getConfigService();		
+		String propValue = config.getLocalProperty(name, null);	
+		//LOG.debug(name +  "=(local)" + propValue );		
 		if(isReady()){
-			return getConfigService().getApplicationProperty(name, defaultValue);
-		}else{ 
-			return getConfigService().getLocalProperty(name, defaultValue);
-		}
+			String str = config.getApplicationProperty(name, null);			
+			//LOG.debug(name +  "=(db)" + str );			
+			if( !StringUtils.isEmpty( str ))
+				propValue = str;			
+		}		
+		if( propValue == null)
+			propValue = defaultValue ;		
+		//LOG.debug(name +  "=(final)" + propValue );	
+		return propValue ;
 	}
 	
-	public static int getApplicationIntProperty(String name, int defaultValue){
-		if(isReady())
-			return getConfigService().getApplicationIntProperty(name, defaultValue);
-		else 
-			return getConfigService().getLocalProperty(name, defaultValue);
+	public static int getApplicationIntProperty(String name, int defaultValue){		
+		String str = getApplicationProperty(name, Integer.toString(defaultValue));		
+		return Integer.parseInt(str) ;
 	}
 	
 	public static boolean getApplicationBooleanProperty(String name, boolean defaultValue){
-		if(isReady())
-		    return getConfigService().getApplicationBooleanProperty(name, defaultValue);
-		else
-			return getConfigService().getLocalProperty(name, defaultValue);
+		String str = getApplicationProperty(name, Boolean.toString(defaultValue));		
+		return Boolean.parseBoolean(str) ;
 	}
 	
 	public static TimeZone getTimeZone(){
@@ -160,8 +187,8 @@ public final class ApplicationHelper {
 			return null;
 	}
 	
-	public static String getMessage(String code, Object[] args, Locale locale){		
-		return AdminHelper.getMessage(code, args, locale);
+	public static String getLocalizedMessage(String code, Object[] args, Locale locale){		
+		return AdminHelper.getLocalizedMessage(code, args, locale);
 	}
 	
 }

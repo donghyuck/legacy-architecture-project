@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ * Copyright 2012 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,10 @@ public class SqlNotFoundException extends SqlQueryException {
 
 	public SqlNotFoundException(String msg, Throwable cause) {
 		super(msg, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	public SqlNotFoundException(String msg) {
 		super(msg);
-		// TODO Auto-generated constructor stub
 	}
 
 	public SqlNotFoundException(Throwable cause) {

@@ -16,14 +16,14 @@
 	]]>
 	</description>
 	<!-- ================================================ -->
-	<!-- 1. Dao                                           -->
+	<!-- 1. Dao                                                                                -->
 	<!-- ================================================ -->
 	<bean id="pluginDao" class="architecture.ee.plugin.dao.impl.JdbcPluginDao"
 		parent="jdbcDaoSupport" 
 		depends-on="sequenceDao" />
 		
 	<!-- ================================================ -->
-	<!-- 2. Manager                                       -->
+	<!-- 2. Manager                                                                          -->
 	<!-- ================================================ -->
 	<bean id="pluginManager"
 		class="architecture.ee.plugin.PluginManagerFactory"

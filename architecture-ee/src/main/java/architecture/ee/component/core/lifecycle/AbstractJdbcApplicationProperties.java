@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.ee.component.core.lifecycle;
 
 import org.apache.commons.lang.math.NumberUtils;
@@ -12,10 +27,7 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
  */
 public abstract class AbstractJdbcApplicationProperties extends ExtendedJdbcDaoSupport implements ApplicationProperties {
 
-	/**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
-	 */
+
 	private EventPublisher eventPublisher = null;
 		
 	public boolean getBooleanProperty(String propertyKey) {
@@ -44,18 +56,11 @@ public abstract class AbstractJdbcApplicationProperties extends ExtendedJdbcDaoS
        }       
     }
     
-    /**
-	 * @return
-	 * @uml.property  name="eventPublisher"
-	 */
+
     protected EventPublisher getEventPublisher(){
     	return eventPublisher;
     }
-    
-    /**
-	 * method from EventSource interface!
-	 * @uml.property  name="eventPublisher"
-	 */
+
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;		
 	}
