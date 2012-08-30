@@ -1,61 +1,34 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+   
 package architecture.ee.web.util;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import architecture.common.user.User;
-
-import architecture.ee.i18n.I18nLocalizer;
 import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.util.I18nTextUtils;
 
-public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
+public class LocaleUtils extends architecture.common.util.LocaleUtils {
 
-	private static Map<Locale, List<Locale>> cachedCandidateLocales = new HashMap<Locale, List<Locale>>();
-	
-	public static final List<Locale> SUPPORTED_LOCALES = Collections.unmodifiableList(getSupportedLocales());
-	
-    /**
-     * Converts a locale string like "en", "en_US" or "en_US_win" to a Java
-     * locale object. If the conversion fails, null is returned.
-     *
-     * @param localeCode the locale code for a Java locale. See the {@link java.util.Locale}
-     *                   class for more details.
-     * @return The Java Locale that matches the locale code, or <tt>null</tt>.                  
-     */
-    public static Locale localeCodeToLocale(String localeCode) {
-    	
-		int idx = localeCode.lastIndexOf('_');
-		if( idx > 0 ){
-			String end = localeCode.substring(idx + 1).toUpperCase();
-			String start = localeCode.substring(0, idx + 1);
-			return toLocale(start + end);
-		}    	
-    	return toLocale(localeCode);
-    }
-    
-    public static boolean isValidCharacterEncoding(String encoding)
-    {    
-        boolean valid = true;
-        try
-        {
-            "".getBytes(encoding);
-        }
-        catch(Exception e)
-        {
-            valid = false;
-        }        
-        return valid;
-    }
-    
     public static Locale getUserLocale(HttpServletRequest request, User user)
     {
         return getUserLocale(request, user, true);
@@ -109,33 +82,6 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
         }        
         return null;
     }
-    
-    public static List<Locale> getCandidateLocales(Locale locale)
-    {
-        if(cachedCandidateLocales.containsKey(locale))
-            return cachedCandidateLocales.get(locale);
-        
-        List<Locale> results = new ArrayList<Locale>();
-        results.add(locale);        
-        if(locale.getVariant().length() > 0)
-            results.add(new Locale(locale.getLanguage(), locale.getCountry()));
-        if(locale.getCountry().length() > 0)
-            results.add(new Locale(locale.getLanguage()));
-        results = Collections.unmodifiableList(results);
-        cachedCandidateLocales.put(locale, results);
-        return results;
-    }    
-    
-    private static List<Locale> getSupportedLocales(){
-    	List<Locale> locales = new ArrayList<Locale>(); 
-    	List<I18nLocalizer> list = I18nTextUtils.getI18nLocalizers();
-    	for(I18nLocalizer localizer : list){
-    		Locale localeToUse = localizer.getI18nLocale().toJavaLocale();
-    		locales.add(localeToUse);
-    	}
-    	return locales;
-    }
-    
     
     // ***
     
@@ -207,7 +153,4 @@ public class LocaleUtils extends org.apache.commons.lang.LocaleUtils {
     {
         return key;
     }
-
-    
-
 }
