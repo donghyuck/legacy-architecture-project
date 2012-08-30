@@ -3,8 +3,8 @@ package architecture.ee.web.struts.action;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.exception.Codeable;
 import architecture.common.exception.ComponentNotFoundException;
-
 import architecture.ee.web.util.WebApplicationHelper;
 
 @SuppressWarnings("deprecation")
@@ -29,6 +29,13 @@ public abstract class FrameworkActionSupport extends
 
 	protected final void autowireComponent(Object obj) {
 		WebApplicationHelper.autowireComponent(obj);
+	}
+	
+	protected boolean isCodeable (Throwable exception){
+		if( exception instanceof Codeable )
+			return true;
+		else 
+			return false;
 	}
 
 }
