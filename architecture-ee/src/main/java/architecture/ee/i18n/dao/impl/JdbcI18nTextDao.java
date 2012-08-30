@@ -29,6 +29,7 @@ import org.springframework.jdbc.core.RowMapper;
 import architecture.common.i18n.I18nText;
 import architecture.common.i18n.dao.I18nTextDao;
 import architecture.common.i18n.impl.I18nTextImpl;
+
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
 public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextDao {
