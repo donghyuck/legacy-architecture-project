@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.model.impl;
 
 import java.io.Serializable;
@@ -5,6 +20,7 @@ import java.io.Serializable;
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
 import architecture.common.model.I18nTextModel;
+import architecture.common.model.ModelObjectType;
 import architecture.common.util.I18nTextUtils;
 
 public class I18nTextModelImpl extends BaseModelObject <I18nText> implements I18nTextModel {
@@ -59,6 +75,8 @@ public class I18nTextModelImpl extends BaseModelObject <I18nText> implements I18
 		size += CacheSizes.sizeOfInt();
 		size += CacheSizes.sizeOfString(localeCode);
 		size += CacheSizes.sizeOfString(text) ;
+		size += CacheSizes.sizeOfDate();
+		size += CacheSizes.sizeOfDate();		
 		return size;
 	}
 
@@ -89,6 +107,9 @@ public class I18nTextModelImpl extends BaseModelObject <I18nText> implements I18
 	public int compareTo(I18nText o) {
 		return 0;
 	}
-	
-	
+
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.I18N_TEXT;
+	}
+		
 }

@@ -122,7 +122,11 @@ public class I18nTextManagerImpl implements I18nTextManager {
     
     protected void loadResourceBundles(){
     	
+    	log.debug("loading resource bundles from database. ");
+    	
     	List<I18nText> texts = i18nTextDao.getTexts();   
+    	
+    	    	
     	Map<Locale, List<String[]>> allKeyValues = new HashMap<Locale, List<String[]>>();
     	
     	for(I18nText text : texts ){    		
@@ -137,8 +141,13 @@ public class I18nTextManagerImpl implements I18nTextManager {
     	
     	HashMap<Locale, ResourceBundle> newResourceBundles = new HashMap<Locale, ResourceBundle>();    	
     	for( Locale locale : allKeyValues.keySet() ){
+    		log.debug( locale + " : "  + allKeyValues );
     		newResourceBundles.put(locale, new I18nResourceBundle ( locale, allKeyValues.get(locale) ) );    		
     	}        
         this.resourceBundles = newResourceBundles;        
+    }
+    
+    public void reload(){
+    	reloadResourceBundes();
     }
 }

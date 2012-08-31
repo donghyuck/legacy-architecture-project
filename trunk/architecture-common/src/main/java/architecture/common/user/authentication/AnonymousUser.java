@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import architecture.common.model.ModelObjectType;
 import architecture.common.user.User;
 
 /**
@@ -35,8 +36,8 @@ public class AnonymousUser implements AuthToken, User {
 		return getUserId();
 	}
 
-	public int getObjectType() {
-		return 1;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.ANONYMOUS ;
 	}
 	
 	/**

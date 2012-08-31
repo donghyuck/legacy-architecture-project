@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.event.internal;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -40,10 +55,6 @@ public final class EventPublisherImpl implements EventPublisher
 {
 
 	private final Log log = LogFactory.getLog(getClass());
-    /**
-	 * @uml.property  name="eventDispatcher"
-	 * @uml.associationEnd  
-	 */
     private final EventDispatcher eventDispatcher;
     private final List<ListenerHandler> listenerHandlers;
 
@@ -199,10 +210,6 @@ public final class EventPublisherImpl implements EventPublisher
 		 */
         private final String key;
 
-        /**
-		 * @uml.property  name="invoker"
-		 * @uml.associationEnd  
-		 */
         private final ListenerInvoker invoker;
 
         KeyedListenerInvoker(String key, ListenerInvoker invoker)
@@ -211,19 +218,11 @@ public final class EventPublisherImpl implements EventPublisher
             this.key = key;
         }
 
-        /**
-		 * @return
-		 * @uml.property  name="key"
-		 */
         String getKey()
         {
             return key;
         }
 
-        /**
-		 * @return
-		 * @uml.property  name="invoker"
-		 */
         ListenerInvoker getInvoker()
         {
             return invoker;
