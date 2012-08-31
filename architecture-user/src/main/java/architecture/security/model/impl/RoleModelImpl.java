@@ -3,8 +3,8 @@ package architecture.security.model.impl;
 import java.io.Serializable;
 import java.util.Date;
 
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
-import architecture.ee.model.ModelConstants;
 import architecture.security.model.RoleModel;
 import architecture.security.role.Role;
 
@@ -111,8 +111,8 @@ public class RoleModelImpl extends BaseModelObject<Role>  implements RoleModel {
 		setRoleId(((Long)primaryKeyObj).longValue());
 	}
 
-	public int getObjectType() {
-		return ModelConstants.ROLE;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.ROLE ;
 	}
 
 	public int compareTo(RoleModel o) {
@@ -125,7 +125,6 @@ public class RoleModelImpl extends BaseModelObject<Role>  implements RoleModel {
 	}
 
 	public int getCachedSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

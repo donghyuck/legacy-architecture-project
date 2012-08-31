@@ -8,8 +8,8 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
-import architecture.ee.model.ModelConstants;
 import architecture.security.model.ProfileFieldValueModel;
 import architecture.security.user.profile.ProfileField;
 import architecture.security.user.profile.ProfileFieldValue;
@@ -318,8 +318,8 @@ public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValu
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {	
 	}
 
-	public int getObjectType() {
-		return ModelConstants.PROFILE_FIELD_VALUE;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.PROFILE_FIELD_VALUE ;
 	}
 
 	public int compareTo(ProfileFieldValue o) {
