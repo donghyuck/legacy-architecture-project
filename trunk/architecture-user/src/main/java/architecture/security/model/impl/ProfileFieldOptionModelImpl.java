@@ -2,8 +2,8 @@ package architecture.security.model.impl;
 
 import java.io.Serializable;
 
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
-import architecture.ee.model.ModelConstants;
 import architecture.security.model.ProfileFieldOptionModel;
 import architecture.security.user.profile.ProfileField;
 import architecture.security.user.profile.ProfileFieldOption;
@@ -95,8 +95,8 @@ public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOp
 		setFieldId(((Long)primaryKeyObj).longValue());
 	}
 
-	public int getObjectType() {
-		return ModelConstants.PROFILE_FIELD_OPTION;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.PROFILE_FIELD_OPTION ;
 	}
 
 	public int compareTo(ProfileField o) {

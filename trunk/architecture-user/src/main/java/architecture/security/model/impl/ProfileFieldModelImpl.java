@@ -7,9 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
 import architecture.common.util.I18nTextUtils;
-import architecture.ee.model.ModelConstants;
 import architecture.security.model.ProfileFieldModel;
 import architecture.security.user.profile.ProfileField;
 import architecture.security.user.profile.ProfileFieldOption;
@@ -481,8 +481,8 @@ public class ProfileFieldModelImpl extends BaseModelObject<ProfileField> impleme
 		this.setFieldId(((Long)primaryKeyObj).longValue());		
 	}
 
-	public int getObjectType() {
-		return ModelConstants.PROFILE_FIELD;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.PROFILE_FIELD ;
 	}
 
 	public int compareTo(ProfileField o) {

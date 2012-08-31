@@ -2,8 +2,8 @@ package architecture.security.model.impl;
 
 import java.io.Serializable;
 
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
-import architecture.ee.model.ModelConstants;
 import architecture.security.model.PermissionMaskModel;
 import architecture.security.permission.PermissionMask;
 
@@ -59,11 +59,10 @@ public class PermissionMaskModelImpl  extends BaseModelObject<PermissionMask> im
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
 
 	}
-	public int getObjectType() {
-		return ModelConstants.PERMISSION_MASK;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.PERMISSION_MASK;
 	}
 	public int getCachedSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

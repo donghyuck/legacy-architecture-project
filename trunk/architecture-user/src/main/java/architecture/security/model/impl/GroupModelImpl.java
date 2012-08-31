@@ -7,10 +7,11 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import architecture.common.cache.CacheSizes;
+import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
-import architecture.ee.model.ModelConstants;
 import architecture.security.model.GroupModel;
 import architecture.security.user.Group;
 import architecture.security.user.UserNotFoundException;
@@ -215,8 +216,8 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
 		setGroupId(((Long)primaryKeyObj).longValue());
 	}
 
-	public int getObjectType() {
-		return ModelConstants.GROUP;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.GROUP;
 	}
 
 	public int compareTo(Group o) {		
@@ -233,6 +234,14 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
 	}
 
 	public int getCachedSize() {
-		return 0;
+        int size = CacheSizes.sizeOfObject();
+        size += CacheSizes.sizeOfLong();
+        size += CacheSizes.sizeOfString(name);
+        size += CacheSizes.sizeOfString(description);
+        size += CacheSizes.sizeOfDate();
+        size += CacheSizes.sizeOfDate();
+        size += CacheSizes.sizeOfCollection(members);
+        size += CacheSizes.sizeOfCollection(administrators);
+        return size;
 	}
 }
