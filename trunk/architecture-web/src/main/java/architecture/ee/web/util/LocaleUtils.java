@@ -82,47 +82,47 @@ public class LocaleUtils extends architecture.common.util.LocaleUtils {
         }        
         return null;
     }
-    
-    // ***
-    
+     
 
     public static String getLocalizedString(String key)
-    {
-    	
+    {    	
         Locale locale = ApplicationHelper.getLocale();
-        String s = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
-        if(s == null)
-            s = getLocalizedString(key, locale, null);
-        return s;
+        String value = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
+        if(value == null)
+        	value = getLocalizedString(key, locale, null);
+        return value;
     }
 
     public static String getLocalizedString(String key, Locale locale)
     {
-        String s = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
-        if(s == null)
-            s = getLocalizedString(key, locale, null);
-        return s;
+        String value = ApplicationHelper.getLocalizedApplicationProperty(key, locale);
+        if(value == null)
+        	value = getLocalizedString(key, locale, null);
+        return value;
     }
 
-    public static String getLocalizedString(String key, List arguments)
+    public static String getLocalizedString(String key, List<?> arguments)
     {
         return getLocalizedString(key, ApplicationHelper.getLocale(), arguments);
     }
 
     
-    public static String getLocalizedString(String key, Locale locale, List arguments)
+    public static String getLocalizedString(String key, Locale locale, List<?> arguments)
     {
-        if(key == null)
+    	Locale localeToUse = locale;
+    	String keyToUse = key;
+    	
+        if(keyToUse == null)
             throw new NullPointerException("i18n key cannot be null");
-        if(locale == null)
-            locale = ApplicationHelper.getLocale();
-/*        JiveTextProvider provider = new JiveTextProvider(com/jivesoftware/util/LocaleUtils, new LocaleProviderWrapper(locale));
-        String value = provider.getText(getEditionizedKey(key), arguments);*/
-        String value = null;
+        if(localeToUse == null)
+        	localeToUse = ApplicationHelper.getLocale();
+        
+        String value = ApplicationHelper.getLocalizedMessage(keyToUse, arguments.toArray(), localeToUse);
         if(value == null)
             value = "";
         return value;
     }
+
 
     public static String getLocalizedNumber(long number)
     {
@@ -144,13 +144,13 @@ public class LocaleUtils extends architecture.common.util.LocaleUtils {
         return NumberFormat.getInstance(locale).format(number);
     }
     
-    public static String getLocalizedString(String key, String pluginName)
+/*    public static String getLocalizedString(String key, String pluginName)
     {
         return getLocalizedString(key, pluginName, null);
     }
 
-    public static String getLocalizedString(String key, String pluginName, List arguments)
+    public static String getLocalizedString(String key, String pluginName, List<?> arguments)
     {
         return key;
-    }
+    }*/
 }
