@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.cache;
 
 /**
@@ -8,14 +23,12 @@ public interface Cache<K,V> extends java.util.Map<K,V> {
     /**
 	 * Returns the name of the cache.
 	 * @return   the name of the cache.
-	 * @uml.property  name="name"
 	 */
     String getName();
 
     /**
 	 * Sets the name of the cache
 	 * @param name   the name of the cache
-	 * @uml.property  name="name"
 	 */
     void setName(String name);
 
@@ -40,14 +53,12 @@ public interface Cache<K,V> extends java.util.Map<K,V> {
     /**
 	 * Returns the maximum number of milliseconds that any object can live in cache. Once the specified number of milliseconds passes, the object will be automatically expried from cache. If the max lifetime is set to -1, then objects never expire.
 	 * @return   the maximum number of milliseconds before objects are expired.
-	 * @uml.property  name="maxLifetime"
 	 */
     long getMaxLifetime();
 
     /**
 	 * Sets the maximum number of milliseconds that any object can live in cache. Once the specified number of milliseconds passes, the object will be automatically expried from cache. If the max lifetime is set to -1, then objects never expire.
 	 * @param maxLifetime   the maximum number of milliseconds before objects are expired.
-	 * @uml.property  name="maxLifetime"
 	 */
     void setMaxLifetime(long maxLifetime);
 

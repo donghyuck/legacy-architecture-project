@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.cache;
 
 import java.util.ArrayList;
@@ -9,15 +24,14 @@ import java.util.Set;
 import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 
+public class EhcacheWrapper<K, V> implements Cache<K, V> {
 
-public class EhcacheWrapper <K, V> implements Cache<K, V> {
-	
-	private final Ehcache targetCache;		
+	private final Ehcache targetCache;
 
 	public EhcacheWrapper(Ehcache targetCache) {
 		this.targetCache = targetCache;
 	}
-		
+
 	public int size() {
 		return targetCache.getSize();
 	}
@@ -94,17 +108,15 @@ public class EhcacheWrapper <K, V> implements Cache<K, V> {
 	}
 
 	/**
-	 * @author  donghyuck
+	 * @author donghyuck
 	 */
 	private class EhcacheEntry<K, V> implements Entry<K, V> {
-
 
 		private final K key;
 
 		public EhcacheEntry(K key) {
 			this.key = key;
 		}
-
 
 		public K getKey() {
 			return key;
@@ -136,22 +148,22 @@ public class EhcacheWrapper <K, V> implements Cache<K, V> {
 	}
 
 	public void setMaxCacheSize(int maxSize) {
-		targetCache.getCacheConfiguration().setMaxElementsInMemory(maxSize);		
+		targetCache.getCacheConfiguration().setMaxElementsInMemory(maxSize);
 	}
 
-	public long getMaxLifetime() {		
+	public long getMaxLifetime() {
 		return targetCache.getCacheConfiguration().getTimeToLiveSeconds();
 	}
 
 	public void setMaxLifetime(long maxLifetime) {
-		targetCache.getCacheConfiguration().setTimeToLiveSeconds(maxLifetime);		
+		targetCache.getCacheConfiguration().setTimeToLiveSeconds(maxLifetime);
 	}
 
 	public int getCacheSize() {
 		return targetCache.getSize();
 	}
 
-	public long getCacheHits() {		
+	public long getCacheHits() {
 		return targetCache.getStatistics().getCacheHits();
 	}
 

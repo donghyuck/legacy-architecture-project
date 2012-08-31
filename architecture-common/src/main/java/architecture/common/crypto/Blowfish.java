@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.crypto;
 
 import java.security.MessageDigest;
@@ -7,16 +22,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * @author  donghyuck
+ * @author donghyuck
  */
 public class Blowfish {
 
 	private static final Log Log = LogFactory.getLog(Blowfish.class);
 
-	/**
-	 * @uml.property  name="m_bfish"
-	 * @uml.associationEnd  
-	 */
 	private BlowfishCBC m_bfish;
 	private static Random m_rndGen = new Random();
 
@@ -95,7 +106,8 @@ public class Blowfish {
 		byte[] newCBCIV = new byte[BlowfishCBC.BLOCKSIZE];
 		longToByteArray(lNewCBCIV, newCBCIV, 0);
 
-		return bytesToBinHex(newCBCIV, 0, BlowfishCBC.BLOCKSIZE) + bytesToBinHex(buf, 0, buf.length);
+		return bytesToBinHex(newCBCIV, 0, BlowfishCBC.BLOCKSIZE)
+				+ bytesToBinHex(buf, 0, buf.length);
 	}
 
 	/**

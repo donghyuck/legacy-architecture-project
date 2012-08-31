@@ -27,20 +27,10 @@ import com.google.common.collect.MapMaker;
  */
 public class LockFreeEventPublisher implements EventPublisher {
 
-    /**
-	 * @uml.property  name="invokerBuilder"
-	 * @uml.associationEnd  
-	 */
     private final InvokerBuilder invokerBuilder;
-    /**
-	 * @uml.property  name="publisher"
-	 * @uml.associationEnd  
-	 */
+
     private final Publisher publisher;
-    /**
-	 * @uml.property  name="listeners"
-	 * @uml.associationEnd  
-	 */
+
     private final Listeners listeners = new Listeners();
         
 	static final class InvokerBuilder {
@@ -75,15 +65,9 @@ public class LockFreeEventPublisher implements EventPublisher {
     static final class Publisher
     {
     	 private final Log log = LogFactory.getLog(getClass());
-         /**
-		 * @uml.property  name="listeners"
-		 * @uml.associationEnd  
-		 */
+
         private final Listeners listeners;
-         /**
-		 * @uml.property  name="dispatcher"
-		 * @uml.associationEnd  
-		 */
+
         private final EventDispatcher dispatcher;
                   
          private final Function eventClassToInvokersTransformer = new Function() {

@@ -15,13 +15,13 @@ public class I18nTextText {
 
 	@Test
 	public void testGenerateResourceBundleKey(){
-		String str = I18nTextUtils.generateResourceBundleKey(ModelObjectType.User.getTypeId(), -1L, -1);
+		String str = I18nTextUtils.generateResourceBundleKey(ModelObjectType.USER.getTypeId(), -1L, -1);
 		System.out.println(str);
 		System.out.println(
-				I18nTextUtils.generateResourceBundleKey(ModelObjectType.User.getTypeId(), 3469, 1)
+				I18nTextUtils.generateResourceBundleKey(ModelObjectType.USER.getTypeId(), 3469, 1)
 		);
 		System.out.println(
-				I18nTextUtils.generateResourceBundleKey(ModelObjectType.User.getTypeId(), 3469, 20)
+				I18nTextUtils.generateResourceBundleKey(ModelObjectType.USER.getTypeId(), 3469, 20)
 		);
 	}
 	

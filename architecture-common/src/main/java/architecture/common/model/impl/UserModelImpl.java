@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.model.impl;
 
 import java.io.Serializable;
@@ -10,6 +25,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.cache.CacheSizes;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.model.ModelObjectType;
@@ -875,8 +891,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 		setUserId(((Long)primaryKeyObj).longValue());		
 	}
 
-	public int getObjectType() {
-		return ModelObjectType.User.getTypeId();
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.USER;
 	}
 
 
@@ -924,7 +940,39 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
     }
 
 	public int getCachedSize() {
-		return 0;
+		int size = 0 ;
+		size += CacheSizes.sizeOfLong();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		size += CacheSizes.sizeOfBoolean();
+		
+		size += CacheSizes.sizeOfString(email);
+		size += CacheSizes.sizeOfString(firstName);
+		size += CacheSizes.sizeOfString(lastName);
+		size += CacheSizes.sizeOfString(name);
+		size += CacheSizes.sizeOfString(password) ;
+		size += CacheSizes.sizeOfString(passwordHash);
+		size += CacheSizes.sizeOfString(username);
+		
+		size += CacheSizes.sizeOfMap(properties);
+		size += CacheSizes.sizeOfObject();
+		size += CacheSizes.sizeOfDate();
+		size += CacheSizes.sizeOfDate();
+		size += CacheSizes.sizeOfDate();
+		size += CacheSizes.sizeOfDate();
+		
+		return size;
 	}
 
 
