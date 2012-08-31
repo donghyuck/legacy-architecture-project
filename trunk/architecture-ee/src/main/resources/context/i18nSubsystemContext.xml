@@ -24,7 +24,7 @@
 	<bean id="i18nTextManager"
 		class="architecture.common.i18n.impl.I18nTextManagerImpl"
 		p:i18nTextDao-ref="i18nTextDao" 
-		init-method="initialize" />
+		init-method="reload" />
 				
 	<!-- =================================================== -->
 	<!-- 3. I18nTextMessageSource                                                             -->

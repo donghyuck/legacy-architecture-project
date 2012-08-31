@@ -1,8 +1,5 @@
 package architecture.ee.test;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
@@ -11,13 +8,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
-import architecture.common.util.I18nTextUtils;
 import architecture.ee.component.admin.AdminHelper;
-import architecture.ee.i18n.I18nCountry;
-import architecture.ee.i18n.I18nLocale;
-import architecture.ee.i18n.I18nLocalizer;
-import architecture.ee.i18n.dao.I18nCountryDao;
-import architecture.ee.util.ApplicationHelper;
 
 public class BootstrapTest {
 
@@ -66,7 +57,7 @@ public class BootstrapTest {
 	}	
 	
 	//@Test
-	public void testI18nCountryDao(){
+	/*public void testI18nCountryDao(){
 		
 		I18nCountryDao dao = Bootstrap.getBootstrapComponent(I18nCountryDao.class);		
 		int size = dao.allCountryCount();
@@ -81,7 +72,7 @@ public class BootstrapTest {
 			log.debug( ">>>>" + country ) ;
 		}
 		
-	}
+	}*/
 	
 	
 	//@Test
