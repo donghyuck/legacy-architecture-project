@@ -21,7 +21,6 @@ package architecture.ee.web.servlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 
 import architecture.common.exception.ComponentDisabledException;

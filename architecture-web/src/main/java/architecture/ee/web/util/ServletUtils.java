@@ -17,6 +17,9 @@
 package architecture.ee.web.util;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import architecture.ee.util.OutputFormat;
 
 public class ServletUtils {
 	
@@ -34,4 +37,9 @@ public class ServletUtils {
 		return thisPath;
 	}
 	
+	public static OutputFormat getOutputFormat(HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse){
+    	String formatString = ParamUtils.getParameter(httpservletrequest, "output", "html");
+    	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);  
+    	return format;
+	}
 }
