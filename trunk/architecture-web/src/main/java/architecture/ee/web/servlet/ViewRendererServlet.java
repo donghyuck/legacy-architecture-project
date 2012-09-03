@@ -41,6 +41,7 @@ import org.springframework.web.util.NestedServletException;
 import architecture.ee.util.OutputFormat;
 
 import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
 
@@ -103,16 +104,14 @@ public class ViewRendererServlet extends HttpServlet {
         throws Exception
     {
         
-    	View view = resolvingView(httpservletrequest, httpservletresponse);
-        
+    	View view = resolvingView(httpservletrequest, httpservletresponse);        
         if(view == null)
         {
             throw new ServletException("Could not complete render request: View is null");
         } else
         {
             Map map = resolveModel(httpservletrequest, httpservletresponse);            
-            view.render(map, httpservletrequest, httpservletresponse);
-            
+            view.render(map, httpservletrequest, httpservletresponse);            
             return;
         }
     }
@@ -136,7 +135,7 @@ public class ViewRendererServlet extends HttpServlet {
             try
             {
                 String viewName = translator.getViewName(httpservletrequest);
-                ViewResolver viewresolver = WebApplicationHelper.getComponent( viewResolverName , org.springframework.web.servlet.ViewResolver.class);
+                ViewResolver viewresolver = getViewResolver( viewResolverName );
                 view = viewresolver.resolveViewName(viewName, httpservletrequest.getLocale());
             }
             catch(Exception exception)
@@ -146,22 +145,16 @@ public class ViewRendererServlet extends HttpServlet {
             
             if(view != null && view instanceof AbstractView ){        	
             	
-            	String formatString = ParamUtils.getParameter(httpservletrequest, "output", "html");
-            	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);
-            	
+            	OutputFormat format = ServletUtils.getOutputFormat(httpservletrequest, httpservletresponse);
             	if(log.isDebugEnabled())
-            	    log.debug("content: " + format );
-            	
+            	    log.debug("content: " + format );            	
             	if( format == OutputFormat.XML )
             	{
-            		httpservletresponse.setContentType(null);
-            		
+            		httpservletresponse.setContentType(null);            		
             		((AbstractView)view).setContentType("text/xml;charset=UTF-8");
             	}
             }
         }
-        
-        
         
         if(log.isDebugEnabled()){
         	log.debug("response content type: " + httpservletresponse.getContentType());
@@ -170,5 +163,8 @@ public class ViewRendererServlet extends HttpServlet {
         return view;
     }
     
+    protected ViewResolver getViewResolver(String name){
+    	return  WebApplicationHelper.getComponent( name , org.springframework.web.servlet.ViewResolver.class);
+    }
     
 }
