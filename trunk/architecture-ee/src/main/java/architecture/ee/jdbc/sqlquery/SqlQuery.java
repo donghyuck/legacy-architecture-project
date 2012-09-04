@@ -55,6 +55,13 @@ public interface SqlQuery {
 	
 	public SqlQuery setAdditionalParameters(Map<String, Object> additionalParameters);
 	
+	
+	
+	/** ====================================================== */
+	/**  OLD API                                                                                      */
+	/** ====================================================== */
+	
+	
 	/**
 	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우, 리턴 컬럼이 하나 이상인 경우 예외가 발생된다. 
 	 * 
@@ -137,8 +144,13 @@ public interface SqlQuery {
 	
 	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper);
 	
-	public int update (String statement, Object[] values, int[] types );
 	
+	
+	
+	
+	/** ====================================================== */
+	/**  NEW API                                                                                      */
+	/** ====================================================== */
 	
 	/**
 	 * 단일 ROW 에 해당하는 elementType 형태의 값을 리턴한다. 하나 이상의 ROW 가 존재하는 경우 오류가 리턴된다.
@@ -189,14 +201,23 @@ public interface SqlQuery {
 	
 	public <T> List<T> list(String statement, Class<T> elementType, Map<String, Object> parameters);
 	
+	
 	public List<Map<String, Object>> list(String statement);
 	
     public List<Map<String, Object>> list(String statement, Object... parameter);
 	
 	public List<Map<String, Object>> list(String statement, Map<String, Object> parameters);
-	
-
 		
+	public int update (String statement, Object[] values, int[] types );
+	
+	public int update (String statement);
+	
+	public int update(String statement, Object... parameters);
+	
+	public int[] batchUpdate(String statement, List<Object[]> parameters ) ;
+	
+	
+	
 	public int executeUpdate(String statement);
 	
 	public int executeUpdate(String statement, Object parameters);

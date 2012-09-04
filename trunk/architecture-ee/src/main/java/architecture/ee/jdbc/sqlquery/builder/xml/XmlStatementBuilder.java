@@ -142,6 +142,8 @@ public class XmlStatementBuilder extends AbstractBuilder {
 		    builder.cipher(child.getStringAttribute("cipher", null));
 		    builder.cipherKey(child.getStringAttribute("cipherKey", null));
 		    builder.cipherKeyAlg(child.getStringAttribute("cipherKeyAlg", null));		    
+		    builder.digest(child.getStringAttribute("digest", null));	
+		    
 		    builder.size(child.getStringAttribute("size", "0"));
            
 			String javaTypeName = child.getStringAttribute("javaType", null);			

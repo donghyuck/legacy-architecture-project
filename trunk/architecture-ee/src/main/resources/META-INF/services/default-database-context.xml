@@ -24,8 +24,9 @@
 		factory-method="getDataSource" />
 					
 	<!-- ================================================ -->
-	<!-- 2. Jdbc Utils                                    -->
+	<!-- 2. Jdbc Utils                                                                        -->
 	<!-- ================================================ -->	
+
 	<bean id="automaticJdbcExtractor" class="architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor" lazy-init="true">		
 		<property name="defaultJdbcExtractor">
 			<bean class="org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor" />
@@ -39,6 +40,7 @@
 						</property>
 					</bean>
 				</entry>	
+			
 				<entry key="weblogic">
 					<bean class="architecture.common.spring.jdbc.support.nativejdbc.LazyNativeJdbcExtractor">
 						<property name="extractorClass">
@@ -53,15 +55,16 @@
 						</property>
 					</bean>
 				</entry>
+			
 			</map>
 		</property>
 	</bean>	
-			
+
     <bean id="defaultLobHandler" class="org.springframework.jdbc.support.lob.DefaultLobHandler" lazy-init="true"/>
    
     <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
         <property name="nativeJdbcExtractor">
-            <ref local="automaticJdbcExtractor"/>
+            <ref local="defaultJdbcExtractor"/>
         </property>
     </bean>
     		

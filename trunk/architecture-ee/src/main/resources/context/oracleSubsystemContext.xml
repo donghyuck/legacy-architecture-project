@@ -12,13 +12,12 @@
        
 	<description>
 	<![CDATA[
-        Define Utility for Oracle
+        Define Oracle 
 	]]>
 	</description>	
 	<!-- ================================================ -->
-	<!-- 1. Transaction                                   -->
-	<!-- ================================================ -->		
-	<alias name="oracleLobHandler" alias="lobHandler"/>
-	
+	<!-- 1. LOB                                                                               -->
+	<!-- ================================================ -->	
+	<alias name="lobHandler" alias="oracleLobHandler"/>
 	
 </beans>
