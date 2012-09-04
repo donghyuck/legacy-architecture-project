@@ -47,6 +47,8 @@ public class ParameterMapping {
 
 	private String pattern;
 	
+	private String digest ;
+	
 	private boolean primary ;
 	
 	private Class<?> javaType = Object.class;
@@ -86,9 +88,15 @@ public class ParameterMapping {
 	public void setCipherKeyAlg(String cipherKeyAlg) {
 		this.cipherKeyAlg = cipherKeyAlg;
 	}
+	
+	public String getDigest() {
+		return digest;
+	}
 
-	
-	
+	public void setDigest(String digest) {
+		this.digest = digest;
+	}
+
 	public Mode getMode() {
 		return mode;
 	}
@@ -97,43 +105,29 @@ public class ParameterMapping {
 		this.mode = mode;
 	}
 
-
-
 	public String getProperty() {
 		return property;
 	}
-
-
 
 	public boolean isPrimary() {
 		return primary;
 	}
 
-
-
 	public String getEncoding() {
 		return encoding;
 	}
-
-
 
 	public void setEncoding(String encoding) {
 		this.encoding = encoding;
 	}
 
-
-
 	public Class<?> getJavaType() {
 		return javaType;
 	}
 
-
-
 	public JdbcType getJdbcType() {
 		return jdbcType;
 	}
-
-
 
 	public int getIndex() {
 		return index;
@@ -181,6 +175,11 @@ public class ParameterMapping {
 		    return this;
 		}
 
+		public Builder digest(String digest) {
+		    parameterMapping.digest = digest;		    
+		    return this;
+		}
+		
 		public Builder cipher(String cipher) {
 		    parameterMapping.cipher = cipher;		    
 		    return this;

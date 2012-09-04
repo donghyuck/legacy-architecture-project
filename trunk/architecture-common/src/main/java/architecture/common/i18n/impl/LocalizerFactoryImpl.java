@@ -15,23 +15,18 @@
  */
 package architecture.common.i18n.impl;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
 import architecture.common.i18n.Localizer;
 import architecture.common.i18n.LocalizerFactory;
-
 /**
  * 
  * 
  * @author DongHyuck, Son
  */
 public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
-
+/*
 	private static class LocalizerResourceBundleControl extends ResourceBundle.Control {
 
 		public static final String XML = "xml";
@@ -59,7 +54,7 @@ public class LocalizerFactoryImpl implements LocalizerFactory.Implementation {
 			}
 			return bundle;
 		}
-	}
+	}*/
 
 	public Localizer getLocalizer(String baseName) {
 		ResourceBundle bundle = ResourceBundle.getBundle(baseName);

@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -29,13 +31,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 import javax.sql.DataSource;
 
+import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -47,6 +51,7 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
+import org.springframework.jdbc.core.StatementCreatorUtils;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.jdbc.support.lob.OracleLobHandler;
@@ -198,13 +203,19 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		}
 
 		public void setValues(PreparedStatement ps) throws SQLException {
-						log.debug(parameterMappings.size());
-						
-			for( ParameterMapping mapping : parameterMappings ){            	
+			
+			// parameterMappings 정보가 존재하는 경우 :
+			if(log.isDebugEnabled())
+		  	    log.debug(parameterMappings.size());	
+			
+			for( ParameterMapping mapping : parameterMappings ){ 
+				
 				JdbcType jdbcType = mapping.getJdbcType();            	
             	Object valueToUse = parameters.get( mapping.getProperty() );
             	
-            	log.debug("jdbcType="+jdbcType + ", value=" + valueToUse );            	
+            	if(log.isDebugEnabled())
+            	    log.debug("jdbcType="+jdbcType + ", value=" + valueToUse );            	
+            	
             	if( valueToUse == null && mapping.getJavaType() == Date.class ){
             		valueToUse = new Date();
             	}                 	
@@ -227,16 +238,21 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 							}	
 						}
             		}
-            	}
+            	}            	
             	
-            	if (valueToUse == null)
+            	if (valueToUse == null){
             		ps.setNull(mapping.getIndex(), jdbcType.TYPE_CODE);
-            	else
-            		ps.setObject(mapping.getIndex(), valueToUse, jdbcType.TYPE_CODE);            	
+            	}
+            	else{
+            		StatementCreatorUtils.setParameterValue(ps, mapping.getIndex(),  jdbcType.TYPE_CODE,  jdbcType.name(), valueToUse);
+            		
+            		//ps.setObject(mapping.getIndex(), valueToUse, jdbcType.TYPE_CODE);         
+            	}
             }				
-		}
-		
+		}		
 	}
+	
+
 	
 	public static class MappedArrayPreparedStatementSetter implements PreparedStatementSetter {
 		
@@ -253,23 +269,34 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 						
 			int index = 1 ;
 			for ( Object object : parameters ){
-				//log.debug("parameters [" + index + "]" + object);
-				Object valueToUse = object;
-				
-				int jdbcType = JdbcUtils.TYPE_UNKNOWN;
+
+				Object valueToUse = object;				
+				int jdbcType = JdbcUtils.TYPE_UNKNOWN;				
+				String typeNameToUse = null;
 				
 				for( ParameterMapping mapping : parameterMappings ){
-					if ( index == mapping.getIndex() ){						
+					
+					if ( index == mapping.getIndex() ){							
 						jdbcType = mapping.getJdbcType().TYPE_CODE;						
+						if( !StringUtils.isEmpty( mapping.getJdbcTypeName() ) )
+						    typeNameToUse = mapping.getJdbcTypeName();
+						
+						// javaType 이 Date 이고 값이 널이면 새로운 Date 객체를 생성하여 사용.
 						if( valueToUse == null && mapping.getJavaType() == Date.class ){
 		            		valueToUse = new Date();
 		            	}     
-						if( valueToUse instanceof Date && mapping.getJdbcType() == JdbcType.VARCHAR ){
+						
+						// java 값이 Date 이고 Jdbc Type 이 VARCHAR 이면 스트링으로 pattern 값을 사용하여 변환.						
+						if( valueToUse instanceof Date && ( mapping.getJdbcType() == JdbcType.VARCHAR )  ){
 		            		valueToUse = DateFormatUtils.format((Date)valueToUse, mapping.getPattern());
 		            	}
+						
+						// java 값이 String 이고 Jdbc Type 이 VARCHAR 인경우 
 						if( valueToUse instanceof String && mapping.getJdbcType() == JdbcType.VARCHAR ){
-							String stringValue = (String)valueToUse;
-		            		if(!StringUtils.isEmpty( mapping.getEncoding())){
+							
+							String stringValue = (String)valueToUse;		            		
+							// CASE 1: encoding 값을 이용하여 문자 변환을 실행한다. 
+							if(!StringUtils.isEmpty( mapping.getEncoding())){
 								if( !StringUtils.isEmpty(stringValue)){
 									String[] encoding = StringUtils.split(mapping.getEncoding(), ">");		
 									try {
@@ -281,23 +308,42 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 										log.error(e);
 									}	
 								}
-		            		}							
-						}
+		            		}
+							
+							// CASE 2: cipher 과 이용하여 문자 암호화을 실행한다. 
+							if( !StringUtils.isEmpty(  mapping.getCipher()  ) ){								
+								try {
+									Cipher cipher = Cipher.getInstance(mapping.getCipher());
+									SecretKeySpec skeySpec = new SecretKeySpec(Hex.decodeHex(mapping.getCipherKey().toCharArray()), mapping.getCipherKeyAlg());
+									cipher.init(Cipher.ENCRYPT_MODE, skeySpec);									
+									byte raw[] = stringValue.getBytes();
+							        byte stringBytes[] = cipher.doFinal(raw);
+							        valueToUse = new String(stringBytes);
+								} catch (Exception e) {
+									log.error(e);
+								}
+								
+							}else 							
+							// CASE 3: digest 값을 이용하여 문자에 대한 해쉬 값를 생성한다.  
+							if( !StringUtils.isEmpty( mapping.getDigest() )){
+								try {									
+									MessageDigest md =  MessageDigest.getInstance( mapping.getDigest() );									
+									byte[] digest = md.digest(stringValue.getBytes());
+									valueToUse = Hex.encodeHexString(digest);									
+								} catch (NoSuchAlgorithmException e) {
+									log.error(e);
+								}								
+							}
+						} else { }						
 						break;
 					}
-				}
-				
-				if (valueToUse == null)
-            		ps.setNull(index, jdbcType);
-            	else
-            		ps.setObject(index, valueToUse, jdbcType);         
-				
+				}				
+				StatementCreatorUtils.setParameterValue(ps, index, jdbcType, typeNameToUse, valueToUse);				
 				index ++ ;
 			}			
 		}
 		
 	}
-
 	
 	private DatabaseType databaseType;
 
@@ -312,6 +358,9 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	}
 
 	public DatabaseType getDatabaseType() {
+		if( databaseType == null && getDataSource() != null){
+			this.databaseType = JdbcUtils.getDatabaseType(getDataSource());	
+		}
 		return databaseType;
 	}
 	
@@ -340,6 +389,7 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 			}
 		}				
 	}
+	
 		
 	// *********************************************
 	// Public Methods for Scrollable
@@ -380,7 +430,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 				newScrollablePreparedStatementCreator( sql, startIndex, numResults, null, null, databaseType), 
 				newMappedPreparedStatementSetter(parameters, parameterMappings), 
 				newScrollableResultSetExtractor( startIndex, numResults, rowMapper, databaseType));		
-		
 	}
 	
 	// *********************************************
@@ -393,7 +442,6 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	protected PreparedStatementSetter newMappedArrayPreparedStatementSetter(Object[] parameters, List<ParameterMapping> parameterMappings) {
 		return new MappedArrayPreparedStatementSetter( parameters, parameterMappings );
 	}	
-
 	
 	public <T> T queryForObject(String sql, List<ParameterMapping> parameterMappings, Map<String, Object> parameters, RowMapper<T> rowMapper) throws DataAccessException {				
 		List<T> results = query(sql, newMappedPreparedStatementSetter(parameters, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper, 1));		
@@ -412,14 +460,19 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	}
 	
 	
-	public <T> List<T> query(String sql, List<ParameterMapping> parameterMappings, Object[] args, RowMapper<T> rowMapper) throws DataAccessException {
+	public <T> List<T> query(String sql, List<ParameterMapping> parameterMappings, Object[] args, RowMapper<T> rowMapper) throws DataAccessException {	
 		
-		return query(sql, newMappedArrayPreparedStatementSetter(args, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper));
 		
+		return query(sql, newMappedArrayPreparedStatementSetter(args, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper));		
 	}
 	
 	public <T> List<T> queryForList(String sql, List<ParameterMapping> parameterMappings, Map<String, Object> parameters, RowMapper<T> rowMapper) throws DataAccessException {				
 		return query(sql, newMappedPreparedStatementSetter(parameters, parameterMappings), new RowMapperResultSetExtractor<T>(rowMapper));		
+	}
+	
+	
+	public int update(String sql, List<ParameterMapping> parameterMappings, Object... args) throws DataAccessException {
+		return update(sql, newMappedArrayPreparedStatementSetter(args, parameterMappings));
 	}
 	
 	// *********************************************

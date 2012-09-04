@@ -26,8 +26,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.StringTokenizer;
 
-import javax.servlet.http.HttpServletRequest;
-
 public abstract class LocaleUtils extends org.apache.commons.lang.LocaleUtils  {
 
 	private static Map<Locale, List<Locale>> cachedCandidateLocales = new HashMap<Locale, List<Locale>>();
