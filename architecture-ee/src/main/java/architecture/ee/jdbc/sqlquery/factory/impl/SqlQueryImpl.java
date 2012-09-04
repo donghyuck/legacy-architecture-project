@@ -327,15 +327,25 @@ public class SqlQueryImpl implements SqlQuery {
 	public List<Map<String, Object>> list(String statement, Object... parameters) {
 		BoundSql sql = getBoundSql(statement, parameters);		
 		if( this.maxResults > 0 ){
-			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, parameters, null, new MappedColumnMapRowMapper(sql.getResultMappings()));
+			return jdbcTemplate.queryScrollable(
+					sql.getSql(), 
+					startIndex, 
+					maxResults, 
+					parameters, 
+					null, 
+					new MappedColumnMapRowMapper(sql.getResultMappings()));
 		}else{
-			return jdbcTemplate.query(sql.getSql(), sql.getParameterMappings(), (Object[]) parameters, new MappedColumnMapRowMapper(sql.getResultMappings()));
+			return jdbcTemplate.query(
+					sql.getSql(), 
+					sql.getParameterMappings(), 
+					(Object[]) parameters, 
+					new MappedColumnMapRowMapper(sql.getResultMappings()));
 		}
 	}
 
+	
 	public List<Map<String, Object>> list(String statement, Map<String, Object> parameters) {
-		BoundSql sql = getBoundSql(statement, parameters);	
-		
+		BoundSql sql = getBoundSql(statement, parameters);		
 		if( this.maxResults > 0 ){
 			return jdbcTemplate.queryScrollable(sql.getSql(), sql.getParameterMappings(), startIndex, maxResults, parameters, new MappedColumnMapRowMapper(sql.getResultMappings()));
 		}else{
@@ -352,18 +362,28 @@ public class SqlQueryImpl implements SqlQuery {
 			return jdbcTemplate.query(sql.getSql(), rowMapper);	
 		}
 	}
-	
-	
-	public int update (String statement, Object[] values){
-		BoundSql sql = getBoundSql(statement, values);
-		return jdbcTemplate.update(sql.getSql(), values) ;
-	}	
-	
+		
 	public int update (String statement, Object[] values, int[] types ){
 		BoundSql sql = getBoundSql(statement, values);
 		return jdbcTemplate.update(sql.getSql(), values, types) ;
 	}
 	
+	public int update(String statement){
+		return executeUpdate(statement);
+	}
+	
+	public int update (String statement, Object... values){
+		BoundSql sql = getBoundSql(statement, values);
+		List<ParameterMapping> parameterMappings = sql.getParameterMappings();		
+		return jdbcTemplate.update(sql.getSql(), values) ;
+	}
+
+	public int[] batchUpdate(String statement, List<Object[]> parameters) {
+		BoundSql sql = getBoundSql(statement, parameters);
+		List<ParameterMapping> parameterMappings = sql.getParameterMappings();
+		
+		return jdbcTemplate.batchUpdate(sql.getSql(), (List<Object[]>) parameters );
+	}
 	
 	public int executeUpdate(String statement){
 		BoundSql sql = getBoundSql(statement);
@@ -372,9 +392,10 @@ public class SqlQueryImpl implements SqlQuery {
 	
 	public int executeUpdate(String statement, Object parameters) {
 		BoundSql sql = getBoundSql(statement, parameters);
-		List<ParameterMapping> parameterMappings = sql.getParameterMappings();		
-		if( parameters instanceof Map ){
-			return jdbcTemplate.update(sql.getSql(), parameterMappings, (Map<String, Object>)parameters );
+		List<ParameterMapping> parameterMappings = sql.getParameterMappings();
+		
+		if( parameters instanceof Map ){		
+			return jdbcTemplate.update(sql.getSql(), parameterMappings, (Map<String, Object>)parameters );		
 		} else if (parameters instanceof List) {	
 			// Batch Job Processing :
 			List list = (List)parameters;
@@ -429,5 +450,6 @@ public class SqlQueryImpl implements SqlQuery {
 		return jdbcTemplate.call(callableStatementFactory.newCallableStatementCreator(paramsToUse), declaredParameters );
 	
 	}
+
 
 }

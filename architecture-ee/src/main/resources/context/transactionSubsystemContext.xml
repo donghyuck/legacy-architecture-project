@@ -12,12 +12,12 @@
        
 	<description>
 	<![CDATA[
-        Define Transaction Management
+        Define Transaction
 	]]>
 	</description>	
 	<!-- ================================================ -->
-	<!-- 1. Transaction                                                                       -->
-	<!-- ================================================ -->		
+	<!-- 1. Transaction                                   -->
+	<!-- ================================================ -->	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 </beans>

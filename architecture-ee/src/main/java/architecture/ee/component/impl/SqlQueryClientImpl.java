@@ -17,7 +17,6 @@ import java.util.concurrent.Callable;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
-import org.springframework.jdbc.core.SingleColumnRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 
@@ -120,6 +119,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 
 	
 	private static class  TableToExcelTask implements Callable<Boolean> {
+		
 		private final SqlQueryClient client ;
 		private final String catalogName, schemaName, tableName ;
 		
@@ -210,8 +210,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		                 if (valueToUse == null)
 		                	ps.setNull(idx, type);
 		                 else                	
-		                	ps.setObject(idx, valueToUse, type );
-		                 
+		                	ps.setObject(idx, valueToUse, type );		                 
 		                 idx ++ ;		                	
 					 }
 				}
@@ -234,6 +233,10 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		}
 	}
 	
+	public Map<String, Object> uniqueResult(String statement ) {
+		return getSqlQuery().uniqueResult(statement, new ColumnMapRowMapper());
+	}
+	
 	public Map<String, Object> uniqueResult(String statement, Object parameter ) {
 		return getSqlQuery().uniqueResult(statement, parameter, new ColumnMapRowMapper());
 	}
@@ -246,11 +249,28 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		return getSqlQuery().list(statement, parameters);
 	}
 
-	public Object call(String statement, Object... parameters) {		
-		return getSqlQuery().call(statement, parameters);		
+	public Object update(String statement) {
+		return getSqlQuery().update(statement);
 	}
-
+	
 	public Object update(String statement, Object[] values, int[] types) {
 		return getSqlQuery().update(statement, values, types);
 	}
+
+	public Object update(String statement, Object... parameters) {
+		return getSqlQuery().update(statement, parameters);
+	}
+
+	public Object update(String statement, List<Object[]> parameters) {
+		return  getSqlQuery().batchUpdate(statement, parameters);
+	}	
+
+	public Object update(String statement, Map<String, Object> parameters) {
+		return  getSqlQuery().executeUpdate(statement, parameters);
+	}
+	
+	public Object call(String statement, Object... parameters) {		
+		return getSqlQuery().call(statement, parameters);		
+	}
+	
 }
