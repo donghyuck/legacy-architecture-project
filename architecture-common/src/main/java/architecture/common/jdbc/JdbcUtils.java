@@ -21,11 +21,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.core.SqlTypeValue;
 import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.MetaDataAccessException;
 
@@ -197,6 +199,7 @@ public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUti
 		}
 	}
 	
+	
 	public static Database getDatabase(Connection conn, String catalog, String schemaName, String tableName) {
 		try {
 			return DatabaseFactory.newDatabase(conn, catalog, schemaName, tableName);		
@@ -216,6 +219,5 @@ public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUti
 		}
 		return name;
 	}
-	
 	
 }

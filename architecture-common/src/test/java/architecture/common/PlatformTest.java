@@ -11,7 +11,7 @@ public class PlatformTest {
 	@Test
 	public void testOSInfo() {
 
-		PlatformHelper.showOS();
+		//PlatformHelper.showOS();
 		
 	}
 
