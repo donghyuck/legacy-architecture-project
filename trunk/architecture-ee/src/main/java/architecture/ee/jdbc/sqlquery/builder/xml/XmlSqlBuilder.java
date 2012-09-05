@@ -18,6 +18,7 @@ package architecture.ee.jdbc.sqlquery.builder.xml;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -52,7 +53,11 @@ public class XmlSqlBuilder extends AbstractBuilder {
 	public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		this.parser = new XPathParser(new InputStreamReader(is), false, configuration.getVariables(), null);
+		try {
+			this.parser = new XPathParser(new InputStreamReader(is, "UTF-8"), false, configuration.getVariables(), null);
+		} catch (UnsupportedEncodingException e) {
+			log.error(e);
+		}
 	}
 
 	public XmlSqlBuilder(InputStream is, Configuration configuration) {
