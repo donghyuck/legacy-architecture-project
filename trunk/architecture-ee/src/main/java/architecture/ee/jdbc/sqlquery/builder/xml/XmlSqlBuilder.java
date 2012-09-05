@@ -24,6 +24,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.lifecycle.ApplicationConstants;
 import architecture.common.util.L10NUtils;
 import architecture.ee.jdbc.sqlquery.builder.AbstractBuilder;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
@@ -53,11 +54,7 @@ public class XmlSqlBuilder extends AbstractBuilder {
 	public XmlSqlBuilder(InputStream is, Configuration configuration, String resource) {
 		super(configuration);
 		this.builderAssistant = new SqlBuilderAssistant(configuration, resource);
-		try {
-			this.parser = new XPathParser(new InputStreamReader(is, "UTF-8"), false, configuration.getVariables(), null);
-		} catch (UnsupportedEncodingException e) {
-			log.error(e);
-		}
+		this.parser = new XPathParser(new InputStreamReader(is), false, configuration.getVariables(), null);
 	}
 
 	public XmlSqlBuilder(InputStream is, Configuration configuration) {
