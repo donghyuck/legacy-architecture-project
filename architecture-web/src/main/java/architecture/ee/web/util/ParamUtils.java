@@ -17,17 +17,35 @@
 package architecture.ee.web.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.ServletRequestUtils;
 
 public class ParamUtils extends ServletRequestUtils {
-
+		
     public ParamUtils()
     {
     }
+    /**
+     * Json 형식의 문자열을 Map 타입의 데이터로 변환한다.
+     * @param request
+     * @param name
+     * @return
+     */
+    public static Map getJsonParameter(HttpServletRequest request, String name) {    	
+    	try {
+			String jsonString = getParameter(request, name);    	
+			com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+			return mapper.readValue(jsonString, Map.class);
+		} catch (Exception e) {
+			return Collections.EMPTY_MAP;
+		}    	
+    }
+    
 
     public static String getParameter(HttpServletRequest request, String name)
     {
@@ -250,4 +268,5 @@ public class ParamUtils extends ServletRequestUtils {
             return defaultNum;
         }
     }
+    
 }
