@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localizers>
+	<localizer bundleName="architecture.security.i18n.SecurityLogLocalizer" codes="006001-006500" />
+</localizers>

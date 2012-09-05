@@ -47,10 +47,8 @@ public class AuthFactory {
         	return AnonymousUserToekn;
     }
     
-    public static AuthToken authenticate (String username, String password) throws UnAuthorizedException {
-		
-    	impl.getAuthProvider().authenticate(username, password);
-		
+    public static AuthToken authenticate (String username, String password) throws UnAuthorizedException {		
+    	impl.getAuthProvider().authenticate(username, password);		
 		return new SimpleUserToken(-1L, username, null);
 	}
     
@@ -62,15 +60,23 @@ public class AuthFactory {
 		return impl.isDigestSupported();
 	}
 	
+	public static AuthToken loginUserAndLoadProperties(String username, String password, boolean newSession, HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse ){	    
+		
+		 AuthToken token = impl.getAuthProvider().authenticateAndGetAuthToken(username, password);		    
+		HttpSession httpsession = httpservletrequest.getSession(newSession);
+	    httpsession.setAttribute(AUTHORIZATION_SESSION_KEY, token);		    
+	    httpsession.setAttribute("IP", httpservletrequest.getRemoteHost() );	
+	    return token ;
+	}
+		
 	public static AuthToken loginUser( String username, String password, boolean newSession, HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse)
 	        throws UnAuthorizedException
-	    {		    
+   {		    
 		    AuthToken token = authenticate (username, password);		    
 		    HttpSession httpsession = httpservletrequest.getSession(newSession);
 		    httpsession.setAttribute(AUTHORIZATION_SESSION_KEY, token);		    
 		    httpsession.setAttribute("IP", httpservletrequest.getRemoteHost() );		    
-		    
 	        return token ;
-	    }
+	 }
 	
 }
