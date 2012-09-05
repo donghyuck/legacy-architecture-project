@@ -1,27 +1,28 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>architecture-parent</artifactId>
-    <groupId>architecture</groupId>
-    <version>1.0.0.RELEASE</version>
-  </parent>
-  <groupId>architecture</groupId>
-  <artifactId>architecture-user</artifactId>
-  <version>1.0.0.RELEASE</version>
-  <name>APPLICATION SECURITY ARCHITECTURE</name>
-  <description>웹 어플리케이션 개발을 위한 사용자 관리 프레임워크</description>
-  <dependencies>
-  	<dependency>
-  		<groupId>architecture</groupId>
-  		<artifactId>architecture-ee</artifactId>
-  		<version>1.0.2.RELEASE</version>
-  		<type>jar</type>
-  		<scope>compile</scope>
-  	</dependency>
-  </dependencies>
-  
-  
-  
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>architecture-parent</artifactId>
+		<groupId>architecture</groupId>
+		<version>1.0.0.RELEASE</version>
+	</parent>
+	<groupId>architecture</groupId>
+	<artifactId>architecture-user</artifactId>
+	<version>1.0.0.RELEASE</version>
+	<name>APPLICATION SECURITY ARCHITECTURE</name>
+	<description>웹 어플리케이션 개발을 위한 사용자 관리 프레임워크</description>
+	<dependencies>
+		<dependency>
+			<groupId>architecture</groupId>
+			<artifactId>architecture-ee</artifactId>
+			<version>1.0.2.RELEASE</version>
+			<type>jar</type>
+			<scope>compile</scope>
+		</dependency>
+	</dependencies>
+
+
+
 	<build>
 		<plugins>
 			<plugin>
@@ -40,7 +41,16 @@
 					<attach>true</attach>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${javac.src.version}</source>
+					<target>${javac.target.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -71,7 +81,7 @@
 						<goals>
 							<goal>proguard</goal>
 						</goals>
-					</execution>				
+					</execution>
 				</executions>
 				<configuration>
 					<obfuscate>true</obfuscate>
@@ -124,7 +134,7 @@
 					</libs>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 

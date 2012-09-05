@@ -27,7 +27,7 @@
 	</organization>
 
 	<properties>
-<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
 		<project.test.skip>true</project.test.skip>
 	</properties>
@@ -113,7 +113,7 @@
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.freemarker</groupId>
 			<artifactId>freemarker</artifactId>
@@ -121,7 +121,7 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-core</artifactId>
@@ -219,7 +219,16 @@
 					<attach>true</attach>
 				</configuration>
 			</plugin>
-
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${javac.src.version}</source>
+					<target>${javac.target.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -250,7 +259,7 @@
 						<goals>
 							<goal>proguard</goal>
 						</goals>
-					</execution>				
+					</execution>
 				</executions>
 				<configuration>
 					<obfuscate>true</obfuscate>
@@ -303,7 +312,7 @@
 					</libs>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
