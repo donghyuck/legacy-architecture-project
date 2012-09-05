@@ -16,6 +16,7 @@ import architecture.common.util.ImplFactory;
  */
 public class SecurityHelper {
 
+	
 	public static interface Implementation {
 		
 		public boolean isAnonymous();
@@ -30,6 +31,7 @@ public class SecurityHelper {
 		
 		public Authentication getAuthentication();
 	}
+	
 	
 	/**
 	 */
