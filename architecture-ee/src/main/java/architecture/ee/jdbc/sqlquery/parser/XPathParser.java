@@ -37,6 +37,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+import architecture.common.lifecycle.ApplicationConstants;
 import architecture.ee.jdbc.sqlquery.builder.BuilderException;
 
 /**
@@ -228,7 +229,7 @@ public class XPathParser {
 			factory.setExpandEntityReferences(true);
 			
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			
+		
 			builder.setEntityResolver(entityResolver);
 			builder.setErrorHandler(new ErrorHandler() {
 				public void error(SAXParseException exception)
@@ -243,7 +244,10 @@ public class XPathParser {
 						throws SAXException {
 				}
 			});
-			return builder.parse(new InputSource(reader));
+			
+			InputSource source = new InputSource(reader);
+			source.setEncoding(ApplicationConstants.DEFAULT_CHAR_ENCODING);			
+			return builder.parse(source);
 		
 		} catch (Exception e) {
 			throw new BuilderException( "Error creating document instance.  Cause: " + e, e);
