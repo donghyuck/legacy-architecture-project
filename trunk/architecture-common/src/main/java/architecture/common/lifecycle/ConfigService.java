@@ -32,21 +32,18 @@ public interface ConfigService extends Component{
 	/**
 	 * 로케일을 리턴한다.	
 	 * @return
-	 * @uml.property  name="locale"
 	 */
 	public Locale getLocale();
 	
 	/**
 	 * 로케일을 지정한다.
 	 * @param  newLocale
-	 * @uml.property  name="locale"
 	 */
 	public void setLocale(Locale newLocale);
 	
 	/**
 	 * 인코딩을 리턴한다.
 	 * @return
-	 * @uml.property  name="characterEncoding"
 	 */
 	public String getCharacterEncoding();
 	
@@ -54,21 +51,18 @@ public interface ConfigService extends Component{
 	 * 인코딩을 설정한다.
 	 * @param characterEncoding
 	 * @throws UnsupportedEncodingException
-	 * @uml.property  name="characterEncoding"
 	 */
 	public void setCharacterEncoding(String characterEncoding) throws UnsupportedEncodingException ;
 		
 	/**
 	 * 시간대를 리턴한다.
 	 * @return
-	 * @uml.property  name="timeZone"
 	 */
 	public TimeZone getTimeZone();
 	
 	/**
 	 * 시간대를 설정한다.
 	 * @param  newTimeZone
-	 * @uml.property  name="timeZone"
 	 */
 	public void setTimeZone(TimeZone newTimeZone);
 	
@@ -85,25 +79,58 @@ public interface ConfigService extends Component{
 	 * @return
 	 */
 	public String formatDateTime(Date date);
-	
-	
-	
+		
+	/**
+	 * xml 파일에 정의된 프로퍼티 값을 리턴한다.
+	 * @param name
+	 * @return
+	 */
 	public String getLocalProperty(String name);
 
+	/**
+	 * xml 파일에 정의된 프로퍼티 값을 리턴한다.
+	 * 
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
 	public int getLocalProperty(String name, int defaultValue);
 
+	/**
+	 * xml 파일에 정의된 프로퍼티 값을 리턴한다.
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
 	public String getLocalProperty(String name, String defaultValue);
 	
+	/**
+	 * xml 파일에 정의된 프로퍼티 값을 리턴한다.
+	 * @param name
+	 * @param defaultValue
+	 * @return
+	 */
 	public boolean getLocalProperty(String name, boolean defaultValue);
 	
+	/**
+	 *  xml 파일에 정의된 프로퍼티 값들을 리턴한다. parent 노드에 자식에 해당하는 모든 값들을 리턴한다.
+	 *  
+	 * @param parent
+	 * @return
+	 */
 	public List<String> getLocalProperties(String parent);
 
+	/**
+	 *  xml 파일에 프로퍼티 값을 지정한다.
+	 *  
+	 * @param name
+	 * @param value
+	 */
 	public void setLocalProperty(String name, String value);
 
 	public void setLocalProperties(Map<String, String> map);
 
 	public void deleteLocalProperty(String name);
-
 	
 	public String getApplicationProperty(String name);
 

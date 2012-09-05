@@ -17,6 +17,12 @@ package architecture.common.lifecycle;
 
 import java.io.File;
 
+/**
+ * Configuration Repository Location 에 대한 접근을 제공하는 클래스 인턴페이스.
+ * 
+ * @author donghyuck
+ *
+ */
 public interface ConfigRoot {
 
     public static int NODE = 0;
