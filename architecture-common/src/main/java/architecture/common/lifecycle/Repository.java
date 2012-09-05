@@ -38,5 +38,4 @@ public interface Repository extends Component {
 	
 	public abstract File getLicenseFile();
 	
-	
 }
