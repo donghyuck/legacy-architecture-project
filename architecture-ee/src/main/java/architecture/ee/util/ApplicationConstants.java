@@ -16,8 +16,7 @@
 package architecture.ee.util;
 
 public interface ApplicationConstants extends architecture.common.lifecycle.ApplicationConstants {
-			
-		
+					
 	/** SETUP PROPERTY KEY */	
 	public static final String DEFAULT_SETUP_CONTEXT_FILE_LOCATION = "classpath:setupApplicationContext.xml";		
 	
@@ -25,15 +24,9 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
 	
 	public static final String BOOTSTRAP_CONTEXT_PROP_NAME = "bootstrap.context";	
 	
-	
-	
-	
 	/** USER PROPERTY KEY */
 	public static final String USER_LOCALE_PROP_NAME = "userLocale";
-	
-	
-	
-	
+
 	/** APPLICATION PROPERTY KEY */	
 	
 	public static final String RESOURCE_SQL_LOCATION_PROP_NAME = "resource.sql.location";
@@ -67,11 +60,9 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
 	
 	public static final String DATABASE_DEFAULT_SQL_LOCATION_PROP_NAME = "database.default.sql.location";	
 	
-	
-	//public static final String DATABASE_DEFAULT_SQL_LOCATION_PROP_NAME = "database.default.sql.location";	
-	
-	
 	public static final int USER = 1;
+	
+	/** SESSION PROPERTY KEY */	
 	
 	
 }
