@@ -5,6 +5,7 @@ package architecture.ee.test;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.junit.Test;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
 import architecture.security.permission.Permissions;
 
@@ -62,6 +63,16 @@ public class SecurityTest {
 		);
 	}
 	*/
+	@Test
+	public void testPasswordEncoder (){
+		MessageDigestPasswordEncoder encoder = new MessageDigestPasswordEncoder("SHA-256");
+		
+		System.out.println(
+				encoder.encodePassword("1234", null)
+		);
+		
+	}
+	
 	@Test
 	public void testPermissions(){
 		
