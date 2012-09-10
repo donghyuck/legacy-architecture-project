@@ -40,6 +40,7 @@ public class LicenseSigner
 	private static String privateKeyPath = "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/private.key";
 	
     private static final Log log = LogFactory.getLog(LicenseSigner.class);
+    
     private Signature sig;
     
     public LicenseSigner()
@@ -73,18 +74,14 @@ public class LicenseSigner
 
     protected void init(Reader keyReader)
         throws IOException, NoSuchAlgorithmException, DecoderException, InvalidKeySpecException, InvalidKeyException
-    {
-    	
+    {    	
         BufferedReader in = new BufferedReader(keyReader);
         String privateKey = in.readLine();
         in.close();
-        
-        
         KeyFactory keyFactory = KeyFactory.getInstance("DSA");
         sig = Signature.getInstance("SHA1withDSA");
         PKCS8EncodedKeySpec privKeySpec = new PKCS8EncodedKeySpec(Hex.decodeHex(privateKey.toCharArray()));
-        java.security.PrivateKey privKey = keyFactory.generatePrivate(privKeySpec);
-        
+        java.security.PrivateKey privKey = keyFactory.generatePrivate(privKeySpec);        
         sig.initSign(privKey);
     }
 
@@ -96,6 +93,4 @@ public class LicenseSigner
         license.setSignature(signature);
     }
 
-
 }
-

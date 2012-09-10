@@ -5,6 +5,7 @@ import javax.servlet.ServletContext;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import architecture.common.lifecycle.State;
+import architecture.common.lifecycle.service.AdminService;
 import architecture.common.util.ImplFactory;
 
 /**
@@ -41,6 +42,10 @@ public class Bootstrap {
 		return impl.getBootstrapApplicationContext();
 	}
 	
+	public static ClassLoader getBootstrapClassLoader(){
+		return getBootstrapApplicationContext().getClassLoader();
+	}
+	
 	public static String[] getBootstrapComponentNames() {
 		return impl.getBootstrapApplicationContext().getBeanDefinitionNames();
 	}
@@ -48,8 +53,7 @@ public class Bootstrap {
 	public static final void boot(ServletContext servletContext){	
 		impl.boot(servletContext);
 	}
-		
-	
+			
 	public static final void shutdown(ServletContext servletContext){
 		impl.shutdown(servletContext);
 	}

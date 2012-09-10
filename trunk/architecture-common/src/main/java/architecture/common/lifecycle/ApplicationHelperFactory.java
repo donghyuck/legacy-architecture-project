@@ -18,19 +18,18 @@ package architecture.common.lifecycle;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author    donghyuck
+ * 
+ * 
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  */
 public class ApplicationHelperFactory {
 
 	public static interface Implementation
     {		
-		public abstract ApplicationHelper getApplicationHelper();		
+		
+		public abstract ApplicationHelper getApplicationHelper();
+		
     }
-	
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
 	private static Implementation impl = null;
     
     static 

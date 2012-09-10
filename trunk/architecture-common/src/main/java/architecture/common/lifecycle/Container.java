@@ -48,11 +48,7 @@ public interface Container {
 	 * @throws ComponentNotFoundException
 	 */
 	public Object getComponent(Object obj) throws ComponentNotFoundException;
-	
-	
-	
-	
-	
+		
 	/**
 	 * 인자에 해당하는 타입의 객체를 리턴한다. 
 	 * @param <T>

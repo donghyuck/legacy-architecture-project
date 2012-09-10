@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 INKIUM, Inc.
+ * Copyright 2012 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package architecture.common.util;
 
+import groovy.lang.GroovyClassLoader;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -29,6 +31,7 @@ import javax.xml.parsers.SAXParserFactory;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
+import org.springframework.core.io.DefaultResourceLoader;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
@@ -42,7 +45,8 @@ import org.xml.sax.helpers.DefaultHandler;
  * JAR 에 포함된 META-INF/impl-factory.xml 파일에 정의된 정보를 기반으로 객체 인스턴스를 
  * 생성하는 유틸리티. 하나 이상의 파일이 검색된 경우 XML 에 정의된  lank 정보를 가지고 
  * 우선순위를 판단하여 높은 순위의 것을 생성하여 리턴.
- * 
+ * <p>
+ * 2012.09.05 - Groovy 을 지원하도록 수정
  * <p>
  * (이 클래스는 javolution 을 사용하여 구현됨.)
  * 
@@ -299,11 +303,33 @@ public class ImplFactory {
 		return loadClass((String) classname);
 	}
 
+
+	/**
+	 * classname 의 확장자가 .groovy 로끝나는 경우에 한하여 
+	 * GroovyClassLoader 을 사용하여 클래스를 로드한다.
+	 * 
+	 * @param classname
+	 * @return
+	 * @throws ClassNotFoundException
+	 */
    private static Class<?> loadClass(String classname) throws ClassNotFoundException {
-		try {
-			ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-			return classloader.loadClass(classname);
+	   try {
+			ClassLoader classloader = Thread.currentThread().getContextClassLoader();					
+			if( classname.endsWith( ".groovy")){				
+				try {
+					GroovyClassLoader gcl = new GroovyClassLoader(classloader);	
+					DefaultResourceLoader loader = new DefaultResourceLoader();
+					URL url = loader.getResource(classname).getURL();				
+					return gcl.parseClass(  new  groovy.lang.GroovyCodeSource(url) );
+				} catch (Exception e) {
+					throw new ClassNotFoundException(e.getMessage());
+				}				
+			}else{
+				return classloader.loadClass( classname );
+			}			
 		} catch (ClassNotFoundException e) {
+			if( classname.endsWith( ".groovy"))
+				throw e;			
 			return ImplFactory.class.getClassLoader().loadClass(classname);
 		}
 	}
@@ -355,8 +381,7 @@ public class ImplFactory {
 	private static List<FactoryList> parseLegacyXmlFile(List<FactoryList> list) throws Exception {	
 		
 		ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		Enumeration<URL> enumeration = cl.getResources(IF_PLUGIN_PATH);
-				
+		Enumeration<URL> enumeration = cl.getResources(IF_PLUGIN_PATH);				
 		SAXParserFactory factory = SAXParserFactory.newInstance();
 		factory.setNamespaceAware(true);
 		XMLReader xmlreader = factory.newSAXParser().getXMLReader();
@@ -364,8 +389,7 @@ public class ImplFactory {
 		xmlreader.setContentHandler(handler);
 		xmlreader.setDTDHandler(handler);
 		xmlreader.setEntityResolver(handler);		
-		xmlreader.setErrorHandler(handler);
-		
+		xmlreader.setErrorHandler(handler);		
 		System.out.println("Enum:");	
 		
 		do {
@@ -388,4 +412,5 @@ public class ImplFactory {
 	public ImplFactory() {
 		
 	}
+	
 }

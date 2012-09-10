@@ -33,21 +33,10 @@ import architecture.common.lifecycle.event.StateChangeEvent;
  */
 public class ComponentImpl implements Component {
     
-    /**
-	 * @uml.property  name="name"
-	 */
     protected String name;
     
-    /**
-	 * @uml.property  name="state"
-	 * @uml.associationEnd  
-	 */
     protected volatile State state;
             
-    /**
-	 * @uml.property  name="eventPublisher"
-	 * @uml.associationEnd  
-	 */
     private EventPublisher eventPublisher = null;
     
     protected Log log = LogFactory.getLog(getClass());
@@ -58,28 +47,16 @@ public class ComponentImpl implements Component {
     	setName(getClass().getSimpleName());
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="name"
-	 */
 	public String getName()
     {
         return name;
     }
 
-	/**
-	 * @param  name
-	 * @uml.property  name="name"
-	 */
 	public void setName(String name)
     {
         this.name = name;
     }
 
-    /**
-	 * @return
-	 * @uml.property  name="state"
-	 */
     public State getState()
     {
         return state;
@@ -127,12 +104,13 @@ public class ComponentImpl implements Component {
 	}
 
     /**
+     * 
+     * 
 	 * @param newState
 	 * @throws RuntimeError
 	 * @throws RuntimeWarning
 	 * @throws ConfigurationError
 	 * @throws ConfigurationWarning
-	 * @uml.property  name="state"
 	 */
     protected void setState(State newState) throws RuntimeError, RuntimeWarning, ConfigurationError, ConfigurationWarning
     {	
@@ -157,7 +135,6 @@ public class ComponentImpl implements Component {
     
     /**
 	 * @return
-	 * @uml.property  name="eventPublisher"
 	 */
     protected EventPublisher getEventPublisher(){
     	return eventPublisher;
@@ -165,7 +142,6 @@ public class ComponentImpl implements Component {
     
     /**
 	 * method from EventSource interface!
-	 * @uml.property  name="eventPublisher"
 	 */
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;		

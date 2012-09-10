@@ -41,16 +41,9 @@ public class LicenseManager {
 	private static final DateFormat dateFormat = DateFormat.getDateTimeInstance(2, 3);
     
     protected static final Log log = LogFactory.getLog(LicenseManager.class);
-    
-    /**
-	 * @uml.property  name="license"
-	 * @uml.associationEnd  
-	 */
+
     private License license;
-    /**
-	 * @uml.property  name="provider"
-	 * @uml.associationEnd  
-	 */
+
     private LicenseProvider provider;
     
 	public void initialize(LicenseProvider provider, Reader reader) throws LicenseException, IOException {
@@ -85,11 +78,7 @@ public class LicenseManager {
         }
         return exceptions;
     }
-    
-    /**
-	 * @return
-	 * @uml.property  name="license"
-	 */
+
     public License getLicense()
     {
         return license;
@@ -138,28 +127,16 @@ public class LicenseManager {
         return d;
     }
     
-    /**
-	 * @param license
-	 * @uml.property  name="license"
-	 */
     protected void setLicense(License license)
     {
         this.license = license;
     }
 
-    /**
-	 * @return
-	 * @uml.property  name="provider"
-	 */
     protected LicenseProvider getProvider()
     {
         return provider;
     }
 
-    /**
-	 * @param provider
-	 * @uml.property  name="provider"
-	 */
     protected void setProvider(LicenseProvider provider)
     {
         this.provider = provider;
