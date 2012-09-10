@@ -3,6 +3,8 @@ package architecture.ee.services;
 import java.util.List;
 import java.util.Map;
 
+import architecture.ee.jdbc.sqlquery.SqlQueryException;
+
 public interface SqlQueryClient {
 
 	
@@ -68,14 +70,25 @@ public interface SqlQueryClient {
 	 * @param parameters
 	 * @return
 	 */
-	public Object update(String statement, List<Object[]> parameters );
+	public Object batchUpdate(String statement, List<Object[]> parameters );
 	
 		
-	
+	/**
+	 * 
+	 * @param statement
+	 * @param parameters
+	 * @return
+	 */
 	public Object update(String statement, Map<String, Object> parameters );
 	
 
-	
+	/**
+	 * 
+	 * @param statement
+	 * @param values
+	 * @param types
+	 * @return
+	 */
 	public Object update(String statement, Object[] values, int[] types);
 	
 
@@ -87,5 +100,11 @@ public interface SqlQueryClient {
 	 */
 	public Object call(String statement, Object... parameters);	
 	
-	
+	/**
+	 * 
+	 * @param action
+	 * @return
+	 */
+	public <T> T execute ( SqlQueryCallback<T> action ) throws SqlQueryException ;
+			
 }

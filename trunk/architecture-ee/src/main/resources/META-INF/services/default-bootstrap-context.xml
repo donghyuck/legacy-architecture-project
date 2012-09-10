@@ -44,8 +44,10 @@
 
 	<bean id="configService" class="architecture.ee.component.core.lifecycle.ConfigServiceImpl" init-method="initialize" depends-on="eventPublisher, sqlConfiguration, dataSource" p:eventPublisher-ref="eventPublisher" p:sqlConfiguration-ref="sqlConfiguration" p:dataSource-ref="dataSource" />
 
-	<bean id="adminService" class="architecture.ee.component.core.lifecycle.AdminServiceImpl" init-method="initialize" depends-on="eventPublisher, contextLoader, configService" p:eventPublisher-ref="eventPublisher" p:contextLoader-ref="contextLoader" p:configService-ref="configService" />
+	<bean id="adminService" class="architecture.ee.component.core.lifecycle.AdminServiceImpl" init-method="initialize" depends-on="eventPublisher, contextLoader, configService" p:eventPublisher-ref="eventPublisher" p:contextLoader-ref="contextLoader" p:configService-ref="configService"  />
 		
 	<bean id="licenseManager" class="architecture.common.license.LicenseManagerFactory"  factory-method="getLicenseManager" />
 
+    <bean id="groovyScriptEngine" class="architecture.ee.spring.scripting.groovy.GroovyScriptEngineFactory" />
+    
 </beans>

@@ -1,3 +1,19 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package architecture.ee.component.impl;
 
 import java.io.File;
@@ -19,11 +35,16 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.jdbc.JdbcUtils;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.schema.Database;
 import architecture.common.jdbc.schema.Table;
+import architecture.ee.component.admin.AdminHelper;
+import architecture.ee.jdbc.sqlquery.SqlQueryException;
+import architecture.ee.services.SqlQueryCallback;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 import architecture.ee.util.ApplicationHelper;
@@ -110,8 +131,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		} catch (Exception e) {
 			log.error(e);
 			hasError = true;
-		}
-		
+		}		
 		
 		ApplicationHelper.getEventPublisher().publish("");
 		
@@ -129,12 +149,11 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 			this.schemaName  = schemaName;
             this.tableName   = tableName;
 		}
-
+		
 		public Boolean call() throws Exception {
 			client.exportToExcel(catalogName, schemaName, tableName);			
 			return true;
-		}
-		
+		}		
 	}
 
 	private static class  ExcelToTableTask implements Callable<Boolean> {
@@ -261,7 +280,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 		return getSqlQuery().update(statement, parameters);
 	}
 
-	public Object update(String statement, List<Object[]> parameters) {
+	public Object batchUpdate(String statement, List<Object[]> parameters) {
 		return  getSqlQuery().batchUpdate(statement, parameters);
 	}	
 
@@ -272,5 +291,25 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements SqlQueryCl
 	public Object call(String statement, Object... parameters) {		
 		return getSqlQuery().call(statement, parameters);		
 	}
+
+	@Transactional ( readOnly = false, propagation = Propagation.REQUIRES_NEW , rollbackFor = {SqlQueryException.class} )
+	public <T> T execute(SqlQueryCallback<T> action) throws SqlQueryException {
+		return action.doInSqlQuery(getSqlQuery());
+	}
 	
+	public Object executeScript(String scriptName){	    
+		try {
+			Class callback = AdminHelper.getGroovyScriptEngine().getGroovyClassLoader().loadClass(scriptName);	    
+			if( callback == SqlQueryCallback.class ){
+				 Object obj = callback.newInstance();
+			     return  ((SqlQueryCallback)obj).doInSqlQuery(getSqlQuery());	    	 
+			}
+		} catch (SqlQueryException e) {
+			throw e;
+		} catch (Exception e) {			
+			throw new SqlQueryException(e);
+		}
+		return null;
+	}	
+
 }

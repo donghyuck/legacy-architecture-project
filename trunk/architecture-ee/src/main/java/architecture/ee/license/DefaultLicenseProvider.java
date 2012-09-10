@@ -18,7 +18,7 @@ public class DefaultLicenseProvider implements LicenseProvider {
 
     public String getName()
     {
-        return "APPLICATION EE ARCHITECTURE";
+        return "APPLICATION ARCHITECTURE for JAVA";
     }
 
     public License.Version getVersion()
@@ -37,11 +37,13 @@ public class DefaultLicenseProvider implements LicenseProvider {
     public Collection<License.Module> getInstalledModules()
     {
         ArrayList<License.Module> modules = new ArrayList<License.Module>();
+        
         modules.add(new License.Module("wiki"));
         modules.add(new License.Module("blogs"));
         modules.add(new License.Module("forums"));
         modules.add(new License.Module("analytics"));
         modules.add(new License.Module("bridges"));
+        
         return Collections.unmodifiableCollection(modules);
     }
 }

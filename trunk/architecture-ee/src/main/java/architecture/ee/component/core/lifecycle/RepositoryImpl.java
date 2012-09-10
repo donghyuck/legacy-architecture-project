@@ -40,7 +40,7 @@ import org.springframework.web.context.support.ServletContextResourceLoader;
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.exception.ConfigurationError;
 import architecture.common.exception.ConfigurationWarning;
-import architecture.common.lifecycle.ApplicationConstants;
+import architecture.ee.util.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigRoot;
@@ -308,8 +308,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	}
 
 	public File getFile(String name) {
-		try {
-			//Resource obj = getRootResource().createRelative(name);			
+		try {	
 			File file = new File(getRootResource().getFile(), name);
 			return  file ;
 		} catch (IOException e) {
@@ -317,8 +316,13 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 		return null;
 	}
 
-	public File getLicenseFile() {
-		return getConfigRoot().getFile("framework.license");
+	public File getLicenseFile() {		
+		String filePath = getSetupApplicationProperties().getStringProperty( ApplicationConstants.RESOURCE_LICENSE_LOCATION_PROP_NAME , null ) ;
+		if( !StringUtils.isEmpty( filePath )){
+			return new File( filePath );
+		} else {
+		    return getConfigRoot().getFile("license");
+		}
 	}
 	
 }

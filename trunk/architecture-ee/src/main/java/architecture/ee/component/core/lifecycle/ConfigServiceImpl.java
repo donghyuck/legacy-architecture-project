@@ -50,49 +50,26 @@ import architecture.ee.util.ApplicationConstants;
  */
 public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
-	/**
-	 * @uml.property  name="setupProperties"
-	 * @uml.associationEnd  
-	 */
 	private ApplicationProperties setupProperties = null;
-	/**
-	 * @uml.property  name="properties"
-	 * @uml.associationEnd  
-	 */
+
 	private ApplicationProperties properties = null;	
-	/**
-	 * @uml.property  name="localizedProperties"
-	 * @uml.associationEnd  
-	 */
+
 	private ApplicationProperties localizedProperties = null;	
 	
-    /**
-	 * @uml.property  name="locale"
-	 */
     private Locale locale = null;
-    /**
-	 * @uml.property  name="timeZone"
-	 */
+
     private TimeZone timeZone = null;
-    /**
-	 * @uml.property  name="characterEncoding"
-	 */
+
     private String characterEncoding = null;
     
     private FastDateFormat dateFormat = null;
     
     private FastDateFormat dateTimeFormat = null;
- 
-    /**
-	 * @uml.property  name="sqlConfiguration"
-	 * @uml.associationEnd  
-	 */
+
     private Configuration sqlConfiguration = null;   
     
     private DataSource dataSource = null;    
-    /**
-	 * @uml.property  name="effectiveRootPath"
-	 */
+
     private String effectiveRootPath = null;
     
 	public ConfigServiceImpl() {
@@ -100,10 +77,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		setName("ConfigService");
 	}
 
-	/**
-	 * @param  dataSource
-	 * @uml.property  name="dataSource"
-	 */
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		reset();
@@ -161,21 +134,13 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return properties == null ? EmptyApplicationProperties.getInstance() : properties;
 		
 	}
-	
-	/**
-	 * @return
-	 * @uml.property  name="setupProperties"
-	 */
+
 	private ApplicationProperties getSetupProperties(){
 		if(setupProperties == null)
 			this.setupProperties = getRepository().getSetupApplicationProperties();
 		return setupProperties;
 	}
 		
-	/**
-	 * @param setupProperties
-	 * @uml.property  name="setupProperties"
-	 */
 	public void setSetupProperties(ApplicationProperties setupProperties) {
 		this.setupProperties = setupProperties;
 	}
@@ -199,17 +164,12 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 		return null;
 	}
 
-	/**
-	 * @param sqlConfiguration
-	 * @uml.property  name="sqlConfiguration"
-	 */
 	public void setSqlConfiguration(Configuration sqlConfiguration) {
 		this.sqlConfiguration = sqlConfiguration;
 	}
 
 	/**
 	 * @return  로케일 정보를 리턴한다. 기본은 ko_KR 이다.
-	 * @uml.property  name="locale"
 	 */
 	public Locale getLocale() {
 		
@@ -246,7 +206,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	/**
 	 * 로케일을 지정한다.
 	 * @param  newLocale
-	 * @uml.property  name="locale"
 	 */
 	public void setLocale(Locale newLocale) {
 		String country = newLocale.getCountry();
@@ -259,7 +218,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @return  문자 인코딩을 리턴한다.
-	 * @uml.property  name="characterEncoding"
 	 */
 	public String getCharacterEncoding() {
         if(characterEncoding == null)
@@ -280,7 +238,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 	/**
 	 * @param characterEncoding
 	 * @throws UnsupportedEncodingException
-	 * @uml.property  name="characterEncoding"
 	 */
 	public void setCharacterEncoding(String characterEncoding)
 			throws UnsupportedEncodingException {
@@ -295,7 +252,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @return
-	 * @uml.property  name="timeZone"
 	 */
 	public TimeZone getTimeZone() {
         if(timeZone == null)
@@ -315,7 +271,6 @@ public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	/**
 	 * @param  newTimeZone
-	 * @uml.property  name="timeZone"
 	 */
 	public void setTimeZone(TimeZone newTimeZone) {
 		String timeZoneId = newTimeZone.getID();

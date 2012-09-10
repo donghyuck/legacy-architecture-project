@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ * Copyright 2012 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,16 +23,8 @@ import architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory;
  */
 public class ConfigurationFactoryImpl implements ConfigurationFactory.Implementation {
 
-	/**
-	 * @uml.property  name="configuration"
-	 * @uml.associationEnd  
-	 */
 	private final Configuration configuration = new Configuration();;
 
-	/**
-	 * @return
-	 * @uml.property  name="configuration"
-	 */
 	public Configuration getConfiguration() {
 		return configuration;
 	}

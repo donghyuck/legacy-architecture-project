@@ -1,6 +1,11 @@
 
 		    
 		<!-- 1. 기본 테이블 생성 스크립트 -->
+		drop table V2_LOCALIZED_PROPERTY cascade constraints PURGE ;
+		drop table V2_PROPERTY cascade constraints PURGE ;
+		drop table V2_SEQUENCER cascade constraints PURGE ;
+		drop table V2_I18N_OBJECT_TEXT cascade constraints PURGE ;
+		
 		CREATE TABLE V2_LOCALIZED_PROPERTY (
 		  LOCALE_CODE            VARCHAR2(100)   NOT NULL,
 		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
@@ -19,9 +24,25 @@
 		    NAME                   VARCHAR2(200) NOT NULL,
 		    VALUE                  INTEGER NOT NULL,
 		    CONSTRAINT V2_SEQUENCER_PK PRIMARY KEY (SEQUENCER_ID)
-		); 				     
+		); 			
+		
 		CREATE UNIQUE INDEX V2_SEQUENCER_NAME_IDX ON V2_SEQUENCER (NAME);		
-                
+        
+		
+		CREATE TABLE V2_I18N_OBJECT_TEXT (
+		     TEXT_ID                 INTEGER NOT NULL,
+		     OBJECT_TYPE           INTEGER NOT NULL,
+		     OBJECT_ID              INTEGER NOT NULL,
+		     OBJECT_ATTRIBUTE    INTEGER NOT NULL,
+		     LOCALE_CODE          VARCHAR2(100)   NOT NULL,    
+		     TEXT                     VARCHAR2(2000)  NOT NULL,	
+			 CREATION_DATE       DATE DEFAULT SYSDATE NOT NULL ,
+		     MODIFIED_DATE       DATE DEFAULT SYSDATE NOT NULL ,
+		     CONSTRAINT V2_I18N_OBJ_TEXT_PK PRIMARY KEY (TEXT_ID)
+		);
+		
+		CREATE INDEX V2_I18N_OBJ_TEXT_LOCALE_IDX ON V2_I18N_OBJECT_TEXT( LOCALE_CODE ) ;
+		
 		
 		
 		
@@ -232,19 +253,7 @@
 		
 		
 		-- provides internationalized text for other tables.		
-		CREATE TABLE V2_I18N_OBJECT_TEXT (
-		     TEXT_ID                INTEGER NOT NULL,
-		     OBJECT_TYPE            INTEGER NOT NULL,
-		     OBJECT_ID              INTEGER NOT NULL,
-		     OBJECT_ATTRIBUTE       INTEGER NOT NULL,
-		     LOCALE_CODE            VARCHAR2(100)   NOT NULL,    
-		     TEXT                   VARCHAR2(2000)  NOT NULL,	
-			 CREATION_DATE          DATE DEFAULT SYSDATE NOT NULL ,
-		     MODIFIED_DATE          DATE DEFAULT SYSDATE NOT NULL ,
-		     CONSTRAINT V2_I18N_OBJECT_TEXT_PK PRIMARY KEY (TEXT_ID)
-		);
-		
-		CREATE INDEX V2_I18N_TEXT_IDX ON V2_I18N_TEXT(LOCALE_CODE, TEXT_KEY) ;
+
 				
 		CREATE TABLE V2_ZIPCODE (
 		    ZIPCODE_ID             INTEGER NOT NULL,

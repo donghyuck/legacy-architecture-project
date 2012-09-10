@@ -24,6 +24,8 @@ import org.springframework.web.context.ContextLoader;
 
 import architecture.common.event.api.EventListener;
 import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.license.License;
+import architecture.common.license.LicenseManager;
 import architecture.common.lifecycle.Component;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.State;
@@ -37,27 +39,22 @@ import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
- * @author   donghyuck
+ * 
+ * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ *
  */
 public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAdminService {
 
-
-
 	private ContextLoader contextLoader;
-
 
 	private ServletContext servletContext;
 
-
 	private ConfigurableApplicationContext applicationContext;
-
-
+	
 	private Version version ;
 
-
 	private ConfigService configService;
-    
-	
+    	
 	public AdminServiceImpl(){		
 		super();
 		setName("AdminService");
@@ -68,8 +65,6 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );
 	}
 	
-
-
 	public ConfigService getConfigService() {
 		return configService;
 	}
@@ -80,9 +75,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	
 	protected <T> T getBootstrapComponent(Class<T> requiredType){
 		return architecture.common.lifecycle.bootstrap.Bootstrap.getBootstrapComponent(requiredType);
-	}
-		
-
+	}		
 
 	public void setConfigService(ConfigService configService){
 		this.configService = configService ;
@@ -100,14 +93,10 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		}
 		return false; 
 	}
-	
-
 
 	public void setContextLoader(ContextLoader contextLoader) {
 		this.contextLoader = contextLoader;
 	}
-
-
 
 	public ContextLoader getContextLoader() {
 		return contextLoader;
@@ -119,13 +108,9 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		return false;
 	}
 	
-
-
 	public ServletContext getServletContext() {
 		return servletContext;
 	}
-
-
 
 	public void setServletContext(ServletContext servletContext) {
 		this.servletContext = servletContext;
@@ -151,8 +136,17 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		Thread currentThread = Thread.currentThread();
         ClassLoader oldLoader = currentThread.getContextClassLoader();
         
+        LicenseManager licenseManager = getBootstrapComponent(LicenseManager.class);
+        License license = licenseManager.getLicense();
+        
+        log.info( 
+            license.toString()
+        );
+        
        // MethodInvoker invoker = new MethodInvoker();
-        if( AdminHelper.isSetupComplete()  ){
+        
+        // 플러그인 기능은 평가판 라이선스에서는 제공하지 않는다.
+        if( AdminHelper.isSetupComplete() && license.getType() != License.Type.EVALUATION  ){
         	try {
 				PluginService pluginService = getBootstrapComponent(PluginService.class);
 				pluginService.prepare();
@@ -160,6 +154,8 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 				
 			}
         }
+        
+        // 컨텐스트를 로드합니다
         if(isSetServletContext() && isSetContextLoader()){
 			try{				
 				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());
@@ -198,14 +194,11 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 			}
 		}
 	}
-		
-
 
 	public ConfigurableApplicationContext getApplicationContext() {
 		return this.applicationContext;
 	}
-	
-	
+		
 	public void autowireComponent(Object obj) {
 		if(isSetApplicationContext()){
 			getApplicationContext().getAutowireCapableBeanFactory().autowireBeanProperties(obj, AutowireCapableBeanFactory.AUTOWIRE_BY_NAME, false);			
@@ -235,9 +228,6 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		}
 		getApplicationContext().refresh();
 	}
-
-
-
 	
 	public Version getVersion() {
 		return this.version;
@@ -258,8 +248,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 			);
 		}		
 	}
-	
-	
+		
 	@EventListener
 	public void onEvent(ApplicationPropertyChangeEvent event) {
 		log.debug("property changed " + event.getOldValue() + ">" + event.getNewValue() );
