@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.ee.jdbc.sqlquery.factory.impl;
 
 import java.io.File;
@@ -138,18 +153,15 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		return "success";
 	}
 
-	public boolean fileDeleted(File file) {
-		
+	public boolean fileDeleted(File file) {		
 		if (configuration.isResourceLoaded(file.toURI().toString())) {
 			configuration.removeUriNamespace(file.toURI().toString(), true);
 			configuration.removeLoadedResource(file.toURI().toString());
-		}
-		
+		}		
 		//DeployedInfo di = 
 		deployments.remove(file.toURI());
 		// ToDo more ...
-		return true;
-		
+		return true;		
 	}
 
 	public void fileChanged(File file) {
@@ -157,10 +169,8 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 			buildSqlFromInputStream(new FileInputStream(file), configuration);
 			DeployedInfo di = deployments.get(file.toURI());
 			di.deployedTime = System.currentTimeMillis();
-			deployments.put(di.uri, di);
-			
-			configuration.buildAllStatements();
-			
+			deployments.put(di.uri, di);			
+			configuration.buildAllStatements();			
 		} catch (FileNotFoundException e) {
 		}
 	}
@@ -178,7 +188,6 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 
 	// 파일이 유요한 형태의 파일인가를 확인하여 true/false 값을 리턴한다.	
 	public boolean validateFile(File file) {
-
 		boolean readable = file.canRead();
 		boolean flag1 = StringUtils.isEmpty(suffix) ? true : file.getName().endsWith(suffix);
 		boolean flag2 = StringUtils.isEmpty(prefix) ? true : file.getName().startsWith(prefix);

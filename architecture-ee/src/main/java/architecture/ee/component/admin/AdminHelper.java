@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.task.AsyncTaskExecutor;
 
 import architecture.common.event.api.EventPublisher;
+import architecture.common.license.LicenseManager;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
@@ -88,6 +89,10 @@ public final class AdminHelper {
 	public static AdminService getAdminService(){
 		return Bootstrap.getBootstrapComponent(AdminService.class);
 	}
+
+	public static LicenseManager getLicenseManager(){
+		return Bootstrap.getBootstrapComponent(LicenseManager.class);
+	}
 	
 	public static ConfigService getConfigService(){
 		return Bootstrap.getBootstrapComponent(ConfigService.class);
@@ -108,6 +113,10 @@ public final class AdminHelper {
 	public static net.sf.ehcache.Cache getCache(String name){
 	    return 	getCache(name, true);
 	}
+	
+	public static groovy.util.GroovyScriptEngine getGroovyScriptEngine(){
+	    return Bootstrap.getBootstrapComponent(groovy.util.GroovyScriptEngine.class);
+	}	
 	
 	public static net.sf.ehcache.Cache getCache(String name, boolean createNotExist){			
 		
@@ -147,7 +156,6 @@ public final class AdminHelper {
 			return adminService.getApplicationContext().getMessage(code, args, localeToUse);
 		}else{ 
 		    return Bootstrap.getBootstrapApplicationContext().getMessage(code, args, localeToUse);
-		}	
-		
+		}			
 	}
 }

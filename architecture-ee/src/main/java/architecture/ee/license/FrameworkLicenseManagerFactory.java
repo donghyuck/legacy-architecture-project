@@ -4,6 +4,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.license.LicenseManager;
 import architecture.common.license.LicenseManagerFactory;
+import architecture.common.util.L10NUtils;
 
 /**
  * @author  donghyuck
@@ -11,16 +12,12 @@ import architecture.common.license.LicenseManagerFactory;
 public class FrameworkLicenseManagerFactory implements LicenseManagerFactory.Implementation {
 	
 	private static final Log log = LogFactory.getLog(FrameworkLicenseManagerFactory.class);
-	
-	/**
-	 * @uml.property  name="instance"
-	 * @uml.associationEnd  
-	 */
+
 	private FrameworkLicenseManager instance = null ;
 	
 	public LicenseManager getLicenseManager() {
 		
-		log.debug( "loading license manager " );
+		log.debug( L10NUtils.getMessage("003408") );	
 		
 		if( instance == null ){
 			try {
