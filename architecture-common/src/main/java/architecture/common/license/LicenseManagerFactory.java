@@ -18,18 +18,16 @@ package architecture.common.license;
 import architecture.common.util.ImplFactory;
 
 /**
- * @author  donghyuck
+ * 
+ * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ *
  */
 public class LicenseManagerFactory {
 
 	public static interface Implementation {
 		public abstract LicenseManager getLicenseManager();
 	}
-
-	/**
-	 * @uml.property  name="impl"
-	 * @uml.associationEnd  
-	 */
+	
 	private static Implementation impl = null;
 
 	static {

@@ -19,7 +19,11 @@ import java.util.Collection;
 
 import architecture.common.license.validator.Validator;
 
-
+/**
+ * 
+ * 
+ * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ */
 public interface LicenseProvider
 {
 

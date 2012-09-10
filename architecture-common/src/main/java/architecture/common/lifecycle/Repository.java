@@ -37,5 +37,5 @@ public interface Repository extends Component {
 	public abstract ApplicationProperties getSetupApplicationProperties();
 	
 	public abstract File getLicenseFile();
-	
+		
 }

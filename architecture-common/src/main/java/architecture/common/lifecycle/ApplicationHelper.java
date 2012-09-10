@@ -20,7 +20,7 @@ package architecture.common.lifecycle;
  * 
  * 
  * 
- * @author <a href="mailto:andang311@inkium.com">donghyuck son </a>
+ * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
 public interface ApplicationHelper extends Container {
