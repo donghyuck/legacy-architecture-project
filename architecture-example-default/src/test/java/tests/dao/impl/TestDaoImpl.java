@@ -1,16 +1,16 @@
-package tests.service.impl;
+package tests.dao.impl;
 
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
-import tests.service.ICapService;
+import tests.dao.TestDao;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 
 @Transactional(readOnly = true)
-public class ICapServiceImpl extends SqlQueryDaoSupport implements ICapService {
+public class TestDaoImpl extends SqlQueryDaoSupport implements TestDao {
 
 	@Override
 	protected void initDao() throws Exception {

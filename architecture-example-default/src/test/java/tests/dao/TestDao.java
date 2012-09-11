@@ -1,9 +1,9 @@
-package tests.service;
+package tests.dao;
 
 import java.util.List;
 import java.util.Map;
 
-public interface ICapService {
+public interface TestDao {
 
 	public <T> List<T> queryForList(String statement,  Class<T> elementType);	
 
