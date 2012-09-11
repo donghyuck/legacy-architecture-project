@@ -130,19 +130,22 @@
 			<artifactId>architecture-user</artifactId>
 			<version>1.0.0.RELEASE</version>
 			<scope>compile</scope>
+			<exclusions>
+				<exclusion>
+					<artifactId>ehcache</artifactId>
+					<groupId>net.sf.ehcache</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>commons-dbcp</artifactId>
+					<groupId>commons-dbcp</groupId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>architecture</groupId>
 			<artifactId>architecture-web-struts</artifactId>
 			<version>1.0.0.RELEASE</version>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-			<version>1.4</version>
-			<type>jar</type>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
@@ -160,6 +163,11 @@
 			<scope>compile</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>log4j-over-slf4j</artifactId>
+			<version>1.6.6</version>
+		</dependency>
 	</dependencies>
 
 	<description>스트럿츠 1 기반의 웹 어플리케이션 예제</description>
