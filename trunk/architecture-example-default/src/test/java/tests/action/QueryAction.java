@@ -11,7 +11,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import tests.service.ICapService;
+import tests.dao.TestDao;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.web.struts.action.FrameworkDispatchActionSupport;
 import architecture.ee.web.util.WebApplicatioinConstants;
@@ -30,7 +30,7 @@ public class QueryAction extends FrameworkDispatchActionSupport {
 		if (log.isDebugEnabled())
 			log.debug("logging here ..");
 
-		ICapService service = getComponent(ICapService.class);
+		TestDao service = getComponent(TestDao.class);
 		List<Map<String, Object>> list = service.queryForList(statement);
 
 		ModelMap model = new ModelMap();
