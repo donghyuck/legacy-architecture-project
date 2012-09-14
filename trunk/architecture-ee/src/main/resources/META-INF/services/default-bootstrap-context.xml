@@ -12,14 +12,14 @@
 	]]>
 	</description>
 	<!-- ================================================ -->
-	<!-- 1. Task Engine                                   -->
+	<!-- 1. Task Engine                                                                      -->
 	<!-- ================================================ -->
 	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" p:corePoolSize="5" p:maxPoolSize="10" p:queueCapacity="25" />
 
 	<bean id="taskEngine" class="architecture.common.task.TaskEngine" />
 
 	<!-- ================================================ -->
-	<!-- 2. Event                                         -->
+	<!-- 2. Event                                                                              -->
 	<!-- ================================================ -->
 	<bean id="eventDispatcher" class="architecture.common.event.internal.AsynchronousAbleEventDispatcher" depends-on="taskExecutor">
 		<constructor-arg index="0" ref="taskExecutor" />
@@ -33,12 +33,12 @@
 	</bean>
 
 	<!-- ================================================ -->
-	<!-- 3. Cache                                         -->
+	<!-- 3. Cache                                                                             -->
 	<!-- ================================================ -->
 	<bean id="ehcache" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" p:shared="false" />
 
 	<!-- ================================================ -->
-	<!-- 4. Core Components                               -->
+	<!-- 4. Core Components                                                              -->
 	<!-- ================================================ -->	
 	<bean id="contextLoader" class="architecture.ee.spring.context.WebApplicationContextLoader" />
 
@@ -48,6 +48,6 @@
 		
 	<bean id="licenseManager" class="architecture.common.license.LicenseManagerFactory"  factory-method="getLicenseManager" />
 
-    <bean id="groovyScriptEngine" class="architecture.ee.spring.scripting.groovy.GroovyScriptEngineFactory" />
+    <bean id="groovyClassLoaderFactory" class="architecture.ee.spring.scripting.groovy.GroovyClassLoaderFactory" />
     
 </beans>

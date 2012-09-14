@@ -105,18 +105,20 @@ public final class AdminHelper {
 	public static String getEffectiveRootPath(){
 		return getRepository().getEffectiveRootPath();
 	}
-			
+	
+	public static groovy.lang.GroovyClassLoader getGroovyClassLoader(){
+		return Bootstrap.getBootstrapComponent( groovy.lang.GroovyClassLoader.class );
+	}	
+	
 	public static net.sf.ehcache.CacheManager getCacheManager(){		
 		return Bootstrap.getBootstrapComponent(net.sf.ehcache.CacheManager.class);
 	}
-		
+	
 	public static net.sf.ehcache.Cache getCache(String name){
 	    return 	getCache(name, true);
 	}
 	
-	public static groovy.util.GroovyScriptEngine getGroovyScriptEngine(){
-	    return Bootstrap.getBootstrapComponent(groovy.util.GroovyScriptEngine.class);
-	}	
+	
 	
 	public static net.sf.ehcache.Cache getCache(String name, boolean createNotExist){			
 		

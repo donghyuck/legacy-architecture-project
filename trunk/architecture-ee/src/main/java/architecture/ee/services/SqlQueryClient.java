@@ -105,6 +105,22 @@ public interface SqlQueryClient {
 	 * @param action
 	 * @return
 	 */
-	public <T> T execute ( SqlQueryCallback<T> action ) throws SqlQueryException ;
+	public <T> T execute ( SqlQueryCallback<T> action )  ;
+	
+	/**
+	 * 단일 트랜잭션으로 처리되며 scriptName 에 해당하는 스크립트의 특정 함수를  
+	 * 호출하고 그결과를 리턴한다. 
+	 * 
+	 * @param scriptName
+	 * @param methodName
+	 * @param parameters
+	 * @return
+	 */
+	public  Object unitOfWork ( String scriptName , String methodName ,  Object... parameters );
+	//public  <T> T unitOfWork ( String scriptName , String methodName,  Class<T> returnType,  Object... parameters );
 			
+	
+	
+	
+	
 }

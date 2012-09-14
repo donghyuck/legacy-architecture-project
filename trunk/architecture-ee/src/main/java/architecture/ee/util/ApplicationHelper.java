@@ -38,7 +38,6 @@ import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.component.admin.AdminHelper;
 
-
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
  * 

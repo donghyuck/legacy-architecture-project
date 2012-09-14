@@ -58,7 +58,7 @@ public interface SqlQuery {
 	
 	
 	/** ====================================================== */
-	/**  OLD API                                                                                      */
+	/**  OLD STYLE API                                                                                      */
 	/** ====================================================== */
 	
 	
@@ -145,11 +145,15 @@ public interface SqlQuery {
 	public <T> List<T> queryForList(String statement, Object[] params, int[] paramTypes, RowMapper<T> rowMapper);
 	
 	
+	public int update (String statement, Object[] values, int[] types );
 	
+	public int update (String statement);
+		
+	public int[] batchUpdate(String statement, List<Object[]> parameters ) ;
 	
 	
 	/** ====================================================== */
-	/**  NEW API                                                                                      */
+	/**  NEW STYLE API                                                                                      */
 	/** ====================================================== */
 	
 	/**
@@ -208,14 +212,10 @@ public interface SqlQuery {
 	
 	public List<Map<String, Object>> list(String statement, Map<String, Object> parameters);
 		
-	public int update (String statement, Object[] values, int[] types );
-	
-	public int update (String statement);
 	
 	public int update(String statement, Object... parameters);
-	
-	public int[] batchUpdate(String statement, List<Object[]> parameters ) ;
-	
+
+
 	
 	
 	public int executeUpdate(String statement);
