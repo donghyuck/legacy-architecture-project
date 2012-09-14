@@ -82,7 +82,6 @@ public class SqlQueryDaoSupport extends JdbcDaoSupport {
 		if( sqlQueryFactory != null )
 			return true;
 		return false;
-		
 	}
 		
 	protected SqlQuery getSqlQuery(){

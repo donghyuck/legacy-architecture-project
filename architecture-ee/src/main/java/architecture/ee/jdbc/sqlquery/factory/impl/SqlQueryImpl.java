@@ -371,18 +371,20 @@ public class SqlQueryImpl implements SqlQuery {
 	public int update(String statement){
 		return executeUpdate(statement);
 	}
-	
-	public int update (String statement, Object... values){
-		BoundSql sql = getBoundSql(statement, values);
-		List<ParameterMapping> parameterMappings = sql.getParameterMappings();		
-		return jdbcTemplate.update(sql.getSql(), values) ;
-	}
 
 	public int[] batchUpdate(String statement, List<Object[]> parameters) {
 		BoundSql sql = getBoundSql(statement, parameters);
 		List<ParameterMapping> parameterMappings = sql.getParameterMappings();
 		
 		return jdbcTemplate.batchUpdate(sql.getSql(), (List<Object[]>) parameters );
+	}
+	
+	
+	
+	public int update (String statement, Object... values){
+		BoundSql sql = getBoundSql(statement, values);
+		List<ParameterMapping> parameterMappings = sql.getParameterMappings();		
+		return jdbcTemplate.update(sql.getSql(), values) ;
 	}
 	
 	public int executeUpdate(String statement){

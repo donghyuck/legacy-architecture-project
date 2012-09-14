@@ -1,7 +1,7 @@
 package architecture.ee.services;
 
-public interface UnitOfWork<T> extends SqlQueryCallback<T> {
+public interface UnitOfWork  {
 
-	
+	public String getName();
 	
 }

@@ -17,7 +17,6 @@
 package architecture.ee.services;
 
 import architecture.ee.jdbc.sqlquery.SqlQuery;
-import architecture.ee.jdbc.sqlquery.SqlQueryException;
 
 /**
  * 
@@ -26,6 +25,6 @@ import architecture.ee.jdbc.sqlquery.SqlQueryException;
  */
 public interface SqlQueryCallback<T> {
 	
-	T doInSqlQuery(SqlQuery sqlQuery) throws SqlQueryException;
+	T doInSqlQuery(SqlQuery sqlQuery) ;
 	
 }

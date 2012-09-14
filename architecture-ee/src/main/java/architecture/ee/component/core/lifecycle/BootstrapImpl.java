@@ -72,17 +72,20 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 				ApplicationProperties properties = repository.getSetupApplicationProperties();
 				Collection<String> names = properties.getPropertyNames();
 				
-				log.debug("bootstrap properties from startup-config.xml -- ");
-				for(String name : names){
-					log.debug( name + " = " + properties.get(name));
+				if( log.isDebugEnabled() ){
+					log.debug("bootstrap properties from startup-config.xml -- ");				
+					for(String name : names){
+						log.debug( name + " = " + properties.get(name));
+					}
 				}
 				
 				boolean setupComplete = properties.getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
 				bootstrapFactoryKey = properties.getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);				
 				
-				log.info(L10NUtils.format("003008", setupComplete ));
-				log.info(L10NUtils.format("003009", bootstrapFactoryKey ));
-				
+				if( log.isDebugEnabled() ){
+					log.info(L10NUtils.format("003008", setupComplete ));
+					log.info(L10NUtils.format("003009", bootstrapFactoryKey ));
+				}
 			}
 			
 			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(bootstrapFactoryKey);			
@@ -113,12 +116,10 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 				lock.unlock();
 			}
 			return (T)repository;
-		}
-		
+		}		
 		
 		if( references.get(requiredType) == null){			
-			try {
-				
+			try {				
 				if ( getBootstrapApplicationContext() == null) {
 					throw new IllegalStateException(L10NUtils.getMessage("003051"));
 				}
@@ -127,6 +128,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 				throw new ComponentNotFoundException(L10NUtils.format("003052", requiredType.getName()), e);
 			}			
 		}
+		
 		return (T)references.get(requiredType).get();
 	}
 		
@@ -138,7 +140,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			}						
 			// 1. admin service 가 존재하는 경우 : DOTO
 						
-			AdminService adminService = getBootstrapComponent(AdminService.class);	
+			AdminService adminService = getAdminService();
 			if(adminService instanceof SpringAdminService ){
 				((SpringAdminService)adminService).setServletContext(servletContext);
 			}
@@ -152,25 +154,31 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			lock.unlock();
 		}		
 	}	
+	
+	public AdminService getAdminService() throws ComponentNotFoundException {
+		return getBootstrapComponent(AdminService.class);
+	}
 		
 	public void shutdown(ServletContext servletContext){
 		lock.lock();
 		try{
 			// 1. admin service 가 존재하는 경우 :
-			AdminService adminService = getBootstrapComponent(AdminService.class);
+			AdminService adminService = getAdminService();
 			adminService.stop();
 			adminService.destroy();
 		} catch (ComponentNotFoundException e) { 
 			// 2. admin service 가 존재하지 않는 경우 :
 			
 		}finally{
+			initialized.set(false);
 			lock.unlock();
 		}
 	}
 
-	public boolean isAvailable(Class serviceClass){
-		try{
-			getBootstrapComponent(AdminService.class);
+	public boolean isBootstrapComponentAvailable(Class serviceClass){
+		try{			
+			getBootstrapComponent(serviceClass);
+			
 		} catch (ComponentNotFoundException e) {
 			return false;
 		} catch (Exception e){
@@ -180,7 +188,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	}
 	
 	public State getState() {
-		if(isAvailable(AdminService.class)){
+		if(isBootstrapComponentAvailable(AdminService.class)){
 			AdminService adminService = getBootstrapComponent(AdminService.class);	
 			return adminService.getState();
 		}else{

@@ -45,7 +45,14 @@ public interface ApplicationConstants extends architecture.common.lifecycle.Appl
 			
 	public static final String RESOURCE_SQL_LOCATION_PROP_NAME = "resoruce.sql.location";	
 	public static final String RESOURCE_TEMPLATE_LOCATION_PROP_NAME = "resoruce.template.location";	
-	public static final String RESOURCE_GROOVY_LOCATION_PROP_NAME = "resoruce.groovy.location";	
+	
+	
+	public static final String SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME = "scripting.groovy.source.location";	
+	public static final String SCRIPTING_GROOVY_SOURCE_ENCODING_PROP_NAME = "scripting.groovy.source.encoding";	
+	public static final String SCRIPTING_GROOVY_SOURCE_RECOMPILE_PROP_NAME = "scripting.groovy.source.recompile";	
+	public static final String SCRIPTING_GROOVY_DEBUG_PROP_NAME = "scripting.groovy.debug";	
+	
+	//setRecompileGroovySource
 	public static final String RESOURCE_LICENSE_LOCATION_PROP_NAME = "resoruce.license.location";	
 	
 	public static final int USER = 1;
