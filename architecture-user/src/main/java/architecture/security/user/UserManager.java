@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import architecture.common.user.User;
+import architecture.common.user.UserAlreadyExistsException;
+import architecture.common.user.UserNotFoundException;
 
 public interface UserManager {
 	
@@ -29,16 +31,16 @@ public interface UserManager {
 
 	public abstract User getUser(User user, boolean flag);
 
-	public abstract User getUser(String s) throws UserNotFoundException;
+	public abstract User getUser(String username) throws UserNotFoundException;
 
-	public abstract User getUser(long l) throws UserNotFoundException;
+	public abstract User getUser(long userID) throws UserNotFoundException;
 
-	public abstract void deleteUser(User user)
-			throws UnsupportedOperationException, UserNotFoundException;
+	
+	public abstract void deleteUser(User user) throws UnsupportedOperationException, UserNotFoundException;
 
-	public abstract void deleteUserAndContent(User user)
-			throws UnsupportedOperationException, UserNotFoundException;
+	public abstract void deleteUserAndContent(User user) throws UnsupportedOperationException, UserNotFoundException;
 
+	
 	public abstract int getApplicationUserCount();
 
 	public abstract List<User> getApplicationUsers();
@@ -57,9 +59,8 @@ public interface UserManager {
 
 	public abstract boolean isCreationSupported();
 
-	public abstract User updateUser(User user) throws UserNotFoundException,
-			UserAlreadyExistsException;
+	public abstract User updateUser(User user) throws UserNotFoundException, UserAlreadyExistsException;
 
 	public abstract void enableUser(User user);
-
+	
 }
