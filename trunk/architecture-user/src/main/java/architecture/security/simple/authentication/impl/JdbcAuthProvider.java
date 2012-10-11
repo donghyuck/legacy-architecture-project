@@ -13,13 +13,13 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.AuthToken;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.L10NUtils;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.security.simple.authentication.AuthProvider;
 import architecture.security.simple.authentication.SimpleUserToken;
-import architecture.security.user.UserNotFoundException;
 
 public class JdbcAuthProvider  extends ExtendedJdbcDaoSupport implements AuthProvider {
 
@@ -71,7 +71,7 @@ public class JdbcAuthProvider  extends ExtendedJdbcDaoSupport implements AuthPro
 	
 	public void authenticate(String username, String password) throws UnAuthorizedException {
         if (username == null || password == null) {
-            throw new UnAuthorizedException(L10NUtils.getMessage("006003"));
+            throw new UnAuthorizedException(L10NUtils.getMessage("005003"));
         }        
         String passwordToUser = password;        
         if(isDigestSupported()){
@@ -79,11 +79,11 @@ public class JdbcAuthProvider  extends ExtendedJdbcDaoSupport implements AuthPro
         }        
         try {
 			if (!passwordToUser.equals(getPassword(username))) {				
-				String msg = L10NUtils.format("006002", username );
+				String msg = L10NUtils.format("005002", username );
 				throw new UnAuthorizedException(msg);
 			}
 		} catch (UserNotFoundException e) {
-			String msg = L10NUtils.format("006001", username );
+			String msg = L10NUtils.format("005001", username );
 			throw new UnAuthorizedException(msg, e);
 		}        
         // Got this far, so the user must be authorized.
@@ -92,7 +92,7 @@ public class JdbcAuthProvider  extends ExtendedJdbcDaoSupport implements AuthPro
 	public AuthToken authenticateAndGetAuthToken(String username, String password) throws UnAuthorizedException {
         
 		if (username == null || password == null) {
-            throw new UnAuthorizedException(L10NUtils.getMessage("006003"));
+            throw new UnAuthorizedException(L10NUtils.getMessage("005003"));
         }
         
         String passwordToUser = password;        
@@ -107,11 +107,11 @@ public class JdbcAuthProvider  extends ExtendedJdbcDaoSupport implements AuthPro
 
 		try {
 			if (!passwordToUser.equals(getPassword(username))) {
-				String msg = L10NUtils.format("006002", username );
+				String msg = L10NUtils.format("005002", username );
 				throw new UnAuthorizedException(msg);
 			}
 		} catch (UserNotFoundException e) {
-			String msg = L10NUtils.format("006001", username );
+			String msg = L10NUtils.format("005001", username );
 			throw new UnAuthorizedException(msg, e);
 		}
 		
