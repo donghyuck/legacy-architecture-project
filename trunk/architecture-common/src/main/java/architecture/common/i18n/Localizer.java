@@ -104,4 +104,8 @@ public class Localizer {
 		return stringToUse;
 	}
 	
+	public static String codeToString(int code){
+		return decimalformat.format(code);
+	}
+	
 }

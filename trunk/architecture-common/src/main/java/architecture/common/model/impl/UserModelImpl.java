@@ -167,12 +167,9 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	 * 메일 주소 변경 지원 여부
 	 */
 	private boolean setEmailSuppoted;
-		
-	/**
-	 * 계정 상태 
-	 */
+				
 	private User.Status status;
-		
+	
 	/**
 	 * ID 값이 -2 인 경우 아직 생성되지 않은 계정을 의미!
 	 * -1 인 경우는 익명 사용자를 의미.
@@ -232,8 +229,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        status = null;
         this.username = formatUsername(username);
+        status = null;
     }
     
 
@@ -263,11 +260,11 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        status = null;
         this.username = formatUsername(username);
         this.password = password;
         this.email = email;
         this.name = name;
+        status = null;
     }
     
     public UserModelImpl(String username, String password, String email, String name, boolean emailVisible, boolean nameVisible, Map<String, String> props)
@@ -296,14 +293,14 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        status = null;
         this.username = formatUsername(username);
         this.password = password;
         this.email = email;
         this.name = name;
         this.nameVisible = nameVisible;
         this.emailVisible = emailVisible;
-        properties = props;        
+        properties = props;     
+        status = null;
     }
 
     public UserModelImpl(String userName, String password, String email, String firstName, String lastName, boolean emailVisible, boolean nameVisible, Map<String, String> props)
@@ -332,7 +329,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        status = null;
         username = formatUsername(userName);
         this.password = password;
         this.email = email;
@@ -341,6 +337,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         this.nameVisible = nameVisible;
         this.emailVisible = emailVisible;
         properties = props;
+        status = null;
     }
     
 
@@ -375,8 +372,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        status = null;
         this.userId = userId;
+        status = null;
     }
 
     public UserModelImpl(User user)
@@ -405,23 +402,14 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        status = null;
         if(null == user)
             return;
         userId = user.getUserId();
         username = formatUsername(user.getUsername());
-        if(user.getFirstName() != null && user.getLastName() != null)
-        {
-            firstName = user.getFirstName();
-            lastName = user.getLastName();
-        } else
-        {
-            name = user.getName();
-        }
+        name = user.getName();
         email = user.getEmail();
         nameVisible = user.isNameVisible();
         emailVisible = user.isEmailVisible();
-        enabled = user.isEnabled();
         
         setCreationDate(user.getCreationDate());
         setModifiedDate(user.getModifiedDate());
@@ -452,6 +440,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         {
             log.debug((new StringBuilder()).append("Couldn't copy password or password hash to newly constructed template for ").append(user).toString());
         }
+        status = null;
     }
     
 	/**

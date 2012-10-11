@@ -47,22 +47,13 @@ public class Profiler {
 	 */
     public static class ProfileStat
     {
-    	/**
-		 * @uml.property  name="count"
-		 */
+
     	int count;
-        /**
-		 * @uml.property  name="average"
-		 */
+
         double average;
-        /**
-		 * @uml.property  name="max"
-		 */
+
         long max;
-        /**
-		 * @uml.property  name="parent"
-		 * @uml.associationEnd  
-		 */
+
         ProfileStat parent;
 
         public ProfileStat()
@@ -84,7 +75,6 @@ public class Profiler {
 
         /**
 		 * @return
-		 * @uml.property  name="count"
 		 */
         public int getCount()
         {
@@ -93,7 +83,6 @@ public class Profiler {
 
         /**
 		 * @return
-		 * @uml.property  name="average"
 		 */
         public double getAverage()
         {
@@ -102,7 +91,6 @@ public class Profiler {
 
         /**
 		 * @return
-		 * @uml.property  name="max"
 		 */
         public long getMax()
         {
@@ -123,10 +111,9 @@ public class Profiler {
     }
     
     private Log log = LogFactory.getLog(Profiler.class);
+    
     private Stack<ProfileInstance> stack;
-    /**
-	 * @uml.property  name="stats"
-	 */
+
     private HashMap<String, ProfileStat> stats = new HashMap<String, ProfileStat>();
     private boolean enabled = false;
     

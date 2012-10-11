@@ -1,8 +1,22 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.user.authentication;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
@@ -67,10 +81,6 @@ public class SystemUser implements AuthToken, User {
 		return null;
 	}
 
-	public Map<String, String> getProperties() {
-		return new HashMap<String, String>();
-	}
-
 	public Date getLastLoggedIn() {
 		return null;
 	}
@@ -127,10 +137,6 @@ public class SystemUser implements AuthToken, User {
 		return false;
 	}
 
-	public Status getStatus() {
-		return null;
-	}
-
 	public int compareTo(User o) {
 		return 0;
 	}
@@ -143,26 +149,8 @@ public class SystemUser implements AuthToken, User {
 		return false;
 	}
 
-	@Override
-	public Object clone() {
-		return null;
-	}
-
-	public boolean isNew() {
-		return false;
-	}
-
-
-	public void setNew(boolean n) {		
-	}
-
-
 	public Serializable getPrimaryKeyObject() {
 		return getUserId();
-	}
-
-
-	public void setPrimaryKeyObject(Serializable primaryKeyObj) {		
 	}
 
 	public void setCreationDate(Date creationDate) {		
@@ -174,6 +162,18 @@ public class SystemUser implements AuthToken, User {
 
 	public int getCachedSize() {
 		return 0;
+	}
+
+	public boolean isSetNameVisbleSupported() {
+		return false;
+	}
+
+	public Status getStatus() {
+		return null;
+	}
+
+	public Map<String, String> getProperties() {
+		return null;
 	}
 
 }

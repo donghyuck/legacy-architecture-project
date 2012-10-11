@@ -13,16 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.user.authentication;
+package architecture.common.user;
 
-public interface AuthToken {
+import architecture.common.exception.CodeableRuntimeException;
 
-	// public abstract String domain
-	 
-	public abstract long getUserId();
+public class EmailAlreadyExistsException extends CodeableRuntimeException {
 
-	public abstract boolean isAnonymous();
-	
-	public abstract String getUsername();
-	
+	public EmailAlreadyExistsException() {
+		super();
+	}
+
+	public EmailAlreadyExistsException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public EmailAlreadyExistsException(String msg) {
+		super(msg);
+	}
+
+	public EmailAlreadyExistsException(Throwable cause) {
+		super(cause);
+	}
+
 }

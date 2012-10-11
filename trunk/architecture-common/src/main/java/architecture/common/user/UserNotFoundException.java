@@ -13,16 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.user.authentication;
+package architecture.common.user;
 
-public interface AuthToken {
+import architecture.common.exception.CodeableRuntimeException;
 
-	// public abstract String domain
-	 
-	public abstract long getUserId();
+public class UserNotFoundException extends CodeableRuntimeException {
 
-	public abstract boolean isAnonymous();
-	
-	public abstract String getUsername();
-	
+	public UserNotFoundException() {
+		super();
+	}
+
+	public UserNotFoundException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public UserNotFoundException(String msg) {
+		super(msg);
+	}
+
+	public UserNotFoundException(Throwable cause) {
+		super(cause);
+	}
+
 }

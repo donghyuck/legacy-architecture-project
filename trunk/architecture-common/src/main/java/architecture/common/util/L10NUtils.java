@@ -92,6 +92,10 @@ public class L10NUtils {
     	return MessageFormat.format( getMessage(id, locale, cl), args);
     }
 
+    public static String codeToString(int code){
+    	return Localizer.decimalformat.format(code);
+    }
+    
     public static String getMessage(String id){
     	return getLocalizer(id).getMessage(id);
     }
