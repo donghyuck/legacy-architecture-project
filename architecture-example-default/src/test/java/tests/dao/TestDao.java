@@ -5,12 +5,16 @@ import java.util.Map;
 
 public interface TestDao {
 
-	public <T> List<T> queryForList(String statement,  Class<T> elementType);	
-
-	public List<Map<String, Object>> queryForList(String statement);
+	public List<Map<String, Object>> queryForList(String statement );	
 	
-	public List<Map<String, Object>> queryForList(String statement, Object[] params, int[] paramTypes);
+	public List<Map<String, Object>> queryForList(String statement , Object[] params, int[] jdbcTypes);	
 	
-	public <T> T queryForObject(String statement,  Class<T> elementType);
+	public List<String> queryForStringList(String statement );	
 		
+	public List<String> queryForStringList(String statement , Object[] params, int[] jdbcTypes);	
+	
+	public Map<String, Object> queryForMap(String statement );	
+	
+	public Map<String, Object> queryForMap(String statement, Object[] params, int[] jdbcTypes);	
+	
 }
