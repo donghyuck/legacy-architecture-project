@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import architecture.common.user.User;
+import architecture.common.user.UserManager;
 import architecture.security.user.AbstractGroupManager;
 import architecture.security.user.Group;
 import architecture.security.user.GroupNotFoundException;
-import architecture.security.user.UserManager;
 import architecture.security.user.dao.GroupDao;
 
 /**
