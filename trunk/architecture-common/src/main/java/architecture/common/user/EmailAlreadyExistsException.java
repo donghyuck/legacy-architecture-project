@@ -15,9 +15,9 @@
  */
 package architecture.common.user;
 
-import architecture.common.exception.CodeableRuntimeException;
+import architecture.common.exception.CodeableException;
 
-public class EmailAlreadyExistsException extends CodeableRuntimeException {
+public class EmailAlreadyExistsException extends CodeableException {
 
 	public EmailAlreadyExistsException() {
 		super();
