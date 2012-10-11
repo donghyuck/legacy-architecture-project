@@ -1,14 +1,5 @@
 package architecture.security.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-
-import architecture.common.user.User;
-import architecture.common.user.authentication.AuthToken;
 import architecture.common.util.ImplFactory;
 
 /**
@@ -21,7 +12,7 @@ public class SecurityHelper {
 		
 		public boolean isAnonymous();
 		
-		public boolean isAnonymous(Authentication authen);
+/*		public boolean isAnonymous(Authentication authen);
 		
 		public  boolean isApplicaitonUser();
 		
@@ -29,7 +20,7 @@ public class SecurityHelper {
 		
 		public User getUser();
 		
-		public Authentication getAuthentication();
+		public Authentication getAuthentication();*/
 	}
 	
 	
@@ -45,7 +36,7 @@ public class SecurityHelper {
     public static boolean isAnonymous(){
     	return impl.isAnonymous();
     }
-    
+    /*
     public static boolean isAnonymous(Authentication authen){
     	return impl.isAnonymous(authen);
     }
@@ -65,8 +56,8 @@ public class SecurityHelper {
 	public static Authentication getAuthentication(){
 		return impl.getAuthentication();
 	}	
-	
-	public static List<String> getUserRoles(){		
+	*/
+/*	public static List<String> getUserRoles(){		
 		
 		Collection< ? extends GrantedAuthority> authorities = getAuthentication().getAuthorities();
 		List<String> list = new ArrayList<String>(authorities.size());		
@@ -74,6 +65,6 @@ public class SecurityHelper {
 			list.add( authority.getAuthority() );
 		}
 		return list;
-	}
+	}*/
 	
 }
