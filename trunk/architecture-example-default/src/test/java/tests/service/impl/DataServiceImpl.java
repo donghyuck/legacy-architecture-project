@@ -1,6 +1,7 @@
 package tests.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,4 +35,5 @@ public class DataServiceImpl extends SqlQueryDaoSupport implements DataService  
 		}		
 	}
 	
+
 }

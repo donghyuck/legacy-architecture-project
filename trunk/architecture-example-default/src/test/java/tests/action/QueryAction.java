@@ -12,11 +12,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import tests.dao.TestDao;
+import architecture.ee.jdbc.sqlquery.SqlQuery;
+import architecture.ee.services.SqlQueryCallback;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.web.struts.action.FrameworkDispatchActionSupport;
-import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.ModelMap;
 import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.util.WebApplicatioinConstants;
 
 public class QueryAction extends FrameworkDispatchActionSupport {
 
@@ -50,13 +52,17 @@ public class QueryAction extends FrameworkDispatchActionSupport {
 		if (log.isDebugEnabled())
 			log.debug("export:" + tableName );
 
-		SqlQueryClient service = getComponent(SqlQueryClient.class);
-		service.exportToExcel(null, null, tableName);
-
+		SqlQueryClient client = getComponent(SqlQueryClient.class);
 		
-		//ModelMap model = new ModelMap();
-		//model.put("list", list);
-		//request.setAttribute(ApplicatioinConstants.MODEL_ATTRIBUTE, model);
+		client.execute(new SqlQueryCallback<List<Map<String, Object>>> (){
+				public List<Map<String, Object>> doInSqlQuery(SqlQuery sqlQuery) {
+				    
+					// sqlQuery 를 사용하여 필요한 작업을 수행한다. 
+					
+					return null;
+				}			
+			}
+		);
 		
 		return (mapping.findForward("exproted-success"));
 
