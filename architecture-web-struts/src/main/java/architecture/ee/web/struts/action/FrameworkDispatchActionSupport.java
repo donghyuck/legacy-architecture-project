@@ -1,10 +1,21 @@
 package architecture.ee.web.struts.action;
 
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.exception.Codeable;
 import architecture.common.exception.ComponentNotFoundException;
+
+import architecture.ee.util.OutputFormat;
+
+import architecture.ee.web.util.ModelMap;
+import architecture.ee.web.util.ServletUtils;
+import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
 
 public abstract class FrameworkDispatchActionSupport extends
@@ -34,6 +45,28 @@ public abstract class FrameworkDispatchActionSupport extends
 			return true;
 		else 
 			return false;
+	}	
+	
+	protected OutputFormat getOutputFormat(HttpServletRequest request, HttpServletResponse response){
+		return ServletUtils.getOutputFormat(request, response);
 	}
+	
+	protected Map getModelMap(HttpServletRequest request, HttpServletResponse response){
+		ModelMap modelMap =  (ModelMap) request.getAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
+            if (modelMap == null) {
+            	modelMap = new ModelMap();
+            }
+            return modelMap;		
+	}
+	
+    protected void saveModelMap(HttpServletRequest request,  Map modelMap) {
+        // Remove any error messages attribute if none are required
+        if ((modelMap == null) || modelMap.isEmpty()) {
+            request.removeAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
+            return;
+        }
+        // Save the error messages we need
+        request.setAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE, modelMap);
+    }
 	
 }
