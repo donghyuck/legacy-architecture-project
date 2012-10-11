@@ -11,10 +11,10 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
 import architecture.common.user.User;
+import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.security.model.GroupModel;
 import architecture.security.user.Group;
-import architecture.security.user.UserNotFoundException;
 
 /**
  * @author  donghyuck
