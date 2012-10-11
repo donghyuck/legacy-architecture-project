@@ -152,6 +152,9 @@ public class ViewRendererServlet extends HttpServlet {
             	{
             		httpservletresponse.setContentType(null);            		
             		((AbstractView)view).setContentType("text/xml;charset=UTF-8");
+            	} else if ( format == OutputFormat.HTML ){
+            		httpservletresponse.setContentType(null);        
+            		((AbstractView)view).setContentType("text/html;charset=UTF-8");
             	}
             }
         }
