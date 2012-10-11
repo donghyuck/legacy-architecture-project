@@ -15,6 +15,8 @@
  */
 package architecture.ee.util;
 
+import groovy.lang.GroovyClassLoader;
+
 import java.lang.ref.WeakReference;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,20 +24,17 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import net.sf.ehcache.CacheManager;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.i18n.I18nTextManager;
+import architecture.common.license.License;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
-import architecture.common.lifecycle.service.AdminService;
+import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.ee.component.admin.AdminHelper;
 
 /**
@@ -68,17 +67,21 @@ public final class ApplicationHelper {
 		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
 	}	
 	
+	public static License getLicense(){
+	    return AdminHelper.getLicense();	
+	}
+	
 	public static ConfigService getConfigService(){
 		return AdminHelper.getConfigService();
 	}
 		
-	public static AdminService getAdminService(){
+/*	public static AdminService getAdminService(){
 		return AdminHelper.getAdminService();
-	}
+	}*/
 
-	public static I18nTextManager getI18nTextManager(){
+/*	public static I18nTextManager getI18nTextManager(){
 		return getComponent(I18nTextManager.class);
-	}
+	}*/
 	
 	public static boolean isSetupComplete(){
 		return AdminHelper.isSetupComplete();
@@ -88,18 +91,15 @@ public final class ApplicationHelper {
 		return AdminHelper.isReady();
 	}
 
-	public static EventPublisher getEventPublisher(){		
+/*	public static EventPublisher getEventPublisher(){		
 		return AdminHelper.getEventPublisher();
-	}
+	}*/
 	
 	public static State getState(){
 		return AdminHelper.getState();
 	}
-
-	public static Repository getRepository(){
-		return AdminHelper.getRepository();
-	}
 	
+/*
 	public static net.sf.ehcache.Cache creatCache(String name, long lifetime){
 		CacheManager cacheManager = AdminHelper.getCacheManager();
 		if( ! cacheManager.cacheExists(name) ){
@@ -111,6 +111,20 @@ public final class ApplicationHelper {
 			cacheManager.addCache(cache);
 		}
 		return cacheManager.getCache(name);
+	}
+	
+	public static GroovyClassLoader getGroovyClassLoader(){
+		return 
+	}
+	*/
+	
+	public static Repository getRepository(){		
+		return AdminHelper.getRepository();
+	}
+	
+	public static Class loadClass( String scriptName , boolean lookupScriptFiles, boolean preferClassOverScript ) throws ClassNotFoundException{
+		GroovyClassLoader gcl = Bootstrap.getBootstrapComponent( groovy.lang.GroovyClassLoader.class );
+		return gcl.loadClass(scriptName, lookupScriptFiles, preferClassOverScript);
 	}
 	
 	public static Locale getLocale(){
@@ -144,16 +158,13 @@ public final class ApplicationHelper {
 		
 		ConfigService config = getConfigService();		
 		String propValue = config.getLocalProperty(name, null);	
-		//LOG.debug(name +  "=(local)" + propValue );		
 		if(isReady()){
 			String str = config.getApplicationProperty(name, null);			
-			//LOG.debug(name +  "=(db)" + str );			
 			if( !StringUtils.isEmpty( str ))
 				propValue = str;			
 		}		
 		if( propValue == null)
 			propValue = defaultValue ;		
-		//LOG.debug(name +  "=(final)" + propValue );	
 		return propValue ;
 	}
 	

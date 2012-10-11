@@ -24,6 +24,7 @@
     	<property name="resourceLocations">
 			<list>
 			   <value>res:sql/default-framework-sqlset.xml</value>
+			   <value>res:sql/default-security-sqlset.xml</value>
 			</list>
     	</property>
     	<property name="dataSource" ref="dataSource" />

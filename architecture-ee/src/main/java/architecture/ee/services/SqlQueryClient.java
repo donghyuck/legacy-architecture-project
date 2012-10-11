@@ -117,10 +117,6 @@ public interface SqlQueryClient {
 	 * @return
 	 */
 	public  Object unitOfWork ( String scriptName , String methodName ,  Object... parameters );
-	//public  <T> T unitOfWork ( String scriptName , String methodName,  Class<T> returnType,  Object... parameters );
-			
-	
-	
 	
 	
 }

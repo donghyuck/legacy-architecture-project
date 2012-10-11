@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.core.task.AsyncTaskExecutor;
 
 import architecture.common.event.api.EventPublisher;
+import architecture.common.license.License;
 import architecture.common.license.LicenseManager;
 import architecture.common.lifecycle.ConfigRoot;
 import architecture.common.lifecycle.ConfigService;
@@ -47,6 +48,11 @@ public final class AdminHelper {
 
 	public static Repository getRepository(){
 		return Bootstrap.getBootstrapComponent(Repository.class);
+	}
+	
+	public static License getLicense(){
+		 LicenseManager licenseManager = Bootstrap.getBootstrapComponent(LicenseManager.class);
+		 return licenseManager.getLicense();
 	}
 	
 	public static boolean isReady(){		

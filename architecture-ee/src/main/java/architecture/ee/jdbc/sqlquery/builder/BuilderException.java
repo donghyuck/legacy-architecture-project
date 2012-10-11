@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ * Copyright 2010, 2011 donghyuck, son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,18 +21,22 @@ public class BuilderException extends SqlQueryException {
 
 	public BuilderException() {
 		super();
+		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public BuilderException(String msg, Throwable cause) {
 		super(msg, cause);
+		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public BuilderException(String msg) {
 		super(msg);
+		// TODO 자동 생성된 생성자 스텁
 	}
 
 	public BuilderException(Throwable cause) {
 		super(cause);
+		// TODO 자동 생성된 생성자 스텁
 	}
 
 }

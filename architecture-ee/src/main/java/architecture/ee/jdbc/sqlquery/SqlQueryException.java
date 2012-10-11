@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ * Copyright 2010, 2011 donghyuck,son.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package architecture.ee.jdbc.sqlquery;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
+import architecture.common.exception.CodeableRuntimeException;
+import architecture.common.util.L10NUtils;
 
-public class SqlQueryException extends NestableRuntimeException {
-
-	public SqlQueryException() {
+public class SqlQueryException extends CodeableRuntimeException {
+	
+      public SqlQueryException() {
 		super();
 	}
 
@@ -35,4 +36,31 @@ public class SqlQueryException extends NestableRuntimeException {
 		super(cause);
 	}
 
+	public static SqlQueryException createSqlQueryException(Throwable cause, int code, Object...args){
+   			if( code < 60000){
+   				String codeString = L10NUtils.codeToString(code);
+   				String msg = L10NUtils.format(codeString, args);
+   				SqlQueryException e = new SqlQueryException(msg, cause);
+   				e.setErrorCode(code);
+   				return e;
+   			} else {
+   				SqlQueryException e = new SqlQueryException(cause);
+   				e.setErrorCode(code);
+   				return e;
+   			}
+      }
+	
+	public static SqlQueryException createSqlQueryException(Throwable cause, int code){
+			if( code < 60000){
+				String codeString = L10NUtils.codeToString(code);
+				String msg = L10NUtils.getMessage(codeString);
+				SqlQueryException e = new SqlQueryException(msg, cause);
+				e.setErrorCode(code);
+				return e;
+			} else {
+				SqlQueryException e = new SqlQueryException(cause);
+				e.setErrorCode(code);
+				return e;
+			}
+  }
 }

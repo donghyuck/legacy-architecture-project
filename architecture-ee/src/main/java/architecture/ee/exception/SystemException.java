@@ -15,9 +15,9 @@
  */
 package architecture.ee.exception;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
+import architecture.common.exception.CodeableRuntimeException;
 
-public class SystemException extends NestableRuntimeException {
+public class SystemException extends CodeableRuntimeException {
 
 	public SystemException() {
 		super();
