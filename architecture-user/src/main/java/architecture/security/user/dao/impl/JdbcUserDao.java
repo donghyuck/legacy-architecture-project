@@ -81,7 +81,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	 */
 	private ExtendedPropertyDao extendedPropertyDao;
 	
-	private String sequencerName = "User";
+	private String sequencerName = "USER";
 	private String userPropertyTableName = "V2_USER_PROPERTY";
 	private String userPropertyPrimaryColumnName = "USER_ID";
 	
@@ -103,8 +103,6 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 			String userPropertyPrimaryColumnName) {
 		this.userPropertyPrimaryColumnName = userPropertyPrimaryColumnName;
 	}
-
-
 	
 	/**
 	 * @param extendedPropertyDao
@@ -113,30 +111,49 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		this.extendedPropertyDao = extendedPropertyDao;
 	}
 
+	/**
+	 * 
+	 * @param propertyName
+	 * @param propertyValue
+	 * @return 프로퍼티에 해당하는 사용자 아이디 값들을 리턴한다.
+	 */
 	public List<Integer> getUserIdsWithUserProperty(String propertyName, String propertyValue) {
-		return getExtendedJdbcTemplate().queryForList( getBoundSql("FRAMEWORK_V2.SELECT_USER_ID_BY_PROPERTY").getSql(),  new Object[]{ propertyName , propertyValue }, new int [] {Types.VARCHAR, Types.VARCHAR}, Integer.class);
+		return getExtendedJdbcTemplate().queryForList( 
+				getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_PROPERTY").getSql(),  
+				new Object[]{ propertyName , propertyValue }, 
+				new int [] {Types.VARCHAR, Types.VARCHAR}, Integer.class);
 	}
 
-	public User getUser(User template){
-
+	/**
+	 * userID, username, email 순서로 사용자를 검색한다.
+	 * 
+	 * @param template
+	 * @return
+	 */
+	public User getUser(User template) {
 		User user = null;
-		try {
-			User retVal = null;
-			if (template.getUserId() > 0L)
-				retVal = getUserById(template.getUserId());
-			if (null == retVal)
-				retVal = getUserByUsername(template.getUsername());
-			if (null == retVal)
-				retVal = getUserByEmail(template.getUsername());
-			if (null == retVal)
-				log.info((new StringBuilder()).append("No match found for user ").append(template).append(".").toString());
-			user = retVal;
-		} catch (Throwable throwable) {
-//			/throw throwable;
-		}
+		User retVal = null;
+		// 1. ID 로 검색
+		if (template.getUserId() > 0L)
+			retVal = getUserById(template.getUserId());
+		// 2. 로그인 아이디로 검색
+		if (null == retVal)
+			retVal = getUserByUsername(template.getUsername());
+		// 3. 메일로 검색
+		if (null == retVal)
+			retVal = getUserByEmail(template.getUsername());
+
+		if (null == retVal)
+			log.info((new StringBuilder()).append("No match found for user ")	.append(template).append(".").toString());
+		user = retVal;
 		return user;
 	}
 	
+	/**
+	 * 새로운 사용자를 생성한다.
+	 * 
+	 * @param u
+	 */
 	public User create(User u) {
 		UserTemplate user = new UserTemplate(u);
 		if(user.getEmail() == null)
@@ -150,10 +167,14 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		user.setEmail(user.getEmail().toLowerCase());
 	    if(user.getStatus() == null)
 	        user.setStatus(User.Status.registered);
+	    
 	    boolean useLastNameFirstName = user.getFirstName() != null && user.getLastName() != null;
 	    	    
 	    try {
-			getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.CREATE_USER").getSql(), new Object[]{
+	    	
+	    	Date now = new Date();
+	    	
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.CREATE_USER").getSql(), new Object[]{
 				userId,
 				user.getUsername(), 
 				user.getPasswordHash(), 
@@ -163,15 +184,37 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 				useLastNameFirstName ? user.getLastName() : null,
 				user.getEmail(),
 				user.isEmailVisible() ? 1 : 0,
-				user.getLastLoggedIn() != null ? user.getLastLoggedIn() : null,		
-				user.getLastProfileUpdate() != null ? user.getLastProfileUpdate() : null,
+				user.getLastLoggedIn() != null ? user.getLastLoggedIn() : now,		
+						
+				user.getLastProfileUpdate() != null ? user.getLastProfileUpdate() : now,
 				user.isEnabled() ? 1 : 0,
 				1,
 				user.isExternal() ? 1 : 0,
 				user.isFederated() ? 1 : 0,
 				user.getStatus().getId(),
-				user.getCreationDate() != null ? user.getCreationDate() : null,
-				user.getModifiedDate() != null ? user.getModifiedDate() : null		
+				user.getCreationDate() != null ? user.getCreationDate() : now,
+				user.getModifiedDate() != null ? user.getModifiedDate() : now		
+			},
+			new int [] {
+				Types.NUMERIC,
+				Types.VARCHAR,
+				Types.VARCHAR,
+				Types.VARCHAR,
+				Types.NUMERIC,
+				Types.VARCHAR,
+				Types.VARCHAR,
+				Types.VARCHAR,
+				Types.NUMERIC,			
+				Types.DATE,
+				
+				Types.DATE,
+				Types.NUMERIC,
+				Types.NUMERIC,
+				Types.NUMERIC,
+				Types.NUMERIC,
+				Types.NUMERIC,
+				Types.DATE,
+				Types.DATE
 			});				
 			setUserProperties(user.getUserId(), user.getProperties());
 		} catch (DataAccessException e) {
@@ -186,7 +229,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		boolean useLastNameFirstName = user.getFirstName() != null && user.getLastName() != null;
 		try{
 			
-			getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_USER").getSql(), 
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_USER").getSql(), 
 				new Object[]{
 				    useLastNameFirstName ? null : user.getName(),
 				    useLastNameFirstName ? user.getFirstName() : null, 
@@ -216,7 +259,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	public User getUserByUsername(String username) {
 		UserTemplate user = null;		
 		try {
-			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_USER_BY_USERNAME").getSql(), new Object[] {username}, new int[] {Types.VARCHAR} , userMapper );
+			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_USERNAME").getSql(), new Object[] {username}, new int[] {Types.VARCHAR} , userMapper );
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (EmptyResultDataAccessException e) {
 			String message = (new StringBuilder()).append("Failure attempting to load user by case-insensitive username '").append(username).append("'.").toString();
@@ -231,7 +274,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	public User getUserByUsernameNoCase(String username) {
 		UserTemplate user = null;		
 		try {
-			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_USER_BY_USERNAME").getSql(), new Object[] { username.toLowerCase()}, new int[] {Types.VARCHAR}, userMapper );
+			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_USERNAME").getSql(), new Object[] { username.toLowerCase()}, new int[] {Types.VARCHAR}, userMapper );
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (EmptyResultDataAccessException e) {
 			String message = (new StringBuilder()).append("Failure attempting to load user by case-insensitive username '").append(username).append("'.").toString();
@@ -250,7 +293,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		{
 			String emailMatch = email.replace('*', '%');
 			try {				
-				UserTemplate user = getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_USER_BY_ENAIL").getSql(), userMapper, new Object[]{emailMatch}, new int[]{Types.VARCHAR});
+				UserTemplate user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ENAIL").getSql(), userMapper, new Object[]{emailMatch}, new int[]{Types.VARCHAR});
 				user.setProperties(getUserProperties(user.getUserId()));
 				usertemplate = user;
 			} catch (IncorrectResultSizeDataAccessException e) {
@@ -275,7 +318,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		
 		UserTemplate user = null;
 		try {
-			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("FRAMEWORK_V2.SELECT_USER_BY_ID").getSql(), userMapper, new Object[]{userId}, new int[]{Types.INTEGER});
+			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ID").getSql(), userMapper, new Object[]{userId}, new int[]{Types.INTEGER});
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (IncorrectResultSizeDataAccessException e) {
 			if(e.getActualSize() > 1)
@@ -292,9 +335,9 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public void delete(User user) {		
-        getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.DELETE_GROUP_MEMBERSHIP").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});
+        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_MEMBERSHIP").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});
         extendedPropertyDao.deleteProperties(userPropertyTableName, userPropertyPrimaryColumnName, user.getUserId());
-        getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.DELETE_USER_BY_ID").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});        
+        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_USER_BY_ID").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});        
 	}
 
 	public Map<String, String> getUserProperties(long userId) {
@@ -306,7 +349,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> getApplicationUsers() {	
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_ENABLED_USER").getSql(), userMapper2);
+		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_ENABLED_USER").getSql(), userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -314,7 +357,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> getApplicationUsers(int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_ENABLED_USER").getSql(), startIndex, numResults, new Object[0], new int[0], userMapper2);
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_ENABLED_USER").getSql(), startIndex, numResults, new Object[0], new int[0], userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -322,23 +365,23 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public int getTotalUserCount() {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.COUNT_VISIBLE_USER").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_VISIBLE_USER").getSql());
 	}
 
 	public int getApplicationUserCount() {	
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.COUNT_ENABLED_USER").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ENABLED_USER").getSql());
 	}
 	
 	public int getAuthenticatedUserCount() {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.COUNT_AUTHENTICATED_USER").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_AUTHENTICATED_USER").getSql());
 	}
 
 	public int getRecentUserCount(Date date) {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.COUNT_RECENT_USER").getSql(), new Object[]{date}, new int[]{Types.DATE});
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_RECENT_USER").getSql(), new Object[]{date}, new int[]{Types.DATE});
 	}
 
 	public List<User> getAllUsers() {
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_VISIBLE_USER").getSql(), userMapper2);
+		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_VISIBLE_USER").getSql(), userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -346,7 +389,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> getAllUsers(int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("FRAMEWORK_V2.SELECT_ALL_VISIBLE_USER").getSql(), startIndex, numResults, new Object[0], new int[0], userMapper2);
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_VISIBLE_USER").getSql(), startIndex, numResults, new Object[0], new int[0], userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -354,8 +397,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<Integer> getUserIdsWithStatuses(int[] status) {
-		//SELECT_USER_ID_BY_STATUS
-		return getExtendedJdbcTemplate().queryForList(getBoundSqlWithAdditionalParameter("FRAMEWORK_V2.SELECT_USER_ID_BY_STATUS", status).getSql(), Integer.class);
+		return getExtendedJdbcTemplate().queryForList(getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_STATUS", status).getSql(), Integer.class);
 	}
     
 }
