@@ -15,9 +15,9 @@
  */
 package architecture.common.user;
 
-import architecture.common.exception.CodeableRuntimeException;
+import architecture.common.exception.CodeableException;
 
-public class UserNotFoundException extends CodeableRuntimeException {
+public class UserNotFoundException extends CodeableException {
 
 	public UserNotFoundException() {
 		super();
