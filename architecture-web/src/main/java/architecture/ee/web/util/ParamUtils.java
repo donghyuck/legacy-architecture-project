@@ -30,6 +30,11 @@ public class ParamUtils extends ServletRequestUtils {
     public ParamUtils()
     {
     }
+    
+    public static Map getParametersAsMap(HttpServletRequest request){
+    	return request.getParameterMap();
+    }
+    
     /**
      * Json 형식의 문자열을 Map 타입의 데이터로 변환한다.
      * @param request

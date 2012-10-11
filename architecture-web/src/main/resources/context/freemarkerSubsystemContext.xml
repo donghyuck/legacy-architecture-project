@@ -18,6 +18,7 @@
 	
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="defaultEncoding" value="UTF-8" />
 		<property name="templateLoaderPaths">
 			<list>
 				<value>/</value>
@@ -38,8 +39,12 @@
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
 		<property name="cache" value="true" />
 		<property name="prefix" value="" />
-		<property name="suffix" value=".ftl" />
+		<property name="suffix" value=".ftl" />		
+		<!-- <property name="contentType" value="text/html; charset=UTF-8" />-->
+		<property name="exposeSessionAttributes" value="true" />
+		<property name="requestContextAttribute" value="context" />
 		<property name="exposeSpringMacroHelpers" value="true" />
+		
 	</bean>
 
 </beans>
