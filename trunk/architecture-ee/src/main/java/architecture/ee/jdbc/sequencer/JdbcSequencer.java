@@ -113,12 +113,12 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
     
     private long createNewID(int type) {
     	long newID = 1L ;    	
-        getJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_SEQUENCER").getSql(), new Object[]{newID, name, type}, new int[]{Types.INTEGER, Types.VARCHAR, Types.INTEGER });    
+        getJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.INSERT_SEQUENCER").getSql(), new Object[]{newID, name, type}, new int[]{Types.INTEGER, Types.VARCHAR, Types.INTEGER });    
         return newID;
     }
     
     private int getNextSequencerId(){
-    	int max = getJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_MAX_ID").getSql());
+    	int max = getJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_SEQUENCER_MAX_ID").getSql());
     	return max + 1; 
     }
     
@@ -134,7 +134,7 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
         boolean success = false;
         long currentID = 1;
         try {
-            currentID = getJdbcTemplate().queryForLong( getBoundSql("FRAMEWORK_V2.SELECT_SEQUENCER_BY_ID").getSql(), new Object[] { this.type }, new int[] { Types.INTEGER });
+            currentID = getJdbcTemplate().queryForLong( getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_SEQUENCER_BY_ID").getSql(), new Object[] { this.type }, new int[] { Types.INTEGER });
         } catch (IncorrectResultSizeDataAccessException e) {
             // 해당 값이 없는 경우 생성한다.
         	this.type = getNextSequencerId();     
@@ -150,7 +150,7 @@ public class JdbcSequencer extends JdbcDaoSupport implements Sequencer {
         // that an update will occur only if nobody else has performed an
         // update first.
         success = (1 == getJdbcTemplate().update( 
-        		getBoundSql("FRAMEWORK_V2.UPDATE_SEQUENCER").getSql(),
+        		getBoundSql("ARCHITECTURE_FRAMEWORK.UPDATE_SEQUENCER").getSql(),
                 new Object[] { newID, type, currentID },
                 new int[] { Types.INTEGER, Types.INTEGER, Types.INTEGER }));
         // Check to see if the row was affected. If not, some other process

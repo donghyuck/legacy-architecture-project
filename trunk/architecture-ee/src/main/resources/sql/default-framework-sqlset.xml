@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <sqlset>
-    <name>FRAMEWORK_V2</name>
+    <name>ARCHITECTURE_FRAMEWORK</name>
+    <version>2.0</version>
     <description>Queries for COMMON</description>
-    <version></version>
 
 	<!-- ============================================== -->
 	<!-- V2_LOCALIZED_PROPERTY                                                     -->

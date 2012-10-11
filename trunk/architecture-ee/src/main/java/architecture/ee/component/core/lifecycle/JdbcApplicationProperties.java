@@ -231,11 +231,11 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
 			if (localized) {
 				String baseKey = StringUtils.substringBeforeLast(name, ".");
 				String localeCode = StringUtils.substringAfterLast(name, ".");
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_LOCALIZED_PROPERTY").getSql(), 
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.INSERT_LOCALIZED_PROPERTY").getSql(), 
 						new Object[]{ baseKey, value, localeCode }, 
 						new int []{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR });
 			} else {
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.INSERT_PROPERTY").getSql(), 
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.INSERT_PROPERTY").getSql(), 
 						new Object[]{  name, value }, 
 						new int []{Types.VARCHAR, Types.VARCHAR });
 			}
@@ -248,13 +248,13 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
 				String baseKey = StringUtils.substringBeforeLast(name, ".");
 				String localeCode = StringUtils.substringAfterLast(name, ".");
 				
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.DELETE_LOCALIZED_PROPERTY").getSql(), new Object[]{ 
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.DELETE_LOCALIZED_PROPERTY").getSql(), new Object[]{ 
 					(new StringBuilder()).append(baseKey).append("%").toString(), 
 					(new StringBuilder()).append(localeCode).append("%").toString()
 				}, new int []{Types.VARCHAR, Types.VARCHAR });
 
 			} else {
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.DELETE_PROPERTY").getSql(), new Object[]{ 
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.DELETE_PROPERTY").getSql(), new Object[]{ 
 					(new StringBuilder()).append(name).append(".%").toString()
 				}, new int []{Types.VARCHAR });
 			}
@@ -266,11 +266,11 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
 			if (localized) {
 				String baseKey = StringUtils.substringBeforeLast(name, ".");
 	            String localeCode = StringUtils.substringAfterLast(name, ".");	            
-	            getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_LOCALIZED_PROPERTY").getSql(), 
+	            getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.UPDATE_LOCALIZED_PROPERTY").getSql(), 
 	            		new Object[] { value, baseKey, localeCode }, 
 	            		new int[]{Types.VARCHAR, Types.VARCHAR, Types.VARCHAR} );           
 			} else {				
-				getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_PROPERTY").getSql(), 
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_FRAMEWORK.UPDATE_PROPERTY").getSql(), 
 						new Object[] { value, name }, 
 						new int[]{ Types.VARCHAR, Types.VARCHAR } );
 			}
@@ -283,7 +283,7 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
     		    	    
 			Map rs ;			
 			if(localized){
-				rs = getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_LOCALIZED_PROPERTY").getSql(), new ResultSetExtractor<Map<String, String>>(){
+				rs = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_ALL_LOCALIZED_PROPERTY").getSql(), new ResultSetExtractor<Map<String, String>>(){
 						public Map<String, String> extractData(ResultSet rs) throws SQLException, DataAccessException {
 							Map<String, String> map = new HashMap<String, String> ();
 							while(rs.next()){					
@@ -297,7 +297,7 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
 							return map;
 						}});
     	    }else{
-				rs = getExtendedJdbcTemplate().query(getBoundSql("FRAMEWORK_V2.SELECT_ALL_PROPERTY").getSql(), new ResultSetExtractor<Map<String, String>>(){
+				rs = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_ALL_PROPERTY").getSql(), new ResultSetExtractor<Map<String, String>>(){
 					public Map<String, String> extractData(ResultSet rs) throws SQLException, DataAccessException {
 						Map<String, String> map = new HashMap<String, String> ();
 						
@@ -323,7 +323,7 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
     public List<Locale> getLocalesForProperty(String name){    	
     	ArrayList<Locale> list = new ArrayList<Locale>();
     	if( getJdbcTemplate() != null ){  
-    		List<String> locales = getExtendedJdbcTemplate().queryForList(getBoundSql("FRAMEWORK_V2.SELECT_LOCALES").getSql(), new Object[]{name}, new int[]{Types.VARCHAR}, String.class);
+    		List<String> locales = getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_LOCALES").getSql(), new Object[]{name}, new int[]{Types.VARCHAR}, String.class);
     		for(String localeCode : locales){
     			list.add(LocaleUtils.localeCodeToLocale(localeCode));
     		}

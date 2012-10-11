@@ -88,7 +88,7 @@ public class SequencerFactory {
 	public Map<Integer, Sequencer> getAllSequencer() {		
 		Map<Integer, Sequencer> sequencers = new HashMap<Integer, Sequencer>();		
 		JdbcTemplate template = new JdbcTemplate(dataSource);		
-		MappedStatement stmt = configuration.getMappedStatement("FRAMEWORK_V2.SELECT_ALL_SEQUENCER");		
+		MappedStatement stmt = configuration.getMappedStatement("ARCHITECTURE_FRAMEWORK.SELECT_ALL_SEQUENCER");		
 		List<JdbcSequencer> list = template.query(
 				stmt.getBoundSql(null).getSql(), 
 				new ResultSetExtractor<List<JdbcSequencer>>() {

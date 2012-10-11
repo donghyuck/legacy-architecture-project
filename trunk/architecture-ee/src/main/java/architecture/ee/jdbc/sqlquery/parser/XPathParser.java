@@ -212,8 +212,7 @@ public class XPathParser {
 		try {
 			return xpath.evaluate(expression, root, returnType);
 		} catch (Exception e) {
-			throw new BuilderException("Error evaluating XPath.  Cause: " + e,
-					e);
+			throw new BuilderException("Error evaluating XPath.", e);
 		}
 	}
 

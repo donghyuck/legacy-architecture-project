@@ -257,6 +257,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 					log.debug("No startup file now create !!!");					
 					Writer writer = null;
 					try {			
+						
 						writer = new OutputStreamWriter(new FileOutputStream(file), ApplicationConstants.DEFAULT_CHAR_ENCODING);
 						XMLWriter xmlWriter = new XMLWriter(writer, OutputFormat.createPrettyPrint());
 						StringBuilder sb = new StringBuilder();					
@@ -265,10 +266,36 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 						// setup start ------------------------------------------------------------
 						org.dom4j.Element setupNode = root.addElement("setup");
 						setupNode.addElement("complete").setText("false");
-						//org.dom4j.Element servicesNode = root.addElement("services");
-						//servicesNode.addElement("");
-						
 						// setup end --------------------------------------------------------------
+						// license start 
+						org.dom4j.Element licenseNode = root.addElement("license");						
+						// license end 
+						// view start 
+						org.dom4j.Element viewNode = root.addElement("view");			
+						org.dom4j.Element renderNode = viewNode.addElement("render");
+						org.dom4j.Element freemarkerNode = renderNode.addElement("freemarker");
+						freemarkerNode.addElement("enabled").setText("true");
+						freemarkerNode.addElement("source").addElement("location");
+						org.dom4j.Element velocityNode = renderNode.addElement("velocity");
+						velocityNode.addElement("enabled").setText("false");
+						// view end 
+						// security start 
+						org.dom4j.Element securityNode = root.addElement("security");		
+						securityNode.addElement("authentication").addElement("encoding").addElement("algorithm").setText("SHA-256") ;
+						// security end 
+						
+						// scripting start
+						org.dom4j.Element scriptingNode = root.addElement("scripting");		
+						org.dom4j.Element groovyNode = scriptingNode.addElement("groovy");
+						groovyNode.addElement("debug").setText("false");
+						org.dom4j.Element sourceGroovyNode = groovyNode.addElement("source");
+						sourceGroovyNode.addElement("location");
+						sourceGroovyNode.addElement("encoding").setText( ApplicationConstants.DEFAULT_CHAR_ENCODING );
+						sourceGroovyNode.addElement("recompile").setText("true");
+						// scripting end
+						// database start
+						
+						// database end
 						xmlWriter.write( document );					
 					}catch(Exception e)
 			        {

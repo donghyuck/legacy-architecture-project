@@ -51,7 +51,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 	
 	public void createTexts(List<I18nText> list) {
 		final List<I18nText> textsToUse = list ;
-		getExtendedJdbcTemplate().batchUpdate(getBoundSql("FRAMEWORK_V2.INSERT_I18N_OBJECT_TEXT").getSql(),			    
+		getExtendedJdbcTemplate().batchUpdate(getBoundSql("ARCHITECTURE_FRAMEWORK.INSERT_I18N_OBJECT_TEXT").getSql(),			    
 				new BatchPreparedStatementSetter(){
 						public void setValues(PreparedStatement ps, int i) throws SQLException {
 							for( I18nText text : textsToUse ){
@@ -73,7 +73,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 
 	public void updateTexts(List<I18nText> list) {
 		final List<I18nText> textsToUse = list ;
-		getExtendedJdbcTemplate().batchUpdate(getBoundSql("FRAMEWORK_V2.UPDATE_I18N_OBJECT_TEXT").getSql(),
+		getExtendedJdbcTemplate().batchUpdate(getBoundSql("ARCHITECTURE_FRAMEWORK.UPDATE_I18N_OBJECT_TEXT").getSql(),
 			    new BatchPreparedStatementSetter(){
 					public void setValues(PreparedStatement ps, int i) throws SQLException {
 						for( I18nText text : textsToUse ){
@@ -91,7 +91,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 	public void deleteTexts(List<I18nText> list) {
 		final List<I18nText> textsToUse = list ;
 		getExtendedJdbcTemplate().batchUpdate(
-				getBoundSql("FRAMEWORK_V2.DELETE_I18N_OBJECT_TEXT").getSql(),
+				getBoundSql("ARCHITECTURE_FRAMEWORK.DELETE_I18N_OBJECT_TEXT").getSql(),
 			    	new BatchPreparedStatementSetter(){
 						public void setValues(PreparedStatement ps, int i) throws SQLException {
 							for( I18nText text : textsToUse ){
@@ -105,7 +105,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 
 	public I18nText getText(long textId) {
 		return getExtendedJdbcTemplate().queryForObject(
-				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_ID").getSql(), 
+				getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_I18N_OBJECT_TEXT_BY_ID").getSql(), 
 				new Object[]{textId}, 
 				new int[]{Types.INTEGER}, 
 				new I18nTextRowMapper());
@@ -113,13 +113,13 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 
 	public List<I18nText> getTexts() {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("FRAMEWORK_V2.SELECT_ALL_I18N_OBJECT_TEXT").getSql(), 
+				getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_ALL_I18N_OBJECT_TEXT").getSql(), 
 				new I18nTextRowMapper());
 	}
 
 	public List<I18nText> getTexts(Locale locale) {		
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_LOCALE").getSql(), 
+				getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_I18N_OBJECT_TEXT_BY_LOCALE").getSql(), 
 				new Object[]{locale.toString()}, 
 				new int[]{ Types.VARCHAR }, 
 				new I18nTextRowMapper());
@@ -127,7 +127,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 
 	public List<I18nText> getTexts(int objectType) {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE").getSql(), 
+				getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE").getSql(), 
 				new Object[]{objectType}, 
 				new int[]{Types.INTEGER}, 
 				new I18nTextRowMapper());
@@ -135,7 +135,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 
 	public List<I18nText> getTexts(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
 				new Object[]{objectType, objectId}, 
 				new int[]{Types.INTEGER, Types.INTEGER}, 
 				new I18nTextRowMapper());
@@ -143,7 +143,7 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 
 	public List<I18nText> getTexts(int objectType, String locale) {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("FRAMEWORK_V2.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_LOCALE").getSql(), 
+				getBoundSql("ARCHITECTURE_FRAMEWORK.SELECT_I18N_OBJECT_TEXT_BY_OBJECT_TYPE_AND_LOCALE").getSql(), 
 				new Object[]{objectType, locale}, 
 				new int[]{Types.INTEGER, Types.VARCHAR}, 
 				new I18nTextRowMapper());

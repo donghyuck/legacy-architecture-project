@@ -46,7 +46,6 @@ import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.schema.Database;
 import architecture.common.jdbc.schema.Table;
 import architecture.common.util.L10NUtils;
-import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.exception.ApplicationException;
 import architecture.ee.services.SqlQueryCallback;
 import architecture.ee.services.SqlQueryClient;
@@ -145,7 +144,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 			hasError = true;
 		}
 
-		ApplicationHelper.getEventPublisher().publish("");
+	//	ApplicationHelper.getEventPublisher().publish("");
 
 	}
 
@@ -321,7 +320,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 
 		try {						
 			
-			Class groovyClass = AdminHelper.getGroovyClassLoader().loadClass(scriptName, true, false);
+			Class groovyClass = ApplicationHelper.loadClass(scriptName, true, false);
 			GroovyObject groovyObject = (GroovyObject)groovyClass.newInstance();			
 			if (groovyObject instanceof UnitOfWork && !StringUtils.isEmpty(methodName)) {				
 				if( groovyObject instanceof UnitOfWorkForSqlQuery ){

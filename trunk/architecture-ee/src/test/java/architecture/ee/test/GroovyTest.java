@@ -98,7 +98,7 @@ public class GroovyTest {
 	}
 	
 	
-	@Test
+	//@Test
 	public void testGroovyClassLoader(){
 		try {
 			String uri = "C:/Users/donghyuck/workspace/architecture-example-default/WebContent/WEB-INF/groovy";

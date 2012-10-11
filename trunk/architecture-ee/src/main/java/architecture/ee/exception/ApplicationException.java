@@ -15,31 +15,21 @@
  */
 package architecture.ee.exception;
 
-import java.text.DecimalFormat;
-
-import org.apache.commons.lang.exception.NestableException;
-
-import architecture.common.exception.Codeable;
+import architecture.common.exception.CodeableException;
+import architecture.common.util.L10NUtils;
 
 /**
  * @author  donghyuck
  */
-public class ApplicationException extends NestableException implements Codeable {
-
-	private static final DecimalFormat decimalformat = new DecimalFormat("0000000");
-	
-	/**
-	 * error code 값이 60000 이상인 경우는 DB 에서 정보를 가져온다.
-	 * @uml.property  name="errorCode"
-	 */
-	private int errorCode = 60000 ;
+public class ApplicationException extends CodeableException {
 	
 	public ApplicationException() {
 		super();
 	}
 
 	public ApplicationException(int errorCode) {
-		this.errorCode = errorCode;
+		super();
+		setErrorCode( errorCode );
 	}
 
 	public ApplicationException(String msg, Throwable cause) {
@@ -49,7 +39,7 @@ public class ApplicationException extends NestableException implements Codeable 
 	public ApplicationException(int errorCode, String msg, Throwable cause) {
 		
 		super(msg, cause);
-		this.errorCode = errorCode;
+		setErrorCode( errorCode );
 	}
 	
 
@@ -59,7 +49,7 @@ public class ApplicationException extends NestableException implements Codeable 
 
 	public ApplicationException(int errorCode, String msg) {
 		super(msg);
-		this.errorCode = errorCode;
+		setErrorCode( errorCode );
 	}
 	
 	public ApplicationException(Throwable cause) {
@@ -68,19 +58,35 @@ public class ApplicationException extends NestableException implements Codeable 
 
 	public ApplicationException(int errorCode, Throwable cause) {
 		super(cause);
-		this.errorCode = errorCode;
-	}
-	
-	/**
-	 * @return
-	 * @uml.property  name="errorCode"
-	 */
-	public int getErrorCode() {
-		return errorCode;
+		setErrorCode( errorCode );
 	}
 
-	public String getErrorCodeString() {
-		return decimalformat.format(errorCode);
-	}
+	public static ApplicationException createApplicationException(Throwable cause, int code, Object...args){
+			if( code < 60000){
+				String codeString = L10NUtils.codeToString(code);
+				String msg = L10NUtils.format(codeString, args);
+				ApplicationException e = new ApplicationException(msg, cause);
+				e.setErrorCode(code);
+				return e;
+			} else {
+				ApplicationException e = new ApplicationException(cause);
+				e.setErrorCode(code);
+				return e;
+			}
+  }
+
+public static ApplicationException createApplicationException(Throwable cause, int code){
+		if( code < 60000){
+			String codeString = L10NUtils.codeToString(code);
+			String msg = L10NUtils.getMessage(codeString);
+			ApplicationException e = new ApplicationException(msg, cause);
+			e.setErrorCode(code);
+			return e;
+		} else {
+			ApplicationException e = new ApplicationException(cause);
+			e.setErrorCode(code);
+			return e;
+		}
+}
 
 }
