@@ -1,16 +1,62 @@
 package architecture.common.util;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 public class PlatformHelper {
 
+	public enum Platform {
+		
+		WINDOWS(';'),UNIX(':');
+		
+		public final char pathSeparator;
+		
+		private Platform(char pathSeparator) {
+	        this.pathSeparator = pathSeparator;
+	    }
+		
+		public static Platform current() {			
+	        if(File.pathSeparatorChar==':') return UNIX;
+	        return WINDOWS;
+	    }
+		
+	}
+	
+	public static Platform currentPlatform(){
+		return Platform.current();
+	}
+	
+	
 	public static void main(String [] args ){
 		
 		showOS();
 	}
+	
+	public static String getName(){
+		return System.getProperty("os.name").toUpperCase(Locale.ENGLISH);
+	}
+	
+	public static VersionNumber getVersionNumber(){
+		return new VersionNumber(System.getProperty("os.version"));		
+	}	
+	
+	public static boolean isDarwin() {
+        // according to http://developer.apple.com/technotes/tn2002/tn2110.html
+        return System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac");
+    }
+	
+	public static boolean isSnowLeopardOrLater() {
+        try {
+            return isDarwin() && new VersionNumber(System.getProperty("os.version")).compareTo(new VersionNumber("10.6"))>=0;
+        } catch (IllegalArgumentException e) {
+            // failed to parse the version
+            return false;
+        }
+    }	
 	
 	public static void showOS(){
 	    

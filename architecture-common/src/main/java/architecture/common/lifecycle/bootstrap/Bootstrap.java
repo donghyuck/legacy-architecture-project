@@ -69,7 +69,7 @@ public class Bootstrap {
 	 * 부스트랩 클래스로더를 리턴한다.
 	 * @return
 	 */
-	public static ClassLoader getBootstrapClassLoader(){
+	public static ClassLoader getBootstrapContextClassLoader(){
 		return getBootstrapApplicationContext().getClassLoader();
 	}
 	

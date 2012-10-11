@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.user.authentication;
 
 import java.io.Serializable;
@@ -147,10 +162,6 @@ public class AnonymousUser implements AuthToken, User {
 		return false;
 	}
 
-	public Status getStatus() {
-		return Status.none;
-	}
-
 	public int compareTo(User o) {
 		return 0;
 	}
@@ -163,45 +174,36 @@ public class AnonymousUser implements AuthToken, User {
 		return true;
 	}
 
-	@Override
-	public Object clone() {
-		return new AnonymousUser();
-	}
-
-
-	public boolean isNew() {
-		return false;
-	}
-
-
-	public void setNew(boolean n) {		
-	}
-
-
 	public Serializable getPrimaryKeyObject() {
 		return ANONYMOUS_ID;
 	}
 
-
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {		
 	}
 
-
-	public void setCreationDate(Date creationDate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void setModifiedDate(Date modifiedDate) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
 	public int getCachedSize() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
+	public Date getLastProfileUpdated() {
+		return null;
+	}
+
+	public boolean isSetNameVisbleSupported() {
+		return false;
+	}
+
+
+	public Status getStatus() {
+		return null;
+	}
+
+
+	public void setCreationDate(Date creationDate) {	
+	}
+
+
+	public void setModifiedDate(Date modifiedDate) {		
+	}
 }
