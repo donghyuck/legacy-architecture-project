@@ -193,7 +193,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		User user = getUser(newUser);
 		if(null != user)
         {
-            UserAlreadyExistsException e = CodeableException.newException(UserAlreadyExistsException.class, 5110, user.toString()) ;
+            UserAlreadyExistsException e = CodeableException.newException(UserAlreadyExistsException.class, 5110, user.getUsername()) ;
             log.info(e.getMessage());
             throw e;
         }
