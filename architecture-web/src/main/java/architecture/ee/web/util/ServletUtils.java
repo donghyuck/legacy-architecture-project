@@ -23,6 +23,7 @@ import architecture.ee.util.OutputFormat;
 
 public class ServletUtils {
 	
+	
 	public static String getServletPath(HttpServletRequest request) {
 		String thisPath = request.getServletPath();
 		if (thisPath == null) {
