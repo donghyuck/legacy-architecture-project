@@ -16,6 +16,8 @@
    
 package architecture.ee.web.util;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -23,7 +25,16 @@ import architecture.ee.util.OutputFormat;
 
 public class ServletUtils {
 	
-	
+    public static Map getModelMap(HttpServletRequest request, HttpServletResponse response) {
+		ModelMap modelMap = (ModelMap) request.getAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
+		if (modelMap == null) {
+			modelMap = new ModelMap();
+		}
+		return modelMap;
+	}
+    
+    
+        
 	public static String getServletPath(HttpServletRequest request) {
 		String thisPath = request.getServletPath();
 		if (thisPath == null) {
