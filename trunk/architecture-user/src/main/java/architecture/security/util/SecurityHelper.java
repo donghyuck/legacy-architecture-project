@@ -1,48 +1,41 @@
 package architecture.security.util;
 
+import org.springframework.security.core.Authentication;
+
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
+
 import architecture.common.util.ImplFactory;
 
 /**
- * @author  donghyuck
+ * 
+ * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
+ *
  */
 public class SecurityHelper {
 
 	
 	public static interface Implementation {
 		
-		public boolean isAnonymous();
+		public void checkUserStatus(String username, User.Status status);
 		
-/*		public boolean isAnonymous(Authentication authen);
+		public Authentication getAuthentication();
 		
-		public  boolean isApplicaitonUser();
-		
-		public  AuthToken getAuthToke();
+		public AuthToken getAuthToke();
 		
 		public User getUser();
 		
-		public Authentication getAuthentication();*/
 	}
-	
-	
-	/**
-	 */
+
 	private static Implementation impl = null;
     
     static 
     {
         impl = (Implementation)ImplFactory.loadImplFromKey(SecurityHelper.Implementation.class);
     }
-	
-    public static boolean isAnonymous(){
-    	return impl.isAnonymous();
-    }
-    /*
-    public static boolean isAnonymous(Authentication authen){
-    	return impl.isAnonymous(authen);
-    }
-    
-    public static boolean isApplicaitonUser(){
-    	return impl.isApplicaitonUser();
+
+    public static void checkUserStatus(String username, User.Status status){
+    	impl.checkUserStatus(username, status);
     }
     
     public static AuthToken getAuthToke(){
@@ -56,15 +49,5 @@ public class SecurityHelper {
 	public static Authentication getAuthentication(){
 		return impl.getAuthentication();
 	}	
-	*/
-/*	public static List<String> getUserRoles(){		
 		
-		Collection< ? extends GrantedAuthority> authorities = getAuthentication().getAuthorities();
-		List<String> list = new ArrayList<String>(authorities.size());		
-		for( GrantedAuthority authority : authorities ){
-			list.add( authority.getAuthority() );
-		}
-		return list;
-	}*/
-	
 }
