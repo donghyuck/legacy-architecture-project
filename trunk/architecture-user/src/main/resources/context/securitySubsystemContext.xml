@@ -1,4 +1,5 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:security="http://www.springframework.org/schema/security"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
@@ -8,46 +9,58 @@
        http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
        http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
-       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd 
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
 	<description>
 	<![CDATA[
-        Define Simple Security 
+        Define  Security 
 	]]>
-	</description>	
+	</description>
 
-	<bean id="userProviderCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userProviderCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+    <security:http pattern="/decorators/**"         security="none"/> 
+    <security:http pattern="/images/**"             security="none"/>
+    <security:http pattern="/includes/**"            security="none"/> 
+    <security:http pattern="/js/**"                    security="none"/>
+    <security:http pattern="/styles/**"               security="none"></security:http>
+    <security:http pattern="/404.jsp*"               security="none"/>
+    <security:http pattern="/500.jsp*"               security="none"/>
+    <security:http pattern="/login.jsp*"             security="none"/>    
+    <security:http pattern="/main.do*"              security="none"/>    
+    <security:http pattern="/member/signup.do*" security="none"/>
+    <security:http pattern="/member/token.do*"  security="none"/>
+    
+	<security:http auto-config='true'>
+		<security:intercept-url pattern="/**" access="ROLE_USER" />
+		<security:form-login login-page="/login.jsp"
+			login-processing-url="/login" 
+			username-parameter="username"
+			password-parameter="password"
+			authentication-failure-handler-ref="authenticationFailureHandler"
+			authentication-success-handler-ref="authenticationSuccessHandler" />
 
-	<bean id="userIDCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userIDCache" p:maxElementsInMemory="5000"
-		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
-		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-
-	<bean id="userCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
-		p:cacheName="userCache" p:maxElementsInMemory="5000" p:diskPersistent="false"
-		p:overflowToDisk="false" p:timeToIdle="30" p:timeToLive="60"
-		p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
-		
-	<bean id="userDao" class="architecture.security.user.dao.impl.JdbcUserDao"
-		parent="jdbcDaoSupport" 
-		depends-on="extendedPropertyDao"
-		p:extendedPropertyDao-ref="extendedPropertyDao" />
-
-	<bean id="userManager" class="architecture.security.user.MultiProviderUserManager"
-		depends-on="userDao, eventPublisher" 
-		p:userDao-ref="userDao"
-		p:eventPublisher-ref="eventPublisher" 
+	</security:http>
+	
+	<security:authentication-manager>
+		<security:authentication-provider ref="daoAuthenticationProvider" ></security:authentication-provider>
+	</security:authentication-manager>
+	
+	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" 
+	    p:defaultTargetUrl="/main.do" />
+	
+	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" 
+	    p:defaultFailureUrl="/includes/jsp/error.jsp" 
+	    p:useForward="true" />
+	
+	<bean id="daoAuthenticationProvider"
+		class="architecture.security.spring.authentication.ExtendedAuthenticationProvider"  
+		p:saltSource-ref="passwordSaltSource" 
 		p:passwordEncoder-ref="passwordEncoder"
-		p:saltSource-ref="passwordSaltSource"
-		p:userCache-ref="userCache"
-		p:userIdCache-ref="userIDCache" 
-		p:userProviderCache-ref="userProviderCache" />
-		
+		p:userDetailsService-ref="userDetailsService"
+		p:userManager-ref="userManager"/>
 
-    <bean id="passwordEncoder" class="architecture.security.spring.authentication.encoding.PasswordEncoderFactory" />    
-    <bean id="passwordSaltSource" class="architecture.security.spring.authentication.encoding.SaltSourceFactory" />
-
+	<bean id="userDetailsService"
+		class="architecture.security.spring.userdetails.ExtendedUserDetailsService"  
+		p:userManager-ref="userManager" />
+  
 </beans>
