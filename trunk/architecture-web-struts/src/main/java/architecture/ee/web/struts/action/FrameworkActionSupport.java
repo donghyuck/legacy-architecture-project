@@ -22,6 +22,21 @@ public abstract class FrameworkActionSupport extends
 
 	protected Log log;
 
+    public String cancel()
+    {
+        return "cancel";
+    }
+
+    public String input()
+    {
+        return "input";
+    }
+
+    public String success()
+    {
+        return "success";
+    }
+
 	public FrameworkActionSupport() {
 		log = LogFactory.getLog(getClass());
 	}

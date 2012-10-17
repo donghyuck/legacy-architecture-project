@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import architecture.ee.util.OutputFormat;
 import architecture.ee.web.struts.action.FrameworkActionSupport;
+import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.view.json.JsonView;
 
 public class GetTokenAction extends FrameworkActionSupport  {
@@ -23,14 +24,21 @@ public class GetTokenAction extends FrameworkActionSupport  {
 			throws Exception {
 		
 		OutputFormat output = getOutputFormat(request, response);		
+	
+		boolean doCreate = ParamUtils.getBooleanParameter(request, "create");
+		if( doCreate )
+		    saveToken(request);
+		
+		
 		Map model = getModelMap(request, response);
 		Map<String, String> item = new java.util.HashMap<String, String>() ; 
 		
-		String token = (String)request.getSession().getAttribute(org.apache.struts.Globals.TRANSACTION_TOKEN_KEY);				
+		String token = (String)request.getSession().getAttribute( org.apache.struts.Globals.TRANSACTION_TOKEN_KEY );
 		
 		item.put("success", "true");		
 		item.put("token", token );		
 		model.put("item", item );		
+		
 		saveModelMap(request, model);		
 		
 		if(output == OutputFormat.JSON ){
