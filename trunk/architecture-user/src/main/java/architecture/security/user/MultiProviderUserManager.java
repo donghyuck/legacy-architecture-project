@@ -46,7 +46,7 @@ import architecture.common.user.spi.UserProvider;
 import architecture.common.util.L10NUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.security.authentication.InvalidProviderUserException;
-import architecture.security.spring.authentication.ExtendedUserDetailsAdapter;
+import architecture.security.spring.userdetails.ExtendedUserDetailsAdaptor;
 import architecture.security.user.dao.UserDao;
 
 
@@ -730,7 +730,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             return null;
         try
         {
-            return passwordEncoder.encodePassword(passwd, saltSource.getSalt(new ExtendedUserDetailsAdapter(user)));
+            return passwordEncoder.encodePassword(passwd, saltSource.getSalt(new ExtendedUserDetailsAdaptor(user)));
         }
         catch(Exception ex)
         {
