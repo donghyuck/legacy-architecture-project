@@ -9,7 +9,7 @@ public class FrameworkExceptionHandler extends ExceptionHandler {
 	@Override
 	protected void logException(Exception e) {
 		
-		if(e instanceof Codeable){
+		if( e instanceof Codeable ){
 			
 		} else {			
 			

@@ -10,13 +10,13 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.exception.Codeable;
 import architecture.common.exception.ComponentNotFoundException;
-
+import architecture.common.user.User;
+import architecture.common.user.authentication.AuthToken;
 import architecture.ee.util.OutputFormat;
-
-import architecture.ee.web.util.ModelMap;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
+import architecture.security.util.SecurityHelper;
 
 public abstract class FrameworkDispatchActionSupport extends
 		org.springframework.web.struts.DispatchActionSupport {
@@ -47,16 +47,20 @@ public abstract class FrameworkDispatchActionSupport extends
 			return false;
 	}	
 	
+	protected User getUser (){
+		return SecurityHelper.getUser();
+	} 
+
+	protected AuthToken getAuthToken (){
+		return SecurityHelper.getAuthToken();
+	} 
+	
 	protected OutputFormat getOutputFormat(HttpServletRequest request, HttpServletResponse response){
 		return ServletUtils.getOutputFormat(request, response);
 	}
 	
 	protected Map getModelMap(HttpServletRequest request, HttpServletResponse response){
-		ModelMap modelMap =  (ModelMap) request.getAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
-            if (modelMap == null) {
-            	modelMap = new ModelMap();
-            }
-            return modelMap;		
+         return ServletUtils.getModelMap(request, response);		
 	}
 	
     protected void saveModelMap(HttpServletRequest request,  Map modelMap) {
