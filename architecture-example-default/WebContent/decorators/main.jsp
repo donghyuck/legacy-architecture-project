@@ -1,29 +1,20 @@
-<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator" %>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/page" prefix="page" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
   <head>
+    <title><decorator:title default="Main Page Templage ..." /></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title><decorator:title default="Main Page Templage ..." /></title>    
-        
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">        
+    <script src="<%= request.getContextPath()  %>/js/yepnope.js"></script>
+    <link href="<%= request.getContextPath()  %>/styles/normalize.css" rel="stylesheet" type="text/css" />
+    <link href="<%= request.getContextPath()  %>/styles/main.css" rel="stylesheet" type="text/css" />
+    <decorator:head />
   </head>
   <body>
-  <table>
-      <tr>
-          <td width="200"></td>
-          <td>상단 메뉴 위치</td>
-      </tr>  
-      <tr>
-          <td width="200"><td><decorator:head /></td>
-      </tr>   
-      <tr>
-          <td width="200"><td><decorator:body /></td>
-      </tr> 
-      
-       <tr>
-          <td width="200"><td>하단 공동 위치 </td>
-      </tr>                 
-  </table>
+  main
+  <decorator:body />
   </body>
 </html>

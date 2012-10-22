@@ -1,7 +1,8 @@
-<%@ page isErrorPage="true"
-         import="java.util.Locale,
+<%@ page  pageEncoding="UTF-8"  isErrorPage="true"
+         import="java.util.Locale, java.io.*,
                  architecture.common.exception.Codeable,
                  architecture.common.util.I18nTextUtils,
+                 architecture.common.util.L10NUtils,
                  architecture.ee.util.OutputFormat,
                  architecture.ee.web.util.WebApplicationHelper,
                  architecture.ee.web.util.ParamUtils" %><%
@@ -10,9 +11,14 @@
 	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);
 	
 	Throwable ex = exception;
+	
 	if( ex == null ){
 		// 스트럿츠 오류 처리
 		ex = (Throwable)request.getAttribute( org.apache.struts.Globals.EXCEPTION_KEY );
+	}
+	
+	if( ex == null ){
+		ex = (Throwable)request.getAttribute( org.springframework.security.web.WebAttributes.AUTHENTICATION_EXCEPTION );
 	}
 	
 	int objectType = 1;
@@ -45,5 +51,33 @@
 <%    	
     } else if (format == OutputFormat.JSON ) {
     	response.setContentType("application/json;charset=UTF-8");
-%>{"error":{ "locale" : <%= localeToUse %>, "code": <%= I18nTextUtils.generateResourceBundleKey(objectType, errorCode, objectAttribute ) %>, "exception" : <%= exceptionClassName  %>, "message" : <%= exceptionMessage == null ? "" : exceptionMessage %> }}<%	
-    } %>
+%>{"error":{ "locale" : "<%= localeToUse %>", "code": "<%= I18nTextUtils.generateResourceBundleKey(objectType, errorCode, objectAttribute ) %>", "exception" : "<%= exceptionClassName  %>", "message" : "<%= exceptionMessage == null ? "" : exceptionMessage %>" }}<%	
+    } else if (format == OutputFormat.HTML ) { 
+    	
+%><html>
+    <head> 
+        <title>오류가 발생했습니다.</title>
+    </head>
+    <body>
+      <%= errorCode %><p/>
+      <%= exceptionMessage == null ? "오류가발생됨" : exceptionMessage %><p/>
+      <%    
+      if(ex != null){
+    	  
+    	  StringWriter sout = new StringWriter();
+          PrintWriter pout = new PrintWriter(sout);
+          ex.printStackTrace(pout);
+          response.flushBuffer();
+          //response.setCharacterEncoding("UTF-8");
+          %>
+          <pre>
+          <%= sout.toString() %>
+          </pre>
+          <%    	  
+      }
+      %>
+    </body>
+</html>        
+<%
+    } 
+%>    
