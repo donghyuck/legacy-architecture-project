@@ -246,6 +246,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 				    user.getStatus() != null ? user.getStatus().none.getId() : user.getStatus().getId(),
 				    user.getUserId()				
 			});		
+			
 			setUserProperties(user.getUserId(), user.getProperties());
 
 		}catch(DataAccessException e){

@@ -17,50 +17,45 @@
         Define  Security 
 	]]>
 	</description>
-
-    <security:http pattern="/decorators/**"         security="none"/> 
-    <security:http pattern="/images/**"             security="none"/>
-    <security:http pattern="/includes/**"            security="none"/> 
-    <security:http pattern="/js/**"                    security="none"/>
-    <security:http pattern="/styles/**"               security="none"></security:http>
-    <security:http pattern="/404.jsp*"               security="none"/>
-    <security:http pattern="/500.jsp*"               security="none"/>
-    <security:http pattern="/login.jsp*"             security="none"/>    
-    <security:http pattern="/main.do*"              security="none"/>    
-    <security:http pattern="/member/signup.do*" security="none"/>
-    <security:http pattern="/member/token.do*"  security="none"/>
     
-	<security:http auto-config='true'>
-		<security:intercept-url pattern="/**" access="ROLE_USER" />
-		<security:form-login login-page="/login.jsp"
-			login-processing-url="/login" 
-			username-parameter="username"
-			password-parameter="password"
-			authentication-failure-handler-ref="authenticationFailureHandler"
-			authentication-success-handler-ref="authenticationSuccessHandler" />
+    <security:http pattern="/favicon.ico"              security="none" />
+    <security:http pattern="/decorators/**"          security="none" /> 
+    <security:http pattern="/images/**"              security="none" />
+    <security:http pattern="/includes/**"             security="none" /> 
+    <security:http pattern="/js/**"                     security="none" />
+    <security:http pattern="/styles/**"                security="none" />
+    <security:http pattern="/404.jsp*"                 security="none" />
+    <security:http pattern="/500.jsp*"                 security="none" />
+    <security:http pattern="/login.jsp*"               security="none" />
+    <security:http pattern="/member/signup.do*"  security="none" />
+    <security:http pattern="/common/token.do*"   security="none" />
+    <security:http pattern="/index.jsp"               security="none" />
 
-	</security:http>
-	
-	<security:authentication-manager>
-		<security:authentication-provider ref="daoAuthenticationProvider" ></security:authentication-provider>
+    <security:http>    	
+        <security:intercept-url pattern="/main.do*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>        
+        <security:intercept-url pattern="/**" access="ROLE_USER" />    	
+    	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
+    	<security:form-login 
+    	    login-page="/login.jsp" 
+    	    login-processing-url="/login" 
+    	    username-parameter="username" 
+    	    password-parameter="password" 
+    	    authentication-failure-handler-ref="authenticationFailureHandler" 
+    	    authentication-success-handler-ref="authenticationSuccessHandler" />
+    	<security:anonymous enabled="true" username="ANONYMOUS" />
+    	<security:session-management session-fixation-protection="newSession" />
+    </security:http>
+
+    <security:authentication-manager>
+		<security:authentication-provider ref="daoAuthenticationProvider" />
 	</security:authentication-manager>
 	
-	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" 
-	    p:defaultTargetUrl="/main.do" />
+	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" p:defaultTargetUrl="/main.do" />
 	
-	<bean id="authenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" 
-	    p:defaultFailureUrl="/includes/jsp/error.jsp" 
-	    p:useForward="true" />
+	<bean id="authenticationFailureHandler"  class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" p:defaultFailureUrl="/includes/jsp/error.jsp" p:useForward="true" />
 	
-	<bean id="daoAuthenticationProvider"
-		class="architecture.security.spring.authentication.ExtendedAuthenticationProvider"  
-		p:saltSource-ref="passwordSaltSource" 
-		p:passwordEncoder-ref="passwordEncoder"
-		p:userDetailsService-ref="userDetailsService"
-		p:userManager-ref="userManager"/>
+	<bean id="daoAuthenticationProvider" class="architecture.security.spring.authentication.ExtendedAuthenticationProvider"  p:saltSource-ref="passwordSaltSource"  p:passwordEncoder-ref="passwordEncoder" p:userDetailsService-ref="userDetailsService" p:userManager-ref="userManager"/>
 
-	<bean id="userDetailsService"
-		class="architecture.security.spring.userdetails.ExtendedUserDetailsService"  
-		p:userManager-ref="userManager" />
+	<bean id="userDetailsService" class="architecture.security.spring.userdetails.ExtendedUserDetailsService" p:userManager-ref="userManager" />
   
 </beans>
