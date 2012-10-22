@@ -8,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.cache.Cache;
 import architecture.common.cache.EhcacheWrapper;
-import architecture.ee.util.ApplicationHelper;
+import architecture.ee.component.admin.AdminHelper;
 
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.PrefixMethodInvocationUtil;
@@ -17,7 +17,7 @@ public class ExtendedPrefixMethodInvocationUtil extends PrefixMethodInvocationUt
 
     private static final Log log = LogFactory.getLog(ExtendedPrefixMethodInvocationUtil.class);
        
-    private static Cache<String, Boolean> cache = new EhcacheWrapper<String, Boolean>( ApplicationHelper.creatCache("Prefix lookup map", 0x1499700L));
+    private static Cache<String, Boolean> cache = new EhcacheWrapper<String, Boolean>( AdminHelper.getCache("Prefix lookup map"));
     
 	public static void invokePrefixMethod(ActionInvocation actionInvocation, String prefixes[]) throws InvocationTargetException, IllegalAccessException {
 		

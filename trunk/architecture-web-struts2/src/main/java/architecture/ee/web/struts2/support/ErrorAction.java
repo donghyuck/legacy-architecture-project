@@ -1,7 +1,8 @@
-package architecture.ee.web.struts2.action;
+package architecture.ee.web.struts2.support;
 
 import org.apache.commons.lang.StringUtils;
 
+import architecture.ee.web.struts2.action.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
 public class ErrorAction extends FrameworkActionSupport {

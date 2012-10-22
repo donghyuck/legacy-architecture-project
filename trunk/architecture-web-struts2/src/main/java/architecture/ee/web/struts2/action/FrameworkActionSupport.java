@@ -17,19 +17,21 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.authentication.AuthenticationProvider;
 
+import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
-import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.OutputFormat;
+import architecture.ee.web.struts2.interceptor.OutputFormatAware;
 import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
+import architecture.ee.web.util.WebApplicatioinConstants;
+import architecture.ee.web.util.WebApplicationHelper;
 import architecture.security.util.SecurityHelper;
 
 import com.opensymphony.xwork2.util.ValueStack;
 
-public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSupport 
-        implements SessionAware, ServletRequestAware, ServletResponseAware {
+public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSupport  implements SessionAware, ServletRequestAware, ServletResponseAware, OutputFormatAware {
 
 	public static final String CANCEL = "cancel";
 	public static final String NOTFOUND = "notfound";
@@ -38,8 +40,6 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 	public static final String UNAUTHENTICATED = "unauthenticated";
 	public static final String JSON = "json";
 	public static final String XML = "xml";
-		
-	protected String dataType = OutputFormat.HTML.name().toLowerCase();
 
 	protected final transient Log log = LogFactory.getLog(getClass());
 
@@ -51,6 +51,8 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 
 	protected AuthenticationProvider authProvider;
 
+	private OutputFormat outputFormat = OutputFormat.HTML ;
+	
 	private final FrameworkTextProvider textProvider = new FrameworkTextProvider(getClass(), this);
 	
 	private AuthToken authToken;
@@ -59,32 +61,7 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 	
 	protected Map<String, Object> models = new LinkedHashMap<String, Object>();
 
-	protected String view;
 	
-	public String getView() {
-		return view;
-	}
-
-	public void setView(String view) {
-		this.view = view;
-	}
-	
-	public Map<String, Object> getModels() {
-		return models;
-	}
-
-	public void setModels(Map<String, Object> models) {
-		this.models = models;
-	}
-	
-	public String getDataType() {
-		return dataType;
-	}
-
-	public void setDataType(String dataType) {
-		this.dataType = dataType.toLowerCase();
-	}
-
     public final void setAuthenticationProvider(AuthenticationProvider authProvider)
     {
         this.authProvider = authProvider;
@@ -102,13 +79,23 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 		this.session = session;
 	}
 
+	
+	
+	public OutputFormat getOutputFormat() {
+		return outputFormat;
+	}
+
+	public void setOutputFormat(OutputFormat outputFormat) {
+		this.outputFormat = outputFormat;
+	}
+
 	public void setAuthToken(AuthToken authToken) {
 		this.authToken = authToken;
 	}
 
 	public AuthToken getAuthToken() {
 		if ( null == authToken )
-			authToken = SecurityHelper.getAuthToke();
+			authToken = SecurityHelper.getAuthToken();
 		return authToken;
 	}
 
@@ -129,10 +116,33 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 		return user;
 	}
 
-	public <T> T getComponnet(final Class<T> requiredType) {
-		return ApplicationHelper.getComponent(requiredType);
+	
+	
+	public Map getModelMap(){
+		return ServletUtils.getModelMap(request, response);
+	}
+	
+    protected void saveModelMap(Map model) {
+        // Remove any error messages attribute if none are required
+        if ((model == null) || model.isEmpty()) {
+            request.removeAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
+            return;
+        }
+        // Save the error messages we need
+        request.setAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE, model);
+    }
+    
+	
+	protected final <T> T getComponent(Class<T> requiredType)
+			throws ComponentNotFoundException {
+		return WebApplicationHelper.getComponent(requiredType);
 	}
 
+	protected final <T> T getComponent(String requiredName, Class<T> requiredType)
+			throws ComponentNotFoundException {
+		return WebApplicationHelper.getComponent(requiredName, requiredType);
+	}
+	
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -196,50 +206,41 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 
 	@Override
 	public String getText(String aTextName, String defaultValue) {
-		// TODO Auto-generated method stub
 		return textProvider.getText(aTextName, defaultValue);
 	}
 
 	@Override
 	public String getText(String aTextName, String defaultValue, String obj) {
-		// TODO Auto-generated method stub
 		return textProvider.getText(aTextName, defaultValue, obj);
 	}
 
 	@Override
 	public String getText(String aTextName, List<?> args) {
-		// TODO Auto-generated method stub
 		return textProvider.getText(aTextName, args);
 	}
 
 	@Override
 	public String getText(String aTextName, String defaultValue, List<?> args) {
-		// TODO Auto-generated method stub
 		return textProvider.getText(aTextName, defaultValue, args);
 	}
 
 	@Override
 	public String getText(String key, String defaultValue, String[] args) {
-		// TODO Auto-generated method stub
 		return textProvider.getText(key, defaultValue, args);
 	}
 
 	@Override
-	public String getText(String key, String defaultValue, List<?> args,
-			ValueStack stack) {
-		// TODO Auto-generated method stub
+	public String getText(String key, String defaultValue, List<?> args, ValueStack stack) {
 		return textProvider.getText(key, defaultValue, args, stack);
 	}
 
 	@Override
 	public ResourceBundle getTexts() {
-		// TODO Auto-generated method stub
 		return textProvider.getTexts();
 	}
 
 	@Override
 	public ResourceBundle getTexts(String aBundleName) {
-		// TODO Auto-generated method stub
 		return textProvider.getTexts(aBundleName);
 	}
 		

@@ -1,6 +1,7 @@
-package architecture.ee.web.struts2.action;
+package architecture.ee.web.struts2.support;
 
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.struts2.action.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
 import com.opensymphony.xwork2.Validateable;
