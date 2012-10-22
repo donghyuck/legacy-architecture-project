@@ -64,7 +64,7 @@ public class JdbcExtendedPropertyDao extends ExtendedJdbcDaoSupport implements E
             deleteProperties(table, keyField, objectId);
         } else
         {
-        	String sql = (new StringBuilder("INSERT INTO ")).append(table).append(" ( ").append(keyField).append(", name, propValue) VALUES (?, ?, ?)").toString();
+        	String sql = (new StringBuilder("INSERT INTO ")).append(table).append(" ( ").append(keyField).append(", " + PROPERTY_NAME_COLUMN_NAME + ", "+  PROPERTY_VALUE_COLUMN_NAME +") VALUES (?, ?, ?)").toString();
         	
         	final List<Object[]> copy = new ArrayList<Object[]>(properties.size());
         	Set<Map.Entry<String, String>> set = properties.entrySet();
