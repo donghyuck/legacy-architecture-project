@@ -13,9 +13,10 @@ import org.apache.struts2.dispatcher.Dispatcher;
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
 import architecture.common.event.api.EventListener;
+import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.web.util.ApplicatioinConstants;
+import architecture.ee.web.util.WebApplicationHelper;
 
 public class FrameworkStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExecuteFilter {
 
@@ -28,7 +29,7 @@ public class FrameworkStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExec
 	public FrameworkStrutsPrepareAndExecuteFilter() {
 		dispatcher = null;
 		initialized = new AtomicBoolean(false);
-		ApplicationHelper.getEventPublisher().register(this);
+		WebApplicationHelper.getComponent(EventPublisher.class).register(this);
 	}
 
 	@Override
@@ -67,18 +68,13 @@ public class FrameworkStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExec
         }
 	}
 	
-	private void setMultiPartMaxSize(){
-		
-        int maxNumber = ApplicationHelper.getApplicationIntProperty(ApplicatioinConstants.ATTACHMENTS_MAX_ATTACHMENTS_PER_MESSAGE, 5);
-        int maxSize = ApplicationHelper.getApplicationIntProperty(ApplicatioinConstants.ATTACHMENTS_MAX_ATTACHMENT_SIZE, 1024);
-        
+	private void setMultiPartMaxSize(){				
+        int maxNumber = WebApplicationHelper.getApplicationIntProperty(WebApplicationHelper.ATTACHMENTS_MAX_ATTACHMENTS_PER_MESSAGE, 5);
+        int maxSize = WebApplicationHelper.getApplicationIntProperty(WebApplicationHelper.ATTACHMENTS_MAX_ATTACHMENT_SIZE, 1024);        
         long maxAllowedSize = maxNumber * maxSize * 1024 + 10240;
         long limit1 = (long)((double)maxAllowedSize * 1.5D);
         long limit2 = maxAllowedSize + 0xf00000L;
-        maxAllowedSize = limit1 <= limit2 ? limit2 : limit1;
-
-        //
-        
+        maxAllowedSize = limit1 <= limit2 ? limit2 : limit1;        
     }
 
 

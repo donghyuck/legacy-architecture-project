@@ -10,7 +10,7 @@
 	<artifactId>architecture-web-struts2</artifactId>
 	<version>1.0.0.RELEASE</version>
 	<name>APPLICATION WEB STRUTS2 SUPPORT</name>
-	<description>웹 어플리케이션 개발을 위한 스트럿츠 2 지원</description>
+	<description>웹 어플리케이션 개발을 위한 스트럿츠 2 지원 패키지</description>
 
 	<dependencies>
 		<dependency>
@@ -38,13 +38,6 @@
 			<groupId>architecture</groupId>
 			<artifactId>architecture-web</artifactId>
 			<version>1.0.1.RELEASE</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>opensymphony</groupId>
-			<artifactId>sitemesh</artifactId>
-			<version>2.4.2</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>

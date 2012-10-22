@@ -1,9 +1,10 @@
-package architecture.ee.web.struts2.action;
+package architecture.ee.web.struts2.support;
 
 import java.util.Map;
 
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.OutputFormat;
+import architecture.ee.web.struts2.action.FrameworkActionSupport;
 import architecture.ee.web.struts2.interceptor.RefererInterceptor;
 import architecture.ee.web.util.ParamUtils;
 

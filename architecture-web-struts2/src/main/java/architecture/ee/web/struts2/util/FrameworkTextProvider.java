@@ -84,7 +84,7 @@ public class FrameworkTextProvider extends TextProviderSupport {
         				key, locale
                     })
         );      
-        return ApplicationHelper.getMessage(key, args, locale);
+        return "";
         
     }
     

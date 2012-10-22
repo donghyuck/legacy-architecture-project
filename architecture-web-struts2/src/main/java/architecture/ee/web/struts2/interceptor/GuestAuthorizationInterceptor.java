@@ -2,11 +2,13 @@ package architecture.ee.web.struts2.interceptor;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.Authentication;
 
+import architecture.common.user.User;
 import architecture.ee.web.struts2.annotation.AlwaysAllowAnonymous;
 import architecture.ee.web.struts2.annotation.AlwaysDisallowAnonymous;
-import architecture.security.user.spring.authentication.ExtendedAuthentication;
-import architecture.security.user.spring.authentication.ExtendedAuthenticationProvider;
+import architecture.security.authentication.AuthenticationProvider;
+import architecture.security.util.SecurityHelper;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -15,7 +17,7 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 @SuppressWarnings("serial")
 public class GuestAuthorizationInterceptor implements Interceptor {
 
-	private ExtendedAuthenticationProvider authProvider;
+	private AuthenticationProvider authProvider;
 	private Log log = LogFactory.getLog(getClass());
 	
 	public void destroy() {
@@ -24,16 +26,16 @@ public class GuestAuthorizationInterceptor implements Interceptor {
 	public void init() {
 	}
 
-	public void setAuthenticationProvider(ExtendedAuthenticationProvider authProvider) {
+	public void setAuthenticationProvider(AuthenticationProvider authProvider) {
 		this.authProvider = authProvider;
 	}
 
 	public String intercept(ActionInvocation invocation) throws Exception {
 		
-		ExtendedAuthentication auth;
+		Authentication auth ;
         try
         {
-            auth = authProvider.getAuthentication();
+        	auth = SecurityHelper.getAuthentication();
         }
         catch(Exception ex)
         {
@@ -44,7 +46,9 @@ public class GuestAuthorizationInterceptor implements Interceptor {
         
         invocation.getInvocationContext().put("authentication", auth);
         
-        if(auth.isAnonymous()){        	
+        User user = SecurityHelper.getUser();
+        
+        if(user.isAnonymous()){        	
         	Action action = (Action) invocation.getAction();
         	String method = invocation.getProxy().getMethod();
         	if( !actionAllowsGuest(action, method) || actionDisallowsGuest(action, method)){
