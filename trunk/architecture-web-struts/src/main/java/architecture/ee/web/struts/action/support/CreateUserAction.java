@@ -60,6 +60,7 @@ public class CreateUserAction  extends FrameworkActionSupport {
 		Map<String, String> item = new java.util.HashMap<String, String>() ; 
 		item.put("success", "true");		
 		model.put("item", item);		
+		
 		saveModelMap(request, model);
 		
 		if(output == OutputFormat.JSON ){
