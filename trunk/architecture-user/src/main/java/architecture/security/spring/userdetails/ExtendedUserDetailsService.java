@@ -15,8 +15,13 @@
  */
 package architecture.security.spring.userdetails;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -70,8 +75,8 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 		if(eventPublisher != null){
 			
 		}		
-		
-		ExtendedUserDetails userDetails = new ExtendedUserDetails(user);
+		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		ExtendedUserDetails userDetails = new ExtendedUserDetails(user, AuthorityUtils.createAuthorityList("ROLE_USER"));
 		return userDetails;
 	}
 	

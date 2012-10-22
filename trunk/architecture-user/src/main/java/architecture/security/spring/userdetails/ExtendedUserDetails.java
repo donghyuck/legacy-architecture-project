@@ -16,7 +16,9 @@
 package architecture.security.spring.userdetails;
 
 import java.util.Collections;
+import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 import architecture.common.user.authentication.AuthToken;
@@ -30,6 +32,11 @@ public class ExtendedUserDetails extends User implements AuthToken {
 		this.user = user;
 	}
 
+	public ExtendedUserDetails(architecture.common.user.User user, List<GrantedAuthority> authorities ) {
+		super(user.getUsername(), user.getPasswordHash(), user.isEnabled(), user.isEnabled(), true, user.isEnabled(), authorities );
+		this.user = user;
+	}
+	
 	public boolean isAnonymous() {
 		return user.isAnonymous();
 	}

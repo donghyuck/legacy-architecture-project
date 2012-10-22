@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <factories>
 	<rank>1000</rank>	
+	
 	<factory interface="architecture.security.simple.authentication.AuthFactory$Implementation" impl="architecture.security.simple.authentication.impl.AuthFactoryImpl" />
+	
+	<factory interface="architecture.security.util.SecurityHelper$Implementation" impl="architecture.security.util.impl.SecurityHelperImpl" />
+	
 </factories>
 

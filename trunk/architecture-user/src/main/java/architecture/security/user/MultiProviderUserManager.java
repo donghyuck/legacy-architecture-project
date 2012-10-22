@@ -250,27 +250,23 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 					log.error( L10NUtils.getMessage("005111") , ex);
 				}				
 		}
-
-		log.debug(userIdCache.getName());
-		long id = -2L;
 		
+		long id = -2L;		
 		if(user != null || template.getUsername() != null )
-		{
-			
+		{			
 			if( userIdCache.get(template.getUsername()) != null ){
 				id = (Long)userIdCache.get(template.getUsername()).getValue();
-			}
-			
+			}			
 			if( id > 0L ){
 				user = getUserFromCacheById(id);		    
+				log.debug( "user cached:"+ user + ", properties=" +  user.getProperties() );
 				if( user == null)
 					try {
 						user = userDao.getUserById(template.getUserId());
 					} catch (Exception ex) {
 						log.error(L10NUtils.getMessage("005111"), ex);
 					}
-			}
-			
+			}			
 			if(null == user){				
 				if(caseInsensitive){
 		            try

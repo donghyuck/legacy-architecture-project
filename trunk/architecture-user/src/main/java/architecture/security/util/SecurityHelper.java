@@ -13,7 +13,6 @@ import architecture.common.util.ImplFactory;
  *
  */
 public class SecurityHelper {
-
 	
 	public static interface Implementation {
 		
@@ -21,7 +20,7 @@ public class SecurityHelper {
 		
 		public Authentication getAuthentication();
 		
-		public AuthToken getAuthToke();
+		public AuthToken getAuthToken();
 		
 		public User getUser();
 		
@@ -38,8 +37,8 @@ public class SecurityHelper {
     	impl.checkUserStatus(username, status);
     }
     
-    public static AuthToken getAuthToke(){
-    	return impl.getAuthToke();
+    public static AuthToken getAuthToken(){
+    	return impl.getAuthToken();
     }
     
     public static User getUser(){

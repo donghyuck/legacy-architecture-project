@@ -24,6 +24,30 @@ public class SecurityHelperImpl implements Implementation {
 		return authen;
 	}
 
+	public AuthToken getAuthToken() {		
+		try {
+			Authentication authen = getAuthentication();	
+			Object obj = authen.getPrincipal();
+			if ( obj instanceof AuthToken )
+				return (AuthToken)obj;
+		} catch (Exception ignore) {
+		}		
+		return new AnonymousUser();
+	}
+
+	public User getUser() {
+		try {
+			SecurityContext context = SecurityContextHolder.getContext();
+			Authentication authen = context.getAuthentication();
+			Object obj = authen.getPrincipal();
+			if ( obj instanceof ExtendedUserDetails )
+				return ((ExtendedUserDetails)obj).getUser();
+		} catch (Exception ignore) {
+		}			
+		return new AnonymousUser();
+	}
+	
+
 	public void checkUserStatus(String username, Status status) {
 		/*if(status == User.Status.awaiting_validation)
         {
@@ -49,22 +73,5 @@ public class SecurityHelperImpl implements Implementation {
         {
             return;
         }*/
-	}
-
-	public AuthToken getAuthToke() {		
-		Authentication authen = getAuthentication();		
-		Object obj = authen.getPrincipal();
-		if ( obj instanceof AuthToken )
-			return (AuthToken)obj;		
-		return new AnonymousUser();
-	}
-
-	public User getUser() {
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authen = context.getAuthentication();
-		Object obj = authen.getPrincipal();
-		if ( obj instanceof ExtendedUserDetails )
-			return ((ExtendedUserDetails)obj).getUser();				
-		return new AnonymousUser();
 	}
 }
