@@ -28,6 +28,7 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.license.License;
 import architecture.common.lifecycle.ApplicationHelperFactory;
@@ -91,9 +92,9 @@ public final class ApplicationHelper {
 		return AdminHelper.isReady();
 	}
 
-/*	public static EventPublisher getEventPublisher(){		
+    public static EventPublisher getEventPublisher(){		
 		return AdminHelper.getEventPublisher();
-	}*/
+	}
 	
 	public static State getState(){
 		return AdminHelper.getState();
@@ -148,9 +149,7 @@ public final class ApplicationHelper {
 		if(isReady()){
 			return getConfigService().getCharacterEncoding();
 		}else{
-			return getConfigService().getLocalProperty(
-				ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME, 
-				ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME);
+			return getConfigService().getLocalProperty( ApplicationConstants.LOCALE_CHARACTER_ENCODING_PROP_NAME,  ApplicationConstants.DEFAULT_CHAR_ENCODING);
 		}
 	}
 	
