@@ -8,16 +8,14 @@
 	</parent>
 	<groupId>architecture</groupId>
 	<artifactId>architecture-user</artifactId>
-	<version>1.0.0.RELEASE</version>
+	<version>1.0.3.RELEASE</version>
 	<name>APPLICATION SECURITY ARCHITECTURE</name>
 	<description>웹 어플리케이션 개발을 위한 사용자 관리 프레임워크</description>
 	<dependencies>
 		<dependency>
 			<groupId>architecture</groupId>
 			<artifactId>architecture-ee</artifactId>
-			<version>1.0.2.RELEASE</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>1.0.3.RELEASE</version>
 		</dependency>
 	</dependencies>
 

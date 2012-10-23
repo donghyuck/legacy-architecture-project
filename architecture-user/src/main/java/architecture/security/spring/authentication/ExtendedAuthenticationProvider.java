@@ -47,7 +47,6 @@ public class ExtendedAuthenticationProvider extends DaoAuthenticationProvider {
 	protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication)
 			throws AuthenticationException {
 		
-		
 		if(authentication.getCredentials() == null)
 			throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));
         
@@ -64,6 +63,7 @@ public class ExtendedAuthenticationProvider extends DaoAuthenticationProvider {
 		
 		
 		State state = ApplicationHelper.getState(); 
+		
 		log.debug(state);
 		try {
 			if(user.getUser() != null){
