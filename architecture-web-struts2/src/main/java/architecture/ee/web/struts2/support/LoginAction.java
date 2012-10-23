@@ -85,11 +85,9 @@ public class LoginAction extends FrameworkActionSupport implements Validateable 
         }else
         {        	
             getRedirects();
-            addActionMessage(getText("login.success.welcome.text", new String[]{ getUser().isNameVisible() ? getUser().getName() : getUser().getUsername() })); 
-            
-            if( OutputFormat.stingToOutputFormat( getDataType() ) == OutputFormat.XML  )
-            	return "success-ajax";
-            
+            addActionMessage(getText("login.success.welcome.text", new String[]{ getUser().isNameVisible() ? getUser().getName() : getUser().getUsername() }));            
+            if(  this.getOutputFormat() == OutputFormat.XML  )
+            	return "success-xml";            
             return SUCCESS;
         }
 	}

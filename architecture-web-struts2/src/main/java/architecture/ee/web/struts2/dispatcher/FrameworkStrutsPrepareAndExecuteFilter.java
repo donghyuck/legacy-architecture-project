@@ -13,7 +13,6 @@ import org.apache.struts2.dispatcher.Dispatcher;
 import org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter;
 
 import architecture.common.event.api.EventListener;
-import architecture.common.event.api.EventPublisher;
 import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.WebApplicationHelper;
@@ -29,7 +28,7 @@ public class FrameworkStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExec
 	public FrameworkStrutsPrepareAndExecuteFilter() {
 		dispatcher = null;
 		initialized = new AtomicBoolean(false);
-		WebApplicationHelper.getComponent(EventPublisher.class).register(this);
+		ApplicationHelper.getEventPublisher().register(this);
 	}
 
 	@Override
