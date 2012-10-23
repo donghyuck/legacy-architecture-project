@@ -25,10 +25,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.RequestToViewNameTranslator;
@@ -38,9 +36,8 @@ import org.springframework.web.servlet.view.AbstractView;
 import org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator;
 import org.springframework.web.util.NestedServletException;
 
+import architecture.common.util.StringUtils;
 import architecture.ee.util.OutputFormat;
-
-import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
