@@ -8,11 +8,10 @@
 	</parent>
 	<groupId>architecture</groupId>
 	<artifactId>architecture-web-struts</artifactId>
-	<version>1.0.0.RELEASE</version>
 	<name>APPLICATION WEB STRUTS SUPPORT</name>
 	<description>웹 어플리케이션 개발을 위한 스트럿츠 지원 모듈</description>
 
-<build>
+	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -124,15 +123,18 @@
 				</configuration>
 			</plugin>
 		</plugins>
-	</build>	
-	
+	</build>
+
 	<dependencies>
 		<dependency>
 			<groupId>architecture</groupId>
+			<artifactId>architecture-user</artifactId>
+			<version>1.0.3.RELEASE</version>
+		</dependency>	
+		<dependency>
+			<groupId>architecture</groupId>
 			<artifactId>architecture-web</artifactId>
-			<version>1.0.1.RELEASE</version>
-			<type>jar</type>
-			<scope>compile</scope>
+			<version>1.0.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.struts</groupId>
@@ -149,9 +151,9 @@
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>architecture</groupId>
-			<artifactId>architecture-user</artifactId>
-			<version>1.0.0.RELEASE</version>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity-tools</artifactId>
+			<version>2.0</version>
 		</dependency>
 	</dependencies>
 
@@ -163,4 +165,5 @@
 		</repository>
 	</distributionManagement>
 
+	<version>1.0.3.RELEASE</version>
 </project>
