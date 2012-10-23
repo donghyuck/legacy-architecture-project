@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<groupId>architecture</groupId>
 	<artifactId>architecture-web</artifactId>
-	<version>1.0.1.RELEASE</version>
+	<version>1.0.3.RELEASE</version>
 	<name>APPLICATION WEB ARCHITECTURE</name>
 	<description>웹 어플리케이션 개발을 위한 아키텍처</description>
 	<scm>
@@ -134,28 +134,16 @@
 	</build>
 	<dependencies>
 		<dependency>
+			<groupId>architecture</groupId>
+			<artifactId>architecture-ee</artifactId>
+			<version>1.0.3.RELEASE</version>
+		</dependency>	
+		<dependency>
 			<groupId>opensymphony</groupId>
 			<artifactId>sitemesh</artifactId>
 			<version>2.4.2</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>architecture</groupId>
-			<artifactId>architecture-ee</artifactId>
-			<version>1.0.2.RELEASE</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity-tools</artifactId>
-			<version>2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.itextpdf</groupId>
@@ -180,6 +168,11 @@
 			<version>1.2.17</version>
 			<type>jar</type>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.velocity</groupId>
+			<artifactId>velocity</artifactId>
+			<version>1.7</version>
 		</dependency>
 	</dependencies>
 

@@ -18,12 +18,13 @@ package architecture.ee.web.util;
 
 import java.util.Locale;
 
+import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.State;
 import architecture.ee.util.ApplicationHelper;
 
-public final class WebApplicationHelper 
+public final class WebApplicationHelper implements WebApplicatioinConstants
 {	
 		
 	public static final ConfigService getConfigService(){
@@ -50,12 +51,23 @@ public final class WebApplicationHelper
 		return ApplicationHelper.isReady();		
 	}
 	
+	public static String getApplicationProperty(String name, String defaultValue){		
+		return ApplicationHelper.getApplicationProperty(name, defaultValue);
+	}
+	
 	public static boolean getApplicationBooleanProperty(String name, boolean defaultValue){
 		return ApplicationHelper.getApplicationBooleanProperty(name, defaultValue);
+	}
+	
+	public static int getApplicationIntProperty(String name, int defaultValue){		
+		return ApplicationHelper.getApplicationIntProperty(name, defaultValue);
 	}
 	
 	public static Locale getLocale(){
 		return ApplicationHelper.getLocale();
 	}
 	
+    public static EventPublisher getEventPublisher(){		
+		return ApplicationHelper.getEventPublisher();
+	}
 }

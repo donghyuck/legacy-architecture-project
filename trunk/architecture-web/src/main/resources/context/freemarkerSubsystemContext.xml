@@ -29,6 +29,8 @@
 			<map>
 				<entry key="xml_escape" value-ref="fmXmlEscape" />
 				<entry key="output_encoding" value="UTF-8" />
+				<entry key="whitespace_stripping" value="true" />
+				<entry key="template_update_delay" value="60" />
 			</map>
 		</property>
 	</bean>
