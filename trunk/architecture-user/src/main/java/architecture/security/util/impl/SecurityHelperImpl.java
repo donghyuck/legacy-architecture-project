@@ -49,6 +49,7 @@ public class SecurityHelperImpl implements Implementation {
 	
 
 	public void checkUserStatus(String username, Status status) {
+		
 		/*if(status == User.Status.awaiting_validation)
         {
             log.info(String.format("Authentication attempt by unregistered user '%s'.", new Object[] {
