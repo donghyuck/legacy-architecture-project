@@ -33,6 +33,8 @@ public interface WebApplicatioinConstants extends architecture.ee.util.Applicati
 		
 	/** VIEW RENDER PROPERTY KEY */
 	public static final String VIEW_FREEMARKER_ENABLED = "view.render.freemarker.enabled" ;	
+	public static final String VIEW_FREEMARKER_DEBUG = "view.render.freemarker.debug" ;	
+	
 	public static final String VIEW_VELOCITY_ENABLED   = "view.render.velocity.enabled" ;	
     public static final String VIEW_ATTRIBUTE  = (architecture.ee.web.servlet.ViewRendererServlet.class).getName() + ".VIEW";    
     public static final String MODEL_ATTRIBUTE  = (architecture.ee.web.servlet.ViewRendererServlet.class).getName() + ".MODEL";
