@@ -2,12 +2,12 @@ package architecture.common.exception;
 
 import java.lang.reflect.Constructor;
 
-import org.apache.commons.lang.exception.NestableException;
+import org.apache.commons.lang3.exception.ContextedException;
 
 import architecture.common.i18n.Localizer;
 import architecture.common.util.L10NUtils;
 
-public class CodeableException extends NestableException implements Codeable {
+public class CodeableException extends Exception implements Codeable {
 
 private int errorCode = 0 ;
 	

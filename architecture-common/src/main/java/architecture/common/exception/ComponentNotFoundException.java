@@ -15,7 +15,6 @@
  */
 package architecture.common.exception;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
 
 /**
  * 
@@ -23,7 +22,7 @@ import org.apache.commons.lang.exception.NestableRuntimeException;
  * @author DongHyuck, Son 
  *
  */
-public class ComponentNotFoundException extends NestableRuntimeException {
+public class ComponentNotFoundException extends RuntimeException {
 
 	/**
 	 * 

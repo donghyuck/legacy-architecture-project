@@ -15,9 +15,8 @@
  */
 package architecture.common.exception;
 
-import org.apache.commons.lang.exception.NestableError;
 
-public class RuntimeError extends NestableError {
+public class RuntimeError extends Error {
 
 	/**
 	 * 

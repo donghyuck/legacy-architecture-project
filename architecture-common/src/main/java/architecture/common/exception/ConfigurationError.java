@@ -15,10 +15,9 @@
  */
 package architecture.common.exception;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
 
 
-public class ConfigurationError extends NestableRuntimeException {
+public class ConfigurationError extends RuntimeException {
 
 	/**
 	 * 

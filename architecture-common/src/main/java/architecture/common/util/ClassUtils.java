@@ -24,7 +24,7 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class ClassUtils extends org.apache.commons.lang.ClassUtils {
+public class ClassUtils extends org.apache.commons.lang3.ClassUtils {
 
 	private static final Log log = LogFactory.getLog(ClassUtils.class);
 	
