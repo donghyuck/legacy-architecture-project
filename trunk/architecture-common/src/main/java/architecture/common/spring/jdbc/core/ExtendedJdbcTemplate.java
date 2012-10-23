@@ -36,8 +36,7 @@ import javax.crypto.spec.SecretKeySpec;
 import javax.sql.DataSource;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
+import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
@@ -60,6 +59,7 @@ import architecture.common.jdbc.JdbcType;
 import architecture.common.jdbc.JdbcUtils;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.schema.DatabaseType;
+import architecture.common.util.StringUtils;
 
 
 /**

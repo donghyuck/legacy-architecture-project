@@ -15,14 +15,13 @@
  */
 package architecture.common.exception;
 
-import org.apache.commons.lang.exception.NestableException;
 
 /**
  * 
  * @author DongHyuck, Son 
  *
  */
-public class ComponentDisabledException extends NestableException {
+public class ComponentDisabledException extends Exception {
 
 	/**
 	 * 

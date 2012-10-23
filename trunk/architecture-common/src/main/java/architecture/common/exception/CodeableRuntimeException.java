@@ -3,12 +3,12 @@ package architecture.common.exception;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
+import org.apache.commons.lang3.exception.ContextedRuntimeException;
 
 import architecture.common.i18n.Localizer;
 import architecture.common.util.L10NUtils;
 
-public abstract class CodeableRuntimeException extends NestableRuntimeException implements Codeable {
+public abstract class CodeableRuntimeException extends RuntimeException implements Codeable {
 
 	private int errorCode = 0 ;
 	

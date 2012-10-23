@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 /**
  * @author    DongHyuck, Son

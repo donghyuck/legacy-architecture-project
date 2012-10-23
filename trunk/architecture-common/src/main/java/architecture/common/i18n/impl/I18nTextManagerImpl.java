@@ -22,7 +22,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
@@ -33,6 +32,7 @@ import architecture.common.i18n.I18nText;
 import architecture.common.i18n.I18nTextManager;
 import architecture.common.i18n.dao.I18nTextDao;
 import architecture.common.util.LocaleUtils;
+import architecture.common.util.StringUtils;
 
 
 public class I18nTextManagerImpl implements I18nTextManager {

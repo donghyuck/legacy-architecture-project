@@ -15,9 +15,8 @@
  */
 package architecture.common.exception;
 
-import org.apache.commons.lang.exception.NestableRuntimeException;
 
-public class LicenseException extends NestableRuntimeException {
+public class LicenseException extends RuntimeException {
 
 	private static final long serialVersionUID = 8541463362674661215L;
 
