@@ -17,7 +17,7 @@ public class ErrorAction extends FrameworkActionSupport {
 	}
 	
 	public boolean isSetStatus(){
-		if(!StringUtils.isEmpty(status))
+		if( !StringUtils.isEmpty(status) )
 			return true;
 		return false;
 	}

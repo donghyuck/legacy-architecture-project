@@ -27,6 +27,7 @@ import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
+import architecture.security.authentication.AuthenticationProviderFactory;
 import architecture.security.util.SecurityHelper;
 
 import com.opensymphony.xwork2.util.ValueStack;
@@ -89,13 +90,9 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 		this.outputFormat = outputFormat;
 	}
 
-	public void setAuthToken(AuthToken authToken) {
-		this.authToken = authToken;
-	}
-
 	public AuthToken getAuthToken() {
 		if ( null == authToken )
-			authToken = SecurityHelper.getAuthToken();
+			authToken = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getAuthToken();
 		return authToken;
 	}
 
@@ -103,7 +100,7 @@ public class FrameworkActionSupport extends com.opensymphony.xwork2.ActionSuppor
 
 		if (null == user)
 			try {
-				final User ju = SecurityHelper.getUser();
+				final User ju = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getUser();
 				if (ju != null)
 					user = ju; // new ImmutableUser(SecurityHelper.getUser());
 				
