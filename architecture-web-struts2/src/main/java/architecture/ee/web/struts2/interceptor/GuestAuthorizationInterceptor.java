@@ -8,7 +8,7 @@ import architecture.common.user.User;
 import architecture.ee.web.struts2.annotation.AlwaysAllowAnonymous;
 import architecture.ee.web.struts2.annotation.AlwaysDisallowAnonymous;
 import architecture.security.authentication.AuthenticationProvider;
-import architecture.security.util.SecurityHelper;
+import architecture.security.authentication.AuthenticationProviderFactory;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;
@@ -35,7 +35,7 @@ public class GuestAuthorizationInterceptor implements Interceptor {
 		Authentication auth ;
         try
         {
-        	auth = SecurityHelper.getAuthentication();
+        	auth = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getAuthentication();
         }
         catch(Exception ex)
         {
@@ -46,7 +46,7 @@ public class GuestAuthorizationInterceptor implements Interceptor {
         
         invocation.getInvocationContext().put("authentication", auth);
         
-        User user = SecurityHelper.getUser();
+        User user = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getUser();
         
         if(user.isAnonymous()){        	
         	Action action = (Action) invocation.getAction();
