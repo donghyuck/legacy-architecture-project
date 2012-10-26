@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.struts.action.support;
+package architecture.ee.web.struts.action.common;
 
 import java.util.List;
 import java.util.Map;
@@ -29,7 +29,7 @@ import org.apache.struts.action.ActionMapping;
 import architecture.ee.services.SqlQueryClient;
 import architecture.ee.util.OutputFormat;
 
-import architecture.ee.web.struts.action.FrameworkDispatchActionSupport;
+import architecture.ee.web.struts.action.support.FrameworkDispatchActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.view.json.JsonView;

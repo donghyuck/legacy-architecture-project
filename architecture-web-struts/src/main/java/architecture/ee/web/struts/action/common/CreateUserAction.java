@@ -1,4 +1,4 @@
-package architecture.ee.web.struts.action.support;
+package architecture.ee.web.struts.action.common;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserTemplate;
 import architecture.ee.exception.ApplicationException;
 import architecture.ee.util.OutputFormat;
-import architecture.ee.web.struts.action.FrameworkActionSupport;
+import architecture.ee.web.struts.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.view.json.JsonView;
 

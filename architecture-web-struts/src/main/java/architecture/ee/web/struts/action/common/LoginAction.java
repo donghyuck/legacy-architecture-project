@@ -13,10 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.struts.action.support;
-
-import java.util.List;
-import java.util.Map;
+package architecture.ee.web.struts.action.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,39 +22,14 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import architecture.ee.util.OutputFormat;
-import architecture.ee.web.struts.action.FrameworkActionSupport;
-import architecture.ee.web.view.json.JsonView;
+import architecture.ee.web.struts.action.support.FrameworkActionSupport;
 
-/**
- * 
- * 
- * 
- * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
- *
- */
-public class ViewProfileAction extends FrameworkActionSupport  {
 
+public class LoginAction extends FrameworkActionSupport {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {		
-		
-		OutputFormat output = getOutputFormat(request, response);
-		
-		Map model = getModelMap(request, response);
-		model.put("user", getUser());		
-		saveModelMap(request, model);
-		
-		// Json processing ....
-		if(output == OutputFormat.JSON ){
-			JsonView view = new JsonView();		    
-			view.setModelKey("user");			
-			view.render(model, request, response);
-			return null;
-		}
-		
-		return (mapping.findForward(output.name().toLowerCase()));		
+		return mapping.findForward(success());		
 	}
-	
 }
