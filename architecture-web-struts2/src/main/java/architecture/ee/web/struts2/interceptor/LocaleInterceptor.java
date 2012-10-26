@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.StrutsStatics;
 
 import architecture.common.user.User;
-import architecture.ee.web.struts2.action.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.LocaleUtils;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 
 public class LocaleInterceptor implements Interceptor {
 	
-	private static final String LOCALE_ATTRIBUTE = "extended.locale";
+	private static final String LOCALE_ATTRIBUTE = "user.locale";
 	private static final Log log = LogFactory.getLog(LocaleInterceptor.class);
 	
     public LocaleInterceptor()
@@ -36,7 +36,6 @@ public class LocaleInterceptor implements Interceptor {
     public String intercept(ActionInvocation invocation)
         throws Exception
     {
-        log.debug("In LocaleInterceptor");
         ActionContext ac = invocation.getInvocationContext();
         
         HttpServletRequest req = (HttpServletRequest)ac.get(StrutsStatics.HTTP_REQUEST);

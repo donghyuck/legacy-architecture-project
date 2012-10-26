@@ -16,7 +16,9 @@
 package architecture.ee.web.struts2.view.freemarker;
 
 import java.io.Writer;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -37,9 +39,11 @@ import architecture.ee.web.util.WebApplicatioinConstants;
 import com.opensymphony.xwork2.util.ValueStack;
 
 import freemarker.cache.StrongCacheStorage;
+import freemarker.cache.TemplateLoader;
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
+import freemarker.template.ObjectWrapper;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.TemplateHashModel;
@@ -53,13 +57,13 @@ import freemarker.template.TemplateModelException;
  */
 public class ExtendedFreemarkerManager extends FreemarkerManager {
 
+    private List tagModels;
+    
 	private static final Log log = LogFactory.getLog(ExtendedFreemarkerManager.class);
 	
 	private static final int UPDATE_DELAY = 60;
 	
 	private FreeMarkerConfig freeMarkerConfig ;
-	
-	
 	
 	public static final TemplateExceptionHandler LOG_DEBUG_HANDLER = new TemplateExceptionHandler() {		
 	        public void handleTemplateException(TemplateException te, Environment env, Writer out)
@@ -70,6 +74,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	   
 	   
 	public ExtendedFreemarkerManager() {    	
+	    tagModels = Collections.emptyList();
 	}
 
 	public void setFreeMarkerConfig(FreeMarkerConfig freeMarkerConfig) {
@@ -82,9 +87,8 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 		if(ApplicationHelper.isReady())
 		try {
 			//FreeMarkerConfig freeMarkerConfig = ApplicationHelper.getComponent(FreeMarkerConfig.class);
-			Configuration configuration = freeMarkerConfig.getConfiguration();
+			Configuration configuration = freeMarkerConfig.getConfiguration();			
 			configureDefaultConfiguration(configuration, servletContext );
-
 			return configuration;
 		} catch (ComponentNotFoundException e) {			
 		}
@@ -94,12 +98,12 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
     protected void configureDefaultConfiguration(Configuration configuration, ServletContext servletContext)
     {     
     	configuration.setCacheStorage(new StrongCacheStorage());        
-    	configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());     
-    	
+    	configuration.setTemplateExceptionHandler(getTemplateExceptionHandler());    	
         // configuration.addAutoImport("framework", "/template/common/include/framework-macros.ftl");        
-        // configuration.setLocalizedLookup(false);      
-    	
-        configuration.setObjectWrapper(wrapper);
+        // configuration.setLocalizedLookup(false);
+    	if( configuration.getObjectWrapper() == null ){
+    	    configuration.setObjectWrapper(createObjectWrapper(servletContext));
+    	}
     }
     
     @Override
@@ -118,6 +122,12 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
             return;
         }	
 	}
+    
+    public void setTagModels(List tagModels)
+    {
+        this.tagModels = tagModels;
+    }
+    
 
 	@Override
 	protected void populateContext(ScopesHashModel model, ValueStack stack,
@@ -125,6 +135,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			HttpServletResponse response) {
 
 		super.populateContext(model, stack, action, request, response);
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();		
 		populateStatics(map);		
 		model.putAll(map);
@@ -156,7 +167,16 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
 	}
 
-	private TemplateExceptionHandler getTemplateExceptionHandler()
+	@Override
+    protected TemplateLoader createTemplateLoader(ServletContext servletContext, String templatePath) {
+        
+	    log.debug("templatePath:" + templatePath );
+	    return freeMarkerConfig.getConfiguration().getTemplateLoader();
+	    
+        //return super.createTemplateLoader(servletContext, templatePath);
+    }
+
+    private TemplateExceptionHandler getTemplateExceptionHandler()
     {
     	boolean logErrorDefault = false;
         boolean logError = ApplicationHelper.getApplicationBooleanProperty(WebApplicatioinConstants.VIEW_FREEMARKER_DEBUG, logErrorDefault);
