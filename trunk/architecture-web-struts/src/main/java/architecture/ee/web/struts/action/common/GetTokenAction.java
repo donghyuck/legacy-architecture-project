@@ -1,4 +1,4 @@
-package architecture.ee.web.struts.action.support;
+package architecture.ee.web.struts.action.common;
 
 import java.util.Map;
 
@@ -10,7 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import architecture.ee.util.OutputFormat;
-import architecture.ee.web.struts.action.FrameworkActionSupport;
+import architecture.ee.web.struts.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.view.json.JsonView;
 

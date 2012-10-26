@@ -1,4 +1,4 @@
-package architecture.ee.web.struts.action;
+package architecture.ee.web.struts.action.support;
 
 import java.util.Map;
 

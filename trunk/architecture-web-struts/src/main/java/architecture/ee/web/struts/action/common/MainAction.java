@@ -1,4 +1,4 @@
-package architecture.ee.web.struts.action.support;
+package architecture.ee.web.struts.action.common;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +7,8 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import architecture.ee.web.struts.action.FrameworkActionSupport;
+import architecture.ee.web.struts.action.support.FrameworkActionSupport;
+
 
 public class MainAction extends FrameworkActionSupport {
 
