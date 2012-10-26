@@ -28,7 +28,9 @@ public class FrameworkStrutsPrepareAndExecuteFilter extends StrutsPrepareAndExec
 	public FrameworkStrutsPrepareAndExecuteFilter() {
 		dispatcher = null;
 		initialized = new AtomicBoolean(false);
+		
 		ApplicationHelper.getEventPublisher().register(this);
+	
 	}
 
 	@Override

@@ -18,6 +18,7 @@ public class ExtendedValidationInterceptor extends ValidationInterceptor {
         boolean applyMethod = true;
         Object action = invocation.getAction();
         String methodName = invocation.getProxy().getMethod();
+        
         if(methodName == null)
             methodName = "execute";
         try
@@ -35,9 +36,9 @@ public class ExtendedValidationInterceptor extends ValidationInterceptor {
             }
             catch(NoSuchMethodException e1) { }
         }
-        if(applyMethod)
-            applyMethod = super.applyInterceptor(invocation);
         
+        if(applyMethod)
+            applyMethod = super.applyInterceptor(invocation);        
         return applyMethod;
     }
 

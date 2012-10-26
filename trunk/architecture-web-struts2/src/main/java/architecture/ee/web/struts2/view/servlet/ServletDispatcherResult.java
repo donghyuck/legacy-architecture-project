@@ -27,7 +27,7 @@ import org.apache.struts2.dispatcher.StrutsResultSupport;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 
 import architecture.ee.util.OutputFormat;
-import architecture.ee.web.struts2.action.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager;
 
 import com.opensymphony.xwork2.Action;
