@@ -4,69 +4,69 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<package name="framework-struts-default" extends="struts-default">
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory.spring.autoWire" value="name" />
+	<constant name="struts.freemarker.manager.classname" value="freemarkerManager" />
+
+	<package name="framework-default" extends="struts-default">
 		<!-- Result Type Overrides and Additions -->
 		<result-types>
-			<result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" default="true" />
-			<result-type name="dispatcher" class="architecture.ee.web.struts2.view.servlet.ServletDispatcherResult" />
-			<result-type name="json" class="org.apache.struts2.json.JSONResult"/>
-			<result-type name="redirect-action" class="architecture.ee.web.struts2.view.servlet.ServletActionRedirectResult" />
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+			<result-type name="dispatcher" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="true" />
+			<result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" />
+			<result-type name="redirect" class="org.apache.struts2.dispatcher.ServletRedirectResult" />
+			<result-type name="redirectAction" class="org.apache.struts2.dispatcher.ServletActionRedirectResult" />
+			<result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
+			<result-type name="xslt" class="org.apache.struts2.views.xslt.XSLTResult" />
+			<result-type name="plainText" class="org.apache.struts2.dispatcher.PlainTextResult" />
+			<result-type name="httpstatusview" class="architecture.ee.web.struts2.action.support.HttpStatusViewResult"/>
 		</result-types>
-        
 		<!-- Interceptor overrides and additions -->
 		<interceptors>
-			<interceptor name="validation" class="architecture.ee.web.struts2.interceptor.ExtendedValidationInterceptor">
-				<param name="excludeMethods">input,back,cancel,default,withRedirect,removeAttach,doCancel,delete,reply,skip</param>
-			</interceptor>			
-			<!-- Validation interceptor - only registered to executing methods, customized for NoValidation annotation -->
-			<interceptor name="prepare" class="architecture.ee.web.struts2.interceptor.ExtendedMethodFilterInterceptor" />			
-			<!-- sets the current executing action in the session for redirection -->
+			<interceptor name="locale" class="architecture.ee.web.struts2.interceptor.LocaleInterceptor" />
+			<interceptor name="outputFormat" class="architecture.ee.web.struts2.interceptor.OutputFormatInterceptor" />
+			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
 			<interceptor name="referer" class="architecture.ee.web.struts2.interceptor.RefererInterceptor" />
-            <!-- Helper to set the ActionContext Locale to the user's locale (if specified) -->
-            <interceptor name="locale" class="architecture.ee.web.struts2.interceptor.LocaleInterceptor"/>
-			<!-- A complete stack with all the common interceptors in place. Generally, 
-				this stack should be the one you use, though it may do more than you need. 
-				Also, the ordering can be switched around (ex: if you wish to have your prepare() 
-				method called interceptor up.servlet-related. before your servlet related 
-				objects, you need to move the prepare This stack also excludes the validation 
-				and workflow the method names input,back,cancel,default,withRedirect, removeAttach,doCancel, 
-				reply and delete. These typically are associated with requests that should 
-				not be validated. -->
-			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor"/>	
-						
+			
 			<interceptor-stack name="defaultStack">
 				<interceptor-ref name="referer" />
 				<interceptor-ref name="servletConfig" />
 				<interceptor-ref name="prepare" />
-				<interceptor-ref name="params"/>
-				<interceptor-ref name="locale"/>
-				<interceptor-ref name="validation"/>
-			</interceptor-stack>	
-					
-			<interceptor-stack name="includeStack">
-				<interceptor-ref name="servletConfig" />
-				<interceptor-ref name="prepare" />
-				<interceptor-ref name="params"/>
-				<interceptor-ref name="locale"/>
+				<interceptor-ref name="params" />
+				<interceptor-ref name="outputFormat" />
+				<interceptor-ref name="locale" />
 				<interceptor-ref name="validation" />
-			</interceptor-stack>			
-			
+			</interceptor-stack>		
 		</interceptors>
 		
-		<!-- The default interceptor stack applied to all actions -->
 		<default-interceptor-ref name="defaultStack" />
 		
 		<global-results>
-			<result name="login" type="redirect">/login.jsp</result>
-            <result name="redirect" type="redirect">${url}</result>
-            <result name="none" type="httpheader">204</result>
-            <result name="error">/includes/jsp/error.jsp</result>
+			<result name="redirect" type="redirect">${url}</result>
+			<result name="error" type="httpheader">
+                <param name="status">500</param>
+                <param name="location" >/includes/jsp/error.jsp</param>
+			</result>
+            <result name="notfound" type="httpstatusview">
+                <param name="status">404</param>
+                <param name="location" >/includes/jsp/error.jsp</param>
+            </result>
 		</global-results>
-		
-		<global-exception-mappings>			
-			<exception-mapping exception="java.lang.Throwable" result="error" />
-		</global-exception-mappings>
 
+        <global-exception-mappings>
+            <exception-mapping exception="java.lang.Exception" result="error"/>
+        </global-exception-mappings>
+        		
 	</package>
-	
+
+	<package name="framework-actions" extends="framework-default" namespace="/">
+		<default-interceptor-ref name="defaultStack" />
+		<action name="main" class="architecture.ee.web.struts2.action.common.MainAction">
+			<result name="success" type="freemarker">/html/main.ftl</result>
+		</action>
+	</package>
+
 </struts>
