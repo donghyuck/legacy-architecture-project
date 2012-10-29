@@ -24,7 +24,6 @@ import java.io.Writer;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dom4j.io.OutputFormat;
@@ -40,7 +39,6 @@ import org.springframework.web.context.support.ServletContextResourceLoader;
 import architecture.common.exception.ComponentDisabledException;
 import architecture.common.exception.ConfigurationError;
 import architecture.common.exception.ConfigurationWarning;
-import architecture.ee.util.ApplicationConstants;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigRoot;
@@ -49,7 +47,9 @@ import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.internal.EmptyApplicationProperties;
 import architecture.common.lifecycle.internal.XmlApplicationProperties;
 import architecture.common.util.L10NUtils;
+import architecture.common.util.StringUtils;
 import architecture.common.xml.XmlProperties;
+import architecture.ee.util.ApplicationConstants;
 
 
 /**
