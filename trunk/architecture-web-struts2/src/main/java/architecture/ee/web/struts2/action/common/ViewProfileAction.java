@@ -15,6 +15,13 @@
  */
 package architecture.ee.web.struts2.action.common;
 
-public class ViewProfileAction {
+import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+
+public class ViewProfileAction extends FrameworkActionSupport {
+
+    @Override
+    public String execute() throws Exception {
+        return SUCCESS;
+    }
 
 }
