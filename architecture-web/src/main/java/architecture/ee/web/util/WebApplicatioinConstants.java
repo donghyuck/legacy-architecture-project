@@ -34,6 +34,7 @@ public interface WebApplicatioinConstants extends architecture.ee.util.Applicati
 	/** VIEW RENDER PROPERTY KEY */
 	public static final String VIEW_FREEMARKER_ENABLED = "view.render.freemarker.enabled" ;	
 	public static final String VIEW_FREEMARKER_DEBUG = "view.render.freemarker.debug" ;	
+	public static final String VIEW_FREEMARKER_SOURCE_LOCATION = "view.render.freemarker.source.location" ;	
 	
 	public static final String VIEW_VELOCITY_ENABLED   = "view.render.velocity.enabled" ;	
     public static final String VIEW_ATTRIBUTE  = (architecture.ee.web.servlet.ViewRendererServlet.class).getName() + ".VIEW";    
