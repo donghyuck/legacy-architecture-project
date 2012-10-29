@@ -44,6 +44,7 @@ import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.spi.UserProvider;
 import architecture.common.util.L10NUtils;
+
 import architecture.ee.component.admin.AdminHelper;
 import architecture.security.authentication.InvalidProviderUserException;
 import architecture.security.spring.userdetails.ExtendedUserDetailsAdaptor;

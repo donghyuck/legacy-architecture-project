@@ -15,7 +15,7 @@
 		<dependency>
 			<groupId>architecture</groupId>
 			<artifactId>architecture-ee</artifactId>
-			<version>1.0.3.RELEASE</version>
+			<version>1.0.3.RELEASE</version>			
 		</dependency>
 	</dependencies>
 
