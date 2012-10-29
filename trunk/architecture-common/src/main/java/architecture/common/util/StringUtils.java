@@ -18,6 +18,11 @@ package architecture.common.util;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -118,4 +123,5 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 			return false;
 		}
 	}
+	
 }
