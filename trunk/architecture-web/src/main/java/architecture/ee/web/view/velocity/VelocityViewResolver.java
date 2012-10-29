@@ -14,8 +14,8 @@
  * limitations under the License.
  */
    
-package architecture.ee.web.view;
+package architecture.ee.web.view.velocity;
 
-public class FreeMarkerViewResolver extends org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver {
+public class VelocityViewResolver extends org.springframework.web.servlet.view.velocity.VelocityViewResolver {
 
 }

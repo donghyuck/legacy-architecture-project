@@ -137,12 +137,6 @@
 			<groupId>architecture</groupId>
 			<artifactId>architecture-ee</artifactId>
 			<version>1.0.3.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>commons-lang</artifactId>
-					<groupId>commons-lang</groupId>
-				</exclusion>
-			</exclusions>
 		</dependency>	
 		<dependency>
 			<groupId>opensymphony</groupId>
