@@ -25,7 +25,6 @@ import architecture.ee.web.struts2.interceptor.OutputFormatAware;
 import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
-import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
 import architecture.security.authentication.AuthenticationProviderFactory;
 
