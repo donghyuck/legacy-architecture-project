@@ -22,7 +22,7 @@
 			<result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
 			<result-type name="xslt" class="org.apache.struts2.views.xslt.XSLTResult" />
 			<result-type name="plainText" class="org.apache.struts2.dispatcher.PlainTextResult" />
-			<result-type name="httpstatusview" class="architecture.ee.web.struts2.action.support.HttpStatusViewResult"/>
+			<result-type name="httpstatusview" class="architecture.ee.web.struts2.action.HttpStatusViewResult"/>
 		</result-types>
 		<!-- Interceptor overrides and additions -->
 		<interceptors>
@@ -64,7 +64,7 @@
 
 	<package name="framework-actions" extends="framework-default" namespace="/">
 		<default-interceptor-ref name="defaultStack" />
-		<action name="main" class="architecture.ee.web.struts2.action.common.MainAction">
+		<action name="main" class="architecture.ee.web.struts2.action.MainAction">
 			<result name="success" type="freemarker">/html/main.ftl</result>
 		</action>
 	</package>
