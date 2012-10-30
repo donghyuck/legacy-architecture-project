@@ -91,6 +91,16 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		return authToken;
 	}
 
+    public String success(){
+        log.debug(getOutputFormat().name());
+        if( getOutputFormat() == OutputFormat.JSON ){
+            return  OutputFormat.JSON.name().toLowerCase() + "-" + SUCCESS ;
+        } else if ( getOutputFormat() == OutputFormat.XML ){ 
+            return  OutputFormat.HTML.name().toLowerCase() + "-" + SUCCESS ;
+        }        
+       return SUCCESS;
+	}
+	
 	public final User getUser() {
 
 		if (null == user)
