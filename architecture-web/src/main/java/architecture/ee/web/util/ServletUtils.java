@@ -33,7 +33,6 @@ public class ServletUtils {
 		return modelMap;
 	}
     
-    
         
 	public static String getServletPath(HttpServletRequest request) {
 		String thisPath = request.getServletPath();
