@@ -66,7 +66,7 @@ public interface UserManager {
 
 	public abstract List<User> getUsers();
 
-	public abstract List<User> getUsers(int i, int j);
+	public abstract List<User> getUsers(int startIndex, int numResults);
 
 	public abstract boolean isCreationSupported();
 

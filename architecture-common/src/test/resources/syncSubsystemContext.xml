@@ -26,9 +26,6 @@
 		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
 		
 		
-	<bean id="dataSyncProcessor" class="architecture.common.adaptor.processor.DataSyncProcessor">
-	    <property map=""></property>
+	<bean id="dataSyncProcessor" class="architecture.common.adaptor.processor.DataSyncProcessor" />
 	
-	
-	</bean>	
 </beans>	
