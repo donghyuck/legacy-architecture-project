@@ -11,6 +11,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
@@ -319,7 +320,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		
 		UserTemplate user = null;
 		try {
-			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ID").getSql(), userMapper, new Object[]{userId}, new int[]{Types.INTEGER});
+			user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ID").getSql(), userMapper, new SqlParameterValue(Types.NUMERIC, userId ) );
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (IncorrectResultSizeDataAccessException e) {
 			if(e.getActualSize() > 1)
@@ -336,9 +337,9 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public void delete(User user) {		
-        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_MEMBERSHIP").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});
+        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_MEMBERSHIP").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.NUMERIC});
         extendedPropertyDao.deleteProperties(userPropertyTableName, userPropertyPrimaryColumnName, user.getUserId());
-        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_USER_BY_ID").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});        
+        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_USER_BY_ID").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.NUMERIC});        
 	}
 
 	public Map<String, String> getUserProperties(long userId) {

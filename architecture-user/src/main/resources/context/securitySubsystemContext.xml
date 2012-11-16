@@ -32,9 +32,11 @@
     <security:http pattern="/accounts/token.do*"   security="none" />
     <security:http pattern="/index.jsp"                security="none" />
 
-    <security:http>    	
+    <security:http entry-point-ref="authenticationEntryPoint">    	
         <security:intercept-url pattern="/main.do*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>        
         <security:intercept-url pattern="/**" access="ROLE_USER" />    	
+        
+        <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
     	<security:form-login 
     	    login-page="/accounts/login.do" 
@@ -43,13 +45,36 @@
     	    password-parameter="password" 
     	    authentication-failure-handler-ref="authenticationFailureHandler" 
     	    authentication-success-handler-ref="authenticationSuccessHandler" />
+    	<security:access-denied-handler error-page="/includes/jsp/unauthorized.jsp" />   
     	<security:anonymous enabled="true" username="ANONYMOUS" />
     	<security:session-management session-fixation-protection="newSession" />
+    	
     </security:http>
 
     <security:authentication-manager>
 		<security:authentication-provider ref="daoAuthenticationProvider" />
 	</security:authentication-manager>
+
+	<bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<constructor-arg value="/accounts/login.do" />
+	</bean>	
+	
+	<bean id="ajaxAuthenticationEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
+	
+	<bean id="nonAjaxRequestMatcher" class="architecture.ee.web.security.spring.util.NonAjaxRequestMatcher" />
+	
+    <bean id="authenticationRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache">
+	    <property name="requestMatcher" ref="nonAjaxRequestMatcher" />
+    </bean>
+	
+	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
+		<constructor-arg>
+			<map>
+				<entry key-ref="nonAjaxRequestMatcher" value-ref="loginUrlAuthenticationEntryPoint" />
+			</map>
+		</constructor-arg>
+		<property name="defaultEntryPoint" ref="ajaxAuthenticationEntryPoint" />
+	</bean>
 	
 	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" p:defaultTargetUrl="/main.do" />
 	

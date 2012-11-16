@@ -57,7 +57,7 @@ public class ExtendedAuthenticationProvider extends DaoAuthenticationProvider {
 		try {
 			user = (ExtendedUserDetails) userDetails;
 		} catch (Exception e) {
-			log.error("Unable to coerce user detail to JiveUserDetail.");
+			log.error("Unable to coerce user detail to ExtendedUserDetails.");
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));        
 		}
 		
