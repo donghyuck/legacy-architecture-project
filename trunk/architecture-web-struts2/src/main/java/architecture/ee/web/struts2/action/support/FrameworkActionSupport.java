@@ -33,7 +33,7 @@ import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.opensymphony.xwork2.util.ValueStack;
 
 public class FrameworkActionSupport extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware, ParameterNameAware, OutputFormatAware {
-
+   
 	public static final String CANCEL = "cancel";
 	public static final String NOTFOUND = "notfound";
 	public static final String UNAUTHORIZED = "unauthorized";
@@ -58,7 +58,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 
 	private User user;
 	
-	protected Map<String, Object> models = new LinkedHashMap<String, Object>();
+    protected Map<String, Object> models = new LinkedHashMap<String, Object>();
 	
     public final void setAuthenticationProvider(AuthenticationProvider authProvider)
     {
@@ -91,8 +91,16 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		return authToken;
 	}
 
+    public String input(){
+        if( getOutputFormat() == OutputFormat.JSON ){
+            return  OutputFormat.JSON.name().toLowerCase() + "-" + INPUT ;
+        } else if ( getOutputFormat() == OutputFormat.XML ){ 
+            return  OutputFormat.HTML.name().toLowerCase() + "-" + INPUT ;
+        }        
+       return INPUT;
+    }
+   
     public String success(){
-        log.debug(getOutputFormat().name());
         if( getOutputFormat() == OutputFormat.JSON ){
             return  OutputFormat.JSON.name().toLowerCase() + "-" + SUCCESS ;
         } else if ( getOutputFormat() == OutputFormat.XML ){ 
@@ -116,24 +124,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			}
 		return user;
 	}
-	
-	
-	/*
-	public Map getModelMap(){
-		return ServletUtils.getModelMap(request, response);
-	}
-	
-    protected void saveModelMap(Map model) {
-        // Remove any error messages attribute if none are required
-        if ((model == null) || model.isEmpty()) {
-            request.removeAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
-            return;
-        }
-        // Save the error messages we need
-        request.setAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE, model);
-    }
-    */
-	
+		
 	protected final <T> T getComponent(Class<T> requiredType)
 			throws ComponentNotFoundException {
 		return WebApplicationHelper.getComponent(requiredType);
