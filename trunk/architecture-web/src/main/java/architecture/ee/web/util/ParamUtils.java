@@ -52,7 +52,21 @@ public class ParamUtils extends ServletRequestUtils {
 		}    	
     }
     
-
+    public static <T> T getJsonParameter(HttpServletRequest request, String name, Class<T> requiredType) {       
+        try {
+            String jsonString = getParameter(request, name);        
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            return (T) mapper.readValue(jsonString, requiredType );
+        } catch (Exception e) {
+            if(requiredType == List.class )
+                return (T) Collections.EMPTY_LIST;
+            else if (requiredType == Map.class ){
+                return (T) Collections.EMPTY_MAP;
+            }
+            return null;
+        }       
+    }
+    
     public static String getParameter(HttpServletRequest request, String name)
     {
         return getParameter(request, name, false);
