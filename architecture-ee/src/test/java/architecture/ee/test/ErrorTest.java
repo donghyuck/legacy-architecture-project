@@ -5,7 +5,6 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.junit.Test;
 
-import architecture.common.exception.CodeableRuntimeException;
 import architecture.ee.exception.ApplicationException;
 
 public class ErrorTest {

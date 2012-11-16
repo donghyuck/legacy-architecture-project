@@ -10,8 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.context.support.AbstractMessageSource;
 
-import architecture.ee.component.admin.AdminHelper;
-
 public class I18nTextMessageSource extends AbstractMessageSource {
 
 	private final AtomicBoolean i18nTextBundlesLoaded = new AtomicBoolean(false);	
