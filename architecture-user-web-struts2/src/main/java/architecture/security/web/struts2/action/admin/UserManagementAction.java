@@ -19,11 +19,14 @@ import java.util.List;
 
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
-import architecture.ee.util.OutputFormat;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
+    private int pageSize = 0 ;
+    
+    private int startIndex = 0 ;    
+    
     private UserManager userManager ;
 
     public UserManager getUserManager() {
@@ -34,17 +37,36 @@ public class UserManagementAction  extends FrameworkActionSupport  {
         this.userManager = userManager;
     }
     
-    public List<User> getUsers(){
-        return userManager.getUsers();
+    public int getPageSize() {
+        return pageSize;
     }
 
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
+    }
+
+    public int getStartIndex() {
+        return startIndex;
+    }
+
+    public void setStartIndex(int startIndex) {
+        this.startIndex = startIndex;
+    }
+    
+    public int getTotalUserCount(){
+        return userManager.getTotalUserCount();
+    }
+
+    public List<User> getUsers(){        
+        if( pageSize > 0 ){
+            return userManager.getUsers(startIndex, pageSize);            
+        }else{            
+            return userManager.getUsers();
+        }
+    }
     
     @Override
     public String execute() throws Exception {  
         return success();
-    }
-
-    
-    
-    
+    }    
 }
