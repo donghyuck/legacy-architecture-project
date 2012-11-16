@@ -12,7 +12,11 @@ import architecture.ee.web.model.AttachmentModel;
 
 public class AttachmentModelImpl extends BaseModelObject<Attachment>  implements AttachmentModel {
 
-	private long attachmentId = -1L;
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 3961478724321254035L;
+    private long attachmentId = -1L;
 	private String name;
 	private String contentType ;
 	private int objectType ;
