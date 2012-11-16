@@ -18,8 +18,17 @@ package architecture.security.web.struts2.action;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class ViewUserProfileAction  extends FrameworkActionSupport  {
+    
     @Override
     public String execute() throws Exception {
+        return SUCCESS;
+    }
+
+    public String update() throws Exception {
+        return SUCCESS;
+    }
+    
+    public String delete() throws Exception {
         return SUCCESS;
     }
 }

@@ -29,9 +29,47 @@
 		<action name="manage-user" class="architecture.security.web.struts2.action.admin.UserManagementAction">
 			<result name="success" type="freemarker">/html/manage-users.ftl</result>
 			<result name="json-success" type="json">
-				<param name="root" >users</param>
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">users.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				users.*, totalUserCount
+				</param>
 			</result>
-		</action>				
+		</action>
+		
+		<action name="user-property" class="architecture.security.web.struts2.action.admin.UserPropetyAction">
+		    <result name="success" type="freemarker">/html/manage-users.ftl</result>
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserProperty.*
+				</param>
+			</result>		
+		</action>			
+
+		<action name="update-user-property" method="update" class="architecture.security.web.struts2.action.admin.UserPropetyAction">
+		    <result name="success" type="freemarker">/html/manage-users.ftl</result>
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserProperty.*
+				</param>
+			</result>		
+		</action>	
+
+		<action name="delete-property" method="delete" class="architecture.security.web.struts2.action.admin.UserPropetyAction">
+		    <result name="success" type="freemarker">/html/manage-users.ftl</result>
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserProperty.*
+				</param>
+			</result>		
+		</action>						
 	</package>
 	
 </struts>
