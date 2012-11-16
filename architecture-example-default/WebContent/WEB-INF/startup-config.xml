@@ -31,7 +31,7 @@ MTdjMzQ1ZTc5ZTAxOWFmNGQwOTVmZTRkZjk8L3NpZ25hdHVyZT48L2xpY2Vuc2U+</file>
             <freemarker>
                 <enabled>true</enabled>
                 <source>
-                    <location></location>
+                    <location>/WEB-INF/templates/freemarker</location>
                 </source>
             </freemarker>
             <velocity>
