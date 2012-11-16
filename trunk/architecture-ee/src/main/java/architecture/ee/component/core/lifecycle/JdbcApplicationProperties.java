@@ -122,7 +122,7 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
 	}
 
 	public Collection<String> getPropertyNames() {
-		return (Collection<String>)new ArrayList(properties.keySet());
+		return (Collection<String>)new ArrayList<String>(properties.keySet());
 	}
 
 	public String getStringProperty(String property, String defaultValue) {
@@ -171,15 +171,14 @@ public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties
                 if(!oldValue.equals(value))
                 {
                     updateProperty(key, value);
-                    HashMap params = new HashMap();
+                    HashMap<String, Object> params = new HashMap<String, Object>();
                     params.put("PARAM_MODIFIED_OLD_VALUE", oldValue);
-
                     firePropertyChangeEvent(this, ApplicationPropertyChangeEvent.Type.MODIFIED, (String)key, value, params);  
                 }
             } else
             {
                 insertProperty(key, value);
-                firePropertyChangeEvent(this, ApplicationPropertyChangeEvent.Type.ADDED, (String)key, value, null);   
+                firePropertyChangeEvent(this, ApplicationPropertyChangeEvent.Type.ADDED, key, value, null);   
             }
            // CacheFactory.doClusterTask(new PropertyClusterPutTask(key, value, localized));
             s = oldValue;

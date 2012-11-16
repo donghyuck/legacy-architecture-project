@@ -3,8 +3,6 @@ package architecture.ee.services;
 import java.util.List;
 import java.util.Map;
 
-import architecture.ee.jdbc.sqlquery.SqlQueryException;
-
 public interface SqlQueryClient {
 
 	

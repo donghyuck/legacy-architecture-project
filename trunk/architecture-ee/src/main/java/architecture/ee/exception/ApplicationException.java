@@ -23,7 +23,12 @@ import architecture.common.util.L10NUtils;
  */
 public class ApplicationException extends CodeableException {
 	
-	public ApplicationException() {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = -7905504453715998652L;
+
+    public ApplicationException() {
 		super();
 	}
 
