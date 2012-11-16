@@ -1,0 +1,135 @@
+2012.11.05 09:38:33 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/login.jsp]
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/favicon.ico'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/decorators/**'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/images/**'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/includes/**'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/js/**'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/styles/**'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/404.jsp*'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/500.jsp*'
+2012.11.05 09:38:33 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/login.jsp'; against '/login.jsp*'
+2012.11.05 09:38:33 DEBUG [FilterChainProxy] doFilter - /login.jsp has an empty filter list
+2012.11.05 09:38:34 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/login.jsp]
+2012.11.05 09:38:35 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/styles/foundation.css]
+2012.11.05 09:38:35 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/foundation.css'; against '/favicon.ico'
+2012.11.05 09:38:35 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/foundation.css'; against '/decorators/**'
+2012.11.05 09:38:35 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/foundation.css'; against '/images/**'
+2012.11.05 09:38:35 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/foundation.css'; against '/includes/**'
+2012.11.05 09:38:35 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/foundation.css'; against '/js/**'
+2012.11.05 09:38:35 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/foundation.css'; against '/styles/**'
+2012.11.05 09:38:35 DEBUG [FilterChainProxy] doFilter - /styles/foundation.css has an empty filter list
+2012.11.05 09:38:35 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/styles/foundation.css]
+2012.11.05 09:38:35 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/yepnope.js]
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/yepnope.js'; against '/favicon.ico'
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/yepnope.js'; against '/decorators/**'
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/yepnope.js'; against '/images/**'
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/yepnope.js'; against '/includes/**'
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/yepnope.js'; against '/js/**'
+2012.11.05 09:38:36 DEBUG [FilterChainProxy] doFilter - /js/yepnope.js has an empty filter list
+2012.11.05 09:38:36 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/yepnope.js]
+2012.11.05 09:38:36 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/images/yeti9000.png]
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/images/yeti9000.png'; against '/favicon.ico'
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/images/yeti9000.png'; against '/decorators/**'
+2012.11.05 09:38:36 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/images/yeti9000.png'; against '/images/**'
+2012.11.05 09:38:36 DEBUG [FilterChainProxy] doFilter - /images/yeti9000.png has an empty filter list
+2012.11.05 09:38:36 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/images/yeti9000.png]
+2012.11.05 09:38:39 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/jquery/1.7.1/jquery.min.js]
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/favicon.ico'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/decorators/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/images/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/includes/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/js/**'
+2012.11.05 09:38:39 DEBUG [FilterChainProxy] doFilter - /js/jquery/1.7.1/jquery.min.js has an empty filter list
+2012.11.05 09:38:39 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/jquery/1.7.1/jquery.min.js]
+2012.11.05 09:38:39 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/foundation/foundation.min.js]
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/favicon.ico'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/decorators/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/images/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/includes/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/js/**'
+2012.11.05 09:38:39 DEBUG [FilterChainProxy] doFilter - /js/foundation/foundation.min.js has an empty filter list
+2012.11.05 09:38:39 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/foundation/foundation.min.js]
+2012.11.05 09:38:39 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/jquery/1.8.2/jquery.min.js]
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/favicon.ico'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/decorators/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/images/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/includes/**'
+2012.11.05 09:38:39 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/js/**'
+2012.11.05 09:38:39 DEBUG [FilterChainProxy] doFilter - /js/jquery/1.8.2/jquery.min.js has an empty filter list
+2012.11.05 09:38:39 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/jquery/1.8.2/jquery.min.js]
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/jquery/1.7.1/jquery.min.js]
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/favicon.ico'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/decorators/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/images/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/includes/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.7.1/jquery.min.js'; against '/js/**'
+2012.11.05 09:38:41 DEBUG [FilterChainProxy] doFilter - /js/jquery/1.7.1/jquery.min.js has an empty filter list
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/jquery/1.7.1/jquery.min.js]
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/styles/kendo.metro.min.css]
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/favicon.ico'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/decorators/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/images/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/includes/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/js/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/styles/**'
+2012.11.05 09:38:41 DEBUG [FilterChainProxy] doFilter - /styles/kendo.metro.min.css has an empty filter list
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/styles/kendo.metro.min.css]
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/styles/kendo.common.min.css]
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/favicon.ico'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/decorators/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/images/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/includes/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/js/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/styles/**'
+2012.11.05 09:38:41 DEBUG [FilterChainProxy] doFilter - /styles/kendo.common.min.css has an empty filter list
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/styles/kendo.common.min.css]
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/kendo/kendo.web.min.js]
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/favicon.ico'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/decorators/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/images/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/includes/**'
+2012.11.05 09:38:41 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/js/**'
+2012.11.05 09:38:41 DEBUG [FilterChainProxy] doFilter - /js/kendo/kendo.web.min.js has an empty filter list
+2012.11.05 09:38:41 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/kendo/kendo.web.min.js]
+2012.11.05 09:38:42 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/foundation/foundation.min.js]
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/favicon.ico'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/decorators/**'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/images/**'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/includes/**'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/foundation/foundation.min.js'; against '/js/**'
+2012.11.05 09:38:42 DEBUG [FilterChainProxy] doFilter - /js/foundation/foundation.min.js has an empty filter list
+2012.11.05 09:38:42 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/foundation/foundation.min.js]
+2012.11.05 09:38:42 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/jquery/1.8.2/jquery.min.js]
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/favicon.ico'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/decorators/**'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/images/**'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/includes/**'
+2012.11.05 09:38:42 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/jquery/1.8.2/jquery.min.js'; against '/js/**'
+2012.11.05 09:38:42 DEBUG [FilterChainProxy] doFilter - /js/jquery/1.8.2/jquery.min.js has an empty filter list
+2012.11.05 09:38:42 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/jquery/1.8.2/jquery.min.js]
+2012.11.05 09:38:43 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/js/kendo/kendo.web.min.js]
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/favicon.ico'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/decorators/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/images/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/includes/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/js/kendo/kendo.web.min.js'; against '/js/**'
+2012.11.05 09:38:43 DEBUG [FilterChainProxy] doFilter - /js/kendo/kendo.web.min.js has an empty filter list
+2012.11.05 09:38:43 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/js/kendo/kendo.web.min.js]
+2012.11.05 09:38:43 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/styles/kendo.common.min.css]
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/favicon.ico'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/decorators/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/images/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/includes/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/js/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.common.min.css'; against '/styles/**'
+2012.11.05 09:38:43 DEBUG [FilterChainProxy] doFilter - /styles/kendo.common.min.css has an empty filter list
+2012.11.05 09:38:43 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/styles/kendo.common.min.css]
+2012.11.05 09:38:43 DEBUG [CommonsRequestLoggingFilter] beforeRequest - Before request [uri=/styles/kendo.metro.min.css]
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/favicon.ico'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/decorators/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/images/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/includes/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/js/**'
+2012.11.05 09:38:43 DEBUG [AntPathRequestMatcher] matches - Checking match of request : '/styles/kendo.metro.min.css'; against '/styles/**'
+2012.11.05 09:38:43 DEBUG [FilterChainProxy] doFilter - /styles/kendo.metro.min.css has an empty filter list
+2012.11.05 09:38:43 DEBUG [CommonsRequestLoggingFilter] afterRequest - After request [uri=/styles/kendo.metro.min.css]
