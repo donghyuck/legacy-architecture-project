@@ -3,7 +3,12 @@ import architecture.ee.exception.ApplicationException;
 
 public class AlreadyExistsException extends ApplicationException {
 
-	public AlreadyExistsException() {
+	/**
+     * 
+     */
+    private static final long serialVersionUID = 5916721737344787601L;
+
+    public AlreadyExistsException() {
 		super();
 	}
 
