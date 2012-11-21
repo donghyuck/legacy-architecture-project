@@ -24,6 +24,12 @@ import org.apache.commons.net.ftp.FTPReply;
 
 import architecture.common.adaptor.Connector;
 
+/**
+ * FTP 작업을 위한 추상 클래스
+ * 
+ * @author donghyuck
+ *
+ */
 public class AbstractFtpConnector implements Connector  {
 
 	protected Log log = LogFactory.getLog(getClass());

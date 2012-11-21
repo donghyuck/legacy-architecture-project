@@ -37,7 +37,7 @@ public class LicenseTest {
             //  signer.sign(license);
             
             LicenseWriter writer = new LicenseWriter(license, signer);
-            writer.write(new FileWriter(  "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/license.xml"  ));
+            writer.write(new FileWriter(  "C:/TOOLS/workspace/profile/license.xml"  ));
             
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,13 +48,13 @@ public class LicenseTest {
 		validator.validate(license);
 	}
 	
-	//@Test
+	@Test
 	public void testReadLicense(){
 		
 		LicenseReader reader = new LicenseReader();
 		
 		try {
-			License license = reader.read(new FileReader( "C:/TOOLS/workspace/architecture_v2/architecture-ee/profile/license.xml"  ) );
+			License license = reader.read(new FileReader( "C:/TOOLS/workspace/profile/license.xml"  ) );
 			System.out.println( license.toXML() ) ;
 		} catch (Exception e) {
 			e.printStackTrace();

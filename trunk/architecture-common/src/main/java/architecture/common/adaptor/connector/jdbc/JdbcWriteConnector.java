@@ -23,6 +23,11 @@ import architecture.common.adaptor.WriteConnector;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.util.StringUtils;
 
+/**
+ * 
+ * @author donghyuck
+ *
+ */
 public class JdbcWriteConnector extends AbstractJdbcConnector implements WriteConnector {
 
 		
@@ -36,6 +41,7 @@ public class JdbcWriteConnector extends AbstractJdbcConnector implements WriteCo
 				// 쿼리가 존재하지 않는 경우는 어떻게..
 			}
 		}		
+		
 		List<ParameterMapping> parameterMappings = context.getObject("parameterMappings", List.class);
 		
 		

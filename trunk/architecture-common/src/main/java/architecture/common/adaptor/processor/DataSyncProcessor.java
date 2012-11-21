@@ -1,3 +1,18 @@
+/*
+ * Copyright 2012 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package architecture.common.adaptor.processor;
 
 import architecture.common.adaptor.Context;
@@ -6,25 +21,15 @@ import architecture.common.adaptor.ReadConnector;
 import architecture.common.adaptor.WriteConnector;
 
 /**
+ * 
  * @author  donghyuck
  */
 public class DataSyncProcessor implements DataProcessor {
-	
-	/**
-	 * @uml.property  name="readConnector"
-	 * @uml.associationEnd  
-	 */
+
 	private ReadConnector readConnector;
-	
-	/**
-	 * @uml.property  name="writeConnector"
-	 * @uml.associationEnd  
-	 */
+
 	private WriteConnector writeConnector;
 		
-	/**
-	 * 
-	 */
 	public Object process(Object... args) {
 
 		Context context = getContext();		
@@ -40,38 +45,21 @@ public class DataSyncProcessor implements DataProcessor {
 		return null;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="readConnector"
-	 */
 	public ReadConnector getReadConnector() {
 		return readConnector;
 	}
 
-	/**
-	 * @param readConnector
-	 * @uml.property  name="readConnector"
-	 */
 	public void setReadConnector(ReadConnector readConnector) {
 		this.readConnector = readConnector;
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="writeConnector"
-	 */
 	public WriteConnector getWriteConnector() {
 		return writeConnector;
 	}
 
-	/**
-	 * @param writeConnector
-	 * @uml.property  name="writeConnector"
-	 */
 	public void setWriteConnector(WriteConnector writeConnector) {
 		this.writeConnector = writeConnector;
 	}
-	
 	
 
 }
