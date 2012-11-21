@@ -23,6 +23,11 @@ import architecture.common.adaptor.ReadConnector;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.util.StringUtils;
 
+/**
+ * 
+ * @author donghyuck
+ *
+ */
 public class JdbcReadConnector extends AbstractJdbcConnector implements ReadConnector {
 
 	

@@ -20,6 +20,11 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.adaptor.Connector;
 
+/**
+ * 
+ * @author donghyuck
+ *
+ */
 public class HttpConnector implements Connector {
 	
 	protected Log log = LogFactory.getLog(getClass());
@@ -27,8 +32,6 @@ public class HttpConnector implements Connector {
 	public static final String DEFAULT_CHARSET = "UTF-8" ;
 	
 	public static final String DEFAULT_CONTENT_TYPE = "text/xml; charset=utf-8" ;
-	
-
 	
 	/**
 	 * 문자 인코딩 형식
@@ -56,11 +59,20 @@ public class HttpConnector implements Connector {
 	private int retryMaxCount = 1;
 	
 	
+	/**
+	 * 
+	 * @return 문자 인코딩 형식 값을 리턴.
+	 */
 	public String getCharset() {
 		return charset;
 	}
 
 
+	/**
+	 * 문자인코딩 값을 설정
+	 * 
+	 * @param charset
+	 */
 	public void setCharset(String charset) {
 		this.charset = charset;
 	}
