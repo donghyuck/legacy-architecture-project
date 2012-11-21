@@ -94,7 +94,14 @@
 		</plugins>
 	</reporting>
 
-	<modules>
-		<module>architecture-user-web-struts2</module>
-	</modules>
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>FUSE ARCHITECTURE Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</repository>
+	</repositories>
 </project>
