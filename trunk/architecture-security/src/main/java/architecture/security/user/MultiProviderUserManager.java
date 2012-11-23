@@ -30,6 +30,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
@@ -139,6 +141,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		this.eventPublisher = eventPublisher;
 	}
 
+	
 	public User createUser(User newUser) throws UserAlreadyExistsException,
 			UnsupportedOperationException, EmailAlreadyExistsException {
 		
@@ -190,6 +193,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		return user;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public User createApplicationUser(User newUser) throws UserAlreadyExistsException {
 		User user = getUser(newUser);
 		if(null != user)
@@ -349,6 +353,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		return user;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteUser(User user) throws UnsupportedOperationException, UserNotFoundException {
 		log.info( L10NUtils.format("005118", user ) );
         User loadedUser = getUser(user);
@@ -388,6 +393,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteUserAndContent(User user) throws UnsupportedOperationException, UserNotFoundException {
         log.info((new StringBuilder()).append("Deleting user ").append(user).append(" and content.").toString());
         User loadedUser = getUser(user);
@@ -441,6 +447,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		return allowApplicationUserCreation;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public User updateUser(User user) throws UserNotFoundException, UserAlreadyExistsException {
 
 		log.debug( L10NUtils.format("005124", user ) );
