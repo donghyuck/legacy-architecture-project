@@ -1,6 +1,7 @@
 package architecture.security.role.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import net.sf.ehcache.Cache;
@@ -90,7 +91,7 @@ public class RoleManagerImpl implements ExtendedRoleManager, EventSource {
 			roles.add(role);
 		}
         
-		List<Group> groups = groupManager.getUserGroups(new UserTemplate(userId));
+		List<Group> groups = Collections.EMPTY_LIST; //groupManager.getUserGroups(new UserTemplate(userId));
 		for(Group group : groups ){			
 			List<Long> groupRoleIds = roleDao.getGroupRoleIds(group.getGroupId());
 			for(long roleId : groupRoleIds ){

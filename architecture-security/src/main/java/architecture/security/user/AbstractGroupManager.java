@@ -1,8 +1,5 @@
 package architecture.security.user;
 
-import java.util.Collections;
-import java.util.List;
-
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -11,7 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
-import architecture.common.user.User;
+import architecture.ee.component.admin.AdminHelper;
 
 /**
  * @author  donghyuck
@@ -22,44 +19,25 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	/**
 	 */
 	protected EventPublisher eventPublisher;
-	protected Cache groupCache;
-	protected Cache groupIdCache;
-	protected Cache groupMemberCache;
 	protected boolean caseInsensitiveGroupNameMatch;
-	
-		
+	protected Cache groupCache;
+    protected Cache groupIdCache ;
+    
 	public AbstractGroupManager() {
 		
-        caseInsensitiveGroupNameMatch = true;
-        //groupCache = AdminHelper.getCache("groupCache");
-        //groupIdCache = AdminHelper.getCache("groupIDCache");
-        //groupMemberCache = AdminHelper.getCache("groupMemberCache");
+        this.caseInsensitiveGroupNameMatch = true;
+        this.groupCache = AdminHelper.getCache("groupCache");
+        this.groupIdCache = AdminHelper.getCache("groupIdCache");
 	}
 	
-	/**
-	 * @param groupCache
-	 */
 	public void setGroupCache(Cache groupCache) {
 		this.groupCache = groupCache;
 	}
-
-
-
-	/**
-	 * @param groupIdCache
-	 */
-
+	
+	
 	public void setGroupIdCache(Cache groupIdCache) {
 		this.groupIdCache = groupIdCache;
 	}
-
-	/**
-	 * @param groupMemberCache
-	 */
-	public void setGroupMemberCache(Cache groupMemberCache) {
-		this.groupMemberCache = groupMemberCache;
-	}
-
 
 	/**
 	 * @param caseInsensitiveGroupNameMatch
@@ -77,14 +55,49 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 		this.eventPublisher = eventPublisher;
 	}	
 	
+	
+    public Group getGroup(String name)
+        throws GroupNotFoundException
+    {
+    	String nameToUse = caseGroupName(name);
+    	if( groupIdCache.isKeyInCache(nameToUse) ){
+    		Long groupId = (Long)groupIdCache.get(nameToUse).getValue();    		
+    		return getGroup(groupId);
+    	}else{
+    		Group g = lookupGroup(nameToUse);
+    		groupIdCache.put( new Element( nameToUse, g.getGroupId() ) );
+    		return getGroup(g.getGroupId());
+    	}
+    }
+
+	public Group getGroup(long groupId) throws GroupNotFoundException {
+		Group group = (Group) groupCache.get( groupId ).getValue();
+		if (group == null) {
+			 group = lookupGroup(groupId);
+			 groupCache.put(new Element(groupId, group));
+		}
+		return group;
+	}
+    
+    protected String caseGroupName(String name)
+    {
+        return caseInsensitiveGroupNameMatch ? name.toLowerCase() : name;
+    }
+    
+    protected abstract Group lookupGroup(String name) throws GroupNotFoundException;
+	
+    protected abstract Group lookupGroup(long groupId)  throws GroupNotFoundException;
+    
+    
+	/*
 	public List<Group> getUserGroups(User user){
+		
 		long userId = user.getUserId();
+		
 		String key = (new StringBuilder()).append("userGroups-").append(userId).toString();
-		
+				
 		List<Group> groups;
-		
-	    log.debug(groupMemberCache);
-		
+				
 		if(groupMemberCache.get(key) != null)
 		{
 			groups = (List<Group>)groupMemberCache.get(key).getValue();
@@ -103,9 +116,91 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	
     protected abstract Group lookupGroup(String name) throws GroupNotFoundException;
 	
+    protected abstract Group lookupGroup(long groupId)  throws GroupNotFoundException;
+        
     public boolean isGetUserGroupsSupported()
     {
         return false;
     }
     
+    public int getGroupCount()
+    {
+        return 0;
+    }
+    
+
+    public Group getGroup(long groupID, boolean force)
+        throws GroupNotFoundException
+    {
+        if(force)
+            return lookupGroup(groupID);
+        else
+            return getGroup(groupID);
+    }
+
+    public Group getGroup(long groupID)
+        throws GroupNotFoundException
+    {
+        Group group = (Group)groupCache.get(Long.valueOf(groupID)).getValue();
+        if(group == null)
+        {
+            group = lookupGroup(groupID);
+            groupCache.put( new Element ( Long.valueOf(groupID), group ) );
+        }
+        return group;
+    }
+
+    public Group getGroup(String name)
+        throws GroupNotFoundException
+    {
+        name = caseGroupName(name);
+        Long groupIDLong = (Long)groupIdCache.get(name).getValue();
+        if(groupIDLong == null)
+        {
+            Group group = lookupGroup(name);
+            groupIDLong = Long.valueOf(group.getGroupId());
+            groupIdCache.put( new Element( name, groupIDLong ) );
+        }
+        return getGroup(groupIDLong.longValue());
+    }
+
+    protected void groupNameUpdated(String oldGroupName)
+    {
+        groupIdCache.remove(caseGroupName(oldGroupName));
+    }
+    
+    protected boolean nameEquals(Group group1, Group group2)
+    {
+        return group1.getName() != null && group2.getName() != null && caseGroupName(group1.getName()).equals(caseGroupName(group2.getName()));
+    }
+
+    protected String caseGroupName(String name)
+    {
+        return caseInsensitiveGroupNameMatch ? name.toLowerCase() : name;
+    }
+
+    public boolean isCreateGroupSupported()
+    {
+        return false;
+    }
+
+    public boolean isDeleteGroupSupported()
+    {
+        return false;
+    }
+
+    public boolean isGroupListSupported()
+    {
+        return false;
+    }
+
+    public List<Group> getGroups()
+    {
+        return Collections.emptyList();
+    }
+
+    public List<Group> getGroups(int startIndex, int numResults)
+    {
+        return Collections.emptyList();
+    }*/
 }

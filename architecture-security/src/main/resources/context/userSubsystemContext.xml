@@ -45,7 +45,27 @@
 		p:timeToLive="60"
 		p:eternal="false" 
 		p:diskExpiryThreadIntervalSeconds="0" />
-		
+
+	<bean id="groupCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userCache" 
+		p:maxElementsInMemory="5000" 
+		p:diskPersistent="false"
+		p:overflowToDisk="false" 
+		p:timeToIdle="30" 
+		p:timeToLive="60"
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="groupIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userCache" 
+		p:maxElementsInMemory="5000" 
+		p:diskPersistent="false"
+		p:overflowToDisk="false" 
+		p:timeToIdle="30" 
+		p:timeToLive="60"
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+						
 	<bean id="userDao" class="architecture.security.user.dao.impl.JdbcUserDao"
 		parent="jdbcDaoSupport" 
 		depends-on="extendedPropertyDao"
@@ -61,6 +81,20 @@
 		p:userIdCache-ref="userIDCache" 
 		p:userProviderCache-ref="userProviderCache" />		
 
+	<bean id="groupDao" class="architecture.security.user.dao.impl.JdbcGroupDao"
+		parent="jdbcDaoSupport" 
+		depends-on="extendedPropertyDao"
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
+
+	<bean id="groupManager" class="architecture.security.user.DefaultGroupManager"
+		depends-on="groupDao, userManager, eventPublisher" 
+		p:groupDao-ref="groupDao"
+		p:userManager-ref="userManager"
+		p:eventPublisher-ref="eventPublisher" 
+		p:userCache-ref="groupCache"
+		p:userIdCache-ref="groupIdCache" 
+		 />	
+				
     <bean id="passwordEncoder" class="architecture.security.spring.authentication.encoding.PasswordEncoderFactory" />
     <bean id="passwordSaltSource" class="architecture.security.spring.authentication.encoding.SaltSourceFactory" />
 

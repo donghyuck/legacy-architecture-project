@@ -7,27 +7,45 @@ import architecture.security.user.Group;
 
 public interface GroupDao {
 	
+	public abstract void createGroup(Group group);
+	
+	public abstract void updateGroup(Group group);
+	
+	public abstract int getGroupCount();
+	
+	public abstract List<Group> getGroups();
+	
+	public abstract List<Group> getGroups(int start, int num);
+	
+	
+	public abstract List<Long> getGroupIds(int start, int num);
+	
+	public abstract List<Long> getAllGroupIds();
+	
+	public abstract Group getGroupById(long groupId);
+
+	public abstract Group getGroupByName(String name, boolean caseInsensitive);	
+	
+	/*
 	public abstract void deleteGroupUsers(long groupId);
 
 	public abstract void deleteGroupProperties(long groupId);
 
 	public abstract void deleteGroup(long groupId);
 
-	public abstract int getGroupCount();
+	
 
-	public abstract List<Long> getAllGroupIds();
+	
 
 	public abstract List<Long> getUserGroupIds(long userId);
 
 	public abstract List<Long> getGroupIds(int start, int num);
 
-	public abstract void createGroup(Group group);
+	
 
-	public abstract void update(Group group);
+	
 
-	public abstract Group getGroupById(long groupId);
 
-	public abstract Group getGroupByName(String name, boolean flag);	
 	
 	public abstract List<Long> getMembersIds(long groupId);
 
@@ -52,5 +70,6 @@ public interface GroupDao {
 	public abstract void removeAdministrators(long groupId, Set<Long> userIds);	
 	
 	public abstract void deleteUserMemberships(long userId);
+	*/
 
 }

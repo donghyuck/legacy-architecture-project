@@ -244,4 +244,12 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
         size += CacheSizes.sizeOfCollection(administrators);
         return size;
 	}
+
+	public int getMemberCount() {
+		return members.size();
+	}
+
+	public int getAdministratorCount() {
+		return administrators.size();
+	}
 }
