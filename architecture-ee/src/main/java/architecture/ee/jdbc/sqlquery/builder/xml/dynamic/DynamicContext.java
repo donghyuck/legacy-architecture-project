@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ *  Copyright 2012, 2013 donghyuck, son.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,6 @@ public class DynamicContext {
 	
 	public static final String PARAMETER_OBJECT_KEY = "_parameter";
 
-	/**
-	 * @uml.property  name="bindings"
-	 */
 	private final Map<String, Object> bindings;
 	
 	private final StringBuilder sqlBuilder = new StringBuilder();
@@ -49,10 +46,6 @@ public class DynamicContext {
 		this.bindings.put(ADDITIONAL_PARAMETER_OBJECT_KEY, additionalParameters);	
 	}
 
-	/**
-	 * @return
-	 * @uml.property  name="bindings"
-	 */
 	public Map<String, Object> getBindings() {
 		return bindings;
 	}

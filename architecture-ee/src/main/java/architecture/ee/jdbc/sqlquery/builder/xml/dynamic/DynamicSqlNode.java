@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ * Copyright 2012, 2013 donghyuck, son.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,12 +36,7 @@ public class DynamicSqlNode implements SqlNode {
 
 	protected Log log = LogFactory.getLog(getClass());
 	private static BeansWrapper wrapper = new BeansWrapper();
-
 	private String text;
-	/**
-	 * @uml.property  name="language"
-	 * @uml.associationEnd  
-	 */
 	private Language language;
 
 	public DynamicSqlNode(String text) {
@@ -59,8 +54,7 @@ public class DynamicSqlNode implements SqlNode {
 		
 		Object parameterObject = context.getBindings().get(DynamicContext.PARAMETER_OBJECT_KEY);		
 		Object additionalParameterObject = context.getBindings().get(DynamicContext.ADDITIONAL_PARAMETER_OBJECT_KEY);		
-		
-		
+				
 		if (additionalParameterObject != null) {
 			if( additionalParameterObject instanceof Map )
 				map.putAll((Map) additionalParameterObject);
@@ -91,18 +85,8 @@ public class DynamicSqlNode implements SqlNode {
 		return "dynamic[" + text + "]";
 	}
 
-	/**
-	 * @author   donghyuck
-	 */
 	public enum Language {
-		/**
-		 * @uml.property  name="vELOCITY"
-		 * @uml.associationEnd  
-		 */
-		VELOCITY, /**
-		 * @uml.property  name="fREEMARKER"
-		 * @uml.associationEnd  
-		 */
+		VELOCITY,
 		FREEMARKER
 	}
 
@@ -110,13 +94,11 @@ public class DynamicSqlNode implements SqlNode {
 		StringReader reader = new StringReader(text);
 		StringWriter writer = new StringWriter();
 		try {
-
 			populateStatics(map);
 			freemarker.template.SimpleHash root = new freemarker.template.SimpleHash();
 			root.putAll(map);
 			freemarker.template.Template template = new freemarker.template.Template( "dynamic", reader, null );
 			template.process(root, writer);
-
 		} catch (IOException e) {
 			log.error(e);
 		} catch (TemplateException e) {
@@ -130,10 +112,8 @@ public class DynamicSqlNode implements SqlNode {
 			TemplateHashModel enumModels = wrapper.getEnumModels();
 			model.put("enums", enumModels );
 		} catch (UnsupportedOperationException e) {
-		}
-		
-		TemplateHashModel staticModels = wrapper.getStaticModels();
-		
+		}		
+		TemplateHashModel staticModels = wrapper.getStaticModels();		
 		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
 	}
 }
