@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
-		<groupId>architecture</groupId>
+		<groupId>architecture.parent</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
 	<groupId>architecture</groupId>
