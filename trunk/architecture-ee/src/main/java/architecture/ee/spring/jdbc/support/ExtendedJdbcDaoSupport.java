@@ -104,6 +104,14 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 		return null;
 	}
 	
+	protected BoundSql getBoundSql(String statement, Object ... params ){		
+		if(isSetConfiguration()){
+			MappedStatement stmt = configuration.getMappedStatement(statement);
+			return stmt.getBoundSql(params);
+		}
+		return null;
+	}
+	
 	protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object additionalParameter ){
 		if(isSetConfiguration()){
 			MappedStatement stmt = configuration.getMappedStatement(statement);
@@ -112,20 +120,13 @@ public class ExtendedJdbcDaoSupport extends JdbcDaoSupport {
 		return null;
 	}
 
-	protected BoundSql getBoundSql(String statement, Object ... params ){		
-		if(isSetConfiguration()){
-			MappedStatement stmt = configuration.getMappedStatement(statement);
-			return stmt.getBoundSql(params);
-		}
-		return null;
-	}	
-
 	protected BoundSql getBoundSqlWithAdditionalParameter(String statement, Object parameters, Object additionalParameter ){
 		if(isSetConfiguration()){
 			MappedStatement stmt = configuration.getMappedStatement(statement);
 			return stmt.getBoundSql(parameters, additionalParameter);
 		}
 		return null;
-	}	
+	}
+	
 
 }

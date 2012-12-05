@@ -1,5 +1,5 @@
 /*
- * Copyright 2010, 2011 INKIUM, Inc.
+ *  Copyright 2012, 2013 donghyuck, son.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ public class TextSqlNode implements SqlNode {
 
 	@Override
 	public String toString() {
-
 		return "text[" + text + "]";
 	}
 

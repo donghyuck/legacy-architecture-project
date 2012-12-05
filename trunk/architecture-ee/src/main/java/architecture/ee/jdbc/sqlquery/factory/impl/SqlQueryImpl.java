@@ -64,9 +64,15 @@ public class SqlQueryImpl implements SqlQuery {
 	private Map<String, Object> additionalParameters = new HashMap<String, Object>(4);
 	
 	
+	/**
+	 * startIndex, maxResult, additionalParameters 값을 초기화 한다.
+	 * 
+	 * @return
+	 */
 	public SqlQuery reset() {
 		this.startIndex = 0;
 		this.maxResults = 0;
+		this.additionalParameters.clear();
 		return this;
 	}
 	
@@ -80,9 +86,11 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 		
 
+
 	// *********************************************
 	// Protected Methods
 	// ********************************************
+	
 	protected SqlQueryImpl(Configuration configuration) {
 		this.configuration = configuration;
 	}
@@ -105,28 +113,34 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 	
 	protected BoundSql getBoundSql(String statement) {		
-		MappedStatement stmt = configuration.getMappedStatement(statement);
-		return stmt.getBoundSql(null);
-	}
-	
-	protected BoundSql getBoundSql(String statement, Object parameter) {		
-		MappedStatement stmt = configuration.getMappedStatement(statement);	
-		BoundSql sql;
+		MappedStatement stmt = configuration.getMappedStatement(statement);		
+		BoundSql sql;		
 		if( additionalParameters.size() > 0)
-			sql = stmt.getBoundSql(parameter, additionalParameters);
+			sql = stmt.getBoundSql(null, additionalParameters);
 		else 
-			sql = stmt.getBoundSql(parameter);
-		
-		additionalParameters.clear();
+			sql = stmt.getBoundSql(null);		
+		//additionalParameters.clear();
 		return sql;
 	}
 	
-	
+	protected BoundSql getBoundSql(String statement, Object parameter) {			
+		MappedStatement stmt = configuration.getMappedStatement(statement);	
+		BoundSql sql;		
+		if( additionalParameters.size() > 0)
+			sql = stmt.getBoundSql(parameter, additionalParameters);
+		else 
+			sql = stmt.getBoundSql(parameter);		
+		//additionalParameters.clear();
+		return sql;
+	}
+		
 	protected BoundSql getBoundSql(String statement, Object parameter, Object additionalParameters ) {		
 		MappedStatement stmt = configuration.getMappedStatement(statement);
 		BoundSql sql =stmt.getBoundSql(parameter, additionalParameters);
 		return sql;
 	}
+	
+	
 	
 	// *********************************************
 	// Public Methods from SqlQuery interface
@@ -393,7 +407,9 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 	
 	public int executeUpdate(String statement, Object parameters) {
+		
 		BoundSql sql = getBoundSql(statement, parameters);
+		
 		List<ParameterMapping> parameterMappings = sql.getParameterMappings();
 		
 		if( parameters instanceof Map ){		
