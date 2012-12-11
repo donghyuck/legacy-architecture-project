@@ -2,8 +2,6 @@ package architecture.common.exception;
 
 import java.lang.reflect.Constructor;
 
-import org.apache.commons.lang3.exception.ContextedException;
-
 import architecture.common.i18n.Localizer;
 import architecture.common.util.L10NUtils;
 
