@@ -1,0 +1,101 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<description>
+	<![CDATA[
+        Define User System 
+	]]>
+	</description>	
+
+	<bean id="userProviderCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userProviderCache" 
+		p:maxElementsInMemory="5000"
+		p:diskPersistent="false" 
+		p:overflowToDisk="false" 
+		p:timeToIdle="30"
+		p:timeToLive="60" 
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="userIDCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userIDCache" 
+		p:maxElementsInMemory="5000"
+		p:diskPersistent="false" 
+		p:overflowToDisk="false"
+		 p:timeToIdle="30"
+		p:timeToLive="60" 
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="userCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userCache" 
+		p:maxElementsInMemory="5000" 
+		p:diskPersistent="false"
+		p:overflowToDisk="false" 
+		p:timeToIdle="30" 
+		p:timeToLive="60"
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="groupCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="groupCache" 
+		p:maxElementsInMemory="5000" 
+		p:diskPersistent="false"
+		p:overflowToDisk="false" 
+		p:timeToIdle="30" 
+		p:timeToLive="60"
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="groupIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="groupIdCache" 
+		p:maxElementsInMemory="5000" 
+		p:diskPersistent="false"
+		p:overflowToDisk="false" 
+		p:timeToIdle="30" 
+		p:timeToLive="60"
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+						
+	<bean id="userDao" class="architecture.security.user.dao.impl.JdbcUserDao"
+		parent="jdbcDaoSupport" 
+		depends-on="extendedPropertyDao"
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
+
+	<bean id="userManager" class="architecture.security.user.MultiProviderUserManager"
+		depends-on="userDao, eventPublisher" 
+		p:userDao-ref="userDao"
+		p:eventPublisher-ref="eventPublisher" 
+		p:passwordEncoder-ref="passwordEncoder"
+		p:saltSource-ref="passwordSaltSource"
+		p:userCache-ref="userCache"
+		p:userIdCache-ref="userIDCache" 
+		p:userProviderCache-ref="userProviderCache" />		
+
+	<bean id="groupDao" class="architecture.security.user.dao.impl.JdbcGroupDao"
+		parent="jdbcDaoSupport" 
+		depends-on="extendedPropertyDao"
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
+
+	<bean id="groupManager" class="architecture.security.user.DefaultGroupManager"
+		depends-on="groupDao, userManager, eventPublisher" 
+		p:groupDao-ref="groupDao"
+		p:userManager-ref="userManager"
+		p:eventPublisher-ref="eventPublisher" 
+		p:groupCache-ref="groupCache"
+		p:groupIdCache-ref="groupIdCache" 
+		 />	
+				
+    <bean id="passwordEncoder" class="architecture.user.security.spring.authentication.encoding.PasswordEncoderFactory" />
+    <bean id="passwordSaltSource" class="architecture.user.security.spring.authentication.encoding.SaltSourceFactory" />
+
+</beans>
