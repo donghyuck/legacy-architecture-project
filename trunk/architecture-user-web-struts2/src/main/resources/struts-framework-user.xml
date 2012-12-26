@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="framework-user-actions" namespace="/accounts"  extends="framework-default" >	
+		
+		<default-interceptor-ref name="defaultStack" />
+		<action name="login" class="architecture.security.web.struts2.action.LoginAction">
+			<result name="input" >/login.jsp</result>
+		</action>				
+		<action name="view-profile" class="architecture.security.web.struts2.action.ViewUserProfileAction">
+			<result name="success" type="freemarker">/html/view-profile.ftl</result>
+		</action>
+	</package>
+
+	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >	
+		
+		<default-interceptor-ref name="defaultStack" />		
+		
+		 <!--  User  -->
+		<action name="main-user" class="architecture.security.web.struts2.action.admin.MainAction">
+			<result name="success" type="freemarker">/html/manage-users.ftl</result>
+		</action>
+
+		<action name="list-user" class="architecture.security.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">users.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				users.*, totalUserCount
+				</param>
+			</result>
+		</action>
+		
+		<action name="update-user" method="updateUser"  class="architecture.security.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetUser.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUser.*
+				</param>
+			</result>		
+		</action>		
+				
+		<action name="get-user-property" class="architecture.security.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserProperty.*
+				</param>
+			</result>		
+		</action>			
+		
+		<action name="update-user-property" method="updateUserProperties" class="architecture.security.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserProperty.*
+				</param>
+			</result>		
+		</action>	
+
+		<action name="delete-user-property" method="deleteUserProperties" class="architecture.security.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserProperty.*
+				</param>
+			</result>		
+		</action>		
+		
+        <!--  Group  -->
+		<action name="main-group"  class="architecture.security.web.struts2.action.admin.MainAction">
+			<result name="success"         type="freemarker">/html/manage-groups.ftl</result>
+		</action>
+
+		<action name="list-group"  class="architecture.security.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">groups.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				groups.*, totalGroupCount
+				</param>
+			</result>
+		</action>
+					
+		<action name="create-group" method="createGroup"  class="architecture.security.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetGroup.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetGroup.*
+				</param>
+			</result>		
+		</action>				
+	
+		<action name="update-group" method="updateGroup"  class="architecture.security.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetGroup.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetGroup.*
+				</param>
+			</result>		
+		</action>		
+			
+		<action name="get-group-property"  class="architecture.security.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetGroupProperty.*
+				</param>
+			</result>		
+		</action>			
+
+		<action name="update-group-property" method="updateGroupProperties" class="architecture.security.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetGroupProperty.*
+				</param>
+			</result>		
+		</action>	
+
+		<action name="delete-group-property" method="deleteGroupProperties" class="architecture.security.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetGroupProperty.*
+				</param>
+			</result>		
+		</action>		
+								
+	</package>
+	
+</struts>
