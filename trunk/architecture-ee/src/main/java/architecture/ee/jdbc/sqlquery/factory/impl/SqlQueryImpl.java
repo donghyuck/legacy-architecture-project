@@ -23,9 +23,9 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.collections.map.FixedSizeMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.jdbc.core.CallableStatementCreatorFactory;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -81,7 +81,7 @@ public class SqlQueryImpl implements SqlQuery {
 	}
 
 	public SqlQuery setAdditionalParameters(Map<String, Object> additionalParameters) {
-		this.additionalParameters = additionalParameters;
+		this.additionalParameters = FixedSizeMap.decorate( additionalParameters );
 		return this;
 	}
 		
@@ -139,9 +139,7 @@ public class SqlQueryImpl implements SqlQuery {
 		BoundSql sql =stmt.getBoundSql(parameter, additionalParameters);
 		return sql;
 	}
-	
-	
-	
+		
 	// *********************************************
 	// Public Methods from SqlQuery interface
 	// ********************************************
