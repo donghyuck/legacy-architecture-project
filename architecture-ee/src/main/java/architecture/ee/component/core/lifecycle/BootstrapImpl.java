@@ -65,23 +65,18 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	public ConfigurableApplicationContext getBootstrapApplicationContext(){	
 		
 		try {            			
-			// 리파지토리가 준비되어 있고 아직 컨텍스트가 초기화 되지 않았다면 ..		
-			
-			if( repository.getState() == State.INITIALIZED && !initialized.getAndSet(true) ){
-				
+			// 리파지토리가 준비되어 있고 아직 컨텍스트가 초기화 되지 않았다면 ..					
+			if( repository.getState() == State.INITIALIZED && !initialized.getAndSet(true) ){				
 				ApplicationProperties properties = repository.getSetupApplicationProperties();
-				Collection<String> names = properties.getPropertyNames();
-				
+				Collection<String> names = properties.getPropertyNames();				
 				if( log.isDebugEnabled() ){
-					log.debug("bootstrap properties from startup-config.xml -- ");				
+					log.debug(L10NUtils.getMessage("003050"));				
 					for(String name : names){
-						log.debug( name + " = " + properties.get(name));
+						log.debug( L10NUtils.format("003053",  name, properties.get(name) ));
 					}
-				}
-				
+				}				
 				boolean setupComplete = properties.getBooleanProperty(ApplicationConstants.SETUP_COMPLETE_PROP_NAME, false);
-				bootstrapFactoryKey = properties.getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);				
-				
+				bootstrapFactoryKey = properties.getStringProperty(ApplicationConstants.BOOTSTRAP_CONTEXT_PROP_NAME, BOOTSTRAP_CONTEXT_KEY);
 				if( log.isDebugEnabled() ){
 					log.info(L10NUtils.format("003008", setupComplete ));
 					log.info(L10NUtils.format("003009", bootstrapFactoryKey ));
@@ -89,7 +84,8 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			}
 			
 			BeanFactoryReference parentContextRef = ContextSingletonBeanFactoryLocator.getInstance().useBeanFactory(bootstrapFactoryKey);			
-			ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();			
+			ConfigurableApplicationContext context = (ConfigurableApplicationContext) parentContextRef.getFactory();
+			
 			return context;
 			
 		} catch (Throwable e) {
@@ -100,10 +96,11 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 	
 	@SuppressWarnings("unchecked")
 	public <T> T getBootstrapComponent(Class<T> requiredType) throws ComponentNotFoundException {
-
+		
 		if (requiredType == null) {
 			throw new ComponentNotFoundException();
 		}
+		
 		if( requiredType == Repository.class ){			
 			lock.lock();
 			try{
@@ -177,8 +174,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 
 	public boolean isBootstrapComponentAvailable(Class serviceClass){
 		try{			
-			getBootstrapComponent(serviceClass);
-			
+			getBootstrapComponent(serviceClass);			
 		} catch (ComponentNotFoundException e) {
 			return false;
 		} catch (Exception e){

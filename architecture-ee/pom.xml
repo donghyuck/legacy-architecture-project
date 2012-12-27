@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
-		<groupId>architecture</groupId>
+		<groupId>architecture.parent</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
-	<groupId>architecture</groupId>
+	<groupId>architecture.ee</groupId>
 	<artifactId>architecture-ee</artifactId>
 	<name>APPLICATION EE ARCHITECTURE</name>
 	<description>자바기반의 엔터프라이즈 어플리케이션 개발 아키텍처.</description>
@@ -14,24 +14,28 @@
 	<packaging>jar</packaging>
 	<contributors>
 		<contributor>
-			<name>Donghyuch Son</name>
-			<email>andang311@inkium.com</email>
+			<name>Donghyuch, Son</name>
 		</contributor>
 	</contributors>
 	<scm>
 		<url>https://power-j.googlecode.com/svn/trunk/architecture-ee</url>
 	</scm>
-	<organization>
-		<name>INKIUM</name>
-		<url>http://www.inkium.com</url>
-	</organization>
-
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
 		<project.test.skip>true</project.test.skip>
 	</properties>
 
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>POWER-J ARCHITECTURE Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</repository>
+	</repositories>
 
 	<dependencies>
 		<dependency>
