@@ -123,5 +123,11 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 			return false;
 		}
 	}
+
+	
+	public final static boolean stringToBoolean(String str){
+		String booleanString = defaultString(str, "false");
+		return Boolean.parseBoolean(booleanString);		
+	}
 	
 }

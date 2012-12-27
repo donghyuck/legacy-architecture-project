@@ -21,7 +21,7 @@ import architecture.common.model.ModelObject;
 
 @SuppressWarnings("serial")
 public abstract class BaseModelObject<T> implements ModelObject<T> {
-
+	
 	private Date creationDate = null;
 	
 	private Date modifiedDate = null;

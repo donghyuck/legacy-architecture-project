@@ -45,13 +45,11 @@ public interface UserManager {
 	public abstract User getUser(String username) throws UserNotFoundException;
 
 	public abstract User getUser(long userID) throws UserNotFoundException;
-
 	
 	public abstract void deleteUser(User user) throws UnsupportedOperationException, UserNotFoundException;
 
 	public abstract void deleteUserAndContent(User user) throws UnsupportedOperationException, UserNotFoundException;
 
-	
 	public abstract int getApplicationUserCount();
 
 	public abstract List<User> getApplicationUsers();

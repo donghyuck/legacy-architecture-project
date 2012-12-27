@@ -16,6 +16,7 @@
 package architecture.common.model;
 
 public enum ModelObjectType {
+	
     UNKNOWN ( 0, "UNKNOWN" ),
 	USER ( 3, "USER" ),
 	GROUP ( 4, "GROUP" ),

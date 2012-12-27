@@ -6,7 +6,7 @@
 		<groupId>architecture.parent</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
-	<groupId>architecture</groupId>
+	<groupId>architecture.common</groupId>
 	<artifactId>architecture-common</artifactId>
 	<name>APPLICATION COMMON ARCHITECTURE</name>
 	<packaging>jar</packaging>
@@ -15,19 +15,13 @@
 	<description>공통 아키텍처 콤포넌트 모듈</description>
 	<contributors>
 		<contributor>
-			<name>Donghyuch Son</name>
-			<email>andang311@inkium.com</email>
+			<name>Donghyuch, Son</name>
 		</contributor>
 	</contributors>
 
 	<scm>
 		<url>https://power-j.googlecode.com/svn/trunk/architecture-common</url>
 	</scm>
-
-	<organization>
-		<name>INKIUM</name>
-		<url>http://www.inkium.com</url>
-	</organization>
 
 	<repositories>
 		<repository>

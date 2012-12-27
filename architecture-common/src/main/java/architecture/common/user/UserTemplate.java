@@ -18,8 +18,6 @@ package architecture.common.user;
 import java.util.Map;
 
 import architecture.common.model.impl.UserModelImpl;
-
-
 /**
  * 
  * @author donghyuck
