@@ -7,12 +7,10 @@
                  architecture.ee.web.util.ParamUtils" %><%
                  
 	String formatString = ParamUtils.getParameter(request, "output", "html");
-	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);
-	
-	Throwable ex = exception;
-	
+	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);	
+	Throwable ex = exception;	
 	if( ex == null ){
-		// 스트럿츠 오류 처리
+		// 스트럿츠1 오류 처리
 		// ex = (Throwable)request.getAttribute( org.apache.struts.Globals.EXCEPTION_KEY );
 	}
 	
@@ -38,7 +36,8 @@
 		
     if(format == OutputFormat.XML ){
     	response.setContentType("text/xml;charset=UTF-8");
-%><?xml version="1.0" encoding="UTF-8"?>
+%>
+<?xml version="1.0" encoding="UTF-8"?>
 <response>
     <error>
         <locale><%= localeToUse %></locale>
