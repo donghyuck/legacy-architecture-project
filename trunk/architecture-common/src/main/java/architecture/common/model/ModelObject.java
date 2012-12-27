@@ -21,10 +21,12 @@ import architecture.common.cache.Cacheable;
 
 public interface ModelObject<T> extends Cacheable, DatedObject, Comparable<T> {
 	
+	
 	/**
 	 * @return 프라이머리 키 값을 리턴한다.
 	 */
 	public Serializable getPrimaryKeyObject();	
+	
 	
 	/**
 	 * 
