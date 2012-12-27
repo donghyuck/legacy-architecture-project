@@ -14,92 +14,130 @@
 <meta http-equiv="Expires" content="-1">
 <meta name="viewport" content="width=device-width" />
 <script src="<%=request.getContextPath()%>/js/yepnope.js"></script>
+<link href="<%=request.getContextPath()%>/styles/main.css" rel="stylesheet" type="text/css" />
 <link href="<%=request.getContextPath()%>/styles/foundation.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript">
 <!--
 yepnope([{
-    load: [ '<%= request.getContextPath()  %>/js/jquery/1.7.1/jquery.min.js', '<%= request.getContextPath()  %>/js/foundation/foundation.min.js' ,  ],
+    load: [  
+        '<%=request.getContextPath()%>/js/jquery/1.8.2/jquery.min.js',         
+        '<%= request.getContextPath()  %>/js/foundation/foundation.min.js' ],
     complete: function(){ 
-        $(document).foundationNavigation();
-        $(document).foundationTabs();
+    	$(document).foundationNavigation();
+        $(document).foundationAlerts();
+        $(document).foundationButtons();
+        $(document).foundationCustomForms();
+        
+        $('#expend-top-btn').click( function (){        	
+        	if( $(this).find('span').hasClass('k-icon k-si-plus') ) {
+        		$(this).find('span').removeClass('k-icon k-si-plus')
+        		$(this).find('span').addClass('k-icon k-si-minus')
+       		    $('#expend-top-section').slideDown();
+        	} else {
+        		$(this).find('span').removeClass('k-icon k-si-minus')
+        		$(this).find('span').addClass('k-icon k-si-plus')        		
+        		$('#expend-top-section').slideUp();
+        	}
+        } );
     }
 }]);  
 -->
 </script>  
 <decorator:head />     
 </head>
-<body>
-	<!-- Header and Nav -->
-	<div class="row">
-		<div class="three columns">
-			<h1>
-				<img src="<%= request.getContextPath()  %>/images/yeti9000.png" />
-			</h1>
-		</div>		
-		<div class="seven columns">
-			<ul class="nav-bar right">
-			    <li><a href="#">Nav Item 1</a></li>			
-				<li class="has-flyout">
-				  <a href="#">시스템</a>
-				  <a href="#" class="flyout-toggle"><span> </span></a>
-				  <ul class="flyout">
-				    <li><a href="<%= request.getContextPath()  %>/accounts/admin/main-user.do">사용자</a></li>
-				    <li><a href="#">그룹</a></li>
-				    <li><a href="#">Sub Nav 3</a></li>
-				    <li><a href="#">Sub Nav 4</a></li>
-				    <li><a href="#">Sub Nav Item 5</a></li>
-				  </ul>
-				</li>			
+<body class="off-canvas">
+	<!-- Header and Nav -->	
 <%
     String path = ServletUtils.getServletPath(request);
     User user = SecurityHelper.getUser();
-    if (user.isAnonymous()) {
-    	if( StringUtils.contains(path, "/login.jsp") ){
-    		%>
-			<li><a href="<%= request.getContextPath()  %>/member/signup.do"  class="small">회원가입</a></li>
-			<% 
-    	}else{
-    		%>
-			<li><a href="<%= request.getContextPath()  %>/login.jsp">로그인</a></li>
-			<% 
-    	}
-    }else{    	
-		%>
-			<li class="has-flyout"><a href="#"><%= user.getName() %></a> 
-				<a href="#" class="flyout-toggle"><span> </span></a>
-				<div class="flyout large right">
-					<h5><%= user.getName() %></h5>
-					<div class="row">
-						<div class="eight columns">
-							<p><%= user.getEmail() %></p>				
-						</div>
-						<div class="four columns">
-							<img src="http://placehold.it/200x250" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="eight columns">
-							<p><a href="<%= request.getContextPath()  %>/accounts/view-profile.do" class="k-button" >계정설정</a> <a href="/logout" class="k-button" >로그아웃</a></p>		
-						</div>
-					</div>
-				</div>
-
-			</li>
-<%     	
-    }
-%>
+ %>   
+	<section class="row" > 	
+	     <div class="twelve columns">
+			<ul class="nav-bar" style="margin-bottom: 0px; ">
+			    <li>
+			    <a href="<%= request.getContextPath()  %>/main.do">          홈          </a></li>			
+				<li class="has-flyout">
+				  <a href="#">시스템</a>
+				  <a href="#" class="flyout-toggle"><span></span></a>
+				  <ul class="flyout">
+				    <li><a href="<%= request.getContextPath()  %>/accounts/admin/main-user.do">사용자 관리</a></li>
+				    <li><a href="<%= request.getContextPath()  %>/accounts/admin/main-group.do">그룹 관리</a></li>
+				    <li><a href="#">권한 관리</a></li>
+				    <li><a href="#">모니터링</a></li>				    
+				  </ul>
+				</li>	
 			</ul>
-		</div>
-		<div class="two columns">
-
-		</div>
-	</div>
-	<!-- End Header and Nav -->
-	<decorator:body />
+		</div>	
+	</section>		
+	<section class="row" >
+        <div class="twelve columns" align="right" style="margin-bottom: 5px; padding-bottom: 5px; padding-top: 10px;">
+<%
+    if (user.isAnonymous()) {
+    	boolean isLoginPage = StringUtils.contains(path, "/login.do") ;
+		if( isLoginPage ){
+%>
+		    <a href="<%= request.getContextPath()  %>/accounts/signup.do"  class="k-button" >회원가입</a>
+<% 
+    	}else{
+%>
+			<a href="<%= request.getContextPath()  %>/accounts/login.do" class="k-button" >로그인</a>
+<%   } 
+    }else{
+%>    	            
+            <a class="k-button" id="expend-top-btn"><%= user.getName() %><span class="k-icon k-si-plus"></span></a>
+<% 
+    } 
+%>	
+        </div>
+    </section>    	    
+    <section id="expend-top-section" class="row"  style="margin-bottom: 0px; padding-bottom: 0px; padding-top: 0px; display:none; "> 
+		<div class="six columns" ></div>	
+		<div class="six columns" >
+		    <div  class="main-section k-widget k-header"  style="margin-top: 0px;">
+			<div class="row">
+	            <div class="three columns"><a href="#" class="th"><img src="<%= request.getContextPath()  %>/images/anonymous_user_64.png"></a></div>
+	            <div class="nine columns">	                
+					    <table class="twelve">
+						    <tbody>
+							    <tr>
+								    <td><span class="success radius  label"><%= user.getUsername() %></span></td>
+									<td><label><%= user.getEmail() %></label></td>
+								</tr>	
+							    <tr>
+								    <td><label>메시지</label></td>
+									<td><span class="alert round label">5</span></td>
+								</tr>										
+							    <tr>
+								    <td><label>공지</label></td>
+									<td><span class="alert round label">5</span></td>
+								</tr>										
+							    <tr>
+								    <td><label>마지막 회원정보 변경일</label></td>
+									<td><%= user.getLastProfileUpdate() %></td>
+								</tr>													    
+							    <tr>
+								    <td><label>마지막 로그인 일자</label></td>
+									<td><%= user.getLastLoggedIn() %></td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+	        </div>		
+			<div class="row">
+                <div class="twelve  columns" align="right">
+				    <a href="<%= request.getContextPath()  %>/accounts/view-profile.do" class="k-button" >회원정보 변경</a>
+				    <a href="<%= request.getContextPath()  %>/logout" class="k-button" >로그아웃</a>
+			    </div>
+	        </div>
+		</div>		
+		</div>	
+	</section>    		
+	<!-- End Header and Nav -->	
+	
+	<decorator:body />	
 	<!-- Footer -->
-	<footer class="row" style="bg-color:#F5F5F5;">
+	<footer class="row">
 		<div class="twelve columns">
-			<hr />
 			<div class="row">
 				<div class="six columns">
 					<p>카피라이터 추가</p>
@@ -107,18 +145,15 @@ yepnope([{
 				<div class="six columns">
 					<ul class="link-list right">
 						<!-- 
-            <li><a href="#">Link 1</a></li>
-            <li><a href="#">Link 2</a></li>
-            <li><a href="#">Link 3</a></li>
-            <li><a href="#">Link 4</a></li>            
-           -->
+			            <li><a href="#">Link 1</a></li>
+			            <li><a href="#">Link 2</a></li>
+			            <li><a href="#">Link 3</a></li>
+			            <li><a href="#">Link 4</a></li>            
+			           -->
 					</ul>
 				</div>
 			</div>
 		</div>
 	</footer>
-
-
-
 </body>
 </html>

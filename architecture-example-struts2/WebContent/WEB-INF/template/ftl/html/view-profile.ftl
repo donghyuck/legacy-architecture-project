@@ -4,11 +4,11 @@
         <title>회원정보</title>
         <script type="text/javascript">
         yepnope([{
-        	  load: [ '${request.contextPath}/js/jquery/1.7.2/jquery.min.js',      
+        	  load: [ '${request.contextPath}/js/jquery/1.8.2/jquery.min.js',
         	          '${request.contextPath}/js/kendo/kendo.web.min.js',
         	          '${request.contextPath}/js/common.js',
-        	          '${request.contextPath}/styles/kendo.common.min.css',
-        	          '${request.contextPath}/styles/kendo.metro.min.css'
+        	          '${request.contextPath}/styles/kendo/kendo.common.min.css',
+        	          '${request.contextPath}/styles/kendo/kendo.metro.min.css'
         	         ],
                	  complete: function() {        	
                		var crudServiceBaseUrl = "http://demos.kendoui.com/service",
@@ -79,11 +79,8 @@
 	<div class="row">	
  	<div class="nine columns push-three">      
       <h3>회원정보 <small>${ user.name } </small></h3>
-      
-
  		<form name="fm1"  method="POST" >
-        <input type="hidden" id="output" name="output" value="json" />
-        
+        <input type="hidden" id="output" name="output" value="json" />        
    <div class="row">
     <div class="two mobile-one columns">
       <label class="right inline">Address Name:</label>

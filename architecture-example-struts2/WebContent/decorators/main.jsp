@@ -9,12 +9,9 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="-1">        
     <script src="<%= request.getContextPath()  %>/js/yepnope.js"></script>
-    <link href="<%= request.getContextPath()  %>/styles/normalize.css" rel="stylesheet" type="text/css" />
-    <link href="<%= request.getContextPath()  %>/styles/main.css" rel="stylesheet" type="text/css" />
     <decorator:head />
   </head>
   <body>
-  main
-  <decorator:body />
+   <decorator:body />
   </body>
 </html>

@@ -6,15 +6,12 @@
 <!--
 yepnope([{
     load: [        
-             'css!${request.contextPath}/styles/kendo.common.min.css',
-             'css!${request.contextPath}/styles/kendo.metro.min.css',
-             'css!${request.contextPath}/styles/kendo.dataviz.min.css',
-             '${request.contextPath}/js/jquery/1.7.2/jquery.min.js',
+             'css!${request.contextPath}/styles/kendo/kendo.common.min.css',
+             'css!${request.contextPath}/styles/kendo/kendo.metro.min.css',
+             'css!${request.contextPath}/styles/kendo/kendo.dataviz.min.css',
              '${request.contextPath}/js/kendo/kendo.web.min.js',
-             '${request.contextPath}/js/kendo/kendo.dataviz.min.js' ],
-             
+             '${request.contextPath}/js/kendo/kendo.dataviz.min.js' ],             
 		complete : function() {
-
 			// grid 생성
 			$("#grid")
 					.kendoGrid(
@@ -151,7 +148,16 @@ yepnope([{
 			<img src="http://placehold.it/400x300&text=[img]" />
 		</div>
 	</div>
-
+	<!-- Start Breadcrumbs -->	    
+	<section class="row">
+	    <div class="twelve columns">
+	        <hr style="margin-top:10px;margin-bottom:10px;" />
+			<ul class="breadcrumbs">
+			  <li class="current"><a href="${request.contextPath}/main.do">홈</a></li>
+			</ul>
+		</div>
+	</section>
+	<!-- End Breadcrumbs -->	  
 
 </body>
 </html>
