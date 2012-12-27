@@ -23,10 +23,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
-import architecture.security.user.Group;
-import architecture.security.user.GroupAlreadyExistsException;
-import architecture.security.user.GroupManager;
-import architecture.security.user.GroupNotFoundException;
+import architecture.user.Group;
+import architecture.user.GroupAlreadyExistsException;
+import architecture.user.GroupManager;
+import architecture.user.GroupNotFoundException;
 
 public class GroupManagementAction  extends FrameworkActionSupport  {
 
