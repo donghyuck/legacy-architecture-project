@@ -26,7 +26,7 @@ import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicationHelper;
-import architecture.security.authentication.AuthenticationProviderFactory;
+import architecture.user.security.authentication.AuthenticationProviderFactory;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
@@ -95,17 +95,21 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
         if( getOutputFormat() == OutputFormat.JSON ){
             return  OutputFormat.JSON.name().toLowerCase() + "-" + INPUT ;
         } else if ( getOutputFormat() == OutputFormat.XML ){ 
-            return  OutputFormat.HTML.name().toLowerCase() + "-" + INPUT ;
+            return  OutputFormat.XML.name().toLowerCase() + "-" + INPUT ;
         }        
        return INPUT;
     }
    
     public String success(){
+    	if( log.isDebugEnabled())
+    		log.debug("output=" + getOutputFormat() );
+    	
         if( getOutputFormat() == OutputFormat.JSON ){
             return  OutputFormat.JSON.name().toLowerCase() + "-" + SUCCESS ;
         } else if ( getOutputFormat() == OutputFormat.XML ){ 
-            return  OutputFormat.HTML.name().toLowerCase() + "-" + SUCCESS ;
-        }        
+            return  OutputFormat.XML.name().toLowerCase() + "-" + SUCCESS ;
+        }
+        
        return SUCCESS;
 	}
 	

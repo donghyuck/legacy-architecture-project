@@ -7,8 +7,8 @@ import org.springframework.security.core.Authentication;
 import architecture.common.user.User;
 import architecture.ee.web.struts2.annotation.AlwaysAllowAnonymous;
 import architecture.ee.web.struts2.annotation.AlwaysDisallowAnonymous;
-import architecture.security.authentication.AuthenticationProvider;
-import architecture.security.authentication.AuthenticationProviderFactory;
+import architecture.user.security.authentication.AuthenticationProvider;
+import architecture.user.security.authentication.AuthenticationProviderFactory;
 
 import com.opensymphony.xwork2.Action;
 import com.opensymphony.xwork2.ActionInvocation;

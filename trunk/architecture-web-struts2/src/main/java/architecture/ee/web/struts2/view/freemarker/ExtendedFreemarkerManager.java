@@ -43,7 +43,6 @@ import freemarker.cache.TemplateLoader;
 import freemarker.core.Environment;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.template.Configuration;
-import freemarker.template.ObjectWrapper;
 import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.TemplateHashModel;
@@ -66,10 +65,12 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	private FreeMarkerConfig freeMarkerConfig ;
 	
 	public static final TemplateExceptionHandler LOG_DEBUG_HANDLER = new TemplateExceptionHandler() {		
+		
 	        public void handleTemplateException(TemplateException te, Environment env, Writer out)
 	        {
 	        	ExtendedFreemarkerManager.log.warn("Freemarker template exception. ", te);
 	        }
+	        
 	   };
 	   
 	   
@@ -110,8 +111,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	protected void loadSettings(ServletContext servletContext) {
 		super.loadSettings(servletContext);
 		HttpServletRequest request = ServletActionContext.getRequest();
-        HttpServletResponse response = ServletActionContext.getResponse();
-        
+        HttpServletResponse response = ServletActionContext.getResponse();        
         if( request == null || response == null )
         {
             return;
@@ -134,8 +134,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			Object action, HttpServletRequest request,
 			HttpServletResponse response) {
 
-		super.populateContext(model, stack, action, request, response);
-		
+		super.populateContext(model, stack, action, request, response);		
 		HashMap<String, Object> map = new HashMap<String, Object>();		
 		populateStatics(map);		
 		model.putAll(map);
@@ -158,9 +157,11 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 		TemplateHashModel staticModels = b.getStaticModels();
 		try {
+			model.put("L10NUtils",             staticModels.get("architecture.common.util.L10NUtils"));
 			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
 			model.put("SecurityHelper",         staticModels.get("architecture.security.util.SecurityHelper"));
 			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));							
+			model.put("WebApplicationHelper",     staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
 		} catch (TemplateModelException e) {
 			log.error(e);
 		}		
@@ -171,9 +172,8 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
     protected TemplateLoader createTemplateLoader(ServletContext servletContext, String templatePath) {
         
 	    log.debug("templatePath:" + templatePath );
-	    return freeMarkerConfig.getConfiguration().getTemplateLoader();
-	    
-        //return super.createTemplateLoader(servletContext, templatePath);
+	    return freeMarkerConfig.getConfiguration().getTemplateLoader();	    
+        //return super.createTemplateLoader(servletContext, templatePath);	    
     }
 
     private TemplateExceptionHandler getTemplateExceptionHandler()
@@ -188,7 +188,5 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
             handler = TemplateExceptionHandler.HTML_DEBUG_HANDLER;
         return handler;
     }
-	
-	
-    
+	    
 }
