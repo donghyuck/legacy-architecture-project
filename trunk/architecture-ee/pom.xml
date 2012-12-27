@@ -39,7 +39,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>architecture</groupId>
+			<groupId>architecture.common</groupId>
 			<artifactId>architecture-common</artifactId>
 			<version>1.0.3.RELEASE</version>			
 		</dependency>
