@@ -473,8 +473,7 @@
     <sql-query name="SELECT_ALL_GROUP_ID" description="모든 그룹 아이디를 조회"><![CDATA[
 		SELECT GROUP_ID FROM V2_GROUP ORDER BY NAME
     ]]></sql-query>
-    	
-	
+    
 	<sql-query name="SELECT_GROUPS_FOR_USER" description="사용자의 모든 그룹아이디를 조회"><![CDATA[
 		SELECT GROUP_ID
 		FROM V2_GROUP_MEMBERS 
@@ -490,12 +489,16 @@
 	<sql-query name="DELETE_MEMBERSHIP_BY_USER" description="사용자의 모든 그룹 맴버 정보를 삭제"><![CDATA[
 		DELETE FROM V2_GROUP_MEMBERS WHERE USER_ID = ?
     ]]></sql-query>
-	
-
+    
+    <sql-query name="SELECT_USER_ID_FROM_GROUP_BY_GROUP_ID_AND_USER_ID" description="그룹  관리자 추가"><![CDATA[
+		SELECT USER_ID T  FROM V2_GROUP_MEMBERS WHERE GROUP_ID=? AND USER_ID=? AND ADMINISTRATOR=0
+    ]]></sql-query>
+    
     
 	<sql-query name="ADD_GROUP_ADMIN" description="그룹  관리자 추가"><![CDATA[
 		INSERT INTO V2_GROUP_MEMBERS (GROUP_ID, USER_ID, ADMINISTRATOR) VALUES ( ?, ?, 1)
     ]]></sql-query>
+    
 	<sql-query name="ADD_GROUP_MEMBER" description="그룹 맴버 추가"><![CDATA[
 		INSERT INTO V2_GROUP_MEMBERS (GROUP_ID, USER_ID, ADMINISTRATOR) VALUES ( ?, ?, 0)
     ]]></sql-query>
@@ -509,10 +512,10 @@
     ]]></sql-query>
 
 
-	<sql-query name="ADD_GROUP_ADMIN" description="그룹  관리자 삭제"><![CDATA[
+	<sql-query name="REMOVE_GROUP_ADMIN" description="그룹  관리자 삭제"><![CDATA[
 		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND USER_ID = ? AND ADMINISTRATOR = 1
     ]]></sql-query>
-	<sql-query name="ADD_GROUP_MEMBER" description="그룹 맴버 삭제"><![CDATA[
+	<sql-query name="REMOVE_GROUP_MEMBER" description="그룹 맴버 삭제"><![CDATA[
 		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND USER_ID = ? AND ADMINISTRATOR = 0
     ]]></sql-query>
 	<sql-query name="TEST_GROUP_MEMBERSHIP" description="그룹 맴버 테스트"><![CDATA[
@@ -525,7 +528,10 @@
 		SELECT USER_ID FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND ADMINISTRATOR = 1
     ]]></sql-query>
 
-
+	<sql-query name="COUNT_ALL_GROUP_MEMBER" description="특정 그룹  맴버수를 조회"><![CDATA[
+		SELECT COUNT(GROUP_ID)
+		FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ? AND ADMINISTRATOR = 0
+    ]]></sql-query>    
 
 	<sql-query name="UPDATE_GROUP_MODIFIED_DATE" description="그룹 수정일 업데이트"><![CDATA[        
         UPDATE V2_GROUPS

@@ -2,7 +2,7 @@
 <factories>
 	<rank>1000</rank>	
 	
-	<factory interface="architecture.security.authentication.AuthenticationProviderFactory$Implementation" impl="architecture.security.authentication.impl.AuthenticationProviderFactoryImpl" />
+	<factory interface="architecture.user.security.authentication.AuthenticationProviderFactory$Implementation" impl="architecture.user.security.authentication.impl.AuthenticationProviderFactoryImpl" />
 	
 	<factory interface="architecture.user.security.simple.authentication.AuthFactory$Implementation" impl="architecture.user.security.simple.authentication.impl.AuthFactoryImpl" />
 	

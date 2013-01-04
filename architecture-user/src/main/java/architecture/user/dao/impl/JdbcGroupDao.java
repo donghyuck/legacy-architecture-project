@@ -18,8 +18,10 @@ package architecture.user.dao.impl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DataAccessException;
@@ -32,6 +34,8 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.Group;
 import architecture.user.dao.GroupDao;
 import architecture.user.model.impl.GroupImpl;
+
+import com.google.common.collect.Lists;
 
 public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 
@@ -187,6 +191,71 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 
 	public void setGroupProperties(long groupId, Map<String, String> props) {
 		extendedPropertyDao.updateProperties(groupPropertyTableName, groupPropertyPrimaryColumnName, groupId, props);
+	}
+
+	public List<Long> getMembersIds(long groupId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_GROUP_MEMBER_ID").getSql(), Long.class);
+	}
+
+	public List<Long> getMembersIds(long groupId, int startIndex, int numResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_GROUP_MEMBER_ID").getSql(), 
+				startIndex, 
+				numResults, 
+				new Object[ ] {groupId}, 
+				new int[] {Types.NUMERIC}, 
+				Long.class);
+	}
+
+	public int getGroupMemberCount(long groupId) {
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ALL_GROUP_MEMBER").getSql(), new SqlParameterValue(Types.NUMERIC, groupId )  );
+	}
+
+	public boolean isMember(long groupId, long userId) {
+		// SELECT_GROUPS_FOR_USER, UPDATE_GROUP_MODIFIED_DATE
+		
+		List<Long> userIds = getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_ID_FROM_GROUP_BY_GROUP_ID_AND_USER_ID").getSql(), 
+				Long.class, new SqlParameterValue(Types.NUMERIC, groupId ) , 
+				new SqlParameterValue(Types.NUMERIC, userId ) );
+		return !userIds.isEmpty();
+		
+	}
+
+	public void addMember(long groupId, long userId) {
+		// ADD_GROUP_MEMBER, UPDATE_GROUP_MODIFIED_DATE
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.ADD_GROUP_MEMBER").getSql(), 	
+				new SqlParameterValue (Types.NUMERIC, groupId), 
+				new SqlParameterValue(Types.NUMERIC, userId));
+		
+		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );
+	}
+
+	public void removeMember(long groupId, long userId) {
+		// REMOVE_GROUP_MEMBER, UPDATE_GROUP_MODIFIED_DATE
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.REMOVE_GROUP_MEMBER").getSql(), 	
+				new SqlParameterValue (Types.NUMERIC, groupId), 
+				new SqlParameterValue(Types.NUMERIC, userId));
+		
+		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );
+		
+	}
+
+	public void addMembers(long groupId, Set<Long> userIds) {
+		List args = Lists.newArrayListWithExpectedSize(userIds.size());
+		for( Long userId : userIds )
+			args.add(userId);				
+		getExtendedJdbcTemplate().batchUpdate( getBoundSql("ARCHITECTURE_SECURITY.ADD_GROUP_MEMBER").getSql(), args ); 		
+		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );
+		
+	}
+
+	public void removeMembers(long groupId, Set<Long> userIds) {
+		// REMOVE_GROUP_MEMBER, UPDATE_GROUP_MODIFIED_DATE
+		List args = Lists.newArrayListWithExpectedSize(userIds.size());
+		for( Long userId : userIds )
+			args.add(userId);				
+		getExtendedJdbcTemplate().batchUpdate( getBoundSql("ARCHITECTURE_SECURITY.REMOVE_GROUP_MEMBER").getSql(), args ); 		
+		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );
 	}
 
 

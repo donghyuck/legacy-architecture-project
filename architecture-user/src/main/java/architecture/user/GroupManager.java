@@ -18,6 +18,7 @@ package architecture.user;
 import java.util.List;
 
 import architecture.common.user.User;
+import architecture.common.user.authentication.UnAuthorizedException;
 
 public interface GroupManager {
 
@@ -37,11 +38,62 @@ public interface GroupManager {
 	
 	public abstract void updateGroup(Group group) throws GroupNotFoundException, GroupAlreadyExistsException;
 	
-	public abstract List<User> getGroupUsers(Group group) throws GroupNotFoundException ;
+	/**
+	 * 그룹에 해당하는 전체 멤버를 리턴한다.
+	 * 
+	 * @param group
+	 * @return
+	 */
+	public abstract List<User> getGroupUsers(Group group) ;
 	
-	public abstract List<User> getGroupUsers(Group group, int startIndex, int numResults) throws GroupNotFoundException ;
+	/**
+	 * 그룹에 해당하는 멤버를 리턴한다.
+	 * 
+	 * @param group
+	 * @param startIndex 
+	 * @param numResults 
+	 * @return
+	 */
+	public abstract List<User> getGroupUsers(Group group, int startIndex, int numResults) ;
 	
+	/**
+	 * 그룹에 해당하는 멤버 수를 리턴한다.
+	 * @param group
+	 * @return
+	 */
 	public abstract int getTotalGroupUserCount(Group group);
+	
+	/**
+	 * 그룹 멤버쉽을 추가한다.
+	 * 
+	 * @param group
+	 * @param user
+	 * @throws UnAuthorizedException
+	 */
+	public abstract void addMembership(Group group, User user) throws UnAuthorizedException;
+
+	public abstract void addMembership(Group group, List<User> user) throws UnAuthorizedException;
+	
+	/**
+	 * 그룹 멤버쉽이 있는가를 확인한다.
+	 * 
+	 * @param group
+	 * @param user
+	 * @return
+	 * @throws UnAuthorizedException
+	 */
+	public abstract boolean hasMembership(Group group, User user) throws UnAuthorizedException;
+
+	/**
+	 * 그룹 멤버쉽을 제거한다.
+	 * 
+	 * @param group
+	 * @param user
+	 * @throws UnAuthorizedException
+	 */
+	public abstract void removeMembership(Group group, User user) throws UnAuthorizedException;
+	
+	public abstract void removeMembership(Group group, List<User> user) throws UnAuthorizedException;
 	
 	/*
 	
@@ -58,11 +110,6 @@ public interface GroupManager {
 	public abstract void updateGroup(Group group) throws GroupNotFoundException, GroupAlreadyExistsException;
 
 	public abstract void deleteGroup(Group group) throws UnAuthorizedException;
-	
-	public abstract void addMembership(Group group, User user) throws UnAuthorizedException;
-
-	public abstract boolean hasMembership(Group group, User user) throws UnAuthorizedException;
-
-	public abstract void removeMembership(Group group, User user) throws UnAuthorizedException;*/
+*/
 
 }
