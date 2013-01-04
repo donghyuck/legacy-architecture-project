@@ -40,6 +40,22 @@ public interface UserDao {
 
     public abstract int getRecentUserCount(Date date);
 
+    /**
+     * 
+     * @param nameOrEmail
+     * @return
+     */
+    public abstract List<User> findUsers(String nameOrEmail);
+    
+    /**
+     * 
+     * @param nameOrEmail
+     * @param startIndex
+     * @param numResults
+     * @return
+     */
+    public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
+    
     public abstract List<User> getAllUsers();
 
     public abstract List<User> getAllUsers(int startIndex, int numResults);
