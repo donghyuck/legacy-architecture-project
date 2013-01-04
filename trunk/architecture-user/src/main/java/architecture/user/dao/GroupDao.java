@@ -15,8 +15,7 @@ public interface GroupDao {
 	
 	public abstract List<Group> getGroups();
 	
-	public abstract List<Group> getGroups(int start, int num);
-	
+	public abstract List<Group> getGroups(int start, int num);	
 	
 	public abstract List<Long> getGroupIds(int start, int num);
 	
@@ -25,6 +24,22 @@ public interface GroupDao {
 	public abstract Group getGroupById(long groupId);
 
 	public abstract Group getGroupByName(String name, boolean caseInsensitive);	
+	
+	public abstract List<Long> getMembersIds(long groupId);
+	
+	public abstract List<Long> getMembersIds(long groupId, int start, int num );
+	
+	public abstract int getGroupMemberCount(long groupId);
+	
+	public abstract boolean isMember(long groupId, long userId);
+	
+	public abstract void addMember(long groupId, long userId);
+	
+	public abstract void removeMember(long groupId, long userId);
+	 
+    public abstract void addMembers(long groupId, Set<Long> userIds);
+	
+	public abstract void removeMembers(long groupId, Set<Long> userIds);
 	
 	/*
 	public abstract void deleteGroupUsers(long groupId);
@@ -47,23 +62,17 @@ public interface GroupDao {
 
 
 	
-	public abstract List<Long> getMembersIds(long groupId);
+	
 
 	public abstract List<Long> getAdministratorIds(long groupId);
 
-	public abstract boolean isMember(long groupId, long userId);
-	
-	public abstract void addMember(long groupId, long userId);
-	
-	public abstract void removeMember(long groupId, long userId);
+
 
 	public abstract void addAdministrator(long groupId, long userId);
 	
 	public abstract void removeAdministrator(long groupId, long userId);
 	
-	public abstract void addMembers(long groupId, Set<Long> userIds);
 	
-	public abstract void removeMembers(long groupId, Set<Long> userIds);
 	
 	public abstract void addAdministrators(long groupId, Set<Long> userIds);
 	

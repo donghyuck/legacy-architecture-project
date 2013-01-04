@@ -66,12 +66,12 @@
 		p:eternal="false" 
 		p:diskExpiryThreadIntervalSeconds="0" />
 						
-	<bean id="userDao" class="architecture.security.user.dao.impl.JdbcUserDao"
+	<bean id="userDao" class="architecture.user.dao.impl.JdbcUserDao"
 		parent="jdbcDaoSupport" 
 		depends-on="extendedPropertyDao"
 		p:extendedPropertyDao-ref="extendedPropertyDao" />
 
-	<bean id="userManager" class="architecture.security.user.MultiProviderUserManager"
+	<bean id="userManager" class="architecture.user.MultiProviderUserManager"
 		depends-on="userDao, eventPublisher" 
 		p:userDao-ref="userDao"
 		p:eventPublisher-ref="eventPublisher" 
@@ -81,12 +81,12 @@
 		p:userIdCache-ref="userIDCache" 
 		p:userProviderCache-ref="userProviderCache" />		
 
-	<bean id="groupDao" class="architecture.security.user.dao.impl.JdbcGroupDao"
+	<bean id="groupDao" class="architecture.user.dao.impl.JdbcGroupDao"
 		parent="jdbcDaoSupport" 
 		depends-on="extendedPropertyDao"
 		p:extendedPropertyDao-ref="extendedPropertyDao" />
 
-	<bean id="groupManager" class="architecture.security.user.DefaultGroupManager"
+	<bean id="groupManager" class="architecture.user.DefaultGroupManager"
 		depends-on="groupDao, userManager, eventPublisher" 
 		p:groupDao-ref="groupDao"
 		p:userManager-ref="userManager"

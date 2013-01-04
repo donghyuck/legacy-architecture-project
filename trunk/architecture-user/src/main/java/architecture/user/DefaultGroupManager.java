@@ -3,14 +3,19 @@ package architecture.user;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
+import architecture.common.user.UserNotFoundException;
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.dao.GroupDao;
 import architecture.user.model.impl.GroupImpl;
+
+import com.google.common.collect.Sets;
 
 /**
  * @author  donghyuck
@@ -165,21 +170,76 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	
 	}
 
-	public List<User> getGroupUsers(Group group) throws GroupNotFoundException {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+	
+	public List<User> getGroupUsers(Group group) {		
+		List<Long> userIds = groupDao.getMembersIds(group.getGroupId());
+		List<User> list = new ArrayList<User>(userIds.size());
+		for( Long userId : userIds ){
+			try {
+				list.add(userManager.getUser(userId));
+			} catch (UserNotFoundException e) {
+				// 잘못된 데이터이다.
+			}
+		}		
+		return list;
 	}
 
-	public List<User> getGroupUsers(Group group, int startIndex, int numResults)
-			throws GroupNotFoundException {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+	public List<User> getGroupUsers(Group group, int startIndex, int numResults) {
+		List<Long> userIds = groupDao.getMembersIds(group.getGroupId(), startIndex, numResults );
+		List<User> list = new ArrayList<User>(userIds.size());
+		for( Long userId : userIds ){
+			try {
+				list.add(userManager.getUser(userId));
+			} catch (UserNotFoundException e) {
+				// 잘못된 데이터이다.
+			}
+		}		
+		return list;
 	}
 
 	public int getTotalGroupUserCount(Group group) {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
+		return groupDao.getGroupMemberCount(group.getGroupId());
 	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void addMembership(Group group, User user) throws UnAuthorizedException {
+		groupDao.addMember(group.getGroupId(), user.getUserId());
+	}
+
+	public boolean hasMembership(Group group, User user) throws UnAuthorizedException {
+		return groupDao.isMember(group.getGroupId(), user.getUserId());
+	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void removeMembership(Group group, User user)
+			throws UnAuthorizedException {
+		groupDao.removeMember(group.getGroupId(), user.getUserId());
+		
+	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void addMembership(Group group, List<User> users)
+			throws UnAuthorizedException {
+		Set<Long> userIds = Sets.newHashSetWithExpectedSize(users.size());
+		
+		for( User u : users)
+			userIds.add(u.getUserId());
+		
+		groupDao.addMembers(group.getGroupId(), userIds);
+		
+	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void removeMembership(Group group, List<User> users)
+			throws UnAuthorizedException {
+		Set<Long> userIds = Sets.newHashSetWithExpectedSize(users.size());
+		
+		for( User u : users)
+			userIds.add(u.getUserId());
+		
+		groupDao.removeMembers(group.getGroupId(), userIds);		
+	}
+	
 	
 /*
 
@@ -241,21 +301,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		
 	}
 
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void addMembership(Group group, User user) throws UnAuthorizedException {
-
-	}
-
-	public boolean hasMembership(Group group, User user) throws UnAuthorizedException {
-		return false;
-	}
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void removeMembership(Group group, User user)
-			throws UnAuthorizedException {
-		groupDao.removeMember(group.getGroupId(), user.getUserId());
-		
-	}
+	
 
 	@Override
 	public List<Group> getGroups() {
