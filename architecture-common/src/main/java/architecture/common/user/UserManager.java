@@ -72,4 +72,7 @@ public interface UserManager {
 
 	public abstract void enableUser(User user);
 	
+	public abstract List<User> findUsers(String nameOrEmail);
+	
+	public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
 }

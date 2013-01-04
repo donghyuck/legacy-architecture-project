@@ -1,4 +1,4 @@
-/*
+/** 
  * Copyright 2012 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -33,6 +33,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -44,7 +45,11 @@ import sun.misc.BASE64Decoder;
 import architecture.common.adaptor.Connector;
 import architecture.common.jdbc.JdbcType;
 import architecture.common.jdbc.ParameterMapping;
-
+/**
+ * 
+ * @author donghyuck, son
+ *
+ */
 public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Connector {
 	
 	protected Log log = LogFactory.getLog(getClass());
