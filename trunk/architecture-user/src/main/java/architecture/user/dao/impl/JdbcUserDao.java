@@ -401,5 +401,21 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	public List<Integer> getUserIdsWithStatuses(int[] status) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_STATUS", status).getSql(), Integer.class);
 	}
+
+	public List<User> findUsers(String nameOrEmail) {
+		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), userMapper2, new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+		for(User user : users){
+			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
+		}
+		return users;
+	}
+
+	public List<User> findUsers(String nameOrEmail, int startIndex, int numResults) {		
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), startIndex, numResults, new Object[]{nameOrEmail}, new int[]{Types.VARCHAR}, userMapper2);
+		for(User user : users){
+			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
+		}
+		return users;
+	}
     
 }

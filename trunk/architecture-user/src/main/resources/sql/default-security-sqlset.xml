@@ -127,6 +127,29 @@
 		FROM V2_USER WHERE VISIBLE = 1 AND EMAIL LIKE ?
     ]]></sql-query>
 
+<sql-query name="SELECT_USERS_BY_EMAIL_OR_NAME" description="메일 주소에 또는 이름에 해당하는 모든 사용자를 조회"><![CDATA[
+		SELECT 
+			USER_ID, 
+			USERNAME, 
+			PASSWORD_HASH, 
+			NAME, 
+			NAME_VISIBLE, 
+			FIRST_NAME, 
+		    LAST_NAME, 
+		    EMAIL, 
+		    EMAIL_VISIBLE, 
+		    LAST_LOGINED_IN, 
+		    LAST_PROFILE_UPDATE, 
+		    USER_ENABLED, 
+		    VISIBLE, 
+		    IS_EXTERNAL, 
+		    FEDERATED, 
+		    STATUS,
+		    CREATION_DATE, 
+		    MODIFIED_DATE
+		FROM V2_USER WHERE VISIBLE = 1 AND ( EMAIL LIKE ? OR NAME LIKE ? )
+    ]]></sql-query>
+    
 	<sql-query name="SELECT_USER_BY_USERNAME" description="USERNAME에 해당하는 사용자를 조회."><![CDATA[
 		SELECT 
 			USER_ID, 

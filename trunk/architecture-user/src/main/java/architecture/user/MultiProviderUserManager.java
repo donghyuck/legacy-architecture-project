@@ -773,6 +773,14 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             usert.setSetUsernameSupported(false);
         }
         return usert;
-    }    
+    }
+
+	public List<User> findUsers(String nameOrEmail) {
+		return userDao.findUsers(nameOrEmail);
+	}
+
+	public List<User> findUsers(String nameOrEmail, int startIndex, int numResults) {
+		return userDao.findUsers(nameOrEmail, startIndex, numResults);
+	}    
 	
 }

@@ -194,7 +194,10 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 	}
 
 	public List<Long> getMembersIds(long groupId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_GROUP_MEMBER_ID").getSql(), Long.class);
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_GROUP_MEMBER_ID").getSql(), 				
+				new Object[ ] {groupId}, 
+				new int[] {Types.NUMERIC}, 
+				Long.class);
 	}
 
 	public List<Long> getMembersIds(long groupId, int startIndex, int numResults) {
