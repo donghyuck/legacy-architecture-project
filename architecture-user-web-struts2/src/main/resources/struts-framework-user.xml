@@ -80,9 +80,9 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 
-			    <param name="excludeProperties">findUsers.properties</param>
+			    <param name="excludeProperties">foundUsers.properties</param>
 				<param name="includeProperties">
-				findUsers.*
+				  foundUsers.*, foundUserCount
 				</param>
 			</result>		
 		</action>			
