@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
-		<groupId>architecture</groupId>
+		<groupId>architecture.parent</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
-	<groupId>architecture</groupId>
+	<groupId>architecture.web</groupId>
 	<artifactId>architecture-web-struts</artifactId>
 	<name>APPLICATION WEB STRUTS SUPPORT</name>
 	<description>웹 어플리케이션 개발을 위한 스트럿츠 지원 모듈</description>
@@ -127,12 +127,12 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>architecture</groupId>
+			<groupId>architecture.user</groupId>
 			<artifactId>architecture-user</artifactId>
 			<version>1.0.3.RELEASE</version>
 		</dependency>	
 		<dependency>
-			<groupId>architecture</groupId>
+			<groupId>architecture.web</groupId>
 			<artifactId>architecture-web</artifactId>
 			<version>1.0.3.RELEASE</version>
 		</dependency>
