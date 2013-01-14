@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
-		<groupId>architecture</groupId>
+		<groupId>architecture.parent</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
 	<packaging>jar</packaging>
-	<groupId>architecture</groupId>
+	<groupId>architecture.web</groupId>
 	<artifactId>architecture-web</artifactId>
 	<version>1.0.3.RELEASE</version>
 	<name>APPLICATION WEB ARCHITECTURE</name>
@@ -134,7 +134,7 @@
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>architecture</groupId>
+			<groupId>architecture.ee</groupId>
 			<artifactId>architecture-ee</artifactId>
 			<version>1.0.3.RELEASE</version>
 		</dependency>	
