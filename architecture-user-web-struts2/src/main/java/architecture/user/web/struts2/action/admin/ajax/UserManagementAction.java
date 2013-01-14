@@ -84,16 +84,27 @@ public class UserManagementAction  extends FrameworkActionSupport  {
         }
     }
     
+    public int getFoundUserCount(){
+    	String nameOrEmail = ParamUtils.getParameter(request, "nameOrEmail");
+        return userManager.getFoundUserCount(nameOrEmail);
+    }
     
     public List<User> findUsers(){
-    	String nameOrEmail = ParamUtils.getParameter(request, "search-text");
+    	String nameOrEmail = ParamUtils.getParameter(request, "nameOrEmail");
 		if (nameOrEmail == null)
 			log.warn("No search condition..");
+		else
+			log.debug("search user : " + nameOrEmail);
+		
         if( pageSize > 0 ){
             return userManager.findUsers(nameOrEmail, startIndex, pageSize);            
         }else{            
             return userManager.findUsers(nameOrEmail);
         }
+    }
+    
+    public List<User> getFoundUsers(){
+    	return findUsers ();
     }
     
     

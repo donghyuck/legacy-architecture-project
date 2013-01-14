@@ -133,7 +133,7 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 			}
 		}
 		return targetGroup ;
-	}
+	}    
 
 	public List<Property> getTargetGroupProperty() {
 		Map<String, String> properties = getTargetGroup().getProperties();
@@ -181,7 +181,8 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);	
 		List<User> users = Lists.newArrayListWithExpectedSize(list.size());
 		for( Map map : list ){
-			long userId = Long.parseLong( (String)map.get("userId") );
+			
+			long userId = Long.parseLong(map.get("userId").toString() );
 			User user = userManager.getUser(userId);
 			users.add(user);
 		}
@@ -194,7 +195,7 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);	
 		List<User> users = Lists.newArrayListWithExpectedSize(list.size());
 		for( Map map : list ){
-			long userId = Long.parseLong( (String)map.get("userId") );
+			long userId = Long.parseLong(map.get("userId").toString() );
 			User user = userManager.getUser(userId);
 			users.add(user);
 		}
@@ -241,5 +242,8 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
         return success();
     }  
 
+    
+    
+    
 
 }
