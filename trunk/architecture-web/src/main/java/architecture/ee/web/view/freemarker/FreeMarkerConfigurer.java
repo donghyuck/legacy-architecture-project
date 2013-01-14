@@ -95,9 +95,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	 */
 	@Override
 	protected void postProcessTemplateLoaders(
-			List<TemplateLoader> templateLoaders) {
-		templateLoaders.add(new ClassTemplateLoader(FreeMarkerConfigurer.class,
-				""));
+			List<TemplateLoader> templateLoaders) {templateLoaders.add(new ClassTemplateLoader(FreeMarkerConfigurer.class, "/"));
 		logger.info("ClassTemplateLoader for Spring macros added to FreeMarker configuration");
 	}
 
@@ -145,6 +143,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 
     @Override
     protected TemplateLoader getTemplateLoaderForPath(String templateLoaderPath) {
+    	
         if (isPreferFileSystemAccess()) {
             // Try to load via the file system, fall back to SpringTemplateLoader
             // (for hot detection of template changes, if possible).
