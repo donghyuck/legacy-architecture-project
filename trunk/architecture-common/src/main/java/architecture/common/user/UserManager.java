@@ -75,4 +75,6 @@ public interface UserManager {
 	public abstract List<User> findUsers(String nameOrEmail);
 	
 	public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
+	
+	public abstract int getFoundUserCount(String nameOrEmail);
 }
