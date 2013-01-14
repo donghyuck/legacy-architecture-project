@@ -18,7 +18,7 @@ import architecture.ee.util.OutputFormat;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
-import architecture.security.util.SecurityHelper;
+import architecture.user.util.SecurityHelper;
 
 @SuppressWarnings("deprecation")
 public abstract class FrameworkActionSupport extends
