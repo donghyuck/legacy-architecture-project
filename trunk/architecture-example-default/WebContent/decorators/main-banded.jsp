@@ -4,7 +4,7 @@
 <%@ page import="architecture.common.user.User"%>
 <%@ page import="architecture.common.util.StringUtils"%>
 <%@ page import="architecture.ee.web.util.ServletUtils"%>
-<%@ page import="architecture.security.util.SecurityHelper"%>
+<%@ page import="architecture.user.util.SecurityHelper"%>
 <!DOCTYPE html>
 <html>
 <head>
