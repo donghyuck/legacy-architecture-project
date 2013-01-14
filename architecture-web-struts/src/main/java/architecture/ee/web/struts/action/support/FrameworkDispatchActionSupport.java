@@ -16,7 +16,7 @@ import architecture.ee.util.OutputFormat;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebApplicationHelper;
-import architecture.security.util.SecurityHelper;
+import architecture.user.util.SecurityHelper;
 
 public abstract class FrameworkDispatchActionSupport extends
 		org.springframework.web.struts.DispatchActionSupport {
