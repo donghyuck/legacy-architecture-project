@@ -130,7 +130,6 @@
 			<groupId>architecture</groupId>
 			<artifactId>architecture-user</artifactId>
 			<version>1.0.0.RELEASE</version>
-			<scope>compile</scope>
 			<exclusions>
 				<exclusion>
 					<artifactId>ehcache</artifactId>
@@ -151,10 +150,9 @@
 			</exclusions>
 		</dependency>
 		<dependency>
-			<groupId>architecture</groupId>
+			<groupId>architecture.web</groupId>
 			<artifactId>architecture-web-struts</artifactId>
 			<version>1.0.0.RELEASE</version>
-			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
