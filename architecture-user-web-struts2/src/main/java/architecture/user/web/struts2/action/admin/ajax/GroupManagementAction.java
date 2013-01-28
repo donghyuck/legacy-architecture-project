@@ -146,6 +146,7 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 	}
 	
 	
+	
 	public String createGroup() throws Exception {		
 		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);		
 		String name = (String)map.get("name");
@@ -174,6 +175,7 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 		}	
 		
 	}
+	
 	
 	
 	public String addMembers() throws Exception {	
@@ -241,9 +243,5 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
     public String execute() throws Exception {  
         return success();
     }  
-
-    
-    
-    
 
 }
