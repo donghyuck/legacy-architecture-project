@@ -781,6 +781,10 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	public List<User> findUsers(String nameOrEmail, int startIndex, int numResults) {
 		return userDao.findUsers(nameOrEmail, startIndex, numResults);
+	}
+
+	public int getFoundUserCount(String nameOrEmail) {
+		return userDao.getFoundUserCount(nameOrEmail);
 	}    
 	
 }

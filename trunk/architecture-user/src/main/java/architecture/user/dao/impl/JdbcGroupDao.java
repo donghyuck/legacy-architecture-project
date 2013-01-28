@@ -15,6 +15,7 @@
  */
 package architecture.user.dao.impl;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -26,8 +27,11 @@ import java.util.Set;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
@@ -244,22 +248,54 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 	}
 
 	public void addMembers(long groupId, Set<Long> userIds) {
-		List args = Lists.newArrayListWithExpectedSize(userIds.size());
-		for( Long userId : userIds )
-			args.add(userId);				
-		getExtendedJdbcTemplate().batchUpdate( getBoundSql("ARCHITECTURE_SECURITY.ADD_GROUP_MEMBER").getSql(), args ); 		
-		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );
-		
+		final List<Membership> memberships = Lists.newArrayListWithExpectedSize(userIds.size());		
+		for( Long userId : userIds ){
+			memberships.add(new Membership(groupId, userId));
+		}			
+		getExtendedJdbcTemplate().batchUpdate( 
+				getBoundSql("ARCHITECTURE_SECURITY.ADD_GROUP_MEMBER").getSql(), 
+				new BatchPreparedStatementSetter() {
+					public void setValues(PreparedStatement ps, int i)
+							throws SQLException {
+						ps.setLong(1, memberships.get(i).groupId);
+		                ps.setLong(2, memberships.get(i).userId);						
+					}
+					public int getBatchSize() {
+						return memberships.size();
+					}}		
+		); 		
+		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );		
 	}
 
 	public void removeMembers(long groupId, Set<Long> userIds) {
 		// REMOVE_GROUP_MEMBER, UPDATE_GROUP_MODIFIED_DATE
-		List args = Lists.newArrayListWithExpectedSize(userIds.size());
-		for( Long userId : userIds )
-			args.add(userId);				
-		getExtendedJdbcTemplate().batchUpdate( getBoundSql("ARCHITECTURE_SECURITY.REMOVE_GROUP_MEMBER").getSql(), args ); 		
+		final List<Membership> memberships = Lists.newArrayListWithExpectedSize(userIds.size());		
+		for( Long userId : userIds ){
+			memberships.add(new Membership(groupId, userId));
+		}			
+		getExtendedJdbcTemplate().batchUpdate( getBoundSql("ARCHITECTURE_SECURITY.REMOVE_GROUP_MEMBER").getSql(), 
+				new BatchPreparedStatementSetter() {
+			public void setValues(PreparedStatement ps, int i)
+					throws SQLException {
+				ps.setLong(1, memberships.get(i).groupId);
+                ps.setLong(2, memberships.get(i).userId);						
+			}
+			public int getBatchSize() {
+				return memberships.size();
+			}}						
+	    ); 		
 		getExtendedJdbcTemplate().update( getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP_MODIFIED_DATE").getSql(), new SqlParameterValue(Types.DATE, new Date() ), new SqlParameterValue(Types.NUMERIC, groupId )  );
 	}
 
+	
+	static class Membership{
+		private long groupId = -1L;
+		private long userId = -1L;
+		private boolean administrator = false;
+		public Membership(long groupId, long userId) {
+			this.groupId = groupId;
+			this.userId = userId;
+		}				
+	}
 
 }

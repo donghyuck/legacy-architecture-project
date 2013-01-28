@@ -403,7 +403,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> findUsers(String nameOrEmail) {
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), userMapper2, new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), userMapper2, new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -411,11 +411,15 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	}
 
 	public List<User> findUsers(String nameOrEmail, int startIndex, int numResults) {		
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), startIndex, numResults, new Object[]{nameOrEmail}, new int[]{Types.VARCHAR}, userMapper2);
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), startIndex, numResults, new Object[]{nameOrEmail, nameOrEmail}, new int[]{Types.VARCHAR, Types.VARCHAR}, userMapper2);
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
 		return users;
+	}
+
+	public int getFoundUserCount(String nameOrEmail) {
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_USERS_BY_EMAIL_OR_NAME").getSql(), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
 	}
     
 }
