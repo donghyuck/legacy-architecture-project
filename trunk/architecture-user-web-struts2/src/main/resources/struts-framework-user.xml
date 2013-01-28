@@ -34,7 +34,18 @@
 				</param>
 			</result>
 		</action>
-		
+
+		<action name="list-user-groups" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">userGroups.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				userGroups.*
+				</param>
+			</result>
+		</action>
+				
 		<action name="update-user" method="updateUser"  class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>

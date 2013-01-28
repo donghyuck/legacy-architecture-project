@@ -27,6 +27,8 @@ import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
+import architecture.user.Group;
+import architecture.user.GroupManager;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
@@ -39,6 +41,8 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 	private Long userId;
     
     private UserManager userManager ;
+    
+    private GroupManager groupManager ;
 
     public UserManager getUserManager() {
         return userManager;
@@ -47,7 +51,16 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
+
     
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
 	public Long getUserId() {
 		return userId;
 	}
@@ -76,7 +89,11 @@ public class UserManagementAction  extends FrameworkActionSupport  {
         return userManager.getTotalUserCount();
     }
 
-    public List<User> getUsers(){        
+    public List<User> getUsers(){   
+    	
+    	log.debug(  request.getParameterMap() );
+    	log.debug( "startIndex= " + startIndex + ", pageSize=" + pageSize  );
+    	
         if( pageSize > 0 ){
             return userManager.getUsers(startIndex, pageSize);            
         }else{            
@@ -108,7 +125,10 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     }
     
     
-    
+    public List<Group> getUserGroups(){
+    	return groupManager.getUserGroups(getTargetUser());    	
+    }
+        
 	public User getTargetUser() {
 		if (userId == null)
 			log.warn("Edit profile for unspecified user.");
