@@ -56,6 +56,9 @@ public interface UserDao {
      */
     public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
     
+    public abstract int getFoundUserCount(String nameOrEmail) ;
+    
+    
     public abstract List<User> getAllUsers();
 
     public abstract List<User> getAllUsers(int startIndex, int numResults);
