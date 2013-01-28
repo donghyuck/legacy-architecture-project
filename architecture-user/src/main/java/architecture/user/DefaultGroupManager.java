@@ -241,9 +241,8 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	}
 	
 	
-/*
-
-	protected List<Group> lookupGroupsForUser(User user) {		
+	
+	public List<Group> getUserGroups(User user) {		
 		List<Group> groups = new ArrayList<Group>();		
 		List<Long> groupIds = groupDao.getUserGroupIds(user.getUserId());
 		for(long groupId:groupIds){
@@ -257,6 +256,10 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		return groups;
 	}
 
+	
+/*
+
+	
     protected Group lookupGroup(String name) throws GroupNotFoundException
 	{
 	    Group g = groupDao.getGroupByName(name, caseInsensitiveGroupNameMatch);

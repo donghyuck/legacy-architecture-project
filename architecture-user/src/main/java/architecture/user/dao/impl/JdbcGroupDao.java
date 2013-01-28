@@ -298,4 +298,10 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 		}				
 	}
 
+
+	public List<Long> getUserGroupIds(long userId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_SECURITY.SELECT_GROUPS_FOR_USER").getSql(), 				
+					Long.class, new SqlParameterValue(Types.NUMERIC, userId ) );
+	}
+
 }

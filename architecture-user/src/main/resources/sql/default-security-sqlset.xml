@@ -238,6 +238,12 @@
    		) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
      ]]></sql-query>
 
+	<sql-query name="COUNT_USERS_BY_EMAIL_OR_NAME" description="활성화된 내부 사용자 수"><![CDATA[
+		SELECT count( USER_ID ) FROM V2_USER 
+		WHERE VISIBLE = 1 AND ( EMAIL LIKE ? OR NAME LIKE ? )
+    ]]></sql-query>
+
+
 	<sql-query name="COUNT_ENABLED_USER" description="활성화된 내부 사용자 수"><![CDATA[
 		SELECT count( USER_ID ) FROM V2_USER WHERE VISIBLE = 1 AND USER_ENABLED = 1 AND IS_EXTERNAL = 0
     ]]></sql-query>
@@ -507,7 +513,7 @@
 		DELETE FROM V2_GROUP_MEMBERS WHERE GROUP_ID = ?
     ]]></sql-query>
 	<sql-query name="DELETE_GROUP" description="그룹 삭제"><![CDATA[
-		DELETE FROM V2_GROUPS WHERE GROUP_ID = ?
+		DELETE FROM V2_GROUP WHERE GROUP_ID = ?
     ]]></sql-query>
 	<sql-query name="DELETE_MEMBERSHIP_BY_USER" description="사용자의 모든 그룹 맴버 정보를 삭제"><![CDATA[
 		DELETE FROM V2_GROUP_MEMBERS WHERE USER_ID = ?
@@ -557,7 +563,7 @@
     ]]></sql-query>    
 
 	<sql-query name="UPDATE_GROUP_MODIFIED_DATE" description="그룹 수정일 업데이트"><![CDATA[        
-        UPDATE V2_GROUPS
+        UPDATE V2_GROUP
         SET MODIFIED_DATE = ?
         WHERE GROUP_ID = ?
     ]]></sql-query>
