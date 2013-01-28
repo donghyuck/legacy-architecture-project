@@ -72,6 +72,12 @@ public interface GroupManager {
 	 */
 	public abstract void addMembership(Group group, User user) throws UnAuthorizedException;
 
+	/**
+	 * 그룹 멤버쉽을 추가한다.
+	 * @param group
+	 * @param user
+	 * @throws UnAuthorizedException
+	 */
 	public abstract void addMembership(Group group, List<User> user) throws UnAuthorizedException;
 	
 	/**
@@ -95,6 +101,8 @@ public interface GroupManager {
 	
 	public abstract void removeMembership(Group group, List<User> user) throws UnAuthorizedException;
 	
+	public abstract List<Group> getUserGroups(User user);
+	
 	/*
 	
 	public abstract Group getGroup(long groupId) throws GroupNotFoundException;
@@ -103,7 +111,7 @@ public interface GroupManager {
 
 	public abstract Group getGroup(long groupId, boolean flag) throws GroupNotFoundException;
 
-	public abstract List<Group> getUserGroups(User user);
+
 
 
 

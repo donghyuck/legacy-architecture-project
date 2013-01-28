@@ -41,6 +41,8 @@ public interface GroupDao {
 	
 	public abstract void removeMembers(long groupId, Set<Long> userIds);
 	
+	public abstract List<Long> getUserGroupIds(long userId);
+	
 	/*
 	public abstract void deleteGroupUsers(long groupId);
 
@@ -52,7 +54,7 @@ public interface GroupDao {
 
 	
 
-	public abstract List<Long> getUserGroupIds(long userId);
+	
 
 	public abstract List<Long> getGroupIds(int start, int num);
 
