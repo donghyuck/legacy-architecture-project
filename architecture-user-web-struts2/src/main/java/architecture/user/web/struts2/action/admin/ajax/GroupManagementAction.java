@@ -29,6 +29,8 @@ import architecture.user.Group;
 import architecture.user.GroupAlreadyExistsException;
 import architecture.user.GroupManager;
 import architecture.user.GroupNotFoundException;
+import architecture.user.Role;
+import architecture.user.RoleManager;
 
 import com.google.common.collect.Lists;
 
@@ -46,7 +48,17 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 
     private UserManager userManager;
     
-    public UserManager getUserManager() {
+    private RoleManager roleManager ;
+    
+    public RoleManager getRoleManager() {
+		return roleManager;
+	}
+
+	public void setRoleManager(RoleManager roleManager) {
+		this.roleManager = roleManager;
+	}
+
+	public UserManager getUserManager() {
 		return userManager;
 	}
 
@@ -146,6 +158,9 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 	}
 	
 	
+	public List<Role> getGroupRoles(){
+		return roleManager.getFinalGroupRoles(getTargetGroup().getGroupId());
+	}
 	
 	public String createGroup() throws Exception {		
 		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);		

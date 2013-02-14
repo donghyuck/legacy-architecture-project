@@ -29,6 +29,8 @@ import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.user.Group;
 import architecture.user.GroupManager;
+import architecture.user.Role;
+import architecture.user.RoleManager;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
@@ -43,12 +45,22 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     private UserManager userManager ;
     
     private GroupManager groupManager ;
+    
+    private RoleManager roleManager ;
 
     public UserManager getUserManager() {
         return userManager;
     }
 
-    public void setUserManager(UserManager userManager) {
+    public RoleManager getRoleManager() {
+		return roleManager;
+	}
+
+	public void setRoleManager(RoleManager roleManager) {
+		this.roleManager = roleManager;
+	}
+
+	public void setUserManager(UserManager userManager) {
         this.userManager = userManager;
     }
 
@@ -100,6 +112,7 @@ public class UserManagementAction  extends FrameworkActionSupport  {
             return userManager.getUsers();
         }
     }
+
     
     public int getFoundUserCount(){
     	String nameOrEmail = ParamUtils.getParameter(request, "nameOrEmail");
@@ -129,6 +142,7 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     	return groupManager.getUserGroups(getTargetUser());    	
     }
         
+    
 	public User getTargetUser() {
 		if (userId == null)
 			log.warn("Edit profile for unspecified user.");
@@ -143,8 +157,15 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 		return new UserTemplate(targetUser);
 	}
 	
-	
+    
+    public List<Role> getUserRoles(){    	
+    	List<Role> roles =  roleManager.getFinalUserRoles(getTargetUser().getUserId());
+    	return roles;
+    }
+    
 	/** Action method **/
+	
+	
 	
     @Override
     public String execute() throws Exception {  
