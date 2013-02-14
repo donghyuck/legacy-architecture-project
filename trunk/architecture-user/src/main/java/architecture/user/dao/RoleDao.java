@@ -1,8 +1,8 @@
-package architecture.user.role.dao;
+package architecture.user.dao;
 
 import java.util.List;
 
-import architecture.user.role.Role;
+import architecture.user.Role;
 
 public interface RoleDao {
 
@@ -15,7 +15,7 @@ public interface RoleDao {
 	 * 롤 정보를 업데이트 한다.
 	 * @param role
 	 */
-	public abstract void update(Role role);
+	public abstract void updateRole(Role role);
 
 	public abstract Role getRoleById(long roleId);
 

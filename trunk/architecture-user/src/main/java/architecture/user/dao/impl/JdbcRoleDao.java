@@ -1,4 +1,4 @@
-package architecture.user.role.dao.impl;
+package architecture.user.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.model.impl.RoleModelImpl;
-import architecture.user.role.Role;
-import architecture.user.role.dao.RoleDao;
+import architecture.user.Role;
+import architecture.user.dao.RoleDao;
+import architecture.user.model.impl.RoleImpl;
 
 /**
  * @author  donghyuck
@@ -21,9 +21,10 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 
 	private final RowMapper<Role> roleRowMapper = new RowMapper<Role>(){
 		public Role mapRow(ResultSet rs, int rowNum) throws SQLException {  			
-			RoleModelImpl model = new RoleModelImpl();			
+			RoleImpl model = new RoleImpl();			
 			model.setRoleId( rs.getLong("ROLE_ID") );
 			model.setName(rs.getString("NAME"));
+			model.setMask(rs.getInt("MASK"));
 			model.setDescription(rs.getString("DESCRIPTION"));
 			model.setCreationDate(rs.getDate("CREATION_DATE"));
 			model.setModifiedDate(rs.getDate("MODIFIED_DATE"));					
@@ -31,8 +32,8 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 		}};
 	
 	private String sequencerName = "Role";
-	/**
-	 */
+
+
 	private MaxValueIncrementer sequenceDao;
 	
 	/**
@@ -60,7 +61,7 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 		role.setModifiedDate(now);
 		
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.CREATE_ROLE").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.CREATE_ROLE").getSql(), 
 			new Object[]{id, role.getName(), role.getDescription(), role.getCreationDate(), role.getModifiedDate()}, 
 			new int[]{Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.DATE });
 			
@@ -71,28 +72,28 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 	public void deleteRole(long roleId) {
 		
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.DELETE_GROUP_ROLES").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_ROLES").getSql(), 
 			new Object[]{roleId}, new int[]{Types.INTEGER});
 		
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.DELETE_USER_ROLES").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.DELETE_USER_ROLES").getSql(), 
 			new Object[]{roleId}, new int[]{Types.INTEGER});
 		
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.DELETE_ROLE").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.DELETE_ROLE").getSql(), 
 			new Object[]{roleId}, new int[]{Types.INTEGER});
 	
 	}
 
-	public void update(Role role) {
-		getExtendedJdbcTemplate().update(getBoundSql("FRAMEWORK_V2.UPDATE_ROLE").getSql(), 
+	public void updateRole(Role role) {
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_ROLE").getSql(), 
 			new Object[]{role.getName(), role.getDescription(), role.getModifiedDate(), role.getRoleId()}, 
 			new int[]{Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.INTEGER});
 	}
 
 	public Role getRoleById(long roleId) {
 		Role role = getExtendedJdbcTemplate().queryForObject(
-				getBoundSql("FRAMEWORK_V2.SELECT_ROLE_BY_ID").getSql(), 
+				getBoundSql("ARCHITECTURE_SECURITY.SELECT_ROLE_BY_ID").getSql(), 
 				new Object[]{roleId}, new int[]{Types.INTEGER}, roleRowMapper);		
 		return role;
 	}
@@ -100,71 +101,69 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 	public Role getRoleByName(String name, boolean caseInsensitive) {
 		String n = caseInsensitive ? name.toLowerCase() : name;
 		Role role = getExtendedJdbcTemplate().queryForObject(
-			getBoundSqlWithAdditionalParameter("FRAMEWORK_V2.SELECT_ROLE_BY_NAME", caseInsensitive).getSql(), 
+			getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_ROLE_BY_NAME", caseInsensitive).getSql(), 
 			new Object[]{n}, new int[]{Types.VARCHAR}, roleRowMapper);				
 		return role;
 	}
-	
-	
+		
 	public void deleteUserRoles(long userId) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.REMOVE_USER_ROLES").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.REMOVE_USER_ROLES").getSql(), 
 			new Object[]{userId}, 
 			new int[]{Types.INTEGER});			
 	}
 
 	public void deleteGroupRoles(long groupId) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.REMOVE_USER_ROLES").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.REMOVE_USER_ROLES").getSql(), 
 			new Object[]{groupId}, 
 			new int[]{Types.INTEGER});			
 	}
 
 	public int getRoleCount() {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("FRAMEWORK_V2.COUNT_ALL_ROLES").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ALL_ROLES").getSql());
 	}
 
 	public List<Long> getAllRoleIds() {
 		return getExtendedJdbcTemplate().queryForList(
-			getBoundSql("FRAMEWORK_V2.SELECT_ALL_ROLE_IDS").getSql(), Long.class );
+			getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_ROLE_IDS").getSql(), Long.class );
 	}
 
 	public List<Long> getRoleIds(int start, int num) {
 		return getExtendedJdbcTemplate().queryScrollable(
-			getBoundSql("FRAMEWORK_V2.SELECT_ALL_ROLE_IDS").getSql(), start, num, new Object[0], new int[0], Long.class );
+			getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_ROLE_IDS").getSql(), start, num, new Object[0], new int[0], Long.class );
 	}
 		
 	public List<Long> getUserRoleIds(long userId) {
 		return getExtendedJdbcTemplate().queryForList(
-			getBoundSql("FRAMEWORK_V2.SELECT_USER_ROLE_IDS").getSql(), new Object[]{ userId }, new int[]{Types.INTEGER}, Long.class );
+			getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_ROLE_IDS").getSql(), new Object[]{ userId }, new int[]{Types.INTEGER}, Long.class );
 	}
 
 	public List<Long> getGroupRoleIds(long groupId) {
 		return getExtendedJdbcTemplate().queryForList(
-			getBoundSql("FRAMEWORK_V2.SELECT_GROUP_ROLE_IDS").getSql(), new Object[]{ groupId }, new int[]{Types.INTEGER}, Long.class );
+			getBoundSql("ARCHITECTURE_SECURITY.SELECT_GROUP_ROLE_IDS").getSql(), new Object[]{ groupId }, new int[]{Types.INTEGER}, Long.class );
 	}
 	public void removeUserRole(long roleId, long userId) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.DELETE_USER_ROLE").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.DELETE_USER_ROLE").getSql(), 
 			new Object[]{roleId, userId}, 
 			new int[]{Types.INTEGER, Types.INTEGER});
 	}
 	public void removeGroupRole(long roleId, long groupId) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.DELETE_GROUP_ROLE").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_ROLE").getSql(), 
 			new Object[]{roleId, groupId}, 
 			new int[]{Types.INTEGER, Types.INTEGER});		
 	}
 	public void addUserRole(long roleId, long userId) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.CREATE_USER_ROLE").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.CREATE_USER_ROLE").getSql(), 
 			new Object[]{roleId, userId}, 
-			new int[]{Types.INTEGER, Types.INTEGER});	
-		
+			new int[]{Types.INTEGER, Types.INTEGER});		
 	}
 	public void addGroupRole(long roleId, long groupId) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("FRAMEWORK_V2.CREATE_GROUP_ROLE").getSql(), 
+			getBoundSql("ARCHITECTURE_SECURITY.CREATE_GROUP_ROLE").getSql(), 
 			new Object[]{roleId, groupId}, 
 			new int[]{Types.INTEGER, Types.INTEGER});			
 	}		

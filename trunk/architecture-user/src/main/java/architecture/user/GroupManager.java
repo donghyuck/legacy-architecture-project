@@ -105,17 +105,17 @@ public interface GroupManager {
 	
 	/*
 	
-	public abstract Group getGroup(long groupId) throws GroupNotFoundException;
+	public abstract Group getGroup(long groupId) throws RoleNotFoundException;
 
-	public abstract Group getGroup(String name) throws GroupNotFoundException;
+	public abstract Group getGroup(String name) throws RoleNotFoundException;
 
-	public abstract Group getGroup(long groupId, boolean flag) throws GroupNotFoundException;
-
-
+	public abstract Group getGroup(long groupId, boolean flag) throws RoleNotFoundException;
 
 
 
-	public abstract void updateGroup(Group group) throws GroupNotFoundException, GroupAlreadyExistsException;
+
+
+	public abstract void updateGroup(Group group) throws RoleNotFoundException, RoleAlreadyExistsException;
 
 	public abstract void deleteGroup(Group group) throws UnAuthorizedException;
 */

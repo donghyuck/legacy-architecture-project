@@ -1,7 +1,7 @@
 package architecture.user.model;
 
 import architecture.common.model.ModelObject;
-import architecture.user.role.Role;
+import architecture.user.Role;
 
 /**
  * @author                 donghyuck
@@ -38,5 +38,15 @@ public interface RoleModel extends ModelObject<Role> {
 	 */
 	public abstract void setDescription(String description);
 
+
+	/**
+	 * @return
+	 */
+	public int getMask();
+
+	/**
+	 * @param  mask
+	 */
+	public void setMask(int mask);
     
 }
