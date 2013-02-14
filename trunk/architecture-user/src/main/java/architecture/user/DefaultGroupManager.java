@@ -8,6 +8,7 @@ import java.util.Set;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.exception.CodeableException;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
@@ -118,7 +119,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	protected Group lookupGroup(String name) throws GroupNotFoundException {
 	    Group g = groupDao.getGroupByName(name, caseInsensitiveGroupNameMatch);
 	    if(g == null)
-	        throw new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
+	        throw CodeableException.newException(GroupNotFoundException.class, 5142, name);//new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
 	    else
 	        return g;
 	}
@@ -129,7 +130,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	        return null ; //new RegisteredUsersGroup();
 	    Group group = groupDao.getGroupById(groupId);
 	    if(group == null)
-	        throw new GroupNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
+	        throw CodeableException.newException(GroupNotFoundException.class, 5141, groupId); //new GroupNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
 	    else
 	        return group;
 	}
@@ -139,7 +140,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		
 		Group original = groupDao.getGroupById(group.getGroupId());
 		if (original == null)
-			throw new GroupNotFoundException();
+			throw CodeableException.newException(GroupAlreadyExistsException.class, 5141, group.getGroupId()); //new GroupNotFoundException();
 		
 		String oldGroupName = null;
 		String newGroupName = null;
@@ -148,7 +149,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 			try{
 			Group checked = getGroup(caseGroupName(group.getName()));
 			if( checked.getGroupId() == group.getGroupId() ){
-				throw new GroupAlreadyExistsException("Group with this name already exists.");
+				throw CodeableException.newException(GroupAlreadyExistsException.class, 5143); //new GroupAlreadyExistsException("Group with this name already exists.");
 			}
 			}catch(GroupNotFoundException e){
 				oldGroupName = original.getName();
