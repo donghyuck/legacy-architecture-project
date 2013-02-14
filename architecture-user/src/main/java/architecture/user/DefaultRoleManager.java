@@ -9,9 +9,12 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import architecture.common.exception.CodeableException;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.component.admin.AdminHelper;
@@ -38,14 +41,14 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 
 	protected Cache roleIdCache ;
 	
-	private Cache userRoleCache;
+	//private Cache userRoleCache;
 		
-	private Cache groupRoleCache;	
+	//private Cache groupRoleCache;	
 	
 	public DefaultRoleManager() {
 		this.roleCache = AdminHelper.getCache("roleCache");
-		this.userRoleCache = AdminHelper.getCache("userRoleCache");
-		this.groupRoleCache = AdminHelper.getCache("groupRoleCache");
+		//this.userRoleCache = AdminHelper.getCache("userRoleCache");
+		//this.groupRoleCache = AdminHelper.getCache("groupRoleCache");
 		this.roleIdCache = AdminHelper.getCache("roleIdCache");
 	}
 
@@ -58,10 +61,10 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 	}
 
 	/**
-	 * @param userRoleCache
+	 * @param roleIdCache
 	 */
-	public void setUserRoleCache(Cache userRoleCache) {
-		this.userRoleCache = userRoleCache;
+	public void setRoleIdCache(Cache roleIdCache) {
+		this.roleIdCache = roleIdCache;
 	}
 
 	/**
@@ -83,7 +86,7 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 		this.eventPublisher = eventPublisher;
 	}
 		
-	public List<Role> getFinalUserRoles(long userId) {		
+	public List<Role> getFinalUserRoles(long userId) {	
 		
 		List<Role> roles = new ArrayList<Role>();		
 		List<Long> userRoleIds = roleDao.getUserRoleIds(userId);
@@ -133,6 +136,7 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 		return roleDao.getRoleCount();
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void createRole(String name, String description) {
 		Role newRole = new RoleImpl();
 		newRole.setName(name);
@@ -142,10 +146,11 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 	}
 
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void updateRole(Role role) throws RoleNotFoundException, RoleAlreadyExistsException {		
 		Role original = roleDao.getRoleById(role.getRoleId());
 		if (original == null)
-			throw new RoleNotFoundException();		
+			throw CodeableException.newException(RoleNotFoundException.class, 5152, role.getRoleId() ); //throw new RoleNotFoundException();		
 
 		String oldRoleName = null;
 		String newRoleName = null;
@@ -153,8 +158,8 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 		if( !nameEquals(original, role)){
 			try{
 			Role checked = getRole(caseRoleName(role.getName()));
-			if( checked.getRoleId() == role.getRoleId() ){
-				throw new RoleAlreadyExistsException("Role with this name already exists.");
+			if( checked.getRoleId() == role.getRoleId() ){				
+				throw CodeableException.newException(RoleAlreadyExistsException.class, 5151); //new RoleAlreadyExistsException("Role with this name already exists.");
 			}
 			}catch(RoleNotFoundException e){
 				oldRoleName = original.getName();
@@ -167,53 +172,62 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 		if( oldRoleName != null && newRoleName != null ){
 			roleNameUpdated(oldRoleName);
 		}
-		clearRoleFromCache(role);		
-		
+		clearRoleFromCache(role);			
 	}
 
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void removeRole(Role role) throws RoleNotFoundException {		
 		Role original = roleDao.getRoleById(role.getRoleId());
 		if (original == null)
-			throw new RoleNotFoundException();
-		
-		roleDao.deleteRole(role.getRoleId());
-		
+			throw new RoleNotFoundException();		
+		roleDao.deleteRole(role.getRoleId());		
 		clearRoleFromCache(role);		
-		roleIdCache.remove(caseRoleName(role.getName()));
-		
+		roleIdCache.remove(caseRoleName(role.getName()));		
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void removeUserRole(User user, List<Role> roles) {		
+		for( Role role : roles )
+			roleDao.removeUserRole(role.getRoleId(), user.getUserId());		
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void addUserRole(User user, List<Role> roles) {		
+		for( Role role : roles )
+			roleDao.addUserRole(role.getRoleId(), user.getUserId());		
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void removeGroupRole(Group group, List<Role> roles) {		
+		for( Role role : roles )
+			roleDao.removeGroupRole(role.getRoleId(), group.getGroupId());		
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void addGroupRole(Group group, List<Role> roles) {		
+		for( Role role : roles )
+			roleDao.addGroupRole(role.getRoleId(), group.getGroupId());		
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void removeUserRole(User user, Role role) {		
+		roleDao.removeUserRole(role.getRoleId(), user.getUserId());
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void addUserRole(User user, Role role) {		
+		roleDao.addUserRole(role.getRoleId(), user.getUserId());
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void removeGroupRole(Group group, Role role) {		
+		roleDao.removeGroupRole(role.getRoleId(), group.getGroupId());
 	}
 
-
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void addGroupRole(Group group, Role role) {		
+		roleDao.addGroupRole(role.getRoleId(), group.getGroupId());
 	}
 
 	public Role getRole(String name) throws RoleNotFoundException {
@@ -253,17 +267,17 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 	protected Role lookupRole(String name) throws RoleNotFoundException {
 	    Role r = roleDao.getRoleByName(name, caseInsensitiveRoleNameMatch);
 	    if(r == null)
-	        throw new RoleNotFoundException((new StringBuilder()).append("No role found for with name ").append(name).toString());
+	        throw  CodeableException.newException(RoleNotFoundException.class, 5153, name);//new RoleNotFoundException((new StringBuilder()).append("No role found for with name ").append(name).toString());
 	    else
 	        return r;
 	}
 
 	protected Role lookupRole(long roleId) throws RoleNotFoundException {
 	    if(roleId == -2L)
-	        return null ; //new RegisteredUsersGroup();
+	        return null ; 
 	    Role role = roleDao.getRoleById(roleId);
 	    if(role == null)
-	        throw new RoleNotFoundException((new StringBuilder()).append("No role found for with id ").append(roleId).toString());
+	        throw  CodeableException.newException(RoleNotFoundException.class, 5152, roleId); //new RoleNotFoundException((new StringBuilder()).append("No role found for with id ").append(roleId).toString());
 	    else
 	        return role;
 	}
@@ -279,4 +293,5 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
     protected boolean nameEquals(Role g1, Role g2){
     	return g1.getName() != null && g2.getName() != null && caseRoleName(g1.getName()).equals(caseRoleName(g2.getName()));
     }
+    
 }
