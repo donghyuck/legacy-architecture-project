@@ -88,7 +88,6 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		try {
 			return groupDao.getGroupCount();
 		} catch (Exception e) {
-			// TODO 자동 생성된 catch 블록
 			log.error(e);
 		}
 		return 0 ;
@@ -100,10 +99,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		for( Long groupId : groupIds )
 			try {
 				list.add(getGroup(groupId));
-			} catch (GroupNotFoundException e) {}
-		
-		log.debug( list );
-		
+			} catch (GroupNotFoundException e) {}		
 		return list;
 	}
 
@@ -139,8 +135,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	}
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void updateGroup(Group group) throws GroupNotFoundException,
-			GroupAlreadyExistsException {		
+	public void updateGroup(Group group) throws GroupNotFoundException, GroupAlreadyExistsException {		
 		
 		Group original = groupDao.getGroupById(group.getGroupId());
 		if (original == null)
@@ -256,56 +251,54 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		return groups;
 	}
 
-	
-/*
-
-	
-    protected Group lookupGroup(String name) throws GroupNotFoundException
-	{
-	    Group g = groupDao.getGroupByName(name, caseInsensitiveGroupNameMatch);
-	    if(g == null)
-	        throw new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
-	    else
-	        return g;
-	}	
-	
-    protected Group lookupGroup(long groupId) throws GroupNotFoundException
-	{
-	    if(groupId == -2L)
-	        return null ; //new RegisteredUsersGroup();
-	    Group group = groupDao.getGroupById(groupId);
-	    if(group == null)
-	        throw new GroupNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
-	    else
-	        return group;
-	}
-
-    
-
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void updateGroup(Group group) throws GroupNotFoundException,
-			GroupAlreadyExistsException {
-		
-	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void deleteGroup(Group group) throws UnAuthorizedException {
 		long groupId = group.getGroupId();
 		List<Long> memberIds = group.getMemberIds();
+		/**
 		groupDao.deleteGroupUsers(groupId);		
 		groupDao.deleteGroupProperties(groupId);
 		groupDao.deleteGroup(groupId);
 		groupCache.remove(Long.valueOf(groupId));
 		groupIdCache.remove(caseGroupName(group.getName()));
-		
+		*/
 		for( long memberId : memberIds ){
-			groupMemberCache.remove((new StringBuilder()).append("userGroups-").append(memberId).toString());
+			//groupMemberCache.remove((new StringBuilder()).append("userGroups-").append(memberId).toString());
 		}
+		
+	}
+	
+	
+/*
+	    protected Group lookupGroup(String name) throws RoleNotFoundException
+	{
+	    Group g = groupDao.getGroupByName(name, caseInsensitiveGroupNameMatch);
+	    if(g == null)
+	        throw new RoleNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
+	    else
+	        return g;
+	}	
+	
+    protected Group lookupGroup(long groupId) throws RoleNotFoundException
+	{
+	    if(groupId == -2L)
+	        return null ; //new RegisteredUsersGroup();
+	    Group group = groupDao.getGroupById(groupId);
+	    if(group == null)
+	        throw new RoleNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
+	    else
+	        return group;
+	}
+
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void updateGroup(Group group) throws RoleNotFoundException,
+			RoleAlreadyExistsException {
 		
 	}
 
 	
-
 	@Override
 	public List<Group> getGroups() {
 		// TODO 자동 생성된 메소드 스텁

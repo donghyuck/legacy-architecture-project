@@ -5,8 +5,8 @@ import java.util.Date;
 
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
+import architecture.user.Role;
 import architecture.user.model.RoleModel;
-import architecture.user.role.Role;
 
 /**
  * @author  donghyuck
@@ -29,6 +29,9 @@ public class RoleModelImpl extends BaseModelObject<Role>  implements RoleModel {
 	 */
 	private Date modifiedDate;
 
+	
+	private int mask;
+	
 	/**
 	 * @return
 	 */
@@ -126,5 +129,13 @@ public class RoleModelImpl extends BaseModelObject<Role>  implements RoleModel {
 
 	public int getCachedSize() {
 		return 0;
+	}
+
+	public int getMask() {
+		return mask;
+	}
+
+	public void setMask(int mask) {
+		this.mask = mask;		
 	}
 }

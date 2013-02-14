@@ -49,13 +49,13 @@ public class Permissions implements Serializable {
         }
 	}
 	
-    public static final long NONE                     = PermissionAtom.NONE.atomId;
-    public static final long VIEW_ONLINE_STATUS       = PermissionAtom.VIEW_ONLINE_STATUS.atomId;
-    public static final long USER_ADMINISTRATION      = PermissionAtom.USER_ADMINISTRATION.atomId;
+    public static final long NONE                               = PermissionAtom.NONE.atomId;
+    public static final long VIEW_ONLINE_STATUS         = PermissionAtom.VIEW_ONLINE_STATUS.atomId;
+    public static final long USER_ADMINISTRATION       = PermissionAtom.USER_ADMINISTRATION.atomId;
     public static final long GROUP_ADMINISTRATION     = PermissionAtom.GROUP_ADMINISTRATION.atomId;
     public static final long SYSTEM_ADMINISTRATION    = PermissionAtom.SYSTEM_ADMINISTRATION.atomId;
     public static final long HOSTED_ADMINISTRATION    = PermissionAtom.HOSTED_ADMINISTRATION.atomId;
-    public static final long ACCESS                   = PermissionAtom.ACCESS.atomId;
+    public static final long ACCESS                              = PermissionAtom.ACCESS.atomId;
     
 	
 	private long permissions;
