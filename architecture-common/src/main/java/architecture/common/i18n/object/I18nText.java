@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.i18n;
+package architecture.common.i18n.object;
 
 import architecture.common.model.I18nTextModel;
 

@@ -2,9 +2,9 @@ package architecture.common.util;
 
 import java.util.List;
 
-import architecture.common.i18n.I18nText;
-import architecture.common.i18n.I18nTextManager;
-import architecture.common.i18n.impl.I18nTextImpl;
+import architecture.common.i18n.object.I18nText;
+import architecture.common.i18n.object.I18nTextManager;
+import architecture.common.i18n.object.impl.I18nTextImpl;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 
 public abstract class I18nTextUtils {

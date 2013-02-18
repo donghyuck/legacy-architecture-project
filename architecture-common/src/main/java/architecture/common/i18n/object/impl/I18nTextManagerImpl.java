@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.i18n.impl;
+package architecture.common.i18n.object.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,9 +28,9 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.i18n.I18nResourceBundle;
-import architecture.common.i18n.I18nText;
-import architecture.common.i18n.I18nTextManager;
-import architecture.common.i18n.dao.I18nTextDao;
+import architecture.common.i18n.object.I18nText;
+import architecture.common.i18n.object.I18nTextManager;
+import architecture.common.i18n.object.dao.I18nTextDao;
 import architecture.common.util.LocaleUtils;
 import architecture.common.util.StringUtils;
 

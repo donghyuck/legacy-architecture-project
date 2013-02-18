@@ -51,7 +51,11 @@ public class I18nResourceBundle extends ListResourceBundle {
         
     }
     
-    public I18nResourceBundle(Locale locale, List<String[]> keyValues)
+    public String getBaseName() {
+		return baseName;
+	}
+
+	public I18nResourceBundle(Locale locale, List<String[]> keyValues)
     {
         this.locale = locale;
         this.contents = new Object[keyValues.size()][2];
