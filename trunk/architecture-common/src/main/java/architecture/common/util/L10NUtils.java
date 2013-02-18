@@ -28,7 +28,9 @@ import java.util.MissingResourceException;
 
 import javax.xml.parsers.SAXParserFactory;
 
+
 import org.apache.commons.io.IOUtils;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
@@ -56,6 +58,7 @@ public class L10NUtils {
 	
 	
 	private L10NUtils(boolean load) {
+		// 1. 모든 jar 파일에 포함된 META-INF/i18n.xml 에서 오류 코드에 따른 properties 파일 정보를 가져온다.
 		try
         {
             if(load){
@@ -65,6 +68,8 @@ public class L10NUtils {
         catch(IOException e){            
             log.debug((new StringBuilder()).append("Unable to access I18n file, " + I18N_XML_RESOURCE + ": ").append(e.toString()).toString());            
         }
+		
+		// 1. 모든 jar 에 포함된 i18n_custom.xml 에서 오류 코드에 따른 properties 파일 정보를 가져온다.
         try
         {
             if(load){
@@ -162,8 +167,7 @@ public class L10NUtils {
         
     }
 	
-	public static Localizer getLocalizer(String key)
-			throws MissingResourceException {
+	public static Localizer getLocalizer(String key) throws MissingResourceException {
 		return getLocalizer(key, Locale.getDefault(), null);
 	}
 	
@@ -171,6 +175,15 @@ public class L10NUtils {
 		return getLocalizer(key, locale, null);
 	}
 
+	/**
+	 * key 에 해당하는 프로퍼티 파일을 인자로하여 생성된 Localizer 객체를 리턴한다.
+	 * 
+	 * @param key
+	 * @param locale
+	 * @param classloader
+	 * @return
+	 * @throws MissingResourceException
+	 */
 	 public static Localizer getLocalizer(String key, Locale locale, ClassLoader classloader) throws MissingResourceException {
 		
 		 Locale localeToUse = locale;

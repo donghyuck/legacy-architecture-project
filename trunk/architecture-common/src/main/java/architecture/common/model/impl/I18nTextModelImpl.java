@@ -18,7 +18,7 @@ package architecture.common.model.impl;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.i18n.I18nText;
+import architecture.common.i18n.object.I18nText;
 import architecture.common.model.I18nTextModel;
 import architecture.common.model.ModelObjectType;
 import architecture.common.util.I18nTextUtils;

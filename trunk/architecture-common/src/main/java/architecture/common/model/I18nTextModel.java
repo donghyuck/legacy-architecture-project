@@ -15,7 +15,7 @@
  */
 package architecture.common.model;
 
-import architecture.common.i18n.I18nText;
+import architecture.common.i18n.object.I18nText;
 
 public interface I18nTextModel extends ModelObject<I18nText> {
 	

@@ -13,31 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.i18n;
+package architecture.common.i18n.object.dao;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
-import java.util.ResourceBundle;
 
-public interface I18nTextManager {
+import architecture.common.i18n.object.I18nText;
+
+public interface I18nTextDao {
 	
-    public abstract void saveTexts(List<I18nText> list);
+    public abstract void createTexts(List<I18nText> list);
 
-    public abstract void saveTexts(List<I18nText> list, int i, long l);
+    public abstract void updateTexts(List<I18nText> list);
 
     public abstract void deleteTexts(List<I18nText> list);
 
-    public abstract I18nText getText(long id);
-
+    public abstract I18nText getText(long textId);
+    
     public abstract List<I18nText> getTexts();
-
+    
+    public abstract List<I18nText> getTexts(Locale locale);
+    
     public abstract List<I18nText> getTexts(int objectType);
 
     public abstract List<I18nText> getTexts(int objectType, long objectId);
 
-    public abstract List<I18nText> getTexts(int objectType, String localeCode);
-
-    public abstract Map<Locale, ResourceBundle> getResourceBundles();
+    public abstract List<I18nText> getTexts(int objectType, String locale);
     
 }

@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.i18n.impl;
+package architecture.common.i18n.object.impl;
 
-import architecture.common.i18n.I18nText;
+import architecture.common.i18n.object.I18nText;
 import architecture.common.model.impl.I18nTextModelImpl;
 
 public class I18nTextImpl extends I18nTextModelImpl implements I18nText {

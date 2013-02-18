@@ -26,10 +26,31 @@ public class LocalizerFactory {
 
 	public static interface Implementation {
 
+		/**
+		 * 
+		 * @param location 리소스 파일 경로
+		 * @param locale 로케일
+		 * @param classloader
+		 * @return
+		 * @throws MissingResourceException
+		 */
 		public Localizer getLocalizer(String location, Locale locale, ClassLoader classloader) throws MissingResourceException;
 
+		/**
+		 * 
+		 * @param location 리소스 파일 경로
+		 * @param locale 로케일
+		 * @return
+		 * @throws MissingResourceException
+		 */
 		public Localizer getLocalizer(String location, Locale locale) throws MissingResourceException;
 
+		/**
+		 * 
+		 * @param location 리소스 파일 경로
+		 * @return
+		 * @throws MissingResourceException
+		 */
 		public Localizer getLocalizer(String location) throws MissingResourceException;
 
 	}
