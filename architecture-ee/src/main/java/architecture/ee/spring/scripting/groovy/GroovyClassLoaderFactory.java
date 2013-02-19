@@ -106,6 +106,4 @@ public class GroovyClassLoaderFactory implements FactoryBean<GroovyClassLoader>,
 				this.groovyClassLoader = groovyClassLoaderToUse;
 			}				
 	}
-
-
 }

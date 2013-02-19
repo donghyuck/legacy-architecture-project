@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface SqlQueryClient {
-
 	
 	public void exportToExcel(String catalogName, String schemaName, String tableName);	
 	
@@ -99,6 +98,7 @@ public interface SqlQueryClient {
 	public Object call(String statement, Object... parameters);	
 	
 	/**
+	 * 인자로 전달된 SqlQueryCallback 인터페이스를 구현하는 객체의 doInSqlQuery 함수를 호출하고 그결과를 리턴한다.
 	 * 
 	 * @param action
 	 * @return
@@ -116,5 +116,15 @@ public interface SqlQueryClient {
 	 */
 	public  Object unitOfWork ( String scriptName , String methodName ,  Object... parameters );
 	
+	/**
+	 * 단일 트랜잭션으로 처리되며 scriptName 에 해당하는 스크립트의 특정 함수를  
+	 * 호출하고 그결과를 리턴한다. 
+	 * 
+	 * @param scriptName
+	 * @param methodName
+	 * @param parameters
+	 * @return
+	 */
+	public  Object unitOfWorkWithoutTransaction ( String scriptName , String methodName ,  Object... parameters );
 	
 }

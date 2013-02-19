@@ -15,6 +15,7 @@ public class I18nTextMessageSource extends AbstractMessageSource {
 	private final AtomicBoolean i18nTextBundlesLoaded = new AtomicBoolean(false);	
 	
 	private final Map<Locale, ResourceBundle> cachedResourceBundles = new HashMap<Locale, ResourceBundle>();
+	
 	private final Map<ResourceBundle, Map<String, Map<Locale, MessageFormat>>> cachedBundleMessageFormats = new HashMap<ResourceBundle, Map<String, Map<Locale, MessageFormat>>>();
 	
 	protected MessageFormat resolveCode(String code, Locale locale) {

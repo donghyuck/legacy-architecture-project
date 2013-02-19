@@ -104,8 +104,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		boolean hasError = false;
 
 		try {
-			Database database = JdbcUtils.getDatabase(getConnection(),
-					catalogName, schemaName, tableName);
+			Database database = JdbcUtils.getDatabase(getConnection(), catalogName, schemaName, tableName);
 			Table table = database.getTable(tableName);
 			int idx = 0;
 			int columnSize = table.getColumnNames().length;
@@ -256,11 +255,9 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		}
 	}
 
-	public void importFromExcel(String catalogName, String schemaName,
-			String tableName, String uri, boolean asyncMode) {
+	public void importFromExcel(String catalogName, String schemaName, String tableName, String uri, boolean asyncMode) {
 		if (asyncMode) {
-			taskExecutor.submit(new ExcelToTableTask(this, catalogName,
-					schemaName, tableName, uri));
+			taskExecutor.submit(new ExcelToTableTask(this, catalogName, schemaName, tableName, uri));
 		} else {
 			importFromExcel(catalogName, schemaName, tableName, uri);
 		}
@@ -315,6 +312,10 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = { ApplicationException.class } )
 	public Object unitOfWork(String scriptName, String methodName, Object... parameters) {
 		
+		return unitOfWorkWithoutTransaction(scriptName,methodName, parameters );
+	}
+
+	public Object unitOfWorkWithoutTransaction(String scriptName, String methodName, Object... parameters) {
 		if( StringUtils.isEmpty( scriptName ) )
 			throw new NullPointerException( L10NUtils.getMessage("003081"));		
 
@@ -334,6 +335,8 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 			if( groovyObject instanceof SqlQueryCallback ){
 				return groovyObject.invokeMethod( "doInSqlQuery", getSqlQuery() );
 			}			
+			
+			
 		} catch (ClassNotFoundException e) {
 			throw new IllegalStateException( L10NUtils.format("003082", scriptName )  );
 		} catch (InstantiationException e) {
