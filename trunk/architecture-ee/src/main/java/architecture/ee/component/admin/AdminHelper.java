@@ -120,12 +120,11 @@ public final class AdminHelper {
 		return Bootstrap.getBootstrapComponent(net.sf.ehcache.CacheManager.class);
 	}
 	
+	
 	public static net.sf.ehcache.Cache getCache(String name){
 	    return 	getCache(name, true);
 	}
-	
-	
-	
+		
 	public static net.sf.ehcache.Cache getCache(String name, boolean createNotExist){			
 		
 		if(!getCacheManager().cacheExists(name) && createNotExist ){

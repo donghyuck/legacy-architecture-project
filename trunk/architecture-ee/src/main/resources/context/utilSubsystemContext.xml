@@ -27,10 +27,4 @@
 		</property>
     </bean>
     	
-	<!-- =================================================== -->
-	<!-- 2. GroovyClassLoader                                                                   -->
-	<!-- =================================================== -->
-	<!-- 
-	<bean id="groovyClassLoader" class="architecture.ee.spring.scripting.groovy.GroovyClassLoaderFactory" />	
-	 -->
 </beans>

@@ -50,11 +50,17 @@ public class GroovyScriptEngineFactory implements FactoryBean<GroovyScriptEngine
 	public void afterPropertiesSet() throws Exception {
 		if(this.groovyScriptEngine == null)
 		{			
-			ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();	
 			
-			String path = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME);				
-			String sourceEncoding = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_ENCODING_PROP_NAME);			
+			ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
+			
+			String path = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_LOCATION_PROP_NAME);	
+			
+			String sourceEncoding = setupProperties.get(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_ENCODING_PROP_NAME);	
+			
 			boolean recompileGroovySource = setupProperties.getBooleanProperty(ApplicationConstants.SCRIPTING_GROOVY_SOURCE_RECOMPILE_PROP_NAME, false);
+			
+			
+			
 			
 			if( StringUtils.isEmpty(path) ){
 				path = AdminHelper.getRepository().getURI("groovy");

@@ -8,14 +8,14 @@
 	default-destroy-method="destroy">
 	<description>
 	<![CDATA[
-        I18N subsystem Context
+        I18N & L10N Context
 	]]>
 	</description>
 	<!-- ================================================ -->
 	<!-- 1. Dao                                              -->
 	<!-- ================================================ -->
 	<bean id="i18nTextDao" 
-	    class="architecture.ee.i18n.dao.impl.JdbcI18nTextDao" 
+	    class="architecture.ee.component.dao.JdbcI18nTextDao" 
 	    parent="jdbcDaoSupport" />
 	    
 	<!-- ================================================ -->
@@ -24,7 +24,7 @@
 	<bean id="i18nTextManager"
 		class="architecture.common.i18n.impl.I18nTextManagerImpl"
 		p:i18nTextDao-ref="i18nTextDao" 
-		init-method="reload" />
+		init-method="refresh" />
 				
 	<!-- =================================================== -->
 	<!-- 3. I18nTextMessageSource                                                             -->

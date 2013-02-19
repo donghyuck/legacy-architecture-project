@@ -13,14 +13,11 @@
         Dao Subsystem Context
 	]]></description>
 
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB"
-		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver" p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB" p:username="fw_v1" p:password="inkium" p:initialSize="1" />
 
-    <bean id="sqlQueryFactory"
-    	class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder"
-    	factory-method="getSqlQueryFactory" init-method="initialize" p:incrementerSupported="false" >
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager" depends-on="dataSource" p:dataSource-ref="dataSource" />	
+	
+    <bean id="sqlQueryFactory" class="architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder" factory-method="getSqlQueryFactory" init-method="initialize" p:incrementerSupported="false" >
     	<property name="resourceLocations">
     		<list>
     			<value>res:common-sqlset.xml</value>

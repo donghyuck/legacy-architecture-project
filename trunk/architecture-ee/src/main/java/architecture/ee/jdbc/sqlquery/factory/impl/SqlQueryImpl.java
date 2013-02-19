@@ -263,7 +263,7 @@ public class SqlQueryImpl implements SqlQuery {
 			
 			return jdbcTemplate.queryScrollable(sql.getSql(), startIndex, maxResults, params, paramTypes, new ColumnMapRowMapper());			
 		}else{
-			if(params.length == 0 )
+			if(params == null || params.length == 0 )
 			    return jdbcTemplate.query(sql.getSql(), new ColumnMapRowMapper());	
 			else
 			    return jdbcTemplate.query(sql.getSql(), params, paramTypes, new ColumnMapRowMapper());	

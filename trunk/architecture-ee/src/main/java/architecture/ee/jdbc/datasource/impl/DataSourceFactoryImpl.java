@@ -2,10 +2,12 @@ package architecture.ee.jdbc.datasource.impl;
 
 import javax.sql.DataSource;
 
+import org.apache.commons.lang.ClassUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.impl.GenericObjectPool;
 import org.springframework.jndi.JndiTemplate;
+import org.springframework.util.MethodInvoker;
 
 import architecture.common.exception.RuntimeError;
 import architecture.common.jdbc.datasource.DataSourceFactory;
@@ -45,6 +47,49 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 		}else{
 			log.warn(L10NUtils.format("003055", jndiTag));			
 		}		
+		
+		String providerTag = "database."+ name + ".oracleDataSourceProvider";		
+		if( dataSource == null && setupProperties.getChildrenNames(providerTag).size() > 0 ){
+			String driverClassName = setupProperties.get( providerTag + ".driverClassName"); 
+			String url = setupProperties.get( providerTag + ".url"); 
+			String username = setupProperties.get( providerTag + ".user"); 
+			String password = setupProperties.get( providerTag + ".password"); 
+			boolean connectionCachingEnabled = setupProperties.getBooleanProperty(providerTag + ".connectionCachingEnabled", false );			
+			
+			try {
+				MethodInvoker invoker = new MethodInvoker();
+				Class driverClass = ClassUtils.getClass(driverClassName);
+				Object driverObject = driverClass.newInstance();			
+				invoker.setTargetObject(driverObject);
+				
+				invoker.setTargetMethod("setURL");
+				invoker.setArguments(new Object[]{url});	
+				invoker.prepare();
+				invoker.invoke();
+				
+				invoker.setTargetMethod("setUser");
+				invoker.setArguments(new Object[]{username});
+				invoker.prepare();
+				invoker.invoke();
+
+				invoker.setTargetMethod("setPassword");
+				invoker.setArguments(new Object[]{password});
+				invoker.prepare();
+				invoker.invoke();
+				
+				invoker.setTargetMethod("setConnectionCachingEnabled");
+				invoker.setArguments(new Object[]{connectionCachingEnabled});
+				invoker.prepare();
+				invoker.invoke();
+				
+				dataSource = (DataSource) driverObject;
+				
+			} catch (Exception e) {
+				log.error(e);
+			}
+			
+			
+		}
 		
 		String pooledTag = "database."+ name + ".pooledDataSourceProvider";		
 		
@@ -89,8 +134,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			basic.setNumTestsPerEvictionRun(numTestsPerEvictionRun);
 			dataSource = basic;
 		}else{
-			log.warn(L10NUtils.format("003055", pooledTag));		
-			
+			log.warn(L10NUtils.format("003055", pooledTag));	
 		}
 		
 		if( dataSource == null )
