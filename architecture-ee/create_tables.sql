@@ -1,10 +1,11 @@
 
 		    
 		<!-- 1. 기본 CORE 테이블 생성 스크립트 -->		
-		drop table V2_LOCALIZED_PROPERTY cascade constraints PURGE ;
-		drop table V2_PROPERTY cascade constraints PURGE ;
-		drop table V2_SEQUENCER cascade constraints PURGE ;
-		drop table V2_I18N_OBJECT_TEXT cascade constraints PURGE ;
+		drop table V2_LOCALIZED_PROPERTY cascade constraints PURGE ;		
+		drop table V2_PROPERTY cascade constraints PURGE ;		
+		drop table V2_SEQUENCER cascade constraints PURGE ;		
+		drop table V2_I18N_TEXT cascade constraints PURGE ;
+		
 		
 		CREATE TABLE V2_LOCALIZED_PROPERTY (
 		  LOCALE_CODE            VARCHAR2(100)   NOT NULL,
@@ -12,6 +13,7 @@
 		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
 		  CONSTRAINT V2_LOCALIZED_PROPERTY_PK PRIMARY KEY (LOCALE_CODE, PROPERTY_NAME)
 		);
+		
 		
 		COMMENT ON TABLE "V2_LOCALIZED_PROPERTY"  IS '애플리케이션 전역에서 사용되는 로케일 기반 프로퍼티 정보';
 		COMMENT ON COLUMN "V2_LOCALIZED_PROPERTY"."LOCALE_CODE" IS '로케일 코드 값'; 
@@ -29,6 +31,7 @@
 		COMMENT ON COLUMN "V2_PROPERTY"."PROPERTY_NAME" IS '프로퍼디 이름'; 
         COMMENT ON COLUMN "V2_PROPERTY"."PROPERTY_VALUE" IS '프로퍼티 값';
 		
+        
 		CREATE TABLE V2_SEQUENCER (
 		    SEQUENCER_ID           INTEGER NOT NULL,
 		    NAME                   VARCHAR2(200) NOT NULL,
@@ -42,6 +45,39 @@
 		COMMENT ON COLUMN "V2_SEQUENCER"."SEQUENCER_ID" IS '시퀀서 ID'; 
         COMMENT ON COLUMN "V2_SEQUENCER"."NAME" IS '시퀀서 이름';		
 		COMMENT ON COLUMN "V2_SEQUENCER"."VALUE" IS '시퀀서 값';		
+		
+		<!-- 2. i18N 테이블 생성 스크립트 -->		
+		CREATE TABLE V2_I18N_TEXT (
+		     TEXT_ID                   INTEGER NOT NULL,
+		     NAME                      VARCHAR2(200)   NOT NULL,	     
+		     TEXT                        VARCHAR2(2000)  NOT NULL,	
+             CATEGORY_NAME     VARCHAR2(100)   NOT NULL,    
+             LOCALE_CODE          VARCHAR2(100)   NOT NULL,
+			 CREATION_DATE       DATE DEFAULT SYSDATE NOT NULL ,			 
+		     MODIFIED_DATE       DATE DEFAULT SYSDATE NOT NULL ,
+		     CONSTRAINT V2_I18N_TEXT_PK PRIMARY KEY (TEXT_ID)
+		);				
+		CREATE INDEX V2_I18N_TEXT_LOCALE_IDX ON V2_I18N_TEXT (LOCALE_CODE) ;
+		CREATE UNIQUE INDEX V2_I18N_TEXT_NAME_IDX ON V2_I18N_TEXT (NAME, CATEGORY_NAME);	
+		
+		COMMENT ON TABLE "V2_I18N_TEXT"  IS 'I18N 지원을 위한 테이블';
+		COMMENT ON COLUMN "V2_I18N_TEXT"."TEXT_ID" IS '국제화 텍스트 ID 값';	
+		COMMENT ON COLUMN "V2_I18N_TEXT"."NAME" IS '국제화 텍스트 키 값';	
+		COMMENT ON COLUMN "V2_I18N_TEXT"."TEXT" IS '국제화 텍스트 값';	
+		COMMENT ON COLUMN "V2_I18N_TEXT"."CATEGORY_NAME" IS '카테고리 이름';	
+		COMMENT ON COLUMN "V2_I18N_TEXT"."LOCALE_CODE" IS '로케일 코드 값';			
+		COMMENT ON COLUMN "V2_I18N_TEXT"."CREATION_DATE" IS '생성일';	
+		COMMENT ON COLUMN "V2_I18N_TEXT"."MODIFIED_DATE" IS '수정일';			
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		
@@ -59,11 +95,7 @@
 		);		
 		CREATE INDEX V2_I18N_OBJ_TEXT_LOCALE_IDX ON V2_I18N_OBJECT_TEXT( LOCALE_CODE ) ;
 		
-		
-		
-		
-		
-		
+			
 		
         -- User data table.
         CREATE TABLE V2_USERS (
