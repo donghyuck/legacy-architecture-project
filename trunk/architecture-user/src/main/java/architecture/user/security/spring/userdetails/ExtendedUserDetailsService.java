@@ -25,20 +25,32 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.util.StringUtils;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.L10NUtils;
+import architecture.ee.component.admin.AdminHelper;
+import architecture.user.Role;
+import architecture.user.RoleManager;
 
 public class ExtendedUserDetailsService implements UserDetailsService, EventSource {
 
 	private Log log = LogFactory.getLog( getClass() );
 	
 	private UserManager userManager;
+	private RoleManager roleManager;
+	
+	public void setRoleManager(RoleManager roleManager) {
+		this.roleManager = roleManager;
+	}
+
 	private EventPublisher eventPublisher;
+	
 	private boolean caseInsensitive;
 	
 	public ExtendedUserDetailsService() {
@@ -75,9 +87,32 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 		if(eventPublisher != null){
 			
 		}		
-		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
-		ExtendedUserDetails userDetails = new ExtendedUserDetails(user, AuthorityUtils.createAuthorityList("ROLE_USER"));
+		
+		ExtendedUserDetails userDetails = new ExtendedUserDetails(user, getFinalUserAuthority(user) );
 		return userDetails;
+	}
+	
+	protected List<GrantedAuthority> getFinalUserAuthority(User user){		
+		
+		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();		
+		String authority = setupProperties.get(architecture.ee.util.ApplicationConstants.SECURITY_AUTHENTICATION_AUTHORITY_PROP_NAME);
+		
+		long userId = user.getUserId();		
+		List<Role> userRoles = roleManager.getFinalUserRoles(userId) ;
+		List<String> roles = new ArrayList<String>(userRoles.size());
+		for( Role role : userRoles ){
+			roles.add( role.getName() );
+		}		
+		
+		if( !architecture.common.util.StringUtils.isEmpty(authority) ){
+			authority = authority.trim();
+			
+			if (!roles.contains(authority)){
+				roles.add(authority);
+			}
+		}
+				
+		return AuthorityUtils.createAuthorityList(StringUtils.toStringArray(roles));
 	}
 	
 }

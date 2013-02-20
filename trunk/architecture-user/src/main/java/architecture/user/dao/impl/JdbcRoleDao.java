@@ -62,8 +62,8 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 		
 		getExtendedJdbcTemplate().update(
 			getBoundSql("ARCHITECTURE_SECURITY.CREATE_ROLE").getSql(), 
-			new Object[]{id, role.getName(), role.getDescription(), role.getCreationDate(), role.getModifiedDate()}, 
-			new int[]{Types.INTEGER, Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.DATE });
+			new Object[]{id, role.getName(), role.getMask(),  role.getDescription(), role.getCreationDate(), role.getModifiedDate()}, 
+			new int[]{Types.INTEGER, Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.DATE, Types.DATE });
 			
 		role.setRoleId(id);
 
@@ -87,8 +87,8 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 
 	public void updateRole(Role role) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_ROLE").getSql(), 
-			new Object[]{role.getName(), role.getDescription(), role.getModifiedDate(), role.getRoleId()}, 
-			new int[]{Types.VARCHAR, Types.VARCHAR, Types.DATE, Types.INTEGER});
+			new Object[]{role.getName(), role.getMask(), role.getDescription(), role.getModifiedDate(), role.getRoleId()}, 
+			new int[]{Types.VARCHAR, Types.INTEGER, Types.VARCHAR, Types.DATE, Types.INTEGER});
 	}
 
 	public Role getRoleById(long roleId) {

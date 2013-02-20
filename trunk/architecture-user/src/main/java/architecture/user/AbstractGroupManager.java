@@ -52,8 +52,7 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}	
-	
-	
+		
     public Group getGroup(String name)
         throws GroupNotFoundException
     {

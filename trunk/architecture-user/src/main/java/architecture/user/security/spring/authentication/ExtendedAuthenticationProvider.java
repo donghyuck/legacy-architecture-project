@@ -31,6 +31,7 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.L10NUtils;
 import architecture.ee.util.ApplicationHelper;
+
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 
 public class ExtendedAuthenticationProvider extends DaoAuthenticationProvider {
