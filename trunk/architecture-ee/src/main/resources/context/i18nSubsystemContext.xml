@@ -22,7 +22,7 @@
 	<!-- 2. Manager                                                                          -->
 	<!-- ================================================ -->	    
 	<bean id="i18nTextManager"
-		class="architecture.common.i18n.impl.I18nTextManagerImpl"
+		class="architecture.common.i18n.impl.DefaultI18nTextManager"
 		p:i18nTextDao-ref="i18nTextDao" 
 		init-method="refresh" />
 				
