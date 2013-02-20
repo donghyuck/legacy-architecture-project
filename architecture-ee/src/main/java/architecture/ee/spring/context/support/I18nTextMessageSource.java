@@ -10,6 +10,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.springframework.context.support.AbstractMessageSource;
 
+import architecture.ee.util.ApplicationHelper;
+
 public class I18nTextMessageSource extends AbstractMessageSource {
 
 	private final AtomicBoolean i18nTextBundlesLoaded = new AtomicBoolean(false);	
@@ -75,9 +77,9 @@ public class I18nTextMessageSource extends AbstractMessageSource {
 	protected ResourceBundle getResourceBundle(Locale locale) {		
 		
 		if( ! i18nTextBundlesLoaded.get() ){
-			//cachedResourceBundles.putAll(
-			  //  AdminHelper.getI18nTextManager().getResourceBundles()
-			//);
+			cachedResourceBundles.putAll(
+					ApplicationHelper.getI18nTextManager().getResourceBundles()
+			);			
 			i18nTextBundlesLoaded.set(true);
 		}
 		
