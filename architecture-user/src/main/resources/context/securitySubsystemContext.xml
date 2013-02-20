@@ -83,6 +83,6 @@
 	
 	<bean id="daoAuthenticationProvider" class="architecture.user.security.spring.authentication.ExtendedAuthenticationProvider"  p:saltSource-ref="passwordSaltSource"  p:passwordEncoder-ref="passwordEncoder" p:userDetailsService-ref="userDetailsService" p:userManager-ref="userManager"/>
 
-	<bean id="userDetailsService" class="architecture.user.security.spring.userdetails.ExtendedUserDetailsService" p:userManager-ref="userManager" />
+	<bean id="userDetailsService" class="architecture.user.security.spring.userdetails.ExtendedUserDetailsService" p:userManager-ref="userManager" p:roleManager-ref="roleManager" />
   
 </beans>
