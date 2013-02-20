@@ -20,6 +20,7 @@ import java.io.Serializable;
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
 import architecture.common.model.v2.BaseModelObject;
+import architecture.common.util.I18nTextUtils;
 
 public class I18nTextImpl extends BaseModelObject  implements I18nText {
 	
@@ -71,7 +72,7 @@ public class I18nTextImpl extends BaseModelObject  implements I18nText {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) +  CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfString( this.categoryName ) + CacheSizes.sizeOfString( getLocaleCode() )  + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;		
 	}
 	public String getResourceBundleKey() {
-		return categoryName + ':' + name  ;
+		return I18nTextUtils.generateResourceBundleKey(categoryName, name);
 	}
 
 		

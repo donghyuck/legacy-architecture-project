@@ -13,10 +13,10 @@ public class L10NTest {
 	@Test
 	public void testLoad(){
 		log.debug(
-		L10NUtils.format("002103", "a", "b", "c")
+				L10NUtils.format("002103", "a", "b", "c")
 		);
 		log.debug(
-		L10NUtils.format("002099")
-		);
+				L10NUtils.format("002099")
+		);		
 	}
 }

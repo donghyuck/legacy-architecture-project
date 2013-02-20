@@ -41,6 +41,16 @@ public class DefaultI18nTextManager implements I18nTextManager {
 	private Map<Locale, ResourceBundle> resourceBundles;
 	
 	
+	public I18nTextDao getI18nTextDao() {
+		return i18nTextDao;
+	}
+
+
+	public void setI18nTextDao(I18nTextDao i18nTextDao) {
+		this.i18nTextDao = i18nTextDao;
+	}
+
+
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void saveTexts(List<I18nText> list) {
 		
