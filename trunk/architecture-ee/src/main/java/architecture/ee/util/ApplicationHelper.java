@@ -30,6 +30,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.i18n.I18nTextManager;
 import architecture.common.license.License;
 import architecture.common.lifecycle.ApplicationHelperFactory;
 import architecture.common.lifecycle.ConfigService;
@@ -75,14 +76,10 @@ public final class ApplicationHelper {
 	public static ConfigService getConfigService(){
 		return AdminHelper.getConfigService();
 	}
-		
-/*	public static AdminService getAdminService(){
-		return AdminHelper.getAdminService();
-	}*/
 
-/*	public static I18nTextManager getI18nTextManager(){
+    public static I18nTextManager getI18nTextManager(){
 		return getComponent(I18nTextManager.class);
-	}*/
+	}
 	
 	public static boolean isSetupComplete(){
 		return AdminHelper.isSetupComplete();
@@ -100,25 +97,7 @@ public final class ApplicationHelper {
 		return AdminHelper.getState();
 	}
 	
-/*
-	public static net.sf.ehcache.Cache creatCache(String name, long lifetime){
-		CacheManager cacheManager = AdminHelper.getCacheManager();
-		if( ! cacheManager.cacheExists(name) ){
-			net.sf.ehcache.config.CacheConfiguration config = new net.sf.ehcache.config.CacheConfiguration(name, 0);
-			config.setEternal(false);
-			config.setOverflowToDisk(false);
-			config.setTimeToLiveSeconds(lifetime);
-			net.sf.ehcache.Cache cache = new net.sf.ehcache.Cache(config);
-			cacheManager.addCache(cache);
-		}
-		return cacheManager.getCache(name);
-	}
-	
-	public static GroovyClassLoader getGroovyClassLoader(){
-		return 
-	}
-	*/
-	
+
 	public static Repository getRepository(){		
 		return AdminHelper.getRepository();
 	}
