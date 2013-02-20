@@ -36,4 +36,5 @@ public interface I18nTextManager {
 
     public abstract Map<Locale, ResourceBundle> getResourceBundles();
     
+    public abstract void refresh();
 }
