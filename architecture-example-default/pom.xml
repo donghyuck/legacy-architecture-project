@@ -152,7 +152,7 @@
 		<dependency>
 			<groupId>architecture.web</groupId>
 			<artifactId>architecture-web-struts</artifactId>
-			<version>1.0.0.RELEASE</version>
+			<version>1.0.3.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>com.oracle</groupId>
