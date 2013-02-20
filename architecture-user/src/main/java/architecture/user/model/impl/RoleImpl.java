@@ -24,7 +24,7 @@ import architecture.user.Role;
 
 public class RoleImpl extends BaseModelObject  implements Role  {
 
-	private Long getRoleId;
+	private Long roleId;
 	
 	private int mask;
 	
@@ -41,18 +41,18 @@ public class RoleImpl extends BaseModelObject  implements Role  {
 	}
 
 	public long getRoleId() {
-		return getRoleId;
+		return roleId;
 	}
 
 	public void setRoleId(long roleId) {
-		getRoleId = roleId;
+		this.roleId = roleId;
 	}
 	public int getMask() {
 		return mask;
 	}
 
 	public void setMask(int mask) {
-		this.mask;
+		this.mask = mask;
 	}
 
 
