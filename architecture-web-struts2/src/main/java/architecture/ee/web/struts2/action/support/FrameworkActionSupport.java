@@ -124,7 +124,8 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 				//리턴된 사용자 정보를 수정할 수 없도록 변경 불가 형식의 객체를 리턴한다.
 				//
 			} catch (final Exception ex) {
-				log.warn("Unable to retrieve portal user from authentication context.");
+				if( log.isWarnEnabled() )
+					log.warn("Unable to retrieve portal user from authentication context.");
 			}
 		return user;
 	}

@@ -72,8 +72,7 @@ public class FrameworkTextProvider extends TextProviderSupport {
             locale = getLocale();
         else
         	locale = (Locale) theStack.getContext().get(ActionContext.LOCALE);
-        
-        
+                
         if(locale == null)
             locale = getLocale();
         
@@ -82,6 +81,7 @@ public class FrameworkTextProvider extends TextProviderSupport {
         				key, locale
                     })
         );      
+        
         return "";
         
     }
