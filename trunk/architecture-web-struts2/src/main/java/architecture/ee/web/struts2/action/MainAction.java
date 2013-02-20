@@ -31,7 +31,6 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 	@Override
 	public String execute() throws Exception {
 		log.debug("main action called!!");
-
 		return SUCCESS;
 	}
 
