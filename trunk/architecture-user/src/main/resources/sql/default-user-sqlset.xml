@@ -575,6 +575,7 @@
     INSERT INTO V2_ROLE ( 
     	ROLE_ID, 
     	NAME, 
+    	MASK,
     	DESCRIPTION, 
     	CREATION_DATE, 
     	MODIFIED_DATE 
@@ -588,6 +589,7 @@
 	<sql-query name="UPDATE_ROLE" description="CREATE_ROLE"><![CDATA[                 
     UPDATE V2_ROLE
 	SET  NAME          = ?,
+	        MASK   = ?,
 	       DESCRIPTION   = ?,
 	       MODIFIED_DATE = ?
 	WHERE  ROLE_ID       = ?
@@ -597,6 +599,7 @@
     SELECT 
         ROLE_ID, 
         NAME, 
+        MASK,
         DESCRIPTION, 
         CREATION_DATE, 
         MODIFIED_DATE
@@ -609,6 +612,7 @@
     SELECT
    		ROLE_ID, 
    		NAME, 
+   		 MASK,
    		DESCRIPTION, 
   		CREATION_DATE, 
   		MODIFIED_DATE
