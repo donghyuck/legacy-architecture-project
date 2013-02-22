@@ -5,6 +5,7 @@ import architecture.ee.services.UnitOfWork;
 
 public abstract class UnitOfWorkForSqlQuery implements UnitOfWork {
 
+	
 	protected SqlQuery sqlQuery;
 	
 	public String getName() {

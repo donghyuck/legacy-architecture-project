@@ -103,8 +103,11 @@ public final class ApplicationHelper {
 	}
 	
 	public static Class loadClass( String scriptName , boolean lookupScriptFiles, boolean preferClassOverScript ) throws ClassNotFoundException{
+		
 		GroovyClassLoader gcl = Bootstrap.getBootstrapComponent( groovy.lang.GroovyClassLoader.class );
+		
 		return gcl.loadClass(scriptName, lookupScriptFiles, preferClassOverScript);
+		
 	}
 	
 	public static Locale getLocale(){
