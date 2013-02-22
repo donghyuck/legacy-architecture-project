@@ -6,8 +6,6 @@
 <!--
 yepnope([{
     load: [        
-             'css!${request.contextPath}/styles/kendo/kendo.common.min.css',
-             'css!${request.contextPath}/styles/kendo/kendo.metro.min.css',
              'css!${request.contextPath}/styles/kendo/kendo.dataviz.min.css',
              '${request.contextPath}/js/kendo/kendo.web.min.js',
              '${request.contextPath}/js/kendo/kendo.dataviz.min.js' ],             
@@ -118,7 +116,7 @@ yepnope([{
 <body>
 	<div class="row">
 		<div class="twelve columns">
-			<img src="http://placehold.it/1000x400&text=[img]" />
+			<img src="http://ncc.phinf.naver.net/ncc01/2012/10/17/133/img01.jpg?type=w323" />
 			<hr />
 		</div>
 	</div>
