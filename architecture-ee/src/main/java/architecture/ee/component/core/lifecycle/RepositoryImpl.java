@@ -71,8 +71,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     public RepositoryImpl() {
 		super();
 	}
-
-    //private FileObject rootFileObject = getRootFileObject() ;
         
     private Resource rootResource = getRootResource() ;
     
@@ -101,7 +99,12 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 	
     public ConfigRoot getConfigRoot(){    	
 		try {			
-			Resource child = getRootResource().createRelative("config");      
+			 
+			File file = new File ( getRootResource().getFile() , "config" );			
+			Resource child = new FileSystemResource( file );
+			
+			log.debug( "config root:" + child.getURI() );
+			
 			if(!child.exists()){
                 child.getFile().mkdirs();
             }
@@ -161,10 +164,9 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     }
         
     public void setServletContext(ServletContext servletContext){    	
+    	
     	// 1. 서블릿 컨텍스트에 설정된 프로퍼티 값을 검사 : ARCHITECTURE_INSTALL_ROOT
     	String value = servletContext.getInitParameter( ApplicationConstants.ARCHITECTURE_PROFILE_ROOT_ENV_KEY );    	
-
-
     	if(!StringUtils.isEmpty(value)){
     		try {        	
     			ServletContextResourceLoader servletResoruceLoader = new ServletContextResourceLoader(servletContext);    			
@@ -180,7 +182,6 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
     			this.rootResource = null;
 			}
     	} 
-
     	
     	if( !initailized  && !StringUtils.isEmpty(value) ){
     		Resource obj;
