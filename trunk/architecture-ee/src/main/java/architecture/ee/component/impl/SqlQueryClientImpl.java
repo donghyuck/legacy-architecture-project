@@ -310,55 +310,12 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW, rollbackFor = { ApplicationException.class } )
-	public Object unitOfWork(String scriptName, String methodName, Object... parameters) {
-		
+	public Object unitOfWork(String scriptName, String methodName, Object... parameters) {		
 		return unitOfWorkWithoutTransaction(scriptName,methodName, parameters );
 	}
 
-	public Object unitOfWorkWithoutTransaction(String scriptName, String methodName, Object... parameters) {
-		if( StringUtils.isEmpty( scriptName ) )
-			throw new NullPointerException( L10NUtils.getMessage("003081"));		
-
-		try {						
-			
-			Class groovyClass = ApplicationHelper.loadClass(scriptName, true, false);
-			GroovyObject groovyObject = (GroovyObject)groovyClass.newInstance();			
-			if (groovyObject instanceof UnitOfWork && !StringUtils.isEmpty(methodName)) {				
-				if( groovyObject instanceof UnitOfWorkForSqlQuery ){
-					groovyObject.invokeMethod("setSqlQuery", new Object[]{ getSqlQuery() });
-				}					
-				return groovyObject.invokeMethod(
-						methodName, 
-						parameters
-				);
-			}else			
-			if( groovyObject instanceof SqlQueryCallback ){
-				return groovyObject.invokeMethod( "doInSqlQuery", getSqlQuery() );
-			}			
-			
-			
-		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException( L10NUtils.format("003082", scriptName )  );
-		} catch (InstantiationException e) {
-			throw new IllegalStateException(e.getMessage());
-		} catch (IllegalAccessException e) {
-			throw new IllegalStateException(e.getMessage());
-		}		
-		return null;
+	public Object unitOfWorkWithoutTransaction(String scriptName, String methodName, Object... parameters) {		
+		return execute(scriptName,  methodName, parameters);
 	}
 
-	/**
-	public Object executeScript(String scriptClassName) {		
-		try {
-			Class groovyClass = AdminHelper.getGroovyClassLoader().loadClass(scriptClassName);
-			GroovyObject groovyObject = (GroovyObject)groovyClass.newInstance();
-			if (groovyObject instanceof SqlQueryCallback ) {
-				return ((SqlQueryCallback) groovyObject ).doInSqlQuery(getSqlQuery());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	**/
 }
