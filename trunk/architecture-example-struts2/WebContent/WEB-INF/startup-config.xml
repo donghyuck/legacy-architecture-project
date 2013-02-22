@@ -45,6 +45,7 @@ MTdjMzQ1ZTc5ZTAxOWFmNGQwOTVmZTRkZjk8L3NpZ25hdHVyZT48L2xpY2Vuc2U+</file>
 	<security>
 		<authentication>
 		    <disallowGuest>false</disallowGuest>
+		    <authority>ROLE_USER</authority>
 			<encoding>
 				<algorithm>SHA-256</algorithm>
 			</encoding>
@@ -79,6 +80,7 @@ MTdjMzQ1ZTc5ZTAxOWFmNGQwOTVmZTRkZjk8L3NpZ25hdHVyZT48L2xpY2Vuc2U+</file>
 			</jndiDataSourceProvider>
             -->
 			<!-- 2. Use the built-in pooled datasource. -->			
+			<!-- 
 			<pooledDataSourceProvider order="2">
 				<driverClassName>oracle.jdbc.driver.OracleDriver</driverClassName>
 				<url>jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB</url>
@@ -95,6 +97,14 @@ MTdjMzQ1ZTc5ZTAxOWFmNGQwOTVmZTRkZjk8L3NpZ25hdHVyZT48L2xpY2Vuc2U+</file>
 				<minEvictableIdleTimeMillis>1800000</minEvictableIdleTimeMillis>
 				<numTestsPerEvictionRun>5</numTestsPerEvictionRun>
 			</pooledDataSourceProvider>			
+			 -->
+			 <oracleDataSourceProvider>
+			 	<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
+			 	<url>jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB</url>
+			 	<user>fw_v1</user>
+			 	<password>inkium</password>
+			 	<connectionCachingEnabled>true</connectionCachingEnabled>
+			 </oracleDataSourceProvider>
 		</default>
 	</database>
 </startup-config>

@@ -5,20 +5,16 @@
 <script type="text/javascript">
 		 yepnope([{
        	  load: [ 
-               'css!<%= request.getContextPath()  %>/styles/kendo/kendo.common.min.css',
-          	   'css!<%= request.getContextPath()  %>/styles/kendo/kendo.metro.min.css',
-          	   '<%= request.getContextPath()  %>/js/common.js',  
-          	   '<%= request.getContextPath()  %>/js/kendo/kendo.web.min.js' 
+          	   '<%= request.getContextPath()  %>/js/kendo/kendo.web.min.js',
+          	   '<%= request.getContextPath()  %>/js/common.models.min.js' 
           	   ],
-              	  complete: function() {        	              		
-              		  
+              	  complete: function() {        	              		              		  
               		  
                  	 var templateContent = $("#alert-template").html();
                 	 var template = kendo.template(templateContent);	               		  
               		 var validator = $("#login-form").kendoValidator().data("kendoValidator");     
               		 
-           		     $("#login").click(function() {
-           		    	
+           		     $("#login").click(function() {           		    	
            		      $("#status").html("");
            			  if( validator.validate() )
            		      {        				
@@ -61,10 +57,17 @@
 </head>
 <body>
 	<!-- Main Page Content  -->
+  <header>
+    <div class="row">
+      <div class="twelve columns">
+        <h1>로그인</h1>
+        <h4>Foundation is designed to quickly prototype, and one thing we've found very helpful is a series of visibility classes that can be applied to turn things on and off for different device characteristics. On this page, you'll see different elements on different screen sizes or orientations.</h4>
+      </div>
+    </div>
+  </header>
+  	
 	<div class="row">
 		<div class="five columns">
-			<h3>계정</h3>
-			<p>설명</p>			
 		</div>
 		<div class="eight columns">				
 		    <div class="row">
@@ -78,7 +81,6 @@
 				    <input type="hidden" id="output" name="output" value="json" />		    
 				    <div class="row">
 				        <div class="twelve columns centered" style="padding:10px;">
-				            <h5>로그인</h5>
 				        </div>  
 				    </div>		    
 				    <div class="row">
@@ -109,7 +111,6 @@
     <script type="text/x-kendo-template" id="alert-template">
     <div class="alert-box alert">
           #=message#
-
         <a href="" class="close">&times;</a>
     </div>
     </script>

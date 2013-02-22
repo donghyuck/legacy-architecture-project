@@ -1,36 +1,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ page import="javax.sql.DataSource"%>
-<%@ page import="org.springframework.jndi.*"%>
-<%@ page import="org.springframework.jndi.support.*"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
+<%@ page import="java.util.*,architecture.ee.services.*,architecture.ee.web.util.WebApplicationHelper" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 <%
-JndiTemplate jt =  new JndiTemplate();
-//JndiLocatorDelegate jt = new JndiLocatorDelegate();
-//jt.setResourceRef(false);
-
-//DataSource ds = jt.lookup("jdbc/EHRD_DS" , DataSource.class);
-//Object obj = jt.lookup("jdbc/EHRD_DS", DataSource.class);
-
-JndiObjectFactoryBean fb = new JndiObjectFactoryBean();
-fb.setExpectedType(javax.sql.DataSource.class);
-fb.setJndiName("jdbc/EHRD_DS");
-//fb.setResourceRef(true);
-fb.afterPropertiesSet();
-Object obj = fb.getObject();
-boolean check = false ;
-if ( obj instanceof DataSource )
-	check = true;
-
+SqlQueryClient  client =  WebApplicationHelper.getComponent(SqlQueryClient.class) ;    
+List list = (List)client.unitOfWork("unitofwork.SqlQueryTest", "getTableNames", "%");
 %>
-<%= obj.getClass().getName()  %>
-<%= check %>
-
+<%= list  %>
+<br>
+<%
+List list2 = (List)client.unitOfWork("unitofwork.SqlQueryTest", "getTableData", "V2_USER");
+%>
+<%= list2  %>
 </body>
-</html>
+</html> 

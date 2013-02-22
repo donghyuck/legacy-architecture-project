@@ -1,3 +1,11 @@
+ 
+/**
+ * MODEL DEFINE
+ * 
+ * */
+
+
+
 function token(url, option, handler, dataType) {
 	var params = "create=" + option + "&output=" + dataType;
 	$.ajax({

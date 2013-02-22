@@ -22,11 +22,9 @@
 	<import resource="classpath:context/freemarkerSubsystemContext.xml"/>
 	<import resource="classpath:context/transactionSubsystemContext.xml"/>
 	<import resource="classpath:context/oracleSubsystemContext.xml"/>
-	<import resource="classpath:context/utilSubsystemContext.xml"/>
-	
+	<import resource="classpath:context/utilSubsystemContext.xml"/>	
 	<import resource="classpath:context/userSubsystemContext.xml"/>
-	<import resource="classpath:context/securitySubsystemContext.xml"/>
-	
+	<import resource="classpath:context/securitySubsystemContext.xml"/>	
 	<import resource="classpath:context/struts2SubsystemContext.xml"/>
 	
 </beans>
