@@ -7,7 +7,8 @@
 		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
 		  CONSTRAINT V2_PROPERTY_PK PRIMARY KEY (PROPERTY_NAME)
 		); 		
-			
+		
+    COMMENT ON TABLE "V2_PROPERTY"  IS '응용프로그램 프로퍼티 지원을 위한 테이블';	
 		COMMENT ON COLUMN V2_PROPERTY.PROPERTY_NAME    IS '프로퍼티 이름';                      
 		COMMENT ON COLUMN V2_PROPERTY.PROPERTY_VALUE   IS '프로퍼티 값';  
 		
@@ -20,6 +21,7 @@
 		  CONSTRAINT V2_LOCALIZED_PROPERTY_PK PRIMARY KEY (LOCALE_CODE, PROPERTY_NAME)
 		);
 		
+    COMMENT ON TABLE "V2_LOCALIZED_PROPERTY"  IS '로케일에 따른 응용프로그램 프로퍼티 지원을 위한 테이블';
 		COMMENT ON COLUMN V2_LOCALIZED_PROPERTY.LOCALE_CODE      IS '로케일 코드';                          
 		COMMENT ON COLUMN V2_LOCALIZED_PROPERTY.PROPERTY_NAME    IS '프로퍼티 이름';                      
 		COMMENT ON COLUMN V2_LOCALIZED_PROPERTY.PROPERTY_VALUE   IS '프로퍼티 값';                                
@@ -34,7 +36,8 @@
 		); 				 
 		
 		CREATE UNIQUE INDEX V2_SEQUENCER_NAME_IDX ON V2_SEQUENCER (NAME);		
-       
+    
+    COMMENT ON TABLE "V2_SEQUENCER"  IS '시퀀스 지원을 위한 테이블';    
 		COMMENT ON COLUMN V2_SEQUENCER.SEQUENCER_ID      IS '시퀀스 아이디';                          
 		COMMENT ON COLUMN V2_SEQUENCER.NAME              IS '시퀀스 이름';                      
 		COMMENT ON COLUMN V2_SEQUENCER.VALUE             IS '시퀀스 값';    
