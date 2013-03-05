@@ -89,6 +89,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			return context;
 			
 		} catch (Throwable e) {
+			
 			log.error( L10NUtils.getMessage("002402") , e );
 			return null;
 		}	

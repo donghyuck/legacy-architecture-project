@@ -16,24 +16,10 @@
 
 package architecture.ee.i18n.dao.impl;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Types;
-import java.util.List;
-import java.util.Locale;
-
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.RowMapper;
-
-import architecture.common.i18n.object.I18nText;
-import architecture.common.i18n.object.dao.I18nTextDao;
-import architecture.common.i18n.object.impl.I18nTextImpl;
-
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
-public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextDao {
-
+public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport /* implements I18nTextDao */{
+/*
 	class I18nTextRowMapper implements RowMapper<I18nText> {		
 		public I18nText mapRow(ResultSet rs, int rowNum) throws SQLException {
 			I18nTextImpl impl = new I18nTextImpl();			
@@ -148,5 +134,5 @@ public class JdbcI18nTextDao extends ExtendedJdbcDaoSupport implements I18nTextD
 				new int[]{Types.INTEGER, Types.VARCHAR}, 
 				new I18nTextRowMapper());
 	}
-		
+		*/
 }

@@ -295,7 +295,7 @@ public class RepositoryImpl extends ComponentImpl implements Repository {
 						sourceGroovyNode.addElement("recompile").setText("true");
 						// scripting end
 						// database start
-						
+						org.dom4j.Element databaseNode = root.addElement("database");	
 						// database end
 						xmlWriter.write( document );					
 					}catch(Exception e)

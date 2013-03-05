@@ -14,7 +14,7 @@
 	<packaging>jar</packaging>
 	<contributors>
 		<contributor>
-			<name>Donghyuch, Son</name>
+			<name>donghyuck, son</name>
 		</contributor>
 	</contributors>
 	<scm>
@@ -24,6 +24,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
 		<project.test.skip>true</project.test.skip>
+		<javac.src.version>1.5</javac.src.version>
+		<javac.target.version>1.5</javac.target.version>				
 	</properties>
 
 	<repositories>
