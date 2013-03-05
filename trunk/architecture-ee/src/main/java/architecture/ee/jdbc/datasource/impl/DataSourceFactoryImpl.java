@@ -1,5 +1,7 @@
 package architecture.ee.jdbc.datasource.impl;
 
+import java.util.Collection;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.lang.ClassUtils;
@@ -30,10 +32,16 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 		
 		DataSource dataSource = null;
 		
-		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();
-				
-		String jndiTag = "database."+ name + ".jndiDataSourceProvider";
+		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();		
+		Collection<String> c = setupProperties.getChildrenNames("database."+ name);
+		if( c.size() == 0 ){
+			// 주어진 이름에 해당하는 데이터베이스 연결 정보가 존재하지 않음 .
+			throw new RuntimeError(L10NUtils.format("003057", name));
+		}
 		
+		
+		
+		String jndiTag = "database."+ name + ".jndiDataSourceProvider";			
 		if( setupProperties.getChildrenNames(jndiTag).size() > 0 ){
 			String jndiName = setupProperties.get( jndiTag + ".jndiName"); 
 			if(StringUtils.isNotEmpty(jndiName)){
@@ -55,13 +63,11 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			String username = setupProperties.get( providerTag + ".user"); 
 			String password = setupProperties.get( providerTag + ".password"); 
 			boolean connectionCachingEnabled = setupProperties.getBooleanProperty(providerTag + ".connectionCachingEnabled", false );			
-			
 			try {
 				MethodInvoker invoker = new MethodInvoker();
 				Class driverClass = ClassUtils.getClass(driverClassName);
 				Object driverObject = driverClass.newInstance();			
-				invoker.setTargetObject(driverObject);
-				
+				invoker.setTargetObject(driverObject);				
 				invoker.setTargetMethod("setURL");
 				invoker.setArguments(new Object[]{url});	
 				invoker.prepare();
@@ -86,9 +92,7 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 				
 			} catch (Exception e) {
 				log.error(e);
-			}
-			
-			
+			}			
 		}
 		
 		String pooledTag = "database."+ name + ".pooledDataSourceProvider";		
