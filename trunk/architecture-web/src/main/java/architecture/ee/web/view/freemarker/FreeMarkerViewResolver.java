@@ -13,9 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-   
+
 package architecture.ee.web.view.freemarker;
 
-public class FreeMarkerViewResolver extends org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver {
+public class FreeMarkerViewResolver extends
+		org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver {
 
 }
