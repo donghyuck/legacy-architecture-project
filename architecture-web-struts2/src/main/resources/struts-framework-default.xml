@@ -17,13 +17,13 @@
 		<result-types>
 			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
 			<result-type name="dispatcher" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="true" />
-			<result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" />
+			<result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" />			
 			<result-type name="redirect" class="org.apache.struts2.dispatcher.ServletRedirectResult" />
 			<result-type name="redirectAction" class="org.apache.struts2.dispatcher.ServletActionRedirectResult" />
 			<result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
 			<result-type name="xslt" class="org.apache.struts2.views.xslt.XSLTResult" />
 			<result-type name="plainText" class="org.apache.struts2.dispatcher.PlainTextResult" />
-			<result-type name="httpstatusview" class="architecture.ee.web.struts2.action.HttpStatusViewResult"/>
+			<result-type name="httpheader" class="org.apache.struts2.dispatcher.HttpHeaderResult" />			
 		</result-types>
 		
 		<!-- Interceptor overrides and additions -->
@@ -31,7 +31,7 @@
 			<interceptor name="locale" class="architecture.ee.web.struts2.interceptor.LocaleInterceptor" />
 			<interceptor name="outputFormat" class="architecture.ee.web.struts2.interceptor.OutputFormatInterceptor" />
 			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
-			<interceptor name="referer" class="architecture.ee.web.struts2.interceptor.RefererInterceptor" />			
+			<interceptor name="referer" class="architecture.ee.web.struts2.interceptor.RefererInterceptor" />
             
 			<interceptor-stack name="defaultStack">
 				<interceptor-ref name="exception">
@@ -41,6 +41,8 @@
 				<interceptor-ref name="referer" />
 				<interceptor-ref name="servletConfig" />
 				<interceptor-ref name="prepare" />
+				<!-- <interceptor-ref name="chain"/>-->
+				<interceptor-ref name="staticParams"/>
 				<interceptor-ref name="params" />
 				<interceptor-ref name="outputFormat" />
 				<interceptor-ref name="locale" />
@@ -51,25 +53,17 @@
 		<default-interceptor-ref name="defaultStack" />
 		
 		<global-results>
-			<result name="redirect" type="redirect">${url}</result>			
-			<result name="error" type="httpheader">
-                <param name="status">500</param>
-                <param name="location" >/includes/jsp/error.jsp</param>
-			</result>
-            
-            <result name="notfound" type="httpstatusview">
-                <param name="status">404</param>
-                <param name="location" >/includes/jsp/error.jsp</param>
+			<result name="redirect" type="redirect">${url}</result>	
+            <result name="notfound" type="httpheader">
+                <param name="status">404</param>        
             </result>
-            
+            <result name="error" >/includes/jsp/error.jsp</result>                                      
 		</global-results>
 
-        <global-exception-mappings>
-            
-            <exception-mapping exception="java.lang.Throwable" result="error"/>
-            <exception-mapping exception="java.lang.RuntimeException" result="error"/>
-            <exception-mapping exception="java.lang.Exception" result="error"/>
-            
+        <global-exception-mappings>            
+			<exception-mapping exception="java.lang.Exception" result="error"/> 
+			<exception-mapping exception="java.lang.Error"        result="error"/> 
+			<exception-mapping exception="java.lang.Throwable" result="error"/> 
         </global-exception-mappings>
         		
 	</package>
@@ -77,9 +71,8 @@
 	<package name="framework-actions" extends="framework-default" namespace="/">
 		<default-interceptor-ref name="defaultStack" />
 		<action name="main" class="architecture.ee.web.struts2.action.MainAction">
-			<result name="success" type="freemarker">/html/main.ftl</result>
+			<result name="success">/main.jsp</result>
 		</action>
 	</package>
-
 
 </struts>

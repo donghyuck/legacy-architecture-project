@@ -31,11 +31,10 @@ import freemarker.template.TemplateException;
 
 public class HttpStatusViewResult extends ExtendedFreemarkerResult {
 
-    private int status;
+    private int status = 200;
     
     public HttpStatusViewResult(int status, String location)
     {
-        this.status = 200;
         this.status = status;
         super.setLocation(location);
     }
@@ -56,8 +55,7 @@ public class HttpStatusViewResult extends ExtendedFreemarkerResult {
         ActionContext ctx = invocation.getInvocationContext();
         HttpServletRequest req = (HttpServletRequest) ctx.get(ServletActionContext.HTTP_REQUEST);
         HttpServletResponse res = (HttpServletResponse) ctx.get(ServletActionContext.HTTP_RESPONSE);
-        res.setStatus(status);
-        
+        res.setStatus(status);        
         super.doExecute(location, invocation);
     }
 

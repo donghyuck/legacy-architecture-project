@@ -17,6 +17,7 @@ import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
 import org.springframework.security.authentication.AuthenticationProvider;
 
+import architecture.common.exception.Codeable;
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
@@ -171,6 +172,13 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
             CookieUtils.setCookie(ServletActionContext.getRequest(), ServletActionContext.getResponse(), name, value);
     }
     
+	protected boolean isCodeable (Throwable exception){
+		if( exception instanceof Codeable )
+			return true;
+		else 
+			return false;
+	}
+	
 	public String getPageURL() {
 		final StringBuffer page = new StringBuffer();
 		page.append(ServletUtils.getServletPath(ServletActionContext.getRequest()));
@@ -180,6 +188,8 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		
 		return page.toString();
 	}
+	
+	
 
 	public boolean acceptableParameterName(String parameterName) {
 		return !parameterName.contains(".");

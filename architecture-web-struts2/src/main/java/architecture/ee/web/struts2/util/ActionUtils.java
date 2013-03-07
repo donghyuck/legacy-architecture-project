@@ -36,6 +36,15 @@ public class ActionUtils {
             return null;
     }
     
+    public static Throwable getException(){
+    	Object e = ActionContext.getContext().getValueStack().findValue("exception");
+    	if( e != null )
+    		return (Throwable)e;
+    	else 
+    		return null;
+    	
+    }
+    
     public static Collection<String> getActionMessages()
     {
         Action a = getAction();
