@@ -82,8 +82,8 @@ public class Localizer {
     }	
 	
 
-    public Object getObject(String key, String id) throws MissingResourceException {
-        return bundle.getObject( new StringBuilder().append(key).append(stripPrefix(id)).toString());
+    public Object getObject(String key, String id) throws MissingResourceException {         
+    	return  bundle.getObject( new StringBuilder().append(key).append(stripPrefix(id)).toString());
     }
 
 	public Object getObject(String key, int id){
