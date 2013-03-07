@@ -4,26 +4,38 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<package name="framework-user-actions" namespace="/accounts"  extends="framework-default" >	
-		
+	<package name="framework-user-actions" namespace="/accounts"  extends="framework-default" >			
 		<default-interceptor-ref name="defaultStack" />
+		
 		<action name="login" class="architecture.user.web.struts2.action.LoginAction">
 			<result name="input" >/login.jsp</result>
 		</action>				
+		
+		<action name="signup" class="architecture.user.web.struts2.action.SignUpAction">
+			<result name="input" >/signup.jsp</result>			
+		</action>	
+		
+		<action name="signup-register" method="register"  class="architecture.user.web.struts2.action.SignUpAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">users.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUser.*
+				</param>
+			</result>
+		</action>					
+					
 		<action name="view-profile" class="architecture.user.web.struts2.action.ViewUserProfileAction">
 			<result name="success" type="freemarker">/html/view-profile.ftl</result>
 		</action>
 	</package>
-
-	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >	
-		
-		<default-interceptor-ref name="defaultStack" />		
-		
+	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >			
+		<default-interceptor-ref name="defaultStack" />				
 		 <!--  User  -->
 		<action name="main-user" class="architecture.user.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/manage-users.ftl</result>
 		</action>
-
 		<action name="list-user" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
