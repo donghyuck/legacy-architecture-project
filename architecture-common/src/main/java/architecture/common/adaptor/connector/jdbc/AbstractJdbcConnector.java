@@ -15,6 +15,7 @@
  */
 package architecture.common.adaptor.connector.jdbc;
 
+
 import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -162,6 +163,8 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 			}
 		});
 	}
+	
+	
 	
 	/**
 	 * Batch ...
