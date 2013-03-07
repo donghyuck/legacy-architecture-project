@@ -30,6 +30,7 @@
     
     <security:http pattern="/accounts/login.do*"    security="none" />
     <security:http pattern="/accounts/signup.do*"  security="none" />
+    <security:http pattern="/accounts/signup-register.do*"  security="none" />    
     <security:http pattern="/accounts/token.do*"   security="none" />
     <security:http pattern="/index.jsp"                security="none" />
 
