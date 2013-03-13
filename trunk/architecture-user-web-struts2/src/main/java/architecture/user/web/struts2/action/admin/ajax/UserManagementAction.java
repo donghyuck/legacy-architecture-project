@@ -34,6 +34,8 @@ import architecture.user.RoleManager;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
+	private String password ;
+	
     private int pageSize = 0 ;
     
     private int startIndex = 0 ;  
@@ -81,7 +83,15 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 		this.userId = userId;
 	}
 
-    public int getPageSize() {
+    public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public int getPageSize() {
         return pageSize;
     }
 
@@ -196,6 +206,19 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 		return success();
 	}
 	
+	public String updateUserPassword() throws Exception {
+		User user = getTargetUser(); 
+		if( user instanceof UserTemplate ){
+			if( !StringUtils.isEmpty(password))
+			{ 
+				((UserTemplate) user).setPassword(password);
+				userManager.updateUser(user);
+			}
+		}
+		return success();	
+	}
+	
+	
 	public String updateUserProperties() throws Exception {
 		User user = getTargetUser();
 		Map<String, String> properties = user.getProperties();
@@ -213,19 +236,30 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 		
 		try {
 			User user = getTargetUser();
-			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
-			
-			boolean enabled = StringUtils.stringToBoolean((String)map.get("enabled"));
-			boolean emailVisible = StringUtils.stringToBoolean((String)map.get("emailVisible"));
-			boolean nameVisible = StringUtils.stringToBoolean((String)map.get("nameVisible"));
+			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);			
 
+			String name = (String)map.get("name");
+			String email = (String)map.get("email");
+			boolean enabled = (Boolean)map.get("enabled");
+			boolean emailVisible = (Boolean)map.get("emailVisible");
+			boolean nameVisible = (Boolean)map.get("nameVisible");
+			String password = (String)map.get("password");
+			
 			if( user instanceof UserTemplate ){
+				((UserTemplate) user).setName(name);
+				((UserTemplate) user).setEmail(email);
 				((UserTemplate) user).setEnabled(enabled);
 				((UserTemplate) user).setEmailVisible(emailVisible);				
 				((UserTemplate) user).setNameVisible(nameVisible);
+				
+				if( StringUtils.isNotEmpty(password)){
+					((UserTemplate) user).setPassword(password);
+				}				
 			}
 			
 			this.targetUser = user;			
+			
+			log.debug( user );
 			
 			userManager.updateUser(user);
 			
@@ -235,6 +269,7 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 			throw new Exception(e);
 		}	
 	}
+
 	
 	protected void updateTargetUserProperties(User user, Map<String, String> properties) throws UserNotFoundException, UserAlreadyExistsException {
 		if (properties.size() > 0 && user instanceof UserTemplate) {
@@ -243,4 +278,7 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 			userManager.updateUser(user);
 		}
 	}
+	
+	
+	
 }
