@@ -46,9 +46,7 @@ import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.spi.UserProvider;
 import architecture.common.util.L10NUtils;
-
 import architecture.ee.component.admin.AdminHelper;
-
 import architecture.user.dao.UserDao;
 import architecture.user.security.authentication.InvalidProviderUserException;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsAdaptor;
@@ -647,6 +645,11 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             return;
     }
     
+	
+	
+	protected void modifyUserPassword(User user, String password ){
+		
+	}
     
     protected void modifyUserEnabled(User user, boolean enabled) throws UserNotFoundException, UserAlreadyExistsException
     {
@@ -724,6 +727,8 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             return;
         }
     }
+	
+	
 	
 	private String getPasswordHash(User user)
     {

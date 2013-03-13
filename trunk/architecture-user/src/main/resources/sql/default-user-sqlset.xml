@@ -205,7 +205,8 @@
 	       USERNAME            = ?,
 	       IS_EXTERNAL         = ?,
 	       FEDERATED           = ?,
-	       STATUS              = ?
+	       STATUS              = ?,
+	       PASSWORD_HASH = ?
        WHERE USER_ID       = ?
     ]]></sql-query>
 

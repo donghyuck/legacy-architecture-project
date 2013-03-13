@@ -245,6 +245,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 				    user.isExternal(),
 				    user.isFederated(),
 				    user.getStatus() != null ? user.getStatus().none.getId() : user.getStatus().getId(),
+				    user.getPasswordHash(),
 				    user.getUserId()				
 			});		
 			
