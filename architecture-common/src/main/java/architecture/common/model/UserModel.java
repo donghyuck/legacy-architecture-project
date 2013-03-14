@@ -81,7 +81,43 @@ public interface UserModel extends ModelObject<User> {
     
     public abstract boolean isAnonymous();
     
-    public abstract Map<String, String> getProperties();
+    public abstract Map<String, String> getProperties();    
+        
+    /**
+     * 확장 사용자 정보 제공하는가 여부를 리턴한다.
+     * 
+     * @return
+     */
+    public abstract boolean isProfileSupported();
     
+    /**
+     * 확장 사용자 정보 수정을 지원하는가 여부를 리턴한다.
+     * 
+     * @return
+     */
+    public abstract boolean isProfileEditSupported();
     
+    /**
+     * 확장 사용자 정보를 리턴한다. 
+     * @return
+     */
+    public abstract Map<String, Object> getProfile ();
+    
+    /**
+     * 특정 필드에 해당하는 확장 사용자 정보를 elementType 타입으로 캐스팅하여 리턴한다.
+     * @param fieldName
+     * @param elementType
+     * @return
+     */
+    public abstract <T> T getProfileFieldValue(String fieldName,  Class<T> elementType); 
+    
+    /**
+     * 특정 필드에 해당하는 확장 사용자 정보를 String 로 리턴한다.
+     * 
+     * @param fieldName
+     * @return
+     */
+    public abstract String getProfileFieldValueString(String fieldName); 
+
+        
 }
