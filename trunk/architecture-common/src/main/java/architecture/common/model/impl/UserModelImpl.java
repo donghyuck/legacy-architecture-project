@@ -99,6 +99,12 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	private Map<String, String> properties;
 	
 	/**
+	 * 추가 프로퍼티 값
+	 */
+	private Map<String, Object> profile;
+		
+	
+	/**
 	 * 사용 여부
 	 */
 	private boolean enabled;
@@ -167,8 +173,14 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	 * 메일 주소 변경 지원 여부
 	 */
 	private boolean setEmailSuppoted;
+	
+	private boolean setProfileSuppoted;
 				
+	private boolean setProfileEditSuppoted;
+	
 	private User.Status status;
+	
+	
 	
 	/**
 	 * ID 값이 -2 인 경우 아직 생성되지 않은 계정을 의미!
@@ -200,6 +212,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true; 
         status = null;
     }
     
@@ -229,6 +243,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true;         
         this.username = formatUsername(username);
         status = null;
     }
@@ -260,6 +276,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true;         
         this.username = formatUsername(username);
         this.password = password;
         this.email = email;
@@ -293,6 +311,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true;         
         this.username = formatUsername(username);
         this.password = password;
         this.email = email;
@@ -329,6 +349,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true;         
         username = formatUsername(userName);
         this.password = password;
         this.email = email;
@@ -372,6 +394,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true;         
         this.userId = userId;
         status = null;
     }
@@ -402,6 +426,9 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
+        setProfileSuppoted = true;
+        setProfileEditSuppoted = true; 
+        
         if(null == user)
             return;
         userId = user.getUserId();
@@ -428,6 +455,11 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setUsernameSupported = user.isSetUsernameSupported();
         setPropertyEditSupported = user.isPropertyEditSupported();
         setPasswordSupported = user.isSetPasswordSupported();
+        setProfileSuppoted = user.isProfileSupported();
+        setProfileEditSuppoted = user.isProfileEditSupported();
+        
+        if( user.getProperties() != null)
+        	profile = user.getProfile();
         
         if(user.getProperties() != null)
             properties = new HashMap<String, String>(user.getProperties());
@@ -954,6 +986,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 		size += CacheSizes.sizeOfString(passwordHash);
 		size += CacheSizes.sizeOfString(username);
 		
+		size += CacheSizes.sizeOfObjectMap(profile);
 		size += CacheSizes.sizeOfMap(properties);
 		size += CacheSizes.sizeOfObject();
 		size += CacheSizes.sizeOfDate();
@@ -964,5 +997,52 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 		return size;
 	}
 
+	public boolean isProfileSupported() {
+		return this.isProfileSupported();
+	}
+
+	public boolean isProfileEditSupported() {
+		return this.isProfileEditSupported();
+	}
+
+	public Map<String, Object> getProfile() {
+		if (profile == null)
+			profile = new HashMap<String, Object>();
+		return profile;
+	}
+
+	
+	// string, date, int, long
+	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
+		if (profile == null)
+			profile = new HashMap<String, Object>();
+		
+		Object object = profile.get(fieldName);	
+		if( object != null ){
+			if(object.getClass() == elementType)
+			{
+				return (T) object;	
+			}
+			else 
+			{
+				String valueToUse =  object.toString();
+				return (T)StringUtils.defaultString(valueToUse, "");				
+			}	
+		}else{
+			if( elementType == Number.class )
+				return (T) new Long(0);					
+			return null;
+		}
+	}
+	
+	public void setProfileFieldValue(String fieldName, Object value){
+		if (profile == null)
+			profile = new HashMap<String, Object>();
+		profile.put(fieldName, value);
+	}
+
+	public String getProfileFieldValueString(String fieldName) {
+		return getProfileFieldValue(fieldName, String.class);
+	}
 
 }

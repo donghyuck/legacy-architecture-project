@@ -119,6 +119,21 @@ public class CacheSizes {
         return size;
     }
 
+    public static int sizeOfObjectMap(Map<String, Object> map) {
+        if (map == null) {
+            return 0;
+        }
+        // Base map object -- should be something around this size.
+        int size = 36;
+        
+        // Add in size of each value
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+			size += sizeOfString(entry.getKey());
+            size += sizeOfObject();
+        }
+        return size;
+    }
+    
     /**
      * Returns the size in bytes of a Collection object. Elements are assumed to be
      * <tt>String</tt>s, <tt>Long</tt>s or <tt>Cacheable</tt> objects.
