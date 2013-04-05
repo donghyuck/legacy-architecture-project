@@ -30,6 +30,15 @@ public interface UserManager {
 	 */
 	public abstract User createUser(User user) throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException;
 
+
+	/**
+	 * 새로운 로컬 사용자를 생성한다.
+	 * @param user
+	 * @return
+	 * @throws UserAlreadyExistsException
+	 */
+	public abstract User createUser(User user, Company company) throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException;
+	
 	/**
 	 * 새로운 로컬 사용자를 생성한다.
 	 * @param user
@@ -38,6 +47,9 @@ public interface UserManager {
 	 */
 	public abstract User createApplicationUser(User user) throws UserAlreadyExistsException;
 
+
+	
+	
 	public abstract User getUser(User user);
 
 	public abstract User getUser(User user, boolean flag);
@@ -59,7 +71,7 @@ public interface UserManager {
 	public abstract int getAuthenticatedUserCount();
 
 	public abstract int getTotalUserCount();
-
+	
 	public abstract int getRecentUserCount(Date date);
 
 	public abstract List<User> getUsers();
@@ -76,5 +88,19 @@ public interface UserManager {
 	
 	public abstract List<User> findUsers(String nameOrEmail, int startIndex, int numResults);
 	
-	public abstract int getFoundUserCount(String nameOrEmail);
+	public abstract int getFoundUserCount(String nameOrEmail);	
+	
+	public abstract int getUserCount(Company company);
+	
+	public abstract List<User> getUsers(Company company);
+
+	public abstract List<User> getUsers(Company company, int startIndex, int numResults);
+	
+	
+	public abstract List<User> findUsers(Company company, String nameOrEmail);
+	
+	public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
+	
+	public abstract int getFoundUserCount(Company company, String nameOrEmail);
+	
 }

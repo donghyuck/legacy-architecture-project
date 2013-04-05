@@ -30,6 +30,7 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.UserModel;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.StringUtils;
@@ -42,6 +43,10 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
 	private Log log = LogFactory.getLog(getClass());
 
+	private long companyId;
+	
+	private Company company;
+	
 	/**
 	 * 사용자 객체 아이디 값 (내부적으로 사용하는 시스템 아이디)
 	 */
@@ -174,9 +179,9 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	 */
 	private boolean setEmailSuppoted;
 	
-	private boolean setProfileSuppoted;
+	private boolean profileSuppoted = false ;
 				
-	private boolean setProfileEditSuppoted;
+	private boolean setProfileEditSuppoted = false;
 	
 	private User.Status status;
 	
@@ -188,6 +193,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	 */
     public UserModelImpl()
     {
+    	companyId = -1L;
+    	company = null;
         userId = -2L;
         username = null;
         password = null;
@@ -212,13 +219,15 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true; 
         status = null;
     }
     
     public UserModelImpl(String username)
     {
+    	companyId = -1L;
+    	company = null;
         userId = -2L;
         this.username = null;
         password = null;
@@ -243,7 +252,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true;         
         this.username = formatUsername(username);
         status = null;
@@ -252,6 +261,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
     public UserModelImpl(String username, String password, String email, String name)
     {
+    	companyId = -1L;
+    	company = null;
         userId = -2L;
         this.username = null;
         this.password = null;
@@ -276,7 +287,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true;         
         this.username = formatUsername(username);
         this.password = password;
@@ -287,6 +298,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
     
     public UserModelImpl(String username, String password, String email, String name, boolean emailVisible, boolean nameVisible, Map<String, String> props)
     {
+    	companyId = -1L;
+    	company = null;
     	this.userId = -2L;
     	this.username = null;
         this.password = null;
@@ -311,7 +324,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true;         
         this.username = formatUsername(username);
         this.password = password;
@@ -325,6 +338,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
     public UserModelImpl(String userName, String password, String email, String firstName, String lastName, boolean emailVisible, boolean nameVisible, Map<String, String> props)
     {
+    	companyId = -1L;
+    	company = null;
         userId = -2L;
         username = null;
         this.password = null;
@@ -349,7 +364,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true;         
         username = formatUsername(userName);
         this.password = password;
@@ -370,6 +385,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
     public UserModelImpl(long userId)
     {
+    	companyId = -1L;
+    	company = null;
         this.userId = -2L;
         username = null;
         password = null;
@@ -394,7 +411,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true;         
         this.userId = userId;
         status = null;
@@ -402,6 +419,8 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 
     public UserModelImpl(User user)
     {
+    	companyId = -1L;
+    	company = null;
         userId = -2L;
         username = null;
         password = null;
@@ -426,7 +445,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setPasswordHashSupported = true;
         setPropertyEditSupported = true;
         setEmailSuppoted = true;
-        setProfileSuppoted = true;
+        profileSuppoted = true;
         setProfileEditSuppoted = true; 
         
         if(null == user)
@@ -455,8 +474,11 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         setUsernameSupported = user.isSetUsernameSupported();
         setPropertyEditSupported = user.isPropertyEditSupported();
         setPasswordSupported = user.isSetPasswordSupported();
-        setProfileSuppoted = user.isProfileSupported();
+        profileSuppoted = user.isProfileSupported();
         setProfileEditSuppoted = user.isProfileEditSupported();
+        
+        companyId = user.getCompanyId();
+    	company = user.getCompany();
         
         if( user.getProperties() != null)
         	profile = user.getProfile();
@@ -997,12 +1019,12 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 		return size;
 	}
 
-	public boolean isProfileSupported() {
-		return this.isProfileSupported();
+	public boolean isProfileSupported() {		
+		return this.profileSuppoted;
 	}
 
 	public boolean isProfileEditSupported() {
-		return this.isProfileEditSupported();
+		return this.setProfileEditSuppoted;
 	}
 
 	public Map<String, Object> getProfile() {
@@ -1011,6 +1033,9 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 		return profile;
 	}
 
+	public void setProfile(Map<String, Object> profile){
+		this.profile = profile;
+	}
 	
 	// string, date, int, long
 	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
@@ -1044,5 +1069,22 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	public String getProfileFieldValueString(String fieldName) {
 		return getProfileFieldValue(fieldName, String.class);
 	}
+
+	public long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		this.companyId = companyId;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+	
 
 }
