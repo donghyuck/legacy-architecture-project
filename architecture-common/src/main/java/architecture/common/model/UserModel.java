@@ -18,6 +18,7 @@ package architecture.common.model;
 import java.util.Date;
 import java.util.Map;
 
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 
@@ -28,6 +29,10 @@ public interface UserModel extends ModelObject<User> {
     public static final String EMAIL_VISIBILITY_ALLOW_TOGGLE = "user.allowEmailVisibilityToggle";
     
     public static final String NAME_VISIBILITY_ALLOW_TOGGLE = "user.allowNameVisibilityToggle";
+    
+    public abstract long getCompanyId();
+    
+    public abstract Company getCompany();
     
     public abstract long getUserId();
 
