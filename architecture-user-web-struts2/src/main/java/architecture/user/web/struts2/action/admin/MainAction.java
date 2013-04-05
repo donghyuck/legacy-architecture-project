@@ -19,4 +19,20 @@ import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class MainAction extends FrameworkActionSupport  {
 
+	private Long companyId = 1L ;
+		
+    public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	@Override
+    public String execute() throws Exception {  
+        return success();
+    }  
+    
+    
 }

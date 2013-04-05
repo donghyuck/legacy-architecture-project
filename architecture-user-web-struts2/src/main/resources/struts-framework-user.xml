@@ -13,7 +13,7 @@
 		
 		<action name="signup" class="architecture.user.web.struts2.action.SignUpAction">
 			<result name="input" >/signup.jsp</result>			
-		</action>	
+		</action>
 		
 		<action name="signup-register" method="register"  class="architecture.user.web.struts2.action.SignUpAction">
 			<result name="json-success" type="json">
@@ -24,12 +24,13 @@
 				targetUser.*
 				</param>
 			</result>
-		</action>					
+		</action>
 					
 		<action name="view-profile" class="architecture.user.web.struts2.action.ViewUserProfileAction">
 			<result name="success" type="freemarker">/html/view-profile.ftl</result>
 		</action>
 	</package>
+	
 	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >			
 		<default-interceptor-ref name="defaultStack" />				
 		 <!--  User  -->
@@ -119,7 +120,82 @@
 				</param>
 			</result>		
 		</action>			
+		<!--  Company  -->		
+		<action name="main-company"  class="architecture.user.web.struts2.action.admin.MainAction">
+			<result name="success"         type="freemarker">/html/manage-company.ftl</result>
+		</action>
+		<action name="list-company"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">companies.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				companies.*, totalCompanyCount
+				</param>
+			</result>
+		</action>
 				
+		<action name="create-company" method="createCompany"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetCompany.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompany.*
+				</param>
+			</result>		
+		</action>			
+		<action name="update-company" method="updateCompany"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetCompany.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompany.*
+				</param>
+			</result>		
+		</action>								
+		<action name="get-company-property"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompanyProperty.*
+				</param>
+			</result>		
+		</action>			
+
+		<action name="update-company-property" method="updateCompanyProperties" class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompanyProperty.*
+				</param>
+			</result>		
+		</action>	
+
+		<action name="delete-company-property" method="deleteCompanyProperties" class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompanyProperty.*
+				</param>
+			</result>		
+		</action>		
+		
+		<action name="list-company-group"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">companyGroups.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				companyGroups.*, totalCompanyGroupCount
+				</param>
+			</result>
+		</action>		
+		
         <!--  Group  -->
 		<action name="main-group"  class="architecture.user.web.struts2.action.admin.MainAction">
 			<result name="success"         type="freemarker">/html/manage-groups.ftl</result>
@@ -230,6 +306,28 @@
 				</param>
 			</result>		
 		</action>
+		
+		<action name="update-group-roles" method="updateGroupRoles"  class="architecture.user.web.struts2.action.admin.ajax.GroupManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				groupRoles.*
+				</param>
+			</result>			
+		</action>	
+				
+		<!--  Role  -->	
+		<action name="list-role"  class="architecture.user.web.struts2.action.admin.ajax.RoleManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">roles.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				roles.*, totalRoleCount
+				</param>
+			</result>
+		</action>		
 												
 	</package>
 	
