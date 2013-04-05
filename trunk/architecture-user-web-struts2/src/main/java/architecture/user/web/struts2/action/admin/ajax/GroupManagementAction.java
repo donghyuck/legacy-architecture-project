@@ -21,10 +21,13 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
+import architecture.user.CompanyManager;
+import architecture.user.CompanyNotFoundException;
 import architecture.user.Group;
 import architecture.user.GroupAlreadyExistsException;
 import architecture.user.GroupManager;
@@ -40,7 +43,11 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
     
     private int startIndex = 0 ;    
 
+    private Long companyId = 1L ;
+    
     private Long groupId;
+    
+    private Company targetCompany;
     
     private Group targetGroup;
     
@@ -50,7 +57,17 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
     
     private RoleManager roleManager ;
     
-    public RoleManager getRoleManager() {
+    private CompanyManager companyManager ;
+    
+    public CompanyManager getCompanyManager() {
+		return companyManager;
+	}
+
+	public void setCompanyManager(CompanyManager companyManager) {
+		this.companyManager = companyManager;
+	}
+
+	public RoleManager getRoleManager() {
 		return roleManager;
 	}
 
@@ -73,8 +90,16 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
     public void setGroupManager(GroupManager groupManager) {
         this.groupManager = groupManager;
     }
-    
-    public int getPageSize() {
+        
+    public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public int getPageSize() {
         return pageSize;
     }
 
@@ -99,16 +124,16 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 	}
 
 	public int getTotalGroupCount(){		
-		int totalCount = groupManager.getTotalGroupCount();
+		int totalCount = companyManager.getTotalCompanyGroupCount(getTargetCompany());
         return totalCount;
     }
     
     public List<Group> getGroups(){    	
     	List<Group> list ;    	
         if( pageSize > 0 ){        
-        	list = groupManager.getGroups(startIndex, pageSize);
+        	list = companyManager.getCompanyGroups(getTargetCompany(), startIndex, pageSize);
         }else{
-        	list = groupManager.getGroups();        
+        	list = companyManager.getCompanyGroups(getTargetCompany());        
         }        
         return list;
     }
@@ -129,6 +154,20 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
         	list = groupManager.getGroupUsers(getTargetGroup());        
         }        
         return list;
+    }
+    
+    public Company getTargetCompany(){
+		if (companyId == null)
+			log.warn("Edit profile for unspecified comany.");
+		if(targetCompany == null){
+			try {
+				targetCompany = companyManager.getCompany(companyId.longValue());
+			} catch (CompanyNotFoundException e) {
+				log.warn((new StringBuilder()).append("Could not load company object for id: ").append(companyId).toString());
+				return null;
+			}
+		}
+		return targetCompany ;
     }
     
     public Group getTargetGroup() {
@@ -155,43 +194,61 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 			list.add(new Property(key, value));
 		}
 		return list;
-	}
-	
+	}	
 	
 	public List<Role> getGroupRoles(){
 		return roleManager.getFinalGroupRoles(getTargetGroup().getGroupId());
 	}
 	
 	public String createGroup() throws Exception {		
+		
 		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);		
 		String name = (String)map.get("name");
-		String description = (String)map.get("description");
-		this.targetGroup = groupManager.createGroup(name, description);
+		String displayName = (String)map.get("displayName");
+		String description = (String)map.get("description");		
+		Company company = getTargetCompany();
+		
+		if( !name.startsWith( company.getName() )){
+			StringBuilder sb = new StringBuilder();
+			sb.append(company.getName());
+			sb.append('_');
+			sb.append(name);
+			name = sb.toString();
+		}
+		
+		this.targetGroup = groupManager.createGroup(name, displayName, description, company);
 		return success();	
 	}
 	
 	public String updateGroup() throws Exception {	
 		
 		try {
-			Group group = getTargetGroup();
 			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
 			String name = (String)map.get("name");
-			String description = (String)map.get("description");		
+			String displayName = (String)map.get("displayName");
+			String description = (String)map.get("description");	
+			
+			if( groupId == null){
+				Integer  selectedGroupId = (Integer)map.get("groupId");	
+				groupId = selectedGroupId.longValue();
+			}
+			Group group = getTargetGroup();			
+	
 			if(!StringUtils.isEmpty(name))
 			    group.setName(name);
+			if(!StringUtils.isEmpty(displayName))
+			    group.setDisplayName(displayName);
 			if(!StringUtils.isEmpty(description))
-			    group.setDescription(description);			
+			    group.setDescription(description);		
+			
 			groupManager.updateGroup(group);		
 			this.targetGroup = null;		
 			return success();
 		} catch (Throwable e) {
 			e.printStackTrace();
 			throw new Exception(e);
-		}	
-		
+		}		
 	}
-	
-	
 	
 	public String addMembers() throws Exception {	
 		Group group = getTargetGroup();
@@ -219,6 +276,32 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 		groupManager.removeMembership(group, users);		
 		return success();	
 	}
+	
+	public String updateGroupRoles() throws Exception {	
+		Group group = getTargetGroup();				
+		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);			
+		List<Role> oleRoles = roleManager.getFinalGroupRoles(group.getGroupId());
+		List<Role> newRoles = new ArrayList<Role>(list.size());		
+		for( Map map : list ){			
+			long roleId = Long.parseLong(map.get("roleId").toString() );
+			Role role = roleManager.getRole(roleId);
+			newRoles.add(role);
+		}
+		
+		if(oleRoles.size() > 0 ){
+			roleManager.removeGroupRole(group, oleRoles);
+		}
+		
+		if(newRoles.size() > 0 ){
+			roleManager.addGroupRole(group, newRoles);
+		}
+		
+		log.debug( group.getName() + " : " + oleRoles + ">" + newRoles );
+		
+		return success();			
+	}
+	
+	
 	
 	public String updateGroupProperties() throws Exception {		
 		Group group = getTargetGroup();
@@ -253,6 +336,8 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 			groupManager.updateGroup(group);
 		}
 	}
+	
+	
 	
     @Override
     public String execute() throws Exception {  

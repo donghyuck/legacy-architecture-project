@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
@@ -27,6 +28,8 @@ import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
+import architecture.user.CompanyManager;
+import architecture.user.CompanyNotFoundException;
 import architecture.user.Group;
 import architecture.user.GroupManager;
 import architecture.user.Role;
@@ -34,6 +37,8 @@ import architecture.user.RoleManager;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
+	private Long companyId = 1L ;
+	
 	private String password ;
 	
     private int pageSize = 0 ;
@@ -49,6 +54,18 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     private GroupManager groupManager ;
     
     private RoleManager roleManager ;
+
+    private CompanyManager companyManager ;
+    
+    private Company targetCompany;
+    
+    public CompanyManager getCompanyManager() {
+		return companyManager;
+	}
+
+	public void setCompanyManager(CompanyManager companyManager) {
+		this.companyManager = companyManager;
+	}
 
     public UserManager getUserManager() {
         return userManager;
@@ -73,6 +90,14 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 
 	public void setGroupManager(GroupManager groupManager) {
 		this.groupManager = groupManager;
+	}
+	
+    public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
 	}
 
 	public Long getUserId() {
@@ -108,25 +133,43 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     }
     
     public int getTotalUserCount(){
-        return userManager.getTotalUserCount();
+    	if( companyId == null ){
+    		 return userManager.getTotalUserCount();
+    	}else{
+    		return userManager.getUserCount(getTargetCompany());
+    	}    
     }
 
+    public Company getTargetCompany(){
+		if (companyId == null)
+			log.warn("Edit profile for unspecified comany.");
+		if(targetCompany == null){
+			try {
+				targetCompany = companyManager.getCompany(companyId.longValue());
+			} catch (CompanyNotFoundException e) {
+				log.warn((new StringBuilder()).append("Could not load company object for id: ").append(companyId).toString());
+				return null;
+			}
+		}
+		return targetCompany ;
+    }
+    
     public List<User> getUsers(){   
     	
     	log.debug(  request.getParameterMap() );
     	log.debug( "startIndex= " + startIndex + ", pageSize=" + pageSize  );
-    	
+
         if( pageSize > 0 ){
-            return userManager.getUsers(startIndex, pageSize);            
+            return userManager.getUsers(getTargetCompany(), startIndex, pageSize);            
         }else{            
-            return userManager.getUsers();
+            return userManager.getUsers(getTargetCompany());
         }
     }
 
     
     public int getFoundUserCount(){
     	String nameOrEmail = ParamUtils.getParameter(request, "nameOrEmail");
-        return userManager.getFoundUserCount(nameOrEmail);
+        return userManager.getFoundUserCount(getTargetCompany(), nameOrEmail);
     }
     
     public List<User> findUsers(){
@@ -137,9 +180,9 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 			log.debug("search user : " + nameOrEmail);
 		
         if( pageSize > 0 ){
-            return userManager.findUsers(nameOrEmail, startIndex, pageSize);            
+            return userManager.findUsers(getTargetCompany(), nameOrEmail, startIndex, pageSize);            
         }else{            
-            return userManager.findUsers(nameOrEmail);
+            return userManager.findUsers(getTargetCompany(), nameOrEmail);
         }
     }
     
