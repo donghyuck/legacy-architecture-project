@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import architecture.common.user.Company;
 import architecture.common.user.User;
 
 public interface UserDao {
@@ -34,10 +35,10 @@ public interface UserDao {
 
     public abstract List<User> getApplicationUsers(int startIndex, int numResults);
 
-    public abstract int getTotalUserCount();
-
     public abstract int getAuthenticatedUserCount();
 
+    public abstract List<Integer> getUserIdsWithStatuses(int status[]);
+    
     public abstract int getRecentUserCount(Date date);
 
     /**
@@ -58,11 +59,22 @@ public interface UserDao {
     
     public abstract int getFoundUserCount(String nameOrEmail) ;
     
+    public abstract int getTotalUserCount();
     
     public abstract List<User> getAllUsers();
 
     public abstract List<User> getAllUsers(int startIndex, int numResults);
 
-    public abstract List<Integer> getUserIdsWithStatuses(int status[]);
-    
+	public abstract int getUserCount(Company company);
+	
+	public abstract List<User> getUsers(Company company);
+
+	public abstract List<User> getUsers(Company company, int startIndex, int numResults);	
+	
+	public abstract List<User> findUsers(Company company, String nameOrEmail);
+	
+	public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
+	
+	public abstract int getFoundUserCount(Company company, String nameOrEmail);
+	    
 }

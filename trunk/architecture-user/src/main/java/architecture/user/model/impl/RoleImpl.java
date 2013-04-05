@@ -51,6 +51,27 @@ public class RoleImpl extends BaseModelObject  implements Role  {
 		return mask;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if( obj instanceof Role){
+			if( ((Role)obj).getRoleId() == this.roleId )
+				return true;
+			else 
+				return false;
+		}
+		return super.equals(obj);
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("User [ roleId=");
+		sb.append(roleId);
+		sb.append(", name=").append(getName());
+		sb.append("]");
+		return sb.toString();
+	}
+
 	public void setMask(int mask) {
 		this.mask = mask;
 	}

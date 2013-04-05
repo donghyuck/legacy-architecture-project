@@ -10,6 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.impl.BaseModelObject;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -21,10 +22,15 @@ import architecture.user.model.GroupModel;
  */
 public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel {
 
-	/**
-	 */
-	private long groupId;
+	private Company company;
 	
+	private String displayName;
+	
+	private long companyId ;
+
+	private long groupId;
+
+
 	/**
 	 */
 	private String name;
@@ -55,10 +61,31 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
 
 	private Set<Long> addedMembers;
 
-	private Set<Long> removedMembers;
-		
+	private Set<Long> removedMembers;		
+	
+	public GroupModelImpl() {
+		groupId = -1L;
+		companyId = -1L;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
 	public List<Long> getAdministratorIds() {
 		return administrators;
+	}
+
+	public long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		this.companyId = companyId;
 	}
 
 	public void setAdministratorIds(List<Long> administrators) {
@@ -99,6 +126,14 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
 	 */
 	public String getName() {
 		return name;
+	}
+
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 
 	/**
@@ -237,6 +272,7 @@ public class GroupModelImpl extends BaseModelObject<Group> implements GroupModel
         int size = CacheSizes.sizeOfObject();
         size += CacheSizes.sizeOfLong();
         size += CacheSizes.sizeOfString(name);
+        size += CacheSizes.sizeOfString(displayName);
         size += CacheSizes.sizeOfString(description);
         size += CacheSizes.sizeOfDate();
         size += CacheSizes.sizeOfDate();
