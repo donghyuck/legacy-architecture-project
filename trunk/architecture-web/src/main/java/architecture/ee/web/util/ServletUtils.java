@@ -21,9 +21,13 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
+
 import architecture.ee.util.OutputFormat;
 
 public class ServletUtils {
+	
+	public static final String CONTEXT_ROOT_PATH = "";
 	
     public static Map getModelMap(HttpServletRequest request, HttpServletResponse response) {
 		ModelMap modelMap = (ModelMap) request.getAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE);
@@ -32,6 +36,17 @@ public class ServletUtils {
 		}
 		return modelMap;
 	}
+    
+    public static String getContextPath(HttpServletRequest request){    	
+    	
+    	if( StringUtils.isEmpty(request.getContextPath())){
+    		return CONTEXT_ROOT_PATH ;
+    	}else if ( "/".equals( request.getContextPath()  ) ){
+    		return CONTEXT_ROOT_PATH ;    		
+    	}else{
+    		return request.getContextPath();
+    	}
+    }
     
         
 	public static String getServletPath(HttpServletRequest request) {
