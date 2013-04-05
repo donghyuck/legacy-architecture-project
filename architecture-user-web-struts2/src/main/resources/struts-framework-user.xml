@@ -79,7 +79,17 @@
 				</param>
 			</result>		
 		</action>	
-						
+		
+		<action name="get-user-group-roles" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				userGroupRoles.*
+				</param>
+			</result>		
+		</action>	
+								
 		<action name="get-user-property" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
