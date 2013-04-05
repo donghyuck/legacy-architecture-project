@@ -45,8 +45,10 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 	private final RowMapper<Group> groupMapper = new RowMapper<Group>(){
 		public Group mapRow(ResultSet rs, int rowNum) throws SQLException {			
 			Group g = new GroupImpl();
+			g.setCompanyId(rs.getLong("COMPANY_ID"));
 			g.setGroupId(rs.getLong("GROUP_ID"));
 			g.setName(rs.getString("NAME"));
+			g.setDisplayName(rs.getString("DISPLAY_NAME"));
 			g.setDescription(rs.getString("DESCRIPTION"));
 			g.setCreationDate( rs.getDate("CREATION_DATE") ); 
 			g.setModifiedDate( rs.getDate("MODIFIED_DATE") ); 		
@@ -89,8 +91,10 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
             group.setDescription(null);
 		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.CREATE_GROUP").getSql(), 	
+				new SqlParameterValue(Types.NUMERIC, group.getCompanyId()),
 				new SqlParameterValue (Types.NUMERIC, groupId), 
 				new SqlParameterValue(Types.VARCHAR, group.getName()),
+				new SqlParameterValue(Types.VARCHAR, group.getDisplayName()),
 				new SqlParameterValue(Types.VARCHAR, group.getDescription()),
 				new SqlParameterValue(Types.DATE, group.getCreationDate()),
 				new SqlParameterValue(Types.DATE, group.getModifiedDate()));		
@@ -101,6 +105,7 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 	public void updateGroup(Group group) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_GROUP").getSql(), 	
 				new SqlParameterValue(Types.VARCHAR, group.getName()),
+				new SqlParameterValue(Types.VARCHAR, group.getDisplayName()),
 				new SqlParameterValue(Types.VARCHAR, group.getDescription()),
 				new SqlParameterValue(Types.DATE, group.getModifiedDate()),
 				new SqlParameterValue(Types.NUMERIC, group.getGroupId()));
@@ -170,7 +175,6 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 	public List<Group> getGroups(int start, int num) {
 		throw new UnsupportedOperationException("Group creation not supported.");
 	}
-
 	
 	
 	public List<Long> getAllGroupIds() {

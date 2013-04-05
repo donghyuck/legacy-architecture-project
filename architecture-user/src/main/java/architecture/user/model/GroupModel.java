@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import architecture.common.model.ModelObject;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.Group;
@@ -38,6 +39,18 @@ public interface GroupModel extends ModelObject<Group>{
 	 */
     public abstract void setGroupId(long groupId);
 
+    public abstract void setCompanyId(long companyId);
+    
+    public abstract long getCompanyId();
+    
+    public abstract void setCompany(Company company);
+    
+    public abstract Company getCompany();
+    
+    public abstract String getDisplayName();
+    
+    public abstract void setDisplayName(String displayName);
+    
     /**
 	 * @return
 	 */
@@ -66,11 +79,7 @@ public interface GroupModel extends ModelObject<Group>{
 	 * @param  properties
 	 */
     public abstract void setProperties(Map<String, String> properties);
-    
-    
-    
-    
-    
+        
 	/**
 	 * @return
 	 */

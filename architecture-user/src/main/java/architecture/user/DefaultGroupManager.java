@@ -9,12 +9,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.exception.CodeableException;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.dao.GroupDao;
 import architecture.user.model.impl.GroupImpl;
+import architecture.user.util.CompanyUtils;
 
 import com.google.common.collect.Sets;
 
@@ -66,7 +68,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	}
 		
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public Group createGroup(String name, String description) throws GroupAlreadyExistsException {
+	public Group createGroup(String name, String displayName) throws GroupAlreadyExistsException {
 		try
         {
             getGroup(name);
@@ -75,8 +77,55 @@ public class DefaultGroupManager extends AbstractGroupManager {
         catch(GroupNotFoundException unfe)
         {
         	Group g = new GroupImpl();
+        	g.setDisplayName(displayName);
+        	g.setDescription(displayName);
+        	g.setName(name);
+        	Date groupCreateDate = new Date();
+        	g.setCreationDate(groupCreateDate);
+        	g.setModifiedDate(groupCreateDate);
+        	groupDao.createGroup(g);        	
+        	return g;
+        }
+	}
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public Group createGroup(String name, String displayName, Company company) throws GroupAlreadyExistsException {
+		try
+        {
+            getGroup(name);
+            throw new GroupAlreadyExistsException();
+        }
+        catch(GroupNotFoundException unfe)
+        {
+        	Group g = new GroupImpl();
+        	g.setDisplayName(displayName);
+        	g.setDescription(displayName);
+        	g.setName(name);
+        	g.setCompanyId(company.getCompanyId());
+        	g.setCompany(company);
+        	Date groupCreateDate = new Date();
+        	g.setCreationDate(groupCreateDate);
+        	g.setModifiedDate(groupCreateDate);
+        	groupDao.createGroup(g);        	
+        	return g;
+        }
+	}
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public Group createGroup(String name, String displayName, String description, Company company) throws GroupAlreadyExistsException {
+		try
+        {
+            getGroup(name);
+            throw new GroupAlreadyExistsException();
+        }
+        catch(GroupNotFoundException unfe)
+        {
+        	Group g = new GroupImpl();
+        	g.setDisplayName(displayName);
         	g.setDescription(description);
         	g.setName(name);
+        	g.setCompanyId(company.getCompanyId());
+        	g.setCompany(company);
         	Date groupCreateDate = new Date();
         	g.setCreationDate(groupCreateDate);
         	g.setModifiedDate(groupCreateDate);
@@ -117,11 +166,16 @@ public class DefaultGroupManager extends AbstractGroupManager {
 
 	@Override
 	protected Group lookupGroup(String name) throws GroupNotFoundException {
-	    Group g = groupDao.getGroupByName(name, caseInsensitiveGroupNameMatch);
+	    Group g = groupDao.getGroupByName(name, caseInsensitiveGroupNameMatch);	    
 	    if(g == null)
 	        throw CodeableException.newException(GroupNotFoundException.class, 5142, name);//new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
-	    else
-	        return g;
+	    if(g.getCompanyId() != -1L){
+	    	try {
+				g.setCompany(CompanyUtils.getCompany(g.getCompanyId()));
+			} catch (CompanyNotFoundException e) {
+			}
+	    }
+	    return g;
 	}
 
 	@Override
@@ -131,20 +185,22 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	    Group group = groupDao.getGroupById(groupId);
 	    if(group == null)
 	        throw CodeableException.newException(GroupNotFoundException.class, 5141, groupId); //new GroupNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
-	    else
-	        return group;
+	    if(group.getCompanyId() != -1L){
+	    	try {
+	    		group.setCompany(CompanyUtils.getCompany(group.getCompanyId()));
+			} catch (CompanyNotFoundException e) {
+			}
+	    }
+        return group;
 	}
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-	public void updateGroup(Group group) throws GroupNotFoundException, GroupAlreadyExistsException {		
-		
+	public void updateGroup(Group group) throws GroupNotFoundException, GroupAlreadyExistsException {
 		Group original = groupDao.getGroupById(group.getGroupId());
 		if (original == null)
-			throw CodeableException.newException(GroupAlreadyExistsException.class, 5141, group.getGroupId()); //new GroupNotFoundException();
-		
+			throw CodeableException.newException(GroupAlreadyExistsException.class, 5141, group.getGroupId()); //new GroupNotFoundException();		
 		String oldGroupName = null;
-		String newGroupName = null;
-		
+		String newGroupName = null;		
 		if( !nameEquals(original, group)){
 			try{
 			Group checked = getGroup(caseGroupName(group.getName()));
@@ -155,15 +211,13 @@ public class DefaultGroupManager extends AbstractGroupManager {
 				oldGroupName = original.getName();
 				newGroupName = group.getName();
 			}
-		}
-		
+		}		
 		group.setModifiedDate(new Date());
 		groupDao.updateGroup(group);
 		if( oldGroupName != null && newGroupName != null ){
 			groupNameUpdated(oldGroupName);
 		}
-		clearGroupFromCache(group);		
-	
+		clearGroupFromCache(group);			
 	}
 
 	
@@ -235,9 +289,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		
 		groupDao.removeMembers(group.getGroupId(), userIds);		
 	}
-	
-	
-	
+		
 	public List<Group> getUserGroups(User user) {		
 		List<Group> groups = new ArrayList<Group>();		
 		List<Long> groupIds = groupDao.getUserGroupIds(user.getUserId());

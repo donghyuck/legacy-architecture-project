@@ -17,6 +17,7 @@ package architecture.user;
 
 import java.util.List;
 
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 
@@ -24,7 +25,11 @@ public interface GroupManager {
 
 	public abstract Group createGroup(String name) throws GroupAlreadyExistsException;
 
-	public abstract Group createGroup(String name, String description) throws GroupAlreadyExistsException;
+	public abstract Group createGroup(String name, String displayName) throws GroupAlreadyExistsException;
+
+	public abstract Group createGroup(String name, String displayName, Company company) throws GroupAlreadyExistsException;
+	
+	public abstract Group createGroup(String name, String displayName, String description, Company company) throws GroupAlreadyExistsException;
 	
 	public abstract int getTotalGroupCount();
 

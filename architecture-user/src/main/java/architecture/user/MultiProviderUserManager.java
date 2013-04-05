@@ -37,6 +37,7 @@ import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.exception.CodeableException;
 import architecture.common.exception.CodeableRuntimeException;
+import architecture.common.user.Company;
 import architecture.common.user.EmailAlreadyExistsException;
 import architecture.common.user.User;
 import architecture.common.user.UserAlreadyExistsException;
@@ -140,6 +141,55 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		this.eventPublisher = eventPublisher;
 	}
 
+
+	public User createUser(User newUser, Company company) throws UserAlreadyExistsException, UnsupportedOperationException, EmailAlreadyExistsException {
+		User user = getUser(newUser);
+		if(null != user)
+            if(!user.getUsername().equals(newUser.getUsername()))
+            {
+                if(caseEmailAddress(user).equals(caseEmailAddress(newUser)))
+                {
+                	EmailAlreadyExistsException e = CodeableException.newException(EmailAlreadyExistsException.class, 5104, user.getUsername(), caseEmailAddress(user));                   
+                    throw e;
+                }
+            } else
+            {                
+                UserAlreadyExistsException e = CodeableException.newException(UserAlreadyExistsException.class, 5105, user.getUsername(), caseEmailAddress(user));
+                log.info(e.getMessage());
+                throw e;                
+            }
+		
+		UserTemplate userTemplate = new UserTemplate(newUser);
+		wireTemplateDates(userTemplate);
+		userTemplate.setPassword(newUser.getPassword());
+		userTemplate.setPasswordHash(getPasswordHash(userTemplate));
+		userTemplate.setCompanyId(company.getCompanyId());
+		userTemplate.setCompany(company);
+		
+		user = createApplicationUser(userTemplate);
+		
+		for(UserProvider up : providers ){
+			
+			if(up.supportsUpdate())
+			{
+				log.info( L10NUtils.format("005106", up.getName() ) );
+				try
+                {
+                    long systemId = user.getUserId();
+                    User result = up.create(user);
+                    if(null == result || result.getUserId() != systemId){
+                    	log.warn(L10NUtils.format("005107", up.getName()));
+                    }
+                }
+                catch(Exception exc)
+                {
+                    log.warn( L10NUtils.getMessage("005108"), exc);
+                    throw new UnsupportedOperationException( L10NUtils.format("005109", up.getName()) );
+                }
+			}
+		}		
+		return user;
+	}    	
 	
 	public User createUser(User newUser) throws UserAlreadyExistsException,
 			UnsupportedOperationException, EmailAlreadyExistsException {
@@ -250,6 +300,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		    if( user == null)
 				try {
 					user = userDao.getUserById(template.getUserId());
+					
 				} catch (Exception ex) {					
 					log.error( L10NUtils.getMessage("005111") , ex);
 				}				
@@ -262,14 +313,21 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 				id = (Long)userIdCache.get(template.getUsername()).getValue();
 			}			
 			if( id > 0L ){
+				
 				user = getUserFromCacheById(id);		    
-				log.debug( "user cached:"+ user + ", properties=" +  user.getProperties() );
-				if( user == null)
+				
+				log.debug( 
+					"user cached:"+ user + ", properties=" +  user.getProperties() 
+				);
+				
+				if( user == null){
 					try {
 						user = userDao.getUserById(template.getUserId());
 					} catch (Exception ex) {
 						log.error(L10NUtils.getMessage("005111"), ex);
 					}
+				}
+				
 			}			
 			if(null == user){				
 				if(caseInsensitive){
@@ -496,6 +554,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         if(userModel.getStatus() != user.getStatus())
             eventParams.put("statusOfUserModified", userModel.getStatus());
         
+        
         userModel.setEmail(caseEmailAddress(user));
         userModel.setEmailVisible(user.isEmailVisible());
         userModel.setExternal(user.isExternal());
@@ -604,6 +663,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 		return null;
 	}
 
+	
     private User getUserFromCacheById(long id)
     {
     	
@@ -645,7 +705,6 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             return;
     }
     
-	
 	
 	protected void modifyUserPassword(User user, String password ){
 		
@@ -708,11 +767,9 @@ public class MultiProviderUserManager implements UserManager, EventSource {
                  updateCaches(sourcedUser);
                  return up;
     		 }
-    	 }
-         
+    	 }         
          return null;
-    }
-    
+    }    
     
 	private void updateCaches(User user)
     {
@@ -726,9 +783,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             this.userIdCache.put(new Element(user.getUsername(), uid ));
             return;
         }
-    }
-	
-	
+    }	
 	
 	private String getPasswordHash(User user)
     {
@@ -740,6 +795,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             return null;
         try
         {
+        	log.debug( user.getPassword() + "=" + passwordEncoder.encodePassword(passwd, saltSource.getSalt(new ExtendedUserDetailsAdaptor(user)))  );
             return passwordEncoder.encodePassword(passwd, saltSource.getSalt(new ExtendedUserDetailsAdaptor(user)));
         }
         catch(Exception ex)
@@ -757,8 +813,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
             ut.setCreationDate(new Date());
         if(null == ut.getModifiedDate())
             ut.setModifiedDate(new Date());
-    }
-    
+    }    
 
     private String caseEmailAddress(User user)
     {
@@ -791,6 +846,31 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 
 	public int getFoundUserCount(String nameOrEmail) {
 		return userDao.getFoundUserCount(nameOrEmail);
-	}    
+	}
+
+	public int getUserCount(Company company) {
+		return userDao.getUserCount(company);
+	}
+	
+	public List<User> getUsers(Company company) {
+		return userDao.getUsers(company);
+	}
+
+	public List<User> getUsers(Company company, int startIndex, int numResults) {
+		return userDao.getUsers(company, startIndex, numResults);
+	}
+
+	public List<User> findUsers(Company company, String nameOrEmail) {
+		return userDao.findUsers(company, nameOrEmail);
+	}
+
+	public List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults) {
+		return userDao.findUsers(company, nameOrEmail, startIndex, numResults);
+	}
+
+	public int getFoundUserCount(Company company, String nameOrEmail) {
+		return userDao.getFoundUserCount(company, nameOrEmail);
+	}
+
 	
 }
