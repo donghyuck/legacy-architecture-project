@@ -159,6 +159,8 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 		try {
 			model.put("L10NUtils",             staticModels.get("architecture.common.util.L10NUtils"));
 			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
+			model.put("ServletUtils",             staticModels.get("architecture.ee.web.util.ServletUtils"));
+			model.put("ParamUtils",             staticModels.get("architecture.ee.web.util.ParamUtils"));
 			model.put("SecurityHelper",         staticModels.get("architecture.user.util.SecurityHelper"));
 			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));							
 			model.put("WebApplicationHelper",     staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
