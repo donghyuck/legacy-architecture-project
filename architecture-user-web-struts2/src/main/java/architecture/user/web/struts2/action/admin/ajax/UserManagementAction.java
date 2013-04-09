@@ -215,7 +215,12 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     	List<Role> roles =  roleManager.getFinalUserRoles(getTargetUser().getUserId());
     	return roles;
     }
-    
+
+    public List<Role> getUserGroupRoles(){    	
+    	List<Role> roles =  roleManager.getUserRolesFromGroup(getTargetUser().getUserId());
+    	return roles;
+    }
+        
 	/** Action method **/
 	
 	
