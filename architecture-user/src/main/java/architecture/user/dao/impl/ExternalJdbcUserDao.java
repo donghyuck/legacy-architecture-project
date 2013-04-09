@@ -35,8 +35,10 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.user.CompanyNotFoundException;
 import architecture.user.dao.ExternalUserProfileDao;
 import architecture.user.dao.UserDao;
+import architecture.user.util.CompanyUtils;
 
 public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	
@@ -475,40 +477,70 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 
-	public int getUserCount(Company company) {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
-	}
-
-
 	public List<User> getUsers(Company company) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_COMPANY_VISIBLE_USER").getSql(), userMapper);
+		for(User user : users){
+			try {
+				((UserTemplate)user).setCompany( CompanyUtils.getCompany(user.getCompanyId()));
+			} catch (CompanyNotFoundException e) {
+			}
+			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
+		}
+		return users;
 	}
-
 
 	public List<User> getUsers(Company company, int startIndex, int numResults) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_COMPANY_VISIBLE_USER").getSql(), startIndex, numResults, 
+				new Object[]{company.getCompanyId()}, 
+				new int[]{Types.INTEGER}, 
+				userMapper);
+		for(User user : users){
+			try {
+				((UserTemplate)user).setCompany( CompanyUtils.getCompany(user.getCompanyId()));
+			} catch (CompanyNotFoundException e) {
+			}
+			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
+		}
+		return users;
 	}
-
 
 	public List<User> findUsers(Company company, String nameOrEmail) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), 
+				userMapper, 
+				new SqlParameterValue(Types.INTEGER, company.getCompanyId() ),
+				new SqlParameterValue(Types.VARCHAR, nameOrEmail ), 
+				new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+		for(User user : users){
+			try {
+				((UserTemplate)user).setCompany( CompanyUtils.getCompany(user.getCompanyId()));
+			} catch (CompanyNotFoundException e) {
+			}
+			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
+		}
+		return users;
 	}
 
-
-	public List<User> findUsers(Company company, String nameOrEmail,
-			int startIndex, int numResults) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+	public List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults) {
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), startIndex, numResults, 
+				new Object[]{company.getCompanyId(), nameOrEmail, nameOrEmail}, 
+				new int[]{Types.INTEGER, Types.VARCHAR, Types.VARCHAR}, userMapper);
+		for(User user : users){
+			try {
+				((UserTemplate)user).setCompany( CompanyUtils.getCompany(user.getCompanyId()));
+			} catch (CompanyNotFoundException e) {
+			}
+			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
+		}
+		return users;
 	}
-
 
 	public int getFoundUserCount(Company company, String nameOrEmail) {
-		// TODO 자동 생성된 메소드 스텁
-		return 0;
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+	}
+
+
+	public int getUserCount(Company company) {
+		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_USERS").getSql(), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ));
 	}
 	
 }

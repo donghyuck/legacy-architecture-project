@@ -40,4 +40,6 @@ public interface RoleManager {
 	
 	public abstract void addGroupRole( Group group, Role role);
 
+	public abstract List<Role> getUserRolesFromGroup(long userId);
+		
 }
