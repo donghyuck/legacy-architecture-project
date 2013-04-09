@@ -85,6 +85,21 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}
+	
+	public List<Role> getUserRolesFromGroup(long userId){
+		List<Role> roles = new ArrayList<Role>();		
+		List<Group> groups = groupManager.getUserGroups(new UserTemplate(userId));			
+			for(Group group : groups ){			
+				List<Long> groupRoleIds = roleDao.getGroupRoleIds(group.getGroupId());
+				for(long roleId : groupRoleIds ){
+					try {
+						Role r = getRole(roleId) ;
+						roles.add( r );
+					} catch (RoleNotFoundException e) { }
+				}
+			}		
+			return roles;
+	}
 		
 	public List<Role> getFinalUserRoles(long userId) {	
 		
@@ -102,7 +117,8 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 			List<Long> groupRoleIds = roleDao.getGroupRoleIds(group.getGroupId());
 			for(long roleId : groupRoleIds ){
 				try {
-					roles.add( getRole(roleId) );
+					Role r = getRole(roleId) ;
+					roles.add( r );
 				} catch (RoleNotFoundException e) { }
 			}
 		}		
