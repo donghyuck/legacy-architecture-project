@@ -200,6 +200,6 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 				new int[]{Types.INTEGER}, 
 				Long.class);
 	}
-	
+
 
 }

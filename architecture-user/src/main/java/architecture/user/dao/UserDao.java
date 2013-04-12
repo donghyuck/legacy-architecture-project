@@ -3,6 +3,7 @@ package architecture.user.dao;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -76,5 +77,7 @@ public interface UserDao {
 	public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
 	
 	public abstract int getFoundUserCount(Company company, String nameOrEmail);
+	
+	public void switchCompanies(long  companyId,  Set<Long> users );
 	    
 }

@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
@@ -32,6 +33,8 @@ import org.springframework.security.authentication.dao.SaltSource;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.google.common.collect.Sets;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
@@ -71,6 +74,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
 	protected List<UserProvider> providers;
 	private UserDao userDao;
 	private EventPublisher eventPublisher;
+	
 	protected int applicationUserCount;
 	protected int authenticatedUserCount;
 	protected int totalUserCount;
@@ -552,8 +556,7 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         if(userModel.isEnabled() != user.isEnabled())
             eventParams.put("enabledModify", userModel.isEnabled());
         if(userModel.getStatus() != user.getStatus())
-            eventParams.put("statusOfUserModified", userModel.getStatus());
-        
+            eventParams.put("statusOfUserModified", userModel.getStatus());        
         
         userModel.setEmail(caseEmailAddress(user));
         userModel.setEmailVisible(user.isEmailVisible());
@@ -602,12 +605,12 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         try
         {
         	userDao.update(userModel);
-            userCache.put( new Element( userModel.getUserId(), userModel ));            
-            
+        	
+            // cache 수정 ..
+        	userCache.put( new Element( userModel.getUserId(), userModel ));             
             if(previousUsername != null)
                 userIdCache.remove(previousUsername);
-            userIdCache.put(new Element( userModel.getUsername(), userModel.getUserId( )));
-            
+            userIdCache.put(new Element( userModel.getUsername(), userModel.getUserId( )));        
             resetUserCounts();
         }
         catch(DataAccessException ex)
@@ -617,8 +620,19 @@ public class MultiProviderUserManager implements UserManager, EventSource {
         }
         //dispatchEvent(new UserEvent(com.jivesoftware.base.event.UserEvent.Type.MODIFIED, userModel, eventParams));
        //eventPublisher.publish(event);
-        
 		return userModel;
+	}
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+	public void switchCompanies(Company  company,  List<User> users ){
+		
+		Set<Long> userIds = Sets.newHashSetWithExpectedSize(users.size());		
+		for( User u : users)
+			userIds.add(u.getUserId());		
+		userDao.switchCompanies( company.getCompanyId(), userIds );
+		for( User u : users)
+			userCache.remove(u.getUserId());
+		
 	}
 
 	public void enableUser(User user) {

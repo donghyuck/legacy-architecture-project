@@ -15,6 +15,7 @@
  */
 package architecture.user.dao.impl;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
@@ -22,11 +23,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
@@ -39,6 +42,8 @@ import architecture.user.CompanyNotFoundException;
 import architecture.user.dao.ExternalUserProfileDao;
 import architecture.user.dao.UserDao;
 import architecture.user.util.CompanyUtils;
+
+import com.google.common.collect.Lists;
 
 public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	
@@ -84,6 +89,8 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	private RowMapper<User> externalUserRowMapper = null ;
 	private ExtendedPropertyDao extendedPropertyDao;
 	
+	private String sqlSetName = "EXTENDED_SECURITY" ;
+	
 	private String sequencerName = "USER";
 	private String userPropertyTableName = "V2_USER_PROPERTY";
 	private String userPropertyPrimaryColumnName = "USER_ID";
@@ -94,6 +101,16 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
     }
 
     
+	public String getSqlSetName() {
+		return sqlSetName;
+	}
+
+
+	public void setSqlSetName(String sqlSetName) {
+		this.sqlSetName = sqlSetName;
+	}
+
+
 	public RowMapper<User> getExternalUserRowMapper() {
 		if( externalUserRowMapper == null )
 			externalUserRowMapper = userMapper ;
@@ -140,6 +157,18 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 		return externalUserProfileDao == null ? false : true;
 	}
 	
+	protected String getSql( String name ){
+		StringBuilder sb = new StringBuilder(sqlSetName);
+		sb.append(".").append(name);
+		return getBoundSql( sb.toString() ).getSql();
+	}
+	
+	protected String getSql( String name, Object obj ){
+		StringBuilder sb = new StringBuilder(sqlSetName);
+		sb.append(".").append(name);
+		return getBoundSqlWithAdditionalParameter( sb.toString() , obj ).getSql();
+	}
+	
 	/**
 	 * 
 	 * @param propertyName
@@ -148,7 +177,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	 */
 	public List<Integer> getUserIdsWithUserProperty(String propertyName, String propertyValue) {
 		return getExtendedJdbcTemplate().queryForList( 
-				getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_PROPERTY").getSql(),  
+				getSql("SELECT_USER_ID_BY_PROPERTY"),  
 				new Object[]{ propertyName , propertyValue }, 
 				new int [] {Types.VARCHAR, Types.VARCHAR}, Integer.class);
 	}
@@ -203,7 +232,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	    	
 	    	Date now = new Date();
 	    	
-			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.CREATE_USER").getSql(), new Object[]{
+			getExtendedJdbcTemplate().update(getSql("CREATE_USER"), new Object[]{
 				userId,
 				user.getUsername(), 
 				user.getPasswordHash(), 
@@ -257,7 +286,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 		boolean useLastNameFirstName = user.getFirstName() != null && user.getLastName() != null;
 		try{
 			Date now = new Date();
-			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_USER").getSql(), 
+			getExtendedJdbcTemplate().update(getSql("UPDATE_USER"), 
 				new Object[]{
 				    useLastNameFirstName ? null : user.getName(),
 				    user.isNameVisible() ? 1 : 0,
@@ -289,7 +318,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	public User getUserByUsername(String username) {
 		UserTemplate user = null;		
 		try {
-			user = (UserTemplate) getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_USERNAME").getSql(), new Object[] {username}, new int[] {Types.VARCHAR} , getExternalUserRowMapper() );
+			user = (UserTemplate) getExtendedJdbcTemplate().queryForObject(getSql("SELECT_USER_BY_USERNAME"), new Object[] {username}, new int[] {Types.VARCHAR} , getExternalUserRowMapper() );
 			user.setProfile( getUserProfile(user.getUserId()) );
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (EmptyResultDataAccessException e) {
@@ -305,7 +334,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	public User getUserByUsernameNoCase(String username) {
 		UserTemplate user = null;		
 		try {
-			user = (UserTemplate)getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_USERNAME").getSql(), new Object[] { username.toLowerCase()}, new int[] {Types.VARCHAR}, getExternalUserRowMapper() );
+			user = (UserTemplate)getExtendedJdbcTemplate().queryForObject(getSql("SELECT_USER_BY_USERNAME"), new Object[] { username.toLowerCase()}, new int[] {Types.VARCHAR}, getExternalUserRowMapper() );
 			user.setProfile( getUserProfile(user.getUserId()) );
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (EmptyResultDataAccessException e) {
@@ -325,7 +354,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 		{
 			String emailMatch = email.replace('*', '%');
 			try {				
-				UserTemplate user = (UserTemplate) getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ENAIL").getSql(), getExternalUserRowMapper(), new Object[]{emailMatch}, new int[]{Types.VARCHAR});
+				UserTemplate user = (UserTemplate) getExtendedJdbcTemplate().queryForObject(getSql("SELECT_USER_BY_ENAIL"), getExternalUserRowMapper(), new Object[]{emailMatch}, new int[]{Types.VARCHAR});
 				
 				user.setProfile( getUserProfile(user.getUserId()) );
 				user.setProperties(getUserProperties(user.getUserId()));
@@ -353,7 +382,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 		
 		UserTemplate user = null;
 		try {
-			user = (UserTemplate)getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ID").getSql(), getExternalUserRowMapper(), new SqlParameterValue(Types.INTEGER, userId ) );
+			user = (UserTemplate)getExtendedJdbcTemplate().queryForObject(getSql("SELECT_USER_BY_ID"), getExternalUserRowMapper(), new SqlParameterValue(Types.INTEGER, userId ) );
 			user.setProfile( getUserProfile(user.getUserId()) );
 			user.setProperties(getUserProperties(user.getUserId()));
 		} catch (IncorrectResultSizeDataAccessException e) {
@@ -371,9 +400,9 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public void delete(User user) {		
-        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_GROUP_MEMBERSHIP").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});
+        getExtendedJdbcTemplate().update(getSql("DELETE_GROUP_MEMBERSHIP"), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});
         extendedPropertyDao.deleteProperties(userPropertyTableName, userPropertyPrimaryColumnName, user.getUserId());
-        getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.DELETE_USER_BY_ID").getSql(), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});        
+        getExtendedJdbcTemplate().update(getSql("DELETE_USER_BY_ID"), new Object[]{ user.getUserId()}, new int [] {Types.INTEGER});        
 	}
 
 	public Map<String, String> getUserProperties(long userId) {
@@ -385,7 +414,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> getApplicationUsers() {	
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_ENABLED_USER").getSql(), getExternalUserRowMapper());
+		List<User> users = getExtendedJdbcTemplate().query(getSql("SELECT_ALL_ENABLED_USER"), getExternalUserRowMapper());
 		for(User user : users){
 			((UserTemplate)user).setProfile(this.getUserProfile(user.getUserId()));
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
@@ -394,7 +423,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> getApplicationUsers(int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_ENABLED_USER").getSql(), startIndex, numResults, new Object[0], new int[0], getExternalUserRowMapper());
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getSql("SELECT_ALL_ENABLED_USER"), startIndex, numResults, new Object[0], new int[0], getExternalUserRowMapper());
 		for(User user : users){
 			((UserTemplate)user).setProfile(this.getUserProfile(user.getUserId()));
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));			
@@ -404,23 +433,23 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	
 
 	public int getTotalUserCount() {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_VISIBLE_USER").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_VISIBLE_USER"));
 	}
 
 	public int getApplicationUserCount() {	
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_ENABLED_USER").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_ENABLED_USER"));
 	}
 	
 	public int getAuthenticatedUserCount() {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_AUTHENTICATED_USER").getSql());
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_AUTHENTICATED_USER"));
 	}
 
 	public int getRecentUserCount(Date date) {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_RECENT_USER").getSql(), new Object[]{date}, new int[]{Types.DATE});
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_RECENT_USER"), new Object[]{date}, new int[]{Types.DATE});
 	}
 
 	public List<User> getAllUsers() {
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_VISIBLE_USER").getSql(), getExternalUserRowMapper());
+		List<User> users = getExtendedJdbcTemplate().query(getSql("SELECT_ALL_VISIBLE_USER"), getExternalUserRowMapper());
 		for(User user : users){
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
 		}
@@ -428,7 +457,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> getAllUsers(int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_VISIBLE_USER").getSql(), startIndex, numResults, new Object[0], new int[0], getExternalUserRowMapper());
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getSql("SELECT_ALL_VISIBLE_USER"), startIndex, numResults, new Object[0], new int[0], getExternalUserRowMapper());
 		for(User user : users){
 			((UserTemplate)user).setProfile(this.getUserProfile(user.getUserId()));
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
@@ -437,11 +466,11 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<Integer> getUserIdsWithStatuses(int[] status) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSqlWithAdditionalParameter("ARCHITECTURE_SECURITY.SELECT_USER_ID_BY_STATUS", status).getSql(), Integer.class);
+		return getExtendedJdbcTemplate().queryForList(getSql("SELECT_USER_ID_BY_STATUS", status), Integer.class);
 	}
 
 	public List<User> findUsers(String nameOrEmail) {
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), getExternalUserRowMapper(), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+		List<User> users = getExtendedJdbcTemplate().query(getSql("SELECT_USERS_BY_EMAIL_OR_NAME"), getExternalUserRowMapper(), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
 		for(User user : users){
 			((UserTemplate)user).setProfile(this.getUserProfile(user.getUserId()));
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
@@ -450,7 +479,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> findUsers(String nameOrEmail, int startIndex, int numResults) {		
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USERS_BY_EMAIL_OR_NAME").getSql(), startIndex, numResults, new Object[]{nameOrEmail, nameOrEmail}, new int[]{Types.VARCHAR, Types.VARCHAR}, getExternalUserRowMapper());
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getSql("SELECT_USERS_BY_EMAIL_OR_NAME"), startIndex, numResults, new Object[]{nameOrEmail, nameOrEmail}, new int[]{Types.VARCHAR, Types.VARCHAR}, getExternalUserRowMapper());
 		for(User user : users){
 			((UserTemplate)user).setProfile(this.getUserProfile(user.getUserId()));
 			((UserTemplate)user).setProperties(this.getUserProperties(user.getUserId()));
@@ -459,7 +488,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public int getFoundUserCount(String nameOrEmail) {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_USERS_BY_EMAIL_OR_NAME").getSql(), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_USERS_BY_EMAIL_OR_NAME"), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
 	}
 	
 	public Map<String, Object> getUserProfile(long userId){
@@ -478,7 +507,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 
 
 	public List<User> getUsers(Company company) {
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_COMPANY_VISIBLE_USER").getSql(), userMapper);
+		List<User> users = getExtendedJdbcTemplate().query(getSql("SELECT_ALL_COMPANY_VISIBLE_USER"), userMapper);
 		for(User user : users){
 			try {
 				((UserTemplate)user).setCompany( CompanyUtils.getCompany(user.getCompanyId()));
@@ -490,7 +519,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> getUsers(Company company, int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_ALL_COMPANY_VISIBLE_USER").getSql(), startIndex, numResults, 
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getSql("SELECT_ALL_COMPANY_VISIBLE_USER"), startIndex, numResults, 
 				new Object[]{company.getCompanyId()}, 
 				new int[]{Types.INTEGER}, 
 				userMapper);
@@ -505,7 +534,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> findUsers(Company company, String nameOrEmail) {
-		List<User> users = getExtendedJdbcTemplate().query(getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), 
+		List<User> users = getExtendedJdbcTemplate().query(getSql("SELECT_COMPANY_USERS_BY_EMAIL_OR_NAME"), 
 				userMapper, 
 				new SqlParameterValue(Types.INTEGER, company.getCompanyId() ),
 				new SqlParameterValue(Types.VARCHAR, nameOrEmail ), 
@@ -521,7 +550,7 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults) {
-		List<User> users = getExtendedJdbcTemplate().queryScrollable(getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), startIndex, numResults, 
+		List<User> users = getExtendedJdbcTemplate().queryScrollable(getSql("SELECT_COMPANY_USERS_BY_EMAIL_OR_NAME"), startIndex, numResults, 
 				new Object[]{company.getCompanyId(), nameOrEmail, nameOrEmail}, 
 				new int[]{Types.INTEGER, Types.VARCHAR, Types.VARCHAR}, userMapper);
 		for(User user : users){
@@ -535,12 +564,31 @@ public class ExternalJdbcUserDao extends ExtendedJdbcDaoSupport implements UserD
 	}
 
 	public int getFoundUserCount(Company company, String nameOrEmail) {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME"), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
 	}
 
 
 	public int getUserCount(Company company) {
-		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_USERS").getSql(), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ));
+		return getExtendedJdbcTemplate().queryForInt(getSql("COUNT_COMPANY_USERS"), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ));
 	}
 	
+	public void switchCompanies(long companyId, Set<Long> users) {
+		
+		final List<Long> userIdsToUse = Lists.newArrayListWithExpectedSize(users.size());			
+		for( Long userId : users ){
+			userIdsToUse.add(userId);
+		}	
+		
+		final Long companyIdToUse = companyId ;		
+		getExtendedJdbcTemplate().batchUpdate( getSql("UPDATE_USER_COMPANY"),  new BatchPreparedStatementSetter() {
+			public void setValues(PreparedStatement ps, int i)
+					throws SQLException {
+				ps.setLong(1, companyIdToUse );
+                ps.setLong(2, userIdsToUse.get(i));						
+			}
+			public int getBatchSize() {
+				return userIdsToUse.size();
+			}}		
+		); 		
+	}
 }
