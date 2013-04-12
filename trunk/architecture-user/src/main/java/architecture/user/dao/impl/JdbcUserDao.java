@@ -6,6 +6,7 @@ import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -539,6 +540,10 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 
 	public int getFoundUserCount(Company company, String nameOrEmail) {
 		return getExtendedJdbcTemplate().queryForInt(getBoundSql("ARCHITECTURE_SECURITY.COUNT_COMPANY_USERS_BY_EMAIL_OR_NAME").getSql(), new SqlParameterValue(Types.INTEGER, company.getCompanyId() ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ), new SqlParameterValue(Types.VARCHAR, nameOrEmail ) );
+	}
+
+	public void switchCompanies(long companyId, Set<Long> users) {
+		
 	}
     
 }

@@ -72,12 +72,13 @@ public interface CompanyDao {
 	 */	
 	public abstract List<Long> getCompanyGroupIds(long companyId, int start, int maxResults);		
 
+	/*
 	public int getCompanyUserCount(long companyId);
 	
 	public abstract List<Long> getCompanyUserIds(long companyId);
 	
 	public abstract List<Long> getCompanyUserIds(long companyId, int start, int maxResults);
-	
+	*/
 	
 	
 }
