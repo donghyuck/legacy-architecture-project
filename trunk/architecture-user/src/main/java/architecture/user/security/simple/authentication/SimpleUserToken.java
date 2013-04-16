@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -202,5 +203,33 @@ public class SimpleUserToken implements AuthToken, User {
 
 	public int getCachedSize() {
 		return 0;
+	}
+
+	public long getCompanyId() {
+		return 0;
+	}
+
+	public Company getCompany() {
+		return null;
+	}
+
+	public boolean isProfileSupported() {
+		return false;
+	}
+
+	public boolean isProfileEditSupported() {
+		return false;
+	}
+
+	public Map<String, Object> getProfile() {
+		return null;
+	}
+
+	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
+		return null;
+	}
+
+	public String getProfileFieldValueString(String fieldName) {
+		return null;
 	}
 }
