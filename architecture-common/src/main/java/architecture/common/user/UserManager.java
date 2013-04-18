@@ -95,8 +95,7 @@ public interface UserManager {
 	public abstract List<User> getUsers(Company company);
 
 	public abstract List<User> getUsers(Company company, int startIndex, int numResults);
-	
-	
+		
 	public abstract List<User> findUsers(Company company, String nameOrEmail);
 	
 	public abstract List<User> findUsers(Company company, String nameOrEmail, int startIndex, int numResults);
