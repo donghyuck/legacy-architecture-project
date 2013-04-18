@@ -5,17 +5,17 @@
 <struts>
 
 	<package name="framework-user-actions" namespace="/accounts"  extends="framework-default" >			
-		<default-interceptor-ref name="defaultStack" />
+		<default-interceptor-ref name="defaultStack" />		
 		
 		<action name="login" class="architecture.user.web.struts2.action.LoginAction">
 			<result name="input" >/login.jsp</result>
-		</action>				
+		</action>
 		
 		<action name="signup" class="architecture.user.web.struts2.action.SignUpAction">
 			<result name="input" >/signup.jsp</result>			
 		</action>
 		
-		<action name="signup-register" method="register"  class="architecture.user.web.struts2.action.SignUpAction">
+		<action name="signup-register"  method="register"  class="architecture.user.web.struts2.action.SignUpAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeProperties">users.properties</param>
@@ -26,13 +26,31 @@
 			</result>
 		</action>
 					
-		<action name="view-profile" class="architecture.user.web.struts2.action.ViewUserProfileAction">
-			<result name="success" type="freemarker">/html/view-profile.ftl</result>
+		<action name="get-user" class="architecture.user.web.struts2.action.ajax.UserActioin">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">currentUser.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				currentUser.*
+				</param>
+			</result>
 		</action>
+
+		<action name="get-user-props" class="architecture.user.web.struts2.action.ajax.UserActioin">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				currentUserProperty.*
+				</param>
+			</result>
+		</action>
+		
 	</package>
 	
-	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >			
-		<default-interceptor-ref name="defaultStack" />				
+	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >
+		<default-interceptor-ref name="defaultStack" />
 		 <!--  User  -->
 		<action name="main-user" class="architecture.user.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/manage-users.ftl</result>
