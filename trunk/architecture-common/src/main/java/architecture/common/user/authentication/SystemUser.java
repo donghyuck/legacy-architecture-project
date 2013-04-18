@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 
 
@@ -173,6 +174,41 @@ public class SystemUser implements AuthToken, User {
 	}
 
 	public Map<String, String> getProperties() {
+		return null;
+	}
+
+	public long getCompanyId() {
+		// TODO 자동 생성된 메소드 스텁
+		return 0;
+	}
+
+	public Company getCompany() {
+		// TODO 자동 생성된 메소드 스텁
+		return null;
+	}
+
+	public boolean isProfileSupported() {
+		// TODO 자동 생성된 메소드 스텁
+		return false;
+	}
+
+	public boolean isProfileEditSupported() {
+		// TODO 자동 생성된 메소드 스텁
+		return false;
+	}
+
+	public Map<String, Object> getProfile() {
+		// TODO 자동 생성된 메소드 스텁
+		return null;
+	}
+
+	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
+		// TODO 자동 생성된 메소드 스텁
+		return null;
+	}
+
+	public String getProfileFieldValueString(String fieldName) {
+		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 
