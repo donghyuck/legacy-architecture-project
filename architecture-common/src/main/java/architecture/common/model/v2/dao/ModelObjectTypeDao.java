@@ -13,25 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.v2;
+package architecture.common.model.v2.dao;
 
-import java.io.Serializable;
+public interface ModelObjectTypeDao {
 
-import architecture.common.cache.Cacheable;
-import architecture.common.model.DatedObject;
-
-public interface ModelObject extends DatedObject, Cacheable {
+	public abstract void addModelObjectType( String code, int typeId );
 	
-	public String getName();
-	
-	public void setName(String name);
-	
-	public String getDescription();
-		
-	public void setDescription(String description);
-		
-	public Serializable getPrimaryKeyObject();	
-	
-	public int getModelObjectType();
+	public abstract String getModelObjectTypeCode(int typeId);
 	
 }
