@@ -34,6 +34,7 @@ import architecture.user.Group;
 import architecture.user.GroupManager;
 import architecture.user.Role;
 import architecture.user.RoleManager;
+import architecture.user.RoleNotFoundException;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
@@ -211,7 +212,7 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 	}
 	
     
-    public List<Role> getUserRoles(){    	
+    public List<Role> getFinalUserRoles(){    	
     	List<Role> roles =  roleManager.getFinalUserRoles(getTargetUser().getUserId());
     	return roles;
     }
@@ -220,6 +221,17 @@ public class UserManagementAction  extends FrameworkActionSupport  {
     	List<Role> roles =  roleManager.getUserRolesFromGroup(getTargetUser().getUserId());
     	return roles;
     }
+    
+    public List<Role> getUserRoles(){
+    	User user = getTargetUser();
+    	List<Role> roleForUser = roleManager.getFinalUserRoles(user.getUserId());
+    	
+    	for( Role role : getUserGroupRoles() ){
+    		roleForUser.remove(role);
+    	}    	
+    	return roleForUser;
+    }
+    
         
 	/** Action method **/
 	
@@ -317,7 +329,38 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 			throw new Exception(e);
 		}	
 	}
-
+	
+	public String updateUserRoles() throws Exception {	
+		
+		
+		
+		List<Role> oleRoles = getUserRoles();
+		List<Role> groupRoles = getUserGroupRoles();
+		
+		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);			
+		List<Role> newRoles = new ArrayList<Role>(list.size());			
+ 		
+		for( Map map : list ){			
+			long roleId = Long.parseLong(map.get("roleId").toString() );
+			Role role = roleManager.getRole(roleId);
+			if( !groupRoles.contains(role) )
+				newRoles.add(role);
+		}
+		
+		User user = getTargetUser();		
+		if(oleRoles.size() > 0 ){
+			roleManager.removeUserRole(user, oleRoles);
+		}		
+		
+		if(newRoles.size() > 0 ){
+			roleManager.addUserRole(user, newRoles);
+		}		
+		log.debug( user.getName() + " : " + oleRoles + ">" + newRoles );
+		
+		return success();			
+	}
+	
+	
 	
 	protected void updateTargetUserProperties(User user, Map<String, String> properties) throws UserNotFoundException, UserAlreadyExistsException {
 		if (properties.size() > 0 && user instanceof UserTemplate) {
@@ -326,6 +369,7 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 			userManager.updateUser(user);
 		}
 	}
+	
 	
 	
 	

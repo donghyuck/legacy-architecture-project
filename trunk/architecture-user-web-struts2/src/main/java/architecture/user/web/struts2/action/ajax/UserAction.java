@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.security.core.GrantedAuthority;
+
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
@@ -37,21 +39,35 @@ public class UserAction extends FrameworkActionSupport {
 	}
 	
 	public User getCurrentUser(){
-		User targetUser = getUser();		
-		
-		Object obj = getCurrentAuthToken();
-		
-		log.debug(obj.getClass().getName());
-		
+		User targetUser = getUser();
 		return targetUser;
+	}
+	
+	public List<String> getRoles () {		
+		List<String> list = new ArrayList<String>();
+		for(GrantedAuthority auth : getAuthorities() ) {
+			list.add(  auth.getAuthority() );
+		}
+		return list;
+	}
+	
+	public List<GrantedAuthority> getAuthorities (){		
+		AuthToken token = getCurrentAuthToken();
+		List<GrantedAuthority> list = new ArrayList<GrantedAuthority>();		
+		if( token instanceof org.springframework.security.core.userdetails.UserDetails ){			
+			list.addAll(    
+				((org.springframework.security.core.userdetails.UserDetails)token).getAuthorities()
+			);
+		}		
+		return  list;
 	}
 	
 	public AuthToken getCurrentAuthToken(){
 		return getAuthToken();
 	}
 	
-    public String execute() throws Exception {    	
-        return SUCCESS;
-    }
+    public String execute() throws Exception {      	
+        return success();
+    }  
 	
 }
