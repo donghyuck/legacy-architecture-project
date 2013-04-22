@@ -31,9 +31,11 @@
     <security:http pattern="/accounts/login.do*"    security="none" />
     <security:http pattern="/accounts/signup.do*"  security="none" />
     <security:http pattern="/accounts/signup-register.do*"  security="none" />    
+    <security:http pattern="/accounts/get-user*"   security="none" />
     <security:http pattern="/accounts/token.do*"   security="none" />
+    
     <security:http pattern="/index.jsp"                security="none" />
-
+    
     <security:http entry-point-ref="authenticationEntryPoint">    	
         <security:intercept-url pattern="/main.do*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>        
         <security:intercept-url pattern="/**" access="ROLE_USER" />    	
