@@ -15,23 +15,13 @@
  */
 package architecture.common.model.v2;
 
-import java.io.Serializable;
+public interface ModelObjectType {
 
-import architecture.common.cache.Cacheable;
-import architecture.common.model.DatedObject;
-
-public interface ModelObject extends DatedObject, Cacheable {
+	public abstract int getId();
 	
-	public String getName();
+	public abstract String getCode();
 	
-	public void setName(String name);
+	//public abstract getModelObjectFactory();
 	
-	public String getDescription();
-		
-	public void setDescription(String description);
-		
-	public Serializable getPrimaryKeyObject();	
-	
-	public int getModelObjectType();
-	
+	public abstract boolean isEnabled();
 }
