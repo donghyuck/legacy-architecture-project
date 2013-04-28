@@ -1,0 +1,102 @@
+/*
+ * Copyright 2012, 2013 Donghyuck, Son
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package architecture.ee.web.attachment.impl;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Serializable;
+
+import architecture.common.cache.CacheSizes;
+import architecture.common.model.ModelObjectType;
+import architecture.common.model.v2.BaseModelObject;
+import architecture.ee.web.attachment.Image;
+
+public class ImageImpl extends BaseModelObject implements Image {
+
+	private Long imageId;
+	private Integer size;
+	private String contentType;
+	private Integer objectType;
+	private Long objectId;
+	private InputStream inputStream;
+	
+	
+	public Serializable getPrimaryKeyObject() {
+		return imageId;
+	}
+
+	public int getModelObjectType() {
+		return ModelObjectType.IMAGE.getKey();
+	}
+
+	public int getCachedSize() {
+		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())
+				+ CacheSizes.sizeOfString(contentType)
+				+ CacheSizes.sizeOfString(getDescription())
+				+ CacheSizes.sizeOfInt()
+				+ CacheSizes.sizeOfLong() 
+				+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
+	}
+
+	public long getImageId() {
+		return imageId;
+	}
+
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
+	}
+
+	public void setSize(int size) {
+		this.size = size;
+	}
+
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
+	}
+
+	public String getContentType() {
+		return contentType;
+	}
+
+	public int getSize() {
+		return size ;
+	}
+
+	public InputStream getInputStream() throws IOException {
+		return null;
+	}
+
+	public int getObjectType() {
+		return objectType;
+	}
+
+	public void setObjectType(Integer objectType) {
+		this.objectType = objectType;
+	}
+
+	public long getObjectId() {
+		return objectId;
+	}
+
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	public void setInputStream(InputStream inputStream) {
+		this.inputStream = inputStream;
+	}
+
+}

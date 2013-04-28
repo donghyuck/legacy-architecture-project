@@ -36,7 +36,6 @@ public interface AttachmentDao {
         {
             return downloadCompleted;
         }
-
     }
     
 	
