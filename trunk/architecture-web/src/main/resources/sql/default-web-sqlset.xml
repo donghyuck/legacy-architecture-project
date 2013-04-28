@@ -7,7 +7,7 @@
     	 
     <!--  COMPANY -->	 
 	<sql-query name="CREATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
-  		CREATE V2_IMAGE (
+  		INSERT INTO V2_IMAGE (
 	  		IMAGE_ID,
 			OBJECT_TYPE,
 			OBJECT_ID,
