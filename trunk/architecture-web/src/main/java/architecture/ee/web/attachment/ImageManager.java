@@ -15,11 +15,18 @@
  */
 package architecture.ee.web.attachment;
 
+import java.io.InputStream;
 import java.util.List;
 
 import architecture.ee.exception.NotFoundException;
 
-
+/**
+ * 
+ * 
+ * 
+ * @author donghyuck
+ *
+ */
 public interface ImageManager {
 
 	public abstract boolean isImageEnabled();
@@ -60,4 +67,15 @@ public interface ImageManager {
 	
 	public abstract void setAllowAllByDefault( boolean allowed );
 	
+	public abstract List<String> getDisallowedTypes();
+	
+	public abstract void addDisallowedType(String contentType);
+	
+	public abstract void removeDisallowedType(String contentType);
+	
+	public abstract Image createImage(int objectType, long objectId, String name, String contentType, InputStream inputStream);
+	
+	public abstract void saveOrUpdate( Image image );
+	
+	public abstract Image saveImage( Image image );
 }

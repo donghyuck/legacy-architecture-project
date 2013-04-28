@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_WEB</name>
+    <version>2.0</version>
+    <description>Queries for WEB COMPONENTS</description>
+    <version></version>
+    	 
+    <!--  COMPANY -->	 
+	<sql-query name="CREATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
+  		CREATE V2_IMAGE (
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ? )
+    ]]></sql-query>
+	
+	<sql-query name="UPDATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
+  		UPDATE V2_IMAGE SET
+	  		IMAGE_ID = ?,
+			OBJECT_TYPE = ?,
+			OBJECT_ID = ?,
+			FILE_NAME = ?,
+			FILE_SIZE = ?,
+			CONTENT_TYPE = ?,
+			CREATION_DATE = ?,
+			MODIFIED_DATE = ?
+		FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_IMAGE_BY_ID" description="ID로 IMAGE 조회"><![CDATA[    
+  		SELECT
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_IMAGE_BY_ID" description="IMAGE  삭제"><![CDATA[    
+ 		DELETE FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_EMPTY_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		INSERT INTO V2_IMAGE_DATA (IMAGE_ID, IMAGE_DATA) VALUES (?, EMPTY_BLOB())
+    ]]></sql-query>
+    
+	<sql-query name="UPDATE_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		UPDATE V2_IMAGE_DATA  SET IMAGE_DATA = ? WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		INSERT V2_IMAGE_DATA  (IMAGE_ID, IMAGE_DATA) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_IMAGE_DATA_BY_ID" description="IMAGE 데이터 조회"><![CDATA[    
+ 		SELECT IMAGE_DATA V2_IMAGE_DATA FROM IMAGE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_IMAGE_DATA_BY_ID" description="IMAGE 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+                    
+</sqlset>

@@ -58,7 +58,7 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 	}
 
 	public void create(Attachment attachment) {
-	
+		
 	}
 
 	public void update(Attachment attachment) {

@@ -24,6 +24,11 @@ public interface Image extends ModelObject {
 
 	public abstract long getImageId();
 
+	public abstract int getObjectType();
+	
+	public abstract long getObjectId();
+	
+	
 	/**
 	 * 이미지 ContentType 값
 	 * @return
