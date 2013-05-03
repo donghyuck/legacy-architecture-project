@@ -15,7 +15,9 @@
  */
 package architecture.user.web.struts2.action.admin.ajax;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -26,7 +28,6 @@ import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.struts2.action.UploadImageAction;
 
@@ -106,24 +107,28 @@ public class UserImageUploadAction extends UploadImageAction  {
 	public String execute() throws Exception {		
 		User user = getTargetUser();
 		Image imageToUse;
-		if( imageId < 0  ){
-			
-			getComponent(ImageManager.class).getMaxImageSize();
-			
+		if( imageId < 0  ){	
+			File fileToUse = getUploadImage();			
 			imageToUse = getImageManager().createImage(
 				ModelObjectType.USER.getTypeId(), 
 				user.getUserId(), 
 				getUploadImageFileName(), 
 				getUploadImageContentType(), 
-				new FileInputStream(getUploadImage()));			
-			imageId = getImageManager().saveImage(imageToUse).getImageId();
-			user.getProperties().put("", imageId.toString());		
+				fileToUse);	
 			
+			imageId = getImageManager().saveImage(imageToUse).getImageId();			
+			Map<String, String> properties = user.getProperties();			
+			properties.put("imageId", imageId.toString());	
+			((UserTemplate) user).setProperties(properties);
 			userManager.updateUser(user);
 			
 		}else{
 			imageToUse = getTargetUserImage();
-			((ImageImpl)imageToUse).setInputStream( new FileInputStream(getUploadImage()) );
+			File fileToUse = getUploadImage();			
+			((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
+			((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
+			log.debug("image size:" + imageToUse.getSize());
+			log.debug("image stream:" + imageToUse.getInputStream());
 			getImageManager().saveImage(imageToUse);
 		}
 		
