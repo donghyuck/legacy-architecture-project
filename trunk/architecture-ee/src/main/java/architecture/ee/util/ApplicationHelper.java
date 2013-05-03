@@ -97,7 +97,6 @@ public final class ApplicationHelper {
 		return AdminHelper.getState();
 	}
 	
-
 	public static Repository getRepository(){		
 		return AdminHelper.getRepository();
 	}

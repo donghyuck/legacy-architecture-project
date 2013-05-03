@@ -16,8 +16,6 @@
 
 package architecture.ee.component.impl;
 
-import groovy.lang.GroovyObject;
-
 import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
@@ -32,7 +30,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.core.task.AsyncTaskExecutor;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.ColumnMapRowMapper;
@@ -45,12 +42,9 @@ import architecture.common.jdbc.JdbcUtils;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.schema.Database;
 import architecture.common.jdbc.schema.Table;
-import architecture.common.util.L10NUtils;
 import architecture.ee.exception.ApplicationException;
 import architecture.ee.services.SqlQueryCallback;
 import architecture.ee.services.SqlQueryClient;
-import architecture.ee.services.UnitOfWork;
-import architecture.ee.services.support.UnitOfWorkForSqlQuery;
 import architecture.ee.spring.jdbc.support.SqlQueryDaoSupport;
 import architecture.ee.util.ApplicationHelper;
 
@@ -121,8 +115,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 			}
 			builder.append(" FROM " + table.getName());
 
-			List<Map<String, Object>> list = getExtendedJdbcTemplate()
-					.queryForList((builder.toString()));
+			List<Map<String, Object>> list = getExtendedJdbcTemplate().queryForList((builder.toString()));
 
 			ExcelWriter writer = new ExcelWriter();
 			writer.addSheet(table.getName());
@@ -161,7 +154,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		}
 
 		public Boolean call() throws Exception {
-			client.exportToExcel(catalogName, schemaName, tableName);
+			client.call(catalogName, schemaName, tableName);
 			return true;
 		}
 	}
@@ -180,7 +173,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		}
 
 		public Boolean call() throws Exception {
-			client.importFromExcel(catalogName, schemaName, tableName, uri);
+			client.call(catalogName, schemaName, tableName, uri);
 			return true;
 		}
 
@@ -263,21 +256,21 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		}
 	}
 
+	
+	
+	
+	
 	public Map<String, Object> uniqueResult(String statement) {
 		return getSqlQuery().uniqueResult(statement, new ColumnMapRowMapper());
 	}
 
-	public Map<String, Object> uniqueResult(String statement, Object parameter) {
-		return getSqlQuery().uniqueResult(statement, parameter,
-				new ColumnMapRowMapper());
+	public Map<String, Object> uniqueResult(String statement, Object parameter) { return getSqlQuery().uniqueResult(statement, parameter, new ColumnMapRowMapper());
 	}
 
-	public List<Map<String, Object>> list(String statement) {
-		return getSqlQuery().list(statement);
+	public List<Map<String, Object>> list(String statement) { return getSqlQuery().list(statement);
 	}
 
-	public List<Map<String, Object>> list(String statement,
-			Object... parameters) {
+	public List<Map<String, Object>> list(String statement, Object... parameters) {
 		return getSqlQuery().list(statement, parameters);
 	}
 
@@ -301,6 +294,8 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		return getSqlQuery().executeUpdate(statement, parameters);
 	}
 	
+	
+	
 	public Object call(String statement, Object... parameters) {
 		return getSqlQuery().call(statement, parameters);
 	}
@@ -316,6 +311,10 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 
 	public Object unitOfWorkWithoutTransaction(String scriptName, String methodName, Object... parameters) {		
 		return execute(scriptName,  methodName, parameters);
+	}
+
+	public List<Map<String, Object>> list(String statement, int startIndex, int maxResults) {
+		return getSqlQuery().setStartIndex(startIndex).setMaxResults(maxResults).list(statement);
 	}
 
 }
