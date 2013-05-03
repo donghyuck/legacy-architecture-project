@@ -22,7 +22,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.ServletRequestUtils;
 
@@ -57,6 +56,20 @@ public class ParamUtils extends ServletRequestUtils {
             String jsonString = getParameter(request, name);        
             com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
             return (T) mapper.readValue(jsonString, requiredType );
+        } catch (Exception e) {
+            if(requiredType == List.class )
+                return (T) Collections.EMPTY_LIST;
+            else if (requiredType == Map.class ){
+                return (T) Collections.EMPTY_MAP;
+            }
+            return null;
+        }       
+    }
+
+    public static <T> T getJsonParameter(HttpServletRequest request, String name, String key,  Class<T> requiredType) {               
+        try {
+        	Map map = getJsonParameter(request, name);
+        	return (T) map.get(key);
         } catch (Exception e) {
             if(requiredType == List.class )
                 return (T) Collections.EMPTY_LIST;

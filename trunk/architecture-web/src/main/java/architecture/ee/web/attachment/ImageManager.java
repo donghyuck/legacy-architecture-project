@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.attachment;
 
+import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
@@ -73,9 +74,14 @@ public interface ImageManager {
 	
 	public abstract void removeDisallowedType(String contentType);
 	
+	public abstract Image createImage(int objectType, long objectId, String name, String contentType, File file);
+	
 	public abstract Image createImage(int objectType, long objectId, String name, String contentType, InputStream inputStream);
 	
 	public abstract void saveOrUpdate( Image image );
 	
 	public abstract Image saveImage( Image image );
+	
+	public abstract InputStream getImageInputStream(Image image);
+	
 }

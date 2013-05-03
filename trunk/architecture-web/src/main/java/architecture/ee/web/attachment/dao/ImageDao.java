@@ -21,11 +21,11 @@ import architecture.ee.web.attachment.Image;
 
 public interface ImageDao {
 
-	public abstract void create(Image image);
+	public abstract Image createImage(Image image);
 	
-	public abstract void update(Image image);
+	public abstract Image updateImage(Image image);
 	
-	public abstract void delete(Image image);
+	public abstract void deleteImage(Image image);
 	
 	public abstract InputStream getImageInputStream(Image image);
 	

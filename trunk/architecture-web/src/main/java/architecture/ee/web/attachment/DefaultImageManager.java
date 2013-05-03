@@ -16,16 +16,22 @@
 package architecture.ee.web.attachment;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.lf5.util.StreamUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
@@ -191,33 +197,66 @@ public class DefaultImageManager implements ImageManager, EventSource {
 		ApplicationHelper.getConfigService().setApplicationProperty("image.allowAllByDefault", str);			
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void deleteImage(Image image){		
 		Image imageToUse = imageDao.getImageById(image.getImageId());
-		imageDao.delete(imageToUse);
+		imageDao.deleteImage(imageToUse);
 		 File imageFile = new File(getImageDir(), (new StringBuilder()).append(imageToUse.getImageId()).append(".bin").toString());
          if(imageFile.exists())
              imageFile.delete();
 	}
 	
-
-	public Image createImage(int objectType, long objectId, String name, String contentType, InputStream inputStream) {
+	public Image createImage(int objectType, long objectId, String name, String contentType, File file) {
+		Date now = new Date();
 		ImageImpl image = new ImageImpl();
+		image.setCreationDate(now);
+		image.setModifiedDate(now);
+		image.setObjectType(objectType);
+		image.setObjectId(objectId);
+		image.setContentType(contentType);
+		image.setName(name);
+		image.setImageId(-1L);
+		
+		image.setSize( (int) FileUtils.sizeOf(file));
+		try {
+			image.setInputStream(FileUtils.openInputStream(file));
+		} catch (IOException e) {
+			log.debug(e);
+		}		
+		return image;
+	}
+	
+	public Image createImage(int objectType, long objectId, String name, String contentType, InputStream inputStream) {
+		Date now = new Date();
+		ImageImpl image = new ImageImpl();
+		image.setCreationDate(now);
+		image.setModifiedDate(now);
 		image.setObjectType(objectType);
 		image.setObjectId(objectId);
 		image.setContentType(contentType);
 		image.setName(name);
 		image.setImageId(-1L);
 		image.setInputStream(inputStream);		
+		
+		
+		try {
+			image.setSize( StreamUtils.getBytes(inputStream).length );
+		} catch (IOException e) {
+			log.debug(e);
+		}		
 		return image;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void saveOrUpdate(Image image) {
 		try {
 			if( image.getImageId() < 0 ){
-				imageDao.create(image);
+				imageDao.createImage(image);
 				imageDao.saveImageInputStream(image, image.getInputStream());
 			}else{
-				imageDao.update(image);
+				Date now = new Date();
+				((ImageImpl)image).setModifiedDate(now);
+				imageDao.updateImage(image);
 				imageDao.saveImageInputStream(image, image.getInputStream());
 			}					
 			Image imageToUse = getImage(image.getImageId());			
@@ -227,13 +266,16 @@ public class DefaultImageManager implements ImageManager, EventSource {
 		}
 	}
 	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public Image saveImage(Image image){
 		try {
 			if( image.getImageId() < 0 ){
-				imageDao.create(image);
-				imageDao.saveImageInputStream(image, image.getInputStream());
+				Image newImage = imageDao.createImage(image);
+				imageDao.saveImageInputStream(newImage, image.getInputStream());
 			}else{
-				imageDao.update(image);
+				Date now = new Date();
+				((ImageImpl)image).setModifiedDate(now);
+				imageDao.updateImage(image);
 				imageDao.saveImageInputStream(image, image.getInputStream());
 			}					
 			Image imageToUse = getImage(image.getImageId());			
@@ -292,11 +334,17 @@ public class DefaultImageManager implements ImageManager, EventSource {
         return imageDir;
 	}
 	
+
+	public InputStream getImageInputStream(Image image) {
+		return imageDao.getImageInputStream(image);
+	}
+	
 	public void destroy(){
 	
 	}
 		
 	public void  initialize() {		
+		log.debug( "initializing image manager" );
 		
 		ImageConfig imageConfigToUse = new ImageConfig();
 		imageConfigToUse.setEnabled( ApplicationHelper.getApplicationBooleanProperty("image.enabled", true) );
@@ -311,6 +359,8 @@ public class DefaultImageManager implements ImageManager, EventSource {
 		imageConfigToUse.setDisallowedTypes( stringToList( ApplicationHelper.getApplicationProperty("image.disallowedTypes", "")));
 		this.imageConfig = imageConfigToUse;
 		getImageDir();		
+		
+		log.debug( imageConfig );
 	}	
 	
 	private static String listToString(List<String> list)
@@ -331,4 +381,5 @@ public class DefaultImageManager implements ImageManager, EventSource {
         }
         return list;
     }
+
 }
