@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Donghyuck, Son
+ * Copyright 2012, 2013 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,23 +15,37 @@
  */
 package architecture.ee.exception;
 
-import architecture.common.exception.CodeableRuntimeException;
+public class NotFoundException extends ApplicationException {
 
-public class SystemException extends CodeableRuntimeException {
-
-	public SystemException() {
+	public NotFoundException() {
 		super();
 	}
 
-	public SystemException(String msg, Throwable cause) {
+	public NotFoundException(int errorCode, String msg, Throwable cause) {
+		super(errorCode, msg, cause);
+	}
+
+	public NotFoundException(int errorCode, String msg) {
+		super(errorCode, msg);
+	}
+
+	public NotFoundException(int errorCode, Throwable cause) {
+		super(errorCode, cause);
+	}
+
+	public NotFoundException(int errorCode) {
+		super(errorCode);
+	}
+
+	public NotFoundException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public SystemException(String msg) {
+	public NotFoundException(String msg) {
 		super(msg);
 	}
 
-	public SystemException(Throwable cause) {
+	public NotFoundException(Throwable cause) {
 		super(cause);
 	}
 

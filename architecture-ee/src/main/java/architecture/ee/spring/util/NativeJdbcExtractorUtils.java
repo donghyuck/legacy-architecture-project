@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Donghyuck, Son
+ * Copyright 2012, 2013 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.exception;
+package architecture.ee.spring.util;
 
-import architecture.common.exception.CodeableRuntimeException;
+import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 
-public class SystemException extends CodeableRuntimeException {
+import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.spring.jdbc.support.nativejdbc.AutomaticJdbcExtractor;
+import architecture.ee.util.ApplicationHelper;
 
-	public SystemException() {
-		super();
+public class NativeJdbcExtractorUtils {	
+	public static NativeJdbcExtractor getNativeJdbcExtractor(){		
+		return Bootstrap.getBootstrapComponent(AutomaticJdbcExtractor.class);		
 	}
-
-	public SystemException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
-
-	public SystemException(String msg) {
-		super(msg);
-	}
-
-	public SystemException(Throwable cause) {
-		super(cause);
-	}
-
 }
