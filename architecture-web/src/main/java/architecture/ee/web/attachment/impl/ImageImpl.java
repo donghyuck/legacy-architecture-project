@@ -76,7 +76,7 @@ public class ImageImpl extends BaseModelObject implements Image {
 	}
 
 	public InputStream getInputStream() throws IOException {
-		return null;
+		return inputStream;
 	}
 
 	public int getObjectType() {

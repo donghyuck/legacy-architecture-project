@@ -16,7 +16,9 @@ public class JsonTest {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			Map<String, List<Map<String, String>>> map = mapper.readValue(json, Map.class);
-			System.out.println( map.get("items") );
+			List lit = (List) map.get("items") ;
+			
+			//System.out.println( map.get("items") );
 			
 		} catch (Exception e) {
 			e.printStackTrace();

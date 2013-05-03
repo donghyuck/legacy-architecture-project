@@ -25,10 +25,8 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
+import architecture.common.jdbc.schema.DatabaseType;
 import architecture.common.util.io.SharedByteArrayOutputStream;
-import architecture.ee.jdbc.util.JdbcHelper;
-import architecture.ee.jdbc.util.JdbcHelper.DatabaseType;
-import architecture.ee.jdbc.util.JdbcHelperFactory;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.dao.ImageDao;
@@ -76,9 +74,15 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 		}		
 	};
 
-	public void create(Image image) {		
-		if( image.getImageId() <1L){
-			long imageId = getNextId(sequencerName);
+	public Image createImage(Image image) {
+		
+		Image toUse = image;		
+		if( toUse.getImageId() <1L){
+			long imageId = getNextId(sequencerName);		
+			if( image instanceof ImageImpl){
+				ImageImpl impl = (ImageImpl)toUse;
+				impl.setImageId(imageId);
+			}			
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_IMAGE").getSql(), 	
 					new SqlParameterValue (Types.NUMERIC, imageId), 
 					new SqlParameterValue (Types.INTEGER, image.getObjectType() ), 
@@ -88,10 +92,11 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 					new SqlParameterValue (Types.VARCHAR, image.getContentType()), 
 					new SqlParameterValue(Types.DATE, image.getCreationDate()),
 					new SqlParameterValue(Types.DATE, image.getModifiedDate()));	
-		}
+		}		
+		return  image;
 	}
 
-	public void update(Image image) {
+	public Image updateImage(Image image) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_IMAGE").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, image.getImageId()), 
 				new SqlParameterValue (Types.INTEGER, image.getObjectType() ), 
@@ -102,9 +107,10 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 				new SqlParameterValue(Types.DATE, image.getCreationDate()),
 				new SqlParameterValue(Types.DATE, image.getModifiedDate()),
 				new SqlParameterValue (Types.NUMERIC, image.getImageId()) );	
+		return image;
 	}
 			
-	public void delete(Image image) {
+	public void deleteImage(Image image) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_IMAGE_BY_ID").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, image.getImageId()));
 		
@@ -117,21 +123,45 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 	}
 	
 	public void saveImageInputStream(Image image, InputStream inputStream) {
-		JdbcHelper jdbcHelper = JdbcHelperFactory.getJdbcHelper(getDataSource());
-		if( jdbcHelper.getDatabaseType() == DatabaseType.oracle ){			
+		
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_IMAGE_DATA_BY_ID").getSql(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));
+		
+		if( getExtendedJdbcTemplate().getDatabaseType() == DatabaseType.oracle ){						
+			
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_EMPTY_IMAGE_DATA").getSql(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));
-			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_IMAGE_DATA").getSql(), 
-					new SqlLobValue( inputStream , image.getSize(), getLobHandler()), 
-					new SqlParameterValue (Types.NUMERIC, image.getImageId()));	
+			
+			
+			getExtendedJdbcTemplate().update(
+					getBoundSql("ARCHITECTURE_WEB.UPDATE_IMAGE_DATA").getSql(), 
+					new Object[]{
+						new SqlLobValue( inputStream , image.getSize(), getLobHandler()),
+						image.getImageId()
+					}, 
+					new int[]{
+						Types.BLOB,
+						Types.NUMERIC
+					});
+			
+			
+			/**
+			.update(getBoundSql("ARCHITECTURE_WEB.UPDATE_IMAGE_DATA").getSql(), 
+					new SqlParameterValue (Types.BLOB,  new SqlLobValue( inputStream , image.getSize(), getLobHandler())), 
+					new SqlParameterValue (Types.NUMERIC, image.getImageId())
+			);	
+			**/
+
 		}else{			
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_IMAGE_DATA").getSql(), 
-					new SqlParameterValue (Types.NUMERIC, image.getImageId()), 
-					new SqlLobValue( inputStream , image.getSize(), getLobHandler()) );
+					new SqlParameterValue ( Types.NUMERIC, image.getImageId()), 
+					new SqlParameterValue ( Types.BLOB,  new SqlLobValue( inputStream , image.getSize(), getLobHandler() ) ) 
+			);
 		}		
 	}
 
 	public Image getImageById(long imageId) {		
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_BY_ID").getSql(), imageMapper, new SqlParameterValue (Types.NUMERIC, imageId ));			
 	}
+	
+	
 	
 }

@@ -29,7 +29,7 @@
 			CONTENT_TYPE = ?,
 			CREATION_DATE = ?,
 			MODIFIED_DATE = ?
-		FROM V2_IMAGE WHERE IMAGE_ID = ?
+		WHERE IMAGE_ID = ?
     ]]></sql-query>
             
 	<sql-query name="SELECT_IMAGE_BY_ID" description="ID로 IMAGE 조회"><![CDATA[    
@@ -62,7 +62,7 @@
     ]]></sql-query>
             
 	<sql-query name="SELECT_IMAGE_DATA_BY_ID" description="IMAGE 데이터 조회"><![CDATA[    
- 		SELECT IMAGE_DATA V2_IMAGE_DATA FROM IMAGE_ID = ?
+ 		SELECT IMAGE_DATA FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
     ]]></sql-query>
 
 	<sql-query name="DELETE_IMAGE_DATA_BY_ID" description="IMAGE 데이터 삭제"><![CDATA[    
