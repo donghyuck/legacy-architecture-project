@@ -16,14 +16,10 @@
 package architecture.ee.web.struts2.action;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 
 import architecture.ee.web.attachment.ImageManager;
@@ -33,8 +29,6 @@ import com.opensymphony.xwork2.Preparable;
 
 public class UploadImageAction extends FrameworkActionSupport  implements Preparable {
 
-//	private Log log = LogFactory.getLog(getClass());
-		
 	private File uploadImage;
 
 	private String uploadImageContentType;
