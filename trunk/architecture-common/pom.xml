@@ -204,6 +204,11 @@
 			<artifactId>ehcache-core</artifactId>
 			<version>2.5.7</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

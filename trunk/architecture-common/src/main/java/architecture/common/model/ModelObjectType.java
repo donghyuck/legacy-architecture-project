@@ -33,6 +33,7 @@ public enum ModelObjectType {
 	ANONYMOUS (13, "ANONYMOUS"),
 	SYSTEM (14, "SYSTEM"),
 	I18N_LOCALE (15, "I18N_LOCALE"),
+	IMAGE ( 16, "IMAGE"),
 	ATTACHMENT ( 17, "ATTACHMENT")
 	;
 	
