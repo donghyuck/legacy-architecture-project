@@ -354,7 +354,32 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 	}
 
 	public LobHandler getLobHandler() {
+		if(this.lobHandler == null && this.getDataSource() != null){
+			logger.debug("Initializing ExtendedJdbcTemplate LobHandler");
+			if ( getDatabaseType() == DatabaseType.oracle) {
+				OracleLobHandler oracleLobHandler = new OracleLobHandler();
+				oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
+				this.lobHandler = oracleLobHandler;
+			} else {
+				this.lobHandler = new DefaultLobHandler();
+			}
+		}	
 		return lobHandler;
+	}
+	
+	
+	public void initialize(){	
+		logger.debug("Initializing ExtendedJdbcTemplate");
+		logger.debug( "databaseType:" + databaseType );		
+		if(this.lobHandler == null && this.getDataSource() != null){
+			if ( getDatabaseType() == DatabaseType.oracle) {
+				OracleLobHandler oracleLobHandler = new OracleLobHandler();
+				oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
+				this.lobHandler = oracleLobHandler;
+			} else {
+				this.lobHandler = new DefaultLobHandler();
+			}
+		}				
 	}
 
 	public DatabaseType getDatabaseType() {
@@ -377,20 +402,9 @@ public class ExtendedJdbcTemplate extends JdbcTemplate {
 		this.databaseType = databaseType;
 	}
 	
-	public void initialize(){				 
-		if(this.databaseType == null && this.getDataSource() != null){
-			this.databaseType = JdbcUtils.getDatabaseType(getDataSource());			
-			if (databaseType == DatabaseType.oracle) {
-				OracleLobHandler oracleLobHandler = new OracleLobHandler();
-				oracleLobHandler.setNativeJdbcExtractor(getNativeJdbcExtractor());
-				this.lobHandler = oracleLobHandler;
-			} else {
-				lobHandler = new DefaultLobHandler();
-			}
-		}				
-	}
 	
-		
+
+	
 	// *********************************************
 	// Public Methods for Scrollable
 	// ********************************************

@@ -13,14 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.v2;
+package architecture.common.util.io;
 
-public interface ModelObjectType {
+import java.io.InputStream;
+import java.io.OutputStream;
 
-	public abstract int getId();
-	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+public abstract class SharedOutputStream extends OutputStream
+{
+
+    public SharedOutputStream()
+    {
+    }
+
+    public abstract InputStream getInputStream();
+
+    public abstract int getSize();
 }
+
