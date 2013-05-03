@@ -15,6 +15,16 @@
 			<result name="input" >/signup.jsp</result>			
 		</action>
 		
+		<action name="view-image" class="architecture.user.web.struts2.action.ViewUserImageAction">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <!-- <param name="contentDisposition">attachment;filename="${targetImageFileName}"</param>-->
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>
+		
 		<action name="signup-register"  method="register"  class="architecture.user.web.struts2.action.SignUpAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -66,7 +76,17 @@
 				</param>
 			</result>
 		</action>
-		
+
+		<action name="save-user-image" class="architecture.ee.web.struts2.action.UploadImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserImage.*
+				</param>
+			</result>
+		</action>
+						
 	</package>
 	
 	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >
@@ -166,7 +186,27 @@
 				</param>
 			</result>		
 		</action>		
-
+		
+		<action name="save-user-image" class="architecture.user.web.struts2.action.admin.ajax.UserImageUploadAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUserImage
+				</param>
+			</result>
+		</action>
+		
+		<action name="view-user-image" class="architecture.ee.web.struts2.action.ViewImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				imageFileName
+				</param>
+			</result>
+		</action>
+		
 		<action name="find-user" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
