@@ -34,7 +34,6 @@ import architecture.user.Group;
 import architecture.user.GroupManager;
 import architecture.user.Role;
 import architecture.user.RoleManager;
-import architecture.user.RoleNotFoundException;
 
 public class UserManagementAction  extends FrameworkActionSupport  {
 
@@ -332,14 +331,11 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 	
 	public String updateUserRoles() throws Exception {	
 		
-		
-		
 		List<Role> oleRoles = getUserRoles();
 		List<Role> groupRoles = getUserGroupRoles();
 		
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);			
-		List<Role> newRoles = new ArrayList<Role>(list.size());			
- 		
+		List<Role> newRoles = new ArrayList<Role>(list.size()); 		
 		for( Map map : list ){			
 			long roleId = Long.parseLong(map.get("roleId").toString() );
 			Role role = roleManager.getRole(roleId);
@@ -350,27 +346,22 @@ public class UserManagementAction  extends FrameworkActionSupport  {
 		User user = getTargetUser();		
 		if(oleRoles.size() > 0 ){
 			roleManager.removeUserRole(user, oleRoles);
-		}		
+		}
 		
 		if(newRoles.size() > 0 ){
 			roleManager.addUserRole(user, newRoles);
 		}		
+		
 		log.debug( user.getName() + " : " + oleRoles + ">" + newRoles );
 		
 		return success();			
 	}
-	
-	
-	
+	 
 	protected void updateTargetUserProperties(User user, Map<String, String> properties) throws UserNotFoundException, UserAlreadyExistsException {
-		if (properties.size() > 0 && user instanceof UserTemplate) {
+		if (user instanceof UserTemplate) {
 			((UserTemplate) user).setProperties(properties);
 			this.targetUser = user;			
 			userManager.updateUser(user);
 		}
-	}
-	
-	
-	
-	
+	} 
 }
