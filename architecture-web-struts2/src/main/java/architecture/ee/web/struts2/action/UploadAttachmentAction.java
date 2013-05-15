@@ -16,62 +16,38 @@
 package architecture.ee.web.struts2.action;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 
-import architecture.ee.web.attachment.ImageManager;
+import architecture.ee.web.attachment.AttachmentManager;
+import architecture.ee.web.attachment.FileInfo;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class UploadImageAction extends FrameworkActionSupport  implements Preparable {
+public class UploadAttachmentAction extends FrameworkActionSupport  implements Preparable {
 
-	private File uploadImage;
-
-	private String uploadImageContentType;
-
-	private String uploadImageFileName;
-
-	private ImageManager imageManager ;
+	private List<FileInfo> attachments = new ArrayList<FileInfo>(); 
 	
+	protected AttachmentManager attachmentManager;
 	
-	public ImageManager getImageManager() {
-		return imageManager;
+	public AttachmentManager getAttachmentManager() {
+		return attachmentManager;
 	}
 
-	public void setImageManager(ImageManager imageManager) {
-		this.imageManager = imageManager;
+	public void setAttachmentManager(AttachmentManager attachmentManager) {
+		this.attachmentManager = attachmentManager;
 	}
-
-	public File getUploadImage() {
-		return uploadImage;
-	}
-
-	public void setUploadImage(File uploadImage) {
-		this.uploadImage = uploadImage;
-	}
-
-	public String getUploadImageContentType() {
-		return uploadImageContentType;
-	}
-
-	public void setUploadImageContentType(String uploadImageContentType) {
-		this.uploadImageContentType = uploadImageContentType;
-	}
-
-	public String getUploadImageFileName() {
-		return uploadImageFileName;
-	}
-
-	public void setUploadImageFileName(String uploadImageFileName) {
-		this.uploadImageFileName = uploadImageFileName;
-	}
-
 	
-	
+	protected List<FileInfo> getAttachmentFileInfos() {
+		return attachments;
+	}
+
 	protected boolean isMultiPart() {
 		HttpServletRequest request = getRequest();
 		if ( request instanceof MultiPartRequestWrapper ) 
@@ -98,10 +74,12 @@ public class UploadImageAction extends FrameworkActionSupport  implements Prepar
 					if (isNonEmpty(fileNames)) {						
 						File[] files = multiWrapper.getFiles(inputName);						
 						if (files != null && files.length > 0) {
-							for (int index = 0; index < files.length; index++) {										
-								uploadImage = files[index];
-								uploadImageFileName =  fileNames[index];
-								uploadImageContentType = contentTypes[index];									
+							for (int index = 0; index < files.length; index++) {												
+								File uploadFile = files[index];
+								String uploadFilename =  fileNames[index];
+								String uploadContentType = contentTypes[index];											
+								FileInfo f = new FileInfo( uploadFilename,  uploadContentType, uploadFile );
+								attachments.add(f);
 							}
 						}
 					}
