@@ -49,7 +49,7 @@
 				<interceptor-ref name="validation" />				
 			</interceptor-stack>		
 		</interceptors>
-		
+				
 		<default-interceptor-ref name="defaultStack" />
 		
 		<global-results>
