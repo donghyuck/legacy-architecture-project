@@ -36,22 +36,21 @@ public interface AttachmentDao {
         {
             return downloadCompleted;
         }
-    }
-    
+    }    
 	
     public abstract void insertAttachmentDownloads(List<AttachmentDownloadItem> list);
 
-    public abstract List getAllAttachmentIds();
+    public abstract List<Long> getAllAttachmentIds();
 
     public abstract void deleteAttachmentData();
 
-    public abstract List getTempAttachmentIdsWithCreationGreaterThan(Date date);
+    public abstract void deleteAttachmentData(Attachment attachment);
+    
+    public abstract Attachment createAttachment(Attachment attachment);
 
-    public abstract void create(Attachment attachment);
+    public abstract void updateAttachment(Attachment attachment);
 
-    public abstract void update(Attachment attachment);
-
-    public abstract void delete(Attachment attachment);
+    public abstract void deleteAttachment(Attachment attachment);
 
     public abstract InputStream getAttachmentData(Attachment attachment);
 
@@ -59,8 +58,6 @@ public interface AttachmentDao {
 
     public abstract Attachment getByAttachmentId(long attachmentId);
 
-    public abstract List getByObjectTypeAndObjectId(int objectType, long objectId);
-
-    public abstract List retrieveOldTemporaryAttachments();
+    public abstract List<Attachment> getByObjectTypeAndObjectId(int objectType, long objectId);
     
 }

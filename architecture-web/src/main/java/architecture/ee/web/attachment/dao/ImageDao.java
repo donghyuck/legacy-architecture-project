@@ -32,5 +32,6 @@ public interface ImageDao {
 	public abstract void saveImageInputStream(Image image , InputStream inputStream);
 
 	public abstract Image getImageById(long imageId);
+
 	
 }
