@@ -250,6 +250,15 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 		}		
 	}
 	
+	public String addMember() throws Exception {	
+		Group group = getTargetGroup();
+		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);	
+		long userId = Long.parseLong(map.get("userId").toString() );
+		User user = userManager.getUser(userId);		
+		groupManager.addMembership(group, user);		
+		return success();	
+	}
+	
 	public String addMembers() throws Exception {	
 		Group group = getTargetGroup();
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);	
@@ -261,6 +270,15 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 			users.add(user);
 		}
 		groupManager.addMembership(group, users);		
+		return success();	
+	}
+	
+	public String removeMember() throws Exception {	
+		Group group = getTargetGroup();
+		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);	
+		long userId = Long.parseLong(map.get("userId").toString() );
+		User user = userManager.getUser(userId);		
+		groupManager.removeMembership(group, user);
 		return success();	
 	}
 	
