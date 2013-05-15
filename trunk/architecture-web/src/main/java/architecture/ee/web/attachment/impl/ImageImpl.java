@@ -99,4 +99,16 @@ public class ImageImpl extends BaseModelObject implements Image {
 		this.inputStream = inputStream;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Image{");
+	    sb.append("imageId=").append(imageId);
+	    sb.append(",name=").append(getName());
+	    sb.append(",contentType=").append(contentType);
+	    sb.append("size=").append(size);
+		sb.append("}");
+		return sb.toString();
+	}
+
 }

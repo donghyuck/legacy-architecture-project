@@ -27,6 +27,7 @@ import org.springframework.jdbc.core.support.SqlLobValue;
 
 import architecture.common.jdbc.schema.DatabaseType;
 import architecture.common.util.io.SharedByteArrayOutputStream;
+import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.dao.ImageDao;
@@ -51,29 +52,6 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 		}		
 	};
 	
-	private final RowMapper<InputStream> inputStreamMapper = new RowMapper<InputStream>(){		
-		public InputStream mapRow(ResultSet rs, int rowNum) throws SQLException {
-			InputStream in = null;
-			InputStream inputstream;
-			try
-            {
-                in = rs.getBinaryStream(1);
-                SharedByteArrayOutputStream out = new SharedByteArrayOutputStream();
-                byte buf[] = new byte[1024];
-                int len;
-                while((len = in.read(buf)) >= 0) 
-                    out.write(buf, 0, len);
-                out.flush();
-                inputstream = out.getInputStream();
-            }
-            catch(IOException ioe)
-            {
-                throw new SQLException(ioe.getMessage());
-            }
-			return inputstream;
-		}		
-	};
-
 	public Image createImage(Image image) {
 		
 		Image toUse = image;		
@@ -119,7 +97,7 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 	}
 
 	public InputStream getImageInputStream(Image image) {
-		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_DATA_BY_ID").getSql(), inputStreamMapper, new SqlParameterValue (Types.NUMERIC, image.getImageId()));		
+		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_DATA_BY_ID").getSql(), SqlQueryHelper.getInputStreamRowMapper(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));		
 	}
 	
 	public void saveImageInputStream(Image image, InputStream inputStream) {
@@ -141,15 +119,6 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 						Types.BLOB,
 						Types.NUMERIC
 					});
-			
-			
-			/**
-			.update(getBoundSql("ARCHITECTURE_WEB.UPDATE_IMAGE_DATA").getSql(), 
-					new SqlParameterValue (Types.BLOB,  new SqlLobValue( inputStream , image.getSize(), getLobHandler())), 
-					new SqlParameterValue (Types.NUMERIC, image.getImageId())
-			);	
-			**/
-
 		}else{			
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_IMAGE_DATA").getSql(), 
 					new SqlParameterValue ( Types.NUMERIC, image.getImageId()), 

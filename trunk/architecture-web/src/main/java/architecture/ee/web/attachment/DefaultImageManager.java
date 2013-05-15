@@ -29,7 +29,7 @@ import net.sf.ehcache.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.lf5.util.StreamUtils;
+import org.apache.poi.util.IOUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,25 +41,13 @@ import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.dao.ImageDao;
 import architecture.ee.web.attachment.impl.ImageImpl;
 
-public class DefaultImageManager implements ImageManager, EventSource {
+public class DefaultImageManager extends AbstractAttachmentManager implements ImageManager {
 
-	private Log log = LogFactory.getLog(getClass());
-	
-	private EventPublisher eventPublisher;
 	private ImageConfig imageConfig;
 	private ImageDao imageDao;
 	private Cache imageCache;
 	private File imageDir;	
 	
-	
-	public EventPublisher getEventPublisher() {
-		return eventPublisher;
-	}
-
-	public void setEventPublisher(EventPublisher eventPublisher) {
-		this.eventPublisher = eventPublisher;
-	}
-
 	public ImageConfig getImageConfig() {
 		return imageConfig;
 	}
@@ -237,10 +225,8 @@ public class DefaultImageManager implements ImageManager, EventSource {
 		image.setName(name);
 		image.setImageId(-1L);
 		image.setInputStream(inputStream);		
-		
-		
 		try {
-			image.setSize( StreamUtils.getBytes(inputStream).length );
+			image.setSize( IOUtils.toByteArray(inputStream).length );
 		} catch (IOException e) {
 			log.debug(e);
 		}		
@@ -287,20 +273,19 @@ public class DefaultImageManager implements ImageManager, EventSource {
 	}
 		
 	public Image getImage(long imageId) throws NotFoundException {
-		Image image = null  ;
-		if( imageCache.get(imageId) != null)
-			image =  (Image) imageCache.get( imageId ).getValue();
-		
-		if( image == null ){
+		Image imageToUse = null  ;
+		if( imageCache.get(imageId) == null){
 			try {
-				image = getImageById(imageId);
-				imageCache.put(new Element(imageId, image));
+				imageToUse = getImageById(imageId);
+				imageCache.put(new Element(imageId, imageToUse));
 			} catch (Exception e) {
 				 String msg = (new StringBuilder()).append("Unable to find image ").append(imageId).toString();
 	             throw new NotFoundException(msg, e);
 			}
-		}
-		return image;
+		}else{
+			imageToUse =  (Image) imageCache.get( imageId ).getValue();
+		}		
+		return imageToUse;
 	}
 
 	private Image getImageById(long imageId) throws NotFoundException {
@@ -344,8 +329,7 @@ public class DefaultImageManager implements ImageManager, EventSource {
 	}
 		
 	public void  initialize() {		
-		log.debug( "initializing image manager" );
-		
+		log.debug( "initializing image manager" );		
 		ImageConfig imageConfigToUse = new ImageConfig();
 		imageConfigToUse.setEnabled( ApplicationHelper.getApplicationBooleanProperty("image.enabled", true) );
 		imageConfigToUse.setAllowAllByDefault( ApplicationHelper.getApplicationBooleanProperty("image.allowAllByDefault", true) );
@@ -358,28 +342,8 @@ public class DefaultImageManager implements ImageManager, EventSource {
 		imageConfigToUse.setAllowedTypes( stringToList(ApplicationHelper.getApplicationProperty("image.allowedTypes", ""))  );
 		imageConfigToUse.setDisallowedTypes( stringToList( ApplicationHelper.getApplicationProperty("image.disallowedTypes", "")));
 		this.imageConfig = imageConfigToUse;
-		getImageDir();		
-		
+		getImageDir();				
 		log.debug( imageConfig );
 	}	
-	
-	private static String listToString(List<String> list)
-    {
-        StringBuilder sb = new StringBuilder();
-        for( String element :  list ){
-        	 sb.append(element).append(",");
-        }
-        return sb.toString();
-    }
-
-    private static List<String> stringToList(String string)
-    {
-        List<String> list = new ArrayList<String>();
-        if(string != null)
-        {
-            for(StringTokenizer tokens = new StringTokenizer(string, ","); tokens.hasMoreTokens(); list.add(tokens.nextToken()));
-        }
-        return list;
-    }
 
 }
