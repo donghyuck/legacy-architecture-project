@@ -63,6 +63,9 @@ public interface SqlQueryClient {
 	public Map<String, Object> uniqueResult(String statement);
 	
 	
+	public <T> T  uniqueResult(String statement, Class<T> elementType, Object... parameters);
+	
+	
 	/**
 	 * 배치 모드로 쿼리를 실행한다. int[] 형태로 결과가 리턴된다. 
 	 * 

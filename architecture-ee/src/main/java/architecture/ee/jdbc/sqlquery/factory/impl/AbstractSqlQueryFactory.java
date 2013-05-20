@@ -149,7 +149,9 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 				di.timestamp = file.lastModified();
 				deployments.put(di.uri, di);
 			}
-		} catch (FileNotFoundException e) {}		
+		} catch (FileNotFoundException e) {
+			
+		}		
 		return "success";
 	}
 
@@ -192,13 +194,16 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		boolean flag1 = StringUtils.isEmpty(suffix) ? true : file.getName().endsWith(suffix);
 		boolean flag2 = StringUtils.isEmpty(prefix) ? true : file.getName().startsWith(prefix);
 		boolean valid = readable && flag1 && flag2;
+		
 		if (!valid) {
 			// if (log.isDebugEnabled())
 			// log.info(MessageFormatter.format("011023",
 			// file.getAbsolutePath()));
 		}
 
-		// log.debug(file.getPath() + "validate:" + valid);
+		//if( log.isDebugEnabled() )
+		//	log.debug(file.getPath() + "validate:" + valid);
+		
 		return valid;
 	}
 
