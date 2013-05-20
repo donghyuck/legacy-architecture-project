@@ -317,4 +317,8 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 		return getSqlQuery().setStartIndex(startIndex).setMaxResults(maxResults).list(statement);
 	}
 
+	public <T> T uniqueResult(String statement, Class<T> elementType, Object... parameters) {		
+		return getSqlQuery().uniqueResult(statement, parameters, elementType);
+	}
+
 }

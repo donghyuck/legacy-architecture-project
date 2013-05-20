@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.List;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,6 +49,7 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 
 
 	private URLDirectoryScanner scanner;
+	
 	private List<String> resourceLocations;
 	
 	private boolean fastDeploy = false;
@@ -172,16 +174,18 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 				FileObject fo = VFSUtils.resolveFile(path);
 				if(fo.exists()){							
 					URL url = fo.getURL();
-					url.openConnection();					
+					url.openConnection();
 					if(fastDeploy){
 						if(log.isDebugEnabled()){
 							log.debug("Fast deploy : " + url );							
-							SqlQueryFactory builder = null;							 
+							SqlQueryFactory builder = null;
 							for(DirectoryListener listener : scanner.getDirectoryListeners()){
 								if(listener instanceof SqlQueryFactory ){									
-									builder = (SqlQueryFactory)listener;			
+									builder = (SqlQueryFactory)listener;	
+									break;
 								}
-							}							
+							}
+							
 							File file = new File(url.getFile());
 							fastDeploy(file, builder);							
 						}
@@ -193,16 +197,29 @@ public class DirectoryScannerImpl implements InitializingBean, DisposableBean, D
 		} catch (Exception e) { }
 	}		
 	
-	public void fastDeploy(File file, SqlQueryFactory builder){
-		if(file.isFile()){
-			if(builder.validateFile(file)){
-	        	builder.fileCreated(file);
-	        }
-		}else{
-			for( File c : file.listFiles() ){
-			    fastDeploy(c, builder);				
-			}		
-		}	
+	public void fastDeploy(File file, SqlQueryFactory builder){		
+		if( file.isDirectory()){		
+			for ( File f : FileUtils.listFiles(file, new String[]{"xml"} , true) ){
+				
+				boolean valid = builder.validateFile(f);
+				StringBuilder sb = new StringBuilder();
+				sb.append("deploy : ");
+				sb.append( f.getAbsolutePath() ) ;
+				sb.append( " , valid = " );
+				sb.append( valid );
+				log.debug(
+					sb.toString()
+				);
+				
+				if(valid){
+					try {					
+						builder.fileCreated(file);					
+					} catch (Throwable e) {
+						log.error(e);
+					}
+				}	
+			}
+		}
 	}	
 	
 }

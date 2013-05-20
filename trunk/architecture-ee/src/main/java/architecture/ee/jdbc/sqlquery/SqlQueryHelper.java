@@ -19,6 +19,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,17 +28,47 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.support.SqlLobValue;
 import org.springframework.jdbc.support.lob.DefaultLobHandler;
 import org.springframework.jdbc.support.lob.LobHandler;
 
+import architecture.common.util.io.SharedByteArrayOutputStream;
 import architecture.ee.jdbc.sqlquery.factory.impl.SqlQueryImpl;
 
 
 public class SqlQueryHelper {
 		
+	static class InputStreamRowMapper implements RowMapper<InputStream> {
+		
+		public InputStream mapRow(ResultSet rs, int rowNum) throws SQLException {
+			InputStream in = null;
+			InputStream inputstream;
+			try
+            {
+                in = rs.getBinaryStream(1);
+                SharedByteArrayOutputStream out = new SharedByteArrayOutputStream();
+                byte buf[] = new byte[1024];
+                int len;
+                while((len = in.read(buf)) >= 0) 
+                    out.write(buf, 0, len);
+                out.flush();
+                inputstream = out.getInputStream();
+            }
+            catch(IOException ioe)
+            {
+                throw new SQLException(ioe.getMessage());
+            }
+			return inputstream;
+		}		
+	}
+	
+	public static RowMapper<InputStream> getInputStreamRowMapper(){
+		return new InputStreamRowMapper();
+	}
+	
 	public SqlQueryHelper() {
 	
 	}
