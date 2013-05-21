@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Donghyuck, Son
+ * Copyright 2012, 2013 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,15 +15,8 @@
  */
 package architecture.common.lifecycle;
 
-/**
- * 
- * 
- * 
- * @author <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
- *
- */
-public interface ApplicationHelper extends Container {
+public interface SystemInformationService extends Component {
 
-	public abstract boolean isReady();
+		
 	
 }
