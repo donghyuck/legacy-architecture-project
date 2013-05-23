@@ -233,7 +233,7 @@
 			  <param name="contentType">${targetAttachmentContentType}</param>
 			  <param name="contentLength">${targetAttachmentContentLength}</param>
 			  <param name="inputName">targetAttachmentInputStream</param>
-			  <param name="contentDisposition">attachment;filename="${targetAttachmentFileName}"</param>
+			  <param name="contentDisposition">attachment;filename="${encodedTargetAttachmentFileName}"</param>
 			  <param name="bufferSize">1024</param>
 			</result>			
 		</action>
