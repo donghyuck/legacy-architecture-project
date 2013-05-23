@@ -29,6 +29,12 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.struts2.action.UploadImageAction;
 
+/**
+ * 사용자 이미지를 업로드하기 위한 액션...
+ * 
+ * @author donghyuck
+ *
+ */
 public class UserImageUploadAction extends UploadImageAction  {
 
 	private Long userId = -1L;
