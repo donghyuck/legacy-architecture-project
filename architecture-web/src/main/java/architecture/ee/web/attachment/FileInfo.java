@@ -19,9 +19,18 @@ import java.io.File;
 
 public class FileInfo {
 
+	private String fileParameterName;	
 	private String name;
 	private String contentType;
 	private File file;
+
+	public String getFileParameterName() {
+		return fileParameterName;
+	}
+
+	public void setFileParameterName(String fileParameterName) {
+		this.fileParameterName = fileParameterName;
+	}
 
 	public String getName() {
 		return name;
