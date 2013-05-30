@@ -20,6 +20,8 @@ import architecture.ee.web.struts2.action.DownloadImageActioin;
 public class ViewUserImageAction extends DownloadImageActioin {
     
 	public String execute() throws Exception {
+		
+		
         return SUCCESS;
     }
 	
