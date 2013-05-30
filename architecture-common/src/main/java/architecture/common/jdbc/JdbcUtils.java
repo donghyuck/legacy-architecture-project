@@ -21,19 +21,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.jdbc.core.SqlTypeValue;
 import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.MetaDataAccessException;
 
 import architecture.common.jdbc.schema.Database;
 import architecture.common.jdbc.schema.DatabaseFactory;
 import architecture.common.jdbc.schema.DatabaseType;
+import architecture.common.lifecycle.DatabaseInfo;
 
 public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUtils {
 	
@@ -167,9 +166,7 @@ public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUti
 				JdbcUtils.closeConnection(conn);
 		}
 	}
-	
-	
-	
+		
 	public static PreparedStatement createScrollablePreparedStatement(DatabaseType type, Connection con, String sql) throws SQLException {
 		if (type.scrollResultsSupported)
 			return con.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);

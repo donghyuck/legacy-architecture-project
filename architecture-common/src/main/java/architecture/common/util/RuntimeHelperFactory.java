@@ -13,20 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.lifecycle;
+package architecture.common.util;
 
-import java.util.List;
 
-import architecture.common.license.License;
+public class RuntimeHelperFactory {
 
-public interface SystemInformationService extends Component {
-
-		public abstract SystemInfo getSystemInfo();
-		
-		public abstract MemoryInfo getMemoryInfo();
-		
-		public abstract License getLicenseInfo();
-		
-		public abstract List<DatabaseInfo> getDatabaseInfos();
+	public static interface Implementation {
+		public abstract RuntimeHelper getRuntimeHelper();
+	}
 	
+	private static Implementation impl = null;
+
+	static {
+		impl = (Implementation) ImplFactory.loadImplFromKey(RuntimeHelperFactory.Implementation.class);
+	}
+
+	public static RuntimeHelper getRuntimeHelper() {
+		return impl.getRuntimeHelper();
+	}
 }
