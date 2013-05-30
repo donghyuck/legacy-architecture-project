@@ -31,10 +31,7 @@
 
 	<sql-query name="UPDATE_COMPANY" description="COMPANY  수정"><![CDATA[        
         UPDATE V2_COMPANY
-            SET NAME = ?, 
-            DISPLAY_NAME = ?
-            DESCRIPTION = ? , 
-            MODIFIED_DATE = ?
+            SET NAME = ?, DISPLAY_NAME = ?, DESCRIPTION = ? , MODIFIED_DATE = ?
         WHERE COMPANY_ID = ?
     ]]></sql-query>
 	
