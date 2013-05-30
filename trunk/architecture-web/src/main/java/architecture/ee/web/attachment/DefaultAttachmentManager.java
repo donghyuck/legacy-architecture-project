@@ -18,6 +18,7 @@ package architecture.ee.web.attachment;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -147,9 +149,16 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			attachmentToUse = attachmentDao.createAttachment(attachmentToUse);
 		}		
 		try {
+			
 			if( attachmentToUse.getInputStream() != null )
 			{
 				attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());
+				
+				Collection<File> files = FileUtils.listFiles(getAttachmentCacheDir(), FileFilterUtils.prefixFileFilter(attachment.getAttachmentId() + ""), null);
+				for(File file : files){
+					FileUtils.deleteQuietly(file);
+				}
+				
 			}
 			
 			return getAttachment(attachment.getAttachmentId());
@@ -158,8 +167,41 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 		}
 	}
 
+	
 	public InputStream getAttachmentInputStream(Attachment attachment) {
-		return attachmentDao.getAttachmentData(attachment);
+		try {
+			File file = getAttachmentFromCacheIfExist(attachment);
+			return FileUtils.openInputStream(file);
+		} catch (IOException e) {
+			throw new SystemException(e);
+		}
+	}
+	
+	protected File getAttachmentFromCacheIfExist(Attachment attachment) throws IOException{		
+		File dir = getAttachmentCacheDir();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append( attachment.getAttachmentId() ).append(".bin");		
+		
+		File file = new File(dir, sb.toString() );		
+		if( file.exists() ){
+			long size = FileUtils.sizeOf(file);
+			if( size != attachment.getSize() ){
+				// size different make cache new one....
+				InputStream inputStream = attachmentDao.getAttachmentData(attachment);
+				FileUtils.copyInputStreamToFile(inputStream, file);
+			}
+		}else{
+			// doesn't exist, make new one ..
+			InputStream inputStream = attachmentDao.getAttachmentData(attachment);
+			FileUtils.copyInputStreamToFile(inputStream, file);
+		}		
+		return file;
+	}	
+	
+	protected File getAttachmentCacheDir(){
+		File dir = new File(getAttachmentDir(), "cache" );	
+		return dir;
 	}
 	
 

@@ -15,10 +15,14 @@
  */
 package architecture.ee.web.attachment;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,6 +35,8 @@ public abstract class AbstractAttachmentManager implements EventSource {
 	
 	private EventPublisher eventPublisher;
 	
+	
+	
 	public EventPublisher getEventPublisher() {
 		return eventPublisher;
 	}
@@ -38,6 +44,7 @@ public abstract class AbstractAttachmentManager implements EventSource {
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}
+	
 	
 	protected static String listToString(List<String> list)
     {

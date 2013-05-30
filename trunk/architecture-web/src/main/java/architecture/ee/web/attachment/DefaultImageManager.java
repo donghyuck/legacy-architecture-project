@@ -15,26 +15,26 @@
  */
 package architecture.ee.web.attachment;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.StringTokenizer;
 
+import javax.imageio.ImageIO;
+
+import net.coobird.thumbnailator.Thumbnails;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.poi.util.IOUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import architecture.common.event.api.EventPublisher;
-import architecture.common.event.api.EventSource;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
@@ -47,6 +47,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	private ImageDao imageDao;
 	private Cache imageCache;
 	private File imageDir;	
+	
 	
 	public ImageConfig getImageConfig() {
 		return imageConfig;
@@ -189,7 +190,8 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	public void deleteImage(Image image){		
 		Image imageToUse = imageDao.getImageById(image.getImageId());
 		imageDao.deleteImage(imageToUse);
-		 File imageFile = new File(getImageDir(), (new StringBuilder()).append(imageToUse.getImageId()).append(".bin").toString());
+		File dir = new File(getImageDir(), "cache" );
+		 File imageFile = new File(dir, (new StringBuilder()).append(imageToUse.getImageId()).append(".bin").toString());
          if(imageFile.exists())
              imageFile.delete();
 	}
@@ -245,6 +247,12 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 				imageDao.updateImage(image);
 				imageDao.saveImageInputStream(image, image.getInputStream());
 			}					
+			
+			Collection<File> files = FileUtils.listFiles(getImageCacheDir(), FileFilterUtils.prefixFileFilter(image.getImageId() + ""), null);
+			for(File file : files){
+				FileUtils.deleteQuietly(file);
+			}
+			
 			Image imageToUse = getImage(image.getImageId());			
 			imageCache.remove(imageToUse.getImageId());
 		} catch (Exception e) {
@@ -254,6 +262,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public Image saveImage(Image image){
+		
 		try {
 			if( image.getImageId() < 0 ){
 				Image newImage = imageDao.createImage(image);
@@ -262,8 +271,14 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 				Date now = new Date();
 				((ImageImpl)image).setModifiedDate(now);
 				imageDao.updateImage(image);
-				imageDao.saveImageInputStream(image, image.getInputStream());
+				imageDao.saveImageInputStream(image, image.getInputStream());				
 			}					
+			
+			Collection<File> files = FileUtils.listFiles(getImageCacheDir(), FileFilterUtils.prefixFileFilter(image.getImageId() + ""), null);
+			for(File file : files){
+				FileUtils.deleteQuietly(file);
+			}
+			
 			Image imageToUse = getImage(image.getImageId());			
 			imageCache.remove(imageToUse.getImageId());
 			return imageToUse;
@@ -314,18 +329,105 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
                 boolean result = imageDir.mkdir();
                 if(!result)
                     log.error((new StringBuilder()).append("Unable to create image directory: '").append(imageDir).append("'").toString());
+                
+                File dir = new File(imageDir, "cache");
+                dir.mkdir();      
             }
         }
         return imageDir;
 	}
 	
 
-	public InputStream getImageInputStream(Image image) {
-		return imageDao.getImageInputStream(image);
+	public InputStream getImageInputStream(Image image) {		
+		try {
+			File file = getImageFromCacheIfExist(image);
+			return FileUtils.openInputStream(file);
+		} catch (IOException e) {
+			throw new SystemException(e);
+		}
 	}
 	
-	public void destroy(){
 	
+	public InputStream getImageThumbnailInputStream(Image image, int width, int height ) {		
+		try {
+			
+			File file = getThumbnailFromCacheIfExist(image, width, height);
+			return FileUtils.openInputStream(file);
+		} catch (IOException e) {
+			throw new SystemException(e);
+		}
+	}
+	
+	/**
+	 * 
+	 * @param image
+	 * @return
+	 * @throws IOException
+	 */
+	protected File getImageFromCacheIfExist(Image image) throws IOException{		
+		File dir = getImageCacheDir();
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append( image.getImageId() ).append(".bin");		
+		File file = new File(dir, sb.toString() );		
+		if( file.exists() ){
+			long size = FileUtils.sizeOf(file);
+			if( size != image.getSize() ){
+				// size different make cache new one....
+				InputStream inputStream = imageDao.getImageInputStream(image);
+				FileUtils.copyInputStreamToFile(inputStream, file);
+			}
+		}else{
+			// doesn't exist, make new one ..
+			InputStream inputStream = imageDao.getImageInputStream(image);
+			FileUtils.copyInputStreamToFile(inputStream, file);
+		}		
+		return file;
+	}	
+	
+	protected File getImageCacheDir(){
+		File dir = new File(getImageDir(), "cache" );	
+		return dir;
+	}
+	
+	protected String toThumbnailFilename(Image image,  int width, int height){
+		StringBuilder sb = new StringBuilder();
+		sb.append( image.getImageId() ).append("_").append(width).append("_").append(height).append(".bin");	
+		return sb.toString();
+	}
+	
+	
+	protected File getThumbnailFromCacheIfExist(Image image,  int width, int height ) throws IOException{		
+		
+		log.debug( "thumbnail generation " + width + "x" + height );
+		File dir = getImageCacheDir();
+		File file = new File(dir, toThumbnailFilename(image, width, height) );		
+		File originalFile = getImageFromCacheIfExist( image );	
+		
+		log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() );
+		log.debug( "target:" + file.getAbsoluteFile());
+		
+		if( file.exists() && file.length() > 0 ){
+			image.setThumbnailSize((int)file.length());
+			return file;
+		}
+		
+		BufferedImage originalImage = ImageIO.read(originalFile);		
+		if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
+			image.setThumbnailSize(0);
+			return originalFile ;
+		}
+		
+		BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
+		ImageIO.write(thumbnail, "png", file );
+		image.setThumbnailSize((int)file.length());
+		
+		return file;		
+	}
+	
+		
+	public void destroy(){
+		
 	}
 		
 	public void  initialize() {		
