@@ -16,7 +16,6 @@
 package architecture.ee.jdbc.util.impl;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -25,8 +24,6 @@ import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.jdbc.support.DatabaseMetaDataCallback;
-import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.jdbc.support.MetaDataAccessException;
 import org.springframework.jdbc.support.nativejdbc.NativeJdbcExtractor;
 import org.springframework.jdbc.support.nativejdbc.SimpleNativeJdbcExtractor;
@@ -159,29 +156,27 @@ public class JdbcHelperImpl implements JdbcHelper {
 	public boolean isTransactionsSupported() {
 		return transactionsSupported;
 	}
-
+	
 	public void setDatabaseMetaData(DataSource dataSource)
 			throws MetaDataAccessException {
-
 		
-		
-		JdbcUtils.extractDatabaseMetaData(dataSource,
-				
-				new DatabaseMetaDataCallback() {
-				
-			private  boolean transactionsSupported;
 			
+		//DatabaseType type = JdbcUtils.getDatabaseType(dataSource);
+		
+		
+		
+		/*
+		JdbcUtils.extractDatabaseMetaData(dataSource,				
+				new DatabaseMetaDataCallback() {				
+			
+			private  boolean transactionsSupported;			
 			private int transactionIsolation;
-
 			// True if the database requires large text fields to be streamed.
 			private boolean streamTextRequired;
-
 			// True if the database supports the Statement.setMaxRows() method.
 			private boolean streamBlobRequired;
-
 			// True if the database supports the Statement.setFetchSize() method.
 			private boolean fetchSizeSupported;
-
 			// True if the database supports correlated subqueries.
 			private boolean subqueriesSupported;
 
@@ -296,9 +291,7 @@ public class JdbcHelperImpl implements JdbcHelper {
 							databaseType = DatabaseType.hsqldb;
 						return this;
 					}
-				});
-		
-		
+				});*/
 	}
 
 	public PreparedStatement createScrollablePreparedStatement(Connection con, String sql) throws SQLException {

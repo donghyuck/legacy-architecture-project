@@ -39,14 +39,12 @@ public class DataSourceFactoryImpl implements DataSourceFactory.Implementation {
 			throw new RuntimeError(L10NUtils.format("003057", name));
 		}
 		
-		
-		
 		String jndiTag = "database."+ name + ".jndiDataSourceProvider";			
 		if( setupProperties.getChildrenNames(jndiTag).size() > 0 ){
 			String jndiName = setupProperties.get( jndiTag + ".jndiName"); 
 			if(StringUtils.isNotEmpty(jndiName)){
 				try{
-				    dataSource = jndiTemplate.lookup(jndiName, DataSource.class);
+				    dataSource = new DataSourceProxy(  jndiTemplate.lookup(jndiName, DataSource.class) );
 				}catch(Exception e){
 					log.warn("There is no Jndi Object with name [" + jndiName + "]", e);
 					dataSource = null;

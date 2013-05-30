@@ -67,7 +67,8 @@ public class FrameworkLicenseManager extends LicenseManager {
     		log.debug(  L10NUtils.getMessage( "003409" ));
     	}else{
     		
-    		File file = AdminHelper.getRepository().getLicenseFile();    		
+    		File file = AdminHelper.getRepository().getLicenseFile(); 
+    		
     		if(!file.canRead() && file.exists() ){
                 String msg = L10NUtils.format("003410",  file.getName() );
                 log.fatal(msg);
@@ -113,6 +114,7 @@ public class FrameworkLicenseManager extends LicenseManager {
 			
 			String licenseKey = AdminHelper.getRepository().getSetupApplicationProperties().get("license.file");
 			if( readerToUse == null && !StringUtils.isEmpty( licenseKey )){
+						
 				readerToUse = new StringReader( licenseKey );				
 			}
 			

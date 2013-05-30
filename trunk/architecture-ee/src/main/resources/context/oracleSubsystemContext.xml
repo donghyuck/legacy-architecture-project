@@ -18,6 +18,11 @@
 	<!-- ================================================ -->
 	<!-- 1. LOB                                                                               -->
 	<!-- ================================================ -->	
-	<alias name="lobHandler" alias="oracleLobHandler"/>
+	
+	<alias name="oracleLobHandler" alias="lobHandler"/>
+	
+	<!-- 	
+	<bean id="oracleLobHandler"  parent="JdbcExtractorSupport"  class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true" />
+    	 -->
 	
 </beans>
