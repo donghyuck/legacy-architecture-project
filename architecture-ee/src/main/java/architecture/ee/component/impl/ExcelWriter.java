@@ -204,6 +204,7 @@ public class ExcelWriter {
 	}
 	
 	/**
+	 * 
 	 * @param workbook
 	 * @uml.property  name="workbook"
 	 */
@@ -214,6 +215,9 @@ public class ExcelWriter {
 	public void write(File file){
 		FileOutputStream fs = null;
 		try {
+			
+			//File.createTempFile(prefix, suffix);
+			
 			 fs = new FileOutputStream(file);
 			workbook.write(fs);
 		} catch (IOException e) {
@@ -222,7 +226,7 @@ public class ExcelWriter {
 				try {
 					fs.close();
 				} catch (IOException e) {
-				}
+			}
         }
 	}
 
@@ -235,7 +239,7 @@ public class ExcelWriter {
 				try {
 					output.close();
 				} catch (IOException e) {
-				}
+			}
         }
 	}
 }

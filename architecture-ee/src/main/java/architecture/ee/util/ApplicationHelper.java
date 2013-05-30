@@ -18,8 +18,10 @@ package architecture.ee.util;
 import groovy.lang.GroovyClassLoader;
 
 import java.lang.ref.WeakReference;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -27,6 +29,7 @@ import java.util.TimeZone;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.poi.ss.formula.functions.T;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
@@ -37,7 +40,9 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.component.admin.AdminHelper;
+import architecture.ee.spring.lifecycle.SpringAdminService;
 
 /**
  * 컴포넌트들에 대한 인터페이스를 제공하는 Helper 클래스.
@@ -59,6 +64,24 @@ public final class ApplicationHelper {
 		}
 		return (T)ApplicationHelper.references.get(requiredType).get();
 	}
+	
+	/*
+	public static <T> List<T> getComponents(Class<T> requiredType){
+		
+		AdminService as = AdminHelper.getAdminService();
+		LOG.debug("SpringAdminService: " +  ( as instanceof SpringAdminService ));
+		
+		if( as instanceof SpringAdminService ){
+			SpringAdminService sas = (SpringAdminService)as ;
+			Map<String, T> beans =  sas.getApplicationContext().getBeansOfType(requiredType);
+			LOG.debug( beans );
+			
+			beans.values();
+			return new ArrayList<T>(beans.values());
+		}	
+		return Collections.EMPTY_LIST;
+	}
+	*/
 	
 	public static <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException
 	{
