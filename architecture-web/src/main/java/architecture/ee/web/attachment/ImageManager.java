@@ -84,4 +84,6 @@ public interface ImageManager {
 	
 	public abstract InputStream getImageInputStream(Image image);
 	
+	public abstract InputStream getImageThumbnailInputStream(Image image, int width, int height ) ;
+	
 }

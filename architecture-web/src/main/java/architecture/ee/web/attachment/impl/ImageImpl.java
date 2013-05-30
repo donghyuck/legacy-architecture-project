@@ -32,6 +32,8 @@ public class ImageImpl extends BaseModelObject implements Image {
 	private Integer objectType;
 	private Long objectId;
 	private InputStream inputStream;
+	private Integer thumbnailSize = 0;
+	private String thumbnailContentType = "png";
 	
 	
 	public Serializable getPrimaryKeyObject() {
@@ -97,6 +99,22 @@ public class ImageImpl extends BaseModelObject implements Image {
 
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
+	}
+
+	public Integer getThumbnailSize() {
+		return thumbnailSize;
+	}
+
+	public void setThumbnailSize(Integer thumbnailSize) {
+		this.thumbnailSize = thumbnailSize;
+	}
+
+	public String getThumbnailContentType() {
+		return thumbnailContentType;
+	}
+
+	public void setThumbnailContentType(String thumbnailContentType) {
+		this.thumbnailContentType = thumbnailContentType;
 	}
 
 	@Override

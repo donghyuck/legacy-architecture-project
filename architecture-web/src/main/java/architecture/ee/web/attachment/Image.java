@@ -46,6 +46,15 @@ public interface Image extends ModelObject {
 	 * @return
 	 * @throws IOException
 	 */
-	public abstract InputStream getInputStream() throws IOException ;
-		
+	public abstract InputStream getInputStream() throws IOException ;	
+	
+	public abstract Integer getThumbnailSize();
+	
+	public abstract void setThumbnailSize(Integer thumbnailSize);
+	
+	public abstract void setThumbnailContentType(String contentType);
+	
+	public abstract String getThumbnailContentType();
+	
+			
 }
