@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.lifecycle;
+package architecture.common.util.internal;
 
-import java.util.List;
+public interface MemoryInformation {
 
-import architecture.common.license.License;
-
-public interface SystemInformationService extends Component {
-
-		public abstract SystemInfo getSystemInfo();
-		
-		public abstract MemoryInfo getMemoryInfo();
-		
-		public abstract License getLicenseInfo();
-		
-		public abstract List<DatabaseInfo> getDatabaseInfos();
+	public abstract String getName();
 	
+	public abstract long getTotal();
+	
+	public abstract long getUsed();
+	
+	public abstract long getFree();
 }

@@ -38,10 +38,19 @@ public class CheckSignatureValidator
             Signature sig = Signature.getInstance("DSA");
                         
             sig.initVerify(pubKey);
+           // license.getSignature().getBytes("UTF-8");
             byte decoded[] = Hex.decodeHex(license.getSignature().toCharArray());
+            
+            log.debug("decoded sig: " + Hex.encodeHexString(decoded));
+            
             log.info((new StringBuilder()).append("Validating license. License fingerprint: ").append(license.getSignature()).toString());
+            
+            
             sig.update(license.getFingerprint());
+            
+            
             boolean verified = sig.verify(decoded);
+            
             if(!verified)
                 throw new LicenseException("License signature is invalid.");
         }

@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Locale;
 
+import architecture.common.exception.RuntimeError;
+
 public class PlatformHelper {
 
 	public enum Platform {
@@ -89,6 +91,19 @@ public class PlatformHelper {
 			System.out.println(stdout.toString());
 			System.out.println(errout.toString());			
 		} catch (IOException e) {}		
+	}
+	
+	public static float getJvmVersion(){
+		String props = System.getProperty("java.specification.version");
+		try{
+			return Float.valueOf(props).floatValue();
+		}catch(Exception e){
+			throw new RuntimeError(e);
+		}
+	}
+	
+	public static boolean isJvmVersion(float versionNumber){
+		return getJvmVersion() >= versionNumber;
 	}
 	
 }

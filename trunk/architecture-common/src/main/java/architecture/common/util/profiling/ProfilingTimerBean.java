@@ -30,6 +30,7 @@ public class ProfilingTimerBean
 	 * 
 	 */
 	private static final long serialVersionUID = -2544236547702391434L;
+	
 	List<ProfilingTimerBean> children;
     /**
 	 * @uml.property  name="parent"

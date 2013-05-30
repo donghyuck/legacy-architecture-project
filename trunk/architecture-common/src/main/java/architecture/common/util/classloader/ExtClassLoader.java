@@ -13,6 +13,9 @@ import architecture.common.util.L10NUtils;
 
 
 /**
+ * 동적 클래스 로딩을 위한 확장 클래스 로더 클래스
+ * 
+ * 
  * @author    donghyuck
  */
 public class ExtClassLoader extends URLClassLoader {

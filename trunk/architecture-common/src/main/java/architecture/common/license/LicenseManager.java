@@ -48,16 +48,15 @@ public class LicenseManager {
     
 	public void initialize(LicenseProvider provider, Reader reader) throws LicenseException, IOException {
 		this.provider = provider;
-		license = null;
-		
+		license = null;		
 		LicenseReader licenseReader = new LicenseReader();
-		License l = licenseReader.read(reader);
-		Collection<LicenseException> exceptions = validate(provider, l);
+		License currentLicense = licenseReader.read(reader);
+		Collection<LicenseException> exceptions = validate(provider, currentLicense);
 		if (!exceptions.isEmpty()) {
 			throw new LicenseInitializationException(L10NUtils.format("002112"), exceptions);
 		} else {
-			l.setVersion(provider.getVersion());
-			license = l;
+			currentLicense.setVersion(provider.getVersion());
+			license = currentLicense;
 			return;
 		}
 	}
@@ -103,7 +102,8 @@ public class LicenseManager {
     {
         ArrayList<License.Module> list = new ArrayList<License.Module>();
         for( License.Module m : license.getModules()){
-        	 if(provider.getInstalledModules().contains(m))
+        	
+        	 if( provider != null && provider.getInstalledModules().contains(m))
                  list.add(m);
         }       
         return Collections.unmodifiableCollection(list);
