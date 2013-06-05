@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_WEB</name>
+    <version>2.0</version>
+    <description>Queries for WEB COMPONENTS</description>
+    <version></version>
+    	 
+    <!--  ATTACHMENT -->	 
+    <sql-query name="SELECT_ALL_ATTACHMENTS" description="전체 첨부파일 조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_ATTACHMENT
+    ]]></sql-query>
+    <sql-query name="SELECT_ATTACHMENT_BY_ID" description="ID로 첨부파일  조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_ATTACHMENT
+    WHERE 
+    	ATTACHMENT_ID = ?	    
+    ]]></sql-query>
+    <sql-query name="SELECT_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 첨부파일  조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_ATTACHMENT
+    WHERE 
+    	OBJECT_TYPE = ?	AND
+    	OBJECT_ID = ?
+    ]]></sql-query>    
+    <sql-query name="SELECT_ATTACHMENT_DATA_BY_ID" description="ID 값으로 첨부파일 데이터 조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		ATTACHMENT_DATA
+    FROM 
+    	V2_ATTACHMENT_DATA
+    WHERE 
+    	ATTACHMENT_ID = ?
+    ]]></sql-query>    
+    <sql-query name="INSERT_ATTACHMENT" description="첨부파일  생성"><![CDATA[    
+    INSERT INTO V2_ATTACHMENT (
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,?,? )
+    ]]></sql-query>
+
+    <sql-query name="UPDATE_ATTACHMENT" description="첨부파일  생성"><![CDATA[    
+    UPDATE V2_ATTACHMENT SET 		
+		OBJECT_TYPE = ?,
+		OBJECT_ID = ?,
+		CONTENT_TYPE = ?,
+		FILE_NAME = ?,
+		FILE_SIZE = ?,
+		CREATION_DATE = ?,
+		MODIFIED_DATE = ?
+	WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ATTACHMENT" description="첨부파일  삭제"><![CDATA[    
+ 		DELETE FROM V2_ATTACHMENT WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+        
+	<sql-query name="SELECT_ATTACHMENT_IDS" description="첨부파일 아이디 조회"><![CDATA[    
+ 		SELECT ATTACHMENT_ID FROM  V2_ATTACHMENT_DATA
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_EMPTY_ATTACHMENT_DATA" description="첨부파일 데이터 생성"><![CDATA[    
+ 		INSERT INTO V2_ATTACHMENT_DATA (ATTACHMENT_ID, ATTACHMENT_DATA) VALUES (?, EMPTY_BLOB())
+    ]]></sql-query>
+    
+	<sql-query name="UPDATE_ATTACHMENT_DATA" description="첨부파일 데이터 업데이트"><![CDATA[    
+ 		UPDATE V2_ATTACHMENT_DATA  SET ATTACHMENT_DATA = ? WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_ATTACHMENT_DATA" description="첨부파일 데이터 생성"><![CDATA[    
+ 		INSERT V2_ATTACHMENT_DATA  (ATTACHMENT_ID, ATTACHMENT_DATA) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_ATTACHMENT_DATA_BY_ID" description="첨부파일 데이터 조회"><![CDATA[    
+ 		SELECT ATTACHMENT_DATA FROM V2_ATTACHMENT_DATA WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ATTACHMENT_DATA_BY_ID" description="첨부파일 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_ATTACHMENT_DATA WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ALL_ATTACHMENT_DATAS" description="전체 첨부파일 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_ATTACHMENT_DATA
+    ]]></sql-query>            
+    
+    <!--  IMAGE -->	 
+	<sql-query name="CREATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
+  		INSERT INTO V2_IMAGE (
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ? )
+    ]]></sql-query>
+	
+	<sql-query name="UPDATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
+  		UPDATE V2_IMAGE SET
+	  		IMAGE_ID = ?,
+			OBJECT_TYPE = ?,
+			OBJECT_ID = ?,
+			FILE_NAME = ?,
+			FILE_SIZE = ?,
+			CONTENT_TYPE = ?,
+			CREATION_DATE = ?,
+			MODIFIED_DATE = ?
+		WHERE IMAGE_ID = ?
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_IMAGE_BY_ID" description="ID로 IMAGE 조회"><![CDATA[    
+  		SELECT
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_IMAGE_BY_ID" description="IMAGE  삭제"><![CDATA[    
+ 		DELETE FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_EMPTY_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		INSERT INTO V2_IMAGE_DATA (IMAGE_ID, IMAGE_DATA) VALUES (?, EMPTY_BLOB())
+    ]]></sql-query>
+    
+	<sql-query name="UPDATE_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		UPDATE V2_IMAGE_DATA  SET IMAGE_DATA = ? WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		INSERT V2_IMAGE_DATA  (IMAGE_ID, IMAGE_DATA) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_IMAGE_DATA_BY_ID" description="IMAGE 데이터 조회"><![CDATA[    
+ 		SELECT IMAGE_DATA FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_IMAGE_DATA_BY_ID" description="IMAGE 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+                    
+</sqlset>
