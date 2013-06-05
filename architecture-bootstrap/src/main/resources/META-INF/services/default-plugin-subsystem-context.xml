@@ -1,0 +1,49 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       
+	<description>
+	<![CDATA[
+        Define Bootstrap Context
+	]]>
+	</description>
+	<!-- ================================================ -->
+	<!-- 1. Dao                                                                                -->
+	<!-- ================================================ -->
+	<bean id="pluginDao" class="architecture.ee.plugin.dao.impl.JdbcPluginDao"
+		parent="jdbcDaoSupport" 
+		depends-on="sequenceDao" />
+		
+	<!-- ================================================ -->
+	<!-- 2. Manager                                                                          -->
+	<!-- ================================================ -->
+	<bean id="pluginManager"
+		class="architecture.ee.plugin.PluginManagerFactory"
+		factory-method="getPluginManager"
+		depends-on="eventPublisher, taskEngine, pluginDao, pluginCache"
+		destroy-method="destroy" 	
+		p:eventPublisher-ref="eventPublisher" 
+		p:licenseManager-ref="licenseManager"
+		p:taskEngine-ref="taskEngine"
+		p:pluginDao-ref="pluginDao"
+		p:pluginCache-ref="pluginCache" />
+		
+	<bean id="pluginCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="pluginCache" 
+		p:maxElementsInMemory="10000"
+		p:diskPersistent="false" 
+		p:overflowToDisk="false" 
+		p:timeToIdle="30"
+		p:timeToLive="60" 
+		p:eternal="false" 
+		p:diskExpiryThreadIntervalSeconds="0" />
+					
+</beans>
