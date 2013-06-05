@@ -21,7 +21,6 @@ public class ViewUserImageAction extends DownloadImageActioin {
     
 	public String execute() throws Exception {
 		
-		
         return SUCCESS;
     }
 	
