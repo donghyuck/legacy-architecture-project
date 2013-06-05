@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+	default-autowire="no" default-lazy-init="false" default-init-method="init"
+	default-destroy-method="destroy">
+	<description>
+	<![CDATA[
+        Define Bootstrap Context
+	]]>
+	</description>
+
+	<!-- ================================================ -->
+	<!-- Dao                                              -->
+	<!-- ================================================ -->
+	<bean id="userDao" class="architecture.ee.user.dao.impl.JdbcUserDao"
+		parent="jdbcDaoSupport" 
+		depends-on="extendedPropertyDao"
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
+
+	<bean id="groupDao" class="architecture.ee.user.dao.impl.JdbcGroupDao"
+		parent="jdbcDaoSupport" 
+		depends-on="extendedPropertyDao"
+		p:extendedPropertyDao-ref="extendedPropertyDao" />
+
+	<bean id="profileFiledDao" class="architecture.ee.user.dao.impl.JdbcProfileFiledDao"
+		parent="jdbcDaoSupport" 
+		depends-on="extendedPropertyDao"  />
+
+	<bean id="userProfileDao" class="architecture.ee.user.dao.impl.JdbcUserProfileDao"
+		parent="jdbcDaoSupport" />
+
+	<bean id="roleDao" class="architecture.ee.security.role.dao.impl.JdbcRoleDao"
+		parent="jdbcDaoSupport" />
+			
+	<!-- ================================================ -->
+	<!-- Manager                                          -->
+	<!-- ================================================ -->
+	<bean id="userManager" class="architecture.ee.user.impl.MultiProviderUserManager"
+		depends-on="userDao, eventPublisher" 
+		p:userDao-ref="userDao"
+		p:eventPublisher-ref="eventPublisher" 
+		p:passwordEncoder-ref="passwordEncoder"
+		p:saltSource-ref="passwordSaltSource"
+		p:userCache-ref="userCache"
+		p:userIdCache-ref="userIDCache" 
+		p:userProviderCache-ref="userProviderCache" />
+
+    <bean id="passwordEncoder" class="architecture.ee.spring.security.authentication.encoding.PasswordEncoderFactory" />
+    
+    <bean id="passwordSaltSource" class="architecture.ee.spring.security.authentication.encoding.SaltSourceFactory" />
+ 
+	<bean id="groupManager" class="architecture.ee.user.impl.GroupManagerImpl"
+		p:groupDao-ref="groupDao" p:userManager-ref="userManager"
+		p:eventPublisher-ref="eventPublisher"
+		p:groupMemberCache-ref="groupMemberCache"
+		p:groupIdCache-ref="groupIdCache"
+		p:groupCache-ref="groupCache" />
+
+	<bean id="roleManager" class="architecture.ee.security.role.impl.RoleManagerImpl"
+		p:roleDao-ref="roleDao" p:groupManager-ref="groupManager"
+		p:eventPublisher-ref="eventPublisher"
+		p:roleCache-ref="roleCache"
+		p:userRoleCache-ref="userRoleCache" />
+		
+</beans>
