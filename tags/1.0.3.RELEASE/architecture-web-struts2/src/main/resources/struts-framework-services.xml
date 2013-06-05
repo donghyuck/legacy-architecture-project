@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="framework-admin-actions" namespace="/services" extends="framework-default">
+		<action name="unitofwork"
+			class="architecture.ee.web.struts2.action.support.SqlQueryAction">
+			<result name="success" type="freemarker">/html/system-info.ftl</result>
+			
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">users.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				users.*, totalUserCount
+				</param>
+			</result>
+						
+		</action>
+	</package>
+
+</struts>
