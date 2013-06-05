@@ -19,7 +19,7 @@ import architecture.ee.web.struts2.action.DownloadAttachmentActioin;
 
 
 public class ViewUserAttachmentAction extends DownloadAttachmentActioin {
-    
+	
 	public String execute() throws Exception {
         return SUCCESS;
     }
