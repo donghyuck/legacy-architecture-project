@@ -3,10 +3,10 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
-		<groupId>architecture</groupId>
+		<groupId>architecture.parent</groupId>
 		<version>1.0.0.RELEASE</version>
 	</parent>
-	<groupId>architecture</groupId>
+	<groupId>architecture.ext</groupId>
 	<artifactId>architecture-ext</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0.5.RELEASE</version>
@@ -16,24 +16,37 @@
 	
 	<contributors>
 		<contributor>
-			<name>Donghyuch Son</name>
-			<email>andang311@inkium.com</email>
+			<name>donghyuck, Son</name>
+			<email>donghyuck.son@gmail.com</email>
 		</contributor>
 	</contributors>
-	<organization>
-		<name>INKIUM</name>
-		<url>http://www.inkium.com</url>
-	</organization>
+
+	
+	<properties>
+		<project.build.version>1.0.3.RELEASE</project.build.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>FUSE ARCHITECTURE Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</repository>
+	</repositories>
+
 	<dependencies>
 		<dependency>
-			<groupId>smeapi</groupId>
+			<groupId>m-gov</groupId>
 			<artifactId>smeapi</artifactId>
 			<version>2.5</version>
 		</dependency>
 		<dependency>
-			<groupId>com.dkitec.mose</groupId>
-			<artifactId>mose-client</artifactId>
-			<version>1.5.0</version>
+			<groupId>m-gov</groupId>
+			<artifactId>mose-api</artifactId>
+			<version>1.5.1</version>
 		</dependency>			
 		<dependency>
 			<groupId>log4j</groupId>
@@ -61,13 +74,6 @@
 			<groupId>com.caucho</groupId>
 			<artifactId>hessian</artifactId>
 			<version>4.0.7</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>architecture</groupId>
-			<artifactId>architecture-common</artifactId>
-			<version>${project.build.version}</version>
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
@@ -108,11 +114,23 @@
 			<type>jar</type>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+			<version>2.6</version>
+		</dependency>
+		<dependency>
+			<groupId>architecture.common</groupId>
+			<artifactId>architecture-common</artifactId>
+			<version>1.0.3.RELEASE</version>			
+		</dependency>
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc5</artifactId>
+			<version>11.1.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-	
-	<properties>
-		<project.build.version>1.0.2.RELEASE</project.build.version>
-	</properties>
 
 	<build>
 		<plugins>
@@ -132,7 +150,6 @@
 					<attach>true</attach>
 				</configuration>
 			</plugin>
-
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
