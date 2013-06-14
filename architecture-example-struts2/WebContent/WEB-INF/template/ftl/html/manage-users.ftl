@@ -1,25 +1,78 @@
 <#ftl encoding="UTF-8"/>
-<html decorator="banded">
+<html decorator="secure">
     <head>
         <title>사용자 관리</title>
         <script type="text/javascript">                
         yepnope([{
-            load: [             
-        	   '${request.contextPath}/js/kendo/kendo.web.min.js',
-        	   'preload!${request.contextPath}/js/common.models.js',               
-        	   'preload!${request.contextPath}/js/common.ui.js'
-        	   ],
-        	   
-            complete: function() {   
-                        	            	
-	            var selectedUser = new User ({});		            
+            load: [ 
+			'css!${request.contextPath}/styles/jquery.pageslide/jquery.pageslide.css',
+			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jquery.pageslide/jquery.pageslide.min.js',
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+       	    '${request.contextPath}/js/kendo/kendo.web.min.js',
+       	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
+       	    '${request.contextPath}/js/common/common.ui.js',
+      	    '${request.contextPath}/js/common/common.models.js' ],             	   
+            complete: function() {               
+                kendo.culture("ko-KR");               
+				$("#company").kendoDropDownList({
+                        dataTextField: "displayName",
+                        dataValueField: "companyId",
+                        dataSource: {
+                            transport: {
+                                read: {
+                                    type: "json",
+                                    url: '${request.contextPath}/secure/list-company.do?output=json',
+									type:'POST'
+                                }
+                            },
+                            schema: { 
+                            		data: "companies",
+                            		model : Company
+                        	}
+                        },
+                        dataBound: function(e){
+                        }
+                });	                
+				$("#company").data("kendoDropDownList").readonly();
+		
+		
+				$("header .open").pageslide({ modal: true });
+				
+				$("#menu").kendoMenu({
+						select: function(e){							
+							var action = $(e.item).attr('action') ;
+							if( action != '#' ){
+								$("form[name='fm1']").attr("action", action ).submit(); 
+							}
+						}						
+				});
+				$("#menu").show();	
+				
+				$("#go-comapny-btn").click( function(){
+					$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 
+				}); 
+
+				var visible = false;
+				$('#detail-panel-close-btn').click( function(e){
+					if(visible){
+						$(".panel").toggle("fast");						
+						$(this).toggleClass("active");									
+						visible = false;
+						//$("#detail-panel").hide();	
+						return false;			
+					}
+				});		
+									
+	            var selectedUser = new User ({});		  
 		        // 1. USER GRID 		        
 				var user_grid = $("#user-grid").kendoGrid({
                     dataSource: {
+                    	serverFiltering: true,
                         transport: { 
                             read: { url:'${request.contextPath}/secure/list-user.do?output=json', type: 'POST' },
 	                        parameterMap: function (options, type){
-	                            return { startIndex: options.skip, pageSize: options.pageSize }
+	                            return { startIndex: options.skip, pageSize: options.pageSize,  companyId: $("#company").data("kendoDropDownList").value() }
 	                        }
                         },
                         schema: {
@@ -27,6 +80,7 @@
                             data: "users",
                             model: User
                         },
+                        error:handleKendoAjaxError,
                         batch: false,
                         pageSize: 15,
                         serverPaging: true,
@@ -34,46 +88,273 @@
                         serverSorting: false
                     },
                     columns: [
-                        { field: "userId", title: "ID", width:50,  filterable: false, sortable: false }, 
+                        { field: "userId", title: "ID", width:50,  filterable: true, sortable: false }, 
                         { field: "username", title: "아이디", width: 100 }, 
                         { field: "name", title: "이름", width: 100 }, 
                         { field: "email", title: "메일" },
-                        { field: "creationDate", title: "생성일", filterable: false,  width: 100, format: "{0:yyyy/MM/dd}" } ],         
+                        { field: "creationDate", title: "생성일", width: 100, format: "{0:yyyy/MM/dd}" } ],         
                     filterable: true,
                     sortable: true,
                     pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
                     selectable: 'row',
-                    height: 500,
+                    height: 452,
+                    toolbar: [
+					 	{ name: "create-user", text: "새로운 사용자 생성하기", className: "createUserCustomClass" } ],
                     change: function(e) {                    
                         var selectedCells = this.select();
-  						if( selectedCells.length == 1){  						
-                             var selectedCell = this.dataItem( selectedCells );                             
-							 selectedUser.userId = selectedCell.userId ;         
-							 selectedUser.username = selectedCell.username ;             
-							 selectedUser.name = selectedCell.name ;
-							 selectedUser.email = selectedCell.email ;
-							 selectedUser.creationDate = selectedCell.creationDate ;
-							 selectedUser.lastLoggedIn = selectedCell.lastLoggedIn ;         							 
-							 selectedUser.formattedLastLoggedIn =  kendo.format("{0:yyyy.MM.dd}",  selectedUser.lastLoggedIn  );							 
-							 selectedUser.lastProfileUpdate = selectedCell.lastProfileUpdate ;                 
-							 selectedUser.formattedLastProfileUpdate =  kendo.format("{0:yyyy.MM.dd}",  selectedUser.lastProfileUpdate  );                   
-							 selectedUser.enabled = selectedCell.enabled ;              
-							 selectedUser.nameVisible = selectedCell.nameVisible ;          
-							 selectedUser.emailVisible = selectedCell.emailVisible ; 							 
-							 if( selectedUser.userId > 0 ){							 	
-							 	
+                        
+  						if( selectedCells.length == 1){ 
+                            var selectedCell = this.dataItem( selectedCells ); 
+                            selectedUser.userId = selectedCell.userId ; 
+							selectedUser.username = selectedCell.username ;             
+							selectedUser.name = selectedCell.name ;
+							selectedUser.email = selectedCell.email ;
+							selectedUser.creationDate = selectedCell.creationDate ;
+							selectedUser.lastLoggedIn = selectedCell.lastLoggedIn ;         							 
+							selectedUser.formattedLastLoggedIn =  kendo.format("{0:yyyy.MM.dd}",  selectedUser.lastLoggedIn  );							 
+							selectedUser.lastProfileUpdate = selectedCell.lastProfileUpdate ;                 
+							selectedUser.formattedLastProfileUpdate =  kendo.format("{0:yyyy.MM.dd}",  selectedUser.lastProfileUpdate  );                   
+							selectedUser.enabled = selectedCell.enabled ;              
+							selectedUser.nameVisible = selectedCell.nameVisible ;          
+							selectedUser.emailVisible = selectedCell.emailVisible ;
+							selectedUser.properties = selectedCell.properties;
+							 							 
+							selectedUser.company = $("#company").data("kendoDropDownList").dataSource.get(  $("#company").data("kendoDropDownList").value()  );
+							var observable = new kendo.data.ObservableObject( selectedUser ); 
+
+							 if( selectedUser.userId > 0 ){
 							 	// 2. USER DETAILS
-							 	kendo.bind($(".tabular"), selectedUser );							
-							 	
 							 	// 3. USER TABS 	
-							 	$('#user-tabs').show().html(kendo.template($('#template').html()));
-							 	var user_tabs = $('#user-tabs').find(".tabstrip").kendoTabStrip({
-				                      animation: {
-								        close: {  duration: 200, effects: "fadeOut" },
+							 	$('#user-details').show().html(kendo.template($('#template').html()));
+							 	
+	                            kendo.bind($(".details"), selectedUser );      
+								
+								if( !visible ) {	
+									$(".panel").toggle("fast");						
+									$(this).toggleClass("active");									
+									visible = true;
+								} 
+								
+							 	if( selectedUser.properties.imageId ){
+							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=200&height=300&imageId=' + selectedUser.properties.imageId ;
+							 	 	$('#user-photo').attr( 'src', photoUrl );
+							 	}
+								
+								$("#files").kendoUpload({
+								 	multiple : false,
+								 	showFileList : false,
+								    localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
+								    async: {
+									    saveUrl:  '${request.contextPath}/secure/save-user-image.do?output=json',							   
+									    autoUpload: true
+								    },
+								    upload: function (e) {								         
+								         var imageId = -1;
+								         if( selectedUser.properties.imageId ){
+								         	imageId = selectedUser.properties.imageId
+								         }
+								    	 e.data = { userId: selectedUser.userId , imageId:imageId  };						
+								    								    	 		    	 
+								    },
+								    success : function(e) {								    
+								    	if( e.response.targetUserImage ){
+								    		selectedUser.properties.imageId = e.response.targetUserImage.imageId;
+								    		var photoUrl = '${request.contextPath}/secure/view-image.do?width=200&height=300&imageId=' + selectedUser.properties.imageId ;
+							 	 			$('#user-photo').attr( 'src', photoUrl );
+								    	}				
+								    }					   
+								});	
+                    
+					            $('#change-password-btn').bind( 'click', function(){
+					                $('#change-password-window').kendoWindow({
+				                            width: "400px",
+				                            minWidth: "300px",
+				                            minHeight: "250px",
+				                            title: "패스워드 변경",
+				                            modal: true,
+				                            visible: false
+				                        });
+				                    $('#change-password-window').data("kendoWindow").center();        
+				                    $('#password2').focus();                
+					            	$('#change-password-window').data("kendoWindow").open();	            	
+					            });
+					            
+					            $('#do-change-password-btn').bind( 'click', function(){	            	
+					            	var doChangePassword = true ;	            	
+					            	if( $('#password2').val().length < 6 ){
+					            		alert ('패스워드는 최소 6 자리 이상으로 입력하여 주십시오.') ;	     
+					            		doChangePassword = false ;
+					            		$('#password2').val("");        
+					            		$('#password3').val("");           		
+					            		$('#password2').focus();   
+					            		return false;
+					            	}
+					            
+				                   	if( doChangePassword && $('#password2').val() != $('#password3').val() ){
+				                   		doChangePassword = false;
+				                   	    alert( '패스워드가 같지 않습니다. 다시 입력하여 주십시오.' );      
+				                   	    $('#password3').val("");
+				                   	    $('#password3').focus();               
+				                   	    return false; 	   
+				                   	} 				
+									if(doChangePassword) {
+				                   	    selectedUser.password = $('#password2').val();                   	    
+										$.ajax({
+												type : 'POST',
+												url : "${request.contextPath}/secure/update-user.do?output=json",
+												data : { userId:selectedUser.userId, item: kendo.stringify( selectedUser ) },
+												success : function( response ){	
+												    $('#user-grid').data('kendoGrid').dataSource.read();	
+												},
+												error:handleKendoAjaxError,
+												dataType : "json"
+											});	
+										selectedUser.password = '' ;                   	    	
+				                   	}            	                   	
+					            } );               
+					            	
+            
+				                $('#update-user-btn').bind('click' , function(){
+									$.ajax({
+										type : 'POST',
+										url : "${request.contextPath}/secure/update-user.do?output=json",
+										data : { userId:selectedUser.userId, item: kendo.stringify( selectedUser ) },
+										success : function( response ){									
+										    $('#user-grid').data('kendoGrid').dataSource.read();	
+										},
+										error: handleKendoAjaxError,
+										dataType : "json"
+									});	
+									
+									if(visible){
+										slide.reverse();						
+										visible = false;		
+										$("#detail-panel").hide();				
+									}
+				                }); 	
+                							 	
+							 	//kendo.bind($(".tabular"), selectedUser );
+							 					
+							 	var user_tabs = $('#user-details').find(".tabstrip").kendoTabStrip({
+									animation: {
+								    	close: {  duration: 200, effects: "fadeOut" },
 								       	open: { duration: 200, effects: "fadeIn" }
-				                      },
-				                      select : function(e){				                      				                      				                      
-				                          if( $( e.contentElement ).find('div').hasClass('groups') ){
+				                    },
+									select : function(e){			
+										
+										// TAB - ATTACHMENT TAB
+										if( $( e.contentElement ).find('div').hasClass('attachments') ){					   
+											if( ! $("#attach-upload").data("kendoUpload") ){	
+												$("#attach-upload").kendoUpload({
+					                      			multiple : true,
+					                      			showFileList : true,
+					                      			localization : { select: '파일 선택', remove:'삭제', dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' , 
+					                      				uploadSelectedFiles : '파일 업로드',
+					                      				cancel: '취소' 
+					                      			 },
+					                      			 async: {
+													    saveUrl:  '${request.contextPath}/secure/save-user-attachments.do?output=json',							   
+													    autoUpload: false
+												    },
+												    upload:  function (e) {		
+												    	e.data = { userId: selectedUser.userId };		
+												    },
+												    success : function(e) {	
+												    	$('#attach-grid').data('kendoGrid').dataSource.read(); 
+												    }
+					                      		});				
+											}				                   
+											   		         
+											if( ! $("#attach-grid").data("kendoGrid") ){	
+												$("#attach-grid").kendoGrid({
+							                        dataSource: {
+							                        	autoSync: true,
+							                            type: 'json',
+							                            transport: {
+							                                read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
+							                                destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
+									                        parameterMap: function (options, operation){
+									                        	 if (operation != "read" && options) {										                        								                       	 	
+									                        	 	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
+									                            }else{
+									                            	return { userId: selectedUser.userId };
+									                            }
+									                        }								                         
+							                            },
+							                            error:handleKendoAjaxError,
+							                            schema: {
+							                            	model: Attachment,
+							                            	data : "targetUserAttachments"
+							                            }
+							                        },
+							                        height:200,
+							                        scrollable:  true,
+							                        sortable: true,
+							                        editable: {
+									                	update: false,
+									                	destroy: true,
+									                	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
+									                },
+							                        columns: [{
+							                        		title: "ID",
+							                        		width: 50,
+							                                field:"attachmentId",
+							                                filterable: false
+							                            },
+							                            {
+							                                field: "name",
+							                                title: "이름",
+							                                template: '#= name  #',
+							                                width: 150
+							                            },
+							                             {
+							                                field: "contentType",
+							                                title: "유형",
+							                                width: 80 /**
+							                            }, {
+							                                field: "modifiedDate",
+							                                title: "수정일",
+							                                width: 80,
+							                                format: "{0:yyyy/MM/dd}" **/
+							                            },
+							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
+									                            	var tr = $(e.target).closest("tr"); 
+														          	var item = this.dataItem(tr);
+							                            			if(! $("#download-window").data("kendoWindow")){
+							                            				$("#download-window").kendoWindow({
+							                            					actions: ["Minimize", "Maximize", "Close"],
+							                            					minHeight : 200,
+							                            					maxHeight : 500,
+							                            					minWidth :  200,
+							                            					maxWidth :  600,
+							                            					modal: true,
+							                            					visible: false
+							                            				});
+							                            			}
+							                            			
+							                            			var downloadWindow = $("#download-window").data("kendoWindow");
+							                            			downloadWindow.title( item.name );							                            			
+							                            			//downloadWindow.content.data = item ;
+							                            			//downloadWindow.content.template = kendo.template($("#download-window-template").html());
+							                            		 
+							                            		 	var template = kendo.template($("#download-window-template").html());
+							                            			downloadWindow.content( template(item) );
+							                            			
+							                            			downloadWindow.center();
+							                            			downloadWindow.open();
+							                            		}
+							                            	}, 
+							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
+							                        ],
+							                        dataBound: function(e) {
+							                        }
+							                    });
+							                    $("#attach-grid").attr('style', '');
+											}
+				                    	}
+				                    	
+										// TAB - GROUP TAB --------------------------------------------------------------------------
+										if( $( e.contentElement ).find('div').hasClass('groups') ){
 				                          	if( ! user_tabs.find(".groups").data("kendoGrid") ){	
 												// 3-1 USER GROUP GRID
 											    user_tabs.find(".groups").kendoGrid({
@@ -86,7 +367,7 @@
 												                    if (operation !== "read" && options.models) {
 																 	    return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
 										                            }
-												                    return { userId: selectedUser.userId }
+												                    return { userId: selectedUser.userId };
 												                }
 										                    },
 										                    schema: {
@@ -95,13 +376,13 @@
 										                    },
 										                    error:handleKendoAjaxError
 					                                     },
-													    height: 200,
-													    scrollable: false,
+													    scrollable: true,
+													    height:200,
 													    editable: false,
 										                columns: [
 									                        { field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
-									                        { field: "name",    title: "이름",  filterable: true, sortable: true,  width: 100 },
-									                       { command:  { text: "삭제", click : function(e){									                       		
+									                        { field: "displayName",    title: "이름",   filterable: true, sortable: true,  width: 100 },
+									                        { command:  { text: "삭제", click : function(e){									                       		
 									                       		if( confirm("정말로 삭제하시겠습니까?") ){
 																	var selectedGroup = this.dataItem($(e.currentTarget).closest("tr"));									                       		
 										                       		$.ajax({
@@ -109,7 +390,8 @@
 																		url : "/secure/remove-group-members.do?output=json",
 																		data : { groupId:selectedGroup.groupId, items: '[' + kendo.stringify( selectedUser ) + ']'  },
 																		success : function( response ){									
-																	        $('#user-group-grid').data('kendoGrid').dataSource.read();				
+																	        $('#user-group-grid').data('kendoGrid').dataSource.read();
+																	        $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
 																		},
 																		error:handleKendoAjaxError,
 																		dataType : "json"
@@ -117,19 +399,184 @@
 									                       		}
 									                       }},  title: "&nbsp;", width: 100 }	
 										                ],
-										                dataBound:function(e){
-										                
+										                dataBound:function(e){										                
 										                }
-											    });
-  
-				                          	}				                          	
-				                          } else if( $( e.contentElement ).find('div').hasClass('props') ){
-				                          	if( !user_tabs.find(".props").data("kendoGrid") ){	
-				                          	}		                          	
-				                          }
-				                      } 
-				                });		
+											    });  											    
+											    $("#user-group-grid").attr('style','');	    
+				                          	}	
+				                        // TAB 3 - PROPS  											
+										} else if( $( e.contentElement ).find('div').hasClass('props') ){
+											if( !user_tabs.find(".props").data("kendoGrid") ){	
+				                          					                          	
+											}	
+										// TAB - ROLES --------------------------------------------------------------		                          	
+										} else if( $( e.contentElement ).find('div').hasClass('roles') ){										
+											// SELECTED GROUP ROLES
+											if( !$('#group-role-selected').data('kendoMultiSelect') ){
+												$('#group-role-selected').kendoMultiSelect({
+				                                    placeholder: "NONE",
+									                dataTextField: "name",
+									                dataValueField: "roleId",
+									                dataSource: {
+									                    transport: {
+									                        read: {
+							                                    url: '${request.contextPath}/secure/get-user-group-roles.do?output=json',
+																dataType: "json",
+																type: "POST",
+																data: { userId: selectedUser.userId }
+									                        }
+									                    },
+									                    schema: { 
+						                            		data: "userGroupRoles",
+						                            		model: Role
+						                        		}
+									                },
+						                        	error:handleKendoAjaxError,
+						                        	dataBound: function(e) {
+						                        		var multiSelect = $("#group-role-selected").data("kendoMultiSelect");
+						                        		var selectedRoleIDs = "";
+						                        		$.each(  multiSelect.dataSource.data(), function(index, row){  
+						                        			if( selectedRoleIDs == "" ){
+						                        			    selectedRoleIDs =  selectedRoleIDs + row.roleId ;
+						                        			}else{
+						                        				selectedRoleIDs = selectedRoleIDs + "," + row.roleId;
+						                        			}
+						                        		} );			                        		
+						                        		multiSelect.value( selectedRoleIDs.split( "," ) );
+						                        		multiSelect.readonly();		
+						                        	}
+									            });	
+											}									    
+											// SELECT USER ROLES
+											if( !$('#user-role-select').data('kendoMultiSelect') ){											
+												var selectedRoleDataSource = new kendo.data.DataSource({
+													transport: {
+										            	read: { 
+										            		url:'${request.contextPath}/secure/get-user-roles.do?output=json', 
+										            		dataType: "json", 
+										            		type:'POST',
+										            		data: { userId: selectedUser.userId }
+												        }  
+												    },
+												    schema: {
+									                	data: "userRoles",
+									                    model: Role
+									                },
+									                error:handleKendoAjaxError,
+									                change: function(e) {                
+						                        		var multiSelect = $("#user-role-select").data("kendoMultiSelect");
+						                        		var selectedRoleIDs = "";			                        		
+						                        		$.each(  selectedRoleDataSource.data(), function(index, row){  
+						                        			if( selectedRoleIDs == "" ){
+						                        			    selectedRoleIDs =  selectedRoleIDs + row.roleId ;
+						                        			}else{
+						                        				selectedRoleIDs = selectedRoleIDs + "," + row.roleId;
+						                        			}
+						                        		} );			                        		
+						                        		multiSelect.value( selectedRoleIDs.split( "," ) );	 
+									                }	                               
+				                               	});	
+				                               												
+												$('#user-role-select').kendoMultiSelect({
+				                                    placeholder: "롤 선택",
+									                dataTextField: "name",
+									                dataValueField: "roleId",
+									                dataSource: {
+									                    transport: {
+									                        read: {
+							                                    url: '${request.contextPath}/secure/list-role.do?output=json',
+																dataType: "json",
+																type: "POST"
+									                        }
+									                    },
+									                    schema: { 
+						                            		data: "roles",
+						                            		model: Role
+						                        		}
+									                },
+						                        	error:handleKendoAjaxError,
+						                        	dataBound: function(e) {
+						                        		 selectedRoleDataSource.read();   	
+						                        	},			                        	
+						                        	change: function(e){
+						                        		var multiSelect = $("#user-role-select").data("kendoMultiSelect");			                        		
+						                        		var list = new Array();			                        		                  		
+						                        		$.each(multiSelect.value(), function(index, row){  
+						                        			var item =  multiSelect.dataSource.get(row);
+						                        			list.push(item);			                        			
+						                        		});			                        		
+						                        		multiSelect.readonly();						                        		
+							 							$.ajax({
+												            dataType : "json",
+															type : 'POST',
+															url : "${request.contextPath}/secure/update-user-roles.do?output=json",
+															data : { userId: selectedUser.userId, items: kendo.stringify( list ) },
+															success : function( response ){		
+																// need refresh ..
+															},
+															error:handleKendoAjaxError
+														});												
+														multiSelect.readonly(false);
+						                        	}
+									            });
+											}										
+										}
+									} 
+				                });
 				                
+				                // GROUP SELECT COMBO BOX
+								var company_combo = $("#company-combo").kendoComboBox({
+									autoBind: false,
+									placeholder: "회사 선택",
+			                        dataTextField: "displayName",
+			                        dataValueField: "companyId",
+								    dataSource: $("#company").data("kendoDropDownList").dataSource 
+								});			
+													
+								$("#company-combo").data("kendoComboBox").value( 
+								 	$("#company").data("kendoDropDownList").value() 
+								 );	
+								 
+								$("#company-combo").data("kendoComboBox").readonly();
+																
+								$("#group-combo").kendoComboBox({
+									autoBind: false,
+									placeholder: "그룹 선택",
+			                        dataTextField: "displayName",
+			                        dataValueField: "groupId",
+			                        cascadeFrom: "company-combo",			                       
+								    dataSource:  {
+										type: "json",
+									 	serverFiltering: true,
+										transport: {
+											read: { url:'${request.contextPath}/secure/list-company-group.do?output=json', type:'post' },
+											parameterMap: function (options, operation){											 	
+											 	return { companyId:  options.filter.filters[0].value };
+											}
+										},
+										schema: {
+											data: "companyGroups",
+											model: Group
+										},
+										error:handleKendoAjaxError
+									}
+								});	
+								
+								// ADD USER TO SELECTED GROUP 
+								$("#add-to-member-btn").click( function ( e ) {
+									 $.ajax({
+							            dataType : "json",
+										type : 'POST',
+										url : "${request.contextPath}/secure/add-group-member.do?output=json",
+										data : { groupId:  $("#group-combo").data("kendoComboBox").value(), item: kendo.stringify( selectedUser ) },
+										success : function( response ){																		    
+											 $("#user-group-grid").data("kendoGrid").dataSource.read();
+											 $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
+										},
+										error:handleKendoAjaxError
+									});	
+								} );
+																				                
 				                // 3-1 USER PROPERTY GRID				         
 				                user_tabs.find(".props").kendoGrid({
 								     dataSource: {
@@ -148,13 +595,7 @@
 										 batch: true, 
 										 schema: {
 					                            data: "targetUserProperty",
-					                            model: {
-					                                id:"name",
-					                                fields: {
-					                                    name: { type: "string" },
-					                                    value: { type: "string" }
-					                                }
-					                            }
+					                            model: Property
 					                     },
 					                     error:handleKendoAjaxError
 								     },
@@ -168,7 +609,7 @@
 								     scrollable: true,
 								     height: 200,
 						             editable: {
-						                	update: false,
+						                	update: true,
 						                	destroy: true,
 						                	confirmation: "선택하신 프로퍼티를 삭제하겠습니까?"	
 						             },
@@ -179,7 +620,8 @@
 									 ],				     
 								     change: function(e) {  
 								     }
-							    });
+							    });								    
+							    $("#user-props-grid").attr('style','');	    
 							 }			     
                         }else{
                             selectedUser = new User ({});
@@ -187,8 +629,14 @@
 					},
 					dataBound: function(e){		
 						 var selectedCells = this.select();
-						 if(selectedCells.length == 0 ){											      
+						 if(selectedCells.length == 0 ){								      
 						     selectedUser = new User ({});
+						     kendo.bind($(".tabular"), selectedUser );	
+							if( visible ) {	
+								$(".panel").toggle("fast");						
+								$(this).toggleClass("active");									
+								visible = true;
+							} 						     
 						 }
 					}
                 });                 
@@ -196,89 +644,257 @@
         }]);      
         </script>
     </head>
-    <body>  
-	<!-- START MAIN HEADER  -->   
-	<header>
-		<div class="row">
-			<div class="twelve columns">
-				<h1>사용자 관리</h1>
-				<h4>사용자 관리 프로그램</h4>
+	<body>
+		<!-- START HEADER -->
+		<header>
+			<div class="row layout">
+				<div class="large-12 columns">
+					<div class="big-box topless bottomless">
+					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>사용자관리</h1>
+					<h4>사용자을 관리하기 위한 기능을 제공합니다.</h4>
+					</div>
+				</div>
 			</div>
+		</header>
+		<!-- END HEADER -->
+		<!-- START MAIN CONTNET -->
+		<section id="mainContent">
+			<div class="row layout">			
+				<div class="large-6 columns" >
+					<div class="box leftless rightless topless">
+						<form name="fm1" method="POST" accept-charset="utf-8">
+							<input type="hidden" name="companyId"  value="${action.companyId}" />
+						</form>		    	
+			    		<ul id="menu" style="display:none;" >
+			                <li action="#">회사
+			                	<ul>	                		    
+			                		<li>
+			                			<div style="padding: 10px;">
+			                			<input id="company" type="hidden" style="width: 250px" value="${action.companyId}"/>
+			                			</div>
+			                		</li>
+			                		<li>
+			                			<div style="padding: 10px;">
+			                				<button id="go-comapny-btn" class="k-button">회사 관리하기</button>
+			                			</div>	                			
+			                		</li>
+			                	</ul>
+			                </li>  
+			                <li action="main-group.do">그룹
+			                </li>     
+			            </ul>  					
+					</div>
+				</div>	
+			</div>
+			<div class="row layout">			
+				<div class="large-12 columns" >
+					<div id="user-grid"></div>
+				</div>
+			</div>						
+		</section>	
+		<div id="change-password-window" style="display:none; width:500px;">
+			<form>
+				<p>
+					    	6~16자의 영문 대소문자, 숫자, 특수문자를 조합하여
+							사용하실 수 있습니다.
+							생년월일, 전화번호 등 개인정보와 관련된 숫자,
+							연속된 숫자와 같이 쉬운 비밀번호는 다른 사람이 쉽게
+							알아낼 수 있으니 사용을 자제해 주세요.
+							이전에 사용했던 비밀번호나 타 사이트와는 다른 비밀번호를
+							사용하고, 비밀번호는 주기적으로 변경해주세요.
+							<div class="alert-box alert">비밀번호에 특수문자를 추가하여 사용하시면
+							기억하기도 쉽고, 비밀번호 안전도가 높아져 도용의 위험이
+							줄어듭니다.	</div>    	
+					</p>
+					    	<table class="tabular" width="100%">	    	
+								<tr>
+						    		<td>새 비밀번호</td> 
+						    		<td><input type="password" id="password2" name="password2" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." /></td>
+						    	</tr>	
+								<tr>
+						    		<td>새 비밀번호 확인</td> 
+						    		<td><input type="password" id="password3" name="password3" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." /></td>
+						    	</tr>							    	
+					    	</table>				
+					    	<table>
+					    		<tr>
+					    			<td>
+					    				<button id="do-change-password-btn" class="k-button">확인</button>
+										<span style="padding-left:5px;"></span>
+										<button class="k-button" type="reset">다시입력</button></div>	
+					    			</td>
+					    		</tr>
+					    	</table>									
+			</form>
 		</div>
-	</header>
-	<!-- END MAIN HEADER  -->   	            
-	<!-- START MAIN CONTENT  -->   
-    <section class="row" style="padding-top:10px;" >
-	    <div class="seven columns"><div id="user-grid"></div></div>
-	    <div class="five columns">
-	        <div class="row">	        
-		        <table class="tabular" width="100%">
-					<tr>
-					    <th rowspan="6" align="center"><a href="#"><img src="http://placehold.it/100x150"></a></th>
-					    <td width="110px">이름</td> 
-					    <td width="120px"><span data-bind="text:name"></span></td>
-				    </tr>
-					<tr>
-				    	<td>마지막 방문일</td> 
-				    	<td><span data-bind="text: formattedLastLoggedIn"></span></td> 
-				    </tr>
-					<tr>
-				    	<td>계정사용</td> 
-				    	<td><input type="checkbox"  name="enabled"  data-bind="checked: enabled" /></td>
-				    </tr>
-					<tr>
-				    	<td>이름공개</td> 
-				    	<td><input type="checkbox"  name="nameVisible"  data-bind="checked: nameVisible" /></td>
-				    </tr>
-					<tr>
-				    	<td>메일공개</td> 
-				    	<td><input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" /></td>
-				    </tr>
-					<tr>
-				    	<td colspan=2><a class="k-button">변경</a>&nbsp;<a class="k-button">비밀번호변경</a></td>
-				    </tr>				    
-				</table>	        		
-	        </div>
-	        <div class="row">
-	        	<div id="user-tabs">       	
-	        	</div>
-	        </div>
-			<script type="text/x-kendo-template" id="template">		
-				<div class="tabstrip">
-	                <ul>
-	                    <li class="k-state-active">
-	                        프로퍼티
-	                    </li>
-	                    <li>
-	                       그룹
-	                    </li>
-	                    <li>
-	                       권한
-	                    </li>	                    
-	                </ul>
-	                <div>
-	                	<div id="user-props-grid" class="props"></div>
-	                	<p/>
-	                	<div class="alert-box success">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+
+		<div id="detail-panel" class="panel k-content details" style="display:none">  		
+			<div class="row layout">
+				<div class="large-6 columns"><span data-bind="text: name"></span>&nbsp;&nbsp; 상세보기</div>
+				<div class="large-6 columns"><button id="detail-panel-close-btn" class='k-button right'><span class="k-icon k-i-close"></span>상세보기 닫기</button></div>
+			</div>
+			<div class="row layout">
+				<div class="large-12 columns">			
+					<div class="big-box leftless rightless bottomless">	
+						<div id="user-details"></div>
+					</div>
+				</div>					
+			</div>	 		
+  		</div>	  
+  		<div id="download-window"></div>    
+				  
+  <!-- END MAIN CONTNET -->
+  <footer>  
+  </footer>  
+  
+	<script id="download-window-template" type="text/x-kendo-template">				
+		#if (contentType.match("^image") ) {#
+			<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;"/>
+		# } else { #
+		<table class="tabular" width="100%">
+		  <thead>
+		    <tr>
+		      <th>이름</th>
+		      <th>유형</th>
+		      <th>크기</th>
+		      <th>&nbsp;</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <td  width="200">#= name #</td>
+		      <td  width="150">#= contentType #</td>
+		      <td  width="150">#= size # 바이트</td>
+		      <td  width="150"><a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
+		    </tr>
+		  </tbody>
+		</table>				
+		# } #  		
+	</script>
+	
+	<script type="text/x-kendo-template" id="template">
+		<div class="row layout">
+			<div class="large-12 columns">
+				<div class="big-box">
+					<div class="tabstrip">
+						<ul>
+							<li class="k-state-active">
+							기본정보
+							</li>	                	
+							<li>
+							프로퍼티
+							</li>
+							<li>
+							그룹
+							</li>
+							<li>
+							권한
+							</li>	                   
+							<li>
+							첨부파일
+							</li>	   
+						</ul>	          
+						<div>
+							<div class="row layout">
+								<div class="large-3 columns">
+									<div class="big-box">
+										<a href="\\#"  class="th"><img id="user-photo" src="http://placehold.it/100x150" border="0" /></a>
+										<input name="uploadImage" id="files" type="file" />
+									</div>								
+								</div>
+								<div class="large-9 columns">
+									<table class="tabular" width="100%">
+										<tbody>		
+											<tr>
+									    		<td width="150px">이름</td> 
+											    <td><input class="k-textbox" class="k-text" data-bind="value:name"></td>
+										    </tr>
+											<tr>
+										    	<td>마지막 방문일</td> 
+										    	<td><span data-bind="text: formattedLastLoggedIn"></span></td> 
+										    </tr>
+											<tr>
+										    	<td>메일</td> 
+										    	<td><input type="email" class="k-textbox" class="k-text" data-bind="value:email" placeholder="메일"></td>
+										    </tr>
+											<tr>
+										    	<td>계정사용</td> 
+										    	<td><input type="checkbox"  name="enabled"  data-bind="checked: enabled" /></td>
+										    </tr>
+											<tr>
+										    	<td>이름공개</td> 
+										    	<td><input type="checkbox"  name="nameVisible"  data-bind="checked: nameVisible" /></td>
+										    </tr>
+											<tr>
+										    	<td>메일공개</td> 
+										    	<td><input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" /></td>
+										    </tr>
+										<tbody>					    
+									</table>	
+								</div>
+							</div>
+							<div class="row layout">
+								<div class="small-9 small-offset-3 columns">
+										<button id="update-user-btn" class="k-button">정보 변경</button>&nbsp;
+										<button id="change-password-btn" class="k-button right">비밀번호변경</button>
+								</div>
+							</div>							
+	                </div>	                	      
+	        		<div>
+        				<div id="user-props-grid" class="props" style="height:0px;"/>
+        				<div class="box leftless rightless bottomless">
+	                		<div class="alert-box secondary">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+	                	</div>
 	                </div>
-	                <div><div id="user-group-grid" class="groups"></div></div>			
-	                <div><div id="user-role-grid" class="roles"></div></div>				                
-	            </div>
-	        </script>	        	    
-	    </div>
-	</section>	
-	<!-- END MAIN CONTENT  -->   
-	<!-- START Breadcrumbs -->
-	<section class="row">
-	    <div class="twelve columns">
-	        <hr style="margin-top:10px;margin-bottom:10px;" />
-			<ul class="breadcrumbs">
-			  <li><a href="${request.contextPath}/main.do">홈</a></li>
-			  <li class="unavailable"><a href="#">시스템</a></li>
-			  <li class="current"><a href="#">사용자 관리</a></li>
-			</ul>
-	    </div>
-	</section>
-	<!-- End Breadcrumbs -->
+	                <div>
+	                    <div class="alert-box secondary">
+		                    <input id="company-combo" style="width: 180px" />
+		                    <input id="group-combo" style="width: 180px" />
+		                    <button id="add-to-member-btn" class="k-button">그룹 맴버로 추가</button>
+		                    <br/><br/>멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
+	                    </div>
+	                	<div id="user-group-grid" class="groups"></div>
+	                </div>			
+	                <div>
+	                	<div class="roles">
+	                		<div class="row layout">
+	                			<div class="large-12 columns">	
+	                				<div class="big-box">
+	                				<div class="alert-box secondary">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.</div>
+	                				<div id="group-role-selected"></div>
+	                				</div>
+	                			</div>
+	                		</div>
+	                		<div class="row layout">
+	                			<div class="large-12 columns">	
+	                				<div class="big-box bottomless">
+	                					<div class="alert-box">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.</div>	                				
+	                				</div>
+	                			</div>
+	                		</div>	  
+							<div class="row layout">
+	                			<div class="large-12 columns">	
+	                				<div class="big-box topless">
+	                					<div id="user-role-select"></div>                				
+	                				</div>
+	                			</div>
+	                		</div>	 	                		              		
+							
+						</div>	
+	                </div>			
+	                <div>	                	    
+	                    <div class="alert-box secondary">
+		                    <input id="attach-upload" name="uploadFile" type="file" />
+		                    <p/>
+		                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
+	                    </div>
+	                	<div id="attach-grid" class="attachments"></div>
+	                </div>	
+				</div>
+			</div>			
+		</div>
+							
+	</script>
+	<!-- END MAIN CONTENT  -->
     </body>
 </html>
