@@ -18,6 +18,19 @@
 <decorator:head />
 <style>
 
+	header {
+	background-color: #2ba6cb;
+	padding: 20px 0;
+	}
+
+	#mainContent {
+	margin-top: 44px;
+	margin-bottom: 22px;
+	padding-bottom: 22px;
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+	}
+	
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
