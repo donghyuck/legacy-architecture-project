@@ -1,0 +1,138 @@
+.box {
+  padding: 2px ;
+}
+
+.big-box {
+  padding: 5px ;
+}
+
+.gray-box {
+	backgroupd-color: #F5F5F5;	
+	padding: 2px ;
+}
+
+.topless {
+  padding-top: 0px ;
+}
+
+.bottomless {
+  padding-bottom: 0px ;
+}
+
+.bottomspace {
+  padding-bottom: 5px ;
+}
+
+.leftless {
+  padding-left: 0px ;
+}
+
+.rightless {
+  padding-right: 0px ;
+}
+
+#mainContent {
+	margin-top: 22px;
+	margin-bottom: 11px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-bottom: 11px;
+	border-bottom: 1px solid #eee;
+	overflow: hidden;
+}
+
+
+header .open {
+	
+            /* display: none; */
+            float: left;
+            width: 40px;
+            height: 30px;
+            margin-right: 10px;
+            background: url( ../../images/common/menu.png) center center no-repeat #333;
+            -moz-border-radius: 8px;
+            -webkit-border-radius: 8px;
+            -border-radius: 8px;
+            box-shadow: inset 0 0 3px #000;
+            text-indent: -999999px;
+            border: 0;	
+}
+
+/* Tables */
+table.tabular {
+	background: white;
+	margin-bottom: 1px;
+	border: solid 1px #dddddd;
+}
+
+table.tabular thead,table.tabular tfoot {
+	background: whitesmoke;
+	font-weight: bold;
+}
+
+table.tabular thead tr th,table.tabular thead tr td,table.tabular tfoot tr th,table.tabular tfoot tr td
+	{
+	padding: 0.5em 0.625em 0.625em;
+	font-size: 12px;
+	color: #222222;
+	text-align: left;
+}
+
+table.tabular tr th,table.tabular tr td {
+	padding: 0.5625em 0.625em;
+	color: #222222;
+}
+
+table.tabular tr.even,table.tabular tr.alt,table.tabular tr:nth-of-type(even)
+	{ /*background: #f9f9f9;*/
+	
+}
+
+table.tabular thead tr th,table.tabular tfoot tr th,table.tabular tbody tr td,table.tabular tr td,table.tabular tfoot tr td
+	{
+	display: table-cell;
+	line-height: 1.125em;
+}
+
+
+/* Panal **/
+
+div.panel {
+display: inline-block;
+position: absolute;
+z-index: 10001;
+border-style: solid;
+border-width: 1px;
+padding-top: 2em;
+}
+
+.k-panel {
+	border-color: rgba(0,0,0,0.3);
+	-webkit-box-shadow: 1px 1px 7px 1px rgba(128,128,128,0.3);
+	box-shadow: 1px 1px 7px 1px rgba(128,128,128,0.3);
+	background-color: #fff;
+}
+
+.panel {
+	position: absolute;
+	top: 90px;
+	right: 0;
+	display: none;
+	background: #000000;
+	border:1px solid #111111;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-top-left-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	width: 60%;
+	height: auto;
+	padding: 30px 30px 30px 30px;
+	
+}
+
+.panel p{
+margin: 0 0 15px 0;
+padding: 0;
+color: #cccccc;
+}
+
