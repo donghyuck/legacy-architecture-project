@@ -42,6 +42,8 @@
 					dataType : "json"
 				});
 				
+				$("#tabstrip").show();
+				
 				$("#tabstrip").kendoTabStrip({
 					animation:  {
 						open: {
@@ -51,25 +53,27 @@
 					select : function(e){			
 						// TAB - ATTACHMENT TAB
 						if( $( e.contentElement ).hasClass('attachments') ){	
-							if( !$('#attachment-list-view').data('kendoListView') ){	
+						
+							if( !$('#attachment-list-view').data('kendoListView') ){
+								
 								$("#attachment-list-view").kendoListView({
 									dataSource: {
 										type: 'json',
 										transport: {
-											read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
-											destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },                                
+											read: { url:'${request.contextPath}/accounts/get-user-attachements.do?output=json', type: 'POST' },		
+											destroy: { url:'${request.contextPath}/accounts/delete-user-attachment.do?output=json', type:'POST' },                                
 											parameterMap: function (options, operation){
 												if (operation != "read" && options) {										                        								                       	 	
-													return { userId: currentUser.userId, attachmentId :options.attachmentId };									                            	
+													return { attachmentId :options.attachmentId };									                            	
 												}else{
-													return { userId: currentUser.userId };
+													return { };
 												}
 											}								                         
 										},
 										error:handleKendoAjaxError,
 										schema: {
 											model: Attachment,
-											data : "targetUserAttachments"
+											data : "userAttachments"
 										}
 									},
 									selectable: "single",
@@ -105,6 +109,28 @@
 									 }).on("mouseleave", ".attach", function(e) {
 										kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 								});        
+								
+								$("#attachment-files").kendoUpload({
+								 	multiple : false,
+								 	width: 150,
+								 	showFileList : false,
+								    localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+								    async: {
+									    saveUrl:  '${request.contextPath}/accounts/save-user-attachments.do?output=json',							   
+									    autoUpload: true
+								    },
+								    upload: function (e) {								         
+								    	 e.data = {  };														    								    	 		    	 
+								    },
+								    success : function(e) {								    
+								    	if( e.response.targetAttachment ){
+								    		e.response.targetAttachment.attachmentId;
+								    		// LIST VIEW REFRESH...
+								    		$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+								    	}				
+								    }					   
+								});	
+																
 							}
 						
 						}
@@ -266,24 +292,32 @@
  
 
  
-    <div class="large-4 columns">
-      <h5>Map</h5>
-      <!-- Clicking this placeholder fires the mapModal Reveal modal -->
-	<div id="tabstrip">
-		<ul>
-			<li class="k-state-active">
-			쪽지 
-			</li>
-			<li>
-			내 파일
-			</li>
-		</ul>
-		<div>새로운 메시지가 없습니다.</div>
-		<div class="attachments">
-			<button class="k-button">파일업로드</button>
-			<div id="attachment-list-view" ></div>
-		</div>
-	</div>				
+	<div class="large-4 columns">
+		<h5>Map</h5>
+		<!-- Clicking this placeholder fires the mapModal Reveal modal -->
+		<div id="tabstrip" style="display:none;">
+			<ul>
+				<li class="k-state-active">
+				쪽지 
+				</li>
+				<li>
+				내 파일
+				</li>
+			</ul>
+			<div>새로운 메시지가 없습니다.</div>
+			<div class="attachments" >
+				<div class="row layout">
+					<div class="small-12 columns">	
+						<input name="uploadAttachment" id="attachment-files" type="file" />		
+					</div>
+				</div>
+				<div class="row layout">
+					<div class="small-12 columns">	
+						<div id="attachment-list-view" ></div>
+					</div>
+				</div>
+			</div>
+		</div>				
       <p>
         <a href="" data-reveal-id="mapModal"><img src="http://placehold.it/400x280"></a><br />
         <a href="" data-reveal-id="mapModal">View Map</a>
