@@ -1,13 +1,16 @@
 <%@ page pageEncoding="UTF-8"%>
-<html decorator="banded">
+<html decorator="main">
 <head>
 <title>로그인</title>
 <script type="text/javascript">
 		 yepnope([{
        	  load: [ 
-          	   '<%= request.getContextPath()  %>/js/kendo/kendo.web.min.js',
-          	   '<%= request.getContextPath()  %>/js/common.models.min.js' 
-          	   ],
+     			'<%= request.getContextPath()  %>/js/jquery/1.9.1/jquery.min.js',
+    			'<%= request.getContextPath()  %>/js/jgrowl/jquery.jgrowl.min.js',
+    			'<%= request.getContextPath()  %>/js/kendo/kendo.web.min.js',
+    			'<%= request.getContextPath()  %>/js/kendo/kendo.ko_KR.js',
+    			'<%= request.getContextPath()  %>/js/common/common.ui.min.js',
+    			'<%= request.getContextPath()  %>/js/common/common.models.js' ],
               	  complete: function() {        	              		              		  
               		  
                  	 var templateContent = $("#alert-template").html();
