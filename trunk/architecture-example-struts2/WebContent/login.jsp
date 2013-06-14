@@ -5,12 +5,12 @@
 <script type="text/javascript">
 		 yepnope([{
        	  load: [ 
-     			'<%= request.getContextPath()  %>/js/jquery/1.9.1/jquery.min.js',
-    			'<%= request.getContextPath()  %>/js/jgrowl/jquery.jgrowl.min.js',
-    			'<%= request.getContextPath()  %>/js/kendo/kendo.web.min.js',
-    			'<%= request.getContextPath()  %>/js/kendo/kendo.ko_KR.js',
-    			'<%= request.getContextPath()  %>/js/common/common.ui.min.js',
-    			'<%= request.getContextPath()  %>/js/common/common.models.js' ],
+     			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.web.min.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.ko_KR.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.min.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js' ],
               	  complete: function() {        	              		              		  
               		  
                  	 var templateContent = $("#alert-template").html();
