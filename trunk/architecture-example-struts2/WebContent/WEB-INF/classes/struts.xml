@@ -5,8 +5,8 @@
 <struts>
 
     <constant name="struts.devMode" value="true" />
-    <include file="struts-framework-default.xml"/>
-    <include file="struts-framework-admin.xml"/>
-	<include file="struts-framework-user.xml"/>
+    <include file="struts-framework-default.xml"/>	
+    <include file="struts-framework-user.xml"/>	 
+    <include file="struts-framework-system.xml"/>	 
 	
 </struts>
