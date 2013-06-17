@@ -44,8 +44,7 @@
 					},
 					select : function(e){			
 						// TAB - ATTACHMENT TAB
-						if( $( e.contentElement ).hasClass('attachments') ){	
-						
+						if( $( e.contentElement ).hasClass('attachments') ){							
 							if( !$('#attachment-list-view').data('kendoListView') ){								
 								$("#attachment-list-view").kendoListView({
 									dataSource: {
@@ -59,7 +58,7 @@
 												}else{
 													return { };
 												}
-											}								                         
+											}
 										},
 										error:handleKendoAjaxError,
 										schema: {
@@ -102,6 +101,23 @@
 									 }).on("mouseleave", ".attach", function(e) {
 										kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 								});        
+								
+								// Filter 					
+											
+								$("dl#attachment-list-view-filter dd").find("a").click(function(){			
+									
+									$("dl#attachment-list-view-filter dd.active").removeClass("active");
+									$(this).parent().addClass("active");
+									
+									var filter_id =  $(this).attr('id') ;
+									if( filter_id == "attachment-list-view-filter-1" ){
+										$('#attachment-list-view').data('kendoListView').dataSource.filter({}) ; 
+									}else if (filter_id == "attachment-list-view-filter-2" ) {
+										$('#attachment-list-view').data('kendoListView').dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
+									}else if (filter_id == "attachment-list-view-filter-3" ) {
+										$('#attachment-list-view').data('kendoListView').dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
+									}
+								});
 								
 								$("#attachment-files").kendoUpload({
 								 	multiple : false,
@@ -295,7 +311,7 @@
 	<div class="large-4 columns">
 		<h5>Map</h5>
 		<!-- Clicking this placeholder fires the mapModal Reveal modal -->
-		<div id="tabstrip" style="display:none;">
+		<div id="tabstrip" style="display:none; background-color:#f5f5f5;">
 			<ul>
 				<li class="k-state-active">
 				쪽지 
@@ -305,14 +321,24 @@
 				</li>
 			</ul>
 			<div>새로운 메시지가 없습니다.</div>
-			<div class="attachments" >
+			<div class="attachments">
 				<div class="row layout">
 					<div class="small-12 columns">	
 						<input name="uploadAttachment" id="attachment-files" type="file" />		
 					</div>
 				</div>
 				<div class="row layout">
-					<div class="small-12 columns">	
+					<div class="small-12 columns">					
+						<dl id="attachment-list-view-filter"  class="sub-nav">
+							<dt>필터:</dt>
+							<dd class="active"><a href="#" id="attachment-list-view-filter-1">전체</a></dd>
+							<dd><a href="#" id="attachment-list-view-filter-2">이미지</a></dd>
+							<dd><a href="#" id="attachment-list-view-filter-3">파일</a></dd>
+						</dl>
+					</div>
+				</div>
+				<div class="row layout">
+					<div class="small-12 columns">					
 						<div id="attachment-list-view" ></div>
 					</div>
 				</div>
@@ -331,12 +357,14 @@
     
   </div>
   
- <div id="drop1" data-dropdown-content class="f-dropdown">
- 	<div id="account-details" class="k-content" style="background-color:#F5F5F5;"></div>
- </div>
- 
-		<!-- END MAIN CONTENT -->
-		
+		<div id="drop1" data-dropdown-content class="f-dropdown">
+			<div id="account-details" class="k-content" style="background-color:#F5F5F5;"></div>
+		</div>		
+		<!-- END MAIN CONTENT -->		
+ 		<!-- START FOOTER -->
+		<footer> 
+		</footer>
+		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
 		<script id="template" type="text/x-kendo-template">
 			<div class="row layout">
@@ -362,7 +390,7 @@
 					<a class="k-button right" href="${request.contextPath}/logout" >로그아웃</a><div class="box right"></div><button class="k-button right">계정설정</button>
 					</div>
 				</div>
-			</div>								
+			</div>
 		</script>
 		<script type="text/x-kendo-tmpl" id="template2">
 			<div class="attach">			
@@ -377,8 +405,7 @@
 				</div>		
 					
 			</div>
-		</script>
-		
+		</script>		
 		<script id="template3" type="text/x-kendo-template">				
 		#if (contentType.match("^image") ) {#
 			<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;"/>
@@ -386,8 +413,7 @@
 			<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
 			<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>	
 			</p>
-		# } else { #
-		
+		# } else { #		
 			<div class="k-grid k-widget" style="width:100%;">
 				<div style="padding-right: 17px;" class="k-grid-header">
 					<div class="k-grid-header-wrap">
@@ -431,9 +457,6 @@
 		# } #  		
 	</script>		
 		<!-- END TEMPLATE -->
-		<!-- START FOOTER -->
-		<footer> 
-		</footer>
-		<!-- END FOOTER -->	
+
 	</body>    
 </html>
