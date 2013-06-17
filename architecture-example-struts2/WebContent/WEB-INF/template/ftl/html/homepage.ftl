@@ -77,7 +77,7 @@
 												actions: ["Minimize", "Maximize", "Close"],
 												minHeight : 300,
 												minWidth : 300,
-												maxWidth : 500,
+												maxWidth : 800,
 												modal: false,
 												visible: false
 											});
