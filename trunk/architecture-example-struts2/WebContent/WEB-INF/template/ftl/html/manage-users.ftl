@@ -34,11 +34,8 @@
                         dataBound: function(e){
                         }
                 });	                
-				$("#company").data("kendoDropDownList").readonly();
-		
-		
-				$("header .open").pageslide({ modal: true });
-				
+				$("#company").data("kendoDropDownList").readonly();		
+				$("header .open").pageslide({ modal: true });				
 				$("#menu").kendoMenu({
 						select: function(e){							
 							var action = $(e.item).attr('action') ;
@@ -47,12 +44,10 @@
 							}
 						}						
 				});
-				$("#menu").show();	
-				
+				$("#menu").show();					
 				$("#go-comapny-btn").click( function(){
 					$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 
 				}); 
-
 				var visible = false;
 				$('#detail-panel-close-btn').click( function(e){
 					if(visible){
@@ -62,8 +57,7 @@
 						//$("#detail-panel").hide();	
 						return false;			
 					}
-				});		
-									
+				});											
 	            var selectedUser = new User ({});		  
 		        // 1. USER GRID 		        
 				var user_grid = $("#user-grid").kendoGrid({
@@ -101,8 +95,7 @@
                     toolbar: [
 					 	{ name: "create-user", text: "새로운 사용자 생성하기", className: "createUserCustomClass" } ],
                     change: function(e) {                    
-                        var selectedCells = this.select();
-                        
+                        var selectedCells = this.select();                        
   						if( selectedCells.length == 1){ 
                             var selectedCell = this.dataItem( selectedCells ); 
                             selectedUser.userId = selectedCell.userId ; 
@@ -117,29 +110,23 @@
 							selectedUser.enabled = selectedCell.enabled ;              
 							selectedUser.nameVisible = selectedCell.nameVisible ;          
 							selectedUser.emailVisible = selectedCell.emailVisible ;
-							selectedUser.properties = selectedCell.properties;
-							 							 
+							selectedUser.properties = selectedCell.properties;							 							 
 							selectedUser.company = $("#company").data("kendoDropDownList").dataSource.get(  $("#company").data("kendoDropDownList").value()  );
 							var observable = new kendo.data.ObservableObject( selectedUser ); 
-
 							 if( selectedUser.userId > 0 ){
 							 	// 2. USER DETAILS
 							 	// 3. USER TABS 	
-							 	$('#user-details').show().html(kendo.template($('#template').html()));
-							 	
-	                            kendo.bind($(".details"), selectedUser );      
-								
+							 	$('#user-details').show().html(kendo.template($('#template').html()));							 	
+	                            kendo.bind($(".details"), selectedUser );      								
 								if( !visible ) {	
 									$(".panel").toggle("fast");						
 									$(this).toggleClass("active");									
 									visible = true;
-								} 
-								
+								} 								
 							 	if( selectedUser.properties.imageId ){
 							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=200&height=300&imageId=' + selectedUser.properties.imageId ;
 							 	 	$('#user-photo').attr( 'src', photoUrl );
-							 	}
-								
+							 	}								
 								$("#files").kendoUpload({
 								 	multiple : false,
 								 	showFileList : false,
@@ -153,8 +140,7 @@
 								         if( selectedUser.properties.imageId ){
 								         	imageId = selectedUser.properties.imageId
 								         }
-								    	 e.data = { userId: selectedUser.userId , imageId:imageId  };						
-								    								    	 		    	 
+								    	 e.data = { userId: selectedUser.userId , imageId:imageId  };									    								    	 		    	 
 								    },
 								    success : function(e) {								    
 								    	if( e.response.targetUserImage ){
@@ -163,8 +149,7 @@
 							 	 			$('#user-photo').attr( 'src', photoUrl );
 								    	}				
 								    }					   
-								});	
-                    
+								});	                    
 					            $('#change-password-btn').bind( 'click', function(){
 					                $('#change-password-window').kendoWindow({
 				                            width: "400px",
@@ -177,8 +162,7 @@
 				                    $('#change-password-window').data("kendoWindow").center();        
 				                    $('#password2').focus();                
 					            	$('#change-password-window').data("kendoWindow").open();	            	
-					            });
-					            
+					            });					            
 					            $('#do-change-password-btn').bind( 'click', function(){	            	
 					            	var doChangePassword = true ;	            	
 					            	if( $('#password2').val().length < 6 ){
@@ -188,8 +172,7 @@
 					            		$('#password3').val("");           		
 					            		$('#password2').focus();   
 					            		return false;
-					            	}
-					            
+					            	}					            
 				                   	if( doChangePassword && $('#password2').val() != $('#password3').val() ){
 				                   		doChangePassword = false;
 				                   	    alert( '패스워드가 같지 않습니다. 다시 입력하여 주십시오.' );      
@@ -211,9 +194,7 @@
 											});	
 										selectedUser.password = '' ;                   	    	
 				                   	}            	                   	
-					            } );               
-					            	
-            
+					            } ); 
 				                $('#update-user-btn').bind('click' , function(){
 									$.ajax({
 										type : 'POST',
@@ -224,17 +205,14 @@
 										},
 										error: handleKendoAjaxError,
 										dataType : "json"
-									});	
-									
+									});										
 									if(visible){
 										slide.reverse();						
 										visible = false;		
 										$("#detail-panel").hide();				
 									}
-				                }); 	
-                							 	
-							 	//kendo.bind($(".tabular"), selectedUser );
-							 					
+				                }); 	                							 	
+							 	//kendo.bind($(".tabular"), selectedUser );							 					
 							 	var user_tabs = $('#user-details').find(".tabstrip").kendoTabStrip({
 									animation: {
 								    	close: {  duration: 200, effects: "fadeOut" },
@@ -730,11 +708,11 @@
 
 		<div id="detail-panel" class="panel k-content details" style="display:none">  		
 			<div class="row layout">
-				<div class="large-6 columns"><span data-bind="text: name"></span>&nbsp;&nbsp; 상세보기</div>
-				<div class="large-6 columns"><button id="detail-panel-close-btn" class='k-button right'><span class="k-icon k-i-close"></span>상세보기 닫기</button></div>
+				<div class="small-6 columns"><span data-bind="text: name"></span>&nbsp;&nbsp; 상세보기</div>
+				<div class="small-6 columns"><button id="detail-panel-close-btn" class='k-button right'><span class="k-icon k-i-close"></span>상세보기 닫기</button></div>
 			</div>
 			<div class="row layout">
-				<div class="large-12 columns">			
+				<div class="small-12 columns">			
 					<div class="big-box leftless rightless bottomless">	
 						<div id="user-details"></div>
 					</div>
@@ -745,8 +723,7 @@
 				  
   <!-- END MAIN CONTNET -->
   <footer>  
-  </footer>  
-  
+  </footer>    
 	<script id="download-window-template" type="text/x-kendo-template">				
 		#if (contentType.match("^image") ) {#
 			<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;"/>
@@ -770,8 +747,7 @@
 		  </tbody>
 		</table>				
 		# } #  		
-	</script>
-	
+	</script>	
 	<script type="text/x-kendo-template" id="template">
 		<div class="row layout">
 			<div class="large-12 columns">
@@ -878,8 +854,7 @@
 	                					<div id="user-role-select"></div>                				
 	                				</div>
 	                			</div>
-	                		</div>	 	                		              		
-							
+	                		</div>	
 						</div>	
 	                </div>			
 	                <div>	                	    
