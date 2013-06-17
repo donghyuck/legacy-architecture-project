@@ -60,13 +60,14 @@
 												}
 											}
 										},
+										pageSize: 10,
 										error:handleKendoAjaxError,
 										schema: {
 											model: Attachment,
 											data : "userAttachments"
 										}
 									},
-									selectable: "single",
+									selectable: "single",									
 									change: function(e) {
 										var data = this.dataSource.view() ;
 										var item = data[this.select().index()];
@@ -95,6 +96,10 @@
 									template: kendo.template($("#template2").html())
 								});
 								
+								$("#pager").kendoPager({
+									dataSource: $('#attachment-list-view').data('kendoListView').dataSource	
+								});
+            
 								$("#attachment-list-view").on("mouseenter", ".attach", 
 									function(e) {
 										kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
@@ -291,6 +296,12 @@
 						<div id="attachment-list-view" ></div>
 					</div>
 				</div>
+				<div class="row layout">
+					<div class="small-12 columns">
+						<div id="pager" class="k-pager-wrap"></div>
+					</div>
+				</div>				
+				</div>				
 			</div>
 		</div>				
       <p>
