@@ -15,6 +15,16 @@
       	    '${request.contextPath}/js/common/common.models.js' ],             	   
             complete: function() {               
                 kendo.culture("ko-KR");               
+                
+				// SPLITTER LAYOUT
+				var splitter = $("#splitter").kendoSplitter({
+					orientation: "horizontal",
+					panes: [
+						{ collapsible: true, min: "500px" },
+						{ collapsible: true, collapsed: true, min: "500px" }
+					]
+				});
+                
 				$("#company").kendoDropDownList({
                         dataTextField: "displayName",
                         dataValueField: "companyId",
@@ -43,22 +53,15 @@
 								$("form[name='fm1']").attr("action", action ).submit(); 
 							}
 						}						
-				});
-				$("#menu").show();					
+				}).css("background-color", "#F5F5F5").css("border-width", "0px 0px 1px");;
+				$("#menu").show();				
+					
 				$("#go-comapny-btn").click( function(){
 					$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 
 				}); 
-				var visible = false;
-				$('#detail-panel-close-btn').click( function(e){
-					if(visible){
-						$(".panel").toggle("fast");						
-						$(this).toggleClass("active");									
-						visible = false;
-						//$("#detail-panel").hide();	
-						return false;			
-					}
-				});											
-	            var selectedUser = new User ({});		  
+				
+								
+	            var selectedUser = new User ({});	
 		        // 1. USER GRID 		        
 				var user_grid = $("#user-grid").kendoGrid({
                     dataSource: {
@@ -91,7 +94,7 @@
                     sortable: true,
                     pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
                     selectable: 'row',
-                    height: 452,
+                    height: 547,
                     toolbar: [
 					 	{ name: "create-user", text: "새로운 사용자 생성하기", className: "createUserCustomClass" } ],
                     change: function(e) {                    
@@ -114,15 +117,15 @@
 							selectedUser.company = $("#company").data("kendoDropDownList").dataSource.get(  $("#company").data("kendoDropDownList").value()  );
 							var observable = new kendo.data.ObservableObject( selectedUser ); 
 							 if( selectedUser.userId > 0 ){
+							 	
+							 	
 							 	// 2. USER DETAILS
+							 	 $("#splitter").data("kendoSplitter").expand("#datail_pane");
+							 	 
 							 	// 3. USER TABS 	
 							 	$('#user-details').show().html(kendo.template($('#template').html()));							 	
 	                            kendo.bind($(".details"), selectedUser );      								
-								if( !visible ) {	
-									$(".panel").toggle("fast");						
-									$(this).toggleClass("active");									
-									visible = true;
-								} 								
+							
 							 	if( selectedUser.properties.imageId ){
 							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=200&height=300&imageId=' + selectedUser.properties.imageId ;
 							 	 	$('#user-photo').attr( 'src', photoUrl );
@@ -312,13 +315,12 @@
 							                            			
 							                            			var downloadWindow = $("#download-window").data("kendoWindow");
 							                            			downloadWindow.title( item.name );							                            			
-							                            			//downloadWindow.content.data = item ;
-							                            			//downloadWindow.content.template = kendo.template($("#download-window-template").html());
-							                            		 
 							                            		 	var template = kendo.template($("#download-window-template").html());
 							                            			downloadWindow.content( template(item) );
-							                            			
-							                            			downloadWindow.center();
+							                            			$("#download-window").closest(".k-window").css({
+																	     top: 65,
+																	     left: 10,
+																	 });						                            			
 							                            			downloadWindow.open();
 							                            		}
 							                            	}, 
@@ -610,22 +612,34 @@
 						 if(selectedCells.length == 0 ){								      
 						     selectedUser = new User ({});
 						     kendo.bind($(".tabular"), selectedUser );	
-							if( visible ) {	
-								$(".panel").toggle("fast");						
-								$(this).toggleClass("active");									
-								visible = true;
-							} 						     
+							$("#user-details").hide(); 	 					     
 						 }
 					}
-                });                 
+                }).css("border", "0px"); 	              
             }	
         }]);      
         </script>
+		<style>
+			#mainContent {
+				margin-top: 5px;
+			}
+ 			#user-details .k-content 
+		    {
+		        height: "100%";
+		    }			
+			 #user-details .k-content 
+		    {
+		        height: "100%";
+		        overflow: auto;
+		    }
+		    
+		</style>
+		   
     </head>
 	<body>
 		<!-- START HEADER -->
 		<header>
-			<div class="row layout">
+			<div class="row full-width layout">
 				<div class="large-12 columns">
 					<div class="big-box topless bottomless">
 					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>사용자관리</h1>
@@ -636,39 +650,47 @@
 		</header>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<section id="mainContent">
-			<div class="row layout">			
-				<div class="large-6 columns" >
-					<div class="box leftless rightless topless">
-						<form name="fm1" method="POST" accept-charset="utf-8">
-							<input type="hidden" name="companyId"  value="${action.companyId}" />
-						</form>		    	
-			    		<ul id="menu" style="display:none;" >
-			                <li action="#">회사
-			                	<ul>	                		    
-			                		<li>
-			                			<div style="padding: 10px;">
-			                			<input id="company" type="hidden" style="width: 250px" value="${action.companyId}"/>
-			                			</div>
-			                		</li>
-			                		<li>
-			                			<div style="padding: 10px;">
-			                				<button id="go-comapny-btn" class="k-button">회사 관리하기</button>
-			                			</div>	                			
-			                		</li>
-			                	</ul>
-			                </li>  
-			                <li action="main-group.do">그룹
-			                </li>     
-			            </ul>  					
-					</div>
-				</div>	
-			</div>
-			<div class="row layout">			
-				<div class="large-12 columns" >
-					<div id="user-grid"></div>
+		<section id="mainContent">		
+			<div id="splitter" style="height:600px;">
+				<div id="list_pane">
+					<div class="row full-width layout">
+						<div class="large-12 columns" >
+							<ul id="menu" style="display:none;" >
+								<li action="#">회사
+									<ul>
+										<li>
+											<div style="padding: 10px;">
+											<input id="company" type="hidden" style="width: 250px" value="${action.companyId}"/>
+											</div>
+										</li>
+										<li>
+											<div style="padding: 10px;">
+												<button id="go-comapny-btn" class="k-button">회사 관리하기</button>
+											</div>	                			
+										</li>
+									</ul>
+								</li>  
+								<li action="main-group.do">그룹</li>     
+							</ul>  
+						</div>
+					</div>			
+					<div class="row full-width layout">			
+						<div class="large-12 columns" >
+							<div id="user-grid"></div>
+						</div>
+					</div>		
 				</div>
-			</div>						
+				<div id="datail_pane">
+					<div class="row full-width layout">			
+						<div class="large-12 columns" >
+							<div id="user-details"></div>
+						</div>				
+					</div>
+				</div>
+			</div>	
+			<form name="fm1" method="POST" accept-charset="utf-8">
+				<input type="hidden" name="companyId"  value="${action.companyId}" />
+			</form>	
 		</section>	
 		<div id="change-password-window" style="display:none; width:500px;">
 			<form>
@@ -704,21 +726,7 @@
 					    		</tr>
 					    	</table>									
 			</form>
-		</div>
-
-		<div id="detail-panel" class="panel k-content details" style="display:none">  		
-			<div class="row layout">
-				<div class="small-6 columns"><span data-bind="text: name"></span>&nbsp;&nbsp; 상세보기</div>
-				<div class="small-6 columns"><button id="detail-panel-close-btn" class='k-button right'><span class="k-icon k-i-close"></span>상세보기 닫기</button></div>
-			</div>
-			<div class="row layout">
-				<div class="small-12 columns">			
-					<div class="big-box leftless rightless bottomless">	
-						<div id="user-details"></div>
-					</div>
-				</div>					
-			</div>	 		
-  		</div>	  
+		</div>  
   		<div id="download-window"></div>    
 				  
   <!-- END MAIN CONTNET -->
@@ -749,7 +757,7 @@
 		# } #  		
 	</script>	
 	<script type="text/x-kendo-template" id="template">
-		<div class="row layout">
+		<div class="row full-width layout">
 			<div class="large-12 columns">
 				<div class="big-box">
 					<div class="tabstrip">
@@ -771,7 +779,7 @@
 							</li>	   
 						</ul>	          
 						<div>
-							<div class="row layout">
+							<div class="row full-width layout">
 								<div class="large-3 columns">
 									<div class="big-box">
 										<a href="\\#"  class="th"><img id="user-photo" src="http://placehold.it/100x150" border="0" /></a>
@@ -779,7 +787,7 @@
 									</div>								
 								</div>
 								<div class="large-9 columns">
-									<table class="tabular" width="100%">
+									<table class="tabular details" width="100%">
 										<tbody>		
 											<tr>
 									    		<td width="150px">이름</td> 
@@ -809,7 +817,7 @@
 									</table>	
 								</div>
 							</div>
-							<div class="row layout">
+							<div class="row full-width layout">
 								<div class="small-9 small-offset-3 columns">
 										<button id="update-user-btn" class="k-button">정보 변경</button>&nbsp;
 										<button id="change-password-btn" class="k-button right">비밀번호변경</button>
@@ -833,7 +841,7 @@
 	                </div>			
 	                <div>
 	                	<div class="roles">
-	                		<div class="row layout">
+	                		<div class="row full-width layout">
 	                			<div class="large-12 columns">	
 	                				<div class="big-box">
 	                				<div class="alert-box secondary">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.</div>
@@ -841,14 +849,14 @@
 	                				</div>
 	                			</div>
 	                		</div>
-	                		<div class="row layout">
+	                		<div class="row full-width layout">
 	                			<div class="large-12 columns">	
 	                				<div class="big-box bottomless">
 	                					<div class="alert-box">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.</div>	                				
 	                				</div>
 	                			</div>
 	                		</div>	  
-							<div class="row layout">
+							<div class="row full-width layout">
 	                			<div class="large-12 columns">	
 	                				<div class="big-box topless">
 	                					<div id="user-role-select"></div>                				
