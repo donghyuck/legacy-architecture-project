@@ -21,8 +21,8 @@
 				var splitter = $("#splitter").kendoSplitter({
                         orientation: "horizontal",
                         panes: [
-                            { collapsible: true, min: "500px",  size: "50%" },
-                            { collapsible: true, collapsed: true, min: "500px", size: "50%" }
+                            { collapsible: true, min: "500px" },
+                            { collapsible: true, collapsed: true, min: "500px" }
                         ]
                  });
                     
@@ -327,33 +327,42 @@
 		
 		
 		<section id="mainContent">		
-			<div id="splitter" style="height: 600px; width: 100%;">
-				<div id="list_pane">
-					<div id="company-grid" class="layout"></div>	
-				</div>
-				<div id="datail_pane">				
-					<ul id="menu" class="hide" >
-						<li action="main-group.do">그룹 관리하기</li>
-						<li action="main-user.do">사용자 관리하기</li>
-					</ul>
-					<div id="company-details"></div>
-				</div>
-			</div>
-			<div id="perms-window" style="display:none;">
-				<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
-				<div id="role-grid">	</div>            	
-			</div>				
+
+					<div id="splitter" style="height:600px;">
+						<div id="list_pane">
+							<div class="row layout">
+								<div class="large-12 columns">				
+									<div id="company-grid" class="layout"></div>
+								</div>
+							</div>			
+						</div>
+						<div id="datail_pane">				
+							<div class="row layout">
+								<div class="large-12 columns">
+									<ul id="menu" class="hide" >
+										<li action="main-group.do">그룹 관리하기</li>
+										<li action="main-user.do">사용자 관리하기</li>
+									</ul>						
+								</div>
+							</div>			
+							<div class="row layout">
+								<div class="large-12 columns">
+									<div id="company-details"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="perms-window" style="display:none;">
+						<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
+						<div id="role-grid">	</div>            	
+					</div>
+					
 		</section>
 		<!-- END MAIN CONTENT -->
 		<!-- START FOOTER -->
 		<footer class="row"> 
 		</footer>
-		<!-- END FOOTER -->
-
-		<div id="detail-panel" class="panel k-content details" style="display:none">
-							
-		</div>
-		
+		<!-- END FOOTER -->		
 		<!-- 상세 정보 템플릿 -->
 		<script type="text/x-kendo-template" id="template">				
 			<form name="fm1" method="POST" accept-charset="utf-8" class="details">
