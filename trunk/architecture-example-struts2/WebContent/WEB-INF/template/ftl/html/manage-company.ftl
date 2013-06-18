@@ -21,8 +21,8 @@
 				var splitter = $("#splitter").kendoSplitter({
                         orientation: "horizontal",
                         panes: [
-                            { collapsible: true, size: "50%" },
-                            { collapsible: true, collapsed: true, size: "50%" }
+                            { collapsible: true, min: "500px",  size: "50%" },
+                            { collapsible: true, collapsed: true, min: "500px", size: "50%" }
                         ]
                  });
                     
