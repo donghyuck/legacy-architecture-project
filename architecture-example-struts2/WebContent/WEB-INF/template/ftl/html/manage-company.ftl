@@ -18,6 +18,8 @@
 				// START SCRIPT           
 				// 1. COMPANY GRID			        
 				var selectedCompany = new Company();
+				
+				// SPLITTER LAYOUT
 				var splitter = $("#splitter").kendoSplitter({
                         orientation: "horizontal",
                         panes: [
