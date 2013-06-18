@@ -45,9 +45,6 @@
 					select : function(e){			
 						// TAB - ATTACHMENT TAB
 						if( $( e.contentElement ).hasClass('attachments') ){	
-							
-							
-						
 							if( !$('#attachment-list-view').data('kendoListView') ){								
 								$("#attachment-list-view").kendoListView({
 									dataSource: {

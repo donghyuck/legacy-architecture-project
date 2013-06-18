@@ -225,7 +225,7 @@
 	<body>
 		<!-- START HEADER -->
 		<header>
-			<div class="row layout">
+			<div class="row full-width layout">
 				<div class="large-12 columns">
 					<div class="big-box topless bottomless">
 					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>시스템 정보</h1>
@@ -237,7 +237,7 @@
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
 		<section id="mainContent">
-			<div class="row layout">			
+			<div class="row  layout">			
 				<div class="large-12 columns" >
 					<h4>메모리 사용현황</h4>
 				</div>
@@ -288,12 +288,12 @@
 							</div>				
 				</div>
 			</div>	
-			<div class="row layout">			
+			<div class="row  layout">			
 				<div class="large-12 columns" >
 					<h4>시스템 정보</h4>
 				</div>
 			</div>						
-			<div class="row layout">			
+			<div class="row  layout">			
 				<div class="large-12 columns" >
 						<ul id="panelbar"  style="display:none;">
 							<li class="k-state-active">

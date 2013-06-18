@@ -449,7 +449,7 @@
 	<body>
 		<!-- START HEADER -->
 		<header>
-			<div class="row layout">
+			<div class="row full-width layout">
 				<div class="large-12 columns">
 					<div class="big-box topless bottomless">
 					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>그룹관리</h1>
@@ -463,7 +463,7 @@
 		<section id="mainContent">
 			<div id="splitter" style="height:600px;">
 				<div id="list_pane">
-					<div class="row layout">
+					<div class="row full-width layout">
 						<div class="large-12 columns" >
 							<ul id="menu" style="display:none;" >
 				                <li action="#">회사
@@ -484,14 +484,14 @@
 				            </ul>							
 						</div>
 					</div>
-					<div class="row layout">
+					<div class="row full-width layout">
 						<div class="large-12 columns" >
 							<div id="group-grid"></div>	
 						</div>
 					</div>	
 				</div>
 				<div id="datail_pane">			
-					<div class="row layout">			
+					<div class="row full-width layout">			
 						<div class="large-12 columns" >
 							<div id="group-details"></div>
 						</div>				
