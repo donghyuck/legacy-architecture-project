@@ -44,7 +44,10 @@
 					},
 					select : function(e){			
 						// TAB - ATTACHMENT TAB
-						if( $( e.contentElement ).hasClass('attachments') ){							
+						if( $( e.contentElement ).hasClass('attachments') ){	
+							
+							
+						
 							if( !$('#attachment-list-view').data('kendoListView') ){								
 								$("#attachment-list-view").kendoListView({
 									dataSource: {
@@ -67,11 +70,10 @@
 											data : "userAttachments"
 										}
 									},
-									selectable: "single",									
+									selectable: "none",									
 									change: function(e) {
 										var data = this.dataSource.view() ;
-										var item = data[this.select().index()];
-										
+										var item = data[this.select().index()];										
 										if(! $("#attach-window").data("kendoWindow")){
 											$("#attach-window").kendoWindow({
 												actions: ["Minimize", "Maximize", "Close"],
@@ -81,8 +83,7 @@
 												modal: false,
 												visible: false
 											});
-										}
-										
+										}										
 										var attachWindow = $("#attach-window").data("kendoWindow");
 										var template = kendo.template($("#template3").html());
 										attachWindow.title( item.name );
@@ -93,13 +94,19 @@
 										 });
 										attachWindow.open();
 									},
-									template: kendo.template($("#template2").html())
+									navigatable: false,
+									template: kendo.template($("#template2").html()),
+									dataBound: function(e) {
+										
+									}
 								});
 								
 								$("#pager").kendoPager({
-									dataSource: $('#attachment-list-view').data('kendoListView').dataSource	
+									refresh : true,
+									numeric : true,
+									dataSource: $('#attachment-list-view').data('kendoListView').dataSource
 								});
-            
+									           
 								$("#attachment-list-view").on("mouseenter", ".attach", 
 									function(e) {
 										kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
@@ -107,28 +114,26 @@
 										kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 								});        
 								
-								// Filter 					
-											
-								$("dl#attachment-list-view-filter dd").find("a").click(function(){			
-									
+								// Filter 												
+								$("dl#attachment-list-view-filter dd").find("a").click(function(){					
+									var attachment_list_view = $('#attachment-list-view').data('kendoListView');
 									$("dl#attachment-list-view-filter dd.active").removeClass("active");
 									$(this).parent().addClass("active");
-									
 									var filter_id =  $(this).attr('id') ;
 									if( filter_id == "attachment-list-view-filter-1" ){
-										$('#attachment-list-view').data('kendoListView').dataSource.filter({}) ; 
+										attachment_list_view.dataSource.filter({}) ; 
 									}else if (filter_id == "attachment-list-view-filter-2" ) {
-										$('#attachment-list-view').data('kendoListView').dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
+										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
 									}else if (filter_id == "attachment-list-view-filter-3" ) {
-										$('#attachment-list-view').data('kendoListView').dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
+										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
 									}
 								});
-								
+																
 								$("#attachment-files").kendoUpload({
 								 	multiple : false,
 								 	width: 150,
 								 	showFileList : false,
-								    localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+								    localization:{ select : '업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
 								    async: {
 									    saveUrl:  '${request.contextPath}/accounts/save-user-attachments.do?output=json',							   
 									    autoUpload: true
@@ -176,33 +181,33 @@
 		}	
 		
 		#attachment-list-view {
-			min-height: 500px;
-            width: 270px;
-            margin: 0 auto;
-            padding-top:15px;
-            border:0px;
+			min-height: 300px;
+			min-width: 286px;
+			padding: 0px;
+			border: 0px;
+			margin-bottom: -1px;
 		}
         		                		
 		.attach
 		{
 			float: left;
             position: relative;
-            width: 130px;
-            height: 130px;
+            width: 144px;
+            height: 144px;
             padding: 0;
 			cursor: pointer;
 		}
 		
 		.attach img
 		{
-			width: 130px;
-			height: 130px;
+			width: 144px;
+			height: 144px;
 		}
 		
 		.attach-description {
             position: absolute;
             top: 0;
-            width: 130px;
+            width: 144px	;
             height: 0;
             overflow: hidden;
             background-color: rgba(0,0,0,0.8)
@@ -225,7 +230,17 @@
             padding: 0 10px;
              font-size: 12px;
         }
-        
+		.k-listview:after, .attach dl:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden;
+        }
+        .k-pager-wrap {
+        	border : 0px;
+        	border-width: 0px;
+        }
 		</style>   	
 	</head>
 	<body id="doc">
@@ -277,12 +292,12 @@
 			<div>새로운 메시지가 없습니다.</div>
 			<div class="attachments">
 				<div class="row layout">
-					<div class="small-12 columns">	
+					<div class="small-12 columns big-box">	
 						<input name="uploadAttachment" id="attachment-files" type="file" />		
 					</div>
 				</div>
 				<div class="row layout">
-					<div class="small-12 columns">					
+					<div class="small-12 columns big-box">					
 						<dl id="attachment-list-view-filter"  class="sub-nav">
 							<dt>필터:</dt>
 							<dd class="active"><a href="#" id="attachment-list-view-filter-1">전체</a></dd>
@@ -353,9 +368,9 @@
 		<script type="text/x-kendo-tmpl" id="template2">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=120&height=120&attachmentId=#:attachmentId#" alt="#:name# 이미지"/>
+				<img src="${request.contextPath}/secure/view-attachment.do?width=144&height=144&attachmentId=#:attachmentId#" alt="#:name# 이미지"/>
 			# } else { #			
-				<img src="http://placehold.it/120x120&amp;text=[file]"></a>
+				<img src="http://placehold.it/144x144&amp;text=[file]"></a>
 			# } #	
 				<div class="attach-description">
 					<h3>#:name#</h3>
