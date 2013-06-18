@@ -18,19 +18,15 @@
 				// START SCRIPT           
 				// 1. COMPANY GRID			        
 				var selectedCompany = new Company();
-				var visible = false;
-				
+				var splitter = $("#splitter").kendoSplitter({
+                        orientation: "horizontal",
+                        panes: [
+                            { collapsible: true, size: "50%" },
+                            { collapsible: true, collapsed: true, size: "50%" }
+                        ]
+                 });
+                    
 				$("header .open").pageslide({ modal: true });
-									
-				$('#detail-panel-close-btn').click( function(e){
-					if(visible){
-						$(".panel").toggle("fast");						
-						$(this).toggleClass("active");									
-						visible = false;
-						//$("#detail-panel").hide();	
-						return false;			
-					}
-				});								
 				
 				var company_grid = $("#company-grid").kendoGrid({
 					dataSource: {	
@@ -66,7 +62,7 @@
 					filterable: true,
 					editable: "inline",
 					selectable: 'row',
-					height: 500,
+					height: 598,
 					batch: false,
 					toolbar: [ { name: "create", text: "회사 추가" }, { name: "view-roles", text: "롤 정보보기", className: "viewRoleCustomClass" } ],                    
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
@@ -86,28 +82,23 @@
 								selectedCompany.formattedCreationDate  =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.creationDate );      
 								selectedCompany.formattedModifiedDate =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.modifiedDate );    
 															
+								$("#splitter").data("kendoSplitter").expand("#datail_pane");
+								
 								// 1-1-2 템플릿을 이용한 상세 정보 출력	
 								$('#company-details').show().html(kendo.template($('#template').html()));								
 								kendo.bind($(".details"), selectedCompany );
-							
-								if( !visible ) {	
-									$(".panel").toggle("fast");						
-									$(this).toggleClass("active");									
-									visible = true;
-								} 
 																
 								// 1-1-3 툴바 생성
 								$("#menu").kendoMenu({
-									select: function(e){
-									
+									select: function(e){									
 										if( selectedCompany.companyId > 0 ){
 											var action = $(e.item).attr('action') ;
 											$("form[name='fm1']").attr("action", action ).submit(); 
 										}else{
 											alert("선택된 회사가 없습니다. 회사를 먼저 선택하여주세요.");
 										}
-									}						
-								});
+									}		
+								}).css("background-color", "#F5F5F5").css("border-width", "0px 0px 1px");
 								
 								$("#menu").show();
 										                                 
@@ -199,7 +190,7 @@
 													}
 												});													
 												// GRID 화면 깨짐을 이한 속성 변경
-												$("#company-prop-grid").attr('style','');	   
+												$("#company-prop-grid").attr('style','');	   	
 											}
 										// 1-1-4-3 상세 사용자 정보 GRID 생성 (디폴드로 보여줄 데이터이므로 1-1-5 에서 GRID 생성
 										}else if( $( e.contentElement ).find('div').hasClass('users') ){
@@ -208,7 +199,7 @@
 											}
 										}					                      
 									}
-								});
+								}).css("border", "0");;
 								// 1-1-5 DETAIL USERS GRID
 								company_tabs.find(".users").kendoGrid({
 					   				dataSource: {
@@ -245,7 +236,9 @@
 										{ field: "creationDate", title: "생성일", filterable: false,  width: 100, format: "{0:yyyy/MM/dd}" } ],         
 									dataBound:function(e){  },
 									toolbar: [{ name: "create-groups", text: "선택 사용자 소속 변경하기", imageClass:"k-icon k-i-folder-up" , className: "changeUserCompanyCustomClass" }]
-								});				
+								});		
+								
+								//$("#company-user-grid").attr('style','');	   		
 							}
 						}
 					},
@@ -255,15 +248,12 @@
 						if(selectedCells.length == 0 )
 						{
 							selectedCompany = new Company({});		    
-							kendo.bind($(".tabular"), selectedCompany );	            	 		
-							if( visible ) {	
-								$(".panel").toggle("fast");						
-								$(this).toggleClass("active");									
-								visible = true;
-							} 
+							kendo.bind($(".tabular"), selectedCompany );
+							$("#menu").hide(); 	
+							$("#company-details").hide(); 	 		
 						}   
 					}	                    
-				});
+				}).css("border", 0);
 				
 				$('#company-grid').find(".viewRoleCustomClass").click( function(){
 					if(! $("#perms-window").data("kendoWindow")){
@@ -315,7 +305,9 @@
 		-->
 		</script> 		 
 		<style>
-
+			#mainContent {
+				margin-top: 5px;
+			}
 		</style>
 	</head>
 	<body>
@@ -332,15 +324,25 @@
 		</header>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTENT -->
-		<section id="mainContent">
-			<div class="row layout">			
-				<div class="large-12 columns" >
-					<div id="company-grid" class="layout"></div>
-				</div>				
-				<div id="perms-window" style="display:none;">
-					<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
-					<div id="role-grid">	</div>            	
-				</div>			
+		
+		
+		<section id="mainContent">		
+			<div id="splitter" style="height: 600px; width: 100%;">
+				<div id="list_pane">
+					<div id="company-grid" class="layout"></div>	
+				</div>
+				<div id="datail_pane">				
+					<ul id="menu" class="hide" >
+						<li action="main-group.do">그룹 관리하기</li>
+						<li action="main-user.do">사용자 관리하기</li>
+					</ul>
+					<div id="company-details"></div>
+				</div>
+			</div>
+			<div id="perms-window" style="display:none;">
+				<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
+				<div id="role-grid">	</div>            	
+			</div>				
 		</section>
 		<!-- END MAIN CONTENT -->
 		<!-- START FOOTER -->
@@ -349,25 +351,7 @@
 		<!-- END FOOTER -->
 
 		<div id="detail-panel" class="panel k-content details" style="display:none">
-			<div class="row layout">
-				<div class="large-6 columns"><span data-bind="text: displayName"></span>&nbsp;&nbsp;상세보기</div>
-				<div class="large-6 columns"><button id="detail-panel-close-btn" class='k-button right'><span class="k-icon k-i-close"></span>상세보기 닫기</button></div>
-			</div>
-			<div class="row layout">
-				<div class="large-12 columns">			
-					<div class="big-box leftless rightless">	
-						<ul id="menu" class="hide" >
-							<li action="main-group.do">그룹 관리하기</li>
-							<li action="main-user.do">사용자 관리하기</li>
-						</ul>
-					</div>
-				</div>		
-			</div>
-			<div class="row layout">
-				<div class="large-12 columns">				
-					<div id="company-details"></div>
-				</div>					
-			</div>					
+							
 		</div>
 		
 		<!-- 상세 정보 템플릿 -->
