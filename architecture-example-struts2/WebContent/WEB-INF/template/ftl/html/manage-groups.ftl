@@ -16,7 +16,16 @@
       	    '${request.contextPath}/js/common/common.models.js' ],        	     	  	   
             complete: function() {      
 
-            	$(document).ready(function(){            	
+            	$(document).ready(function(){        
+					// SPLITTER LAYOUT
+					var splitter = $("#splitter").kendoSplitter({
+	                        orientation: "horizontal",
+	                        panes: [
+	                            { collapsible: true, min: "500px" },
+	                            { collapsible: true, collapsed: true, min: "500px" }
+	                        ]
+	                 });
+	                 
 					$("#company").kendoDropDownList({
                         dataTextField: "displayName",
                         dataValueField: "companyId",
@@ -46,24 +55,13 @@
 								$("form[name='fm1']").attr("action", action ).submit(); 
 							}
 						}						
-					});
+					}).css("background-color", "#F5F5F5").css("border-width", "0px 0px 1px");;
 					
 					$("#menu").show();									
 
 					$("#go-comapny-btn").click( function(){
 						$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 
 					}); 
-
-					var visible = false;
-					$('#detail-panel-close-btn').click( function(e){
-						if(visible){
-							$(".panel").toggle("fast");						
-							$(this).toggleClass("active");									
-							visible = false;
-							//$("#detail-panel").hide();	
-							return false;			
-						}
-					});		
 								
 			        // 1. GROUP GRID			        
 			        var selectedGroup = new Group();		      
@@ -101,7 +99,7 @@
 	                    filterable: true,
 	                    editable: "inline",
 	                    selectable: 'row',
-	                    height: 405,
+	                    height: "560",
 	                    batch: false,
 	                    toolbar: [ { name: "create", text: "그룹추가" } ],                    
 	                    pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },                    
@@ -120,17 +118,11 @@
 	                                 selectedGroup.formattedModifiedDate =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.modifiedDate );         	                                 
 	                                 selectedGroup.company = $("#company").data("kendoDropDownList").dataSource.get(  $("#company").data("kendoDropDownList").value()  );
 	                                 
-	                                 
+	                                 $("#splitter").data("kendoSplitter").expand("#datail_pane");
 	                                 
 	                                 // SHOW GROUP DETAILS ======================================	                                 	                                 
 	                                 $('#group-details').show().html(kendo.template($('#template').html()));	                                 
 	                                 kendo.bind($(".details"), selectedGroup );
-	                                 
-									if( !visible ) {	
-										$(".panel").toggle("fast");						
-										$(this).toggleClass("active");									
-										visible = true;
-									} 
 									                                 
 	                                // 2. GROUP TABS	                                
 									var group_tabs = $('#group-details').find(".tabstrip").kendoTabStrip({
@@ -266,7 +258,7 @@
 				                      		}
 				                      	}				                      
 				                      }
-				                  	});    	                                   
+				                  	}).css("border", "0px");                             
 	                                  // 2-2. GROUP MEMBER GRID
 	                                 group_tabs.find(".members").kendoGrid({
 	                                     dataSource: {
@@ -386,14 +378,10 @@
 						    {
 						    	selectedGroup = new Group({});
 						    	kendo.bind($(".details"), selectedGroup );		
-								if( visible ) {	
-									$(".panel").toggle("fast");						
-									$(this).toggleClass("active");									
-									visible = true;
-								} 						    	
+								$("#group-details").hide(); 	 			    	
 						    }   
 						}					
-	                }); 	                	
+	                }).css("border", "0px"); 	                	
 	                
 	                // 3-3 CLOSE SEARCH WINDOW
 	                $("#close-search-window-btn").click( function() {	
@@ -452,6 +440,11 @@
         }]);        		
      	-->
         </script> 	
+		<style>
+			#mainContent {
+				margin-top: 5px;
+			}
+		</style>
     </head>
 	<body>
 		<!-- START HEADER -->
@@ -468,51 +461,47 @@
 	  	<!-- END HEADER -->	  	
 	  	<!-- START MAIN CONTNET -->
 		<section id="mainContent">
-			<div class="row layout">			
-				<div class="large-6 columns" >
-					<div class="box leftless rightless topless">
-						<form name="fm1" method="POST" accept-charset="utf-8">
-							<input type="hidden" name="companyId"  value="${action.companyId}" />
-						</form>	
-			    		<ul id="menu" style="display:none;" >
-			                <li action="#">회사
-			                	<ul>	                		    
-			                		<li>
-			                			<div style="padding: 10px;">
-			                			<input id="company" type="hidden" style="width: 250px" value="${action.companyId}"/>
-			                			</div>
-			                		</li>
-			                		<li>
-			                			<div style="padding: 10px;">
-			                				<button id="go-comapny-btn" class="k-button">회사 관리하기</button>
-			                			</div>	                			
-			                		</li>	                		
-			                	</ul>
-			                </li>        
-			                <li action="main-user.do">사용자</li>     
-			            </ul>	
-		            </div>	
-				</div>				
-			</div>		
-			<div class="row layout">			
-				<div class="large-12 columns" >
-					<div id="group-grid"></div>	
-				</div>				
-			</div>	
-		</section>	
-  		<div id="detail-panel" class="panel k-content details" style="display:none">  		
-			<div class="row layout">
-				<div class="large-6 columns"><span data-bind="text: displayName"></span>&nbsp;&nbsp;그룹 상세보기</div>
-				<div class="large-6 columns"><button id="detail-panel-close-btn" class='k-button right'><span class="k-icon k-i-close"></span>상세보기 닫기</button></div>
-			</div>
-			<div class="row layout">
-				<div class="large-12 columns">			
-					<div class="big-box leftless rightless bottomless">	
-						<div id="group-details"></div>
+			<div id="splitter" style="height:600px;">
+				<div id="list_pane">
+					<div class="row layout">
+						<div class="large-12 columns" >
+							<ul id="menu" style="display:none;" >
+				                <li action="#">회사
+				                	<ul>	                		    
+				                		<li>
+				                			<div style="padding: 10px;">
+				                			<input id="company" type="hidden" style="width: 250px" value="${action.companyId}"/>
+				                			</div>
+				                		</li>
+				                		<li>
+				                			<div style="padding: 10px;">
+				                				<button id="go-comapny-btn" class="k-button">회사 관리하기</button>
+				                			</div>	                			
+				                		</li>	                		
+				                	</ul>
+				                </li>        
+				                <li action="main-user.do">사용자</li>     
+				            </ul>							
+						</div>
 					</div>
-				</div>					
-			</div>	 		
-  		</div>	  
+					<div class="row layout">
+						<div class="large-12 columns" >
+							<div id="group-grid"></div>	
+						</div>
+					</div>	
+				</div>
+				<div id="datail_pane">			
+					<div class="row layout">			
+						<div class="large-12 columns" >
+							<div id="group-details"></div>
+						</div>				
+					</div>						
+				</div>
+			</div>					
+			<form name="fm1" method="POST" accept-charset="utf-8">
+				<input type="hidden" name="companyId"  value="${action.companyId}" />
+			</form>
+		</section>	  		
 		<div id="search-window" style="display:none;">			
 			<div class="row layout">
 				<div class="small-12 columns">
