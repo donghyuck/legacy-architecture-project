@@ -16,11 +16,16 @@
 package architecture.ee.web.struts2.action;
 
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.apache.commons.lang.StringUtils;
 
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
@@ -28,26 +33,51 @@ import com.opensymphony.xwork2.Preparable;
 public class DownloadAttachmentActioin extends FrameworkActionSupport  implements Preparable {
 
 	private Long attachmentId;
+	
+	private Attachment targetAttachment ;
+
+	private int width = 0;
+	
+	private int height = 0;
+	
+	public int getWidth() {
+		return width;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+	public int getHeight() {
+		return height;
+	}
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
 
 	private AttachmentManager attachmentManager ;
+	
 	
 	public void prepare() throws Exception {
 		
 	}
-	
-	
+
+	public String getEncodedTargetAttachmentFileName() {
+		try {
+			return URLEncoder.encode(getTargetAttachmentFileName(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return getTargetAttachmentFileName();
+		}
+	}
 
 	public Long getAttachmentId() {
 		return attachmentId;
 	}
 
-
-
 	public void setAttachmentId(Long attachmentId) {
 		this.attachmentId = attachmentId;
 	}
-
-
 
 	public AttachmentManager getAttachmentManager() {
 		return attachmentManager;
@@ -57,22 +87,46 @@ public class DownloadAttachmentActioin extends FrameworkActionSupport  implement
 		this.attachmentManager = attachmentManager;
 	}
 
-
-
+	protected boolean isThumbnailSupport( Attachment attachment ){
+		boolean thumbnailSupport = false ;
+		if( attachment != null && StringUtils.isNotEmpty( attachment.getContentType()) ){
+			thumbnailSupport = StringUtils.startsWith(attachment.getContentType().toLowerCase(), "image");
+		}
+		return thumbnailSupport;
+	}
+	
 	public Attachment getTargetAttachment() {
 		try {
-			return attachmentManager.getAttachment(attachmentId);
+			
+			if( targetAttachment == null)
+				targetAttachment = attachmentManager.getAttachment(attachmentId);
+				
+			if( width > 0 && height > 0 && isThumbnailSupport(targetAttachment) ){
+				attachmentManager.getAttachmentImageThumbnailInputStream(targetAttachment, width, height);	
+			}
+			log.debug( "ThumbnailSize:" + targetAttachment.getThumbnailSize());	
+			
+			return targetAttachment;
 		} catch (NotFoundException e) {
 			throw new SystemException(e);
 		}		
 	}
 	
 	public InputStream getTargetAttachmentInputStream() {
-		return attachmentManager.getAttachmentInputStream(getTargetAttachment());
+		Attachment attachmentToUse = getTargetAttachment();
+		if( width > 0 && height > 0 && attachmentToUse.getThumbnailSize() > 0)
+			return attachmentManager.getAttachmentImageThumbnailInputStream(attachmentToUse, width, height);
+		else
+			return attachmentManager.getAttachmentInputStream(attachmentToUse);
 	}
 	
 	public String getTargetAttachmentContentType(){
-		return getTargetAttachment().getContentType();
+		if( width > 0 && height > 0 && getTargetAttachment().getThumbnailSize() > 0 )
+		{
+			return getTargetAttachment().getThumbnailContentType();
+		}else{
+			return getTargetAttachment().getContentType();
+		}
 	}
 
 	public String getTargetAttachmentFileName(){
@@ -80,7 +134,12 @@ public class DownloadAttachmentActioin extends FrameworkActionSupport  implement
 	}	
 	
 	public int getTargetAttachmentContentLength(){
-		return getTargetAttachment().getSize();
+		if( width > 0 && height > 0 && getTargetAttachment().getThumbnailSize() > 0 )
+		{
+			return getTargetAttachment().getThumbnailSize();
+		}else{
+			return getTargetAttachment().getSize();
+		}	
 	}
 	
 }

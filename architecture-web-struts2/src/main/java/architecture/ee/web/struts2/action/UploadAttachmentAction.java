@@ -79,6 +79,7 @@ public class UploadAttachmentAction extends FrameworkActionSupport  implements P
 								String uploadFilename =  fileNames[index];
 								String uploadContentType = contentTypes[index];											
 								FileInfo f = new FileInfo( uploadFilename,  uploadContentType, uploadFile );
+								f.setFileParameterName(inputName);
 								attachments.add(f);
 							}
 						}

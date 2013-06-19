@@ -72,6 +72,8 @@
 		<default-interceptor-ref name="defaultStack" />
 		<action name="main" class="architecture.ee.web.struts2.action.MainAction">
 			<result name="success">/main.jsp</result>
+			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
+			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
 		</action>
 	</package>
 

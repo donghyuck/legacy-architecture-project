@@ -28,13 +28,40 @@ import com.opensymphony.xwork2.Preparable;
 public class DownloadImageActioin extends FrameworkActionSupport  implements Preparable {
 
 	private Long imageId;
-
-	private ImageManager imageManager ;
 	
+	private int width = 0;
+	
+	private int height = 0;
+	
+	private Image targetImage ;
+	
+	private ImageManager imageManager ;
+		
 	public void prepare() throws Exception {
 		
 	}
 	
+	
+	public int getWidth() {
+		return width;
+	}
+
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
+
+	public int getHeight() {
+		return height;
+	}
+
+
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+
 	public Long getImageId() {
 		return imageId;
 	}
@@ -53,18 +80,36 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 
 	public Image getTargetImage() {
 		try {
-			return imageManager.getImage(imageId);
+			if( targetImage == null)
+				targetImage = imageManager.getImage(imageId);
+				
+			if( width > 0 && height > 0 )
+					imageManager.getImageThumbnailInputStream(targetImage, width, height);
+			
+			log.debug( "ThumbnailSize:" + targetImage.getThumbnailSize());
+			
+			return targetImage;
 		} catch (NotFoundException e) {
 			throw new SystemException(e);
 		}		
 	}
 	
 	public InputStream getTargetImageInputStream() {
-		return imageManager.getImageInputStream(getTargetImage());
+		Image imageToUse = getTargetImage();
+		
+		if( width > 0 && height > 0 && imageToUse.getThumbnailSize() > 0)
+			return imageManager.getImageThumbnailInputStream(imageToUse, width, height);
+		else
+			return imageManager.getImageInputStream(imageToUse);
 	}
 	
 	public String getTargetImageContentType(){
-		return getTargetImage().getContentType();
+		if( width > 0 && height > 0 && getTargetImage().getThumbnailSize() > 0 )
+		{
+			return getTargetImage().getThumbnailContentType();
+		}else{
+			return getTargetImage().getContentType();
+		}	
 	}
 
 	public String getTargetImageFileName(){
@@ -72,7 +117,12 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 	}	
 	
 	public int getTargetImageContentLength(){
-		return getTargetImage().getSize();
+		if( width > 0 && height > 0 && getTargetImage().getThumbnailSize() > 0 )
+		{
+			return getTargetImage().getThumbnailSize();
+		}else{
+			return getTargetImage().getSize();
+		}	
 	}
 	
 }
