@@ -1,5 +1,4 @@
 
-
 		
 		<!-- 1. 프로퍼티 -->
 		CREATE TABLE V2_PROPERTY (
