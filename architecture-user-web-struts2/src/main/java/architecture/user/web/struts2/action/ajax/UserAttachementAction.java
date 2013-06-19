@@ -24,16 +24,21 @@ import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class UserAttachmentMgmtAction extends  FrameworkActionSupport {
+public class UserAttachementAction extends  FrameworkActionSupport {
 
 	private Long attachmentId = -1L;
 	
-    private AttachmentManager attachmentManager;
+    public Long getAttachmentId() {
+		return attachmentId;
+	}
 
-    public Attachment getTargetAttachment() throws NotFoundException{
-    	return attachmentManager.getAttachment(attachmentId);
-    } 
-    
+	public void setAttachmentId(Long attachmentId) {
+		this.attachmentId = attachmentId;
+	}
+
+	private AttachmentManager attachmentManager;
+
+
 	public AttachmentManager getAttachmentManager() {
 		return attachmentManager;
 	}
@@ -46,21 +51,40 @@ public class UserAttachmentMgmtAction extends  FrameworkActionSupport {
     	return attachmentManager.getAttachments(ModelObjectType.USER.getKey(), getCurrentUser().getUserId());
     }
 	
+	
 	public User getCurrentUser(){
 		User targetUser = super.getUser();
 		return targetUser;
 	}
 	
+	
     public String execute() throws Exception {  
         return success();
     }  
     
-	public String deleteAttachment() throws Exception {  		
+    public Attachment getTargetAttachment() throws NotFoundException{
+    	return attachmentManager.getAttachment(attachmentId);
+    } 
+    
+    public List<Attachment> getUserAttachments(){    	
+    	return attachmentManager.getAttachments(ModelObjectType.USER.getKey(), getCurrentUser().getUserId());
+    }
+    
+	public String deleteUserAttachment() throws Exception {  		
 		User user = getCurrentUser();
-		Attachment attachment = getTargetAttachment();
-		
+		Attachment attachment = getTargetAttachment();		
 		if( attachment.getAttachmentId() > 0 && attachment.getObjectId() == user.getUserId() )
 			attachmentManager.removeAttachment(attachment);			
+        return success();
+    } 
+	
+	public String deleteUserAttachments() throws Exception {  		
+		User user = getCurrentUser();
+		List<Attachment> attachments = getUserAttachments();		
+		for( Attachment attachment : attachments ){
+			if( attachment.getAttachmentId() > 0 && attachment.getObjectId() == user.getUserId() )
+				attachmentManager.removeAttachment(attachment);			
+		}
         return success();
     } 
 	

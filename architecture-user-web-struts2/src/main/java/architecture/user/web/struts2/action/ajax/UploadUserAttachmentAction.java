@@ -27,21 +27,26 @@ import architecture.ee.web.struts2.action.UploadAttachmentAction;
  * @author donghyuck
  *
  */
-public class UserAttachmentUploadAction extends UploadAttachmentAction  {
+public class UploadUserAttachmentAction extends UploadAttachmentAction  {
 
+	private Attachment attachement ;
+	
 	public User getCurrentUser(){
 		User targetUser = super.getUser();
 		return targetUser;
 	}
 	
-	public String execute() throws Exception {
+	public Attachment getTargetAttachment(){
+		return attachement;
+	}
 		
+	public String execute() throws Exception {		
 		User user = getCurrentUser();
 		if( ! user.isAnonymous() )
-		for( FileInfo f : getAttachmentFileInfos()){			
+		for( FileInfo f : getAttachmentFileInfos()){	
 			Attachment attach = attachmentManager.createAttachment(ModelObjectType.USER.getTypeId(), user.getUserId(), f.getName(), f.getContentType(), f.getFile());
-			attachmentManager.saveAttachment(attach);
-		}		
+			this.attachement = attachmentManager.saveAttachment(attach);
+		}
 		return success();
 	}
 }
