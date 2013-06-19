@@ -29,7 +29,6 @@ import architecture.common.exception.RuntimeError;
 
 import com.opensymphony.xwork2.ActionInvocation;
 
-import freemarker.cache.MultiTemplateLoader;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

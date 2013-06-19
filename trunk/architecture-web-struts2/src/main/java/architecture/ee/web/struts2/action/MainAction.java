@@ -1,5 +1,7 @@
 package architecture.ee.web.struts2.action;
 
+import org.apache.commons.lang.StringUtils;
+
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
@@ -13,7 +15,7 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 	private String view;
 
 	public MainAction() {
-		this.view = VIEW_HOMEPAGE;
+		
 	}
 
 	public void prepare() throws Exception {
@@ -30,7 +32,15 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 
 	@Override
 	public String execute() throws Exception {
+		
+		if( !StringUtils.isEmpty(view) && view.equals( VIEW_HOMEPAGE ) )
+			return VIEW_HOMEPAGE;
+		
+		if( !StringUtils.isEmpty(view) && view.equals( VIEW_PERSONALIZED ) )
+			return VIEW_PERSONALIZED;
+		
 		log.debug("main action called!!");
+		
 		return SUCCESS;
 	}
 
