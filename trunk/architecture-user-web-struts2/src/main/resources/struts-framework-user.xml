@@ -87,7 +87,39 @@
 				</param>
 			</result>
 		</action>
-						
+
+		<action name="get-user-attachements" class="architecture.user.web.struts2.action.ajax.UserAttachementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+			    <param name="excludeProperties">userAttachments.inputStream</param>
+				<param name="includeProperties">
+				  userAttachments.*
+				</param>
+			</result>	
+		</action>	
+		
+		<action name="delete-user-attachment" method="deleteUserAttachment" class="architecture.user.web.struts2.action.ajax.UserAttachementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+				<param name="includeProperties">
+				currentUser.*
+				</param>
+			</result>
+		</action>
+					
+		<action name="save-user-attachments" class="architecture.user.web.struts2.action.ajax.UploadUserAttachmentAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+			    <param name="excludeProperties">targetAttachment.inputStream</param>
+				<param name="includeProperties">
+				targetAttachment.*
+				</param>
+			</result>
+		</action>
+								
 	</package>
 	
 	<package name="framework-user-admin-actions" namespace="/secure"  extends="framework-default" >
