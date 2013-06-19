@@ -43,4 +43,13 @@ public interface Attachment extends ModelObject {
 	public void setInputStream(InputStream inputStream) ;
 	
 	public InputStream getInputStream() throws IOException ;
+	
+	public abstract Integer getThumbnailSize();
+	
+	public abstract void setThumbnailSize(Integer thumbnailSize);
+	
+	public abstract void setThumbnailContentType(String contentType);
+	
+	public abstract String getThumbnailContentType();
+	
 }

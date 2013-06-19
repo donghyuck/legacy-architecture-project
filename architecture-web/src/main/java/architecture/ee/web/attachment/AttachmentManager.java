@@ -37,4 +37,6 @@ public interface AttachmentManager {
 	
 	public abstract InputStream getAttachmentInputStream(Attachment attachment);
 	
+	public abstract InputStream getAttachmentImageThumbnailInputStream(Attachment image, int width, int height ) ;	
+		
 }

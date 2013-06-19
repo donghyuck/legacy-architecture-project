@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.attachment;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -22,6 +23,9 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import net.coobird.thumbnailator.Thumbnails;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -201,6 +205,9 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	
 	protected File getAttachmentCacheDir(){
 		File dir = new File(getAttachmentDir(), "cache" );	
+		if( !dir.exists() )
+			dir.mkdir();
+		
 		return dir;
 	}
 	
@@ -212,7 +219,63 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	public void destroy(){
 		
 	}
+	
+	public InputStream getAttachmentImageThumbnailInputStream(Attachment image, int width, int height ) {		
+		try {
+			
+			File file = getThumbnailFromCacheIfExist(image, width, height);
+			return FileUtils.openInputStream(file);
+		} catch (IOException e) {
+			throw new SystemException(e);
+		}
+	}
 
+	
+	public InputStream getImageThumbnailInputStream(Attachment image, int width, int height ) {		
+		try {
+			
+			File file = getThumbnailFromCacheIfExist(image, width, height);
+			return FileUtils.openInputStream(file);
+		} catch (IOException e) {
+			throw new SystemException(e);
+		}
+	}
+
+
+	protected File getThumbnailFromCacheIfExist(Attachment image,  int width, int height ) throws IOException{		
+		
+		log.debug( "thumbnail generation " + width + "x" + height );
+		File dir = getAttachmentCacheDir();
+		File file = new File(dir, toThumbnailFilename(image, width, height) );		
+		File originalFile = getAttachmentFromCacheIfExist( image );	
+		
+		log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() );
+		log.debug( "target:" + file.getAbsoluteFile());
+		
+		if( file.exists() && file.length() > 0 ){
+			image.setThumbnailSize((int)file.length());
+			return file;
+		}
+		
+		BufferedImage originalImage = ImageIO.read(originalFile);		
+		if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
+			image.setThumbnailSize(0);
+			return originalFile ;
+		}
+		
+		BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
+		ImageIO.write(thumbnail, "png", file );
+		image.setThumbnailSize((int)file.length());
+		
+		return file;		
+	}
+
+	protected String toThumbnailFilename(Attachment image,  int width, int height){
+		StringBuilder sb = new StringBuilder();
+		sb.append( image.getAttachmentId() ).append("_").append(width).append("_").append(height).append(".bin");	
+		return sb.toString();
+	}
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void removeAttachment(Attachment attachment) {		
 		Attachment attachmentToUse = attachment ;		

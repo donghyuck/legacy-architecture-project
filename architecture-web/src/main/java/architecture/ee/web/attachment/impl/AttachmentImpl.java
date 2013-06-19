@@ -30,6 +30,10 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 	private Map<String, String> properties = new HashMap<String, String>();
 	
 	private InputStream inputStream;
+
+	private Integer thumbnailSize = 0;
+	
+	private String thumbnailContentType = "png";
 	
 	public Serializable getPrimaryKeyObject() {
 		return attachmentId;
@@ -133,4 +137,22 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 		sb.append("}");
 		return sb.toString();
 	}
+	
+
+	public Integer getThumbnailSize() {
+		return thumbnailSize;
+	}
+
+	public void setThumbnailSize(Integer thumbnailSize) {
+		this.thumbnailSize = thumbnailSize;
+	}
+
+	public String getThumbnailContentType() {
+		return thumbnailContentType;
+	}
+
+	public void setThumbnailContentType(String thumbnailContentType) {
+		this.thumbnailContentType = thumbnailContentType;
+	}
+	
 }
