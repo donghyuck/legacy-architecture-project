@@ -31,8 +31,7 @@ PC9saWNlbnNlPg==</file>
 	</view>	
 	
 	<userProvider>
-		<dao>		
-		</dao>
+		<dao></dao>
 	</userProvider>
 	
 	<components>
@@ -48,6 +47,12 @@ PC9saWNlbnNlPg==</file>
 			<disallowedTypes></disallowedTypes>
 			<forceThumbnailsEnabled></forceThumbnailsEnabled>
 		</image>
+		<menu>
+			<enabled>true</enabled>
+			<defaultMenuId>1</defaultMenuId>
+			<userMenuKey>USER_MENU</userMenuKey>
+			<adminMenuKey>ADMIN_MENU</adminMenuKey>
+		</menu>
 	</components>
 	
 	<security>	
@@ -64,7 +69,7 @@ PC9saWNlbnNlPg==</file>
 		<groovy>
 			<debug>false</debug>
 			<source>
-				<location />
+				<location/>
 				<encoding>UTF-8</encoding>
 				<recompile>true</recompile>
 			</source>
