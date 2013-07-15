@@ -113,6 +113,7 @@ public class SqlQueryClientImpl extends SqlQueryDaoSupport implements
 				}
 				types.put(columnName, table.getColumn(columnName).getType());
 			}
+			
 			builder.append(" FROM " + table.getName());
 
 			List<Map<String, Object>> list = getExtendedJdbcTemplate().queryForList((builder.toString()));

@@ -87,7 +87,7 @@ public class SqlQueryHelper {
 	
 	public List<Map<String, Object>> list (SqlQuery sqlQuery, String statement){		
 		if( sqlQuery instanceof SqlQueryImpl){
-			return sqlQuery.setAdditionalParameters(additionalParameters).queryForList(statement, values.size() == 0 ? null : values.toArray(), null );			
+			return sqlQuery.setAdditionalParameters(additionalParameters).queryForList(statement, values.size() == 0 ? null : values.toArray() );			
 		}
 		return sqlQuery.queryForList( statement, values.size() == 0 ? null : values.toArray());
 	}

@@ -18,6 +18,7 @@ package architecture.ee.test;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Test;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
@@ -42,6 +43,7 @@ public class SqlQueryService extends SqlQueryDaoSupport {
 	        });
 	 }
 	 
+	
 	 public List<Map<String, Object>> resultOfSelectOperation(){
 		SqlQueryHelper helper = new SqlQueryHelper();
 		helper.additionalParameter("TABLE_NAME", "V2_I18N_LOCALE");
