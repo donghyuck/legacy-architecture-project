@@ -5,19 +5,14 @@
                  architecture.ee.util.OutputFormat,
                  architecture.security.user.*,
                  architecture.ee.web.util.WebApplicationHelper,
-                 architecture.ee.web.util.ParamUtils" %><%
-                 
-                 GroupManager gm = WebApplicationHelper.getComponent(GroupManager.class);
+                 architecture.ee.web.util.ParamUtils" %><%GroupManager gm = WebApplicationHelper.getComponent(GroupManager.class);
                  try{
                 	 
-                 	Group g = gm.getGroup("developer");
+                 	Group g = gm.getMenu("developer");
 out.println( g);
                  }catch(GroupNotFoundException e){
                 	 gm.createGroup("developer");
-                 }
-                 
-                 
-%>                 
+                 }%>                 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
