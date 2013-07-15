@@ -19,20 +19,30 @@
 <style>
 
 	header {
-	background-color: #2ba6cb;
+		background-color: #2ba6cb;
 	}
 
 	header h1 { color: #fff; font-weight: 500; }
 	header h4 { color: #CCC; font-weight: 300; }
 	
 	#mainContent {
-	margin-top: 44px;
-	margin-bottom: 22px;
-	padding-bottom: 22px;
-	border-bottom: 1px solid #eee;
-	overflow: hidden;
+		/*margin-top: 44px; */
+		margin-top: 10px;
+		margin-bottom: 22px;
+		padding-bottom: 22px;
+		/*border-bottom: 1px solid #dadada;*/
+		overflow: hidden;
 	}
 	
+	nav.top-bar {
+		background-color: #F5F5F5;
+		margin-top: 0px;
+		padding-top : 0px;
+		height : 37px;
+		/*border-bottom:1px solid #dadada;*/
+	}
+	
+		
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
