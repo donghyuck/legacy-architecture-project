@@ -210,13 +210,11 @@ public class AnonymousUser implements AuthToken, User {
 
 
 	public long getCompanyId() {
-		// TODO 자동 생성된 메소드 스텁
 		return 0;
 	}
 
 
 	public Company getCompany() {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 

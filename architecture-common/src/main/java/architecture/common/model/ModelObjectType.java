@@ -34,7 +34,8 @@ public enum ModelObjectType {
 	SYSTEM (14, "SYSTEM"),
 	I18N_LOCALE (15, "I18N_LOCALE"),
 	IMAGE ( 16, "IMAGE"),
-	ATTACHMENT ( 17, "ATTACHMENT")
+	ATTACHMENT ( 17, "ATTACHMENT"),
+	MENU ( 18, "MENU")
 	;
 	
 	public static ModelObjectType ALL_TYPES[] = values();
