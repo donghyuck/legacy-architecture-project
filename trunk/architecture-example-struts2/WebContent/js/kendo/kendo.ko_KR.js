@@ -19,8 +19,8 @@ kendo.ui.FilterMenu.prototype.options.messages =
 /* FILTER MENU MESSAGES 
  ***************************************************************************/   
   info: "필터조건:", // sets the text on top of the filter menu
-  isTrue: "is true",                   // sets the text for "isTrue" radio button
-  isFalse: "is false",                 // sets the text for "isFalse" radio button
+  isTrue: " 참(True)",                   // sets the text for "isTrue" radio button
+  isFalse: " 거짓(False)",                 // sets the text for "isFalse" radio button
   filter: "필터",                    // sets the text for the "Filter" button
   clear: "지우기",                      // sets the text for the "Clear" button
   and: "그리고",
@@ -70,10 +70,10 @@ kendo.ui.Pager.prototype.options.messages =
   
 /* PAGER MESSAGES 
  ****************************************************************************/   
-  display: "{0} - {1} of {2} items",
+  display: "{0} - {1} / {2} items",
   empty: "데이터가 없습니다.",
   page: "페이지",
-  of: "of {0}",
+  of: "/ {0}",
   itemsPerPage: "페이지당 데이터 수",
   first: "처음 페이지로 이동",
   previous: "이전 페이지로 이동",

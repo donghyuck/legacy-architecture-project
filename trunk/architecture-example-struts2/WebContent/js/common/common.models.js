@@ -38,6 +38,7 @@ var User = kendo.data.Model.define( {
         email: { type: "string" , editable: true },
         password: { type: "string" , editable: true },
         creationDate: { type: "date" },
+        modifiedDate: { type: "date" },
         lastLoggedIn: { type: "date" },
         lastProfileUpdate : { type: "date" },                                    
         enabled : {type: "boolean" },
@@ -46,21 +47,16 @@ var User = kendo.data.Model.define( {
         hasProfileImage:{type: "boolean", defaultValue: false},
         formattedLastLoggedIn : { type: "string" },
         formattedLastProfileUpdate : { type: "string" },
-        clear: function() {
-            this.set("userId", 0 );
-            this.set("username", "");
-            this.set("password", "");
-            this.set("name", "");
-            this.set("email", false);
-            this.set("creationDate", null ); 
-            this.set("lastLoggedIn", null ); 
-            this.set("lastProfileUpdate", null ); 
-            this.set("formattedLastLoggedIn", "" ); 
-            this.set("formattedLastProfileUpdate", "" );   
-            this.set("enabled", false ); 
-            this.set("nameVisible", false ); 
-            this.set("emailVisible", false );
-        }        
+        isSystem: { type:"boolean", defaultVlaue: false },
+        anonymous : { type:"boolean", defaultVlaue: true },
+        photoUrl : {type: "string", editable: true },
+        roles: {}
+    },
+    hasRole : function ( role ) {
+    	if( typeof( user.roles ) != "undefined" && $.inArray( role, user.roles ) >= 0 )
+			return true
+		else 
+			return false;    	
     }
 });
 
@@ -113,5 +109,20 @@ var DatabaseInfo = kendo.data.Model.define( {
     	driverVersion: {type: "string", editable: false},
     	isolationLevel: {type: "string", editable: false}
     }
+});
+
+var Menu = kendo.data.Model.define( {
+	  	id: "menuId", // the identifier of the model
+	    fields: {
+	    	menuId: { type: "number", editable: false, defaultValue: -1  }, 
+	    	name: { type: "string", editable: true },
+	        title: { type: "string", editable: true },
+	        enabled : {type: "boolean" },
+	        description: { type: "string", editable: true },
+	        properties : {},
+	        menuData : { type: "string", editable: true, defaultValue : "" },
+	        modifiedDate: { type: "date"},
+	        creationDate: { type: "date" }	        
+	    }	
 });
 
