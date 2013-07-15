@@ -47,12 +47,6 @@ PC9saWNlbnNlPg==</file>
 			<disallowedTypes></disallowedTypes>
 			<forceThumbnailsEnabled></forceThumbnailsEnabled>
 		</image>
-		<menu>
-			<enabled>true</enabled>
-			<defaultMenuId>1</defaultMenuId>
-			<userMenuKey>USER_MENU</userMenuKey>
-			<adminMenuKey>ADMIN_MENU</adminMenuKey>
-		</menu>
 	</components>
 	
 	<security>	
