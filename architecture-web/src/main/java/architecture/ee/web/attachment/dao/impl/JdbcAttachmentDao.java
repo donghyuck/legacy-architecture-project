@@ -40,8 +40,7 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 		}		
 	};
 		
-	public void insertAttachmentDownloads(List<AttachmentDownloadItem> list) {
-		
+	public void insertAttachmentDownloads(List<AttachmentDownloadItem> list) {		
 		final List<AttachmentDownloadItem> itemsToUse = list;		
 		getExtendedJdbcTemplate().batchUpdate(getBoundSql("ARCHITECTURE_WEB.INSERT_ATTACHMENT_DOWNLOAD" ).getSql(),
 			    new BatchPreparedStatementSetter(){

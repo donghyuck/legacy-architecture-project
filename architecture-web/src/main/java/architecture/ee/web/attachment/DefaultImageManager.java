@@ -48,7 +48,6 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	private Cache imageCache;
 	private File imageDir;	
 	
-	
 	public ImageConfig getImageConfig() {
 		return imageConfig;
 	}
@@ -231,7 +230,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			image.setSize( IOUtils.toByteArray(inputStream).length );
 		} catch (IOException e) {
 			log.debug(e);
-		}		
+		}
 		return image;
 	}
 
@@ -246,7 +245,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 				((ImageImpl)image).setModifiedDate(now);
 				imageDao.updateImage(image);
 				imageDao.saveImageInputStream(image, image.getInputStream());
-			}					
+			}
 			
 			Collection<File> files = FileUtils.listFiles(getImageCacheDir(), FileFilterUtils.prefixFileFilter(image.getImageId() + ""), null);
 			for(File file : files){
@@ -346,8 +345,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			throw new SystemException(e);
 		}
 	}
-	
-	
+		
 	public InputStream getImageThumbnailInputStream(Image image, int width, int height ) {		
 		try {
 			

@@ -4,7 +4,79 @@
     <version>2.0</version>
     <description>Queries for WEB COMPONENTS</description>
     <version></version>
-    	 
+    <!--  MENU -->	 
+    <sql-query name="SELECT_MENU_BY_NAME" description="이름으로 메뉴 조회"><![CDATA[    
+	SELECT
+	  MENU_ID,
+	  NAME,
+	  TITLE,
+	  LOCATION,
+	  MENU_ENABLED,
+	  CREATION_DATE,
+	  MODIFIED_DATE
+	FROM V2_MENU
+	WHERE NAME LIKE  ?
+    ]]></sql-query>
+    <sql-query name="SELECT_MENU_BY_ID" description="아이디로 메뉴 조회"><![CDATA[    
+	SELECT
+	  MENU_ID,
+	  NAME,
+	  TITLE,
+	  LOCATION,
+	  MENU_ENABLED,
+	  CREATION_DATE,
+	  MODIFIED_DATE
+	FROM V2_MENU
+	WHERE MENU_ID = ?  
+    ]]></sql-query>    
+    <sql-query name="SELECT_ALL_MENU_ID" description="전체 메뉴 아이디 조회"><![CDATA[    
+	SELECT
+	  MENU_ID
+	FROM V2_MENU    
+    ]]></sql-query>
+    <sql-query name="UPDATE_MENU" description="메뉴 업데이트"><![CDATA[    
+ 	UPDATE V2_MENU SET 		
+		NAME = ?,
+		TITLE = ?,
+	  	LOCATION = ?,
+	  	MENU_ENABLED = ?,
+		MODIFIED_DATE = ?
+	WHERE MENU_ID = ?
+	    
+    ]]></sql-query>        
+    <sql-query name="CREATE_MENU" description="메뉴 생성"><![CDATA[    
+    INSERT INTO V2_MENU (
+	  MENU_ID,
+	  NAME,
+	  TITLE,
+	  LOCATION,
+	  MENU_ENABLED,
+	  CREATION_DATE,
+	  MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,? )    
+    ]]></sql-query>          
+    <sql-query name="REMOVE_MENU" description="메뉴 삭제"><![CDATA[    
+    DELETE FROM V2_MENU WHERE MENU_ID = ?
+    ]]></sql-query>           
+    <sql-query name="REMOVE_MENU_XML" description="메뉴 XML 데이터 삭제"><![CDATA[    
+    DELETE FROM V2_MENU_XML WHERE MENU_ID = ?
+    ]]></sql-query>    
+    <sql-query name="CREATE_MENU_XML" description="메뉴 XML 생성"><![CDATA[    
+    INSERT INTO V2_MENU_XML (
+    	MENU_ID,
+    	MENU_DATA
+    )VALUES(?, ?)
+    ]]></sql-query>        
+    <sql-query name="SELECT_MENU_XML_BY_ID" description="아이디로 XML 메뉴 조회"><![CDATA[    
+	SELECT
+	  MENU_DATA
+	FROM V2_MENU_XML WHERE MENU_ID = ?
+    ]]></sql-query>            
+    <sql-query name="COUNT_ALL_MENUS" description="메뉴 수 조회"><![CDATA[    
+	SELECT COUNT(MENU_ID)
+	FROM V2_MENU        
+    ]]></sql-query>     
+    
     <!--  ATTACHMENT -->	 
     <sql-query name="SELECT_ALL_ATTACHMENTS" description="전체 첨부파일 조회"><![CDATA[    
     SELECT 

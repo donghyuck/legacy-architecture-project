@@ -1,4 +1,51 @@
 	    -- =================================================  
+		--  MENU	
+		-- =================================================		
+		CREATE TABLE V2_MENU (
+	    	MENU_ID			          INTEGER NOT NULL,
+	   		--COMPANY_ID               INTEGER NOT NULL,
+		   	NAME                         VARCHAR2(255) NOT NULL,
+		   	TITLE                           VARCHAR2(255) NOT NULL,
+		   	LOCATION                   VARCHAR2(255),
+		    MENU_ENABLED           NUMBER(1, 0)  DEFAULT 1,
+			CREATION_DATE            DATE DEFAULT  SYSDATE NOT NULL,
+			MODIFIED_DATE            DATE DEFAULT  SYSDATE NOT NULL,	
+	    	CONSTRAINT V2_MENU_PK PRIMARY KEY (MENU_ID)	    
+	    );		
+		COMMENT ON TABLE      "V2_MENU"  IS '메뉴 테이블';
+		COMMENT ON COLUMN "V2_MENU"."MENU_ID" IS '메뉴 ID'; 
+		--COMMENT ON COLUMN "V2_MENU"."COMPANY_ID" IS '회사 아이디'; 
+		COMMENT ON COLUMN "V2_MENU"."NAME" IS '이름'; 		
+		COMMENT ON COLUMN "V2_MENU"."TITLE" IS '타이틀 명'; 
+		COMMENT ON COLUMN "V2_MENU"."LOCATION" IS 'LOCATION 값'; 				
+		COMMENT ON COLUMN "V2_MENU"."MENU_ENABLED" IS '사용여부'; 
+		COMMENT ON COLUMN "V2_MENU"."CREATION_DATE" IS '생성을'; 		
+		COMMENT ON COLUMN "V2_MENU"."MODIFIED_DATE" IS '수정일'; 
+		
+		CREATE TABLE V2_MENU_PROPERTY (
+		  MENU_ID                     INTEGER NOT NULL,
+		  PROPERTY_NAME          VARCHAR2(100)   NOT NULL,
+		  PROPERTY_VALUE         VARCHAR2(1024)  NOT NULL,
+		  CONSTRAINT V2_MENU_PROPERTY_PK PRIMARY KEY (MENU_ID, PROPERTY_NAME)
+		);	
+		COMMENT ON TABLE      "V2_MENU_PROPERTY"  IS '메뉴 프로퍼티 테이블';
+		COMMENT ON COLUMN "V2_MENU_PROPERTY"."MENU_ID" IS '메뉴 ID'; 
+		COMMENT ON COLUMN "V2_MENU_PROPERTY"."PROPERTY_NAME" IS '프로퍼티 이름'; 
+		COMMENT ON COLUMN "V2_MENU_PROPERTY"."PROPERTY_VALUE" IS '프로퍼티 값'; 		
+
+		CREATE TABLE V2_MENU_XML (
+			  MENU_ID                    INTEGER NOT NULL,
+			  MENU_DATA               CLOB,
+			  CONSTRAINT V2_MENU_XML_PK PRIMARY KEY (MENU_ID)
+		);
+		
+		CREATE TABLE V2_MENU_DATA (
+			  MENU_ID                    INTEGER NOT NULL,
+			  MENU_DATA               BLOB,
+			  CONSTRAINT V2_MENU_DATA_PK PRIMARY KEY (MENU_ID)
+		);
+		
+		-- =================================================  
 		--  ATTACHEMENT 	
 		-- =================================================		
 		CREATE TABLE V2_ATTACHMENT (
@@ -10,9 +57,9 @@
 			   	FILE_SIZE                      INTEGER   NOT NULL,
 			   	CREATION_DATE            DATE DEFAULT  SYSDATE NOT NULL,
 			   	MODIFIED_DATE            DATE DEFAULT  SYSDATE NOT NULL,	
-	    	   CONSTRAINT V2_ATTACHMENT_PK PRIMARY KEY (ATTACHMENT_ID)
-	    
+	    	   CONSTRAINT V2_ATTACHMENT_PK PRIMARY KEY (ATTACHMENT_ID)	    
 	    );
+	    
 	    CREATE INDEX V2_ATTACHMENT_OBJ_IDX ON V2_ATTACHMENT( OBJECT_TYPE, OBJECT_ID ) ;	
 		COMMENT ON TABLE "V2_ATTACHMENT"  IS '첨부파일 테이블';
 		COMMENT ON COLUMN "V2_ATTACHMENT"."ATTACHMENT_ID" IS 'ID'; 
