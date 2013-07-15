@@ -54,23 +54,6 @@
 		margin-top: 5px;
 	}	
 
-::-webkit-scrollbar {
-	width: 8px;
-	height: 8px
-}
-
-::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.05)
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 12px;
-	background: rgba(0, 0, 0, 0.2)
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: rgba(0, 0, 0, 0.25)
-}
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
