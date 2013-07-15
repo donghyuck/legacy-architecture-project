@@ -5,19 +5,26 @@
 		<script type="text/javascript">
 		<!--
 		yepnope([{
-			load: [ 	      
-			'css!${request.contextPath}/styles/jquery.pageslide/jquery.pageslide.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
-			'${request.contextPath}/js/jquery.pageslide/jquery.pageslide.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			load: [
+			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',	
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
-       	    '${request.contextPath}/js/common/common.ui.js',
-      	    '${request.contextPath}/js/common/common.models.js' ],        	  	   
+       	    '${request.contextPath}/js/common/common.models.js',
+       	    '${request.contextPath}/js/common/common.ui.js'
+      	     ],        	  	   
 			complete: function() {      
 				// START SCRIPT           
+
+				// ACCOUNTS LOAD		
+				var currentUser = new User({});
+				var accounts = $("#account-panel").kendoAccounts({
+					authenticate : function( e ){
+						currentUser = e.token;						
+					}
+				});
+								
 				// 1. COMPANY GRID			        
-				var selectedCompany = new Company();
+				var selectedCompany = new Company();				
 				
 				// SPLITTER LAYOUT
 				var splitter = $("#splitter").kendoSplitter({
@@ -26,10 +33,8 @@
                             { collapsible: true, min: "500px" },
                             { collapsible: true, collapsed: true, min: "500px" }
                         ]
-                 });
-                    
-				$("header .open").pageslide({ modal: true });
-				
+                 }).data("kendoSplitter");                       
+               
 				var company_grid = $("#company-grid").kendoGrid({
 					dataSource: {	
 						transport: { 
@@ -66,7 +71,8 @@
 					selectable: 'row',
 					height: 598,
 					batch: false,
-					toolbar: [ { name: "create", text: "회사 추가" }, { name: "view-roles", text: "롤 정보보기", className: "viewRoleCustomClass" } ],                    
+					toolbar: [ { name: "create", text: "회사 추가" }, { name: "view-roles", text: "롤 정보보기", className: "viewRoleCustomClass" }, { name: "view-menu", text: "메뉴관리", className: "viewMenuCustomClass" },
+						{ name: "group-mgmt", text: "그룹관리", className: "goGroupMainCustomClass" }, { name: "user-mgmt", text: "사용자관리", className: "goUserMainCustomClass" } ],                    
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
@@ -87,22 +93,8 @@
 								$("#splitter").data("kendoSplitter").expand("#datail_pane");
 								
 								// 1-1-2 템플릿을 이용한 상세 정보 출력	
-								$('#company-details').show().html(kendo.template($('#template').html()));								
+								$('#company-details').show().html(kendo.template($('#template').html()));	
 								kendo.bind($(".details"), selectedCompany );
-																
-								// 1-1-3 툴바 생성
-								$("#menu").kendoMenu({
-									select: function(e){									
-										if( selectedCompany.companyId > 0 ){
-											var action = $(e.item).attr('action') ;
-											$("form[name='fm1']").attr("action", action ).submit(); 
-										}else{
-											alert("선택된 회사가 없습니다. 회사를 먼저 선택하여주세요.");
-										}
-									}		
-								}).css("background-color", "#F5F5F5").css("border-width", "0px 0px 1px");
-								
-								$("#menu").show();
 										                                 
 								// 1-1-4 상세 탭 생성	                                 
 								var company_tabs = $('#company-details').find(".tabstrip").kendoTabStrip({
@@ -256,12 +248,132 @@
 						}   
 					}	                    
 				}).css("border", 0);
+
+				$('#company-grid').find(".goGroupMainCustomClass").click( function(){			
+					$("form[name='fm1']").attr("action", "main-group.do" ).submit(); 
+				} );
 				
-				$('#company-grid').find(".viewRoleCustomClass").click( function(){
-					if(! $("#perms-window").data("kendoWindow")){
+				$('#company-grid').find(".goUserMainCustomClass").click( function(){					
+					$("form[name='fm1']").attr("action", "main-user.do" ).submit(); 
+				} );
+				
+				// MENU WINDOW
+				var selectedMenu = new Menu();								
+				$('#company-grid').find(".viewMenuCustomClass").click( function(){											
+					if(! $("#menu-grid").data("kendoGrid")){       												
+						$('#menu-grid').kendoGrid({
+							dataSource: {
+								transport: { 
+									read: { url:'${request.contextPath}/secure/list-menu.do?output=json', type:'post' }
+								},						
+								batch: false, 
+								schema: {
+									total: "totalMenuCount",
+									data: "menus",
+									model: Menu
+								},
+								pageSize: 15,
+								serverPaging: true,
+								serverFiltering: false,
+								serverSorting: false,  
+								error:handleKendoAjaxError
+							},													
+							columns: [
+								//{ title: "ID", field: "menuId",  width:40 },
+								{ title: "이름", field: "name", width:100 }
+							],
+							pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
+							resizable: true,
+							editable : false,
+							selectable : "row",
+							scrollable: true,
+							height: 336,
+							toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
+							change: function(e) {
+								var selectedCells = this.select();
+								if( selectedCells.length == 1){ 
+                            		var selectedCell = this.dataItem( selectedCells );                      
+                            		selectedMenu.menuId = selectedCell.menuId;
+                            		selectedMenu.name = selectedCell.name;
+                            		selectedMenu.enabled = selectedCell.enabled;
+                            		selectedMenu.description = selectedCell.description;
+                            		selectedMenu.properties = selectedCell.properties;
+                            		selectedMenu.menuData = selectedCell.menuData;
+                            		selectedMenu.modifiedDate = selectedCell.modifiedDate;
+                            		selectedMenu.creationDate = selectedCell.creationDate;	        
+								 	kendo.bind($(".menu-details"), selectedMenu );
+								 	$(".menu-details").show();
+								 	
+ 									$('#update-menu-btn').bind('click' , function(){
+ 										if( selectedMenu.menuId > 0){
+											$.ajax({
+												type : 'POST',
+												url : "${request.contextPath}/secure/update-menu.do?output=json",
+												data : { menuId:selectedMenu.menuId, item: kendo.stringify( selectedMenu ) },
+												success : function( response ){									
+												    $('#menu-grid').data('kendoGrid').dataSource.read();	
+												},
+												error: handleKendoAjaxError,
+												dataType : "json"
+											});	
+										}else{
+											$.ajax({
+												type : 'POST',
+												url : "${request.contextPath}/secure/create-menu.do?output=json",
+												data : { menuId:selectedMenu.menuId, item: kendo.stringify( selectedMenu ) },
+												success : function( response ){									
+												    $('#menu-grid').data('kendoGrid').dataSource.read();	
+												},
+												error: handleKendoAjaxError,
+												dataType : "json"
+											});											
+										}
+									});				 	
+								}
+							},
+							dataBound: function(e){
+								kendo.bind($(".menu-details"), {} );      	
+								$(".menu-details").hide();
+							}
+						});	 						
+						$("#menu-grid").attr('style','');	  
+
+						$(".newMenuCustomClass").click( function (e){
+							$(".menu-details").show();
+							$("#menu-grid").data("kendoGrid").clearSelection();
+							selectedMenu = new Menu();		
+							kendo.bind($(".menu-details"), selectedMenu );      
+						});
+						
+						if(! $("#menu-window").data("kendoWindow")){       
 						// WINDOW 생성
-						$("#perms-window").kendoWindow({
-							minHeight : 200,
+						$("#menu-window").kendoWindow({
+							actions: ["Maximize", "Close"],
+							resizable: false,
+							minHeight : 350,
+							maxHeight : 500,
+							minWidth :  800,
+							maxWidth : 800,
+							modal: true,
+							visible: false,
+							title: '메뉴'
+						});
+					}			 		                   								
+					}					
+					var menuWindow = $("#menu-window").data("kendoWindow");
+					$("#menu-window").closest(".k-window").css({
+						top: 70,
+						left: 15,
+					});					
+					menuWindow.open();
+				});				
+				
+				// ROLE WINDOW				
+				$('#company-grid').find(".viewRoleCustomClass").click( function(){															 
+					if(! $("#perms-window").data("kendoWindow")){								
+						// WINDOW 생성
+						$("#perms-window").kendoWindow({							
+							minHeight : 300,
 							maxHeight : 500,
 							minWidth :  200,
 							maxWidth :  700,
@@ -269,6 +381,8 @@
 							visible: false,
 							title: '권한 정보'
 						});
+					}					
+					if( ! $('#role-grid').data("kendoGrid")){
 						// ROLE GRID 생성
 						$('#role-grid').kendoGrid({
 							dataSource: {
@@ -291,14 +405,17 @@
 							resizable: true,
 							editable : false,
 							scrollable: true,
-							height: 200,
+							height: 300,
 							change: function(e) {
 							}
-						});																				
-					}
+						});								
+					}					
 					var permsWindow = $("#perms-window").data("kendoWindow");
-					permsWindow.center();
-					permsWindow.open();
+					$("#perms-window").closest(".k-window").css({
+						top: 70,
+						left: 15,
+					});	
+					permsWindow.open();					
 				});
 				           	                	                
 				// END SCRIPT
@@ -307,67 +424,125 @@
 		-->
 		</script> 		 
 		<style>
-			#mainContent {
-				margin-top: 5px;
-			}
+			
+			#splitter {
+				height : 600px;
+			}			
+			#datail_pane {
+				background-color : #F5F5F5;
+			}		
+
+ 			#group-details .k-content 
+		    {
+		        height: "100%";
+		    }			
+			 #group-details .k-content 
+		    {
+		        height: "100%";
+		        overflow: auto;
+		    }
+		    			
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
+		<!--
 		<header>
 			<div class="row full-width layout">
 				<div class="large-12 columns">
 					<div class="big-box topless bottomless">
-					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>회사관리</h1>
-					<h4>회사를 관리하기 위한 기능을 제공합니다.</h4>
+					<h1>회사관리</h1>
+					<h4 class="desc">회사를 관리하기 위한 기능을 제공합니다.</h4>
 					</div>
 				</div>
 			</div>
 		</header>
+		-->
 		<!-- END HEADER -->
-		<!-- START MAIN CONTENT -->
-		
-		
-		<section id="mainContent">
-			<div id="splitter" style="height:600px;">
-				<div id="list_pane">
-					<div class="row full-width layout">
-						<div class="large-12 columns">				
-							<div id="company-grid" class="layout"></div>
-						</div>
-					</div>			
+		<!-- START MAIN CONTENT -->		
+		<section id="mainContent">		
+			<div class="row full-width">
+				<div class="large-6 columns" >
+					<div class="k-content"></div>		
 				</div>
-				<div id="datail_pane">				
-					<div class="row full-width layout">
-						<div class="large-12 columns">
-							<ul id="menu" class="hide" >
-								<li action="main-group.do">그룹 관리하기</li>
-								<li action="main-user.do">사용자 관리하기</li>
-							</ul>						
+				<div class="large-6 columns" >
+					<div class="k-content"></div>									
+				</div>				
+			</div>
+			<div class="row full-width">
+				<div class="large-12 columns" >	
+					<div id="splitter" style="height:600px;">
+						<div id="list_pane">
+							<div id="company-grid"></div>		
 						</div>
-					</div>			
-					<div class="row full-width layout">
-						<div class="large-12 columns">
+						<div id="datail_pane">
 							<div id="company-details"></div>
 						</div>
-					</div>
+					</div>			
 				</div>
 			</div>
-			<div id="perms-window" style="display:none;">
-				<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
-				<div id="role-grid">	</div>            	
-			</div>
 		</section>
+		
+		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
+			<div id="account-panel"></div>
+		</div>
+						
 		<!-- END MAIN CONTENT -->
+		<div id="perms-window" style="display:none;">
+			<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
+			<div id="role-grid">	</div>            	
+		</div>
+		
+		<div id="menu-window" style="display:none;">
+			<div class="row layout">
+				<div class="small-3 columns"><div class="k-content"><div id="menu-grid"></div></div></div>
+				<div class="small-9 columns layout">
+					<div class="menu-details k-block" style="height:450px;">
+						<div class="row big-box bottomless">
+							<div class="large-6 columns">
+									<label>이름</label>
+									<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name">
+							</div>
+							<div class="large-6 columns">
+									<label>타이틀</label>
+									<input type="text" class="k-textbox" placeholder="타이틀" data-bind="value:title">
+							</div>
+						</div>				
+						<div class="row big-box">
+							<div class="large-6 columns">
+									<label>사용여부</label>
+									<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />
+							</div>
+							<div class="large-6 columns">
+									<label>설명</label>
+									<input type="text" class="k-textbox" style="width: 200px;" placeholder="설명" data-bind="value:description">
+							</div>
+						</div>	
+						<div class="row big-box topless bottomless">
+							<div class="large-12 columns">
+									<label>XML 메뉴 데이터</label>
+									<textarea  data-bind="value: menuData" style="height:220px;" ></textarea>
+							</div>
+						</div>			
+						<div class="row big-box">
+							<div class="large-12 columns">
+									<button id="update-menu-btn" class="k-button right">저장</button>
+							</div>
+						</div>																				
+					</div>	
+				</div>
+			</div>
+		</div>
+			
 		<!-- START FOOTER -->
+		<!--
 		<footer class="row"> 
 		</footer>
+		-->
 		<!-- END FOOTER -->		
-		<!-- 상세 정보 템플릿 -->
-		<script type="text/x-kendo-template" id="template">				
-			<form name="fm1" method="POST" accept-charset="utf-8" class="details">
-				<input type="hidden" name="companyId" data-bind="value: companyId" />
-			</form>						
+		
+		<!-- 템플릿 -->
+		<script type="text/x-kendo-template" id="template">								
 			<div class="tabstrip">			
 				<ul>
 					<li>프로퍼티</li>
@@ -393,6 +568,11 @@
 					</div>	
 				</div>        
 			</div>
-		</script>		            	
+			<form name="fm1" method="POST" accept-charset="utf-8" class="details">
+				<input type="hidden" name="companyId" data-bind="value: companyId" />
+			</form>					
+		</script>	
+		<!-- 공용 템플릿 -->
+		<#include "/html/common-templates.ftl" >		        	
 	</body>    
 </html>

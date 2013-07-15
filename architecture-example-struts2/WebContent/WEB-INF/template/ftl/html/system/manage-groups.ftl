@@ -6,26 +6,24 @@
         <!--
         yepnope([{
             load: [ 	       
-			'css!${request.contextPath}/styles/jquery.pageslide/jquery.pageslide.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
-			'${request.contextPath}/js/jquery.pageslide/jquery.pageslide.min.js',
+			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',			
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
-       	    '${request.contextPath}/js/common/common.ui.js',
-      	    '${request.contextPath}/js/common/common.models.js' ],        	     	  	   
-            complete: function() {      
-
-            	$(document).ready(function(){        
-					// SPLITTER LAYOUT
-					var splitter = $("#splitter").kendoSplitter({
-	                        orientation: "horizontal",
-	                        panes: [
-	                            { collapsible: true, min: "500px" },
-	                            { collapsible: true, collapsed: true, min: "500px" }
-	                        ]
-	                 });
-	                 
+       	    '${request.contextPath}/js/common/common.models.js',
+       	    '${request.contextPath}/js/common/common.ui.js'],        	     	  	   
+            complete: function() { 
+				// Localization 
+				kendo.culture("ko-KR");
+				
+				// ACCOUNTS LOAD		
+				var currentUser = new User({});
+				var accounts = $("#accounts-panel").kendoAccounts({
+					authenticate : function( e ){
+						currentUser = e.token;						
+					}
+				});
+				
 					$("#company").kendoDropDownList({
                         dataTextField: "displayName",
                         dataValueField: "companyId",
@@ -44,7 +42,6 @@
                         }
                     });
                     
-                    $("header .open").pageslide({ modal: true });
                     
 					$("#company").data("kendoDropDownList").readonly();
 							                                 
@@ -55,7 +52,7 @@
 								$("form[name='fm1']").attr("action", action ).submit(); 
 							}
 						}						
-					}).css("background-color", "#F5F5F5").css("border-width", "0px 0px 1px");;
+					}).css("border-width", "1px 1px 0px");;
 					
 					$("#menu").show();									
 
@@ -99,7 +96,7 @@
 	                    filterable: true,
 	                    editable: "inline",
 	                    selectable: 'row',
-	                    height: "560",
+	                    height: 600,
 	                    batch: false,
 	                    toolbar: [ { name: "create", text: "그룹추가" } ],                    
 	                    pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },                    
@@ -213,8 +210,7 @@
 				                      		
 				                      	// TAB - PROPS GRID	
 				                      	} else if( $( e.contentElement ).find('div').hasClass('props') ){			
-				                      		if( ! $('#group-prop-grid').data("kendoGrid") ){	
-				                      			
+				                      		if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
 												group_tabs.find(".props").kendoGrid({
 													dataSource: {
 														transport: { 
@@ -258,7 +254,8 @@
 				                      		}
 				                      	}				                      
 				                      }
-				                  	}).css("border", "0px");                             
+				                  	});
+				                  	                             
 	                                  // 2-2. GROUP MEMBER GRID
 	                                 group_tabs.find(".members").kendoGrid({
 	                                     dataSource: {
@@ -286,7 +283,7 @@
 						                    serverFiltering: false,
 						                    pageSize:10
 	                                     },
-									    scrollable: true,								    
+									    scrollable: true,				    
 						                sortable: true,
 						                height: 350,
 						                resizable: true,
@@ -308,18 +305,19 @@
 						                    { command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }	
 						                ],
 						                dataBound:function(e){   
-						                	var group_memeber_grid = $('#group-member-grid').data('kendoGrid'); 
-						                    selectedGroup.memberCount = group_memeber_grid.dataSource.total() ;			                    
+						                	var group_memeber_grid = this; //$('#group-member-grid').data('kendoGrid'); 
+						                    selectedGroup.memberCount = group_memeber_grid.dataSource.total() ;
 						                	kendo.bind($(".tabstrip"), selectedGroup );
-						                }                                                            
-	                                 });	  
+						                	
+										}                                                            
+									 });	  
 	                                group_tabs.find(".searchCustomClass").click(function(){	        	                                 	              
 								    	// 3. SEARCH WINDOW 								    	
 								    	if( !$("#search-window").data("kendoWindow") ){											
 											// 3-1 SEARCH WINDOW 		
 											
 								    		$("#search-window").kendoWindow({
-									    		width:460,
+									    		width:500,
 									    		resizable : false,
 					                            title:  selectedGroup.company.name + " 사용자 검색",
 					                            modal: true,
@@ -328,7 +326,7 @@
 									    	 // make focus user search input 									    	
 											// 3-2 SEARCH RESULT GRID
 											$("#search-result").kendoGrid({
-										        dataSource: {
+												dataSource: {
 													type: "json",
 													transport: {
 														read: { url:'${request.contextPath}/secure/find-user.do?output=json', type:'post' },
@@ -352,15 +350,25 @@
 										        },
 										    	scrollable: true,
 										       	sortable: true,
-										       	selectable: "multiple, row",
 										       	height: 280,					       			      
 										        columns: [
+										           { field: "select", title: "&nbsp;", template: '<input type=\'checkbox\' />', sortable: false, width: 32},	
 										           { field: "userId", title: "ID", width:25,  filterable: false, sortable: false }, 
 										           { field: "username", title: "아이디", width: 100 }, 
 										           { field: "name", title: "이름", width: 50 }, 
 										           { field: "email", title: "메일", width: 100 },
-										       ],
-										       autoBind: true                                                            
+										       	],
+												autoBind: true,
+												dataBound: function() {
+            										var grid = this;
+            										//handle checkbox change
+            										grid.table.find("tr").find("td:first input").change(function(e) {  
+            											var checkbox = $(this);
+            											var selected = grid.table.find("tr").find("td:first input:checked").closest("tr");
+            											//grid.clearSelection();  
+            											//grid.select(selected);
+            										}); 
+            									}                                                     
 										    });
 										} 										
 										$('#search-window').data("kendoWindow").center();       
@@ -386,7 +394,7 @@
 	                // 3-3 CLOSE SEARCH WINDOW
 	                $("#close-search-window-btn").click( function() {	
 	                	$("#search-window").data("kendoWindow").close();
-	                	var user_search_grid = $('#search-result').data('kendoGrid') ;	                	
+	                	var user_search_grid = $('#search-result').data('kendoGrid') ;	        	                	        	
 	                	$("#search-text").val("");
 	                	if( user_search_grid.dataSource.total() > 0 ){	                		
 	                		user_search_grid.dataSource.read({ search_text: "" });	
@@ -404,8 +412,10 @@
 					$("#add-member-btn").click( function(){									    
 					        var user_search_grid = $('#search-result').data('kendoGrid') ;			
 					        var group_memeber_grid = $('#group-member-grid').data('kendoGrid');      
-					        var selectedUsers = [];	        		        
-					        $.each(  user_search_grid.select(), function(index, row){        
+					        
+					        var selected = user_search_grid.table.find("tr").find("td:first input:checked").closest("tr");
+					        var selectedUsers = [];						        
+					        $.each(  selected, function(index, row){        
 					            var selectedItem = user_search_grid.dataItem(row);	
 								var selectedUser = new User({
 										userId: selectedItem.userId ,
@@ -416,55 +426,83 @@
 					            selectedUsers.push( selectedUser )
 					        } );	
 					        
-					        $.ajax({
-					            dataType : "json",
-								type : 'POST',
-								url : "${request.contextPath}/secure/add-group-members.do?output=json",
-								data : { groupId:selectedGroup.groupId, items: kendo.stringify( selectedUsers ) },
-								success : function( response ){								    
-									$.each(  user_search_grid.select(), function(index, row){      
-							        	user_search_grid.removeRow(row);
-							        });	
-									group_memeber_grid.dataSource.read();
-								},
-								error:handleKendoAjaxError
-							});									
-					       // user_search_grid.clearSelection();
+					        if( selectedUsers.length > 0 ){
+								$.ajax({
+						            dataType : "json",
+									type : 'POST',
+									url : "${request.contextPath}/secure/add-group-members.do?output=json",
+									data : { groupId:selectedGroup.groupId, items: kendo.stringify( selectedUsers ) },
+									success : function( response ){								    
+										$.each(  selected, function(index, row){      
+								        	user_search_grid.removeRow(row);
+								        });	
+										group_memeber_grid.dataSource.read();
+									},
+									error:handleKendoAjaxError
+								});						        
+					        }else{
+					        	alert('선택된 사용자가 없습니다.');
+					        }
 	                });
 	                
 	                $("#update-role-btn").click(function(){	
 	                
 	                }); 
-				});
+				//});
+				
+				// SPLITTER LAYOUT
+				var splitter = $("#splitter").kendoSplitter({
+	                orientation: "horizontal",
+	                panes: [
+	                    { collapsible: true, min: "500px" },
+	                    { collapsible: true, collapsed: true, min: "500px" }
+	                ]
+	             });
+	                 				
             }
         }]);        		
      	-->
         </script> 	
 		<style>
-			#mainContent {
-				margin-top: 5px;
-			}
+			#splitter {
+				height : 600px;
+			}			
+			#datail_pane {
+				background-color : #F5F5F5;
+			}		
+
+ 			#group-details .k-content 
+		    {
+		        height: "100%";
+		    }
+
+			 #group-details .k-content 
+		    {
+		        height: "100%";
+		        overflow: auto;
+		    }
+		    
 		</style>
     </head>
 	<body>
 		<!-- START HEADER -->
+		<!--
 		<header>
 			<div class="row full-width layout">
 				<div class="large-12 columns">
 					<div class="big-box topless bottomless">
-					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>그룹관리</h1>
-					<h4>그룹을 관리하기 위한 기능을 제공합니다.</h4>
+					<h1><a class="open" href="#">Menu</a>그룹관리</h1>
+					<h4 class="desc">그룹을 관리하기 위한 기능을 제공합니다.</h4>
 					</div>
 				</div>
 			</div>
-		</header>
+		</header>-->
 	  	<!-- END HEADER -->	  	
 	  	<!-- START MAIN CONTNET -->
 		<section id="mainContent">
-			<div id="splitter" style="height:600px;">
-				<div id="list_pane">
-					<div class="row full-width layout">
-						<div class="large-12 columns" >
+			<div class="row full-width">
+				<div class="large-6 columns" >
+					<div class="k-content">
 							<ul id="menu" style="display:none;" >
 				                <li action="#">회사
 				                	<ul>	                		    
@@ -482,22 +520,37 @@
 				                </li>        
 				                <li action="main-user.do">사용자</li>     
 				            </ul>							
-						</div>
 					</div>
-					<div class="row full-width layout">
-						<div class="large-12 columns" >
-							<div id="group-grid"></div>	
+				</div>
+				<div class="large-6 columns" >
+					<div class="k-content"></div>								
+				</div>						
+			</div>		
+			<div class="row full-width">
+				<div class="large-12 columns" >								
+						<div id="splitter">
+							<div id="list_pane">
+								<div class="row full-width layout">
+									<div class="large-12 columns" >			
+									</div>
+								</div>
+								<div class="row full-width layout">
+									<div class="large-12 columns" >
+										<div id="group-grid">
+										</div>	
+									</div>
+								</div>	
+							</div>
+							<div id="datail_pane">			
+								<div class="row full-width layout">			
+									<div class="large-12 columns" >
+										<div id="group-details"></div>
+									</div>				
+								</div>						
+							</div>
 						</div>
-					</div>	
 				</div>
-				<div id="datail_pane">			
-					<div class="row full-width layout">			
-						<div class="large-12 columns" >
-							<div id="group-details"></div>
-						</div>				
-					</div>						
-				</div>
-			</div>					
+			</div>	
 			<form name="fm1" method="POST" accept-charset="utf-8">
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>
@@ -518,7 +571,7 @@
 			<div class="row layout">
 				<div class="small-12 columns">
 					<div class="alert-box alert">
-					검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 여러 사용자를 추가하는 경우 SHIFT 키를 누르고 여러 사용자들을 선택합니다. 
+					검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 사용자 선택은 체크박스를 체크하면 됩니다.
 					</div>
 				</div>
 			</div>
@@ -537,11 +590,16 @@
 			</div>
 		</div>	    
 		<!-- END MAIN CONTNET -->
+		<!--
 	  <footer>  
 	  </footer>
-	
+		-->
+		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
+			<div id="accounts-panel"></div>
+		</div>
+			
 		<script type="text/x-kendo-template" id="template">					
-			<div class="details">										
+			<div class="details big-box">	
 				<div class="tabstrip">
 					<ul>
 						<li>프로퍼티</li>
@@ -571,6 +629,9 @@
 				</div>
 			</div>
 		</script>		        
+		<!-- 공용 템플릿 -->
+		<#include "/html/common-templates.ftl" >		        
+				
 	<!-- END MAIN CONTENT  -->	  
     </body>
 </html>
