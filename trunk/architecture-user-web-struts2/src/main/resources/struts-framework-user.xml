@@ -126,7 +126,7 @@
 		<default-interceptor-ref name="defaultStack" />
 		 <!--  User  -->
 		<action name="main-user" class="architecture.user.web.struts2.action.admin.MainAction">
-			<result name="success" type="freemarker">/html/manage-users.ftl</result>
+			<result name="success" type="freemarker">/html/system/manage-users.ftl</result>
 		</action>
 		<action name="list-user" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
 			<result name="json-success" type="json">
@@ -312,7 +312,7 @@
 						
 		<!--  Company  -->		
 		<action name="main-company"  class="architecture.user.web.struts2.action.admin.MainAction">
-			<result name="success"         type="freemarker">/html/manage-company.ftl</result>
+			<result name="success"         type="freemarker">/html/system/manage-company.ftl</result>
 		</action>
 		<action name="list-company"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
 			<result name="json-success"  type="json">
@@ -388,7 +388,7 @@
 		
         <!--  Group  -->
 		<action name="main-group"  class="architecture.user.web.struts2.action.admin.MainAction">
-			<result name="success"         type="freemarker">/html/manage-groups.ftl</result>
+			<result name="success"         type="freemarker">/html/system/manage-groups.ftl</result>
 		</action>
 
 		<action name="list-group"  class="architecture.user.web.struts2.action.admin.ajax.GroupManagementAction">
@@ -533,14 +533,117 @@
 		<action name="list-role"  class="architecture.user.web.struts2.action.admin.ajax.RoleManagementAction">
 			<result name="json-success"  type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">roles.properties</param>
+			    <param name="excludeProperties">roles.*\.properties</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">
 				roles.*, totalRoleCount
 				</param>
 			</result>
 		</action>		
-												
+		<!--  Menu  -->	
+		<action name="list-menu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <!-- <param name="excludeProperties">menus.*\.data</param>-->
+			    <param name="excludeNullProperties">false</param> 
+				<param name="includeProperties">
+				menus.*, totalMenuCount
+				</param>
+			</result>
+		</action>
+		<action name="get-company-menu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetCompanyMenu.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompanyMenu.*
+				</param>
+			</result>
+		</action>
+		<action name="get-company-menu-component"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetCompanyMenuComponent.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompanyMenuComponent.*
+				</param>
+			</result>
+		</action>
+		
+		<action name="get-menu-component"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetMenuComponent.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetMenuComponent.*
+				</param>
+			</result>
+		</action>					
+		<action name="get-menu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success"  type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetMenu.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetMenu.*
+				</param>
+			</result>
+		</action>
+		<action name="create-menu" method="createMenu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetMenu.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetMenu.*
+				</param>
+			</result>		
+		</action>				
+	
+		<action name="update-menu" method="updateMenu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetGroup.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetGroup.*
+				</param>
+			</result>		
+		</action>		
+			
+		<action name="get-menu-property"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetMenu.properties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetMenu.*
+				</param>
+			</result>		
+		</action>			
+
+		<action name="update-menu-property" method="updateMenuProperties" class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetMenuProperty.*
+				</param>
+			</result>		
+		</action>	
+
+		<action name="delete-menu-property" method="deleteMenuProperties" class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetMenuProperty.*
+				</param>
+			</result>		
+		</action>		
 	</package>
 	
 </struts>
