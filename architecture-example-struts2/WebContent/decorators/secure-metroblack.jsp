@@ -10,26 +10,24 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
-
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/foundation/foundation.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/foundation/general_foundicons.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.common.min.css" />
-<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.metro.min.css" />
+<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.black.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.css" />
-
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
 
 	@media only screen and (min-width: 768px) {
 		body{
-			font-size: 11pt;
+			font-size: 10pt;
 		}
 	}
 	
 	@media only screen and (min-width: 1280px) {
 		body{
-			font-size: 12pt;
+			font-size: 11pt;
 		}
 	}
 	
@@ -39,38 +37,43 @@
 		}
 	}
 	
-	header { background-color: #2ba6cb;  height: 65px;}
-	
-	header .desc {
-		margin-top: -42px;
-		padding-left: 150px;
+	.ui-panel {
+		width: 65%;
+		height:100%;
+		top: 16px;
+		background-color: #ffffff;
+		border-color: #dadada;
+		display: inline-block;
+		position: absolute;
+		z-index: 10001;
+		border-style: solid;
+		border-width: 1px;		
 	}
+	
+	.panel-position-right {
+	/* right: -17em; */
+	}
+
+	/* animated: panel right (for overlay and push) */
+	.ui-panel-animate.ui-panel-position-right.ui-panel-display-overlay,
+	.ui-panel-animate.ui-panel-position-right.ui-panel-display-push {
+		right: 0;
+		-webkit-transform: translate3d(17em,0,0);
+		-moz-transform: translate3d(17em,0,0);
+		transform: translate3d(17em,0,0);
+	}
+	/* panel right open */
+	.ui-panel-position-right.ui-panel-display-reveal,  /* negate "panel right" for reveal */
+	.ui-panel-position-right.ui-panel-open {
+		right: 0;
+	}	
+	header { background-color: #2ba6cb; }
 	
 	header h1 { color: #fff; font-weight: 500; }
 	
 	header h4 { color: #fff; font-weight: 300; }
+	
 
-	#mainContent {
-		margin-top: 5px;
-	}	
-
-::-webkit-scrollbar {
-	width: 8px;
-	height: 8px
-}
-
-::-webkit-scrollbar-track {
-	background: rgba(0, 0, 0, 0.05)
-}
-
-::-webkit-scrollbar-thumb {
-	border-radius: 12px;
-	background: rgba(0, 0, 0, 0.2)
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: rgba(0, 0, 0, 0.25)
-}
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
