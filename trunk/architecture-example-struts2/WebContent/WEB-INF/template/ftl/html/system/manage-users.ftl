@@ -5,26 +5,24 @@
         <script type="text/javascript">                
         yepnope([{
             load: [ 
-			'css!${request.contextPath}/styles/jquery.pageslide/jquery.pageslide.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
-			'${request.contextPath}/js/jquery.pageslide/jquery.pageslide.min.js',
+			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',			
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
-       	    '${request.contextPath}/js/common/common.ui.js',
-      	    '${request.contextPath}/js/common/common.models.js' ],             	   
-            complete: function() {               
-                kendo.culture("ko-KR");               
+       	    '${request.contextPath}/js/common/common.models.js',
+       	    '${request.contextPath}/js/common/common.ui.js'],
+            complete: function() {       
+                    
+                kendo.culture("ko-KR");
                 
-				// SPLITTER LAYOUT
-				var splitter = $("#splitter").kendoSplitter({
-					orientation: "horizontal",
-					panes: [
-						{ collapsible: true, min: "500px" },
-						{ collapsible: true, collapsed: true, min: "500px" }
-					]
+				// ACCOUNTS LOAD		
+				var currentUser = new User({});
+				var accounts = $("#accounts-panel").kendoAccounts({
+					authenticate : function( e ){
+						currentUser = e.token;						
+					}
 				});
-                
+				
 				$("#company").kendoDropDownList({
                         dataTextField: "displayName",
                         dataValueField: "companyId",
@@ -45,7 +43,7 @@
                         }
                 });	                
 				$("#company").data("kendoDropDownList").readonly();		
-				$("header .open").pageslide({ modal: true });				
+								
 				$("#menu").kendoMenu({
 						select: function(e){							
 							var action = $(e.item).attr('action') ;
@@ -53,14 +51,14 @@
 								$("form[name='fm1']").attr("action", action ).submit(); 
 							}
 						}						
-				}).css("background-color", "#F5F5F5").css("border-width", "0px 0px 1px");;
-				$("#menu").show();				
+				}).css("border-width", "1px 1px 0px");;
+				
+				$("#menu").show();	
 					
 				$("#go-comapny-btn").click( function(){
 					$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 
 				}); 
 				
-								
 	            var selectedUser = new User ({});	
 		        // 1. USER GRID 		        
 				var user_grid = $("#user-grid").kendoGrid({
@@ -85,16 +83,18 @@
                         serverSorting: false
                     },
                     columns: [
-                        { field: "userId", title: "ID", width:50,  filterable: true, sortable: false }, 
-                        { field: "username", title: "아이디", width: 100 }, 
-                        { field: "name", title: "이름", width: 100 }, 
-                        { field: "email", title: "메일" },
-                        { field: "creationDate", title: "생성일", width: 100, format: "{0:yyyy/MM/dd}" } ],         
+                        { field: "userId", title: "ID", width:50,  filterable: false, sortable: false , headerAttributes: { "class": "table-header-cell", style: "text-align: center" } }, 
+                        { field: "username", title: "아이디", width: 100, headerAttributes: { "class": "table-header-cell", style: "text-align: center" } }, 
+                        { field: "name", title: "이름", width: 100 , headerAttributes: { "class": "table-header-cell", style: "text-align: center" }}, 
+                        { field: "email", title: "메일", headerAttributes: { "class": "table-header-cell", style: "text-align: center" } },
+                        { field: "enabled", title: "사용여부", width: 90, headerAttributes: { "class": "table-header-cell", style: "text-align: center" } },
+                        { field: "creationDate",  title: "생성일", width: 120,  format:"{0:yyyy/MM/dd}", headerAttributes: { "class": "table-header-cell", style: "text-align: center" } },
+                        { field: "modifiedDate", title: "수정일", width: 120,  format:"{0:yyyy/MM/dd}", headerAttributes: { "class": "table-header-cell", style: "text-align: center" } } ],         
                     filterable: true,
                     sortable: true,
                     pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
                     selectable: 'row',
-                    height: 547,
+                    height: 600,
                     toolbar: [
 					 	{ name: "create-user", text: "새로운 사용자 생성하기", className: "createUserCustomClass" } ],
                     change: function(e) {                    
@@ -116,9 +116,9 @@
 							selectedUser.properties = selectedCell.properties;							 							 
 							selectedUser.company = $("#company").data("kendoDropDownList").dataSource.get(  $("#company").data("kendoDropDownList").value()  );
 							var observable = new kendo.data.ObservableObject( selectedUser ); 
-							 if( selectedUser.userId > 0 ){
-							 	
-							 	
+							
+							 if( selectedUser.userId > 0 ){						
+							 	 	
 							 	// 2. USER DETAILS
 							 	 $("#splitter").data("kendoSplitter").expand("#datail_pane");
 							 	 
@@ -268,7 +268,7 @@
 							                            	data : "targetUserAttachments"
 							                            }
 							                        },
-							                        height:200,
+							                        height:300,
 							                        scrollable:  true,
 							                        sortable: true,
 							                        editable: {
@@ -615,14 +615,31 @@
 							$("#user-details").hide(); 	 					     
 						 }
 					}
-                }).css("border", "0px"); 	              
+                }).css("border", "0px").data('kendoGrid');
+               
+                
+                // SPLITTER LAYOUT
+				var splitter = $("#splitter").kendoSplitter({
+					orientation: "horizontal",
+					panes: [
+						{ scrollable : true, min: 500},
+						{ collapsed: true, collapsible: true, scrollable : true, min: 550 }
+					]
+				});
+				
             }	
         }]);      
+        
         </script>
-		<style>
-			#mainContent {
-				margin-top: 5px;
+		<style>			
+			#splitter {
+				height : 600px;
 			}
+			
+			#datail_pane {
+				background-color : #F5F5F5;
+			}
+			
  			#user-details .k-content 
 		    {
 		        height: "100%";
@@ -634,27 +651,27 @@
 		    }
 		    
 		</style>
-		   
     </head>
 	<body>
 		<!-- START HEADER -->
+		<!--
 		<header>
 			<div class="row full-width layout">
 				<div class="large-12 columns">
 					<div class="big-box topless bottomless">
-					<h1><a class="open" href="${request.contextPath}/secure/get-system-menu.do">Menu</a>사용자관리</h1>
-					<h4>사용자을 관리하기 위한 기능을 제공합니다.</h4>
+					<h1><a class="open" href="#">Menu</a>사용자관리</h1>
+					<h4 class="desc">사용자을 관리하기 위한 기능을 제공합니다.</h4>
 					</div>
 				</div>
 			</div>
 		</header>
+		-->
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
 		<section id="mainContent">		
-			<div id="splitter" style="height:600px;">
-				<div id="list_pane">
-					<div class="row full-width layout">
-						<div class="large-12 columns" >
+			<div class="row full-width">
+				<div class="large-6 columns" >
+					<div class="k-content">
 							<ul id="menu" style="display:none;" >
 								<li action="#">회사
 									<ul>
@@ -671,23 +688,38 @@
 									</ul>
 								</li>  
 								<li action="main-group.do">그룹</li>     
-							</ul>  
-						</div>
-					</div>			
-					<div class="row full-width layout">			
-						<div class="large-12 columns" >
-							<div id="user-grid"></div>
-						</div>
-					</div>		
+							</ul>  	
+						</div>		
 				</div>
-				<div id="datail_pane">
-					<div class="row full-width layout">			
-						<div class="large-12 columns" >
-							<div id="user-details"></div>
-						</div>				
-					</div>
+				<div class="large-6 columns" >
+					<div class="k-content">								
+				</div>				
+			</div>
+			<div class="row full-width">
+				<div class="large-12 columns" >				
+					<div id="splitter">
+						<div id="list_pane">
+							<div class="row full-width layout">
+								<div class="large-12 columns" >
+									
+								</div>
+							</div>			
+							<div class="row full-width layout">			
+								<div class="large-12 columns" >
+									<div id="user-grid"></div>
+								</div>
+							</div>		
+						</div>
+						<div id="datail_pane">
+							<div class="row full-width layout">			
+								<div class="large-12 columns" >
+									<div id="user-details"></div>
+								</div>				
+							</div>
+						</div>
+					</div>				
 				</div>
-			</div>	
+			</div>				
 			<form name="fm1" method="POST" accept-charset="utf-8">
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>	
@@ -728,37 +760,42 @@
 			</form>
 		</div>  
   		<div id="download-window"></div>    
-				  
-  <!-- END MAIN CONTNET -->
-  <footer>  
-  </footer>    
-	<script id="download-window-template" type="text/x-kendo-template">				
-		#if (contentType.match("^image") ) {#
-			<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;"/>
-		# } else { #
-		<table class="tabular" width="100%">
-		  <thead>
-		    <tr>
-		      <th>이름</th>
-		      <th>유형</th>
-		      <th>크기</th>
-		      <th>&nbsp;</th>
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <tr>
-		      <td  width="200">#= name #</td>
-		      <td  width="150">#= contentType #</td>
-		      <td  width="150">#= size # 바이트</td>
-		      <td  width="150"><a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
-		    </tr>
-		  </tbody>
-		</table>				
-		# } #  		
-	</script>	
-	<script type="text/x-kendo-template" id="template">
-		<div class="row full-width layout">
-			<div class="large-12 columns">
+		
+		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
+			<div id="accounts-panel"></div>
+		</div>
+						  
+  		<!-- END MAIN CONTNET -->
+		<!--
+		<footer>  
+		</footer>    
+		-->
+		<script id="download-window-template" type="text/x-kendo-template">				
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;"/>
+			# } else { #
+			<table class="tabular" width="100%">
+			  <thead>
+			    <tr>
+			      <th>이름</th>
+			      <th>유형</th>
+			      <th>크기</th>
+			      <th>&nbsp;</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td  width="200">#= name #</td>
+			      <td  width="150">#= contentType #</td>
+			      <td  width="150">#= size # 바이트</td>
+			      <td  width="150"><a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
+			    </tr>
+			  </tbody>
+			</table>				
+			# } #  		
+		</script>	
+		<script type="text/x-kendo-template" id="template">
+
 				<div class="big-box">
 					<div class="tabstrip">
 						<ul>
@@ -778,7 +815,7 @@
 							첨부파일
 							</li>	   
 						</ul>	          
-						<div>
+						<div class="full-height">
 							<div class="row full-width layout">
 								<div class="large-3 columns">
 									<div class="big-box">
@@ -786,51 +823,83 @@
 										<input name="uploadImage" id="files" type="file" />
 									</div>								
 								</div>
-								<div class="large-9 columns">
-									<table class="tabular details" width="100%">
-										<tbody>		
-											<tr>
-									    		<td width="150px">이름</td> 
-											    <td><input class="k-textbox" class="k-text" data-bind="value:name"></td>
-										    </tr>
-											<tr>
-										    	<td>마지막 방문일</td> 
-										    	<td><span data-bind="text: formattedLastLoggedIn"></span></td> 
-										    </tr>
-											<tr>
-										    	<td>메일</td> 
-										    	<td><input type="email" class="k-textbox" class="k-text" data-bind="value:email" placeholder="메일"></td>
-										    </tr>
-											<tr>
-										    	<td>계정사용</td> 
-										    	<td><input type="checkbox"  name="enabled"  data-bind="checked: enabled" /></td>
-										    </tr>
-											<tr>
-										    	<td>이름공개</td> 
-										    	<td><input type="checkbox"  name="nameVisible"  data-bind="checked: nameVisible" /></td>
-										    </tr>
-											<tr>
-										    	<td>메일공개</td> 
-										    	<td><input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" /></td>
-										    </tr>
-										<tbody>					    
-									</table>	
+								<div class="large-9 columns details">
+									<fieldset>
+										<legend>기본정보</legend>
+										<div class="row">
+										      <div class="small-6 columns">
+										        <label>이름</label>
+										        <input type="text" class="k-textbox" placeholder="large-6.columns" data-bind="value:name">
+										      </div>
+										</div>      
+										<div class="row">      
+										      <div class="small-6 columns">
+										        <label>메일</label>
+										        <input type="text" class="k-textbox" placeholder="large-6.columns" data-bind="value:email">
+										      </div>
+										</div>
+									</fieldset>
+									<fieldset>
+										<legend>옵션</legend>																		
+										<div class="row">
+										      <div class="small-3 columns">
+										        <label class="">이름공개</label>
+										      </div>
+										      <div class="small-3 columns">										      
+										      	<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />										        					        
+										      </div>
+										      <div class="small-3 columns">
+										        <label class="">메일공개</label>				        
+										      </div>		
+										      <div class="small-3 columns">
+										        <input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />						        
+										      </div>											      								      									      
+										</div>			
+										<div class="row">
+										      <div class="small-3 columns">
+										        <label class="">계정사용</label>
+										      </div>
+										      <div class="small-3 columns">
+										      	<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />											        					        
+										      </div>			
+										      <div class="small-3 columns"></div>
+										      <div class="small-3 columns"></div>											      						      								      									      
+										</div>																																																
+									</fieldset>
+									<div class="alert-box secondary">
+										<div class="row">
+										      <div class="large-6 columns">
+										        개인정보 수정일							        
+										      </div>
+										      <div class="large-6 columns">
+										        <span data-bind="text: formattedLastProfileUpdate"></span>		 	
+										      </div>										      
+										</div>					
+										<div class="row">
+										      <div class="large-6 columns">
+										        마지막 방문일						        
+										      </div>
+										      <div class="large-6 columns">
+										        <span data-bind="text: formattedLastLoggedIn"></span>
+										      </div>										      
+										</div>							
+									</div>									
 								</div>
 							</div>
-							<div class="row full-width layout">
+							<div class="row full-width">
 								<div class="small-9 small-offset-3 columns">
 										<button id="update-user-btn" class="k-button">정보 변경</button>&nbsp;
 										<button id="change-password-btn" class="k-button right">비밀번호변경</button>
 								</div>
 							</div>							
 	                </div>	                	      
-	        		<div>
+	        		<div class="full-height">
         				<div id="user-props-grid" class="props" style="height:0px;"/>
         				<div class="box leftless rightless bottomless">
 	                		<div class="alert-box secondary">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
 	                	</div>
 	                </div>
-	                <div>
+	                <div class="full-height">
 	                    <div class="alert-box secondary">
 		                    <input id="company-combo" style="width: 180px" />
 		                    <input id="group-combo" style="width: 180px" />
@@ -839,7 +908,7 @@
 	                    </div>
 	                	<div id="user-group-grid" class="groups"></div>
 	                </div>			
-	                <div>
+	                <div class="full-height" style="height:400px;">
 	                	<div class="roles">
 	                		<div class="row full-width layout">
 	                			<div class="large-12 columns">	
@@ -865,7 +934,7 @@
 	                		</div>	
 						</div>	
 	                </div>			
-	                <div>	                	    
+	                <div class="full-height">	                	    
 	                    <div class="alert-box secondary">
 		                    <input id="attach-upload" name="uploadFile" type="file" />
 		                    <p/>
@@ -874,10 +943,9 @@
 	                	<div id="attach-grid" class="attachments"></div>
 	                </div>	
 				</div>
-			</div>			
-		</div>
-							
-	</script>
-	<!-- END MAIN CONTENT  -->
+		</script>
+		<!-- 공용 템플릿 -->
+		<#include "/html/common-templates.ftl" >		
+		<!-- END MAIN CONTENT  -->
     </body>
 </html>
