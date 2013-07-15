@@ -23,14 +23,14 @@ public class LicenseTest {
 		
         
 		License license = new License("APPLICATION ARCHITECTURE for JAVA", "STANDARD", 1, 0, 3, "ANY", "ANY");
-		license.setID(20130522);
+		license.setID(20130614);
 		license.setType(Type.COMMERCIAL);
 		license.setModule("architecture-common");
 		license.setModule("architecture-ee");
 		license.setModule("architecture-user");
 		license.setModule("architecture-web");
 		license.setCreationDate(new Date());
-		license.setClient("www.ksa.or.kr","KOREAN STANDARDS ASSOCIATION");
+		license.setClient("www.inkium.com","INKIUM");
 		
 		
 		try {
