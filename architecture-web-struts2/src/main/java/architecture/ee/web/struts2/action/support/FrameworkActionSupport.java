@@ -9,6 +9,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
@@ -19,9 +20,14 @@ import org.springframework.security.authentication.AuthenticationProvider;
 
 import architecture.common.exception.Codeable;
 import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
 import architecture.ee.util.OutputFormat;
+import architecture.ee.web.navigator.Menu;
+import architecture.ee.web.navigator.MenuComponent;
+import architecture.ee.web.navigator.MenuNotFoundException;
+import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.struts2.interceptor.OutputFormatAware;
 import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
@@ -59,6 +65,8 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 
 	private User user;
 	
+	private MenuRepository menuRepository ;
+	
     protected Map<String, Object> models = new LinkedHashMap<String, Object>();
 	
     public final void setAuthenticationProvider(AuthenticationProvider authProvider)
@@ -66,6 +74,10 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
         this.authProvider = authProvider;
     }
     
+	public void setMenuRepository(MenuRepository menuRepository) {
+		this.menuRepository = menuRepository;
+	}
+
 	public void setServletResponse(final HttpServletResponse response) {
 		this.response = response;
 	}
@@ -86,13 +98,38 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		this.outputFormat = outputFormat;
 	}
 
+	public MenuComponent getMenuComponent(String name){ 
+		MenuComponent menuComp = null;
+		try {
+			if( menuRepository != null ){
+				Menu menu;
+				menu = menuRepository.getMenu(1);		
+				if( !isGuest() ){
+					String menuIdStr =StringUtils.defaultIfEmpty( getUser().getCompany().getProperties().get("menuId"), "1" );	
+					long menuId = Long.parseLong( menuIdStr );
+					if( menuId != menu.getMenuId() ){
+						menu = menuRepository.getMenu(menuId);		
+					}
+				}	
+				menuComp = menuRepository.getMenuComponent(menu, name);
+			}
+		} catch (MenuNotFoundException e) {
+			log.error(e);
+		}	
+		return menuComp;
+	}
+	
 	public AuthToken getAuthToken() {
 		if ( null == authToken )
 			authToken = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getAuthToken();
 		return authToken;
 	}
 
-    public String input(){
+    protected MenuRepository getMenuRepository() {
+		return menuRepository;
+	}
+
+	public String input(){
         if( getOutputFormat() == OutputFormat.JSON ){
             return  OutputFormat.JSON.name().toLowerCase() + "-" + INPUT ;
         } else if ( getOutputFormat() == OutputFormat.XML ){ 
@@ -186,13 +223,10 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		page.append(ServletUtils.getServletPath(ServletActionContext.getRequest()));
 		final String queryString = ServletActionContext.getRequest().getQueryString();
 		if (queryString != null && !"".equals(queryString.trim()))
-			page.append('?').append(queryString);
-		
+			page.append('?').append(queryString);		
 		return page.toString();
 	}
 	
-	
-
 	public boolean acceptableParameterName(String parameterName) {
 		return !parameterName.contains(".");
 	}	
