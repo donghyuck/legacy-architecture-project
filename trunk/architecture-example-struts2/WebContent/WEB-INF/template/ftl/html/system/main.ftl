@@ -53,6 +53,9 @@
 						}
 					}
 				 });	
+				 					
+				$("#content_frame_wrapper").css( "height", $(document).height() - 54 );
+		
 				// END SCRIPT
 			}
 		}]);
@@ -86,7 +89,7 @@
 			</div>			
 			<div id="content">
 				<div class="row full-width layout">
-					<div class="large-12 columns" style="height:100%;">
+					<div class="large-12 columns">
 						<iframe id="content_frame_wrapper" class="content" src="http://www.naver.com/" frameborder="0" hspace="0" style="width: 100%; height:600px;"></iframe>									
 					</div>				
 				</div>
