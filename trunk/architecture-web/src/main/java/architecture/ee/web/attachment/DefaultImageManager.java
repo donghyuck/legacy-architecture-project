@@ -15,15 +15,16 @@
  */
 package architecture.ee.web.attachment;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-
-import javax.imageio.ImageIO;
+import java.util.UUID;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import net.coobird.thumbnailator.Thumbnails;
 import net.sf.ehcache.Cache;
@@ -43,6 +44,7 @@ import architecture.ee.web.attachment.impl.ImageImpl;
 
 public class DefaultImageManager extends AbstractAttachmentManager implements ImageManager {
 
+	private Lock lock = new ReentrantLock();
 	private ImageConfig imageConfig;
 	private ImageDao imageDao;
 	private Cache imageCache;
@@ -195,6 +197,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
              imageFile.delete();
 	}
 	
+	
 	public Image createImage(int objectType, long objectId, String name, String contentType, File file) {
 		Date now = new Date();
 		ImageImpl image = new ImageImpl();
@@ -249,9 +252,8 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			
 			Collection<File> files = FileUtils.listFiles(getImageCacheDir(), FileFilterUtils.prefixFileFilter(image.getImageId() + ""), null);
 			for(File file : files){
-				FileUtils.deleteQuietly(file);
-			}
-			
+				FileUtils.forceDelete(file);
+			}			
 			Image imageToUse = getImage(image.getImageId());			
 			imageCache.remove(imageToUse.getImageId());
 		} catch (Exception e) {
@@ -273,17 +275,29 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 				imageDao.saveImageInputStream(image, image.getInputStream());				
 			}					
 			
-			Collection<File> files = FileUtils.listFiles(getImageCacheDir(), FileFilterUtils.prefixFileFilter(image.getImageId() + ""), null);
-			for(File file : files){
-				FileUtils.deleteQuietly(file);
-			}
+			deleteImageFileCache(image);
 			
 			Image imageToUse = getImage(image.getImageId());			
 			imageCache.remove(imageToUse.getImageId());
+			
 			return imageToUse;
 		} catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+	
+	private void deleteImageFileCache(Image image ){
+		
+		Collection<File> files = FileUtils.listFiles(getImageCacheDir(), FileFilterUtils.prefixFileFilter(image.getImageId() + ""), null);
+		for(File file : files){
+			log.debug( file.getPath() + ":" + file.isFile() );
+			try {
+				FileUtils.forceDelete(file);
+			} catch (IOException e) {
+				log.error(e);
+			}
+		}
+		
 	}
 		
 	public Image getImage(long imageId) throws NotFoundException {
@@ -329,8 +343,15 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
                 if(!result)
                     log.error((new StringBuilder()).append("Unable to create image directory: '").append(imageDir).append("'").toString());
                 
-                File dir = new File(imageDir, "cache");
-                dir.mkdir();      
+                getImageCacheDir(); //new File(imageDir, "cache");                
+                getImageTempDir();                
+            }else{
+            	File dir = getImageTempDir();
+            	try {
+					FileUtils.cleanDirectory(dir);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
             }
         }
         return imageDir;
@@ -347,12 +368,13 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	}
 		
 	public InputStream getImageThumbnailInputStream(Image image, int width, int height ) {		
-		try {
-			
+		try {			
 			File file = getThumbnailFromCacheIfExist(image, width, height);
 			return FileUtils.openInputStream(file);
 		} catch (IOException e) {
 			throw new SystemException(e);
+		}finally {
+			
 		}
 	}
 	
@@ -363,11 +385,14 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	 * @throws IOException
 	 */
 	protected File getImageFromCacheIfExist(Image image) throws IOException{		
+		
 		File dir = getImageCacheDir();
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append( image.getImageId() ).append(".bin");		
-		File file = new File(dir, sb.toString() );		
+		File file = new File(dir, sb.toString() );	
+		
+		
 		if( file.exists() ){
 			long size = FileUtils.sizeOf(file);
 			if( size != image.getSize() ){
@@ -380,11 +405,23 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			InputStream inputStream = imageDao.getImageInputStream(image);
 			FileUtils.copyInputStreamToFile(inputStream, file);
 		}		
+		
 		return file;
 	}	
 	
 	protected File getImageCacheDir(){
 		File dir = new File(getImageDir(), "cache" );	
+		if( !dir.exists() ){
+			dir.mkdir();
+		}
+		return dir;
+	}
+
+	protected File getImageTempDir(){
+		File dir = new File(getImageDir(), "temp" );
+		if( !dir.exists() ){
+			dir.mkdir();
+		}
 		return dir;
 	}
 	
@@ -394,33 +431,54 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		return sb.toString();
 	}
 	
+	protected File getTemeFile(){
+		UUID uuid = UUID.randomUUID();		
+		File tmp = new File(getImageTempDir(), uuid.toString());		
+		return  tmp;
+	}
 	
-	protected File getThumbnailFromCacheIfExist(Image image,  int width, int height ) throws IOException{		
-		
-		log.debug( "thumbnail generation " + width + "x" + height );
-		File dir = getImageCacheDir();
-		File file = new File(dir, toThumbnailFilename(image, width, height) );		
-		File originalFile = getImageFromCacheIfExist( image );	
-		
-		log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() );
-		log.debug( "target:" + file.getAbsoluteFile());
-		
-		if( file.exists() && file.length() > 0 ){
-			image.setThumbnailSize((int)file.length());
+	protected File getThumbnailFromCacheIfExist(Image image,  int width, int height ) throws IOException{			
+		try {
+			lock.lock();
+			
+			log.debug( "thumbnail : " + width + "x" + height );
+			File dir = getImageCacheDir();
+			File file = new File(dir, toThumbnailFilename(image, width, height) );		
+			File originalFile = getImageFromCacheIfExist( image );	
+			
+			log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() + "target:" + file.getAbsoluteFile() );
+			
+			if( file.exists() && file.length() > 0 ){
+				image.setThumbnailSize((int)file.length());
+				return file;
+			}
+			
+			/*
+			BufferedImage originalImage = ImageIO.read(originalFile);
+			if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
+				image.setThumbnailSize(0);			
+				return originalFile ;			
+			}
+			*/
+			
+			/**
+			 * TIP : 윈동우 경우 Thumbnail 파일 생성후에도 해당 파일을 참조하는 문제가 있어 이를 임시파일을 사용하여 
+			 * 처리.
+			 */
+			//UUID uuid = UUID.randomUUID();		
+			//File tmp = new File(getImageTempDir(), uuid.toString());		
+			
+			
+			//BufferedImage thumbnail = 
+			File tmp = getTemeFile();
+			Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(tmp)); 		
+			image.setThumbnailSize((int)tmp.length());
+			FileUtils.copyFile(tmp, file);			
 			return file;
-		}
+		}  finally  {
+			lock.unlock();
+		}		
 		
-		BufferedImage originalImage = ImageIO.read(originalFile);		
-		if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
-			image.setThumbnailSize(0);
-			return originalFile ;
-		}
-		
-		BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
-		ImageIO.write(thumbnail, "png", file );
-		image.setThumbnailSize((int)file.length());
-		
-		return file;		
 	}
 	
 		
@@ -442,6 +500,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		imageConfigToUse.setAllowedTypes( stringToList(ApplicationHelper.getApplicationProperty("image.allowedTypes", ""))  );
 		imageConfigToUse.setDisallowedTypes( stringToList( ApplicationHelper.getApplicationProperty("image.disallowedTypes", "")));
 		this.imageConfig = imageConfigToUse;
+		
 		getImageDir();				
 		log.debug( imageConfig );
 	}	
