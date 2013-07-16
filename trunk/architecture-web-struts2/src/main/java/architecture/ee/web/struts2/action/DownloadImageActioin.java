@@ -35,6 +35,8 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 	
 	private Image targetImage ;
 	
+	private InputStream imputStream = null;
+	
 	private ImageManager imageManager ;
 		
 	public void prepare() throws Exception {
@@ -80,14 +82,14 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 
 	public Image getTargetImage() {
 		try {
-			if( targetImage == null)
-				targetImage = imageManager.getImage(imageId);
-				
-			if( width > 0 && height > 0 )
-					imageManager.getImageThumbnailInputStream(targetImage, width, height);
-			
-			log.debug( "ThumbnailSize:" + targetImage.getThumbnailSize());
-			
+			if( targetImage == null){
+				targetImage = imageManager.getImage(imageId);				
+				if( width > 0 && height > 0 )
+					imputStream = imageManager.getImageThumbnailInputStream(targetImage, width, height);
+				else
+					imputStream = imageManager.getImageInputStream(targetImage);			
+				log.debug( "ThumbnailSize:" + targetImage.getThumbnailSize());
+			}
 			return targetImage;
 		} catch (NotFoundException e) {
 			throw new SystemException(e);
@@ -95,12 +97,12 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 	}
 	
 	public InputStream getTargetImageInputStream() {
-		Image imageToUse = getTargetImage();
-		
-		if( width > 0 && height > 0 && imageToUse.getThumbnailSize() > 0)
+		Image imageToUse = getTargetImage();		
+		return imputStream;
+		/*if( width > 0 && height > 0 && imageToUse.getThumbnailSize() > 0)
 			return imageManager.getImageThumbnailInputStream(imageToUse, width, height);
 		else
-			return imageManager.getImageInputStream(imageToUse);
+			return imageManager.getImageInputStream(imageToUse);*/
 	}
 	
 	public String getTargetImageContentType(){
