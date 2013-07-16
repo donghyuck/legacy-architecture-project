@@ -240,10 +240,11 @@
         render : function(){
         	//that.trigger( UPDATE, {token: user});
         	var that = this, element, content  ;        	
-        	var photoUrl = that.options.photoUrl ;
-        	        	
-        	if( that.options.photoUrl ){
-        		that.token.photoUrl = that.options.photoUrl;
+
+        	if( that.options.photoUrl != null ){
+        		that.token.photoUrl = that.options.photoUrl ;
+        	}else{
+        		that.token.photoUrl = null;
         	}
         	        	
         	if( that.token.properties.imageId ){
