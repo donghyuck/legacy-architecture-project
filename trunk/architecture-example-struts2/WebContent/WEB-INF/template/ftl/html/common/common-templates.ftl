@@ -1,7 +1,7 @@
 		<script id="account-template" type="text/x-kendo-template">
 			<a id="account-button" data-dropdown="account-dropdown" href="\\#">
 				<span class="avatar-container">				
-					#if (photoUrl != 'null' && photoUrl != '')  { #
+					#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 					<span class="avatar-wrapper loaded"><img src="#:photoUrl#" /></span>
 					# } else { #
 					<span class="avatar-wrapper"><img class="loading"></span>
