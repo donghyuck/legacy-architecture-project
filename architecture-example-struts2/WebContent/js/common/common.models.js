@@ -49,7 +49,7 @@ var User = kendo.data.Model.define( {
         formattedLastProfileUpdate : { type: "string" },
         isSystem: { type:"boolean", defaultVlaue: false },
         anonymous : { type:"boolean", defaultVlaue: true },
-        photoUrl : {type: "string", editable: true },
+        photoUrl : {type: "string", editable: true, defaultVlaue: null },
         roles: {}
     },
     hasRole : function ( role ) {
