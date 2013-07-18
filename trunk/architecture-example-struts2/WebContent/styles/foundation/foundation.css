@@ -29,6 +29,7 @@ html,body {
 		url('../font/nanumgothic.woff') format('truetype');
 }
 
+
 body {
 	background: white;
 	color: #222222;
@@ -54,7 +55,7 @@ img,object,embed {
 	height: auto;
 }
 
-object,embed {
+object,embed {`
 	height: 100%;
 }
 

@@ -1,3 +1,48 @@
+/* Naver nanumgothic font ---------------------- */
+@font-face {
+	font-family: "BM_NANUMGOTHIC";
+	src: url('../font/nanumgothic.eot');
+	src: local('☺'), url('../font/nanumgothic.woff') format('woff'), url('../font/nanumgothic.woff') format('truetype');
+}
+/** Main body ------------------------------------ */
+body {
+	padding: 0;
+	margin: 0;
+	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+	font-weight: normal;
+	font-style: normal;
+	position: relative;
+}
+
+.navigation {
+	position: fixed;
+	padding: 5px;
+	background: #e1e2e5;
+	box-shadow: inset 0 0 1px 1px #d5d5d8,0 3px 3px #fdfdfe;
+	height: 100%;
+	width: 250px;
+	top: 50px;
+	left: 0;
+	right: 0;
+	bottom: 0;	
+	z-index: 1;
+}
+
+.content {
+	position: absolute;
+	margin-top: 25px;
+	top: 0px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border: 0;
+	outline: 0;
+	vertical-align: baseline;
+	padding: 0;
+	z-index: 0;
+}
+
+
 .box {
 	padding: 2px;
 }
@@ -63,6 +108,7 @@
 }
 
 
+/**
 
 #top-menu {
 	border-style: none;
@@ -91,6 +137,7 @@
 	background-color: #676767;
 	border-width: 0 0 0 0;
 }
+*/
 
 nav .top-bar {
 	float: left;
@@ -144,14 +191,7 @@ header .open:hover {
 	background-color: #676767;
 }
 
-#content {
-	position: absolute;
-	top: 50px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: #fdfdfe;
-}
+
 
 	
 /* ---------------------------------- */
@@ -207,16 +247,6 @@ div .rexy-header {
 	}
 }
 
-div .rexy-content {
-	float: left;
-	left: 0;
-	top: 0;	
-	width: 260px;
-	padding: 0;	
-	background-color: transparent;
-	display:block;
-	font-size: 11pt;
-}
 
 .rexy-content ul.k-menu {
 	width : 240px;
