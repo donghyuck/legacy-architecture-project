@@ -26,9 +26,10 @@
 				});
 								
 				// LEFT MENU !
-				$("#topbar .open").kendoPageslide({ 
+				$("#topbar .open").kendoTopBar({ 
 					template : kendo.template($("#sidebar-template").html()),
 					data : currentUser,
+					
 					content : {
 						type : "kendoMenu",
 						dataSource : {
@@ -50,7 +51,7 @@
 						select : function( item ){
 							$("#content_frame_wrapper").attr( "src", item.action );
 							 kendo.bind($("#content_title"), item );
-						}
+						}						
 					}
 				 });	
 				 					
@@ -88,11 +89,8 @@
 				<div id="account"></div>
 			</div>			
 			<div id="content">
-				<div class="row full-width layout">
-					<div class="large-12 columns">
-						<iframe id="content_frame_wrapper" class="content" src="http://www.naver.com/" frameborder="0" hspace="0" style="width: 100%; height:600px;"></iframe>									
-					</div>				
-				</div>
+			
+				<iframe id="content_frame_wrapper" class="content" src="/secure/main-company.do" frameborder="0" allowtransparency="true" hspace="0" style="width: 100%; height:600px;"></iframe>
 			</div>
 		</section>		
 		<div id="pageslide" style="left: -300px; right: auto; display: none;">	</div>

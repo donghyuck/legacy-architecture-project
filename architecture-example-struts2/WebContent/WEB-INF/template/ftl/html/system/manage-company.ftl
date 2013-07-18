@@ -69,7 +69,7 @@
 					filterable: true,
 					editable: "inline",
 					selectable: 'row',
-					height: 598,
+					height: 600,
 					batch: false,
 					toolbar: [ { name: "create", text: "회사 추가" }, { name: "view-roles", text: "롤 정보보기", className: "viewRoleCustomClass" }, { name: "view-menu", text: "메뉴관리", className: "viewMenuCustomClass" },
 						{ name: "group-mgmt", text: "그룹관리", className: "goGroupMainCustomClass" }, { name: "user-mgmt", text: "사용자관리", className: "goUserMainCustomClass" } ],                    
