@@ -41,6 +41,145 @@
 })(jQuery);	
 
 /**
+ *  kendoTopBar widget
+ */
+;(function($, undefined) {
+	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
+	var sliding = false;	
+	var $body = $('body'), $pageslide = $('#pageslide');
+	
+	ui.kendoTopBar = Widget.extend({
+		init: function(element, options) {			
+			var that = this;
+			Widget.fn.init.call(that, element, options);
+			options = that.options;	
+			//that.options = $.extend({}, settings, options);		
+			if( $pageslide.length == 0 ) {
+				$pageslide = $('<div />').attr( 'id', 'pageslide' ).css( 'display', 'none' ).appendTo( $('body') );
+			}
+			if( options.template ){
+				$pageslide.append( options.template( options.data ) );	     	
+        	}			
+			element.click($.proxy( that._open, this ));			
+			if(options.visible){
+				that._open();
+			}
+			
+			if( $.isArray( options.content) ){
+				alert ("array");
+			}else if( (typeof options.content == "object") && (options.content !== null) ){
+				that.render( options.content );
+			}
+			
+		},
+		events : {
+		},
+		options : {
+			name: "Pageslide",	
+			enabled: true,
+			visible : false,
+			speed:      200,      // Accepts standard jQuery effects speeds (i.e. fast, normal or milliseconds)
+	        direction:  'right',   // Accepts 'left' or 'right'
+	        modal:      false,   // If set to true, you must explicitly close
+									  // pageslide using $.pageslide.close();
+	        data: {},
+	        template : null,
+	        content: null
+		},
+		render: function ( options ) {			
+			var content = $( "#" + options.renderTo ) ;
+			var dataSource = DataSource.create(options.dataSource);
+			dataSource.fetch(function(){
+				var items = dataSource.data();
+				content.html( options.template( items ) );	
+				content.find('ul').first().kendoMenu({
+ 					orientation : "vertical",
+ 					select: function(e){	
+ 						if( $(e.item).is('[action]') ){
+ 							var selected = $(e.item);
+ 							options.select( { title: $.trim(selected.text()), action: selected.attr("action") , description: selected.attr("description") || "" } );
+ 						}
+					}
+ 				});				
+			});			
+		},
+		// Function that controls opening of the pageslide
+		_open: function (e){
+			 if ( $pageslide.is(':visible')) {
+				// If we clicked the same element twice, toggle closed
+				 $("#wrapper").addClass("translate");
+				
+				this._close();
+			}else {
+				 $("#wrapper").removeClass("translate");
+				this._start();
+			}
+		},
+		_start : function( direction, speed ) {
+	        var slideWidth = $pageslide.outerWidth( true ),
+	            bodyAnimateIn = {},
+	            slideAnimateIn = {};	        
+	        // If the slide is open or opening, just ignore the call
+	        if( $pageslide.is(':visible') || sliding ) return;	        
+	        sliding = true;	          
+	        switch( direction ) {
+	            case 'left':
+	                $pageslide.css({ left: 'auto', right: '-' + slideWidth + 'px' });
+	                bodyAnimateIn['margin-left'] = '-=' + slideWidth;
+	                slideAnimateIn['right'] = '+=' + slideWidth;
+	                break;
+	            default:
+	                $pageslide.css({ left: '-' + slideWidth + 'px', right: 'auto' });
+	                bodyAnimateIn['margin-left'] = '+=' + slideWidth;
+	                slideAnimateIn['left'] = '+=' + slideWidth;
+	                break;
+	        }	                    
+	        // Animate the slide, and attach this slide's settings to the
+			// element
+	        $body.animate(bodyAnimateIn, speed);
+	        $pageslide.show().animate(slideAnimateIn, speed, function() {
+	        	sliding = false;
+	        });
+		},
+		_close : function( callback ) {
+	            slideWidth = $pageslide.outerWidth( true ),
+	            speed = $pageslide.data( 'speed' ),
+	            bodyAnimateIn = {},
+	            slideAnimateIn = {}
+	            	        
+	        // If the slide isn't open, just ignore the call
+	        if( $pageslide.is(':hidden') || sliding ) return;	        
+	            sliding = true;
+	        
+	        switch( $pageslide.data( 'direction' ) ) {
+	            case 'left':
+	                bodyAnimateIn['margin-left'] = '+=' + slideWidth;
+	                slideAnimateIn['right'] = '-=' + slideWidth;
+	                break;
+	            default:
+	                bodyAnimateIn['margin-left'] = '-=' + slideWidth;
+	                slideAnimateIn['left'] = '-=' + slideWidth;
+	                break;
+	        }
+	        
+	        $pageslide.animate(slideAnimateIn, speed);
+	        $body.animate(bodyAnimateIn, speed, function() {
+	            $pageslide.hide();
+	            sliding = false;
+	            if( typeof callback != 'undefined' ) callback();
+	        });
+	    }
+	});
+
+	$.fn.extend( { 
+		kendoTopBar : function ( options ) {
+			return new ui.kendoTopBar ( this , options );		
+		}
+	});
+	
+})(jQuery);
+
+/**
  *  Extended Pageslide widget
  */
 ;(function($, undefined) {
@@ -193,6 +332,7 @@
 	UPDATE = "update",
 	SYSTEM_ROLE = "ROLE_SYSTEM",
     NS = ".kendoAccounts",
+    open = false,
 	DISABLED = "disabled";
 
 	ui.kendoAccounts = Widget.extend( {
@@ -263,10 +403,22 @@
                 that.toggle($(this));
             });
         	
-            $('*, html, body').on('click', function (e) {
-        	});
+       	/*
+            $('*, html, body').on('click.fndtn.dropdown', function (e) {
+                if (!$(e.target).data('dropdown')) {
+                	alert("2"); //alert($('[data-dropdown-content]').hasClass("dropped"));
+                }else{
+                	alert("1");
+                }
+              });
+            */
+        	
+            //$('*, html, body').on('click', function (e) {
+            	//alert(  e.target.html());
+        	//});
             
         	$('[data-dropdown-content]').on('click.fndtn.dropdown', function (e) {
+        		//alert( e.target.text());
                 e.stopPropagation();
               });
             
@@ -278,15 +430,18 @@
         	if( target.hasClass("dropped")){
         		target.removeClass("dropped");
         		dropdown.css("display", "none");
+        		open = false;
         	}else{
         		target.addClass("dropped");
         		dropdown.css("display", "block");
+        		open = true;
         	}        	
         },
         destroy: function() {
         	var that = this;
             Widget.fn.destroy.call(that);
             that.element.off(NS);
+            open = false;
         },
         token : new User({})
 	});
