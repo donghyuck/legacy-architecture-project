@@ -23,19 +23,27 @@
 		
 		<script id="sidebar-template" type="text/x-kendo-template">	
 			<div class="rexy-header">
-				<div id="navigation">
-					<nav role="navigation">
-						<a href="\\#/setup" class="home active" title="홈"><i>Home</i></a>
-						<a href="\\#/profile" class="friends" title="사용자관리"><i>Friends</i></a>
-						<a href="\\#/settings/profile" class="settings" title="설정"><i>Settings</i></a>
-					</nav>
+				<div class="btn-group">
+				  <button class="btn">Left</button>
+				  <button class="btn">Middle</button>
+				  <button class="btn">Right</button>
 				</div>
+			
+			</div>			
+		    <div class="row">
+      			<div class="span3 bs-docs-sidebar">	
+				<ul class="nav nav-list">
+					<li class="nav-header">List header</li>
+					<li class="active"><a href="\\#">Home</a></li>
+					<li><a href="\\#">Library</a></li>
+				</ul>
 			</div>
-			<section id="sidebar-menu-section" class="rexy-content"></section>
+			</div>
+			
 		</script>
 
-	    <script id="sidebar-menu-template" type="text/x-kendo-template">	    
-	    <ul id="sidebar-menu">
+	    <script id="top-menu-template" type="text/x-kendo-template">	    
+	    <ul id="top-menu">
 	    	# for (var i = 0; i < data.length; i++) { #
 	    	# var item =data[i] ; #
 	    	<li>#= item.title #

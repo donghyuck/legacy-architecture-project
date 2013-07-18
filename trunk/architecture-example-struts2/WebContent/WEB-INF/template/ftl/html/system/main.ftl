@@ -26,10 +26,10 @@
 				});
 								
 				// LEFT MENU !
-				$("#topbar .open").kendoTopBar({ 
+				/**
+				$("#topbar .open").kendoPageslide({ 
 					template : kendo.template($("#sidebar-template").html()),
-					data : currentUser,
-					
+					data : currentUser
 					content : {
 						type : "kendoMenu",
 						dataSource : {
@@ -46,15 +46,38 @@
 								data: "targetCompanyMenuComponent.components"
 							}
 						},
-						template : kendo.template($("#sidebar-menu-template").html()),
+						template : kendo.template($("#top-menu-template").html()),
 						renderTo : "sidebar-menu-section",
 						select : function( item ){
 							$("#content_frame_wrapper").attr( "src", item.action );
 							 kendo.bind($("#content_title"), item );
-						}						
-					}
+						}
 				 });	
-				 					
+				*/
+				
+				$("#topbar .open").kendoTopBar({ 
+					template : kendo.template($("#top-menu-template").html()),
+					data : currentUser,
+					renderTo : $('.navigation'),
+					dataSource : {
+						transport: {
+							read: {
+								url: "/secure/get-company-menu-component.do?output=json",
+								dataType: "json",
+								data: {
+									menuName: "SYSTEM_MENU"
+								}
+							}
+						},
+						schema: {
+							data: "targetCompanyMenuComponent.components"
+						}
+					},
+					select : function( item ){
+						$("#content_frame_wrapper").attr( "src", item.action );
+						 kendo.bind($("#content_title"), item );
+					}
+				 });				
 				$("#content_frame_wrapper").css( "height", $(document).height() - 54 );
 		
 				// END SCRIPT
@@ -80,27 +103,27 @@
 		<!-- END HEADER -->
 
 		<!-- START MAIN CONTENT -->		
-		<section id="wrapper">
+		<section class="container-fluid">		
 			<div id="topbar">
 				<button class="square sidebar open">
 					<i>Toggle</i>
 				</button>
 				<article id="content_title"><span data-bind="text:title"></span><span class="desc" data-bind="text:description"></span></article>
-				<div id="account"></div>
+				<div id="account"></div>				
 			</div>			
-			<div id="content">
-			
-				<iframe id="content_frame_wrapper" class="content" src="/secure/main-company.do" frameborder="0" allowtransparency="true" hspace="0" style="width: 100%; height:600px;"></iframe>
+			<div class="content">			
+				<div class="navigation" style="display:none;"></div>
+				<iframe id="content_frame_wrapper" class="content" src="/secure/main-company.do" frameborder="1" allowtransparency="true" hspace="0" style="width: 100%; height:100%;"></iframe>				
 			</div>
-		</section>		
-		<div id="pageslide" style="left: -300px; right: auto; display: none;">	</div>
+		<section>
 		<!-- END MAIN CONTENT -->					
 		<!-- START FOOTER -->
+		<!--
 		<footer class="row"> 
 		</footer>
+		-->
 		<!-- END FOOTER -->				
 		<!-- 공용 템플릿 -->
-		<div id="naver"></div>
 		<#include "/html/common/common-templates.ftl" >
 	</body>    
 </html>
