@@ -46,54 +46,33 @@
 ;(function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
 	var sliding = false;	
-	var $body = $('body'), $pageslide = $('#pageslide');
+	var $body = $('body');
 	
 	ui.kendoTopBar = Widget.extend({
-		init: function(element, options) {			
+		init: function(element, options) {
 			var that = this;
 			Widget.fn.init.call(that, element, options);
-			options = that.options;	
-			//that.options = $.extend({}, settings, options);		
-			if( $pageslide.length == 0 ) {
-				$pageslide = $('<div />').attr( 'id', 'pageslide' ).css( 'display', 'none' ).appendTo( $('body') );
-			}
-			if( options.template ){
-				$pageslide.append( options.template( options.data ) );	     	
-        	}			
-			element.click($.proxy( that._open, this ));			
-			if(options.visible){
-				that._open();
-			}
-			
-			if( $.isArray( options.content) ){
-				alert ("array");
-			}else if( (typeof options.content == "object") && (options.content !== null) ){
-				that.render( options.content );
-			}
-			
+			options = that.options;		
+			that.render(options);			
+			element.click($.proxy( that._open, this ));	
 		},
 		events : {
+			
 		},
 		options : {
-			name: "Pageslide",	
-			enabled: true,
-			visible : false,
-			speed:      200,      // Accepts standard jQuery effects speeds (i.e. fast, normal or milliseconds)
-	        direction:  'right',   // Accepts 'left' or 'right'
-	        modal:      false,   // If set to true, you must explicitly close
-									  // pageslide using $.pageslide.close();
-	        data: {},
-	        template : null,
-	        content: null
+			name: "topBar",	
+			renderTo: null,
+			dataSource: null,
+			template : null
 		},
 		render: function ( options ) {			
-			var content = $( "#" + options.renderTo ) ;
-			var dataSource = DataSource.create(options.dataSource);
+			var content = options.renderTo ;
+			var dataSource = DataSource.create(options.dataSource);			
 			dataSource.fetch(function(){
 				var items = dataSource.data();
 				content.html( options.template( items ) );	
 				content.find('ul').first().kendoMenu({
- 					orientation : "vertical",
+ 					orientation :  "vertical", // "horizontal",
  					select: function(e){	
  						if( $(e.item).is('[action]') ){
  							var selected = $(e.item);
@@ -105,70 +84,17 @@
 		},
 		// Function that controls opening of the pageslide
 		_open: function (e){
-			 if ( $pageslide.is(':visible')) {
-				// If we clicked the same element twice, toggle closed
-				 $("#wrapper").addClass("translate");
-				
-				this._close();
-			}else {
-				 $("#wrapper").removeClass("translate");
-				this._start();
+			var content = this.options.renderTo ;
+			 var slide = kendo.fx(content).slideIn("right");
+			 if( sliding ){
+				 slide.reverse();
+				 sliding = false;
+			}else{	 
+				 slide.play();
+				 sliding = true;
 			}
-		},
-		_start : function( direction, speed ) {
-	        var slideWidth = $pageslide.outerWidth( true ),
-	            bodyAnimateIn = {},
-	            slideAnimateIn = {};	        
-	        // If the slide is open or opening, just ignore the call
-	        if( $pageslide.is(':visible') || sliding ) return;	        
-	        sliding = true;	          
-	        switch( direction ) {
-	            case 'left':
-	                $pageslide.css({ left: 'auto', right: '-' + slideWidth + 'px' });
-	                bodyAnimateIn['margin-left'] = '-=' + slideWidth;
-	                slideAnimateIn['right'] = '+=' + slideWidth;
-	                break;
-	            default:
-	                $pageslide.css({ left: '-' + slideWidth + 'px', right: 'auto' });
-	                bodyAnimateIn['margin-left'] = '+=' + slideWidth;
-	                slideAnimateIn['left'] = '+=' + slideWidth;
-	                break;
-	        }	                    
-	        // Animate the slide, and attach this slide's settings to the
-			// element
-	        $body.animate(bodyAnimateIn, speed);
-	        $pageslide.show().animate(slideAnimateIn, speed, function() {
-	        	sliding = false;
-	        });
-		},
-		_close : function( callback ) {
-	            slideWidth = $pageslide.outerWidth( true ),
-	            speed = $pageslide.data( 'speed' ),
-	            bodyAnimateIn = {},
-	            slideAnimateIn = {}
-	            	        
-	        // If the slide isn't open, just ignore the call
-	        if( $pageslide.is(':hidden') || sliding ) return;	        
-	            sliding = true;
-	        
-	        switch( $pageslide.data( 'direction' ) ) {
-	            case 'left':
-	                bodyAnimateIn['margin-left'] = '+=' + slideWidth;
-	                slideAnimateIn['right'] = '-=' + slideWidth;
-	                break;
-	            default:
-	                bodyAnimateIn['margin-left'] = '-=' + slideWidth;
-	                slideAnimateIn['left'] = '-=' + slideWidth;
-	                break;
-	        }
-	        
-	        $pageslide.animate(slideAnimateIn, speed);
-	        $body.animate(bodyAnimateIn, speed, function() {
-	            $pageslide.hide();
-	            sliding = false;
-	            if( typeof callback != 'undefined' ) callback();
-	        });
-	    }
+			e.preventDefault();
+		}
 	});
 
 	$.fn.extend( { 
