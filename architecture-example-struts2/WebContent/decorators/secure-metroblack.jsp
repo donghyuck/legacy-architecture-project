@@ -18,6 +18,10 @@
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
+	
+	body {
+		overflow-y : hidden;
+	}
 
 	@media only screen and (min-width: 768px) {
 		body{
@@ -74,23 +78,24 @@
 	header h4 { color: #fff; font-weight: 300; }
 	
 
-	::-webkit-scrollbar {
-		width: 8px;
-		height: 8px
-	}
-	
-	::-webkit-scrollbar-track {
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
 		background: rgba(0, 0, 0, 0.05)
 	}
 	
-	::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
 		border-radius: 12px;
 		background: rgba(0, 0, 0, 0.2)
 	}
 	
-	::-webkit-scrollbar-thumb:hover {
+::-webkit-scrollbar-thumb:hover {
 		background: rgba(0, 0, 0, 0.25)
 	}
+	
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
