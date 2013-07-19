@@ -42,6 +42,51 @@ body {
 	z-index: 0;
 }
 
+/** block */
+
+.round-block  {
+position: relative;
+margin: 0px 0;
+padding: 15px 0 0;
+background-color: #fff;
+border: 1px solid #ddd;
+-webkit-border-radius: 4px;
+-moz-border-radius: 4px;
+border-radius: 4px;
+}
+
+/** forms */
+textarea {
+	font-family: "나눔 고딕", "BM_NANUMGOTHIC";	
+}
+
+input {
+	font-family: "나눔 고딕", "BM_NANUMGOTHIC";	
+}
+
+a.k-button:hover {	
+	text-decoration:none;
+}
+
+a.k-link:hover {	
+	text-decoration:none;
+}
+
+
+/** */
+.space-top {
+	padding-top: 5px;
+}
+
+.no-margin-bottom {
+	margin-bottom:0;
+}
+
+.bottomspace {
+	padding-bottom: 5px;
+}
+
+
 
 .box {
 	padding: 2px;
