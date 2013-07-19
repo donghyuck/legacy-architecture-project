@@ -127,7 +127,7 @@
 	                            kendo.bind($(".details"), selectedUser );      								
 							
 							 	if( selectedUser.properties.imageId ){
-							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=200&height=300&imageId=' + selectedUser.properties.imageId ;
+							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
 							 	 	$('#user-photo').attr( 'src', photoUrl );
 							 	}								
 								$("#files").kendoUpload({
@@ -148,7 +148,7 @@
 								    success : function(e) {								    
 								    	if( e.response.targetUserImage ){
 								    		selectedUser.properties.imageId = e.response.targetUserImage.imageId;
-								    		var photoUrl = '${request.contextPath}/secure/view-image.do?width=200&height=300&imageId=' + selectedUser.properties.imageId ;
+								    		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
 							 	 			$('#user-photo').attr( 'src', photoUrl );
 								    	}				
 								    }					   
@@ -304,10 +304,8 @@
 							                            			if(! $("#download-window").data("kendoWindow")){
 							                            				$("#download-window").kendoWindow({
 							                            					actions: ["Minimize", "Maximize", "Close"],
-							                            					minHeight : 200,
-							                            					maxHeight : 500,
-							                            					minWidth :  200,
-							                            					maxWidth :  600,
+							                            					minHeight : 500,
+							                            					minWidth :  400,
 							                            					modal: true,
 							                            					visible: false
 							                            				});
@@ -654,23 +652,11 @@
     </head>
 	<body>
 		<!-- START HEADER -->
-		<!--
-		<header>
-			<div class="row full-width layout">
-				<div class="large-12 columns">
-					<div class="big-box topless bottomless">
-					<h1><a class="open" href="#">Menu</a>사용자관리</h1>
-					<h4 class="desc">사용자을 관리하기 위한 기능을 제공합니다.</h4>
-					</div>
-				</div>
-			</div>
-		</header>
-		-->
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<section id="mainContent">		
-			<div class="row full-width">
-				<div class="large-6 columns" >
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
 					<div class="k-content">
 							<ul id="menu" style="display:none;" >
 								<li action="#">회사
@@ -690,29 +676,21 @@
 								<li action="main-group.do">그룹</li>     
 							</ul>  	
 						</div>		
-				</div>
-				<div class="large-6 columns" >
-					<div class="k-content">								
 				</div>				
 			</div>
-			<div class="row full-width">
-				<div class="large-12 columns" >				
+			<div class="row-fluid">
+				<div class="span12">		
 					<div id="splitter">
 						<div id="list_pane">
-							<div class="row full-width layout">
-								<div class="large-12 columns" >
-									
-								</div>
-							</div>			
-							<div class="row full-width layout">			
-								<div class="large-12 columns" >
+							<div class="row-fluid">
+								<div class="span12">
 									<div id="user-grid"></div>
 								</div>
 							</div>		
 						</div>
 						<div id="datail_pane">
-							<div class="row full-width layout">			
-								<div class="large-12 columns" >
+							<div class="row-fluid">
+								<div class="span12">
 									<div id="user-details"></div>
 								</div>				
 							</div>
@@ -724,9 +702,10 @@
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>	
 		</section>	
-		<div id="change-password-window" style="display:none; width:500px;">
-			<form>
-				<p>
+		<div id="change-password-window" style="display:none;">
+			<div class="row-fluid">
+				<div class="span12">					
+					<p>
 					    	6~16자의 영문 대소문자, 숫자, 특수문자를 조합하여
 							사용하실 수 있습니다.
 							생년월일, 전화번호 등 개인정보와 관련된 숫자,
@@ -736,29 +715,31 @@
 							사용하고, 비밀번호는 주기적으로 변경해주세요.
 							<div class="alert-box alert">비밀번호에 특수문자를 추가하여 사용하시면
 							기억하기도 쉽고, 비밀번호 안전도가 높아져 도용의 위험이
-							줄어듭니다.	</div>    	
-					</p>
-					    	<table class="tabular" width="100%">	    	
-								<tr>
-						    		<td>새 비밀번호</td> 
-						    		<td><input type="password" id="password2" name="password2" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." /></td>
-						    	</tr>	
-								<tr>
-						    		<td>새 비밀번호 확인</td> 
-						    		<td><input type="password" id="password3" name="password3" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." /></td>
-						    	</tr>							    	
-					    	</table>				
-					    	<table>
-					    		<tr>
-					    			<td>
-					    				<button id="do-change-password-btn" class="k-button">확인</button>
-										<span style="padding-left:5px;"></span>
-										<button class="k-button" type="reset">다시입력</button></div>	
-					    			</td>
-					    		</tr>
-					    	</table>									
-			</form>
-		</div>  
+							줄어듭니다.	
+							</div>    	
+					</p>					
+					<form class="form-horizontal no-margin-bottom">
+						<div class="control-group">
+							<label class="control-label" for="password2">새 비밀번호</label>
+							<div class="controls">
+								<input type="password" id="password2" name="password2" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
+							</div>
+						</div>	
+						<div class="control-group">
+							<label class="control-label" for="password3">새 비밀번호 확인</label>
+							<div class="controls">
+								<input type="password" id="password3" name="password3" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
+							</div>
+						</div>		
+						<div class="form-actions no-margin-bottom">			
+							<button id="do-change-password-btn" class="k-button">확인</button>
+							<button class="k-button" type="reset">다시입력</button></div>	
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		  
   		<div id="download-window"></div>    
 		
 		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
@@ -815,127 +796,125 @@
 							첨부파일
 							</li>	   
 						</ul>	          
-						<div class="full-height">
-							<div class="row full-width layout">
-								<div class="large-3 columns">
-									<div class="big-box">
-										<a href="\\#"  class="th"><img id="user-photo" src="http://placehold.it/100x150" border="0" /></a>
-										<input name="uploadImage" id="files" type="file" />
-									</div>								
+						<div>
+							<div class="row-fluid ">
+								<div class="span4 offset2">
+									<img id="user-photo" class="img-polaroid" src="http://placehold.it/100x150" border="0" /></a>
 								</div>
-								<div class="large-9 columns details">
-									<fieldset>
-										<legend>기본정보</legend>
-										<div class="row">
-										      <div class="small-6 columns">
-										        <label>이름</label>
-										        <input type="text" class="k-textbox" placeholder="large-6.columns" data-bind="value:name">
-										      </div>
-										</div>      
-										<div class="row">      
-										      <div class="small-6 columns">
-										        <label>메일</label>
-										        <input type="text" class="k-textbox" placeholder="large-6.columns" data-bind="value:email">
-										      </div>
+								<div class="span6">
+									<input name="uploadImage" id="files" type="file" />
+								</div>
+							</div>	
+							<div class="row-fluid">
+								<div class="span12 space-top details">
+									<div class="form-horizontal">
+										<div class="control-group">
+	 										<label class="control-label">이름</label>
+											<div class="controls">
+												<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name"/>
+											</div>	
 										</div>
-									</fieldset>
-									<fieldset>
-										<legend>옵션</legend>																		
-										<div class="row">
-										      <div class="small-3 columns">
-										        <label class="">이름공개</label>
-										      </div>
-										      <div class="small-3 columns">										      
-										      	<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />										        					        
-										      </div>
-										      <div class="small-3 columns">
-										        <label class="">메일공개</label>				        
-										      </div>		
-										      <div class="small-3 columns">
-										        <input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />						        
-										      </div>											      								      									      
-										</div>			
-										<div class="row">
-										      <div class="small-3 columns">
-										        <label class="">계정사용</label>
-										      </div>
-										      <div class="small-3 columns">
-										      	<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />											        					        
-										      </div>			
-										      <div class="small-3 columns"></div>
-										      <div class="small-3 columns"></div>											      						      								      									      
-										</div>																																																
-									</fieldset>
-									<div class="alert-box secondary">
-										<div class="row">
-										      <div class="large-6 columns">
-										        개인정보 수정일							        
-										      </div>
-										      <div class="large-6 columns">
-										        <span data-bind="text: formattedLastProfileUpdate"></span>		 	
-										      </div>										      
-										</div>					
-										<div class="row">
-										      <div class="large-6 columns">
-										        마지막 방문일						        
-										      </div>
-										      <div class="large-6 columns">
-										        <span data-bind="text: formattedLastLoggedIn"></span>
-										      </div>										      
-										</div>							
-									</div>									
+										<div class="control-group">
+	 										<label class="control-label">메일</label>
+											<div class="controls">
+												<input type="text" class="k-textbox" placeholder="메일주소" data-bind="value:email"/>
+											</div>	
+										</div>
+										<div class="control-group">
+	 										<label class="control-label">옵션</label>
+											<div class="controls">
+												<label class="checkbox">
+													<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
+												</label>												
+											</div>
+										</div>		
+										<div class="control-group">
+											<div class="controls">
+												<label class="checkbox inline">
+													<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
+												</label>												
+											</div>	
+										</div>		
+										<div class="control-group">
+											<div class="controls">
+												<label class="checkbox">
+													<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
+												</label>												
+											</div>	
+										</div>
+										<table class="table span6 offset6">
+											<thead>
+												<tr>
+													<td>개인정보 수정일</td>
+													<td>마지막 방문일</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="success">
+													<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
+													<td><span data-bind="text: formattedLastLoggedIn"></span></td>
+												</tr>										
+											</tbody>
+										</table>
 								</div>
+							</div>				
+						</div>
+						<div class="row-fluid">
+							<div class="span12 details">
+								<div class="form-actions">
+									<button id="update-user-btn" class="k-button">정보 변경</button>
+									<button id="change-password-btn" class="k-button right">비밀번호변경</button>								
+								</div>							
 							</div>
-							<div class="row full-width">
-								<div class="small-9 small-offset-3 columns">
-										<button id="update-user-btn" class="k-button">정보 변경</button>&nbsp;
-										<button id="change-password-btn" class="k-button right">비밀번호변경</button>
-								</div>
-							</div>							
-	                </div>	                	      
-	        		<div class="full-height">
+						</div>	
+					</div>	
+	        		<div>
         				<div id="user-props-grid" class="props" style="height:0px;"/>
         				<div class="box leftless rightless bottomless">
-	                		<div class="alert-box secondary">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+	                		<div class="alert alert-info">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
 	                	</div>
 	                </div>
-	                <div class="full-height">
-	                    <div class="alert-box secondary">
-		                    <input id="company-combo" style="width: 180px" />
-		                    <input id="group-combo" style="width: 180px" />
-		                    <button id="add-to-member-btn" class="k-button">그룹 맴버로 추가</button>
-		                    <br/><br/>멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
-	                    </div>
-	                	<div id="user-group-grid" class="groups"></div>
+	                <div>	                
+	                	<div class="row-fluid">
+	                		<div class="span12">
+	                			<div class="alert alert-info">
+			                    	멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
+									<div class="form-inline">
+										<input id="company-combo" style="width: 180px" />
+										<input id="group-combo" style="width: 180px" />
+										<button id="add-to-member-btn" class="k-button">그룹 맴버로 추가</button>
+				                    </div>	
+								</div>
+	                		</div>
+	                	</div>	
+	                	<div class="row-fluid">
+	                		<div class="span12">
+			                    <div id="user-group-grid" class="groups"></div>                		
+	                		</div>
+	                	</div>	                	
 	                </div>			
-	                <div class="full-height" style="height:400px;">
+	                <div>
 	                	<div class="roles">
-	                		<div class="row full-width layout">
-	                			<div class="large-12 columns">	
-	                				<div class="big-box">
-	                				<div class="alert-box secondary">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.</div>
+	                		<div class="row-fluid">
+	                			<div class="span12">
+	                				<div class="alert alert-info">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.</div>
 	                				<div id="group-role-selected"></div>
-	                				</div>
 	                			</div>
 	                		</div>
-	                		<div class="row full-width layout">
-	                			<div class="large-12 columns">	
-	                				<div class="big-box bottomless">
-	                					<div class="alert-box">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.</div>	                				
-	                				</div>
+	                		<div class="row-fluid">
+	                			<div class="span12 space-top">
+                					<div class="alert alert-info">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.</div>	                				
 	                			</div>
 	                		</div>	  
-							<div class="row full-width layout">
-	                			<div class="large-12 columns">	
-	                				<div class="big-box topless">
-	                					<div id="user-role-select"></div>                				
-	                				</div>
+	                		<div class="row-fluid">
+	                			<div class="span12">
+                					<div id="user-role-select"></div>                				
 	                			</div>
 	                		</div>	
 						</div>	
 	                </div>			
-	                <div class="full-height">	                	    
-	                    <div class="alert-box secondary">
+	                <div>	                	    
+	                    <div class="alert alert-info">
 		                    <input id="attach-upload" name="uploadFile" type="file" />
 		                    <p/>
 		                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.

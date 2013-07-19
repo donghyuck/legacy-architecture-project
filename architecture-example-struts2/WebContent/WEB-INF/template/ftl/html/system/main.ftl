@@ -25,36 +25,7 @@
 					template : kendo.template($("#account-template").html())
 				});
 								
-				// LEFT MENU !
-				/**
-				$("#topbar .open").kendoPageslide({ 
-					template : kendo.template($("#sidebar-template").html()),
-					data : currentUser
-					content : {
-						type : "kendoMenu",
-						dataSource : {
-							transport: {
-								read: {
-									url: "/secure/get-company-menu-component.do?output=json",
-									dataType: "json",
-									data: {
-										menuName: "SYSTEM_MENU"
-									}
-								}
-							},
-							schema: {
-								data: "targetCompanyMenuComponent.components"
-							}
-						},
-						template : kendo.template($("#top-menu-template").html()),
-						renderTo : "sidebar-menu-section",
-						select : function( item ){
-							$("#content_frame_wrapper").attr( "src", item.action );
-							 kendo.bind($("#content_title"), item );
-						}
-				 });	
-				*/
-				
+				// LEFT MENU !				
 				$("#topbar .open").kendoTopBar({ 
 					template : kendo.template($("#top-menu-template").html()),
 					data : currentUser,
