@@ -18,7 +18,8 @@
 				
 				// ACCOUNTS LOAD		
 				var currentUser = new User({});
-				var accounts = $("#accounts-panel").kendoAccounts({
+				var accounts = $("#account-panel").kendoAccounts({
+					visible : false,
 					authenticate : function( e ){
 						currentUser = e.token;						
 					}
@@ -319,7 +320,7 @@
 								    		$("#search-window").kendoWindow({
 									    		width:500,
 									    		resizable : false,
-					                            title:  selectedGroup.company.name + " 사용자 검색",
+					                            title:  selectedGroup.company.name + " 도메인 사용자 검색",
 					                            modal: true,
 					                            visible: false
 									    	});
@@ -454,7 +455,7 @@
 				var splitter = $("#splitter").kendoSplitter({
 	                orientation: "horizontal",
 	                panes: [
-	                    { collapsible: true, min: "500px" },
+	                    { collapsible: false, min: "500px" },
 	                    { collapsible: true, collapsed: true, min: "500px" }
 	                ]
 	             });
@@ -486,22 +487,11 @@
     </head>
 	<body>
 		<!-- START HEADER -->
-		<!--
-		<header>
-			<div class="row full-width layout">
-				<div class="large-12 columns">
-					<div class="big-box topless bottomless">
-					<h1><a class="open" href="#">Menu</a>그룹관리</h1>
-					<h4 class="desc">그룹을 관리하기 위한 기능을 제공합니다.</h4>
-					</div>
-				</div>
-			</div>
-		</header>-->
 	  	<!-- END HEADER -->	  	
 	  	<!-- START MAIN CONTNET -->
-		<section id="mainContent">
-			<div class="row full-width">
-				<div class="large-6 columns" >
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
 					<div class="k-content">
 							<ul id="menu" style="display:none;" >
 				                <li action="#">회사
@@ -521,29 +511,22 @@
 				                <li action="main-user.do">사용자</li>     
 				            </ul>							
 					</div>
-				</div>
-				<div class="large-6 columns" >
-					<div class="k-content"></div>								
-				</div>						
+				</div>					
 			</div>		
-			<div class="row full-width">
-				<div class="large-12 columns" >								
+			<div class="row-fluid">
+				<div class="span12">								
 						<div id="splitter">
 							<div id="list_pane">
-								<div class="row full-width layout">
-									<div class="large-12 columns" >			
-									</div>
-								</div>
-								<div class="row full-width layout">
-									<div class="large-12 columns" >
+								<div class="row-fluid">
+									<div class="span12">
 										<div id="group-grid">
 										</div>	
 									</div>
 								</div>	
 							</div>
 							<div id="datail_pane">			
-								<div class="row full-width layout">			
-									<div class="large-12 columns" >
+								<div class="row-fluid">
+									<div class="span12">
 										<div id="group-details"></div>
 									</div>				
 								</div>						
@@ -555,34 +538,31 @@
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>
 		</section>	  		
+		
 		<div id="search-window" style="display:none;">			
-			<div class="row layout">
-				<div class="small-12 columns">
-					<table width="100%">
-						<tbody>
-							<tr>
-								<td><input type="text" id="search-text" placeholder="검색할 사용자 이름 또는 메일 주소"  class="k-textbox" style="width:300px;;" /></td>
-								<td width="150"><a class="k-button" id="search-user-btn"><span class="k-icon k-i-search"></span>검색</a></td>						
-							</tr>
-						</tbody>
-					</table>		
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="form-inline">
+						<input type="text" id="search-text" placeholder="검색할 사용자 이름 또는 메일 주소"  class="input-large"/>
+						<a class="k-button" id="search-user-btn"><span class="k-icon k-i-search"></span>사용자 검색</a>
+					</div>
 				</div>
 			</div>
-			<div class="row layout">
-				<div class="small-12 columns">
-					<div class="alert-box alert">
+			<div class="row-fluid">
+				<div class="span12 space-top">
+					<div class="alert alert-error">
 					검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 사용자 선택은 체크박스를 체크하면 됩니다.
 					</div>
 				</div>
 			</div>
-			<div class="row layout">
-				<div class="small-12 columns">
+			<div class="row-fluid">
+				<div class="span12">
 					<div id="search-result"></div>
 				</div>
 			</div>
-			<div class="row layout">
-				<div class="small-12 columns">
-					<div class="box leftless bottomless">
+			<div class="row-fluid">
+				<div class="span12">
+					<div class="form-actions no-margin-bottom">
 					<a class="k-button" id="add-member-btn"><span class="k-icon k-i-folder-add"></span>선택된 사용자 그룹 멤버로 추가하기</a> &nbsp; 
 					<a class="k-button right" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
 					</div>
@@ -590,14 +570,7 @@
 			</div>
 		</div>	    
 		<!-- END MAIN CONTNET -->
-		<!--
-	  <footer>  
-	  </footer>
-		-->
-		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
-			<div id="accounts-panel"></div>
-		</div>
-			
+		<div id="account-panel"></div>			
 		<script type="text/x-kendo-template" id="template">					
 			<div class="details big-box">	
 				<div class="tabstrip">
@@ -609,18 +582,18 @@
 					<div>
 						<div id="group-prop-grid" class="props"></div>
 						<div class="box leftless rightless bottomless">
-							<div class="alert-box secondary">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+							<div class="alert alert-info">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
 						</div>	
 					</div> 	
 					<div>
 						<div id="group-member-grid"  class="members"></div>
 						<div class="box leftless rightless bottomless">
-							<div class="alert-box secondary">멤버수:<span data-bind="text:memberCount">0</span> 명</div>
+							<div class="alert alert-info">멤버수:<span data-bind="text:memberCount">0</span> 명</div>
 						</div>	
 					</div>
 					<div>
 						<div class="big-box bottomless">
-							<div class="alert-box secondary">그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.</div>
+							<div class="alert alert-info">그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.</div>
 						</div>	
 						<div class="roles big-box">
 							<div id="group-role-select"></div>

@@ -18,6 +18,7 @@
 				// ACCOUNTS LOAD		
 				var currentUser = new User({});
 				var accounts = $("#account-panel").kendoAccounts({
+					visible : false,
 					authenticate : function( e ){
 						currentUser = e.token;						
 					}
@@ -30,7 +31,7 @@
 				var splitter = $("#splitter").kendoSplitter({
                         orientation: "horizontal",
                         panes: [
-                            { collapsible: true, min: "500px" },
+                            { collapsible: false, min: "500px" },
                             { collapsible: true, collapsed: true, min: "500px" }
                         ]
                  }).data("kendoSplitter");                       
@@ -258,14 +259,14 @@
 				} );
 				
 				// MENU WINDOW
-				var selectedMenu = new Menu();								
-				$('#company-grid').find(".viewMenuCustomClass").click( function(){											
-					if(! $("#menu-grid").data("kendoGrid")){       												
+				var selectedMenu = new Menu();
+				$('#company-grid').find(".viewMenuCustomClass").click( function(){
+					if(! $("#menu-grid").data("kendoGrid")){
 						$('#menu-grid').kendoGrid({
 							dataSource: {
 								transport: { 
 									read: { url:'${request.contextPath}/secure/list-menu.do?output=json', type:'post' }
-								},						
+								},
 								batch: false, 
 								schema: {
 									total: "totalMenuCount",
@@ -277,7 +278,7 @@
 								serverFiltering: false,
 								serverSorting: false,  
 								error:handleKendoAjaxError
-							},													
+							},
 							columns: [
 								//{ title: "ID", field: "menuId",  width:40 },
 								{ title: "이름", field: "name", width:100 }
@@ -287,7 +288,7 @@
 							editable : false,
 							selectable : "row",
 							scrollable: true,
-							height: 336,
+							height: 400,
 							toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
 							change: function(e) {
 								var selectedCells = this.select();
@@ -348,12 +349,8 @@
 						if(! $("#menu-window").data("kendoWindow")){       
 						// WINDOW 생성
 						$("#menu-window").kendoWindow({
-							actions: ["Maximize", "Close"],
+							actions: ["Minimize", "Maximize", "Close"],
 							resizable: false,
-							minHeight : 350,
-							maxHeight : 500,
-							minWidth :  800,
-							maxWidth : 800,
 							modal: true,
 							visible: false,
 							title: '메뉴'
@@ -361,10 +358,11 @@
 					}			 		                   								
 					}					
 					var menuWindow = $("#menu-window").data("kendoWindow");
-					$("#menu-window").closest(".k-window").css({
-						top: 70,
-						left: 15,
-					});					
+					//$("#menu-window").closest(".k-window").css({
+					//	top: 70,
+					//	left: 15,
+					//});					
+					menuWindow.maximize();
 					menuWindow.open();
 				});				
 				
@@ -446,31 +444,11 @@
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<!--
-		<header>
-			<div class="row full-width layout">
-				<div class="large-12 columns">
-					<div class="big-box topless bottomless">
-					<h1>회사관리</h1>
-					<h4 class="desc">회사를 관리하기 위한 기능을 제공합니다.</h4>
-					</div>
-				</div>
-			</div>
-		</header>
-		-->
 		<!-- END HEADER -->
 		<!-- START MAIN CONTENT -->		
-		<section id="mainContent">		
-			<div class="row full-width">
-				<div class="large-6 columns" >
-					<div class="k-content"></div>		
-				</div>
-				<div class="large-6 columns" >
-					<div class="k-content"></div>									
-				</div>				
-			</div>
-			<div class="row full-width">
-				<div class="large-12 columns" >	
+		<div class="container-fluid">
+			<div class="row-fluid">
+				<div class="span12">
 					<div id="splitter" style="height:600px;">
 						<div id="list_pane">
 							<div id="company-grid"></div>		
@@ -478,67 +456,63 @@
 						<div id="datail_pane">
 							<div id="company-details"></div>
 						</div>
-					</div>			
+					</div>		
 				</div>
 			</div>
-		</section>
-		
-		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
-			<div id="account-panel"></div>
-		</div>
-						
+		</div>	
+		<div id="account-panel"></div>				
 		<!-- END MAIN CONTENT -->
 		<div id="perms-window" style="display:none;">
-			<div class="alert-box secondary">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
+			<div class="alert alert-info">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
 			<div id="role-grid">	</div>            	
 		</div>
 		
-		<div id="menu-window" style="display:none;">
-			<div class="row layout">
-				<div class="small-3 columns"><div class="k-content"><div id="menu-grid"></div></div></div>
-				<div class="small-9 columns layout">
-					<div class="menu-details k-block" style="height:450px;">
-						<div class="row big-box bottomless">
-							<div class="large-6 columns">
-									<label>이름</label>
-									<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name">
+		<div id="menu-window" style="display:none;" class="">
+			 <div class="row">
+				<div class="span4"><div class="k-content"><div id="menu-grid"></div></div></div>
+				<div class="span10">
+					<div class="menu-details" style="dispaly:none">
+						<form class="form-horizontal no-padding-bottom">
+							<div class="control-group">
+								<label class="control-label" for="input-menu-name">이름</label>
+								<div class="controls">
+									<input type="text" class="input-xlarge k-textbox" placeholder="이름" data-bind="value:name" id="input-menu-name"/>
+								</div>
 							</div>
-							<div class="large-6 columns">
-									<label>타이틀</label>
-									<input type="text" class="k-textbox" placeholder="타이틀" data-bind="value:title">
-							</div>
-						</div>				
-						<div class="row big-box">
-							<div class="large-6 columns">
-									<label>사용여부</label>
-									<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />
-							</div>
-							<div class="large-6 columns">
-									<label>설명</label>
-									<input type="text" class="k-textbox" style="width: 200px;" placeholder="설명" data-bind="value:description">
-							</div>
-						</div>	
-						<div class="row big-box topless bottomless">
-							<div class="large-12 columns">
-									<label>XML 메뉴 데이터</label>
-									<textarea  data-bind="value: menuData" style="height:220px;" ></textarea>
-							</div>
-						</div>			
-						<div class="row big-box">
-							<div class="large-12 columns">
-									<button id="update-menu-btn" class="k-button right">저장</button>
-							</div>
-						</div>																				
-					</div>	
+							<div class="control-group">
+								<label class="control-label" for="input-menu-title">타이틀</label>
+								<div class="controls">
+									<input type="text" class="input-xlarge k-textbox" placeholder="타이틀" data-bind="value:title" id="input-menu-title"/>
+								</div>
+							</div>				
+							<div class="control-group">
+								<label class="checkbox">
+									<div class="controls">
+										사용여부<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />
+									</div>
+							</div>				
+							<div class="control-group">
+								<label class="control-label" for="input-menu-description">설명</label>
+								<div class="controls">
+									<input type="text" class="input-xxlarge" placeholder="설명" data-bind="value:description" id="input-menu-description"/>
+								</div>
+							</div>			
+							<div class="control-group">
+								<label class="control-label" for="input-menu-xmldata">XML 메뉴 데이터<span class="label label-important">Important</span></label>
+								<div class="controls">
+									<textarea  data-bind="value: menuData" rows="10" id="input-menu-xmldata" class="input-xxlarge"></textarea>
+								</div>
+							</div>	
+							<div class="form-actions no-margin-bottom ">
+								<button id="update-menu-btn" class="k-button right">저장</button>
+							</div>								
+						</form>									
+					</div>
 				</div>
 			</div>
 		</div>
 			
 		<!-- START FOOTER -->
-		<!--
-		<footer class="row"> 
-		</footer>
-		-->
 		<!-- END FOOTER -->		
 		
 		<!-- 템플릿 -->
@@ -552,19 +526,19 @@
 				<div>
 					<div id="company-prop-grid" class="props"></div>
 					<div class="box leftless rightless bottomless">
-						<div class="alert-box secondary">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+						<div class="alert alert-error">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
 					</div>
 				</div> 	
 				<div>
 					<div id="company-group-grid"  class="groups"></div>		
 					<div class="box leftless rightless bottomless">
-						<div class="alert-box secondary">그룹 관리는 그룹관리 메뉴를 사용하여 관리 하실수 있습니다</div>	  
+						<div class="alert alert-info">그룹 관리는 그룹관리 메뉴를 사용하여 관리 하실수 있습니다</div>	  
 					</div>              
 				</div>        
 				<div>
 					<div id="company-user-grid"  class="users"></div>	
 					<div class="box leftless rightless bottomless">
-						<div class="alert-box secondary">사용자 관리는  사용자 관리 메뉴를 사용하여 관리 하실수 있습니다.</div>	     
+						<div class="alert alert-info">사용자 관리는  사용자 관리 메뉴를 사용하여 관리 하실수 있습니다.</div>	     
 					</div>	
 				</div>        
 			</div>
