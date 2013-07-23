@@ -51,7 +51,7 @@
 								$("form[name='fm1']").attr("action", action ).submit(); 
 							}
 						}						
-				}).css("border-width", "1px 1px 0px");;
+				}).css("border-width", "1px 1px 1px");;
 				
 				$("#menu").show();	
 					
@@ -630,13 +630,6 @@
         
         </script>
 		<style>			
-			#splitter {
-				height : 600px;
-			}
-			
-			#datail_pane {
-				background-color : #F5F5F5;
-			}
 			
  			#user-details .k-content 
 		    {
@@ -797,7 +790,7 @@
 							</li>	   
 						</ul>	          
 						<div>
-							<div class="row-fluid ">
+							<div class="row-fluid">
 								<div class="span4 offset2">
 									<img id="user-photo" class="img-polaroid" src="http://placehold.it/100x150" border="0" /></a>
 								</div>
@@ -842,7 +835,7 @@
 												</label>												
 											</div>	
 										</div>
-										<table class="table span6 offset6">
+										<table class="table span6 offset5">
 											<thead>
 												<tr>
 													<td>개인정보 수정일</td>
@@ -866,7 +859,8 @@
 									<button id="change-password-btn" class="k-button right">비밀번호변경</button>								
 								</div>							
 							</div>
-						</div>	
+						</div>
+							
 					</div>	
 	        		<div>
         				<div id="user-props-grid" class="props" style="height:0px;"/>

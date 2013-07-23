@@ -61,9 +61,6 @@
 				margin-top: 5px;
 			}
 			
-			#splitter {
-				height : 600px;
-			}			
 			#datail_pane {
 				background-color : #F5F5F5;
 			}				

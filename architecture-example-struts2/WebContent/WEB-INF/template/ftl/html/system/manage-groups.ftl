@@ -390,7 +390,7 @@
 								$("#group-details").hide(); 	 			    	
 						    }   
 						}					
-	                }).css("border", "0px"); 	                	
+	                }); //.css("border", "0px"); 	                	
 	                
 	                // 3-3 CLOSE SEARCH WINDOW
 	                $("#close-search-window-btn").click( function() {	
@@ -459,18 +459,11 @@
 	                    { collapsible: true, collapsed: true, min: "500px" }
 	                ]
 	             });
-	                 				
             }
         }]);        		
      	-->
         </script> 	
-		<style>
-			#splitter {
-				height : 600px;
-			}			
-			#datail_pane {
-				background-color : #F5F5F5;
-			}		
+		<style>	
 
  			#group-details .k-content 
 		    {
