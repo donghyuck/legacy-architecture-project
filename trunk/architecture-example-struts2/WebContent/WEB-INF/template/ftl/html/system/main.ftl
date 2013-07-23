@@ -86,10 +86,8 @@
 		<section>
 		<!-- END MAIN CONTENT -->					
 		<!-- START FOOTER -->
-		<!--
-		<footer class="row"> 
+		<footer class="row-fluid"> 
 		</footer>
-		-->
 		<!-- END FOOTER -->				
 		<!-- 공용 템플릿 -->
 		<#include "/html/common/common-templates.ftl" >
