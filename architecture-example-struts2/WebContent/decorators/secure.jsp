@@ -23,20 +23,43 @@
 		body{
 			font-size: 11pt;
 		}
+		
+		#splitter {				
+			height : 600px;
+			border : 0px;
+		}	
 	}
 	
+		
 	@media only screen and (min-width: 1280px) {
 		body{
 			font-size: 12pt;
 		}
+		#splitter {				
+			height : 700px;
+			border : 0px;
+		}			
 	}
 	
 	@media only screen and (min-width: 1440px) {
 		body{
-			font-size: 14pt;
+			font-size: 12pt;
 		}
+		
+		#splitter {				
+			height : 900px;
+			border : 0px;
+		}			
 	}
-
+	
+	#list_pane {
+		background-color : #CCC;
+	}	
+		
+	#datail_pane {
+		background-color : #F5F5F5;
+	}	
+				
 	.container-fluid {
 		padding: 2px 1px  1px 1px;		
 	}
