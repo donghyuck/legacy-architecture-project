@@ -421,14 +421,7 @@
 		}]);
 		-->
 		</script> 		 
-		<style>
-			
-			#splitter {
-				height : 600px;
-			}			
-			#datail_pane {
-				background-color : #F5F5F5;
-			}		
+		<style>						
 
  			#group-details .k-content 
 		    {
@@ -449,7 +442,7 @@
 		<div class="container-fluid">
 			<div class="row-fluid">
 				<div class="span12">
-					<div id="splitter" style="height:600px;">
+					<div id="splitter">
 						<div id="list_pane">
 							<div id="company-grid"></div>		
 						</div>
