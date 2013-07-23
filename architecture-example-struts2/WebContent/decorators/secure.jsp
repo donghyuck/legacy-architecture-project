@@ -10,9 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
-
-<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/foundation/foundation.css" />
-<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/foundation/general_foundicons.css" />
+<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/2.3.2/bootstrap.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.common.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.metro.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.css" />
@@ -38,22 +36,15 @@
 			font-size: 14pt;
 		}
 	}
-	
-	header { background-color: #2ba6cb;  height: 65px;}
-	
-	header .desc {
-		margin-top: -42px;
-		padding-left: 150px;
+
+	.container-fluid {
+		padding: 2px 1px  1px 1px;		
 	}
 	
-	header h1 { color: #fff; font-weight: 500; }
+	.k-menu.k-header, .k-menu .k-item {
+		border-color :#dadada;
+	}
 	
-	header h4 { color: #fff; font-weight: 300; }
-
-	#mainContent {
-		margin-top: 5px;
-	}	
-
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
