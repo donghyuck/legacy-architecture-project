@@ -482,8 +482,8 @@
 		<!-- START HEADER -->
 	  	<!-- END HEADER -->	  	
 	  	<!-- START MAIN CONTNET -->
-		<div class="container-fluid">
-			<div class="row-fluid">
+		<div class="container">
+			<div class="row">
 				<div class="span12">
 					<div class="k-content">
 							<ul id="menu" style="display:none;" >

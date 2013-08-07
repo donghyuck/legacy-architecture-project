@@ -6,8 +6,7 @@
 		<!--
 		yepnope([{
 			load: [
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',			
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',	
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',
@@ -57,10 +56,6 @@
 		-->
 		</script> 		 
 		<style>
-			#mainContent {
-				margin-top: 5px;
-			}
-			
 			#datail_pane {
 				background-color : #F5F5F5;
 			}				
@@ -71,7 +66,7 @@
 		<!-- END HEADER -->
 
 		<!-- START MAIN CONTENT -->		
-		<section class="container-fluid">		
+		<section class="container">		
 			<div id="topbar">
 				<button class="square sidebar open">
 					<i>Toggle</i>
@@ -86,8 +81,10 @@
 		<section>
 		<!-- END MAIN CONTENT -->					
 		<!-- START FOOTER -->
-		<footer class="row-fluid"> 
+		<!--
+		<footer class="row"> 
 		</footer>
+		-->
 		<!-- END FOOTER -->				
 		<!-- 공용 템플릿 -->
 		<#include "/html/common/common-templates.ftl" >
