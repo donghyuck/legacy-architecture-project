@@ -53,7 +53,6 @@ public class TechBizJdbcSMSClient extends JdbcDaoSupport implements SMSClient  {
 	public void closeSession() throws SMSException {
 		isOpened.set(0);
 	}
-
 	
 	protected String getQueryString(String name, String defautlQuery){
 		if(getQueryString(name) == null)
