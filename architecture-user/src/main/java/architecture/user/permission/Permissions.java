@@ -2,6 +2,28 @@ package architecture.user.permission;
 
 import java.io.Serializable;
 
+/**
+* Represents a set of permissions that an entity has for an object in the system. For example,
+* the rights that a user has for a category. Permissions are used by the protection proxy objects
+* defined for each major component of the system to provide access rights.<p>
+* <p/>
+* A Permissions object is internally represented as a long with each bit indicating whether
+* a particular permission is set. The constants defined by extensions of this class define the bit
+* masks that can be used for permission operations. For example, the following code creates
+* permissions:<pre>
+* <p/>
+* // Create a permissions object with only read permissions set to true.
+* Permissions perms1 = new Permissions(Permissions.READ_FORUM);
+* // Create a permissions object with read and system admin permissions set to true.
+* Permissions perms2 = new Permissions(Permissions.READ_FORUM |
+*          Permissions.SYSTEM_ADMIN);</pre>
+* <p/>
+* If we were to view the bits of each variable, <tt>perms1</tt> would be
+* <tt>0000000000000000000000000000000000000000000000000000000000000001</tt> and
+* <tt>perms2</tt> would be
+* <tt>0000000000000000000000000000000010000000000000000000000000000001</tt>.<p>
+*/
+
 public class Permissions implements Serializable {
 
 	private static final long serialVersionUID = -8195862189097761722L;

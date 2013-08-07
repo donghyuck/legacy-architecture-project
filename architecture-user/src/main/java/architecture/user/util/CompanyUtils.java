@@ -22,7 +22,7 @@ import architecture.user.CompanyNotFoundException;
 import architecture.user.model.impl.CompanyImpl;
 
 public class CompanyUtils {
-
+	
 	public static Company getCompany(long companyId) throws CompanyNotFoundException{
 		if(companyId == -1L ){
 			return new CompanyImpl();
