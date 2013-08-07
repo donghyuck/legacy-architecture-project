@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
-<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/2.3.2/bootstrap.css" />
+<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.0.0/bootstrap.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.common.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.metro.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.css" />
@@ -19,53 +19,54 @@
 <decorator:head />
 <style>
 
+	.k-splitter {
+		border: 0px;
+	}		
+	
 	@media only screen and (min-width: 768px) {
 		body{
 			font-size: 11pt;
-		}
-		
+		}		
 		#splitter {				
-			height : 600px;
-			border : 0px;
+			height : 650px;
 		}	
-	}
-	
+	}	
 		
 	@media only screen and (min-width: 1280px) {
 		body{
 			font-size: 12pt;
 		}
 		#splitter {				
-			height : 700px;
-			border : 0px;
+			height : 740px;
 		}			
 	}
 	
 	@media only screen and (min-width: 1440px) {
 		body{
 			font-size: 12pt;
-		}
-		
+		}		
 		#splitter {				
 			height : 900px;
-			border : 0px;
 		}			
 	}
 	
+	
 	#list_pane {
-		background-color : #CCC;
+		background-color : #cccccc;
 	}	
 		
 	#datail_pane {
-		background-color : #F5F5F5;
-	}	
-				
-	.container-fluid {
-		padding: 2px 1px  1px 1px;		
+		background-color : #FFFFFF;
 	}
 	
 	.k-menu.k-header, .k-menu .k-item {
 		border-color :#dadada;
+	}
+			
+	.container {
+		max-width:100% ;
+		overflow-x:hidden ;
+		overflow-y:hidden ;
 	}
 	
 </style>
