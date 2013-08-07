@@ -55,6 +55,7 @@
 			options = that.options;		
 			that.render(options);			
 			element.click($.proxy( that._open, this ));	
+				
 		},
 		events : {
 			
@@ -68,6 +69,7 @@
 		render: function ( options ) {			
 			var content = options.renderTo ;
 			var dataSource = DataSource.create(options.dataSource);			
+			var that = this;
 			dataSource.fetch(function(){
 				var items = dataSource.data();
 				content.html( options.template( items ) );	
@@ -76,11 +78,12 @@
  					select: function(e){	
  						if( $(e.item).is('[action]') ){
  							var selected = $(e.item);
- 							options.select( { title: $.trim(selected.text()), action: selected.attr("action") , description: selected.attr("description") || "" } );
+ 							options.select( { title: $.trim(selected.text()), action: selected.attr("action") , description: selected.attr("description") || "" } ); 							
+ 							setTimeout( function(){ that._open(); }, 300);
  						}
 					}
  				});				
-			});			
+			});	
 		},
 		// Function that controls opening of the pageslide
 		_open: function (e){
@@ -166,7 +169,9 @@
  						}
 					}
  				});				
-			});			
+			});
+			
+			
 		},
 		// Function that controls opening of the pageslide
 		_open: function (e){
@@ -328,7 +333,8 @@
                 e.stopPropagation();
                 that.toggle($(this));
             });
-        	
+
+         
        	/*
             $('*, html, body').on('click.fndtn.dropdown', function (e) {
                 if (!$(e.target).data('dropdown')) {
@@ -339,20 +345,14 @@
               });
             */
         	
-            //$('*, html, body').on('click', function (e) {
-            	//alert(  e.target.html());
-        	//});
             
         	$('[data-dropdown-content]').on('click.fndtn.dropdown', function (e) {
-        		//alert( e.target.text());
                 e.stopPropagation();
               });
             
         },
-        toggle : function(target) {
-        	
-        	var dropdown = $('#' + target.data('dropdown'));	
-        	
+        toggle : function(target) {        	
+        	var dropdown = $('#' + target.data('dropdown'));	        	
         	if( target.hasClass("dropped")){
         		target.removeClass("dropped");
         		dropdown.css("display", "none");
