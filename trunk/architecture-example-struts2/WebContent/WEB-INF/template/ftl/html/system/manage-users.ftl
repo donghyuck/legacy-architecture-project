@@ -5,8 +5,7 @@
         <script type="text/javascript">                
         yepnope([{
             load: [ 
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',			
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',	
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',

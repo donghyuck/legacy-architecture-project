@@ -34,7 +34,7 @@
                             { collapsible: false, min: "500px" },
                             { collapsible: true, collapsed: true, min: "500px" }
                         ]
-                 }).data("kendoSplitter");                       
+                 }).data("kendoSplitter");
                
 				var company_grid = $("#company-grid").kendoGrid({
 					dataSource: {	
@@ -439,9 +439,9 @@
 		<!-- START HEADER -->
 		<!-- END HEADER -->
 		<!-- START MAIN CONTENT -->		
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span12">
+		<div class="container layout">
+			<div class="row">
+				<div class="col-12 col-lg-12">
 					<div id="splitter">
 						<div id="list_pane">
 							<div id="company-grid"></div>		
@@ -455,12 +455,12 @@
 		</div>	
 		<div id="account-panel"></div>				
 		<!-- END MAIN CONTENT -->
-		<div id="perms-window" style="display:none;">
+		<div id="perms-window" style="display:none;" class="layout">
 			<div class="alert alert-info">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
 			<div id="role-grid">	</div>            	
 		</div>
 		
-		<div id="menu-window" style="display:none;" class="">
+		<div id="menu-window" style="display:none;" class="unlayout">
 			 <div class="row">
 				<div class="span4"><div class="k-content"><div id="menu-grid"></div></div></div>
 				<div class="span10">
