@@ -4,6 +4,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import architecture.ext.sync.client.DataSyncClient;
@@ -24,20 +25,23 @@ public class DataSyncJob extends QuartzJobBean {
 		this.dataSyncClient = dataSyncClient;
 	}
 
-
-
 	public void setJobCode(String jobCode) {
 		this.jobCode = jobCode;
 	}
 	
 	protected void executeInternal(JobExecutionContext ctx) throws JobExecutionException {
 		try {
-			log.debug("execute sync job : " + jobCode + " with " +  dataSyncClient.getClass().getName() );
+			
+			if(log.isDebugEnabled())
+				log.debug("execute sync job : " + jobCode + " with " +  dataSyncClient.getClass().getName() );
+			
 			System.out.println("execute sync job : " + jobCode + " with " +  dataSyncClient.getClass().getName());
 			dataSyncClient.process(jobCode);
+			
 		} catch (Throwable e) {
 			e.printStackTrace();
 			log.error(e);
+			
 			throw new JobExecutionException(e);
 		}
 	}

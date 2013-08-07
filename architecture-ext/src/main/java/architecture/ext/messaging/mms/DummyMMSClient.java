@@ -10,42 +10,36 @@ public class DummyMMSClient implements MMSClient {
 	public void send(String senderNumber, String receiverName,
 			String receiverNumber, String subject, String contents)
 			throws SMSException {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void send(String senderNumber, String receiverName,
 			String receiverNumber, String subject, String contents, String date)
 			throws SMSException {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void send(String senderNumber, List<String> receiverNames,
 			List<String> receiverNumbers, String subject, String contents)
 			throws SMSException {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void send(String senderNumber, String[] receiverNames,
 			String[] receiverNumbers, String subject, String contents)
 			throws SMSException {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void send(String senderNumber, List<String> receiverNames,
 			List<String> receiverNumbers, String subject, String contents,
 			String date) throws SMSException {
-		// TODO Auto-generated method stub
 
 	}
 
 	public void send(String senderNumber, String[] receiverNames,
 			String[] receiverNumbers, String subject, String contents,
 			String date) throws SMSException {
-		// TODO Auto-generated method stub
 
 	}
 

@@ -203,7 +203,7 @@ public class EDIFileWriterConnector implements WriteConnector {
 						if( value == null || "NULL".equals(value)){
 							valueToUse = "0";
 						}
-					}					
+					}
 					
 					sb.append(valueToUse);				
 					if(index < columnSize )
