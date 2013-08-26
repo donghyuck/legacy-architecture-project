@@ -27,7 +27,7 @@
 		},
 		options : {
 			name: "Alert",
-			windowTemplate: '<div data-alert class="alert-box alert">#=message#<a href="\\#" class="close">&times;</a></div>',
+			windowTemplate: '<div data-alert class="alert alert-danger">#=message#<a href="\\#" class="close">&times;</a></div>',
 			close : function (){} 
 		}		
 	}); 	
@@ -54,8 +54,7 @@
 			Widget.fn.init.call(that, element, options);
 			options = that.options;		
 			that.render(options);			
-			element.click($.proxy( that._open, this ));	
-				
+			element.click($.proxy( that._open, this ));					
 		},
 		events : {
 			
@@ -258,6 +257,7 @@
 	template = kendo.template,
 	AUTHENTICATE_URL = "/accounts/get-user.do?output=json",
 	AUTHENTICATE = "authenticate", 
+	LOGIN_URL = "/login", 
 	PHOTO_URL = "/accounts/view-image.do?width=100&height=150",
 	ERROR = "error",
 	UPDATE = "update",
@@ -267,6 +267,7 @@
 	DISABLED = "disabled";
 
 	ui.kendoAccounts = Widget.extend( {
+		
 		init: function(element, options) {	
 			var that = this;			
 			Widget.fn.init.call(that, element, options);
@@ -280,10 +281,11 @@
 		options : {	
 			name : "Accounts",
 			photoUrl : null,
-			doAuthenticate: true,
+			doAuthenticate: true,			
 			visible: true,
 			ajax : { url : AUTHENTICATE_URL },
-			template : null
+			template : null,
+			dropdown : true
 		},
 		events : [
 			AUTHENTICATE,
@@ -303,11 +305,36 @@
     				if(that.options.visible){
     					that.render();
     				}
+    				if( that.options.afterAuthenticate != null ){
+    					that.options.afterAuthenticate();    					
+    				}
     			},
     			error: that.options.ajax.error || handleKendoAjaxError,
     			dataType : "json"
     		});	 
         },
+        login :  function (url, options){	    
+    		if (typeof url === "object") {
+    	        options = url;
+    	        url = undefined;
+    	    }	    
+    	    // Force options to be an object
+    	    options = options || {};		    
+    	    $.ajax({
+    			type : 'POST',
+    			url : options.url || LOGIN_URL ,
+    			data: options.data || {},
+    			success : function(response){
+    				if( response.error ){ 												
+    					options.fail(response) ;
+    				} else {
+    					options.success(response) ;
+    				}
+    			},
+    			error:options.error || handleKendoAjaxError,
+    			dataType : "json"
+    		});	
+    	},
         render : function(){
         	//that.trigger( UPDATE, {token: user});
         	var that = this, element, content  ;        	
@@ -326,30 +353,18 @@
         	} 
         	if( that.options.template ){
         		that.element.html( that.options.template( that.token ) );        		
-        	}         	
+        	}
         	
-        	$(that.element).on('click.fndtn.dropdown', '[data-dropdown]', function (e) {        		
-                e.preventDefault();
-                e.stopPropagation();
-                that.toggle($(this));
-            });
-
-         
-       	/*
-            $('*, html, body').on('click.fndtn.dropdown', function (e) {
-                if (!$(e.target).data('dropdown')) {
-                	alert("2"); //alert($('[data-dropdown-content]').hasClass("dropped"));
-                }else{
-                	alert("1");
-                }
-              });
-            */
-        	
-            
-        	$('[data-dropdown-content]').on('click.fndtn.dropdown', function (e) {
-                e.stopPropagation();
-              });
-            
+        	if( that.options.dropdown ){
+	        	$(that.element).on('click.fndtn.dropdown', '[data-dropdown]', function (e) {        		
+	                e.preventDefault();
+	                e.stopPropagation();
+	                that.toggle($(this));
+	            });
+	        	$('[data-dropdown-content]').on('click.fndtn.dropdown', function (e) {
+	                e.stopPropagation();
+	            });
+        	}
         },
         toggle : function(target) {        	
         	var dropdown = $('#' + target.data('dropdown'));	        	
