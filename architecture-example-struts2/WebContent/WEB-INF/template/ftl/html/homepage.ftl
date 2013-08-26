@@ -192,11 +192,12 @@
 					minHeight : 300,
 					minWidth : 300,
 					width : '65%',
+					height: 620,
 					modal: false,
 					visible: false,
 					draggable : false,
 					pinned: true,
-					position: { top: 10 }
+					position: { top: 5 }
 				});
 			}										
 			var attachWindow = $("#attach-window").data("kendoWindow");
@@ -204,7 +205,7 @@
 			attachWindow.title( item.name );
 			attachWindow.content( template(item) );
 			$("#attach-window").closest(".k-window").css({
-			     top: 75,
+			     top: 5,
 			     left: 5,
 			 });
 			attachWindow.open();		
