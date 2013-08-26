@@ -16,6 +16,9 @@ MTVmYzAyMTQ0ZWZmOWE3ZWY2NTI4ZjdkMDZmNGU2NjMzNGQyYWRjMjliNDA0MWNiPC9zaWduYXR1cmU+
 PC9saWNlbnNlPg==</file>
 	</license>
 	<view>
+		<html>
+			<main>homepage</main>			
+		</html>
 		<render>
 			<freemarker>
                 <debug>true</debug>
@@ -29,12 +32,15 @@ PC9saWNlbnNlPg==</file>
 			</velocity>
 		</render>
 	</view>	
-	
-	<userProvider>
-		<dao></dao>
-	</userProvider>
-	
+		
 	<components>
+		<user>
+			<anonymous>
+				<company>
+					<id>2</id>
+				</company>
+			</anonymous>
+		</user>
 		<image>
 			<enabled>true</enabled>
 			<maxImageSize>2048</maxImageSize>
@@ -49,7 +55,7 @@ PC9saWNlbnNlPg==</file>
 		</image>
 	</components>
 	
-	<security>	
+	<security>
 		<authentication>
 		    <disallowGuest>false</disallowGuest>
 		    <authority>ROLE_USER</authority>		
@@ -85,6 +91,20 @@ PC9saWNlbnNlPg==</file>
 				<connectionCachingEnabled>true</connectionCachingEnabled>
 			</oracleDataSourceProvider>
 		</default>
+		<external>
+		<!-- 
+			<jndiDataSourceProvider>
+				<jndiName></jndiName>
+			</jndiDataSourceProvider>
+			-->
+			<oracleDataSourceProvider>
+				<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
+				<url> jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB</url>
+				<user>u_framework</user>
+				<password>inkium</password>
+				<connectionCachingEnabled>true</connectionCachingEnabled>
+			</oracleDataSourceProvider>
+		</external>		
 	</database>
 		
 </startup-config>
