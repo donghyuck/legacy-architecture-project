@@ -102,7 +102,19 @@ a.k-link:hover {
 }
 */
 
-/** */
+/** SPACE */
+.blank-top-5 {
+	padding-top: 5px;	
+}
+
+.blank-space-5{
+	padding: 5px;	
+}
+
+
+
+
+
 .space-top {
 	padding-top: 5px;
 }
