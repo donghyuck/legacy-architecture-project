@@ -310,7 +310,7 @@
 			<div class="container">
 				<div class="row layout">
 					<div class="col-lg-8">
-						<h2><#if action.user.company ?? > ${action.user.company.name} </#if></h2>
+						<h2><#if action.user.company ?? > ${action.user.company.displayName } </#if></h2>
 					</div>								
 					<div class="col-lg-4">					 	
 						<div id="account-panel" class="visible-lg"></div>
