@@ -370,29 +370,18 @@
 							<div class="tab-pane active" id="my-messages"><span class="glyphicon glyphicon-comment"></span> 새로운 메시지가 없습니다.</div>
 							<div class="tab-pane" id="my-attachments">
 								<div class="container">
-									<div class="row blank-top-5">
-									<div class="col-lg-12">
+									<div class="row blank-top-5 layout">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
-												<a href="#"  id="attachment-list-view-filter-1">
-													<span class="badge pull-right" data-bind="text: totalAttachCount">&nbsp;</span>
-													전체
-												</a>
+												<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
 											</li>
 											<li>
-												<a href="#"  id="attachment-list-view-filter-2">
-													<span class="badge pull-right" data-bind="text: totalImageCount">&nbsp;</span>
-													이미지
-												</a>
+												<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
 											</li>
 											<li>
-												<a href="#"  id="attachment-list-view-filter-3">
-													<span class="badge pull-right" data-bind="text: totalFileCount">&nbsp;</span>
-													파일
-												</a>
+												<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
 											</li>									  
 										</ul>
-									</div>
 									</div>								
 									<#if !action.user.anonymous >	
 									<div class="row blank-top-5">
