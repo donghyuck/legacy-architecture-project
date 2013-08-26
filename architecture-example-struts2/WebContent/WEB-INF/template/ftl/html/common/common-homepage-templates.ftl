@@ -1,6 +1,6 @@
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
-		#:name#
+		<font color="\\#fff">#:name#</font>
 		<a class="dropdown-toggle" data-toggle="dropdown">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" /><span class="k-icon k-i-arrow-s"></span>
