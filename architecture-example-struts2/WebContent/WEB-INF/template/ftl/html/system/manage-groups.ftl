@@ -209,7 +209,7 @@
 									            });	
 				                      		}
 				                      		
-				                      	// TAB - PROPS GRID	
+				                      	// TAB - PROPS GRID	 ======================================	        
 				                      	} else if( $( e.contentElement ).find('div').hasClass('props') ){			
 				                      		if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
 												group_tabs.find(".props").kendoGrid({
@@ -257,7 +257,7 @@
 				                      }
 				                  	});
 				                  	                             
-	                                  // 2-2. GROUP MEMBER GRID
+	                                  // 2-2. GROUP MEMBER GRID  ======================================	        
 	                                 group_tabs.find(".members").kendoGrid({
 	                                     dataSource: {
 									    	type: "json",
@@ -325,7 +325,7 @@
 					                            visible: false
 									    	});
 									    	 // make focus user search input 									    	
-											// 3-2 SEARCH RESULT GRID
+											// 3-2 SEARCH RESULT GRID  ======================================	        
 											$("#search-result").kendoGrid({
 												dataSource: {
 													type: "json",
@@ -482,9 +482,9 @@
 		<!-- START HEADER -->
 	  	<!-- END HEADER -->	  	
 	  	<!-- START MAIN CONTNET -->
-		<div class="container">
+		<div class="container layout">
 			<div class="row">
-				<div class="span12">
+				<div class="col-12 col-lg-12">
 					<div class="k-content">
 							<ul id="menu" style="display:none;" >
 				                <li action="#">회사
@@ -506,23 +506,14 @@
 					</div>
 				</div>					
 			</div>		
-			<div class="row-fluid">
-				<div class="span12">								
+			<div class="row">
+				<div class="col-12 col-lg-12">								
 						<div id="splitter">
 							<div id="list_pane">
-								<div class="row-fluid">
-									<div class="span12">
-										<div id="group-grid">
-										</div>	
-									</div>
-								</div>	
+								<div id="group-grid"></div>		
 							</div>
 							<div id="datail_pane">			
-								<div class="row-fluid">
-									<div class="span12">
-										<div id="group-details"></div>
-									</div>				
-								</div>						
+								<div id="group-details"></div>				
 							</div>
 						</div>
 				</div>
@@ -532,40 +523,39 @@
 			</form>
 		</section>	  		
 		
-		<div id="search-window" style="display:none;">			
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="form-inline">
-						<input type="text" id="search-text" placeholder="검색할 사용자 이름 또는 메일 주소"  class="input-large"/>
-						<a class="k-button" id="search-user-btn"><span class="k-icon k-i-search"></span>사용자 검색</a>
+		<div id="search-window" style="display:none;">		
+			<div class="container layout">					
+				<div class="row">
+					<div class="col-12 col-lg-12">
+						<div class="alert alert-danger">
+						검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 사용자 선택은 체크박스를 체크하면 됩니다.
+						</div>
+					</div>
+				</div>				 
+				<div class="row  ">
+					<div class="col-8 col-lg-8"><input type="text" id="search-text"  class="k-textbox" style="width:300px;"  placeholder="검색할 사용자 이름 또는 메일 주소"/></div>
+					<div class="col-4 col-lg-4"><a class="k-button" id="search-user-btn"><span class="k-icon k-i-search"></span>사용자 검색</a></div>
+				</div>				
+				<div class="row blank-top-5">
+					<div class="col-12 col-lg-12">
+						<div id="search-result"></div>
 					</div>
 				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span12 space-top">
-					<div class="alert alert-error">
-					검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 사용자 선택은 체크박스를 체크하면 됩니다.
+				<div class="row blank-top-5">
+					<div class="col-10 col-lg-10">
+					<div class="btn-group">
+						<a class="k-button" id="add-member-btn"><span class="k-icon k-i-folder-add"></span>선택된 사용자 그룹 멤버로 추가하기</a>
+						<a class="k-button right" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
+						</div>
 					</div>
 				</div>
+				
 			</div>
-			<div class="row-fluid">
-				<div class="span12">
-					<div id="search-result"></div>
-				</div>
-			</div>
-			<div class="row-fluid">
-				<div class="span12">
-					<div class="form-actions no-margin-bottom">
-					<a class="k-button" id="add-member-btn"><span class="k-icon k-i-folder-add"></span>선택된 사용자 그룹 멤버로 추가하기</a> &nbsp; 
-					<a class="k-button right" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
-					</div>
-				</div>
-			</div>
-		</div>	    
+		</div>	
+		    
 		<!-- END MAIN CONTNET -->
 		<div id="account-panel"></div>			
 		<script type="text/x-kendo-template" id="template">					
-			<div class="details big-box">	
 				<div class="tabstrip">
 					<ul>
 						<li>프로퍼티</li>
@@ -593,7 +583,6 @@
 						</div>	
 					</div>
 				</div>
-			</div>
 		</script>		        
 		<!-- 공용 템플릿 -->
 		<#include "/html/common-templates.ftl" >		        
