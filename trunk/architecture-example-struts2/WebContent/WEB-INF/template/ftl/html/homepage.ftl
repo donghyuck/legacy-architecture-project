@@ -353,10 +353,11 @@
 			<div class="container layout">		
 				<div class="row">
 					<div class="col-lg-8">
-						<div class="panel panel-info">
+						<div class="panel panel-default">
+							<div class="panel-heading">알림</div>
 							<div class="panel-body">
-							<h3>소개</h3>
-							<p>지금 보는 페이지는 공개소스 jquery 기반의 kendoui 와 foundation js 를 사용하여 구현되었다. </p>
+								<h3>소개</h3>
+								<p>지금 보는 페이지는 공개소스 jquery 기반의 kendoui 와 foundation js 를 사용하여 구현되었다. </p>
 							</div>
 						</div>
 					</div>
