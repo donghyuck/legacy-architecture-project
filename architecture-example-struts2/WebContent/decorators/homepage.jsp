@@ -22,7 +22,6 @@
 		background-color: #2ba6cb;
 		height : 70px;
 		position: relative;
-		color : #fff;		
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 	}
 
