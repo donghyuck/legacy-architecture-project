@@ -371,6 +371,7 @@
 							<div class="tab-pane" id="my-attachments">
 								<div class="container">
 									<div class="row blank-top-5">
+									<div class="col-lg-12">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
 												<a href="#"  id="attachment-list-view-filter-1">
@@ -391,6 +392,7 @@
 												</a>
 											</li>									  
 										</ul>
+									</div>
 									</div>								
 									<#if !action.user.anonymous >	
 									<div class="row blank-top-5">
