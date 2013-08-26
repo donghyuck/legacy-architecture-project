@@ -34,4 +34,5 @@ public interface ModelObject<T> extends Cacheable, DatedObject, Comparable<T> {
 	 */
 	public ModelObjectType getModelObjectType();
 	
+	
 }
