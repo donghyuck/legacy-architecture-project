@@ -302,9 +302,11 @@
 														          	var item = this.dataItem(tr);
 							                            			if(! $("#download-window").data("kendoWindow")){
 							                            				$("#download-window").kendoWindow({
-							                            					actions: ["Minimize", "Maximize", "Close"],
+							                            					actions: ["Close"],
 							                            					minHeight : 500,
 							                            					minWidth :  400,
+							                            					maxHeight : 700,
+							                            					maxWidth :  600,
 							                            					modal: true,
 							                            					visible: false
 							                            				});
@@ -646,9 +648,9 @@
 		<!-- START HEADER -->
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container-fluid">
-			<div class="row-fluid">
-				<div class="span12">
+		<div class="container layout">
+			<div class="row">
+				<div class="col-12 col-lg-12">
 					<div class="k-content">
 							<ul id="menu" style="display:none;" >
 								<li action="#">회사
@@ -670,22 +672,14 @@
 						</div>		
 				</div>				
 			</div>
-			<div class="row-fluid">
-				<div class="span12">		
+			<div class="row">
+				<div class="col-12 col-lg-12">
 					<div id="splitter">
 						<div id="list_pane">
-							<div class="row-fluid">
-								<div class="span12">
-									<div id="user-grid"></div>
-								</div>
-							</div>		
+							<div id="user-grid"></div>
 						</div>
 						<div id="datail_pane">
-							<div class="row-fluid">
-								<div class="span12">
-									<div id="user-details"></div>
-								</div>				
-							</div>
+							<div id="user-details"></div>
 						</div>
 					</div>				
 				</div>
@@ -695,8 +689,9 @@
 			</form>	
 		</section>	
 		<div id="change-password-window" style="display:none;">
-			<div class="row-fluid">
-				<div class="span12">					
+		<div class="container layout">	
+			<div class="row">
+				<div class="col-12 col-lg-12">
 					<p>
 					    	6~16자의 영문 대소문자, 숫자, 특수문자를 조합하여
 							사용하실 수 있습니다.
@@ -705,31 +700,39 @@
 							알아낼 수 있으니 사용을 자제해 주세요.
 							이전에 사용했던 비밀번호나 타 사이트와는 다른 비밀번호를
 							사용하고, 비밀번호는 주기적으로 변경해주세요.
-							<div class="alert-box alert">비밀번호에 특수문자를 추가하여 사용하시면
+							<div class="alert alert-danger">비밀번호에 특수문자를 추가하여 사용하시면
 							기억하기도 쉽고, 비밀번호 안전도가 높아져 도용의 위험이
 							줄어듭니다.	
 							</div>    	
-					</p>					
-					<form class="form-horizontal no-margin-bottom">
-						<div class="control-group">
-							<label class="control-label" for="password2">새 비밀번호</label>
+					</p>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-lg-12">									
+					<form class="form-horizontal">
+						<div class="form-group">
+							<label class="col-lg-5 control-label" for="password2">새 비밀번호</label>
 							<div class="controls">
 								<input type="password" id="password2" name="password2" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
 							</div>
 						</div>	
-						<div class="control-group">
-							<label class="control-label" for="password3">새 비밀번호 확인</label>
+						<div class="form-group">
+							<label class="col-lg-5 control-label" for="password3">새 비밀번호 확인</label>
 							<div class="controls">
 								<input type="password" id="password3" name="password3" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
 							</div>
 						</div>		
-						<div class="form-actions no-margin-bottom">			
+						<div class="form-group">	
+							<div class="col-lg-4"></div>
+							<div class="col-lg-8">
 							<button id="do-change-password-btn" class="k-button">확인</button>
-							<button class="k-button" type="reset">다시입력</button></div>	
+							<button class="k-button" type="reset">다시입력</button></div>
+							</div>
 						</div>
 					</form>
 				</div>
-			</div>
+			</div>	
+		</div>
 		</div>
 		  
   		<div id="download-window"></div>    
@@ -745,9 +748,11 @@
 		-->
 		<script id="download-window-template" type="text/x-kendo-template">				
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;"/>
+				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-responsive" alt="#= name #" />
 			# } else { #
-			<table class="tabular" width="100%">
+			
+			# } #  		
+			<table class="table table-bordered">
 			  <thead>
 			    <tr>
 			      <th>이름</th>
@@ -758,14 +763,13 @@
 			  </thead>
 			  <tbody>
 			    <tr>
-			      <td  width="200">#= name #</td>
+			      <td  width="300">#= name #</td>
 			      <td  width="150">#= contentType #</td>
-			      <td  width="150">#= size # 바이트</td>
+			      <td  width="200">#= size # 바이트</td>
 			      <td  width="150"><a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
 			    </tr>
 			  </tbody>
 			</table>				
-			# } #  		
 		</script>	
 		<script type="text/x-kendo-template" id="template">
 
@@ -789,79 +793,78 @@
 							</li>	   
 						</ul>	          
 						<div>
-							<div class="row-fluid">
-								<div class="span4 offset2">
-									<img id="user-photo" class="img-polaroid" src="http://placehold.it/100x150" border="0" /></a>
-								</div>
-								<div class="span6">
+							<!-- USER INFO TAB =============================== -->
+							<div class="container layout" >
+							<div class="row blank-top-5">
+								<div class="col-lg-3">
+									<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>
 									<input name="uploadImage" id="files" type="file" />
 								</div>
-							</div>	
-							<div class="row-fluid">
-								<div class="span12 space-top details">
-									<div class="form-horizontal">
-										<div class="control-group">
-	 										<label class="control-label">이름</label>
-											<div class="controls">
-												<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name"/>
-											</div>	
-										</div>
-										<div class="control-group">
-	 										<label class="control-label">메일</label>
-											<div class="controls">
-												<input type="text" class="k-textbox" placeholder="메일주소" data-bind="value:email"/>
-											</div>	
-										</div>
-										<div class="control-group">
-	 										<label class="control-label">옵션</label>
-											<div class="controls">
-												<label class="checkbox">
-													<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
-												</label>												
+								<div class="col-lg-9 details">									
+										<div class="form-horizontal">
+											<div class="form-group">
+	 											<label class="col-lg-3 control-label">이름</label>
+												<div class="col-lg-9">
+													<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name"/>
+												</div>	
 											</div>
-										</div>		
-										<div class="control-group">
-											<div class="controls">
-												<label class="checkbox inline">
-													<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
-												</label>												
-											</div>	
-										</div>		
-										<div class="control-group">
-											<div class="controls">
-												<label class="checkbox">
-													<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
-												</label>												
-											</div>	
+											<div class="form-group">
+	 											<label class="col-lg-3 control-label">메일</label>
+												<div class="col-lg-9">
+													<input type="text" class="k-textbox" placeholder="메일주소" data-bind="value:email"/>
+												</div>	
+											</div>
+											<div class="form-group">
+	 											<label class="col-lg-3 control-label">옵션</label>
+												<div class="col-lg-9">
+													<div class="checkbox">
+														<label>
+															<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
+														</label>
+													</div>		
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
+														</label>
+													</div>	
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
+														</label>
+													</div>																																			
+												</div>
+											</div>										
 										</div>
-										<table class="table span6 offset5">
-											<thead>
-												<tr>
-													<td>개인정보 수정일</td>
-													<td>마지막 방문일</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="success">
-													<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
-													<td><span data-bind="text: formattedLastLoggedIn"></span></td>
-												</tr>										
-											</tbody>
-										</table>
+									
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<td>최근 수정일자</td>
+												<td>최근 로그인 일자</td>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="active">
+												<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
+												<td><span data-bind="text: formattedLastLoggedIn"></span></td>
+											</tr>                                                                    
+										</tbody>
+									</table>									
 								</div>
-							</div>				
-						</div>
-						<div class="row-fluid">
-							<div class="span12 details">
-								<div class="form-actions">
+							</div>
+							
+							
+							
+							<div class="row">
+								<div class="col-lg-12">
 									<button id="update-user-btn" class="k-button">정보 변경</button>
-									<button id="change-password-btn" class="k-button right">비밀번호변경</button>								
-								</div>							
+									<button id="change-password-btn" class="k-button right">비밀번호변경</button>												
+								</div>
+							</div>							
 							</div>
 						</div>
-							
-					</div>	
-	        		<div>
+						<div>
+	        			<!-- USER PROPS TAB =============================== -->
         				<div id="user-props-grid" class="props" style="height:0px;"/>
         				<div class="box leftless rightless bottomless">
 	                		<div class="alert alert-info">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>

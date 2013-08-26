@@ -347,15 +347,16 @@
 						});
 						
 						if(! $("#menu-window").data("kendoWindow")){       
-						// WINDOW 생성
-						$("#menu-window").kendoWindow({
-							actions: ["Minimize", "Maximize", "Close"],
-							resizable: false,
-							modal: true,
-							visible: false,
-							title: '메뉴'
-						});
-					}			 		                   								
+							// WINDOW 생성
+							$(".menu-details").hide();
+							$("#menu-window").kendoWindow({
+								actions: ["Close"],
+								resizable: false,
+								modal: true,
+								visible: false,
+								title: '메뉴'
+							});
+						}			 		                   								
 					}					
 					var menuWindow = $("#menu-window").data("kendoWindow");
 					//$("#menu-window").closest(".k-window").css({
@@ -427,7 +428,8 @@
 		    {
 		        height: "100%";
 		    }			
-			 #group-details .k-content 
+			
+			#group-details .k-content 
 		    {
 		        height: "100%";
 		        overflow: auto;
@@ -455,54 +457,65 @@
 		</div>	
 		<div id="account-panel"></div>				
 		<!-- END MAIN CONTENT -->
-		<div id="perms-window" style="display:none;" class="layout">
+		<div id="perms-window" style="display:none;" class="clearfix">
 			<div class="alert alert-info">그룹 또는 사용자에게 부여 가능한 롤은 다음과 같습니다.</div>
 			<div id="role-grid">	</div>            	
 		</div>
 		
-		<div id="menu-window" style="display:none;" class="unlayout">
+		<div id="menu-window" style="display:none;">
+		<div class="container layout">
 			 <div class="row">
-				<div class="span4"><div class="k-content"><div id="menu-grid"></div></div></div>
-				<div class="span10">
+				<div class="col-4 col-lg-4"><div class="k-content"><div id="menu-grid"></div></div></div>
+				<div class="col-8 col-lg-8">
 					<div class="menu-details" style="dispaly:none">
-						<form class="form-horizontal no-padding-bottom">
-							<div class="control-group">
-								<label class="control-label" for="input-menu-name">이름</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge k-textbox" placeholder="이름" data-bind="value:name" id="input-menu-name"/>
+					<div class="panel blank-space-5 gray">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<label class="col-lg-2 control-label" for="input-menu-name">이름</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" placeholder="이름" data-bind="value:name" id="input-menu-name"/>
 								</div>
 							</div>
-							<div class="control-group">
-								<label class="control-label" for="input-menu-title">타이틀</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge k-textbox" placeholder="타이틀" data-bind="value:title" id="input-menu-title"/>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" for="input-menu-title">타이틀</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" placeholder="타이틀" data-bind="value:title" id="input-menu-title"/>
 								</div>
 							</div>				
-							<div class="control-group">
-								<label class="checkbox">
-									<div class="controls">
-										사용여부<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />
+							<div class="form-group">
+								<label class="col-lg-2 control-label" >옵션</label>
+								<div class="col-lg-10">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"  name="enabled"  data-bind="checked: enabled" /> 사용여부
+										</label>
 									</div>
+								</div>							
 							</div>				
-							<div class="control-group">
-								<label class="control-label" for="input-menu-description">설명</label>
-								<div class="controls">
-									<input type="text" class="input-xxlarge" placeholder="설명" data-bind="value:description" id="input-menu-description"/>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" for="input-menu-description">설명</label>
+								<div class="col-lg-10">
+									<input type="text" class="form-control" placeholder="설명" data-bind="value:description" id="input-menu-description"/>
 								</div>
 							</div>			
-							<div class="control-group">
-								<label class="control-label" for="input-menu-xmldata">XML 메뉴 데이터<span class="label label-important">Important</span></label>
-								<div class="controls">
-									<textarea  data-bind="value: menuData" rows="10" id="input-menu-xmldata" class="input-xxlarge"></textarea>
+							<div class="form-group">
+								<label class="col-lg-2 control-label" for="input-menu-xmldata">XML &nbsp<br/><span class="label label-danger">Important</span></label>
+								<div class="col-lg-10">
+									<textarea  data-bind="value: menuData" rows="10" id="input-menu-xmldata" class="form-control"></textarea>
 								</div>
 							</div>	
-							<div class="form-actions no-margin-bottom ">
-								<button id="update-menu-btn" class="k-button right">저장</button>
+							<div class="form-group">
+								<div class="col-lg-2" ></div>
+								<div class="col-lg-10">
+									<button id="update-menu-btn" class="k-button right">저장</button>
+								</div>
 							</div>								
-						</form>									
+						</form>								
+					</div>
 					</div>
 				</div>
 			</div>
+		</div>
 		</div>
 			
 		<!-- START FOOTER -->
