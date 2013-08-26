@@ -9,6 +9,7 @@
         <pattern>/templates/*</pattern>
         <pattern>/styles/*</pattern>
         <pattern>/js/*</pattern>
+        <pattern>/fonts/*</pattern>
         <pattern>*output=xml*</pattern>
         <pattern>*output=json*</pattern>
     </excludes>
