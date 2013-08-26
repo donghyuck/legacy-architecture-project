@@ -23,6 +23,14 @@
 		border: 0px;
 	}		
 	
+	html{
+		font-size: 11pt;
+	}	
+	
+	body{
+		font-size: 11pt;
+	}		
+		
 	@media only screen and (min-width: 768px) {
 		body{
 			font-size: 11pt;
@@ -64,6 +72,8 @@
 	}
 			
 	.container {
+		
+		padding-left: 0px;
 		max-width:100% ;
 		overflow-x:hidden ;
 		overflow-y:hidden ;
