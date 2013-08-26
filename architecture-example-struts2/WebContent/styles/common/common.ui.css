@@ -1503,7 +1503,7 @@ table.tabular thead tr th,table.tabular tfoot tr th,table.tabular tbody tr td,ta
 	line-height: 1.125em;
 }
 
-/* Panal **/
+/* Panal 
 div.panel-body {
 	color : #ffffff;
 	padding : 3px;
@@ -1534,7 +1534,7 @@ div.panel.gray {
 	background-color : #ffffff;	
 	color : #787878;
 }
-
+**/
 /*------------------------------------------------*/
 /* MENU SLIDER SECTION                           */
 /*------------------------------------------------*/
