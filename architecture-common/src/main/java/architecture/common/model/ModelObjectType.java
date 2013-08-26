@@ -23,6 +23,8 @@ public enum ModelObjectType {
 	GROUP ( 3, "GROUP" ),
 	ROLE ( 4, "ROLE"),
 	
+	
+	
 	EXCEPTION ( 5, "EXCEPTION" ),
 	PERMISSION (6, "PERMISSION"),
 	PERMISSION_MASK (7, "PERMISSION_MASK"),
@@ -31,11 +33,13 @@ public enum ModelObjectType {
 	PROFILE_FIELD_VALUE (10, "PROFILE_FIELD_VALUE"),	
 	I18N_TEXT (12, "I18N_TEXT"),
 	ANONYMOUS (13, "ANONYMOUS"),
+	
 	SYSTEM (14, "SYSTEM"),
 	I18N_LOCALE (15, "I18N_LOCALE"),
 	IMAGE ( 16, "IMAGE"),
 	ATTACHMENT ( 17, "ATTACHMENT"),
 	MENU ( 18, "MENU")
+	
 	;
 	
 	public static ModelObjectType ALL_TYPES[] = values();
