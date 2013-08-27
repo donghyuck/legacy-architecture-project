@@ -10,7 +10,7 @@
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
-			'${request.contextPath}/js/bootstrap/3.0.0/dropdown.js',
+			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',			
        	    '${request.contextPath}/js/common/holder.js',
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.ui.js'], 
@@ -64,8 +64,11 @@
 				});
 				
 				$('#myTab a').click(function (e) {
-					e.preventDefault();
-					if(  $(this).attr('href') == '#my-attachments' ){
+					e.preventDefault();					
+					if(  $(this).attr('href') == '#my-messages' ){
+						$('#my-messages').popover('show');			
+								
+					} else if(  $(this).attr('href') == '#my-attachments' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){	
 							
 							var attachementTotalModle = kendo.observable({ 
@@ -367,7 +370,17 @@
 							<li><a href="#my-attachments">첨부파일</a></li>
 						</ul>						
 						<div class="tab-content">
-							<div class="tab-pane active" id="my-messages"><span class="glyphicon glyphicon-comment"></span> 새로운 메시지가 없습니다.</div>
+							<div class="tab-pane active" id="my-messages">
+								<span class="glyphicon glyphicon-comment"></span> 새로운 메시지가 없습니다.
+							
+								<div class="popover top" style="display:true;">
+									<div class="arrow"></div>
+									<h3 class="popover-title">Popover top</h3>
+									<div class="popover-content">
+										<p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+									</div>
+								</div>	
+							</div>
 							<div class="tab-pane" id="my-attachments">
 								<div class="container">
 									<div class="row blank-top-5 layout">
