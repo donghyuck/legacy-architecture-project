@@ -63,6 +63,7 @@
 					}
 				});
 				
+				<#if !action.user.anonymous >
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){
@@ -157,7 +158,7 @@
 								refresh : true,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
 							});		
-							<#if !action.user.anonymous >														
+																					
 							$("#attachment-files").kendoUpload({
 								 	multiple : false,
 								 	width: 300,
@@ -178,16 +179,17 @@
 								    	}				
 								    }					   
 							});
-							</#if>							
+													
 						}								
 					}
 					$(this).tab('show')
-				})
-				
+				});
+				</#if>	
 				// END SCRIPT            
 			}
 		}]);	
 		
+		<#if !action.user.anonymous >
 		function openPreviewWindow( item ){
 			if(! $("#attach-window").data("kendoWindow")){
 				$("#attach-window").kendoWindow({
@@ -213,6 +215,7 @@
 			 });
 			attachWindow.open();		
 		}			
+		</#if>		
 		-->
 		</script> 		   
 		
@@ -358,11 +361,12 @@
 							<div class="panel-heading">알림</div>
 							<div class="panel-body">
 								<h3>소개</h3>
-								<p>지금 보는 페이지는 공개소스 jquery 기반의 kendoui 와 foundation js 를 사용하여 구현되었다. </p>
+								<p>포도소프트는 .. </p>
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 visible-lg">
+					<div class="col-lg-4 visible-lg">					
+						<#if !action.user.anonymous >
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">메시지</a></li>
 							<li><a href="#my-attachments">클라우드 저장소</a></li>
@@ -371,9 +375,8 @@
 							<div class="tab-pane active" id="my-messages">
 								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
-									<!--<h3 class="popover-title">알림</h3>-->
 									<div class="popover-content">
-										<p>새로운 메시지가 없습니다.</p>
+										<p>새로운 뉴스가 없습니다.</p>
 									</div>
 								</div>	
 							</div>
@@ -406,6 +409,20 @@
 								</div>														
 							</div>
 						</div>
+						<#else>
+						<div class="panel panel-success" id="my-messages">
+							<div class="panel-heading">뉴스</div>					
+							<div class="panel-body">
+								<div class="popover top" style="display:true;">
+									<div class="arrow"></div>
+									<!--<h3 class="popover-title">알림</h3>-->
+									<div class="popover-content">
+										<p>새로운 메시지가 없습니다.</p>
+									</div>
+								</div>	
+							</div>	
+						</div>
+						</#if>
 					</div>
 				</div>
 			</div>		
