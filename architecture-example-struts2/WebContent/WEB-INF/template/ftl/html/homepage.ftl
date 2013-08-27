@@ -218,20 +218,6 @@
 		
     <style scoped="scoped">
     	
-    	.login-panel {
-			max-width : 280px;
-		}
-
-		.alert-box {
-			margin-top: 5px;
-			margin-bottom: 0px;
-		}
-        span.k-tooltip, span.k-tooltip-validation {        	
-        	font-size : 90%;
-	 		border-radius: 5px;
-	 		margin-top: 5px;
-        }
-
 		.k-callout-n {
 		border-bottom-color: #787878;
 		}	
@@ -310,47 +296,61 @@
 	<body id="doc">
 		<!-- START HEADER -->
 		<div class="header">		
-			<div class="container">
-				<div class="row layout">
-					<div class="col-lg-8">
-						<h2><#if action.user.company ?? > ${action.user.company.displayName } </#if></h2>
-					</div>								
-					<div class="col-lg-4">					 	
-						<div id="account-panel" class="visible-lg"></div>
-					</div>
-				</div> 
-			</div>
-		</div>
+
+
 		<!-- END HEADER -->	
-		<div class="container blank-top-5">		
-				<ul id="top-menu" style="display:none;">
-					<#if action.getMenuComponent("USER_MENU") ?? >
-						<#assign menu = action.getMenuComponent("USER_MENU") />
-						<#list menu.components as item >
-							<li>
-							${item.title}
-								<#if item.components?has_content >
-									<ul>
-									<#list item.components as sub_item >
-										<li>${sub_item.title}
-										<#if sub_item.components?has_content >
-											<ul>
-												<#list sub_item.components as sub_sub_item >
-												<li>${ sub_sub_item.title }</li>
-												</#list>
-											</ul>
-										</#if>
-										</li>
-									</#list>
-									</ul>
-								</#if>
-							</li>
-						</#list>
+		<!-- START MENU -->	
+		<#if action.getMenuComponent("USER_MENU") ?? >
+		<#assign menu = action.getMenuComponent("USER_MENU") />
+		<div class="container"  style="width: auto;">		
+			<nav class="navbar navbar-default" role="navigation">
+				<#if action.user.company ?? >
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#">${action.user.company.displayName }</a>
+				</div>			
+				</#if>												
+				<ul class="nav navbar-nav">
+					<#list menu.components as item >
+					<#if  item.components?has_content >
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+							<#list item.components as sub_item >
+								<#if sub_item.components?has_content >
+									<li class="dropdown-submenu">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
+										<ul class="dropdown-menu">
+											<#list sub_item.components as sub_sub_item >
+											<li><a href="#">${ sub_sub_item.title }</a></li>
+											</#list>
+										</ul>
+									</li>
+								<#else>								
+									<li><a href="#">${sub_item.title}</a></li>
+								</#if>								
+							</#list>
+							</ul>
+						</li>
 					<#else>
-						<!-- 메뉴 데이터 없음  -->
-					</#if>			
-					</ul>	
-			</div>
+						<li>
+							<a href="#">${item.title}</a>
+						</li>
+					</#if>
+					</#list>
+				</ul>				
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+					<div id="account-panel"></div> 
+					</li>
+					<li>
+					<p class="navbar-text"></p>
+					</li>
+				</ul>
+			</nav>
+		</#if>		
+		</div>
+		<!-- END MENU -->	
+		</div>
 		<!-- START MAIN CONTENT --> 
 		<div id="wrap">
 			<div class="container layout">		
@@ -373,7 +373,7 @@
 							<div class="tab-pane active" id="my-messages">
 								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
-									<h3 class="popover-title">알림</h3>
+									<!--<h3 class="popover-title">알림</h3>-->
 									<div class="popover-content">
 										<p>새로운 메시지가 없습니다.</p>
 									</div>

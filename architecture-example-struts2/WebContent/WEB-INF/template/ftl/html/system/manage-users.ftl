@@ -752,7 +752,7 @@
 			# } else { #
 			
 			# } #  		
-			<table class="table table-bordered">
+			<table class="table table-bordered blank-top-5">
 			  <thead>
 			    <tr>
 			      <th>이름</th>
