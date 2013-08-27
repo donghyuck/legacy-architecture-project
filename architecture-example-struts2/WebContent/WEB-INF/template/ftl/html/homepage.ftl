@@ -365,7 +365,7 @@
 					<div class="col-lg-4 visible-lg">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">메시지</a></li>
-							<li><a href="#my-attachments">첨부파일</a></li>
+							<li><a href="#my-attachments">클라우드 저장소</a></li>
 						</ul>						
 						<div class="tab-content">
 							<div class="tab-pane active" id="my-messages">
