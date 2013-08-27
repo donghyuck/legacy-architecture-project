@@ -371,13 +371,11 @@
 						</ul>						
 						<div class="tab-content">
 							<div class="tab-pane active" id="my-messages">
-								<span class="glyphicon glyphicon-comment"></span> 새로운 메시지가 없습니다.
-							
-								<div class="popover top" style="display:true;">
+								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
-									<h3 class="popover-title">Popover top</h3>
+									<h3 class="popover-title">알림</h3>
 									<div class="popover-content">
-										<p>Sed posuere consectetur est at lobortis. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum.</p>
+										<p>새로운 메시지가 없습니다.</p>
 									</div>
 								</div>	
 							</div>
