@@ -422,7 +422,7 @@
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=144&height=144&attachmentId=#:attachmentId#" alt="#:name# 이미지"/>
+				<img src="${request.contextPath}/secure/view-attachment.do?width=144&height=144&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 			# } else { #			
 				<img src="http://placehold.it/144x144&amp;text=[file]"></a>
 			# } #	
