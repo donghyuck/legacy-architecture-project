@@ -65,7 +65,19 @@
 	
 	#account-panel  .dropdown-menu{
 	 	width : 80%;
+	}
+	
+	#my-messages .popover {
+		width: 260px;
+		margin-top: 20px;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		margin-left: 20px;
+		float: left;
+		display: block;
+		position: relative;
 	 }
+	 
 	
 </style>
 </head>
