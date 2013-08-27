@@ -77,8 +77,12 @@
 		float: left;
 		display: block;
 		position: relative;
+		z-index: 1;
 	 }
 	 
+	 .popover-title {
+		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+	 }
 	
 </style>
 </head>
