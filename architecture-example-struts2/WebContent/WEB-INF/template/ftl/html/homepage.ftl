@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title>::</title>
+		<title><#if action.user.company ?? >${action.user.company.displayName }<#else>::</#if></title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -295,10 +295,7 @@
 	</head>
 	<body id="doc">
 		<!-- START HEADER -->
-		<div class="header">		
-
-
-		<!-- END HEADER -->	
+		<div class="header">
 		<!-- START MENU -->	
 		<#if action.getMenuComponent("USER_MENU") ?? >
 		<#assign menu = action.getMenuComponent("USER_MENU") />
@@ -351,6 +348,7 @@
 		</div>
 		<!-- END MENU -->	
 		</div>
+		<!-- END HEADER -->			
 		<!-- START MAIN CONTENT --> 
 		<div id="wrap">
 			<div class="container layout">		
