@@ -68,6 +68,7 @@
 	}
 	
 	#my-messages .popover {
+		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 		width: 260px;
 		margin-top: 20px;
 		margin-right: 20px;
