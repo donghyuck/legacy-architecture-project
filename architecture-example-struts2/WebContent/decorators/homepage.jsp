@@ -19,15 +19,10 @@
 <style>
 
 	.header {
-		background-color: #2ba6cb;
-		height : 70px;
+		padding-top : 10px;
 		position: relative;
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-	}
-
-	.header h2 { color: #fff; font-family: "나눔 고딕", "BM_NANUMGOTHIC"; }
-	.header h4 { color: #CCC; font-weight: 300; font-family: "나눔 고딕", "BM_NANUMGOTHIC"; }
-	
+	}	
 
 	.k-menu.k-header, .k-menu .k-item {
 		border-color :#dadada;
@@ -55,16 +50,19 @@
 	}	
 	
 	#wrap > .container {
-	  padding: 25px 15px 0;
+
 	}
 		
 	#account-panel {
 		margin-top : 0 px;
-		padding-top : 20px;
+		padding-top : 10px;
+		color: #fff;
 	}	
 	
 	#account-panel  .dropdown-menu{
-	 	width : 80%;
+	 	width : 300px;;
+	 	z-index: 1001;
+	 	color: #000;
 	}
 	
 	#my-messages .popover {
@@ -83,7 +81,14 @@
 	 .popover-title {
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 	 }
-	
+	 
+	.dropdown-submenu{position:relative;}
+	.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
+	.dropdown-submenu:hover>.dropdown-menu{display:block;}
+	.dropdown-submenu>a:after{display:block;content:" ";float:right;width:0;height:0;border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#cccccc;margin-top:5px;margin-right:-10px;}
+	.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
+	.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
+
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
