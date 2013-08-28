@@ -302,54 +302,100 @@
 		<!-- START MENU -->	
 		<#if action.getMenuComponent("USER_MENU") ?? >
 		<#assign menu = action.getMenuComponent("USER_MENU") />
-		<div class="container"  style="width: auto;">		
-			<nav class="navbar navbar-default" role="navigation">
-				<#if action.user.company ?? >
-				<div class="navbar-header">
-					<a class="navbar-brand" href="#">${action.user.company.displayName }</a>
-				</div>			
-				</#if>												
-				<ul class="nav navbar-nav">
-					<#list menu.components as item >
-					<#if  item.components?has_content >
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-							<#list item.components as sub_item >
-								<#if sub_item.components?has_content >
-									<li class="dropdown-submenu">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
-										<ul class="dropdown-menu">
-											<#list sub_item.components as sub_sub_item >
-											<li><a href="#">${ sub_sub_item.title }</a></li>
-											</#list>
-										</ul>
-									</li>
-								<#else>								
-									<li><a href="#">${sub_item.title}</a></li>
-								</#if>								
-							</#list>
-							</ul>
-						</li>
-					<#else>
+			<div class="container"  style="width: auto;">		
+				<nav class="navbar navbar-inverse" role="navigation">
+					<#if action.user.company ?? >
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#">${action.user.company.displayName }</a>
+					</div>			
+					</#if>												
+					<ul class="nav navbar-nav">
+						<#list menu.components as item >
+						<#if  item.components?has_content >
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}<b class="caret"></b></a>
+								<ul class="dropdown-menu">
+								<#list item.components as sub_item >
+									<#if sub_item.components?has_content >
+										<li class="dropdown-submenu">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
+											<ul class="dropdown-menu">
+												<#list sub_item.components as sub_sub_item >
+												<li><a href="#">${ sub_sub_item.title }</a></li>
+												</#list>
+											</ul>
+										</li>
+									<#else>								
+										<li><a href="#">${sub_item.title}</a></li>
+									</#if>								
+								</#list>
+								</ul>
+							</li>
+						<#else>
+							<li>
+								<a href="#">${item.title}</a>
+							</li>
+						</#if>
+						</#list>
+					</ul>				
+					<ul class="nav navbar-nav navbar-right">
 						<li>
-							<a href="#">${item.title}</a>
+						<div id="account-panel"></div> 
 						</li>
-					</#if>
-					</#list>
-				</ul>				
-				<ul class="nav navbar-nav navbar-right">
-					<li>
-					<div id="account-panel"></div> 
-					</li>
-					<li>
-					<p class="navbar-text"></p>
-					</li>
-				</ul>
-			</nav>
-		</#if>		
-		</div>
+						<li>
+						<p class="navbar-text"></p>
+						</li>
+					</ul>
+				</nav>
+			</#if>		
+			</div>
 		<!-- END MENU -->	
+		</div>
+		<div class="container">
+			<div id="myCarousel" class="carousel slide">
+			<!-- Indicators -->
+				<ol class="carousel-indicators">
+					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+					<li data-target="#myCarousel" data-slide-to="1"></li>
+					<li data-target="#myCarousel" data-slide-to="2"></li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item active ">	
+						<img src="http://www.clipartkorea.co.kr/PREV_SRV/Preview/2013/08/01/ti013a3501.jpg" alt=""/>				
+						<div class="container">						
+							<div class="carousel-caption">
+								<h1>포트폴리오</h1>
+								<p>쇼셜기반의 포트폴리오 관리.............................</p>
+	 							<p><a class="btn btn-large btn-primary" href="#">상세하게 알아보기</a></p>	 							
+							</div>
+						</div>
+					</div>
+					<div class="item">					
+					<img src="http://cdn.sencha.io/img/space/space-homepage-devices.png" alt="">
+						<div class="container">
+							
+							<div class="carousel-caption">
+								<h1>역량진단</h1>
+								<p>온라인 역량진단 ......</p>
+								<p><a class="btn btn-large btn-primary" href="#">역량진단 체험하기</a></p>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<img src="http://developer-static.se-mc.com/wp-content/blogs.dir/1/files/2012/08/OS_OpenSource_660x384.jpg" alt="">					
+						<div class="container">
+						
+							<div class="carousel-caption">
+								<h1>오픈소스.</h1>
+								<p>오픈소스.</p>
+								<p><a class="btn btn-large btn-primary" href="#">자세하게 알아보기</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div><!-- /.carousel -->
 		</div>
 		<!-- END HEADER -->			
 		<!-- START MAIN CONTENT --> 
@@ -365,7 +411,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-4 visible-lg">					
+					<div class="col-lg-4">					
 						<#if !action.user.anonymous >
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">메시지</a></li>
