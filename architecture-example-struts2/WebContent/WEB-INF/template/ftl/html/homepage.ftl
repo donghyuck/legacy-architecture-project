@@ -6,14 +6,12 @@
 		<!--
 		yepnope([{
 			load: [			
-			'css!${request.contextPath}/styles/lightbox/lightbox.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',			
 			'${request.contextPath}/js/common/holder.js',
-			'${request.contextPath}/js/lightbox/lightbox-2.6.min.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {      
