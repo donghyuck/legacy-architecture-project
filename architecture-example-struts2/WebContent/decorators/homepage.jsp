@@ -95,46 +95,39 @@
 	h1 {
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 	}
+	
+	.carousel {
+		margin-top: -10px;		
+		margin-bottom: 10px;	
+		height:400px;		
+	}
+	
+	.carousel-caption {
+		z-index: 10;
+		text-shadow : none;
+	}
 
-.carousel {
-  margin-bottom: 10px;
-  /* Negative margin to pull up carousel. 90px is roughly margins and height of navbar. */
-  margin-top: -10px;
-}
-/* Since positioning the image, we need to help out the caption */
-.carousel-caption {
-	z-index: 10;
-    color: #2e2e2e;
-    text-shadow : none;
-    text-align:left;
-    padding-left: 40%;
-}
+	.carousel-inner { 
+		text-align: center; 
+		overflow: hidden;	
+	}
+	
+	.carousel .item > img { 
+		display: inline-block; 
+		margin: 0 auto;
 
-/* Declare heights because of positioning of img element */
-.carousel .item {
-  height: 400px;
-  background-color: #fff;
+	}
+	
+	.carousel-control {
+		color : #000;
+	}
 
-}
-.carousel-inner > .item > img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 400px;
-}
-.carousel-indicators {
- text-align : left;
-}
-.carousel-control {
-color : #000;
-}
-
-.carousel-control:hover , .carousel-control:focus {
-	color : #000;
-}
-.left.carousel-control , .right.carousel-control {
-	background-image : none;
-}
+	.carousel-control:hover , .carousel-control:focus {
+		color : #000;
+	}
+	.left.carousel-control , .right.carousel-control {
+		background-image : none;
+	}	
 
 </style>
 </head>
