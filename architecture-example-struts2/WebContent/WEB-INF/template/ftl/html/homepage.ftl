@@ -6,15 +6,16 @@
 		<!--
 		yepnope([{
 			load: [			
+			'css!${request.contextPath}/styles/lightbox/lightbox.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',			
-       	    '${request.contextPath}/js/common/holder.js',
-       	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.ui.js'], 
-       	    
+			'${request.contextPath}/js/common/holder.js',
+			'${request.contextPath}/js/lightbox/lightbox-2.6.min.js',
+			'${request.contextPath}/js/common/common.models.js',
+			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {      
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
@@ -74,8 +75,8 @@
 							
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
-								totalImageCount : "X",
-								totalFileCount : "X"							
+								totalImageCount : "0",
+								totalFileCount : "0"							
 							});
 							
 							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );
@@ -94,7 +95,7 @@
 											}
 										}
 									},
-									pageSize: 6,
+									pageSize: 12,
 									error:handleKendoAjaxError,
 									schema: {
 										model: Attachment,
@@ -196,8 +197,8 @@
 					actions: ["Minimize", "Maximize", "Close"],
 					minHeight : 300,
 					minWidth : 300,
-					width : '65%',
-					height: 620,
+					maxHeight : $(window).height() - 50,
+					maxWidth : $(window).width() - 50,					
 					modal: false,
 					visible: false,
 					draggable : false,
@@ -210,8 +211,8 @@
 			attachWindow.title( item.name );
 			attachWindow.content( template(item) );
 			$("#attach-window").closest(".k-window").css({
-			     top: 5,
-			     left: 5,
+				top: 5,
+				left: 5
 			 });
 			attachWindow.open();		
 		}			
@@ -235,32 +236,33 @@
 		
 		#attachment-list-view {
 			min-height: 300px;
-			min-width: 286px;
+			min-width: 300px;
 			padding: 0px;
 			border: 0px;
 			margin-bottom: -1px;
+			vertical-align: middle;
 		}
         		                		
 		.attach
 		{
 			float: left;
             position: relative;
-            width: 144px;
-            height: 144px;
+            width: 150px;
+            height: 150px;
             padding: 0;
 			cursor: pointer;
 		}
 		
 		.attach img
 		{
-			width: 144px;
-			height: 144px;
+			width: 150px;
+			height: 150px;
 		}
 		
 		.attach-description {
             position: absolute;
             top: 0;
-            width: 144px	;
+            width: 150px	;
             height: 0;
             overflow: hidden;
             background-color: rgba(0,0,0,0.8)
@@ -361,7 +363,7 @@
 				</ol>
 				<div class="carousel-inner">
 					<div class="item active ">	
-						<img src="http://www.clipartkorea.co.kr/PREV_SRV/Preview/2013/08/01/ti013a3501.jpg" alt=""/>				
+						<span class="" /><img src="http://www.clipartkorea.co.kr/PREV_SRV/Preview/2013/08/01/ti013a3501.jpg"  class="img-rounded" alt=""/>				
 						<div class="container">						
 							<div class="carousel-caption">
 								<h1>포트폴리오</h1>
@@ -371,9 +373,8 @@
 						</div>
 					</div>
 					<div class="item">					
-					<img src="http://cdn.sencha.io/img/space/space-homepage-devices.png" alt="">
-						<div class="container">
-							
+					<img src="http://cdn.sencha.io/img/space/space-homepage-devices.png" class="img-rounded" alt="">
+						<div class="container">							
 							<div class="carousel-caption">
 								<h1>역량진단</h1>
 								<p>온라인 역량진단 ......</p>
@@ -382,9 +383,8 @@
 						</div>
 					</div>
 					<div class="item">
-						<img src="http://developer-static.se-mc.com/wp-content/blogs.dir/1/files/2012/08/OS_OpenSource_660x384.jpg" alt="">					
-						<div class="container">
-						
+						<img src="http://developer-static.se-mc.com/wp-content/blogs.dir/1/files/2012/08/OS_OpenSource_660x384.jpg" class="img-rounded" alt="">					
+						<div class="container">						
 							<div class="carousel-caption">
 								<h1>오픈소스.</h1>
 								<p>오픈소스.</p>
@@ -427,6 +427,7 @@
 								</div>	
 							</div>
 							<div class="tab-pane" id="my-attachments">
+							
 								<div class="container">
 									<div class="row blank-top-5 layout">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
@@ -446,14 +447,18 @@
 										<input name="uploadAttachment" id="attachment-files" type="file" />
 									</div>	
 									</#if>
+									<div class="panel panel-default">
+									<div class="panel-body">
 									<div class="row blank-top-5">
 										<div class="col-lg-12" align="center"><div id="attachment-list-view" ></div></div>
-									</div>
+									</div>									
 									<div class="row">
-										<div class="col-lg-12"><div id="pager" class="k-pager-wrap"></div></div>
+										<div class="col-lg-12" align="center"><div id="pager" class="k-pager-wrap"></div></div>
+									</div>
+									</div>	
 									</div>
 								</div>														
-							</div>
+							</div>						
 						</div>
 						<#else>
 						<div class="panel panel-success" id="my-messages">
@@ -483,9 +488,9 @@
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=144&height=144&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
+				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 			# } else { #			
-				<img src="http://placehold.it/144x144&amp;text=[file]"></a>
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
 			# } #	
 				<div class="attach-description">
 					<h3>#:name#</h3>
@@ -493,13 +498,19 @@
 				</div>
 			</div>
 		</script>		
-		<script id="attachment-preview-template" type="text/x-kendo-template">				
+		<script id="attachment-preview-template" type="text/x-kendo-template">	
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;" class="img-rounded" />
+				
+					<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;" class="img-rounded img-responsive" />
+					<!--
+					<a class="left carousel-control" ><span class="glyphicon glyphicon-chevron-left"></span></a>
+					<a class="right carousel-control" ><span class="glyphicon glyphicon-chevron-right"></span></a>
+					-->
+			
 				<p class="blank-top-5">
-				<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-				<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>	
-				</p>
+						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
+						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>					
+				</p>				
 			# } else { #		
 				<div class="k-grid k-widget" style="width:100%;">
 					<div style="padding-right: 17px;" class="k-grid-header">
@@ -541,7 +552,7 @@
 					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
 					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>	
 				</p>	
-				# } #  		
+				# } #  	
 		</script>		
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
