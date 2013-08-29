@@ -8,8 +8,8 @@
 /* Naver nanumgothic font ---------------------- */
 @font-face {
 	font-family: "BM_NANUMGOTHIC";
-	src: url('../font/nanumgothic.eot');
-	src: local('☺'), url('../font/nanumgothic.woff') format('woff'), url('../font/nanumgothic.woff') format('truetype');
+	src: url('../fonts/nanumgothic.eot');
+	src: local('☺'), url('../fonts/nanumgothic.woff') format('woff'), url('../fonts/nanumgothic.woff') format('truetype');
 }
 /** Main body ------------------------------------ */
 body {
@@ -111,18 +111,13 @@ a.k-link:hover {
 	padding: 5px;	
 }
 
+.blank-space-0{
+	padding: 0px;	
+}
 
-
-
-
-
-
-
-
-
-
-
-
+.blank-margin-0{
+	margin: 0px;	
+}
 
 
 .space-top {
