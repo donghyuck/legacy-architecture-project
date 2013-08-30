@@ -24,7 +24,9 @@
     <decorator name="secure-metroblack" page="secure-metroblack.jsp">
         <pattern>/*</pattern>
     </decorator>
-        
+    <decorator name="secure-metro" page="secure-metro.jsp">
+        <pattern>/*</pattern>
+    </decorator>
     <decorator name="homepage" page="homepage.jsp">
         <pattern>/*</pattern>
     </decorator>
