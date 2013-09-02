@@ -1,17 +1,17 @@
 <#ftl encoding="UTF-8"/>
-<html decorator="secure-metroblack">
+<html decorator="secure-metro">
 <head>
 		<title>관리자 메인</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',	
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.ui.js'
-      	     ],        	  	   
+       	    '${request.contextPath}/js/common/common.ui.js'],        	  	   
 			complete: function() {      
 				// START SCRIPT
 				
@@ -44,29 +44,59 @@
 						}
 					},
 					select : function( item ){
-						$("#content_frame_wrapper").attr( "src", item.action );
+						var url = item.action ;
+						if(url.indexOf("?") != -1){
+							url = url + "&companyId=" + $("#companyList").data("kendoDropDownList").value();
+						}else{
+							url = url + "?companyId=" + $("#companyList").data("kendoDropDownList").value();
+						}
+						 
+						$("#main-content-frame").attr( "src", url );
 						 kendo.bind($("#content_title"), item );
+					},
+					doAfter : function( content ){						
+						$("#companyList").kendoDropDownList({
+							dataTextField: "displayName",
+							dataValueField: "companyId",
+							dataSource: {
+								transport: {
+									read: {
+										type: "json",
+										url: '${request.contextPath}/secure/list-company.do?output=json',
+										type:'POST'
+									}
+								},
+								schema: { 
+									data: "companies",
+									model : Company
+								}
+							}
+						});					
+						if( !user.isSystem )	
+							$("#companyList").data("kendoDropDownList").readonly();
 					}
-				 });				
-				$("#content_frame_wrapper").css( "height", $(document).height() - 54 );
-		
+				 });	
+				$("#main-content-frame").css( "height", $(document).height() -51 );
+				$("#main-content-frame").attr("src" , 	"/secure/system-info.do");							
+				$(window).resize(function() {
+					$("#main-content-frame").css( "height", $(document).height() -51 );
+				});
 				// END SCRIPT
 			}
 		}]);
 		-->
 		</script> 		 
 		<style>
-			#datail_pane {
-				background-color : #F5F5F5;
-			}				
+			.container {
+				padding-top : 51px;
+				overflow-y : none;
+			}
+			
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<!-- END HEADER -->
-
-		<!-- START MAIN CONTENT -->		
-		<section class="container">		
+		<section>
 			<div id="topbar">
 				<button class="square sidebar open">
 					<i>Toggle</i>
@@ -74,17 +104,18 @@
 				<article id="content_title"><span data-bind="text:title"></span><span class="desc" data-bind="text:description"></span></article>
 				<div id="account"></div>				
 			</div>			
-			<div class="content">			
-				<div class="navigation" style="display:none;"></div>
-				<iframe id="content_frame_wrapper" class="content" src="/secure/main-company.do" frameborder="1" allowtransparency="true" hspace="0" style="width: 100%; height:100%;"></iframe>				
+			<div class="navigation" style="display:none;">
+			</div>	
+		</section>
+		<!-- END HEADER -->
+		<!-- START MAIN CONTENT -->		
+		<section class="container">			
+			<div class="row">			
+			<iframe id="main-content-frame" style="width: 100%; height: 100%; background-color: #f5e5c5;" frameborder="0" hspace="0"></iframe>		
 			</div>
 		<section>
 		<!-- END MAIN CONTENT -->					
 		<!-- START FOOTER -->
-		<!--
-		<footer class="row"> 
-		</footer>
-		-->
 		<!-- END FOOTER -->				
 		<!-- 공용 템플릿 -->
 		<#include "/html/common/common-templates.ftl" >

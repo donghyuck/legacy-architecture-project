@@ -1,16 +1,17 @@
 <#ftl encoding="UTF-8"/>
-<html decorator="secure">
+<html decorator="secure-metro">
     <head>
         <title>그룹 관리</title>
         <script type="text/javascript">
         <!--
         yepnope([{
             load: [ 	       
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',			
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',	
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',
+       	    '${request.contextPath}/js/common/common.apis.js',
        	    '${request.contextPath}/js/common/common.ui.js'],        	     	  	   
             complete: function() { 
 				// Localization 
@@ -25,43 +26,28 @@
 					}
 				});
 				
-					$("#company").kendoDropDownList({
-                        dataTextField: "displayName",
-                        dataValueField: "companyId",
-                        dataSource: {
-                            transport: {
-                                read: {
-                                    type: "json",
-                                    url: '${request.contextPath}/secure/list-company.do?output=json',
-									type:'POST'
-                                }
-                            },
-                            schema: { 
-                            		data: "companies",
-                            		model : Company
-                        	}
-                        }
-                    });
-                    
-                    
-					$("#company").data("kendoDropDownList").readonly();
-							                                 
-					$("#menu").kendoMenu({
-						select: function(e){							
-							var action = $(e.item).attr('action') ;										
-							if( action != '#' ){
-								$("form[name='fm1']").attr("action", action ).submit(); 
-							}
-						}						
-					}).css("border-width", "1px 1px 0px");;
-					
-					$("#menu").show();									
-
-					$("#go-comapny-btn").click( function(){
-						$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 
-					}); 
+				var companyId = ${action.companyId};
+				var selectedCompany = new Company();
+				common.apis.getTargetCompany({
+					data : {companyId: companyId},
+					success : function ( token ){
+						selectedCompany = token;
+					}
+				});
+				
+				// SPLITTER LAYOUT
+				var splitter = $("#splitter").kendoSplitter({
+	                orientation: "horizontal",
+	                panes: [
+	                    { collapsible: false, min: "500px" },
+	                    { collapsible: true, collapsed: true, min: "500px" }
+	                ]
+	             });
+				
+				$("#splitter").css( "height", $(document).height());
+				$("#list_pane").css( "height", $(document).height());
 								
-			        // 1. GROUP GRID			        
+				// 1. GROUP GRID			        
 			        var selectedGroup = new Group();		      
 			        var group_grid = $("#group-grid").kendoGrid({
 	                    dataSource: {	
@@ -71,9 +57,9 @@
 	                            update: { url:'${request.contextPath}/secure/update-group.do?output=json', type:'POST' },
 		                        parameterMap: function (options, operation){	          
 		                            if (operation != "read" && options) {
-		                                return { companyId: $("#company").data("kendoDropDownList").value(), item: kendo.stringify(options)};
+		                                return { companyId: companyId, item: kendo.stringify(options)};
 		                            }else{
-		                                return { startIndex: options.skip, pageSize: options.pageSize , companyId: $("#company").data("kendoDropDownList").value() }
+		                                return { startIndex: options.skip, pageSize: options.pageSize , companyId: companyId }
 		                            }
 		                        }                  
 	                        },
@@ -114,7 +100,7 @@
 	                                 selectedGroup.creationDate = selectedCell.creationDate;
 	                                 selectedGroup.formattedCreationDate  =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.creationDate );      
 	                                 selectedGroup.formattedModifiedDate =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.modifiedDate );         	                                 
-	                                 selectedGroup.company = $("#company").data("kendoDropDownList").dataSource.get(  $("#company").data("kendoDropDownList").value()  );
+	                                 selectedGroup.company = selectedCompany;
 	                                 
 	                                 $("#splitter").data("kendoSplitter").expand("#datail_pane");
 	                                 
@@ -450,78 +436,30 @@
 	                
 	                }); 
 				//});
-				
-				// SPLITTER LAYOUT
-				var splitter = $("#splitter").kendoSplitter({
-	                orientation: "horizontal",
-	                panes: [
-	                    { collapsible: false, min: "500px" },
-	                    { collapsible: true, collapsed: true, min: "500px" }
-	                ]
-	             });
             }
         }]);        		
      	-->
         </script> 	
 		<style>	
-
- 			#group-details .k-content 
-		    {
-		        height: "100%";
-		    }
-
-			 #group-details .k-content 
-		    {
-		        height: "100%";
-		        overflow: auto;
-		    }
-		    
+	    	#list_pane{height:700px;}
 		</style>
     </head>
 	<body>
 		<!-- START HEADER -->
 	  	<!-- END HEADER -->	  	
 	  	<!-- START MAIN CONTNET -->
-		<div class="container layout">
+		<div class="container">
 			<div class="row">
-				<div class="col-12 col-lg-12">
-					<div class="k-content">
-							<ul id="menu" style="display:none;" >
-				                <li action="#">회사
-				                	<ul>	                		    
-				                		<li>
-				                			<div style="padding: 10px;">
-				                			<input id="company" type="hidden" style="width: 250px" value="${action.companyId}"/>
-				                			</div>
-				                		</li>
-				                		<li>
-				                			<div style="padding: 10px;">
-				                				<button id="go-comapny-btn" class="k-button">회사 관리하기</button>
-				                			</div>	                			
-				                		</li>	                		
-				                	</ul>
-				                </li>        
-				                <li action="main-user.do">사용자</li>     
-				            </ul>							
-					</div>
-				</div>					
-			</div>		
-			<div class="row">
-				<div class="col-12 col-lg-12">								
-						<div id="splitter">
-							<div id="list_pane">
-								<div id="group-grid"></div>		
-							</div>
-							<div id="datail_pane">			
-								<div id="group-details"></div>				
-							</div>
+					<div id="splitter">
+						<div id="list_pane">
+							<div id="group-grid"></div>
 						</div>
-				</div>
+						<div id="datail_pane">
+							<div id="group-details"></div>
+						</div>
+					</div>				
 			</div>	
-			<form name="fm1" method="POST" accept-charset="utf-8">
-				<input type="hidden" name="companyId"  value="${action.companyId}" />
-			</form>
-		</section>	  		
+		</div>	  		
 		
 		<div id="search-window" style="display:none;">		
 			<div class="container layout">					

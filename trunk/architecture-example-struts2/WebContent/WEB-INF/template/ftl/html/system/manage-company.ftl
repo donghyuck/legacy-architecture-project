@@ -1,13 +1,15 @@
 <#ftl encoding="UTF-8"/>
-<html decorator="secure">
+<html decorator="secure-metro">
 <head>
 		<title>회사 관리</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',	
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
+			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
+			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',		       	    
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.ui.js'
@@ -35,7 +37,10 @@
                             { collapsible: true, collapsed: true, min: "500px" }
                         ]
                  }).data("kendoSplitter");
-               
+                 
+                $("#splitter").css( "height", $(document).height() );
+                $("#list_pane").css( "height", $(document).height() );
+                
 				var company_grid = $("#company-grid").kendoGrid({
 					dataSource: {	
 						transport: { 
@@ -70,7 +75,7 @@
 					filterable: true,
 					editable: "inline",
 					selectable: 'row',
-					height: 600,
+					height: 650,
 					batch: false,
 					toolbar: [ { name: "create", text: "회사 추가" }, { name: "view-roles", text: "롤 정보보기", className: "viewRoleCustomClass" }, { name: "view-menu", text: "메뉴관리", className: "viewMenuCustomClass" },
 						{ name: "group-mgmt", text: "그룹관리", className: "goGroupMainCustomClass" }, { name: "user-mgmt", text: "사용자관리", className: "goUserMainCustomClass" } ],                    
@@ -249,6 +254,8 @@
 						}   
 					}	                    
 				}).css("border", 0);
+				
+				
 
 				$('#company-grid').find(".goGroupMainCustomClass").click( function(){			
 					$("form[name='fm1']").attr("action", "main-group.do" ).submit(); 
@@ -422,28 +429,16 @@
 		}]);
 		-->
 		</script> 		 
-		<style>						
-
- 			#group-details .k-content 
-		    {
-		        height: "100%";
-		    }			
-			
-			#group-details .k-content 
-		    {
-		        height: "100%";
-		        overflow: auto;
-		    }
-		    			
+		<style>
+	    			#list_pane{height:700px;}
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
 		<!-- END HEADER -->
 		<!-- START MAIN CONTENT -->		
-		<div class="container layout">
+		<div class="container">
 			<div class="row">
-				<div class="col-12 col-lg-12">
 					<div id="splitter">
 						<div id="list_pane">
 							<div id="company-grid"></div>		
@@ -452,7 +447,6 @@
 							<div id="company-details"></div>
 						</div>
 					</div>		
-				</div>
 			</div>
 		</div>	
 		<div id="account-panel"></div>				
