@@ -33,14 +33,15 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 	@Override
 	public String execute() throws Exception {
 		
-		if( !StringUtils.isEmpty(view) && view.equals( VIEW_HOMEPAGE ) )
-			return VIEW_HOMEPAGE;
+		if( StringUtils.isEmpty(view)){
+			return getApplicationProperty("view.html.main", SUCCESS);
+		}else{
+			if( view.equals( VIEW_HOMEPAGE ) )
+				return VIEW_HOMEPAGE;
 		
-		if( !StringUtils.isEmpty(view) && view.equals( VIEW_PERSONALIZED ) )
-			return VIEW_PERSONALIZED;
-		
-		log.debug("main action called!!");
-		
+			if(view.equals( VIEW_PERSONALIZED ) )
+				return VIEW_PERSONALIZED;	
+		}
 		return SUCCESS;
 	}
 

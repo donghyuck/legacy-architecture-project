@@ -23,6 +23,7 @@ import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.util.OutputFormat;
 import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuComponent;
@@ -104,9 +105,11 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			if( menuRepository != null ){
 				Menu menu;
 				menu = menuRepository.getMenu(1);		
-				if( !isGuest() ){
+				if( getUser().getCompany()!=null ){
 					String menuIdStr =StringUtils.defaultIfEmpty( getUser().getCompany().getProperties().get("menuId"), "1" );	
+					log.debug("menuId : " + menuIdStr );
 					long menuId = Long.parseLong( menuIdStr );
+					
 					if( menuId != menu.getMenuId() ){
 						menu = menuRepository.getMenu(menuId);		
 					}
@@ -150,6 +153,12 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
         
        return SUCCESS;
 	}
+    
+    
+    public final Company getCompany(){
+    	User user = getUser();
+    	return user.getCompany();
+    }
 	
 	public final User getUser() {
 
@@ -176,9 +185,22 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 	}
 
 	protected final <T> T getComponent(String requiredName, Class<T> requiredType)
-			throws ComponentNotFoundException {
+			throws ComponentNotFoundException {	
 		return WebApplicationHelper.getComponent(requiredName, requiredType);
 	}
+	
+	protected final String getApplicationProperty(String name, String defaultValue){		
+		return ApplicationHelper.getApplicationProperty(name, defaultValue);
+	}
+	
+	protected final boolean getApplicationBooleanProperty(String name, boolean defaultValue){
+		return ApplicationHelper.getApplicationBooleanProperty(name, defaultValue);
+	}
+	
+	protected final  int getApplicationIntProperty(String name, int defaultValue){		
+		return ApplicationHelper.getApplicationIntProperty(name, defaultValue);
+	}
+	
 	
 	public HttpServletRequest getRequest() {
 		return request;
@@ -226,6 +248,8 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			page.append('?').append(queryString);		
 		return page.toString();
 	}
+	
+	
 	
 	public boolean acceptableParameterName(String parameterName) {
 		return !parameterName.contains(".");
