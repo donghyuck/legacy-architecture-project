@@ -19,9 +19,8 @@
 			success : function(response){
 				if( response.error ){ 												
 					options.fail(response) ;
-				} else {					
-					var company = new Company (response.targetCompany);	
-					options.success(company) ;					
+				} else {
+					options.success(response) ;
 				}
 			},
 			error:options.error || handleKendoAjaxError,
