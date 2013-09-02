@@ -54,7 +54,8 @@
 			Widget.fn.init.call(that, element, options);
 			options = that.options;		
 			that.render(options);			
-			element.click($.proxy( that._open, this ));					
+			element.click($.proxy( that._open, this ));				
+			
 		},
 		events : {
 			
@@ -71,7 +72,7 @@
 			var that = this;
 			dataSource.fetch(function(){
 				var items = dataSource.data();
-				content.html( options.template( items ) );	
+				content.append( options.template( items ) );	
 				content.find('ul').first().kendoMenu({
  					orientation :  "vertical", // "horizontal",
  					select: function(e){	
@@ -81,8 +82,13 @@
  							setTimeout( function(){ that._open(); }, 300);
  						}
 					}
- 				});				
-			});	
+ 				});	
+				if( options.doAfter != null ){
+					options.doAfter(content);    					
+				}	
+			});
+		
+
 		},
 		// Function that controls opening of the pageslide
 		_open: function (e){

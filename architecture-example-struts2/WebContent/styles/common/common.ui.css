@@ -35,6 +35,23 @@ body {
 	z-index: 1;
 }
 
+.fluid-container {
+	padding-left: 0px;
+	padding-right: 0px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.scrollable {
+	left:0px;
+	top:0px;
+	right:0px;
+	bottom:0px;
+	position:absolute;
+	overflow-x:hidden;
+	overflow-y:auto;
+}
+/*
 .content {
 	position: absolute;
 	margin-top: 25px;
@@ -48,7 +65,7 @@ body {
 	padding: 0;
 	z-index: 0;
 }
-
+*/
 /** block */
 
 .round-block  {
@@ -249,7 +266,7 @@ list-style: none;
 }
 
 header .k-icon {
-	background-image: url('../kendo/MetroBlack/sprite.png');
+	background-image: url('../kendo/Metro/sprite.png');
 }
 
 header .button {
