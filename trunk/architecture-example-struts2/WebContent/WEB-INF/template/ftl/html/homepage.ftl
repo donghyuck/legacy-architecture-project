@@ -172,14 +172,13 @@
 								    	 e.data = {};														    								    	 		    	 
 								    },
 								    success : function(e) {								    
-								    	if( e.response.targetAttachment ){
-								    		e.response.targetAttachment.attachmentId;
-								    		// LIST VIEW REFRESH...
-								    		$('#attachment-list-view').data('kendoListView').dataSource.read(); 
-								    	}				
-								    }					   
-							});
-													
+										if( e.response.targetAttachment ){
+											e.response.targetAttachment.attachmentId;
+											// LIST VIEW REFRESH...
+											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+										}				
+									}					   
+							});													
 						}								
 					}
 					$(this).tab('show')
@@ -190,7 +189,26 @@
 		}]);	
 		
 		<#if !action.user.anonymous >
-		function openPreviewWindow( item ){
+		function openPreviewWindow( item ){					
+			var template = kendo.template($('#image-view-template').html());
+			$('#image-view-panel').html( template(item) );	
+			kendo.bind($("#image-view-panel"), item );
+			if( $('#image-view-panel').hasClass('hide') ){
+				$('#image-view-panel').removeClass('hide');
+			}			
+			if( !$('#notice-view-panel').hasClass('hide') ){
+				$('#notice-view-panel').addClass("hide");
+			}
+			$('#image-view-btn-close').click(function(){
+				if( $('#notice-view-panel').hasClass('hide') ){
+					$('#notice-view-panel').removeClass('hide');
+				}					
+				if( !$('#image-view-panel').hasClass('hide') ){
+					$('#image-view-panel').addClass('hide');
+				}				
+			} );
+			
+			/**		
 			if(! $("#attach-window").data("kendoWindow")){
 				$("#attach-window").kendoWindow({
 					actions: ["Minimize", "Maximize", "Close"],
@@ -213,7 +231,8 @@
 				top: 5,
 				left: 5
 			 });
-			attachWindow.open();		
+			attachWindow.open();
+			*/
 		}			
 		</#if>		
 		-->
@@ -280,16 +299,16 @@
 
 		.attach p {
 			color: #ffffff;
-            font-weight: normal;
-            padding: 0 10px;
-             font-size: 12px;
+			font-weight: normal;
+			padding: 0 10px;
+			font-size: 12px;
         }
 		.k-listview:after, .attach dl:after {
-            content: ".";
-            display: block;
-            height: 0;
-            clear: both;
-            visibility: hidden;
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
         }
         .k-pager-wrap {
         	border : 0px;
@@ -341,10 +360,10 @@
 					</ul>				
 					<ul class="nav navbar-nav navbar-right">
 						<li>
-						<div id="account-panel"></div> 
+							<div id="account-panel"></div> 
 						</li>
 						<li>
-						<p class="navbar-text"></p>
+							<p class="navbar-text"></p>
 						</li>
 					</ul>
 				</nav>
@@ -401,7 +420,7 @@
 		<div id="wrap">
 			<div class="container layout">		
 				<div class="row">
-					<div class="col-lg-8">
+					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-default">
 							<div class="panel-heading">알림</div>
 							<div class="panel-body">
@@ -409,7 +428,10 @@
 								<p>포도소프트는 .. </p>
 							</div>
 						</div>
-					</div>
+					</div>							
+					
+					<div id="image-view-panel" class="col-lg-8 hide"></div>
+										
 					<div class="col-lg-4">					
 						<#if !action.user.anonymous >
 						<ul class="nav nav-tabs" id="myTab">
