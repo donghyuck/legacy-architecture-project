@@ -1,3 +1,55 @@
+<script type="text/x-kendo-template" id="image-view-template">
+	<div class="panel panel-default">
+		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
+		<div class="panel-body">
+			#if (contentType.match("^image") ) {#
+			<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-rounded img-responsive"/>
+			# } else { #		
+				<div class="k-grid k-widget" style="width:100%;">
+					<div style="padding-right: 17px;" class="k-grid-header">
+						<div class="k-grid-header-wrap">
+							<table cellSpacing="0">
+								<thead>
+									<tr>
+										<th class="k-header">속성</th>
+										<th class="k-header">값</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<div style="height: 199px;" class="k-grid-content">
+						<table style="height: auto;" class="system-details" cellSpacing="0">
+							<tbody>
+								<tr>
+									<td>파일</td>
+									<td>#= name #</td>
+								</tr>
+								<tr class="k-alt">
+									<td>종류</td>
+									<td>#= contentType #</td>
+								</tr>
+								<tr>
+									<td>크기(bytes)</td>
+									<td>#= size #</td>
+								</tr>				
+								<tr>
+									<td>다운수/클릭수</td>
+									<td>#= downloadCount #</td>
+								</tr>											
+							</tbody>
+						</table>	
+					</div>
+				</div>
+			# } #  	
+			<p class="blank-top-5">
+				<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
+				<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>					
+			</p>					
+		</div>
+	</div>
+</script>
+
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
 		#:name#
