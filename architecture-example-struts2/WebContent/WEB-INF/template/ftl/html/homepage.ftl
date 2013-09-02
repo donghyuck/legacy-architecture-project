@@ -7,6 +7,7 @@
 		yepnope([{
 			load: [			
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
@@ -424,36 +425,35 @@
 									</div>
 								</div>	
 							</div>
-							<div class="tab-pane" id="my-attachments">
-							
+							<div class="tab-pane" id="my-attachments">							
 								<div class="container">
-									<div class="row blank-top-5 layout">
-										<ul id="attachment-list-view-filter" class="nav nav-pills">
-											<li class="active">
-												<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
-											</li>
-											<li>
-												<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
-											</li>
-											<li>
-												<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
-											</li>									  
-										</ul>
-									</div>								
 									<#if !action.user.anonymous >	
 									<div class="row blank-top-5">
 										<input name="uploadAttachment" id="attachment-files" type="file" />
 									</div>	
 									</#if>
-									<div class="panel panel-default">
-									<div class="panel-body">
-									<div class="row blank-top-5">
-										<div class="col-lg-12" align="center"><div id="attachment-list-view" ></div></div>
-									</div>									
-									<div class="row">
-										<div class="col-lg-12" align="center"><div id="pager" class="k-pager-wrap"></div></div>
-									</div>
-									</div>	
+									<div class="panel panel-default">									
+										<div class="panel-heading">
+											<ul id="attachment-list-view-filter" class="nav nav-pills">
+												<li class="active">
+													<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
+												</li>
+												<li>
+													<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
+												</li>
+												<li>
+													<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
+												</li>									  
+											</ul>										
+										</div>
+										<div class="panel-body">
+											<div class="row blank-top-5">
+												<div class="col-lg-12" align="center"><div id="attachment-list-view" ></div></div>
+											</div>									
+											<div class="row">
+												<div class="col-lg-12" align="center"><div id="pager" class="k-pager-wrap"></div></div>
+											</div>
+										</div>	
 									</div>
 								</div>														
 							</div>						
@@ -497,14 +497,9 @@
 			</div>
 		</script>		
 		<script id="attachment-preview-template" type="text/x-kendo-template">	
-			#if (contentType.match("^image") ) {#
-				
-					<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" style="border:0;" class="img-rounded img-responsive" />
-					<!--
-					<a class="left carousel-control" ><span class="glyphicon glyphicon-chevron-left"></span></a>
-					<a class="right carousel-control" ><span class="glyphicon glyphicon-chevron-right"></span></a>
-					-->
 			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 				<p class="blank-top-5">
 						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
 						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>					

@@ -43,30 +43,40 @@
 		</script>
 
 	    <script id="top-menu-template" type="text/x-kendo-template">	    
-	    <ul id="top-menu">
-	    	# for (var i = 0; i < data.length; i++) { #
-	    	# var item =data[i] ; #
-	    	<li>#= item.title #
-		    	#if ( item.components.length > 0) { #	    			      	
-		    	<ul>
-		    	# for ( var j = 0 ; j <item.components.length ; j ++ ) { #
-		    	# var sub_item =item.components[j] ; #
-		    		#if (sub_item.page != 'null' && sub_item.page != '')  { #<li action="#=sub_item.page#" description="#=sub_item.description#" ># } else { #<li># } # 
-					#= sub_item.title #
-		    		#if ( sub_item.components.length > 0) { #	
-		    			<ul>
-		      	 		# for ( var k = 0 ; k <sub_item.components.length ; k ++ ) { #	 	
-		      	 		# var sub_sub_item =sub_item.components[k] ; #
-		      	 			#if (sub_sub_item.page != 'null' && sub_sub_item.page != '')  { #<li action="#=sub_sub_item.page#" description="#=sub_sub_item.description#" ># } else { #<li># } #
-		      	 			#= sub_sub_item.title #</li>
-		      	 		# } #
-		    			</ul>	
-		    		# } #
-		    		</li>
-		    	# } #	
-		    	</ul>		
-		      	# } #
-	        </li>
-	        # } #
-	    </ul>    
+			<div class="panel panel-default">
+				<div class="panel-heading">
+				회사
+				</div>
+				<div class="panel-body">
+					<input id="companyList" style="width:100%" value="${action.company.companyId}" />
+				</div>
+			</div>
+			
+			<ul id="top-menu">
+		    	# for (var i = 0; i < data.length; i++) { #
+		    	# var item =data[i] ; #
+		    	<li>#= item.title #
+			    	#if ( item.components.length > 0) { #	    			      	
+			    	<ul>
+			    	# for ( var j = 0 ; j <item.components.length ; j ++ ) { #
+			    	# var sub_item =item.components[j] ; #
+			    		#if (sub_item.page != 'null' && sub_item.page != '')  { #<li action="#=sub_item.page#" description="#=sub_item.description#" ># } else { #<li># } # 
+						#= sub_item.title #
+			    		#if ( sub_item.components.length > 0) { #	
+			    			<ul>
+			      	 		# for ( var k = 0 ; k <sub_item.components.length ; k ++ ) { #	 	
+			      	 		# var sub_sub_item =sub_item.components[k] ; #
+			      	 			#if (sub_sub_item.page != 'null' && sub_sub_item.page != '')  { #<li action="#=sub_sub_item.page#" description="#=sub_sub_item.description#" ># } else { #<li># } #
+			      	 			#= sub_sub_item.title #</li>
+			      	 		# } #
+			    			</ul>	
+			    		# } #
+			    		</li>
+			    	# } #	
+			    	</ul>		
+			      	# } #
+		        </li>
+		        # } #
+		    </ul>    
+			
 	    </script>		
