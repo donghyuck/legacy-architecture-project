@@ -15,19 +15,26 @@
  */
 package architecture.user.security.authentication.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
+import architecture.ee.util.ApplicationHelper;
+import architecture.user.CompanyManager;
 import architecture.user.security.authentication.AuthenticationProvider;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 
 public class AuthenticationProviderFactoryImpl implements AuthenticationProviderFactory.Implementation {
 
+	private static final Log log = LogFactory.getLog(AuthenticationProviderFactoryImpl.class);
+	
 	private SecurityContextAuthenticationProvider instance = new SecurityContextAuthenticationProvider();
 	
 	public AuthenticationProvider getSecurityContextAuthenticationProvider() {
@@ -51,7 +58,7 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 					return ((ExtendedUserDetails)obj).getUser();
 			} catch (Exception ignore) {
 			}			
-			return new AnonymousUser();
+			return  createAnonymousUser();
 		}
 
 		public AuthToken getAuthToken() {		
@@ -62,7 +69,19 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 					return (AuthToken)obj;
 			} catch (Exception ignore) {
 			}		
-			return new AnonymousUser();
+			return createAnonymousUser();
+		}
+		
+		protected AnonymousUser createAnonymousUser(){
+			
+			try {
+				String companyIdStr = ApplicationHelper.getApplicationProperty("components.user.anonymous.company.id", "1");
+				Company company = ApplicationHelper.getComponent(CompanyManager.class).getCompany(Long.parseLong(companyIdStr));				
+				return new AnonymousUser( company );
+			} catch (Exception e) {
+				log.error(e);
+				return new AnonymousUser();
+			}			
 		}
 
 		public boolean isSystemAdmin() {
