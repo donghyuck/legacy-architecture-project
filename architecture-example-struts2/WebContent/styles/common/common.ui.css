@@ -4,7 +4,12 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
+/* body */
 
+/* Bootstrap customize---------------------- */
+.page-header {
+	margin: 15px 0 15px;	
+}
 /* Naver nanumgothic font ---------------------- */
 @font-face {
 	font-family: "BM_NANUMGOTHIC";
@@ -120,6 +125,10 @@ a.k-link:hover {
 */
 
 /** SPACE */
+.blank-top-0 {
+	padding-top: 0px;	
+}
+
 .blank-top-5 {
 	padding-top: 5px;	
 }
