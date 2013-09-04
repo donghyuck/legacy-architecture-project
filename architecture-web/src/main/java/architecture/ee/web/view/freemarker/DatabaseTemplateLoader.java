@@ -21,6 +21,7 @@ import java.io.IOException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
 import architecture.ee.util.ApplicationHelper;
 import freemarker.cache.FileTemplateLoader;
@@ -47,22 +48,31 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	public Object findTemplateSource(String name) throws IOException {
 		
 		boolean customized = isCustomizedEnabled();
+		
 		if( !customized )
 		{
 			return null;
 		}
 		
 		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;
+		
 		if(nameToUse.charAt(0) == File.separatorChar ){
-			nameToUse = File.separatorChar + SecurityHelper.getUser().getCompany().getName() + nameToUse ;
+			nameToUse = File.separatorChar + getCurrentCompany().getName() + nameToUse ;
 		}else{
-			nameToUse = File.separatorChar + SecurityHelper.getUser().getCompany().getName() + File.separatorChar + nameToUse ;
+			nameToUse = File.separatorChar + getCurrentCompany().getName() + File.separatorChar + nameToUse ;
 		}
+		
+		
 		log.debug( name + ">" + nameToUse );
+		
 		return super.findTemplateSource(nameToUse);
 	}
 	
 	protected final boolean isCustomizedEnabled(){		
 		return ApplicationHelper.getApplicationBooleanProperty("view.html.customize.enabled", false);
+	}
+	
+	protected final Company getCurrentCompany(){
+		return SecurityHelper.getUser().getCompany();
 	}
 }

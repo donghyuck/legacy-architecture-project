@@ -86,14 +86,16 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	public void afterPropertiesSet() throws IOException, TemplateException {
 		if (this.configuration == null) {			
 			
-			
+			logger.debug( "template customized enabled : " + isCustomizedEnabled() );			
 			if( isCustomizedEnabled() ){
 				File home = getCustomizedTemplateHome();
+				logger.debug( "template customized home : " + home.getAbsolutePath() );
 				if( home != null ){
 					DatabaseTemplateLoader templateLoader = new DatabaseTemplateLoader(home);
-					setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
+					this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
 				}				
 			}
+			
 			this.configuration = createConfiguration();
 		}
 	}
