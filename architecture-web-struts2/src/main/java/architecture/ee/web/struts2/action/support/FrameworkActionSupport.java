@@ -161,9 +161,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
     }
 	
 	public final User getUser() {
-
-		log.debug( this.authProvider);
-		
+		log.debug( this.authProvider);		
 		if (null == user)
 			try {
 				final User ju = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getUser();

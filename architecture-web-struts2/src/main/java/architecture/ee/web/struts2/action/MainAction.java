@@ -34,7 +34,7 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 	public String execute() throws Exception {
 		
 		if( StringUtils.isEmpty(view)){
-			return getApplicationProperty("view.html.main", SUCCESS);
+			return getApplicationProperty("view.html.page.main", SUCCESS);
 		}else{
 			if( view.equals( VIEW_HOMEPAGE ) )
 				return VIEW_HOMEPAGE;

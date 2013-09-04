@@ -70,7 +70,6 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 	        {
 	        	ExtendedFreemarkerManager.log.warn("Freemarker template exception. ", te);
 	        }
-	        
 	   };
 	   
 	   
@@ -161,7 +160,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
 			model.put("ServletUtils",             staticModels.get("architecture.ee.web.util.ServletUtils"));
 			model.put("ParamUtils",             staticModels.get("architecture.ee.web.util.ParamUtils"));
-			model.put("SecurityHelper",         staticModels.get("architecture.user.util.SecurityHelper"));
+			model.put("SecurityHelper",         staticModels.get("architecture.common.user.SecurityHelper"));
 			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));							
 			model.put("WebApplicationHelper",     staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
 		} catch (TemplateModelException e) {
@@ -172,9 +171,11 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 	@Override
     protected TemplateLoader createTemplateLoader(ServletContext servletContext, String templatePath) {
-        
-	    log.debug("templatePath:" + templatePath );
-	    return freeMarkerConfig.getConfiguration().getTemplateLoader();	    
+		TemplateLoader loader = freeMarkerConfig.getConfiguration().getTemplateLoader();	  
+	    //log.debug("templatePath:" + templatePath );
+	    //log.debug("loader:" + loader.getClass().getName() );
+	    
+	    return loader;	    
         //return super.createTemplateLoader(servletContext, templatePath);	    
     }
 
