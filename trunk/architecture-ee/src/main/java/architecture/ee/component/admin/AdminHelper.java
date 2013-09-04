@@ -154,11 +154,13 @@ public final class AdminHelper {
 		return getCacheManager().getCache(name);		
 	}	
 	
+	
 	public static String getLocalizedMessage(String code, Object[] args, Locale locale){		
 		Locale localeToUse = locale ;
 		if(localeToUse==null)
 			localeToUse = getConfigService().getLocale();		
 		SpringAdminService adminService = (SpringAdminService)getAdminService();
+
 		if(isReady()){
 			return adminService.getApplicationContext().getMessage(code, args, localeToUse);
 		}else{ 

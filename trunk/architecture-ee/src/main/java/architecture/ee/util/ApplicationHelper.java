@@ -18,10 +18,8 @@ package architecture.ee.util;
 import groovy.lang.GroovyClassLoader;
 
 import java.lang.ref.WeakReference;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
@@ -29,7 +27,8 @@ import java.util.TimeZone;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.poi.ss.formula.functions.T;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;
@@ -40,7 +39,6 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
-import architecture.common.lifecycle.service.AdminService;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
@@ -91,6 +89,11 @@ public final class ApplicationHelper {
 	public static void autowireComponent(Object obj){
 		ApplicationHelperFactory.getApplicationHelper().autowireComponent(obj);
 	}	
+	
+	public static Resource getResource( String path ){
+		SpringAdminService adminService = (SpringAdminService)AdminHelper.getAdminService();		
+		return adminService.getApplicationContext().getResource(path);
+	}
 	
 	public static License getLicense(){
 	    return AdminHelper.getLicense();	
@@ -161,11 +164,13 @@ public final class ApplicationHelper {
 		
 		ConfigService config = getConfigService();		
 		String propValue = config.getLocalProperty(name, null);	
+		
 		if(isReady()){
 			String str = config.getApplicationProperty(name, null);			
 			if( !StringUtils.isEmpty( str ))
 				propValue = str;			
 		}		
+		
 		if( propValue == null)
 			propValue = defaultValue ;		
 		return propValue ;
