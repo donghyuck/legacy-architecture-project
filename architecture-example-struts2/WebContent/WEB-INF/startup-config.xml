@@ -17,14 +17,22 @@ PC9saWNlbnNlPg==</file>
 	</license>
 	<view>
 		<html>
-			<main>homepage</main>			
+			<page>
+				<main>homepage</main>
+			</page>
+			<customize>
+				<enabled>true</enabled>
+				<source>
+					<location>/WEB-INF/template/custom/ftl/</location>
+				</source>
+			</customize>
 		</html>
 		<render>
 			<freemarker>
                 <debug>true</debug>
                 <enabled>true</enabled>
                 <source>
-                    <location>/WEB-INF/template/ftl/</location>
+                    <location>/WEB-INF/template/global/ftl/</location>
                 </source>
 			</freemarker>
 			<velocity>
