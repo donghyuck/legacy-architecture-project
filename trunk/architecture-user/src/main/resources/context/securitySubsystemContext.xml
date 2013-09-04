@@ -21,6 +21,7 @@
     <security:http pattern="/favicon.ico"             security="none" />
     <security:http pattern="/decorators/**"          security="none" /> 
     <security:http pattern="/images/**"              security="none" />
+    <security:http pattern="/fonts"               security="none" />
     <security:http pattern="/includes/**"             security="none" /> 
     <security:http pattern="/js/**"                      security="none" />
     <security:http pattern="/styles/**"                 security="none" />
@@ -28,7 +29,6 @@
     <security:http pattern="/500.jsp*"                 security="none" />
     <security:http pattern="/login.jsp*"               security="none" />
      <security:http pattern="/stream/*"               security="none" />
-     
      <security:http pattern="/accounts/login.do*"               security="none" />
      <!--
      <security:http pattern="/accounts/sso/**"                  security="none" />
@@ -41,10 +41,10 @@
     <security:http pattern="/index.jsp"                security="none" />
     
     <security:http entry-point-ref="authenticationEntryPoint">    	
-        <security:intercept-url pattern="/main.do*"                access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
-        <security:intercept-url pattern="/accounts/*"   access="IS_AUTHENTICATED_ANONYMOUSLY" />    
+        <security:intercept-url pattern="/main.do*"            access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
+        <security:intercept-url pattern="/accounts/*"          access="IS_AUTHENTICATED_ANONYMOUSLY" />    
         <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/**"                          access="ROLE_USER" />    	
+        <security:intercept-url pattern="/**"                      access="ROLE_USER" />    	
         
         <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />

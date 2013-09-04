@@ -16,6 +16,8 @@
 package architecture.user.util;
 
 import architecture.common.user.Company;
+import architecture.common.user.SecurityHelper;
+import architecture.common.user.User;
 import architecture.ee.util.ApplicationHelper;
 import architecture.user.CompanyManager;
 import architecture.user.CompanyNotFoundException;
@@ -26,11 +28,8 @@ public class CompanyUtils {
 	public static Company getCompany(long companyId) throws CompanyNotFoundException{
 		if(companyId == -1L ){
 			return new CompanyImpl();
-		}
-		
+		}		
 		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
-		return companyManger.getCompany(companyId);
-		
-	}
-
+		return companyManger.getCompany(companyId);		
+	}	
 }

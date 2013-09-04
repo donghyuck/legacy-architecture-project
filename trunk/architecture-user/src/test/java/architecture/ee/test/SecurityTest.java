@@ -86,13 +86,16 @@ public class SecurityTest {
 		Permissions perms8 = new Permissions(128L);
 		Permissions perms9 = new Permissions(256L);
 		
+		//long i = 0x0000000000000000000000000000000010000000000000000000000000000001;
+		
+		//System.out.println(">>" + i );
 		
 		Permissions perms = new Permissions(0x000000000000000L);
 		perms.set(perms1.value(), true);
 		perms.set(perms2.value(), true);
 		perms.set(perms3.value(), true);
 		perms.set(perms6.value(), true);
-		perms.set(perms7.value(), true);
+		//perms.set(perms7.value(), true);
 		perms.set(perms8.value(), true);
 		perms.set(perms9.value(), true);
 		
@@ -100,7 +103,7 @@ public class SecurityTest {
 		log.debug(perms.hasPermission(perms5.value()));
 		log.debug(perms.hasPermission(perms7.value()));
 		
-		log.debug(perms.value());
+		System.out.println(perms.value());
 		
 	}
 }

@@ -6,12 +6,12 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import architecture.common.user.SecurityHelper.Implementation;
 import architecture.common.user.User;
 import architecture.common.user.User.Status;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
-import architecture.user.util.SecurityHelper.Implementation;
 
 
 public class SecurityHelperImpl implements Implementation {
@@ -37,8 +37,7 @@ public class SecurityHelperImpl implements Implementation {
 
 	public User getUser() {
 		try {
-			SecurityContext context = SecurityContextHolder.getContext();
-			Authentication authen = context.getAuthentication();
+			Authentication authen = getAuthentication();
 			Object obj = authen.getPrincipal();
 			if ( obj instanceof ExtendedUserDetails )
 				return ((ExtendedUserDetails)obj).getUser();
