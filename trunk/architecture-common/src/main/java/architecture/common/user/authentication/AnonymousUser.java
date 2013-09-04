@@ -35,6 +35,7 @@ public class AnonymousUser implements AuthToken, User {
 	
 	public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
 	
+	private Company company  = null;
 	/**
 	 */
 	private String username ;
@@ -46,8 +47,11 @@ public class AnonymousUser implements AuthToken, User {
 
 	public AnonymousUser(String username, String password) {
 	}
-	
-	
+
+	public AnonymousUser(Company company) {
+		this.company = company;
+	}
+		
 	public Object getPrimaryKey() {		
 		return getUserId();
 	}
@@ -215,7 +219,7 @@ public class AnonymousUser implements AuthToken, User {
 
 
 	public Company getCompany() {
-		return null;
+		return company;
 	}
 
 
