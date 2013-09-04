@@ -288,8 +288,7 @@
 				  targetUserAttachments.*
 				</param>
 			</result>	
-		</action>	
-		
+		</action>			
 		<action name="delete-user-attachment" method="deleteAttachment" class="architecture.user.web.struts2.action.admin.ajax.AttachmentManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -324,7 +323,16 @@
 				</param>
 			</result>
 		</action>
-				
+		<action name="get-company"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <!-- <param name="excludeProperties">targetCompany.properties</param>-->
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetCompany.*
+				</param>
+			</result>		
+		</action>				
 		<action name="create-company" method="createCompany"  class="architecture.user.web.struts2.action.admin.ajax.CompanyManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
