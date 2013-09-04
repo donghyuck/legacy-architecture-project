@@ -319,58 +319,9 @@
 	<body id="doc">
 		<!-- START HEADER -->
 		<div class="header">
-		<!-- START MENU -->	
-		<#if action.getMenuComponent("USER_MENU") ?? >
-		<#assign menu = action.getMenuComponent("USER_MENU") />
-			<div class="container"  style="width: auto;">		
-				<nav class="navbar navbar-inverse" role="navigation">
-					<#if action.user.company ?? >
-					<div class="navbar-header">
-						<a class="navbar-brand" href="#">${action.user.company.displayName }</a>
-					</div>			
-					</#if>												
-					<ul class="nav navbar-nav">
-						<#list menu.components as item >
-						<#if  item.components?has_content >
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}<b class="caret"></b></a>
-								<ul class="dropdown-menu">
-								<#list item.components as sub_item >
-									<#if sub_item.components?has_content >
-										<li class="dropdown-submenu">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
-											<ul class="dropdown-menu">
-												<#list sub_item.components as sub_sub_item >
-												<li><a href="#">${ sub_sub_item.title }</a></li>
-												</#list>
-											</ul>
-										</li>
-									<#else>								
-										<li><a href="#">${sub_item.title}</a></li>
-									</#if>								
-								</#list>
-								</ul>
-							</li>
-						<#else>
-							<li>
-								<a href="#">${item.title}</a>
-							</li>
-						</#if>
-						</#list>
-					</ul>				
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-							<div id="account-panel"></div> 
-						</li>
-						<li>
-							<p class="navbar-text"></p>
-						</li>
-					</ul>
-				</nav>
-			</#if>		
-			</div>
-		<!-- END MENU -->	
+		<#include "/html/common/common-homepage-menu.ftl" >	
 		</div>
+		<!-- END HEADER -->
 		<div class="container">
 			<div id="myCarousel" class="carousel slide">
 			<!-- Indicators -->
