@@ -28,7 +28,7 @@
 					template : kendo.template($("#account-template").html()),
 					afterAuthenticate : function(){
 						$('.dropdown-toggle').dropdown();
-						Holder.run();
+						//Holder.run();
 						
 						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
@@ -71,29 +71,56 @@
 
 		</style>   	
 	</head>
-	<body id="osx">
+	<body id="doc">
 		<!-- START HEADER -->
 		<div class="header">
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		</div>
 		<!-- END HEADER -->			
 		<!-- START MAIN CONTENT --> 
-		<div id="wrap">
-			<div class="container">		
+		<div id="wraps">
+			<div class="container layout">		
 				<div class="row">
 					<div class="col-lg-12">												
-						<div class="page-header">
+								<div class="page-header">
 						  	<img src="http://images.apple.com/ios/images/product_title.png"/>
 						</div>						
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">												
+					<div class="col-lg-8">												
 						<img src="http://www.inkium.com/homepage/consulting/img/01.jpg" alt="..." class="img-rounded">
 						<img src="http://www.inkium.com/homepage/consulting/img/02.jpg" alt="..." class="img-rounded">
 						<img src="http://www.inkium.com/homepage/consulting/img/03.jpg" alt="..." class="img-rounded">
 						<img src="http://www.inkium.com/homepage/consulting/img/04.jpg" alt="..." class="img-rounded">
 					</div>
+					<div class="col-lg-4">
+						<div class="panel panel-default">
+							<div class="panel-heading">Panel heading without title</div>
+							<div class="panel-body">
+							Panel content
+							</div>
+						</div>
+						<div class="panel panel-default" id="my-messages">
+							<div class="panel-heading">뉴스</div>					
+							<div class="panel-body">						
+								<div class="popover right" style="display:true;">
+									<div class="arrow"></div>
+									<!--<h3 class="popover-title">알림</h3>-->
+									<div class="popover-content">
+										<p>새로운 메시지가 없습니다.</p>
+									</div>
+								</div>
+								<div class="popover left" style="display:true;">
+									<div class="arrow"></div>
+									<!--<h3 class="popover-title">알림</h3>-->
+									<div class="popover-content">
+										<p>새로운 메시지가 없습니다.</p>
+									</div>
+								</div>										
+							</div>
+						</div>													
+					</div>		
 				</div>
 			</div>		
 		</div>		
