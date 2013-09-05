@@ -4,9 +4,10 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-    <constant name="struts.devMode" value="true" />
-    <include file="struts-framework-default.xml"/>	
-    <include file="struts-framework-user.xml"/>	 
-    <include file="struts-framework-system.xml"/>	 
+	<constant name="struts.devMode" value="true" />
+	<include file="struts-framework-default.xml"/>	
+	<include file="struts-framework-user.xml"/>	 
+	<include file="struts-framework-system.xml"/>	 
+	<include file="struts-framework-content.xml"/>	 
 	
 </struts>
