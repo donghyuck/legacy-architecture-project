@@ -1,21 +1,31 @@
 <%@ page pageEncoding="UTF-8"%>
-<html decorator="main">
+<%@ page import="architecture.common.user.*"%>
+<html decorator="homepage">
 <head>
 <title>로그인</title>
+<%
+
+User user = SecurityHelper.getUser();
+Company company = user.getCompany();
+
+%>
 <script type="text/javascript">
 		 yepnope([{
        	  load: [ 
-     			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js',
     			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js',
     			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.web.min.js',
-    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.ko_KR.js',
-    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.min.js',
-    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js' ],
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.ko_KR.js',			
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.0/bootstrap.min.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.0/tooltip.js',			
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/holder.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js',
+    			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
               	  complete: function() {        	              		              		  
               		  
                  	 var templateContent = $("#alert-template").html();
                 	 var template = kendo.template(templateContent);	               		  
-              		 var validator = $("#login-form").kendoValidator().data("kendoValidator");     
+              		 var validator = $("#login-panel").kendoValidator().data("kendoValidator");     
               		 
            		     $("#login").click(function() {           		    	
            		      $("#status").html("");
@@ -60,61 +70,87 @@
 </head>
 <body>
 	<!-- Main Page Content  -->
-  <header>
-    <div class="row">
-      <div class="twelve columns">
-        <h1>로그인</h1>
-        <h4>Foundation is designed to quickly prototype, and one thing we've found very helpful is a series of visibility classes that can be applied to turn things on and off for different device characteristics. On this page, you'll see different elements on different screen sizes or orientations.</h4>
-      </div>
-    </div>
-  </header>
-  	
-	<div class="row">
-		<div class="five columns">
-		</div>
-		<div class="eight columns">				
-		    <div class="row">
-		        <div class="nine columns"></div>
-		   		<div class="three columns"></div>
-		    </div>
-		</div>		
-		<div class="four columns">	
-		    <div  id="login-form" class="panel radius round validator-form">
-			    <form name="fm1" method="POST" accept-charset="utf-8">
-				    <input type="hidden" id="output" name="output" value="json" />		    
-				    <div class="row">
-				        <div class="twelve columns centered" style="padding:10px;">
-				        </div>  
-				    </div>		    
-				    <div class="row">
-				        <div class="twelve columns centered" style="padding:10px;">
-				        <input type="text" id="username" name="username"  class="k-textbox" pattern="[^0-9][A-Za-z]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요." />      
-				        </div>  
-				    </div>
-				    <div class="row">
-				        <div class="twelve columns centered" style="padding:10px;">
-				        <input type="password" id="password" name="password" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
-				        </div>
-				    </div>
-				    <div class="row">
-				        <div class="twelve columns centered" style="padding:10px;">				        
-				        <button type="button" id="login" class="k-button">로그인</button>	
-				        </div>
-				    </div>	
-				    <div class="row">
-				        <div class="twelve columns centered" style="padding:10px;">
-				            <div id="status">				            
-				            </div>
-				        </div>
-				    </div>
-				</form>				    
-		    </div>
+	<!-- 
+	<div class="header">
+		<div class="container"  style="width: auto;">		
+				<nav class="navbar navbar-inverse" role="navigation">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="/main.do"><%= company.getDisplayName()  %></a>
+					</div>														
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#">회원가입</a>
+						</li>
+					</ul>
+				</nav>
 		</div>
 	</div>
-    <script type="text/x-kendo-template" id="alert-template">
-    <div class="alert-box alert">
+	 -->
+	<div class="container layout">	
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="page-header">
+				  <h1>로그인  <small>Subtext for header</small></h1>
+				</div>			
+			</div>
+		</div>		
+		<div class="row">
+			<div class="col-lg-6">
+			
+				<div class="panel panel-default">		
+					<div id="login-panel" class="panel-body">
+						<form name="fm1" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">
+							<input type="hidden" id="output" name="output" value="json" />		    
+						  <div class="form-group">
+						    <label for="username" class="col-lg-2 control-label">아이디</label>
+						    <div class="col-lg-10">
+						      <input type="text" class="form-control"  id="username" name="username"  pattern="[^0-9][A-Za-z]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요.">
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <label for="password" class="col-lg-2 control-label">비밀번호</label>
+						    <div class="col-lg-10">
+						      <input type="password" class="form-control" id="password" name="password"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." >
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-lg-offset-2 col-lg-10">
+						      <div class="checkbox">
+						        <label>
+						          <input type="checkbox">로그인 상태유지  
+						        </label>
+						      </div>
+						    </div>
+						  </div>
+						  <div class="form-group">
+						    <div class="col-lg-offset-2 col-lg-10">
+						      <button id="login" type="button" class="btn btn-primary">로그인</button>
+						    </div>
+						  </div>
+						    <div class="col-lg-12">
+						       <div id="status"></div>
+						    </div>
+						</form>
+					</div>
+					<div class="panel-footer">
+						<div class="btn-group ">
+							<button type="button" class="btn btn-default" >아이디/비밀번호찾기</button>
+							<button type="button" class="btn btn-default">회원가입</button>
+						</div>
+					</div>						
+				</div>
+							
+			</div>
+			<div class="col-lg-6">
+			kkk
+			</div>
+		</div>
+	</div>
+		
+	<script type="text/x-kendo-template" id="alert-template">
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
           #=message#
-        <a href="" class="close">&times;</a>
     </div>
     </script>
     
@@ -142,15 +178,6 @@
 	</STYLE>
 	<!-- End Main Content and Sidebar -->
 	<!-- Start Breadcrumbs -->	    
-	<section class="row">
-	    <div class="twelve columns">
-	        <hr style="margin-top:10px;margin-bottom:10px;" />
-			<ul class="breadcrumbs">
-			  <li><a href="<%= request.getContextPath()  %>/main.do">홈</a></li>
-			  <li class="current"><a href="#">로그인</a></li>
-			</ul>
-		</div>
-	</section>
 	<!-- End Breadcrumbs -->	    	
 </body>
 </html>
