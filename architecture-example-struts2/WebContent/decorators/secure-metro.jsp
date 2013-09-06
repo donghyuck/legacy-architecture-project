@@ -19,7 +19,7 @@
 <style>
 	
 	body {
-		overflow-y : hidden;
+		overflow-y : none;
 	}
 
 	@media only screen and (min-width: 768px) {
