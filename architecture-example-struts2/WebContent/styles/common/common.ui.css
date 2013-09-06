@@ -4,6 +4,13 @@
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 }
+
+.unlayout * {
+	-moz-box-sizing: none;
+	-webkit-box-sizing: none;
+	box-sizing: none;
+}
+
 /* body */
 
 /* Bootstrap customize---------------------- */
