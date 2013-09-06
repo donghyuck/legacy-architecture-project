@@ -87,6 +87,10 @@
 		-->
 		</script> 		 
 		<style>
+			body {
+				overflow-y : hidden;
+			}
+					
 			.container {
 				padding-top : 51px;
 				overflow-y : none;
@@ -111,7 +115,7 @@
 		<!-- START MAIN CONTENT -->		
 		<section class="container">			
 			<div class="row">			
-			<iframe id="main-content-frame" style="width: 100%; height: 100%; background-color: #f5e5c5;" frameborder="0" hspace="0"></iframe>		
+			<iframe id="main-content-frame" style="width: 100%; height: 100%; background-color: #f5e5c5;" frameborder="0"  hspace="0"></iframe>		
 			</div>
 		<section>
 		<!-- END MAIN CONTENT -->					

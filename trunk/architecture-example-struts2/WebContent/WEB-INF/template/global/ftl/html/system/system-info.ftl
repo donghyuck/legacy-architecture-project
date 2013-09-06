@@ -29,7 +29,6 @@
 					}
 				});
 				
-
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/secure/view-system-details.do?output=json',
