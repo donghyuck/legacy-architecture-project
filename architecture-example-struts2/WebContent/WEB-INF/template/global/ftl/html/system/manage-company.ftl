@@ -521,7 +521,7 @@
 				<ul>
 					<li>프로퍼티</li>
 					<li>그룹 정보</li>
-					<li class="k-state-active"> 사용자 정보</li>		                    
+					<li class="k-state-active"> 사용자 정보</li>	
 				</ul>
 				<div>
 					<div id="company-prop-grid" class="props"></div>
