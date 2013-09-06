@@ -15,11 +15,10 @@
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.ui.js'],        	   
             complete: function() {               
-            
-                // 1.  한글 지원을 위한 로케일 설정
-                kendo.culture("ko-KR");
+				
+				// 1.  한글 지원을 위한 로케일 설정
+				kendo.culture("ko-KR");
 		
-
 				// ACCOUNTS LOAD		
 				var currentUser = new User({});
 				var accounts = $("#account-panel").kendoAccounts({
