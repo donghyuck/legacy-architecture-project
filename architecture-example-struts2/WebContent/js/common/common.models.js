@@ -1,3 +1,17 @@
+var Image = kendo.data.Model.define( {
+    id: "imageId", // the identifier of the model
+    fields: {
+    	imageId: { type: "number", editable: false, defaultValue: -1  },   
+    	objectType: { type: "number", editable: false, defaultValue: -1  },    	
+    	objectId: { type: "number", editable: false, defaultValue: -1  },    	
+    	name: { type: "string", editable: true , validation: { required: true }},
+        contentType: { type: "string", editable: false },
+        imageId: { type: "number", editable: false },
+        modifiedDate: { type: "date"},
+        creationDate: { type: "date" } 
+    }
+});
+
 var Attachment = kendo.data.Model.define( {
     id: "attachmentId", // the identifier of the model
     fields: {
