@@ -47,8 +47,13 @@
 				<div class="panel-heading">
 				회사
 				</div>
-				<div class="panel-body">
-					<input id="companyList" style="width:100%" value="${action.company.companyId}" />
+				<div class="panel-body blank-top-5">		
+					<input id="companyList" style="width:100%" value="${action.company.companyId}" />	
+					<div class="row blank-top-5 layout">
+						<div class="col-lg-12">
+							<a class="btn btn-success btn-block" href="${request.contextPath}/main.do">사용자화면 바로가기</a>
+						</div>
+					</div>
 				</div>
 			</div>
 			
