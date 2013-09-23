@@ -27,7 +27,6 @@ import architecture.user.util.CompanyUtils;
  * @author  donghyuck
  */
 public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
-   	
 		
 	private final RowMapper<UserTemplate> userMapper = new RowMapper<UserTemplate>(){
 

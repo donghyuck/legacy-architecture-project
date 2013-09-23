@@ -44,6 +44,7 @@
         <security:intercept-url pattern="/main.do*"            access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/accounts/*"          access="IS_AUTHENTICATED_ANONYMOUSLY" />    
         <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/content/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/**"                      access="ROLE_USER" />    	
         
         <security:request-cache ref="authenticationRequestCache" />        
