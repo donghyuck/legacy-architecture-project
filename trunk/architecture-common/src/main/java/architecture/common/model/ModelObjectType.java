@@ -38,7 +38,8 @@ public enum ModelObjectType {
 	I18N_LOCALE (15, "I18N_LOCALE"),
 	IMAGE ( 16, "IMAGE"),
 	ATTACHMENT ( 17, "ATTACHMENT"),
-	MENU ( 18, "MENU")
+	MENU ( 18, "MENU"),
+	SOCAIL_ACCOUNT ( 19, "SOCAIL_ACCOUNT")
 	
 	;
 	
