@@ -5,7 +5,9 @@
 		<script type="text/javascript">
 		<!--
 		yepnope([{
-			load: [			
+			load: [
+			'css!${request.contextPath}/styles/bootstrap/3.0.0/font-awesome.css',			
+			'css!${request.contextPath}/styles/bootstrap/3.0.0/social-buttons.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -239,7 +241,10 @@
 		</script> 		   
 		
     <style scoped="scoped">
-    	
+
+		.carousel {
+		margin-top: 60px;		
+		}	
 		.k-callout-n {
 		border-bottom-color: #787878;
 		}	
@@ -318,8 +323,8 @@
 	</head>
 	<body id="doc">
 		<!-- START HEADER -->
-		<div class="header">
-		<#include "/html/common/common-homepage-menu.ftl" >	
+		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+		<#include "/html/common/common-homepage-wide-menu.ftl" >	
 		</div>
 		<!-- END HEADER -->
 		<div class="container">
@@ -376,7 +381,7 @@
 							<div class="panel-heading">알림</div>
 							<div class="panel-body">
 								<h3>소개</h3>
-								<p>${action.company.displayName} .. </p>
+								<p>${action.company.displayName} ..ddd </p>
 							</div>
 						</div>
 					</div>							
