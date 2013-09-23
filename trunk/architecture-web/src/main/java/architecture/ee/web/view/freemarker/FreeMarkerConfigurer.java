@@ -89,7 +89,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 			logger.debug( "template customized enabled : " + isCustomizedEnabled() );			
 			if( isCustomizedEnabled() ){
 				File home = getCustomizedTemplateHome();
-				logger.debug( "template customized home : " + home.getAbsolutePath() );
+				logger.debug( "template customized home : " + home );
 				if( home != null ){
 					DatabaseTemplateLoader templateLoader = new DatabaseTemplateLoader(home);
 					this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
@@ -111,7 +111,9 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 			if( !file.exists()){
 				file.mkdirs();
 			}
-		} catch (IOException e) {}	
+		} catch (IOException e) {
+			logger.error(e);
+		}	
 		return file;		
 	}
 	

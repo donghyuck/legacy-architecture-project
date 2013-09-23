@@ -54,15 +54,12 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 			return null;
 		}
 		
-		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;
-		
+		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;		
 		if(nameToUse.charAt(0) == File.separatorChar ){
 			nameToUse = File.separatorChar + getCurrentCompany().getName() + nameToUse ;
 		}else{
 			nameToUse = File.separatorChar + getCurrentCompany().getName() + File.separatorChar + nameToUse ;
-		}
-		
-		
+		}		
 		log.debug( name + ">" + nameToUse );
 		
 		return super.findTemplateSource(nameToUse);
@@ -73,6 +70,9 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	}
 	
 	protected final Company getCurrentCompany(){
+		//log.debug( "user" + SecurityHelper.getUser() );		
 		return SecurityHelper.getUser().getCompany();
+		
 	}
+	
 }
