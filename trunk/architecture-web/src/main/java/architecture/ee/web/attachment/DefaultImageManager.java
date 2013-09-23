@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -452,24 +453,10 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 				image.setThumbnailSize((int)file.length());
 				return file;
 			}
-			
-			/*
-			BufferedImage originalImage = ImageIO.read(originalFile);
-			if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
-				image.setThumbnailSize(0);			
-				return originalFile ;			
-			}
-			*/
-			
 			/**
 			 * TIP : 윈동우 경우 Thumbnail 파일 생성후에도 해당 파일을 참조하는 문제가 있어 이를 임시파일을 사용하여 
 			 * 처리.
 			 */
-			//UUID uuid = UUID.randomUUID();		
-			//File tmp = new File(getImageTempDir(), uuid.toString());		
-			
-			
-			//BufferedImage thumbnail = 
 			File tmp = getTemeFile();
 			Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(tmp)); 		
 			image.setThumbnailSize((int)tmp.length());
@@ -503,6 +490,32 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		
 		getImageDir();				
 		log.debug( imageConfig );
+	}
+
+	public List<Image> getImages(int objectType, long objectId) {
+		List<Long> imageIds = imageDao.getImageIds(objectType, objectId);
+		List<Image> list = new ArrayList<Image>(imageIds.size());
+		for( Long imageId : imageIds )
+			try {
+				list.add(getImage(imageId));
+			} catch (Exception e) {}
+		
+		return list;
+	}
+
+	public List<Image> getImages(int objectType, long objectId, int startIndex, int maxResults) {
+		List<Long> imageIds = imageDao.getImageIds(objectType, objectId, startIndex, maxResults);
+		List<Image> list = new ArrayList<Image>(imageIds.size());
+		for( Long imageId : imageIds )
+			try {
+				list.add(getImage(imageId));
+			} catch (Exception e) {}
+		
+		return list;
+	}
+
+	public int getTotalImageCount(int objectType, long objectId) {
+		return imageDao.getImageCount(objectType, objectId);
 	}	
 
 }

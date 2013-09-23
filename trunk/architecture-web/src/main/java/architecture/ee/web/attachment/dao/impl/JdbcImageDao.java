@@ -20,6 +20,7 @@ import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.List;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
@@ -29,6 +30,7 @@ import architecture.common.jdbc.schema.DatabaseType;
 import architecture.common.util.io.SharedByteArrayOutputStream;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.dao.ImageDao;
 import architecture.ee.web.attachment.impl.ImageImpl;
@@ -36,6 +38,15 @@ import architecture.ee.web.attachment.impl.ImageImpl;
 public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 
 	private String sequencerName = "IMAGE";
+	
+	public String getSequencerName() {
+		return sequencerName;
+	}
+
+
+	public void setSequencerName(String sequencerName) {
+		this.sequencerName = sequencerName;
+	}
 	
 	private final RowMapper<Image> imageMapper = new RowMapper<Image>(){
 		public Image mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -131,6 +142,29 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_BY_ID").getSql(), imageMapper, new SqlParameterValue (Types.NUMERIC, imageId ));			
 	}
 	
+	public List<Long> getImageIds(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
+				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
+	}
 	
+	
+	
+	public List<Long> getImageIds(int objectType, long objectId, int startIndex, int numResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				startIndex, 
+				numResults, 
+				new Object[ ] {objectType, objectId }, 
+				new int[] {Types.NUMERIC, Types.NUMERIC}, 
+				Long.class);
+	}
+
+
+	public int getImageCount(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_WEB.COUNT_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				new SqlParameterValue(Types.NUMERIC, objectType ), 
+				new SqlParameterValue(Types.NUMERIC, objectId ));
+	}
 	
 }
