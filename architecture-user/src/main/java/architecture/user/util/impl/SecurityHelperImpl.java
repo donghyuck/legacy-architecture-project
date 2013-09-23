@@ -11,6 +11,7 @@ import architecture.common.user.User;
 import architecture.common.user.User.Status;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
+import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 
 
@@ -19,28 +20,31 @@ public class SecurityHelperImpl implements Implementation {
 	private Log log = LogFactory.getLog(SecurityHelperImpl.class);
 	
 	public Authentication getAuthentication(){
-		SecurityContext context = SecurityContextHolder.getContext();
-		Authentication authen = context.getAuthentication();		
-		return authen;
+		//SecurityContext context = SecurityContextHolder.getContext();
+		//Authentication authen = context.getAuthentication();		
+		return AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getAuthentication();
+		//return authen;
 	}
 
 	public AuthToken getAuthToken() {		
-		try {
+		/*try {
 			Authentication authen = getAuthentication();	
 			Object obj = authen.getPrincipal();
 			if ( obj instanceof AuthToken )
 				return (AuthToken)obj;
 		} catch (Exception ignore) {
 		}		
-		return new AnonymousUser();
+		return new AnonymousUser();*/
+		return AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getAuthToken();
 	}
 
 	public User getUser() {
 		try {
-			Authentication authen = getAuthentication();
+			/*Authentication authen = getAuthentication();
 			Object obj = authen.getPrincipal();
 			if ( obj instanceof ExtendedUserDetails )
-				return ((ExtendedUserDetails)obj).getUser();
+				return ((ExtendedUserDetails)obj).getUser();*/
+			return AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getUser();
 		} catch (Exception ignore) {
 		}			
 		return new AnonymousUser();
