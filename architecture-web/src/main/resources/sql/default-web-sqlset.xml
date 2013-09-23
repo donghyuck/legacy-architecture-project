@@ -252,5 +252,86 @@
  		DELETE FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
     ]]></sql-query>
     
-                    
+     <sql-query name="SELECT_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 이미지  조회"><![CDATA[    
+    SELECT 
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+    FROM 
+    	V2_IMAGE
+    WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>                      
+    
+     <sql-query name="SELECT_IMAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 이미지  아이디 조회"><![CDATA[    
+    SELECT 
+	  		IMAGE_ID
+    FROM 
+    	V2_IMAGE
+    WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>      
+    
+    <sql-query name="COUNT_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 해당 이미지 수 조회"><![CDATA[    
+	SELECT COUNT(IMAGE_ID)
+	FROM V2_IMAGE        
+	WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>    
+	<!--  SOCIAL  -->
+ <sql-query name="SELECT_SOCIAL_ACCOUNT_BY_ID" description="ID로 쇼셜계정  조회"><![CDATA[    
+	SELECT 
+		ACCOUNT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		SOCIAL_PROVIDER,
+		ACCESS_TOKEN,
+		ACCESS_SECRET,
+		SIGNED,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_SOCIAL_ACCOUNT
+    WHERE 
+    	ACCOUNT_ID = ?	    
+    ]]></sql-query>
+
+	<sql-query name="CREATE_SOCIAL_ACCOUNT" description="SOCIAL_ACCOUNT 생성"><![CDATA[    
+  		INSERT INTO V2_SOCIAL_ACCOUNT (
+			ACCOUNT_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			SOCIAL_PROVIDER,
+			ACCESS_TOKEN,
+			ACCESS_SECRET,
+			SIGNED,
+			CREATION_DATE,
+			MODIFIED_DATE
+		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ?, ? )
+    ]]></sql-query>
+    
+	<sql-query name="DELETE_SOCIAL_ACCOUNT_BY_ID" description="SOCIAL_ACCOUNT  삭제"><![CDATA[    
+ 		DELETE FROM SOCIAL_ACCOUNT WHERE ACCOUNT_ID = ?
+    ]]></sql-query>
+	
+	<sql-query name="UPDATE_SOCIAL_ACCOUNT" description="ID로 SOCIAL_ACCOUNT 조회"><![CDATA[    
+  		UPDATE SOCIAL_ACCOUNT SET
+	  		ACCESS_TOKEN = ?,
+			ACCESS_SECRET = ?,
+			MODIFIED_DATE = ?
+		WHERE ACCOUNT_ID = ?
+    ]]></sql-query>
+    <sql-query name="SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 SOCIAL_ACCOUNT  아이디 조회"><![CDATA[    
+    SELECT 
+	  		ACCOUNT_ID
+    FROM 
+    	V2_SOCIAL_ACCOUNT
+    WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>              
 </sqlset>
