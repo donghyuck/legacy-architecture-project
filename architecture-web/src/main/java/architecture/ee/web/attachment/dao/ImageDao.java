@@ -16,6 +16,7 @@
 package architecture.ee.web.attachment.dao;
 
 import java.io.InputStream;
+import java.util.List;
 
 import architecture.ee.web.attachment.Image;
 
@@ -33,5 +34,9 @@ public interface ImageDao {
 
 	public abstract Image getImageById(long imageId);
 
+	public List<Long> getImageIds(int objectType, long objectId, int startIndex, int numResults);
 	
+	public List<Long> getImageIds(int objectType, long objectId);
+	
+	public int getImageCount( int objectType, long objectId );
 }
