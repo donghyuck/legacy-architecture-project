@@ -52,10 +52,9 @@
 
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
-		#:name#
 		<a class="dropdown-toggle" data-toggle="dropdown">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
-			<img src="#:photoUrl#"  width="30" height="30" /><span class="k-icon k-i-arrow-s"></span>
+			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/><span class="k-icon k-i-arrow-s"></span>
 		# } else { # 
 			<img src="http://placehold.it/100x150&amp;text=[No Photo]"  width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
 		# } #	
@@ -108,10 +107,25 @@
 			# } #
 			<li class="divider"></li>
 			<li><a href="/logout">로그아웃</a></li>
-			# } else { #  
+			# } else { #  			
 			<li>
-				<div class="container bg-white layout" id="login-panel">
-					<div class="row">
+				<div class="container layout">
+					<div class="row blank-top-5 ">
+						<div class="col-lg-12">
+							<button class="btn btn-block btn-facebook"><i class="icon-facebook"></i> | 페이스북으로 로그인</button>
+						</div>
+					</div>		
+					<div class="row blank-top-5 ">
+						<div class="col-lg-12">
+							<button class="btn btn-block btn-twitter"><i class="icon-twitter"></i> | 트위터로 로그인</button>
+						</div>
+					</div>					
+				</div>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<div class="container bg-white layout" id="login-panel">													
+					<div class="row blank-top-5 ">
 						<div class="col-lg-12">
 							<form role="form" name="login-form" method="POST" accept-charset="utf-8">
 								<input type="hidden" id="output" name="output" value="json" />		
@@ -135,6 +149,7 @@
 				</div>
 			</li>
 			<li class="divider"></li>
+			<li><a href="\\#">아이디/비밀번호찾기</a></li>
 			<li><a href="\\#">회원가입</a></li>
 			# } #
 		</ul>
