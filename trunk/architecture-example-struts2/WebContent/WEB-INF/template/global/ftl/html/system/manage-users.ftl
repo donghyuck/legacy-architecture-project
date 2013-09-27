@@ -6,31 +6,68 @@
         yepnope([{
             load: [ 
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',	
+			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',       	    
        	    '${request.contextPath}/js/common/common.apis.js',
        	    '${request.contextPath}/js/common/common.ui.js'],
             complete: function() {       
-                    
-                kendo.culture("ko-KR");
-                
-				// ACCOUNTS LOAD		
+
+				// 1.  한글 지원을 위한 로케일 설정
+				kendo.culture("ko-KR");
+										
+				// 2. ACCOUNTS LOAD		
+				
 				var currentUser = new User({});
-				var accounts = $("#accounts-panel").kendoAccounts({
+				var accounts = $("#account-panel").kendoAccounts({
+					visible : false,
 					authenticate : function( e ){
 						currentUser = e.token;						
 					}
-				});		
-				
-				var companyId = ${action.companyId};
-				var selectedCompany = new Company();
-				common.apis.getTargetCompany({
-					data : {companyId: companyId},
-					success : function ( token ){
-						selectedCompany = token;
-					}
 				});
+				var selectedCompany = new Company({companyId:${action.companyId}});			
+								
+				// 3.MENU LOAD
+			
+				var currentPageName = "MENU_1_4";
+				
+				var topBar = $("#navbar").extTopBar({ 
+					template : kendo.template($("#topbar-template").html()),
+					data : currentUser,
+					menuName: "SYSTEM_MENU",
+					items: {
+						id:"companyDropDownList", 
+						type: "dropDownList",
+						dataTextField: "displayName",
+						dataValueField: "companyId",
+						value: ${action.companyId},
+						enabled : false,
+						dataSource: {
+							transport: {
+								read: {
+									type: "json",
+									url: '${request.contextPath}/secure/list-company.do?output=json',
+									type:'POST'
+								}
+							},
+							schema: { 
+								data: "companies",
+								model : Company
+							}
+						},
+						change : function(data){
+							selectedCompany = data ;
+							kendo.bind($("#company-info-panel"), selectedCompany );   
+						}
+					},
+					doAfter : function(that){
+						var menu = that.getMenuItem(currentPageName);
+						kendo.bind($(".page-header"), menu );   
+					}
+				 });	
+		
+				// 4. CONTENT MAIN		
 
                 // SPLITTER LAYOUT
 				var splitter = $("#splitter").kendoSplitter({
@@ -40,8 +77,6 @@
 						{ collapsed: true, collapsible: true, scrollable : true, min: 550 }
 					]
 				});
-				$("#splitter").css( "height", $(document).height() );
-				$("#list_pane").css( "height", $(document).height() );
 												
 	            var selectedUser = new User ({});	
 		        // 1. USER GRID 		        
@@ -51,7 +86,7 @@
                         transport: { 
                             read: { url:'${request.contextPath}/secure/list-user.do?output=json', type: 'POST' },
 	                        parameterMap: function (options, type){
-	                            return { startIndex: options.skip, pageSize: options.pageSize,  companyId: companyId }
+	                            return { startIndex: options.skip, pageSize: options.pageSize,  companyId: selectedCompany.companyId }
 	                        }
                         },
                         schema: {
@@ -78,7 +113,7 @@
                     sortable: true,
                     pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
                     selectable: 'row',
-                    height: 600,
+                    height: '100%',
                     toolbar: [
 					 	{ name: "create-user", text: "새로운 사용자 생성하기", className: "createUserCustomClass" } ],
                     change: function(e) {                    
@@ -494,11 +529,11 @@
 									placeholder: "회사 선택",
 			                        dataTextField: "displayName",
 			                        dataValueField: "companyId",
-								    dataSource: $("#company").data("kendoDropDownList").dataSource 
+								    dataSource: topBar.items[0].dataSource // $("#company").data("kendoDropDownList").dataSource 
 								});			
 													
 								$("#company-combo").data("kendoComboBox").value( 
-								 	$("#company").data("kendoDropDownList").value() 
+								 	selectedCompany.companyId //$("#company").data("kendoDropDownList").value() 
 								 );	
 								 
 								$("#company-combo").data("kendoComboBox").readonly();
@@ -599,23 +634,30 @@
 							$("#user-details").hide(); 	 					     
 						 }
 					}
-                }).css("border", "0px").data('kendoGrid');
+                }).data('kendoGrid');
             }	
         }]);      
         
         </script>
 		<style>			
 		
-	    	#list_pane{height:700px;}
-		    
 		</style>
     </head>
 	<body>
 		<!-- START HEADER -->
+		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container">
+		<div class="container layout blank-top-66">
+			<div class="row">			
+				<div class="col-12 col-lg-12">					
+					<div class="page-header">
+						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
+					</div>			
+				</div>		
+			</div>
 			<div class="row">
+				<div class="col-12 col-lg-12">		
 					<div id="splitter">
 						<div id="list_pane">
 							<div id="user-grid"></div>
@@ -624,11 +666,12 @@
 							<div id="user-details"></div>
 						</div>
 					</div>				
+				</div>	
 			</div>				
 			<form name="fm1" method="POST" accept-charset="utf-8">
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>	
-		</section>	
+		</div>	
 		<div id="change-password-window" style="display:none;">
 		<div class="container layout">	
 			<div class="row">
@@ -861,6 +904,7 @@
 				</div>
 		</script>
 		<!-- 공용 템플릿 -->
+		<div id="account-panel"></div>	
 		<#include "/html/common/common-templates.ftl" >		
 		<!-- END MAIN CONTENT  -->
     </body>

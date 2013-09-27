@@ -21,6 +21,10 @@
 			</nav>		
 		</script>
 		
+		<script id="image-details-template" type="text/x-kendo-template">	
+			<img id="image-preview" src="${request.contextPath}/secure/view-image.do?imageId=#=imageId#" class="img-thumbnail">
+		</script>
+		
 		<script id="sidebar-template" type="text/x-kendo-template">	
 			<div class="rexy-header">
 				<div class="btn-group">
@@ -42,6 +46,60 @@
 			
 		</script>
 
+		<script id="topbar-template" type="text/x-kendo-template">
+			<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="\\#">관리자 콘솔</a>
+				</div>
+				<form role="navigation" name="navbar-form" method="POST" accept-charset="utf-8">
+					<input type="hidden" id="output" name="output" value="html" />
+				</form>			
+				<div class="navbar-form navbar-left">
+					<div class="form-group">
+						<div id="companyDropDownList"></div>
+					</div>					
+				</div>			
+				<div class="collapse navbar-collapse navbar-ex1-collapse">					
+					<ul class="nav navbar-nav">
+					# for (var i = 0; i < data.length; i++) { #
+						# var item =data[i] ; #
+						#if ( item.components.length > 0) { #	
+						<li class="dropdown">
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">#= item.title # <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+							# for ( var j = 0 ; j <item.components.length ; j ++ ) { #
+								# var sub_item =item.components[j] ; #
+								<li><a href="\\#" #if (sub_item.page != 'null' && sub_item.page != '')  { # action="#=sub_item.page#" description="#=sub_item.description#" # } # >#= sub_item.title #</a></li>
+							# } #
+							</ul>							
+						</li>
+						# } else { #	
+						<li><a href="\\#">#= item.title #</a></li>
+						# } #
+					# } #
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="${request.contextPath}/">사용자 홈</a></li>
+						<li class="dropdown">
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="\\#">Action</a></li>
+								<li><a href="\\#">Another action</a></li>
+								<li><a href="\\#">Something else here</a></li>
+								<li><a href="\\#">Separated link</a></li>
+							</ul>
+						</li>
+					</ul>					
+				</div>
+			</div>
+		</script>	
+	    
 	    <script id="top-menu-template" type="text/x-kendo-template">	    
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -55,8 +113,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			
+			</div>			
 			<ul id="top-menu">
 		    	# for (var i = 0; i < data.length; i++) { #
 		    	# var item =data[i] ; #

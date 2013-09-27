@@ -15,9 +15,10 @@
        	    '${request.contextPath}/js/common/common.ui.js'
       	     ],        	  	   
 			complete: function() {      
-				// START SCRIPT           
-
-				// ACCOUNTS LOAD		
+				// 1.  한글 지원을 위한 로케일 설정
+				kendo.culture("ko-KR");
+										
+				// 2. ACCOUNTS LOAD		
 				var currentUser = new User({});
 				var accounts = $("#account-panel").kendoAccounts({
 					visible : false,
@@ -25,9 +26,46 @@
 						currentUser = e.token;						
 					}
 				});
-								
-				// 1. COMPANY GRID			        
-				var selectedCompany = new Company();				
+				var selectedCompany = new Company();			
+										
+				// 3.MENU LOAD
+				var currentPageName = "MENU_1_1";
+				var topBar = $("#navbar").extTopBar({ 
+					template : kendo.template($("#topbar-template").html() ),
+					data : currentUser,
+					menuName: "SYSTEM_MENU",
+					items: {
+						id:"companyDropDownList", 
+						type: "dropDownList",
+						dataTextField: "displayName",
+						dataValueField: "companyId",
+						value: ${action.companyId},
+						enabled : false,
+						dataSource: {
+							transport: {
+								read: {
+									type: "json",
+									url: '${request.contextPath}/secure/list-company.do?output=json',
+									type:'POST'
+								}
+							},
+							schema: { 
+								data: "companies",
+								model : Company
+							}
+						},
+						change : function(data){
+							selectedCompany = data ;
+							kendo.bind($("#company-info-panel"), selectedCompany );   
+						}
+					},
+					doAfter : function(that){
+						var menu = that.getMenuItem(currentPageName);
+						kendo.bind($(".page-header"), menu );   
+					}
+				 });	
+				 
+				 // 4. MAIN CONTENT		
 				
 				// SPLITTER LAYOUT
 				var splitter = $("#splitter").kendoSplitter({
@@ -37,10 +75,7 @@
                             { collapsible: true, collapsed: true, min: "500px" }
                         ]
                  }).data("kendoSplitter");
-                 
-                $("#splitter").css( "height", $(document).height() );
-                $("#list_pane").css( "height", $(document).height() );
-                
+
 				var company_grid = $("#company-grid").kendoGrid({
 					dataSource: {	
 						transport: { 
@@ -71,11 +106,11 @@
 						{ field: "name",    title: "KEY",  filterable: true, sortable: true,  width: 80 }, 
 						{ field: "displayName",   title: "이름",  filterable: true, sortable: true,  width: 100 }, 
 						{ field: "description", title: "설명", width: 200, filterable: false, sortable: false },
-						{ command: [ {name:"edit",  text: { edit: "수정", update: "저장", cancel: "취소"}  }  ], title: "&nbsp;" }], 
+						{ command: [ {name:"edit",  text: { edit: "수정", update: "저장", cancel: "취소"}  }  ], title: "&nbsp;", width: 100  }], 
 					filterable: true,
 					editable: "inline",
 					selectable: 'row',
-					height: 650,
+					height: '100%',
 					batch: false,
 					toolbar: [ { name: "create", text: "회사 추가" }, { name: "view-roles", text: "롤 정보보기", className: "viewRoleCustomClass" }, { name: "view-menu", text: "메뉴관리", className: "viewMenuCustomClass" },
 						{ name: "group-mgmt", text: "그룹관리", className: "goGroupMainCustomClass" }, { name: "user-mgmt", text: "사용자관리", className: "goUserMainCustomClass" } ],                    
@@ -199,7 +234,7 @@
 											}
 										}					                      
 									}
-								}).css("border", "0");;
+								}); //.css("border", "0");;
 								// 1-1-5 DETAIL USERS GRID
 								company_tabs.find(".users").kendoGrid({
 					   				dataSource: {
@@ -253,8 +288,7 @@
 							$("#company-details").hide(); 	 		
 						}   
 					}	                    
-				}).css("border", 0);
-				
+				}); //.css("border", 0);
 				
 
 				$('#company-grid').find(".goGroupMainCustomClass").click( function(){			
@@ -430,15 +464,24 @@
 		-->
 		</script> 		 
 		<style>
-	    			#list_pane{height:700px;}
+			
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
+		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
-		<!-- START MAIN CONTENT -->		
-		<div class="container">
+		<!-- START MAIN CONTNET -->
+		<div class="container layout blank-top-66">
+			<div class="row">			
+				<div class="col-12 col-lg-12">					
+					<div class="page-header">
+						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
+					</div>			
+				</div>		
+			</div>		
 			<div class="row">
+				<div class="col-12 col-lg-12">
 					<div id="splitter">
 						<div id="list_pane">
 							<div id="company-grid"></div>		
@@ -446,7 +489,8 @@
 						<div id="datail_pane">
 							<div id="company-details"></div>
 						</div>
-					</div>		
+					</div>	
+				</div>		
 			</div>
 		</div>	
 		<div id="account-panel"></div>				
@@ -525,20 +569,26 @@
 				</ul>
 				<div>
 					<div id="company-prop-grid" class="props"></div>
-					<div class="box leftless rightless bottomless">
-						<div class="alert alert-error">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+					<div class="blank-top-15"></div>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.
 					</div>
 				</div> 	
 				<div>
 					<div id="company-group-grid"  class="groups"></div>		
-					<div class="box leftless rightless bottomless">
-						<div class="alert alert-info">그룹 관리는 그룹관리 메뉴를 사용하여 관리 하실수 있습니다</div>	  
+					<div class="blank-top-15"></div>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						그룹 관리는 그룹관리 메뉴를 사용하여 관리 하실수 있습니다
 					</div>              
 				</div>        
 				<div>
 					<div id="company-user-grid"  class="users"></div>	
-					<div class="box leftless rightless bottomless">
-						<div class="alert alert-info">사용자 관리는  사용자 관리 메뉴를 사용하여 관리 하실수 있습니다.</div>	     
+					<div class="blank-top-15"></div>
+					<div class="alert alert-danger">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						사용자 관리는  사용자 관리 메뉴를 사용하여 관리 하실수 있습니다.	     
 					</div>	
 				</div>        
 			</div>
