@@ -1,10 +1,9 @@
 /**
  * User 
  */
-;(function($, undefined) {
+(function($, undefined) {
 	var common = window.common = window.common || {};
-	common.apis = {};
-	
+	common.apis = {};	
 	common.apis.getTargetCompany =  function (url, options){	    
 		if (typeof url === "object") {
 	        options = url;
@@ -27,8 +26,4 @@
 			dataType : "json"
 		});	
 	};	
-	
-		
-
-	
 })(jQuery);

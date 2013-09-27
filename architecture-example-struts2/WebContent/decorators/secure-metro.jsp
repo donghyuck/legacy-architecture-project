@@ -20,52 +20,36 @@
 	
 	body {
 		overflow-y : none;
-	}
-
-	@media only screen and (min-width: 768px) {
-		body{
-			font-size: 10pt;
-		}
-	}
-	
-	@media only screen and (min-width: 1280px) {
-		body{
-			font-size: 11pt;
-		}
-	}
-	
-	@media only screen and (min-width: 1440px) {
-		body{
-			font-size: 11pt;
-		}
+		background-color : #f2f2f2;
 	}
 
 	#splitter {				
-		height : "100%";
+		height : 600px;
+		border : 0 px;
 	}	
 
-::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
-}
+	::-webkit-scrollbar {
+		width: 8px;
+		height: 8px;
+	}
 
-::-webkit-scrollbar-track {
+	::-webkit-scrollbar-track {
 		background: rgba(0, 0, 0, 0.05)
 	}
 	
-::-webkit-scrollbar-thumb {
+	::-webkit-scrollbar-thumb {
 		border-radius: 12px;
 		background: rgba(0, 0, 0, 0.2)
 	}
 	
-::-webkit-scrollbar-thumb:hover {
+	::-webkit-scrollbar-thumb:hover {
 		background: rgba(0, 0, 0, 0.25)
 	}
 	
 	.k-menu.k-header, .k-menu .k-item {
 		border-color :#dadada;
 	}	
-
+	
 	.container {
 		max-width : 100%;
 	} 

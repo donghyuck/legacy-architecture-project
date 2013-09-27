@@ -1,7 +1,7 @@
 /**
  * COMMON UI DEFINE
  */
-;(function($, undefined) {
+(function($, undefined) {
 	var Widget = kendo.ui.Widget;
 	var ui = window.ui = window.ui || {};
 
@@ -40,10 +40,210 @@
 	
 })(jQuery);	
 
+
+/**
+ *  extDropDownList widget
+ */
+(function($, undefined) {
+	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
+	ui.extDropDownList = Widget.extend({
+		init: function(element, options) {
+			var that = this;
+			Widget.fn.init.call(that, element, options);
+			options = that.options;		
+			if( options.renderTo == null ){
+				options.renderTo = element;
+			}	
+			if( options.value != null )
+				that.value = options.value;			
+			that.render(options);
+			
+			
+		},
+		events : {			
+		},
+		value: 0,
+		dataSource : null,
+		options : {
+			name: "dropDownList",	
+			dataSource: null,
+			template : null,
+			enabled : true,
+		},
+		_change: function (){
+			var that = this;
+			if( that.options.change != null )
+				that.options.change( that.dataSource.get( that.value) );
+		},
+		render: function ( options ) {				
+			var contentId = this.element.attr('id') + 'list';			
+			var content = options.renderTo ;
+			var that = this;
+			
+			that.dataSource = DataSource.create(options.dataSource);		
+			that.dataSource.fetch(function(){
+				var items = that.dataSource.data();
+				var html = '<select id="' + contentId + '"role="navigation" class="form-control"'; 
+				if( ! options.enabled )
+					html = html + 'disabled >';
+				else
+					html = html + '>';
+				
+				$.each( items, function (index, value) {
+					html = html + '<option ';
+					if( that.value == value[options.dataValueField] )
+						html = html + ' selected ';					
+					html = html + ' value="'+ value[options.dataValueField]  +'" ' + '>'+ value[options.dataTextField] +'</option>' ;					
+				});
+				html = html + '</select>' ;
+				content.append(html);
+				that._change();
+				
+				$( "#" + contentId  ).change(function() {
+					that.value = $( "#" + contentId  ).val() ;
+					that._change();
+				});
+				
+				if( options.doAfter != null){
+					options.doAfter(that);
+				}
+ 			});
+		}
+	});
+
+	$.fn.extend( { 
+		extDropDownList : function ( options ) {
+			return new ui.extDropDownList ( this , options );		
+		}
+	});
+	
+})(jQuery);
+
+/**
+ * extNavBar widget
+ */
+(function($, undefined) {
+	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
+
+	ui.extTopBar = Widget.extend({
+		init: function(element, options) {			
+			var that = this;
+			Widget.fn.init.call(that, element, options);			
+			options = that.options;					
+			if( options.renderTo == null ){
+				options.renderTo = element;
+			}
+			that.items = new Array();
+			that.render(options);	
+			
+		},
+		events : {
+			
+		},
+		dataSource : null,
+		items : null,
+		options : {
+			name: "topBar",	
+			renderTo: null,
+			menuName : null,
+			dataSource: null,
+			template : null,
+			select : null,
+		},
+		render: function ( options ) {			
+			var content = options.renderTo ;
+			if( options.dataSource == null  && options.menuName != null ){
+				this.dataSource = DataSource.create({
+					transport: {
+						read: {
+							url: "/secure/get-company-menu-component.do?output=json",
+							dataType: "json",
+							data: {
+								menuName: options.menuName
+							}
+						}
+					},
+					schema: {
+						data: "targetCompanyMenuComponent.components"
+					}
+				});
+			}else{
+				this.dataSource = DataSource.create(options.dataSource);
+			}			
+			var that = this;
+			that.dataSource.fetch(function(){
+			var items = that.dataSource.data();
+			content.append( options.template( items ) );	
+				
+				content.find('.nav a').click(function( e ){
+					if( $(e.target).is('[action]') ){
+						var selected = $(e.target);
+						var item = { title: $.trim(selected.text()), action: selected.attr("action") , description: selected.attr("description") || "" };
+						if( options.select != null )
+							options.select( item );
+						else
+							that.select( item );
+					}					
+				});						
+				if( $.isArray( options.items ) ){
+					//alert ("array");
+				}else if( (typeof options.items == "object") && (options.items !== null) ){
+					if( options.items.type == 'dropDownList' ){
+						var subItem = options.items;
+						var subObject = $('#' + subItem.id ).extDropDownList(subItem);
+						that.items.push( subObject );
+					}
+				}				
+				if( options.doAfter != null ){
+					options.doAfter(that);    					
+				}
+			});
+
+		},
+		select : function( item ){
+			var content = this.options.renderTo ;
+			content.find("form[role='navigation']").attr("action", item.action ).submit();	
+		},
+		getMenuItem : function( name ){
+			var items = this.dataSource.data();
+			var menuItem = null;
+			$.each( items, function ( i, item ){
+				if(item.components.length > 0 )
+				{	
+					$.each( item.components, function ( j, item2 ){
+						if( name == item2.name ){
+							menuItem = item2;
+							return;
+						}
+					});
+				}else{
+					if( name == item.name ){
+						menuItem = item;
+						return;						
+					}
+				}
+			});
+			return menuItem;
+		},
+		item : function (id){
+			return $('#' + id ).data("extDropDownList");			
+		}
+		// Function that controls opening of the pageslide
+	});
+
+	$.fn.extend( { 
+		extTopBar : function ( options ) {
+			return new ui.extTopBar ( this , options );		
+		}
+	});
+	
+})(jQuery);
+
+
 /**
  *  kendoTopBar widget
  */
-;(function($, undefined) {
+(function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
 	var sliding = false;	
 	var $body = $('body');
@@ -55,7 +255,6 @@
 			options = that.options;		
 			that.render(options);			
 			element.click($.proxy( that._open, this ));				
-			
 		},
 		events : {
 			
@@ -68,7 +267,7 @@
 		},
 		render: function ( options ) {			
 			var content = options.renderTo ;
-			var dataSource = DataSource.create(options.dataSource);			
+			var dataSource = DataSource.create(options.dataSource);	
 			var that = this;
 			dataSource.fetch(function(){
 				var items = dataSource.data();
@@ -84,11 +283,9 @@
 					}
  				});	
 				if( options.doAfter != null ){
-					options.doAfter(content);    					
+					options.doAfter(content);
 				}	
 			});
-		
-
 		},
 		// Function that controls opening of the pageslide
 		_open: function (e){
@@ -116,7 +313,7 @@
 /**
  *  Extended Pageslide widget
  */
-;(function($, undefined) {
+(function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
 	var sliding = false;	
 	var $body = $('body'), $pageslide = $('#pageslide');
@@ -257,7 +454,7 @@
 /**
  *  Extended Accounts widget
  */
-;(function($, undefined) {	
+(function($, undefined) {	
 	var Widget = kendo.ui.Widget, ui = window.ui = window.ui || {};
 	var proxy = $.proxy,
 	template = kendo.template,
@@ -430,9 +627,7 @@ function handleKendoAjaxError(xhr) {
 			height : "hide"
 		}
 	});
-}
-
-;
+};
 (function($, window, document, undefined) {
 	'use strict';
 
@@ -484,7 +679,7 @@ function handleKendoAjaxError(xhr) {
 			$tab.trigger('click.fndtn');
 		}
 	}
-
+/*
 	$.fn.foundationTabs = function(method) {
 		if (methods[method]) {
 			return methods[method].apply(this, Array.prototype.slice.call( arguments, 1));
@@ -494,5 +689,5 @@ function handleKendoAjaxError(xhr) {
 			$.error('Method ' + method + ' does not exist on jQuery.foundationTabs');
 		}
 	};
-	
+	*/
 }(jQuery, this, this.document));

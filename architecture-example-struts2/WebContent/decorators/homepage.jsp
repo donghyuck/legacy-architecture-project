@@ -17,27 +17,18 @@
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
-
 	.header {
 		padding-top : 10px;
 		position: relative;
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 		 color: #5a5a5a;
-	}	
-
-	.k-menu.k-header, .k-menu .k-item {
-		border-color :#dadada;
 	}
-	
-	nav.top-bar {
-		padding-right : 15px;
-		margin-right : 20px;
-		padding-left : 15px;
-		margin-left : 20px;
-		margin-top: 0px;
-		padding-top : 2px;
-		height : 36px;
-		border-bottom:1px solid #dadada;
+	.navbar {
+		margin-bottom : 0px;
+	}
+	 
+	.k-menu.k-header, .k-menu .k-item {
+		/*border-color :#dadada;*/
 	}
 
 	#wrap {
@@ -57,7 +48,6 @@
 	#account-panel {
 		margin-top : 0 px;
 		padding-top : 10px;
-		color: #fff;
 	}	
 	
 	#account-panel  .dropdown-menu{
@@ -90,14 +80,13 @@
 	.dropdown-submenu:hover>a:after{border-left-color:#ffffff;}
 	.dropdown-submenu.pull-left{float:none;}.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:6px 0 6px 6px;-moz-border-radius:6px 0 6px 6px;border-radius:6px 0 6px 6px;}
 
-
+	
 	/* Carousel base class */
 	h1 {
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 	}
 	
 	.carousel {
-		margin-top: -10px;		
 		margin-bottom: 10px;	
 		height:400px;		
 	}
