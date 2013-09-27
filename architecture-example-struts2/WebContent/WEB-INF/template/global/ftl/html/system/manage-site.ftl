@@ -2,14 +2,12 @@
 <html decorator="secure-metro">
     <head>
         <title>시스템 정보</title>
-        <script type="text/javascript">                
-        
+        <script type="text/javascript"> 
         yepnope([{
             load: [ 
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
-       	    '${request.contextPath}/js/kendo/kendo.dataviz.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',       	   
        	    '${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
        	    '${request.contextPath}/js/common/common.models.js',
@@ -19,8 +17,8 @@
 				
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
-		
-				// ACCOUNTS LOAD		
+										
+				// 2. ACCOUNTS LOAD		
 				var currentUser = new User({});
 				var accounts = $("#account-panel").kendoAccounts({
 					visible : false,
@@ -28,18 +26,47 @@
 						currentUser = e.token;						
 					}
 				});
-				
-				
-				var companyId = ${action.companyId};
-				var selectedCompany = new Company();
-				common.apis.getTargetCompany({
-					data : {companyId: companyId},
-					success : function ( token ){
-						selectedCompany = token.targetCompany;
-						 kendo.bind($("#company-info-panel"), selectedCompany );   
+				var selectedCompany = new Company();			
+										
+				// 3.MENU LOAD
+				var currentPageName = "MENU_1_2";
+				var topBar = $("#navbar").extTopBar({ 
+					template : kendo.template($("#topbar-template").html() ),
+					data : currentUser,
+					menuName: "SYSTEM_MENU",
+					items: {
+						id:"companyDropDownList", 
+						type: "dropDownList",
+						dataTextField: "displayName",
+						dataValueField: "companyId",
+						value: ${action.companyId},
+						enabled : false,
+						dataSource: {
+							transport: {
+								read: {
+									type: "json",
+									url: '${request.contextPath}/secure/list-company.do?output=json',
+									type:'POST'
+								}
+							},
+							schema: { 
+								data: "companies",
+								model : Company
+							}
+						},
+						change : function(data){
+							selectedCompany = data ;
+							kendo.bind($("#company-info-panel"), selectedCompany );   
+						}
+					},
+					doAfter : function(that){
+						var menu = that.getMenuItem(currentPageName);
+						kendo.bind($(".page-header"), menu );   
 					}
-				});
-								
+				 });	
+				 
+				 
+				 // 4. PAGE MAIN					 								
 				$('#myTab a').click(function (e) {
 					e.preventDefault();
 					if(  $(this).attr('href') == '#setup-info' ){
@@ -49,23 +76,23 @@
 						if( ! $("#image-upload").data("kendoUpload") ){	
 							$("#image-upload").kendoUpload({
 								multiple : false,
-					                      			showFileList : true,
-					                      			localization : { select: '이미지 파일 선택', remove:'삭제', dropFilesHere : '업로드할 이미지 파일을 이곳에 끌어 놓으세요.' , 
-					                      				uploadSelectedFiles : '이미지 업로드',
-					                      				cancel: '취소' 
-					                      			 },
-					                      			 async: {
-													    saveUrl:  '${request.contextPath}/secure/update-image.do?output=json',							   
-													    autoUpload: true
-												    },
-												    upload:  function (e) {		
-												    	e.data = { objectType: 1, objectId : selectedCompany.companyId, imageId:'-1' };		
-												    },
-												    success : function(e) {	
-												    	$('#image-grid').data('kendoGrid').dataSource.read(); 
-												    }
-							});		
-							
+								showFileList : true,
+								localization : { 
+									select: '이미지 파일 선택', remove:'삭제', dropFilesHere : '업로드할 이미지 파일을 이곳에 끌어 놓으세요.' , 
+									uploadSelectedFiles : '이미지 업로드',
+									cancel: '취소' 
+								},
+								async: {
+									saveUrl:  '${request.contextPath}/secure/update-image.do?output=json',							   
+									autoUpload: true
+								},
+								upload:  function (e) {		
+									e.data = { objectType: 1, objectId : selectedCompany.companyId, imageId:'-1' };		
+								},
+								success : function(e) {	
+									$('#image-grid').data('kendoGrid').dataSource.read(); 
+								}
+							}).css('min-width','300');
 						}				
 						
 						if( ! $("#image-grid").data("kendoGrid") ){	
@@ -94,35 +121,33 @@
 									error: handleKendoAjaxError
 								},
 								columns:[
-									{ field: "name", title: "파일", template: '#=name#', width: 150 },
+									{ field: "imageId", title: "ID",  width: 50, filterable: false, sortable: false },
+									{ field: "name", title: "파일", width: 150 },
 									{ field: "contentType", title: "이미지 유형",  width: 100 },
 									{ field: "size", title: "파일크기",  width: 100 },
 									{ field: "creationDate", title: "생성일", width: 80, format: "{0:yyyy/MM/dd}" },
 									{ field: "modifiedDate", title: "수정일", width: 80, format: "{0:yyyy/MM/dd}" },
-									{ command: [
-										{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }
-									
+									{ command: [ { name: "destroy", text: "삭제" } ], title: " ", width: "160px"  }
 								],
 								filterable: true,
 								sortable: true,
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
-								selectable: 'row',
-								height: 300,
+								//selectable: 'row',
+								height: 500,
+								detailTemplate: kendo.template( $("#image-details-template").html() ),
+								detailInit : function(e){
+									//var detailRow = e.detailRow;
+								},		
 								dataBound: function(e) {
+								
 								},
-								change: function(e) {                    
-									 var selectedCells = this.select();       
-									 if( selectedCells.length == 1){ 
-										var selectedCell = this.dataItem( selectedCells ); 
-										$('#image-preview').attr('src' , "${request.contextPath}/secure/view-image.do?imageId=" + selectedCell.imageId  );
-										$('#image-preview').show();
-									}
+								change: function(e) {          
+									var selectedCells = this.select();       
+									this.expandRow(selectedCells);
 								}
 							});
 						}											
-					}else if(  $(this).attr('href') == '#attachment-mgmt' ){
-										
-					}
+					}else if(  $(this).attr('href') == '#attachment-mgmt' ){ }
 					$(this).tab('show');
 				});
 			}	
@@ -133,12 +158,20 @@
 	</head>
 	<body>
 		<!-- START HEADER -->
+		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container layout">
-			<div class="row blank-top-5">			
+		<div class="container layout blank-top-66">
+			<div class="row">			
+				<div class="col-12 col-lg-12">					
+					<div class="page-header">
+						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
+					</div>			
+				</div>		
+			</div>
+			<div class="row">			
 				<div class="col-6 col-lg-6">						
-					<div id="company-info-panel" class="panel panel-primary">
+					<div id="company-info-panel" class="panel panel-default">
 						<div class="panel-heading layout">
 							<span data-bind="text: displayName"></span>
 							&nbsp;&nbsp;&nbsp;
@@ -161,8 +194,12 @@
 											<tbody>						
 												<tr>
 													<th>등록 아이디</th>
-													<td><span class="label label-info"><span data-bind="text: name"></span></span><em>(<span data-bind="text: description"></span>)</em></td>
+													<td><span class="label label-info"><span data-bind="text: name"></span></span><code><span data-bind="text: companyId"></span></code></td>
 												</tr>			
+												<tr>
+													<th>등록 이름</th>
+													<td><span data-bind="text: description"></span></td>
+												</tr>	
 												<tr>
 													<th>등록일</th>
 													<td><span data-bind="text: creationDate"></span></td>
@@ -179,6 +216,10 @@
 			</div>				
 			<div class="row">			
 				<div class="col-12 col-lg-12">
+				
+					<div class="panel panel-default">
+  					<div class="panel-body">
+				
 					<ul class="nav nav-tabs" id="myTab">
 					  <li class="active"><a href="#license-info">기본 설정 정보</a></li>
 					  <li><a href="#setup-info">템플릿 관리</a></li>
@@ -241,18 +282,10 @@
 						<div class="tab-pane" id="image-mgmt">
 							<div class="blank-space-5">
 								<div class="row">
-									<div class="col-lg-7">
+									<div class="col-lg-12">
 										<input name="image-upload" id="image-upload" type="file" />
 										<div id="image-grid"></div>
 									</div>
-									<div class="col-lg-5">
-										<div class="panel panel-default">
-											<div class="panel-heading">미리보기</div>
-											<div class="panel-body">
-											<img id="image-preview" src="..." class="img-thumbnail" style="display:none;">
-											</div>
-										</div>
-									</div>									
 								</div>								 
 							</div>
 						</div>								
@@ -262,6 +295,9 @@
 								image attachment
 								</div>
 							</div>
+						</div>
+
+						 </div>
 						</div>
 										
 					</div>
@@ -274,5 +310,6 @@
 		<footer>  		
 		</footer>
 		<!-- END FOOTER -->
+		<#include "/html/common/common-templates.ftl" >		
 	</body>
 </html>

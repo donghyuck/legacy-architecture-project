@@ -6,18 +6,20 @@
         <!--
         yepnope([{
             load: [ 	       
-			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',	
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',				
+			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.apis.js',
        	    '${request.contextPath}/js/common/common.ui.js'],        	     	  	   
             complete: function() { 
-				// Localization 
+
+				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
+										
+				// 2. ACCOUNTS LOAD		
 				
-				// ACCOUNTS LOAD		
 				var currentUser = new User({});
 				var accounts = $("#account-panel").kendoAccounts({
 					visible : false,
@@ -25,15 +27,48 @@
 						currentUser = e.token;						
 					}
 				});
+				var selectedCompany = new Company({companyId:${action.companyId}});			
+								
+				// 3.MENU LOAD
+			
+				var currentPageName = "MENU_1_3";
 				
-				var companyId = ${action.companyId};
-				var selectedCompany = new Company();
-				common.apis.getTargetCompany({
-					data : {companyId: companyId},
-					success : function ( token ){
-						selectedCompany = token;
+				var topBar = $("#navbar").extTopBar({ 
+					template : kendo.template($("#topbar-template").html()),
+					data : currentUser,
+					menuName: "SYSTEM_MENU",
+					items: {
+						id:"companyDropDownList", 
+						type: "dropDownList",
+						dataTextField: "displayName",
+						dataValueField: "companyId",
+						value: ${action.companyId},
+						enabled : false,
+						dataSource: {
+							transport: {
+								read: {
+									type: "json",
+									url: '${request.contextPath}/secure/list-company.do?output=json',
+									type:'POST'
+								}
+							},
+							schema: { 
+								data: "companies",
+								model : Company
+							}
+						},
+						change : function(data){
+							selectedCompany = data ;
+							kendo.bind($("#company-info-panel"), selectedCompany );   
+						}
+					},
+					doAfter : function(that){
+						var menu = that.getMenuItem(currentPageName);
+						kendo.bind($(".page-header"), menu );   
 					}
-				});
+				 });	
+		
+				// 4. CONTENT MAIN		
 				
 				// SPLITTER LAYOUT
 				var splitter = $("#splitter").kendoSplitter({
@@ -43,10 +78,7 @@
 	                    { collapsible: true, collapsed: true, min: "500px" }
 	                ]
 	             });
-				
-				$("#splitter").css( "height", $(document).height());
-				$("#list_pane").css( "height", $(document).height());
-								
+												
 				// 1. GROUP GRID			        
 			        var selectedGroup = new Group();		      
 			        var group_grid = $("#group-grid").kendoGrid({
@@ -57,9 +89,9 @@
 	                            update: { url:'${request.contextPath}/secure/update-group.do?output=json', type:'POST' },
 		                        parameterMap: function (options, operation){	          
 		                            if (operation != "read" && options) {
-		                                return { companyId: companyId, item: kendo.stringify(options)};
+		                                return { companyId: selectedCompany.companyId, item: kendo.stringify(options)};
 		                            }else{
-		                                return { startIndex: options.skip, pageSize: options.pageSize , companyId: companyId }
+		                                return { startIndex: options.skip, pageSize: options.pageSize , companyId: selectedCompany.companyId }
 		                            }
 		                        }                  
 	                        },
@@ -83,7 +115,7 @@
 	                    filterable: true,
 	                    editable: "inline",
 	                    selectable: 'row',
-	                    height: 600,
+	                    height: '100%',
 	                    batch: false,
 	                    toolbar: [ { name: "create", text: "그룹추가" } ],                    
 	                    pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },                    
@@ -376,7 +408,7 @@
 								$("#group-details").hide(); 	 			    	
 						    }   
 						}					
-	                }); //.css("border", "0px"); 	                	
+	                });  	
 	                
 	                // 3-3 CLOSE SEARCH WINDOW
 	                $("#close-search-window-btn").click( function() {	
@@ -446,10 +478,19 @@
     </head>
 	<body>
 		<!-- START HEADER -->
-	  	<!-- END HEADER -->	  	
-	  	<!-- START MAIN CONTNET -->
-		<div class="container">
-			<div class="row">
+		<section id="navbar" class="layout"></section>
+		<!-- END HEADER -->
+		<!-- START MAIN CONTNET -->
+		<div class="container layout blank-top-66">
+			<div class="row">			
+				<div class="col-12 col-lg-12">					
+					<div class="page-header">
+						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
+					</div>			
+				</div>		
+			</div>
+			<div class="row">		
+				<div class="col-12 col-lg-12">		
 					<div id="splitter">
 						<div id="list_pane">
 							<div id="group-grid"></div>
@@ -457,7 +498,8 @@
 						<div id="datail_pane">
 							<div id="group-details"></div>
 						</div>
-					</div>				
+					</div>						
+				</div>						
 			</div>	
 		</div>	  		
 		
@@ -502,20 +544,20 @@
 					</ul>
 					<div>
 						<div id="group-prop-grid" class="props"></div>
-						<div class="box leftless rightless bottomless">
-							<div class="alert alert-info">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
+						<div class="blank-top-15"></div>
+						<div class="alert alert-danger">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.
 						</div>	
 					</div> 	
 					<div>
 						<div id="group-member-grid"  class="members"></div>
-						<div class="box leftless rightless bottomless">
-							<div class="alert alert-info">멤버수:<span data-bind="text:memberCount">0</span> 명</div>
-						</div>	
+						<div class="blank-top-15"></div>
+						<div class="alert alert-info">멤버수:<span data-bind="text:memberCount">0</span> 명</div>
 					</div>
 					<div>
-						<div class="big-box bottomless">
-							<div class="alert alert-info">그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.</div>
-						</div>	
+						<div class="blank-top-15"></div>
+						<div class="alert alert-info">그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.</div>	
 						<div class="roles big-box">
 							<div id="group-role-select"></div>
 						</div>	
