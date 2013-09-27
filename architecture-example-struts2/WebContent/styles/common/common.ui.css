@@ -12,17 +12,30 @@
 }
 
 /* body */
-
-/* Bootstrap customize---------------------- */
-.page-header {
-	margin: 15px 0 15px;	
-}
 /* Naver nanumgothic font ---------------------- */
 @font-face {
 	font-family: "BM_NANUMGOTHIC";
 	src: url('../fonts/nanumgothic.eot');
 	src: local('☺'), url('../fonts/nanumgothic.woff') format('woff'), url('../fonts/nanumgothic.woff') format('truetype');
 }
+
+/* Kendoui customize----------------------- */
+.k-button.k-upload-button
+  {
+		min-width:150px;
+  }
+/* Bootstrap customize---------------------- */
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+}
+
+.modal-footer{
+	/*background-color: #F5F5F5;	*/
+}
+.page-header {
+	margin: 15px 0 15px;	
+}
+
 /** Main body ------------------------------------ */
 body {
 	padding: 0;
@@ -31,6 +44,10 @@ body {
 	font-weight: normal;
 	font-style: normal;
 	position: relative;
+}
+
+.bg-gray{
+	background-color: #E5E5E5;	
 }
 
 .navigation {
@@ -63,21 +80,7 @@ body {
 	overflow-x:hidden;
 	overflow-y:auto;
 }
-/*
-.content {
-	position: absolute;
-	margin-top: 25px;
-	top: 0px;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	border: 0;
-	outline: 0;
-	vertical-align: baseline;
-	padding: 0;
-	z-index: 0;
-}
-*/
+
 /** block */
 
 .round-block  {
@@ -108,44 +111,31 @@ a.k-link:hover {
 	text-decoration:none;
 }
 
-/*
-
-.form-actions {
-  padding: 19px 20px 20px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  background-color: #f5f5f5;
-  border-top: 1px solid #e5e5e5;
-  *zoom: 1;
-}
-
-.form-actions:before,
-.form-actions:after {
-  display: table;
-  line-height: 0;
-  content: "";
-}
-
-.form-actions:after {
-  clear: both;
-}
-*/
-
 /** SPACE */
 .blank-top-0 {
 	padding-top: 0px;	
 }
 
+.blank-bottom-0 {
+	padding-bottom: 0px;	
+}
+
 .blank-top-5 {
 	padding-top: 5px;	
 }
-
+.blank-top-15 {
+	padding-top: 15px;	
+}
 .blank-bottom-5 {
 	padding-top: 5px;	
 }
 
 
-
+.blank-top-66 {
+	padding-top : 66px;
+}
+			
+			
 .blank-space-5{
 	padding: 5px;	
 }
@@ -162,6 +152,8 @@ a.k-link:hover {
 .space-top {
 	padding-top: 5px;
 }
+
+
 
 .no-margin-bottom {
 	margin-bottom:0;
@@ -237,38 +229,6 @@ a.k-link:hover {
 	overflow: hidden;
 }
 
-
-/**
-
-#top-menu {
-	border-style: none;
-	background-color: #F5F5F5;
-	border-width: 0 0 0 0;
-}
-
-#top-menu  .k-popup {
-	-webkit-box-shadow: none;
-	box-shadow: none;
-	background-color: #F5F5F5;
-}
-
-#top-menu .k-item {
-	border-style: none;
-	border-width: 0 0 0 0;
-}
-
-#top-menu .k-link {
-	background-color: #F5F5F5;
-	border-style: none;
-	border-width: 0 0 0 0;
-}
-
-#top-menu .k-link:hover {
-	background-color: #676767;
-	border-width: 0 0 0 0;
-}
-*/
-
 nav .top-bar {
 	float: left;
 	width: 40px;
@@ -320,8 +280,6 @@ header .open {
 header .open:hover {
 	background-color: #676767;
 }
-
-
 
 	
 /* ---------------------------------- */
