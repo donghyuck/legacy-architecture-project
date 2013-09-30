@@ -15,11 +15,15 @@
  */
 package architecture.user.security.authentication.impl;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -73,6 +77,13 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		}
 		
 		protected AnonymousUser createAnonymousUser(){
+			
+			try {
+				HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+				String domain = request.getLocalAddr();
+				log.debug("DOMAIN:" + domain);
+			} catch (Exception ignore) {
+			}
 			
 			try {
 				String companyIdStr = ApplicationHelper.getApplicationProperty("components.user.anonymous.company.id", "1");
