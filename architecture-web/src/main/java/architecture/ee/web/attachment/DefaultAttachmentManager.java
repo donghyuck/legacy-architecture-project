@@ -285,4 +285,8 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			attachmentDao.deleteAttachmentData(attachmentToUse);
 		}
 	}
+
+	public int getTotalAttachmentCount(int objectType, long objectId) {
+		return attachmentDao.getAttachmentCount(objectType, objectId);
+	}
 }

@@ -217,4 +217,12 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 				new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));		
 	}
 
+
+	public int getAttachmentCount(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_WEB.COUNT_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				new SqlParameterValue(Types.NUMERIC, objectType ), 
+				new SqlParameterValue(Types.NUMERIC, objectId ));
+	}
+
 }
