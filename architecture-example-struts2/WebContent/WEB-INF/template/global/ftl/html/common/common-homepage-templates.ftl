@@ -103,7 +103,7 @@
 			<li class="divider"></li>
 			<li><a href="\\#">프로필 보기</a></li>
 			#if (isSystem ) {#
-			<li><a href="/secure/main.do">시스템 관리하기</a></li>
+			<li><a href="/secure/main-site.do">시스템 관리하기</a></li>
 			# } #
 			<li class="divider"></li>
 			<li><a href="/logout">로그아웃</a></li>
