@@ -72,6 +72,7 @@
 		},
 		_change: function (){
 			var that = this;
+			alert( '>>' + that.value );
 			if( that.options.change != null )
 				that.options.change( that.dataSource.get( that.value) );
 		},
@@ -202,6 +203,7 @@
 		},
 		select : function( item ){
 			var content = this.options.renderTo ;
+			
 			content.find("form[role='navigation']").attr("action", item.action ).submit();	
 		},
 		getMenuItem : function( name ){
