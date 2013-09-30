@@ -138,10 +138,10 @@
 									color: "#ea7001"		
 								},
 								scale: {
-									majorUnit: 15,
-									minorUnit: 5,
-									startAngle: 90,
-                            		endAngle: 240,
+									majorUnit: 50,
+									minorUnit: 10,
+									startAngle: -30,
+                            		endAngle: 210,
 									max: data.memoryInfo.maxPermGen.megabytes,
 									ranges: [
 										{
