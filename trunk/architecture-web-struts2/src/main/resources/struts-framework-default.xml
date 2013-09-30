@@ -10,6 +10,7 @@
 	<constant name="struts.objectFactory" value="spring" />
 	<constant name="struts.objectFactory.spring.autoWire" value="name" />
 	<constant name="struts.freemarker.manager.classname" value="freemarkerManager" />
+	<constant name="struts.multipart.maxSize" value="20000000" />
 
 	<package name="framework-default" extends="struts-default">
 	
@@ -23,7 +24,7 @@
 			<result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
 			<result-type name="xslt" class="org.apache.struts2.views.xslt.XSLTResult" />
 			<result-type name="plainText" class="org.apache.struts2.dispatcher.PlainTextResult" />
-			<result-type name="httpheader" class="org.apache.struts2.dispatcher.HttpHeaderResult" />			
+			<result-type name="httpheader" class="org.apache.struts2.dispatcher.HttpHeaderResult" />	
 		</result-types>
 		
 		<!-- Interceptor overrides and additions -->
@@ -46,7 +47,7 @@
 				<interceptor-ref name="params" />
 				<interceptor-ref name="outputFormat" />
 				<interceptor-ref name="locale" />
-				<interceptor-ref name="validation" />				
+				<interceptor-ref name="validation" />	
 			</interceptor-stack>		
 		</interceptors>
 				
