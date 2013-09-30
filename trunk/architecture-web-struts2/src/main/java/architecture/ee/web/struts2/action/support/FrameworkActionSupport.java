@@ -99,6 +99,10 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		this.outputFormat = outputFormat;
 	}
 
+	public Menu getMenu(Long menuId) throws MenuNotFoundException{
+		return menuRepository.getMenu(menuId);		
+	}
+	
 	public MenuComponent getMenuComponent(String name){ 
 		MenuComponent menuComp = null;
 		try {
@@ -107,11 +111,11 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 				menu = menuRepository.getMenu(1);		
 				if( getUser().getCompany()!=null ){
 					String menuIdStr =StringUtils.defaultIfEmpty( getUser().getCompany().getProperties().get("menuId"), "1" );	
-					log.debug("menuId : " + menuIdStr );
+					//log.debug("menuId : " + menuIdStr );
 					long menuId = Long.parseLong( menuIdStr );
 					
 					if( menuId != menu.getMenuId() ){
-						menu = menuRepository.getMenu(menuId);		
+						menu = getMenu(menuId);		
 					}
 				}	
 				menuComp = menuRepository.getMenuComponent(menu, name);
@@ -161,7 +165,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
     }
 	
 	public final User getUser() {
-		log.debug( this.authProvider);		
+		//log.debug( this.authProvider );		
 		if (null == user)
 			try {
 				final User ju = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getUser();

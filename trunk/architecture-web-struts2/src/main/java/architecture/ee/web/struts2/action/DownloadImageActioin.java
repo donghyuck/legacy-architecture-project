@@ -99,10 +99,6 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 	public InputStream getTargetImageInputStream() {
 		Image imageToUse = getTargetImage();		
 		return imputStream;
-		/*if( width > 0 && height > 0 && imageToUse.getThumbnailSize() > 0)
-			return imageManager.getImageThumbnailInputStream(imageToUse, width, height);
-		else
-			return imageManager.getImageInputStream(imageToUse);*/
 	}
 	
 	public String getTargetImageContentType(){
@@ -126,5 +122,8 @@ public class DownloadImageActioin extends FrameworkActionSupport  implements Pre
 			return getTargetImage().getSize();
 		}	
 	}
+	public String execute() throws Exception {
+        return SUCCESS;
+    }
 	
 }
