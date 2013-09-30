@@ -39,4 +39,5 @@ public interface AttachmentManager {
 	
 	public abstract InputStream getAttachmentImageThumbnailInputStream(Attachment image, int width, int height ) ;	
 		
+	public abstract int getTotalAttachmentCount(int objectType, long objectId);
 }

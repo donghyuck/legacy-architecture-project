@@ -37,6 +37,7 @@ import org.apache.poi.util.IOUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.util.PlatformHelper.Platform;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
@@ -457,12 +458,19 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			 * TIP : 윈동우 경우 Thumbnail 파일 생성후에도 해당 파일을 참조하는 문제가 있어 이를 임시파일을 사용하여 
 			 * 처리.
 			 */
-			File tmp = getTemeFile();
-			Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(tmp)); 		
-			image.setThumbnailSize((int)tmp.length());
-			FileUtils.copyFile(tmp, file);			
+			if( Platform.current() == Platform.WINDOWS ){
+				File tmp = getTemeFile();
+				Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(tmp)); 		
+				image.setThumbnailSize((int)tmp.length());
+				FileUtils.copyFile(tmp, file);			
+			}else{
+				Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(file)); 		
+				image.setThumbnailSize((int)file.length());
+			}
+			
 			return file;
-		}  finally  {
+		
+		} finally  {
 			lock.unlock();
 		}		
 		

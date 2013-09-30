@@ -42,6 +42,8 @@ public interface AttachmentDao {
 
     public abstract List<Long> getAllAttachmentIds();
 
+    public abstract int getAttachmentCount(int objectType, long objectId);
+    
     public abstract void deleteAttachmentData();
 
     public abstract void deleteAttachmentData(Attachment attachment);
