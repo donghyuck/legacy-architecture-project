@@ -548,11 +548,14 @@
 									<div class="form-group">
 										<div class="col-lg-2" ></div>
 										<div class="col-lg-10">
-											<button id="update-menu-btn" class="k-button right">저장</button>
+											
 										</div>
 									</div>								
 								</form>	
 							</div>
+							 <div class="panel-footer">
+							 	<button id="update-menu-btn" class="k-button right">저장</button>
+							 </div>
 						</div>
 					</div>
 				</div>
