@@ -147,7 +147,85 @@
 								}
 							});
 						}											
-					}else if(  $(this).attr('href') == '#attachment-mgmt' ){ }
+					}else if(  $(this).attr('href') == '#attachment-mgmt' ){ 
+					
+						// IMAGE MGMT
+						if( ! $("#attach-upload").data("kendoUpload") ){	
+							$("#attach-upload").kendoUpload({
+								multiple : false,
+								showFileList : true,
+								localization : { 
+									select: '첨부파일 선택', remove:'삭제', dropFilesHere : '업로드할 첨부 파일을 이곳에 끌어 놓으세요.' , 
+									uploadSelectedFiles : '이미지 업로드',
+									cancel: '취소' 
+								},
+								async: {
+									saveUrl:  '${request.contextPath}/secure/save-attachments.do?output=json',							   
+									autoUpload: true
+								},
+								upload:  function (e) {		
+									e.data = { objectType: 1, objectId : selectedCompany.companyId, attachmentId:'-1' };		
+								},
+								success : function(e) {	
+									$('#image-grid').data('kendoGrid').dataSource.read(); 
+								}
+							}).css('min-width','300');
+						}				
+						
+						if( ! $("#attach-grid").data("kendoGrid") ){	
+							$("#attach-grid").kendoGrid({
+								dataSource: {
+									type: 'json',
+									transport: {
+										read: { url:'${request.contextPath}/secure/get-attachements.do?output=json', type: 'POST' },
+										parameterMap: function (options, operation){
+											if (operation != "read" && options) {										                        								                       	 	
+												return { objectType: 1, objectId : selectedCompany.companyId , item: kendo.stringify(options)};									                            	
+											}else{
+												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 1, objectId: selectedCompany.companyId }
+											}
+										} 
+									},
+									schema: {
+										total: "totalTargetAttachmentCount",
+										data: "targetAttachments",
+										model : Attachment
+									},
+									pageSize: 15,
+									serverPaging: true,
+									serverFiltering: false,
+									serverSorting: false,                        
+									error: handleKendoAjaxError
+								},
+								columns:[
+									{ field: "attachmentId", title: "ID",  width: 50, filterable: false, sortable: false },
+									{ field: "name", title: "파일", width: 150 },
+									{ field: "contentType", title: "파일 유형",  width: 100 },
+									{ field: "size", title: "파일크기",  width: 100 },
+									{ field: "creationDate", title: "생성일", width: 80, format: "{0:yyyy/MM/dd}" },
+									{ field: "modifiedDate", title: "수정일", width: 80, format: "{0:yyyy/MM/dd}" },
+									{ command: [ { name: "destroy", text: "삭제" } ], title: " ", width: "160px"  }
+								],
+								filterable: true,
+								sortable: true,
+								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+								//selectable: 'row',
+								height: 500,
+								detailTemplate: kendo.template( $("#attach-details-template").html() ),
+								detailInit : function(e){
+									//var detailRow = e.detailRow;
+								},		
+								dataBound: function(e) {
+								
+								},
+								change: function(e) {          
+									var selectedCells = this.select();       
+									this.expandRow(selectedCells);
+								}
+							});
+						}	
+											
+					}
 					$(this).tab('show');
 				});
 			}	
@@ -290,10 +368,13 @@
 							</div>
 						</div>								
 						<div class="tab-pane" id="attachment-mgmt">
-							<div class="big-box">
-								<div class="panel">
-								image attachment
-								</div>
+							<div class="blank-space-5">
+								<div class="row">
+									<div class="col-lg-12">
+										<input name="attach-upload" id="attach-upload" type="file" />
+										<div id="attach-grid"></div>
+									</div>
+								</div>								 
 							</div>
 						</div>
 

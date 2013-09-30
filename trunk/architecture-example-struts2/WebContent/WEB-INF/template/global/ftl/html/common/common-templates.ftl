@@ -24,7 +24,11 @@
 		<script id="image-details-template" type="text/x-kendo-template">	
 			<img id="image-preview" src="${request.contextPath}/secure/view-image.do?imageId=#=imageId#" class="img-thumbnail">
 		</script>
-		
+
+		<script id="attach-details-template" type="text/x-kendo-template">	
+			hello
+		</script>
+				
 		<script id="sidebar-template" type="text/x-kendo-template">	
 			<div class="rexy-header">
 				<div class="btn-group">
