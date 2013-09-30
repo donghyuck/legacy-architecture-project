@@ -72,7 +72,7 @@
 		},
 		_change: function (){
 			var that = this;
-			alert( '>>' + that.value );
+		//	alert( '>>' + that.value );
 			if( that.options.change != null )
 				that.options.change( that.dataSource.get( that.value) );
 		},
