@@ -502,7 +502,7 @@
 			<div id="role-grid">	</div>            	
 		</div>
 		
-		<div id="menu-window" style="display:none;">
+		<div id="menu-window" class="gray" style="display:none;">
 		<div class="container layout">
 			 <div class="row">
 				<div class="col-4 col-lg-4"><div class="k-content"><div id="menu-grid"></div></div></div>
