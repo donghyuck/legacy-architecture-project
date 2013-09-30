@@ -118,7 +118,7 @@ Company company = user.getCompany();
 									</div>
 								</div>
 								<div class="col-lg-12">
-									<div id="status"></div>
+									<div id="status"><%= request.getRemoteHost()%></div>
 								</div>
 							</form>						
 						</div>
