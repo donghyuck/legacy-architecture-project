@@ -26,7 +26,9 @@
 						currentUser = e.token;						
 					}
 				});
-				var selectedCompany = new Company();			
+										
+				var currentCompany = new Company();							
+				var selectedCompany = new Company();	
 										
 				// 3.MENU LOAD
 				var currentPageName = "MENU_1_1";
@@ -55,7 +57,7 @@
 							}
 						},
 						change : function(data){
-							selectedCompany = data ;
+							currentCompany = data ;
 							kendo.bind($("#company-info-panel"), selectedCompany );   
 						}
 					},
