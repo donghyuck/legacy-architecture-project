@@ -239,17 +239,6 @@
 			</result>
 		</action>
 
-		<!-- 
-		<action name="view-image" class="architecture.user.web.struts2.action.ViewUserImageAction">
-			<result name="success" type="stream">
-			  <param name="contentType">${targetImageContentType}</param>
-			  <param name="contentLength">${targetImageContentLength}</param>
-			  <param name="inputName">targetImageInputStream</param>			  
-			  <param name="bufferSize">1024</param>
-			</result>			
-		</action>
-		-->
-		
 		<action name="find-user" class="architecture.user.web.struts2.action.admin.ajax.UserManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -260,26 +249,7 @@
 				</param>
 			</result>		
 		</action>	
-<!-- 
-		<action name="download-attachment" class="architecture.user.web.struts2.action.ViewUserAttachmentAction">
-			<result name="success" type="stream">
-			  <param name="contentType">${targetAttachmentContentType}</param>
-			  <param name="contentLength">${targetAttachmentContentLength}</param>
-			  <param name="inputName">targetAttachmentInputStream</param>
-			  <param name="contentDisposition">attachment;filename="${encodedTargetAttachmentFileName}"</param>
-			  <param name="bufferSize">1024</param>
-			</result>			
-		</action>
 
-		<action name="view-attachment" class="architecture.user.web.struts2.action.ViewUserAttachmentAction">
-			<result name="success" type="stream">
-			  <param name="contentType">${targetAttachmentContentType}</param>
-			  <param name="contentLength">${targetAttachmentContentLength}</param>
-			  <param name="inputName">targetAttachmentInputStream</param>
-			  <param name="bufferSize">1024</param>
-			</result>			
-		</action>
- -->				
 		<action name="get-user-attachements" class="architecture.user.web.struts2.action.admin.ajax.AttachmentManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
