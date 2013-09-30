@@ -188,6 +188,14 @@
  		DELETE FROM V2_ATTACHMENT_DATA
     ]]></sql-query>            
     
+	<sql-query name="COUNT_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="전체 첨부파일 수 조회"><![CDATA[    
+	SELECT COUNT(ATTACHMENT_ID)
+	FROM V2_ATTACHMENT        
+	WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>            
+    
+        
     <!--  IMAGE -->	 
 	<sql-query name="CREATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
   		INSERT INTO V2_IMAGE (
