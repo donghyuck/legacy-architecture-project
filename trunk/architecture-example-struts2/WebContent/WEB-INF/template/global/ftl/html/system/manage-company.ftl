@@ -323,7 +323,7 @@
 								error:handleKendoAjaxError
 							},
 							columns: [
-								//{ title: "ID", field: "menuId",  width:40 },
+								{ title: "ID", field: "menuId",  width:40 },
 								{ title: "이름", field: "name", width:100 }
 							],
 							pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
