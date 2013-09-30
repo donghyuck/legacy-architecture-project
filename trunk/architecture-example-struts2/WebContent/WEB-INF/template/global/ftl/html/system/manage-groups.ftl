@@ -42,7 +42,7 @@
 						type: "dropDownList",
 						dataTextField: "displayName",
 						dataValueField: "companyId",
-						value: ${action.companyId},
+						value: selectedCompany.companyId,
 						enabled : false,
 						dataSource: {
 							transport: {
