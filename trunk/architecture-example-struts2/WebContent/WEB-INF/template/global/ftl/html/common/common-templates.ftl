@@ -59,6 +59,7 @@
 				</div>
 				<form role="navigation" name="navbar-form" method="POST" accept-charset="utf-8">
 					<input type="hidden" id="output" name="output" value="html" />
+					<input type="hidden" id="companyId" name="companyId" value="${action.companyId}" />
 				</form>			
 				<div class="navbar-form navbar-left">
 					<div class="form-group">
