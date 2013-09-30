@@ -25,7 +25,6 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
-import architecture.ee.web.attachment.Image;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
@@ -141,5 +140,11 @@ public class DownloadAttachmentActioin extends FrameworkActionSupport  implement
 			return getTargetAttachment().getSize();
 		}	
 	}
+	
+	
+	public String execute() throws Exception {
+        return SUCCESS;
+    }
+	
 	
 }

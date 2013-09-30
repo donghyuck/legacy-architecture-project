@@ -16,13 +16,17 @@
 package architecture.ee.web.struts2.action;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.util.Enumeration;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 
+import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
+import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
@@ -37,6 +41,14 @@ public class UploadImageAction extends FrameworkActionSupport  implements Prepar
 
 	private ImageManager imageManager ;
 	
+	private Image targetImage;
+	
+	 private Long imageId = -1L;
+	 
+	 private Integer objectType = 0;
+	 
+	 private Long objectId = -1L;
+	 
 	
 	public ImageManager getImageManager() {
 		return imageManager;
@@ -72,6 +84,48 @@ public class UploadImageAction extends FrameworkActionSupport  implements Prepar
 
 	
 	
+	/**
+	 * @return imageId
+	 */
+	public Long getImageId() {
+		return imageId;
+	}
+
+	/**
+	 * @param imageId 설정할 imageId
+	 */
+	public void setImageId(Long imageId) {
+		this.imageId = imageId;
+	}
+
+	/**
+	 * @return objectType
+	 */
+	public Integer getObjectType() {
+		return objectType;
+	}
+
+	/**
+	 * @param objectType 설정할 objectType
+	 */
+	public void setObjectType(Integer objectType) {
+		this.objectType = objectType;
+	}
+
+	/**
+	 * @return objectId
+	 */
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	/**
+	 * @param objectId 설정할 objectId
+	 */
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
 	protected boolean isMultiPart() {
 		HttpServletRequest request = getRequest();
 		if ( request instanceof MultiPartRequestWrapper ) 
@@ -118,5 +172,42 @@ public class UploadImageAction extends FrameworkActionSupport  implements Prepar
 			}
 		}
 		return result;
+	}
+	
+	public Image getTargetImage( ){
+		try {	
+			if( targetImage == null){
+				targetImage = getImageManager().getImage(imageId);
+			}
+			return targetImage;
+		} catch (NotFoundException e) {
+			log.error(e);
+			return null;
+		}
+	}
+	
+	public String execute() throws Exception {		
+		
+		Image imageToUse;
+		if( this.imageId < 0  ){	
+			File fileToUse = getUploadImage();			
+			imageToUse = getImageManager().createImage(
+				objectType, 
+				objectId, 
+				getUploadImageFileName(), 
+				getUploadImageContentType(), 
+				fileToUse);	
+			this.imageId = getImageManager().saveImage(imageToUse).getImageId();					
+		}else{
+			imageToUse = getTargetImage();
+			File fileToUse = getUploadImage();			
+			((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
+			((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
+			log.debug("image size:" + imageToUse.getSize());
+			log.debug("image stream:" + imageToUse.getInputStream());
+			getImageManager().saveImage(imageToUse);
+		}
+		
+		return success();
 	}
 }
