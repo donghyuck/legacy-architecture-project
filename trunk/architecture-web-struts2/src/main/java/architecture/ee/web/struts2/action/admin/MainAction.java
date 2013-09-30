@@ -15,10 +15,60 @@
  */
 package architecture.ee.web.struts2.action.admin;
 
+import architecture.common.user.Company;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.user.CompanyManager;
+import architecture.user.CompanyNotFoundException;
 
 public class MainAction extends FrameworkActionSupport {
 	
+	private Long companyId = -1L ;
+	
+	private Company targetCompany ;
+	
+	private CompanyManager companyManager ;
+	
+	
+	/**
+	 * @return companyManager
+	 */
+	public CompanyManager getCompanyManager() {
+		return companyManager;
+	}
+	/**
+	 * @param companyManager 설정할 companyManager
+	 */
+	public void setCompanyManager(CompanyManager companyManager) {
+		this.companyManager = companyManager;
+	}
+	public Long getCompanyId() {
+		if( companyId == -1L ){
+			companyId = getCompany().getCompanyId();
+		}
+		return companyId;
+	}
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+	
+    public Company getTargetCompany() {
+
+		if (companyId == null)
+			log.warn("Edit profile for unspecified company.");
+		
+		this.companyId = getCompanyId();
+		
+		if(targetCompany == null){
+			try {
+				targetCompany = companyManager.getCompany( (companyId).longValue() );
+			} catch (CompanyNotFoundException e) {
+				log.warn((new StringBuilder()).append("Could not load company object for id: ").append(companyId).toString());
+				return null;
+			}
+		}
+		return targetCompany ;
+	}   
+    
 	@Override
     public String execute() throws Exception {  
         return success();
