@@ -77,12 +77,13 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		}
 		
 		protected AnonymousUser createAnonymousUser(){
-			
+			log.debug("--------------------------------------------------------");
 			try {
 				HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 				String domain = request.getLocalAddr();
 				log.debug("DOMAIN:" + domain);
 			} catch (Exception ignore) {
+				log.warn(ignore);
 			}
 			
 			try {
