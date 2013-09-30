@@ -780,11 +780,11 @@
 							<!-- USER INFO TAB =============================== -->
 							<div class="container layout" >
 							<div class="row blank-top-5">
-								<div class="col-lg-3">
-									<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>
+								<div class="col-lg-4">
+									<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>									
 									<input name="uploadImage" id="files" type="file" />
 								</div>
-								<div class="col-lg-9 details">									
+								<div class="col-lg-8 details">									
 										<div class="form-horizontal">
 											<div class="form-group">
 	 											<label class="col-lg-3 control-label">이름</label>
@@ -819,21 +819,20 @@
 												</div>
 											</div>										
 										</div>
-									
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<td>최근 수정일자</td>
-												<td>최근 로그인 일자</td>
-											</tr>
-										</thead>
-										<tbody>
-											<tr class="active">
-												<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
-												<td><span data-bind="text: formattedLastLoggedIn"></span></td>
-											</tr>                                                                    
-										</tbody>
-									</table>									
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<td>최근 수정일자</td>
+													<td>최근 로그인 일자</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="active">
+													<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
+													<td><span data-bind="text: formattedLastLoggedIn"></span></td>
+												</tr>                                                                    
+											</tbody>
+										</table>									
 								</div>
 							</div>
 							
