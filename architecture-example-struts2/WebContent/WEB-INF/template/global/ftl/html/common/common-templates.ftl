@@ -26,7 +26,7 @@
 		</script>
 
 		<script id="attach-details-template" type="text/x-kendo-template">	
-			hello
+			<a href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" class="btn btn-warning">다운로드</a>
 		</script>
 				
 		<script id="sidebar-template" type="text/x-kendo-template">	
