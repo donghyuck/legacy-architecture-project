@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <startup-config>
+	
 	<setup>
 		<complete>false</complete>
 	</setup>
+	
 	<license>
 		<file>PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPGxpY2Vuc2UgaWQ9IjIwMTMwNjE0
 IiBuYW1lPSJBUFBMSUNBVElPTiBBUkNISVRFQ1RVUkUgZm9yIEpBVkEiIGVkaXRpb249IlNUQU5EQVJE
@@ -15,6 +17,7 @@ ZWIiLz48c2lnbmF0dXJlPjMwMmMwMjE0MDUxOGY0MzU1MDM2ZWJkYTRkNzQ0MDllMTk5M2UxOGM4ZmIz
 MTVmYzAyMTQ0ZWZmOWE3ZWY2NTI4ZjdkMDZmNGU2NjMzNGQyYWRjMjliNDA0MWNiPC9zaWduYXR1cmU+
 PC9saWNlbnNlPg==</file>
 	</license>
+	
 	<view>
 		<html>
 			<page>
@@ -29,11 +32,11 @@ PC9saWNlbnNlPg==</file>
 		</html>
 		<render>
 			<freemarker>
-                <debug>true</debug>
-                <enabled>true</enabled>
-                <source>
-                    <location>/WEB-INF/template/global/ftl/</location>
-                </source>
+				<debug>true</debug>
+				<enabled>true</enabled>
+				<source>
+					<location>/WEB-INF/template/global/ftl/</location>
+				</source>
 			</freemarker>
 			<velocity>
 				<enabled>false</enabled>
@@ -45,7 +48,8 @@ PC9saWNlbnNlPg==</file>
 		<user>
 			<anonymous>
 				<company>
-					<id>1</id>
+					<defaultId>1</defaultId>
+					<getByDomainName>true</getByDomainName>
 				</company>
 			</anonymous>
 		</user>
@@ -100,11 +104,6 @@ PC9saWNlbnNlPg==</file>
 			</oracleDataSourceProvider>
 		</default>
 		<external>
-		<!-- 
-			<jndiDataSourceProvider>
-				<jndiName></jndiName>
-			</jndiDataSourceProvider>
-			-->
 			<oracleDataSourceProvider>
 				<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
 				<url> jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB</url>
