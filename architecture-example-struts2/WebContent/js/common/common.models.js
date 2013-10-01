@@ -32,6 +32,7 @@ var Company = kendo.data.Model.define( {
     	companyId: { type: "number", editable: false, defaultValue: -1  },    	
         name: { type: "string", editable: true , validation: { required: true }},
         displayName: { type: "string", editable: true },
+        domainName: { type: "string", editable: true },
         description: { type: "string", editable: true },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" },
