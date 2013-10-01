@@ -30,9 +30,8 @@ public class MainAction extends FrameworkActionSupport  {
 	}
 
 	@Override
-    public String execute() throws Exception {  
+    public String execute() throws Exception{
         return success();
     }  
-    
     
 }

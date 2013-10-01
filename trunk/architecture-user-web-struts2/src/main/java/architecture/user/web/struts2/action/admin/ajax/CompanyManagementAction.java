@@ -126,6 +126,7 @@ public class CompanyManagementAction extends FrameworkActionSupport  {
 		String name = (String)map.get("name");
 		String displayName = (String)map.get("displayName");
 		String description = (String)map.get("description");
+		String domainName = (String)map.get("domainName");
 		this.targetCompany = companyManager.createCompany(name, displayName, description);
 		return success();	
 	}
@@ -138,12 +139,17 @@ public class CompanyManagementAction extends FrameworkActionSupport  {
 			String name = (String)map.get("name");
 			String description = (String)map.get("description");		
 			String displayName = (String)map.get("displayName");
+			String domainName = (String)map.get("domainName");
+			
 			if(!StringUtils.isEmpty(displayName))
 			    company.setDisplayName(displayName);			
 			if(!StringUtils.isEmpty(name))
 			    company.setName(name);
 			if(!StringUtils.isEmpty(description))
-			    company.setDescription(description);			
+			    company.setDescription(description);		
+			if(!StringUtils.isEmpty(domainName))
+			    company.setDomainName(domainName);				
+			
 			companyManager.updateCompany(company);		
 			this.targetCompany = null;		
 			return success();
