@@ -47,6 +47,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 	public static final String UNAUTHORIZED = "unauthorized";
 	public static final String DISABLED = "feature-disabled";
 	public static final String UNAUTHENTICATED = "unauthenticated";
+	public static final Long DEFAULT_MENU_ID = 1L;
 
 	protected final transient Log log = LogFactory.getLog(getClass());
 
@@ -108,12 +109,10 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		try {
 			if( menuRepository != null ){
 				Menu menu;
-				menu = menuRepository.getMenu(1);		
+				menu = menuRepository.getMenu(DEFAULT_MENU_ID);		
 				if( getUser().getCompany()!=null ){
-					String menuIdStr =StringUtils.defaultIfEmpty( getUser().getCompany().getProperties().get("menuId"), "1" );	
-					//log.debug("menuId : " + menuIdStr );
+					String menuIdStr =StringUtils.defaultIfEmpty( getUser().getCompany().getProperties().get("menuId"), DEFAULT_MENU_ID.toString() );	
 					long menuId = Long.parseLong( menuIdStr );
-					
 					if( menuId != menu.getMenuId() ){
 						menu = getMenu(menuId);		
 					}
@@ -141,37 +140,32 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
             return  OutputFormat.JSON.name().toLowerCase() + "-" + INPUT ;
         } else if ( getOutputFormat() == OutputFormat.XML ){ 
             return  OutputFormat.XML.name().toLowerCase() + "-" + INPUT ;
-        }        
+        }
        return INPUT;
     }
    
     public String success(){
     	if( log.isDebugEnabled())
-    		log.debug("output=" + getOutputFormat() );
-    	
+    		log.debug("output=" + getOutputFormat() );    	
         if( getOutputFormat() == OutputFormat.JSON ){
             return  OutputFormat.JSON.name().toLowerCase() + "-" + SUCCESS ;
         } else if ( getOutputFormat() == OutputFormat.XML ){ 
             return  OutputFormat.XML.name().toLowerCase() + "-" + SUCCESS ;
-        }
-        
+        }        
        return SUCCESS;
 	}
     
     
     public final Company getCompany(){
-    	User user = getUser();
-    	return user.getCompany();
+    	return getUser().getCompany();
     }
 	
 	public final User getUser() {
-		//log.debug( this.authProvider );		
 		if (null == user)
 			try {
 				final User ju = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getUser();
 				if (ju != null)
 					user = ju; // new ImmutableUser(SecurityHelper.getUser());				
-				// 
 				//리턴된 사용자 정보를 수정할 수 없도록 변경 불가 형식의 객체를 리턴한다.
 				//
 			} catch (final Exception ex) {
@@ -181,13 +175,11 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		return user;
 	}
 		
-	protected final <T> T getComponent(Class<T> requiredType)
-			throws ComponentNotFoundException {
+	protected final <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException {
 		return WebApplicationHelper.getComponent(requiredType);
 	}
 
-	protected final <T> T getComponent(String requiredName, Class<T> requiredType)
-			throws ComponentNotFoundException {	
+	protected final <T> T getComponent(String requiredName, Class<T> requiredType) throws ComponentNotFoundException {	
 		return WebApplicationHelper.getComponent(requiredName, requiredType);
 	}
 	
