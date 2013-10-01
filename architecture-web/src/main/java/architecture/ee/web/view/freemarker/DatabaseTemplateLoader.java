@@ -52,16 +52,14 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		if( !customized )
 		{
 			return null;
-		}
-		
+		}		
 		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;		
 		if(nameToUse.charAt(0) == File.separatorChar ){
 			nameToUse = File.separatorChar + getCurrentCompany().getName() + nameToUse ;
 		}else{
 			nameToUse = File.separatorChar + getCurrentCompany().getName() + File.separatorChar + nameToUse ;
 		}		
-		log.debug( name + ">" + nameToUse );
-		
+		log.debug( name + ">" + nameToUse );		
 		return super.findTemplateSource(nameToUse);
 	}
 	
