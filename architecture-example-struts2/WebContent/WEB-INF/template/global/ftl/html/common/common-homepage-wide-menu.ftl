@@ -10,7 +10,7 @@
 							<span class="icon-bar"></span>
 						</button>					
 						<a class="navbar-brand" href="/main.do">${action.user.company.displayName }</a>
-					</div>			
+					</div>
 					</#if>		
 					<div class="navbar-collapse collapse">										
 					<ul class="nav navbar-nav">

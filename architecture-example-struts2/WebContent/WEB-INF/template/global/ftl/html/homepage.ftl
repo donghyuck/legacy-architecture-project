@@ -210,31 +210,6 @@
 				}				
 			} );
 			
-			/**		
-			if(! $("#attach-window").data("kendoWindow")){
-				$("#attach-window").kendoWindow({
-					actions: ["Minimize", "Maximize", "Close"],
-					minHeight : 300,
-					minWidth : 300,
-					maxHeight : $(window).height() - 50,
-					maxWidth : $(window).width() - 50,					
-					modal: false,
-					visible: false,
-					draggable : false,
-					pinned: true,
-					position: { top: 5 }
-				});
-			}										
-			var attachWindow = $("#attach-window").data("kendoWindow");
-			var template = kendo.template($("#attachment-preview-template").html());
-			attachWindow.title( item.name );
-			attachWindow.content( template(item) );
-			$("#attach-window").closest(".k-window").css({
-				top: 5,
-				left: 5
-			 });
-			attachWindow.open();
-			*/
 		}			
 		</#if>		
 		-->
