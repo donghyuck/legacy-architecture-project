@@ -28,7 +28,7 @@ public interface CompanyManager {
 
 	public abstract Company createCompany(String name, String displayName, String description) throws CompanyAlreadyExistsException;
 	
-	
+	public abstract Company createCompany(String name, String displayName, String domainName, String description) throws CompanyAlreadyExistsException;
 	
 	public abstract Company getCompany(long groupId) throws CompanyNotFoundException;
 

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -124,7 +125,37 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
         }
 	}
 
-	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	public Company createCompany(String name, String displayName,
+			String domainName, String description)
+			throws CompanyAlreadyExistsException {
+		try
+        {
+			getCompany(name);
+            throw new CompanyAlreadyExistsException();
+        }
+        catch(CompanyNotFoundException unfe)
+        {
+        	if( !StringUtils.isEmpty(domainName)){
+        		try {
+					getCompanyByDomainName(domainName);
+				} catch (CompanyNotFoundException e) {
+					 throw new CompanyAlreadyExistsException();
+				}
+        	}        	
+        	Company company = new CompanyImpl();
+        	company.setDescription(description);
+        	company.setDisplayName(displayName);
+        	company.setName(name);
+        	company.setDomainName(domainName);
+        	Date groupCreateDate = new Date();
+        	company.setCreationDate(groupCreateDate);
+        	company.setModifiedDate(groupCreateDate);
+        	companyDao.createCompany(company);
+        	return company;
+        }
+	}
+
 	
 	public int getTotalCompanyCount() {
 		try {
