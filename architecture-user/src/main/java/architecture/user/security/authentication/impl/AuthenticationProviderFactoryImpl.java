@@ -17,6 +17,7 @@ package architecture.user.security.authentication.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
@@ -88,14 +89,17 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		
 		protected AnonymousUser createAnonymousUser(){
 			try {
-				HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-				String localAddr = request.getLocalAddr();
-				String localName = request.getLocalName();
-				
+				String localName = getLocalName();
 				log.debug("DOMAIN:" + localName);
+				
+				if( StringUtils.isNotEmpty(localName)){
+					Company company = getCompanyManager().getCompanyByDomainName(localName);	
+					return new AnonymousUser( company );
+				}
 			} catch (Exception ignore) {
 				log.warn(ignore);
-			}			
+			}	
+			
 			try {
 				return new AnonymousUser( getDefaultCompany() );
 			} catch (Exception e) {
@@ -103,15 +107,23 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 				return new AnonymousUser();
 			}			
 		}
-
+		
+		protected String getLocalName(){
+			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
+			return request.getLocalName();
+		}
+		
 		protected Company getDefaultCompany() throws Exception {
 			if( defaultCompany == null ){
 				String companyIdStr = ApplicationHelper.getApplicationProperty("components.user.anonymous.company.id", "1");
-				Company company = ApplicationHelper.getComponent(CompanyManager.class).getCompany(Long.parseLong(companyIdStr));
+				Company company = getCompanyManager().getCompany(Long.parseLong(companyIdStr));
 				defaultCompany = company;
 			}
 			return defaultCompany;
 		}
 		
+		protected CompanyManager getCompanyManager(){
+			return  ApplicationHelper.getComponent(CompanyManager.class);
+		}
 	}
 }
