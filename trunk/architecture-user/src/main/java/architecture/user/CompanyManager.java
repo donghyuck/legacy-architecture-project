@@ -28,17 +28,24 @@ public interface CompanyManager {
 
 	public abstract Company createCompany(String name, String displayName, String description) throws CompanyAlreadyExistsException;
 	
+	
+	
 	public abstract Company getCompany(long groupId) throws CompanyNotFoundException;
 
 	public abstract Company getCompany(String name) throws CompanyNotFoundException;
 	
+	public abstract Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException;
+		
+	
 	public abstract void updateCompany(Company group) throws CompanyNotFoundException, CompanyAlreadyExistsException;
+	
 	
 	public abstract int getTotalCompanyCount();
 
 	public abstract List<Company> getCompanies();
 
 	public abstract List<Company> getCompanies(int startIndex, int numResults);
+	
 	
 	public abstract int getTotalCompanyGroupCount(Company group);
 	

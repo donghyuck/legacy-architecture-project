@@ -21,11 +21,13 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	protected Cache groupCache;
     protected Cache groupIdCache ;
     
+    
 	public AbstractGroupManager() {
 		
         this.caseInsensitiveGroupNameMatch = true;
         this.groupCache = AdminHelper.getCache("groupCache");
         this.groupIdCache = AdminHelper.getCache("groupIdCache");
+       // this.groupIdCache = AdminHelper.getCache("groupDomainCache");
 	}
 	
 	public void setGroupCache(Cache groupCache) {
@@ -93,6 +95,8 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	
     protected abstract Group lookupGroup(long groupId)  throws GroupNotFoundException;
     
+    protected abstract Group lookupGroupByDomainName(String nameToUse)  throws GroupNotFoundException;
+    
     protected boolean nameEquals(Group g1, Group g2){
     	return g1.getName() != null && g2.getName() != null && caseGroupName(g1.getName()).equals(caseGroupName(g2.getName()));
     }
@@ -100,6 +104,7 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
     protected void groupNameUpdated(String oldGroupName){
         groupIdCache.remove(caseGroupName(oldGroupName));	
     }
+
     
     protected void clearGroupFromCache(Group group){
     	groupCache.remove(group.getGroupId());

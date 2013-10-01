@@ -28,6 +28,8 @@ public interface CompanyDao {
 	public Company getCompanyById(long companyId);
 	
 	public void updateCompany(Company company);
+	
+	public Company getCompanyByDomainName(String domainName);
 
 	/**
 	 * 제공되지 않는 기능

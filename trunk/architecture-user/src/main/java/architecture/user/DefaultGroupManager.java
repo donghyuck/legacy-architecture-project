@@ -178,6 +178,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 	    return g;
 	}
 
+
 	@Override
 	protected Group lookupGroup(long groupId) throws GroupNotFoundException {
 	    if(groupId == -2L)
@@ -321,7 +322,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
 		}
 		
 	}
-	
+
 	
 /*
 	    protected Group lookupGroup(String name) throws RoleNotFoundException

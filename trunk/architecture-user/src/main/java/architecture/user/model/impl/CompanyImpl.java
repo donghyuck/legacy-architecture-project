@@ -27,6 +27,7 @@ public class CompanyImpl  extends BaseModelObject implements Company {
 
 	private Long companyId;
 	private String displayName;
+	private String domainName;
 	
 	public String getDisplayName() {
 		return displayName;
@@ -40,6 +41,20 @@ public class CompanyImpl  extends BaseModelObject implements Company {
 
 	public long getCompanyId() {
 		return companyId;
+	}
+
+	/**
+	 * @return domainName
+	 */
+	public String getDomainName() {
+		return domainName;
+	}
+
+	/**
+	 * @param domainName 설정할 domainName
+	 */
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
 	}
 
 	public Serializable getPrimaryKeyObject() {
