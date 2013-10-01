@@ -19,7 +19,7 @@ import java.util.Map;
 
 import architecture.common.model.v2.ModelObject;
 
-public interface Company extends  ModelObject {
+public interface Company extends ModelObject {
 	
 	
 	/**
@@ -37,10 +37,15 @@ public interface Company extends  ModelObject {
 	
 	public abstract void setDisplayName(String displayName);
 	
+	public String getDomainName();
+	
+	public void setDomainName(String domainName);
+	
     public abstract Map<String, String> getProperties();
 	
     /**
 	 * @param  properties
 	 */
     public abstract void setProperties(Map<String, String> properties);
+    
 }
