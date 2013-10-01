@@ -70,7 +70,6 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	}
 	
 	protected final Company getCurrentCompany(){
-		//log.debug( "user" + SecurityHelper.getUser() );		
 		return SecurityHelper.getUser().getCompany();
 		
 	}
