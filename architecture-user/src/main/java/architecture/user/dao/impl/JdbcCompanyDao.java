@@ -42,6 +42,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 			g.setCompanyId(rs.getLong("COMPANY_ID"));
 			g.setDisplayName(rs.getString("DISPLAY_NAME"));
 			g.setName(rs.getString("NAME"));
+			g.setDomainName(rs.getString("DOMAIN_NAME"));
 			g.setDescription(rs.getString("DESCRIPTION"));
 			g.setCreationDate( rs.getDate("CREATION_DATE") ); 
 			g.setModifiedDate( rs.getDate("MODIFIED_DATE") ); 		
@@ -86,13 +87,39 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 				new SqlParameterValue(Types.VARCHAR, company.getName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDisplayName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDescription()),
+				new SqlParameterValue(Types.VARCHAR, company.getDomainName()),
 				new SqlParameterValue(Types.DATE, company.getCreationDate()),
 				new SqlParameterValue(Types.DATE, company.getModifiedDate()));		
 		company.setCompanyId(companyId);		
 		setCompanyProperties(company.getCompanyId(), company.getProperties());		
 	}	
 
-	
+
+	public Company getCompanyByDomainName(String domainName) {
+		if( StringUtils.isEmpty(domainName)){
+			return null;
+		}		
+		Company company = null ;
+		try {
+			company = getExtendedJdbcTemplate().queryForObject(
+					getBoundSql("ARCHITECTURE_SECURITY.SELECT_COMPANY_BY_DOMAIN_NAME").getSql(), companyMapper, 
+					new SqlParameterValue(Types.VARCHAR,  domainName ) );
+			
+			company.setProperties(getCompanyProperties( company.getCompanyId() ));
+		} catch (IncorrectResultSizeDataAccessException e) {
+			if(e.getActualSize() > 1)
+	        {
+	            log.warn((new StringBuilder()).append("Multiple occurrances of the same company domainName found: ").append(domainName).toString());
+	            throw e;
+	        }
+		} catch (DataAccessException e) {
+			 String message = (new StringBuilder()).append("Failure attempting to load company by domainName : ").append(domainName).append(".").toString();
+			 log.fatal(message, e);
+		}		
+		return company;
+	}
+
+
 	public Company getCompanyByName(String name, boolean caseInsensitive) {
 		if( StringUtils.isEmpty(name)){
 			return null;
@@ -107,11 +134,11 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 		} catch (IncorrectResultSizeDataAccessException e) {
 			if(e.getActualSize() > 1)
 	        {
-	            log.warn((new StringBuilder()).append("Multiple occurrances of the same company ID found: ").append(name).toString());
+	            log.warn((new StringBuilder()).append("Multiple occurrances of the same company name found: ").append(name).toString());
 	            throw e;
 	        }
 		} catch (DataAccessException e) {
-			 String message = (new StringBuilder()).append("Failure attempting to load company by ID : ").append(name).append(".").toString();
+			 String message = (new StringBuilder()).append("Failure attempting to load company by name : ").append(name).append(".").toString();
 			 log.fatal(message, e);
 		}		
 		return company;
@@ -139,6 +166,7 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.UPDATE_COMPANY").getSql(), 	
 				new SqlParameterValue(Types.VARCHAR, company.getName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDisplayName()),
+				new SqlParameterValue(Types.VARCHAR, company.getDomainName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDescription()),
 				new SqlParameterValue(Types.DATE, company.getModifiedDate()),
 				new SqlParameterValue(Types.NUMERIC, company.getCompanyId()));
@@ -200,6 +228,5 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 				new int[]{Types.INTEGER}, 
 				Long.class);
 	}
-
 
 }

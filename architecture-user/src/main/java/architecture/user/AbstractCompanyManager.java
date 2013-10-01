@@ -33,6 +33,7 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 	protected boolean caseInsensitiveCompanyNameMatch;
 	protected Cache companyCache;
     protected Cache companyIdCache ;
+    protected Cache companyDomainCache ;
         
 	public AbstractCompanyManager() {
         this.caseInsensitiveCompanyNameMatch = true;
@@ -43,6 +44,20 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 	public void setCaseInsensitiveCompanyNameMatch(
 			boolean caseInsensitiveCompanyNameMatch) {
 		this.caseInsensitiveCompanyNameMatch = caseInsensitiveCompanyNameMatch;
+	}
+
+	/**
+	 * @return companyDomainCache
+	 */
+	public Cache getCompanyDomainCache() {
+		return companyDomainCache;
+	}
+
+	/**
+	 * @param companyDomainCache 설정할 companyDomainCache
+	 */
+	public void setCompanyDomainCache(Cache companyDomainCache) {
+		this.companyDomainCache = companyDomainCache;
 	}
 
 	public void setCompanyCache(Cache companyCache) {
@@ -57,6 +72,21 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 		this.eventPublisher = eventPublisher;
 	}	
 		
+	 public Company getCompanyByDomainName(String name)
+		        throws CompanyNotFoundException
+		    {
+		    	String nameToUse = name.toLowerCase();
+		    	if( companyDomainCache.get(nameToUse)  != null ){
+		    		log.debug( companyDomainCache.get(nameToUse )) ;
+		    		Long companyId = (Long)companyDomainCache.get(nameToUse).getValue();    		
+		    		return getCompany(companyId);
+		    	}else{
+		    		Company c = lookupCompany(nameToUse);
+		    		companyDomainCache.put( new Element( nameToUse, c.getCompanyId() ) );
+		    		return getCompany(c.getCompanyId());
+		    	}
+		    }
+	 
     public Company getCompany(String name)
         throws CompanyNotFoundException
     {
@@ -93,12 +123,18 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
         return caseInsensitiveCompanyNameMatch ? name.toLowerCase() : name;
     }
     
+    protected abstract Company lookupCompanyByDomainName(String name) throws CompanyNotFoundException;
+    
     protected abstract Company lookupCompany(String name) throws CompanyNotFoundException;
 	
     protected abstract Company lookupCompany(long groupId)  throws CompanyNotFoundException;
     
     protected boolean nameEquals(Company c1, Company c2){
     	return c1.getName() != null && c2.getName() != null && caseCompanyName(c1.getName()).equals(caseCompanyName(c2.getName()));
+    }
+    
+    protected void companyDomainNameUpdated(String oldCompanyDomainName){
+        companyDomainCache.remove(oldCompanyDomainName);	
     }
     
     protected void companyNameUpdated(String oldCompanyName){

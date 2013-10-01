@@ -25,12 +25,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
 import architecture.ee.util.ApplicationHelper;
 import architecture.user.CompanyManager;
+import architecture.user.CompanyNotFoundException;
 import architecture.user.security.authentication.AuthenticationProvider;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
@@ -41,12 +43,16 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 	
 	private SecurityContextAuthenticationProvider instance = new SecurityContextAuthenticationProvider();
 	
+	
+	
 	public AuthenticationProvider getSecurityContextAuthenticationProvider() {
 		return instance;
 	}
 
 	static class SecurityContextAuthenticationProvider implements AuthenticationProvider {
 
+		private Company defaultCompany = null;
+		
 		public Authentication getAuthentication(){
 			SecurityContext context = SecurityContextHolder.getContext();
 			Authentication authen = context.getAuthentication();		
@@ -55,8 +61,7 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 
 		public User getUser() {
 			try {
-				SecurityContext context = SecurityContextHolder.getContext();
-				Authentication authen = context.getAuthentication();
+				Authentication authen = getAuthentication();	
 				Object obj = authen.getPrincipal();
 				if ( obj instanceof ExtendedUserDetails )
 					return ((ExtendedUserDetails)obj).getUser();
@@ -76,28 +81,36 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 			return createAnonymousUser();
 		}
 		
+
+		public boolean isSystemAdmin() {
+				return false;
+		}
+		
 		protected AnonymousUser createAnonymousUser(){
-			log.debug("--------------------------------------------------------");
 			try {
 				HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-				String domain = request.getLocalAddr();
-				log.debug("DOMAIN:" + domain);
+				String localAddr = request.getLocalAddr();
+				String localName = request.getLocalName();
+				
+				log.debug("DOMAIN:" + localName);
 			} catch (Exception ignore) {
 				log.warn(ignore);
-			}
-			
+			}			
 			try {
-				String companyIdStr = ApplicationHelper.getApplicationProperty("components.user.anonymous.company.id", "1");
-				Company company = ApplicationHelper.getComponent(CompanyManager.class).getCompany(Long.parseLong(companyIdStr));				
-				return new AnonymousUser( company );
+				return new AnonymousUser( getDefaultCompany() );
 			} catch (Exception e) {
-				log.error(e);
+				log.warn(e);
 				return new AnonymousUser();
 			}			
 		}
 
-		public boolean isSystemAdmin() {
-				return false;
+		protected Company getDefaultCompany() throws Exception {
+			if( defaultCompany == null ){
+				String companyIdStr = ApplicationHelper.getApplicationProperty("components.user.anonymous.company.id", "1");
+				Company company = ApplicationHelper.getComponent(CompanyManager.class).getCompany(Long.parseLong(companyIdStr));
+				defaultCompany = company;
+			}
+			return defaultCompany;
 		}
 		
 	}

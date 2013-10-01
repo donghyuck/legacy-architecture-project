@@ -195,6 +195,18 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 	        return g;
 	}
 
+
+	@Override
+	protected Company lookupCompanyByDomainName(String name)
+			throws CompanyNotFoundException {
+		Company g = companyDao.getCompanyByDomainName(name);
+	    if(g == null)
+	        throw CodeableException.newException(CompanyNotFoundException.class, 5142, name);//new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
+	    else
+	        return g;
+	}
+
+	
 	@Override
 	protected Company lookupCompany(long groupId)
 			throws CompanyNotFoundException {
