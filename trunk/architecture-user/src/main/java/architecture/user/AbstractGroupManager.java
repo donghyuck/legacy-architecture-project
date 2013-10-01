@@ -95,8 +95,6 @@ public abstract class AbstractGroupManager implements GroupManager, EventSource 
 	
     protected abstract Group lookupGroup(long groupId)  throws GroupNotFoundException;
     
-    protected abstract Group lookupGroupByDomainName(String nameToUse)  throws GroupNotFoundException;
-    
     protected boolean nameEquals(Group g1, Group g2){
     	return g1.getName() != null && g2.getName() != null && caseGroupName(g1.getName()).equals(caseGroupName(g2.getName()));
     }
