@@ -21,6 +21,7 @@ import architecture.common.model.ModelObject;
 
 
 public abstract class DateModelObjectSupport implements ModelObject {
+	
 	private Date creationDate = null;
 	
 	private Date modifiedDate = null;
