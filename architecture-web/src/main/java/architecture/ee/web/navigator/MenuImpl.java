@@ -16,21 +16,18 @@
 package architecture.ee.web.navigator;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.support.BaseModelObjectSupport;
 
-public class MenuImpl  extends BaseModelObject implements Menu {
+public class MenuImpl  extends BaseModelObjectSupport implements Menu {
 	
 	private long menuId = -1L;
 	private String location ;
 	private String title;
 	private boolean enabled = false;
 	private String menuData;
-	private Map<String, String> properties = null;
 	
 	public long getMenuId() {
 		return menuId;
@@ -48,8 +45,8 @@ public class MenuImpl  extends BaseModelObject implements Menu {
 		return menuId;
 	}
 
-	public int getModelObjectType() {
-		return ModelObjectType.MENU.getKey();
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.MENU;
 	}
 
 	public String getLocation() {
@@ -118,11 +115,6 @@ public class MenuImpl  extends BaseModelObject implements Menu {
 		builder.append("enabled=");
 		builder.append(enabled);
 		builder.append(", ");
-		if (getDescription() != null) {
-			builder.append("getDescription()=");
-			builder.append(getDescription());
-			builder.append(", ");
-		}
 		if (getName() != null) {
 			builder.append("getName()=");
 			builder.append(getName());
@@ -144,7 +136,6 @@ public class MenuImpl  extends BaseModelObject implements Menu {
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() 
 				+ CacheSizes.sizeOfString(getName())
-				+ CacheSizes.sizeOfString(getDescription())
 				+ CacheSizes.sizeOfString(title)
 				+ CacheSizes.sizeOfString(location) 
 				+ CacheSizes.sizeOfBoolean()
@@ -162,14 +153,5 @@ public class MenuImpl  extends BaseModelObject implements Menu {
 		this.menuData = data;
 	}
 
-	public Map<String, String> getProperties() {
-		if(properties == null)
-			properties = new HashMap<String, String>();
-		return properties;
-	}
-
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;		
-	}
 	
 }
