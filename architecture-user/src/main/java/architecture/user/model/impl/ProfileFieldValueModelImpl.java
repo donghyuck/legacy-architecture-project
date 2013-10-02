@@ -19,7 +19,7 @@ import architecture.user.profile.TypeConverter.ConversionException;
 /**
  * @author  donghyuck
  */
-public class ProfileFieldValueModelImpl extends BaseModelObject<ProfileFieldValue> implements ProfileFieldValueModel {
+public class ProfileFieldValueModelImpl extends SimpleModelObject<ProfileFieldValue> implements ProfileFieldValueModel {
 
 	private Log log = LogFactory.getLog(getClass());
 	

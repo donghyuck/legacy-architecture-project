@@ -81,7 +81,7 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 		    		Long companyId = (Long)companyDomainCache.get(nameToUse).getValue();    		
 		    		return getCompany(companyId);
 		    	}else{
-		    		Company c = lookupCompany(nameToUse);
+		    		Company c = lookupCompanyByDomainName(nameToUse);
 		    		companyDomainCache.put( new Element( nameToUse, c.getCompanyId() ) );
 		    		return getCompany(c.getCompanyId());
 		    	}

@@ -11,7 +11,7 @@ import architecture.user.profile.ProfileFieldOption;
 /**
  * @author  donghyuck
  */
-public class ProfileFieldOptionModelImpl  extends BaseModelObject<ProfileFieldOption> implements ProfileFieldOptionModel {
+public class ProfileFieldOptionModelImpl  extends SimpleModelObject<ProfileFieldOption> implements ProfileFieldOptionModel {
 
     private long fieldID;
     /**

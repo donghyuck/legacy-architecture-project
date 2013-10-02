@@ -31,7 +31,7 @@ import architecture.common.user.Company;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.dao.CompanyDao;
-import architecture.user.model.impl.CompanyImpl;
+import architecture.user.impl.CompanyImpl;
 
 public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDao {
 

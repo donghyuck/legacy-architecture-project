@@ -1,7 +1,7 @@
 package architecture.user.permission;
 
-import architecture.user.model.PermissionModel;
+import architecture.common.model.SimpleModelObject;
 
-public interface Permission extends PermissionModel {
+public interface Permission extends SimpleModelObject {
 
 }

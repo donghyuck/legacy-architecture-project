@@ -28,7 +28,7 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.user.dao.CompanyDao;
-import architecture.user.model.impl.CompanyImpl;
+import architecture.user.impl.CompanyImpl;
 
 public class DefaultCompanyManager extends AbstractCompanyManager {
 

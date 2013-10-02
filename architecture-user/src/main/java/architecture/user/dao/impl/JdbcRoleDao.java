@@ -12,7 +12,7 @@ import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.Role;
 import architecture.user.dao.RoleDao;
-import architecture.user.model.impl.RoleImpl;
+import architecture.user.impl.RoleImpl;
 
 /**
  * @author  donghyuck

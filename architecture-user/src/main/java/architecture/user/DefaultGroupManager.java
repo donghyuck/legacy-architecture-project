@@ -15,7 +15,7 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.dao.GroupDao;
-import architecture.user.model.impl.GroupImpl;
+import architecture.user.impl.GroupImpl;
 import architecture.user.util.CompanyUtils;
 
 import com.google.common.collect.Sets;

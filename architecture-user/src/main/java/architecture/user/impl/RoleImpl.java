@@ -13,31 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.user.model.impl;
+package architecture.user.impl;
 
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.SimpleModelObjectSupport;
 import architecture.user.Role;
 
 
-public class RoleImpl extends BaseModelObject  implements Role  {
+public class RoleImpl extends SimpleModelObjectSupport  implements Role  {
 
 	private Long roleId;
 	
 	private int mask;
 	
+	private String description;
+	
 	public Serializable getPrimaryKeyObject() {
 		return getRoleId();
 	}
 
-	public int getModelObjectType() {
-		return 11;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.ROLE;
 	}
 
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
+	}
+
+	/**
+	 * @return description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description 설정할 description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public long getRoleId() {

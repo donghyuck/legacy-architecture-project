@@ -16,20 +16,29 @@
 package architecture.user.util;
 
 import architecture.common.user.Company;
-import architecture.common.user.SecurityHelper;
-import architecture.common.user.User;
 import architecture.ee.util.ApplicationHelper;
 import architecture.user.CompanyManager;
 import architecture.user.CompanyNotFoundException;
-import architecture.user.model.impl.CompanyImpl;
 
 public class CompanyUtils {
 	
 	public static Company getCompany(long companyId) throws CompanyNotFoundException{
-		if(companyId == -1L ){
-			return new CompanyImpl();
-		}		
 		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
 		return companyManger.getCompany(companyId);		
 	}	
+	
+	public static Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException{
+		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
+		return companyManger.getCompanyByDomainName(domainName);
+	}	
+	
+	
+	public static Company getDefaultCompany() throws CompanyNotFoundException {
+		long companuId = ApplicationHelper.getApplicationLongProperty("components.user.anonymous.company.defaultId", 1L);
+		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
+		Company company = companyManger.getCompany(companuId);
+		return company;
+	}
+	//boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
+		
 }
