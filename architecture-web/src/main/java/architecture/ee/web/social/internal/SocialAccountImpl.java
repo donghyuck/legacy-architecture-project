@@ -21,11 +21,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.support.PropertyModelSupport;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.SocialServiceProvider;
 
-public class SocialAccountImpl extends BaseModelObject implements SocialAccount {
+public class SocialAccountImpl extends PropertyModelSupport implements SocialAccount {
 
 	private Long socialAccountId = -1L;
 	private Integer objectType;
@@ -35,8 +35,6 @@ public class SocialAccountImpl extends BaseModelObject implements SocialAccount 
 	private String accessSecret ;
 	private boolean isSignedIn = false;
 	private SocialServiceProvider serviceProvider;
-	private Map<String, String> properties;
-	
 	public SocialAccountImpl() {
 	}
 
@@ -157,26 +155,10 @@ public class SocialAccountImpl extends BaseModelObject implements SocialAccount 
 		this.isSignedIn = isSignedIn;
 	}
 
-	public int getModelObjectType() {
-		return ModelObjectType.SOCAIL_ACCOUNT.getKey();
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.SOCAIL_ACCOUNT;
 	}
-	
-	/**
-	 * @param properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
-	
-	public Map<String, String> getProperties() {
-		synchronized (this) {
-			if (properties == null) {
-				properties = new ConcurrentHashMap<String, String>();
-			}
-		}
-		// Return a wrapper that will intercept add and remove commands.
-		return properties;
-	}
+
 	
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() 

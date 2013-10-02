@@ -82,7 +82,7 @@ public class DefaultSocialAccountManager implements SocialAccountManager {
 		Date now = new Date();		
 		impl.setCreationDate(now);
 		impl.setModifiedDate(now);
-		impl.setObjectType(company.getModelObjectType());
+		impl.setObjectType(company.getModelObjectType().getKey());
 		impl.setObjectId(company.getCompanyId());
 		impl.setServiceProviderName(media.name().toLowerCase());
 		impl.setSocialAccountId(-1L);		
@@ -126,7 +126,7 @@ public class DefaultSocialAccountManager implements SocialAccountManager {
 	}
 
 	public List<SocialAccount> getSocialAccounts(Company company) {
-		List<Long> ids = socialAccountDao.getSocialAccountIds(company.getModelObjectType(), company.getCompanyId());
+		List<Long> ids = socialAccountDao.getSocialAccountIds(company.getModelObjectType().getKey(), company.getCompanyId());
 		List<SocialAccount> accounts = new ArrayList<SocialAccount>(ids.size());
 		for(Long id : ids){
 			try {
