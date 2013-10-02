@@ -220,7 +220,6 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);						
 			String name = (String)map.get("name");
 			String title = (String)map.get("title");
-			String description = (String)map.get("description");	
 			Boolean enabled = (Boolean)map.get("enabled");
 			String location = (String)map.get("location");
 			String menuData = (String)map.get("menuData");			
@@ -232,9 +231,7 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 			if(!StringUtils.isEmpty(name))
 				menu.setName(name);
 			if(!StringUtils.isEmpty(title))
-				menu.setTitle(title);
-			if(!StringUtils.isEmpty(description))
-				menu.setDescription(description);		
+				menu.setTitle(title);	
 			if(!StringUtils.isEmpty(location))
 				menu.setLoaction(location);	
 			if(enabled!=null)
