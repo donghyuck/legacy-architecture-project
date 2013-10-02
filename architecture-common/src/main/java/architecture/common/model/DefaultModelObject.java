@@ -23,6 +23,6 @@ public interface DefaultModelObject extends PropertyModelObject {
 	
 	public String getDescription();
 	
-	public void setDesctiption(String name);
+	public void setDescription(String name);
 	
 }

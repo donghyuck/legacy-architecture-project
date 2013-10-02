@@ -16,7 +16,9 @@
  */
 package architecture.common.model;
 
-
+/*
+ * name, date, properties support
+ */
 public interface BaseModelObject extends PropertyModelObject {
 
 	public String getName();
