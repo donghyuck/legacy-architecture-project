@@ -18,12 +18,15 @@ package architecture.common.model.support;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import architecture.common.model.PropertyModelObject;
+import architecture.common.model.PropertyModel;
 import architecture.common.util.StringUtils;
 
-public abstract class PropertyModelObjectSupport implements PropertyModelObject {
+public abstract class PropertyModelSupport extends DateModelObjectSupport implements PropertyModel {
 	
 	private Map<String, String> properties = null;
+	
+
+	
 	/**
 	 * @param properties
 	 */
