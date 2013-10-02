@@ -21,23 +21,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
-<<<<<<< .mine
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
-=======
-import architecture.common.model.support.PropertyAndDateModelObjectSupport;
-import architecture.common.user.Company;
->>>>>>> .r989
 import architecture.common.user.User;
 
 /**
  * @author  donghyuck
  */
-<<<<<<< .mine
 public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, User {
-=======
-public class AnonymousUser extends PropertyAndDateModelObjectSupport implements AuthToken, User {
->>>>>>> .r989
+
 
 	private static final long serialVersionUID = 6602216613448436301L;
 
