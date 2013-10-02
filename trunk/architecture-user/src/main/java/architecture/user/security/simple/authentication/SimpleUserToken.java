@@ -6,12 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
 import architecture.common.user.authentication.UnAuthorizedException;
 
-public class SimpleUserToken implements AuthToken, User {
+public class SimpleUserToken extends BaseModelObjectSupport  implements AuthToken, User {
 
 	private long userId = -1L;
 	
