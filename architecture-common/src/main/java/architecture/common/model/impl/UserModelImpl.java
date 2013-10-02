@@ -30,8 +30,10 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.UserModel;
-import architecture.common.model.support.PropertyAndDateModelObjectSupport;
+
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
+
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.StringUtils;
@@ -40,7 +42,8 @@ import architecture.common.util.StringUtils;
  * @author  donghyuck
  */
 
-public class UserModelImpl extends PropertyAndDateModelObjectSupport  implements UserModel {
+public class UserModelImpl extends BaseModelObjectSupport  implements UserModel {
+
 
 	private Log log = LogFactory.getLog(getClass());
 

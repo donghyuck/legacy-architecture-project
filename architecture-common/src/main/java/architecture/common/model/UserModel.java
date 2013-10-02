@@ -22,7 +22,7 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 
-public interface UserModel extends PropertyAndDateModelObject {
+public interface UserModel extends BaseModelObject {
 	
     public static final String EMAIL_VISIBILITY_DEFAULT = "user.default.displayEmailAddress";
     
