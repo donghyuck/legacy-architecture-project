@@ -13,30 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model;
+package architecture.common.model.internal;
 
-import java.util.Date;
+import architecture.common.model.v2.ModelObjectTypeManager;
+import architecture.common.model.v2.ModelObjectTypeManagerFactory;
 
-public abstract class BaseModelObject  implements DateModelObject {
+public class DefaultModelObjectTypeManagerFactory implements ModelObjectTypeManagerFactory.Implementation {
 
-	private Date creationDate = null;
-	
-	private Date modifiedDate = null;
-
-	public Date getCreationDate() {
-		return creationDate;
+	public ModelObjectTypeManager getModelObjectTypeManager(){
+		return null;
 	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}	
-	
 }

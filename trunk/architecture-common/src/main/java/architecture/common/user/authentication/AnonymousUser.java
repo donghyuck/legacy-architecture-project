@@ -21,13 +21,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.PropertyAndDateModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 
 /**
  * @author  donghyuck
  */
-public class AnonymousUser implements AuthToken, User {
+public class AnonymousUser extends PropertyAndDateModelObjectSupport implements AuthToken, User {
 
 	private static final long serialVersionUID = 6602216613448436301L;
 

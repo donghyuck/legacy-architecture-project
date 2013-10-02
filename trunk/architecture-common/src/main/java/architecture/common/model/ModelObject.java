@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 import architecture.common.cache.Cacheable;
 
-public interface ModelObject<T> extends Cacheable, DatedObject, Comparable<T> {
+public interface ModelObject extends Cacheable {
 	
 	
 	/**
