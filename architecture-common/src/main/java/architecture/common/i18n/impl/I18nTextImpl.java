@@ -19,10 +19,11 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.SimpleModelObjectSupport;
 import architecture.common.util.I18nTextUtils;
 
-public class I18nTextImpl extends BaseModelObject  implements I18nText {
+public class I18nTextImpl extends SimpleModelObjectSupport  implements I18nText {
 	
 	private long textId = -1L ;
 	private String name;
@@ -65,11 +66,11 @@ public class I18nTextImpl extends BaseModelObject  implements I18nText {
 	public Serializable getPrimaryKeyObject() {
 		return getTextId();
 	}
-	public int getModelObjectType() {
-		return 0;
+	public ModelObjectType  getModelObjectType() {
+		return ModelObjectType.I18N_TEXT;
 	}
 	public int getCachedSize() {
-		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) +  CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfString( this.categoryName ) + CacheSizes.sizeOfString( getLocaleCode() )  + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;		
+		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) +  CacheSizes.sizeOfString( this.categoryName ) + CacheSizes.sizeOfString( getLocaleCode() )  + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;		
 	}
 	public String getResourceBundleKey() {
 		return I18nTextUtils.generateResourceBundleKey(categoryName, name);

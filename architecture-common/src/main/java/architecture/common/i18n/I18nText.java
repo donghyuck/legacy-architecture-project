@@ -15,9 +15,9 @@
  */
 package architecture.common.i18n;
 
-import architecture.common.model.v2.ModelObject;
+import architecture.common.model.SimpleModelObject;
 
-public interface I18nText  extends  ModelObject {
+public interface I18nText  extends  SimpleModelObject {
 
 	/**
 	 * @return textId
