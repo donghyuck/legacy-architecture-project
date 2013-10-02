@@ -180,6 +180,11 @@ public final class ApplicationHelper {
 		String str = getApplicationProperty(name, Integer.toString(defaultValue));		
 		return Integer.parseInt(str) ;
 	}
+
+	public static long getApplicationLongProperty(String name, long defaultValue){		
+		String str = getApplicationProperty(name, Long.toString(defaultValue));		
+		return Integer.parseInt(str) ;
+	}
 	
 	public static boolean getApplicationBooleanProperty(String name, boolean defaultValue){
 		String str = getApplicationProperty(name, Boolean.toString(defaultValue));		

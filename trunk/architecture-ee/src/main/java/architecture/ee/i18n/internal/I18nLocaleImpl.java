@@ -1,18 +1,17 @@
-package architecture.ee.model.impl;
+package architecture.ee.i18n.internal;
 
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
+import architecture.common.model.BaseModelObject;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.impl.BaseModelObject;
 import architecture.common.util.StringUtils;
 import architecture.ee.i18n.I18nLocale;
-import architecture.ee.model.I18nLocaleModel;
 
 /**
  * @author   donghyuck
  */
-public class I18nLocaleModelImpl extends BaseModelObject<I18nLocale>implements I18nLocaleModel , I18nLocale{
+public class I18nLocaleImpl extends BaseModelObject implements I18nLocale{
 
 	private long localeId = -1L;
 
@@ -87,7 +86,7 @@ public class I18nLocaleModelImpl extends BaseModelObject<I18nLocale>implements I
 	}
 	
 	public Object clone() {
-		I18nLocaleModelImpl impl = new I18nLocaleModelImpl();
+		I18nLocaleImpl impl = new I18nLocaleImpl();
 		impl.setLocaleId(getLocaleId());
 		impl.setLanguage(getLanguage());
 		impl.setCountry(getCountry());

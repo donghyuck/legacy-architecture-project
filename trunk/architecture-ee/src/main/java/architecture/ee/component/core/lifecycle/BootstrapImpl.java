@@ -173,6 +173,7 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean isBootstrapComponentAvailable(Class serviceClass){
 		try{			
 			getBootstrapComponent(serviceClass);			
