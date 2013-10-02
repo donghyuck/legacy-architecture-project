@@ -20,6 +20,13 @@ import java.util.Date;
 
 import architecture.common.cache.Cacheable;
 
+/**
+ * 모델을 표현하기 위한 기본 인터페이스로 
+ * 모델 타입, 프라이머리 키, 생성일 , 수정일 정보를 기본으로 같는다.
+ * 
+ * @author donghyuck
+ *
+ */
 public interface ModelObject extends Cacheable {
 	
 	
