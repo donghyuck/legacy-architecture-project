@@ -3,15 +3,15 @@ package architecture.ee.i18n.internal;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.BaseModelObject;
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.StringUtils;
 import architecture.ee.i18n.I18nLocale;
 
 /**
  * @author   donghyuck
  */
-public class I18nLocaleImpl extends BaseModelObject implements I18nLocale{
+public class I18nLocaleImpl extends DateModelObjectSupport implements I18nLocale{
 
 	private long localeId = -1L;
 
