@@ -15,28 +15,6 @@
  */
 package architecture.common.model;
 
-import java.util.Date;
+public interface PropertyAndDateModelObject extends PropertyModelObject, DateModelObject {
 
-public abstract class BaseModelObject  implements DateModelObject {
-
-	private Date creationDate = null;
-	
-	private Date modifiedDate = null;
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}	
-	
 }

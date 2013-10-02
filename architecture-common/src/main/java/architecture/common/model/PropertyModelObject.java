@@ -15,28 +15,20 @@
  */
 package architecture.common.model;
 
-import java.util.Date;
+import java.util.Map;
 
-public abstract class BaseModelObject  implements DateModelObject {
+public interface PropertyModelObject extends ModelObject {
 
-	private Date creationDate = null;
+	public abstract Map<String, String> getProperties();
 	
-	private Date modifiedDate = null;
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}	
+	public abstract void setProperties(Map<String, String> properties);
+	
+	public abstract boolean getBooleanProperty(String name, boolean defaultValue );
+	
+	public abstract long getLongProperty(String name, long defaultValue );
+	
+	public abstract int getIntProperty(String name, int defaultValue );
+	
+	public abstract String getProperty(String name, String defaultValue );
 	
 }

@@ -20,11 +20,12 @@ import java.util.Date;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.PropertyAndDateModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 
 
-public class SystemUser implements AuthToken, User {
+public class SystemUser extends PropertyAndDateModelObjectSupport implements AuthToken, User {
 	
 	private static final long serialVersionUID = -2371386795832701297L;
 	

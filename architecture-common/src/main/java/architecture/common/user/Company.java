@@ -15,11 +15,9 @@
  */
 package architecture.common.user;
 
-import java.util.Map;
+import architecture.common.model.PropertyAndDateModelObject;
 
-import architecture.common.model.v2.ModelObject;
-
-public interface Company extends ModelObject {
+public interface Company extends PropertyAndDateModelObject {
 	
 	
 	/**
@@ -41,11 +39,6 @@ public interface Company extends ModelObject {
 	
 	public void setDomainName(String domainName);
 	
-    public abstract Map<String, String> getProperties();
-	
-    /**
-	 * @param  properties
-	 */
-    public abstract void setProperties(Map<String, String> properties);
-    
+
+		
 }

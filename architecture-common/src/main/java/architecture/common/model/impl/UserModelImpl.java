@@ -30,6 +30,7 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.UserModel;
+import architecture.common.model.support.PropertyAndDateModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
@@ -39,7 +40,7 @@ import architecture.common.util.StringUtils;
  * @author  donghyuck
  */
 
-public class UserModelImpl extends BaseModelObject <User> implements UserModel {
+public class UserModelImpl extends PropertyAndDateModelObjectSupport  implements UserModel {
 
 	private Log log = LogFactory.getLog(getClass());
 
@@ -97,11 +98,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	 * 메일 공개 여부
 	 */
 	private boolean emailVisible;
-	
-	/**
-	 * 추가 프로퍼티 값
-	 */
-	private Map<String, String> properties;
 	
 	/**
 	 * 추가 프로퍼티 값
@@ -204,7 +200,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         nameVisible = true;
         email = null;
         emailVisible = false;
-        properties = null;
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -237,7 +232,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         nameVisible = true;
         email = null;
         emailVisible = false;
-        properties = null;
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -272,7 +266,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         nameVisible = true;
         this.email = null;
         emailVisible = false;
-        properties = null;
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -309,7 +302,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         this.nameVisible = true;
         this.email = null;
         this.emailVisible = false;
-        properties = null;
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -332,7 +324,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         this.name = name;
         this.nameVisible = nameVisible;
         this.emailVisible = emailVisible;
-        properties = props;     
+        setProperties(props);
         status = null;
     }
 
@@ -349,7 +341,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         this.nameVisible = true;
         this.email = null;
         this.emailVisible = false;
-        properties = null;
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -373,7 +364,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         this.lastName = lastName;
         this.nameVisible = nameVisible;
         this.emailVisible = emailVisible;
-        properties = props;
+        setProperties(props);
         status = null;
     }
     
@@ -396,7 +387,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         nameVisible = true;
         email = null;
         emailVisible = false;
-        properties = null;
+       
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -430,7 +421,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         nameVisible = true;
         email = null;
         emailVisible = false;
-        properties = null;
+       
         enabled = true;
         lastLoggedIn = null;
         lastProfileUpdate = null;
@@ -484,7 +475,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
         	profile = user.getProfile();
         
         if(user.getProperties() != null)
-            properties = new HashMap<String, String>(user.getProperties());
+        	setProperties(user.getProperties());
         try
         {
             passwordHash = user.getPasswordHash();
@@ -690,23 +681,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}
-
-	/**
-	 * @return
-	 */
-	public Map<String, String> getProperties() {
-		if (properties == null)
-			properties = new HashMap<String, String>();
-		return properties;
-	}
-
-	/**
-	 * @param properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
-
 	/**
 	 * @return
 	 */
@@ -939,11 +913,6 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 	}
 
 
-	@Override
-	public Object clone() {
-		return null;
-	}
-
     private static final char USERNAME_DISALLOWED_CHARS[] = {
         '/', ';', '#', ',', ':'
     };
@@ -1009,7 +978,7 @@ public class UserModelImpl extends BaseModelObject <User> implements UserModel {
 		size += CacheSizes.sizeOfString(username);
 		
 		size += CacheSizes.sizeOfObjectMap(profile);
-		size += CacheSizes.sizeOfMap(properties);
+		size += CacheSizes.sizeOfMap(getProperties());
 		size += CacheSizes.sizeOfObject();
 		size += CacheSizes.sizeOfDate();
 		size += CacheSizes.sizeOfDate();

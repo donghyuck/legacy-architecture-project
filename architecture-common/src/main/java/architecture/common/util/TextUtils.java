@@ -1702,4 +1702,19 @@ main:
 
         return true;
     }
+    
+    public static final String VALID_IP_ADDRESS_REGEX = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+	public static final String VALID_HOSTNAME_REGEX = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
+
+	public static boolean isValidHostname(String hostname) {
+		if( StringUtils.isEmpty(hostname))
+			return false;
+		return hostname.matches(VALID_HOSTNAME_REGEX);
+	}
+	
+	public static boolean isValidIpAddress(String ipAddress) {
+		if( StringUtils.isEmpty(ipAddress))
+			return false;
+		return ipAddress.matches(VALID_IP_ADDRESS_REGEX);
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Donghyuck, Son
+ * Copyright 2012, 2013 Donghyuck, Son
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.impl;
+package architecture.common.model.support;
 
 import java.util.Date;
 
-import architecture.common.model.ModelObject;
+import architecture.common.model.PropertyAndDateModelObject;
 
-@SuppressWarnings("serial")
-public abstract class BaseModelObject<T> implements ModelObject<T> {
-	
+public abstract class PropertyAndDateModelObjectSupport extends PropertyModelObjectSupport implements PropertyAndDateModelObject {
+
 	private Date creationDate = null;
 	
 	private Date modifiedDate = null;
 
-	public BaseModelObject() {
-	}
-		
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -43,6 +39,6 @@ public abstract class BaseModelObject<T> implements ModelObject<T> {
 
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
-	}	
-
+	}
+	
 }

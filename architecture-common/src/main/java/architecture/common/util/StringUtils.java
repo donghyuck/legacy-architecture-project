@@ -129,5 +129,5 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils {
 		String booleanString = defaultString(str, "false");
 		return Boolean.parseBoolean(booleanString);		
 	}
-	
+
 }

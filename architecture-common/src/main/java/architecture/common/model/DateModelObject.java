@@ -17,26 +17,28 @@ package architecture.common.model;
 
 import java.util.Date;
 
-public abstract class BaseModelObject  implements DateModelObject {
+public interface DateModelObject extends ModelObject {
 
-	private Date creationDate = null;
+	/**
+	 * @return 생성일을 리턴한다.
+	 */
+	public Date getCreationDate() ;
 	
-	private Date modifiedDate = null;
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}	
+	/**
+	 * 
+	 * @param  creationDate 생성일
+	 */
+	public void setCreationDate(Date creationDate);
+	
+	/**
+	 * @return 수정일을 리턴한다.
+	 */
+	public Date getModifiedDate();
+	
+	/**
+	 * 
+	 * @param  modifiedDate 수정일
+	 */
+	public void setModifiedDate(Date modifiedDate);
 	
 }

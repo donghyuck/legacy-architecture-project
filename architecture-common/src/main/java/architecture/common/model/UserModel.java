@@ -22,7 +22,7 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 
-public interface UserModel extends ModelObject<User> {
+public interface UserModel extends PropertyAndDateModelObject {
 	
     public static final String EMAIL_VISIBILITY_DEFAULT = "user.default.displayEmailAddress";
     
@@ -86,8 +86,6 @@ public interface UserModel extends ModelObject<User> {
     
     public abstract boolean isAnonymous();
     
-    public abstract Map<String, String> getProperties();    
-        
     /**
      * 확장 사용자 정보 제공하는가 여부를 리턴한다.
      * 
