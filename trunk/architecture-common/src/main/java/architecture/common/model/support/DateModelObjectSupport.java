@@ -17,10 +17,10 @@ package architecture.common.model.support;
 
 import java.util.Date;
 
-import architecture.common.model.PropertyAndDateModelObject;
+import architecture.common.model.ModelObject;
 
-public abstract class PropertyAndDateModelObjectSupport extends PropertyModelObjectSupport implements PropertyAndDateModelObject {
 
+public abstract class DateModelObjectSupport implements ModelObject {
 	private Date creationDate = null;
 	
 	private Date modifiedDate = null;
@@ -40,5 +40,4 @@ public abstract class PropertyAndDateModelObjectSupport extends PropertyModelObj
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
-	
 }
