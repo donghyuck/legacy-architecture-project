@@ -17,7 +17,7 @@
 package architecture.common.model;
 
 
-public interface BaseModelObject extends PropertyModel {
+public interface BaseModelObject extends PropertyModelObject {
 
 	public String getName();
 	

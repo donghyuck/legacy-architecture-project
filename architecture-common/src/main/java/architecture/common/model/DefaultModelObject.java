@@ -15,7 +15,7 @@
  */
 package architecture.common.model;
 
-public interface DefaultModelObject extends PropertyModel {
+public interface DefaultModelObject extends PropertyModelObject {
 
 	public String getName();
 	
