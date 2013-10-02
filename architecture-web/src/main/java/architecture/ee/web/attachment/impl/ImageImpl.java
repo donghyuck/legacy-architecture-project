@@ -21,11 +21,12 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.support.SimpleModelObjectSupport;
 import architecture.ee.web.attachment.Image;
 
-public class ImageImpl extends BaseModelObject implements Image {
+public class ImageImpl extends SimpleModelObjectSupport  implements Image {
 
+	private String name;
 	private Long imageId;
 	private Integer size;
 	private String contentType;
@@ -40,14 +41,13 @@ public class ImageImpl extends BaseModelObject implements Image {
 		return imageId;
 	}
 
-	public int getModelObjectType() {
-		return ModelObjectType.IMAGE.getKey();
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.IMAGE;
 	}
 
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())
 				+ CacheSizes.sizeOfString(contentType)
-				+ CacheSizes.sizeOfString(getDescription())
 				+ CacheSizes.sizeOfInt()
 				+ CacheSizes.sizeOfLong() 
 				+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
@@ -115,6 +115,20 @@ public class ImageImpl extends BaseModelObject implements Image {
 
 	public void setThumbnailContentType(String thumbnailContentType) {
 		this.thumbnailContentType = thumbnailContentType;
+	}
+
+	/**
+	 * @return name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name 설정할 name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override

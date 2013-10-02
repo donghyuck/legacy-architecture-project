@@ -2,11 +2,10 @@ package architecture.ee.web.attachment;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
-import architecture.common.model.v2.ModelObject;
+import architecture.common.model.BaseModelObject;
 
-public interface Attachment extends ModelObject {
+public interface Attachment extends BaseModelObject {
 
 	public long getAttachmentId();
 
@@ -31,10 +30,6 @@ public interface Attachment extends ModelObject {
 	public String getContentType();
 
 	public void setContentType(String contentType);
-
-	public Map<String, String> getProperties();
-
-	public void setProperties(Map<String, String> properties);
 
 	public int getDownloadCount();
 

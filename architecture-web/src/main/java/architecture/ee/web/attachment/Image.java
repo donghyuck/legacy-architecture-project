@@ -18,9 +18,9 @@ package architecture.ee.web.attachment;
 import java.io.IOException;
 import java.io.InputStream;
 
-import architecture.common.model.v2.ModelObject;
+import architecture.common.model.SimpleModelObject;
 
-public interface Image extends ModelObject {
+public interface Image extends SimpleModelObject {
 
 	public abstract long getImageId();
 

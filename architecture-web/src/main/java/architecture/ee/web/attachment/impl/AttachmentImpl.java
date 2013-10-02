@@ -3,15 +3,13 @@ package architecture.ee.web.attachment.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.ee.web.attachment.Attachment;
 
-public class AttachmentImpl extends BaseModelObject implements Attachment {
+public class AttachmentImpl extends BaseModelObjectSupport implements Attachment {
 
     private long attachmentId = -1L;
 	
@@ -26,9 +24,7 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 	private int size = 0 ;
 	
 	private int downloadCount = 0;
-	
-	private Map<String, String> properties = new HashMap<String, String>();
-	
+		
 	private InputStream inputStream;
 
 	private Integer thumbnailSize = 0;
@@ -63,14 +59,6 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 		this.objectId = objectId;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public int getSize() {
 		return size;
 	}
@@ -87,14 +75,6 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 		this.contentType = contentType;
 	}
 
-	public Map<String, String> getProperties() {
-		return properties;
-	}
-
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
-
 	public int getDownloadCount() {
 		return downloadCount;
 	}
@@ -106,10 +86,9 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())
 				+ CacheSizes.sizeOfString(contentType)
-				+ CacheSizes.sizeOfString(getDescription())
 				+ CacheSizes.sizeOfInt()
 				+ CacheSizes.sizeOfLong() 
-				+ CacheSizes.sizeOfMap(properties)
+				+ CacheSizes.sizeOfMap(getProperties())
 				+ CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate();
 	}
 
@@ -117,8 +96,8 @@ public class AttachmentImpl extends BaseModelObject implements Attachment {
 		return 0;
 	}
 
-	public int getModelObjectType() {
-		return ModelObjectType.ATTACHMENT.getKey();
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.ATTACHMENT;
 	}
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
