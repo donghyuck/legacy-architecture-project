@@ -48,7 +48,7 @@
   			CREATION_DATE, 
   			MODIFIED_DATE
   		FROM V2_COMPANY
-  		WHERE DOMAIN_NAME = ?
+  		WHERE DOMAIN_NAME LIKE '%'|| ? ||'%'
     ]]></dynamic>
 	</sql-query>
 		
