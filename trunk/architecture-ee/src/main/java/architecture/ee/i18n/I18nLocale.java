@@ -1,8 +1,8 @@
 package architecture.ee.i18n;
 
-import architecture.common.model.DateModelObject;
+import architecture.common.model.ModelObject;
 
-public interface I18nLocale extends DateModelObject {
+public interface I18nLocale extends ModelObject {
 
 
     /**
