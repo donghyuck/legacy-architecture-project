@@ -187,7 +187,7 @@ public class JdbcMenuDao extends ExtendedJdbcDaoSupport implements MenuDao {
 				new SqlParameterValue(Types.VARCHAR, menu.getName()),
 				new SqlParameterValue(Types.VARCHAR, menu.getTitle()),
 				new SqlParameterValue(Types.VARCHAR, menu.getLocation()),
-				new SqlParameterValue(Types.VARCHAR, menu.getDescription()),
+				new SqlParameterValue(Types.NUMERIC, menu.isEnabled() ? 1 : 0 ),
 				new SqlParameterValue(Types.DATE, menu.getModifiedDate()),
 				new SqlParameterValue(Types.NUMERIC, menu.getMenuId()));		
 		setMenuProperties(menu.getMenuId(), menu.getProperties());		
@@ -200,9 +200,6 @@ public class JdbcMenuDao extends ExtendedJdbcDaoSupport implements MenuDao {
 		
 		long menuId = getNextId(sequencerName);
 		((MenuImpl)menu).setMenuId(menuId);
-		
-		if("".equals(menu.getDescription()))
-            menu.setDescription(null);
 		if("".equals(menu.getTitle()))
             menu.setTitle(null);
 		if("".equals(menu.getLocation()))
@@ -213,7 +210,7 @@ public class JdbcMenuDao extends ExtendedJdbcDaoSupport implements MenuDao {
 				new SqlParameterValue(Types.VARCHAR, menu.getName()),
 				new SqlParameterValue(Types.VARCHAR, menu.getTitle()),
 				new SqlParameterValue(Types.VARCHAR, menu.getLocation()),
-				new SqlParameterValue(Types.VARCHAR, menu.getDescription()),
+				new SqlParameterValue(Types.NUMERIC, menu.isEnabled() ? 1 : 0 ),
 				new SqlParameterValue(Types.DATE, menu.getModifiedDate()),
 				new SqlParameterValue(Types.DATE, menu.getCreationDate()));		
 		setMenuProperties(menu.getMenuId(), menu.getProperties());	

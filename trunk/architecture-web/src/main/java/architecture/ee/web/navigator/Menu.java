@@ -14,11 +14,9 @@
  * limitations under the License.
  */
 package architecture.ee.web.navigator;
-import java.util.Map;
+import architecture.common.model.BaseModelObject;
 
-import architecture.common.model.v2.ModelObject;
-
-public interface Menu extends ModelObject {
+public interface Menu extends BaseModelObject {
 	
 	public abstract long getMenuId();
 	public String getLocation();
@@ -29,8 +27,6 @@ public interface Menu extends ModelObject {
 	public void setEnabled(boolean enabled);
 	public String getMenuData();
 	public void setMenuData(String data);	
-	public Map<String, String> getProperties();
-	public void setProperties( Map<String, String> properties );
 	
 	
 }
