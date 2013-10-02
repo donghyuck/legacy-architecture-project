@@ -16,7 +16,6 @@
 package architecture.common.model.support;
 
 import architecture.common.model.BaseModelObject;
-import architecture.common.model.PropertyModel;
 
 public abstract class BaseModelObjectSupport extends PropertyModelSupport implements BaseModelObject {
 	

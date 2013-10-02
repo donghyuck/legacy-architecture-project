@@ -15,20 +15,30 @@
  */
 package architecture.common.model;
 
-import java.util.Map;
+import java.util.Date;
 
-public interface PropertyModelObject extends DateModelObject {
+public interface DateModelObject extends ModelObject {
 
-	public abstract Map<String, String> getProperties();
+	/**
+	 * @return 생성일을 리턴한다.
+	 */
+	public Date getCreationDate() ;
 	
-	public abstract void setProperties(Map<String, String> properties);
+	/**
+	 * 
+	 * @param  creationDate 생성일
+	 */
+	public void setCreationDate(Date creationDate);
 	
-	public abstract boolean getBooleanProperty(String name, boolean defaultValue );
+	/**
+	 * @return 수정일을 리턴한다.
+	 */
+	public Date getModifiedDate();
 	
-	public abstract long getLongProperty(String name, long defaultValue );
-	
-	public abstract int getIntProperty(String name, int defaultValue );
-	
-	public abstract String getProperty(String name, String defaultValue );
+	/**
+	 * 
+	 * @param  modifiedDate 수정일
+	 */
+	public void setModifiedDate(Date modifiedDate);
 	
 }

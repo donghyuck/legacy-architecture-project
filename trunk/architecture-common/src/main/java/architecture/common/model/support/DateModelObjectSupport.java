@@ -17,10 +17,10 @@ package architecture.common.model.support;
 
 import java.util.Date;
 
-import architecture.common.model.ModelObject;
+import architecture.common.model.DateModelObject;
 
 
-public abstract class DateModelObjectSupport implements ModelObject {
+public abstract class DateModelObjectSupport implements DateModelObject {
 	
 	private Date creationDate = null;
 	
