@@ -12,7 +12,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.i18n.I18nLocale;
 import architecture.ee.i18n.dao.I18nLocaleDao;
-import architecture.ee.model.impl.I18nLocaleModelImpl;
+import architecture.ee.i18n.internal.I18nLocaleImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
 public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLocaleDao {
@@ -20,7 +20,7 @@ public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLoc
 	class I18nLocaleRowMapper implements RowMapper<I18nLocale> {
 
 		public I18nLocale mapRow(ResultSet rs, int rowNum) throws SQLException {	
-			I18nLocaleModelImpl c = new I18nLocaleModelImpl();			
+			I18nLocaleImpl c = new I18nLocaleImpl();			
 			c.setLocaleId(rs.getLong(1));
 			c.setLanguage(rs.getString(2));
 			c.setCountry(rs.getString(3));
@@ -68,7 +68,7 @@ public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLoc
 
 	public I18nLocale addI18nLocale(Locale locale) {		
 		long now = System.currentTimeMillis();
-		I18nLocaleModelImpl impl = new I18nLocaleModelImpl();
+		I18nLocaleImpl impl = new I18nLocaleImpl();
 		impl.setLocaleId(getNextId("I18N_LOCALE"));
 		impl.setLanguage(locale.getLanguage());
 		impl.setCountry(locale.getCountry());
