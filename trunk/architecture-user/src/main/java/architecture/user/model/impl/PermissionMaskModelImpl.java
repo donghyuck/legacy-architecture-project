@@ -10,7 +10,7 @@ import architecture.user.permission.PermissionMask;
 /**
  * @author  donghyuck
  */
-public class PermissionMaskModelImpl  extends BaseModelObject<PermissionMask> implements PermissionMaskModel {
+public class PermissionMaskModelImpl  extends SimpleModelObject<PermissionMask> implements PermissionMaskModel {
 	
 	/**
 	 */

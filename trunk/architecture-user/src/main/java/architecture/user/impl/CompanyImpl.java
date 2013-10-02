@@ -13,17 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.user.model.impl;
+package architecture.user.impl;
 
 import java.io.Serializable;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.v2.BaseModelObject;
+import architecture.common.model.ModelObjectType;
+import architecture.common.model.support.DefaultModelObjectSupport;
 import architecture.common.user.Company;
 
-public class CompanyImpl  extends BaseModelObject implements Company {
+public class CompanyImpl  extends DefaultModelObjectSupport implements Company {
 
 	private Long companyId;
 	private String displayName;
@@ -36,8 +37,6 @@ public class CompanyImpl  extends BaseModelObject implements Company {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-
-	private Map<String, String> properties;
 
 	public long getCompanyId() {
 		return companyId;
@@ -61,8 +60,8 @@ public class CompanyImpl  extends BaseModelObject implements Company {
 		return companyId;
 	}
 
-	public int getModelObjectType() {
-		return 12;
+	public ModelObjectType getModelObjectType() {
+		return ModelObjectType.COMPANY;
 	}
 
 	
@@ -70,23 +69,6 @@ public class CompanyImpl  extends BaseModelObject implements Company {
 		this.companyId = companyId;
 	}
 	
-
-	/**
-	 * @param properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
-
-	public Map<String, String> getProperties() {
-		synchronized (this) {
-			if (properties == null) {
-				properties = new ConcurrentHashMap<String, String>();
-			}
-		}
-		return properties;
-	}
-
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())  +  CacheSizes.sizeOfString(getDisplayName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
 	}

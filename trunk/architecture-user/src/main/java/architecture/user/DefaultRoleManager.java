@@ -19,7 +19,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.user.dao.RoleDao;
-import architecture.user.model.impl.RoleImpl;
+import architecture.user.impl.RoleImpl;
 import architecture.user.spi.ExtendedRoleManager;
 
 /**

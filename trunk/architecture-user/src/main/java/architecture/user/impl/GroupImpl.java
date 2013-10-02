@@ -1,4 +1,4 @@
-package architecture.user.model.impl;
+package architecture.user.impl;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -9,18 +9,15 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.impl.BaseModelObject;
+import architecture.common.model.support.PropertyModelSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.Group;
-import architecture.user.model.GroupModel;
 
-/**
- * @author  donghyuck
- */
-public class GroupModelImpl extends SimpleModelObject<Group> implements GroupModel {
+
+public class GroupImpl extends PropertyModelSupport implements Group {
 
 	private Company company;
 	
@@ -39,9 +36,6 @@ public class GroupModelImpl extends SimpleModelObject<Group> implements GroupMod
 	 */
 	private String description;
 	
-	/**
-	 */
-	private Map<String, String> properties;
 	
 	/**
 	 */
@@ -63,7 +57,7 @@ public class GroupModelImpl extends SimpleModelObject<Group> implements GroupMod
 
 	private Set<Long> removedMembers;		
 	
-	public GroupModelImpl() {
+	public GroupImpl () {
 		groupId = -1L;
 		companyId = -1L;
 	}
@@ -107,12 +101,6 @@ public class GroupModelImpl extends SimpleModelObject<Group> implements GroupMod
 		this.groupId = groupId;
 	}
 
-	/**
-	 * @param properties
-	 */
-	public void setProperties(Map<String, String> properties) {
-		this.properties = properties;
-	}
 
 	/**
 	 * @return
@@ -196,19 +184,6 @@ public class GroupModelImpl extends SimpleModelObject<Group> implements GroupMod
 	 */
 	public void setModifiedDate(Date date) throws UnAuthorizedException {
 		this.modifiedDate = date;
-	}
-
-	/**
-	 * @return
-	 */
-	public Map<String, String> getProperties() {
-		synchronized (this) {
-			if (properties == null) {
-				properties = new ConcurrentHashMap<String, String>();
-			}
-		}
-		// Return a wrapper that will intercept add and remove commands.
-		return properties;
 	}
 
 	public boolean equals(Object object) {

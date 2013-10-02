@@ -11,7 +11,7 @@ import architecture.user.model.RoleModel;
 /**
  * @author  donghyuck
  */
-public class RoleModelImpl extends BaseModelObject<Role>  implements RoleModel {
+public class RoleModelImpl extends SimpleModelObject<Role>  implements RoleModel {
 
 	/**
 	 */

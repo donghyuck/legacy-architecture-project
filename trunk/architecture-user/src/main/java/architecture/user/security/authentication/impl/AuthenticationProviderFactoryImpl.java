@@ -31,12 +31,14 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
+import architecture.common.util.TextUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.user.CompanyManager;
 import architecture.user.CompanyNotFoundException;
 import architecture.user.security.authentication.AuthenticationProvider;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
+import architecture.user.util.CompanyUtils;
 
 public class AuthenticationProviderFactoryImpl implements AuthenticationProviderFactory.Implementation {
 
@@ -51,8 +53,6 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 	}
 
 	static class SecurityContextAuthenticationProvider implements AuthenticationProvider {
-
-		private Company defaultCompany = null;
 		
 		public Authentication getAuthentication(){
 			SecurityContext context = SecurityContextHolder.getContext();
@@ -88,12 +88,15 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		}
 		
 		protected AnonymousUser createAnonymousUser(){
+			boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
+			log.debug("getByDomainName:" + getByDomainName);			
+			if( getByDomainName )
 			try {
 				String localName = getLocalName();
-				log.debug("DOMAIN:" + localName);
-				
-				if( StringUtils.isNotEmpty(localName)){
-					Company company = getCompanyManager().getCompanyByDomainName(localName);	
+				log.debug("isValidIpAddress:" + TextUtils.isValidIpAddress(localName) );			
+				log.debug("isValidHostname:" + TextUtils.isValidHostname(localName) );			
+				if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){
+					Company company =CompanyUtils.getCompanyByDomainName(localName);	
 					return new AnonymousUser( company );
 				}
 			} catch (Exception ignore) {
@@ -101,7 +104,7 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 			}	
 			
 			try {
-				return new AnonymousUser( getDefaultCompany() );
+				return new AnonymousUser( CompanyUtils.getDefaultCompany() );
 			} catch (Exception e) {
 				log.warn(e);
 				return new AnonymousUser();
@@ -113,17 +116,5 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 			return request.getLocalName();
 		}
 		
-		protected Company getDefaultCompany() throws Exception {
-			if( defaultCompany == null ){
-				String companyIdStr = ApplicationHelper.getApplicationProperty("components.user.anonymous.company.id", "1");
-				Company company = getCompanyManager().getCompany(Long.parseLong(companyIdStr));
-				defaultCompany = company;
-			}
-			return defaultCompany;
-		}
-		
-		protected CompanyManager getCompanyManager(){
-			return  ApplicationHelper.getComponent(CompanyManager.class);
-		}
 	}
 }

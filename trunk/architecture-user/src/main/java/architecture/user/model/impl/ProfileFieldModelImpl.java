@@ -19,7 +19,7 @@ import architecture.user.profile.ProfileFieldUtil;
 /**
  * @author  donghyuck
  */
-public class ProfileFieldModelImpl extends BaseModelObject<ProfileField> implements ProfileFieldModel {
+public class ProfileFieldModelImpl extends SimpleModelObject<ProfileField> implements ProfileFieldModel {
 
 	private static final String SINGLE_VALUE_KEY = "v";
     /**

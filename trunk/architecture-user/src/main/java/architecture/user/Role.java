@@ -1,9 +1,9 @@
 package architecture.user;
 
-import architecture.common.model.v2.ModelObject;
+import architecture.common.model.SimpleModelObject;
 
 
-public interface Role extends  ModelObject  {
+public interface Role extends  SimpleModelObject  {
 
 	/**
 	 * @return
@@ -25,5 +25,7 @@ public interface Role extends  ModelObject  {
 	 */
 	public void setMask(int mask);
 	
+	public String getDescription();
 	
+	public void setDescription(String description);
 }
