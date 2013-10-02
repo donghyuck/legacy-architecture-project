@@ -1,8 +1,14 @@
 package architecture.user.profile;
 
-import architecture.user.model.UserProfileModel;
+import architecture.common.model.ModelObject;
 
 
-public interface UserProfile extends UserProfileModel {
-
+public interface UserProfile extends ModelObject {
+	
+	public long getFieldId();
+	
+	public int getFieldType();
+	
+	public String getValueString();
+	
 }

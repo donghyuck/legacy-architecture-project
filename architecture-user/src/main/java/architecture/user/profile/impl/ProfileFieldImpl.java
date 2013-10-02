@@ -73,7 +73,7 @@ public class ProfileFieldImpl extends SimpleModelObjectSupport implements Profil
 	 */
     private List profileFieldText;
 
-    public ProfileFieldModelImpl() {
+    public ProfileFieldImpl() {
         profileFieldText = new ArrayList();
         registrationIndex = 0x80000000;
 	}

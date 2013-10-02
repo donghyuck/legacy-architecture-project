@@ -10,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.support.SimpleModelObjectSupport;
-import architecture.user.model.impl.ProfileFieldValueModelImpl;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldValue;
 import architecture.user.profile.TypeConverter;
