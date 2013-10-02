@@ -28,4 +28,5 @@ public interface Role extends  SimpleModelObject  {
 	public String getDescription();
 	
 	public void setDescription(String description);
+	
 }
