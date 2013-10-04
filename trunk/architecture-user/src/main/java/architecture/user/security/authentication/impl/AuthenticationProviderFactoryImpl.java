@@ -88,7 +88,7 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		}
 		
 		protected AnonymousUser createAnonymousUser(){
-			boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
+			boolean getByDomainName = CompanyUtils.isAllowedGetByDomainName();
 			log.debug("getByDomainName:" + getByDomainName);			
 			if( getByDomainName )
 			try {
