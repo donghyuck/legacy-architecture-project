@@ -23,22 +23,48 @@ import architecture.user.CompanyNotFoundException;
 public class CompanyUtils {
 	
 	public static Company getCompany(long companyId) throws CompanyNotFoundException{
-		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
+		CompanyManager companyManger = getCompanyManager();
 		return companyManger.getCompany(companyId);		
 	}	
 	
 	public static Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException{
-		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
+		CompanyManager companyManger = getCompanyManager();
 		return companyManger.getCompanyByDomainName(domainName);
 	}	
 	
 	
 	public static Company getDefaultCompany() throws CompanyNotFoundException {
-		long companuId = ApplicationHelper.getApplicationLongProperty("components.user.anonymous.company.defaultId", 1L);
-		CompanyManager companyManger = ApplicationHelper.getComponent(CompanyManager.class);
+		long companuId = getDefaultCompanyId();
+		CompanyManager companyManger = getCompanyManager();
 		Company company = companyManger.getCompany(companuId);
 		return company;
 	}
-	//boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
-		
+	
+	public static CompanyManager getCompanyManager(){
+		return ApplicationHelper.getComponent(CompanyManager.class);
+	}
+	
+	public static Long getDefaultCompanyId(){
+		long defaultCompanyId = ApplicationHelper.getApplicationLongProperty("components.company.default.companyId", 1L);
+		return defaultCompanyId;
+	}
+	
+	public static Long getDefaultMenuId(){
+		long defaultMenuId = ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
+		return defaultMenuId;
+	}
+	
+	public static boolean isAllowedGetByDomainName(){
+		boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
+		return getByDomainName;
+	}
+
+	public static boolean isallowedSignIn(Company company){
+		return company.getBooleanProperty("allowedSignIn", true);
+	}
+	
+	public static boolean isAllowedSignup(Company company){
+		return company.getBooleanProperty("allowedSignup", true);
+	}
+	
 }
