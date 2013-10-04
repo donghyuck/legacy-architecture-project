@@ -1,7 +1,7 @@
 		<!-- START MENU -->	
 		<#if action.getMenuComponent("USER_MENU") ?? >
 		<#assign menu = action.getMenuComponent("USER_MENU") />
-			<div class="container"">
+			<div class="container">
 					<#if action.user.company ?? >
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
