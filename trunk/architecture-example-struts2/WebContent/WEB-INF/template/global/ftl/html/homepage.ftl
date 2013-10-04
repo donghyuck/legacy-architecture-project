@@ -28,7 +28,9 @@
 					authenticate : function( e ){
 						currentUser = e.token;						
 					},
+					<#if CompanyUtils.isallowedSignIn(action.company) >
 					template : kendo.template($("#account-template").html()),
+					</#if>
 					afterAuthenticate : function(){
 						$('.dropdown-toggle').dropdown();
 						Holder.run();
@@ -179,9 +181,9 @@
 											// LIST VIEW REFRESH...
 											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
 										}				
-									}					   
-							});													
-						}								
+									}
+							});
+						}
 					}
 					$(this).tab('show')
 				});
