@@ -17,6 +17,9 @@ package architecture.ee.web.view.freemarker;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,6 +27,8 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.content.Content;
+import architecture.ee.web.content.ContentManager;
 import freemarker.cache.FileTemplateLoader;
 
 public class DatabaseTemplateLoader extends FileTemplateLoader {
@@ -45,22 +50,67 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	}
 
 	@Override
+	public long getLastModified(Object templateSource) {
+		if(templateSource instanceof Content){
+			return ((Content) templateSource).getModifiedDate().getTime();
+		}else{
+			return super.getLastModified(templateSource);
+		}				
+	}
+
+	@Override
+	public Reader getReader(Object templateSource, String encoding)
+			throws IOException {		
+		if(templateSource instanceof Content){
+			 return new StringReader( ((Content) templateSource).getBody() );
+		}else{
+			return super.getReader(templateSource, encoding);
+		}				
+	}
+
+	@Override
+	public void closeTemplateSource(Object templateSource) {
+		if(templateSource instanceof Content){
+			
+		}else{
+			super.closeTemplateSource(templateSource);
+		}
+	}
+
+	@Override
 	public Object findTemplateSource(String name) throws IOException {
-		
-		boolean customized = isCustomizedEnabled();
-		
-		if( !customized )
+
+		if( !isCustomizedEnabled() )
 		{
 			return null;
 		}		
+		
+		if( usingDatabase()){
+			ContentManager contentManager = ApplicationHelper.getComponent(ContentManager.class);
+			List<Content> contents = contentManager.getContent(getCurrentCompany());
+			for( Content content : contents){
+				if( name.equals( content.getTitle() ) ){
+					return content;
+				}
+			}
+		}
+		
+		String nameToUse = getCustomizedTemplateFileName(name);
+		return super.findTemplateSource(nameToUse);
+	}
+	
+	protected final String getCustomizedTemplateFileName(String name){
 		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;		
 		if(nameToUse.charAt(0) == File.separatorChar ){
 			nameToUse = File.separatorChar + getCurrentCompany().getName() + nameToUse ;
 		}else{
 			nameToUse = File.separatorChar + getCurrentCompany().getName() + File.separatorChar + nameToUse ;
 		}		
-		log.debug( name + ">" + nameToUse );		
-		return super.findTemplateSource(nameToUse);
+		return nameToUse;
+	}
+
+	protected final boolean usingDatabase(){		
+		return ApplicationHelper.getApplicationBooleanProperty("view.render.freemarker.usingDatabase", false);
 	}
 	
 	protected final boolean isCustomizedEnabled(){		
@@ -68,8 +118,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	}
 	
 	protected final Company getCurrentCompany(){
-		return SecurityHelper.getUser().getCompany();
-		
+		return SecurityHelper.getUser().getCompany();		
 	}
 	
 }
