@@ -34,6 +34,7 @@ PC9saWNlbnNlPg==</file>
 			<freemarker>
 				<debug>true</debug>
 				<enabled>true</enabled>
+				<usingDatabase>true</usingDatabase>
 				<source>
 					<location>/WEB-INF/template/global/ftl/</location>
 				</source>
@@ -48,11 +49,20 @@ PC9saWNlbnNlPg==</file>
 		<user>
 			<anonymous>
 				<company>
-					<defaultId>1</defaultId>
-					<getByDomainName>true</getByDomainName>
+					<getByDomainName>true</getByDomainName>					
 				</company>
 			</anonymous>
 		</user>
+		<company>
+			<default>
+				<companyId>1</companyId>
+			</default>				
+		</company>
+		<menu>
+			<default>
+				<menuId>1</menuId>	
+			</default>				
+		</menu>
 		<image>
 			<enabled>true</enabled>
 			<maxImageSize>2048</maxImageSize>
@@ -66,7 +76,7 @@ PC9saWNlbnNlPg==</file>
 			<forceThumbnailsEnabled></forceThumbnailsEnabled>
 		</image>
 	</components>
-	
+		
 	<security>
 		<authentication>
 		    <disallowGuest>false</disallowGuest>
