@@ -35,6 +35,7 @@ import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicationHelper;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
+import architecture.user.util.CompanyUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
@@ -108,14 +109,11 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		MenuComponent menuComp = null;
 		try {
 			if( menuRepository != null ){
-				Menu menu;
-				menu = menuRepository.getMenu(DEFAULT_MENU_ID);		
+				Menu menu = null;
 				if( getUser().getCompany()!=null ){
-					String menuIdStr =StringUtils.defaultIfEmpty( getUser().getCompany().getProperties().get("menuId"), DEFAULT_MENU_ID.toString() );	
-					long menuId = Long.parseLong( menuIdStr );
-					if( menuId != menu.getMenuId() ){
-						menu = getMenu(menuId);		
-					}
+					menu = getMenu(getUser().getCompany().getLongProperty("", CompanyUtils.getDefaultMenuId()));
+				}else{
+					menu = menuRepository.getMenu(CompanyUtils.getDefaultMenuId());		
 				}	
 				menuComp = menuRepository.getMenuComponent(menu, name);
 			}
