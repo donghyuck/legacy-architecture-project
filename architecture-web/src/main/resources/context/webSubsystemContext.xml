@@ -29,6 +29,8 @@
 	<bean id="imageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="attachmentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="attachmentCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="socialAccountCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="socialAccountCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="contentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="contentCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />					
+						
 						
 	<bean id="companyDao" class="architecture.user.dao.impl.JdbcCompanyDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	<bean id="companyManager" class="architecture.user.DefaultCompanyManager" depends-on="companyDao eventPublisher groupManager"  p:companyDao-ref="companyDao" p:eventPublisher-ref="eventPublisher"  p:groupManager-ref="groupManager" p:companyCache-ref="companyCache" p:companyIdCache-ref="companyIdCache"  />		
@@ -53,5 +55,7 @@
 	<bean id="socialAccountDao" class="architecture.ee.web.social.dao.impl.JdbcSocialAccountDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	<bean id="socialAccountManager" class="architecture.ee.web.social.internal.DefaultSocialAccountManager" depends-on="socialAccountDao"  p:socialAccountDao-ref="socialAccountDao" p:socialAccountCache-ref="socialAccountCache"/>		
 	
+	<bean id="contentDao" class="architecture.ee.web.content.dao.JdbcContentDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	<bean id="contentManager" class="architecture.ee.web.content.DefaultContentManager" depends-on="contentDao"  p:contentDao-ref="contentDao" p:objectCache-ref="contentCache" p:userManager-ref="userManager" />		
 	
 </beans>
