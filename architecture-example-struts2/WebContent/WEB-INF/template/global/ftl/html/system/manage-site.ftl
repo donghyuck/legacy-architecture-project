@@ -56,7 +56,7 @@
 						},
 						change : function(data){
 							selectedCompany = data ;
-							kendo.bind($("#company-info-panel"), selectedCompany );   
+							kendo.bind($("#site-info"), selectedCompany );   
 						}
 					},
 					doAfter : function(that){
@@ -69,8 +69,55 @@
 				 // 4. PAGE MAIN					 								
 				$('#myTab a').click(function (e) {
 					e.preventDefault();
-					if(  $(this).attr('href') == '#setup-info' ){
+					if(  $(this).attr('href') == '#site-info' ){
 					
+					}else if(  $(this).attr('href') == '#content-mgmt' ){
+						if( ! $("#content-grid").data("kendoGrid") ){	
+							$("#content-grid").kendoGrid({
+								dataSource: {
+									type: 'json',
+									transport: {
+										read: { url:'${request.contextPath}/secure/list-content.do?output=json', type: 'POST' },
+										parameterMap: function (options, operation){
+											if (operation != "read" && options) {										                        								                       	 	
+												return { objectType: 1, objectId : selectedCompany.companyId , item: kendo.stringify(options)};									                            	
+											}else{
+												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 1, objectId: selectedCompany.companyId }
+											}
+										} 
+									},
+									schema: {
+										total: "totalTargetContentCount",
+										data: "targetContents",
+										model : Content
+									},
+									pageSize: 15,
+									serverPaging: true,
+									serverFiltering: false,
+									serverSorting: false,                        
+									error: handleKendoAjaxError
+								},
+								columns:[
+									{ field: "contentId", title: "ID",  width: 50, filterable: false, sortable: false },
+									{ field: "title", title: "파일", width: 150 },
+									{ field: "contentType", title: "유형",  width: 100 },
+									{ field: "modifiedDate", title: "수정일", width: 80, format: "{0:yyyy/MM/dd}" },
+									{ command: [ { name: "destroy", text: "삭제" } , { name: "customEditContentClass", text: "수정" }], title: " ", width: "160px"  }
+								],
+								filterable: true,
+								sortable: true,
+								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+								//selectable: 'row',
+								height: 500,
+								dataBound: function(e) {
+								
+								},
+								change: function(e) {          
+									var selectedCells = this.select();       
+									this.expandRow(selectedCells);
+								}
+							});
+						}					
 					}else if(  $(this).attr('href') == '#image-mgmt' ){
 						// IMAGE MGMT
 						if( ! $("#image-upload").data("kendoUpload") ){	
@@ -251,7 +298,7 @@
 				<div class="col-6 col-lg-6">						
 					<div id="company-info-panel" class="panel panel-default">
 						<div class="panel-heading layout">
-							<span data-bind="text: displayName"></span>
+							
 							&nbsp;&nbsp;&nbsp;
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning">옵션</button>
@@ -300,53 +347,45 @@
 				
 					<ul class="nav nav-tabs" id="myTab">
 					  <li class="active"><a href="#license-info">기본 설정 정보</a></li>
-					  <li><a href="#setup-info">템플릿 관리</a></li>
+					  <li><a href="#content-mgmt">페이지 템플릿 관리</a></li>
 					  <li><a href="#image-mgmt">이미지 관리</a></li>
 					  <li><a href="#attachment-mgmt">첨부파일 관리</a></li>
 					  <li><a href="#mgmt-info">쇼셜 관리</a></li>
 					  <li><a href="#database-info">RSS 관리</a></li>
 					</ul>
 					<div class="tab-content">
-						<div class="tab-pane active" id="license-info">
+						<div class="tab-pane active" id="site-info">
 							<div class="blank-space-5">
-								<table class="table table-striped .table-hover license-details">
-									<tbody>
-										<tr>
-													<th>도메인</th>
-													<td><span data-bind="text: licenseId"></span></td>
-												</tr>								
-												<tr>
-													<th>로고</th>
-													<td><span data-bind="text: name"></span></td>
-												</tr>			
-												<tr>
-													<th>메뉴</th>
-													<td><span data-bind="text: version.versionString"></span></td>
-												</tr>				
-												<tr>
-													<th>테마</th>
-													<td><span class="label label-info"><span data-bind="text: edition"></span></span></td>
-												</tr>																
-												<tr>
-													<th>타입</th>
-													<td><span class="label label-danger"><span data-bind="text: type"></span></span></td>
-												</tr>																	
-												<tr>
-													<th>발급일</th>
-													<td><span data-bind="text: creationDate"></span></td>
-												</tr>	
-												<tr>
-													<th>발급대상</th>
-													<td><span data-bind="text: client.company"></span>(<span data-bind="text: client.name"></span>)</td>
-										</tr>	
-								 	</tbody>
+								<table class="table table-hover">
+								<tbody>						
+									<tr>
+										<th>사이트</th>								
+										<td><span data-bind="text: displayName"></span></td>
+									</tr>	
+									<tr>
+										<th>등록 아이디</th>
+										<td><span class="label label-info"><span data-bind="text: name"></span></span><code><span data-bind="text: companyId"></span></code></td>
+									</tr>			
+									<tr>
+										<th>등록 이름</th>
+										<td><span data-bind="text: description"></span></td>
+									</tr>	
+									<tr>
+										<th>등록일</th>
+										<td><span data-bind="text: creationDate"></span></td>
+									</tr>				
+									<tr>
+										<th>마지막 정보 수정일</th>
+										<td><span data-bind="text: modifiedDate"></span></td>
+									</tr>												
+							 	</tbody>
 								</table>
 							</div>
 						</div>
-						<div class="tab-pane" id="setup-info">
+						<div class="tab-pane" id="content-mgmt">
 							<div class="big-box">
 								<div class="panel">
-									<div id="setup-props-grid" ></div>
+									<div id="content-grid" ></div>
 								</div>
 							</div>		
 						</div>

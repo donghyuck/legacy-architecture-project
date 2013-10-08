@@ -30,6 +30,10 @@
     <decorator name="homepage" page="homepage.jsp">
         <pattern>/*</pattern>
     </decorator>
+    
+    <decorator name="simple-homepage" page="simple-homepage.jsp">
+        <pattern>/*</pattern>
+    </decorator>
         
      <!--    
     <decorator name="slidedown" page="main-slidedown.jsp" />
