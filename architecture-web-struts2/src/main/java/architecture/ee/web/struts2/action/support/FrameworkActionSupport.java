@@ -111,7 +111,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			if( menuRepository != null ){
 				Menu menu = null;
 				if( getUser().getCompany()!=null ){
-					menu = getMenu(getUser().getCompany().getLongProperty("", CompanyUtils.getDefaultMenuId()));
+					menu = getMenu(getUser().getCompany().getLongProperty("menuId", CompanyUtils.getDefaultMenuId()));
 				}else{
 					menu = menuRepository.getMenu(CompanyUtils.getDefaultMenuId());		
 				}	
