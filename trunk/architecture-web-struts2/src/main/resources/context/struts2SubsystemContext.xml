@@ -20,4 +20,5 @@
 		class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager"
 		p:freeMarkerConfig-ref="freemarkerConfig" depends-on="freemarkerConfig" />
 
+		
 </beans>
