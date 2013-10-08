@@ -1,3 +1,17 @@
+var Content = kendo.data.Model.define( {
+    id: "contentId", // the identifier of the model
+    fields: {
+    	contentId: { type: "number", editable: false, defaultValue: -1  },    	
+    	objectType: { type: "number", editable: false, defaultValue: -1  },    	
+    	objectId: { type: "number", editable: false, defaultValue: -1  },    	
+        title: { type: "string", editable: true , validation: { required: true }},
+        contentType: { type: "string", editable: true },
+        body: { type: "string", editable: true },
+        modifiedDate: { type: "date"},
+        creationDate: { type: "date" } 
+    }
+});
+
 var Image = kendo.data.Model.define( {
     id: "imageId", // the identifier of the model
     fields: {
