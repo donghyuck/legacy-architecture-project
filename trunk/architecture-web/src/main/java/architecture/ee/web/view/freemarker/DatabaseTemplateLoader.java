@@ -23,6 +23,7 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.MethodInvoker;
 
 import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
@@ -86,18 +87,40 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		}		
 		
 		if( usingDatabase()){
-			ContentManager contentManager = ApplicationHelper.getComponent(ContentManager.class);
+			try {				
+				MethodInvoker invoker = new MethodInvoker();		
+				invoker.setStaticMethod("architecture.ee.web.struts2.util.ActionUtils.getAction");
+				invoker.prepare();
+				Object action = invoker.invoke();
+				if( action instanceof ContentAware ){
+					Content content = ((ContentAware)action).getTargetContent();
+					log.debug("##########################################CONTENT:" + content.getTitle() );
+					log.debug( name ); 
+					log.debug( content.getTitle() );
+					log.debug( content.getContentType() );
+					if(  "ftl".equals(content.getContentType()) && name.contains(content.getLocation() ))
+						return content;
+				}
+			} catch (Exception e) {
+				log.warn(e);				
+			}
+			
+			log.debug("finding template in database .. : " + name );
+			ContentManager contentManager = ApplicationHelper.getComponent(ContentManager.class);			
 			List<Content> contents = contentManager.getContent(getCurrentCompany());
 			for( Content content : contents){
-				if( name.equals( content.getTitle() ) ){
+				log.debug( name + " - content: " + content.getTitle() + ", type:" + content.getContentType() + ", match:" + content.getLocation() .contains(name) );
+				if(  content.getLocation() .contains(name)){
 					return content;
 				}
-			}
+			}	
+			
 		}
-		
 		String nameToUse = getCustomizedTemplateFileName(name);
 		return super.findTemplateSource(nameToUse);
 	}
+	
+	
 	
 	protected final String getCustomizedTemplateFileName(String name){
 		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;		
@@ -120,5 +143,5 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	protected final Company getCurrentCompany(){
 		return SecurityHelper.getUser().getCompany();		
 	}
-	
+
 }
