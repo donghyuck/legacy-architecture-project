@@ -196,8 +196,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
             }
             catch (IOException ex) {
                 if (logger.isDebugEnabled()) {
-                    logger.debug("Cannot resolve template loader path [" + templateLoaderPath +
-                            "] to [java.io.File]: using SpringTemplateLoader as fallback", ex);
+                    logger.debug("Cannot resolve template loader path [" + templateLoaderPath +  "] to [java.io.File]: using SpringTemplateLoader as fallback", ex);
                 }
                 return new SpringTemplateLoader(getResourceLoader(), templateLoaderPath);
             }

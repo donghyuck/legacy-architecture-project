@@ -341,5 +341,83 @@
     	V2_SOCIAL_ACCOUNT
     WHERE 
     	OBJECT_TYPE = ?	AND OBJECT_ID = ?
-    ]]></sql-query>              
+    ]]></sql-query>       
+    
+<!--  CONTENT -->
+    <sql-query name="SELECT_CONTENT_BY_ID" description="ID로 콘텐츠 조회"><![CDATA[    
+    SELECT 
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_ID,
+		CONTENT_TYPE,
+		TITLE,
+		LOCATION,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_CONTENT
+    WHERE 
+    	CONTENT_ID = ?    
+    ]]></sql-query>
+    <sql-query name="SELECT_CONTENT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 콘텐츠  조회"><![CDATA[    
+    SELECT 
+		CONTENT_ID
+    FROM 
+    	V2_CONTENT
+    WHERE 
+    	OBJECT_TYPE = ?	AND
+    	OBJECT_ID = ?
+    ]]></sql-query>    
+
+    <sql-query name="CREATE_CONTENT" description="콘텐츠  생성"><![CDATA[    
+    INSERT INTO V2_CONTENT (
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_ID,
+		CONTENT_TYPE,
+		TITLE,
+		LOCATION,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,?,?,? )
+    ]]></sql-query>
+
+    <sql-query name="UPDATE_CONTENT" description="콘텐츠 수정"><![CDATA[    
+    UPDATE V2_CONTENT SET 		
+		OBJECT_TYPE = ?,
+		OBJECT_ID = ?,
+		CONTENT_TYPE = ?,
+		TITLE = ?,
+		LOCATION = ?,
+		LASTMODIFIER,
+		MODIFIED_DATE
+	WHERE CONTENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_CONTENT" description="삭제"><![CDATA[    
+ 		DELETE FROM V2_CONTENT WHERE CONTENT_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_CONTENT_BODY" description="데이터 생성"><![CDATA[    
+ 		INSERT V2_CONTENT_BODY  (BODY_CONTENT_ID, BODY) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_CONTENT_BODY_BY_ID" description="데이터 조회"><![CDATA[    
+ 		SELECT BODY FROM V2_CONTENT_BODY WHERE BODY_CONTENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="REMOVE_CONTENT_BODY" description="데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_CONTENT_BODY WHERE BODY_CONTENT_ID = ?
+    ]]></sql-query>         
+    
+	<sql-query name="COUNT_CONTENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="전체  수 조회"><![CDATA[    
+	SELECT COUNT(OBJECT_ID)
+	FROM V2_CONTENT        
+	WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>                 
 </sqlset>
