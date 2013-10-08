@@ -4,8 +4,14 @@
 			<div class="container"  style="width: auto;">		
 				<nav class="navbar navbar-inverse" role="navigation">
 					<#if action.user.company ?? >
-					<div class="navbar-header">
-						<a class="navbar-brand" href="/main.do">${action.user.company.displayName }</a>
+					<div class="navbar-header">					
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>					
+						<a class="navbar-brand" href="/main.do">&nbsp;&nbsp;${action.user.company.displayName }</a>
 					</div>			
 					</#if>												
 					<ul class="nav navbar-nav">
