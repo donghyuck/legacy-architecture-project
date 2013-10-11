@@ -6,6 +6,7 @@ var Content = kendo.data.Model.define( {
     	objectId: { type: "number", editable: false, defaultValue: -1  },    	
         title: { type: "string", editable: true , validation: { required: true }},
         contentType: { type: "string", editable: true },
+        location : { type: "string", editable: true },
         body: { type: "string", editable: true },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" } 
