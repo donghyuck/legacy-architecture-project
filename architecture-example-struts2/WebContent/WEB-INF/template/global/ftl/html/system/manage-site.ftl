@@ -358,6 +358,22 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="site-info">
 							<div class="blank-space-5">
+
+							<div class="btn-group">
+								<button type="button" class="btn btn-sm btn-warning">옵션</button>
+								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
+								    <span class="caret"></span>
+								  </button>
+								  <ul class="dropdown-menu" role="menu">
+								    <li><a href="#">Action</a></li>
+								    <li><a href="#">Another action</a></li>
+								    <li><a href="#">Something else here</a></li>
+								    <li class="divider"></li>
+								    <li><a href="#">Separated link</a></li>
+								  </ul>
+							</div>				
+							
+							
 								<table class="table table-hover">
 								<tbody>						
 									<tr>
