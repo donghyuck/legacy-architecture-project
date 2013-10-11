@@ -348,7 +348,7 @@
   					<div class="panel-body">
 				
 					<ul class="nav nav-tabs" id="myTab">
-					  <li class="active"><a href="#license-info">기본 설정 정보</a></li>
+					  <li class="active"><a href="#site-info">기본 설정 정보</a></li>
 					  <li><a href="#content-mgmt">페이지 템플릿 관리</a></li>
 					  <li><a href="#image-mgmt">이미지 관리</a></li>
 					  <li><a href="#attachment-mgmt">첨부파일 관리</a></li>
