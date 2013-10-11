@@ -358,7 +358,7 @@
 					<div class="tab-content">
 						<div class="tab-pane active" id="site-info">
 							<div class="blank-space-5">
-
+<div class="pull-right">
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning">옵션</button>
 								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
@@ -372,7 +372,7 @@
 								    <li><a href="#">Separated link</a></li>
 								  </ul>
 							</div>				
-							
+</div>							
 							
 								<table class="table table-hover">
 								<tbody>						
