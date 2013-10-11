@@ -100,7 +100,8 @@
 								toolbar: [ { text: "템플릿 파일 추가", css:"createTemplateCustom" } ],   
 								columns:[
 									{ field: "contentId", title: "ID",  width: 50, filterable: false, sortable: false },
-									{ field: "title", title: "파일", width: 150 },
+									{ field: "title", title: "타이틀", width: 150 },
+									{ field: "location", title: "템플릿 이름", width: 150 },
 									{ field: "contentType", title: "유형",  width: 100 },
 									{ field: "modifiedDate", title: "수정일", width: 80, format: "{0:yyyy/MM/dd}" },
 									{ command: [ { name: "destroy", text: "삭제" } , { name: "customEditContentClass", text: "수정" }], title: " ", width: "160px"  }
