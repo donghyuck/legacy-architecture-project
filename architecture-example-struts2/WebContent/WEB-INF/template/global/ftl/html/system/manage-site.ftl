@@ -97,7 +97,7 @@
 									serverSorting: false,                        
 									error: handleKendoAjaxError
 								},
-								toolbar: [ { text: "그룹추가", css:"createTemplateCustom" } ],   
+								toolbar: [ { text: "템플릿 파일 추가", css:"createTemplateCustom" } ],   
 								columns:[
 									{ field: "contentId", title: "ID",  width: 50, filterable: false, sortable: false },
 									{ field: "title", title: "파일", width: 150 },
@@ -126,7 +126,7 @@
 								multiple : false,
 								showFileList : true,
 								localization : { 
-									select: '이미지 파일 업로드', remove:'삭제', dropFilesHere : '업로드할 이미지 파일을 이곳에 끌어 놓으세요.' , 
+									select: '이미지 업로드', remove:'삭제', dropFilesHere : '업로드할 이미지 파일을 이곳에 끌어 놓으세요.' , 
 									uploadSelectedFiles : '이미지 업로드',
 									cancel: '취소' 
 								},
