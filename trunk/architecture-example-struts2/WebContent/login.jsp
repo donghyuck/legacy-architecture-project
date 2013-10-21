@@ -99,19 +99,19 @@ Company company = user.getCompany();
 							<form name="fm1" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">
 								<input type="hidden" id="output" name="output" value="json" />		    
 								<div class="form-group">
-									<label for="username" class="col-lg-2 control-label">아이디</label>
-									<div class="col-lg-10">
+									<label for="username" class="col-lg-3 control-label">아이디</label>
+									<div class="col-lg-9">
 										<input type="text" class="form-control"  id="username" name="username"  pattern="[^0-9][A-Za-z]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요.">
 									</div>
 								</div>
 								<div class="form-group">
-									<label for="password" class="col-lg-2 control-label">비밀번호</label>
-									<div class="col-lg-10">
+									<label for="password" class="col-lg-3 control-label">비밀번호</label>
+									<div class="col-lg-9">
 										<input type="password" class="form-control" id="password" name="password"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." >
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-lg-offset-2 col-lg-10">
+									<div class="col-lg-offset-3 col-lg-9">
 										<div class="checkbox">
 											<label>
 												<input type="checkbox">로그인 상태유지  
