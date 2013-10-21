@@ -305,7 +305,6 @@
 		</div>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
-		<div id="wrap">
 			<div class="container layout">		
 				<div class="row">
 					<div id ="notice-view-panel" class="col-lg-8">
@@ -385,7 +384,7 @@
 					</div>
 				</div>
 			</div>		
-		</div>		
+
 		<div id="attach-window"></div>					
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
