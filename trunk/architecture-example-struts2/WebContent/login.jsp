@@ -69,8 +69,8 @@ Company company = user.getCompany();
 	}]);
 </script>
 <style scoped="scoped">
-	#login-window {
-		max-width : 500px;
+	#login-window .modal-dialog {
+		width : 500px;
 	}
 </style>
 </head>
