@@ -371,7 +371,7 @@
 						<div class="panel panel-success" id="my-messages">
 							<div class="panel-heading">뉴스</div>					
 							<div class="panel-body">
-								<div class="popover right" style="display:true;">
+								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
 									<!--<h3 class="popover-title">알림</h3>-->
 									<div class="popover-content">
