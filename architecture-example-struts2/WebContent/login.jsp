@@ -69,7 +69,9 @@ Company company = user.getCompany();
 	}]);
 </script>
 <style scoped="scoped">
-
+	#login-window {
+		max-width : 500px;
+	}
 </style>
 </head>
 <body class="bg-gray">
@@ -119,7 +121,7 @@ Company company = user.getCompany();
 								</div>
 								<div class="col-lg-12">
 									<div id="status">
-									<%= request.getLocalAddr()%><br/>
+									<%= request.getLocalName()%><br/>
 									</div>
 								</div>
 							</form>						
