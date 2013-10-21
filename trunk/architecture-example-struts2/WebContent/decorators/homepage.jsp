@@ -39,19 +39,6 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		/*border-color :#dadada;*/
 	}
 
-	#wrap {
-	  min-height: 100%;
-	  height: auto !important;
-	  height: 100%;
-	  /* Negative indent footer by its height */
-	  margin: 0 auto -25px;
-	  /* Pad bottom by footer height */
-	  padding: 0 0 25px;
-	}	
-	
-	#wrap > .container {
-
-	}
 		
 	#account-panel {
 		margin-top : 0 px;
