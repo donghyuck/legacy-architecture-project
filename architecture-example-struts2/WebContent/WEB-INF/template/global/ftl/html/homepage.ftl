@@ -303,52 +303,7 @@
 		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<#include "/html/common/common-homepage-wide-menu.ftl" >	
 		</div>
-		<!-- END HEADER -->
-		<div class="container">
-			<div id="myCarousel" class="carousel slide">
-			<!-- Indicators -->
-				<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-				</ol>
-				<div class="carousel-inner">
-					<div class="item active ">	
-						<span class="" /><img src="http://www.clipartkorea.co.kr/PREV_SRV/Preview/2013/08/01/ti013a3501.jpg"  class="img-rounded" alt=""/>				
-						<div class="container">						
-							<div class="carousel-caption">
-								<h1>포트폴리오</h1>
-								<p>쇼셜기반의 포트폴리오 관리.............................</p>
-	 							<p><a class="btn btn-large btn-primary" href="#">상세하게 알아보기</a></p>	 							
-							</div>
-						</div>
-					</div>
-					<div class="item">					
-					<img src="http://cdn.sencha.io/img/space/space-homepage-devices.png" class="img-rounded" alt="">
-						<div class="container">							
-							<div class="carousel-caption">
-								<h1>역량진단</h1>
-								<p>온라인 역량진단 ......</p>
-								<p><a class="btn btn-large btn-primary" href="#">역량진단 체험하기</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="item">
-						<img src="http://developer-static.se-mc.com/wp-content/blogs.dir/1/files/2012/08/OS_OpenSource_660x384.jpg" class="img-rounded" alt="">					
-						<div class="container">						
-							<div class="carousel-caption">
-								<h1>오픈소스.</h1>
-								<p>오픈소스.</p>
-								<p><a class="btn btn-large btn-primary" href="#">자세하게 알아보기</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-				<a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-			</div><!-- /.carousel -->
-		</div>
-		<!-- END HEADER -->			
+		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
 		<div id="wrap">
 			<div class="container layout">		
