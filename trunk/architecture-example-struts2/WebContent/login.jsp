@@ -121,7 +121,7 @@ Company company = user.getCompany();
 								</div>
 								<div class="col-lg-12">
 									<div id="status">
-									<%= request.getLocalName()%><br/>
+									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %><br/>
 									</div>
 								</div>
 							</form>						
