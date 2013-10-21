@@ -70,7 +70,7 @@ Company company = user.getCompany();
 </script>
 <style scoped="scoped">
 	#login-window .modal-dialog {
-		width : 500px;
+		width : 550px;
 	}
 </style>
 </head>
