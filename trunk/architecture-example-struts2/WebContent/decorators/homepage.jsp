@@ -45,6 +45,10 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		padding-top : 10px;
 	}	
 	
+	#mainContent {
+		padding-top : 66px;
+	} 
+	
 	#account-panel  .dropdown-menu{
 	 	width : 300px;;
 	 	z-index: 1001;
