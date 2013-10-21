@@ -306,7 +306,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
 			<div class="container layout">		
-				<div class="row">
+				<div class="row blank-top-5">
 					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-default">
 							<div class="panel-heading">알림</div>
