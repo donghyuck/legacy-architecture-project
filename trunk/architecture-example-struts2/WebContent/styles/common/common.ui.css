@@ -1516,38 +1516,6 @@ table.tabular thead tr th,table.tabular tfoot tr th,table.tabular tbody tr td,ta
 	line-height: 1.125em;
 }
 
-/* Panal 
-div.panel-body {
-	color : #ffffff;
-	padding : 3px;
-	background : transparent;
-}
-
-div.panel-header-toolbar {
-	background-color : transparent;
-	border-bottom: 1px solid rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
-	box-shadow: 0 1px 0 rgba(255,255,255,0.1);	
-	font-size : 11pt;
-	padding : 5px 5px 5px 0px;
-	height: 45px;
-}
-
-div.panel-body-content {
-	background-color : transparent;
-	border-bottom: 1px solid rgba(0,0,0,0.5);
-	-webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.1);
-	box-shadow: 0 1px 0 rgba(255,255,255,0.1);	
-	font-size : 11pt;
-	padding : 0px 5px 0px 5px;
-	margin-top: 5px;
-}
-
-div.panel.gray {
-	background-color : #ffffff;	
-	color : #787878;
-}
-**/
 /*------------------------------------------------*/
 /* MENU SLIDER SECTION                           */
 /*------------------------------------------------*/
