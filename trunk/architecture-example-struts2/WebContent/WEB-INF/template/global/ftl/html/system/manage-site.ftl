@@ -26,7 +26,8 @@
 						currentUser = e.token;						
 					}
 				});
-				var selectedCompany = new Company();			
+				var selectedCompany = new Company();
+				var selectedSocial = {};			
 										
 				// 3.MENU LOAD
 				var currentPageName = "MENU_1_2";
@@ -195,7 +196,107 @@
 									this.expandRow(selectedCells);
 								}
 							});
-						}											
+						}							
+					}else if(  $(this).attr('href') == '#social-mgmt' ){ 
+
+						if( ! $("#social-grid").data("kendoGrid") ){	
+							$("#social-grid").kendoGrid({
+								dataSource: {
+									type: 'json',
+									transport: {
+										read: { url:'${request.contextPath}/secure/list-social-account.do?output=json', type: 'POST' },
+										update: { url:'${request.contextPath}/secure/update-social-account.do?output=json', type:'POST' },
+										parameterMap: function (options, operation){
+											if (operation != "read" && options) {										                        								                       	 	
+												return { objectType: 1, objectId : selectedCompany.companyId , item: kendo.stringify(options)};									                            	
+											}else{
+												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 1, objectId: selectedCompany.companyId }
+											}
+										} 
+									},
+									schema: {
+										data: "targetSocialAccounts",
+										model : SocialAccount
+									},
+									pageSize: 15,
+									serverPaging: false,
+									serverFiltering: false,
+									serverSorting: false,                        
+									error: handleKendoAjaxError
+								},
+								columns:[
+									{ field: "socialAccountId", title: "ID",  width: 50, filterable: false, sortable: false },
+									{ field: "serviceProviderName", title: "쇼셜", width: 100 },
+									{ field: "signedIn", title: "로그인",  width: 80 },
+									{ field: "accessSecret", title: "Access Secret", sortable: false },
+									{ field: "accessToken", title: "Access Token", sortable: false },
+									{ field: "creationDate", title: "생성일", width: 100, format: "{0:yyyy/MM/dd}" },
+									{ field: "modifiedDate", title: "수정일", width: 100, format: "{0:yyyy/MM/dd}" },
+									{ command: [ {  text: "상세" , click: function(e){										
+										e.preventDefault();
+										//var selectedCells = this.dataItem($(e.currentTarget).closest("tr"));
+										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));
+										
+										if(! $("#social-detail-window").data("kendoWindow")){       
+											// WINDOW 생성
+											$("#social-detail-window").kendoWindow({
+												actions: ["Close"],
+												resizable: false,
+												modal: true,
+												visible: false,
+												minWidth: 300,
+												minHeight: 300
+											});
+										}											
+
+										// load social content ...
+										var socialWindow = $("#social-detail-window").data("kendoWindow");
+										socialWindow.title( selectedSocial.serviceProviderName + ' 연결정보' );
+										
+										var template = kendo.template($('#social-details-template').html());										
+										$.ajax({
+											type : 'POST',
+											url : '${request.contextPath}/social/get-twitter-profile.do?output=json',
+											data: { socialAccountId: selectedSocial.socialAccountId },
+											success : function(response){
+												if( response.error ){
+													// 오류 발생..
+													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
+												} else {														
+													//alert( kendo.stringify(response.twitterProfile) );
+													socialWindow.content( template(response) );
+												}
+										
+												$('#connect-social-btn').click( function(e){
+													socialWindow.close();
+													var w = window.open(selectedSocial.authorizationUrl, "_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400");
+													w.focus();
+												});
+											},
+											error:handleKendoAjaxError,
+											dataType : 'json'
+										});										
+										
+										socialWindow.center();
+										socialWindow.open();
+																				
+									}}, { name: "destroy", text: "삭제" } ], title: " ", width: "230px"  }
+								],
+								filterable: true,
+								editable: "inline",
+								sortable: true,
+								//selectable: 'row',
+								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+								height: 500,
+								dataBound: function(e) {
+								
+								},
+								change: function(e) {          
+									var selectedCells = this.select();     
+								}
+							});
+						}	
+																
 					}else if(  $(this).attr('href') == '#attachment-mgmt' ){ 
 					
 						// IMAGE MGMT
@@ -296,6 +397,7 @@
 					</div>			
 				</div>		
 			</div>
+			<!--
 			<div class="row">			
 				<div class="col-6 col-lg-6">						
 					<div id="company-info-panel" class="panel panel-default">
@@ -340,7 +442,8 @@
 						</div>
 					</div>
 				</div>
-			</div>				
+			</div>			
+			-->	
 			<div class="row">			
 				<div class="col-12 col-lg-12">
 				
@@ -352,35 +455,12 @@
 					  <li><a href="#content-mgmt">페이지 템플릿 관리</a></li>
 					  <li><a href="#image-mgmt">이미지 관리</a></li>
 					  <li><a href="#attachment-mgmt">첨부파일 관리</a></li>
-					  <li><a href="#mgmt-info">쇼셜 관리</a></li>
+					  <li><a href="#social-mgmt">쇼셜 관리</a></li>
 					  <li><a href="#database-info">RSS 관리</a></li>
 					</ul>
 					<div class="tab-content">
 						<div class="tab-pane active" id="site-info">
-							<div class="blank-space-5">
-							
-<div class="panel panel-default">
-	<div class="panel-body">
-		<div class="pull-right">
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-warning">옵션</button>
-								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
-								    <span class="caret"></span>
-								  </button>
-								  <ul class="dropdown-menu" role="menu">
-								    <li><a href="#">Action</a></li>
-								    <li><a href="#">Another action</a></li>
-								    <li><a href="#">Something else here</a></li>
-								    <li class="divider"></li>
-								    <li><a href="#">Separated link</a></li>
-								  </ul>
-							</div>				
-		</div>	
-  </div>
-</div>
-							
-						
-							
+							<div class="blank-space-5">							
 								<table class="table table-hover">
 								<tbody>						
 									<tr>
@@ -441,7 +521,15 @@
 								</div>								 
 							</div>
 						</div>
-
+						<div class="tab-pane" id="social-mgmt">
+							<div class="blank-space-5">
+								<div class="row">
+									<div class="col-lg-12">
+										<div id="social-grid"></div>
+									</div>
+								</div>								 
+							</div>
+						</div>
 						 </div>
 						</div>
 										
@@ -449,12 +537,80 @@
 				</div>
 			</div>
 		</div>				
-		<div id="account-panel"></div>		
+		<div id="account-panel" ></div>
+  
+	<!-- Modal -->
+	<div id="social-detail-window" style="display:none;">	
+	
+
+	
+	</div>
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Modal title</h4>
+				</div>
+				<div class="modal-body">
+				...
+				</div>
+			<div class="modal-footer">
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="button" class="btn btn-primary">Save changes</button>
+		</div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  		
 		<!-- END MAIN CONTNET -->
 		<!-- START FOOTER -->
 		<footer>  		
 		</footer>
 		<!-- END FOOTER -->
+
+		<script id="social-details-template" type="text/x-kendo-template">				
+				#if ( typeof (twitterProfile)  == "object" ){ #
+				<div class="media">
+					<a class="pull-left" href="\\#"><img class="media-object" src="#=twitterProfile.profileImageUrl#" alt="프로파일 이미지" class="img-rounded"></a>
+					<div class="media-body">
+						<h4 class="media-heading">#=twitterProfile.screenName# (#=twitterProfile.name#)</h4>
+						#=twitterProfile.description#</br>
+						</br>
+						트위터 URL : #=twitterProfile.profileUrl#</br>
+						표준시간대: #=twitterProfile.timeZone#</br>	
+						웹 사이트: #=twitterProfile.url#</br>	
+						언어: #=twitterProfile.language#</br>	
+						위치: #=twitterProfile.location#</br>	
+					</div>			
+				</div>
+				</br>
+				<ul class="list-group">
+					<li class="list-group-item">
+					<span class="badge">#=twitterProfile.statusesCount#</span>
+					트윗
+					</li>
+					<li class="list-group-item">
+					<span class="badge">#=twitterProfile.friendsCount#</span>
+					팔로잉
+					</li>
+					<li class="list-group-item">
+					<span class="badge">#=twitterProfile.followersCount#</span>
+					팔로워
+					</li>		
+				</ul>							
+				# } else if ( typeof (error)  == "object" ) { #
+				<div class="alert alert-danger">
+					#=socialAccount.serviceProviderName# 쇼셜계정에 접근할 수 없습니다. <BR/>
+					연결하기 버튼을 클릭하여	<BR/>
+					다시 연결하여 주십시오.	<BR/>					
+					<img src="${request.contextPath}/images/common/twitter-bird-dark-bgs.png" alt="Twitter Logo" class="img-rounded">					
+				</div>
+				<input id="connect-social-id" type="hidden" value="#=socialAccount.socialAccountId #" />
+				<button id="connect-social-btn" type="button" class="btn btn-primary btn-block">#=socialAccount.serviceProviderName#  연결하기</button>
+				# } #						
+		</script>		
+
 		<#include "/html/common/common-templates.ftl" >		
 	</body>
 </html>
