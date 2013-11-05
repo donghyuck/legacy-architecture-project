@@ -30,11 +30,11 @@
 						},
 						success : function(response){
 							$('.progress').hide();
+							var template = kendo.template($('#twitter-profile-template').html());
 							if( response.error ){							
 							
-							} else {
+							} else {							
 								
-								var template = kendo.template($('#twitter-profile-template').html());
 								$('#twitter-profile').html( template(response) );
 							}
 							
@@ -99,10 +99,9 @@
 					<span class="badge">#=twitterProfile.followersCount#</span>
 					팔로워
 					</li>		
-				</ul>			
-				<button id="close-btn" type="button" class="btn btn-primary btn-block">확인</button>				
+				</ul>								
 				# } #
-				
+				<button id="close-btn" type="button" class="btn btn-primary btn-block">확인</button>			
 		</script>					
 	</body>
 </html>
