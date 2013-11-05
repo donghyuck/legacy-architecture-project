@@ -324,11 +324,11 @@
     ]]></sql-query>
     
 	<sql-query name="DELETE_SOCIAL_ACCOUNT_BY_ID" description="SOCIAL_ACCOUNT  삭제"><![CDATA[    
- 		DELETE FROM SOCIAL_ACCOUNT WHERE ACCOUNT_ID = ?
+ 		DELETE FROM V2_SOCIAL_ACCOUNT WHERE ACCOUNT_ID = ?
     ]]></sql-query>
 	
 	<sql-query name="UPDATE_SOCIAL_ACCOUNT" description="ID로 SOCIAL_ACCOUNT 조회"><![CDATA[    
-  		UPDATE SOCIAL_ACCOUNT SET
+  		UPDATE V2_SOCIAL_ACCOUNT SET
 	  		ACCESS_TOKEN = ?,
 			ACCESS_SECRET = ?,
 			MODIFIED_DATE = ?

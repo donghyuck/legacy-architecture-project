@@ -149,19 +149,31 @@ public class DefaultSocialAccountManager implements SocialAccountManager {
 		return accounts;
 	}
 
+	public List<SocialAccount> getSocialAccounts(int objectType, long objectId) {
+		List<Long> ids = socialAccountDao.getSocialAccountIds(objectType, objectId);
+		List<SocialAccount> accounts = new ArrayList<SocialAccount>(ids.size());
+		for(Long id : ids){
+			try {
+				accounts.add( getSocialAccountById(id) );
+			} catch (NotFoundException e) {
+			}
+		}
+		return accounts;
+	}
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void saveSocialAccount(SocialAccount socialAccount) {
-		if(socialAccount.getSocialAccountId() > 0 ){
+		
+		if(socialAccount.getSocialAccountId() <= 0 ){
 			socialAccountDao.createSocialAccount(socialAccount);
 		}else{
 			socialAccountDao.updateSocialAccount(socialAccount);
 		}
-
+		
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void removeSocialAccount(SocialAccount socialAccount) {
 		socialAccountDao.deleteSocialAccount(socialAccount);
 	}
-
 }

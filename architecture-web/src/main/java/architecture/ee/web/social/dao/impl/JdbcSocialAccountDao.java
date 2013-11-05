@@ -32,6 +32,7 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.dao.SocialAccountDao;
 import architecture.ee.web.social.internal.SocialAccountImpl;
@@ -63,10 +64,23 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 			if( !StringUtils.isEmpty( account.getServiceProviderName())){
 				if( "twitter".toLowerCase().equals(account.getServiceProviderName()) ){
 					
-					TwitterServiceProvider twitter = new TwitterServiceProvider(
+					String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.twitter.callbackUrl", null);
+					log.debug("twitter callback : " + callbackUrl);
+					
+					TwitterServiceProvider twitter;
+					if( callbackUrl!=null ){
+						twitter = new TwitterServiceProvider(
+							"4XebpD1MW3CQ8Koh7naQpg",
+							"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
+							callbackUrl
+						);
+					}else{
+						twitter = new TwitterServiceProvider(
 							"4XebpD1MW3CQ8Koh7naQpg",
 							"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
 						);
+					}
+					
 					if( !StringUtils.isEmpty( account.getAccessToken() ) && !StringUtils.isEmpty( account.getAccessSecret())){
 						twitter.setAccessSecret(account.getAccessSecret());
 						twitter.setAccessToken(account.getAccessToken());
@@ -123,16 +137,6 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 		extendedPropertyDao.updateProperties(socialAccountPropertyTableName, socialAccountPropertyPrimaryColumnName, accountId, props);
 	}
 
-	/*public List<Long> getSocialAccountIds(Company company) {		
-		int objectType = ModelObjectType.COMPANY.getKey();		
-		return getSocialAccountIds(objectType, company.getCompanyId());
-	}
-
-	public List<Long> getSocialAccountIds(User user) {		
-		int objectType = ModelObjectType.USER.getKey();		
-		return getSocialAccountIds(objectType, user.getUserId());
-	}*/
-
 	public List<Long> getSocialAccountIds( int objectType, long objectId) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
 				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
@@ -145,11 +149,13 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 	}
 
 	public void updateSocialAccount(SocialAccount socialAccount) {
+		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_SOCIAL_ACCOUNT").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, socialAccount.getAccessToken()), 
 				new SqlParameterValue (Types.VARCHAR, socialAccount.getAccessSecret()), 
 				new SqlParameterValue(Types.DATE, socialAccount.getModifiedDate()),
 				new SqlParameterValue (Types.NUMERIC, socialAccount.getSocialAccountId()) );		
+		
 		deleteSocialAccountProperties(socialAccount.getSocialAccountId());
 		if(!socialAccount.getProperties().isEmpty())
 			setSocialAccountProperties(socialAccount.getSocialAccountId(), socialAccount.getProperties());

@@ -16,8 +16,6 @@
 package architecture.ee.web.social.internal;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
@@ -35,7 +33,9 @@ public class SocialAccountImpl extends PropertyModelSupport implements SocialAcc
 	private String accessSecret ;
 	private boolean isSignedIn = false;
 	private SocialServiceProvider serviceProvider;
+	
 	public SocialAccountImpl() {
+		
 	}
 
 	public Serializable getPrimaryKeyObject() {
@@ -158,6 +158,7 @@ public class SocialAccountImpl extends PropertyModelSupport implements SocialAcc
 	public ModelObjectType getModelObjectType() {
 		return ModelObjectType.SOCAIL_ACCOUNT;
 	}
+	
 
 	
 	public int getCachedSize() {
@@ -218,6 +219,17 @@ public class SocialAccountImpl extends PropertyModelSupport implements SocialAcc
 		}
 		builder.append("]");
 		return builder.toString();
+	}
+
+	public String getAuthorizationUrl() {
+		if(serviceProvider!=null)
+			try {
+				return serviceProvider.getAuthorizationUrl();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return null;
 	}
 
 }

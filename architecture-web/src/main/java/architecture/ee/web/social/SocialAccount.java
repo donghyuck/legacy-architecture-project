@@ -82,5 +82,7 @@ public interface SocialAccount extends PropertyModelObject {
 	 * @param properties
 	 */
 	public abstract void setProperties(Map<String, String> properties);
+	
+	public abstract String getAuthorizationUrl();
 
 }
