@@ -48,6 +48,7 @@
 </response>    	
 <%    	
     } else if (format == OutputFormat.JSON ) {
+    	//response.sendError(500);
     	response.setContentType("application/json;charset=UTF-8");
 %>{"error":{ "locale" : "<%= localeToUse %>", "code": "<%= I18nTextUtils.generateResourceBundleKey(objectType, errorCode, objectAttribute ) %>", "exception" : "<%= exceptionClassName  %>", "message" : "<%= exceptionMessage == null ? "" : exceptionMessage %>" }}<%	
     } else if (format == OutputFormat.HTML ) { 
