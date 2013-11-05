@@ -1,3 +1,19 @@
+var SocialAccount = kendo.data.Model.define( {
+    id: "socialAccountId", // the identifier of the model
+    fields: {
+    	socialAccountId: { type: "number", editable: false, defaultValue: -1  },    	
+    	objectType: { type: "number", editable: false, defaultValue: -1  },    	
+    	objectId: { type: "number", editable: false, defaultValue: -1  },    	
+    	serviceProviderName: { type: "string", editable: true , validation: { required: true }},
+    	authorizationUrl : { type: "string", editable: false  },    	
+    	accessSecret: { type: "string", editable: true },
+    	accessToken : { type: "string", editable: true },
+    	signedIn: { type:"boolean", defaultVlaue: false },
+        modifiedDate: { type: "date"},
+        creationDate: { type: "date" } 
+    }
+});
+
 var Content = kendo.data.Model.define( {
     id: "contentId", // the identifier of the model
     fields: {
