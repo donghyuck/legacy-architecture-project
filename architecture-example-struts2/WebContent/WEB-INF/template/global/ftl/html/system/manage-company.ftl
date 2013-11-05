@@ -394,7 +394,7 @@
 						if(! $("#menu-window").data("kendoWindow")){       
 							// WINDOW 생성
 							$(".menu-details").hide();
-							$("#menu-window").kendoWindow({
+							$("#menu-window").kendoWindow({								
 								actions: ["Close"],
 								resizable: false,
 								modal: true,
@@ -421,9 +421,12 @@
 							maxHeight : 500,
 							minWidth :  200,
 							maxWidth :  700,
-							modal: true,
+							modal: false,
 							visible: false,
-							title: '권한 정보'
+							title: '권한 정보',
+							actions : [
+								"Pin", "Close"
+							]
 						});
 					}					
 					if( ! $('#role-grid').data("kendoGrid")){
