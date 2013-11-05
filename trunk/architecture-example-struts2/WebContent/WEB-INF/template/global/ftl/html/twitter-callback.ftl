@@ -16,7 +16,8 @@
             complete: function() {               
 				
 				var oauth_token = '${ action.oauth_token }';
-				var oauth_verifier = '${ action.oauth_verifier }';				
+				var oauth_verifier = '${ action.oauth_verifier }';
+					
 				var socialAccountId = window.opener.$("#connect-social-id").val();
 				var grid = window.opener.$("#social-grid").data("kendoGrid");
 				
