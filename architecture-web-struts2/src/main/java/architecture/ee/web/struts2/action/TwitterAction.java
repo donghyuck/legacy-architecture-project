@@ -13,107 +13,63 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.struts2.action.admin.ajax;
+package architecture.ee.web.struts2.action;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
+import org.scribe.model.Token;
 
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.SocialAccountManager;
+import architecture.ee.web.social.twitter.Tweet;
+import architecture.ee.web.social.twitter.TwitterProfile;
+import architecture.ee.web.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
-import architecture.user.Group;
 
-public class SocialManagementAction extends FrameworkActionSupport  {
+public class TwitterAction extends FrameworkActionSupport  {
 
-    private int pageSize = 0 ;
-    
-    private int startIndex = 0 ;  
-    
 	private Long socialAccountId = -1L; 
-	
-	private Integer objectType = 0;
-	
-	private Long objectId = -1L;
 	
 	private SocialAccount targetSocialAccount;
 	
 	private SocialAccountManager socialAccountManager;
-			
-	public SocialManagementAction() {
+	
+	private String oauth_token;
+	
+	private String oauth_verifier;
+		
+	
+	/**
+	 * @return oauth_token
+	 */
+	public String getOauth_token() {
+		return oauth_token;
 	}
 
 	/**
-	 * @return pageSize
+	 * @param oauth_token 설정할 oauth_token
 	 */
-	public int getPageSize() {
-		return pageSize;
+	public void setOauth_token(String oauth_token) {
+		this.oauth_token = oauth_token;
 	}
 
 	/**
-	 * @param pageSize 설정할 pageSize
+	 * @return oauth_verifier
 	 */
-	public void setPageSize(int pageSize) {
-		this.pageSize = pageSize;
+	public String getOauth_verifier() {
+		return oauth_verifier;
 	}
 
 	/**
-	 * @return startIndex
+	 * @param oauth_verifier 설정할 oauth_verifier
 	 */
-	public int getStartIndex() {
-		return startIndex;
-	}
-
-	/**
-	 * @param startIndex 설정할 startIndex
-	 */
-	public void setStartIndex(int startIndex) {
-		this.startIndex = startIndex;
-	}
-
-	/**
-	 * @return socialAccountId
-	 */
-	public Long getSocialAccountId() {
-		return socialAccountId;
-	}
-
-	/**
-	 * @param socialAccountId 설정할 socialAccountId
-	 */
-	public void setSocialAccountId(Long socialAccountId) {
-		this.socialAccountId = socialAccountId;
-	}
-
-	/**
-	 * @return objectType
-	 */
-	public Integer getObjectType() {
-		return objectType;
-	}
-
-	/**
-	 * @param objectType 설정할 objectType
-	 */
-	public void setObjectType(Integer objectType) {
-		this.objectType = objectType;
-	}
-
-	/**
-	 * @return objectId
-	 */
-	public Long getObjectId() {
-		return objectId;
-	}
-
-	/**
-	 * @param objectId 설정할 objectId
-	 */
-	public void setObjectId(Long objectId) {
-		this.objectId = objectId;
+	public void setOauth_verifier(String oauth_verifier) {
+		this.oauth_verifier = oauth_verifier;
 	}
 
 	/**
@@ -131,14 +87,39 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 		}
 	}
 	
-	public int getTotalTargetSocialAccountCount(){
-		return 0; //getSocialAccountManager().		
+	/**
+	 * @return socialAccountId
+	 */
+	public Long getSocialAccountId() {
+		return socialAccountId;
+	}
+
+	
+	public TwitterServiceProvider getServiceProvider () {
+		return (TwitterServiceProvider)getTargetSocialAccount().getSocialServiceProvider();
 	}
 	
-	public List<SocialAccount>getTargetSocialAccounts(){
-		return getSocialAccountManager().getSocialAccounts(objectType, objectId);
+	
+	public TwitterProfile getTwitterProfile () throws UnAuthorizedException {
+		return getServiceProvider().authenticate();
+	}
+
+	public List<Tweet> getUserTimeline () {
+		return getServiceProvider().getUserTimeline();
+	}
+
+	public String getAuthorizationUrl () {
+		return getServiceProvider().getAuthorizationUrl();
 	}
 	
+	
+	/**
+	 * @param socialAccountId 설정할 socialAccountId
+	 */
+	public void setSocialAccountId(Long socialAccountId) {
+		this.socialAccountId = socialAccountId;
+	}
+
 	/**
 	 * @return socialAccountManager
 	 */
@@ -150,37 +131,36 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 	 * @param socialAccountManager 설정할 socialAccountManager
 	 */
 	public void setSocialAccountManager(SocialAccountManager socialAccountManager) {
+		
 		this.socialAccountManager = socialAccountManager;
 	}
-	
+
 	public String execute() throws Exception {
 		return success();
-	}
+	}	
 	
-	public String updateSocialAccount() throws Exception{
+	public String update() throws Exception{
 		try {
 			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
-			String accessSecret = (String)map.get("accessSecret");
-			String accessToken = (String)map.get("accessToken");
+			
+			oauth_token = (String)map.get("oauth_token");
+			oauth_verifier = (String)map.get("oauth_verifier");
+			
 			Boolean signedIn = (Boolean)map.get("signedIn");
 			
 			if( socialAccountId == null){
 				Integer  selectedSocialAccountId = (Integer)map.get("socialAccountId");	
 				socialAccountId = selectedSocialAccountId.longValue();
-			}			
+			}
+			
+			TwitterServiceProvider provider = getServiceProvider();
+			Token token = provider.getTokenWithCallbackReturn(oauth_token, oauth_verifier);
 			
 			SocialAccount account = getTargetSocialAccount();
-			log.debug("=====================");
+			account.setAccessSecret(token.getSecret());			
+			account.setAccessToken(token.getToken());
+			socialAccountManager.saveSocialAccount(account);
 			
-			if(!StringUtils.isEmpty(accessSecret))
-				account.setAccessSecret(accessSecret);
-			if(!StringUtils.isEmpty(accessToken))
-				account.setAccessToken(accessToken);
-			//if( signedIn!=null )
-	
-			log.debug(account);
-			log.debug("=====================");
-			socialAccountManager.saveSocialAccount(account);		
 			this.targetSocialAccount = null;
 			
 			return success();
@@ -189,4 +169,5 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 			throw new Exception(e);
 		}	
 	}
+	
 }
