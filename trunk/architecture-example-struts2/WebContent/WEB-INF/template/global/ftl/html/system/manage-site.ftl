@@ -607,7 +607,7 @@
 					<img src="${request.contextPath}/images/common/twitter-bird-dark-bgs.png" alt="Twitter Logo" class="img-rounded">					
 				</div>
 				<input id="connect-social-id" type="hidden" value="#=socialAccount.socialAccountId #" />
-				<div style="padding-top:-30px;">
+				<div style="margin-top:-30px;">
 				<button id="connect-social-btn" type="button" class="btn btn-primary btn-block">#=socialAccount.serviceProviderName#  연결하기</button>
 				</div>
 				# } #						
