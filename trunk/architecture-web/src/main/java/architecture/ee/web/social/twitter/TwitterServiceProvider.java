@@ -45,10 +45,10 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 
 	public TwitterServiceProvider(String clientId, String clientSecret, String callbackUrl) {
 		super(new ServiceBuilder()
-                                .provider(TwitterApi.class)
-                                .callback(callbackUrl)
+                                .provider(TwitterApi.class)                               
                                 .apiKey(clientId)
                                 .apiSecret(clientSecret)
+                                .callback(callbackUrl)
                                 .build());
 	}
 	
@@ -56,6 +56,12 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 		Token accessToken = getAccessToken(accessKey);		
 		return verifyCredentials(accessToken);
 	}
+	
+	
+	public Token getTokenWithCallbackReturn(String oAuthToken, String oAuthVarifier){	
+		return this.getAccessTokenWithCallbackReturn(oAuthToken, oAuthVarifier);
+	}
+	
 	
 	public TwitterProfile authenticate() throws UnAuthorizedException {
 		Token accessToken = getAccessToken(getAccessToken(), getAccessSecret());
@@ -81,6 +87,9 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 	}
 	
 	public List<Tweet> getUserTimeline(){
+		if( super.isAuthorized = false ){
+			authenticate();
+		}
 		Token accessToken = getAccessToken(getAccessToken(), getAccessSecret());
 		OAuthRequest request = new OAuthRequest(Verb.GET, STATUSES_USER_TIMELINE_URL);
 		getOAuthService().signRequest(accessToken, request);
@@ -99,5 +108,6 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 	private static class TweetList extends ArrayList<Tweet>{
 		
 	}
+
 	
 }

@@ -13,26 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.social;
+package architecture.ee.web.theme;
 
-import org.scribe.oauth.OAuthService;
+import architecture.common.model.ModelObject;
 
-public interface SocialServiceProvider {
+public interface Theme extends ModelObject  {
 
-	public OAuthService getOAuthService();
-	
-	public String getAuthorizationUrl();
-	
-	public boolean isAuthorized();
-	
-	public String getAccessToken() ;
-	
-	public void setAccessToken(String accessToken) ;
-	
-	public String getAccessSecret() ;
-		
-	public void setAccessSecret(String accessSecret);
-	
-	//public void setAccessSecret(String accessToken, String accessVerifier );
-	
 }

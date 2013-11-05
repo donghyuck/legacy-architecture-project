@@ -13,26 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.social;
+package architecture.ee.web.story;
 
-import org.scribe.oauth.OAuthService;
+public interface Story {
 
-public interface SocialServiceProvider {
-
-	public OAuthService getOAuthService();
-	
-	public String getAuthorizationUrl();
-	
-	public boolean isAuthorized();
-	
-	public String getAccessToken() ;
-	
-	public void setAccessToken(String accessToken) ;
-	
-	public String getAccessSecret() ;
-		
-	public void setAccessSecret(String accessSecret);
-	
-	//public void setAccessSecret(String accessToken, String accessVerifier );
-	
 }

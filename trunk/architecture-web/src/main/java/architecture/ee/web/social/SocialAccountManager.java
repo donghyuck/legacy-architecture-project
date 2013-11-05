@@ -32,6 +32,8 @@ public interface SocialAccountManager {
 	public abstract List<SocialAccount> getSocialAccounts(Company company);
 	
 	public abstract List<SocialAccount> getSocialAccounts(User user);
+	
+	public abstract List<SocialAccount> getSocialAccounts(int objectType, long objectId);
 			
 	public abstract void saveSocialAccount( SocialAccount socialAccount );	
 

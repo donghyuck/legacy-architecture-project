@@ -26,7 +26,6 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 	private String accessSecret;
 	protected boolean isAuthorized = false;
 	
-
 	public AbstractSocialServiceProvider(OAuthService service) {
 		this.service = service;
 	}
@@ -43,9 +42,10 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 	 * @return isAuthorized
 	 */
 	public boolean isAuthorized() {
+		
 		return isAuthorized;
+	
 	}
-
 	/**
 	 * @return accessToken
 	 */
@@ -77,6 +77,13 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 	protected Token getRequestToken(){
 		return service.getRequestToken();
 	}
+
+	protected Token getAccessTokenWithCallbackReturn(String oAuthToken, String oAuthVarifier  ){		
+		Verifier verifier = new Verifier(oAuthVarifier) ;
+		Token requestToken = new Token(oAuthToken, oAuthVarifier);		
+		Token accessToken = service.getAccessToken(requestToken, verifier );
+		return accessToken;
+	}
 	
 	protected Token getAccessToken(String accessKey){
 		Token accessToken = service.getAccessToken(getRequestToken(), new Verifier(accessKey));
@@ -89,5 +96,6 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 		Token accessToken = new Token( token, secret );
 		return accessToken;
 	}
+	
 	
 }
