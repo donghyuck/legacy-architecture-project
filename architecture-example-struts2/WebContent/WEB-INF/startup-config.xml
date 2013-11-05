@@ -53,6 +53,13 @@ PC9saWNlbnNlPg==</file>
 				</company>
 			</anonymous>
 		</user>
+		<social>
+			<providers>
+				<twitter>
+					<callbackUrl>http://222.122.63.147/social/twitter-callback.do</callbackUrl>
+				</twitter>
+			</providers>
+		</social>
 		<company>
 			<default>
 				<companyId>1</companyId>
