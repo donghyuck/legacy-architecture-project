@@ -15,6 +15,8 @@
  */
 package architecture.ee.web.social;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.scribe.model.Token;
 import org.scribe.model.Verifier;
 import org.scribe.oauth.OAuthService;
@@ -25,6 +27,7 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 	private String accessToken ;
 	private String accessSecret;
 	protected boolean isAuthorized = false;
+	protected Log log = LogFactory.getLog(getClass());
 	
 	public AbstractSocialServiceProvider(OAuthService service) {
 		this.service = service;

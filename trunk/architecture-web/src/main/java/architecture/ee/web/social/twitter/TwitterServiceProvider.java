@@ -40,6 +40,7 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
                                 .provider(TwitterApi.class)
                                 .apiKey(clientId)
                                 .apiSecret(clientSecret)
+                                .debug()
                                 .build());
 	}
 
@@ -49,6 +50,7 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
                                 .apiKey(clientId)
                                 .apiSecret(clientSecret)
                                 .callback(callbackUrl)
+                                .debug()
                                 .build());
 	}
 	
@@ -70,9 +72,11 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 	
 	protected TwitterProfile verifyCredentials(Token accessToken) throws UnAuthorizedException {		
 		OAuthRequest request = new OAuthRequest(Verb.GET, ACCOUNT_VERIFY_CREDENTIALS_URL);
+		//mrequest.addBodyParameter("status", "this is sparta! *");
 		getOAuthService().signRequest(accessToken, request);
 		Response response = request.send();
-		    
+		log.debug(response.getCode()); 
+		log.debug(response.getBody());
 		if( response.getCode() != 200)
 			throw new UnAuthorizedException();
 		else
