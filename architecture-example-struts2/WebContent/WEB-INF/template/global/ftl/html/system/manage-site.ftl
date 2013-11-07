@@ -225,6 +225,7 @@
 									serverSorting: false,                        
 									error: handleKendoAjaxError
 								},
+								toolbar: [ { text: "쇼셜 연결 추가", css:"createSocialCustom" } ],   
 								columns:[
 									{ field: "socialAccountId", title: "ID",  width: 50, filterable: false, sortable: false },
 									{ field: "serviceProviderName", title: "쇼셜", width: 100 },
@@ -234,9 +235,8 @@
 									{ field: "creationDate", title: "생성일", width: 100, format: "{0:yyyy/MM/dd}" },
 									{ field: "modifiedDate", title: "수정일", width: 100, format: "{0:yyyy/MM/dd}" },
 									{ command: [ {  text: "상세" , click: function(e){										
-										e.preventDefault();
-										
-										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));
+										e.preventDefault();										
+										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));	
 										
 										if(! $("#social-detail-window").data("kendoWindow")){       
 											// WINDOW 생성
@@ -248,42 +248,42 @@
 												minWidth: 300,
 												minHeight: 300
 											});
-										}											
-
-										// load social content ...
+										}
+										
+										// load social content ...										
 										var socialWindow = $("#social-detail-window").data("kendoWindow");
 										socialWindow.title( selectedSocial.serviceProviderName + ' 연결정보' );
-										var template = kendo.template($('#social-details-template').html());										
-										
+										var template = kendo.template($('#social-details-template').html());	
+										socialWindow.content(template({}));
 										$.ajax({
 											type : 'POST',
 											url : '${request.contextPath}/social/get-twitter-profile.do?output=json',
 											data: { socialAccountId: selectedSocial.socialAccountId },
+											beforeSend: function(){																					
+												socialWindow.center();
+												socialWindow.open();
+												kendo.ui.progress($("#social-detail-window"), true);												
+											},
 											success : function(response){
 												if( response.error ){
 													// 오류 발생..
 													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
 												} else {														
-													//alert( kendo.stringify(response.twitterProfile) );
 													socialWindow.content( template(response) );
 												}										
 												$('#connect-social-btn').click( function(e){
 													socialWindow.close();
 													var w = window.open(selectedSocial.authorizationUrl, "_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400");
 													w.focus();
-												});
-												
-												socialWindow.center();
-												socialWindow.open();
+												});		
 											},
-											error: handleKendoAjaxError
+											error: function(){
+												socialWindow.close();
+												handleKendoAjaxError();
+											},
 											dataType : 'json'
-										});			
-																	
-										if(doWindowOpen){
-
-										}
-																														
+										});	
+										
 									}}, { name: "destroy", text: "삭제" } ], title: " ", width: "230px"  }
 								],
 								filterable: true,
@@ -614,7 +614,9 @@
 				<div style="margin-top:-50px;">
 				<button id="connect-social-btn" type="button" class="btn btn-primary btn-block">#=socialAccount.serviceProviderName#  연결하기</button>
 				</div>
-				# } #						
+				# } else { #	
+					<img src="${request.contextPath}/images/common/twitter-bird-light-bgs.png" alt="Twitter Logo" class="img-rounded">	
+				# } #					
 		</script>		
 
 		<#include "/html/common/common-templates.ftl" >		
