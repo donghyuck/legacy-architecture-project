@@ -251,16 +251,15 @@
 										}											
 
 										// load social content ...
-										var doWindowOpen = false;
 										var socialWindow = $("#social-detail-window").data("kendoWindow");
 										socialWindow.title( selectedSocial.serviceProviderName + ' 연결정보' );
 										var template = kendo.template($('#social-details-template').html());										
+										
 										$.ajax({
 											type : 'POST',
 											url : '${request.contextPath}/social/get-twitter-profile.do?output=json',
 											data: { socialAccountId: selectedSocial.socialAccountId },
 											success : function(response){
-												doWindowOpen = true;
 												if( response.error ){
 													// 오류 발생..
 													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
@@ -273,14 +272,18 @@
 													var w = window.open(selectedSocial.authorizationUrl, "_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400");
 													w.focus();
 												});
+												
+												socialWindow.center();
+												socialWindow.open();
 											},
-											error:handleKendoAjaxError,
+											error: handleKendoAjaxError
 											dataType : 'json'
-										});										
+										});			
+																	
 										if(doWindowOpen){
-											socialWindow.center();
-											socialWindow.open();
-										}																				
+
+										}
+																														
 									}}, { name: "destroy", text: "삭제" } ], title: " ", width: "230px"  }
 								],
 								filterable: true,
