@@ -235,7 +235,7 @@
 									{ field: "modifiedDate", title: "수정일", width: 100, format: "{0:yyyy/MM/dd}" },
 									{ command: [ {  text: "상세" , click: function(e){										
 										e.preventDefault();
-										//var selectedCells = this.dataItem($(e.currentTarget).closest("tr"));
+										
 										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));
 										
 										if(! $("#social-detail-window").data("kendoWindow")){       
@@ -251,23 +251,23 @@
 										}											
 
 										// load social content ...
+										var doWindowOpen = false;
 										var socialWindow = $("#social-detail-window").data("kendoWindow");
 										socialWindow.title( selectedSocial.serviceProviderName + ' 연결정보' );
-										
 										var template = kendo.template($('#social-details-template').html());										
 										$.ajax({
 											type : 'POST',
 											url : '${request.contextPath}/social/get-twitter-profile.do?output=json',
 											data: { socialAccountId: selectedSocial.socialAccountId },
 											success : function(response){
+												doWindowOpen = true;
 												if( response.error ){
 													// 오류 발생..
 													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
 												} else {														
 													//alert( kendo.stringify(response.twitterProfile) );
 													socialWindow.content( template(response) );
-												}
-										
+												}										
 												$('#connect-social-btn').click( function(e){
 													socialWindow.close();
 													var w = window.open(selectedSocial.authorizationUrl, "_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400");
@@ -277,10 +277,10 @@
 											error:handleKendoAjaxError,
 											dataType : 'json'
 										});										
-										
-										socialWindow.center();
-										socialWindow.open();
-																				
+										if(doWindowOpen){
+											socialWindow.center();
+											socialWindow.open();
+										}																				
 									}}, { name: "destroy", text: "삭제" } ], title: " ", width: "230px"  }
 								],
 								filterable: true,
