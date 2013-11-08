@@ -55,22 +55,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	 	color: #000;
 	}
 	
-	#my-messages .popover {
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-		width: 260px;
-		margin-top: 20px;
-		margin-right: 20px;
-		margin-bottom: 20px;
-		margin-left: 20px;
-		float: left;
-		display: block;
-		position: relative;
-		z-index: 1;
-	 }
-	 
-	 .popover-title {
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-	 }
+
 	/* Carousel base class */
 	.dropdown-submenu{position:relative;}
 	.dropdown-submenu>.dropdown-menu{top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0 6px 6px 6px;-moz-border-radius:0 6px 6px 6px;border-radius:0 6px 6px 6px;}
