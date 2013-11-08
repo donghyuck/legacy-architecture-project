@@ -68,11 +68,47 @@
 				});
 				
 				<#if !action.user.anonymous >
+				// Start : Company Social Content 
+				<#list action.companySocials  as item >	
+					<#if item.serviceProviderName == "twitter">					
+					var template = kendo.template($("#twitter-timeline-template").html());
+					var dataSource = new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								type: "json",
+								url : '${request.contextPath}/social/get-twitter-usertimeline.do?output=json',
+							},
+							parameterMap: function (options, operation){
+								if (operation == "read" && options) {										                        								                       	 	
+									return { socialAccountId: ${ item.socialAccountId } };									                            	
+								}
+							} 
+						},
+						requestStart: function() {
+							kendo.ui.progress($("#company-twitter-timeline"), true);
+						},
+						requestEnd: function() {
+							kendo.ui.progress($("#company-twitter-timeline"), false);
+						},
+						change: function() {
+							$("#company-twitter-timeline").html(kendo.render(template, this.view()));
+						},
+						error:handleKendoAjaxError,
+							schema: {
+								data : "userTimeline"
+						}
+		            });            				
+		            dataSource.read();
+					</#if>			
+				</#list>
+				// End : Company Social Content 
+				
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-messages' ){
-						$('#my-messages').popover('show');			
-								
+					
+					if(  $(this).attr('href') == '#my-messages' ){					
+						$('#my-messages').popover('show');	
 					} else if(  $(this).attr('href') == '#my-attachments' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){	
 							
@@ -219,6 +255,24 @@
 		
     <style scoped="scoped">
 
+	#my-messages .popover {
+		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+		width: 100%;
+		margin-top: 20px;
+		margin-right: 20px;
+		margin-bottom: 20px;
+		margin-left: 20px;
+		float: left;
+		display: block;
+		position: relative;
+		z-index: 1;
+		max-width: 340px;
+	 }
+	 
+	 .popover-title {
+		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+	 }
+	 		
 		.carousel {
 		margin-top: 60px;		
 		}	
@@ -296,6 +350,8 @@
         	border : 0px;
         	border-width: 0px;
         }
+        
+        
 		</style>   	
 	</head>
 	<body id="doc">
@@ -326,13 +382,8 @@
 							<li><a href="#my-attachments">클라우드 저장소</a></li>
 						</ul>						
 						<div class="tab-content">
-							<div class="tab-pane active" id="my-messages">
-								<div class="popover left" style="display:true;">
-									<div class="arrow"></div>
-									<div class="popover-content">
-										<p>새로운 뉴스가 없습니다.</p>
-									</div>
-								</div>	
+							<div class="tab-pane active" id="my-messages">							
+								<div id="company-twitter-timeline"></div>								
 							</div>
 							<div class="tab-pane" id="my-attachments">							
 								<div class="container">
@@ -392,6 +443,21 @@
 		</footer>
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
+		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
+			<div class="popover left" style="display:true;">
+				<div class="arrow"></div>
+				<div class="popover-content">
+					<p>#: text #</p>
+					<p>
+					# for (var i = 0; i < entities.media.length ; i++) { #					
+					# var media = entities.media[i] ; #					
+					<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
+					# } #
+					</p>
+					<img src="#: user.profileImageUrl #" alt="#: user.name#" class="img-thumbnail">
+				</div>
+			</div>			
+		</script>
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
@@ -406,7 +472,6 @@
 			</div>
 		</script>		
 		<script id="attachment-preview-template" type="text/x-kendo-template">	
-			
 			#if (contentType.match("^image") ) {#
 				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 				<p class="blank-top-5">
@@ -458,6 +523,5 @@
 		</script>		
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
-
 	</body>    
 </html>
