@@ -59,13 +59,21 @@
 		<action name="twitter-callback" class="architecture.ee.web.struts2.action.TwitterAction">
 			<result name="success" type="freemarker">/html/twitter-callback.ftl</result>
 		</action>
-					
+		<action name="get-twitter-hometimeline" class="architecture.ee.web.struts2.action.TwitterAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  homeTimeline.*
+				</param>
+			</result>	
+		</action>					
 		<action name="get-twitter-usertimeline" class="architecture.ee.web.struts2.action.TwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>
 				<param name="includeProperties">
-				  userTimeline
+				  userTimeline.*
 				</param>
 			</result>	
 		</action>						

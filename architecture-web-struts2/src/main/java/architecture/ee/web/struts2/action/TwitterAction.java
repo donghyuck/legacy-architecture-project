@@ -18,9 +18,9 @@ package architecture.ee.web.struts2.action;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.scribe.model.Token;
 
+import architecture.common.user.Company;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.social.SocialAccount;
@@ -108,6 +108,10 @@ public class TwitterAction extends FrameworkActionSupport  {
 		return getServiceProvider().getUserTimeline();
 	}
 
+	public List<Tweet> getHomeTimeline () {
+		return getServiceProvider().getHomeTimeline();
+	}
+	
 	public String getAuthorizationUrl () {
 		return getServiceProvider().getAuthorizationUrl();
 	}
@@ -135,9 +139,20 @@ public class TwitterAction extends FrameworkActionSupport  {
 		this.socialAccountManager = socialAccountManager;
 	}
 
-	public String execute() throws Exception {
+	public String execute() throws Exception {		
+		if( socialAccountId < 0 ){
+			Company company = getCompany();
+			List <SocialAccount> list = socialAccountManager.getSocialAccounts(company);
+			for( SocialAccount account : list ){
+				if( "twitter".toLowerCase().equals(account.getServiceProviderName()) ){				
+					socialAccountId = account.getSocialAccountId();
+					targetSocialAccount = account;
+					break;
+				}
+			}		
+		}
 		return success();
-	}	
+	}
 	
 	public String update() throws Exception{
 		try {
@@ -168,6 +183,5 @@ public class TwitterAction extends FrameworkActionSupport  {
 			e.printStackTrace();
 			throw new Exception(e);
 		}	
-	}
-	
+	}	
 }
