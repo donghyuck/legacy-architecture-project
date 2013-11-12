@@ -75,7 +75,10 @@
 			<result name="success">/main.jsp</result>
 			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
-		</action>
+		</action>	
+		<action name="profile" class="architecture.ee.web.struts2.action.MyPageAction">
+			<result name="homepage" type="freemarker">/html/profile.ftl</result>
+		</action>						
 	</package>
 
 </struts>
