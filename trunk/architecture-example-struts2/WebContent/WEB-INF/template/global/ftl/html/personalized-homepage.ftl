@@ -70,50 +70,26 @@
 						}
 					}
 				});
-				
-				<#if !action.user.anonymous >
-				// Start : Company Social Content 
-				<#list action.companySocials  as item >	
-					<#if item.serviceProviderName == "twitter">					
-					var template = kendo.template($("#twitter-timeline-template").html());
-					var dataSource = new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								type: "json",
-								//url : '${request.contextPath}/social/get-twitter-usertimeline.do?output=json',
-								url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
-							},
-							parameterMap: function (options, operation){
-								if (operation == "read" && options) {										                        								                       	 	
-									return { socialAccountId: ${ item.socialAccountId } };									                            	
-								}
-							} 
-						},
-						requestStart: function() {
-							kendo.ui.progress($("#company-twitter-timeline"), true);
-						},
-						requestEnd: function() {
-							kendo.ui.progress($("#company-twitter-timeline"), false);
-						},
-						change: function() {
-							$("#company-twitter-timeline").html(kendo.render(template, this.view()));
-						},
-						error:handleKendoAjaxError,
-						schema: {
-							data : "homeTimeline"
-						}
-		            });            				
-		            dataSource.read();
-					</#if>			
-				</#list>
-				// End : Company Social Content 
-				
+
+				$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
+					$(item).click( function(){ 
+						var socialProvider = $(item).attr('data-provider');
+						var socialAccountId = $(item).attr('data-account');
+						if( typeof (socialProvider) == 'string' && typeof (socialAccountId) == 'string' ){
+ 							showSocialContent( socialProvider, socialAccountId );	
+ 						}
+ 					});	
+				});
+										
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					
 					if(  $(this).attr('href') == '#my-messages' ){					
-						$('#my-messages').popover('show');	
+						//$('#my-messages').popover('show');	
+						
+						
+
+						
 					} else if(  $(this).attr('href') == '#my-attachments' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){	
 							
@@ -202,7 +178,8 @@
 							$("#pager").kendoPager({
 								refresh : true,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
-							});		
+							});
+							
 																					
 							$("#attachment-files").kendoUpload({
 								 	multiple : false,
@@ -228,22 +205,84 @@
 					}
 					$(this).tab('show')
 				});
-				</#if>	
+				
 				// END SCRIPT            
 			}
 		}]);	
 		
-		<#if !action.user.anonymous >
-		function openPreviewWindow( item ){					
+		function showSocialContent ( socialProvider, socialAccountId ){					
+			if( socialAccountId > 0 && socialProvider == "twitter" ){
+				kendo.bind($("#social-view-panel"), {name:"twitter"} );
+				if( !$('#notice-view-panel').hasClass('hide') ){
+					$('#notice-view-panel').addClass("hide");
+				}			
+				if( !$('#image-view-panel').hasClass('hide') ){
+					$('#image-view-panel').addClass('hide');
+				}
+				if( $('#social-view-panel').hasClass('hide') ){
+					$('#social-view-panel').removeClass('hide');
+				}
+
+				$('#social-view-btn-close').click(function(){
+					if( $('#notice-view-panel').hasClass('hide') ){
+						$('#notice-view-panel').removeClass('hide');
+					}					
+					if( !$('#image-view-panel').hasClass('hide') ){
+						$('#image-view-panel').addClass('hide');
+					}	
+					if( !$('#social-view-panel').hasClass('hide') ){
+						$('#social-view-panel').addClass('hide');
+					}								
+				} );								
+				var template = kendo.template($("#twitter-timeline-template").html());				
+				var dataSource = new kendo.data.DataSource({
+					transport: {
+						read: {
+							type : 'POST',
+							type: "json",
+							url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
+						},
+						parameterMap: function (options, operation){
+							if (operation == "read" && options) {										                        								                       	 	
+								return { socialAccountId: socialAccountId };									                            	
+							}
+						} 
+					},
+					requestStart: function() {
+						kendo.ui.progress($("#twitter-timeline"), true);
+					},
+					requestEnd: function() {
+						kendo.ui.progress($("#twitter-timeline"), false);
+					},
+					change: function() {
+						$("#twitter-timeline").html(kendo.render(template, this.view()));
+					},
+					error:handleKendoAjaxError,
+					schema: {
+						data : "homeTimeline"
+					}
+				});
+				
+				dataSource.read();							
+			}
+		}
+		
+		
+		function openPreviewWindow( item ){						
 			var template = kendo.template($('#image-view-template').html());
-			$('#image-view-panel').html( template(item) );	
+			$('#image-view-panel').html( template(item) );				
 			kendo.bind($("#image-view-panel"), item );
+		
 			if( $('#image-view-panel').hasClass('hide') ){
 				$('#image-view-panel').removeClass('hide');
-			}			
+			}
 			if( !$('#notice-view-panel').hasClass('hide') ){
 				$('#notice-view-panel').addClass("hide");
-			}
+			}			
+			if( !$('#social-view-panel').hasClass('hide') ){
+				$('#social-view-panel').addClass('hide');
+			}	
+									
 			$('#image-view-btn-close').click(function(){
 				if( $('#notice-view-panel').hasClass('hide') ){
 					$('#notice-view-panel').removeClass('hide');
@@ -251,14 +290,12 @@
 				if( !$('#image-view-panel').hasClass('hide') ){
 					$('#image-view-panel').addClass('hide');
 				}				
-			} );
-			
+			} );			
 		}			
-		</#if>		
 		-->
 		</script> 		   
 		
-    <style scoped="scoped">
+		<style scoped="scoped">
 
 	#social-meida-panel .popover {
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
@@ -366,8 +403,9 @@
 		</div>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
-			<div id="mainContent" class="container layout">	
-				<div class="row">
+			<div id="mainContent" class="container layout">					
+				<div class="row">	
+								
 					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-default">
 							<div class="panel-heading">알림</div>
@@ -376,87 +414,76 @@
 								<p>${action.company.displayName} ..ddd </p>
 							</div>
 						</div>
-					</div>
-					<div id="social-meida-panel" class="col-lg-4">
+					</div>								
+					<div id="social-view-panel" class="col-lg-8 hide">
 						<div class="panel panel-success">
-							<div class="panel-heading">
-								<i class="icon-twitter"></i>
-								<!--
-								<img src="${request.contextPath}/images/common/social/twitter.png" width="56"  alt="">
-								<img src="${request.contextPath}/images/common/social/facebook.png" width="56" alt="">
-								<img src="${request.contextPath}/images/common/social/youtube.png" width="56" alt="">
-								<img src="${request.contextPath}/images/common/social/rss.png" width="56" alt="">					-->		
+							<div class="panel-heading">			
+								<span data-bind="text: name"></span><button id="social-view-btn-close" type="button" class="close">&times;</button>
 							</div>
 							<div class="panel-body">
 								<ul class="media-list">
-									<div id="company-twitter-timeline"></div>
+									<div id="twitter-timeline"></div>
 								</ul>
 							</div>
 						</div>
-					</div>
-				</div>				
-				<!--
-				<div class="row">
-					<div id="image-view-panel" class="col-lg-8 hide"></div>
-					<div class="col-lg-4">					
-						<#if !action.user.anonymous >
+					</div>	
+					<div id="image-view-panel" class="col-lg-8 hide"></div>					
+					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
-							<li class="active"><a href="#my-messages">메시지</a></li>
-							<li><a href="#my-attachments">클라우드 저장소</a></li>
-						</ul>						
-						<div class="tab-content">
-							<div class="tab-pane active" id="my-messages">	
-							</div>
-							<div class="tab-pane" id="my-attachments">							
-								<div class="container">
-									<#if !action.user.anonymous >	
-									<div class="row blank-top-5">
-										<input name="uploadAttachment" id="attachment-files" type="file" />
-									</div>	
-									</#if>
-									<div class="panel panel-default">									
-										<div class="panel-heading">
-											<ul id="attachment-list-view-filter" class="nav nav-pills">
-												<li class="active">
-													<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
-												</li>
-												<li>
-													<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
-												</li>
-												<li>
-													<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
-												</li>									  
-											</ul>										
-										</div>
-										<div class="panel-body">
-											<div class="row blank-top-5">
-												<div class="col-lg-12" align="center"><div id="attachment-list-view" ></div></div>
-											</div>									
-											<div class="row">
-												<div class="col-lg-12" align="center"><div id="pager" class="k-pager-wrap"></div></div>
-											</div>
-										</div>	
+							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
+							<li><a href="#my-attachments">My 파일</a></li>
+						</ul>								
+						<!-- start  of tab content -->				
+						<div class="tab-content">							
+							<div class="tab-pane active" id="my-messages">								
+								<div class="block-space-5" >									
+									<div class="alert alert-info">아래의 버튼을 클릭하면, 등록된 쇼셜 사이트에서 정보를 가져올 수 있습니다.</div>								
+									<div class="btn-group social-connect-btn">
+										<#list action.companySocials as item >	
+										<button class="btn btn-default" data-account="${ item.socialAccountId }" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
+										</#list>	
+										<button class="btn btn-default disabled" type="submit"><i class="icon-facebook"></i> &nbsp;  페이스북</button>
+										<button class="btn btn-default disabled" type="submit"><i class="icon-youtube"></i> &nbsp; 유튜브</button>
 									</div>
-								</div>														
-							</div>						
-						</div>
-						<#else>
-						<div class="panel panel-success" id="my-messages">
-							<div class="panel-heading">뉴스</div>					
-							<div class="panel-body">
-								<div class="popover left" style="display:true;">
-									<div class="arrow"></div>
-									<!--<h3 class="popover-title">알림</h3>-->
-									<div class="popover-content">
-										<p>새로운 메시지가 없습니다.</p>
+								</div>													
+							</div>							
+							<div class="tab-pane" id="my-attachments">
+								<div class="blank-top-5" ></div>				
+								<#if !action.user.anonymous >			
+								<div class="panel panel-default">
+									<div class="panel-body">
+										<input name="uploadAttachment" id="attachment-files" type="file" />
 									</div>
 								</div>	
-							</div>	
+								</#if>
+								<div class="panel panel-default">								
+									<div class="panel-heading">
+										<ul id="attachment-list-view-filter" class="nav nav-pills">
+											<li class="active">
+												<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
+											</li>
+											<li>
+												<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
+											</li>
+											<li>
+												<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
+											</li>									  
+										</ul>										
+									</div>
+									<div class="panel-body">
+										<div id="attachment-list-view" ></div>
+									</div>	
+									<div class="panel-footer" style="background-color:#FFFFFF;">
+											<div id="pager" class="k-pager-wrap"></div>
+									</div>
+								</div>																					
+							</div>		
 						</div>
-						</#if>
-					</div>
-				</div>-->
+						<!-- end of tab content -->						
+					</div>				
+				</div>
 			</div>		
+			
 
 		<div id="attach-window"></div>					
 		<!-- END MAIN CONTENT -->		
@@ -466,13 +493,13 @@
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
-<li class="media">
-    <a class="pull-left" href="\\#">
-      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
-     	#: text #      	
+			<li class="media">
+				<a class="pull-left" href="\\#">
+					<img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
+					#: text #      	
 					# for (var i = 0; i < entities.urls.length ; i++) { #					
 					# var url = entities.urls[i] ; #		
 					<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
@@ -492,10 +519,9 @@
 						<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
 					</div>
 				</div>						
-					# } #
-    </div>
-  </li>		
-				
+				# } #
+			</div>
+		</li>						
 		</script>
 				
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template2">
@@ -531,7 +557,7 @@
 				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 				<p class="blank-top-5">
 						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>					
+						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>
 				</p>				
 			# } else { #		
 				<div class="k-grid k-widget" style="width:100%;">

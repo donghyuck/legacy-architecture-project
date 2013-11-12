@@ -102,6 +102,7 @@
 			</li>
 			<li class="divider"></li>
 			<li><a href="\\#">프로필 보기</a></li>
+			<li><a href="/main.do?view=personalized">마이 페이지</a></li>
 			#if (isSystem ) {#
 			<li><a href="/secure/main-site.do">시스템 관리하기</a></li>
 			# } #

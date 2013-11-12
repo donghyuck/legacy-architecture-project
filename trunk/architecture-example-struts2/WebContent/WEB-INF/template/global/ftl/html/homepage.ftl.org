@@ -17,11 +17,7 @@
 			'${request.contextPath}/js/common/holder.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.ui.js'],
-			complete: function() {
-			
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
-				      
+			complete: function() {      
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
@@ -81,8 +77,7 @@
 							read: {
 								type : 'POST',
 								type: "json",
-								//url : '${request.contextPath}/social/get-twitter-usertimeline.do?output=json',
-								url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
+								url : '${request.contextPath}/social/get-twitter-usertimeline.do?output=json',
 							},
 							parameterMap: function (options, operation){
 								if (operation == "read" && options) {										                        								                       	 	
@@ -100,8 +95,8 @@
 							$("#company-twitter-timeline").html(kendo.render(template, this.view()));
 						},
 						error:handleKendoAjaxError,
-						schema: {
-							data : "homeTimeline"
+							schema: {
+								data : "userTimeline"
 						}
 		            });            				
 		            dataSource.read();
@@ -260,7 +255,7 @@
 		
     <style scoped="scoped">
 
-	#social-meida-panel .popover {
+	#my-messages .popover {
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 		width: 100%;
 		margin-top: 20px;
@@ -366,7 +361,7 @@
 		</div>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
-			<div id="mainContent" class="container layout">	
+			<div id="mainContent" class="container layout">		
 				<div class="row">
 					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-default">
@@ -376,28 +371,10 @@
 								<p>${action.company.displayName} ..ddd </p>
 							</div>
 						</div>
-					</div>
-					<div id="social-meida-panel" class="col-lg-4">
-						<div class="panel panel-success">
-							<div class="panel-heading">
-								<i class="icon-twitter"></i>
-								<!--
-								<img src="${request.contextPath}/images/common/social/twitter.png" width="56"  alt="">
-								<img src="${request.contextPath}/images/common/social/facebook.png" width="56" alt="">
-								<img src="${request.contextPath}/images/common/social/youtube.png" width="56" alt="">
-								<img src="${request.contextPath}/images/common/social/rss.png" width="56" alt="">					-->		
-							</div>
-							<div class="panel-body">
-								<ul class="media-list">
-									<div id="company-twitter-timeline"></div>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>				
-				<!--
-				<div class="row">
+					</div>							
+					
 					<div id="image-view-panel" class="col-lg-8 hide"></div>
+										
 					<div class="col-lg-4">					
 						<#if !action.user.anonymous >
 						<ul class="nav nav-tabs" id="myTab">
@@ -405,7 +382,8 @@
 							<li><a href="#my-attachments">클라우드 저장소</a></li>
 						</ul>						
 						<div class="tab-content">
-							<div class="tab-pane active" id="my-messages">	
+							<div class="tab-pane active" id="my-messages">							
+								<div id="company-twitter-timeline"></div>								
 							</div>
 							<div class="tab-pane" id="my-attachments">							
 								<div class="container">
@@ -455,7 +433,7 @@
 						</div>
 						</#if>
 					</div>
-				</div>-->
+				</div>
 			</div>		
 
 		<div id="attach-window"></div>					
@@ -466,39 +444,6 @@
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
-<li class="media">
-    <a class="pull-left" href="\\#">
-      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
-     	#: text #      	
-					# for (var i = 0; i < entities.urls.length ; i++) { #					
-					# var url = entities.urls[i] ; #		
-					<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
-					 # } #	
-					<p>
-					# for (var i = 0; i < entities.media.length ; i++) { #					
-					# var media = entities.media[i] ; #					
-					<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-					# } #
-					</p>
-					#if (retweeted) {#					
-				<div class="media">
-					<a class="pull-left" href="\\#">
-						<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
-					</div>
-				</div>						
-					# } #
-    </div>
-  </li>		
-				
-		</script>
-				
-		<script type="text/x-kendo-tmpl" id="twitter-timeline-template2">
 			<div class="popover left" style="display:true;">
 				<div class="arrow"></div>
 				<div class="popover-content">
