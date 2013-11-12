@@ -162,7 +162,13 @@ a.k-link:hover {
 	padding-bottom: 5px;
 }
 
+.block-space-5 {
+	padding: 5px;	
+}
 
+.block-space-10 {
+	padding: 10px;	
+}
 
 .box {
 	padding: 2px;
