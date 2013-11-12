@@ -8,15 +8,10 @@
 
 	<developers>
 		<developer>
-			<name>Donghyuch Son</name>
-			<email>andang311@inkium.com</email>
+			<name>Donghyuck Son</name>
+			<email>donghyuck.son@gmail.com</email>
 		</developer>
 	</developers>
-
-	<organization>
-		<name>INKIUM</name>
-		<url>http://www.inkium.com</url>
-	</organization>
 
 	<licenses>
 		<license>
@@ -44,12 +39,10 @@
 		<javac.target.version>1.5</javac.target.version>
 		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
 		<project.test.skip>true</project.test.skip>
-
 		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
 		<project.build.version>1.0.1.RELEASE</project.build.version>
-		<project.dependency.spring.version>3.1.1.RELEASE</project.dependency.spring.version>
+		<project.dependency.spring.version>3.2.1.RELEASE</project.dependency.spring.version>
 		<project.dependency.spring-security.version>3.1.3.RELEASE</project.dependency.spring-security.version>
-
 	</properties>
 
 	<pluginRepositories>
