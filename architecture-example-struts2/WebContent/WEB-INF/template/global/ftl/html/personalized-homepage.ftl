@@ -434,7 +434,8 @@
 							<li><a href="#my-attachments">My 파일</a></li>
 						</ul>								
 						<!-- start  of tab content -->				
-						<div class="tab-content">							
+						<div class="tab-content">			
+							<!-- start messages -->				
 							<div class="tab-pane active" id="my-messages">								
 								<div class="block-space-5" >									
 									<div class="alert alert-info">아래의 버튼을 클릭하면, 등록된 쇼셜 사이트에서 정보를 가져올 수 있습니다.</div>								
@@ -444,9 +445,26 @@
 										</#list>	
 										<button class="btn btn-default disabled" type="submit"><i class="icon-facebook"></i> &nbsp;  페이스북</button>
 										<button class="btn btn-default disabled" type="submit"><i class="icon-youtube"></i> &nbsp; 유튜브</button>
+										
+										<div class="btn-group">
+  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+    Action <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>
+										
+										
 									</div>
 								</div>													
-							</div>							
+							</div>			
+							<!-- end messages -->				
+							<!-- start attachement -->
 							<div class="tab-pane" id="my-attachments">
 								<div class="blank-top-5" ></div>				
 								<#if !action.user.anonymous >			
@@ -477,7 +495,8 @@
 											<div id="pager" class="k-pager-wrap"></div>
 									</div>
 								</div>																					
-							</div>		
+							</div>
+							<!-- end attachements -->		
 						</div>
 						<!-- end of tab content -->						
 					</div>				
