@@ -418,7 +418,7 @@
 					<div id="social-view-panel" class="col-lg-8 hide">
 						<div class="panel panel-success">
 							<div class="panel-heading">			
-								<span data-bind="text: name"></span><button id="social-view-btn-close" type="button" class="close">&times;</button>
+								<i class="icon-twitter"></i>&nbsp;<span data-bind="text: name"></span><button id="social-view-btn-close" type="button" class="close">&times;</button>
 							</div>
 							<div class="panel-body">
 								<ul class="media-list">
