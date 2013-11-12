@@ -35,6 +35,9 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 	
 	private static final String STATUSES_USER_TIMELINE_URL = "https://api.twitter.com/1.1/statuses/user_timeline.json";
 	
+	private static final String STATUSES_HOME_TIMELINE_URL = "https://api.twitter.com/1.1/statuses/home_timeline.json";
+	
+	
 	public TwitterServiceProvider(String clientId, String clientSecret) {
 		super(new ServiceBuilder()
                                 .provider(TwitterApi.class)
@@ -108,6 +111,24 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 		return Collections.EMPTY_LIST;
 	}
 
+	public List<Tweet> getHomeTimeline(){
+		if( super.isAuthorized = false ){
+			authenticate();
+		}
+		Token accessToken = getAccessToken(getAccessToken(), getAccessSecret());
+		OAuthRequest request = new OAuthRequest(Verb.GET, STATUSES_HOME_TIMELINE_URL);
+		getOAuthService().signRequest(accessToken, request);
+		Response response = request.send();
+		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();		
+		mapper.addMixInAnnotations(Tweet.class, TweetMixin.class);
+		try {
+			return mapper.readValue(response.getBody(), TweetList.class);
+		} catch (Exception e) {
+			
+		}
+		return Collections.EMPTY_LIST;
+	}
+	
 	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet>{
 		
