@@ -436,37 +436,39 @@
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
 							<!-- start messages -->				
-							<div class="tab-pane active" id="my-messages">								
-								<div class="block-space-5" >									
-									<div class="alert alert-info">아래의 버튼을 클릭하면, 등록된 쇼셜 사이트에서 정보를 가져올 수 있습니다.</div>								
-									<div class="btn-group social-connect-btn">
-										<#list action.companySocials as item >	
-										<button class="btn btn-default" data-account="${ item.socialAccountId }" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
-										</#list>	
-										<button class="btn btn-default disabled" type="submit"><i class="icon-facebook"></i> &nbsp;  페이스북</button>
-										<button class="btn btn-default disabled" type="submit"><i class="icon-youtube"></i> &nbsp; 유튜브</button>
-										
+							<div class="tab-pane active" id="my-messages">							
+								<div class="blank-top-15" ></div>		
+								<div class="panel panel-default">
+									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
+									<div class="panel-body">								
 										<div class="btn-group">
-  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-    Action <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  </ul>
-</div>
-										
-										
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+											쇼셜미디어 연결 <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#"><i class="icon-facebook"></i> &nbsp;페이스북 연결</a></li>
+												<li><a href="#"><i class="icon-twitter"></i> &nbsp;트위터 연결</a></li>
+												<li class="divider"></li>
+												<li><a href="#">쇼셜미디어 계정 관리</a></li>
+											</ul>
+										</div>
 									</div>
-								</div>													
+								</div>
+								<div class="panel panel-primary">
+									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 사이트에서 정보를 가져올 수 있습니다.</div>
+									<div class="panel-body">
+										<div class="btn-group social-connect-btn">
+											<#list action.companySocials as item >	
+											<button class="btn btn-primary" data-account="${ item.socialAccountId }" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
+											</#list>	
+										</div>									
+									</div>
+								</div>					
 							</div>			
 							<!-- end messages -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-attachments">
-								<div class="blank-top-5" ></div>				
+								<div class="blank-top-15" ></div>				
 								<#if !action.user.anonymous >			
 								<div class="panel panel-default">
 									<div class="panel-body">
