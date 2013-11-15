@@ -58,6 +58,9 @@ PC9saWNlbnNlPg==</file>
 				<twitter>
 					<callbackUrl>http://222.122.63.147/social/twitter-callback.do</callbackUrl>
 				</twitter>
+				<facebook>
+					<callbackUrl>http://222.122.63.147/social/facebook-callback.do</callbackUrl>
+				</facebook>				
 			</providers>
 		</social>
 		<company>
