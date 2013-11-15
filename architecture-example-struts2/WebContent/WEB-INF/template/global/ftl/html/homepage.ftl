@@ -454,10 +454,10 @@
 		    <div class="media-body">
 		      <h4 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h4>
 		     	#: type #<br/>
-		     	#if ( message != "null" ) { #
+		     	#if ( message !=null ) { #
 		     	#: message #
 		     	# } #		     	
-		     	#if (type == "PHOTP") {#
+		     	#if (type == "PHOTO") {#
 		     	<img src="http://graph.facebook.com/#=photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
 		     	# } #	 
 		    </div>
