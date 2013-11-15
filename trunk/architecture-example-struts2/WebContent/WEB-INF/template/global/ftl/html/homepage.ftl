@@ -468,11 +468,7 @@
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<img src="#: picture #" alt="media" class="img-thumbnail">
-		     	# } #
-		     	
-		     	#if (type == "PHOTO") {#
-		     	<img src="http://graph.facebook.com/#:photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
+		     	<br><img src="#: picture #" alt="media" class="img-thumbnail">
 		     	# } #
 		     	
 		     	#if ( caption !=null ) { #
