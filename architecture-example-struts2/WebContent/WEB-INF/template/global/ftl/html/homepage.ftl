@@ -106,7 +106,7 @@
 		            });            				
 		            dataSource.read();
 		            <#elseif item.serviceProviderName == "facebook">
-					var facebookTemplate = kendo.template($("#facebook-timeline-template").html());
+					var facebookTemplate = kendo.template($("#facebook-homefeed-template").html());
 					var facebookDataSource = new kendo.data.DataSource({
 						transport: {
 							read: {
@@ -443,7 +443,7 @@
 		</footer>
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
-		<script type="text/x-kendo-tmpl" id="facebook-timeline-template">
+		<script type="text/x-kendo-tmpl" id="facebook-homefeed-template">
 		<li class="media">
 		    <a class="pull-left" href="\\#">
 		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지" class="img-rounded">
