@@ -459,9 +459,17 @@
 		     	<br>#: message #
 		     	# } #		
 		     	     	
+		     	#if ( name !=null ) { #
+		     	<br>#: name  #
+		     	# } #
+		     	     	
 		     	#if ( link !=null ) { #
 		     	<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
 		     	# } #		     	
+		     	
+		     	#if ( picture !=null ) { #
+		     	<img src="#: picture #" width="100%" alt="media">
+		     	# } #
 		     	
 		     	#if (type == "PHOTO") {#
 		     	<img src="http://graph.facebook.com/#:photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
