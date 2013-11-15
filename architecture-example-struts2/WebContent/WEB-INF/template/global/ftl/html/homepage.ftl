@@ -449,28 +449,8 @@
 		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지" class="img-rounded">
 		    </a>
 		    <div class="media-body">
-		      <h4 class="media-heading">#: from.name # </h4>
-		     	#: message #      	
-							# for (var i = 0; i < entities.urls.length ; i++) { #					
-							# var url = entities.urls[i] ; #		
-							<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
-							 # } #	
-							<p>
-							# for (var i = 0; i < entities.media.length ; i++) { #					
-							# var media = entities.media[i] ; #					
-							<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-							# } #
-							</p>
-							#if (retweeted) {#					
-						<div class="media">
-							<a class="pull-left" href="\\#">
-								<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
-							</a>
-							<div class="media-body">
-								<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
-							</div>
-						</div>						
-							# } #
+		      <h4 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h4>
+		     	#: message # 
 		    </div>
 		  </li>					
 		</script>		
