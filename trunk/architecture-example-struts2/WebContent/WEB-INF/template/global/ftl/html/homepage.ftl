@@ -462,7 +462,14 @@
 		     	# } #		     	
 		     	#if (type == "PHOTO") {#
 		     	<img src="http://graph.facebook.com/#=photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
-		     	# } #	 
+		     	# } else if (type == "LINK") #	
+		     	#if ( name !=null ) { #
+		     	<br>#: name #
+		     	# } #	
+		     	#if ( description !=null ) { #
+		     	<br>#: description #
+		     	# } #			     	
+		     	# } # 
 		    </div>
 		  </li>					
 		</script>		
