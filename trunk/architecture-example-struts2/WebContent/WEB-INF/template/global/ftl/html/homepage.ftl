@@ -466,10 +466,15 @@
 		     	#if ( name !=null ) { #
 		     	<br>#: name #
 		     	# } #	
+		     	# } # 
+
+
 		     	#if ( description !=null ) { #
 		     	<br>#: description #
 		     	# } #			     	
-		     	# } # 
+		     	#if ( caption !=null ) { #
+		     	<br>#: caption #
+		     	# } #			     			     			     	
 		    </div>
 		  </li>					
 		</script>		
