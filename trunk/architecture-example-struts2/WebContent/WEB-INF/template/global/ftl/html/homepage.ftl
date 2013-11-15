@@ -105,7 +105,9 @@
 						}
 		            });            				
 		            dataSource.read();
+		            
 		            <#elseif item.serviceProviderName == "facebook">
+					
 					var facebookTemplate = kendo.template($("#facebook-homefeed-template").html());
 					var facebookDataSource = new kendo.data.DataSource({
 						transport: {
@@ -121,13 +123,13 @@
 							} 
 						},
 						requestStart: function() {
-							kendo.ui.progress($("#company-facebook-timeline"), true);
+							kendo.ui.progress($("#company-facebook-homefeed"), true);
 						},
 						requestEnd: function() {
-							kendo.ui.progress($("#company-facebook-timeline"), false);
+							kendo.ui.progress($("#company-facebook-homefeed"), false);
 						},
 						change: function() {
-							$("#company-facebook-timeline").html(kendo.render(template, this.view()));
+							$("#company-facebook-homefeed").html(kendo.render(facebookTemplate, this.view()));
 						},
 						error:handleKendoAjaxError,
 						schema: {
@@ -135,7 +137,8 @@
 						}
 		            });            				
 		            facebookDataSource.read();
-					</#if>			
+					</#if>
+								
 				</#list>
 				// End : Company Social Content 
 				
@@ -416,7 +419,7 @@
 							</div>		
 							<div class="panel-body">
 								<ul class="media-list">
-									<div id="company-facebook-timeline"></div>
+									<div id="company-facebook-homefeed"></div>
 								</ul>
 							</div>							
 						</div>
