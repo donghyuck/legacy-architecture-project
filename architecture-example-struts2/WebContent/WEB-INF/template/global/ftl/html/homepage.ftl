@@ -470,7 +470,7 @@
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded">
+		     	<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
 		     	# } #
 		     	
 		     	#if ( caption !=null ) { #
