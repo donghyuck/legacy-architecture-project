@@ -468,7 +468,7 @@
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<br><img src="#: picture #" alt="media" class="img-thumbnail">
+		     	<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-thumbnail">
 		     	# } #
 		     	
 		     	#if ( caption !=null ) { #
