@@ -462,10 +462,8 @@
 		     	<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
 		     	# } #		     	
 		     	
-		     	#if (type == "PHOTO") {#
-		     	
-		     	<img src="http://graph.facebook.com/#=photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
-		     	
+		     	#if (type == "PHOTO") {#		     	
+		     	<img src="http://graph.facebook.com/#:photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
 		     	# } else if (type == "LINK") #	
 			    		     	
 		     	# } # 
@@ -474,6 +472,7 @@
 		     	#if ( description !=null ) { #
 		     	<br>#: description #
 		     	# } #			     	
+		     	
 		     	#if ( caption !=null ) { #
 		     	<br>#: caption #
 		     	# } #			     			     			     	
