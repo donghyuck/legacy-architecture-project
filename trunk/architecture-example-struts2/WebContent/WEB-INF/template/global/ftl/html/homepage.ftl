@@ -468,7 +468,7 @@
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<img src="#: picture #" alt="media">
+		     	<img src="#: picture #" alt="media" class="img-thumbnail">
 		     	# } #
 		     	
 		     	#if (type == "PHOTO") {#
