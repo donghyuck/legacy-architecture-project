@@ -457,9 +457,8 @@
 		     	#if ( message != "null" ) { #
 		     	#: message #
 		     	# } #		     	
-		     	#if (type == "IMAGE") {#
-		     	
-		     	
+		     	#if (type == "PHOTP") {#
+		     	<img src="http://graph.facebook.com/#=photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
 		     	# } #	 
 		    </div>
 		  </li>					
