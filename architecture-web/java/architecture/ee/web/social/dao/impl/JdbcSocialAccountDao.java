@@ -22,19 +22,16 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.TwitterApi;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
-import architecture.common.model.ModelObjectType;
-import architecture.common.user.Company;
-import architecture.common.user.User;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.social.SocialAccount;
+import architecture.ee.web.social.SocialServiceProvider;
 import architecture.ee.web.social.dao.SocialAccountDao;
+import architecture.ee.web.social.facebook.FacebookServiceProvider;
 import architecture.ee.web.social.internal.SocialAccountImpl;
 import architecture.ee.web.social.twitter.TwitterServiceProvider;
 
@@ -61,32 +58,39 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 			account.setSignedIn( rs.getInt("SIGNED") == 1 ); 
 			account.setCreationDate(rs.getDate("CREATION_DATE"));
 			account.setModifiedDate(rs.getDate("MODIFIED_DATE"));						
-			if( !StringUtils.isEmpty( account.getServiceProviderName())){
-				if( "twitter".toLowerCase().equals(account.getServiceProviderName()) ){
-					
+			
+			if( !StringUtils.isEmpty( account.getServiceProviderName())){				
+				SocialServiceProvider provider = null;				
+				if( "twitter".toLowerCase().equals(account.getServiceProviderName()) ){					
 					String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.twitter.callbackUrl", null);
-					log.debug("twitter callback : " + callbackUrl);
-					
-					TwitterServiceProvider twitter;
 					if( callbackUrl!=null ){
-						twitter = new TwitterServiceProvider(
+						provider = new TwitterServiceProvider(
 							"4XebpD1MW3CQ8Koh7naQpg",
 							"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
 							callbackUrl
 						);
 					}else{
-						twitter = new TwitterServiceProvider(
+						provider = new TwitterServiceProvider(
 							"4XebpD1MW3CQ8Koh7naQpg",
 							"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
 						);
-					}
-					
-					if( !StringUtils.isEmpty( account.getAccessToken() ) && !StringUtils.isEmpty( account.getAccessSecret())){
-						twitter.setAccessSecret(account.getAccessSecret());
-						twitter.setAccessToken(account.getAccessToken());
 					}					
-					account.setSocialServiceProvider(twitter);
+				}else if ( "facebook".toLowerCase().equals(account.getServiceProviderName()) ){		
+					String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.callbackUrl", null);
+					String scope = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.scope", FacebookServiceProvider.DEFAULT_SCOPE);
+					provider = new FacebookServiceProvider(
+							"251365428350280",
+							"704f08c943c6dfdba328e08a10550d38",							
+							callbackUrl,
+							scope
+					);
+					account.setAccessSecret("");
 				}
+				if( !StringUtils.isEmpty( account.getAccessToken() ) && !StringUtils.isEmpty( account.getAccessSecret())){
+					provider.setAccessSecret(account.getAccessSecret());
+					provider.setAccessToken(account.getAccessToken());
+				}
+				account.setSocialServiceProvider(provider);
 			}			
 			return account;
 		}		
