@@ -105,6 +105,36 @@
 						}
 		            });            				
 		            dataSource.read();
+		            <#elseif item.serviceProviderName == "facebook">
+					var facebookTemplate = kendo.template($("#facebook-timeline-template").html());
+					var facebookDataSource = new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								type: "json",
+								url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
+							},
+							parameterMap: function (options, operation){
+								if (operation == "read" && options) {										                        								                       	 	
+									return { socialAccountId: ${ item.socialAccountId } };	                            	
+								}
+							} 
+						},
+						requestStart: function() {
+							kendo.ui.progress($("#company-facebook-timeline"), true);
+						},
+						requestEnd: function() {
+							kendo.ui.progress($("#company-facebook-timeline"), false);
+						},
+						change: function() {
+							$("#company-facebook-timeline").html(kendo.render(template, this.view()));
+						},
+						error:handleKendoAjaxError,
+						schema: {
+							data : "homeFeed"
+						}
+		            });            				
+		            facebookDataSource.read();
 					</#if>			
 				</#list>
 				// End : Company Social Content 
@@ -376,16 +406,25 @@
 								<p>${action.company.displayName} ..ddd </p>
 							</div>
 						</div>
+					</div>					
+				</div>		
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<i class="icon-facebook"></i>
+							</div>		
+							<div class="panel-body">
+								<ul class="media-list">
+									<div id="company-facebook-timeline"></div>
+								</ul>
+							</div>							
+						</div>
 					</div>
 					<div id="social-meida-panel" class="col-lg-4">
 						<div class="panel panel-success">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
-								<!--
-								<img src="${request.contextPath}/images/common/social/twitter.png" width="56"  alt="">
-								<img src="${request.contextPath}/images/common/social/facebook.png" width="56" alt="">
-								<img src="${request.contextPath}/images/common/social/youtube.png" width="56" alt="">
-								<img src="${request.contextPath}/images/common/social/rss.png" width="56" alt="">					-->		
 							</div>
 							<div class="panel-body">
 								<ul class="media-list">
@@ -393,8 +432,8 @@
 								</ul>
 							</div>
 						</div>
-					</div>
-				</div>				
+					</div>					
+				</div>		
 				<!--
 				<div class="row">
 					<div id="image-view-panel" class="col-lg-8 hide"></div>
@@ -465,39 +504,68 @@
 		</footer>
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
+		<script type="text/x-kendo-tmpl" id="facebook-timeline-template">
+		<li class="media">
+		    <a class="pull-left" href="\\#">
+		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
+		    </a>
+		    <div class="media-body">
+		      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
+		     	#: text #      	
+							# for (var i = 0; i < entities.urls.length ; i++) { #					
+							# var url = entities.urls[i] ; #		
+							<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
+							 # } #	
+							<p>
+							# for (var i = 0; i < entities.media.length ; i++) { #					
+							# var media = entities.media[i] ; #					
+							<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
+							# } #
+							</p>
+							#if (retweeted) {#					
+						<div class="media">
+							<a class="pull-left" href="\\#">
+								<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
+							</div>
+						</div>						
+							# } #
+		    </div>
+		  </li>					
+		</script>		
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
-<li class="media">
-    <a class="pull-left" href="\\#">
-      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
-     	#: text #      	
-					# for (var i = 0; i < entities.urls.length ; i++) { #					
-					# var url = entities.urls[i] ; #		
-					<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
-					 # } #	
-					<p>
-					# for (var i = 0; i < entities.media.length ; i++) { #					
-					# var media = entities.media[i] ; #					
-					<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-					# } #
-					</p>
-					#if (retweeted) {#					
-				<div class="media">
-					<a class="pull-left" href="\\#">
-						<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
-					</div>
-				</div>						
-					# } #
-    </div>
-  </li>		
-				
+		<li class="media">
+		    <a class="pull-left" href="\\#">
+		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
+		    </a>
+		    <div class="media-body">
+		      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
+		     	#: text #      	
+							# for (var i = 0; i < entities.urls.length ; i++) { #					
+							# var url = entities.urls[i] ; #		
+							<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
+							 # } #	
+							<p>
+							# for (var i = 0; i < entities.media.length ; i++) { #					
+							# var media = entities.media[i] ; #					
+							<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
+							# } #
+							</p>
+							#if (retweeted) {#					
+						<div class="media">
+							<a class="pull-left" href="\\#">
+								<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
+							</a>
+							<div class="media-body">
+								<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
+							</div>
+						</div>						
+							# } #
+		    </div>
+		  </li>					
 		</script>
-				
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template2">
 			<div class="popover left" style="display:true;">
 				<div class="arrow"></div>
