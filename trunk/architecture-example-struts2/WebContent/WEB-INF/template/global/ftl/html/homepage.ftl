@@ -453,9 +453,12 @@
 		    </a>
 		    <div class="media-body">
 		      <h4 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h4>
-		     	#: type #<br/>
+		     	#: type #
 		     	#if ( message !=null ) { #
-		     	#: message #
+		     	<br>#: message #
+		     	# } #		     	
+		     	#if ( link !=null ) { #
+		     	<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
 		     	# } #		     	
 		     	#if (type == "PHOTO") {#
 		     	<img src="http://graph.facebook.com/#=photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
