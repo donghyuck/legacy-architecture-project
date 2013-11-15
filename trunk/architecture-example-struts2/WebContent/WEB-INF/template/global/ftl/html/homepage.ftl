@@ -434,67 +434,6 @@
 						</div>
 					</div>					
 				</div>		
-				<!--
-				<div class="row">
-					<div id="image-view-panel" class="col-lg-8 hide"></div>
-					<div class="col-lg-4">					
-						<#if !action.user.anonymous >
-						<ul class="nav nav-tabs" id="myTab">
-							<li class="active"><a href="#my-messages">메시지</a></li>
-							<li><a href="#my-attachments">클라우드 저장소</a></li>
-						</ul>						
-						<div class="tab-content">
-							<div class="tab-pane active" id="my-messages">	
-							</div>
-							<div class="tab-pane" id="my-attachments">							
-								<div class="container">
-									<#if !action.user.anonymous >	
-									<div class="row blank-top-5">
-										<input name="uploadAttachment" id="attachment-files" type="file" />
-									</div>	
-									</#if>
-									<div class="panel panel-default">									
-										<div class="panel-heading">
-											<ul id="attachment-list-view-filter" class="nav nav-pills">
-												<li class="active">
-													<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
-												</li>
-												<li>
-													<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
-												</li>
-												<li>
-													<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
-												</li>									  
-											</ul>										
-										</div>
-										<div class="panel-body">
-											<div class="row blank-top-5">
-												<div class="col-lg-12" align="center"><div id="attachment-list-view" ></div></div>
-											</div>									
-											<div class="row">
-												<div class="col-lg-12" align="center"><div id="pager" class="k-pager-wrap"></div></div>
-											</div>
-										</div>	
-									</div>
-								</div>														
-							</div>						
-						</div>
-						<#else>
-						<div class="panel panel-success" id="my-messages">
-							<div class="panel-heading">뉴스</div>					
-							<div class="panel-body">
-								<div class="popover left" style="display:true;">
-									<div class="arrow"></div>
-									<!--<h3 class="popover-title">알림</h3>-->
-									<div class="popover-content">
-										<p>새로운 메시지가 없습니다.</p>
-									</div>
-								</div>	
-							</div>	
-						</div>
-						</#if>
-					</div>
-				</div>-->
 			</div>		
 
 		<div id="attach-window"></div>					
@@ -507,11 +446,11 @@
 		<script type="text/x-kendo-tmpl" id="facebook-timeline-template">
 		<li class="media">
 		    <a class="pull-left" href="\\#">
-		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
+		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지" class="img-rounded">
 		    </a>
 		    <div class="media-body">
-		      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
-		     	#: text #      	
+		      <h4 class="media-heading">#: from.name # </h4>
+		     	#: message #      	
 							# for (var i = 0; i < entities.urls.length ; i++) { #					
 							# var url = entities.urls[i] ; #		
 							<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
