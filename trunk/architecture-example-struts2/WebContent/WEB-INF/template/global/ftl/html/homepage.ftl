@@ -454,7 +454,7 @@
 		    <div class="media-body">
 		      <h4 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h4>
 		     	#: type #<br/>
-		     	#if ( message != 'null' ) { #
+		     	#if ( message != "null" ) { #
 		     	#: message #
 		     	# } #		     	
 		     	#if (type == "IMAGE") {#
