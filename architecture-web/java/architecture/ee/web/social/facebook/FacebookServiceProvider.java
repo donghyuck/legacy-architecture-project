@@ -33,7 +33,6 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.social.AbstractSocialServiceProvider;
 import architecture.ee.web.social.facebook.Post.PostType;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -43,7 +42,7 @@ public class FacebookServiceProvider extends AbstractSocialServiceProvider {
 	private static final String GRAPH_API_URL = "https://graph.facebook.com/";		
 	public static final String DEFAULT_SCOPE = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
 	
-	
+
 	public FacebookServiceProvider(String clientId, String clientSecret,  String callbackUrl) {
 		super(new ServiceBuilder()
                                 .provider(FacebookApi.class)
@@ -64,6 +63,16 @@ public class FacebookServiceProvider extends AbstractSocialServiceProvider {
                                 .debug()
                                 .build());
 	}
+	
+	
+	/* (비Javadoc)
+	 * @see architecture.ee.web.social.AbstractSocialServiceProvider#getAuthorizationUrl()
+	 */
+	@Override
+	public String getAuthorizationUrl() {
+		return getOAuthService().getAuthorizationUrl(null);
+	}
+
 	
 	public Token getTokenWithCallbackReturns(String oAuthToken, String oAuthVarifier){	
 		return this.getAccessTokenWithCallbackReturns("", oAuthVarifier);

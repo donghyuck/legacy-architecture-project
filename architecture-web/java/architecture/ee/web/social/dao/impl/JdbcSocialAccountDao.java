@@ -84,13 +84,31 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 							callbackUrl,
 							scope
 					);
+					
 					account.setAccessSecret("");
-				}
-				if( !StringUtils.isEmpty( account.getAccessToken() ) && !StringUtils.isEmpty( account.getAccessSecret())){
 					provider.setAccessSecret(account.getAccessSecret());
+					
+				}
+								
+				if(StringUtils.isNotEmpty( account.getAccessToken() )){
 					provider.setAccessToken(account.getAccessToken());
 				}
+				if(StringUtils.isNotEmpty( account.getAccessSecret())){
+					provider.setAccessSecret(account.getAccessSecret());
+				}
+				
+				log.debug( 
+						"getAccessToken: " + account.getAccessToken() + 
+						"getAccessSecret: " + account.getAccessSecret()
+				);
+				log.debug( 
+						"getAccessToken: " + provider.getAccessToken() + 
+						"getAccessSecret: " + provider.getAccessSecret()
+				);
+				
 				account.setSocialServiceProvider(provider);
+				
+				
 			}			
 			return account;
 		}		
