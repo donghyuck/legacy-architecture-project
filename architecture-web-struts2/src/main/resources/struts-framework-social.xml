@@ -99,7 +99,7 @@
 		<action name="get-facebook-homefeed" class="architecture.ee.web.struts2.action.FacebookAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param>
+			    <param name="excludeNullProperties">false</param>
 				<param name="includeProperties">
 				  homeFeed.*
 				</param>
