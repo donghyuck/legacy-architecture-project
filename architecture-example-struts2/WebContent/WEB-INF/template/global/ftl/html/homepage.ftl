@@ -468,7 +468,7 @@
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<img src="#: picture #" width="100%" alt="media">
+		     	<img src="#: picture #" alt="media">
 		     	# } #
 		     	
 		     	#if (type == "PHOTO") {#
