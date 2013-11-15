@@ -47,6 +47,7 @@
 	</package>
 	
 	<package name="framework-social-actions" namespace="/social" extends="framework-default">
+		
 		<action name="get-twitter-profile" class="architecture.ee.web.struts2.action.TwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -56,9 +57,7 @@
 				</param>
 			</result>	
 		</action>
-		<action name="twitter-callback" class="architecture.ee.web.struts2.action.TwitterAction">
-			<result name="success" type="freemarker">/html/twitter-callback.ftl</result>
-		</action>
+				
 		<action name="get-twitter-hometimeline" class="architecture.ee.web.struts2.action.TwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -67,7 +66,8 @@
 				  homeTimeline.*
 				</param>
 			</result>	
-		</action>					
+		</action>			
+				
 		<action name="get-twitter-usertimeline" class="architecture.ee.web.struts2.action.TwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -76,7 +76,36 @@
 				  userTimeline.*
 				</param>
 			</result>	
-		</action>						
+		</action>	
+
+		<action name="twitter-callback" class="architecture.ee.web.struts2.action.TwitterAction">
+			<result name="success" type="freemarker">/html/twitter-callback.ftl</result>
+		</action>
+					
+		<action name="facebook-callback" class="architecture.ee.web.struts2.action.FacebookAction">
+			<result name="success" type="freemarker">/html/facebook-callback.ftl</result>
+		</action>	
+
+		<action name="get-facebook-profile" class="architecture.ee.web.struts2.action.FacebookAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  facebookProfile.*
+				</param>
+			</result>	
+		</action>
+		
+		<action name="get-facebook-homefeed" class="architecture.ee.web.struts2.action.FacebookAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  homeFeed.*
+				</param>
+			</result>	
+		</action>			
+							
 	</package>
 		
 </struts>

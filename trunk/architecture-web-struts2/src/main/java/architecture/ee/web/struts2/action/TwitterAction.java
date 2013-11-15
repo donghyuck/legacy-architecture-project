@@ -154,22 +154,21 @@ public class TwitterAction extends FrameworkActionSupport  {
 		return success();
 	}
 	
+	
+	
 	public String update() throws Exception{
 		try {
-			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
-			
+			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);			
 			oauth_token = (String)map.get("oauth_token");
-			oauth_verifier = (String)map.get("oauth_verifier");
-			
-			Boolean signedIn = (Boolean)map.get("signedIn");
-			
+			oauth_verifier = (String)map.get("oauth_verifier");			
+			Boolean signedIn = (Boolean)map.get("signedIn");			
 			if( socialAccountId == null){
 				Integer  selectedSocialAccountId = (Integer)map.get("socialAccountId");	
 				socialAccountId = selectedSocialAccountId.longValue();
 			}
 			
 			TwitterServiceProvider provider = getServiceProvider();
-			Token token = provider.getTokenWithCallbackReturn(oauth_token, oauth_verifier);
+			Token token = provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);
 			
 			SocialAccount account = getTargetSocialAccount();
 			account.setAccessSecret(token.getSecret());			
