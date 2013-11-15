@@ -456,7 +456,8 @@
 		     	#: type #
 		     	#if ( message !=null ) { #
 		     	<br>#: message #
-		     	# } #		     	
+		     	# } #		
+		     	     	
 		     	#if ( link !=null ) { #
 		     	<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
 		     	# } #		     	
@@ -464,6 +465,14 @@
 		     	#if (type == "PHOTO") {#
 		     	<img src="http://graph.facebook.com/#:photoId#/picture" width="100%" alt="media" class="img-rounded">		     	
 		     	# } #
+		     	
+		     	#if ( caption !=null ) { #
+		     	<br>#: caption #
+		     	# } #		
+		     	
+		     	#if ( description !=null ) { #
+		     	<br>#: description #
+		     	# } #		
 		     	
 		     	
 		     		 
