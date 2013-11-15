@@ -199,7 +199,6 @@
 							});
 						}							
 					}else if(  $(this).attr('href') == '#social-mgmt' ){ 
-
 						if( ! $("#social-grid").data("kendoGrid") ){	
 							$("#social-grid").kendoGrid({
 								dataSource: {
@@ -236,8 +235,7 @@
 									{ field: "modifiedDate", title: "수정일", width: 100, format: "{0:yyyy/MM/dd}" },
 									{ command: [ {  text: "상세" , click: function(e){										
 										e.preventDefault();										
-										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));	
-										
+										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));											
 										if(! $("#social-detail-window").data("kendoWindow")){       
 											// WINDOW 생성
 											$("#social-detail-window").kendoWindow({
@@ -248,16 +246,16 @@
 												minWidth: 300,
 												minHeight: 300
 											});
-										}
-										
+										}																				
 										// load social content ...										
 										var socialWindow = $("#social-detail-window").data("kendoWindow");
-										socialWindow.title( selectedSocial.serviceProviderName + ' 연결정보' );
-										var template = kendo.template($('#social-details-template').html());	
-										socialWindow.content(template({}));
+										var socialMediaName = selectedSocial.serviceProviderName ;										
+										var template = kendo.template($('#social-details-template').html());											
+										socialWindow.title( socialMediaName + ' 연결정보' );
+										socialWindow.content(template({ 'socialAccount' : selectedSocial }));
 										$.ajax({
 											type : 'POST',
-											url : '${request.contextPath}/social/get-twitter-profile.do?output=json',
+											url : '${request.contextPath}/social/get-' + socialMediaName + '-profile.do?output=json',
 											data: { socialAccountId: selectedSocial.socialAccountId },
 											beforeSend: function(){																					
 												socialWindow.center();
@@ -272,8 +270,12 @@
 													socialWindow.content( template(response) );
 												}										
 												$('#connect-social-btn').click( function(e){
-													socialWindow.close();
-													var w = window.open(selectedSocial.authorizationUrl, "_blank","toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400");
+													socialWindow.close();													
+													var w = window.open(
+														selectedSocial.authorizationUrl, 
+														"_blank",
+														"toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400"
+													);
 													w.focus();
 												});		
 											},
@@ -289,11 +291,9 @@
 								filterable: true,
 								editable: "inline",
 								sortable: true,
-								//selectable: 'row',
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
 								height: 500,
-								dataBound: function(e) {
-								
+								dataBound: function(e) {								
 								},
 								change: function(e) {          
 									var selectedCells = this.select();     
@@ -301,8 +301,7 @@
 							});
 						}	
 																
-					}else if(  $(this).attr('href') == '#attachment-mgmt' ){ 
-					
+					}else if(  $(this).attr('href') == '#attachment-mgmt' ){ 					
 						// IMAGE MGMT
 						if( ! $("#attach-upload").data("kendoUpload") ){	
 							$("#attach-upload").kendoUpload({
@@ -544,10 +543,7 @@
 		<div id="account-panel" ></div>
   
 	<!-- Modal -->
-	<div id="social-detail-window" style="display:none;">	
-	
-
-	
+	<div id="social-detail-window" style="display:none;">		
 	</div>
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -602,7 +598,19 @@
 					<span class="badge">#=twitterProfile.followersCount#</span>
 					팔로워
 					</li>		
-				</ul>							
+				</ul>			
+				# } else if ( typeof (facebookProfile)  == "object" ) { #
+				<div class="media">
+					<a class="pull-left" href="\\#"><img class="media-object" src="http://graph.facebook.com/#=facebookProfile.id#/picture" alt="프로파일 이미지" class="img-rounded"></a>
+					<div class="media-body">
+						<h4 class="media-heading">#=facebookProfile.name# (#=facebookProfile.firstName#, #=facebookProfile.lastName#)</h4>
+						</br>
+						URL : #=facebookProfile.link#</br>
+						로케일 : #=facebookProfile.locale#</br>
+						위치 : #=facebookProfile.location.name#</br>
+					</div>		
+				</div>
+								
 				# } else if ( typeof (error)  == "object" ) { #
 				<div class="alert alert-danger">
 					#=socialAccount.serviceProviderName# 쇼셜계정에 접근할 수 없습니다. <BR/>
@@ -615,7 +623,11 @@
 				<button id="connect-social-btn" type="button" class="btn btn-primary btn-block">#=socialAccount.serviceProviderName#  연결하기</button>
 				</div>
 				# } else { #	
+					# if ( socialAccount.serviceProviderName == "facebook" ) { #
+					<img src="${request.contextPath}/images/common/FB-f-Logo__blue_512.png" alt="Facebook Logo" class="img-rounded">	
+					# } else{ #
 					<img src="${request.contextPath}/images/common/twitter-bird-light-bgs.png" alt="Twitter Logo" class="img-rounded">	
+					# } #	
 				# } #					
 		</script>		
 
