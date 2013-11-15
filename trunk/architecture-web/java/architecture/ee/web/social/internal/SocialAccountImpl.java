@@ -226,9 +226,8 @@ public class SocialAccountImpl extends PropertyModelSupport implements SocialAcc
 			try {
 				return serviceProvider.getAuthorizationUrl();
 			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		
+				//e.printStackTrace();
+			}		
 		return null;
 	}
 
