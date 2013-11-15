@@ -468,11 +468,13 @@
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-thumbnail">
+		     	<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded">
 		     	# } #
 		     	
 		     	#if ( caption !=null ) { #
-		     	<br>#: caption #
+		     	<blockquote>
+		     	<p>#: caption #</p>
+				</blockquote>
 		     	# } #		
 		     	
 		     	#if ( description !=null ) { #
