@@ -447,6 +447,7 @@
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
 		<script type="text/x-kendo-tmpl" id="facebook-homefeed-template">
+		#if (type != "STATUS") {#
 		<li class="media">
 		    <a class="pull-left" href="\\#">
 		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지" class="img-rounded">
@@ -473,11 +474,9 @@
 		     	#if ( description !=null ) { #
 		     	<br>#: description #
 		     	# } #		
-		     	
-		     	
-		     		 
 		    </div>
 		  </li>					
+			# } #  	
 		</script>		
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
 		<li class="media">
