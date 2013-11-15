@@ -96,7 +96,7 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 				if(StringUtils.isNotEmpty( account.getAccessSecret())){
 					provider.setAccessSecret(account.getAccessSecret());
 				}
-				
+				/*
 				log.debug( 
 						"getAccessToken: " + account.getAccessToken() + 
 						"getAccessSecret: " + account.getAccessSecret()
@@ -105,7 +105,7 @@ public class JdbcSocialAccountDao extends ExtendedJdbcDaoSupport implements Soci
 						"getAccessToken: " + provider.getAccessToken() + 
 						"getAccessSecret: " + provider.getAccessSecret()
 				);
-				
+				*/
 				account.setSocialServiceProvider(provider);
 				
 				
