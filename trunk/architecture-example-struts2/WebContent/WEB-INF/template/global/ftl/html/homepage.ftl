@@ -454,7 +454,9 @@
 		    </a>
 		    <div class="media-body">
 		      <h4 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h4>
-		     	#: type #
+		     	
+		     	<span class="label label-primary">#: type #</span>
+		     	
 		     	#if ( message !=null ) { #
 		     	<br>#: message #
 		     	# } #		
@@ -478,7 +480,9 @@
 		     	# } #		
 		     	
 		     	#if ( description !=null ) { #
-		     	<br>#: description #
+		     	<p class="text-info">...
+		     	#: description #
+		     	</p>
 		     	# } #		
 		    </div>
 		  </li>					
