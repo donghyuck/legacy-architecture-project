@@ -462,7 +462,7 @@
 		     	<span class="label label-primary">#: type #</span>
 		     	
 		     	#if ( message !=null ) { #
-		     	<br>
+		     	<br><br>
 		     	#: message #
 		     	# } #		
 		     	     	
@@ -471,12 +471,12 @@
 		     	# } #
 		     	     	
 		     	#if ( link !=null ) { #
-		     	<br>
+		     	<br><br>
 		     	<span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<br>
+		     	<br><br>
 		     	<img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
 		     	# } #
 		     	
