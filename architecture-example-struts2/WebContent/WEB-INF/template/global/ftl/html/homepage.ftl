@@ -403,7 +403,11 @@
 				<div class="row">
 					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-default">
-							<div class="panel-heading">알림</div>
+							<div class="panel-heading">알림
+							
+							<button id="social-view-btn-close" type="button" class="close">&times;</button>
+							<button id="social-view-btn-close" type="button" class="close">&times;</button>
+							</div>
 							<div class="panel-body">
 								<h3>소개</h3>
 								<p>${action.company.displayName} ..ddd </p>
@@ -458,7 +462,10 @@
 		     	<span class="label label-primary">#: type #</span>
 		     	
 		     	#if ( message !=null ) { #
-		     	<br>#: message #
+		     	<br>
+		     	<pre>
+		     	#: message #
+		     	</pre>
 		     	# } #		
 		     	     	
 		     	#if ( name !=null ) { #
@@ -466,20 +473,24 @@
 		     	# } #
 		     	     	
 		     	#if ( link !=null ) { #
-		     	<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
+		     	<br>
+		     	<span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
 		     	# } #		     	
 		     	
 		     	#if ( picture !=null ) { #
-		     	<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
+		     	<br>
+		     	<img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
 		     	# } #
 		     	
 		     	#if ( caption !=null ) { #
+		     	<br>
 		     	<blockquote>
 		     	<p>#: caption #</p>
 				</blockquote>
 		     	# } #		
 		     	
 		     	#if ( description !=null ) { #
+		     	<br>
 		     	<p class="text-info">...
 		     	#: description #
 		     	</p>
