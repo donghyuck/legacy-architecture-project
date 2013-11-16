@@ -421,8 +421,12 @@
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								
-								
-								<span class="k-icon k-i-minimize"></span><span class="k-icon k-i-restore"></span>
+							<div class="full-right">	
+								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
+								<button type="button" class="close"><span class="k-icon k-i-restore"></span></button>
+								<button type="button" class="k-button"><span class="k-icon k-i-close"></span></button>
+							</div>
+							
 							</div>		
 							<div class="panel-body">
 								<ul class="media-list">
