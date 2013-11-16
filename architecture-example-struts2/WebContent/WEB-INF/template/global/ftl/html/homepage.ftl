@@ -488,17 +488,17 @@
 		     		<br><br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
 		     		# } #		     		
 		     		#if ( source !=null ) { #
-		     		<br><br>source : <span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: source #">#: source #</a>
+		     		<br>source : <span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: source #">#: source #</a>
 		     		# } #
 		     	# } #
 		     	#if ( caption !=null ) { #
-		     	<br>
+		     	<br><br>
 		     	<blockquote>
 		     	<p>#: caption #</p>
 				</blockquote>
 		     	# } #				     	
 		     	#if ( typeof( description ) == 'string'  ) { #
-		     	<br>
+		     	<br><br>
 		     	<p class="text-info">...
 		     	#: description #
 		     	</p>
