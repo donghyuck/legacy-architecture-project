@@ -463,9 +463,7 @@
 		     	
 		     	#if ( message !=null ) { #
 		     	<br>
-		     	<pre>
 		     	#: message #
-		     	</pre>
 		     	# } #		
 		     	     	
 		     	#if ( name !=null ) { #
