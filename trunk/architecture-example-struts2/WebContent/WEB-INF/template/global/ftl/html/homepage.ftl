@@ -415,7 +415,7 @@
 				</div>		
 				<div class="row">
 					<div id="facebook-panel" class="col-lg-8">
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								
