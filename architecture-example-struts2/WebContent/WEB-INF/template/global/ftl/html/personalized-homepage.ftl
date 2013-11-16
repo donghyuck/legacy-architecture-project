@@ -404,10 +404,9 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
 			<div id="mainContent" class="container layout">					
-				<div class="row">	
-								
+				<div class="row">								
 					<div id ="notice-view-panel" class="col-lg-8">
-						<div class="panel panel-default">
+						<div class="panel panel-warning">
 							<div class="panel-heading">알림</div>
 							<div class="panel-body">
 								<h3>소개</h3>
