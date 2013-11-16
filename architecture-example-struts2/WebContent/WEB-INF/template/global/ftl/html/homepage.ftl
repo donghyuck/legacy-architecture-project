@@ -485,11 +485,10 @@
 		     	<img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
 		     	# } else { #		     	
 		     		#if ( picture !=null ) { #
-		     		<br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
-		     		# } #
-		     		
+		     		<br><br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
+		     		# } #		     		
 		     		#if ( source !=null ) { #
-		     		<br>source : <span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
+		     		<br><br>source : <span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: source #">#: source #</a>
 		     		# } #
 		     	# } #
 		     	#if ( caption !=null ) { #
@@ -497,8 +496,7 @@
 		     	<blockquote>
 		     	<p>#: caption #</p>
 				</blockquote>
-		     	# } #		
-		     	
+		     	# } #				     	
 		     	#if ( typeof( description ) == 'string'  ) { #
 		     	<br>
 		     	<p class="text-info">...
