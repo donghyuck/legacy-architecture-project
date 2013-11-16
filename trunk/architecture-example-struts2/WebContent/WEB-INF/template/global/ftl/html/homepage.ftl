@@ -414,13 +414,15 @@
 					</div>					
 				</div>		
 				<div class="row">
-					<div class="col-lg-8">
+					<div id="facebook-panel" class="col-lg-8">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
-								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
-								<button type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
-								<button type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>
+								
+								<button id="facebook-panel-refresh-btn" type="button" class="close "><span class="k-icon k-i-refresh"></span></button>
+								<button id="facebook-panel-minimize-btn" type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
+								<button id="facebook-panel-restore-btn" type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
+								<button id="facebook-panel-close-btn" type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>
 							</div>		
 							<div class="panel-body">
 								<ul class="media-list">
@@ -429,13 +431,14 @@
 							</div>							
 						</div>
 					</div>
-					<div id="social-meida-panel" class="col-lg-4">
+					<div id="twitter-panel" class="col-lg-4">
 						<div class="panel panel-success">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
-								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
-								<button type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
-								<button type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>								
+								<button id="twitter-panel-refresh-btn" type="button" class="close "><span class="k-icon k-i-refresh"></span></button>
+								<button id="twitter-panel-minimize-btn" type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
+								<button id="twitter-panel-restore-btn" type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
+								<button id="twitter-panel-close-btn" type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>								
 							</div>
 							<div class="panel-body">
 								<ul class="media-list">
