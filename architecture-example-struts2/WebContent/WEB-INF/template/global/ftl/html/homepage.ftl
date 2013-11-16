@@ -421,10 +421,10 @@
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								
-							<div class="full-right">	
+							<div>	
 								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
 								<button type="button" class="close"><span class="k-icon k-i-restore"></span></button>
-								<button type="button" class="caret"><span class="k-icon k-i-close"></span></button>
+								<button type="button" class="close"><span class="k-icon k-i-close"></span></button>
 							</div>
 							
 							</div>		
