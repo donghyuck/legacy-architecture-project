@@ -420,12 +420,9 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
-								
-								
 								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
 								<button type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
 								<button type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>
-							
 							</div>		
 							<div class="panel-body">
 								<ul class="media-list">
@@ -438,6 +435,9 @@
 						<div class="panel panel-success">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
+								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
+								<button type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
+								<button type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>								
 							</div>
 							<div class="panel-body">
 								<ul class="media-list">
