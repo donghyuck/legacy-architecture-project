@@ -423,8 +423,8 @@
 								
 								
 								<button type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
-								<button type="button" class="close"><span class="k-icon k-i-restore"></span></button>
-								<button type="button" class="close"><span class="k-icon k-i-close"></span></button>
+								<button type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
+								<button type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>
 							
 							</div>		
 							<div class="panel-body">
