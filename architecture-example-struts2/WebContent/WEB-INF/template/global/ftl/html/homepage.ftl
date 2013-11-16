@@ -402,7 +402,7 @@
 			<div id="mainContent" class="container layout">	
 				<div class="row">
 					<div id ="notice-view-panel" class="col-lg-8">
-						<div class="panel panel-primary">
+						<div class="panel panel-warning">
 							<div class="panel-heading">알림
 							<button id="social-view-btn-close" type="button" class="close">&times;</button>
 							</div>
