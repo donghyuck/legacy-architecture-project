@@ -420,6 +420,9 @@
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
+								
+								
+								<span class="k-icon k-i-minimize"></span><span class="k-icon k-i-restore"></span>
 							</div>		
 							<div class="panel-body">
 								<ul class="media-list">
