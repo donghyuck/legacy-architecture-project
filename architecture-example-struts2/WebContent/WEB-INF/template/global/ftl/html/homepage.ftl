@@ -404,8 +404,6 @@
 					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-default">
 							<div class="panel-heading">알림
-							
-							<button id="social-view-btn-close" type="button" class="close">&times;</button>
 							<button id="social-view-btn-close" type="button" class="close">&times;</button>
 							</div>
 							<div class="panel-body">
