@@ -5,7 +5,7 @@
 		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지">
 		    </a>
 		    <div class="media-body">
-		      <h5 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h5>		     	
+		      <h5 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h5>
 		     	<span class="label label-primary">#: type #</span>		     	
 		     	#if ( typeof( message ) == 'string'  ) { #
 		     	<br>
@@ -65,14 +65,14 @@
 		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
 		    </a>
 		    <div class="media-body">
-		      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
+		      <h5 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h5>
 		     	#: text #      	
-							# for (var i = 0; i < entities.urls.length ; i++) { #					
+							# for (var i = 0; i < entities.urls.length ; i++) { #
 							# var url = entities.urls[i] ; #		
 							<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
 							 # } #	
 							<p>
-							# for (var i = 0; i < entities.media.length ; i++) { #					
+							# for (var i = 0; i < entities.media.length ; i++) { #	
 							# var media = entities.media[i] ; #					
 							<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
 							# } #
