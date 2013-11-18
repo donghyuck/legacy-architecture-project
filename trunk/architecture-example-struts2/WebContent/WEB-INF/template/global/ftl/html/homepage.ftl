@@ -74,9 +74,10 @@
 				<#if !action.user.anonymous >
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >	
+				
 					<#if item.serviceProviderName == "twitter">					
-					var template = kendo.template($("#twitter-timeline-template").html());
-					var dataSource = new kendo.data.DataSource({
+					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
+					var twitterDataSource = new kendo.data.DataSource({
 						transport: {
 							read: {
 								type : 'POST',
@@ -97,14 +98,14 @@
 							kendo.ui.progress($("#company-twitter-timeline"), false);
 						},
 						change: function() {
-							$("#company-twitter-timeline").html(kendo.render(template, this.view()));
+							$("#company-twitter-timeline").html(kendo.render(twitterTemplate, this.view()));
 						},
 						error:handleKendoAjaxError,
 						schema: {
 							data : "homeTimeline"
 						}
 		            });            				
-		            dataSource.read();
+		            twitterDataSource.read();
 		            
 		            <#elseif item.serviceProviderName == "facebook">
 					
@@ -137,7 +138,29 @@
 						}
 		            });            				
 		            facebookDataSource.read();
+		            
+		            
 					</#if>
+					
+					$("#${item.serviceProviderName}-panel .panel-header-actions a").each(function( index ) {
+						var panel_header_action = $(this);						
+						if( panel_header_action.text() == "Minimize" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#${item.serviceProviderName}-panel .panel-body").toggleClass("hide");								
+								var panel_header_action_icon = panel_header_action.find('span');
+								if( panel_header_action_icon.hasClass("k-i-minimize") ){
+									panel_header_action.find('span').removeClass("k-i-minimize");
+									panel_header_action.find('span').addClass("k-i-maximize");
+								}else{
+									panel_header_action.find('span').removeClass("k-i-maximize");
+									panel_header_action.find('span').addClass("k-i-minimize");
+								}								
+							});
+						} else if (panel_header_action.text() == "Refresh" ){
+							${item.serviceProviderName}DataSource.read();
+						}
+					} );
 								
 				</#list>
 				// End : Company Social Content 
@@ -417,10 +440,10 @@
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-pin">Pin</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 								</div>
 							</div>		
 							<div class="panel-body">
@@ -435,10 +458,13 @@
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
 								<div class="k-window-actions panel-header-actions">
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-pin">Pin</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>	
+									<!--
+																	
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									-->
 								</div>							
 							</div>
 							<div class="panel-body">
