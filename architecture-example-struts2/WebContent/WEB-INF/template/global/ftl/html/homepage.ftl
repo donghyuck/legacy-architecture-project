@@ -73,8 +73,7 @@
 				
 				<#if !action.user.anonymous >
 				// Start : Company Social Content 
-				<#list action.companySocials  as item >	
-				
+				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">					
 					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
 					var twitterDataSource = new kendo.data.DataSource({
@@ -138,8 +137,6 @@
 						}
 		            });            				
 		            facebookDataSource.read();
-		            
-		            
 					</#if>
 					
 					$("#${item.serviceProviderName}-panel .panel-header-actions a").each(function( index ) {
@@ -158,7 +155,10 @@
 								}								
 							});
 						} else if (panel_header_action.text() == "Refresh" ){
-							${item.serviceProviderName}DataSource.read();
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								${item.serviceProviderName}DataSource.read();
+							});
 						}
 					} );
 								
@@ -172,7 +172,7 @@
 						$('#my-messages').popover('show');	
 					} else if(  $(this).attr('href') == '#my-attachments' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){	
-							
+													
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
@@ -224,8 +224,7 @@
 										attachementTotalModle.set("totalFileCount", totalCount);
 									} else {
 										attachementTotalModle.set("totalAttachCount", totalCount);
-									}
-									
+									}	
 								}
 							});
 														
@@ -236,7 +235,8 @@
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
-							});								
+							});							
+								
 							// ListView Filter 									
 							$("ul#attachment-list-view-filter li").find("a").click(function(){					
 								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
@@ -315,6 +315,11 @@
 		</script> 		   
 		
     <style scoped="scoped">
+	
+	blockquote p {
+		font-size: 15px;
+	}
+
 
 	#social-meida-panel .popover {
 		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
@@ -478,108 +483,13 @@
 			</div>		
 
 		<div id="attach-window"></div>					
-		<!-- END MAIN CONTENT -->		
+		<!-- END MAIN CONTENT -->			
  		<!-- START FOOTER -->
 		<footer> 
 		</footer>
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
-		<script type="text/x-kendo-tmpl" id="facebook-homefeed-template">
-		#if (type != "STATUS") {#
-		<li class="media">
-		    <a class="pull-left" href="\\#">
-		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지" class="img-rounded">
-		    </a>
-		    <div class="media-body">
-		      <h4 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h4>
-		     	
-		     	<span class="label label-primary">#: type #</span>
-		     	
-		     	#if ( message !=null ) { #
-		     	<br><br>
-		     	#: message #
-		     	# } #		
-		     	     	
-		     	#if ( name !=null ) { #
-		     	<br>#: name  #
-		     	# } #
-		     	     	
-		     	#if ( type == 'LINK' ) { #
-		     	<br><br>
-		     	<span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: link #">#: link #</a>
-		     	# } else if ( type == 'PHOTO' ) { #
-		     	<br><br>
-		     	<img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
-		     	# } else { #		     	
-		     		#if ( picture !=null ) { #
-		     		<br><br><img src="#: picture.replace("_s.", "_n.")  #" alt="media" class="img-rounded img-responsive">
-		     		# } #		     		
-		     		#if ( source !=null ) { #
-		     		<br>source : <span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: source #">#: source #</a>
-		     		# } #
-		     	# } #
-		     	#if ( caption !=null ) { #
-		     	<br><br>
-		     	<blockquote>
-		     	<p>#: caption #</p>
-				</blockquote>
-		     	# } #				     	
-		     	#if ( typeof( description ) == 'string'  ) { #
-		     	<br><br>
-		     	<p class="text-info">...
-		     	#: description #
-		     	</p>
-		     	# } #		
-		    </div>
-		  </li>					
-			# } #  	
-		</script>		
-		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
-		<li class="media">
-		    <a class="pull-left" href="\\#">
-		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
-		    </a>
-		    <div class="media-body">
-		      <h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
-		     	#: text #      	
-							# for (var i = 0; i < entities.urls.length ; i++) { #					
-							# var url = entities.urls[i] ; #		
-							<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
-							 # } #	
-							<p>
-							# for (var i = 0; i < entities.media.length ; i++) { #					
-							# var media = entities.media[i] ; #					
-							<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-							# } #
-							</p>
-							#if (retweeted) {#					
-						<div class="media">
-							<a class="pull-left" href="\\#">
-								<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
-							</a>
-							<div class="media-body">
-								<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
-							</div>
-						</div>						
-							# } #
-		    </div>
-		  </li>					
-		</script>
-		<script type="text/x-kendo-tmpl" id="twitter-timeline-template2">
-			<div class="popover left" style="display:true;">
-				<div class="arrow"></div>
-				<div class="popover-content">
-					<p>#: text #</p>
-					<p>
-					# for (var i = 0; i < entities.media.length ; i++) { #					
-					# var media = entities.media[i] ; #					
-					<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-					# } #
-					</p>
-					<img src="#: user.profileImageUrl #" alt="#: user.name#" class="img-thumbnail">
-				</div>
-			</div>			
-		</script>
+
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
@@ -643,6 +553,7 @@
 				</p>	
 				# } #  	
 		</script>		
+		<#include "/html/common/common-homepage-social-templates.ftl" >		
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
