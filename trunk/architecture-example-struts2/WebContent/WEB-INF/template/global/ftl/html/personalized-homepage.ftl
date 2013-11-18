@@ -69,26 +69,37 @@
 							});	
 						}
 					}
-				});
+				});				
 
+				<#list action.companySocials as item >	
+				socialServiceProviders.${item.serviceProviderName} = { 
+					dataSource: null,
+					<#if  item.serviceProviderName == "twitter" >
+					url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
+					data : "homeTimeline",
+					template : kendo.template($("#twitter-timeline-template").html())
+					<#elseif item.serviceProviderName == "facebook" >
+					url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
+					data : "homeFeed",
+					template : kendo.template($("#facebook-homefeed-template").html())			
+					</#if>
+				};
+				</#list>
+						
 				$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
 					$(item).click( function(){ 
 						var socialProvider = $(item).attr('data-provider');
 						var socialAccountId = $(item).attr('data-account');
 						if( typeof (socialProvider) == 'string' && typeof (socialAccountId) == 'string' ){
- 							showSocialContent( socialProvider, socialAccountId );	
+ 							showSocialPanel( socialProvider, socialAccountId );	
  						}
  					});	
-				});
+				});										
 										
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					
 					if(  $(this).attr('href') == '#my-messages' ){					
 						//$('#my-messages').popover('show');	
-						
-						
-
 						
 					} else if(  $(this).attr('href') == '#my-attachments' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){	
@@ -179,7 +190,6 @@
 								refresh : true,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
 							});
-							
 																					
 							$("#attachment-files").kendoUpload({
 								 	multiple : false,
@@ -204,92 +214,93 @@
 						}
 					}
 					$(this).tab('show')
-				});
-				
+				});				
 				// END SCRIPT            
 			}
 		}]);	
-		
-		function showSocialContent ( socialProvider, socialAccountId ){					
-			if( socialAccountId > 0 && socialProvider == "twitter" ){
-				kendo.bind($("#social-view-panel"), {name:"twitter"} );
-				if( !$('#notice-view-panel').hasClass('hide') ){
-					$('#notice-view-panel').addClass("hide");
-				}			
-				if( !$('#image-view-panel').hasClass('hide') ){
-					$('#image-view-panel').addClass('hide');
-				}
-				if( $('#social-view-panel').hasClass('hide') ){
-					$('#social-view-panel').removeClass('hide');
-				}
 
-				$('#social-view-btn-close').click(function(){
-					if( $('#notice-view-panel').hasClass('hide') ){
-						$('#notice-view-panel').removeClass('hide');
-					}					
-					if( !$('#image-view-panel').hasClass('hide') ){
-						$('#image-view-panel').addClass('hide');
-					}	
-					if( !$('#social-view-panel').hasClass('hide') ){
-						$('#social-view-panel').addClass('hide');
-					}								
-				} );								
-				var template = kendo.template($("#twitter-timeline-template").html());				
-				var dataSource = new kendo.data.DataSource({
-					transport: {
-						read: {
-							type : 'POST',
-							type: "json",
-							url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
-						},
-						parameterMap: function (options, operation){
-							if (operation == "read" && options) {										                        								                       	 	
-								return { socialAccountId: socialAccountId };									                            	
-							}
-						} 
-					},
-					requestStart: function() {
-						kendo.ui.progress($("#twitter-timeline"), true);
-					},
-					requestEnd: function() {
-						kendo.ui.progress($("#twitter-timeline"), false);
-					},
-					change: function() {
-						$("#twitter-timeline").html(kendo.render(template, this.view()));
-					},
-					error:handleKendoAjaxError,
-					schema: {
-						data : "homeTimeline"
-					}
-				});
+		// Social DataSource
+		var socialServiceProviders = { } ;
+						
+		function showSocialPanel ( provider, socialId ){			
+			var elementId =  provider + "-panel";			
+			if( $("#" + elementId ).length == 0  ){
+			
+				// create new social panel 
+				var template = kendo.template($("#social-view-panel-template").html());		
+				$("#social-view-panels").append( template( { provider:provider} ) );
 				
-				dataSource.read();							
-			}
-		}
-		
+				// create dataSource
+				if ( socialServiceProviders[ provider ].dataSource == null ){
+					var socialStreamsElementId = provider + "-streams" ;
+					alert ( "id:" + socialStreamsElementId );
+					socialServiceProviders[ provider ].dataSource = new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								type: "json",
+								url : socialServiceProviders[ provider ].url,
+							},
+							parameterMap: function (options, operation){
+								if (operation == "read" && options) {										                        								                       	 	
+									return { socialAccountId: socialId };									                            	
+								}
+							} 
+						},
+						requestStart: function() {
+							kendo.ui.progress($("#" + socialStreamsElementId ), true);
+						},
+						requestEnd: function() {
+							kendo.ui.progress($("#" + socialStreamsElementId ), false);
+						},
+						change: function() {
+							$("#" + socialStreamsElementId ).html(kendo.render(socialServiceProviders[ provider ].template, this.view()));
+						},
+						error:handleKendoAjaxError,
+						schema: {
+							data : socialServiceProviders[ provider ].data
+						}
+		            });			
+		           socialServiceProviders[ provider ].dataSource.read();
+				}				
+				
+				$( '#'+ elementId + ' .panel-header-actions a').each(function( index ) {
+					var social_header_action = $(this);
+					social_header_action.click(function (e){
+						e.preventDefault();		
+						var social_header_action_icon = social_header_action.find('span');
+						if (social_header_action.text() == "Maximize"){
+							$( "#"+ elementId +" .panel-body").toggleClass("hide");				
+							if( social_header_action_icon.hasClass("k-i-maximize") ){
+								social_header_action_icon.removeClass("k-i-maximize");
+								social_header_action_icon.addClass("k-i-minimize");
+							}else{
+								social_header_action_icon.removeClass("k-i-minimize");
+								social_header_action_icon.addClass("k-i-maximize");
+							}
+						} else if (social_header_action.text() == "Refresh"){	
+							socialServiceProviders[ provider ].dataSource.read();
+						} else if (social_header_action.text() == "Close"){	
+							$("#" + elementId ).hide();
+						}
+					});			
+				} );			
+			} else {
+				$("#" + elementId ).show();
+			} 
+		}		
 		
 		function openPreviewWindow( item ){						
 			var template = kendo.template($('#image-view-template').html());
 			$('#image-view-panel').html( template(item) );				
 			kendo.bind($("#image-view-panel"), item );
-		
-			if( $('#image-view-panel').hasClass('hide') ){
-				$('#image-view-panel').removeClass('hide');
-			}
-			if( !$('#notice-view-panel').hasClass('hide') ){
-				$('#notice-view-panel').addClass("hide");
-			}			
-			if( !$('#social-view-panel').hasClass('hide') ){
-				$('#social-view-panel').addClass('hide');
-			}	
-									
+			
+			$('#image-view-panel').show();
+			$('#notice-view-panel').hide();
+															
 			$('#image-view-btn-close').click(function(){
-				if( $('#notice-view-panel').hasClass('hide') ){
-					$('#notice-view-panel').removeClass('hide');
-				}					
-				if( !$('#image-view-panel').hasClass('hide') ){
-					$('#image-view-panel').addClass('hide');
-				}				
+				$('#notice-view-panel').show();
+				$('#image-view-panel').hide();			
 			} );			
 		}			
 		-->
@@ -403,30 +414,24 @@
 		</div>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT --> 
-			<div id="mainContent" class="container layout">					
+			<div id="mainContent" class="container layout">							
 				<div class="row">								
-					<div id ="notice-view-panel" class="col-lg-8">
-						<div class="panel panel-warning">
-							<div class="panel-heading">알림</div>
+				
+					<div class="col-lg-8">						
+						<div id="notice-view-panel" class="panel panel-warning">
+							<div class="panel-heading">알림											
+							</div>
 							<div class="panel-body">
 								<h3>소개</h3>
 								<p>${action.company.displayName} ..ddd </p>
 							</div>
-						</div>
-					</div>								
-					<div id="social-view-panel" class="col-lg-8 hide">
-						<div class="panel panel-success">
-							<div class="panel-heading">			
-								<i class="icon-twitter"></i>&nbsp;<span data-bind="text: name"></span><button id="social-view-btn-close" type="button" class="close">&times;</button>
-							</div>
-							<div class="panel-body">
-								<ul class="media-list">
-									<div id="twitter-timeline"></div>
-								</ul>
-							</div>
-						</div>
-					</div>	
-					<div id="image-view-panel" class="col-lg-8 hide"></div>					
+						</div>						
+						<div id="image-view-panel"></div>						
+						<!-- start social view panels -->
+						<div id="social-view-panels"></div>	
+						<!-- end social view panels -->						
+					</div>		
+					
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
@@ -512,53 +517,25 @@
 		</footer>
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
-		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
-			<li class="media">
-				<a class="pull-left" href="\\#">
-					<img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
-				</a>
-				<div class="media-body">
-					<h4 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h4>
-					#: text #      	
-					# for (var i = 0; i < entities.urls.length ; i++) { #					
-					# var url = entities.urls[i] ; #		
-					<br><span class="glyphicon glyphicon-link"></span>&nbsp;<a href="#: url.expandedUrl  #">#: url.displayUrl #</a>
-					 # } #	
-					<p>
-					# for (var i = 0; i < entities.media.length ; i++) { #					
-					# var media = entities.media[i] ; #					
-					<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-					# } #
-					</p>
-					#if (retweeted) {#					
-				<div class="media">
-					<a class="pull-left" href="\\#">
-						<img src="#: retweetedStatus.user.profileImageUrl #" width="100%" alt="media" class="img-rounded">
-					</a>
-					<div class="media-body">
-						<h4 class="media-heading">#: retweetedStatus.user.name #</h4>
-					</div>
-				</div>						
-				# } #
+		<script type="text/x-kendo-tmpl" id="social-view-panel-template">
+		<div id="#: provider #-panel" class="panel panel-success">
+			<div class="panel-heading">
+				<i class="icon-#: provider #"></i> &nbsp; #: provider #
+				<div class="k-window-actions panel-header-actions">
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+				</div>							
 			</div>
-		</li>						
+			<div class="panel-body">
+				<ul class="media-list">
+					<div id="#:provider#-streams">데이터가 없습니다..</div>
+				</ul>
+			</div>
+		</div>				
 		</script>
-				
-		<script type="text/x-kendo-tmpl" id="twitter-timeline-template2">
-			<div class="popover left" style="display:true;">
-				<div class="arrow"></div>
-				<div class="popover-content">
-					<p>#: text #</p>
-					<p>
-					# for (var i = 0; i < entities.media.length ; i++) { #					
-					# var media = entities.media[i] ; #					
-					<img src="#: media.mediaUrl #" width="100%" alt="media" class="img-rounded">
-					# } #
-					</p>
-					<img src="#: user.profileImageUrl #" alt="#: user.name#" class="img-thumbnail">
-				</div>
-			</div>			
-		</script>
+		
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
@@ -622,6 +599,7 @@
 				</p>	
 				# } #  	
 		</script>		
+		<#include "/html/common/common-homepage-social-templates.ftl" >		
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
