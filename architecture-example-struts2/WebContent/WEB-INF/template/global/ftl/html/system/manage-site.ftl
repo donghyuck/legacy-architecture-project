@@ -404,8 +404,7 @@
 			<div class="row">			
 				<div class="col-6 col-lg-6">						
 					<div id="company-info-panel" class="panel panel-default">
-						<div class="panel-heading layout">
-							
+						<div class="panel-heading layout">			
 							&nbsp;&nbsp;&nbsp;
 							<div class="btn-group">
 								<button type="button" class="btn btn-sm btn-warning">옵션</button>
