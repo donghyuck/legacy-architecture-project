@@ -80,6 +80,13 @@ body {
 	overflow-y:auto;
 }
 
+
+.panel-header-actions {
+	float: right;
+	padding-top:2px;
+	
+}
+
 /** block */
 
 .round-block  {
