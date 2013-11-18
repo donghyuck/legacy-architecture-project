@@ -441,7 +441,7 @@
 				</div>		
 				<div class="row">
 					<div id="facebook-panel" class="col-lg-8">
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
@@ -459,7 +459,7 @@
 						</div>
 					</div>
 					<div id="twitter-panel" class="col-lg-4">
-						<div class="panel panel-primary">
+						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
 								<div class="k-window-actions panel-header-actions">
