@@ -403,9 +403,7 @@
 				<div class="row">
 					<div id ="notice-view-panel" class="col-lg-8">
 						<div class="panel panel-warning">
-							<div class="panel-heading">알림
-							<button id="social-view-btn-close" type="button" class="close">&times;</button>
-							</div>
+							<div class="panel-heading">알림</div>
 							<div class="panel-body">
 								<h3>소개</h3>
 								<p>${action.company.displayName} ..ddd </p>
@@ -415,14 +413,15 @@
 				</div>		
 				<div class="row">
 					<div id="facebook-panel" class="col-lg-8">
-						<div class="panel panel-info">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
-								
-								<button id="facebook-panel-refresh-btn" type="button" class="close "><span class="k-icon k-i-refresh"></span></button>
-								<button id="facebook-panel-minimize-btn" type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
-								<button id="facebook-panel-restore-btn" type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
-								<button id="facebook-panel-close-btn" type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>
+								<div class="k-window-actions panel-header-actions">
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-pin">Pin</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+								</div>
 							</div>		
 							<div class="panel-body">
 								<ul class="media-list">
@@ -432,13 +431,15 @@
 						</div>
 					</div>
 					<div id="twitter-panel" class="col-lg-4">
-						<div class="panel panel-success">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
-								<button id="twitter-panel-refresh-btn" type="button" class="close "><span class="k-icon k-i-refresh"></span></button>
-								<button id="twitter-panel-minimize-btn" type="button" class="close"><span class="k-icon k-i-minimize"></span></button>
-								<button id="twitter-panel-restore-btn" type="button" class="close hidden"><span class="k-icon k-i-restore"></span></button>
-								<button id="twitter-panel-close-btn" type="button" class="close hidden"><span class="k-icon k-i-close"></span></button>								
+								<div class="k-window-actions panel-header-actions">
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-pin">Pin</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+								</div>							
 							</div>
 							<div class="panel-body">
 								<ul class="media-list">
