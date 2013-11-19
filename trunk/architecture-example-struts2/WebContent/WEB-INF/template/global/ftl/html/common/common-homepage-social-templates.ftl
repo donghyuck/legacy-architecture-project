@@ -1,7 +1,7 @@
 		<script type="text/x-kendo-tmpl" id="social-view-panel-template">
 		<div id="#: provider #-panel" class="panel panel-success">
 			<div class="panel-heading">
-				<i class="icon-#: provider #"></i> &nbsp; #: provider #
+				<i class="icon-#: provider #"></i> &nbsp; #: provider # &nbsp; 뉴스
 				<div class="k-window-actions panel-header-actions">
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 					<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
