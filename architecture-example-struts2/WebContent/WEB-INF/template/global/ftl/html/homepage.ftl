@@ -32,7 +32,7 @@
 					authenticate : function( e ){
 						currentUser = e.token;						
 					},
-					<#if CompanyUtils.isallowedSignIn(action.company) >
+					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  >
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
@@ -193,9 +193,9 @@
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="jumbotron">
-							h1>Hello, world!</h1>
+							<h1>Hello, world!</h1>
 							<p>...</p>
-							<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+							<p><a class="btn btn-primary btn-default" role="button">Learn more</a></p>
 						</div>
 					</div>
 					<div id ="notice-view-panel" class="col-lg-4">
