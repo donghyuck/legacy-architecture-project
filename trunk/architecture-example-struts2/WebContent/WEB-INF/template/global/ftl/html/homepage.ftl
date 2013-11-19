@@ -202,13 +202,20 @@
 						<div class="panel panel-warning">
 							<div class="panel-heading">공지</div>
 							<div class="panel-body">
-	
 <div class="list-group">
-  <a href="#" class="list-group-item active">
-    <h4 class="list-group-item-heading">List group item heading</h4>
-    <p class="list-group-item-text">...</p>
-  </a>
-</div>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">List group item heading</h4>
+          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">List group item heading</h4>
+          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+        </a>
+        <a href="#" class="list-group-item">
+          <h4 class="list-group-item-heading">List group item heading</h4>
+          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+        </a>
+      </div>
 <br>							
 								<div class="thumbnail">
 									<img src="${request.contextPath}/content/image.do?imageId=71" alt="...">
