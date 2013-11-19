@@ -171,7 +171,7 @@
 														},
 														error:handleKendoAjaxError
 													},
-													height: 300,
+													height: 350,
 													scrollable: true,
 													editable: false,
 													columns: [
@@ -185,7 +185,7 @@
 													toolbar: [{ name: "create-groups", text: "디폴트 그룹 생성하기", imageClass:"k-icon k-i-folder-add" , className: "createGroupsCustomClass" }]
 												});		
 												
-												$("#company-group-grid").attr('style','');	   										
+												//$("#company-group-grid").attr('style','');	   										
 											}
 										// 1-1-4-2 DETAIL PROPS GRID 생성 
 										}else if( $( e.contentElement ).find('div').hasClass('props') ){				         
@@ -220,7 +220,7 @@
 													resizable: true,
 													editable : true,
 													scrollable: true,
-													height: 300,
+													height: 350,
 													toolbar: [
 														{ name: "create", text: "추가" },
 														{ name: "save", text: "저장" },
@@ -230,7 +230,7 @@
 													}
 												});													
 												// GRID 화면 깨짐을 이한 속성 변경
-												$("#company-prop-grid").attr('style','');	   	
+												//$("#company-prop-grid").attr('style','');	   	
 											}
 										// 1-1-4-3 상세 사용자 정보 GRID 생성 (디폴드로 보여줄 데이터이므로 1-1-5 에서 GRID 생성
 										}else if( $( e.contentElement ).find('div').hasClass('users') ){
