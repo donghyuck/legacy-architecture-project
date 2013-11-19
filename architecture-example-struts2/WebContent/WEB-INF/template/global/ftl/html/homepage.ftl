@@ -443,7 +443,7 @@
 					<div id="facebook-panel" class="col-lg-8">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<i class="icon-facebook"></i>
+								<i class="icon-facebook"></i> 뉴스
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -461,7 +461,7 @@
 					<div id="twitter-panel" class="col-lg-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<i class="icon-twitter"></i>
+								<i class="icon-twitter"></i> 뉴스
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
