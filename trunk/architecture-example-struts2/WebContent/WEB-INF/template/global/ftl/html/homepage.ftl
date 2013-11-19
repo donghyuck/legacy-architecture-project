@@ -71,8 +71,8 @@
 					}
 				});
 				
-				<#if !action.user.anonymous >
-				// Start : Company Social Content 
+				
+// Start : Company Social Content 
 				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">					
 					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
@@ -164,6 +164,8 @@
 								
 				</#list>
 				// End : Company Social Content 
+								
+				<#if !action.user.anonymous >				
 				
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
