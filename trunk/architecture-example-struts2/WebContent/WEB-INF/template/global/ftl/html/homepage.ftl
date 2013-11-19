@@ -192,9 +192,7 @@
 			<div id="mainContent" class="container layout">	
 				<div class="row">
 					<div class="col-lg-8">
-						<div class="jumbotron">
-							<h1>Hello, world!</h1>
-							<p>...</p>
+						<div class="jumbotron">							
 							<p><a class="btn btn-primary btn-default" role="button">Learn more</a></p>
 						</div>
 					</div>
@@ -202,7 +200,40 @@
 						<div class="panel panel-warning">
 							<div class="panel-heading">공지</div>
 							<div class="panel-body">
-								<p>${action.company.displayName} ..ddd </p>
+								<p><img src="${request.contextPath}/content/image.do?imageId=71"  	class="img-circle img-responsive"></p>
+
+<!-- Table -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+        								
 							</div>
 						</div>
 					</div>					
