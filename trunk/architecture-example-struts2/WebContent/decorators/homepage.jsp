@@ -38,7 +38,6 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	.k-menu.k-header, .k-menu .k-item {
 		/*border-color :#dadada;*/
 	}
-
 		
 	#account-panel {
 		margin-top : 0 px;
