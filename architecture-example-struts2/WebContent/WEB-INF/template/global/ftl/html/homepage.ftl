@@ -37,7 +37,7 @@
 					</#if>
 					afterAuthenticate : function(){
 						$('.dropdown-toggle').dropdown();
-						Holder.run();
+						//Holder.run();
 						
 						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
@@ -69,10 +69,9 @@
 							});	
 						}
 					}
-				});
+				});				
 				
-				
-// Start : Company Social Content 
+				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">					
 					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
@@ -167,152 +166,11 @@
 								
 				<#if !action.user.anonymous >				
 				
-				$('#myTab a').click(function (e) {
-					e.preventDefault();					
-					
-					if(  $(this).attr('href') == '#my-messages' ){					
-						$('#my-messages').popover('show');	
-					} else if(  $(this).attr('href') == '#my-attachments' ){
-						if( !$('#attachment-list-view').data('kendoListView') ){	
-													
-							var attachementTotalModle = kendo.observable({ 
-								totalAttachCount : "0",
-								totalImageCount : "0",
-								totalFileCount : "0"							
-							});
-							
-							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );
-						
-							$("#attachment-list-view").kendoListView({
-								dataSource: {
-									type: 'json',
-									transport: {
-										read: { url:'${request.contextPath}/accounts/get-user-attachements.do?output=json', type: 'POST' },		
-										destroy: { url:'${request.contextPath}/accounts/delete-user-attachment.do?output=json', type:'POST' },                                
-										parameterMap: function (options, operation){
-											if (operation != "read" && options) {										                        								                       	 	
-												return { attachmentId :options.attachmentId };									                            	
-											}else{
-												return { };
-											}
-										}
-									},
-									pageSize: 12,
-									error:handleKendoAjaxError,
-									schema: {
-										model: Attachment,
-										data : "userAttachments"
-									},
-									sort: { field: "attachmentId", dir: "desc" },
-									filter :  { field: "contentType", operator: "neq", value: "" }
-								},
-								selectable: "single",									
-								change: function(e) {									
-									var data = this.dataSource.view() ;
-									this.dataSource.page();
-									var item = data[this.select().index()];				
-									openPreviewWindow( item ) ;
-								},
-								navigatable: false,
-								template: kendo.template($("#attachment-list-view-template").html()),								
-								dataBound: function(e) {
-									var attachment_list_view = $('#attachment-list-view').data('kendoListView');
-									var filter =  attachment_list_view.dataSource.filter().filters[0].value;
-									var totalCount = attachment_list_view.dataSource.total();
-									if( filter == "image" ) 
-									{
-										attachementTotalModle.set("totalImageCount", totalCount);
-									} else if ( filter == "application" ) {
-										attachementTotalModle.set("totalFileCount", totalCount);
-									} else {
-										attachementTotalModle.set("totalAttachCount", totalCount);
-									}	
-								}
-							});
-														
-							$("#attachment-list-view").on(
-								"mouseenter", 
-								".attach", 
-								function(e) {
-									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
-								}).on("mouseleave", ".attach", function(e) {
-									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
-							});							
-								
-							// ListView Filter 									
-							$("ul#attachment-list-view-filter li").find("a").click(function(){					
-								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
-								$("ul#attachment-list-view-filter li.active").removeClass("active");
-								$(this).parent().addClass("active");
-								var filter_id =  $(this).attr('id') ;
-								switch(filter_id){
-									case "attachment-list-view-filter-1" :
-										attachment_list_view.dataSource.filter(  { field: "contentType", operator: "neq", value: "" } ) ; 
-										break;
-									case "attachment-list-view-filter-2":
-										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
-										break;
-									case "attachment-list-view-filter-3":
-										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
-										break;											
-								}
-							});							
-							$("#pager").kendoPager({
-								refresh : true,
-								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
-							});		
-																					
-							$("#attachment-files").kendoUpload({
-								 	multiple : false,
-								 	width: 300,
-								 	showFileList : false,
-								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
-								    async: {
-									    saveUrl:  '${request.contextPath}/accounts/save-user-attachments.do?output=json',							   
-									    autoUpload: true
-								    },
-								    upload: function (e) {								         
-								    	 e.data = {};														    								    	 		    	 
-								    },
-								    success : function(e) {								    
-										if( e.response.targetAttachment ){
-											e.response.targetAttachment.attachmentId;
-											// LIST VIEW REFRESH...
-											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
-										}				
-									}
-							});
-						}
-					}
-					$(this).tab('show')
-				});
 				</#if>	
 				// END SCRIPT            
 			}
 		}]);	
 		
-		<#if !action.user.anonymous >
-		function openPreviewWindow( item ){					
-			var template = kendo.template($('#image-view-template').html());
-			$('#image-view-panel').html( template(item) );	
-			kendo.bind($("#image-view-panel"), item );
-			if( $('#image-view-panel').hasClass('hide') ){
-				$('#image-view-panel').removeClass('hide');
-			}			
-			if( !$('#notice-view-panel').hasClass('hide') ){
-				$('#notice-view-panel').addClass("hide");
-			}
-			$('#image-view-btn-close').click(function(){
-				if( $('#notice-view-panel').hasClass('hide') ){
-					$('#notice-view-panel').removeClass('hide');
-				}					
-				if( !$('#image-view-panel').hasClass('hide') ){
-					$('#image-view-panel').addClass('hide');
-				}				
-			} );
-			
-		}			
-		</#if>		
 		-->
 		</script> 		   
 		
@@ -322,104 +180,6 @@
 		font-size: 15px;
 	}
 
-
-	#social-meida-panel .popover {
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-		width: 100%;
-		margin-top: 20px;
-		margin-right: 20px;
-		margin-bottom: 20px;
-		margin-left: 20px;
-		float: left;
-		display: block;
-		position: relative;
-		z-index: 1;
-		max-width: 340px;
-	 }
-	 
-	 .popover-title {
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-	 }
-	 		
-		.carousel {
-		margin-top: 60px;		
-		}	
-		.k-callout-n {
-		border-bottom-color: #787878;
-		}	
-				
-		.k-callout-w {
-			border-right-color: #787878;
-		}
-		
-		.k-callout-e {
-		border-left-color: #787878;
-		}	
-		
-		#attachment-list-view {
-			min-height: 300px;
-			min-width: 300px;
-			padding: 0px;
-			border: 0px;
-			margin-bottom: -1px;
-			vertical-align: middle;
-		}
-        		                		
-		.attach
-		{
-			float: left;
-            position: relative;
-            width: 150px;
-            height: 150px;
-            padding: 0;
-			cursor: pointer;
-		}
-		
-		.attach img
-		{
-			width: 150px;
-			height: 150px;
-		}
-		
-		.attach-description {
-            position: absolute;
-            top: 0;
-            width: 150px	;
-            height: 0;
-            overflow: hidden;
-            background-color: rgba(0,0,0,0.8)
-        }
-        		
-		.attach h3
-		{
-			margin: 0;
-            padding: 10px 10px 0 10px;
-            line-height: 1.1em;
-            font-size : 12px;
-            font-weight: normal;
-            color: #ffffff;
-            word-wrap: break-word;
-		}
-
-		.attach p {
-			color: #ffffff;
-			font-weight: normal;
-			padding: 0 10px;
-			font-size: 12px;
-        }
-		.k-listview:after, .attach dl:after {
-			content: ".";
-			display: block;
-			height: 0;
-			clear: both;
-			visibility: hidden;
-        }
-        .k-pager-wrap {
-        	border : 0px;
-        	border-width: 0px;
-        }
-        
-        
 		</style>   	
 	</head>
 	<body id="doc">
@@ -431,11 +191,17 @@
 		<!-- START MAIN CONTENT --> 
 			<div id="mainContent" class="container layout">	
 				<div class="row">
-					<div id ="notice-view-panel" class="col-lg-8">
+					<div class="col-lg-8">
+						<div class="jumbotron">
+							h1>Hello, world!</h1>
+							<p>...</p>
+							<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+						</div>
+					</div>
+					<div id ="notice-view-panel" class="col-lg-4">
 						<div class="panel panel-warning">
-							<div class="panel-heading">알림</div>
+							<div class="panel-heading">공지</div>
 							<div class="panel-body">
-								<h3>소개</h3>
 								<p>${action.company.displayName} ..ddd </p>
 							</div>
 						</div>
