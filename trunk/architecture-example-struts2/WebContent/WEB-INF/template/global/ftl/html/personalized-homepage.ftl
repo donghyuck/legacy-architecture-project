@@ -413,10 +413,9 @@
 		<#include "/html/common/common-homepage-wide-menu.ftl" >	
 		</div>
 		<!-- END HEADER -->	
-		<!-- START MAIN CONTENT --> 
-			<div id="mainContent" class="container layout">							
-				<div class="row">								
-				
+		<!-- START MAIN CONTENT -->
+			<div class="container layout blank-top-50">							
+				<div class="row">					
 					<div class="col-lg-8">						
 						<div id="notice-view-panel" class="panel panel-warning">
 							<div class="panel-heading">알림											

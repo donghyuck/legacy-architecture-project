@@ -172,14 +172,11 @@
 		}]);	
 		
 		-->
-		</script> 		   
-		
-    <style scoped="scoped">
-	
-	blockquote p {
-		font-size: 15px;
-	}
-
+		</script>		
+		<style scoped="scoped">		
+		blockquote p {
+			font-size: 15px;
+		}
 		</style>   	
 	</head>
 	<body id="doc">
@@ -188,58 +185,43 @@
 		<#include "/html/common/common-homepage-wide-menu.ftl" >	
 		</div>
 		<!-- END HEADER -->	
-		<!-- START MAIN CONTENT --> 
-			<div id="mainContent" class="container layout">	
+		<!-- START MAIN CONTENT -->
+		<div class="blank-top-50" ></div>
+		<div id="main" class="jumbotron">							
+			<div class="container">
+				<p><a class="btn btn-primary btn-default" role="button">Learn more</a></p>
+			</div>
+		</div>								 
+		<div class="container layout">	
 				<div class="row">
 					<div class="col-lg-8">
-						<div class="jumbotron">							
-							<p><a class="btn btn-primary btn-default" role="button">Learn more</a></p>
-						</div>
-					</div>
+					</div>								
+				</div>		
+				<div class="row">
 					<div id ="notice-view-panel" class="col-lg-4">
 						<div class="panel panel-warning">
 							<div class="panel-heading">공지</div>
 							<div class="panel-body">
-								<p><img src="${request.contextPath}/content/image.do?imageId=71"  	class="img-circle img-responsive"></p>
-
-<!-- Table -->
-        <table class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@fat</td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-            </tr>
-          </tbody>
-        </table>
-        								
+							
+								<div class="thumbnail">
+									<img src="${request.contextPath}/content/image.do?imageId=71" alt="...">
+									<div class="caption">
+									<h5><p class="text-warning">오픈소스 기반의 프레임워크 기술 컨설팅</p></h5>
+									<p>오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</p>
+									</div>
+								</div>
+								<br>
+								<div class="thumbnail">
+									<div class="caption">
+									<h5><p class="text-warning">쇼셜 네트워크 연결 기능 서비스 오픈</p></h5>
+									<p>트위터 지원</p>
+									</div>
+								</div>
+							
 							</div>
 						</div>
-					</div>					
-				</div>		
-				<div class="row">
-					<div id="facebook-panel" class="col-lg-8">
+					</div>											
+					<div id="facebook-panel" class="col-lg-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i> 뉴스
