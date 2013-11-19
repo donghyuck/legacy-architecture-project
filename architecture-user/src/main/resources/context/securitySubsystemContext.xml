@@ -37,8 +37,9 @@
         <security:intercept-url pattern="/accounts/*"          access="IS_AUTHENTICATED_ANONYMOUSLY" />    
         <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/content/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/social/get-*"        access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/**"                     access="ROLE_USER" />    	
+        <security:intercept-url pattern="/social/get-*"         access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/social/*-callback*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <security:intercept-url pattern="/**"                      access="ROLE_USER" />
         
         <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
