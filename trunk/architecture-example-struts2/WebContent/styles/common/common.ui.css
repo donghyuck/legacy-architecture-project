@@ -139,6 +139,13 @@ a.k-link:hover {
 	padding-top: 5px;	
 }
 
+.blank-top-50{
+	padding-top : 50px;
+}
+
+.blank-top-60 {
+	padding-top : 60px;
+}
 
 .blank-top-66 {
 	padding-top : 66px;
