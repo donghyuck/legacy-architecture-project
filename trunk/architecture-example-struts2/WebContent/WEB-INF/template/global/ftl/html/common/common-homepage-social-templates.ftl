@@ -1,3 +1,22 @@
+		<script type="text/x-kendo-tmpl" id="social-view-panel-template">
+		<div id="#: provider #-panel" class="panel panel-success">
+			<div class="panel-heading">
+				<i class="icon-#: provider #"></i> &nbsp; #: provider #
+				<div class="k-window-actions panel-header-actions">
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+				</div>							
+			</div>
+			<div class="panel-body">
+				<ul class="media-list">
+					<div id="#:provider#-streams">데이터가 없습니다..</div>
+				</ul>
+			</div>
+		</div>				
+		</script>
+
 		<script type="text/x-kendo-tmpl" id="facebook-homefeed-template">
 		#if (type != "STATUS") {#
 		<li class="media">
