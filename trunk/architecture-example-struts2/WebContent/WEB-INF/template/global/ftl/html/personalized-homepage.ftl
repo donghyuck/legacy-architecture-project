@@ -32,7 +32,7 @@
 					authenticate : function( e ){
 						currentUser = e.token;						
 					},
-					<#if CompanyUtils.isallowedSignIn(action.company) >
+					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  >
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
