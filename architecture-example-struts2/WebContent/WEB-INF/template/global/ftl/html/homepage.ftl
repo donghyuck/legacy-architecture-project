@@ -173,10 +173,14 @@
 		
 		-->
 		</script>		
-		<style scoped="scoped">		
+		<style scoped="scoped">
 		blockquote p {
 			font-size: 15px;
 		}
+		
+		.jumbotron {
+			background-color : #2eb3a6;
+		}		
 		</style>   	
 	</head>
 	<body id="doc">
@@ -187,7 +191,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<div class="blank-top-50" ></div>
-		<div id="main" class="jumbotron">							
+		<div class="jumbotron layout">							
 			<div class="container">
 				<p><a class="btn btn-primary btn-default" role="button">Learn more</a></p>
 			</div>
