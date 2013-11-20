@@ -193,7 +193,7 @@
 		<div class="blank-top-50" ></div>
 		<div class="jumbotron layout">							
 			<div class="container">
-				<p><a class="btn btn-primary btn-default" role="button">Learn more</a></p>
+				<p><a class="btn btn-success btn-default" role="button">Learn more</a></p>
 			</div>
 		</div>								 
 		<div class="container layout">	
