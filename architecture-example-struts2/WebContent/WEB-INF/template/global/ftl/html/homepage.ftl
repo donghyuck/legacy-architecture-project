@@ -204,7 +204,7 @@
 							<div class="panel-body">
 								<div class="list-group">
 									<a href="#" class="list-group-item">
-										<h4 class="list-group-item-heading">오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</h4>
+										<h5 class="list-group-item-heading">오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</h5>
 										<p class="list-group-item-text">
 											<img src="${request.contextPath}/content/image.do?imageId=71" class="img-rounded img-responsive">
 											오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.
