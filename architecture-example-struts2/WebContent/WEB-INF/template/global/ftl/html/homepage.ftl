@@ -202,36 +202,23 @@
 						<div class="panel panel-warning">
 							<div class="panel-heading">공지</div>
 							<div class="panel-body">
-<div class="list-group">
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">List group item heading</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">List group item heading</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-        <a href="#" class="list-group-item">
-          <h4 class="list-group-item-heading">List group item heading</h4>
-          <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-        </a>
-      </div>
-<br>							
-								<div class="thumbnail">
-									<img src="${request.contextPath}/content/image.do?imageId=71" alt="...">
-									<div class="caption">
-									<h5><p class="text-warning">오픈소스 기반의 프레임워크 기술 컨설팅</p></h5>
-									<p>오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</p>
-									</div>
+								<div class="list-group">
+									<a href="#" class="list-group-item">
+										<h4 class="list-group-item-heading">오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</h4>
+										<p class="list-group-item-text">
+											<img src="${request.contextPath}/content/image.do?imageId=71" class="img-thumbnail img-responsive">
+											오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.
+										</p>
+									</a>
+									<a href="#" class="list-group-item">
+										<h4 class="list-group-item-heading">List group item heading</h4>
+										<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+									</a>
+									<a href="#" class="list-group-item">
+										<h4 class="list-group-item-heading">List group item heading</h4>
+										<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
+									</a>
 								</div>
-								<br>
-								<div class="thumbnail">
-									<div class="caption">
-									<h5><p class="text-warning">쇼셜 네트워크 연결 기능 서비스 오픈</p></h5>
-									<p>트위터 지원</p>
-									</div>
-								</div>
-							
 							</div>
 						</div>
 					</div>											
