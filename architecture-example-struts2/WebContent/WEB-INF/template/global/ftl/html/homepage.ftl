@@ -202,7 +202,7 @@
 					</div>								
 				</div>		
 				<div class="row">
-					<div id ="notice-view-panel" class="col-lg-4">
+					<div id ="notice-view-panel" class="col-xs-4">
 						<div class="panel panel-warning">
 							<div class="panel-heading">공지</div>
 							<div class="panel-body">
@@ -226,7 +226,7 @@
 							</div>
 						</div>
 					</div>											
-					<div id="facebook-panel" class="col-lg-4">
+					<div id="facebook-panel" class="col-xs-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i> 뉴스
@@ -244,7 +244,7 @@
 							</div>							
 						</div>
 					</div>
-					<div id="twitter-panel" class="col-lg-4">
+					<div id="twitter-panel" class="col-xs-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i> 뉴스
