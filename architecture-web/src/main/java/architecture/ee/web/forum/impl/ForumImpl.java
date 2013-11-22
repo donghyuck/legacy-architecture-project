@@ -18,11 +18,11 @@ package architecture.ee.web.forum.impl;
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.DefaultModelObjectSupport;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.ee.web.forum.Category;
 import architecture.ee.web.forum.Forum;
 
-public class ForumImpl extends DefaultModelObjectSupport implements Forum {
+public class ForumImpl extends BaseModelObjectSupport implements Forum {
 
 	private Long forumId = -1L ;
 	
@@ -81,8 +81,8 @@ public class ForumImpl extends DefaultModelObjectSupport implements Forum {
 		return forumId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.FORUM;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey();
 	}
 
 	public int getCachedSize() {

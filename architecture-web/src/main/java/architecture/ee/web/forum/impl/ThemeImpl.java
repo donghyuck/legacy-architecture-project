@@ -18,10 +18,10 @@ package architecture.ee.web.forum.impl;
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.EntityModelObjectSupport;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.ee.web.theme.Theme;
 
-public class ThemeImpl extends EntityModelObjectSupport  implements Theme {
+public class ThemeImpl extends BaseModelObjectSupport  implements Theme {
 	
 	private Long themeId = -1L;
 	
@@ -70,8 +70,8 @@ public class ThemeImpl extends EntityModelObjectSupport  implements Theme {
 		return themeId;
 	}
 	
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.FORUM_THEME;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey();
 	}
 	
 	public int getCachedSize() {

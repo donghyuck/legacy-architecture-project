@@ -21,10 +21,10 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.SimpleModelObjectSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.attachment.Image;
 
-public class ImageImpl extends SimpleModelObjectSupport  implements Image {
+public class ImageImpl extends EntityModelObjectSupport  implements Image {
 
 	private String name;
 	private Long imageId;
@@ -41,8 +41,8 @@ public class ImageImpl extends SimpleModelObjectSupport  implements Image {
 		return imageId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.IMAGE;
+	public int getModelObjectType() {
+		return ModelObjectType.IMAGE.getKey();
 	}
 
 	public int getCachedSize() {

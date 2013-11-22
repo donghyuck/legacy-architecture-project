@@ -18,10 +18,10 @@ package architecture.ee.web.forum.impl;
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.EntityModelObjectSupport;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.ee.web.forum.Topic;
 
-public class TopicImpl extends EntityModelObjectSupport  implements Topic {
+public class TopicImpl extends BaseModelObjectSupport  implements Topic {
 	
 	private Long ForumId;
 	
@@ -37,8 +37,8 @@ public class TopicImpl extends EntityModelObjectSupport  implements Topic {
 		return topidId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.FORUM_TOPIC;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey();
 	}
 
 	public int getCachedSize() {

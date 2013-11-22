@@ -61,11 +61,11 @@ public class DefaultContentManager extends AbstractObjectManager implements Cont
 	}
 
 	public List<Content> getContent(Company company) {
-		return getContent(company.getModelObjectType().getKey(), company.getCompanyId());
+		return getContent(company.getModelObjectType(), company.getCompanyId());
 	}
 
 	public List<Content> getContent(User user) {
-		return getContent(user.getModelObjectType().getKey(), user.getCompanyId());
+		return getContent(user.getModelObjectType(), user.getCompanyId());
 	}
 
 	public List<Content> getContent(int objectType, long objectId) {

@@ -17,11 +17,11 @@ package architecture.ee.web.content;
 
 import java.util.List;
 
-import architecture.common.model.PropertyModelObject;
+import architecture.common.model.EntityModelObject;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 
-public interface Content extends PropertyModelObject {
+public interface Content extends EntityModelObject {
 
 	public long getContentId();
 	

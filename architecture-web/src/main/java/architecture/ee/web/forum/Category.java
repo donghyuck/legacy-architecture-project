@@ -15,8 +15,8 @@
  */
 package architecture.ee.web.forum;
 
-import architecture.common.model.NameAndPropertyModel;
+import architecture.common.model.BaseModelObject;
 
-public interface Category extends NameAndPropertyModel {
+public interface Category extends BaseModelObject {
 
 }

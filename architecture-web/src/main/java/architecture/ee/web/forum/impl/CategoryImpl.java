@@ -31,8 +31,8 @@ public class CategoryImpl extends BaseModelObjectSupport implements Category {
 		return categoryId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.FORUM_CATEGORY;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey();
 	}
 
 	public int getCachedSize() {

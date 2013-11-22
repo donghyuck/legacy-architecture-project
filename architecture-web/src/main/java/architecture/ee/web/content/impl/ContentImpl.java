@@ -20,12 +20,12 @@ import java.util.List;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.PropertyModelSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.content.Content;
 
-public class ContentImpl extends PropertyModelSupport implements Content{
+public class ContentImpl extends EntityModelObjectSupport implements Content{
 
 	private long contentId;
 	
@@ -192,8 +192,8 @@ public class ContentImpl extends PropertyModelSupport implements Content{
 		return contentId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.CONTENT ;
+	public int getModelObjectType() {
+		return ModelObjectType.CONTENT.getKey() ;
 	}
 	
 	public int getCachedSize() {

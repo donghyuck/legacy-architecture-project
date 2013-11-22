@@ -34,7 +34,7 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.content.Content;
 import architecture.ee.web.content.impl.ContentImpl;
 import architecture.ee.web.navigator.Menu;
-import architecture.ee.web.navigator.MenuImpl;
+import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao {
 
