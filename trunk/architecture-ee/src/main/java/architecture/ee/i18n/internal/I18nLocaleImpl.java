@@ -122,8 +122,8 @@ public class I18nLocaleImpl extends DateModelObjectSupport implements I18nLocale
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
 		setLocaleId(((Long)primaryKeyObj).longValue());
 	}
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.I18N_LOCALE;
+	public int getModelObjectType() {
+		return ModelObjectType.I18N_LOCALE.getKey();
 	}
 	
 	public int getCachedSize() {
