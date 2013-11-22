@@ -17,9 +17,9 @@ package architecture.ee.web.social;
 
 import java.util.Map;
 
-import architecture.common.model.PropertyModelObject;
+import architecture.common.model.EntityModelObject;
 
-public interface SocialAccount extends PropertyModelObject {
+public interface SocialAccount extends EntityModelObject {
 
 	
 	public enum SocialMedia {

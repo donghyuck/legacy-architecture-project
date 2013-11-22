@@ -19,11 +19,11 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.PropertyModelSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.SocialServiceProvider;
 
-public class SocialAccountImpl extends PropertyModelSupport implements SocialAccount {
+public class SocialAccountImpl extends EntityModelObjectSupport implements SocialAccount {
 
 	private Long socialAccountId = -1L;
 	private Integer objectType;
@@ -155,8 +155,8 @@ public class SocialAccountImpl extends PropertyModelSupport implements SocialAcc
 		this.isSignedIn = isSignedIn;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.SOCAIL_ACCOUNT;
+	public int getModelObjectType() {
+		return ModelObjectType.SOCAIL_ACCOUNT.getKey();
 	}
 	
 
