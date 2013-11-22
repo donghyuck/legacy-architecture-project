@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>architecture.user</groupId>
 	<artifactId>architecture-user</artifactId>
-	<version>1.0.4.RELEASE</version>
+	<version>1.0.5.RELEASE</version>
 	<name>APPLICATION USER ARCHITECTURE</name>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
@@ -148,7 +148,7 @@
 		<dependency>
 			<groupId>architecture.ee</groupId>
 			<artifactId>architecture-ee</artifactId>
-			<version>1.0.3.RELEASE</version>
+			<version>1.0.5.RELEASE</version>
 		</dependency>
 	</dependencies>
 </project>
