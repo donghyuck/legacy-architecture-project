@@ -1,9 +1,9 @@
 package architecture.user;
 
-import architecture.common.model.SimpleModelObject;
+import architecture.common.model.BaseModelObject;
 
 
-public interface Role extends  SimpleModelObject  {
+public interface Role extends  BaseModelObject  {
 
 	/**
 	 * @return

@@ -1,9 +1,13 @@
 package architecture.user.permission;
 
-import architecture.common.model.SimpleModelObject;
+import architecture.common.model.DateModelObject;
 
-public interface PermissionMask extends SimpleModelObject {
+public interface PermissionMask extends DateModelObject {
 
+	public String getName();
+
+	public void setName(String name);
+	
 	/**
 	 * @return
 	 */

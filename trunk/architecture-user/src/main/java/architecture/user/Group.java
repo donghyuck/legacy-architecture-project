@@ -17,12 +17,12 @@ package architecture.user;
 
 import java.util.List;
 
-import architecture.common.model.PropertyModelObject;
+import architecture.common.model.BaseModelObject;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 
-public interface Group extends PropertyModelObject {
+public interface Group extends BaseModelObject {
 
     /**
 	 * @return

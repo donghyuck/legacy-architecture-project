@@ -16,15 +16,13 @@
 package architecture.user.impl;
 
 import java.io.Serializable;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.DefaultModelObjectSupport;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 
-public class CompanyImpl  extends DefaultModelObjectSupport implements Company {
+public class CompanyImpl  extends BaseModelObjectSupport implements Company {
 
 	private Long companyId;
 	private String displayName;
@@ -60,8 +58,8 @@ public class CompanyImpl  extends DefaultModelObjectSupport implements Company {
 		return companyId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.COMPANY;
+	public int getModelObjectType() {
+		return ModelObjectType.COMPANY.getKey();
 	}
 
 	
