@@ -3,9 +3,9 @@ package architecture.ee.web.attachment;
 import java.io.IOException;
 import java.io.InputStream;
 
-import architecture.common.model.NameAndPropertyModel;
+import architecture.common.model.EntityModelObject;
 
-public interface Attachment extends NameAndPropertyModel {
+public interface Attachment extends EntityModelObject {
 
 	public long getAttachmentId();
 

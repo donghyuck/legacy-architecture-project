@@ -18,11 +18,11 @@ package architecture.ee.web.community;
 import java.util.Date;
 import java.util.List;
 
-import architecture.common.model.PropertyModelObject;
+import architecture.common.model.NoNamedEntityModelObject;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 
-public interface Announce extends PropertyModelObject {
+public interface Announce extends NoNamedEntityModelObject {
 
 	/**
 	 * @return announceId

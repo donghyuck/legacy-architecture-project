@@ -6,10 +6,10 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.BaseModelObjectSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.attachment.Attachment;
 
-public class AttachmentImpl extends BaseModelObjectSupport implements Attachment {
+public class AttachmentImpl extends EntityModelObjectSupport implements Attachment {
 
     private long attachmentId = -1L;
 	
@@ -96,8 +96,8 @@ public class AttachmentImpl extends BaseModelObjectSupport implements Attachment
 		return 0;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.ATTACHMENT;
+	public int getModelObjectType() {
+		return ModelObjectType.ATTACHMENT.getKey();
 	}
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;

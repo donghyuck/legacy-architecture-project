@@ -21,12 +21,12 @@ import java.util.Date;
 import java.util.List;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.PropertyModelSupport;
+import architecture.common.model.support.NoNamedEntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.community.Announce;
 
-public class AnnounceImpl extends PropertyModelSupport implements Announce {
+public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Announce {
 
 	private Long announceId;
 	private int objectType ;
@@ -280,8 +280,8 @@ public class AnnounceImpl extends PropertyModelSupport implements Announce {
 		return announceId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.ANNOUNCE;
+	public int getModelObjectType() {
+		return ModelObjectType.ANNOUNCE.getKey();
 	}
 
 	public int getCachedSize() {
