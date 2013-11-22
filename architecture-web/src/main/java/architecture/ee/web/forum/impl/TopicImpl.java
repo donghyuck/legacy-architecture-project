@@ -18,10 +18,10 @@ package architecture.ee.web.forum.impl;
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.DateModelObjectSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.forum.Topic;
 
-public class TopicImpl extends DateModelObjectSupport  implements Topic {
+public class TopicImpl extends EntityModelObjectSupport  implements Topic {
 	
 	private Long ForumId;
 	

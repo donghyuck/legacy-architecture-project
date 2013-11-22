@@ -3,7 +3,61 @@
     <name>ARCHITECTURE_WEB</name>
     <version>2.0</version>
     <description>Queries for WEB COMPONENTS</description>
-    <version></version>
+    
+    <!--  ANNOUNCE-->	
+	<sql-query name="SELECT_ANNOUNCE_BY_ID" description="SELECT_ANNOUNCE_BY_ID"><![CDATA[
+	SELECT 
+		ANNOUNCE_ID,
+		OBJECT_TYPE,
+		OBJECT_ID, 		
+		USER_ID,	 		
+		SUBJECT,
+		BODY,
+		START_DATE,
+		END_DATE,
+		STATUS,
+		CREATION_DATE,
+		MODIFIED_DATE
+	FROM V2_ANNOUNCE
+	WHERE ANNOUNCE_ID = ?
+	]]></sql-query>
+	<sql-query name="UPDATE_ANNOUNCE" description="UPDATE_ANNOUNCE"><![CDATA[
+ 	UPDATE V2_ANNOUNCE SET 		
+		SUBJECT = ?,
+		BODY = ?,
+	  	START_DATE = ?,
+	  	END_DATE = ?,
+		MODIFIED_DATE = ?
+	WHERE ANNOUNCE_ID = ?	
+	]]></sql-query>
+	<sql-query name="INSERT_ANNOUNCE" description="INSERT_ANNOUNCE"><![CDATA[
+    INSERT INTO V2_ANNOUNCE (
+		ANNOUNCE_ID,
+		OBJECT_TYPE,
+		OBJECT_ID, 		
+		USER_ID,	 		
+		SUBJECT,
+		BODY,
+		START_DATE,
+		END_DATE,
+		STATUS,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,?,?,?,?,? )    	
+	]]></sql-query>
+	<sql-query name="DELETE_ANNOUNCE" description="DELETE_ANNOUNCE"><![CDATA[
+	DELETE FROM V2_ANNOUNCE WHERE ANNOUNCE_ID = ?
+	]]></sql-query>			
+	<sql-query name="SELECT_ANNOUNCE_IDS_BY_USER_ID" description="SELECT_ANNOUNCE_IDS_BY_USER_ID"><![CDATA[
+	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE WHERE USER_ID = ?
+	]]></sql-query>		
+	<sql-query name="SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>		
+	<sql-query name="SELECT_ALL_ANNOUNCE_IDS" description="SELECT_ALL_ANNOUNCE_IDS"><![CDATA[
+	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE
+	]]></sql-query>					
+	
     <!--  MENU -->	 
     <sql-query name="SELECT_MENU_BY_NAME" description="이름으로 메뉴 조회"><![CDATA[    
 	SELECT
@@ -41,8 +95,7 @@
 	  	LOCATION = ?,
 	  	MENU_ENABLED = ?,
 		MODIFIED_DATE = ?
-	WHERE MENU_ID = ?
-	    
+	WHERE MENU_ID = ?	    
     ]]></sql-query>        
     <sql-query name="CREATE_MENU" description="메뉴 생성"><![CDATA[    
     INSERT INTO V2_MENU (

@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 package architecture.ee.web.navigator;
-import architecture.common.model.BaseModelObject;
+import architecture.common.model.NameAndPropertyModel;
 
-public interface Menu extends BaseModelObject {
+public interface Menu extends NameAndPropertyModel {
 	
 	public abstract long getMenuId();
 	public String getLocation();

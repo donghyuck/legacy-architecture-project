@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ehcache.Element;
-import architecture.common.model.AbstractObjectManager;
+import architecture.common.model.factory.AbstractObjectManager;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
