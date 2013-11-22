@@ -17,15 +17,31 @@ package architecture.common.model.support;
 
 import java.util.Date;
 
-import architecture.common.model.DateModelObject;
+import architecture.common.model.EntityModelObject;
 
 
-public abstract class DateModelObjectSupport implements DateModelObject {
+public abstract class EntityModelObjectSupport extends PropertyModelSupport  implements EntityModelObject {
 	
 	private Date creationDate = null;
 	
 	private Date modifiedDate = null;
 
+	private String name;
+
+	/**
+	 * @return name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name 설정할 name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	public Date getCreationDate() {
 		return creationDate;
 	}
