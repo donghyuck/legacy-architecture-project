@@ -73,8 +73,8 @@ public class SimpleUserToken extends BaseModelObjectSupport  implements AuthToke
 		this.properties = properties;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.USER ;
+	public int getModelObjectType() {
+		return ModelObjectType.USER.getKey() ;
 	}
 	
 	public String getUsername() {
