@@ -22,6 +22,7 @@ public enum ModelObjectType {
 	USER(2, "USER"), 
 	GROUP(3, "GROUP"), 
 	ROLE(4, "ROLE"),
+	I18N_TEXT (12, "I18N_TEXT"),
 	
 	ANONYMOUS (13, "ANONYMOUS"),
 	SYSTEM (14, "SYSTEM"),

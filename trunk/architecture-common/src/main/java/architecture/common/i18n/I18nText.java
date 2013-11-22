@@ -15,10 +15,14 @@
  */
 package architecture.common.i18n;
 
-import architecture.common.model.SimpleModelObject;
+import architecture.common.model.DateModelObject;
 
-public interface I18nText  extends  SimpleModelObject {
+public interface I18nText  extends  DateModelObject {
 
+	public abstract String getName();
+	
+	public abstract void setName(String name);
+	
 	/**
 	 * @return textId
 	 */
