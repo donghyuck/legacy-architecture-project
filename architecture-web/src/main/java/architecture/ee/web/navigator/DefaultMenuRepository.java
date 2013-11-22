@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.ee.web.navigator.dao.MenuDao;
+import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class DefaultMenuRepository extends AbstractMenuRepository {
 	
