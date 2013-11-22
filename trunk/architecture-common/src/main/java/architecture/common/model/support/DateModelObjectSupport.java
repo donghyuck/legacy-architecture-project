@@ -19,7 +19,7 @@ import java.util.Date;
 
 import architecture.common.model.DateModelObject;
 
-public abstract class DataModelObjectSupport implements DateModelObject {
+public abstract class DateModelObjectSupport implements DateModelObject {
 
 	private Date creationDate = null;
 	

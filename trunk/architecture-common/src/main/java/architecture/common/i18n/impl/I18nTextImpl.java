@@ -20,10 +20,10 @@ import java.io.Serializable;
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.DataModelObjectSupport;
+import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.I18nTextUtils;
 
-public class I18nTextImpl extends DataModelObjectSupport  implements I18nText {
+public class I18nTextImpl extends DateModelObjectSupport  implements I18nText {
 	
 	private long textId = -1L ;
 	private String name;
