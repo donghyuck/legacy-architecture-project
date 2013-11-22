@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import architecture.common.model.PropertyModelObject;
 import architecture.common.util.StringUtils;
 
-public abstract class PropertyModelSupport extends DateModelObjectSupport implements PropertyModelObject {
+public abstract class PropertyModelSupport implements PropertyModelObject {
 	
 	private Map<String, String> properties = null;
 		

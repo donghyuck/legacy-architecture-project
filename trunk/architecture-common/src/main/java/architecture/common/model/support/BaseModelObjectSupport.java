@@ -17,22 +17,22 @@ package architecture.common.model.support;
 
 import architecture.common.model.BaseModelObject;
 
-public abstract class BaseModelObjectSupport extends PropertyModelSupport implements BaseModelObject {
+public abstract class BaseModelObjectSupport extends EntityModelObjectSupport implements BaseModelObject {
 	
-	private String name;
+	private String description = null;
 
 	/**
-	 * @return name
+	 * @return description
 	 */
-	public String getName() {
-		return name;
+	public String getDescription() {
+		return description;
 	}
 
 	/**
-	 * @param name 설정할 name
+	 * @param description 설정할 description
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
