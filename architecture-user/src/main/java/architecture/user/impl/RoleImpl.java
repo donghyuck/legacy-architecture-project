@@ -19,11 +19,11 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.SimpleModelObjectSupport;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.user.Role;
 
 
-public class RoleImpl extends SimpleModelObjectSupport  implements Role  {
+public class RoleImpl extends BaseModelObjectSupport  implements Role  {
 
 	private Long roleId;
 	
@@ -35,8 +35,8 @@ public class RoleImpl extends SimpleModelObjectSupport  implements Role  {
 		return getRoleId();
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.ROLE;
+	public int getModelObjectType() {
+		return ModelObjectType.ROLE.getKey();
 	}
 
 	public int getCachedSize() {

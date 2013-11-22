@@ -3,13 +3,11 @@ package architecture.user.impl;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.PropertyModelSupport;
+import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
@@ -17,7 +15,7 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.Group;
 
 
-public class GroupImpl extends PropertyModelSupport implements Group {
+public class GroupImpl extends BaseModelObjectSupport implements Group {
 
 	private Company company;
 	
@@ -226,8 +224,8 @@ public class GroupImpl extends PropertyModelSupport implements Group {
 		setGroupId(((Long)primaryKeyObj).longValue());
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.GROUP;
+	public int getModelObjectType() {
+		return ModelObjectType.GROUP.getKey();
 	}
 
 	public int compareTo(Group o) {		

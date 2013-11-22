@@ -19,10 +19,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.SimpleModelObjectSupport;
+import architecture.common.model.support.DateModelObjectSupport;
 import architecture.user.permission.PermissionMask;
 
-public class PermissionMaskImpl extends SimpleModelObjectSupport implements PermissionMask {
+public class PermissionMaskImpl extends DateModelObjectSupport implements PermissionMask {
 
 	public String getName() {
 		// TODO 자동 생성된 메소드 스텁
@@ -39,9 +39,9 @@ public class PermissionMaskImpl extends SimpleModelObjectSupport implements Perm
 		return null;
 	}
 
-	public ModelObjectType getModelObjectType() {
+	public int getModelObjectType() {
 		// TODO 자동 생성된 메소드 스텁
-		return null;
+		return ModelObjectType.UNKNOWN.getKey();
 	}
 
 	public Date getCreationDate() {
