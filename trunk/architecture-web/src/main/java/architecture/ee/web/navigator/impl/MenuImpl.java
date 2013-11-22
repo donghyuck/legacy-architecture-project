@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.navigator;
+package architecture.ee.web.navigator.impl;
 
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.BaseModelObjectSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
+import architecture.ee.web.navigator.Menu;
 
-public class MenuImpl  extends BaseModelObjectSupport implements Menu {
+public class MenuImpl  extends EntityModelObjectSupport implements Menu {
 	
 	private long menuId = -1L;
 	private String location ;
@@ -45,8 +46,8 @@ public class MenuImpl  extends BaseModelObjectSupport implements Menu {
 		return menuId;
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.MENU;
+	public int getModelObjectType() {
+		return ModelObjectType.MENU.getKey();
 	}
 
 	public String getLocation() {

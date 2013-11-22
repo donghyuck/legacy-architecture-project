@@ -31,8 +31,8 @@ import org.springframework.jdbc.core.support.SqlLobValue;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.navigator.Menu;
-import architecture.ee.web.navigator.MenuImpl;
 import architecture.ee.web.navigator.dao.MenuDao;
+import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class JdbcMenuDao extends ExtendedJdbcDaoSupport implements MenuDao {
 	
