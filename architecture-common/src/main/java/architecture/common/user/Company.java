@@ -16,10 +16,9 @@
  */
 package architecture.common.user;
 
-import architecture.common.model.DefaultModelObject;
+import architecture.common.model.BaseModelObject;
 
-public interface Company extends DefaultModelObject {
-	
+public interface Company extends BaseModelObject {
 	
 	/**
 	 * @return companyId
@@ -40,6 +39,4 @@ public interface Company extends DefaultModelObject {
 	
 	public void setDomainName(String domainName);
 	
-
-		
 }

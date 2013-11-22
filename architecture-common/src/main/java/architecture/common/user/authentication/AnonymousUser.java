@@ -58,8 +58,8 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 		return getUserId();
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.ANONYMOUS ;
+	public int getModelObjectType() {
+		return ModelObjectType.ANONYMOUS.getKey() ;
 	}
 	
 	/**
