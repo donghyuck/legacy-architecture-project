@@ -3,10 +3,10 @@ package architecture.user.profile;
 import java.util.List;
 import java.util.Map;
 
-import architecture.common.model.SimpleModelObject;
+import architecture.common.model.ModelObject;
 
 
-public interface ProfileField extends SimpleModelObject {
+public interface ProfileField extends ModelObject {
 	
 
 	/**

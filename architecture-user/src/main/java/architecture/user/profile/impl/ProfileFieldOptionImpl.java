@@ -3,11 +3,10 @@ package architecture.user.profile.impl;
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.SimpleModelObjectSupport;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldOption;
 
-public class ProfileFieldOptionImpl extends SimpleModelObjectSupport  implements ProfileFieldOption{
+public class ProfileFieldOptionImpl   implements ProfileFieldOption{
 
     private long fieldID;
     /**
@@ -91,18 +90,14 @@ public class ProfileFieldOptionImpl extends SimpleModelObjectSupport  implements
 		setFieldId(((Long)primaryKeyObj).longValue());
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.PROFILE_FIELD_OPTION ;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey() ;
 	}
 
 	public int compareTo(ProfileField o) {
 		return 0;
 	}
 
-	@Override
-	public Object clone() {
-		return null;
-	}
 
 	public int getCachedSize() {
 		// TODO Auto-generated method stub

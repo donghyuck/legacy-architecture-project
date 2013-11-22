@@ -8,13 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.SimpleModelObjectSupport;
 import architecture.common.util.I18nTextUtils;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldOption;
 import architecture.user.profile.ProfileFieldUtil;
 
-public class ProfileFieldImpl extends SimpleModelObjectSupport implements ProfileField {
+public class ProfileFieldImpl  implements ProfileField {
 
 	private static final String SINGLE_VALUE_KEY = "v";
     /**
@@ -476,8 +475,8 @@ public class ProfileFieldImpl extends SimpleModelObjectSupport implements Profil
 		this.setFieldId(((Long)primaryKeyObj).longValue());		
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.PROFILE_FIELD ;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey() ;
 	}
 
 	public int compareTo(ProfileField o) {
