@@ -9,13 +9,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.SimpleModelObjectSupport;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldValue;
 import architecture.user.profile.TypeConverter;
 import architecture.user.profile.TypeConverter.ConversionException;
 
-public class ProfileFieldValueImpl extends SimpleModelObjectSupport implements ProfileFieldValue{
+public class ProfileFieldValueImpl  implements ProfileFieldValue{
 
 	private Log log = LogFactory.getLog(getClass());
 	
@@ -314,17 +313,12 @@ public class ProfileFieldValueImpl extends SimpleModelObjectSupport implements P
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {	
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.PROFILE_FIELD_VALUE ;
+	public int getModelObjectType() {
+		return ModelObjectType.UNKNOWN.getKey() ;
 	}
 
 	public int compareTo(ProfileFieldValue o) {
 		return 0;
-	}
-
-	@Override
-	public Object clone() {
-		return null;
 	}
 
 	public Date getCreationDate() {
