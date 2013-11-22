@@ -7,7 +7,7 @@
 		<version>1.0.0.RELEASE</version>
 	</parent>
 	<artifactId>architecture-web-struts2</artifactId>
-	<version>1.0.4.RELEASE</version>
+	<version>1.0.5.RELEASE</version>
 	<name>APPLICATION WEB STRUTS2 SUPPORT</name>
 	<description>웹 어플리케이션 개발을 위한 스트럿츠 2 지원 패키지</description>
 	<build>
@@ -129,18 +129,18 @@
 		<dependency>
 			<groupId>architecture.web</groupId>
 			<artifactId>architecture-web</artifactId>
-			<version>1.0.4.RELEASE</version>
+			<version>1.0.5.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>architecture.user</groupId>
 			<artifactId>architecture-user</artifactId>
-			<version>1.0.4.RELEASE</version>
+			<version>1.0.5.RELEASE</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-core</artifactId>
-			<version>2.3.4.1</version>
+			<version>2.3.15.3</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-lang3</artifactId>
@@ -151,7 +151,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-json-plugin</artifactId>
-			<version>2.3.4.1</version>
+			<version>2.3.15.3</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>commons-lang3</artifactId>
@@ -167,7 +167,7 @@
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-spring-plugin</artifactId>
-			<version>2.3.4.1</version>
+			<version>2.3.15.3</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>spring-web</artifactId>
@@ -195,10 +195,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.struts</groupId>
 			<artifactId>struts2-sitemesh-plugin</artifactId>
-			<version>2.3.4.1</version>
+			<version>2.3.15.3</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>struts2-core</artifactId>
@@ -206,6 +207,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		
 	</dependencies>
 
 	<distributionManagement>
