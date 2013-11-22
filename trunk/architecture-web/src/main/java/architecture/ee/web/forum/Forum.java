@@ -15,9 +15,9 @@
  */
 package architecture.ee.web.forum;
 
-import architecture.common.model.DefaultModelObject;
+import architecture.common.model.DescModelObject;
 
-public interface Forum extends DefaultModelObject {
+public interface Forum extends DescModelObject {
 
 
 }

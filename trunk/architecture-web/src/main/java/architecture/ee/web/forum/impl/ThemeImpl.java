@@ -18,10 +18,10 @@ package architecture.ee.web.forum.impl;
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
-import architecture.common.model.support.DateModelObjectSupport;
+import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.theme.Theme;
 
-public class ThemeImpl extends DateModelObjectSupport  implements Theme {
+public class ThemeImpl extends EntityModelObjectSupport  implements Theme {
 	
 	private Long themeId = -1L;
 	
