@@ -35,8 +35,8 @@ public class SystemUser extends BaseModelObjectSupport implements AuthToken, Use
 		return getUserId();
 	}
 
-	public ModelObjectType getModelObjectType() {
-		return ModelObjectType.SYSTEM ;
+	public int getModelObjectType() {
+		return ModelObjectType.SYSTEM.getKey() ;
 	}
 	
 	public String getUsername() {
@@ -179,37 +179,30 @@ public class SystemUser extends BaseModelObjectSupport implements AuthToken, Use
 	}
 
 	public long getCompanyId() {
-		// TODO 자동 생성된 메소드 스텁
 		return 0;
 	}
 
 	public Company getCompany() {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 
 	public boolean isProfileSupported() {
-		// TODO 자동 생성된 메소드 스텁
 		return false;
 	}
 
 	public boolean isProfileEditSupported() {
-		// TODO 자동 생성된 메소드 스텁
 		return false;
 	}
 
 	public Map<String, Object> getProfile() {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 
 	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 
 	public String getProfileFieldValueString(String fieldName) {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 
