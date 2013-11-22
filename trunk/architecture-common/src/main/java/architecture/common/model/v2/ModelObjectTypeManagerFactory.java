@@ -15,8 +15,6 @@
  */
 package architecture.common.model.v2;
 
-import architecture.common.jdbc.datasource.DataSourceFactory;
-import architecture.common.jdbc.datasource.DataSourceFactory.Implementation;
 import architecture.common.util.ImplFactory;
 
 

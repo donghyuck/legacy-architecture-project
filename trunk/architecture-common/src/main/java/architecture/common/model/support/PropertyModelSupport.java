@@ -24,9 +24,7 @@ import architecture.common.util.StringUtils;
 public abstract class PropertyModelSupport extends DateModelObjectSupport implements PropertyModelObject {
 	
 	private Map<String, String> properties = null;
-	
-
-	
+		
 	/**
 	 * @param properties
 	 */
