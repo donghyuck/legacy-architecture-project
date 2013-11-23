@@ -11,7 +11,6 @@
 	<name>APPLICATION COMMON ARCHITECTURE</name>
 	<packaging>jar</packaging>
 	<version>1.0.5.RELEASE</version>
-
 	<description>공통 아키텍처 콤포넌트 모듈</description>
 	<contributors>
 		<contributor>
