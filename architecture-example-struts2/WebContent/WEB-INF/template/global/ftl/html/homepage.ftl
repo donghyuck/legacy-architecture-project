@@ -178,9 +178,10 @@
 			font-size: 15px;
 		}
 		
-		.jumbotron {
-			background-color : #2eb3a6;
-		}		
+		#.jumbotron {
+		#	background-color : #2eb3a6;
+		#}		
+		
 		</style>   	
 	</head>
 	<body id="doc">
