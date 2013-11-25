@@ -3,9 +3,7 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">
-
 		<action name="list-announce" class="architecture.ee.web.struts2.action.ajax.AnnounceAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
@@ -14,8 +12,7 @@
 				targetAnnounces.*
 				</param>
 			</result>
-		</action>
-		
+		</action>		
 		<action name="get-announce" class="architecture.ee.web.struts2.action.ajax.AnnounceAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
