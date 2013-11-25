@@ -30,10 +30,10 @@
 		<li class="media">
 		    <a class="pull-left" href="\\#">
 		    	<img class="media-object img-circle" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지">
-		    	<span class="label label-primary">#: type #</span>
+		    	
 		    </a>
 		    <div class="media-body">
-		      <h5 class="media-heading">#: from.name # (#: ui.util.prettyDate(updatedTime) #)</h5>
+		      <h5 class="media-heading">#: from.name # (#: ui.util.prettyDate(updatedTime) #) <span class="label label-primary">#: type #</span></h5>
 		     	
 		     	#if ( typeof( message ) == 'string'  ) { #
 		     	<br>
