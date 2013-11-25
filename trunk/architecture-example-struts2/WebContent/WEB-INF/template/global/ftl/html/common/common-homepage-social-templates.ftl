@@ -21,7 +21,7 @@
 		#if (type != "STATUS") {#
 		<li class="media">
 		    <a class="pull-left" href="\\#">
-		    	<img class="media-object" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지">
+		    	<img class="media-object img-circle" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지">
 		    </a>
 		    <div class="media-body">
 		      <h5 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h5>
@@ -66,7 +66,7 @@
 				# var comment = comments[i] ; #							
 					<div class="media">
 						<a class="pull-left" href="\\#">
-							<img class="media-object" src="http://graph.facebook.com/#=comment.from.id#/picture" alt="프로파일 이미지" class="img-circle">
+							<img class="media-object img-circle" src="http://graph.facebook.com/#=comment.from.id#/picture" alt="프로파일 이미지" class="img-circle">
 						</a>	
 						<div class="media-body">
 							 <h6 class="media-heading">#: comment.from.name # &nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-thumbs-up"></span>#:comment.likesCount#</h6>
@@ -81,7 +81,7 @@
 		<script type="text/x-kendo-tmpl" id="twitter-timeline-template">
 		<li class="media">
 		    <a class="pull-left" href="\\#">
-		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object">
+		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object img-circle">
 		    </a>
 		    <div class="media-body">
 		      <h5 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h5>
