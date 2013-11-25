@@ -19,6 +19,7 @@ import java.util.List;
 
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceManager;
+import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class AnnounceAction extends FrameworkActionSupport {
@@ -29,6 +30,33 @@ public class AnnounceAction extends FrameworkActionSupport {
 	
 	private AnnounceManager announceManager ;
 	
+	private Long announceId ;
+	
+	
+	/**
+	 * 
+	 */
+	public AnnounceAction() {
+
+	}
+
+
+	/**
+	 * @return announceId
+	 */
+	public Long getAnnounceId() {
+		return announceId;
+	}
+
+
+	/**
+	 * @param announceId 설정할 announceId
+	 */
+	public void setAnnounceId(Long announceId) {
+		this.announceId = announceId;
+	}
+
+
 	/**
 	 * @return objectId
 	 */
@@ -67,6 +95,10 @@ public class AnnounceAction extends FrameworkActionSupport {
 			this.objectId = getCompany().getCompanyId();
 		}
 		return announceManager.getAnnounces(objectType, objectId);
+	}
+	
+	public Announce getTargetAnnounce() throws AnnounceNotFoundException{
+		return announceManager.getAnnounce(announceId);
 	}
 	
 	/**
