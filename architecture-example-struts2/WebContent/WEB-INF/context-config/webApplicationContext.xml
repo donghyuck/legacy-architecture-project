@@ -27,7 +27,7 @@
 	<import resource="classpath:context/securitySubsystemContext.xml"/>	
 	<import resource="classpath:context/struts2SubsystemContext.xml"/>
 	<import resource="classpath:context/webSubsystemContext.xml"/>
-	
+	<import resource="classpath:context/communtiySubsystemContext.xml"/>
 	
 	
 </beans>
