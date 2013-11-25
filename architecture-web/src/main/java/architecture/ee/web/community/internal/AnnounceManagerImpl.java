@@ -44,6 +44,20 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 	private Cache announceCache ;
 	
 	/**
+	 * @return announceCache
+	 */
+	public Cache getAnnounceCache() {
+		return announceCache;
+	}
+
+	/**
+	 * @param announceCache 설정할 announceCache
+	 */
+	public void setAnnounceCache(Cache announceCache) {
+		this.announceCache = announceCache;
+	}
+
+	/**
 	 * @return eventPublisher
 	 */
 	public EventPublisher getEventPublisher() {
@@ -105,7 +119,12 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 
 	public Announce getAnnounce(long announceId) throws AnnounceNotFoundException  {
 		
-		Announce announce = (Announce) announceCache.get(announceId);		
+		
+		Announce announce = null;
+		if( announceCache.isKeyInCache(announceId) ){
+			announce = (Announce) announceCache.get(announceId).getValue();	
+		}
+		
 		if( announce == null ){
 			announce = announceDao.load(announceId);
 			updateCache(announce);
@@ -120,6 +139,7 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 	public List<Announce> getAnnounces(int objectType, long objectId) {
 		
 		List<Long> announceIds = announceDao.getAnnounceIds(objectType, objectId);
+		
 		List<Announce> list = new ArrayList<Announce>(announceIds.size());
 		Date now = new Date();
 		long startDate = now.getTime();
