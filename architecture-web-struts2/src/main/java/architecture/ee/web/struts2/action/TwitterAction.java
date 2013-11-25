@@ -15,8 +15,11 @@
  */
 package architecture.ee.web.struts2.action;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import net.sf.ehcache.Element;
 
 import org.scribe.model.Token;
 
@@ -25,13 +28,15 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.SocialAccountManager;
+import architecture.ee.web.social.facebook.FacebookProfile;
+import architecture.ee.web.social.facebook.Post;
 import architecture.ee.web.social.twitter.Tweet;
 import architecture.ee.web.social.twitter.TwitterProfile;
 import architecture.ee.web.social.twitter.TwitterServiceProvider;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.SocialActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class TwitterAction extends FrameworkActionSupport  {
+public class TwitterAction extends SocialActionSupport  {
 
 	private Long socialAccountId = -1L; 
 	
@@ -42,6 +47,7 @@ public class TwitterAction extends FrameworkActionSupport  {
 	private String oauth_token;
 	
 	private String oauth_verifier;
+	
 		
 	
 	/**
@@ -103,13 +109,43 @@ public class TwitterAction extends FrameworkActionSupport  {
 	public TwitterProfile getTwitterProfile () throws UnAuthorizedException {
 		return getServiceProvider().authenticate();
 	}
+	
+	private String getTimelineCacheKey(String type){		
+		StringBuilder sb = new StringBuilder();
+		sb.append( getTargetSocialAccount().getSocialAccountId() );
+		sb.append( "-");
+		sb.append( type );
+		return sb.toString();
+	}
 
-	public List<Tweet> getUserTimeline () {
-		return getServiceProvider().getUserTimeline();
+	public List<Tweet> getUserTimeline () {		
+		List<Tweet> list = Collections.EMPTY_LIST ;	
+		if( isCacheEnabled()){
+			String key = getTimelineCacheKey("usertimeline");			
+			if( getSocialStreamsCache().get(key) == null){
+				list = getServiceProvider().getUserTimeline();
+				getSocialStreamsCache().put(new Element(key, list));
+			}
+			list = (List<Tweet>)getSocialStreamsCache().get( key ).getValue();
+		}else{
+			list = getServiceProvider().getUserTimeline();
+		}
+		return list ;
 	}
 
 	public List<Tweet> getHomeTimeline () {
-		return getServiceProvider().getHomeTimeline();
+		List<Tweet> list = Collections.EMPTY_LIST ;	
+		if( isCacheEnabled()){
+			String key = getTimelineCacheKey("hometimeline");			
+			if( getSocialStreamsCache().get(key) == null){
+				list = getServiceProvider().getHomeTimeline();
+				getSocialStreamsCache().put(new Element(key, list));
+			}
+			list = (List<Tweet>)getSocialStreamsCache().get( key ).getValue();
+		}else{
+			list = getServiceProvider().getHomeTimeline();
+		}
+		return list ;
 	}
 	
 	public String getAuthorizationUrl () {
@@ -154,8 +190,6 @@ public class TwitterAction extends FrameworkActionSupport  {
 		return success();
 	}
 	
-	
-	
 	public String update() throws Exception{
 		try {
 			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);			
@@ -168,15 +202,12 @@ public class TwitterAction extends FrameworkActionSupport  {
 			}
 			
 			TwitterServiceProvider provider = getServiceProvider();
-			Token token = provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);
-			
+			Token token = provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);			
 			SocialAccount account = getTargetSocialAccount();
 			account.setAccessSecret(token.getSecret());			
 			account.setAccessToken(token.getToken());
-			socialAccountManager.saveSocialAccount(account);
-			
-			this.targetSocialAccount = null;
-			
+			socialAccountManager.saveSocialAccount(account);			
+			this.targetSocialAccount = null;			
 			return success();
 		} catch (Throwable e) {
 			e.printStackTrace();

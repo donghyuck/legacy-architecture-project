@@ -15,19 +15,26 @@
  */
 package architecture.ee.web.struts2.action;
 
+import java.util.Collections;
 import java.util.List;
 
+import net.sf.ehcache.Element;
+
+import architecture.common.user.Company;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.SocialAccountManager;
 import architecture.ee.web.social.facebook.FacebookProfile;
 import architecture.ee.web.social.facebook.FacebookServiceProvider;
 import architecture.ee.web.social.facebook.Post;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.SocialActionSupport;
 
-public class FacebookAction  extends FrameworkActionSupport {
+public class FacebookAction  extends SocialActionSupport {
 	
-	private int offset = 0, limit = 25 ;
+	private int offset = 0;
+			
+	private int limit = 25 ;
 	
 	private Long socialAccountId = -1L; 
 	
@@ -46,6 +53,12 @@ public class FacebookAction  extends FrameworkActionSupport {
 	 */
 	public Long getSocialAccountId() {
 		return socialAccountId;
+	}
+	/**
+	 * @param socialAccountId 설정할 socialAccountId
+	 */
+	public void setSocialAccountId(Long socialAccountId) {
+		this.socialAccountId = socialAccountId;
 	}
 
 	/**
@@ -90,12 +103,6 @@ public class FacebookAction  extends FrameworkActionSupport {
 		this.userId = userId;
 	}
 
-	/**
-	 * @param socialAccountId 설정할 socialAccountId
-	 */
-	public void setSocialAccountId(Long socialAccountId) {
-		this.socialAccountId = socialAccountId;
-	}
 
 	/**
 	 * @return socialAccountManager
@@ -139,12 +146,60 @@ public class FacebookAction  extends FrameworkActionSupport {
 		this.token = token;
 	}
 	
-	public FacebookProfile getFacebookProfile(){
-		return getServiceProvider ().getUserProfile(userId);
+	private String getFacebookProfileCacheKey(String userId ){		
+		StringBuilder sb = new StringBuilder();
+		sb.append( getTargetSocialAccount().getSocialAccountId() );
+		sb.append( "-");
+		sb.append( "profile" );
+		sb.append( "-");
+		sb.append(  userId );
+		return sb.toString();
+	}
+	
+	private String getHomeFeedCacheKey(){		
+		StringBuilder sb = new StringBuilder();
+		sb.append( getTargetSocialAccount().getSocialAccountId() );
+		sb.append( "-");
+		sb.append( "homefeed" );
+		sb.append( "-");
+		sb.append(  offset  );
+		sb.append( "-");
+		sb.append(  limit  );		
+		return sb.toString();
+	}
+	
+	public FacebookProfile getFacebookProfile(){		
+		FacebookProfile profile = null;
+		if( isCacheEnabled()){
+			String key = getFacebookProfileCacheKey(userId);			
+			if( getSocialStreamsCache().get(key) == null){
+				profile =  getServiceProvider().getUserProfile(userId);
+				getSocialStreamsCache().put(new Element(key, profile));
+			}
+			profile = (FacebookProfile)getSocialStreamsCache().get( key ).getValue();
+		}else{
+			profile = getServiceProvider().getUserProfile(userId);
+		}
+		return profile ;
 	}
 	
 	public List<Post> getHomeFeed() {
-		return getServiceProvider().getHomeFeed(offset, limit);		
+		List<Post> list = Collections.EMPTY_LIST ;		
+		if( isCacheEnabled()){
+			String key = getHomeFeedCacheKey();
+			if( getSocialStreamsCache().get(key) == null){
+				try {
+					list = getServiceProvider().getHomeFeed(offset, limit);
+					getSocialStreamsCache().put(new Element(key, list));
+				} catch (Exception e) {
+					log.warn(e);
+				}
+			}
+			list =  (List<Post>) getSocialStreamsCache().get( key ).getValue();
+		}else{
+			list = getServiceProvider().getHomeFeed(offset, limit);			
+		}		
+		return list ;
 	}
 	
 	public SocialAccount getTargetSocialAccount() {
@@ -164,6 +219,17 @@ public class FacebookAction  extends FrameworkActionSupport {
 	}
 	
 	public String execute() throws Exception {
+		if( socialAccountId < 0 ){
+			Company company = getCompany();
+			List <SocialAccount> list = socialAccountManager.getSocialAccounts(company);
+			for( SocialAccount account : list ){
+				if( "facebook".toLowerCase().equals(account.getServiceProviderName()) ){				
+					socialAccountId = account.getSocialAccountId();
+					targetSocialAccount = account;
+					break;
+				}
+			}		
+		}
 		return success();
 	}
 	
