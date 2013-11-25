@@ -10,4 +10,5 @@
 	<include file="struts-framework-system.xml"/>	 
 	<include file="struts-framework-content.xml"/>	 
 	<include file="struts-framework-social.xml"/>	 
+	<include file="struts-framework-community.xml"/>	 
 </struts>
