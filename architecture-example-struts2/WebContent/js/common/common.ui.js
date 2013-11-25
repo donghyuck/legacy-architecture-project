@@ -4,6 +4,7 @@
 (function($, undefined) {
 	var Widget = kendo.ui.Widget;
 	var ui = window.ui = window.ui || {};
+	
 	ui.util = {};
 	
 	ui.util.prettyDate = function(time){
