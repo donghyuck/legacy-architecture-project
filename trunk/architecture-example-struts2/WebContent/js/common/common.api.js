@@ -27,9 +27,6 @@
 			error:options.error || handleKendoAjaxError,
 			dataType : "json"
 		});	
-	};	
-	
-		
-
+	};			
 	
 })(jQuery);
