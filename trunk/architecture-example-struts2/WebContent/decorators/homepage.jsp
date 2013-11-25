@@ -51,6 +51,102 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	 	z-index: 1001;
 	 	color: #000;
 	}
+	
+/*Block Headline*/
+		.headline {
+			display: block;
+			margin: 10px 0 25px 0;
+			border-bottom: 1px dotted #e4e9f0;
+		}
+		.headline h2, 
+		.headline h3, 
+		.headline h4 {
+			color: #585f69;
+			margin: 0 0 -2px 0;
+			padding-bottom: 5px;
+			display: inline-block;
+			border-bottom: 2px solid #3498db;
+		}
+		.headline h2 {
+			font-size: 18px;
+		}
+		
+		.headline-md h2 {
+			font-size: 18px;
+		}
+		
+		.headline-md {
+			margin-bottom: 15px;
+		}
+		
+		/*Footer*/
+		.footer {
+			color: #dadada;
+			margin-top: 40px;
+			padding: 20px 0 30px;
+			background: #F5F5F5;
+		}
+		
+		.footer.margin-top-0 {
+			margin-top: 0;
+		}
+		
+		.footer h1, 
+		.footer h2, 
+		.footer h3, 
+		.footer h4, 
+		.footer h5 {
+			text-shadow: none;
+			font-weight: normal !important; 
+		} 
+		
+		.footer p,
+		.footer a {
+			font-size: 14px;
+		} 
+		.footer p {
+			color: #333333;
+		} 
+		
+		.footer address {
+			color: #333333;
+		}
+		
+		.footer a {
+			#color: #333333;
+		}
+		.footer a:hover {
+			#color: #a8f85f;
+		    -webkit-transition: all 0.4s ease-in-out;
+		    -moz-transition: all 0.4s ease-in-out;
+		    -o-transition: all 0.4s ease-in-out;
+		    transition: all 0.4s ease-in-out;
+		}	
+		
+		/*Copyright*/
+		.copyright {
+			font-size: 12px;
+			padding: 11px 0 7px;
+			background: #ffffff;
+			border-top: solid 1px #e7e7e7;	
+		}
+		
+		.copyright p {
+			color: #333333;
+		}
+		
+		.copyright p.copyright-space {
+			margin-top: 12px;
+		}
+		
+		.copyright a {
+			margin: 0 5px;
+			color: #333333;
+		}
+		.copyright a:hover {
+			color: #428bca;
+		}	
+			
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
