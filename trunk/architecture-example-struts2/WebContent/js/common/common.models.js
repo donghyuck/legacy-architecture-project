@@ -1,3 +1,16 @@
+var Announce = kendo.data.Model.define( {
+    id: "announceId", // the identifier of the model
+    fields: {
+    	announceId: { type: "number", editable: false, defaultValue: -1  },
+    	subject: { type: "string", editable: true },
+    	body: { type: "string", editable: true },
+    	startDate: { type: "date",  editable: true},
+    	endDate: { type: "date" ,  editable: true},
+        modifiedDate: { type: "date"},
+        creationDate: { type: "date" }         
+    }
+});
+
 var OAuthToken = kendo.data.Model.define( {
     id: "socialAccountId", // the identifier of the model
     fields: {
