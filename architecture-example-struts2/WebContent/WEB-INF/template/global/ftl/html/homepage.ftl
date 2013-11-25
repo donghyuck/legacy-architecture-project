@@ -72,7 +72,7 @@
 				});				
 				
 				// News : announces 
-				var announceTemplate = kendo.template($("#twitter-timeline-template").html());
+				var announceTemplate = kendo.template($("#announcement-template").html());
 				var announceDataSource = new kendo.data.DataSource({
 					transport: {
 						read: {
@@ -81,23 +81,47 @@
 							url : '${request.contextPath}/community/list-announce.do?output=json'
 						} 
 					},
-					/**
 					requestStart: function() {
-						kendo.ui.progress($("#company-twitter-timeline"), true);
+						kendo.ui.progress($("#announce-panel"), true);
 					},
 					requestEnd: function() {
-						kendo.ui.progress($("#company-twitter-timeline"), false);
-					},**/
+						kendo.ui.progress($("#announce-panel"), false);
+					},
 					change: function() {
-						//$("#company-twitter-timeline").html(kendo.render(twitterTemplate, this.view()));
+						$("#announce-panel table tbody").html(kendo.render(announceTemplate, this.view()));
 					},
 					error:handleKendoAjaxError,
 					schema: {
-						data : "targetAnnounces"
+						data : "targetAnnounces",
+						model : Announce
 					}
 				});	
+								
 				announceDataSource.read();
-
+				
+				$("#announce-panel .panel-header-actions a").each(function( index ) {
+						var panel_header_action = $(this);						
+						if( panel_header_action.text() == "Minimize" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#announce-panel .panel-body").toggleClass("hide");								
+								var panel_header_action_icon = panel_header_action.find('span');
+								if( panel_header_action_icon.hasClass("k-i-minimize") ){
+									panel_header_action.find('span').removeClass("k-i-minimize");
+									panel_header_action.find('span').addClass("k-i-maximize");
+								}else{
+									panel_header_action.find('span').removeClass("k-i-maximize");
+									panel_header_action.find('span').addClass("k-i-minimize");
+								}								
+							});
+						} else if (panel_header_action.text() == "Refresh" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								announceDataSource.read();
+							});
+						}
+				} );
+					
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">					
@@ -239,24 +263,27 @@
 					</div>								
 				</div>		
 				<div class="row">
-					<div id ="notice-view-panel" class="col-lg-4" >
+					<div id ="announce-panel" class="col-lg-4" >
 						<div class="panel panel-warning">
-							<div class="panel-heading">공지</div>
+							<div class="panel-heading">공지
+								<div class="k-window-actions panel-header-actions">
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+								</div>
+							</div>
 							<div class="panel-body">
 								<p>공지 내용입니다...</p>								
-								<table class="table table-hover">
+								<table class="table table-striped table-hover">
 									<thead>
 										<th></th>
 										<th>제목</th>
 									</thead>
-									<tbody>
+									<tbody>										
 										<tr>
-											<th>1</th>
-											<td>오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</td>
-										</tr>
-										<tr>
-											<th>1</th>
-											<td>오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</td>
+											<th></th>
+											<td></td>
 										</tr>										
 									</tbody>
 								</table>
@@ -375,8 +402,7 @@
 					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>	
 				</p>	
 				# } #  	
-		</script>		
-		<#include "/html/common/common-homepage-social-templates.ftl" >		
+		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
