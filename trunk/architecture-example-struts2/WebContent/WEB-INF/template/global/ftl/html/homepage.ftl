@@ -71,6 +71,33 @@
 					}
 				});				
 				
+				// News : announces 
+				var announceTemplate = kendo.template($("#twitter-timeline-template").html());
+				var announceDataSource = new kendo.data.DataSource({
+					transport: {
+						read: {
+							type : 'POST',
+							type: "json",
+							url : '${request.contextPath}/community/list-announce.do?output=json'
+						} 
+					},
+					/**
+					requestStart: function() {
+						kendo.ui.progress($("#company-twitter-timeline"), true);
+					},
+					requestEnd: function() {
+						kendo.ui.progress($("#company-twitter-timeline"), false);
+					},**/
+					change: function() {
+						//$("#company-twitter-timeline").html(kendo.render(twitterTemplate, this.view()));
+					},
+					error:handleKendoAjaxError,
+					schema: {
+						data : "targetAnnounces"
+					}
+				});	
+				announceDataSource.read();
+
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">					
