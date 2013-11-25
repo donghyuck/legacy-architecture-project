@@ -233,7 +233,7 @@
 				// create dataSource
 				if ( socialServiceProviders[ provider ].dataSource == null ){
 					var socialStreamsElementId = provider + "-streams" ;
-					alert ( "id:" + socialStreamsElementId );
+					//alert ( "id:" + socialStreamsElementId );
 					socialServiceProviders[ provider ].dataSource = new kendo.data.DataSource({
 						transport: {
 							read: {
@@ -414,7 +414,7 @@
 		</div>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div class="container layout blank-top-50">							
+			<div class="container layout blank-top-60">							
 				<div class="row">					
 					<div class="col-lg-8">						
 						<div id="notice-view-panel" class="panel panel-warning">
