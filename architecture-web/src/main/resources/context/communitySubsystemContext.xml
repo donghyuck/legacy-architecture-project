@@ -18,6 +18,7 @@
 	<bean id="announceCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="announceCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />					
 	
 	<bean id="announceDao" class="architecture.ee.web.community.dao.internal.JdbcAnnounceDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	
 	<bean id="announceManager" class="architecture.ee.web.community.internal.AnnounceManagerImpl" depends-on="announceDao" p:eventPublisher-ref="eventPublisher" p:announceDao-ref="announceDao" p:announceCache-ref="announceCache" />		
 	
 </beans>
