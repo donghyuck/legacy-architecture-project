@@ -180,23 +180,32 @@
 		
 		#.jumbotron {
 		#	background-color : #2eb3a6;
-		#}		
+		#}	
 		
+			
 		</style>   	
 	</head>
-	<body id="doc">
+	<body>
 		<!-- START HEADER -->
 		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<#include "/html/common/common-homepage-wide-menu.ftl" >	
 		</div>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-		<div class="blank-top-50" ></div>
-		<div class="jumbotron layout">							
-			<div class="container">
-				<p><a class="btn btn-success btn-default" role="button">Learn more</a></p>
-			</div>
-		</div>								 
+		<div class="blank-top-60" ></div>						
+		
+		<div class="container layout">
+				<div calss="row">
+					<div class="col-lg-8">
+						<img src="${request.contextPath}/content/image.do?imageId=81" class="img-rounded img-responsive">
+					</div>
+					<div class="col-lg-4">
+						<div class="blank-top-10" ></div>		
+						<p><a class="btn btn-success btn-default" role="button">Learn more</a></p>
+					</div>
+				</div>					
+		</div>
+		<div class="blank-top-10" ></div>								 
 		<div class="container layout">	
 				<div class="row">
 					<div class="col-lg-8">
@@ -207,27 +216,27 @@
 						<div class="panel panel-warning">
 							<div class="panel-heading">공지</div>
 							<div class="panel-body">
-								<div class="list-group">
-									<a href="#" class="list-group-item">
-										<h5 class="list-group-item-heading">오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</h5>
-										<p class="list-group-item-text">
-											<img src="${request.contextPath}/content/image.do?imageId=71" class="img-rounded img-responsive">
-											오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.
-										</p>
-									</a>
-									<a href="#" class="list-group-item">
-										<h4 class="list-group-item-heading">List group item heading</h4>
-										<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-									</a>
-									<a href="#" class="list-group-item">
-										<h4 class="list-group-item-heading">List group item heading</h4>
-										<p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-									</a>
-								</div>
+								<p>공지 내용입니다...</p>								
+								<table class="table table-hover">
+									<thead>
+										<th></th>
+										<th>제목</th>
+									</thead>
+									<tbody>
+										<tr>
+											<th>1</th>
+											<td>오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</td>
+										</tr>
+										<tr>
+											<th>1</th>
+											<td>오픈소스 기반의 프레임워크 기술 컨설팅을 제공합니다.</td>
+										</tr>										
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</div>											
-					<div id="facebook-panel" class="col-lg-4">
+					<div id="facebook-panel" class="col-md-6 col-lg-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i> 뉴스
@@ -245,7 +254,7 @@
 							</div>							
 						</div>
 					</div>
-					<div id="twitter-panel" class="col-lg-4">
+					<div id="twitter-panel" class="col-md-6 col-lg-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i> 뉴스
@@ -270,13 +279,13 @@
 			</div>		
 
 		<div id="attach-window"></div>					
-		<!-- END MAIN CONTENT -->			
+		<!-- END MAIN CONTENT -->	
+			
  		<!-- START FOOTER -->
-		<footer> 
-		</footer>
+		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		
 		<!-- START TEMPLATE -->
-
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
