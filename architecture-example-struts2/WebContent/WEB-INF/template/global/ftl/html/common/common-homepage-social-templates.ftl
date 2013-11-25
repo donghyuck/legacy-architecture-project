@@ -24,8 +24,8 @@
 		    	<img class="media-object img-circle" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지">
 		    </a>
 		    <div class="media-body">
-		      <h5 class="media-heading">#: from.name # (#: kendo.toString(updatedTime, "D") #)</h5>
-		     	<span class="label label-primary">#: type #</span>		     	
+		      <h5 class="media-heading">#: from.name # (#: ui.util.prettyDate(updatedTime) #)</h5>
+		     	<span class="label label-primary">#: type #</span>
 		     	#if ( typeof( message ) == 'string'  ) { #
 		     	<br>
 		     	#: message #
@@ -84,7 +84,7 @@
 		      <img src="#: user.profileImageUrl #" alt="#: user.name#" class="media-object img-circle">
 		    </a>
 		    <div class="media-body">
-		      <h5 class="media-heading">#: user.name # (#: kendo.toString(createdAt, "D") #)</h5>
+		      <h5 class="media-heading">#: user.name # (#: ui.util.prettyDate(createdAt) #)</h5>
 		     	#: text #      	
 							# for (var i = 0; i < entities.urls.length ; i++) { #
 							# var url = entities.urls[i] ; #		
