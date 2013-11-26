@@ -225,26 +225,29 @@
 		}]);	
 		
 		function viewAnnounce (announceId){		
-			var item = $("#announce-panel").data( "dataSource").get(announceId);
-			
-			var template = kendo.template($('#announcement-view-template').html());
+			var item = $("#announce-panel").data( "dataSource").get(announceId);			
+			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
 				template(item)
 			);
-						
-			$("#announce-view .announce-body").html( item.body );			
+			kendo.bind($("#announce-view"), item );		
+			
+			if( !$("#announce-view-editor").data("kendoEditor") ){				
+				$("#announce-view-editor").kendoEditor({
+					tools: [
+						"createLink",
+						"unlink",
+						"insertImage"
+						]
+				});		
+			}
 			
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
 				if( announce_button.hasClass( 'custom-announce-modify') ){
 					announce_button.click(function (e) { 
-						e.preventDefault();
-						kendo.bind($("#announce-edit-window"), item );						
-						//$('#announce-body-editor').kendoEditor();								
-						$('#announce-edit-window').on('shown', function() {
-							$(document).off('focusin.modal');
-						});					
-						$('#announce-edit-window').modal("show");					
+						e.preventDefault();					
+																		
 					} );
 				}else if ( announce_button.hasClass('custom-announce-delete') ){
 					announce_button.click(function (e) { 
@@ -253,9 +256,9 @@
 							// delete ...	
 						}
 					} );
-				}
-			
+				}			
 			} );
+			
 			
 		}
 		
@@ -270,7 +273,42 @@
 			position : relative;
 			max-width : 500px;
 		}
-			
+
+ .k-editor-inline {
+                    margin: 0;
+                    padding: 21px 21px 11px;
+                    border-width: 0;
+                    box-shadow: none;
+                    background: none;
+                }
+
+                .k-editor-inline.k-state-active {
+                    border-width: 1px;
+                    padding: 20px 20px 10px;
+                    background: none;
+                }
+
+.k-table {
+                    border-spacing: 0;
+                    border-collapse: collapse;
+                    border: 1px solid #999;
+                    width: 100%;
+                }
+
+                .k-table td, .k-table th {
+                    border: 1px solid #999;
+                    padding: 3px;
+                }			
+                
+.k-widget,
+.k-widget *,
+.k-animation-container *
+{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
 		</style>   	
 	</head>
 	<body>
@@ -311,12 +349,12 @@
 								</div>
 							</div>
 							<div class="panel-body">					
-								<div  id="announce-view" ></div>		
-								<p></p>
-								<table class="table table-striped table-hover">
+								<div  id="announce-view" class="k-content" ></div>		
+								<p></p>								
+								<table class="table table-hover">
 									<thead>
-										<th></th>
-										<th></th>
+										<th><span class="glyphicon glyphicon-bullhorn"></span></th>
+										<th>목록</th>
 									</thead>
 									<tbody>										
 										<tr>
@@ -324,7 +362,7 @@
 											<td></td>
 										</tr>										
 									</tbody>
-								</table>
+								</table>								
 							</div>
 						</div>
 					</div>											
@@ -372,30 +410,6 @@
 		<div id="attach-window"></div>					
 		<!-- END MAIN CONTENT -->	
 
-<div class="modal fade" id="announce-edit-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog layout">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title"><span data-bind="text: subject"></span></h4>
-      </div>
-      <div class="modal-body">
-      
-      <div class="k-content"> 
-<textarea id="announce-body-editor" data-role="editor"
-			data-bind="value: body"></textarea>
-      </div>
-      
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">저장</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-			
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
