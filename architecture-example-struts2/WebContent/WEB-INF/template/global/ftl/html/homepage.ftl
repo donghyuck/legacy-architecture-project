@@ -88,6 +88,9 @@
 						},
 						change: function() {
 							$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
+							if( this.data().length > 0 ){
+								viewAnnounce (this.at(0).announceId) ;
+							}
 						},
 						error:handleKendoAjaxError,
 						schema: {
@@ -115,12 +118,10 @@
 						} else if (panel_header_action.text() == "Refresh" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								//announceDataSource.read();
 								$("#announce-panel").data( "dataSource").read();
 							});
 						}
-				} );
-				
+				} );				
 				$("#announce-panel").data( "dataSource").read();
 					
 				// Start : Company Social Content 
@@ -229,6 +230,7 @@
 			$("#announce-view").html(
 				template(item)
 			);
+			$("#announce-view .announce-body").html( item.body );
 		}
 		
 		-->
@@ -288,7 +290,7 @@
 								<table class="table table-striped table-hover">
 									<thead>
 										<th></th>
-										<th>제목</th>
+										<th></th>
 									</thead>
 									<tbody>										
 										<tr>
