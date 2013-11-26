@@ -254,25 +254,11 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 		this.user = user;
 	}
 
-	/**
-	 * @return attachements
-	 */
-	public List<Attachment> getAttachements() {
-		return attachments;
-	}
-
-	/**
-	 * @param attachements 설정할 attachements
-	 */
-	public void setAttachements(List<Attachment> attachments) {
-		this.attachments = attachments;
-	}
-
-	public void deleteAttachements(Attachment attachment) {
+	public void deleteAttachments(Attachment attachment) {
 		this.attachments.remove(attachment);
 	}
 	
-	public int attachementCount(){
+	public int attachmentCount(){
 		return attachments.size(); 
 	}
 	

@@ -124,19 +124,9 @@ public interface Announce extends NoNamedEntityModelObject {
 	 * @param user 설정할 user
 	 */
 	public void setUser(User user);
-
-	/**
-	 * @return attachements
-	 */
-	public List<Attachment> getAttachements();
-
-	/**
-	 * @param attachements 설정할 attachements
-	 */
-	public void setAttachements(List<Attachment> attachments);
-
-	public void deleteAttachements(Attachment attachment);
 	
-	public int attachementCount();
+	public void deleteAttachments(Attachment attachment);
+	
+	public int attachmentCount();
 	
 }

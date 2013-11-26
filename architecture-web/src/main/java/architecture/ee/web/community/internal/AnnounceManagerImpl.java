@@ -31,6 +31,8 @@ import org.springframework.transaction.annotation.Transactional;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.user.User;
+import architecture.common.user.UserManager;
+import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceManager;
 import architecture.ee.web.community.AnnounceNotFoundException;
@@ -42,7 +44,24 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 	
 	private AnnounceDao announceDao ;
 	private Cache announceCache ;
+	private UserManager userManager;
 	
+	
+	
+	/**
+	 * @return userManager
+	 */
+	public UserManager getUserManager() {
+		return userManager;
+	}
+
+	/**
+	 * @param userManager 설정할 userManager
+	 */
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+
 	/**
 	 * @return announceCache
 	 */
@@ -127,6 +146,14 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 		
 		if( announce == null ){
 			announce = announceDao.load(announceId);
+			
+			User user;
+			try {
+				user = userManager.getUser(announce.getUserId());
+				announce.setUser( user  );
+			} catch (UserNotFoundException e) {
+
+			}
 			updateCache(announce);
 		}		
 		return announce;
