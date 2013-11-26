@@ -19,6 +19,6 @@
 	
 	<bean id="announceDao" class="architecture.ee.web.community.dao.internal.JdbcAnnounceDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	
-	<bean id="announceManager" class="architecture.ee.web.community.internal.AnnounceManagerImpl" depends-on="announceDao" p:eventPublisher-ref="eventPublisher" p:announceDao-ref="announceDao" p:announceCache-ref="announceCache" />		
+	<bean id="announceManager" class="architecture.ee.web.community.internal.AnnounceManagerImpl" depends-on="announceDao"  p:userManager-ref="userManager" p:eventPublisher-ref="eventPublisher" p:announceDao-ref="announceDao" p:announceCache-ref="announceCache" />		
 	
 </beans>
