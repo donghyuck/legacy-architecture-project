@@ -6,11 +6,31 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-view-template">
-<h4><strong>#:subject# </strong><small>Secondary text</small></h4>
-<p class="text-primary">공지 기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</p>
-
-<p> #:body#</p>
-
+<h4><strong>#:subject# </strong><br><small>(기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #)</small></h4>
+<p>
+	#if ( user.properties.imageId != null ) {# 
+	<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
+	# } else {  #	
+	<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
+	# } #
+	# if( user.nameVisible ){#
+	#: user.name #
+	# } else { #
+	#: user.username #
+	# } # 
+	# if( user.emailVisible ){#
+	(#: user.email #)
+	# } #	
+</p>	
+<p class="announce-body" ></p>
+ # if ( user.userId == ${action.user.userId } ) {#  
+ <div class="pull-right">
+	 <div class="btn-group">
+	  <button type="button" class="btn btn-default">수정</button>
+	  <button type="button" class="btn btn-danger">삭제</button>
+	</div>
+</div>
+# } #
 </script>
 
 
@@ -41,8 +61,10 @@
 		    	
 		    </a>
 		    <div class="media-body">
-		      <h5 class="media-heading">#: from.name # (#: ui.util.prettyDate(updatedTime) #) <span class="label label-primary">#: type #</span></h5>
-		     	
+		      <h5 class="media-heading">
+		      <span class="label label-primary">#: type #</span><br><br>
+		      #: from.name #  (#: ui.util.prettyDate(updatedTime) #) 
+		      </h5>		     	
 		     	#if ( typeof( message ) == 'string'  ) { #
 		     	<br>
 		     	#: message #
@@ -186,7 +208,7 @@
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/><span class="k-icon k-i-arrow-s"></span>
 		# } else { # 
-			<img src="http://placehold.it/100x150&amp;text=[No Photo]"  width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
+			<img src="${request.contextPath}/images/common/anonymous.png"  width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
 		# } #	
 		</a>
 		<ul class="dropdown-menu">
