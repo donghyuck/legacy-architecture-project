@@ -45,6 +45,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 			announce.setAnnounceId(rs.getLong("ANNOUNCE_ID"));
 			announce.setObjectType(rs.getInt("OBJECT_TYPE"));
 			announce.setObjectId(rs.getLong("OBJECT_ID"));
+			announce.setUserId(rs.getLong("USER_ID"));
 			announce.setSubject(rs.getString("SUBJECT"));
 			announce.setBody(rs.getString("BODY"));
 			announce.setStartDate(rs.getDate("START_DATE"));
