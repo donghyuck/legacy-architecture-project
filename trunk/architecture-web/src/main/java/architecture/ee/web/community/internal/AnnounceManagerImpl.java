@@ -172,18 +172,18 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 		long startDate = now.getTime();
 		long endDate = now.getTime();
 		
+		log.debug( announceIds);
+		
 		for( Long announceId : announceIds){
 			try {
 				Announce announce = getAnnounce(announceId);
-				if( announce.getEndDate() == null){
-					
-					if( announce.getStartDate().getTime() <= startDate )
+				if( announce.getEndDate() == null){					
+					if( announce.getStartDate().getTime() <= startDate ){
 						list.add(announce);
-					
+					}
 				}else if (announce.getEndDate().getTime() >= endDate && announce.getStartDate().getTime() <= startDate ){
 					list.add(announce);
-				}
-				
+				}				
 			} catch (AnnounceNotFoundException e) {
 				log.warn(e);
 			}
