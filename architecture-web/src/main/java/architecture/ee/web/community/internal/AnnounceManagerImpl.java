@@ -140,7 +140,7 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 		
 		
 		Announce announce = null;
-		if( announceCache.isKeyInCache(announceId) ){
+		if( announceCache.get(announceId)!=null ){
 			announce = (Announce) announceCache.get(announceId).getValue();	
 		}
 		
