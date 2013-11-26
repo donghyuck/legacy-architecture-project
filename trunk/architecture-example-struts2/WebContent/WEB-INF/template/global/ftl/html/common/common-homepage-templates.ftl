@@ -1,8 +1,16 @@
 <script type="text/x-kendo-tmpl" id="announcement-template">
-			<tr class="announce-item" onclick="alert(#: announceId#);">
+			<tr class="announce-item" onclick="viewAnnounce(#: announceId#);">
 				<th>#: announceId#</th>
 				<td>#: subject#</td>
 			</tr>
+</script>
+
+<script type="text/x-kendo-tmpl" id="announcement-view-template">
+<h4><strong>#:subject# </strong><small>Secondary text</small></h4>
+<p class="text-primary">공지 기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</p>
+
+<p> #:body#</p>
+
 </script>
 
 

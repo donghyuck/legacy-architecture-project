@@ -14,7 +14,6 @@
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',			
-			'${request.contextPath}/js/common/holder.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
@@ -71,34 +70,33 @@
 					}
 				});				
 				
-				// News : announces 
-				var announceTemplate = kendo.template($("#announcement-template").html());
-				var announceDataSource = new kendo.data.DataSource({
-					transport: {
-						read: {
-							type : 'POST',
-							type: "json",
-							url : '${request.contextPath}/community/list-announce.do?output=json'
-						} 
-					},
-					requestStart: function() {
-						kendo.ui.progress($("#announce-panel"), true);
-					},
-					requestEnd: function() {
-						kendo.ui.progress($("#announce-panel"), false);
-					},
-					change: function() {
-						$("#announce-panel table tbody").html(kendo.render(announceTemplate, this.view()));
-					},
-					error:handleKendoAjaxError,
-					schema: {
-						data : "targetAnnounces",
-						model : Announce
-					}
-				});	
+				// Feed : Announces 
+				$("#announce-panel").data( "dataSource", 
+	 				new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								type: "json",
+								url : '${request.contextPath}/community/list-announce.do?output=json'
+							} 
+						},
+						requestStart: function() {
+							kendo.ui.progress($("#announce-panel"), true);
+						},
+						requestEnd: function() {
+							kendo.ui.progress($("#announce-panel"), false);
+						},
+						change: function() {
+							$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
+						},
+						error:handleKendoAjaxError,
+						schema: {
+							data : "targetAnnounces",
+							model : Announce
+						}
+					})
+				);								
 								
-				announceDataSource.read();
-				
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);						
 						if( panel_header_action.text() == "Minimize" ){
@@ -117,10 +115,13 @@
 						} else if (panel_header_action.text() == "Refresh" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								announceDataSource.read();
+								//announceDataSource.read();
+								$("#announce-panel").data( "dataSource").read();
 							});
 						}
 				} );
+				
+				$("#announce-panel").data( "dataSource").read();
 					
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
@@ -222,17 +223,25 @@
 			}
 		}]);	
 		
+		function viewAnnounce (announceId){		
+			var item = $("#announce-panel").data( "dataSource").get(announceId);
+			var template = kendo.template($('#announcement-view-template').html());
+			$("#announce-view").html(
+				template(item)
+			);
+		}
+		
 		-->
 		</script>		
 		<style scoped="scoped">
 		blockquote p {
 			font-size: 15px;
 		}
-		
-		#.jumbotron {
-		#	background-color : #2eb3a6;
-		#}	
-		
+
+		#announce-view .popover {
+			position : relative;
+			max-width : 500px;
+		}
 			
 		</style>   	
 	</head>
@@ -264,8 +273,8 @@
 				</div>		
 				<div class="row">
 					<div id ="announce-panel" class="col-lg-4" >
-						<div class="panel panel-warning">
-							<div class="panel-heading">공지
+						<div class="panel panel-danger">
+							<div class="panel-heading"><strong>공지</strong>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -273,8 +282,9 @@
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 								</div>
 							</div>
-							<div class="panel-body">
-								<p>공지 내용입니다...</p>								
+							<div class="panel-body">					
+								<div  id="announce-view" ></div>		
+								<p></p>
 								<table class="table table-striped table-hover">
 									<thead>
 										<th></th>
@@ -293,7 +303,7 @@
 					<div id="facebook-panel" class="col-md-6 col-lg-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<i class="icon-facebook"></i> 뉴스
+								<i class="icon-facebook"></i><strong>뉴스</strong>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -311,13 +321,12 @@
 					<div id="twitter-panel" class="col-md-6 col-lg-4">
 						<div class="panel panel-info">
 							<div class="panel-heading">
-								<i class="icon-twitter"></i> 뉴스
+								<i class="icon-twitter"></i><strong>뉴스</strong>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>	
-									<!--
-																	
+									<!--																	
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 									-->
 								</div>							
@@ -338,71 +347,7 @@
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
-		
 		<!-- START TEMPLATE -->
-		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
-			<div class="attach">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="attach-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>		
-		<script id="attachment-preview-template" type="text/x-kendo-template">	
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
-				<p class="blank-top-5">
-						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>					
-				</p>				
-			# } else { #		
-				<div class="k-grid k-widget" style="width:100%;">
-					<div style="padding-right: 17px;" class="k-grid-header">
-						<div class="k-grid-header-wrap">
-							<table cellSpacing="0">
-								<thead>
-									<tr>
-										<th class="k-header">속성</th>
-										<th class="k-header">값</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div>
-					<div style="height: 199px;" class="k-grid-content">
-						<table style="height: auto;" class="system-details" cellSpacing="0">
-							<tbody>
-								<tr>
-									<td>파일</td>
-									<td>#= name #</td>
-								</tr>
-								<tr class="k-alt">
-									<td>종류</td>
-									<td>#= contentType #</td>
-								</tr>
-								<tr>
-									<td>크기(bytes)</td>
-									<td>#= size #</td>
-								</tr>				
-								<tr>
-									<td>다운수/클릭수</td>
-									<td>#= downloadCount #</td>
-								</tr>											
-							</tbody>
-						</table>	
-					</div>
-				</div>
-				<p class="blank-top-5">
-					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>	
-				</p>	
-				# } #  	
-		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
