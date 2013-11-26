@@ -226,11 +226,37 @@
 		
 		function viewAnnounce (announceId){		
 			var item = $("#announce-panel").data( "dataSource").get(announceId);
+			
 			var template = kendo.template($('#announcement-view-template').html());
 			$("#announce-view").html(
 				template(item)
 			);
-			$("#announce-view .announce-body").html( item.body );
+						
+			$("#announce-view .announce-body").html( item.body );			
+			
+			$("#announce-view div button").each(function( index ) {			
+				var announce_button = $(this);			
+				if( announce_button.hasClass( 'custom-announce-modify') ){
+					announce_button.click(function (e) { 
+						e.preventDefault();
+						kendo.bind($("#announce-edit-window"), item );						
+						//$('#announce-body-editor').kendoEditor();								
+						$('#announce-edit-window').on('shown', function() {
+							$(document).off('focusin.modal');
+						});					
+						$('#announce-edit-window').modal("show");					
+					} );
+				}else if ( announce_button.hasClass('custom-announce-delete') ){
+					announce_button.click(function (e) { 
+						e.preventDefault();
+						if( confirm("삭제하시겠습니까 ?") ) {
+							// delete ...	
+						}
+					} );
+				}
+			
+			} );
+			
 		}
 		
 		-->
@@ -345,6 +371,30 @@
 
 		<div id="attach-window"></div>					
 		<!-- END MAIN CONTENT -->	
+
+<div class="modal fade" id="announce-edit-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog layout">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title"><span data-bind="text: subject"></span></h4>
+      </div>
+      <div class="modal-body">
+      
+      <div class="k-content"> 
+<textarea id="announce-body-editor" data-role="editor"
+			data-bind="value: body"></textarea>
+      </div>
+      
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">저장</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 			
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		

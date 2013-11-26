@@ -26,8 +26,8 @@
  # if ( user.userId == ${action.user.userId } ) {#  
  <div class="pull-right">
 	 <div class="btn-group">
-	  <button type="button" class="btn btn-default">수정</button>
-	  <button type="button" class="btn btn-danger">삭제</button>
+	  <button type="button" class="btn btn-default custom-announce-modify">수정</button>
+	  <button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
 	</div>
 </div>
 # } #
