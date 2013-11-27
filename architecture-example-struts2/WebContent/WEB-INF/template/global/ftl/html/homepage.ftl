@@ -6,8 +6,9 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/bootstrap/3.0.0/font-awesome.css',			
+			'css!${request.contextPath}/styles/bootstrap/3.0.0/font-awesome.min.css',
 			'css!${request.contextPath}/styles/bootstrap/3.0.0/social-buttons.css',
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -300,17 +301,7 @@
 		}
 
 
-		.k-table {
-			border-spacing: 0;
-			border-collapse: collapse;
-			border: 1px solid #999;
-			width: 100%;
-		}
 
-		.k-table td, .k-table th {
-			border: 1px solid #999;
-			padding: 3px;
-		}			
 				
 		</style>   	
 	</head>
@@ -337,39 +328,41 @@
 		<div class="blank-top-10" ></div>								 
 		<div class="container layout">	
 				<div class="row">
-					<div class="col-lg-8">
-					</div>								
-				</div>		
-				<div class="row">
-					<div id ="announce-panel" class="col-lg-4" >
-						<div class="panel panel-danger">
-							<div class="panel-heading"><strong>공지</strong>
-								<div class="k-window-actions panel-header-actions">
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+					<div id ="announce-panel" class="col-lg-6">
+							<div class="panel panel-default">
+								<div class="panel-heading"><i class="fa fa-bullhorn fa-fw"></i> <strong>공지</strong>
+									<div class="k-window-actions panel-header-actions">
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>
 								</div>
-							</div>
-							<div class="panel-body">					
-								<div  id="announce-view" class="k-content" ></div>		
-								<p></p>								
+								<div class="panel-body layout">					
+									<div  id="announce-view"></div>		
+								</div>
 								<table class="table table-hover">
+									<!--
 									<thead>
 										<th><span class="glyphicon glyphicon-bullhorn"></span></th>
 										<th>목록</th>
 									</thead>
+									-->
 									<tbody>										
 										<tr>
 											<th></th>
 											<td></td>
 										</tr>										
 									</tbody>
-								</table>								
-							</div>
-						</div>
-					</div>											
-					<div id="facebook-panel" class="col-md-6 col-lg-4">
+								</table>															
+								<div class="panel-footer">
+									<button type="button" class="btn btn-default custom-announce-create">새로운 공지 작성</button>
+								</div>
+							</div>						
+						</div>		
+					
+					<div class="col-lg-6">
+					<div id="facebook-panel">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i><strong>뉴스</strong>
@@ -387,7 +380,7 @@
 							</div>							
 						</div>
 					</div>
-					<div id="twitter-panel" class="col-md-6 col-lg-4">
+					<div id="twitter-panel">
 						<div class="panel panel-info">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i><strong>뉴스</strong>
@@ -406,7 +399,11 @@
 								</ul>
 							</div>
 						</div>
-					</div>					
+					</div>										
+					</div>								
+				</div>		
+				<div class="row">
+
 				</div>		
 			</div>		
 
