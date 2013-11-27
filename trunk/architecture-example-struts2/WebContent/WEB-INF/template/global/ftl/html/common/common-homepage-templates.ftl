@@ -4,7 +4,6 @@
 		<td>#: subject#</td>
 	</tr>
 </script>
-
 <script type="text/x-kendo-tmpl" id="announcement-view-template">
 # if ( user.userId == ${action.user.userId } ) {#  
 <div class="panel panel-default">
