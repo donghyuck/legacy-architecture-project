@@ -6,26 +6,16 @@
 </script>
 <script type="text/x-kendo-tmpl" id="announcement-view-template">
 # if ( user.userId == ${action.user.userId } ) {#  
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<div contentEditable data-role="editor" class="inline-column-editor"
-				data-tools="['italic',
-								'underline',
-								'strikethrough']" 
-				data-bind="value:subject"></div>
-	</div>
-	<div class="panel-body">
-		<div contentEditable class="inline-body-editor" data-role="editor" 
-					data-tools="['italic',
-									'underline',
-									'strikethrough']" 
-				data-bind="value:body"></div>	
-	</div>
+	
+	<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder=".col-xs-4" />		
+	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
-		<li class="list-group-item">시작일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px"></li>
-		<li class="list-group-item">종료일시: <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px"></li>
-	</ul>
-	<div class="panel-footer">
+		<li class="list-group-item">
+		시작일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px; height:28px;">
+		<div class="blank-top-5" ></div>
+		종료일시: <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px; height:28px;">
+		</li>
+		<li class="list-group-item">
 		<div class="media">
 			<a class="pull-left" href="\\#">
 			#if ( user.properties.imageId != null ) {# 
@@ -45,21 +35,25 @@
 					<br>(#: user.email #)
 					# } #	
 				</h5>
-				<div class="pull-right">
-					 <button type="button" class="btn btn-default custom-announce-create">새로운 공지 작성</button>
-					 <div class="btn-group">
-					  <button type="button" class="btn btn-default custom-announce-modify">수정</button>
-					  <button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
-					</div>
-				</div>						
 			</div>
-		</div>
-	</div>
-</div>		
+		</div>			
+		</li>
+	</ul>
+	<div contentEditable class="inline-body-editor" data-role="editor" 
+					data-tools="['italic',
+									'underline',
+									'strikethrough']" 
+				data-bind="value:body"></div>			
+	<div class="blank-top-5" ></div>				
+	<div class="pull-right">
+			<div class="btn-group">
+			<button type="button" class="btn btn-default custom-announce-modify">수정</button>
+			<button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
+			</div>
+	</div>		
 # } else {  #
-<h5 data-bind="html:subject"></h5>
-<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br><br>
-<div data-bind="html:body"></div>
+		<h5 data-bind="html:subject"></h5>
+		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
 		<div class="media">
 			<a class="pull-left" href="\\#">
 			#if ( user.properties.imageId != null ) {# 
@@ -81,6 +75,8 @@
 				</h5>		
 			</div>
 		</div>	
+		<div class="blank-top-5" ></div>
+		<div data-bind="html:body"></div>
 # } #				
 </script>
 
