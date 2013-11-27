@@ -167,13 +167,11 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 		
 		List<Long> announceIds = announceDao.getAnnounceIds(objectType, objectId);
 		
-		List<Announce> list = new ArrayList<Announce>(announceIds.size());
+		List<Announce> list = new ArrayList<Announce>();
 		Date now = new Date();
 		long startDate = now.getTime();
 		long endDate = now.getTime();
-		
-		log.debug( announceIds);
-		
+
 		for( Long announceId : announceIds){
 			try {
 				Announce announce = getAnnounce(announceId);
