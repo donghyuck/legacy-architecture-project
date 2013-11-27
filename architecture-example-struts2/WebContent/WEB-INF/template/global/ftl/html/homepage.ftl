@@ -230,17 +230,16 @@
 			$("#announce-view").html(
 				template(item)
 			);
-			kendo.bind($("#announce-view"), item );		
+			kendo.bind($("#announce-view"), item );			
 			
-			if( !$("#announce-view-editor").data("kendoEditor") ){				
-				$("#announce-view-editor").kendoEditor({
-					tools: [
-						"createLink",
-						"unlink",
-						"insertImage"
-						]
-				});		
-			}
+							
+			//$("#announce-view .column-editor").each(function( index ) {	
+			//	alert( $(this).html() );
+			//});
+				
+			//	$("#announce-view .column-editor").kendoEditor({
+			//		tools: ["bold"]
+			//	});	
 			
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
@@ -274,41 +273,45 @@
 			max-width : 500px;
 		}
 
- .k-editor-inline {
-                    margin: 0;
-                    padding: 21px 21px 11px;
-                    border-width: 0;
-                    box-shadow: none;
-                    background: none;
-                }
+		.k-editor-inline {
+			margin: 0;
+			#padding: 21px 21px 11px;
+			border-width: 0;
+			box-shadow: none;
+			background: none;
+		}
 
-                .k-editor-inline.k-state-active {
-                    border-width: 1px;
-                    padding: 20px 20px 10px;
-                    background: none;
-                }
+		.k-editor-inline.k-state-active {
+			border-width: 1px;
+			#padding: 20px 20px 10px;
+			#background: none;
+			#border-color : red;
+  			border-color: #66afe9;
+			#  outline: 0;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+		}
 
-.k-table {
-                    border-spacing: 0;
-                    border-collapse: collapse;
-                    border: 1px solid #999;
-                    width: 100%;
-                }
+		.inline-column-editor {
+			display: inline-block;
+			vertical-align: top;
+			max-width: 600px;
+			width: 100%;
+		}
 
-                .k-table td, .k-table th {
-                    border: 1px solid #999;
-                    padding: 3px;
-                }			
-                
-.k-widget,
-.k-widget *,
-.k-animation-container *
-{
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-}
 
+		.k-table {
+			border-spacing: 0;
+			border-collapse: collapse;
+			border: 1px solid #999;
+			width: 100%;
+		}
+
+		.k-table td, .k-table th {
+			border: 1px solid #999;
+			padding: 3px;
+		}			
+				
 		</style>   	
 	</head>
 	<body>
