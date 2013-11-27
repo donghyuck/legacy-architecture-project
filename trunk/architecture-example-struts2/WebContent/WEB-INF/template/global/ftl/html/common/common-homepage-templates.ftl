@@ -6,46 +6,83 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-view-template">
-	<h5><strong>#:subject#</strong></h5>
-	# if ( user.userId == ${action.user.userId } ) {#  
-	시작일시 : <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px"><br>
-	종료일시 : <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px"><br>
-	# } else { #
-	<small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
-	# } #	
-	<div contentEditable id="announce-view-editor" data-bind="html:body"></div>
-	<div class="media">
-		<a class="pull-left" href="\\#">
-		#if ( user.properties.imageId != null ) {# 
-		<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
-		# } else {  #	
-		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
-		# } #
-		</a>
-		<div class="media-body">
-			<h5 class="media-heading">
-				# if( user.nameVisible ){#
-				#: user.name # (#: user.username #)
-				# } else { #
-				#: user.username #
-				# } # 		
-				# if( user.emailVisible ){#
-				<br>(#: user.email #)
-				# } #	
-			</h5>		
-		</div>
+# if ( user.userId == ${action.user.userId } ) {#  
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<div contentEditable data-role="editor" class="inline-column-editor"
+				data-tools="['italic',
+								'underline',
+								'strikethrough']" 
+				data-bind="value:subject"></div>
 	</div>
-		# if ( user.userId == ${action.user.userId } ) {#  
-		<br><br>
-		<div class="pull-right">
-			 <button type="button" class="btn btn-default custom-announce-create">새로운 공지 작성</button>
-			 <div class="btn-group">
-			  <button type="button" class="btn btn-default custom-announce-modify">수정</button>
-			  <button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
+	<div class="panel-body">
+		<div contentEditable class="inline-body-editor" data-role="editor" 
+					data-tools="['italic',
+									'underline',
+									'strikethrough']" 
+				data-bind="value:body"></div>	
+	</div>
+	<ul class="list-group">
+		<li class="list-group-item">시작일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px"></li>
+		<li class="list-group-item">종료일시: <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px"></li>
+	</ul>
+	<div class="panel-footer">
+		<div class="media">
+			<a class="pull-left" href="\\#">
+			#if ( user.properties.imageId != null ) {# 
+			<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
+			# } else {  #	
+			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
+			# } #
+			</a>
+			<div class="media-body">
+				<h5 class="media-heading">
+					# if( user.nameVisible ){#
+					#: user.name # (#: user.username #)
+					# } else { #
+					#: user.username #
+					# } # 		
+					# if( user.emailVisible ){#
+					<br>(#: user.email #)
+					# } #	
+				</h5>
+				<div class="pull-right">
+					 <button type="button" class="btn btn-default custom-announce-create">새로운 공지 작성</button>
+					 <div class="btn-group">
+					  <button type="button" class="btn btn-default custom-announce-modify">수정</button>
+					  <button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
+					</div>
+				</div>						
 			</div>
 		</div>
-		# } #
-			
+	</div>
+</div>		
+# } else {  #
+<h5 data-bind="html:subject"></h5>
+<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br><br>
+<div data-bind="html:body"></div>
+		<div class="media">
+			<a class="pull-left" href="\\#">
+			#if ( user.properties.imageId != null ) {# 
+			<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
+			# } else {  #	
+			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
+			# } #
+			</a>
+			<div class="media-body">
+				<h5 class="media-heading">
+					# if( user.nameVisible ){#
+					#: user.name # (#: user.username #)
+					# } else { #
+					#: user.username #
+					# } # 		
+					# if( user.emailVisible ){#
+					<br>(#: user.email #)
+					# } #	
+				</h5>		
+			</div>
+		</div>	
+# } #				
 </script>
 
 
