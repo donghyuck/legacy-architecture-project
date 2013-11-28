@@ -51,6 +51,7 @@
 			<button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
 			</div>
 	</div>		
+	
 # } else {  #
 		<h5 data-bind="html:subject"></h5>
 		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
@@ -251,7 +252,7 @@
 
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
-		<a class="dropdown-toggle" data-toggle="dropdown">
+		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/><span class="k-icon k-i-arrow-s"></span>
 		# } else { # 

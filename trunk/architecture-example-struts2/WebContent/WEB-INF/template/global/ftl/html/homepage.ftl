@@ -71,7 +71,7 @@
 					}
 				});				
 				
-				// Feed : Announces 
+				// Announces 
 				$("#announce-panel").data( "dataSource", 
 	 				new kendo.data.DataSource({
 						transport: {
@@ -123,11 +123,14 @@
 							});
 						}
 				} );				
+				
 				$("#announce-panel").data( "dataSource").read();
 					
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
-					<#if item.serviceProviderName == "twitter">					
+					<#if item.serviceProviderName == "twitter">
+					
+										
 					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
 					var twitterDataSource = new kendo.data.DataSource({
 						transport: {
@@ -159,9 +162,11 @@
 		            });            				
 		            twitterDataSource.read();
 		            
+		            
 		            <#elseif item.serviceProviderName == "facebook">
 					
 					var facebookTemplate = kendo.template($("#facebook-homefeed-template").html());
+					
 					var facebookDataSource = new kendo.data.DataSource({
 						transport: {
 							read: {
@@ -307,13 +312,9 @@
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<#include "/html/common/common-homepage-wide-menu.ftl" >	
-		</div>
+		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-		<!-- START MAIN CONTENT -->
-		<div class="blank-top-60" ></div>						
-		
+		<!-- START MAIN CONTENT -->	
 		<div class="container layout">
 				<div calss="row">
 					<div class="col-lg-8">
@@ -328,9 +329,10 @@
 		<div class="blank-top-10" ></div>								 
 		<div class="container layout">	
 				<div class="row">
-					<div id ="announce-panel" class="col-lg-6">
-							<div class="panel panel-default">
-								<div class="panel-heading"><i class="fa fa-bullhorn fa-fw"></i> <strong>공지</strong>
+					<div class="col-lg-6">
+						<div id="announce-panel" >	
+							<div class="panel-default">
+								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -339,33 +341,26 @@
 									</div>
 								</div>
 								<div class="panel-body layout">					
-									<div  id="announce-view"></div>		
+									<div  id="announce-view"></div>
+									<br><br>
+									<table class="table table-hover">
+										<tbody>										
+											<tr>
+												<th></th>	
+												<td></td>
+											</tr>										
+										</tbody>
+									</table>												
 								</div>
-								<table class="table table-hover">
-									<!--
-									<thead>
-										<th><span class="glyphicon glyphicon-bullhorn"></span></th>
-										<th>목록</th>
-									</thead>
-									-->
-									<tbody>										
-										<tr>
-											<th></th>
-											<td></td>
-										</tr>										
-									</tbody>
-								</table>															
-								<div class="panel-footer">
-									<button type="button" class="btn btn-default custom-announce-create">새로운 공지 작성</button>
-								</div>
-							</div>						
-						</div>		
-					
+							</div>		
+						</div>							
+					</div>							
 					<div class="col-lg-6">
+
 					<div id="facebook-panel">
-						<div class="panel panel-info">
+						<div class="panel-default">
 							<div class="panel-heading">
-								<i class="icon-facebook"></i><strong>뉴스</strong>
+								<i class="icon-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -381,9 +376,9 @@
 						</div>
 					</div>
 					<div id="twitter-panel">
-						<div class="panel panel-info">
+						<div class="panel-default">
 							<div class="panel-heading">
-								<i class="icon-twitter"></i><strong>뉴스</strong>
+								<i class="icon-twitter"></i>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
