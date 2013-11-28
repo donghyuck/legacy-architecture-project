@@ -26,33 +26,21 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 <decorator:head />
 <style>
 	
-	.header {
-		padding-top : 10px;
-		position: relative;
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-		 color: #5a5a5a;
-	}
+	body { padding-top: 70px; }
 	
-	.navbar {
-		margin-bottom : 0px;
-	}
-	 
-	.k-menu.k-header, .k-menu .k-item {
-		/*border-color :#dadada;*/
-	}
+		#account-panel {
+			margin-top : 0 px;
+			padding-top : 10px;
+		}	
 		
-	#account-panel {
-		margin-top : 0 px;
-		padding-top : 10px;
-	}	
+		
+		#account-panel  .dropdown-menu{
+		 	width : 300px;;
+		 	z-index: 1001;
+		 	color: #000;
+		}
 	
-	#account-panel  .dropdown-menu{
-	 	width : 300px;;
-	 	z-index: 1001;
-	 	color: #000;
-	}
-	
-/*Block Headline*/
+		/*Block Headline*/
 		.headline {
 			display: block;
 			margin: 10px 0 25px 0;
