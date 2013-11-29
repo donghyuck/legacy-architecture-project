@@ -5,8 +5,7 @@
 	</tr>
 </script>
 <script type="text/x-kendo-tmpl" id="announcement-view-template">
-# if ( user.userId == ${action.user.userId } ) {#  
-	
+# if ( user.userId == ${action.user.userId } && editable ) {#  	
 	<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder=".col-xs-4" />		
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
