@@ -128,8 +128,6 @@
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">
-					
-										
 					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
 					var twitterDataSource = new kendo.data.DataSource({
 						transport: {
@@ -159,8 +157,7 @@
 							data : "homeTimeline"
 						}
 		            });            				
-		            twitterDataSource.read();
-		            
+		            twitterDataSource.read();		            
 		            
 		            <#elseif item.serviceProviderName == "facebook">
 					
@@ -231,20 +228,12 @@
 		
 		function viewAnnounce (announceId){		
 			var item = $("#announce-panel").data( "dataSource").get(announceId);			
+
 			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
 				template(item)
 			);
 			kendo.bind($("#announce-view"), item );			
-			
-							
-			//$("#announce-view .column-editor").each(function( index ) {	
-			//	alert( $(this).html() );
-			//});
-				
-			//	$("#announce-view .column-editor").kendoEditor({
-			//		tools: ["bold"]
-			//	});	
 			
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
@@ -262,10 +251,7 @@
 					} );
 				}			
 			} );
-			
-			
-		}
-		
+		}		
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -277,36 +263,7 @@
 			position : relative;
 			max-width : 500px;
 		}
-
-		.k-editor-inline {
-			margin: 0;
-			#padding: 21px 21px 11px;
-			border-width: 0;
-			box-shadow: none;
-			background: none;
-		}
-
-		.k-editor-inline.k-state-active {
-			border-width: 1px;
-			#padding: 20px 20px 10px;
-			#background: none;
-			#border-color : red;
-  			border-color: #66afe9;
-			#  outline: 0;
-			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-		}
-
-		.inline-column-editor {
-			display: inline-block;
-			vertical-align: top;
-			max-width: 600px;
-			width: 100%;
-		}
-
-
-
-				
+						
 		</style>   	
 	</head>
 	<body>
@@ -329,8 +286,9 @@
 		<div class="container layout">	
 				<div class="row">
 					<div class="col-lg-6">
+						<!-- start announce panel -->
 						<div id="announce-panel" >	
-							<div class="panel-default">
+							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
@@ -352,12 +310,13 @@
 									</table>												
 								</div>
 							</div>		
-						</div>							
+						</div>
+						<!-- end announce panel -->							
 					</div>							
 					<div class="col-lg-6">
-
+					
 					<div id="facebook-panel">
-						<div class="panel-default">
+						<div class="panel panel-success">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
@@ -374,9 +333,9 @@
 							</div>							
 						</div>
 					</div>
-					<div class="blank-top-10" ></div>		
+					
 					<div id="twitter-panel">
-						<div class="panel-primary">
+						<div class="panel panel-success">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
 								<div class="k-window-actions panel-header-actions">

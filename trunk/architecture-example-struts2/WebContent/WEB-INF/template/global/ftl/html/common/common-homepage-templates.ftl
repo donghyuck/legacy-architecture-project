@@ -5,7 +5,7 @@
 	</tr>
 </script>
 <script type="text/x-kendo-tmpl" id="announcement-view-template">
-# if ( user.userId == ${action.user.userId } && editable ) {#  	
+# if ( user.userId == ${action.user.userId } && "${action.view!}" == "personalized" ) {#  	
 	<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder=".col-xs-4" />		
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
@@ -46,8 +46,8 @@
 	<div class="blank-top-5" ></div>				
 	<div class="pull-right">
 			<div class="btn-group">
-			<button type="button" class="btn btn-default custom-announce-modify">수정</button>
-			<button type="button" class="btn btn-danger custom-announce-delete">삭제</button>
+			<button type="button" class="btn btn-primary custom-announce-modify" data-announceId="#: announceId #" disabled="disabled">수정</button>
+			<button type="button" class="btn btn-danger custom-announce-delete" data-announceId="#: announceId #" disabled="disabled">삭제</button>
 			</div>
 	</div>		
 	
@@ -84,15 +84,15 @@
 <script type="text/x-kendo-tmpl" id="social-view-panel-template">
 		<div id="#: provider #-panel" class="panel panel-success">
 			<div class="panel-heading">
-				<i class="icon-#: provider #"></i> &nbsp; #: provider # &nbsp; 뉴스
+				<i class="icon-#: provider #"></i> &nbsp; #: provider # &nbsp; 소식
 				<div class="k-window-actions panel-header-actions">
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-					<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+					<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 				</div>							
 			</div>
-			<div class="panel-body">
+			<div class="panel-body scrollable" style="max-height:500px;">
 				<ul class="media-list">
 					<div id="#:provider#-streams">데이터가 없습니다..</div>
 				</ul>

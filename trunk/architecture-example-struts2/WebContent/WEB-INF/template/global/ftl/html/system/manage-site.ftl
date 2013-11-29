@@ -46,7 +46,7 @@
 						dataSource: {
 							transport: {
 								read: {
-									type: "json",
+									dataType: "json",
 									url: '${request.contextPath}/secure/list-company.do?output=json',
 									type:'POST'
 								}
@@ -77,7 +77,7 @@
 						if( ! $("#content-grid").data("kendoGrid") ){	
 							$("#content-grid").kendoGrid({
 								dataSource: {
-									type: 'json',
+									dataType: 'json',
 									transport: {
 										read: { url:'${request.contextPath}/secure/list-content.do?output=json', type: 'POST' },
 										parameterMap: function (options, operation){
@@ -149,7 +149,7 @@
 						if( ! $("#image-grid").data("kendoGrid") ){	
 							$("#image-grid").kendoGrid({
 								dataSource: {
-									type: 'json',
+									dataType: 'json',
 									transport: {
 										read: { url:'${request.contextPath}/secure/list-image.do?output=json', type: 'POST' },
 										parameterMap: function (options, operation){
@@ -202,7 +202,7 @@
 						if( ! $("#social-grid").data("kendoGrid") ){	
 							$("#social-grid").kendoGrid({
 								dataSource: {
-									type: 'json',
+									dataType: 'json',
 									transport: {
 										read: { url:'${request.contextPath}/secure/list-social-account.do?output=json', type: 'POST' },
 										update: { url:'${request.contextPath}/secure/update-social-account.do?output=json', type:'POST' },
