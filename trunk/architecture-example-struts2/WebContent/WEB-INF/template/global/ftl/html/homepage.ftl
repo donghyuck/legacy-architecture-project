@@ -7,8 +7,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/bootstrap/3.0.0/font-awesome.min.css',
-			'css!${request.contextPath}/styles/bootstrap/3.0.0/social-buttons.css',
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
+			'css!${request.contextPath}/styles/bootstrap/3.0.0/social-buttons.min.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -358,7 +357,7 @@
 					<div class="col-lg-6">
 
 					<div id="facebook-panel">
-						<div class="panel-primary">
+						<div class="panel-default">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
