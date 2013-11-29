@@ -53,7 +53,7 @@
 	</div>		
 	
 # } else {  #
-		<strong><h5 data-bind="html:subject"></h5></strong>
+		<h4 data-bind="html:subject"></h4>
 		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
 		<div class="media">
 			<a class="pull-left" href="\\#">
