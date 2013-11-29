@@ -358,7 +358,7 @@
 					<div class="col-lg-6">
 
 					<div id="facebook-panel">
-						<div class="panel-default">
+						<div class="panel-primary">
 							<div class="panel-heading">
 								<i class="icon-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
@@ -368,7 +368,7 @@
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 								</div>
 							</div>		
-							<div class="panel-body">
+							<div class="panel-body scrollable" style="max-height:500px;">
 								<ul class="media-list">
 									<div id="company-facebook-homefeed"></div>
 								</ul>
@@ -376,7 +376,7 @@
 						</div>
 					</div>
 					<div id="twitter-panel">
-						<div class="panel-default">
+						<div class="panel-primary">
 							<div class="panel-heading">
 								<i class="icon-twitter"></i>
 								<div class="k-window-actions panel-header-actions">
