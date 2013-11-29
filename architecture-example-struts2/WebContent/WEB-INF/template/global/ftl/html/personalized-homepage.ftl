@@ -37,8 +37,6 @@
 					</#if>
 					afterAuthenticate : function(){
 						$('.dropdown-toggle').dropdown();
-						Holder.run();
-						
 						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
 							$("#login-btn").click(function() { 
@@ -70,31 +68,135 @@
 						}
 					}
 				});				
+				
+				// Announces 
+				var selectedAnnounce = new Announce ();
+				$("#announce-panel").data( "dataSource", 
+	 				new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-announce.do?output=json'
+							},
+							update: {
+								type : 'POST',								
+								url : '${request.contextPath}/community/update-announce.do?output=json'
+							},
+							parameterMap: function(options, operation) {
 
-				<#list action.companySocials as item >	
-				socialServiceProviders.${item.serviceProviderName} = { 
-					dataSource: null,
-					<#if  item.serviceProviderName == "twitter" >
-					url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
-					data : "homeTimeline",
-					template : kendo.template($("#twitter-timeline-template").html())
-					<#elseif item.serviceProviderName == "facebook" >
-					url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
-					data : "homeFeed",
-					template : kendo.template($("#facebook-homefeed-template").html())			
-					</#if>
-				};
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}else if (operation == 'update' && options ) {
+									alert( kendo.stringify(options) );
+									return { announceId: options.announceId,  item:kendo.stringify(options) };
+								}
+							} 
+						},
+						requestStart: function() {
+							kendo.ui.progress($("#announce-panel"), true);
+						},
+						requestEnd: function() {
+							kendo.ui.progress($("#announce-panel"), false);
+						},
+						change: function(e) {							
+							if( this.hasChanges()){
+								$(".custom-announce-modify").removeAttr("disabled");
+							}else{
+								$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
+								if( this.data().length > 0 ){
+									viewAnnounce (this.at(0).announceId) ;
+								}
+							}
+						},
+						error:handleKendoAjaxError,
+						schema: {
+							data : "targetAnnounces",
+							model : Announce
+						}
+					})
+				);								
+								
+				$("#announce-panel .panel-header-actions a").each(function( index ) {
+						var panel_header_action = $(this);						
+						if( panel_header_action.text() == "Minimize" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#announce-panel .panel-body").toggleClass("hide");								
+								var panel_header_action_icon = panel_header_action.find('span');
+								if( panel_header_action_icon.hasClass("k-i-minimize") ){
+									panel_header_action.find('span').removeClass("k-i-minimize");
+									panel_header_action.find('span').addClass("k-i-maximize");
+								}else{
+									panel_header_action.find('span').removeClass("k-i-maximize");
+									panel_header_action.find('span').addClass("k-i-minimize");
+								}								
+							});
+						} else if (panel_header_action.text() == "Refresh" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#announce-panel").data( "dataSource").read();
+							});
+						}
+				} );								
+				
+				$("#announce-panel").data( "dataSource").read();
+				// social data sources
+				$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
+				<#list action.companySocials as item >
+					<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
+					$("#social-view-panels").data( "providers").set( "${item.serviceProviderName}" ,  {
+						<#if  item.serviceProviderName == "twitter" >
+						template : kendo.template($("#twitter-timeline-template").html())	,			
+						<#elseif item.serviceProviderName == "facebook" >
+						template : kendo.template($("#facebook-homefeed-template").html()),
+						</#if>		
+						dataSource : new kendo.data.DataSource({
+							transport: {
+								read: {
+									type : 'POST',
+									type: "json",
+									<#if  item.serviceProviderName == "twitter" >
+									url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',			
+									<#elseif item.serviceProviderName == "facebook" >
+									url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
+									</#if>	
+								},
+								parameterMap: function (options, operation){
+									if (operation == "read" && options) {										                        								                       	 	
+										return { socialAccountId: ${ item.socialAccountId } };									                            	
+									}
+								} 
+							},
+							requestStart: function() {
+								kendo.ui.progress($(${elementId}), true);
+							},
+							requestEnd: function() {
+								kendo.ui.progress($(${elementId}), false);
+							},
+							change: function() {
+								$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
+							},
+							error:handleKendoAjaxError,
+							schema: {
+							<#if  item.serviceProviderName == "twitter" >
+								data : "homeTimeline"
+							<#elseif item.serviceProviderName == "facebook" >
+								data : "homeFeed"
+							</#if>	
+							}						
+						})
+				});							
 				</#list>
-						
+								
 				$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
 					$(item).click( function(){ 
 						var socialProvider = $(item).attr('data-provider');
-						var socialAccountId = $(item).attr('data-account');
-						if( typeof (socialProvider) == 'string' && typeof (socialAccountId) == 'string' ){
- 							showSocialPanel( socialProvider, socialAccountId );	
+						if( typeof (socialProvider) == 'string' ){
+ 							showSocialPanel( socialProvider );	
  						}
  					});	
-				});										
+				});
 										
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
@@ -102,16 +204,13 @@
 						//$('#my-messages').popover('show');	
 						
 					} else if(  $(this).attr('href') == '#my-attachments' ){
-						if( !$('#attachment-list-view').data('kendoListView') ){	
-							
+						if( !$('#attachment-list-view').data('kendoListView') ){								
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
 								totalFileCount : "0"							
-							});
-							
-							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );
-						
+							});							
+							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );						
 							$("#attachment-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
@@ -156,7 +255,6 @@
 									} else {
 										attachementTotalModle.set("totalAttachCount", totalCount);
 									}
-									
 								}
 							});
 														
@@ -186,8 +284,10 @@
 										break;											
 								}
 							});							
+							// Attachment Pager
 							$("#pager").kendoPager({
 								refresh : true,
+								buttonCount : 5,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
 							});
 																					
@@ -218,58 +318,26 @@
 				// END SCRIPT            
 			}
 		}]);	
-
-		// Social DataSource
-		var socialServiceProviders = { } ;
 						
-		function showSocialPanel ( provider, socialId ){			
+		function showSocialPanel ( provider ){			
 			var elementId =  provider + "-panel";			
-			if( $("#" + elementId ).length == 0  ){
-			
+			if( $("#" + elementId ).length == 0  ){						
 				// create new social panel 
 				var template = kendo.template($("#social-view-panel-template").html());		
 				$("#social-view-panels").append( template( { provider:provider} ) );
-				
-				// create dataSource
-				if ( socialServiceProviders[ provider ].dataSource == null ){
-					var socialStreamsElementId = provider + "-streams" ;
-					//alert ( "id:" + socialStreamsElementId );
-					socialServiceProviders[ provider ].dataSource = new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								type: "json",
-								url : socialServiceProviders[ provider ].url,
-							},
-							parameterMap: function (options, operation){
-								if (operation == "read" && options) {										                        								                       	 	
-									return { socialAccountId: socialId };									                            	
-								}
-							} 
-						},
-						requestStart: function() {
-							kendo.ui.progress($("#" + socialStreamsElementId ), true);
-						},
-						requestEnd: function() {
-							kendo.ui.progress($("#" + socialStreamsElementId ), false);
-						},
-						change: function() {
-							$("#" + socialStreamsElementId ).html(kendo.render(socialServiceProviders[ provider ].template, this.view()));
-						},
-						error:handleKendoAjaxError,
-						schema: {
-							data : socialServiceProviders[ provider ].data
-						}
-		            });			
-		           socialServiceProviders[ provider ].dataSource.read();
-				}				
-				
+												
+				// get dataSource
+				var dataSource = $("#social-view-panels").data( "providers").get( provider ).dataSource;
+				if( dataSource.total() == 0 )
+				{
+					dataSource.read();
+				} 								
 				$( '#'+ elementId + ' .panel-header-actions a').each(function( index ) {
 					var social_header_action = $(this);
 					social_header_action.click(function (e){
 						e.preventDefault();		
 						var social_header_action_icon = social_header_action.find('span');
-						if (social_header_action.text() == "Maximize"){
+						if (social_header_action.text() == "Minimize"){
 							$( "#"+ elementId +" .panel-body").toggleClass("hide");				
 							if( social_header_action_icon.hasClass("k-i-maximize") ){
 								social_header_action_icon.removeClass("k-i-maximize");
@@ -302,6 +370,72 @@
 				$('#notice-view-panel').show();
 				$('#image-view-panel').hide();			
 			} );			
+		}		
+		
+		function viewAnnounce (announceId){		
+			var item = $("#announce-panel").data( "dataSource").get(announceId);				
+			var template = kendo.template($('#announcement-view-template').html());			
+			$("#announce-view").html(
+				template(item)
+			);			
+			kendo.bind($("#announce-view"), item );						
+			
+			$("#announce-view div button").each(function( index ) {			
+				var announce_button = $(this);			
+				if( announce_button.hasClass( 'custom-announce-modify') ){
+					announce_button.click(function (e) { 
+						e.preventDefault();					
+						var updateId = announce_button.attr('data-announceId');
+						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
+						if($("#announce-panel").data( "dataSource").hasChanges()){
+							$("#announce-panel").data( "dataSource").sync();			
+							/**
+										$.ajax({
+											type : 'POST',
+											url : '${request.contextPath}/community/update-announce.do?output=json'
+											data: { socialAccountId: selectedSocial.socialAccountId },
+											beforeSend: function(){																					
+												socialWindow.center();
+												socialWindow.open();
+												kendo.ui.progress($("#social-detail-window"), true);												
+											},
+											success : function(response){
+												if( response.error ){
+													// 오류 발생..
+													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
+												} else {														
+													socialWindow.content( template(response) );
+												}										
+												$('#connect-social-btn').click( function(e){
+													socialWindow.close();													
+													var w = window.open(
+														selectedSocial.authorizationUrl, 
+														"_blank",
+														"toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400"
+													);
+													w.focus();
+												});		
+											},
+											error: function(){
+												socialWindow.close();
+												handleKendoAjaxError();
+											},
+											dataType : 'json'
+										});				
+										**/				
+						}
+						
+						
+					} );
+				}else if ( announce_button.hasClass('custom-announce-delete') ){
+					announce_button.click(function (e) { 
+						e.preventDefault();
+						if( confirm("삭제하시겠습니까 ?") ) {
+							// delete ...	
+						}
+					} );
+				}			
+			} );
 		}			
 		-->
 		</script> 		   
@@ -344,32 +478,31 @@
 		#attachment-list-view {
 			min-height: 300px;
 			min-width: 300px;
-			padding: 0px;
+			padding: 5px;
 			border: 0px;
 			margin-bottom: -1px;
-			vertical-align: middle;
 		}
         		                		
 		.attach
 		{
 			float: left;
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             padding: 0;
 			cursor: pointer;
 		}
 		
 		.attach img
 		{
-			width: 150px;
-			height: 150px;
+			width: 160px;
+			height: 160px;
 		}
 		
 		.attach-description {
             position: absolute;
             top: 0;
-            width: 150px	;
+            width: 160px	;
             height: 0;
             overflow: hidden;
             background-color: rgba(0,0,0,0.8)
@@ -392,6 +525,7 @@
 			padding: 0 10px;
 			font-size: 12px;
         }
+        
 		.k-listview:after, .attach dl:after {
 			content: ".";
 			display: block;
@@ -399,38 +533,82 @@
 			clear: both;
 			visibility: hidden;
         }
+        
         .k-pager-wrap {
         	border : 0px;
         	border-width: 0px;
         }
-        
-        
+
+		.k-editor-inline {
+			margin: 0;
+			#padding: 21px 21px 11px;
+			border-width: 0;
+			box-shadow: none;
+			background: none;
+		}
+
+		.k-editor-inline.k-state-active {
+			border-width: 1px;
+			#padding: 20px 20px 10px;
+			#background: none;
+			#border-color : red;
+  			border-color: #66afe9;
+			#  outline: 0;
+			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+		}
+
+		.inline-column-editor {
+			display: inline-block;
+			vertical-align: top;
+			max-width: 600px;
+			width: 100%;
+		}
+		
 		</style>   	
 	</head>
 	<body id="doc">
 		<!-- START HEADER -->
-		<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<#include "/html/common/common-homepage-wide-menu.ftl" >	
-		</div>
+		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div class="container layout blank-top-60">							
+			<div class="container layout">							
 				<div class="row">					
 					<div class="col-lg-8">						
-						<div id="notice-view-panel" class="panel panel-warning">
-							<div class="panel-heading">알림											
-							</div>
-							<div class="panel-body">
-								<h3>소개</h3>
-								<p>${action.company.displayName} ..ddd </p>
-							</div>
-						</div>						
-						<div id="image-view-panel"></div>						
+						<!-- start announce panel -->
+						<div id="announce-panel" >	
+							<div class="panel panel-default">
+								<div class="panel-heading">알림
+									<div class="k-window-actions panel-header-actions">
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>
+								</div>
+								<div class="panel-body layout">					
+									<div  id="announce-view"></div>
+									<br><br>
+									<table class="table table-hover">
+										<tbody>										
+											<tr>
+												<th></th>	
+												<td></td>
+											</tr>										
+										</tbody>
+									</table>												
+								</div>
+							</div>		
+						</div>
+						<!-- end announce panel -->			
+						
+						<!-- start image view panel -->
+						<div id="image-view-panel"></div>				
+						<!-- end image view panel -->		
 						<!-- start social view panels -->
 						<div id="social-view-panels"></div>	
 						<!-- end social view panels -->						
-					</div>		
-					
+					</div>							
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
@@ -446,7 +624,7 @@
 									<div class="panel-body">								
 										<div class="btn-group">
 											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-											쇼셜미디어 연결 <span class="caret"></span>
+											쇼셜미디어 추가 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" role="menu">
 												<li><a href="#"><i class="icon-facebook"></i> &nbsp;페이스북 연결</a></li>
@@ -458,11 +636,11 @@
 									</div>
 								</div>
 								<div class="panel panel-primary">
-									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 사이트에서 정보를 가져올 수 있습니다.</div>
+									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
 									<div class="panel-body">
 										<div class="btn-group social-connect-btn">
 											<#list action.companySocials as item >	
-											<button class="btn btn-primary" data-account="${ item.socialAccountId }" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
+											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
 											</#list>	
 										</div>									
 									</div>
@@ -479,7 +657,7 @@
 									</div>
 								</div>	
 								</#if>
-								<div class="panel panel-default">								
+								<div class="panel panel-success">								
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
@@ -488,16 +666,15 @@
 											<li>
 												<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
 											</li>
-											<li>
-												<a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
+											<li><a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
 											</li>									  
 										</ul>										
 									</div>
 									<div class="panel-body">
 										<div id="attachment-list-view" ></div>
 									</div>	
-									<div class="panel-footer" style="background-color:#FFFFFF;">
-											<div id="pager" class="k-pager-wrap"></div>
+									<div class="panel-footer" style="padding:0px;">
+										<div id="pager" class="k-pager-wrap"></div>
 									</div>
 								</div>																					
 							</div>
@@ -507,14 +684,12 @@
 					</div>				
 				</div>
 			</div>		
-			
-
 		<div id="attach-window"></div>					
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
-		<footer> 
-		</footer>
+		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		
 		<!-- START TEMPLATE -->
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
@@ -579,7 +754,6 @@
 				</p>	
 				# } #  	
 		</script>		
-		<#include "/html/common/common-homepage-social-templates.ftl" >		
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
