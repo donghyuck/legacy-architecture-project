@@ -325,11 +325,11 @@
 								change: function(e) {									
 									var data = this.dataSource.view() ;
 									var item = data[this.select().index()];		
-									//$("#photo-view-panel").data( "photoPlaceHolder", item );														
-									openPreviewWindow( ) ;	
+									$("#photo-view-panel").data( "photoPlaceHolder", item );														
+									showPhotoPanel( ) ;	
 								},
 								navigatable: false,
-								template: kendo.template($("#attachment-list-view-template").html()),								
+								template: kendo.template($("#photo-list-view-template").html()),								
 								dataBound: function(e) {
 								}
 							});														
@@ -414,7 +414,10 @@
 			} 
 		}		
 		
-		function openPreviewWindow(){						
+		
+		
+		function openPreviewWindow(){				
+				
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#image-view-template').html());
 			$('#attach-view-panel').html( template(attachPlaceHolder) );				
@@ -554,10 +557,10 @@
 		border-left-color: #787878;
 		}	
 		
-		#attachment-list-view {
-			min-height: 300px;
-			min-width: 300px;
-			padding: 5px;
+		#attachment-list-view, #photo-list-view {
+			min-height: 320px;
+			min-width: 320px;
+			padding: 0px;
 			border: 0px;
 			margin-bottom: -1px;
 		}
@@ -566,22 +569,22 @@
 		{
 			float: left;
             position: relative;
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             padding: 0;
 			cursor: pointer;
 		}
 		
 		.attach img
 		{
-			width: 150px;
-			height: 150px;
+			width: 160px;
+			height: 160px;
 		}
 		
 		.attach-description {
             position: absolute;
             top: 0;
-            width: 150px	;
+            width: 160px	;
             height: 0;
             overflow: hidden;
             background-color: rgba(0,0,0,0.8)
@@ -798,7 +801,20 @@
 					<p>#:size# 바이트</p>
 				</div>
 			</div>
-		</script>				
+		</script>	
+		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
+			<div class="attach">			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
+			# } else { #			
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
+			# } #	
+				<div class="attach-description">
+					<h3>#:name#</h3>
+					<p>#:size# 바이트</p>
+				</div>
+			</div>
+		</script>					
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
