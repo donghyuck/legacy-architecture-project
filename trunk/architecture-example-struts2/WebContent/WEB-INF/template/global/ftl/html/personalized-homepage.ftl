@@ -381,7 +381,7 @@
 			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {
-				alert (announcePlaceHolder.startDate);				
+				alert("event :: change (" + kendo.toString(this.get("startDate"), "F") + ")");
 				$(".custom-announce-modify").removeAttr("disabled");
 			});
 																		
