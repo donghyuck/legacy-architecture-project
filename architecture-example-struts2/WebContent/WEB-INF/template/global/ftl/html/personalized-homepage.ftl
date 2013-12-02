@@ -630,7 +630,7 @@
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
 							<li><a href="#my-attachments">My 파일</a></li>
-							<li><a href="#my-images">My 포토</a></li>
+							<li><a href="#my-photos">My 포토</a></li>
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
