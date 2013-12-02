@@ -305,7 +305,67 @@
 							});
 						}
 					} else if(  $(this).attr('href') == '#my-photos' ){
-					
+						if( !$('#photo-list-view').data('kendoListView') ){		
+											
+							$("#photo-list-view").kendoListView({
+								dataSource: {
+									type: 'json',
+									transport: {
+										read: { url:'${request.contextPath}/community/list-my-photo.do?output=json', type: 'POST' }
+									},
+									pageSize: 12,
+									error:handleKendoAjaxError,
+									schema: {
+										model: Image,
+										data : "targetImages",
+										total : "totalTargetImageCount"
+									},
+									sort: { field: "imageId", dir: "desc" }
+								},
+								selectable: "single",									
+								change: function(e) {									
+									var data = this.dataSource.view() ;
+									var item = data[this.select().index()];		
+									$("#attach-view-panel").data( "attachPlaceHolder", item );														
+									openPreviewWindow( ) ;	
+								},
+								navigatable: false,
+								template: kendo.template($("#attachment-list-view-template").html()),								
+								dataBound: function(e) {
+								}
+							});														
+							$("#photo-list-view").on("mouseenter",  ".attach", function(e) {
+									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
+								}).on("mouseleave", ".attach", function(e) {
+									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
+							});								
+									
+							// Pager
+							$("#photo-list-pager").kendoPager({
+								refresh : true,
+								buttonCount : 5,
+								dataSource : $('#photo-list-view').data('kendoListView').dataSource
+							});													
+							$("#photo-files").kendoUpload({
+								 	multiple : false,
+								 	width: 300,
+								 	showFileList : false,
+								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+								    async: {
+										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
+										autoUpload: true
+								    },
+								    upload: function (e) {								         
+								    	 e.data = {};														    								    	 		    	 
+								    },
+								    success : function(e) {								    
+										if( e.response.targetAttachment ){
+											e.response.targetAttachment.attachmentId;
+											// LIST VIEW REFRESH...
+											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+										}				
+									}
+							});					
 					}
 					$(this).tab('show')
 				});				
