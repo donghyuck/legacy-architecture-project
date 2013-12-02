@@ -132,6 +132,9 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void updateAnnounce(Announce announce) {
+		Date now = new Date();
+		announce.setModifiedDate(now);
+		
 		announceDao.update(announce);
 		updateCache(announce);
 	}

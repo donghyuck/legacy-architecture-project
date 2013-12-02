@@ -274,4 +274,46 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 		return 0;
 	}
 
+
+
+	/* (비Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("AnnounceImpl [");
+		if (announceId != null) {
+			builder.append("announceId=");
+			builder.append(announceId);
+			builder.append(", ");
+		}
+		if (userId != null) {
+			builder.append("userId=");
+			builder.append(userId);
+			builder.append(", ");
+		}
+		if (subject != null) {
+			builder.append("subject=");
+			builder.append(subject);
+			builder.append(", ");
+		}
+		if (body != null) {
+			builder.append("body=");
+			builder.append(body);
+			builder.append(", ");
+		}
+		if (startDate != null) {
+			builder.append("startDate=");
+			builder.append(startDate);
+			builder.append(", ");
+		}
+		if (endDate != null) {
+			builder.append("endDate=");
+			builder.append(endDate);
+		}
+		builder.append("]");
+		return builder.toString();
+	}
+
 }
