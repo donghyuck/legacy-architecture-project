@@ -248,6 +248,21 @@
 	</div>
 </script>
 
+<script type="text/x-kendo-template" id="photo-view-template">
+	<div class="panel panel-default">
+		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
+		<div class="panel-body">
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
+			<p class="blank-top-5">
+				<input name="update-photo-file" id="update-photo-file" type="file" />
+				<div class="blank-top-5 "></div>
+				<a class="btn btn-default" href="${request.contextPath}/community/download-my-image.do?imageId=#= imageId #" >다운로드</a>
+				<button  type="button" class="btn btn-danger custom-photo-delete"  data-for-imageId="#:imageId #" >삭제</button>					
+			</p>					
+		</div>
+	</div>
+</script>
+
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
