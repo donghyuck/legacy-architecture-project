@@ -191,26 +191,28 @@
  						}
  					});	
 				});
-										
+				
+				
+				$("#image-view-panel").data( "imagePlaceHolder", new Image () );
+								
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){					
-						//$('#my-messages').popover('show');	
 						
 					} else if(  $(this).attr('href') == '#my-attachments' ){
-						if( !$('#attachment-list-view').data('kendoListView') ){								
+						if( !$('#attachment-list-view').data('kendoListView') ){		
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
 								totalFileCount : "0"							
-							});							
+							});
 							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );						
 							$("#attachment-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
 									transport: {
-										read: { url:'${request.contextPath}/accounts/get-user-attachements.do?output=json', type: 'POST' },		
-										destroy: { url:'${request.contextPath}/accounts/delete-user-attachment.do?output=json', type:'POST' },                                
+										read: { url:'${request.contextPath}/community/list-my-attachement.do?output=json', type: 'POST' },		
+										destroy: { url:'${request.contextPath}/community/delete-my-attachment.do?output=json', type:'POST' },                                
 										parameterMap: function (options, operation){
 											if (operation != "read" && options) {										                        								                       	 	
 												return { attachmentId :options.attachmentId };									                            	
@@ -223,7 +225,8 @@
 									error:handleKendoAjaxError,
 									schema: {
 										model: Attachment,
-										data : "userAttachments"
+										data : "targetAttachments",
+										total : "totalTargetAttachmentCount"
 									},
 									sort: { field: "attachmentId", dir: "desc" },
 									filter :  { field: "contentType", operator: "neq", value: "" }
@@ -231,9 +234,10 @@
 								selectable: "single",									
 								change: function(e) {									
 									var data = this.dataSource.view() ;
-									this.dataSource.page();
-									var item = data[this.select().index()];				
-									openPreviewWindow( item ) ;	
+									//this.dataSource.page();
+									var item = data[this.select().index()];		
+									$("#image-view-panel").data( "imagePlaceHolder", item );														
+									openPreviewWindow( ) ;	
 								},
 								navigatable: false,
 								template: kendo.template($("#attachment-list-view-template").html()),								
@@ -250,12 +254,8 @@
 										attachementTotalModle.set("totalAttachCount", totalCount);
 									}
 								}
-							});
-														
-							$("#attachment-list-view").on(
-								"mouseenter", 
-								".attach", 
-								function(e) {
+							});														
+							$("#attachment-list-view").on("mouseenter",  ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
@@ -283,16 +283,15 @@
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
-							});
-																					
+							});													
 							$("#attachment-files").kendoUpload({
 								 	multiple : false,
 								 	width: 300,
 								 	showFileList : false,
 								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
 								    async: {
-									    saveUrl:  '${request.contextPath}/accounts/save-user-attachments.do?output=json',							   
-									    autoUpload: true
+										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
+										autoUpload: true
 								    },
 								    upload: function (e) {								         
 								    	 e.data = {};														    								    	 		    	 
@@ -352,18 +351,52 @@
 			} 
 		}		
 		
-		function openPreviewWindow( item ){						
+		function openPreviewWindow(){						
+			var imagePlaceHolder = $("#image-view-panel").data( "imagePlaceHolder");
 			var template = kendo.template($('#image-view-template').html());
-			$('#image-view-panel').html( template(item) );				
-			kendo.bind($("#image-view-panel"), item );
+			$('#image-view-panel').html( template(imagePlaceHolder) );				
+			kendo.bind($("#image-view-panel"), imagePlaceHolder );		
+						
+			$("#image-view-panel button").each(function( index ) {		
+				var panel_button = $(this);
+				panel_button.click(function (e) { 
+					e.preventDefault();					
+					if( panel_button.hasClass( 'custom-attachment-delete') ){
+						$.ajax({
+							dataType : "json",
+							type : 'POST',
+							url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
+							data : { attachmentId: imagePlaceHolder.attachmentId },
+							success : function( response ){		
+								$('#announce-panel').show();
+								$('#image-view-panel').hide();
+							},
+							error:handleKendoAjaxError
+						});	
+					}
+					if( panel_button.hasClass( 'close') ){
+						$('#announce-panel').show();
+						$('#image-view-panel').hide();						
+					}					
+				});
+			});	
+			
+			$("#update-attach-file").kendoUpload({
+				multiple: false,
+				async: {
+					saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
+					autoUpload: true
+				},
+				localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
+				upload: function (e) {				
+					e.data = { attachmentId: $("#image-view-panel").data( "imagePlaceHolder").attachmentId };														    								    	 		    	 
+				},
+				success: function (e) {				
+				} 
+			});		
 			
 			$('#image-view-panel').show();
-			$('#announce-panel').hide();
-															
-			$('#image-view-btn-close').click(function(){
-				$('#announce-panel').show();
-				$('#image-view-panel').hide();			
-			} );			
+			$('#announce-panel').hide();	
 		}		
 				
 		function viewAnnounce (announceId){				
@@ -380,12 +413,7 @@
 			announcePlaceHolder.user = item.user;
 			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
-			observable.bind("change", function(e) {
-				
-				
-				
-				alert("event :: change (" + kendo.toString(this.get("startDate"), "F") + ")");
-				
+			observable.bind("change", function(e) {				
 				$(".custom-announce-modify").removeAttr("disabled");
 			});
 																		
@@ -402,9 +430,14 @@
 						e.preventDefault();					
 						var updateId = announce_button.attr('data-announceId');
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
-						//if($("#announce-panel").data( "dataSource").hasChanges()){
+						
+						//	alert(
+							//	kendo.toString( announcePlaceHolder.get("startDate"), "F")
+						//	);
+							
 							alert(  kendo.stringify( announcePlaceHolder ) );
-						/**	$.ajax({
+							
+						$.ajax({
 								dataType : "json",
 								type : 'POST',
 								url : '${request.contextPath}/community/update-announce.do?output=json',
@@ -413,10 +446,8 @@
 									$("#announce-panel").data( "dataSource").read();
 								},
 								error:handleKendoAjaxError
-							});	
-							**/
-																					
-						//}
+						});	
+						
 					} );
 				}else if ( announce_button.hasClass('custom-announce-delete') ){
 					announce_button.click(function (e) { 
@@ -433,23 +464,23 @@
 		
 		<style scoped="scoped">
 
-	#social-meida-panel .popover {
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-		width: 100%;
-		margin-top: 20px;
-		margin-right: 20px;
-		margin-bottom: 20px;
-		margin-left: 20px;
-		float: left;
-		display: block;
-		position: relative;
-		z-index: 1;
-		max-width: 340px;
-	 }
-	 
-	 .popover-title {
-		font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-	 }
+		#social-meida-panel .popover {
+			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+			width: 100%;
+			margin-top: 20px;
+			margin-right: 20px;
+			margin-bottom: 20px;
+			margin-left: 20px;
+			float: left;
+			display: block;
+			position: relative;
+			z-index: 1;
+			max-width: 340px;
+		 }
+		 
+		 .popover-title {
+			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+		 }
 	 		
 		.carousel {
 		margin-top: 60px;		
@@ -478,22 +509,22 @@
 		{
 			float: left;
             position: relative;
-            width: 160px;
-            height: 160px;
+            width: 150px;
+            height: 150px;
             padding: 0;
 			cursor: pointer;
 		}
 		
 		.attach img
 		{
-			width: 160px;
-			height: 160px;
+			width: 150px;
+			height: 150px;
 		}
 		
 		.attach-description {
             position: absolute;
             top: 0;
-            width: 160px	;
+            width: 150px	;
             height: 0;
             overflow: hidden;
             background-color: rgba(0,0,0,0.8)
@@ -643,11 +674,8 @@
 							<div class="tab-pane" id="my-attachments">
 								<div class="blank-top-15" ></div>				
 								<#if !action.user.anonymous >			
-								<div class="panel panel-default">
-									<div class="panel-body">
-										<input name="uploadAttachment" id="attachment-files" type="file" />
-									</div>
-								</div>	
+								<input name="uploadAttachment" id="attachment-files" type="file" />	
+								<div class="blank-top-5 "></div>
 								</#if>
 								<div class="panel panel-success">								
 									<div class="panel-heading">
@@ -662,7 +690,7 @@
 											</li>									  
 										</ul>										
 									</div>
-									<div class="panel-body">
+									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="attachment-list-view" ></div>
 									</div>	
 									<div class="panel-footer" style="padding:0px;">
@@ -696,12 +724,14 @@
 				</div>
 			</div>
 		</script>		
+		
 		<script id="attachment-preview-template" type="text/x-kendo-template">	
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
+				<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 				<p class="blank-top-5">
-						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-						<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>
+					<input name="uploadAttachment" id="attachment-files" type="file" />
+					<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
+					<button  type="button" class="btn btn-default"  data-for-attachmentId="#:attachmentId #" >삭제</button>						
 				</p>				
 			# } else { #		
 				<div class="k-grid k-widget" style="width:100%;">
@@ -741,8 +771,9 @@
 					</div>
 				</div>
 				<p class="blank-top-5">
-					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-					<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>	
+					<input name="uploadAttachment" id="attachment-files" type="file" />
+					<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
+					<button  type="button" class="btn btn-default"  data-for-attachmentId="#:attachmentId #" >삭제</button>
 				</p>	
 				# } #  	
 		</script>		
