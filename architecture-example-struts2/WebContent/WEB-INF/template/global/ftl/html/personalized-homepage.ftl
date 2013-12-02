@@ -701,8 +701,22 @@
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
-		<!-- END FOOTER -->			
-		<!-- START TEMPLATE -->	
+		<!-- END FOOTER -->	
+		
+		<!-- START TEMPLATE -->
+		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
+			<div class="attach">			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
+			# } else { #			
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
+			# } #	
+				<div class="attach-description">
+					<h3>#:name#</h3>
+					<p>#:size# 바이트</p>
+				</div>
+			</div>
+		</script>				
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
