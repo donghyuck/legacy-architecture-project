@@ -239,7 +239,7 @@
 									var data = this.dataSource.view() ;
 									this.dataSource.page();
 									var item = data[this.select().index()];				
-									openPreviewWindow( item ) ;
+									openPreviewWindow( item ) ;	
 								},
 								navigatable: false,
 								template: kendo.template($("#attachment-list-view-template").html()),								
@@ -364,10 +364,10 @@
 			kendo.bind($("#image-view-panel"), item );
 			
 			$('#image-view-panel').show();
-			$('#notice-view-panel').hide();
+			$('#announce-panel').hide();
 															
 			$('#image-view-btn-close').click(function(){
-				$('#notice-view-panel').show();
+				$('#announce-panel').show();
 				$('#image-view-panel').hide();			
 			} );			
 		}		
@@ -378,8 +378,7 @@
 			$("#announce-view").html(
 				template(item)
 			);			
-			kendo.bind($("#announce-view"), item );						
-			
+			kendo.bind($("#announce-view"), item );							
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
 				if( announce_button.hasClass( 'custom-announce-modify') ){
@@ -388,44 +387,8 @@
 						var updateId = announce_button.attr('data-announceId');
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
 						if($("#announce-panel").data( "dataSource").hasChanges()){
-							$("#announce-panel").data( "dataSource").sync();			
-							/**
-										$.ajax({
-											type : 'POST',
-											url : '${request.contextPath}/community/update-announce.do?output=json'
-											data: { socialAccountId: selectedSocial.socialAccountId },
-											beforeSend: function(){																					
-												socialWindow.center();
-												socialWindow.open();
-												kendo.ui.progress($("#social-detail-window"), true);												
-											},
-											success : function(response){
-												if( response.error ){
-													// 오류 발생..
-													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
-												} else {														
-													socialWindow.content( template(response) );
-												}										
-												$('#connect-social-btn').click( function(e){
-													socialWindow.close();													
-													var w = window.open(
-														selectedSocial.authorizationUrl, 
-														"_blank",
-														"toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400"
-													);
-													w.focus();
-												});		
-											},
-											error: function(){
-												socialWindow.close();
-												handleKendoAjaxError();
-											},
-											dataType : 'json'
-										});				
-										**/				
+							$("#announce-panel").data( "dataSource").sync();
 						}
-						
-						
 					} );
 				}else if ( announce_button.hasClass('custom-announce-delete') ){
 					announce_button.click(function (e) { 
