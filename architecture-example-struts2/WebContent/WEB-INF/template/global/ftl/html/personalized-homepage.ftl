@@ -193,7 +193,7 @@
  					});	
 				});				
 				
-				$("#image-view-panel").data( "imagePlaceHolder", new Image () );								
+				$("#attach-view-panel").data( "attachPlaceHolder", new Image () );								
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){					
@@ -235,7 +235,7 @@
 									var data = this.dataSource.view() ;
 									//this.dataSource.page();
 									var item = data[this.select().index()];		
-									$("#image-view-panel").data( "imagePlaceHolder", item );														
+									$("#attach-view-panel").data( "attachPlaceHolder", item );														
 									openPreviewWindow( ) ;	
 								},
 								navigatable: false,
@@ -304,6 +304,8 @@
 									}
 							});
 						}
+					} else if(  $(this).attr('href') == '#my-images' ){
+					
 					}
 					$(this).tab('show')
 				});				
@@ -351,12 +353,12 @@
 		}		
 		
 		function openPreviewWindow(){						
-			var imagePlaceHolder = $("#image-view-panel").data( "imagePlaceHolder");
+			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#image-view-template').html());
-			$('#image-view-panel').html( template(imagePlaceHolder) );				
-			kendo.bind($("#image-view-panel"), imagePlaceHolder );		
+			$('#attach-view-panel').html( template(attachPlaceHolder) );				
+			kendo.bind($("#attach-view-panel"), attachPlaceHolder );		
 						
-			$("#image-view-panel button").each(function( index ) {		
+			$("#attach-view-panel button").each(function( index ) {		
 				var panel_button = $(this);
 				panel_button.click(function (e) { 
 					e.preventDefault();					
@@ -365,17 +367,17 @@
 							dataType : "json",
 							type : 'POST',
 							url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
-							data : { attachmentId: imagePlaceHolder.attachmentId },
+							data : { attachmentId: attachPlaceHolder.attachmentId },
 							success : function( response ){		
 								$('#announce-panel').show();
-								$('#image-view-panel').hide();
+								$('#attach-view-panel').hide();
 							},
 							error:handleKendoAjaxError
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
 						$('#announce-panel').show();
-						$('#image-view-panel').hide();						
+						$('#attach-view-panel').hide();						
 					}					
 				});
 			});	
@@ -388,17 +390,17 @@
 				},
 				localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
 				upload: function (e) {				
-					e.data = { attachmentId: $("#image-view-panel").data( "imagePlaceHolder").attachmentId };														    								    	 		    	 
+					e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
 				},
 				success: function (e) {				
 					if( e.response.targetAttachment ){
-						 $("#image-view-panel").data( "imagePlaceHolder",  e.response.targetAttachment  );
-						kendo.bind($("#image-view-panel"), e.response.targetAttachment );
+						 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
+						kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
 					}
 				} 
 			});		
 			
-			$('#image-view-panel').show();
+			$('#attach-view-panel').show();
 			$('#announce-panel').hide();	
 		}		
 				
@@ -618,7 +620,7 @@
 						<!-- end announce panel -->			
 						
 						<!-- start image view panel -->
-						<div id="image-view-panel"></div>				
+						<div id="attach-view-panel"></div>				
 						<!-- end image view panel -->		
 						<!-- start social view panels -->
 						<div id="social-view-panels"></div>	
@@ -692,6 +694,11 @@
 								</div>																					
 							</div>
 							<!-- end attachements -->		
+							<!-- start images -->
+							<div class="tab-pane" id="my-attachments">
+							
+							</div>
+							<!-- end images -->
 						</div>
 						<!-- end of tab content -->						
 					</div>				
