@@ -71,7 +71,7 @@
 					}
 				});				
 				
-				// Announces 
+				// 1. Announces 
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				$("#announce-panel").data( "dataSource", 
 	 				new kendo.data.DataSource({
@@ -183,6 +183,7 @@
 				});							
 				</#list>
 								
+								
 				$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
 					$(item).click( function(){ 
 						var socialProvider = $(item).attr('data-provider');
@@ -190,11 +191,9 @@
  							showSocialPanel( socialProvider );	
  						}
  					});	
-				});
+				});				
 				
-				
-				$("#image-view-panel").data( "imagePlaceHolder", new Image () );
-								
+				$("#image-view-panel").data( "imagePlaceHolder", new Image () );								
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){					
@@ -392,6 +391,10 @@
 					e.data = { attachmentId: $("#image-view-panel").data( "imagePlaceHolder").attachmentId };														    								    	 		    	 
 				},
 				success: function (e) {				
+					if( e.response.targetAttachment ){
+						 $("#image-view-panel").data( "imagePlaceHolder",  e.response.targetAttachment  );
+						kendo.bind($("#image-view-panel"), e.response.targetAttachment );
+					}
 				} 
 			});		
 			
@@ -399,8 +402,7 @@
 			$('#announce-panel').hide();	
 		}		
 				
-		function viewAnnounce (announceId){				
-			
+		function viewAnnounce (announceId){							
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 			announcePlaceHolder.announceId = item.announceId;
@@ -410,19 +412,16 @@
 			announcePlaceHolder.endDate = item.endDate;
 			announcePlaceHolder.modifiedDate = item.modifiedDate;
 			announcePlaceHolder.creationDate = item.creationDate;
-			announcePlaceHolder.user = item.user;
-			
+			announcePlaceHolder.user = item.user;			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {				
 				$(".custom-announce-modify").removeAttr("disabled");
-			});
-																		
+			});																		
 			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
 				template(announcePlaceHolder)
 			);			
-			kendo.bind($("#announce-view"), announcePlaceHolder );
-					
+			kendo.bind($("#announce-view"), announcePlaceHolder );					
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
 				if( announce_button.hasClass( 'custom-announce-modify') ){
@@ -430,13 +429,7 @@
 						e.preventDefault();					
 						var updateId = announce_button.attr('data-announceId');
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
-						
-						//	alert(
-							//	kendo.toString( announcePlaceHolder.get("startDate"), "F")
-						//	);
-							
 							alert(  kendo.stringify( announcePlaceHolder ) );
-							
 						$.ajax({
 								dataType : "json",
 								type : 'POST',
@@ -708,75 +701,8 @@
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
-		<!-- END FOOTER -->	
-		
-		<!-- START TEMPLATE -->
-		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
-			<div class="attach">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="attach-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>		
-		
-		<script id="attachment-preview-template" type="text/x-kendo-template">	
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
-				<p class="blank-top-5">
-					<input name="uploadAttachment" id="attachment-files" type="file" />
-					<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-					<button  type="button" class="btn btn-default"  data-for-attachmentId="#:attachmentId #" >삭제</button>						
-				</p>				
-			# } else { #		
-				<div class="k-grid k-widget" style="width:100%;">
-					<div style="padding-right: 17px;" class="k-grid-header">
-						<div class="k-grid-header-wrap">
-							<table cellSpacing="0">
-								<thead>
-									<tr>
-										<th class="k-header">속성</th>
-										<th class="k-header">값</th>
-									</tr>
-								</thead>
-							</table>
-						</div>
-					</div>
-					<div style="height: 199px;" class="k-grid-content">
-						<table style="height: auto;" class="system-details" cellSpacing="0">
-							<tbody>
-								<tr>
-									<td>파일</td>
-									<td>#= name #</td>
-								</tr>
-								<tr class="k-alt">
-									<td>종류</td>
-									<td>#= contentType #</td>
-								</tr>
-								<tr>
-									<td>크기(bytes)</td>
-									<td>#= size #</td>
-								</tr>				
-								<tr>
-									<td>다운수/클릭수</td>
-									<td>#= downloadCount #</td>
-								</tr>											
-							</tbody>
-						</table>	
-					</div>
-				</div>
-				<p class="blank-top-5">
-					<input name="uploadAttachment" id="attachment-files" type="file" />
-					<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-					<button  type="button" class="btn btn-default"  data-for-attachmentId="#:attachmentId #" >삭제</button>
-				</p>	
-				# } #  	
-		</script>		
+		<!-- END FOOTER -->			
+		<!-- START TEMPLATE -->	
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
