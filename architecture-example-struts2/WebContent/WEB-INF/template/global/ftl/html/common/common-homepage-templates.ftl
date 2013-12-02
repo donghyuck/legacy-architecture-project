@@ -10,9 +10,9 @@
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
 		<li class="list-group-item">
-		시작일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px; height:28px;">
+		시작일시: <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px; height:28px;">
 		<div class="blank-top-5" ></div>
-		종료일시: <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px; height:28px;">
+		종료일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px; height:28px;">
 		</li>
 		<li class="list-group-item">
 		<div class="media">
