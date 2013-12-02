@@ -80,20 +80,9 @@
 								dataType : "json", 
 								url : '${request.contextPath}/community/list-announce.do?output=json'
 							},
-							update: {
-								type : 'POST',								
-								url : '${request.contextPath}/community/update-announce.do?output=json'
-							},
 							parameterMap: function(options, operation) {
-
 								if (operation != "read" && options.models) {
 									return {models: kendo.stringify(options.models)};
-								}else if (operation == 'update' && options ) {
-									
-									var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder");
-									alert( kendo.stringify(announcePlaceHolder) );
-									alert( kendo.stringify(options) );									
-									return { announceId: options.announceId,  item:kendo.stringify(options) };
 								}
 							} 
 						},
@@ -379,7 +368,6 @@
 		function viewAnnounce (announceId){				
 			
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
-			
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 			announcePlaceHolder.announceId = item.announceId;
 			announcePlaceHolder.subject = item.subject;
@@ -409,7 +397,18 @@
 						var updateId = announce_button.attr('data-announceId');
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
 						if($("#announce-panel").data( "dataSource").hasChanges()){
-							$("#announce-panel").data( "dataSource").sync();
+							alert(  kendo.stringify( announcePlaceHolder ) );
+							$.ajax({
+								dataType : "json",
+								type : 'POST',
+								url : '${request.contextPath}/community/update-announce.do?output=json'
+								data : { announceId: announcePlaceHolder.announceId, item: kendo.stringify( announcePlaceHolder ) },
+								success : function( response ){		
+									$("#announce-panel").data( "dataSource").read();
+								},
+								error:handleKendoAjaxError
+							});	
+																					
 						}
 					} );
 				}else if ( announce_button.hasClass('custom-announce-delete') ){
