@@ -105,7 +105,6 @@
 		<li class="media">
 		    <a class="pull-left" href="\\#">
 		    	<img class="media-object img-circle" src="http://graph.facebook.com/#=from.id#/picture" alt="프로파일 이미지">
-		    	
 		    </a>
 		    <div class="media-body">
 		      <h5 class="media-heading">
@@ -139,15 +138,13 @@
 		     	<blockquote>
 		     	<p>#: caption #</p>
 				</blockquote>
-		     	# } #			     	
-		     	
+		     	# } #		     	
 		     	#if ( typeof( description ) == 'string'  ) { #
 		     	<blockquote><p class="text-muted"><small>
 		     	#: description #
 		     	</small></p>
 		     	</blockquote>
-		     	# } #		
-		     							
+		     	# } #				     							
 				# for (var i = 0; i < comments.length ; i++) { #												
 				# var comment = comments[i] ; #							
 					<div class="media">
@@ -202,7 +199,7 @@
 		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
 		<div class="panel-body">
 			#if (contentType.match("^image") ) {#
-			<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-rounded img-responsive"/>
+			<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 			# } else { #		
 				<div class="k-grid k-widget" style="width:100%;">
 					<div style="padding-right: 17px;" class="k-grid-header">
@@ -242,8 +239,10 @@
 				</div>
 			# } #  	
 			<p class="blank-top-5">
-				<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-				<a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >삭제</a>					
+				<input name="update-attach-file" id="update-attach-file" type="file" />
+				<div class="blank-top-5 "></div>
+				<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
+				<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#:attachmentId #" >삭제</button>					
 			</p>					
 		</div>
 	</div>
