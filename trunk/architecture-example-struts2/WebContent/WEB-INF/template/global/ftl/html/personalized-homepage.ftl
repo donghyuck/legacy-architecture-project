@@ -304,7 +304,7 @@
 									}
 							});
 						}
-					} else if(  $(this).attr('href') == '#my-images' ){
+					} else if(  $(this).attr('href') == '#my-photos' ){
 					
 					}
 					$(this).tab('show')
@@ -694,15 +694,24 @@
 								</div>																					
 							</div>
 							<!-- end attachements -->		
-							<!-- start images -->
-							<div class="tab-pane" id="my-images">
+							<!-- start photos -->
+							<div class="tab-pane" id="my-photos">
 								<div class="blank-top-15" ></div>				
 								<#if !action.user.anonymous >			
-								<input name="uploadImages" id="image-files" type="file" />	
+								<input name="uploadPhotos" id="photo-files" type="file" />	
 								<div class="blank-top-5 "></div>
-								</#if>							
+								</#if>		
+								<div class="panel panel-danger">								
+									<div class="panel-heading"></div>
+									<div class="panel-body scrollable" style="max-height:450px;">
+										<div id="photo-list-view" ></div>
+									</div>	
+									<div class="panel-footer" style="padding:0px;">
+										<div id="photo-list-pager" class="k-pager-wrap"></div>
+									</div>
+								</div>																				
 							</div>
-							<!-- end images -->
+							<!-- end photos -->
 						</div>
 						<!-- end of tab content -->						
 					</div>				
