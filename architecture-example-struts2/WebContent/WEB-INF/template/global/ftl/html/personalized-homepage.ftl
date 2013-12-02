@@ -695,7 +695,7 @@
 							</div>
 							<!-- end attachements -->		
 							<!-- start images -->
-							<div class="tab-pane" id="my-attachments">
+							<div class="tab-pane" id="my-images">
 							
 							</div>
 							<!-- end images -->
