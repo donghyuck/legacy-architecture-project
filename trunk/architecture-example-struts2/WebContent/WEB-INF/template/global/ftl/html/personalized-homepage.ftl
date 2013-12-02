@@ -398,7 +398,7 @@
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
 						//if($("#announce-panel").data( "dataSource").hasChanges()){
 							alert(  kendo.stringify( announcePlaceHolder ) );
-							$.ajax({
+						/**	$.ajax({
 								dataType : "json",
 								type : 'POST',
 								url : '${request.contextPath}/community/update-announce.do?output=json',
@@ -408,6 +408,7 @@
 								},
 								error:handleKendoAjaxError
 							});	
+							**/
 																					
 						//}
 					} );
