@@ -414,6 +414,8 @@
 			} 
 		}		
 		
+		function showPhotoPanel(){
+		}
 		
 		
 		function openPreviewWindow(){				
