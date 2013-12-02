@@ -70,7 +70,7 @@
 				});				
 				
 				// Announces 
-				var selectedAnnounce = new Announce ();
+				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				$("#announce-panel").data( "dataSource", 
 	 				new kendo.data.DataSource({
 						transport: {
@@ -89,6 +89,8 @@
 									return {models: kendo.stringify(options.models)};
 								}else if (operation == 'update' && options ) {
 									
+									var selected = $("#announce-panel").data( "announcePlaceHolder");
+									alert( kendo.stringify(selected) );
 									alert( kendo.stringify(options) );
 									
 									return { announceId: options.announceId,  item:kendo.stringify(options) };
@@ -374,12 +376,15 @@
 			} );			
 		}		
 		
-		function viewAnnounce (announceId){		
+		function viewAnnounce (announceId){				
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
+			$("#announce-panel").data( "announcePlaceHolder", item );
+															
 			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
 				template(item)
 			);			
+			
 			kendo.bind($("#announce-view"), item );							
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
