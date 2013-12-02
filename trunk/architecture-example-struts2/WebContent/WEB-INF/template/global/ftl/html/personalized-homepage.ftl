@@ -696,7 +696,11 @@
 							<!-- end attachements -->		
 							<!-- start images -->
 							<div class="tab-pane" id="my-images">
-							
+								<div class="blank-top-15" ></div>				
+								<#if !action.user.anonymous >			
+								<input name="uploadImages" id="image-files" type="file" />	
+								<div class="blank-top-5 "></div>
+								</#if>							
 							</div>
 							<!-- end images -->
 						</div>
