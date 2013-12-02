@@ -90,10 +90,9 @@
 									return {models: kendo.stringify(options.models)};
 								}else if (operation == 'update' && options ) {
 									
-									var selected = $("#announce-panel").data( "announcePlaceHolder");
-									alert( kendo.stringify(selected) );
-									alert( kendo.stringify(options) );
-									
+									var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder");
+									alert( kendo.stringify(announcePlaceHolder) );
+									alert( kendo.stringify(options) );									
 									return { announceId: options.announceId,  item:kendo.stringify(options) };
 								}
 							} 
@@ -379,14 +378,22 @@
 		
 		function viewAnnounce (announceId){				
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
-			$("#announce-panel").data( "announcePlaceHolder", item );
-															
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
+			announcePlaceHolder.announceId = item.announceId;
+			announcePlaceHolder.subject = item.subject;
+			announcePlaceHolder.body = item.body;
+			announcePlaceHolder.startDate = item.startDate ;
+			announcePlaceHolder.endDate = item.endDate;
+			announcePlaceHolder.modifiedDate = item.modifiedDate;
+			announcePlaceHolder.creationDate = item.creationDate;
+			announcePlaceHolder.user = item.user;
+																		
 			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
-				template(item)
+				template(announcePlaceHolder)
 			);			
-			
-			kendo.bind($("#announce-view"), item );							
+			kendo.bind($("#announce-view"), announcePlaceHolder );
+					
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
 				if( announce_button.hasClass( 'custom-announce-modify') ){
