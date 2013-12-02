@@ -88,7 +88,9 @@
 								if (operation != "read" && options.models) {
 									return {models: kendo.stringify(options.models)};
 								}else if (operation == 'update' && options ) {
+									
 									alert( kendo.stringify(options) );
+									
 									return { announceId: options.announceId,  item:kendo.stringify(options) };
 								}
 							} 
