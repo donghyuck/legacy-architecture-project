@@ -365,7 +365,7 @@
 				$('#image-view-panel').hide();			
 			} );			
 		}		
-		
+				
 		function viewAnnounce (announceId){				
 			
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
