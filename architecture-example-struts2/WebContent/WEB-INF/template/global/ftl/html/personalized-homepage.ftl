@@ -396,7 +396,7 @@
 						e.preventDefault();					
 						var updateId = announce_button.attr('data-announceId');
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
-						if($("#announce-panel").data( "dataSource").hasChanges()){
+						//if($("#announce-panel").data( "dataSource").hasChanges()){
 							alert(  kendo.stringify( announcePlaceHolder ) );
 							$.ajax({
 								dataType : "json",
@@ -409,7 +409,7 @@
 								error:handleKendoAjaxError
 							});	
 																					
-						}
+						//}
 					} );
 				}else if ( announce_button.hasClass('custom-announce-delete') ){
 					announce_button.click(function (e) { 
