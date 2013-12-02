@@ -401,7 +401,7 @@
 							$.ajax({
 								dataType : "json",
 								type : 'POST',
-								url : '${request.contextPath}/community/update-announce.do?output=json'
+								url : '${request.contextPath}/community/update-announce.do?output=json',
 								data : { announceId: announcePlaceHolder.announceId, item: kendo.stringify( announcePlaceHolder ) },
 								success : function( response ){		
 									$("#announce-panel").data( "dataSource").read();
