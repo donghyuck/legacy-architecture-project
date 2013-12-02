@@ -305,13 +305,12 @@
 							});
 						}
 					} else if(  $(this).attr('href') == '#my-photos' ){
-						if( !$('#photo-list-view').data('kendoListView') ){		
-											
+						if( !$('#photo-list-view').data('kendoListView') ){													
 							$("#photo-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
 									transport: {
-										read: { url:'${request.contextPath}/community/list-my-photo.do?output=json', type: 'POST' }
+										read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' }
 									},
 									pageSize: 12,
 									error:handleKendoAjaxError,
@@ -326,7 +325,7 @@
 								change: function(e) {									
 									var data = this.dataSource.view() ;
 									var item = data[this.select().index()];		
-									$("#attach-view-panel").data( "attachPlaceHolder", item );														
+									//$("#photo-view-panel").data( "photoPlaceHolder", item );														
 									openPreviewWindow( ) ;	
 								},
 								navigatable: false,
@@ -341,6 +340,7 @@
 							});								
 									
 							// Pager
+							
 							$("#photo-list-pager").kendoPager({
 								refresh : true,
 								buttonCount : 5,
@@ -350,22 +350,24 @@
 								 	multiple : false,
 								 	width: 300,
 								 	showFileList : false,
-								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+								    localization:{ select : '이미지 선택' , dropFilesHere : '업로드할 이미지을 이곳에 끌어 놓으세요.' },
 								    async: {
-										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
+										saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
 										autoUpload: true
 								    },
 								    upload: function (e) {								         
 								    	 e.data = {};														    								    	 		    	 
 								    },
 								    success : function(e) {								    
-										if( e.response.targetAttachment ){
-											e.response.targetAttachment.attachmentId;
+										if( e.response.targetImage ){
+											e.response.targetImage.imageId;
 											// LIST VIEW REFRESH...
-											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+											$('#photo-list-view').data('kendoListView').dataSource.read(); 
 										}				
 									}
-							});					
+							});		
+							
+						}	
 					}
 					$(this).tab('show')
 				});				
