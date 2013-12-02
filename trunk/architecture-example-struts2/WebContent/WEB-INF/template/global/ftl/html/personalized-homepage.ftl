@@ -377,7 +377,9 @@
 		}		
 		
 		function viewAnnounce (announceId){				
+			
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
+			
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 			announcePlaceHolder.announceId = item.announceId;
 			announcePlaceHolder.subject = item.subject;
@@ -387,6 +389,11 @@
 			announcePlaceHolder.modifiedDate = item.modifiedDate;
 			announcePlaceHolder.creationDate = item.creationDate;
 			announcePlaceHolder.user = item.user;
+			
+			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
+			observable.bind("change", function(e) {
+				$(".custom-announce-modify").removeAttr("disabled");
+			});
 																		
 			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
