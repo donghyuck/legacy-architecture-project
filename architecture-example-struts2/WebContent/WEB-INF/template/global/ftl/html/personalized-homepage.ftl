@@ -193,7 +193,9 @@
  					});	
 				});				
 				
-				$("#attach-view-panel").data( "attachPlaceHolder", new Image () );								
+				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
+				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
+											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){					
@@ -233,7 +235,6 @@
 								selectable: "single",									
 								change: function(e) {									
 									var data = this.dataSource.view() ;
-									//this.dataSource.page();
 									var item = data[this.select().index()];		
 									$("#attach-view-panel").data( "attachPlaceHolder", item );														
 									openPreviewWindow( ) ;	
@@ -324,7 +325,7 @@
 								selectable: "single",									
 								change: function(e) {									
 									var data = this.dataSource.view() ;
-									var item = data[this.select().index()];		
+									var item = data[this.select().index()];
 									$("#photo-view-panel").data( "photoPlaceHolder", item );														
 									showPhotoPanel( ) ;	
 								},
@@ -339,13 +340,13 @@
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 							});								
 									
-							// Pager
-							
+							// Pager							
 							$("#photo-list-pager").kendoPager({
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#photo-list-view').data('kendoListView').dataSource
-							});													
+							});			
+							// Photo Upload										
 							$("#photo-files").kendoUpload({
 								 	multiple : false,
 								 	width: 300,
@@ -414,12 +415,63 @@
 			} 
 		}		
 		
+		
+		
 		function showPhotoPanel(){
+			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");
+			var template = kendo.template($('#photo-view-template').html());
+			$('#photo-view-panel').html( template(photoPlaceHolder) );				
+			kendo.bind($("#photo-view-panel"), photoPlaceHolder );	
+	
+			$("#photo-view-panel button").each(function( index ) {		
+				var panel_button = $(this);
+				panel_button.click(function (e) { 
+					e.preventDefault();					
+					if( panel_button.hasClass( 'custom-photo-delete') ){
+						$.ajax({
+							dataType : "json",
+							type : 'POST',
+							url : '${request.contextPath}/community/delete-my-image.do?output=json',
+							data : { imageId: photoPlaceHolder.imageId },
+							success : function( response ){		
+								$('#announce-panel').show();
+								$('#photo-view-panel').hide();
+							},
+							error:handleKendoAjaxError
+						});	
+					}
+					if( panel_button.hasClass( 'close') ){
+						$("div .custom-panels-group").hide();
+						$('#announce-panel').show();						
+					}					
+				});
+			});	
+					
+			$("#update-photo-file").kendoUpload({
+				multiple: false,
+				async: {
+					saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
+					autoUpload: true
+				},
+				localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+				upload: function (e) {				
+					e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
+				},
+				success: function (e) {				
+					if( e.response.targetImage ){
+						 $("#photo-view-panel").data( "photoPlaceHolder",  e.response.targetImage  );
+						 showPhotoPanel();
+						//kendo.bind($("#photo-view-panel"), e.response.targetImage );
+					}
+				} 
+			});		
+						
+			$("div .custom-panels-group").hide();
+			$("#photo-view-panel").show();			
 		}
 		
 		
-		function openPreviewWindow(){				
-				
+		function openPreviewWindow(){	
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#image-view-template').html());
 			$('#attach-view-panel').html( template(attachPlaceHolder) );				
@@ -443,8 +495,8 @@
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
-						$('#announce-panel').show();
-						$('#attach-view-panel').hide();						
+						$("div .custom-panels-group").hide();
+						$('#announce-panel').show();						
 					}					
 				});
 			});	
@@ -467,9 +519,10 @@
 				} 
 			});		
 			
-			$('#attach-view-panel').show();
-			$('#announce-panel').hide();	
+			$("div .custom-panels-group").hide();
+			$('#attach-view-panel').show();			
 		}		
+		
 				
 		function viewAnnounce (announceId){							
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
@@ -660,7 +713,7 @@
 				<div class="row">					
 					<div class="col-lg-8">						
 						<!-- start announce panel -->
-						<div id="announce-panel" >	
+						<div id="announce-panel" class="custom-panels-group">	
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
@@ -685,10 +738,12 @@
 							</div>		
 						</div>
 						<!-- end announce panel -->			
-						
-						<!-- start image view panel -->
-						<div id="attach-view-panel"></div>				
-						<!-- end image view panel -->		
+						<!-- start photo view panel -->
+						<div id="photo-view-panel" class="custom-panels-group"></div>	
+						<!-- end photo view panel -->												
+						<!-- start attach view panel -->
+						<div id="attach-view-panel" class="custom-panels-group"></div>				
+						<!-- end attach view panel -->		
 						<!-- start social view panels -->
 						<div id="social-view-panels"></div>	
 						<!-- end social view panels -->						
