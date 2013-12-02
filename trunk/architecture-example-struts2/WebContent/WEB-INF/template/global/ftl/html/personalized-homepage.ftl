@@ -12,6 +12,7 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
+			'${request.contextPath}/js/cultures/kendo.culture.ko-KR.min.js',			
 			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',			
 			'${request.contextPath}/js/common/holder.js',
