@@ -156,6 +156,7 @@ public class ExtendedFreemarkerManager extends FreemarkerManager {
 
 		TemplateHashModel staticModels = b.getStaticModels();
 		try {
+			model.put("TextUtils",              staticModels.get("architecture.common.util.TextUtils"));
 			model.put("L10NUtils",              staticModels.get("architecture.common.util.L10NUtils"));
 			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
 			model.put("ServletUtils",             staticModels.get("architecture.ee.web.util.ServletUtils"));

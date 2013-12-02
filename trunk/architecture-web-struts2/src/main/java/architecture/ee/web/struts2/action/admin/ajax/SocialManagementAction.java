@@ -181,8 +181,7 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 			log.debug(account);
 			log.debug("=====================");
 			socialAccountManager.saveSocialAccount(account);		
-			this.targetSocialAccount = null;
-			
+			this.targetSocialAccount = null;			
 			return success();
 		} catch (Throwable e) {
 			e.printStackTrace();
