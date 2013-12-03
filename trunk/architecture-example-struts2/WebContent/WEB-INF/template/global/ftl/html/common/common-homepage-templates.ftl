@@ -268,6 +268,7 @@
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
 	<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-rounded img-responsive"/>
 	<h5>#:name#</h5>
+	<p class="text-muted">#: modifiedDate #</p>
 </script>
 
 <script type="text/x-kendo-template" id="photo-view-template">
