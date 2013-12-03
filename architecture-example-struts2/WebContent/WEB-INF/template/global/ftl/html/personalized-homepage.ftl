@@ -218,22 +218,7 @@
 						}
 					});	
 				});			
-				$("#update-gallery-photo-file").kendoUpload({
-								multiple: false,
-								async: {
-									saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
-									autoUpload: true
-								},
-								localization:{ select : '사진 업로드하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
-								upload: function (e) {				
-									//e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
-								},
-								success: function (e) {				
-									if( e.response.targetImage ){
-										$('#photo-gallery-view').data('kendoListView').dataSource.read();
-									}
-								} 
-				});		
+				
 												
 				// 4. Right Tabs
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
@@ -413,6 +398,24 @@
 							});									
 						}
 					} else if ( $(this).attr('href') == '#my-photo-gallery' ){						
+						if(!$('#update-gallery-photo-file').data('kendoUpload')){
+							$("#update-gallery-photo-file").kendoUpload({
+								multiple: false,
+								async: {
+									saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
+									autoUpload: true
+								},
+								localization:{ select : '사진 업로드하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+								upload: function (e) {				
+									//e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
+								},
+								success: function (e) {				
+									if( e.response.targetImage ){
+										$('#photo-gallery-view').data('kendoListView').dataSource.read();
+									}
+								} 
+							});		
+						}			
 						showPhotoGallaryPanel();
 					}
 					$(this).tab('show')
