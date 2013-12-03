@@ -135,7 +135,7 @@
 				
 				$("#announce-panel").data( "dataSource").read();
 
-								if( $("#social-view-panels").data( "providers") == null ){			
+				if( $("#social-view-panels").data( "providers") == null ){			
 					$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
 					<#list action.companySocials as item >
 						<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
@@ -397,6 +397,26 @@
 							});									
 						}
 					} else if ( $(this).attr('href') == '#my-photo-gallery' ){
+					
+						if ( !$('#update-gallery-photo-file').data('kendoUpload') ) {
+							$("#update-gallery-photo-file").kendoUpload({
+								multiple: false,
+								async: {
+									saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
+									autoUpload: true
+								},
+								localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+								upload: function (e) {				
+									//e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
+								},
+								success: function (e) {				
+									if( e.response.targetImage ){
+										$('#photo-gallery-view').data('kendoListView').dataSource.read();
+									}
+								} 
+							});		
+						}
+						
 						showPhotoGallaryPanel();
 					}
 					$(this).tab('show')
@@ -896,7 +916,7 @@
 							</div>							
 							<!-- end photos -->
 							<div class="tab-pane" id="my-photo-gallery">
-							
+								<input name="update-gallery-photo-file" id="update-photo-file" type="file" />
 							</div>
 						</div>
 						<!-- end of tab content -->						
