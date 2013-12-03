@@ -24,49 +24,59 @@ Company company = user.getCompany();
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
 		complete: function() {        	              		              		  
-			var templateContent = $("#alert-template").html();
-			var template = kendo.template(templateContent);	               		  
-			var validator = $("#login-window").kendoValidator().data("kendoValidator");     
-			$("#login").click(function() {           		    	
-				$("#status").html("");
-				if( validator.validate() ){        				
-					$.ajax({
-						type: "POST",
-						url: "/login",
-						dataType: 'json',
-						data: $("form[name=fm1]").serialize(),
-						success : function( response ) {   
-							if( response.error ){ 
-								$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
-								// var status = $(".status");
-								//status.text( "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." ).addClass("error") ;                                      
-								$("#login").kendoAnimate("slideIn:up");          
-								$("#password").val("").focus();
-							} else {
-	                                         //var status = $(".status");
-	                                         //status.text(  ""  );
-								$("form[name='fm1']")[0].reset();               	                            
-								$("form[name='fm1']").attr("action", "/main.do").submit();
-							}                                 
-						},
-						error: function( xhr, ajaxOptions, thrownError){         				        
-							$("form[name='fm1']")[0].reset();                    
-							var status = $(".status");
-							status.text(  "잘못된 접근입니다."  ).addClass("error") ;    
-							$("#login").kendoAnimate("slideIn:up");
-						}
-					});
-				}else{        			      
-					//$("#login").kendoAnimate("slideIn:up"); 
-				}
+						
+			$("#login").click( function() {           		    	
+				doLogin();
 			});          
+			
 			$('#login-window').modal({show:true, backdrop:false});
 			$('#login-window').on('hidden.bs.modal', function () {
-				$("form[name='fm1']")[0].reset();               	                            
+				$("form[name='fm1']")[0].reset();               	   
+				// referer 
 				$("form[name='fm1']").attr("action", "/main.do").submit();
+			});
+			
+			$("#password").keypress(function(event){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if(keycode == '13'){
+					doLogin();
+				}				
 			});
 		}		
 	}]);
+	
+	function doLogin(){
+		var templateContent = $("#alert-template").html();
+		var template = kendo.template(templateContent);	              
+		var validator = $("#login-window").kendoValidator().data("kendoValidator");     
+		$("#status").html("");
+		if( validator.validate() ){        				
+			$.ajax({
+				type: "POST",
+				url: "/login",
+				dataType: 'json',
+				data: $("form[name=fm1]").serialize(),
+				success : function( response ) {   
+					if( response.error ){ 
+						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );                        
+						$("#login").kendoAnimate("slideIn:up");          
+						$("#password").val("").focus();
+					} else {
+						$("form[name='fm1']")[0].reset();               	                            
+						$("form[name='fm1']").attr("action", "/main.do").submit();
+					}                                 
+				},
+				error: function( xhr, ajaxOptions, thrownError){         				        
+					$("form[name='fm1']")[0].reset();                    
+					var status = $(".status");
+					status.text(  "잘못된 접근입니다."  ).addClass("error") ;    
+					$("#login").kendoAnimate("slideIn:up");
+				}
+			});
+		}else{        			      
+			//$("#login").kendoAnimate("slideIn:up"); 
+		}		
+	}
 </script>
 <style scoped="scoped">
 	#login-window .modal-dialog {
@@ -87,10 +97,10 @@ Company company = user.getCompany();
 			<div class="modal-body">
 				<div class="container layout">
 					<div class="row">
-						<div class="col-lg-6">
+						<div class="col-lg-6 col-xs-6">
 							<button class="btn btn-lg btn-block btn-facebook"><i class="icon-facebook"></i> | 페이스북으로 로그인</button>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-6 col-xs-6">
 							<button class="btn btn-lg btn-block btn-twitter"><i class="icon-twitter"></i> | 트위터로 로그인</button>
 						</div>						
 					</div>				
