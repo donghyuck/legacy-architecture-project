@@ -398,8 +398,7 @@
 							});									
 						}
 					} else if ( $(this).attr('href') == '#my-photo-gallery' ){
-							showPhotoGallaryPanel();
-							return;
+						showPhotoGallaryPanel();
 					}
 					$(this).tab('show')
 				});				
@@ -895,8 +894,11 @@
 										<div id="photo-list-pager" class="k-pager-wrap"></div>
 									</div>
 								</div>																				
-							</div>
+							</div>							
 							<!-- end photos -->
+							<div class="tab-pane" id="my-photo-gallery">
+							
+							</div>
 						</div>
 						<!-- end of tab content -->						
 					</div>				
