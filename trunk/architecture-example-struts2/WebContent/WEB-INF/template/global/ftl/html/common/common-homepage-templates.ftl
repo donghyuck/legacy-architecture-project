@@ -248,6 +248,28 @@
 	</div>
 </script>
 
+<script type="text/x-kendo-template" id="photo-gallery-template">
+	<div class="panel panel-default">
+		<div class="panel-heading">My 포토 갤러리		
+			<div class="k-window-actions panel-header-actions">
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+			</div>		
+		</div>
+		<div class="panel-body">
+			<div id="photo-gallery-pager" class="k-pager-wrap"></div>
+			<div id="photo-gallery-view" style="border:0px;"></div>
+		</div>
+	</div>		
+</script>
+
+<script type="text/x-kendo-template" id="photo-gallery-view-template">
+	<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-rounded img-responsive"/>
+	<h5>#:name#</h5>
+</script>
+
 <script type="text/x-kendo-template" id="photo-view-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
