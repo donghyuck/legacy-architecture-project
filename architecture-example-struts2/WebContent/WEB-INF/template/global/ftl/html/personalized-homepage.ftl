@@ -461,7 +461,7 @@
 							data : "targetImages",
 							total : "totalTargetImageCount"
 						},
-						sort: { field: "modifiedDate", dir: "desc" }
+						sort: { field: "modifiedDate", dir: "asc" }
 					},
 					template: kendo.template($("#photo-gallery-view-template").html())
 				});
