@@ -224,7 +224,7 @@
 									saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
 									autoUpload: true
 								},
-								localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+								localization:{ select : '사진 업로드하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
 								upload: function (e) {				
 									//e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
 								},
@@ -523,12 +523,12 @@
 			$("#update-photo-file").kendoUpload({
 				multiple: false,
 				async: {
-					saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
+					saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
 					autoUpload: true
 				},
 				localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
 				upload: function (e) {				
-					e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
+					e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };
 				},
 				success: function (e) {				
 					if( e.response.targetImage ){
@@ -912,7 +912,7 @@
 							</div>							
 							<!-- end photos -->
 							<div class="tab-pane" id="my-photo-gallery">
-								<input name="update-gallery-photo-file" id="update-photo-file" type="file" />
+								<input name="update-gallery-photo-file" id="update-gallery-photo-file" type="file" />
 							</div>
 						</div>
 						<!-- end of tab content -->						
