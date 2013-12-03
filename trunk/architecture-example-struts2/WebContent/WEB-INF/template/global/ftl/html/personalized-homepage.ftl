@@ -912,6 +912,7 @@
 							</div>							
 							<!-- end photos -->
 							<div class="tab-pane" id="my-photo-gallery">
+								<div class="blank-top-5 "></div>
 								<input name="update-gallery-photo-file" id="update-gallery-photo-file" type="file" />
 							</div>
 						</div>
