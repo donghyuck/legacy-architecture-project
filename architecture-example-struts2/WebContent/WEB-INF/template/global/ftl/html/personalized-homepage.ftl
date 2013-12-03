@@ -135,71 +135,99 @@
 				} );								
 				
 				$("#announce-panel").data( "dataSource").read();
-				// social data sources
-				$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
-				<#list action.companySocials as item >
-					<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
-					$("#social-view-panels").data( "providers").set( "${item.serviceProviderName}" ,  {
-						<#if  item.serviceProviderName == "twitter" >
-						template : kendo.template($("#twitter-timeline-template").html())	,			
-						<#elseif item.serviceProviderName == "facebook" >
-						template : kendo.template($("#facebook-homefeed-template").html()),
-						</#if>		
-						dataSource : new kendo.data.DataSource({
-							transport: {
-								read: {
-									type : 'POST',
-									type: "json",
-									<#if  item.serviceProviderName == "twitter" >
-									url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',			
-									<#elseif item.serviceProviderName == "facebook" >
-									url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
-									</#if>	
-								},
-								parameterMap: function (options, operation){
-									if (operation == "read" && options) {										                        								                       	 	
-										return { socialAccountId: ${ item.socialAccountId } };									                            	
-									}
-								} 
-							},
-							requestStart: function() {
-								kendo.ui.progress($(${elementId}), true);
-							},
-							requestEnd: function() {
-								kendo.ui.progress($(${elementId}), false);
-							},
-							change: function() {
-								$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
-							},
-							error:handleKendoAjaxError,
-							schema: {
+
+								if( $("#social-view-panels").data( "providers") == null ){			
+					$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
+					<#list action.companySocials as item >
+						<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
+						$("#social-view-panels").data( "providers").set( "${item.serviceProviderName}" ,  {
 							<#if  item.serviceProviderName == "twitter" >
-								data : "homeTimeline"
+							template : kendo.template($("#twitter-timeline-template").html())	,			
 							<#elseif item.serviceProviderName == "facebook" >
-								data : "homeFeed"
-							</#if>	
-							}						
-						})
-				});							
-				</#list>
-								
-								
-				$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
-					$(item).click( function(){ 
-						var socialProvider = $(item).attr('data-provider');
-						if( typeof (socialProvider) == 'string' ){
- 							showSocialPanel( socialProvider );	
- 						}
- 					});	
-				});				
-				
+							template : kendo.template($("#facebook-homefeed-template").html()),
+							</#if>		
+							dataSource : new kendo.data.DataSource({
+								transport: {
+									read: {
+										type : 'POST',
+										type: "json",
+										<#if  item.serviceProviderName == "twitter" >
+										url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',			
+										<#elseif item.serviceProviderName == "facebook" >
+										url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
+										</#if>	
+									},
+									parameterMap: function (options, operation){
+										if (operation == "read" && options) {										                        								                       	 	
+											return { socialAccountId: ${ item.socialAccountId } };									                            	
+										}
+									} 
+								},
+								requestStart: function() {
+									kendo.ui.progress($(${elementId}), true);
+								},
+								requestEnd: function() {
+									kendo.ui.progress($(${elementId}), false);
+								},
+								change: function() {
+									$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
+								},
+								error:handleKendoAjaxError,
+								schema: {
+								<#if  item.serviceProviderName == "twitter" >
+									data : "homeTimeline"
+								<#elseif item.serviceProviderName == "facebook" >
+									data : "homeFeed"
+								</#if>	
+								}						
+							})
+					});							
+					</#list>
+					$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
+						$(item).click( function(){ 
+							var socialProvider = $(item).attr('data-provider');
+							if( typeof (socialProvider) == 'string' ){
+			 					showSocialPanel( socialProvider );	
+			 				}
+			 			});	
+					});											
+				}				
+										
+				// 3. Photo Gallery Setup
+				$("#photo-gallery-panel").html(
+					$('#photo-gallery-template').html()
+				);					
+				$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
+					var gallery_header_action = $(this);
+					gallery_header_action.click(function (e){
+						e.preventDefault();		
+						var gallery_header_action_icon = gallery_header_action.find('span');
+						if (gallery_header_action.text() == "Minimize"){
+							$( "#photo-gallery-panel .panel-body").toggleClass("hide");				
+							if( gallery_header_action_icon.hasClass("k-i-maximize") ){
+								gallery_header_action_icon.removeClass("k-i-maximize");
+								gallery_header_action_icon.addClass("k-i-minimize");
+							}else{
+								gallery_header_action_icon.removeClass("k-i-minimize");
+								gallery_header_action_icon.addClass("k-i-maximize");
+							}
+						} else if (gallery_header_action.text() == "Refresh"){	
+							$('#photo-gallery-view').data('kendoListView').dataSource.read();
+						} else if (gallery_header_action.text() == "Close"){	
+							$("div .custom-panels-group").hide();
+							$('#announce-panel').show();		
+						}
+					});	
+				});			
+					
+				// 4. Right Tabs
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-messages' ){					
-						
+					if(  $(this).attr('href') == '#my-messages' ){
+		
 					} else if(  $(this).attr('href') == '#my-attachments' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){		
 							var attachementTotalModle = kendo.observable({ 
@@ -305,8 +333,8 @@
 									}
 							});
 						}
-					} else if(  $(this).attr('href') == '#my-photos' ){
-						if( !$('#photo-list-view').data('kendoListView') ){													
+					} else if( $(this).attr('href') == '#my-photos' ){						
+						if( !$('#photo-list-view').data('kendoListView') ){
 							$("#photo-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
@@ -327,7 +355,7 @@
 									var data = this.dataSource.view() ;
 									var item = data[this.select().index()];
 									$("#photo-view-panel").data( "photoPlaceHolder", item );														
-									showPhotoPanel( ) ;	
+									showPhotoPanel( ) ;										
 								},
 								navigatable: false,
 								template: kendo.template($("#photo-list-view-template").html()),								
@@ -338,8 +366,7 @@
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
-							});								
-									
+							});											
 							// Pager							
 							$("#photo-list-pager").kendoPager({
 								refresh : true,
@@ -363,16 +390,20 @@
 										if( e.response.targetImage ){
 											e.response.targetImage.imageId;
 											// LIST VIEW REFRESH...
-											$('#photo-list-view').data('kendoListView').dataSource.read(); 
+											$('#photo-list-view').data('kendoListView').dataSource.read();
+											$("#photo-view-panel").data( "photoPlaceHolder", item );
+											showPhotoPanel(); 
 										}				
 									}
-							});		
-							
-						}	
+							});									
+						}
+					} else if ( $(this).attr('href') == '#my-photo-gallery' ){
+							showPhotoGallaryPanel();
+							return;
 					}
 					$(this).tab('show')
 				});				
-				// END SCRIPT            
+				// END SCRIPT 
 			}
 		}]);	
 						
@@ -415,7 +446,35 @@
 			} 
 		}		
 		
-		
+		function showPhotoGallaryPanel(){
+			if( !$('#photo-gallery-view').data('kendoListView') ){		
+				$("#photo-gallery-view").kendoListView({
+					dataSource: {
+						type: 'json',
+						transport: {
+							read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' }
+						},
+						pageSize: 1,
+						error:handleKendoAjaxError,
+						schema: {
+							model: Image,
+							data : "targetImages",
+							total : "totalTargetImageCount"
+						},
+						sort: { field: "modifiedDate", dir: "desc" }
+					},
+					template: kendo.template($("#photo-gallery-view-template").html())
+				});
+				$("#photo-gallery-pager").kendoPager({
+					refresh : true,
+					buttonCount : 12,
+					dataSource : $('#photo-gallery-view').data('kendoListView').dataSource
+				});		
+			}			
+			//photo-gallery-panel
+			$("div .custom-panels-group").hide();
+			$("#photo-gallery-panel").show();		
+		}
 		
 		function showPhotoPanel(){
 			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");
@@ -470,7 +529,6 @@
 			$("#photo-view-panel").show();			
 		}
 		
-		
 		function openPreviewWindow(){	
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#image-view-template').html());
@@ -521,8 +579,7 @@
 			
 			$("div .custom-panels-group").hide();
 			$('#attach-view-panel').show();			
-		}		
-		
+		}	
 				
 		function viewAnnounce (announceId){							
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
@@ -740,6 +797,7 @@
 						<!-- end announce panel -->			
 						<!-- start photo view panel -->
 						<div id="photo-view-panel" class="custom-panels-group"></div>	
+						<div id="photo-gallery-panel" class="custom-panels-group" style="display: none;"></div>	
 						<!-- end photo view panel -->												
 						<!-- start attach view panel -->
 						<div id="attach-view-panel" class="custom-panels-group"></div>				
@@ -752,7 +810,13 @@
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
 							<li><a href="#my-attachments">My 파일</a></li>
-							<li><a href="#my-photos">My 포토</a></li>
+							<li class="dropdown">
+								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
+									<li><a href="#my-photos" tabindex="-1" data-toggle="tab">포토 뷰어</a></li>
+									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab">포토 갤러리</a></li>
+								</ul>
+							</li>
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
@@ -823,8 +887,7 @@
 								<input name="uploadPhotos" id="photo-files" type="file" />	
 								<div class="blank-top-5 "></div>
 								</#if>		
-								<div class="panel panel-danger">								
-									<div class="panel-heading"></div>
+								<div class="panel panel-default">								
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
 									</div>	
@@ -845,7 +908,7 @@
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
 		
-		<!-- START TEMPLATE -->
+		<!-- START TEMPLATE -->				
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
