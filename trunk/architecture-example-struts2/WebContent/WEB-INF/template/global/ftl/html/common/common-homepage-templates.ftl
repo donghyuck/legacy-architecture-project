@@ -268,23 +268,20 @@
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
 	<div class="carousel-inner">
 		<div class="item active">
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-rounded img-responsive"/>
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지"/>
 			<div class="carousel-caption">
-	<h5>#:name#</h5>
-	<p class="text-muted">#: modifiedDate #</p>			
+			<h5>#:name#</h5>
+			<p class="text-muted">#: modifiedDate #</p>			
 			</div>
 		</div>
 	</div>
-
 	<!-- Controls -->
 	<a class="left carousel-control" href="\\#carousel-example-generic" data-slide="prev">
 		<span class="glyphicon glyphicon-chevron-left"></span>
 	</a>
 	<a class="right carousel-control" href="\\#carousel-example-generic" data-slide="next">
-		span class="glyphicon glyphicon-chevron-right"></span>
-	</a>
-  	
-	
+		<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>	
 </script>
 
 <script type="text/x-kendo-template" id="photo-view-template">
