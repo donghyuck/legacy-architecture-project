@@ -260,7 +260,7 @@
 		</div>
 		<div class="panel-body">
 			<div id="photo-gallery-pager" class="k-pager-wrap"></div>
-			<div id="photo-gallery-view" ></div>
+			<div id="photo-gallery-view"></div>
 		</div>
 	</div>		
 </script>
@@ -277,14 +277,14 @@
 		</div>
 	</div>
 -->	
-	<div class="gv_galleryWrap" style="width:100%; height:100%;">
-		<div class="gv_gallery">
-			<div class="gv_panelWrap">
-				<div class="gv_panel">
+	<div class="gv_galleryWrap" style="width: 800px; height: 400px; padding: 5px;">
+		<div class="gv_gallery" style="width: 800px; height: 400px;">
+			<div class="gv_panelWrap" style="width: 800px; height: 400px; top: 0px; left: 0px;">
+				<div class="gv_panel" style="width: 800px; height: 400px;">
 					<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지"/>
 				</div>
-				<div class="gv_panelNavNext" style="top: 180px; right: 10px;"></div>
-				<div class="gv_panelNavPrev" style="top: 180px; left: 10px;"></div>
+				<div class="gv_panelNavNext" style="top: 180px; right: 10px; display: none;"></div>
+				<div class="gv_panelNavPrev" style="top: 180px; left: 10px; display: none;"></div>
 			</div>
 		</div>
 	</div>	
