@@ -875,11 +875,11 @@
 								<input name="uploadAttachment" id="attachment-files" type="file" />	
 								<div class="blank-top-5 "></div>
 								</#if>
-								<div class="panel panel-success">								
+								<div class="panel panel-default">								
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
-												<a href="#"  id="attachment-list-view-filter-1" style="width:150px;"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
+												<a href="#"  id="attachment-list-view-filter-1" style="width:100px;"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
 											</li>
 											<li>
 												<a href="#"  id="attachment-list-view-filter-2">사진</a>
