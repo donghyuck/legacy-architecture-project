@@ -267,18 +267,24 @@
 
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
 	<div class="inner clearfix">
-		<ul class="bxslider">
-			<li><img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/></li>
-		</ul>
-		<div class="bx-controls bx-has-pager bx-has-controls-direction">
-			<div class="bx-pager bx-default-pager">
-				<div class="bx-controls-direction">
-					<a class="bx-prev" href="">Prev</a>
-					<a class="bx-next" href="">Next</a>
+		<div class="bx-wrapper" style="max-width: 100%;">
+			<div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; height: 190px;">
+				<ul class="bxslider" style="width: auto; position: relative;">
+					<li style="float: none; list-style: none; position: absolute; width: 865px; z-index: 50; display: list-item;">
+						<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
+					</li>
+				</ul>
+			</div>
+			<div class="bx-controls bx-has-pager bx-has-controls-direction">
+				<div class="bx-pager bx-default-pager">
+					<div class="bx-controls-direction">
+						<a class="bx-prev" href="">Prev</a>
+						<a class="bx-next" href="">Next</a>
+					</div>
 				</div>
 			</div>
 		</div>
-	
+	</div>	
 	<h5>#:name#</h5>
 	<p class="text-muted">#: modifiedDate #</p>		
 </script>
