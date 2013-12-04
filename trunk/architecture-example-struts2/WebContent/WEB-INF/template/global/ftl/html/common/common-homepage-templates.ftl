@@ -272,6 +272,11 @@
 				<ul class="bxslider" style="width: auto; position: relative;">
 					<li style="float: none; list-style: none; position: absolute; width: 865px; z-index: 50; display: list-item;">
 						<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
+						<div class="bx-caption">
+							<span>
+								<h5>#:name#</h5><p class="text-muted">#: modifiedDate #</p>
+							</span>
+						</div>
 					</li>
 				</ul>
 			</div>
@@ -285,8 +290,7 @@
 			</div>
 		</div>
 	</div>	
-	<h5>#:name#</h5>
-	<p class="text-muted">#: modifiedDate #</p>		
+			
 </script>
 
 <script type="text/x-kendo-template" id="photo-view-template">
