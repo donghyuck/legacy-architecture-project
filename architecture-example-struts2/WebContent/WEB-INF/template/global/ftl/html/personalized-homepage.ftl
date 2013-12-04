@@ -830,8 +830,8 @@
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
-									<li><a href="#my-photos" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span>  포토 뷰어</a></li>
-									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>  포토 갤러리</a></li>
+									<li><a href="#my-photos" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span>    포토 뷰어</a></li>
+									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    포토 갤러리</a></li>
 								</ul>
 							</li>
 						</ul>								
