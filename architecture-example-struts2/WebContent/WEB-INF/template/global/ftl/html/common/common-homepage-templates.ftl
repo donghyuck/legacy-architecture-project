@@ -266,7 +266,19 @@
 </script>
 
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
-	<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
+	<div class="inner clearfix">
+		<ul class="bxslider">
+			<li><img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/></li>
+		</ul>
+		<div class="bx-controls bx-has-pager bx-has-controls-direction">
+			<div class="bx-pager bx-default-pager">
+				<div class="bx-controls-direction">
+					<a class="bx-prev" href="">Prev</a>
+					<a class="bx-next" href="">Next</a>
+				</div>
+			</div>
+		</div>
+	
 	<h5>#:name#</h5>
 	<p class="text-muted">#: modifiedDate #</p>		
 </script>
