@@ -823,15 +823,15 @@
 						<div id="social-view-panels"></div>	
 						<!-- end social view panels -->						
 					</div>							
-					<div class="col-lg-4 gray">
+					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
 							<li><a href="#my-attachments">My 파일</a></li>
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
-									<li><a href="#my-photos" tabindex="-1" data-toggle="tab">포토 뷰어</a></li>
-									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab">포토 갤러리</a></li>
+									<li><a href="#my-photos" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th-list"></span>포토 뷰어</a></li>
+									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>포토 갤러리</a></li>
 								</ul>
 							</li>
 						</ul>								
@@ -844,8 +844,7 @@
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
 									<div class="panel-body">								
 										<div class="btn-group">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-											쇼셜미디어 추가 <span class="caret"></span>
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">쇼셜미디어 추가 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" role="menu">
 												<li><a href="#"><i class="icon-facebook"></i> &nbsp;페이스북 연결</a></li>
