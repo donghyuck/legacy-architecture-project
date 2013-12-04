@@ -260,7 +260,7 @@
 		</div>
 		<div class="panel-body">
 			<div id="photo-gallery-pager" class="k-pager-wrap"></div>
-			<div id="photo-gallery-view" class="carousel slide" ></div>
+			<div id="photo-gallery-view" ></div>
 		</div>
 	</div>		
 </script>
@@ -277,7 +277,7 @@
 		</div>
 	</div>
 -->	
-	<div class="gv_galleryWrap">
+	<div class="gv_galleryWrap" style="width:100%; height:100%;">
 		<div class="gv_gallery">
 			<div class="gv_panelWrap">
 				<div class="gv_panel">
