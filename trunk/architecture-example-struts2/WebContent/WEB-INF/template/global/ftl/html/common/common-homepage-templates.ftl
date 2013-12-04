@@ -260,15 +260,31 @@
 		</div>
 		<div class="panel-body">
 			<div id="photo-gallery-pager" class="k-pager-wrap"></div>
-			<div id="photo-gallery-view" style="border:0px;"></div>
+			<div id="photo-gallery-view" class="carousel slide" ></div>
 		</div>
 	</div>		
 </script>
 
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
-	<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-rounded img-responsive"/>
+	<div class="carousel-inner">
+		<div class="item active">
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-rounded img-responsive"/>
+			<div class="carousel-caption">
 	<h5>#:name#</h5>
-	<p class="text-muted">#: modifiedDate #</p>
+	<p class="text-muted">#: modifiedDate #</p>			
+			</div>
+		</div>
+	</div>
+
+	<!-- Controls -->
+	<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	<a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+		span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+  	
+	
 </script>
 
 <script type="text/x-kendo-template" id="photo-view-template">
