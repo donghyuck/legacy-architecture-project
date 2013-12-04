@@ -686,7 +686,7 @@
 		border-left-color: #787878;
 		}	
 		
-		#attachment-list-view, #photo-list-view {
+		#attachment-list-view, #photo-list-view #photo-gallery-view {
 			min-height: 320px;
 			min-width: 320px;
 			padding: 0px;
