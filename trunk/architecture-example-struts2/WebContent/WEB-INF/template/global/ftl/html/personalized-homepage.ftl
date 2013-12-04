@@ -882,9 +882,9 @@
 												<a href="#"  id="attachment-list-view-filter-1"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
 											</li>
 											<li>
-												<a href="#"  id="attachment-list-view-filter-2"><span class="badge pull-right" data-bind="text: totalImageCount"></span>사진</a>
+												<a href="#"  id="attachment-list-view-filter-2">사진</a>
 											</li>
-											<li><a href="#"  id="attachment-list-view-filter-3"><span class="badge pull-right" data-bind="text: totalFileCount"></span>파일</a>
+											<li><a href="#"  id="attachment-list-view-filter-3">파일</a>
 											</li>									  
 										</ul>										
 									</div>
