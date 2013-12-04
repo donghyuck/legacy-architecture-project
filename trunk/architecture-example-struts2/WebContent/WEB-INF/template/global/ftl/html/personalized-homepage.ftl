@@ -823,7 +823,7 @@
 						<div id="social-view-panels"></div>	
 						<!-- end social view panels -->						
 					</div>							
-					<div class="col-lg-4">
+					<div class="col-lg-4 gray">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
 							<li><a href="#my-attachments">My 파일</a></li>
