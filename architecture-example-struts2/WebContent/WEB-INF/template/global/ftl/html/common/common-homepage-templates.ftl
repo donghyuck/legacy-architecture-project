@@ -266,22 +266,28 @@
 </script>
 
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
+<!--
 	<div class="carousel-inner">
 		<div class="item active">
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지"/>
+			
 			<div class="carousel-caption">
 			<h5>#:name#</h5>
 			<p class="text-muted">#: modifiedDate #</p>			
 			</div>
 		</div>
 	</div>
-	<!-- Controls -->
-	<a class="left carousel-control" href="\\#carousel-example-generic" data-slide="prev">
-		<span class="glyphicon glyphicon-chevron-left"></span>
-	</a>
-	<a class="right carousel-control" href="\\#carousel-example-generic" data-slide="next">
-		<span class="glyphicon glyphicon-chevron-right"></span>
-	</a>	
+-->	
+	<div class="gv_galleryWrap" style="width: 800px; height: 400px; padding: 5px;">
+		<div class="gv_gallery" style="width: 800px; height: 400px;">
+			<div class="gv_panelWrap" style="width: 800px; height: 400px; top: 0px; left: 0px;">
+				<div class="gv_panel" style="width: 800px; height: 400px;">
+					<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지"/>
+				</div>
+				<div class="gv_panelNavNext" style="top: 180px; right: 10px; display: none;"></div>
+				<div class="gv_panelNavPrev" style="top: 180px; left: 10px; display: none;"></div>
+			</div>
+		</div>
+	</div>	
 </script>
 
 <script type="text/x-kendo-template" id="photo-view-template">
