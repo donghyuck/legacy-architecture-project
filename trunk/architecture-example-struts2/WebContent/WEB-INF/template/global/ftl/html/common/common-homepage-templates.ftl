@@ -283,8 +283,8 @@
 				<div class="gv_panel" style="width: 800px; height: 400px;">
 					<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지"/>
 				</div>
-				<div class="gv_panelNavNext" style="top: 180px; right: 10px; display: none;"></div>
-				<div class="gv_panelNavPrev" style="top: 180px; left: 10px; display: none;"></div>
+				<div class="gv_panelNavNext" style="top: 180px; right: 10px;"></div>
+				<div class="gv_panelNavPrev" style="top: 180px; left: 10px;"></div>
 			</div>
 		</div>
 	</div>	
