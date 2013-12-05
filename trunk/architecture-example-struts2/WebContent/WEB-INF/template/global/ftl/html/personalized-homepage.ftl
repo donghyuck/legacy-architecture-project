@@ -308,34 +308,6 @@
 							});
 						}
 					} else if( $(this).attr('href') == '#my-photos' ){					
-						if( $("#photo-gallery-panel").html() == "" ){
-							// Photo Gallery Setup
-							$("#photo-gallery-panel").html(
-								$('#photo-gallery-template').html()
-							);					
-							$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
-								var gallery_header_action = $(this);
-								gallery_header_action.click(function (e){
-									e.preventDefault();		
-									var gallery_header_action_icon = gallery_header_action.find('span');
-									if (gallery_header_action.text() == "Minimize"){
-										$( "#photo-gallery-panel .panel-body").toggleClass("hide");				
-										if( gallery_header_action_icon.hasClass("k-i-maximize") ){
-											gallery_header_action_icon.removeClass("k-i-maximize");
-											gallery_header_action_icon.addClass("k-i-minimize");
-										}else{
-											gallery_header_action_icon.removeClass("k-i-minimize");
-											gallery_header_action_icon.addClass("k-i-maximize");
-										}
-									} else if (gallery_header_action.text() == "Refresh"){	
-										$('#photo-gallery-view').data('kendoListView').dataSource.read();
-									} else if (gallery_header_action.text() == "Close"){	
-										$("div .custom-panels-group").hide();
-										$('#announce-panel').show();		
-									}
-								});	
-							});						
-						}						
 							
 						if( !$('#photo-list-view').data('kendoListView') ){
 							$("#photo-list-view").kendoListView({
@@ -400,7 +372,37 @@
 									}
 							});									
 						}
-					} else if ( $(this).attr('href') == '#my-photo-gallery' ){						
+					} else if ( $(this).attr('href') == '#my-photo-gallery' ){					
+
+						if( $("#photo-gallery-panel").html() == "" ){
+							// Photo Gallery Setup
+							$("#photo-gallery-panel").html(
+								$('#photo-gallery-template').html()
+							);					
+							$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
+								var gallery_header_action = $(this);
+								gallery_header_action.click(function (e){
+									e.preventDefault();		
+									var gallery_header_action_icon = gallery_header_action.find('span');
+									if (gallery_header_action.text() == "Minimize"){
+										$( "#photo-gallery-panel .panel-body").toggleClass("hide");				
+										if( gallery_header_action_icon.hasClass("k-i-maximize") ){
+											gallery_header_action_icon.removeClass("k-i-maximize");
+											gallery_header_action_icon.addClass("k-i-minimize");
+										}else{
+											gallery_header_action_icon.removeClass("k-i-minimize");
+											gallery_header_action_icon.addClass("k-i-maximize");
+										}
+									} else if (gallery_header_action.text() == "Refresh"){	
+										$('#photo-gallery-view').data('kendoListView').dataSource.read();
+									} else if (gallery_header_action.text() == "Close"){	
+										$("div .custom-panels-group").hide();
+										$('#announce-panel').show();		
+									}
+								});	
+							});						
+						}							
+						
 						if(!$('#update-gallery-photo-file').data('kendoUpload')){
 							$("#update-gallery-photo-file").kendoUpload({
 								multiple: false,
