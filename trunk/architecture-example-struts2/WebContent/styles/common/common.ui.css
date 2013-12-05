@@ -749,7 +749,7 @@ div.jGrowl div.jGrowl-closer {
 	.image-caption .blur{
 		background-color: rgba(0,0,0,0.7);
 		height: 300px;
-		width: 100%;
+		width: 400px;
 		z-index: 5;
 		position: absolute;
 	}
