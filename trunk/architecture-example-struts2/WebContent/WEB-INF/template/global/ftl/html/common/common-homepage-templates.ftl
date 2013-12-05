@@ -277,8 +277,8 @@
 				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
 			</a>
 			<div class="media-body">
-		 		<h4 class="media-heading">이상학</h4>
-				좋아요.
+		 		<h5 class="media-heading">이상학</h5>
+				너무 좋아요.
 		  </div>
 		</div>		
 	</div>
