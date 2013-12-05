@@ -904,14 +904,13 @@
 								<input name="uploadPhotos" id="photo-files" type="file" />	
 								<div class="blank-top-5 "></div>
 								</#if>		
-								<div class="panel panel-default">								
-									<div class="panel-header gray" style="padding:0px;">
+								<div class="panel panel-default">				
+									<div class="panel-heading">
 										<div id="photo-list-pager" class="k-pager-wrap"></div>
-									</div>								
+									</div>										
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
 									</div>	
-
 								</div>																				
 							</div>							
 							<!-- end photos -->
