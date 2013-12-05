@@ -266,7 +266,30 @@
 </script>
 
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
-	<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
+<div class="slider">
+	<div class="bx-wrapper" style="max-width: 100%;">
+		<div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; max-height: 100%;">
+		<ul class="bxslider" style="width: auto; position: relative;">
+  			<li style="float: none; list-style: none; position: absolute; display: block;">
+				<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
+				<div class="bx-caption"><span>Funky roots</span></div>
+  			</li>
+  		</ul>
+  	</div>
+  	<div class="bx-controls bx-has-pager bx-has-controls-direction">
+  		<div class="bx-pager bx-default-pager">
+  			<div class="bx-pager-item">
+  				<a href="" data-slide-index="0" class="bx-pager-link active">1</a></div>
+  			<div class="bx-pager-item"><a href="" data-slide-index="1" class="bx-pager-link">2</a></div>
+  			<div class="bx-pager-item"><a href="" data-slide-index="2" class="bx-pager-link">3</a></div>
+  		</div>
+  		<div class="bx-controls-direction">
+  			<a class="bx-prev" href="">Prev</a>
+  			<a class="bx-next" href="">Next</a>
+  		</div>
+  	</div>
+</div>
+	
 	<div class="bx-caption">
 		<span>
 			<h5>#:name#</h5>
@@ -277,7 +300,7 @@
 				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
 			</a>
 			<div class="media-body">
-		 		<h5 class="media-heading">이상학</h5>
+		 		<h5 class="media-heading">익명</h5>
 				너무 좋아요.
 		  </div>
 		</div>		
