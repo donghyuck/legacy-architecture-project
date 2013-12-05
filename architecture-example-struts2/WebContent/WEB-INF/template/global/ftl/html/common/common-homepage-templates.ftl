@@ -272,6 +272,15 @@
 			<h5>#:name#</h5>
 			<p class="text-muted">#: modifiedDate #</p>
 		</span>
+		<div class="media">
+			<a class="pull-left" href="\\#">
+				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+			</a>
+			<div class="media-body">
+		 		<h4 class="media-heading">이상학</h4>
+				좋아요.
+		  </div>
+		</div>		
 	</div>
 			
 </script>
