@@ -486,6 +486,7 @@
 				$("#photo-gallery-pager").kendoPager({
 					refresh : true,
 					buttonCount : 12,
+					pageSize : 2,
 					dataSource : $('#photo-gallery-view').data('kendoListView').dataSource
 				});		
 			}			
