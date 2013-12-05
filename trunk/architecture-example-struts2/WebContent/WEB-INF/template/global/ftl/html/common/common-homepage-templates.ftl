@@ -280,7 +280,7 @@
 				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
 			</a>
 			<div class="media-body">
-		 		<h5 class="media-heading">익명</h5>
+		 		<h5 class="media-heading"><strong>익명</strong></h5>
 				너무 좋아요.
 			</div>
 		</div>
