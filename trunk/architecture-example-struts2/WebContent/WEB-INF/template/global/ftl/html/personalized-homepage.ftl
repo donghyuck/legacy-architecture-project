@@ -136,62 +136,8 @@
 				
 				$("#announce-panel").data( "dataSource").read();
 
-				if( $("#social-view-panels").data( "providers") == null ){			
-					$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
-					<#list action.companySocials as item >
-						<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
-						$("#social-view-panels").data( "providers").set( "${item.serviceProviderName}" ,  {
-							<#if  item.serviceProviderName == "twitter" >
-							template : kendo.template($("#twitter-timeline-template").html())	,			
-							<#elseif item.serviceProviderName == "facebook" >
-							template : kendo.template($("#facebook-homefeed-template").html()),
-							</#if>		
-							dataSource : new kendo.data.DataSource({
-								transport: {
-									read: {
-										type : 'POST',
-										type: "json",
-										<#if  item.serviceProviderName == "twitter" >
-										url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',			
-										<#elseif item.serviceProviderName == "facebook" >
-										url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
-										</#if>	
-									},
-									parameterMap: function (options, operation){
-										if (operation == "read" && options) {										                        								                       	 	
-											return { socialAccountId: ${ item.socialAccountId } };									                            	
-										}
-									} 
-								},
-								requestStart: function() {
-									kendo.ui.progress($(${elementId}), true);
-								},
-								requestEnd: function() {
-									kendo.ui.progress($(${elementId}), false);
-								},
-								change: function() {
-									$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
-								},
-								error:handleKendoAjaxError,
-								schema: {
-								<#if  item.serviceProviderName == "twitter" >
-									data : "homeTimeline"
-								<#elseif item.serviceProviderName == "facebook" >
-									data : "homeFeed"
-								</#if>	
-								}						
-							})
-					});							
-					</#list>
-					$.each( $('#my-streams').find( '.social-connect-btn button' ) , function ( i, item ){					
-						$(item).click( function(){ 
-							var socialProvider = $(item).attr('data-provider');
-							if( typeof (socialProvider) == 'string' ){
-			 					showSocialPanel( socialProvider );	
-			 				}
-			 			});	
-					});											
-				}				
+if( $("#photo-gallery-panel").html() == "" )
+alert ( "empty" ) ;
 										
 				// 3. Photo Gallery Setup
 				$("#photo-gallery-panel").html(
@@ -228,7 +174,64 @@
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){
-					
+						
+						if( $("#social-view-panels").data( "providers") == null ){			
+							$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
+							<#list action.companySocials as item >
+								<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
+								$("#social-view-panels").data( "providers").set( "${item.serviceProviderName}" ,  {
+									<#if  item.serviceProviderName == "twitter" >
+									template : kendo.template($("#twitter-timeline-template").html())	,			
+									<#elseif item.serviceProviderName == "facebook" >
+									template : kendo.template($("#facebook-homefeed-template").html()),
+									</#if>		
+									dataSource : new kendo.data.DataSource({
+										transport: {
+											read: {
+												type : 'POST',
+												type: "json",
+												<#if  item.serviceProviderName == "twitter" >
+												url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',			
+												<#elseif item.serviceProviderName == "facebook" >
+												url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
+												</#if>	
+											},
+											parameterMap: function (options, operation){
+												if (operation == "read" && options) {										                        								                       	 	
+													return { socialAccountId: ${ item.socialAccountId } };									                            	
+												}
+											} 
+										},
+										requestStart: function() {
+											kendo.ui.progress($(${elementId}), true);
+										},
+										requestEnd: function() {
+											kendo.ui.progress($(${elementId}), false);
+										},
+										change: function() {
+											$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
+										},
+										error:handleKendoAjaxError,
+										schema: {
+										<#if  item.serviceProviderName == "twitter" >
+											data : "homeTimeline"
+										<#elseif item.serviceProviderName == "facebook" >
+											data : "homeFeed"
+										</#if>	
+										}						
+									})
+							});							
+							</#list>
+							$.each( $('#my-streams').find( '.social-connect-btn button' ) , function ( i, item ){					
+								$(item).click( function(){ 
+									var socialProvider = $(item).attr('data-provider');
+									if( typeof (socialProvider) == 'string' ){
+					 					showSocialPanel( socialProvider );	
+					 				}
+					 			});	
+							});											
+						}		
+													
 					} else if(  $(this).attr('href') == '#my-streams' ){
 		
 					} else if(  $(this).attr('href') == '#my-files' ){
