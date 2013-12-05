@@ -183,7 +183,7 @@
 							})
 					});							
 					</#list>
-					$.each( $('#my-messages').find( '.social-connect-btn button' ) , function ( i, item ){					
+					$.each( $('#my-streams').find( '.social-connect-btn button' ) , function ( i, item ){					
 						$(item).click( function(){ 
 							var socialProvider = $(item).attr('data-provider');
 							if( typeof (socialProvider) == 'string' ){
@@ -227,9 +227,9 @@
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-messages' ){
+					if(  $(this).attr('href') == '#my-streams' ){
 		
-					} else if(  $(this).attr('href') == '#my-attachments' ){
+					} else if(  $(this).attr('href') == '#my-files' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){		
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
@@ -826,8 +826,8 @@
 					</div>							
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
-							<li class="active"><a href="#my-messages">My 쇼셜</a></li>
-							<li><a href="#my-attachments">My 파일</a></li>
+							<li class="active"><a href="#my-streams">My 쇼셜</a></li>
+							<li><a href="#my-files">My 파일</a></li>
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
@@ -835,11 +835,12 @@
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    포토 갤러리</a></li>
 								</ul>
 							</li>
+							<li><a href="#my-messages">My 메시지</a></li>
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
 							<!-- start messages -->				
-							<div class="tab-pane active" id="my-messages">							
+							<div class="tab-pane active" id="my-streams">							
 								<div class="blank-top-15" ></div>		
 								<div class="panel panel-default">
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
@@ -869,7 +870,7 @@
 							</div>			
 							<!-- end messages -->				
 							<!-- start attachement -->
-							<div class="tab-pane" id="my-attachments">
+							<div class="tab-pane" id="my-files">
 								<div class="blank-top-15" ></div>				
 								<#if !action.user.anonymous >			
 								<input name="uploadAttachment" id="attachment-files" type="file" />	
@@ -917,6 +918,9 @@
 							<div class="tab-pane" id="my-photo-gallery">
 								<div class="blank-top-5 "></div>
 								<input name="update-gallery-photo-file" id="update-gallery-photo-file" type="file" />
+							</div>
+							<div class="tab-pane" id="my-messages">
+								<div class="blank-top-5 "></div>
 							</div>
 						</div>
 						<!-- end of tab content -->						
