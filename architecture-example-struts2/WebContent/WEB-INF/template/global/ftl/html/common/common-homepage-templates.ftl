@@ -274,7 +274,6 @@
 				<p class="text-muted">#: modifiedDate #</p>
 		</figcaption>
 	</figure>
-</div>
 		<div class="media">
 			<a class="pull-left" href="\\#">
 				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
