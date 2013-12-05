@@ -135,46 +135,17 @@
 				} );								
 				
 				$("#announce-panel").data( "dataSource").read();
-
-if( $("#photo-gallery-panel").html() == "" )
-alert ( "empty" ) ;
-										
-				// 3. Photo Gallery Setup
-				$("#photo-gallery-panel").html(
-					$('#photo-gallery-template').html()
-				);					
-				$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
-					var gallery_header_action = $(this);
-					gallery_header_action.click(function (e){
-						e.preventDefault();		
-						var gallery_header_action_icon = gallery_header_action.find('span');
-						if (gallery_header_action.text() == "Minimize"){
-							$( "#photo-gallery-panel .panel-body").toggleClass("hide");				
-							if( gallery_header_action_icon.hasClass("k-i-maximize") ){
-								gallery_header_action_icon.removeClass("k-i-maximize");
-								gallery_header_action_icon.addClass("k-i-minimize");
-							}else{
-								gallery_header_action_icon.removeClass("k-i-minimize");
-								gallery_header_action_icon.addClass("k-i-maximize");
-							}
-						} else if (gallery_header_action.text() == "Refresh"){	
-							$('#photo-gallery-view').data('kendoListView').dataSource.read();
-						} else if (gallery_header_action.text() == "Close"){	
-							$("div .custom-panels-group").hide();
-							$('#announce-panel').show();		
-						}
-					});	
-				});			
-				
-												
+											
 				// 4. Right Tabs
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-messages' ){
-						
+					if(  $(this).attr('href') == '#my-messages' ){						
+					
+													
+					} else if(  $(this).attr('href') == '#my-streams' ){
 						if( $("#social-view-panels").data( "providers") == null ){			
 							$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
 							<#list action.companySocials as item >
@@ -231,9 +202,6 @@ alert ( "empty" ) ;
 					 			});	
 							});											
 						}		
-													
-					} else if(  $(this).attr('href') == '#my-streams' ){
-		
 					} else if(  $(this).attr('href') == '#my-files' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){		
 							var attachementTotalModle = kendo.observable({ 
@@ -339,7 +307,36 @@ alert ( "empty" ) ;
 									}
 							});
 						}
-					} else if( $(this).attr('href') == '#my-photos' ){						
+					} else if( $(this).attr('href') == '#my-photos' ){					
+						if( $("#photo-gallery-panel").html() == "" ){
+							// Photo Gallery Setup
+							$("#photo-gallery-panel").html(
+								$('#photo-gallery-template').html()
+							);					
+							$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
+								var gallery_header_action = $(this);
+								gallery_header_action.click(function (e){
+									e.preventDefault();		
+									var gallery_header_action_icon = gallery_header_action.find('span');
+									if (gallery_header_action.text() == "Minimize"){
+										$( "#photo-gallery-panel .panel-body").toggleClass("hide");				
+										if( gallery_header_action_icon.hasClass("k-i-maximize") ){
+											gallery_header_action_icon.removeClass("k-i-maximize");
+											gallery_header_action_icon.addClass("k-i-minimize");
+										}else{
+											gallery_header_action_icon.removeClass("k-i-minimize");
+											gallery_header_action_icon.addClass("k-i-maximize");
+										}
+									} else if (gallery_header_action.text() == "Refresh"){	
+										$('#photo-gallery-view').data('kendoListView').dataSource.read();
+									} else if (gallery_header_action.text() == "Close"){	
+										$("div .custom-panels-group").hide();
+										$('#announce-panel').show();		
+									}
+								});	
+							});						
+						}						
+							
 						if( !$('#photo-list-view').data('kendoListView') ){
 							$("#photo-list-view").kendoListView({
 								dataSource: {
@@ -832,8 +829,7 @@ alert ( "empty" ) ;
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">My 메시지</a></li>
-							<li><a href="#my-streams">My 쇼셜</a></li>
-							<li><a href="#my-files">My 파일</a></li>
+							<li><a href="#my-streams">My 쇼셜</a></li>							
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
@@ -841,7 +837,7 @@ alert ( "empty" ) ;
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    포토 갤러리</a></li>
 								</ul>
 							</li>
-							
+							<li><a href="#my-files">My 파일</a></li>
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
