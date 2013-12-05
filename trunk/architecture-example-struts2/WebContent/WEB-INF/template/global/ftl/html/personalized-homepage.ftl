@@ -828,7 +828,8 @@
 					</div>							
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
-							<li class="active"><a href="#my-streams">My 쇼셜</a></li>
+							<li class="active"><a href="#my-messages">My 메시지</a></li>
+							<li><a href="#my-streams">My 쇼셜</a></li>
 							<li><a href="#my-files">My 파일</a></li>
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
@@ -837,7 +838,7 @@
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    포토 갤러리</a></li>
 								</ul>
 							</li>
-							<li><a href="#my-messages">My 메시지</a></li>
+							
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
