@@ -905,7 +905,7 @@
 								<div class="blank-top-5 "></div>
 								</#if>		
 								<div class="panel panel-default">				
-									<div class="panel-heading" style="padding:0px; background-color:#FFFFFF;">
+									<div class="panel-heading" style="padding:0px;">
 										<div id="photo-list-pager" class="k-pager-wrap"></div>
 									</div>										
 									<div class="panel-body scrollable" style="max-height:450px;">
