@@ -721,7 +721,7 @@ section figure figcaption {
 	left: 0;
 	right: 0;
 	background: rgba(0,0,0,0.7);
-	text-align: center;
+	text-align: left;
 	color: #fff; 
 	padding: 10px;
 }
