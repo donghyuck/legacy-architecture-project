@@ -274,6 +274,7 @@
 				<p class="text-muted">#: modifiedDate #</p>
 		</figcaption>
 	</figure>
+</section>	
 		<div class="media">
 			<a class="pull-left" href="\\#">
 				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
@@ -283,7 +284,7 @@
 				너무 좋아요.
 			</div>
 		</div>
-</section>			
+		
 </script>
 
 <script type="text/x-kendo-template" id="photo-view-template">
