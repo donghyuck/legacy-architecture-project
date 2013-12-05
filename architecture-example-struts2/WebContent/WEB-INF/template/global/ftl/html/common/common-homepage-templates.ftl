@@ -270,7 +270,7 @@
 	<div class="bx-wrapper" style="max-width: 100%;">
 		<div class="bx-viewport" style="width: 100%; overflow: hidden; position: relative; max-height: 100%;">
 		<ul class="bxslider" style="width: auto; position: relative;">
-  			<li style="float: none; list-style: none; position: absolute; display: block;">
+  			<li>
 				<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
 				<div class="bx-caption"><span>Funky roots</span></div>
   			</li>
