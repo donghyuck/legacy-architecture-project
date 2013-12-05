@@ -702,7 +702,7 @@ div.jGrowl div.jGrowl-closer {
 /*  GalleryView                                          */
 /*------------------------------------------------*/
 section figure {
-	float: left;
+	float: center;
 	clear: both;
 	position: relative;
 	overflow: auto;
