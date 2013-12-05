@@ -227,7 +227,9 @@
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-streams' ){
+					if(  $(this).attr('href') == '#my-messages' ){
+					
+					} else if(  $(this).attr('href') == '#my-streams' ){
 		
 					} else if(  $(this).attr('href') == '#my-files' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){		
@@ -840,7 +842,10 @@
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
 							<!-- start messages -->				
-							<div class="tab-pane active" id="my-streams">							
+							<div class="tab-pane active" id="my-messages">
+								<div class="blank-top-5 "></div>
+							</div>							
+							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-15" ></div>		
 								<div class="panel panel-default">
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
@@ -919,9 +924,7 @@
 								<div class="blank-top-5 "></div>
 								<input name="update-gallery-photo-file" id="update-gallery-photo-file" type="file" />
 							</div>
-							<div class="tab-pane" id="my-messages">
-								<div class="blank-top-5 "></div>
-							</div>
+
 						</div>
 						<!-- end of tab content -->						
 					</div>				
