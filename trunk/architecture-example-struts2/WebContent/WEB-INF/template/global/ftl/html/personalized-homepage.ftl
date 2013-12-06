@@ -902,7 +902,9 @@
 </ul>
 </div>
 									<div class="panel-footer" style="padding:0px;">
+									<div class="k-content">
 										<textarea id="messageEditor" rows="10" cols="30" style="width:100%;height:300px"></textarea>
+									</div>	
 									</div>
 </div>
 
