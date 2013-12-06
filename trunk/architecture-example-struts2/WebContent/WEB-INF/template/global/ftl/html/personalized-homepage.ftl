@@ -674,6 +674,11 @@
 		  .popover .left {
 		  	margin-left: -5px;
 		  }
+		  
+		  .popover .right {
+		  	margin-right: -5px;
+		  	float: right;
+		  }		  
 		 
 		 .popover-title {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
