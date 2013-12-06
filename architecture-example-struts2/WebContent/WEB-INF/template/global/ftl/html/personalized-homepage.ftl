@@ -672,12 +672,12 @@
 			max-width: 340px;
 		 }
 		  .popover.left {
+		  	float: right;
 		  	margin-left: 10px;
 		  }
 		  
 		  .popover.right {
-		  	margin-right: 10px;
-		  	float: right;
+		  	margin-right: 10px;		  	
 		  }		  
 		 
 		 .popover-title {
