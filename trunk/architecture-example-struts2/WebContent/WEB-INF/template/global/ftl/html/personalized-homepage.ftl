@@ -856,7 +856,7 @@
 		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
     </a>
     <div class="media-body">
-								<div class="popover left" style="display:true;">
+								<div class="popover right" style="display:true;">
 									<div class="arrow"></div>
 									<!--<h3 class="popover-title">알림</h3>-->
 									<div class="popover-content">
@@ -870,7 +870,7 @@
 		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
     </a>
     <div class="media-body">
-								<div class="popover right" style="display:true;">
+								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
 									<!--<h3 class="popover-title">알림</h3>-->
 									<div class="popover-content">
