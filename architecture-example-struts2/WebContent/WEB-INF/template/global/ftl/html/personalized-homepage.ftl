@@ -671,12 +671,12 @@
 			z-index: 1;
 			max-width: 340px;
 		 }
-		  .popover .left {
-		  	margin-left: -5px;
+		  .popover.left {
+		  	margin-left: 10px;
 		  }
 		  
-		  .popover .right {
-		  	margin-right: -5px;
+		  .popover.right {
+		  	margin-right: 10px;
 		  	float: right;
 		  }		  
 		 
