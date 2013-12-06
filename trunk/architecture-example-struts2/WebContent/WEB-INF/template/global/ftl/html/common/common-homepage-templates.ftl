@@ -269,15 +269,15 @@
 </script>
 
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
-<section>
-	<figure>
-		<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
-		<figcaption>
-				<h5>#:name#</h5>
-				<p class="text-muted">#: modifiedDate #</p>
-		</figcaption>
-	</figure>
-</section>	
+		<section>
+			<figure>
+				<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
+				<figcaption>
+						<h5>#:name#</h5>
+						<p class="text-muted">#: modifiedDate #</p>
+				</figcaption>
+			</figure>
+		</section>	
 		<div class="media">
 			<a class="pull-left" href="\\#">
 				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
@@ -297,6 +297,18 @@
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
 		</div>
 		<ul class="list-group">
+			<li class="list-group-item">
+				<div class="media">
+					<a class="pull-left" href="\\#">
+					<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+					</a>
+					<div class="media-body">
+		 				<h5 class="media-heading"><strong>댓글</strong></h5>
+						<input type="text" placeholder="댓글" class="form-control" placeholder=".col-xs-4" />	
+							
+					</div>
+				</div>		
+			</li>
 			<li class="list-group-item">
 				<input name="update-photo-file" id="update-photo-file" type="file" />
 			</li>
