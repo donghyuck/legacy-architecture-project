@@ -846,6 +846,15 @@
 							<!-- start messages -->				
 							<div class="tab-pane active" id="my-messages">
 								<div class="blank-top-5 "></div>
+
+								<div class="popover left" style="display:true;">
+									<div class="arrow"></div>
+									<!--<h3 class="popover-title">알림</h3>-->
+									<div class="popover-content">
+										<p>새로운 메시지가 없습니다.</p>
+									</div>
+								</div>	
+								
 							</div>							
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-15" ></div>		
