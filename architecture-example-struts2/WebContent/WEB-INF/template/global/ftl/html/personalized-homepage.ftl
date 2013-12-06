@@ -139,14 +139,7 @@
 				// 4. Right Tabs
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
-											
-				 $("#messageEditor").kendoEditor({
-				 	tools: [
-				 	"createLink",
-                "unlink",
-                "insertImage"
-				 	]
-				 });							
+
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
@@ -901,10 +894,8 @@
   
 </ul>
 </div>
-									<div class="panel-footer" style="padding:2px;">
-									<div class="k-content">
-										<textarea id="messageEditor" rows="5" cols="30" style="width:100%;height:150px"></textarea>
-									</div>	
+									<div class="panel-footer"">
+									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>메시지 작성</button>
 									</div>
 </div>
 
