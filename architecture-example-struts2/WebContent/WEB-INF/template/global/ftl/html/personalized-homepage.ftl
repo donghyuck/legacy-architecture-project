@@ -140,13 +140,13 @@
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
 											
-				 $("#messageEditor").kendoEditor(
+				 $("#messageEditor").kendoEditor({
 				 	tools: [
 				 	"createLink",
                 "unlink",
                 "insertImage"
 				 	]
-				 );							
+				 });							
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
