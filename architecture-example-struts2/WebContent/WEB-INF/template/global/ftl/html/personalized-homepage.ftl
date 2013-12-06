@@ -895,7 +895,7 @@
 </ul>
 </div>
 									<div class="panel-footer"">
-									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>메시지 작성</button>
+									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>   메시지 작성</button>
 									</div>
 </div>
 
