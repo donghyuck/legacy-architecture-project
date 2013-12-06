@@ -669,7 +669,7 @@
 			display: block;
 			position: relative;
 			z-index: 1;
-			min-width: 300px;
+			min-width: 200px;
 			max-width: 340px;
 		 }
 		  .popover.left {
