@@ -896,7 +896,7 @@
 </ul>
 </div>
 									<div class="panel-footer" style="padding:0px;">
-										<div id="messageEditor">
+										<div id="messageEditor"></div>
 									</div>
 </div>
 
