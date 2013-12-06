@@ -658,7 +658,7 @@
 		
 		<style scoped="scoped">
 
-		#social-meida-panel .popover {
+		 .popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 			width: 100%;
 			margin-top: 20px;
