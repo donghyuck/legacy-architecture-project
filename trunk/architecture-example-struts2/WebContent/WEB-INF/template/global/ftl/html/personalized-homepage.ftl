@@ -660,7 +660,7 @@
 
 		 .popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-			width: 100%;
+			width: 90%;
 			margin-top: 5px;
 			margin-right: 20px;
 			margin-bottom: 10px;
