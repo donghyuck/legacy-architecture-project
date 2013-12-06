@@ -847,6 +847,27 @@
 							<div class="tab-pane active" id="my-messages">
 								<div class="blank-top-5 "></div>
 
+<ul class="media-list">
+  <li class="media">
+    <a class="pull-left" href="#">
+      <img class="media-object" src="..." alt="...">
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading">Media heading</h4>
+    </div>
+  </li>
+  <li class="media">
+    <a class="pull-right" href="#">
+      <img class="media-object" src="..." alt="...">
+    </a>
+    <div class="media-body">
+      <h4 class="media-heading">Media heading</h4>
+    </div>
+  </li>  
+</ul>
+
+
+
 								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
 									<!--<h3 class="popover-title">알림</h3>-->
