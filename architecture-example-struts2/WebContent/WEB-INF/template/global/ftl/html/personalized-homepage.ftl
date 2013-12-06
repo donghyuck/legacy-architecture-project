@@ -850,7 +850,7 @@
 <ul class="media-list">
   <li class="media">
     <a class="pull-left" href="#">
-      <img class="media-object" src="..." alt="...">
+		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
     </a>
     <div class="media-body">
       <h4 class="media-heading">Media heading</h4>
@@ -858,7 +858,7 @@
   </li>
   <li class="media">
     <a class="pull-right" href="#">
-      <img class="media-object" src="..." alt="...">
+		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
     </a>
     <div class="media-body">
       <h4 class="media-heading">Media heading</h4>
