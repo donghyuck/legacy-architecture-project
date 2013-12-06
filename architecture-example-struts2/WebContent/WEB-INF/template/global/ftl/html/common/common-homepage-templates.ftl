@@ -240,17 +240,18 @@
 			# } #  	
 			<p class="blank-top-5">
 				<input name="update-attach-file" id="update-attach-file" type="file" />
-				<div class="blank-top-5 "></div>
-				<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-				<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#:attachmentId #" >삭제</button>					
 			</p>					
+		</div>
+		<div class="panel-footer">
+			<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
+			<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#:attachmentId #" >삭제</button>		
 		</div>
 	</div>
 </script>
 
 <script type="text/x-kendo-template" id="photo-gallery-template">
 	<div class="panel panel-default">
-		<div class="panel-heading">My 포토 갤러리		
+		<div class="panel-heading">My 포토 뷰어		
 			<div class="k-window-actions panel-header-actions">
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
