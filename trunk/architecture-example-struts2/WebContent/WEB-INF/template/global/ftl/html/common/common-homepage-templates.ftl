@@ -237,11 +237,13 @@
 						</table>	
 					</div>
 				</div>
-			# } #  	
-			<p class="blank-top-5">
-				<input name="update-attach-file" id="update-attach-file" type="file" />
-			</p>					
+			# } #  			
 		</div>
+		<ul class="list-group">
+			<li class="list-group-item">
+				<input name="update-attach-file" id="update-attach-file" type="file" />
+			</li>
+		</ul>			
 		<div class="panel-footer">
 			<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
 			<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#:attachmentId #" >삭제</button>		
