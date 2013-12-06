@@ -859,7 +859,8 @@
 							<!-- start messages -->				
 							<div class="tab-pane active" id="my-messages">
 								<div class="blank-top-5 "></div>
-
+<div class="panel panel-default">
+<div class="panel-body">			
 <ul class="media-list">
   <li class="media">
     <a class="pull-left" href="#">
@@ -889,10 +890,13 @@
 								</div>	
     </div>
   </li>  
+  
 </ul>
-
-
-
+</div>
+									<div class="panel-footer" style="padding:0px;">
+										
+									</div>
+</div>
 
 								
 							</div>							
