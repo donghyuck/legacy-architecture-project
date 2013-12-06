@@ -658,8 +658,8 @@
 		
 		<style scoped="scoped">
 
-		.media {
-			margin-top: 15px;
+		.media, .media .media {
+		margin-top: 5px;
 		}
 		
 		 .popover {
