@@ -140,6 +140,8 @@
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
 											
+				 $("#messageEditor").kendoEditor();							
+											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){						
@@ -894,7 +896,7 @@
 </ul>
 </div>
 									<div class="panel-footer" style="padding:0px;">
-										
+										<div id="messageEditor">
 									</div>
 </div>
 
