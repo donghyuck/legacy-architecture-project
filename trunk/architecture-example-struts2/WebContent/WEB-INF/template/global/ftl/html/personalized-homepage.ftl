@@ -903,7 +903,7 @@
 </div>
 									<div class="panel-footer">
 									<div class="k-content">
-										<textarea id="messageEditor" rows="10" cols="30" style="width:100%;height:300px"></textarea>
+										<textarea id="messageEditor" rows="5" cols="30" style="width:100%;height:150px"></textarea>
 									</div>	
 									</div>
 </div>
