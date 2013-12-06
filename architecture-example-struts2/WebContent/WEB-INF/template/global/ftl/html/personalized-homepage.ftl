@@ -670,7 +670,7 @@
 			position: relative;
 			z-index: 1;
 			min-width: 200px;
-			max-width: 340px;
+			max-width: 500px;
 		 }
 		  .popover.left {
 		  	float: right;
