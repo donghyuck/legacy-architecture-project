@@ -858,7 +858,7 @@
 						<div class="tab-content">			
 							<!-- start messages -->				
 							<div class="tab-pane active" id="my-messages">
-								<div class="blank-top-5 "></div>
+								<div class="blank-top-15" ></div>		
 <div class="panel panel-default">
 <div class="panel-body">			
 <ul class="media-list">
