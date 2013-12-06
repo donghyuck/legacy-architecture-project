@@ -853,21 +853,6 @@
 		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
     </a>
     <div class="media-body">
-      <h4 class="media-heading">Media heading</h4>
-    </div>
-  </li>
-  <li class="media">
-    <a class="pull-right" href="#">
-		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
-    </a>
-    <div class="media-body">
-      <h4 class="media-heading">Media heading</h4>
-    </div>
-  </li>  
-</ul>
-
-
-
 								<div class="popover left" style="display:true;">
 									<div class="arrow"></div>
 									<!--<h3 class="popover-title">알림</h3>-->
@@ -875,6 +860,27 @@
 										<p>새로운 메시지가 없습니다.</p>
 									</div>
 								</div>	
+    </div>
+  </li>
+  <li class="media">
+    <a class="pull-right" href="#">
+		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+    </a>
+    <div class="media-body">
+								<div class="popover left" style="display:true;">
+									<div class="arrow"></div>
+									<!--<h3 class="popover-title">알림</h3>-->
+									<div class="popover-content">
+										<p>새로운 메시지가 없습니다.</p>
+									</div>
+								</div>	
+    </div>
+  </li>  
+</ul>
+
+
+
+
 								
 							</div>							
 							<div class="tab-pane" id="my-streams">							
