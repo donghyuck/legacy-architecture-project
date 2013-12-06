@@ -351,7 +351,7 @@
 							});			
 							// Photo Upload										
 							$("#photo-files").kendoUpload({
-								 	multiple : false,
+								 	multiple : true,
 								 	width: 300,
 								 	showFileList : false,
 								    localization:{ select : '이미지 선택' , dropFilesHere : '업로드할 이미지을 이곳에 끌어 놓으세요.' },
@@ -367,8 +367,8 @@
 											e.response.targetImage.imageId;
 											// LIST VIEW REFRESH...
 											$('#photo-list-view').data('kendoListView').dataSource.read();
-											$("#photo-view-panel").data( "photoPlaceHolder", item );
-											showPhotoPanel(); 
+											//$("#photo-view-panel").data( "photoPlaceHolder", item );
+											//showPhotoPanel(); 
 										}				
 									}
 							});									
