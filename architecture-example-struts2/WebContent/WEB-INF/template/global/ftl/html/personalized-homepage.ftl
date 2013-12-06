@@ -662,9 +662,9 @@
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 			width: 100%;
 			margin-top: 5px;
-			margin-right: 5px;
+			margin-right: 20px;
 			margin-bottom: 10px;
-			margin-left: 5px;
+			margin-left: 20px;
 			float: left;
 			display: block;
 			position: relative;
@@ -673,11 +673,11 @@
 		 }
 		  .popover.left {
 		  	float: right;
-		  	margin-left: 10px;
+		  
 		  }
 		  
 		  .popover.right {
-		  	margin-right: 10px;		  	
+
 		  }		  
 		 
 		 .popover-title {
