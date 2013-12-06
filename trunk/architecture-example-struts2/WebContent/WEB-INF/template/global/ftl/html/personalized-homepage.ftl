@@ -671,6 +671,9 @@
 			z-index: 1;
 			max-width: 340px;
 		 }
+		  .popover .left {
+		  	margin-left: -5px;
+		  }
 		 
 		 .popover-title {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
