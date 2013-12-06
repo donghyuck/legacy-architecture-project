@@ -901,7 +901,7 @@
   
 </ul>
 </div>
-									<div class="panel-footer">
+									<div class="panel-footer" style="padding:2px;">
 									<div class="k-content">
 										<textarea id="messageEditor" rows="5" cols="30" style="width:100%;height:150px"></textarea>
 									</div>	
