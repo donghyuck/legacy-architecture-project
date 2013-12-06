@@ -658,6 +658,10 @@
 		
 		<style scoped="scoped">
 
+		.media {
+			margin-top: 15px;
+		}
+		
 		 .popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 			width: 90%;
