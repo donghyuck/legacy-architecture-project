@@ -137,6 +137,16 @@
 				
 				$("#announce-panel").data( "dataSource").read();
 											
+				$("#announce-grid").kendoGrid({
+					dataSource : $("#announce-panel").data( "dataSource"),
+					columns: [ 
+						{field:"announceId", title: "ID"} ,
+						{field:"subject", title: "주제"}
+					]
+				});
+				
+											
+											
 				// 4. Right Tabs
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
@@ -889,6 +899,9 @@
 							<!-- start messages -->			
 							<div class="tab-pane active" id="my-message-announces">
 								<div class="blank-top-5" ></div>	
+								<div id="announce-grid" ></div>
+								
+								
 							</div>									
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
