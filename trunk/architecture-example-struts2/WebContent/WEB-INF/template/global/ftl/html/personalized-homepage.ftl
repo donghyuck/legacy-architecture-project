@@ -176,6 +176,17 @@
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	     
 							alert( "select:" + selectedCell.announceId );
+							
+							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
+							announcePlaceHolder.announceId = selectedCell.announceId;
+							announcePlaceHolder.subject = selectedCell.subject;
+							announcePlaceHolder.body = selectedCell.body;
+							announcePlaceHolder.startDate = selectedCell.startDate ;
+							announcePlaceHolder.endDate = selectedCell.endDate;
+							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
+							announcePlaceHolder.creationDate = selectedCell.creationDate;
+							announcePlaceHolder.user = selectedCell.user;	
+										
 						}
 						
 						
@@ -660,7 +671,8 @@
 			$('#attach-view-panel').show();			
 		}	
 				
-		function viewAnnounce (announceId){							
+		function viewAnnounce (announceId){			
+						
 			var item = $("#announce-panel").data( "dataSource").get(announceId);				
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 			announcePlaceHolder.announceId = item.announceId;
@@ -670,7 +682,8 @@
 			announcePlaceHolder.endDate = item.endDate;
 			announcePlaceHolder.modifiedDate = item.modifiedDate;
 			announcePlaceHolder.creationDate = item.creationDate;
-			announcePlaceHolder.user = item.user;			
+			announcePlaceHolder.user = item.user;		
+				
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {				
 				$(".custom-announce-modify").removeAttr("disabled");
