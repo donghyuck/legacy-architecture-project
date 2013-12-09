@@ -72,47 +72,7 @@
 					}
 				});				
 				
-				// 1. Announces 
-				
-				$("#announce-panel").data( "dataSource", 
-	 				new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-announce.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}
-							} 
-						},
-						pageSize: 20,
-						requestStart: function() {
-							kendo.ui.progress($("#announce-panel"), true);
-						},
-						requestEnd: function() {
-							kendo.ui.progress($("#announce-panel"), false);
-						},
-						change: function(e) {							
-							if( this.hasChanges()){
-								$(".custom-announce-modify").removeAttr("disabled");
-							}else{
-								$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
-								if( this.data().length > 0 ){
-									viewAnnounce (this.at(0).announceId) ;
-								}
-							}
-						},
-						error:handleKendoAjaxError,
-						schema: {
-							data : "targetAnnounces",
-							model : Announce
-						}
-					})
-				);								
-								
+				// 1. Announces 								
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
 						transport: {
@@ -496,34 +456,30 @@
 
 		function showAnnouncePanel (){	
 
-			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
-			
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {				
 				$(".custom-announce-modify").removeAttr("disabled");
-			});																		
-			
+			});			
 			var template = kendo.template($('#announcement-view-template').html());			
 			$("#announce-view").html(
 				template(announcePlaceHolder)
-			);
-						
-			kendo.bind($("#announce-view"), announcePlaceHolder );					
+			);						
+			kendo.bind($("#announce-view"), announcePlaceHolder );				
 			
 			$("#announce-view div button").each(function( index ) {			
 				var announce_button = $(this);			
 				if( announce_button.hasClass( 'custom-announce-modify') ){
 					announce_button.click(function (e) { 
 						e.preventDefault();					
-						var updateId = announce_button.attr('data-announceId');
-						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
+						var updateItem = $("#announce-panel").data( "announcePlaceHolder" );	
 						$.ajax({
 								dataType : "json",
 								type : 'POST',
 								url : '${request.contextPath}/community/update-announce.do?output=json',
-								data : { announceId: announcePlaceHolder.announceId, item: kendo.stringify( announcePlaceHolder ) },
+								data : { announceId: updateItem.announceId, item: kendo.stringify( updateItem ) },
 								success : function( response ){		
-									$("#announce-panel").data( "dataSource").read();
+									$('#announce-grid').data('kendoGrid').dataSource.read();	
 								},
 								error:handleKendoAjaxError
 						});	
