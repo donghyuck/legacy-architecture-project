@@ -204,6 +204,29 @@
 					 			});	
 							});											
 						}		
+					} else if(  $(this).attr('href') == '#my-file-upload' ){
+						if( !$('#attachment-files').data('kendoUpload') ){		
+							$("#attachment-files").kendoUpload({
+								 	multiple : false,
+								 	width: 300,
+								 	showFileList : false,
+								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+								    async: {
+										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
+										autoUpload: true
+								    },
+								    upload: function (e) {								         
+								    	 e.data = {};														    								    	 		    	 
+								    },
+								    success : function(e) {								    
+										if( e.response.targetAttachment ){
+											e.response.targetAttachment.attachmentId;
+											// LIST VIEW REFRESH...
+											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+										}				
+									}
+							});						
+						}
 					} else if(  $(this).attr('href') == '#my-files' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){		
 							var attachementTotalModle = kendo.observable({ 
@@ -287,27 +310,7 @@
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
-							});													
-							$("#attachment-files").kendoUpload({
-								 	multiple : false,
-								 	width: 300,
-								 	showFileList : false,
-								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
-								    async: {
-										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
-										autoUpload: true
-								    },
-								    upload: function (e) {								         
-								    	 e.data = {};														    								    	 		    	 
-								    },
-								    success : function(e) {								    
-										if( e.response.targetAttachment ){
-											e.response.targetAttachment.attachmentId;
-											// LIST VIEW REFRESH...
-											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
-										}				
-									}
-							});
+							});			
 						}
 					} else if( $(this).attr('href') == '#my-photo-stream' ){							
 						if( !$('#photo-list-view').data('kendoListView') ){
@@ -937,12 +940,15 @@
 							</div>			
 							<!-- end messages -->				
 							<!-- start attachement -->
-							<div class="tab-pane" id="my-files">
-								<div class="blank-top-15" ></div>				
+							<div class="tab-pane" id="my-file-upload">
+								<div class="blank-top-15" ></div>			
+								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 파일을 선택하거나 사진을 <strong>파일 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 파일이 서버에 저장됩니다.</div>
 								<#if !action.user.anonymous >			
-								<input name="uploadAttachment" id="attachment-files" type="file" />	
+								<input name="uploadAttachment" id="attachment-files" type="file" />									
+								</#if>							
+							</div>
+							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
-								</#if>
 								<div class="panel panel-default">								
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
