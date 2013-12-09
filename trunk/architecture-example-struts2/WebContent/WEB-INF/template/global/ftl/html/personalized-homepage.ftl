@@ -145,7 +145,8 @@
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-messages' ){						
 					
-													
+					} else if(  $(this).attr('href') == '#my-streams-mgmt' ){
+						
 					} else if(  $(this).attr('href') == '#my-streams' ){
 					
 						if( $("#social-view-panels").data( "providers") == null ){			
@@ -852,6 +853,13 @@
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active"><a href="#my-messages">메시지</a></li>
+							<li class="dropdown">
+								<a href="#" id="my-social-drop" class="dropdown-toggle" data-toggle="dropdown">쇼셜 <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="my-social-drop">
+									<li><a href="#my-streams" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 쇼셜</a></li>		
+									<li><a href="#my-streams-mgmt" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span>   My 쇼셜 관리</a></li>							
+								</ul>
+							</li>							
 							<li><a href="#my-streams">쇼셜</a></li>							
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
@@ -918,6 +926,19 @@
 							</div>							
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
+								<div class="panel panel-primary">
+									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
+									<div class="panel-body">
+										<div class="btn-group social-connect-btn">
+											<#list action.companySocials as item >	
+											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
+											</#list>	
+										</div>									
+									</div>
+								</div>					
+							</div>		
+							<div class="tab-pane" id="my-streams-mgmt">				
+								<div class="blank-top-5" ></div>	
 								<div class="panel panel-default">
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
 									<div class="panel-body">								
@@ -932,18 +953,8 @@
 											</ul>
 										</div>
 									</div>
-								</div>
-								<div class="panel panel-primary">
-									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
-									<div class="panel-body">
-										<div class="btn-group social-connect-btn">
-											<#list action.companySocials as item >	
-											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
-											</#list>	
-										</div>									
-									</div>
-								</div>					
-							</div>			
+								</div>								
+							</div>	
 							<!-- end messages -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-file-upload">
