@@ -153,16 +153,6 @@
 							} 
 						},
 						pageSize: 10,
-						change: function(e) {							
-							if( this.hasChanges()){
-								$(".custom-announce-modify").removeAttr("disabled");
-							}else{
-								$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
-								if( this.data().length > 0 ){
-									viewAnnounce (this.at(0).announceId) ;
-								}
-							}
-						},
 						error:handleKendoAjaxError,
 						schema: {
 							data : "targetAnnounces",
@@ -175,7 +165,10 @@
 					columns: [ 
 						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
 						{field:"subject", title: "주제"}
-					]
+					],
+					dataBound: function(e) {
+						alert( "loaded" );
+					}
 				});
 				
 											
