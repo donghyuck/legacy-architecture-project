@@ -162,7 +162,8 @@
 							showAnnouncePanel();	
 						}
 					},
-					dataBound: function(e) {						
+					dataBound: function(e) {					
+					alert("loaded");	
 						var selectedCells = this.select();				
 						if(selectedCells.length == 0 )
 						{
