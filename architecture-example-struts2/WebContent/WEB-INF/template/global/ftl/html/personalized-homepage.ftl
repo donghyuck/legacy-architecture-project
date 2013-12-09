@@ -173,7 +173,12 @@
 					selectable: "row",
 					change: function(e) { 
 						var selectedCells = this.select();
-						alert( "select:" + selectedCells.announceId );
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	     
+							alert( "select:" + selectedCell.announceId );
+						}
+						
+						
 					},
 					dataBound: function(e) {
 						alert( "loaded" );
