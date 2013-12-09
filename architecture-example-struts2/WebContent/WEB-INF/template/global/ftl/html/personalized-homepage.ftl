@@ -144,7 +144,7 @@
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-messages' ){						
+					if(  $(this).attr('href') == '#my-message-notes' ){						
 					
 					} else if(  $(this).attr('href') == '#my-streams-mgmt' ){
 						
@@ -856,7 +856,7 @@
 							<li class="dropdown active">
 								<a href="#" id="my-messages-drop" class="dropdown-toggle" data-toggle="dropdown">메시지 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-messages-drop">
-									<li class="active"><a href="#my-message-announce" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>    알림</a></li>		
+									<li class="active"><a href="#my-message-announces" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>    알림</a></li>		
 									<li><a href="#my-message-notes" tabindex="-1" data-toggle="tab"><i class="fa fa-comments-o"></i>   My 쪽지</a></li>							
 								</ul>
 							</li>								
@@ -886,8 +886,11 @@
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
-							<!-- start messages -->				
-							<div class="tab-pane active" id="my-messages">
+							<!-- start messages -->			
+							<div class="tab-pane active" id="my-message-announces">
+								<div class="blank-top-5" ></div>	
+							</div>									
+							<div class="tab-pane active" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
 <div class="panel panel-default">
 <div class="panel-body">			
