@@ -859,8 +859,7 @@
 									<li><a href="#my-streams" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 쇼셜</a></li>		
 									<li><a href="#my-streams-mgmt" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span>   My 쇼셜 관리</a></li>							
 								</ul>
-							</li>							
-							<li><a href="#my-streams">쇼셜</a></li>							
+							</li>		
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
