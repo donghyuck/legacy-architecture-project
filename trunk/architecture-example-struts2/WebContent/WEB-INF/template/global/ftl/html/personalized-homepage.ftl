@@ -140,7 +140,7 @@
 				$("#announce-grid").kendoGrid({
 					dataSource : $("#announce-panel").data( "dataSource"),
 					columns: [ 
-						{field:"announceId", title: "ID", width: 90} ,
+						{field:"announceId", title: "ID", width: 50} ,
 						{field:"subject", title: "주제"}
 					]
 				});
