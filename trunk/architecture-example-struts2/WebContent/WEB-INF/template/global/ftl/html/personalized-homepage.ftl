@@ -874,7 +874,7 @@
 						<div class="tab-content">			
 							<!-- start messages -->				
 							<div class="tab-pane active" id="my-messages">
-								<div class="blank-top-15" ></div>		
+								<div class="blank-top-5" ></div>		
 <div class="panel panel-default">
 <div class="panel-body">			
 <ul class="media-list">
@@ -917,7 +917,7 @@
 								
 							</div>							
 							<div class="tab-pane" id="my-streams">							
-								<div class="blank-top-15" ></div>		
+								<div class="blank-top-5" ></div>		
 								<div class="panel panel-default">
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
 									<div class="panel-body">								
@@ -947,7 +947,7 @@
 							<!-- end messages -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-file-upload">
-								<div class="blank-top-15" ></div>			
+								<div class="blank-top-5" ></div>			
 								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 파일을 선택하거나 사진을 <strong>파일 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 파일이 서버에 저장됩니다.</div>
 								<#if !action.user.anonymous >			
 								<input name="uploadAttachment" id="attachment-files" type="file" />									
@@ -979,7 +979,7 @@
 							<!-- end attachements -->		
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
-								<div class="blank-top-15" ></div>					
+								<div class="blank-top-5" ></div>					
 								<div class="panel panel-default">								
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
