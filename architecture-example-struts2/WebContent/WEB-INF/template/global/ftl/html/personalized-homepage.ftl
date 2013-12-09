@@ -163,9 +163,7 @@
 						}
 					},
 					dataBound: function(e) {
-						if( this.dataSource.data().length > 0 ){
-							this.select('tr:eq(0)');
-						}
+						this.select('tr:eq(0)');
 					}
 				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
