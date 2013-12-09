@@ -139,7 +139,36 @@
 				$("#announce-panel").data( "dataSource").read();
 											
 				$("#announce-grid").kendoGrid({
-					dataSource : $("#announce-panel").data( "dataSource"),
+					dataSource : new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-announce.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}
+							} 
+						},
+						pageSize: 10,
+						change: function(e) {							
+							if( this.hasChanges()){
+								$(".custom-announce-modify").removeAttr("disabled");
+							}else{
+								$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
+								if( this.data().length > 0 ){
+									viewAnnounce (this.at(0).announceId) ;
+								}
+							}
+						},
+						error:handleKendoAjaxError,
+						schema: {
+							data : "targetAnnounces",
+							model : Announce
+						}
+					}),
 					sortable: true,
 					pageable: true,
 					resizable: true,
