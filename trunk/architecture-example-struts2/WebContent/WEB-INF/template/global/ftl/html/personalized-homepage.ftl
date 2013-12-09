@@ -72,6 +72,7 @@
 					}
 				});				
 				
+				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				// 1. Announces 								
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
@@ -127,12 +128,9 @@
 						var selectedCells = this.select();				
 						if(selectedCells.length == 0 )
 						{
-							$("#announce-panel").data( "announcePlaceHolder", new Announce () );
+							//$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 						} 
-						
-						
-						this.select('tr:eq(0)');
-						
+						this.select("tr:eq(1)");
 					}
 				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
