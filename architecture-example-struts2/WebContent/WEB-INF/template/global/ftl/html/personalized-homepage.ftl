@@ -163,7 +163,7 @@
 						}
 					},
 					dataBound: function(e) {
-						if( this.data().length > 0 ){
+						if( this.dataSource.data().length > 0 ){
 							this.select('tr:eq(0)');
 						}
 					}
