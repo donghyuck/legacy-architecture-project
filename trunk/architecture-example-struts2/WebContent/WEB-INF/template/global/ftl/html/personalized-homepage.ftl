@@ -676,6 +676,9 @@
 			z-index: 1;
 			min-width: 200px;
 			max-width: 500px;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			background-clip: none;			
 		 }
 		  .popover.left {
 		  	float: right;
