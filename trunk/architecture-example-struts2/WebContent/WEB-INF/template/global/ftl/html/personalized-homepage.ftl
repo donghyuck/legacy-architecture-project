@@ -492,6 +492,7 @@
 		function showAnnouncePanel (){	
 
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
+			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {				
 				$(".custom-announce-modify").removeAttr("disabled");
@@ -511,7 +512,6 @@
 						e.preventDefault();					
 						var updateId = announce_button.attr('data-announceId');
 						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
-							alert(  kendo.stringify( announcePlaceHolder ) );
 						$.ajax({
 								dataType : "json",
 								type : 'POST',
@@ -522,7 +522,6 @@
 								},
 								error:handleKendoAjaxError
 						});	
-						
 					} );
 				}else if ( announce_button.hasClass('custom-announce-delete') ){
 					announce_button.click(function (e) { 
@@ -920,23 +919,14 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 									</div>
 								</div>
 								<div class="panel-body layout">					
 									<div  id="announce-view"></div>
-									<br><br>
-									<table class="table table-hover">
-										<tbody>										
-											<tr>
-												<th></th>	
-												<td></td>
-											</tr>										
-										</tbody>
-									</table>												
 								</div>
 							</div>		
 						</div>
@@ -991,8 +981,6 @@
 							<div class="tab-pane active" id="my-message-announces">
 								<div class="blank-top-5" ></div>	
 								<div id="announce-grid" ></div>
-								
-								
 							</div>									
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
