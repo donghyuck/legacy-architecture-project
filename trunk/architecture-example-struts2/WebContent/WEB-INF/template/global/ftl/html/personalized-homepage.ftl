@@ -139,6 +139,9 @@
 											
 				$("#announce-grid").kendoGrid({
 					dataSource : $("#announce-panel").data( "dataSource"),
+					sortable: true,
+					pageable: true,
+					resizable: true,
 					columns: [ 
 						{field:"announceId", title: "ID", width: 50} ,
 						{field:"subject", title: "주제"}
