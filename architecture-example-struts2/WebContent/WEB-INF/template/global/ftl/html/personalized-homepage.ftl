@@ -853,8 +853,9 @@
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
-									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
 									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 포토 스트림</a></li>
+									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
+									
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span>    포토 뷰어</a></li>
 								</ul>
 							</li>
@@ -977,6 +978,7 @@
 								</div>																				
 							</div>							
 							<div class="tab-pane" id="my-photo-upload">
+								<div class="blank-top-5 "></div>
 								<#if !action.user.anonymous >		
 								<div class="alert alert-info"><strong>이미지 선택</strong> 버튼을 클릭하여 사진을 선택하거나 사진을 <strong>이미지 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 사진이 서버에 저장됩니다.</div>
 								<div class="blank-top-5 "></div>	
