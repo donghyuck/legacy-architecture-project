@@ -90,17 +90,17 @@
 						},
 						pageSize: 10,
 						error:handleKendoAjaxError,
-						serverPaging: false,
+					//	serverPaging: true,
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
 						}
 					}),
 					sortable: true,
-					pageable: {
-						refresh: true,
-						buttonCount: 5
-					},
+					//pageable: {
+					//	refresh: true,
+					//	buttonCount: 5
+					//},
 					height: 300,
 					columns: [ 
 						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
@@ -124,12 +124,7 @@
 						}
 					},
 					dataBound: function(e) {					
-					alert("loaded");	
-						var selectedCells = this.select();				
-						if(selectedCells.length == 0 )
-						{
-							//$("#announce-panel").data( "announcePlaceHolder", new Announce () );
-						} 
+						var selectedCells = this.select();
 						this.select("tr:eq(1)");
 					}
 				});
