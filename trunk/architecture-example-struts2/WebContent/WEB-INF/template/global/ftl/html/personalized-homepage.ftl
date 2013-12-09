@@ -851,10 +851,10 @@
 					</div>							
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
-							<li class="active"><a href="#my-messages">My 메시지</a></li>
-							<li><a href="#my-streams">My 쇼셜</a></li>							
+							<li class="active"><a href="#my-messages">메시지</a></li>
+							<li><a href="#my-streams">쇼셜</a></li>							
 							<li class="dropdown">
-								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
+								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
 									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 포토 스트림</a></li>
 									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
@@ -863,7 +863,7 @@
 								</ul>
 							</li>
 							<li class="dropdown">
-								<a href="#" id="my-files-drop" class="dropdown-toggle" data-toggle="dropdown">My 파일 <b class="caret"></b></a>
+								<a href="#" id="my-files-drop" class="dropdown-toggle" data-toggle="dropdown">파일 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-files-drop">
 									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 파일</a></li>
 									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    파일 업로드</a></li>
