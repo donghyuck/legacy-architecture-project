@@ -73,7 +73,7 @@
 				});				
 				
 				// 1. Announces 
-				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
+				
 				$("#announce-panel").data( "dataSource", 
 	 				new kendo.data.DataSource({
 						transport: {
@@ -162,8 +162,16 @@
 							showAnnouncePanel();	
 						}
 					},
-					dataBound: function(e) {
+					dataBound: function(e) {						
+						var selectedCells = this.select();				
+						if(selectedCells.length == 0 )
+						{
+							$("#announce-panel").data( "announcePlaceHolder", new Announce () );
+						} 
+						
+						
 						this.select('tr:eq(0)');
+						
 					}
 				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
