@@ -154,6 +154,7 @@
 						},
 						pageSize: 10,
 						error:handleKendoAjaxError,
+						serverPaging: false,
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
