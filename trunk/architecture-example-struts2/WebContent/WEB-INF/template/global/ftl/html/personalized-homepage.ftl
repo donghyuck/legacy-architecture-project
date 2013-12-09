@@ -173,7 +173,7 @@
 					pageable: true,
 					resizable: true,
 					columns: [ 
-						{field:"announceId", title: "ID", width: 50} ,
+						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
 						{field:"subject", title: "주제"}
 					]
 				});
