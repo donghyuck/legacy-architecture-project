@@ -852,7 +852,13 @@
 					</div>							
 					<div class="col-lg-4">
 						<ul class="nav nav-tabs" id="myTab">
-							<li class="active"><a href="#my-messages">메시지</a></li>
+							<li class="dropdown">
+								<a href="#" id="my-messages-drop" class="dropdown-toggle" data-toggle="dropdown">메시지 <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="my-messages-drop">
+									<li class="active"><a href="#my-message-announce" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    알림</a></li>		
+									<li><a href="#my-message-notes" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cog"></span>   My 쪽지</a></li>							
+								</ul>
+							</li>								
 							<li class="dropdown">
 								<a href="#" id="my-social-drop" class="dropdown-toggle" data-toggle="dropdown">쇼셜 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-social-drop">
