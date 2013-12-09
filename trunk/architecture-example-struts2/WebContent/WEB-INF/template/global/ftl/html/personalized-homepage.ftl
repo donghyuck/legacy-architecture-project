@@ -113,26 +113,6 @@
 					})
 				);								
 								
-				$("#announce-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);						
-						if( panel_header_action.text() == "Minimize" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-panel .panel-body").toggleClass("hide");								
-								var panel_header_action_icon = panel_header_action.find('span');
-								if( panel_header_action_icon.hasClass("k-i-minimize") ){
-									panel_header_action.find('span').removeClass("k-i-minimize");
-									panel_header_action.find('span').addClass("k-i-maximize");
-								}else{
-									panel_header_action.find('span').removeClass("k-i-maximize");
-									panel_header_action.find('span').addClass("k-i-minimize");
-								}								
-							});
-						}
-				} );								
-				
-				//$("#announce-panel").data( "dataSource").read();
-											
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
 						transport: {
@@ -179,14 +159,32 @@
 							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
 							announcePlaceHolder.user = selectedCell.user;					
-							showAnnouncePanel();						
+							showAnnouncePanel();	
 						}
 					},
 					dataBound: function(e) {
-						alert( "loaded" );
+						if( this.data().length > 0 ){
+							this.select('tr:eq(0)');
+						}
 					}
 				});
-				
+				$("#announce-panel .panel-header-actions a").each(function( index ) {
+						var panel_header_action = $(this);						
+						if( panel_header_action.text() == "Minimize" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#announce-panel .panel-body").toggleClass("hide");								
+								var panel_header_action_icon = panel_header_action.find('span');
+								if( panel_header_action_icon.hasClass("k-i-minimize") ){
+									panel_header_action.find('span').removeClass("k-i-minimize");
+									panel_header_action.find('span').addClass("k-i-maximize");
+								}else{
+									panel_header_action.find('span').removeClass("k-i-maximize");
+									panel_header_action.find('span').addClass("k-i-minimize");
+								}								
+							});
+						}
+				} );						
 											
 											
 				// 4. Right Tabs
