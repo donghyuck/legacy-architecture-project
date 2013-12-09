@@ -357,7 +357,7 @@
 								 	multiple : true,
 								 	width: 300,
 								 	showFileList : false,
-								    localization:{ select : '이미지 선택' , dropFilesHere : '업로드할 이미지을 이곳에 끌어 놓으세요.' },
+								    localization:{ select : '사진 선택' , dropFilesHere : '업로드할 사진들을 이곳에 끌어 놓으세요.' },
 								    async: {
 										saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
 										autoUpload: true
@@ -965,7 +965,7 @@
 							</div>
 							<!-- end attachements -->		
 							<!-- start photos -->
-							<div class="tab-pane" id="my-photos">
+							<div class="tab-pane" id="my-photo-stream">
 								<div class="blank-top-15" ></div>					
 								<div class="panel panel-default">								
 									<div class="panel-body scrollable" style="max-height:450px;">
@@ -977,9 +977,10 @@
 								</div>																				
 							</div>							
 							<div class="tab-pane" id="my-photo-upload">
-								<#if !action.user.anonymous >			
+								<#if !action.user.anonymous >		
+								<div class="alert alert-info"><strong>이미지 선택</strong> 버튼을 클릭하여 사진을 선택하거나 사진을 <strong>이미지 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 사진이 서버에 저장됩니다.</div>
+								<div class="blank-top-5 "></div>	
 								<input name="uploadPhotos" id="photo-files" type="file" />	
-								<div class="blank-top-5 "></div>
 								</#if>							
 							</div>
 							<!-- end photos -->
