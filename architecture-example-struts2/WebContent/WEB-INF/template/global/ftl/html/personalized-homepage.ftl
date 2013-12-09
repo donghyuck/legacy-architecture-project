@@ -88,6 +88,7 @@
 								}
 							} 
 						},
+						pageSize: 20,
 						requestStart: function() {
 							kendo.ui.progress($("#announce-panel"), true);
 						},
