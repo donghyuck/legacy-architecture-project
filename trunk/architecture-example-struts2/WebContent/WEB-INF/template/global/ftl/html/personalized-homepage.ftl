@@ -862,7 +862,13 @@
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span>    포토 뷰어</a></li>
 								</ul>
 							</li>
-							<li><a href="#my-files">My 파일</a></li>
+							<li class="dropdown">
+								<a href="#" id="my-files-drop" class="dropdown-toggle" data-toggle="dropdown">My 파일 <b class="caret"></b></a>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="my-files-drop">
+									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 파일</a></li>
+									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    파일 업로드</a></li>
+								</ul>
+							</li>
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
