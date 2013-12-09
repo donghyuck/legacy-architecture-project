@@ -131,7 +131,7 @@
 						}
 				} );								
 				
-				$("#announce-panel").data( "dataSource").read();
+				//$("#announce-panel").data( "dataSource").read();
 											
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
@@ -178,7 +178,8 @@
 							announcePlaceHolder.endDate = selectedCell.endDate;
 							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;											
+							announcePlaceHolder.user = selectedCell.user;					
+							showAnnouncePanel();						
 						}
 					},
 					dataBound: function(e) {
@@ -486,7 +487,54 @@
 				// END SCRIPT 
 			}
 		}]);	
+
+
+		function showAnnouncePanel (){	
+
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
+			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
+			observable.bind("change", function(e) {				
+				$(".custom-announce-modify").removeAttr("disabled");
+			});																		
+			
+			var template = kendo.template($('#announcement-view-template').html());			
+			$("#announce-view").html(
+				template(announcePlaceHolder)
+			);
 						
+			kendo.bind($("#announce-view"), announcePlaceHolder );					
+			
+			$("#announce-view div button").each(function( index ) {			
+				var announce_button = $(this);			
+				if( announce_button.hasClass( 'custom-announce-modify') ){
+					announce_button.click(function (e) { 
+						e.preventDefault();					
+						var updateId = announce_button.attr('data-announceId');
+						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
+							alert(  kendo.stringify( announcePlaceHolder ) );
+						$.ajax({
+								dataType : "json",
+								type : 'POST',
+								url : '${request.contextPath}/community/update-announce.do?output=json',
+								data : { announceId: announcePlaceHolder.announceId, item: kendo.stringify( announcePlaceHolder ) },
+								success : function( response ){		
+									$("#announce-panel").data( "dataSource").read();
+								},
+								error:handleKendoAjaxError
+						});	
+						
+					} );
+				}else if ( announce_button.hasClass('custom-announce-delete') ){
+					announce_button.click(function (e) { 
+						e.preventDefault();
+						if( confirm("삭제하시겠습니까 ?") ) {
+							// delete ...	
+						}
+					} );
+				}			
+			} );
+		}	
+								
 		function showSocialPanel ( provider ){			
 			var elementId =  provider + "-panel";			
 			if( $("#" + elementId ).length == 0  ){						
