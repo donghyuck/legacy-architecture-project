@@ -171,8 +171,9 @@
 						{field:"subject", title: "주제"}
 					],
 					selectable: "row",
-					change: function(e) { 
-					
+					change: function(data) { 
+						selectedDate = data ;
+						alert( "select:" + data.announceId );
 					},
 					dataBound: function(e) {
 						alert( "loaded" );
