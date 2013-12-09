@@ -128,11 +128,6 @@
 									panel_header_action.find('span').addClass("k-i-minimize");
 								}								
 							});
-						} else if (panel_header_action.text() == "Refresh" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-panel").data( "dataSource").read();
-							});
 						}
 				} );								
 				
@@ -175,8 +170,6 @@
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	     
-							alert( "select:" + selectedCell.announceId );
-							
 							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 							announcePlaceHolder.announceId = selectedCell.announceId;
 							announcePlaceHolder.subject = selectedCell.subject;
@@ -185,11 +178,8 @@
 							announcePlaceHolder.endDate = selectedCell.endDate;
 							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;	
-										
+							announcePlaceHolder.user = selectedCell.user;											
 						}
-						
-						
 					},
 					dataBound: function(e) {
 						alert( "loaded" );
