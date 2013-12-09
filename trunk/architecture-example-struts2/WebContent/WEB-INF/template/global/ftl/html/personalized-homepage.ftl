@@ -147,6 +147,7 @@
 					
 													
 					} else if(  $(this).attr('href') == '#my-streams' ){
+					
 						if( $("#social-view-panels").data( "providers") == null ){			
 							$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
 							<#list action.companySocials as item >
@@ -308,8 +309,7 @@
 									}
 							});
 						}
-					} else if( $(this).attr('href') == '#my-photos' ){					
-							
+					} else if( $(this).attr('href') == '#my-photo-stream' ){							
 						if( !$('#photo-list-view').data('kendoListView') ){
 							$("#photo-list-view").kendoListView({
 								dataSource: {
@@ -348,8 +348,11 @@
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#photo-list-view').data('kendoListView').dataSource
-							});			
-							// Photo Upload										
+							});	
+						}
+					} else if( $(this).attr('href') == '#my-photo-upload' ){							
+						// Photo Upload			
+						if( !$("#photo-files").data("kendoUpload")	){						
 							$("#photo-files").kendoUpload({
 								 	multiple : true,
 								 	width: 300,
@@ -371,10 +374,9 @@
 											//showPhotoPanel(); 
 										}				
 									}
-							});									
+							});		
 						}
-					} else if ( $(this).attr('href') == '#my-photo-gallery' ){					
-
+					} else if ( $(this).attr('href') == '#my-photo-gallery' ){
 						if( $("#photo-gallery-panel").html() == "" ){
 							// Photo Gallery Setup
 							$("#photo-gallery-panel").html(
@@ -402,8 +404,7 @@
 									}
 								});	
 							});						
-						}							
-						
+						}
 						if(!$('#update-gallery-photo-file').data('kendoUpload')){
 							$("#update-gallery-photo-file").kendoUpload({
 								multiple: false,
@@ -852,7 +853,8 @@
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">My 포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
-									<li><a href="#my-photos" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    포토</a></li>
+									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
+									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 포토 스트림</a></li>
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span>    포토 뷰어</a></li>
 								</ul>
 							</li>
@@ -964,11 +966,7 @@
 							<!-- end attachements -->		
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photos">
-								<div class="blank-top-15" ></div>				
-								<#if !action.user.anonymous >			
-								<input name="uploadPhotos" id="photo-files" type="file" />	
-								<div class="blank-top-5 "></div>
-								</#if>		
+								<div class="blank-top-15" ></div>					
 								<div class="panel panel-default">								
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
@@ -978,6 +976,12 @@
 									</div>
 								</div>																				
 							</div>							
+							<div class="tab-pane" id="my-photo-upload">
+								<#if !action.user.anonymous >			
+								<input name="uploadPhotos" id="photo-files" type="file" />	
+								<div class="blank-top-5 "></div>
+								</#if>							
+							</div>
 							<!-- end photos -->
 							<div class="tab-pane" id="my-photo-gallery">
 								<div class="blank-top-5 "></div>
