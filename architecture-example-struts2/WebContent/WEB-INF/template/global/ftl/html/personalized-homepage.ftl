@@ -451,6 +451,8 @@
 
 		function showAnnouncePanel (){	
 
+			$("#announce-view").show();
+
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {				
