@@ -48,8 +48,19 @@
 									accounts.login({
 										data: $("form[name=login-form]").serialize(),
 										success : function( response ) {
-											$("form[name='login-form']")[0].reset();               
-											$("form[name='login-form']").attr("action", "/main.do").submit();										
+										
+										alert( response );
+										
+											$("form[name='login-form']")[0].reset();    
+											<#if action.view! == "personalized" >
+											$("form[name='login-form']").attr("action", "/main.do?view=personalized").submit();						
+											<#else>
+											$("form[name='login-form']").attr("action", "/main.do").submit();						
+											</#if>
+											
+											           
+										
+															
 										},
 										fail : function( response ) {  
 											$("#login-password").val("").focus();												
