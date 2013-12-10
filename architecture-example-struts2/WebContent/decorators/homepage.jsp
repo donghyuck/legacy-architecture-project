@@ -46,16 +46,16 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		.headline {
 			display: block;
 			margin: 10px 0 25px 0;
-			border-bottom: 1px solid #F5F5F5;
+			border-bottom:  2px solid #333333;
 		}
 		.headline h2, 
 		.headline h3, 
 		.headline h4 {
-			color: #f5f5f5;
+			color: #ffffff;
 			margin: 0 0 -2px 0;
 			padding-bottom: 5px;
 			display: inline-block;
-			border-bottom: 2px solid #3498db;
+			border-bottom: 2px solid #00aba9;
 		}
 		.headline h2 {
 			font-size: 18px;
@@ -71,10 +71,10 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		
 		/*Footer*/
 		.footer {
-			color: #f5f5f5;
+			color: #ffffff;
 			margin-top: 40px;
 			padding: 20px 0 30px;
-			background: #363940;
+			background: #0e0e0e;
 		}
 		
 		.footer.margin-top-0 {
