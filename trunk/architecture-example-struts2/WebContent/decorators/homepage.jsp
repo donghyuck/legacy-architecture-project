@@ -71,7 +71,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		
 		/*Footer*/
 		.footer {
-			color: #dadada;
+			color: #f5f5f5;
 			margin-top: 40px;
 			padding: 20px 0 30px;
 			background: #363940;
@@ -102,7 +102,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 			color: #333333;
 		}
 		
-		.footer a {
+		.footer  a {
 			#color: #333333;
 		}
 		.footer a:hover {
