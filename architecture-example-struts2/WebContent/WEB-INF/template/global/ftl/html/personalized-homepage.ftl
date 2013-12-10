@@ -562,15 +562,14 @@
 				});		
 			}			
 			//photo-gallery-panel
-			$("div .custom-panels-group").hide();
+			//$("div .custom-panels-group").hide();
 			$("#photo-gallery-panel").show();		
 		}
 		
 		function showPhotoPanel(){
 		
-			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");
-			
-			if( $("#photo-view-panel").length == 0  ){					
+			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");			
+			if( $("#photo-view-panel").html() == ""  ){					
 				var template = kendo.template($('#photo-view-template').html());
 				$('#photo-view-panel').html( template(photoPlaceHolder) );					
 				$("#photo-view-panel button").each(function( index ) {		
