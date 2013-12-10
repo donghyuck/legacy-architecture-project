@@ -568,9 +568,11 @@
 		}
 		
 		function showPhotoPanel(){
+		
 			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");
 			var template = kendo.template($('#photo-view-template').html());
 			$('#photo-view-panel').html( template(photoPlaceHolder) );				
+			
 			kendo.bind($("#photo-view-panel"), photoPlaceHolder );	
 	
 			$("#photo-view-panel button").each(function( index ) {		
@@ -583,16 +585,14 @@
 							type : 'POST',
 							url : '${request.contextPath}/community/delete-my-image.do?output=json',
 							data : { imageId: photoPlaceHolder.imageId },
-							success : function( response ){		
-								$('#announce-panel').show();
+							success : function( response ){
 								$('#photo-view-panel').hide();
 							},
 							error:handleKendoAjaxError
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
-						$("div .custom-panels-group").hide();
-						//$('#announce-panel').show();						
+						$("div .custom-panels-group").hide();					
 					}					
 				});
 			});	
