@@ -719,15 +719,15 @@
 		
 		<style scoped="scoped">
 
-
+		.k-grid table tr.k-state-selected{
+			background: #428bca;
+			color: #ffffff; 
+		}
 
 		.media, .media .media {
 			margin-top: 5px;
 		}
-		
-		
-.k-calendar .k-state-selected { background: blue; }
-		
+	
 		.popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 			width: 90%;
