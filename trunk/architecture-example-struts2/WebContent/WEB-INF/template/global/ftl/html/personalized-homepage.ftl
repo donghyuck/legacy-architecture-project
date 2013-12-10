@@ -144,7 +144,7 @@
 								}								
 							});
 						} else if (panel_header_action.text() == "Close"){	
-							$("#announce-panel").hide();
+							$("#announce-panel" ).hide();
 						}
 				} );						
 											
@@ -451,7 +451,7 @@
 
 		function showAnnouncePanel (){	
 
-			$("#announce-panel" ).show();;
+			$("#announce-panel" ).show();
 
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
@@ -877,7 +877,7 @@
 				<div class="row">					
 					<div class="col-lg-8">						
 						<!-- start announce panel -->
-						<div id="announce-panel" class="custom-panels-group">	
+						<div id="announce-panel" class="custom-panels-group" style="display:none;">	
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
