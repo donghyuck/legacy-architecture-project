@@ -320,7 +320,7 @@
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/><span class="k-icon k-i-arrow-s"></span>
 		# } else { # 
-			<img src="${request.contextPath}/images/common/anonymous.png" class="img-rounded" width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
+			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
 		# } #	
 		</a>
 		<ul class="dropdown-menu">
