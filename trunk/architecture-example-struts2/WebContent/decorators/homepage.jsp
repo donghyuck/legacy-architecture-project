@@ -51,7 +51,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		.headline h2, 
 		.headline h3, 
 		.headline h4 {
-			color: #585f69;
+			color: #f5f5f5;
 			margin: 0 0 -2px 0;
 			padding-bottom: 5px;
 			display: inline-block;
@@ -75,10 +75,6 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 			margin-top: 40px;
 			padding: 20px 0 30px;
 			background: #363940;
-		}
-		
-		.footer.headline {
-			color: #ffffff;
 		}
 		
 		.footer.margin-top-0 {
