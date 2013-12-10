@@ -130,12 +130,9 @@
 				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);		
-						
-						
-									
-						if( panel_header_action.text() == "Minimize" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
+						panel_header_action.click(function (e) {
+							e.preventDefault();
+							if( panel_header_action.text() == "Minimize" ){
 								$("#announce-panel .panel-body").toggleClass("hide");								
 								var panel_header_action_icon = panel_header_action.find('span');
 								if( panel_header_action_icon.hasClass("k-i-minimize") ){
@@ -144,13 +141,12 @@
 								}else{
 									panel_header_action.find('span').removeClass("k-i-maximize");
 									panel_header_action.find('span').addClass("k-i-minimize");
-								}								
-							});
-						} else if (panel_header_action.text() == "Close"){	
-						alert( panel_header_action.text()  );	
-							$("#announce-panel" ).hide();
-						}
-				} );						
+								}							
+							}else if (panel_header_action.text() == "Close"){	
+								$("#announce-panel" ).hide();
+							}
+						});
+				});						
 											
 											
 				// 4. Right Tabs
