@@ -74,7 +74,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 			color: #dadada;
 			margin-top: 40px;
 			padding: 20px 0 30px;
-			background: #F5F5F5;
+			background: #363940;
 		}
 		
 		.footer.margin-top-0 {
