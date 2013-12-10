@@ -95,11 +95,11 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 			font-size: 14px;
 		} 
 		.footer p {
-			color: #333333;
+			color: #F5F5F5;
 		} 
 		
 		.footer address {
-			color: #333333;
+			color: #F5F5F5;
 		}
 		
 		.footer  a {
