@@ -192,8 +192,6 @@
 		    </div>
 		  </li>					
 </script>
-		
-
 <script type="text/x-kendo-template" id="image-view-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
@@ -250,7 +248,6 @@
 		</div>
 	</div>
 </script>
-
 <script type="text/x-kendo-template" id="photo-gallery-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">My 포토 뷰어		
@@ -267,7 +264,6 @@
 		</div>
 	</div>		
 </script>
-
 <script type="text/x-kendo-template" id="photo-gallery-view-template">
 		<section>
 			<figure>
@@ -286,10 +282,8 @@
 		 		<h5 class="media-heading"><strong>익명</strong></h5>
 				너무 좋아요.
 			</div>
-		</div>
-		
+		</div>		
 </script>
-
 <script type="text/x-kendo-template" id="photo-view-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
@@ -326,7 +320,7 @@
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/><span class="k-icon k-i-arrow-s"></span>
 		# } else { # 
-			<img src="${request.contextPath}/images/common/anonymous.png"  width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
+			<img src="${request.contextPath}/images/common/anonymous.png" class="img-circle" width="30" height="30"/><span class="k-icon k-i-arrow-s"></span>
 		# } #	
 		</a>
 		<ul class="dropdown-menu">
