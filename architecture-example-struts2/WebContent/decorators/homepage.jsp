@@ -71,7 +71,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		
 		/*Footer*/
 		.footer {
-			color: #ffffff;
+			color: #F5F5F5;
 			margin-top: 40px;
 			padding: 20px 0 30px;
 			background: #0e0e0e;
@@ -95,11 +95,11 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 			font-size: 14px;
 		} 
 		.footer p {
-			color: #F5F5F5;
+			color: #333333;
 		} 
 		
 		.footer address {
-			color: #F5F5F5;
+			color: #333333;
 		}
 		
 		.footer  a {
