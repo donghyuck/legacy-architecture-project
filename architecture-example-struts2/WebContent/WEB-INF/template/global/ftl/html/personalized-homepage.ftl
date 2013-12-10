@@ -24,9 +24,6 @@
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
-				
-				alert( "${action.view!}" );
-				
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
@@ -37,7 +34,7 @@
 					authenticate : function( e ){
 						currentUser = e.token;						
 					},
-					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || ${action.view!"none"} == "personalized" >
+					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || "${action.view!"none"}" == "personalized" >
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
