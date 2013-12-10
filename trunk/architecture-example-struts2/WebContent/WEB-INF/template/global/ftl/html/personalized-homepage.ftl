@@ -143,6 +143,8 @@
 									panel_header_action.find('span').addClass("k-i-minimize");
 								}								
 							});
+						} else if (panel_header_action.text() == "Close"){	
+							$("#announce-panel").hide();
 						}
 				} );						
 											
