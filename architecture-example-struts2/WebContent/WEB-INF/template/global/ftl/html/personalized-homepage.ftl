@@ -458,7 +458,6 @@
 		function showAnnouncePanel (){	
 
 			$("#announce-panel" ).show();
-
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );			
 			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
 			observable.bind("change", function(e) {				
@@ -570,53 +569,53 @@
 		function showPhotoPanel(){
 		
 			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");
-			var template = kendo.template($('#photo-view-template').html());
-			$('#photo-view-panel').html( template(photoPlaceHolder) );				
 			
-			kendo.bind($("#photo-view-panel"), photoPlaceHolder );	
-	
-			$("#photo-view-panel button").each(function( index ) {		
-				var panel_button = $(this);
-				panel_button.click(function (e) { 
-					e.preventDefault();					
-					if( panel_button.hasClass( 'custom-photo-delete') ){
-						$.ajax({
-							dataType : "json",
-							type : 'POST',
-							url : '${request.contextPath}/community/delete-my-image.do?output=json',
-							data : { imageId: photoPlaceHolder.imageId },
-							success : function( response ){
-								$('#photo-view-panel').hide();
-							},
-							error:handleKendoAjaxError
-						});	
-					}
-					if( panel_button.hasClass( 'close') ){
-						$("div .custom-panels-group").hide();					
-					}					
+			if( $("#photo-view-panel").length == 0  ){					
+				var template = kendo.template($('#photo-view-template').html());
+				$('#photo-view-panel').html( template(photoPlaceHolder) );					
+				$("#photo-view-panel button").each(function( index ) {		
+					var panel_button = $(this);
+					panel_button.click(function (e) { 
+						e.preventDefault();					
+						if( panel_button.hasClass( 'custom-photo-delete') ){
+							$.ajax({
+								dataType : "json",
+								type : 'POST',
+								url : '${request.contextPath}/community/delete-my-image.do?output=json',
+								data : { imageId: photoPlaceHolder.imageId },
+								success : function( response ){
+									$('#photo-view-panel').hide();
+								},
+								error:handleKendoAjaxError
+							});	
+						}
+						if( panel_button.hasClass( 'close') ){
+							$("div .custom-panels-group").hide();					
+						}					
+					});
 				});
-			});	
-					
-			$("#update-photo-file").kendoUpload({
-				multiple: false,
-				async: {
-					saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
-					autoUpload: true
-				},
-				localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
-				upload: function (e) {				
-					e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };
-				},
-				success: function (e) {				
-					if( e.response.targetImage ){
-						 $("#photo-view-panel").data( "photoPlaceHolder",  e.response.targetImage  );
-						 showPhotoPanel();
-						//kendo.bind($("#photo-view-panel"), e.response.targetImage );
-					}
-				} 
-			});		
+				$("#update-photo-file").kendoUpload({
+					multiple: false,
+					async: {
+						saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
+						autoUpload: true
+					},
+					localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+					upload: function (e) {				
+						e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };
+					},
+					success: function (e) {				
+						if( e.response.targetImage ){
+							 $("#photo-view-panel").data( "photoPlaceHolder",  e.response.targetImage  );
+							 showPhotoPanel();
+							//kendo.bind($("#photo-view-panel"), e.response.targetImage );
+						}
+					} 
+				});					
+			}
 						
-			$("div .custom-panels-group").hide();
+			kendo.bind($("#photo-view-panel"), photoPlaceHolder );	
+			//$("div .custom-panels-group").hide();
 			$("#photo-view-panel").show();			
 		}
 		
