@@ -719,13 +719,9 @@
 		
 		<style scoped="scoped">
 
-		.k-grid-content tbody tr:hover {
-			background: #ebebeb;
-		}
-
 		.k-grid table tr.k-state-selected{
 			background: #428bca;
-			color: #428bca; 
+			color: #ffffff; 
 		}
 
 		.media, .media .media {
