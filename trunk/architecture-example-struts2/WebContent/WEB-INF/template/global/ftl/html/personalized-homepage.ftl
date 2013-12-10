@@ -569,7 +569,7 @@
 		function showPhotoPanel(){
 		
 			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");			
-			if( $("#photo-view-panel").html() == ""  ){					
+			//if( $("#photo-view-panel").html() == ""  ){					
 				var template = kendo.template($('#photo-view-template').html());
 				$('#photo-view-panel').html( template(photoPlaceHolder) );					
 				$("#photo-view-panel button").each(function( index ) {		
@@ -611,8 +611,7 @@
 						}
 					} 
 				});					
-			}
-						
+			//}						
 			kendo.bind($("#photo-view-panel"), photoPlaceHolder );	
 			//$("div .custom-panels-group").hide();
 			$("#photo-view-panel").show();			
