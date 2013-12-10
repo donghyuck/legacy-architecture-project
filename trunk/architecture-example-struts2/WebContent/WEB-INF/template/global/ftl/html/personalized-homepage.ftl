@@ -51,15 +51,12 @@
 									accounts.login({
 										data: $("form[name=login-form]").serialize(),
 										success : function( response ) {
-										
-										alert( kendo.stringify(response) );
-										
+											var refererUrl = "/main.do";
+											if( response.item.referer ){
+												refererUrl = response.item.referer;
+											}
 											$("form[name='login-form']")[0].reset();    
-											<#if action.view! == "personalized" >
-											$("form[name='login-form']").attr("action", "/main.do?view=personalized").submit();						
-											<#else>
-											$("form[name='login-form']").attr("action", "/main.do").submit();						
-											</#if>
+											$("form[name='login-form']").attr("action", refererUrl ).submit();						
 										},
 										fail : function( response ) {  
 											$("#login-password").val("").focus();												
