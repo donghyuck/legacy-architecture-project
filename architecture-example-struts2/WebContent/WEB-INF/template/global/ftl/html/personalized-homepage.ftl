@@ -719,10 +719,7 @@
 		
 		<style scoped="scoped">
 
-		.k-grid table tr.k-state-selected{
-			background: #428bca;
-			color: #ffffff; 
-		}
+
 
 		.media, .media .media {
 			margin-top: 5px;
