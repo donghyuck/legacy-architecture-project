@@ -43,9 +43,7 @@
 						</#list>
 					</ul>				
 					<ul class="nav navbar-nav navbar-right">
-						<li id="account-panel">
-							<!--<div id="account-panel"></div> -->
-						</li>
+						<li id="account-panel"></li>
 						<li>
 							<p class="navbar-text"></p>
 						</li>
