@@ -40,7 +40,10 @@
 					afterAuthenticate : function(){
 						$('.dropdown-toggle').dropdown();
 						if( currentUser.anonymous ){
-							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
+							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");
+							
+							
+							
 							$("#login-btn").click(function() { 
 								$("#login-status").html("");
 								if( validator.validate() )
@@ -49,7 +52,7 @@
 										data: $("form[name=login-form]").serialize(),
 										success : function( response ) {
 										
-										alert( response );
+										alert( kendo.stringify(response) );
 										
 											$("form[name='login-form']")[0].reset();    
 											<#if action.view! == "personalized" >
@@ -57,10 +60,6 @@
 											<#else>
 											$("form[name='login-form']").attr("action", "/main.do").submit();						
 											</#if>
-											
-											           
-										
-															
 										},
 										fail : function( response ) {  
 											$("#login-password").val("").focus();												
