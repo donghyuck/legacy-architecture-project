@@ -303,7 +303,7 @@
 					<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
 					</a>
 					<div class="media-body">
-		 				<h5 class="media-heading"><strong>댓글</strong></h5>
+		 				<h5 class="media-heading">댓글 달기</h5>
 						<input type="text" placeholder="댓글" class="form-control" placeholder=".col-xs-4" />	
 							
 					</div>
