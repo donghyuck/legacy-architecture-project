@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4 md-margin-bottom-40">
                 <!-- About -->
-                <div class="headline"><h2>회사소개</h2></div>  
+                <div class="headline"><h2> 회사소개 </h2></div>  
                 <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>    
             </div><!--/col-md-4-->  
             
@@ -12,7 +12,7 @@
             </div><!--/col-md-4-->
 
             <div class="col-md-4">
-                <div class="headline"><h2>연락처</h2></div> 
+                <div class="headline"><h2> 연락처 </h2></div> 
                 <address class="md-margin-bottom-40">
                     25, Lorem Lis Street, Orange <br />
                     California, US <br />
