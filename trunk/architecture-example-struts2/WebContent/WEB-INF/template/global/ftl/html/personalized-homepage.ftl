@@ -24,7 +24,9 @@
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
-				      
+				
+				alert( "${action.view!}" );
+				
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
@@ -863,8 +865,6 @@
 			max-width: 600px;
 			width: 100%;
 		}
-		
-		
 		
 		</style>   	
 	</head>
