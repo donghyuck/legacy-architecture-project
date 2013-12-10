@@ -729,9 +729,7 @@
 		}
 		
 		
-		.k-datetimepicker .k-state-hover.k-select {
-		background: #428bca;
-		} 
+.k-calendar .k-state-selected { background: blue; }
 		
 		.popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
