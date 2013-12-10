@@ -723,6 +723,10 @@
 			background: #ff0000;
 		}
 
+		.k-grid table tr.k-state-selected{
+			background: red;color: black; 
+		}
+
 		.media, .media .media {
 			margin-top: 5px;
 		}
