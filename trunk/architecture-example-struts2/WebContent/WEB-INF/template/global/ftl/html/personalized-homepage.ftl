@@ -131,7 +131,7 @@
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);		
 						
-						alert( panel_header_action.text()  );	
+						
 									
 						if( panel_header_action.text() == "Minimize" ){
 							panel_header_action.click(function (e) {
@@ -147,6 +147,7 @@
 								}								
 							});
 						} else if (panel_header_action.text() == "Close"){	
+						alert( panel_header_action.text()  );	
 							$("#announce-panel" ).hide();
 						}
 				} );						
