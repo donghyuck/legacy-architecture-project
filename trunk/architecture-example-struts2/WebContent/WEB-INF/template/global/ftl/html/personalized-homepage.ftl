@@ -417,7 +417,7 @@
 										$('#photo-gallery-view').data('kendoListView').dataSource.read();
 									} else if (gallery_header_action.text() == "Close"){	
 										$("div .custom-panels-group").hide();
-										$('#announce-panel').show();		
+										//$('#announce-panel').show();		
 									}
 								});	
 							});						
@@ -586,7 +586,7 @@
 					}
 					if( panel_button.hasClass( 'close') ){
 						$("div .custom-panels-group").hide();
-						$('#announce-panel').show();						
+						//$('#announce-panel').show();						
 					}					
 				});
 			});	
@@ -639,7 +639,7 @@
 					}
 					if( panel_button.hasClass( 'close') ){
 						$("div .custom-panels-group").hide();
-						$('#announce-panel').show();						
+						//$('#announce-panel').show();						
 					}					
 				});
 			});	
