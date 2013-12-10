@@ -728,6 +728,11 @@
 			margin-top: 5px;
 		}
 		
+		
+		.k-datetimepicker .k-state-hover.k-select {
+		background: #428bca;
+		} 
+		
 		.popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 			width: 90%;
