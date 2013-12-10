@@ -719,11 +719,15 @@
 		
 		<style scoped="scoped">
 
+		.k-grid-content tbody tr:hover {
+			background: #ff0000;
+		}
+
 		.media, .media .media {
-		margin-top: 5px;
+			margin-top: 5px;
 		}
 		
-		 .popover {
+		.popover {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 			width: 90%;
 			margin-top: 5px;
@@ -752,10 +756,7 @@
 		 .popover-title {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 		 }
-	 		
-		.carousel {
-		margin-top: 60px;		
-		}	
+
 		.k-callout-n {
 		border-bottom-color: #787878;
 		}	
@@ -857,6 +858,8 @@
 			max-width: 600px;
 			width: 100%;
 		}
+		
+		
 		
 		</style>   	
 	</head>
