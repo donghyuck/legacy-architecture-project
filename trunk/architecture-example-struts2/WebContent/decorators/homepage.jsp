@@ -46,7 +46,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		.headline {
 			display: block;
 			margin: 10px 0 25px 0;
-			border-bottom: 1px solid #ffffff;
+			border-bottom: 1px solid #F5F5F5;
 		}
 		.headline h2, 
 		.headline h3, 
