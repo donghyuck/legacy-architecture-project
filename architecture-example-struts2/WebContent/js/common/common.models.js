@@ -69,7 +69,8 @@ var Image = kendo.data.Model.define( {
         contentType: { type: "string", editable: false },
         imageId: { type: "number", editable: false },
         modifiedDate: { type: "date"},
-        creationDate: { type: "date" } 
+        creationDate: { type: "date" },
+        index : {type: "number", defaultValue : 0 }
     }
 });
 
