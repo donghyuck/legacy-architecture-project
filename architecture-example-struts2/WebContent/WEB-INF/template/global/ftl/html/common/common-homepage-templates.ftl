@@ -82,9 +82,9 @@
 
 
 <script type="text/x-kendo-tmpl" id="social-view-panel-template">
-		<div id="#: provider #-panel" class="panel panel-success">
+		<div id="#: provider #-panel" class="panel panel-info">
 			<div class="panel-heading">
-				<i class="icon-#: provider #"></i> &nbsp; #: provider # &nbsp; 소식
+				<i class="fa fa-#: provider # fa-fw"></i>&nbsp;&nbsp;#: provider # &nbsp; 소식
 				<div class="k-window-actions panel-header-actions">
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -286,9 +286,19 @@
 </script>
 <script type="text/x-kendo-template" id="photo-view-template">
 	<div class="panel panel-default">
-		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
+		<div class="panel-heading">#:name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
 		<div class="panel-body">
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
+			<figure>
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
+				<figcaption>
+					<small><p class="text-muted">#:modifiedDate#</p></small>	
+					<ul class="pager">
+						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+					</ul>										
+				</figcaption>			
+				
+			</figure>
 		</div>
 		<ul class="list-group">
 			<li class="list-group-item">
@@ -297,9 +307,8 @@
 					<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
 					</a>
 					<div class="media-body">
-		 				<h5 class="media-heading">댓글 달기</h5>
+		 				<h5 class="media-heading"></h5>
 						<input type="text" placeholder="댓글" class="form-control" placeholder=".col-xs-4" />	
-							
 					</div>
 				</div>		
 			</li>
@@ -308,7 +317,7 @@
 			</li>
 		</ul>
 		<div class="panel-footer">
-			<a class="btn btn-default" href="${request.contextPath}/community/download-my-image.do?imageId=#= imageId #" >다운로드</a>
+			<a class="btn btn-default" href="${request.contextPath}/community/download-my-image.do?imageId=#:imageId #" >다운로드</a>
 			<button  type="button" class="btn btn-danger custom-photo-delete"  data-for-imageId="#:imageId #" >삭제</button>					
 		</div>
 	</div>
@@ -374,33 +383,33 @@
 			<li><a href="/logout">로그아웃</a></li>
 			# } else { #  			
 			<li>
-				<div class="container layout">
+				<div class="container" style="width:100%;">
 					<div class="row blank-top-5 ">
 						<div class="col-lg-12">
-							<button class="btn btn-block btn-facebook"><i class="icon-facebook"></i> | 페이스북으로 로그인</button>
+							<button class="btn btn-block btn-primary"><i class="fa fa-facebook"></i> | 페이스북으로 로그인</button>
 						</div>
 					</div>		
 					<div class="row blank-top-5 ">
 						<div class="col-lg-12">
-							<button class="btn btn-block btn-twitter"><i class="icon-twitter"></i> | 트위터로 로그인</button>
+							<button class="btn btn-block btn-info"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
 						</div>
 					</div>					
 				</div>
 			</li>
 			<li class="divider"></li>
 			<li>
-				<div class="container bg-white layout" id="login-panel">													
+				<div class="container bg-white" id="login-panel"style="width:100%;">													
 					<div class="row blank-top-5 ">
 						<div class="col-lg-12">
 							<form role="form" name="login-form" method="POST" accept-charset="utf-8">
 								<input type="hidden" id="output" name="output" value="json" />		
 								<div class="form-group">
 									<label for="login-username">아이디 또는 이메일</label>
-									<input type="text" class="form-control" id="login-username" name="username" placeholder="아이디 또는 이메일" required validationMessage="아이디 또는 이메일을 입력하여 주세요.">
+									<input type="text" class="form-control col-lg-12" id="login-username" name="username" placeholder="아이디 또는 이메일" required validationMessage="아이디 또는 이메일을 입력하여 주세요.">
 								</div>
 								<div class="form-group">
 									<label for="login-password">비밀번호</label>
-										<input type="password" class="form-control" id="login-password" name="password"  placeholder="비밀번호"  required validationMessage="비밀번호를 입력하여 주세요." >
+										<input type="password" class="form-control " id="login-password" name="password"  placeholder="비밀번호"  required validationMessage="비밀번호를 입력하여 주세요." >
 								</div>				 
 								<button type="button" id="login-btn" class="btn btn-primary btn-block">로그인</button>
 							</form>						

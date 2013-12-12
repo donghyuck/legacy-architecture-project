@@ -6,8 +6,6 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/bootstrap/3.0.0/font-awesome.min.css',
-			'css!${request.contextPath}/styles/bootstrap/3.0.0/social-buttons.min.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',

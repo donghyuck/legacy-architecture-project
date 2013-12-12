@@ -6,10 +6,7 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/bootstrap/3.0.0/font-awesome.css',		
-			'css!${request.contextPath}/styles/bootstrap/3.0.0/social-buttons.css',			
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',			
-			'css!${request.contextPath}/styles/jquery.bjslider/jquery.bxslider.css',
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -166,8 +163,7 @@
 					
 					} else if(  $(this).attr('href') == '#my-streams-mgmt' ){
 						
-					} else if(  $(this).attr('href') == '#my-streams' ){
-					
+					} else if(  $(this).attr('href') == '#my-streams' ){					
 						if( $("#social-view-panels").data( "providers") == null ){			
 							$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
 							<#list action.companySocials as item >
@@ -400,11 +396,14 @@
 							});		
 						}
 					} else if ( $(this).attr('href') == '#my-photo-gallery' ){
+					
 						if( $("#photo-gallery-panel").html() == "" ){
 							// Photo Gallery Setup
+							
 							$("#photo-gallery-panel").html(
 								$('#photo-gallery-template').html()
-							);					
+							);			
+									
 							$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
 								var gallery_header_action = $(this);
 								gallery_header_action.click(function (e){
@@ -423,7 +422,6 @@
 										$('#photo-gallery-view').data('kendoListView').dataSource.read();
 									} else if (gallery_header_action.text() == "Close"){	
 										$("div .custom-panels-group").hide();
-										//$('#announce-panel').show();		
 									}
 								});	
 							});						
@@ -501,9 +499,8 @@
 			var elementId =  provider + "-panel";			
 			if( $("#" + elementId ).length == 0  ){						
 				// create new social panel 
-				var template = kendo.template($("#social-view-panel-template").html());		
-				$("#social-view-panels").append( template( { provider:provider} ) );
-												
+				var template = kendo.template($("#social-view-panel-template").html());				
+				$("#social-view-panels").append( template( { provider:provider} ) );												
 				// get dataSource
 				var dataSource = $("#social-view-panels").data( "providers").get( provider ).dataSource;
 				if( dataSource.total() == 0 )
@@ -562,17 +559,14 @@
 				});		
 			}			
 			//photo-gallery-panel
-			//$("div .custom-panels-group").hide();
 			$("#photo-gallery-panel").show();		
 		}
 		
-		function showPhotoPanel(){
-		
+		function showPhotoPanel(){	
 			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");			
-			//if( $("#photo-view-panel").html() == ""  ){					
-				var template = kendo.template($('#photo-view-template').html());
-				$('#photo-view-panel').html( template(photoPlaceHolder) );					
-				$("#photo-view-panel button").each(function( index ) {		
+			var template = kendo.template($('#photo-view-template').html());				
+			$('#photo-view-panel').html( template(photoPlaceHolder) );						
+			$("#photo-view-panel button").each(function( index ) {		
 					var panel_button = $(this);
 					panel_button.click(function (e) { 
 						e.preventDefault();					
@@ -581,7 +575,7 @@
 								dataType : "json",
 								type : 'POST',
 								url : '${request.contextPath}/community/delete-my-image.do?output=json',
-								data : { imageId: photoPlaceHolder.imageId },
+								data : { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId },
 								success : function( response ){
 									$('#photo-view-panel').hide();
 								},
@@ -589,11 +583,40 @@
 							});	
 						}
 						if( panel_button.hasClass( 'close') ){
-							$("div .custom-panels-group").hide();					
+							//$("div .custom-panels-group").hide();		
+							$('#photo-view-panel').hide();			
 						}					
 					});
-				});
-				$("#update-photo-file").kendoUpload({
+			});
+			
+			$( '#photo-view-panel .pager li').each(function( index ) { 
+				var panel_pager = $(this);				
+				if( panel_pager.hasClass('previous') ){
+					panel_pager.click(function (e) { 
+						e.preventDefault();						
+						var listView =  $('#photo-list-view').data('kendoListView');
+						var idx = listView.select().index();
+						if( idx > 0 ){
+							var item = listView.dataSource.view()[idx-1];
+							$("#photo-view-panel").data( "photoPlaceHolder", item );														
+							showPhotoPanel( );
+						} 
+					});
+				}else if ( panel_pager.hasClass('next') ){ 
+					panel_pager.click(function (e) { 
+						e.preventDefault();				
+						var listView =  $('#photo-list-view').data('kendoListView');
+						var idx = listView.select().index();
+						if( idx <= listView.dataSource.view().length ){
+							var item = listView.dataSource.view()[idx+1];
+							$("#photo-view-panel").data( "photoPlaceHolder", item );
+							showPhotoPanel( );						
+						}						
+					});				
+				}
+			} );			
+			
+			$("#update-photo-file").kendoUpload({
 					multiple: false,
 					async: {
 						saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
@@ -607,13 +630,9 @@
 						if( e.response.targetImage ){
 							 $("#photo-view-panel").data( "photoPlaceHolder",  e.response.targetImage  );
 							 showPhotoPanel();
-							//kendo.bind($("#photo-view-panel"), e.response.targetImage );
 						}
 					} 
-				});					
-			//}						
-			kendo.bind($("#photo-view-panel"), photoPlaceHolder );	
-			//$("div .custom-panels-group").hide();
+			});					
 			$("#photo-view-panel").show();			
 		}
 		
@@ -793,6 +812,7 @@
             height: 160px;
             padding: 0;
 			cursor: pointer;
+			overflow: hidden;
 		}
 		
 		.attach img
@@ -802,14 +822,14 @@
 		}
 		
 		.attach-description {
-            position: absolute;
-            top: 0;
-            width: 160px	;
-            height: 0;
-            overflow: hidden;
-            background-color: rgba(0,0,0,0.8)
-        }
-        		
+			position: absolute;
+			top: 0;
+			width: 160px	;
+			height: 0;
+			overflow: hidden;
+			background-color: rgba(0,0,0,0.8)
+		}
+	
 		.attach h3
 		{
 			margin: 0;
@@ -919,14 +939,14 @@
 							<li class="dropdown">
 								<a href="#" id="my-social-drop" class="dropdown-toggle" data-toggle="dropdown">쇼셜 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-social-drop">
-									<li><a href="#my-streams" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 쇼셜</a></li>		
+									<li><a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 쇼셜</a></li>		
 									<li><a href="#my-streams-mgmt" tabindex="-1" data-toggle="tab"><i class="fa fa-cogs"></i>   My 쇼셜 관리</a></li>							
 								</ul>
 							</li>		
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
-									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 포토 스트림</a></li>
+									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 포토 스트림</a></li>
 									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
 									
 									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span>    포토 뷰어</a></li>
@@ -935,8 +955,8 @@
 							<li class="dropdown">
 								<a href="#" id="my-files-drop" class="dropdown-toggle" data-toggle="dropdown">파일 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-files-drop">
-									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-th"></span>    My 파일</a></li>
-									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    파일 업로드</a></li>
+									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 파일</a></li>
+									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><i class="fa fa-upload"></i>    파일 업로드</a></li>
 								</ul>
 							</li>
 						</ul>								
@@ -997,7 +1017,7 @@
 									<div class="panel-body">
 										<div class="btn-group social-connect-btn">
 											<#list action.companySocials as item >	
-											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="icon-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
+											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="fa fa-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
 											</#list>	
 										</div>									
 									</div>
@@ -1012,8 +1032,8 @@
 											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">쇼셜미디어 추가 <span class="caret"></span>
 											</button>
 											<ul class="dropdown-menu" role="menu">
-												<li><a href="#"><i class="icon-facebook"></i> &nbsp;페이스북 연결</a></li>
-												<li><a href="#"><i class="icon-twitter"></i> &nbsp;트위터 연결</a></li>
+												<li><a href="#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
+												<li><a href="#"><i class="fa fa-twitter"></i> &nbsp;트위터 연결</a></li>
 												<li class="divider"></li>
 												<li><a href="#">쇼셜미디어 계정 관리</a></li>
 											</ul>
@@ -1024,9 +1044,9 @@
 							<!-- end messages -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-file-upload">
-								<div class="blank-top-5" ></div>			
-								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 파일을 선택하거나 사진을 <strong>파일 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 파일이 서버에 저장됩니다.</div>
+								<div class="blank-top-5" ></div>											
 								<#if !action.user.anonymous >			
+								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 파일을 선택하거나 사진을 <strong>파일 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 파일이 서버에 저장됩니다.</div>
 								<input name="uploadAttachment" id="attachment-files" type="file" />									
 								</#if>							
 							</div>
