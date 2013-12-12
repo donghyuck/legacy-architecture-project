@@ -293,7 +293,9 @@
 				<figcaption>
 					<small><p class="text-muted">#:modifiedDate#</p></small>	
 					<ul class="pager">
+						#if ( index > 0 || page > 1 ) { # 
 						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						# } #	
 						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
 					</ul>										
 				</figcaption>			
