@@ -28,9 +28,9 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 <decorator:head />
 <style>
 	
-#account-panel .nav .open > a,
-.nav .open > a:hover,
-.nav .open > a:focus {
+#account-panel .nav .open > a, 
+#account-panel .nav .open > a:hover,
+#account-panel .nav .open > a:focus {
   background-color: #eeeeee;
   border-color: #428bca;
 	height : 30px; 
