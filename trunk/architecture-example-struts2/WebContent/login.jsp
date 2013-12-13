@@ -12,8 +12,7 @@ Company company = user.getCompany();
 <script type="text/javascript">
 	yepnope([{
 		load: [ 
-			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.0.0/font-awesome.css',	
-			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.0.0/social-buttons.css',	
+			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.web.min.js',
@@ -95,13 +94,13 @@ Company company = user.getCompany();
 					<h4 class="modal-title">로그인</h4>
 				</div>
 			<div class="modal-body">
-				<div class="container layout">
+				<div class="container" style="width:100%;">
 					<div class="row">
 						<div class="col-lg-6 col-xs-6">
-							<button class="btn btn-lg btn-block btn-facebook"><i class="icon-facebook"></i> | 페이스북으로 로그인</button>
+							<button class="btn btn-primary btn-lg btn-block"><i class="fa fa-facebook"></i> | 페이스북으로 로그인</button>
 						</div>
 						<div class="col-lg-6 col-xs-6">
-							<button class="btn btn-lg btn-block btn-twitter"><i class="icon-twitter"></i> | 트위터로 로그인</button>
+							<button class="btn btn-info btn-lg btn-block"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
 						</div>						
 					</div>				
 					<div class="row blank-top-15">
