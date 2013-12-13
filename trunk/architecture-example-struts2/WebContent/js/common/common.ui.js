@@ -5,8 +5,8 @@
 	var Widget = kendo.ui.Widget;
 	var ui = window.ui = window.ui || {};
 	
-	ui.util = {};
-	
+	/** Utility */
+	ui.util = {};	
 	ui.util.prettyDate = function(time){
 		var date = new Date((time || "").replace(/-/g,"/").replace(/[TZ]/g," ")),
 			diff = (((new Date()).getTime() - date.getTime()) / 1000),
@@ -61,6 +61,110 @@
 	
 })(jQuery);	
 
+/**
+ *  extPanel widget
+ */
+
+(function($, undefined) {
+	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
+	var observable = new kendo.data.ObservableObject({ title : "&nbsp;" } );
+	
+	ui.extPanel = Widget.extend({
+		init: function(element, options) {			
+			var that = this;
+			Widget.fn.init.call(that, element, options);			
+			options = that.options;
+			if( options.title )
+				observable.set("title", options.title);			
+			that.render();
+		},
+		events : {			
+		},
+		options : {
+			name: "Panel",
+			title : null,
+			template : null
+		},
+		hide: function (){
+			var that = this ;
+			that.element.hide();			
+		},
+		data : function(){
+			return observable ;
+		},
+		title: function( title ){
+			if( title ){
+				observable.set("title" , title);
+			}else{
+				return observable.get("title");
+			}
+		},
+		show: function (){
+			var that = this ;
+			that.element.show();			
+		},
+		render: function () {				
+			var that = this ;			
+        	if( that.options.template ){        		
+        		that.element.html( that.options.template )  
+        		kendo.bind(that.element, observable );
+        	}        	
+        	$(that.element).find(".panel-header-actions a").each(function( index ){
+        		 $(this).click(function (e) {
+        			e.preventDefault();
+        			var header_action = $(this);
+        			if( header_action.text() == "Minimize" ){        				
+        				$(that.element).find(".panel-body, .panel-footer").toggleClass("hide");        				
+						var header_action_icon = header_action.find('span');
+						if( header_action_icon.hasClass("k-i-minimize") ){
+							header_action_icon.removeClass("k-i-minimize");
+							header_action_icon.addClass("k-i-maximize");
+						}else{
+							header_action_icon.removeClass("k-i-maximize");
+							header_action_icon.addClass("k-i-minimize");
+						}
+						
+        			}else if ( header_action.text() == "Close"){
+        				that.hide();
+        			}else if ( header_action.text() == "Refresh"){	
+        				
+        			}
+        			
+        		});
+        		
+        	});
+        	
+        	/**
+        	$("#announce-panel .panel-header-actions a").each(function( index ) {
+				var panel_header_action = $(this);		
+				panel_header_action.click(function (e) {
+					e.preventDefault();
+					if( panel_header_action.text() == "Minimize" ){
+						$("#announce-panel .panel-body").toggleClass("hide");								
+						var panel_header_action_icon = panel_header_action.find('span');
+						if( panel_header_action_icon.hasClass("k-i-minimize") ){
+							panel_header_action.find('span').removeClass("k-i-minimize");
+							panel_header_action.find('span').addClass("k-i-maximize");
+						}else{
+							panel_header_action.find('span').removeClass("k-i-maximize");
+							panel_header_action.find('span').addClass("k-i-minimize");
+						}							
+					}else if (panel_header_action.text() == "Close"){	
+						$("#announce-panel" ).hide();
+					}
+				});*/
+	
+        	
+		}
+	});
+	
+	$.fn.extend( { 
+		extPanel : function ( options ) {
+			return new ui.extPanel ( this , options );		
+		}
+	});
+	
+})(jQuery);
 
 /**
  *  extDropDownList widget
