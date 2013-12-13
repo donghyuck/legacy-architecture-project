@@ -383,8 +383,8 @@
 										saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
 										autoUpload: true
 								    },
-								    upload: function (e) {								         
-								    	 e.data = {};														    								    	 		    	 
+								    upload: function (e) {				
+								    	 e.data = {};							
 								    },
 								    success : function(e) {								    
 										if( e.response.targetImage ){
