@@ -29,7 +29,8 @@
 				var accounts = $("#account-panel").kendoAccounts({
 					dropdown : false,
 					authenticate : function( e ){
-						currentUser = e.token;						
+						currentUser = e.token;
+						$("#account-panel").data("currentUser", currentUser );
 					},
 					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
 					template : kendo.template($("#account-template").html()),
@@ -38,9 +39,6 @@
 						$('.dropdown-toggle').dropdown();
 						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");
-							
-							
-							
 							$("#login-btn").click(function() { 
 								$("#login-status").html("");
 								if( validator.validate() )
@@ -73,7 +71,8 @@
 							});	
 						}
 					}
-				});				
+				});	
+				
 				
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				// 1. Announces 								
@@ -434,7 +433,7 @@
 									saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
 									autoUpload: true
 								},
-								localization:{ select : '사진 업로드하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+								localization:{ select : '사진 선택' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
 								upload: function (e) {				
 									//e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
 								},
@@ -563,33 +562,64 @@
 			$("#photo-gallery-panel").show();		
 		}
 		
-		function showPhotoPanel(){	
-			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");			
-			var template = kendo.template($('#photo-view-template').html());				
-			$('#photo-view-panel').html( template(photoPlaceHolder) );						
-			$("#photo-view-panel button").each(function( index ) {		
-					var panel_button = $(this);
-					panel_button.click(function (e) { 
-						e.preventDefault();					
-						if( panel_button.hasClass( 'custom-photo-delete') ){
-							$.ajax({
-								dataType : "json",
-								type : 'POST',
-								url : '${request.contextPath}/community/delete-my-image.do?output=json',
-								data : { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId },
-								success : function( response ){
-									$('#photo-view-panel').hide();
-								},
-								error:handleKendoAjaxError
-							});	
-						}
-						if( panel_button.hasClass( 'close') ){
-							//$("div .custom-panels-group").hide();		
-							$('#photo-view-panel').hide();			
-						}					
-					});
-			});
+		function showPhotoPanel(){
+					
+			if( !$("#photo-view-panel").data("extPanel") ){					
+				$("#photo-view-panel").data("extPanel", 
+					$("#photo-view-panel").extPanel({
+						title : "포토",
+						template : kendo.template($("#photo-panel-template").html())
+					})
+				 );						 
+				$("#photo-view-panel").find(".custom-photo-delete").click(function (e) { 
+					e.preventDefault();			
+					$.ajax({
+						dataType : "json",
+						type : 'POST',
+						url : '${request.contextPath}/community/delete-my-image.do?output=json',
+						data : { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId },
+						success : function( response ){
+							$('#photo-view-panel').hide();
+						},
+						error:handleKendoAjaxError
+					});	
+				});
+				$("#update-photo-file").kendoUpload({
+						multiple: false,
+						async: {
+							saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
+							autoUpload: true
+						},
+						localization:{ select : '사진 선택' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+						upload: function (e) {				
+							e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };
+						},
+						success: function (e) {				
+							if( e.response.targetImage ){
+								
+								$('#photo-list-view').data('kendoListView').dataSource.read();
+								
+								var item = e.response.targetImage;
+								item.index = $("#photo-view-panel").data( "photoPlaceHolder" ).index;			
+								item.page = $("#photo-view-panel").data( "photoPlaceHolder" ).page				
+								$("#photo-view-panel").data( "photoPlaceHolder",  item );
+								showPhotoPanel();
+							}
+						} 
+				});	
+			}
 			
+			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");		
+			var panel = $("#photo-view-panel").data("extPanel");
+			var editable = $("#account-panel").data("currentUser" ).userId == photoPlaceHolder.objectId ;
+			
+			panel.title( photoPlaceHolder.name ) ;
+			panel.data().set("imageId", photoPlaceHolder.imageId );
+			panel.data().set("editable", editable );
+			
+			var template = kendo.template($('#photo-view-template').html());
+			$("#photo-view-panel").find(".panel-body").html( template(photoPlaceHolder) );
+
 			$( '#photo-view-panel .pager li').each(function( index ) { 
 				var panel_pager = $(this);				
 				if( panel_pager.hasClass('previous') ){
@@ -621,8 +651,7 @@
 						var listView =  $('#photo-list-view').data('kendoListView');
 						var total_index = listView.dataSource.view().length -1 ;
 						var list_view_pager = $("#photo-list-pager").data("kendoPager");
-						var current_page = list_view_pager.page();
-												
+						var current_page = list_view_pager.page();												
 						if( current_index < total_index  ){
 							var item = listView.dataSource.view()[next_index];
 							item.index = next_index;
@@ -637,29 +666,9 @@
 						}						
 					});				
 				}
-			} );			
-			
-			$("#update-photo-file").kendoUpload({
-					multiple: false,
-					async: {
-						saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
-						autoUpload: true
-					},
-					localization:{ select : '사진 변경하기' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
-					upload: function (e) {				
-						e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };
-					},
-					success: function (e) {				
-						if( e.response.targetImage ){
-							var item = e.response.targetImage;
-							item.index = $("#photo-view-panel").data( "photoPlaceHolder" ).index;			
-							item.page = $("#photo-view-panel").data( "photoPlaceHolder" ).page				
-							$("#photo-view-panel").data( "photoPlaceHolder",  item );
-							showPhotoPanel();
-						}
-					} 
-			});					
-			$("#photo-view-panel").show();			
+			} );		
+												
+			panel.show();			
 		}
 		
 		function openPreviewWindow(){	
@@ -941,9 +950,11 @@
 							</div>		
 						</div>
 						
-						<!-- end announce panel -->			
+						<!-- end announce panel -->		
+						<div id="demo-view-panel" class="custom-panels-group"></div>	
+							
 						<!-- start photo view panel -->
-						<div id="photo-view-panel" class="custom-panels-group"></div>	
+						<div id="photo-view-panel" class="custom-panels-group" style="display: none;"></div>	
 						<div id="photo-gallery-panel" class="custom-panels-group" style="display: none;"></div>	
 						<!-- end photo view panel -->												
 						<!-- start attach view panel -->
@@ -1115,7 +1126,7 @@
 							<div class="tab-pane" id="my-photo-upload">
 								<div class="blank-top-5 "></div>
 								<#if !action.user.anonymous >		
-								<div class="alert alert-info"><strong>이미지 선택</strong> 버튼을 클릭하여 사진을 선택하거나 사진을 <strong>이미지 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 사진이 서버에 저장됩니다.</div>
+								<div class="alert alert-info"><strong>이미지 선택</strong> 버튼을 클릭하여 사진을 선택하거나, 사진을 마우스로 끌어서 놓기(Drag & Drop)하면 사진이 서버에 저장됩니다.</div>
 								<div class="blank-top-5 "></div>	
 								<input name="uploadPhotos" id="photo-files" type="file" />	
 								</#if>							

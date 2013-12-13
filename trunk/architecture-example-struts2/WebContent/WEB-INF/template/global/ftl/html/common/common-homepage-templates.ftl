@@ -1,3 +1,55 @@
+<script type="text/x-kendo-template" id="photo-panel-template">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span data-bind="text: title"></span>
+			<div class="k-window-actions panel-header-actions">
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+			</div>		
+		</div>
+		<div class="panel-body"></div>	
+		<div class="panel-footer" data-bind="visible: editable">
+			<div class="btn-group dropup" data-bind="visible: editable">
+				<button  type="button" class="btn btn-danger custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
+				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cloud-upload"></i> 사진 변경하기</button>	
+				<ul class="dropdown-menu" style="min-width:300px;">
+					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
+					<li>
+						<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
+					</li>
+				</ul>
+			</div>			
+		</div>
+	</div>		
+</script>
+<script type="text/x-kendo-template" id="photo-view-template">	
+		<figure>			
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
+			<figcaption>
+				<ul class="list-inline">
+					<li><small class="text-muted">#:modifiedDate#</small></li>
+					<li class="pull-right">
+						<div class="btn-group">
+							<a class="btn btn-info btn-sm" href="${request.contextPath}/community/download-my-image.do?imageId=#:imageId #" ><i class="fa fa-download"></i></a>
+							<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-share"></i></button>	
+							<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-comment-o"></i></button>
+							<button  type="button" class="btn btn-primary btn-sm"><i class="fa fa-angle-down"></i></button>	
+						</div>			
+					</li>
+				</ul>
+				<div class="blank-top-5 "></div>
+				<ul class="pager">
+						#if ( index > 0 || page > 1 ) { # 
+						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						# } #	
+						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+				</ul>										
+			</figcaption>			
+		</figure>
+</script>
+
 <script type="text/x-kendo-tmpl" id="announcement-template">
 	<tr class="announce-item" onclick="viewAnnounce(#: announceId#);">
 		<th>#: announceId#</th>
@@ -284,46 +336,7 @@
 			</div>
 		</div>		
 </script>
-<script type="text/x-kendo-template" id="photo-view-template">
-	<div class="panel panel-default">
-		<div class="panel-heading">#:name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
-		<div class="panel-body">
-			<figure>
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
-				<figcaption>
-					<small><p class="text-muted">#:modifiedDate#</p></small>	
-					<ul class="pager">
-						#if ( index > 0 || page > 1 ) { # 
-						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
-						# } #	
-						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
-					</ul>										
-				</figcaption>			
-				
-			</figure>
-		</div>
-		<ul class="list-group">
-			<li class="list-group-item">
-				<div class="media">
-					<a class="pull-left" href="\\#">
-					<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
-					</a>
-					<div class="media-body">
-		 				<h5 class="media-heading"></h5>
-						<input type="text" placeholder="댓글" class="form-control" placeholder=".col-xs-4" />	
-					</div>
-				</div>		
-			</li>
-			<li class="list-group-item">
-				<input name="update-photo-file" id="update-photo-file" type="file" />
-			</li>
-		</ul>
-		<div class="panel-footer">
-			<a class="btn btn-default" href="${request.contextPath}/community/download-my-image.do?imageId=#:imageId #" >다운로드</a>
-			<button  type="button" class="btn btn-danger custom-photo-delete"  data-for-imageId="#:imageId #" >삭제</button>					
-		</div>
-	</div>
-</script>
+
 
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
