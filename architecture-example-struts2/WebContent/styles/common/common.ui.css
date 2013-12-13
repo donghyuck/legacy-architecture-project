@@ -756,6 +756,10 @@ figcaption .pager  {
 	margin : 0 0 ;
 }
 
+figcaption .figure-actions  {
+	margin : 0 0 ;
+}
+
 figcaption .pager li > a, figcaption .pager li > span {
 	display: inline-block;
 	padding: 5px 14px;
