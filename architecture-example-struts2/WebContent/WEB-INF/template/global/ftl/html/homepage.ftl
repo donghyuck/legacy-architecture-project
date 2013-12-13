@@ -316,7 +316,7 @@
 					<div id="facebook-panel">
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<i class="icon-facebook"></i>
+								<i class="fa fa-facebook"></i>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -335,7 +335,7 @@
 					<div id="twitter-panel">
 						<div class="panel panel-success">
 							<div class="panel-heading">
-								<i class="icon-twitter"></i>
+								<i class="fa fa-twitter"></i>
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
