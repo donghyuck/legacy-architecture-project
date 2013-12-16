@@ -225,7 +225,7 @@
 								 	multiple : false,
 								 	width: 300,
 								 	showFileList : false,
-								    localization:{ select : '파일 업로드' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+								    localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
 								    async: {
 										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
 										autoUpload: true
@@ -780,6 +780,21 @@
 		
 		<style scoped="scoped">
 
+		.k-dropzone {
+		#	width: 808px;
+		#	height: 219px;
+			border: 5px dashed #c0dcf2;
+			background: 0;
+			text-align: center;
+			padding: 34px 10px 10px;
+			-webkit-border-radius: 18px;
+			-moz-border-radius: 18px;
+			border-radius: 18px;
+			margin: 0 0 10px;
+			position: relative;
+			z-index: 2000;
+		}
+		
 		.k-grid table tr.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
@@ -1006,46 +1021,43 @@
 							</div>									
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
-<div class="panel panel-default">
-<div class="panel-body">			
-<ul class="media-list">
-  <li class="media">
-    <a class="pull-left" href="#">
-		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
-    </a>
-    <div class="media-body">
-								<div class="popover right" style="display:true;">
-									<div class="arrow"></div>
-									<!--<h3 class="popover-title">알림</h3>-->
-									<div class="popover-content">
-										<p>새로운 메시지가 없습니다.</p>
+								<div class="panel panel-default">
+									<div class="panel-body">			
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+												</a>
+												<div class="media-body">
+																		<div class="popover right" style="display:true;">
+																			<div class="arrow"></div>
+																			<!--<h3 class="popover-title">알림</h3>-->
+																			<div class="popover-content">
+																				<p>새로운 메시지가 없습니다.</p>
+																			</div>
+																		</div>	
+												</div>
+											</li>
+											<li class="media">
+												<a class="pull-right" href="#">
+													<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+												</a>
+												<div class="media-body">
+													<div class="popover left" style="display:true;">
+														<div class="arrow"></div>
+														<!--<h3 class="popover-title">알림</h3>-->
+														<div class="popover-content">
+															<p>새로운 메시지가 없습니다.</p>
+														</div>
+													</div>	
+												</div>
+											</li>  
+									</ul>
 									</div>
-								</div>	
-    </div>
-  </li>
-  <li class="media">
-    <a class="pull-right" href="#">
-		<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
-    </a>
-    <div class="media-body">
-								<div class="popover left" style="display:true;">
-									<div class="arrow"></div>
-									<!--<h3 class="popover-title">알림</h3>-->
-									<div class="popover-content">
-										<p>새로운 메시지가 없습니다.</p>
-									</div>
-								</div>	
-    </div>
-  </li>  
-  
-</ul>
-</div>
 									<div class="panel-footer"">
 									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>   메시지 작성</button>
 									</div>
-</div>
-
-								
+								</div>								
 							</div>							
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
@@ -1083,7 +1095,7 @@
 							<div class="tab-pane" id="my-file-upload">
 								<div class="blank-top-5" ></div>											
 								<#if !action.user.anonymous >			
-								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 파일을 선택하거나 사진을 <strong>파일 선택</strong> 버튼에 끌어서 놓기(Drag & Drop)하면 파일이 서버에 저장됩니다.</div>
+								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>
 								<input name="uploadAttachment" id="attachment-files" type="file" />									
 								</#if>							
 							</div>
@@ -1126,7 +1138,7 @@
 							<div class="tab-pane" id="my-photo-upload">
 								<div class="blank-top-5 "></div>
 								<#if !action.user.anonymous >		
-								<div class="alert alert-info"><strong>이미지 선택</strong> 버튼을 클릭하여 사진을 선택하거나, 사진을 마우스로 끌어서 놓기(Drag & Drop)하면 사진이 서버에 저장됩니다.</div>
+								<div class="alert alert-info"><strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)을 끌어서 놓기(Drag & Drop)를 하세요.</div>
 								<div class="blank-top-5 "></div>	
 								<input name="uploadPhotos" id="photo-files" type="file" />	
 								</#if>							
