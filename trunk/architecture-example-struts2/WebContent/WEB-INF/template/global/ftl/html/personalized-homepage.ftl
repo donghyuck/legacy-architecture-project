@@ -870,14 +870,15 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-					
-						<ul class="nav nav-pills">
-							<li><a href="#"><i class="fa fa-calendar"></i> 달력</a></li>
-							<li class="active"><a href="#"><i class="fa fa-bookmark"></i> 북마크</a></li>
-							<li><a href="#"><i class="fa fa-folder-open"></i> 노트</a></li>
-						</ul>
-						<div class="blank-top-5" ></div>	
-						
+						<div class="panel panel-primary">
+							<div class="panel-body">
+								<ul class="nav nav-pills">
+									<li><a href="#"><i class="fa fa-calendar"></i> 달력</a></li>
+									<li class="active"><a href="#"><i class="fa fa-bookmark"></i> 북마크</a></li>
+									<li><a href="#"><i class="fa fa-folder-open"></i> 노트</a></li>
+								</ul>
+							</div>
+						</div>						
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="dropdown active">
 								<a href="#" id="my-messages-drop" class="dropdown-toggle" data-toggle="dropdown">메시지 <b class="caret"></b></a>
