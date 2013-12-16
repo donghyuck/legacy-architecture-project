@@ -69,42 +69,64 @@
 					}
 				});				
 				
-				// Announces 
-				$("#announce-panel").data( "dataSource", 
-	 				new kendo.data.DataSource({
+				// 1. Announces 				
+				$("#announce-grid").data( "announcePlaceHolder", new Announce () );				
+				$("#announce-grid").kendoGrid({
+					dataSource : new kendo.data.DataSource({
 						transport: {
 							read: {
 								type : 'POST',
-								type: "json",
+								dataType : "json", 
 								url : '${request.contextPath}/community/list-announce.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}
 							} 
 						},
-						requestStart: function() {
-							kendo.ui.progress($("#announce-panel"), true);
-						},
-						requestEnd: function() {
-							kendo.ui.progress($("#announce-panel"), false);
-						},
-						change: function() {
-							$("#announce-panel table tbody").html(kendo.render(kendo.template($("#announcement-template").html()), this.view()));
-							if( this.data().length > 0 ){
-								viewAnnounce (this.at(0).announceId) ;
-							}
-						},
+						pageSize: 10,
 						error:handleKendoAjaxError,
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
 						}
-					})
-				);								
-								
+					}),
+					sortable: true,
+					height: 300,
+					columns: [ 
+						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field:"subject", title: "주제"}
+					],
+					selectable: "row",
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    	
+							var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
+							announcePlaceHolder.announceId = selectedCell.announceId;
+							announcePlaceHolder.subject = selectedCell.subject;
+							announcePlaceHolder.body = selectedCell.body;
+							announcePlaceHolder.startDate = selectedCell.startDate ;
+							announcePlaceHolder.endDate = selectedCell.endDate;
+							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
+							announcePlaceHolder.creationDate = selectedCell.creationDate;
+							announcePlaceHolder.user = selectedCell.user;			
+							announcePlaceHolder.editable = false;					 
+							showAnnounce();	
+						}
+					},
+					dataBound: function(e) {					
+						var selectedCells = this.select();
+						this.select("tr:eq(1)");
+					}
+				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);						
 						if( panel_header_action.text() == "Minimize" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								$("#announce-panel .panel-body").toggleClass("hide");								
+								$("#announce-panel .panel-body, .list-group ").toggleClass("hide");								
 								var panel_header_action_icon = panel_header_action.find('span');
 								if( panel_header_action_icon.hasClass("k-i-minimize") ){
 									panel_header_action.find('span').removeClass("k-i-minimize");
@@ -117,12 +139,11 @@
 						} else if (panel_header_action.text() == "Refresh" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								$("#announce-panel").data( "dataSource").read();
+								$("#announce-grid").data("kendoGrid").dataSource.read();
 							});
 						}
 				} );				
-				
-				$("#announce-panel").data( "dataSource").read();
+						
 					
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
@@ -225,32 +246,13 @@
 			}
 		}]);	
 		
-		function viewAnnounce (announceId){		
-			var item = $("#announce-panel").data( "dataSource").get(announceId);			
-
+		function showAnnounce () {
+			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-view-template').html());			
-			$("#announce-view").html(
-				template(item)
-			);
-			kendo.bind($("#announce-view"), item );			
-			
-			$("#announce-view div button").each(function( index ) {			
-				var announce_button = $(this);			
-				if( announce_button.hasClass( 'custom-announce-modify') ){
-					announce_button.click(function (e) { 
-						e.preventDefault();					
-																		
-					} );
-				}else if ( announce_button.hasClass('custom-announce-delete') ){
-					announce_button.click(function (e) { 
-						e.preventDefault();
-						if( confirm("삭제하시겠습니까 ?") ) {
-							// delete ...	
-						}
-					} );
-				}			
-			} );
-		}		
+			$("#announce-view").html( template(announcePlaceHolder) );
+			kendo.bind($("#announce-view"), announcePlaceHolder );					
+		}
+				
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -258,6 +260,11 @@
 			font-size: 15px;
 		}
 
+		.k-grid table tr.k-state-selected{
+			background: #428bca;
+			color: #ffffff; 
+		}
+		
 		#announce-view .popover {
 			position : relative;
 			max-width : 500px;
@@ -297,23 +304,18 @@
 									</div>
 								</div>
 								<div class="panel-body layout">					
-									<div  id="announce-view"></div>
-									<br><br>
-									<table class="table table-hover">
-										<tbody>										
-											<tr>
-												<th></th>	
-												<td></td>
-											</tr>										
-										</tbody>
-									</table>												
-								</div>
-							</div>		
+									<div  id="announce-view" style="min-height:80px;"></div>																			
+								</div>								
+								<ul class="list-group">
+									<li class="list-group-item" style="min-height:100px;">
+										<div id="announce-grid" ></div>				
+									</li>
+								</ul>		
+							</div>							
 						</div>
 						<!-- end announce panel -->							
 					</div>							
-					<div class="col-lg-6">
-					
+					<div class="col-lg-6">					
 					<div id="facebook-panel">
 						<div class="panel panel-success">
 							<div class="panel-heading">
