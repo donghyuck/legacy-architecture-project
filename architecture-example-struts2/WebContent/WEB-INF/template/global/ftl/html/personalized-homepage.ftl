@@ -998,7 +998,7 @@
 							</div>
 							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
-								<div class="panel panel-default">								
+								<div class="panel panel-default" style="margin-bottom:0px;">					
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
@@ -1023,7 +1023,7 @@
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
 								<div class="blank-top-5" ></div>					
-								<div class="panel panel-default">								
+								<div class="panel panel-default" style="margin-bottom:0px;">								
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
 									</div>	
