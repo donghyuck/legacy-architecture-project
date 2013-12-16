@@ -327,7 +327,7 @@
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 								</div>
 							</div>		
-							<div class="panel-body scrollable" style="min-height:500px; max-height:500px;">
+							<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
 									<ul class="media-list">
 										<div id="company-facebook-homefeed"></div>
 									</ul>
@@ -348,7 +348,7 @@
 									-->
 								</div>							
 							</div>
-							<div class="panel-body scrollable" style="min-height:500px; max-height:500px;">
+							<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
 								<ul class="media-list">
 									<div id="company-twitter-timeline"></div>
 								</ul>
