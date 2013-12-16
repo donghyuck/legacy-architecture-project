@@ -34,8 +34,13 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		height : 30px; 
 	}
 
-	
-	body { padding-top: 70px; }
+	.tab-content {
+		background-color : #FFFFFF;	
+	}
+	body { 
+		padding-top: 70px; 
+		background-color : #F5F5F5;	
+	}
 	
 		#account-panel {
 			margin-top : 0 px;
@@ -58,11 +63,11 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		.headline h2, 
 		.headline h3, 
 		.headline h4 {
-			color: #0e0e0e;
+			color: #777;
 			margin: 0 0 -2px 0;
 			padding-bottom: 5px;
 			display: inline-block;
-			border-bottom: 2px solid #00aba9;
+			border-bottom: 2px solid #128deb;
 		}
 		.headline h2 {
 			font-size: 18px;
@@ -78,10 +83,10 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		
 		/*Footer*/
 		.footer {
-			color: #0e0e0e;
+			color: #777;
 			margin-top: 40px;
 			padding: 20px 0 30px;
-			background: #f5f5f5;
+			background: #242122;
 		}
 		
 		.footer.margin-top-0 {
@@ -102,34 +107,34 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 			font-size: 14px;
 		} 
 		.footer p {
-			color: #333333;
+			color: #777;
 		} 
 		
 		.footer address {
-			color: #333333;
+			color: #777;
 		}
 		
 		.footer  a {
-			#color: #333333;
+			#color: #777;
 		}
 		.footer a:hover {
-			#color: #a8f85f;
-		    -webkit-transition: all 0.4s ease-in-out;
-		    -moz-transition: all 0.4s ease-in-out;
-		    -o-transition: all 0.4s ease-in-out;
-		    transition: all 0.4s ease-in-out;
+			#color: #F5F5F5;
+			-webkit-transition: all 0.4s ease-in-out;
+			-moz-transition: all 0.4s ease-in-out;
+			-o-transition: all 0.4s ease-in-out;
+			transition: all 0.4s ease-in-out;
 		}	
 		
 		/*Copyright*/
 		.copyright {
 			font-size: 12px;
 			padding: 11px 0 7px;
-			background: #ffffff;
-			border-top: solid 1px #e7e7e7;	
+			background: #181616;
+			border-top: solid  0px #e7e7e7;	
 		}
 		
 		.copyright p {
-			color: #333333;
+			color: #777;
 		}
 		
 		.copyright p.copyright-space {
@@ -138,10 +143,10 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		
 		.copyright a {
 			margin: 0 5px;
-			color: #333333;
+			color: #777;
 		}
 		.copyright a:hover {
-			color: #428bca;
+			color: #F5F5F5;
 		}	
 			
 </style>
