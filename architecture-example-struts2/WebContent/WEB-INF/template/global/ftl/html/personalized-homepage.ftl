@@ -112,7 +112,7 @@
 					change: function(e) { 
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	     
+							var selectedCell = this.dataItem( selectedCells );	    							
 							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 							announcePlaceHolder.announceId = selectedCell.announceId;
 							announcePlaceHolder.subject = selectedCell.subject;
@@ -121,7 +121,13 @@
 							announcePlaceHolder.endDate = selectedCell.endDate;
 							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;					
+							announcePlaceHolder.user = selectedCell.user;							
+							if( announcePlaceHolder.user.userId == $("#account-panel").data("currentUser").userId ){
+								announcePlaceHolder.editable = true;
+							}else{
+								announcePlaceHolder.editable = false;
+							}
+							$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
 							showAnnouncePanel();	
 						}
 					},
@@ -349,8 +355,7 @@
 									var data = this.dataSource.view() ;
 									var item = data[this.select().index()];									
 									item.index = this.select().index();			
-									item.page = $("#photo-list-pager").data("kendoPager").page();
-													
+									item.page = $("#photo-list-pager").data("kendoPager").page();													
 									$("#photo-view-panel").data( "photoPlaceHolder", item );														
 									showPhotoPanel( ) ;										
 								},
@@ -395,104 +400,75 @@
 									}
 							});		
 						}
-					} else if ( $(this).attr('href') == '#my-photo-gallery' ){
-					
-						if( $("#photo-gallery-panel").html() == "" ){
-							// Photo Gallery Setup
-							
-							$("#photo-gallery-panel").html(
-								$('#photo-gallery-template').html()
-							);			
-									
-							$( '#photo-gallery-panel .panel-header-actions a').each(function( index ) {
-								var gallery_header_action = $(this);
-								gallery_header_action.click(function (e){
-									e.preventDefault();		
-									var gallery_header_action_icon = gallery_header_action.find('span');
-									if (gallery_header_action.text() == "Minimize"){
-										$( "#photo-gallery-panel .panel-body").toggleClass("hide");				
-										if( gallery_header_action_icon.hasClass("k-i-maximize") ){
-											gallery_header_action_icon.removeClass("k-i-maximize");
-											gallery_header_action_icon.addClass("k-i-minimize");
-										}else{
-											gallery_header_action_icon.removeClass("k-i-minimize");
-											gallery_header_action_icon.addClass("k-i-maximize");
-										}
-									} else if (gallery_header_action.text() == "Refresh"){	
-										$('#photo-gallery-view').data('kendoListView').dataSource.read();
-									} else if (gallery_header_action.text() == "Close"){	
-										$("div .custom-panels-group").hide();
-									}
-								});	
-							});						
-						}
-						if(!$('#update-gallery-photo-file').data('kendoUpload')){
-							$("#update-gallery-photo-file").kendoUpload({
-								multiple: false,
-								async: {
-									saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
-									autoUpload: true
-								},
-								localization:{ select : '사진 선택' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
-								upload: function (e) {				
-									//e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };														    								    	 		    	 
-								},
-								success: function (e) {				
-									if( e.response.targetImage ){
-										$('#photo-gallery-view').data('kendoListView').dataSource.read();
-									}
-								} 
-							});		
-						}			
-						showPhotoGallaryPanel();
-					}
+					} 
 					$(this).tab('show')
 				});				
 				// END SCRIPT 
 			}
 		}]);	
 
+		/** Announce View Panel */		
+		function editAnnouncePanel (){
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
+			if( announcePlaceHolder.editable ){		
+						
+				var observable = new kendo.data.ObservableObject(announcePlaceHolder);
+				
+				observable.bind("change", function(e) {				
+					e.preventDefault();			
+						alert("s");		
+					//	$("#announce-view button[class*=custom-update]").removeAttr("disabled");
+				});				
 
-		function showAnnouncePanel (){	
+				//announcePlaceHolder.body = "" ;
+				
 
-			$("#announce-panel" ).show();
-			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );			
-			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
-			observable.bind("change", function(e) {				
-				$(".custom-announce-modify").removeAttr("disabled");
-			});			
-			var template = kendo.template($('#announcement-view-template').html());			
-			$("#announce-view").html(
-				template(announcePlaceHolder)
-			);						
+				var template = kendo.template($('#announcement-edit-template').html());
+				$("#announce-view").html( template(announcePlaceHolder) );	
+				kendo.bind($("#announce-view"), announcePlaceHolder );					
+				
+				$("#announce-view div button").each(function( index ) {			
+					var panel_button = $(this);			
+					if( panel_button.hasClass( 'custom-update') ){
+						panel_button.click(function (e) { 
+							e.preventDefault();					
+							var data = $("#announce-panel").data( "announcePlaceHolder" );	
+							alert(  kendo.stringify( data ) );
+							/*
+							$.ajax({
+									dataType : "json",
+									type : 'POST',
+									url : '${request.contextPath}/community/update-announce.do?output=json',
+									data : { announceId: data.announceId, item: kendo.stringify( data ) },
+									success : function( response ){		
+										$('#announce-grid').data('kendoGrid').dataSource.read();	
+									},
+									error:handleKendoAjaxError
+							});	
+							*/
+						} );
+					}else if ( panel_button.hasClass('custom-delete') ){
+						panel_button.click(function (e) { 
+							e.preventDefault();
+							if( confirm("삭제하시겠습니까 ?") ) {
+							}
+						} );
+					}			
+				} );							
+			}
+		}
+		
+		function showAnnouncePanel (){			
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );						
+			var template = kendo.template($('#announcement-view-template').html());
+			$("#announce-view").html( template(announcePlaceHolder) );	
 			kendo.bind($("#announce-view"), announcePlaceHolder );				
-			
-			$("#announce-view div button").each(function( index ) {			
-				var announce_button = $(this);			
-				if( announce_button.hasClass( 'custom-announce-modify') ){
-					announce_button.click(function (e) { 
-						e.preventDefault();					
-						var updateItem = $("#announce-panel").data( "announcePlaceHolder" );	
-						$.ajax({
-								dataType : "json",
-								type : 'POST',
-								url : '${request.contextPath}/community/update-announce.do?output=json',
-								data : { announceId: updateItem.announceId, item: kendo.stringify( updateItem ) },
-								success : function( response ){		
-									$('#announce-grid').data('kendoGrid').dataSource.read();	
-								},
-								error:handleKendoAjaxError
-						});	
-					} );
-				}else if ( announce_button.hasClass('custom-announce-delete') ){
-					announce_button.click(function (e) { 
-						e.preventDefault();
-						if( confirm("삭제하시겠습니까 ?") ) {
-							// delete ...	
-						}
-					} );
-				}			
-			} );
+			if( announcePlaceHolder.editable ){
+				$("#announce-view button[class*=custom-edit]").click( function (e){
+					editAnnouncePanel();
+				} );
+			}
+			$("#announce-panel" ).show();
 		}	
 								
 		function showSocialPanel ( provider ){			
@@ -532,38 +508,9 @@
 				$("#" + elementId ).show();
 			} 
 		}		
-		
-		function showPhotoGallaryPanel(){
-			if( !$('#photo-gallery-view').data('kendoListView') ){		
-				$("#photo-gallery-view").kendoListView({
-					dataSource: {
-						type: 'json',
-						transport: {
-							read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' }
-						},
-						pageSize: 1,
-						error:handleKendoAjaxError,
-						schema: {
-							model: Image,
-							data : "targetImages",
-							total : "totalTargetImageCount"
-						}
-						,sort: { field: "imageId", dir: "desc" }
-					},
-					template: kendo.template($("#photo-gallery-view-template").html())
-				});
-				$("#photo-gallery-pager").kendoPager({
-					refresh : true,
-					buttonCount : 12,
-					dataSource : $('#photo-gallery-view').data('kendoListView').dataSource
-				});		
-			}			
-			//photo-gallery-panel
-			$("#photo-gallery-panel").show();		
-		}
-		
-		function showPhotoPanel(){
-					
+				
+		/** Photo View Panel */
+		function showPhotoPanel(){					
 			if( !$("#photo-view-panel").data("extPanel") ){					
 				$("#photo-view-panel").data("extPanel", 
 					$("#photo-view-panel").extPanel({
@@ -666,17 +613,16 @@
 						}						
 					});				
 				}
-			} );		
-												
+			} );													
 			panel.show();			
 		}
 		
 		function openPreviewWindow(){	
+		
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#image-view-template').html());
 			$('#attach-view-panel').html( template(attachPlaceHolder) );				
 			kendo.bind($("#attach-view-panel"), attachPlaceHolder );		
-						
 			$("#attach-view-panel button").each(function( index ) {		
 				var panel_button = $(this);
 				panel_button.click(function (e) { 
@@ -699,8 +645,7 @@
 						//$('#announce-panel').show();						
 					}					
 				});
-			});	
-			
+			});				
 			$("#update-attach-file").kendoUpload({
 				multiple: false,
 				async: {
@@ -723,58 +668,6 @@
 			$('#attach-view-panel').show();			
 		}	
 				
-		function viewAnnounce (announceId){			
-						
-			var item = $("#announce-panel").data( "dataSource").get(announceId);				
-			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
-			announcePlaceHolder.announceId = item.announceId;
-			announcePlaceHolder.subject = item.subject;
-			announcePlaceHolder.body = item.body;
-			announcePlaceHolder.startDate = item.startDate ;
-			announcePlaceHolder.endDate = item.endDate;
-			announcePlaceHolder.modifiedDate = item.modifiedDate;
-			announcePlaceHolder.creationDate = item.creationDate;
-			announcePlaceHolder.user = item.user;		
-				
-			var observable = new kendo.data.ObservableObject(announcePlaceHolder);
-			observable.bind("change", function(e) {				
-				$(".custom-announce-modify").removeAttr("disabled");
-			});																		
-			var template = kendo.template($('#announcement-view-template').html());			
-			$("#announce-view").html(
-				template(announcePlaceHolder)
-			);			
-			kendo.bind($("#announce-view"), announcePlaceHolder );					
-			$("#announce-view div button").each(function( index ) {			
-				var announce_button = $(this);			
-				if( announce_button.hasClass( 'custom-announce-modify') ){
-					announce_button.click(function (e) { 
-						e.preventDefault();					
-						var updateId = announce_button.attr('data-announceId');
-						var updateItem = $("#announce-panel").data( "dataSource").get(updateId);		
-							alert(  kendo.stringify( announcePlaceHolder ) );
-						$.ajax({
-								dataType : "json",
-								type : 'POST',
-								url : '${request.contextPath}/community/update-announce.do?output=json',
-								data : { announceId: announcePlaceHolder.announceId, item: kendo.stringify( announcePlaceHolder ) },
-								success : function( response ){		
-									$("#announce-panel").data( "dataSource").read();
-								},
-								error:handleKendoAjaxError
-						});	
-						
-					} );
-				}else if ( announce_button.hasClass('custom-announce-delete') ){
-					announce_button.click(function (e) { 
-						e.preventDefault();
-						if( confirm("삭제하시겠습니까 ?") ) {
-							// delete ...	
-						}
-					} );
-				}			
-			} );
-		}			
 		-->
 		</script> 		   
 		
@@ -1000,8 +893,6 @@
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
 									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 포토 스트림</a></li>
 									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
-									
-									<li><a href="#my-photo-gallery" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-picture"></span>    포토 뷰어</a></li>
 								</ul>
 							</li>
 							<li class="dropdown">
@@ -1144,11 +1035,6 @@
 								</#if>							
 							</div>
 							<!-- end photos -->
-							<div class="tab-pane" id="my-photo-gallery">
-								<div class="blank-top-5 "></div>
-								<input name="update-gallery-photo-file" id="update-gallery-photo-file" type="file" />
-							</div>
-
 						</div>
 						<!-- end of tab content -->						
 					</div>				
