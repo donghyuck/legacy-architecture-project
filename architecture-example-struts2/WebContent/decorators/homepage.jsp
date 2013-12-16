@@ -36,6 +36,10 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 
 	.tab-content {
 		background-color : #FFFFFF;	
+		padding : 0 5px 5px 5px;
+		border-bottom:  1px solid #dddddd;
+		border-left:  1px solid #dddddd;
+		border-right:  1px solid #dddddd;
 	}
 	body { 
 		padding-top: 70px; 
