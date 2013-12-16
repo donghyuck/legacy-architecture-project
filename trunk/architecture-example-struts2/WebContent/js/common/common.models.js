@@ -7,7 +7,7 @@ var Announce = kendo.data.Model.define( {
     	startDate: { type: "date",  editable: true},
     	endDate: { type: "date" ,  editable: true},
         modifiedDate: { type: "date"},
-        creationDate: { type: "date" }         
+        creationDate: { type: "date" }
     }
 });
 
