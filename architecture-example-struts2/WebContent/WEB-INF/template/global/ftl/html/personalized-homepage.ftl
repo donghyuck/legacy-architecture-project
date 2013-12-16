@@ -901,13 +901,7 @@
 									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 파일</a></li>
 									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><i class="fa fa-upload"></i>    파일 업로드</a></li>
 								</ul>
-							</li>
-							<li class="dropdown">
-								<a href="#" id="my-note-drop" class="dropdown-toggle" data-toggle="dropdown">노트 <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="my-note-drop">
-									<li><a href="#my-notes" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 파일</a></li>
-								</ul>
-							</li>							
+							</li>						
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
