@@ -839,9 +839,8 @@
 		<!-- START MAIN CONTENT -->
 			<div class="container layout" style="min-height:350px;">							
 				<div class="row">					
-					<div class="col-lg-8">						
-						<!-- start announce panel -->
-						
+					<div class="col-sm-12 col-md-8">						
+						<!-- start announce panel -->						
 						<div id="announce-panel" class="custom-panels-group" style="display:none;">	
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
@@ -856,11 +855,9 @@
 									<div  id="announce-view"></div>
 								</div>
 							</div>		
-						</div>
-						
+						</div>						
 						<!-- end announce panel -->		
-						<div id="demo-view-panel" class="custom-panels-group"></div>	
-							
+						<div id="demo-view-panel" class="custom-panels-group"></div>								
 						<!-- start photo view panel -->
 						<div id="photo-view-panel" class="custom-panels-group" style="display: none;"></div>	
 						<div id="photo-gallery-panel" class="custom-panels-group" style="display: none;"></div>	
@@ -872,7 +869,15 @@
 						<div id="social-view-panels"></div>	
 						<!-- end social view panels -->						
 					</div>							
-					<div class="col-lg-4">
+					<div class="col-sm-12 col-md-4">
+					
+						<ul class="nav nav-pills">
+							<li><a href="#"><i class="fa fa-calendar"></i> 달력</a></li>
+							<li class="active"><a href="#"><i class="fa fa-bookmark"></i> 북마크</a></li>
+							<li><a href="#"><i class="fa fa-folder-open"></i> 노트</a></li>
+						</ul>
+						<div class="blank-top-5" ></div>	
+						
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="dropdown active">
 								<a href="#" id="my-messages-drop" class="dropdown-toggle" data-toggle="dropdown">메시지 <b class="caret"></b></a>
@@ -999,9 +1004,9 @@
 												<a href="#"  id="attachment-list-view-filter-1" style="width:100px;"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
 											</li>
 											<li>
-												<a href="#"  id="attachment-list-view-filter-2"><span class="glyphicon glyphicon-filter"></span>사진</a>
+												<a href="#"  id="attachment-list-view-filter-2"><i class="fa fa-filter"></i> 사진</a>
 											</li>
-											<li><a href="#"  id="attachment-list-view-filter-3"><span class="glyphicon glyphicon-filter"></span>파일</a>
+											<li><a href="#"  id="attachment-list-view-filter-3"><i class="fa fa-filter"></i> 파일</a>
 											</li>									  
 										</ul>										
 									</div>
