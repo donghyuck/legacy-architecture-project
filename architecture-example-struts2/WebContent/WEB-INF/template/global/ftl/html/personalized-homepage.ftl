@@ -870,8 +870,8 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<div class="panel panel-primary">
-							<div class="panel-body">
+						<div class="panel panel-default" style="margin-bottom:5px;">
+							<div class="panel-body" style="padding: 5px;">
 								<ul class="nav nav-pills">
 									<li><a href="#"><i class="fa fa-calendar"></i> 달력</a></li>
 									<li class="active"><a href="#"><i class="fa fa-bookmark"></i> 북마크</a></li>
@@ -918,7 +918,7 @@
 							</div>									
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
-								<div class="panel panel-default">
+								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-body">			
 										<ul class="media-list">
 											<li class="media">
@@ -958,7 +958,7 @@
 							</div>							
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
-								<div class="panel panel-primary">
+								<div class="panel panel-primary" style="margin-bottom:0px;">
 									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
 									<div class="panel-body">
 										<div class="btn-group social-connect-btn">
@@ -971,7 +971,7 @@
 							</div>		
 							<div class="tab-pane" id="my-streams-mgmt">				
 								<div class="blank-top-5" ></div>	
-								<div class="panel panel-default">
+								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
 									<div class="panel-body">								
 										<div class="btn-group">
