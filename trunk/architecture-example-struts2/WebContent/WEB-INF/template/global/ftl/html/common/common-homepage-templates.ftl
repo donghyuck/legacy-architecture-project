@@ -50,15 +50,39 @@
 			</figcaption>			
 		</figure>
 </script>
-
-<script type="text/x-kendo-tmpl" id="announcement-template">
-	<tr class="announce-item" onclick="viewAnnounce(#: announceId#);">
-		<th>#: announceId#</th>
-		<td>#: subject#</td>
-	</tr>
+<!-- announce view panel -->
+<script type="text/x-kendo-tmpl" id="announcement-view-template">		
+		<h4 data-bind="html:subject"></h4>
+		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
+		<div class="media">
+			<a class="pull-left" href="\\#">
+			#if ( user.properties.imageId != null ) {# 
+			<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
+			# } else {  #	
+			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
+			# } #
+			</a>
+			<div class="media-body">
+				<h5 class="media-heading">
+					# if( user.nameVisible ){#
+					#: user.name # (#: user.username #)
+					# } else { #
+					#: user.username #
+					# } # 		
+					# if( user.emailVisible ){#
+					<br>(#: user.email #)
+					# } #	
+				</h5>		
+			</div>
+		</div>	
+		<div class="blank-top-5" ></div>
+		<div data-bind="html:body"></div>
+		# if ("${action.view!}" == "personalized" && editable ) {#  	
+			<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
+		# } #
 </script>
-<script type="text/x-kendo-tmpl" id="announcement-view-template">
-# if ( user.userId == ${action.user.userId } && "${action.view!}" == "personalized" ) {#  	
+
+<script type="text/x-kendo-tmpl" id="announcement-edit-template">		
 	<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder=".col-xs-4" />		
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
@@ -91,48 +115,23 @@
 		</div>			
 		</li>
 	</ul>
-	<div contentEditable class="inline-body-editor" data-role="editor" 
-					data-tools="['italic',
-									'underline',
-									'strikethrough']" 
-				data-bind="value:body"></div>			
+	<div contentEditable class="inline-body-editor" data-role="editor" data-tools="['italic',	'underline',	'strikethrough']"	data-bind="value:body"></div>			
 	<div class="blank-top-5" ></div>				
 	<div class="pull-right">
 			<div class="btn-group">
-			<button type="button" class="btn btn-primary custom-announce-modify" data-announceId="#: announceId #" disabled="disabled">수정</button>
-			<button type="button" class="btn btn-danger custom-announce-delete" data-announceId="#: announceId #" disabled="disabled">삭제</button>
+			<button type="button" class="btn btn-primary custom-update" ><i class="fa fa-check"></i> 저장</button>
+			<button type="button" class="btn btn-danger custom-delete" ><i class="fa fa-trash-o"></i> 삭제</button>
 			</div>
-	</div>		
-	
-# } else {  #
-		<h4 data-bind="html:subject"></h4>
-		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
-		<div class="media">
-			<a class="pull-left" href="\\#">
-			#if ( user.properties.imageId != null ) {# 
-			<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
-			# } else {  #	
-			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
-			# } #
-			</a>
-			<div class="media-body">
-				<h5 class="media-heading">
-					# if( user.nameVisible ){#
-					#: user.name # (#: user.username #)
-					# } else { #
-					#: user.username #
-					# } # 		
-					# if( user.emailVisible ){#
-					<br>(#: user.email #)
-					# } #	
-				</h5>		
-			</div>
-		</div>	
-		<div class="blank-top-5" ></div>
-		<div data-bind="html:body"></div>
-# } #				
+	</div>
 </script>
 
+
+<script type="text/x-kendo-tmpl" id="announcement-template">
+	<tr class="announce-item" onclick="viewAnnounce(#: announceId#);">
+		<th>#: announceId#</th>
+		<td>#: subject#</td>
+	</tr>
+</script>
 
 <script type="text/x-kendo-tmpl" id="social-view-panel-template">
 		<div id="#: provider #-panel" class="panel panel-info">
@@ -301,43 +300,6 @@
 		</div>
 	</div>
 </script>
-<script type="text/x-kendo-template" id="photo-gallery-template">
-	<div class="panel panel-default">
-		<div class="panel-heading">My 포토 뷰어		
-			<div class="k-window-actions panel-header-actions">
-				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-			</div>		
-		</div>
-		<div class="panel-body">
-			<div id="photo-gallery-pager" class="k-pager-wrap"></div>
-			<div id="photo-gallery-view"></div>
-		</div>
-	</div>		
-</script>
-<script type="text/x-kendo-template" id="photo-gallery-view-template">
-		<section>
-			<figure>
-				<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>
-				<figcaption>
-						<h5>#:name#</h5>
-						<p class="text-muted">#: modifiedDate #</p>
-				</figcaption>
-			</figure>
-		</section>	
-		<div class="media">
-			<a class="pull-left" href="\\#">
-				<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
-			</a>
-			<div class="media-body">
-		 		<h5 class="media-heading"><strong>익명</strong></h5>
-				너무 좋아요.
-			</div>
-		</div>		
-</script>
-
 
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
