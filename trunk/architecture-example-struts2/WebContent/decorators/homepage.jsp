@@ -40,6 +40,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		border-bottom:  1px solid #dddddd;
 		border-left:  1px solid #dddddd;
 		border-right:  1px solid #dddddd;
+		min-height: 50px;
 	}
 	body { 
 		padding-top: 70px; 
