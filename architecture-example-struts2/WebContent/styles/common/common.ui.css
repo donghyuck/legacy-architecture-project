@@ -33,16 +33,42 @@ background-color: rgba(0, 0, 0, 0.2);
 	min-width: 120px;
 }
 /* Bootstrap customize---------------------- */
+.full-width {
+	width:100%;
+}
+
+.full-width-row {
+	margin: 0 15px;
+}
+
+.full-width-column {
+	padding: 0 0px;
+	margin:0 0px;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 }
 
-.modal-footer{
+.modal-footer {
 	/*background-color: #F5F5F5;	*/
 }
+
 .page-header {
 	margin: 15px 0 15px;	
+	padding-bottom: 0px;
+	padding-left: 30px;
 }
+
+.tab-content {
+	background-color : #FFFFFF;	
+	padding : 0 5px 5px 5px;
+	border-bottom:  1px solid #dddddd;
+	border-left:  1px solid #dddddd;
+	border-right:  1px solid #dddddd;
+	min-height: 100px;
+}
+	
 
 /** Main body ------------------------------------ */
 body {
@@ -73,6 +99,14 @@ body {
 	float: right;
 	padding-top:2px;
 	
+}
+
+.panel-footer-primary {
+	padding: 10px 15px;
+	background-color: #428bca;
+	border-top: 1px solid #428bca;
+	border-bottom-right-radius: 3px;
+	border-bottom-left-radius: 3px;	
 }
 
 /** block */
@@ -125,6 +159,10 @@ a.k-link:hover {
 }
 .blank-bottom-5 {
 	padding-top: 5px;	
+}
+
+.blank-top-45{
+	padding-top : 45px;
 }
 
 .blank-top-50{
