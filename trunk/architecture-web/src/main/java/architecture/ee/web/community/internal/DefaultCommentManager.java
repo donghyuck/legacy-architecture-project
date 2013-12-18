@@ -22,14 +22,10 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
-import architecture.common.model.ModelObject;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.AnonymousUser;
-import architecture.common.util.LockUtils;
-import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.Comment;
-import architecture.ee.web.community.CommentManager;
 import architecture.ee.web.community.CommentNotFoundException;
 import architecture.ee.web.community.dao.CommentDao;
 
