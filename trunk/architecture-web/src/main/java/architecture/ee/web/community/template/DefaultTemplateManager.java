@@ -24,25 +24,25 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.template.dao.ContentDao;
+import architecture.ee.web.community.template.dao.TemplateDao;
 
-public class DefaultContentManager extends AbstractObjectManager implements ContentManager {
+public class DefaultTemplateManager extends AbstractObjectManager implements TemplateManager {
 
 	private UserManager userManager ;
 
-	private ContentDao contentDao;
+	private TemplateDao contentDao;
 	
 	/**
 	 * @return contentDao
 	 */
-	public ContentDao getContentDao() {
+	public TemplateDao getContentDao() {
 		return contentDao;
 	}
 
 	/**
 	 * @param contentDao 설정할 contentDao
 	 */
-	public void setContentDao(ContentDao contentDao) {
+	public void setContentDao(TemplateDao contentDao) {
 		this.contentDao = contentDao;
 	}
 
@@ -60,17 +60,17 @@ public class DefaultContentManager extends AbstractObjectManager implements Cont
 		this.userManager = userManager;
 	}
 
-	public List<Content> getContent(Company company) {
+	public List<Template> getContent(Company company) {
 		return getContent(company.getModelObjectType(), company.getCompanyId());
 	}
 
-	public List<Content> getContent(User user) {
+	public List<Template> getContent(User user) {
 		return getContent(user.getModelObjectType(), user.getCompanyId());
 	}
 
-	public List<Content> getContent(int objectType, long objectId) {
+	public List<Template> getContent(int objectType, long objectId) {
 		List<Long> ids = contentDao.getContentIds(objectType, objectId);
-		List<Content> list = new ArrayList<Content>(ids.size());
+		List<Template> list = new ArrayList<Template>(ids.size());
 		for( Long contentId : ids ){
 			try {
 				list.add(getContent(contentId));
@@ -80,9 +80,9 @@ public class DefaultContentManager extends AbstractObjectManager implements Cont
 	}
 
 	
-	public List<Content> getContent(int objectType, long objectId, int startIndex, int maxResults) {
+	public List<Template> getContent(int objectType, long objectId, int startIndex, int maxResults) {
 		List<Long> ids = contentDao.getContentIds(objectType, objectId, startIndex, maxResults);
-		List<Content> list = new ArrayList<Content>(ids.size());
+		List<Template> list = new ArrayList<Template>(ids.size());
 		for( Long contentId : ids ){
 			try {
 				list.add(getContent(contentId));
@@ -95,8 +95,8 @@ public class DefaultContentManager extends AbstractObjectManager implements Cont
 		return contentDao.getContentCount(objectType, objectId);
 	}
 
-	public Content getContent(long contentId) throws NotFoundException {
-		Content content = null  ;
+	public Template getContent(long contentId) throws NotFoundException {
+		Template content = null  ;
 		if( objectCache.get(contentId) == null){
 			try {
 				content = getContentById(contentId);
@@ -113,12 +113,12 @@ public class DefaultContentManager extends AbstractObjectManager implements Cont
 	             throw new NotFoundException(msg, e);
 			}
 		}else{
-			content =  (Content) objectCache.get( contentId ).getValue();
+			content =  (Template) objectCache.get( contentId ).getValue();
 		}		
 		return content;
 	}
 	
-	public Content getContentById(long contentId){
+	public Template getContentById(long contentId){
 		return contentDao.getContent(contentId);
 	}
 	

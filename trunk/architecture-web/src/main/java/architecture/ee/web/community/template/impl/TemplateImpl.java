@@ -23,9 +23,9 @@ import architecture.common.model.ModelObjectType;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
-import architecture.ee.web.community.template.Content;
+import architecture.ee.web.community.template.Template;
 
-public class ContentImpl extends EntityModelObjectSupport implements Content{
+public class TemplateImpl extends EntityModelObjectSupport implements Template{
 
 	private long contentId;
 	

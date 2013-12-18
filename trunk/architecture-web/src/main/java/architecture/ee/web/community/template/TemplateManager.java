@@ -21,18 +21,18 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 
-public interface ContentManager {
+public interface TemplateManager {
 
-	public List<Content> getContent(Company company);
+	public List<Template> getContent(Company company);
 	
-	public List<Content> getContent(User user);
+	public List<Template> getContent(User user);
 	
-	public List<Content> getContent(int objectType, long objectId);
+	public List<Template> getContent(int objectType, long objectId);
 	
-	public List<Content> getContent(int objectType, long objectId, int startIndex, int maxResults);
+	public List<Template> getContent(int objectType, long objectId, int startIndex, int maxResults);
 	
 	public int getContentCount(int objectType, long objectId);
 	
-	public Content getContent(long contentId)  throws NotFoundException ;
+	public Template getContent(long contentId)  throws NotFoundException ;
 	
 }

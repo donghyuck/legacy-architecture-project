@@ -21,7 +21,7 @@ import architecture.common.model.EntityModelObject;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 
-public interface Content extends EntityModelObject {
+public interface Template extends EntityModelObject {
 
 	public long getContentId();
 	
