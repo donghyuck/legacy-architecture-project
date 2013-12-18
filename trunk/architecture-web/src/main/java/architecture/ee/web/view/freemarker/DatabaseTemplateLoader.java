@@ -99,8 +99,8 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 					log.debug("##########################################CONTENT:" + template.getTitle() );
 					log.debug( name ); 
 					log.debug( template.getTitle() );
-					log.debug( template.getContentType() );
-					if(  "ftl".equals(template.getContentType()) && name.contains(template.getLocation() ))
+					log.debug( template.getTemplateType() );
+					if(  "ftl".equals(template.getTemplateType()) && name.contains(template.getLocation() ))
 						return template;
 				}
 			} catch (Exception e) {
@@ -109,9 +109,9 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 			
 			log.debug("finding template in database .. : " + name );
 			TemplateManager contentManager = ApplicationHelper.getComponent(TemplateManager.class);			
-			List<Template> contents = contentManager.getContent(getCurrentCompany());
+			List<Template> contents = contentManager.getTemplate(getCurrentCompany());
 			for( Template content : contents){
-				log.debug( name + " - content: " + content.getTitle() + ", type:" + content.getContentType() + ", match:" + content.getLocation() .contains(name) );
+				log.debug( name + " - content: " + content.getTitle() + ", type:" + content.getTemplateType() + ", match:" + content.getLocation() .contains(name) );
 				if(  content.getLocation() .contains(name)){
 					return content;
 				}
