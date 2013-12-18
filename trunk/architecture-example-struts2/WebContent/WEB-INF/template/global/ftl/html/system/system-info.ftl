@@ -6,13 +6,14 @@
         
         yepnope([{
             load: [ 
+            'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',					
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.dataviz.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',       	   
        	    '${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
-       	    '${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
+       	    '${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.apis.js',
        	    '${request.contextPath}/js/common/common.ui.js'],        	   
@@ -241,17 +242,15 @@
 		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container layout blank-top-66">
+		<div class="container full-width">		
 			<div class="row">			
-				<div class="col-12 col-lg-12">					
-					<div class="page-header">
-						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
-					</div>			
-				</div>		
-			</div>
-			<div class="row">			
-				<div class="col-6 col-lg-6">
-					<div class="panel panel-default">
+				<div class="page-header blank-top-45">
+					<h1><span data-bind="text: title"></span>     <small><span data-bind="text: description"></span></small></h1>
+				</div>			
+			</row>	
+			<div class="row full-width-row">			
+				<div class="col-sm-3">
+					<div class="panel panel-primary">
 						<div class="panel-heading">Heap 메모리</div>
 						<div id="mem-gen-gauge"></div>						
 						<div class="panel-footer">
@@ -272,8 +271,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-6 col-lg-6">
-					<div class="panel panel-default">
+				<div class="col-sm-3">
+					<div class="panel panel-primary">
 						<div class="panel-heading">PermGen 메모리</div>
 						<div id="perm-gen-gauge"></div>						
 						<div class="panel-footer">
@@ -295,14 +294,13 @@
 					</div>
 				</div>				
 			</div>			
-			<div class="row">			
-				<div class="col-12 col-lg-12">
-					<div class="panel panel-default">
-  						<div class="panel-body">					
+			<div class="row full-width-row">			
+				<div class="col-lg-12">	
+			
 							<ul class="nav nav-tabs" id="myTab">
-							  <li class="active"><a href="#license-info">라이센스 정보</a></li>
-							  <li><a href="#setup-info">셋업 프로퍼티 정보</a></li>
-							  <li><a href="#system-info">시스템 환경 정보</a></li>
+							  <li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
+							  <li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
+							  <li><a href="#system-info"><i class="fa fa-info"></i> 시스템 환경 정보</a></li>
 							  <li><a href="#database-info">데이터베이스 정보</a></li>
 							</ul>
 							<div class="tab-content">
@@ -434,8 +432,7 @@
 								</div>
 							</div>					
 						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>				
 		<div id="account-panel"></div>		

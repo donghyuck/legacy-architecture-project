@@ -11,11 +11,11 @@
 			</div>		
 		</div>
 		<div class="panel-body"></div>	
-		<div class="panel-footer" data-bind="visible: editable">
+		<div class="panel-footer" data-bind="visible: editable" style="padding:5px;">
 			<div class="btn-group dropup" data-bind="visible: editable">
 				<button  type="button" class="btn btn-danger custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
 				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cloud-upload"></i> 사진 변경하기</button>	
-				<ul class="dropdown-menu" style="min-width:300px;">
+				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
 					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
 					<li>
 						<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
