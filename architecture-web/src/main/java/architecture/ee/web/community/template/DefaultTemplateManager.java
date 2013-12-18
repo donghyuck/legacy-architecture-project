@@ -60,42 +60,42 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 		this.userManager = userManager;
 	}
 
-	public List<Template> getContent(Company company) {
-		return getContent(company.getModelObjectType(), company.getCompanyId());
+	public List<Template> getTemplate(Company company) {
+		return getTemplate(company.getModelObjectType(), company.getCompanyId());
 	}
 
-	public List<Template> getContent(User user) {
-		return getContent(user.getModelObjectType(), user.getCompanyId());
+	public List<Template> getTemplate(User user) {
+		return getTemplate(user.getModelObjectType(), user.getCompanyId());
 	}
 
-	public List<Template> getContent(int objectType, long objectId) {
-		List<Long> ids = contentDao.getContentIds(objectType, objectId);
+	public List<Template> getTemplate(int objectType, long objectId) {
+		List<Long> ids = contentDao.getTemplateIds(objectType, objectId);
 		List<Template> list = new ArrayList<Template>(ids.size());
 		for( Long contentId : ids ){
 			try {
-				list.add(getContent(contentId));
+				list.add(getTemplate(contentId));
 			} catch (Exception e) {}
 		}	
 		return list;
 	}
 
 	
-	public List<Template> getContent(int objectType, long objectId, int startIndex, int maxResults) {
-		List<Long> ids = contentDao.getContentIds(objectType, objectId, startIndex, maxResults);
+	public List<Template> getTemplate(int objectType, long objectId, int startIndex, int maxResults) {
+		List<Long> ids = contentDao.getTemplateIds(objectType, objectId, startIndex, maxResults);
 		List<Template> list = new ArrayList<Template>(ids.size());
 		for( Long contentId : ids ){
 			try {
-				list.add(getContent(contentId));
+				list.add(getTemplate(contentId));
 			} catch (Exception e) {}
 		}	
 		return list;
 	}
 
-	public int getContentCount(int objectType, long objectId) {
-		return contentDao.getContentCount(objectType, objectId);
+	public int getTemplateCount(int objectType, long objectId) {
+		return contentDao.getTemplateCount(objectType, objectId);
 	}
 
-	public Template getContent(long contentId) throws NotFoundException {
+	public Template getTemplate(long contentId) throws NotFoundException {
 		Template content = null  ;
 		if( objectCache.get(contentId) == null){
 			try {
@@ -119,7 +119,7 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 	}
 	
 	public Template getContentById(long contentId){
-		return contentDao.getContent(contentId);
+		return contentDao.getTemplate(contentId);
 	}
 	
 }

@@ -27,11 +27,11 @@ import architecture.ee.web.community.template.Template;
 
 public class TemplateImpl extends EntityModelObjectSupport implements Template{
 
-	private long contentId;
+	private long templateId;
 	
 	private String title;
 	
-	private String contentType;
+	private String templateType;
 	
 	private List<Attachment> attachments;
 	
@@ -65,15 +65,15 @@ public class TemplateImpl extends EntityModelObjectSupport implements Template{
 	/**
 	 * @return contentId
 	 */
-	public long getContentId() {
-		return contentId;
+	public long getTemplateId() {
+		return templateId;
 	}
 
 	/**
 	 * @param contentId 설정할 contentId
 	 */
-	public void setContentId(long contentId) {
-		this.contentId = contentId;
+	public void setTemplateId(long templateId) {
+		this.templateId = templateId;
 	}
 
 	/**
@@ -93,15 +93,15 @@ public class TemplateImpl extends EntityModelObjectSupport implements Template{
 	/**
 	 * @return contentType
 	 */
-	public String getContentType() {
-		return contentType;
+	public String getTemplateType() {
+		return templateType;
 	}
 
 	/**
 	 * @param contentType 설정할 contentType
 	 */
-	public void setContentType(String contentType) {
-		this.contentType = contentType;
+	public void setTemplateType(String contentType) {
+		this.templateType = contentType;
 	}
 
 	/**
@@ -189,7 +189,7 @@ public class TemplateImpl extends EntityModelObjectSupport implements Template{
 	}
 
 	public Serializable getPrimaryKeyObject() {
-		return contentId;
+		return templateId;
 	}
 
 	public int getModelObjectType() {
@@ -203,11 +203,10 @@ public class TemplateImpl extends EntityModelObjectSupport implements Template{
 				CacheSizes.sizeOfString(title) + 
 				CacheSizes.sizeOfString(location) + 
 				CacheSizes.sizeOfString(body) + 
-				CacheSizes.sizeOfString(contentType) + 
+				CacheSizes.sizeOfString(templateType) + 
 				CacheSizes.sizeOfMap(getProperties()) +
 				CacheSizes.sizeOfDate() + 
-				CacheSizes.sizeOfDate() ;
-		
+				CacheSizes.sizeOfDate() ;		
 		return cacheSize;
 	}
 

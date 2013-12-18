@@ -23,17 +23,17 @@ import architecture.ee.web.attachment.Attachment;
 
 public interface Template extends EntityModelObject {
 
-	public long getContentId();
+	public long getTemplateId();
 	
-	public void setContentId(long contentId);
+	public void setTemplateId(long contentId);
 	
 	public String getTitle();
 	
 	public void setTitle(String title);
 	
-	public String getContentType();
+	public String getTemplateType();
 	
-	public void setContentType(String contentType);
+	public void setTemplateType(String contentType);
 	
 	public List<Attachment> getAttachments();
 	
@@ -60,6 +60,5 @@ public interface Template extends EntityModelObject {
 	public void setLocation(String location);
 	
 	public String getLocation();
-	
 	
 }

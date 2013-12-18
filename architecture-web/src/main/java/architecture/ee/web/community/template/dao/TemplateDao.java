@@ -22,18 +22,18 @@ import architecture.ee.web.community.template.Template;
 
 public interface TemplateDao {
 
-	public Template createContent(Template content);
+	public Template createTemplate(Template content);
 	
-	public void deleteContent(Template content);	
+	public void deleteTemplate(Template content);	
 	
-	public void updateContent(Template content);
+	public void updateTemplate(Template content);
 		
-	public Template getContent(long contentId);
+	public Template getTemplate(long contentId);
 		
-	public List<Long> getContentIds(int objectType, long objectId);
+	public List<Long> getTemplateIds(int objectType, long objectId);
 	
-	public List<Long> getContentIds(int objectType, long objectId, int startIndex, int numResults);
+	public List<Long> getTemplateIds(int objectType, long objectId, int startIndex, int numResults);
 	
-	public int getContentCount(int objectType, long objectId);
+	public int getTemplateCount(int objectType, long objectId);
 		
 }
