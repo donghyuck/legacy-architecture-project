@@ -38,12 +38,12 @@ import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateDao {
 
-	private final RowMapper<TemplateImpl> contentMapper = new RowMapper<TemplateImpl>(){
+	private final RowMapper<TemplateImpl> templateMapper = new RowMapper<TemplateImpl>(){
 		public TemplateImpl mapRow(ResultSet rs, int rowNum) throws SQLException {
 			TemplateImpl impl = new TemplateImpl();			
-			impl.setContentId(rs.getLong("CONTENT_ID"));
+			impl.setTemplateId(rs.getLong("CONTENT_ID"));
 			impl.setTitle(rs.getString("TITLE"));
-			impl.setContentType(rs.getString("CONTENT_TYPE"));
+			impl.setTemplateType(rs.getString("CONTENT_TYPE"));
 			impl.setObjectType(rs.getInt("OBJECT_TYPE"));
 			impl.setObjectId(rs.getLong("OBJECT_ID"));
 			impl.setLocation(rs.getString("LOCATION"));
@@ -57,8 +57,8 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 	
 	private ExtendedPropertyDao extendedPropertyDao;	
 	private String sequencerName = "CONTENT";
-	private String contentPropertyTableName = "V2_CONTENT_PROPERTY";
-	private String contnetPropertyPrimaryColumnName = "CONTENT_ID";
+	private String templatePropertyTableName = "V2_CONTENT_PROPERTY";
+	private String templatePropertyPrimaryColumnName = "CONTENT_ID";
 	/**
 	 * @return extendedPropertyDao
 	 */
@@ -86,45 +86,45 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 	/**
 	 * @return contentPropertyTableName
 	 */
-	public String getContentPropertyTableName() {
-		return contentPropertyTableName;
+	public String getTemplatePropertyTableName() {
+		return templatePropertyTableName;
 	}
 	/**
 	 * @param contentPropertyTableName 설정할 contentPropertyTableName
 	 */
-	public void setContentPropertyTableName(String contentPropertyTableName) {
-		this.contentPropertyTableName = contentPropertyTableName;
+	public void setTemplatePropertyTableName(String contentPropertyTableName) {
+		this.templatePropertyTableName = contentPropertyTableName;
 	}
 	/**
 	 * @return contnetPropertyPrimaryColumnName
 	 */
-	public String getContnetPropertyPrimaryColumnName() {
-		return contnetPropertyPrimaryColumnName;
+	public String getTemplatePropertyPrimaryColumnName() {
+		return templatePropertyPrimaryColumnName;
 	}
 	/**
 	 * @param contnetPropertyPrimaryColumnName 설정할 contnetPropertyPrimaryColumnName
 	 */
-	public void setContnetPropertyPrimaryColumnName(
+	public void setTemplatePropertyPrimaryColumnName(
 			String contnetPropertyPrimaryColumnName) {
-		this.contnetPropertyPrimaryColumnName = contnetPropertyPrimaryColumnName;
+		this.templatePropertyPrimaryColumnName = contnetPropertyPrimaryColumnName;
 	}
 	
 
-	public Map<String, String> getContentProperties(long contentId) {
-		return extendedPropertyDao.getProperties(contentPropertyTableName, contnetPropertyPrimaryColumnName, contentId);
+	public Map<String, String> getTemplateProperties(long contentId) {
+		return extendedPropertyDao.getProperties(templatePropertyTableName, templatePropertyPrimaryColumnName, contentId);
 	}
 
-	public void deleteContentProperties(long contentId) {
-		extendedPropertyDao.deleteProperties(contentPropertyTableName, contnetPropertyPrimaryColumnName, contentId);
+	public void deleteTemplateProperties(long contentId) {
+		extendedPropertyDao.deleteProperties(templatePropertyTableName, templatePropertyPrimaryColumnName, contentId);
 	}
 	
-	public void setContentProperties(long contentId, Map<String, String> props) {
-		extendedPropertyDao.updateProperties(contentPropertyTableName, contnetPropertyPrimaryColumnName, contentId, props);
+	public void setTemplateProperties(long contentId, Map<String, String> props) {
+		extendedPropertyDao.updateProperties(templatePropertyTableName, templatePropertyPrimaryColumnName, contentId, props);
 	}
-	public Template createContent(Template content) {
+	public Template createTemplate(Template content) {
 		
 		long contentId = getNextId(sequencerName);		
-		content.setContentId(contentId);	
+		content.setTemplateId(contentId);	
 		if("".equals(content.getTitle()))
 			content.setTitle(null);
 		
@@ -132,8 +132,8 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 				
 				new SqlParameterValue(Types.NUMERIC, content.getObjectType() ),
 				new SqlParameterValue(Types.NUMERIC, content.getObjectId() ),
-				new SqlParameterValue(Types.NUMERIC, content.getContentId()),
-				new SqlParameterValue(Types.VARCHAR, content.getContentType()),
+				new SqlParameterValue(Types.NUMERIC, content.getTemplateId()),
+				new SqlParameterValue(Types.VARCHAR, content.getTemplateType()),
 				new SqlParameterValue(Types.VARCHAR, content.getTitle()),
 				new SqlParameterValue(Types.VARCHAR, content.getLocation()),
 				new SqlParameterValue(Types.NUMERIC, content.getCreator().getUserId() ),
@@ -141,36 +141,36 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 				new SqlParameterValue(Types.DATE, content.getCreationDate()),
 				new SqlParameterValue(Types.DATE, content.getModifiedDate()));		
 		
-		setContentProperties(content.getContentId(), content.getProperties());
-		saveContentBody(content);			
+		setTemplateProperties(content.getTemplateId(), content.getProperties());
+		saveTemplateBody(content);			
 		return content;
 	}
-	public void deleteContent(Template content) {
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_CONTENT").getSql(), 	new SqlParameterValue(Types.NUMERIC, content.getContentId()));
-		deleteContentProperties(content.getContentId());
-		removeContentBody(content);
+	public void deleteTemplate(Template content) {
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_CONTENT").getSql(), 	new SqlParameterValue(Types.NUMERIC, content.getTemplateId()));
+		deleteTemplateProperties(content.getTemplateId());
+		removeTemplateBody(content);
 	}
-	public void updateContent(Template content) {
+	public void updateTemplate(Template content) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_CONTENT").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, content.getObjectType() ), 
 				new SqlParameterValue (Types.NUMERIC, content.getObjectId() ), 
-				new SqlParameterValue (Types.VARCHAR, content.getContentType()), 
+				new SqlParameterValue (Types.VARCHAR, content.getTemplateType()), 
 				new SqlParameterValue (Types.VARCHAR, content.getTitle()), 
 				new SqlParameterValue(Types.VARCHAR, content.getLocation()),
 				new SqlParameterValue(Types.DATE, content.getModifier().getUserId()),
 				new SqlParameterValue(Types.DATE, content.getModifiedDate()),
-				new SqlParameterValue (Types.NUMERIC, content.getContentId()) );			
-		setContentProperties(content.getContentId(), content.getProperties());
-		removeContentBody(content);
-		saveContentBody(content);
+				new SqlParameterValue (Types.NUMERIC, content.getTemplateId()) );			
+		setTemplateProperties(content.getTemplateId(), content.getProperties());
+		removeTemplateBody(content);
+		saveTemplateBody(content);
 	}
-	public Template getContent(long contentId) {
+	public Template getTemplate(long contentId) {
 		TemplateImpl impl = null ;
 		try {
 			
-			impl = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_BY_ID").getSql(), contentMapper, new SqlParameterValue(Types.NUMERIC, contentId ) );
-			impl.setProperties(getContentProperties( impl.getContentId() ));
-			impl.setBody(getContentBody(impl));
+			impl = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_BY_ID").getSql(), templateMapper, new SqlParameterValue(Types.NUMERIC, contentId ) );
+			impl.setProperties(getTemplateProperties( impl.getTemplateId() ));
+			impl.setBody(getTemplateBody(impl));
 			
 		} catch (IncorrectResultSizeDataAccessException e) {
 			if(e.getActualSize() > 1)
@@ -185,7 +185,7 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 		return impl;
 	}
 	
-	public List<Long> getContentIds(int objectType, long objectId) {
+	public List<Long> getTemplateIds(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().query(
 				getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(),
 				new RowMapper<Long>(){
@@ -196,7 +196,7 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 				new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));		
 	}
 	
-	public List<Long> getContentIds(int objectType, long objectId, int startIndex, int numResults) {
+	public List<Long> getTemplateIds(int objectType, long objectId, int startIndex, int numResults) {
 		return getExtendedJdbcTemplate().queryScrollable(
 				getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
 				startIndex, 
@@ -205,27 +205,27 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 				new int[]{Types.NUMERIC, Types.NUMERIC}, Long.class);
 	}
 	
-	public int getContentCount(int objectType, long objectId) {
+	public int getTemplateCount(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().queryForInt(
 				getBoundSql("ARCHITECTURE_WEB.COUNT_CONTENT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
 				new SqlParameterValue(Types.NUMERIC, objectType ), 
 				new SqlParameterValue(Types.NUMERIC, objectId ));
 	}
 	
-	public void removeContentBody(Template content){		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.REMOVE_CONTENT_BODY").getSql(), 	new SqlParameterValue(Types.NUMERIC, content.getContentId()));
+	public void removeTemplateBody(Template content){		
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.REMOVE_CONTENT_BODY").getSql(), 	new SqlParameterValue(Types.NUMERIC, content.getTemplateId()));
 	}
 	
-	public void saveContentBody(Template content){		
+	public void saveTemplateBody(Template content){		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_CONTENT_BODY").getSql(), 
-				new SqlParameterValue ( Types.NUMERIC, content.getContentId()), 
+				new SqlParameterValue ( Types.NUMERIC, content.getTemplateId()), 
 				new SqlParameterValue ( Types.CLOB,  new SqlLobValue(content.getBody(), getLobHandler() ) ) 
 		);		
 	}
 	
-	public String getContentBody(Template content) {		
+	public String getTemplateBody(Template content) {		
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_BODY_BY_ID").getSql(), 
-				String.class, new SqlParameterValue (Types.NUMERIC, content.getContentId()));
+				String.class, new SqlParameterValue (Types.NUMERIC, content.getTemplateId()));
 	}
 	
 }

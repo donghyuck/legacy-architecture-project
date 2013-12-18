@@ -23,16 +23,16 @@ import architecture.ee.exception.NotFoundException;
 
 public interface TemplateManager {
 
-	public List<Template> getContent(Company company);
+	public List<Template> getTemplate(Company company);
 	
-	public List<Template> getContent(User user);
+	public List<Template> getTemplate(User user);
 	
-	public List<Template> getContent(int objectType, long objectId);
+	public List<Template> getTemplate(int objectType, long objectId);
 	
-	public List<Template> getContent(int objectType, long objectId, int startIndex, int maxResults);
+	public List<Template> getTemplate(int objectType, long objectId, int startIndex, int maxResults);
 	
-	public int getContentCount(int objectType, long objectId);
+	public int getTemplateCount(int objectType, long objectId);
 	
-	public Template getContent(long contentId)  throws NotFoundException ;
+	public Template getTemplate(long contentId)  throws NotFoundException ;
 	
 }
