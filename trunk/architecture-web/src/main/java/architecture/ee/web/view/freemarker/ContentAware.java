@@ -16,7 +16,7 @@
 package architecture.ee.web.view.freemarker;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.content.Content;
+import architecture.ee.web.community.template.Content;
 
 public interface ContentAware {
 	
