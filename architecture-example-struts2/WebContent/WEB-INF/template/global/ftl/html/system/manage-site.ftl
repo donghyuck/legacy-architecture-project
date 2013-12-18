@@ -1,20 +1,21 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="secure-metro">
-    <head>
-        <title>시스템 정보</title>
-        <script type="text/javascript"> 
-        yepnope([{
-            load: [ 
+	<head>
+		<title>시스템 정보</title>
+		<script type="text/javascript"> 
+		yepnope([{
+			load: [ 
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
-       	    '${request.contextPath}/js/kendo/kendo.web.min.js',
-       	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',       	   
-       	    '${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
-       	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.apis.js',
-       	    '${request.contextPath}/js/common/common.ui.js'],        	   
-            complete: function() {               
+			'${request.contextPath}/js/kendo/kendo.web.min.js',
+			'${request.contextPath}/js/kendo/kendo.ko_KR.js',       	   
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
+			'${request.contextPath}/js/common/common.models.js',
+			'${request.contextPath}/js/common/common.apis.js',
+			'${request.contextPath}/js/common/common.ui.js'],        	   
+			complete: function() {               
 				
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
@@ -65,8 +66,7 @@
 						var menu = that.getMenuItem(currentPageName);
 						kendo.bind($(".page-header"), menu );   
 					}
-				 });	
-				 
+				 });					 
 				 
 				 // 4. PAGE MAIN					 								
 				$('#myTab a').click(function (e) {
@@ -112,7 +112,6 @@
 								sortable: true,
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
 								//selectable: 'row',
-								height: 500,
 								dataBound: function(e) {
 								
 								},
@@ -183,8 +182,8 @@
 								filterable: true,
 								sortable: true,
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
-								//selectable: 'row',
-								height: 500,
+								selectable: 'row',
+								//height: 400,
 								detailTemplate: kendo.template( $("#image-details-template").html() ),
 								detailInit : function(e){
 									//var detailRow = e.detailRow;
@@ -292,7 +291,7 @@
 								editable: "inline",
 								sortable: true,
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
-								height: 500,
+								//height: 500,
 								dataBound: function(e) {								
 								},
 								change: function(e) {          
@@ -363,7 +362,7 @@
 								sortable: true,
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
 								//selectable: 'row',
-								height: 500,
+								//height: 500,
 								detailTemplate: kendo.template( $("#attach-details-template").html() ),
 								detailInit : function(e){
 									//var detailRow = e.detailRow;
@@ -384,85 +383,38 @@
 			}	
 		}]);
 		</script>
-		<style>						
+		<style>					
+		.k-grid-content{
+			height:400px;
+		}			
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<section id="navbar" class="layout"></section>
+		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container layout blank-top-66">
+		<div class="container full-width">		
 			<div class="row">			
-				<div class="col-12 col-lg-12">					
-					<div class="page-header">
-						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
-					</div>			
-				</div>		
-			</div>
-			<!--
-			<div class="row">			
-				<div class="col-6 col-lg-6">						
-					<div id="company-info-panel" class="panel panel-default">
-						<div class="panel-heading layout">			
-							&nbsp;&nbsp;&nbsp;
-							<div class="btn-group">
-								<button type="button" class="btn btn-sm btn-warning">옵션</button>
-								<button type="button" class="btn btn-sm btn-warning dropdown-toggle" data-toggle="dropdown">
-								    <span class="caret"></span>
-								  </button>
-								  <ul class="dropdown-menu" role="menu">
-								    <li><a href="#">Action</a></li>
-								    <li><a href="#">Another action</a></li>
-								    <li><a href="#">Something else here</a></li>
-								    <li class="divider"></li>
-								    <li><a href="#">Separated link</a></li>
-								  </ul>
-							</div>							
-						</div>
-						<div class="panel-body">
-							<table class="table table-hover">
-								<tbody>						
-									<tr>
-										<th>등록 아이디</th>
-										<td><span class="label label-info"><span data-bind="text: name"></span></span><code><span data-bind="text: companyId"></span></code></td>
-									</tr>			
-									<tr>
-										<th>등록 이름</th>
-										<td><span data-bind="text: description"></span></td>
-									</tr>	
-									<tr>
-										<th>등록일</th>
-										<td><span data-bind="text: creationDate"></span></td>
-									</tr>				
-									<tr>
-										<th>마지막 정보 수정일</th>
-										<td><span data-bind="text: modifiedDate"></span></td>
-									</tr>												
-							 	</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
-			</div>			
-			-->	
-			<div class="row">			
-				<div class="col-12 col-lg-12">
-				
-					<div class="panel panel-default">
-  					<div class="panel-body">
-				
+				<div class="page-header blank-top-45">
+					<h1><span data-bind="text: title"></span>     <small><span data-bind="text: description"></span></small></h1>
+				</div>			
+			</row>	
+			<div class="row full-width-row">			
+				<div class="col-lg-12">				
+					
+					
 					<ul class="nav nav-tabs" id="myTab">
-					  <li class="active"><a href="#site-info">기본 설정 정보</a></li>
-					  <li><a href="#content-mgmt">페이지 템플릿 관리</a></li>
-					  <li><a href="#image-mgmt">이미지 관리</a></li>
-					  <li><a href="#attachment-mgmt">첨부파일 관리</a></li>
+					  <li class="active"><a href="#site-info"><i class="fa fa-certificate"></i> 라이선스 정보</a></li>
+					  <li><a href="#content-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
+					  <li><a href="#image-mgmt"><i class="fa fa-picture-o"></i> 이미지 관리</a></li>
+					  <li><a href="#attachment-mgmt"><i class="fa fa-paperclip"></i> 첨부파일 관리</a></li>
 					  <li><a href="#social-mgmt">쇼셜 관리</a></li>
-					  <li><a href="#database-info">RSS 관리</a></li>
+					  <li><a href="#rss-info"><i class="fa fa-rss"></i> RSS 관리</a></li>
 					</ul>
 					<div class="tab-content">
+						<div class="blank-top-5" ></div>	
 						<div class="tab-pane active" id="site-info">
-							<div class="blank-space-5">							
 								<table class="table table-hover">
 								<tbody>						
 									<tr>
@@ -487,54 +439,24 @@
 									</tr>												
 							 	</tbody>
 								</table>
-							</div>
 						</div>
 						<div class="tab-pane" id="content-mgmt">
-							<div class="big-box">
-								<div class="panel">
-									<div id="content-grid" ></div>
-								</div>
-							</div>		
+							<div id="content-grid" ></div>
 						</div>
 						<div class="tab-pane" id="system-info">
-							<div class="big-box">
-								<div class="panel">
-								
-								</div>
-							</div>	
 						</div>
 						<div class="tab-pane" id="image-mgmt">
-							<div class="blank-space-5">
-								<div class="row">
-									<div class="col-lg-12">
-										<input name="image-upload" id="image-upload" type="file" />
-										<div id="image-grid"></div>
-									</div>
-								</div>								 
-							</div>
+							<input name="image-upload" id="image-upload" type="file" />
+							<div id="image-grid"></div>	
 						</div>								
 						<div class="tab-pane" id="attachment-mgmt">
-							<div class="blank-space-5">
-								<div class="row">
-									<div class="col-lg-12">
-										<input name="attach-upload" id="attach-upload" type="file" />
-										<div id="attach-grid"></div>
-									</div>
-								</div>								 
-							</div>
+							<input name="attach-upload" id="attach-upload" type="file" />
+							<div id="attach-grid"></div>
 						</div>
 						<div class="tab-pane" id="social-mgmt">
-							<div class="blank-space-5">
-								<div class="row">
-									<div class="col-lg-12">
-										<div id="social-grid"></div>
-									</div>
-								</div>								 
-							</div>
+							<div id="social-grid"></div>
 						</div>
-						 </div>
-						</div>
-										
+								
 					</div>
 				</div>
 			</div>

@@ -6,12 +6,12 @@
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
-			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
-			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',		       	    
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',      	    
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',       	    
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.ui.js'
       	     ],        	  	   
@@ -472,30 +472,93 @@
 		-->
 		</script> 		 
 		<style>
-			
+		.k-grid-content{
+			height:400px;
+		}				
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<section id="navbar" class="layout"></section>
+		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container layout blank-top-66">
+		<div class="container full-width">		
 			<div class="row">			
-				<div class="col-12 col-lg-12">					
-					<div class="page-header">
-						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
-					</div>			
-				</div>		
-			</div>		
-			<div class="row">
-				<div class="col-12 col-lg-12">
+				<div class="page-header blank-top-45">
+					<h1><span data-bind="text: title"></span>     <small><span data-bind="text: description"></span></small></h1>
+				</div>			
+			</row>	
+			<div class="row full-width-row">		
+				<div class="col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">&nbsp;
+							<div class="k-window-actions panel-header-actions">
+								<a role="button" href="#" class="k-window-action k-link"><i class="fa fa-columns"></i></a>
+							</div>						
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-sm-6">
+									<div id="company-grid"></div>
+								</div>
+								<div class="col-sm-6" style="padding-left:0;">
+									<div id="company-details"></div>	
+								</div>
+							</div>							
+						</div>
+					</div>	
+				</div>
+			</div>
+			<!--
+			<div class="row full-width-row">		
+					<div class="panel panel-default">
+						<div class="panel-heading">
+						&nbsp;
+
+						</div>					
+					<div class="panel-body">
+						<div class="row">
+						
+											
+						</div>
+					</div>
+				</div>			
+				-->
+			
+			<!--	
+				<div class="col-sm-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">알림
+							<div class="k-window-actions panel-header-actions">
+								<a role="button" href="#" class="k-window-action k-link"><i class="fa fa-columns"></i></a>
+							</div>
+						</div>					
+						<div class="panel-body">
+							<div id="company-grid"></div>
+						</div>
+					</div>
+				</div>	
+
+				<div class="col-sm-6">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<i class="fa fa-chevron-left"></i>
+						</div>
+						<div class="panel-body">
+							
+						</div>
+					</div>
+				</div>
+				-->	
+
+			<div class="row full-width-row">			
+				<div class="col-lg-12">	
 					<div id="splitter">
 						<div id="list_pane">
-							<div id="company-grid"></div>		
+									
 						</div>
 						<div id="datail_pane">
-							<div id="company-details"></div>
+							
 						</div>
 					</div>	
 				</div>		
@@ -509,7 +572,7 @@
 		</div>
 		
 		<div id="menu-window" class="gray" style="display:none;">
-		<div class="container layout">
+		<div class="container">
 			 <div class="row">
 				<div class="col-4 col-lg-4"><div class="k-content"><div id="menu-grid"></div></div></div>
 				<div class="col-8 col-lg-8">

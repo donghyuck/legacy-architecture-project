@@ -12,8 +12,7 @@
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
-			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
-			'${request.contextPath}/js/bootstrap/3.0.0/tooltip.js',			
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/common/holder.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.ui.js'],
@@ -714,8 +713,9 @@
 			box-shadow: none;
 			background-clip: none;			
 		 }
-		  .popover.left {
-		  	float: right;
+		 
+		.popover.left {
+			float: right;
 		  
 		  }
 		  
@@ -870,30 +870,46 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<div class="panel panel-default" style="margin-bottom:5px;">
+						<div class="panel panel-default">
+							<div class="panel-heading">프로그램
+									<div class="k-window-actions panel-header-actions">
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+									</div>
+							</div>
 							<div class="panel-body" style="padding: 5px;">
 								<ul class="nav nav-pills">
-									<li><a href="#"><i class="fa fa-calendar"></i> 달력</a></li>
-									<li class="active"><a href="#"><i class="fa fa-bookmark"></i> 북마크</a></li>
-									<li><a href="#"><i class="fa fa-folder-open"></i> 노트</a></li>
+									<li><a href="#"><i class="fa fa-comments-o"></i> 쪽지</a></li>
+									<li><a href="#"><i class="fa fa-calendar-o"></i> 달력</a></li>
+									<li><a href="#"><i class="fa fa-bookmark-o"></i> 북마크</a></li>
+									<li><a href="#"><i class="fa fa-pencil-square-o"></i> 노트</a></li>									
 								</ul>
 							</div>
 						</div>						
 						<ul class="nav nav-tabs" id="myTab">
-							<li class="dropdown active">
+							<li class="active">
+								<a href="#my-message-announces" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>    알림</a>
+							</li>
+							<li>
+								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 쇼셜</a>
+							</li>							
+							<!--
+							<li class="dropdown">
 								<a href="#" id="my-messages-drop" class="dropdown-toggle" data-toggle="dropdown">메시지 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-messages-drop">
 									<li class="active"><a href="#my-message-announces" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>    알림</a></li>		
 									<li><a href="#my-message-notes" tabindex="-1" data-toggle="tab"><i class="fa fa-comments-o"></i>   My 쪽지</a></li>							
 								</ul>
-							</li>								
+							</li>		
+									
 							<li class="dropdown">
 								<a href="#" id="my-social-drop" class="dropdown-toggle" data-toggle="dropdown">쇼셜 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-social-drop">
 									<li><a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 쇼셜</a></li>		
 									<li><a href="#my-streams-mgmt" tabindex="-1" data-toggle="tab"><i class="fa fa-cogs"></i>   My 쇼셜 관리</a></li>							
 								</ul>
-							</li>		
+							</li>	
+									-->			
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
@@ -952,13 +968,13 @@
 									</ul>
 									</div>
 									<div class="panel-footer"">
-									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>   메시지 작성</button>
+										<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>   메시지 작성</button>
 									</div>
 								</div>								
 							</div>							
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
-								<div class="panel panel-primary" style="margin-bottom:0px;">
+								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
 									<div class="panel-body">
 										<div class="btn-group social-connect-btn">
@@ -966,6 +982,18 @@
 											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="fa fa-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
 											</#list>	
 										</div>									
+									</div>
+									<div class="panel-footer" style="padding:5px;">
+										<div class="btn-group">
+											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> 쇼셜미디어 추가 <span class="caret"></span>
+											</button>
+											<ul class="dropdown-menu" role="menu">
+												<li><a href="#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
+												<li><a href="#"><i class="fa fa-twitter"></i> &nbsp;트위터 연결</a></li>
+												<li class="divider"></li>
+												<li><a href="#"><i class="fa fa-cog"></i> 쇼셜미디어 계정 관리</a></li>
+											</ul>
+										</div>
 									</div>
 								</div>					
 							</div>		
