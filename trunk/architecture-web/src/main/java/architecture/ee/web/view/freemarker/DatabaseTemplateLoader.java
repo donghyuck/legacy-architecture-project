@@ -29,8 +29,8 @@ import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
 
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.web.community.template.Content;
-import architecture.ee.web.community.template.ContentManager;
+import architecture.ee.web.community.template.Template;
+import architecture.ee.web.community.template.TemplateManager;
 
 import freemarker.cache.FileTemplateLoader;
 
@@ -54,8 +54,8 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 
 	@Override
 	public long getLastModified(Object templateSource) {
-		if(templateSource instanceof Content){
-			return ((Content) templateSource).getModifiedDate().getTime();
+		if(templateSource instanceof Template){
+			return ((Template) templateSource).getModifiedDate().getTime();
 		}else{
 			return super.getLastModified(templateSource);
 		}				
@@ -64,8 +64,8 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	@Override
 	public Reader getReader(Object templateSource, String encoding)
 			throws IOException {		
-		if(templateSource instanceof Content){
-			 return new StringReader( ((Content) templateSource).getBody() );
+		if(templateSource instanceof Template){
+			 return new StringReader( ((Template) templateSource).getBody() );
 		}else{
 			return super.getReader(templateSource, encoding);
 		}				
@@ -73,7 +73,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 
 	@Override
 	public void closeTemplateSource(Object templateSource) {
-		if(templateSource instanceof Content){
+		if(templateSource instanceof Template){
 			
 		}else{
 			super.closeTemplateSource(templateSource);
@@ -94,29 +94,28 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				invoker.setStaticMethod("architecture.ee.web.struts2.util.ActionUtils.getAction");
 				invoker.prepare();
 				Object action = invoker.invoke();
-				if( action instanceof ContentAware ){
-					Content content = ((ContentAware)action).getTargetContent();
-					log.debug("##########################################CONTENT:" + content.getTitle() );
+				if( action instanceof TemplateAware ){
+					Template template = ((TemplateAware)action).getTargetTemplate();
+					log.debug("##########################################CONTENT:" + template.getTitle() );
 					log.debug( name ); 
-					log.debug( content.getTitle() );
-					log.debug( content.getContentType() );
-					if(  "ftl".equals(content.getContentType()) && name.contains(content.getLocation() ))
-						return content;
+					log.debug( template.getTitle() );
+					log.debug( template.getContentType() );
+					if(  "ftl".equals(template.getContentType()) && name.contains(template.getLocation() ))
+						return template;
 				}
 			} catch (Exception e) {
 				log.warn(e);				
 			}
 			
 			log.debug("finding template in database .. : " + name );
-			ContentManager contentManager = ApplicationHelper.getComponent(ContentManager.class);			
-			List<Content> contents = contentManager.getContent(getCurrentCompany());
-			for( Content content : contents){
+			TemplateManager contentManager = ApplicationHelper.getComponent(TemplateManager.class);			
+			List<Template> contents = contentManager.getContent(getCurrentCompany());
+			for( Template content : contents){
 				log.debug( name + " - content: " + content.getTitle() + ", type:" + content.getContentType() + ", match:" + content.getLocation() .contains(name) );
 				if(  content.getLocation() .contains(name)){
 					return content;
 				}
-			}	
-			
+			}			
 		}
 		String nameToUse = getCustomizedTemplateFileName(name);
 		return super.findTemplateSource(nameToUse);

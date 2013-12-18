@@ -16,14 +16,14 @@
 package architecture.ee.web.view.freemarker;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.template.Content;
+import architecture.ee.web.community.template.Template;
 
-public interface ContentAware {
+public interface TemplateAware {
 	
-	public Long getContentId();
+	public Long getTemplateId();
 	
-	public String getContentType();
+	public String getTemplateType();
 	
-	public Content getTargetContent() throws NotFoundException;
+	public Template getTargetTemplate() throws NotFoundException;
 
 }
