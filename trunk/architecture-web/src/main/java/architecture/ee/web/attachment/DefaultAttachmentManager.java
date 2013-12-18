@@ -152,17 +152,14 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			attachmentToUse.setModifiedDate(now);
 			attachmentToUse = attachmentDao.createAttachment(attachmentToUse);
 		}		
-		try {
-			
+		try {			
 			if( attachmentToUse.getInputStream() != null )
 			{
-				attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());
-				
+				attachmentDao.saveAttachmentData(attachmentToUse, attachmentToUse.getInputStream());				
 				Collection<File> files = FileUtils.listFiles(getAttachmentCacheDir(), FileFilterUtils.prefixFileFilter(attachment.getAttachmentId() + ""), null);
 				for(File file : files){
 					FileUtils.deleteQuietly(file);
 				}
-				
 			}
 			
 			return getAttachment(attachment.getAttachmentId());
