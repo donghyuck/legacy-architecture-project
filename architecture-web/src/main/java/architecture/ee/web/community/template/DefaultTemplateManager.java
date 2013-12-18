@@ -30,20 +30,20 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 
 	private UserManager userManager ;
 
-	private TemplateDao contentDao;
+	private TemplateDao templateDao;
 	
 	/**
 	 * @return contentDao
 	 */
-	public TemplateDao getContentDao() {
-		return contentDao;
+	public TemplateDao getTemplateDao() {
+		return templateDao;
 	}
 
 	/**
 	 * @param contentDao 설정할 contentDao
 	 */
-	public void setContentDao(TemplateDao contentDao) {
-		this.contentDao = contentDao;
+	public void setTemplateDao(TemplateDao templateDao) {
+		this.templateDao = templateDao;
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 	}
 
 	public List<Template> getTemplate(int objectType, long objectId) {
-		List<Long> ids = contentDao.getTemplateIds(objectType, objectId);
+		List<Long> ids = templateDao.getTemplateIds(objectType, objectId);
 		List<Template> list = new ArrayList<Template>(ids.size());
 		for( Long contentId : ids ){
 			try {
@@ -81,7 +81,7 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 
 	
 	public List<Template> getTemplate(int objectType, long objectId, int startIndex, int maxResults) {
-		List<Long> ids = contentDao.getTemplateIds(objectType, objectId, startIndex, maxResults);
+		List<Long> ids = templateDao.getTemplateIds(objectType, objectId, startIndex, maxResults);
 		List<Template> list = new ArrayList<Template>(ids.size());
 		for( Long contentId : ids ){
 			try {
@@ -92,14 +92,14 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 	}
 
 	public int getTemplateCount(int objectType, long objectId) {
-		return contentDao.getTemplateCount(objectType, objectId);
+		return templateDao.getTemplateCount(objectType, objectId);
 	}
 
 	public Template getTemplate(long contentId) throws NotFoundException {
 		Template content = null  ;
 		if( objectCache.get(contentId) == null){
 			try {
-				content = getContentById(contentId);
+				content = getTemplateById(contentId);
 				
 				if( content.getCreator().getUserId() > 0 )
 					content.setCreator( userManager.getUser(content.getCreator().getUserId()));
@@ -118,8 +118,8 @@ public class DefaultTemplateManager extends AbstractObjectManager implements Tem
 		return content;
 	}
 	
-	public Template getContentById(long contentId){
-		return contentDao.getTemplate(contentId);
+	public Template getTemplateById(long templateId){
+		return templateDao.getTemplate(templateId);
 	}
 	
 }
