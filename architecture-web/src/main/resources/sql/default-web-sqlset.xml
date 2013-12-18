@@ -396,13 +396,13 @@
     	OBJECT_TYPE = ?	AND OBJECT_ID = ?
     ]]></sql-query>       
     
-<!--  CONTENT -->
-    <sql-query name="SELECT_CONTENT_BY_ID" description="ID로 콘텐츠 조회"><![CDATA[    
+<!--  TEMPLATE -->
+    <sql-query name="SELECT_TEMPLATE_BY_ID" description="ID로 TEMPLATE 조회"><![CDATA[    
     SELECT 
 		OBJECT_TYPE,
 		OBJECT_ID,
-		CONTENT_ID,
-		CONTENT_TYPE,
+		TEMPLATE_ID,
+		TEMPLATE_TYPE,
 		TITLE,
 		LOCATION,
 		CREATOR,
@@ -410,26 +410,26 @@
 		CREATION_DATE,
 		MODIFIED_DATE
     FROM 
-    	V2_CONTENT
+    	V2_TEMPLATE
     WHERE 
-    	CONTENT_ID = ?    
+    	TEMPLATE_ID = ?    
     ]]></sql-query>
-    <sql-query name="SELECT_CONTENT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 콘텐츠  조회"><![CDATA[    
+    <sql-query name="SELECT_TEMPLATE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 TEMPLATE  조회"><![CDATA[    
     SELECT 
-		CONTENT_ID
+		TEMPLATE_ID
     FROM 
-    	V2_CONTENT
+    	V2_TEMPLATE
     WHERE 
     	OBJECT_TYPE = ?	AND
     	OBJECT_ID = ?
     ]]></sql-query>    
 
-    <sql-query name="CREATE_CONTENT" description="콘텐츠  생성"><![CDATA[    
-    INSERT INTO V2_CONTENT (
+    <sql-query name="CREATE_TEMPLATE" description="TEMPLATE  생성"><![CDATA[    
+    INSERT INTO V2_TEMPLATE (
 		OBJECT_TYPE,
 		OBJECT_ID,
-		CONTENT_ID,
-		CONTENT_TYPE,
+		TEMPLATE_ID,
+		TEMPLATE_TYPE,
 		TITLE,
 		LOCATION,
 		CREATOR,
@@ -439,37 +439,37 @@
 	) VALUES ( 	?,?,?,?,?,?,?,?,? )
     ]]></sql-query>
 
-    <sql-query name="UPDATE_CONTENT" description="콘텐츠 수정"><![CDATA[    
-    UPDATE V2_CONTENT SET 		
+    <sql-query name="UPDATE_TEMPLATE" description="콘텐츠 수정"><![CDATA[    
+    UPDATE V2_TEMPLATE SET 		
 		OBJECT_TYPE = ?,
 		OBJECT_ID = ?,
-		CONTENT_TYPE = ?,
+		TEMPLATE_TYPE = ?,
 		TITLE = ?,
 		LOCATION = ?,
 		LASTMODIFIER,
 		MODIFIED_DATE
-	WHERE CONTENT_ID = ?
+	WHERE TEMPLATE_ID = ?
     ]]></sql-query>
 
-	<sql-query name="DELETE_CONTENT" description="삭제"><![CDATA[    
- 		DELETE FROM V2_CONTENT WHERE CONTENT_ID = ?
+	<sql-query name="DELETE_TEMPLATE" description="삭제"><![CDATA[    
+ 		DELETE FROM V2_TEMPLATE WHERE TEMPLATE_ID = ?
     ]]></sql-query>
     
-	<sql-query name="CREATE_CONTENT_BODY" description="데이터 생성"><![CDATA[    
- 		INSERT V2_CONTENT_BODY  (BODY_CONTENT_ID, BODY) VALUES (?, ?)
+	<sql-query name="CREATE_TEMPLATE_BODY" description="TEMPLATE 데이터 생성"><![CDATA[    
+ 		INSERT V2_TEMPLATE_BODY  (BODY_TEMPLATE_ID, BODY) VALUES (?, ?)
     ]]></sql-query>
             
-	<sql-query name="SELECT_CONTENT_BODY_BY_ID" description="데이터 조회"><![CDATA[    
- 		SELECT BODY FROM V2_CONTENT_BODY WHERE BODY_CONTENT_ID = ?
+	<sql-query name="SELECT_TEMPLATE_BODY_BY_ID" description="TEMPLATE 데이터 조회"><![CDATA[    
+ 		SELECT BODY FROM V2_TEMPLATE_BODY WHERE BODY_TEMPLATE_ID = ?
     ]]></sql-query>
 
-	<sql-query name="REMOVE_CONTENT_BODY" description="데이터 삭제"><![CDATA[    
- 		DELETE FROM V2_CONTENT_BODY WHERE BODY_CONTENT_ID = ?
+	<sql-query name="REMOVE_TEMPLATE_BODY" description="TEMPLATE 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_TEMPLATE_BODY WHERE BODY_TEMPLATE_ID = ?
     ]]></sql-query>         
     
-	<sql-query name="COUNT_CONTENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="전체  수 조회"><![CDATA[    
+	<sql-query name="COUNT_TEMPLATE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="전체  TEMPLATE 수 조회"><![CDATA[    
 	SELECT COUNT(OBJECT_ID)
-	FROM V2_CONTENT        
+	FROM V2_TEMPLATE    
 	WHERE 
     	OBJECT_TYPE = ?	AND OBJECT_ID = ?
     ]]></sql-query>                 
