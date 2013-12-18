@@ -108,12 +108,12 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 			}
 			
 			log.debug("finding template in database .. : " + name );
-			TemplateManager contentManager = ApplicationHelper.getComponent(TemplateManager.class);			
-			List<Template> contents = contentManager.getTemplate(getCurrentCompany());
-			for( Template content : contents){
-				log.debug( name + " - content: " + content.getTitle() + ", type:" + content.getTemplateType() + ", match:" + content.getLocation() .contains(name) );
-				if(  content.getLocation() .contains(name)){
-					return content;
+			TemplateManager templateManager = ApplicationHelper.getComponent(TemplateManager.class);			
+			List<Template> contents = templateManager.getTemplate(getCurrentCompany());
+			for( Template template : contents){
+				log.debug( name + " - content: " + template.getTitle() + ", type:" + template.getTemplateType() + ", match:" + template.getLocation() .contains(name) );
+				if(  template.getLocation() .contains(name)){
+					return template;
 				}
 			}			
 		}
