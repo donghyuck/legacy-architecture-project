@@ -18,7 +18,7 @@
 
 	<bean id="templateCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="templateCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />					
 	<bean id="templateDao" class="architecture.ee.web.community.template.dao.JdbcTemplateDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
-	<bean id="templateManager" class="architecture.ee.web.community.template.DefaultTemplateManager" depends-on="templateDao"  p:contentDao-ref="templateDao" p:objectCache-ref="templateCache" p:userManager-ref="userManager" />		
+	<bean id="templateManager" class="architecture.ee.web.community.template.DefaultTemplateManager" depends-on="templateDao"  p:templateDao-ref="templateDao" p:objectCache-ref="templateCache" p:userManager-ref="userManager" />		
 		
 	<bean id="announceCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="announceCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />					
 	<bean id="announceDao" class="architecture.ee.web.community.dao.internal.JdbcAnnounceDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	

@@ -27,14 +27,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
-import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.template.Template;
 import architecture.ee.web.community.template.impl.TemplateImpl;
-import architecture.ee.web.navigator.Menu;
-import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateDao {
 
