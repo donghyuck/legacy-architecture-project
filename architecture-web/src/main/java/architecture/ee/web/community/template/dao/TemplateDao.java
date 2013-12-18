@@ -18,17 +18,17 @@ package architecture.ee.web.community.template.dao;
 import java.util.List;
 
 import architecture.common.user.User;
-import architecture.ee.web.community.template.Content;
+import architecture.ee.web.community.template.Template;
 
-public interface ContentDao {
+public interface TemplateDao {
 
-	public Content createContent(Content content);
+	public Template createContent(Template content);
 	
-	public void deleteContent(Content content);	
+	public void deleteContent(Template content);	
 	
-	public void updateContent(Content content);
+	public void updateContent(Template content);
 		
-	public Content getContent(long contentId);
+	public Template getContent(long contentId);
 		
 	public List<Long> getContentIds(int objectType, long objectId);
 	

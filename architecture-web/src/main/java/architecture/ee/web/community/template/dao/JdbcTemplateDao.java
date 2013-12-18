@@ -31,16 +31,16 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.community.template.Content;
-import architecture.ee.web.community.template.impl.ContentImpl;
+import architecture.ee.web.community.template.Template;
+import architecture.ee.web.community.template.impl.TemplateImpl;
 import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.impl.MenuImpl;
 
-public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao {
+public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateDao {
 
-	private final RowMapper<ContentImpl> contentMapper = new RowMapper<ContentImpl>(){
-		public ContentImpl mapRow(ResultSet rs, int rowNum) throws SQLException {
-			ContentImpl impl = new ContentImpl();			
+	private final RowMapper<TemplateImpl> contentMapper = new RowMapper<TemplateImpl>(){
+		public TemplateImpl mapRow(ResultSet rs, int rowNum) throws SQLException {
+			TemplateImpl impl = new TemplateImpl();			
 			impl.setContentId(rs.getLong("CONTENT_ID"));
 			impl.setTitle(rs.getString("TITLE"));
 			impl.setContentType(rs.getString("CONTENT_TYPE"));
@@ -121,7 +121,7 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 	public void setContentProperties(long contentId, Map<String, String> props) {
 		extendedPropertyDao.updateProperties(contentPropertyTableName, contnetPropertyPrimaryColumnName, contentId, props);
 	}
-	public Content createContent(Content content) {
+	public Template createContent(Template content) {
 		
 		long contentId = getNextId(sequencerName);		
 		content.setContentId(contentId);	
@@ -145,12 +145,12 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 		saveContentBody(content);			
 		return content;
 	}
-	public void deleteContent(Content content) {
+	public void deleteContent(Template content) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_CONTENT").getSql(), 	new SqlParameterValue(Types.NUMERIC, content.getContentId()));
 		deleteContentProperties(content.getContentId());
 		removeContentBody(content);
 	}
-	public void updateContent(Content content) {
+	public void updateContent(Template content) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_CONTENT").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, content.getObjectType() ), 
 				new SqlParameterValue (Types.NUMERIC, content.getObjectId() ), 
@@ -164,8 +164,8 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 		removeContentBody(content);
 		saveContentBody(content);
 	}
-	public Content getContent(long contentId) {
-		ContentImpl impl = null ;
+	public Template getContent(long contentId) {
+		TemplateImpl impl = null ;
 		try {
 			
 			impl = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_BY_ID").getSql(), contentMapper, new SqlParameterValue(Types.NUMERIC, contentId ) );
@@ -212,18 +212,18 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 				new SqlParameterValue(Types.NUMERIC, objectId ));
 	}
 	
-	public void removeContentBody(Content content){		
+	public void removeContentBody(Template content){		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.REMOVE_CONTENT_BODY").getSql(), 	new SqlParameterValue(Types.NUMERIC, content.getContentId()));
 	}
 	
-	public void saveContentBody(Content content){		
+	public void saveContentBody(Template content){		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_CONTENT_BODY").getSql(), 
 				new SqlParameterValue ( Types.NUMERIC, content.getContentId()), 
 				new SqlParameterValue ( Types.CLOB,  new SqlLobValue(content.getBody(), getLobHandler() ) ) 
 		);		
 	}
 	
-	public String getContentBody(Content content) {		
+	public String getContentBody(Template content) {		
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_CONTENT_BODY_BY_ID").getSql(), 
 				String.class, new SqlParameterValue (Types.NUMERIC, content.getContentId()));
 	}
