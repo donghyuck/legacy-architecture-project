@@ -27,9 +27,11 @@ import org.springframework.util.MethodInvoker;
 
 import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
+
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.web.content.Content;
-import architecture.ee.web.content.ContentManager;
+import architecture.ee.web.community.template.Content;
+import architecture.ee.web.community.template.ContentManager;
+
 import freemarker.cache.FileTemplateLoader;
 
 public class DatabaseTemplateLoader extends FileTemplateLoader {
