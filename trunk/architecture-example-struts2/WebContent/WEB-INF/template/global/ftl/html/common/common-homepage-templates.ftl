@@ -251,6 +251,13 @@
 			#if (contentType.match("^image") ) {#
 			<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
 			# } else { #		
+				
+				#if (contentType.match("^application/pdf")) {#
+				<script type="text/javascript">
+					var success = new PDFObject({ url: "${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" }).embed("pdf-view");				
+				</script>
+				<div id="pdf-view"></div>
+				# } #				
 				<div class="k-grid k-widget" style="width:100%;">
 					<div style="padding-right: 17px;" class="k-grid-header">
 						<div class="k-grid-header-wrap">
