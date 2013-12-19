@@ -244,20 +244,16 @@
 		    </div>
 		  </li>					
 </script>
-<script type="text/x-kendo-template" id="image-view-template">
+<script type="text/x-kendo-template" id="file-view-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
 		<div class="panel-body">
-			#if (contentType.match("^image") ) {#
-			<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
+			#if (contentType.match("^image") ) {#			
+			<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#= attachmentId #" alt="#:name# 이미지" class="img-responsive"/>			
 			# } else { #		
-				
-				#if (contentType.match("^application/pdf")) {#
-				<script type="text/javascript">
-					var success = new PDFObject({ url: "${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" }).embed("pdf-view");				
-				</script>
+				#if (contentType == "application/pdf" ) {#
 				<div id="pdf-view"></div>
-				# } #				
+				# } else { #	
 				<div class="k-grid k-widget" style="width:100%;">
 					<div style="padding-right: 17px;" class="k-grid-header">
 						<div class="k-grid-header-wrap">
@@ -294,16 +290,26 @@
 						</table>	
 					</div>
 				</div>
+				# } #
 			# } #  			
 		</div>
+		<!--
 		<ul class="list-group">
 			<li class="list-group-item">
 				<input name="update-attach-file" id="update-attach-file" type="file" />
 			</li>
 		</ul>			
+		-->
 		<div class="panel-footer">
 			<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-			<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#:attachmentId #" >삭제</button>		
+			<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#=attachmentId #" >삭제</button>		
+			<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 파일 변경하기</button>				
+			<ul class="dropdown-menu" style="min-width:400px; padding:10px;">
+				<li role="presentation" class="dropdown-header">마우스로 새로운 파일을 끌어 놓으세요.</li>
+				<li>
+					<input name="update-attach-file" id="update-attach-file" type="file"class="pull-right" />
+				</li>
+			</ul>			
 		</div>
 	</div>
 </script>
