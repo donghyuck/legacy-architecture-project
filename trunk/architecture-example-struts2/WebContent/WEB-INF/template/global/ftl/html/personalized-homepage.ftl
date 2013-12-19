@@ -619,9 +619,13 @@
 		function openPreviewWindow(){	
 		
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
-			var template = kendo.template($('#image-view-template').html());
+			var template = kendo.template($('#file-view-template').html());
 			$('#attach-view-panel').html( template(attachPlaceHolder) );				
 			kendo.bind($("#attach-view-panel"), attachPlaceHolder );		
+			if( attachPlaceHolder.contentType == "application/pdf" ){
+				var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + attachPlaceHolder.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
+			}
+			
 			$("#attach-view-panel button").each(function( index ) {		
 				var panel_button = $(this);
 				panel_button.click(function (e) { 
@@ -640,8 +644,7 @@
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
-						$("div .custom-panels-group").hide();
-						//$('#announce-panel').show();						
+						$("div .custom-panels-group").hide();			
 					}					
 				});
 			});				
@@ -663,7 +666,7 @@
 				} 
 			});		
 			
-			$("div .custom-panels-group").hide();
+			//$("div .custom-panels-group").hide();
 			$('#attach-view-panel').show();			
 		}	
 				
@@ -671,6 +674,22 @@
 		</script> 		   
 		
 		<style scoped="scoped">
+
+#pdf-view {
+	height: 500px;
+	margin: 0 auto;
+	border: 0px solid #787878;
+}
+
+#pdf-view p {
+   padding: 1em;
+}
+
+#pdf-view object {
+   display: block;
+   border: solid 1px #787878;
+}
+
 
 		.k-dropzone {
 		#	width: 808px;

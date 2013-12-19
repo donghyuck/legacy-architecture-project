@@ -293,16 +293,9 @@
 				# } #
 			# } #  			
 		</div>
-		<!--
-		<ul class="list-group">
-			<li class="list-group-item">
-				<input name="update-attach-file" id="update-attach-file" type="file" />
-			</li>
-		</ul>			
-		-->
 		<div class="panel-footer">
-			<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" >다운로드</a>
-			<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#=attachmentId #" >삭제</button>		
+			<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i> 다운로드</a>
+			<button  type="button" class="btn btn-danger custom-attachment-delete"  data-for-attachmentId="#=attachmentId #" ><i class="fa fa-trash-o"></i> 삭제</button>		
 			<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 파일 변경하기</button>				
 			<ul class="dropdown-menu" style="min-width:400px; padding:10px;">
 				<li role="presentation" class="dropdown-header">마우스로 새로운 파일을 끌어 놓으세요.</li>
