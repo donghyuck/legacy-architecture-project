@@ -33,15 +33,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		border-color: #428bca;
 		height : 30px; 
 	}
-
-	.tab-content {
-		background-color : #FFFFFF;	
-		padding : 0 5px 5px 5px;
-		border-bottom:  1px solid #dddddd;
-		border-left:  1px solid #dddddd;
-		border-right:  1px solid #dddddd;
-		min-height: 100px;
-	}
+	
 	body { 
 		padding-top: 70px; 
 		background-color : #F5F5F5;	
