@@ -13,37 +13,69 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.forum.impl;
+package architecture.ee.web.community.forum.impl;
 
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.support.BaseModelObjectSupport;
-import architecture.ee.web.forum.Topic;
+import architecture.ee.web.theme.Theme;
 
-public class TopicImpl extends BaseModelObjectSupport  implements Topic {
+public class ThemeImpl extends BaseModelObjectSupport  implements Theme {
 	
-	private Long ForumId;
+	private Long themeId = -1L;
 	
-	private Long topidId;
+	private String styleName ;
 	
-	private Long userId ;
-		
-	private int totalReplies = 0 ;
-
-	private String  subject  ;
+	private String templateName;
+	
+	/**
+	 * @return themeId
+	 */
+	public Long getThemeId() {
+		return themeId;
+	}
+	/**
+	 * @param themeId 설정할 themeId
+	 */
+	public void setThemeId(Long themeId) {
+		this.themeId = themeId;
+	}
+	/**
+	 * @return styleName
+	 */
+	public String getStyleName() {
+		return styleName;
+	}
+	/**
+	 * @param styleName 설정할 styleName
+	 */
+	public void setStyleName(String styleName) {
+		this.styleName = styleName;
+	}
+	/**
+	 * @return templateName
+	 */
+	public String getTemplateName() {
+		return templateName;
+	}
+	/**
+	 * @param templateName 설정할 templateName
+	 */
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
+	}
 	
 	public Serializable getPrimaryKeyObject() {
-		return topidId;
+		return themeId;
 	}
-
+	
 	public int getModelObjectType() {
 		return ModelObjectType.UNKNOWN.getKey();
 	}
-
+	
 	public int getCachedSize() {
 		return 0;
 	}
 
-	
 }

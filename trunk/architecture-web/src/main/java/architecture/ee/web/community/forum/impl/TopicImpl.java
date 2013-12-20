@@ -13,22 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.forum.impl;
+package architecture.ee.web.community.forum.impl;
 
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.support.BaseModelObjectSupport;
-import architecture.ee.web.forum.Category;
+import architecture.ee.web.community.forum.Topic;
 
-public class CategoryImpl extends BaseModelObjectSupport implements Category {
-
-	private Long categoryId = -1L ;
+public class TopicImpl extends BaseModelObjectSupport  implements Topic {
 	
-	private int displayOrder = 0 ;
+	private Long ForumId;
+	
+	private Long topidId;
+	
+	private Long userId ;
+		
+	private int totalReplies = 0 ;
 
+	private String  subject  ;
+	
 	public Serializable getPrimaryKeyObject() {
-		return categoryId;
+		return topidId;
 	}
 
 	public int getModelObjectType() {
@@ -36,8 +42,8 @@ public class CategoryImpl extends BaseModelObjectSupport implements Category {
 	}
 
 	public int getCachedSize() {
-		// TODO 자동 생성된 메소드 스텁
 		return 0;
 	}
+
 	
 }
