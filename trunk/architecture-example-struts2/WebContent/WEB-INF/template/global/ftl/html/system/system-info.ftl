@@ -242,13 +242,13 @@
 		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container full-width">		
+		<div class="container full-width-container">		
 			<div class="row">			
-				<div class="page-header blank-top-45">
+				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><span data-bind="text: description"></span></small></h1>
 				</div>			
 			</row>	
-			<div class="row full-width-row">			
+			<div class="row full-width-row">	
 				<div class="col-sm-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">Heap 메모리</div>
@@ -301,7 +301,7 @@
 							  <li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
 							  <li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
 							  <li><a href="#system-info"><i class="fa fa-info"></i> 시스템 환경 정보</a></li>
-							  <li><a href="#database-info">데이터베이스 정보</a></li>
+							  <li><a href="#database-info"><i class="fa fa-hdd-o"></i> 데이터베이스 정보</a></li>
 							</ul>
 							<div class="tab-content">
 								<div class="tab-pane active" id="license-info">

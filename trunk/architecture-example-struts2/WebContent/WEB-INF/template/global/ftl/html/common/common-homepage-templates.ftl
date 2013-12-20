@@ -358,13 +358,13 @@
 				</div>
 			</li>
 			<li class="divider"></li>
-			<li><a href="\\#">프로필 보기</a></li>
-			<li><a href="/main.do?view=personalized">마이 페이지</a></li>
+			<li><a href="\\#"><i class="fa fa-user"></i> 프로필 보기</a></li>
+			<li><a href="/main.do?view=personalized"><i class="fa fa-smile-o"></i> 마이 페이지</a></li>
 			#if (isSystem ) {#
-			<li><a href="/secure/main-site.do">시스템 관리하기</a></li>
+			<li><a href="/secure/main-site.do"><i class="fa fa-tachometer"></i> 시스템 관리하기</a></li>
 			# } #
 			<li class="divider"></li>
-			<li><a href="/logout">로그아웃</a></li>
+			<li><a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 			# } else { #  			
 			<li>
 				<div class="container" style="width:100%;">
@@ -395,7 +395,7 @@
 									<label for="login-password">비밀번호</label>
 										<input type="password" class="form-control " id="login-password" name="password"  placeholder="비밀번호"  required validationMessage="비밀번호를 입력하여 주세요." >
 								</div>				 
-								<button type="button" id="login-btn" class="btn btn-primary btn-block">로그인</button>
+								<button type="button" id="login-btn" class="btn btn-primary btn-block"><i class="fa fa-sign-in"></i> 로그인</button>
 							</form>						
 						</div>
 					</div>

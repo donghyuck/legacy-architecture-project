@@ -29,6 +29,7 @@
 			<a href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" class="btn btn-warning">다운로드</a>
 		</script>
 				
+		<!--		
 		<script id="sidebar-template" type="text/x-kendo-template">	
 			<div class="rexy-header">
 				<div class="btn-group">
@@ -49,7 +50,8 @@
 			</div>
 			
 		</script>
-
+        -->
+        
 		<script id="topbar-template" type="text/x-kendo-template">
 			<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
 				<div class="navbar-header">
@@ -90,15 +92,18 @@
 					# } #
 					</ul>
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="${request.contextPath}/main.do">사용자 홈</a></li>
+						<li><a href="${request.contextPath}/main.do"><i class="fa fa-home"></i> 사용자 홈</a></li>
 						<li class="dropdown">
-							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">${action.user.name} <b class="caret"></b></a>
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> ${action.user.name} <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="\\#">Action</a></li>
 								<li><a href="\\#">Another action</a></li>
 								<li><a href="\\#">Something else here</a></li>
-								<li><a href="${request.contextPath}/logout">로그아웃</a></li>
+								<li><a href="${request.contextPath}/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 							</ul>
+						</li>
+						<li>
+							<p class="navbar-text"></p>
 						</li>
 					</ul>					
 				</div>
