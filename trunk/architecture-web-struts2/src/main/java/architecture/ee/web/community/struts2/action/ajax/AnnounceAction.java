@@ -113,6 +113,9 @@ public class AnnounceAction extends FrameworkActionSupport {
 		return announceManager;
 	}
 
+	public int getTotalAnnounceCount(){
+return 0;
+	}
 
 	/**
 	 * @param announceManager 설정할 announceManager

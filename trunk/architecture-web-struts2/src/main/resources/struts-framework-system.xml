@@ -188,25 +188,7 @@
 				</param>
 			</result>
 		</action>
-		<!--  contents  -->
-		<action name="list-content" class="architecture.ee.web.struts2.action.admin.ajax.ContentManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param> 		    
-				<param name="includeProperties">
-				targetContents.*, totalTargetContentCount
-				</param>
-			</result>
-		</action>
-		<action name="get-content" class="architecture.ee.web.struts2.action.admin.ajax.ContentManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">
-				targetContent.*
-				</param>
-			</result>
-		</action>				
+
 	</package>
 
 </struts>
