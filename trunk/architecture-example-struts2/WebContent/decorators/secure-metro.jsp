@@ -14,46 +14,28 @@
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.metro.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.0.3/bootstrap.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.css" />
+<%
+String userAgent = request.getHeader("user-agent");
+if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
+%>
+<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.0/respond.min.js"></script>
+<%
+}
+%>
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
 	
-	body {
-		overflow-y : none;
-		background-color : #f2f2f2;
+	body { 
+		padding-top: 70px; 
+		background-color : #F5F5F5;	
 	}
 
-	#splitter {				
-		height : 600px;
-		border : 0 px;
-	}	
-
-	::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
+	.k-grid table tr.k-state-selected{
+		background: #428bca;
+		color: #ffffff; 
 	}
-
-	::-webkit-scrollbar-track {
-		background: rgba(0, 0, 0, 0.05)
-	}
-	
-	::-webkit-scrollbar-thumb {
-		border-radius: 12px;
-		background: rgba(0, 0, 0, 0.2)
-	}
-	
-	::-webkit-scrollbar-thumb:hover {
-		background: rgba(0, 0, 0, 0.25)
-	}
-	
-	.k-menu.k-header, .k-menu .k-item {
-		border-color :#dadada;
-	}	
-	
-	.container{
-		max-width:100%;
-	}
-				    
+		
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
