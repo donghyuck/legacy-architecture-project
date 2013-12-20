@@ -30,7 +30,7 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.community.dao.AnnounceDao;
-import architecture.ee.web.community.internal.AnnounceImpl;
+import architecture.ee.web.community.impl.AnnounceImpl;
 
 public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceDao {
 
