@@ -675,20 +675,20 @@
 		
 		<style scoped="scoped">
 
-#pdf-view {
-	height: 500px;
-	margin: 0 auto;
-	border: 0px solid #787878;
-}
-
-#pdf-view p {
-   padding: 1em;
-}
-
-#pdf-view object {
-   display: block;
-   border: solid 1px #787878;
-}
+		#pdf-view {
+			height: 500px;
+			margin: 0 auto;
+			border: 0px solid #787878;
+		}
+		
+		#pdf-view p {
+		   padding: 1em;
+		}
+		
+		#pdf-view object {
+		   display: block;
+		   border: solid 1px #787878;
+		}
 
 
 		.k-dropzone {

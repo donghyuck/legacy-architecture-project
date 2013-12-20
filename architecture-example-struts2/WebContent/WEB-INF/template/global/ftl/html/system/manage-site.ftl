@@ -394,16 +394,14 @@
 		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container full-width">		
+		<div class="container full-width-container">		
 			<div class="row">			
-				<div class="page-header blank-top-45">
+				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><span data-bind="text: description"></span></small></h1>
 				</div>			
 			</row>	
-			<div class="row full-width-row">			
-				<div class="col-lg-12">				
-					
-					
+			<div class="row full-width-row">	
+				<div class="col-lg-12">
 					<ul class="nav nav-tabs" id="myTab">
 					  <li class="active"><a href="#site-info"><i class="fa fa-certificate"></i> 라이선스 정보</a></li>
 					  <li><a href="#content-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
