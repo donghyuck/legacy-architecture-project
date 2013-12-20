@@ -33,18 +33,49 @@ background-color: rgba(0, 0, 0, 0.2);
 	min-width: 120px;
 }
 /* Bootstrap customize---------------------- */
-.full-width {
+.full-width-container {
 	width:100%;
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;	
 }
 
 .full-width-row {
 	margin: 0 15px;
 }
 
+.marginless {
+	margin:0 0px;
+}
+
+.margin-buttom-5 {
+	margin: 0 0px 5px 0px;
+}
+
+.marginless {
+	margin:0 0px;
+}
+
+.paddingless {
+	padding:0 0px;
+}
+
+
+.paddingless {
+	padding:0 0px;
+}
+
 .full-width-column {
 	padding: 0 0px;
 	margin:0 0px;
 }
+
+.full-width-column-5 {
+	padding: 0 0px;
+	margin:0 0px;
+}
+
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
