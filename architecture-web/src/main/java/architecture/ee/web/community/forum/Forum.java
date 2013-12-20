@@ -13,8 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.forum;
+package architecture.ee.web.community.forum;
 
-public interface Topic {
+import architecture.common.model.BaseModelObject;
+
+public interface Forum extends BaseModelObject {
+
 
 }

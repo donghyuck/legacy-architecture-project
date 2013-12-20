@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.label;
+package architecture.ee.web.community.forum;
 
-import architecture.common.model.NameModelObject;
-
-public interface Label extends NameModelObject {
+public interface Topic {
 
 }

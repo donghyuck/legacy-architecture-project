@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.forum.impl;
+package architecture.ee.web.community.forum.impl;
 
 import java.io.Serializable;
 
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.support.BaseModelObjectSupport;
-import architecture.ee.web.forum.Category;
-import architecture.ee.web.forum.Forum;
+import architecture.ee.web.community.forum.Category;
+import architecture.ee.web.community.forum.Forum;
 
 public class ForumImpl extends BaseModelObjectSupport implements Forum {
 
