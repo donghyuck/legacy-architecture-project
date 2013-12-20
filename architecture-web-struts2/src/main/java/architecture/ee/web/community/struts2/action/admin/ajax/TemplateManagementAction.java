@@ -13,32 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.struts2.action.admin.ajax;
+package architecture.ee.web.community.struts2.action.admin.ajax;
 
 import java.util.Collections;
 import java.util.List;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.content.Content;
-import architecture.ee.web.content.ContentManager;
+import architecture.ee.web.community.template.Template;
+import architecture.ee.web.community.template.TemplateManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class ContentManagementAction extends FrameworkActionSupport {
+public class TemplateManagementAction extends FrameworkActionSupport {
 
 
     private int pageSize = 0 ;
     
     private int startIndex = 0 ;  
     
-	private Content targetContent;
+	private Template targetTemplate;
 
 	private Long objectId = -1L;
 	
 	private Integer objectType = 0;
 	
-	private Long contentId = -1L; 
+	private Long templateId = -1L; 
 	
-	private ContentManager contentManager ;
+	private TemplateManager templateManager ;
 
 	/**
 	 * @return pageSize
@@ -72,8 +72,8 @@ public class ContentManagementAction extends FrameworkActionSupport {
 	/**
 	 * @param targetContent 설정할 targetContent
 	 */
-	public void setTargetContent(Content targetContent) {
-		this.targetContent = targetContent;
+	public void setTargetTemplate(Template targetTemplate) {
+		this.targetTemplate = targetTemplate;
 	}
 
 	/**
@@ -107,49 +107,49 @@ public class ContentManagementAction extends FrameworkActionSupport {
 	/**
 	 * @return contentId
 	 */
-	public Long getContentId() {
-		return contentId;
+	public Long getTemplateId() {
+		return templateId;
 	}
 
 	/**
 	 * @param contentId 설정할 contentId
 	 */
-	public void setContentId(Long contentId) {
-		this.contentId = contentId;
+	public void setTemplateId(Long templateId) {
+		this.templateId = templateId;
 	}
 
 	/**
 	 * @return contentManager
 	 */
-	public ContentManager getContentManager() {
-		return contentManager;
+	public TemplateManager getTemplateManager() {
+		return templateManager;
 	}
 
 	/**
 	 * @param contentManager 설정할 contentManager
 	 */
-	public void setContentManager(ContentManager contentManager) {
-		this.contentManager = contentManager;
+	public void setTemplateManager(TemplateManager templateManager) {
+		this.templateManager = templateManager;
 	}
 	
 
-    public int getTotalTargetContentCount() {    	
-    	return contentManager.getContentCount(objectType, objectId);
+    public int getTotalTargetTemplateCount() {    	
+    	return templateManager.getTemplateCount(objectType, objectId);
     }
     
-    public Content getTargetContent() throws NotFoundException{
-    	return contentManager.getContent(contentId);
+    public Template getTargetTemplate() throws NotFoundException{
+    	return templateManager.getTemplate(templateId);
     } 
     
-    public List<Content> getTargetContents(){   
+    public List<Template> getTargetTemplates(){   
 
     	if( objectType < 1 || objectId < 1 ){
     		return Collections.EMPTY_LIST;
     	}
     	 if( pageSize > 0 ){
-             return contentManager.getContent(objectType, objectId, startIndex, pageSize);      
+             return templateManager.getTemplate(objectType, objectId, startIndex, pageSize);      
     	 }
-        return contentManager.getContent(objectType, objectId);
+        return templateManager.getTemplate(objectType, objectId);
     }
     
 	public String execute() throws Exception {

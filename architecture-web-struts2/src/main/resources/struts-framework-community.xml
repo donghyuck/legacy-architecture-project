@@ -20,7 +20,8 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>     
 				<param name="includeProperties">
-				targetAnnounce.*
+				targetAnnounce.*,
+				totalAnnounceCount
 				</param>
 			</result>
 		</action>
@@ -164,6 +165,26 @@
 				
 	</package>
 
-	
+	<package name="framework-system-admin-actions" namespace="/secure" extends="framework-default">	
+		<!--  contents  -->
+		<action name="list-content" class="architecture.ee.web.community.struts2.action.admin.ajax.ContentManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 		    
+				<param name="includeProperties">
+				targetContents.*, totalTargetContentCount
+				</param>
+			</result>
+		</action>
+		<action name="get-content" class="architecture.ee.web.community.struts2.action.admin.ajax.ContentManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetContent.*
+				</param>
+			</result>
+		</action>				
+	</package>			
 		
 </struts>

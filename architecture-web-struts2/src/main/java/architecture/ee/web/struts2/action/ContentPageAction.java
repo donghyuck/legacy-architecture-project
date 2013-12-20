@@ -16,30 +16,30 @@
 package architecture.ee.web.struts2.action;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.content.Content;
-import architecture.ee.web.content.ContentManager;
+import architecture.ee.web.community.template.Template;
+import architecture.ee.web.community.template.TemplateManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
-import architecture.ee.web.view.freemarker.ContentAware;
+import architecture.ee.web.view.freemarker.TemplateAware;
 
-public class ContentPageAction extends FrameworkActionSupport implements ContentAware {
+public class ContentPageAction extends FrameworkActionSupport implements TemplateAware {
 
 	private static final String DEFAULT_PAGE =  "/html/page.ftl";
 	private String page = DEFAULT_PAGE ;
-	private ContentManager contentManager ;
+	private TemplateManager contentManager ;
 	long contentId = -1L;
-	private Content targetContent = null;
+	private Template targetContent = null;
 
 	/**
 	 * @return contentManager
 	 */
-	public ContentManager getContentManager() {
+	public TemplateManager getContentManager() {
 		return contentManager;
 	}
 
 	/**
 	 * @param contentManager 설정할 contentManager
 	 */
-	public void setContentManager(ContentManager contentManager) {
+	public void setContentManager(TemplateManager contentManager) {
 		this.contentManager = contentManager;
 	}
 
@@ -50,7 +50,7 @@ public class ContentPageAction extends FrameworkActionSupport implements Content
 		this.page = page;
 	}
 
-	public Long getContentId() {
+	public Long getTemplateId() {
 		return contentId;
 	}
 
@@ -69,7 +69,7 @@ public class ContentPageAction extends FrameworkActionSupport implements Content
 	public String getPage() {
 		if( contentId > 0 ){
 			try {
-				return getTargetContent().getLocation();
+				return getTargetTemplate().getLocation();
 			} catch (Exception e) {
 				return DEFAULT_PAGE;
 			}
@@ -77,11 +77,11 @@ public class ContentPageAction extends FrameworkActionSupport implements Content
 		return page;
 	}
 	
-	public Content getTargetContent(){
+	public Template getTargetTemplate(){
 		if(targetContent == null && contentId > 0 )
 		{
 			try {
-				targetContent = contentManager.getContent(contentId);
+				targetContent = contentManager.getTemplate(contentId);
 			} catch (NotFoundException e) {
 				targetContent = null;
 			}
@@ -91,9 +91,9 @@ public class ContentPageAction extends FrameworkActionSupport implements Content
 	
 
 
-	public String getContentType() {
+	public String getTemplateType() {
 		try {
-			return getTargetContent().getContentType();
+			return getTargetTemplate().getTemplateType();
 		} catch (Exception e) {
 			return null;
 		}
