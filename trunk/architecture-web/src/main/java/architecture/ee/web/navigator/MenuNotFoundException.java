@@ -17,6 +17,7 @@ package architecture.ee.web.navigator;
 
 import architecture.ee.exception.ApplicationException;
 
+@SuppressWarnings("serial")
 public class MenuNotFoundException extends ApplicationException {
 
 	public MenuNotFoundException() {
