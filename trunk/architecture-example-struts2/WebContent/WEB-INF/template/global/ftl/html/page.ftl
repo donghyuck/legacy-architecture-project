@@ -98,9 +98,14 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<div class="container layout">
-				<div class="page-header">
-					<h1>${action.targetContent.subject}</h1>
-				</div>	
+			<div class="page-header">
+				<h1>${action.targetContent.subject}</h1>
+			</div>	
+			<div class="row">
+				<div class="col-lg-12">
+				${action.targetContent.body}		
+				</div>
+			</div>
 		</div>
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
