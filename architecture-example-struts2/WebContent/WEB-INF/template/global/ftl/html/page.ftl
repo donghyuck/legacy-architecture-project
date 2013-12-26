@@ -103,7 +103,7 @@
 			</div>	
 			<div class="row">
 				<div class="col-lg-12">
-				${action.targetContent.body}		
+				${action.targetContent.body?replace("#company#", action.user.company.displayName )}		
 				</div>
 			</div>
 		</div>
