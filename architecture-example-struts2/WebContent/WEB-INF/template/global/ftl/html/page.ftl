@@ -99,7 +99,7 @@
 		<!-- END HEADER -->	
 		<div class="container layout">
 			<div class="page-header">
-				<h1>${action.targetContent.subject}<small>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</small></h1>
+				<h1>${action.targetContent.subject}<br><small>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</small></h1>
 			</div>	
 			<div class="row">
 				<div class="col-lg-12">
