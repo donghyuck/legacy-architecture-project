@@ -15,11 +15,10 @@
  */
 package architecture.common.model.v2.support;
 
-import architecture.common.model.v2.EitityModel;
+import architecture.common.model.v2.EntityModel;
+import architecture.common.model.v2.TypeModelObject;
 
 @SuppressWarnings("serial")
-public abstract class EntiryModelSupport<T> implements EitityModel<T> {
-
-
+public abstract class EntityModelSupport<T> extends TypeModelObject implements EntityModel<T> {
 
 }

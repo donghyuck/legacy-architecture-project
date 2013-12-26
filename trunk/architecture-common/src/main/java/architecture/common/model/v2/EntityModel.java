@@ -17,6 +17,6 @@ package architecture.common.model.v2;
 
 import architecture.common.cache.Cacheable;
 
-public interface EitityModel<T> extends ModelObject<T>, TypeModel, Cacheable {
+public interface EntityModel<T> extends ModelObject<T>, TypeModel, Cacheable {
 
 }
