@@ -1,6 +1,6 @@
 <!--=== Footer ===-->
 <div class="footer">
-    <div class="container layout">
+	<div class="container layout">
         <div class="row">
             <div class="col-md-4 md-margin-bottom-40">
                 <!-- About -->
@@ -33,7 +33,7 @@
             <div class="col-md-6">                      
                 <p class="copyright-space">
                     <#if action.user.company ?? >2013 &copy; ${action.user.company.displayName }. 모든 권리 보유.<#else></#if>
-                    <a href="#">개인정보 취급방침</a> | <a href="#">이용약관</a>
+                    <a href="${request.contextPath}/community/content.do?contentId=2">개인정보 취급방침</a> | <a href="${request.contextPath}/community/content.do?contentId=1">이용약관</a>
                 </p>
             </div>
             <div class="col-md-6">  

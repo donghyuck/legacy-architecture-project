@@ -73,13 +73,13 @@
 					e.preventDefault();
 					if(  $(this).attr('href') == '#site-info' ){
 					
-					}else if(  $(this).attr('href') == '#content-mgmt' ){
-						if( ! $("#content-grid").data("kendoGrid") ){	
-							$("#content-grid").kendoGrid({
+					}else if(  $(this).attr('href') == '#template-mgmt' ){
+						if( ! $("#template-grid").data("kendoGrid") ){	
+							$("#template-grid").kendoGrid({
 								dataSource: {
 									dataType: 'json',
 									transport: {
-										read: { url:'${request.contextPath}/secure/list-content.do?output=json', type: 'POST' },
+										read: { url:'${request.contextPath}/secure/list-template.do?output=json', type: 'POST' },
 										parameterMap: function (options, operation){
 											if (operation != "read" && options) {										                        								                       	 	
 												return { objectType: 1, objectId : selectedCompany.companyId , item: kendo.stringify(options)};									                            	
@@ -89,9 +89,9 @@
 										} 
 									},
 									schema: {
-										total: "totalTargetContentCount",
-										data: "targetContents",
-										model : Content
+										total: "totalTargetTemplateCount",
+										data: "targetTemplates",
+										model : Template
 									},
 									pageSize: 15,
 									serverPaging: true,
@@ -101,12 +101,12 @@
 								},
 								toolbar: [ { text: "템플릿 파일 추가", css:"createTemplateCustom" } ],   
 								columns:[
-									{ field: "contentId", title: "ID",  width: 50, filterable: false, sortable: false },
+									{ field: "templateId", title: "ID",  width: 50, filterable: false, sortable: false },
 									{ field: "title", title: "타이틀", width: 150 },
 									{ field: "location", title: "템플릿 이름", width: 150 },
-									{ field: "contentType", title: "유형",  width: 100 },
+									{ field: "templateType", title: "유형",  width: 100 },
 									{ field: "modifiedDate", title: "수정일", width: 80, format: "{0:yyyy/MM/dd}" },
-									{ command: [ { name: "destroy", text: "삭제" } , { name: "customEditContentClass", text: "수정" }], title: " ", width: "160px"  }
+									{ command: [ { name: "destroy", text: "삭제" } , { name: "customEditTemplateClass", text: "수정" }], title: " ", width: "160px"  }
 								],
 								filterable: true,
 								sortable: true,
@@ -246,7 +246,7 @@
 												minHeight: 300
 											});
 										}																				
-										// load social content ...										
+										// load social template ...										
 										var socialWindow = $("#social-detail-window").data("kendoWindow");
 										var socialMediaName = selectedSocial.serviceProviderName ;										
 										var template = kendo.template($('#social-details-template').html());											
@@ -404,7 +404,7 @@
 				<div class="col-lg-12">
 					<ul class="nav nav-tabs" id="myTab">
 					  <li class="active"><a href="#site-info"><i class="fa fa-certificate"></i> 라이선스 정보</a></li>
-					  <li><a href="#content-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
+					  <li><a href="#template-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
 					  <li><a href="#image-mgmt"><i class="fa fa-picture-o"></i> 이미지 관리</a></li>
 					  <li><a href="#attachment-mgmt"><i class="fa fa-paperclip"></i> 첨부파일 관리</a></li>
 					  <li><a href="#social-mgmt">쇼셜 관리</a></li>
@@ -438,8 +438,8 @@
 							 	</tbody>
 								</table>
 						</div>
-						<div class="tab-pane" id="content-mgmt">
-							<div id="content-grid" ></div>
+						<div class="tab-pane" id="template-mgmt">
+							<div id="template-grid" ></div>
 						</div>
 						<div class="tab-pane" id="system-info">
 						</div>
