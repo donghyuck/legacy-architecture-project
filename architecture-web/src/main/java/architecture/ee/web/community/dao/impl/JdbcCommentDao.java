@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.dao.internal;
+package architecture.ee.web.community.dao.impl;
 
 import java.util.Date;
 import java.util.List;
