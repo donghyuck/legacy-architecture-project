@@ -15,6 +15,21 @@
  */
 package architecture.ee.web.community.dao;
 
+import java.util.List;
+
+import architecture.ee.web.community.Content;
+import architecture.ee.web.community.ContentNotFoundException;
+
 public interface ContentDao {
 
+	public List<Long> getContentIdsForUser(long userId);
+	
+	public int getContentCountForUser(long userId);
+	
+	public Content getContent(long contentId) throws ContentNotFoundException;
+	
+	public void updateContent(Content content);
+	
+	public void insertContent(Content content);
+	
 }

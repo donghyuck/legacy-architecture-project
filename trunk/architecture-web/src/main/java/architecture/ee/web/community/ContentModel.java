@@ -33,6 +33,10 @@ public interface ContentModel extends EntityModel<Content>, DateModel, PropertyM
 	public String getSubject();
 	
 	public void setSubject(String subject);
+
+	public String getSummary();
+	
+	public void setSummary(String summary);
 	
 	public String getBody();
 	
