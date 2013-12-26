@@ -44,14 +44,14 @@ var SocialAccount = kendo.data.Model.define( {
     }
 });
 
-var Content = kendo.data.Model.define( {
-    id: "contentId", // the identifier of the model
+var Template = kendo.data.Model.define( {
+    id: "templateId", // the identifier of the model
     fields: {
-    	contentId: { type: "number", editable: false, defaultValue: -1  },    	
+    	templateId: { type: "number", editable: false, defaultValue: -1  },    	
     	objectType: { type: "number", editable: false, defaultValue: -1  },    	
     	objectId: { type: "number", editable: false, defaultValue: -1  },    	
         title: { type: "string", editable: true , validation: { required: true }},
-        contentType: { type: "string", editable: true },
+        templateType: { type: "string", editable: true },
         location : { type: "string", editable: true },
         body: { type: "string", editable: true },
         modifiedDate: { type: "date"},
