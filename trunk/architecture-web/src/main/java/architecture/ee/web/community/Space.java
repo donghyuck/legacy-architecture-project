@@ -13,17 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.impl;
+package architecture.ee.web.community;
 
-import architecture.ee.web.community.Content;
-
-public class ContentImpl extends ContentModelImpl implements Content {
-
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never modify or reference this class directly. All methods that expect a content model instance 
-	 * should use the {@link Content} interface instead.
-	 */
+public interface Space {
 
 }

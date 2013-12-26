@@ -15,33 +15,8 @@
  */
 package architecture.ee.web.community;
 
-import architecture.common.model.BaseModelObject;
-import architecture.common.user.User;
 
-public interface Content extends BaseModelObject {
+public interface Content extends ContentModel {
 	
-	public Long getContentId();
-	
-	public void setContentId(Long contentId);
-	
-	public String getContentType();
-	
-	public void setContentType(String contentType);
-	
-	public String getSubject();
-	
-	public void setSubject(String subject);
-	
-	public String getBody();
-	
-	public void setBody(String body);
-	
-	public User getCreator();
-	
-	public User getModifier();
-	
-	public void setCreator(User creator);
-	
-	public void setModifier(User modifier);	
 	
 }
