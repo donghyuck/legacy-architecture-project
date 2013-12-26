@@ -13,17 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community;
+package architecture.ee.web.community.dao.impl;
 
-import architecture.common.model.ModelObject;
-
-public interface ContentModelObject extends ModelObject {
-
-		enum Field {
-			Body, 
-			Subject, 
-			Summary, 
-			Property			
-		};
+public class JdbcContentDao {
 
 }

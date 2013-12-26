@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.template.dao;
+package architecture.ee.web.community.template.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -31,6 +31,7 @@ import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.template.Template;
+import architecture.ee.web.community.template.dao.TemplateDao;
 import architecture.ee.web.community.template.impl.TemplateImpl;
 
 public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateDao {
