@@ -15,12 +15,20 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+import java.util.Map;
 
-	public abstract Long getId();
+public interface PropertyModel {
+
+	public abstract Map<String, String> getProperties();
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	public abstract void setProperties(Map<String, String> properties);
+	
+	public abstract boolean getBooleanProperty(String name, boolean defaultValue );
+	
+	public abstract long getLongProperty(String name, long defaultValue );
+	
+	public abstract int getIntProperty(String name, int defaultValue );
+	
+	public abstract String getProperty(String name, String defaultValue );
 	
 }

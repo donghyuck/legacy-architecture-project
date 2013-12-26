@@ -15,12 +15,8 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+import architecture.common.cache.Cacheable;
 
-	public abstract Long getId();
-	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+public interface EitityModel<T> extends ModelObject<T>, TypeModel, Cacheable {
+
 }

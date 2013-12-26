@@ -13,14 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.v2;
+package architecture.common.model.support;
+import architecture.common.model.NameModelObject;
 
-public interface ModelObjectType {
+public abstract class NameModelObjectSupport implements NameModelObject{
 
-	public abstract Long getId();
-	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+
+	private String name;
+
+	/**
+	 * @return name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name 설정할 name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

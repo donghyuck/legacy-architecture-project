@@ -15,12 +15,12 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+import java.io.Serializable;
 
-	public abstract Long getId();
+public interface ModelObject<T> {
+
+	public Serializable getPrimaryKeyObject();	
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	public void setPrimaryKeyObject(Serializable primaryKeyObj);
 	
 }

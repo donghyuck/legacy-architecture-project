@@ -15,12 +15,20 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+public class TypeModelObject implements TypeModel {
 
-	public abstract Long getId();
+	private ModelObjectType modelObjectType;
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+	public ModelObjectType getModelObjectType() {
+		return modelObjectType;
+	}
+
+	public Long getModelObjectTypeId() {
+		return modelObjectType.getId();
+	}
+
+	public void setModelObjectType(ModelObjectType modelObjType) {
+		this.modelObjectType = modelObjectType;
+	}
+
 }

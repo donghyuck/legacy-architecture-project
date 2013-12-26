@@ -29,6 +29,6 @@ public interface ModelObjectTypeManager {
 	
 	public abstract ModelObjectType getModelObjectType( String code );
 	
-	public abstract ModelObjectType getModelObjectType( int objectId );
+	public abstract ModelObjectType getModelObjectType( Long objectId );
 	
 }

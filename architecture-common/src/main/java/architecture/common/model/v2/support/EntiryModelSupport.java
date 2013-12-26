@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.v2;
+package architecture.common.model.v2.support;
 
-public interface ModelObjectType {
+import architecture.common.model.v2.EitityModel;
 
-	public abstract Long getId();
-	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+@SuppressWarnings("serial")
+public abstract class EntiryModelSupport<T> implements EitityModel<T> {
+
+
+
 }

@@ -15,12 +15,30 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+import java.util.Date;
 
-	public abstract Long getId();
+public class DateModelObject implements DateModel {
+
+
+	private Date creationDate = null;
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	private Date modifiedDate = null;
+	
+
+	public Date getCreationDate() {
+		return creationDate;
+	}
+
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 	
 }
