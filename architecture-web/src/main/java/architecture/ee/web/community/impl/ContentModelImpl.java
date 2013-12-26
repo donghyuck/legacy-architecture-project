@@ -36,9 +36,26 @@ public class ContentModelImpl extends PropertyEntityModelSupport<Content> implem
 	private User modifier;
 	
 	private String body;
+	
+	private String summary;
 
 	private String contentType;	
 	
+	
+	/**
+	 * @return summary
+	 */
+	public String getSummary() {
+		return summary;
+	}
+
+	/**
+	 * @param summary 설정할 summary
+	 */
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
 	public Serializable getPrimaryKeyObject() {
 		return contentId;
 	}
