@@ -23,6 +23,7 @@ import java.util.List;
 import architecture.common.util.StringUtils;
 
 
+@SuppressWarnings("serial")
 public class MenuComponent extends MenuBase implements Serializable, Component {
     //~ Static fields/initializers =============================================
     protected static MenuComponent[] _menuComponent = new MenuComponent[0];

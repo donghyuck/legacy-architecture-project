@@ -19,6 +19,8 @@ import architecture.ee.exception.ApplicationException;
 
 public class MenuAlreadyExistsException extends ApplicationException {
 
+	private static final long serialVersionUID = -2198302717248962579L;
+
 	public MenuAlreadyExistsException() {
 		// TODO 자동 생성된 생성자 스텁
 	}
