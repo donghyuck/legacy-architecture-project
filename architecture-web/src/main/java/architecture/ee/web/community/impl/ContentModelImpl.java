@@ -13,25 +13,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.internal;
+package architecture.ee.web.community.impl;
 
 import java.io.Serializable;
 
+import architecture.common.model.v2.DateModelObject;
+import architecture.common.model.v2.ModelObjectType;
+import architecture.common.model.v2.PropertyModelObject;
+import architecture.common.model.v2.support.PropertyEntityModelSupport;
 import architecture.common.user.User;
+import architecture.ee.web.community.Content;
+import architecture.ee.web.community.ContentModel;
 
-public class ContentImpl  {
+public class ContentModelImpl extends PropertyEntityModelSupport<Content> implements ContentModel {
 
 	private Long contentId = -1L;
-
+	
 	private String subject;
 
 	private User creator;
 
 	private User modifier;
-
+	
 	private String body;
 
-	private String contentType;
+	private String contentType;	
+	
+	public Serializable getPrimaryKeyObject() {
+		return contentId;
+	}
+	
+	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
+		this.contentId = (Long) primaryKeyObj;		
+	}
+
 
 	/**
 	 * @return subject
@@ -115,22 +130,10 @@ public class ContentImpl  {
 		return contentId;
 	}
 
-	/**
-	 * @param contentId
-	 *            설정할 contentId
-	 */
 	public void setContentId(Long contentId) {
-		this.contentId = contentId;
+		this.contentId = contentId;		
 	}
-
-	public Serializable getPrimaryKeyObject() {
-		return contentId;
-	}
-
-	public int getModelObjectType() {
-		return 0;
-	}
-
+	
 	public int getCachedSize() {
 		return 0;
 	}
