@@ -15,12 +15,23 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+public class DescriptionModelObject implements DescriptionModel {
 
-	public abstract Long getId();
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	private String description = null;
+
+	/**
+	 * @return description
+	 */
+	public String getDescription() {
+		return description;
+	}
+
+	/**
+	 * @param description 설정할 description
+	 */
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	
 }

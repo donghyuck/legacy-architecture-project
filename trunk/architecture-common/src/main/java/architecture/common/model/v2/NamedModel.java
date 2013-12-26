@@ -15,12 +15,10 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
-
-	public abstract Long getId();
+public interface NamedModel {
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	public String getName();
+	
+	public void setName(String name);
 	
 }

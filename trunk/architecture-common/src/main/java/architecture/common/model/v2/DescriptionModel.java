@@ -15,12 +15,10 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+public interface DescriptionModel {
 
-	public abstract Long getId();
+	public String getDescription();
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	public void setDescription(String description);
 	
 }

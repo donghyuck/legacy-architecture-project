@@ -13,14 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.v2;
+package architecture.common.model;
 
-public interface ModelObjectType {
+import java.util.Date;
 
-	public abstract Long getId();
+public interface NoNamedEntityModelObject extends  PropertyModelObject {
+
+
+	/**
+	 * @return 생성일을 리턴한다.
+	 */
+	public Date getCreationDate() ;
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	/**
+	 * 
+	 * @param  creationDate 생성일
+	 */
+	public void setCreationDate(Date creationDate);
+	
+	/**
+	 * @return 수정일을 리턴한다.
+	 */
+	public Date getModifiedDate();
+	
+	/**
+	 * 
+	 * @param  modifiedDate 수정일
+	 */
+	public void setModifiedDate(Date modifiedDate);
 	
 }

@@ -15,12 +15,22 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+public class NamedModelObject implements NamedModel {
 
-	public abstract Long getId();
-	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
-	
+	private String name;
+
+	/**
+	 * @return name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name 설정할 name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
 }

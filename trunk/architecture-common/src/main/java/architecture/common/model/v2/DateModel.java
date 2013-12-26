@@ -15,12 +15,30 @@
  */
 package architecture.common.model.v2;
 
-public interface ModelObjectType {
+import java.util.Date;
 
-	public abstract Long getId();
+public interface DateModel {
+
+	/**
+	 * @return 생성일을 리턴한다.
+	 */
+	public Date getCreationDate() ;
 	
-	public abstract String getCode();
-		
-	public abstract boolean isEnabled();
+	/**
+	 * 
+	 * @param  creationDate 생성일
+	 */
+	public void setCreationDate(Date creationDate);
+	
+	/**
+	 * @return 수정일을 리턴한다.
+	 */
+	public Date getModifiedDate();
+	
+	/**
+	 * 
+	 * @param  modifiedDate 수정일
+	 */
+	public void setModifiedDate(Date modifiedDate);
 	
 }
