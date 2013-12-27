@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 	<head>
-		<title> 페이지</title>
+		<title> ${action.targetContent.subject}</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
