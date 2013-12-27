@@ -201,7 +201,7 @@
 						<!-- start announce panel -->
 						<div id="announce-panel" >	
 							<div class="panel panel-default">
-								<div class="panel-heading">알림
+								<div class="panel-heading"><i class="fa fa-bullhorn"></i>&nbsp;알림
 									<div class="k-window-actions panel-header-actions">
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
