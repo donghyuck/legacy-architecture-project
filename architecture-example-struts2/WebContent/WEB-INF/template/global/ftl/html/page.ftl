@@ -98,7 +98,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 
-		<div class="jumbotron jumbotron-ad hidden-print">
+		<div class="jumbotron jumbotron-ad hidden-print margin-top-minus-20">
 		  <div class="container">
 		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; What's New</h1>
 		    <p>What's New in the latest version — Font Awesome 4.0</p>
