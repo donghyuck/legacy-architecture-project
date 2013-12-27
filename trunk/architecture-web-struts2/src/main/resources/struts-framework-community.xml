@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<package name="framework-community-site-actions" namespace="/community" extends="framework-default">
+	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">${template}</result>	
 		</action>			
