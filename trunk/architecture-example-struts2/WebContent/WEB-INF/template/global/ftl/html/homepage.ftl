@@ -122,7 +122,7 @@
 				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);						
-						if( panel_header_action.text() == "Minimize" ){
+						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
 								$("#announce-panel .panel-body, .list-group ").toggleClass("hide");								
