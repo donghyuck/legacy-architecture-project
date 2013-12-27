@@ -3,30 +3,77 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="framework-community-actions" namespace="/community" extends="framework-default">
-	
-		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.AnnounceAction">
+
+	<package name="framework-community-site-actions" namespace="/community" extends="framework-default">
+		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">${template}</result>	
+		</action>			
+		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
+			<result name="success" type="freemarker">about.ftl</result>	
+		</action>		
+	</package>	
+
+	<package name="framework-community-admin-actions" namespace="/secure" extends="framework-default">	
+		<!--  contents  -->
+		<action name="list-template" class="architecture.ee.web.community.struts2.action.admin.ajax.TemplateMgmtAction">
 			<result name="json-success" type="json">
-			  <param name="enableGZIP">true</param>
-			  <param name="excludeNullProperties">true</param>     
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 		    
 				<param name="includeProperties">
-				targetAnnounces.*
+				targetTemplates.*, totalTargetTemplateCount
 				</param>
 			</result>
-		</action>		
-
-		<action name="get-announce" class="architecture.ee.web.community.struts2.action.ajax.AnnounceAction">
+		</action>
+		<action name="get-template" class="architecture.ee.web.community.struts2.action.admin.ajax.TemplateMgmtAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetTemplate.*
+				</param>
+			</result>
+		</action>				
+	</package>	
+	
+	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
+		<!--  contents  -->
+		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">${template}</result>	
+			<!-- 
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>     
 				<param name="includeProperties">
-				targetAnnounce.*,
+				targetContent.*
+				</param>
+			</result>
+			-->
+		</action>		
+		
+			
+		<!--  announce  -->			
+		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">true</param>     
+				<param name="includeProperties">
+				targetAnnounces.*,
 				totalAnnounceCount
+				</param>
+			</result>
+		</action>		
+
+		<action name="get-announce" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>     
+				<param name="includeProperties">
+				targetAnnounce.*				
 				</param>
 			</result>
 		</action>
 
-		<action name="update-announce" method="update" class="architecture.ee.web.community.struts2.action.ajax.AnnounceAction">
+		<action name="update-announce" method="update" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>	    
@@ -36,7 +83,7 @@
 			</result>
 		</action>
 
-		<action name="delete-announce" method="delete" class="architecture.ee.web.community.struts2.action.ajax.AnnounceAction">
+		<action name="delete-announce" method="delete" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>		    
@@ -46,8 +93,7 @@
 			</result>
 		</action>
 	
-		<!--  images  -->
-				
+		<!--  images  -->				
 		<action name="list-my-image" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -164,27 +210,6 @@
 		</action>
 				
 	</package>
-
-	<package name="framework-system-admin-actions" namespace="/secure" extends="framework-default">	
-		<!--  contents  -->
-		<action name="list-content" class="architecture.ee.web.community.struts2.action.admin.ajax.ContentManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param> 		    
-				<param name="includeProperties">
-				targetContents.*, totalTargetContentCount
-				</param>
-			</result>
-		</action>
-		<action name="get-content" class="architecture.ee.web.community.struts2.action.admin.ajax.ContentManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">
-				targetContent.*
-				</param>
-			</result>
-		</action>				
-	</package>			
+		
 		
 </struts>
