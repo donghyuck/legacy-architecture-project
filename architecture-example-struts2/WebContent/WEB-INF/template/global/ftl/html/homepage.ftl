@@ -224,9 +224,7 @@
 			<div class="row">
 
 			</div>		
-		</div>		
-
-		<div id="attach-window"></div>					
+		</div>			
 		<!-- END MAIN CONTENT -->	
 
  		<!-- START FOOTER -->
