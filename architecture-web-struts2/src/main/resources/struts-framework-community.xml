@@ -9,7 +9,7 @@
 			<result name="success" type="freemarker">${template}</result>	
 		</action>			
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
-			<result name="success" type="freemarker">about.ftl</result>	
+			<result name="success" type="freemarker">/html/about.ftl</result>	
 		</action>		
 	</package>	
 
