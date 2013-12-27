@@ -194,7 +194,7 @@
 		<!-- END HEADER -->	
 		
 		<div class="jumbotron jumbotron-ad hidden-print margin-top-minus-20">
-		  <div class="container">
+		  <div class="container" style="background-image:'http://www.sds.samsung.co.kr/new_career/images/common/top_visual_C03.png'; ">
 		    <h2><i class="fa fa-building-o"></i>&nbsp; 기업소개</h2>
 		    <p></p>
 		  </div>
