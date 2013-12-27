@@ -17,9 +17,6 @@ package architecture.ee.web.community.impl;
 
 import java.io.Serializable;
 
-import architecture.common.model.v2.DateModelObject;
-import architecture.common.model.v2.ModelObjectType;
-import architecture.common.model.v2.PropertyModelObject;
 import architecture.common.model.v2.support.PropertyEntityModelSupport;
 import architecture.common.user.User;
 import architecture.ee.web.community.Content;

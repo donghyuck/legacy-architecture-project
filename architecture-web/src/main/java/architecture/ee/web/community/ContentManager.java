@@ -27,7 +27,7 @@ public interface ContentManager {
 		
 	public abstract List<Content> getContents(User user, int startIndex, int maxResults);
 	
-	public abstract Content getContent(long contentId);
+	public abstract Content getContent(long contentId) throws ContentNotFoundException;
 	
 	public abstract void updateContent(Content content);
 	

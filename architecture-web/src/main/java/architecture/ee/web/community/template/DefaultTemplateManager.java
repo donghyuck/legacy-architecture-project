@@ -19,14 +19,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ehcache.Element;
-import architecture.common.model.factory.AbstractObjectManager;
+import architecture.common.model.support.AbstractModelManagerSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.template.dao.TemplateDao;
 
-public class DefaultTemplateManager extends AbstractObjectManager implements TemplateManager {
+public class DefaultTemplateManager extends AbstractModelManagerSupport implements TemplateManager {
 
 	private UserManager userManager ;
 
