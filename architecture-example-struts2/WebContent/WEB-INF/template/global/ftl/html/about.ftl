@@ -206,7 +206,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<div id="facebook-panel">
-							<div class="panel panel-defaut">
+							<div class="panel panel-default">
 								<div class="panel-heading">
 									<i class="fa fa-facebook"></i>
 									<div class="k-window-actions panel-header-actions">
@@ -226,7 +226,7 @@
 					</div>							
 					<div class="col-lg-6">			
 						<div id="twitter-panel">
-							<div class="panel panel-defaut">
+							<div class="panel panel-default">
 								<div class="panel-heading">
 									<i class="fa fa-twitter"></i>
 									<div class="k-window-actions panel-header-actions">
