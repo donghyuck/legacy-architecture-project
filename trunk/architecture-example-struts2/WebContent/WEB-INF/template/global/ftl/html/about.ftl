@@ -68,82 +68,7 @@
 					}
 				});				
 				
-				// 1. Announces 				
-				$("#announce-grid").data( "announcePlaceHolder", new Announce () );				
-				$("#announce-grid").kendoGrid({
-					dataSource : new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-announce.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}
-							} 
-						},
-						pageSize: 10,
-						error:handleKendoAjaxError,
-						schema: {
-							data : "targetAnnounces",
-							model : Announce
-						}
-					}),
-					sortable: true,
-					height: 300,
-					columns: [ 
-						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field:"subject", title: "주제"}
-					],
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    	
-							var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
-							announcePlaceHolder.announceId = selectedCell.announceId;
-							announcePlaceHolder.subject = selectedCell.subject;
-							announcePlaceHolder.body = selectedCell.body;
-							announcePlaceHolder.startDate = selectedCell.startDate ;
-							announcePlaceHolder.endDate = selectedCell.endDate;
-							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
-							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;			
-							announcePlaceHolder.editable = false;					 
-							showAnnounce();	
-						}
-					},
-					dataBound: function(e) {					
-						var selectedCells = this.select();
-						this.select("tr:eq(1)");
-					}
-				});
-				$("#announce-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);						
-						if( panel_header_action.text() == "Minimize" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-panel .panel-body, .list-group ").toggleClass("hide");								
-								var panel_header_action_icon = panel_header_action.find('span');
-								if( panel_header_action_icon.hasClass("k-i-minimize") ){
-									panel_header_action.find('span').removeClass("k-i-minimize");
-									panel_header_action.find('span').addClass("k-i-maximize");
-								}else{
-									panel_header_action.find('span').removeClass("k-i-maximize");
-									panel_header_action.find('span').addClass("k-i-minimize");
-								}								
-							});
-						} else if (panel_header_action.text() == "Refresh" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-grid").data("kendoGrid").dataSource.read();
-							});
-						}
-				} );				
-						
-					
+								
 				// Start : Company Social Content 
 				<#list action.companySocials  as item >				
 					<#if item.serviceProviderName == "twitter">
@@ -244,14 +169,6 @@
 				// END SCRIPT            
 			}
 		}]);	
-		
-		function showAnnounce () {
-			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
-			var template = kendo.template($('#announcement-view-template').html());			
-			$("#announce-view").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-view"), announcePlaceHolder );					
-		}
-				
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -288,28 +205,7 @@
 		<div class="container layout">	
 				<div class="row">
 					<div class="col-lg-6">
-						<!-- start announce panel -->
-						<div id="announce-panel" >	
-							<div class="panel panel-default">
-								<div class="panel-heading">알림
-									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-								</div>
-								<div class="panel-body layout">					
-									<div  id="announce-view" style="min-height:80px;"></div>																			
-								</div>								
-								<ul class="list-group">
-									<li class="list-group-item" style="min-height:100px;">
-										<div id="announce-grid" ></div>				
-									</li>
-								</ul>		
-							</div>							
-						</div>
-						<!-- end announce panel -->							
+											
 					</div>							
 					<div class="col-lg-6">					
 					<div id="facebook-panel">
@@ -339,9 +235,6 @@
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>	
-									<!--																	
-									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									-->
 								</div>							
 							</div>
 							<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
