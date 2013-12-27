@@ -97,6 +97,14 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
+
+		<div class="jumbotron jumbotron-ad hidden-print">
+		  <div class="container">
+		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; What's New</h1>
+		    <p>What's New in the latest version — Font Awesome 4.0</p>
+		  </div>
+		</div>
+		
 		<div class="container layout">
 			<div class="page-header">
 				<h1>${action.targetContent.subject}<br><small>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</small></h1>
