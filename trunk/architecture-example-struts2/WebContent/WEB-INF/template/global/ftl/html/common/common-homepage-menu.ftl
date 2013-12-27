@@ -1,5 +1,4 @@
 		<!-- START MENU -->	
-		<div class="container">
 		<#if action.getMenuComponent("USER_MENU") ?? >
 		<#assign menu = action.getMenuComponent("USER_MENU") />
 				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
