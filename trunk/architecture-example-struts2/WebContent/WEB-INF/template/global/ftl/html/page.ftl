@@ -103,12 +103,8 @@
 		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; ${action.targetContent.subject}</h1>
 		    <p>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</p>
 		  </div>
-		</div>
-		
+		</div>		
 		<div class="container layout">
-			<div class="page-header">
-				<h1>${action.targetContent.subject}<br><small>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</small></h1>
-			</div>	
 			<div class="row">
 				<div class="col-lg-12">
 				${action.targetContent.body?replace("#company#", action.user.company.displayName )}		
