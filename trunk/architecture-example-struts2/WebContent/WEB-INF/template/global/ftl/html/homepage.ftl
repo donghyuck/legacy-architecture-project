@@ -201,15 +201,17 @@
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 									</div>
 								</div>
-								<div class="panel-body layout">					
-									<div  id="announce-view" style="min-height:80px;"></div>																			
+								<div class="panel-body layout hide">					
+									<div  id="announce-view" style="min-height:80px;">
+									 알림이 없습니다.
+									</div>																			
 								</div>								
-								<ul class="list-group">
+								<ul class="list-group hide">
 									<li class="list-group-item" style="min-height:100px;">
 										<div id="announce-grid" ></div>				
 									</li>
