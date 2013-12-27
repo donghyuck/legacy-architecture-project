@@ -40,7 +40,7 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 	private ExtendedPropertyDao extendedPropertyDao;	
 	private String sequencerName = "CONTENT";
 	private String contentPropertyTableName = "V2_CONTENT_PROPERTY";
-	private String contentPropertyPrimaryColumnName = "CONTENT";
+	private String contentPropertyPrimaryColumnName = "CONTENT_ID";
 	
 
 	
@@ -156,16 +156,19 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 			throw new ContentNotFoundException(e);
 		}
 	}
+	
 	public void updateContent(Content content) {
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_CONTENT").getSql(), 					
 				new SqlParameterValue(Types.VARCHAR, content.getContentType()),
 				new SqlParameterValue(Types.VARCHAR, content.getSubject()),
 				new SqlParameterValue(Types.VARCHAR, content.getSummary()),
-				new SqlParameterValue(Types.NUMERIC, content.getCreator().getUserId() ),				
-				new SqlParameterValue(Types.DATE, content.getModifiedDate()));
+				new SqlParameterValue ( Types.CLOB,  new SqlLobValue(content.getBody(), getLobHandler() ) ),
+				new SqlParameterValue(Types.NUMERIC, content.getModifier().getUserId() ),				
+				new SqlParameterValue(Types.DATE, content.getModifiedDate()),
+				new SqlParameterValue(Types.NUMERIC, content.getContentId()));
 		
 		setContentProperties(content.getContentId(), content.getProperties());
-		saveContentBody(content);		
+		//saveContentBody(content);		
 	}
 	public void insertContent(Content content) {
 		long contentId = nextId();
@@ -177,18 +180,19 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 				new SqlParameterValue(Types.VARCHAR, content.getContentType()),
 				new SqlParameterValue(Types.VARCHAR, content.getSubject()),
 				new SqlParameterValue(Types.VARCHAR, content.getSummary()),
+				new SqlParameterValue ( Types.CLOB,  new SqlLobValue(content.getBody(), getLobHandler() ) ),
 				new SqlParameterValue(Types.NUMERIC, content.getCreator().getUserId() ),
-				new SqlParameterValue(Types.NUMERIC, content.getCreator().getUserId() ),				
+				new SqlParameterValue(Types.NUMERIC, content.getModifier().getUserId() ),				
 				new SqlParameterValue(Types.DATE, content.getCreationDate()),
 				new SqlParameterValue(Types.DATE, content.getModifiedDate()));		
 		
 		setContentProperties(content.getContentId(), content.getProperties());
-		saveContentBody(content);
+		//saveContentBody(content);
 	}
 	
 	
 	public void saveContentBody(Content content){		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_TEMPLATE_BODY").getSql(), 
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_CONTENT_BODY").getSql(), 
 				new SqlParameterValue ( Types.NUMERIC, content.getContentId()), 
 				new SqlParameterValue ( Types.CLOB,  new SqlLobValue(content.getBody(), getLobHandler() ) ) 
 		);		

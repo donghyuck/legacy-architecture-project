@@ -3,7 +3,53 @@
     <name>ARCHITECTURE_WEB</name>
     <version>2.0</version>
     <description>Queries for WEB COMPONENTS</description>
-    
+    <!--  CONTENT -->
+	<sql-query name="SELECT_CONTENT_IDS_BY_USER_ID" description="SELECT_CONTENT_IDS_BY_USER_ID"><![CDATA[
+	SELECT 
+		CONTENT_ID
+	FROM V2_CONTENT 
+	WHERE CREATOR = ? 	
+	]]></sql-query>
+	<sql-query name="SELECT_CONTENT_BY_ID" description="SELECT_CONTENT_BY_ID"><![CDATA[
+	SELECT
+		CONTENT_ID,
+		CONTENT_TYPE,		
+		SUBJECT,
+		SUMMARY,
+		BODY,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+	FROM V2_CONTENT 
+	WHERE CONTENT_ID = ?	
+	]]></sql-query>
+	<sql-query name="INSERT_CONTENT" description="INSERT_CONTENT"><![CDATA[
+	INSERT INTO V2_CONTENT (
+		CONTENT_ID,
+		CONTENT_TYPE,		
+		SUBJECT,
+		SUMMARY,
+		BODY,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES (
+		?,?,?,?,?,?,?,?,?
+	)	
+	]]></sql-query>
+	<sql-query name="UPDATE_CONTENT" description="UPDATE_CONTENT"><![CDATA[
+	UPDATE V2_CONTENT SET
+		CONTENT_TYPE = ?,		
+		SUBJECT = ?,
+		SUMMARY = ?,
+		BODY = ?,
+		LASTMODIFIER = ?,
+		MODIFIED_DATE = ?
+	WHERE CONTENT_ID = ?	
+	]]></sql-query>
+	
     <!--  ANNOUNCE-->	
 	<sql-query name="SELECT_ANNOUNCE_BY_ID" description="SELECT_ANNOUNCE_BY_ID"><![CDATA[
 	SELECT 
