@@ -36,7 +36,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	
 	body { 
 		padding-top: 70px; 
-		background-color : #F5F5F5;	
+		/*background-color : #F5F5F5;	*/
 	}
 	
 		#account-panel {
