@@ -33,6 +33,12 @@ background-color: rgba(0, 0, 0, 0.2);
 	min-width: 120px;
 }
 /* Bootstrap customize---------------------- */
+
+.jumbotron-page-header {
+		margin-top: -20px;
+	
+}
+
 .full-width-container {
 	width:100%;
 	padding-left: 15px;
