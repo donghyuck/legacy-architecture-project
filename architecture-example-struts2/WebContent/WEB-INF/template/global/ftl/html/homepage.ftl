@@ -194,6 +194,9 @@
 		<div class="blank-top-10" ></div>								 
 		<div class="container layout">	
 			<div class="row">
+				<div class="col-lg-6">					
+										
+				</div>
 				<div class="col-lg-6">
 						<!-- start announce panel -->
 						<div id="announce-panel" >	
@@ -219,12 +222,7 @@
 							</div>							
 						</div>
 						<!-- end announce panel -->							
-				</div>							
-				<div class="col-lg-6">					
-										
-				</div>		
-			<div class="row">
-
+				</div>
 			</div>		
 		</div>			
 		<!-- END MAIN CONTENT -->	
