@@ -203,7 +203,7 @@
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">	
 			<div class="row">
-				<div class="col-lg-3 .visible-lg">
+				<div class="col-lg-3 visible-lg">
 					<div class="list-group">
 						<a href="#" class="list-group-item active">
 					    기업소개
