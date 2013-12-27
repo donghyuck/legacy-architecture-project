@@ -38,6 +38,9 @@ background-color: rgba(0, 0, 0, 0.2);
 		margin-top: -20px;
 		padding-top: 20px;
 		padding-bottom: 20px;	
+	-webkit-box-shadow: 0 8px 6px -6px black;
+	   -moz-box-shadow: 0 8px 6px -6px black;
+	        box-shadow: 0 8px 6px -6px black;		
 }
 
 .full-width-container {
@@ -45,7 +48,7 @@ background-color: rgba(0, 0, 0, 0.2);
 	padding-left: 15px;
 	padding-right: 15px;
 	margin-left: auto;
-	margin-right: auto;	
+	margin-right: auto;		
 }
 
 .full-width-row {
