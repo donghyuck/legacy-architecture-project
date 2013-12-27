@@ -101,7 +101,7 @@
 		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header">
 		  <div class="container">
 		    <h2><i class="fa fa-chevron-right"></i>&nbsp; ${action.targetContent.subject}</h2>
-		    <p class="text-muted"><i class="fa fa-quote-left fa-2x pull-left fa-border"></i>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</p>
+		    <small class="text-muted"><i class="fa fa-quote-left fa-2x pull-left fa-border"></i>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</small>
 		  </div>
 		</div>		
 		<div class="container layout">
