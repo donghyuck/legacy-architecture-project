@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title>회사소개</title>
+		<title>기업소개</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
