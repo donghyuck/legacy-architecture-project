@@ -215,52 +215,54 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">
+
+					<div class="row">
+						<div class="col-lg-6">
+							<div id="facebook-panel">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fa-facebook"></i>&nbsp;Facebook
+										<div class="k-window-actions panel-header-actions">
+											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+										</div>
+									</div>		
+									<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
+											<ul class="media-list">
+												<div id="company-facebook-homefeed"></div>
+											</ul>
+									</div>							
+								</div>
+							</div>																
+						</div>							
+						<div class="col-lg-6">			
+							<div id="twitter-panel">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<i class="fa fa-twitter"></i>&nbsp;Twitter
+										<div class="k-window-actions panel-header-actions">
+											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>	
+										</div>							
+									</div>
+									<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
+										<ul class="media-list">
+											<div id="company-twitter-timeline"></div>
+										</ul>
+									</div>
+								</div>
+							</div>										
+						</div>								
+					</div>	
 					
 				</div>				
 			</div>
 		</div>									 
 		<div class="container layout">	
-				<div class="row">
-					<div class="col-lg-6">
-						<div id="facebook-panel">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-facebook"></i>&nbsp;Facebook
-									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-								</div>		
-								<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
-										<ul class="media-list">
-											<div id="company-facebook-homefeed"></div>
-										</ul>
-								</div>							
-							</div>
-						</div>																
-					</div>							
-					<div class="col-lg-6">			
-						<div id="twitter-panel">
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<i class="fa fa-twitter"></i>&nbsp;Twitter
-									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>	
-									</div>							
-								</div>
-								<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
-									<ul class="media-list">
-										<div id="company-twitter-timeline"></div>
-									</ul>
-								</div>
-							</div>
-						</div>										
-					</div>								
-				</div>		
+					
 				<div class="row">
 
 				</div>		
