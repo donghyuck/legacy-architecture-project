@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title><#if action.user.company ?? >${action.user.company.displayName }<#else>::</#if></title>
+		<title><#if action.user.company ?? >${action.user.company.displayName }<#else>::</#if> 회사소개</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -275,6 +275,14 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
+		
+		<div class="jumbotron jumbotron-ad hidden-print margin-top-minus-20">
+		  <div class="container">
+		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; <#if action.user.company ?? >${action.user.company.displayName }<#else>::</#if> 회사소개</h1>
+		    <p></p>
+		  </div>
+		</div>	
+				
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">
 				<div calss="row">
