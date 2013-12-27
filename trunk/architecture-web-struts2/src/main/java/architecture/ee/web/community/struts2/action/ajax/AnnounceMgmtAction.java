@@ -29,7 +29,7 @@ import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class AnnounceAction extends FrameworkActionSupport {
+public class AnnounceMgmtAction extends FrameworkActionSupport {
 
 	private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 	
@@ -44,7 +44,7 @@ public class AnnounceAction extends FrameworkActionSupport {
 	/**
 	 * 
 	 */
-	public AnnounceAction() {
+	public AnnounceMgmtAction() {
 	}
 
 	/**
