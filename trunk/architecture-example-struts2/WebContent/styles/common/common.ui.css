@@ -49,6 +49,11 @@ background-color: rgba(0, 0, 0, 0.2);
 	margin:0 0px;
 }
 
+.margin-top-minus-20 {
+	margin-top: -20px;
+}
+
+
 .margin-buttom-5 {
 	margin: 0 0px 5px 0px;
 }
