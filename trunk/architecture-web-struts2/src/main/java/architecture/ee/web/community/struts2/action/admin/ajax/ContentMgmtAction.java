@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.struts2.action.ajax;
+package architecture.ee.web.community.struts2.action.admin.ajax;
 
 import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class ViewContentAction extends FrameworkActionSupport {
+public class ContentMgmtAction extends FrameworkActionSupport {
 
 	private static final String DEFAULT_TEMPLATE = "/html/page.ftl" ;
 	private ContentManager contentManager;
