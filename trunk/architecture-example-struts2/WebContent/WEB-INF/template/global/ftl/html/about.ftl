@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title><#if action.user.company ?? >${action.user.company.displayName }<#else>::</#if> 회사소개</title>
+		<title>회사소개</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -278,24 +278,13 @@
 		
 		<div class="jumbotron jumbotron-ad hidden-print margin-top-minus-20">
 		  <div class="container">
-		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; <#if action.user.company ?? >${action.user.company.displayName }<#else>::</#if> 회사소개</h1>
+		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; 회사소개</h1>
 		    <p></p>
 		  </div>
 		</div>	
 				
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">
-				<div calss="row">
-					<div class="col-lg-8">
-						<img src="${request.contextPath}/content/image.do?imageId=81" class="img-rounded img-responsive">
-					</div>
-					<div class="col-lg-4">
-						<div class="blank-top-10" ></div>		
-						<p><a class="btn btn-success btn-default" role="button">Learn more</a></p>
-					</div>
-				</div>					
-		</div>
-		<div class="blank-top-10" ></div>								 
+						 
 		<div class="container layout">	
 				<div class="row">
 					<div class="col-lg-6">
