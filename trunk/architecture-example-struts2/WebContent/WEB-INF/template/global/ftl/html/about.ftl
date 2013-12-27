@@ -195,7 +195,7 @@
 		
 		<div class="jumbotron jumbotron-ad hidden-print margin-top-minus-20">
 		  <div class="container">
-		    <h2><i class="fa fa-building-o"></i>&nbsp; 회사소개</h2>
+		    <h2><i class="fa fa-building-o"></i>&nbsp; 기업소개</h2>
 		    <p></p>
 		  </div>
 		</div>	
