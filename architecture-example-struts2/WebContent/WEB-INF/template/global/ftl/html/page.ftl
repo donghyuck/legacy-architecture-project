@@ -98,7 +98,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 
-		<div class="jumbotron jumbotron-ad hidden-print margin-top-minus-20">
+		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header">
 		  <div class="container">
 		    <h1><i class="fa fa-lightbulb-o"></i>&nbsp; ${action.targetContent.subject}</h1>
 		    <p>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</p>
