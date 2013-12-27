@@ -38,9 +38,9 @@ background-color: rgba(0, 0, 0, 0.2);
 		margin-top: -20px;
 		padding-top: 20px;
 		padding-bottom: 20px;	
-	-webkit-box-shadow: 0 8px 6px -6px #cccccc;
-	   -moz-box-shadow: 0 8px 6px -6px #cccccc;
-	        box-shadow: 0 8px 6px -6px #cccccc;		
+	-webkit-box-shadow: 0 2px 2px 0px #dddddd;
+	   -moz-box-shadow: 0 2px 2px 0px #dddddd;
+	        box-shadow: 0 2px 2px 0px #dddddd;	
 }
 
 .full-width-container {
