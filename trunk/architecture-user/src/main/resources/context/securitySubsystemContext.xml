@@ -44,7 +44,11 @@
         
         <security:intercept-url pattern="/content.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/about.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
-                        
+        <security:intercept-url pattern="/events".do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
+        <security:intercept-url pattern="/press.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
+        <security:intercept-url pattern="/contact.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>  
+        <security:intercept-url pattern="/customers.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        
         <security:intercept-url pattern="/**"                      access="ROLE_USER" />
         
         <security:request-cache ref="authenticationRequestCache" />        
