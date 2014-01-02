@@ -205,6 +205,11 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">
+					<div class="panel panel-default">
+						<div class="panel-body">
+						
+						</div>
+					</div>
 					<div id="announce-grid" ></div>
 				</div>				
 			</div>
