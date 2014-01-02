@@ -11,9 +11,18 @@
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
 			<result name="success" type="freemarker">/html/about.ftl</result>	
 		</action>		
-		<action name="contact" class="architecture.ee.web.community.struts2.action.SocialPageAction">
+		<action name="events" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/events.ftl</result>	
+		</action>	
+		<action name="contact" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">/html/contact.ftl</result>	
-		</action>				
+		</action>		
+		<action name="customers" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/customers.ftl</result>	
+		</action>		
+		<action name="press" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/press.ftl</result>	
+		</action>										
 	</package>	
 
 	<package name="framework-community-admin-actions" namespace="/secure" extends="framework-default">	
