@@ -103,7 +103,7 @@
 		    <h2><i class="fa fa-chevron-right"></i>&nbsp; ${action.targetContent.subject}</h2>
 		    <small class="text-muted"><i class="fa fa-quote-left fa-2x pull-left fa-border"></i>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }</small>
 		  </div>
-		</div>		
+		</div>			
 		<div class="container layout">
 			<div class="row">
 				<div class="col-lg-12">
