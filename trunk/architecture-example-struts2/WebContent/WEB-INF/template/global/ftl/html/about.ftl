@@ -208,7 +208,10 @@
 						<a href="#" class="list-group-item active">
 					    기업소개
 					  </a>
-					  <a href="#" class="list-group-item">오시는길</a>
+					  <a href="events.do" class="list-group-item">공지 & 이벤트</a>
+					  <a href="customers.do" class="list-group-item">고객</a>
+					  <a href="press.do" class="list-group-item">뉴스</a>
+					  <a href="contact.do" class="list-group-item">오시는길</a>
 					</div>					
 				</div>
 				<div class="col-lg-9">
