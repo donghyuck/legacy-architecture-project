@@ -180,9 +180,9 @@
 		<!-- END HEADER -->	
 		
 		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1") />
-		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header bg-flat">
+		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header bg-metro-black">
 		  <div class="container">
-		    <h2><i class="fa fa-building-o"></i>&nbsp; ${ current_menu.title }</h2>
+		    <h2 class="page-title"><i class="fa fa-building-o"></i>&nbsp; ${ current_menu.title }</h2>
 		    <p></p>
 		  </div>
 		</div>	
