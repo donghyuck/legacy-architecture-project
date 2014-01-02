@@ -137,7 +137,7 @@
 
 			$("#announce-panel .btn-group button").each(function( index ) {
 				var panel_footer_action = $(this);	
-				var panel_footer_action_icon = panel_header_action.find('i');
+				var panel_footer_action_icon = panel_footer_action.find('i');
 				panel_footer_action.click(function (e) {
 					e.preventDefault();		
 					$("#announce-grid").toggleClass("hide");
