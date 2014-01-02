@@ -163,7 +163,7 @@
 		
 		function showAnnounce () {
 			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
-			var template = kendo.template($('#announcement-view-template').html());			
+			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-view").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view"), announcePlaceHolder );					
 		}
@@ -232,15 +232,15 @@
 			</div>				
 		<!-- END MAIN CONTENT -->	
 
-            <script id="rowTemplate" type="text/x-kendo-tmpl">
-	            <tr>
-		            <td  class="text-center">#: announceId #</td>
-		            <td class="details">
-			           <span class="title">#: subject #</span><br>
-			           <small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
-		            </td>
-	           </tr>
-            </script>
+		<script id="rowTemplate" type="text/x-kendo-tmpl">
+			<tr>
+				<td  class="text-center">#: announceId #</td>
+				<td class="details">
+					<span class="title">#: subject #</span><br>
+					<small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
+				</td>
+			</tr>
+		</script>
             
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
