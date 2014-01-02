@@ -126,7 +126,7 @@
 						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								$("#announce-panel .panel-body, .list-group ").toggleClass("hide");								
+								$("#announce-panel .panel-body, #announce-panel .list-group").toggleClass("hide");								
 								var panel_header_action_icon = panel_header_action.find('span');
 								if( panel_header_action_icon.hasClass("k-i-minimize") ){
 									panel_header_action.find('span').removeClass("k-i-minimize");
