@@ -7,7 +7,6 @@ height: 16px; }
 background-color: rgba(0, 0, 0, 0.2);
 -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.10),inset 0 -1px 0 rgba(0,0,0,0.07); }
 
-
 .layout * {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
@@ -32,15 +31,15 @@ background-color: rgba(0, 0, 0, 0.2);
 .k-button.k-upload-button {
 	min-width: 120px;
 }
-/* Bootstrap customize---------------------- */
 
+/* Bootstrap customize---------------------- */
 .jumbotron-page-header {
-		margin-top: -20px;
-		padding-top: 20px;
-		padding-bottom: 20px;	
+	margin-top: -20px;
+	padding-top: 20px;
+	padding-bottom: 20px;	
 	-webkit-box-shadow: 0 2px 2px 0px #dddddd;
-	   -moz-box-shadow: 0 2px 2px 0px #dddddd;
-	        box-shadow: 0 2px 2px 0px #dddddd;	
+	-moz-box-shadow: 0 2px 2px 0px #dddddd;
+	box-shadow: 0 1px 1px 0px #dddddd;	
 }
 
 .full-width-container {
@@ -63,7 +62,6 @@ background-color: rgba(0, 0, 0, 0.2);
 	margin-top: -20px;
 }
 
-
 .margin-buttom-5 {
 	margin: 0 0px 5px 0px;
 }
@@ -75,7 +73,6 @@ background-color: rgba(0, 0, 0, 0.2);
 .paddingless {
 	padding:0 0px;
 }
-
 
 .paddingless {
 	padding:0 0px;
@@ -90,7 +87,6 @@ background-color: rgba(0, 0, 0, 0.2);
 	padding: 0 0px;
 	margin:0 0px;
 }
-
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
@@ -114,7 +110,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	border-right:  0px solid #dddddd;
 	min-height: 100px;
 }
-	
 
 /** Main body ------------------------------------ */
 body {
@@ -140,11 +135,9 @@ body {
 	overflow-y:auto;
 }
 
-
 .panel-header-actions {
 	float: right;
 	padding-top:2px;
-	
 }
 
 .panel-footer-primary {
@@ -156,7 +149,6 @@ body {
 }
 
 /** block */
-
 .round-block  {
 position: relative;
 margin: 0px 0;
