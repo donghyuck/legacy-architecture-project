@@ -135,7 +135,7 @@
 			$("#announce-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-panel"), announcePlaceHolder );	
 
-			$("#announce-panel .btn-group button").each(function( index ) {
+			$("#announce-actions a").each(function( index ) {
 				var panel_footer_action = $(this);	
 				var panel_footer_action_icon = panel_footer_action.find('i');
 				panel_footer_action.click(function (e) {
@@ -214,9 +214,10 @@
 				</div>
 				<div class="col-lg-9">					
 					<div id="announce-panel" ></div>					
-					<div class="content-block">
+					<div id="announce-actions" class="content-block">
 					<ul class="nav nav-pills">
 						<li class="pull-right"><a href="#"><i class="fa fa-bars"></i>&nbsp;목록</a></li>
+						<div class="blank-top-5" ></div>
 					</ul>
 					<div id="announce-grid" ></div>
 					</div>
