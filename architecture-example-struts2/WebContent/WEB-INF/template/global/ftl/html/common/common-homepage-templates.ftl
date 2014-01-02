@@ -59,11 +59,6 @@
 			<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
 		</div>
 		<div class="panel-body" data-bind="html:body"></div>	
-		<div class="panel-footer">
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
-			</div>
-		</div>
 	</div>
 </script>
 
