@@ -203,14 +203,12 @@
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="list-group">
-						<a href="#" class="list-group-item active">
-					    기업소개
-					  </a>
+						<a href="${request.contextPath}/about.do" class="list-group-item active">기업소개 </a>
 					  <a href="${request.contextPath}/events.do" class="list-group-item">공지 & 이벤트</a>
 					  <a href="${request.contextPath}/customers.do" class="list-group-item">고객</a>
 					  <a href="${request.contextPath}/press.do" class="list-group-item">뉴스</a>
 					  <a href="${request.contextPath}/contact.do" class="list-group-item">오시는길</a>
-					</div>					
+					</div>						
 				</div>
 				<div class="col-lg-9">
 
