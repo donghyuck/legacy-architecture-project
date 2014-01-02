@@ -54,23 +54,14 @@
 <!-- EVENT -->
 <script type="text/x-kendo-tmpl" id="announcement-detail-panel-template">		
 <div class="panel panel-default">
-	<div class="panel-heading">&nbsp;
-		<div class="k-window-actions panel-header-actions">&nbsp;
-			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-			<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-		</div>		
+	<div class="panel-heading">
+		<h4 data-bind="html:subject"></h4>
+		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
 	</div>
-	<ul class="list-group">
-		<li class="list-group-item gray">		
-			<h4 data-bind="html:subject"></h4>
-			<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>		
-		</li>
-	</ul> 
 	<div class="panel-body">
 		<div data-bind="html:body"></div>
 	</body>	
+	<div class="panel-footer">목록보기</div>
 </div>
 </script>
 
