@@ -234,9 +234,7 @@
 
             <script id="rowTemplate" type="text/x-kendo-tmpl">
 	            <tr>
-		            <td class="photo">
-#: announceId #
-		            </td>
+		            <td  class="text-center">#: announceId #</td>
 		            <td class="details">
 			           <span class="title">#: subject #</span><br>
 			           <small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
