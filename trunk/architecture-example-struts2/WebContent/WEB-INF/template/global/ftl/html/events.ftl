@@ -92,6 +92,7 @@
 							model : Announce
 						}
 					}),
+					rowTemplate: kendo.template($("#rowTemplate").html()),
 					sortable: true,
 					height: 300,
 					columns: [ 
@@ -231,6 +232,17 @@
 			</div>				
 		<!-- END MAIN CONTENT -->	
 
+            <script id="rowTemplate" type="text/x-kendo-tmpl">
+	            <tr>
+		            <td class="photo">
+#: announceId #
+		            </td>
+		            <td class="details">
+			           <span class="title">#: subject #</span>
+		            </td>
+	           </tr>
+            </script>
+            
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
