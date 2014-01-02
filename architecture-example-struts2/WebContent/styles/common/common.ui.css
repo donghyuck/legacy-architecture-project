@@ -42,6 +42,10 @@ background-color: rgba(0, 0, 0, 0.2);
 	box-shadow: 0 1px 1px 0px #dddddd;	
 }
 
+.bg-flat {
+	background-color: #10c4b2 ;	
+}
+
 .full-width-container {
 	width:100%;
 	padding-left: 15px;
