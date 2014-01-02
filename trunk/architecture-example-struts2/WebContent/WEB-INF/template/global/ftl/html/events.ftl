@@ -205,48 +205,7 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">
-
-							<ul class="nav nav-tabs" id="myTab">
-							  <li class="active"><a href="#announce" data-toggle="tab">공지</a></li>
-							  <li><a href="#events" data-toggle="tab">이벤트</a></li>
-							</ul>							
-							<!-- Tab panes -->
-							<div class="tab-content-borderless">
-							  <div class="tab-pane active" id="announce">
-
-						<!-- start announce panel -->
-						<div id="announce-panel" >	
-							<div class="panel panel-default">
-								<div class="panel-heading">공지
-									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-								</div>
-								<div class="panel-body layout hide">					
-									<div  id="announce-view" style="min-height:80px;">
-									공지사항이 없습니다.
-									</div>																			
-								</div>								
-								<ul class="list-group hide">
-									<li class="list-group-item" style="min-height:100px;">
-										<div id="announce-grid" ></div>				
-									</li>
-								</ul>		
-							</div>							
-						</div>
-						<!-- end announce panel -->							
-							  
-							  </div>
-							  <div class="tab-pane" id="events">
-							  
-							  
-							  </div>
-							  
-					</div>																										
-					
+					<div id="announce-grid" ></div>
 				</div>				
 			</div>
 		</div>									 
