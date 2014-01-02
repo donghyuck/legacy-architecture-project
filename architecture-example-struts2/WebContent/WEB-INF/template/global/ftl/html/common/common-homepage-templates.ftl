@@ -55,7 +55,12 @@
 <script type="text/x-kendo-tmpl" id="announcement-detail-panel-template">		
 <div class="panel panel-default">
 	<div class="panel-header">
-	
+		<div class="k-window-actions panel-header-actions">
+			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+			<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+		</div>		
 	</div>
 	<ul class="list-group">
 		<li class="list-group-item gray">		
