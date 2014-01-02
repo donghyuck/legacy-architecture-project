@@ -207,7 +207,7 @@
 				<div class="col-lg-9">
 
 							<ul class="nav nav-tabs" id="myTab">
-							  <li><a href="#announce" data-toggle="tab" class="active">공지</a></li>
+							  <li class="active"><a href="#announce" data-toggle="tab">공지</a></li>
 							  <li><a href="#events" data-toggle="tab">이벤트</a></li>
 							</ul>							
 							<!-- Tab panes -->
