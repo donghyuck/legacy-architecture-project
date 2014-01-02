@@ -47,6 +47,11 @@ background-color: rgba(0, 0, 0, 0.2);
 	color: #ffffff;
 }
 
+.bg-metro-black {
+	background-color: #0e0e0e ;	
+	color: #ffffff;
+}
+
 .full-width-container {
 	width:100%;
 	padding-left: 15px;
