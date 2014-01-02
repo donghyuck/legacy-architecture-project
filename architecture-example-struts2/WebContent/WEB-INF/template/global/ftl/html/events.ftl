@@ -179,9 +179,10 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		
+		<#assign current_menu = action.getMenuComponent("USER_MENU", "MENU_1") />
 		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header">
 		  <div class="container">
-		    <h2><i class="fa fa-chevron-right"></i>&nbsp; 회사소개</h2>
+		    <h2><i class="fa fa-building-o"></i>&nbsp; ${ current_menu.title }</h2>
 		    <p></p>
 		  </div>
 		</div>	
