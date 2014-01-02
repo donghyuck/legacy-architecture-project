@@ -53,51 +53,50 @@
 
 <!-- EVENT -->
 <script type="text/x-kendo-tmpl" id="announcement-detail-panel-template">		
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<h4 data-bind="html:subject"></h4>
-		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
-	</div>
-	<div class="panel-body" data-bind="html:body">
-	</div>	
-	<div class="panel-footer">
-		<div class="btn-group">
-			<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h4 data-bind="html:subject"></h4>
+			<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
+		</div>
+		<div class="panel-body" data-bind="html:body"></div>	
+		<div class="panel-footer">
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
+			</div>
 		</div>
 	</div>
-</div>
 </script>
 
 <!-- announce view panel -->
 <script type="text/x-kendo-tmpl" id="announcement-view-template">		
-		<h4 data-bind="html:subject"></h4>
-		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
-		<div class="media">
-			<a class="pull-left" href="\\#">
-			#if ( user.properties.imageId != null ) {# 
-			<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
-			# } else {  #	
-			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
-			# } #
-			</a>
-			<div class="media-body">
-				<h5 class="media-heading">
-					# if( user.nameVisible ){#
-					#: user.name # (#: user.username #)
-					# } else { #
-					#: user.username #
-					# } # 		
-					# if( user.emailVisible ){#
-					<br>(#: user.email #)
-					# } #	
-				</h5>		
-			</div>
-		</div>	
-		<div class="blank-top-5" ></div>
-		<div data-bind="html:body"></div>
-		# if ("${action.view!}" == "personalized" && editable ) {#  	
-			<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
+	<h4 data-bind="html:subject"></h4>
+	<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
+	<div class="media">
+		<a class="pull-left" href="\\#">
+		#if ( user.properties.imageId != null ) {# 
+		<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
+		# } else {  #	
+		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
 		# } #
+		</a>
+		<div class="media-body">
+			<h5 class="media-heading">
+				# if( user.nameVisible ){#
+				#: user.name # (#: user.username #)
+				# } else { #
+				#: user.username #
+				# } # 		
+				# if( user.emailVisible ){#
+				<br>(#: user.email #)
+				# } #	
+			</h5>		
+		</div>
+	</div>	
+	<div class="blank-top-5" ></div>
+	<div data-bind="html:body"></div>
+	# if ("${action.view!}" == "personalized" && editable ) {#  	
+	<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
+	# } #
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
