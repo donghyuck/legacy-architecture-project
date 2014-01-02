@@ -11,6 +11,9 @@
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
 			<result name="success" type="freemarker">/html/about.ftl</result>	
 		</action>		
+		<action name="contact" class="architecture.ee.web.community.struts2.action.SocialPageAction">
+			<result name="success" type="freemarker">/html/contact.ftl</result>	
+		</action>				
 	</package>	
 
 	<package name="framework-community-admin-actions" namespace="/secure" extends="framework-default">	
