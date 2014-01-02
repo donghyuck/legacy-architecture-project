@@ -134,9 +134,7 @@
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-panel"), announcePlaceHolder );	
-			
-			kendo.fx($("#announce-panel")).expand("vertical").play();
-			
+						
 			$("#announce-actions .nav a").each(function( index ) {
 				var panel_footer_action = $(this);	
 				var panel_footer_action_icon = panel_footer_action.find('i');
@@ -146,11 +144,14 @@
 						if( panel_footer_action_icon.hasClass("fa-bars") ){
 							panel_footer_action.find('i').removeClass("fa-bars");
 							panel_footer_action.find('i').addClass("fa-angle-up");
+							kendo.fx($("#announce-grid")).expand("vertical").stop().play();							
 						}else{
 							panel_footer_action.find('i').removeClass("fa-angle-up");
 							panel_footer_action.find('i').addClass("fa-bars");
+							
+							kendo.fx($("#announce-grid")).expand("vertical").stop().reverse();
 						}		
-						$("#announce-grid").toggleClass("hide", 1000);				
+						//$("#announce-grid").toggleClass("hide", 1000);				
 					});		
 				//}	
 			} );
