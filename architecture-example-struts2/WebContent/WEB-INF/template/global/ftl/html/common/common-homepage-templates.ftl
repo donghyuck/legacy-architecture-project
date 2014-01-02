@@ -60,7 +60,7 @@
 	</div>
 	<div class="panel-body" data-bind="html:body">
 	</div>	
-	<div class="panel-footer">목록보기</div>
+	<div class="panel-footer"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-bars"></i>목록</button></div>
 </div>
 </script>
 
