@@ -138,10 +138,12 @@
 			$("#announce-actions a").each(function( index ) {
 				var panel_footer_action = $(this);	
 				var panel_footer_action_icon = panel_footer_action.find('i');
+				alert( panel_footer_action.attr("href") );
+				
 				panel_footer_action.click(function (e) {
 					e.preventDefault();		
 					$("#announce-grid").toggleClass("hide");
-				
+					
 				});				
 				
 				/*					
