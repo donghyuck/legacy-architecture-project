@@ -30,7 +30,9 @@
     <decorator name="homepage" page="homepage.jsp">
         <pattern>/*</pattern>
     </decorator>
-    
+    <decorator name="flat-homepage" page="flat-homepage.jsp">
+        <pattern>/*</pattern>
+    </decorator>    
     <decorator name="simple-homepage" page="simple-homepage.jsp">
         <pattern>/*</pattern>
     </decorator>
