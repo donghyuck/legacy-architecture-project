@@ -123,6 +123,27 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		return menuComp;
 	}
 	
+	public MenuComponent findMenuComponent(String parentMenuName, String childMenuName){ 
+		MenuComponent parentMenu = getMenuComponent(parentMenuName);
+		MenuComponent selectedMenu = null;
+		for( MenuComponent childMenu : parentMenu.getComponents() )
+		{
+			if( childMenuName.equals( childMenu.getName() ) ){
+				selectedMenu = childMenu;		
+				break;
+			}
+			if( childMenu.getComponents().size() > 0 ){
+				for( MenuComponent childMenu2 : childMenu.getComponents() ){
+					if( childMenuName.equals( childMenu2.getName() ) ){
+						selectedMenu = childMenu2;		
+						break;
+					}
+				}
+			}
+		}
+		return selectedMenu;		
+	}
+	
 	public AuthToken getAuthToken() {
 		if ( null == authToken )
 			authToken = AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().getAuthToken();
