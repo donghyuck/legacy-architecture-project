@@ -106,12 +106,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	padding-left: 30px;
 }
 
-.tab-content {
+.tab-content-borderless {
 	background-color : #FFFFFF;	
 	padding : 0 5px 5px 5px;
-	border-bottom:  1px solid #dddddd;
-	border-left:  1px solid #dddddd;
-	border-right:  1px solid #dddddd;
+	border-bottom:  0px solid #dddddd;
+	border-left:  0px solid #dddddd;
+	border-right:  0px solid #dddddd;
 	min-height: 100px;
 }
 	
