@@ -96,7 +96,7 @@
 					height: 300,
 					columns: [ 
 						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field:"subject", title: "주제"}
+						{field:"subject", title: "공지 & 이벤트"}
 					],
 					selectable: "row",
 					change: function(e) { 
