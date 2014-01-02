@@ -216,7 +216,7 @@
 					<div id="announce-panel" ></div>
 					
 					<ul class="nav nav-pills">
-						<li><a href="#"><i class="fa fa-bars"></i>&nbsp;목록</a></li>
+						<li class="pull-right"><a href="#"><i class="fa fa-bars"></i>&nbsp;목록</a></li>
 					</ul>
 					
 					<div class="content-block">
