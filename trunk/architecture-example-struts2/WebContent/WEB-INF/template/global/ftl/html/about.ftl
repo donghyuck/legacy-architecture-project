@@ -194,7 +194,7 @@
 		<!-- END HEADER -->	
 		
 		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header">
-		  <div class="container" style="background-image:'http://www.sds.samsung.co.kr/new_career/images/common/top_visual_C03.png'; ">
+		  <div class="container">
 		    <h2><i class="fa fa-building-o"></i>&nbsp; 기업소개</h2>
 		    <p></p>
 		  </div>
@@ -208,10 +208,10 @@
 						<a href="#" class="list-group-item active">
 					    기업소개
 					  </a>
-					  <a href="events.do" class="list-group-item">공지 & 이벤트</a>
-					  <a href="customers.do" class="list-group-item">고객</a>
-					  <a href="press.do" class="list-group-item">뉴스</a>
-					  <a href="contact.do" class="list-group-item">오시는길</a>
+					  <a href="${request.contextPath}/events.do" class="list-group-item">공지 & 이벤트</a>
+					  <a href="${request.contextPath}/customers.do" class="list-group-item">고객</a>
+					  <a href="${request.contextPath}/press.do" class="list-group-item">뉴스</a>
+					  <a href="${request.contextPath}/contact.do" class="list-group-item">오시는길</a>
 					</div>					
 				</div>
 				<div class="col-lg-9">
