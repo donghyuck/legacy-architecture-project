@@ -161,10 +161,8 @@
 					} );
 								
 				</#list>
-				// End : Company Social Content 
-								
-				<#if !action.user.anonymous >				
-				
+				// End : Company Social Content								
+				<#if !action.user.anonymous >							
 				</#if>	
 				// END SCRIPT            
 			}
@@ -192,10 +190,10 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-		
+		<#assign current_menu = action.getMenuComponent("USER_MENU", "MENU_1") />
 		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header">
 		  <div class="container">
-		    <h2><i class="fa fa-building-o"></i>&nbsp; 기업소개</h2>
+		    <h2><i class="fa fa-building-o"></i>&nbsp; ${ current_menu.title }</h2>
 		    <p></p>
 		  </div>
 		</div>	
