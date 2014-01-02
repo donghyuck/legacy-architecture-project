@@ -122,6 +122,7 @@
 						this.select("tr:eq(1)");
 					}
 				});
+				/**
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);						
 						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
@@ -143,17 +144,8 @@
 								$("#announce-grid").data("kendoGrid").dataSource.read();
 							});
 						}
-				} );				
-				
-				$('#myTab a').click(function (e) {
-					e.preventDefault();					
-					if(  $(this).attr('href') == '#announce' ){			
-					}
-					
-					$(this).tab('show');
-				});
-					
-											
+				} );		
+						**/					
 				<#if !action.user.anonymous >				
 				
 				</#if>	
@@ -213,12 +205,7 @@
 					  <a href="${request.contextPath}/contact.do" class="list-group-item">오시는길</a>
 					</div>					
 				</div>
-				<div class="col-lg-9">
-					<div class="panel panel-default">
-						<div class="panel-body" id="announce-view">
-						
-						</div>
-					</div>
+				<div class="col-lg-9">					
 					<div id="announce-panel" ></div>
 					<div id="announce-grid" ></div>
 				</div>				
