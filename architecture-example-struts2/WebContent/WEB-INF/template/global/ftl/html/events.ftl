@@ -134,7 +134,6 @@
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-panel"), announcePlaceHolder );	
-						
 			$("#announce-actions .nav a").each(function( index ) {
 				var panel_footer_action = $(this);	
 				var panel_footer_action_icon = panel_footer_action.find('i');
@@ -202,7 +201,7 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">					
-					<div id="announce-panel" >					
+					<div id="announce-panel" style="min-height:300px;" >					
 						<div class="alert alert-warning">
 							새로운 공지 & 이벤트가 없습니다.						
 						</div>
