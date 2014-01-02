@@ -201,7 +201,7 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">					
-					<div id="announce-panel" style="min-height:300px;" >					
+					<div id="announce-panel" style="min-height:200px;" >					
 						<div class="alert alert-warning">
 							새로운 공지 & 이벤트가 없습니다.						
 						</div>
@@ -216,13 +216,7 @@
 				</div>				
 			</div>
 		</div>									 
-		<div class="container layout">						
-				<div class="row">
-					<div class="col-lg-12">
-							
-					</div>
-				</div>		
-			</div>				
+			
 		<!-- END MAIN CONTENT -->	
 
 		<script id="rowTemplate" type="text/x-kendo-tmpl">
