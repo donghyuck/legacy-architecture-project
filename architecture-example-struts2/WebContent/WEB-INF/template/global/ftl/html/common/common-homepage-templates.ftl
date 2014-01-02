@@ -54,7 +54,7 @@
 <!-- EVENT -->
 <script type="text/x-kendo-tmpl" id="announcement-detail-panel-template">		
 <div class="panel panel-default">
-	<div class="panel-heading">
+	<div class="panel-heading">&nbsp;
 		<div class="k-window-actions panel-header-actions">&nbsp;
 			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 			<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
