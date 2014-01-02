@@ -224,7 +224,9 @@
 				</div>
 				<div class="col-lg-9">					
 					<div id="announce-panel" >					
-						<div class="alert alert-warning"새로운 공지 & 이벤트가 없습니다.</div>
+						<div class="alert alert-warning">
+							새로운 공지 & 이벤트가 없습니다.						
+						</div>
 					</div>					
 					<div id="announce-actions" class="content-block">
 					<ul class="nav nav-pills">
