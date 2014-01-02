@@ -142,8 +142,7 @@
 				var panel_footer_action_icon = panel_footer_action.find('i');
 				//if( panel_footer_action.attr("href") == "list" ){
 					panel_footer_action.click(function (e) {
-						e.preventDefault();		
-						
+						e.preventDefault();
 						if( panel_footer_action_icon.hasClass("fa-bars") ){
 							panel_footer_action.find('i').removeClass("fa-bars");
 							panel_footer_action.find('i').addClass("fa-angle-up");
@@ -151,7 +150,7 @@
 							panel_footer_action.find('i').removeClass("fa-angle-up");
 							panel_footer_action.find('i').addClass("fa-bars");
 						}		
-						$("#announce-grid").toggleClass("hide");				
+						$("#announce-grid").toggleClass("hide", 1000);				
 					});		
 				//}	
 			} );
