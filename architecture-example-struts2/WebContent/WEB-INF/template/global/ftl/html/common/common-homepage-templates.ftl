@@ -60,7 +60,11 @@
 	</div>
 	<div class="panel-body" data-bind="html:body">
 	</div>	
-	<div class="panel-footer"><button type="button" class="btn btn-primary pull-right"><i class="fa fa-bars"></i>목록</button></div>
+	<div class="panel-footer">
+		<div class="btn-group pull-right">
+			<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
+		</div>
+	</div>
 </div>
 </script>
 
