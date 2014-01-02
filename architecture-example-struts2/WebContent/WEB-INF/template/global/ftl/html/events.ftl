@@ -165,7 +165,7 @@
 			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-view").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-view"), announcePlaceHolder );					
+			kendo.bind($("#announce-panel"), announcePlaceHolder );					
 		}
 				
 		-->
@@ -219,6 +219,7 @@
 						
 						</div>
 					</div>
+					<div id="announce-panel" ></div>
 					<div id="announce-grid" ></div>
 				</div>				
 			</div>
