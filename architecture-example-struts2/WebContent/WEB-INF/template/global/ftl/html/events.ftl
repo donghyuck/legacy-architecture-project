@@ -135,7 +135,7 @@
 			$("#announce-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-panel"), announcePlaceHolder );	
 
-			$("#announce-actions a").each(function( index ) {
+			$("#announce-actions .nav a").each(function( index ) {
 				var panel_footer_action = $(this);	
 				var panel_footer_action_icon = panel_footer_action.find('i');
 				alert( panel_footer_action.attr("href") );
