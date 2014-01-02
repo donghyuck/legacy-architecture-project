@@ -120,14 +120,23 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">
-
 					<div class="row">
-						<div class="col-lg-6">
-																							
-						</div>							
-						<div class="col-lg-6">			
-											
-						</div>								
+						<div class="col-lg-12">
+							<ul class="nav nav-tabs">
+							  <li><a href="#notice" data-toggle="tab">공지</a></li>
+							  <li><a href="#events" data-toggle="tab">이벤트</a></li>
+							</ul>							
+							<!-- Tab panes -->
+							<div class="tab-content">
+							  <div class="tab-pane active" id="notice">
+							  
+							  </div>
+							  <div class="tab-pane" id="events">
+							  
+							  
+							  </div>
+							</div>																										
+						</div>														
 					</div>	
 					
 				</div>				
@@ -135,6 +144,9 @@
 		</div>									 
 		<div class="container layout">						
 				<div class="row">
+					<div class="col-lg-12">
+							
+					</div>
 				</div>		
 			</div>				
 		<!-- END MAIN CONTENT -->	
