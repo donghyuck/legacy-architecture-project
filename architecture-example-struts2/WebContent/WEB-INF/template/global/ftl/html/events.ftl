@@ -191,9 +191,7 @@
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="list-group">
-						<a href="#" class="list-group-item">
-					    기업소개
-					  </a>
+						<a href="${request.contextPath}/about.do" class="list-group-item">기업소개 </a>
 					  <a href="${request.contextPath}/events.do" class="list-group-item active">공지 & 이벤트</a>
 					  <a href="${request.contextPath}/customers.do" class="list-group-item">고객</a>
 					  <a href="${request.contextPath}/press.do" class="list-group-item">뉴스</a>
