@@ -134,17 +134,25 @@
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-panel"), announcePlaceHolder );	
-
 			$("#announce-actions .nav a").each(function( index ) {
 				var panel_footer_action = $(this);	
 				var panel_footer_action_icon = panel_footer_action.find('i');
-				alert( panel_footer_action.attr("href") );
+				if( panel_footer_action.attr("href") == "list" ){
+					panel_footer_action.click(function (e) {
+						e.preventDefault();		
+						
+						if( panel_header_action_icon.hasClass("fa-bars") ){
+							panel_header_action.find('span').removeClass("fa-bars");
+							panel_header_action.find('span').addClass("fa-angle-up");
+						}else{
+							panel_header_action.find('span').removeClass("fa-angle-up");
+							panel_header_action.find('span').addClass("fa-bars");
+						}		
+						$("#announce-grid").toggleClass("hide");				
+					});		
+				}
 				
-				panel_footer_action.click(function (e) {
-					e.preventDefault();		
-					$("#announce-grid").toggleClass("hide");
-					
-				});				
+		
 				
 				/*					
 						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
