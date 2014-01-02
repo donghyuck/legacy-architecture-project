@@ -213,16 +213,11 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">					
-					<div id="announce-panel" ></div>
-					
+					<div id="announce-panel" ></div>					
+					<div class="content-block">
 					<ul class="nav nav-pills">
 						<li class="pull-right"><a href="#"><i class="fa fa-bars"></i>&nbsp;목록</a></li>
 					</ul>
-					
-					<div class="content-block">
-					<div class="btn-group">
-						<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
-					</div>	
 					<div id="announce-grid" ></div>
 					</div>
 				</div>				
