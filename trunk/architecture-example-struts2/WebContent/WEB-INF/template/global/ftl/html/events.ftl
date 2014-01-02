@@ -206,7 +206,7 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="panel panel-default">
-						<div class="panel-body">
+						<div class="panel-body" id="announce-view">
 						
 						</div>
 					</div>
