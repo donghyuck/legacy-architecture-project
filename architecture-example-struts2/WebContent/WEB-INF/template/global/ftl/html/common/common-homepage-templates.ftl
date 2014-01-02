@@ -61,7 +61,7 @@
 	<div class="panel-body" data-bind="html:body">
 	</div>	
 	<div class="panel-footer">
-		<div class="btn-group pull-right">
+		<div class="btn-group">
 			<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
 		</div>
 	</div>
