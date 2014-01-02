@@ -141,12 +141,12 @@
 					panel_footer_action.click(function (e) {
 						e.preventDefault();		
 						
-						if( panel_header_action_icon.hasClass("fa-bars") ){
-							panel_header_action.find('span').removeClass("fa-bars");
-							panel_header_action.find('span').addClass("fa-angle-up");
+						if( panel_footer_action_icon.hasClass("fa-bars") ){
+							panel_footer_action.find('i').removeClass("fa-bars");
+							panel_footer_action.find('i').addClass("fa-angle-up");
 						}else{
-							panel_header_action.find('span').removeClass("fa-angle-up");
-							panel_header_action.find('span').addClass("fa-bars");
+							panel_footer_action.find('i').removeClass("fa-angle-up");
+							panel_footer_action.find('i').addClass("fa-bars");
 						}		
 						$("#announce-grid").toggleClass("hide");				
 					});		
