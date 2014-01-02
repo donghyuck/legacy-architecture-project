@@ -205,10 +205,9 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-lg-12">
+
 							<ul class="nav nav-tabs" id="myTab">
-							  <li><a href="#announce" data-toggle="tab">공지</a></li>
+							  <li><a href="#announce" data-toggle="tab" class="active">공지</a></li>
 							  <li><a href="#events" data-toggle="tab">이벤트</a></li>
 							</ul>							
 							<!-- Tab panes -->
@@ -245,9 +244,8 @@
 							  
 							  
 							  </div>
-							</div>																										
-						</div>														
-					</div>	
+							  
+					</div>																										
 					
 				</div>				
 			</div>
