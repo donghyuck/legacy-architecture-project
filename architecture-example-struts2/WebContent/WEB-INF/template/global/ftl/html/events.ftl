@@ -238,8 +238,8 @@
 #: announceId #
 		            </td>
 		            <td class="details">
-			           <span class="title">#: subject #</span>
-			           <small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
+			           <span class="title">#: subject #</span><br>
+			           <small class="text-danger">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
 		            </td>
 	           </tr>
             </script>
