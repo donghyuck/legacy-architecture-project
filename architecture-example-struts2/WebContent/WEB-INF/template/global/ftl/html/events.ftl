@@ -157,7 +157,7 @@
 			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-panel").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-grid"), announcePlaceHolder );					
+			kendo.bind($("#announce-panel"), announcePlaceHolder );					
 		}
 				
 		-->
