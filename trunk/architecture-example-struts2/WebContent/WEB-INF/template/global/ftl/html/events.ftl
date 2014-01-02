@@ -211,7 +211,7 @@
 						<li class="pull-right"><a href="#list"><i class="fa fa-bars"></i>&nbsp;목록</a></li>						
 					</ul>
 					<div class="blank-top-5" ></div>
-					<div id="announce-grid" class="hide"></div>
+					<div id="announce-grid" style="display:none;"></div>
 					</div>
 				</div>				
 			</div>
