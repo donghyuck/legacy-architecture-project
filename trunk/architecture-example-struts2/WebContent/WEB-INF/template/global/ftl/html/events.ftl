@@ -212,7 +212,7 @@
 							  <li><a href="#events" data-toggle="tab">이벤트</a></li>
 							</ul>							
 							<!-- Tab panes -->
-							<div class="tab-content">
+							<div class="tab-content-borderless">
 							  <div class="tab-pane active" id="announce">
 
 						<!-- start announce panel -->
