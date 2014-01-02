@@ -215,6 +215,9 @@
 				<div class="col-lg-9">					
 					<div id="announce-panel" ></div>
 					<div id="announce-grid" ></div>
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary"><i class="fa fa-bars"></i>&nbsp;목록</button>
+			</div>					
 				</div>				
 			</div>
 		</div>									 
