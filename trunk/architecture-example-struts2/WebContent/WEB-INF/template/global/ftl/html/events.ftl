@@ -122,9 +122,29 @@
 						this.select("tr:eq(1)");
 					}
 				});
-				/**
-				$("#announce-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);						
+				<#if !action.user.anonymous >				
+				
+				</#if>	
+				// END SCRIPT            
+			}
+		}]);	
+		
+		function showAnnounce () {
+			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
+			var template = kendo.template($('#announcement-detail-panel-template').html());			
+			$("#announce-panel").html( template(announcePlaceHolder) );
+			kendo.bind($("#announce-panel"), announcePlaceHolder );	
+
+			$("#announce-panel .btn-group button").each(function( index ) {
+				var panel_footer_action = $(this);	
+				var panel_footer_action_icon = panel_header_action.find('i');
+				panel_header_action.click(function (e) {
+					e.preventDefault();		
+					$("#announce-grid").toggleClass("hide");
+				
+				});				
+				
+				/*					
 						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
@@ -143,23 +163,10 @@
 								e.preventDefault();		
 								$("#announce-grid").data("kendoGrid").dataSource.read();
 							});
-						}
-				} );		
-						**/					
-				<#if !action.user.anonymous >				
-				
-				</#if>	
-				// END SCRIPT            
-			}
-		}]);	
-		
-		function showAnnounce () {
-			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
-			var template = kendo.template($('#announcement-detail-panel-template').html());			
-			$("#announce-panel").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-panel"), announcePlaceHolder );					
-		}
-				
+				}
+				*/
+			} );
+		}				
 		-->
 		</script>		
 		<style scoped="scoped">
