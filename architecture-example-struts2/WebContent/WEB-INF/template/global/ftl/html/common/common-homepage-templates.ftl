@@ -58,9 +58,8 @@
 		<h4 data-bind="html:subject"></h4>
 		<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
 	</div>
-	<div class="panel-body">
-		<div data-bind="html:body"></div>
-	</body>	
+	<div class="panel-body" data-bind="html:body">
+	</div>	
 	<div class="panel-footer">목록보기</div>
 </div>
 </script>
