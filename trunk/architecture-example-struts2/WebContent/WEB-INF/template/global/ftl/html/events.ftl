@@ -297,7 +297,7 @@
 		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
 <div class="announcement col-sm-6 col-md-4">
 <div class="thumbnail">
-	<img src="http://th01.deviantart.net/fs70/PRE/f/2014/002/8/5/sister_benedron_cosplay_by_natasherz-d70hy0c.jpg" alt="...">
+	<img src="http://fc00.deviantart.net/fs71/f/2010/190/8/2/Notice_by_kerokero13.jpg" alt="...">
 	<div class="caption">
 		<h4>#: subject #</h4>
 		<p class="text-muted"><small>#: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small></p>
