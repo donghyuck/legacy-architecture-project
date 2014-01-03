@@ -30,6 +30,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		padding-top: 70px; 
 		background-color : #F5F5F5;	
 	}
+	
 
 	.k-grid table tr.k-state-selected{
 		background: #428bca;
