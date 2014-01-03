@@ -420,6 +420,10 @@
 										<td><span data-bind="text: displayName"></span></td>
 									</tr>	
 									<tr>
+										<th>도메인</th>								
+										<td><span data-bind="text: domainName"></span></td>
+									</tr>										
+									<tr>
 										<th>등록 아이디</th>
 										<td><span class="label label-info"><span data-bind="text: name"></span></span><code><span data-bind="text: companyId"></span></code></td>
 									</tr>			
