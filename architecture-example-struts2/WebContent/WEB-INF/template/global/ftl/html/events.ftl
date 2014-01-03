@@ -98,6 +98,8 @@
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
 							var selectedCell = this.items( selectedCells );	    	
+							
+						 alert(	kendo.stringify(selectedCell));
 							$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
 							/**
 							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
@@ -111,7 +113,7 @@
 							announcePlaceHolder.user = selectedCell.user;			
 							announcePlaceHolder.editable = false;					
 							**/ 
-							showAnnounce();	
+							//showAnnounce();	
 						}
 					},
 					dataBound: function(e) {
