@@ -203,13 +203,17 @@
 		<div class="container layout">	
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
+					<!-- start side menu -->		
 					<div class="list-group">
-						<a href="${request.contextPath}/about.do" class="list-group-item active">기업소개 </a>
-					  <a href="${request.contextPath}/events.do" class="list-group-item">공지 & 이벤트</a>
-					  <a href="${request.contextPath}/customers.do" class="list-group-item">고객</a>
-					  <a href="${request.contextPath}/press.do" class="list-group-item">뉴스</a>
-					  <a href="${request.contextPath}/contact.do" class="list-group-item">오시는길</a>
-					</div>						
+					<#list current_menu.parent.components as item >
+						<#if item.name ==  current_menu.name >
+						<a href="${item.page}" class="list-group-item active">${ item.title } </a>
+						<#else>
+						<a href="${item.page}" class="list-group-item">${ item.title } </a>
+						</#if>						
+					</#list>										
+					</div>	
+					<!-- end side menu -->					
 				</div>
 				<div class="col-lg-9">
 
