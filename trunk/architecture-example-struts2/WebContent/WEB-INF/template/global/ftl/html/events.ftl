@@ -97,7 +97,7 @@
 					change: function(e) { 
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
-							var selectedCell = this.items( selectedCells[0].index() );	    	
+							var selectedCell = selectedCells[0];	    	
 							
 						alert(	kendo.stringify(selectedCell));
 						//	$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
