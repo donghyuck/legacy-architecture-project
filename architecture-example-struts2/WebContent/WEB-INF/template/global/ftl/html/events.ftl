@@ -251,7 +251,7 @@
 			<div class="container">
 				<div class="col-lg-12">	
 					<h1>${ current_menu.title }</h1>
-					<h4><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~!</h4>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~! &nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>		
@@ -275,7 +275,7 @@
 				<div class="col-lg-9">						
 					<div id="announce-list-view"></div>	
 					<div id="announce-grid-panel" class="panel panel-default">
-						<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;목록
+						<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
 							<div class="k-window-actions panel-header-actions">
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
