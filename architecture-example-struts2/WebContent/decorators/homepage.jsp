@@ -53,7 +53,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	}
 .
 
-	header div h1 {
+	header h1 {
 		color: white;
 		font-weight: 300;
 		margin-bottom: 0;
