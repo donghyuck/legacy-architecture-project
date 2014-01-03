@@ -223,7 +223,8 @@
 			height: 0;
 			clear: both;
 			visibility: hidden;
-			}
+		}
+		
 		.k-listview
 		{
 			padding: 0;
@@ -232,11 +233,12 @@
 		}
 				
 		.announcement {
-			min-height: 320px;
-			min-width: 320px;
-			padding: 0px;
-			border: 0px;
-			margin-bottom: -1px;
+			float: left;
+			width: 220px;
+			height: 110px;
+			margin: 0;
+			padding: 5px;
+			cursor: pointer;
 		}
 							
 		</style>   	
