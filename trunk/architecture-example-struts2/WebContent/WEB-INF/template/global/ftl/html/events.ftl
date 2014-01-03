@@ -96,7 +96,7 @@
 					template: kendo.template($("#announce-list-view-template").html()),
 					change: function(e) { 
 						var selectedCells = this.select();
-						alert( selectedCells );
+						alert( kendo.stringify( selectedCells ) );
 						
 						if( selectedCells.length > 0){
 							var selectedCell = this.items( selectedCells );	    	
