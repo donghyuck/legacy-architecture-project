@@ -115,7 +115,7 @@
 						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								$("#announce-grid-panel .panel-body, #announce-list-view-panel .list-group ").toggleClass("hide");
+								$("#announce-list-view-panel .panel-body, #announce-list-view-panel .list-group ").toggleClass("hide");
 								var panel_header_action_icon = panel_header_action.find('span');
 								if( panel_header_action_icon.hasClass("k-i-minimize") ){
 									panel_header_action.find('span').removeClass("k-i-minimize");
