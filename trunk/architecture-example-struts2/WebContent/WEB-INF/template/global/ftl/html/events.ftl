@@ -204,6 +204,9 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">					
+					<div class="page-header">
+						<h1>공지 & 이벤트 <small>모든 이벤트와 공지사항을 한눈에 ~!</small></h1>
+					</div>				
 					<div id="announce-view-panel" style="min-height:200px;" >					
 						<div class="alert alert-warning">
 							새로운 공지 & 이벤트가 없습니다.						
