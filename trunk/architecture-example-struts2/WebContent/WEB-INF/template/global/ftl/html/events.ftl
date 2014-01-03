@@ -86,10 +86,7 @@
 							} 
 						},
 						pageSize: 10,
-						error:handleKendoAjaxError,
-						requestStart: function(e){
-							//alert( "start" );
-						},					
+						error:handleKendoAjaxError,				
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
