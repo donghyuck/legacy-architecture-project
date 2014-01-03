@@ -96,8 +96,33 @@
 				
 				$("#announce-list-view").kendoListView({
 					dataSource: $("#announce-list-view").data( "dataSource"),
-					selectable: "multiple",
-					template: kendo.template($("#announce-list-view-template").html())
+					selectable: "row",
+					template: kendo.template($("#announce-list-view-template").html()),
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    	
+							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
+							announcePlaceHolder.announceId = selectedCell.announceId;
+							announcePlaceHolder.subject = selectedCell.subject;
+							announcePlaceHolder.body = selectedCell.body;
+							announcePlaceHolder.startDate = selectedCell.startDate ;
+							announcePlaceHolder.endDate = selectedCell.endDate;
+							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
+							announcePlaceHolder.creationDate = selectedCell.creationDate;
+							announcePlaceHolder.user = selectedCell.user;			
+							announcePlaceHolder.editable = false;					 
+							showAnnounce();	
+						}
+					},
+					dataBound: function(e) {
+						if( this.dataSource.data().length == 0 ){
+						//	$("#announce-view-panel").html( 
+						//		$('#alert-message-template').html() 
+						//	);
+						}							
+						this.select( this.element.children().first() );				
+					}
 				});
             					
 				/**
@@ -133,7 +158,7 @@
 						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
 						{field:"subject", title: "공지 & 이벤트"}
 					],
-					selectable: "row",
+					selectable: true,
 					change: function(e) { 
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
@@ -153,22 +178,21 @@
 					},
 					dataBound: function(e) {
 						if( this.dataSource.data().length == 0 ){
-							$("#announce-view-panel").html( 
-								$('#alert-message-template').html() 
-							);
-						}						
-						var selectedCells = this.select();						
-						this.select("tr:eq(1)");						
+						//	$("#announce-view-panel").html( 
+						//		$('#alert-message-template').html() 
+						//	);
+						}							
+						this.select( this.element.children().first() );				
 					}
 				});
 				**/
 				
-				$("#announce-grid-panel .panel-header-actions a").each(function( index ) {
+				$("#announce-list-view-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);						
 						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								$("#announce-grid-panel .panel-body, #announce-grid-panel .list-group ").toggleClass("hide");
+								$("#announce-grid-panel .panel-body, #announce-list-view-panel .list-group ").toggleClass("hide");
 								var panel_header_action_icon = panel_header_action.find('span');
 								if( panel_header_action_icon.hasClass("k-i-minimize") ){
 									panel_header_action.find('span').removeClass("k-i-minimize");
@@ -181,7 +205,7 @@
 						} else if (panel_header_action.text() == "Refresh" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								//$("#announce-grid").data("kendoGrid").dataSource.read();
+								 $("#announce-list-view").data( "dataSource").read();
 							});
 						}
 			} );						
@@ -194,10 +218,10 @@
 		}]);	
 		
 		function showAnnounce () {
-			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
+			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-view-panel"), announcePlaceHolder );				
+			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
 		}				
 		-->
 		</script>		
@@ -273,8 +297,8 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">						
-					<div id="announce-view"></div>	
-					<div id="announce-grid-panel" class="panel panel-default">
+					<div id="announce-view-panel"></div>	
+					<div id="announce-list-view-panel" class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
 							<div class="k-window-actions panel-header-actions">
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
