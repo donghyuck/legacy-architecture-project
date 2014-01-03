@@ -99,7 +99,7 @@
 						if( selectedCells.length > 0){
 							var selectedCell = this.items( selectedCells );	    	
 							
-						 alert(	kendo.stringify(selectedCell));
+						 alert(	kendo.stringify(selectedCells));
 							$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
 							/**
 							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
