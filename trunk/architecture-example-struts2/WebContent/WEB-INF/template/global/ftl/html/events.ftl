@@ -283,7 +283,7 @@
 							</div>						
 						</div>
 						<div class="panel-body hide">
-							<div id="announce-view-panel" ></div>	
+							<div id="announce-list-view"></div>	
 						</div>
 					</div>					
 				</div>				
