@@ -89,10 +89,7 @@
 						error:handleKendoAjaxError,
 						requestStart: function(e){
 							alert( "start" );
-						},
-						requestEnd: function(e){
-							alert( this.data().length );
-						},						
+						},					
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
@@ -124,6 +121,7 @@
 						}
 					},
 					dataBound: function(e) {
+						alert( this.dataSource.data().length) ;
 						var selectedCells = this.select();						
 						this.select("tr:eq(1)");						
 					}
