@@ -272,10 +272,7 @@
 					</div>	
 					<!-- end side menu -->				
 				</div>
-				<div class="col-lg-9">							
-					<div id="announce-view-panel" >					
-					</div>				
-					
+				<div class="col-lg-9">						
 					<div id="announce-list-view"></div>	
 					<div id="announce-grid-panel" class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;목록
@@ -286,7 +283,7 @@
 							</div>						
 						</div>
 						<div class="panel-body hide">
-							<div id="announce-grid"></div>
+							<div id="announce-view-panel" ></div>	
 						</div>
 					</div>					
 				</div>				
@@ -295,23 +292,15 @@
 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
-<div class="announcement col-sm-6 col-md-4">
-<div class="thumbnail">
-	<img src="http://fc00.deviantart.net/fs71/f/2010/190/8/2/Notice_by_kerokero13.jpg" alt="...">
-	<div class="caption">
-		<h5>#: subject #</h5>
-		<p class="text-muted"><small>#: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small></p>
-		</div>
-	</div>
-</div>
-    		<!--
-			<div class="announcement">
-
-					<span class="title">#: subject #</span><br>
-					<small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
-
+		<div class="announcement col-sm-6 col-md-4">
+			<div class="thumbnail">
+				<img src="http://fc00.deviantart.net/fs71/f/2010/190/8/2/Notice_by_kerokero13.jpg" alt="...">
+				<div class="caption">
+					<h5>#: subject #</h5>
+					<p class="text-muted"><small>#: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small></p>
+				</div>
 			</div>
-			-->
+		</div>
 		</script>
 		
 		<script id="rowTemplate" type="text/x-kendo-tmpl">
