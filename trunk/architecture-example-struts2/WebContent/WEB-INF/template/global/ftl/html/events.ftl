@@ -121,7 +121,13 @@
 						}
 					}
 				);
-									
+				
+				$("#announce-list-view").kendoListView({
+					dataSource: dataSource,
+					selectable: "multiple",
+					template: kendo.template($("#announce-list-view-template").html())
+				});
+            					
 				/**
 				$("#announce-grid").data( "announcePlaceHolder", new Announce () );	
 				$("#announce-grid").kendoGrid({
@@ -286,7 +292,10 @@
 		</div>									 
 			
 		<!-- END MAIN CONTENT -->	
-
+		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
+			<div class="announcement">fdasfs</div>
+		</script>
+		
 		<script id="rowTemplate" type="text/x-kendo-tmpl">
 			<tr>
 				<td  class="text-center">#: announceId #</td>
