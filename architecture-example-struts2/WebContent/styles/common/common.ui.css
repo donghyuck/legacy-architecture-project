@@ -134,7 +134,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 .embossed-text{
     text-shadow: -1px -1px 1px #fff, 1px 1px 1px #000;
-    color: #9c8468;
+    /** color: #9c8468;*/
     opacity: 0.3;
 }
 
