@@ -91,7 +91,7 @@
 							alert( "start" );
 						},
 						requestEnd: function(e){
-							alert( e.response.length );
+							alert( this.data().length );
 						},						
 						schema: {
 							data : "targetAnnounces",
