@@ -212,7 +212,7 @@
 		}
 
 		.k-listview div.k-state-selected{
-			background: #428bca;
+			background: #ffffff;
 			color: #ffffff; 
 		}
 
