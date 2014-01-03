@@ -70,8 +70,60 @@
 
 
 				// 1. Announces 				
-				$("#announce-grid").data( "announcePlaceHolder", new Announce () );				
+				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );		
+				$("#announce-list-view").data( "dataSource", 
+					dataSource : new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-announce.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}
+							} 
+						},
+						pageSize: 10,
+						error:handleKendoAjaxError,
+						requestStart: function(e){
+							//alert( "start" );
+						},					
+						schema: {
+							data : "targetAnnounces",
+							model : Announce
+						}
+					}),
+					rowTemplate: kendo.template($("#rowTemplate").html()),
+					sortable: true,
+					height: 300,
+					columns: [ 
+						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field:"subject", title: "공지 & 이벤트"}
+					],
+					selectable: "row",
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    	
+							var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
+							announcePlaceHolder.announceId = selectedCell.announceId;
+							announcePlaceHolder.subject = selectedCell.subject;
+							announcePlaceHolder.body = selectedCell.body;
+							announcePlaceHolder.startDate = selectedCell.startDate ;
+							announcePlaceHolder.endDate = selectedCell.endDate;
+							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
+							announcePlaceHolder.creationDate = selectedCell.creationDate;
+							announcePlaceHolder.user = selectedCell.user;			
+							announcePlaceHolder.editable = false;					 
+							//showAnnounce();	
+						}
+					}
+				);
+									
 				/**
+				$("#announce-grid").data( "announcePlaceHolder", new Announce () );	
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
 						transport: {
@@ -214,7 +266,9 @@
 				</div>
 				<div class="col-lg-9">							
 					<div id="announce-view-panel" >					
-					</div>					
+					</div>				
+					
+					<div id="announce-list-view"></div>	
 					<div id="announce-grid-panel" class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;목록
 							<div class="k-window-actions panel-header-actions">
