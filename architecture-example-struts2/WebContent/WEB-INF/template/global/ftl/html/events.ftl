@@ -122,7 +122,9 @@
 					},
 					dataBound: function(e) {
 						if( this.dataSource.data().length == 0 ){
-							$("#announce-view-panel").html( kendo.template($('#alert-message-template').html() );
+							$("#announce-view-panel").html( 
+								$('#alert-message-template').html() 
+							);
 						}						
 						var selectedCells = this.select();						
 						this.select("tr:eq(1)");						
