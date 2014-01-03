@@ -210,7 +210,12 @@
 			background: #428bca;
 			color: #ffffff; 
 		}
-					
+
+		.k-listview table tr.k-state-selected{
+			background: #428bca;
+			color: #ffffff; 
+		}
+							
 		</style>   	
 	</head>
 	<body>
