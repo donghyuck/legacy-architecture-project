@@ -57,6 +57,9 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		font-weight: 300;
 	}
 		
+	.navbar {
+		boder-buttom : 0px;
+	}		
 		#account-panel {
 			margin-top : 0 px;
 			padding-top : 10px;
