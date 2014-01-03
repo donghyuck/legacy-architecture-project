@@ -128,10 +128,16 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	border-top:  0px solid #dddddd;
 }
 
+.shadowless {
+	border-radius: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+}
+
 /** Main body ------------------------------------ */
 .page-title {
-        text-shadow: 0px 1px 1px #4d4d4d;
-        color: #222;
+	text-shadow: 0px 1px 1px #4d4d4d;
+	color: #222;
 }
 
 .page-embossed-title{
