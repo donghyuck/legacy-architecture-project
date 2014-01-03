@@ -117,9 +117,9 @@
 							showAnnounce();	
 						}
 					},
-					dataBound: function(e) {					
-						var selectedCells = this.select();
-						this.select("tr:eq(1)");
+					dataBound: function(e) {
+						var selectedCells = this.select();						
+						this.select("tr:eq(1)");						
 					}
 				});
 				
@@ -170,12 +170,7 @@
 			background: #428bca;
 			color: #ffffff; 
 		}
-		
-		#announce-view .popover {
-			position : relative;
-			max-width : 500px;
-		}
-						
+					
 		</style>   	
 	</head>
 	<body>
@@ -194,7 +189,8 @@
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">			
 			<div class="row">
-				<div class="col-lg-3 visible-lg">				
+				<div class="col-lg-3 visible-lg">		
+					<!-- start side menu -->		
 					<div class="list-group">
 					<#list current_menu.parent.components as item >
 						<#if item.name ==  current_menu.name >
@@ -202,11 +198,12 @@
 						<#else>
 						<a href="${item.page}" class="list-group-item">${ item.title } </a>
 						</#if>						
-					</#list>							
-					</div>					
+					</#list>										
+					</div>	
+					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">							
-					<div id="announce-view-panel" style="min-height:200px;" >					
+					<div id="announce-view-panel" >					
 						<div class="alert alert-warning">
 							새로운 공지 & 이벤트가 없습니다.						
 						</div>
