@@ -189,15 +189,16 @@
 	<body>
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<!-- END HEADER -->	
-		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1") />
-		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header bg-metro-black">
-		  <div class="container">
-		    <h2 class="page-title"><i class="fa fa-building-o"></i>&nbsp; ${ current_menu.title }</h2>
-		    <p></p>
-		  </div>
-		</div>	
-				
+		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1_1") />
+		<header>
+			<div class="container">
+				<div class="col-lg-12">	
+					<h1>${ current_menu.title }</h1>
+					<h4><i class="fa fa-quote-left"></i>&nbsp; ${action.user.company.displayName}를 소개합니다.</h4>
+				</div>
+			</div>
+		</header>				
+		<!-- END HEADER -->					
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">	
 			<div class="row">
