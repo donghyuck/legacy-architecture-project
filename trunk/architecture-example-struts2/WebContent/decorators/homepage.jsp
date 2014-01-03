@@ -54,7 +54,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	}
 
 	header h4 {
-		color: #cccccc;
+		color: white;
 		font-weight: 300;
 	}
 		
