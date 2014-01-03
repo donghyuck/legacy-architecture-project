@@ -221,7 +221,7 @@
 				</div>
 				<div class="col-lg-9">		
 					<div id="announce-view-panel"></div>	
-					<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
+					<div id="announce-list-view-panel" class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
 							<div class="k-window-actions panel-header-actions">
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
