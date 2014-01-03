@@ -299,8 +299,8 @@
 <div class="thumbnail">
 	<img src="http://th01.deviantart.net/fs70/PRE/f/2014/002/8/5/sister_benedron_cosplay_by_natasherz-d70hy0c.jpg" alt="...">
 	<div class="caption">
-		<h3>#: subject #</h3>
-		<p class="text-muted"><small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small></p>
+		<h4>#: subject #</h4>
+		<p class="text-muted"><small>#: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small></p>
 		</div>
 	</div>
 </div>
