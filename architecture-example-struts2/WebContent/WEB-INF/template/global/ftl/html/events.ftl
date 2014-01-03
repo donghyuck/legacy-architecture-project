@@ -295,7 +295,7 @@
 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
-
+<div class="col-sm-6 col-md-4">
 <div class="thumbnail">
       <img data-src="holder.js/300x200" alt="...">
       <div class="caption">
@@ -303,6 +303,7 @@
         <small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>
       </div>
     </div>
+</div>
     		<!--
 			<div class="announcement">
 
