@@ -232,12 +232,12 @@
 			min-height: 360px;
 		}
 				
+		#announce-list-view {
+			padding: 0px;
+			border: 0px;		
+		}
+				
 		.announcement {
-			float: left;
-			width: 220px;
-			height: 110px;
-			margin: 0;
-			padding: 5px;
 			cursor: pointer;
 		}
 							
@@ -295,14 +295,14 @@
 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
-<div class="col-sm-6 col-md-4">
+<div class="announcement col-sm-6 col-md-4">
 <div class="thumbnail">
-      <img data-src="holder.js/300x200" alt="...">
-      <div class="caption">
-        <h3>#: subject #</h3>
-        <small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>
-      </div>
-    </div>
+	<img data-src="holder.js/300x200" alt="...">
+	<div class="caption">
+		<h3>#: subject #</h3>
+		<p>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</p>
+		</div>
+	</div>
 </div>
     		<!--
 			<div class="announcement">
