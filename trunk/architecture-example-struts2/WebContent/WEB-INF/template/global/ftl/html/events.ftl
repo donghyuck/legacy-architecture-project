@@ -215,6 +215,14 @@
 			background: #428bca;
 			color: #ffffff; 
 		}
+		
+		.announcement {
+			min-height: 320px;
+			min-width: 320px;
+			padding: 0px;
+			border: 0px;
+			margin-bottom: -1px;
+		}
 							
 		</style>   	
 	</head>
