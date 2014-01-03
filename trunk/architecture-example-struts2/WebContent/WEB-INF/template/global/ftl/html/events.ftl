@@ -72,7 +72,7 @@
 				// 1. Announces 				
 				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );		
 				$("#announce-list-view").data( "dataSource", 
-					dataSource : new kendo.data.DataSource({
+					new kendo.data.DataSource({
 						transport: {
 							read: {
 								type : 'POST',
