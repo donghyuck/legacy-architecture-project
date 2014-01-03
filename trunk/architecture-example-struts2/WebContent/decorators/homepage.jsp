@@ -48,6 +48,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	}
 
 	header.cloud {
+	    color: white;
 		background: #0070b8 url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
