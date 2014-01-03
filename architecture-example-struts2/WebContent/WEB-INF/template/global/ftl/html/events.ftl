@@ -186,7 +186,7 @@
 			<div class="container layout">
 				<div class="col-lg-12">	
 					<h1>${ current_menu.title }</h1>
-					<h4><i class="fa fa-quote-left"></i>모든 이벤트와 공지사항을 한눈에 ~!</h4>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~!</h4>
 				</div>
 			</div>
 		</header>		
