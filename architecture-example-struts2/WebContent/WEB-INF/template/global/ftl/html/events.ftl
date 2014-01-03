@@ -122,6 +122,30 @@
 						this.select("tr:eq(1)");
 					}
 				});
+				
+				$("#announce-grid-panel .panel-header-actions a").each(function( index ) {
+						var panel_header_action = $(this);						
+						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#announce-grid-panel .panel-body, .list-group ").toggleClass("hide");
+								var panel_header_action_icon = panel_header_action.find('span');
+								if( panel_header_action_icon.hasClass("k-i-minimize") ){
+									panel_header_action.find('span').removeClass("k-i-minimize");
+									panel_header_action.find('span').addClass("k-i-maximize");
+								}else{
+									panel_header_action.find('span').removeClass("k-i-maximize");
+									panel_header_action.find('span').addClass("k-i-minimize");
+								}								
+							});
+						} else if (panel_header_action.text() == "Refresh" ){
+							panel_header_action.click(function (e) {
+								e.preventDefault();		
+								$("#announce-grid").data("kendoGrid").dataSource.read();
+							});
+						}
+			} );						
+										
 				<#if !action.user.anonymous >				
 				
 				</#if>	
@@ -132,28 +156,8 @@
 		function showAnnounce () {
 			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
-			$("#announce-panel").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-panel"), announcePlaceHolder );	
-			$("#announce-actions .nav a").each(function( index ) {
-				var panel_footer_action = $(this);	
-				var panel_footer_action_icon = panel_footer_action.find('i');
-				//if( panel_footer_action.attr("href") == "list" ){
-					panel_footer_action.click(function (e) {
-						e.preventDefault();
-						if( panel_footer_action_icon.hasClass("fa-bars") ){
-							panel_footer_action.find('i').removeClass("fa-bars");
-							panel_footer_action.find('i').addClass("fa-angle-up");
-							kendo.fx($("#announce-grid")).expand("vertical").stop().play();							
-						}else{
-							panel_footer_action.find('i').removeClass("fa-angle-up");
-							panel_footer_action.find('i').addClass("fa-bars");
-							
-							kendo.fx($("#announce-grid")).expand("vertical").stop().reverse();
-						}		
-						//$("#announce-grid").toggleClass("hide", 1000);				
-					});		
-				//}	
-			} );
+			$("#announce-view-panel").html( template(announcePlaceHolder) );
+			kendo.bind($("#announce-view-panel"), announcePlaceHolder );				
 		}				
 		-->
 		</script>		
@@ -200,30 +204,23 @@
 					</div>					
 				</div>
 				<div class="col-lg-9">					
-					<div id="announce-panel" style="min-height:200px;" >					
+					<div id="announce-view-panel" style="min-height:200px;" >					
 						<div class="alert alert-warning">
 							새로운 공지 & 이벤트가 없습니다.						
 						</div>
 					</div>					
-					<div id="announce-actions" class="content-block">
-					<ul class="nav nav-pills">
-						<li class="pull-right"><a href="#list"><i class="fa fa-bars"></i>&nbsp;목록</a></li>						
-					</ul>
-					<div class="panel panel-default">
+					<div id="announce-grid-panel" class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;목록
 							<div class="k-window-actions panel-header-actions">
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-							</div>
-						
+							</div>						
 						</div>
 						<div class="panel-body">
 							<div id="announce-grid"></div>
 						</div>
 					</div>					
-					
-					</div>
 				</div>				
 			</div>
 		</div>									 
