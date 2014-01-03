@@ -98,6 +98,8 @@
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
 							var selectedCell = this.items( selectedCells );	    	
+							$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
+							/**
 							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 							announcePlaceHolder.announceId = selectedCell.announceId;
 							announcePlaceHolder.subject = selectedCell.subject;
@@ -107,7 +109,8 @@
 							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
 							announcePlaceHolder.user = selectedCell.user;			
-							announcePlaceHolder.editable = false;					 
+							announcePlaceHolder.editable = false;					
+							**/ 
 							showAnnounce();	
 						}
 					},
