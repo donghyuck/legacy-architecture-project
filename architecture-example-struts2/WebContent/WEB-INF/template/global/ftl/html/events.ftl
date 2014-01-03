@@ -194,11 +194,11 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1_2") />
-		<header>
+		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
 					<h1>${ current_menu.title }</h1>
-					<h4 class="text-info"><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~! &nbsp;<i class="fa fa-quote-right"></i></h4>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~! &nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>		
