@@ -211,7 +211,7 @@
 			color: #ffffff; 
 		}
 
-		.k-listview table tr.k-state-selected{
+		.k-listview div.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
 		}
