@@ -397,7 +397,7 @@
 		<div class="container full-width-container">		
 			<div class="row">			
 				<div class="page-header">
-					<h1><span data-bind="text: title"></span></h1><small class="text-muted"><i class="fa fa-quote-left fa-2x pull-left"></i><span data-bind="text: description"></span></small>
+					<h1><span data-bind="text: title"></span><small class="text-muted"><i class="fa fa-quote-left fa-2x"></i><span data-bind="text: description"></span></small></h1>
 				</div>			
 			</row>	
 			<div class="row full-width-row">	
