@@ -403,7 +403,7 @@
 			<div class="row full-width-row">	
 				<div class="col-lg-12">
 					<ul class="nav nav-tabs" id="myTab">
-					  <li class="active"><a href="#site-info"><i class="fa fa-certificate"></i> 라이선스 정보</a></li>
+					  <li class="active"><a href="#site-info"><i class="fa fa-sitemap"></i> 사이트 정보</a></li>
 					  <li><a href="#template-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
 					  <li><a href="#image-mgmt"><i class="fa fa-picture-o"></i> 이미지 관리</a></li>
 					  <li><a href="#attachment-mgmt"><i class="fa fa-paperclip"></i> 첨부파일 관리</a></li>
