@@ -270,7 +270,12 @@
 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
-			<div class="announcement">fdasfs</div>
+			<div class="announcement">
+
+					<span class="title">#: subject #</span><br>
+					<small>기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
+
+			</div>
 		</script>
 		
 		<script id="rowTemplate" type="text/x-kendo-tmpl">
