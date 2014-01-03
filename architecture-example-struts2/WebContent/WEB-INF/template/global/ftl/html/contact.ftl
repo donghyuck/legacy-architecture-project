@@ -101,7 +101,7 @@
 			<div class="container">
 				<div class="col-lg-12">	
 					<h1>${ current_menu.title }</h1>
-					<h4 class="embossed-text"><i class="fa fa-quote-left"></i>&nbsp; ${action.user.company.displayName} 를 찾아오시는 방법입니다.&nbsp;<i class="fa fa-quote-right"></i></h4>
+					<h4 class="text-primary"><i class="fa fa-quote-left"></i>&nbsp; ${action.user.company.displayName} 를 찾아오시는 방법입니다.&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>	
