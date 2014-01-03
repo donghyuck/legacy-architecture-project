@@ -94,32 +94,7 @@
 							data : "targetAnnounces",
 							model : Announce
 						}
-					}),
-					rowTemplate: kendo.template($("#rowTemplate").html()),
-					sortable: true,
-					height: 300,
-					columns: [ 
-						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field:"subject", title: "공지 & 이벤트"}
-					],
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    	
-							var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );
-							announcePlaceHolder.announceId = selectedCell.announceId;
-							announcePlaceHolder.subject = selectedCell.subject;
-							announcePlaceHolder.body = selectedCell.body;
-							announcePlaceHolder.startDate = selectedCell.startDate ;
-							announcePlaceHolder.endDate = selectedCell.endDate;
-							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
-							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;			
-							announcePlaceHolder.editable = false;					 
-							//showAnnounce();	
-						}
-					}
+					})
 				);
 				
 				$("#announce-list-view").kendoListView({
