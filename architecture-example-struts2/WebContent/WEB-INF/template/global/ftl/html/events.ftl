@@ -215,7 +215,22 @@
 			background: #428bca;
 			color: #ffffff; 
 		}
-		
+
+		.k-listview:after
+		{
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+			}
+		.k-listview
+		{
+			padding: 0;
+			min-width: 690px;
+			min-height: 360px;
+		}
+				
 		.announcement {
 			min-height: 320px;
 			min-width: 320px;
