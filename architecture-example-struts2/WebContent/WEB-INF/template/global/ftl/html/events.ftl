@@ -92,7 +92,7 @@
 							model : Announce
 						}
 					}),
-					selectable: "row",
+					selectable: "single",
 					template: kendo.template($("#announce-list-view-template").html()),
 					change: function(e) { 
 						var data = this.dataSource.view() ;
