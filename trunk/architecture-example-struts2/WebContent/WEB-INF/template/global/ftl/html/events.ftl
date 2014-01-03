@@ -71,6 +71,7 @@
 
 				// 1. Announces 				
 				$("#announce-grid").data( "announcePlaceHolder", new Announce () );				
+				/**
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
 						transport: {
@@ -130,6 +131,7 @@
 						this.select("tr:eq(1)");						
 					}
 				});
+				**/
 				
 				$("#announce-grid-panel .panel-header-actions a").each(function( index ) {
 						var panel_header_action = $(this);						
@@ -149,7 +151,7 @@
 						} else if (panel_header_action.text() == "Refresh" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								$("#announce-grid").data("kendoGrid").dataSource.read();
+								//$("#announce-grid").data("kendoGrid").dataSource.read();
 							});
 						}
 			} );						
