@@ -69,6 +69,7 @@
 				});				
 				
 				// 1. Announces 				
+				/**
 				$("#announce-grid").data( "announcePlaceHolder", new Announce () );				
 				$("#announce-grid").kendoGrid({
 					dataSource : new kendo.data.DataSource({
@@ -120,28 +121,7 @@
 						this.select("tr:eq(1)");
 					}
 				});
-				$("#announce-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);						
-						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-panel .panel-body, .list-group ").toggleClass("hide");								
-								var panel_header_action_icon = panel_header_action.find('span');
-								if( panel_header_action_icon.hasClass("k-i-minimize") ){
-									panel_header_action.find('span').removeClass("k-i-minimize");
-									panel_header_action.find('span').addClass("k-i-maximize");
-								}else{
-									panel_header_action.find('span').removeClass("k-i-maximize");
-									panel_header_action.find('span').addClass("k-i-minimize");
-								}								
-							});
-						} else if (panel_header_action.text() == "Refresh" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-grid").data("kendoGrid").dataSource.read();
-							});
-						}
-				} );														
+				**/							
 				<#if !action.user.anonymous >				
 				
 				</#if>	
@@ -198,30 +178,7 @@
 										
 				</div>
 				<div class="col-lg-6">
-						<!-- start announce panel -->
-						<div id="announce-panel" >	
-							<div class="panel panel-default">
-								<div class="panel-heading"><i class="fa fa-bullhorn"></i>&nbsp;알림
-									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-								</div>
-								<div class="panel-body layout hide">					
-									<div  id="announce-view" style="min-height:80px;">
-									 알림이 없습니다.
-									</div>																			
-								</div>								
-								<ul class="list-group hide">
-									<li class="list-group-item" style="min-height:100px;">
-										<div id="announce-grid" ></div>				
-									</li>
-								</ul>		
-							</div>							
-						</div>
-						<!-- end announce panel -->							
+											
 				</div>
 			</div>		
 		</div>			
