@@ -70,9 +70,9 @@
 
 
 				// 1. Announces 				
-				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );		
-				$("#announce-list-view").data( "dataSource", 
-					new kendo.data.DataSource({
+				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );	
+				$("#announce-list-view").kendoListView({
+					dataSource: new kendo.data.DataSource({
 						transport: {
 							read: {
 								type : 'POST',
@@ -91,11 +91,7 @@
 							data : "targetAnnounces",
 							model : Announce
 						}
-					})
-				);
-				
-				$("#announce-list-view").kendoListView({
-					dataSource: $("#announce-list-view").data( "dataSource"),
+					}),
 					selectable: "row",
 					template: kendo.template($("#announce-list-view-template").html()),
 					change: function(e) { 
