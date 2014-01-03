@@ -194,6 +194,13 @@
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">	
 			<div class="row">
+				<div class="col-lg-12">	
+					<div class="page-header">
+						<h1>공지 & 이벤트 <small>모든 이벤트와 공지사항을 한눈에 ~!</small></h1>
+					</div>							
+				</div>
+			</div>			
+			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="list-group">
 						<a href="${request.contextPath}/about.do" class="list-group-item">기업소개 </a>
@@ -203,10 +210,7 @@
 					  <a href="${request.contextPath}/contact.do" class="list-group-item">오시는길</a>
 					</div>					
 				</div>
-				<div class="col-lg-9">					
-					<div class="page-header">
-						<h1>공지 & 이벤트 <small>모든 이벤트와 공지사항을 한눈에 ~!</small></h1>
-					</div>				
+				<div class="col-lg-9">							
 					<div id="announce-view-panel" style="min-height:200px;" >					
 						<div class="alert alert-warning">
 							새로운 공지 & 이벤트가 없습니다.						
