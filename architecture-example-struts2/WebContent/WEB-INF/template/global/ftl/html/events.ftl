@@ -95,26 +95,10 @@
 					selectable: "row",
 					template: kendo.template($("#announce-list-view-template").html()),
 					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = selectedCells[0];	    	
-							
-						alert(	kendo.stringify(selectedCell));
-						//	$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
-							/**
-							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
-							announcePlaceHolder.announceId = selectedCell.announceId;
-							announcePlaceHolder.subject = selectedCell.subject;
-							announcePlaceHolder.body = selectedCell.body;
-							announcePlaceHolder.startDate = selectedCell.startDate ;
-							announcePlaceHolder.endDate = selectedCell.endDate;
-							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
-							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;			
-							announcePlaceHolder.editable = false;					
-							**/ 
-							//showAnnounce();	
-						}
+						var data = this.dataSource.view() ;
+						var selectedCell = data[this.select().index()];		
+						$("#announce-list-view").data( "announcePlaceHolder", selectedCell )										
+						showAnnounce();							
 					},
 					dataBound: function(e) {
 						if( this.dataSource.data().length == 0 ){
