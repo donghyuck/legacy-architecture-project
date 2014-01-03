@@ -43,6 +43,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		background: url(/images/common/header/marquee-stars.svg) #074e68;
 		background-size: cover;
 		padding: 22px 0;
+		margin-top : -19px;
 	}
 
 	header h1 {
