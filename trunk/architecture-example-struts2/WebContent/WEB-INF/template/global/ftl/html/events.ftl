@@ -220,7 +220,7 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-				<div class="panel panel-default">		
+				<div class="panel panel-default paddingless">		
 				<div class="panel-body">		
 					<div id="announce-view-panel"></div>	
 					<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
