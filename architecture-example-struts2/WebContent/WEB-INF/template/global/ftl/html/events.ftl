@@ -87,6 +87,12 @@
 						},
 						pageSize: 10,
 						error:handleKendoAjaxError,
+						requestStart: function(e){
+							alert( "start" );
+						},
+						requestEnd: function(e){
+							alert( e.response.length );
+						},						
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
