@@ -181,9 +181,12 @@
 	<body>
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<!-- END HEADER -->	
-		
 		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1_2") />
+		<header>
+			<h1>ss</h1>
+			<h4>ss</h4>
+		</header>		
+		<!-- END HEADER -->			
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">	
 			<div class="row">
