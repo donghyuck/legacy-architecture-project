@@ -38,7 +38,24 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		padding-top: 70px; 
 		/*background-color : #F5F5F5;	*/
 	}
-	
+
+	header {
+		background: url(../img/marquee-stars.svg) #074e68;
+		background-size: cover;
+		padding: 22px 0;
+	}
+
+	header h1 {
+		color: white;
+		font-weight: 300;
+		margin-bottom: 0;
+	}
+
+	header h4 {
+		color: #cccccc;
+		font-weight: 300;
+	}
+		
 		#account-panel {
 			margin-top : 0 px;
 			padding-top : 10px;
