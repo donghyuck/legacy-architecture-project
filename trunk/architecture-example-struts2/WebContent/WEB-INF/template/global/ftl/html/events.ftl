@@ -185,21 +185,14 @@
 		<header>
 			<div class="container layout">
 				<div class="col-lg-12">	
-					<h1>ss</h1>
-					<h4>ss</h4>
+					<h1>${ current_menu.title }</h1>
+					<h4><i class="fa fa-quote-left"></i>모든 이벤트와 공지사항을 한눈에 ~!</h4>
 				</div>
 			</div>
 		</header>		
 		<!-- END HEADER -->			
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">	
-			<div class="row">
-				<div class="col-lg-12">	
-					<div class="page-header">
-						<h1>${ current_menu.title }&nbsp;<small class="text-muted"><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~!</small></h1>
-					</div>							
-				</div>
-			</div>			
+		<div class="container layout">			
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="list-group">
