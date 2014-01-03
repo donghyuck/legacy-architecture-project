@@ -98,7 +98,7 @@
 				);
 				
 				$("#announce-list-view").kendoListView({
-					dataSource: dataSource,
+					dataSource: $("#announce-list-view").data( "dataSource"),
 					selectable: "multiple",
 					template: kendo.template($("#announce-list-view-template").html())
 				});
