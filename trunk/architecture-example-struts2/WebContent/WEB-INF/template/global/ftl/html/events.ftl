@@ -96,11 +96,13 @@
 					template: kendo.template($("#announce-list-view-template").html()),
 					change: function(e) { 
 						var selectedCells = this.select();
+						alert( selectedCells );
+						
 						if( selectedCells.length > 0){
 							var selectedCell = this.items( selectedCells );	    	
 							
-						 alert(	kendo.stringify(selectedCells));
-							$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
+						// alert(	kendo.stringify(selectedCells));
+						//	$("#announce-list-view").data( "announcePlaceHolder", selectedCell )
 							/**
 							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 							announcePlaceHolder.announceId = selectedCell.announceId;
