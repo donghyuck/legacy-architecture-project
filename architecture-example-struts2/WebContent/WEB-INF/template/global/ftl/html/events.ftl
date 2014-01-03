@@ -88,7 +88,7 @@
 						pageSize: 10,
 						error:handleKendoAjaxError,
 						requestStart: function(e){
-							alert( "start" );
+							//alert( "start" );
 						},					
 						schema: {
 							data : "targetAnnounces",
@@ -121,7 +121,9 @@
 						}
 					},
 					dataBound: function(e) {
-						alert( this.dataSource.data().length) ;
+						if( this.dataSource.data().length == 0 ){
+							$("#announce-view-panel").html( kendo.template($('#alert-message-template').html() );
+						}						
 						var selectedCells = this.select();						
 						this.select("tr:eq(1)");						
 					}
@@ -208,9 +210,6 @@
 				</div>
 				<div class="col-lg-9">							
 					<div id="announce-view-panel" >					
-						<div class="alert alert-warning">
-							새로운 공지 & 이벤트가 없습니다.						
-						</div>
 					</div>					
 					<div id="announce-grid-panel" class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;목록
@@ -239,7 +238,9 @@
 				</td>
 			</tr>
 		</script>
-            
+		<script id="alert-message-template" type="text/x-kendo-tmpl">
+			<div class="alert alert-warning">새로운 공지 & 이벤트가 없습니다.</div>
+		</script>				
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
