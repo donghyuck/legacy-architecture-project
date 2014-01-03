@@ -97,7 +97,7 @@
 					change: function(e) { 
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    	
+							var selectedCell = this.items( selectedCells );	    	
 							var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 							announcePlaceHolder.announceId = selectedCell.announceId;
 							announcePlaceHolder.subject = selectedCell.subject;
