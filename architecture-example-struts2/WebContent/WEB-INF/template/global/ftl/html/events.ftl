@@ -183,20 +183,13 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		
-		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1") />
-		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header bg-metro-black">
-		  <div class="container">
-		    <h2 class="page-title"><i class="fa fa-building-o"></i>&nbsp; ${ current_menu.title }</h2>
-		    <p></p>
-		  </div>
-		</div>	
-				
+		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1_2") />
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">	
 			<div class="row">
 				<div class="col-lg-12">	
 					<div class="page-header">
-						<h1>공지 & 이벤트 <small>모든 이벤트와 공지사항을 한눈에 ~!</small></h1>
+						<h1>${ current_menu.title }&nbsp;<small class="text-muted"><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~!</small></h1>
 					</div>							
 				</div>
 			</div>			
