@@ -40,12 +40,17 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	}
 
 	header {
-		background: #2aa3c7;
+		background: #0070b8;
 		background-size: cover;
 		padding: 22px 0;
 		margin-top : -19px;
 		margin-bottom: 10px;
 	}
+
+	header.cloud {
+		background: #0070b8 url(/images/common/header/cloud-hero.png) bottom right no-repeat;
+	}
+.
 
 	header h1 {
 		color: white;
