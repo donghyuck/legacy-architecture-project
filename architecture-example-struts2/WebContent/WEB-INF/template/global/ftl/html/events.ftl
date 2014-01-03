@@ -209,8 +209,20 @@
 					<ul class="nav nav-pills">
 						<li class="pull-right"><a href="#list"><i class="fa fa-bars"></i>&nbsp;목록</a></li>						
 					</ul>
-					<div class="blank-top-5" ></div>
-					<div id="announce-grid" style="display:none;"></div>
+					<div class="panel panel-default">
+						<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;목록
+							<div class="k-window-actions panel-header-actions">
+								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+							</div>
+						
+						</div>
+						<div class="panel-body">
+							<div id="announce-grid"></div>
+						</div>
+					</div>					
+					
 					</div>
 				</div>				
 			</div>
