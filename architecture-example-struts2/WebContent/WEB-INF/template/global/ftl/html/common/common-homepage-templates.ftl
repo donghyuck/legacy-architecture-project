@@ -54,7 +54,7 @@
 <!-- EVENT -->
 <script type="text/x-kendo-tmpl" id="announcement-detail-panel-template">		
 	<div class="panel panel-default borderless shadowless">
-		<div class="panel-heading" style="background-color:#ffffff;">
+		<div class="panel-heading" style="background-color:\\#ffffff;">
 			<h4 data-bind="html:subject"></h4>
 			<small class="text-muted">기간 : #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
 		</div>
