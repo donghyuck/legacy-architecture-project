@@ -220,8 +220,6 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-				<div class="panel panel-default paddingless">		
-				<div class="panel-body">		
 					<div id="announce-view-panel"></div>	
 					<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
 						<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
@@ -235,8 +233,6 @@
 							<div id="announce-list-view"></div>	
 						</div>
 					</div>		
-				</div>				
-				</div>
 				</div>				
 			</div>
 		</div>									 
