@@ -165,7 +165,9 @@
 	                                 $('#group-details').show().html(kendo.template($('#group-details-template').html()));	                                 
 	                                 kendo.bind($(".details"), selectedGroup );
 									                                 
-	                                // 2. GROUP TABS	                                
+	                                // 2. GROUP TABS
+	                                
+	                                
 									var group_tabs = $('#group-details').find(".tabstrip").kendoTabStrip({
 				                      animation: {
 								        close: { duration: 200, effects: "fadeOut" },
@@ -572,7 +574,7 @@
 		<!-- END MAIN CONTNET -->
 		<div id="account-panel"></div>			
 		<script type="text/x-kendo-template" id="group-details-template">					
-			<div class="panel panel-primary marginless" >
+			<div class="panel panel-primary marginless details" >
 				<div class="panel-heading" >
 					<span data-bind="text: displayName"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button></div>
