@@ -470,7 +470,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-8 col-xs-8"><input type="text" id="search-text"  class="k-textbox" style="width:300px;"  placeholder="검색할 사용자 이름 또는 메일 주소"/></div>
+					<div class="col-8 col-xs-8"><input type="text" id="search-text"  class="form-control" placeholder="검색할 사용자 이름 또는 메일 주소"/></div>
 					<div class="col-4 col-xs-4"><button class="btn btn-default" id="search-user-btn"><i class="fa fa-search"></i> 사용자 검색</button></div>
 				</div>				
 				<div class="row blank-top-5">
