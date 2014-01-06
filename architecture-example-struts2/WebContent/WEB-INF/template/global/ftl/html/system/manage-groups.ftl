@@ -581,8 +581,8 @@
 					<div class="panel-body" style="padding:5px;">
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-						<li><a href="\\#groups" data-toggle="tab">멤버</a></li>
-						<li><a href="\\#users" data-toggle="tab">롤</a></li>
+						<li><a href="\\#members" data-toggle="tab">멤버</a></li>
+						<li><a href="\\#roles" data-toggle="tab">롤</a></li>
 					</ul>			
 					<div class="tab-content">
 						<div class="tab-pane active" id="props">
@@ -593,7 +593,7 @@
 							</div>						
 							<div id="company-prop-grid" class="props"></div>
 						</div>
-						<div class="tab-pane" id="groups">
+						<div class="tab-pane" id="members">
 							<div class="blank-top-5" ></div>	
 							<div class="alert alert-danger margin-buttom-5">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -601,7 +601,7 @@
 							</div>						
 							<div id="company-group-grid"  class="members"></div>					
 						</div>
-						<div class="tab-pane" id="users">
+						<div class="tab-pane" id="roles">
 							<div class="blank-top-5" ></div>	
 							<div class="alert alert-danger margin-buttom-5">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
