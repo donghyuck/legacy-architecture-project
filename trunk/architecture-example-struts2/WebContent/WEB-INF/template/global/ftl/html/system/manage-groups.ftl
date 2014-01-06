@@ -168,8 +168,9 @@
 	                                // 2. GROUP TABS
 									$('#myTab a').click(function (e) {
 										e.preventDefault(); 
-										if( $(this).attr('href') == '#props' ){	
 										/**
+										if( $(this).attr('href') == '#props' ){	
+										
 											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
 												$('#group-prop-grid').kendoGrid({
 													dataSource: {
@@ -211,13 +212,14 @@
 													}
 												});
 											}				
-										*/							 
+																 
 										} else if( $(this).attr('href') == '#members' ){	
 										 
 										} else if( $(this).attr('href') == '#roles' ){	
 										 
 										}
-									 }
+										*/	
+									} 
 	                                
 									var group_tabs = $('#group-details').find(".tabstrip").kendoTabStrip({
 				                      animation: {
