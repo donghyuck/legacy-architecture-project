@@ -213,7 +213,7 @@
 										}
 										
 									});
-									$('#myTab a:first').tab('show');
+									$('#myTab a[href="#props"]').tab('show');
 									
 																			/**
 									$('#myTab a').click(function (e) {
