@@ -326,7 +326,10 @@
 			            									}                                                     
 													    });										    		
 										    		}
-													$('#search-window').data("kendoWindow").center();       
+													$("#search-window").closest(".k-window").css({
+														top: 70,
+														left: 15,
+													});	 
 													$("#search-window").data("kendoWindow").open();								    	
 													$("#search-text").focus();								    	
 												});	        							
