@@ -166,7 +166,56 @@
 	                                 kendo.bind($(".details"), selectedGroup );
 									                                 
 	                                // 2. GROUP TABS
-	                                
+									$('#myTab a').click(function (e) {
+									e.preventDefault(); 
+										if( $(this).attr('href') == '#props' ){	
+											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
+												group_tabs.find(".props").kendoGrid({
+													dataSource: {
+														transport: { 
+															read: { url:'${request.contextPath}/secure/get-group-property.do?output=json', type:'post' },
+															create: { url:'${request.contextPath}/secure/update-group-property.do?output=json', type:'post' },
+															update: { url:'${request.contextPath}/secure/update-group-property.do?output=json', type:'post'  },
+															destroy: { url:'${request.contextPath}/secure/delete-group-property.do?output=json', type:'post' },
+													 		parameterMap: function (options, operation){			
+														 		if (operation !== "read" && options.models) {
+														 			return { groupId: selectedGroup.groupId, items: kendo.stringify(options.models)};
+																} 
+																return { groupId: selectedGroup.groupId }
+															}
+														},						
+														batch: true, 
+														schema: {
+															data: "targetGroupProperty",
+															model: Property
+														},
+														error:handleKendoAjaxError
+													},
+													columns: [
+														{ title: "속성", field: "name" },
+														{ title: "값",   field: "value" },
+														{ command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
+													],
+													pageable: false,
+													resizable: true,
+													editable : true,
+													scrollable: true,
+													height: 300,
+													toolbar: [
+														{ name: "create", text: "추가" },
+														{ name: "save", text: "저장" },
+														{ name: "cancel", text: "취소" }
+													],				     
+													change: function(e) {
+													}
+												});
+											}										 
+										}else 	if( $(this).attr('href') == '#members' ){	
+										 
+										}else 	if( $(this).attr('href') == '#roles' ){	
+										 
+										}
+									 }
 	                                
 									var group_tabs = $('#group-details').find(".tabstrip").kendoTabStrip({
 				                      animation: {
@@ -523,7 +572,7 @@
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
 							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i><span data-bind="text: displayName"></span>&nbsp;사용자관리</button>
+								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i>&nbsp;<span data-bind="text: displayName"></span>&nbsp;사용자관리</button>
 								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							</div>
 						</div>
