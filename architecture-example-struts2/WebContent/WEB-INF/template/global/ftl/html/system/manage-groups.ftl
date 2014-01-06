@@ -423,7 +423,7 @@
 		}
 		
 		#search-window .container {
-			width:700px;
+
 		}
 		</style>
     </head>
