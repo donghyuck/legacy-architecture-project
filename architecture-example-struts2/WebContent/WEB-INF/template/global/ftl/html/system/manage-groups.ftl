@@ -481,7 +481,7 @@
 				<div class="row blank-top-5">
 					<div class="col-10 col-xs-10">
 						<div class="btn-group">
-							<button class="btn btn-default" id="add-member-btn"><i class="fa fa-plus"></i>선택된 사용자 멤버로 추가하기</button>
+							<button class="btn btn-default" id="add-member-btn"><i class="fa fa-plus"></i>&nbsp;선택된 사용자 멤버로 추가하기</button>
 						<!--<a class="btn btn-default" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>-->
 						</div>
 					</div>
