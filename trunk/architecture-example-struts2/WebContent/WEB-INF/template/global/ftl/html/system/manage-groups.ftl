@@ -166,10 +166,7 @@
 	                                 kendo.bind($(".details"), selectedGroup );
 										
 									// 2. GROUP TABS
-									$('#myTab a').click(function (e) {
-										e.preventDefault(); 
-										if( $(this).attr('href') == '#props' ){	
-											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
+									if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
 												$('#group-prop-grid').kendoGrid({
 													dataSource: {
 														transport: { 
@@ -209,11 +206,15 @@
 													change: function(e) {
 													}
 												});
-											}											
+									}		
+																				
+									$('#myTab a').click(function (e) {
+										e.preventDefault(); 
+										if( $(this).attr('href') == '#props' ){	
+																				
 										}
 										
 									});
-									$('#myTab a[href="#props"]').tab('show');
 									
 																			/**
 									$('#myTab a').click(function (e) {
