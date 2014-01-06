@@ -481,8 +481,8 @@
 				<div class="row blank-top-5">
 					<div class="col-10 col-xs-10">
 					<div class="btn-group">
-						<a class="k-button" id="add-member-btn"><span class="k-icon k-i-folder-add"></span>선택된 사용자 그룹 멤버로 추가하기</a>
-						<a class="k-button right" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
+						<a class="btn btn-default" id="add-member-btn"><span class="k-icon k-i-folder-add"></span>선택된 사용자 그룹 멤버로 추가하기</a>
+						<a class="btn btn-default" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
 						</div>
 					</div>
 				</div>				
