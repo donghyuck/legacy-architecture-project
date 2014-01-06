@@ -307,8 +307,7 @@
 													        },
 													    	scrollable: true,
 													       	sortable: true,
-													       	height: 280,	
-													       	width:600,				       			      
+													       	height: 280,		       			      
 													        columns: [
 													           { field: "select", title: "&nbsp;", template: '<input type=\'checkbox\' />', sortable: false, width: 32},	
 													           { field: "userId", title: "ID", width:25,  filterable: false, sortable: false }, 
