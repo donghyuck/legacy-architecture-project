@@ -519,7 +519,7 @@
 						<div class="panel-heading selected-company-info" style="padding:5px;">
 							<i class="fa fa-users"></i>&nbsp;<span data-bind="text: displayName"></span>
 							<div class="btn-group pull-right">
-								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
+								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i>&nbsp;</button>
 							</div>
 						</div>
 						<div class="panel-body" style="padding:5px;">
