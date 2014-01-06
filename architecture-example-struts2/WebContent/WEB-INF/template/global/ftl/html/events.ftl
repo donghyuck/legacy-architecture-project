@@ -176,7 +176,7 @@
 		{
 			padding: 0;
 			min-width: 690px;
-			min-height: 360px;
+			min-height: 100px;
 		}
 				
 		#announce-list-view {
