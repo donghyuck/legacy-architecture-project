@@ -486,8 +486,8 @@
 			</div>
 			<div class="row full-width-row">		
 				<div class="col-sm-12">
-					<div class="panel panel-default" style="min-height:300px;" data-bind="text: displayName">
-						<div class="panel-heading selected-company-info" style="padding:5px;">
+					<div class="panel panel-default" style="min-height:300px;" >
+						<div class="panel-heading selected-company-info" style="padding:5px;" data-bind="text: displayName">
 						<!--
 							<div class="btn-group">
 								<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
