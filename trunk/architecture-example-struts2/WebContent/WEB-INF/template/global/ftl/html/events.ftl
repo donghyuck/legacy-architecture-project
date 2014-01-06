@@ -175,7 +175,6 @@
 		.k-listview
 		{
 			padding: 0;
-			padding-top: 15px;
 			min-width: 690px;
 			min-height: 100px;
 		}
@@ -230,7 +229,7 @@
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 							</div>						
 						</div>
-						<div class="panel-body hide">
+						<div class="panel-body hide" style="padding-top:5px;">
 							<div id="announce-list-view"></div>	
 						</div>
 					</div>		
