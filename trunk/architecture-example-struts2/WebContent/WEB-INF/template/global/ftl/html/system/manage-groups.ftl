@@ -6,14 +6,15 @@
         <!--
         yepnope([{
             load: [ 	       
-			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',				
-			'${request.contextPath}/js/bootstrap/3.0.0/bootstrap.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',			
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',      	    
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',       	    
        	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.apis.js',
-       	    '${request.contextPath}/js/common/common.ui.js'],        	     	  	   
+       	    '${request.contextPath}/js/common/common.ui.js'
+       	    ],        	     	  	   
             complete: function() { 
 
 				// 1.  한글 지원을 위한 로케일 설정
@@ -70,16 +71,7 @@
 				 });	
 		
 				// 4. CONTENT MAIN		
-				
-				// SPLITTER LAYOUT
-				var splitter = $("#splitter").kendoSplitter({
-	                orientation: "horizontal",
-	                panes: [
-	                    { collapsible: false, min: "500px" },
-	                    { collapsible: true, collapsed: true, min: "500px" }
-	                ]
-	             });
-												
+							
 				// 1. GROUP GRID			        
 			        var selectedGroup = new Group();		      
 			        var group_grid = $("#group-grid").kendoGrid({
@@ -474,7 +466,9 @@
      	-->
         </script> 	
 		<style>	
-	    	#list_pane{height:700px;}
+		.k-grid-content{
+			height:300px;
+		}
 		</style>
     </head>
 	<body>
@@ -486,7 +480,7 @@
 			<div class="row">			
 				<div class="col-12 col-lg-12">					
 					<div class="page-header">
-						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
+						<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
 					</div>			
 				</div>		
 			</div>
