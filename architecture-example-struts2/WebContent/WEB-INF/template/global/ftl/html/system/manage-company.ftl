@@ -33,6 +33,7 @@
 										
 				// 3.MENU LOAD
 				var currentPageName = "MENU_1_1";
+				
 				var topBar = $("#navbar").extTopBar({ 
 					template : kendo.template($("#topbar-template").html() ),
 					data : currentUser,
@@ -604,7 +605,7 @@
 					
 		<script type="text/x-kendo-template" id="company-details-template">			
 			<div class="panel panel-primary marginless" >
-				<div class="panel-heading" >&nbsp;
+				<div class="panel-heading" >
 					<span data-bind="text: displayName"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button></div>
 					<div class="panel-body" style="padding:5px;">
