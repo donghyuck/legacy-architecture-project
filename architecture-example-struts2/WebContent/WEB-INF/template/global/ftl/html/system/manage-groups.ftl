@@ -167,10 +167,10 @@
 									                                 
 	                                // 2. GROUP TABS
 									$('#myTab a').click(function (e) {
-									e.preventDefault(); 
+										e.preventDefault(); 
 										if( $(this).attr('href') == '#props' ){	
 											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
-												group_tabs.find(".props").kendoGrid({
+												$('#group-prop-grid').kendoGrid({
 													dataSource: {
 														transport: { 
 															read: { url:'${request.contextPath}/secure/get-group-property.do?output=json', type:'post' },
