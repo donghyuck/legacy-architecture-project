@@ -74,7 +74,12 @@
 				$("button.btn-control-group ").each(function (index) {					
 					var btn_control = $(this);
 					var btn_control_action = btn_control.attr("data-action");
-					if (btn_control_action == "layout"){
+					if (btn_control_action == "user"){
+						btn_control.click( function(e){			
+							$("form[name='fm1'] input").val(selectedCompany.companyId);		
+							$("form[name='fm1']").attr("action", "main-user.do" ).submit(); 
+						} );						
+					}else if (btn_control_action == "layout"){
 						btn_control.click(function (e) {										
 							$(".body-group").each(function( index ) {
 								var panel_body = $(this);
@@ -517,11 +522,9 @@
 				<div class="col-sm-12">
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
-							<span data-bind="text: displayName"></span>
-							<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							<div class="btn-group pull-right">
 								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
-								
+								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							</div>
 						</div>
 						<div class="panel-body" style="padding:5px;">
