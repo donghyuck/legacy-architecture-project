@@ -454,7 +454,7 @@
 			</div>				
 		</div>	  		
 		
-		<div id="search-window" style="display:none;">		
+		<div id="search-window" style="display:none;" class="gray">		
 			<div class="container layout">					
 				<div class="row">
 					<div class="col-12 col-lg-12">
@@ -520,9 +520,9 @@
 							<div class="blank-top-5" ></div>	
 							<div class="alert alert-danger margin-buttom-5">
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
+								그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.
 							</div>							
-							<div id="company-user-grid"  class="roles"></div>
+							<div id="group-role-select"></div>
 						</div>
 					</div>
 				</div>
