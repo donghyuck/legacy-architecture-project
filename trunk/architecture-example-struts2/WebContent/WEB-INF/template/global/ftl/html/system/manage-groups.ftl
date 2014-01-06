@@ -164,9 +164,17 @@
 	                                 // SHOW GROUP DETAILS ======================================	                                 	                                 
 	                                 $('#group-details').show().html(kendo.template($('#group-details-template').html()));	                                 
 	                                 kendo.bind($(".details"), selectedGroup );
-									                                 
-	                                // 2. GROUP TABS
-	                                										/**
+										
+									// 2. GROUP TABS
+									$('#myTab a').click(function (e) {
+										e.preventDefault(); 
+										if( $(this).attr('href') == '#props' ){	
+										
+										
+										}
+										
+									});
+																			/**
 									$('#myTab a').click(function (e) {
 										e.preventDefault(); 
 
