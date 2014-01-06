@@ -268,11 +268,74 @@
 									                	
 													}                                                            
 												});
+												// End of tabs
+												// start of member searching
+												$('#company-group-grid').find(".searchCustomClass").click(function(){
+													if( !$("#search-window").data("kendoWindow") ){		
+														$("#search-window").kendoWindow({
+															width:500,
+															resizable : false,
+															title:  selectedGroup.company.name + " 도메인 사용자 검색",
+															modal: true,
+															visible: false
+										    			});
+										    		}
+										    		
+										    		if(!$("#search-result").data('kendoGrid')) {
+										    			$("#search-result").kendoGrid({
+															dataSource: {
+																type: "json",
+																transport: {
+																	read: { url:'${request.contextPath}/secure/find-user.do?output=json', type:'post' },
+																	parameterMap: function (options, operation){							                
+																		if (operation !== "read" && options.models) {
+																 			return { nameOrEmail: search_text, items: kendo.stringify(options.models) , companyId: selectedGroup.company.companyId };
+																		} 
+													                    return { nameOrEmail:options.search_text,  startIndex: options.skip, pageSize: options.pageSize , companyId: selectedGroup.company.companyId };
+																	}                        
+																},
+																schema: {
+													                   total: "foundUserCount",
+													                   data: "foundUsers",
+													                   model: User
+													           },
+													           serverPaging: false,
+													           serverSorting: false,
+													           serverFiltering: false,
+													           pageSize:10,
+													           error: handleKendoAjaxError                             
+													        },
+													    	scrollable: true,
+													       	sortable: true,
+													       	height: 280,					       			      
+													        columns: [
+													           { field: "select", title: "&nbsp;", template: '<input type=\'checkbox\' />', sortable: false, width: 32},	
+													           { field: "userId", title: "ID", width:25,  filterable: false, sortable: false }, 
+													           { field: "username", title: "아이디", width: 100 }, 
+													           { field: "name", title: "이름", width: 50 }, 
+													           { field: "email", title: "메일", width: 100 },
+													       	],
+															autoBind: true,
+															dataBound: function() {
+			            										var grid = this;
+			            										//handle checkbox change
+			            										grid.table.find("tr").find("td:first input").change(function(e) {  
+			            											var checkbox = $(this);
+			            											var selected = grid.table.find("tr").find("td:first input:checked").closest("tr");
+			            										}); 
+			            									}                                                     
+													    });										    		
+										    		}
+													$('#search-window').data("kendoWindow").center();       
+													$("#search-window").data("kendoWindow").open();								    	
+													$("#search-text").focus();								    	
+												});	        							
+												// end of  member searching				
 											}																			
 										}	
 									});
-									// End of tabs
-									
+
+																					
 								}
 							}else{
 								selectedGroupId = 0 ;	                            
