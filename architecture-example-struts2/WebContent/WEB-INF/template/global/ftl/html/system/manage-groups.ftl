@@ -458,7 +458,7 @@
 		</div>	  		
 		
 		<div id="search-window" style="display:none;" class="clearfix gray">		
-			<div class="container layout">					
+			<div class="container layout" style="min-width:500px;">					
 				<div class="row">
 					<div class="col-12 col-lg-12">
 						<div class="alert alert-danger">
