@@ -457,7 +457,7 @@
 			</div>				
 		</div>	  		
 		
-		<div id="search-window" style="display:none;" class="gray">		
+		<div id="search-window" style="display:none;" class="clearfix gray">		
 			<div class="container layout">					
 				<div class="row">
 					<div class="col-12 col-lg-12">
