@@ -210,9 +210,9 @@
 													}
 												});
 											}										 
-										}else 	if( $(this).attr('href') == '#members' ){	
+										} else if( $(this).attr('href') == '#members' ){	
 										 
-										}else 	if( $(this).attr('href') == '#roles' ){	
+										} else if( $(this).attr('href') == '#roles' ){	
 										 
 										}
 									 }
