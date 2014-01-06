@@ -523,7 +523,7 @@
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
 							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
+								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i><span data-bind="text: displayName"></span>&nbsp;사용자관리</button>
 								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							</div>
 						</div>
