@@ -421,6 +421,10 @@
 		.k-grid-content{
 			height:300px;
 		}
+		
+		#search-window.container {
+			width:700px;
+		}
 		</style>
     </head>
 	<body>
@@ -457,7 +461,7 @@
 			</div>				
 		</div>		
 
-		<div id="search-window" style="display:none; width:800px;" class="clearfix gray">		
+		<div id="search-window" style="display:none;" class="clearfix gray">		
 			<div class="container layout">					
 				<div class="row">
 					<div class="col-12 col-xs-8">
