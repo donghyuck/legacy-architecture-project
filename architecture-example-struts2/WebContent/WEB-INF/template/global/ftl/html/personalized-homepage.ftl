@@ -864,7 +864,9 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">
+										
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-custom">Custom</span></a>
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
@@ -910,7 +912,7 @@
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>공지 및 이벤트</a>
 							</li>
 							<li>
-								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 쇼셜</a>
+								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    쇼셜</a>
 							</li>							
 							<!--
 							<li class="dropdown">
