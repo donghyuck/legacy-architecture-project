@@ -458,9 +458,9 @@
 		</div>		
 
 		<div id="search-window" style="display:none;" class="clearfix gray">		
-			<div class="container layout" style="min-width:500px;">					
+			<div class="container layout">					
 				<div class="row">
-					<div class="col-12 col-lg-12">
+					<div class="col-12 col-xs-8">
 						<div class="alert alert-danger">
 						검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 사용자 선택은 체크박스를 체크하면 됩니다.
 						</div>
