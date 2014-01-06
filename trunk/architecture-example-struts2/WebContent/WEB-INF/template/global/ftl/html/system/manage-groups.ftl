@@ -455,8 +455,8 @@
 					</div>				
 				</div>			
 			</div>				
-		</div>	  		
-		
+		</div>		
+
 		<div id="search-window" style="display:none;" class="clearfix gray">		
 			<div class="container layout" style="min-width:500px;">					
 				<div class="row">
@@ -482,10 +482,9 @@
 						<a class="k-button right" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
 						</div>
 					</div>
-				</div>
-				
+				</div>				
 			</div>
-		</div>	
+		</div>			
 		<form name="fm1" method="POST" accept-charset="utf-8" class="details">
 			<input type="hidden" name="companyId" value="0" />
 		</form>		
