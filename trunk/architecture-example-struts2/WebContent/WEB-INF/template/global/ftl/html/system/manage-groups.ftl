@@ -468,10 +468,10 @@
 						검색 결과 목록에서 추가를 원하는 사용자을 선택 후 "멤버추가" 버튼을 클릭하여 멤버를 그룹에 추가합니다. 사용자 선택은 체크박스를 체크하면 됩니다.
 						</div>
 					</div>
-				</div>				 
+				</div>
 				<div class="row">
 					<div class="col-8 col-xs-8"><input type="text" id="search-text"  class="k-textbox" style="width:300px;"  placeholder="검색할 사용자 이름 또는 메일 주소"/></div>
-					<div class="col-4 col-xs-4"><a class="k-button" id="search-user-btn"><span class="k-icon k-i-search"></span>사용자 검색</a></div>
+					<div class="col-4 col-xs-4"><button class="btn btn-default" id="search-user-btn"><i class="fa fa-search"></i> 사용자 검색</button></div>
 				</div>				
 				<div class="row blank-top-5">
 					<div class="col-12 col-xs-12">
@@ -480,9 +480,9 @@
 				</div>
 				<div class="row blank-top-5">
 					<div class="col-10 col-xs-10">
-					<div class="btn-group">
-						<a class="btn btn-default" id="add-member-btn"><span class="k-icon k-i-folder-add"></span>선택된 사용자 그룹 멤버로 추가하기</a>
-						<a class="btn btn-default" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>
+						<div class="btn-group">
+							<button class="btn btn-default" id="add-member-btn"><i class="fa fa-plus"></i>선택된 사용자 멤버로 추가하기</button>
+						<!--<a class="btn btn-default" id="close-search-window-btn"><span class="k-icon k-i-close"></span>닫기</a>-->
 						</div>
 					</div>
 				</div>				
