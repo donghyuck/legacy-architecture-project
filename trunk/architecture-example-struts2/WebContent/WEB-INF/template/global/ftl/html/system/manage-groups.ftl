@@ -160,11 +160,9 @@
 	                                 selectedGroup.formattedCreationDate  =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.creationDate );      
 	                                 selectedGroup.formattedModifiedDate =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.modifiedDate );         	                                 
 	                                 selectedGroup.company = selectedCompany;
-	                                 
-	                                 $("#splitter").data("kendoSplitter").expand("#datail_pane");
-	                                 
+	                                 	                                 
 	                                 // SHOW GROUP DETAILS ======================================	                                 	                                 
-	                                 $('#group-details').show().html(kendo.template($('#template').html()));	                                 
+	                                 $('#group-details').show().html(kendo.template($('#group-details-template').html()));	                                 
 	                                 kendo.bind($(".details"), selectedGroup );
 									                                 
 	                                // 2. GROUP TABS	                                
@@ -573,7 +571,7 @@
 		</form>		
 		<!-- END MAIN CONTNET -->
 		<div id="account-panel"></div>			
-		<script type="text/x-kendo-template" id="template">					
+		<script type="text/x-kendo-template" id="group-details-template">					
 				<div class="tabstrip">
 					<ul>
 						<li>프로퍼티</li>
