@@ -273,7 +273,6 @@
 												$('#company-group-grid').find(".searchCustomClass").click(function(){
 													if( !$("#search-window").data("kendoWindow") ){		
 														$("#search-window").kendoWindow({
-															width:500,
 															resizable : false,
 															title:  selectedGroup.company.name + " 도메인 사용자 검색",
 															modal: true,
