@@ -166,9 +166,10 @@
 	                                 kendo.bind($(".details"), selectedGroup );
 									                                 
 	                                // 2. GROUP TABS
+	                                										/**
 									$('#myTab a').click(function (e) {
 										e.preventDefault(); 
-										/**
+
 										if( $(this).attr('href') == '#props' ){	
 										
 											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
@@ -218,9 +219,9 @@
 										} else if( $(this).attr('href') == '#roles' ){	
 										 
 										}
-										*/	
+									
 									} 
-	                                
+	*/	
 									var group_tabs = $('#group-details').find(".tabstrip").kendoTabStrip({
 				                      animation: {
 								        close: { duration: 200, effects: "fadeOut" },
