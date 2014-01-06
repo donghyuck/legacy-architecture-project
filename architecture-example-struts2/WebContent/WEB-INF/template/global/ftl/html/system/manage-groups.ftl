@@ -169,6 +169,7 @@
 									$('#myTab a').click(function (e) {
 										e.preventDefault(); 
 										if( $(this).attr('href') == '#props' ){	
+										/**
 											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
 												$('#group-prop-grid').kendoGrid({
 													dataSource: {
@@ -209,7 +210,8 @@
 													change: function(e) {
 													}
 												});
-											}										 
+											}				
+										*/							 
 										} else if( $(this).attr('href') == '#members' ){	
 										 
 										} else if( $(this).attr('href') == '#roles' ){	
