@@ -167,7 +167,7 @@
 										
 									// 2. GROUP TABS
 									if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
-												$('#group-prop-grid').kendoGrid({
+										$('#group-prop-grid').kendoGrid({
 													dataSource: {
 														transport: { 
 															read: { url:'${request.contextPath}/secure/get-group-property.do?output=json', type:'post' },
@@ -205,17 +205,74 @@
 													],				     
 													change: function(e) {
 													}
-												});
+										});
 									}		
-																				
+									// Start of Tabs											
 									$('#myTab a').click(function (e) {
 										e.preventDefault(); 
 										if( $(this).attr('href') == '#props' ){	
 										}else if( $(this).attr('href') == '#members' ){	
-																				
-										}
-										
+											// start members
+											if(!$('#company-group-grid').data('kendoGrid') ){
+												$('#company-group-grid').kendoGrid({
+													dataSource: {
+														type: "json",
+														transport: {
+															read: { url:'${request.contextPath}/secure/list-group-user.do?output=json', type:'post' },			
+															destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
+															parameterMap: function (options, operation){												                  
+																if (operation !== "read" && options.models) {
+																	return { groupId: selectedGroup.groupId, items: kendo.stringify(options.models)};
+																} 
+																return { groupId: selectedGroup.groupId,  startIndex: options.skip, pageSize: options.pageSize  }		
+															}                        
+														},
+														schema: {
+															total: "totalGroupUserCount",
+															data: "groupUsers",
+															model: User
+														},
+														error:handleKendoAjaxError,
+														autoSync: true,
+														batch: true,
+														serverPaging: true,
+														serverSorting: false,
+														serverFiltering: false,
+														pageSize:10
+													},
+													scrollable: true,				    
+													sortable: true,
+													height: 350,
+													resizable: true,
+													editable: {
+														update: false,
+														destroy: true,
+														confirmation: "선택하신 사용자를 그룹에서 	삭제하겠습니까?"	
+													},
+													pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+													toolbar: [
+														{ name: "search", text: "멤버 검색", imageClass:"k-icon k-i-search" , className: "searchCustomClass" },
+														{ name: "cancel", text: "취소"}
+													],				      
+													columns: [
+									                    { field: "userId", title: "ID", width:50,  filterable: false, sortable: false}, 
+									                    { field: "username", title: "아이디", width: 80 }, 
+									                    { field: "name", title: "이름", width: 80 }, 
+									                    { field: "email", title: "메일", width: 80  },
+									                    { command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }	
+									                ],
+									                dataBound:function(e){   
+									                	var group_memeber_grid = this; //$('#group-member-grid').data('kendoGrid'); 
+									                    selectedGroup.memberCount = group_memeber_grid.dataSource.total() ;
+									                	kendo.bind($(".tabstrip"), selectedGroup );
+									                	
+													}                                                            
+												});
+											}																			
+										}	
 									});
+									// End of tabs
+									
 								}
 							}else{
 								selectedGroupId = 0 ;	                            
