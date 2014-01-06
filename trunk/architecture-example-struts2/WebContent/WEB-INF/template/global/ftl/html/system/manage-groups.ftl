@@ -422,7 +422,7 @@
 			height:300px;
 		}
 		
-		#search-window.container {
+		#search-window .container {
 			width:700px;
 		}
 		</style>
