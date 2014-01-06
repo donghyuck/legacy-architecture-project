@@ -572,6 +572,45 @@
 		<!-- END MAIN CONTNET -->
 		<div id="account-panel"></div>			
 		<script type="text/x-kendo-template" id="group-details-template">					
+			<div class="panel panel-primary marginless" >
+				<div class="panel-heading" >
+					<span data-bind="text: displayName"></span>
+					<button type="button" class="close" aria-hidden="true">&times;</button></div>
+					<div class="panel-body" style="padding:5px;">
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
+						<li><a href="\\#groups" data-toggle="tab">멤버</a></li>
+						<li><a href="\\#users" data-toggle="tab">롤</a></li>
+					</ul>			
+					<div class="tab-content">
+						<div class="tab-pane active" id="props">
+							<div class="blank-top-5"></div>
+							<div class="alert alert-danger margin-buttom-5">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
+							</div>						
+							<div id="company-prop-grid" class="props"></div>
+						</div>
+						<div class="tab-pane" id="groups">
+							<div class="blank-top-5" ></div>	
+							<div class="alert alert-danger margin-buttom-5">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
+							</div>						
+							<div id="company-group-grid"  class="members"></div>					
+						</div>
+						<div class="tab-pane" id="users">
+							<div class="blank-top-5" ></div>	
+							<div class="alert alert-danger margin-buttom-5">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
+							</div>							
+							<div id="company-user-grid"  class="roles"></div>
+						</div>
+					</div>
+				</div>
+			</div>		
+		<!--
 				<div class="tabstrip">
 					<ul>
 						<li>프로퍼티</li>
@@ -599,6 +638,7 @@
 						</div>	
 					</div>
 				</div>
+		-->		
 		</script>		        
 		<!-- 공용 템플릿 -->
 		<#include "/html/common/common-templates.ftl" >		        
