@@ -517,10 +517,11 @@
 				<div class="col-sm-12">
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
-							<i class="fa fa-users"></i>&nbsp;<span data-bind="text: displayName"></span>
+							<span data-bind="text: displayName"></span>
+							<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							<div class="btn-group pull-right">
 								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
-								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
+								
 							</div>
 						</div>
 						<div class="panel-body" style="padding:5px;">
