@@ -568,7 +568,9 @@
 				
 			</div>
 		</div>	
-		    
+		<form name="fm1" method="POST" accept-charset="utf-8" class="details">
+			<input type="hidden" name="companyId" value="0" />
+		</form>		
 		<!-- END MAIN CONTNET -->
 		<div id="account-panel"></div>			
 		<script type="text/x-kendo-template" id="template">					
