@@ -169,17 +169,6 @@
 									$('#myTab a').click(function (e) {
 										e.preventDefault(); 
 										if( $(this).attr('href') == '#props' ){	
-										
-										
-										}
-										
-									});
-																			/**
-									$('#myTab a').click(function (e) {
-										e.preventDefault(); 
-
-										if( $(this).attr('href') == '#props' ){	
-										
 											if( ! $('#group-prop-grid').data("kendoGrid") ){					                      			
 												$('#group-prop-grid').kendoGrid({
 													dataSource: {
@@ -220,7 +209,17 @@
 													change: function(e) {
 													}
 												});
-											}				
+											}											
+										}
+										
+									});
+																			/**
+									$('#myTab a').click(function (e) {
+										e.preventDefault(); 
+
+										if( $(this).attr('href') == '#props' ){	
+										
+														
 																 
 										} else if( $(this).attr('href') == '#members' ){	
 										 
