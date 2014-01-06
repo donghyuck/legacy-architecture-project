@@ -71,7 +71,36 @@
 				 });	
 		
 				// 4. CONTENT MAIN		
-							
+				$("button.btn-control-group ").each(function (index) {					
+					var btn_control = $(this);
+					var btn_control_action = btn_control.attr("data-action");
+					if (btn_control_action == "layout"){
+						btn_control.click(function (e) {										
+							$(".body-group").each(function( index ) {
+								var panel_body = $(this);
+								var is_detail_body = false;
+								if (panel_body.attr("id") == "company-details"){
+									is_detail_body = true;
+								}else{
+									is_detail_body = false;
+								}								
+								if( panel_body.hasClass("col-sm-6" )){
+									panel_body.removeClass("col-sm-6");
+									panel_body.addClass("col-sm-12");	
+									if( is_detail_body ){
+										panel_body.css('padding', '5px 0 0 0');
+									}													
+								}else{
+									panel_body.removeClass("col-sm-12");
+									panel_body.addClass("col-sm-6");		
+									if( is_detail_body ){
+										panel_body.css('padding', '0 0 0 5px');
+									}				
+								}
+							});
+						});
+					}	
+				});							
 				// 1. GROUP GRID			        
 			        var selectedGroup = new Group();		      
 			        var group_grid = $("#group-grid").kendoGrid({
@@ -490,14 +519,8 @@
 						<div class="panel-heading selected-company-info" style="padding:5px;">
 							<i class="fa fa-users"></i>&nbsp;<span data-bind="text: displayName"></span>
 							<div class="btn-group pull-right">
-								<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
-								<button type="button" class="btn btn-info btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
+								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							</div>
-							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-control-group" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
-								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
-							</div>
-							<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 						</div>
 						<div class="panel-body" style="padding:5px;">
 							<div class="row marginless paddingless">
