@@ -175,6 +175,7 @@
 		.k-listview
 		{
 			padding: 0;
+			padding-top: 15px;
 			min-width: 690px;
 			min-height: 100px;
 		}
