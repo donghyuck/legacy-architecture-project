@@ -488,7 +488,7 @@
 				<div class="col-sm-12">
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
-							<span data-bind="text: displayName"></span>
+							<i class="fa fa-users"></i>&nbsp;<span data-bind="text: displayName"></span>
 							<div class="btn-group">
 								<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
 								<button type="button" class="btn btn-info btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
