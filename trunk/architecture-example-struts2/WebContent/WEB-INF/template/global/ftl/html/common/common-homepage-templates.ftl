@@ -96,6 +96,7 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
+<div  class="form-horizontal">
 	<div class="form-group">
 		<label class="col-sm-2 control-label">제목</label>
 		<div class="col-sm-10">
@@ -108,7 +109,7 @@
 			<input data-role="datetimepicker" data-bind="value:startDate">
 		</div>
 	</div>
-	  
+</div>	  
 	<!--		
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
