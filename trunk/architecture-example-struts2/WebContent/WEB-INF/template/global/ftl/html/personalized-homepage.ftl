@@ -432,10 +432,6 @@
 						panel_button.click(function (e) { 
 							e.preventDefault();					
 							var data = $("#announce-panel").data( "announcePlaceHolder" );	
-							
-							alert(  kendo.stringify( data ) );
-							
-							/*
 							$.ajax({
 									dataType : "json",
 									type : 'POST',
@@ -446,13 +442,16 @@
 									},
 									error:handleKendoAjaxError
 							});	
-							*/
 						} );
 					}else if ( panel_button.hasClass('custom-delete') ){
 						panel_button.click(function (e) { 
 							e.preventDefault();
 							if( confirm("삭제하시겠습니까 ?") ) {
 							}
+						} );
+					}else if ( panel_button.hasClass('custom-cancle') ){
+						panel_button.click(function (e) { 
+							showAnnouncePanel();
 						} );
 					}			
 				} );							
