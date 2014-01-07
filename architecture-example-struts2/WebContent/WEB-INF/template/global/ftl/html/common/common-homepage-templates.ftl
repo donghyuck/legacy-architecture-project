@@ -94,8 +94,14 @@
 	<button  type="button" class="btn btn-primary pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
 	# } #
 </script>
+
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
-	<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder=".col-xs-4" />		
+	<div class="form-group">
+		<label>제목</label>
+		<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
+	</div>
+  
+			
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
 		<li class="list-group-item">
