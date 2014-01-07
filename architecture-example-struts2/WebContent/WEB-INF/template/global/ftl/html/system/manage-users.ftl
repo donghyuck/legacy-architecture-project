@@ -692,7 +692,7 @@
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
 							<div class="btn-group">
-								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i>&nbsp;<span data-bind="text: displayName"></span>&nbsp;그룹관리</button>
+								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-users"></i>&nbsp;<span data-bind="text: displayName"></span>&nbsp;그룹관리</button>
 								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
 							</div>
 						</div>
@@ -814,8 +814,7 @@
 					<span data-bind="text: name"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button>
 				</div>				
-				<div class="panel-body" style="padding:5px;">
-					
+				<div class="panel-body" style="padding:5px;">					
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
