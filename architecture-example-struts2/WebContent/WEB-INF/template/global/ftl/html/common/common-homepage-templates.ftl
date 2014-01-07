@@ -90,16 +90,7 @@
 	</div>	
 	<div class="blank-top-5" ></div>
 	<div data-bind="html:body"></div>
-	# if ("${action.view!}" == "personalized" && editable ) {#  	
-	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-		<span class="caret"></span>
-		</button>
-		<ul class="dropdown-menu" role="menu">
-			<li><a href="\\#"><i class="fa fa-pencil-square-o"></i> &nbsp;수정</a></li>
-			<li><a href="\\#"><i class="fa fa-trash-o"></i>&nbsp;삭제</a></li>
-		</ul>		
-	</div>										
+	# if ("${action.view!}" == "personalized" && editable ) {#  										
 	<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
 	# } #
 </script>
