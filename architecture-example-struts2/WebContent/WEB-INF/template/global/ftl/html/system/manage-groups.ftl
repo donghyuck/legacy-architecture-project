@@ -334,7 +334,81 @@
 												});	        							
 												// end of  member searching				
 											}																			
-										}	
+										}else if( $(this).attr('href') == '#roles' ){	
+										
+											if( ! $('#group-role-select').data("kendoMultiSelect") ){					                      			
+				                      			var selectedRoleDataSource = new kendo.data.DataSource({
+													transport: {
+										            	read: { 
+										            		url:'${request.contextPath}/secure/get-group-roles.do?output=json', 
+										            		dataType: "json", 
+										            		type:'POST',
+										            		data: { groupId: selectedGroup.groupId }
+												        }  
+												    },
+												    schema: {
+									                	data: "groupRoles",
+									                    model: Role
+									                },
+									                error:handleKendoAjaxError,
+									                change: function(e) {                
+						                        		var multiSelect = $("#group-role-select").data("kendoMultiSelect");
+						                        		var selectedRoleIDs = "";
+						                        		$.each(  selectedRoleDataSource.data(), function(index, row){  
+						                        			if( selectedRoleIDs == "" ){
+						                        			    selectedRoleIDs =  selectedRoleIDs + row.roleId ;
+						                        			}else{
+						                        				selectedRoleIDs = selectedRoleIDs + "," + row.roleId;
+						                        			}
+						                        		} );			                        		
+						                        		multiSelect.value( selectedRoleIDs.split( "," ) );	 
+									                }	                               
+				                               });		                               
+												$('#group-role-select').kendoMultiSelect({
+				                                    placeholder: "롤 선택",
+									                dataTextField: "name",
+									                dataValueField: "roleId",
+									                dataSource: {
+									                    transport: {
+									                        read: {
+							                                    url: '${request.contextPath}/secure/list-role.do?output=json',
+																dataType: "json",
+																type: "POST"
+									                        }
+									                    },
+									                    schema: { 
+						                            		data: "roles",
+						                            		model: Role
+						                        		}
+									                },
+						                        	error:handleKendoAjaxError,
+						                        	dataBound: function(e) {
+						                        		 selectedRoleDataSource.read();   	
+						                        	},			                        	
+						                        	change: function(e){
+						                        		var multiSelect = $("#group-role-select").data("kendoMultiSelect");			                        		
+						                        		var list = new Array();			                        		                  		
+						                        		$.each(multiSelect.value(), function(index, row){  
+						                        			var item =  multiSelect.dataSource.get(row);
+						                        			list.push(item);			                        			
+						                        		});						                        		
+						                        		multiSelect.readonly();			                        		
+							 							$.ajax({
+												            dataType : "json",
+															type : 'POST',
+															url : "${request.contextPath}/secure/update-group-roles.do?output=json",
+															data : { groupId:selectedGroup.groupId, items: kendo.stringify( list ) },
+															success : function( response ){		
+																// need refresh ..			
+																// alert( kendo.stringify( response ) );							    
+															},
+															error:handleKendoAjaxError
+														});												
+														multiSelect.readonly(false);
+						                        	}
+									            });
+											}											
+										}
 									});
 
 																					
@@ -556,7 +630,7 @@
 						<div class="blank-top-15"></div>
 						<div class="alert alert-info">그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.</div>	
 						<div class="roles big-box">
-							<div id="group-role-select"></div>
+							
 						</div>	
 					</div>
 				</div>
