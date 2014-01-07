@@ -853,7 +853,6 @@
 								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 								그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.
 							</div>							
-							<div id="group-role-select"></div>
 						</div>						
 					</div>
 				</div>
