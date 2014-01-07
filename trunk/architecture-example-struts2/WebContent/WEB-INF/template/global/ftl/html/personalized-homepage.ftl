@@ -856,7 +856,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div class="container layout" style="min-height:350px;">							
+			<div class="container" style="min-height:350px;">							
 				<div class="row">					
 					<div class="col-sm-12 col-md-8">						
 						<!-- start announce panel -->						
