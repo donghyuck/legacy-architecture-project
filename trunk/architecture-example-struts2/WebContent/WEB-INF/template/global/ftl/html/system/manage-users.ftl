@@ -819,7 +819,7 @@
 		<script type="text/x-kendo-template" id="user-details-template">			
 			<div class="panel panel-primary marginless details" >
 				<div class="panel-heading" >
-					<span data-bind="text: name"></span>
+					<i class="fa fa-male"></i>&nbsp;<span data-bind="text: name"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button>
 				</div>				
 				<div class="panel-body" style="padding:5px;">		
@@ -835,7 +835,7 @@
 											
 						</a>
 						<div class="media-body">
-							<h4 class="media-heading"><i class="fa fa-male"></i></h4>
+							<h4 class="media-heading"></h4>
 							<table class="table">
 								<tbody>
 									<tr>
