@@ -817,8 +817,14 @@
 				<div class="panel-body" style="padding:5px;">		
 					<div class="media">
 						<a class="pull-left" href="\\#">
-							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0" />
-							<input name="uploadImage" id="files" type="file" />
+							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0" dropdown-toggle" data-toggle="dropdown"/>							
+							<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
+								<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
+								<li>
+									<input name="uploadImage" id="files" type="file" class="pull-right" />
+								</li>
+							</ul>
+											
 						</a>
 						<div class="media-body">
 							<h4 class="media-heading"><i class="fa fa-male"></i></h4>
