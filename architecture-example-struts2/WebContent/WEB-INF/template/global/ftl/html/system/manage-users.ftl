@@ -641,7 +641,9 @@
         
         </script>
 		<style>			
-		
+		.k-grid-content{
+			height:300px;
+		}		
 		</style>
     </head>
 	<body>
