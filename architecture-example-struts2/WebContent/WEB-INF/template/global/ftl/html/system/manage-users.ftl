@@ -653,15 +653,35 @@
 			<div class="row">			
 				<div class="col-12 col-lg-12">					
 					<div class="page-header">
-						<h1><span data-bind="text: title"></span>&nbsp;&nbsp;<small><span data-bind="text: description"></span></small></h1>
+						<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
 					</div>			
 				</div>		
 			</div>
+			<div class="row full-width-row">		
+				<div class="col-sm-12">
+					<div class="panel panel-default" style="min-height:300px;" >
+						<div class="panel-heading selected-company-info" style="padding:5px;">
+							<div class="btn-group">
+								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i>&nbsp;<span data-bind="text: displayName"></span>&nbsp;그룹관리</button>
+								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>
+							</div>
+						</div>
+						<div class="panel-body" style="padding:5px;">
+							<div class="row marginless paddingless">
+								<div class="col-sm-12 body-group marginless paddingless"><div id="user-grid"></div></div>
+								<div id="user-details" class="col-sm-12 body-group marginless paddingless" style="display:none; padding-top:5px;"></div>
+							</div>
+						</div>
+					
+					</div>				
+				</div>			
+			</div>				
+						<!--
 			<div class="row">
 				<div class="col-12 col-lg-12">		
 					<div id="splitter">
 						<div id="list_pane">
-							<div id="user-grid"></div>
+							
 						</div>
 						<div id="datail_pane">
 							<div id="user-details"></div>
@@ -669,6 +689,7 @@
 					</div>				
 				</div>	
 			</div>				
+			-->
 			<form name="fm1" method="POST" accept-charset="utf-8">
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>	
