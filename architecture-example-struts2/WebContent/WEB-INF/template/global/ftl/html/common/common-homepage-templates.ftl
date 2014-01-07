@@ -91,7 +91,7 @@
 	<div class="blank-top-5" ></div>
 	<div data-bind="html:body"></div>
 	# if ("${action.view!}" == "personalized" && editable ) {#  										
-	<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
+	<button  type="button" class="btn btn-primary pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
 	# } #
 </script>
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
