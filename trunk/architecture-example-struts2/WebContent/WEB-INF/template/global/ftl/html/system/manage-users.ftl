@@ -824,6 +824,10 @@
 							<table class="table table-striped">
 								<tbody>
 									<tr>
+										<th class="col-lg-3">아이디</th>
+										<td><input type="text" class="k-textbox" placeholder="아이디" data-bind="value:username"/></td>
+									</tr> 
+									<tr>
 										<th class="col-lg-3">최근 프로파일 수정일</th>
 										<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
 									</tr>  
@@ -845,7 +849,7 @@
 											<div class="form-group">
 	 											<label class="col-lg-3 control-label">이름</label>
 												<div class="col-lg-9">
-													<input type="text" class="k-textbox" placeholder="아이디" data-bind="value:username"/>
+													
 												</div>	
 											</div>
 											<div class="form-group">
