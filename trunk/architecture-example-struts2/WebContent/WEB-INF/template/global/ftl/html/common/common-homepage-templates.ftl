@@ -110,6 +110,20 @@
 			<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다. </span>
 		</div>
 	</div>
+	<div class="form-group">
+		<div class="col-sm-12">
+			<textarea data-role="editor"
+			data-tools="['bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'justifyLeft',
+			'justifyCenter',
+			'justifyRight',
+			'justifyFull']"
+			data-bind='value:body'></textarea>		
+		</div>
+	</div>
 </div>	  
 	<!--		
 	<div class="blank-top-5" ></div>		
@@ -147,16 +161,7 @@
 	<!--
 	<div contentEditable class="inline-body-editor" data-role="editor" data-tools="['italic',	'underline',	'strikethrough']"	data-bind="value:body"></div>	
 	-->
-	<textarea data-role="editor"
-			data-tools="['bold',
-			'italic',
-			'underline',
-			'strikethrough',
-			'justifyLeft',
-			'justifyCenter',
-			'justifyRight',
-			'justifyFull']"
-			data-bind='value:body'></textarea>	
+		
 	<div class="blank-top-5" ></div>				
 	<div class="pull-right">
 			<div class="btn-group">
