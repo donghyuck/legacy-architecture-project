@@ -673,7 +673,7 @@
 			height:300px;
 		}		
 		
-		.media a .dropdown-menu {
+		.media a ul .dropdown-menu {
 			top: none;
 			left: 10px; 
 			padding : 20px;
