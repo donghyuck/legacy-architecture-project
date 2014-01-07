@@ -139,8 +139,7 @@
 			'justifyCenter',
 			'justifyRight',
 			'justifyFull']"
-			data-bind='value:body'
-			style="width: 280px"></textarea>	
+			data-bind='value:body'></textarea>	
 	<div class="blank-top-5" ></div>				
 	<div class="pull-right">
 			<div class="btn-group">
