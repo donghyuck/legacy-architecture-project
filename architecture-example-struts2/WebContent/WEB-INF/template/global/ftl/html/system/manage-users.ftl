@@ -961,7 +961,7 @@
 										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 										프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
 									</div>						
-									<div id="group-prop-grid" class="props"></div>
+									<div id="user-props-grid" class="props"></div>
 								</div>
 								<div class="tab-pane" id="groups">
 									<div class="alert alert-info">
@@ -1076,10 +1076,7 @@
 						</div>
 						<div>
 	        			<!-- USER PROPS TAB =============================== -->
-        				<div id="user-props-grid" class="props" style="height:0px;"/>
-        				<div class="box leftless rightless bottomless">
-	                		<div class="alert alert-info">프로퍼티는 저장 버튼을 클릭하여야 최종 반영됩니다.</div>
-	                	</div>
+
 	                </div>
 	                <div>	                
 	                	<div class="row-fluid">
