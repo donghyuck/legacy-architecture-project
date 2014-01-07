@@ -455,8 +455,43 @@
 										}
 									}else if( $(this).attr('href') == '#files' ){	
 										if(!$("#attach-grid").data("kendoGrid") ){	
-										
-										
+											$("#attach-grid").kendoGrid({
+							                	dataSource: {
+							                    	autoSync: true,
+							                        type: 'json',
+							                        transport: {
+							                            read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
+							                            destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
+									                    parameterMap: function (options, operation){
+									                  		if (operation != "read" && options) {										                        								                       	 	
+									                         	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
+									                        }else{
+									                           	return { userId: selectedUser.userId };
+									                        }
+									                    }								                         
+							                        },
+							                        error:handleKendoAjaxError,
+							                        schema: {
+							                          	model: Attachment,
+							                           	data : "targetUserAttachments"
+							                        }
+						                        },
+							                    height:300,
+							                    scrollable:  true,
+							                    sortable: true,
+							                    editable: {
+									               	update: false,
+									               	destroy: true,
+									              	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
+									            },
+							                    columns: [
+							                    	{ title: "ID", width: 50, field:"attachmentId", filterable: false },
+							                        { field: "name", title: "이름", template: '#=name#', width: 150 },
+							                        { field: "contentType", title: "유형", width: 80 }
+							                    ],
+							                    dataBound: function(e) {
+							                    }
+							          		});										
 										}
 									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
