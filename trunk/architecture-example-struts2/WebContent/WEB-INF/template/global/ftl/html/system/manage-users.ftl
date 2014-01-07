@@ -451,11 +451,13 @@
 														});												
 														multiSelect.readonly(false);
 														}
-												});
-											}												
-										
-										
+											});
+										}
 									}else if( $(this).attr('href') == '#files' ){	
+										if(!$("#attach-grid").data("kendoGrid") ){	
+										
+										
+										}
 									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
 											$("#attach-grid").kendoGrid({
