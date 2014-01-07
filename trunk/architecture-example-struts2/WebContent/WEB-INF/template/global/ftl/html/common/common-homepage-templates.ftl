@@ -96,7 +96,8 @@
 		<i class="fa fa-cog"></i>
 		</button>
 		<ul class="dropdown-menu" role="menu">
-		<li><a href="\\#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
+			<li><a href="\\#"><i class="fa fa-pencil-square-o"></i> &nbsp;수정</a></li>
+			<li><a href="\\#"><i class="fa fa-trash-o"></i>&nbsp;삭제</a></li>
 		</ul>		
 	</div>										
 	<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
