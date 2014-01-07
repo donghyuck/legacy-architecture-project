@@ -888,6 +888,10 @@
 					<button type="button" class="close" aria-hidden="true">&times;</button>
 				</div>				
 				<div class="panel-body" style="padding:5px;">		
+									<div class="alert alert-danger margin-buttom-5">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+										이미지를 수정하시려면 이미지를 클릭하십시오.
+									</div>						
 					<div class="media">
 						<a class="pull-left" href="\\#" dropdown-toggle" data-toggle="dropdown">
 							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0"/>																
