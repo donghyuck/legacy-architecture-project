@@ -815,10 +815,18 @@
 					<button type="button" class="close" aria-hidden="true">&times;</button>
 				</div>				
 				<div class="panel-body" style="padding:5px;">		
-				
+					<div class="media">
+						<a class="pull-left" href="#">
+							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0" />
+						</a>
+						<div class="media-body">
+							<h4 class="media-heading">Media heading</h4>
+
+						</div>
+					</div>								
 					<div class="row">
 						<div class="col-lg-2">
-							<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>									
+																
 							<input name="uploadImage" id="files" type="file" />
 						</div>
 						<div class="col-lg-10 details">									
