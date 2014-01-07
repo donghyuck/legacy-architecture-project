@@ -93,7 +93,7 @@
 	# if ("${action.view!}" == "personalized" && editable ) {#  	
 	<div class="btn-group pull-right">
 		<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
-		<i class="fa fa-cog"></i>
+		<span class="caret"></span>
 		</button>
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="\\#"><i class="fa fa-pencil-square-o"></i> &nbsp;수정</a></li>
