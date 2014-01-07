@@ -171,8 +171,8 @@
 							 	// $("#splitter").data("kendoSplitter").expand("#datail_pane");
 							 	 
 							 	// 3. USER TABS 	
-							 	$('#user-details').show().html(kendo.template($('#template').html()));							 	
-	                            kendo.bind($(".details"), selectedUser );      								
+							 	$('#user-details').show().html(kendo.template($('#user-details-template').html()));							 	
+								kendo.bind($(".details"), selectedUser ); 
 							
 							 	if( selectedUser.properties.imageId ){
 							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
@@ -807,6 +807,49 @@
 			  </tbody>
 			</table>				
 		</script>	
+		
+		<script type="text/x-kendo-template" id="user-details-template">			
+			<div class="panel panel-primary marginless details" >
+				<div class="panel-heading" >
+					<span data-bind="text: displayName"></span>
+					<button type="button" class="close" aria-hidden="true">&times;</button></div>
+					<div class="panel-body" style="padding:5px;">
+					<ul id="myTab" class="nav nav-tabs">
+						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
+						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
+						<li><a href="\\#roles" data-toggle="tab">롤</a></li>
+						<li><a href="\\#files" data-toggle="tab">롤</a></li>
+					</ul>			
+					<div class="tab-content">
+						<div class="tab-pane active" id="props">
+							<div class="blank-top-5"></div>
+							<div class="alert alert-danger margin-buttom-5">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
+							</div>						
+							<div id="group-prop-grid" class="props"></div>
+						</div>
+						<div class="tab-pane" id="members">
+							<div class="blank-top-5" ></div>	
+							<div class="alert alert-danger margin-buttom-5">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
+							</div>						
+							<div id="company-group-grid"  class="members"></div>					
+						</div>
+						<div class="tab-pane" id="roles">
+							<div class="blank-top-5" ></div>	
+							<div class="alert alert-danger margin-buttom-5">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.
+							</div>							
+							<div id="group-role-select"></div>
+						</div>
+					</div>
+				</div>
+			</div>			
+		</div>
+		
 		<script type="text/x-kendo-template" id="template">
 
 				<div class="big-box">
