@@ -254,6 +254,46 @@
 									if( $(this).attr('href') == '#props' ){	
 
 									}else	if( $(this).attr('href') == '#groups' ){	
+										// GROUP SELECT COMBO BOX
+										if( !$("#company-combo").data("kendoComboBox") ){
+											var company_combo = $("#company-combo").kendoComboBox({
+												autoBind: false,
+												placeholder: "회사 선택",
+						                        dataTextField: "displayName",
+						                        dataValueField: "companyId",
+											    dataSource: topBar.items[0].dataSource // $("#company").data("kendoDropDownList").dataSource 
+											});
+											$("#company-combo").data("kendoComboBox").value( 
+												selectedCompany.companyId //$("#company").data("kendoDropDownList").value() 
+											);
+											$("#company-combo").data("kendoComboBox").readonly();
+										}										
+
+										if( !$("#group-combo").data("kendoComboBox") ){
+											$("#group-combo").kendoComboBox({
+												autoBind: false,
+												placeholder: "그룹 선택",
+						                        dataTextField: "displayName",
+						                        dataValueField: "groupId",
+						                        cascadeFrom: "company-combo",			                       
+											    dataSource:  {
+													type: "json",
+												 	serverFiltering: true,
+													transport: {
+														read: { url:'${request.contextPath}/secure/list-company-group.do?output=json', type:'post' },
+														parameterMap: function (options, operation){											 	
+														 	return { companyId:  options.filter.filters[0].value };
+														}
+													},
+													schema: {
+														data: "companyGroups",
+														model: Group
+													},
+													error:handleKendoAjaxError
+												}
+											});											
+										}
+									
 										if( ! $("#user-group-grid").data("kendoGrid") ){	
 											// 3-1 USER GROUP GRID
 											$("#user-group-grid").kendoGrid({
@@ -661,43 +701,7 @@
 									} 
 				                });
 				                
-				                // GROUP SELECT COMBO BOX
-								var company_combo = $("#company-combo").kendoComboBox({
-									autoBind: false,
-									placeholder: "회사 선택",
-			                        dataTextField: "displayName",
-			                        dataValueField: "companyId",
-								    dataSource: topBar.items[0].dataSource // $("#company").data("kendoDropDownList").dataSource 
-								});			
-													
-								$("#company-combo").data("kendoComboBox").value( 
-								 	selectedCompany.companyId //$("#company").data("kendoDropDownList").value() 
-								 );	
-								 
-								$("#company-combo").data("kendoComboBox").readonly();
-																
-								$("#group-combo").kendoComboBox({
-									autoBind: false,
-									placeholder: "그룹 선택",
-			                        dataTextField: "displayName",
-			                        dataValueField: "groupId",
-			                        cascadeFrom: "company-combo",			                       
-								    dataSource:  {
-										type: "json",
-									 	serverFiltering: true,
-										transport: {
-											read: { url:'${request.contextPath}/secure/list-company-group.do?output=json', type:'post' },
-											parameterMap: function (options, operation){											 	
-											 	return { companyId:  options.filter.filters[0].value };
-											}
-										},
-										schema: {
-											data: "companyGroups",
-											model: Group
-										},
-										error:handleKendoAjaxError
-									}
-								});	
+
 								
 								// ADD USER TO SELECTED GROUP 
 								$("#add-to-member-btn").click( function ( e ) {
@@ -968,6 +972,7 @@
 									<div id="user-props-grid" class="props"></div>
 								</div>
 								<div class="tab-pane" id="groups">
+									<div class="blank-top-5"></div>
 									<div class="alert alert-info">
 				                    	멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
 										<div class="form-inline">
