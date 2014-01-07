@@ -455,6 +455,7 @@
 										}
 									}else if( $(this).attr('href') == '#files' ){	
 									alert("1");
+									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
 											$("#attach-grid").kendoGrid({
 							                	dataSource: {
@@ -494,6 +495,7 @@
 							                    }
 							          		});										
 										}
+										*/
 									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
 											$("#attach-grid").kendoGrid({
