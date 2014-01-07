@@ -674,8 +674,8 @@
 		}		
 		
 		#user-details .dropdown-menu {
-			top: none;
-			left: 10px; 
+			top: 120px;
+			left: 50px; 
 			padding : 20px;
 			min-width:300px;
 		}
