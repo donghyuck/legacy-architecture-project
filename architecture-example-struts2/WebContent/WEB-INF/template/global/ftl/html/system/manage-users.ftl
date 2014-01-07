@@ -455,7 +455,89 @@
 										
 										
 									}else	if( $(this).attr('href') == '#files' ){	
-										
+										if( ! $("#attach-grid").data("kendoGrid") ){	
+												$("#attach-grid").kendoGrid({
+							                        dataSource: {
+							                        	autoSync: true,
+							                            type: 'json',
+							                            transport: {
+							                                read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
+							                                destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
+									                        parameterMap: function (options, operation){
+									                        	 if (operation != "read" && options) {										                        								                       	 	
+									                        	 	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
+									                            }else{
+									                            	return { userId: selectedUser.userId };
+									                            }
+									                        }								                         
+							                            },
+							                            error:handleKendoAjaxError,
+							                            schema: {
+							                            	model: Attachment,
+							                            	data : "targetUserAttachments"
+							                            }
+							                        },
+							                        height:300,
+							                        scrollable:  true,
+							                        sortable: true,
+							                        editable: {
+									                	update: false,
+									                	destroy: true,
+									                	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
+									                },
+							                        columns: [{
+							                        		title: "ID",
+							                        		width: 50,
+							                                field:"attachmentId",
+							                                filterable: false
+							                            },
+							                            {
+							                                field: "name",
+							                                title: "이름",
+							                                template: '#= name  #',
+							                                width: 150
+							                            },
+							                             {
+							                                field: "contentType",
+							                                title: "유형",
+							                                width: 80 /**
+							                            }, {
+							                                field: "modifiedDate",
+							                                title: "수정일",
+							                                width: 80,
+							                                format: "{0:yyyy/MM/dd}" **/
+							                            },
+							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
+									                            	var tr = $(e.target).closest("tr"); 
+														          	var item = this.dataItem(tr);
+							                            			if(! $("#download-window").data("kendoWindow")){
+							                            				$("#download-window").kendoWindow({
+							                            					actions: ["Close"],
+							                            					minHeight : 500,
+							                            					minWidth :  400,
+							                            					maxHeight : 700,
+							                            					maxWidth :  600,
+							                            					modal: true,
+							                            					visible: false
+							                            				});
+							                            			}
+							                            			
+							                            			var downloadWindow = $("#download-window").data("kendoWindow");
+							                            			downloadWindow.title( item.name );							                            			
+							                            		 	var template = kendo.template($("#download-window-template").html());
+							                            			downloadWindow.content( template(item) );
+							                            			$("#download-window").closest(".k-window").css({
+																	     top: 5,
+																	     left: 5,
+																	 });						                            			
+							                            			downloadWindow.open();
+							                            		}
+							                            	}, 
+							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
+							                        ],
+							                        dataBound: function(e) {
+							                        }
+							                    });
 									}
 								});				
 								$('#myTab a:first').tab('show') ;						
@@ -555,89 +637,7 @@
 					                      		});				
 											}				                   
 											   		         
-											if( ! $("#attach-grid").data("kendoGrid") ){	
-												$("#attach-grid").kendoGrid({
-							                        dataSource: {
-							                        	autoSync: true,
-							                            type: 'json',
-							                            transport: {
-							                                read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
-							                                destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
-									                        parameterMap: function (options, operation){
-									                        	 if (operation != "read" && options) {										                        								                       	 	
-									                        	 	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
-									                            }else{
-									                            	return { userId: selectedUser.userId };
-									                            }
-									                        }								                         
-							                            },
-							                            error:handleKendoAjaxError,
-							                            schema: {
-							                            	model: Attachment,
-							                            	data : "targetUserAttachments"
-							                            }
-							                        },
-							                        height:300,
-							                        scrollable:  true,
-							                        sortable: true,
-							                        editable: {
-									                	update: false,
-									                	destroy: true,
-									                	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
-									                },
-							                        columns: [{
-							                        		title: "ID",
-							                        		width: 50,
-							                                field:"attachmentId",
-							                                filterable: false
-							                            },
-							                            {
-							                                field: "name",
-							                                title: "이름",
-							                                template: '#= name  #',
-							                                width: 150
-							                            },
-							                             {
-							                                field: "contentType",
-							                                title: "유형",
-							                                width: 80 /**
-							                            }, {
-							                                field: "modifiedDate",
-							                                title: "수정일",
-							                                width: 80,
-							                                format: "{0:yyyy/MM/dd}" **/
-							                            },
-							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
-									                            	var tr = $(e.target).closest("tr"); 
-														          	var item = this.dataItem(tr);
-							                            			if(! $("#download-window").data("kendoWindow")){
-							                            				$("#download-window").kendoWindow({
-							                            					actions: ["Close"],
-							                            					minHeight : 500,
-							                            					minWidth :  400,
-							                            					maxHeight : 700,
-							                            					maxWidth :  600,
-							                            					modal: true,
-							                            					visible: false
-							                            				});
-							                            			}
-							                            			
-							                            			var downloadWindow = $("#download-window").data("kendoWindow");
-							                            			downloadWindow.title( item.name );							                            			
-							                            		 	var template = kendo.template($("#download-window-template").html());
-							                            			downloadWindow.content( template(item) );
-							                            			$("#download-window").closest(".k-window").css({
-																	     top: 5,
-																	     left: 5,
-																	 });						                            			
-							                            			downloadWindow.open();
-							                            		}
-							                            	}, 
-							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
-							                        ],
-							                        dataBound: function(e) {
-							                        }
-							                    });
+											
 							                    $("#attach-grid").attr('style', '');
 											}
 				                    	}
@@ -996,7 +996,15 @@
 									<div class="alert alert-info">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.</div>	
                 					<div id="user-role-select"></div>                				
 								</div>
-								<div class="tab-pane" id="files"></div>						
+								<div class="tab-pane" id="files">
+									<div class="blank-top-5"></div>
+				                    <div class="alert alert-info">
+					                    <input id="attach-upload" name="uploadFile" type="file" />
+					                    <p/>
+					                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
+				                    </div>
+				                	<div id="attach-grid" class="attachments"></div>									
+								</div>						
 							</div>
 						</div>
 					</div>
@@ -1117,12 +1125,7 @@
 						</div>	
 	                </div>			
 	                <div>	                	    
-	                    <div class="alert alert-info">
-		                    <input id="attach-upload" name="uploadFile" type="file" />
-		                    <p/>
-		                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
-	                    </div>
-	                	<div id="attach-grid" class="attachments"></div>
+
 	                </div>	
 				</div>
 		</script>
