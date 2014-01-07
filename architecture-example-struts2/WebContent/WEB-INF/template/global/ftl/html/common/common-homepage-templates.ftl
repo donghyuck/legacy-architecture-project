@@ -104,9 +104,10 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<label class="col-sm-2 control-label">시작일</label>
+		<label class="col-sm-2 control-label">기간</label>
 		<div class="col-sm-10">
 			<input data-role="datetimepicker" data-bind="value:startDate"> ~ <input data-role="datetimepicker" data-bind="value:endDate">
+			<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다. </span>
 		</div>
 	</div>
 </div>	  
