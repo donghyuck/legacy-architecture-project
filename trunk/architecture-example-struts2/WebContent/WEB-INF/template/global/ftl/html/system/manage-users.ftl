@@ -821,7 +821,7 @@
 							<input name="uploadImage" id="files" type="file" />
 						</a>
 						<div class="media-body">
-							<h4 class="media-heading">&nbsp;</h4>
+							<h4 class="media-heading"><i class="fa fa-male"></i></h4>
 							<table class="table">
 								<tbody>
 									<tr>
