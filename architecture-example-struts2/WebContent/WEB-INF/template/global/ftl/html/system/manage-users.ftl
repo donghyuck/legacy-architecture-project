@@ -820,7 +820,7 @@
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
 						<li><a href="\\#roles" data-toggle="tab">롤</a></li>
-						<li><a href="\\#files" data-toggle="tab"첨부파일롤</a></li>
+						<li><a href="\\#files" data-toggle="tab">첨부파일</a></li>
 					</ul>			
 					<div class="tab-content">
 						<div class="tab-pane active" id="props">
