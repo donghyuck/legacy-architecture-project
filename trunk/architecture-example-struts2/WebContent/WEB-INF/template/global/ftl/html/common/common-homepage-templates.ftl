@@ -97,8 +97,10 @@
 
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
 	<div class="form-group">
-		<label>제목</label>
-		<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
+		<label class="col-sm-2 control-label">제목</label>
+		<div class="col-sm-10">
+			<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
+		</div>
 	</div>
   
 			
