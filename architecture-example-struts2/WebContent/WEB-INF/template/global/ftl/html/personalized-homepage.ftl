@@ -911,7 +911,7 @@
 						</div>						
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
-								<a href="#my-message-announces" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>공지 및 이벤트</a>
+								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
 							</li>
 							<li>
 								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    쇼셜</a>
