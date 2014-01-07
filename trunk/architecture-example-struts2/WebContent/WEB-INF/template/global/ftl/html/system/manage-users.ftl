@@ -817,7 +817,8 @@
 				<div class="panel-body" style="padding:5px;">		
 				
 					<div class="row"></div>
-					<div class="row">		
+					<div class="row">
+					<div class="col-12 col-xs-12">		
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
@@ -836,6 +837,7 @@
 						<div class="tab-pane" id="groups"></div>
 						<div class="tab-pane" id="roles"></div>
 						<div class="tab-pane" id="files"></div>						
+					</div>
 					</div>
 					</div>
 				</div>
