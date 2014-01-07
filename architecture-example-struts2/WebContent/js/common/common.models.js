@@ -4,8 +4,8 @@ var Announce = kendo.data.Model.define( {
     	announceId: { type: "number", editable: false, defaultValue: -1  },
     	subject: { type: "string", editable: true },
     	body: { type: "string", editable: true },
-    	startDate: { type: "date",  editable: true},
-    	endDate: { type: "date" ,  editable: true},
+    	startDate: { type: "date",  editable: true, format: "M/d/yyyy h:mm:ss tt" },
+    	endDate: { type: "date" ,  editable: true, format: "M/d/yyyy h:mm:ss tt"},
         modifiedDate: { type: "date"},
         creationDate: { type: "date" }
     }
