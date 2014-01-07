@@ -811,7 +811,7 @@
 		<script type="text/x-kendo-template" id="user-details-template">			
 			<div class="panel panel-primary marginless details" >
 				<div class="panel-heading" >
-					<span data-bind="text: displayName"></span>
+					<span data-bind="text: name"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button></div>
 					<div class="panel-body" style="padding:5px;">
 					<ul id="myTab" class="nav nav-tabs">
