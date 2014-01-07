@@ -864,10 +864,6 @@
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link dropdown-toggle" data-toggle="dropdown"><span role="presentation" class="k-icon k-i-custom">Custom</span></a>
-										<ul class="dropdown-menu" role="menu">
-											<li><a href="#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
-										</ul>									
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
