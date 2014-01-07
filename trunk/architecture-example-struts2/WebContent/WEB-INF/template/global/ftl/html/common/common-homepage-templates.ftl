@@ -103,7 +103,6 @@
 	<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
 	# } #
 </script>
-
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
 	<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder=".col-xs-4" />		
 	<div class="blank-top-5" ></div>		
