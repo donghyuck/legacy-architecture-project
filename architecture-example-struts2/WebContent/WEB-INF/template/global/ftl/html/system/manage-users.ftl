@@ -177,7 +177,8 @@
 							 	if( selectedUser.properties.imageId ){
 							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
 							 	 	$('#user-photo').attr( 'src', photoUrl );
-							 	}								
+							 	}		
+							 								 							
 								$("#files").kendoUpload({
 								 	multiple : false,
 								 	showFileList : false,
@@ -200,7 +201,15 @@
 							 	 			$('#user-photo').attr( 'src', photoUrl );
 								    	}				
 								    }					   
-								});	                    
+								});
+								
+								$('#myTab a').click(function (e) {
+									e.preventDefault(); 
+									if( $(this).attr('href') == '#props' ){	
+										
+									}
+								});										
+								
 					            $('#change-password-btn').bind( 'click', function(){
 					                $('#change-password-window').kendoWindow({
 				                            width: "400px",
@@ -884,7 +893,7 @@
 					<div class="row">
 						<div class="col-12 col-xs-12">		
 							<ul id="myTab" class="nav nav-tabs">
-								<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
+								<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 								<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
 								<li><a href="\\#roles" data-toggle="tab">롤</a></li>
 								<li><a href="\\#files" data-toggle="tab">첨부파일</a></li>
