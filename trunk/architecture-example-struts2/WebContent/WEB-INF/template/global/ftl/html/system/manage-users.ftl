@@ -490,13 +490,7 @@
 							                    columns: [
 							                    	{ title: "ID", width: 50, field:"attachmentId", filterable: false },
 							                        { field: "name", title: "이름", template: '#= name  #', width: 150 },
-							                        { field: "contentType", title: "유형", width: 80 /**
-							                            }, {
-							                                field: "modifiedDate",
-							                                title: "수정일",
-							                                width: 80,
-							                                format: "{0:yyyy/MM/dd}" **/
-							                        },
+							                        { field: "contentType", title: "유형", width: 80 },
 							                        { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
 									                   	var tr = $(e.target).closest("tr"); 
 											          	var item = this.dataItem(tr);
