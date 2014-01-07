@@ -102,12 +102,18 @@
 			<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
 		</div>
 	</div>
-  
-			
+	<div class="form-group">
+		<label class="col-sm-2 control-label">시작일</label>
+		<div class="col-sm-10">
+			<input data-role="datetimepicker" data-bind="value:startDate">
+		</div>
+	</div>
+	  
+	<!--		
 	<div class="blank-top-5" ></div>		
 	<ul class="list-group">
 		<li class="list-group-item">
-		시작일시: <input data-role="datetimepicker" data-bind="value:startDate" style="width: 220px; height:28px;">
+		시작일시: 
 		<div class="blank-top-5" ></div>
 		종료일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px; height:28px;">
 		</li>
@@ -135,6 +141,7 @@
 		</div>			
 		</li>
 	</ul>
+	-->
 	<!--
 	<div contentEditable class="inline-body-editor" data-role="editor" data-tools="['italic',	'underline',	'strikethrough']"	data-bind="value:body"></div>	
 	-->
