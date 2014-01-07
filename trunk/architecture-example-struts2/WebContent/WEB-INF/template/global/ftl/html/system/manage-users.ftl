@@ -168,7 +168,7 @@
 							 if( selectedUser.userId > 0 ){						
 							 	 	
 							 	// 2. USER DETAILS
-							 	 $("#splitter").data("kendoSplitter").expand("#datail_pane");
+							 	// $("#splitter").data("kendoSplitter").expand("#datail_pane");
 							 	 
 							 	// 3. USER TABS 	
 							 	$('#user-details').show().html(kendo.template($('#template').html()));							 	
