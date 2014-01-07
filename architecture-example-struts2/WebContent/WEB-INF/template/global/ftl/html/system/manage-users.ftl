@@ -170,7 +170,6 @@
 							 	// 2. USER DETAILS
 							 	// $("#splitter").data("kendoSplitter").expand("#datail_pane");
 							 	 
-							 	// 3. USER TABS 	
 							 	$('#user-details').show().html(kendo.template($('#user-details-template').html()));							 	
 								kendo.bind($(".details"), selectedUser ); 
 							
@@ -202,13 +201,107 @@
 								    	}				
 								    }					   
 								});
-								
+
+ 								// 3-1. USER PROPERTY GRID	
+ 								if(!$("#user-props-grid").data("kendoGrid")){
+ 									$("#user-props-grid").kendoGrid({
+										dataSource: {
+											transport: { 
+												read: { url:'${request.contextPath}/secure/get-user-property.do?output=json', type:'post' },
+											    create: { url:'${request.contextPath}/secure/update-user-property.do?output=json', type:'post' },
+											    update: { url:'${request.contextPath}/secure/update-user-property.do?output=json', type:'post'  },
+											    destroy: { url:'${request.contextPath}/secure/delete-user-property.do?output=json', type:'post' },
+											 	parameterMap: function (options, operation){
+											 		if (operation !== "read" && options.models) {
+					                                	return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
+					                                } 
+							                        return { userId: selectedUser.userId }
+							                    }
+											 },						
+											 batch: true, 
+											 schema: {
+						                            data: "targetUserProperty",
+						                            model: Property
+						                     },
+						                     error:handleKendoAjaxError
+									    },
+									    columns: [
+									         { title: "속성", field: "name" },
+									         { title: "값",   field: "value" },
+									         { command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
+									    ],
+									    autoBind: true, 
+									    pageable: false,
+									    scrollable: true,
+									    height: 200,
+							            editable: {
+							                	update: true,
+							                	destroy: true,
+							                	confirmation: "선택하신 프로퍼티를 삭제하겠습니까?"	
+							            },
+									    toolbar: [
+									         { name: "create", text: "추가" },
+					                         { name: "save", text: "저장" },
+					                         { name: "cancel", text: "취소" }
+										],				     
+									    change: function(e) {  
+										}
+								    });								    
+ 								}
+							 	// 3-2. USER TABS 																
 								$('#myTab a').click(function (e) {
 									e.preventDefault(); 
 									if( $(this).attr('href') == '#props' ){	
-										alert( "1" );
+
 									}else	if( $(this).attr('href') == '#groups' ){	
-										
+										if( ! $("#user-group-grid").data("kendoGrid") ){	
+											// 3-1 USER GROUP GRID
+											$("#user-group-grid").kendoGrid({
+				   								dataSource: {
+													type: "json",
+										        	transport: {
+										                        read: { url:'${request.contextPath}/secure/list-user-groups.do?output=json', type:'post' },
+																destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
+																parameterMap: function (options, operation){
+												                    if (operation !== "read" && options.models) {
+																 	    return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
+										                            }
+												                    return { userId: selectedUser.userId };
+												                }
+										        	},
+										        	schema: {
+										                    	data: "userGroups",
+										                    	model: Group
+										        	},
+										            error:handleKendoAjaxError
+					                        	},
+												scrollable: true,
+												height:200,
+												editable: false,
+										        columns: [
+									                        { field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
+									                        { field: "displayName",    title: "이름",   filterable: true, sortable: true,  width: 100 },
+									                        { command:  { text: "삭제", click : function(e){									                       		
+									                       		if( confirm("정말로 삭제하시겠습니까?") ){
+																	var selectedGroup = this.dataItem($(e.currentTarget).closest("tr"));									                       		
+										                       		$.ajax({
+																		type : 'POST',
+																		url : "/secure/remove-group-members.do?output=json",
+																		data : { groupId:selectedGroup.groupId, items: '[' + kendo.stringify( selectedUser ) + ']'  },
+																		success : function( response ){									
+																	        $('#user-group-grid').data('kendoGrid').dataSource.read();
+																	        $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
+																		},
+																		error:handleKendoAjaxError,
+																		dataType : "json"
+																	});								                       		
+									                       		}
+									                       }},  title: "&nbsp;", width: 100 }	
+										        ],
+										        dataBound:function(e){										                
+												}
+											});
+										}											
 									}else	if( $(this).attr('href') == '#roles' ){	
 										
 									}else	if( $(this).attr('href') == '#files' ){	
@@ -621,51 +714,7 @@
 									});	
 								} );
 																				                
-				                // 3-1 USER PROPERTY GRID				         
-				                user_tabs.find(".props").kendoGrid({
-								     dataSource: {
-										transport: { 
-											read: { url:'${request.contextPath}/secure/get-user-property.do?output=json', type:'post' },
-										    create: { url:'${request.contextPath}/secure/update-user-property.do?output=json', type:'post' },
-										    update: { url:'${request.contextPath}/secure/update-user-property.do?output=json', type:'post'  },
-										    destroy: { url:'${request.contextPath}/secure/delete-user-property.do?output=json', type:'post' },
-										 	parameterMap: function (options, operation){
-										 		if (operation !== "read" && options.models) {
-				                                	return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
-				                                } 
-						                        return { userId: selectedUser.userId }
-						                    }
-										 },						
-										 batch: true, 
-										 schema: {
-					                            data: "targetUserProperty",
-					                            model: Property
-					                     },
-					                     error:handleKendoAjaxError
-								     },
-								     columns: [
-								         { title: "속성", field: "name" },
-								         { title: "값",   field: "value" },
-								         { command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
-								     ],
-								     autoBind: true, 
-								     pageable: false,
-								     scrollable: true,
-								     height: 200,
-						             editable: {
-						                	update: true,
-						                	destroy: true,
-						                	confirmation: "선택하신 프로퍼티를 삭제하겠습니까?"	
-						             },
-								     toolbar: [
-								         { name: "create", text: "추가" },
-				                         { name: "save", text: "저장" },
-				                         { name: "cancel", text: "취소" }
-									 ],				     
-								     change: function(e) {  
-								     }
-							    });								    
-							    $("#user-props-grid").attr('style','');	    
+				               
 							 }			     
                         }else{
                             selectedUser = new User ({});
@@ -914,7 +963,17 @@
 									</div>						
 									<div id="group-prop-grid" class="props"></div>
 								</div>
-								<div class="tab-pane" id="groups"></div>
+								<div class="tab-pane" id="groups">
+									<div class="alert alert-info">
+				                    	멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
+										<div class="form-inline">
+											<input id="company-combo" style="width: 180px" />
+											<input id="group-combo" style="width: 180px" />
+											<button id="add-to-member-btn" class="k-button">그룹 맴버로 추가</button>
+					                    </div>	
+									</div>								
+									<div id="user-group-grid" class="groups"></div>									
+								</div>
 								<div class="tab-pane" id="roles"></div>
 								<div class="tab-pane" id="files"></div>						
 							</div>
@@ -1025,19 +1084,12 @@
 	                <div>	                
 	                	<div class="row-fluid">
 	                		<div class="span12">
-	                			<div class="alert alert-info">
-			                    	멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
-									<div class="form-inline">
-										<input id="company-combo" style="width: 180px" />
-										<input id="group-combo" style="width: 180px" />
-										<button id="add-to-member-btn" class="k-button">그룹 맴버로 추가</button>
-				                    </div>	
-								</div>
+	                			
 	                		</div>
 	                	</div>	
 	                	<div class="row-fluid">
 	                		<div class="span12">
-			                    <div id="user-group-grid" class="groups"></div>                		
+			                                    		
 	                		</div>
 	                	</div>	                	
 	                </div>			
