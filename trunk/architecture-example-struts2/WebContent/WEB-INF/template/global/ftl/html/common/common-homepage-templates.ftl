@@ -113,14 +113,38 @@
 	<div class="form-group">
 		<div class="col-sm-12">
 			<textarea data-role="editor"
-			data-tools="['bold',
-			'italic',
-			'underline',
-			'strikethrough',
-			'justifyLeft',
-			'justifyCenter',
-			'justifyRight',
-			'justifyFull']"
+			data-tools="[
+				'bold',
+				'italic',
+				'underline',
+				'strikethrough',
+				'justifyLeft',
+				'justifyCenter',
+				'justifyRight',
+				'justifyFull',
+				'insertUnorderedList',
+				'insertOrderedList',
+				'indent',
+				'outdent',
+				'createLink',
+				'unlink',
+				'insertImage',
+				'subscript',
+				'superscript',
+				'createTable',
+				'addRowAbove',
+				'addRowBelow',
+				'addColumnLeft',
+				'addColumnRight',
+				'deleteRow',
+				'deleteColumn',
+				'viewHtml',
+				'formatting',
+				'fontName',
+				'fontSize',
+				'foreColor',
+				'backColor'
+			]"
 			data-bind='value:body'></textarea>		
 		</div>
 	</div>
