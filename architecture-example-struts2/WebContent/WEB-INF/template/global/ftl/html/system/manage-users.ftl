@@ -814,6 +814,8 @@
 					<span data-bind="text: name"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button></div>
 					<div class="panel-body" style="padding:5px;">
+					
+					
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
