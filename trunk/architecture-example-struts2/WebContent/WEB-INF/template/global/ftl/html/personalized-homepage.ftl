@@ -411,7 +411,7 @@
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
 			if( announcePlaceHolder.editable ){		
 						
-				//var observable = new kendo.data.ObservableObject( announcePlaceHolder );
+				var observable = new kendo.data.ObservableObject( announcePlaceHolder );
 				
 				//observable.bind("change", function(e) {				
 				//	e.preventDefault();			
@@ -423,8 +423,8 @@
 				
 
 				var template = kendo.template($('#announcement-edit-template').html());
-				$("#announce-view").html( template(announcePlaceHolder) );	
-				kendo.bind($("#announce-view"), announcePlaceHolder );					
+				$("#announce-view").html( template(observable) );	
+				kendo.bind($("#announce-view"), observable );					
 				
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
