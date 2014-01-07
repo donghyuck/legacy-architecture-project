@@ -432,6 +432,8 @@
 						panel_button.click(function (e) { 
 							e.preventDefault();					
 							var data = $("#announce-panel").data( "announcePlaceHolder" );	
+							
+							alert( data.startDate );
 							$.ajax({
 									dataType : "json",
 									type : 'POST',
