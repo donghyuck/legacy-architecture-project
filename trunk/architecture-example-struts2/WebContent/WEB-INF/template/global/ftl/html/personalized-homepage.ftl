@@ -413,11 +413,11 @@
 						
 				var observable = new kendo.data.ObservableObject( announcePlaceHolder );
 				
-				//observable.bind("change", function(e) {				
-				//	e.preventDefault();			
-				//		alert("s");		
+				observable.bind("change", function(e) {				
+					e.preventDefault();			
+						alert("s");		
 					//	$("#announce-view button[class*=custom-update]").removeAttr("disabled");
-				//});				
+				});				
 
 				//announcePlaceHolder.body = "" ;
 				
