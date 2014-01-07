@@ -679,7 +679,7 @@
 		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container layout blank-top-66">
+		<div class="container full-width-container">	
 			<div class="row">			
 				<div class="col-12 col-lg-12">					
 					<div class="page-header">
