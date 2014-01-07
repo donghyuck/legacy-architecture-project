@@ -870,7 +870,7 @@
 										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 									</div>									
 								</div>
-								<div class="panel-body layout">					
+								<div class="panel-body">					
 									<div  id="announce-view"></div>
 								</div>
 							</div>		
