@@ -816,29 +816,84 @@
 				</div>				
 				<div class="panel-body" style="padding:5px;">		
 				
-					<div class="row"></div>
 					<div class="row">
-					<div class="col-12 col-xs-12">		
-					<ul id="myTab" class="nav nav-tabs">
-						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
-						<li><a href="\\#roles" data-toggle="tab">롤</a></li>
-						<li><a href="\\#files" data-toggle="tab">첨부파일</a></li>
-					</ul>			
-					<div class="tab-content">
-						<div class="tab-pane active" id="props">
-							<div class="blank-top-5"></div>
-							<div class="alert alert-danger margin-buttom-5">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
-							</div>						
-							<div id="group-prop-grid" class="props"></div>
+						<div class="col-lg-4">
+							<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>									
+							<input name="uploadImage" id="files" type="file" />
 						</div>
-						<div class="tab-pane" id="groups"></div>
-						<div class="tab-pane" id="roles"></div>
-						<div class="tab-pane" id="files"></div>						
+						<div class="col-lg-8 details">									
+							<div class="form-horizontal">
+											<div class="form-group">
+	 											<label class="col-lg-3 control-label">이름</label>
+												<div class="col-lg-9">
+													<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name"/>
+												</div>	
+											</div>
+											<div class="form-group">
+	 											<label class="col-lg-3 control-label">메일</label>
+												<div class="col-lg-9">
+													<input type="text" class="k-textbox" placeholder="메일주소" data-bind="value:email"/>
+												</div>	
+											</div>
+											<div class="form-group">
+	 											<label class="col-lg-3 control-label">옵션</label>
+												<div class="col-lg-9">
+													<div class="checkbox">
+														<label>
+															<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
+														</label>
+													</div>		
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
+														</label>
+													</div>	
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
+														</label>
+													</div>																																			
+												</div>
+											</div>										
+										</div>
+							<table class="table table-striped">
+											<thead>
+												<tr>
+													<td>최근 수정일자</td>
+													<td>최근 로그인 일자</td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="active">
+													<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
+													<td><span data-bind="text: formattedLastLoggedIn"></span></td>
+												</tr>                                                                    
+											</tbody>
+										</table>									
+						</div>					
 					</div>
-					</div>
+					<div class="row">
+						<div class="col-12 col-xs-12">		
+							<ul id="myTab" class="nav nav-tabs">
+								<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
+								<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
+								<li><a href="\\#roles" data-toggle="tab">롤</a></li>
+								<li><a href="\\#files" data-toggle="tab">첨부파일</a></li>
+							</ul>			
+							<div class="tab-content">
+								<div class="tab-pane active" id="props">
+									<div class="blank-top-5"></div>
+									<div class="alert alert-danger margin-buttom-5">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+										프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
+									</div>						
+									<div id="group-prop-grid" class="props"></div>
+								</div>
+								<div class="tab-pane" id="groups"></div>
+								<div class="tab-pane" id="roles"></div>
+								<div class="tab-pane" id="files"></div>						
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>			
