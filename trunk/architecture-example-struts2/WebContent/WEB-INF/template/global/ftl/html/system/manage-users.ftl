@@ -818,9 +818,10 @@
 					<div class="media">
 						<a class="pull-left" href="\\#">
 							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0" />
+							<input name="uploadImage" id="files" type="file" />
 						</a>
 						<div class="media-body">
-							<h4 class="media-heading">Media heading</h4>
+							<h4 class="media-heading">&nbsp;</h4>
 							<table class="table">
 								<tbody>
 									<tr>
@@ -870,7 +871,7 @@
 					<div class="row">
 						<div class="col-lg-2">
 																
-							<input name="uploadImage" id="files" type="file" />
+							
 						</div>
 						<div class="col-lg-10 details">									
 							<div class="form-horizontal">
