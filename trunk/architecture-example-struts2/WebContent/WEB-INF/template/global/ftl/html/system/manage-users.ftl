@@ -165,8 +165,7 @@
 							selectedUser.company = selectedCompany;
 							var observable = new kendo.data.ObservableObject( selectedUser ); 
 							
-							 if( selectedUser.userId > 0 ){						
-							 	 	
+							if( selectedUser.userId > 0 ){					
 							 	// 2. USER DETAILS
 							 	// $("#splitter").data("kendoSplitter").expand("#datail_pane");
 							 	 
@@ -177,31 +176,33 @@
 							 		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
 							 	 	$('#user-photo').attr( 'src', photoUrl );
 							 	}		
-							 								 							
-								$("#files").kendoUpload({
-								 	multiple : false,
-								 	showFileList : false,
-								    localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
-								    async: {
-									    saveUrl:  '${request.contextPath}/secure/save-user-image.do?output=json',							   
-									    autoUpload: true
-								    },
-								    upload: function (e) {								         
-								         var imageId = -1;
-								         if( selectedUser.properties.imageId ){
-								         	imageId = selectedUser.properties.imageId
-								         }
-								    	 e.data = { userId: selectedUser.userId , imageId:imageId  };									    								    	 		    	 
-								    },
-								    success : function(e) {								    
-								    	if( e.response.targetUserImage ){
-								    		selectedUser.properties.imageId = e.response.targetUserImage.imageId;
-								    		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
-							 	 			$('#user-photo').attr( 'src', photoUrl );
-								    	}				
-								    }					   
-								});
-
+							 	
+							 	if(!$("#files").data("kendoUpload")){
+								 	$("#files").kendoUpload({
+									 	multiple : false,
+									 	showFileList : false,
+									    localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
+									    async: {
+										    saveUrl:  '${request.contextPath}/secure/save-user-image.do?output=json',							   
+										    autoUpload: true
+									    },
+									    upload: function (e) {								         
+									         var imageId = -1;
+									         if( selectedUser.properties.imageId ){
+									         	imageId = selectedUser.properties.imageId
+									         }
+									    	 e.data = { userId: selectedUser.userId , imageId:imageId  };									    								    	 		    	 
+									    },
+									    success : function(e) {								    
+									    	if( e.response.targetUserImage ){
+									    		selectedUser.properties.imageId = e.response.targetUserImage.imageId;
+									    		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
+								 	 			$('#user-photo').attr( 'src', photoUrl );
+									    	}				
+									    }					   
+									});
+							 	}							 							
+								
  								// 3-1. USER PROPERTY GRID	
  								if(!$("#user-props-grid").data("kendoGrid")){
  									$("#user-props-grid").kendoGrid({
@@ -342,7 +343,7 @@
 												}
 											});
 										}											
-									}else	if( $(this).attr('href') == '#roles' ){	
+									}else if( $(this).attr('href') == '#roles' ){	
 										// SELECTED GROUP ROLES
 										if( !$('#group-role-selected').data('kendoMultiSelect') ){
 												$('#group-role-selected').kendoMultiSelect({
@@ -454,94 +455,81 @@
 											}												
 										
 										
-									}else	if( $(this).attr('href') == '#files' ){	
-									
-										if( ! $("#attach-grid").data("kendoGrid") ){	
-												$("#attach-grid").kendoGrid({
-							                        dataSource: {
-							                        	autoSync: true,
-							                            type: 'json',
-							                            transport: {
-							                                read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
-							                                destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
-									                        parameterMap: function (options, operation){
-									                        	 if (operation != "read" && options) {										                        								                       	 	
-									                        	 	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
-									                            }else{
-									                            	return { userId: selectedUser.userId };
-									                            }
-									                        }								                         
-							                            },
-							                            error:handleKendoAjaxError,
-							                            schema: {
-							                            	model: Attachment,
-							                            	data : "targetUserAttachments"
-							                            }
+									}else if( $(this).attr('href') == '#files' ){	
+										if(!$("#attach-grid").data("kendoGrid") ){	
+											$("#attach-grid").kendoGrid({
+							                	dataSource: {
+							                    	autoSync: true,
+							                        type: 'json',
+							                        transport: {
+							                            read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
+							                            destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
+									                    parameterMap: function (options, operation){
+									                  		if (operation != "read" && options) {										                        								                       	 	
+									                         	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
+									                        }else{
+									                           	return { userId: selectedUser.userId };
+									                        }
+									                    }								                         
 							                        },
-							                        height:300,
-							                        scrollable:  true,
-							                        sortable: true,
-							                        editable: {
-									                	update: false,
-									                	destroy: true,
-									                	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
-									                },
-							                        columns: [{
-							                        		title: "ID",
-							                        		width: 50,
-							                                field:"attachmentId",
-							                                filterable: false
-							                            },
-							                            {
-							                                field: "name",
-							                                title: "이름",
-							                                template: '#= name  #',
-							                                width: 150
-							                            },
-							                             {
-							                                field: "contentType",
-							                                title: "유형",
-							                                width: 80 /**
+							                        error:handleKendoAjaxError,
+							                        schema: {
+							                          	model: Attachment,
+							                           	data : "targetUserAttachments"
+							                        }
+						                        },
+							                    height:300,
+							                    scrollable:  true,
+							                    sortable: true,
+							                    editable: {
+									               	update: false,
+									               	destroy: true,
+									              	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
+									            },
+							                    columns: [
+							                    	{ title: "ID", width: 50, field:"attachmentId", filterable: false },
+							                        { field: "name", title: "이름", template: '#= name  #', width: 150 },
+							                        { field: "contentType", title: "유형", width: 80 /**
 							                            }, {
 							                                field: "modifiedDate",
 							                                title: "수정일",
 							                                width: 80,
 							                                format: "{0:yyyy/MM/dd}" **/
-							                            },
-							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
-									                            	var tr = $(e.target).closest("tr"); 
-														          	var item = this.dataItem(tr);
-							                            			if(! $("#download-window").data("kendoWindow")){
-							                            				$("#download-window").kendoWindow({
-							                            					actions: ["Close"],
-							                            					minHeight : 500,
-							                            					minWidth :  400,
-							                            					maxHeight : 700,
-							                            					maxWidth :  600,
-							                            					modal: true,
-							                            					visible: false
-							                            				});
-							                            			}
+							                        },
+							                        { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
+									                   	var tr = $(e.target).closest("tr"); 
+											          	var item = this.dataItem(tr);
+				                            			if(! $("#download-window").data("kendoWindow")){
+							                   				$("#download-window").kendoWindow({
+							                          			actions: ["Close"],
+							                           			minHeight : 500,
+							                   					minWidth :  400,
+							                   					maxHeight : 700,
+							                   					maxWidth :  600,
+					                           					modal: true,
+							                            		visible: false
+							                           		});
+							                   			}
 							                            			
-							                            			var downloadWindow = $("#download-window").data("kendoWindow");
-							                            			downloadWindow.title( item.name );							                            			
-							                            		 	var template = kendo.template($("#download-window-template").html());
-							                            			downloadWindow.content( template(item) );
-							                            			$("#download-window").closest(".k-window").css({
-																	     top: 5,
-																	     left: 5,
-																	 });						                            			
-							                            			downloadWindow.open();
-							                            		}
-							                            	}, 
-							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
-							                        ],
-							                        dataBound: function(e) {
-							                        }
-							            });
-									}
-								});				
-								$('#myTab a:first').tab('show') ;						
+							                            var downloadWindow = $("#download-window").data("kendoWindow");
+							                   			downloadWindow.title( item.name );							                            			
+							                   		 	var template = kendo.template($("#download-window-template").html());
+							                   			downloadWindow.content( template(item) );
+				                           				$("#download-window").closest(".k-window").css({
+														     top: 5,
+														     left: 5,
+													 	});						                            			
+							                            downloadWindow.open(); }}, 
+							                            { name: "destroy", text: "삭제" } ],  
+							                            title: "&nbsp;", width: 160  }
+							                    ],
+							                    dataBound: function(e) {
+							                    }
+							          		});
+										}
+									});				
+									
+									$('#myTab a:first').tab('show') ;						
 								
 								
 								
