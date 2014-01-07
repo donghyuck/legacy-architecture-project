@@ -106,7 +106,7 @@
 	<div class="form-group">
 		<label class="col-sm-2 control-label">시작일</label>
 		<div class="col-sm-10">
-			<input data-role="datetimepicker" data-bind="value:startDate">
+			<input data-role="datetimepicker" data-bind="value:startDate"> ~ <input data-role="datetimepicker" data-bind="value:endDate">
 		</div>
 	</div>
 </div>	  
@@ -116,7 +116,7 @@
 		<li class="list-group-item">
 		시작일시: 
 		<div class="blank-top-5" ></div>
-		종료일시: <input data-role="datetimepicker" data-bind="value:endDate" style="width: 220px; height:28px;">
+		종료일시: 
 		</li>
 		<li class="list-group-item">
 		<div class="media">
