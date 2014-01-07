@@ -817,16 +817,16 @@
 				<div class="panel-body" style="padding:5px;">		
 				
 					<div class="row">
-						<div class="col-lg-4">
+						<div class="col-lg-2">
 							<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>									
 							<input name="uploadImage" id="files" type="file" />
 						</div>
-						<div class="col-lg-8 details">									
+						<div class="col-lg-10 details">									
 							<div class="form-horizontal">
 											<div class="form-group">
 	 											<label class="col-lg-3 control-label">이름</label>
 												<div class="col-lg-9">
-													<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name"/>
+													<input type="text" class="k-textbox" placeholder="아이디" data-bind="value:username"/>
 												</div>	
 											</div>
 											<div class="form-group">
