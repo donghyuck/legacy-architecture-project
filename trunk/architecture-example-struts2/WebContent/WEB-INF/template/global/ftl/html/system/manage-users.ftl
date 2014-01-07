@@ -456,6 +456,7 @@
 										
 										
 									}else if( $(this).attr('href') == '#files' ){	
+									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
 											$("#attach-grid").kendoGrid({
 							                	dataSource: {
@@ -526,10 +527,10 @@
 							                    dataBound: function(e) {
 							                    }
 							          		});
-										}
-									});				
-									
-									$('#myTab a:first').tab('show') ;						
+							          		**/
+									}
+								});				
+								$('#myTab a:first').tab('show') ;						
 								
 								
 								
