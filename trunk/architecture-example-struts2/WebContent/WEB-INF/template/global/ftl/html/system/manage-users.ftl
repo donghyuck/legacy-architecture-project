@@ -816,7 +816,7 @@
 				</div>				
 				<div class="panel-body" style="padding:5px;">		
 					<div class="media">
-						<a class="pull-left" href="#">
+						<a class="pull-left" href="\\#">
 							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0" />
 						</a>
 						<div class="media-body">
