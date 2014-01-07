@@ -825,8 +825,16 @@
 								<tbody>
 									<tr>
 										<th class="col-lg-3 col-sm-4">아이디</th>
-										<td><input type="text" class="k-textbox" placeholder="아이디" data-bind="value:username"/></td>
+										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:username"/></td>
 									</tr> 
+									<tr>
+										<th class="col-lg-3 col-sm-4">이름</th>
+										<td><input type="text" class="form-control" placeholder="이름" data-bind="value:name"/></td>
+									</tr> 
+									<tr>
+										<th class="col-lg-3 col-sm-4">메일</th>
+										<td><input type="email" class="form-control" placeholder="메일주소" data-bind="value:email"/></td>
+									</tr> 									
 									<tr>
 										<th class="col-lg-3 col-sm-4">최근 프로파일 수정일</th>
 										<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
@@ -855,7 +863,7 @@
 											<div class="form-group">
 	 											<label class="col-lg-3 control-label">메일</label>
 												<div class="col-lg-9">
-													<input type="text" class="k-textbox" placeholder="메일주소" data-bind="value:email"/>
+													
 												</div>	
 											</div>
 											<div class="form-group">
