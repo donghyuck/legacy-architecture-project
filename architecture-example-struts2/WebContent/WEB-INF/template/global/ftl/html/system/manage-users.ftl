@@ -812,9 +812,9 @@
 			<div class="panel panel-primary marginless details" >
 				<div class="panel-heading" >
 					<span data-bind="text: name"></span>
-					<button type="button" class="close" aria-hidden="true">&times;</button></div>
-					<div class="panel-body" style="padding:5px;">
-					
+					<button type="button" class="close" aria-hidden="true">&times;</button>
+				</div>				
+				<div class="panel-body" style="padding:5px;">
 					
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
@@ -831,29 +831,9 @@
 							</div>						
 							<div id="group-prop-grid" class="props"></div>
 						</div>
-						<div class="tab-pane" id="groups">
-							<div class="blank-top-5" ></div>	
-							<div class="alert alert-danger margin-buttom-5">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
-							</div>						
-							<div id="company-group-grid"  class="groups"></div>					
-						</div>
-						<div class="tab-pane" id="roles">
-							<div class="blank-top-5" ></div>	
-							<div class="alert alert-danger margin-buttom-5">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.
-							</div>							
-							<div id="group-role-select"></div>
-						</div>
-						<div class="tab-pane" id="files">
-							<div class="blank-top-5" ></div>	
-							<div class="alert alert-danger margin-buttom-5">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								그룹에서 부여된 롤은 멤버들에게 상속됩니다. 아래의 선택 박스에서 롤을 선택하여 주세요.
-							</div>							
-						</div>						
+						<div class="tab-pane" id="groups"></div>
+						<div class="tab-pane" id="roles"></div>
+						<div class="tab-pane" id="files"></div>						
 					</div>
 				</div>
 			</div>			
