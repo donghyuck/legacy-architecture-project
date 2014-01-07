@@ -834,13 +834,33 @@
 									<tr>
 										<th class="col-lg-3 col-sm-4">메일</th>
 										<td><input type="email" class="form-control" placeholder="메일주소" data-bind="value:email"/></td>
-									</tr> 									
+									</tr> 
 									<tr>
-										<th class="col-lg-3 col-sm-4">최근 프로파일 수정일</th>
+										<th class="col-lg-3 col-sm-4">옵션</th>
+										<td>
+													<div class="checkbox">
+														<label>
+															<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
+														</label>
+													</div>		
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
+														</label>
+													</div>	
+													<div class="checkbox">
+														<label>
+															<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
+														</label>
+													</div>										
+										</td>
+									</tr> 																		
+									<tr>
+										<th class="col-lg-3 col-sm-4">마지막 프로파일 수정일</th>
 										<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
 									</tr>  
 									<tr>
-										<th class="col-lg-3 col-sm-4">최근 로그인 일자</th>
+										<th class="col-lg-3 col-sm-4">마지막 로그인 일자</th>
 										<td><span data-bind="text: formattedLastLoggedIn"></span></td>
 									</tr>  
 								</tbody>
@@ -869,21 +889,7 @@
 											<div class="form-group">
 	 											<label class="col-lg-3 control-label">옵션</label>
 												<div class="col-lg-9">
-													<div class="checkbox">
-														<label>
-															<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
-														</label>
-													</div>		
-													<div class="checkbox">
-														<label>
-															<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
-														</label>
-													</div>	
-													<div class="checkbox">
-														<label>
-															<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
-														</label>
-													</div>																																			
+																																			
 												</div>
 											</div>										
 										</div>
