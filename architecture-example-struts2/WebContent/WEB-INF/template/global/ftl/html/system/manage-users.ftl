@@ -823,12 +823,12 @@
 							<h4 class="media-heading">Media heading</h4>
 							<table class="table table-striped">
 								<tbody>
-									<tr class="active">
-										<th>최근 프로파일 수정일</th>
+									<tr>
+										<th class="col-lg-3">최근 프로파일 수정일</th>
 										<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
 									</tr>  
 									<tr>
-										<th>최근 로그인 일자></th>
+										<th>최근 로그인 일자</th>
 										<td><span data-bind="text: formattedLastLoggedIn"></span></td>
 									</tr>  
 								</tbody>
