@@ -881,35 +881,6 @@
 								</tbody>
 							</table>						
 						</div>
-					</div>								
-					<div class="row">
-						<div class="col-lg-2">
-																
-							
-						</div>
-						<div class="col-lg-10 details">									
-							<div class="form-horizontal">
-											<div class="form-group">
-	 											<label class="col-lg-3 control-label">이름</label>
-												<div class="col-lg-9">
-													
-												</div>	
-											</div>
-											<div class="form-group">
-	 											<label class="col-lg-3 control-label">메일</label>
-												<div class="col-lg-9">
-													
-												</div>	
-											</div>
-											<div class="form-group">
-	 											<label class="col-lg-3 control-label">옵션</label>
-												<div class="col-lg-9">
-																																			
-												</div>
-											</div>										
-										</div>
-										
-						</div>					
 					</div>
 					<div class="row">
 						<div class="col-12 col-xs-12">		
