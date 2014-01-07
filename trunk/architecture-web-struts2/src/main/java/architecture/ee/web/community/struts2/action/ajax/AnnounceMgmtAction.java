@@ -144,6 +144,9 @@ return 0;
 		String startDateString = (String)map.get("startDate");
 		String endDateString = (String)map.get("endDate");
 		
+		log.debug( "startDateString:" + startDateString );
+		log.debug( "endDateString:" + endDateString );
+		
 		Announce targetAnnounce = getTargetAnnounce();
 		targetAnnounce.setSubject(subject);
 		targetAnnounce.setBody(body);
