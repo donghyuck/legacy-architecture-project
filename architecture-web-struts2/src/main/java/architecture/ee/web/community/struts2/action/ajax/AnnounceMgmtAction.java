@@ -165,6 +165,8 @@ return 0;
 	}
 	
 	public Date stringToDate(String str) throws ParseException{
+		log.debug( str + ">" + formatter.parse(str) );
+		
 		return formatter.parse(str);
 	}
 	
