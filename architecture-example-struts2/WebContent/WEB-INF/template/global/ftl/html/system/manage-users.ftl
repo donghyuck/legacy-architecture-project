@@ -821,7 +821,18 @@
 						</a>
 						<div class="media-body">
 							<h4 class="media-heading">Media heading</h4>
-
+							<table class="table table-striped">
+								<tbody>
+									<tr class="active">
+										<th>최근 프로파일 수정일</th>
+										<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
+									</tr>  
+									<tr>
+										<th>최근 로그인 일자></th>
+										<td><span data-bind="text: formattedLastLoggedIn"></span></td>
+									</tr>  
+								</tbody>
+							</table>						
 						</div>
 					</div>								
 					<div class="row">
@@ -864,20 +875,7 @@
 												</div>
 											</div>										
 										</div>
-							<table class="table table-striped">
-											<thead>
-												<tr>
-													<td>최근 수정일자</td>
-													<td>최근 로그인 일자</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="active">
-													<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
-													<td><span data-bind="text: formattedLastLoggedIn"></span></td>
-												</tr>                                                                    
-											</tbody>
-										</table>									
+										
 						</div>					
 					</div>
 					<div class="row">
