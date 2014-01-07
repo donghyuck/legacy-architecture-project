@@ -821,7 +821,7 @@
 						</a>
 						<div class="media-body">
 							<h4 class="media-heading">Media heading</h4>
-							<table class="table table-striped">
+							<table class="table">
 								<tbody>
 									<tr>
 										<th class="col-lg-3 col-sm-4">아이디</th>
