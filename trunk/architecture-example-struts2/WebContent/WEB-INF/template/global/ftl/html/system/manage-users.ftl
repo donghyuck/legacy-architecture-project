@@ -206,9 +206,16 @@
 								$('#myTab a').click(function (e) {
 									e.preventDefault(); 
 									if( $(this).attr('href') == '#props' ){	
+										alert( "1" );
+									}else	if( $(this).attr('href') == '#groups' ){	
+										
+									}else	if( $(this).attr('href') == '#roles' ){	
+										
+									}else	if( $(this).attr('href') == '#files' ){	
 										
 									}
-								});										
+								});				
+								$('#myTab a:first').tab('show') ;						
 								
 					            $('#change-password-btn').bind( 'click', function(){
 					                $('#change-password-window').kendoWindow({
