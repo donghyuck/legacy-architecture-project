@@ -824,15 +824,15 @@
 							<table class="table table-striped">
 								<tbody>
 									<tr>
-										<th class="col-lg-3">아이디</th>
+										<th class="col-lg-3 col-sm-4">아이디</th>
 										<td><input type="text" class="k-textbox" placeholder="아이디" data-bind="value:username"/></td>
 									</tr> 
 									<tr>
-										<th class="col-lg-3">최근 프로파일 수정일</th>
+										<th class="col-lg-3 col-sm-4">최근 프로파일 수정일</th>
 										<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
 									</tr>  
 									<tr>
-										<th>최근 로그인 일자</th>
+										<th class="col-lg-3 col-sm-4">최근 로그인 일자</th>
 										<td><span data-bind="text: formattedLastLoggedIn"></span></td>
 									</tr>  
 								</tbody>
