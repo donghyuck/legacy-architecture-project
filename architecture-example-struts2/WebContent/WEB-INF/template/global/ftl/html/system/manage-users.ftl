@@ -455,6 +455,7 @@
 										
 										
 									}else	if( $(this).attr('href') == '#files' ){	
+									
 										if( ! $("#attach-grid").data("kendoGrid") ){	
 												$("#attach-grid").kendoGrid({
 							                        dataSource: {
@@ -537,7 +538,7 @@
 							                        ],
 							                        dataBound: function(e) {
 							                        }
-							                    });
+							            });
 									}
 								});				
 								$('#myTab a:first').tab('show') ;						
@@ -606,107 +607,7 @@
 										$("#detail-panel").hide();				
 									}
 				                }); 	                							 	
-							 	//kendo.bind($(".tabular"), selectedUser );							 					
-							 	var user_tabs = $('#user-details').find(".tabstrip").kendoTabStrip({
-									animation: {
-								    	close: {  duration: 200, effects: "fadeOut" },
-								       	open: { duration: 200, effects: "fadeIn" }
-				                    },
-									select : function(e){			
-										
-										// TAB - ATTACHMENT TAB
-										if( $( e.contentElement ).find('div').hasClass('attachments') ){					   
-											if( ! $("#attach-upload").data("kendoUpload") ){	
-												$("#attach-upload").kendoUpload({
-					                      			multiple : true,
-					                      			showFileList : true,
-					                      			localization : { select: '파일 선택', remove:'삭제', dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' , 
-					                      				uploadSelectedFiles : '파일 업로드',
-					                      				cancel: '취소' 
-					                      			 },
-					                      			 async: {
-													    saveUrl:  '${request.contextPath}/secure/save-user-attachments.do?output=json',							   
-													    autoUpload: false
-												    },
-												    upload:  function (e) {		
-												    	e.data = { userId: selectedUser.userId };		
-												    },
-												    success : function(e) {	
-												    	$('#attach-grid').data('kendoGrid').dataSource.read(); 
-												    }
-					                      		});				
-											}				                   
-											   		         
-											
-							                    $("#attach-grid").attr('style', '');
-											}
-				                    	}
-				                    	
-										// TAB - GROUP TAB --------------------------------------------------------------------------
-										if( $( e.contentElement ).find('div').hasClass('groups') ){
-				                          	if( ! user_tabs.find(".groups").data("kendoGrid") ){	
-												// 3-1 USER GROUP GRID
-											    user_tabs.find(".groups").kendoGrid({
-				   										dataSource: {
-													    	type: "json",
-										                    transport: {
-										                        read: { url:'${request.contextPath}/secure/list-user-groups.do?output=json', type:'post' },
-																destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
-																parameterMap: function (options, operation){
-												                    if (operation !== "read" && options.models) {
-																 	    return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
-										                            }
-												                    return { userId: selectedUser.userId };
-												                }
-										                    },
-										                    schema: {
-										                    	data: "userGroups",
-										                    	model: Group
-										                    },
-										                    error:handleKendoAjaxError
-					                                     },
-													    scrollable: true,
-													    height:200,
-													    editable: false,
-										                columns: [
-									                        { field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
-									                        { field: "displayName",    title: "이름",   filterable: true, sortable: true,  width: 100 },
-									                        { command:  { text: "삭제", click : function(e){									                       		
-									                       		if( confirm("정말로 삭제하시겠습니까?") ){
-																	var selectedGroup = this.dataItem($(e.currentTarget).closest("tr"));									                       		
-										                       		$.ajax({
-																		type : 'POST',
-																		url : "/secure/remove-group-members.do?output=json",
-																		data : { groupId:selectedGroup.groupId, items: '[' + kendo.stringify( selectedUser ) + ']'  },
-																		success : function( response ){									
-																	        $('#user-group-grid').data('kendoGrid').dataSource.read();
-																	        $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
-																		},
-																		error:handleKendoAjaxError,
-																		dataType : "json"
-																	});								                       		
-									                       		}
-									                       }},  title: "&nbsp;", width: 100 }	
-										                ],
-										                dataBound:function(e){										                
-										                }
-											    });  											    
-											    $("#user-group-grid").attr('style','');	    
-				                          	}	
-				                        // TAB 3 - PROPS  											
-										} else if( $( e.contentElement ).find('div').hasClass('props') ){
-											if( !user_tabs.find(".props").data("kendoGrid") ){	
-				                          					                          	
-											}	
-										// TAB - ROLES --------------------------------------------------------------		                          	
-										} else if( $( e.contentElement ).find('div').hasClass('roles') ){										
-																			
-										}
-									} 
-				                });
-				                
-
-								
+							 									
 								// ADD USER TO SELECTED GROUP 
 								$("#add-to-member-btn").click( function ( e ) {
 									 $.ajax({
