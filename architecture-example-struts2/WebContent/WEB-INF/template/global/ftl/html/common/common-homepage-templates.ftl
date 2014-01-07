@@ -91,6 +91,14 @@
 	<div class="blank-top-5" ></div>
 	<div data-bind="html:body"></div>
 	# if ("${action.view!}" == "personalized" && editable ) {#  	
+	<div class="btn-group pull-right">
+		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		<i class="fa fa-cog"></i>
+		</button>
+		<ul class="dropdown-menu" role="menu">
+		<li><a href="#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
+		</ul>		
+	</div>										
 	<button  type="button" class="btn btn-danger pull-right custom-edit"><i class="fa fa-pencil-square-o"></i> 수정</button>
 	# } #
 </script>
