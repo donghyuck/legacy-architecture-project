@@ -92,7 +92,7 @@
 	<div data-bind="html:body"></div>
 	# if ("${action.view!}" == "personalized" && editable ) {#  	
 	<div class="btn-group pull-right">
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		<button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown">
 		<i class="fa fa-cog"></i>
 		</button>
 		<ul class="dropdown-menu" role="menu">
