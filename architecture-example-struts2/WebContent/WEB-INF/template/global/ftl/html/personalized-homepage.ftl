@@ -122,9 +122,9 @@
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
 							announcePlaceHolder.user = selectedCell.user;							
 							if( announcePlaceHolder.user.userId == $("#account-panel").data("currentUser").userId ){
-								announcePlaceHolder.editable = true;
+								announcePlaceHolder.modifyAllowed = true;
 							}else{
-								announcePlaceHolder.editable = false;
+								announcePlaceHolder.modifyAllowed = false;
 							}
 							$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
 							showAnnouncePanel();	
@@ -409,7 +409,7 @@
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
-			if( announcePlaceHolder.editable ){		
+			if( announcePlaceHolder.modifyAllowed ){		
 						
 				var observable = new kendo.data.ObservableObject( announcePlaceHolder );
 				
