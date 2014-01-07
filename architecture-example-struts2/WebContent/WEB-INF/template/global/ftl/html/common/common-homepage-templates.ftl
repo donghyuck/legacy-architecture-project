@@ -127,7 +127,20 @@
 		</div>			
 		</li>
 	</ul>
-	<div contentEditable class="inline-body-editor" data-role="editor" data-tools="['italic',	'underline',	'strikethrough']"	data-bind="value:body"></div>			
+	<!--
+	<div contentEditable class="inline-body-editor" data-role="editor" data-tools="['italic',	'underline',	'strikethrough']"	data-bind="value:body"></div>	
+	-->
+	<textarea data-role="editor"
+			data-tools="['bold',
+			'italic',
+			'underline',
+			'strikethrough',
+			'justifyLeft',
+			'justifyCenter',
+			'justifyRight',
+			'justifyFull']"
+			data-bind='value:body'
+			style="width: 280px"></textarea>	
 	<div class="blank-top-5" ></div>				
 	<div class="pull-right">
 			<div class="btn-group">
