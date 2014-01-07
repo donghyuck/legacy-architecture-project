@@ -411,11 +411,11 @@
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
 			if( announcePlaceHolder.modifyAllowed ){		
 						
-				var observable = new kendo.data.ObservableObject( announcePlaceHolder );
+				//var observable = new kendo.data.ObservableObject( announcePlaceHolder );
 				
-				observable.bind("change", function(e) {				
-					e.preventDefault();			
-						alert("s");		
+				//observable.bind("change", function(e) {				
+				//	e.preventDefault();			
+				//		alert("s");		
 					//	$("#announce-view button[class*=custom-update]").removeAttr("disabled");
 				});				
 
@@ -423,8 +423,8 @@
 				
 
 				var template = kendo.template($('#announcement-edit-template').html());
-				$("#announce-view").html( template(observable) );	
-				kendo.bind($("#announce-view"), observable );					
+				$("#announce-view").html( template(announcePlaceHolder) );	
+				kendo.bind($("#announce-view"), announcePlaceHolder );					
 				
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
