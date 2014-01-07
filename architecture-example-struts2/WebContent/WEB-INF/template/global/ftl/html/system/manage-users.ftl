@@ -852,21 +852,21 @@
 									<tr>
 										<th class="col-lg-3 col-sm-4">옵션</th>
 										<td>
-													<div class="checkbox">
-														<label>
-															<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
-														</label>
-													</div>		
-													<div class="checkbox">
-														<label>
-															<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
-														</label>
-													</div>	
-													<div class="checkbox">
-														<label>
-															<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
-														</label>
-													</div>										
+											<div class="checkbox">
+												<label>
+													<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
+												</label>
+											</div>		
+											<div class="checkbox">
+												<label>
+													<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
+												</label>
+											</div>	
+											<div class="checkbox">
+												<label>
+													<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
+												</label>
+											</div>										
 										</td>
 									</tr> 																		
 									<tr>
