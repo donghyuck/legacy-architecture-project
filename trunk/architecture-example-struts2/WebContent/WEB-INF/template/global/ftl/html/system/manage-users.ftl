@@ -453,7 +453,7 @@
 														}
 											});
 										}
-									}else if( $(this).attr('href') == '#files' ){	
+									}else if( $(this).attr('href') == '#attachments' ){	
 									alert("1");
 									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
@@ -919,7 +919,7 @@
 										<div id="user-role-select"></div>  
 									</div>             				
 								</div>
-								<div class="tab-pane" id="files">
+								<div class="tab-pane" id="attachments">
 									<div class="blank-top-5"></div>
 				                    <div class="alert alert-info">
 					                    <input id="attach-upload" name="uploadFile" type="file" />
