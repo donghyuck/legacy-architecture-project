@@ -417,7 +417,7 @@
 				//	e.preventDefault();			
 				//		alert("s");		
 					//	$("#announce-view button[class*=custom-update]").removeAttr("disabled");
-				});				
+				//});				
 
 				//announcePlaceHolder.body = "" ;
 				
