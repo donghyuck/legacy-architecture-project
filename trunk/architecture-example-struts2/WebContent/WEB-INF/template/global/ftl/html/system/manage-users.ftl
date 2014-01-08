@@ -573,16 +573,16 @@
 									<div id="group-role-selected" sytle="width:500px;"></div>
 									<div class="alert alert-info margin-buttom-5">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.
 										<div id="user-role-select"></div>  
-									</div>             				
+									</div>
 								</div>
 								<div class="tab-pane" id="attachments">
 									<div class="blank-top-5"></div>
-				                    <div class="alert alert-info">
-					                    <input id="attach-upload" name="uploadFile" type="file" />
-					                    <p/>
-					                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
-				                    </div>
-				                	<div id="attach-grid" class="files"></div>									
+									<div class="alert alert-info">
+										<input id="attach-upload" name="uploadFile" type="file" />
+										<p/>
+										업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
+									</div>
+									<div id="attach-grid" class="files"></div>									
 								</div>			
 							</div>
 						</div>
