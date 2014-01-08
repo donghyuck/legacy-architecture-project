@@ -652,7 +652,7 @@
 																		});
 																	});			
 																	
-																	$("#file-preview-panel").show();
+																	
 																		
 																	$("#update-attach-file").kendoUpload({
 																		multiple: false,
@@ -670,7 +670,9 @@
 																				kendo.bind($("#file-preview-panel"), e.response.targetAttachment );
 																			}
 																		} 
-																	});																			
+																	});		
+																	$("#file-preview-panel").show();
+																	$('#file-preview-panel')[0].scrollIntoView(true); 																	
 							                            		}
 							                            	}, 
 							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
