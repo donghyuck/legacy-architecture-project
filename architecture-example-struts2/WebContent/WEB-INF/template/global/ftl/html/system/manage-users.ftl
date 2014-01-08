@@ -178,7 +178,7 @@
 							 	}		
 							 	
 							 	observable.bind("change", function(e) {
-									alert( e.field + "changed");
+									$('#update-user-btn').enabled();
 								});
 							 								 	
 							 	if(!$("#files").data("kendoUpload")){
@@ -205,8 +205,9 @@
 									    	}				
 									    }					   
 									});
-							 	}							 							
-
+							 	}	
+							 							 							
+								// change password..
 					            $('#change-password-btn').bind( 'click', function(){
 					                $('#change-password-window').kendoWindow({
 				                            width: "400px",
@@ -254,6 +255,7 @@
 				                   	}
 					            } ); 
 				                
+				                // update user info
 				                $('#update-user-btn').bind('click' , function(){
 									$.ajax({
 										type : 'POST',
