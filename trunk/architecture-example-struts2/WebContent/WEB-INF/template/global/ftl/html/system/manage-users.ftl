@@ -762,20 +762,22 @@
 						<div class="form-group">
 							<label class="col-lg-5 control-label" for="password2">새 비밀번호</label>
 							<div class="controls">
-								<input type="password" id="password2" name="password2" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
+								<input type="password" id="password2" name="password2" class="form-control" placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
 							</div>
 						</div>	
 						<div class="form-group">
 							<label class="col-lg-5 control-label" for="password3">새 비밀번호 확인</label>
 							<div class="controls">
-								<input type="password" id="password3" name="password3" class="k-textbox"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
+								<input type="password" id="password3" name="password3" class="form-control"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
 							</div>
 						</div>		
 						<div class="form-group">	
 							<div class="col-lg-4"></div>
 							<div class="col-lg-8">
-							<button id="do-change-password-btn" class="k-button">확인</button>
-							<button class="k-button" type="reset">다시입력</button></div>
+								<div class="btn-group">
+									<button id="do-change-password-btn" class="btn btn-primary">확인</button>
+									<button class="btn btn-default" type="reset">다시입력</button></div>
+								</div>
 							</div>
 						</div>
 					</form>
