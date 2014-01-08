@@ -622,7 +622,7 @@
 																	$('#file-preview-panel').html( template(item) );				
 																	kendo.bind($("#file-preview-panel"), item );		
 																	
-																	if( attachPlaceHolder.contentType == "application/pdf" ){
+																	if( item.contentType == "application/pdf" ){
 																		var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + item.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
 																	}
 																	
