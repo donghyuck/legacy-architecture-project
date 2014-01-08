@@ -177,6 +177,10 @@
 							 	 	$('#user-photo').attr( 'src', photoUrl );
 							 	}		
 							 	
+							 	observable.bind("change", function(e) {
+									alert( e.field + "changed");
+								});
+							 								 	
 							 	if(!$("#files").data("kendoUpload")){
 								 	$("#files").kendoUpload({
 									 	multiple : false,
@@ -202,7 +206,72 @@
 									    }					   
 									});
 							 	}							 							
-								
+
+					            $('#change-password-btn').bind( 'click', function(){
+					                $('#change-password-window').kendoWindow({
+				                            width: "400px",
+				                            minWidth: "300px",
+				                            minHeight: "250px",
+				                            title: "패스워드 변경",
+				                            modal: true,
+				                            visible: false
+				                        });
+				                    $('#change-password-window').data("kendoWindow").center();        
+				                    $('#password2').focus();                
+					            	$('#change-password-window').data("kendoWindow").open();	            	
+					            });	
+					            				            
+					            $('#do-change-password-btn').bind( 'click', function(){	            	
+					            	var doChangePassword = true ;	            	
+					            	if( $('#password2').val().length < 6 ){
+					            		alert ('패스워드는 최소 6 자리 이상으로 입력하여 주십시오.') ;	     
+					            		doChangePassword = false ;
+					            		$('#password2').val("");        
+					            		$('#password3').val("");           		
+					            		$('#password2').focus();   
+					            		return false;
+					            	}					            
+				                   	if( doChangePassword && $('#password2').val() != $('#password3').val() ){
+				                   		doChangePassword = false;
+				                   	    alert( '패스워드가 같지 않습니다. 다시 입력하여 주십시오.' );      
+				                   	    $('#password3').val("");
+				                   	    $('#password3').focus();               
+				                   	    return false;
+				                   	} 				
+									if(doChangePassword) {
+				                   	    selectedUser.password = $('#password2').val();                   	    
+										$.ajax({
+												type : 'POST',
+												url : "${request.contextPath}/secure/update-user.do?output=json",
+												data : { userId:selectedUser.userId, item: kendo.stringify( selectedUser ) },
+												success : function( response ){	
+												    $('#user-grid').data('kendoGrid').dataSource.read();	
+												},
+												error:handleKendoAjaxError,
+												dataType : "json"
+											});	
+										selectedUser.password = '' ;                   	    	
+				                   	}
+					            } ); 
+				                
+				                $('#update-user-btn').bind('click' , function(){
+									$.ajax({
+										type : 'POST',
+										url : "${request.contextPath}/secure/update-user.do?output=json",
+										data : { userId:selectedUser.userId, item: kendo.stringify( selectedUser ) },
+										success : function( response ){									
+										    $('#user-grid').data('kendoGrid').dataSource.read();	
+										},
+										error: handleKendoAjaxError,
+										dataType : "json"
+									});										
+									if(visible){
+										slide.reverse();						
+										visible = false;		
+										$("#detail-panel").hide();				
+									}
+				                }); 	   
+				                								
  								// 3-1. USER PROPERTY GRID	
  								if(!$("#user-props-grid").data("kendoGrid")){
  									$("#user-props-grid").kendoGrid({
@@ -342,7 +411,23 @@
 										        dataBound:function(e){										                
 												}
 											});
-										}																				
+										}			
+										
+										// ADD USER TO SELECTED GROUP 
+										$("#add-to-member-btn").click( function ( e ) {
+											 $.ajax({
+									            dataType : "json",
+												type : 'POST',
+												url : "${request.contextPath}/secure/add-group-member.do?output=json",
+												data : { groupId:  $("#group-combo").data("kendoComboBox").value(), item: kendo.stringify( selectedUser ) },
+												success : function( response ){																		    
+													 $("#user-group-grid").data("kendoGrid").dataSource.read();
+													 $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
+												},
+												error:handleKendoAjaxError
+											});	
+										} );
+																									
 									}else if( $(this).attr('href') == '#roles' ){	
 										// SELECTED GROUP ROLES
 										if( !$('#group-role-selected').data('kendoMultiSelect') ){
@@ -454,6 +539,27 @@
 											});
 										}										
 									}else	if( $(this).attr('href') == '#attachments' ){	
+										if( ! $("#attach-upload").data("kendoUpload") ){	
+											$("#attach-upload").kendoUpload({
+					                    		multiple : true,
+					                    		showFileList : true,
+					                    		localization : { select: '파일 선택', remove:'삭제', dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' , 
+					                    			uploadSelectedFiles : '파일 업로드',
+					                    			cancel: '취소' 
+					                    		 },
+					                    		 async: {
+													saveUrl:  '${request.contextPath}/secure/save-user-attachments.do?output=json',							   
+													autoUpload: false
+												},
+												upload:  function (e) {		
+													e.data = { userId: selectedUser.userId };		
+												},
+												success : function(e) {	
+													$('#attach-grid').data('kendoGrid').dataSource.read(); 
+												}
+					                      	});				
+										}	
+																				
 										if( ! $("#attach-grid").data("kendoGrid") ){	
 											$("#attach-grid").kendoGrid({
 							                        dataSource: {
@@ -535,94 +641,15 @@
 							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
 							                        ],
 							                        dataBound: function(e) {
-							                        }
-						
-											});			
+							                        }						
+											});
+											
 										}							
 									}
 									$(this).tab('show');
 								});				
 								$('#myTab a[href="#props"]').tab('show') ;
 								
-					            $('#change-password-btn').bind( 'click', function(){
-					                $('#change-password-window').kendoWindow({
-				                            width: "400px",
-				                            minWidth: "300px",
-				                            minHeight: "250px",
-				                            title: "패스워드 변경",
-				                            modal: true,
-				                            visible: false
-				                        });
-				                    $('#change-password-window').data("kendoWindow").center();        
-				                    $('#password2').focus();                
-					            	$('#change-password-window').data("kendoWindow").open();	            	
-					            });					            
-					            $('#do-change-password-btn').bind( 'click', function(){	            	
-					            	var doChangePassword = true ;	            	
-					            	if( $('#password2').val().length < 6 ){
-					            		alert ('패스워드는 최소 6 자리 이상으로 입력하여 주십시오.') ;	     
-					            		doChangePassword = false ;
-					            		$('#password2').val("");        
-					            		$('#password3').val("");           		
-					            		$('#password2').focus();   
-					            		return false;
-					            	}					            
-				                   	if( doChangePassword && $('#password2').val() != $('#password3').val() ){
-				                   		doChangePassword = false;
-				                   	    alert( '패스워드가 같지 않습니다. 다시 입력하여 주십시오.' );      
-				                   	    $('#password3').val("");
-				                   	    $('#password3').focus();               
-				                   	    return false; 	   
-				                   	} 				
-									if(doChangePassword) {
-				                   	    selectedUser.password = $('#password2').val();                   	    
-										$.ajax({
-												type : 'POST',
-												url : "${request.contextPath}/secure/update-user.do?output=json",
-												data : { userId:selectedUser.userId, item: kendo.stringify( selectedUser ) },
-												success : function( response ){	
-												    $('#user-grid').data('kendoGrid').dataSource.read();	
-												},
-												error:handleKendoAjaxError,
-												dataType : "json"
-											});	
-										selectedUser.password = '' ;                   	    	
-				                   	}            	                   	
-					            } ); 
-				                $('#update-user-btn').bind('click' , function(){
-									$.ajax({
-										type : 'POST',
-										url : "${request.contextPath}/secure/update-user.do?output=json",
-										data : { userId:selectedUser.userId, item: kendo.stringify( selectedUser ) },
-										success : function( response ){									
-										    $('#user-grid').data('kendoGrid').dataSource.read();	
-										},
-										error: handleKendoAjaxError,
-										dataType : "json"
-									});										
-									if(visible){
-										slide.reverse();						
-										visible = false;		
-										$("#detail-panel").hide();				
-									}
-				                }); 	                							 	
-							 									
-								// ADD USER TO SELECTED GROUP 
-								$("#add-to-member-btn").click( function ( e ) {
-									 $.ajax({
-							            dataType : "json",
-										type : 'POST',
-										url : "${request.contextPath}/secure/add-group-member.do?output=json",
-										data : { groupId:  $("#group-combo").data("kendoComboBox").value(), item: kendo.stringify( selectedUser ) },
-										success : function( response ){																		    
-											 $("#user-group-grid").data("kendoGrid").dataSource.read();
-											 $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
-										},
-										error:handleKendoAjaxError
-									});	
-								} );
-																				                
-				               
 							 }			     
                         }else{
                             selectedUser = new User ({});
