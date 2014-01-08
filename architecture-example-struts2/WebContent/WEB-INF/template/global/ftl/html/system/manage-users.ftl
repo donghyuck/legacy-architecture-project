@@ -59,7 +59,7 @@
 						},
 						change : function(data){
 							selectedCompany = data ;
-							kendo.bind($("#company-info-panel"), selectedCompany );   
+							kendo.bind($(".selected-company-info"), selectedCompany );   
 						}
 					},
 					doAfter : function(that){
