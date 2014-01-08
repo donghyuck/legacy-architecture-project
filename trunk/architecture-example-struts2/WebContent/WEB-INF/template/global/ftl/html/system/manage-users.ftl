@@ -542,8 +542,7 @@
 								<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 								<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
 								<li><a href="\\#roles" data-toggle="tab">롤</a></li>
-								<li><a href="\\#files" data-toggle="tab">첨부파일</a></li>
-								<li><a href="\\#attachments" data-toggle="tab">첨부파일2</a></li>
+								<li><a href="\\#attachments" data-toggle="tab">첨부파일</a></li>
 							</ul>			
 							<div class="tab-content">
 								<div class="tab-pane active" id="props">
@@ -565,13 +564,7 @@
 					                    </div>	
 									</div>								
 									<div id="user-group-grid" class="groups"></div>									
-								</div>
-								<div class="tab-pane" id="files">
-								ssssssssss
-								</div>
-								<div class="tab-pane" id="attachments">
-								ssssssssss
-								</div>								
+								</div>							
 								<div class="tab-pane" id="roles">
 									<div class="blank-top-5"></div>
 									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
@@ -582,8 +575,7 @@
 										<div id="user-role-select"></div>  
 									</div>             				
 								</div>
-								<!--
-								<div class="tab-pane" id="files">
+								<div class="tab-pane" id="attachments">
 									<div class="blank-top-5"></div>
 				                    <div class="alert alert-info">
 					                    <input id="attach-upload" name="uploadFile" type="file" />
@@ -591,8 +583,7 @@
 					                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
 				                    </div>
 				                	<div id="attach-grid" class="files"></div>									
-								</div>		
-								-->				
+								</div>			
 							</div>
 						</div>
 					</div>
