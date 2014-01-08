@@ -761,14 +761,14 @@
 					<form class="form-horizontal">
 						<div class="form-group">
 							<label class="col-lg-5 control-label" for="password2">새 비밀번호</label>
-							<div class="controls">
+							<div class="col-lg-7">
 								<input type="password" id="password2" name="password2" class="form-control" placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
 							</div>
 						</div>	
 						<div class="form-group">
 							<label class="col-lg-5 control-label" for="password3">새 비밀번호 확인</label>
-							<div class="controls">
-								<input type="password" id="password3" name="password3" class="form-control"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." />
+							<div class="col-lg-7">
+								<input type="password" id="password3" name="password3" class="form-control"  placeholder="비밀번호 확인" required validationMessage="비밀번호를 입력하여 주세요." />
 							</div>
 						</div>		
 						<div class="form-group">	
@@ -828,15 +828,17 @@
 					<button type="button" class="close" aria-hidden="true">&times;</button>
 				</div>				
 				<div class="panel-body" style="padding:5px;">		
+					<!--
 					<div class="alert alert-danger margin-buttom-5">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 						이미지를 수정하시려면 이미지를 클릭하십시오.
-					</div>						
+					</div>		
+					-->				
 					<div class="media">
 						<a class="pull-left" href="\\#" dropdown-toggle" data-toggle="dropdown">
 							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0"/>				
 						</a>
-						<span class="help-block">이미지를 수정하시려면 이미지를 클릭하십시오.</span>	
+						<span class="help-block"><i class="fa fa-info"></i> 이미지를 수정하시려면 이미지를 클릭하십시오.</span>	
 						<ul class="dropdown-menu">
 							<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
 							<li>
