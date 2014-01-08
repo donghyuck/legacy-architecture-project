@@ -855,11 +855,15 @@
 										<td><span data-bind="text: formattedLastLoggedIn"></span></td>
 									</tr>  
 								</tbody>
-							</table>		
+							</table>					
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12 col-xs-12">
 							<div class="btn-group full-right">
 								<button id="update-user-btn" class="btn btn-primary">정보 변경</button>
 								<button id="change-password-btn" class="btn btn-primary">비밀번호변경</button>					
-							</div>				
+							</div>							
 						</div>
 					</div>
 					<div class="row">
