@@ -834,7 +834,8 @@
 					</div>						
 					<div class="media">
 						<a class="pull-left" href="\\#" dropdown-toggle" data-toggle="dropdown">
-							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0"/>																
+							<img id="user-photo" class="img-thumbnail media-object" src="http://placehold.it/100x150" border="0"/>						
+							<span class="help-block">이미지를 수정하시려면 이미지를 클릭하십시오.</span>										
 						</a>
 						<ul class="dropdown-menu">
 							<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
