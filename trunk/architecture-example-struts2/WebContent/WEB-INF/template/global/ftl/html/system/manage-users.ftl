@@ -617,29 +617,7 @@
 									                            	var tr = $(e.target).closest("tr"); 
 														          	var item = this.dataItem(tr);
 														          	
-														          	/**
-							                            			if(! $("#download-window").data("kendoWindow")){
-							                            				$("#download-window").kendoWindow({
-							                            					actions: ["Close"],
-							                            					minHeight : 500,
-							                            					minWidth :  400,
-							                            					maxHeight : 700,
-							                            					maxWidth :  600,
-							                            					modal: true,
-							                            					visible: false
-							                            				});
-							                            			}
-							                            			
-							                            			var downloadWindow = $("#download-window").data("kendoWindow");
-							                            			downloadWindow.title( item.name );							                            			
-							                            		 	var template = kendo.template($("#download-window-template").html());
-							                            			downloadWindow.content( template(item) );
-							                            			$("#download-window").closest(".k-window").css({
-																	     top: 5,
-																	     left: 5,
-																	 });						                            			
-							                            			downloadWindow.open();
-							                            			*/
+							                            			$('#file-preview-panel').data("attachPlaceHolder", item );							                            			
 																	var template = kendo.template($('#file-preview-template').html());
 																	$('#file-preview-panel').html( template(item) );				
 																	kendo.bind($("#file-preview-panel"), item );		
@@ -647,7 +625,35 @@
 																	if( attachPlaceHolder.contentType == "application/pdf" ){
 																		var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + item.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
 																	}
-/*
+																	
+																	$("#file-preview-panel button").each(function( index ) {		
+																		var panel_button = $(this);
+																		panel_button.click(function (e) { 
+																			e.preventDefault();					
+																			if( panel_button.hasClass( 'custom-attachment-delete') ){
+																				alert("준비중입니다.");
+																				/*
+																				$.ajax({
+																					dataType : "json",
+																					type : 'POST',
+																					url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
+																					data : { attachmentId: $("#file-preview-panel").data( "attachPlaceHolder").attachmentId },
+																					success : function( response ){		
+																						//$('#announce-panel').show();
+																						//$('#attach-view-panel').hide();
+																					},
+																					error:handleKendoAjaxError
+																				});	
+																				*/
+																			}
+																			if( panel_button.hasClass( 'close') ){
+																				$("#file-preview-panel").hide();			
+																			}					
+																		});
+																	});			
+																	
+																	$("#file-preview-panel").show();
+																		
 																	$("#update-attach-file").kendoUpload({
 																		multiple: false,
 																		async: {
@@ -656,17 +662,15 @@
 																		},
 																		localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
 																		upload: function (e) {				
-																			e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
+																			e.data = { attachmentId: $("#file-preview-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
 																		},
 																		success: function (e) {				
 																			if( e.response.targetAttachment ){
-																				 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
-																				kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
+																				 $("#file-preview-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
+																				kendo.bind($("#file-preview-panel"), e.response.targetAttachment );
 																			}
 																		} 
-																	});		
-*/																				
-																	
+																	});																			
 							                            		}
 							                            	}, 
 							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
