@@ -252,6 +252,7 @@
 							 	// 3-2. USER TABS 																
 								$('#myTab a').click(function (e) {
 									e.preventDefault(); 
+									
 									if( $(this).attr('href') == '#props' ){	
 
 									}else	if( $(this).attr('href') == '#groups' ){	
@@ -563,6 +564,7 @@
 							          		});
 							          		**/
 									}
+									$(this).tab('show');
 								});				
 								$('#myTab a:first').tab('show') ;						
 								
