@@ -861,7 +861,7 @@
 					<div class="row">
 						<div class="col-12 col-xs-12">
 							<div class="btn-group pull-right">
-								<button id="update-user-btn" class="btn btn-primary">정보 변경</button>
+								<button id="update-user-btn" disabled class="btn btn-primary">정보 변경</button>
 								<button id="change-password-btn" class="btn btn-primary">비밀번호변경</button>					
 							</div>							
 						</div>
