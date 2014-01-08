@@ -628,7 +628,6 @@
 																	
 																	$("#file-preview-panel button").each(function( index ) {		
 																		var panel_button = $(this);
-																		alert("ss");
 																		panel_button.click(function (e) { 
 																			e.preventDefault();					
 																			if( panel_button.hasClass( 'custom-attachment-delete') ){
