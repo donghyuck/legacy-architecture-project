@@ -682,7 +682,7 @@
 			min-width:300px;
 		}
 		#change-password-window .container {
-			width:400px;
+			width:500px;
 		}
 		
 		</style>
