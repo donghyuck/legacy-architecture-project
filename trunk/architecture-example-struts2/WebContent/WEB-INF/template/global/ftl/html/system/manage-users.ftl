@@ -741,7 +741,7 @@
 		<div id="change-password-window" style="display:none;">
 		<div class="container layout">	
 			<div class="row">
-				<div class="col-12 col-lg-12">
+				<div class="col-12 col-xs-12">
 					<p>
 					    	6~16자의 영문 대소문자, 숫자, 특수문자를 조합하여
 							사용하실 수 있습니다.
@@ -758,7 +758,7 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-12 col-lg-12">									
+				<div class="col-12 col-xs-12">									
 					<form class="form-horizontal">
 						<div class="form-group">
 							<label class="col-lg-5 control-label" for="password2">새 비밀번호</label>
