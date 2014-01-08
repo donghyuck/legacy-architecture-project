@@ -806,6 +806,9 @@
 									</div>								
 									<div id="user-group-grid" class="groups"></div>									
 								</div>
+								<div class="tab-pane" id="files">
+								
+								</div>
 								<div class="tab-pane" id="roles">
 									<div class="blank-top-5"></div>
 									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
