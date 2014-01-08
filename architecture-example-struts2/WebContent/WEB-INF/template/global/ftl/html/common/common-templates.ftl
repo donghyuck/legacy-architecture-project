@@ -154,6 +154,7 @@
 	    </script>		
 	    
 	<script type="text/x-kendo-template" id="file-preview-template">
+		<div class="blank-top-5"></div>
 		<div class="panel panel-default">
 			<div class="panel-heading">#= name # 미리보기<button id="image-view-btn-close" type="button" class="close">&times;</button></div>
 			<div class="panel-body">
