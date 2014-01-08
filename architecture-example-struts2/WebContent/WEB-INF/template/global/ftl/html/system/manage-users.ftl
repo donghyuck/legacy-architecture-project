@@ -796,7 +796,7 @@
 								</div>
 								<div class="tab-pane" id="groups">
 									<div class="blank-top-5"></div>
-									<div class="alert alert-info">
+									<div class="alert alert-info margin-buttom-5">
 				                    	멤버로 추가하려면 리스트 박스에서 그룹을 선택후 "그룹 멤버로 추가" 버튼을 클릭하세요.
 										<div class="form-inline">
 											<input id="company-combo" style="width: 180px" />
@@ -808,11 +808,10 @@
 								</div>
 								<div class="tab-pane" id="roles">
 									<div class="blank-top-5"></div>
-									<div class="alert alert-info">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
+									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
 										<div id="group-role-selected"></div>
 									</div>
-									<div class="blank-top-5"></div>
-									<div class="alert alert-info">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.
+									<div class="alert alert-info margin-buttom-5">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.
 										<div id="user-role-select"></div>  
 									</div>             				
 								</div>
