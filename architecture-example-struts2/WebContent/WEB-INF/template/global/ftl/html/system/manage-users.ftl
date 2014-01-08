@@ -919,7 +919,7 @@
 										<div id="user-role-select"></div>  
 									</div>             				
 								</div>
-								<div class="tab-pane" id="attachments">
+								<div class="tab-pane" id="files">
 									<div class="blank-top-5"></div>
 				                    <div class="alert alert-info">
 					                    <input id="attach-upload" name="uploadFile" type="file" />
