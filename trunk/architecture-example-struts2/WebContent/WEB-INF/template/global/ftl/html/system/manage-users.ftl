@@ -616,6 +616,8 @@
 							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
 									                            	var tr = $(e.target).closest("tr"); 
 														          	var item = this.dataItem(tr);
+														          	
+														          	/**
 							                            			if(! $("#download-window").data("kendoWindow")){
 							                            				$("#download-window").kendoWindow({
 							                            					actions: ["Close"],
@@ -637,6 +639,34 @@
 																	     left: 5,
 																	 });						                            			
 							                            			downloadWindow.open();
+							                            			*/
+																	var template = kendo.template($('#file-view-template').html());
+																	$('#file-preview-panel').html( template(item) );				
+																	kendo.bind($("#file-preview-panel"), item );		
+																	
+																	if( attachPlaceHolder.contentType == "application/pdf" ){
+																		var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + item.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
+																	}
+/*
+																	$("#update-attach-file").kendoUpload({
+																		multiple: false,
+																		async: {
+																			saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
+																			autoUpload: true
+																		},
+																		localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
+																		upload: function (e) {				
+																			e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
+																		},
+																		success: function (e) {				
+																			if( e.response.targetAttachment ){
+																				 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
+																				kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
+																			}
+																		} 
+																	});		
+*/																				
+																	
 							                            		}
 							                            	}, 
 							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
@@ -796,6 +826,8 @@
 		<footer>  
 		</footer>    
 		-->
+		
+		
 		<script id="download-window-template" type="text/x-kendo-template">				
 			#if (contentType.match("^image") ) {#
 				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-responsive" alt="#= name #" />
