@@ -640,7 +640,7 @@
 																	 });						                            			
 							                            			downloadWindow.open();
 							                            			*/
-																	var template = kendo.template($('#file-view-template').html());
+																	var template = kendo.template($('#file-preview-template').html());
 																	$('#file-preview-panel').html( template(item) );				
 																	kendo.bind($("#file-preview-panel"), item );		
 																	
