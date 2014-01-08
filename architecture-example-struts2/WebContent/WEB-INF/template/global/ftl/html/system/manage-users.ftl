@@ -210,7 +210,6 @@
 								// change password..
 					            $('#change-password-btn').bind( 'click', function(){
 					                $('#change-password-window').kendoWindow({
-				                            width: "400px",
 				                            minWidth: "300px",
 				                            minHeight: "250px",
 				                            title: "패스워드 변경",
