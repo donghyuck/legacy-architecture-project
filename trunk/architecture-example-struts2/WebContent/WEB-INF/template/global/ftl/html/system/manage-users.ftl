@@ -453,7 +453,7 @@
 														}
 											});
 										}
-									}else if( $(this).attr('href') == '#attachments' ){	
+									}else if( $(this).attr('href') == '#files' ){	
 									alert("1");
 									/**
 										if(!$("#attach-grid").data("kendoGrid") ){	
@@ -926,7 +926,7 @@
 					                    <p/>
 					                    업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
 				                    </div>
-				                	<div id="attach-grid" class="attachments"></div>									
+				                	<div id="attach-grid" class="files"></div>									
 								</div>						
 							</div>
 						</div>
