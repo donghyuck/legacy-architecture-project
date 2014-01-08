@@ -178,7 +178,7 @@
 							 	}		
 							 	
 							 	observable.bind("change", function(e) {
-									$('#update-user-btn').enabled();
+									$('#update-user-btn').removeAttr('disabled');
 								});
 							 								 	
 							 	if(!$("#files").data("kendoUpload")){
