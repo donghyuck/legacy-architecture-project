@@ -403,64 +403,77 @@
 			</row>	
 			<div class="row full-width-row">	
 				<div class="col-lg-12">
-					<ul class="nav nav-tabs" id="myTab">
-					  <li class="active"><a href="#site-info"><i class="fa fa-sitemap"></i> 사이트 정보</a></li>
-					  <li><a href="#template-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
-					  <li><a href="#image-mgmt"><i class="fa fa-picture-o"></i> 이미지 관리</a></li>
-					  <li><a href="#attachment-mgmt"><i class="fa fa-paperclip"></i> 첨부파일 관리</a></li>
-					  <li><a href="#social-mgmt">쇼셜 관리</a></li>
-					  <li><a href="#rss-info"><i class="fa fa-rss"></i> RSS 관리</a></li>
-					</ul>
-					<div class="tab-content">
-						<div class="blank-top-5" ></div>	
-						<div class="tab-pane active" id="site-info">
-								<table class="table table-hover">
-								<tbody>						
-									<tr>
-										<th>사이트</th>								
-										<td><span data-bind="text: displayName"></span></td>
-									</tr>	
-									<tr>
-										<th>도메인</th>								
-										<td><span data-bind="text: domainName"></span></td>
-									</tr>										
-									<tr>
-										<th>등록 아이디</th>
-										<td><span class="label label-info"><span data-bind="text: name"></span></span><code><span data-bind="text: companyId"></span></code></td>
-									</tr>			
-									<tr>
-										<th>등록 이름</th>
-										<td><span data-bind="text: description"></span></td>
-									</tr>	
-									<tr>
-										<th>등록일</th>
-										<td><span data-bind="text: creationDate"></span></td>
-									</tr>				
-									<tr>
-										<th>마지막 정보 수정일</th>
-										<td><span data-bind="text: modifiedDate"></span></td>
-									</tr>												
-							 	</tbody>
-								</table>
+					<div class="panel panel-default" style="min-height:300px;">
+						<div class="panel-heading" style="padding:5px;">
+							<div class="btn-group">
+								<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-success btn-control-group" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
+								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
+							</div>
+							<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>					
 						</div>
-						<div class="tab-pane" id="template-mgmt">
-							<div id="template-grid" ></div>
+						<div class="panel-body" style="padding:5px;">					
+							<ul class="nav nav-tabs" id="myTab">
+							  <li class="active"><a href="#site-info"><i class="fa fa-sitemap"></i> 사이트 정보</a></li>
+							  <li><a href="#template-mgmt"><i class="fa fa-file-o"></i>	페이지 템플릿 관리</a></li>
+							  <li><a href="#image-mgmt"><i class="fa fa-picture-o"></i> 이미지 관리</a></li>
+							  <li><a href="#attachment-mgmt"><i class="fa fa-paperclip"></i> 첨부파일 관리</a></li>
+							  <li><a href="#social-mgmt">쇼셜 관리</a></li>
+							  <li><a href="#rss-info"><i class="fa fa-rss"></i> RSS 관리</a></li>
+							</ul>
+							<div class="tab-content">
+								<div class="blank-top-5" ></div>	
+								<div class="tab-pane active" id="site-info">
+										<table class="table table-hover">
+										<tbody>						
+											<tr>
+												<th>사이트</th>								
+												<td><span data-bind="text: displayName"></span></td>
+											</tr>	
+											<tr>
+												<th>도메인</th>								
+												<td><span data-bind="text: domainName"></span></td>
+											</tr>										
+											<tr>
+												<th>등록 아이디</th>
+												<td><span class="label label-info"><span data-bind="text: name"></span></span><code><span data-bind="text: companyId"></span></code></td>
+											</tr>			
+											<tr>
+												<th>등록 이름</th>
+												<td><span data-bind="text: description"></span></td>
+											</tr>	
+											<tr>
+												<th>등록일</th>
+												<td><span data-bind="text: creationDate"></span></td>
+											</tr>				
+											<tr>
+												<th>마지막 정보 수정일</th>
+												<td><span data-bind="text: modifiedDate"></span></td>
+											</tr>												
+									 	</tbody>
+										</table>
+								</div>
+								<div class="tab-pane" id="template-mgmt">
+									<div id="template-grid" ></div>
+								</div>
+								<div class="tab-pane" id="system-info">
+								</div>
+								<div class="tab-pane" id="image-mgmt">
+									<input name="image-upload" id="image-upload" type="file" />
+									<div id="image-grid"></div>	
+								</div>								
+								<div class="tab-pane" id="attachment-mgmt">
+									<input name="attach-upload" id="attach-upload" type="file" />
+									<div id="attach-grid"></div>
+								</div>
+								<div class="tab-pane" id="social-mgmt">
+									<div id="social-grid"></div>
+								</div>								
+							</div>
 						</div>
-						<div class="tab-pane" id="system-info">
-						</div>
-						<div class="tab-pane" id="image-mgmt">
-							<input name="image-upload" id="image-upload" type="file" />
-							<div id="image-grid"></div>	
-						</div>								
-						<div class="tab-pane" id="attachment-mgmt">
-							<input name="attach-upload" id="attach-upload" type="file" />
-							<div id="attach-grid"></div>
-						</div>
-						<div class="tab-pane" id="social-mgmt">
-							<div id="social-grid"></div>
-						</div>
-								
-					</div>
+					</div>	
 				</div>
 			</div>
 		</div>				
