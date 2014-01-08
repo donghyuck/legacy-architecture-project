@@ -208,7 +208,7 @@
 							 	// 3-2. USER TABS 																
 								$('#myTab a').click(function (e) {
 									e.preventDefault(); 
-									$(this).tab('show');
+									
 									
 									if( $(this).attr('href') == '#props' ){	
 	alert("1");
@@ -219,6 +219,7 @@
 									}else	if( $(this).attr('href') == '#files' ){	
 									
 									}
+									$(this).tab('show');
 								});				
 								$('#myTab a[href="#props"]').tab('show') ;
 								
