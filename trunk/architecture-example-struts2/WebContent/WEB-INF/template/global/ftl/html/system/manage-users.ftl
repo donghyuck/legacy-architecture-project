@@ -543,6 +543,7 @@
 								<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
 								<li><a href="\\#roles" data-toggle="tab">롤</a></li>
 								<li><a href="\\#files" data-toggle="tab">첨부파일</a></li>
+								<li><a href="\\#attachments" data-toggle="tab">첨부파일2</a></li>
 							</ul>			
 							<div class="tab-content">
 								<div class="tab-pane active" id="props">
@@ -568,6 +569,9 @@
 								<div class="tab-pane" id="files">
 								ssssssssss
 								</div>
+								<div class="tab-pane" id="attachments">
+								ssssssssss
+								</div>								
 								<div class="tab-pane" id="roles">
 									<div class="blank-top-5"></div>
 									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
