@@ -681,6 +681,9 @@
 			padding : 20px;
 			min-width:300px;
 		}
+		#change-password-window .container {
+			width:400px;
+		}
 		
 		</style>
     </head>
@@ -734,6 +737,7 @@
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>	
 		</div>	
+		
 		<div id="change-password-window" style="display:none;">
 		<div class="container layout">	
 			<div class="row">
