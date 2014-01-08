@@ -855,7 +855,11 @@
 										<td><span data-bind="text: formattedLastLoggedIn"></span></td>
 									</tr>  
 								</tbody>
-							</table>						
+							</table>		
+							<div class="btn-group full-right">
+								<button id="update-user-btn" class="btn btn-primary">정보 변경</button>
+								<button id="change-password-btn" class="btn btn-primary">비밀번호변경</button>					
+							</div>				
 						</div>
 					</div>
 					<div class="row">
@@ -889,17 +893,16 @@
 								</div>							
 								<div class="tab-pane" id="roles">
 									<div class="blank-top-5"></div>
-									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
-										
-									</div>
-									<div id="group-role-selected" sytle="width:500px;"></div>
-									<div class="alert alert-info margin-buttom-5">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.
-										<div id="user-role-select"></div>  
-									</div>
+									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.</div>
+									<div id="group-role-selected"></div>
+									<div class="blank-top-5"></div>
+									<div class="alert alert-info margin-buttom-5">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.</div>
+									<div class="blank-top-5"></div>
+									<div id="user-role-select"></div>  
 								</div>
 								<div class="tab-pane" id="attachments">
 									<div class="blank-top-5"></div>
-									<div class="alert alert-info">
+									<div class="alert alert-info margin-buttom-5">
 										<input id="attach-upload" name="uploadFile" type="file" />
 										<p/>
 										업로드할 파일을 "선택" 버튼에  이곳에 끌어 놓거나,  "선택" 버튼을 클릭하여 업로드할 파일들을 선택한 다음 "업로드" 버튼을 클릭하세요.
@@ -998,8 +1001,7 @@
 							
 							<div class="row">
 								<div class="col-lg-12">
-									<button id="update-user-btn" class="k-button">정보 변경</button>
-									<button id="change-password-btn" class="k-button right">비밀번호변경</button>												
+							
 								</div>
 							</div>							
 							</div>
