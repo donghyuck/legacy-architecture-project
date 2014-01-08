@@ -797,8 +797,7 @@
 				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-responsive" alt="#= name #" />
 			# } else { #
 			
-			# } # 
-			
+			# } # 			
 			<table class="table table-bordered blank-top-5">
 			  <thead>
 			    <tr>
