@@ -812,7 +812,7 @@
 			      <td  width="300">#= name #</td>
 			      <td  width="150">#= contentType #</td>
 			      <td  width="200">#= size # 바이트</td>
-			      <td  width="150"><a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
+			      <td  width="150"><a class="btn btn-default" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i> 다운로드</a></td>
 			    </tr>
 			  </tbody>
 			</table>				
@@ -949,7 +949,6 @@
 		</div>
 		
 		<script type="text/x-kendo-template" id="template">
-
 		</script>
 		<!-- 공용 템플릿 -->
 		<div id="account-panel"></div>	
