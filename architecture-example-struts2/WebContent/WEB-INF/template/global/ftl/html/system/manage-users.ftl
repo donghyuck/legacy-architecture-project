@@ -211,7 +211,7 @@
 									$(this).tab('show');
 									
 									if( $(this).attr('href') == '#props' ){	
-
+	alert("1");
 									}else	if( $(this).attr('href') == '#groups' ){	
 																		
 									}else if( $(this).attr('href') == '#roles' ){	
