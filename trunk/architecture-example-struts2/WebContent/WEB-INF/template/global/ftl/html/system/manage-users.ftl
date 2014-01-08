@@ -254,7 +254,7 @@
 									e.preventDefault(); 
 									
 									if( $(this).attr('href') == '#props' ){	
-
+alert('ww');
 									}else	if( $(this).attr('href') == '#groups' ){	
 										// GROUP SELECT COMBO BOX
 										if( !$("#company-combo").data("kendoComboBox") ){
