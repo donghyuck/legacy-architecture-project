@@ -797,7 +797,8 @@
 				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-responsive" alt="#= name #" />
 			# } else { #
 			
-			# } #  		
+			# } # 
+			
 			<table class="table table-bordered blank-top-5">
 			  <thead>
 			    <tr>
@@ -812,7 +813,7 @@
 			      <td  width="300">#= name #</td>
 			      <td  width="150">#= contentType #</td>
 			      <td  width="200">#= size # 바이트</td>
-			      <td  width="150"><a class="k-button" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
+			      <td  width="150"><a class="btn btn-primary" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" >다운로드</a></td>
 			    </tr>
 			  </tbody>
 			</table>				
@@ -947,123 +948,6 @@
 				</div>
 			</div>			
 		</div>
-		
-		<script type="text/x-kendo-template" id="template">
-
-				<div class="big-box">
-					<div class="tabstrip">
-						<ul>
-							<li class="k-state-active">
-							기본정보
-							</li>	                	
-							<li>
-							프로퍼티
-							</li>
-							<li>
-							그룹
-							</li>
-							<li>
-							권한
-							</li>	                   
-							<li>
-							첨부파일
-							</li>	   
-						</ul>	          
-						<div>
-							<!-- USER INFO TAB =============================== -->
-							<div class="container layout" >
-							<div class="row blank-top-5">
-								<div class="col-lg-4">
-									<img id="user-photo" class="img-thumbnail" src="http://placehold.it/100x150" border="0" /></a>									
-									<input name="uploadImage" id="files" type="file" />
-								</div>
-								<div class="col-lg-8 details">									
-										<div class="form-horizontal">
-											<div class="form-group">
-	 											<label class="col-lg-3 control-label">이름</label>
-												<div class="col-lg-9">
-													<input type="text" class="k-textbox" placeholder="이름" data-bind="value:name"/>
-												</div>	
-											</div>
-											<div class="form-group">
-	 											<label class="col-lg-3 control-label">메일</label>
-												<div class="col-lg-9">
-													<input type="text" class="k-textbox" placeholder="메일주소" data-bind="value:email"/>
-												</div>	
-											</div>
-											<div class="form-group">
-	 											<label class="col-lg-3 control-label">옵션</label>
-												<div class="col-lg-9">
-													<div class="checkbox">
-														<label>
-															<input type="checkbox" name="nameVisible"  data-bind="checked: nameVisible" />	이름공개
-														</label>
-													</div>		
-													<div class="checkbox">
-														<label>
-															<input type="checkbox"  name="emailVisible"  data-bind="checked: emailVisible" />	메일공개
-														</label>
-													</div>	
-													<div class="checkbox">
-														<label>
-															<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />계정사용여부
-														</label>
-													</div>																																			
-												</div>
-											</div>										
-										</div>
-										<table class="table table-striped">
-											<thead>
-												<tr>
-													<td>최근 수정일자</td>
-													<td>최근 로그인 일자</td>
-												</tr>
-											</thead>
-											<tbody>
-												<tr class="active">
-													<td><span data-bind="text: formattedLastProfileUpdate"></span></td>
-													<td><span data-bind="text: formattedLastLoggedIn"></span></td>
-												</tr>                                                                    
-											</tbody>
-										</table>									
-								</div>
-							</div>
-							
-							
-							
-							<div class="row">
-								<div class="col-lg-12">
-							
-								</div>
-							</div>							
-							</div>
-						</div>
-						<div>
-	        			<!-- USER PROPS TAB =============================== -->
-
-	                </div>
-	                <div>	                
-	                	<div class="row-fluid">
-	                		<div class="span12">
-	                			
-	                		</div>
-	                	</div>	
-	                	<div class="row-fluid">
-	                		<div class="span12">
-			                                    		
-	                		</div>
-	                	</div>	                	
-	                </div>			
-	                <div>
-	                	<div class="roles">
-	                		
-						</div>	
-	                </div>			
-	                <div>	                	    
-
-	                </div>	
-				</div>
-		</script>
 		<!-- 공용 템플릿 -->
 		<div id="account-panel"></div>	
 		<#include "/html/common/common-templates.ftl" >		
