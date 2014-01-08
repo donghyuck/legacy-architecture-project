@@ -782,11 +782,8 @@
 		</div>
 		  
   		<div id="download-window"></div>    
-		
-		<div id="pageslide" style="left: -300px; right: auto; display: none;">	
-			<div id="accounts-panel"></div>
-		</div>
-						  
+		<div id="accounts-panel"></div>
+		  
   		<!-- END MAIN CONTNET -->
 		<!--
 		<footer>  
@@ -797,13 +794,14 @@
 				<img src="${request.contextPath}/secure/view-attachment.do?attachmentId=#= attachmentId #" class="img-responsive" alt="#= name #" />
 			# } else { #
 			
-			# } #  		
+			# } #  
+			<div class="blank-top-5"></div>		
 			<table class="table table-bordered blank-top-5">
 			  <thead>
 			    <tr>
 			      <th>이름</th>
 			      <th>유형</th>
-			      <th>크기</th>
+			      <th>크기(bytes)</th>
 			      <th>&nbsp;</th>
 			    </tr>
 			  </thead>
@@ -811,7 +809,7 @@
 			    <tr>
 			      <td  width="300">#= name #</td>
 			      <td  width="150">#= contentType #</td>
-			      <td  width="200">#= size # 바이트</td>
+			      <td  width="200">#= size #</td>
 			      <td  width="150"><a class="btn btn-default" href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i> 다운로드</a></td>
 			    </tr>
 			  </tbody>
