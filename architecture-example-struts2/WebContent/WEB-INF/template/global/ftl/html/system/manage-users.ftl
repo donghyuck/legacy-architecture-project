@@ -204,20 +204,341 @@
 							 	}							 							
 								
  								// 3-1. USER PROPERTY GRID	
- 								
+ 								if(!$("#user-props-grid").data("kendoGrid")){
+ 									$("#user-props-grid").kendoGrid({
+										dataSource: {
+											transport: { 
+												read: { url:'${request.contextPath}/secure/get-user-property.do?output=json', type:'post' },
+											    create: { url:'${request.contextPath}/secure/update-user-property.do?output=json', type:'post' },
+											    update: { url:'${request.contextPath}/secure/update-user-property.do?output=json', type:'post'  },
+											    destroy: { url:'${request.contextPath}/secure/delete-user-property.do?output=json', type:'post' },
+											 	parameterMap: function (options, operation){
+											 		if (operation !== "read" && options.models) {
+					                                	return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
+					                                } 
+							                        return { userId: selectedUser.userId }
+							                    }
+											 },						
+											 batch: true, 
+											 schema: {
+						                            data: "targetUserProperty",
+						                            model: Property
+						                     },
+						                     error:handleKendoAjaxError
+									    },
+									    columns: [
+									         { title: "속성", field: "name" },
+									         { title: "값",   field: "value" },
+									         { command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
+									    ],
+									    autoBind: true, 
+									    pageable: false,
+									    scrollable: true,
+									    height: 200,
+							            editable: {
+							                	update: true,
+							                	destroy: true,
+							                	confirmation: "선택하신 프로퍼티를 삭제하겠습니까?"	
+							            },
+									    toolbar: [
+									         { name: "create", text: "추가" },
+					                         { name: "save", text: "저장" },
+					                         { name: "cancel", text: "취소" }
+										],				     
+									    change: function(e) {  
+										}
+								    });								    
+ 								}
+ 																
 							 	// 3-2. USER TABS 																
 								$('#myTab a').click(function (e) {
-									e.preventDefault(); 
-									
-									
+									e.preventDefault(); 									
 									if( $(this).attr('href') == '#props' ){	
-	alert("1");
 									}else	if( $(this).attr('href') == '#groups' ){	
-																		
-									}else if( $(this).attr('href') == '#roles' ){	
-										
-									}else	if( $(this).attr('href') == '#files' ){	
+										// GROUP SELECT COMBO BOX
+										if( !$("#company-combo").data("kendoComboBox") ){
+											var company_combo = $("#company-combo").kendoComboBox({
+												autoBind: false,
+												placeholder: "회사 선택",
+						                        dataTextField: "displayName",
+						                        dataValueField: "companyId",
+											    dataSource: topBar.items[0].dataSource // $("#company").data("kendoDropDownList").dataSource 
+											});
+											$("#company-combo").data("kendoComboBox").value( 
+												selectedCompany.companyId //$("#company").data("kendoDropDownList").value() 
+											);
+											$("#company-combo").data("kendoComboBox").readonly();
+										}										
+
+										if( !$("#group-combo").data("kendoComboBox") ){
+											$("#group-combo").kendoComboBox({
+												autoBind: false,
+												placeholder: "그룹 선택",
+						                        dataTextField: "displayName",
+						                        dataValueField: "groupId",
+						                        cascadeFrom: "company-combo",			                       
+											    dataSource:  {
+													type: "json",
+												 	serverFiltering: true,
+													transport: {
+														read: { url:'${request.contextPath}/secure/list-company-group.do?output=json', type:'post' },
+														parameterMap: function (options, operation){											 	
+														 	return { companyId:  options.filter.filters[0].value };
+														}
+													},
+													schema: {
+														data: "companyGroups",
+														model: Group
+													},
+													error:handleKendoAjaxError
+												}
+											});											
+										}
 									
+										if( ! $("#user-group-grid").data("kendoGrid") ){	
+											// 3-3 USER GROUP GRID
+											$("#user-group-grid").kendoGrid({
+				   								dataSource: {
+													type: "json",
+										        	transport: {
+										                        read: { url:'${request.contextPath}/secure/list-user-groups.do?output=json', type:'post' },
+																destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
+																parameterMap: function (options, operation){
+												                    if (operation !== "read" && options.models) {
+																 	    return { userId: selectedUser.userId, items: kendo.stringify(options.models)};
+										                            }
+												                    return { userId: selectedUser.userId };
+												                }
+										        	},
+										        	schema: {
+										                    	data: "userGroups",
+										                    	model: Group
+										        	},
+										            error:handleKendoAjaxError
+					                        	},
+												scrollable: true,
+												height:200,
+												editable: false,
+										        columns: [
+									                        { field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
+									                        { field: "displayName",    title: "이름",   filterable: true, sortable: true,  width: 100 },
+									                        { command:  { text: "삭제", click : function(e){									                       		
+									                       		if( confirm("정말로 삭제하시겠습니까?") ){
+																	var selectedGroup = this.dataItem($(e.currentTarget).closest("tr"));									                       		
+										                       		$.ajax({
+																		type : 'POST',
+																		url : "/secure/remove-group-members.do?output=json",
+																		data : { groupId:selectedGroup.groupId, items: '[' + kendo.stringify( selectedUser ) + ']'  },
+																		success : function( response ){									
+																	        $('#user-group-grid').data('kendoGrid').dataSource.read();
+																	        $('#group-role-selected').data("kendoMultiSelect").dataSource.read();
+																		},
+																		error:handleKendoAjaxError,
+																		dataType : "json"
+																	});								                       		
+									                       		}
+									                       }},  title: "&nbsp;", width: 100 }	
+										        ],
+										        dataBound:function(e){										                
+												}
+											});
+										}																				
+									}else if( $(this).attr('href') == '#roles' ){	
+										// SELECTED GROUP ROLES
+										if( !$('#group-role-selected').data('kendoMultiSelect') ){
+												$('#group-role-selected').kendoMultiSelect({
+				                                    placeholder: "NONE",
+									                dataTextField: "name",
+									                dataValueField: "roleId",
+									                dataSource: {
+									                    transport: {
+									                        read: {
+							                                    url: '${request.contextPath}/secure/get-user-group-roles.do?output=json',
+																dataType: "json",
+																type: "POST",
+																data: { userId: selectedUser.userId }
+									                        }
+									                    },
+									                    schema: { 
+						                            		data: "userGroupRoles",
+						                            		model: Role
+						                        		}
+									                },
+						                        	error:handleKendoAjaxError,
+						                        	dataBound: function(e) {
+						                        		var multiSelect = $("#group-role-selected").data("kendoMultiSelect");
+						                        		var selectedRoleIDs = "";
+						                        		$.each(  multiSelect.dataSource.data(), function(index, row){  
+						                        			if( selectedRoleIDs == "" ){
+						                        			    selectedRoleIDs =  selectedRoleIDs + row.roleId ;
+						                        			}else{
+						                        				selectedRoleIDs = selectedRoleIDs + "," + row.roleId;
+						                        			}
+						                        		} );			                        		
+						                        		multiSelect.value( selectedRoleIDs.split( "," ) );
+						                        		multiSelect.readonly();		
+						                        	}
+									            });	
+											}									    
+											// SELECT USER ROLES
+											if( !$('#user-role-select').data('kendoMultiSelect') ){											
+												var selectedRoleDataSource = new kendo.data.DataSource({
+													transport: {
+										            	read: { 
+										            		url:'${request.contextPath}/secure/get-user-roles.do?output=json', 
+										            		dataType: "json", 
+										            		type:'POST',
+										            		data: { userId: selectedUser.userId }
+												        }  
+												    },
+												    schema: {
+									                	data: "userRoles",
+									                    model: Role
+									                },
+									                error:handleKendoAjaxError,
+									                change: function(e) {                
+						                        		var multiSelect = $("#user-role-select").data("kendoMultiSelect");
+						                        		var selectedRoleIDs = "";			                        		
+						                        		$.each(  selectedRoleDataSource.data(), function(index, row){  
+						                        			if( selectedRoleIDs == "" ){
+						                        			    selectedRoleIDs =  selectedRoleIDs + row.roleId ;
+						                        			}else{
+						                        				selectedRoleIDs = selectedRoleIDs + "," + row.roleId;
+						                        			}
+						                        		} );			                        		
+						                        		multiSelect.value( selectedRoleIDs.split( "," ) );	 
+									                }	                               
+				                               	});	
+				                               												
+												$('#user-role-select').kendoMultiSelect({
+				                                    placeholder: "롤 선택",
+									                dataTextField: "name",
+									                dataValueField: "roleId",
+									                dataSource: {
+									                    transport: {
+									                        read: {
+							                                    url: '${request.contextPath}/secure/list-role.do?output=json',
+																dataType: "json",
+																type: "POST"
+									                        }
+									                    },
+									                    schema: { 
+						                            		data: "roles",
+						                            		model: Role
+						                        		}
+									                },
+						                        	error:handleKendoAjaxError,
+						                        	dataBound: function(e) {
+						                        		 selectedRoleDataSource.read();   	
+						                        	},			                        	
+						                        	change: function(e){
+						                        		var multiSelect = $("#user-role-select").data("kendoMultiSelect");			                        		
+						                        		var list = new Array();			                        		                  		
+						                        		$.each(multiSelect.value(), function(index, row){  
+						                        			var item =  multiSelect.dataSource.get(row);
+						                        			list.push(item);			                        			
+						                        		});			                        		
+						                        		multiSelect.readonly();						                        		
+							 							$.ajax({
+												            dataType : "json",
+															type : 'POST',
+															url : "${request.contextPath}/secure/update-user-roles.do?output=json",
+															data : { userId: selectedUser.userId, items: kendo.stringify( list ) },
+															success : function( response ){		
+																// need refresh ..
+															},
+															error:handleKendoAjaxError
+														});												
+														multiSelect.readonly(false);
+														}
+											});
+										}										
+									}else	if( $(this).attr('href') == '#attachments' ){	
+										if( ! $("#attach-grid").data("kendoGrid") ){	
+											$("#attach-grid").kendoGrid({
+							                        dataSource: {
+							                        	autoSync: true,
+							                            type: 'json',
+							                            transport: {
+							                                read: { url:'${request.contextPath}/secure/get-user-attachements.do?output=json', type: 'POST' },		
+							                                destroy: { url:'${request.contextPath}/secure/delete-user-attachment.do?output=json', type:'POST' },						                                
+									                        parameterMap: function (options, operation){
+									                        	 if (operation != "read" && options) {										                        								                       	 	
+									                        	 	return { userId: selectedUser.userId, attachmentId :options.attachmentId };									                            	
+									                            }else{
+									                            	return { userId: selectedUser.userId };
+									                            }
+									                        }								                         
+							                            },
+							                            error:handleKendoAjaxError,
+							                            schema: {
+							                            	model: Attachment,
+							                            	data : "targetUserAttachments"
+							                            }
+							                        },
+							                        height:300,
+							                        scrollable:  true,
+							                        sortable: true,
+							                        editable: {
+									                	update: false,
+									                	destroy: true,
+									                	confirmation: "선택하신 첨부파일을 삭제하겠습니까?"
+									                },
+							                        columns: [{
+							                        		title: "ID",
+							                        		width: 50,
+							                                field:"attachmentId",
+							                                filterable: false
+							                            },
+							                            {
+							                                field: "name",
+							                                title: "이름",
+							                                template: '#= name  #',
+							                                width: 150
+							                            },
+							                             {
+							                                field: "contentType",
+							                                title: "유형",
+							                                width: 80 /**
+							                            }, {
+							                                field: "modifiedDate",
+							                                title: "수정일",
+							                                width: 80,
+							                                format: "{0:yyyy/MM/dd}" **/
+							                            },
+							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
+									                            	var tr = $(e.target).closest("tr"); 
+														          	var item = this.dataItem(tr);
+							                            			if(! $("#download-window").data("kendoWindow")){
+							                            				$("#download-window").kendoWindow({
+							                            					actions: ["Close"],
+							                            					minHeight : 500,
+							                            					minWidth :  400,
+							                            					maxHeight : 700,
+							                            					maxWidth :  600,
+							                            					modal: true,
+							                            					visible: false
+							                            				});
+							                            			}
+							                            			
+							                            			var downloadWindow = $("#download-window").data("kendoWindow");
+							                            			downloadWindow.title( item.name );							                            			
+							                            		 	var template = kendo.template($("#download-window-template").html());
+							                            			downloadWindow.content( template(item) );
+							                            			$("#download-window").closest(".k-window").css({
+																	     top: 5,
+																	     left: 5,
+																	 });						                            			
+							                            			downloadWindow.open();
+							                            		}
+							                            	}, 
+							                            	{ name: "destroy", text: "삭제" } ],  title: "&nbsp;", width: 160  }					                            
+							                        ],
+							                        dataBound: function(e) {
+							                        }
+						
+											});			
+										}							
 									}
 									$(this).tab('show');
 								});				
