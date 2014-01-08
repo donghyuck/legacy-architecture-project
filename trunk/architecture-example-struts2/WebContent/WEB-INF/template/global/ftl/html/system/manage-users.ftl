@@ -788,7 +788,9 @@
 		  
   		<div id="download-window"></div>    
 		<div id="accounts-panel"></div>
-		  
+		<form name="fm1" method="POST" accept-charset="utf-8" class="details">
+			<input type="hidden" name="companyId" value="0" />
+		</form>			  
   		<!-- END MAIN CONTNET -->
 		<!--
 		<footer>  
