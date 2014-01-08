@@ -812,8 +812,9 @@
 								<div class="tab-pane" id="roles">
 									<div class="blank-top-5"></div>
 									<div class="alert alert-info margin-buttom-5">다음은 그룹에 부여된 롤입니다. 그룹에서 부여된 롤은 그룹 관리에서 변경할 수 있습니다.
-										<div id="group-role-selected"></div>
+										
 									</div>
+									<div id="group-role-selected" sytle="width:500px;"></div>
 									<div class="alert alert-info margin-buttom-5">다음은 사용자에게 직접 부여된 롤입니다. 그룹에서 부여된 롤을 제외한 롤들만 아래의 선택박스에서 사용자에게 부여 또는 제거하세요.
 										<div id="user-role-select"></div>  
 									</div>             				
