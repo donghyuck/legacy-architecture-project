@@ -53,3 +53,21 @@
 				</nav>
 			</#if>		
 			<!-- END MENU -->		
+			<!-- start My profile Modal -->
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			        <h4 class="modal-title" id="myModalLabel">#:name# 프로필</h4>
+			      </div>
+			      <div class="modal-body">
+						<p>Loading...</p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">최소</button>
+			        <button type="button" class="btn btn-primary">확인</button>
+			      </div>
+			    </div><!-- /.modal-content -->
+			  </div><!-- /.modal-dialog -->
+			</div><!-- /.modal -->					
