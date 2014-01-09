@@ -429,7 +429,7 @@
 				</div>
 			</li>
 			<li class="divider"></li>
-			<li><a href="\\#"  data-toggle="modal" data-target="\\#myModal"> 프로필 보기</a><button type="button" data-toggle="modal" data-target="\\#myModal">Launch modal</button></li>			
+			<li><a href="\\#"  data-toggle="modal" data-target="\\#myModal"> 프로필 보기</a></li>			
 			<li><a href="/main.do?view=personalized">마이 페이지</a></li>
 			#if (isSystem ) {#
 			<li><a href="/secure/main-site.do">시스템 관리하기</a></li>
@@ -489,10 +489,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">#:name# 프로필</h4>
       </div>
       <div class="modal-body">
-        ...
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
