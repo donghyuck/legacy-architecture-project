@@ -183,7 +183,7 @@
 			text-shadow : none;
 		}
 		
-		.carousel-control.right, .carousel-control.right {
+		.carousel-control .right, .carousel-control .left {
 			background-image : none;
 			background-repeat : none; 
 		}
