@@ -11,11 +11,11 @@
 
 <div class="media">
   <a class="pull-left" href="#">
-    							#if (user.properties.imageId??)  { #
+    							<#if (user.properties.imageId??>
 								<img class="media-object img-thumbnail" src="PHOTO_URL = "/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
-								# } else { # 
+								<#else> 
 								<img class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
-								# } #	
+								</#if>
 								  
   </a>
   <div class="media-body">
