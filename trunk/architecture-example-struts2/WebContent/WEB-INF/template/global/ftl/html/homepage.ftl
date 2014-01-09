@@ -268,7 +268,7 @@
       <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-left fa-3x"></i></a>
       <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-chevron-right fa-3x"></i></a>
     </div><!-- /.carousel -->
-		
+		<!--
 		<div class="container layout">
 				<div calss="row">
 					<div class="col-lg-8">
@@ -290,7 +290,8 @@
 											
 				</div>
 			</div>		
-		</div>			
+		</div>		
+		-->	
 		<!-- END MAIN CONTENT -->	
 
  		<!-- START FOOTER -->
