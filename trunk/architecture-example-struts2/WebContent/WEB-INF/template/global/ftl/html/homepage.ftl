@@ -236,7 +236,7 @@
         <div class="item active">
 			
           <div class="container">
-          	<div class="center-block"><img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive"></div>          
+          	<img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive" />       
             <div class="carousel-caption">
               <h1>Example headline.</h1>
               <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
