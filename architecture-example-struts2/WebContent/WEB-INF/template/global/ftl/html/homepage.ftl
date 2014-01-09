@@ -189,6 +189,7 @@
 		.carousel-control:hover
 		{ 
 			color: #333333;
+			opacity: 0.5;
 		}
 		 
 		.carousel-control .fa {
