@@ -181,6 +181,7 @@
 		.carousel-control {
 			text-shadow : none;
 			color : #CCCCCC;
+			width : 20%;
 		}
 		
 		.carousel-control.right, .carousel-control.left {
