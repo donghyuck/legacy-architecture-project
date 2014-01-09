@@ -429,7 +429,7 @@
 				</div>
 			</li>
 			<li class="divider"></li>
-			<li><a href="\\#"> 프로필 보기</a></li>
+			<li><a href="\\#"  data-toggle="modal" data-target="#myModal"> 프로필 보기</a><button type="button" data-toggle="modal" data-target="#myModal">Launch modal</button></li>			
 			<li><a href="/main.do?view=personalized">마이 페이지</a></li>
 			#if (isSystem ) {#
 			<li><a href="/secure/main-site.do">시스템 관리하기</a></li>
@@ -482,6 +482,24 @@
 			<li><a href="\\#">회원가입</a></li>
 			# } #
 		</ul>
-	</div>									
+	</div>				
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->						
 </script>
 		
