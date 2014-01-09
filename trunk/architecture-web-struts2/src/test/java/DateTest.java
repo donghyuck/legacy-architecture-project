@@ -1,6 +1,7 @@
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /*
  * Copyright 2012, 2013 Donghyuck, Son
@@ -25,14 +26,39 @@ public class DateTest {
 	 * @throws ParseException 
 	 */
 	public static void main(String[] args) throws ParseException {
+		String source = "2013-11-29T00:00:00.000Z";
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		SimpleDateFormat  dateTransformer = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss.SSS");
+		dateTransformer.setTimeZone(tz);
+		Date dt2 = dateTransformer.parse(source);
+		System.out.println( dt2 );
+/*		DateTime dt = new DateTime();
+		DateTimeFormatter fmt = ISODateTimeFormat.dateTimeNoMillis();
+		String str = fmt.print(dt);
+		System.out.println( str );
+		String source = "2013-11-29T00:00:00.000Z";
+		DateTime dt2 = fmt.parseDateTime(source);
+		
+		System.out.println( dt2.toDate() );*/
+		
 		// TODO 자동 생성된 메소드 스텁
-		String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:sss";
-		SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
-		System.out.println(formatter.format(new Date()));
+		/*String DATE_FORMAT = "yyyy-MM-dd'T'HH:mmZ";
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		DateFormat df = new SimpleDateFormat(DATE_FORMAT);
+		df.setTimeZone(tz);
 		
-		String source = "2013-11-26T14:00:00.000Z";
-		System.out.println( formatter.parse(source));
 		
-	}
+		
+		//SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSZ");
+		//System.out.println(df.format(new Date()));
+		
+		System.out.println( DateFormatUtils.ISO_DATE_TIME_ZONE_FORMAT.format(new Date()) );
+		
+		String source = "2013-11-29T00:00:00.000Z";
+		
+		//System.out.println( DateFormatUtils.ISO_DATE_TIME_ZONE_FORMAT.parseObject(source) );
+		System.out.println( df.parse(source));
+		//System.out.println( formatter.parse(source));
+*/	}
 
 }

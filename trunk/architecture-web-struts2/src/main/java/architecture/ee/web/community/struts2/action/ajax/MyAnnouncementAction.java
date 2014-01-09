@@ -23,13 +23,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
+import architecture.common.util.DateUtils;
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceManager;
 import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class AnnounceMgmtAction extends FrameworkActionSupport {
+public class MyAnnouncementAction extends FrameworkActionSupport {
 
 	private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 	
@@ -44,7 +45,7 @@ public class AnnounceMgmtAction extends FrameworkActionSupport {
 	/**
 	 * 
 	 */
-	public AnnounceMgmtAction() {
+	public MyAnnouncementAction() {
 	}
 
 	/**
@@ -144,23 +145,24 @@ return 0;
 		String startDateString = (String)map.get("startDate");
 		String endDateString = (String)map.get("endDate");
 		
-		log.debug( "startDateString:" + startDateString );
-		log.debug( "endDateString:" + endDateString );
+		//log.debug( "startDateString:" + startDateString );
+		//log.debug( "endDateString:" + endDateString );
 		
 		Announce targetAnnounce = getTargetAnnounce();
 		targetAnnounce.setSubject(subject);
 		targetAnnounce.setBody(body);
 		try {
-			targetAnnounce.setStartDate(stringToDate(startDateString));
+			
+			targetAnnounce.setStartDate( DateUtils.parseISODate(startDateString) );
 		} catch (Exception ie) {
 		}
 				
 		try {
-			targetAnnounce.setEndDate(stringToDate(endDateString));
+			targetAnnounce.setEndDate(DateUtils.parseISODate(endDateString));
 		} catch (Exception ie) {
 		}		
 		
-		log.debug(targetAnnounce);
+		//log.debug(targetAnnounce);
 		
 		announceManager.updateAnnounce(targetAnnounce);		
 		
