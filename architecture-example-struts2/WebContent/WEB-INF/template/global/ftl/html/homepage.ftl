@@ -172,11 +172,12 @@
 			
 			/*background-color: #FFFFFF;*/
 		}
+		
 		.carousel-inner > .item > img {
 			position: absolute;
 			top: 0;
 			left: 0;		
-			 min-width: 100%;	
+			min-width: 100%;	
 		}
 		
 		.carousel-control {
@@ -234,9 +235,8 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-			
           <div class="container">
-          	<img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive" />       
+          	<img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive" style="min-width:100%;" />       
             <div class="carousel-caption">
               <h1>Example headline.</h1>
               <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
