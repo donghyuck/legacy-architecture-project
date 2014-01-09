@@ -19,8 +19,8 @@
 								  
   </a>
   <div class="media-body">
-    <h4 class="media-heading">Media heading</h4>
-    ...
+    <h4 class="media-heading">${ user.username }</h4>
+    
   </div>
 </div>
 
