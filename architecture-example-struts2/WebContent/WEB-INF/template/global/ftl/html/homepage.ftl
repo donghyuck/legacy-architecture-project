@@ -182,14 +182,14 @@
 			color : #CCCCCC;
 		}
 		
-		.carousel-control .right, .carousel-control .left {
+		.carousel-control.right, .carousel-control.left {
 			background-image : transparent;
 			background-repeat : none; 
 		}
 		
 		.carousel-control:hover
 		{ 
-			background-color:yellow;
+			color: #428bca;
 		}
 		 
 		.carousel-control .fa {
