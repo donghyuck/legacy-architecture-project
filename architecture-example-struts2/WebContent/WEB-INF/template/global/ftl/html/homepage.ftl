@@ -179,14 +179,15 @@
 		
 		.carousel-control {
 			text-shadow : none;
+			color : #CCCCCC;
 		}
 		
 		.carousel-control .right, .carousel-control .left {
-			background-image : none;
+			background-image : transparent;
 			background-repeat : none; 
 		}
 		
-		.carousel-control a:hover
+		.carousel-control:hover
 		{ 
 			background-color:yellow;
 		}
