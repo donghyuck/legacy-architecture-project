@@ -2,7 +2,6 @@
 <html decorator="none">
 <head>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 <!-- Modal -->
@@ -11,7 +10,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">#:name# 프로필</h4>
+        <h4 class="modal-title" id="myModalLabel">프로필</h4>
       </div>
       <div class="modal-body">
 
