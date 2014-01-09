@@ -12,7 +12,7 @@
 <meta http-equiv="Expires" content="-1">
 <decorator:head />
 </head>
-<body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
+<body onload="<decorator:getProperty property="body.onload" />" >
 	<decorator:body />
 </body>
 </html>
