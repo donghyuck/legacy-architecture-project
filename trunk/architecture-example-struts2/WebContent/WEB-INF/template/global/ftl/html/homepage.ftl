@@ -235,14 +235,14 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-        
+        <div class="container">
           	<img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive" style="min-width:100%;" />       
             <div class="carousel-caption">
               <h1>Example headline.</h1>
               <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
               <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
             </div>
-        
+         </div>
         </div>
         <div class="item">
           <img src="${request.contextPath}/content/image.do?imageId=808" class="img-responsive" style="min-width:100%;" />
@@ -255,7 +255,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="${request.contextPath}/content/image.do?imageId=809" class="img-responsive" style="min-width:100%;" />
+          <img src="${request.contextPath}/content/image.do?imageId=810" class="img-responsive" style="min-width:100%;" />
           <div class="container">
             <div class="carousel-caption">
               <h1>One more for good measure.</h1>
