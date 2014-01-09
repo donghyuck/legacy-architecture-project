@@ -44,5 +44,5 @@
     <decorator name="printable" page="printable.jsp"/>    
      --> 
     <decorator name="black" page="black.jsp"/>
-
+	<decorator name="none" page="none.jsp"/>
 </decorators>
