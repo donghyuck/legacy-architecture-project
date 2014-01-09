@@ -65,8 +65,6 @@
 						<p>Loading...</p>
 			      </div>
 			      <div class="modal-footer">
-			        <button type="button" class="btn btn-default" data-dismiss="modal">최소</button>
-			        <button type="button" class="btn btn-primary">확인</button>
 			      </div>
 			    </div><!-- /.modal-content -->
 			  </div><!-- /.modal-dialog -->
