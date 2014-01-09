@@ -204,7 +204,13 @@
 		.carousel-indicators .active {
 			background-color: #428bca;
 			border: 1px solid #428bca;
-		}						
+		}				
+
+		.center-block {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}				
 		</style>   	
 	</head>
 	<body>
