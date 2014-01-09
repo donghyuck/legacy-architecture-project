@@ -188,7 +188,7 @@
 		
 		.carousel-control:hover
 		{ 
-			color: #dddddd;
+			color: #333333;
 		}
 		 
 		.carousel-control .fa {
