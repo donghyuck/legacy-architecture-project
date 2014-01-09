@@ -233,7 +233,7 @@
         <div class="item active">
 			
           <div class="container">
-          	<div class="center-block"><img src="${request.contextPath}/content/image.do?imageId=81" class="img-responsive"></div>
+          	<div class="center-block"><img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive"></div>
           	
           
             <div class="carousel-caption">
