@@ -4,6 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
+	<!--  PUBLIC ACTIONS -->
 	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">${template}</result>	
@@ -21,10 +22,11 @@
 			<result name="success" type="freemarker">/html/customers.ftl</result>	
 		</action>		
 		<action name="press" class="architecture.ee.web.community.struts2.action.PageAction">
-			<result name="success" type="freemarker">/html/press.ftl</result>	
+			<result name="success" type="freemarker">/html/press.ftl</result>
 		</action>										
 	</package>	
 
+	<!--  MANAGEMENT ACTIONS -->
 	<package name="framework-community-admin-actions" namespace="/secure" extends="framework-default">	
 		<!--  contents  -->
 		<action name="list-template" class="architecture.ee.web.community.struts2.action.admin.ajax.TemplateMgmtAction">
@@ -46,8 +48,15 @@
 			</result>
 		</action>				
 	</package>	
-	
+
+	<!--  USER ACTIONS -->	
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
+		<!--  profile  -->
+		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/my-profile.ftl</result>
+			<result name="modal-dialog" type="freemarker">/html/my-profile-modal-dialog.ftl</result>
+		</action>
+		
 		<!--  contents  -->
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">${template}</result>	
@@ -64,7 +73,7 @@
 		
 			
 		<!--  announce  -->			
-		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
+		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
 			  <param name="excludeNullProperties">true</param>     
@@ -75,7 +84,7 @@
 			</result>
 		</action>		
 
-		<action name="get-announce" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
+		<action name="get-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>     
@@ -85,7 +94,7 @@
 			</result>
 		</action>
 
-		<action name="update-announce" method="update" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
+		<action name="update-announce" method="update" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>	    
@@ -95,7 +104,7 @@
 			</result>
 		</action>
 
-		<action name="delete-announce" method="delete" class="architecture.ee.web.community.struts2.action.ajax.AnnounceMgmtAction">
+		<action name="delete-announce" method="delete" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>		    
