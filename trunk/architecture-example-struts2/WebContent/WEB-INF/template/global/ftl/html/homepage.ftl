@@ -175,6 +175,21 @@
 		  margin-right: 10px;
 		}
 
+		/* Featurettes
+		------------------------- */
+		
+		.featurette-divider {
+		  margin: 80px 0; /* Space out the Bootstrap <hr> more */
+		}
+		
+		/* Thin out the marketing headings */
+		.featurette-heading {
+		  font-weight: 300;
+		  line-height: 1;
+		  letter-spacing: -1px;
+		}
+
+
 		/* CUSTOMIZE THE CAROUSEL
 		-------------------------------------------------- */		
 		/* Carousel base class */
@@ -318,31 +333,51 @@
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
-		</div>	
-		<!--
-		<div class="container layout">
-				<div calss="row">
-					<div class="col-lg-8">
-						<img src="${request.contextPath}/content/image.do?imageId=81" class="img-rounded img-responsive">
-					</div>
-					<div class="col-lg-4">
-						<div class="blank-top-10" ></div>		
-						<p><a class="btn btn-success btn-default" role="button">Learn more</a></p>
-					</div>
-				</div>					
-		</div>
-		<div class="blank-top-10" ></div>								 
-		<div class="container layout">	
-			<div class="row">
-				<div class="col-lg-6">					
-										
-				</div>
-				<div class="col-lg-6">
-											
-				</div>
-			</div>		
-		</div>		
-		-->	
+      
+		<!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+       
+	</div><!-- /.container -->
+
 		
 		<!-- END MAIN CONTENT -->	
 
