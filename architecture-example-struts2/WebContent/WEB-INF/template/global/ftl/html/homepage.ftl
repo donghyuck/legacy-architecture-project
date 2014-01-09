@@ -190,6 +190,7 @@
 			border: 1px solid #cccccc;
 		}
 		.carousel-indicators .active {
+			background-color: #428bca;
 			border: 1px solid #428bca;
 		}						
 		</style>   	
