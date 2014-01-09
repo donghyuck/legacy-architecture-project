@@ -236,7 +236,7 @@
         </div>
       </div>
       <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="fa fa-chevron-circle-left fa-2x"></i></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="fa fa-chevron-circle-right fa-2x"></i></a>
     </div><!-- /.carousel -->
 		
 		<div class="container layout">
