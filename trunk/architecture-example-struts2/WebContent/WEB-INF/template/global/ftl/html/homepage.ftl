@@ -159,7 +159,7 @@
 		.carousel {
 			margin-top:-20px;
 			height: 500px;
-			margin-bottom: 60px;
+			margin-bottom: 20px;
 		}
 		/* Since positioning the image, we need to help out the caption */
 		.carousel-caption {
