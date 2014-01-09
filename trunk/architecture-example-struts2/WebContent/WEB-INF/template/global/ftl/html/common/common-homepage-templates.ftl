@@ -482,7 +482,6 @@
 			<li><a href="\\#">회원가입</a></li>
 			# } #
 		</ul>
-	</div>				
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -500,6 +499,9 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->						
+</div><!-- /.modal -->				
+		
+	</div>				
+				
 </script>
 		
