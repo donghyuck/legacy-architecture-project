@@ -169,13 +169,14 @@
 		/* Declare heights because of positioning of img element */
 		.carousel .item {
 			height: 500px;
-			min-width:100%l	;
+			
 			/*background-color: #FFFFFF;*/
 		}
 		.carousel-inner > .item > img {
 			position: absolute;
 			top: 0;
-			left: 0;			
+			left: 0;		
+			 min-width: 100%;	
 		}
 		
 		.carousel-control {
