@@ -3,15 +3,6 @@
 <head>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" %>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
-<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/font-awesome/4.0.3/font-awesome.min.css" />
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js"></script>
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js"></script>
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.web.min.js"></script>
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.ko_KR.js"></script>
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.3/bootstrap.min.js"></script>
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js"></script>
-<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js"></script>			
 </head>
 <body>
 <!-- Modal -->
