@@ -183,13 +183,12 @@
 		}
 		
 		.carousel-control.right, .carousel-control.left {
-			background-image : transparent;
-			background-repeat : none; 
+			background-image : none; 
 		}
 		
 		.carousel-control:hover
 		{ 
-			color: #428bca;
+			color: #dddddd;
 		}
 		 
 		.carousel-control .fa {
