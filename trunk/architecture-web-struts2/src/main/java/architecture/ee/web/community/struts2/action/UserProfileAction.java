@@ -48,9 +48,7 @@ public class UserProfileAction extends FrameworkActionSupport {
 	public String execute() throws Exception {      	
 		
 		if( !StringUtils.isEmpty(getView())){
-			if( VIEW_MODAL_DIALOG.equals( getView())){
-				return VIEW_MODAL_DIALOG;
-			}
+			return getView();
 		}
 				
 		
