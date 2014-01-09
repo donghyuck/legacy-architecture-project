@@ -179,6 +179,10 @@
 			height: 500px;
 		}
 		
+		.carousel-control {
+			text-shadow : none;
+		}
+		
 		.carousel-control .fa {
 			position: absolute;
 			top: 50%;
