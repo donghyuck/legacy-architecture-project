@@ -183,6 +183,16 @@
 			text-shadow : none;
 		}
 		
+		.carousel-control.right, .carousel-control.right {
+			background-image : none;
+			background-repeat : none; 
+		}
+		
+		.carousel-control a:hover
+		{ 
+			background-color:yellow;
+		}
+		 
 		.carousel-control .fa {
 			position: absolute;
 			top: 50%;
