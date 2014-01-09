@@ -1,7 +1,8 @@
 		<!-- START MENU -->	
 		<#if action.getMenuComponent("USER_MENU") ?? >
-		<#assign menu = action.getMenuComponent("USER_MENU") />
+		<#assign menu = action.getMenuComponent("USER_MENU") />			
 				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+					<div class="container">
 					<#if action.user.company ?? >
 					<div class="navbar-header">					
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
@@ -48,6 +49,7 @@
 							<p class="navbar-text"></p>
 						</li>
 					</ul>
+					</div>
 				</nav>
 			</#if>		
 			<!-- END MENU -->		
