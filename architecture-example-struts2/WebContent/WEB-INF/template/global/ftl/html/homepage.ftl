@@ -205,7 +205,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-			<img src="${request.contextPath}/content/image.do?imageId=81" class="img-rounded img-responsive">
+			<img src="${request.contextPath}/content/image.do?imageId=81" class="img-responsive">
           <div class="container">
             <div class="carousel-caption">
               <h1>Example headline.</h1>
