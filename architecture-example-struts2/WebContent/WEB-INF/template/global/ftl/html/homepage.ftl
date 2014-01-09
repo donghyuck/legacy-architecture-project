@@ -158,6 +158,7 @@
 
 /* Carousel base class */
 .carousel {
+	margin-top:-20px;
   height: 500px;
   margin-bottom: 60px;
 }
