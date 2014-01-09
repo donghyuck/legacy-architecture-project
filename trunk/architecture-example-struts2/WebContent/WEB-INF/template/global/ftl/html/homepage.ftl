@@ -185,7 +185,13 @@
 			z-index: 5;
 			display: inline-block;
 		} 		
-						
+		
+		.carousel-indicators li {			
+			border: 1px solid #cccccc;
+		}
+		.carousel-indicators .active {
+			background-color: #428bca;
+		}						
 		</style>   	
 	</head>
 	<body>
