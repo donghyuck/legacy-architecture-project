@@ -83,7 +83,7 @@
 											<dt>마지막 정보 수정일</dt>
 											<dd data-bind="text: lastProfileUpdate">${user.lastProfileUpdate} </dd>
 											<dt>마지막 로그인 일자</dt>
-											<dd data-bind="text: lastLoggedIn">${user.lastLoggedIn} </dd>												
+																							
 										</dl>	
 									</div>
 								</div>									
@@ -122,12 +122,8 @@
 											</td>
 										</tr>		
 										<tr>
-											<td>권한</td>
-											<td>
-												<#list roles as item >								
-													<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
-												</#list>  										
-											</td>
+											<td>마지막 로그인</td>
+											<td><p class="text-muted data-bind="text: lastLoggedIn">${user.lastLoggedIn}</p></td>
 										</tr>																				
 									</tbody>
 								</table>								
