@@ -76,17 +76,7 @@
 											<button type="submit" class="btn btn-primary">비밀번호 변경</button>				
 										</div>							
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<dl class="dl-horizontal">
-											<dt>마지막 정보 수정일</dt>
-											<dd data-bind="text: lastProfileUpdate">${user.lastProfileUpdate} </dd>
-											<dt>마지막 로그인 일자</dt>
-																							
-										</dl>	
-									</div>
-								</div>									
+								</div>																	
 							</form>
 						</div>
 					</div>
