@@ -102,7 +102,15 @@
 										<tr>
 											<td>외부 계정</td>
 											<td>${user.external?string("네", "아니오")}</td>
-										</tr>										
+										</tr>
+										<tr>
+											<td>그룹</td>
+											<td>
+												<#list groups as item >								
+													<span class="label label-success"><i class="fa fa-key"></i> ${item.displayName} <small>${item.description}</small></span>						
+												</#list>  										
+											</td>
+										</tr>																						
 										<tr>
 											<td>권한</td>
 											<td>
