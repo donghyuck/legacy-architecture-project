@@ -75,7 +75,11 @@
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
-							<div class="tab-pane active" id="home">...</div>
+							<div class="tab-pane active" id="home">
+							<#list user.roles as item >								
+								<span class="label label-primary">${item}</span>						
+							</#list>
+							</div>
 							<div class="tab-pane" id="profile">...</div>
 						</div>
 					</div>
