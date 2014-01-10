@@ -11,7 +11,7 @@
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
 					e.preventDefault();		
-					alert( $(this).html() );
+					//alert( $(this).html() );
 				});
 			});	
 
