@@ -54,6 +54,11 @@
 												<input type="checkbox" data-bind="checked: nameVisible" <#if user.nameVisible >checked="checked"</#if>> nameVisible
 											</label>
 										</div>
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" data-bind="checked: emailVisible" <#if user.emailVisible >checked="checked"</#if>> emailVisible
+											</label>
+										</div>										
 									</div>
 								</div>
 								<div class="form-group">
