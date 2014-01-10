@@ -76,7 +76,7 @@
 							</form>
 						</div>
 					</div>
-					<div class="alert alert-danger">								
+					<div class="alert alert-danger no-margin-bottom" style="padding:5px;">								
 						<i class="fa fa-info"></i> 마지막으로 <span data-bind="text: lastProfileUpdate">${user.lastProfileUpdate}</span> 에 수정하였습니다. 사진를 클릭하면 새로운 사진을 업로드 하실 수 있습니다. 
 					</div>
 							
