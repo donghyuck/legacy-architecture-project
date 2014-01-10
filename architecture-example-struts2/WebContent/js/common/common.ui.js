@@ -630,8 +630,12 @@
     			success : function(response){
     				user = new User ( $.extend(response.currentUser, { roles: response.roles } ));
    					user.set('isSystem', user.hasRole(SYSTEM_ROLE ) );		   					
-    				that.token = user ;
-    				that.trigger( AUTHENTICATE, {token: user});    				
+    				
+   					$("#account-panel").data("currentUser", user );
+   					alert( $(this).html() );
+   					that.token = user ;
+    				
+    				that.trigger( AUTHENTICATE, {token: user}); 
     				if(that.options.visible){
     					that.render();
     				}
