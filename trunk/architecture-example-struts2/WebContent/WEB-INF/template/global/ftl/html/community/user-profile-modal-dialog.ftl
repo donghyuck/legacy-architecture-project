@@ -88,12 +88,12 @@
 									</div>
 								</div>									
 							</form>
-							<div class="alert alert-danger">								
-								<p><i class="fa fa-info"></i> 이미지를 수정하시려면 이미지를 클릭하십시오. </p> 
-							</div>
 						</div>
 					</div>
-					<div>
+					<div class="alert alert-danger">								
+						<i class="fa fa-info"></i> 마지막으로 <p class="text-muted data-bind="text: lastProfileUpdate">${user.lastProfileUpdate}</p> 에 수정하였습니다. 사진를 클릭하면 새로운 사진을 업로드 하실 수 있습니다. 
+					</div>
+							
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" id="my-profile-tab">
 							<li class="active"><a href="#profile-basic-info" data-toggle="tab">기본정보</a></li>
@@ -103,7 +103,7 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="profile-basic-info">
 								<div class="blank-top-5" ></div>					
-								<table class="table  table-hover" >
+								<table class="table  table-hover no-margin-bottom" >
 									<tbody>
 										<tr>
 											<td>회사</td>
@@ -128,9 +128,12 @@
 									</tbody>
 								</table>								
 							</div>
-							<div class="tab-pane" id="profile">...</div>
+							<div class="tab-pane" id="profile">
+
+
+							</div>
 						</div>
-					</div>
+					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
