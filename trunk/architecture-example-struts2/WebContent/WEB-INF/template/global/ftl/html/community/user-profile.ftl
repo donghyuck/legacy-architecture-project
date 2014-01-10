@@ -4,7 +4,9 @@
 		<script type="text/javascript">
 		<!--
 		
-		 	alert( kendo.stringify($("#account-panel").data("currentUser")) ):
+		 	alert( 
+		 		kendo.stringify( $("#account-panel").data("currentUser") ) 
+		 	);
 			$("#my-profile-dialog a").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
