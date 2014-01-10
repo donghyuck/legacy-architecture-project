@@ -3,6 +3,8 @@
 	<body>
 		<script type="text/javascript">
 		<!--
+		
+		 	alert( kendo.stringify($("#account-panel").data("currentUser")) ):
 			$("#my-profile-dialog a").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
@@ -17,7 +19,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title" id="myModalLabel">${user.name}</h4>
+					<h4 class="modal-title" id="myModalLabel">프로파일</h4>
 				</div>
 				<div class="modal-body">
 					<div class="media">
