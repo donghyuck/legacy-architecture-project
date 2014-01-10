@@ -121,27 +121,7 @@
 											</td>
 										</tr>										
 									</tbody>
-								</table>
-								
-								<ul class="list-group">
-									<li class="list-group-item">
-										<h5>조직 <small>내가 속한 조직 정보</small></h5>
-										<#if !user.anonymous >
-										<dl class="dl-horizontal">
-											<dt>${company.displayName}</dt>
-											<dd>${company.description}</dd>
-										</dl>										
-										</#if>										
-									</li>
-									<li class="list-group-item">
-										<h5>권한 <small>내게 부여된 권한</small></h5>							
-										<#list roles as item >								
-											<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
-										</#list>  
-										
-										
-									</li>
-								</ul>				
+								</table>								
 							</div>
 							<div class="tab-pane" id="profile">...</div>
 						</div>
