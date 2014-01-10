@@ -78,7 +78,7 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10 gray">
+									<div class="col-sm-offset-2 col-sm-10">
 										<dl class="dl-horizontal">
 											<dt>마지막 정보 수정일</dt>
 											<dd data-bind="text: lastProfileUpdate">${user.lastProfileUpdate} </dd>
