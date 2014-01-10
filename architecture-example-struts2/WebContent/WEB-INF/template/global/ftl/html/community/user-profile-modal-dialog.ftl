@@ -76,12 +76,17 @@
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div class="tab-pane active" id="home">
-							
-							<h5>권한 <small>내게 부여된 권한</small></h5>
-							
-							<#list roles as item >								
-								<span class="label label-primary"><i class="fa fa-key"></i> ${item}</span>						
-							</#list>
+<ul class="list-group">
+	<li class="list-group-item">Cras justo odio
+		<h5>조직 <small>내가 속한 조직 정보</small></h5>
+	</li>
+	<li class="list-group-item">
+		<h5>권한 <small>내게 부여된 권한</small></h5>							
+		<#list roles as item >								
+			<span class="label label-primary"><i class="fa fa-key"></i> ${item}</span>						
+		</#list>  
+	</li>
+</ul>				
 							</div>
 							<div class="tab-pane" id="profile">...</div>
 						</div>
