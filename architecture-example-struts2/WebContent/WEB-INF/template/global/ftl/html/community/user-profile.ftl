@@ -70,7 +70,7 @@
 					<div>
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" id="my-profile-tab">
-							<li><a href="#home" data-toggle="tab">Home</a></li>
+							<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
 							<li><a href="#profile" data-toggle="tab">Profile</a></li>
 						</ul>
 						<!-- Tab panes -->
