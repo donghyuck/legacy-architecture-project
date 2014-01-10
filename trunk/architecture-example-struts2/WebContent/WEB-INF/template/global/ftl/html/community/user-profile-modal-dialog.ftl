@@ -107,7 +107,7 @@
 											<td>그룹</td>
 											<td>
 												<#list groups as item >								
-												<span class="label label-info" style="font-size:100%; font-weight:normal;"><i class="fa fa-folder-o"></i> ${item.displayName} <small>${item.description}</small></span>
+												<span class="label label-info" style="font-size:100%; font-weight:normal;"><i class="fa fa-folder-o"></i> ${item.displayName}</span>
 												</#list>  										
 											</td>
 										</tr>																						
@@ -115,7 +115,7 @@
 											<td>권한</td>
 											<td>
 												<#list roles as item >								
-													<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
+													<span class="label label-success" style="font-size:100%; font-weight:normal;"><i class="fa fa-key"></i> ${item}</span>						
 												</#list>  										
 											</td>
 										</tr>		
