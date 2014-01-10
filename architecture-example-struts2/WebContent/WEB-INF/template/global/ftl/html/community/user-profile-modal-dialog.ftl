@@ -42,6 +42,12 @@
 							<form class="form-horizontal" role="form">
 								<fieldset disabled>
 									<div class="form-group">
+										<label class="col-sm-2 control-label">아이디</label>
+										<div class="col-sm-10">
+											<h5 data-bind="text:name" >${ user.name }</h5>
+										</div>
+									</div>
+									<div class="form-group">
 										<label class="col-sm-2 control-label">이름</label>
 										<div class="col-sm-10">
 											<input type="email" class="form-control" placeholder="이름" data-bind="value:name" value="${ user.name }"/>
@@ -90,7 +96,7 @@
 									<tbody>
 										<tr>
 											<td>회사</td>
-											<td>${company.displayName}<small>${company.description}</small></td>
+											<td>${company.displayName}<small>(${company.description})</small></td>
 										</tr>
 										<tr>
 											<td>권한</td>
