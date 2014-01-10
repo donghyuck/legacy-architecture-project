@@ -62,8 +62,8 @@
 										<div class="col-sm-offset-2 col-sm-10">
 										${user.lastProfileUpdate}
 										${user.lastLoggedIn}
-											${user.profileEditSupported?c}
-											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported?c}</button>
+											${user.profileEditSupported?string}
+											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported?string}</button>
 										</div>
 									</div>
 								</fieldset>
