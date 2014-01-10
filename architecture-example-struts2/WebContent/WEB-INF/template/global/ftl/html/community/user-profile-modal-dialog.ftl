@@ -68,26 +68,25 @@
 											</label>
 										</div>
 									</div>
-									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-10">
-											<dl class="dl-horizontal">
-												<dt>마지막 정보 수정일</dt>
-												<dd data-bind="text: lastProfileUpdate">${user.lastProfileUpdate} </dd>
-												<dt>마지막 로그인 일자</dt>
-												<dd data-bind="text: lastLoggedIn">${user.lastLoggedIn} </dd>												
-											</dl>	
-										</div>
-									</div>										
-									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-10">
-											<div class="btn-group pull-right">	
-												<button type="submit" class="btn btn-default">기본정보변경</button>		
-												<button type="submit" class="btn btn-primary">비밀번호 변경</button>				
-											</div>							
-										</div>
+								</fieldset>									
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10">
+										<div class="btn-group pull-right">	
+											<button type="submit" class="btn btn-default">기본정보변경</button>		
+											<button type="submit" class="btn btn-primary">비밀번호 변경</button>				
+										</div>							
 									</div>
-									
-								</fieldset>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-offset-2 col-sm-10 gray">
+										<dl class="dl-horizontal">
+											<dt>마지막 정보 수정일</dt>
+											<dd data-bind="text: lastProfileUpdate">${user.lastProfileUpdate} </dd>
+											<dt>마지막 로그인 일자</dt>
+											<dd data-bind="text: lastLoggedIn">${user.lastLoggedIn} </dd>												
+										</dl>	
+									</div>
+								</div>									
 							</form>								
 						</div>
 					</div>
