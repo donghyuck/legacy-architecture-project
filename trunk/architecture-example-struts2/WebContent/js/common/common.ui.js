@@ -632,7 +632,8 @@
    					user.set('isSystem', user.hasRole(SYSTEM_ROLE ) );		   					
     				
    					$("#account-panel").data("currentUser", user );
-   					alert( $(this).html() );
+   					alert( that.element );
+   					alert( $(that.element).html() );
    					that.token = user ;
     				
     				that.trigger( AUTHENTICATE, {token: user}); 
