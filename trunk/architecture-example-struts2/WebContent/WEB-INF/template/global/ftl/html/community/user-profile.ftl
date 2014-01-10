@@ -49,14 +49,14 @@
 								</div>
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
-										<div class="checkbox">
+
 											<label class="checkbox-inline">
 												<input type="checkbox" data-bind="checked: nameVisible" <#if user.nameVisible >checked="checked"</#if>> 이름 공걔
 											</label>
 											<label class="checkbox-inline">
 												<input type="checkbox" data-bind="checked: emailVisible" <#if user.emailVisible >checked="checked"</#if>> 메일 공개
 											</label>
-										</div>										
+
 									</div>
 								</div>
 								<div class="form-group">
