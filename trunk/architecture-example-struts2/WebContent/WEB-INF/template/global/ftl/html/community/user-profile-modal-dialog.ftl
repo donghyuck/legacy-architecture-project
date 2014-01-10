@@ -37,8 +37,7 @@
 							<img class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
 							</#if>  
 						</a>
-						<div class="media-body">
-							<h4 class="media-heading">${ user.username }</h4>							
+						<div class="media-body">				
 							<form class="form-horizontal" role="form">
 								<fieldset disabled>
 									<div class="form-group">
