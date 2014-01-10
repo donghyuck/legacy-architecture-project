@@ -71,21 +71,23 @@
 									</div>
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-												${user.profileEditSupported?string}
-											<button type="submit" class="btn btn-primary pull-right">기본정보변경</button>			
-											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported?string}</button>											
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-10">
 											<dl class="dl-horizontal">
 												<dt>마지막 정보 수정일</dt>
-												<dd>${user.lastProfileUpdate} </dd>
+												<dd data-bind="text: lastProfileUpdate">${user.lastProfileUpdate} </dd>
 												<dt>마지막 로그인 일자</dt>
-												<dd>${user.lastLoggedIn} </dd>												
+												<dd data-bind="text: lastLoggedIn">${user.lastLoggedIn} </dd>												
 											</dl>	
 										</div>
-									</div>	
+									</div>										
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<div class="btn-group pull-right">	
+												<button type="submit" class="btn btn-default">기본정보변경</button>		
+												<button type="submit" class="btn btn-primary">비밀번호 변경</button>				
+											</div>							
+										</div>
+									</div>
+									
 								</fieldset>
 							</form>								
 						</div>
@@ -107,10 +109,14 @@
 											<td>${company.displayName}<small>(${company.description})</small></td>
 										</tr>
 										<tr>
+											<td>외부 계정</td>
+											<td>${user.external?string("네", "아이오")}</td>
+										</tr>										
+										<tr>
 											<td>권한</td>
 											<td>
 												<#list roles as item >								
-														<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
+													<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
 												</#list>  										
 											</td>
 										</tr>										
@@ -132,7 +138,7 @@
 										<#list roles as item >								
 											<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
 										</#list>  
-										${user.external?string}
+										
 										
 									</li>
 								</ul>				
