@@ -35,35 +35,35 @@
 						<div class="media-body">
 							<h4 class="media-heading">${ user.username }</h4>							
 							<form class="form-horizontal" role="form">
-								<div class="form-group">
-									<label class="col-sm-2 control-label">이름</label>
-									<div class="col-sm-10">
-										<input type="email" class="form-control" placeholder="이름" disabled data-bind="value:name" value="${ user.name }"/>
+								<fieldset disabled>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">이름</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" placeholder="이름" data-bind="value:name" value="${ user.name }"/>
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-sm-2 control-label">메일</label>
-									<div class="col-sm-10">
-										<input type="email" class="form-control" placeholder="메일" disabled data-bind="value:email" value="${ user.email }"/>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">메일</label>
+										<div class="col-sm-10">
+											<input type="email" class="form-control" placeholder="메일" data-bind="value:email" value="${ user.email }"/>
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
 											<label class="checkbox-inline">
 												<input type="checkbox" data-bind="checked: nameVisible" <#if user.nameVisible >checked="checked"</#if>> 이름 공걔
 											</label>
 											<label class="checkbox-inline">
 												<input type="checkbox" data-bind="checked: emailVisible" <#if user.emailVisible >checked="checked"</#if>> 메일 공개
 											</label>
-
+										</div>
 									</div>
-								</div>
-								<div class="form-group">
-									<div class="col-sm-offset-2 col-sm-10">
-										<button type="submit" class="btn btn-default">Sign in</button>
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10 pull-right">
+											<button type="submit" class="btn btn-primary">비밀번호 변경</button>
+										</div>
 									</div>
-								</div>
+								</fieldset>
 							</form>							
 							<table class="table">
 								<tbody>
