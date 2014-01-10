@@ -52,7 +52,7 @@
 	<!--  USER ACTIONS -->	
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
 		<!--  profile  -->
-		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.PageAction">
+		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.UserProfileAction">
 			<result name="success" type="freemarker">/html/community/user-profile.ftl</result>
 			<result name="modal-dialog" type="freemarker">/html/community/user-profile-modal-dialog.ftl</result>
 		</action>
