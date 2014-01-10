@@ -33,9 +33,14 @@
 							</#if>  
 						</a>
 						<div class="media-body">
-							<h4 class="media-heading">${ user.username }</h4>
-							
+							<h4 class="media-heading">${ user.username }</h4>							
 							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<label class="col-sm-2 control-label">이름</label>
+									<div class="col-sm-10">
+										<input type="email" class="form-control" placeholder="이름" disabled data-bind="value:name" value="${ user.name }"/>
+									</div>
+								</div>
 								<div class="form-group">
 									<label class="col-sm-2 control-label">메일</label>
 									<div class="col-sm-10">
