@@ -84,9 +84,10 @@
 									<li class="list-group-item">
 										<h5>조직 <small>내가 속한 조직 정보</small></h5>
 										<#if !user.anonymous >
-										${company.displayName}
-										${company.description}
-										
+										<dl class="dl-horizontal">
+											<dt>조직</dt>
+											<dd>${company.description}</dd>
+										</dl>										
 										</#if>										
 									</li>
 									<li class="list-group-item">
