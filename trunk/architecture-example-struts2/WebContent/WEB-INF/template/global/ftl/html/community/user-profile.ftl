@@ -67,16 +67,17 @@
 							</form>								
 						</div>
 					</div>
-					
-					<!-- Nav tabs -->
-					<ul class="nav nav-tabs" id="my-profile-tab">
-						<li><a href="#home" data-toggle="tab">Home</a></li>
-						<li><a href="#profile" data-toggle="tab">Profile</a></li>
-					</ul>
-					<!-- Tab panes -->
-					<div class="tab-content">
-						<div class="tab-pane active" id="home">...</div>
-						<div class="tab-pane" id="profile">...</div>
+					<div>
+						<!-- Nav tabs -->
+						<ul class="nav nav-tabs" id="my-profile-tab">
+							<li><a href="#home" data-toggle="tab">Home</a></li>
+							<li><a href="#profile" data-toggle="tab">Profile</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<div class="tab-pane active" id="home">...</div>
+							<div class="tab-pane" id="profile">...</div>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
