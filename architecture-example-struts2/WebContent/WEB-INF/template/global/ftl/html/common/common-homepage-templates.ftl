@@ -402,7 +402,9 @@
 							</a>
 							<div class="media-body" style="color:ccc;">
 								<p class="text-muted"><strong> #:name#</strong></p>
-								<p class="text-muted"> #:email #</p>								
+								<p class="text-muted"> #:email #</p>	
+								<p><a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary" data-toggle="modal" data-target="\\#myModal" > 프로필 보기</a></p>		
+								<!--						
 								<ul class="nav nav-pills nav-stacked">
 									<li class="active">
 										<a href="\\#">
@@ -423,6 +425,7 @@
 										</a>
 									</li>																			
 								</ul>
+								-->
 							</div>
 						</li>
 					</ul>
@@ -482,7 +485,7 @@
 			<li><a href="\\#">회원가입</a></li>
 			# } #
 		</ul>
-	</div>				
+	</div>			
 				
 </script>
 		
