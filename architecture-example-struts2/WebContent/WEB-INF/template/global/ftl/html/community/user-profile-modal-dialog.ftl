@@ -86,6 +86,23 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="profile-basic-info">
 								<div class="blank-top-5" ></div>					
+								<table class="table  table-hover" >
+									<tbody>
+										<tr>
+											<td>회사</td>
+											<td>${company.displayName}<small>${company.description}</small></td>
+										</tr>
+										<tr>
+											<td>권한</td>
+											<td>
+												<#list roles as item >								
+														<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
+												</#list>  										
+											</td>
+										</tr>										
+									</tbody>
+								</table>
+								
 								<ul class="list-group">
 									<li class="list-group-item">
 										<h5>조직 <small>내가 속한 조직 정보</small></h5>
