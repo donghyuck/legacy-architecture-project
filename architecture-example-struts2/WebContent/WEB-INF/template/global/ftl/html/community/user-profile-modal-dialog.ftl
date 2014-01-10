@@ -59,8 +59,9 @@
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-offset-2 col-sm-10 pull-right">
-											<button type="submit" class="btn btn-primary">비밀번호 변경</button>
+										<div class="col-sm-offset-2 col-sm-10">
+											${user.profileEditSupported}
+											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported}</button>
 										</div>
 									</div>
 								</fieldset>
@@ -70,7 +71,7 @@
 					<div>
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" id="my-profile-tab">
-							<li class="active"><a href="#home" data-toggle="tab">Home</a></li>
+							<li class="active"><a href="#basic-info" data-toggle="tab">기본정보</a></li>
 							<li><a href="#profile" data-toggle="tab">Profile</a></li>
 						</ul>
 						<!-- Tab panes -->
@@ -80,12 +81,19 @@
 								<ul class="list-group">
 									<li class="list-group-item">
 										<h5>조직 <small>내가 속한 조직 정보</small></h5>
+										<#if !user.anonymous >
+										${company.displayName}
+										${company.description}
+										
+										<#/if>										
 									</li>
 									<li class="list-group-item">
 										<h5>권한 <small>내게 부여된 권한</small></h5>							
 										<#list roles as item >								
-											<span class="label label-primary"><i class="fa fa-key"></i> ${item}</span>						
+											<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
 										</#list>  
+										${company.external}
+										
 									</li>
 								</ul>				
 							</div>
