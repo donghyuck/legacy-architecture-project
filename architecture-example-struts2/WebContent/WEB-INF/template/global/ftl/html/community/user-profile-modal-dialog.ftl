@@ -44,6 +44,7 @@
 										<label class="col-sm-2 control-label">아이디</label>
 										<div class="col-sm-10">
 											<h5 data-bind="text:name" >${ user.name }</h5>
+											<span class="help-block text-danger">사진를 클릭하면 변경할 수 있습니다..</span>
 										</div>
 									</div>
 									<div class="form-group">
