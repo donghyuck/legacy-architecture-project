@@ -94,7 +94,7 @@
 										<#list roles as item >								
 											<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
 										</#list>  
-										${company.external}
+										${user.external}
 										
 									</li>
 								</ul>				
