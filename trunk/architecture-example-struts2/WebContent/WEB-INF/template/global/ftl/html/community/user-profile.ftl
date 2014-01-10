@@ -64,24 +64,23 @@
 										</div>
 									</div>
 								</fieldset>
-							</form>							
-							<table class="table">
-								<tbody>
-									<tr>
-										<th class="col-lg-3 col-sm-4">아이디</th>
-										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:username" value="${ user.username }"/></td>
-									</tr> 								
-									<tr>
-										<th class="col-lg-3 col-sm-4">이름</th>
-										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:name" value="${ user.name }"/></td>
-									</tr> 
-									<tr>
-										<th class="col-lg-3 col-sm-4">메일</th>
-										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:email" value="${ user.email }"/></td>
-									</tr> 									
-								</tbody>
-							</table>		
+							</form>								
 						</div>
+					</div>
+					
+					<!-- Nav tabs -->
+					<ul class="nav nav-tabs" id="my-profile-tab">
+						<li><a href="#home" data-toggle="tab">Home</a></li>
+						<li><a href="#profile" data-toggle="tab">Profile</a></li>
+						<li><a href="#messages" data-toggle="tab">Messages</a></li>
+						<li><a href="#settings" data-toggle="tab">Settings</a></li>
+					</ul>
+					<!-- Tab panes -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="home">...</div>
+						<div class="tab-pane" id="profile">...</div>
+						<div class="tab-pane" id="messages">...</div>
+						<div class="tab-pane" id="settings">...</div>
 					</div>
 				</div>
 				<div class="modal-footer">
