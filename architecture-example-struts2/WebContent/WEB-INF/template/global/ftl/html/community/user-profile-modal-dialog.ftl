@@ -60,10 +60,11 @@
 									</div>
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-										${user.lastProfileUpdate}
+										
 										${user.lastLoggedIn}
-											${user.profileEditSupported?string}
+												${user.profileEditSupported?string}
 											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported?string}</button>
+											<span class="help-block">마지막 정보 수정일: ${user.lastProfileUpdate} </span>
 										</div>
 									</div>
 								</fieldset>
