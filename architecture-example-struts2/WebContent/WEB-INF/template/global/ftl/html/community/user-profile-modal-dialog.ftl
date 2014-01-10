@@ -117,7 +117,7 @@
 										</tr>		
 										<tr>
 											<td>마지막 로그인</td>
-											<td><p class="text-muted data-bind="text: lastLoggedIn">${user.lastLoggedIn}</p></td>
+											<td><span class="text-muted data-bind="text: lastLoggedIn">${user.lastLoggedIn}</span></td>
 										</tr>																				
 									</tbody>
 								</table>								
