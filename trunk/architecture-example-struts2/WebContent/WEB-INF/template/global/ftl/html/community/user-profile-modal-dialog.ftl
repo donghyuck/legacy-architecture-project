@@ -76,6 +76,9 @@
 						<!-- Tab panes -->
 						<div class="tab-content">
 							<div class="tab-pane active" id="home">
+							
+							<p class="text-primary"><i class="fa fa-key"></i> &nbsp; 권한</p>
+							
 							<#list roles as item >								
 								<span class="label label-primary">${item}</span>						
 							</#list>
