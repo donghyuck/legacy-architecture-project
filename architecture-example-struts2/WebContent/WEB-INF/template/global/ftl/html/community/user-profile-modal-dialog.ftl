@@ -107,7 +107,7 @@
 											<td>그룹</td>
 											<td>
 												<#list groups as item >								
-													<span class="label label-success"><i class="fa fa-key"></i> ${item.displayName} <small>${item.description}</small></span>						
+												<h3><span class="label label-default"><i class="fa fa-folder-o"></i> ${item.displayName} <small>${item.description}</small></span>	</h3>
 												</#list>  										
 											</td>
 										</tr>																						
