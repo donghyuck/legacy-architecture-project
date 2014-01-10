@@ -71,13 +71,21 @@
 									</div>
 									<div class="form-group">
 										<div class="col-sm-offset-2 col-sm-10">
-										
-										${user.lastLoggedIn}
 												${user.profileEditSupported?string}
-											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported?string}</button>
-											<span class="help-block">마지막 정보 수정일: ${user.lastProfileUpdate} </span>
+											<button type="submit" class="btn btn-primary pull-right">기본정보변경</button>			
+											<button type="submit" class="btn btn-primary pull-right">비밀번호 변경 ${user.setPasswordSupported?string}</button>											
 										</div>
 									</div>
+									<div class="form-group">
+										<div class="col-sm-offset-2 col-sm-10">
+											<dl class="dl-horizontal">
+												<dt>마지막 정보 수정일</dt>
+												<dd>${user.lastProfileUpdate} </dd>
+												<dt>마지막 로그인 일자</dt>
+												<dd>${user.lastLoggedIn} </dd>												
+											</dl>	
+										</div>
+									</div>	
 								</fieldset>
 							</form>								
 						</div>
