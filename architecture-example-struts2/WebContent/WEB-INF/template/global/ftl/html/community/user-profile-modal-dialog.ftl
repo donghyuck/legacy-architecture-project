@@ -44,7 +44,6 @@
 										<label class="col-sm-2 control-label">아이디</label>
 										<div class="col-sm-10">
 											<h5 data-bind="text:name" >${ user.name }</h5>
-											<span class="help-block text-danger">사진를 클릭하면 변경할 수 있습니다..</span>
 										</div>
 									</div>
 									<div class="form-group">
@@ -88,7 +87,10 @@
 										</dl>	
 									</div>
 								</div>									
-							</form>								
+							</form>
+							<div class="alert alert-danger">								
+								<p><i class="fa fa-info"></i> 이미지를 수정하시려면 이미지를 클릭하십시오. </p> 
+							</div>
 						</div>
 					</div>
 					<div>
@@ -118,7 +120,15 @@
 													<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
 												</#list>  										
 											</td>
-										</tr>										
+										</tr>		
+										<tr>
+											<td>권한</td>
+											<td>
+												<#list roles as item >								
+													<span class="label label-success"><i class="fa fa-key"></i> ${item}</span>						
+												</#list>  										
+											</td>
+										</tr>																				
 									</tbody>
 								</table>								
 							</div>
