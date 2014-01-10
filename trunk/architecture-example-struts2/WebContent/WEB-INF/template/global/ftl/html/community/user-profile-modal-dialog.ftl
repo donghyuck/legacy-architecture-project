@@ -79,12 +79,12 @@
 					<div>
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" id="my-profile-tab">
-							<li class="active"><a href="#basic-info" data-toggle="tab">기본정보</a></li>
+							<li class="active"><a href="#profile-basic-info" data-toggle="tab">기본정보</a></li>
 							<li><a href="#profile" data-toggle="tab">Profile</a></li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
-							<div class="tab-pane active" id="home">
+							<div class="tab-pane active" id="profile-basic-info">
 								<div class="blank-top-5" ></div>					
 								<ul class="list-group">
 									<li class="list-group-item">
