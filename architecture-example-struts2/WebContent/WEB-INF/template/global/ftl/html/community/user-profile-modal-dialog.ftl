@@ -110,7 +110,7 @@
 										</tr>
 										<tr>
 											<td>외부 계정</td>
-											<td>${user.external?string("네", "아이오")}</td>
+											<td>${user.external?string("네", "아니오")}</td>
 										</tr>										
 										<tr>
 											<td>권한</td>
