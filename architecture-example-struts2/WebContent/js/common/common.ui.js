@@ -680,9 +680,7 @@
         	if( that.token.properties.imageId ){
         		that.token.photoUrl = PHOTO_URL + '&imageId=' + that.token.properties.imageId ;	
         	}
-        	if (!that.element ) {
-        		//that.element.html( );
-        	} 
+
         	if( that.options.template ){
         		that.element.html( that.options.template( that.token ) );        		
         	}
