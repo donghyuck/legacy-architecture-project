@@ -77,10 +77,10 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="home">
 							
-							<p class="text-primary"><i class="fa fa-key"></i> &nbsp; 권한</p>
+							<h5>권한 <small>내게 부여된 권한</small></h5>
 							
 							<#list roles as item >								
-								<span class="label label-primary">${item}</span>						
+								<span class="label label-primary"><i class="fa fa-key"></i> ${item}</span>						
 							</#list>
 							</div>
 							<div class="tab-pane" id="profile">...</div>
