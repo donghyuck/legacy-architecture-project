@@ -13,7 +13,12 @@
 					e.preventDefault();		
 					alert( $(this).html() );
 				});
-			});			
+			});	
+
+			$('#my-profile-tab a').click(function (e) {
+				e.preventDefault()
+				$(this).tab('show')
+			})					
 		-->
 		</script>
 			
