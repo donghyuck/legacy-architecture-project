@@ -38,8 +38,16 @@
 								<tbody>
 									<tr>
 										<th class="col-lg-3 col-sm-4">아이디</th>
-										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:username"/></td>
+										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:username" value="${ user.username }"/></td>
+									</tr> 								
+									<tr>
+										<th class="col-lg-3 col-sm-4">이름</th>
+										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:name" value="${ user.name }"/></td>
 									</tr> 
+									<tr>
+										<th class="col-lg-3 col-sm-4">메일</th>
+										<td><input type="text" class="form-control" placeholder="아이디" disabled data-bind="value:email" value="${ user.email }"/></td>
+									</tr> 									
 								</tbody>
 							</table>		
 						</div>
