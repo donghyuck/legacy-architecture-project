@@ -87,7 +87,7 @@
 										${company.displayName}
 										${company.description}
 										
-										<#/if>										
+										</#if>										
 									</li>
 									<li class="list-group-item">
 										<h5>권한 <small>내게 부여된 권한</small></h5>							
