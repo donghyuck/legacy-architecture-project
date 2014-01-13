@@ -107,7 +107,18 @@ public class PageAction extends FrameworkActionSupport {
 	}
 	
 	public String getProcessedContentBodyString(Content content) throws Exception {		
-		 freemarker.template.Template  template =  freemarker.template.Template.getPlainTextTemplate(content.getContentId().toString(), content.getBody(), getFreeMarkerConfig().getConfiguration());
+		if(getFreeMarkerConfig() == null)
+			this.freeMarkerConfig = getComponent(FreeMarkerConfig.class);
+		
+		
+		log.debug("content.getContentId():" + content.getContentId());
+		log.debug("getFreeMarkerConfig():" + getFreeMarkerConfig() );
+		log.debug("getFreeMarkerConfig().get:" + getFreeMarkerConfig().getConfiguration() );
+		log.debug("");
+		 freemarker.template.Template  template =  freemarker.template.Template.getPlainTextTemplate(
+				 content.getContentId().toString(), 
+				 content.getBody(), 
+				 getFreeMarkerConfig().getConfiguration());
 		 models.put("action", this);		 
 		 StringWriter stringWriter = new StringWriter();
 		 template.process(models, stringWriter) ;				 
