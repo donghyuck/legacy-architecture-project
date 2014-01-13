@@ -17,6 +17,7 @@ package architecture.ee.web.community.internal;
 
 import java.io.Serializable;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 
 public class ContentImpl  {
@@ -128,7 +129,7 @@ public class ContentImpl  {
 	}
 
 	public int getModelObjectType() {
-		return 0;
+		return ModelTypeFactory.getTypeIdFromCode("CONTENT");
 	}
 
 	public int getCachedSize() {
