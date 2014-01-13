@@ -17,7 +17,7 @@
 	<model id="18" code="MENU" />
 	<model id="19" code="SOCAIL_ACCOUNT" />
 	<model id="20" code="CONTENT" />
-	<model id="20" code="TEMPLATE" />
-	<model id="20" code="ANNOUNCE" />
+	<model id="21" code="TEMPLATE" />
+	<model id="22" code="ANNOUNCE" />
 	
 </models>

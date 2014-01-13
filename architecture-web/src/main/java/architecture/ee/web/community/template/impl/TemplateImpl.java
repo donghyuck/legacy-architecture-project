@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
@@ -193,7 +193,7 @@ public class TemplateImpl extends EntityModelObjectSupport implements Template{
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.CONTENT.getKey() ;
+		return ModelTypeFactory.getTypeIdFromCode("TEMPLATE");
 	}
 	
 	public int getCachedSize() {
