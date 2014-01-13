@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.community.Comment;
@@ -210,7 +211,7 @@ public class CommentImpl extends EntityModelObjectSupport implements Comment  {
 		return commentId;
 	}
 	public int getModelObjectType() {
-		return 0;
+		return ModelTypeFactory.getTypeIdFromCode("COMMENT");
 	}
 	public int getCachedSize() {
 		return 0;
