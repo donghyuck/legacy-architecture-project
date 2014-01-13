@@ -17,7 +17,7 @@ package architecture.ee.web.community.forum.impl;
 
 import java.io.Serializable;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.ee.web.community.forum.Topic;
 
@@ -38,7 +38,7 @@ public class TopicImpl extends BaseModelObjectSupport  implements Topic {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.UNKNOWN.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("FORUM_TOPIC");
 	}
 
 	public int getCachedSize() {
