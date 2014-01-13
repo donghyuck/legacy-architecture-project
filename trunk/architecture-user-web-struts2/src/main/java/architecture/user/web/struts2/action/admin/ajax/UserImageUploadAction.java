@@ -19,7 +19,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.util.Map;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
@@ -104,7 +104,7 @@ public class UserImageUploadAction extends UploadImageAction  {
 		if( this.imageId < 0  ){	
 			File fileToUse = getUploadImage();			
 			imageToUse = getImageManager().createImage(
-				ModelObjectType.USER.getTypeId(), 
+				ModelTypeFactory.getTypeIdFromCode("USER"),
 				user.getUserId(), 
 				getUploadImageFileName(), 
 				getUploadImageContentType(), 

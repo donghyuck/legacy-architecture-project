@@ -15,7 +15,7 @@
  */
 package architecture.user.web.struts2.action.ajax;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.FileInfo;
@@ -44,7 +44,9 @@ public class UploadUserAttachmentAction extends UploadAttachmentAction  {
 		User user = getCurrentUser();
 		if( ! user.isAnonymous() )
 		for( FileInfo f : getAttachmentFileInfos()){	
-			Attachment attach = attachmentManager.createAttachment(ModelObjectType.USER.getTypeId(), user.getUserId(), f.getName(), f.getContentType(), f.getFile());
+			Attachment attach = attachmentManager.createAttachment(
+				ModelTypeFactory.getTypeIdFromCode("USER"), 
+				user.getUserId(), f.getName(), f.getContentType(), f.getFile());
 			this.attachement = attachmentManager.saveAttachment(attach);
 		}
 		return success();
