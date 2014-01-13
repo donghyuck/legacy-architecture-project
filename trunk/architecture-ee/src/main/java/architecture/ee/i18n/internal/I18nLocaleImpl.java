@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.StringUtils;
 import architecture.ee.i18n.I18nLocale;
@@ -122,8 +123,8 @@ public class I18nLocaleImpl extends DateModelObjectSupport implements I18nLocale
 	public void setPrimaryKeyObject(Serializable primaryKeyObj) {
 		setLocaleId(((Long)primaryKeyObj).longValue());
 	}
-	public int getModelObjectType() {
-		return ModelObjectType.I18N_LOCALE.getKey();
+	public int getModelObjectType() {		
+		return ModelTypeFactory.getTypeIdFromCode("I18N_LOCALE");
 	}
 	
 	public int getCachedSize() {
