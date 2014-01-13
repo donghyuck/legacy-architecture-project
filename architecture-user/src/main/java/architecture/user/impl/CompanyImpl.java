@@ -18,7 +18,7 @@ package architecture.user.impl;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 
@@ -59,7 +59,7 @@ public class CompanyImpl  extends BaseModelObjectSupport implements Company {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.COMPANY.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("COMPANY");
 	}
 
 	
