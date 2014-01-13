@@ -142,15 +142,11 @@ public class MyImageAction extends UploadImageAction  {
 		{
 			
 			
-		}
-		
-        return success();
-    }  
-	
-	
+		}		
+		return success();
+	}
 	
 	public String updateImage() throws Exception {		
-		
 		if(isMultiPart() ){
 			Image imageToUse;
 			if( this.imageId < 0  ){	
