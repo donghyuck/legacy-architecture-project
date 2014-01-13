@@ -264,18 +264,18 @@ public class ModelTypeFactory {
 			return false;
 	}
 
-	public static ModelType getModelTypeFromCode(String code) {
-		return _map.get(code);
+	public static Integer getTypeIdFromCode(String code) {
+		return _map.get(code).id;
 	}
 	
-	public static ModelType getModelTypeFromObject(Object model) {
+/*	public static ModelType getModelTypeFromObject(Object model) {
 		
 		for( ModelType type : _map.values() ){
 			if( model.getClass().getName().equals( type.implName ) )
 				return type;
 		}
 		return _map.get("UNKNOWN");
-	}
+	}*/
 	
 	private static List<ModelList> parseLegacyXmlFile(List<ModelList> list) throws Exception {	
 		

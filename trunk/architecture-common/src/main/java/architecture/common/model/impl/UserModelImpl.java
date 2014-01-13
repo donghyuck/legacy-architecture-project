@@ -30,6 +30,7 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.model.ModelObjectType;
 import architecture.common.model.UserModel;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -910,7 +911,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.USER.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("USER");
 	}
 
     private static final char USERNAME_DISALLOWED_CHARS[] = {
