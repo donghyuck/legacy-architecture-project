@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.attachment.Attachment;
 
@@ -97,7 +97,7 @@ public class AttachmentImpl extends EntityModelObjectSupport implements Attachme
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.ATTACHMENT.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("ATTACHMENT");
 	}
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;

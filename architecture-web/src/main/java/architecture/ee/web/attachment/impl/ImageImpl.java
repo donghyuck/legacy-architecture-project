@@ -20,7 +20,7 @@ import java.io.InputStream;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.attachment.Image;
 
@@ -42,7 +42,7 @@ public class ImageImpl extends EntityModelObjectSupport  implements Image {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.IMAGE.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("IMAGE");
 	}
 
 	public int getCachedSize() {

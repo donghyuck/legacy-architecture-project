@@ -18,7 +18,7 @@ package architecture.ee.web.social.internal;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.social.SocialAccount;
 import architecture.ee.web.social.SocialServiceProvider;
@@ -156,7 +156,7 @@ public class SocialAccountImpl extends EntityModelObjectSupport implements Socia
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.SOCAIL_ACCOUNT.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("SOCAIL_ACCOUNT");
 	}
 	
 
