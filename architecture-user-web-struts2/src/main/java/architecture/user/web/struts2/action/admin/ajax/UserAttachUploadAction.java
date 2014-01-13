@@ -15,7 +15,7 @@
  */
 package architecture.user.web.struts2.action.admin.ajax;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
@@ -67,7 +67,7 @@ public class UserAttachUploadAction extends UploadAttachmentAction {
 		User user = getTargetUser();
 		if( ! user.isAnonymous() )
 		for( FileInfo f : getAttachmentFileInfos()){			
-			Attachment attach = attachmentManager.createAttachment(ModelObjectType.USER.getTypeId(), user.getUserId(), f.getName(), f.getContentType(), f.getFile());
+			Attachment attach = attachmentManager.createAttachment(ModelTypeFactory.getTypeIdFromCode("USER"), user.getUserId(), f.getName(), f.getContentType(), f.getFile());
 			attachmentManager.saveAttachment(attach);
 		}
 		
