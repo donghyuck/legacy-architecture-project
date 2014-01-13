@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.NoNamedEntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
@@ -267,7 +267,7 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.ANNOUNCE.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("ANNOUNCE");
 	}
 
 	public int getCachedSize() {
