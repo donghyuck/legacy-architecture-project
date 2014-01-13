@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -36,7 +37,7 @@ public class SystemUser extends BaseModelObjectSupport implements AuthToken, Use
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.SYSTEM.getKey() ;
+		return ModelTypeFactory.getTypeIdFromCode(".SYSTEM");
 	}
 	
 	public String getUsername() {

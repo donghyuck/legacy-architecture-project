@@ -16,7 +16,7 @@
 package architecture.common.model;
 
 public enum ModelObjectType {
-	
+	/*
 	UNKNOWN(0, "UNKNOWN"), 
 	COMPANY(1, "COMPANY"), 
 	USER(2, "USER"), 
@@ -84,4 +84,5 @@ public static ModelObjectType ALL_TYPES[] = values();
     {
         return code;
     }
+    */
 }

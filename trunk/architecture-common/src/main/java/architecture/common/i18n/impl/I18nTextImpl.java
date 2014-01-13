@@ -20,6 +20,7 @@ import java.io.Serializable;
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.I18nTextUtils;
 
@@ -67,7 +68,7 @@ public class I18nTextImpl extends DateModelObjectSupport  implements I18nText {
 		return getTextId();
 	}
 	public int  getModelObjectType() {
-		return ModelObjectType.I18N_TEXT.getKey();
+		return ModelTypeFactory.getTypeIdFromCode(".I18N_TEXT");
 	}
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) +  CacheSizes.sizeOfString( this.categoryName ) + CacheSizes.sizeOfString( getLocaleCode() )  + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;		

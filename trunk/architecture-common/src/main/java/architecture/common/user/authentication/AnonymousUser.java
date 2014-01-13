@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -59,7 +60,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.ANONYMOUS.getKey() ;
+		return ModelTypeFactory.getTypeIdFromCode(".ANONYMOUS");
 	}
 	
 	/**
