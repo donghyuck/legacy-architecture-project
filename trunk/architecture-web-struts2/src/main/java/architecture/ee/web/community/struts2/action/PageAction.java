@@ -16,6 +16,7 @@
 package architecture.ee.web.community.struts2.action;
 
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -112,24 +113,20 @@ public class PageAction extends FrameworkActionSupport {
 		if(getFreeMarkerConfig() == null)
 			this.freeMarkerConfig = getComponent(FreeMarkerConfig.class);
 		
-		Map<String, Object> input = new HashMap<String, Object>();
-		input.put("action", this);	 
-		
-		freemarker.template.Template  template =  freemarker.template.Template.getPlainTextTemplate(
+		freemarker.template.Template  template = new freemarker.template.Template (
 				 content.getContentId().toString(), 
-				 content.getBody(), 
+				new StringReader(content.getBody()), 
 				 getFreeMarkerConfig().getConfiguration());
-		 
+		
+		models.put("action", this);	 
+		
 		 StringWriter stringWriter = new StringWriter();
-		 template.process(input, stringWriter) ;			
-		 
+		 template.process(models, stringWriter) ;			
+				 
 		 return stringWriter.toString();
 	}
 	
-	public String execute() throws Exception {
-
-		
-		
+	public String execute() throws Exception {		
 		return success();
 	}
 	
