@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -225,7 +225,7 @@ public class GroupImpl extends BaseModelObjectSupport implements Group {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.GROUP.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("GROUP");
 	}
 
 	public int compareTo(Group o) {		

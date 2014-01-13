@@ -18,7 +18,7 @@ package architecture.user.impl;
 import java.io.Serializable;
 import java.util.Date;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.user.permission.PermissionMask;
 
@@ -40,8 +40,7 @@ public class PermissionMaskImpl extends DateModelObjectSupport implements Permis
 	}
 
 	public int getModelObjectType() {
-		// TODO 자동 생성된 메소드 스텁
-		return ModelObjectType.UNKNOWN.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("UNKNOWN");
 	}
 
 	public Date getCreationDate() {

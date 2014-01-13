@@ -18,7 +18,7 @@ package architecture.user.impl;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.user.Role;
 
@@ -36,7 +36,7 @@ public class RoleImpl extends BaseModelObjectSupport  implements Role  {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.ROLE.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("ROLE");
 	}
 
 	public int getCachedSize() {
