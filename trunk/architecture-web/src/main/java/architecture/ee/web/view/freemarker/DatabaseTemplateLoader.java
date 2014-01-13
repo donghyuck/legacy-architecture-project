@@ -33,7 +33,11 @@ import architecture.ee.web.community.template.Template;
 import architecture.ee.web.community.template.TemplateManager;
 
 import freemarker.cache.FileTemplateLoader;
-
+/**
+ * 
+ * @author donghyuck
+ * @todo : 캐쉬적용이 필요.
+ */
 public class DatabaseTemplateLoader extends FileTemplateLoader {
 	
 	private Log log = LogFactory.getLog(getClass());

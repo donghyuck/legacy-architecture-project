@@ -18,7 +18,7 @@ package architecture.ee.web.navigator.impl;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.ee.web.navigator.Menu;
 
@@ -47,7 +47,7 @@ public class MenuImpl  extends EntityModelObjectSupport implements Menu {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.MENU.getKey();
+		return ModelTypeFactory.getTypeIdFromCode("MENU");
 	}
 
 	public String getLocation() {
