@@ -17,6 +17,8 @@ package architecture.ee.web.community.struts2.action;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
@@ -110,18 +112,17 @@ public class PageAction extends FrameworkActionSupport {
 		if(getFreeMarkerConfig() == null)
 			this.freeMarkerConfig = getComponent(FreeMarkerConfig.class);
 		
+		Map<String, Object> input = new HashMap<String, Object>();
+		input.put("action", this);	 
 		
-		log.debug("content.getContentId():" + content.getContentId());
-		log.debug("getFreeMarkerConfig():" + getFreeMarkerConfig() );
-		log.debug("getFreeMarkerConfig().get:" + getFreeMarkerConfig().getConfiguration() );
-		log.debug("");
-		 freemarker.template.Template  template =  freemarker.template.Template.getPlainTextTemplate(
+		freemarker.template.Template  template =  freemarker.template.Template.getPlainTextTemplate(
 				 content.getContentId().toString(), 
 				 content.getBody(), 
 				 getFreeMarkerConfig().getConfiguration());
-		 models.put("action", this);		 
+		 
 		 StringWriter stringWriter = new StringWriter();
-		 template.process(models, stringWriter) ;				 
+		 template.process(input, stringWriter) ;			
+		 
 		 return stringWriter.toString();
 	}
 	
