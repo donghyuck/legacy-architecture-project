@@ -16,6 +16,7 @@
 package architecture.ee.web.community.struts2.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -23,11 +24,30 @@ import org.springframework.security.core.GrantedAuthority;
 
 import architecture.common.user.authentication.AuthToken;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.user.Group;
+import architecture.user.GroupManager;
 
 public class UserProfileAction extends FrameworkActionSupport {
 
 	public static final String VIEW_MODAL_DIALOG = "modal-dialog";
 	
+	private GroupManager groupManager ;
+	
+	
+	/**
+	 * @return groupManager
+	 */
+	public GroupManager getGroupManager() {
+		return groupManager;
+	}
+
+	/**
+	 * @param groupManager 설정할 groupManager
+	 */
+	public void setGroupManager(GroupManager groupManager) {
+		this.groupManager = groupManager;
+	}
+
 	private String view;
 	
 	
@@ -45,13 +65,10 @@ public class UserProfileAction extends FrameworkActionSupport {
 		this.view = view;
 	}
 
-	public String execute() throws Exception {      	
-		
+	public String execute() throws Exception {		
 		if( !StringUtils.isEmpty(getView())){
 			return getView();
 		}
-				
-		
 		return super.success();
 	}
 
@@ -74,4 +91,9 @@ public class UserProfileAction extends FrameworkActionSupport {
 		return  list;
 	}
 	
+    public List<Group> getGroups(){
+    	if( getUser().isAnonymous() )
+    		return Collections.EMPTY_LIST;    		
+    	return groupManager.getUserGroups(getUser());    	
+    }
 }

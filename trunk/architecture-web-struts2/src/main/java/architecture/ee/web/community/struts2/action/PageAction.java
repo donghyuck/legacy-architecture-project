@@ -15,10 +15,19 @@
  */
 package architecture.ee.web.community.struts2.action;
 
+import java.io.IOException;
+import java.io.StringWriter;
+
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
+
+import freemarker.cache.StringTemplateLoader;
+import freemarker.template.TemplateException;
+
 import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager;
 
 public class PageAction extends FrameworkActionSupport {
 
@@ -32,7 +41,24 @@ public class PageAction extends FrameworkActionSupport {
 		
 	private String template = DEFAULT_TEMPLATE ;
 	
-	
+	private FreeMarkerConfig freeMarkerConfig ;
+
+
+
+	/**
+	 * @return freeMarkerConfig
+	 */
+	public FreeMarkerConfig getFreeMarkerConfig() {
+		return freeMarkerConfig;
+	}
+
+	/**
+	 * @param freeMarkerConfig 설정할 freeMarkerConfig
+	 */
+	public void setFreeMarkerConfig(FreeMarkerConfig freeMarkerConfig) {
+		this.freeMarkerConfig = freeMarkerConfig;
+	}
+
 	/**
 	 * @return template
 	 */
@@ -74,8 +100,24 @@ public class PageAction extends FrameworkActionSupport {
 	public Content getContentById(Long contentId)throws ContentNotFoundException {
 		return contentManager.getContent(contentId);				
 	}
+
+	public String getProcessedTargetContentBodyString() throws Exception {		
+		Content contentToUse = getTargetContent();		 
+		 return getProcessedContentBodyString(contentToUse);
+	}
+	
+	public String getProcessedContentBodyString(Content content) throws Exception {		
+		 freemarker.template.Template  template =  freemarker.template.Template.getPlainTextTemplate(content.getContentId().toString(), content.getBody(), getFreeMarkerConfig().getConfiguration());
+		 models.put("action", this);		 
+		 StringWriter stringWriter = new StringWriter();
+		 template.process(models, stringWriter) ;				 
+		 return stringWriter.toString();
+	}
 	
 	public String execute() throws Exception {
+
+		
+		
 		return success();
 	}
 	
