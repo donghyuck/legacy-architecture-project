@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.common.model.factory;
+package architecture.common.model.support;
 
 import net.sf.ehcache.Cache;
 
@@ -21,9 +21,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
+
 import architecture.common.model.ModelObject;
 
-public abstract class AbstractObjectManager implements ObjectManager {
+
+public abstract class AbstractModelManagerSupport {
 	
 	protected Log log = LogFactory.getLog(getClass());
 	
