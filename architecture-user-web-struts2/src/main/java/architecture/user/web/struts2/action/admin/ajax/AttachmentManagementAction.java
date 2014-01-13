@@ -17,7 +17,7 @@ package architecture.user.web.struts2.action.admin.ajax;
 
 import java.util.List;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
@@ -100,7 +100,7 @@ public class AttachmentManagementAction extends FrameworkActionSupport {
     } 
     
     public List<Attachment> getTargetUserAttachments(){    	
-    	return attachmentManager.getAttachments(ModelObjectType.USER.getKey(), getTargetUser().getUserId());
+    	return attachmentManager.getAttachments(ModelTypeFactory.getTypeIdFromCode("USER"), getTargetUser().getUserId());
     }
 
 	public User getTargetUser() {

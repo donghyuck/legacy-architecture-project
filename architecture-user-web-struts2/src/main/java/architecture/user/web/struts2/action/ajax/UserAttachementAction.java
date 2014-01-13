@@ -17,7 +17,7 @@ package architecture.user.web.struts2.action.ajax;
 
 import java.util.List;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
@@ -48,7 +48,7 @@ public class UserAttachementAction extends  FrameworkActionSupport {
 	}
 	
     public List<Attachment> getCurrentUserAttachments(){    	
-    	return attachmentManager.getAttachments(ModelObjectType.USER.getKey(), getCurrentUser().getUserId());
+    	return attachmentManager.getAttachments(ModelTypeFactory.getTypeIdFromCode("USER"), getCurrentUser().getUserId());
     }
 	
 	
@@ -67,7 +67,7 @@ public class UserAttachementAction extends  FrameworkActionSupport {
     } 
     
     public List<Attachment> getUserAttachments(){    	
-    	return attachmentManager.getAttachments(ModelObjectType.USER.getKey(), getCurrentUser().getUserId());
+    	return attachmentManager.getAttachments(ModelTypeFactory.getTypeIdFromCode("USER"), getCurrentUser().getUserId());
     }
     
 	public String deleteUserAttachment() throws Exception {  		
