@@ -107,7 +107,7 @@
 		<div class="container layout">
 			<div class="row">
 				<div class="col-lg-12">
-				${action.targetContent.body?replace("#company#", action.user.company.displayName )}		
+				${ action.processedTargetContentBodyString }		
 				</div>
 			</div>
 		</div>
