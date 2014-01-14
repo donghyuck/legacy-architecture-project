@@ -459,6 +459,7 @@
 									fields : {
 										id : { fieldId: "imageId" },
 										name : { fieldId: "name" },
+										type : { fieldId: "type" , defaultValue: 'f'},
 										size : { fieldId : "size" }										
 									}
 								},
