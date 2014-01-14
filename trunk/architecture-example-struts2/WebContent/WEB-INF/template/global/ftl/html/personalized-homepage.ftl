@@ -482,11 +482,11 @@
 								},	
 								*/							
 								thumbnailUrl: function( path, name, imageId ){
-									return "${request.contextPath}/community/download-image?width=150&height=150&imageId=" + imageId ;
+									return "${request.contextPath}/community/download-image.do?width=150&height=150&imageId=" + imageId ;
 								},
 								uploadUrl: "/service/ImageBrowser/Upload",
 								imageUrl: function(path, imageId){
-									return "${request.contextPath}/community/download-image?imageId=" + imageId;
+									return "${request.contextPath}/community/download-image.do?imageId=" + imageId;
 								}
 							}
 						}
