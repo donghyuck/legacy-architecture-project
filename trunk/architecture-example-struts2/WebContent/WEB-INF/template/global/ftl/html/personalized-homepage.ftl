@@ -481,7 +481,7 @@
 								},								
 								thumbnailUrl: "/service/ImageBrowser/Thumbnail",
 								uploadUrl: "/service/ImageBrowser/Upload",
-								imageUrl: "/service/ImageBrowser/Image?path={0}"
+								imageUrl: "${request.contextPath}/community/download-image?width=150&height=150&imageId={0}"
 							}
 						}
 					});
