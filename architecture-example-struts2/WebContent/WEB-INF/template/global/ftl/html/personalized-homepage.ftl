@@ -457,6 +457,7 @@
 								model: {
 									id: "imageId",
 									fields : {
+										id : { fieldId: "imageId" },
 										name : { fieldId: "name" },
 										type : { fieldId : "contentType" },
 										size : { fieldId : "size" }										
