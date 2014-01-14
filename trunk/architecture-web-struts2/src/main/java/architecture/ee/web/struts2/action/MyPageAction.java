@@ -3,8 +3,8 @@ package architecture.ee.web.struts2.action;
 import java.util.Collections;
 import java.util.List;
 
-import architecture.ee.web.social.SocialAccount;
-import architecture.ee.web.social.SocialAccountManager;
+import architecture.ee.web.community.social.SocialAccount;
+import architecture.ee.web.community.social.SocialAccountManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;

@@ -6,8 +6,8 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import architecture.common.user.Company;
-import architecture.ee.web.social.SocialAccount;
-import architecture.ee.web.social.SocialAccountManager;
+import architecture.ee.web.community.social.SocialAccount;
+import architecture.ee.web.community.social.SocialAccountManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
