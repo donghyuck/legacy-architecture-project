@@ -460,8 +460,7 @@
 									fields : {
 										name : { fieldId: "name" },
 										type : { fieldId : "contentType" },
-										size : { fieldId : "size" }
-										
+										size : { fieldId : "size" }										
 									}
 								}
 								data : "targetImages"	        									
