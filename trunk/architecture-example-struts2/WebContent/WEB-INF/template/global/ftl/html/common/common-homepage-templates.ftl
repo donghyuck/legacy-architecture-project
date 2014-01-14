@@ -140,7 +140,8 @@
 				'fontName',
 				'fontSize',
 				'foreColor',
-				'backColor'
+				'backColor',
+				'imageBrowser'
 			]"
 			data-bind='value:body'></textarea>		
 	</div>
