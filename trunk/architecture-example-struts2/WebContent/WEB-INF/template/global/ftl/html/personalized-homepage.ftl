@@ -457,7 +457,6 @@
 								model: {
 									id: "id",
 									fields : {
-										id : { fieldId: "imageId" },
 										name : { fieldId: "name" },
 										type : { fieldId: "contentType" , parse: function() { return "f" ; }},
 										size : { fieldId : "size" }										
@@ -482,7 +481,7 @@
 								},	
 								*/							
 								thumbnailUrl: function( path, name, id ){
-									alert ( id ) ;
+									alert ( this.data ) ;
 									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={id}";
 								},
 								uploadUrl: "/service/ImageBrowser/Upload",
