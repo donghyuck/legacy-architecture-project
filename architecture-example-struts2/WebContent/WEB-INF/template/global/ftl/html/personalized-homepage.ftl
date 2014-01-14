@@ -479,11 +479,12 @@
 								destroy: {
 									url: "/service/ImageBrowser/Destroy",
 									type: "POST"
-								},								
+								},	
+								*/							
 								thumbnailUrl: function( data ){
 									alert ( data ) ;
 									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={id}";
-								},	*/
+								},
 								uploadUrl: "/service/ImageBrowser/Upload",
 								imageUrl: "${request.contextPath}/community/download-image?imageId={0}"
 							}
