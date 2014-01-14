@@ -23,11 +23,11 @@ import net.sf.ehcache.Element;
 import architecture.common.user.Company;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.social.SocialAccount;
-import architecture.ee.web.social.SocialAccountManager;
-import architecture.ee.web.social.facebook.FacebookProfile;
-import architecture.ee.web.social.facebook.FacebookServiceProvider;
-import architecture.ee.web.social.facebook.Post;
+import architecture.ee.web.community.social.SocialAccount;
+import architecture.ee.web.community.social.SocialAccountManager;
+import architecture.ee.web.community.social.facebook.FacebookProfile;
+import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
+import architecture.ee.web.community.social.facebook.Post;
 import architecture.ee.web.struts2.action.support.SocialActionSupport;
 
 public class FacebookAction  extends SocialActionSupport {

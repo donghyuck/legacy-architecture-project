@@ -178,12 +178,9 @@ public class ImageManagementAction extends UploadImageAction  {
 		{
 			
 			
-		}
-		
+		}		
         return success();
     }  
-	
-	
 	
 	public String updateImage() throws Exception {		
 		

@@ -20,6 +20,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 
 import architecture.common.exception.Codeable;
 import architecture.common.exception.ComponentNotFoundException;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
@@ -194,6 +195,9 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		return user;
 	}
 		
+	protected int getModelTypeId(String code){
+		return ModelTypeFactory.getTypeIdFromCode(code);
+	}
 	protected final <T> T getComponent(Class<T> requiredType) throws ComponentNotFoundException {
 		return WebApplicationHelper.getComponent(requiredType);
 	}

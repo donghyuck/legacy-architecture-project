@@ -24,8 +24,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 
-import architecture.common.model.ModelObjectType;
-import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.FileInfo;
