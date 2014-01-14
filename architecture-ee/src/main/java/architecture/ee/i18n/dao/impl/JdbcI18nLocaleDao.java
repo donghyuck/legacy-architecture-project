@@ -15,6 +15,7 @@ import architecture.ee.i18n.dao.I18nLocaleDao;
 import architecture.ee.i18n.internal.I18nLocaleImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 
+
 public class JdbcI18nLocaleDao extends ExtendedJdbcDaoSupport implements I18nLocaleDao {
 
 	class I18nLocaleRowMapper implements RowMapper<I18nLocale> {

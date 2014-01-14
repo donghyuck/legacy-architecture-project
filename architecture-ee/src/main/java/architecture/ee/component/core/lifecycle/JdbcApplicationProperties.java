@@ -37,8 +37,8 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import architecture.common.event.api.EventSource;
 import architecture.common.jdbc.schema.DatabaseType;
 import architecture.common.lifecycle.event.ApplicationPropertyChangeEvent;
-import architecture.common.util.StringUtils;
 import architecture.common.util.LocaleUtils;
+import architecture.common.util.StringUtils;
 
 public class JdbcApplicationProperties extends AbstractJdbcApplicationProperties implements EventSource  {
 

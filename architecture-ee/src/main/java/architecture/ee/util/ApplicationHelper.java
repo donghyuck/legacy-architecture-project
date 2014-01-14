@@ -28,7 +28,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.exception.ComponentNotFoundException;

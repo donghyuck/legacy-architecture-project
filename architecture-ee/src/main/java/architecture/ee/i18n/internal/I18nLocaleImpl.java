@@ -3,7 +3,6 @@ package architecture.ee.i18n.internal;
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
-import architecture.common.model.ModelObjectType;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.StringUtils;
