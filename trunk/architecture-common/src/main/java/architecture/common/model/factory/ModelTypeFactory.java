@@ -42,12 +42,8 @@ public class ModelTypeFactory {
 
 	private static final Log log = LogFactory.getLog(ModelTypeFactory.class);
 	
-	private static class ModelType {
-
-		protected ModelType(int id, String code) {
-			this.code = code;
-			this.id = id;
-		}
+	public static class ModelType {
+	
 
 		public String code;
 		
@@ -59,8 +55,52 @@ public class ModelTypeFactory {
 
 		public boolean isOverride;
 
+		
 		private ModelType() {
 			isOverride = false;
+		}
+		
+		private ModelType(int id, String code) {
+			this.code = code;
+			this.id = id;
+			this.isOverride = false;
+		}
+		
+		
+
+		/**
+		 * @return code
+		 */
+		public String getCode() {
+			return code;
+		}
+
+		/**
+		 * @return id
+		 */
+		public int getId() {
+			return id;
+		}
+
+		/**
+		 * @return implName
+		 */
+		public String getImplName() {
+			return implName;
+		}
+
+		/**
+		 * @return interfaceName
+		 */
+		public String getInterfaceName() {
+			return interfaceName;
+		}
+
+		/**
+		 * @return isOverride
+		 */
+		public boolean isOverride() {
+			return isOverride;
 		}
 
 		public String toString() {			
@@ -273,10 +313,8 @@ public class ModelTypeFactory {
 			return false;
 	}
 
-	public static Integer getTypeIdFromCode(String code) {
-		
-		log.debug("code[" + code + "]"  );
-		
+	public static Integer getTypeIdFromCode(String code) {		
+		log.debug("code[" + code + "]"  );		
 		return _map.get(code).id;
 	}
 	
