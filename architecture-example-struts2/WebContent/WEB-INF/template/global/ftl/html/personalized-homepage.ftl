@@ -455,8 +455,9 @@
 							},
 							schema: {
 								model: {
-									id: "id",
+									id: "imageId",
 									fields : {
+										imageId : { fieldId: "imageId" },
 										name : { fieldId: "name" },
 										type : { fieldId: "contentType" , parse: function() { return "f" ; }},
 										size : { fieldId : "size" }										
@@ -480,7 +481,7 @@
 									type: "POST"
 								},	
 								*/							
-								thumbnailUrl: function( path, name, id ){
+								thumbnailUrl: function( path, name ){
 									var that = this,  selected = that._selectedItem();
 																		
 									alert ( selected ) ;
