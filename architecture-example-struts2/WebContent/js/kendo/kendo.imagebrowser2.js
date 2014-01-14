@@ -9,8 +9,8 @@
 * For GPL requirements, please review: http://www.gnu.org/copyleft/gpl.html
 */
 kendo_module({
-    id: "imagebrowser2",
-    name: "imagebrowser2",
+    id: "imagebrowser",
+    name: "ImageBrowser",
     category: "web",
     description: "",
     hidden: true,
@@ -31,7 +31,7 @@ kendo_module({
         APPLY = "apply",
         ERROR = "error",
         CLICK = "click",
-        NS = ".kendoimagebrowser2",
+        NS = ".kendoImageBrowser",
         BREADCRUBMSNS = ".kendoBreadcrumbs",
         SEARCHBOXNS = ".kendoSearchBox",
         NAMEFIELD = "name",
@@ -61,7 +61,7 @@ kendo_module({
 
     extend(true, kendo.data, {
         schemas: {
-            "imagebrowser2": {
+            "imagebrowser": {
                 data: function(data) {
                     return data.items || data || [];
                 },
@@ -79,7 +79,7 @@ kendo_module({
 
     extend(true, kendo.data, {
         transports: {
-            "imagebrowser2": kendo.data.RemoteTransport.extend({
+            "imagebrowser": kendo.data.RemoteTransport.extend({
                 init: function(options) {
                     kendo.data.RemoteTransport.fn.init.call(this, $.extend(true, {}, this.options, options));
                 },
@@ -195,7 +195,7 @@ kendo_module({
         return descriptor;
     }
 
-    var imagebrowser2 = Widget.extend({
+    var ImageBrowser = Widget.extend({
         init: function(element, options) {
             var that = this;
 
@@ -203,7 +203,7 @@ kendo_module({
 
             Widget.fn.init.call(that, element, options);
 
-            that.element.addClass("k-imagebrowser2 k-secondary");
+            that.element.addClass("k-imagebrowser k-secondary");
 
             that.element
                 .on(CLICK + NS, ".k-toolbar button:not(.k-state-disabled):has(.k-delete)", proxy(that._deleteClick, that))
@@ -219,7 +219,7 @@ kendo_module({
         },
 
         options: {
-            name: "imagebrowser2",
+            name: "ImageBrowser",
             messages: {
                 uploadFile: "Upload",
                 orderBy: "Arrange by",
@@ -362,7 +362,7 @@ kendo_module({
                 offset = element.offset();
 
             that.toolbar.find(".k-dropzone")
-                .addClass("k-imagebrowser2-dropzone")
+                .addClass("k-imagebrowser-dropzone")
                 .offset(offset)
                 .css({
                     width: element[0].clientWidth,
@@ -373,7 +373,7 @@ kendo_module({
 
         _removeDropzone: function() {
             this.toolbar.find(".k-dropzone")
-                .removeClass("k-imagebrowser2-dropzone")
+                .removeClass("k-imagebrowser-dropzone")
                 .css({ width: "", height: "", lineHeight: "", top: "", left: "" });
         },
 
@@ -667,7 +667,7 @@ kendo_module({
                 nameSortOrder = { field: NAMEFIELD, dir: "asc" },
                 schema,
                 dataSource = {
-                    type: transport.type || "imagebrowser2",
+                    type: transport.type || "imagebrowser",
                     sort: [typeSortOrder, nameSortOrder]
                 };
 
@@ -1158,7 +1158,7 @@ kendo_module({
         }
     });
 
-    kendo.ui.plugin(imagebrowser2);
+    kendo.ui.plugin(ImageBrowser);
     kendo.ui.plugin(Breadcrumbs);
     kendo.ui.plugin(SearchBox);
 })(window.kendo.jQuery);
