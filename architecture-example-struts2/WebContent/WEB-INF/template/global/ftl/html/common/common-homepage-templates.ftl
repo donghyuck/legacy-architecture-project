@@ -57,7 +57,7 @@
 	<div class="panel panel-default borderless shadowless">
 		<div class="panel-heading" style="background-color:\\#ffffff;">
 			<h4 data-bind="html:subject"></h4>
-			<small class="text-muted"><span class="label label-info">기간</span> #: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small>			
+			<small class="text-muted"><span class="label label-info">기간</span> #: kendo.toString(startDate, "g") # ~  #: kendo.toString(endDate, "g") #</small>			
 		</div>
 		<div class="panel-body" data-bind="html:body"></div>	
 	</div>
