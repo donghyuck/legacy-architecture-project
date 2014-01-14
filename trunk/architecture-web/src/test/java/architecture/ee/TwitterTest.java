@@ -17,10 +17,10 @@ package architecture.ee;
 
 import java.util.List;
 
-import architecture.ee.web.social.twitter.MediaEntity;
-import architecture.ee.web.social.twitter.Tweet;
-import architecture.ee.web.social.twitter.TwitterProfile;
-import architecture.ee.web.social.twitter.TwitterServiceProvider;
+import architecture.ee.web.community.social.twitter.MediaEntity;
+import architecture.ee.web.community.social.twitter.Tweet;
+import architecture.ee.web.community.social.twitter.TwitterProfile;
+import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 
 public class TwitterTest {
 
