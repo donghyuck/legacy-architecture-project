@@ -41,7 +41,7 @@
 	<bean id="menuDao" class="architecture.ee.web.navigator.dao.impl.JdbcMenuDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="menuRepository" class="architecture.ee.web.navigator.DefaultMenuRepository"  init-method="initialize" destroy-method="destory"  depends-on="menuDao, eventPublisher" 	p:menuDao-ref="menuDao" p:eventPublisher-ref="eventPublisher"  p:menuCache-ref="menuCache"  p:menuIdCache-ref="menuIdCache" />
 
-	<bean id="socialAccountDao" class="architecture.ee.web.social.dao.impl.JdbcSocialAccountDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
-	<bean id="socialAccountManager" class="architecture.ee.web.social.internal.DefaultSocialAccountManager" depends-on="socialAccountDao"  p:socialAccountDao-ref="socialAccountDao" p:socialAccountCache-ref="socialAccountCache"/>		
+	<bean id="socialAccountDao" class="architecture.ee.web.community.social.dao.impl.JdbcSocialAccountDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	<bean id="socialAccountManager" class="architecture.ee.web.community.social.internal.DefaultSocialAccountManager" depends-on="socialAccountDao"  p:socialAccountDao-ref="socialAccountDao" p:socialAccountCache-ref="socialAccountCache"/>		
 
 </beans>
