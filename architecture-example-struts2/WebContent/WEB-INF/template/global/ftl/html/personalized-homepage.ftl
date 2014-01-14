@@ -450,7 +450,7 @@
 							'foreColor',
 							'backColor'
 						],
-						imageBrowser: new imagebrowser2 {
+						imageBrowser: {
 							messages: {
 								dropFilesHere: "Drop files here"
 							},
