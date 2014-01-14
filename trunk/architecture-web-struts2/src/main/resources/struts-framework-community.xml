@@ -6,27 +6,34 @@
 
 	<!--  PUBLIC ACTIONS -->
 	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
+	
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">${template}</result>	
-		</action>			
+		</action>
+
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
 			<result name="success" type="freemarker">/html/about.ftl</result>	
 		</action>		
+
 		<action name="events" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">/html/events.ftl</result>	
 		</action>	
+
 		<action name="contact" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">/html/contact.ftl</result>	
 		</action>		
+
 		<action name="customers" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">/html/customers.ftl</result>	
 		</action>		
+
 		<action name="press" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">/html/press.ftl</result>
 		</action>										
+
 	</package>	
 
-	<!--  MANAGEMENT ACTIONS -->
+	<!--  COMMUNITY MANAGEMENT ACTIONS -->
 	<package name="framework-community-admin-actions" namespace="/secure" extends="framework-default">	
 		<!--  contents  -->
 		<action name="list-template" class="architecture.ee.web.community.struts2.action.admin.ajax.TemplateMgmtAction">
@@ -49,8 +56,19 @@
 		</action>				
 	</package>	
 
-	<!--  USER ACTIONS -->	
+	<!--  COMMUNITY USER ACTIONS -->	
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
+
+		<!--  image broswer  -->
+		<action name="download-image" class="architecture.ee.web.community.struts2.action.DownloadImageActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>			
+		
 		<!--  profile  -->
 		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.UserProfileAction">
 			<result name="success" type="freemarker">/html/community/user-profile.ftl</result>
@@ -69,9 +87,8 @@
 				</param>
 			</result>
 			-->
-		</action>		
-		
-			
+		</action>	
+					
 		<!--  announce  -->			
 		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
