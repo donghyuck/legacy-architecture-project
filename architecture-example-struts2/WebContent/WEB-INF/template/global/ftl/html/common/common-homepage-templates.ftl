@@ -66,7 +66,7 @@
 <!-- announce view panel -->
 <script type="text/x-kendo-tmpl" id="announcement-view-template">		
 	<h4 data-bind="html:subject"></h4>
-	<small><span class="label label-primary">기간</span> #: kendo.toString(startDate, "g") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small><br>
+	<small><span class="label label-primary">기간</span> #: kendo.toString(startDate, "g") # ~  #: kendo.toString(endDate, "g") #</small><br>
 	<div class="media">
 		<a class="pull-left" href="\\#">
 		#if ( user.properties.imageId != null ) {# 
