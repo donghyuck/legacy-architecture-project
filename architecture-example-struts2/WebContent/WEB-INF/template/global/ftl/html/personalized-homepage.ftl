@@ -432,7 +432,7 @@
 							e.preventDefault();					
 							var data = $("#announce-panel").data( "announcePlaceHolder" );	
 							
-							alert( data.startDate );
+							alert( kendo.stringify( data ) );
 							$.ajax({
 									dataType : "json",
 									type : 'POST',
