@@ -484,7 +484,7 @@
 								thumbnailUrl: function( path, name ){
 									
 																		
-									alert ( $(this).html() ) ;
+									alert ( this) ;
 									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={id}";
 								},
 								uploadUrl: "/service/ImageBrowser/Upload",
