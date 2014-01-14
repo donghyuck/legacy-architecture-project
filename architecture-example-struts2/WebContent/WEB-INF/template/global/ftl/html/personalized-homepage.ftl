@@ -419,11 +419,64 @@
 				//});				
 
 				//announcePlaceHolder.body = "" ;
-				
 
+				
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
 				kendo.bind($("#announce-view"), announcePlaceHolder );					
+				if(!$("#announce-body-editor").data("kendoEditor") ){
+					tools : [
+						'bold',
+						'italic',
+						'underline',
+						'strikethrough',
+						'justifyLeft',
+						'justifyCenter',
+						'justifyRight',
+						'justifyFull',
+						'insertUnorderedList',
+						'insertOrderedList',
+						'indent',
+						'outdent',
+						'createLink',
+						'unlink',
+						'insertImage',
+						'subscript',
+						'superscript',
+						'createTable',
+						'addRowAbove',
+						'addRowBelow',
+						'addColumnLeft',
+						'addColumnRight',
+						'deleteRow',
+						'deleteColumn',
+						'viewHtml',
+						'formatting',
+						'fontName',
+						'fontSize',
+						'foreColor',
+						'backColor'					
+					],
+					imageBrowser: {
+						messages: {
+							dropFilesHere: "Drop files here"
+						},
+						transport: {
+							read: "/service/ImageBrowser/Read",
+							destroy: {
+								url: "/service/ImageBrowser/Destroy",
+								type: "POST"
+							},
+							create: {
+								url: "/service/ImageBrowser/Create",
+								type: "POST"
+							},
+							thumbnailUrl: "/service/ImageBrowser/Thumbnail",
+							uploadUrl: "/service/ImageBrowser/Upload",
+							imageUrl: "/service/ImageBrowser/Image?path={0}"
+						}
+					}
+				}
 				
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
