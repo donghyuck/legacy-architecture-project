@@ -313,6 +313,11 @@ public class ModelTypeFactory {
 			return false;
 	}
 
+	public static ModelType getTypeFromCode(String code) {		
+		log.debug("code[" + code + "]"  );		
+		return _map.get(code);
+	}
+	
 	public static Integer getTypeIdFromCode(String code) {		
 		log.debug("code[" + code + "]"  );		
 		return _map.get(code).id;
