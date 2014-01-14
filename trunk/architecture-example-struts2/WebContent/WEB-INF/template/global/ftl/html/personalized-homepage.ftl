@@ -476,7 +476,7 @@
 							imageUrl: "/service/ImageBrowser/Image?path={0}"
 						}
 					}
-				}
+				});
 				
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
