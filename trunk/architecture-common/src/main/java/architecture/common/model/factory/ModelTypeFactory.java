@@ -45,15 +45,15 @@ public class ModelTypeFactory {
 	public static class ModelType {
 	
 
-		public String code;
+		private String code;
 		
-		public int id;
+		private int id;
 		
-		public String implName;
+		private String implName;
 		
-		public String interfaceName;
+		private String interfaceName;
 
-		public boolean isOverride;
+		private boolean isOverride;
 
 		
 		private ModelType() {
@@ -162,7 +162,7 @@ public class ModelTypeFactory {
 
 		int rank;
 
-		List<ModelType> modelTypes;
+//		List<ModelType> modelTypes;
 
 		ModelType modelType;
 
