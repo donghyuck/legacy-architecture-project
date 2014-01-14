@@ -466,11 +466,7 @@
 								destroy: {
 									url: "/service/ImageBrowser/Destroy",
 									type: "POST"
-								},
-								create: {
-									url: "/service/ImageBrowser/Create",
-									type: "POST"
-								},
+								},								
 								thumbnailUrl: "/service/ImageBrowser/Thumbnail",
 								uploadUrl: "/service/ImageBrowser/Upload",
 								imageUrl: "/service/ImageBrowser/Image?path={0}"
