@@ -749,7 +749,6 @@ kendo_module({
                 element = $(li),
                 dataItem = that.dataSource.getByUid(element.attr(kendo.attr("uid"))),
                 name = dataItem.get(NAMEFIELD),
-                imageId =  dataItem.get("imageId"),
                 thumbnailUrl = that.options.transport.thumbnailUrl,
                 img = $("<img />", { alt: name }),
                 urlJoin = "?";
@@ -762,7 +761,7 @@ kendo_module({
             element.find(".k-loading").after(img);
 
             if (isFunction(thumbnailUrl)) {
-                thumbnailUrl = thumbnailUrl(that.path(), encodeURIComponent(name), imageId);
+                thumbnailUrl = thumbnailUrl(that.path(), encodeURIComponent(name));
             } else {
                 if (thumbnailUrl.indexOf("?") >= 0) {
                     urlJoin = "&";
