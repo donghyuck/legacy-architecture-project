@@ -26,15 +26,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
 import architecture.common.util.TextUtils;
-import architecture.ee.util.ApplicationHelper;
-import architecture.user.CompanyManager;
-import architecture.user.CompanyNotFoundException;
 import architecture.user.security.authentication.AuthenticationProvider;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
@@ -45,8 +41,6 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 	private static final Log log = LogFactory.getLog(AuthenticationProviderFactoryImpl.class);
 	
 	private SecurityContextAuthenticationProvider instance = new SecurityContextAuthenticationProvider();
-	
-	
 	
 	public AuthenticationProvider getSecurityContextAuthenticationProvider() {
 		return instance;

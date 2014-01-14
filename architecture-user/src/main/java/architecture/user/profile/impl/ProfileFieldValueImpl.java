@@ -8,7 +8,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldValue;
 import architecture.user.profile.TypeConverter;
@@ -314,7 +314,7 @@ public class ProfileFieldValueImpl  implements ProfileFieldValue{
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.UNKNOWN.getKey() ;
+		return ModelTypeFactory.UNKNOWN.getId() ;
 	}
 
 	public int compareTo(ProfileFieldValue o) {

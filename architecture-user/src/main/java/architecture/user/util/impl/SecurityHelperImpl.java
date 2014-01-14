@@ -3,8 +3,6 @@ package architecture.user.util.impl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import architecture.common.user.SecurityHelper.Implementation;
 import architecture.common.user.User;
@@ -12,7 +10,6 @@ import architecture.common.user.User.Status;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
-import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 
 
 public class SecurityHelperImpl implements Implementation {
