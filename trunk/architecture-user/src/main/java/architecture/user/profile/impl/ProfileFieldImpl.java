@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.util.I18nTextUtils;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldOption;
@@ -476,7 +476,7 @@ public class ProfileFieldImpl  implements ProfileField {
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.UNKNOWN.getKey() ;
+		return ModelTypeFactory.UNKNOWN.getId() ;
 	}
 
 	public int compareTo(ProfileField o) {

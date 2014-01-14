@@ -2,7 +2,7 @@ package architecture.user.profile.impl;
 
 import java.io.Serializable;
 
-import architecture.common.model.ModelObjectType;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.user.profile.ProfileField;
 import architecture.user.profile.ProfileFieldOption;
 
@@ -91,7 +91,7 @@ public class ProfileFieldOptionImpl   implements ProfileFieldOption{
 	}
 
 	public int getModelObjectType() {
-		return ModelObjectType.UNKNOWN.getKey() ;
+		return ModelTypeFactory.UNKNOWN.getId();
 	}
 
 	public int compareTo(ProfileField o) {

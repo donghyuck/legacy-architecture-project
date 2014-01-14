@@ -34,8 +34,6 @@ import org.springframework.security.authentication.encoding.PasswordEncoder;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.collect.Sets;
-
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.exception.CodeableException;
@@ -54,6 +52,8 @@ import architecture.ee.component.admin.AdminHelper;
 import architecture.user.dao.UserDao;
 import architecture.user.security.authentication.InvalidProviderUserException;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsAdaptor;
+
+import com.google.common.collect.Sets;
 
 
 /**
