@@ -15,13 +15,8 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 import architecture.common.util.DateUtils;
 import architecture.ee.web.community.Announce;
@@ -32,7 +27,7 @@ import architecture.ee.web.util.ParamUtils;
 
 public class MyAnnouncementAction extends FrameworkActionSupport {
 
-	private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
+	//private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
 	
 	private Long objectId = -1L; 
 	
@@ -145,8 +140,8 @@ return 0;
 		String startDateString = (String)map.get("startDate");
 		String endDateString = (String)map.get("endDate");
 		
-		//log.debug( "startDateString:" + startDateString );
-		//log.debug( "endDateString:" + endDateString );
+		log.debug( "startDateString:" + startDateString );
+		log.debug( "endDateString:" + endDateString );
 		
 		Announce targetAnnounce = getTargetAnnounce();
 		targetAnnounce.setSubject(subject);
@@ -169,11 +164,6 @@ return 0;
 		return success();
 	}
 	
-	public Date stringToDate(String str) throws ParseException{
-		log.debug( str + ">" + formatter.parse(str) );
-		
-		return formatter.parse(str);
-	}
 	
 	public String delete() throws Exception{				
 		announceManager.deleteAnnounce(announceId);				
