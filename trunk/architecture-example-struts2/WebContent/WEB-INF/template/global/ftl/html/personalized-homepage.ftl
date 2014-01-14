@@ -479,7 +479,7 @@
 									url: "/service/ImageBrowser/Destroy",
 									type: "POST"
 								},								
-								thumbnailUrl: "/service/ImageBrowser/Thumbnail",
+								thumbnailUrl: "${request.contextPath}/community/download-image?width=150&height=150&imageId={0}",
 								uploadUrl: "/service/ImageBrowser/Upload",
 								imageUrl: "${request.contextPath}/community/download-image?width=150&height=150&imageId={0}"
 							}
