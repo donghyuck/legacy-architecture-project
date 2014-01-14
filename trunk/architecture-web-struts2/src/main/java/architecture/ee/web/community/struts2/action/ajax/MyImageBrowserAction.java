@@ -20,42 +20,27 @@ import java.io.FileInputStream;
 import java.util.Collections;
 import java.util.List;
 
-import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.struts2.action.UploadImageAction;
 
-public class MyImageAction extends UploadImageAction  {
+public class MyImageBrowserAction extends UploadImageAction {
 
-	private int DEFAULT_OBJEDT_TYPE = 2 ;
-	
-    private int pageSize = 0 ;
+	private int pageSize = 0 ;
     
-    private int startIndex = 0 ;  
+	private int startIndex = 0 ;  
     
 	private Long imageId = -1L; 
-		
-	private UserManager userManager ;
-	
+			
 	private Image targetImage;
 	
-	private ImageManager imageManager;
+	private Integer objectType = 0;
 	
-	/**
-	 * @return imageManager
-	 */
-	public ImageManager getImageManager() {
-		return imageManager;
-	}
-
-	/**
-	 * @param imageManager 설정할 imageManager
-	 */
-	public void setImageManager(ImageManager imageManager) {
-		this.imageManager = imageManager;
-	}
+	private Long objectId = -1L;
+	
+	private ImageManager imageManager;
 
 	/**
 	 * @return pageSize
@@ -85,24 +70,69 @@ public class MyImageAction extends UploadImageAction  {
 		this.startIndex = startIndex;
 	}
 
-	
-	
+	/**
+	 * @return imageId
+	 */
 	public Long getImageId() {
 		return imageId;
 	}
 
+	/**
+	 * @param imageId 설정할 imageId
+	 */
 	public void setImageId(Long imageId) {
 		this.imageId = imageId;
 	}
 
-	public UserManager getUserManager() {
-		return userManager;
+	/**
+	 * @param targetImage 설정할 targetImage
+	 */
+	public void setTargetImage(Image targetImage) {
+		this.targetImage = targetImage;
 	}
 
-	public void setUserManager(UserManager userManager) {
-		this.userManager = userManager;
+	/**
+	 * @return objectType
+	 */
+	public Integer getObjectType() {
+		return objectType;
 	}
-	
+
+	/**
+	 * @param objectType 설정할 objectType
+	 */
+	public void setObjectType(Integer objectType) {
+		this.objectType = objectType;
+	}
+
+	/**
+	 * @return objectId
+	 */
+	public Long getObjectId() {
+		return objectId;
+	}
+
+	/**
+	 * @param objectId 설정할 objectId
+	 */
+	public void setObjectId(Long objectId) {
+		this.objectId = objectId;
+	}
+
+	/**
+	 * @return imageManager
+	 */
+	public ImageManager getImageManager() {
+		return imageManager;
+	}
+
+	/**
+	 * @param imageManager 설정할 imageManager
+	 */
+	public void setImageManager(ImageManager imageManager) {
+		this.imageManager = imageManager;
+	}
+
 	public Image getTargetImage( ){
 		try {	
 			if( targetImage == null){
@@ -116,19 +146,23 @@ public class MyImageAction extends UploadImageAction  {
 	}
 	
 	public int getTotalTargetImageCount(){
-		if( getUser().getUserId() < 1 )
-			return 0 ;
-		return getImageManager().getTotalImageCount(DEFAULT_OBJEDT_TYPE, getUser().getUserId());
+		if( objectType < 0 || objectId < 0)
+			return 0;
+		
+		return getImageManager().getTotalImageCount(objectType, objectId);
 	}
 	
 	public List<Image> getTargetImages(){    	
-    	if( getUser().getUserId() < 1 )
-    		return Collections.EMPTY_LIST;
+    	if( this.objectType < 0 || this.objectId <0 )
+    		return Collections.EMPTY_LIST;    	
     	
+    	log.debug(  request.getParameterMap() );
+    	log.debug( "startIndex= " + startIndex + ", pageSize=" + pageSize  );
+
         if( pageSize > 0 ){
-            return getImageManager().getImages(DEFAULT_OBJEDT_TYPE, getUser().getUserId(), startIndex, pageSize);            
+            return getImageManager().getImages(objectType, objectId, startIndex, pageSize);            
         }else{            
-            return getImageManager().getImages(DEFAULT_OBJEDT_TYPE, getUser().getUserId());
+            return getImageManager().getImages(objectType, objectId);
         }
     }
 	
@@ -141,10 +175,9 @@ public class MyImageAction extends UploadImageAction  {
 		if( image.getImageId() > 0)
 		{
 			
-			
 		}		
-		return success();
-	}
+        return success();
+    }  
 	
 	public String updateImage() throws Exception {		
 		if(isMultiPart() ){
@@ -152,8 +185,8 @@ public class MyImageAction extends UploadImageAction  {
 			if( this.imageId < 0  ){	
 				File fileToUse = getUploadImage();			
 				imageToUse = getImageManager().createImage(
-					DEFAULT_OBJEDT_TYPE, 
-					getUser().getUserId(), 
+					objectType, 
+					objectId, 
 					getUploadImageFileName(), 
 					getUploadImageContentType(), 
 					fileToUse);	
@@ -170,6 +203,5 @@ public class MyImageAction extends UploadImageAction  {
 		}
 		return success();
 	}
-	
 	
 }
