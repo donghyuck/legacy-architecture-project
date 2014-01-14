@@ -481,8 +481,8 @@
 									type: "POST"
 								},	
 								*/							
-								thumbnailUrl: function( data ){
-									alert ( data ) ;
+								thumbnailUrl: function( path, name, id ){
+									alert ( id ) ;
 									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={id}";
 								},
 								uploadUrl: "/service/ImageBrowser/Upload",
