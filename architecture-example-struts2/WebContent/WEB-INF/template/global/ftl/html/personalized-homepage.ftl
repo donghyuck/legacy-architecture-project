@@ -462,11 +462,8 @@
 										type : { fieldId : "contentType" },
 										size : { fieldId : "size" }										
 									}
-								}
-								data : "targetImages"	        									
-								/*model: Image,
-								data : "targetImages",
-								total : "totalTargetImageCount"*/
+								},
+								data : "targetImages"
 							},			
 							transport: {
 								read: {
