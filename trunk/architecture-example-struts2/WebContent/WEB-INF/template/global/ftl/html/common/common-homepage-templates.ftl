@@ -109,6 +109,8 @@
 		</div>
 	</div>
 	<div class="form-group">
+		<textarea id="announce-body-editor" data-bind='value:body'></textarea>
+		<!--
 		<textarea data-role="editor"
 			data-tools="[
 				'bold',
@@ -140,10 +142,10 @@
 				'fontName',
 				'fontSize',
 				'foreColor',
-				'backColor',
-				'imageBrowser'
+				'backColor'
 			]"
 			data-bind='value:body'></textarea>		
+			-->
 	</div>
 </div>	  
 	<!--		
