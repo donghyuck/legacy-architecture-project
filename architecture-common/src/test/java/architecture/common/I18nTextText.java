@@ -1,14 +1,11 @@
 package architecture.common;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import org.junit.Test;
 
-import architecture.common.model.ModelObjectType;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.util.I18nTextUtils;
 
