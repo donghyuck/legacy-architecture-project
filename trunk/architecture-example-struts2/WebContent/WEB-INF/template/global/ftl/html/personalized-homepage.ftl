@@ -482,9 +482,9 @@
 								},	
 								*/							
 								thumbnailUrl: function( path, name ){
-									var that = this,  selected = that._selectedItem();
+									
 																		
-									alert ( selected ) ;
+									alert ( $(this).html() ) ;
 									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={id}";
 								},
 								uploadUrl: "/service/ImageBrowser/Upload",
