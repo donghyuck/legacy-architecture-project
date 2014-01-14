@@ -14,5 +14,11 @@ public class ModelTypeTest {
 			System.out.println( id ) ;
 		} catch (Exception e) {
 		}
+		
+		id = ModelTypeFactory.getTypeIdFromCode("COMPANY");
+		try {
+			System.out.println( id ) ;
+		} catch (Exception e) {
+		}
 	}
 }

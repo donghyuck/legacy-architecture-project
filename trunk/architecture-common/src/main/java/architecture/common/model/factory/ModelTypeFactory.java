@@ -28,6 +28,8 @@ import javax.xml.parsers.SAXParserFactory;
 import javolution.util.FastList;
 import javolution.util.FastMap;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.Locator;
@@ -38,9 +40,14 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class ModelTypeFactory {
 
+	private static final Log log = LogFactory.getLog(ModelTypeFactory.class);
+	
 	private static class ModelType {
 
-		//public String name;
+		protected ModelType(int id, String code) {
+			this.code = code;
+			this.id = id;
+		}
 
 		public String code;
 		
@@ -221,6 +228,8 @@ public class ModelTypeFactory {
 
 	private static Map<String, ModelType> _map;
 
+	public static ModelType UNKNOWN = new  ModelType(0, "UNKNOWN");
+	
 	static {
 
 		try {
@@ -265,6 +274,9 @@ public class ModelTypeFactory {
 	}
 
 	public static Integer getTypeIdFromCode(String code) {
+		
+		log.debug("code[" + code + "]"  );
+		
 		return _map.get(code).id;
 	}
 	
@@ -289,7 +301,7 @@ public class ModelTypeFactory {
 		xmlreader.setDTDHandler(handler);
 		xmlreader.setEntityResolver(handler);		
 		xmlreader.setErrorHandler(handler);		
-		System.out.println("Enum:");	
+		System.out.println("Model Enum:");	
 		
 		do {
 			if (!enumeration.hasMoreElements())
