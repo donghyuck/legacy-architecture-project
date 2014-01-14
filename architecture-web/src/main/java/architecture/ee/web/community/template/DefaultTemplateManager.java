@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.sf.ehcache.Element;
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.AbstractModelManagerSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -61,11 +62,11 @@ public class DefaultTemplateManager extends AbstractModelManagerSupport implemen
 	}
 
 	public List<Template> getTemplate(Company company) {
-		return getTemplate(company.getModelObjectType(), company.getCompanyId());
+		return getTemplate(ModelTypeFactory.getTypeIdFromCode("COMPANY"), company.getCompanyId());
 	}
 
 	public List<Template> getTemplate(User user) {
-		return getTemplate(user.getModelObjectType(), user.getCompanyId());
+		return getTemplate(ModelTypeFactory.getTypeIdFromCode("USER"), user.getUserId());
 	}
 
 	public List<Template> getTemplate(int objectType, long objectId) {

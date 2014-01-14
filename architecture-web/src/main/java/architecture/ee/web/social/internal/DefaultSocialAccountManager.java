@@ -24,6 +24,7 @@ import net.sf.ehcache.Cache;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
@@ -126,7 +127,7 @@ public class DefaultSocialAccountManager implements SocialAccountManager {
 	}
 
 	public List<SocialAccount> getSocialAccounts(Company company) {
-		List<Long> ids = socialAccountDao.getSocialAccountIds(company.getModelObjectType(), company.getCompanyId());
+		List<Long> ids = socialAccountDao.getSocialAccountIds(ModelTypeFactory.getTypeIdFromCode("COMPANY"), company.getCompanyId());
 		List<SocialAccount> accounts = new ArrayList<SocialAccount>(ids.size());
 		for(Long id : ids){
 			try {
@@ -138,7 +139,7 @@ public class DefaultSocialAccountManager implements SocialAccountManager {
 	}
 
 	public List<SocialAccount> getSocialAccounts(User user) {
-		List<Long> ids = socialAccountDao.getSocialAccountIds(user.getModelObjectType(), user.getUserId());
+		List<Long> ids = socialAccountDao.getSocialAccountIds(ModelTypeFactory.getTypeIdFromCode("USER"), user.getUserId());
 		List<SocialAccount> accounts = new ArrayList<SocialAccount>(ids.size());
 		for(Long id : ids){
 			try {
