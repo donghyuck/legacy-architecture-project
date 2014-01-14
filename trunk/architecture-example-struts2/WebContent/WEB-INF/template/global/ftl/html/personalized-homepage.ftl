@@ -481,7 +481,7 @@
 								},	
 								*/							
 								thumbnailUrl: function( path, name, id ){
-									var that = this,  selected = that._selectedItem(),
+									var that = this,  selected = that._selectedItem();
 																		
 									alert ( selected ) ;
 									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={id}";
