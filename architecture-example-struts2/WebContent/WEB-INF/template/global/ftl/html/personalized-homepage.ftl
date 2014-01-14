@@ -478,7 +478,9 @@
 									url: "/service/ImageBrowser/Destroy",
 									type: "POST"
 								},								
-								thumbnailUrl: "${request.contextPath}/community/download-image?width=150&height=150&imageId={0}",
+								thumbnailUrl: function(){
+									return "${request.contextPath}/community/download-image?width=150&height=150&imageId={0}";	
+								},								
 								uploadUrl: "/service/ImageBrowser/Upload",
 								imageUrl: "${request.contextPath}/community/download-image?imageId={0}"
 							}
