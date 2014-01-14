@@ -162,7 +162,7 @@ public class ModelTypeFactory {
 
 		int rank;
 
-//		List<ModelType> modelTypes;
+		List<ModelType> modelTypes;
 
 		ModelType modelType;
 
