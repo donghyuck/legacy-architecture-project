@@ -424,10 +424,11 @@
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
 				kendo.bind($("#announce-view"), announcePlaceHolder );					
+				
 				if(!$("#announce-body-editor").data("kendoEditor") ){
 					$("#announce-body-editor").kendoEditor({
 						tools : [
-							'bold',
+						/*	'bold',
 							'italic',
 							'underline',
 							'strikethrough',
@@ -456,7 +457,8 @@
 							'fontName',
 							'fontSize',
 							'foreColor',
-							'backColor'					
+							'backColor'				
+							*/	"insertImage"
 						],
 						imageBrowser: {
 							messages: {
