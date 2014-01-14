@@ -7,7 +7,7 @@ import java.util.TimeZone;
 
 public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 
-	private static final SimpleDateFormat  ISO_DATE_FORMAT = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss.SSS");
+	private static final SimpleDateFormat  ISO_DATE_FORMAT = new SimpleDateFormat ("yyyy-MM-dd'T'HH:mm:ss");
 	private static final TimeZone UTC_TIMEZONE = TimeZone.getTimeZone("UTC");
 	
     public static Date clone(Date date)
