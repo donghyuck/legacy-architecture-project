@@ -454,10 +454,16 @@
 							messages: {
 								dropFilesHere: "Drop files here"
 							},
+							schema: {
+								model: Image,
+								data : "targetImages",
+								total : "totalTargetImageCount"
+							},			
 							transport: {
 								read: {
 									url: "${request.contextPath}/community/imagebrowser-list.do?output=json",
 									type: "POST",
+									dataType: "json",
 									data: { 
 										objectType: 1,
 										objectId: $("#account-panel").data("currentUser" ).company.companyId  
