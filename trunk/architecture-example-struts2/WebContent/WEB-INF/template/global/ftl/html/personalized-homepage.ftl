@@ -408,18 +408,8 @@
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
+			
 			if( announcePlaceHolder.modifyAllowed ){		
-						
-				//var observable = new kendo.data.ObservableObject( announcePlaceHolder );
-				
-				//observable.bind("change", function(e) {				
-				//	e.preventDefault();			
-				//		alert("s");		
-					//	$("#announce-view button[class*=custom-update]").removeAttr("disabled");
-				//});				
-
-				//announcePlaceHolder.body = "" ;
-
 				
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
@@ -465,7 +455,14 @@
 								dropFilesHere: "Drop files here"
 							},
 							transport: {
-								read: "/service/ImageBrowser/Read",
+								read: {
+									url: "${request.contextPath}/community/imagebrowser-list.do?output=json",
+									type: "POST",
+									data: { 
+										objectType: 1,
+										objectId: $("#account-panel").data("currentUser" ).company.companyId  
+									}
+								},
 								destroy: {
 									url: "/service/ImageBrowser/Destroy",
 									type: "POST"
