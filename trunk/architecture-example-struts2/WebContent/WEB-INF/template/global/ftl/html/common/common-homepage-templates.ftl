@@ -96,23 +96,18 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
-<div  class="form-horizontal">
+<div  class="form">
 	<div class="form-group">
-		<label class="col-sm-2 control-label">제목</label>
-		<div class="col-sm-10">
-			<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
-		</div>
+		<label class="control-label">제목</label>
+		<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
 	</div>
 	<div class="form-group">
-		<label class="col-sm-2 control-label">기간</label>
-		<div class="col-sm-10">
-			<input data-role="datetimepicker" data-bind="value:startDate"> ~ <input data-role="datetimepicker" data-bind="value:endDate">
-			<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다. </span>
-		</div>
+		<label class="control-label">기간</label>
+		input data-role="datetimepicker" data-bind="value:startDate"> ~ <input data-role="datetimepicker" data-bind="value:endDate">
+		<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다. </span>
 	</div>
 	<div class="form-group">
-		<div class="col-sm-12">
-			<textarea data-role="editor"
+		<textarea data-role="editor"
 			data-tools="[
 				'bold',
 				'italic',
@@ -146,7 +141,6 @@
 				'backColor'
 			]"
 			data-bind='value:body'></textarea>		
-		</div>
 	</div>
 </div>	  
 	<!--		
