@@ -418,7 +418,7 @@
 				if(!$("#announce-body-editor").data("kendoEditor") ){
 					$("#announce-body-editor").kendoEditor({
 						tools : [
-						/*	'bold',
+							'bold',
 							'italic',
 							'underline',
 							'strikethrough',
@@ -447,8 +447,7 @@
 							'fontName',
 							'fontSize',
 							'foreColor',
-							'backColor'				
-							*/	"insertImage"
+							'backColor'
 						],
 						imageBrowser: {
 							messages: {
