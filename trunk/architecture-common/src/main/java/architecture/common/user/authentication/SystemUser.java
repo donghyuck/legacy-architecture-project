@@ -19,7 +19,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Map;
 
-import architecture.common.model.ModelObjectType;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
@@ -37,7 +36,7 @@ public class SystemUser extends BaseModelObjectSupport implements AuthToken, Use
 	}
 
 	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode(".SYSTEM");
+		return ModelTypeFactory.getTypeIdFromCode("SYSTEM");
 	}
 	
 	public String getUsername() {

@@ -19,7 +19,6 @@ import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.i18n.I18nText;
-import architecture.common.model.ModelObjectType;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.common.util.I18nTextUtils;

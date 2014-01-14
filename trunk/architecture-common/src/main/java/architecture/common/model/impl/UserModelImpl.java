@@ -28,7 +28,6 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.cache.CacheSizes;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
-import architecture.common.model.ModelObjectType;
 import architecture.common.model.UserModel;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
