@@ -136,6 +136,8 @@ public class BootstrapImpl implements Bootstrap.Implementation {
 			if( repository.getState() != State.INITIALIZED ){
 				((RepositoryImpl)repository).setServletContext(servletContext);
 			}						
+			
+			
 			// 1. admin service 가 존재하는 경우 : DOTO
 						
 			AdminService adminService = getAdminService();

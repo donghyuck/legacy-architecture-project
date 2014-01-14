@@ -25,8 +25,8 @@ import java.util.Locale;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 
-import architecture.common.i18n.dao.I18nTextDao;
 import architecture.common.i18n.I18nText;
+import architecture.common.i18n.dao.I18nTextDao;
 import architecture.common.i18n.impl.I18nTextImpl;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 

@@ -18,6 +18,7 @@ package architecture.ee.jdbc.datasource.impl;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 public class DataSourceProxy implements DataSource {
