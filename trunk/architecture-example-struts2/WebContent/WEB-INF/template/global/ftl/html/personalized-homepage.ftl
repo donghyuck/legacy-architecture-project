@@ -455,7 +455,7 @@
 							},
 							schema: {
 								model: {
-									id: "imageId",
+									id: "id",
 									fields : {
 										id : { fieldId: "imageId" },
 										name : { fieldId: "name" },
