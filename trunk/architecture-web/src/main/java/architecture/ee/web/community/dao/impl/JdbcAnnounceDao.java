@@ -48,7 +48,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 			announce.setUserId(rs.getLong("USER_ID"));
 			announce.setSubject(rs.getString("SUBJECT"));
 			announce.setBody(rs.getString("BODY"));
-			announce.setStartDate(rs.getDate("START_DATE"));
+			announce.setStartDate(rs.getTimestamp("START_DATE"));
 			announce.setEndDate(rs.getDate("END_DATE"));		
 			announce.setCreationDate(rs.getDate("CREATION_DATE"));
 			announce.setModifiedDate(rs.getDate("MODIFIED_DATE"));					
@@ -153,7 +153,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_ANNOUNCE").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, annoucne.getSubject()), 
 				new SqlParameterValue (Types.VARCHAR, annoucne.getBody() ), 
-				new SqlParameterValue(Types.DATE, annoucne.getStartDate()),
+				new SqlParameterValue(Types.TIMESTAMP, annoucne.getStartDate()),
 				new SqlParameterValue(Types.DATE, annoucne.getEndDate()),
 				new SqlParameterValue(Types.DATE, annoucne.getModifiedDate()),
 				new SqlParameterValue (Types.NUMERIC, annoucne.getAnnounceId()) );		
@@ -171,7 +171,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 				new SqlParameterValue (Types.NUMERIC, announce.getAnnounceId()),
 				new SqlParameterValue (Types.VARCHAR, announce.getSubject()), 
 				new SqlParameterValue (Types.VARCHAR, announce.getBody() ), 
-				new SqlParameterValue(Types.DATE, announce.getStartDate()),
+				new SqlParameterValue(Types.TIMESTAMP, announce.getStartDate()),
 				new SqlParameterValue(Types.DATE, announce.getEndDate()),
 				new SqlParameterValue(Types.DATE, announce.getCreationDate()),
 				new SqlParameterValue(Types.DATE, announce.getModifiedDate()) );				
