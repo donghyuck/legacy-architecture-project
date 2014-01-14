@@ -69,6 +69,50 @@
 			</result>			
 		</action>			
 		
+		<action name="imagebrowser-list" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImages.inputStream</param>			    
+				<param name="includeProperties">
+				targetImages.*, totalTargetImageCount
+				</param>
+			</result>
+		</action>
+		
+		<action name="imagebrowser-get" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+						
+		<action name="imagebrowser-delete" method="deleteImage" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="imagebrowser-update" method="updateImage" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+				
 		<!--  profile  -->
 		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.UserProfileAction">
 			<result name="success" type="freemarker">/html/community/user-profile.ftl</result>
