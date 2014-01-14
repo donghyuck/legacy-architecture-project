@@ -455,9 +455,19 @@
 								dropFilesHere: "Drop files here"
 							},
 							schema: {
-								model: Image,
+								model: {
+									id: "imageId",
+									fields : {
+										name : { fieldId: "name" },
+										type : { fieldId : "contentType" },
+										size : { fieldId : "size" }
+										
+									}
+								}
+								data : "targetImages"	        									
+								/*model: Image,
 								data : "targetImages",
-								total : "totalTargetImageCount"
+								total : "totalTargetImageCount"*/
 							},			
 							transport: {
 								read: {
