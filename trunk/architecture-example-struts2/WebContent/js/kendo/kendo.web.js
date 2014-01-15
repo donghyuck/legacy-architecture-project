@@ -29818,7 +29818,7 @@ kendo_module({
                             that.path(this.value());
                         }
                     }).data("kendoBreadcrumbs");
-
+						navigation.find("input:first").addClass('hide');
             that.searchBox = navigation.parent().find("input:last")
                     .kendoSearchBox({
                         label: that.options.messages.search,
