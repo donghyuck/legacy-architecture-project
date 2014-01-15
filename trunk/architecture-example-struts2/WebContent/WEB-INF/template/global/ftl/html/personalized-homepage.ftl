@@ -496,7 +496,7 @@
 									objectType: 1,
 									objectId: $("#account-panel").data("currentUser" ).company.companyId  
 								},	
-								uploadUrl: "/service/ImageBrowser/Upload",							
+								uploadUrl: "${request.contextPath}/community/imagebrowser-update.do?output=json",							
 								imageUrl: function(path, imageId){
 									return "${request.contextPath}/community/download-image.do?imageId=" + imageId;
 								}
