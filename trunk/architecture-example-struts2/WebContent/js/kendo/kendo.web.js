@@ -29155,7 +29155,7 @@ kendo_module({
                             '<div class="k-toolbar-wrap">' +
                                 '# if (showUpload) { # ' +
                                     '<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">' +
-                                        '<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" /></div></div>' +
+                                        '<!--<span class="k-icon k-add"></span>-->#=messages.uploadFile#<input type="file" name="file" /></div></div>' +
                                 '# } #' +
 
                                 '# if (showCreate) { #' +
