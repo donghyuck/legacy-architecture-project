@@ -26,7 +26,7 @@
 					showFileList : false,
 					localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
 					async: {
-						saveUrl:  '${request.contextPath}/secure/save-user-image.do?output=json',							   
+						saveUrl:  '${request.contextPath}/community/update-my-photo.do?output=json',							   
 						autoUpload: true
 					},
 					upload: function (e) {								         
@@ -41,7 +41,7 @@
 						if( e.response.targetUserImage ){
 							var _currentUser = $("#account-panel").data("currentUser" );
 							_currentUser.properties.imageId = e.response.photo.imageId;
-							var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + _currentUser.properties.imageId ;
+							var photoUrl = '${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=' + _currentUser.properties.imageId ;
 							$('#my-photo-image').attr( 'src', photoUrl );
 						}				
 					}	
