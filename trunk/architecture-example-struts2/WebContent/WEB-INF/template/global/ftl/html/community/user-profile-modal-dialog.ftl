@@ -16,11 +16,9 @@
 			});	
 
 			$('#my-profile-tab a').click(function (e) {
-				e.preventDefault()
-				alert($(this).attr('href'));
-				
+				e.preventDefault();				
 				if( $(this).attr('href') == '#profile-social-network' ){					
-					if( !$("#my-social-network-list-view" ) ){
+					if( !$("#my-social-network-list-view" ).data('kendoListView') ){
 						$("#my-social-network-list-view").kendoListView({
 							dataSource: new kendo.data.DataSource({
 								transport: {
