@@ -28,11 +28,14 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
+import architecture.ee.web.community.social.SocialServiceProvider;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.dao.SocialNetworkDao;
 
+import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 
 public class DefaultSocialNetworktManager implements SocialNetworkManager {
@@ -85,15 +88,7 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 		impl.setObjectId(company.getCompanyId());
 		impl.setServiceProviderName(media.name().toLowerCase());
 		impl.setSocialAccountId(-1L);		
-		
-		if(media == Media.TWITTER ){
-			impl.setSocialServiceProvider(
-				new TwitterServiceProvider(
-					"4XebpD1MW3CQ8Koh7naQpg",
-					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
-				)
-			);
-		}		
+		impl.setSocialServiceProvider(createSocialServiceProvider(media));	
 		return impl;
 	}
 
@@ -106,18 +101,40 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 		impl.setObjectId(user.getUserId());
 		impl.setServiceProviderName(media.name().toLowerCase());
 		impl.setSocialAccountId(-1L);		
+		impl.setSocialServiceProvider(createSocialServiceProvider(media));
 		
-		if(media == Media.TWITTER ){
-			impl.setSocialServiceProvider(
-				new TwitterServiceProvider(
-					"4XebpD1MW3CQ8Koh7naQpg",
-					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
-				)
-			);
-		}		
 		return impl;
 	}
 
+	private SocialServiceProvider createSocialServiceProvider(SocialNetwork.Media media){		
+		SocialServiceProvider provider = null;				
+		if(media == SocialNetwork.Media.TWITTER){					
+			String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.twitter.callbackUrl", null);
+			if( callbackUrl!=null ){
+				provider = new TwitterServiceProvider(
+					"4XebpD1MW3CQ8Koh7naQpg",
+					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
+					callbackUrl
+				);
+			}else{
+				provider = new TwitterServiceProvider(
+					"4XebpD1MW3CQ8Koh7naQpg",
+					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
+				);
+			}					
+		}else if ( media == SocialNetwork.Media.FACEBOOK){		
+			String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.callbackUrl", null);
+			String scope = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.scope", FacebookServiceProvider.DEFAULT_SCOPE);
+			provider = new FacebookServiceProvider(
+					"251365428350280",
+					"704f08c943c6dfdba328e08a10550d38",							
+					callbackUrl,
+					scope
+			);			
+		}	
+		return provider;
+	} 
+	
 	public SocialNetwork getSocialNetworkById(long socialAccountId)
 			throws NotFoundException {
 		SocialNetwork account = socialNetworkDao.getSocialAccountById(socialAccountId);

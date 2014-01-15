@@ -25,14 +25,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public abstract class AbstractSocialServiceProvider implements SocialServiceProvider  {
 
+	protected Log log = LogFactory.getLog(getClass());
+	
 	private OAuthService service;
 	private String accessToken ;
 	private String accessSecret;
 	protected boolean isAuthorized = false;
-	protected Log log = LogFactory.getLog(getClass());
+
 	private ObjectMapper objectMapper = null ;
-	
-	
 	
 	
 	public AbstractSocialServiceProvider(OAuthService service) {

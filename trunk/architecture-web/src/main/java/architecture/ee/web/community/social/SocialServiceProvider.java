@@ -33,6 +33,8 @@ public interface SocialServiceProvider {
 		
 	public void setAccessSecret(String accessSecret);
 	
+	public SocialNetwork.Media getMedia();
+	
 	//public void setAccessSecret(String accessToken, String accessVerifier );
 	
 }
