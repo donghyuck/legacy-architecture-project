@@ -3,11 +3,11 @@
 	<body>
 		<script type="text/javascript">
 		<!--
-			$("#my-profile-dialog a").each(function( index ) {
+			$("#my-profile-dialog form  button").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
 					e.preventDefault();		
-					//alert( $(this).html() );
+					alert( $(this).html() );
 				});
 			});	
 
