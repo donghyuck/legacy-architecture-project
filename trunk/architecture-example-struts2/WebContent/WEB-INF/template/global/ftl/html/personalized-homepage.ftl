@@ -416,6 +416,9 @@
 				kendo.bind($("#announce-view"), announcePlaceHolder );					
 				
 				if(!$("#announce-body-editor").data("kendoEditor") ){
+					
+					var toolbarTemplate = kendo.template($("#imagebrowser-toolbar-template").html());
+					
 					$("#announce-body-editor").kendoEditor({
 						tools : [
 							'bold',
@@ -453,7 +456,7 @@
 							messages: {
 								dropFilesHere: "Drop files here"
 							},
-							toolbarTemplate : kendo.template($("#imagebrowser-toolbar-template").html()),
+							toolbarTemplate : toolbarTemplate,
 							schema: {
 								model: {
 									id: "imageId",
