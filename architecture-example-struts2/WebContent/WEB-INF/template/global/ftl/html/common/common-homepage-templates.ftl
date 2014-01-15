@@ -1,5 +1,21 @@
 <script type="text/x-kendo-template" id="imagebrowser-toolbar-template">
-<div class='k-widget k-toolbar k-header k-floatwrap'></div>
+	<div class="k-widget k-toolbar k-header k-floatwrap">
+		<div class="k-toolbar-wrap">
+			# if (showUpload) { # 
+				<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">
+					<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" /></div></div>
+			# } #
+			# if (showCreate) { #
+				<button type="button" class="k-button k-button-icon"><span class="k-icon k-addfolder" /></button>
+			# } #
+			# if (showDelete) { #
+				<button type="button" class="k-button k-button-icon k-state-disabled"><span class="k-icon k-delete" /></button>&nbsp;
+			# } #
+		</div>
+		<div class="k-tiles-arrange">
+			<label>#=messages.orderBy#: <select /></label></a>
+		</div>
+	</div>
 </script>
 
 <!-- photo view panel -->
