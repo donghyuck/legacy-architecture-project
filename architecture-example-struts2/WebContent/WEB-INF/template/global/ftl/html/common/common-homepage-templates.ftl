@@ -382,11 +382,7 @@
 	<div class="btn-group">
 		<!--
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
-		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
-			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/>
-		# } else { # 
-			
-		# } #	
+
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
 		</a>
 
@@ -394,8 +390,11 @@
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</a>-->
-		
-		<img src="${request.contextPath}/images/common/anonymous.png" style="float: left; height:34px;"/>
+		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
+		<img src="#:photoUrl#"  style="float: left; height:34px;" alt="#:name#"/>
+		# } else { # 
+		<img src="${request.contextPath}/images/common/anonymous.png" style="float: left; height:34px;"/>	
+		# } #
 		 <button type="button" class="btn btn-danger"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
