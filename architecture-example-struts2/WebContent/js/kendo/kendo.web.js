@@ -29406,7 +29406,11 @@ kendo_module({
                     { text: messages.orderByName, value: "name" },
                     { text: messages.orderBySize, value: "size" }
                 ];
-
+						
+						if( that.options.toolbarTemplate ){
+							template = that.options.toolbarTemplate ;
+						}
+						
             that.toolbar = $(template({
                     messages: messages,
                     showUpload: that.options.transport.uploadUrl,
