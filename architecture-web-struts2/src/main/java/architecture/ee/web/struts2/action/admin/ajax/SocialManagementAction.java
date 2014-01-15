@@ -21,8 +21,8 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.social.SocialAccount;
-import architecture.ee.web.community.social.SocialAccountManager;
+import architecture.ee.web.community.social.SocialNetwork;
+import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.user.Group;
@@ -39,9 +39,9 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 	
 	private Long objectId = -1L;
 	
-	private SocialAccount targetSocialAccount;
+	private SocialNetwork targetSocialAccount;
 	
-	private SocialAccountManager socialAccountManager;
+	private SocialNetworkManager socialNetworkManager;
 			
 	public SocialManagementAction() {
 	}
@@ -119,10 +119,10 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 	/**
 	 * @return targetSocialAccount
 	 */
-	public SocialAccount getTargetSocialAccount() {
+	public SocialNetwork getTargetSocialAccount() {
 		try {	
 			if( targetSocialAccount == null){
-				targetSocialAccount = getSocialAccountManager().getSocialAccountById(socialAccountId);
+				targetSocialAccount = getSocialAccountManager().getSocialNetworkById(socialAccountId);
 			}
 			return targetSocialAccount;
 		} catch (NotFoundException e) {
@@ -135,22 +135,22 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 		return 0; //getSocialAccountManager().		
 	}
 	
-	public List<SocialAccount>getTargetSocialAccounts(){
-		return getSocialAccountManager().getSocialAccounts(objectType, objectId);
+	public List<SocialNetwork>getTargetSocialAccounts(){
+		return getSocialAccountManager().getSocialNetworks(objectType, objectId);
 	}
 	
 	/**
-	 * @return socialAccountManager
+	 * @return socialNetworkManager
 	 */
-	public SocialAccountManager getSocialAccountManager() {
-		return socialAccountManager;
+	public SocialNetworkManager getSocialAccountManager() {
+		return socialNetworkManager;
 	}
 
 	/**
-	 * @param socialAccountManager 설정할 socialAccountManager
+	 * @param socialNetworkManager 설정할 socialNetworkManager
 	 */
-	public void setSocialAccountManager(SocialAccountManager socialAccountManager) {
-		this.socialAccountManager = socialAccountManager;
+	public void setSocialAccountManager(SocialNetworkManager socialNetworkManager) {
+		this.socialNetworkManager = socialNetworkManager;
 	}
 	
 	public String execute() throws Exception {
@@ -169,7 +169,7 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 				socialAccountId = selectedSocialAccountId.longValue();
 			}			
 			
-			SocialAccount account = getTargetSocialAccount();
+			SocialNetwork account = getTargetSocialAccount();
 			log.debug("=====================");
 			
 			if(!StringUtils.isEmpty(accessSecret))
@@ -180,7 +180,7 @@ public class SocialManagementAction extends FrameworkActionSupport  {
 	
 			log.debug(account);
 			log.debug("=====================");
-			socialAccountManager.saveSocialAccount(account);		
+			socialNetworkManager.saveSocialNetwork(account);		
 			this.targetSocialAccount = null;			
 			return success();
 		} catch (Throwable e) {

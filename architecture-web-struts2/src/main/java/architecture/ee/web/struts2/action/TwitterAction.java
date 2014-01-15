@@ -26,8 +26,8 @@ import org.scribe.model.Token;
 import architecture.common.user.Company;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.social.SocialAccount;
-import architecture.ee.web.community.social.SocialAccountManager;
+import architecture.ee.web.community.social.SocialNetwork;
+import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.facebook.Post;
 import architecture.ee.web.community.social.twitter.Tweet;
@@ -40,9 +40,9 @@ public class TwitterAction extends SocialActionSupport  {
 
 	private Long socialAccountId = -1L; 
 	
-	private SocialAccount targetSocialAccount;
+	private SocialNetwork targetSocialAccount;
 	
-	private SocialAccountManager socialAccountManager;
+	private SocialNetworkManager socialNetworkManager;
 	
 	private String oauth_token;
 	
@@ -81,10 +81,10 @@ public class TwitterAction extends SocialActionSupport  {
 	/**
 	 * @return targetSocialAccount
 	 */
-	public SocialAccount getTargetSocialAccount() {
+	public SocialNetwork getTargetSocialAccount() {
 		try {	
 			if( targetSocialAccount == null){
-				targetSocialAccount = getSocialAccountManager().getSocialAccountById(socialAccountId);
+				targetSocialAccount = getSocialAccountManager().getSocialNetworkById(socialAccountId);
 			}
 			return targetSocialAccount;
 		} catch (NotFoundException e) {
@@ -161,25 +161,25 @@ public class TwitterAction extends SocialActionSupport  {
 	}
 
 	/**
-	 * @return socialAccountManager
+	 * @return socialNetworkManager
 	 */
-	public SocialAccountManager getSocialAccountManager() {
-		return socialAccountManager;
+	public SocialNetworkManager getSocialAccountManager() {
+		return socialNetworkManager;
 	}
 
 	/**
-	 * @param socialAccountManager 설정할 socialAccountManager
+	 * @param socialNetworkManager 설정할 socialNetworkManager
 	 */
-	public void setSocialAccountManager(SocialAccountManager socialAccountManager) {
+	public void setSocialAccountManager(SocialNetworkManager socialNetworkManager) {
 		
-		this.socialAccountManager = socialAccountManager;
+		this.socialNetworkManager = socialNetworkManager;
 	}
 
 	public String execute() throws Exception {		
 		if( socialAccountId < 0 ){
 			Company company = getCompany();
-			List <SocialAccount> list = socialAccountManager.getSocialAccounts(company);
-			for( SocialAccount account : list ){
+			List <SocialNetwork> list = socialNetworkManager.getSocialNetworks(company);
+			for( SocialNetwork account : list ){
 				if( "twitter".toLowerCase().equals(account.getServiceProviderName()) ){				
 					socialAccountId = account.getSocialAccountId();
 					targetSocialAccount = account;
@@ -203,10 +203,10 @@ public class TwitterAction extends SocialActionSupport  {
 			
 			TwitterServiceProvider provider = getServiceProvider();
 			Token token = provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);			
-			SocialAccount account = getTargetSocialAccount();
+			SocialNetwork account = getTargetSocialAccount();
 			account.setAccessSecret(token.getSecret());			
 			account.setAccessToken(token.getToken());
-			socialAccountManager.saveSocialAccount(account);			
+			socialNetworkManager.saveSocialNetwork(account);			
 			this.targetSocialAccount = null;			
 			return success();
 		} catch (Throwable e) {

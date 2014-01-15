@@ -19,30 +19,30 @@ import java.util.Collections;
 import java.util.List;
 
 import architecture.common.user.Company;
-import architecture.ee.web.community.social.SocialAccount;
-import architecture.ee.web.community.social.SocialAccountManager;
+import architecture.ee.web.community.social.SocialNetwork;
+import architecture.ee.web.community.social.SocialNetworkManager;
 
 public class SocialPageAction extends PageAction {
 
-	private SocialAccountManager socialAccountManager;	
+	private SocialNetworkManager socialNetworkManager;	
 
 	/**
-	 * @return socialAccountManager
+	 * @return socialNetworkManager
 	 */
-	public SocialAccountManager getSocialAccountManager() {
-		return socialAccountManager;
+	public SocialNetworkManager getSocialAccountManager() {
+		return socialNetworkManager;
 	}
 
 	/**
-	 * @param socialAccountManager 설정할 socialAccountManager
+	 * @param socialNetworkManager 설정할 socialNetworkManager
 	 */
-	public void setSocialAccountManager(SocialAccountManager socialAccountManager) {
-		this.socialAccountManager = socialAccountManager;
+	public void setSocialAccountManager(SocialNetworkManager socialNetworkManager) {
+		this.socialNetworkManager = socialNetworkManager;
 	}
 
 	public boolean hasCompanySocial () {
 		 Company company = getCompany();
-		 List<SocialAccount> asl = socialAccountManager.getSocialAccounts(company);
+		 List<SocialNetwork> asl = socialNetworkManager.getSocialNetworks(company);
 		 if( asl.size() > 0 ){
 			 return true;
 		 }else {
@@ -50,10 +50,10 @@ public class SocialPageAction extends PageAction {
 		 }
 	}
 	
-	public List<SocialAccount> getCompanySocials(){
+	public List<SocialNetwork> getCompanySocials(){
 		 try {
 			Company company = getCompany();
-			 return socialAccountManager.getSocialAccounts(company);
+			 return socialNetworkManager.getSocialNetworks(company);
 		} catch (Exception e) {
 			return Collections.EMPTY_LIST;
 		}
