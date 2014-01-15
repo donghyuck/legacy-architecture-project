@@ -3,7 +3,7 @@
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 	<tr>
 		<td><i class="fa fa-#: serviceProviderName#"></i></td>
-		<td>#if (  socialAccountId < 0 ) { # not connetced  # } else { # connected  # }  #  </td>
+		<td>#if (  socialAccountId < 0 ) { # <button type="button" class="btn btn-danger">연결</button>  # } else { # <i class="fa fa-check"></i> 연결됨  # }  #  </td>
 		<td></td>
 		<td></td>
 	</tr>	
