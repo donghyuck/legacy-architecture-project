@@ -33,7 +33,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="media">
-						<a class="pull-left" href="#" data-toggle="dropdown">
+						<a class="pull-left dropdown-toggle" href="#" data-toggle="dropdown">
 							<#if user.properties.imageId??>
 							<img class="media-object img-thumbnail" src="PHOTO_URL = "/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
 							<#else> 
