@@ -454,7 +454,17 @@
 						],
 						imageBrowser: {
 							messages: {
-								dropFilesHere: "Drop files here"
+								uploadFile: "이미지 업로드",
+								orderBy: "정렬",
+								orderByName: "이름",
+								orderBySize: "크기",
+								directoryNotFound: "A directory with this name was not found.",
+								emptyFolder: "Empty Folder",
+								deleteFile: 'Are you sure you want to delete "{0}"?',
+								invalidFileType: "The selected file \"{0}\" is not valid. Supported file types are {1}.",
+								overwriteFile: "A file with name \"{0}\" already exists in the current directory. Do you want to overwrite it?",
+								dropFilesHere: "이미지 파일을 이미지 업로드 버튼에 끌어 놓으세요.",
+								search: "검색"
 							},
 							//toolbarTemplate : toolbarTemplate,
 							schema: {
