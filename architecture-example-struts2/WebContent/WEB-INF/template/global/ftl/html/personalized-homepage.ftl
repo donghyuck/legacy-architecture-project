@@ -762,7 +762,9 @@
 		.k-tiles-arrange label {
 			font-weight : normal;		
 		}
-
+		.k-tiles li.k-state-selected {
+			border-color: #428bca;
+		}
 		.k-imagebrowser ul li.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
