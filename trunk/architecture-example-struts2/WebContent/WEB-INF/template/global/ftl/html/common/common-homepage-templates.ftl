@@ -379,6 +379,7 @@
 
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
+	<div class="btn-group">
 		<!--
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
@@ -387,13 +388,17 @@
 			
 		# } #	
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
-		</a>-->
+		</a>
 
 		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
-		</a>
-
+		</a>-->
+<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+    <span class="caret"></span>
+    <span class="sr-only">Toggle Dropdown</span>
+	</button>
+  
 		<ul class="dropdown-menu">
 			# if ( !anonymous ) { # 
 			<li>
@@ -493,6 +498,6 @@
 			# } #
 		</ul>
 	</div>			
-				
+	</div>				
 </script>
 		
