@@ -29518,25 +29518,31 @@ kendo_module({
                 fileNameField = NAMEFIELD,
                 sizeField = SIZEFIELD,
                 model;
-
-            if (filterRegExp.test(fileName)) {
-                e.data = { path: that.path() };
-
-                model = that._createFile(fileName);
-
-                if (!model) {
-                    e.preventDefault();
-                } else {
-                    that.upload.one("success", function(e) {
-                        model.set(fileNameField, e.response[that._getFieldName(fileNameField)]);
-                        model.set(sizeField, e.response[that._getFieldName(sizeField)]);
-                        that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
-                        that._scroll();
-                    });
-                }
-            } else {
-                e.preventDefault();
-                that._showMessage(kendo.format(options.messages.invalidFileType, fileName, fileTypes));
+            if(options.transport.uploadData ){
+            	e.data = options.transport.uploadData ;
+            	that.upload.one("success", function(e) {
+            		that.dataSource.read();            		
+            	});
+            }else{
+							if (filterRegExp.test(fileName)) {
+	                e.data = { path: that.path() };
+	
+	                model = that._createFile(fileName);
+	
+	                if (!model) {
+	                    e.preventDefault();
+	                } else {
+	                    that.upload.one("success", function(e) {
+	                        model.set(fileNameField, e.response[that._getFieldName(fileNameField)]);
+	                        model.set(sizeField, e.response[that._getFieldName(sizeField)]);
+	                        that._tiles = that.listView.items().filter("[" + kendo.attr("type") + "=f]");
+	                        that._scroll();
+	                    });
+	                }
+	            } else {
+	                e.preventDefault();
+	                that._showMessage(kendo.format(options.messages.invalidFileType, fileName, fileTypes));
+	            }            	
             }
         },
 
