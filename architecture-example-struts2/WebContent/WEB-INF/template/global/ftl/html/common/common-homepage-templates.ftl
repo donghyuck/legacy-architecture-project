@@ -3,11 +3,10 @@
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 	<tr>
 		<td><i class="fa fa-#:item.serviceProviderName#"></i></td>
-		<td>#if (socialAccountId < 0 ) { # not connetced  # } else { # connected  # }  #  </td>
+		<td>#if (  socialAccountId < 0 ) { # not connetced  # } else { # connected  # }  #  </td>
 		<td></td>
 		<td></td>
-	</tr>		
-			<p>#: serviceProviderName #</p>
+	</tr>	
 		</script>
 <!-- photo view panel -->
 <script type="text/x-kendo-template" id="photo-panel-template">
