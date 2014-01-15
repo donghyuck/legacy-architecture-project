@@ -33,14 +33,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="media">
-						<a class="pull-left" href="#">
+						<a class="pull-left" href="#" data-toggle="dropdown">
 							<#if user.properties.imageId??>
 							<img class="media-object img-thumbnail" src="PHOTO_URL = "/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
 							<#else> 
 							<img class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
 							</#if>  
 						</a>
-						<span class="help-block"><i class="fa fa-info"></i> 이미지를 수정하시려면 이미지를 클릭하십시오.</span>	
 						<ul class="dropdown-menu">
 							<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
 							<li>
