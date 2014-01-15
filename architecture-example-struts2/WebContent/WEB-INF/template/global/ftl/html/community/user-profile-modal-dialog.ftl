@@ -17,9 +17,8 @@
 
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault()
-				if(  $(this).attr('href') == '#profile-social-network' ){		
-				
-					if( !$("#my-social-network-list-view" ){
+				if( $(this).attr('href') == '#profile-social-network' ){					
+					if( !$("#my-social-network-list-view" ) ){
 						$("#my-social-network-list-view").kendoListView({
 							dataSource: new kendo.data.DataSource({
 								transport: {
