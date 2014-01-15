@@ -1,3 +1,4 @@
+
 <!-- photo view panel -->
 <script type="text/x-kendo-template" id="photo-panel-template">
 	<div class="panel panel-default">
