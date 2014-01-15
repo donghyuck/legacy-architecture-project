@@ -1,7 +1,7 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
-			<p></p>
+			<p>#: serviceProviderName #</p>
 		</script>
 <!-- photo view panel -->
 <script type="text/x-kendo-template" id="photo-panel-template">
