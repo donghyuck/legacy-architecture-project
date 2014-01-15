@@ -395,7 +395,7 @@
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</a>-->
 		
-		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
+		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" style="float: left;"/>
 		 <button type="button" class="btn btn-danger"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
