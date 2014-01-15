@@ -409,16 +409,11 @@
 		function editAnnouncePanel (){
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
 			
-			if( announcePlaceHolder.modifyAllowed ){		
-				
+			if( announcePlaceHolder.modifyAllowed ){						
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
-				kendo.bind($("#announce-view"), announcePlaceHolder );					
-				
+				kendo.bind($("#announce-view"), announcePlaceHolder );			
 				if(!$("#announce-body-editor").data("kendoEditor") ){
-					
-				//	var toolbarTemplate = kendo.template($("#imagebrowser-toolbar-template").html());
-					
 					$("#announce-body-editor").kendoEditor({
 						tools : [
 							'bold',
@@ -466,7 +461,6 @@
 								dropFilesHere: "이미지 파일을 이미지 업로드 버튼에 끌어 놓으세요.",
 								search: "검색"
 							},
-							//toolbarTemplate : toolbarTemplate,
 							schema: {
 								model: {
 									id: "imageId",
@@ -498,7 +492,14 @@
 								thumbnailUrl: function( path, name, imageId ){
 									return "${request.contextPath}/community/download-image.do?width=150&height=150&imageId=" + imageId ;
 								},
-								uploadUrl: "/service/ImageBrowser/Upload",
+								upload:{
+									url : "/service/ImageBrowser/Upload",
+									data: { 
+										objectType: 1,
+										objectId: $("#account-panel").data("currentUser" ).company.companyId  
+									}
+								},	
+								uploadUrl: "/service/ImageBrowser/Upload",							
 								imageUrl: function(path, imageId){
 									return "${request.contextPath}/community/download-image.do?imageId=" + imageId;
 								}
