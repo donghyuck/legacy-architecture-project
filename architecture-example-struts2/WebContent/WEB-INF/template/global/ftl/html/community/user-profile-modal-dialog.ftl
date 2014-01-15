@@ -17,6 +17,50 @@
 
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault()
+				if(  $(this).attr('href') == '#profile-social-network' ){		
+				
+					if( !$("#my-social-network-list-view" ){
+						$("#my-social-network-list-view").kendoListView({
+							dataSource: new kendo.data.DataSource({
+								transport: {
+									read: {
+										type : 'POST',
+										dataType : "json", 
+										url : '${request.contextPath}/community/socialnetwork-list.do?output=json'
+									},
+									parameterMap: function(options, operation) {
+										if (operation != "read" && options.models) {
+											return {models: kendo.stringify(options.models)};
+										}
+									} 
+								},
+								pageSize: 10,
+								error:handleKendoAjaxError,				
+								schema: {
+									data : "socialNetworks",
+									model : SocialAccount
+								}
+							}),
+							selectable: "single",
+							template: kendo.template($("#social-network-list-view-template").html()),
+							change: function(e) { 
+								var data = this.dataSource.view() ;
+								var selectedCell = data[this.select().index()];		
+								//$("#announce-list-view").data( "announcePlaceHolder", selectedCell )										
+								//showAnnounce();							
+							},
+							dataBound: function(e) {
+								if( this.dataSource.data().length == 0 ){
+								//	$("#announce-view-panel").html( 
+								//		$('#alert-message-template').html() 
+								//	);
+								}							
+								this.select( this.element.children().first() );				
+							}
+						});
+					}
+				
+				}
 				$(this).tab('show')
 			})		 	
 			
@@ -169,8 +213,7 @@
 								</table>								
 							</div>
 							<div class="tab-pane" id="profile-social-network">
-
-
+								<div id="my-social-network-list-view"></div>
 							</div>
 						</div>
 					
@@ -179,6 +222,9 @@
 					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
 				</div>
 			</div><!-- /.modal-content -->
-		</div><!-- /.modal-dialog -->				
+		</div><!-- /.modal-dialog -->	
+		<script type="text/x-kendo-tmpl" id="social-network-list-view-template">
+			<p></p>
+		</script>					
 	</body> 
 </html>
