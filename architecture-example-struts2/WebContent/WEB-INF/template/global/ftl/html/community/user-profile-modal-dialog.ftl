@@ -212,10 +212,12 @@
 								</table>								
 							</div>
 							<div class="tab-pane" id="profile-social-network">
-								<div id="my-social-network-list-view"></div>
+								<table class="table table-hover">
+									<tbody id="my-social-network-list-view">
+									</tbody>
+								</table>							
 							</div>
-						</div>
-					
+						</div>					
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary" data-dismiss="modal">확인</button>
