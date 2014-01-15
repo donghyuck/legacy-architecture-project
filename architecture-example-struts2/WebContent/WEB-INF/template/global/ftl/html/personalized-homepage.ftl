@@ -417,7 +417,7 @@
 				
 				if(!$("#announce-body-editor").data("kendoEditor") ){
 					
-					var toolbarTemplate = kendo.template($("#imagebrowser-toolbar-template").html());
+				//	var toolbarTemplate = kendo.template($("#imagebrowser-toolbar-template").html());
 					
 					$("#announce-body-editor").kendoEditor({
 						tools : [
@@ -456,7 +456,7 @@
 							messages: {
 								dropFilesHere: "Drop files here"
 							},
-							toolbarTemplate : toolbarTemplate,
+							//toolbarTemplate : toolbarTemplate,
 							schema: {
 								model: {
 									id: "imageId",
