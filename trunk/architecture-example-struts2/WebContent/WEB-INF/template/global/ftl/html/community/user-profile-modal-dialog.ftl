@@ -18,13 +18,19 @@
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault()
 				$(this).tab('show')
-			})
-
-		
-							 				
+			})		 				
 		-->
 		</script>
-			
+		<style>			
+
+		#my-profile-dialog .dropdown-menu {
+			top: 120px;
+			left: 50px; 
+			padding : 20px;
+			min-width:300px;
+		}
+	
+		</style>			
 		<div id="my-profile-dialog" class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
