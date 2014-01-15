@@ -83,7 +83,7 @@
 						<!-- Nav tabs -->
 						<ul class="nav nav-tabs" id="my-profile-tab">
 							<li class="active"><a href="#profile-basic-info" data-toggle="tab">기본정보</a></li>
-							<li><a href="#profile" data-toggle="tab">Profile</a></li>
+							<li><a href="#profile-social-network" data-toggle="tab">쇼셜 네트워크</a></li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -122,7 +122,7 @@
 									</tbody>
 								</table>								
 							</div>
-							<div class="tab-pane" id="profile">
+							<div class="tab-pane" id="profile-social-network">
 
 
 							</div>
