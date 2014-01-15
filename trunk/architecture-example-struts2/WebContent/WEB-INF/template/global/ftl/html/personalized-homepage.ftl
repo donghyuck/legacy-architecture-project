@@ -759,6 +759,16 @@
 		
 		<style scoped="scoped">
 
+		. k-imagebrowser label {
+			font-weight : normal;
+		
+		}
+
+		.k-imagebrowser ul li.k-state-selected{
+			background: #428bca;
+			color: #ffffff; 
+		}
+		
 		#pdf-view {
 			height: 500px;
 			margin: 0 auto;
@@ -773,7 +783,6 @@
 		   display: block;
 		   border: solid 1px #787878;
 		}
-
 
 		.k-dropzone {
 		#	width: 808px;
