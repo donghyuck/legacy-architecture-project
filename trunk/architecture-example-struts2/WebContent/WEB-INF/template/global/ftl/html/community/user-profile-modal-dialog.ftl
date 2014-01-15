@@ -94,12 +94,40 @@
 		-->
 		</script>
 		<style>		
+		
 		#my-profile-dialog .dropdown-menu {
 			top: 120px;
 			left: 50px; 
 			padding : 20px;
 			min-width:300px;
 		}	
+		#my-social-network-list-view .k-listview div.k-state-selected{
+			background: #ffffff;
+			color: #ffffff; 
+		}
+
+		#my-social-network-list-view .k-listview:after
+		{
+			content: ".";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden;
+		}
+		
+		#my-social-network-list-view .k-listview
+		{
+			padding: 0;
+			min-width: 690px;
+			min-height: 100px;
+		}
+				
+		
+		#my-social-network-list-view {
+			padding: 0px;
+			border: 0px;		
+		}
+				
 		</style>			
 		<div id="my-profile-dialog" class="modal-dialog">
 			<div class="modal-content">
@@ -212,10 +240,8 @@
 								</table>								
 							</div>
 							<div class="tab-pane" id="profile-social-network">
-								<table class="table table-hover">
-									<tbody id="my-social-network-list-view">
-									</tbody>
-								</table>							
+								<div id="my-social-network-list-view">
+								</div>						
 							</div>
 						</div>					
 				</div>
