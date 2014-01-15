@@ -68,7 +68,7 @@
 					<div class="media">
 						<a class="pull-left dropdown-toggle" href="#" data-toggle="dropdown">
 							<#if user.properties.imageId??>
-							<img id="my-photo-image" class="media-object img-thumbnail" src="PHOTO_URL = "/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
+							<img id="my-photo-image" class="media-object img-thumbnail" src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
 							<#else> 
 							<img id="my-photo-image" class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
 							</#if>  
