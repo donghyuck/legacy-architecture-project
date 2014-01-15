@@ -8,6 +8,12 @@
 				dialog_action.click(function (e) {
 					e.preventDefault();		
 					alert( $(this).html() );
+					
+					if( $(this).hasClass("custom-modify") ){
+						alert("update");
+					}else if( $(this).hasClass("custom-password-change") ){ 
+						alert("password");				
+					}
 				});
 			});	
 
@@ -68,8 +74,8 @@
 								<div class="form-group">
 									<div class="col-sm-offset-2 col-sm-10">
 										<div class="btn-group pull-right">	
-											<button type="submit" class="btn btn-default">기본정보변경</button>		
-											<button type="submit" class="btn btn-primary">비밀번호 변경</button>				
+											<button type="submit" class="btn btn-default custom-modify">기본정보변경</button>		
+											<button type="submit" class="btn btn-primary custom-password-change">비밀번호 변경</button>				
 										</div>							
 									</div>
 								</div>																	
