@@ -12,9 +12,10 @@
 				<button type="button" class="k-button k-button-icon k-state-disabled"><span class="k-icon k-delete" /></button>&nbsp;
 			# } #
 		</div>
+		<!--
 		<div class="k-tiles-arrange">
 			<label>#=messages.orderBy#: <select /></label></a>
-		</div>
+		</div>-->
 	</div>
 </script>
 
