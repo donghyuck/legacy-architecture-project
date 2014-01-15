@@ -1,7 +1,7 @@
 <script type="text/x-kendo-template" id="imagebrowser-toolbar-template">
 	<div class="k-widget k-toolbar k-header k-floatwrap">
 		<div class="k-toolbar-wrap">
-			'# if (showUpload) { # 
+			# if (showUpload) { # 
 				<div class="k-widget k-upload"><div class="k-button k-button-icontext k-upload-button">
 					<span class="k-icon k-add"></span>#=messages.uploadFile#<input type="file" name="file" />
 				</div>
