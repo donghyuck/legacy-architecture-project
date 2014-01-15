@@ -29408,9 +29408,8 @@ kendo_module({
                 ];
 						
 						
-						if( that.options.toolbarTemplate ){
-							alert(that.options.toolbarTemplate );
-							//template = that.options.toolbarTemplate ;
+						if( that.options.toolbarTemplate ){							
+							template = that.options.toolbarTemplate ;
 						}
 						
             that.toolbar = $(template({
