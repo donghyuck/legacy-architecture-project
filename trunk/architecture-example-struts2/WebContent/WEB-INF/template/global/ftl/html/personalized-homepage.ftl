@@ -767,6 +767,7 @@
 		.k-imagebrowser ul li.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
+			border-color : color: #ffffff; 
 		}
 		
 		#pdf-view {
