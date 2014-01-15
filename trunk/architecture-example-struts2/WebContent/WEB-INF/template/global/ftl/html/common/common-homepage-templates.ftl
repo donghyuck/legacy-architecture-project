@@ -384,11 +384,12 @@
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/>
 		# } else { # 
-			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
+			
 		# } #	
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
 		</a>-->
-		<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
+		<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</button>
 		<ul class="dropdown-menu">
