@@ -15,22 +15,15 @@
  */
 package architecture.ee.web.community.struts2.action;
 
-import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
-
-import freemarker.cache.StringTemplateLoader;
-import freemarker.template.TemplateException;
 
 import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
-import architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager;
 
 public class PageAction extends FrameworkActionSupport {
 
@@ -45,7 +38,6 @@ public class PageAction extends FrameworkActionSupport {
 	private String template = DEFAULT_TEMPLATE ;
 	
 	private FreeMarkerConfig freeMarkerConfig ;
-
 
 
 	/**

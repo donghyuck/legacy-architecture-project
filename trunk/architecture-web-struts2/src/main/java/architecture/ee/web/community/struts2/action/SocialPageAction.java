@@ -26,17 +26,19 @@ public class SocialPageAction extends PageAction {
 
 	private SocialNetworkManager socialNetworkManager;	
 
+
+
 	/**
 	 * @return socialNetworkManager
 	 */
-	public SocialNetworkManager getSocialAccountManager() {
+	public SocialNetworkManager getSocialNetworkManager() {
 		return socialNetworkManager;
 	}
 
 	/**
 	 * @param socialNetworkManager 설정할 socialNetworkManager
 	 */
-	public void setSocialAccountManager(SocialNetworkManager socialNetworkManager) {
+	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager) {
 		this.socialNetworkManager = socialNetworkManager;
 	}
 

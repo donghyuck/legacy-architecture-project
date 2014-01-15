@@ -59,6 +59,19 @@
 	<!--  COMMUNITY USER ACTIONS -->	
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
 
+		<!--  social network  -->
+		<!--  announce  -->			
+		<action name="socialnetwork-list" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">socialNetworks.*\.socialServiceProvider</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				socialNetworks.*
+				</param>
+			</result>
+		</action>	
+			
 		<!--  image broswer  -->
 		<action name="download-image" class="architecture.ee.web.community.struts2.action.DownloadImageActioin">
 			<result name="success" type="stream">

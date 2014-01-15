@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.struts2.action.ajax;
+package architecture.ee.web.community.struts2.action;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.community.social.SocialNetworkManager;
 
-public class MySocialAction extends FrameworkActionSupport  {
+public interface SocialNetworkAware {
 
-
-
+	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager);
+	
+	public SocialNetworkManager getSocialNetworkManager( );
+	
 }

@@ -79,12 +79,26 @@ public class TwitterAction extends SocialActionSupport  {
 	}
 
 	/**
+	 * @return socialNetworkManager
+	 */
+	public SocialNetworkManager getSocialNetworkManager() {
+		return socialNetworkManager;
+	}
+
+	/**
+	 * @param socialNetworkManager 설정할 socialNetworkManager
+	 */
+	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager) {
+		this.socialNetworkManager = socialNetworkManager;
+	}
+
+	/**
 	 * @return targetSocialAccount
 	 */
 	public SocialNetwork getTargetSocialAccount() {
 		try {	
 			if( targetSocialAccount == null){
-				targetSocialAccount = getSocialAccountManager().getSocialNetworkById(socialAccountId);
+				targetSocialAccount = getSocialNetworkManager().getSocialNetworkById(socialAccountId);
 			}
 			return targetSocialAccount;
 		} catch (NotFoundException e) {
@@ -158,21 +172,6 @@ public class TwitterAction extends SocialActionSupport  {
 	 */
 	public void setSocialAccountId(Long socialAccountId) {
 		this.socialAccountId = socialAccountId;
-	}
-
-	/**
-	 * @return socialNetworkManager
-	 */
-	public SocialNetworkManager getSocialAccountManager() {
-		return socialNetworkManager;
-	}
-
-	/**
-	 * @param socialNetworkManager 설정할 socialNetworkManager
-	 */
-	public void setSocialAccountManager(SocialNetworkManager socialNetworkManager) {
-		
-		this.socialNetworkManager = socialNetworkManager;
 	}
 
 	public String execute() throws Exception {		
