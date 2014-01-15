@@ -1,5 +1,10 @@
 <script type="text/x-kendo-template" id="imagebrowser-toolbar-template">
+<div class="k-widget k-toolbar k-header k-floatwrap">
 
+	<div class="k-tiles-arrange">
+		<label>#=messages.orderBy#: <select /></label></a>
+	</div
+</div>
 </script>
 
 <!-- photo view panel -->
