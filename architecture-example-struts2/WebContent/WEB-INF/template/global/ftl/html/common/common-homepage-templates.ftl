@@ -393,7 +393,6 @@
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</a>
-		</button>
 		</div>
 		<ul class="dropdown-menu">
 			# if ( !anonymous ) { # 
