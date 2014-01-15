@@ -492,12 +492,9 @@
 								thumbnailUrl: function( path, name, imageId ){
 									return "${request.contextPath}/community/download-image.do?width=150&height=150&imageId=" + imageId ;
 								},
-								upload:{
-									url : "/service/ImageBrowser/Upload",
-									data: { 
-										objectType: 1,
-										objectId: $("#account-panel").data("currentUser" ).company.companyId  
-									}
+								uploadData : {
+									objectType: 1,
+									objectId: $("#account-panel").data("currentUser" ).company.companyId  
 								},	
 								uploadUrl: "/service/ImageBrowser/Upload",							
 								imageUrl: function(path, imageId){
