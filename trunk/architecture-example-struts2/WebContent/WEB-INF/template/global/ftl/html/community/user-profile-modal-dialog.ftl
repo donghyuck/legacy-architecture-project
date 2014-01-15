@@ -240,8 +240,8 @@
 								</table>								
 							</div>
 							<div class="tab-pane" id="profile-social-network">
-								<div id="my-social-network-list-view">
-								</div>						
+								<div class="blank-top-5" ></div>			
+								<div id="my-social-network-list-view"></div>						
 							</div>
 						</div>					
 				</div>
