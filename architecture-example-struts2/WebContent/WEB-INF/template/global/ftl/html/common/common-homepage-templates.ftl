@@ -388,12 +388,12 @@
 		# } #	
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
 		</a>-->
-		<div class="btn-group">
+
 		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</a>
-		</div>
+
 		<ul class="dropdown-menu">
 			# if ( !anonymous ) { # 
 			<li>
