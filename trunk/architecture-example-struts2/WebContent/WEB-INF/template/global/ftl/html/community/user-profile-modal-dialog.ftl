@@ -224,6 +224,10 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->	
 		
+		<!-- social network -->
+		<script type="text/x-kendo-template" id="social-network-list-view-template">
+			<p></p>
+		</script>
 
 	</body> 
 </html>
