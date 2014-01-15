@@ -6,9 +6,7 @@
 			$("#my-profile-dialog form  button").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
-					e.preventDefault();		
-					alert( $(this).html() );
-					
+					e.preventDefault();					
 					if( $(this).hasClass("custom-modify") ){
 						alert("update");
 					}else if( $(this).hasClass("custom-password-change") ){ 
