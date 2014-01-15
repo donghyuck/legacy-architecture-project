@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.community.social.AbstractSocialServiceProvider;
+import architecture.ee.web.community.social.SocialNetwork.Media;
 
 public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 
@@ -138,6 +139,10 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 	@SuppressWarnings("serial")
 	private static class TweetList extends ArrayList<Tweet>{
 		
+	}
+
+	public Media getMedia() {
+		return Media.TWITTER;
 	}
 
 

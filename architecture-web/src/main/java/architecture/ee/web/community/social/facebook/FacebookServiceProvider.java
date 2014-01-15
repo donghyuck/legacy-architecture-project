@@ -31,6 +31,7 @@ import org.scribe.model.Verb;
 
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.community.social.AbstractSocialServiceProvider;
+import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.facebook.Post.PostType;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -177,5 +178,9 @@ public class FacebookServiceProvider extends AbstractSocialServiceProvider {
 			}
 		}
 		return "post";
+	}
+
+	public Media getMedia() {
+		return Media.FACEBOOK;
 	}
 }
