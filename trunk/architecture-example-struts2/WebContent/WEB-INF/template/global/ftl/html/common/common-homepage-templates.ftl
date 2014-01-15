@@ -1,4 +1,4 @@
-<script type="text/x-kendo-template  id="imagebrowser-toolbar-template">
+<script type="text/x-kendo-template" id="imagebrowser-toolbar-template">
 	<div class="k-widget k-toolbar k-header k-floatwrap">
 		<div class="k-toolbar-wrap">
 			'# if (showUpload) { # 
