@@ -388,7 +388,7 @@
 		# } #	
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
 		</a>-->
-		<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		<button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</button>
 		<ul class="dropdown-menu">
