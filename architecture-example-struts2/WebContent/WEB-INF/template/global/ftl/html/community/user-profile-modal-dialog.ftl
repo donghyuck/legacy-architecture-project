@@ -18,18 +18,45 @@
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault()
 				$(this).tab('show')
-			})		 				
+			})		 	
+			
+			if(!$("#my-photo-upload").data("kendoUpload")){
+				$("#my-photo-upload").kendoUpload({
+					multiple : false,
+					showFileList : false,
+					localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
+					async: {
+						saveUrl:  '${request.contextPath}/secure/save-user-image.do?output=json',							   
+						autoUpload: true
+					},
+					upload: function (e) {								         
+						var imageId = -1;
+						var _currentUser = $("#account-panel").data("currentUser" );
+						if( _currentUser.properties.imageId ){
+							imageId = _currentUser.properties.imageId
+						}
+						e.data = { userId: _currentUser.userId , imageId:imageId  };									    								    	 		    	 
+					},
+					success : function(e) {								    
+						if( e.response.targetUserImage ){
+							var _currentUser = $("#account-panel").data("currentUser" );
+							_currentUser.properties.imageId = e.response.photo.imageId;
+							var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + _currentUser.properties.imageId ;
+							$('#my-photo-image').attr( 'src', photoUrl );
+						}				
+					}	
+				});
+			}
+						
 		-->
 		</script>
-		<style>			
-
+		<style>		
 		#my-profile-dialog .dropdown-menu {
 			top: 120px;
 			left: 50px; 
 			padding : 20px;
 			min-width:300px;
-		}
-	
+		}	
 		</style>			
 		<div id="my-profile-dialog" class="modal-dialog">
 			<div class="modal-content">
@@ -41,15 +68,15 @@
 					<div class="media">
 						<a class="pull-left dropdown-toggle" href="#" data-toggle="dropdown">
 							<#if user.properties.imageId??>
-							<img class="media-object img-thumbnail" src="PHOTO_URL = "/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
+							<img id="my-photo-image" class="media-object img-thumbnail" src="PHOTO_URL = "/accounts/view-image.do?width=100&height=150&imageId=${user.properties.imageId}"," />
 							<#else> 
-							<img class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
+							<img id="my-photo-image" class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
 							</#if>  
 						</a>
 						<ul class="dropdown-menu">
 							<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
 							<li>
-								<input name="uploadImage" id="files" type="file" class="pull-right" />
+								<input name="my-photo-upload" id="my-photo-upload" type="file" class="pull-right" />
 							</li>
 						</ul>									
 						<div class="media-body">				
