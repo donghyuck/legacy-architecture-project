@@ -390,10 +390,12 @@
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
 		</a>
 
-		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
+		
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</a>-->
+		
+		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
 		 <button type="button" class="btn btn-danger"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
