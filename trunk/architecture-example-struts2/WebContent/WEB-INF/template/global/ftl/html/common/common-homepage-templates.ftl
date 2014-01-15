@@ -385,12 +385,11 @@
 		# } else { # 
 		<img src="${request.contextPath}/images/common/anonymous.png" height="34" style="float: left;"/>	
 		# } #
-		 <button type="button" class="btn btn-danger"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
-		<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+		 <button type="button" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
+		<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 			<span class="caret"></span>
 			<span class="sr-only">Toggle Dropdown</span>
-		</button>
-  
+		</button>  
 		<ul class="dropdown-menu">
 			# if ( !anonymous ) { # 
 			<li>
