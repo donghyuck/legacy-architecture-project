@@ -390,8 +390,9 @@
 		</a>-->
 		<div class="btn-group">
 		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
-		<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
+		</a>
 		</button>
 		</div>
 		<ul class="dropdown-menu">
