@@ -56,10 +56,10 @@ PC9saWNlbnNlPg==</file>
 		<social>
 			<providers>
 				<twitter>
-					<callbackUrl>http://222.122.63.147/social/twitter-callback.do</callbackUrl>
+					<callbackUrl>http://222.122.63.147/community/twitter-callback.do</callbackUrl>
 				</twitter>
 				<facebook>
-					<callbackUrl>http://222.122.63.147/social/facebook-callback.do</callbackUrl>
+					<callbackUrl>http://222.122.63.147/community/facebook-callback.do</callbackUrl>
 				</facebook>				
 			</providers>
 		</social>
