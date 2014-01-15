@@ -23,7 +23,7 @@ import architecture.ee.web.community.template.Template;
 import architecture.ee.web.community.template.TemplateManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class TemplateMgmtAction extends FrameworkActionSupport {
+public class TemplateManagementAction extends FrameworkActionSupport {
 
 
     private int pageSize = 0 ;

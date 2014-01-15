@@ -15,17 +15,22 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
 import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.attachment.Image;
+import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
 import architecture.user.CompanyManager;
@@ -33,7 +38,7 @@ import architecture.user.GroupManager;
 import architecture.user.Role;
 import architecture.user.RoleManager;
 
-public class MyProfileAction extends FrameworkActionSupport {
+public class MyProfileAction extends UploadImageAction {
 
 	private UserManager userManager;
 	
@@ -44,9 +49,23 @@ public class MyProfileAction extends FrameworkActionSupport {
 	private CompanyManager companyManager;
 
 	private String password ;
+		
+	private Long photoId = -1L;
 	
-	
-	
+	/**
+	 * @return photoId
+	 */
+	public Long getPhotoId() {
+		return photoId;
+	}
+
+	/**
+	 * @param photoId 설정할 photoId
+	 */
+	public void setPhotoId(Long photoId) {
+		this.photoId = photoId;
+	}
+
 	/**
 	 * @return userManager
 	 */
@@ -214,6 +233,46 @@ public class MyProfileAction extends FrameworkActionSupport {
     		roleForUser.remove(role);
     	}    	
     	return roleForUser;
+    }
+    
+	public Image getPhoto( ){
+		try {	
+			return getImageManager().getImage(photoId);
+		} catch (NotFoundException e) {
+			log.error(e);
+			return null;
+		}
+	}
+    
+    public String updatePhoto () throws Exception {			
+    	User user = getUser();
+    	this.photoId = user.getLongProperty("imageId", -1L);	
+    	Image imageToUse;
+    	if(isMultiPart() ){	    	
+	    	File fileToUse = getUploadImage();	    	
+	    	if( this.photoId < 0  ){	
+				imageToUse = getImageManager().createImage(
+					ModelTypeFactory.getTypeIdFromCode("USER"),
+					user.getUserId(), 
+					getUploadImageFileName(), 
+					getUploadImageContentType(), 
+					fileToUse);					
+				this.photoId = getImageManager().saveImage(imageToUse).getImageId();
+				
+				Map<String, String> properties = user.getProperties();			
+				properties.put("imageId", photoId.toString());	
+				((UserTemplate) user).setProperties(properties);
+				userManager.updateUser(user);				
+			}else{
+				imageToUse = getPhoto();
+				((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
+				((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
+				log.debug("image size:" + imageToUse.getSize());
+				log.debug("image stream:" + imageToUse.getInputStream());
+				getImageManager().saveImage(imageToUse);
+			}
+    	}
+    	return success();		
     }
     
 	public String updateUserRoles() throws Exception {			

@@ -30,9 +30,9 @@ import architecture.ee.web.struts2.action.UploadImageAction;
 
 public class ImageManagementAction extends UploadImageAction  {
 
-    private int pageSize = 0 ;
+	private int pageSize = 0 ;
     
-    private int startIndex = 0 ;  
+	private int startIndex = 0 ;  
     
 	private Long imageId = -1L; 
 		

@@ -20,7 +20,7 @@ import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class ContentMgmtAction extends FrameworkActionSupport {
+public class ContentManagementAction extends FrameworkActionSupport {
 
 	private static final String DEFAULT_TEMPLATE = "/html/page.ftl" ;
 	private ContentManager contentManager;
