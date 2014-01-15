@@ -760,14 +760,13 @@
 		<style scoped="scoped">
 
 		.k-tiles-arrange label {
-			font-weight : normal;
-		
+			font-weight : normal;		
 		}
 
 		.k-imagebrowser ul li.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
-			border-color : color: #ffffff; 
+			border-color : #ffffff; 
 		}
 		
 		#pdf-view {
