@@ -394,6 +394,7 @@
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</a>-->
+		 <button type="button" class="btn btn-danger">#:name#</button>
 <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
     <span class="caret"></span>
     <span class="sr-only">Toggle Dropdown</span>
