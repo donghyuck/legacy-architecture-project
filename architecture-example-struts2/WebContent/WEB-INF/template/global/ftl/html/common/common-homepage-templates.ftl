@@ -1,4 +1,8 @@
-
+		
+		<!-- social network -->
+		<script type="text/x-kendo-template" id="social-network-list-view-template">
+			<p></p>
+		</script>
 <!-- photo view panel -->
 <script type="text/x-kendo-template" id="photo-panel-template">
 	<div class="panel panel-default">
