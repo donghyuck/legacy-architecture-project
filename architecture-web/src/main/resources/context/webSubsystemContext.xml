@@ -22,12 +22,10 @@
 	p:timeToLive : 60 초 	
 	 -->	 
 	 
-	 <bean id="socialStreamsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="socialStreamsCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="imageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="attachmentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="attachmentCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="menuCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="menuCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="menuIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="menuIdCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
-	<bean id="socialAccountCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="socialAccountCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 					
 	<bean id="imageDao" class="architecture.ee.web.attachment.dao.impl.JdbcImageDao" parent="jdbcDaoSupport"  />
 	<bean id="imageManager" class="architecture.ee.web.attachment.DefaultImageManager"  init-method="initialize" destroy-method="destroy"  depends-on="imageDao eventPublisher" 	p:imageDao-ref="imageDao" p:eventPublisher-ref="eventPublisher"  p:imageCache-ref="imageCache" />
@@ -41,7 +39,5 @@
 	<bean id="menuDao" class="architecture.ee.web.navigator.dao.impl.JdbcMenuDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="menuRepository" class="architecture.ee.web.navigator.DefaultMenuRepository"  init-method="initialize" destroy-method="destory"  depends-on="menuDao, eventPublisher" 	p:menuDao-ref="menuDao" p:eventPublisher-ref="eventPublisher"  p:menuCache-ref="menuCache"  p:menuIdCache-ref="menuIdCache" />
 
-	<bean id="socialAccountDao" class="architecture.ee.web.community.social.dao.impl.JdbcSocialAccountDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
-	<bean id="socialAccountManager" class="architecture.ee.web.community.social.internal.DefaultSocialAccountManager" depends-on="socialAccountDao"  p:socialAccountDao-ref="socialAccountDao" p:socialAccountCache-ref="socialAccountCache"/>		
 
 </beans>
