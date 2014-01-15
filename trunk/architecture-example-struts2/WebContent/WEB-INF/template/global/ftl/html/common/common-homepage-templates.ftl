@@ -1,5 +1,5 @@
 <script type="text/x-kendo-template" id="imagebrowser-toolbar-template">
-<div class="k-widget k-toolbar k-header k-floatwrap"></div>
+hello
 </script>
 
 <!-- photo view panel -->
