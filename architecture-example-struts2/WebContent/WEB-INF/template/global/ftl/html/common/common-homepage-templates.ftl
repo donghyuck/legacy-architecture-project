@@ -389,7 +389,7 @@
 		 #:name#<span class="k-icon k-i-arrow-s"></span>
 		</a>-->
 		<div class="btn-group">
-		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/>
+		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="btn"/>
 		<button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
 		#:name# <span class="k-icon k-i-arrow-s"></span>
 		</button>
