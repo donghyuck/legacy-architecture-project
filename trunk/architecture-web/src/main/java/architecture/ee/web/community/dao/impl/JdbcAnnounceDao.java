@@ -27,6 +27,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.community.dao.AnnounceDao;
@@ -34,6 +35,7 @@ import architecture.ee.web.community.impl.AnnounceImpl;
 
 public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceDao {
 
+	
 	private ExtendedPropertyDao extendedPropertyDao;	
 	private String sequencerName = "ANNOUNCE";
 	private String announcePropertyTableName = "V2_ANNOUNCE_PROPERTY";
