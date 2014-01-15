@@ -379,12 +379,15 @@
 
 <script id="account-template" type="text/x-kendo-template">	
 	<div class="dropdown">
+		
 		<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">
+		<!--
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 			<img src="#:photoUrl#"  width="30" height="30" alt="#:name#"/></span>
 		# } else { # 
 			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30"/></span>
 		# } #	
+		-->
 		 #:name#<b class="caret"></b>
 		</a>
 		<ul class="dropdown-menu">
