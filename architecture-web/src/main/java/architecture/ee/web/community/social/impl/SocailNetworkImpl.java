@@ -13,17 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.social.internal;
+package architecture.ee.web.community.social.impl;
 
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
-import architecture.ee.web.community.social.SocialAccount;
+import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialServiceProvider;
 
-public class SocialAccountImpl extends EntityModelObjectSupport implements SocialAccount {
+public class SocailNetworkImpl extends EntityModelObjectSupport implements SocialNetwork {
 
 	private Long socialAccountId = -1L;
 	private Integer objectType;
@@ -32,9 +32,10 @@ public class SocialAccountImpl extends EntityModelObjectSupport implements Socia
 	private String accessToken;
 	private String accessSecret ;
 	private boolean isSignedIn = false;
+	
 	private SocialServiceProvider serviceProvider;
 	
-	public SocialAccountImpl() {
+	public SocailNetworkImpl() {
 		
 	}
 
@@ -179,7 +180,7 @@ public class SocialAccountImpl extends EntityModelObjectSupport implements Socia
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("SocialAccountImpl [");
+		builder.append("SocailNetworkImpl [");
 		if (socialAccountId != null) {
 			builder.append("socialAccountId=");
 			builder.append(socialAccountId);
