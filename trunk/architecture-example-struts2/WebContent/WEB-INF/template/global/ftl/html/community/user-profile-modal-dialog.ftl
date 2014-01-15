@@ -38,7 +38,7 @@
 						e.data = { userId: _currentUser.userId , imageId:imageId  };									    								    	 		    	 
 					},
 					success : function(e) {								    
-						if( e.response.targetUserImage ){
+						if( e.response.photo ){
 							var _currentUser = $("#account-panel").data("currentUser" );
 							_currentUser.properties.imageId = e.response.photo.imageId;
 							var photoUrl = '${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=' + _currentUser.properties.imageId ;
