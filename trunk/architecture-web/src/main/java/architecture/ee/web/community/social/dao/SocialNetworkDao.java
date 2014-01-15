@@ -17,22 +17,18 @@ package architecture.ee.web.community.social.dao;
 
 import java.util.List;
 
-import architecture.ee.web.community.social.SocialAccount;
+import architecture.ee.web.community.social.SocialNetwork;
 
-public interface SocialAccountDao {
-		
-//	public List<Long> getSocialAccountIds(Company company);
-	
-//	public List<Long> getSocialAccountIds(User user);
+public interface SocialNetworkDao {
 		
 	public List<Long> getSocialAccountIds( int objectType, long objectId);
 	
-	public SocialAccount getSocialAccountById(long socialAccountId);
+	public SocialNetwork getSocialAccountById(long socialAccountId);
 	
-	public void updateSocialAccount(SocialAccount socialAccount);
+	public void updateSocialAccount(SocialNetwork socialNetwork);
 	
-	public SocialAccount createSocialAccount(SocialAccount socialAccount);
+	public SocialNetwork createSocialAccount(SocialNetwork socialNetwork);
 	
-	public void deleteSocialAccount(SocialAccount socialAccount);
+	public void deleteSocialAccount(SocialNetwork socialNetwork);
 		
 }

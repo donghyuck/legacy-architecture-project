@@ -21,22 +21,22 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 
-public interface SocialAccountManager {
-
-	public abstract SocialAccount createSocialAccount(Company company, SocialAccount.SocialMedia media);
+public interface SocialNetworkManager {
 	
-	public abstract SocialAccount createSocialAccount(User user, SocialAccount.SocialMedia media);
+	public abstract SocialNetwork createSocialNetwork(Company company, SocialNetwork.Media media);
 	
-	public abstract SocialAccount getSocialAccountById(long socialAccountId) throws NotFoundException ;
+	public abstract SocialNetwork createSocialNetwork(User user, SocialNetwork.Media media);
 	
-	public abstract List<SocialAccount> getSocialAccounts(Company company);
+	public abstract SocialNetwork getSocialNetworkById(long socialAccountId) throws NotFoundException ;
 	
-	public abstract List<SocialAccount> getSocialAccounts(User user);
+	public abstract List<SocialNetwork> getSocialNetworks(Company company);
 	
-	public abstract List<SocialAccount> getSocialAccounts(int objectType, long objectId);
+	public abstract List<SocialNetwork> getSocialNetworks(User user);
+	
+	public abstract List<SocialNetwork> getSocialNetworks(int objectType, long objectId);
 			
-	public abstract void saveSocialAccount( SocialAccount socialAccount );	
+	public abstract void saveSocialNetwork( SocialNetwork socialNetwork );	
 
-	public abstract void removeSocialAccount( SocialAccount socialAccount );
+	public abstract void removeSocialNetwork( SocialNetwork socialNetwork );
 	
 }

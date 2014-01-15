@@ -19,10 +19,10 @@ import java.util.Map;
 
 import architecture.common.model.EntityModelObject;
 
-public interface SocialAccount extends EntityModelObject {
+public interface SocialNetwork extends EntityModelObject {
 
 	
-	public enum SocialMedia {
+	public enum Media {
 		TWITTER, 
 		FACEBOOK
 	};	
