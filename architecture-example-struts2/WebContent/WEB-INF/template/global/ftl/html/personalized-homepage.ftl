@@ -453,6 +453,7 @@
 							messages: {
 								dropFilesHere: "Drop files here"
 							},
+							toolbarTemplate : kendo.template($("#imagebrowser-toolbar-template").html()),
 							schema: {
 								model: {
 									id: "imageId",
