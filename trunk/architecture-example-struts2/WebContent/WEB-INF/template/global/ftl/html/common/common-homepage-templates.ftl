@@ -4,7 +4,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
 				<div class="panel-body">
-				#if (  socialAccountId < 0 ) { # <button type="button" class="btn btn-danger">연결</button>  # } else { # <i class="fa fa-check"></i> 연결됨  # }  #  
+				#if (  socialAccountId < 0 ) { # <button type="button" class="btn btn-danger">연결</button>  # } else { # <button type="button" class="btn btn-danger">연결 취소</button>  # }  #  
 				</div>
 			</div>
 
