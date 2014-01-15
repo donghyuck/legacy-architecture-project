@@ -18,7 +18,34 @@
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault()
 				$(this).tab('show')
-			})					
+			})
+
+			if(!$("#files").data("kendoUpload")){
+								 	$("#files").kendoUpload({
+									 	multiple : false,
+									 	showFileList : false,
+									    localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
+									    async: {
+										    saveUrl:  '${request.contextPath}/secure/save-user-image.do?output=json',							   
+										    autoUpload: true
+									    },
+									    upload: function (e) {								         
+									         var imageId = -1;
+									         if( selectedUser.properties.imageId ){
+									         	imageId = selectedUser.properties.imageId
+									         }
+									    	 e.data = { userId: selectedUser.userId , imageId:imageId  };									    								    	 		    	 
+									    },
+									    success : function(e) {								    
+									    	if( e.response.targetUserImage ){
+									    		selectedUser.properties.imageId = e.response.targetUserImage.imageId;
+									    		var photoUrl = '${request.contextPath}/secure/view-image.do?width=150&height=200&imageId=' + selectedUser.properties.imageId ;
+								 	 			$('#user-photo').attr( 'src', photoUrl );
+									    	}				
+									    }					   
+									});
+							 	}	
+							 				
 		-->
 		</script>
 			
@@ -37,13 +64,20 @@
 							<img class="media-object img-thumbnail" src="http://placehold.it/100x150&amp;text=[No Photo]" />
 							</#if>  
 						</a>
+						<span class="help-block"><i class="fa fa-info"></i> 이미지를 수정하시려면 이미지를 클릭하십시오.</span>	
+						<ul class="dropdown-menu">
+							<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
+							<li>
+								<input name="uploadImage" id="files" type="file" class="pull-right" />
+							</li>
+						</ul>									
 						<div class="media-body">				
 							<form class="form-horizontal" role="form">
 								<fieldset disabled>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">아이디</label>
 										<div class="col-sm-10">
-											<h5 data-bind="text:name" >${ user.name }</h5>
+											<h5 data-bind="text:username" >${ user.username }</h5>
 										</div>
 									</div>
 									<div class="form-group">
