@@ -759,7 +759,7 @@
 		
 		<style scoped="scoped">
 
-		. k-imagebrowser label {
+		.k-tiles-arrange label {
 			font-weight : normal;
 		
 		}
