@@ -38,7 +38,7 @@
 								error:handleKendoAjaxError,				
 								schema: {
 									data : "socialNetworks",
-									model : SocialAccount
+									model : SocialNetwork
 								}
 							}),
 							selectable: "single",
