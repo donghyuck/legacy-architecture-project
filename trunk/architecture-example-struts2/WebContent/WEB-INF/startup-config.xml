@@ -60,6 +60,7 @@ PC9saWNlbnNlPg==</file>
 				</twitter>
 				<facebook>
 					<callbackUrl>http://222.122.63.147/community/facebook-callback.do</callbackUrl>
+					<scope>export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history</scope>
 				</facebook>				
 			</providers>
 		</social>
