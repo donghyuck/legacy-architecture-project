@@ -74,15 +74,7 @@
 												} else {	
 													var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
 													$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );											
-													//alert( kendo.stringify(response) );	
-													//list_view_action.popover({
-													//	placement:'right',
-													//	trigger: 'hover',
-													//	container: '#my-social-network-list-view',
-													//	content : function(){			
-													//		return "hello";	
-													//	}
-													//});		
+													//alert( kendo.stringify(response) );		
 												}
 											},
 											error:handleKendoAjaxError													
@@ -305,9 +297,7 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
-			<div class="alert alert-warning alert-dismissable">
-				<strong>Warning!</strong> Best check yo self, you're not looking too good.
-			</div>			
+		
 		</div>
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 			<div class="panel panel-default margin-buttom-5">
