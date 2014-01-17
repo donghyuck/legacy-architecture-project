@@ -35,7 +35,8 @@
 							success = true;
 							alert( kendo.stringify(response.socialNewtork) );	
 						}
-					}
+					},
+					error: handleKendoAjaxError
 				});				
 				
 				window.opener.handleSocialCallbackResult(success);		
