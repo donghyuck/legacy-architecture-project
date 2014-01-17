@@ -57,6 +57,10 @@
 											e.preventDefault();	
 											goSocialPopup(list_view_action.attr("data-url"));
 										});
+									}else if( list_view_action.hasClass("custom-social-network-disconnect") ){
+										list_view_action.click(function (e) {
+											e.preventDefault();												
+										});
 									}
 								});	
 							}
