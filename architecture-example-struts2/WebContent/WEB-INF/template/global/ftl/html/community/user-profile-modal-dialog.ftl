@@ -283,7 +283,7 @@
 				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
 				# } else { # 
 				<div class="btn-group">
-				<button type="button" class="btn btn-info custom-social-network-disconnect">계정보기</button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				<button type="button" class="btn btn-info custom-social-network-disconnect" data-container="body" data-toggle="popover" data-placement="top" >계정보기</button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
 				</div>
 				# }  #  
 				</div>
