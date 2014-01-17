@@ -44,26 +44,20 @@
 							template: kendo.template($("#social-network-list-view-template").html()),
 							change: function(e) { 
 								var data = this.dataSource.view() ;
-								var selectedCell = data[this.select().index()];		
-								//$("#announce-list-view").data( "announcePlaceHolder", selectedCell )										
-								//showAnnounce();							
+								var selectedCell = data[this.select().index()];					
 							},
-							dataBound: function(e) {
-								if( this.dataSource.data().length == 0 ){
-								//	$("#announce-view-panel").html( 
-								//		$('#alert-message-template').html() 
-								//	);
-								}							
+							dataBound: function(e) {				
 								this.select( this.element.children().first() );				
+								
+								$("#my-social-network-list-view button").each(function( index ) {
+									var dialog_action = $(this);		
+									alert("1");
+								});	
 							}
 						});
 					
-					alert($(this).html());
 					
-			$("#my-social-network-list-view .custom-social-network-disconnect").each(function( index ) {
-				var dialog_action = $(this);		
-				alert("1");
-			});	
+
 								
 					}				
 				}
