@@ -72,8 +72,15 @@
 												if( response.error ){
 														// 연결실패.
 												} else {														
-													alert( kendo.stringify(response) );	
-															
+													//alert( kendo.stringify(response) );	
+													list_view_action.popover({
+														placement:'right',
+														trigger: 'hover',
+														container: '#my-social-network-list-view',
+														content : function(){			
+															return "hello";	
+														}
+													});		
 												}
 											},
 											error:handleKendoAjaxError													
