@@ -59,20 +59,9 @@
 						});
 					
 					
-					
-			$("#my-social-network-list-view).find("button").each(function( index ) {
+			$("#my-social-network-list-view").find("button").each(function( index ) {
 				var dialog_action = $(this);		
 				alert("1");
-				/**
-				dialog_action.click(function (e) {
-					e.preventDefault();					
-				alert("2");	
-					if( $(this).hasClass("custom-social-network-connect") ){
-						goSocialPopup($(this).attr("data-url"));
-					}else if( $(this).hasClass("custom-social-network-disconnect") ){ 
-								
-					}
-				});**/
 			});	
 								
 					}				
