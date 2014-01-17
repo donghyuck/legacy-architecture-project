@@ -286,9 +286,11 @@
 							</div>
 							<div class="tab-pane" id="profile-social-network">
 								<div class="blank-top-5" ></div>					
-								<div class="center-block">				
-								<div id="my-social-network-list-view" class="col-sm-6"></div>			
-								<div id="my-social-network-account-details" class="col-sm-6"></div>	
+								<div class="container" style="width:100%">
+									<div class="row">				
+										<div id="my-social-network-list-view" class="col-sm-6"></div>			
+										<div id="my-social-network-account-details" class="col-sm-6"></div>	
+									</div>
 								</div>	
 							</div>
 						</div>					
@@ -302,8 +304,8 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
-			<div class="alert alert-info alert-dismissable margin-buttom-5">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>				
+		<div class="panel panel-primary margin-buttom-5">
+			<div class="panel-body" style="padding:10px;">				
 				#if ( typeof (twitterProfile)  == "object" ){ #
 				<div class="media">
 					<a class="pull-left" href="\\#"><img class="media-object" src="#=twitterProfile.profileImageUrl#" alt="프로파일 이미지" class="img-rounded"></a>
@@ -347,7 +349,8 @@
 				# } else if ( typeof (error)  == "object" ) { #
 				
 				# } #
-			</div>			
+			</div>
+		</div>				
 		</script>
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 			<div class="panel panel-default margin-buttom-5">
