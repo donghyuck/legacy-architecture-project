@@ -50,7 +50,15 @@
 							},
 							dataBound: function(e) {				
 								this.select( this.element.children().first() );									
-									
+								$("#my-social-network-list-view button").each(function( index ) {
+									var list_view_action = $(this);
+									if( list_view_action.hasClass("custom-social-network-connect") ){
+										list_view_action.click(function (e) {
+											e.preventDefault();	
+											goSocialPopup(list_view_action.attr("data-url"));
+										});
+									}
+								});	
 							}
 						});								
 					}				
