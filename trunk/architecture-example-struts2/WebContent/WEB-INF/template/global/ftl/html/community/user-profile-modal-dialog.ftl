@@ -71,16 +71,18 @@
 											success : function(response){
 												if( response.error ){
 														// 연결실패.
-												} else {														
+												} else {	
+													var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
+													$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );											
 													//alert( kendo.stringify(response) );	
-													list_view_action.popover({
-														placement:'right',
-														trigger: 'hover',
-														container: '#my-social-network-list-view',
-														content : function(){			
-															return "hello";	
-														}
-													});		
+													//list_view_action.popover({
+													//	placement:'right',
+													//	trigger: 'hover',
+													//	container: '#my-social-network-list-view',
+													//	content : function(){			
+													//		return "hello";	
+													//	}
+													//});		
 												}
 											},
 											error:handleKendoAjaxError													
@@ -289,11 +291,7 @@
 							</div>
 							<div class="tab-pane" id="profile-social-network">
 								<div class="blank-top-5" ></div>	
-								<div id="my-social-network-account-details" class="panel panel-default margin-buttom-5">
-									<div class="panel-heading"></div>	
-									<div class="panel-body" style="padding:10px;">		
-									</div>
-								</div>										
+								<div id="my-social-network-account-details"></div>
 								<div id="my-social-network-list-view"></div>						
 							</div>
 						</div>					
@@ -306,6 +304,12 @@
 
 		
 		<!-- social network -->
+		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
+			<div class="alert alert-warning alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Warning!</strong> Best check yo self, you're not looking too good.
+			</div>			
+		</div>
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 			<div class="panel panel-default margin-buttom-5">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
