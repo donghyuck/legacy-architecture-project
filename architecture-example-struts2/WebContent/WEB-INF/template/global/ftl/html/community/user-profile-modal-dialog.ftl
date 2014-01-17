@@ -72,7 +72,8 @@
 											placement:'right',
 											trigger: 'hover',
 											container: '#my-social-network-list-view',
-											content : function(){																
+											content : function(){			
+																								
 												$.ajax({
 													type : 'POST',
 													url : '${request.contextPath}/community/get-' + _media + ='-profile.do?output=json',
@@ -82,10 +83,14 @@
 														// 연결실패.
 														} else {														
 															alert( kendo.stringify(response.socialNewtork) );	
-															return "id=" + _id + ", media=" + _media ;
+															
 														}
+														return "id=" + _id + ", media=" + _media ;
 													},
-													error: handleKendoAjaxError
+													error: fucntion () {
+														return "eeee";
+													}
+													
 												});				
 												
 											}
