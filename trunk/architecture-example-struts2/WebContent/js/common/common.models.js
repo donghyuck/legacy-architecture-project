@@ -38,6 +38,7 @@ var SocialNetwork = kendo.data.Model.define( {
     	accessSecret: { type: "string", editable: true },
     	accessToken : { type: "string", editable: true },
     	signedIn: { type:"boolean", defaultVlaue: false },
+    	connected: { type:"boolean", defaultVlaue: false },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" } 
     }
