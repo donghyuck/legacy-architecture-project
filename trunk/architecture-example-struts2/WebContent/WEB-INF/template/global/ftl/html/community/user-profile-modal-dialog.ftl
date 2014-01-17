@@ -278,7 +278,7 @@
 			<div class="panel panel-default margin-buttom-5">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
 				<div class="panel-body" style="padding:10px;">				
-				#if (  !connected  ) { # 
+				#if (  connected  ) { # 
 				<button type="button" class="btn btn-success custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
 				# } else { # 
 				<button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
