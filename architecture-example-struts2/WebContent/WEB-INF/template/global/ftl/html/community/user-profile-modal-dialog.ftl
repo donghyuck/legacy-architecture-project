@@ -66,12 +66,14 @@
 											
 										});
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
+										var  = list_view_action.attr("data-id");
+										var _media = list_view_action.attr("data-id");
 										list_view_action.popover({
 											placement:'right',
 											trigger: 'hover',
 											container: '#my-social-network-list-view',
 											content : function(){												
-												return "acctoun inf o";
+												return "id=" + _id + ", media=" + _media ;
 												
 											}
 										})
@@ -300,7 +302,7 @@
 				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
 				# } else { # 
 				<div class="btn-group">
-				<button type="button" class="btn btn-info custom-social-network-account" ><i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				<button type="button" class="btn btn-info custom-social-network-account" data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
 				</div>
 				# }  #  
 				</div>
