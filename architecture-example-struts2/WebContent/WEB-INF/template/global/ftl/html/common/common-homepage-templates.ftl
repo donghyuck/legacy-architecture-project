@@ -1,7 +1,7 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
-			<div class="panel panel-default">
+			<div class="panel panel-default blank-bottom-5">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
 				<div class="panel-body">
 				#if (  socialAccountId < 0 ) { # <button type="button" class="btn btn-danger">연결</button>  # } else { # <button type="button" class="btn btn-danger">연결 취소</button>  # }  #  
