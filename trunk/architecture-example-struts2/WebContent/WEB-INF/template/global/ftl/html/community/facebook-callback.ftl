@@ -38,8 +38,7 @@
 					},
 					error: handleKendoAjaxError
 				});				
-				
-				//window.opener.handleSocialCallbackResult(success);		
+				window.opener.handleSocialCallbackResult(success);		
 			}	
 		}]);
 		</script>		
