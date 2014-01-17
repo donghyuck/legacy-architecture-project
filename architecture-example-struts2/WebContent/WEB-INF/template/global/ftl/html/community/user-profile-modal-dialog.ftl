@@ -59,7 +59,7 @@
 						});
 					
 					
-			$("#my-social-network-list-view").find("button").each(function( index ) {
+			$("#my-social-network-list-view .custom-social-network-disconnect").each(function( index ) {
 				var dialog_action = $(this);		
 				alert("1");
 			});	
