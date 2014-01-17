@@ -286,8 +286,11 @@
 							</div>
 							<div class="tab-pane" id="profile-social-network">
 								<div class="blank-top-5" ></div>	
-								<div id="my-social-network-account-details"></div>
-								<div id="my-social-network-list-view"></div>						
+								<div class="container">
+									<div class="row">
+									<div id="my-social-network-account-details" class="col-sm-6"></div>
+									<div id="my-social-network-list-view" class="col-sm-6"></div>					
+									</div>
 							</div>
 						</div>					
 				</div>
@@ -355,7 +358,7 @@
 				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" ><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName# &nbsp; 연결</button>  
 				# } else { # 
 				<div class="btn-group">
-				<button type="button" class="btn btn-default custom-social-network-account" data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-#: serviceProviderName#"></i>&nbsp;<i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				<button type="button" class="btn btn-default custom-social-network-account" data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
 				</div>
 				# }  #  
 				</div>
