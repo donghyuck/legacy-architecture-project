@@ -59,7 +59,8 @@
 						});
 					
 					
-			$("#my-social-network-list-view button").each(function( index ) {
+					
+			$("#my-social-network-list-view).find("button").each(function( index ) {
 				var dialog_action = $(this);		
 				alert("1");
 				dialog_action.click(function (e) {
