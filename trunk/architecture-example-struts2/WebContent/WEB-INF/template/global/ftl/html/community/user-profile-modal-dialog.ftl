@@ -67,6 +67,8 @@
 										});
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
 										list_view_action.popover({
+											placement:'top',
+											container: 'body',
 											content : function(){
 												
 												return "acctoun inf o";
