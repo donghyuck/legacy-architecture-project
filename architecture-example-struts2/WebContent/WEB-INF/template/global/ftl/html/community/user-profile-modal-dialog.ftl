@@ -280,9 +280,11 @@
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
 				<div class="panel-body" style="padding:10px;">				
 				#if ( ! connected  ) { # 
-				<button type="button" class="btn btn-success custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
+				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
 				# } else { # 
-				<button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				<div class="btn-group">
+				<button type="button" class="btn btn-danger custom-social-network-disconnect"><i class="fa fa-facebook"></i> 계정보기</button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				</div>
 				# }  #  
 				</div>
 			</div>
