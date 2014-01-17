@@ -53,7 +53,9 @@
 								
 								$("#my-social-network-list-view button").each(function( index ) {
 									var list_view_action = $(this);		
-
+									var _myMediaId = list_view_action.attr("data-id");
+									var _myMedia = list_view_action.attr("data-media");
+										
 									if( list_view_action.hasClass("custom-social-network-connect") ){
 										list_view_action.click(function (e) {
 											e.preventDefault();	
@@ -66,8 +68,8 @@
 											
 										});
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
-										var  = list_view_action.attr("data-id");
-										var _media = list_view_action.attr("data-id");
+
+										
 										list_view_action.popover({
 											placement:'right',
 											trigger: 'hover',
@@ -76,16 +78,16 @@
 																								
 												$.ajax({
 													type : 'POST',
-													url : '${request.contextPath}/community/get-' + _media + ='-profile.do?output=json',
-													data: { socialNetworkId: _id },
+													url : '${request.contextPath}/community/get-' + _myMedia + ='-profile.do?output=json',
+													data: { socialNetworkId: _myMediaId },
 													success : function(response){
 														if( response.error ){
 														// 연결실패.
 														} else {														
-															alert( kendo.stringify(response.socialNewtork) );	
+															alert( kendo.stringify(response) );	
 															
 														}
-														return "id=" + _id + ", media=" + _media ;
+														return "id=" + _myMediaId + ", media=" + _myMedia ;
 													},
 													error: fucntion () {
 														return "eeee";
