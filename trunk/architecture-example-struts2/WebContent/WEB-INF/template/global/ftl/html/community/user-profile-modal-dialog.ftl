@@ -61,9 +61,11 @@
 					
 			$("#my-social-network-list-view button").each(function( index ) {
 				var dialog_action = $(this);		
+				alert("1");
 				dialog_action.click(function (e) {
 					e.preventDefault();					
-					if( $(this).hasClass("custom-social-network-connect") ){						
+				alert("2");	
+					if( $(this).hasClass("custom-social-network-connect") ){
 						goSocialPopup($(this).attr("data-url"));
 					}else if( $(this).hasClass("custom-social-network-disconnect") ){ 
 								
