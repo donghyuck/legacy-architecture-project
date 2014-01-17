@@ -50,7 +50,7 @@
 								this.select( this.element.children().first() );				
 								
 								$("#my-social-network-list-view button").each(function( index ) {
-									var dialog_action = $(this);		
+									var list_view_action = $(this);		
 									alert("1");
 								});	
 							}
