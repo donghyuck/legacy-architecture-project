@@ -14,18 +14,19 @@
        	    '${request.contextPath}/js/common/common.apis.js',
        	    '${request.contextPath}/js/common/common.ui.js'], 
             complete: function() {               
-							
+				
 			}	
 		}]);
 		</script>		
 	</head>
 	<body>	
 		code : <br>
-		${action.code!''}
-		
+		${action.code!''}		
 		<br><br><br><br><br><br>
+		secret : <br>
+		${action.accessSecret!''}
+			<br><br><br><br><br><br>
 		token : <br>
-		${action.token!''}
-						
+		${action.accessToken!''}					
 	</body>
 </html>
