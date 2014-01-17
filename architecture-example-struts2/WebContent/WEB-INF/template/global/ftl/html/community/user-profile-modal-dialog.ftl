@@ -68,9 +68,9 @@
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
 										list_view_action.popover({
 											placement:'right',
+											trigger: 'hover',
 											container: '#my-social-network-list-view',
-											content : function(){
-												
+											content : function(){												
 												return "acctoun inf o";
 												
 											}
