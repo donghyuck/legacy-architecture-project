@@ -304,7 +304,7 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
-		<div class="panel panel-primary margin-buttom-5">
+		<div class="panel panel-default margin-buttom-5">
 			<div class="panel-body" style="padding:10px;">				
 				#if ( typeof (twitterProfile)  == "object" ){ #
 				<div class="media">
