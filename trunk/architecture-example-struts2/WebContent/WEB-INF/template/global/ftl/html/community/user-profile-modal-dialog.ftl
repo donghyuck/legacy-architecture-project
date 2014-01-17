@@ -3,6 +3,8 @@
 	<body>
 		<script type="text/javascript">
 		<!--
+		
+			
 			$("#my-profile-dialog form button").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
@@ -47,7 +49,7 @@
 								var selectedCell = data[this.select().index()];					
 							},
 							dataBound: function(e) {				
-								this.select( this.element.children().first() );				
+								this.select( this.element.children().first() );	
 								
 								$("#my-social-network-list-view button").each(function( index ) {
 									var list_view_action = $(this);		
@@ -99,7 +101,17 @@
 		function goSocialPopup(url) {
 			popupWindow = window.open(
 				url,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-		}						
+		}
+		
+		function handleSocialCallbackResult( success ){
+			if( success ){
+				if($("#my-photo-upload").data("kendoUpload")){
+					$("#my-photo-upload").data("kendoUpload").dataSource.read();
+				}
+			}else{
+				alert( "연결에 실패하였습니다." );
+			}
+		}
 		-->
 		</script>
 		<style>		
