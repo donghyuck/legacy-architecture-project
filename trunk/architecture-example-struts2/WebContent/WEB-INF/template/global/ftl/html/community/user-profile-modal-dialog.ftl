@@ -3,7 +3,7 @@
 	<body>
 		<script type="text/javascript">
 		<!--
-			$("#my-profile-dialog form  button").each(function( index ) {
+			$("#my-profile-dialog form button").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
 					e.preventDefault();					
@@ -57,8 +57,21 @@
 								this.select( this.element.children().first() );				
 							}
 						});
+					
+					
+			$("#my-social-network-list-view button").each(function( index ) {
+				var dialog_action = $(this);		
+				dialog_action.click(function (e) {
+					e.preventDefault();					
+					if( $(this).hasClass("custom-social-network-connect") ){						
+						goSocialPopup($(this).attr("data-url"));
+					}else if( $(this).hasClass("custom-social-network-disconnect") ){ 
+								
 					}
-				
+				});
+			});	
+								
+					}				
 				}
 				$(this).tab('show')
 			})		 	
@@ -90,7 +103,12 @@
 					}	
 				});
 			}
-						
+
+		// Popup window code
+		function goSocialPopup(url) {
+			popupWindow = window.open(
+				url,'popUpWindow','height=700,width=800,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+		}						
 		-->
 		</script>
 		<style>		
@@ -256,9 +274,12 @@
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 			<div class="panel panel-default margin-buttom-5">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
-				<div class="panel-body" style="padding:10px;">
-				#:authorizationUrl#
-				#if (  !connected  ) { # <button type="button" class="btn btn-success">연결</button>  # } else { # <button type="button" class="btn btn-danger">연결 취소</button>  # }  #  
+				<div class="panel-body" style="padding:10px;">				
+				#if (  !connected  ) { # 
+				<button type="button" class="btn btn-success custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
+				# } else { # 
+				<button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				# }  #  
 				</div>
 			</div>
 	</body> 
