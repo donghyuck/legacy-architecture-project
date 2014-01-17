@@ -1,13 +1,4 @@
-		
-		<!-- social network -->
-		<script type="text/x-kendo-template" id="social-network-list-view-template">
-			<div class="panel panel-default margin-buttom-5">
-				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
-				<div class="panel-body" style="padding:10px;">
-				#:authorizationUrl#
-				#if (  !connected  ) { # <button type="button" class="btn btn-danger">연결</button>  # } else { # <button type="button" class="btn btn-danger">연결 취소</button>  # }  #  
-				</div>
-			</div>
+
 
 		</script>
 <!-- photo view panel -->
