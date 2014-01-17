@@ -25,7 +25,7 @@
 									read: {
 										type : 'POST',
 										dataType : "json", 
-										url : '${request.contextPath}/community/socialnetwork-list.do?output=json'
+										url : '${request.contextPath}/community/list-socialnetwork.do?output=json'
 									},
 									parameterMap: function(options, operation) {
 										if (operation != "read" && options.models) {
