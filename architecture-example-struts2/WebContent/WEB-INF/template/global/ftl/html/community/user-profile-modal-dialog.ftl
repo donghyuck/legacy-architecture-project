@@ -53,14 +53,29 @@
 								
 								$("#my-social-network-list-view button").each(function( index ) {
 									var list_view_action = $(this);		
-									list_view_action.click(function (e) {
-										e.preventDefault();	
-										if( list_view_action.hasClass("custom-social-network-connect") ){
+
+									if( list_view_action.hasClass("custom-social-network-connect") ){
+										list_view_action.click(function (e) {
+											e.preventDefault();	
 											goSocialPopup(list_view_action.attr("data-url"));
-										}else if( list_view_action.hasClass("custom-social-network-disconnect") ){ 
-								
-										}
-									});
+										});
+									}									
+									else if( list_view_action.hasClass("custom-social-network-disconnect") ){
+										list_view_action.click(function (e) {
+											e.preventDefault();	
+											
+										});
+									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
+										list_view_action.popover({
+											content : function(){
+												
+												return "acctoun inf o";
+												
+											}
+										})
+									}
+									
+									
 								});	
 							}
 						});								
