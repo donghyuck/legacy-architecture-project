@@ -64,19 +64,11 @@
 									}									
 									else if( list_view_action.hasClass("custom-social-network-disconnect") ){
 										list_view_action.click(function (e) {
-											e.preventDefault();	
-											
+											e.preventDefault();												
 										});
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
 
-										
-										list_view_action.popover({
-											placement:'right',
-											trigger: 'hover',
-											container: '#my-social-network-list-view',
-											content : function(){			
-																								
-												$.ajax({
+										$.ajax({
 													type : 'POST',
 													url : '${request.contextPath}/community/get-' + _myMedia + ='-profile.do?output=json',
 													data: { socialNetworkId: _myMediaId },
@@ -87,13 +79,17 @@
 															alert( kendo.stringify(response) );	
 															
 														}
-														return "id=" + _myMediaId + ", media=" + _myMedia ;
 													},
-													error: fucntion () {
-														return "eeee";
-													}
-													
-												});				
+													error:handleKendoAjaxError													
+										});				
+												
+										list_view_action.popover({
+											placement:'right',
+											trigger: 'hover',
+											container: '#my-social-network-list-view',
+											content : function(){			
+												return "hello";												
+												
 												
 											}
 										})
