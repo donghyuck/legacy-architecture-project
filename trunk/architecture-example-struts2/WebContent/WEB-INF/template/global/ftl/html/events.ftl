@@ -260,6 +260,7 @@
 				</td>
 			</tr>
 		</script>
+		
 		<script id="alert-message-template" type="text/x-kendo-tmpl">
 			<div class="alert alert-warning">새로운 공지 & 이벤트가 없습니다.</div>
 		</script>				
