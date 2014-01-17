@@ -300,7 +300,7 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
-			<div class="alert alert-warning alert-dismissable margin-buttom-5">
+			<div class="alert alert-info alert-dismissable margin-buttom-5">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>				
 				#if ( typeof (twitterProfile)  == "object" ){ #
 				<div class="media">
