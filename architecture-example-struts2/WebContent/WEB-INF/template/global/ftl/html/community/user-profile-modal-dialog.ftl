@@ -288,8 +288,8 @@
 								<div class="blank-top-5" ></div>					
 								<div class="container" style="width:100%">
 									<div class="row">				
-										<div id="my-social-network-list-view" class="col-sm-6"></div>			
-										<div id="my-social-network-account-details" class="col-sm-6"></div>	
+										<div id="my-social-network-list-view" class="col-sm-5"></div>			
+										<div id="my-social-network-account-details" class="col-sm-7"></div>	
 									</div>
 								</div>	
 							</div>
@@ -310,7 +310,7 @@
 				<div class="media">
 					<a class="pull-left" href="\\#"><img class="media-object" src="#=twitterProfile.profileImageUrl#" alt="프로파일 이미지" class="img-rounded"></a>
 					<div class="media-body">
-						<h4 class="media-heading">#=twitterProfile.screenName# (#=twitterProfile.name#)</h4>
+						<h5 class="media-heading">#=twitterProfile.screenName# (#=twitterProfile.name#)</h5>
 						#=twitterProfile.description#</br>
 						</br>
 						트위터 URL : #=twitterProfile.profileUrl#</br>
@@ -339,7 +339,7 @@
 				<div class="media">
 					<a class="pull-left" href="\\#"><img class="media-object" src="http://graph.facebook.com/#=facebookProfile.id#/picture" alt="프로파일 이미지" class="img-rounded"></a>
 					<div class="media-body">
-						<h4 class="media-heading">#=facebookProfile.name# (#=facebookProfile.firstName#, #=facebookProfile.lastName#)</h4>
+						<h5 class="media-heading">#=facebookProfile.name# (#=facebookProfile.firstName#, #=facebookProfile.lastName#)</h5>
 						</br>
 						URL : #=facebookProfile.link#</br>
 						로케일 : #=facebookProfile.locale#</br>
@@ -360,7 +360,7 @@
 				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" ><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName# &nbsp; 연결</button>  
 				# } else { # 
 				<div class="btn-group">
-				<button type="button" class="btn btn-default custom-social-network-account" data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				<button type="button" class="btn btn-default custom-social-network-account" data-loading-text="정보를 가져오는 중입니다." data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
 				</div>
 				# }  #  
 				</div>
