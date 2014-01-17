@@ -67,7 +67,7 @@
 										});
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
 										list_view_action.popover({
-											placement:'top',
+											placement:'right',
 											container: '#my-social-network-list-view',
 											content : function(){
 												
