@@ -76,15 +76,7 @@
 													} else {	
 														var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
 														$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );											
-														//alert( kendo.stringify(response) );	
-														//list_view_action.popover({
-														//	placement:'right',
-														//	trigger: 'hover',
-														//	container: '#my-social-network-list-view',
-														//	content : function(){			
-														//		return "hello";	
-														//	}
-														//});		
+														//alert( kendo.stringify(response) );		
 													}
 												},
 												error:handleKendoAjaxError													
@@ -309,8 +301,50 @@
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
 			<div class="alert alert-warning alert-dismissable margin-buttom-5">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Warning!</strong> Best check yo self, you're not looking too good.
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>				
+				#if ( typeof (twitterProfile)  == "object" ){ #
+				<div class="media">
+					<a class="pull-left" href="\\#"><img class="media-object" src="#=twitterProfile.profileImageUrl#" alt="프로파일 이미지" class="img-rounded"></a>
+					<div class="media-body">
+						<h4 class="media-heading">#=twitterProfile.screenName# (#=twitterProfile.name#)</h4>
+						#=twitterProfile.description#</br>
+						</br>
+						트위터 URL : #=twitterProfile.profileUrl#</br>
+						표준시간대: #=twitterProfile.timeZone#</br>	
+						웹 사이트: #=twitterProfile.url#</br>	
+						언어: #=twitterProfile.language#</br>	
+						위치: #=twitterProfile.location#</br>	
+					</div>			
+				</div>
+				</br>
+				<ul class="list-group">
+					<li class="list-group-item">
+					<span class="badge">#=twitterProfile.statusesCount#</span>
+					트윗
+					</li>
+					<li class="list-group-item">
+					<span class="badge">#=twitterProfile.friendsCount#</span>
+					팔로잉
+					</li>
+					<li class="list-group-item">
+					<span class="badge">#=twitterProfile.followersCount#</span>
+					팔로워
+					</li>		
+				</ul>			
+				# } else if ( typeof (facebookProfile)  == "object" ) { #
+				<div class="media">
+					<a class="pull-left" href="\\#"><img class="media-object" src="http://graph.facebook.com/#=facebookProfile.id#/picture" alt="프로파일 이미지" class="img-rounded"></a>
+					<div class="media-body">
+						<h4 class="media-heading">#=facebookProfile.name# (#=facebookProfile.firstName#, #=facebookProfile.lastName#)</h4>
+						</br>
+						URL : #=facebookProfile.link#</br>
+						로케일 : #=facebookProfile.locale#</br>
+						위치 : #=facebookProfile.location.name#</br>
+					</div>		
+				</div>								
+				# } else if ( typeof (error)  == "object" ) { #
+				
+				# } #
 			</div>			
 		</script>
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
