@@ -49,8 +49,7 @@
 								var selectedCell = data[this.select().index()];					
 							},
 							dataBound: function(e) {				
-								this.select( this.element.children().first() );	
-								
+								this.select( this.element.children().first() );									
 								$("#my-social-network-list-view button").each(function( index ) {
 									var list_view_action = $(this);		
 									var _myMediaId = list_view_action.attr("data-id");
@@ -67,7 +66,6 @@
 											e.preventDefault();												
 										});
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
-
 										$.ajax({
 													type : 'POST',
 													url : '${request.contextPath}/community/get-' + _myMedia + ='-profile.do?output=json',
@@ -92,10 +90,8 @@
 												
 												
 											}
-										})
+										});
 									}
-									
-									
 								});	
 							}
 						});								
