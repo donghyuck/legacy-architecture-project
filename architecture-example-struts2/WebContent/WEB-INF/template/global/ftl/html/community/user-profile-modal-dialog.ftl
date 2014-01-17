@@ -308,6 +308,17 @@
 				#if ( ! connected  ) { # 
 				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" >연결</button>  
 				# } else { # 
+				
+				<div class="media">
+  <a class="pull-left" href="\\#">
+    <img class="media-object" src="..." alt="...">
+  </a>
+  <div class="media-body">
+    <h4 class="media-heading">Media heading</h4>
+  
+  </div>
+</div>
+
 				<div class="btn-group">
 				<button type="button" class="btn btn-info custom-social-network-account" data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button><button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
 				</div>
