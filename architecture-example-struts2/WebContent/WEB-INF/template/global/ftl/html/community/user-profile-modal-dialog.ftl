@@ -61,6 +61,11 @@
 										list_view_action.click(function (e) {
 											e.preventDefault();												
 										});
+									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
+										var _myMediaId = list_view_action.attr("data-id");
+										var _myMedia = list_view_action.attr("data-media");
+									
+									
 									}
 								});	
 							}
