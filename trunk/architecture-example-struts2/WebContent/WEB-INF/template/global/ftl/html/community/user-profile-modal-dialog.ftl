@@ -58,6 +58,7 @@
 							}
 						});
 					
+					alert($(this).html());
 					
 			$("#my-social-network-list-view .custom-social-network-disconnect").each(function( index ) {
 				var dialog_action = $(this);		
