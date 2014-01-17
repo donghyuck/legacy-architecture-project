@@ -4,6 +4,7 @@
 			<div class="panel panel-default margin-buttom-5">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
 				<div class="panel-body" style="padding:10px;">
+				#:getAuthorizationUrl#
 				#if (  socialAccountId < 0 ) { # <button type="button" class="btn btn-danger">연결</button>  # } else { # <button type="button" class="btn btn-danger">연결 취소</button>  # }  #  
 				</div>
 			</div>
