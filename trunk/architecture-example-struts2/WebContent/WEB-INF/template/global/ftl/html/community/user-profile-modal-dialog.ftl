@@ -74,7 +74,15 @@
 												} else {	
 													var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
 													$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );											
-													//alert( kendo.stringify(response) );		
+													//alert( kendo.stringify(response) );	
+													//list_view_action.popover({
+													//	placement:'right',
+													//	trigger: 'hover',
+													//	container: '#my-social-network-list-view',
+													//	content : function(){			
+													//		return "hello";	
+													//	}
+													//});		
 												}
 											},
 											error:handleKendoAjaxError													
@@ -297,8 +305,11 @@
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
-		
-		</div>
+			<div class="alert alert-warning alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Warning!</strong> Best check yo self, you're not looking too good.
+			</div>			
+		</script>
 		<script type="text/x-kendo-template" id="social-network-list-view-template">
 			<div class="panel panel-default margin-buttom-5">
 				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
@@ -312,5 +323,6 @@
 				# }  #  
 				</div>
 			</div>
+		</script>	
 	</body> 
 </html>
