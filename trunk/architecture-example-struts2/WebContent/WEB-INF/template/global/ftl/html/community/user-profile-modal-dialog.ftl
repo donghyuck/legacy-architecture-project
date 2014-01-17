@@ -285,9 +285,11 @@
 								</table>								
 							</div>
 							<div class="tab-pane" id="profile-social-network">
-								<div class="blank-top-5" ></div>	
-								<div id="my-social-network-account-details" class="col-sm-6"></div>
-								<div id="my-social-network-list-view" class="col-sm-6"></div>					
+								<div class="blank-top-5" ></div>					
+								<div class="center-block">				
+								<div id="my-social-network-list-view" class="col-sm-6"></div>			
+								<div id="my-social-network-account-details" class="col-sm-6"></div>	
+								</div>	
 							</div>
 						</div>					
 				</div>
