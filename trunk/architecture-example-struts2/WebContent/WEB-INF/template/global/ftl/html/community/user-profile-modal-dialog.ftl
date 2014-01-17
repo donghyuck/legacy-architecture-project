@@ -64,7 +64,20 @@
 									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
 										var _myMediaId = list_view_action.attr("data-id");
 										var _myMedia = list_view_action.attr("data-media");
-									
+										$.ajax({
+											type : 'POST',
+											url : '${request.contextPath}/community/get-' + _myMedia + ='-profile.do?output=json',
+											data: { socialNetworkId: _myMediaId },
+											success : function(response){
+												if( response.error ){
+														// 연결실패.
+												} else {														
+													alert( kendo.stringify(response) );	
+															
+												}
+											},
+											error:handleKendoAjaxError													
+										});	
 									
 									}
 								});	
