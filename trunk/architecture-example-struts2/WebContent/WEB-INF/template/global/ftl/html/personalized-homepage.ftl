@@ -225,7 +225,7 @@
 									var selectedCells = this.select();
 									if( selectedCells.length == 1){
 										var selectedCell = this.dataItem( selectedCells );				
-										var elementId =  selectedCell.serviceProviderName + "-panel";	
+										var elementId =  "#"+ selectedCell.serviceProviderName + "-panel";	
 										if( selectedCell.dataSource == null ){	
 											selectedCell.dataSource : new kendo.data.DataSource({
 												transport: {
