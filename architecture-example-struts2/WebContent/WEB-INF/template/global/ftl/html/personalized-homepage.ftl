@@ -985,11 +985,8 @@
 			<div  class="container" style="min-height:600px;">		
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="btn-group">
-							<button type="button" class="btn btn-default"><i class="fa fa-square"></i></button>
-							<button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
-							<button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
-						</div>
+<button type="button" class="btn btn-default"><i class="fa fa-chevron-left fa-2x"></i>메뉴보기</button>						
+
 <div class="btn-group" data-toggle="buttons">
   <label class="btn btn-primary">
     <input type="radio" name="main-col-size" value="12"><i class="fa fa-square"></i>
