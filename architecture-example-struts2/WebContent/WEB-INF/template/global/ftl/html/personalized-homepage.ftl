@@ -964,7 +964,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div class="container" style="min-height:350px;">							
+			<div  class="container" style="min-height:350px;">							
 				<div class="row">					
 					<div class="col-sm-12 col-md-8">						
 						
@@ -1000,51 +1000,10 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<button id="showRight">Show/Hide Right Slide Menu</button>						
-										
-					</div>				
-				</div>
-			</div>		
-		<div id="attach-window"></div>					
-		<!-- END MAIN CONTENT -->		
- 		<!-- START FOOTER -->
-		<#include "/html/common/common-homepage-footer.ftl" >		
-		<!-- END FOOTER -->	
-		
-		<!-- START TEMPLATE -->				
-		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
-			<div class="attach">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="attach-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>	
-		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
-			<div class="attach">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="attach-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>					
-		<#include "/html/common/common-homepage-templates.ftl" >		
-		<!-- END TEMPLATE -->
-		
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<h3>Menu</h3>
-			
-<ul class="nav nav-tabs" id="myTab">
+						<button id="showRightPush">Show/Hide Right Push Menu</button>
+						<button id="showRight">Show/Hide Right Slide Menu</button>
+						
+						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
 							</li>
@@ -1212,8 +1171,48 @@
 							</div>
 							<!-- end photos -->
 						</div>
-						<!-- end of tab content -->		
-									
+						<!-- end of tab content -->						
+					</div>				
+				</div>
+			</div>		
+		<div id="attach-window"></div>					
+		<!-- END MAIN CONTENT -->		
+ 		<!-- START FOOTER -->
+		<#include "/html/common/common-homepage-footer.ftl" >		
+		<!-- END FOOTER -->	
+		
+		<!-- START TEMPLATE -->				
+		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
+			<div class="attach">			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
+			# } else { #			
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
+			# } #	
+				<div class="attach-description">
+					<h3>#:name#</h3>
+					<p>#:size# 바이트</p>
+				</div>
+			</div>
+		</script>	
+		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
+			<div class="attach">			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
+			# } else { #			
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
+			# } #	
+				<div class="attach-description">
+					<h3>#:name#</h3>
+					<p>#:size# 바이트</p>
+				</div>
+			</div>
+		</script>					
+		<#include "/html/common/common-homepage-templates.ftl" >		
+		<!-- END TEMPLATE -->
+		
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+			<h3>Menu</h3>
 		</section>		
 	</body>    
 </html>
