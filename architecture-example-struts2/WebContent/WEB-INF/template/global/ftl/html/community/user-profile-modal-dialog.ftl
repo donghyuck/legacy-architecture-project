@@ -250,8 +250,9 @@
 							<div class="tab-pane" id="profile-social-network">
 								<div class="blank-top-5" ></div>					
 								<div class="container" style="width:100%">
-									<div class="row">				
-										<div class="col-sm-5">
+									<div class="row">			
+										<div class="col-sm-5">											
+											<!-- start my social network grid -->	
 											<table id="my-social-network-grid">
 												<colgroup>
 													<col class="photo" />
@@ -275,9 +276,10 @@
 													<tr>
 														<td colspan="3"></td>
 													</tr>
-												</tbody>											
-											</div>
-										</div>
+												</tbody>
+											</table>	
+											<!-- end my social network grid -->
+										</div>										
 										<div id="my-social-network-account-details" class="col-sm-7"></div>
 									</div>
 								</div>	
