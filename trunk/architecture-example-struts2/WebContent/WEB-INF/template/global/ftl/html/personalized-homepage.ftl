@@ -587,7 +587,7 @@
 			if( $("#" + renderToString ).length == 0  ){						
 				// create new social panel 
 				var template = kendo.template($("#social-view-panel-template").html());				
-				$("#social-view-panels").append( template( { provider: streamsPlaceHolder } ) );												
+				$("#social-view-panels").append( template( streamsPlaceHolder ) );												
 				if(streamsProvider.dataSource.total() == 0 )
 				{
 					streamsProvider.dataSource.read();
