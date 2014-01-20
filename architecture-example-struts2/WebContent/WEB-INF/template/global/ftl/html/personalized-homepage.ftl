@@ -1049,7 +1049,7 @@
 		<!-- END TEMPLATE -->
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-<h3></h3>
+<div class="blank-top-66"></div>
 			
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
