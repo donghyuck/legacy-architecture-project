@@ -199,65 +199,39 @@
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-message-notes' ){						
 					
-					} else if(  $(this).attr('href') == '#my-streams' ){					
-					
-						if( $("#social-view-panels").data( "providers") == null ){			
-							$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
-							<#list action.companySocials as item >
-								<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />					
-								$("#social-view-panels").data( "providers").set( "${item.serviceProviderName}" ,  {
-									<#if  item.serviceProviderName == "twitter" >
-									template : kendo.template($("#twitter-timeline-template").html())	,			
-									<#elseif item.serviceProviderName == "facebook" >
-									template : kendo.template($("#facebook-homefeed-template").html()),
-									</#if>		
-									dataSource : new kendo.data.DataSource({
-										transport: {
-											read: {
-												type : 'POST',
-												type: "json",
-												<#if  item.serviceProviderName == "twitter" >
-												url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',			
-												<#elseif item.serviceProviderName == "facebook" >
-												url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
-												</#if>	
-											},
-											parameterMap: function (options, operation){
-												if (operation == "read" && options) {										                        								                       	 	
-													return { socialAccountId: ${ item.socialAccountId } };									                            	
-												}
-											} 
-										},
-										requestStart: function() {
-											kendo.ui.progress($(${elementId}), true);
-										},
-										requestEnd: function() {
-											kendo.ui.progress($(${elementId}), false);
-										},
-										change: function() {
-											$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
-										},
-										error:handleKendoAjaxError,
-										schema: {
-										<#if  item.serviceProviderName == "twitter" >
-											data : "homeTimeline"
-										<#elseif item.serviceProviderName == "facebook" >
-											data : "homeFeed"
-										</#if>	
-										}						
-									})
-							});
-														
-							</#list>
-							$.each( $('#my-streams').find( '.social-connect-btn button' ) , function ( i, item ){					
-								$(item).click( function(){ 
-									var socialProvider = $(item).attr('data-provider');
-									if( typeof (socialProvider) == 'string' ){
-					 					showSocialPanel( socialProvider );	
-					 				}
-					 			});	
-							});											
-						}		
+					} else if(  $(this).attr('href') == '#my-streams' ){						
+						
+						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 						
+							$("#my-social-streams-grid").kendoGrid({
+								dataSource: new kendo.data.DataSource({
+									transport: {
+										read: {
+											type : 'POST',
+											dataType : "json", 
+											url : '${request.contextPath}/community/list-my-socialnetwork.do?output=json'
+										} 
+									},
+									pageSize: 10,
+									error:handleKendoAjaxError,				
+									schema: {
+										data : "connectedSocialNetworks",
+										model : SocialNetwork
+									},
+								}),
+								selectable: "single",
+								rowTemplate: kendo.template( '<tr><td><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</td></tr>' ),				
+								change: function(e) { 				
+									var selectedCells = this.select();
+									if( selectedCells.length == 1){
+										var selectedCell = this.dataItem( selectedCells );	
+										//$("#my-social-streams-grid").data( "streams-dataSource", selectedCell );	
+									}							
+								},
+								dataBound: function(e) {									
+								},
+								height: 300
+							});	
+						}
 					} else if(  $(this).attr('href') == '#my-file-upload' ){
 						if( !$('#attachment-files').data('kendoUpload') ){		
 							$("#attachment-files").kendoUpload({
@@ -1178,6 +1152,25 @@
 							</div>		
 							<div class="tab-pane" id="my-streams-mgmt">				
 								<div class="blank-top-5" ></div>	
+											<table id="my-social-streams-grid">
+												<colgroup>
+													<col/>
+												</colgroup>
+												<thead>
+													<tr>
+													<th>
+													미디어
+													</th>															
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>	
+											
+								
 								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
 									<div class="panel-body">								
