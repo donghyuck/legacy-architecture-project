@@ -10,6 +10,7 @@
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',      	    
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
+       	    '${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',       	    
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.ui.js'],
@@ -615,17 +616,14 @@
 							                            },
 							                            { command: [ { name: "download", text: "미리보기" ,click: function(e)  {
 									                            	var tr = $(e.target).closest("tr"); 
-														          	var item = this.dataItem(tr);
-														          	
+														          	var item = this.dataItem(tr);														          	
 							                            			$('#file-preview-panel').data("attachPlaceHolder", item );							                            			
 																	var template = kendo.template($('#file-preview-template').html());
 																	$('#file-preview-panel').html( template(item) );				
-																	kendo.bind($("#file-preview-panel"), item );		
-																	
+																	kendo.bind($("#file-preview-panel"), item );																			
 																	if( item.contentType == "application/pdf" ){
 																		var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + item.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-																	}
-																	
+																	}																	
 																	$("#file-preview-panel button").each(function( index ) {		
 																		var panel_button = $(this);
 																		panel_button.click(function (e) { 
@@ -650,9 +648,7 @@
 																				$("#file-preview-panel").hide();			
 																			}					
 																		});
-																	});			
-																	
-																	
+																	});		
 																		
 																	$("#update-attach-file").kendoUpload({
 																		multiple: false,
