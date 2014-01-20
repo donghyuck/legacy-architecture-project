@@ -135,26 +135,25 @@
 					}
 				});
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);		
-						panel_header_action.click(function (e) {
-							e.preventDefault();
-							if( panel_header_action.text() == "Minimize" ){
-								$("#announce-panel .panel-body").toggleClass("hide");								
-								var panel_header_action_icon = panel_header_action.find('span');
-								if( panel_header_action_icon.hasClass("k-i-minimize") ){
-									panel_header_action.find('span').removeClass("k-i-minimize");
-									panel_header_action.find('span').addClass("k-i-maximize");
-								}else{
-									panel_header_action.find('span').removeClass("k-i-maximize");
-									panel_header_action.find('span').addClass("k-i-minimize");
-								}							
-							}else if (panel_header_action.text() == "Close"){	
-								$("#announce-panel" ).hide();
-							}
-						});
+					var panel_header_action = $(this);		
+					panel_header_action.click(function (e) {
+						e.preventDefault();
+						if( panel_header_action.text() == "Minimize" ){
+							$("#announce-panel .panel-body").toggleClass("hide");								
+							var panel_header_action_icon = panel_header_action.find('span');
+							if( panel_header_action_icon.hasClass("k-i-minimize") ){
+								panel_header_action.find('span').removeClass("k-i-minimize");
+								panel_header_action.find('span').addClass("k-i-maximize");
+							}else{
+								panel_header_action.find('span').removeClass("k-i-maximize");
+								panel_header_action.find('span').addClass("k-i-minimize");
+							}							
+						}else if (panel_header_action.text() == "Close"){	
+							$("#announce-panel" ).hide();
+						}
+					});
 				});						
-											
-											
+															
 				// 4. Right Tabs
 				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
@@ -983,6 +982,7 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
+						<!--
 						<div class="panel panel-default">
 							<div class="panel-heading">프로그램
 									<div class="k-window-actions panel-header-actions">
@@ -998,7 +998,8 @@
 									<li><a href="#"><i class="fa fa-pencil-square-o"></i> 노트</a></li>									
 								</ul>
 							</div>
-						</div>						
+						</div>	
+						-->					
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
