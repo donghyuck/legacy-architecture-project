@@ -39,7 +39,7 @@
 
 			showRightPush.onclick = function() {
 				classie.toggle( this, 'active' );
-				classie.toggle( body, 'cbp-spmenu-push-toleft' );
+				classie.toggle( $("#mainContent"), 'cbp-spmenu-push-toleft' );
 				classie.toggle( menuRight, 'cbp-spmenu-open' );
 				//disableOther( 'showRightPush' );
 			};
@@ -964,7 +964,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div class="container" style="min-height:350px;">							
+			<div id="mainContent" class="container" style="min-height:350px;">							
 				<div class="row">					
 					<div class="col-sm-12 col-md-8">						
 						
