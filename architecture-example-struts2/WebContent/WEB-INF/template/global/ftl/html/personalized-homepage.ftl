@@ -229,13 +229,11 @@
 										$("#my-social-streams-grid").data("streams-" + selectedCell.socialAccountId )
 										if( ! $("#my-social-streams-grid").data("provider-" + selectedCell.socialAccountId ) ){										
 											var selectedStreams = new MediaStreams(selectedCell.serviceProviderName);	
-											selectedStreams.mediaId = selectedCell.socialAccountId;	
-											
-											
+											selectedStreams.mediaId = selectedCell.socialAccountId;												
 											if( selectedStreams.name == 'twitter'){
-												selectedStreams.setTempalte ( kendo.template($("#twitter-timeline-template").html()) );											
+												selectedStreams.setTemplate ( kendo.template($("#twitter-timeline-template").html()) );											
 											}else if ( selectedStreams.name == 'facebook'){
-												selectedStreams.setTempalte( kendo.template($("#facebook-homefeed-template").html()) );
+												selectedStreams.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
 											}
 											selectedStreams.setDataSource({
 												requestStart : function(){
