@@ -2,6 +2,7 @@
  * COMMON UI DEFINE
  */
 
+
 (function($, undefined) {
 	var Widget = kendo.ui.Widget;
 	var ui = window.ui = window.ui || {};
@@ -26,6 +27,15 @@
 			day_diff < 7 && day_diff + " days ago" ||
 			day_diff < 31 && Math.ceil( day_diff / 7 ) + " weeks ago";
 	};
+	
+	ui.util.feedUrl = function ( site ){
+		if( site == "twitter") {
+			return "/community/get-twitter-hometimeline.do?output=json";			
+		}else if ( site == "facebook"){
+			return "/community/get-facebook-homefeed.do?output=json";			
+		}
+		return null;
+	}  
 	
 	ui.kendoAlert = Widget.extend({		
 		init: function(element, options) {			
