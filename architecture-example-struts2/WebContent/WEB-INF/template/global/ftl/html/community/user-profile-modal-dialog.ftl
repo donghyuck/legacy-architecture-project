@@ -47,7 +47,8 @@
 							change: function(e) { 				
 							},
 							dataBound: function(e) {
-							}
+							},
+							height: 300
 						});								
 					}				
 				}
