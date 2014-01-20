@@ -977,9 +977,30 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div  class="container" style="min-height:600px;">							
+			<div  class="container" style="min-height:600px;">		
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default"><i class="fa fa-square"></i></button>
+							<button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
+							<button type="button" class="btn btn-default"><i class="fa fa-th-large"></i></button>
+						</div>
+<div class="btn-group" data-toggle="buttons">
+  <label class="btn btn-primary">
+    <input type="radio" name="options" id="option1"><i class="fa fa-square"></i>
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="options" id="option2"> <i class="fa fa-th-large"></i>
+  </label>
+  <label class="btn btn-primary">
+    <input type="radio" name="options" id="option3"> <i class="fa fa-th-large"></i>
+  </label>
+</div>						
+					</div>
+				</div>
 				<div class="row">					
 					<div class="col-sm-6">						
+					
 												<button id="showRightPush">Show/Hide Right Push Menu</button>
 						<button id="showRight">Show/Hide Right Slide Menu</button>
 						
