@@ -47,13 +47,14 @@
 							//altRowTemplate: kendo.template($("#social-network-grid-row-alt-template").html()),
 							change: function(e) { 				
 								var selectedCells = this.select();
-								if( selectedCells.length > 0){
+								if( selectedCells.length == 1){
 									var selectedCell = this.dataItem( selectedCells );	    
 									alert( selectedCell.socialAccountId );
 									
 								}							
 							},
 							dataBound: function(e) {
+							
 							},
 							height: 300
 						});								
