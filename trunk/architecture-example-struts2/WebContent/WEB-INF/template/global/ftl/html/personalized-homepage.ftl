@@ -960,6 +960,10 @@
 	.cbp-spmenu-right {
 	right: -40%;
 	}		
+	.cbp-spmenu {
+		width:40%;
+	
+	}
 		</style>   	
 	</head>
 	<body id="doc" class="cbp-spmenu-push">
