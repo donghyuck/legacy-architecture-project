@@ -1125,9 +1125,9 @@
 									</div>
 								</div>								
 							</div>							
+							<!-- start social -->		
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
-
 											<table id="my-social-streams-grid">
 												<colgroup>
 													<col/>
@@ -1145,54 +1145,11 @@
 													</tr>
 												</tbody>
 											</table>	
-											<p><i class="fa fa-info"></i> &nbsp; 쇼셜 미디어는 프로파일의 쇼셜네크워크에서 추가하실 수 있습니다. </p>								
-								<div class="panel panel-default" style="margin-bottom:0px;">
-									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
-									<div class="panel-body">
-										<div class="btn-group social-connect-btn">
-											<#list action.companySocials as item >	
-											<button class="btn btn-primary" data-provider="${item.serviceProviderName}"  type="submit"><i class="fa fa-${item.serviceProviderName}"></i> &nbsp; ${item.serviceProviderName}</button>
-											</#list>	
-										</div>									
-									</div>
-									<div class="panel-footer" style="padding:5px;">
-										<div class="btn-group">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus"></i> 쇼셜미디어 추가 <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a href="#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
-												<li><a href="#"><i class="fa fa-twitter"></i> &nbsp;트위터 연결</a></li>
-												<li class="divider"></li>
-												<li><a href="#"><i class="fa fa-cog"></i> 쇼셜미디어 계정 관리</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>					
-							</div>		
-							<!--
-							<div class="tab-pane" id="my-streams-mgmt">				
-								<div class="blank-top-5" ></div>	
-
-											
-								
-								<div class="panel panel-default" style="margin-bottom:0px;">
-									<div class="panel-heading">소셜미디어 연결 버튼을 클릭하여, 새로운 쇼셜미디어 계정을 추가할 수 있습니다.</div>
-									<div class="panel-body">								
-										<div class="btn-group">
-											<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">쇼셜미디어 추가 <span class="caret"></span>
-											</button>
-											<ul class="dropdown-menu" role="menu">
-												<li><a href="#"><i class="fa fa-facebook"></i> &nbsp;페이스북 연결</a></li>
-												<li><a href="#"><i class="fa fa-twitter"></i> &nbsp;트위터 연결</a></li>
-												<li class="divider"></li>
-												<li><a href="#">쇼셜미디어 계정 관리</a></li>
-											</ul>
-										</div>
-									</div>
-								</div>								
-							</div>	
-							-->
-							<!-- end messages -->				
+											<p><i class="fa fa-info"></i> &nbsp; 쇼셜 미디어는 프로파일의 쇼셜네크워크에서 추가하실 수 있습니다. </p>				
+											<p><i class="fa fa-info"></i> &nbsp; 쇼셜 미디어를 선택하시면, 해당 미디어의 최신 뉴스를 볼수 있습니다. </p>			
+								</div>
+							</div>					
+							<!-- end social -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-file-upload">
 								<div class="blank-top-5" ></div>											
