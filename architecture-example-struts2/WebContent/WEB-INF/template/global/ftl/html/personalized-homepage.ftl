@@ -977,9 +977,9 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div  class="container" style="min-height:350px;">							
+			<div  class="container" style="min-height:600px;">							
 				<div class="row">					
-					<div class="col-sm-12 col-md-8">						
+					<div class="col-sm-12">						
 												<button id="showRightPush">Show/Hide Right Push Menu</button>
 						<button id="showRight">Show/Hide Right Slide Menu</button>
 						
@@ -1012,11 +1012,7 @@
 						<!-- start social view panels -->
 						<div id="social-view-panels"></div>	
 						<!-- end social view panels -->						
-					</div>							
-					<div class="col-sm-12 col-md-4">
-
-				
-					</div>				
+					</div>										
 				</div>
 			</div>		
 		<div id="attach-window"></div>					
