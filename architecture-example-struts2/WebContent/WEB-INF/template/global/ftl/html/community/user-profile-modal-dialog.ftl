@@ -44,6 +44,7 @@
 							}),
 							selectable: "single",
 							template: kendo.template($("#social-network-grid-row-template").html()),
+							altRowTemplate: kendo.template($("#social-network-grid-row-alt-template").html()),
 							change: function(e) { 				
 							},
 							dataBound: function(e) {
