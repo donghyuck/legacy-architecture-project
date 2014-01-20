@@ -960,7 +960,7 @@
 		
 		}
 		
-		.cbp-spmenu-right{
+		.cbp-spmenu-right {
 			right: -40%;
 		}
 		
@@ -1224,6 +1224,7 @@
 		<!-- END TEMPLATE -->
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+			<div class=""></div>
 			<h3>Menu</h3>
 		</section>		
 	</body>    
