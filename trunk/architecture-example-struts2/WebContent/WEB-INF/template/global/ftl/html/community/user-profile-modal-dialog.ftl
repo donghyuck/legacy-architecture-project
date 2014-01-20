@@ -21,6 +21,7 @@
 				e.preventDefault();				
 				if( $(this).attr('href') == '#profile-social-network' ){					
 					if( !$("#my-social-network-grid" ).data('kendoGrid') ){
+					alert( "sqs" );
 						$("#my-social-network-grid").kendoGrid({
 							dataSource: new kendo.data.DataSource({
 								transport: {
@@ -49,7 +50,7 @@
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){
 									var selectedCell = this.dataItem( selectedCells );	    
-									alert( selectedCell.socialAccountId );
+									
 									$.ajax({
 										type : 'POST',
 										url : "${request.contextPath}/community/get-" + selectedCell.serviceProviderName + "-profile.do?output=json",
