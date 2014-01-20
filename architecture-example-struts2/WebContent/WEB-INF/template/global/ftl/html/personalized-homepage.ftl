@@ -204,7 +204,7 @@
 						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 				
 									
 							$("#my-social-streams-grid").kendoGrid({
-								dataSource: new kendo.data.DataSource({
+								dataSource : new kendo.data.DataSource({
 									transport: {
 										read: {
 											type : 'POST',
@@ -227,7 +227,7 @@
 										var selectedCell = this.dataItem( selectedCells );				
 										var elementId =  "#"+ selectedCell.serviceProviderName + "-panel";	
 										if( selectedCell.dataSource == null ){	
-											selectedCell.dataSource : new kendo.data.DataSource({
+											selectedCell.dataSource = new kendo.data.DataSource({
 												transport: {
 													read: {
 														type : 'POST',
