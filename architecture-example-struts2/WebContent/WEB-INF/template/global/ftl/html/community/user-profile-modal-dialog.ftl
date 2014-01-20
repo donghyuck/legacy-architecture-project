@@ -70,7 +70,7 @@
 								$("#my-social-network-grid button").each(function( index ) {
 									var grid_action = $(this);
 									alert( grid_action.html() );
-								}
+								});
 							},
 							height: 300
 						});								
