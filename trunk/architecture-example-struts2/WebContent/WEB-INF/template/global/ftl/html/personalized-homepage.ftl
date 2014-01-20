@@ -982,8 +982,6 @@
 			<div  class="container" style="min-height:600px;">		
 				<div class="row">
 					<div class="col-sm-6">
-				
-
 						<div class="btn-group" data-toggle="buttons">
 						  <label class="btn btn-primary">
 						    <input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
@@ -994,13 +992,12 @@
 						  <label class="btn btn-primary">
 						    <input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						  </label>
-						</div>
-						
-						<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;메뉴보기</button>		
-						
+						</div>						
+						<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;메뉴보기</button>
 					</div>
 				</div>
-				<div id="personalized-area" class="row">					
+				
+				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
 						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 							<div class="panel panel-default">
