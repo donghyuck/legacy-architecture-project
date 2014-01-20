@@ -224,8 +224,26 @@
 								change: function(e) { 				
 									var selectedCells = this.select();
 									if( selectedCells.length == 1){
-										var selectedCell = this.dataItem( selectedCells );				
-										var elementId =  "#"+ selectedCell.serviceProviderName + "-panel";	
+										var selectedCell = this.dataItem( selectedCells );		
+										var selectedStreams = new kendoMediaStreams(selectedCell.serviceProviderName);
+										
+										alert( selectedStreams.url );										
+										
+										$("#my-social-streams-grid").data( "newtorkPlaceHolder", selectedCell );
+																				
+										if(  $("#my-social-streams-grid").data("providers") == null ){
+											$("#my-social-streams-grid").data("providers", new kendo.data.ObservableObject({}) );
+										} 
+										var elementId =  "#"+ selectedCell.serviceProviderName + "-streams";	
+										
+										if( 	$("#my-social-streams-grid").data("providers").get( elementId ) == null ){
+										
+											$("#social-view-panels").data( "providers").set( elementId ,{
+											
+											
+											});
+										}	
+										
 										if( selectedCell.dataSource == null ){	
 											selectedCell.dataSource = new kendo.data.DataSource({
 												transport: {
@@ -255,7 +273,7 @@
 												}
 											});												
 										}
-										$("#my-social-streams-grid").data( "newtorkPlaceHolder", selectedCell );
+										
 										showSocialPanel();
 									}							
 								},
