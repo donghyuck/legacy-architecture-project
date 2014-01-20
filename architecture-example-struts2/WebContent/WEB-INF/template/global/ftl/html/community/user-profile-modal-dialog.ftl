@@ -50,7 +50,21 @@
 								if( selectedCells.length == 1){
 									var selectedCell = this.dataItem( selectedCells );	    
 									alert( selectedCell.socialAccountId );
-									
+									$.ajax({
+										type : 'POST',
+										url : "${request.contextPath}/community/get-" + selectedCell.serviceProviderName + "-profile.do?output=json",
+										data: { socialNetworkId: selectedCell.socialAccountId },
+										success : function(response){
+										alert( "ss" );
+											if( response.error ){
+												// 연결실패.
+											} else {	
+												var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
+												$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );													
+											}
+										},
+										error:handleKendoAjaxError													
+									});	
 								}							
 							},
 							dataBound: function(e) {
