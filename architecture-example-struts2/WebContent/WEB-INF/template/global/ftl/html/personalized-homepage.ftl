@@ -958,7 +958,7 @@
 		}
 		.cbp-spmenu {
 			padding: 5px;
-			background-color:"#428bca";
+			background-color: rgba(0,0,0,0.8);
 		}
 		
 		.cbp-spmenu-right {
@@ -1056,7 +1056,7 @@
 		<!-- END TEMPLATE -->
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<div class="blank-top-60"></div>
+			<div class="blank-top-50"></div>
 			<div class="panel panel-default">
 				<div class="panel-body clearfix">		
 						<ul class="nav nav-tabs" id="myTab">
