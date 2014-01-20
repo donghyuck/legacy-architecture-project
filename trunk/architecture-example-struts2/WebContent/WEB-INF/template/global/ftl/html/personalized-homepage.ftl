@@ -1034,7 +1034,7 @@
 						<div id="attach-view-panel" class="custom-panels-group col-sm-6"></div>				
 						<!-- end attach view panel -->		
 						<!-- start social view panels -->
-						<div id="social-view-panels class="custom-panels-group col-sm-6"></div>	
+						<div id="social-view-panels" class="custom-panels-group col-sm-6"></div>	
 						<!-- end social view panels -->												
 					</div>										
 				</div>
