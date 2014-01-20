@@ -225,7 +225,7 @@
 									var selectedCells = this.select();
 									if( selectedCells.length == 1){
 										var selectedCell = this.dataItem( selectedCells );		
-										var selectedStreams = new kendoMediaStreams(selectedCell.serviceProviderName);
+										var selectedStreams = new MediaStreams(selectedCell.serviceProviderName);
 										
 										alert( selectedStreams.url );										
 										
