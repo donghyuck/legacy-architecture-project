@@ -1,6 +1,7 @@
 /**
  * COMMON UI DEFINE
  */
+
 (function($, undefined) {
 	var Widget = kendo.ui.Widget;
 	var ui = window.ui = window.ui || {};
