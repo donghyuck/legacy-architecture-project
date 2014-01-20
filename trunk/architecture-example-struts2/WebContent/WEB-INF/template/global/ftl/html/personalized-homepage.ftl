@@ -957,14 +957,6 @@
 			width: 100%;
 		}
 		
-	.cbp-spmenu-right {
-		right: -40%;
-	}		
-	.cbp-spmenu {
-		padding: 15px;
-		width:40%;
-	
-	}
 		</style>   	
 	</head>
 	<body id="doc" class="cbp-spmenu-push">
@@ -1008,7 +1000,7 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<button id="showRightPush">Show/Hide Right Slide Menu</button>						
+						<button id="showRight">Show/Hide Right Slide Menu</button>						
 										
 					</div>				
 				</div>
@@ -1050,9 +1042,9 @@
 		<!-- END TEMPLATE -->
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<div class="blank-top-66"></div>
+			<h3>Menu</h3>
 			
-						<ul class="nav nav-tabs" id="myTab">
+<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
 							</li>
