@@ -66,8 +66,9 @@
 								}							
 							},
 							dataBound: function(e) {
+								alert(this.dataSource.total()) ;
 								if(this.dataSource.total() ){
-									alert(this.dataSource.total()) ;
+									
 								}
 							},
 							height: 300
