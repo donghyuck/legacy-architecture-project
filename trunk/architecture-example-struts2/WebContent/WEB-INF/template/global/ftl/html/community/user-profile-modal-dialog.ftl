@@ -358,5 +358,21 @@
 				</td>
 			</tr>					
 		</script>	
+		<script type="text/x-kendo-template" id="social-network-grid-row-alt-template">
+			<tr class="k-alt">
+				<td></td>
+				<td><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</td>
+				<td>
+				#if ( ! connected  ) { # 
+				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" ><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName# &nbsp; 연결</button>  
+				# } else { # 
+				<div class="btn-group">
+				<button type="button" class="btn btn-info custom-social-network-account" data-loading-text="정보를 가져오는 중입니다." data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button>
+				<button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
+				</div>
+				# }  #  				
+				</td>
+			</tr>					
+		</script>			
 	</body> 
 </html>
