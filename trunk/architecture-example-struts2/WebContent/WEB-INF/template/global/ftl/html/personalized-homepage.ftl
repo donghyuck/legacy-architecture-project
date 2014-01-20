@@ -34,14 +34,14 @@
 					classie.toggle( this, 'active' );
 					classie.toggle( menuRight, 'cbp-spmenu-open' );
 					
-					var side_menu_icon = $(this).find( "i" );
-					if( side_menu_icon.hasClass("fa-chevron-left") ){
-						side_menu_icon.removeClass("fa-chevron-left");
-						side_menu_icon.addClass("fa-chevron-right");
+					//var side_menu_icon = $(this).find( "i" );
+					if( $(this).find( "i" ).hasClass("fa-chevron-left") ){
+						$(this).find( "i" ).removeClass("fa-chevron-left");
+						$(this).find( "i" ).addClass("fa-chevron-right");
 						$(this).text("메뉴 숨기기");
 					}else{
-						side_menu_icon.removeClass("fa-chevron-right");
-						side_menu_icon.addClass("fa-chevron-left");	
+						$(this).find( "i" ).removeClass("fa-chevron-right");
+						$(this).find( "i" ).addClass("fa-chevron-left");	
 						$(this).text("메뉴 보기");
 					}
 					
