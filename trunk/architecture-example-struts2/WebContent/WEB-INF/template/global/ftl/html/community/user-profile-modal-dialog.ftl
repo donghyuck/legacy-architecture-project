@@ -21,7 +21,6 @@
 				e.preventDefault();				
 				if( $(this).attr('href') == '#profile-social-network' ){					
 					if( !$("#my-social-network-grid" ).data('kendoGrid') ){
-					alert( "sqs" );
 						$("#my-social-network-grid").kendoGrid({
 							dataSource: new kendo.data.DataSource({
 								transport: {
@@ -49,14 +48,12 @@
 							change: function(e) { 				
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){
-									var selectedCell = this.dataItem( selectedCells );	    
-									
+									var selectedCell = this.dataItem( selectedCells );	    									
 									$.ajax({
 										type : 'POST',
 										url : "${request.contextPath}/community/get-" + selectedCell.serviceProviderName + "-profile.do?output=json",
 										data: { socialNetworkId: selectedCell.socialAccountId },
 										success : function(response){
-										alert( "ss" );
 											if( response.error ){
 												// 연결실패.
 											} else {	
@@ -69,7 +66,9 @@
 								}							
 							},
 							dataBound: function(e) {
-							
+								if(this.dataSource.total() ){
+									alert(this.dataSource.total()) ;
+								}
 							},
 							height: 300
 						});								
@@ -271,7 +270,7 @@
 								<div class="blank-top-5" ></div>					
 								<div class="container" style="width:100%">
 									<div class="row">			
-										<div class="col-sm-5">											
+										<div class="col-sm-5 leftless rightless">											
 											<!-- start my social network grid -->	
 											<table id="my-social-network-grid">
 												<colgroup>
@@ -296,7 +295,7 @@
 											</table>	
 											<!-- end my social network grid -->
 										</div>										
-										<div id="my-social-network-account-details" class="col-sm-7"></div>
+										<div id="my-social-network-account-details" class="col-sm-7 rightless"></div>
 									</div>
 								</div>	
 							</div>
