@@ -43,6 +43,11 @@
 				classie.toggle( menuRight, 'cbp-spmenu-open' );
 				//disableOther( 'showRightPush' );
 			};
+			
+			$("input[name='main-col-size']").on("change", function () {
+				alert(this.value);
+			});
+				
 							
 				// 2. ACCOUNTS LOAD	
 				var currentUser = new User({});			
