@@ -958,6 +958,7 @@
 		}
 		.cbp-spmenu {
 			padding: 5px;
+			background-color:"#428bca";
 		}
 		
 		.cbp-spmenu-right {
