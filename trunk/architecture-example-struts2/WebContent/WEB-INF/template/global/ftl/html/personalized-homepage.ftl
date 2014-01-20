@@ -961,7 +961,7 @@
 		}
 		
 		.cbp-spmenu-right{
-			right: 40%;
+			right: -40%;
 		}
 		
 		.cbp-spmenu-vertical{
