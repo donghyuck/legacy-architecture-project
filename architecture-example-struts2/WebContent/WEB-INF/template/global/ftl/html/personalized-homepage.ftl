@@ -959,6 +959,11 @@
 		.cbp-spmenu {
 		
 		}
+		
+		.cbp-spmenu-right{
+			right: 40%;
+		}
+		
 		.cbp-spmenu-vertical{
 			width: 40%;
 		}
