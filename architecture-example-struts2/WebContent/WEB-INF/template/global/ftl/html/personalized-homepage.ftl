@@ -201,7 +201,8 @@
 					
 					} else if(  $(this).attr('href') == '#my-streams' ){						
 						
-						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 						
+						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 				
+									
 							$("#my-social-streams-grid").kendoGrid({
 								dataSource: new kendo.data.DataSource({
 									transport: {
@@ -223,8 +224,39 @@
 								change: function(e) { 				
 									var selectedCells = this.select();
 									if( selectedCells.length == 1){
-										var selectedCell = this.dataItem( selectedCells );	
-										//$("#my-social-streams-grid").data( "streams-dataSource", selectedCell );	
+										var selectedCell = this.dataItem( selectedCells );				
+										var elementId =  selectedCell.serviceProviderName + "-panel";	
+										if( selectedCell.dataSource == null ){	
+											selectedCell.dataSource : new kendo.data.DataSource({
+												transport: {
+													read: {
+														type : 'POST',
+														type: "json",
+														url : '${request.contextPath}' + ui.util.feedUrl(selectedCell.serviceProviderName)
+													},
+													parameterMap: function (options, operation){
+														if (operation == "read" && options) {										                        								                       	 	
+															return { socialAccountId: selectedCell.socialAccountId };									                            	
+														}
+													} 
+												},
+												requestStart: function() {
+													kendo.ui.progress($(${elementId}), true);
+												},
+												requestEnd: function() {
+													kendo.ui.progress($(${elementId}), false);
+												},
+												change: function() {
+													//$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
+												},
+												error:handleKendoAjaxError,
+												schema: {
+													data : ui.util.feedReturnSchemaData(selectedCell.serviceProviderName)
+												}
+											});												
+										}
+										$("#my-social-streams-grid").data( "newtorkPlaceHolder", selectedCell );
+										showSocialPanel();
 									}							
 								},
 								dataBound: function(e) {									
@@ -556,15 +588,17 @@
 			$("#announce-panel" ).show();
 		}	
 								
-		function showSocialPanel ( provider ){			
-			var elementId =  provider + "-panel";			
+		function showSocialPanel ( ){
+		
+			var newtorkPlaceHolder = $("#my-social-streams-grid").data( "newtorkPlaceHolder" );					
+			var elementId =  newtorkPlaceHolder.serviceProviderName + "-panel";			
+			
 			if( $("#" + elementId ).length == 0  ){						
 				// create new social panel 
 				var template = kendo.template($("#social-view-panel-template").html());				
-				$("#social-view-panels").append( template( { provider:provider} ) );												
+				$("#social-view-panels").append( template( { provider: newtorkPlaceHolder } ) );												
 				// get dataSource
-				var dataSource = $("#social-view-panels").data( "providers").get( provider ).dataSource;
-				if( dataSource.total() == 0 )
+				if( newtorkPlaceHolder.dataSource.total() == 0 )
 				{
 					dataSource.read();
 				} 								
