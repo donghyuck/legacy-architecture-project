@@ -35,10 +35,17 @@
 					classie.toggle( menuRight, 'cbp-spmenu-open' );
 					//disableOther( 'showRight' );
 				};
-			
-			$("input[name='main-col-size']").on("change", function () {
-				alert(this.value);
-			});
+				
+				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
+				$("input[name='personalized-area-col-size']").on("change", function () {					
+					var grid-col-size = $("#personalized-area").data("sizePlaceHolder");
+					grid-col-size.newValue = this.value;										
+					$(".custom-panels-group").each(function( index ) {
+						var custom-panels-group = $(this);				
+						custom-panels-group.removeClass("col-sm-" + grid-col-size.oldValue );		
+						custom-panels-group.addClass("col-sm-" + grid-col-size.newValue );		
+					});
+				});
 				
 							
 				// 3. ACCOUNTS LOAD	
@@ -981,13 +988,13 @@
 
 <div class="btn-group" data-toggle="buttons">
   <label class="btn btn-primary">
-    <input type="radio" name="main-col-size" value="12"><i class="fa fa-square"></i>
+    <input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="main-col-size"  value="6"> <i class="fa fa-th-large"></i>
+    <input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="main-col-size"  value="4"> <i class="fa fa-th"></i>
+    <input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
   </label>
 </div>
 
@@ -995,11 +1002,9 @@
 						
 					</div>
 				</div>
-				<div class="row">					
-					<div class="col-sm-6">
-					
+				<div id="personalized-area" class="row">					
 						<!-- start announce panel -->						
-						<div id="announce-panel" class="custom-panels-group" style="display:none;">	
+						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">										
@@ -1015,16 +1020,16 @@
 							</div>		
 						</div>						
 						<!-- end announce panel -->		
-						<div id="demo-view-panel" class="custom-panels-group"></div>								
+						<div id="demo-view-panel" class="custom-panels-group col-sm-6"></div>								
 						<!-- start photo view panel -->
-						<div id="photo-view-panel" class="custom-panels-group" style="display: none;"></div>	
-						<div id="photo-gallery-panel" class="custom-panels-group" style="display: none;"></div>	
+						<div id="photo-view-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
+						<div id="photo-gallery-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
 						<!-- end photo view panel -->												
 						<!-- start attach view panel -->
-						<div id="attach-view-panel" class="custom-panels-group"></div>				
+						<div id="attach-view-panel" class="custom-panels-group col-sm-6"></div>				
 						<!-- end attach view panel -->		
 						<!-- start social view panels -->
-						<div id="social-view-panels"></div>	
+						<div id="social-view-panels class="custom-panels-group col-sm-6"></div>	
 						<!-- end social view panels -->
 												
 					</div>										
