@@ -985,7 +985,7 @@
 			<div  class="container" style="min-height:600px;">		
 				<div class="row">
 					<div class="col-sm-6">
-<button type="button" class="btn btn-default"><i class="fa fa-chevron-left fa-2x"></i>메뉴보기</button>						
+				
 
 <div class="btn-group" data-toggle="buttons">
   <label class="btn btn-primary">
@@ -998,6 +998,8 @@
     <input type="radio" name="main-col-size"  value="4"> <i class="fa fa-th"></i>
   </label>
 </div>
+
+<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i>메뉴보기</button>		
 
 												<button id="showRightPush">Show/Hide Right Push Menu</button>
 						<button id="showRight">Show/Hide Right Slide Menu</button>
