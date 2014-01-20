@@ -38,15 +38,15 @@
 				
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
-					var grid-col-size = $("#personalized-area").data("sizePlaceHolder");
-					grid-col-size.newValue = this.value;										
+					var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
+					grid_col_size.oldValue = grid_col_size.newValue;
+					grid_col_size.newValue = this.value;			
 					$(".custom-panels-group").each(function( index ) {
-						var custom-panels-group = $(this);				
-						custom-panels-group.removeClass("col-sm-" + grid-col-size.oldValue );		
-						custom-panels-group.addClass("col-sm-" + grid-col-size.newValue );		
+						var custom_panels_group = $(this);				
+						custom_panels_group.removeClass("col-sm-" + grid_col_size.oldValue );		
+						custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
 					});
-				});
-				
+				});				
 							
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
