@@ -959,7 +959,7 @@
 		
 		</style>   	
 	</head>
-	<body id="doc" class="cbp-spmenu-push">
+	<body id="doc">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
