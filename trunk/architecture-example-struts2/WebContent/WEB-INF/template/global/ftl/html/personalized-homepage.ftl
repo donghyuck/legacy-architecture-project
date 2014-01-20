@@ -27,14 +27,23 @@
 				
 				
 				var menuRight  = document.getElementById( 'cbp-spmenu-s2' ),
-				showRight = document.getElementById( 'showRight' );
+				showRightPush = document.getElementById( 'showRightPush' ),
+				showRight = document.getElementById( 'showRight' ),
+				body = document.body;
 				
 				showRight.onclick = function() {
 					classie.toggle( this, 'active' );
 					classie.toggle( menuRight, 'cbp-spmenu-open' );
 					//disableOther( 'showRight' );
 				};
-				
+
+			showRightPush.onclick = function() {
+				classie.toggle( this, 'active' );
+				classie.toggle( body, 'cbp-spmenu-push-toleft' );
+				classie.toggle( menuRight, 'cbp-spmenu-open' );
+				//disableOther( 'showRightPush' );
+			};
+							
 				// 2. ACCOUNTS LOAD	
 				var currentUser = new User({});			
 				var accounts = $("#account-panel").kendoAccounts({
