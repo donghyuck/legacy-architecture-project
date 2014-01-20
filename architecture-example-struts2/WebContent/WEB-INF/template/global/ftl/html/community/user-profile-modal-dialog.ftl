@@ -288,8 +288,21 @@
 								<div class="blank-top-5" ></div>					
 								<div class="container" style="width:100%">
 									<div class="row">				
-										<div id="my-social-network-list-view" class="col-sm-5"></div>			
+										<div id="my-social-network-list-view" class="col-sm-5"></div>	
+										<table class="table table-hover col-sm-7">
+											<thead>
+												<tr>
+													<th>미디어</th>
+													<th>&nbsp;</th>
+												</tr>
+											</thead>
+											<tbody >
+												<div id="my-social-network-account-details"></div>	
+											</tbody>
+										</table>		
+										<!--
 										<div id="my-social-network-account-details" class="col-sm-7"></div>	
+										-->
 									</div>
 								</div>	
 							</div>
@@ -300,7 +313,6 @@
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->	
-
 		
 		<!-- social network -->
 		<script type="text/x-kendo-template" id="my-social-network-account-details-template">
