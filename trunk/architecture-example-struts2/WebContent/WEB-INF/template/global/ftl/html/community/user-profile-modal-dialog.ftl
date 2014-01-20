@@ -48,6 +48,7 @@
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){
 									var selectedCell = this.dataItem( selectedCells );	    
+									
 									$("#my-social-network-grid").data( "networkPlaceHolder", selectedCell );																		
 									$.ajax({
 										type : 'POST',
@@ -61,7 +62,13 @@
 												$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );													
 											}
 										},
-										error:handleKendoAjaxError													
+										error:handleKendoAjaxError,
+										beforeSend : function() {
+											kendo.ui.progress($("#my-social-network-account-details"), true);
+										},
+										complete : function(){
+											kendo.ui.progress($("#my-social-network-account-details"), false);
+										}													
 									});	
 								}							
 							},
