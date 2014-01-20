@@ -979,7 +979,8 @@
 			<div  class="container" style="min-height:350px;">							
 				<div class="row">					
 					<div class="col-sm-12 col-md-8">						
-						
+												<button id="showRightPush">Show/Hide Right Push Menu</button>
+						<button id="showRight">Show/Hide Right Slide Menu</button>
 						
 						
 						<!-- start announce panel -->						
@@ -1012,8 +1013,7 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<button id="showRightPush">Show/Hide Right Push Menu</button>
-						<button id="showRight">Show/Hide Right Slide Menu</button>
+
 						
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
