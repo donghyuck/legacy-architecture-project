@@ -957,6 +957,9 @@
 			width: 100%;
 		}
 		
+	.cbp-spmenu-right {
+	right: -40%;
+	}		
 		</style>   	
 	</head>
 	<body id="doc" class="cbp-spmenu-push">
@@ -1041,7 +1044,7 @@
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 		
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2" style="width:40%;">
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 
 			
 						<ul class="nav nav-tabs" id="myTab">
