@@ -1055,8 +1055,9 @@
 		<!-- END TEMPLATE -->
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<div class=""></div>
-						
+			<div class="blank-top-66"></div>
+			<div class="panel panel-default">
+				<div class="panel-body">		
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
@@ -1226,6 +1227,8 @@
 							<!-- end photos -->
 						</div>
 						<!-- end of tab content -->		
+				</div>
+			</div>			
 		</section>		
 	</body>    
 </html>
