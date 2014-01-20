@@ -33,9 +33,20 @@
 				showRight.onclick = function() {
 					classie.toggle( this, 'active' );
 					classie.toggle( menuRight, 'cbp-spmenu-open' );
-					//disableOther( 'showRight' );
+					
+					var side_menu_icon = $(this).find( "i" );
+					if( side_menu_icon.hasClass("fa-chevron-left") ){
+						side_menu_icon.removeClass("fa-chevron-left");
+						side_menu_icon.addClass("fa-chevron-right");
+						$(this).text("메뉴 숨기기");
+					}else{
+						side_menu_icon.removeClass("fa-chevron-right");
+						side_menu_icon.addClass("fa-chevron-left");	
+						$(this).text("메뉴 보기");
+					}
+					
 				};
-				
+								
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
 					var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
@@ -1024,8 +1035,7 @@
 						<!-- end attach view panel -->		
 						<!-- start social view panels -->
 						<div id="social-view-panels class="custom-panels-group col-sm-6"></div>	
-						<!-- end social view panels -->
-												
+						<!-- end social view panels -->												
 					</div>										
 				</div>
 			</div>		
