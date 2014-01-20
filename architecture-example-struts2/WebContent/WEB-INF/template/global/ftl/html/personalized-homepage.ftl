@@ -956,6 +956,13 @@
 			max-width: 600px;
 			width: 100%;
 		}
+		.cbp-spmenu {
+		
+		}
+		.cbp-spmenu-vertical{
+			width: 40%;
+		}
+		
 		
 		</style>   	
 	</head>
