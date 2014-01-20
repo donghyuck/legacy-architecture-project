@@ -265,7 +265,7 @@
 													미디어
 													</th>
 													<th>
-													Details
+													상태
 													</th>													
 													</tr>
 												</thead>
