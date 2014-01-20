@@ -241,13 +241,13 @@
 													} 
 												},
 												requestStart: function() {
-													kendo.ui.progress($(${elementId}), true);
+													kendo.ui.progress($(elementId), true);
 												},
 												requestEnd: function() {
-													kendo.ui.progress($(${elementId}), false);
+													kendo.ui.progress($(elementId), false);
 												},
 												change: function() {
-													//$(${elementId}).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
+													//$(elementId).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
 												},
 												error:handleKendoAjaxError,
 												schema: {
