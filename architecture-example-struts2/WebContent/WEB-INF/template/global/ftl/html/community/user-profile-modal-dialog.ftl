@@ -44,7 +44,6 @@
 							}),
 							selectable: "single",
 							rowTemplate: kendo.template($("#social-network-grid-row-template").html()),
-							//altRowTemplate: kendo.template($("#social-network-grid-row-alt-template").html()),
 							change: function(e) { 				
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){
