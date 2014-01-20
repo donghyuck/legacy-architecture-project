@@ -91,8 +91,7 @@
 	var TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 	TWITTER_FEED_DATA    = "/community/get-facebook-homefeed.do?output=json",
 	FACEBOOK_FEED_URL   = "homeTimeline",
-	FACEBOOK_FEED_DATA = "homeFeed",
-	
+	FACEBOOK_FEED_DATA = "homeFeed";	
 	ui.kendoMediaStreams = kendo.Class.extend({
 		name : null,
 		data : null,
@@ -480,7 +479,7 @@
 	UPDATE = "update",
 	SYSTEM_ROLE = "ROLE_SYSTEM",
     NS = ".kendoAccounts",
-    open = false,
+	open = false,
 	DISABLED = "disabled";
 
 	ui.kendoAccounts = Widget.extend( {		
