@@ -225,9 +225,8 @@
 									var selectedCells = this.select();
 									if( selectedCells.length == 1){
 										var selectedCell = this.dataItem( selectedCells );		
-										$("#my-social-streams-grid").data("socialPlaceHolder", selectedCell);
-										$("#my-social-streams-grid").data("streams-" + selectedCell.socialAccountId )
-										if( ! $("#my-social-streams-grid").data("provider-" + selectedCell.socialAccountId ) ){										
+										$("#my-social-streams-grid").data("streamsPlaceHolder", selectedCell);
+										if( ! $("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId ) ){										
 											var selectedStreams = new MediaStreams(selectedCell.serviceProviderName);	
 											selectedStreams.mediaId = selectedCell.socialAccountId;												
 											if( selectedStreams.name == 'twitter'){
@@ -246,7 +245,7 @@
 													alert(selectedStreams.name);
 												}
 											});
-											$("#my-social-streams-grid").data("provider-" + selectedCell.socialAccountId , selectedStreams )
+											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams )
 										}
 										showSocialPanel();
 									}							
@@ -581,16 +580,14 @@
 								
 		function showSocialPanel ( ){
 
-			var socialPlaceHolder = $("#my-social-streams-grid").data("socialPlaceHolder");
-			var streamsProvider = $("#my-social-streams-grid").data("streams-" + socialPlaceHolder.socialAccountId ) ;
-			var renderToString =  socialPlaceHolder.serviceProviderName + "-panel-" + socialPlaceHolder.socialAccountId ;			
-		alert(streamsProvider);
-		alert(renderToString);
+			var streamsPlaceHolder = $("#my-social-streams-grid").data("socialPlaceHolder");
+			var streamsProvider = $("#my-social-streams-grid").data( socialPlaceHolder.serviceProviderName + "-streams-" + socialPlaceHolder.socialAccountId ) ;
+			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;			
 		
 			if( $("#" + renderToString ).length == 0  ){						
 				// create new social panel 
 				var template = kendo.template($("#social-view-panel-template").html());				
-				$("#social-view-panels").append( template( { provider: socialPlaceHolder } ) );												
+				$("#social-view-panels").append( template( { provider: streamsPlaceHolder } ) );												
 				if(streamsProvider.dataSource.total() == 0 )
 				{
 					streamsProvider.dataSource.read();
