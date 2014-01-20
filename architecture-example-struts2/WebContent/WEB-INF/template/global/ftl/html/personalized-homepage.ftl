@@ -1014,6 +1014,48 @@
 					</div>							
 					<div class="col-sm-12 col-md-4">
 
+				
+					</div>				
+				</div>
+			</div>		
+		<div id="attach-window"></div>					
+		<!-- END MAIN CONTENT -->		
+ 		<!-- START FOOTER -->
+		<#include "/html/common/common-homepage-footer.ftl" >		
+		<!-- END FOOTER -->	
+		
+		<!-- START TEMPLATE -->				
+		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
+			<div class="attach">			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
+			# } else { #			
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
+			# } #	
+				<div class="attach-description">
+					<h3>#:name#</h3>
+					<p>#:size# 바이트</p>
+				</div>
+			</div>
+		</script>	
+		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
+			<div class="attach">			
+			#if (contentType.match("^image") ) {#
+				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
+			# } else { #			
+				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
+			# } #	
+				<div class="attach-description">
+					<h3>#:name#</h3>
+					<p>#:size# 바이트</p>
+				</div>
+			</div>
+		</script>					
+		<#include "/html/common/common-homepage-templates.ftl" >		
+		<!-- END TEMPLATE -->
+		
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
+			<div class=""></div>
 						
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
@@ -1183,49 +1225,7 @@
 							</div>
 							<!-- end photos -->
 						</div>
-						<!-- end of tab content -->						
-					</div>				
-				</div>
-			</div>		
-		<div id="attach-window"></div>					
-		<!-- END MAIN CONTENT -->		
- 		<!-- START FOOTER -->
-		<#include "/html/common/common-homepage-footer.ftl" >		
-		<!-- END FOOTER -->	
-		
-		<!-- START TEMPLATE -->				
-		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
-			<div class="attach">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/secure/view-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" class="img-responsive"/>
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="attach-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>	
-		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
-			<div class="attach">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="attach-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>					
-		<#include "/html/common/common-homepage-templates.ftl" >		
-		<!-- END TEMPLATE -->
-		
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<div class=""></div>
-			<h3>Menu</h3>
+						<!-- end of tab content -->		
 		</section>		
 	</body>    
 </html>
