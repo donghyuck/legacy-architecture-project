@@ -1004,7 +1004,7 @@
 						    <input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						  </label>
 						</div>						
-						<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;메뉴보기</button>
+						<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left fa-2x"></i></button>
 					</div>
 				</div>
 				
