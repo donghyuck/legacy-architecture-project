@@ -21,6 +21,8 @@
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
+				
+				// 2.  MEUN 설정
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
@@ -39,7 +41,7 @@
 			});
 				
 							
-				// 2. ACCOUNTS LOAD	
+				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
 				var accounts = $("#account-panel").kendoAccounts({
 					dropdown : false,
@@ -87,7 +89,7 @@
 					}
 				});	
 				
-				// 3. ANNOUNCEMENT 	
+				// 4. CONTENT 	
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				// 1. Announces 								
 				$("#announce-grid").kendoGrid({
