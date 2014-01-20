@@ -4,7 +4,6 @@
 		<script type="text/javascript">
 		<!--
 		
-			
 			$("#my-profile-dialog form button").each(function( index ) {
 				var dialog_action = $(this);		
 				dialog_action.click(function (e) {
@@ -148,33 +147,7 @@
 			padding : 20px;
 			min-width:300px;
 		}	
-		#my-social-network-list-view .k-listview div.k-state-selected{
-			background: #ffffff;
-			color: #ffffff; 
-		}
-
-		#my-social-network-list-view .k-listview:after
-		{
-			content: ".";
-			display: block;
-			height: 0;
-			clear: both;
-			visibility: hidden;
-		}
-		
-		#my-social-network-list-view .k-listview
-		{
-			padding: 0;
-			min-width: 690px;
-			min-height: 100px;
-		}
-				
-		
-		#my-social-network-list-view {
-			padding: 0px;
-			border: 0px;		
-		}
-				
+			
 		</style>			
 		<div id="my-profile-dialog" class="modal-dialog">
 			<div class="modal-content">
@@ -248,6 +221,7 @@
 						<ul class="nav nav-tabs" id="my-profile-tab">
 							<li class="active"><a href="#profile-basic-info" data-toggle="tab">기본정보</a></li>
 							<li><a href="#profile-social-network" data-toggle="tab">쇼셜 네트워크</a></li>
+							<li><a href="#profile-application-cfg" data-toggle="tab">응용프로그램 설정</a></li>
 						</ul>
 						<!-- Tab panes -->
 						<div class="tab-content">
@@ -319,6 +293,10 @@
 									</div>
 								</div>	
 							</div>
+							<div class="tab-pane" id="profile-application-cfg">
+								<div class="blank-top-5" ></div>
+								준비중입니다.
+							</div>	
 						</div>					
 				</div>
 				<div class="modal-footer">
