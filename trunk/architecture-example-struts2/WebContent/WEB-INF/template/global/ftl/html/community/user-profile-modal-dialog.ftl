@@ -250,10 +250,35 @@
 								<div class="blank-top-5" ></div>					
 								<div class="container" style="width:100%">
 									<div class="row">				
-										<div id="my-social-network-grid" class="col-sm-5">
-										
-										</div>	
+										<div class="col-sm-5">
+											<table id="my-social-network-grid">
+												<colgroup>
+													<col class="photo" />
+													<col/>
+													<col/>
+												</colgroup>
+												<thead>
+													<tr>
+													<th>
+													Picture
+													</th>
+													<th>
+													Details
+													</th>
+													<th>
+													ID
+													</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td colspan="3"></td>
+													</tr>
+												</tbody>											
+											</div>
+										</div>
 										<div id="my-social-network-account-details" class="col-sm-7"></div>
+									</div>
 								</div>	
 							</div>
 						</div>					
@@ -316,6 +341,7 @@
 		</script>
 		<script type="text/x-kendo-template" id="social-network-grid-row-template">
 			<tr>
+				<td></td>
 				<td><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</td>
 				<td>
 				#if ( ! connected  ) { # 
