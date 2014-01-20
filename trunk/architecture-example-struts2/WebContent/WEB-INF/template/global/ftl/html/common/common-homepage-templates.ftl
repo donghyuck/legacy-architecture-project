@@ -207,9 +207,9 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="social-view-panel-template">
-		<div id="#: provider #-panel" class="panel panel-info">
+		<div id="#: serviceProviderName #-panel-#:socialAccountId#" class="panel panel-info">
 			<div class="panel-heading">
-				<i class="fa fa-#: provider # fa-fw"></i>&nbsp;&nbsp;#: provider # &nbsp; 소식
+				<i class="fa fa-#: serviceProviderName # fa-fw"></i>&nbsp;&nbsp;#: provider # &nbsp; 소식
 				<div class="k-window-actions panel-header-actions">
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 					<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -219,7 +219,7 @@
 			</div>
 			<div class="panel-body scrollable" style="max-height:500px;">
 				<ul class="media-list">
-					<div id="#:provider#-streams">데이터가 없습니다..</div>
+					<div id="#:serviceProviderName#-streams-#:socialAccountId#">데이터가 없습니다..</div>
 				</ul>
 			</div>
 		</div>				
