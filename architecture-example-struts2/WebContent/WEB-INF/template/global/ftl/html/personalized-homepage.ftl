@@ -29,7 +29,7 @@
 				var menuRight  = document.getElementById( 'cbp-spmenu-s2' ),
 				showRightPush = document.getElementById( 'showRightPush' ),
 				showRight = document.getElementById( 'showRight' ),
-				body = document.getElementById( 'mainContent' );
+				body = document.body;
 				
 				showRight.onclick = function() {
 					classie.toggle( this, 'active' );
@@ -964,7 +964,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div id="mainContent" class="container" style="min-height:350px;">							
+			<div class="container" style="min-height:350px;">							
 				<div class="row">					
 					<div class="col-sm-12 col-md-8">						
 						
