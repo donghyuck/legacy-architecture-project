@@ -112,6 +112,24 @@
 			}			
 			if (url) this.url = url;
 			if (data) this.data = data;
+		},
+		getDataSource : function (){
+			if( !this.dataSource ){
+				this.dataSource = new kendo.data.DataSource({
+					transport: {
+						read: {
+							type : 'POST',
+							type: "json",
+							url : this.url
+						} 
+					},
+					error:handleKendoAjaxError,
+					schema: {
+						data : this.data
+					}
+				});
+			}			
+			return dataSource;
 		}
 	});	
 	
