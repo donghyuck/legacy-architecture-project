@@ -580,7 +580,7 @@
 								
 		function showSocialPanel ( ){
 
-			var streamsPlaceHolder = $("#my-social-streams-grid").data("socialPlaceHolder");
+			var streamsPlaceHolder = $("#my-social-streams-grid").data("streamsPlaceHolder");
 			var streamsProvider = $("#my-social-streams-grid").data( streamsPlaceHolder.serviceProviderName + "-streams-" + streamsPlaceHolder.socialAccountId ) ;
 			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;			
 		
