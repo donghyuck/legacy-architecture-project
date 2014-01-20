@@ -991,7 +991,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px;">		
-				<div class="row blank-top-5">
+				<div class="row">
 					<div class="col-sm-6">
 						<div class="btn-group" data-toggle="buttons">
 						  <label class="btn btn-primary">
@@ -1003,7 +1003,9 @@
 						  <label class="btn btn-primary">
 						    <input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						  </label>
-						</div>						
+						</div>
+					</div>
+					<div class="col-sm-6">
 						<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left fa-2x"></i></button>
 					</div>
 				</div>
