@@ -15,7 +15,8 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.js',
-			'${request.contextPath}/js/common/common.ui.js'],
+			'${request.contextPath}/js/common/common.ui.js',
+			'${request.contextPath}/js/common/common.classie.js'],
 			complete: function() {
 			
 				// 1.  한글 지원을 위한 로케일 설정
@@ -23,8 +24,17 @@
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
+				
+				
+				var menuRight  = document.getElementById( 'cbp-spmenu-s2' ),
+				showRight.onclick = function() {
+					classie.toggle( this, 'active' );
+					classie.toggle( menuRight, 'cbp-spmenu-open' );
+					disableOther( 'showRight' );
+				};
+				
+				// 2. ACCOUNTS LOAD	
 				var currentUser = new User({});			
-				// ACCOUNTS LOAD	
 				var accounts = $("#account-panel").kendoAccounts({
 					dropdown : false,
 					authenticate : function( e ){
@@ -71,7 +81,7 @@
 					}
 				});	
 				
-				
+				// 3. ANNOUNCEMENT 	
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				// 1. Announces 								
 				$("#announce-grid").kendoGrid({
@@ -163,9 +173,8 @@
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-message-notes' ){						
 					
-					} else if(  $(this).attr('href') == '#my-streams-mgmt' ){
-						
 					} else if(  $(this).attr('href') == '#my-streams' ){					
+					
 						if( $("#social-view-panels").data( "providers") == null ){			
 							$("#social-view-panels").data( "providers", new kendo.data.ObservableObject({}) );
 							<#list action.companySocials as item >
@@ -211,7 +220,8 @@
 										</#if>	
 										}						
 									})
-							});							
+							});
+														
 							</#list>
 							$.each( $('#my-streams').find( '.social-connect-btn button' ) , function ( i, item ){					
 								$(item).click( function(){ 
@@ -482,13 +492,7 @@
 										objectType: 1,
 										objectId: $("#account-panel").data("currentUser" ).company.companyId  
 									}
-								},
-								/**
-								destroy: {
-									url: "/service/ImageBrowser/Destroy",
-									type: "POST"
-								},	
-								*/							
+								},						
 								thumbnailUrl: function( path, name, imageId ){
 									return "${request.contextPath}/community/download-image.do?width=150&height=150&imageId=" + imageId ;
 								},
@@ -952,6 +956,9 @@
 			<div class="container" style="min-height:350px;">							
 				<div class="row">					
 					<div class="col-sm-12 col-md-8">						
+						
+						
+						
 						<!-- start announce panel -->						
 						<div id="announce-panel" class="custom-panels-group" style="display:none;">	
 							<div class="panel panel-default">
@@ -982,24 +989,9 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<!--
-						<div class="panel panel-default">
-							<div class="panel-heading">프로그램
-									<div class="k-window-actions panel-header-actions">
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-									</div>
-							</div>
-							<div class="panel-body" style="padding: 5px;">
-								<ul class="nav nav-pills">
-									<li><a href="#"><i class="fa fa-comments-o"></i> 쪽지</a></li>
-									<li><a href="#"><i class="fa fa-calendar-o"></i> 달력</a></li>
-									<li><a href="#"><i class="fa fa-bookmark-o"></i> 북마크</a></li>
-									<li><a href="#"><i class="fa fa-pencil-square-o"></i> 노트</a></li>									
-								</ul>
-							</div>
-						</div>	
-						-->					
+						
+						<button id="showRight">Show/Hide Right Slide Menu</button>
+						
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
@@ -1007,23 +999,7 @@
 							<li>
 								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    쇼셜</a>
 							</li>							
-							<!--
-							<li class="dropdown">
-								<a href="#" id="my-messages-drop" class="dropdown-toggle" data-toggle="dropdown">메시지 <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="my-messages-drop">
-									<li class="active"><a href="#my-message-announces" tabindex="-1" data-toggle="tab"><i class="fa fa-bell-o"></i>    알림</a></li>		
-									<li><a href="#my-message-notes" tabindex="-1" data-toggle="tab"><i class="fa fa-comments-o"></i>   My 쪽지</a></li>							
-								</ul>
-							</li>		
-									
-							<li class="dropdown">
-								<a href="#" id="my-social-drop" class="dropdown-toggle" data-toggle="dropdown">쇼셜 <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="my-social-drop">
-									<li><a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 쇼셜</a></li>		
-									<li><a href="#my-streams-mgmt" tabindex="-1" data-toggle="tab"><i class="fa fa-cogs"></i>   My 쇼셜 관리</a></li>							
-								</ul>
-							</li>	
-									-->			
+							
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
