@@ -1014,8 +1014,7 @@
 								</div>
 							</div>		
 						</div>						
-						<!-- end announce panel -->		
-						<div id="demo-view-panel" class="custom-panels-group col-sm-6"></div>								
+						<!-- end announce panel -->								
 						<!-- start photo view panel -->
 						<div id="photo-view-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
 						<div id="photo-gallery-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
