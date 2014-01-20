@@ -29,7 +29,7 @@
 				var menuRight  = document.getElementById( 'cbp-spmenu-s2' ),
 				showRightPush = document.getElementById( 'showRightPush' ),
 				showRight = document.getElementById( 'showRight' ),
-				body = document.body;
+				body = document.getElementById( 'mainContent' );
 				
 				showRight.onclick = function() {
 					classie.toggle( this, 'active' );
@@ -39,7 +39,7 @@
 
 			showRightPush.onclick = function() {
 				classie.toggle( this, 'active' );
-				classie.toggle( $("#mainContent"), 'cbp-spmenu-push-toleft' );
+				classie.toggle( body, 'cbp-spmenu-push-toleft' );
 				classie.toggle( menuRight, 'cbp-spmenu-open' );
 				//disableOther( 'showRightPush' );
 			};
