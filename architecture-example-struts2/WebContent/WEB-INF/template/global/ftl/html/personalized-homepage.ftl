@@ -374,7 +374,8 @@
 								dataSource : $('#photo-list-view').data('kendoListView').dataSource
 							});	
 						}
-					} else if( $(this).attr('href') == '#my-photo-upload' ){							
+					} else if( $(this).attr('href') == '#my-photo-upload' ){
+						
 						// New Photo Upload			
 						if( !$("#photo-files").data("kendoUpload")	){						
 							$("#photo-files").kendoUpload({
@@ -1054,13 +1055,13 @@
 													<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
 												</a>
 												<div class="media-body">
-																		<div class="popover right" style="display:true;">
-																			<div class="arrow"></div>
-																			<!--<h3 class="popover-title">알림</h3>-->
-																			<div class="popover-content">
-																				<p>새로운 메시지가 없습니다.</p>
-																			</div>
-																		</div>	
+													<div class="popover right" style="display:true;">
+														<div class="arrow"></div>
+														<!--<h3 class="popover-title">알림</h3>-->
+														<div class="popover-content">
+															<p>새로운 메시지가 없습니다.</p>
+														</div>
+													</div>	
 												</div>
 											</li>
 											<li class="media">
