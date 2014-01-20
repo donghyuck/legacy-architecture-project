@@ -958,9 +958,10 @@
 		}
 		
 	.cbp-spmenu-right {
-	right: -40%;
+		right: -40%;
 	}		
 	.cbp-spmenu {
+		padding: 15px;
 		width:40%;
 	
 	}
@@ -1049,7 +1050,7 @@
 		<!-- END TEMPLATE -->
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-<div class="blank-top-66"></div>
+			<div class="blank-top-66"></div>
 			
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
