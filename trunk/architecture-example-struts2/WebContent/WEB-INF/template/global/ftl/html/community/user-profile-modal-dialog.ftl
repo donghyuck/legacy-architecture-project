@@ -378,21 +378,6 @@
 				# }  #  				
 				</td>
 			</tr>
-		
-			<div class="panel panel-default margin-buttom-5">
-				<div class="panel-heading"><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</div>	
-				<div class="panel-body" style="padding:10px;">				
-				#if ( ! connected  ) { # 
-				<button type="button" class="btn btn-default custom-social-network-connect" data-url="#:authorizationUrl#" ><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName# &nbsp; 연결</button>  
-				# } else { # 
-				<div class="btn-group">
-				<button type="button" class="btn btn-info custom-social-network-account" data-loading-text="정보를 가져오는 중입니다." data-media="#: serviceProviderName#" data-account="#:socialAccountId#"><i class="fa fa-user"></i></button>
-				<button type="button" class="btn btn-danger custom-social-network-disconnect">연결 취소</button>  
-				</div>
-				# }  #  
-				</div>
-			</div>
-			
 			
 		</script>			
 		<script type="text/x-kendo-template" id="social-network-list-view-template2">
