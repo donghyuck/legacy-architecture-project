@@ -48,7 +48,8 @@
 							change: function(e) { 				
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){
-									var selectedCell = this.dataItem( selectedCells );	    									
+									var selectedCell = this.dataItem( selectedCells );	    
+									$("#my-social-network-grid").data( "networkPlaceHolder", selectedCell );																		
 									$.ajax({
 										type : 'POST',
 										url : "${request.contextPath}/community/get-" + selectedCell.serviceProviderName + "-profile.do?output=json",
@@ -66,10 +67,20 @@
 								}							
 							},
 							dataBound: function(e) {
-								alert(this.dataSource.total()) ;
 								$("#my-social-network-grid button").each(function( index ) {
-									var grid_action = $(this);
-									alert( grid_action.html() );
+									var grid_action = $(this);									
+									if( grid_action.hasClass("custom-social-network-connect") ){
+										grid_action.click(function (e) {
+											e.preventDefault();	
+											var networkPlaceHolder = $("#my-social-network-grid").data( "networkPlaceHolder");
+											goSocialPopup(networkPlaceHolder.authorizationUrl + "&display=popup");
+										});
+									} else if( grid_action.hasClass("custom-social-network-disconnect") ){
+										grid_action.click(function (e) {
+											e.preventDefault();			
+											alert( "준비중입니다." ) ;									
+										});									 	
+									 }
 								});
 							},
 							height: 300
