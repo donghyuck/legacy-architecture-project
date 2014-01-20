@@ -78,7 +78,8 @@
 									} else if( grid_action.hasClass("custom-social-network-disconnect") ){
 										grid_action.click(function (e) {
 											e.preventDefault();			
-											alert( "준비중입니다." ) ;									
+											var networkPlaceHolder = $("#my-social-network-grid").data( "networkPlaceHolder");
+											alert( networkPlaceHolder.socialAccountId +  " 준비중입니다." ) ;									
 										});									 	
 									 }
 								});
