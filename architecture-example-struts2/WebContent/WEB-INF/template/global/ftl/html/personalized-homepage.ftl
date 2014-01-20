@@ -1147,7 +1147,7 @@
 											</table>	
 								<div class="alert alert-warning fade in">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-									<i class="fa fa-info"></i> &nbsp; 쇼셜 미디어를 선택하시면, 해당 미디어의 최신 뉴스를 볼수 있습니다.  미디어 추가는 프로파일의 쇼셜네크워크에서 제공합니다. 
+									<p><i class="fa fa-info"></i>쇼셜 미디어를 선택하시면, 해당 미디어의 최신 뉴스를 볼수 있습니다.  미디어 추가는 프로파일의 쇼셜네크워크에서 제공합니다. </p>
 								</div>		
 							</div>					
 							<!-- end social -->				
