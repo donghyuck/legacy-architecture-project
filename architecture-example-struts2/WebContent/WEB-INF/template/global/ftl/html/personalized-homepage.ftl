@@ -1000,7 +1000,7 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						
+						<button id="showRightPush">Show/Hide Right Push Menu</button>
 						<button id="showRight">Show/Hide Right Slide Menu</button>
 						
 						<ul class="nav nav-tabs" id="myTab">
@@ -1127,7 +1127,7 @@
 							</div>
 							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
-								<div class="panel panel-default" style="margin-bottom:0px;">					
+								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
