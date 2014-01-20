@@ -991,7 +991,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px;">		
-				<div class="row">
+				<div class="row blank-top-5">
 					<div class="col-sm-6">
 						<div class="btn-group" data-toggle="buttons">
 						  <label class="btn btn-primary">
