@@ -998,18 +998,18 @@
     <input type="radio" name="main-col-size"  value="6"> <i class="fa fa-th-large"></i>
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="main-col-size"  value="4"> <i class="fa fa-th-large"></i>
+    <input type="radio" name="main-col-size"  value="4"> <i class="fa fa-th"></i>
   </label>
-</div>						
-					</div>
-				</div>
-				<div class="row">					
-					<div class="col-sm-6">						
-					
+</div>
+
 												<button id="showRightPush">Show/Hide Right Push Menu</button>
 						<button id="showRight">Show/Hide Right Slide Menu</button>
 						
-						
+					</div>
+				</div>
+				<div class="row">					
+					<div class="col-sm-6">
+					
 						<!-- start announce panel -->						
 						<div id="announce-panel" class="custom-panels-group" style="display:none;">	
 							<div class="panel panel-default">
@@ -1037,7 +1037,8 @@
 						<!-- end attach view panel -->		
 						<!-- start social view panels -->
 						<div id="social-view-panels"></div>	
-						<!-- end social view panels -->						
+						<!-- end social view panels -->
+												
 					</div>										
 				</div>
 			</div>		
