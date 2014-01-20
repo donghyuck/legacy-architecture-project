@@ -1,3 +1,29 @@
+var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
+	_TWITTER_FEED_DATA    = "/community/get-facebook-homefeed.do?output=json",
+	_FACEBOOK_FEED_URL   = "homeTimeline",
+	_FACEBOOK_FEED_DATA = "homeFeed",	
+	MediaStreams = kendo.Class.extend({
+		name : null,
+		data : null,
+		url : null,
+		dataSource : null,		
+		init: function(name, url, data) {
+			if (name) this.name = name;				
+			if( name.toLowerCase() == 'twitter' )
+			{
+				this.url = _TWITTER_FEED_URL;
+				this.data = _TWITTER_FEED_DATA;
+			}
+			else if ( name.toLowerCase() == 'facebook' ){
+				this.url = _FACEBOOK_FEED_URL;
+				this.data = _FACEBOOK_FEED_DATA;								
+			}			
+			if (url) this.url = url;
+			if (data) this.data = data;
+		}
+	});	
+	
+
 var Announce = kendo.data.Model.define( {
     id: "announceId", // the identifier of the model
     fields: {
