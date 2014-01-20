@@ -89,17 +89,17 @@
 
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
 	var TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
-	TWITTER_FEED_DATA    = "/community/get-facebook-homefeed.do?output=json",
-	FACEBOOK_FEED_URL   = "homeTimeline",
+	FACEBOOK_FEED_URL    = "/community/get-facebook-homefeed.do?output=json",
+	TWITTER_FEED_DATA = "homeTimeline",
 	FACEBOOK_FEED_DATA = "homeFeed";	
+	
 	ui.kendoMediaStreams = kendo.Class.extend({
 		name : null,
 		data : null,
 		url : null,
 		dataSource : null,		
 		init: function(name, url, data) {
-			if (name) this.name = name;	
-			
+			if (name) this.name = name;				
 			if( name.toLowerCase() == 'twitter' )
 			{
 				this.url = TWITTER_FEED_URL;
