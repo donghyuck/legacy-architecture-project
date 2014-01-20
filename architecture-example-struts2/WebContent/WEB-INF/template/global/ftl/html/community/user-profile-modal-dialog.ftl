@@ -117,9 +117,6 @@
 			}else{
 				alert( "연결에 실패하였습니다." );
 			}
-				if($("#my-photo-upload").data("kendoUpload")){
-					$("#my-photo-upload").data("kendoUpload").dataSource.read();
-				}
 		}
 		-->
 		</script>
