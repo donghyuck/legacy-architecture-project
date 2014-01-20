@@ -957,7 +957,7 @@
 			width: 100%;
 		}
 		.cbp-spmenu {
-		
+			padding: 5px;
 		}
 		
 		.cbp-spmenu-right {
