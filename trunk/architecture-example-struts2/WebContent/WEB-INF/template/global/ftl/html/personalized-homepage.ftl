@@ -1008,7 +1008,7 @@
 						<!-- end social view panels -->						
 					</div>							
 					<div class="col-sm-12 col-md-4">
-						<button id="showRight">Show/Hide Right Slide Menu</button>						
+						<button id="showRightPush">Show/Hide Right Slide Menu</button>						
 										
 					</div>				
 				</div>
