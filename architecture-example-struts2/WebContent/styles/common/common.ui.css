@@ -909,7 +909,7 @@ div figure:hover figcaption {
 	background: #47a3da;
 	position: fixed;
 }
-
+/**
 .cbp-spmenu h3 {
 	color: #afdefa;
 	font-size: 1.9em;
@@ -934,7 +934,7 @@ div figure:hover figcaption {
 	background: #afdefa;
 	color: #47a3da;
 }
-
+**/
 /* Orientation-dependent styles for the content of the menu */
 
 .cbp-spmenu-vertical {
@@ -943,11 +943,12 @@ div figure:hover figcaption {
 	top: 0;
 	z-index: 1000;
 }
-
+/**
 .cbp-spmenu-vertical a {
 	border-bottom: 1px solid #258ecd;
 	padding: 1em;
 }
+**/
 
 .cbp-spmenu-horizontal {
 	width: 100%;
@@ -957,6 +958,7 @@ div figure:hover figcaption {
 	overflow: hidden;
 }
 
+/**
 .cbp-spmenu-horizontal h3 {
 	height: 100%;
 	width: 20%;
@@ -969,7 +971,7 @@ div figure:hover figcaption {
 	padding: 0.8em;
 	border-left: 1px solid #258ecd;
 }
-
+**/
 /* Vertical menu that slides from the left or right */
 
 .cbp-spmenu-left {
