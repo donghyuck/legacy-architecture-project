@@ -725,8 +725,7 @@
 			kendo.bind($("#attach-view-panel"), attachPlaceHolder );		
 			if( attachPlaceHolder.contentType == "application/pdf" ){
 				var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + attachPlaceHolder.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-			}
-			
+			}			
 			$("#attach-view-panel button").each(function( index ) {		
 				var panel_button = $(this);
 				panel_button.click(function (e) { 
@@ -745,7 +744,7 @@
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
-						$("div .custom-panels-group").hide();			
+						$('#attach-view-panel').hide();			
 					}					
 				});
 			});				
@@ -767,7 +766,6 @@
 				} 
 			});		
 			
-			//$("div .custom-panels-group").hide();
 			$('#attach-view-panel').show();			
 		}	
 				
