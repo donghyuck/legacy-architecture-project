@@ -35,7 +35,16 @@
 			return "/community/get-facebook-homefeed.do?output=json";			
 		}
 		return null;
-	}  
+	};  
+
+	ui.util.feedReturnSchemaData = function ( site ){
+		if( site == "twitter") {
+			return "homeTimeline";			
+		}else if ( site == "facebook"){
+			return "homeFeed";			
+		}
+		return null;
+	};  
 	
 	ui.kendoAlert = Widget.extend({		
 		init: function(element, options) {			
