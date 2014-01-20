@@ -3,7 +3,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 	_FACEBOOK_FEED_URL   = "homeTimeline",
 	_FACEBOOK_FEED_DATA = "homeFeed",	
 	MediaStreams = kendo.Class.extend({
-		networkId : 0,
+		mediaId : 0,
 		name : null,
 		data : null,
 		url : null,
@@ -22,6 +22,36 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			}			
 			if (url) this.url = url;
 			if (data) this.data = data;
+		},
+		setDataSource: function ( options ){
+			this.dataSource = new kendo.data.DataSource({
+				transport: {
+					read: {
+						type : 'POST',
+						type: "json",
+						url : this.url
+					} 
+				},
+				error:handleKendoAjaxError,
+				schema: {
+					data : this.data
+				}
+			});		
+			if( options.requestStart ){
+				this.dataSource.bind( 'requestStart' , options.requestStart );
+			}			
+			if( options.requestEnd ){
+				this.dataSource.bind( 'requestEnd' , options.requestEnd );
+			}			
+			if( options.change ){
+				this.dataSource.bind( 'change' , options.change );
+			}			
+		},
+		setTemplate: function ( template ){
+			if (template) this.template = template;	
+		}
+		renderToString : function () {
+			return  "#"+ this.name + "-streams-" + this.mediaId ;
 		}
 	});	
 	
