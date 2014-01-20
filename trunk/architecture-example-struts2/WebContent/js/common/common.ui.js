@@ -67,8 +67,7 @@
 
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	var observable = new kendo.data.ObservableObject({ title : "&nbsp;" } );
-	
+	var observable = new kendo.data.ObservableObject({ title : "&nbsp;" } );	
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
 			var that = this;
@@ -133,28 +132,6 @@
         		});
         		
         	});
-        	
-        	/**
-        	$("#announce-panel .panel-header-actions a").each(function( index ) {
-				var panel_header_action = $(this);		
-				panel_header_action.click(function (e) {
-					e.preventDefault();
-					if( panel_header_action.text() == "Minimize" ){
-						$("#announce-panel .panel-body").toggleClass("hide");								
-						var panel_header_action_icon = panel_header_action.find('span');
-						if( panel_header_action_icon.hasClass("k-i-minimize") ){
-							panel_header_action.find('span').removeClass("k-i-minimize");
-							panel_header_action.find('span').addClass("k-i-maximize");
-						}else{
-							panel_header_action.find('span').removeClass("k-i-maximize");
-							panel_header_action.find('span').addClass("k-i-minimize");
-						}							
-					}else if (panel_header_action.text() == "Close"){	
-						$("#announce-panel" ).hide();
-					}
-				});*/
-	
-        	
 		}
 	});
 	
@@ -250,7 +227,6 @@
  */
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-
 	ui.extTopBar = Widget.extend({
 		init: function(element, options) {			
 			var that = this;
@@ -263,8 +239,7 @@
 			that.render(options);	
 			
 		},
-		events : {
-			
+		events : {			
 		},
 		dataSource : null,
 		items : null,
@@ -327,8 +302,7 @@
 
 		},
 		select : function( item ){
-			var content = this.options.renderTo ;
-			
+			var content = this.options.renderTo ;			
 			content.find("form[role='navigation']").attr("action", item.action ).submit();	
 		},
 		getMenuItem : function( name ){
@@ -355,7 +329,6 @@
 		item : function (id){
 			return $('#' + id ).data("extDropDownList");			
 		}
-		// Function that controls opening of the pageslide
 	});
 
 	$.fn.extend( { 
@@ -373,8 +346,7 @@
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
 	var sliding = false;	
-	var $body = $('body');
-	
+	var $body = $('body');	
 	ui.kendoTopBar = Widget.extend({
 		init: function(element, options) {
 			var that = this;
@@ -428,13 +400,11 @@
 			e.preventDefault();
 		}
 	});
-
 	$.fn.extend( { 
 		kendoTopBar : function ( options ) {
 			return new ui.kendoTopBar ( this , options );		
 		}
-	});
-	
+	});	
 })(jQuery);
 
 /**
@@ -596,8 +566,7 @@
     open = false,
 	DISABLED = "disabled";
 
-	ui.kendoAccounts = Widget.extend( {
-		
+	ui.kendoAccounts = Widget.extend( {		
 		init: function(element, options) {	
 			var that = this;			
 			Widget.fn.init.call(that, element, options);
@@ -669,22 +638,18 @@
     	},
         render : function(){
         	//that.trigger( UPDATE, {token: user});
-        	var that = this, element, content  ;        	
-
+        	var that = this, element, content;
         	if( that.options.photoUrl != null ){
         		that.token.photoUrl = that.options.photoUrl ;
         	}else{
         		that.token.photoUrl = null;
-        	}
-        	        	
+        	}        	        	
         	if( that.token.properties.imageId ){
         		that.token.photoUrl = PHOTO_URL + '&imageId=' + that.token.properties.imageId ;	
         	}
-
         	if( that.options.template ){
         		that.element.html( that.options.template( that.token ) );        		
-        	}
-        	
+        	}        	
         	if( that.options.dropdown ){
 	        	$(that.element).on('click.fndtn.dropdown', '[data-dropdown]', function (e) {        		
 	                e.preventDefault();
@@ -721,8 +686,7 @@
 		kendoAccounts : function ( options ) {
 			return new ui.kendoAccounts ( this , options );		
 		}
-	});
-	
+	});	
 })(jQuery);
 
 function handleKendoAjaxError(xhr) {
@@ -755,35 +719,30 @@ function handleKendoAjaxError(xhr) {
 		}
 	});
 };
+
 (function($, window, document, undefined) {
 	'use strict';
-
 	var settings = {
 		callback : $.noop,
 		deep_linking : true,
 		init : false
 	},
-
 	methods = {
 		init : function(options) {
 			settings = $.extend({}, settings, options);
-
 			return this.each(function() {
 				if (!settings.init)
 					methods.events();
-
 				if (settings.deep_linking)
 					methods.from_hash();
 			});
 		},
-
 		events : function() {
 			$(document).on('click.fndtn', '.tabs a', function(e) {
 				methods.set_tab($(this).parent('dd, li'), e);
 			});
 			settings.init = true;
 		},
-
 		set_tab : function($tab, e) {
 			var $activeTab = $tab.closest('dl, ul').find('.active'), target = $tab.children('a').attr("href"), hasHash = /^#/.test(target), $content = $(target + 'Tab');
 			if (hasHash && $content.length > 0) {
@@ -793,14 +752,11 @@ function handleKendoAjaxError(xhr) {
 				$content.closest('.tabs-content').children('li').removeClass('active').hide();
 				$content.css('display', 'block').addClass('active');
 			}
-
 			// Make active tab
 			$activeTab.removeClass('active');
 			$tab.addClass('active');
-
 			settings.callback();
 		},
-
 		from_hash : function() {
 			var hash = window.location.hash, $tab = $('a[href="' + hash + '"]');
 			$tab.trigger('click.fndtn');
