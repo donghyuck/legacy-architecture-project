@@ -225,55 +225,31 @@
 									var selectedCells = this.select();
 									if( selectedCells.length == 1){
 										var selectedCell = this.dataItem( selectedCells );		
-										var selectedStreams = new MediaStreams(selectedCell.serviceProviderName);
-										
-										alert( selectedStreams.url );										
-										
-										$("#my-social-streams-grid").data( "newtorkPlaceHolder", selectedCell );
-																				
-										if(  $("#my-social-streams-grid").data("providers") == null ){
-											$("#my-social-streams-grid").data("providers", new kendo.data.ObservableObject({}) );
-										} 
-										var elementId =  "#"+ selectedCell.serviceProviderName + "-streams";	
-										
-										if( 	$("#my-social-streams-grid").data("providers").get( elementId ) == null ){
-										
-											$("#social-view-panels").data( "providers").set( elementId ,{
+										$("#my-social-streams-grid").data("socialPlaceHolder", selectedCell);
+										$("#my-social-streams-grid").data("streams-" + selectedCell.socialAccountId )
+										if( ! $("#my-social-streams-grid").data("provider-" + selectedCell.socialAccountId ) ){										
+											var selectedStreams = new MediaStreams(selectedCell.serviceProviderName);	
+											selectedStreams.mediaId = selectedCell.socialAccountId;	
 											
 											
-											});
-										}	
-										
-										if( selectedCell.dataSource == null ){	
-											selectedCell.dataSource = new kendo.data.DataSource({
-												transport: {
-													read: {
-														type : 'POST',
-														type: "json",
-														url : '${request.contextPath}' + ui.util.feedUrl(selectedCell.serviceProviderName)
-													},
-													parameterMap: function (options, operation){
-														if (operation == "read" && options) {										                        								                       	 	
-															return { socialAccountId: selectedCell.socialAccountId };									                            	
-														}
-													} 
+											if( selectedStreams.name == 'twitter'){
+												selectedStreams.setTempalte ( kendo.template($("#twitter-timeline-template").html()) );											
+											}else if ( selectedStreams.name == 'facebook'){
+												selectedStreams.setTempalte( kendo.template($("#facebook-homefeed-template").html()) );
+											}
+											selectedStreams.setDataSource({
+												requestStart : function(){
+													alert(selectedStreams.name);
 												},
-												requestStart: function() {
-													kendo.ui.progress($(elementId), true);
+												requestEnd : function(){
+													alert(selectedStreams.name);
 												},
-												requestEnd: function() {
-													kendo.ui.progress($(elementId), false);
-												},
-												change: function() {
-													//$(elementId).html(kendo.render( $("#social-view-panels").data( "providers").get( "item.serviceProviderName" ).template, this.view()));
-												},
-												error:handleKendoAjaxError,
-												schema: {
-													data : ui.util.feedReturnSchemaData(selectedCell.serviceProviderName)
+												change : function(){
+													alert(selectedStreams.name);
 												}
-											});												
+											});
+											$("#my-social-streams-grid").data("provider-" + selectedCell.socialAccountId , selectedStreams )
 										}
-										
 										showSocialPanel();
 									}							
 								},
@@ -467,8 +443,7 @@
 
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
-			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );	
-			
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );				
 			if( announcePlaceHolder.modifyAllowed ){						
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
@@ -607,26 +582,26 @@
 		}	
 								
 		function showSocialPanel ( ){
+
+			var socialPlaceHolder = $("#my-social-streams-grid").data("socialPlaceHolder");
+			var streamsProvider = $("#my-social-streams-grid").data("streams-" + socialPlaceHolder.socialAccountId ) ;
+			var renderToString =  socialPlaceHolder.serviceProviderName + "-panel-" + socialPlaceHolder.socialAccountId ;			
 		
-			var newtorkPlaceHolder = $("#my-social-streams-grid").data( "newtorkPlaceHolder" );					
-			var elementId =  newtorkPlaceHolder.serviceProviderName + "-panel";			
-			
-			if( $("#" + elementId ).length == 0  ){						
+			if( $("#" + renderToString ).length == 0  ){						
 				// create new social panel 
 				var template = kendo.template($("#social-view-panel-template").html());				
-				$("#social-view-panels").append( template( { provider: newtorkPlaceHolder } ) );												
-				// get dataSource
-				if( newtorkPlaceHolder.dataSource.total() == 0 )
+				$("#social-view-panels").append( template( { provider: socialPlaceHolder } ) );												
+				if(streamsProvider.dataSource.total() == 0 )
 				{
-					dataSource.read();
-				} 								
-				$( '#'+ elementId + ' .panel-header-actions a').each(function( index ) {
+					streamsProvider.dataSource.read();
+				}
+				$( '#'+ renderToString + ' .panel-header-actions a').each(function( index ) {
 					var social_header_action = $(this);
 					social_header_action.click(function (e){
 						e.preventDefault();		
 						var social_header_action_icon = social_header_action.find('span');
 						if (social_header_action.text() == "Minimize"){
-							$( "#"+ elementId +" .panel-body").toggleClass("hide");				
+							$( "#"+ renderToString +" .panel-body").toggleClass("hide");				
 							if( social_header_action_icon.hasClass("k-i-maximize") ){
 								social_header_action_icon.removeClass("k-i-maximize");
 								social_header_action_icon.addClass("k-i-minimize");
@@ -637,12 +612,12 @@
 						} else if (social_header_action.text() == "Refresh"){	
 							socialServiceProviders[ provider ].dataSource.read();
 						} else if (social_header_action.text() == "Close"){	
-							$("#" + elementId ).hide();
+							$("#" + renderToString ).hide();
 						}
 					});			
 				} );			
 			} else {
-				$("#" + elementId ).show();
+				$("#" + renderToString ).show();
 			} 
 		}		
 				
