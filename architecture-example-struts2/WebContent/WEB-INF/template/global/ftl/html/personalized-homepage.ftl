@@ -979,7 +979,7 @@
 		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px;">							
 				<div class="row">					
-					<div class="col-sm-12">						
+					<div class="col-sm-6">						
 												<button id="showRightPush">Show/Hide Right Push Menu</button>
 						<button id="showRight">Show/Hide Right Slide Menu</button>
 						
