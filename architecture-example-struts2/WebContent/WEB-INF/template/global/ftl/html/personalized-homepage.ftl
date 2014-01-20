@@ -1127,6 +1127,25 @@
 							</div>							
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
+
+											<table id="my-social-streams-grid">
+												<colgroup>
+													<col/>
+												</colgroup>
+												<thead>
+													<tr>
+													<th>
+													미디어
+													</th>															
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td></td>
+													</tr>
+												</tbody>
+											</table>	
+																			
 								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
 									<div class="panel-body">
@@ -1150,25 +1169,10 @@
 									</div>
 								</div>					
 							</div>		
+							<!--
 							<div class="tab-pane" id="my-streams-mgmt">				
 								<div class="blank-top-5" ></div>	
-											<table id="my-social-streams-grid">
-												<colgroup>
-													<col/>
-												</colgroup>
-												<thead>
-													<tr>
-													<th>
-													미디어
-													</th>															
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td></td>
-													</tr>
-												</tbody>
-											</table>	
+
 											
 								
 								<div class="panel panel-default" style="margin-bottom:0px;">
@@ -1187,6 +1191,7 @@
 									</div>
 								</div>								
 							</div>	
+							-->
 							<!-- end messages -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-file-upload">
