@@ -1145,7 +1145,7 @@
 													</tr>
 												</tbody>
 											</table>	
-																			
+											<p><i class="fa fa-info"></i> &nbsp; 쇼셜 미디어는 프로파일의 쇼셜네크워크에서 추가하실 수 있습니다. </p>								
 								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading"> 쇼셜미디어 버튼을 클릭하면, 쇼셜미디어 최신 뉴스를 볼수 있습니다.</div>
 									<div class="panel-body">
