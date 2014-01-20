@@ -1145,9 +1145,10 @@
 													</tr>
 												</tbody>
 											</table>	
-											<p><i class="fa fa-info"></i> &nbsp; 쇼셜 미디어는 프로파일의 쇼셜네크워크에서 추가하실 수 있습니다. </p>				
-											<p><i class="fa fa-info"></i> &nbsp; 쇼셜 미디어를 선택하시면, 해당 미디어의 최신 뉴스를 볼수 있습니다. </p>			
-								</div>
+								<div class="alert alert-warning fade in">
+									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+									<i class="fa fa-info"></i> &nbsp; 쇼셜 미디어를 선택하시면, 해당 미디어의 최신 뉴스를 볼수 있습니다.  미디어 추가는 프로파일의 쇼셜네크워크에서 제공합니다. 
+								</div>		
 							</div>					
 							<!-- end social -->				
 							<!-- start attachement -->
