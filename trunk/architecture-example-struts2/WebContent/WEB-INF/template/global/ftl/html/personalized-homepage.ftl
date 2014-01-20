@@ -999,10 +999,7 @@
   </label>
 </div>
 
-<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i>메뉴보기</button>		
-
-												<button id="showRightPush">Show/Hide Right Push Menu</button>
-						<button id="showRight">Show/Hide Right Slide Menu</button>
+<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i>&nbsp;메뉴보기</button>		
 						
 					</div>
 				</div>
