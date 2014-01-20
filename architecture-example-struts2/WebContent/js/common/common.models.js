@@ -3,10 +3,12 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 	_FACEBOOK_FEED_URL   = "homeTimeline",
 	_FACEBOOK_FEED_DATA = "homeFeed",	
 	MediaStreams = kendo.Class.extend({
+		networkId : 0,
 		name : null,
 		data : null,
 		url : null,
 		dataSource : null,		
+		template: null,
 		init: function(name, url, data) {
 			if (name) this.name = name;				
 			if( name.toLowerCase() == 'twitter' )
