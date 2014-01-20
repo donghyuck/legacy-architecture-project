@@ -256,26 +256,22 @@
 											<!-- start my social network grid -->	
 											<table id="my-social-network-grid">
 												<colgroup>
-													<col class="photo" />
 													<col/>
 													<col/>
 												</colgroup>
 												<thead>
 													<tr>
 													<th>
-													Picture
+													미디어
 													</th>
 													<th>
 													Details
-													</th>
-													<th>
-													ID
-													</th>
+													</th>													
 													</tr>
 												</thead>
 												<tbody>
 													<tr>
-														<td colspan="3"></td>
+														<td colspan="2"></td>
 													</tr>
 												</tbody>
 											</table>	
@@ -345,7 +341,6 @@
 		</script>
 		<script type="text/x-kendo-template" id="social-network-grid-row-template">
 			<tr>
-				<td></td>
 				<td><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</td>
 				<td>
 				#if ( ! connected  ) { # 
@@ -361,7 +356,6 @@
 		</script>	
 		<script type="text/x-kendo-template" id="social-network-grid-row-alt-template">
 			<tr class="k-alt">
-				<td></td>
 				<td><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</td>
 				<td>
 				#if ( ! connected  ) { # 
