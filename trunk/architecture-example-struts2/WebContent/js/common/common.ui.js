@@ -98,6 +98,7 @@
 		data : null,
 		url : null,
 		dataSource : null,		
+		template: null,
 		init: function(name, url, data) {
 			if (name) this.name = name;				
 			if( name.toLowerCase() == 'twitter' )
