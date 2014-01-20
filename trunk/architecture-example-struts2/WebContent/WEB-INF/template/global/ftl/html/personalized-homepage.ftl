@@ -987,13 +987,13 @@
 						</div>
 <div class="btn-group" data-toggle="buttons">
   <label class="btn btn-primary">
-    <input type="radio" name="options" id="option1"><i class="fa fa-square"></i>
+    <input type="radio" name="main-col-size" value="12"><i class="fa fa-square"></i>
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="options" id="option2"> <i class="fa fa-th-large"></i>
+    <input type="radio" name="main-col-size"  value="6"> <i class="fa fa-th-large"></i>
   </label>
   <label class="btn btn-primary">
-    <input type="radio" name="options" id="option3"> <i class="fa fa-th-large"></i>
+    <input type="radio" name="main-col-size"  value="4"> <i class="fa fa-th-large"></i>
   </label>
 </div>						
 					</div>
