@@ -247,7 +247,7 @@
 													kendo.ui.progress($(elementId), false);
 												},
 												change: function() {
-													//$(elementId).html(kendo.render( $("#social-view-panels").data( "providers").get( "${item.serviceProviderName}" ).template, this.view()));
+													//$(elementId).html(kendo.render( $("#social-view-panels").data( "providers").get( "item.serviceProviderName" ).template, this.view()));
 												},
 												error:handleKendoAjaxError,
 												schema: {
