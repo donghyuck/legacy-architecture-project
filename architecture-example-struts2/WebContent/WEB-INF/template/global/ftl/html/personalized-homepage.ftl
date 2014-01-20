@@ -584,6 +584,8 @@
 			var socialPlaceHolder = $("#my-social-streams-grid").data("socialPlaceHolder");
 			var streamsProvider = $("#my-social-streams-grid").data("streams-" + socialPlaceHolder.socialAccountId ) ;
 			var renderToString =  socialPlaceHolder.serviceProviderName + "-panel-" + socialPlaceHolder.socialAccountId ;			
+		alert(streamsProvider);
+		alert(renderToString);
 		
 			if( $("#" + renderToString ).length == 0  ){						
 				// create new social panel 
