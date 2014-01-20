@@ -20,8 +20,8 @@
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault();				
 				if( $(this).attr('href') == '#profile-social-network' ){					
-					if( !$("#my-social-network-list-view" ).data('kendoListView') ){
-						$("#my-social-network-list-view").kendoListView({
+					if( !$("#my-social-network-grid" ).data('kendoGrid') ){
+						$("#my-social-network-grid").kendoGrid({
 							dataSource: new kendo.data.DataSource({
 								transport: {
 									read: {
@@ -40,51 +40,13 @@
 								schema: {
 									data : "socialNetworks",
 									model : SocialNetwork
-								}
+								},
 							}),
 							selectable: "single",
-							template: kendo.template($("#social-network-list-view-template").html()),
-							change: function(e) { 
-								var data = this.dataSource.view() ;
-								var selectedCell = data[this.select().index()];					
+							template: kendo.template($("#social-network-grid-row-template").html()),
+							change: function(e) { 				
 							},
-							dataBound: function(e) {				
-								this.select( this.element.children().first() );									
-								$("#my-social-network-list-view button").each(function( index ) {
-									var list_view_action = $(this);
-									if( list_view_action.hasClass("custom-social-network-connect") ){
-										list_view_action.click(function (e) {
-											e.preventDefault();	
-											goSocialPopup(list_view_action.attr("data-url"));
-										});
-									}else if( list_view_action.hasClass("custom-social-network-disconnect") ){
-										list_view_action.click(function (e) {
-											e.preventDefault();												
-										});
-									}else if ( list_view_action.hasClass("custom-social-network-account") ){ 
-										var _myMediaId = list_view_action.attr("data-id");
-										var _myMedia = list_view_action.attr("data-media");
-										
-										list_view_action.click(function (e) {
-											$.ajax({
-												type : 'POST',
-												url : "${request.contextPath}/community/get-" + _myMedia + "-profile.do?output=json",
-												data: { socialNetworkId: _myMediaId },
-												success : function(response){
-													if( response.error ){
-															// 연결실패.
-													} else {	
-														var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
-														$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );											
-														//alert( kendo.stringify(response) );		
-													}
-												},
-												error:handleKendoAjaxError													
-											});	
-										});
-									
-									}
-								});	
+							dataBound: function(e) {
 							}
 						});								
 					}				
@@ -288,22 +250,10 @@
 								<div class="blank-top-5" ></div>					
 								<div class="container" style="width:100%">
 									<div class="row">				
-										<div id="my-social-network-list-view" class="col-sm-5"></div>	
-										<table class="table table-hover col-sm-7">
-											<thead>
-												<tr>
-													<th>미디어</th>
-													<th>&nbsp;</th>
-												</tr>
-											</thead>
-											<tbody >
-												<div id="my-social-network-account-details"></div>	
-											</tbody>
-										</table>		
-										<!--
-										<div id="my-social-network-account-details" class="col-sm-7"></div>	
-										-->
-									</div>
+										<div id="my-social-network-grid" class="col-sm-5">
+										
+										</div>	
+										<div id="my-social-network-account-details" class="col-sm-7"></div>
 								</div>	
 							</div>
 						</div>					
