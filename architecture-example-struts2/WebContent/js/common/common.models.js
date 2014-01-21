@@ -28,7 +28,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			var that = this;			
 			
 			if( !options.transport.parameterMap ){
-				options.transport.parameterMap = function (data, type){
+				options.transport.parameterMap =  function( options,  operation) {
 					return {};
 				}				
 			}
