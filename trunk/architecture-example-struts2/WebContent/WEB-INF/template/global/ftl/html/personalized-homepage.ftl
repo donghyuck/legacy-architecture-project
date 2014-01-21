@@ -772,11 +772,7 @@
 				}
 			} );													
 			panel.show();			
-		}
-		
-		
-		
-				
+		}				
 		-->
 		</script> 		   
 		
@@ -1023,13 +1019,7 @@
 									<div  id="announce-view"></div>
 								</div>
 							</div>		
-						</div>						
-						<!-- end announce panel -->								
-						<!-- start photo view panel -->
-						<div id="photo-view-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
-						<div id="photo-gallery-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
-						<!-- end photo view panel -->												
-				
+						</div>
 					</div>										
 				</div>
 			</div>		
