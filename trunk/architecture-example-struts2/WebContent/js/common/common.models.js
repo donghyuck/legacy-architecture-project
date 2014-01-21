@@ -40,13 +40,13 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			if( options.requestStart ){				
 				this.dataSource.bind( 'requestStart' , options.requestStart );
 			}else{
-				this.dataSource.bind( 'requestStart' , options.kendo.ui.progress($(this.renderToString())), true) );
+				this.dataSource.bind( 'requestStart' , kendo.ui.progress($(this.renderToString())), true) );
 			}	
 			
 			if( options.requestEnd ){
 				this.dataSource.bind( 'requestEnd' , options.requestEnd );
 			}else{
-				this.dataSource.bind( 'requestEnd' , options.kendo.ui.progress($(this.renderToString())), false) );
+				this.dataSource.bind( 'requestEnd' , kendo.ui.progress($(this.renderToString())), false) );
 			}			
 			if( options.change ){
 				this.dataSource.bind( 'change' , options.change );
