@@ -98,7 +98,8 @@
 							}
 						} else if (social_header_action.text() == "Refresh"){								
 							${stream_name}.dataSource.read();							
-						} 							
+						} 
+					});								
 				});
 				</#list>	
 				
