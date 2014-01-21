@@ -610,7 +610,7 @@
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
 			}	
-			var attachPlaceHolder = $("#attachment-list-view").data( "attachPlaceHolder", item );		
+			var attachPlaceHolder = $("#attachment-list-view").data( "attachPlaceHolder" );		
 			var template = kendo.template($('#file-view-template').html());			
 			$('#' + renderToString ).html( template(attachPlaceHolder) );	
 			kendo.bind($('#' + renderToString ), attachPlaceHolder );					
