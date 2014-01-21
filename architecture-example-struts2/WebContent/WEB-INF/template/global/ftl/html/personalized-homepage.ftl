@@ -993,7 +993,7 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<button id="show-right-slide" type="button" class="btn btn-info pull-right"><i class="fa fa-bars"></i></button>
+						<button id="show-right-slide" type="button" class="btn btn-success pull-right"><i class="fa fa-bars"></i></button>
 					</div>
 				</div>
 				
