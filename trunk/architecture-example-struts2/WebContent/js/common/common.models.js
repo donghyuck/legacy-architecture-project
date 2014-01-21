@@ -24,20 +24,21 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			if (data) this.data = data;
 		},
 		setDataSource: function ( options ){
+			var that = this;
 			this.dataSource = new kendo.data.DataSource({
 				transport: {
 					read: {
 						type : 'POST',
 						type: "json",
-						url : this.url
+						url : that.url
 					} 
 				},
 				error:handleKendoAjaxError,
 				schema: {
-					data : this.data
+					data : that.data
 				},
 				change : function () {
-					this.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
+					that.elementToRender().html(kendo.render( that.template, this.view()));
 				}
 			});		
 /*
