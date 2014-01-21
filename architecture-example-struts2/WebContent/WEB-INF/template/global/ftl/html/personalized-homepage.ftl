@@ -595,7 +595,7 @@
 						} else if (social_header_action.text() == "Refresh"){								
 							streamsProvider.dataSource.read();							
 						} else if (social_header_action.text() == "Close"){	
-							$("#" + renderToString ).parent().hide();
+							$("#" + renderToString ).parent().remove();
 						}
 					});			
 				} );			
@@ -617,17 +617,14 @@
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#colSize#" style="display:none;"></div>');				
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue} ) );	
-			}
-									
+			}									
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#file-view-template').html());			
 			$('#' + renderToString ).html( template(attachPlaceHolder) );	
-			kendo.bind($('#' + renderToString ), attachPlaceHolder );		
-			
+			kendo.bind($('#' + renderToString ), attachPlaceHolder );					
 			if( attachPlaceHolder.contentType == "application/pdf" ){
 				var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + attachPlaceHolder.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-			}
-			
+			}			
 			$("#attach-view-panel button").each(function( index ) {		
 				var panel_button = $(this);
 				panel_button.click(function (e) { 
@@ -648,8 +645,7 @@
 						$('#' + renderToString ).remove();
 					}
 				});
-			});		
-					
+			});							
 			$("#update-attach-file").kendoUpload({
 				multiple: false,
 				async: {
