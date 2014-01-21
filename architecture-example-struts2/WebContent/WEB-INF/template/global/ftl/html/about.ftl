@@ -83,14 +83,20 @@
 				</#if>
 				${stream_name}.createDataSource({ 
 					transport : {
-						parameterMap : function(data, type) {
-							alert( type ) ;
-							 if (type == "read") {
-							 	return { objectType : 1 };
-							 } 
+						parameterMap : function( options,  operation) {
+							return { objectType : 1 };
 						} 
 					}
 				});
+				
+				parameterMap: function (options, operation){	          
+								if (operation != "read" && options) {
+									return { companyId: options.companyId, item: kendo.stringify(options)};
+								}else{
+									return { startIndex: options.skip, pageSize: options.pageSize }
+								}
+							}
+							
 				${stream_name}.dataSource.read();
 				
 				$( "${panel_element_id} .panel-header-actions a").each(function( index ) {
