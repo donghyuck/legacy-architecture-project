@@ -227,15 +227,11 @@
 					<div id="event-area">						
 						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
 							<div class="panel-heading" style="background-color:#ffffff;">
-								<button type="button" class="close" aria-hidden="true"><span role="presentation" class="k-icon k-i-refresh fa-2x"></span></button>
-								<h4>&nbsp;</h4>
-								<!--
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 								</div>			
-								-->			
 							</div>
 							<div class="panel-body" style="padding-top:25px;">
 								<div id="announce-list-view"></div>	
