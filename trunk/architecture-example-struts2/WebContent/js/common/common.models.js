@@ -26,8 +26,10 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 		},
 		createDataSource: function ( options ){
 			var that = this;			
-			if( !options.data ){}
-				options.data = {};
+			if( !options.transport.parameterMap ){
+				options.transport.parameterMap = function (data, type){
+					return {};
+				}				
 			}
 			
 			this.dataSource = new kendo.data.DataSource({
@@ -36,7 +38,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 						type : 'POST',
 						type: "json",
 						url : that.url,
-						data : options.data
+						parameterMap : options.transport.parameterMap
 					} 
 				},
 				error:handleKendoAjaxError,
