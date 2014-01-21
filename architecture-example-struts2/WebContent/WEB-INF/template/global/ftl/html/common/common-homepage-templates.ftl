@@ -220,7 +220,7 @@
 			</div>
 			<div class="panel-body scrollable" style="max-height:500px;">
 				<ul class="media-list">
-					<div id="#:serviceProviderName#-streams-#:socialAccountId#">데이터가 없습니다..</div>
+					<div id="#:serviceProviderName#-streams-#:socialAccountId#">&nbsp;</div>
 				</ul>
 			</div>
 		</div>	
