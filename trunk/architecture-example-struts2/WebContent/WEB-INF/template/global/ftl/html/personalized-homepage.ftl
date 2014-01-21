@@ -590,8 +590,8 @@
 								social_header_action_icon.removeClass("k-i-minimize");
 								social_header_action_icon.addClass("k-i-maximize");
 							}
-						} else if (social_header_action.text() == "Refresh"){	
-							socialServiceProviders[ provider ].dataSource.read();
+						} else if (social_header_action.text() == "Refresh"){								
+							streamsProvider.dataSource.read();							
 						} else if (social_header_action.text() == "Close"){	
 							$("#" + renderToString ).hide();
 						}
