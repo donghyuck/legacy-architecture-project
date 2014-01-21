@@ -225,8 +225,8 @@
 				</div>
 				<div class="col-lg-9">		
 					<div id="event-area">						
-						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
-							<div class="panel-heading" style="background-color:#ffffff;">
+						<div id="announce-list-view-panel" class="panel panel-default">
+							<div class="panel-heading">
 								&nbsp;
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
