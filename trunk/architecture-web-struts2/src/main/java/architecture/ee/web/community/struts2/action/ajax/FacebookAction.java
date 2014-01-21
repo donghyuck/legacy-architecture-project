@@ -183,8 +183,8 @@ public class FacebookAction extends SocialNetworkActionSupport {
 			}			
 			for( SocialNetwork network : list ){
 				if( "facebook".toLowerCase().equals(network.getServiceProviderName()) ){				
-					socialNetworkId = network.getSocialAccountId();
-					targetSocialNetwork = network;
+					this.socialNetworkId = network.getSocialAccountId();
+					this.targetSocialNetwork = network;
 					break;
 				}
 			}		
