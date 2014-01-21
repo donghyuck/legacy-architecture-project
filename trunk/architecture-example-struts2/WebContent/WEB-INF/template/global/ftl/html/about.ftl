@@ -88,7 +88,7 @@
 				${stream_name}.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
 				</#if>
 				${stream_name}.createDataSource({ data : { objectType : 1} });
-				$( "${panel_element_id}.panel-header-actions a").each(function( index ) {
+				$( "${panel_element_id} .panel-header-actions a").each(function( index ) {
 					var panell_header_action = $(this);
 					panell_header_action.click(function (e){
 						e.preventDefault();		
