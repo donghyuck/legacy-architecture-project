@@ -38,6 +38,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					data : that.data
 				},
 				change : function () {
+					alert( that.renderToString() );
 					alert( that.elementToRender().html() );
 					that.elementToRender().html(kendo.render( that.template, this.view()));
 				}
