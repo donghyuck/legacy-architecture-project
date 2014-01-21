@@ -148,6 +148,7 @@
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
 			$("#announce-view-panel").find(".close").click(function (e) {
 				$("#announce-view-panel").hide();
+				kendo.fx($("#announce-list-view-panel")).fadeIn().duration(700).play(); 
 			});
 			$("#announce-view-panel").show();
 		}				
