@@ -77,9 +77,6 @@
 					
 				});
 				
-			
-				<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />				
-				
 				<#list action.connectedCompanySocialNetworks  as item >				
 				<#assign stream_name = "'" + item.serviceProviderName + '-streams"'  />	
 				<#assign panel_element_id = "'#" + item.serviceProviderName + "-panel-" + item.socialAccountId + "'"  />	
