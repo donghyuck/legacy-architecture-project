@@ -27,26 +27,16 @@
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
 								
-				var menuRight  = document.getElementById( 'cbp-spmenu-s2' ),
-				showRight = document.getElementById( 'showRight' ),
-				body = document.body;				
-				showRight.onclick = function() {
+				var menuRight  = document.getElementById( 'cbp-spmenu-s2' );
+				$("#show-right-slide").click(function (e) {
 					classie.toggle( this, 'active' );
-					classie.toggle( menuRight, 'cbp-spmenu-open' );
-					
-					var side_menu_icon = $(this).find( "i" );
-					if( side_menu_icon.hasClass("fa-chevron-left") ){
-						side_menu_icon.removeClass("fa-chevron-left");
-						side_menu_icon.addClass("fa-chevron-right");
-						//$(this).text("메뉴 숨기기");
-					}else{
-						side_menu_icon.removeClass("fa-chevron-right");
-						side_menu_icon.addClass("fa-chevron-left");	
-						//$(this).text("메뉴 보기");
-					}
-					
-				};
-								
+					classie.toggle( $( '#cbp-spmenu-s2' ), 'cbp-spmenu-open' );				
+				});
+				$("#hide-right-slide").click(function (e) {
+					classie.toggle( this, 'active' );
+					classie.toggle( $( '#cbp-spmenu-s2' ), 'cbp-spmenu-open' );				
+				});
+												
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
 					var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
@@ -1003,7 +993,7 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<button id="showRight" type="button" class="btn btn-info pull-right"><i class="fa fa-bars"></i></button>
+						<button id="show-right-slide" type="button" class="btn btn-info pull-right"><i class="fa fa-bars"></i></button>
 					</div>
 				</div>
 				
@@ -1073,7 +1063,7 @@
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
-			<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i></button>
+			<button id="hide-right-slide" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i></button>
 			<div class="panel panel-default">
 				<div class="panel-body clearfix">		
 						<ul class="nav nav-tabs" id="myTab">
