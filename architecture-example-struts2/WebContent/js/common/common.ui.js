@@ -83,64 +83,6 @@
 
 
 /**
- *  streams class 
- */
-(function($, undefined) {
-
-	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	var TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
-	FACEBOOK_FEED_URL    = "/community/get-facebook-homefeed.do?output=json",
-	TWITTER_FEED_DATA = "homeTimeline",
-	FACEBOOK_FEED_DATA = "homeFeed";	
-	
-	ui.kendoMediaStreams = kendo.Class.extend({
-		name : null,
-		data : null,
-		url : null,
-		dataSource : null,		
-		template: null,
-		init: function(name, url, data) {
-			if (name) this.name = name;				
-			if( name.toLowerCase() == 'twitter' )
-			{
-				this.url = TWITTER_FEED_URL;
-				this.data = TWITTER_FEED_DATA;
-			}
-			else if ( name.toLowerCase() == 'facebook' ){
-				this.url = FACEBOOK_FEED_URL;
-				this.data = FACEBOOK_FEED_DATA;								
-			}			
-			if (url) this.url = url;
-			if (data) this.data = data;
-		},
-		getDataSource : function (){
-			if( !this.dataSource ){
-				this.dataSource = new kendo.data.DataSource({
-					transport: {
-						read: {
-							type : 'POST',
-							type: "json",
-							url : this.url
-						} 
-					},
-					error:handleKendoAjaxError,
-					schema: {
-						data : this.data
-					}
-				});
-			}			
-			return dataSource;
-		}
-	});		
-	$.fn.extend( { 
-		kendoMediaStreams : function ( name, url, data ) {
-			return new ui.kendoMediaStreams ( name, url, data );		
-		}
-	});	
-})(jQuery);
-
-
-/**
  *  extPanel widget
  */
 (function($, undefined) {
