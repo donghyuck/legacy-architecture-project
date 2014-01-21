@@ -112,12 +112,7 @@
 				});
 				
 				</#list>	
-				
-				$(".custom-panels-group").each(function( index ) {
-					var social_panel = $(this).first();
-					alert(social_panel.html() );
-				});	
-							
+
 				<#if !action.user.anonymous >							
 				</#if>	
 				// END SCRIPT            
