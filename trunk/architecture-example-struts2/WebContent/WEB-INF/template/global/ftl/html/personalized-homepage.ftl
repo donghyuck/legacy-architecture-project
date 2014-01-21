@@ -1019,9 +1019,7 @@
 						<div id="photo-view-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
 						<div id="photo-gallery-panel" class="custom-panels-group col-sm-6" style="display: none;"></div>	
 						<!-- end photo view panel -->												
-						<!-- start attach view panel -->
-						<div id="attach-view-panel" class="custom-panels-group col-sm-6" style="display:none;"></div>				
-						<!-- end attach view panel -->										
+				
 					</div>										
 				</div>
 			</div>		
