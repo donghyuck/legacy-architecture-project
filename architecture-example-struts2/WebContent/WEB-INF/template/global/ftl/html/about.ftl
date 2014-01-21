@@ -71,12 +71,6 @@
 				
 				
 				// Start : Company Social Content 
-				$(".custom-panels-group div").each(function( index ) {
-					var social-panel = $(this);
-					alert(social-panel.html);
-					
-				});
-				
 				<#list action.connectedCompanySocialNetworks  as item >				
 				<#assign stream_name = item.serviceProviderName + "-streams"  />	
 				<#assign panel_element_id = "#" + item.serviceProviderName + "-panel-" + item.socialAccountId  />	
@@ -108,6 +102,12 @@
 				});
 				</#list>	
 				
+				$(".custom-panels-group div").each(function( index ) {
+					var social_panel = $(this);
+					alert(social_panel.html() );
+					
+				});
+								
 							
 				<#if !action.user.anonymous >							
 				</#if>	
