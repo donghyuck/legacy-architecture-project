@@ -77,8 +77,38 @@
 					
 				});
 				
-				<#list action.connectedCompanySocialNetworks  as item >	
-					
+			
+				<#assign elementId = "'#" + item.serviceProviderName + "-streams'"  />				
+				
+				<#list action.connectedCompanySocialNetworks  as item >				
+				<#assign stream_name = "'" + item.serviceProviderName + '-streams"'  />	
+				<#assign panel_element_id = "'#" + item.serviceProviderName + "-panel-" + item.socialAccountId + "'"  />	
+											
+				var ${stream_name} = new MediaStreams(${ item.socialAccountId}, ${item.serviceProviderName} );							
+				<#if  item.serviceProviderName == "twitter" >
+				${stream_name}.setTemplate ( kendo.template($("#twitter-timeline-template").html()) );				
+				<#elseif  item.serviceProviderName == "facebook" >
+				${stream_name}.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
+				</#if>
+				${stream_name}.createDataSource({ data : { objectType : 1} });
+				$( "${panel_element_id}.panel-header-actions a").each(function( index ) {
+					var panell_header_action = $(this);
+					panell_header_action.click(function (e){
+						e.preventDefault();		
+						var social_header_action_icon = panell_header_action.find('span');
+						if (social_header_action.text() == "Minimize"){
+							$("${panel_element_id} .panel-body").toggleClass("hide");				
+							if( social_header_action_icon.hasClass("k-i-maximize") ){
+								social_header_action_icon.removeClass("k-i-maximize");
+								social_header_action_icon.addClass("k-i-minimize");
+							}else{
+								social_header_action_icon.removeClass("k-i-minimize");
+								social_header_action_icon.addClass("k-i-maximize");
+							}
+						} else if (social_header_action.text() == "Refresh"){								
+							${stream_name}.dataSource.read();							
+						} 							
+				});
 				</#list>	
 				
 							
@@ -137,7 +167,7 @@
 				</div>
 				<div class="col-lg-9">				
 					<!-- social media -->
-					<div class="row">
+					<div id="social-media-area" class="row">
 					<#list action.connectedCompanySocialNetworks  as item >	
 						<div class="custom-panels-group col-sm-6"> 
 							<div id="${item.serviceProviderName}-panel-${item.socialAccountId}">
