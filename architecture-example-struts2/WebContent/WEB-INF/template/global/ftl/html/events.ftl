@@ -234,7 +234,7 @@
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 								</div>						
 							</div>
-							<div class="panel-body hide" style="padding-top:25px;">
+							<div class="panel-body" style="padding-top:25px;">
 								<div id="announce-list-view"></div>	
 							</div>
 						</div>		
