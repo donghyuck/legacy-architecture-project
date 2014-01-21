@@ -83,7 +83,7 @@
 				</#if>
 				${stream_name}.createDataSource({ 
 					transport : {
-						parameterMap : function( options,  operation) {
+						parameterMap : function ( options,  operation) {
 							return { objectType : 1 };
 						} 
 					}
