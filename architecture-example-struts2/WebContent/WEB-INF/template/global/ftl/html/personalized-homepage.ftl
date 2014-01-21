@@ -182,7 +182,7 @@
 															
 				// 4. Right Tabs
 				//$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
-				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
+				//$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
 
 											
 				$('#myTab a').click(function (e) {
@@ -364,8 +364,8 @@
 									var item = data[this.select().index()];									
 									item.index = this.select().index();			
 									item.page = $("#photo-list-pager").data("kendoPager").page();													
-									$("#photo-view-panel").data( "photoPlaceHolder", item );														
-									showPhotoPanel( ) ;										
+									$("#photo-list-view").data( "photoPlaceHolder", item );														
+									displayPhotoPanel( ) ;										
 								},
 								navigatable: false,
 								template: kendo.template($("#photo-list-view-template").html()),								
@@ -634,7 +634,6 @@
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
-					alert($('#' + renderToString ).html());
 						$('#' + renderToString ).remove();
 					}
 				});
@@ -659,24 +658,34 @@
 			$('#' + renderToString ).show();			
 		}	
 						
-		/** Photo View Panel */
-		function showPhotoPanel(){					
-			if( !$("#photo-view-panel").data("extPanel") ){					
-				$("#photo-view-panel").data("extPanel", 
-					$("#photo-view-panel").extPanel({
+		<!-- ============================== -->
+		<!-- display photo  panel                                  -->
+		<!-- ============================== -->			
+		function displayPhotoPanel(){			
+		
+			var renderToString =  "photo-panel-0";	
+			if( $("#" + renderToString ).length == 0  ){			
+				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
+				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
+				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
+			}			
+				
+			if( !$("#" + renderToString ).data("extPanel") ){					
+				$("#" + renderToString ).data("extPanel", 
+					$("#" + renderToString ).extPanel({
 						title : "포토",
 						template : kendo.template($("#photo-panel-template").html())
 					})
 				 );						 
-				$("#photo-view-panel").find(".custom-photo-delete").click(function (e) { 
+				$("#" + renderToString ).find(".custom-photo-delete").click(function (e) { 
 					e.preventDefault();			
 					$.ajax({
 						dataType : "json",
 						type : 'POST',
 						url : '${request.contextPath}/community/delete-my-image.do?output=json',
-						data : { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId },
+						data : { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId },
 						success : function( response ){
-							$('#photo-view-panel').hide();
+							$("#" + renderToString ).remove();
 						},
 						error:handleKendoAjaxError
 					});	
@@ -689,25 +698,23 @@
 						},
 						localization:{ select : '사진 선택' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
 						upload: function (e) {				
-							e.data = { imageId: $("#photo-view-panel").data( "photoPlaceHolder").imageId };
+							e.data = { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId };
 						},
 						success: function (e) {				
 							if( e.response.targetImage ){
-								
-								$('#photo-list-view').data('kendoListView').dataSource.read();
-								
+								$('#photo-list-view').data('kendoListView').dataSource.read();								
 								var item = e.response.targetImage;
-								item.index = $("#photo-view-panel").data( "photoPlaceHolder" ).index;			
-								item.page = $("#photo-view-panel").data( "photoPlaceHolder" ).page				
-								$("#photo-view-panel").data( "photoPlaceHolder",  item );
-								showPhotoPanel();
+								item.index = $("#photo-list-view").data( "photoPlaceHolder" ).index;			
+								item.page = $("#photo-list-view").data( "photoPlaceHolder" ).page				
+								$("#photo-list-view").data( "photoPlaceHolder",  item );
+								displayPhotoPanel();
 							}
 						} 
 				});	
 			}
 			
-			var photoPlaceHolder = $("#photo-view-panel").data( "photoPlaceHolder");		
-			var panel = $("#photo-view-panel").data("extPanel");
+			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
+			var panel = $("#" + renderToString ).data("extPanel");
 			var editable = $("#account-panel").data("currentUser" ).userId == photoPlaceHolder.objectId ;
 			
 			panel.title( photoPlaceHolder.name ) ;
@@ -715,14 +722,14 @@
 			panel.data().set("editable", editable );
 			
 			var template = kendo.template($('#photo-view-template').html());
-			$("#photo-view-panel").find(".panel-body").html( template(photoPlaceHolder) );
+			$("#" + renderToString ).find(".panel-body").html( template(photoPlaceHolder) );
 
-			$( '#photo-view-panel .pager li').each(function( index ) { 
+			$( '#' + renderToString +' .pager li').each(function( index ) { 
 				var panel_pager = $(this);				
 				if( panel_pager.hasClass('previous') ){
 					panel_pager.click(function (e) { 
 						e.preventDefault();						
-						var current_index = $("#photo-view-panel").data( "photoPlaceHolder").index;				
+						var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
 						var previous_index = current_index-1;	
 						var listView =  $('#photo-list-view').data('kendoListView');	
 						var list_view_pager = $("#photo-list-pager").data("kendoPager");
@@ -731,8 +738,8 @@
 							var item = listView.dataSource.view()[previous_index];
 							item.index = previous_index;		
 							item.page = current_page ;					
-							$("#photo-view-panel").data( "photoPlaceHolder", item );														
-							showPhotoPanel( );
+							$("#photo-list-view").data( "photoPlaceHolder", item );														
+							displayPhotoPanel( );
 						} else {
 							if( current_page > 1 ){
 								list_view_pager.page(current_page - 1);
@@ -743,7 +750,7 @@
 				}else if ( panel_pager.hasClass('next') ){ 
 					panel_pager.click(function (e) { 
 						e.preventDefault();
-						var current_index = $("#photo-view-panel").data( "photoPlaceHolder").index;				
+						var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
 						var next_index = current_index + 1;				
 						var listView =  $('#photo-list-view').data('kendoListView');
 						var total_index = listView.dataSource.view().length -1 ;
@@ -753,8 +760,8 @@
 							var item = listView.dataSource.view()[next_index];
 							item.index = next_index;
 							item.page = current_page ;							
-							$("#photo-view-panel").data( "photoPlaceHolder", item );
-							showPhotoPanel( );						
+							$("#photo-list-view").data( "photoPlaceHolder", item );
+							displayPhotoPanel( );						
 						}else {
 							if( current_page <  list_view_pager.totalPages() ){
 								list_view_pager.page(current_page+1);
