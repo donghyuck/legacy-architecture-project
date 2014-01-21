@@ -100,7 +100,7 @@
 						var data = this.dataSource.view() ;
 						var selectedCell = data[this.select().index()];		
 						$("#announce-list-view").data( "announcePlaceHolder", selectedCell );
-						flipEffect.play();					
+						flipEffect.reverse();					
 						showAnnounce();							
 					},
 					dataBound: function(e) {
