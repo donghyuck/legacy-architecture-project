@@ -181,7 +181,7 @@
 				});						
 															
 				// 4. Right Tabs
-				$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
+				//$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
 				$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
 
 											
@@ -256,6 +256,7 @@
 						}
 					} else if(  $(this).attr('href') == '#my-files' ){
 						if( !$('#attachment-list-view').data('kendoListView') ){		
+						
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
@@ -290,7 +291,7 @@
 								change: function(e) {									
 									var data = this.dataSource.view() ;
 									var item = data[this.select().index()];		
-									$("#attach-view-panel").data( "attachPlaceHolder", item );														
+									$("#attachment-list-view").data( "attachPlaceHolder", item );												
 									displayAttachmentPanel( ) ;	
 								},
 								navigatable: false,
@@ -308,7 +309,8 @@
 										attachementTotalModle.set("totalAttachCount", totalCount);
 									}
 								}
-							});														
+							});				
+																	
 							$("#attachment-list-view").on("mouseenter",  ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
@@ -607,17 +609,15 @@
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
-			}									
-			
-			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
+			}	
+			var attachPlaceHolder = $("#attachment-list-view").data( "attachPlaceHolder", item );		
 			var template = kendo.template($('#file-view-template').html());			
 			$('#' + renderToString ).html( template(attachPlaceHolder) );	
 			kendo.bind($('#' + renderToString ), attachPlaceHolder );					
 			if( attachPlaceHolder.contentType == "application/pdf" ){
 				var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + attachPlaceHolder.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-			}			
-			
-			$("#attach-view-panel button").each(function( index ) {		
+			}	
+			$("#" + renderToString + " button").each(function( index ) {		
 				var panel_button = $(this);
 				panel_button.click(function (e) { 
 					e.preventDefault();					
