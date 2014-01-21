@@ -224,8 +224,7 @@
 										var selectedCell = this.dataItem( selectedCells );		
 										$("#my-social-streams-grid").data("streamsPlaceHolder", selectedCell);
 										if( ! $("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId ) ){										
-											var selectedStreams = new MediaStreams(selectedCell.serviceProviderName);	
-											selectedStreams.mediaId = selectedCell.socialAccountId;												
+											var selectedStreams = new MediaStreams(selectedCell.socialAccountId, selectedCell.serviceProviderName);							
 											if( selectedStreams.name == 'twitter'){
 												selectedStreams.setTemplate ( kendo.template($("#twitter-timeline-template").html()) );											
 											}else if ( selectedStreams.name == 'facebook'){
