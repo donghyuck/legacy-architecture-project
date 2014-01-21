@@ -35,9 +35,12 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 				error:handleKendoAjaxError,
 				schema: {
 					data : this.data
+				},
+				change : function () {
+					his.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
 				}
 			});		
-
+/*
 			if( options.requestStart ){				
 				this.dataSource.bind( 'requestStart' , options.requestStart );
 			}else{
@@ -58,6 +61,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					}
 				);
 			}		
+*/			
 		},
 		setTemplate: function ( template ){
 			if (template) this.template = template;	
