@@ -131,8 +131,7 @@
 			}			
 			return dataSource;
 		}
-	});	
-	
+	});		
 	$.fn.extend( { 
 		kendoMediaStreams : function ( name, url, data ) {
 			return new ui.kendoMediaStreams ( name, url, data );		
