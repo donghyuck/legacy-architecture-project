@@ -71,9 +71,17 @@
 				
 				
 				// Start : Company Social Content 
+				$(".custom-panels-group div").each(function( index ) {
+					var social-panel = $(this);
+					alert(social-panel.html);
+					
+				});
+				
 				<#list action.connectedCompanySocialNetworks  as item >	
 					
-				</#list>				
+				</#list>	
+				
+							
 				<#if !action.user.anonymous >							
 				</#if>	
 				// END SCRIPT            
@@ -131,7 +139,7 @@
 					<!-- social media -->
 					<div class="row">
 					<#list action.connectedCompanySocialNetworks  as item >	
-						<div class="col-sm-6">
+						<div class="custom-panels-group col-sm-6"> 
 							<div id="${item.serviceProviderName}-panel-${item.socialAccountId}">
 								<div class="panel panel-default">
 									<div class="panel-heading">
