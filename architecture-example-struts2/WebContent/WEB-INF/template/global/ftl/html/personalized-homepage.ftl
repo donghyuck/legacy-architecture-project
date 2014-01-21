@@ -632,6 +632,7 @@
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
+					alert($('#' + renderToString ).html());
 						$('#' + renderToString ).remove();
 					}
 				});
