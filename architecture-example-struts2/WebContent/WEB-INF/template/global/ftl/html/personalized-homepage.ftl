@@ -575,13 +575,7 @@
 				var template = kendo.template($("#social-view-panel-template").html());				
 				//$("#social-view-panels").append( template( streamsPlaceHolder ) );												
 				$("#personalized-area").append( template( streamsPlaceHolder ) );						
-				$( '#'+ renderToString ).parent().addClass("col-sm-" + grid_col_size.newValue );		
-				
-				if(streamsProvider.dataSource.total() == 0 )
-				{
-					streamsProvider.dataSource.read();
-				}
-								
+				$( '#'+ renderToString ).parent().addClass("col-sm-" + grid_col_size.newValue );												
 				$( '#'+ renderToString + ' .panel-header-actions a').each(function( index ) {
 					var social_header_action = $(this);
 					social_header_action.click(function (e){
@@ -605,6 +599,10 @@
 				} );			
 			} 
 			$("#" + renderToString ).parent().show();
+			if(streamsProvider.dataSource.total() == 0 )
+			{
+					streamsProvider.dataSource.read();
+			}	
 		}		
 				
 		/** Photo View Panel */
