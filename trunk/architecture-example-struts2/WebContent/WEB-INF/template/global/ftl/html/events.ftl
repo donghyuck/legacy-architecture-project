@@ -226,11 +226,11 @@
 				<div class="col-lg-9">		
 					<div id="event-area">						
 						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
-							<div class="panel-heading" style="background-color:#ffffff;"><h5><i class="fa fa-th-large"></i>&nbsp;공지 & 이벤트</h5>
+							<div class="panel-heading" style="background-color:#ffffff;">&nbsp;
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 								</div>						
 							</div>
 							<div class="panel-body" style="padding-top:25px;">
