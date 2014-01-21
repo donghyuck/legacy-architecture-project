@@ -13,20 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.struts2.action;
+package architecture.ee.web.community.struts2.action.support;
 
-import java.util.Collections;
-import java.util.List;
-
-import architecture.common.user.Company;
-import architecture.ee.web.community.social.SocialNetwork;
+import net.sf.ehcache.Cache;
 import architecture.ee.web.community.social.SocialNetworkManager;
-import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
+import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class SocialPageAction extends PageAction implements SocialNetworkAware {
+public class SocialNetworkActionSupport extends FrameworkActionSupport implements SocialNetworkAware  {
 
+	private Cache socialStreamsCache;
 	private SocialNetworkManager socialNetworkManager;	
+	private int objectType = 2 ;
+	
+	/**
+	 * @return objectType
+	 */
+	public int getObjectType() {
+		return objectType;
+	}
 
+	/**
+	 * @param objectType 설정할 objectType
+	 */
+	public void setObjectType(int objectType) {
+		this.objectType = objectType;
+	}
+	
 	/**
 	 * @return socialNetworkManager
 	 */
@@ -40,13 +52,28 @@ public class SocialPageAction extends PageAction implements SocialNetworkAware {
 	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager) {
 		this.socialNetworkManager = socialNetworkManager;
 	}
-	
-	public List<SocialNetwork> getConnectedCompanySocialNetworks(){
-		 try {
-			Company company = getCompany();
-			 return socialNetworkManager.getSocialNetworks(company);
-		} catch (Exception e) {
-			return Collections.EMPTY_LIST;
-		}
+
+	/**
+	 * @return socialStreamsCache
+	 */
+	public Cache getSocialStreamsCache() {
+		return socialStreamsCache;
 	}
+
+	/**
+	 * @param socialStreamsCache 설정할 socialStreamsCache
+	 */
+	public void setSocialStreamsCache(Cache socialStreamsCache) {
+		this.socialStreamsCache = socialStreamsCache;
+	}
+	
+	public boolean isCacheEnabled(){
+		
+		if ( socialStreamsCache != null)
+			return true;
+		
+		return false;
+	}
+
+	
 }
