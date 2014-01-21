@@ -90,25 +90,27 @@
 						} 
 					}
 				});
+				
 				$( "${panel_element_id} .panel-header-actions a").each(function( index ) {
-					var panell_header_action = $(this);
-					panell_header_action.click(function (e){
+					var header_action = $(this);
+					header_action.click(function (e){
 						e.preventDefault();		
-						var social_header_action_icon = panell_header_action.find('span');
-						if (social_header_action.text() == "Minimize"){
+						var header_action_icon = header_action.find('span');
+						if (header_action.text() == "Minimize"){
 							$("${panel_element_id} .panel-body").toggleClass("hide");				
-							if( social_header_action_icon.hasClass("k-i-maximize") ){
-								social_header_action_icon.removeClass("k-i-maximize");
-								social_header_action_icon.addClass("k-i-minimize");
+							if( header_action_icon.hasClass("k-i-maximize") ){
+								header_action_icon.removeClass("k-i-maximize");
+								header_action_icon.addClass("k-i-minimize");
 							}else{
-								social_header_action_icon.removeClass("k-i-minimize");
-								social_header_action_icon.addClass("k-i-maximize");
+								header_action_icon.removeClass("k-i-minimize");
+								header_action_icon.addClass("k-i-maximize");
 							}
-						} else if (social_header_action.text() == "Refresh"){								
+						} else if (header_action.text() == "Refresh"){								
 							${stream_name}.dataSource.read();							
 						} 
 					});								
 				});
+				
 				</#list>	
 				
 				$(".custom-panels-group").each(function( index ) {
