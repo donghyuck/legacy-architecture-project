@@ -999,7 +999,7 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<button id="show-right-slide" type="button" class="btn btn-success pull-right"><i class="fa fa-bars"></i></button>
+						<p class="text-info"><i class="fa fa-info"></i> 우측 버튼을 클릭하시면 상세 메뉴를 볼 수 있습니다. </p><button id="show-right-slide" type="button" class="btn btn-primary pull-right"><i class="fa fa-bars"></i></button>
 					</div>
 				</div>
 				
