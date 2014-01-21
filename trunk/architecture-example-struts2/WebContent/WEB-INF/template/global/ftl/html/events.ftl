@@ -226,7 +226,7 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-					<div id="event-area">						
+					<div id="event-area" style="min-height:500px;">						
 						<div id="announce-list-view-panel" class="panel panel-default">
 							<div class="panel-heading">
 								&nbsp;
