@@ -72,7 +72,7 @@
 				
 				// Start : Company Social Content 
 				<#list action.connectedCompanySocialNetworks  as item >				
-				<#assign stream_name = item.serviceProviderName + "-streams"  />	
+				<#assign stream_name = item.serviceProviderName + "_streams_" + item.socialAccountId  />	
 				<#assign panel_element_id = "#" + item.serviceProviderName + "-panel-" + item.socialAccountId  />	
 											
 				var ${stream_name} = new MediaStreams(${ item.socialAccountId}, "${item.serviceProviderName}" );							
