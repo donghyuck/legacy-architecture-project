@@ -241,8 +241,7 @@
 					</div>	
 				</div>				
 			</div>
-		</div>									 
-			
+		</div>									 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
 		<div class="announcement col-sm-6 col-md-4">
