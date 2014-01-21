@@ -35,10 +35,10 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			//alert(  kendo.stringify( options.transport.parameterMap) ) ;
 			
 			this.dataSource = new kendo.data.DataSource({
+				type: "json",
 				transport: {
 					read: {
 						type : 'POST',
-						type: "json",
 						url : that.url
 					},
 					parameterMap: options.transport.parameterMap
