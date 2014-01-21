@@ -23,7 +23,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			if (url) this.url = url;
 			if (data) this.data = data;
 		},
-		setDataSource: function ( options ){
+		createDataSource: function ( options ){
 			var that = this;
 			this.dataSource = new kendo.data.DataSource({
 				transport: {
@@ -38,31 +38,10 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					data : that.data
 				},
 				change : function () {
+					alert( that.elementToRender().html() );
 					that.elementToRender().html(kendo.render( that.template, this.view()));
 				}
 			});		
-/*
-			if( options.requestStart ){				
-				this.dataSource.bind( 'requestStart' , options.requestStart );
-			}else{
-				this.dataSource.bind( 'requestStart' , kendo.ui.progress( this.elementToRender(), true) );
-			}	
-			
-			if( options.requestEnd ){
-				this.dataSource.bind( 'requestEnd' , options.requestEnd );
-			}else{
-				this.dataSource.bind( 'requestEnd' , kendo.ui.progress( this.elementToRender(), false) );
-			}			
-			if( options.change ){
-				this.dataSource.bind( 'change' , options.change );
-			}else{
-				this.dataSource.bind( 'change' , function (){ 
-				//	this.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
-					//alert( "" + this.dataSource.view() );
-					}
-				);
-			}		
-*/			
 		},
 		setTemplate: function ( template ){
 			if (template) this.template = template;	
@@ -71,7 +50,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			return  "#"+ this.name + "-streams-" + this.mediaId ;
 		},
 		elementToRender : function (){
-			return $(this.renderToString);
+			return $(this.renderToString());
 		}
 	});	
 	
