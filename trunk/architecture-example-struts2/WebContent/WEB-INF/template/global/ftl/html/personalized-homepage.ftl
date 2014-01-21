@@ -1064,7 +1064,7 @@
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
 			<div class="panel panel-default">
-				<div class="panel-heading"><button  id="hide-right-slide" type="button" class="close">&times;</button></div>
+				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;<button  id="hide-right-slide" type="button" class="close">&times;</button></div>
 				<div class="panel-body clearfix">		
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
