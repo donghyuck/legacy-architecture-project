@@ -225,7 +225,7 @@
 				</div>
 				<div class="col-lg-9">		
 					<div id="event-area">
-						<div id="announce-view-panel"></div>					
+						
 						<div id="announce-list-view-panel" class="panel panel-default">
 							<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
 								<div class="k-window-actions panel-header-actions">
@@ -237,7 +237,8 @@
 							<div class="panel-body" style="padding-top:25px;">
 								<div id="announce-list-view"></div>	
 							</div>
-						</div>		
+						</div>
+						<div id="announce-view-panel"></div>							
 					</div>	
 				</div>				
 			</div>
