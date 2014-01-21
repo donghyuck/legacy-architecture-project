@@ -22,11 +22,9 @@ import architecture.common.user.Company;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
 
-public class SocialPageAction extends PageAction {
+public class SocialPageAction extends PageAction implements SocialNetworkAware {
 
 	private SocialNetworkManager socialNetworkManager;	
-
-
 
 	/**
 	 * @return socialNetworkManager
@@ -41,18 +39,8 @@ public class SocialPageAction extends PageAction {
 	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager) {
 		this.socialNetworkManager = socialNetworkManager;
 	}
-
-	public boolean hasCompanySocial () {
-		 Company company = getCompany();
-		 List<SocialNetwork> asl = socialNetworkManager.getSocialNetworks(company);
-		 if( asl.size() > 0 ){
-			 return true;
-		 }else {
-			 return false;
-		 }
-	}
 	
-	public List<SocialNetwork> getCompanySocials(){
+	public List<SocialNetwork> getConnectedCompanySocialNetworks(){
 		 try {
 			Company company = getCompany();
 			 return socialNetworkManager.getSocialNetworks(company);
