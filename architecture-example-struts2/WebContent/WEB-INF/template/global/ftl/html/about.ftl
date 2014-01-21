@@ -105,9 +105,7 @@
 				$(".custom-panels-group div").each(function( index ) {
 					var social_panel = $(this);
 					alert(social_panel.html() );
-					
-				});
-								
+				});	
 							
 				<#if !action.user.anonymous >							
 				</#if>	
