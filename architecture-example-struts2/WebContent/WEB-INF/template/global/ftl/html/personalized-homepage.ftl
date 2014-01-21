@@ -570,8 +570,7 @@
 		function displaySocialPanel ( ){
 			var streamsPlaceHolder = $("#my-social-streams-grid").data("streamsPlaceHolder");
 			var streamsProvider = $("#my-social-streams-grid").data( streamsPlaceHolder.serviceProviderName + "-streams-" + streamsPlaceHolder.socialAccountId ) ;
-			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;					
-			
+			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;		
 			if( $("#" + renderToString ).length == 0  ){						
 				// create new panel 
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
