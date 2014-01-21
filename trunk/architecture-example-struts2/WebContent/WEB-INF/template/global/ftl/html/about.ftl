@@ -90,6 +90,7 @@
 						} 
 					}
 				});
+				${stream_name}.dataSource.read();
 				
 				$( "${panel_element_id} .panel-header-actions a").each(function( index ) {
 					var header_action = $(this);
@@ -191,8 +192,7 @@
 												<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
 											</ul>
 									</div>							
-								</div>
-																							
+								</div>											
 						</div>													
 					</#list>						
 					</div>
