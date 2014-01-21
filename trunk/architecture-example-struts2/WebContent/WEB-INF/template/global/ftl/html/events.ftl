@@ -70,8 +70,7 @@
 
 				// 1. Announces 				
 				
-				var flipEffect = kendo.fx($("#event-area")).flipHorizontal($("#announce-view-panel"), $("#announce-list-view-panel")).duration(1000);
-				
+				var effect =  kendo.fx($("#announce-list-view-panel")).fadeOut().duration(700); 
 				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );	
 				$("#announce-list-view").kendoListView({
 					dataSource: new kendo.data.DataSource({
@@ -100,7 +99,7 @@
 						var data = this.dataSource.view() ;
 						var selectedCell = data[this.select().index()];		
 						$("#announce-list-view").data( "announcePlaceHolder", selectedCell );
-						flipEffect.reverse();					
+						effect.play();					
 						showAnnounce();							
 					},
 					dataBound: function(e) {
@@ -144,11 +143,12 @@
 			}
 		}]);	
 		
-		function showAnnounce () {
+		function showAnnounce () {			
 			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
+			$("#announce-view-panel").show();
 		}				
 		-->
 		</script>		
@@ -224,8 +224,8 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-					<div id="event-area" style="position: relative; height="600px;"">						
-						<div id="announce-list-view-panel" class="panel panel-default" style="position: absolute;">
+					<div id="event-area">						
+						<div id="announce-list-view-panel" class="panel panel-default">
 							<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
@@ -237,7 +237,7 @@
 								<div id="announce-list-view"></div>	
 							</div>
 						</div>						
-						<div id="announce-view-panel"></div>													
+						<div id="announce-view-panel" style="display:none;"></div>
 					</div>	
 				</div>				
 			</div>
