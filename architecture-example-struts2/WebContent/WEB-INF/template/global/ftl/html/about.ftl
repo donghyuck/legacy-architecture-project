@@ -127,13 +127,15 @@
 					</div>	
 					<!-- end side menu -->					
 				</div>
-				<div class="col-lg-9">
+				<div class="col-lg-9">				
+					<!-- social media -->
 					<div class="row">
-						<div class="col-lg-6">
-							<div id="facebook-panel">
+					<#list action.connectedCompanySocialNetworks  as item >	
+						<div class="col-sm-6">
+							<div id="${serviceProviderName}-panel-${socialAccountId}">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<i class="fa fa-facebook"></i>&nbsp;Facebook
+										<i class="fa fa-${serviceProviderName}"></i>&nbsp;${serviceProviderName}
 										<div class="k-window-actions panel-header-actions">
 											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -143,41 +145,18 @@
 									</div>		
 									<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
 											<ul class="media-list">
-												<div id="company-facebook-homefeed"></div>
+												<div id="${serviceProviderName}-streams-${socialAccountId}">&nbsp;</div>
 											</ul>
 									</div>							
 								</div>
 							</div>																
-						</div>							
-						<div class="col-lg-6">			
-							<div id="twitter-panel">
-								<div class="panel panel-default">
-									<div class="panel-heading">
-										<i class="fa fa-twitter"></i>&nbsp;Twitter
-										<div class="k-window-actions panel-header-actions">
-											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>	
-										</div>							
-									</div>
-									<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
-										<ul class="media-list">
-											<div id="company-twitter-timeline"></div>
-										</ul>
-									</div>
-								</div>
-							</div>										
-						</div>								
-					</div>	
-					
+						</div>													
+					</#list>						
+					</div>
 				</div>				
 			</div>
 		</div>									 
-		<div class="container layout">						
-				<div id="social-area" class="row"></div>		
-			</div>				
 		<!-- END MAIN CONTENT -->	
-
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
