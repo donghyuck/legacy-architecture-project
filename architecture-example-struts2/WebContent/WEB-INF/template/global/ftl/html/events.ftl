@@ -109,7 +109,7 @@
 						//		$('#alert-message-template').html() 
 						//	);
 						}							
-						this.select( this.element.children().first() );				
+						//this.select( this.element.children().first() );				
 					}
 				});
             			
