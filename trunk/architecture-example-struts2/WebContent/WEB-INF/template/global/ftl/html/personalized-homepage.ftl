@@ -197,12 +197,9 @@
 											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-message-notes' ){						
-					
-					} else if(  $(this).attr('href') == '#my-streams' ){						
-						
-						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 				
-									
+					if(  $(this).attr('href') == '#my-message-notes' ){							
+					} else if(  $(this).attr('href') == '#my-streams' ){								
+						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
 							$("#my-social-streams-grid").kendoGrid({
 								dataSource : new kendo.data.DataSource({
 									transport: {
@@ -234,17 +231,7 @@
 											}else if ( selectedStreams.name == 'facebook'){
 												selectedStreams.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
 											}
-											selectedStreams.setDataSource({
-												requestStart : function(){
-													alert(selectedStreams.name);
-												},
-												requestEnd : function(){
-													alert(selectedStreams.name);
-												},
-												change : function(){
-													alert(selectedStreams.name);
-												}
-											});
+											selectedStreams.setDataSource({});
 											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams )
 										}
 										showSocialPanel();
@@ -579,11 +566,9 @@
 		}	
 								
 		function showSocialPanel ( ){
-
 			var streamsPlaceHolder = $("#my-social-streams-grid").data("streamsPlaceHolder");
 			var streamsProvider = $("#my-social-streams-grid").data( streamsPlaceHolder.serviceProviderName + "-streams-" + streamsPlaceHolder.socialAccountId ) ;
-			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;			
-		
+			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;					
 			if( $("#" + renderToString ).length == 0  ){						
 				// create new social panel 
 				var template = kendo.template($("#social-view-panel-template").html());				
