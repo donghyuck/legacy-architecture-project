@@ -47,6 +47,7 @@
 						custom_panels_group.removeClass("col-sm-" + grid_col_size.oldValue );		
 						custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
 					});
+					alert($("#personalized-area").data("sizePlaceHolder").newValue);
 				});				
 							
 				// 3. ACCOUNTS LOAD	
@@ -606,7 +607,7 @@
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#colSize#" style="display:none;"></div>');				
-				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue} ) );	
+				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
 			}									
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
 			var template = kendo.template($('#file-view-template').html());			
