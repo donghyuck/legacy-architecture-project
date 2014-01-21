@@ -227,7 +227,8 @@
 				</div>
 				<div class="col-lg-9">		
 					<div id="event-area" style="min-height:500px;">						
-						<div id="announce-list-view-panel" class="panel panel-default">
+						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
+							<!--
 							<div class="panel-heading">
 								&nbsp;
 								<div class="k-window-actions panel-header-actions">
@@ -236,6 +237,7 @@
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 								</div>			
 							</div>
+							-->
 							<div class="panel-body" style="padding-top:25px;">
 								<div id="announce-list-view"></div>	
 							</div>
