@@ -26,12 +26,13 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 		},
 		createDataSource: function ( options ){
 			var that = this;			
+			
 			if( !options.transport.parameterMap ){
 				options.transport.parameterMap = function (data, type){
 					return {};
 				}				
 			}
-			
+			alert(  options.transport.parameterMap("", "")) ;
 			this.dataSource = new kendo.data.DataSource({
 				transport: {
 					read: {
