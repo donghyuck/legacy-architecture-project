@@ -21,15 +21,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
+import org.scribe.model.Token;
+
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
-import architecture.ee.web.community.struts2.action.SocialNetworkAware;
+import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.util.ParamUtils;
 
 public class MySocialNetworkAction extends FrameworkActionSupport implements SocialNetworkAware  {
-
+    
+	private Long socialNetworkId = -1L; 
+	
+	private SocialNetwork mySocialNetwork = null ;	
+	
+	private static final Token EMPTY_TOKEN = null;
+	
 	private SocialNetworkManager socialNetworkManager;
+	
+	/**
+	 * @return socialNetworkId
+	 */
+	public Long getSocialNetworkId() {
+		return socialNetworkId;
+	}
+
+	/**
+	 * @param socialNetworkId 설정할 socialNetworkId
+	 */
+	public void setSocialNetworkId(Long socialNetworkId) {
+		this.socialNetworkId = socialNetworkId;
+	}
 
 	/**
 	 * @return socialNetworkManager
@@ -76,12 +101,66 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 		return networkList;
 	}
 	
+	public SocialNetwork getSocialNetwork() throws NotFoundException{
+		if( mySocialNetwork == null ){
+			this.mySocialNetwork = socialNetworkManager.getSocialNetworkById(this.socialNetworkId);
+		}		
+		return mySocialNetwork;
+	}
+	
 	public String execute() throws Exception {
 		return success();
 	}
 	
+	public String updateSocialNetwork() throws Exception{		
+		try {
+			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
+			String accessSecret = (String)map.get("accessSecret");
+			String accessToken = (String)map.get("accessToken");
+			Boolean signedIn = (Boolean)map.get("signedIn");
+			Integer  socialAccountId = (Integer)map.get("socialAccountId");			
+			String serviceProviderName = (String)map.get("serviceProviderName");
+			Media media = SocialNetwork.Media.valueOf(serviceProviderName.toUpperCase());
+			
+			if( socialNetworkId == null){				
+				socialNetworkId = socialAccountId.longValue();
+			}				
+			SocialNetwork account = null;
+			if( socialNetworkId > 0 ){				
+				try {
+					account = getSocialNetwork();
+				} catch (NotFoundException e) {
+					account = null;
+				}
+			}
+			
+			if( account == null ){				
+				Map<Media, SocialNetwork> listMap = getConnectedSocialNetworkMap();
+				if( listMap.containsKey(media)){
+					account = listMap.get(media);
+				}else{
+					account = newSocialNetwork(media);				
+				}				
+			}
+			
+			if(!StringUtils.isEmpty(accessSecret))
+				account.setAccessSecret(accessSecret);
+			if(!StringUtils.isEmpty(accessToken))
+				account.setAccessToken(accessToken);
+			
+			socialNetworkManager.saveSocialNetwork(account);					
+			this.socialNetworkId =account.getSocialAccountId();
+			this.mySocialNetwork = account;
+			
+			return success();
+		} catch (Throwable e) {
+			throw new Exception(e);
+		}
+	}
+	
 	protected SocialNetwork newSocialNetwork( SocialNetwork.Media media ){	
-		return socialNetworkManager.createSocialNetwork(getUser(), media);
+		SocialNetwork network =  socialNetworkManager.createSocialNetwork(getUser(), media);
+		return network;
 	}
 	
 }

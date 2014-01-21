@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.struts2.action;
+package architecture.ee.web.community.struts2.action.support;
 
 import architecture.ee.web.community.social.SocialNetworkManager;
 
