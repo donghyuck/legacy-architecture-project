@@ -88,14 +88,6 @@
 						} 
 					}
 				});
-				
-				parameterMap: function (options, operation){	          
-								if (operation != "read" && options) {
-									return { companyId: options.companyId, item: kendo.stringify(options)};
-								}else{
-									return { startIndex: options.skip, pageSize: options.pageSize }
-								}
-							}
 							
 				${stream_name}.dataSource.read();
 				
