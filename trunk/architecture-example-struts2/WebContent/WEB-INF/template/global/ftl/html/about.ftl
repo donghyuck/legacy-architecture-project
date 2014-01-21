@@ -84,6 +84,7 @@
 				${stream_name}.createDataSource({ 
 					transport : {
 						parameterMap : function(data, type) {
+							alert( type ) ;
 							 if (type == "read") {
 							 	return { objectType : 1 };
 							 } 
