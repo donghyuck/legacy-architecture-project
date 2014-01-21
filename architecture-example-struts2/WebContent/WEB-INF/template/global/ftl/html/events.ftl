@@ -224,8 +224,9 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-					<div id="event-area">
-						<div id="announce-list-view-panel" class="panel panel-default" style="height:100%">
+					<div id="event-area" style="position: relative;">
+						
+						<div id="announce-list-view-panel" class="panel panel-default" style="position: absolute;">
 							<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
@@ -237,7 +238,9 @@
 								<div id="announce-list-view"></div>	
 							</div>
 						</div>
-						<div id="announce-view-panel"></div>							
+						
+						<div id="announce-view-panel" style="position: absolute;"></div>
+													
 					</div>	
 				</div>				
 			</div>
