@@ -227,6 +227,7 @@
 					<div id="event-area">						
 						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
 							<div class="panel-heading" style="background-color:#ffffff;">
+								&nbsp;
 								<div class="k-window-actions panel-header-actions">
 									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
