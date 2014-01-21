@@ -37,7 +37,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					data : this.data
 				}
 			});		
-
+/**
 			if( options.requestStart ){				
 				this.dataSource.bind( 'requestStart' , options.requestStart );
 			}else{
@@ -57,7 +57,8 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					this.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
 					}
 				);
-			}			
+			}		
+			*/	
 		},
 		setTemplate: function ( template ){
 			if (template) this.template = template;	
