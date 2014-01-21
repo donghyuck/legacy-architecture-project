@@ -233,7 +233,7 @@
 											selectedStreams.createDataSource({});											
 											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams )
 										}
-										showSocialPanel();
+										displaySocialPanel();
 									}							
 								},
 								dataBound: function(e) {									
@@ -564,18 +564,24 @@
 			$("#announce-panel" ).show();
 		}	
 								
-		function showSocialPanel ( ){
+		function displaySocialPanel ( ){
 			var streamsPlaceHolder = $("#my-social-streams-grid").data("streamsPlaceHolder");
 			var streamsProvider = $("#my-social-streams-grid").data( streamsPlaceHolder.serviceProviderName + "-streams-" + streamsPlaceHolder.socialAccountId ) ;
 			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;					
+			
 			if( $("#" + renderToString ).length == 0  ){						
-				// create new social panel 
+				// create new panel 
+				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template($("#social-view-panel-template").html());				
-				$("#social-view-panels").append( template( streamsPlaceHolder ) );												
+				//$("#social-view-panels").append( template( streamsPlaceHolder ) );												
+				$("#personalized-area").append( template( streamsPlaceHolder ) );						
+				$( '#'+ renderToString ).addClass("col-sm-" + grid_col_size.newValue );		
+				
 				if(streamsProvider.dataSource.total() == 0 )
 				{
 					streamsProvider.dataSource.read();
 				}
+								
 				$( '#'+ renderToString + ' .panel-header-actions a').each(function( index ) {
 					var social_header_action = $(this);
 					social_header_action.click(function (e){
@@ -597,9 +603,8 @@
 						}
 					});			
 				} );			
-			} else {
-				$("#" + renderToString ).show();
 			} 
+			$("#" + renderToString ).show();
 		}		
 				
 		/** Photo View Panel */
