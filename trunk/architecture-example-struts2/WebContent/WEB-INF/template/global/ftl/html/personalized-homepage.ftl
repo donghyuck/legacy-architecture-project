@@ -605,8 +605,7 @@
 			var renderToString =  "attachement-panel-0";	
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
-				alert(grid_col_size.newValue);
-				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#colSize#" style="display:none;"></div>');				
+				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
 			}									
 			var attachPlaceHolder = $("#attach-view-panel").data( "attachPlaceHolder");
