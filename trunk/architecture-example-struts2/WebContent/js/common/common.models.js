@@ -51,7 +51,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 			if( options.change ){
 				this.dataSource.bind( 'change' , options.change );
 			}else{
-				$(renderToString).html(kendo.render( this.template, this.dataSource.view()));
+				$(this.renderToString()).html(kendo.render( this.template, this.dataSource.view()));
 			}			
 		},
 		setTemplate: function ( template ){
