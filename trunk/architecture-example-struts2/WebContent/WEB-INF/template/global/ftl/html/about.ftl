@@ -11,6 +11,7 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.ui.js'],
@@ -68,100 +69,11 @@
 					}
 				});				
 				
-								
+				
 				// Start : Company Social Content 
-				<#list action.companySocials  as item >				
-					<#if item.serviceProviderName == "twitter">
-					var twitterTemplate = kendo.template($("#twitter-timeline-template").html());
-					var twitterDataSource = new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								type: "json",
-								//url : '${request.contextPath}/social/get-twitter-usertimeline.do?output=json',
-								url : '${request.contextPath}/social/get-twitter-hometimeline.do?output=json',
-							},
-							parameterMap: function (options, operation){
-								if (operation == "read" && options) {										                        								                       	 	
-									return { socialAccountId: ${ item.socialAccountId } };									                            	
-								}
-							} 
-						},
-						requestStart: function() {
-							kendo.ui.progress($("#company-twitter-timeline"), true);
-						},
-						requestEnd: function() {
-							kendo.ui.progress($("#company-twitter-timeline"), false);
-						},
-						change: function() {
-							$("#company-twitter-timeline").html(kendo.render(twitterTemplate, this.view()));
-						},
-						error:handleKendoAjaxError,
-						schema: {
-							data : "homeTimeline"
-						}
-		            });            				
-		            twitterDataSource.read();		            
-		            
-		            <#elseif item.serviceProviderName == "facebook">
+				<#list action.connectedCompanySocialNetworks  as item >	
 					
-					var facebookTemplate = kendo.template($("#facebook-homefeed-template").html());
-					
-					var facebookDataSource = new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								type: "json",
-								url : '${request.contextPath}/social/get-facebook-homefeed.do?output=json',
-							},
-							parameterMap: function (options, operation){
-								if (operation == "read" && options) {										                        								                       	 	
-									return { socialAccountId: ${ item.socialAccountId } };	                            	
-								}
-							} 
-						},
-						requestStart: function() {
-							kendo.ui.progress($("#company-facebook-homefeed"), true);
-						},
-						requestEnd: function() {
-							kendo.ui.progress($("#company-facebook-homefeed"), false);
-						},
-						change: function() {
-							$("#company-facebook-homefeed").html(kendo.render(facebookTemplate, this.view()));
-						},
-						error:handleKendoAjaxError,
-						schema: {
-							data : "homeFeed"
-						}
-		            });            				
-		            facebookDataSource.read();
-					</#if>
-					
-					$("#${item.serviceProviderName}-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);						
-						if( panel_header_action.text() == "Minimize" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#${item.serviceProviderName}-panel .panel-body").toggleClass("hide");								
-								var panel_header_action_icon = panel_header_action.find('span');
-								if( panel_header_action_icon.hasClass("k-i-minimize") ){
-									panel_header_action.find('span').removeClass("k-i-minimize");
-									panel_header_action.find('span').addClass("k-i-maximize");
-								}else{
-									panel_header_action.find('span').removeClass("k-i-maximize");
-									panel_header_action.find('span').addClass("k-i-minimize");
-								}								
-							});
-						} else if (panel_header_action.text() == "Refresh" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								${item.serviceProviderName}DataSource.read();
-							});
-						}
-					} );
-								
-				</#list>
-				// End : Company Social Content								
+				</#list>				
 				<#if !action.user.anonymous >							
 				</#if>	
 				// END SCRIPT            
@@ -216,7 +128,6 @@
 					<!-- end side menu -->					
 				</div>
 				<div class="col-lg-9">
-
 					<div class="row">
 						<div class="col-lg-6">
 							<div id="facebook-panel">
@@ -262,11 +173,8 @@
 				</div>				
 			</div>
 		</div>									 
-		<div class="container layout">	
-					
-				<div class="row">
-
-				</div>		
+		<div class="container layout">						
+				<div id="social-area" class="row"></div>		
 			</div>				
 		<!-- END MAIN CONTENT -->	
 
