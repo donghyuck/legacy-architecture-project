@@ -1003,7 +1003,7 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<button id="showRight" type="button" class="btn btn-info"><i class="fa fa-chevron-left fa-2x"></i></button>
+						<button id="showRight" type="button" class="btn btn-info pull-right"><i class="fa fa-bars"></i></button>
 					</div>
 				</div>
 				
