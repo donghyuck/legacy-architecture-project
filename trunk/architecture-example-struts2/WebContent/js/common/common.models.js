@@ -37,24 +37,25 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					data : this.data
 				}
 			});		
-			
-			var elementToRender = $(this.renderToString);
+
 			if( options.requestStart ){				
 				this.dataSource.bind( 'requestStart' , options.requestStart );
 			}else{
-				this.dataSource.bind( 'requestStart' , kendo.ui.progress( elementToRender, true) );
+				this.dataSource.bind( 'requestStart' , kendo.ui.progress( this.elementToRender(), true) );
 			}	
 			
 			if( options.requestEnd ){
 				this.dataSource.bind( 'requestEnd' , options.requestEnd );
 			}else{
-				this.dataSource.bind( 'requestEnd' , kendo.ui.progress( elementToRender, false) );
+				this.dataSource.bind( 'requestEnd' , kendo.ui.progress( this.elementToRender(), false) );
 			}			
 			if( options.change ){
 				this.dataSource.bind( 'change' , options.change );
 			}else{
-				this.dataSource.bind( 'change' , 
-						elementToRender.html(kendo.render( this.template, this.dataSource.view()))
+				this.dataSource.bind( 'change' , function (){ 
+					alert("fdasf");
+					this.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
+					}
 				);
 			}			
 		},
@@ -63,6 +64,9 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 		},
 		renderToString : function () {
 			return  "#"+ this.name + "-streams-" + this.mediaId ;
+		},
+		elementToRender : function (){
+			return $(this.renderToString);
 		}
 	});	
 	
