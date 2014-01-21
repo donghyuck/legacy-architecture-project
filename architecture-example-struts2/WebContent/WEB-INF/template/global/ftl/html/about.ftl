@@ -132,10 +132,10 @@
 					<div class="row">
 					<#list action.connectedCompanySocialNetworks  as item >	
 						<div class="col-sm-6">
-							<div id="${serviceProviderName}-panel-${socialAccountId}">
+							<div id="${item.serviceProviderName}-panel-${item.socialAccountId}">
 								<div class="panel panel-default">
 									<div class="panel-heading">
-										<i class="fa fa-${serviceProviderName}"></i>&nbsp;${serviceProviderName}
+										<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
 										<div class="k-window-actions panel-header-actions">
 											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -145,7 +145,7 @@
 									</div>		
 									<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
 											<ul class="media-list">
-												<div id="${serviceProviderName}-streams-${socialAccountId}">&nbsp;</div>
+												<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
 											</ul>
 									</div>							
 								</div>
