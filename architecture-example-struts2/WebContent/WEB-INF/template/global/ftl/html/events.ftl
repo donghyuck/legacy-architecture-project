@@ -133,9 +133,7 @@
 								$("#announce-list-view").data( "kendoListView").refresh();
 							});
 						}
-				} );						
-				
-										
+				} );											
 				<#if !action.user.anonymous >				
 				
 				</#if>	
@@ -143,11 +141,14 @@
 			}
 		}]);	
 		
-		function showAnnounce () {			
+		function showAnnounce () {					
 			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
+			$("#announce-view-panel").find(".close").click(function (e) {
+				$("#announce-view-panel").hide();
+			});
 			$("#announce-view-panel").show();
 		}				
 		-->
