@@ -34,9 +34,7 @@
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
-						$('.dropdown-toggle').dropdown();
-						//Holder.run();
-						
+						//$('.dropdown-toggle').dropdown();
 						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
 							$("#login-btn").click(function() { 
@@ -71,6 +69,9 @@
 
 
 				// 1. Announces 				
+				
+				var flipEffect = kendo.fx($("#event-area")).flipHorizontal($("#announce-view-panel"), $("#announce-list-view-panel")).duration(1000);
+				
 				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );	
 				$("#announce-list-view").kendoListView({
 					dataSource: new kendo.data.DataSource({
@@ -98,7 +99,8 @@
 					change: function(e) { 
 						var data = this.dataSource.view() ;
 						var selectedCell = data[this.select().index()];		
-						$("#announce-list-view").data( "announcePlaceHolder", selectedCell )										
+						$("#announce-list-view").data( "announcePlaceHolder", selectedCell );
+						flipEffect.play();					
 						showAnnounce();							
 					},
 					dataBound: function(e) {
@@ -132,7 +134,8 @@
 								 $("#announce-list-view").data( "kendoListView").refresh();
 							});
 						}
-			} );						
+				} );						
+				
 										
 				<#if !action.user.anonymous >				
 				
@@ -221,21 +224,21 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-					
-					<div id="announce-view-panel" class="hide"></div>	
-					
-					<div id="announce-list-view-panel" class="panel panel-default">
-						<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
-							<div class="k-window-actions panel-header-actions">
-								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-							</div>						
-						</div>
-						<div class="panel-body hide" style="padding-top:25px;">
-							<div id="announce-list-view"></div>	
-						</div>
-					</div>		
+					<div id="event-area">
+						<div id="announce-view-panel" class="hide"></div>					
+						<div id="announce-list-view-panel" class="panel panel-default">
+							<div class="panel-heading"><i class="fa fa-th-large"></i>&nbsp;목록
+								<div class="k-window-actions panel-header-actions">
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+								</div>						
+							</div>
+							<div class="panel-body hide" style="padding-top:25px;">
+								<div id="announce-list-view"></div>	
+							</div>
+						</div>		
+					</div>	
 				</div>				
 			</div>
 		</div>									 
