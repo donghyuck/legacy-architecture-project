@@ -27,7 +27,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 		createDataSource: function ( options ){
 			var that = this ;			
 			
-			if( !options.transport.parameterMap ){
+			if( options.transport.parameterMap ){
 				options.transport.parameterMap =  function( options,  operation) {
 					return {};
 				}				
