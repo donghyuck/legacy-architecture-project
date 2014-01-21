@@ -37,14 +37,21 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					data : this.data
 				}
 			});		
-			if( options.requestStart ){
+			if( options.requestStart ){				
 				this.dataSource.bind( 'requestStart' , options.requestStart );
-			}			
+			}else{
+				this.dataSource.bind( 'requestStart' , options.kendo.ui.progress($(this.renderToString())), true) );
+			}	
+			
 			if( options.requestEnd ){
 				this.dataSource.bind( 'requestEnd' , options.requestEnd );
+			}else{
+				this.dataSource.bind( 'requestEnd' , options.kendo.ui.progress($(this.renderToString())), false) );
 			}			
 			if( options.change ){
 				this.dataSource.bind( 'change' , options.change );
+			}else{
+				$(renderToString).html(kendo.render( this.template, this.dataSource.view()));
 			}			
 		},
 		setTemplate: function ( template ){
