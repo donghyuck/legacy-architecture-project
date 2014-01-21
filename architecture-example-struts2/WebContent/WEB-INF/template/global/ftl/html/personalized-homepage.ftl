@@ -30,11 +30,11 @@
 				var menuRight  = document.getElementById( 'cbp-spmenu-s2' );
 				$("#show-right-slide").click(function (e) {
 					classie.toggle( this, 'active' );
-					classie.toggle( $( '#cbp-spmenu-s2' ), 'cbp-spmenu-open' );				
+					classie.toggle( menuRight, 'cbp-spmenu-open' );				
 				});
 				$("#hide-right-slide").click(function (e) {
 					classie.toggle( this, 'active' );
-					classie.toggle( $( '#cbp-spmenu-s2' ), 'cbp-spmenu-open' );				
+					classie.toggle( menuRight, 'cbp-spmenu-open' );				
 				});
 												
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
