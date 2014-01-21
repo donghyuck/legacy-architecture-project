@@ -111,7 +111,7 @@
 				});
 				</#list>	
 				
-				$(".custom-panels-group div").each(function( index ) {
+				$(".custom-panels-group div:first-child").each(function( index ) {
 					var social_panel = $(this);
 					alert(social_panel.html() );
 				});	
