@@ -37,7 +37,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 					data : this.data
 				},
 				change : function () {
-					his.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
+					this.elementToRender().html(kendo.render( this.template, this.dataSource.view()));
 				}
 			});		
 /*
