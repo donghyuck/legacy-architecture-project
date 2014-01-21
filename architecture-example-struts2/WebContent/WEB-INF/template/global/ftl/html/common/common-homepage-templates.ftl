@@ -207,7 +207,7 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="social-view-panel-template">
-		<div id="#: serviceProviderName #-panel-#:socialAccountId#" class="panel panel-info">
+		<div id="#: serviceProviderName #-panel-#:socialAccountId#" class="panel panel-info custom-panels-group" style="display:none;">
 			<div class="panel-heading">
 				<i class="fa fa-#: serviceProviderName # fa-fw"></i>&nbsp;&nbsp;#: serviceProviderName # &nbsp; 소식
 				<div class="k-window-actions panel-header-actions">
