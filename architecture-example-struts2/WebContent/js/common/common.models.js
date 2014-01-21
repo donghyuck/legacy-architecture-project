@@ -41,7 +41,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 						type: "json",
 						url : that.url
 					} ,
-					parameterMap : options.transport.parameterMap()
+					parameterMap : options.transport.parameterMap
 				},
 				error:handleKendoAjaxError,
 				schema: {
