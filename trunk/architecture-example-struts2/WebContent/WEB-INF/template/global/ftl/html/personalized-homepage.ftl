@@ -1063,7 +1063,8 @@
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
-			<button id="hide-right-slide" type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i></button>
+
+			<button  id="hide-right-slide" type="button" class="close">&times;</button>
 			<div class="panel panel-default">
 				<div class="panel-body clearfix">		
 						<ul class="nav nav-tabs" id="myTab">
