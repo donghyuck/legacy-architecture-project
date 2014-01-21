@@ -130,7 +130,7 @@
 						} else if (panel_header_action.text() == "Refresh" ){
 							panel_header_action.click(function (e) {
 								e.preventDefault();		
-								 $("#announce-list-view").data( "kendoListView").refresh();
+								$("#announce-list-view").data( "kendoListView").refresh();
 							});
 						}
 				} );						
