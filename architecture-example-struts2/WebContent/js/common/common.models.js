@@ -10,6 +10,7 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 		dataSource : null,		
 		template: null,
 		init: function(mediaId, name, url, data) {
+			if (mediaId) this.mediaId = mediaId;			
 			if (name) this.name = name;				
 			if( name == 'twitter' )
 			{
