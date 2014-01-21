@@ -564,6 +564,9 @@
 			$("#announce-panel" ).show();
 		}	
 								
+		<!-- ============================== -->
+		<!-- displaySocialPanel()                                   -->
+		<!-- ============================== -->						
 		function displaySocialPanel ( ){
 			var streamsPlaceHolder = $("#my-social-streams-grid").data("streamsPlaceHolder");
 			var streamsProvider = $("#my-social-streams-grid").data( streamsPlaceHolder.serviceProviderName + "-streams-" + streamsPlaceHolder.socialAccountId ) ;
