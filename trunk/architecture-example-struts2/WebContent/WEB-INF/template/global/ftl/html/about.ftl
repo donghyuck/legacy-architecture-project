@@ -84,7 +84,6 @@
 				${stream_name}.createDataSource({ 
 					transport : {
 						parameterMap : function ( options,  operation) {
-							alert( operation ) ;
 							return { objectType : 1 };
 						} 
 					}
