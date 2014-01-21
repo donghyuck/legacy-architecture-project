@@ -230,7 +230,7 @@
 											}else if ( selectedStreams.name == 'facebook'){
 												selectedStreams.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
 											}
-											selectedStreams.createDataSource({});
+											selectedStreams.createDataSource({});											
 											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams )
 										}
 										showSocialPanel();
