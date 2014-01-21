@@ -207,7 +207,8 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="social-view-panel-template">
-		<div id="#: serviceProviderName #-panel-#:socialAccountId#" class="panel panel-info custom-panels-group" style="display:none;">
+	<div class="custom-panels-group" style="display:none;"> 
+		<div id="#: serviceProviderName #-panel-#:socialAccountId#" class="panel panel-info">
 			<div class="panel-heading">
 				<i class="fa fa-#: serviceProviderName # fa-fw"></i>&nbsp;&nbsp;#: serviceProviderName # &nbsp; 소식
 				<div class="k-window-actions panel-header-actions">
@@ -222,7 +223,8 @@
 					<div id="#:serviceProviderName#-streams-#:socialAccountId#">데이터가 없습니다..</div>
 				</ul>
 			</div>
-		</div>				
+		</div>	
+	</div>				
 </script>
 
 <script type="text/x-kendo-tmpl" id="facebook-homefeed-template">
