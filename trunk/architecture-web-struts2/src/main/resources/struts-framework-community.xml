@@ -86,7 +86,7 @@
 		<action name="update-socialnetwork"  method="updateSocialNetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
-			   <param name="excludeProperties">socialNetwork.socialServiceProvider</param>
+			   <param name="excludeProperties">socialNetwork.*\.socialServiceProvider, socialNetwork.socialServiceProvider.*</param>
 			  <param name="excludeNullProperties">false</param>     
 				<param name="includeProperties">
 				socialNetwork.*
@@ -96,15 +96,19 @@
 
 		<action name="get-socialnetwork"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
 			  <param name="enableGZIP">true</param>
-			   <param name="excludeProperties">socialNetwork.socialServiceProvider, socialNetwork.primaryKeyObject</param>
+			   <param name="excludeProperties">socialServiceProvider.*</param>
 			  <param name="excludeNullProperties">false</param>     
-				<param name="includeProperties">
+			  <!-- 
+			  <param name="includeProperties">
 				socialNetwork.*
-				</param>
+			  </param>-->
+			  <param name="root">socialNetwork</param>
+			  
 			</result>
-		</action>	
-						
+		</action>
+								
 		<action name="twitter-callback" class="architecture.ee.web.community.struts2.action.TwitterCallbackAction">
 			<result name="success" type="freemarker">/html/community/twitter-callback.ftl</result>
 		</action>
