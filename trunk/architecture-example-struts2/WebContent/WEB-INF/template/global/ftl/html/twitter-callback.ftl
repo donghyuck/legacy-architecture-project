@@ -10,9 +10,8 @@
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',       	   
        	    '${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
-       	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.apis.js',
-       	    '${request.contextPath}/js/common/common.ui.js'], 
+       	    '${request.contextPath}/js/common/common.models.min.js',
+       	    '${request.contextPath}/js/common/common.ui.min.js'], 
             complete: function() {               
 				
 				var oauth_token = '${ action.oauth_token }';
