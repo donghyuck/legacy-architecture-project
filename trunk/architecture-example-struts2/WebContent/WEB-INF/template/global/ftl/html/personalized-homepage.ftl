@@ -91,7 +91,7 @@
 										
 										$.ajax({
 											type : 'POST',
-											url : "${request.contextPath}/community/get-get-socialnetwork.do?output=json",
+											url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
 											data: { media: target_media },
 											success : function(response){
 												if( response.error ){
