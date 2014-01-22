@@ -415,7 +415,6 @@
 				// END SCRIPT 
 			}
 		}]);	
-
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );				
@@ -507,8 +506,7 @@
 							}
 						}
 					});
-				}
-				
+				}				
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
 					if( panel_button.hasClass( 'custom-update') ){
