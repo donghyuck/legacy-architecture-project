@@ -69,28 +69,7 @@
 										if( $("#external-login-window" ).length == 0  ){	
 											$('body').append('<div id="external-login-window"></div>');	
 										}
-										if( !$("#external-login-window" ).data("kendoWindow")){
-											$("#external-login-window" ).kendoWindow({
-												animation: {
-													open: {
-														effects: "fade:in"
-													},
-													close: {
-														effects: "fade:out"
-													}
-												},
-												width : 500,
-												height : 600,
-												visible: false,
-												draggable: false,
-												iframe: true,
-												modal: true,
-												title: "쇼셜 로그인"
-											});
-										}
 										var target_media = external_login_button.attr("data-target");
-										var external_login_window = $("#external-login-window" ).data("kendoWindow");
-										
 										$.ajax({
 											type : 'POST',
 											url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
@@ -98,11 +77,25 @@
 											success : function(response){
 												if( response.error ){
 													// 연결실패.
-												} else {	
-													//var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
-													//$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );		
-													alert( kendo.stringify(response) );							
-													external_login_window.content( response.authorizationUrl );
+												} else {														
+													var external_login_window = $("#external-login-window" ).kendoWindow({
+															animation: {
+																open: {
+																	effects: "fade:in"
+																},
+																close: {
+																	effects: "fade:out"
+																}
+															},
+															width : 500,
+															height : 600,
+															visible: false,
+															draggable: false,
+															content : response.authorizationUrl,
+															iframe: true,
+															modal: true,
+															title: "쇼셜 로그인"
+													});	
 													external_login_window.center();
 													external_login_window.open();
 												}
