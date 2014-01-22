@@ -56,11 +56,14 @@
 					authenticate : function( e ){
 						currentUser = e.token;			
 						if( currentUser.anonymous ){
-								
+								$("#account-panel button").each(function( index ) {
+									var external_login_button = $(this);
+									alert( external_login_button.html() );
+									
+								});
 								$("#account-panel .custom-external-login-groups button").each(function( index ) {
-									var social_login_button = $(this);
-									social_login_button.click(function (e){
-																												
+									var external_login_button = $(this);
+									external_login_button.click(function (e){																												
 										if( $("#external-login-window" ).length == 0  ){	
 											$('body').append('<div id="external-login-window"></div>');	
 										}
