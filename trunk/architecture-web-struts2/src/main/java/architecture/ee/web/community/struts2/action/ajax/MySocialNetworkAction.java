@@ -42,6 +42,24 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 	
 	private SocialNetworkManager socialNetworkManager;
 	
+	private String media;
+	
+	
+	
+	/**
+	 * @return media
+	 */
+	public String getMedia() {
+		return media;
+	}
+
+	/**
+	 * @param media 설정할 media
+	 */
+	public void setMedia(String media) {
+		this.media = media;
+	}
+
 	/**
 	 * @return socialNetworkId
 	 */
@@ -102,9 +120,15 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 	}
 	
 	public SocialNetwork getSocialNetwork() throws NotFoundException{
-		if( mySocialNetwork == null ){
+		if( mySocialNetwork == null && socialNetworkId > 0 ){			
 			this.mySocialNetwork = socialNetworkManager.getSocialNetworkById(this.socialNetworkId);
-		}		
+		}else{		
+			if( StringUtils.isNotEmpty(media)){
+				Media selectedMedia = SocialNetwork.Media.valueOf(media.toUpperCase());
+				mySocialNetwork = newSocialNetwork(selectedMedia);
+				
+			}
+		}
 		return mySocialNetwork;
 	}
 	
