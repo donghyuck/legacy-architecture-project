@@ -20,12 +20,7 @@
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
 				mySocialNetwork.serviceProviderName = "facebook" 
 				var success = false;
-				
-				
-				if (window.parent != window.top) {
-					
-				}
-				
+								
 				if( window.location.href.indexOf("secure") > -1){
 					alert("is admin company register social...");
 				}
