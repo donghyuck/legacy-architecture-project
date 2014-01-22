@@ -62,7 +62,7 @@
 									social_login_button.click(function (e){
 																												
 										if( $("#external-login-window" ).length == 0  ){	
-											$('body').append("<div id="external-login-window"></div>");	
+											$('body').append('<div id="external-login-window"></div>');	
 										}
 										if( !$("#external-login-window" ).data("kendoWindow")){
 											$("#external-login-window" ).kendoWindow({
