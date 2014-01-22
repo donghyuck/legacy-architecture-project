@@ -74,10 +74,10 @@
 														effects: "fade:out"
 													}
 												},
-												visible: false;
+												visible: false,
 												draggable: false,
 												iframe: true,
-												modal: true
+												modal: true,
 												title: "쇼셜 로그인"
 											});
 										}
