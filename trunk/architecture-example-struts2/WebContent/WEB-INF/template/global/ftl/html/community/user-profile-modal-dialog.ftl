@@ -16,6 +16,7 @@
 				});
 			});	
 
+
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault();				
 				if( $(this).attr('href') == '#profile-social-network' ){					
