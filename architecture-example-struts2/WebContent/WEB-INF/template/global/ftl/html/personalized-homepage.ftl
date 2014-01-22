@@ -99,7 +99,7 @@
 												} else {	
 													//var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
 													//$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );		
-													alert( kendoui.stringify(response) );							
+													alert( kendo.stringify(response) );							
 													external_login_window.content( target_media );
 													external_login_window.center();
 													external_login_window.open();
