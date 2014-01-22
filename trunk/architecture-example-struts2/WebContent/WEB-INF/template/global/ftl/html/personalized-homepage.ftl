@@ -79,8 +79,8 @@
 														effects: "fade:out"
 													}
 												},
-												width : 500px;
-												height : 400px;
+												width : 500,
+												height : 600,
 												visible: false,
 												draggable: false,
 												iframe: true,
