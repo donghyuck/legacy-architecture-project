@@ -28,30 +28,7 @@
 		<script id="attach-details-template" type="text/x-kendo-template">	
 			<a href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" class="btn btn-warning">다운로드</a>
 		</script>
-				
-		<!--		
-		<script id="sidebar-template" type="text/x-kendo-template">	
-			<div class="rexy-header">
-				<div class="btn-group">
-				  <button class="btn">Left</button>
-				  <button class="btn">Middle</button>
-				  <button class="btn">Right</button>
-				</div>
-			
-			</div>			
-		    <div class="row">
-      			<div class="span3 bs-docs-sidebar">	
-				<ul class="nav nav-list">
-					<li class="nav-header">List header</li>
-					<li class="active"><a href="\\#">Home</a></li>
-					<li><a href="\\#">Library</a></li>
-				</ul>
-			</div>
-			</div>
-			
-		</script>
-        -->
-        
+				        
 		<script id="topbar-template" type="text/x-kendo-template">
 			<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
 				<div class="navbar-header">
