@@ -20,7 +20,7 @@
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
 				mySocialNetwork.serviceProviderName = "twitter" 
 				var success = false;
-				
+				/**
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
@@ -39,6 +39,7 @@
 					error: handleKendoAjaxError
 				});				
 				window.opener.handleSocialCallbackResult(success);		
+				*/
 			}	
 		}]);
 		</script>		
