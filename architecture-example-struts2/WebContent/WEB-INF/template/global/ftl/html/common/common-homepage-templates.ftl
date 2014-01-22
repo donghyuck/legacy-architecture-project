@@ -1,6 +1,3 @@
-
-
-		</script>
 <!-- photo view panel -->
 <script type="text/x-kendo-template" id="photo-panel-template">
 	<div class="panel panel-default">
@@ -113,84 +110,11 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<textarea id="announce-body-editor" data-bind='value:body'></textarea>
-		<!--
-		<textarea data-role="editor"
-			data-tools="[
-				'bold',
-				'italic',
-				'underline',
-				'strikethrough',
-				'justifyLeft',
-				'justifyCenter',
-				'justifyRight',
-				'justifyFull',
-				'insertUnorderedList',
-				'insertOrderedList',
-				'indent',
-				'outdent',
-				'createLink',
-				'unlink',
-				'insertImage',
-				'subscript',
-				'superscript',
-				'createTable',
-				'addRowAbove',
-				'addRowBelow',
-				'addColumnLeft',
-				'addColumnRight',
-				'deleteRow',
-				'deleteColumn',
-				'viewHtml',
-				'formatting',
-				'fontName',
-				'fontSize',
-				'foreColor',
-				'backColor'
-			]"
-			data-bind='value:body'></textarea>		
-			-->
+		<textarea id="announce-body-editor" data-bind='value:body'></textarea>		
 	</div>
 </div>	  
-	<!--		
-	<div class="blank-top-5" ></div>		
-	<ul class="list-group">
-		<li class="list-group-item">
-		시작일시: 
-		<div class="blank-top-5" ></div>
-		종료일시: 
-		</li>
-		<li class="list-group-item">
-		<div class="media">
-			<a class="pull-left" href="\\#">
-			#if ( user.properties.imageId != null ) {# 
-			<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
-			# } else {  #	
-			<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
-			# } #
-			</a>
-			<div class="media-body">
-				<h5 class="media-heading">
-					# if( user.nameVisible ){#
-					#: user.name # (#: user.username #)
-					# } else { #
-					#: user.username #
-					# } # 		
-					# if( user.emailVisible ){#
-					<br>(#: user.email #)
-					# } #	
-				</h5>
-			</div>
-		</div>			
-		</li>
-	</ul>
-	-->
-	<!--
-	<div contentEditable class="inline-body-editor" data-role="editor" data-tools="['italic',	'underline',	'strikethrough']"	data-bind="value:body"></div>	
-	-->
-		
 	<div class="blank-top-5" ></div>				
-	<div class="pull-right">
+		<div class="pull-right">
 			<div class="btn-group">
 			<button type="button" class="btn btn-primary custom-update" ><i class="fa fa-check"></i> 저장</button>
 			<button type="button" class="btn btn-primary custom-cancle" >취소</button>
@@ -198,7 +122,6 @@
 			</div>
 	</div>
 </script>
-
 
 <script type="text/x-kendo-tmpl" id="announcement-template">
 	<tr class="announce-item" onclick="viewAnnounce(#: announceId#);">
@@ -448,7 +371,7 @@
 			# } #
 			<li class="divider"></li>
 			<li><a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
-			# } else { #  			
+			# } else { # 						
 			<li>
 				<div class="container" style="width:100%;">
 					<div class="row blank-top-5 ">
