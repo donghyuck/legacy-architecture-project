@@ -21,6 +21,17 @@
 				mySocialNetwork.serviceProviderName = "facebook" 
 				var success = false;
 				
+				if ( opener && !opener.closed) {
+ 					alert("부모창 존재");
+				} else {
+ 					alert("부모창 존재하지 않음");
+				}
+				
+				if(parent && parent!=this) 
+				alert("부모님 있음"); 
+				else alert("부모님 없음");
+
+				/**
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
@@ -38,7 +49,11 @@
 					},
 					error: handleKendoAjaxError
 				});				
+				
 				window.opener.handleSocialCallbackResult(success);		
+				
+				*/
+				
 			}	
 		}]);
 		</script>		
