@@ -63,11 +63,6 @@
 						
 						//$('.dropdown-toggle').dropdown();
 						if( currentUser.anonymous ){
-							$("#account-panel button").each(function( index ) {
-									var external_login_button = $(this);
-									alert( external_login_button.html() );
-									
-							});
 							$("#account-panel .custom-external-login-groups button").each(function( index ) {
 									var external_login_button = $(this);
 									external_login_button.click(function (e){																												
@@ -91,9 +86,9 @@
 												title: "쇼셜 로그인"
 											});
 										}
-										
+										var target_media = external_login_button.attr("data-target");
 										var external_login_window = $("#external-login-window" ).data("kendoWindow");
-										var target_media = social_login_button.attr("data-target");
+										
 										external_login_window.content( target_media );
 										external_login_window.center();
 										external_login_window.open();
