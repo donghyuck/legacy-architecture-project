@@ -66,6 +66,7 @@
 							$("#account-panel .custom-external-login-groups button").each(function( index ) {
 									var external_login_button = $(this);
 									external_login_button.click(function (e){																												
+										/**
 										if( $("#external-login-window" ).length == 0  ){	
 											$('body').append('<div id="external-login-window"></div>');	
 										}
@@ -88,8 +89,9 @@
 												title: "쇼셜 로그인"
 											});
 										}
+										**/
 										var target_media = external_login_button.attr("data-target");
-										var external_login_window = $("#external-login-window" ).data("kendoWindow");
+										//var external_login_window = $("#external-login-window" ).data("kendoWindow");
 										
 										$.ajax({
 											type : 'POST',
@@ -99,12 +101,15 @@
 												if( response.error ){
 													// 연결실패.
 												} else {	
+												/**
 													external_login_window.center();
 													external_login_window.open();
 													external_login_window.refresh({
 														url: response.authorizationUrl,
 														iframe : true
 													});
+													*//
+													window.open( response.authorizationUrl ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
 												}
 											},
 											error:handleKendoAjaxError,
