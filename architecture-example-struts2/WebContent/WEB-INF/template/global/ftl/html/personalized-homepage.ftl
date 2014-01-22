@@ -56,6 +56,9 @@
 					authenticate : function( e ){
 						currentUser = e.token;			
 						if( currentUser.anonymous ){
+								
+								alert($("#account-panel").html());
+						
 								$("#account-panel button").each(function( index ) {
 									var external_login_button = $(this);
 									alert( external_login_button.html() );
