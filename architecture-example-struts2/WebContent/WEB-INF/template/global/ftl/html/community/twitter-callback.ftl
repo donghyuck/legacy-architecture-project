@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="secure-metro">
 	<head>
-		<title>페이스북 인증이 성공하였습니다.</title>
+		<title>트위터 인증</title>
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [
@@ -19,8 +19,11 @@
 				mySocialNetwork.accessToken = "${action.accessToken!''}";
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
 				mySocialNetwork.serviceProviderName = "twitter" 
-				var success = false;
-				/**
+				var success = false;				
+				<#if action.user.anonymous >
+					<#assign userProfile = socialNetwork.socialServiceProvider.getUserProfile >
+					var userProfile = ${ HtmlUtils.objectToJson(userProfile) };
+				<#else>
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
@@ -29,17 +32,17 @@
 						
 					},
 					success : function(response){
+						alert( stringify( response ) );
 						if( response.error ){
 						// 연결실패.
 						} else {														
 							success = true;
-							alert( kendo.stringify(response.socialNewtork) );	
 						}
 					},
 					error: handleKendoAjaxError
 				});				
-				window.opener.handleSocialCallbackResult(success);		
-				*/
+				window.opener.handleSocialCallbackResult(success);						
+				</#if>
 			}	
 		}]);
 		</script>		
