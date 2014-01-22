@@ -86,7 +86,7 @@
 		<action name="update-socialnetwork"  method="updateSocialNetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
-			   <param name="excludeProperties">socialNetwork.*\.socialServiceProvider</param>
+			   <param name="excludeProperties">socialNetwork.socialServiceProvider</param>
 			  <param name="excludeNullProperties">false</param>     
 				<param name="includeProperties">
 				socialNetwork.*
@@ -94,10 +94,10 @@
 			</result>
 		</action>	
 
-		<action name="get-socialnetwork"  method="updateSocialNetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+		<action name="get-socialnetwork"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
-			   <param name="excludeProperties">socialNetwork.*\.socialServiceProvider</param>
+			   <param name="excludeProperties">socialNetwork.socialServiceProvider</param>
 			  <param name="excludeNullProperties">false</param>     
 				<param name="includeProperties">
 				socialNetwork.*
