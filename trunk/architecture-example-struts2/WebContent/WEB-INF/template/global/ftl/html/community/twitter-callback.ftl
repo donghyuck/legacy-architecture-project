@@ -20,9 +20,12 @@
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
 				mySocialNetwork.serviceProviderName = "twitter" 
 				var success = false;				
+
+				var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.authenticate() ) };
+				alert( kendo.stringify(userProfile) );
+				
 				<#if action.user.anonymous >
-					<#assign userProfile = socialNetwork.socialServiceProvider.getUserProfile >
-					var userProfile = ${ HtmlUtils.objectToJson(userProfile) };
+
 				<#else>
 				$.ajax({
 					type : 'POST',
