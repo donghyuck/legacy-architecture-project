@@ -99,12 +99,10 @@
 												if( response.error ){
 													// 연결실패.
 												} else {	
-													//var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
-													//$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );		
 													external_login_window.center();
 													external_login_window.open();
 													external_login_window.refresh({
-														url: response,authorizationUrl,
+														url: response.authorizationUrl,
 														iframe : true
 													});
 												}
