@@ -579,7 +579,7 @@ function handleKendoAjaxError(xhr) {
 	} else if (xhr.errorThrown == 'timeout') {
 		message = "처리 대기 시간을 초가하였습니다. 잠시 후 다시 시도하여 주십시오.";
 	} else if (xhr.errorThrown == 'parsererror') {
-		message = "페이터 파싱 중에 오류가 발생하였습니다.";
+		message = "데이터 파싱 중에 오류가 발생하였습니다.";
 	} else {
 		message = "오류가 발생하였습니다." ;
 	}
