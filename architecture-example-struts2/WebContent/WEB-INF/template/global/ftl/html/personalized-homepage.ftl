@@ -55,16 +55,20 @@
 					dropdown : false,
 					authenticate : function( e ){
 						currentUser = e.token;			
-						if( currentUser.anonymous ){
-								
-								alert($("#account-panel").html());
+					},
+					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
+					template : kendo.template($("#account-template").html()),
+					</#if>
+					afterAuthenticate : function(){						
 						
-								$("#account-panel button").each(function( index ) {
+						//$('.dropdown-toggle').dropdown();
+						if( currentUser.anonymous ){
+							$("#account-panel button").each(function( index ) {
 									var external_login_button = $(this);
 									alert( external_login_button.html() );
 									
-								});
-								$("#account-panel .custom-external-login-groups button").each(function( index ) {
+							});
+							$("#account-panel .custom-external-login-groups button").each(function( index ) {
 									var external_login_button = $(this);
 									external_login_button.click(function (e){																												
 										if( $("#external-login-window" ).length == 0  ){	
@@ -95,18 +99,8 @@
 										external_login_window.open();
 									});
 								
-								});											
-						}
-					},
-					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
-					template : kendo.template($("#account-template").html()),
-					</#if>
-					afterAuthenticate : function(){
+							});
 						
-						alert($("#account-panel").html());
-						
-						//$('.dropdown-toggle').dropdown();
-						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");
 							$("#login-btn").click(function() { 
 								$("#login-status").html("");
