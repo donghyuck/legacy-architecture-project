@@ -30,6 +30,8 @@
 				if(parent && parent!=this) 
 				alert("부모님 있음"); 
 				else alert("부모님 없음");
+				
+				alert( kendo.stringify(mySocialNetwork) ) ;
 
 				/**
 				$.ajax({
