@@ -13,7 +13,7 @@
 							<li>
 								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    쇼셜</a>
 							</li>							
-							
+							<#if !action.user.anonymous >	
 							<li class="dropdown">
 								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
 								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
@@ -27,7 +27,8 @@
 									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 파일</a></li>
 									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><i class="fa fa-upload"></i>    파일 업로드</a></li>
 								</ul>
-							</li>						
+							</li>
+							</#if>						
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
