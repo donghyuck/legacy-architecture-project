@@ -79,6 +79,8 @@
 														effects: "fade:out"
 													}
 												},
+												width : 500px;
+												height : 400px;
 												visible: false,
 												draggable: false,
 												iframe: true,
@@ -100,10 +102,9 @@
 													//var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
 													//$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );		
 													alert( kendo.stringify(response) );							
-													external_login_window.content( target_media );
+													external_login_window.content( response.authorizationUrl );
 													external_login_window.center();
 													external_login_window.open();
-														
 												}
 											},
 											error:handleKendoAjaxError,
