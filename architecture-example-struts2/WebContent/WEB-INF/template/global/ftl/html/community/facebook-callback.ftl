@@ -32,8 +32,8 @@
 				
 				<#if action.user.anonymous >
 					// 회원 가입된 경우는 자동 로그인 그렇지 않는 경우는 회원 가입 .. 처리....
-					<#assign userProfile = socialNetwork.socialServiceProvider.getUserProfile >
-					var userProfile = ${ HtmlUtils.objectToJson(userProfile) };
+					<#assign userProfile = socialNetwork.socialServiceProvider.userProfile >
+					var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.userProfile) };
 				<#else>				
 				$.ajax({
 					type : 'POST',
