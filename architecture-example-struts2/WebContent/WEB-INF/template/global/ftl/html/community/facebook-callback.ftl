@@ -30,10 +30,10 @@
 					alert("is admin company register social...");
 				}
 				
+				var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.userProfile) };
+				alert( kendo.stringify(userProfile) );
 				<#if action.user.anonymous >
-					// 회원 가입된 경우는 자동 로그인 그렇지 않는 경우는 회원 가입 .. 처리....
-					<#assign userProfile = socialNetwork.socialServiceProvider.userProfile >
-					var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.userProfile) };
+					// 회원 가입된 경우는 자동 로그인 그렇지 않는 경우는 회원 가입 .. 처리....					
 				<#else>				
 				$.ajax({
 					type : 'POST',
