@@ -54,7 +54,8 @@
 				var accounts = $("#account-panel").kendoAccounts({
 					dropdown : false,
 					authenticate : function( e ){
-						currentUser = e.token;						
+						currentUser = e.token;		
+						alert( ">>" + currentUser.anonymous  )				
 					},
 					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
 					template : kendo.template($("#account-template").html()),
