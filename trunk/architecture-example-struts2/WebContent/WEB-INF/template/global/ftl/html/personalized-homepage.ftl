@@ -89,9 +89,31 @@
 										var target_media = external_login_button.attr("data-target");
 										var external_login_window = $("#external-login-window" ).data("kendoWindow");
 										
-										external_login_window.content( target_media );
-										external_login_window.center();
-										external_login_window.open();
+										$.ajax({
+											type : 'POST',
+											url : "${request.contextPath}/community/get-get-socialnetwork.do?output=json",
+											data: { media: target_media },
+											success : function(response){
+												if( response.error ){
+													// 연결실패.
+												} else {	
+													//var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
+													//$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );		
+													alert( kendoui.stringify(response) );							
+													external_login_window.content( target_media );
+													external_login_window.center();
+													external_login_window.open();
+														
+												}
+											},
+											error:handleKendoAjaxError,
+											beforeSend : function() {
+												//kendo.ui.progress($("#my-social-network-account-details"), true);
+											},
+											complete : function(){
+												//kendo.ui.progress($("#my-social-network-account-details"), false);
+											}													
+										});	
 									});
 								
 							});
