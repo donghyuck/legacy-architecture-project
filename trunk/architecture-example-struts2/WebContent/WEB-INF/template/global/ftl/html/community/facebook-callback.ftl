@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="secure-metro">
 	<head>
-		<title>페이스북 인증이 성공하였습니다.</title>
+		<title>페이스북 인증</title>
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [
@@ -21,41 +21,38 @@
 				mySocialNetwork.serviceProviderName = "facebook" 
 				var success = false;
 				
-				if ( opener && !opener.closed) {
- 					alert("부모창 존재");
-				} else {
- 					alert("부모창 존재하지 않음");
+				
+				if (window.parent != window.top) {
+					
 				}
 				
-				if(parent && parent!=this) 
-				alert("부모님 있음"); 
-				else alert("부모님 없음");
+				if( window.location.href.indexOf("secure") > -1){
+					alert("is admin company register social...");
+				}
 				
-				alert( kendo.stringify(mySocialNetwork) ) ;
-
-				/**
+				<#if action.user.anonymous >
+					// 회원 가입된 경우는 자동 로그인 그렇지 않는 경우는 회원 가입 .. 처리....
+					<#assign userProfile = socialNetwork.socialServiceProvider.getUserProfile >
+					var userProfile = ${ HtmlUtils.objectToJson(userProfile) };
+				<#else>				
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
 					data: { item: kendo.stringify(mySocialNetwork) },
-					beforeSend: function(){																					
-						
+					beforeSend: function(){							
 					},
 					success : function(response){
+						alert( stringify( response ) );
 						if( response.error ){
 						// 연결실패.
 						} else {														
 							success = true;
-							alert( kendo.stringify(response.socialNewtork) );	
 						}
 					},
 					error: handleKendoAjaxError
 				});				
-				
 				window.opener.handleSocialCallbackResult(success);		
-				
-				*/
-				
+				</#if>				
 			}	
 		}]);
 		</script>		
