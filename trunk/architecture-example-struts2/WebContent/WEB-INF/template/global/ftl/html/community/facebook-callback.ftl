@@ -19,16 +19,23 @@
 				mySocialNetwork.accessToken = "${action.accessToken!''}";
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
 				mySocialNetwork.serviceProviderName = "facebook" 
-				var success = false;
+				var success = false;								
 								
 				if( window.opener.location.href.indexOf("secure") > -1){
 					alert("is admin company register social...");
 				}
 				
-				var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.userProfile) };
+				// var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.userProfile) };
 				alert(  window.opener.location.href +"," +kendo.stringify(userProfile) );
+				
 				<#if action.user.anonymous >
-					// 회원 가입된 경우는 자동 로그인 그렇지 않는 경우는 회원 가입 .. 처리....					
+					<#assign foundUser  = action.findUser() #>
+					<#if foundUser >
+					자동 로그인 후 메인 페이지 리프레쉬...
+					window.opener.location.reload(true);
+					<#else>
+					회원가입
+					 </#if>					
 				<#else>				
 				$.ajax({
 					type : 'POST',
@@ -37,7 +44,6 @@
 					beforeSend: function(){							
 					},
 					success : function(response){
-						alert( stringify( response ) );
 						if( response.error ){
 						// 연결실패.
 						} else {														
@@ -46,7 +52,10 @@
 					},
 					error: handleKendoAjaxError
 				});				
-				window.opener.handleSocialCallbackResult(success);		
+				
+				if(typeof f_WfmZ010A00SetDone != "undefined"){
+					window.opener.handleSocialCallbackResult(success);		
+				}				
 				</#if>				
 			}	
 		}]);
