@@ -29,7 +29,7 @@
 				alert( kendo.stringify(userProfile) );
 				
 				<#if action.user.anonymous >
-					<#if action.findUser() >
+					<#if action.findUser()?exists >
 					자동 로그인 후 메인 페이지 리프레쉬...
 					window.opener.location.reload(true);
 					<#else>
