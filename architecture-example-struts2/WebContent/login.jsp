@@ -32,13 +32,13 @@ Company company = user.getCompany();
 			});          
 			
 			$('#login-window').modal({show:true, backdrop:false});
-			/*
+			
 			$('#login-window').on('hidden.bs.modal', function () {
 				$("form[name='fm1']")[0].reset();               	   
 				// referer 
 				$("form[name='fm1']").attr("action", "/main.do").submit();
 			});
-			*/
+			
 			
 			$("#password").keypress(function(event){
 				var keycode = (event.keyCode ? event.keyCode : event.which);
