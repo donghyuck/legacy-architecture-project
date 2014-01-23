@@ -127,9 +127,9 @@ Company company = user.getCompany();
 					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content/image.do?imageId=810" alt="image03"/></li>
 				</ul>
 				<div id="cbp-bicontrols" class="cbp-bicontrols">
-					<span class="cbp-biprev"></span>
-					<span class="cbp-bipause"></span>
-					<span class="cbp-binext"></span>
+					<span class="fa cbp-biprev"></span>
+					<span class="fa cbp-bipause"></span>
+					<span class="fa cbp-binext"></span>
 				</div>
 			</div>
 	
