@@ -185,7 +185,7 @@ Company company = user.getCompany();
 									<div id="status">
 									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %><br/>
 									<% if ( !user.isAnonymous() ) { %>
-									<span class="label label-primary">상태</span>&nbsp; 로그인<br/>
+									<span class="label label-warning">로그인중</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
 									<% } %>
 									</div>
 								</div>
