@@ -21,7 +21,7 @@
 				mySocialNetwork.serviceProviderName = "facebook" 
 				var success = false;
 								
-				if( window.location.href.indexOf("secure") > -1){
+				if( window.opener.location.href.indexOf("secure") > -1){
 					alert("is admin company register social...");
 				}
 				
