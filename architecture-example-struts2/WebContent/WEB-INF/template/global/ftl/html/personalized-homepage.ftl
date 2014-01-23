@@ -26,7 +26,7 @@
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
-								
+												
 				var menuRight  = document.getElementById( 'cbp-spmenu-s2' );
 				$("#show-right-slide").click(function (e) {
 					classie.toggle( this, 'active' );
@@ -49,115 +49,9 @@
 					});
 				});				
 							
+							
 				// 3. ACCOUNTS LOAD	
-				var currentUser = new User({});			
-				var accounts = $("#account-panel").kendoAccounts({
-					dropdown : false,
-					authenticate : function( e ){
-						currentUser = e.token;			
-					},
-					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
-					template : kendo.template($("#account-template").html()),
-					</#if>
-					afterAuthenticate : function(){						
-						
-						//$('.dropdown-toggle').dropdown();
-						if( currentUser.anonymous ){
-							$("#account-panel .custom-external-login-groups button").each(function( index ) {
-									var external_login_button = $(this);
-									external_login_button.click(function (e){																												
-										/**
-										if( $("#external-login-window" ).length == 0  ){	
-											$('body').append('<div id="external-login-window"></div>');	
-										}
-										if( !$("#external-login-window" ).data("kendoWindow")){
-											$("#external-login-window" ).kendoWindow({
-												animation: {
-													open: {
-														effects: "fade:in"
-													},
-													close: {
-														effects: "fade:out"
-													}
-												},
-												width : 500,
-												height : 600,
-												visible: false,
-												draggable: false,
-												iframe: true,
-												modal: true,
-												title: "쇼셜 로그인"
-											});
-										}
-										**/
-										var target_media = external_login_button.attr("data-target");
-										//var external_login_window = $("#external-login-window" ).data("kendoWindow");
-										
-										$.ajax({
-											type : 'POST',
-											url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
-											data: { media: target_media },
-											success : function(response){
-												if( response.error ){
-													// 연결실패.
-												} else {	
-												/**
-													external_login_window.center();
-													external_login_window.open();
-													external_login_window.refresh({
-														url: response.authorizationUrl,
-														iframe : true
-													});
-													*/
-													window.open( response.authorizationUrl ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-												}
-											},
-											error:handleKendoAjaxError,
-											beforeSend : function() {
-												//kendo.ui.progress($("#my-social-network-account-details"), true);
-											},
-											complete : function(){
-												//kendo.ui.progress($("#my-social-network-account-details"), false);
-											}													
-										});	
-									});
-								
-							});
-						
-							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");
-							$("#login-btn").click(function() { 
-								$("#login-status").html("");
-								if( validator.validate() )
-								{								
-									accounts.login({
-										data: $("form[name=login-form]").serialize(),
-										success : function( response ) {
-											var refererUrl = "/main.do";
-											if( response.item.referer ){
-												refererUrl = response.item.referer;
-											}
-											$("form[name='login-form']")[0].reset();    
-											$("form[name='login-form']").attr("action", refererUrl ).submit();						
-										},
-										fail : function( response ) {  
-											$("#login-password").val("").focus();												
-											$("#login-status").kendoAlert({ 
-												data : { message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." },
-												close : function(){	
-													$("#login-password").focus();										
-												 }
-											}); 										
-										},		
-										error : function( thrownError ) {
-											$("form[name='login-form']")[0].reset();                    
-											$("#login-status").kendoAlert({ data : { message: "잘못된 접근입니다." } }); 									
-										}																
-									});															
-								}else{	}
-							});	
-						}
-					}
-				});	
+				<#include "/html/common/common-homepage-account.ftl" >		
 				
 				// 4. CONTENT 	
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
