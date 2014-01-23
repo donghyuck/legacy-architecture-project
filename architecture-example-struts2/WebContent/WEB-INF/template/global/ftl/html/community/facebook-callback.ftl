@@ -25,15 +25,17 @@
 					alert("is admin company register social...");
 				}
 				
-				var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-				alert( kendo.stringify(userProfile) );
+				
+				
 				
 				<#if action.user.anonymous >
 					<#if action.findUser()?exists >
-					자동 로그인 후 메인 페이지 리프레쉬...
-					window.opener.location.reload(true);
-					<#else>
-					회원가입
+						<# signIn() >
+						자동 로그인 후 메인 페이지 리프레쉬...					
+						window.opener.location.reload(true);
+					<#else>					
+						var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
+						alert( kendo.stringify(userProfile) );				
 					 </#if>					
 				<#else>				
 				$.ajax({
