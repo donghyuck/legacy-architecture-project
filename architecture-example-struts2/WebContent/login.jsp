@@ -42,7 +42,7 @@ Company company = user.getCompany();
 				}				
 			});
 						
-			$("#account-panel .custom-external-login-groups button").each(function( index ) {
+			$("#login-window .custom-external-login-groups button").each(function( index ) {
 				var external_login_button = $(this);
 				external_login_button.click(function (e){																												
 					var target_media = external_login_button.attr("data-target");
