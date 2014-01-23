@@ -1165,19 +1165,19 @@ div figure:hover figcaption {
 }
 
 span.cbp-biplay:before {
-	content: "\e002";
+	content: "\f04b";
 }
 
 span.cbp-bipause:before {
-	content: "\e003";
+  content: "\f04c";
 }
 
 span.cbp-binext:before {
-	content: "\e000";
+	content: "\f04e";
 }
 
 span.cbp-biprev:before {
-	content: "\e001";
+	content: "\f04a";
 }
 
 .cbp-bicontrols span.cbp-binext {
