@@ -476,8 +476,7 @@
     				user = new User ( $.extend(response.currentUser, { roles: response.roles } ));
    					user.set('isSystem', user.hasRole(SYSTEM_ROLE ) );
    					$(that.element).data("currentUser", user );
-   					that.token = user ;
-    				
+   					that.token = user ;    				
     				that.trigger( AUTHENTICATE, {token: user}); 
     				if(that.options.visible){
     					that.render();
@@ -513,7 +512,6 @@
     		});	
     	},
         render : function(){
-        	//that.trigger( UPDATE, {token: user});
         	var that = this, element, content;
         	if( that.options.photoUrl != null ){
         		that.token.photoUrl = that.options.photoUrl ;
