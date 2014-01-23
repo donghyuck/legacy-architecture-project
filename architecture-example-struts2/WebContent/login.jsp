@@ -41,6 +41,27 @@ Company company = user.getCompany();
 					doLogin();
 				}				
 			});
+						
+			$("#account-panel .custom-external-login-groups button").each(function( index ) {
+				var external_login_button = $(this);
+				external_login_button.click(function (e){																												
+					var target_media = external_login_button.attr("data-target");
+					$.ajax({
+						type : 'POST',
+						url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
+						data: { media: target_media },
+						success : function(response){
+							if( response.error ){
+								// 연결실패.
+							} else {	
+								window.open( response.authorizationUrl ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+							}
+						},
+						error:handleKendoAjaxError												
+					});	
+				});								
+			});		
+			
 		}		
 	}]);
 	
@@ -94,6 +115,18 @@ Company company = user.getCompany();
 					<h4 class="modal-title">로그인</h4>
 				</div>
 			<div class="modal-body">
+				<div class="container custom-external-login-groups" style="width:100%;">
+					<div class="row blank-top-5 ">
+						<div class="col-lg-12">
+							<button class="btn btn-block btn-primary" data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 로그인</button>
+						</div>
+					</div>		
+					<div class="row blank-top-5 ">
+						<div class="col-lg-12">
+							<button class="btn btn-block btn-info" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
+						</div>
+					</div>					
+				</div>
 				<div class="container" style="width:100%;">
 					<div class="row">
 						<div class="col-lg-6 col-xs-6">
