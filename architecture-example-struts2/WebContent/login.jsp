@@ -126,11 +126,13 @@ Company company = user.getCompany();
 					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content/image.do?imageId=808" alt="image02"/></li>
 					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content/image.do?imageId=810" alt="image03"/></li>
 				</ul>
+				<!-- 
 				<div id="cbp-bicontrols" class="cbp-bicontrols">
 					<span class="fa cbp-biprev"></span>
 					<span class="fa cbp-bipause"></span>
 					<span class="fa cbp-binext"></span>
 				</div>
+				 -->
 			</div>
 	
 	
@@ -182,6 +184,9 @@ Company company = user.getCompany();
 								<div class="col-lg-12">
 									<div id="status">
 									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %><br/>
+									<% if ( !user.isAnonymous() ) %>
+									<span class="label label-primary">상태</span>&nbsp; 로그인<br/>
+									<% } %>
 									</div>
 								</div>
 							</form>						
