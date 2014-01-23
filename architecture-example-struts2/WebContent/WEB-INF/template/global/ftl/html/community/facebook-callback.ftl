@@ -15,15 +15,19 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 				
-				<#if action.user.anonymous >
-					<#if action.findUser()?exists >		
-						window.opener.location.reload(${action.signIn()?string("true","false")});
-						window.close();
-					<#else>					
-						var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-						alert( kendo.stringify(userProfile) );				
-					 </#if>					
-				<#else>				
+			<#if action.user.anonymous >
+				<#if action.findUser()?exists >								
+				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
+					window.opener.handleSocialCallbackResult(success);							
+				}else{
+					window.opener.location.reload(${action.signIn()?string("true","false")});
+				}
+				window.close();
+				<#else>					
+				var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
+				alert( kendo.stringify(userProfile) );				
+				</#if>					
+			<#else>				
 				if( window.opener.location.href.indexOf("secure") > -1){
 					alert("is admin company register social...");
 				}
@@ -51,10 +55,10 @@
 				});				
 				
 				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
-					window.opener.handleSocialCallbackResult(success);		
-					window.close();
-				}				
-				</#if>				
+					window.opener.handleSocialCallbackResult(success);							
+				}	
+				window.close();			
+			</#if>				
 			}	
 		}]);
 		</script>		
