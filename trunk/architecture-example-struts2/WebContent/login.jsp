@@ -65,6 +65,14 @@ Company company = user.getCompany();
 		}		
 	}]);
 	
+	function handleSocialCallbackResult( success ){
+		if( success ){
+			$("form[name='fm1']").attr("action", "/main.do").submit();
+		}else{
+			alert( "인증에 실패하였습니다." );
+		}
+	}
+	
 	function doLogin(){
 		var templateContent = $("#alert-template").html();
 		var template = kendo.template(templateContent);	              
