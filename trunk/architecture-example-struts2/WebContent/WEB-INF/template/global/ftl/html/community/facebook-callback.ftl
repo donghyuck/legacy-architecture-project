@@ -53,7 +53,7 @@
 					error: handleKendoAjaxError
 				});				
 				
-				if(typeof f_WfmZ010A00SetDone != "undefined"){
+				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
 					window.opener.handleSocialCallbackResult(success);		
 				}				
 				</#if>				
