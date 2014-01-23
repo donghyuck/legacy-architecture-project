@@ -4,10 +4,8 @@
 <head>
 <title>로그인</title>
 <%
-
-User user = SecurityHelper.getUser();
-Company company = user.getCompany();
-
+	User user = SecurityHelper.getUser();
+	Company company = user.getCompany();
 %>
 <script type="text/javascript">
 	yepnope([{
@@ -187,6 +185,7 @@ Company company = user.getCompany();
 									<% if ( !user.isAnonymous() ) { %>
 									<span class="label label-warning">로그인중</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
 									<% } %>
+									<%= user.getUsername() %>
 									</div>
 								</div>
 							</form>						
