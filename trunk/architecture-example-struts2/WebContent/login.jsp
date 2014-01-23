@@ -49,7 +49,7 @@ Company company = user.getCompany();
 					var target_media = external_login_button.attr("data-target");
 					$.ajax({
 						type : 'POST',
-						url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
+						url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/get-socialnetwork.do?output=json",
 						data: { media: target_media },
 						success : function(response){
 							if( response.error ){
@@ -118,9 +118,9 @@ Company company = user.getCompany();
 
 		<div class="main">
 				<ul id="cbp-bislideshow" class="cbp-bislideshow">
-					<li><img src="${request.contextPath}/content/image.do?imageId=175" alt="image01"/></li>
-					<li><img src="${request.contextPath}/content/image.do?imageId=808" alt="image02"/></li>
-					<li><img src="${request.contextPath}/content/image.do?imageId=810" alt="image03"/></li>
+					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content/image.do?imageId=175" alt="image01"/></li>
+					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content/image.do?imageId=808" alt="image02"/></li>
+					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content/image.do?imageId=810" alt="image03"/></li>
 				</ul>
 				<div id="cbp-bicontrols" class="cbp-bicontrols">
 					<span class="cbp-biprev"></span>
