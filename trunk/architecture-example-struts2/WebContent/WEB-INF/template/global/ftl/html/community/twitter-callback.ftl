@@ -29,7 +29,7 @@
 			<#else>				
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
-				}else if( window.opener.location.href.indexOf("login.do") > -1  ){
+				}else if( window.opener.location.href.indexOf("/accounts/") > -1  ){
 					// 로그인 모드..
 				}else{			
 					// 프로파일 수정 모드	
