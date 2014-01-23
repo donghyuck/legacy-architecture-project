@@ -17,7 +17,7 @@
 			<#if action.user.anonymous >
 				<#if action.findUser()?exists >								
 				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
-					window.opener.handleSocialCallbackResult(success);							
+					window.opener.handleSocialCallbackResult(${action.signIn()?string("true","false")});							
 				}else{
 					window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
