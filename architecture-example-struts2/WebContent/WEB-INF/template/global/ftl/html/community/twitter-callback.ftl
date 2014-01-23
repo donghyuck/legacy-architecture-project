@@ -14,21 +14,19 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
-
-				<#if action.user.anonymous >
-					<#if action.findUser()?exists >		
-						
-						if
-						window.opener.location.reload(${action.signIn()?string("true","false")});
-										
-						window.close();
-						
-					<#else>					
-						var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-						alert( kendo.stringify(userProfile) );				
-					 </#if>					
-				<#else>	
-				
+			<#if action.user.anonymous >
+				<#if action.findUser()?exists >								
+				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
+					window.opener.handleSocialCallbackResult(success);							
+				}else{
+					window.opener.location.reload(${action.signIn()?string("true","false")});
+				}
+				window.close();
+				<#else>					
+				var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
+				alert( kendo.stringify(userProfile) );				
+				</#if>					
+			<#else>				
 				var mySocialNetwork = new  SocialNetwork({});
 				mySocialNetwork.accessToken = "${action.accessToken!''}";
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
@@ -52,8 +50,10 @@
 					},
 					error: handleKendoAjaxError
 				});				
-				window.opener.handleSocialCallbackResult(success);				
-				window.close();		
+				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
+					window.opener.handleSocialCallbackResult(success);							
+				}		
+				window.close();
 				</#if>
 			}	
 		}]);
