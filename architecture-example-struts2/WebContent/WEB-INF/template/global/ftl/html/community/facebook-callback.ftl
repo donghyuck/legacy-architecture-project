@@ -25,7 +25,7 @@
 					alert("is admin company register social...");
 				}
 				
-				var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.authenticate() ) };
+				var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 				alert( kendo.stringify(userProfile) );
 				
 				<#if action.user.anonymous >
