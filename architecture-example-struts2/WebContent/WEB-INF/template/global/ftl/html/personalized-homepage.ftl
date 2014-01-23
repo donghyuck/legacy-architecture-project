@@ -136,17 +136,12 @@
 						},
 						pageSize: 10,
 						error:handleKendoAjaxError,
-					//	serverPaging: true,
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
 						}
 					}),
 					sortable: true,
-					//pageable: {
-					//	refresh: true,
-					//	buttonCount: 5
-					//},
 					height: 300,
 					columns: [ 
 						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
@@ -201,10 +196,6 @@
 				});						
 															
 				// 4. Right Tabs
-				//$("#attach-view-panel").data( "attachPlaceHolder", new Attachment () );	
-				//$("#photo-view-panel").data( "photoPlaceHolder", new Image () );	
-
-											
 				$('#myTab a').click(function (e) {
 					e.preventDefault();					
 					if(  $(this).attr('href') == '#my-message-notes' ){							

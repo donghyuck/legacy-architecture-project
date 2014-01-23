@@ -212,6 +212,7 @@
 		</li>					
 		# } #  	
 </script>		
+
 <script type="text/x-kendo-tmpl" id="twitter-timeline-template">
 		<li class="media">
 		    <a class="pull-left" href="\\#">
