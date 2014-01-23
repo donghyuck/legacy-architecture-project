@@ -118,10 +118,10 @@ Company company = user.getCompany();
 				<div class="container custom-external-login-groups" style="width:100%;">
 					<div class="row blank-top-5 ">
 						<div class="col-sm-6">
-							<button class="btn btn-block btn-primary" data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 로그인</button>
+							<button class="btn btn-block btn-primary btn-lg "  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 로그인</button>
 						</div>
 						<div class="col-sm-6">
-							<button class="btn btn-block btn-info" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
+							<button class="btn btn-block btn-info btn-lg " data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
 						</div>
 					</div>					
 				</div>
