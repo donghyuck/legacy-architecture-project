@@ -27,33 +27,40 @@
 				alert( kendo.stringify(userProfile) );				
 				</#if>					
 			<#else>				
-				var mySocialNetwork = new  SocialNetwork({});
-				mySocialNetwork.accessToken = "${action.accessToken!''}";
-				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
-				mySocialNetwork.serviceProviderName = "twitter" 
-				var success = false;				
-				
-				$.ajax({
-					type : 'POST',
-					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
-					data: { item: kendo.stringify(mySocialNetwork) },
-					beforeSend: function(){																					
-						
-					},
-					success : function(response){
-						alert( stringify( response ) );
-						if( response.error ){
-						// 연결실패.
-						} else {														
-							success = true;
-						}
-					},
-					error: handleKendoAjaxError
-				});				
-				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
-					window.opener.handleSocialCallbackResult(success);							
-				}		
-				window.close();
+				if( window.opener.location.href.indexOf("/secure/") > -1  ){
+					// 관리자 모드..
+				}else if( window.opener.location.href.indexOf("login.do") > -1  ){
+					// 로그인 모드..
+				}else{			
+					// 프로파일 수정 모드	
+					var success = false;			
+					var mySocialNetwork = new  SocialNetwork({});		
+					mySocialNetwork.accessToken = "${action.accessToken!''}";
+					mySocialNetwork.accessSecret = "${action.accessSecret!''}"
+					mySocialNetwork.serviceProviderName = "facebook" 
+					mySocialNetwork.username = "${action.getUserProfile().getId()}";
+					
+					$.ajax({
+						type : 'POST',
+						url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
+						data: { item: kendo.stringify(mySocialNetwork) },
+						beforeSend: function(){							
+						},
+						success : function(response){
+							if( response.error ){
+							// 연결실패.
+							} else {														
+								success = true;
+							}
+						},
+						error: handleKendoAjaxError
+					});				
+					
+					if(typeof window.opener.handleSocialCallbackResult != "undefined"){
+						window.opener.handleSocialCallbackResult(success);							
+					}	
+					window.close();
+				}
 				</#if>
 			}	
 		}]);
