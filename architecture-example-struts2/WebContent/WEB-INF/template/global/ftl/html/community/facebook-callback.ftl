@@ -22,7 +22,7 @@
 				}else{
 					window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
-				window.close();
+				//window.close();
 				<#else>					
 				var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 				alert( kendo.stringify(userProfile) );				
