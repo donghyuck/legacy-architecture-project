@@ -20,24 +20,21 @@
 				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
 				mySocialNetwork.serviceProviderName = "facebook" 
 				var success = false;								
-								
-				if( window.opener.location.href.indexOf("secure") > -1){
-					alert("is admin company register social...");
-				}
-				
-				
-				
 				
 				<#if action.user.anonymous >
-					<#if action.findUser()?exists >
-						<# signIn() >
-						자동 로그인 후 메인 페이지 리프레쉬...					
-						window.opener.location.reload(true);
+					<#if action.findUser()?exists >		
+						window.opener.location.reload(${action.signIn()});
+						window.close();
 					<#else>					
 						var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 						alert( kendo.stringify(userProfile) );				
 					 </#if>					
 				<#else>				
+				if( window.opener.location.href.indexOf("secure") > -1){
+					alert("is admin company register social...");
+				}
+
+
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
@@ -56,6 +53,7 @@
 				
 				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
 					window.opener.handleSocialCallbackResult(success);		
+					window.close();
 				}				
 				</#if>				
 			}	
