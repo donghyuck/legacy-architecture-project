@@ -21,12 +21,15 @@
 				mySocialNetwork.serviceProviderName = "twitter" 
 				var success = false;				
 
-				var userProfile = ${ HtmlUtils.objectToJson(socialNetwork.socialServiceProvider.authenticate() ) };
-				alert( kendo.stringify(userProfile) );
-				
 				<#if action.user.anonymous >
-
-				<#else>
+					<#if action.findUser()?exists >		
+						window.opener.location.reload(${action.signIn()});
+						window.close();
+					<#else>					
+						var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
+						alert( kendo.stringify(userProfile) );				
+					 </#if>					
+				<#else>	
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
@@ -44,7 +47,8 @@
 					},
 					error: handleKendoAjaxError
 				});				
-				window.opener.handleSocialCallbackResult(success);						
+				window.opener.handleSocialCallbackResult(success);				
+				window.close();		
 				</#if>
 			}	
 		}]);
