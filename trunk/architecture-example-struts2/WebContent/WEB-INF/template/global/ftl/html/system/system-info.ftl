@@ -15,7 +15,7 @@
        	    '${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
        	    '${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
        	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.apis.js',
+       	    '${request.contextPath}/js/common/common.api.js',
        	    '${request.contextPath}/js/common/common.ui.js'],        	   
             complete: function() {               
 
