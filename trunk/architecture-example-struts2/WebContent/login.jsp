@@ -125,15 +125,7 @@ Company company = user.getCompany();
 						</div>
 					</div>					
 				</div>
-				<div class="container" style="width:100%;">
-					<div class="row">
-						<div class="col-lg-6 col-xs-6">
-							<button class="btn btn-primary btn-lg btn-block"><i class="fa fa-facebook"></i> | 페이스북으로 로그인</button>
-						</div>
-						<div class="col-lg-6 col-xs-6">
-							<button class="btn btn-info btn-lg btn-block"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
-						</div>						
-					</div>				
+				<div class="container" style="width:100%;">					
 					<div class="row blank-top-15">
 						<div class="col-lg-12">
 							<form name="fm1" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">
