@@ -13,8 +13,7 @@
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
-			complete: function() {
-				
+			complete: function() {				
 			<#if action.user.anonymous >
 				<#if action.findUser()?exists >								
 				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
