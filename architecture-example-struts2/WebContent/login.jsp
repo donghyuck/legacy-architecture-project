@@ -118,12 +118,9 @@ Company company = user.getCompany();
 
 		<div class="main">
 				<ul id="cbp-bislideshow" class="cbp-bislideshow">
-					<li><img src="images/1.jpg" alt="image01"/></li>
-					<li><img src="images/2.jpg" alt="image02"/></li>
-					<li><img src="images/3.jpg" alt="image03"/></li>
-					<li><img src="images/4.jpg" alt="image04"/></li>
-					<li><img src="images/5.jpg" alt="image05"/></li>
-					<li><img src="images/6.jpg" alt="image06"/></li>
+					<li><img src="${request.contextPath}/content/image.do?imageId=175" alt="image01"/></li>
+					<li><img src="${request.contextPath}/content/image.do?imageId=808" alt="image02"/></li>
+					<li><img src="${request.contextPath}/content/image.do?imageId=810" alt="image03"/></li>
 				</ul>
 				<div id="cbp-bicontrols" class="cbp-bicontrols">
 					<span class="cbp-biprev"></span>
