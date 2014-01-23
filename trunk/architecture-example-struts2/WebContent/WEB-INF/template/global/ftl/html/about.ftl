@@ -34,7 +34,7 @@
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
-						$('.dropdown-toggle').dropdown();
+						//$('.dropdown-toggle').dropdown();
 						//Holder.run();
 						
 						if( currentUser.anonymous ){
