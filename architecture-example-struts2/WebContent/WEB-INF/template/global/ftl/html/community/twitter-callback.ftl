@@ -14,12 +14,6 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
-				
-				var mySocialNetwork = new  SocialNetwork({});
-				mySocialNetwork.accessToken = "${action.accessToken!''}";
-				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
-				mySocialNetwork.serviceProviderName = "twitter" 
-				var success = false;				
 
 				<#if action.user.anonymous >
 					<#if action.findUser()?exists >		
@@ -30,6 +24,13 @@
 						alert( kendo.stringify(userProfile) );				
 					 </#if>					
 				<#else>	
+				
+				var mySocialNetwork = new  SocialNetwork({});
+				mySocialNetwork.accessToken = "${action.accessToken!''}";
+				mySocialNetwork.accessSecret = "${action.accessSecret!''}"
+				mySocialNetwork.serviceProviderName = "twitter" 
+				var success = false;				
+				
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/community/update-socialnetwork.do?output=json',
