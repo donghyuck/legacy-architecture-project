@@ -6,10 +6,10 @@
 <div class="panel-group" id="accordion">
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title">      	
+      <h5 class="panel-title">      	
         <i class="fa fa-bars"></i>&nbsp;<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 공지 & 이벤트
         </a>
-      </h4>
+      </h5>
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
       <div class="panel-body">
