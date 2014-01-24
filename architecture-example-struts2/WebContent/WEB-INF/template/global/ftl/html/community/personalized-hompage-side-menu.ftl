@@ -3,7 +3,7 @@
 		<!-- ================================================== -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
-			<button  id="hide-right-slide" type="button" class="close">&times;</button>
+			<p><button  id="hide-right-slide" type="button" class="close">&times;</button></p>			
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
