@@ -19,23 +19,7 @@
 							</li>							
 							<#if !action.user.anonymous >	
 							<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>     포토</a></li>
-							<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>     파일</a></li>
-							<!--
-							<li class="dropdown">
-								<a href="#" id="my-photo-drop" class="dropdown-toggle" data-toggle="dropdown">포토 <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="my-photo-drop">
-									<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 포토 스트림</a></li>
-									<li><a href="#my-photo-upload" tabindex="-1" data-toggle="tab"><span class="glyphicon glyphicon-cloud-upload"></span>    포토 업로드</a></li>
-								</ul>
-							</li>
-							<li class="dropdown">
-								<a href="#" id="my-files-drop" class="dropdown-toggle" data-toggle="dropdown">파일 <b class="caret"></b></a>
-								<ul class="dropdown-menu" role="menu" aria-labelledby="my-files-drop">
-									<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    My 파일</a></li>
-									<li><a href="#my-file-upload" tabindex="-1" data-toggle="tab"><i class="fa fa-upload"></i>    파일 업로드</a></li>
-								</ul>
-							</li>
-							-->
+							<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>     파일</a></li>							
 							</#if>						
 						</ul>								
 						<!-- start  of tab content -->				
