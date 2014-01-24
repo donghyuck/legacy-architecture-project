@@ -412,39 +412,39 @@
 							
 							$("#my-photo-stream .btn-group button").each(function( index ) { 
 								var control_button = $(this);
-								var control_button_icon = control_button.first();									
+								var control_button_icon = control_button.find("i");			
 								if( control_button_icon.hasClass("fa-upload")){
 									control_button.click( function(e){
-									
-										alert("photo ");
+										// New Photo Upload			
+										if( !$("#photo-files").data("kendoUpload")	){						
+											$("#photo-files").kendoUpload({
+												 	multiple : true,
+												 	width: 300,
+												 	showFileList : false,
+												    localization:{ select : '사진 선택' , dropFilesHere : '업로드할 사진들을 이곳에 끌어 놓으세요.' },
+												    async: {
+														saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
+														autoUpload: true
+												    },
+												    upload: function (e) {				
+												    	 e.data = {};							
+												    },
+												    success : function(e) {								    
+														if( e.response.targetImage ){
+															e.response.targetImage.imageId;
+															// LIST VIEW REFRESH...
+															$('#photo-list-view').data('kendoListView').dataSource.read();
+														}				
+													}
+											});		
+										}
+										
+										$("#my-photo-stream .panel").toggleClass("hide");										
+										$("#my-photo-upload").toggleClass("hide");
+										
 									});
 								}								
 							});
-						}
-					} else if( $(this).attr('href') == '#my-photo-upload' ){
-						
-						// New Photo Upload			
-						if( !$("#photo-files").data("kendoUpload")	){						
-							$("#photo-files").kendoUpload({
-								 	multiple : true,
-								 	width: 300,
-								 	showFileList : false,
-								    localization:{ select : '사진 선택' , dropFilesHere : '업로드할 사진들을 이곳에 끌어 놓으세요.' },
-								    async: {
-										saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
-										autoUpload: true
-								    },
-								    upload: function (e) {				
-								    	 e.data = {};							
-								    },
-								    success : function(e) {								    
-										if( e.response.targetImage ){
-											e.response.targetImage.imageId;
-											// LIST VIEW REFRESH...
-											$('#photo-list-view').data('kendoListView').dataSource.read();
-										}				
-									}
-							});		
 						}
 					} 
 					$(this).tab('show')
