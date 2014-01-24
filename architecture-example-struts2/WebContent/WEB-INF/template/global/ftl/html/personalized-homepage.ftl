@@ -354,7 +354,7 @@
 							});	
 							
 							alert( $(this).html() );
-							$(this).find(".btn-group button").each(function( index ) { 
+							$("#my-photo-stream .btn-group button").each(function( index ) { 
 							
 								alert( $(this).html() );
 							});
