@@ -150,7 +150,8 @@
 								<div class="blank-top-5" ></div>		
 								<div class="btn-group">			
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>		
-								</div>		
+								</div>	
+								<div class="blank-top-5 "></div>					
 								<div id="my-photo-upload" class="hide">
 									<div class="blank-top-5 "></div>
 									<#if !action.user.anonymous >		
@@ -158,8 +159,7 @@
 									<div class="blank-top-5 "></div>	
 									<input name="uploadPhotos" id="photo-files" type="file" />	
 									</#if>							
-								</div>								
-								<div class="blank-top-5 "></div>					
+								</div>	
 								<div class="panel panel-default" style="margin-bottom:0px;">								
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
