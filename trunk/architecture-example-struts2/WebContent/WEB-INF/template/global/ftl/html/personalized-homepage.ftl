@@ -359,7 +359,7 @@
 													}
 											});						
 										}
-										$("#attachment-files .panel").each(function( index ) {
+										$("#my-files .panel").each(function( index ) {
 										alert( $(this).html());
 										 });
 										
