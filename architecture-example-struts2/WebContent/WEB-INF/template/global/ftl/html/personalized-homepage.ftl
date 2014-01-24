@@ -359,11 +359,7 @@
 													}
 											});						
 										}
-										$("#my-files .panel").each(function( index ) {
-										alert( $(this).html());
-										 });
-										
-										
+										$("#my-files .panel").toggleClass("hide");										
 										$("#my-file-upload").toggleClass("hide");
 										
 									});									
