@@ -80,23 +80,21 @@
 							<!-- start social -->		
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
-											<table id="my-social-streams-grid">
-												<colgroup>
-													<col/>
-												</colgroup>
-												<thead>
-													<tr>
-													<th>
-													미디어
-													</th>															
-													</tr>
-												</thead>
-												<tbody>
-													<tr>
-														<td></td>
-													</tr>
-												</tbody>
-											</table>												
+									<table id="my-social-streams-grid">
+										<colgroup>
+											<col/>
+										</colgroup>
+										<thead>
+											<tr>
+												<th>미디어</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td></td>
+											</tr>
+										</tbody>
+									</table>												
 								<div class="blank-top-5" ></div>				
 								<div class="alert alert-warning fade in">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
