@@ -353,10 +353,10 @@
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
 							});	
 							
-							$(this).find("div .btn-group button").click(function (e) {
+							$(this).find(".btn-group button").each(function( index ) { 
 							
-								alert( "hello");
-							} );
+								alert( $(this).html() );
+							});
 									
 						}
 					} else if( $(this).attr('href') == '#my-photo-stream' ){							
