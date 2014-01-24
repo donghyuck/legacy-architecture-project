@@ -359,9 +359,11 @@
 													}
 											});						
 										}
-										alert( "dd" );
+										$("#attachment-files .panel").each(function( index ) {
+										alert( $(this).html());
+										 });
 										
-										$("#attachment-files .panel").toggleClass("hide");
+										
 										$("#my-file-upload").toggleClass("hide");
 										
 									});									
