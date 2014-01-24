@@ -6,7 +6,9 @@
 			<div class="panel panel-default">
 				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;<button  id="hide-right-slide" type="button" class="close">&times;</button></div>
 				<ul class="list-group">
-					<li class="list-group-item">Cras justo odio</li>
+					<li class="list-group-item">
+						<button type="button" class="btn btn-info">공지</button>	
+					</li>
 					<li class="list-group-item">
 					<!-- 공지 -->
 					<div id="announce-grid" ></div>
