@@ -115,7 +115,7 @@
 								<div class="btn-group">
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								</div>								
-								<div id="my-file-upload">
+								<div id="my-file-upload" class="hide">
 									<div class="blank-top-5" ></div>											
 									<#if !action.user.anonymous >			
 									<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>
