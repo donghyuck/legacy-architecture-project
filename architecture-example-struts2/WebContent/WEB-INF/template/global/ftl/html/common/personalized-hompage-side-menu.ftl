@@ -117,9 +117,7 @@
 								<div class="blank-top-5 "></div>
 								<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								<div class="blank-top-5 "></div>
-								<div class="panel panel-default" style="margin-bottom:0px;">
-									<div class="panel-heading">
-										<ul id="attachment-list-view-filter" class="nav nav-pills">
+								<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
 												<a href="#"  id="attachment-list-view-filter-1" style="width:100px;"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
 											</li>
@@ -128,7 +126,11 @@
 											</li>
 											<li><a href="#"  id="attachment-list-view-filter-3"><i class="fa fa-filter"></i> 파일</a>
 											</li>									  
-										</ul>										
+								</ul>		
+										
+								<div class="panel panel-default" style="margin-bottom:0px;">
+									<div class="panel-heading">
+																		
 									</div>									
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="attachment-list-view" ></div>
