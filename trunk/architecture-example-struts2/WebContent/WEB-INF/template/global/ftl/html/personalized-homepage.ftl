@@ -243,28 +243,7 @@
 							});	
 						}
 					} else if(  $(this).attr('href') == '#my-file-upload' ){
-						if( !$('#attachment-files').data('kendoUpload') ){		
-							$("#attachment-files").kendoUpload({
-								 	multiple : false,
-								 	width: 300,
-								 	showFileList : false,
-								    localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
-								    async: {
-										saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
-										autoUpload: true
-								    },
-								    upload: function (e) {								         
-								    	 e.data = {};														    								    	 		    	 
-								    },
-								    success : function(e) {								    
-										if( e.response.targetAttachment ){
-											e.response.targetAttachment.attachmentId;
-											// LIST VIEW REFRESH...
-											$('#attachment-list-view').data('kendoListView').dataSource.read(); 
-										}				
-									}
-							});						
-						}
+						
 					} else if(  $(this).attr('href') == '#my-files' ){
 					
 						if( !$('#attachment-list-view').data('kendoListView') ){		
@@ -354,15 +333,34 @@
 							});	
 							
 							$("#my-files .btn-group button").each(function( index ) { 
-								var control_button = $(this);
-								
-								var control_button_icon = control_button.find("i");
-								alert( control_button_icon.html());							
+								var control_button = $(this);								
+								var control_button_icon = control_button.find("i");				
 								if( control_button_icon.hasClass("fa-upload")){
-									control_button.click( function(e){
-									
-										alert("file ");
+									control_button.click( function(e){									
+										if( !$('#attachment-files').data('kendoUpload') ){		
+											$("#attachment-files").kendoUpload({
+												 	multiple : false,
+												 	width: 300,
+												 	showFileList : false,
+												    localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+												    async: {
+														saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
+														autoUpload: true
+												    },
+												    upload: function (e) {								         
+												    	 e.data = {};														    								    	 		    	 
+												    },
+												    success : function(e) {								    
+														if( e.response.targetAttachment ){
+															e.response.targetAttachment.attachmentId;
+															// LIST VIEW REFRESH...
+															$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+														}				
+													}
+											});						
+										}
 									});
+									$("my-file-upload").show();
 								}								
 							});
 									
