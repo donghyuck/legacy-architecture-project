@@ -150,12 +150,11 @@
 			$("#announce-view-panel").find(".close").click(function (e) {
 				//$("#announce-view-panel").hide();
 				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
-				kendo.fx($("#announce-view-panel")).slideIn("up").reverse();
-				$("#announce-view-panel").hide();
+				kendo.fx($("#announce-view-panel")).fade("out").play();
+				//$("#announce-view-panel").hide();
 			});
 		
-			kendo.fx($("#announce-view-panel")).slideIn("up").play();
-			
+			 kendo.fx($("#announce-view-panel")).fade("in").play();			
 			//$("#announce-view-panel").show();
 			
 		}				
