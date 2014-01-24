@@ -3,6 +3,7 @@
 		<!-- ================================================== -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
+			<button  id="hide-right-slide" type="button" class="close">&times;</button>
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
@@ -18,7 +19,7 @@
 					<div class="panel-heading">
 						<h4 class="panel-title">
 							<i class="fa fa-bars"></i>&nbsp;<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-								파일
+								공유
 							</a>
 						</h4>
 					</div>
@@ -188,7 +189,7 @@
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-          Collapsible Group Item #3
+         메시지
         </a>
       </h4>
     </div>
@@ -201,7 +202,7 @@
 </div>
 			
 			<div class="panel panel-default">
-				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;<button  id="hide-right-slide" type="button" class="close">&times;</button></div>
+				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;</div>
 				
 				<div class="panel-body clearfix">		
 						
