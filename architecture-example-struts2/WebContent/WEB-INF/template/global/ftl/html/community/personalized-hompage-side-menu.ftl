@@ -5,6 +5,10 @@
 			<div class="blank-top-50"></div>
 			<div class="panel panel-default">
 				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;<button  id="hide-right-slide" type="button" class="close">&times;</button></div>
+				<ul class="list-group">
+					<li class="list-group-item">Cras justo odio</li>
+					    <li class="list-group-item">Dapibus ac facilisis in</li>				
+				</ul>
 				<div class="panel-body clearfix">		
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
