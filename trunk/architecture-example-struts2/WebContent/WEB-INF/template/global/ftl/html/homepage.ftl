@@ -259,7 +259,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->	
 		
-<!-- Carousel
+	<!-- Carousel
     ================================================== -->
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
@@ -311,6 +311,7 @@
 
 	<div class="container marketing">
       <!-- Three columns of text below the carousel -->
+      
       <div class="row">
         <div class="col-lg-4">
           <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
