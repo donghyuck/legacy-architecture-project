@@ -242,8 +242,6 @@
 								height: 300
 							});	
 						}
-					} else if(  $(this).attr('href') == '#my-file-upload' ){
-						
 					} else if(  $(this).attr('href') == '#my-files' ){
 					
 						if( !$('#attachment-list-view').data('kendoListView') ){		
@@ -1003,11 +1001,11 @@
 		}
 		
 		.cbp-spmenu-right {
-			right: -400px;
+			right: -450px;
 		}
 		
 		.cbp-spmenu-vertical{
-			width: 400px;
+			width: 450px;
 		}
 		
 		
