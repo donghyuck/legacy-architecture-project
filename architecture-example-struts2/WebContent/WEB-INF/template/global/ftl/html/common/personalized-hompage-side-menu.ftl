@@ -115,6 +115,7 @@
 							</div>
 							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
+								<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								<div class="panel panel-default" style="margin-bottom:0px;">
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
@@ -140,6 +141,7 @@
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
 								<div class="blank-top-5" ></div>					
+								<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>								
 								<div class="panel panel-default" style="margin-bottom:0px;">								
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="photo-list-view" ></div>
