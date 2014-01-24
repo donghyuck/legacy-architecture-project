@@ -1091,7 +1091,7 @@
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 		<!-- START SIDE MENU -->
-		<#include "/html/common/personalized-hompage-side-menu.ftl" >	
+		<#include "/html/community/personalized-hompage-side-menu.ftl" >	
 		<!-- END SIDE MENU -->	
 	</body>    
 </html>
