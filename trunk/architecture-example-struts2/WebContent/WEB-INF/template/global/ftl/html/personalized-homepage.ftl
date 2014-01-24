@@ -353,10 +353,15 @@
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
 							});	
 							
-							alert( $(this).html() );
-							$("#my-photo-stream .btn-group button").each(function( index ) { 
-							
-								alert( $(this).html() );
+							$("#my-files .btn-group button").each(function( index ) { 
+								var control_button = $(this);
+								var control_button_icon = social_header_action.find('i');								
+								if( control_button_icon.hasClass("fa-upload")){
+									control_button.click( function(e){
+									
+										alert("file ");
+									});
+								}								
 							});
 									
 						}
@@ -403,10 +408,16 @@
 								dataSource : $('#photo-list-view').data('kendoListView').dataSource
 							});	
 							
-							$(this).find(".btn-group button").click(function (e) {
-							
-								alert( "hello");
-							} );
+							$("#my-photo-stream .btn-group button").each(function( index ) { 
+								var control_button = $(this);
+								var control_button_icon = social_header_action.find('i');								
+								if( control_button_icon.hasClass("fa-upload")){
+									control_button.click( function(e){
+									
+										alert("file ");
+									});
+								}								
+							});
 						}
 					} else if( $(this).attr('href') == '#my-photo-upload' ){
 						
