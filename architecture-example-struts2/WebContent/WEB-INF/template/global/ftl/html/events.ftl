@@ -153,9 +153,11 @@
 				kendo.fx($("#announce-view-panel")).slideIn("up").reverse();
 				$("#announce-view-panel").hide();
 			});
+		
+			kendo.fx($("#announce-view-panel")).slideIn("up").play();
 			
 			//$("#announce-view-panel").show();
-			kendo.fx($("#announce-view-panel")).slideIn("up").play();
+			
 		}				
 		-->
 		</script>		
