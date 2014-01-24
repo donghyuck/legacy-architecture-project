@@ -116,9 +116,18 @@
 								<div class="blank-top-5 "></div>
 								<div class="btn-group">
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
+								</div>								
+								<div id="my-file-upload" style="display:none;">
+									<div class="blank-top-5" ></div>											
+									<#if !action.user.anonymous >			
+									<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>
+									<input name="uploadAttachment" id="attachment-files" type="file" />									
+									</#if>							
 								</div>
 								<div class="blank-top-5 "></div>
-								<ul id="attachment-list-view-filter" class="nav nav-pills">
+								<div class="panel panel-default" style="margin-bottom:0px;">
+									<div class="panel-heading">
+										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
 												<a href="#"  id="attachment-list-view-filter-1" style="width:100px;"><span class="badge pull-right" data-bind="text: totalAttachCount"></span>전체</a>
 											</li>
@@ -127,14 +136,8 @@
 											</li>
 											<li><a href="#"  id="attachment-list-view-filter-3"><i class="fa fa-filter"></i> 파일</a>
 											</li>									  
-								</ul>		
-								<div class="blank-top-5 "></div>		
-								<div class="panel panel-default" style="margin-bottom:0px;">
-								<!--
-									<div class="panel-heading">
-																		
+										</ul>																				
 									</div>
-								-->										
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="attachment-list-view" ></div>
 									</div>	
