@@ -105,13 +105,13 @@
 							</div>					
 							<!-- end social -->				
 							<!-- start attachement -->
-							<div class="tab-pane" id="my-file-upload">
+							<!--<div class="tab-pane" id="my-file-upload">
 								<div class="blank-top-5" ></div>											
 								<#if !action.user.anonymous >			
 								<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>
 								<input name="uploadAttachment" id="attachment-files" type="file" />									
 								</#if>							
-							</div>
+							</div>-->
 							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
 								<div class="btn-group">
