@@ -7,7 +7,10 @@
 				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;<button  id="hide-right-slide" type="button" class="close">&times;</button></div>
 				<ul class="list-group">
 					<li class="list-group-item">Cras justo odio</li>
-					    <li class="list-group-item">Dapibus ac facilisis in</li>				
+					<li class="list-group-item">
+					<!-- 공지 -->
+					<div id="announce-grid" ></div>
+					</li>				
 				</ul>
 				<div class="panel-body clearfix">		
 						<ul class="nav nav-tabs" id="myTab">
@@ -27,7 +30,7 @@
 							<!-- start messages -->			
 							<div class="tab-pane active" id="my-message-announces">
 								<div class="blank-top-5" ></div>	
-								<div id="announce-grid" ></div>
+								
 							</div>									
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
