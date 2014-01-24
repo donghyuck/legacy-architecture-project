@@ -359,8 +359,8 @@
 													}
 											});						
 										}
-									});
-									$("my-file-upload").show();
+										$("my-file-upload").show();
+									});									
 								}								
 							});
 									
