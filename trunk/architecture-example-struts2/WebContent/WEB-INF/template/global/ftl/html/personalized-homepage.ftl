@@ -411,10 +411,10 @@
 							});	
 							
 							$("#my-photo-stream .btn-group button").each(function( index ) { 
-								var control_button = $(this);
-								var control_button_icon = control_button.find("i");			
+								var control_button = $(this);								
+								var control_button_icon = control_button.find("i");				
 								if( control_button_icon.hasClass("fa-upload")){
-									control_button.click( function(e){
+									control_button.click( function(e){			
 										// New Photo Upload			
 										if( !$("#photo-files").data("kendoUpload")	){						
 											$("#photo-files").kendoUpload({
