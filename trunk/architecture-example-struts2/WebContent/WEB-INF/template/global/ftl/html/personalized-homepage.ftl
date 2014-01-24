@@ -360,7 +360,10 @@
 											});						
 										}
 										alert( "dd" );
-										$("my-file-upload").hide();
+										
+										$("#attachment-files .panel").hide();
+										$("my-file-upload").show();
+										
 									});									
 								}								
 							});
