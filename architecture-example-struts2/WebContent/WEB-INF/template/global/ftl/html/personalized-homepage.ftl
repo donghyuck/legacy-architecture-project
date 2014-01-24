@@ -353,7 +353,7 @@
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
 							});	
 							
-							$(this).find(".btn-group button").click(function (e) {
+							$(this).find("div .btn-group button").click(function (e) {
 							
 								alert( "hello");
 							} );
