@@ -70,7 +70,7 @@
 
 				// 1. Announces 				
 				
-				var effect =  kendo.fx($("#announce-list-view-panel")).fadeOut().duration(700); 
+				//var effect =  kendo.fx($("#announce-list-view-panel")).fadeOut().duration(700); 
 				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );	
 				$("#announce-list-view").kendoListView({
 					dataSource: new kendo.data.DataSource({
@@ -99,8 +99,8 @@
 						var data = this.dataSource.view() ;
 						var selectedCell = data[this.select().index()];		
 						$("#announce-list-view").data( "announcePlaceHolder", selectedCell );
-						effect.play();					
-						showAnnounce();							
+						//effect.play();					
+						displayAnnouncement();							
 					},
 					dataBound: function(e) {
 						if( this.dataSource.data().length == 0 ){
@@ -141,16 +141,20 @@
 			}
 		}]);	
 		
-		function showAnnounce () {					
+		function displayAnnouncement () {					
 			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
+			
 			$("#announce-view-panel").find(".close").click(function (e) {
-				$("#announce-view-panel").hide();
-				kendo.fx($("#announce-list-view-panel")).fadeIn().duration(700).play(); 
+				//$("#announce-view-panel").hide();
+				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
+				kendo.fx($("#nnounce-view-panel")).slideIn("up").play();
 			});
-			$("#announce-view-panel").show();
+			
+			//$("#announce-view-panel").show();
+			kendo.fx($("#nnounce-view-panel")).slideIn("down").play();
 		}				
 		-->
 		</script>		
