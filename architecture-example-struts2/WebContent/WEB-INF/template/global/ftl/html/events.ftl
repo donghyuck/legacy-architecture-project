@@ -150,11 +150,11 @@
 			$("#announce-view-panel").find(".close").click(function (e) {
 				//$("#announce-view-panel").hide();
 				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
-				kendo.fx($("#announce-view-panel")).slideIn("down").reverse();
+				kendo.fx($("#announce-view-panel")).slideIn("up").reverse();
 			});
 			
 			//$("#announce-view-panel").show();
-			kendo.fx($("#announce-view-panel")).slideIn("down").play();
+			kendo.fx($("#announce-view-panel")).slideIn("up").play();
 		}				
 		-->
 		</script>		
@@ -231,6 +231,9 @@
 				</div>
 				<div class="col-lg-9">		
 					<div id="event-area" style="min-height:500px;">						
+						
+						<div id="announce-view-panel" style="display:none;"></div>
+						
 						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
 							<!--
 							<div class="panel-heading">
@@ -245,8 +248,7 @@
 							<div class="panel-body" style="padding-top:25px;">
 								<div id="announce-list-view"></div>	
 							</div>
-						</div>						
-						<div id="announce-view-panel" style="display:none;"></div>
+						</div>
 					</div>	
 				</div>				
 			</div>
