@@ -359,6 +359,7 @@
 													}
 											});						
 										}
+										alert( "dd" );
 										$("my-file-upload").show();
 									});									
 								}								
