@@ -150,11 +150,11 @@
 			$("#announce-view-panel").find(".close").click(function (e) {
 				//$("#announce-view-panel").hide();
 				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
-				kendo.fx($("#nnounce-view-panel")).slideIn("up").play();
+				kendo.fx($("#announce-view-panel")).slideIn("down").reverse();
 			});
 			
 			//$("#announce-view-panel").show();
-			kendo.fx($("#nnounce-view-panel")).slideIn("down").play();
+			kendo.fx($("#announce-view-panel")).slideIn("down").play();
 		}				
 		-->
 		</script>		
