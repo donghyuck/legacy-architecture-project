@@ -1001,11 +1001,11 @@
 		}
 		
 		.cbp-spmenu-right {
-			right: -450px;
+			right: -400px;
 		}
 		
 		.cbp-spmenu-vertical{
-			width: 450px;
+			width: 400px;
 		}
 		
 		
