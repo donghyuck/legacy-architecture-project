@@ -995,7 +995,7 @@
 			<div  class="container" style="min-height:600px;">		
 				<div class="row">
 					<div class="col-sm-6">
-						<div class="btn-group" data-toggle="buttons">
+						레이아웃 <div class="btn-group" data-toggle="buttons">
 						  <label class="btn btn-primary">
 						    <input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
 						  </label>
