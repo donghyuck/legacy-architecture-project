@@ -266,6 +266,7 @@
 							});						
 						}
 					} else if(  $(this).attr('href') == '#my-files' ){
+					
 						if( !$('#attachment-list-view').data('kendoListView') ){		
 						
 							var attachementTotalModle = kendo.observable({ 
@@ -350,7 +351,13 @@
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
-							});			
+							});	
+							
+							$(this).find(".btn-group button").click(function (e) {
+							
+								alert( "hello");
+							} );
+									
 						}
 					} else if( $(this).attr('href') == '#my-photo-stream' ){							
 						if( !$('#photo-list-view').data('kendoListView') ){
@@ -394,6 +401,11 @@
 								buttonCount : 5,
 								dataSource : $('#photo-list-view').data('kendoListView').dataSource
 							});	
+							
+							$(this).find(".btn-group button").click(function (e) {
+							
+								alert( "hello");
+							} );
 						}
 					} else if( $(this).attr('href') == '#my-photo-upload' ){
 						
