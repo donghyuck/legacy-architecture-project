@@ -270,7 +270,7 @@
       </ol>
       <div class="carousel-inner">
         <div class="item active">
-        <img src="${request.contextPath}/content/image.do?imageId=175" class="img-responsive" style="min-width:100%;" />       
+        <img src="${request.contextPath}/community/download-image.do?imageId=175" class="img-responsive" style="min-width:100%;" />       
         <div class="container">
           	
             <div class="carousel-caption">
@@ -281,7 +281,7 @@
          </div>
         </div>
         <div class="item">
-          <img src="${request.contextPath}/content/image.do?imageId=808" class="img-responsive" style="min-width:100%;" />
+          <img src="${request.contextPath}/community/download-image.do?imageId=808" class="img-responsive" style="min-width:100%;" />
           <div class="container">
             <div class="carousel-caption">
               <h1>Another example headline.</h1>
@@ -291,7 +291,7 @@
           </div>
         </div>
         <div class="item">
-          <img src="${request.contextPath}/content/image.do?imageId=810" class="img-responsive" style="min-width:100%;" />
+          <img src="${request.contextPath}/community/download-image.do?imageId=810" class="img-responsive" style="min-width:100%;" />
           <div class="container">
             <div class="carousel-caption">
               <h1>One more for good measure.</h1>
