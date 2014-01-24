@@ -96,8 +96,7 @@
 														<td></td>
 													</tr>
 												</tbody>
-											</table>	
-											
+											</table>												
 								<div class="blank-top-5" ></div>				
 								<div class="alert alert-warning fade in">
 									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -115,7 +114,9 @@
 							</div>
 							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
-								<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
+								<div class="btn-group">
+									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
+								</div>
 								<div class="blank-top-5 "></div>
 								<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
@@ -145,8 +146,10 @@
 							<!-- end attachements -->		
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
-								<div class="blank-top-5" ></div>					
-								<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>			
+								<div class="blank-top-5" ></div>		
+								<div class="btn-group">			
+									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>		
+								</div>		
 								<div class="blank-top-5 "></div>					
 								<div class="panel panel-default" style="margin-bottom:0px;">								
 									<div class="panel-body scrollable" style="max-height:450px;">
