@@ -361,7 +361,7 @@
 										}
 										alert( "dd" );
 										
-										$("#attachment-files .panel").hide();
+										$("#attachment-files div .panel").hide();
 										$("my-file-upload").show();
 										
 									});									
