@@ -127,7 +127,7 @@
 											<li><a href="#"  id="attachment-list-view-filter-3"><i class="fa fa-filter"></i> 파일</a>
 											</li>									  
 								</ul>		
-										
+								<div class="blank-top-5 "></div>		
 								<div class="panel panel-default" style="margin-bottom:0px;">
 								<!--
 									<div class="panel-heading">
