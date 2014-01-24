@@ -185,6 +185,7 @@
        					</div>
 					</div>
   </div>
+  
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -201,12 +202,4 @@
   </div>
 </div>
 			
-			<div class="panel panel-default">
-				<div class="panel-heading"><i class="fa fa-bars"></i>&nbsp;</div>
-				
-				<div class="panel-body clearfix">		
-						
-	
-				</div>
-			</div>			
 		</section>	
