@@ -356,7 +356,7 @@
 							$("#my-files .btn-group button").each(function( index ) { 
 								var control_button = $(this);
 								
-								var control_button_icon = control_button.first()
+								var control_button_icon = control_button.find("i");
 								alert( control_button_icon.html());							
 								if( control_button_icon.hasClass("fa-upload")){
 									control_button.click( function(e){
