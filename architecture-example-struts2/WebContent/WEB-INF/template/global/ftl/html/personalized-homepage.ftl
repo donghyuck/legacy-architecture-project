@@ -752,7 +752,7 @@
 			panel.data().set("editable", editable );
 			
 			var template = kendo.template($('#photo-view-template').html());
-			$("#" + renderToString ).find(".panel-body").html( template(photoPlaceHolder) );
+			$("#" + renderToString ).find(".panel-body:first").html( template(photoPlaceHolder) );
 
 			$( '#' + renderToString +' .pager li').each(function( index ) { 
 				var panel_pager = $(this);				
