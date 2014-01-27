@@ -15,7 +15,7 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
-			'${request.contextPath}/js/common/common.ui.js',
+			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.js'],
 			complete: function() {
 			
