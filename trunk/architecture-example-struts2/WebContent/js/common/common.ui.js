@@ -129,7 +129,8 @@
         		kendo.bind(that.element, observable );
         	}        	
         	$(that.element).find(".panel-header-actions a").each(function( index ){
-        		 $(this).click(function (e) {
+        		 
+        		$(this).click(function (e) {
         			e.preventDefault();
         			var header_action = $(this);
         			if( header_action.text() == "Minimize" ){        				
@@ -149,11 +150,14 @@
         				
         			}else if ( header_action.text() == "Custom" ){
         				kendo.fx($(that.element).find(".panel-body:last")).expand("vertical").stop().play();
-        			}
-        			
+        			}        			
         		});
         		
         	});
+        	alert(
+        	$(that.element).find(".panel-body:last button .close").html("fdsa")
+        	); 
+        	
 		}
 	});
 	
