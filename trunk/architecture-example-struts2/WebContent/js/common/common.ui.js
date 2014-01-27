@@ -87,17 +87,23 @@
  */
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
+	var proxy = $.proxy, CHANGE = "change" ;
 	var observable = new kendo.data.ObservableObject({ title : "&nbsp;" } );	
+	
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
 			var that = this;
 			Widget.fn.init.call(that, element, options);			
 			options = that.options;
 			if( options.title )
-				observable.set("title", options.title);			
-			that.render();
+				observable.set("title", options.title);
+			
+			that.render();		
+			
+			kendo.notify(that);			
 		},
 		events : {			
+			CHANGE
 		},
 		options : {
 			name: "Panel",
@@ -109,6 +115,9 @@
 			var that = this ;
 			that.element.hide();			
 		},
+		change : function(){
+						
+		},
 		data : function(){
 			var that = this ;
 			if(that.options.data )
@@ -117,6 +126,7 @@
 		},
 		data : function ( Object data ){
 			that.options.data = data;
+			that.change();
 		},
 		title: function( title ){
 			if( title ){
