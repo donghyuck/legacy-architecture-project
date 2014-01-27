@@ -1085,6 +1085,7 @@ div figure:hover figcaption {
 
 .cbp-spmenu-trigger:hover {
 	background: #39b3d7;
+	text-decoration: none;	
 }
 
 .cbp-spmenu-trigger i {
