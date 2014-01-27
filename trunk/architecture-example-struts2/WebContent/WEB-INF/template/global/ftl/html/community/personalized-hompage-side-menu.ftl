@@ -4,7 +4,6 @@
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
 			 <a href="#" id="hide-right-slide" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
-			 <button id="show-right-slide" type="button" class="cbp-spmenu-trigger btn btn-danger pull-right"><i class="fa fa-bars"></i></button>
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
