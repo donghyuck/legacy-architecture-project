@@ -646,7 +646,6 @@
 			if( !$( "#" + renderToString ).data("extPanel") ){					
 				$("#" + renderToString ).data("extPanel", 
 					$("#" + renderToString ).extPanel({
-						title : "포토",
 						template : kendo.template($("#file-panel-template").html()),
 						data : attachPlaceHolder
 					})
