@@ -134,14 +134,15 @@
         			e.preventDefault();
         			var header_action = $(this);
         			if( header_action.text() == "Minimize" ){        				
-        				$(that.element).find(".panel-body, .panel-footer").toggleClass("hide");        				
-						var header_action_icon = header_action.find('span');
+        				var header_action_icon = header_action.find('span');
 						if( header_action_icon.hasClass("k-i-minimize") ){
 							header_action_icon.removeClass("k-i-minimize");
 							header_action_icon.addClass("k-i-maximize");
+							$(that.element).find(".panel-body, .panel-footer").addClass("hide");
 						}else{
 							header_action_icon.removeClass("k-i-maximize");
 							header_action_icon.addClass("k-i-minimize");
+							$(that.element).find(".panel-body, .panel-footer").removeClass("hide");
 						}
 						
         			}else if ( header_action.text() == "Close"){
