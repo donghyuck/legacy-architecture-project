@@ -198,8 +198,7 @@
 				// 4. Right Tabs
 				$('#myTab a').click(function (e) {
 					e.preventDefault();	
-					$(this).tab('show')
-					alert( $(this).html() );
+					$(this).tab('show');
 				});	
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
