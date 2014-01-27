@@ -197,9 +197,15 @@
 															
 				// 4. Right Tabs
 				$('#myTab a').click(function (e) {
-					e.preventDefault();					
-					if(  $(this).attr('href') == '#my-message-notes' ){							
-					} else if(  $(this).attr('href') == '#my-streams' ){								
+					e.preventDefault();	
+					$(this).tab('show')
+				});	
+				
+				$('#myTab').on( 'show.bs.tab', function (e) {
+					e.preventDefault();		
+					var show_bs_tab = $(e.target);								
+					if(  show_bs_tab.attr('href') == '#my-message-notes' ){							
+					} else if( show_bs_tab.attr('href') == '#my-streams' ){								
 						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
 							$("#my-social-streams-grid").kendoGrid({
 								dataSource : new kendo.data.DataSource({
@@ -242,7 +248,7 @@
 								height: 300
 							});	
 						}
-					} else if(  $(this).attr('href') == '#my-files' ){
+					} else if( show_bs_tab.attr('href') == '#my-files' ){
 					
 						if( !$('#attachment-list-view').data('kendoListView') ){		
 						
@@ -365,7 +371,7 @@
 							});
 									
 						}
-					} else if( $(this).attr('href') == '#my-photo-stream' ){							
+					} else if(show_bs_tab.attr('href') == '#my-photo-stream' ){							
 						if( !$('#photo-list-view').data('kendoListView') ){
 							$("#photo-list-view").kendoListView({
 								dataSource: {
@@ -445,16 +451,6 @@
 							});
 						}
 					} 
-					$(this).tab('show')
-				});	
-				
-				$('#myTab').on( 'show.bs.tab', function (e) {
-					e.preventDefault();					
-
-						
-				alert( $(e.target).attr('href') ); 
-					
-				
 				});
 				
 				$('#myTab a:first').tab('show') ;
