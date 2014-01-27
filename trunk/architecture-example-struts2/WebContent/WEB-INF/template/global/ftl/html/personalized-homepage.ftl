@@ -681,6 +681,8 @@
 								$('#' + renderToString ).remove();
 							},
 							error:handleKendoAjaxError
+						}).change(function(data){
+							alert( "hello");
 						});	
 					}
 					if( panel_button.hasClass( 'close') ){
