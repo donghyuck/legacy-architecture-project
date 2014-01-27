@@ -178,32 +178,28 @@
 							<!-- end photos -->
 						</div>
 						<!-- end of tab content -->	
-						
-					
-       					</div>
 					</div>
-  </div>
-  
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h5 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-         메시지
-        </a>
-      </h5>
-    </div>
-    <div id="collapseThree" class="panel-collapse collapse">
-      <div class="panel-body">
-<div class="popover left" style="display:true;">
-														<div class="arrow"></div>
-														<!--<h3 class="popover-title">알림</h3>-->
-														<div class="popover-content">
-															<p>새로운 메시지가 없습니다.</p>
-														</div>
-													</div>	
-       </div>
-    </div>
-  </div>
-</div>
-			
+				</div>
+			</div>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h5 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+							메시지
+							</a>
+						</h5>
+					</div>
+					<div id="collapseThree" class="panel-collapse collapse">
+						<div class="panel-body">
+							<div class="popover left" style="display:true;">
+								<div class="arrow"></div>
+								<!--<h3 class="popover-title">알림</h3>-->
+								<div class="popover-content">
+									<p>새로운 메시지가 없습니다.</p>
+								</div>
+						</div>	
+					</div>
+				</div>
+			</div>
+		</div>			
 		</section>	
