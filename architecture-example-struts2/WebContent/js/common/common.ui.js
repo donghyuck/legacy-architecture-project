@@ -128,6 +128,7 @@
 		},
 		render: function () {				
 			var that = this ;			
+			
         	if( that.options.template ){        		 
     			that.element.html( that.data() )          		
     			kendo.bind(that.element, that.data() );
