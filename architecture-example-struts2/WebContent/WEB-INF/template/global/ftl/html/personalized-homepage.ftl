@@ -635,12 +635,28 @@
 		function displayAttachmentPanel(){			
 		
 			var renderToString =  "attachement-panel-0";	
+			var attachPlaceHolder = $("#attachment-list-view").data( "attachPlaceHolder" );		
+			
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
 			}	
-			var attachPlaceHolder = $("#attachment-list-view").data( "attachPlaceHolder" );		
+			
+			
+			
+			if( !$("#" + renderToString ).data("extPanel") ){					
+				$("#" + renderToString ).data("extPanel", 
+					$("#" + renderToString ).extPanel({
+						title : "포토",
+						template : kendo.template($("#file-panel-template").html()),
+						data : attachPlaceHolder
+					})
+				 );		
+			});
+			
+			/**	 
+			
 			var template = kendo.template($('#file-view-template').html());			
 			$('#' + renderToString ).html( template(attachPlaceHolder) );	
 			kendo.bind($('#' + renderToString ), attachPlaceHolder );					
@@ -685,7 +701,12 @@
 					}
 				} 
 			});			
-			$('#' + renderToString ).show();			
+			$('#' + renderToString ).show();	
+			**/
+			
+			var panel = $("#" + renderToString ).data("extPanel");		
+			panel.show();
+						
 		}	
 						
 		<!-- ============================== -->
