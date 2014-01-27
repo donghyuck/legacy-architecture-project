@@ -650,6 +650,7 @@
 						data : attachPlaceHolder
 					})
 				 ).change( function (){
+				 alert( "sss" ) ;
 					this.refresh();
 				});
 			}else{
