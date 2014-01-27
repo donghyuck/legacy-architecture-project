@@ -677,8 +677,9 @@
 							}}
 						]
 					})
-				 );				 
-				 $("#update-attach-file").kendoUpload({
+				 );
+				 
+				$("#update-attach-file").kendoUpload({
 					multiple: false,
 					async: {
 						saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
@@ -698,27 +699,10 @@
 											
 			}else{
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
-			}
-			
+			}			
 			//CHANGE
 			var panel = $("#" + renderToString ).data("extPanel");
-			panel.show();
-			
-			/**	 
-			
-			var template = kendo.template($('#file-view-template').html());			
-			$('#' + renderToString ).html( template(attachPlaceHolder) );	
-			kendo.bind($('#' + renderToString ), attachPlaceHolder );					
-			if( attachPlaceHolder.contentType == "application/pdf" ){
-				var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + attachPlaceHolder.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-			}	
-									
-			
-			$('#' + renderToString ).show();	
-			**/
-			
-			
-						
+			panel.show();		
 		}	
 						
 		<!-- ============================== -->
@@ -736,7 +720,6 @@
 			if( !$("#" + renderToString ).data("extPanel") ){					
 				$("#" + renderToString ).data("extPanel", 
 					$("#" + renderToString ).extPanel({
-						title : "포토",
 						template : kendo.template($("#photo-panel-template").html())
 					})
 				 );					
