@@ -1032,7 +1032,7 @@
 						</div>
 					</div>
 					<div class="col-sm-6">
-						<button id="show-right-slide" type="button" class="btn btn-danger pull-right"><i class="fa fa-bars"></i></button>
+						
 					</div>
 				</div>				
 				<div id="personalized-area" class="row blank-top-5">					
