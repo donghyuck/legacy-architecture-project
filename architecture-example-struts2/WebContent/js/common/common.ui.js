@@ -96,7 +96,7 @@
 			that.render();
 			that.trigger( CHANGE, {data: options.data }); 
 			//that.render();					
-			//kendo.notify(that);			
+			kendo.notify(that);			
 		},
 		events : [
 			CHANGE
