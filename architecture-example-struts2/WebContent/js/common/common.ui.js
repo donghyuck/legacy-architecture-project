@@ -147,6 +147,8 @@
         				that.hide();
         			}else if ( header_action.text() == "Refresh"){	
         				
+        			}else if ( header_action.text() == "Custom" ){
+        				 kendo.fx(that.find(".panel-body:last")).expand("vertical").stop().play();
         			}
         			
         		});
