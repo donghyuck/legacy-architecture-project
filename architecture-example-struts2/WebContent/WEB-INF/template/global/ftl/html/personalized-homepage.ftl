@@ -199,7 +199,7 @@
 
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
-					e.preventDefault();		
+					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
 					if( show_bs_tab.attr('href') == '#my-streams' ){						
 						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
