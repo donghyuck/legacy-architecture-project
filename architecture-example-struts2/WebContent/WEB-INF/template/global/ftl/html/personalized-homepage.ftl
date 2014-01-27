@@ -652,14 +652,30 @@
 						afterChange : function ( data ){
 							if( data.contentType == "application/pdf" ){
 								var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + data.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-							}							
+							}
+														
 						},
 						commands:[
 							{ selector :   "#" + renderToString + " .panel-body:first .btn", 
-							  action : function(e){
+							  handler : function(e){
 								e.preventDefault();
-								alert($(this).html() );								
-							} }
+								var _ele = $(this);
+								if( _ele.hasClass( 'custom-delete') ){
+									alert( $("#attachment-list-view").data( "attachPlaceHolder" ).attachmentId );
+									/**
+									$.ajax({
+										dataType : "json",
+										type : 'POST',
+										url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
+										data : { attachmentId: attachPlaceHolder.attachmentId },
+										success : function( response ){
+											$('#' + renderToString ).remove();
+										},
+										error:handleKendoAjaxError
+									});
+									*/								
+								}
+							}}
 						]
 					})
 				 );
@@ -681,27 +697,7 @@
 						}
 					} 
 				});
-				$("#" + renderToString + " .panel-body:first button").each(function( index ) {		
-					var custom_commend = $(this);
-					custom_commend.click(function (e) { 
-						e.preventDefault();					
-						if( custom_commend.hasClass( 'custom-attachment-delete') ){
-							alert(attachPlaceHolder.attachmentId );
-						/**
-							$.ajax({
-								dataType : "json",
-								type : 'POST',
-								url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
-								data : { attachmentId: attachPlaceHolder.attachmentId },
-								success : function( response ){
-									$('#' + renderToString ).remove();
-								},
-								error:handleKendoAjaxError
-							});
-							*/
-						}
-					});
-				});							
+											
 			}else{
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
 			}
