@@ -12,12 +12,12 @@
 			</div>		
 		</div>
 		<div class="panel-body">
-		
+			
 			first
 		
 		</div>	
 		<div class="panel-body">
-		
+			<button type="button" class="close" aria-hidden="true">&times;</button>
 			second
 		
 		</div>			
