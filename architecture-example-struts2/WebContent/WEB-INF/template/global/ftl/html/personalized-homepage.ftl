@@ -677,8 +677,7 @@
 							}}
 						]
 					})
-				 );
-				 
+				 );				 
 				$("#update-attach-file").kendoUpload({
 					multiple: false,
 					async: {
@@ -747,8 +746,7 @@
 							}}
 						]
 					})
-				 );					
-				 	
+				 );					 	
 				$("#update-photo-file").kendoUpload({
 					multiple: false,
 					async: {
@@ -775,19 +773,23 @@
 			}
 			
 			var panel = $("#" + renderToString ).data("extPanel");
+			var panel_body = panel.body() ;
+			
+			var template = kendo.template($('#photo-view-template').html());
+			panel_body.html( template(photoPlaceHolder) );
+			
+			
 			panel.show();	
 			
 			/**
 			
 			
 			var editable = $("#account-panel").data("currentUser" ).userId == photoPlaceHolder.objectId ;
-			
 			panel.data().set( "title",  photoPlaceHolder.name ) ;
 			panel.data().set("imageId", photoPlaceHolder.imageId );
 			panel.data().set("editable", editable );
+						
 			
-			var template = kendo.template($('#photo-view-template').html());
-			$("#" + renderToString ).find(".panel-body:first").html( template(photoPlaceHolder) );
 
 			$( '#' + renderToString +' .pager li').each(function( index ) { 
 				var panel_pager = $(this);				
