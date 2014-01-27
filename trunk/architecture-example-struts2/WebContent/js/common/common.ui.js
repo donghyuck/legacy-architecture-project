@@ -104,7 +104,8 @@
 			title : null,
 			template: null,
 			data : {},
-			refresh : false 
+			refresh : false ,
+			commands : []
 		},
 		hide: function (){
 			var that = this ;
@@ -136,7 +137,7 @@
         	if( that.options.template ){       
         		$(that.element).html( that.options.template(that.data()) );
         		kendo.bind($(that.element), that.data());
-        	}         	
+        	}        	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
         		$(this).click(function (e) {
         			e.preventDefault();
@@ -161,13 +162,18 @@
         			}else if ( header_action.text() == "Custom" ){
         				$(that.element).find(".panel-body:first").toggleClass("hide");
         			}        			
-        		});        		
+        		});
         	});        	
         	// custom 
         	$(that.element).find(".panel-body:first button.close").click(function(e){
         		e.preventDefault();	
-        		$(that.element).find(".panel-body:first").addClass("hide");       	
-        	});	
+        		$(that.element).find(".panel-body:first").addClass("hide");
+        	});	        	
+        	that.options.commands.forEach(elem, index){
+        		$(elem.selector).click( function (e) {
+        			elem.action(e);
+        		});
+        	}         	
 		},
         destroy: function() {
         	var that = this;
