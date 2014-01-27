@@ -88,11 +88,6 @@
 				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 			</div>		
-		</div>
-		<div class="panel-body">
-			
-			first
-		
 		</div>	
 		<div class="panel-body hide">
 			<button type="button" class="close" aria-hidden="true">&times;</button>					
@@ -120,7 +115,12 @@
 					</li>
 				</ul>
 			</div>
-		</div>			
+		</div>	
+		<div class="panel-body">
+			
+			first
+		
+		</div>				
 	</div>		
 </script>
 <script type="text/x-kendo-template" id="photo-view-template">	
