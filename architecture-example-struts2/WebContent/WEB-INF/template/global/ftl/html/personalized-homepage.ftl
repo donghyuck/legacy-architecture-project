@@ -658,7 +658,7 @@
 							{ selector :   "#" + renderToString + " .panel-body:first .btn", 
 							  action : function(e){
 								e.preventDefault();
-								alert($(e.target).html());								
+								alert(e.target.html());								
 							} }
 						]
 					})
