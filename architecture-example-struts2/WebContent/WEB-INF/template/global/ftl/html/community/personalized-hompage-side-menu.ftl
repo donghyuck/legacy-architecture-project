@@ -5,7 +5,7 @@
 			<div class="blank-top-50"></div>
 			<div class="cbp-spmenu-trigger"  style="height:18px;"><button  id="hide-right-slide" type="button" class="close">&times;</button></div>		
 			 
-			 <a href="#" class="cbp-spmenu-trigger"><i class="fa fa-share-square-o"></i></a>
+			 <a href="#" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
 				
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
