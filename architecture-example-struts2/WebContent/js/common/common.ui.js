@@ -114,7 +114,7 @@
 		data: function(value) {
 			var that = this;
 	            if (value !== undefined) {
-	            	that.options.data = value ;
+	            	that.options.data =new kendo.data.ObservableObject( value ) ;
 	            	if( that.options.refresh )
 	            		that.refresh();
 	            	that.trigger( CHANGE, {data: that.options.data }); 
