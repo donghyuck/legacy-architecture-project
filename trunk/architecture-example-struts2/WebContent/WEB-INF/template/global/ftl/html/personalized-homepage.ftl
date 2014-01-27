@@ -653,7 +653,7 @@
 						data : attachPlaceHolder
 					})
 				 );		
-			});
+			}
 			
 			/**	 
 			
