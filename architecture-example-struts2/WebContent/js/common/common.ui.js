@@ -156,9 +156,10 @@
         	});
         	
         	// custom 
-        	$(that.element).find(".panel-body:last button.close").click(
+        	$(that.element).find(".panel-body:last button.close").click(function(e){
+        		e.preventDefault();	
         		kendo.fx($(that.element).find(".panel-body:last")).expand("vertical").stop().reverse();        	
-        	);	
+        	});	
 		}
 	});
 	
