@@ -125,6 +125,10 @@
 				return observable.get("title");
 			}
 		},
+		refresh: function () {
+			var that = this ;
+			that.render();
+		},
 		show: function (){
 			var that = this ;
 			that.element.show();			
