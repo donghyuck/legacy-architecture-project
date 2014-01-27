@@ -91,7 +91,7 @@
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
 			var that = this;		 
-			Widget.fn.init.call(that, $( element ), options);			
+			Widget.fn.init.call(that, element, options);			
 			options = that.options;							
 			that.render();					
 			kendo.notify(that);			
@@ -128,10 +128,12 @@
 		},
 		render: function () {				
 			var that = this ;			
-			alert( "fdsafsda:" +  that.options.template   );
-        	if( that.options.template ){        		 
+			
+        	if( that.options.template ){        		
+        		alert( $(that.element).html() );
     			$(that.element).html( that.data() ) ;
     			kendo.bind($(that.element), that.data() );
+        	
         	} 
         	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
