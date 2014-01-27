@@ -87,9 +87,7 @@
  */
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	var proxy = $.proxy, CHANGE = "change" ;
-	var observable = new kendo.data.ObservableObject({ title : "&nbsp;" } );	
-	
+	var proxy = $.proxy, CHANGE = "change", _data = null ;	
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
 			var that = this;
@@ -97,9 +95,12 @@
 			options = that.options;
 			if( options.title )
 				observable.set("title", options.title);
-			
-			that.render();		
-			
+			if (options.data ){
+				_data = options.data
+			}else{
+				_data = new kendo.data.ObservableObject({ title : "&nbsp;" } );	
+			}	
+			that.render();					
 			kendo.notify(that);			
 		},
 		events : [
@@ -115,21 +116,21 @@
 			var that = this ;
 			that.element.hide();			
 		},
-		data : function(){
-			var that = this ;
-			if(that.options.data )
-				return that.options.data;
-			return observable ;
-		},
 		data : function ( Object data ){
-			that.options.data = data;
-			that.trigger( CHANGE, null ); 
+			var that = this ;
+			if( data ){
+				_data = data;
+				that.trigger( CHANGE, null ); 
+			}else{
+				return data;
+			}
 		},
 		title: function( title ){
+			var that = this ;
 			if( title ){
-				observable.set("title" , title);
+				that.data().set("title" , title);
 			}else{
-				return observable.get("title");
+				return that.data().get("title");
 			}
 		},
 		refresh: function () {
@@ -142,18 +143,11 @@
 		},
 		render: function () {				
 			var that = this ;			
-        	if( that.options.template ){        		
-        		 
-        		if( that.options.data ){	
-        			that.element.html( that.options.template(that.options.data) ) 
-        			kendo.bind(that.element, that.options.data );
-        		}else{
-        			that.element.html( that.options.template )          		
-        			kendo.bind(that.element, observable );
-        		}
+        	if( that.options.template ){        		 
+    			that.element.html( that.data() )          		
+    			kendo.bind(that.element, that.data() );
         	}        	
-        	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){
-        		 
+        	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
         		$(this).click(function (e) {
         			e.preventDefault();
         			var header_action = $(this);
@@ -176,8 +170,7 @@
         			}else if ( header_action.text() == "Custom" ){
         				$(that.element).find(".panel-body:last").toggleClass("hide");
         			}        			
-        		});
-        		
+        		});        		
         	});
         	
         	// custom 
