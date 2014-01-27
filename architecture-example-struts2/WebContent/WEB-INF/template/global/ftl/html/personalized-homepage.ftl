@@ -650,7 +650,7 @@
 						data : attachPlaceHolder
 					})
 				 ).change( function (){
-					this.refresh();
+					//this.refresh();
 				});
 			}else{
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
