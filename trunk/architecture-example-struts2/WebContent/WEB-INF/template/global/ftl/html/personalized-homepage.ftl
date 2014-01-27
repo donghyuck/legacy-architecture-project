@@ -199,6 +199,7 @@
 				$('#myTab a').click(function (e) {
 					e.preventDefault();	
 					$(this).tab('show')
+					alert( $(this).html() );
 				});	
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
@@ -206,7 +207,8 @@
 					var show_bs_tab = $(e.target);		
 					alert( 	show_bs_tab.attr('href') );					
 					if(  show_bs_tab.attr('href') == '#my-message-notes' ){							
-					} else if( show_bs_tab.attr('href') == '#my-streams' ){								
+					} else if( show_bs_tab.attr('href') == '#my-streams' ){	
+					
 						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
 							$("#my-social-streams-grid").kendoGrid({
 								dataSource : new kendo.data.DataSource({
