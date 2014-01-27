@@ -128,7 +128,7 @@
         		that.element.html( that.options.template )  
         		kendo.bind(that.element, observable );
         	}        	
-        	$(that.element).find(".panel-header-actions a").each(function( index ){
+        	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){
         		 
         		$(this).click(function (e) {
         			e.preventDefault();
@@ -149,7 +149,7 @@
         			}else if ( header_action.text() == "Refresh"){	
         				
         			}else if ( header_action.text() == "Custom" ){
-        				kendo.fx($(that.element).find(".panel-body:last")).expand("vertical").stop().play();
+        				$(that.element).find(".panel-body:last").toggleClass("hide");
         			}        			
         		});
         		
@@ -158,7 +158,7 @@
         	// custom 
         	$(that.element).find(".panel-body:last button.close").click(function(e){
         		e.preventDefault();	
-        		kendo.fx($(that.element).find(".panel-body:last")).expand("vertical").stop().reverse();        	
+        		$(that.element).find(".panel-body:last").addClass("hide");       	
         	});	
 		}
 	});
