@@ -449,8 +449,10 @@
 				});	
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
-					
-				alert( $( e.target ).html() ); 
+					e.preventDefault();					
+
+						
+				alert( $(e.target).attr('href') ); 
 					
 				
 				});
