@@ -43,15 +43,7 @@
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
 			<figcaption>
 				<ul class="list-inline">
-					<li><small class="text-muted">#:modifiedDate#</small></li>
-					<li class="pull-right">
-						<div class="btn-group">
-							<a class="btn btn-info btn-sm" href="${request.contextPath}/community/download-my-image.do?imageId=#:imageId #" ><i class="fa fa-download"></i></a>
-							<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-share"></i></button>	
-							<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-comment-o"></i></button>
-							<button  type="button" class="btn btn-primary btn-sm"><i class="fa fa-angle-down"></i></button>	
-						</div>			
-					</li>
+					<small class="text-muted">#:modifiedDate#</small>
 				</ul>
 				<div class="blank-top-5 "></div>
 				<ul class="pager">
