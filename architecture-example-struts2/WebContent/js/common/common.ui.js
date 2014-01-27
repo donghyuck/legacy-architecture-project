@@ -91,7 +91,7 @@
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
 			var that = this;		 
-			Widget.fn.init.call(that, element, options);			
+			Widget.fn.init.call(that, $( element ), options);			
 			options = that.options;							
 			that.render();					
 			kendo.notify(that);			
