@@ -711,6 +711,8 @@
 		function displayPhotoPanel(){			
 		
 			var renderToString =  "photo-panel-0";	
+			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
+			
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
@@ -720,10 +722,12 @@
 			if( !$("#" + renderToString ).data("extPanel") ){					
 				$("#" + renderToString ).data("extPanel", 
 					$("#" + renderToString ).extPanel({
-						template : kendo.template($("#photo-panel-template").html())
+						template : kendo.template($("#photo-panel-template").html()),
+						data : photoPlaceHolder
 					})
 				 );					
 				 	 
+				 /**	 
 				$("#" + renderToString ).find(".custom-photo-delete").click(function (e) { 
 					e.preventDefault();			
 					$.ajax({
@@ -759,10 +763,15 @@
 							}
 						} 
 				});	
+				**/
 			}
 			
-			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
 			var panel = $("#" + renderToString ).data("extPanel");
+			panel.show();	
+			
+			/**
+			
+			
 			var editable = $("#account-panel").data("currentUser" ).userId == photoPlaceHolder.objectId ;
 			
 			panel.data().set( "title",  photoPlaceHolder.name ) ;
@@ -818,8 +827,10 @@
 						}						
 					});				
 				}
-			} );													
-			panel.show();			
+			} );				
+			**/
+												
+					
 		}				
 		-->
 		</script> 		   
