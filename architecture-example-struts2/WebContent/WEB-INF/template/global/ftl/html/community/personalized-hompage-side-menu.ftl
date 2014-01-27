@@ -26,9 +26,11 @@
 					<div id="collapseTwo" class="panel-collapse collapse">
 						<div class="panel-body clearfix">
 						<ul class="nav nav-tabs" id="myTab">
+							<!--
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
 							</li>
+							-->
 							<li>
 								<a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a>
 							</li>							
@@ -40,10 +42,12 @@
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
 							<!-- start messages -->			
+							<!--
 							<div class="tab-pane active" id="my-message-announces">
 								<div class="blank-top-5" ></div>	
 								
-							</div>									
+							</div>		
+							-->							
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
 								<div class="panel panel-default" style="margin-bottom:0px;">
