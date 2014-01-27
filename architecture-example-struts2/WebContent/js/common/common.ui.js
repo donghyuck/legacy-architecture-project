@@ -128,9 +128,9 @@
 		},
 		render: function () {				
 			var that = this ;			
-			alert( "fdsafsda" );
+			alert( "fdsafsda:" +  that.options.template   );
         	if( that.options.template ){        		 
-        		alert(that.html());
+        		alert(that.element.html());
         		
     			that.element.html( that.data() ) ;
     			kendo.bind(that.element, that.data() );
