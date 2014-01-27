@@ -121,7 +121,7 @@
 			var that = this;
 	            if (value !== undefined) {
 	            	that.data = value ;
-	            	that.trigger( CHANGE, null ); 
+	            	that.trigger( CHANGE ); 
 	            } else {
 	                return that.data;
 	            }
