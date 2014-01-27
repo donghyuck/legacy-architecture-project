@@ -132,7 +132,6 @@
         		 $(this).click(function (e) {
         			e.preventDefault();
         			var header_action = $(this);
-        			alert( header_action.text() );
         			if( header_action.text() == "Minimize" ){        				
         				$(that.element).find(".panel-body, .panel-footer").toggleClass("hide");        				
 						var header_action_icon = header_action.find('span');
@@ -149,9 +148,7 @@
         			}else if ( header_action.text() == "Refresh"){	
         				
         			}else if ( header_action.text() == "Custom" ){
-        				alert("hello");
-        				alert( "hello"  +  $(that.element).find(".panel-body:last").html() );
-        				kendo.fx(that.find(".panel-body:last")).expand("vertical").stop().play();
+        				kendo.fx($(that.element).find(".panel-body:last")).expand("vertical").stop().play();
         			}
         			
         		});
