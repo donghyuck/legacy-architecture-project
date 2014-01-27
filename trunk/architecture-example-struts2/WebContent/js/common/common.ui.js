@@ -138,8 +138,8 @@
         	if( that.options.template ){       
         		$(that.element).html( that.options.template(that.data()) );
         		kendo.bind($(that.element), that.data());        		
-        		observable.set("title", that.data().name );
-        		kendo.bind($(that.element), observable );
+        		//observable.set("title", that.data().name );
+        		//kendo.bind($(that.element), observable );
         	}        	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
         		$(this).click(function (e) {
