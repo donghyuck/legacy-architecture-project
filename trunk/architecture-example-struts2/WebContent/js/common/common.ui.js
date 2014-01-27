@@ -159,7 +159,7 @@
         			
         			// custom
         			}else if ( header_action.text() == "Custom" ){
-        				$(that.element).find(".panel-body:last").toggleClass("hide");
+        				$(that.element).find(".panel-body:first").toggleClass("hide");
         			}        			
         		});        		
         	});        	
