@@ -203,7 +203,8 @@
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					e.preventDefault();		
-					var show_bs_tab = $(e.target);								
+					var show_bs_tab = $(e.target);		
+					alert( 	show_bs_tab.attr('href') );					
 					if(  show_bs_tab.attr('href') == '#my-message-notes' ){							
 					} else if( show_bs_tab.attr('href') == '#my-streams' ){								
 						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
