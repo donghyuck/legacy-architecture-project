@@ -12,12 +12,54 @@
 		</div>
 		<div class="panel-body">
 			
-			first
+			#if (contentType.match("^image") ) {#			
+			<img src="${request.contextPath}/community/view-my-attachment.do?attachmentId=#= attachmentId #" alt="#:name# 이미지" class="img-responsive"/>			
+			# } else { #		
+				#if (contentType == "application/pdf" ) {#
+				<div id="pdf-view"></div>
+				# } else { #	
+				<div class="k-grid k-widget" style="width:100%;">
+					<div style="padding-right: 17px;" class="k-grid-header">
+						<div class="k-grid-header-wrap">
+							<table cellSpacing="0">
+								<thead>
+									<tr>
+										<th class="k-header">속성</th>
+										<th class="k-header">값</th>
+									</tr>
+								</thead>
+							</table>
+						</div>
+					</div>
+					<div style="height: 199px;" class="k-grid-content">
+						<table style="height: auto;" class="system-details" cellSpacing="0">
+							<tbody>
+								<tr>
+									<td>파일</td>
+									<td>#= name #</td>
+								</tr>
+								<tr class="k-alt">
+									<td>종류</td>
+									<td>#= contentType #</td>
+								</tr>
+								<tr>
+									<td>크기(bytes)</td>
+									<td>#= size #</td>
+								</tr>				
+								<tr>
+									<td>다운수/클릭수</td>
+									<td>#= downloadCount #</td>
+								</tr>											
+							</tbody>
+						</table>	
+					</div>
+				</div>
+				# } #
+			# } #  	
 		
 		</div>	
 		<div class="panel-body hide">
-			<button type="button" class="close" aria-hidden="true">&times;</button>
-			
+			<button type="button" class="close" aria-hidden="true">&times;</button>			
 			<div class="btn-group dropup">
 				<a class="btn btn-info" href="\\#"><i class="fa fa-download"></i>&nbsp; 다운로드</a>
 				<button  type="button" class="btn btn-info"><i class="fa fa-share"></i>&nbsp; 공유</button>	
