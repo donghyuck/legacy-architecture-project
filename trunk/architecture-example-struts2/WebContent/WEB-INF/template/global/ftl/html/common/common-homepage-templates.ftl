@@ -27,6 +27,8 @@
 	</div>		
 </script>
 <script type="text/x-kendo-template" id="photo-view-template">	
+<ul class="grid cs-style-3">
+	<li>	
 		<figure>			
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
 			<figcaption>
@@ -50,6 +52,8 @@
 				</ul>										
 			</figcaption>			
 		</figure>
+	</li>
+</ul>		
 </script>
 
 <!-- EVENT -->
