@@ -197,6 +197,10 @@
 															
 				// 4. Right Tabs
 
+				$('#myTab a').click(function (e) {
+					e.preventDefault();	
+					$(this).tab('show');
+				});	
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
@@ -244,13 +248,198 @@
 								height: 300
 							});	
 						}
-					}				
+					} else if( show_bs_tab.attr('href') == '#my-files' ){					
+						if( !$('#attachment-list-view').data('kendoListView') ){								
+							var attachementTotalModle = kendo.observable({ 
+								totalAttachCount : "0",
+								totalImageCount : "0",
+								totalFileCount : "0"							
+							});
+							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );						
+							$("#attachment-list-view").kendoListView({
+								dataSource: {
+									type: 'json',
+									transport: {
+										read: { url:'${request.contextPath}/community/list-my-attachement.do?output=json', type: 'POST' },		
+										destroy: { url:'${request.contextPath}/community/delete-my-attachment.do?output=json', type:'POST' },                                
+										parameterMap: function (options, operation){
+											if (operation != "read" && options) {										                        								                       	 	
+												return { attachmentId :options.attachmentId };									                            	
+											}else{
+												return { };
+											}
+										}
+									},
+									pageSize: 12,
+									error:handleKendoAjaxError,
+									schema: {
+										model: Attachment,
+										data : "targetAttachments",
+										total : "totalTargetAttachmentCount"
+									},
+									sort: { field: "attachmentId", dir: "desc" },
+									filter :  { field: "contentType", operator: "neq", value: "" }
+								},
+								selectable: "single",									
+								change: function(e) {									
+									var data = this.dataSource.view() ;
+									var item = data[this.select().index()];		
+									$("#attachment-list-view").data( "attachPlaceHolder", item );												
+									displayAttachmentPanel( ) ;	
+								},
+								navigatable: false,
+								template: kendo.template($("#attachment-list-view-template").html()),								
+								dataBound: function(e) {
+									var attachment_list_view = $('#attachment-list-view').data('kendoListView');
+									var filter =  attachment_list_view.dataSource.filter().filters[0].value;
+									var totalCount = attachment_list_view.dataSource.total();
+									if( filter == "image" ) 
+									{
+										attachementTotalModle.set("totalImageCount", totalCount);
+									} else if ( filter == "application" ) {
+										attachementTotalModle.set("totalFileCount", totalCount);
+									} else {
+										attachementTotalModle.set("totalAttachCount", totalCount);
+									}
+								}
+							});																	
+							$("#attachment-list-view").on("mouseenter",  ".attach", function(e) {
+									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
+								}).on("mouseleave", ".attach", function(e) {
+									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
+							});															
+							$("ul#attachment-list-view-filter li").find("a").click(function(){					
+								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
+								$("ul#attachment-list-view-filter li.active").removeClass("active");
+								$(this).parent().addClass("active");
+								var filter_id =  $(this).attr('id') ;
+								switch(filter_id){
+									case "attachment-list-view-filter-1" :
+										attachment_list_view.dataSource.filter(  { field: "contentType", operator: "neq", value: "" } ) ; 
+										break;
+									case "attachment-list-view-filter-2":
+										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
+										break;
+									case "attachment-list-view-filter-3":
+										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
+										break;											
+								}
+							});							
+							$("#pager").kendoPager({
+								refresh : true,
+								buttonCount : 5,
+								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
+							});								
+							$("#my-files .btn-group button").each(function( index ) { 
+								var control_button = $(this);								
+								var control_button_icon = control_button.find("i");				
+								if( control_button_icon.hasClass("fa-upload")){
+									control_button.click( function(e){									
+										if( !$('#attachment-files').data('kendoUpload') ){		
+											$("#attachment-files").kendoUpload({
+												 	multiple : false,
+												 	width: 300,
+												 	showFileList : false,
+												    localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+												    async: {
+														saveUrl:  '${request.contextPath}/community/save-my-attachments.do?output=json',							   
+														autoUpload: true
+												    },
+												    upload: function (e) {								         
+												    	 e.data = {};														    								    	 		    	 
+												    },
+												    success : function(e) {								    
+														if( e.response.targetAttachment ){
+															e.response.targetAttachment.attachmentId;
+															// LIST VIEW REFRESH...
+															$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+														}				
+													}
+											});						
+										}
+										$("#my-files .panel").toggleClass("hide");										
+										$("#my-file-upload").toggleClass("hide");										
+									});									
+								}								
+							});									
+						}
+					} else if(show_bs_tab.attr('href') == '#my-photo-stream' ){							
+						if( !$('#photo-list-view').data('kendoListView') ){
+							$("#photo-list-view").kendoListView({
+								dataSource: {
+									type: 'json',
+									transport: {
+										read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' }
+									},
+									pageSize: 12,
+									error:handleKendoAjaxError,
+									schema: {
+										model: Image,
+										data : "targetImages",
+										total : "totalTargetImageCount"
+									},
+									sort: { field: "imageId", dir: "desc" }
+								},
+								selectable: "single",									
+								change: function(e) {									
+									var data = this.dataSource.view() ;
+									var item = data[this.select().index()];									
+									item.index = this.select().index();			
+									item.page = $("#photo-list-pager").data("kendoPager").page();													
+									$("#photo-list-view").data( "photoPlaceHolder", item );														
+									displayPhotoPanel( ) ;										
+								},
+								navigatable: false,
+								template: kendo.template($("#photo-list-view-template").html()),								
+								dataBound: function(e) {
+								}
+							});														
+							$("#photo-list-view").on("mouseenter",  ".attach", function(e) {
+									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
+								}).on("mouseleave", ".attach", function(e) {
+									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
+							});											
+							$("#photo-list-pager").kendoPager({
+								refresh : true,
+								buttonCount : 5,
+								dataSource : $('#photo-list-view').data('kendoListView').dataSource
+							});								
+							$("#my-photo-stream .btn-group button").each(function( index ) { 
+								var control_button = $(this);								
+								var control_button_icon = control_button.find("i");				
+								if( control_button_icon.hasClass("fa-upload")){
+									control_button.click( function(e){			
+										if( !$("#photo-files").data("kendoUpload")	){						
+											$("#photo-files").kendoUpload({
+												 	multiple : true,
+												 	width: 300,
+												 	showFileList : false,
+												    localization:{ select : '사진 선택' , dropFilesHere : '업로드할 사진들을 이곳에 끌어 놓으세요.' },
+												    async: {
+														saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',							   
+														autoUpload: true
+												    },
+												    upload: function (e) {				
+												    	 e.data = {};							
+												    },
+												    success : function(e) {								    
+														if( e.response.targetImage ){
+															e.response.targetImage.imageId;
+															// LIST VIEW REFRESH...
+															$('#photo-list-view').data('kendoListView').dataSource.read();
+														}				
+													}
+											});		
+										}										
+										$("#my-photo-stream .panel").toggleClass("hide");										
+										$("#my-photo-upload").toggleClass("hide");										
+									});
+								}								
+							});
+						}
+					}					
 				});
 
-				$('#myTab a').click(function (e) {
-					e.preventDefault();	
-					$(this).tab('show');
-				});	
 									
 				/**
 				$('#myTab').on( 'show.bs.tab', function (e) {
