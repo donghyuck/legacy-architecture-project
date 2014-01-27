@@ -196,10 +196,7 @@
 				});	
 															
 				// 4. Right Tabs
-				$('#myTab a').click(function (e) {
-					e.preventDefault();	
-					$(this).tab('show');
-				});	
+
 				
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					e.preventDefault();		
@@ -249,7 +246,12 @@
 						}
 					}				
 				});
-					
+
+				$('#myTab a').click(function (e) {
+					e.preventDefault();	
+					$(this).tab('show');
+				});	
+									
 				/**
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					e.preventDefault();		
