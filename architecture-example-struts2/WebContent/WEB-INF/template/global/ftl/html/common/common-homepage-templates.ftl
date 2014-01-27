@@ -16,9 +16,8 @@
 			first
 		
 		</div>	
-		<div class="panel-body" style="dispaly:none;">
-			<button type="button" class="close" aria-hidden="true">&times;</button>
-			
+		<div class="panel-body" style="height: 0; dispaly:none; overflow: hidden;">
+			<button type="button" class="close" aria-hidden="true">&times;</button>			
 			<div class="btn-group dropup" data-bind="visible: editable">
 				<button  type="button" class="btn btn-danger custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
 				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cloud-upload"></i> 사진 변경하기</button>	
