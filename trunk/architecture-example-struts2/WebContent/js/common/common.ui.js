@@ -122,7 +122,7 @@
 				_data = data;
 				that.trigger( CHANGE, null ); 
 			}else{
-				return data;
+				return _data;
 			}
 		},
 		title: function( title ){
