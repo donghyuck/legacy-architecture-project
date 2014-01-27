@@ -115,9 +115,6 @@
 			var that = this ;
 			that.element.hide();			
 		},
-		change : function(){
-						
-		},
 		data : function(){
 			var that = this ;
 			if(that.options.data )
@@ -126,7 +123,7 @@
 		},
 		data : function ( Object data ){
 			that.options.data = data;
-			that.change();
+			that.trigger( CHANGE, null ); 
 		},
 		title: function( title ){
 			if( title ){
