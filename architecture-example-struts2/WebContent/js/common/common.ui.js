@@ -94,7 +94,7 @@
 			Widget.fn.init.call(that, element, options);			
 			options = that.options;							
 			that.render();					
-			kendo.notify(that);			
+			//kendo.notify(that);			
 		},
 		events : [
 			CHANGE
@@ -130,11 +130,9 @@
 			var that = this ;			
 			
         	if( that.options.template ){       
-        		 $(that.element).html("helloo") ;
-        		alert( $(that.element).html() );
-    			$(that.element).html( that.data() ) ;
+        		$(that.element).html( that.data() ) ;
     			kendo.bind($(that.element), that.data() );
-        	
+    			alert( $(that.element).html() );
         	} 
         	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
