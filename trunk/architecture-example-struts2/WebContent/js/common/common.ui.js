@@ -102,7 +102,8 @@
 		options : {
 			name: "Panel",
 			title : null,
-			template : null
+			template : null,
+			data : null
 		},
 		hide: function (){
 			var that = this ;
@@ -126,7 +127,12 @@
 			var that = this ;			
         	if( that.options.template ){        		
         		that.element.html( that.options.template )  
-        		kendo.bind(that.element, observable );
+        		if( that.options.data ){	
+        			kendo.bind(that.element, that.options.data );
+        		}else{
+        			that.element.html( that.options.template )          		
+        			kendo.bind(that.element, observable );
+        		}
         	}        	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){
         		 
