@@ -994,7 +994,7 @@
 		}
 		.cbp-spmenu {
 			padding: 5px;
-			background-color: rgba(0,0,0,0.1);
+			background-color: rgba(0,0,0,0.2);
 		}
 		
 		.cbp-spmenu-right {
