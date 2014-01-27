@@ -447,6 +447,14 @@
 					} 
 					$(this).tab('show')
 				});	
+				
+				$('#myTab').on( 'show.bs.tab', function (e) {
+					
+				alert( $( e.target ).html() ); 
+					
+				
+				});
+				
 				$('#myTab a:first').tab('show') ;
 				// END SCRIPT 
 			}
