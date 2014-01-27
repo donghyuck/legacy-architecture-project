@@ -11,7 +11,16 @@
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 			</div>		
 		</div>
-		<div class="panel-body"></div>	
+		<div class="panel-body">
+		
+			
+		
+		</div>	
+		<div class="panel-body">
+		
+			
+		
+		</div>			
 		<div class="panel-footer" data-bind="visible: editable" style="padding:5px;">
 			<div class="btn-group dropup" data-bind="visible: editable">
 				<button  type="button" class="btn btn-danger custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
