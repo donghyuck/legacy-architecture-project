@@ -1081,6 +1081,7 @@ div figure:hover figcaption {
 	background-color : #5bc0de;
 	border: 1px solid transparent;
 	color: #ffffff;
+	width: '120%';
 }
 
 .cbp-spmenu-trigger:hover {
