@@ -447,11 +447,12 @@
 					} 
 					$(this).tab('show')
 				});				
+				$('#myTab a:first').tab('show') 
 				// END SCRIPT 
 			}
 		}]);	
 		
-		$('#myTab a:first').tab('show') 
+		
 		
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
