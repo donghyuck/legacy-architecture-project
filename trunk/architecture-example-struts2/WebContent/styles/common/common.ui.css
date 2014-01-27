@@ -1073,13 +1073,25 @@ div figure:hover figcaption {
 	}
 }
 
+
 .cbp-spmenu-trigger {
 	position: absolute;
 	top: 50px;
 	left: -30px;
-	background: #8a7972;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.428571429;
 	text-align: center;
-	line-height: 30px;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	-webkit-user-select: none;
 }
 
 .cbp-spmenu-trigger:hover {
