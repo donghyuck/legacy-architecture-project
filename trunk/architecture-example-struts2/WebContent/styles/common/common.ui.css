@@ -1073,6 +1073,33 @@ div figure:hover figcaption {
 	}
 }
 
+.cbp-spmenu-trigger {
+	position: absolute;
+	top: 0px;
+	left: -30px;
+	width: 30px;
+	height: 30px;
+	background: #8a7972;
+	text-align: center;
+	line-height: 30px;
+}
+
+.cbp-spmenu-trigger:hover {
+	background: #de4062;
+}
+
+.cbp-spmenu-trigger i {
+	font-size: 17px;
+	width: 100%;
+	color: #ffffff;
+	text-decoration: none;
+}
+
+.cbp-spmenu-trigger i:hover {
+	text-decoration: none;
+	color:#222;
+}
+
 /* ---------------------------------------- */
 /* BACKGROUND IMAGE SLIDE SHOW */
 /* ---------------------------------------- */
