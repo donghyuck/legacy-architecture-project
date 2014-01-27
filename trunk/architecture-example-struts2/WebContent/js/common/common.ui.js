@@ -130,6 +130,8 @@
 			var that = this ;			
 			alert( "fdsafsda" );
         	if( that.options.template ){        		 
+        		alert(that.html());
+        		
     			that.element.html( that.data() ) ;
     			kendo.bind(that.element, that.data() );
         	} 
