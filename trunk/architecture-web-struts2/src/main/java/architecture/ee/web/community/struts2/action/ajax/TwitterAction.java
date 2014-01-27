@@ -126,11 +126,7 @@ public class TwitterAction extends SocialNetworkActionSupport {
 
 	public String execute() throws Exception {		
 		if( socialNetworkId < 0 ){
-			
-			Company company = this.getCompany();
-			log.debug(  getObjectType() + ", id=" + company.getCompanyId());
-			
-			
+						
 			List <SocialNetwork> list ;
 			if ( getObjectType() == 1 ){				
 				list = getSocialNetworkManager().getSocialNetworks(getCompany());

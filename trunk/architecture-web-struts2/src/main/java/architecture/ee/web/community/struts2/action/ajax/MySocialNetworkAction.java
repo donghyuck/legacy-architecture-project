@@ -42,6 +42,7 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 	
 	private SocialNetworkManager socialNetworkManager;
 	
+	
 	private String media;
 	
 	
@@ -125,8 +126,7 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 		}else{		
 			if( StringUtils.isNotEmpty(media)){
 				Media selectedMedia = SocialNetwork.Media.valueOf(media.toUpperCase());
-				mySocialNetwork = newSocialNetwork(selectedMedia);
-				
+				mySocialNetwork = newSocialNetwork(selectedMedia);				
 			}
 		}
 		return mySocialNetwork;
@@ -136,11 +136,18 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 		return success();
 	}
 	
+	public String deleteSocialNetwork() throws Exception {				
+		socialNetworkManager.removeSocialNetwork(getSocialNetwork());
+		return success();
+	}
+	
 	public String updateSocialNetwork() throws Exception{		
+		
 		try {
 			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
 			String accessSecret = (String)map.get("accessSecret");
 			String accessToken = (String)map.get("accessToken");
+			String username = (String)map.get("username");
 			Boolean signedIn = (Boolean)map.get("signedIn");
 			Integer  socialAccountId = (Integer)map.get("socialAccountId");			
 			String serviceProviderName = (String)map.get("serviceProviderName");
@@ -171,6 +178,8 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 				account.setAccessSecret(accessSecret);
 			if(!StringUtils.isEmpty(accessToken))
 				account.setAccessToken(accessToken);
+			if(!StringUtils.isEmpty(username))
+				account.setUsername(username);
 			
 			socialNetworkManager.saveSocialNetwork(account);					
 			this.socialNetworkId =account.getSocialAccountId();

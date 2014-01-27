@@ -15,92 +15,28 @@
  */
 package architecture.ee.web.community.struts2.action;
 
-import java.util.Map;
-
 import org.apache.commons.lang.StringUtils;
 import org.scribe.model.Token;
 
+import architecture.common.user.User;
+import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
-import architecture.ee.web.community.social.SocialNetworkManager;
+import architecture.ee.web.community.social.SocialNetwork.Media;
+import architecture.ee.web.community.social.facebook.FacebookProfile;
+import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
-import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
-import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
-public class TwitterCallbackAction extends FrameworkActionSupport implements SocialNetworkAware {
-
-	private static final Token EMPTY_TOKEN = null;
-	
-	private String accessSecret;
-	
-	private String accessToken;
-		
-	private SocialNetworkManager socialNetworkManager;
-
-	private SocialNetwork socialNetwork;
-	
+public class TwitterCallbackAction extends SocialCallbackSupport {
+			
 	private String oauth_token;
 	
 	private String oauth_verifier;
 	
-	/**
-	 * @return accessSecret
-	 */
-	public String getAccessSecret() {
-		return accessSecret;
-	}
-
-	/**
-	 * @param accessSecret 설정할 accessSecret
-	 */
-	public void setAccessSecret(String accessSecret) {
-		this.accessSecret = accessSecret;
-	}
-
-	/**
-	 * @return accessToken
-	 */
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-
-	/**
-	 * @param accessToken 설정할 accessToken
-	 */
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-
-
-	/**
-	 * @return socialNetworkManager
-	 */
-	public SocialNetworkManager getSocialNetworkManager() {
-		return socialNetworkManager;
-	}
-
-	/**
-	 * @param socialNetworkManager 설정할 socialNetworkManager
-	 */
-	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager) {
-		this.socialNetworkManager = socialNetworkManager;
-	}
-
-	/**
-	 * @return socialNetwork
-	 */
-	public SocialNetwork getSocialNetwork() {
-		return socialNetwork;
-	}
-
-	/**
-	 * @param socialNetwork 설정할 socialNetwork
-	 */
-	public void setSocialNetwork(SocialNetwork socialNetwork) {
-		this.socialNetwork = socialNetwork;
-	}
-
+	private TwitterProfile userProfile = null;
+	
+	private User foundUser = null;
+	
 	/**
 	 * @return oauth_token
 	 */
@@ -128,26 +64,46 @@ public class TwitterCallbackAction extends FrameworkActionSupport implements Soc
 	public void setOauth_verifier(String oauth_verifier) {
 		this.oauth_verifier = oauth_verifier;
 	}
+	
+
+	public Object getUserProfile(){
+		if( this.userProfile == null ){
+			TwitterServiceProvider provider = (TwitterServiceProvider) getSocialNetwork().getSocialServiceProvider();		
+			this.userProfile = provider.authenticate();
+		}
+		return this.userProfile;
+	}
+	
 
 	public String execute() throws Exception {
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
-			this.socialNetwork = newSocialNetwork();			
-			TwitterServiceProvider provider = (TwitterServiceProvider) socialNetwork.getSocialServiceProvider();			
-			Token token =provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);
+			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TWITTER);			
+			TwitterServiceProvider provider = (TwitterServiceProvider) newSocialNetwork.getSocialServiceProvider();			
+			Token token =provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);			
+			newSocialNetwork.setAccessSecret(token.getSecret());
+			newSocialNetwork.setAccessToken(token.getToken());
+			setSocialNetwork(newSocialNetwork);
 			
-			socialNetwork.setAccessSecret(token.getSecret());
-			socialNetwork.setAccessToken(token.getToken());
-			provider.setAccessToken(token.getToken());
-			provider.setAccessSecret(token.getSecret());
-			this.accessSecret = token.getSecret();
-			this.accessToken = token.getToken();
 		}			
 		return success();
 	}
 	
-	protected SocialNetwork newSocialNetwork(){	
-		SocialNetwork network =  socialNetworkManager.createSocialNetwork(getUser(), SocialNetwork.Media.TWITTER );		
-		return network;
+
+	public User findUser() {
+		
+		if( this.foundUser == null){
+			TwitterProfile profileToUse = (TwitterProfile)getUserProfile();
+			if( profileToUse != null ){
+				SocialNetwork found = findSocialNetworkByUsername( Media.TWITTER, Long.toString( profileToUse.getId() ));
+				if( found != null )
+					try {
+						this.foundUser = getUserManager().getUser(found.getObjectId());
+					} catch (UserNotFoundException e) {
+						log.error(e);
+					}
+			}
+		}
+		return this.foundUser;
 	}
 
 }
