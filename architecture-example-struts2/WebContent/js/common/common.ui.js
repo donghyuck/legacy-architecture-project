@@ -126,7 +126,7 @@
 			var that = this ;
 			that.render();
 			if( that.options.afterChange )
-				afterChange();
+				afterChange( that.options.data );
 		},
 		show: function (){
 			var that = this ;
