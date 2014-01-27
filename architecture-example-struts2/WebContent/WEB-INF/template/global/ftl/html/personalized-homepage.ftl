@@ -643,7 +643,7 @@
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
 			}	
 						
-			if( !$("#" + renderToString ).data("extPanel") ){					
+			if( !$("'" + "#" + renderToString + "'").data("extPanel") ){					
 				$("#" + renderToString ).data("extPanel", 
 					$("#" + renderToString ).extPanel({
 						title : "포토",
