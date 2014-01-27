@@ -1,3 +1,43 @@
+<script type="text/x-kendo-template" id="file-panel-template">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span data-bind="text: title"></span>
+			<div class="k-window-actions panel-header-actions">
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-custom">Custom</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+			</div>		
+		</div>
+		<div class="panel-body">
+			
+			first
+		
+		</div>	
+		<div class="panel-body hide">
+			<button type="button" class="close" aria-hidden="true">&times;</button>
+			
+			<div class="btn-group dropup">
+				<a class="btn btn-info btn-sm" href="\\#"><i class="fa fa-download"></i>&nbsp; 다운로드</a>
+				<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-share"></i>&nbsp; 공유</button>	
+				<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-comment-o"></i>&nbsp; 댓글 추가</button>						
+			</div>		
+			
+			<div class="btn-group dropup" data-bind="visible: editable">
+				<button  type="button" class="btn btn-danger btn-sm custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
+				<button  type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 사진 변경하기</button>	
+				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
+					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
+					<li>
+						<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
+					</li>
+				</ul>
+			</div>
+			
+		</div>			
+	</div>		
+</script>
 <!-- photo view panel -->
 <script type="text/x-kendo-template" id="photo-panel-template">
 	<div class="panel panel-default">
@@ -55,45 +95,7 @@
 			</figcaption>			
 		</figure>
 </script>
-<script type="text/x-kendo-template" id="file-panel-template">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<span data-bind="text: title"></span>
-			<div class="k-window-actions panel-header-actions">
-				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-custom">Custom</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-			</div>		
-		</div>
-		<div class="panel-body">
-			
-			first
-		
-		</div>	
-		<div class="panel-body hide">
-			<button type="button" class="close" aria-hidden="true">&times;</button>		
-			
-			<div class="btn-group dropup">
-				<a class="btn btn-info btn-sm" href="\\#"><i class="fa fa-download"></i>&nbsp; 다운로드</a>
-				<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-share"></i>&nbsp; 공유</button>	
-				<button  type="button" class="btn btn-info btn-sm"><i class="fa fa-comment-o"></i>&nbsp; 댓글 추가</button>						
-			</div>		
-			
-			<div class="btn-group dropup" data-bind="visible: editable">
-				<button  type="button" class="btn btn-danger btn-sm custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
-				<button  type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 사진 변경하기</button>	
-				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
-					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
-					<li>
-						<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
-					</li>
-				</ul>
-			</div>
-		</div>			
-	</div>		
-</script>
+
 <script type="text/x-kendo-template" id="file-view-template">
 
 	<div class="panel panel-default">
