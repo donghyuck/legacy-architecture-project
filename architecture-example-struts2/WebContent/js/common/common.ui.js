@@ -150,8 +150,8 @@
         				
         			}else if ( header_action.text() == "Custom" ){
         				alert("hello");
-        				//alert( "hello"  +  $(that.element).find(".panel-body:last").html() );
-        				// kendo.fx(that.find(".panel-body:last").expand("vertical").stop().play();
+        				alert( "hello"  +  $(that.element).find(".panel-body:last").html() );
+        				kendo.fx(that.find(".panel-body:last").expand("vertical").stop().play();
         			}
         			
         		});
