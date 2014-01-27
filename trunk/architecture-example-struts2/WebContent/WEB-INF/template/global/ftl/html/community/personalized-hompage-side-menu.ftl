@@ -7,7 +7,7 @@
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h5 class="panel-title"><i class="fa fa-bars"></i>&nbsp;<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 공지 & 이벤트</a></h5>
+						<h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 공지 & 이벤트</a></h5>
 					</div>
 					<div id="collapseOne" class="panel-collapse collapse in">
 						<div class="panel-body">
@@ -17,25 +17,24 @@
 				</div>
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h4 class="panel-title">
-							<i class="fa fa-bars"></i>&nbsp;<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+						<h5 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
 								공유
 							</a>
-						</h4>
+						</h5>
 					</div>
 					<div id="collapseTwo" class="panel-collapse collapse">
 						<div class="panel-body clearfix">
-
 						<ul class="nav nav-tabs" id="myTab">
 							<li class="active">
 								<a href="#my-message-announces" tabindex="-1" data-toggle="tab">공지 & 이벤트</a>
 							</li>
 							<li>
-								<a href="#my-streams" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>    쇼셜</a>
+								<a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a>
 							</li>							
 							<#if !action.user.anonymous >	
-							<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>     포토</a></li>
-							<li><a href="#my-files" tabindex="-1" data-toggle="tab"><i class="fa fa-th"></i>     파일</a></li>							
+							<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
+							<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
 							</#if>						
 						</ul>								
 						<!-- start  of tab content -->				
