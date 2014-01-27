@@ -13,13 +13,11 @@
 		<div class="panel-body hide bg-gray">
 			<button type="button" class="close" aria-hidden="true">&times;</button>			
 			<div class="btn-group dropup">
-				<a class="btn btn-info" href="\\#"><i class="fa fa-download"></i>&nbsp; 다운로드</a>
+				<a class="btn btn-info" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i>&nbsp; 다운로드</a>
 				<button  type="button" class="btn btn-info"><i class="fa fa-share"></i>&nbsp; 공유</button>	
 				<button  type="button" class="btn btn-info"><i class="fa fa-comment-o"></i>&nbsp; 댓글 추가</button>						
-			</div>
-			
+			</div>			
 			<div class="btn-group dropup" data-bind="visible: editable">
-				<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i> 다운로드</a>
 				<button  type="button" class="btn btn-danger custom-delete"  data-for-attachmentId="#=attachmentId #" ><i class="fa fa-trash-o"></i> 삭제</button>		
 				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 파일 변경하기</button>				
 				<ul class="dropdown-menu" style="min-width:400px; padding:10px;">
