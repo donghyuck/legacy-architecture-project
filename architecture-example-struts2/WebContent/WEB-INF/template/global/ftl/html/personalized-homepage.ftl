@@ -678,6 +678,8 @@
 					custom_commend.click(function (e) { 
 						e.preventDefault();					
 						if( custom_commend.hasClass( 'custom-attachment-delete') ){
+							alert(attachPlaceHolder.attachmentId );
+						/**
 							$.ajax({
 								dataType : "json",
 								type : 'POST',
@@ -687,9 +689,8 @@
 									$('#' + renderToString ).remove();
 								},
 								error:handleKendoAjaxError
-							}).change(function(data){
-								alert( "hello");
-							});	
+							});
+							*/
 						}
 					});
 				});							
