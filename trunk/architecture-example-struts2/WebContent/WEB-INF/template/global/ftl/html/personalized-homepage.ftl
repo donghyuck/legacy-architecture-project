@@ -15,7 +15,7 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
-			'${request.contextPath}/js/common/common.ui.min.js',
+			'${request.contextPath}/js/common/common.ui.js',
 			'${request.contextPath}/js/common/common.classie.js'],
 			complete: function() {
 			
@@ -706,7 +706,8 @@
 						title : "포토",
 						template : kendo.template($("#photo-panel-template").html())
 					})
-				 );						 
+				 );					
+				 	 
 				$("#" + renderToString ).find(".custom-photo-delete").click(function (e) { 
 					e.preventDefault();			
 					$.ajax({
@@ -720,6 +721,7 @@
 						error:handleKendoAjaxError
 					});	
 				});
+				
 				$("#update-photo-file").kendoUpload({
 						multiple: false,
 						async: {
