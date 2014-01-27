@@ -154,7 +154,7 @@
 						}
 						
         			}else if ( header_action.text() == "Close"){
-        				that.hide();
+        				that.destroy();
         			}else if ( header_action.text() == "Refresh"){	
         			
         			// custom
@@ -168,7 +168,14 @@
         		e.preventDefault();	
         		$(that.element).find(".panel-body:first").addClass("hide");       	
         	});	
-		}
+		},
+        destroy: function() {
+        	var that = this;
+            Widget.fn.destroy.call(that);
+            $(that.element).remove();
+            //.off(NS);
+            //open = false;
+        },
 	});
 	
 	$.fn.extend( { 
