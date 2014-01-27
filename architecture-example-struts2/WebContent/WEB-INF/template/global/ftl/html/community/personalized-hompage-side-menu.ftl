@@ -3,10 +3,7 @@
 		<!-- ================================================== -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
-			<div class="cbp-spmenu-trigger"  style="height:18px;"><button  id="hide-right-slide" type="button" class="close">&times;</button></div>		
-			 
-			 <a href="#" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
-				
+			 <a href="#" id="hide-right-slide" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
 					<div class="panel-heading">
