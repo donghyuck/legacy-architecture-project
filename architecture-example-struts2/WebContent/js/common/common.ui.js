@@ -126,8 +126,9 @@
 		render: function () {				
 			var that = this ;			
         	if( that.options.template ){        		
-        		that.element.html( that.options.template )  
+        		 
         		if( that.options.data ){	
+        			that.element.html( that.options.template(that.options.data) ) 
         			kendo.bind(that.element, that.options.data );
         		}else{
         			that.element.html( that.options.template )          		
