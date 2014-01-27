@@ -1077,8 +1077,9 @@ div figure:hover figcaption {
 .cbp-spmenu-trigger {
 	position: absolute;
 	top: 50px;
-	left: -41px;
+	left: -40px;
 	background-color : #5bc0de;
+	border: 1px solid transparent;
 	color: #ffffff;
 }
 
@@ -1098,7 +1099,6 @@ div figure:hover figcaption {
 	vertical-align: middle;
 	cursor: pointer;
 	background-image: none;
-	border: 1px solid transparent;
 	-webkit-user-select: none;
 }
 
