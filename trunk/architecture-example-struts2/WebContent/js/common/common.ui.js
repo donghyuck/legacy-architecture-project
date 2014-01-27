@@ -102,7 +102,7 @@
 		options : {
 			name: "Panel",
 			title : null,
-			template : null,
+			template: null,
 			data : {}
 		},
 		hide: function (){
@@ -133,7 +133,9 @@
         		//$(that.element).html( that.options.data ) ;
     			//kendo.bind($(that.element), that.options.data);
     			//alert( $(that.element).html() );
-        		$(that.element).html("hello...");
+
+        		
+        		$(that.element).html( that.options.template(that.data()) );
         	} 
         	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
