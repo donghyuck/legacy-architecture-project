@@ -653,9 +653,47 @@
 							if( data.contentType == "application/pdf" ){
 								var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + data.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
 							}	
+							
 						}
 					})
 				 );
+				 $("#update-attach-file").kendoUpload({
+					multiple: false,
+					async: {
+						saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
+						autoUpload: true
+					},
+					localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
+					upload: function (e) {				
+						e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
+					},
+					success: function (e) {				
+						if( e.response.targetAttachment ){
+							 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
+							kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
+						}
+					} 
+				});
+				$("#" + renderToString + " .panel-body:first button").each(function( index ) {		
+					var custom_commend = $(this);
+					custom_commend.click(function (e) { 
+						e.preventDefault();					
+						if( custom_commend.hasClass( 'custom-attachment-delete') ){
+							$.ajax({
+								dataType : "json",
+								type : 'POST',
+								url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
+								data : { attachmentId: attachPlaceHolder.attachmentId },
+								success : function( response ){
+									$('#' + renderToString ).remove();
+								},
+								error:handleKendoAjaxError
+							}).change(function(data){
+								alert( "hello");
+							});	
+						}
+					});
+				});							
 			}else{
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
 			}
@@ -672,46 +710,8 @@
 			if( attachPlaceHolder.contentType == "application/pdf" ){
 				var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + attachPlaceHolder.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
 			}	
-			$("#" + renderToString + " button").each(function( index ) {		
-				var panel_button = $(this);
-				panel_button.click(function (e) { 
-					e.preventDefault();					
-					if( panel_button.hasClass( 'custom-attachment-delete') ){
-						$.ajax({
-							dataType : "json",
-							type : 'POST',
-							url : '${request.contextPath}/community/delete-my-attachment.do?output=json',
-							data : { attachmentId: attachPlaceHolder.attachmentId },
-							success : function( response ){
-								$('#' + renderToString ).remove();
-							},
-							error:handleKendoAjaxError
-						}).change(function(data){
-							alert( "hello");
-						});	
-					}
-					if( panel_button.hasClass( 'close') ){
-						$('#' + renderToString ).remove();
-					}
-				});
-			});							
-			$("#update-attach-file").kendoUpload({
-				multiple: false,
-				async: {
-					saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
-					autoUpload: true
-				},
-				localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
-				upload: function (e) {				
-					e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
-				},
-				success: function (e) {				
-					if( e.response.targetAttachment ){
-						 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
-						kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
-					}
-				} 
-			});			
+									
+			
 			$('#' + renderToString ).show();	
 			**/
 			
