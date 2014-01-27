@@ -1087,6 +1087,7 @@ div figure:hover figcaption {
 .cbp-spmenu-trigger:hover {
 	background: #39b3d7;
 	text-decoration: none;	
+	color: #ffffff;
 }
 
 .cbp-spmenu-trigger i {
@@ -1104,10 +1105,6 @@ div figure:hover figcaption {
 	-webkit-user-select: none;
 }
 
-.cbp-spmenu-trigger i:hover {
-	text-decoration: none;
-	color: #ffffff;
-}
 
 /* ---------------------------------------- */
 /* BACKGROUND IMAGE SLIDE SHOW */
