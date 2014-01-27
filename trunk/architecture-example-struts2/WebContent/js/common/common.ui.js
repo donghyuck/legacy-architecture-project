@@ -154,10 +154,11 @@
         		});
         		
         	});
-        	alert(
-        	$(that.element).find(".panel-body:last button.close").html()
-        	); 
         	
+        	// custom 
+        	$(that.element).find(".panel-body:last button.close").click(
+        		kendo.fx($(that.element).find(".panel-body:last")).expand("vertical").stop().reverse();        	
+        	);	
 		}
 	});
 	
