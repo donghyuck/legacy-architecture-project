@@ -1077,7 +1077,16 @@ div figure:hover figcaption {
 .cbp-spmenu-trigger {
 	position: absolute;
 	top: 50px;
-	left: -30px;
+	left: -41px;
+	background-color : #5bc0de;
+	color: #ffffff;
+}
+
+.cbp-spmenu-trigger:hover {
+	background: #39b3d7;
+}
+
+.cbp-spmenu-trigger i {
 	display: inline-block;
 	padding: 6px 12px;
 	margin-bottom: 0;
@@ -1090,24 +1099,12 @@ div figure:hover figcaption {
 	cursor: pointer;
 	background-image: none;
 	border: 1px solid transparent;
-	border-radius: 4px;
 	-webkit-user-select: none;
-}
-
-.cbp-spmenu-trigger:hover {
-	background: #de4062;
-}
-
-.cbp-spmenu-trigger i {
-	font-size: 17px;
-	width: 100%;
-	color: #ffffff;
-	text-decoration: none;
 }
 
 .cbp-spmenu-trigger i:hover {
 	text-decoration: none;
-	color:#222;
+	color: #ffffff;
 }
 
 /* ---------------------------------------- */
