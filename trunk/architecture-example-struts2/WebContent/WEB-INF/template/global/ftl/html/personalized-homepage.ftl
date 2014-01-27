@@ -47,8 +47,7 @@
 						custom_panels_group.removeClass("col-sm-" + grid_col_size.oldValue );		
 						custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
 					});
-				});				
-							
+				});											
 							
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
@@ -175,6 +174,7 @@
 						this.select("tr:eq(1)");
 					}
 				});
+				
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 					var panel_header_action = $(this);		
 					panel_header_action.click(function (e) {
@@ -193,7 +193,7 @@
 							$("#announce-panel" ).hide();
 						}
 					});
-				});						
+				});	
 															
 				// 4. Right Tabs
 				$('#myTab a').click(function (e) {
@@ -1038,7 +1038,7 @@
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
 						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
-							<div class="panel panel-primary">
+							<div class="panel panel-default">
 								<div class="panel-heading">알림
 									<div class="k-window-actions panel-header-actions">										
 										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
