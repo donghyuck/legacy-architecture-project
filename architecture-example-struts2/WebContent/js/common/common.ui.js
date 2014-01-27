@@ -113,7 +113,7 @@
 			var that = this;
 	            if (value !== undefined) {
 	            	that.options.data = value ;
-	            	$(that.element).trigger( CHANGE ); 
+	            	$(that).trigger( CHANGE ); 
 	            } else {
 	                return that.options.data;
 	            }
