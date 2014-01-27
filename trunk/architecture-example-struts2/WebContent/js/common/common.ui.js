@@ -130,8 +130,8 @@
 			var that = this ;			
 			
         	if( that.options.template ){       
-        		$(that.element).html( that.data() ) ;
-    			kendo.bind($(that.element), that.data() );
+        		$(that.element).html( that.options.data ) ;
+    			kendo.bind($(that.element), that.options.data);
     			alert( $(that.element).html() );
         	} 
         	
