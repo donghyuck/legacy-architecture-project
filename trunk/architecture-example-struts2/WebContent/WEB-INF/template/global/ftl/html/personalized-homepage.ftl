@@ -770,6 +770,8 @@
 						}
 					} 
 				});	 	 
+			}else{
+				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
 			}
 			
 			var panel = $("#" + renderToString ).data("extPanel");
@@ -883,7 +885,7 @@
 			border-radius: 18px;
 			margin: 0 0 10px;
 			position: relative;
-			z-index: 2000;
+			z-index: 9000;
 		}
 		
 		.k-grid table tr.k-state-selected{
