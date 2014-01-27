@@ -652,7 +652,25 @@
 						afterChange : function ( data ){
 							if( data.contentType == "application/pdf" ){
 								var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + data.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-							}														
+							}		
+							
+							$("#update-attach-file").kendoUpload({
+								multiple: false,
+								async: {
+									saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
+									autoUpload: true
+								},
+								localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
+								upload: function (e) {				
+									e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
+								},
+								success: function (e) {				
+									if( e.response.targetAttachment ){
+										 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
+										kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
+									}
+								} 
+							});												
 						},
 						commands:[
 							{ selector :   "#" + renderToString + " .panel-body:first .btn", 
@@ -678,24 +696,6 @@
 						]
 					})
 				 );				 
-				$("#update-attach-file").kendoUpload({
-					multiple: false,
-					async: {
-						saveUrl:  '${request.contextPath}/community/update-my-attachment.do?output=json',							   
-						autoUpload: true
-					},
-					localization:{ select : '파일 변경하기' , dropFilesHere : '새로운 파일을 이곳에 끌어 놓으세요.' },	
-					upload: function (e) {				
-						e.data = { attachmentId: $("#attach-view-panel").data( "attachPlaceHolder").attachmentId };														    								    	 		    	 
-					},
-					success: function (e) {				
-						if( e.response.targetAttachment ){
-							 $("#attach-view-panel").data( "attachPlaceHolder",  e.response.targetAttachment  );
-							kendo.bind($("#attach-view-panel"), e.response.targetAttachment );
-						}
-					} 
-				});
-											
 			}else{
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
 			}			
