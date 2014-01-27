@@ -807,6 +807,7 @@ div.jGrowl div.jGrowl-closer {
 /*------------------------------------------------*/
 /*  Image Caption                                      */
 /*------------------------------------------------*/
+/**
 section figure{
 	float: center;
 	clear: both;
@@ -900,6 +901,7 @@ div figure:hover figcaption {
 	padding:5px;
 	
 }
+*/
 /* ------------------------------- */
 /* SLIDE MENU                      */
 /* ------------------------------- */
