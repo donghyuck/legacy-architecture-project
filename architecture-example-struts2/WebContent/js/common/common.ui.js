@@ -90,17 +90,9 @@
 	var proxy = $.proxy, CHANGE = "change" ;	
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
-			var that = this, data;		 
+			var that = this;		 
 			Widget.fn.init.call(that, element, options);			
-			options = that.options;
-			
-			if (options.data) {
-				 data = options.data;
-	        }	
-			
-			if( options.title )
-				data.title = options.title;
-				
+			options = that.options;							
 			that.render();					
 			kendo.notify(that);			
 		},
@@ -120,10 +112,10 @@
 		data: function(value) {
 			var that = this;
 	            if (value !== undefined) {
-	            	that.data = value ;
+	            	that.options.data = value ;
 	            	$(that.element).trigger( CHANGE ); 
 	            } else {
-	                return that.data;
+	                return that.options.data;
 	            }
 	    },
 		refresh: function () {
