@@ -446,8 +446,8 @@
 						}
 					} 
 					$(this).tab('show')
-				});				
-				$('#myTab a:first').tab('show') 
+				});	
+				$('#myTab a:first').tab('show') ;
 				// END SCRIPT 
 			}
 		}]);	
