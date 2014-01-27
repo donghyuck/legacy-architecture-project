@@ -130,10 +130,8 @@
 			var that = this ;			
 			alert( "fdsafsda:" +  that.options.template   );
         	if( that.options.template ){        		 
-        		alert($( that.element).html());
-        		
-    			that.element.html( that.data() ) ;
-    			kendo.bind(that.element, that.data() );
+    			$(that.element).html( that.data() ) ;
+    			kendo.bind($(that.element), that.data() );
         	} 
         	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
