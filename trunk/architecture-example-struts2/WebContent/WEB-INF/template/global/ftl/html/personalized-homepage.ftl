@@ -201,6 +201,7 @@
 					$(this).tab('show');
 				});	
 				
+				/**
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					e.preventDefault();		
 					var show_bs_tab = $(e.target);
@@ -250,10 +251,8 @@
 								height: 300
 							});	
 						}
-					} else if( show_bs_tab.attr('href') == '#my-files' ){
-					
-						if( !$('#attachment-list-view').data('kendoListView') ){		
-						
+					} else if( show_bs_tab.attr('href') == '#my-files' ){					
+						if( !$('#attachment-list-view').data('kendoListView') ){								
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
@@ -306,14 +305,12 @@
 										attachementTotalModle.set("totalAttachCount", totalCount);
 									}
 								}
-							});				
-																	
+							});																	
 							$("#attachment-list-view").on("mouseenter",  ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
-							});								
-							// ListView Filter 									
+							});															
 							$("ul#attachment-list-view-filter li").find("a").click(function(){					
 								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
 								$("ul#attachment-list-view-filter li.active").removeClass("active");
@@ -331,13 +328,11 @@
 										break;											
 								}
 							});							
-							// Attachment Pager
 							$("#pager").kendoPager({
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#attachment-list-view').data('kendoListView').dataSource
-							});	
-							
+							});								
 							$("#my-files .btn-group button").each(function( index ) { 
 								var control_button = $(this);								
 								var control_button_icon = control_button.find("i");				
@@ -366,12 +361,10 @@
 											});						
 										}
 										$("#my-files .panel").toggleClass("hide");										
-										$("#my-file-upload").toggleClass("hide");
-										
+										$("#my-file-upload").toggleClass("hide");										
 									});									
 								}								
-							});
-									
+							});									
 						}
 					} else if(show_bs_tab.attr('href') == '#my-photo-stream' ){							
 						if( !$('#photo-list-view').data('kendoListView') ){
@@ -409,19 +402,16 @@
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 							});											
-							// Pager							
 							$("#photo-list-pager").kendoPager({
 								refresh : true,
 								buttonCount : 5,
 								dataSource : $('#photo-list-view').data('kendoListView').dataSource
-							});	
-							
+							});								
 							$("#my-photo-stream .btn-group button").each(function( index ) { 
 								var control_button = $(this);								
 								var control_button_icon = control_button.find("i");				
 								if( control_button_icon.hasClass("fa-upload")){
 									control_button.click( function(e){			
-										// New Photo Upload			
 										if( !$("#photo-files").data("kendoUpload")	){						
 											$("#photo-files").kendoUpload({
 												 	multiple : true,
@@ -443,18 +433,16 @@
 														}				
 													}
 											});		
-										}
-										
+										}										
 										$("#my-photo-stream .panel").toggleClass("hide");										
-										$("#my-photo-upload").toggleClass("hide");
-										
+										$("#my-photo-upload").toggleClass("hide");										
 									});
 								}								
 							});
 						}
 					} 
 				});
-				
+				**/
 				$('#myTab a:first').tab('show') ;
 				// END SCRIPT 
 			}
