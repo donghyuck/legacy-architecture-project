@@ -116,7 +116,7 @@
 			var that = this ;
 			that.element.hide();			
 		},
-		data : function ( Object data ){
+		data: function ( Object data ){
 			var that = this ;
 			if( data ){
 				_data = data;
