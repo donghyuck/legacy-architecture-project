@@ -22,7 +22,6 @@ import net.sf.ehcache.Element;
 import architecture.common.user.Company;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
-import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
 import architecture.ee.web.community.social.facebook.Post;
@@ -37,8 +36,6 @@ public class FacebookAction extends SocialNetworkActionSupport {
 	private Long socialNetworkId = -1L; 
 	
 	private String userId = "me";
-	
-	
 	
 	private SocialNetwork targetSocialNetwork;
 	
@@ -160,7 +157,8 @@ public class FacebookAction extends SocialNetworkActionSupport {
 	public SocialNetwork getTargetSocialNetwork() {
 		try {	
 			if( targetSocialNetwork == null){
-				targetSocialNetwork = getSocialNetworkManager().getSocialNetworkById(socialNetworkId);
+				if( socialNetworkId  > 0 )
+					targetSocialNetwork = getSocialNetworkManager().getSocialNetworkById(socialNetworkId);
 			}
 			return targetSocialNetwork;
 		} catch (NotFoundException e) {
@@ -175,8 +173,11 @@ public class FacebookAction extends SocialNetworkActionSupport {
 	
 	public String execute() throws Exception {
 		if( socialNetworkId < 0 ){			
+
 			List <SocialNetwork> list ;
 			if ( getObjectType() == 1 ){				
+
+				
 				list = getSocialNetworkManager().getSocialNetworks(getCompany());
 			}else{
 				list = getSocialNetworkManager().getSocialNetworks(getUser());

@@ -15,71 +15,24 @@
  */
 package architecture.ee.web.community.struts2.action;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.scribe.model.Token;
 
+import architecture.common.user.User;
+import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
-import architecture.ee.web.community.social.SocialNetworkManager;
+import architecture.ee.web.community.social.SocialNetwork.Media;
+import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
-import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
-public class FacebookCallbackAction  extends FrameworkActionSupport implements SocialNetworkAware {
-	
-	private static final Token EMPTY_TOKEN = null;
+public class FacebookCallbackAction  extends SocialCallbackSupport {
 	
 	private String code;
-	
-	private String accessSecret;
-	
-	private String accessToken;
-		
-	private SocialNetworkManager socialNetworkManager;
-
-	private SocialNetwork socialNetwork;
-	
-	/**
-	 * @return accessSecret
-	 */
-	public String getAccessSecret() {
-		return accessSecret;
-	}
-
-	/**
-	 * @param accessSecret 설정할 accessSecret
-	 */
-	public void setAccessSecret(String accessSecret) {
-		this.accessSecret = accessSecret;
-	}
-
-	/**
-	 * @return accessToken
-	 */
-	public String getAccessToken() {
-		return accessToken;
-	}
-
-	/**
-	 * @param accessToken 설정할 accessToken
-	 */
-	public void setAccessToken(String accessToken) {
-		this.accessToken = accessToken;
-	}
-
-	/**
-	 * @return socialNetworkManager
-	 */
-	public SocialNetworkManager getSocialNetworkManager() {
-		return socialNetworkManager;
-	}
-
-	/**
-	 * @param socialNetworkManager 설정할 socialNetworkManager
-	 */
-	public void setSocialNetworkManager(SocialNetworkManager socialNetworkManager) {
-		this.socialNetworkManager = socialNetworkManager;
-	}	
-	
+	private FacebookProfile userProfile = null;
+	private User foundUser = null;
 	/**
 	 * @return code
 	 */
@@ -93,26 +46,44 @@ public class FacebookCallbackAction  extends FrameworkActionSupport implements S
 	public void setCode(String code) {
 		this.code = code;
 	}
-		
 	
+	public Object getUserProfile(){
+		if( this.userProfile == null ){
+			FacebookServiceProvider provider = (FacebookServiceProvider) getSocialNetwork().getSocialServiceProvider();			
+			this.userProfile = provider.getUserProfile();
+		}
+		return this.userProfile;
+	}
+
 	public String execute() throws Exception {
 		
 		if( StringUtils.isNotEmpty(code) ){
-			this.socialNetwork = newSocialNetwork();			
-			FacebookServiceProvider provider = (FacebookServiceProvider) socialNetwork.getSocialServiceProvider();			
+			SocialNetwork newSocialNetwork = newSocialNetwork(Media.FACEBOOK);			
+			FacebookServiceProvider provider = (FacebookServiceProvider) newSocialNetwork.getSocialServiceProvider();			
 			Token token = provider.getTokenWithCallbackReturns(null, code);
-			socialNetwork.setAccessSecret(token.getSecret());
-			socialNetwork.setAccessToken(token.getToken());
-			provider.setAccessToken(token.getToken());
-			provider.setAccessSecret(token.getSecret());
-			this.accessSecret = token.getSecret();
-			this.accessToken = token.getToken();
+			newSocialNetwork.setAccessSecret(token.getSecret());
+			newSocialNetwork.setAccessToken(token.getToken());
+			setSocialNetwork(newSocialNetwork);
 		}		
 		return success();
 	}
-	
-	protected SocialNetwork newSocialNetwork(){	
-		SocialNetwork network =  socialNetworkManager.createSocialNetwork(getUser(), SocialNetwork.Media.FACEBOOK );		
-		return network;
+
+	@Override
+	public User findUser() {
+		
+		if( this.foundUser == null){
+			FacebookProfile profileToUse = (FacebookProfile)getUserProfile();
+			if( profileToUse != null ){
+				SocialNetwork found = findSocialNetworkByUsername( Media.FACEBOOK, profileToUse.getId());
+				if( found != null )
+					try {
+						this.foundUser = getUserManager().getUser(found.getObjectId());
+					} catch (UserNotFoundException e) {
+						log.error(e);
+					}
+			}
+		}
+		return this.foundUser;
 	}
+		
 }

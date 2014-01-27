@@ -23,22 +23,20 @@ public class SocialNetworkActionSupport extends FrameworkActionSupport implement
 
 	private Cache socialStreamsCache;
 	private SocialNetworkManager socialNetworkManager;	
-	private int objectType = 2 ;
-	
+	private Integer objectType = 2 ;
 	/**
 	 * @return objectType
 	 */
-	public int getObjectType() {
+	public Integer getObjectType() {
 		return objectType;
 	}
 
 	/**
 	 * @param objectType 설정할 objectType
 	 */
-	public void setObjectType(int objectType) {
+	public void setObjectType(Integer objectType) {
 		this.objectType = objectType;
 	}
-	
 	/**
 	 * @return socialNetworkManager
 	 */
