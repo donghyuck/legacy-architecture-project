@@ -657,7 +657,7 @@
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
 			}
 			
-			CHANGE
+			//CHANGE
 			var panel = $("#" + renderToString ).data("extPanel");
 			panel.show();
 			
