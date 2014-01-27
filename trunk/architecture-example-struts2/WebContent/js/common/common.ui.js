@@ -103,7 +103,8 @@
 			name: "Panel",
 			title : null,
 			template: null,
-			data : {}
+			data : {},
+			refresh : false 
 		},
 		hide: function (){
 			var that = this ;
@@ -113,7 +114,8 @@
 			var that = this;
 	            if (value !== undefined) {
 	            	that.options.data = value ;
-	            	$(that).trigger( CHANGE ); 
+	            	if( that.options.refresh )
+	            		that.refresh();
 	            } else {
 	                return that.options.data;
 	            }
@@ -128,7 +130,6 @@
 		},
 		render: function () {				
 			var that = this ;			
-			
         	if( that.options.template ){       
         		//$(that.element).html( that.options.data ) ;
     			//kendo.bind($(that.element), that.options.data);
