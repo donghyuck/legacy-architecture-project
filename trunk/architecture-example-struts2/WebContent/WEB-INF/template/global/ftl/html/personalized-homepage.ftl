@@ -655,10 +655,10 @@
 							}							
 						},
 						commands:[
-							{ selector :   "#" + renderToString + " .panel-body:first .btn", action : function(e){
+							{ selector :   "#" + renderToString + " .panel-body:first .btn", 
+							  action : function(e){
 								e.preventDefault();
-								alert($(this).html());
-								
+								alert($(e.target).html());								
 							} }
 						]
 					})
