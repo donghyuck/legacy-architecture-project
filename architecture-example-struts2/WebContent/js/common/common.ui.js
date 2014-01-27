@@ -130,9 +130,10 @@
 			var that = this ;			
 			
         	if( that.options.template ){       
-        		$(that.element).html( that.options.data ) ;
-    			kendo.bind($(that.element), that.options.data);
-    			alert( $(that.element).html() );
+        		//$(that.element).html( that.options.data ) ;
+    			//kendo.bind($(that.element), that.options.data);
+    			//alert( $(that.element).html() );
+        		$(that.element).html("hello...");
         	} 
         	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
