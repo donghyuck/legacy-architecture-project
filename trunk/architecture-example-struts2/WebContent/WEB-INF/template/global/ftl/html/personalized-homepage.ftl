@@ -450,6 +450,9 @@
 				// END SCRIPT 
 			}
 		}]);	
+		
+		$('#myTab a:first').tab('show') 
+		
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );				
