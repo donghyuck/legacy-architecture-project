@@ -647,12 +647,10 @@
 				$("#" + renderToString ).data("extPanel", 
 					$("#" + renderToString ).extPanel({
 						template : kendo.template($("#file-panel-template").html()),
-						data : attachPlaceHolder
+						data : attachPlaceHolder,
+						refresh : true
 					})
-				 ).change( function (){
-				 alert( "sss" ) ;
-					this.refresh();
-				});
+				 );
 			}else{
 				$("#" + renderToString ).data("extPanel").data(attachPlaceHolder);
 			}
