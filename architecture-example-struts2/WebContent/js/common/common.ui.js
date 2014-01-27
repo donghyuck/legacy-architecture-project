@@ -110,7 +110,13 @@
 			that.element.hide();			
 		},
 		data : function(){
+			var that = this ;
+			if(that.options.data )
+				return that.options.data;
 			return observable ;
+		},
+		data : function ( Object data ){
+			that.options.data = data;
 		},
 		title: function( title ){
 			if( title ){
