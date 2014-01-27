@@ -93,8 +93,7 @@
 			var that = this;		 
 			Widget.fn.init.call(that, element, options);			
 			options = that.options;							
-			that.render();
-			that.trigger( CHANGE, {data: options.data }); 
+			that.refresh();		
 			//that.render();					
 			kendo.notify(that);			
 		},
@@ -126,6 +125,8 @@
 		refresh: function () {
 			var that = this ;
 			that.render();
+			if( that.options.afterChange )
+				afterChange();
 		},
 		show: function (){
 			var that = this ;
