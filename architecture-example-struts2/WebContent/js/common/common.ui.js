@@ -87,10 +87,14 @@
  */
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	var proxy = $.proxy, CHANGE = "change", _data = null ;	
+	var proxy = $.proxy, CHANGE = "change" ;	
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
-			var that = this;
+			var that = this, data;
+			 if (options) {
+				 data = options.data;
+	         }
+			 
 			Widget.fn.init.call(that, element, options);			
 			options = that.options;
 			if( options.title )
@@ -110,21 +114,21 @@
 			name: "Panel",
 			title : null,
 			template : null,
-			data : null
+			data :  data: []
 		},
 		hide: function (){
 			var that = this ;
 			that.element.hide();			
 		},
-		data: function ( Object data ){
-			var that = this ;
-			if( data ){
-				_data = data;
-				that.trigger( CHANGE, null ); 
-			}else{
-				return _data;
-			}
-		},
+		 data: function(value) {
+			var that = this;
+	            if (value !== undefined) {
+	            	that._data = value ;
+	            	that.trigger( CHANGE, null ); 
+	            } else {
+	                return that._data;
+	            }
+	    },
 		title: function( title ){
 			var that = this ;
 			if( title ){
