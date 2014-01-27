@@ -726,22 +726,7 @@
 						data : photoPlaceHolder
 					})
 				 );					
-				 	 
-				 /**	 
-				$("#" + renderToString ).find(".custom-photo-delete").click(function (e) { 
-					e.preventDefault();			
-					$.ajax({
-						dataType : "json",
-						type : 'POST',
-						url : '${request.contextPath}/community/delete-my-image.do?output=json',
-						data : { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId },
-						success : function( response ){
-							$("#" + renderToString ).remove();
-						},
-						error:handleKendoAjaxError
-					});	
-				});
-				
+				 	
 				$("#update-photo-file").kendoUpload({
 						multiple: false,
 						async: {
@@ -762,7 +747,23 @@
 								displayPhotoPanel();
 							}
 						} 
-				});	
+				});	 	 
+				 /**	 
+				$("#" + renderToString ).find(".custom-photo-delete").click(function (e) { 
+					e.preventDefault();			
+					$.ajax({
+						dataType : "json",
+						type : 'POST',
+						url : '${request.contextPath}/community/delete-my-image.do?output=json',
+						data : { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId },
+						success : function( response ){
+							$("#" + renderToString ).remove();
+						},
+						error:handleKendoAjaxError
+					});	
+				});
+				
+				
 				**/
 			}
 			
