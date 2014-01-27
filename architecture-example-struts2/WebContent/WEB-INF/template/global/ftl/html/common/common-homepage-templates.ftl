@@ -13,12 +13,12 @@
 		</div>
 		<div class="panel-body">
 		
-			
+			first
 		
 		</div>	
 		<div class="panel-body">
 		
-			
+			second
 		
 		</div>			
 		<div class="panel-footer" data-bind="visible: editable" style="padding:5px;">
