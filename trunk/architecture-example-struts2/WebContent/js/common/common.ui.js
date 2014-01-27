@@ -94,14 +94,13 @@
 			Widget.fn.init.call(that, element, options);			
 			options = that.options;							
 			that.refresh();		
-			//that.render();					
 			kendo.notify(that);			
 		},
 		events : [
 			CHANGE
 		],
 		options : {
-			name: "Panel",
+			name: "extPanel",
 			title : null,
 			template: null,
 			data : {},
@@ -130,20 +129,14 @@
 		},
 		show: function (){
 			var that = this ;
-			that.element.show();			
+			$(that.element).show();			
 		},
 		render: function () {				
 			var that = this ;			
         	if( that.options.template ){       
-        		//$(that.element).html( that.options.data ) ;
-    			//kendo.bind($(that.element), that.options.data);
-    			//alert( $(that.element).html() );
-
-        		
         		$(that.element).html( that.options.template(that.data()) );
         		kendo.bind($(that.element), that.data());
-        	} 
-        	
+        	}         	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
         		$(this).click(function (e) {
         			e.preventDefault();
@@ -163,17 +156,17 @@
         			}else if ( header_action.text() == "Close"){
         				that.hide();
         			}else if ( header_action.text() == "Refresh"){	
-        				
+        			
+        			// custom
         			}else if ( header_action.text() == "Custom" ){
         				$(that.element).find(".panel-body:last").toggleClass("hide");
         			}        			
         		});        		
-        	});
-        	
+        	});        	
         	// custom 
-        	$(that.element).find(".panel-body:last button.close").click(function(e){
+        	$(that.element).find(".panel-body:first button.close").click(function(e){
         		e.preventDefault();	
-        		$(that.element).find(".panel-body:last").addClass("hide");       	
+        		$(that.element).find(".panel-body:first").addClass("hide");       	
         	});	
 		}
 	});
