@@ -102,9 +102,9 @@
 			
 			kendo.notify(that);			
 		},
-		events : {			
+		events : [
 			CHANGE
-		},
+		],
 		options : {
 			name: "Panel",
 			title : null,
