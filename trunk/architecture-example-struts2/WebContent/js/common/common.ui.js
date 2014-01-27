@@ -155,7 +155,7 @@
         		
         	});
         	alert(
-        	$(that.element).find(".panel-body:last button .close").html("fdsa")
+        	$(that.element).find(".panel-body:last button .close").html()
         	); 
         	
 		}
