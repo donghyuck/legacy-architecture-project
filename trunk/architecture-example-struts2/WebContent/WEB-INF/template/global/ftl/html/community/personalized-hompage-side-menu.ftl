@@ -192,11 +192,11 @@
   
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h4 class="panel-title">
+      <h5 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
          메시지
         </a>
-      </h4>
+      </h5>
     </div>
     <div id="collapseThree" class="panel-collapse collapse">
       <div class="panel-body">
