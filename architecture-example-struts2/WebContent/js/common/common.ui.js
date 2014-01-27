@@ -93,7 +93,9 @@
 			var that = this;		 
 			Widget.fn.init.call(that, element, options);			
 			options = that.options;							
-			that.render();					
+			that.render();
+			that.trigger( CHANGE, {data: options.data }); 
+			//that.render();					
 			//kendo.notify(that);			
 		},
 		events : [
