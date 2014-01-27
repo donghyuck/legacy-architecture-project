@@ -43,13 +43,7 @@
 						</ul>								
 						<!-- start  of tab content -->				
 						<div class="tab-content">			
-							<!-- start messages -->			
-							<!--
-							<div class="tab-pane active" id="my-message-announces">
-								<div class="blank-top-5" ></div>	
-								
-							</div>		
-							-->							
+				
 							<div class="tab-pane" id="my-message-notes">
 								<div class="blank-top-5" ></div>		
 								<div class="panel panel-default" style="margin-bottom:0px;">
@@ -200,8 +194,14 @@
     </div>
     <div id="collapseThree" class="panel-collapse collapse">
       <div class="panel-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-      </div>
+<div class="popover left" style="display:true;">
+														<div class="arrow"></div>
+														<!--<h3 class="popover-title">알림</h3>-->
+														<div class="popover-content">
+															<p>새로운 메시지가 없습니다.</p>
+														</div>
+													</div>	
+       </div>
     </div>
   </div>
 </div>
