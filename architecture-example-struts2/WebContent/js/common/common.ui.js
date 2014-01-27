@@ -174,6 +174,10 @@
         		$(value.selector).click(value.handler);
         	});        	
 		},
+		body: function(){
+			var that = this;
+			$(that.element).find(".panel-body:last");
+		},
         destroy: function() {
         	var that = this;
             Widget.fn.destroy.call(that);
