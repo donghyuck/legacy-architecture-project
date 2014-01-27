@@ -131,7 +131,8 @@
         	if( that.options.template ){        		 
     			that.element.html( that.data() )          		
     			kendo.bind(that.element, that.data() );
-        	}        	
+        	} 
+        	
         	$(that.element).find(".panel-header-actions a.k-link").each(function( index ){        		 
         		$(this).click(function (e) {
         			e.preventDefault();
