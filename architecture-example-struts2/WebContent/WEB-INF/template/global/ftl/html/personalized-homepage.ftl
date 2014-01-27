@@ -875,6 +875,7 @@
 		#	height: 219px;
 			border: 5px dashed #c0dcf2;
 			background: 0;
+			right : 0px;
 			text-align: center;
 			padding: 34px 10px 10px;
 			-webkit-border-radius: 18px;
