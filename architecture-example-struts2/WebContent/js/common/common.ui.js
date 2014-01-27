@@ -118,6 +118,7 @@
 	            	that.options.data = value ;
 	            	if( that.options.refresh )
 	            		that.refresh();
+	            	that.trigger( CHANGE, {data: options.data }); 
 	            } else {
 	                return that.options.data;
 	            }
