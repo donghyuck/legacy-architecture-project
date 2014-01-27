@@ -201,6 +201,55 @@
 					$(this).tab('show');
 				});	
 				
+				$('#myTab').on( 'show.bs.tab', function (e) {
+					e.preventDefault();		
+					var show_bs_tab = $(e.target);
+					if( show_bs_tab.attr('href') == '#my-streams' ){						
+						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
+							$("#my-social-streams-grid").kendoGrid({
+								dataSource : new kendo.data.DataSource({
+									transport: {
+										read: {
+											type : 'POST',
+											dataType : "json", 
+											url : '${request.contextPath}/community/list-my-socialnetwork.do?output=json'
+										} 
+									},
+									pageSize: 10,
+									error:handleKendoAjaxError,				
+									schema: {
+										data : "connectedSocialNetworks",
+										model : SocialNetwork
+									},
+								}),
+								selectable: "single",
+								rowTemplate: kendo.template( '<tr><td><i class="fa fa-#: serviceProviderName#"></i>&nbsp; #: serviceProviderName#</td></tr>' ),				
+								change: function(e) { 				
+									var selectedCells = this.select();
+									if( selectedCells.length == 1){
+										var selectedCell = this.dataItem( selectedCells );		
+										$("#my-social-streams-grid").data("streamsPlaceHolder", selectedCell);
+										if( ! $("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId ) ){										
+											var selectedStreams = new MediaStreams(selectedCell.socialAccountId, selectedCell.serviceProviderName);							
+											if( selectedStreams.name == 'twitter'){
+												selectedStreams.setTemplate ( kendo.template($("#twitter-timeline-template").html()) );											
+											}else if ( selectedStreams.name == 'facebook'){
+												selectedStreams.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
+											}
+											selectedStreams.createDataSource({});											
+											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams )
+										}
+										displaySocialPanel();
+									}							
+								},
+								dataBound: function(e) {									
+								},
+								height: 300
+							});	
+						}
+					}				
+				});
+					
 				/**
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					e.preventDefault();		
