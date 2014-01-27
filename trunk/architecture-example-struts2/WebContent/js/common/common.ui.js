@@ -171,7 +171,7 @@
         	});	        	
         	
         	$.each( that.options.commands, function(index, value){
-        		$(value.selector).click(value.action);
+        		$(value.selector).click(value.handler);
         	});        	
 		},
         destroy: function() {
