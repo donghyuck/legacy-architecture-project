@@ -652,8 +652,7 @@
 						afterChange : function ( data ){
 							if( data.contentType == "application/pdf" ){
 								var loadSuccess = new PDFObject({ url: "${request.contextPath}/community/view-my-attachment.do?attachmentId=" + data.attachmentId, pdfOpenParams: { view: "FitV" } }).embed("pdf-view");				
-							}	
-							
+							}							
 						}
 					})
 				 );
