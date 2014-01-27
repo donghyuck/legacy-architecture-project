@@ -775,7 +775,7 @@
 			var panel = $("#" + renderToString ).data("extPanel");
 			var editable = $("#account-panel").data("currentUser" ).userId == photoPlaceHolder.objectId ;
 			
-			panel.title( photoPlaceHolder.name ) ;
+			panel.data().set( "title",  photoPlaceHolder.name ) ;
 			panel.data().set("imageId", photoPlaceHolder.imageId );
 			panel.data().set("editable", editable );
 			
