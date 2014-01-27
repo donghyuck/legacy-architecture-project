@@ -169,11 +169,12 @@
         		e.preventDefault();	
         		$(that.element).find(".panel-body:first").addClass("hide");
         	});	        	
-        	that.options.commands.forEach(elem, index){
-        		$(elem.selector).click( function (e) {
-        			elem.action(e);
+        	
+        	$.each( that.options.commands, function(index, value){
+        		$(value.selector).click( function (e) {		
+        			value.action(e);
         		});
-        	}         	
+        	});        	
 		},
         destroy: function() {
         	var that = this;
