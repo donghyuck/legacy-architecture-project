@@ -18,7 +18,7 @@
 				<button  type="button" class="btn btn-info"><i class="fa fa-comment-o"></i>&nbsp; 댓글 추가</button>						
 			</div>
 			<div class="btn-group dropup" data-bind="visible: editable">
-				<button  type="button" class="btn btn-danger custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
+				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
 				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 사진 변경하기</button>	
 				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
 					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
@@ -90,9 +90,7 @@
 			</div>		
 		</div>
 		<div class="panel-body">
-			
-			first
-		
+			first		
 		</div>	
 		<div class="panel-body hide">
 			<button type="button" class="close" aria-hidden="true">&times;</button>		
@@ -104,18 +102,20 @@
 			</div>		
 			
 			<div class="btn-group dropup" data-bind="visible: editable">
-				<button  type="button" class="btn btn-danger btn-sm custom-photo-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
-				<button  type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 사진 변경하기</button>	
-				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
-					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
+				<a class="btn btn-default" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i> 다운로드</a>
+				<button  type="button" class="btn btn-danger custom-delete"><i class="fa fa-trash-o"></i> 삭제</button>		
+				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 파일 변경하기</button>				
+				<ul class="dropdown-menu" style="min-width:400px; padding:10px;">
+					<li role="presentation" class="dropdown-header">마우스로 새로운 파일을 끌어 놓으세요.</li>
 					<li>
-						<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
+						<input name="update-attach-file" id="update-attach-file" type="file"class="pull-right" />
 					</li>
-				</ul>
-			</div>
+				</ul>	
+			</div>				
 		</div>			
 	</div>		
 </script>
+
 <script type="text/x-kendo-template" id="photo-view-template">	
 		<figure>			
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
