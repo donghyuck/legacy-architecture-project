@@ -1,3 +1,21 @@
+var SignupForm = kendo.Class.extend({ 
+	init: function(data) {
+		this.data = data;
+	},
+	id : function (){
+		return data.id;
+	}
+});
+
+var FacebookSignupForm = SignupForm.extend({ 
+
+});
+
+var TwitterSignupForm = SignupForm.extend({ 
+
+});
+
+
 var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 	_FACEBOOK_FEED_URL    = "/community/get-facebook-homefeed.do?output=json",
 	_TWITTER_FEED_DATA  = "homeTimeline",
@@ -70,6 +88,8 @@ var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
 		}
 	});	
 	
+
+
 
 var Announce = kendo.data.Model.define( {
     id: "announceId", // the identifier of the model
