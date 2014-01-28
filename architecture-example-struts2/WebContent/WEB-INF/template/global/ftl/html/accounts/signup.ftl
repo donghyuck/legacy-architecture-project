@@ -72,7 +72,10 @@
 								</div>
 						</div>	
 						<div class="row blank-top-15">
-							<div class="col-sm-5">
+							<div class="col-sm-6">
+							
+							</div>
+							<div class="col-sm-6">
 								<form role="form">
 									<div class="form-group">
 										<label for="signupInputName">이름</label>
