@@ -26,6 +26,7 @@ import architecture.ee.web.util.ParamUtils;
 public class SignUpAction  extends FrameworkActionSupport  {
 	
 	private UserManager userManager ;
+	
 	private User targetUser ;
 	
     public UserManager getUserManager() {
@@ -44,10 +45,9 @@ public class SignUpAction  extends FrameworkActionSupport  {
 		this.targetUser = targetUser;
 	}
 
-	@Override
-    public String execute() throws Exception {
-        return input() ;
-    }
+	public String execute() throws Exception {
+		return success();
+	}
     
     public String register() throws Exception {    	
     	
