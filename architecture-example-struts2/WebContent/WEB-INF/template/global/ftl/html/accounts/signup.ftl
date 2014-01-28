@@ -58,7 +58,7 @@
 		function signupCallbackResult( data  ){
 			if( data == null ){
 				$("#status").kendoAlert({ 
-					data : { message : "이미가입된 " }
+					data : { message : "이미가입된 계정입니다." }
 				});
 			}else{
 				
