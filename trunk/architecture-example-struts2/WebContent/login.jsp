@@ -5,6 +5,7 @@
 <title>로그인</title>
 <%
 	User user = SecurityHelper.getUser();
+	out.println(user.getName());
 	Company company = user.getCompany();
 %>
 <script type="text/javascript">
@@ -67,7 +68,7 @@
 		}		
 	}]);
 	
-	function handleSocialCallbackResult( success ){
+	function handleCallbackResult( success ){
 		if( success ){
 			$("form[name='fm1']").attr("action", "/main.do").submit();
 		}else{
@@ -88,7 +89,7 @@
 				data: $("form[name=fm1]").serialize(),
 				success : function( response ) {   
 					if( response.error ){ 
-						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );                        
+						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
 						$("#login").kendoAnimate("slideIn:up");          
 						$("#password").val("").focus();
 					} else {
