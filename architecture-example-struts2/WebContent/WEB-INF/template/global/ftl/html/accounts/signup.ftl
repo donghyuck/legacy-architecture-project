@@ -94,17 +94,11 @@
 										<label for="signupInputPassword2">비밀번호 확인</label>
 										<input type="password" class="form-control" id="signupInputPassword2" placeholder="비밀번호 확인">
 									</div>									
-									<div class="form-group">
-										<label for="exampleInputFile">File input</label>
-										<input type="file" id="exampleInputFile">
-										<p class="help-block">Example block-level help text here.</p>
-									</div>
 									<div class="checkbox">
 										<label>
 											<input type="checkbox"  id="signupInputAgree"> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 										</label>
 									</div>
-									<button type="submit" class="btn btn-default">Submit</button>
 								</form>
 							</div>
 						</div>
@@ -150,10 +144,13 @@
 					-->
 				</div>
 				<div class="modal-footer">
+					<button type="button" class="btn btn-info" >확인</button>
+					<!--
 					<div class="btn-group ">
 						<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
 						<a id="signup"  href="${request.contextPath}/accounts/login.do"  class="btn btn-info">로그인</a>
 					</div>
+					-->
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
