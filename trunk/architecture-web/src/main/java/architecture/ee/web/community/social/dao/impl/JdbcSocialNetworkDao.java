@@ -38,7 +38,7 @@ import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements SocialNetworkDao {
 
 	private ExtendedPropertyDao extendedPropertyDao;	
-	private String sequencerName = "SOCIAL_ACCOUNT";
+	private String sequencerName = "SOCIAL_NETWORK";
 	private String socialAccountPropertyTableName = "V2_SOCIAL_ACCOUNT_PROPERTY";
 	private String socialAccountPropertyPrimaryColumnName = "ACCOUNT_ID";
 	
@@ -55,10 +55,11 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 			account.setObjectId(rs.getLong("OBJECT_ID"));
 			account.setAccessToken(rs.getString("ACCESS_TOKEN"));
 			account.setAccessSecret(rs.getString("ACCESS_SECRET"));
+			account.setUsername(rs.getString("USERNAME"));
 			account.setSignedIn( rs.getInt("SIGNED") == 1 ); 
 			account.setCreationDate(rs.getDate("CREATION_DATE"));
 			account.setModifiedDate(rs.getDate("MODIFIED_DATE"));						
-			
+			account.setConnected(true);
 			if( !StringUtils.isEmpty( account.getServiceProviderName())){				
 				SocialServiceProvider provider = null;				
 				if( "twitter".toLowerCase().equals(account.getServiceProviderName()) ){					
@@ -159,6 +160,11 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 		extendedPropertyDao.updateProperties(socialAccountPropertyTableName, socialAccountPropertyPrimaryColumnName, accountId, props);
 	}
 
+	public List<Long> getSocialAccountIds( int objectType, String username) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_USERNAME").getSql(), 				
+				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.VARCHAR, username ));	
+	}
+	
 	public List<Long> getSocialAccountIds( int objectType, long objectId) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
 				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
@@ -198,6 +204,7 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 					new SqlParameterValue (Types.VARCHAR, toUse.getServiceProviderName()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getAccessToken()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getAccessSecret()), 
+					new SqlParameterValue (Types.VARCHAR, toUse.getUsername()), 
 					new SqlParameterValue (Types.INTEGER, toUse.isSignedIn() ? 1 : 0 ), 
 					new SqlParameterValue(Types.DATE, toUse.getCreationDate()),
 					new SqlParameterValue(Types.DATE, toUse.getModifiedDate()));	

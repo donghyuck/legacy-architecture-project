@@ -27,6 +27,20 @@ public interface SocialNetwork extends EntityModelObject {
 		FACEBOOK
 	};	
 		
+	/**
+	 * @return username
+	 */
+	public String getUsername() ;
+
+	/**
+	 * @param username 설정할 username
+	 */
+	public void setUsername(String username);
+	
+	/**
+	 * @return connected
+	 */
+	public boolean isConnected();	
 		
 	public abstract int getObjectType();
 	

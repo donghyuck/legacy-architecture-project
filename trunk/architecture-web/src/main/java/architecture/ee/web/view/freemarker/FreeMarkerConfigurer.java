@@ -92,6 +92,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 				logger.debug( "template customized home : " + home );
 				if( home != null ){
 					DatabaseTemplateLoader templateLoader = new DatabaseTemplateLoader(home);
+					templateLoader.initialize();
 					this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
 				}				
 			}

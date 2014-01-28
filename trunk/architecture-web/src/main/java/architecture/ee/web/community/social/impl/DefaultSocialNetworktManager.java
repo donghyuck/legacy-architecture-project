@@ -88,6 +88,7 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 		impl.setObjectId(company.getCompanyId());
 		impl.setServiceProviderName(media.name().toLowerCase());
 		impl.setSocialAccountId(-1L);		
+		impl.setConnected(false);
 		impl.setSocialServiceProvider(createSocialServiceProvider(media));	
 		return impl;
 	}
@@ -100,6 +101,7 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 		impl.setObjectType(user.getModelObjectType());
 		impl.setObjectId(user.getUserId());
 		impl.setServiceProviderName(media.name().toLowerCase());
+		impl.setConnected(false);
 		impl.setSocialAccountId(-1L);		
 		impl.setSocialServiceProvider(createSocialServiceProvider(media));
 		
@@ -177,15 +179,26 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 		return accounts;
 	}
 	
+	public List<SocialNetwork> getSocialNetworks(int objectType, String username) {
+		List<Long> ids = socialNetworkDao.getSocialAccountIds(objectType, username);
+		List<SocialNetwork> accounts = new ArrayList<SocialNetwork>(ids.size());
+		for(Long id : ids){
+			try {
+				accounts.add( getSocialNetworkById(id) );
+			} catch (NotFoundException e) {
+			}
+		}
+		return accounts;
+	}
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void saveSocialNetwork(SocialNetwork socialNetwork) {
 		
 		if(socialNetwork.getSocialAccountId() <= 0 ){
 			socialNetworkDao.createSocialAccount(socialNetwork);
 		}else{
-			socialNetworkDao.updateSocialAccount(socialNetwork);
-		}
-		
+			socialNetworkDao.updateSocialAccount(socialNetwork);			
+		}		
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )

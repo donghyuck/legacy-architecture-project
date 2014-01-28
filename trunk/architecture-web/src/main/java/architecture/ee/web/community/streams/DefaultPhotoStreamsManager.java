@@ -13,24 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.social.dao;
+package architecture.ee.web.community.streams;
 
-import java.util.List;
+import java.util.UUID;
 
-import architecture.ee.web.community.social.SocialNetwork;
+public class DefaultPhotoStreamsManager {
 
-public interface SocialNetworkDao {
-	
-	public List<Long> getSocialAccountIds( int objectType, String username) ;
-	
-	public List<Long> getSocialAccountIds( int objectType, long objectId);
-	
-	public SocialNetwork getSocialAccountById(long socialAccountId);
-	
-	public void updateSocialAccount(SocialNetwork socialNetwork);
-	
-	public SocialNetwork createSocialAccount(SocialNetwork socialNetwork);
-	
-	public void deleteSocialAccount(SocialNetwork socialNetwork);
-		
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO 자동 생성된 메소드 스텁
+UUID.randomUUID().toString();
+	}
+
 }

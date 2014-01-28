@@ -20,17 +20,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.scribe.builder.ServiceBuilder;
-import org.scribe.builder.api.TwitterApi;
 import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.community.social.AbstractSocialServiceProvider;
 import architecture.ee.web.community.social.SocialNetwork.Media;
+import architecture.ee.web.community.social.twitter.api.SSLTwitterApi;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 
@@ -43,7 +43,7 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 	
 	public TwitterServiceProvider(String clientId, String clientSecret) {
 		super(new ServiceBuilder()
-                                .provider(TwitterApi.class)
+                                .provider(SSLTwitterApi.class)
                                 .apiKey(clientId)
                                 .apiSecret(clientSecret)
                                 .debug()
@@ -52,7 +52,7 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 
 	public TwitterServiceProvider(String clientId, String clientSecret, String callbackUrl) {
 		super(new ServiceBuilder()
-                                .provider(TwitterApi.class)                               
+                                .provider(SSLTwitterApi.class)                               
                                 .apiKey(clientId)
                                 .apiSecret(clientSecret)
                                 .callback(callbackUrl)

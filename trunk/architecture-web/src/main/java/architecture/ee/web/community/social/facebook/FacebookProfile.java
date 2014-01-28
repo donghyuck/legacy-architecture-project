@@ -20,6 +20,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 public class FacebookProfile implements Serializable {
 
 	private final String id;
@@ -382,4 +384,8 @@ public class FacebookProfile implements Serializable {
 	public List<EducationEntry> getEducation() {
 		return education;
 	}
+
+
+
+	
 }

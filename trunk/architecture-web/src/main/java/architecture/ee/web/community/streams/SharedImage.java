@@ -13,24 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.social.dao;
+package architecture.ee.web.community.streams;
 
-import java.util.List;
+public interface SharedImage {
 
-import architecture.ee.web.community.social.SocialNetwork;
-
-public interface SocialNetworkDao {
-	
-	public List<Long> getSocialAccountIds( int objectType, String username) ;
-	
-	public List<Long> getSocialAccountIds( int objectType, long objectId);
-	
-	public SocialNetwork getSocialAccountById(long socialAccountId);
-	
-	public void updateSocialAccount(SocialNetwork socialNetwork);
-	
-	public SocialNetwork createSocialAccount(SocialNetwork socialNetwork);
-	
-	public void deleteSocialAccount(SocialNetwork socialNetwork);
-		
 }
