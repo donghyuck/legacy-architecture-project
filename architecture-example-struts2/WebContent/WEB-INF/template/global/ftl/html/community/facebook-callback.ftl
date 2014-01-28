@@ -15,19 +15,21 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {				
 			<#if action.user.anonymous >
-				<#if action.findUser()?exists >								
-				
-				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
-					window.opener.handleSocialCallbackResult(${action.signIn()?string("true","false")});							
+				<#if action.findUser()?exists >		
+				if(typeof window.opener.handleCallbackResult != "undefined"){
+					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});							
+				} else if(typeof window.opener.signupCallbackResult != "undefined"){
+					window.opener.signupCallbackResult(null);
 				}else{
 					window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
-				window.close();
-				
-				<#else>					
-				var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-				alert( kendo.stringify(userProfile) );				
+				<#else>			
+				if(typeof window.opener.signupCallbackResult != "undefined"){
+					var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
+					window.opener.signupCallbackResult(userProfile);
+				}	
 				</#if>					
+				window.close();				
 			<#else>					
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
