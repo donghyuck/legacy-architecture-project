@@ -28,7 +28,7 @@
 
 				$('#signup-window').modal({show:true, backdrop:false});
 
-				$("#signup-window button:custom-social-groups").each(function( index ) {
+				$("#signup-window button.custom-social-groups").each(function( index ) {
 					var external_button = $(this);
 					external_button.click(function (e){																												
 						var target_media = external_login_button.attr("data-target");
@@ -50,9 +50,20 @@
 				// END SCRIPT            
 			}
 		}]);	
+		
+		
+		function handleSocialCallbackResult( success ){
+			if( success ){
+				
+			}else{
+				alert( "인증에 실패하였습니다." );
+			}
+		}
+				
 		-->
 		</script>		
-
+		<style>   
+		
 		</style>   	
 	</head>
 	<body>
