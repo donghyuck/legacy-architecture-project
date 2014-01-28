@@ -31,7 +31,7 @@
 				$("#signup-window button.custom-social-groups").each(function( index ) {
 					var external_button = $(this);
 					external_button.click(function (e){																												
-						var target_media = external_login_button.attr("data-target");
+						var target_media = external_button.attr("data-target");
 						$.ajax({
 							type : 'POST',
 							url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
