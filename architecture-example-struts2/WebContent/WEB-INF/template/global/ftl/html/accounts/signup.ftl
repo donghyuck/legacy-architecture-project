@@ -61,26 +61,44 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">회원가입</h4>
 				</div>
-				<div class="modal-body container" >
-					<div class="row blank-top-5 ">
-							<div class="col-sm-6">
-								<button class="btn btn-block btn-primary btn-lg "  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
-							</div>
-							<div class="col-sm-6">
-								<button class="btn btn-block btn-info btn-lg " data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
-							</div>
-					</div>	
-					<!--
-					<div class="container custom-external-groups" style="width:100%;">
+				<div class="modal-body">
+					<div class="container" style="width:100%;">
 						<div class="row blank-top-5 ">
-							<div class="col-sm-6">
-								<button class="btn btn-block btn-primary btn-lg "  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
+								<div class="col-sm-6">
+									<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
+								</div>
+								<div class="col-sm-6">
+									<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
+								</div>
+						</div>	
+						<div class="row blank-top-15">
+							<div class="col-sm-12">
+								<form role="form">
+									<div class="form-group">
+										<label for="exampleInputEmail1">Email address</label>
+										<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputPassword1">Password</label>
+										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+									</div>
+									<div class="form-group">
+										<label for="exampleInputFile">File input</label>
+										<input type="file" id="exampleInputFile">
+										<p class="help-block">Example block-level help text here.</p>
+									</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"> Check me out
+										</label>
+									</div>
+									<button type="submit" class="btn btn-default">Submit</button>
+								</form>
 							</div>
-							<div class="col-sm-6">
-								<button class="btn btn-block btn-info btn-lg " data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
-							</div>
-						</div>					
+						</div>
 					</div>
+					<!--
+
 					
 					<div class="container" style="width:100%;">					
 						<div class="row blank-top-15">
