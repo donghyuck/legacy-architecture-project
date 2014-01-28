@@ -82,6 +82,7 @@
 				$("#status").kendoAlert({ 
 					data : { message : "이미가입된 계정입니다. 자동으로 로그인 됩니다." }
 				});
+				homepage();					
 			}else{
 				
 			}
