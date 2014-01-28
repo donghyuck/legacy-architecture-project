@@ -29,4 +29,11 @@
 		});	
 	};			
 	
+	common.apis.toUser(Object data){
+		User user = new User();
+		user.username = data.
+	} 
+	
 })(jQuery);
+
+
