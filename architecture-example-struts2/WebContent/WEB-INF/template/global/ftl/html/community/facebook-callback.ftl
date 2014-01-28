@@ -29,7 +29,7 @@
 					window.opener.signupCallbackResult(userProfile);
 				}	
 				</#if>					
-				window.close();				
+				// window.close();				
 			<#else>					
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
