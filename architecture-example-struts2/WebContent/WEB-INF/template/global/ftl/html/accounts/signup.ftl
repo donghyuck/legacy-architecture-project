@@ -51,6 +51,12 @@
 				$(":button.logout").click( function(e) {
 					var text_danger = $(this).parent();
 					text_danger.remove();
+					
+					$(":fieldset").each(function( index ) {					
+						$(this).removeAttr("disabled"); 
+					});
+					
+					
 					/**
 					$.ajax({
 							type : 'GET',
