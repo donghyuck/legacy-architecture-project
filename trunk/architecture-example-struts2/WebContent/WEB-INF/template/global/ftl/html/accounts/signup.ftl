@@ -47,6 +47,9 @@
 						});
 					});		
 				});						
+				
+				$("#signupInputName").focus();
+				
 				// END SCRIPT            
 			}
 		}]);	
