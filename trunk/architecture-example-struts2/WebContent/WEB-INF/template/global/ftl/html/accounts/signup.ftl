@@ -49,16 +49,14 @@
 				});						
 				
 				$(":button.logout").click( function(e) {
-				
-					alert(
-					$(this).html()
-					);
+					vat text_danger = $(this).parent();
+					text_danger.remove();
 					/**
 					$.ajax({
 							type : 'GET',
 							url : "${request.contextPath}/logout?output=json",
 							success : function(response){
-								alert( kendo.stringify(response) );
+								text_danger.remove();
 							},
 							error:handleKendoAjaxError												
 					});
