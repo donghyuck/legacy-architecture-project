@@ -49,6 +49,11 @@
 				});						
 				
 				$(":button.logout").click( function(e) {
+				
+					alert(
+					$(this).html()
+					);
+					/**
 					$.ajax({
 							type : 'GET',
 							url : "${request.contextPath}/logout?output=json",
@@ -56,7 +61,8 @@
 								alert( kendo.stringify(response) );
 							},
 							error:handleKendoAjaxError												
-						});				
+					});
+					*/				
 				} );
 				
 				$("#form :input:visible:enabled:first").focus();
