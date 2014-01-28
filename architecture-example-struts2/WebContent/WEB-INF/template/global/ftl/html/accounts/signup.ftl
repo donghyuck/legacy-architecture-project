@@ -99,10 +99,10 @@
 					<div class="container" style="width:100%;">
 						<div class="row blank-top-5 ">
 								<div class="col-sm-6">
-									<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
+									<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook" <#if !action.user.anonymous >disabled</#if>><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
 								</div>
 								<div class="col-sm-6">
-									<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
+									<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter" <#if !action.user.anonymous >disabled</#if>><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
 								</div>
 						</div>	
 						<div class="row blank-top-15">
@@ -111,74 +111,37 @@
 							</div>
 							<div class="col-sm-7">
 								<form role="form">
-									<div class="form-group">
-										<label for="signupInputName">이름</label>
-										<input type="text" class="form-control" id="signupInputName" placeholder="이름">
-									</div>
-									<div class="form-group">
-										<label for="signupInputUsername">아이디</label>
-										<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디">
-									</div>									
-									<div class="form-group">
-										<label for="signupInputEmail">이메일 주소</label>
-										<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소">
-									</div>
-									<div class="form-group">
-										<label for="signupInputPassword1">비밀번호</label>
-										<input type="password" class="form-control" id="signupInputPassword1" placeholder="비밀번호">
-									</div>
-									<div class="form-group">
-										<label for="signupInputPassword2">비밀번호 확인</label>
-										<input type="password" class="form-control" id="signupInputPassword2" placeholder="비밀번호 확인">
-									</div>									
-									<div class="checkbox">
-										<label>
-											<input type="checkbox"  id="signupInputAgree"> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
-										</label>
-									</div>
+									<fieldset <#if !action.user.anonymous >disabled</#if>>
+										<div class="form-group">
+											<label for="signupInputName">이름</label>
+											<input type="text" class="form-control" id="signupInputName" placeholder="이름">
+										</div>
+										<div class="form-group">
+											<label for="signupInputUsername">아이디</label>
+											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디">
+										</div>									
+										<div class="form-group">
+											<label for="signupInputEmail">이메일 주소</label>
+											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소">
+										</div>
+										<div class="form-group">
+											<label for="signupInputPassword1">비밀번호</label>
+											<input type="password" class="form-control" id="signupInputPassword1" placeholder="비밀번호">
+										</div>
+										<div class="form-group">
+											<label for="signupInputPassword2">비밀번호 확인</label>
+											<input type="password" class="form-control" id="signupInputPassword2" placeholder="비밀번호 확인">
+										</div>									
+										<div class="checkbox">
+											<label>
+												<input type="checkbox"  id="signupInputAgree"> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+											</label>
+										</div>
+									</fieldset>	
 								</form>
 							</div>
 						</div>
 					</div>
-					<!--
-
-					
-					<div class="container" style="width:100%;">					
-						<div class="row blank-top-15">
-							<div class="col-lg-12">
-								<form name="fm1" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">
-									<input type="hidden" id="output" name="output" value="json" />		    
-									<div class="form-group">
-										<label for="username" class="col-lg-3 control-label">아이디</label>
-										<div class="col-lg-4">
-											<input type="text" class="form-control"  id="username" name="username"  pattern="[^0-9][A-Za-z]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요.">
-										</div>
-									</div>
-									<div class="form-group">
-										<label for="password" class="col-lg-3 control-label">비밀번호</label>
-										<div class="col-lg-4">
-											<input type="password" class="form-control" id="password" name="password"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." >
-										</div>
-									</div>
-									<div class="form-group">
-										<div class="col-lg-offset-3 col-lg-9">
-											<div class="checkbox">
-												<label>
-													<input type="checkbox">로그인 상태유지  
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="col-lg-12">
-										<div id="status">								
-										</div>
-									</div>
-								</form>						
-							</div>
-							<div class="col-lg-12"></div>
-						</div>
-					</div>
-					-->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" >확인</button>
