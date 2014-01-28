@@ -66,6 +66,10 @@
 					});						
 				} );
 				
+				$(":button.homepage").click( function(e) {					
+					homepage();					
+				} );				
+				
 				$("#form :input:visible:enabled:first").focus();
 				
 				// END SCRIPT            
@@ -135,7 +139,11 @@
 								<div id="status"></div>								
 								<#if !action.user.anonymous >
 								<p class="text-danger">
-								<i class="fa fa-info"></i> 현재 로그인 상태입니다.  <button type="button" data-loading-text="로그아웃중 ..." class="btn btn-danger btn-sm logout">로그아웃</button>
+								<i class="fa fa-info"></i> 현재 로그인 상태입니다.  
+								<div class="btn-group ">
+								<button type="button" class="btn btn-info btn-sm homepage" >홈페이지</button>
+								<button type="button" data-loading-text="로그아웃중 ..." class="btn btn-danger btn-sm logout">로그아웃</button>								
+								</div>
 								</p>
 								</#if>								
 							</div>
