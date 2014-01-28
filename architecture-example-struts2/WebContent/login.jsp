@@ -28,9 +28,6 @@
 			$("#login").click( function() {           		    	
 				doLogin();
 			});          
-			$("#signup").click( function() {           		    	
-				$("form[name='fm1']").attr("action", "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do").submit();
-			});    
 			
 			$('#login-window').modal({show:true, backdrop:false});
 			
