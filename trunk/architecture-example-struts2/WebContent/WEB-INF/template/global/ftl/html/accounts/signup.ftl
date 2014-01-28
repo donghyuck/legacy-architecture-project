@@ -114,20 +114,17 @@
 					<h4 class="modal-title">회원가입</h4>
 				</div>
 				<div class="modal-body">
-							<fieldset <#if !action.user.anonymous >disabled</#if>>
-								<div class="col-sm-6">
-									<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
-								</div>
-								<div class="col-sm-6">
-									<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
-								</div>
-							</fieldset>		
+					<fieldset <#if !action.user.anonymous >disabled</#if>>
+						<div class="col-sm-6">
+							<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
+						</div>
+						<div class="col-sm-6">
+							<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
+						</div>
+					</fieldset>		
 				</div>
 				<div class="modal-body">
 					<div class="container" style="width:100%;">
-						<div class="row blank-top-5 ">
-							
-						</div>	
 						<div class="row blank-top-5 ">
 							<div class="col-sm-12">
 								<div id="status"></div>								
@@ -139,8 +136,7 @@
 							</div>
 						</div>
 						<div class="row blank-top-15">
-							<div class="col-sm-5">
-							
+							<div class="col-sm-5">							
 							</div>
 							<div class="col-sm-7">
 								<form role="form">
