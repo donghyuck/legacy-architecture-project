@@ -113,7 +113,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">회원가입</h4>
 				</div>
-				<div class="modal-body">
+				<div class="modal-body bg-gray">
 					<fieldset <#if !action.user.anonymous >disabled</#if>>
 						<div class="col-sm-6">
 							<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
