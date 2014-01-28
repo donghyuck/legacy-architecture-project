@@ -14,8 +14,8 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {				
-			<#if action.user.anonymous >
-				<#if action.findUser()?exists >		
+			<#if action.user.anonymous >			
+				<#if action.findUser()?exists >
 				if(typeof window.opener.handleCallbackResult != "undefined"){
 					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});							
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
@@ -23,13 +23,14 @@
 				}else{
 					window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
+				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){
 					var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 					window.opener.signupCallbackResult(userProfile);
 				}	
 				</#if>					
-				// window.close();				
+				window.close();				
 			<#else>					
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
