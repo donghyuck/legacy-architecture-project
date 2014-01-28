@@ -51,7 +51,7 @@
 				
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃...");
-					var text_danger = $(this).parent();
+					var text_danger = $(this).parent().parent();
 					$.ajax({
 							type : 'GET',
 							url : "${request.contextPath}/logout?output=json",
