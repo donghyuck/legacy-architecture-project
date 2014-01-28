@@ -75,13 +75,25 @@
 							<div class="col-sm-12">
 								<form role="form">
 									<div class="form-group">
-										<label for="exampleInputEmail1">Email address</label>
-										<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+										<label for="signupInputName">이름</label>
+										<input type="text" class="form-control" id="signupInputName" placeholder="이름">
 									</div>
 									<div class="form-group">
-										<label for="exampleInputPassword1">Password</label>
-										<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+										<label for="signupInputUsername">아이디</label>
+										<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디">
+									</div>									
+									<div class="form-group">
+										<label for="signupInputEmail">이메일 주소</label>
+										<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소">
 									</div>
+									<div class="form-group">
+										<label for="signupInputPassword1">비밀번호</label>
+										<input type="password" class="form-control" id="signupInputPassword1" placeholder="비밀번호">
+									</div>
+									<div class="form-group">
+										<label for="signupInputPassword2">비밀번호 확인</label>
+										<input type="password" class="form-control" id="signupInputPassword2" placeholder="비밀번호 확인">
+									</div>									
 									<div class="form-group">
 										<label for="exampleInputFile">File input</label>
 										<input type="file" id="exampleInputFile">
@@ -89,7 +101,7 @@
 									</div>
 									<div class="checkbox">
 										<label>
-											<input type="checkbox"> Check me out
+											<input type="checkbox"  id="signupInputAgree"> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 										</label>
 									</div>
 									<button type="submit" class="btn btn-default">Submit</button>
