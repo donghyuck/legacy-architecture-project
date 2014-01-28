@@ -49,8 +49,8 @@
 					});		
 				});						
 				
-				$(":button.logout").click( function(e) {
-					//$(this).button("로그아웃...");
+				$(":button.logout").click( function(e) {					
+					$(this).button("로그아웃...");
 					var text_danger = $(this).parent();
 					$.ajax({
 							type : 'GET',
