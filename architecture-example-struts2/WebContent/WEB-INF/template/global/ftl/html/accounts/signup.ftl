@@ -123,8 +123,8 @@
 								<div id="status"></div>
 								
 								<#if !action.user.anonymous >
-								<p class="text-danger">...
-								로그인 상태입니다.  <button type="button" class="btn btn-danger btn-sm logout">로그아웃</button>
+								<p class="text-danger">
+								<i class="fa fa-info"></i> 로그인 상태입니다.  <button type="button" class="btn btn-danger btn-sm logout">로그아웃</button>
 								</p>
 								</#if>
 								
