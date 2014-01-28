@@ -34,6 +34,8 @@ public interface SocialNetworkManager {
 	public abstract List<SocialNetwork> getSocialNetworks(User user);
 	
 	public abstract List<SocialNetwork> getSocialNetworks(int objectType, long objectId);
+	
+	public abstract List<SocialNetwork> getSocialNetworks(int objectType, String username);
 			
 	public abstract void saveSocialNetwork( SocialNetwork socialNetwork );	
 

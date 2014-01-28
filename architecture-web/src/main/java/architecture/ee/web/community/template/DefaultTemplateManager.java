@@ -62,11 +62,14 @@ public class DefaultTemplateManager extends AbstractModelManagerSupport implemen
 	}
 
 	public List<Template> getTemplate(Company company) {
-		return getTemplate(ModelTypeFactory.getTypeIdFromCode("COMPANY"), company.getCompanyId());
+		 List<Template> list = getTemplate(ModelTypeFactory.getTypeIdFromCode("COMPANY"), company.getCompanyId());
+		
+		 return list;
 	}
 
 	public List<Template> getTemplate(User user) {
-		return getTemplate(ModelTypeFactory.getTypeIdFromCode("USER"), user.getUserId());
+		List<Template> list = getTemplate(ModelTypeFactory.getTypeIdFromCode("USER"), user.getUserId());
+		return list;
 	}
 
 	public List<Template> getTemplate(int objectType, long objectId) {

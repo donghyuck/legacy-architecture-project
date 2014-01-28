@@ -32,12 +32,47 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	private String accessToken;
 	private String accessSecret ;
 	private boolean isSignedIn = false;
+	private boolean connected = false ;
+	private String username;
 	
-	private SocialServiceProvider serviceProvider;
+	
+	
+	/**
+	 * @return username
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param username 설정할 username
+	 */
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+
+	private SocialServiceProvider serviceProvider;	
 	
 	public SocailNetworkImpl() {
 		
 	}
+	
+	/**
+	 * @return connected
+	 */
+	public boolean isConnected() {
+		return connected;
+	}
+
+
+	/**
+	 * @param connected 설정할 connected
+	 */
+	public void setConnected(boolean connected) {
+		this.connected = connected;
+	}
+
 
 	public Serializable getPrimaryKeyObject() {
 		return socialAccountId;
@@ -157,11 +192,9 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	}
 
 	public int getModelObjectType() {
-		return ModelTypeFactory.getTypeIdFromCode("SOCAIL_ACCOUNT");
+		return ModelTypeFactory.getTypeIdFromCode("SOCIAL_NETWORK");
 	}
-	
-
-	
+		
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() 
 				+ CacheSizes.sizeOfLong() 
@@ -227,9 +260,8 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 			try {
 				return serviceProvider.getAuthorizationUrl();
 			} catch (Exception e) {
-				//e.printStackTrace();
 			}		
-		return null;
+		return "";
 	}
 
 }

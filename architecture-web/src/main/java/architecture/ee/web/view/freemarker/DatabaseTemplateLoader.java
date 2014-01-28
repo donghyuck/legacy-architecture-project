@@ -19,19 +19,21 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
+import java.util.Collections;
 import java.util.List;
+
+import net.sf.ehcache.Cache;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.MethodInvoker;
 
+import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
-
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.template.Template;
 import architecture.ee.web.community.template.TemplateManager;
-
 import freemarker.cache.FileTemplateLoader;
 /**
  * 
@@ -44,10 +46,12 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	
 	private static final boolean SEP_IS_SLASH = File.separatorChar == '/';
 	
+	private Cache templateListCache = null ;
+	
 	public DatabaseTemplateLoader() throws IOException {
 		super();
 	}
-
+	
 	public DatabaseTemplateLoader(File baseDir, boolean allowLinking) throws IOException {
 		super(baseDir, allowLinking);
 	}
@@ -100,22 +104,21 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				Object action = invoker.invoke();
 				if( action instanceof TemplateAware ){
 					Template template = ((TemplateAware)action).getTargetTemplate();
-					log.debug("##########################################CONTENT:" + template.getTitle() );
-					log.debug( name ); 
-					log.debug( template.getTitle() );
-					log.debug( template.getTemplateType() );
+					
+					if( log.isDebugEnabled() )
+						log.debug( name + " < compare > template from action:" + template.getTitle() + ", type=" + template.getTemplateType() + ", locaion=" + template.getLocation());
+					
 					if(  "ftl".equals(template.getTemplateType()) && name.contains(template.getLocation() ))
 						return template;
 				}
 			} catch (Exception e) {
 				log.warn(e);				
 			}
-			
-			log.debug("finding template in database .. : " + name );
-			TemplateManager templateManager = ApplicationHelper.getComponent(TemplateManager.class);			
-			List<Template> contents = templateManager.getTemplate(getCurrentCompany());
+
+			List<Template> contents = getCurrentCompanyTemplates();
 			for( Template template : contents){
-				log.debug( name + " - content: " + template.getTitle() + ", type:" + template.getTemplateType() + ", match:" + template.getLocation() .contains(name) );
+				if( log.isDebugEnabled() )
+					log.debug( name + "< compare > template from database :" + template.getTitle() + ", type:" + template.getTemplateType() + ", match:" + template.getLocation() .contains(name) );
 				if(  template.getLocation() .contains(name)){
 					return template;
 				}
@@ -125,7 +128,65 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		return super.findTemplateSource(nameToUse);
 	}
 	
+
+	/**
+	 * @return templateListCache
+	 */
+	public Cache getTemplateListCache() {
+		return templateListCache;
+	}
+
+
+
+	/**
+	 * @param templateListCache 설정할 templateListCache
+	 */
+	public void setTemplateListCache(Cache templateCache) {
+		this.templateListCache = templateCache;
+	}
 	
+	
+	protected boolean isCacheSet(){
+		
+		return templateListCache == null ? false : true;
+	}
+	
+	protected void initialize(){
+		
+		try {
+			templateListCache = ApplicationHelper.getComponent("templateListCache", Cache.class);
+			if(log.isDebugEnabled())
+				log.debug("cache setted.");
+		} catch (ComponentNotFoundException e) {
+			if(log.isDebugEnabled())
+				log.debug("no cache exist..");
+			templateListCache = null;
+		}
+		
+	}
+
+	
+	protected List<Template> getCurrentCompanyTemplates(){
+		List<Template> list = null;
+		Company targetCompany = getCurrentCompany();
+		
+		if(isCacheSet()){
+			net.sf.ehcache.Element item =  templateListCache.get(targetCompany.getCompanyId());
+			if( item != null ){
+				list = (List<Template>)item.getValue();
+			}		
+		}
+		
+		if( list == null ){
+			TemplateManager templateManager = ApplicationHelper.getComponent(TemplateManager.class);						
+			list = templateManager.getTemplate(targetCompany);			
+			if(isCacheSet()){
+				templateListCache.put(new net.sf.ehcache.Element( targetCompany.getCompanyId(), list ));
+			}
+		}
+		
+		return list ;
+	}
 	
 	protected final String getCustomizedTemplateFileName(String name){
 		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;		
@@ -146,7 +207,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	}
 	
 	protected final Company getCurrentCompany(){
-		return SecurityHelper.getUser().getCompany();		
+		return SecurityHelper.getUser().getCompany();
 	}
 
 }

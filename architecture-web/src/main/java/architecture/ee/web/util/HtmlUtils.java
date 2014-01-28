@@ -18,6 +18,8 @@ package architecture.ee.web.util;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 public class HtmlUtils {
 
     public static String getStackTrace(Throwable t)
@@ -37,4 +39,14 @@ public class HtmlUtils {
     {
         return PlainTextToHtmlConverter.encodeHtmlEntities(text);
     }
+    
+	public static String objectToJson(Object obj) {
+		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+		try {
+			return mapper.writeValueAsString(obj);
+		} catch (JsonProcessingException e) {
+			return null;
+		}
+
+	}
 }
