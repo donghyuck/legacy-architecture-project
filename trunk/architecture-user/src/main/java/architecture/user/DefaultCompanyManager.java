@@ -186,7 +186,9 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 		
 		return list;
 	}
-
+	
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void updateCompany(Company company) throws CompanyNotFoundException,
 			CompanyAlreadyExistsException {
 		
