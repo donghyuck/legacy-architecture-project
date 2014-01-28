@@ -28,6 +28,24 @@
 
 				$('#signup-window').modal({show:true, backdrop:false});
 
+				$("#signup-window button:custom-social-groups").each(function( index ) {
+					var external_button = $(this);
+					external_button.click(function (e){																												
+						var target_media = external_login_button.attr("data-target");
+						$.ajax({
+							type : 'POST',
+							url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/get-socialnetwork.do?output=json",
+							data: { media: target_media },
+							success : function(response){
+								if( response.error ){
+									// 연결실패.
+								} else {	
+									window.open( response.authorizationUrl + '&display=popup' ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+								}
+							},
+							error:handleKendoAjaxError												
+					});	
+				});						
 				// END SCRIPT            
 			}
 		}]);	
@@ -51,7 +69,6 @@
 				</div>
 				 -->
 		</div>
-
 
 	<!-- Modal -->
 	<div class="modal fade" id="signup-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
