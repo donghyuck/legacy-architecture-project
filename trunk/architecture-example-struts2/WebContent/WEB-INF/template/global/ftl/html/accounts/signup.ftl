@@ -48,7 +48,7 @@
 					});		
 				});						
 				
-				$("#signupInputName").focus();
+				$("#form :input:visible:enabled:first").focus();
 				
 				// END SCRIPT            
 			}
