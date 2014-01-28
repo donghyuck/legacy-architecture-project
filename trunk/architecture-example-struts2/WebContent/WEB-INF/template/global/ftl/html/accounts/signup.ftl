@@ -13,6 +13,9 @@
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
+			'${request.contextPath}/js/common/common.cbpBGSlideshow.min.js',
+			'${request.contextPath}/js/jquery.imagesloaded/imagesloaded.min.js',
+			'${request.contextPath}/js/common/modernizr.custom.js',			
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
@@ -21,6 +24,7 @@
 				kendo.culture("ko-KR");
 				      
 				// START SCRIPT	
+				cbpBGSlideshow.init();
 
 				// END SCRIPT            
 			}
@@ -31,6 +35,19 @@
 		</style>   	
 	</head>
 	<body>
-
+		<div class="main">
+			<ul id="cbp-bislideshow" class="cbp-bislideshow">
+				<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/download-image.do?imageId=175" alt="image01"/></li>
+				<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/download-image.do?imageId=808" alt="image02"/></li>
+				<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/download-image.do?imageId=810" alt="image03"/></li>
+			</ul>
+				<!-- 
+				<div id="cbp-bicontrols" class="cbp-bicontrols">
+					<span class="fa cbp-biprev"></span>
+					<span class="fa cbp-bipause"></span>
+					<span class="fa cbp-binext"></span>
+				</div>
+				 -->
+		</div>
 	</body>    
 </html>
