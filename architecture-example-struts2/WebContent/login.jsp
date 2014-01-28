@@ -28,12 +28,14 @@
 			$("#login").click( function() {           		    	
 				doLogin();
 			});          
+			$("#signup").click( function() {           		    	
+				$("form[name='fm1']").attr("action", "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do").submit();
+			});    
 			
 			$('#login-window').modal({show:true, backdrop:false});
 			
 			$('#login-window').on('hidden.bs.modal', function () {
 				$("form[name='fm1']")[0].reset();               	   
-				// referer 
 				$("form[name='fm1']").attr("action", "/main.do").submit();
 			});
 			
@@ -196,7 +198,7 @@
 			<div class="modal-footer">
 				<div class="btn-group ">
 					<button type="button" class="btn btn-default" >아이디/비밀번호찾기</button>
-					<button type="button" class="btn btn-default">회원가입</button>
+					<button id="signup"  type="button" class="btn btn-default">회원가입</button>
 				</div>
 					<button id="login" type="button" class="btn btn-primary">로그인</button>
 				</div>
