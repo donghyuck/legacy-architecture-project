@@ -82,7 +82,7 @@
 				homepage();					
 			}else{
 				alert(
-					kendo.stringify( data );
+					kendo.stringify( data )
 				);
 			}
 		}
