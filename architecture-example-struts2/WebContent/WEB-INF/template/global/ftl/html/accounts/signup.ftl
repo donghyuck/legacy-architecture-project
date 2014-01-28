@@ -52,7 +52,7 @@
 					var text_danger = $(this).parent();
 					text_danger.remove();
 					
-					$(":fieldset").each(function( index ) {					
+					$("fieldset").each(function( index ) {					
 						$(this).removeAttr("disabled"); 
 					});
 					
