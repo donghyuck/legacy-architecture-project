@@ -497,7 +497,7 @@
 			</li>
 			<li class="divider"></li>
 			<li><a href="\\#">아이디/비밀번호찾기</a></li>
-			<li><a href="\\#">회원가입</a></li>
+			<li><a href="${request.contextPath}/accounts/signup.do">회원가입</a></li>
 			# } #
 		</ul>
 	</div>			
