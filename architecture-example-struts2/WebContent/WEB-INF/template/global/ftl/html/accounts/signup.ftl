@@ -76,7 +76,7 @@
 		function signupCallbackResult( data  ){
 			if( data == null ){
 				$("#status").kendoAlert({ 
-					data : { message : "이미가입된 계정입니다." }
+					data : { message : "이미가입된 계정입니다. 자동으로 로그인 됩니다." }
 				});
 			}else{
 				
@@ -125,16 +125,19 @@
 								</div>
 							</fieldset>		
 						</div>	
-						<div class="row blank-top-15">
-							<div class="col-sm-5">
-								<div id="status"></div>
-								
+						<div class="row blank-top-5 ">
+							<div class="col-sm-12">
+								<div id="status"></div>								
 								<#if !action.user.anonymous >
 								<p class="text-danger">
 								<i class="fa fa-info"></i> 로그인 상태입니다.  <button type="button" data-loading-text="로그아웃중 ..." class="btn btn-danger btn-sm logout">로그아웃</button>
 								</p>
-								</#if>
-								
+								</#if>								
+							</div>
+						</div>
+						<div class="row blank-top-15">
+							<div class="col-sm-5">
+							
 							</div>
 							<div class="col-sm-7">
 								<form role="form">
