@@ -16,6 +16,7 @@
 			complete: function() {				
 			<#if action.user.anonymous >
 				<#if action.findUser()?exists >								
+				
 				if(typeof window.opener.handleSocialCallbackResult != "undefined"){
 					window.opener.handleSocialCallbackResult(${action.signIn()?string("true","false")});							
 				}else{
@@ -29,8 +30,10 @@
 			<#else>					
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
+					
 				}else if( window.opener.location.href.indexOf("/accounts/") > -1  ){
-					// 로그인 모드..
+					// 로그인/회원가입 모드..
+					
 				}else{			
 					// 프로파일 수정 모드	
 					var success = false;			
