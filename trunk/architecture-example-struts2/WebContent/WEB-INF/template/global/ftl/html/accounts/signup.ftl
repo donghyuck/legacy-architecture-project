@@ -44,7 +44,8 @@
 								}
 							},
 							error:handleKendoAjaxError												
-					});	
+						});
+					});		
 				});						
 				// END SCRIPT            
 			}
