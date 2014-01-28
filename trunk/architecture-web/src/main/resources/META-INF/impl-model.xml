@@ -15,7 +15,7 @@
 	<model id="16" code="IMAGE" />
 	<model id="17" code="ATTACHMENT" />
 	<model id="18" code="MENU" />
-	<model id="19" code="SOCAIL_ACCOUNT" />
+	<model id="19" code="SOCIAL_NETWORK" />
 	<model id="20" code="CONTENT" />
 	<model id="21" code="TEMPLATE" />
 	<model id="22" code="ANNOUNCE" />

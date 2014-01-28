@@ -15,11 +15,15 @@
  */
 package architecture.ee;
 
-import java.util.List;
+import java.util.Date;
 
-import architecture.ee.web.community.social.twitter.MediaEntity;
-import architecture.ee.web.community.social.twitter.Tweet;
-import architecture.ee.web.community.social.twitter.TwitterProfile;
+import org.junit.Test;
+
+import architecture.ee.web.community.social.SocialNetwork;
+import architecture.ee.web.community.social.SocialNetwork.Media;
+import architecture.ee.web.community.social.SocialServiceProvider;
+import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
+import architecture.ee.web.community.social.impl.SocailNetworkImpl;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 
 public class TwitterTest {
@@ -28,10 +32,59 @@ public class TwitterTest {
 		// TODO 자동 생성된 생성자 스텁
 	}
 
+	private  SocialServiceProvider createSocialServiceProvider(Media media){		
+		SocialServiceProvider provider = null;				
+		if(media == SocialNetwork.Media.TWITTER){					
+			String callbackUrl = "http://222.122.63.147/community/twitter-callback.do";
+			if( callbackUrl!=null ){
+				provider = new TwitterServiceProvider(
+					"4XebpD1MW3CQ8Koh7naQpg",
+					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
+					callbackUrl
+				);
+			}else{
+				provider = new TwitterServiceProvider(
+					"4XebpD1MW3CQ8Koh7naQpg",
+					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
+				);
+			}					
+		}else if ( media == SocialNetwork.Media.FACEBOOK){		
+			String callbackUrl = "http://222.122.63.147/community/facebook-callback.do";
+			String scope = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
+			provider = new FacebookServiceProvider(
+					"251365428350280",
+					"704f08c943c6dfdba328e08a10550d38",							
+					callbackUrl,
+					scope
+			);			
+		}	
+		return provider;
+	} 
+	
+	public SocialNetwork createSocialNetwork(Media media) {
+		SocailNetworkImpl impl = new SocailNetworkImpl(); 
+		Date now = new Date();		
+		impl.setCreationDate(now);
+		impl.setModifiedDate(now);
+		impl.setObjectType(2);
+		impl.setObjectId(2);
+		impl.setServiceProviderName(media.name().toLowerCase());
+		impl.setSocialAccountId(-1L);		
+		impl.setSocialServiceProvider(createSocialServiceProvider(media));	
+		return impl;
+	}
+	
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	@Test
+	public void twitter() {
+		TwitterTest tt = new TwitterTest();
+		SocialNetwork sn = tt.createSocialNetwork(Media.TWITTER);
+		sn.getSocialServiceProvider().setAccessSecret(null);
+		sn.getSocialServiceProvider().setAccessToken(null);
+		System.out.println( sn.getAuthorizationUrl() ) ;
+		/**
 		TwitterServiceProvider provider = new TwitterServiceProvider(
 			"4XebpD1MW3CQ8Koh7naQpg",
 			"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
@@ -62,6 +115,7 @@ public class TwitterTest {
 			}			
 			System.out.println("------------------------------");
 		}
+		**/
 	}
 
 }
