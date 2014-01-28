@@ -88,16 +88,13 @@
 			}
 		}
 		
-		function hompage(){
+		function homepage(){
 			$("form[name='fm1']")[0].reset();               	   
 			$("form[name='fm1']").attr("action", "/main.do").submit();				
 		}
 				
 		-->
-		</script>		
-		<style>   
-		
-		</style>   	
+		</script>
 	</head>
 	<body>
 		<div class="main">
