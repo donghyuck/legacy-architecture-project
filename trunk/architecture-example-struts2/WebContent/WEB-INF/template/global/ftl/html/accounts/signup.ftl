@@ -53,7 +53,7 @@
 							type : 'GET',
 							url : "${request.contextPath}/logout?output=json",
 							success : function(response){
-								alert( stringify(response) );
+								alert( kendo.stringify(response) );
 							},
 							error:handleKendoAjaxError												
 						});				
