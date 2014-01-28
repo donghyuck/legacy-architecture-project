@@ -49,5 +49,11 @@
 				</div>
 				 -->
 		</div>
+		<div  class="container" style="min-height:600px;">		
+			<div class="row">
+				<div class="col-lg-6"></div>
+				<div class="col-lg-6"></div>
+			</div>		
+		</div>			
 	</body>    
 </html>
