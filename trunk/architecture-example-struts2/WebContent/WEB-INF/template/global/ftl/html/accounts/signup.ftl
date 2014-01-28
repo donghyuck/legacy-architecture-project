@@ -30,7 +30,8 @@
 
 				$("#signup-window button.custom-social-groups").each(function( index ) {
 					var external_button = $(this);
-					external_button.click(function (e){																												
+					external_button.click(function (e){	
+						$("#status").html("");																																
 						var target_media = external_button.attr("data-target");
 						$.ajax({
 							type : 'POST',
