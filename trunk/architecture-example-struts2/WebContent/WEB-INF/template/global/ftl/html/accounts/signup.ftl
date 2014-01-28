@@ -34,7 +34,7 @@
 						var target_media = external_login_button.attr("data-target");
 						$.ajax({
 							type : 'POST',
-							url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/get-socialnetwork.do?output=json",
+							url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
 							data: { media: target_media },
 							success : function(response){
 								if( response.error ){
