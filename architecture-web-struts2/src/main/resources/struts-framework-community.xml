@@ -33,29 +33,6 @@
 
 	</package>	
 
-	<!--  COMMUNITY MANAGEMENT ACTIONS -->
-	<package name="framework-community-admin-actions" namespace="/secure" extends="framework-default">	
-		<!--  contents  -->
-		<action name="list-template" class="architecture.ee.web.community.struts2.action.admin.ajax.TemplateManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param> 		    
-				<param name="includeProperties">
-				targetTemplates.*, totalTargetTemplateCount
-				</param>
-			</result>
-		</action>
-		<action name="get-template" class="architecture.ee.web.community.struts2.action.admin.ajax.TemplateManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">
-				targetTemplate.*
-				</param>
-			</result>
-		</action>				
-	</package>	
-
 	<!--  COMMUNITY USER ACTIONS -->	
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
 

@@ -207,7 +207,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
 	</dependencies>
 
 	<distributionManagement>
