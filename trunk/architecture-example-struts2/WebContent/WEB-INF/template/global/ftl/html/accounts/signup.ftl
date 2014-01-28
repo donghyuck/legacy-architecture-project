@@ -122,7 +122,7 @@
 							<div class="col-sm-5">
 								<div id="status"></div>
 								
-								<#if action.user.anonymous >
+								<#if !action.user.anonymous >
 								<span class="label label-warning"><%= action.user.username %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm logout">로그아웃</button><br/>
 								</#if>
 								
