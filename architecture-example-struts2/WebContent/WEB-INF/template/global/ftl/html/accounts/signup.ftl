@@ -50,23 +50,18 @@
 				
 				$(":button.logout").click( function(e) {
 					var text_danger = $(this).parent();
-					text_danger.remove();
-					
-					$("fieldset").each(function( index ) {					
-						$(this).removeAttr("disabled"); 
-					});
-					
-					
-					/**
 					$.ajax({
 							type : 'GET',
 							url : "${request.contextPath}/logout?output=json",
 							success : function(response){
 								text_danger.remove();
+								$("fieldset").each(function( index ) {					
+									$(this).removeAttr("disabled"); 
+								});
+								$("#form :input:visible:enabled:first").focus();
 							},
 							error:handleKendoAjaxError												
-					});
-					*/				
+					});						
 				} );
 				
 				$("#form :input:visible:enabled:first").focus();
