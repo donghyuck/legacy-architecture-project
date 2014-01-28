@@ -57,7 +57,9 @@
 		
 		function signupCallbackResult( data  ){
 			if( data == null ){
-				alert( "이미 가입되어 있는 사용자 계정입니다." );
+				$("#status").kendoAlert({ 
+					data : { message : "이미가입된 " }
+				});
 			}else{
 				
 			}
@@ -105,7 +107,7 @@
 						</div>	
 						<div class="row blank-top-15">
 							<div class="col-sm-5">
-							
+								<div id="status"></div>
 							</div>
 							<div class="col-sm-7">
 								<form role="form">
