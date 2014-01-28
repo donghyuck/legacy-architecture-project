@@ -48,6 +48,17 @@
 					});		
 				});						
 				
+				$(" button.logout").click( function(e) {
+					$.ajax({
+							type : 'GET',
+							url : "${request.contextPath}/logout?output=json",
+							success : function(response){
+								alert( stringify(response) );
+							},
+							error:handleKendoAjaxError												
+						});				
+				} );
+				
 				$("#form :input:visible:enabled:first").focus();
 				
 				// END SCRIPT            
@@ -98,16 +109,23 @@
 				<div class="modal-body">
 					<div class="container" style="width:100%;">
 						<div class="row blank-top-5 ">
+							<fieldset <#if !action.user.anonymous >disabled</#if>>
 								<div class="col-sm-6">
-									<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook" <#if !action.user.anonymous >disabled</#if>><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
+									<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
 								</div>
 								<div class="col-sm-6">
-									<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter" <#if !action.user.anonymous >disabled</#if>><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
+									<button class="btn btn-block btn-info btn-lg custom-social-groups" data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 회원가입</button>
 								</div>
+							</fieldset>		
 						</div>	
 						<div class="row blank-top-15">
 							<div class="col-sm-5">
 								<div id="status"></div>
+								
+								<#if action.user.anonymous >
+								<span class="label label-warning"><%= action.user.username %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm logout">로그아웃</button><br/>
+								</#if>
+								
 							</div>
 							<div class="col-sm-7">
 								<form role="form">
