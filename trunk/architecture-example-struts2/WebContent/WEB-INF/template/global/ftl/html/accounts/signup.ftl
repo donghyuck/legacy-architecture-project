@@ -81,7 +81,9 @@
 			if( data == null ){
 				homepage();					
 			}else{
-				
+				alert(
+					kendo.stringify( data );
+				);
 			}
 		}
 		
