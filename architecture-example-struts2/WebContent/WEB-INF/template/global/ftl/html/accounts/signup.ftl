@@ -134,24 +134,22 @@
 					</fieldset>		
 				</div>
 				<div class="modal-body">
-					<div class="container" style="width:100%;">
-						<div class="row blank-top-5 ">
+						<div class="row">
 							<div class="col-sm-12">
 								<div id="status"></div>								
 								<#if !action.user.anonymous >
 								<p class="text-danger">
 								<i class="fa fa-info"></i> 현재 로그인 상태입니다.  
 								<div class="btn-group ">
-								<button type="button" class="btn btn-info btn-sm homepage" >홈페이지</button>
-								<button type="button" data-loading-text="로그아웃중 ..." class="btn btn-danger btn-sm logout">로그아웃</button>								
+									<button type="button" class="btn btn-info btn-sm homepage" >홈페이지 이동</button>
+									<button type="button" data-loading-text="로그아웃중 ..." class="btn btn-danger btn-sm logout">로그아웃</button>								
 								</div>
 								</p>
 								</#if>								
 							</div>
-						</div>
+						</div>	
 						<div class="row blank-top-15">
-							<div class="col-sm-5">							
-							</div>
+							<div class="col-sm-5"></div>
 							<div class="col-sm-7">
 								<form role="form" name="fm1" method="POST" accept-charset="utf-8">
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
@@ -184,7 +182,6 @@
 								</form>
 							</div>
 						</div>
-					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-info" >확인</button>
