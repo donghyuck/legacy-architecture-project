@@ -49,7 +49,7 @@
 				});						
 				
 				$(":button.logout").click( function(e) {
-					vat text_danger = $(this).parent();
+					var text_danger = $(this).parent();
 					text_danger.remove();
 					/**
 					$.ajax({
