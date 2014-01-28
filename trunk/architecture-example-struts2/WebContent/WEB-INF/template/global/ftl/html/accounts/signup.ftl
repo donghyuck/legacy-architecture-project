@@ -76,7 +76,9 @@
 								<form role="form">
 									<div class="form-group">
 										<label for="signupInputName">이름</label>
+										<div class="col-lg-4">
 										<input type="text" class="form-control" id="signupInputName" placeholder="이름">
+										</div>
 									</div>
 									<div class="form-group">
 										<label for="signupInputUsername">아이디</label>
@@ -113,13 +115,13 @@
 									<input type="hidden" id="output" name="output" value="json" />		    
 									<div class="form-group">
 										<label for="username" class="col-lg-3 control-label">아이디</label>
-										<div class="col-lg-9">
+										<div class="col-lg-4">
 											<input type="text" class="form-control"  id="username" name="username"  pattern="[^0-9][A-Za-z]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요.">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="password" class="col-lg-3 control-label">비밀번호</label>
-										<div class="col-lg-9">
+										<div class="col-lg-4">
 											<input type="password" class="form-control" id="password" name="password"  placeholder="비밀번호" required validationMessage="비밀번호를 입력하여 주세요." >
 										</div>
 									</div>
