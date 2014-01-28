@@ -48,7 +48,7 @@
 					});		
 				});						
 				
-				$(" button.logout").click( function(e) {
+				$(":button.logout").click( function(e) {
 					$.ajax({
 							type : 'GET',
 							url : "${request.contextPath}/logout?output=json",
