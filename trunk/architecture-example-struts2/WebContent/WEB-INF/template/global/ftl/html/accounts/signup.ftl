@@ -52,11 +52,11 @@
 		}]);	
 		
 		
-		function handleSocialCallbackResult( success ){
-			if( success ){
-				
+		function signupCallbackResult( data  ){
+			if( data == null ){
+				alert( "이미 가입되어 있는 사용자 계정입니다." );
 			}else{
-				alert( "인증에 실패하였습니다." );
+				
 			}
 		}
 				
