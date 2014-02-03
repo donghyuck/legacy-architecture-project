@@ -84,7 +84,10 @@
 						}
 					},
 					messages: {
-						verifyPasswords : "비밀번호가 일치하지 않습니다."
+						verifyPasswords : "비밀번호가 일치하지 않습니다.",
+						userNameAvailable : function( input ) {
+							return "확인중..."
+						}
 					},
 					validateOnBlur : false
 				});
