@@ -105,6 +105,8 @@
 				$("#signup-form :input").each(function( index ) {
 				
 					var input_to_use = $(this);
+					var inputs = input_to_use.parents("form").eq(0).find(":input");
+					
 					input_to_use.focusout(function(){
 						if( validator.validateInput( input_to_use ) ){
 							input_to_use.parent().addClass("has-success");
@@ -112,7 +114,12 @@
 							input_to_use.parent().addClass("has-error");
 						}
 					});
-					
+					input_to_use.keydown(function(e) {
+						var keycode = (event.keyCode ? event.keyCode : event.which);
+						if(keycode == '13'){
+							inputs[index+1].focus();
+						}
+					});
 				});				
 					
 				$(":button.logout").click( function(e) {					
