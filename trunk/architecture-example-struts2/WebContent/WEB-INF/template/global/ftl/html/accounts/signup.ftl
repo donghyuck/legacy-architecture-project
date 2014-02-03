@@ -79,8 +79,9 @@
 										data: { username: input.val() },
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
-												validatorPlaceHolder.set( input_id, response.usernameAvailable );									
 												alert("SSSS");			
+												validatorPlaceHolder.set( input_id, response.usernameAvailable );									
+												
 												if( validator.validateInput(input) ){
 													input.parent().addClass("has-success");
 												}
