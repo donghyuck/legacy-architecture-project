@@ -55,6 +55,13 @@
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					validate: function(e){
 						alert( e.valid) ;
+					},
+					rules : {
+						custom: function(input) {
+							alert( input.html() );
+							
+							return true;
+						}
 					}
 				});
 				
