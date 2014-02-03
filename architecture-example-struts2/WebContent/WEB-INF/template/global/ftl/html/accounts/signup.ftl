@@ -60,6 +60,25 @@
 								ret = input.val() === $("#signupInputPassword1").val();
 							}
 							return ret;
+						},
+						userNameAvailable: function(input){
+							var validate = input.data('available');
+							if (typeof validate !== 'undefined' && validate !== false) {
+								$.ajax({
+									type : 'POST',
+									url : "${request.contextPath}/accounts/check-username-available.do?output=json",
+									dataType: 'json',
+									data: { usernameOrEmail: input.val() },
+									success : function(response){
+																		
+									alert( kendo.stringify( response ) );
+									
+									},
+									error:handleKendoAjaxError				
+								});
+								return false;
+							}
+							return true;
 						}
 					},
 					messages: {
