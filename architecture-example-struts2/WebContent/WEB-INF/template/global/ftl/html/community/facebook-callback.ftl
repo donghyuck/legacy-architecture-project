@@ -28,6 +28,7 @@
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
 					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 					window.opener.signupCallbackResult("facebook", {
+						media: "facebook",
 						id: profile.id,
 						firstName: profile.firstName,
 						lastName: profile.lastName,
