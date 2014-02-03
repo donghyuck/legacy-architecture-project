@@ -221,7 +221,7 @@
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
-											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" required data-required-msg="아이디를 입력하여 주십시오." >
+											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" data-available  required data-required-msg="아이디를 입력하여 주십시오." >
 											 <span data-for="RetireDate"></span>
 										</div>									
 										<div class="form-group">
