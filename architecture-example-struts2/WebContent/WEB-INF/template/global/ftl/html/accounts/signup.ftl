@@ -51,6 +51,7 @@
 				
 				$("#signup-form :input:visible:enabled:first").focus();
 				
+				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
 				$("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
@@ -64,21 +65,28 @@
 						userNameAvailable: function(input){
 							var validate = input.data('available');
 							if (typeof validate !== 'undefined' && validate !== false) {
-								$.ajax({
-									type : 'POST',
-									url : "${request.contextPath}/accounts/check-username-available.do?output=json",
-									dataType: 'json',
-									data: { username: input.val() },
-									success : function(response){									
-										if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
-											return true;
-										}
-										return false;
-									},
-									error: function(){
-										return false;
-									}
-								});
+							
+								var validatorPlaceHolder = $("#signup-form").data("validatorPlaceHolder");
+								var input_id = input.attr('id');
+								var available_cache= validatorPlaceHolder.get(input_id);
+								
+								if( available_cache == null ){
+									$.ajax({
+										type : 'POST',
+										url : "${request.contextPath}/accounts/check-username-available.do?output=json",
+										dataType: 'json',
+										data: { username: input.val() },
+										success : function(response){									
+											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
+												available_cache.put( input_id, response.usernameAvailable );
+												validator.validateInput($(input_id));
+											}											
+										},
+										error: error:handleKendoAjaxError
+									});	
+								}else{
+									return available_cache;
+								}
 							}
 							return true;
 						}
