@@ -67,8 +67,10 @@
 								var validatorPlaceHolder = $("#signup-form").data("validatorPlaceHolder");
 								var input_id = input.attr('id');
 								var available_cache= validatorPlaceHolder.get(input_id);						
-								alert(available_cache); 		
-								if( available_cache == null ){
+	
+								if( typeof available_cache !== 'undefined' ){
+									return available_cache;
+								}else{
 									$.ajax({
 										type : 'POST',
 										url : "${request.contextPath}/accounts/check-username-available.do?output=json",
@@ -83,8 +85,6 @@
 										},
 										error:handleKendoAjaxError
 									});	
-								}else{
-									return available_cache;
 								}
 							}
 							return true;
