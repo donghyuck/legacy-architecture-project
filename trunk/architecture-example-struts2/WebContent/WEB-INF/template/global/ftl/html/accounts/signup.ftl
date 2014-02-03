@@ -176,7 +176,7 @@
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
 						var valid = validator.validateInput( input_to_use ) ;
-						alert( valid ) ;
+					//	alert( valid ) ;
 						if(valid ){
 							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().addClass("has-success");
