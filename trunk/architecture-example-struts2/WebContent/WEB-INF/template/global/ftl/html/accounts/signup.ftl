@@ -66,8 +66,9 @@
 							var validate = input.data('available');
 							if (typeof validate !== 'undefined' && validate !== false) {							
 								var validatorPlaceHolder = $("#signup-form").data("validatorPlaceHolder");
-								var input_id = input.attr('id');
-								var available_cache= validatorPlaceHolder.get(input_id);						
+								//var input_id = input.attr('id');
+								
+								var available_cache= validatorPlaceHolder.get(input.val() );						
 	
 								if( typeof available_cache !== 'undefined' ){
 									return available_cache;
@@ -80,7 +81,7 @@
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
 												alert("SSSS");			
-												validatorPlaceHolder.set( input_id, response.usernameAvailable );									
+												validatorPlaceHolder.set( input.val(), response.usernameAvailable );									
 												
 												if( validator.validateInput(input) ){
 													input.parent().addClass("has-success");
