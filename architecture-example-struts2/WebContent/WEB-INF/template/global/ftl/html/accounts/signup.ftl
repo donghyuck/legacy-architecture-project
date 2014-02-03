@@ -115,6 +115,7 @@
 					var input_to_use = $(this);
 					var inputs = input_to_use.parents("form").eq(0).find(":input");					
 					input_to_use.focusout(function(){
+					alert(validator.validateInput( input_to_use ) );
 						if( validator.validateInput( input_to_use ) ){
 							input_to_use.parent().addClass("has-success");
 						}else{
