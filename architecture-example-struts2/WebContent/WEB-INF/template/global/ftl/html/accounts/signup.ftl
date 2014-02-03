@@ -82,7 +82,7 @@
 				$(":button.signup").click( function(e) {					
 					var validatable = $("#signup-form").data("kendoValidator");
 					
-					$("#signup-form :input:visible:enabled").each( function() {
+					$("#signup-form :input").each( function() {
 						var _input = $(this);
 						if( validatable.validateInput( _input ) ){
 							_input.parent().addClass("has-success");
