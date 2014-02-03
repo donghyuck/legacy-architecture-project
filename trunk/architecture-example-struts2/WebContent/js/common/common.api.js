@@ -5,7 +5,7 @@
 	var common = window.common = window.common || {};
 	common.apis = {};
 	
-	common.apis.getTargetCompany =  function (url, options){	    
+	common.apis.getTargetCompany =  function (url, options){
 		if (typeof url === "object") {
 	        options = url;
 	        url = undefined;
@@ -27,13 +27,13 @@
 			error:options.error || handleKendoAjaxError,
 			dataType : "json"
 		});	
-	};			
-	
-	common.apis.toUser(Object data){
-		User user = new User();
-		user.username = data.
-	} 
-	
+	};				
 })(jQuery);
 
+;(function($, undefined) {
+	var common = window.common = window.common || {};	
+	common.api = {};
+	
 
+	
+})(jQuery);
