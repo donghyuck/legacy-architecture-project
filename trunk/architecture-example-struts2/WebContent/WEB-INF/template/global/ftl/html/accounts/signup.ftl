@@ -81,7 +81,7 @@
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
 												validatorPlaceHolder.set( input_id, response.usernameAvailable );												
 												var validator = $("#signup-form").data("kendoValidator");		
-												alert("--------------") ;
+												alert("--------------" +  response.usernameAvailable ) ;
 												validator.validateInput($(input_id));
 											}											
 										},
