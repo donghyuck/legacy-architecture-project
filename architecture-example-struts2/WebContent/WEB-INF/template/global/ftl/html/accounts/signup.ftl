@@ -53,9 +53,6 @@
 				
 				$("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
-					rules: {
-						custom
-					},
 					validate: function(e){
 						alert( e.valid) ;
 					}
