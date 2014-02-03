@@ -62,16 +62,16 @@
 					$(this).button("로그아웃...");
 					var text_danger = $(this).parent().parent();
 					$.ajax({
-							type : 'GET',
-							url : "${request.contextPath}/logout?output=json",
-							success : function(response){
-								text_danger.remove();
-								$("fieldset").each(function( index ) {					
-									$(this).removeAttr("disabled"); 
-								});
-								$("#form :input:visible:enabled:first").focus();
-							},
-							error:handleKendoAjaxError												
+						type : 'GET',
+						url : "${request.contextPath}/logout?output=json",
+						success : function(response){
+							text_danger.remove();
+							$("fieldset").each(function( index ) {					
+								$(this).removeAttr("disabled"); 
+							});
+							$("#form :input:visible:enabled:first").focus();
+						},
+						error:handleKendoAjaxError												
 					});						
 				} );
 				
