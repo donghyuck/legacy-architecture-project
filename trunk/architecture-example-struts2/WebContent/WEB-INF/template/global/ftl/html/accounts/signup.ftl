@@ -82,7 +82,9 @@
 												validatorPlaceHolder.set( input_id, response.usernameAvailable );												
 												var validator = $("#signup-form").data("kendoValidator");		
 												alert("--------------" +  response.usernameAvailable  ) ;
-												validator.validateInput(input);
+												if( validator.validateInput(input) ){
+													input.parent().addClass("has-success");
+												}
 											}											
 										},
 										error:handleKendoAjaxError
