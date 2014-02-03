@@ -164,7 +164,7 @@
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
-											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소" data-bind="value: email" required validationMessage="{0}을 입력하세요." data-email-msg="메일 형식이 올바르지 않습니다.">
+											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소" data-bind="value: email" required validationMessage="메일주소을 입력하세요." data-email-msg="메일 형식이 올바르지 않습니다.">
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword1">비밀번호</label>
