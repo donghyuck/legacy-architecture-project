@@ -49,7 +49,7 @@
 					});		
 				});						
 				
-				$("#signup-form :input:visible:enabled:first").focus();				
+				$("#signup-form :input:visible:enabled:first").select();				
 				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
 				
 				var validator = $("#signup-form").kendoValidator({
