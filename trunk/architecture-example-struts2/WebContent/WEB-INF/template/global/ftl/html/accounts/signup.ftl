@@ -90,9 +90,6 @@
 					var validatable = $("#signup-form").data("kendoValidator");
 					if (validatable.validate() === false ) {
 						var errors = validatable.errors();
-						$(errors).each(function() {
-							alert( this );			
-						} );
 					}					
 				});
 				
