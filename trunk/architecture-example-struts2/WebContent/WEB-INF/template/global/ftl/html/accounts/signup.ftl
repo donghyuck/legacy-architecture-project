@@ -118,8 +118,7 @@
 				$("#signup-form :input").each(function( index ) {				
 					var input_to_use = $(this);
 					var inputs = input_to_use.parents("form").eq(0).find(":input");					
-					input_to_use.focusout(function(){
-					
+					input_to_use.focusout(function(){					
 						if( validator.validateInput( input_to_use ) ){
 							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().addClass("has-success");
@@ -161,12 +160,19 @@
 				
 				$(":button.homepage").click( function(e) {					
 					homepage();					
-				} );				
-				
+				} );								
 				
 				$(":button.signup").click( function(e) {					
-									
-					
+					$("#signup-form :input").each(function( index ) {				
+						var input_to_use = $(this);
+						if( validator.validateInput( input_to_use ) ){
+							input_to_use.parent().removeClass("has-error");
+							input_to_use.parent().addClass("has-success");
+						}else{
+							input_to_use.parent().removeClass("has-success");
+							input_to_use.parent().addClass("has-error");
+						}
+					});			
 				});				
 				// END SCRIPT            
 			}
