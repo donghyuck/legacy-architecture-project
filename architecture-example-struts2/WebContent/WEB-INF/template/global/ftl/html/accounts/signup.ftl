@@ -179,11 +179,11 @@
 						<div class="row blank-top-15">
 							<div class="col-sm-5"></div>
 							<div class="col-sm-7">
-								<form role="form" id="signup-form" name="fm1" method="POST" accept-charset="utf-8" novalidate="novalidate">
+								<form role="form" id="signup-form" name="fm1" method="POST" accept-charset="utf-8" >
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
-											<input type="text" class="form-control" id="signupInputName" name="signupInputName" placeholder="이름" data-bind="value: name" required>
+											<input type="text" class="form-control" id="signupInputName" name="signupInputName" placeholder="이름" data-bind="value: name">
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
