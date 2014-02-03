@@ -75,7 +75,7 @@
 										data: { username: input.val() },
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
-												available_cache.put( input_id, response.usernameAvailable );												
+												validatorPlaceHolder.set( input_id, response.usernameAvailable );												
 												var validator = $("#signup-form").data("kendoValidator");		
 												validator.validateInput($(input_id));
 											}											
