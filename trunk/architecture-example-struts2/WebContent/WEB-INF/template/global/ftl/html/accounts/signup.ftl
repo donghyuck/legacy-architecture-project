@@ -115,8 +115,12 @@
 						}
 					});
 					input_to_use.keydown(function(e) {
-						var keycode = (event.keyCode ? event.keyCode : event.which);
-						if(keycode == '13'){
+						var keycode = (event.keyCode ? event.keyCode : event.which);						
+						if(keycode == '13'){						
+							if( index+1 == inputs.length){
+								alert("1");
+							}
+							
 							inputs[index+1].focus();
 						}
 					});
