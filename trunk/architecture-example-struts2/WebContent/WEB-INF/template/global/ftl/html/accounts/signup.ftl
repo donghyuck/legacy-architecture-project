@@ -58,7 +58,7 @@
 					},
 					rules : {
 						custom: function(input) {
-							alert( input.html() );
+							alert( input.val() );
 							
 							return true;
 						}
