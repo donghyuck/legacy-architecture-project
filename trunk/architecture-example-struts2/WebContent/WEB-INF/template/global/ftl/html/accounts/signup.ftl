@@ -104,11 +104,12 @@
 		.k-widget.k-tooltip-validation {
 			background-color: transparent ;
 			color: #a94442;
+			border-width: 0;
 		}
 		
 		.k-tooltip {
-			-webkit-box-shadow : 0;
-			box-shadow : 0;
+			-webkit-box-shadow : 0 0 0 0 ;
+			box-shadow : 0 0 0 0;
 		}
 		
 		</style>
