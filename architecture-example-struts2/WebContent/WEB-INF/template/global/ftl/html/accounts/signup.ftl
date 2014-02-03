@@ -69,14 +69,16 @@
 									url : "${request.contextPath}/accounts/check-username-available.do?output=json",
 									dataType: 'json',
 									data: { usernameOrEmail: input.val() },
-									success : function(response){
-																		
-									alert( kendo.stringify( response ) );
-									
+									success : function(response){									
+										if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
+											return true;
+										}
+										return false;
 									},
-									error:handleKendoAjaxError				
+									error: function(){
+										return false;
+									}
 								});
-								return false;
 							}
 							return true;
 						}
@@ -109,8 +111,7 @@
 				} );				
 				
 				$(":button.signup").click( function(e) {					
-					var validatable = $("#signup-form").data("kendoValidator");
-					
+					var validatable = $("#signup-form").data("kendoValidator");					
 					$("#signup-form :input").each( function() {
 						var _input = $(this);
 						if( validatable.validateInput( _input ) ){
@@ -119,10 +120,7 @@
 							_input.parent().addClass("has-error");
 						}
 					});				
-				});
-				
-				
-				
+				});				
 				// END SCRIPT            
 			}
 		}]);	
