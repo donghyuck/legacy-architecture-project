@@ -76,7 +76,6 @@
 								//var input_id = input.attr('id');
 								
 								var available_cache= validatorPlaceHolder.get(input.val() );						
-	alert(available_cache) ;
 								if( typeof available_cache !== 'undefined' ){
 									return available_cache;
 								}else{
@@ -115,10 +114,12 @@
 					var input_to_use = $(this);
 					var inputs = input_to_use.parents("form").eq(0).find(":input");					
 					input_to_use.focusout(function(){
-					alert(validator.validateInput( input_to_use ) );
+					
 						if( validator.validateInput( input_to_use ) ){
+							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().addClass("has-success");
 						}else{
+							input_to_use.parent().removeClass("has-success");
 							input_to_use.parent().addClass("has-error");
 						}
 					});
