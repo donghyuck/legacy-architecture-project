@@ -69,7 +69,7 @@
 								//var input_id = input.attr('id');
 								
 								var available_cache= validatorPlaceHolder.get(input.val() );						
-	
+	alert(available_cache) ;
 								if( typeof available_cache !== 'undefined' ){
 									return available_cache;
 								}else{
@@ -80,10 +80,8 @@
 										data: { username: input.val() },
 										success : function(response){						
 			
-											if (typeof response.usernameAvailable !== 'undefined' ){
-												alert("SSSS");			
-												validatorPlaceHolder.set( input.val(), response.usernameAvailable );									
-												
+											if (typeof response.usernameAvailable !== 'undefined' ){	
+												validatorPlaceHolder.set( input.val(), response.usernameAvailable );				
 												if( validator.validateInput(input) ){
 													input.parent().addClass("has-success");
 												}
