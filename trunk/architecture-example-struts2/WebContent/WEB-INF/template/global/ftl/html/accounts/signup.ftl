@@ -26,8 +26,6 @@
 				// START SCRIPT	
 				cbpBGSlideshow.init();
 
-				$("form[name='fm1']").data("signupPlaceHolder", new SignupForm({}));						
-
 				$('#signup-window').modal({show:true, backdrop:false});
 
 				$("#signup-window button.custom-social-groups").each(function( index ) {
@@ -72,8 +70,15 @@
 					homepage();					
 				} );				
 				
+				$(":button.submit").click( function(e) {					
+					homepage();					
+				} );				
+				
 				$("#signup-form :input:visible:enabled:first").focus();
-				 var validatable = $("#signup-form").kendoValidator().data("kendoValidator");
+				
+				 //var validatable = $("#signup-form").kendoValidator().data("kendoValidator");
+				
+				
 				// END SCRIPT            
 			}
 		}]);	
@@ -94,7 +99,18 @@
 			$("form[name='fm1']")[0].reset();               	   
 			$("form[name='fm1']").attr("action", "/main.do").submit();
 		}
+		
+		function save(e) {
+			var validatable = $("#signup-form").data("kendoValidator");
+			if (validatable.validate() === false ) {
 				
+				var errors = validatable.errors();
+        $(errors).each(function() {
+          alert( this );
+        });
+        
+			}
+		}		
 		-->
 		</script>
 		<style>
@@ -168,16 +184,16 @@
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
-											<input type="text" class="form-control" id="signupInputName" name="signupInputName" placeholder="이름" data-bind="value: name" required validationMessage="이름을 입력하세요.">
+											<input type="text" class="form-control" id="signupInputName" name="signupInputName" placeholder="이름" data-bind="value: name" required>
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
-											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" required validationMessage="아이디을 입력하세요.">
+											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" required>
 											 <span data-for="RetireDate"></span>
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
-											<input type="email" class="form-control" id="signupInputEmail" name="signupInputEmail"  placeholder="이메일 주소" data-bind="value: email" required validationMessage="메일주소을 입력하세요." data-email-msg="메일 형식이 올바르지 않습니다.">
+											<input type="email" class="form-control" id="signupInputEmail" name="signupInputEmail"  placeholder="이메일 주소" data-bind="value: email" required>
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword1">비밀번호</label>
@@ -189,7 +205,7 @@
 										</div>									
 										<div class="checkbox">
 											<label>
-												<input type="checkbox"  id="signupInputAgree" name="signupInputAgree"  required  validationMessage="회원가입을 위하여 동의가 필요합니다."> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+												<input type="checkbox"  id="signupInputAgree" name="signupInputAgree"  required> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 											</label>
 										</div>
 									</fieldset>	
@@ -198,7 +214,7 @@
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" >확인</button>
+					<button type="button" class="btn btn-info" data-role="button" data-click='save'>확인</button>
 					<!--
 					<div class="btn-group ">
 						<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
