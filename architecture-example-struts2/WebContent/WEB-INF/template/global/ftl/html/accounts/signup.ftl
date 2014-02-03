@@ -56,7 +56,7 @@
 				var validator = $("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
-						custom: function(){
+						custom: function(input){
 							var signupPlaceHolder = $("#signup-form").data("signupPlaceHolder");
 							if (input.is("[name=signupInputEmail]") || input.is("[name=signupInputPassword1]") || input.is("[name=signupInputPassword2]") ) {
 								if( signupPlaceHolder.isExternal() )
