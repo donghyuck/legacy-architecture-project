@@ -118,7 +118,10 @@
 						var keycode = (event.keyCode ? event.keyCode : event.which);						
 						if(keycode == '13'){						
 							if( index+1 == inputs.length){
-								alert("1");
+								if( !input_to_use.is(':checked') ){
+									input_to_use.attr('checked', true );
+								}
+								$(":button.signup").focus();
 							}
 							
 							inputs[index+1].focus();
