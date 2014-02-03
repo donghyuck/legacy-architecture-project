@@ -1,7 +1,11 @@
 var SignupForm = kendo.data.Model.define({
 	id : "id",
 	fields: {
-        "id": {
+        "media": {
+            type: "string",
+            defaultValue : "internal"
+        },
+		"id": {
             type: "string"
         },
 		"username": {
