@@ -59,6 +59,7 @@
 							if (input.is("[name=signupInputPassword2]")) {
 								ret = input.val() === $("#signupInputPassword1").val();
 							}
+							return ret;
 						}
 					},
 					messages: {
