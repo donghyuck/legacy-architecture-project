@@ -50,11 +50,19 @@
 				});						
 				
 				//$("#signup-form :input:visible:enabled:first").select();				
+				$("#signup-form").data("signupPlaceHolder", new  SignupForm({}) );		
 				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
 				
 				var validator = $("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
+						custom: function(){
+							var signupPlaceHolder = $("#signup-form").data("signupPlaceHolder");
+							if (input.is("[name=signupInputEmail]") || input.is("[name=signupInputPassword1]") || input.is("[name=signupInputPassword2]") ) {
+								if( signupPlaceHolder.isExternal() )
+									return true;
+							}
+						},
 						verifyPasswords:function(input){
 							var ret = true;
 							if (input.is("[name=signupInputPassword2]")) {
@@ -193,6 +201,11 @@
 				fm.data("signupPlaceHolder", sf);				
 				kendo.bind(fm, sf );				
 			}			
+		}
+		
+		function getSocialSignupData(){
+			var signupPlaceHolder =  $("#signup-form").data("signupPlaceHolder");				
+			return signupPlaceHolder ;	
 		}
 		
 		function homepage(){
