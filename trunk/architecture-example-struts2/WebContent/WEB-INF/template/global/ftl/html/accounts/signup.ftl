@@ -104,7 +104,7 @@
 				
 				$("#signup-form :input").each( function() 
 					var input_to_use = $(this);
-					$(input_to_use).focusout(function(){
+					input_to_use.focusout(function(){
 						if( validator.validateInput( input_to_use ) ){
 							input_to_use.parent().addClass("has-success");
 						}else{
