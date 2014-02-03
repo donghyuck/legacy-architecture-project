@@ -54,13 +54,7 @@
 				$("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					validate: function(e){
-						alert( e.valid) ;
-					},
-					messages:{
-						required : function( input ) {
-							input.parent().addClass("has-error");
-							return null;
-						}
+						//alert( e.valid) ;
 					}
 				});
 				
@@ -87,9 +81,15 @@
 				
 				$(":button.signup").click( function(e) {					
 					var validatable = $("#signup-form").data("kendoValidator");
-					if (validatable.validate() === false ) {
-						var errors = validatable.errors();
-					}					
+					
+					$("#signup-form :input:visible:enabled").each( function() {
+						var _input = $(this);
+						if( validatable.validateInput( _input ) ){
+							_input.parent().addClass("has-success");
+						}else{
+							_input.parent().addClass("has-error");
+						}
+					});				
 				});
 				
 				
