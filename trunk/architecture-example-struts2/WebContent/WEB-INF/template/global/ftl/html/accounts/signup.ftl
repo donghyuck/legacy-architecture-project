@@ -74,7 +74,9 @@
 				
 				$("#form :input:visible:enabled:first").focus();
 				
-				 var validator = $("form[name='fm1']").kendoValidator().data("kendoValidator");
+				 $("form[name='fm1']").kendoValidator({
+					errorTemplate: "#-message#" 
+				 });
 				 
 				// END SCRIPT            
 			}
@@ -170,15 +172,15 @@
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
-											<input type="text" class="form-control" id="signupInputName" placeholder="이름" data-bind="value: name" required validationMessage="이름을 입력하세요.">
+											<input type="text" class="form-control" id="signupInputName" placeholder="이름" data-bind="value: name" required data-message="이름을 입력하세요.">
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
-											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디" data-bind="value: username" required validationMessage="아이디을 입력하세요.">
+											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디" data-bind="value: username" required data-message="아이디을 입력하세요.">
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
-											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소" data-bind="value: email" required validationMessage="메일주소을 입력하세요." data-email-msg="메일 형식이 올바르지 않습니다.">
+											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소" data-bind="value: email" required data-message="메일주소을 입력하세요." data-email-msg="메일 형식이 올바르지 않습니다.">
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword1">비밀번호</label>
