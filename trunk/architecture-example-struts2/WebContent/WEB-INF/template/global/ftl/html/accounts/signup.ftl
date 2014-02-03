@@ -170,11 +170,11 @@
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
-											<input type="text" class="form-control" id="signupInputName" placeholder="이름" data-bind="value: name" required validationMessage="{0}을 입력하세요.">
+											<input type="text" class="form-control" id="signupInputName" placeholder="이름" data-bind="value: name" required validationMessage="이름을 입력하세요.">
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
-											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디" data-bind="value: username" required validationMessage="{0}을 입력하세요.">
+											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디" data-bind="value: username" required validationMessage="아이디을 입력하세요.">
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
