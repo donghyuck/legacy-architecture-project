@@ -63,12 +63,10 @@
 						},
 						userNameAvailable: function(input){
 							var validate = input.data('available');
-							if (typeof validate !== 'undefined' && validate !== false) {
-							
+							if (typeof validate !== 'undefined' && validate !== false) {							
 								var validatorPlaceHolder = $("#signup-form").data("validatorPlaceHolder");
 								var input_id = input.attr('id');
-								var available_cache= validatorPlaceHolder.get(input_id);
-								
+								var available_cache= validatorPlaceHolder.get(input_id);								
 								if( available_cache == null ){
 									$.ajax({
 										type : 'POST',
@@ -77,10 +75,9 @@
 										data: { username: input.val() },
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
-												available_cache.put( input_id, response.usernameAvailable );
-												
-												var validatable = $("#signup-form").data("kendoValidator");		
-												validatable.validateInput($(input_id));
+												available_cache.put( input_id, response.usernameAvailable );												
+												var validator = $("#signup-form").data("kendoValidator");		
+												validator.validateInput($(input_id));
 											}											
 										},
 										error: error:handleKendoAjaxError
