@@ -173,6 +173,7 @@
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
 											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" required validationMessage="아이디을 입력하세요.">
+											 <span data-for="RetireDate"></span>
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
