@@ -75,7 +75,7 @@
 				$("#signup-form :input:visible:enabled:first").focus();
 				
 				$("#signup-form").kendoValidator({
-					errorTemplate: "#-message#" 
+					errorTemplate: "#=message#" 
 				 });
 				 
 				// END SCRIPT            
