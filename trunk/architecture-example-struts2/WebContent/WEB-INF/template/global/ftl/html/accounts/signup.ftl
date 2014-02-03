@@ -104,7 +104,12 @@
 					messages: {
 						verifyPasswords : "비밀번호가 일치하지 않습니다.",
 						userNameAvailable : function( input ) {
-							return "확인중..."
+							var validatorPlaceHolder = $("#signup-form").data("validatorPlaceHolder");
+							var available_cache= validatorPlaceHolder.get(input.val() );			
+							if( typeof available_cache !== 'undefined' && !available_cache){
+								return "사용할 수 없는 아이디입니다.";
+							}			
+							return "확인중...";
 						}
 					},
 					validateOnBlur : false
