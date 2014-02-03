@@ -73,11 +73,7 @@
 				} );				
 				
 				$("#signup-form :input:visible:enabled:first").focus();
-				
-				$("#signup-form").kendoValidator({
-					
-				 });
-				 
+				 var validatable = $("#signup-form").kendoValidator().data("kendoValidator");
 				// END SCRIPT            
 			}
 		}]);	
