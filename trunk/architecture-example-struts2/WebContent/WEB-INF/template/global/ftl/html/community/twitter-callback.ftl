@@ -20,14 +20,20 @@
 				if(typeof window.opener.handleCallbackResult != "undefined"){
 					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
-					window.opener.signupCallbackResult(null);
+					window.opener.signupCallbackResult("twitter", null);
 				}else{
 					//window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){
-					var userProfile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-					window.opener.signupCallbackResult(userProfile);
+					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
+					window.opener.signupCallbackResult("twitter", {
+						id: profile.id,
+						username: profile.screenName,
+						name : profile.name,
+						location : profile.location,
+						language: profile.language
+					});
 				}	
 				</#if>					
 				window.close();
