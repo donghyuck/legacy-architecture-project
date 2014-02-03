@@ -11,10 +11,30 @@
 			<result name="input" >/login.jsp</result>
 		</action>
 		
-		<action name="signup" class="architecture.user.web.struts2.action.SignUpAction">
-			<result name="input" >/signup.jsp</result>			
+		<action name="signup" class="architecture.user.web.struts2.action.SignUpMainAction">
+			<result name="success" type="freemarker">/html/accounts/signup.ftl</result>		
+		</action>
+
+		<action name="check-username-available" class="architecture.user.web.struts2.action.ajax.SignUpAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				checkUsernameAvailable
+				</param>
+			</result>	
 		</action>
 		
+		<action name="create-user"  method="createUser"  class="architecture.user.web.struts2.action.ajax.SignUpAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUser.username
+				</param>
+			</result>
+		</action>
+				
 		<action name="view-image" class="architecture.user.web.struts2.action.ViewUserImageAction">
 			<result name="success" type="stream">
 			  <param name="contentType">${targetImageContentType}</param>
@@ -24,18 +44,7 @@
 			  <param name="bufferSize">1024</param>
 			</result>			
 		</action>
-		
-		<action name="signup-register"  method="register"  class="architecture.user.web.struts2.action.SignUpAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">users.properties</param>
-			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">
-				targetUser.*
-				</param>
-			</result>
-		</action>
-					
+							
 		<action name="get-user" class="architecture.user.web.struts2.action.ajax.GetUserDetailsAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
