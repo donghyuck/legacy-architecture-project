@@ -72,9 +72,9 @@
 					homepage();					
 				} );				
 				
-				$("#form :input:visible:enabled:first").focus();
+				$("form :input:visible:enabled:first").focus();
 				
-				 $("form[name='fm1']").kendoValidator({
+				$("form[name='fm1']").kendoValidator({
 					errorTemplate: "#-message#" 
 				 });
 				 
