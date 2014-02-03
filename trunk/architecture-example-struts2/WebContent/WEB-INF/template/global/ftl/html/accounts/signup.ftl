@@ -53,9 +53,7 @@
 				
 				$("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
-					validate: function(e){
-						//alert( e.valid) ;
-					}
+					validateOnBlur : false
 				});
 				
 				$(":button.logout").click( function(e) {					
