@@ -51,7 +51,9 @@
 				
 				$("#signup-form :input:visible:enabled:first").focus();
 				
-				$("#signup-form").kendoValidator();
+				$("#signup-form").kendoValidator({
+					errorTemplate: '<span class="help-block">#=message#</span>'
+				});
 				
 				
 				$(":button.logout").click( function(e) {					
