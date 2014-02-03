@@ -56,11 +56,10 @@
 					validate: function(e){
 						alert( e.valid) ;
 					},
-					rules : {
-						custom: function(input) {
-							alert( input.val() );
-							
-							return true;
+					messages:{
+						required : function( input ) {
+							alert( input.parent().html() );
+							return null;
 						}
 					}
 				});
