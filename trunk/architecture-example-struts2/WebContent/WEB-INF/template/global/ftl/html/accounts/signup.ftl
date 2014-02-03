@@ -102,7 +102,8 @@
 					validateOnBlur : false
 				}).data("kendoValidator");
 				
-				$("#signup-form :input").each( function() 
+				$("#signup-form :input").each(function( index ) {
+				
 					var input_to_use = $(this);
 					input_to_use.focusout(function(){
 						if( validator.validateInput( input_to_use ) ){
@@ -111,6 +112,7 @@
 							input_to_use.parent().addClass("has-error");
 						}
 					});
+					
 				});				
 					
 				$(":button.logout").click( function(e) {					
