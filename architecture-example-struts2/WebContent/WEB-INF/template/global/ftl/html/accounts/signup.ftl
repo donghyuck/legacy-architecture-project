@@ -87,7 +87,8 @@
 										},
 										error:handleKendoAjaxError
 									});	
-								}
+									return false;
+								}								
 							}
 							return true;
 						}
