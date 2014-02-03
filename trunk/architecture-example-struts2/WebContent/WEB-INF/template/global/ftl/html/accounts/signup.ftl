@@ -49,8 +49,7 @@
 					});		
 				});						
 				
-				$("#signup-form :input:visible:enabled:first").focus();
-				
+				$("#signup-form :input:visible:enabled:first").focus();				
 				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
 				$("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
@@ -79,7 +78,9 @@
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
 												available_cache.put( input_id, response.usernameAvailable );
-												validator.validateInput($(input_id));
+												
+												var validatable = $("#signup-form").data("kendoValidator");		
+												validatable.validateInput($(input_id));
 											}											
 										},
 										error: error:handleKendoAjaxError
