@@ -231,8 +231,8 @@
 		}
 		
 		function homepage(){
-			$("form[name='fm1']")[0].reset();               	   
-			$("form[name='fm1']").attr("action", "/main.do").submit();
+			$("#signup-form")[0].reset();               	   
+			$("#signup-form").attr("action", "/main.do").submit();
 		}
 		
 		-->
