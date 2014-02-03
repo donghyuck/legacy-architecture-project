@@ -99,6 +99,19 @@
 				
 		-->
 		</script>
+		<style>
+
+		.k-widget.k-tooltip-validation {
+			background-color: transparent ;
+			color: #a94442;
+		}
+		
+		.k-tooltip {
+			-webkit-box-shadow : 0;
+			box-shadow : 0;
+		}
+		
+		</style>
 	</head>
 	<body>
 		<div class="main">
