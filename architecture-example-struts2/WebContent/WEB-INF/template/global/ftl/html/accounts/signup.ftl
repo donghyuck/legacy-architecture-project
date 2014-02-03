@@ -154,15 +154,15 @@
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
-											<input type="text" class="form-control" id="signupInputName" placeholder="이름">
+											<input type="text" class="form-control" id="signupInputName" placeholder="이름" data-bind="value: name">
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
-											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디">
+											<input type="text" class="form-control" id="signupInputUsername" placeholder="아이디" data-bind="value: username">
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
-											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소">
+											<input type="email" class="form-control" id="signupInputEmail" placeholder="이메일 주소" data-bind="value: email">
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword1">비밀번호</label>
