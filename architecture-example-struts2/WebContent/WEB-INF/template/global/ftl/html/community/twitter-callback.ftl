@@ -28,6 +28,7 @@
 				if(typeof window.opener.signupCallbackResult != "undefined"){
 					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 					window.opener.signupCallbackResult("twitter", {
+						media: "twitter",
 						id: profile.id,
 						username: profile.screenName,
 						name : profile.name,
