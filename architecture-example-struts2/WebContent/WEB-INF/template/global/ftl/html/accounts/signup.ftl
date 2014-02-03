@@ -49,6 +49,11 @@
 					});		
 				});						
 				
+				$("#signup-form :input:visible:enabled:first").focus();
+				
+				$("#signup-form").kendoValidator();
+				
+				
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃...");
 					var text_danger = $(this).parent().parent();
@@ -70,13 +75,17 @@
 					homepage();					
 				} );				
 				
-				$(":button.submit").click( function(e) {					
-					homepage();					
-				} );				
+				$(":button.signup").click( function(e) {					
+					var validatable = $("#signup-form").data("kendoValidator");
+					if (validatable.validate() === false ) {
+						var errors = validatable.errors();
+						$(errors).each(function() {
+							alert( this );			
+						} );
+					}					
+				});
 				
-				$("#signup-form :input:visible:enabled:first").focus();
 				
-				 $("#signup-form").kendoValidator();
 				
 				// END SCRIPT            
 			}
@@ -99,18 +108,6 @@
 			$("form[name='fm1']").attr("action", "/main.do").submit();
 		}
 		
-		function save(e) {
-		alert("fdsaf");
-			var validatable = $("#signup-form").data("kendoValidator");
-			if (validatable.validate() === false ) {
-				
-				var errors = validatable.errors();
-        $(errors).each(function() {
-          alert( this );
-        });
-        
-			}
-		}		
 		-->
 		</script>
 		<style>
@@ -214,7 +211,7 @@
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info" data-role="button" data-click='save'>확인</button>
+					<button type="button" class="btn btn-info signup">확인</button>
 					<!--
 					<div class="btn-group ">
 						<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
