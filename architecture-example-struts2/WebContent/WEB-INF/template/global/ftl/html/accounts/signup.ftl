@@ -163,7 +163,7 @@
 				} );								
 				
 				$(":button.signup").click( function(e) {	
-					boolean hasError = false;				
+					var hasError = false;				
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
 						if( validator.validateInput( input_to_use ) ){
