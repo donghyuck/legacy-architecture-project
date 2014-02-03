@@ -83,7 +83,7 @@
 			if( data == null ){
 				homepage();					
 			}else{
-				SignupForm sf = new SignupForm(data);	
+				var sf = new SignupForm(data);	
 				var fm = $("form[name='fm1']");				
 				fm.data("signupPlaceHolder", sf);				
 				kendo.bind(fm, sf );				
