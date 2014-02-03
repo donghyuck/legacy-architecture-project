@@ -52,9 +52,14 @@
 				$("#signup-form :input:visible:enabled:first").focus();
 				
 				$("#signup-form").kendoValidator({
-					errorTemplate: '<span class="help-block">#=message#</span>'
+					errorTemplate: '<span class="help-block">#=message#</span>',
+					rules: {
+						custom
+					},
+					validate: function(e){
+						alert( e.valid) ;
+					}
 				});
-				
 				
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃...");
