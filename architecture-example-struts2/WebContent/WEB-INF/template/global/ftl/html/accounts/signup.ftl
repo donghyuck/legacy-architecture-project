@@ -62,6 +62,13 @@
 							}
 							return ret;
 						},
+						agree: function(input){
+							var ret = true;
+							if (input.is("[name=signupInputAgree]")) {
+								ret = input.is(':checked');  
+							}
+							return ret;							
+						},
 						userNameAvailable: function(input){
 							var validate = input.data('available');
 							if (typeof validate !== 'undefined' && validate !== false) {							
