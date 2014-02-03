@@ -58,7 +58,7 @@
 					},
 					messages:{
 						required : function( input ) {
-							alert( input.parent().html() );
+							input.parent().addClass("has-error");
 							return null;
 						}
 					}
