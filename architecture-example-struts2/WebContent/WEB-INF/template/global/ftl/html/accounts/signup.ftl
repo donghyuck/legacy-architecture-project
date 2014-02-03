@@ -76,8 +76,7 @@
 				
 				$("#signup-form :input:visible:enabled:first").focus();
 				
-				 //var validatable = $("#signup-form").kendoValidator().data("kendoValidator");
-				
+				 $("#signup-form").kendoValidator();
 				
 				// END SCRIPT            
 			}
