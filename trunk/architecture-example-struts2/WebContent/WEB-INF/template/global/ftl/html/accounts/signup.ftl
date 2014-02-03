@@ -57,8 +57,8 @@
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
 						custom: function(input){
-							var signupPlaceHolder = $("#signup-form").data("signupPlaceHolder");
-							alert( signupPlaceHolder.isExternal()  ) ;
+							var signupPlaceHolder = getSignupPlaceHolder();
+							alert( "external=" +  signupPlaceHolder.isExternal()  ) ;
 							if (input.is("[name=signupInputEmail]") || input.is("[name=signupInputPassword1]") || input.is("[name=signupInputPassword2]") ) {
 								if( signupPlaceHolder.isExternal() )
 									return true;
@@ -199,14 +199,13 @@
 			if( data == null ){
 				homepage();					
 			}else{
-				var sf = new SignupForm(data);	
-				var fm = $("form[name='fm1']");				
-				fm.data("signupPlaceHolder", sf);				
-				kendo.bind(fm, sf );				
+				var signup_form = $("#signup-form");
+				signup_form.data("signupPlaceHolder", new SignupForm(data) );		
+				kendo.bind(signup_form, signup_form.data("signupPlaceHolder") );				
 			}			
 		}
 		
-		function getSocialSignupData(){
+		function getSignupPlaceHolder(){
 			var signupPlaceHolder =  $("#signup-form").data("signupPlaceHolder");				
 			return signupPlaceHolder ;	
 		}
