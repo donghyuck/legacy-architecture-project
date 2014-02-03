@@ -56,14 +56,6 @@
 				var validator = $("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
-						custom: function(input){
-							var signupPlaceHolder = getSignupPlaceHolder();
-							alert( "external=" +  signupPlaceHolder.isExternal()  ) ;
-							if (input.is("[name=signupInputEmail]") || input.is("[name=signupInputPassword1]") || input.is("[name=signupInputPassword2]") ) {
-								if( signupPlaceHolder.isExternal() )
-									return true;
-							}
-						},
 						verifyPasswords:function(input){
 							var ret = true;
 							if (input.is("[name=signupInputPassword2]")) {
@@ -127,13 +119,15 @@
 				$("#signup-form :input").each(function( index ) {				
 					var input_to_use = $(this);
 					var inputs = input_to_use.parents("form").eq(0).find(":input");					
-					input_to_use.focusout(function(){					
-						if( validator.validateInput( input_to_use ) ){
-							input_to_use.parent().removeClass("has-error");
-							input_to_use.parent().addClass("has-success");
-						}else{
-							input_to_use.parent().removeClass("has-success");
-							input_to_use.parent().addClass("has-error");
+					input_to_use.focusout(function(){							
+						if( validateRequired( input ) ){
+							if( validator.validateInput( input_to_use ) ){
+								input_to_use.parent().removeClass("has-error");
+								input_to_use.parent().addClass("has-success");
+							}else{
+								input_to_use.parent().removeClass("has-success");
+								input_to_use.parent().addClass("has-error");
+							}
 						}
 					});
 					input_to_use.keydown(function(e) {
@@ -166,34 +160,49 @@
 						error:handleKendoAjaxError												
 					});						
 				} );
-				
-				$(":button.homepage").click( function(e) {					
-					homepage();					
-				} );								
+						
 				
 				$(":button.signup").click( function(e) {	
 					var hasError = false;				
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
-						var valid = validator.validateInput( input_to_use ) ;
-					//	alert( valid ) ;
-						if(valid ){
-							input_to_use.parent().removeClass("has-error");
-							input_to_use.parent().addClass("has-success");
-						}else{
-							if( !hasError ){
-								input_to_use.focus();
+						if( validateRequired( input ) ){
+							var valid = validator.validateInput( input_to_use ) ;
+							if(valid ){
+								input_to_use.parent().removeClass("has-error");
+								input_to_use.parent().addClass("has-success");
+							}else{
+								if( !hasError ){
+									input_to_use.focus();
+								}
+								hasError = true;							
+								input_to_use.parent().removeClass("has-success");
+								input_to_use.parent().addClass("has-error");
 							}
-							hasError = true;							
-							input_to_use.parent().removeClass("has-success");
-							input_to_use.parent().addClass("has-error");
 						}
 					});			
 				});				
+				
+				$(":button.homepage").click( function(e) {					
+					homepage();					
+				} );		
+								
 				// END SCRIPT            
 			}
 		}]);	
 		
+		function validateRequired ( input ) {
+			var signupPlaceHolder = getSignupPlaceHolder();
+			if( signupPlaceHolder.isExternal() ){				
+				if(input.is("[name=signupInputEmail]") || 
+					input.is("[name=signupInputPassword1]") || 
+					input.is("[name=signupInputPassword2]") 
+				){
+					return false;
+				} 
+			}
+			return true;			
+		}
 		
 		function signupCallbackResult( provider, data  ){
 			if( data == null ){
