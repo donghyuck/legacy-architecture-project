@@ -151,7 +151,7 @@
 						<div class="col-sm-6">
 							<button class="btn btn-block btn-info btn-lg " data-target="twitter"><i class="fa fa-twitter"></i> | 트위터로 로그인</button>
 						</div>
-					</div>					
+					</div>							
 				</div>
 				<div class="container" style="width:100%;">					
 					<div class="row blank-top-15">
