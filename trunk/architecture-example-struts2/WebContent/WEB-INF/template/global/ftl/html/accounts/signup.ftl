@@ -183,11 +183,11 @@
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
-											<input type="text" class="form-control" id="signupInputName" name="signupInputName" placeholder="이름" data-bind="value: name">
+											<input type="text" class="form-control" id="signupInputName" name="signupInputName" placeholder="이름" data-bind="value: name" custom>
 										</div>
 										<div class="form-group">
 											<label for="signupInputUsername">아이디</label>
-											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" required>
+											<input type="text" class="form-control" id="signupInputUsername" name="signupInputUsername" placeholder="아이디" data-bind="value: username" custom>
 											 <span data-for="RetireDate"></span>
 										</div>									
 										<div class="form-group">
@@ -196,15 +196,15 @@
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword1">비밀번호</label>
-											<input type="password" class="form-control" id="signupInputPassword1" name="signupInputPassword1"  placeholder="비밀번호" data-bind="value: password1">
+											<input type="password" class="form-control" id="signupInputPassword1" name="signupInputPassword1"  placeholder="비밀번호" data-bind="value: password1" custom>
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword2">비밀번호 확인</label>
-											<input type="password" class="form-control" id="signupInputPassword2" name="signupInputPassword2"  placeholder="비밀번호 확인" data-bind="value: password2">
+											<input type="password" class="form-control" id="signupInputPassword2" name="signupInputPassword2"  placeholder="비밀번호 확인" data-bind="value: password2" custom>
 										</div>									
 										<div class="checkbox">
 											<label>
-												<input type="checkbox"  id="signupInputAgree" name="signupInputAgree"  required> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+												<input type="checkbox"  id="signupInputAgree" name="signupInputAgree"  custom> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 											</label>
 										</div>
 									</fieldset>	
