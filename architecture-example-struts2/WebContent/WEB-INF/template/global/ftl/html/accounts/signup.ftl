@@ -26,6 +26,8 @@
 				// START SCRIPT	
 				cbpBGSlideshow.init();
 
+				$("form[name='fm1']").data("signupPlaceHolder", new SignupForm({}));						
+
 				$('#signup-window').modal({show:true, backdrop:false});
 
 				$("#signup-window button.custom-social-groups").each(function( index ) {
@@ -77,19 +79,20 @@
 		}]);	
 		
 		
-		function signupCallbackResult( data  ){
+		function signupCallbackResult( provider, data  ){
 			if( data == null ){
 				homepage();					
 			}else{
-				alert(
-					kendo.stringify( data )
-				);
-			}
+				SignupForm sf = new SignupForm(data);	
+				var fm = $("form[name='fm1']");				
+				fm.data("signupPlaceHolder", sf);				
+				kendo.bind(fm, sf );				
+			}			
 		}
 		
 		function homepage(){
 			$("form[name='fm1']")[0].reset();               	   
-			$("form[name='fm1']").attr("action", "/main.do").submit();				
+			$("form[name='fm1']").attr("action", "/main.do").submit();
 		}
 				
 		-->
