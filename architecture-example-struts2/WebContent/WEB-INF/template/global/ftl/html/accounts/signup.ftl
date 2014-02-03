@@ -192,7 +192,7 @@
 										</div>									
 										<div class="form-group">
 											<label for="signupInputEmail">이메일 주소</label>
-											<input type="email" class="form-control" id="signupInputEmail" name="signupInputEmail"  placeholder="이메일 주소" data-bind="value: email" required>
+											<input type="email" class="form-control" id="signupInputEmail" name="signupInputEmail"  placeholder="이메일 주소" data-bind="value: email" required data-email-msg="메일주소 형식이 바르지 않습니다." >
 										</div>
 										<div class="form-group">
 											<label for="signupInputPassword1">비밀번호</label>
