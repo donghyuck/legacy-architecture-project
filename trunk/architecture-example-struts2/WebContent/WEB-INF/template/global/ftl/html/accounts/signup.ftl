@@ -72,9 +72,9 @@
 					homepage();					
 				} );				
 				
-				$("form :input:visible:enabled:first").focus();
+				$("#signup-form :input:visible:enabled:first").focus();
 				
-				$("form[name='fm1']").kendoValidator({
+				$("#signup-form").kendoValidator({
 					errorTemplate: "#-message#" 
 				 });
 				 
@@ -168,7 +168,7 @@
 						<div class="row blank-top-15">
 							<div class="col-sm-5"></div>
 							<div class="col-sm-7">
-								<form role="form" name="fm1" method="POST" accept-charset="utf-8">
+								<form role="form" id="signup-form" name="fm1" method="POST" accept-charset="utf-8">
 									<fieldset <#if !action.user.anonymous >disabled</#if>>
 										<div class="form-group">
 											<label for="signupInputName">이름</label>
