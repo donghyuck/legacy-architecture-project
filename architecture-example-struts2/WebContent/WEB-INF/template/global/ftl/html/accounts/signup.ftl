@@ -58,6 +58,7 @@
 					rules: {
 						custom: function(input){
 							var signupPlaceHolder = $("#signup-form").data("signupPlaceHolder");
+							alert( signupPlaceHolder.isExternal()  ) ;
 							if (input.is("[name=signupInputEmail]") || input.is("[name=signupInputPassword1]") || input.is("[name=signupInputPassword2]") ) {
 								if( signupPlaceHolder.isExternal() )
 									return true;
