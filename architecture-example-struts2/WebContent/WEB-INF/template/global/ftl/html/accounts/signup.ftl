@@ -174,7 +174,9 @@
 					var hasError = false;				
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
-						if( validator.validateInput( input_to_use ) ){
+						var valid = validator.validateInput( input_to_use ) ;
+						alert( valid ) ;
+						if(valid ){
 							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().addClass("has-success");
 						}else{
