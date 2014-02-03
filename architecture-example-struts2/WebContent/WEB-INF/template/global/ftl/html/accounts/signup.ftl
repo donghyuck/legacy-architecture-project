@@ -80,7 +80,7 @@
 												validator.validateInput($(input_id));
 											}											
 										},
-										error: error:handleKendoAjaxError
+										error:handleKendoAjaxError
 									});	
 								}else{
 									return available_cache;
