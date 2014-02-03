@@ -128,6 +128,9 @@
 								input_to_use.parent().removeClass("has-success");
 								input_to_use.parent().addClass("has-error");
 							}
+						}else{
+							input_to_use.parent().removeClass("has-error");
+							input_to_use.parent().removeClass("has-success");						
 						}
 					});
 					input_to_use.keydown(function(e) {
@@ -179,6 +182,9 @@
 								input_to_use.parent().removeClass("has-success");
 								input_to_use.parent().addClass("has-error");
 							}
+						}else{
+							input_to_use.parent().removeClass("has-error");
+							input_to_use.parent().removeClass("has-success");
 						}
 					});			
 				});				
