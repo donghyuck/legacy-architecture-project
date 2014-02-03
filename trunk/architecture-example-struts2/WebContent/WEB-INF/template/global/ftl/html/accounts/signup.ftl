@@ -79,7 +79,8 @@
 										data: { username: input.val() },
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
-												validatorPlaceHolder.set( input_id, response.usernameAvailable );												
+												validatorPlaceHolder.set( input_id, response.usernameAvailable );									
+												alert("SSSS");			
 												if( validator.validateInput(input) ){
 													input.parent().addClass("has-success");
 												}
@@ -102,11 +103,9 @@
 					validateOnBlur : false
 				}).data("kendoValidator");
 				
-				$("#signup-form :input").each(function( index ) {
-				
+				$("#signup-form :input").each(function( index ) {				
 					var input_to_use = $(this);
-					var inputs = input_to_use.parents("form").eq(0).find(":input");
-					
+					var inputs = input_to_use.parents("form").eq(0).find(":input");					
 					input_to_use.focusout(function(){
 						if( validator.validateInput( input_to_use ) ){
 							input_to_use.parent().addClass("has-success");
@@ -122,8 +121,7 @@
 									input_to_use.attr('checked', true );
 								}
 								$(":button.signup").focus();
-							}
-							
+							}							
 							inputs[index+1].focus();
 						}
 					});
