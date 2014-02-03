@@ -187,7 +187,9 @@
 							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().removeClass("has-success");
 							//input_to_use.parent().find("span").remove();	
-							$("#signupInputAgree").focus();
+							if( !$("#signupInputAgree").is(':checked')){
+								$("#signupInputAgree").focus();
+							}							
 						}
 					});			
 				});				
