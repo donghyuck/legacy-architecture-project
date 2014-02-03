@@ -51,7 +51,8 @@
 				
 				$("#signup-form :input:visible:enabled:first").focus();				
 				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
-				$("#signup-form").kendoValidator({
+				
+				var validator = $("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
 						verifyPasswords:function(input){
@@ -69,7 +70,6 @@
 								var available_cache= validatorPlaceHolder.get(input_id);						
 	
 								if( typeof available_cache !== 'undefined' ){
-								alert("--------------" + available_cache) ;
 									return available_cache;
 								}else{
 									$.ajax({
@@ -80,8 +80,6 @@
 										success : function(response){									
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
 												validatorPlaceHolder.set( input_id, response.usernameAvailable );												
-												var validator = $("#signup-form").data("kendoValidator");		
-												alert("--------------" +  response.usernameAvailable  ) ;
 												if( validator.validateInput(input) ){
 													input.parent().addClass("has-success");
 												}
@@ -102,8 +100,19 @@
 						}
 					},
 					validateOnBlur : false
-				});
+				}).data("kendoValidator");
 				
+				$("#signup-form :input").each( function() 
+					var input_to_use = $(this);
+					$(input_to_use).focusout(function(){
+						if( validator.validateInput( input_to_use ) ){
+							input_to_use.parent().addClass("has-success");
+						}else{
+							input_to_use.parent().addClass("has-error");
+						}
+					});
+				});				
+					
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃...");
 					var text_danger = $(this).parent().parent();
@@ -125,16 +134,10 @@
 					homepage();					
 				} );				
 				
+				
 				$(":button.signup").click( function(e) {					
-					var validatable = $("#signup-form").data("kendoValidator");					
-					$("#signup-form :input").each( function() {
-						var _input = $(this);
-						if( validatable.validateInput( _input ) ){
-							_input.parent().addClass("has-success");
-						}else{
-							_input.parent().addClass("has-error");
-						}
-					});				
+									
+					
 				});				
 				// END SCRIPT            
 			}
