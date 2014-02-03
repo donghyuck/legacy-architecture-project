@@ -120,7 +120,7 @@
 					var input_to_use = $(this);
 					var inputs = input_to_use.parents("form").eq(0).find(":input");					
 					input_to_use.focusout(function(){							
-						if( validateRequired( input ) ){
+						if( validateRequired( input_to_use ) ){
 							if( validator.validateInput( input_to_use ) ){
 								input_to_use.parent().removeClass("has-error");
 								input_to_use.parent().addClass("has-success");
@@ -166,7 +166,7 @@
 					var hasError = false;				
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
-						if( validateRequired( input ) ){
+						if( validateRequired( input_to_use ) ){
 							var valid = validator.validateInput( input_to_use ) ;
 							if(valid ){
 								input_to_use.parent().removeClass("has-error");
