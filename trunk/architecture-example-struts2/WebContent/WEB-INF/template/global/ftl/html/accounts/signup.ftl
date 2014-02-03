@@ -162,13 +162,18 @@
 					homepage();					
 				} );								
 				
-				$(":button.signup").click( function(e) {					
+				$(":button.signup").click( function(e) {	
+					boolean hasError = false;				
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
 						if( validator.validateInput( input_to_use ) ){
 							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().addClass("has-success");
 						}else{
+							if( !hasError ){
+								input_to_use.focus();
+							}
+							hasError = true;							
 							input_to_use.parent().removeClass("has-success");
 							input_to_use.parent().addClass("has-error");
 						}
