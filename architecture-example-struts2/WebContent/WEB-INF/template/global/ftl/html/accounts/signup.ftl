@@ -53,6 +53,17 @@
 				
 				$("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
+					rules: {
+						verifyPasswords:function(input){
+							var ret = true;
+							if (input.is("[name=signupInputPassword2]")) {
+								ret = input.val() === $("#signupInputPassword1").val();
+							}
+						}
+					},
+					messages: {
+						verifyPasswords : "비밀번호가 일치하지 않습니다."
+					},
 					validateOnBlur : false
 				});
 				
