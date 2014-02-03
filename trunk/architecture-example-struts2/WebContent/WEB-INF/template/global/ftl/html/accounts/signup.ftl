@@ -101,6 +101,7 @@
 		}
 		
 		function save(e) {
+		alert("fdsaf");
 			var validatable = $("#signup-form").data("kendoValidator");
 			if (validatable.validate() === false ) {
 				
