@@ -1,13 +1,37 @@
 var SignupForm = kendo.data.Model.define({
-	id : "username",
+	id : "id",
 	fields: {
-        "username": {
+        "id": {
             type: "string"
         },
+		"username": {
+            type: "string"
+        },
+        "firstName": {
+            type: "string"
+        },
+        "lastName": {
+            type: "string"
+        },        
         "name": {
             type: "string"
         },
         "email": {
+            type: "string"
+        },
+        "locale": {
+            type: "string"
+        },
+        "location": {
+            type: "string"
+        },
+        "language": {
+            type: "string"
+        },
+        "timezone": {
+            type: "string"
+        },
+        "gender" : {
             type: "string"
         },
         "password1": {
