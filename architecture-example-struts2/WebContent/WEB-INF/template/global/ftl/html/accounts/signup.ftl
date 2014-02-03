@@ -187,7 +187,7 @@
 							input_to_use.parent().removeClass("has-error");
 							input_to_use.parent().removeClass("has-success");
 							//input_to_use.parent().find("span").remove();	
-							$("#signupInputAgree").facus();
+							$("#signupInputAgree").focus();
 						}
 					});			
 				});				
