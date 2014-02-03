@@ -69,6 +69,7 @@
 								var available_cache= validatorPlaceHolder.get(input_id);						
 	
 								if( typeof available_cache !== 'undefined' ){
+								alert("--------------" + available_cache) ;
 									return available_cache;
 								}else{
 									$.ajax({
@@ -80,6 +81,7 @@
 											if (typeof response.usernameAvailable !== 'undefined' && response.usernameAvailable ){
 												validatorPlaceHolder.set( input_id, response.usernameAvailable );												
 												var validator = $("#signup-form").data("kendoValidator");		
+												alert("--------------") ;
 												validator.validateInput($(input_id));
 											}											
 										},
