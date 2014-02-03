@@ -12,16 +12,17 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
+			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 			<#if action.user.anonymous >
 				<#if action.findUser()?exists >		
 				if(typeof window.opener.handleCallbackResult != "undefined"){
-					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});							
+					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
 					window.opener.signupCallbackResult(null);
 				}else{
-					window.opener.location.reload(${action.signIn()?string("true","false")});
+					//window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){
