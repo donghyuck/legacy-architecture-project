@@ -1253,8 +1253,9 @@
 								</div>																				
 							</div>							
 							<!-- end photos -->
-						</div>
-						<!-- end of tab content -->												
+						</div><!-- end of tab content -->												
+					</div>
+					
 					</div>
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
