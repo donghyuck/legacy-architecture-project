@@ -330,7 +330,6 @@
 														
 							$("input[name='attachment-list-view-filters']").on("change", function () {
 								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
-								alert(this.value);
 								switch(this.value){
 									case "all" :
 										attachment_list_view.dataSource.filter(  { field: "contentType", operator: "neq", value: "" } ) ; 
