@@ -1072,9 +1072,8 @@
 						<button type="button" id="personalized-controls-show" class="btn btn-info"><i class="fa fa-bars"></i></button>	
 					</div>
 				</div>				
-				<div id="personalized-controls" class="blank-top-5" style="display:none;;">
-					
-					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
+				<div id="personalized-controls" class="blank-top-5" style="display:none;">					
+					<button id="personalized-controls-hide" type="button" class="close pull-right" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 					
 					</div>
