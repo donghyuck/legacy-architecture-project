@@ -1181,7 +1181,7 @@
 					</div><!-- /dl-menuwrapper -->
 					
 						<div class="btn-group-vertical">
-							 <button type="button" class="btn btn-info active">공지 & 이벤트</button>
+							 <button type="button" class="btn btn-info active"><i class="fa fa-square"></i>공지 & 이벤트</button>
 							  <button type="button" class="btn btn-info"></button>
 							   <button type="button" class="btn btn-info">Left</button>
 						</div>
