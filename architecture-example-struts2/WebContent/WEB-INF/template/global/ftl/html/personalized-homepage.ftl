@@ -1038,9 +1038,7 @@
 		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px; margin-top:-14px;">		
 				<div class="row">
-					<div class="col-sm-6">
-						레이아웃 
-					</div>
+					<div class="col-sm-6"></div>
 					<div class="col-sm-6">
 						<div class="btn-group" data-toggle="buttons">
 							<label class="btn btn-info">
