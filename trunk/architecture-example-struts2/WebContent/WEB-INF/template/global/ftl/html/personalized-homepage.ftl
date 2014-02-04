@@ -1081,16 +1081,14 @@
 					
 					
 					<div class="panel panel-default col-sm-4">
-					<div class="panel-heading">
-						<h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 공지 & 이벤트</a></h5>
-					</div>
-					<div id="collapseOne" class="panel-collapse collapse in">
-						<div class="panel-body">
-							<div id="announce-grid" ></div>
+						<div class="panel-heading">
+							<h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 공지 & 이벤트</a></h5>
+						</div>
+							<div class="panel-body">
+								<div id="announce-grid" ></div>
+							</div>
 						</div>
 					</div>
-				</div>
-				
 				
 					</div>
 				</div>
