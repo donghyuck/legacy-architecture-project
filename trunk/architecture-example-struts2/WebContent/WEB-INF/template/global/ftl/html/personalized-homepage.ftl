@@ -324,6 +324,12 @@
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 							});															
+							
+							
+							$("input[name=attachment-list-view-filters']").on("change", function () {	
+							
+							}
+							
 							$("ul#attachment-list-view-filter li").find("a").click(function(){					
 								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
 								$("ul#attachment-list-view-filter li.active").removeClass("active");
@@ -1254,14 +1260,14 @@
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								</div>								
 								<div class="btn-group" data-toggle="buttons">
-								  <label class="btn btn-warning">
-								    <input type="radio" name="list-view-filters" id="option1" value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
+								  <label class="btn btn-warning active">
+								    <input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
 								  </label>
 								  <label class="btn btn-warning">
-								    <input type="radio" name="list-view-filters" id="option2" value="image"><i class="fa fa-filter"></i> 이미지
+								    <input type="radio" name="attachment-list-view-filters"  value="image"><i class="fa fa-filter"></i> 이미지
 								  </label>
 								  <label class="btn btn-warning">
-								    <input type="radio" name="list-view-filters" id="option3" value="file"><i class="fa fa-filter"></i> 파일
+								    <input type="radio" name="attachment-list-view-filters"  value="file"><i class="fa fa-filter"></i> 파일
 								  </label>
 								</div>
 								<div id="my-file-upload" class="hide">
