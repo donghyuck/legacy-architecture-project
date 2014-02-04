@@ -1050,7 +1050,8 @@
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
-						</div>	
+						</div>
+						<a href="#"><i class="fa fa-bars fa-2x"></i></a>	
 					</div>
 				</div>				
 				<div id="personalized-area" class="row blank-top-5">					
