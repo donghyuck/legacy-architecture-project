@@ -1040,7 +1040,7 @@
 		
 		#personalized-controls {
 			position: absolute;
-			top: 0;
+			top: 50px;
 			left:0;
 			min-height: 300px;
 			padding: 10px;
@@ -1074,7 +1074,7 @@
 					</div>
 				</div>				
 				<div id="personalized-controls" class="blank-top-5" style="display:none;">					
-					<button id="personalized-controls-hide" type="button" class="close pull-right" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
+					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 					
 					</div>
