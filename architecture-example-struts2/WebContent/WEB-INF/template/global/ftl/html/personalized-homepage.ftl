@@ -265,7 +265,8 @@
 							});	
 						}
 					} else if( show_bs_tab.attr('href') == '#my-files' ){					
-						if( !$('#attachment-list-view').data('kendoListView') ){								
+						if( !$('#attachment-list-view').data('kendoListView') ){			
+											
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
@@ -326,9 +327,8 @@
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
 							});															
-							
-							
-							$("#my-files input[name=attachment-list-view-filters']").on("change", function () {
+														
+							$("input[name='attachment-list-view-filters']").on("change", function () {
 								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
 								alert(this.value);
 								switch(this.value){
