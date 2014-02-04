@@ -1179,27 +1179,9 @@
 						</ul>
 					</div><!-- /dl-menuwrapper -->
 
-							<div class="panel panel-default">
-								<div class="panel-body">
-									<div class="panel-heading">공지 & 이벤트
-									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-									</div>								
-									<div id="announce-grid" ></div>
-								</div>
-							</div>
 							
-							
-						</div>
-						
-						<div class="col-sm-4">
-						
 
-<ul class="cbp-ig-grid">
+				<ul class="cbp-ig-grid">
 					<li>
 						<a href="#">
 							<span class="cbp-ig-icon cbp-ig-icon-shoe"></span>
@@ -1242,7 +1224,25 @@
 							<span class="cbp-ig-category">Music</span>
 						</a>
 					</li>
-				</ul>
+				</ul>							
+							
+						</div>
+						
+						<div class="col-sm-4">
+	<div class="panel panel-default">
+								<div class="panel-body">
+									<div class="panel-heading">공지 & 이벤트
+									<div class="k-window-actions panel-header-actions">										
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>
+									</div>								
+									<div id="announce-grid" ></div>
+								</div>
+							</div>					
+
 							
 							
 						
