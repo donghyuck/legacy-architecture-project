@@ -1033,6 +1033,13 @@
 		.navbar{
 			margin-bottom: 0px;
 		}
+		
+		#personalized-controls-area {
+			position: absolute;
+			top: 0;
+			overflow: hidden;
+			background-color: rgba(0,0,0,0.8)		
+		}
 		</style>   	
 	</head>
 	<body id="doc" class="cbp-spmenu-push">
