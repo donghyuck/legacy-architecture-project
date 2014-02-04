@@ -37,6 +37,10 @@
 					classie.toggle( menuRight, 'cbp-spmenu-open' );				
 				});
 												
+				$("#personalized-controls-area-down").click(function (e) {
+					kendo.fx($("personalized-controls-area").expand("vertical").stop().play();
+				});								
+												
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
 					var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
@@ -1051,10 +1055,10 @@
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
 						</div>
-						<a href="#" class="btn btn-info"><i class="fa fa-bars"></i></a>	
+						<button type="button" id="personalized-controls-area-down" class="btn btn-info"><i class="fa fa-bars"></i></button>	
 					</div>
 				</div>				
-				<div id="controls-area" class="row blank-top-5" style="min-height:300px;">				
+				<div id="personalized-controls-area" class="row blank-top-5" style="min-height:300px;">				
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
