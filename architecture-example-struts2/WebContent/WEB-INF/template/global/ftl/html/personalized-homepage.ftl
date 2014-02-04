@@ -286,7 +286,7 @@
 											}
 										}
 									},
-									pageSize: 12,
+									pageSize: 10,
 									error:handleKendoAjaxError,
 									schema: {
 										model: Attachment,
@@ -387,7 +387,7 @@
 									transport: {
 										read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' }
 									},
-									pageSize: 12,
+									pageSize: 10,
 									error:handleKendoAjaxError,
 									schema: {
 										model: Image,
