@@ -1312,6 +1312,7 @@
 									<div class="btn-group">			
 										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>		
 									</div>		
+									<div class="blank-top-5" ></div>
 									<div class="panel panel-default panel-flat">								
 										<div class="panel-body scrollable" style="max-height:450px;">
 											<div id="photo-list-view" ></div>
@@ -1323,8 +1324,9 @@
 								</section>							
 								<section class="side2">
 									<div class="btn-group">			
-										<button type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i></button>		
+										<button type="button" class="close"><i class="fa fa-chevron-left"></i></button>		
 									</div>	
+									
 									<div id="my-photo-upload" class="hide">
 										<#if !action.user.anonymous >		
 										<div class="blank-top-5 "></div>	
