@@ -1070,7 +1070,6 @@
 					<div class="row">
 					
 					</div>
-				</div>				
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
