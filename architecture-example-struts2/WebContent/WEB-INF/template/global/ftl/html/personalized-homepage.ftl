@@ -1078,6 +1078,20 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 					
+					
+					
+					<div class="panel panel-default col-sm-4">
+					<div class="panel-heading">
+						<h5 class="panel-title"><a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"> 공지 & 이벤트</a></h5>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse in">
+						<div class="panel-body">
+							<div id="announce-grid" ></div>
+						</div>
+					</div>
+				</div>
+				
+				
 					</div>
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
