@@ -1037,20 +1037,20 @@
 			<div  class="container" style="min-height:600px;">		
 				<div class="row">
 					<div class="col-sm-6">
-						레이아웃 <div class="btn-group" data-toggle="buttons">
-						  <label class="btn btn-primary">
-						    <input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
-						  </label>
-						  <label class="btn btn-primary active">
-						    <input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
-						  </label>
-						  <label class="btn btn-primary">
-						    <input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
-						  </label>
-						</div>
+						레이아웃 
 					</div>
 					<div class="col-sm-6">
-						
+						<div class="btn-group" data-toggle="buttons">
+							<label class="btn btn-info">
+								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
+							</label>
+							<label class="btn btn-info active">
+						 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
+							</label>
+							<label class="btn btn-info">
+								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
+							</label>
+						</div>	
 					</div>
 				</div>				
 				<div id="personalized-area" class="row blank-top-5">					
