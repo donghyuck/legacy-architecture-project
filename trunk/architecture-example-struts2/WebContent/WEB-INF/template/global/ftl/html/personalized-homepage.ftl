@@ -1115,7 +1115,7 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 						<div class="col-sm-4">
-							<div class="fleft">						
+				
 								<select id="cd-dropdown" class="cd-select">
 									<option value="-1" selected>Choose a network to add</option>
 									<option value="1" class="icon-google-plus">Google Plus</option>
@@ -1123,7 +1123,7 @@
 									<option value="3" class="icon-twitter">Twitter</option>
 									<option value="4" class="icon-github">GitHub</option>
 								</select>				
-							</div>			
+
 						</div>
 						
 						<div class="col-sm-4">
