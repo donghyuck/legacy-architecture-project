@@ -1084,6 +1084,21 @@
 	background: #fc756f;
 	color: #fff;
 }
+	
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+.clearfix {
+	*zoom: 1;
+}
 		
 		</style>   	
 	</head>
