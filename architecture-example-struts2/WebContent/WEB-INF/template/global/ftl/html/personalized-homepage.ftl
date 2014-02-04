@@ -1076,6 +1076,7 @@
 				<div id="personalized-controls" class="blank-top-5" style="display:none;">					
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
+					<!--
 						<div class="col-sm-3 demo-1">
 				
 					<div id="dl-menu" class="dl-menuwrapper">
@@ -1178,8 +1179,10 @@
 								</ul>
 							</li>
 						</ul>
-					</div><!-- /dl-menuwrapper -->
-					
+					</div>
+					-->
+					<!-- /dl-menuwrapper -->
+					<!--
 						<div class="btn-group-vertical">
 							 <button type="button" class="btn btn-info active"><i class="fa fa-square"></i>&nbsp;공지 & 이벤트</button>
 							  <button type="button" class="btn btn-info"></button>
@@ -1188,7 +1191,7 @@
 						
 												
 						</div>
-						
+						-->
 						<div class="col-sm-4">
 							<div class="panel panel-success panel-flat">
 								<div class="panel-heading" style="border:0px;">공지 & 이벤트
