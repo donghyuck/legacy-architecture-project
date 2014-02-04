@@ -1047,12 +1047,6 @@
 			overflow: hidden;
 			background-color: rgba(91,192,222,0.8)		
 		}
-		
-		.fleft {
-			float: left;
-			width: 49%;
-			min-width: 300px;
-		}
 
 		.cd-dropdown > span,
 		.cd-dropdown ul li:nth-last-child(-n+3) span {
