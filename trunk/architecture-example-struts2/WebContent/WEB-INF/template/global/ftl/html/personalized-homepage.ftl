@@ -1081,8 +1081,13 @@
 						
 							<div class="panel panel-default">
 								<div class="panel-body">
-									<div class="panel-heading">
-										<h5 class="panel-title">공지 & 이벤트</h5>
+									<div class="panel-heading">공지 & 이벤트
+									<div class="k-window-actions panel-header-actions">										
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>
 									</div>								
 									<div id="announce-grid" ></div>
 								</div>
