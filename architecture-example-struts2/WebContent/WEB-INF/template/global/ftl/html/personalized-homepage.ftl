@@ -1200,9 +1200,5 @@
 		</script>					
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
-		<!-- START SIDE MENU -->
-		<#include "/html/community/personalized-hompage-side-menu.ftl" >	
-
-		<!-- END SIDE MENU -->	
 	</body>    
 </html>
