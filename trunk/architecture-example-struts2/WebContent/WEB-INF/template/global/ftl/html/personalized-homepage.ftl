@@ -271,7 +271,9 @@
 								totalImageCount : "0",
 								totalFileCount : "0"							
 							});
-							kendo.bind($("#attachment-list-view-filter"), attachementTotalModle );						
+							
+							kendo.bind($("#attachment-list-filter"), attachementTotalModle );		
+											
 							$("#attachment-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
@@ -327,9 +329,21 @@
 							
 							
 							$("input[name=attachment-list-view-filters']").on("change", function () {	
+								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
+								switch(this.value){
+									case "all" :
+										attachment_list_view.dataSource.filter(  { field: "contentType", operator: "neq", value: "" } ) ; 
+										break;
+									case "image" :
+										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
+										break;
+									case "file" :
+										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
+										break;
+								}
+							});
 							
-							}
-							
+							/*
 							$("ul#attachment-list-view-filter li").find("a").click(function(){					
 								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
 								$("ul#attachment-list-view-filter li.active").removeClass("active");
@@ -347,6 +361,9 @@
 										break;											
 								}
 							});							
+							
+							*/
+							
 							$("#pager").kendoPager({
 								refresh : true,
 								buttonCount : 5,
@@ -1259,7 +1276,7 @@
 								<div class="btn-group">
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								</div>								
-								<div class="btn-group" data-toggle="buttons">
+								<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
 								  <label class="btn btn-warning active">
 								    <input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
 								  </label>
@@ -1279,7 +1296,8 @@
 									</#if>							
 								</div>
 								<div class="blank-top-5 "></div>
-								<div class="panel panel-default" style="margin-bottom:0px;">
+								<div class="panel panel-default panel-flat" style="margin-bottom:0px;">
+								<!--
 									<div class="panel-heading">
 										<ul id="attachment-list-view-filter" class="nav nav-pills">
 											<li class="active">
@@ -1292,6 +1310,7 @@
 											</li>									  
 										</ul>																				
 									</div>
+								-->	
 									<div class="panel-body scrollable" style="max-height:450px;">
 										<div id="attachment-list-view" ></div>
 									</div>	
