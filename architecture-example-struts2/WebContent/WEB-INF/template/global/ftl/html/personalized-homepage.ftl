@@ -1043,6 +1043,7 @@
 			top: 0;
 			left:0;
 			min-height: 300px;
+			padding: 10px;
 			width: 100%;
 			overflow: hidden;
 			background-color: rgba(0,0,0,0.8)		
@@ -1134,7 +1135,9 @@
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 		<!-- START SIDE MENU -->
+		<!--
 		<#include "/html/community/personalized-hompage-side-menu.ftl" >	
+		-->
 		<!-- END SIDE MENU -->	
 	</body>    
 </html>
