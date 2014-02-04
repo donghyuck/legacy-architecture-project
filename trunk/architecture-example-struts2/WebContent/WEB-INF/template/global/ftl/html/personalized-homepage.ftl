@@ -461,8 +461,7 @@
 									control_button.click( function(e){		
 										$("#my-photo-stream .side1").toggleClass("hide");										
 										$("#my-photo-stream .side2").toggleClass("hide");										
-									});
-								}
+									});								
 								}								
 							});
 						}
