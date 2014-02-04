@@ -1070,7 +1070,7 @@
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
 						</div>
-						<button type="button" id="personalized-controls-show" class="btn btn-info"><i class="fa fa-bars"></i></button>	
+						<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	
 					</div>
 				</div>				
 				<div id="personalized-controls" class="blank-top-5" style="display:none;">					
@@ -1222,7 +1222,7 @@
 							<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
 							</#if>						
 						</ul>								
-						<div class="tab-content">	
+						<div class="tab-content" style="background-color:#ffffff;">	
 							<!-- start social -->		
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
