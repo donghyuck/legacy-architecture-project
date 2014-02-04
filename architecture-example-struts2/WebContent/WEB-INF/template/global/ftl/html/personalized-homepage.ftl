@@ -1190,7 +1190,7 @@
 						</div>
 						
 						<div class="col-sm-4">
-							<div class="panel panel-success">
+							<div class="panel panel-success panel-flat">
 								<div class="panel-heading" style="border:0px;">공지 & 이벤트
 									<!--
 									<div class="k-window-actions panel-header-actions">										
