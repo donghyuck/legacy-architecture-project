@@ -1254,7 +1254,7 @@ All this is done for any sub-level being entered.
 }
 
 /* General button style (reset) */
-.btn {
+.c-btn {
 	border: none;
 	font-family: inherit;
 	font-size: inherit;
@@ -1274,7 +1274,7 @@ All this is done for any sub-level being entered.
 	transition: all 0.3s;
 }
 
-.btn:after {
+.c-btn:after {
 	content: '';
 	position: absolute;
 	z-index: -1;
@@ -1284,7 +1284,7 @@ All this is done for any sub-level being entered.
 }
 
 /* Pseudo elements for icons */
-.btn:before,
+.c-btn:before,
 .icon-heart:after,
 .icon-star:after,
 .icon-plus:after,
