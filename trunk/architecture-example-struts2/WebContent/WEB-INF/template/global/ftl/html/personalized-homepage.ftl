@@ -48,9 +48,7 @@
 				
 				
 				$( '#cd-dropdown' ).dropdown( {
-					gutter : 5,
-					delay : 100,
-					random : true
+					gutter : 5
 				} );
 				
 															
@@ -1116,13 +1114,13 @@
 					<div class="row">
 						<div class="col-sm-4">
 				
-								<select id="cd-dropdown" class="cd-select">
-									<option value="-1" selected>Choose a network to add</option>
-									<option value="1" class="icon-google-plus">Google Plus</option>
-									<option value="2" class="icon-facebook">Facebook</option>
-									<option value="3" class="icon-twitter">Twitter</option>
-									<option value="4" class="icon-github">GitHub</option>
-								</select>				
+					<select id="cd-dropdown" name="cd-dropdown" class="cd-select">
+						<option value="-1" selected>Choose your favorite animal</option>
+						<option value="1" class="icon-monkey">Monkey</option>
+						<option value="2" class="icon-bear">Bear</option>
+						<option value="3" class="icon-squirrel">Squirrel</option>
+						<option value="4" class="icon-elephant">Elephant</option>
+					</select>		
 
 						</div>
 						
