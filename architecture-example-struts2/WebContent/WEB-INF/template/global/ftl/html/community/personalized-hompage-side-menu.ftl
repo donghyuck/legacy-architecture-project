@@ -3,8 +3,9 @@
 		<!-- ================================================== -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
 			<div class="blank-top-50"></div>
+			<!--
 			 <a href="#" id="hide-right-slide" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
-
+-->
 			 
 			<div class="panel-group" id="accordion">
 				<div class="panel panel-default">
