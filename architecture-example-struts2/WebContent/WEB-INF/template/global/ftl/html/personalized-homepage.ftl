@@ -1048,6 +1048,11 @@
 			background-color: rgba(91,192,222,0.8)		
 		}
 		
+		.fleft {
+			float: left;
+			width: 49%;
+			min-width: 300px;
+		}
 
 		.cd-dropdown > span,
 		.cd-dropdown ul li:nth-last-child(-n+3) span {
@@ -1086,6 +1091,7 @@
 			background: #4d8c9d;
 			color: #fff;
 		}		
+		
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
@@ -1115,13 +1121,15 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 						<div class="col-sm-4">
-							<select id="cd-dropdown" class="cd-select">
-								<option value="-1" selected>Choose a network to add</option>
-								<option value="1" class="icon-google-plus">Google Plus</option>
-								<option value="2" class="icon-facebook">Facebook</option>
-								<option value="3" class="icon-twitter">Twitter</option>
-								<option value="4" class="icon-github">GitHub</option>
-							</select>							
+							<div class="fleft">						
+								<select id="cd-dropdown" class="cd-select">
+									<option value="-1" selected>Choose a network to add</option>
+									<option value="1" class="icon-google-plus">Google Plus</option>
+									<option value="2" class="icon-facebook">Facebook</option>
+									<option value="3" class="icon-twitter">Twitter</option>
+									<option value="4" class="icon-github">GitHub</option>
+								</select>				
+							</div>			
 						</div>
 						
 						<div class="col-sm-4">
