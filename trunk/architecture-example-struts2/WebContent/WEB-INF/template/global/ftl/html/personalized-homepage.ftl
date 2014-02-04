@@ -1183,15 +1183,15 @@
 							
 <section class="color-3">
 				<p>
-					<button class="btn btn-3 btn-3a icon-cart">Add to cart</button>
-					<button class="btn btn-3 btn-3b icon-star-2">Bookmark</button>
+					<button class="c-btn btn-3 btn-3a icon-cart">Add to cart</button>
+					<button class="c-btn btn-3 btn-3b icon-star-2">Bookmark</button>
 				</p>
 				<p>
-					<button class="btn btn-3 btn-3c icon-heart-2">Favorite</button>
+					<button class="c-btn btn-3 btn-3c icon-heart-2">Favorite</button>
 				</p>
 				<p>
-					<button class="btn btn-3 btn-3d icon-cog">Settings</button>
-					<button class="btn btn-3 btn-3e icon-arrow-right">Send data</button>
+					<button class="c-btn btn-3 btn-3d icon-cog">Settings</button>
+					<button class="c-btn btn-3 btn-3e icon-arrow-right">Send data</button>
 				</p>
 			</section>
 
