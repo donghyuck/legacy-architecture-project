@@ -1184,6 +1184,7 @@
 			<section class="color-3">
 				<p>
 					<button class="c-btn btn-3 btn-3c icon-heart-2">공지 & 이벤트</button>
+					<button class="c-btn btn-3 btn-3c icon-heart-2">쇼셜</button>
 					<button class="c-btn btn-3 btn-3d icon-cog">Settings</button>
 				</p>
 			</section>
