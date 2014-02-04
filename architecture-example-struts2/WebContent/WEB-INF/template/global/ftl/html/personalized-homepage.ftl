@@ -1179,11 +1179,6 @@
 						</ul>
 					</div><!-- /dl-menuwrapper -->
 
-
-						</div>
-						
-						<div class="col-sm-4">
-						
 							<div class="panel panel-default">
 								<div class="panel-body">
 									<div class="panel-heading">공지 & 이벤트
@@ -1197,6 +1192,57 @@
 									<div id="announce-grid" ></div>
 								</div>
 							</div>
+							
+							
+						</div>
+						
+						<div class="col-sm-4">
+						
+
+<ul class="cbp-ig-grid">
+					<li>
+						<a href="#">
+							<span class="cbp-ig-icon cbp-ig-icon-shoe"></span>
+							<h3 class="cbp-ig-title">Squid voluptate</h3>
+							<span class="cbp-ig-category">Fashion</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="cbp-ig-icon cbp-ig-icon-ribbon"></span>
+							<h3 class="cbp-ig-title">Mixtape lo-fi</h3>
+							<span class="cbp-ig-category">Design</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="cbp-ig-icon cbp-ig-icon-milk"></span>
+							<h3 class="cbp-ig-title">Cosby sweater</h3>
+							<span class="cbp-ig-category">Lifestyle</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="cbp-ig-icon cbp-ig-icon-whippy"></span>
+							<h3 class="cbp-ig-title">Commodo</h3>
+							<span class="cbp-ig-category">Food</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="cbp-ig-icon cbp-ig-icon-spectacles"></span>
+							<h3 class="cbp-ig-title">Bitters kitsch</h3>
+							<span class="cbp-ig-category">Gadgets</span>
+						</a>
+					</li>
+					<li>
+						<a href="#">
+							<span class="cbp-ig-icon cbp-ig-icon-doumbek"></span>
+							<h3 class="cbp-ig-title">Austin proident</h3>
+							<span class="cbp-ig-category">Music</span>
+						</a>
+					</li>
+				</ul>
 							
 							
 						
