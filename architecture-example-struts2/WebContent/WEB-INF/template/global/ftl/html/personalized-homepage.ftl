@@ -343,27 +343,6 @@
 								}
 							});
 							
-							/*
-							$("ul#attachment-list-view-filter li").find("a").click(function(){					
-								var attachment_list_view = $('#attachment-list-view').data('kendoListView');
-								$("ul#attachment-list-view-filter li.active").removeClass("active");
-								$(this).parent().addClass("active");
-								var filter_id =  $(this).attr('id') ;
-								switch(filter_id){
-									case "attachment-list-view-filter-1" :
-										attachment_list_view.dataSource.filter(  { field: "contentType", operator: "neq", value: "" } ) ; 
-										break;
-									case "attachment-list-view-filter-2":
-										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "image" }) ; 
-										break;
-									case "attachment-list-view-filter-3":
-										attachment_list_view.dataSource.filter( { field: "contentType", operator: "startswith", value: "application" }) ; 
-										break;											
-								}
-							});							
-							
-							*/
-							
 							$("#pager").kendoPager({
 								refresh : true,
 								buttonCount : 5,
@@ -396,8 +375,8 @@
 													}
 											});						
 										}
-										$("#my-files .panel").toggleClass("hide");										
-										$("#my-file-upload").toggleClass("hide");										
+										$("#my-files .side1").toggleClass("hide");										
+										$("#my-files .side2").toggleClass("hide");										
 									});									
 								}								
 							});									
