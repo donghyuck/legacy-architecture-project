@@ -38,7 +38,7 @@
 				});
 												
 				$("#personalized-controls-area-down").click(function (e) {
-					kendo.fx($("personalized-controls-area").expand("vertical").stop().play();
+					kendo.fx($("personalized-controls-area")).expand("vertical").stop().play();
 				});								
 												
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
