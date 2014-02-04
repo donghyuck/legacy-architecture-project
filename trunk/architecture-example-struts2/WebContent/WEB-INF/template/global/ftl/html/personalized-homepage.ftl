@@ -1307,7 +1307,7 @@
 						</div><!-- end of tab content -->												
 					
 					
-					</div></div>
+					</div>
 					
 					</div></div></div>
 					
