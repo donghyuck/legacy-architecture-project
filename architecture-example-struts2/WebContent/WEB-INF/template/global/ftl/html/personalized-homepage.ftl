@@ -1227,8 +1227,7 @@
 										<div id="pager" class="k-pager-wrap"></div>
 									</div>
 								</div>																					
-							</div>
-							<!-- end attachements -->		
+							</div><!-- end attachements -->		
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
 								<div class="blank-top-5" ></div>		
@@ -1251,11 +1250,10 @@
 										<div id="photo-list-pager" class="k-pager-wrap"></div>
 									</div>
 								</div>																				
-							</div>							
-							<!-- end photos -->
+							</div><!-- end photos -->
 						</div><!-- end of tab content -->												
 					</div>
-
+</div></div>
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
