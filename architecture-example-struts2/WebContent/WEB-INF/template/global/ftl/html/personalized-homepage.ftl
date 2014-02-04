@@ -1145,6 +1145,64 @@
 							
 						
 						</div>
+						<div class="col-sm-4">
+
+				<div class="panel panel-default">
+					<div class="panel-heading" style="border:0px;">공유</div>
+					<div class="panel-body clearfix">
+						<ul class="nav nav-tabs" id="myTab">
+							<li>
+								<a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a>
+							</li>							
+							<#if !action.user.anonymous >	
+							<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
+							<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
+							</#if>						
+						</ul>								
+						<!-- start  of tab content -->				
+						<div class="tab-content">	
+							<div class="tab-pane" id="my-message-notes">
+								<div class="blank-top-5" ></div>		
+								<div class="panel panel-default" style="margin-bottom:0px;">
+									<div class="panel-body">			
+										<ul class="media-list">
+											<li class="media">
+												<a class="pull-left" href="#">
+													<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+												</a>
+												<div class="media-body">
+													<div class="popover right" style="display:true;">
+														<div class="arrow"></div>
+														<!--<h3 class="popover-title">알림</h3>-->
+														<div class="popover-content">
+															<p>새로운 메시지가 없습니다.</p>
+														</div>
+													</div>	
+												</div>
+											</li>
+											<li class="media">
+												<a class="pull-right" href="#">
+													<img class="media-object" src="${request.contextPath}/images/common/anonymous.png" alt="...">
+												</a>
+												<div class="media-body">
+													<div class="popover left" style="display:true;">
+														<div class="arrow"></div>
+														<!--<h3 class="popover-title">알림</h3>-->
+														<div class="popover-content">
+															<p>새로운 메시지가 없습니다.</p>
+														</div>
+													</div>	
+												</div>
+											</li>  
+									</ul>
+									</div>
+									<div class="panel-footer"">
+										<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span>   메시지 작성</button>
+									</div>
+								</div>								
+							</div>	
+													
+						</div>						
 					</div>
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
