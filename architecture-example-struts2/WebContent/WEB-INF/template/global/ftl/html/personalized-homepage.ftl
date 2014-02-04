@@ -37,8 +37,8 @@
 					classie.toggle( menuRight, 'cbp-spmenu-open' );				
 				});
 												
-				$("#personalized-controls-area-down").click(function (e) {
-					kendo.fx($("personalized-controls-area")).expand("vertical").stop().play();
+				$("#personalized-controls-show").click(function (e) {
+					kendo.fx($("personalized-controls")).expand("vertical").stop().play();
 				});								
 												
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
@@ -1034,7 +1034,7 @@
 			margin-bottom: 0px;
 		}
 		
-		#personalized-controls-area {
+		#personalized-controls {
 			position: absolute;
 			top: 0;
 			width: 100%;
@@ -1063,10 +1063,10 @@
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
 						</div>
-						<button type="button" id="personalized-controls-area-down" class="btn btn-info"><i class="fa fa-bars"></i></button>	
+						<button type="button" id="personalized-controls-show" class="btn btn-info"><i class="fa fa-bars"></i></button>	
 					</div>
 				</div>				
-				<div id="personalized-controls-area" class="blank-top-5" style="min-height:300px;">
+				<div id="personalized-controls" class="blank-top-5" style="min-height:300px;">
 					<div class="row">
 					
 					</div>
