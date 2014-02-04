@@ -1031,18 +1031,6 @@
 			max-width: 600px;
 			width: 100%;
 		}
-		.cbp-spmenu {
-			padding: 5px;
-			background-color: rgba(0,0,0,0.2);
-		}
-		
-		.cbp-spmenu-right {
-			right: -400px;
-		}
-		
-		.cbp-spmenu-vertical{
-			width: 400px;
-		}
 		
 		.navbar{
 			margin-bottom: 0px;
@@ -1059,6 +1047,45 @@
 			overflow: hidden;
 			background-color: rgba(91,192,222,0.8)		
 		}
+		
+
+		.cd-dropdown > span,
+		.cd-dropdown ul li:nth-last-child(-n+3) span {
+			box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+		}
+		
+		.cd-dropdown ul {
+			position: absolute;
+			top: 0px;
+			width: 100%;
+		}
+		
+		.cd-dropdown ul li {
+			position: absolute;
+			width: 100%;
+		}
+		
+		.cd-active.cd-dropdown > span {
+			color: #4d8c9d;
+		}
+		
+		.cd-active.cd-dropdown > span,
+		.cd-active.cd-dropdown ul li span {
+			box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+		}
+		
+		.cd-active.cd-dropdown ul li span {
+			-webkit-transition: all 0.2s linear 0s;
+			-moz-transition: all 0.2s linear 0s;
+			-ms-transition: all 0.2s linear 0s;
+			-o-transition: all 0.2s linear 0s;
+			transition: all 0.2s linear 0s;
+		}
+		
+		.cd-active.cd-dropdown ul li span:hover {
+			background: #4d8c9d;
+			color: #fff;
+		}		
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
