@@ -1273,42 +1273,46 @@
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-files">
 								<div class="blank-top-5 "></div>
-								<div class="btn-group">
-									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
-								</div>								
-								<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
-								  <label class="btn btn-warning active">
-								    <input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
-								  </label>
-								  <label class="btn btn-warning">
-								    <input type="radio" name="attachment-list-view-filters"  value="image"><i class="fa fa-filter"></i> 이미지
-								  </label>
-								  <label class="btn btn-warning">
-								    <input type="radio" name="attachment-list-view-filters"  value="file"><i class="fa fa-filter"></i> 파일
-								  </label>
-								</div>
-								<div id="my-file-upload" class="hide">
-									<div class="blank-top-5" ></div>											
-									<#if !action.user.anonymous >			
-									
+								<section class="side1">
+									<div class="btn-group">
+										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
+									</div>			
+									<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
+										<label class="btn btn-warning active">
+											<input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
+										</label>
+										<label class="btn btn-warning">
+											<input type="radio" name="attachment-list-view-filters"  value="image"><i class="fa fa-filter"></i> 이미지
+										</label>
+										<label class="btn btn-warning">
+											<input type="radio" name="attachment-list-view-filters"  value="file"><i class="fa fa-filter"></i> 파일
+										</label>	
+									</div>
+									<div class="blank-top-5" ></div>		
+									<div class="panel panel-default panel-flat">
+										<div class="panel-body scrollable" style="max-height:450px;">
+											<div id="attachment-list-view" ></div>
+										</div>	
+										<div class="panel-footer" style="padding:0px;">
+											<div id="pager" class="k-pager-wrap"></div>
+										</div>
+									</div>																							
+								</section>
+								<section class="side2 hide">
+									<div class="btn-group">			
+										<button type="button" class="close"><i class="fa fa-chevron-left"></i></button>		
+									</div>									
+									<div class="blank-top-5 "></div>
+									<#if !action.user.anonymous >									
 									<input name="uploadAttachment" id="attachment-files" type="file" />				
 									<div class="alert alert-info alert-flat"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>					
-									</#if>							
-								</div>
-								<div class="blank-top-5 "></div>
-								<div class="panel panel-default panel-flat" style="margin-bottom:0px;">
-									<div class="panel-body scrollable" style="max-height:450px;">
-										<div id="attachment-list-view" ></div>
-									</div>	
-									<div class="panel-footer" style="padding:0px;">
-										<div id="pager" class="k-pager-wrap"></div>
-									</div>
-								</div>																					
+									</#if>									
+								</section>																													
 							</div><!-- end attachements -->		
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
 								<div class="blank-top-5" ></div>		
-								<div class="side1">
+								<section class="side1">
 									<div class="btn-group">			
 										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>		
 									</div>		
@@ -1321,8 +1325,8 @@
 											<div id="photo-list-pager" class="k-pager-wrap"></div>
 										</div>
 									</div>																
-								</div>							
-								<div class="side2"  class="hide">
+								</section>							
+								<section class="side2 hide">
 									<div class="btn-group">			
 										<button type="button" class="close"><i class="fa fa-chevron-left"></i></button>		
 									</div>									
@@ -1333,7 +1337,7 @@
 										<div class="alert alert-info alert-flat"><strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)을 끌어서 놓기(Drag & Drop)를 하세요.</div>
 										</#if>							
 									</div>																		
-								</div>				
+								</section>				
 							</div><!-- end photos -->
 						</div><!-- end of tab content -->												
 					
