@@ -1322,12 +1322,11 @@
 										</div>
 									</div>																
 								</section>							
-								<section class="side2">
+								<section class="side2"  class="hide">
 									<div class="btn-group">			
 										<button type="button" class="close"><i class="fa fa-chevron-left"></i></button>		
-									</div>	
-									
-									<div id="my-photo-upload" class="hide">
+									</div>									
+									<div id="my-photo-upload">
 										<#if !action.user.anonymous >		
 										<div class="blank-top-5 "></div>	
 										<input name="uploadPhotos" id="photo-files" type="file" />	
