@@ -1051,7 +1051,7 @@
 		}
 		</style>   	
 	</head>
-	<body id="doc" class="cbp-spmenu-push">
+	<body id="doc" class="bg-gray">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
