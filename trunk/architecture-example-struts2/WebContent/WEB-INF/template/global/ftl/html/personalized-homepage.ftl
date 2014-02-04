@@ -378,6 +378,11 @@
 										$("#my-files .side1").toggleClass("hide");										
 										$("#my-files .side2").toggleClass("hide");										
 									});									
+								}else if (control_button_icon.hasClass("fa-th-list")){
+									control_button.click( function(e){		
+										$("#my-files .side1").toggleClass("hide");										
+										$("#my-files .side2").toggleClass("hide");										
+									});
 								}								
 							});									
 						}
@@ -449,9 +454,15 @@
 													}
 											});		
 										}										
-										$("#my-photo-stream .panel").toggleClass("hide");										
-										$("#my-photo-upload").toggleClass("hide");										
+										$("#my-photo-stream .side1").toggleClass("hide");										
+										$("#my-photo-stream .side2").toggleClass("hide");										
+									});									
+								}else if (control_button_icon.hasClass("fa-th-list")){
+									control_button.click( function(e){		
+										$("#my-photo-stream .side1").toggleClass("hide");										
+										$("#my-photo-stream .side2").toggleClass("hide");										
 									});
+								}
 								}								
 							});
 						}
@@ -1279,7 +1290,7 @@
 								</section>
 								<section class="side2 hide">
 									<div class="btn-group">			
-										<button type="button" class="btn btn-info"><i class="fa fa-chevron-left"></i></button>		
+										<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>		
 									</div>									
 									<div class="blank-top-5 "></div>
 									<#if !action.user.anonymous >									
@@ -1307,7 +1318,7 @@
 								</section>							
 								<section class="side2 hide">
 									<div class="btn-group">			
-										<button type="button" class="close"><i class="fa fa-chevron-left"></i></button>		
+										<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>			
 									</div>									
 									<div id="my-photo-upload">
 										<#if !action.user.anonymous >		
