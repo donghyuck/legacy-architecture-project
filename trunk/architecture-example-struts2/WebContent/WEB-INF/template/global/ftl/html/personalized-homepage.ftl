@@ -19,7 +19,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/jquery.extension/modernizr.custom.js',
 			'${request.contextPath}/js/jquery.extension/jquery.dlmenu.min.js',
-			'${request.contextPath}/js/jquery.extension/classie.js.min.js'],
+			'${request.contextPath}/js/jquery.extension/classie.min.js'],
 			complete: function() {
 			
 				// 1.  한글 지원을 위한 로케일 설정
