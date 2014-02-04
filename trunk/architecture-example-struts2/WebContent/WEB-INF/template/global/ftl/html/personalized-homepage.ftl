@@ -1181,7 +1181,7 @@
 					</div><!-- /dl-menuwrapper -->
 					
 						<div class="btn-group-vertical">
-							 <button type="button" class="btn btn-info active"><i class="fa fa-square"></i>공지 & 이벤트</button>
+							 <button type="button" class="btn btn-info active"><i class="fa fa-square"></i>&nbsp;공지 & 이벤트</button>
 							  <button type="button" class="btn btn-info"></button>
 							   <button type="button" class="btn btn-info">Left</button>
 						</div>
@@ -1208,10 +1208,11 @@
 						</div>
 						<div class="col-sm-4">
 
+<!--
 				<div class="panel panel-default">
 					<div class="panel-heading" style="border:0px;">공유</div>
 					<div class="panel-body clearfix">
-						
+-->						
 						<ul class="nav nav-tabs" id="myTab">
 							<li>
 								<a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a>
@@ -1306,10 +1307,14 @@
 								</div>																				
 							</div><!-- end photos -->
 						</div><!-- end of tab content -->												
+					
+					
 					</div>
 					
-					
+					<!--
 					</div></div></div>
+					-->
+					
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
