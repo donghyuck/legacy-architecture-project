@@ -1209,7 +1209,7 @@
 								</div>
 							</div>						
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-8">
 
 				<div class="panel panel-flat panel-default">
 					<div class="panel-body">
