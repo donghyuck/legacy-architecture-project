@@ -261,7 +261,7 @@
 								},
 								dataBound: function(e) {									
 								},
-								height: 300
+								height: 150
 							});	
 						}
 					} else if( show_bs_tab.attr('href') == '#my-files' ){					
