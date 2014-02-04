@@ -1181,7 +1181,7 @@
 
 							
 
-				<ul class="cbp-ig-grid">
+				<ul class="cbp-ig-grid" style="height: 300px;">
 					<li>
 						<a href="#">
 							<h3 class="cbp-ig-title">Squid voluptate</h3>
