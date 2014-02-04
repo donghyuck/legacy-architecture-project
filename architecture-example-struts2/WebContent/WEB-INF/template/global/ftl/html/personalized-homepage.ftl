@@ -1066,7 +1066,11 @@
 						<button type="button" id="personalized-controls-area-down" class="btn btn-info"><i class="fa fa-bars"></i></button>	
 					</div>
 				</div>				
-				<div id="personalized-controls-area" class="row blank-top-5" style="min-height:300px;">				
+				<div id="personalized-controls-area" class="blank-top-5" style="min-height:300px;">
+					<div class="row">
+					
+					</div>
+				</div>				
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
