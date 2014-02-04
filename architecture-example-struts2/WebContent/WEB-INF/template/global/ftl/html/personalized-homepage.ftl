@@ -1047,7 +1047,7 @@
 			width: 100%;
 			z-index: 1000;
 			overflow: hidden;
-			background-color: rgba(0,0,0,0.8)		
+			background-color: rgba(91,192,222,0.8)		
 		}
 		</style>   	
 	</head>
