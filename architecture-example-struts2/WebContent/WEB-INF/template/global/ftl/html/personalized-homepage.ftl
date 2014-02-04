@@ -38,11 +38,11 @@
 				});
 												
 				$("#personalized-controls-show").click(function (e) {
-					kendo.fx($("#personalized-controls")).expand("vertical").play();
+					kendo.fx($("#personalized-controls")).fade("in").play();
 				});							
 
 				$("#personalized-controls-hide").click(function (e) {
-					kendo.fx($("#personalized-controls")).expand("vertical").reverse();
+					kendo.fx($("#personalized-controls")).fade("out").reverse();
 				});					
 																
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
