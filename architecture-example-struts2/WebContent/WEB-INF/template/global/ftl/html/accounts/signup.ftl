@@ -216,12 +216,13 @@
 		}
 		
 		function signupCallbackResult( provider, data  ){
+			alert( provider  + "=" + data  );
 			if( data == null ){
 				homepage();					
 			}else{
 				var signup_form = $("#signup-form");
 				signup_form.data("signupPlaceHolder", new SignupForm(data) );		
-				kendo.bind(signup_form, signup_form.data("signupPlaceHolder") );				
+				kendo.bind(signup_form, signup_form.data("signupPlaceHolder") );
 			}			
 		}
 		
