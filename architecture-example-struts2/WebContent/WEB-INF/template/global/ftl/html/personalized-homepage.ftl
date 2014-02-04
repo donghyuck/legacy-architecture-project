@@ -1054,6 +1054,8 @@
 						<a href="#" class="btn btn-info"><i class="fa fa-bars"></i></a>	
 					</div>
 				</div>				
+				<div id="controls-area" class="row blank-top-5" style="min-height:300px;">				
+				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->						
 						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
