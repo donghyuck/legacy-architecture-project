@@ -1253,6 +1253,17 @@
 								<div class="btn-group">
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								</div>								
+								<div class="btn-group" data-toggle="buttons">
+								  <label class="btn btn-primary">
+								    <input type="radio" name="options" id="option1"> Option 1
+								  </label>
+								  <label class="btn btn-primary">
+								    <input type="radio" name="options" id="option2"> Option 2
+								  </label>
+								  <label class="btn btn-primary">
+								    <input type="radio" name="options" id="option3"> Option 3
+								  </label>
+								</div>
 								<div id="my-file-upload" class="hide">
 									<div class="blank-top-5" ></div>											
 									<#if !action.user.anonymous >			
