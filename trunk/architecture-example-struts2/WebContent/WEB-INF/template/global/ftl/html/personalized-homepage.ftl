@@ -1026,7 +1026,9 @@
 			width: 400px;
 		}
 		
-		
+		.navbar{
+			margin-bottom: 0px;
+		}
 		</style>   	
 	</head>
 	<body id="doc" class="cbp-spmenu-push">
