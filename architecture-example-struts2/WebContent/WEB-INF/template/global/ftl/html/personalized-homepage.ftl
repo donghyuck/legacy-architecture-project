@@ -1255,13 +1255,13 @@
 								</div>								
 								<div class="btn-group" data-toggle="buttons">
 								  <label class="btn btn-success">
-								    <input type="radio" name="options" id="option1"> Option 1
+								    <input type="radio" name="options" id="option1"> 전체<span class="badge pull-right" data-bind="text: totalAttachCount"></span>
 								  </label>
 								  <label class="btn btn-primary">
-								    <input type="radio" name="options" id="option2"> Option 2
+								    <input type="radio" name="options" id="option2"><i class="fa fa-filter"></i>이미지
 								  </label>
 								  <label class="btn btn-primary">
-								    <input type="radio" name="options" id="option3"> Option 3
+								    <input type="radio" name="options" id="option3"><i class="fa fa-filter"></i> 파일
 								  </label>
 								</div>
 								<div id="my-file-upload" class="hide">
