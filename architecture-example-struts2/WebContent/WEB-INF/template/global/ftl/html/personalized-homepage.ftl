@@ -7,6 +7,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common/common-icons.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
@@ -44,6 +45,15 @@
 				$("#personalized-controls-hide").click(function (e) {
 					kendo.fx($("#personalized-controls")).fadeOut().duration(700).play();
 				});					
+				
+				
+				$( '#cd-dropdown' ).dropdown( {
+					gutter : 5,
+					delay : 100,
+					random : true
+				} );
+				
+															
 																
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
@@ -1078,6 +1088,16 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 						<div class="col-sm-4">
+							<select id="cd-dropdown" class="cd-select">
+								<option value="-1" selected>Choose a network to add</option>
+								<option value="1" class="icon-google-plus">Google Plus</option>
+								<option value="2" class="icon-facebook">Facebook</option>
+								<option value="3" class="icon-twitter">Twitter</option>
+								<option value="4" class="icon-github">GitHub</option>
+							</select>							
+						</div>
+						
+						<div class="col-sm-4">
 						
 							<div class="panel panel-default">
 								<div class="panel-body">
@@ -1092,6 +1112,7 @@
 									<div id="announce-grid" ></div>
 								</div>
 							</div>
+							
 							
 						
 						</div>

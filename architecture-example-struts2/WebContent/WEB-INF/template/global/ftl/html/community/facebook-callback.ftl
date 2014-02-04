@@ -17,13 +17,14 @@
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >
 				if(typeof window.opener.handleCallbackResult != "undefined"){
+					// do login
 					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});							
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
+					
 					window.opener.signupCallbackResult("facebook", null);
 				}else{
 					//window.opener.location.reload(${action.signIn()?string("true","false")});
-				}
-				
+				}				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
 					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
