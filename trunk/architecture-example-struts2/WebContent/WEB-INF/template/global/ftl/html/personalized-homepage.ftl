@@ -1179,6 +1179,13 @@
 							</li>
 						</ul>
 					</div><!-- /dl-menuwrapper -->
+					
+						<div class="btn-group-vertical">
+							 <button type="button" class="btn btn-default">Left</button>
+							  <button type="button" class="btn btn-default">Left</button>
+							   <button type="button" class="btn btn-default">Left</button>
+						</div>
+						
 												
 						</div>
 						
@@ -1197,11 +1204,7 @@
 								<div class="panel-body">															
 									<div id="announce-grid" ></div>
 								</div>
-							</div>					
-
-							
-							
-						
+							</div>						
 						</div>
 						<div class="col-sm-4">
 
