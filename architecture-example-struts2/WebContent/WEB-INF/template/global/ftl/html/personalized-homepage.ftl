@@ -1077,6 +1077,7 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div id="dl-menu" class="dl-menuwrapper">
 						<button class="dl-trigger">Open Menu</button>
+						<div class="demo-1">
 						<ul class="dl-menu">
 							<li>
 								<a href="#">Fashion</a>
@@ -1175,8 +1176,10 @@
 								</ul>
 							</li>
 						</ul>
-					</div><!-- /dl-menuwrapper -->										
+					</div><!-- /dl-menuwrapper -->
+					</div>										
 					<div class="row">
+
 						
 						<div class="col-sm-4">
 							<div class="panel panel-success">
