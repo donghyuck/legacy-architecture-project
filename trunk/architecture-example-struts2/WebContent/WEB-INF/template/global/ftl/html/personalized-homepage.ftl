@@ -1208,11 +1208,9 @@
 						</div>
 						<div class="col-sm-4">
 
-<!--
 				<div class="panel panel-default">
-					<div class="panel-heading" style="border:0px;">공유</div>
 					<div class="panel-body clearfix">
--->						
+				
 						<ul class="nav nav-tabs" id="myTab">
 							<li>
 								<a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a>
@@ -1311,9 +1309,7 @@
 					
 					</div></div>
 					
-					<!--
 					</div></div></div>
-					-->
 					
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
