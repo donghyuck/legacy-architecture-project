@@ -1080,10 +1080,10 @@
 						<div class="col-sm-4">
 						
 							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h5 class="panel-title">공지 & 이벤트</h5>
-								</div>
 								<div class="panel-body">
+									<div class="panel-heading">
+										<h5 class="panel-title">공지 & 이벤트</h5>
+									</div>								
 									<div id="announce-grid" ></div>
 								</div>
 							</div>
