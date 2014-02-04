@@ -1193,7 +1193,7 @@
 						</div>
 						-->
 						<div class="col-sm-4">
-							<div class="panel panel-success panel-flat">
+							<div class="panel panel-primary panel-flat">
 								<div class="panel-heading" style="border:0px;">공지 & 이벤트
 									<!--
 									<div class="k-window-actions panel-header-actions">										
@@ -1211,13 +1211,11 @@
 						</div>
 						<div class="col-sm-8">
 
-				<div class="panel panel-flat panel-default">
+				<div class="panel panel-flat panel-primary">
 					<div class="panel-body">
 				
 						<ul class="nav nav-tabs" id="myTab">
-							<li>
-								<a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a>
-							</li>							
+							<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
 							<#if !action.user.anonymous >	
 							<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
 							<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
@@ -1258,8 +1256,9 @@
 								<div id="my-file-upload" class="hide">
 									<div class="blank-top-5" ></div>											
 									<#if !action.user.anonymous >			
-									<div class="alert alert-info"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>
-									<input name="uploadAttachment" id="attachment-files" type="file" />									
+									
+									<input name="uploadAttachment" id="attachment-files" type="file" />				
+									<div class="alert alert-info alert-flat"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>					
 									</#if>							
 								</div>
 								<div class="blank-top-5 "></div>
@@ -1293,9 +1292,10 @@
 								<div class="blank-top-5 "></div>					
 								<div id="my-photo-upload" class="hide">
 									<#if !action.user.anonymous >		
-									<div class="alert alert-info"><strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)을 끌어서 놓기(Drag & Drop)를 하세요.</div>
 									<div class="blank-top-5 "></div>	
 									<input name="uploadPhotos" id="photo-files" type="file" />	
+									<div class="alert alert-info alert-flat"><strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)을 끌어서 놓기(Drag & Drop)를 하세요.</div>
+									
 									</#if>							
 								</div>	
 								<div class="panel panel-default" style="margin-bottom:0px;">								
