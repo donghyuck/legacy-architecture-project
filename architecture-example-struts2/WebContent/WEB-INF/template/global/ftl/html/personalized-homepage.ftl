@@ -1181,9 +1181,9 @@
 					</div><!-- /dl-menuwrapper -->
 					
 						<div class="btn-group-vertical">
-							 <button type="button" class="btn btn-default">Left</button>
-							  <button type="button" class="btn btn-default">Left</button>
-							   <button type="button" class="btn btn-default">Left</button>
+							 <button type="button" class="btn btn-info">Left</button>
+							  <button type="button" class="btn btn-info">Left</button>
+							   <button type="button" class="btn btn-info">Left</button>
 						</div>
 						
 												
