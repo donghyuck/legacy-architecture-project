@@ -1208,8 +1208,8 @@
 						</div>
 						<div class="col-sm-4">
 
-				<div class="panel panel-default">
-					<div class="panel-body clearfix">
+				<div class="panel panel-flat panel-default">
+					<div class="panel-body">
 				
 						<ul class="nav nav-tabs" id="myTab">
 							<li>
