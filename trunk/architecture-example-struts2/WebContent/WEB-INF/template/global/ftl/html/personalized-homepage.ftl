@@ -1254,13 +1254,13 @@
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								</div>								
 								<div class="btn-group" data-toggle="buttons">
-								  <label class="btn btn-success">
-								    <input type="radio" name="options" id="option1"> 전체<span class="badge pull-right" data-bind="text: totalAttachCount"></span>
+								  <label class="btn btn-warning">
+								    <input type="radio" name="options" id="option1"> 전체 (<span data-bind="text: totalAttachCount"></span>)
 								  </label>
-								  <label class="btn btn-primary">
-								    <input type="radio" name="options" id="option2"><i class="fa fa-filter"></i>이미지
+								  <label class="btn btn-warning">
+								    <input type="radio" name="options" id="option2"><i class="fa fa-filter"></i> 이미지
 								  </label>
-								  <label class="btn btn-primary">
+								  <label class="btn btn-warning">
 								    <input type="radio" name="options" id="option3"><i class="fa fa-filter"></i> 파일
 								  </label>
 								</div>
