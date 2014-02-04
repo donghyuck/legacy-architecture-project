@@ -98,6 +98,15 @@ height:50px;
 	padding : 10px;	
 }
 
+.panel-flat {
+	margin-bottom : 0px;
+	padding : 0px;		
+}
+
+.panel-flat div .panel-body {
+	padding : 5px;			
+}
+
 .full-width-column {
 	padding: 0 0px;
 	margin:0 0px;
