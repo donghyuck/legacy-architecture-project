@@ -39,8 +39,12 @@
 												
 				$("#personalized-controls-show").click(function (e) {
 					kendo.fx($("#personalized-controls")).expand("vertical").stop().play();
-				});								
-												
+				});							
+
+				$("#personalized-controls-hide").click(function (e) {
+					kendo.fx($("#personalized-controls")).expand("vertical").stop().reverse();
+				});					
+																
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
 					var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
@@ -1038,6 +1042,7 @@
 			position: absolute;
 			top: 0;
 			left:0;
+			min-height: 300px;
 			width: 100%;
 			overflow: hidden;
 			background-color: rgba(0,0,0,0.8)		
@@ -1067,7 +1072,9 @@
 						<button type="button" id="personalized-controls-show" class="btn btn-info"><i class="fa fa-bars"></i></button>	
 					</div>
 				</div>				
-				<div id="personalized-controls" class="blank-top-5" style="min-height:300px;">
+				<div id="personalized-controls" class="blank-top-5" style="display:none;;">
+					
+					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 					
 					</div>
