@@ -1036,7 +1036,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-			<div  class="container" style="min-height:600px;">		
+			<div  class="container" style="min-height:600px; margin-top:-14px;">		
 				<div class="row">
 					<div class="col-sm-6">
 						레이아웃 
