@@ -216,7 +216,7 @@
 		}
 		
 		function signupCallbackResult( provider, data  ){
-			alert( provider  + "=" + data  );
+			
 			if( data == null ){
 				homepage();					
 			}else{
