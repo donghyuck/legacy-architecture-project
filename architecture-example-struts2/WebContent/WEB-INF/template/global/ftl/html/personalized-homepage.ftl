@@ -1254,7 +1254,7 @@
 									<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
 								</div>								
 								<div class="btn-group" data-toggle="buttons">
-								  <label class="btn btn-primary">
+								  <label class="btn btn-success">
 								    <input type="radio" name="options" id="option1"> Option 1
 								  </label>
 								  <label class="btn btn-primary">
