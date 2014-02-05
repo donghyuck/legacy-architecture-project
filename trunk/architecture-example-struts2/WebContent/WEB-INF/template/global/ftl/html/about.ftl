@@ -167,6 +167,13 @@
 					<!-- end side menu -->					
 				</div>
 				<div class="col-lg-9">				
+					<div class="row">
+						<div class="jumbotron">
+							<div class="container">
+								회사는 어떤 ..
+							</div>
+						</div>					
+					</div>					
 					<!-- social media -->
 					<div id="social-media-area" class="row">
 					<#list action.connectedCompanySocialNetworks  as item >	
