@@ -155,8 +155,12 @@
 				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
 				kendo.fx($("#announce-view-panel")).fade("out").duration(700).play();
 				//$("#announce-view-panel").hide();
+				
+				
 			});
-		
+			
+			kendo.fx($("#announce-list-view-panel")).zoom("out").endValue(0).startValue(1).play();
+			
 			 kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
 			//$("#announce-view-panel").show();
 			
