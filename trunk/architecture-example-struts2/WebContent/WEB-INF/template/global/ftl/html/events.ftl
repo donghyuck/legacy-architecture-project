@@ -144,12 +144,13 @@
 			}
 		}]);	
 		
-		function displayAnnouncement () {					
+		function displayAnnouncement () {
 		
 			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200).play();	
 			
 			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
+			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
 			
@@ -157,7 +158,7 @@
 				//$("#announce-view-panel").hide();
 				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
 				//kendo.fx($("#announce-view-panel")).fade("out").duration(700).play();
-				//$("#announce-view-panel").hide();
+				$("#announce-view-panel").hide();
 					
 				//kendo.fx($("#announce-list-section")).zoom("in").endValue(1).startValue(0).play();			
 				//kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
