@@ -127,12 +127,11 @@
 						.then(function(){					 	
 					 		//$(this).fadeOut("slow", function(){
 					 		//$(this).remove();
-					 		$("#panel-transfer-target").html( panel_source.find(':first-child').html() );
+					 		$("#panel-transfer-target").html( panel_source.children(":first").html() );
 					 		createPanel();
 					 	//});					 
 					 });
 				});
-				
 				
 				// 4. CONTENT 	
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
