@@ -161,7 +161,7 @@
 				$("#announce-view-panel").hide();
 					
 				kendo.fx($("#announce-list-section")).zoom("in").endValue(1).startValue(0).duration(200).play();			
-				//kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
+				kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
 			});
 			
 				
