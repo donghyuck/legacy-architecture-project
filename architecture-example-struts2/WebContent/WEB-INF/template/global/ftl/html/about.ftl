@@ -168,8 +168,8 @@
 				</div>
 				<div class="col-lg-9">				
 					<div class="row">
-						<div class="jumbotron">
-							<div class="container">
+						<div class="panel panel-info panel-flat panel-border-thick">
+							<div class="panel-body">
 								회사는 어떤 ..
 							</div>
 						</div>					
