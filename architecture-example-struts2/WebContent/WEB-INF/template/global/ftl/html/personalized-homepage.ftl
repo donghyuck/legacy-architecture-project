@@ -118,14 +118,13 @@
 				});	
 				
 				
-				$("#available‎-panel-list :button.btn").on("click", function () {				
-					 kendo.fx($(this)).transfer($("#personalized-area")).play().then(function(){
-					 	
-					 	createPanel();
-					 	
-					 	//$(this).fadeOut("slow", function(){
-					 	 $(this).remove();
-					 	//});					 
+				$("#available‎-panel-list :button.btn").on("click", function(){					
+					var transfer_target = createPanel();
+					 kendo.fx($(this)).transfer(transfer_target).play().then(function(){					 	
+					 	$(this).fadeOut("slow", function(){
+					 		$(this).remove();
+					 		transfer_target.show();
+					 	});					 
 					 });
 				});
 				
@@ -640,8 +639,8 @@
 					}
 				});		
 			});					
-			$( '#' + renderTo ).show();
 			
+			return $( '#'+ renderTo );
 		}						
 								
 		<!-- ============================== -->
