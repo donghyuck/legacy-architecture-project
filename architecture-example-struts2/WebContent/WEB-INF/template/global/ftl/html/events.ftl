@@ -170,7 +170,7 @@
 			//zoom = el.zoomIn().startValue(1).endValue(0.7);
 			
 			
-			var effect = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up").duration(700);
+			var effect = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up");
 			effect.add(slide);
 			effect.play();
 			
@@ -273,7 +273,7 @@
 					<section id="announce-list-section" style="location:absolute;">
 						<div id="announce-list-view"></div>	
 					</section>
-					<section id="announce-view-content-section" style="display:none;">						
+					<section id="announce-view-content-section" style="overflow: hidden;">						
 						<div id="announce-view-panel"></div>
 					</section>
 						
