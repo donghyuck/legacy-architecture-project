@@ -120,13 +120,14 @@
 				
 				$("#panel-available‎-source :button.btn").on("click", function(e){						
 					var panel_source = $(e.currentTarget);					
-					alert( panel_source.html() );
+					//alert( panel_source.html() );
 					kendo.fx(panel_source).transfer($("#panel-transfer-target"))
 						.duration(700)
 						.play()
 						.then(function(){					 	
-					 		$(this).fadeOut("slow", function(){
-					 		$(this).remove();
+					 		//$(this).fadeOut("slow", function(){
+					 		//$(this).remove();
+					 		$("#panel-transfer-target").html( panel_source.html() );
 					 		createPanel();
 					 	});					 
 					 });
