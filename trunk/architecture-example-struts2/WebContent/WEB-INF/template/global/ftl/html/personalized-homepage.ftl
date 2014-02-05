@@ -120,7 +120,7 @@
 				
 				$("#available‎-panel-list :button.btn").on("click", function(){					
 					var transfer_target = createPanel();
-					 kendo.fx($(this)).transfer(transfer_target).play().then(function(){					 	
+					 kendo.fx($(this)).transfer(transfer_target).duration(700).play().then(function(){					 	
 					 	$(this).fadeOut("slow", function(){
 					 		$(this).remove();
 					 		transfer_target.show();
