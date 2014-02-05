@@ -153,10 +153,11 @@
 			$("#announce-view-panel").find(".close").click(function (e) {
 				//$("#announce-view-panel").hide();
 				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
-				kendo.fx($("#announce-view-panel")).fade("out").duration(700).play();
+				//kendo.fx($("#announce-view-panel")).fade("out").duration(700).play();
 				//$("#announce-view-panel").hide();
-				
-				
+					
+				kendo.fx($("#announce-list-section")).zoom("in").endValue(1).startValue(0).play();			
+				kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
 			});
 			
 			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();			
