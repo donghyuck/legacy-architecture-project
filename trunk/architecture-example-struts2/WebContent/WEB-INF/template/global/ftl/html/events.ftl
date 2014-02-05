@@ -163,7 +163,7 @@
 			});
 			
 			
-			 var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up").duration(700) ;
+			 var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up") ;
 			 zoom.play().then( function () {
 			 	$(this).hide();
 			 	slide.play();
