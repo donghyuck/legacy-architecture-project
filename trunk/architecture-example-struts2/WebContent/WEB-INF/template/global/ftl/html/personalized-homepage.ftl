@@ -30,6 +30,7 @@
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
 												
+												/**
 				var menuRight  = document.getElementById( 'cbp-spmenu-s2' );
 				$("#show-right-slide").click(function (e) {
 					classie.toggle( this, 'active' );
@@ -39,6 +40,7 @@
 					classie.toggle( this, 'active' );
 					classie.toggle( menuRight, 'cbp-spmenu-open' );				
 				});
+				**/
 												
 				$("#personalized-controls-show").click(function (e) {
 					kendo.fx($("#personalized-controls")).fadeIn().duration(700).play();
