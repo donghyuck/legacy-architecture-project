@@ -159,13 +159,15 @@
 				
 			});
 			
-			//kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();
+			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();
 			
-			$("#announce-list-section").addClass("scale-down-effect");
+			kendo.fx($("announce-view-content-section")).slideIn("up"),
+			
+			//$("#announce-list-section").addClass("scale-down-effect");
 			
 			
 			
-			kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
+			//kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
 			//$("#announce-view-panel").show();
 			
 		}				
@@ -247,7 +249,7 @@
 						<div id="announce-list-view"></div>	
 					</section>
 					<section id="announce-view-content-section">						
-						<div id="announce-view-panel" style="display:none;"></div>
+						<div id="announce-view-panel"></div>
 					</section>
 					  
 					
