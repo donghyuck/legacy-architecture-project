@@ -613,13 +613,13 @@
 		}	
 		
 		
-		function createPanel(){		
-			
-			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
-			
+		function createPanel(){
+					
+			var unique_id = $.unique();
+			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");			
 			var template = kendo.template($("#empty-panel-template").html());	
-			
-			$("#personalized-area").append( template( { colSize: grid_col_size.newValue } ) );
+			$("#personalized-area").append( template( { id: unique_id, colSize: grid_col_size.newValue } ) );
+			$( '#' + unique_id ).show();
 			
 		}						
 								
@@ -1273,7 +1273,7 @@
 		
 		<!-- START TEMPLATE -->				
 		<script type="text/x-kendo-template" id="empty-panel-template">			
-			<div class="custom-panels-group col-sm-#: colSize#" style="min-height:200px;" data-role="panel">					
+			<div id="#: id #" class="custom-panels-group col-sm-#: colSize#" style="min-height:200px; display:none;" data-role="panel">					
 				<div class="panel panel-flat panel-default">
 					<div class="panel-heading">페널
 						<div class="k-window-actions panel-header-actions">		
