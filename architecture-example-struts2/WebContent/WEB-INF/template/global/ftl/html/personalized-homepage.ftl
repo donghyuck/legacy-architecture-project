@@ -627,18 +627,16 @@
 					swith( panel_header_action_icon.text() )
 					{
 						case "Minimize" :
-						$( "#"+ renderTo +" .panel-body").toggleClass("hide");		
-						panel_header_action.toggleClass("hide");		
-						break;
+							$( "#"+ renderTo +" .panel-body").toggleClass("hide");		
+							panel_header_action.toggleClass("hide");		
+							break;
 						case "Refresh" :
-						
-						break;
+							break;
 						case "Close" :
-						$("#" + renderTo ).parent().remove();
-						break;	
+							$("#" + renderTo ).parent().remove();
+							break;	
 						case "Custom" :
-						
-						break;																		
+							break;																		
 					}
 				});		
 			});					
