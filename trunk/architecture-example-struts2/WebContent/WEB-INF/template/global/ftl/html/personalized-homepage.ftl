@@ -127,7 +127,7 @@
 						.then(function(){					 	
 					 		//$(this).fadeOut("slow", function(){
 					 		//$(this).remove();
-					 		$("#panel-transfer-target").append( panel_source.html() );
+					 		$("#panel-transfer-target").html( panel_source.find('i').html() );
 					 		createPanel();
 					 	//});					 
 					 });
