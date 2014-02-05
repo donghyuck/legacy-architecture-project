@@ -1092,7 +1092,7 @@
 			background-color: rgba(91,192,222,0.8)		
 		}
 
-.lightbox {
+.light-box {
             position: absolute;
             width: 69px;
             padding-top: 69px;
@@ -1153,7 +1153,7 @@
 															
 								</div>
 								<div class="panel-body">																
-									<div class="lightbox">
+									<div class="light-box">
 										<div id="panel-transfer-target"></div>
 										<i class="fa fa-desktop fa-2x"></i>
 									</div>        
