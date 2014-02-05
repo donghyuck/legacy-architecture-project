@@ -631,7 +631,12 @@
 						case "Refresh" :
 							break;
 						case "Close" :
-							$("#" + renderTo ).remove();
+							
+							kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).reverse()then( function(e){							
+								$("#" + renderTo ).remove();
+							});
+							
+							
 							break;	
 						case "Custom" :
 							break;																		
