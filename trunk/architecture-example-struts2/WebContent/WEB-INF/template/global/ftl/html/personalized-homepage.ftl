@@ -1091,6 +1091,9 @@
 							<div class="panel panel-flat panel-primary">
 								<div class="panel-body">
 								
+								<div class="btn-group-vertical">
+									<button type="button" class="btn btn-info">공지 및 이벤트</button>
+								</div>
 								
 								</div>
 							</div>							
