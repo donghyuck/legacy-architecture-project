@@ -258,7 +258,7 @@
 				</div>
 				<div class="col-lg-9">		
 				<div class="content-main-section">
-					<section id="announce-list-section"  style="position: absolute;">
+					<section id="announce-list-section" >
 						<div id="announce-list-view"></div>	
 					</section>
 					<section id="announce-view-content-section">						
