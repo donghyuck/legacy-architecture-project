@@ -164,9 +164,8 @@
 			
 			
 			 var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0.7).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up") ;
-			 zoom.play().then( function () {
-			 	
-			 	kendo.fx( $(this) ).fadeOut().duration(700).play();
+			 zoom.play().then( function () {			 	
+			 	kendo.fx( $(this) ).fadeOut().duration().play();
 			 	slide.play();
 			 } );
 
