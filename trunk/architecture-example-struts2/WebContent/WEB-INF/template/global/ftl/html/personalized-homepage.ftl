@@ -55,7 +55,7 @@
 				var accounts = $("#account-panel").kendoAccounts({
 					dropdown : false,
 					authenticate : function( e ){
-						currentUser = e.token;			
+						currentUser = e.token;									
 					},
 					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
 					template : kendo.template($("#account-template").html()),
@@ -120,6 +120,7 @@
 				
 				$("#panel-available‎-source :button.btn").on("click", function(e){						
 					var panel_source = $(e.currentTarget);					
+					alert( panel_source.html() );
 					kendo.fx(panel_source).transfer($("#panel-transfer-target"))
 						.duration(700)
 						.play()
