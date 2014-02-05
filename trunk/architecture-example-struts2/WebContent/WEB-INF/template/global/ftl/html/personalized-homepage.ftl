@@ -119,8 +119,11 @@
 				
 				
 				$("#available‎-panel-list :button.btn").on("click", function () {				
-					alert( $(this).html() );
-				
+					 kendo.fx($(this)).transfer($("#personalized-area")).play().then(function(){
+					 	$(this).fadeOut("slow", function(){
+					 		 $(this).remove();
+					 	});					 
+					 });
 				});
 				
 				
