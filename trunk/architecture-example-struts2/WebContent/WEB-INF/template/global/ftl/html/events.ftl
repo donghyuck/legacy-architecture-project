@@ -221,6 +221,7 @@
 		.content-main-section {
 			background: #F98262;	
 			overflow: hidden;
+			position: absolute;
 			width: 100%;
 			height: 100%;
 		}
