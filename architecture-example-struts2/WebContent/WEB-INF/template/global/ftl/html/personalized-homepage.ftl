@@ -29,19 +29,7 @@
 				// START SCRIPT	
 				$("#top-menu").kendoMenu();
 				$("#top-menu").show();
-												
-												/**
-				var menuRight  = document.getElementById( 'cbp-spmenu-s2' );
-				$("#show-right-slide").click(function (e) {
-					classie.toggle( this, 'active' );
-					classie.toggle( menuRight, 'cbp-spmenu-open' );				
-				});
-				$("#hide-right-slide").click(function (e) {
-					classie.toggle( this, 'active' );
-					classie.toggle( menuRight, 'cbp-spmenu-open' );				
-				});
-				**/
-												
+																								
 				$("#personalized-controls-show").click(function (e) {
 					kendo.fx($("#personalized-controls")).fadeIn().duration(700).play();
 				});							
@@ -49,8 +37,7 @@
 				$("#personalized-controls-hide").click(function (e) {
 					kendo.fx($("#personalized-controls")).fadeOut().duration(700).play();
 				});					
-					
-																
+																					
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
 					var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
@@ -131,7 +118,7 @@
 				});	
 				
 				
-				$("#available‎-panel-list button:btn").on("change", function () {				
+				$("#available‎-panel-list button").on("change", function () {				
 					alert( $(this).html() );
 				
 				});
