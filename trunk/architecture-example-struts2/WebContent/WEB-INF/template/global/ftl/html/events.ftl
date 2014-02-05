@@ -172,7 +172,7 @@
 			
 			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), 
 			slide = kendo.fx($("#announce-view-content-section")).slideIn("up"), 
-			fadein = kendo.fx($("#announce-view-content-section")).fadeIn().duration(700);
+			fadein = kendo.fx($("#announce-view-content-section")).fadeOut().duration(700);
 			
 			fadein.add(zoom);
 			fadein.play();
