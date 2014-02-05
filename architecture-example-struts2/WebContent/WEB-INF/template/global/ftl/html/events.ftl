@@ -273,7 +273,7 @@
 					<section id="announce-list-section" style="location:absolute;">
 						<div id="announce-list-view"></div>	
 					</section>
-					<section id="announce-view-content-section">						
+					<section id="announce-view-content-section" style="display:none;">						
 						<div id="announce-view-panel"></div>
 					</section>
 						
