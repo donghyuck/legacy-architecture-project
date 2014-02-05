@@ -1092,7 +1092,7 @@
 			background-color: rgba(91,192,222,0.8)		
 		}
 
-.light-box {
+.lightbox {
             position: absolute;
             width: 69px;
             padding-top: 69px;
