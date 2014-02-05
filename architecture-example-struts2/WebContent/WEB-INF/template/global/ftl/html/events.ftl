@@ -160,8 +160,9 @@
 				kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
 			});
 			
-			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();			
+				
 			kendo.fx($("announce-view-content-section")).slideIn("up").duration(700).play();
+			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();		
 			
 			//$("#announce-list-section").addClass("scale-down-effect");
 			
