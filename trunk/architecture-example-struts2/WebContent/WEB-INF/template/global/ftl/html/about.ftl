@@ -171,7 +171,7 @@
 					<div id="social-media-area" class="row">
 					<#list action.connectedCompanySocialNetworks  as item >	
 						<div class="custom-panels-group col-sm-6"> 
-								<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default">
+								<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
 									<div class="panel-heading">
 										<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
 										<div class="k-window-actions panel-header-actions">
