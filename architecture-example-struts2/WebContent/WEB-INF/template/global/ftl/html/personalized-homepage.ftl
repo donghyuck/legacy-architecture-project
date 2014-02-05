@@ -1086,138 +1086,9 @@
 				<div id="personalized-controls" class="blank-top-5" style="display:none;">					
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
-					<!--
-						<div class="col-sm-3 demo-1">
-				
-					<div id="dl-menu" class="dl-menuwrapper">
-						<button class="dl-trigger">Open Menu</button>
-						<ul class="dl-menu">
-							<li>
-								<a href="#">Fashion</a>
-								<ul class="dl-submenu">
-									<li>
-										<a href="#">Men</a>
-										<ul class="dl-submenu">
-											<li><a href="#">Shirts</a></li>
-											<li><a href="#">Jackets</a></li>
-											<li><a href="#">Chinos &amp; Trousers</a></li>
-											<li><a href="#">Jeans</a></li>
-											<li><a href="#">T-Shirts</a></li>
-											<li><a href="#">Underwear</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">Women</a>
-										<ul class="dl-submenu">
-											<li><a href="#">Jackets</a></li>
-											<li><a href="#">Knits</a></li>
-											<li><a href="#">Jeans</a></li>
-											<li><a href="#">Dresses</a></li>
-											<li><a href="#">Blouses</a></li>
-											<li><a href="#">T-Shirts</a></li>
-											<li><a href="#">Underwear</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">Children</a>
-										<ul class="dl-submenu">
-											<li><a href="#">Boys</a></li>
-											<li><a href="#">Girls</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Electronics</a>
-								<ul class="dl-submenu">
-									<li><a href="#">Camera &amp; Photo</a></li>
-									<li><a href="#">TV &amp; Home Cinema</a></li>
-									<li><a href="#">Phones</a></li>
-									<li><a href="#">PC &amp; Video Games</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Furniture</a>
-								<ul class="dl-submenu">
-									<li>
-										<a href="#">Living Room</a>
-										<ul class="dl-submenu">
-											<li><a href="#">Sofas &amp; Loveseats</a></li>
-											<li><a href="#">Coffee &amp; Accent Tables</a></li>
-											<li><a href="#">Chairs &amp; Recliners</a></li>
-											<li><a href="#">Bookshelves</a></li>
-										</ul>
-									</li>
-									<li>
-										<a href="#">Bedroom</a>
-										<ul class="dl-submenu">
-											<li>
-												<a href="#">Beds</a>
-												<ul class="dl-submenu">
-													<li><a href="#">Upholstered Beds</a></li>
-													<li><a href="#">Divans</a></li>
-													<li><a href="#">Metal Beds</a></li>
-													<li><a href="#">Storage Beds</a></li>
-													<li><a href="#">Wooden Beds</a></li>
-													<li><a href="#">Children's Beds</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Bedroom Sets</a></li>
-											<li><a href="#">Chests &amp; Dressers</a></li>
-										</ul>
-									</li>
-									<li><a href="#">Home Office</a></li>
-									<li><a href="#">Dining &amp; Bar</a></li>
-									<li><a href="#">Patio</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#">Jewelry &amp; Watches</a>
-								<ul class="dl-submenu">
-									<li><a href="#">Fine Jewelry</a></li>
-									<li><a href="#">Fashion Jewelry</a></li>
-									<li><a href="#">Watches</a></li>
-									<li>
-										<a href="#">Wedding Jewelry</a>
-										<ul class="dl-submenu">
-											<li><a href="#">Engagement Rings</a></li>
-											<li><a href="#">Bridal Sets</a></li>
-											<li><a href="#">Women's Wedding Bands</a></li>
-											<li><a href="#">Men's Wedding Bands</a></li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					-->
-					<!-- /dl-menuwrapper -->
-					<!--
-						<div class="btn-group-vertical">
-							 <button type="button" class="btn btn-info active"><i class="fa fa-square"></i>&nbsp;공지 & 이벤트</button>
-							  <button type="button" class="btn btn-info"></button>
-							   <button type="button" class="btn btn-info">Left</button>
-						</div>
-						
-												
-						</div>
-						-->
+
 						<div class="col-sm-4">
-							<div class="panel panel-primary panel-flat">
-								<div class="panel-heading" style="border:0px;">공지 & 이벤트
-									<!--
-									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-									-->
-								</div>
-								<div class="panel-body">															
-									<div id="announce-grid" ></div>
-								</div>
-							</div>						
+							
 						</div>
 						<div class="col-sm-8">
 
@@ -1335,7 +1206,23 @@
 					
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
-						<!-- start announce panel -->						
+						<!-- start announce panel -->			
+						<div class="panel panel-primary panel-flat">
+								<div class="panel-heading" style="border:0px;">공지 & 이벤트
+									<!--
+									<div class="k-window-actions panel-header-actions">										
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>
+									-->
+								</div>
+								<div class="panel-body">															
+									<div id="announce-grid" ></div>
+								</div>
+						</div>						
+										
 						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 							<div class="panel panel-default">
 								<div class="panel-heading">알림
