@@ -153,22 +153,23 @@
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );	
 			
-			$("#announce-view-panel").find(".close").click(function (e) {
-				//$("#announce-view-panel").hide();
-				//kendo.fx($("#announce-list-view-panel")).slideIn().duration(700).play(); 
-				//kendo.fx($("#announce-view-panel")).fade("out").duration(700).play();
-				//$("#announce-view-panel").hide();					
-				kendo.fx($("#announce-list-section")).zoom("in").endValue(1).startValue(0).duration(200).play();			
-				//kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
-			});
-			
-			
 			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1), slide = kendo.fx($("#announce-view-content-section")).slideIn("up") ;
 			zoom.play();
 			setTimeout(function() {
 				zoom.stop();
 				slide.play();
 			}, 100);
+			
+			$("#announce-view-panel").find(".close").click(function (e) {
+				slide.reverse();
+				setTimeout(function() {
+					slide.stop();
+					zoom.reverse();
+				}, 100);
+			});
+			
+			
+
 			 
 			 //zoom.play().then( function () {			 	
 			 //	kendo.fx( $(this) ).fadeOut().play();
