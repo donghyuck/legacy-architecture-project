@@ -217,6 +217,11 @@
 		.announcement {
 			cursor: pointer;
 		}
+		
+		.content-main-section {
+			background: #F98262;	
+			overflow: hidden;
+		}
 							
 		</style>   	
 	</head>
@@ -250,6 +255,7 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9" style="background:#F98262;">		
+				<div class="content-main-section">
 					<section id="announce-list-section"  style="position: absolute;">
 						<div id="announce-list-view"></div>	
 					</section>
@@ -257,6 +263,7 @@
 						<div id="announce-view-panel"></div>
 					</section>
 						
+				</div>
 				</div>				
 			</div>
 		</div>									 			
