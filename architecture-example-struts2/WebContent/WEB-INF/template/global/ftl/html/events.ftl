@@ -296,6 +296,7 @@
 					<div id="event-area" class="bl-main bl-expand-item">						
 						<section id="bl-list-section" class="bl-expand bl-expand-top">
 							<div id="announce-list-view" class="bl-content">
+<h2>My Works</h2>
 
 							</div>
 						</section>
