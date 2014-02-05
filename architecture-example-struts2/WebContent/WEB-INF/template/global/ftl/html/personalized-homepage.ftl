@@ -1137,7 +1137,7 @@
 								
 								</div>
 								<div id="panel-transfer-target" class="panel-body" style="background: #F98262;">
-								
+								<i class="fa fa-desktop fa-2x"></i>
 								</div>
 							</div>							
 						</div>
