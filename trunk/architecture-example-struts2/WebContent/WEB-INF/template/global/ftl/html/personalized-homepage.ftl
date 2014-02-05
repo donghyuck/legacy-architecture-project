@@ -1136,7 +1136,7 @@
 								</div>
 								
 								</div>
-								<div id="panel-transfer-target" class="panel-body">
+								<div id="panel-transfer-target" class="panel-body" style="background: #F98262;">
 								
 								</div>
 							</div>							
