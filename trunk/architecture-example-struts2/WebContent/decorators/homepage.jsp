@@ -49,7 +49,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 
 	header.cloud {
 	    color: white;
-		background: ##3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
+		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
 
