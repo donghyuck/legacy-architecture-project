@@ -614,9 +614,13 @@
 		
 		
 		function createPanel(){		
+			
 			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
+			
 			var template = kendo.template($("#empty-panel-template").html());	
-			$("#personalized-area").append( template( { colSize: grid_col_size.newValue } ) );			
+			
+			$("#personalized-area").append( template( { colSize: grid_col_size.newValue } ) );
+			
 		}						
 								
 		<!-- ============================== -->
