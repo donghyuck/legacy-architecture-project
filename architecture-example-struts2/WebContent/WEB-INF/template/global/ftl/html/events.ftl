@@ -246,10 +246,10 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-					<section id="announce-list-section">
+					<section id="announce-list-section"  style="position: absolute; height:100%;">
 						<div id="announce-list-view"></div>	
 					</section>
-					<section id="announce-view-content-section">						
+					<section id="announce-view-content-section" style="position: absolute; height:100%;">						
 						<div id="announce-view-panel"></div>
 					</section>
 					  
