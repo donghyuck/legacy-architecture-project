@@ -231,8 +231,8 @@
 									</ul>							
 								</div>
 							</div>								
-						</div>
-						<div class="blank-top-5 "></div>					
+							<div class="blank-top-5 "></div>
+						</div>											
 					</div>					
 					<!-- social media -->
 					<div id="social-media-area" class="row">
