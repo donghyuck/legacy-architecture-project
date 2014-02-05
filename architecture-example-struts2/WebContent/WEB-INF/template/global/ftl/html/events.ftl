@@ -159,9 +159,13 @@
 				
 			});
 			
-			kendo.fx($("#announce-list-view-panel")).zoom("out").endValue(0).startValue(1).play();
+			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();
 			
-			 kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
+			$("#announce-list-section").addClass("scale-down-effect");
+			
+			
+			
+			kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
 			//$("#announce-view-panel").show();
 			
 		}				
