@@ -1092,7 +1092,7 @@
 								<div class="panel-body">
 								
 								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-info"><i class="fa fa-info-circle fa-2x pull-left"></i> 공지 및 이벤트</button>
+									<button type="button" class="btn btn-lg btn-info"><i class="fa fa-info-circle fa-2x pull-left"></i> 공지 및 이벤트</button>
 									<button type="button" class="btn btn-info"><i class="fa fa-picture-o fa-2x pull-left"></i> 이미지</button>
 									<button type="button" class="btn btn-info"><i class="fa fa-file-o fa-2x pull-left"></i> 파일</button>
 									<button type="button" class="btn btn-info"><i class="fa fa-twitter fa-2x pull-left"></i> 트위터</button>
