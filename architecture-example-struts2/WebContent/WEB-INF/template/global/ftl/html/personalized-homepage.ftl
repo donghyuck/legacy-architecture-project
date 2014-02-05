@@ -118,10 +118,14 @@
 				});	
 				
 				
-				$("#panel-available‎-source :button.btn").on("click", function(){						
-					kendo.fx($(this)).transfer($("#panel-transfer-target")).duration(700).play().then(function(){					 	
-					 	$(this).fadeOut("slow", function(){
-					 		//$(this).remove();
+				$("#panel-available‎-source :button.btn").on("click", function(e){						
+					var panel_source = $(e.currentTarget);					
+					kendo.fx(panel_source).transfer($("#panel-transfer-target"))
+						.duration(700)
+						.play()
+						.then(function(){					 	
+					 		$(this).fadeOut("slow", function(){
+					 		$(this).remove();
 					 		createPanel();
 					 	});					 
 					 });
