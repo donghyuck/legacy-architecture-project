@@ -615,11 +615,34 @@
 		
 		function createPanel(){
 					
-			var unique_id = $.unique();
+			var renderTo = $.unique();
 			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");			
 			var template = kendo.template($("#empty-panel-template").html());	
-			$("#personalized-area").append( template( { id: unique_id, colSize: grid_col_size.newValue } ) );
-			$( '#' + unique_id ).show();
+			$("#personalized-area").append( template( { id: renderTo, colSize: grid_col_size.newValue } ) );
+			$( '#'+ renderTo + ' .panel-header-actions a').each(function( index ) {
+				var panel_header_action = $(this);
+				panel_header_action.click(function (e){
+					e.preventDefault();		
+					var panel_header_action_icon = panel_header_action.find('span');
+					swith( panel_header_action_icon.text() )
+					{
+						case "Minimize" :
+						$( "#"+ renderTo +" .panel-body").toggleClass("hide");		
+						panel_header_action.toggleClass("hide");		
+						break;
+						case "Refresh" :
+						
+						break;
+						case "Close" :
+						$("#" + renderTo ).parent().remove();
+						break;	
+						case "Custom" :
+						
+						break;																		
+					}
+				});		
+			});					
+			$( '#' + renderTo ).show();
 			
 		}						
 								
