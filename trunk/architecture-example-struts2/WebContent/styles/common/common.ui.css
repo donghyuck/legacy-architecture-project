@@ -91,6 +91,10 @@ height:50px;
 	padding : 0px;		
 }
 
+.panel-border-thick {
+	border: 6px solid rgba(0,0,0,0.1);
+}
+
 .panel-flat div.panel-body {
 	padding : 5px;			
 }
