@@ -17,7 +17,7 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/jquery.extension/modernizr.custom.js',
-			'${request.contextPath}/js/jquery.extension/boxlayout.min.js',
+			'${request.contextPath}/js/jquery.extension/classie.js',
 			],
 			complete: function() {
 			
@@ -156,18 +156,19 @@
 				//kendo.fx($("#announce-view-panel")).fade("out").duration(700).play();
 				//$("#announce-view-panel").hide();
 					
-				kendo.fx($("#announce-list-section")).zoom("in").endValue(1).startValue(0).play();			
-				kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
+				//kendo.fx($("#announce-list-section")).zoom("in").endValue(1).startValue(0).play();			
+				//kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
 			});
 			
 				
 			
-			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200).play();				
-			kendo.fx($("#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
+			//kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200).play();				
+			//kendo.fx($("#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
 			
+			classie.add( $("#announce-list-section"), 'scale-down-effect');
 			
 			//$("#announce-list-section").addClass("scale-down-effect");
-			//kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
+			////kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
 			//$("#announce-view-panel").show();
 			
 		}				
