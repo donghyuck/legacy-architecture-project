@@ -632,7 +632,7 @@
 							break;
 						case "Close" :
 							
-							kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).reverse()then( function(e){							
+							kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).reverse().then( function(e){							
 								$("#" + renderTo ).remove();
 							});
 							
