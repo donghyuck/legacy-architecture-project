@@ -118,12 +118,11 @@
 				});	
 				
 				
-				$("#available‎-panel-list :button.btn").on("click", function(){					
-					var transfer_target = createPanel();				
-					 kendo.fx($(this)).transfer(transfer_target).duration(700).play().then(function(){					 	
+				$("#panel-available‎-source :button.btn").on("click", function(){						
+					kendo.fx($(this)).transfer($("#panel-transfer-target")).duration(700).play().then(function(){					 	
 					 	$(this).fadeOut("slow", function(){
 					 		$(this).remove();
-					 		transfer_target.show();
+					 		createPanel();
 					 	});					 
 					 });
 				});
@@ -640,7 +639,8 @@
 				});		
 			});					
 			
-			return $( '#'+ renderTo );
+			//$( '#'+ renderTo ).show();
+			kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).play();
 		}						
 								
 		<!-- ============================== -->
@@ -1120,18 +1120,18 @@
 
 						<div class="col-sm-3">
 							<div class="panel panel-flat panel-primary">
-								<div id="available‎-panel-list" class="panel-body">
+								<div id="panel-available‎-source" class="panel-body">
 								
 								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-info"><i class="fa fa-info-circle fa-2x pull-left"></i> 공지 및 이벤트</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-picture-o fa-2x pull-left"></i> 이미지</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-file-o fa-2x pull-left"></i> 파일</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-twitter fa-2x pull-left"></i> 트위터</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-facebook fa-2x pull-left"></i> 페이스북</button>
+									<button type="button" class="btn btn-info"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
+									<button type="button" class="btn btn-info"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
+									<button type="button" class="btn btn-info"><i class="fa fa-file-o pull-left"></i> 파일</button>
+									<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
+									<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
 								</div>
 								
 								</div>
-								<div class="panel-body">
+								<div id="panel-transfer-target" class="panel-body">
 								
 								</div>
 							</div>							
