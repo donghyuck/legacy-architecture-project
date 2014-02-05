@@ -130,6 +130,13 @@
 					}
 				});	
 				
+				
+				$("#available‎-panel-list button:btn").on("change", function () {				
+					alert( $(this).html() );
+				
+				});
+				
+				
 				// 4. CONTENT 	
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
 				// 1. Announces 								
@@ -1089,7 +1096,7 @@
 
 						<div class="col-sm-3">
 							<div class="panel panel-flat panel-primary">
-								<div class="panel-body">
+								<div id="available‎-panel-list" class="panel-body">
 								
 								<div class="btn-group-vertical">
 									<button type="button" class="btn btn-info"><i class="fa fa-info-circle fa-2x pull-left"></i> 공지 및 이벤트</button>
