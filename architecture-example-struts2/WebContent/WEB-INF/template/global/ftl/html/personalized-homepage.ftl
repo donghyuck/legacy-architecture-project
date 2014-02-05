@@ -1207,7 +1207,7 @@
 				</div>
 				<div id="personalized-area" class="row blank-top-5">					
 						<!-- start announce panel -->			
-						<div class="panel panel-primary panel-flat">
+						<div class="custom-panels-group col-sm-6 panel panel-primary panel-flat">
 								<div class="panel-heading" style="border:0px;">공지 & 이벤트
 									<!--
 									<div class="k-window-actions panel-header-actions">										
