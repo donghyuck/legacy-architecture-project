@@ -1258,6 +1258,24 @@
 		<!-- END FOOTER -->	
 		
 		<!-- START TEMPLATE -->				
+		<script type="text/x-kendo-template" id="empty-panel-template">
+			<div class="panel panel-flat panel-default custom-panels-group col-sm-#: colSize#" style="min-height:200px;" >
+				<div class="panel-heading">페널
+					<div class="k-window-actions panel-header-actions">		
+						<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-custom">Custom</span></a>								
+						<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+						<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+						<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+						<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+					</div>									
+				</div>
+				<div class="panel-body hide">					
+				</div>
+				<div class="panel-body">				
+					
+				</div>			
+			</div>
+		</script>		
 		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
 			<div class="attach">			
 			#if (contentType.match("^image") ) {#
