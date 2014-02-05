@@ -624,7 +624,7 @@
 				panel_header_action.click(function (e){
 					e.preventDefault();		
 					var panel_header_action_icon = panel_header_action.find('span');
-					swith( panel_header_action_icon.text() )
+					switch( panel_header_action_icon.text() )
 					{
 						case "Minimize" :
 							$( "#"+ renderTo +" .panel-body").toggleClass("hide");		
