@@ -133,6 +133,9 @@
 			position : relative;
 			max-width : 500px;
 		}
+		.cbp_tmtimeline > li .cbp_tmicon { 
+			position : relative;
+		}
 						
 		</style>   	
 	</head>
