@@ -1088,8 +1088,10 @@
 					<div class="row">
 
 						<div class="col-sm-4">
-							<div class="panel panel-flat panel-primary">
+							<div class="panel panel-flat panel-primary panel-border-thick">
 								<div class="panel-body">
+								
+								
 								</div>
 							</div>							
 						</div>
