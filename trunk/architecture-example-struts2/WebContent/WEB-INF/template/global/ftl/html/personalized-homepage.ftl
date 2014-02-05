@@ -47,11 +47,7 @@
 				$("#personalized-controls-hide").click(function (e) {
 					kendo.fx($("#personalized-controls")).fadeOut().duration(700).play();
 				});					
-				
-				
-				$( '#dl-menu' ).dlmenu();
-				
-															
+					
 																
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
