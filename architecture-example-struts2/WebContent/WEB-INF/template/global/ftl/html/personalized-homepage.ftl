@@ -1087,12 +1087,14 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 
-							<div class="panel panel-flat panel-primary col-sm-3">
+						<div class="col-sm-3">
+							<div class="panel panel-flat panel-primary">
 								<div class="panel-body">
 								
 								
 								</div>
-							</div>	
+							</div>							
+						</div>
 						
 						<div class="col-sm-8 paddingless">
 
