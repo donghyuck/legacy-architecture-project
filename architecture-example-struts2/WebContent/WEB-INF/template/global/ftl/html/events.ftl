@@ -71,7 +71,7 @@
 					}
 				});				
 
-Boxlayout.init();
+//Boxlayout.init();
 
 				// 1. Announces 				
 				
@@ -237,6 +237,7 @@ Boxlayout.init();
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
+				<!--
 					<div id="bl-main" class="bl-main">
 						<section id="bl-work-section">
 							<div class="bl-box">
@@ -254,8 +255,7 @@ Boxlayout.init();
 								<p>Illustrations by <a href="http://dribbble.com/isaac317/click">Isaac Montemayor</a></p>
 							</div>
 							<span class="bl-icon bl-icon-close"></span>
-						</section>		
-						<!-- Panel items for the works -->				
+						</section>					
 						<div class="bl-panel-items" id="bl-panel-work-items">
 							<div data-panel="panel-1">
 								<div>
@@ -292,11 +292,9 @@ Boxlayout.init();
 							</nav>
 						</div>
 					</div>
-				
-					<div id="event-area" style="min-height:500px;">						
-						
-						<div id="announce-view-panel" style="display:none;"></div>
-						
+				-->
+					<div id="event-area" class="bl-main bl-expand-item">						
+						<div class="bl-content">
 						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
 							<!--
 							<div class="panel-heading">
@@ -311,7 +309,11 @@ Boxlayout.init();
 							<div class="panel-body" style="padding-top:25px;">
 								<div id="announce-list-view"></div>	
 							</div>
+						</div>						
 						</div>
+						<div id="announce-view-panel" style="display:none;"></div>
+						
+						
 					</div>	
 				</div>				
 			</div>
