@@ -129,7 +129,7 @@
 					 		//$(this).remove();
 					 		$("#panel-transfer-target").append( panel_source.html() );
 					 		createPanel();
-					 	});					 
+					 	//});					 
 					 });
 				});
 				
