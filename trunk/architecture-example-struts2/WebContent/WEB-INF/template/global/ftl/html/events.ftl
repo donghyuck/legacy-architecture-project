@@ -207,6 +207,7 @@
 			padding: 0;
 			min-width: 690px;
 			min-height: 100px;
+			background-color: transparent;
 		}
 				
 		#announce-list-view {
@@ -220,8 +221,7 @@
 		
 		.content-main-section {
 			background: #F98262;	
-			overflow: hidden;
-			position: absolute;
+			overflow: hidden;			
 			width: 100%;
 			height: 100%;
 			min-height:500px;
