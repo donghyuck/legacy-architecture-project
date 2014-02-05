@@ -1087,7 +1087,7 @@
 					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 					<div class="row">
 
-						<div class="col-sm-4">
+						<div class="col-sm-3">
 							<div class="panel panel-flat panel-primary panel-border-thick">
 								<div class="panel-body">
 								
