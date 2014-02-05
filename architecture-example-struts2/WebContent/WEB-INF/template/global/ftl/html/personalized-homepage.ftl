@@ -633,7 +633,7 @@
 						case "Refresh" :
 							break;
 						case "Close" :
-							$("#" + renderTo ).parent().remove();
+							$("#" + renderTo ).remove();
 							break;	
 						case "Custom" :
 							break;																		
