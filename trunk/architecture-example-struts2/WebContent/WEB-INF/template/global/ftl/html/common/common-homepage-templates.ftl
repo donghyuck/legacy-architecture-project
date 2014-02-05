@@ -197,7 +197,7 @@
 </script>
 <!-- EVENT -->
 <script type="text/x-kendo-tmpl" id="announcement-detail-panel-template">		
-	<div class="panel panel-default borderless shadowless">
+	<div class="panel panel-default panel-flat">
 		<div class="panel-heading" style="background-color:\\#ffffff;">
 			<button type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
 			<h4 data-bind="html:subject"></h4>
