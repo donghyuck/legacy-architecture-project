@@ -1140,23 +1140,21 @@
 						<div class="col-sm-3">
 							<div class="panel panel-flat panel-primary">
 								<div id="panel-available‎-source" class="panel-body" style="min-height:300px;">
-								
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-default"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
-									<button type="button" class="btn btn-default"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
-									<button type="button" class="btn btn-default"><i class="fa fa-file-o pull-left"></i> 파일</button>
-								</div>
-								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
-								</div>	
-															
-								</div>
-								<div class="panel-body">																
 									<div class="light-box">
 										<div id="panel-transfer-target"></div>
 										<i class="fa fa-desktop fa-2x"></i>
-									</div>        
+									</div> 	
+																
+									<div class="btn-group-vertical">
+										<button type="button" class="btn btn-success"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
+										<button type="button" class="btn btn-success"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
+										<button type="button" class="btn btn-success"><i class="fa fa-file-o pull-left"></i> 파일</button>
+									</div>
+									<div class="btn-group-vertical">
+										<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
+										<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
+									</div>	
+															
 								</div>
 							</div>							
 						</div>
