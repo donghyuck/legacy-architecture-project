@@ -615,7 +615,7 @@
 		
 		function createPanel(){
 					
-			var renderTo = $.unique();
+			var renderTo = ui.generateGuid();
 			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");			
 			var template = kendo.template($("#empty-panel-template").html());	
 			$("#personalized-area").append( template( { id: renderTo, colSize: grid_col_size.newValue } ) );
