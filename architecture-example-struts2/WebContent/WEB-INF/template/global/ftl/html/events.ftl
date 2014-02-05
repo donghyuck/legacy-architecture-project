@@ -295,8 +295,8 @@
 				-->
 					<div id="event-area" class="bl-main bl-expand-item">						
 						<section id="bl-list-section" class="bl-expand bl-expand-top">
-							<div class="bl-content">
-								<div id="announce-list-view"></div>	
+							<div id="announce-list-view" class="bl-content">
+
 							</div>
 						</section>
 						
