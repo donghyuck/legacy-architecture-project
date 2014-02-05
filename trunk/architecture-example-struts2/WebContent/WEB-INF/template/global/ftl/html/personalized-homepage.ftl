@@ -121,7 +121,7 @@
 				$("#panel-available‎-source :button.btn").on("click", function(){						
 					kendo.fx($(this)).transfer($("#panel-transfer-target")).duration(700).play().then(function(){					 	
 					 	$(this).fadeOut("slow", function(){
-					 		$(this).remove();
+					 		//$(this).remove();
 					 		createPanel();
 					 	});					 
 					 });
@@ -1128,15 +1128,17 @@
 								<div id="panel-available‎-source" class="panel-body" style="min-height:300px;">
 								
 								<div class="btn-group-vertical">
-									<button type="button" class="btn btn-info"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
-									<button type="button" class="btn btn-info"><i class="fa fa-file-o pull-left"></i> 파일</button>
+									<button type="button" class="btn btn-default"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
+									<button type="button" class="btn btn-default"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
+									<button type="button" class="btn btn-default"><i class="fa fa-file-o pull-left"></i> 파일</button>
+								</div>
+								<div class="btn-group-vertical">
 									<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
 									<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
+								</div>	
+															
 								</div>
-								
-								</div>
-								<div id="panel-transfer-target" class="panel-body" style="background: #F98262;">
+								<div id="panel-transfer-target" class="panel-body" style="background: #F5F5F5;">
 								<i class="fa fa-desktop fa-2x"></i>
 								</div>
 							</div>							
