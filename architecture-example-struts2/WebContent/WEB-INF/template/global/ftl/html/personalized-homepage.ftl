@@ -120,9 +120,12 @@
 				
 				$("#available‎-panel-list :button.btn").on("click", function () {				
 					 kendo.fx($(this)).transfer($("#personalized-area")).play().then(function(){
-					 	$(this).fadeOut("slow", function(){
-					 		 $(this).remove();
-					 	});					 
+					 	
+					 	createPanel();
+					 	
+					 	//$(this).fadeOut("slow", function(){
+					 	 $(this).remove();
+					 	//});					 
 					 });
 				});
 				
@@ -608,6 +611,13 @@
 			}
 			$("#announce-panel" ).show();
 		}	
+		
+		
+		function createPanel(){		
+			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
+			var template = kendo.template($("#empty-panel-template").html());	
+			$("#personalized-area").append( template( { colSize: grid_col_size.newValue } ) );			
+		}						
 								
 		<!-- ============================== -->
 		<!-- display social streams panel                        -->
