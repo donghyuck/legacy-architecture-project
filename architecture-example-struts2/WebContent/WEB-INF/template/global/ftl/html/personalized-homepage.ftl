@@ -1125,7 +1125,7 @@
 
 						<div class="col-sm-3">
 							<div class="panel panel-flat panel-primary">
-								<div id="panel-available‎-source" class="panel-body">
+								<div id="panel-available‎-source" class="panel-body" style="min-height:300px;">
 								
 								<div class="btn-group-vertical">
 									<button type="button" class="btn btn-info"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
