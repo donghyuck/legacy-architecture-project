@@ -1096,6 +1096,13 @@
 			background-color: rgba(91,192,222,0.8)		
 		}
 
+#panel-transfer-target {
+            height: 69px;
+            width: 69px;
+            top: 0;
+            position: absolute;
+        }
+        
 .light-box {
             position: absolute;
             width: 69px;
