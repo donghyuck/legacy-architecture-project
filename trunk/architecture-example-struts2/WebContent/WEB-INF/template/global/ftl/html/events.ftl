@@ -146,7 +146,7 @@
 		
 		function displayAnnouncement () {
 		
-			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200).play();				
+					
 			
 			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
@@ -162,12 +162,22 @@
 				//kendo.fx($("announce-view-content-section")).slideIn("down").duration(700).play();				
 			});
 			
-				
+			
+			
+
+			//var el = kendo.fx($(".content-main-section")),
+			//flip = el.flip("horizontal", $("#announce-list-section"), $("#announce-view-content-section")),
+			//zoom = el.zoomIn().startValue(1).endValue(0.7);
+			
+			
+			var effect = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up").duration(700);
+			effect.add(slide);
+			effect.play();
 			
 						
 			//kendo.fx($(".#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
 			
-			kendo.fx(".content-main-section").flipHorizontal($("#announce-list-section"), $("#announce-view-content-section")).duration(1000).play();
+			//kendo.fx(".content-main-section").flipHorizontal($("#announce-list-section"), $("#announce-view-content-section")).duration(1000).play();
 			
 			//$("#announce-list-section").addClass('scale-down-effect');
 			
