@@ -252,8 +252,7 @@
 					</section>
 					<section id="announce-view-content-section" style="overflow: hidden; display:none;">						
 						<div id="announce-view-panel"></div>
-					</section>
-						
+					</section>						
 				</div>
 				</div>				
 			</div>
