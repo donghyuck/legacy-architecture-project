@@ -256,29 +256,7 @@
 					<section id="announce-view-content-section">						
 						<div id="announce-view-panel"></div>
 					</section>
-					  
-					
-									
-					<div id="event-area" style="min-height:500px;">						
 						
-						
-						
-						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
-							<!--
-							<div class="panel-heading">
-								&nbsp;
-								<div class="k-window-actions panel-header-actions">
-									<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-									<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-								</div>			
-							</div>
-							-->
-							<div class="panel-body" style="padding-top:25px;">
-								
-							</div>
-						</div>
-					</div>	
 				</div>				
 			</div>
 		</div>									 			
