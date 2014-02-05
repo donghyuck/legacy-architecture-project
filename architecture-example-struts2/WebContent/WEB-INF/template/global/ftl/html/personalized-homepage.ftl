@@ -118,7 +118,7 @@
 				});	
 				
 				
-				$("#available‎-panel-list button").on("change", function () {				
+				$("#available‎-panel-list :button.btn").on("change", function () {				
 					alert( $(this).html() );
 				
 				});
