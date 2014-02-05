@@ -294,6 +294,12 @@
 					</div>
 				-->
 					<div id="event-area" class="bl-main bl-expand-item">						
+						<section id="bl-list-section" class="bl-expand bl-expand-top">
+							<div class="bl-content">
+								<div id="announce-list-view"></div>	
+							</div>
+						</section>
+						
 						<div class="bl-content">
 						<div id="announce-list-view-panel" class="panel panel-default borderless shadowless">
 							<!--
@@ -307,7 +313,7 @@
 							</div>
 							-->
 							<div class="panel-body" style="padding-top:25px;">
-								<div id="announce-list-view"></div>	
+								
 							</div>
 						</div>						
 						</div>
