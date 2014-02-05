@@ -95,6 +95,12 @@ height:50px;
 	padding : 5px;			
 }
 
+.thumbnail-flat {
+	margin-bottom : 0px;
+	padding: 0px 5px 5px 0px;
+	border: 6px solid rgba(0,0,0,0.1);
+}
+
 .full-width-column {
 	padding: 0 0px;
 	margin:0 0px;
