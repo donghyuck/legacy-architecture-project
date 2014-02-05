@@ -1152,8 +1152,8 @@
 							<div class="panel panel-flat panel-primary">
 								<div id="panel-available‎-source" class="panel-body" style="min-height:300px;">
 									<div class="light-box">
-										<div id="panel-transfer-target"></div>
-										<i class="fa fa-desktop fa-2x"></i>
+										<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>
+										
 									</div> 	
 																
 									<div class="btn-group-vertical">
