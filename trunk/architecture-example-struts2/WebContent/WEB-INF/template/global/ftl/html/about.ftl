@@ -170,7 +170,7 @@
 						<div class="col-sm-12">						
 							<div class="panel panel-default panel-flat panel-border-thick">
 								<div class="panel-heading">회사 연혁</div>
-								<div class="panel-body">
+								<div class="panel-body scrollable">
 									<ul class="cbp_tmtimeline">
 										<li>
 											<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>4/10/13</span> <span>18:30</span></time>
