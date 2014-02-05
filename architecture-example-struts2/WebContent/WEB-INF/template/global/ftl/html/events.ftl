@@ -163,19 +163,23 @@
 			});
 			
 			
-			
+			 var effect = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200);
+			 effect.play().then( function () {
+			 	$(this).hide();
+			 } );
 
 			//var el = kendo.fx($(".content-main-section")),
 			//flip = el.flip("horizontal", $("#announce-list-section"), $("#announce-view-content-section")),
 			//zoom = el.zoomIn().startValue(1).endValue(0.7);
 			
 			
-			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), 
-			slide = kendo.fx($("#announce-view-content-section")).slideIn("up"), 
-			fadein = kendo.fx($("#announce-view-content-section")).fadeOut().duration(700);
+			/var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200);
+			//zoom.add
+			//slide = kendo.fx($("#announce-view-content-section")).slideIn("up"), 
+			//fadein = kendo.fx($("#announce-view-content-section")).fadeOut().duration(700);
 			
-			fadein.add(zoom);
-			fadein.play();
+			//fadein.add(zoom);
+			//fadein.play();
 			
 						
 			//kendo.fx($(".#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
