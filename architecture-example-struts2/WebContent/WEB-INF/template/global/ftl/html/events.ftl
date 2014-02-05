@@ -7,6 +7,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
+			'css!${request.contextPath}/styles/jquery.extension/component.min.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -14,7 +15,10 @@
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
 			'${request.contextPath}/js/common/common.models.min.js',
-			'${request.contextPath}/js/common/common.ui.min.js'],
+			'${request.contextPath}/js/common/common.ui.min.js',
+			'${request.contextPath}/js/jquery.extension/modernizr.custom.js',
+			'${request.contextPath}/js/jquery.extension/boxlayout.min.js',
+			],
 			complete: function() {
 			
 				// 1.  한글 지원을 위한 로케일 설정
