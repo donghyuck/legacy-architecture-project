@@ -165,7 +165,7 @@
 			//kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200).play();				
 			//kendo.fx($("#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
 			
-			classie.add( $("#announce-list-section"), 'scale-down-effect');
+			$("#announce-list-section").addClass('scale-down-effect');
 			
 			//$("#announce-list-section").addClass("scale-down-effect");
 			////kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
