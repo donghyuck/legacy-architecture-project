@@ -159,9 +159,9 @@
 				
 			});
 			
-			kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();
+			//kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).play();
 			
-			//$("#announce-list-section").addClass("scale-down-effect");
+			$("#announce-list-section").addClass("scale-down-effect");
 			
 			
 			
