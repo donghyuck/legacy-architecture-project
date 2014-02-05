@@ -118,7 +118,7 @@
 				});	
 				
 				
-				$("#available‎-panel-list :button.btn").on("change", function () {				
+				$("#available‎-panel-list :button.btn").on("click", function () {				
 					alert( $(this).html() );
 				
 				});
