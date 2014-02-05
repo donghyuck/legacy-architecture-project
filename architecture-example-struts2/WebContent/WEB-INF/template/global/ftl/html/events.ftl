@@ -170,8 +170,8 @@
 			//zoom = el.zoomIn().startValue(1).endValue(0.7);
 			
 			
-			var effect = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up");
-			effect.add(slide);
+			var effect = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1).duration(200), slide = kendo.fx($("#announce-view-content-section")).slideIn("up"), fadein = kendo.fx($("#announce-view-content-section")).fadeIn().duration(700);
+			effect.add(fadein);
 			effect.play();
 			
 						
