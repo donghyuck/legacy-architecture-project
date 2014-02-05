@@ -1092,6 +1092,20 @@
 			background-color: rgba(91,192,222,0.8)		
 		}
 
+.light-box {
+            position: absolute;
+            width: 69px;
+            padding-top: 69px;
+            top: 0;
+            right: 34px;
+            background: #da2d7d ;
+            overflow: hidden;
+            font-size: 9px;
+            line-height: 20px;
+            text-align: center;
+            color: #fff;
+            text-transform: uppercase;
+        }
 
 		
 		</style>   	
@@ -1138,8 +1152,11 @@
 								</div>	
 															
 								</div>
-								<div id="panel-transfer-target" class="panel-body" style="background: #F5F5F5;">
-								<i class="fa fa-desktop fa-2x"></i>
+								<div class="panel-body">																
+									<div class="lightbox">
+										<div id="panel-transfer-target"></div>
+										<i class="fa fa-desktop fa-2x"></i>
+									</div>        
 								</div>
 							</div>							
 						</div>
