@@ -167,39 +167,6 @@
 					zoom.reverse();
 				}, 100);
 			});
-			
-			
-
-			 
-			 //zoom.play().then( function () {			 	
-			 //	kendo.fx( $(this) ).fadeOut().play();
-			 //	slide.play();
-			 //} );
-
-			//var el = kendo.fx($(".content-main-section")),
-			//flip = el.flip("horizontal", $("#announce-list-section"), $("#announce-view-content-section")),
-			//zoom = el.zoomIn().startValue(1).endValue(0.7);
-			
-			
-			//var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(0.5).duration(200);
-			//zoom.add
-			//slide = kendo.fx($("#announce-view-content-section")).slideIn("up"), 
-			//fadein = kendo.fx($("#announce-view-content-section")).fadeOut().duration(700);
-			
-			//fadein.add(zoom);
-			//fadein.play();
-			
-						
-			//kendo.fx($(".#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
-			
-			//kendo.fx(".content-main-section").flipHorizontal($("#announce-list-section"), $("#announce-view-content-section")).duration(1000).play();
-			
-			//$("#announce-list-section").addClass('scale-down-effect');
-			
-			//$("#announce-list-section").addClass("scale-down-effect");
-			////kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
-			//$("#announce-view-panel").show();
-			//$("#announce-view-panel").show();
 		}				
 		-->
 		</script>		
@@ -285,10 +252,10 @@
 				</div>
 				<div class="col-lg-9">		
 				<div class="content-main-section">
-					<section id="announce-list-section" style="position: absolute;">
+					<section id="announce-list-section" style="position: absolute; background: #F98262;	">
 						<div id="announce-list-view"></div>	
 					</section>
-					<section id="announce-view-content-section" style="overflow: hidden; display:none;">						
+					<section id="announce-view-content-section" style="overflow: hidden; display:none; background: #3ba5db; ">						
 						<div id="announce-view-panel"></div>
 					</section>
 						
