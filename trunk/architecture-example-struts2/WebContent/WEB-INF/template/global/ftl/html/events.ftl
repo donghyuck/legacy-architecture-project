@@ -165,7 +165,9 @@
 				
 			
 						
-			kendo.fx($("#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
+			//kendo.fx($(".#announce-list-section")).tile("up", $("#announce-view-content-section")).duration(700).play();
+			
+			kendo.fx(".content-main-section").flipHorizontal($("#announce-list-section"), $("#announce-view-content-section")).duration(1000).play();
 			
 			//$("#announce-list-section").addClass('scale-down-effect');
 			
