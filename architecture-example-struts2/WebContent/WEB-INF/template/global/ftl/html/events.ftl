@@ -174,7 +174,7 @@
 			//$("#announce-list-section").addClass("scale-down-effect");
 			////kendo.fx($("#announce-view-panel")).fade("in").duration(700).play();			
 			//$("#announce-view-panel").show();
-			$("#announce-view-panel").hide();
+			$("#announce-view-panel").show();
 		}				
 		-->
 		</script>		
