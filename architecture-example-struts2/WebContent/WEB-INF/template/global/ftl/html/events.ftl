@@ -249,7 +249,7 @@
 					</div>	
 					<!-- end side menu -->				
 				</div>
-				<div class="col-lg-9">		
+				<div class="col-lg-9" style="background:#F98262;">		
 					<section id="announce-list-section"  style="position: absolute;">
 						<div id="announce-list-view"></div>	
 					</section>
