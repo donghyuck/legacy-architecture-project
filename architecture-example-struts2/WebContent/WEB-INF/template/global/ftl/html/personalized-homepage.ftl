@@ -1136,7 +1136,7 @@
 				example menus 
 				these menus will be on top of the push wrapper
 			-->
-			<nav class="st-menu st-effect-1" id="menu-1" style="display:none;">
+			<nav class="st-menu st-effect-1" id="menu-1">
 				<h2 class="icon icon-lab">Sidebar</h2>
 				<ul>
 					<li><a class="icon icon-data" href="#">Data Management</a></li>
@@ -1155,13 +1155,9 @@
 				<div class="st-content"><!-- this is the wrapper for the content -->				
 				<div id="st-trigger-effects">
 					<button data-effect="st-effect-1"><i class="fa fa-bars fa-2x"></i></button>												
-				</div>				
-				</div><!-- /st-content -->
-			</div><!-- /st-pusher -->
-		</div><!-- /st-container -->
-		
-	
-		<!-- START MAIN CONTENT -->
+				</div>	
+
+
 			<div  class="container" style="min-height:600px; margin-top:-14px;">		
 				<div class="row">
 					<div class="col-sm-6"></div>
@@ -1356,7 +1352,16 @@
 						</div>
 					</div>										
 				</div>
-			</div>		
+			</div>	
+							
+							
+				</div><!-- /st-content -->
+			</div><!-- /st-pusher -->
+		</div><!-- /st-container -->
+		
+	
+		<!-- START MAIN CONTENT -->
+	
 		<div id="attach-window"></div>		
 		
 					
