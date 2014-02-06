@@ -52,9 +52,13 @@
 							
 				$("#personalized-controls-menu").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+					$('.overlay').toggleClass('hide');
+					
+					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+					$('.overlay').toggleClass('hide');
 				});
 											
 				// 3. ACCOUNTS LOAD	
