@@ -1125,12 +1125,13 @@
         
         #personalized-controls-section{
         	margin-top: 50px;
-        	background-color: rgba(91,192,222,0.8);
         }
         
         #personalized-controls-section.cbp-spmenu-vertical {
         	width : 50%;
-        	min-width : 300px;        
+        }
+        #personalized-controls-section.cbp-spmenu-right {
+        	width : 50%;
         }
 		</style>   	
 	</head>
