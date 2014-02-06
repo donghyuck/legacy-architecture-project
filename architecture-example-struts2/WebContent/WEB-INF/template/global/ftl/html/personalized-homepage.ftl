@@ -57,9 +57,10 @@
 					});					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
-					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+					$('#personalized-controls-section').toggleClass('cbp-spmenu-open').then(function(){
 					kendo.fx($('.overlay')).zoom("in").endValue(1).startValue(0).reverse();		
-					//$('.overlay').toggleClass('hide');
+					$('.overlay').toggleClass('hide');
+					});
 				});
 											
 				// 3. ACCOUNTS LOAD	
