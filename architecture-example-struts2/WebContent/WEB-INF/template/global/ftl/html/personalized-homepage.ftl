@@ -1230,8 +1230,7 @@
 								</div>
 						</div>									
 						
-						</div>
-									
+						</div>									
 										
 						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 							<div class="panel panel-default panel-flat">
