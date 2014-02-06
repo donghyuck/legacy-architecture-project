@@ -1161,10 +1161,10 @@
 		<!-- END HEADER -->	
 
 		<!-- START MAIN CONTENT -->
-			<div  class="container" style="min-height:600px; margin-top:-14px;">		
-				<div class="row">
-					<div class="col-sm-6"></div>
-					<div class="col-sm-6">
+		<div  class="container" style="min-height:600px; margin-top:-14px;">		
+			<div class="row">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-6">
 						<div class="btn-group" data-toggle="buttons">
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
@@ -1178,40 +1178,12 @@
 						</div>
 						<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	
 						<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
-					</div>
-				</div>				
-				<div id="personalized-controls" class="blank-top-5" style="display:none;">					
-					<button id="personalized-controls-hide" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>
-					<div class="row">
-
-						<div class="col-sm-3">
-							<div class="panel panel-flat panel-primary">
-								<div class="panel-body" style="min-height:300px;">
-									<div class="light-box">
-										<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>										
-									</div> 	
-									
-									<div id="panel-available‎-source">							
-									<div class="btn-group-vertical">
-										<button type="button" class="btn btn-success"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
-										<button type="button" class="btn btn-success"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
-										<button type="button" class="btn btn-success"><i class="fa fa-file-o pull-left"></i> 파일</button>
-									</div>
-									<div class="btn-group-vertical">
-										<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
-										<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
-									</div>	
-									</div>						
-								</div>
-							</div>							
-						</div>
-						
-						<div class="col-sm-8 paddingless">
-
-						</div>
-					
 				</div>
-				<div id="personalized-area" class="row blank-top-5">					
+			</div>				
+		</div>
+
+				<div id="personalized-area" class="row blank-top-5">				
+					
 						<!-- start announce panel -->			
 						<div class="custom-panels-group col-sm-6 panel panel-primary panel-flat">
 								<div class="panel-heading" style="border:0px;">공지 & 이벤트
@@ -1244,7 +1216,8 @@
 								</div>
 							</div>		
 						</div>
-					</div>										
+					</div>		
+													
 				</div>
 			</div>		
 		
