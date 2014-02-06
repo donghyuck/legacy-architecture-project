@@ -51,7 +51,7 @@
 				});											
 							
 				$("#personalized-controls-menu").on( "click" , function(e){					
-					//$('.overlay').toggleClass('hide');					
+					$('.overlay').toggleClass('hide');					
 					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).play().then(function(){
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
