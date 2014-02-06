@@ -1126,6 +1126,11 @@
         #personalized-controls-section{
         	margin-top: 50px;
         }
+        
+        #personalized-controls-section..cbp-spmenu-vertical {
+        	width : 50%;
+        	min-width : 300px;        
+        }
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
