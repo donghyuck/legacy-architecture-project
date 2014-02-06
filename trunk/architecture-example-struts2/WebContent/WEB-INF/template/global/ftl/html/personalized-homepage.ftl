@@ -1118,6 +1118,7 @@
             top: 0;
             right: 34px;
             background: #da2d7d ;
+            
             overflow: hidden;
             font-size: 9px;
             line-height: 20px;
@@ -1128,6 +1129,7 @@
         
         #personalized-controls-section{
         	margin-top: 50px;
+        	background-color: rgba(91,192,222,0.8);
         }
         
         #personalized-controls-section.cbp-spmenu-vertical {
@@ -1146,8 +1148,8 @@
         	margin : 0px;
         	padding : 6px 6px 5px 6px;
         	color : #000000;
-        	/**background : transparent;*/
-        	background-color: rgba(91,192,222,0.8);
+        	background : transparent;
+        	
         	height : 49px;
         }
 		</style>   	
