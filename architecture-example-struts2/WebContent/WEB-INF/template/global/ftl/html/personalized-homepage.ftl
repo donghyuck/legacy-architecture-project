@@ -1146,7 +1146,7 @@
         	margin : 0px;
         	padding : 6px 6px 5px 6px;
         	color : #000000;
-        	background : #FFFFFF;
+        	background : transparent;
         }
 		</style>   	
 	</head>
