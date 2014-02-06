@@ -1235,7 +1235,7 @@
 				</div>
 				
 			</div>		
-		 <div class="overlay"></div>
+		 <div class="overlay hide"></div>
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
 			
 			<header>
