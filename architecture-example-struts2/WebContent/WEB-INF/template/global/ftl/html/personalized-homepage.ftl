@@ -1127,6 +1127,216 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
+
+
+<div id="st-container" class="st-container">
+			<!-- 	
+				example menus 
+				these menus will be on top of the push wrapper
+			-->
+			<nav class="st-menu st-effect-1" id="menu-1">
+				<h2 class="icon icon-lab">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+			
+			<nav class="st-menu st-effect-2" id="menu-2">
+				<h2 class="icon icon-stack">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+
+			<nav class="st-menu st-effect-4" id="menu-4">
+				<h2 class="icon icon-lab">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+
+			<nav class="st-menu st-effect-5" id="menu-5">
+				<h2 class="icon icon-stack">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+			
+			<nav class="st-menu st-effect-9" id="menu-9">
+				<h2 class="icon icon-lab">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+			
+			<nav class="st-menu st-effect-10" id="menu-10">
+				<h2 class="icon icon-stack">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+			
+			<nav class="st-menu st-effect-11" id="menu-11">
+				<h2 class="icon icon-lab">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+
+			<nav class="st-menu st-effect-12" id="menu-12">
+				<h2 class="icon icon-stack">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+
+			<nav class="st-menu st-effect-13" id="menu-13">
+				<h2 class="icon icon-stack">Sidebar</h2>
+				<ul>
+					<li><a class="icon icon-data" href="#">Data Management</a></li>
+					<li><a class="icon icon-location" href="#">Location</a></li>
+					<li><a class="icon icon-study" href="#">Study</a></li>
+					<li><a class="icon icon-photo" href="#">Collections</a></li>
+					<li><a class="icon icon-wallet" href="#">Credits</a></li>
+				</ul>
+			</nav>
+
+			<!-- content push wrapper -->
+			<div class="st-pusher">
+				<!-- 	
+					example menus 
+					these menus will be under the push wrapper
+				-->
+				<nav class="st-menu st-effect-3" id="menu-3">
+					<h2 class="icon icon-lab">Sidebar</h2>
+					<ul>
+						<li><a class="icon icon-data" href="#">Data Management</a></li>
+						<li><a class="icon icon-location" href="#">Location</a></li>
+						<li><a class="icon icon-study" href="#">Study</a></li>
+						<li><a class="icon icon-photo" href="#">Collections</a></li>
+						<li><a class="icon icon-wallet" href="#">Credits</a></li>
+					</ul>
+				</nav>
+
+				<nav class="st-menu st-effect-6" id="menu-6">
+					<h2 class="icon icon-stack">Sidebar</h2>
+					<ul>
+						<li><a class="icon icon-data" href="#">Data Management</a></li>
+						<li><a class="icon icon-location" href="#">Location</a></li>
+						<li><a class="icon icon-study" href="#">Study</a></li>
+						<li><a class="icon icon-photo" href="#">Collections</a></li>
+						<li><a class="icon icon-wallet" href="#">Credits</a></li>
+					</ul>
+				</nav>
+
+				<nav class="st-menu st-effect-7" id="menu-7">
+					<h2 class="icon icon-lab">Sidebar</h2>
+					<ul>
+						<li><a class="icon icon-data" href="#">Data Management</a></li>
+						<li><a class="icon icon-location" href="#">Location</a></li>
+						<li><a class="icon icon-study" href="#">Study</a></li>
+						<li><a class="icon icon-photo" href="#">Collections</a></li>
+						<li><a class="icon icon-wallet" href="#">Credits</a></li>
+					</ul>
+				</nav>
+
+				<nav class="st-menu st-effect-8" id="menu-8">
+					<h2 class="icon icon-stack">Sidebar</h2>
+					<ul>
+						<li><a class="icon icon-data" href="#">Data Management</a></li>
+						<li><a class="icon icon-location" href="#">Location</a></li>
+						<li><a class="icon icon-study" href="#">Study</a></li>
+						<li><a class="icon icon-photo" href="#">Collections</a></li>
+						<li><a class="icon icon-wallet" href="#">Credits</a></li>
+					</ul>
+				</nav>
+
+				<nav class="st-menu st-effect-14" id="menu-14">
+					<h2 class="icon icon-stack">Sidebar</h2>
+					<ul>
+						<li><a class="icon icon-data" href="#">Data Management</a></li>
+						<li><a class="icon icon-location" href="#">Location</a></li>
+						<li><a class="icon icon-study" href="#">Study</a></li>
+						<li><a class="icon icon-photo" href="#">Collections</a></li>
+						<li><a class="icon icon-wallet" href="#">Credits</a></li>
+					</ul>
+				</nav>
+
+				<div class="st-content"><!-- this is the wrapper for the content -->
+					<div class="st-content-inner"><!-- extra div for emulating position:fixed of the menu -->
+						<!-- Top Navigation -->
+						<div class="codrops-top clearfix">
+							<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Tutorials/3DShadingWithBoxShadows/"><span>Previous Demo</span></a>
+							<span class="right"><a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=16292"><span>Back to the Codrops Article</span></a></span>
+						</div>
+						<header class="codrops-header">
+							<h1>Sidebar Transitions <span>Transition effects for off-canvas views</span></h1>
+						</header>
+						<div class="main clearfix">
+							<div id="st-trigger-effects" class="column">
+								<button data-effect="st-effect-1">Slide in on top</button>
+								<button data-effect="st-effect-2">Reveal</button>
+								<button data-effect="st-effect-3">Push</button>
+								<button data-effect="st-effect-4">Slide along</button>
+								<button data-effect="st-effect-5">Reverse slide out</button>
+								<button data-effect="st-effect-6">Rotate pusher</button>
+								<button data-effect="st-effect-7">3D rotate in</button>
+								<button data-effect="st-effect-8">3D rotate out</button>
+								<button data-effect="st-effect-9">Scale down pusher</button>
+								<button data-effect="st-effect-10">Scale Up</button>
+								<button data-effect="st-effect-11">Scale &amp; rotate pusher</button>
+								<button data-effect="st-effect-12">Open door</button>
+								<button data-effect="st-effect-13">Fall down</button>
+								<button data-effect="st-effect-14">Delayed 3D Rotate</button>
+							</div>
+							<div class="column">
+								<p>Sidebar menus or off-canvas navigations can be revealed in many creative ways.</p>
+								<p>Here is some inspiration for showing them in style using CSS transitions.</p>
+							</div>
+							<div class="info">
+								<p>If you enjoyed this demo you might also like:</p>
+								<p><a href="http://tympanus.net/Development/HeaderEffects/">On Scroll Header Effects</a></p>
+								<p><a href="http://tympanus.net/Development/PageTransitions/">A Collection of Page Transitions</a></p>
+							</div>
+						</div><!-- /main -->
+					</div><!-- /st-content-inner -->
+				</div><!-- /st-content -->
+			</div><!-- /st-pusher -->
+		</div><!-- /st-container -->
+
+		
 		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px; margin-top:-14px;">		
 				<div class="row">
@@ -1323,7 +1533,9 @@
 					</div>										
 				</div>
 			</div>		
-		<div id="attach-window"></div>					
+		<div id="attach-window"></div>		
+		
+					
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
