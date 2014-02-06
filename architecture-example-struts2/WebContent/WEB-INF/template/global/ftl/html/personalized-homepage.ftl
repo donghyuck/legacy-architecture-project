@@ -1352,6 +1352,11 @@
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
 			<header>				
+<div class="btn-group">
+  <button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
+</div>			
 				<button type="button" class="close" aria-hidden="true"><i class="fa fa-times-circle fa-2x"></i></button>			
 			</header>
 			
