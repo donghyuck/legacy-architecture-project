@@ -1154,7 +1154,7 @@
 				-->
 				<div class="st-content"><!-- this is the wrapper for the content -->				
 				<div id="st-trigger-effects">
-					<button data-effect="st-effect-1">Slide in on top</button>												
+					<button data-effect="st-effect-1"><i class="fa fa-bars fa-2x"></i></button>												
 				</div>				
 				</div><!-- /st-content -->
 			</div><!-- /st-pusher -->
