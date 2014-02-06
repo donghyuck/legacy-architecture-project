@@ -7,7 +7,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common/common.sidebareffects.css',
+			'css!${request.contextPath}/styles/common/common.spmenu.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
@@ -18,8 +18,7 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
-			'${request.contextPath}/js/common/common.classie.min.js',
-			'${request.contextPath}/js/common/common.sidebareffects.min.js'],
+			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {
 			
 			
@@ -50,6 +49,10 @@
 						custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
 					});
 				});											
+							
+				$("#personalized-controls-menu").on( "click" , function(e){
+					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+				});
 							
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
@@ -1323,7 +1326,12 @@
 					</div>										
 				</div>
 			</div>		
-		<div id="attach-window"></div>		
+		
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
+			<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
+		sss
+		
+		</section>
 		
 					
 		<!-- END MAIN CONTENT -->		
