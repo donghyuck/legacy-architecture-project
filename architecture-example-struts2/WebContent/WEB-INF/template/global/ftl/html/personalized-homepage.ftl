@@ -1140,6 +1140,9 @@
         
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
+        	margin : 0px;
+        	padding : 5px;
+        	color : #000000;
         }
 		</style>   	
 	</head>
