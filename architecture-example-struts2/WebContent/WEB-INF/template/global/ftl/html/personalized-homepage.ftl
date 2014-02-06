@@ -53,11 +53,11 @@
 				$("#personalized-controls-menu").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					$('.overlay').toggleClass('hide');					
-					kendo.fx(this).zoom("out").endValue(1).startValue(0).play();					
+					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).play();					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-					kendo.fx(this).zoom("out").endValue(1).startValue(0).reverse();		
+					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).reverse();		
 					$('.overlay').toggleClass('hide');
 				});
 											
