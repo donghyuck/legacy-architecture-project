@@ -1120,14 +1120,6 @@
             text-transform: uppercase;
         }
         
-        #st-container {
-        	margin-top:-20px;
-        }
-		
-		body {
-    overflow:hidden;
-}
-
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
@@ -1135,33 +1127,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 
-<div id="st-container" class="st-container">
-			<!-- 	
-				example menus 
-				these menus will be on top of the push wrapper
-			-->
-			<nav class="st-menu st-effect-1" id="menu-1">
-				<h2 class="icon icon-lab">Sidebar</h2>
-				<ul>
-					<li><a class="icon icon-data" href="#">Data Management</a></li>
-					<li><a class="icon icon-location" href="#">Location</a></li>
-					<li><a class="icon icon-study" href="#">Study</a></li>
-					<li><a class="icon icon-photo" href="#">Collections</a></li>
-					<li><a class="icon icon-wallet" href="#">Credits</a></li>
-				</ul>
-			</nav>
-			<!-- content push wrapper -->
-			<div class="st-pusher">
-				<!-- 	
-					example menus 
-					these menus will be under the push wrapper
-				-->
-				<div class="st-content"><!-- this is the wrapper for the content -->				
-				<div id="st-trigger-effects">
-					<button data-effect="st-effect-1"><i class="fa fa-bars fa-2x"></i></button>												
-				</div>	
-
-
+		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px; margin-top:-14px;">		
 				<div class="row">
 					<div class="col-sm-6"></div>
@@ -1356,24 +1322,13 @@
 						</div>
 					</div>										
 				</div>
-			</div>	
-							
-			<#include "/html/common/common-homepage-footer.ftl" >		
-			
-							
-				</div><!-- /st-content -->
-			</div><!-- /st-pusher -->
-		</div><!-- /st-container -->
-		
-	
-		<!-- START MAIN CONTENT -->
-	
+			</div>		
 		<div id="attach-window"></div>		
 		
 					
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
-		
+		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
 		
 		<!-- START TEMPLATE -->				
