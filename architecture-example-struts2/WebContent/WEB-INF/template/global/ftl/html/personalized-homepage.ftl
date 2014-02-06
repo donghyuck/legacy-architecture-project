@@ -1133,6 +1133,10 @@
         #personalized-controls-section.cbp-spmenu-right {
         	right: -500px;
         }
+        
+        #personalized-controls-section..cbp-spmenu-right.cbp-spmenu-open {
+        	right : 0px;
+        }
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
