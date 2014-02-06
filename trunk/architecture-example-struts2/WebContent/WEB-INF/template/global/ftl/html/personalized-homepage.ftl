@@ -1141,7 +1141,7 @@
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
         	margin : 0px;
-        	padding : 8px 0px 5px 5px;
+        	padding : 6px 6px 5px 6px;
         	color : #000000;
         	background : #FFFFFF;
         }
@@ -1353,11 +1353,11 @@
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
 			<header>				
 <div class="btn-group">
-  <button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-cog fa-2x"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-comment fa-2x"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-envelope fa-2x"></i></button>
 </div>			
-				<button type="button" class="close" aria-hidden="true"><i class="fa fa-times-circle fa-2x"></i></button>			
+				<button type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
 			</header>
 			
 		sss
