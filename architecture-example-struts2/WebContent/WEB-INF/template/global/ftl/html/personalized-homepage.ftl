@@ -51,15 +51,15 @@
 				});											
 							
 				$("#personalized-controls-menu").on( "click" , function(e){					
-					$('.overlay').toggleClass('hide');					
+					//$('.overlay').toggleClass('hide');					
 					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).play().then(function(){
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).reverse();		
-					$('.overlay').toggleClass('hide');
+					kendo.fx($('.overlay')).zoom("in").endValue(1).startValue(0).reverse();		
+					//$('.overlay').toggleClass('hide');
 				});
 											
 				// 3. ACCOUNTS LOAD	
