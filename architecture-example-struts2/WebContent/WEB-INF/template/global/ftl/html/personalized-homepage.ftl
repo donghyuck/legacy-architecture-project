@@ -1131,7 +1131,7 @@
         	width: 500px;
         }
         #personalized-controls-section.cbp-spmenu-right {
-        	right: -500px;
+        	width: -500px;
         }
 		</style>   	
 	</head>
