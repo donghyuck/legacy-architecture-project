@@ -1120,6 +1120,9 @@
             text-transform: uppercase;
         }
 
+#main-wrapper{
+	background: #444;
+}
 		
 		</style>   	
 	</head>
@@ -1127,7 +1130,7 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-
+<section id="main-wrapper" >
 
 <div id="st-container" class="st-container">
 			<!-- 	
@@ -1293,7 +1296,6 @@
 						<li><a class="icon icon-wallet" href="#">Credits</a></li>
 					</ul>
 				</nav>
-
 				<div class="st-content"><!-- this is the wrapper for the content -->
 					<div class="st-content-inner"><!-- extra div for emulating position:fixed of the menu -->
 						<!-- Top Navigation -->
@@ -1335,6 +1337,10 @@
 				</div><!-- /st-content -->
 			</div><!-- /st-pusher -->
 		</div><!-- /st-container -->
+		
+</section>
+
+
 
 		
 		<!-- START MAIN CONTENT -->
