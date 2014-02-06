@@ -53,7 +53,10 @@
 				$("#personalized-controls-menu").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 				});
-							
+				$("#personalized-controls-menu-close").on( "click" , function(e){
+					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+				});
+											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
 				var accounts = $("#account-panel").kendoAccounts({
@@ -1358,7 +1361,7 @@
   <button type="button" class="btn btn-info"><i class="fa fa-comment fa-2x"></i></button>
   <button type="button" class="btn btn-info"><i class="fa fa-envelope fa-2x"></i></button>
 </div>		-->	
-				<button id="personalized-controls-menu" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
+				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
 			</header>
 			
 		sss
