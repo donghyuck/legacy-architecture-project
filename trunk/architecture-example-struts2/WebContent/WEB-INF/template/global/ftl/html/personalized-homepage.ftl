@@ -1119,6 +1119,10 @@
             color: #fff;
             text-transform: uppercase;
         }
+        
+        #st-container {
+        	margin-top:-14px;
+        }
 		
 		</style>   	
 	</head>
