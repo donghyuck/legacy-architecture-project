@@ -1339,7 +1339,7 @@
 			</div>		
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
-			<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
+			<a href="#"  class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
 		sss
 		
 		</section>
