@@ -51,6 +51,7 @@
 	overflow: hidden;
 }
 
+/**
 .cbp-spmenu-horizontal h3 {
 	height: 100%;
 	width: 20%;
@@ -63,7 +64,7 @@
 	padding: 0.8em;
 	border-left: 1px solid #258ecd;
 }
-
+*/
 /* Vertical menu that slides from the left or right */
 
 .cbp-spmenu-left {
