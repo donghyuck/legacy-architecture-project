@@ -1343,7 +1343,7 @@
 			</div>		
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
-			<a href="#"  class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
+			<a href="#"  class="cbp-spmenu-trigger"><i class="fa fa-times-circle fa-2x"></i></a>
 		sss
 		
 		</section>
