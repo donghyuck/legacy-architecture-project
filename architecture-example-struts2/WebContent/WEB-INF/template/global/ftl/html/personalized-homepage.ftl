@@ -1167,7 +1167,7 @@
         }
         
         .overlay{
-	opacity: 0;
+
 	background: rgba(143,27,15,0.8);
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
