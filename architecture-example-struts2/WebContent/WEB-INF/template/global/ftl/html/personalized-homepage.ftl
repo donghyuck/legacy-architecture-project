@@ -1177,7 +1177,7 @@
   width: 100%;
   height: 100%;
   z-index: 10;
- background: rgba(0,0,0,0.6);
+ background: rgba(0,0,0,0.5);
  
  /*dim the background*/
 }
