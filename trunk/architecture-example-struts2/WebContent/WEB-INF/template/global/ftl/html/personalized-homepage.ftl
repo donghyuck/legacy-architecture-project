@@ -1180,7 +1180,7 @@
 						<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
 				</div>
 			</div>				
-		</div>
+		
 
 				<div id="personalized-area" class="row blank-top-5">				
 					
@@ -1219,6 +1219,7 @@
 					</div>		
 													
 				</div>
+				
 			</div>		
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
