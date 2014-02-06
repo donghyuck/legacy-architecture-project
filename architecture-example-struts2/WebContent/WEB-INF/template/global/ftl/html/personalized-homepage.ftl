@@ -68,6 +68,10 @@
 					}, 100);					
 				});
 											
+				
+				
+											
+											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
 				var accounts = $("#account-panel").kendoAccounts({
@@ -489,6 +493,33 @@
 
 				$('#myTab a:first').tab('show') ;
 				// END SCRIPT 
+				
+				(function(){
+
+	var button = document.getElementById('cn-button'),
+    wrapper = document.getElementById('cn-wrapper');
+
+    //open and close menu when the button is clicked
+	var open = false;
+	button.addEventListener('click', handler, false);
+
+	function handler(){
+	  if(!open){
+	    this.innerHTML = "Close";
+	    classie.add(wrapper, 'opened-nav');
+	  }
+	  else{
+	    this.innerHTML = "Menu";
+		classie.remove(wrapper, 'opened-nav');
+	  }
+	  open = !open;
+	}
+	function closeWrapper(){
+		classie.remove(wrapper, 'opened-nav');
+	}
+
+})();
+
 			}
 		}]);	
 		
@@ -1263,6 +1294,22 @@
 			</header>
 			
 			<div class="blank-space-5">
+			
+			<!-- Start Nav Structure -->
+				<button class="cn-button" id="cn-button">Menu</button>
+				<div class="cn-wrapper" id="cn-wrapper">
+					<ul>
+						<li><a href="#"><span>About</span></a></li>
+						<li><a href="#"><span>Tutorials</span></a></li>
+						<li><a href="#"><span>Articles</span></a></li>
+						<li><a href="#"><span>Snippets</span></a></li>
+						<li><a href="#"><span>Plugins</span></a></li>
+						<li><a href="#"><span>Contact</span></a></li>
+						<li><a href="#"><span>Follow</span></a></li>
+					 </ul>
+				</div>
+				<!-- End of Nav Structure -->
+			
 			
 				<div class="panel panel-flat panel-primary borderless">
 					<div class="panel-body">				
