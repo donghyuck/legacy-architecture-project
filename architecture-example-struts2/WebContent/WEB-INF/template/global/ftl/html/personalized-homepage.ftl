@@ -1147,6 +1147,7 @@
         	padding : 6px 6px 5px 6px;
         	color : #000000;
         	background : transparent;
+        	height : 49px;
         }
 		</style>   	
 	</head>
