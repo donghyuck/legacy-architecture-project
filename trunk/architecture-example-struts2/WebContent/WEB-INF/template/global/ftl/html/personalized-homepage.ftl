@@ -1168,7 +1168,6 @@
         
         .overlay{
 
-	background: rgba(143,27,15,0.8);
 	-webkit-transition: all 0.3s;
 	-moz-transition: all 0.3s;
 	transition: all 0.3s;
@@ -1178,7 +1177,7 @@
   width: 100%;
   height: 100%;
   z-index: 10;
- background: rgba(143,27,15,0.8);
+ background: rgba(0,0,0,0.8);
  
  /*dim the background*/
 }
