@@ -60,8 +60,9 @@
 				$("#personalized-controls-menu-close").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					setTimeout(function() {
-						side_section_zoom.reverse();
+						side_section_zoom.reverse().then(function(){
 						$('.overlay').toggleClass('hide');
+						});
 					}, 100);					
 				});
 											
