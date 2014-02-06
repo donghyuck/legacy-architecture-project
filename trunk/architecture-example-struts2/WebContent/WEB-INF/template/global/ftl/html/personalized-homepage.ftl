@@ -1136,7 +1136,7 @@
 				example menus 
 				these menus will be on top of the push wrapper
 			-->
-			<nav class="st-menu st-effect-1" id="menu-1">
+			<nav class="st-menu st-effect-1" id="menu-1" style="display:none;">
 				<h2 class="icon icon-lab">Sidebar</h2>
 				<ul>
 					<li><a class="icon icon-data" href="#">Data Management</a></li>
