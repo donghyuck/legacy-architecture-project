@@ -1262,7 +1262,7 @@
 				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
 			</header>
 			
-			<div class="padding:5px;">
+			<div class="blank-space-5">
 			
 				<div class="panel panel-flat panel-primary">
 					<div class="panel-body">				
