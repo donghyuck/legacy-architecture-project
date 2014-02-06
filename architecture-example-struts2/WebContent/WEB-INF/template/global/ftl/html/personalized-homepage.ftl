@@ -1143,6 +1143,7 @@
         	margin : 0px;
         	padding : 5px;
         	color : #000000;
+        	background : #FFFFFF;
         }
 		</style>   	
 	</head>
