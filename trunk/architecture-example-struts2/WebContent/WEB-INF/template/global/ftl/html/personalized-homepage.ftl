@@ -1137,6 +1137,10 @@
         #personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
         	right : 0px;
         }
+        
+        .cbp-spmenu-vertical header {
+        	1px solid #258ecd;
+        }
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
@@ -1343,7 +1347,10 @@
 			</div>		
 		
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
-			<a href="#"  class="cbp-spmenu-trigger"><i class="fa fa-times-circle fa-2x"></i></a>
+			<header>
+			<i class="fa fa-times-circle fa-2x"></i>
+			</header>
+			
 		sss
 		
 		</section>
