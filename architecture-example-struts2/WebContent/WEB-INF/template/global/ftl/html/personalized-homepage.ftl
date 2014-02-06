@@ -1123,6 +1123,9 @@
             text-transform: uppercase;
         }
         
+        #personalized-controls-section{
+        	margin-top: 50px;
+        }
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
