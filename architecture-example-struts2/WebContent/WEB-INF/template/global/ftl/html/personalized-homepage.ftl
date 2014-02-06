@@ -1134,7 +1134,7 @@
         	right: -500px;
         }
         
-        #personalized-controls-section..cbp-spmenu-right.cbp-spmenu-open {
+        #personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
         	right : 0px;
         }
 		</style>   	
