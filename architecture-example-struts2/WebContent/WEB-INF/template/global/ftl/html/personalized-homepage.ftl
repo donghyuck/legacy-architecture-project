@@ -1253,14 +1253,16 @@
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
 			
 			<header>
-			<!--				
+							
 <div class="btn-group">
   <button type="button" class="btn btn-info"><i class="fa fa-cog fa-2x"></i></button>
   <button type="button" class="btn btn-info"><i class="fa fa-comment fa-2x"></i></button>
   <button type="button" class="btn btn-info"><i class="fa fa-envelope fa-2x"></i></button>
-</div>		-->	
+</div>			
 				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
 			</header>
+			
+			<div class="padding:5px;">
 			
 				<div class="panel panel-flat panel-primary">
 					<div class="panel-body">				
@@ -1367,13 +1369,13 @@
 								</section>				
 							</div><!-- end photos -->
 						</div><!-- end of tab content -->												
-					
-					
-					</div>
+				
 					
 					</div>
+					
 					</div>
-		
+					</div>
+			</div>	
 		</section>
 		
 					
