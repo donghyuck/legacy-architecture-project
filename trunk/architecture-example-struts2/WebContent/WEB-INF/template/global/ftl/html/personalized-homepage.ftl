@@ -1540,6 +1540,8 @@
 			
 			<div class="blank-space-5">
 			
+							<div class="panel panel-flat panel-primary borderless">
+					<div class="panel-body">	
 			<!-- Start Nav Structure -->
 				<button class="cn-button" id="cn-button">Menu</button>
 				<div class="cn-wrapper" id="cn-wrapper">
@@ -1554,6 +1556,8 @@
 					 </ul>
 				</div>
 				<!-- End of Nav Structure -->
+				</div>
+				</div>
 			
 			
 				<div class="panel panel-flat panel-primary borderless">
