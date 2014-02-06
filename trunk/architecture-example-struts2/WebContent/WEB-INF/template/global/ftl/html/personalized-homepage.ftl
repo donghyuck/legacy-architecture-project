@@ -55,16 +55,16 @@
 				
 				$("#personalized-controls-menu").on( "click" , function(e){					
 					$('.overlay').toggleClass('hide');					
-					slide_effect.play().then(function(){
+					//slide_effect.play().then(function(){
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-					});					
+					//});					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					setTimeout(function() {
-						slide_effect.reverse().then(function(){
+						//slide_effect.reverse().then(function(){
 						$('.overlay').toggleClass('hide');
-						});
+						//});
 					}, 100);					
 				});
 											
@@ -1177,7 +1177,7 @@
   width: 100%;
   height: 100%;
   z-index: 10;
- background: rgba(0,0,0,0.8);
+ background: rgba(0,0,0,0.6);
  
  /*dim the background*/
 }
