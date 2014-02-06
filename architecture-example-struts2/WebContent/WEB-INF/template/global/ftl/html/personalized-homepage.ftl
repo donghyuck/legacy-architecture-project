@@ -1128,7 +1128,7 @@
         	background-color: rgba(91,192,222,0.8);
         }
         
-        #personalized-controls-section..cbp-spmenu-vertical {
+        #personalized-controls-section.cbp-spmenu-vertical {
         	width : 50%;
         	min-width : 300px;        
         }
