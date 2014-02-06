@@ -1203,9 +1203,59 @@
 						
 						<div class="col-sm-8 paddingless">
 
+						</div>
+					
+				</div>
+				<div id="personalized-area" class="row blank-top-5">					
+						<!-- start announce panel -->			
+						<div class="custom-panels-group col-sm-6 panel panel-primary panel-flat">
+								<div class="panel-heading" style="border:0px;">공지 & 이벤트
+									<!--
+									<div class="k-window-actions panel-header-actions">										
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>
+									-->
+								</div>
+								<div class="panel-body">															
+									<div id="announce-grid" ></div>
+								</div>
+						</div>						
+										
+						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
+							<div class="panel panel-default">
+								<div class="panel-heading">알림
+									<div class="k-window-actions panel-header-actions">										
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+									</div>									
+								</div>
+								<div class="panel-body">					
+									<div  id="announce-view"></div>
+								</div>
+							</div>		
+						</div>
+					</div>										
+				</div>
+			</div>		
+		
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
+			<header>
+			<!--				
+<div class="btn-group">
+  <button type="button" class="btn btn-info"><i class="fa fa-cog fa-2x"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-comment fa-2x"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-envelope fa-2x"></i></button>
+</div>		-->	
+				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
+			</header>
+			
 				<div class="panel panel-flat panel-primary">
-					<div class="panel-body">
-				
+					<div class="panel-body">				
 						<ul class="nav nav-tabs" id="myTab">
 							<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
 							<#if !action.user.anonymous >	
@@ -1313,58 +1363,8 @@
 					
 					</div>
 					
-					</div></div></div>
-					
-				</div>
-				<div id="personalized-area" class="row blank-top-5">					
-						<!-- start announce panel -->			
-						<div class="custom-panels-group col-sm-6 panel panel-primary panel-flat">
-								<div class="panel-heading" style="border:0px;">공지 & 이벤트
-									<!--
-									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-									-->
-								</div>
-								<div class="panel-body">															
-									<div id="announce-grid" ></div>
-								</div>
-						</div>						
-										
-						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
-							<div class="panel panel-default">
-								<div class="panel-heading">알림
-									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>									
-								</div>
-								<div class="panel-body">					
-									<div  id="announce-view"></div>
-								</div>
-							</div>		
-						</div>
-					</div>										
-				</div>
-			</div>		
-		
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
-			<header>
-			<!--				
-<div class="btn-group">
-  <button type="button" class="btn btn-info"><i class="fa fa-cog fa-2x"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-comment fa-2x"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-envelope fa-2x"></i></button>
-</div>		-->	
-				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
-			</header>
-			
-		sss
+					</div>
+					</div>
 		
 		</section>
 		
