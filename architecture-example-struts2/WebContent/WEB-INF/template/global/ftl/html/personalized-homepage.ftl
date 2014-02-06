@@ -1121,7 +1121,7 @@
         }
         
         #st-container {
-        	margin-top:-14px;
+        	margin-top:-20px;
         }
 		
 		</style>   	
