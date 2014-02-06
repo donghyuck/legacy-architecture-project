@@ -1295,26 +1295,10 @@
 						<li><a class="icon icon-wallet" href="#">Credits</a></li>
 					</ul>
 				</nav>
-				<div class="st-content"><!-- this is the wrapper for the content -->
-				
+				<div class="st-content"><!-- this is the wrapper for the content -->				
 				<div id="st-trigger-effects">
-				<button data-effect="st-effect-1">Slide in on top</button>
-						<button data-effect="st-effect-2">Reveal</button>
-								<button data-effect="st-effect-3">Push</button>
-								<button data-effect="st-effect-4">Slide along</button>
-								<button data-effect="st-effect-5">Reverse slide out</button>
-								<button data-effect="st-effect-6">Rotate pusher</button>
-								<button data-effect="st-effect-7">3D rotate in</button>
-								<button data-effect="st-effect-8">3D rotate out</button>
-								<button data-effect="st-effect-9">Scale down pusher</button>
-								<button data-effect="st-effect-10">Scale Up</button>
-								<button data-effect="st-effect-11">Scale &amp; rotate pusher</button>
-								<button data-effect="st-effect-12">Open door</button>
-								<button data-effect="st-effect-13">Fall down</button>
-								<button data-effect="st-effect-14">Delayed 3D Rotate</button>
-												
-				</div>
-				
+					<button data-effect="st-effect-1">Slide in on top</button>												
+				</div>				
 				</div><!-- /st-content -->
 			</div><!-- /st-pusher -->
 		</div><!-- /st-container -->
