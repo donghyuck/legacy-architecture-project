@@ -1142,7 +1142,7 @@
         	margin-top: 50px;
         	background-color: #FFFFFF;
         	border-left: solid 4px #47a3da;
-        	padding : 5px;
+        	padding : 0px;
         }
         
         #personalized-controls-section.cbp-spmenu-vertical {
@@ -1154,18 +1154,15 @@
         
         #personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
         	right : 0px;
-        }
-        
+        }        
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
         	margin : 0px;
-        	padding : 2px 0px 0px 0px;
+        	padding : 5px;
         	color : #000000;
-        	background : transparent;
-        	
+        	background : transparent;        	
         	height : 49px;
-        }
-        
+        }        
         .overlay{
 
 	-webkit-transition: all 0.3s;
