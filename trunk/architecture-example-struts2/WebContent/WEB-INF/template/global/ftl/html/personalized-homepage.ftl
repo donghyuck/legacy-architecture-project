@@ -1186,7 +1186,7 @@
 					
 						<!-- start announce panel -->			
 						<div class="custom-panels-group col-sm-6">	
-						<div class="panel panel-default panel-flat panel-border-thick">
+						<div class="panel panel-default panel-flat">
 								<div class="panel-heading" style="border:0px;">공지 & 이벤트
 									<!--
 									<div class="k-window-actions panel-header-actions">										
