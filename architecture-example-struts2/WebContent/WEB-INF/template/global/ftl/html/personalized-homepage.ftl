@@ -1358,6 +1358,8 @@
 				</div>
 			</div>	
 							
+			<#include "/html/common/common-homepage-footer.ftl" >		
+			
 							
 				</div><!-- /st-content -->
 			</div><!-- /st-pusher -->
@@ -1371,7 +1373,7 @@
 					
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
-		<#include "/html/common/common-homepage-footer.ftl" >		
+		
 		<!-- END FOOTER -->	
 		
 		<!-- START TEMPLATE -->				
