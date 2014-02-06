@@ -1130,6 +1130,7 @@
         #personalized-controls-section{
         	margin-top: 50px;
         	background-color: rgba(14,14,14,0.8);
+        	padding : 5px;
         }
         
         #personalized-controls-section.cbp-spmenu-vertical {
@@ -1146,7 +1147,7 @@
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
         	margin : 0px;
-        	padding : 6px 6px 5px 6px;
+        	padding : 2px 0px 0px 0px;
         	color : #000000;
         	background : transparent;
         	
