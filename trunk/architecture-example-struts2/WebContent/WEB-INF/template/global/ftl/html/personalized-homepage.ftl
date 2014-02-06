@@ -50,10 +50,11 @@
 					});
 				});											
 							
-				$("#personalized-controls-menu").on( "click" , function(e){
-					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+				$("#personalized-controls-menu").on( "click" , function(e){					
 					$('.overlay').toggleClass('hide');					
-					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).play();					
+					kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0).play().then(function(){
+						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+					});					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
