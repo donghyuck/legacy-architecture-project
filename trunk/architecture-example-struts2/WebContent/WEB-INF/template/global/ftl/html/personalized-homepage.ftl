@@ -1146,7 +1146,8 @@
         	margin : 0px;
         	padding : 6px 6px 5px 6px;
         	color : #000000;
-        	background : transparent;
+        	/**background : transparent;*/
+        	background-color: rgba(91,192,222,0.8);
         	height : 49px;
         }
 		</style>   	
