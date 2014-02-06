@@ -1124,6 +1124,10 @@
         	margin-top:-20px;
         }
 		
+		body {
+    overflow:hidden;
+}
+
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
