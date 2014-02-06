@@ -1119,10 +1119,6 @@
             color: #fff;
             text-transform: uppercase;
         }
-
-#main-wrapper{
-	background: #444;
-}
 		
 		</style>   	
 	</head>
@@ -1130,7 +1126,6 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-<section id="main-wrapper" >
 
 <div id="st-container" class="st-container">
 			<!-- 	
@@ -1338,11 +1333,7 @@
 			</div><!-- /st-pusher -->
 		</div><!-- /st-container -->
 		
-</section>
-
-
-
-		
+	
 		<!-- START MAIN CONTENT -->
 			<div  class="container" style="min-height:600px; margin-top:-14px;">		
 				<div class="row">
