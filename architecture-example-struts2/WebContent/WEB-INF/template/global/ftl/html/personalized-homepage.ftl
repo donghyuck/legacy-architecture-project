@@ -51,7 +51,7 @@
 				});											
 							
 				var side_section_zoom = kendo.fx($('.overlay')).zoom("out").endValue(1).startValue(0.5);			
-				var slide_effect = kendo.fx($(".overlay")).fadeIn().duration(700); // kendo.fx($(".overlay")).slideIn("left");
+				var slide_effect = kendo.fx($(".overlay")).fadeIn(); // kendo.fx($(".overlay")).slideIn("left");
 				
 				$("#personalized-controls-menu").on( "click" , function(e){					
 					$('.overlay').toggleClass('hide');					
