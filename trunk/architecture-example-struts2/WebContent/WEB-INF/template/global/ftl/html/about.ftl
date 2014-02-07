@@ -239,7 +239,7 @@
 					<!-- social media -->
 					<div id="social-media-area" class="row blank-top-5">
 					<#list action.connectedCompanySocialNetworks  as item >	
-						<div class="custom-panels-group col-sm-6"> 
+						<div class="custom-panels-group col-sm-12"> 
 								<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
 									<div class="panel-heading">
 										<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
