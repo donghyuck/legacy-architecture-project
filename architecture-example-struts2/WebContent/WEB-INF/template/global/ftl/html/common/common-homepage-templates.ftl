@@ -109,7 +109,7 @@
 		</div>	
 		<div class="panel-body">
 			
-			first
+			
 		
 		</div>				
 	</div>		
@@ -130,6 +130,14 @@
 				</ul>										
 			</figcaption>			
 		</figure>
+		<div class="lb-overlay">
+			<a href="\\#page" class="lb-close">x Close</a>
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
+			<div>
+				<h3>pointe <span>/point/</h3>
+				<p>Dance performed on the tips of the toes</p>
+			</div>
+		</div>		
 </script>
 
 <script type="text/x-kendo-template" id="file-view-template">
