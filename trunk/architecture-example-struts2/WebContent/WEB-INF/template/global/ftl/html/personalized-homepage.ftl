@@ -50,7 +50,9 @@
 				$("#personalized-controls-menu").on( "click" , function(e){					
 					$('.overlay').toggleClass('hide');					
 					slide_effect.play().then(function(){
-						$('#personalized-controls-section').show();
+						if( $('#personalized-controls-section').hasClass("hide") )
+							$('#personalized-controls-section').removeClass("hide");
+							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
 				});
