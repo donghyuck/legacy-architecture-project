@@ -7,7 +7,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common/common.spmenu.css',
+			'css!${request.contextPath}/styles/codedrop/cbpHorizontalSlideOutMenu.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
@@ -18,7 +18,8 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
-			'${request.contextPath}/js/common/common.classie.min.js'],
+			'${request.contextPath}/js/common/common.classie.min.js',
+			'${request.contextPath}/js/codedrop/cbpHorizontalSlideOutMenu.min.js'],
 			complete: function() {
 			
 			
