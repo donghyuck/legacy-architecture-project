@@ -116,7 +116,9 @@
 </script>
 <script type="text/x-kendo-template" id="photo-view-template">	
 		<figure>			
+			<a href="\\#photo-#:imageId#">			
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
+			</a>
 			<figcaption>
 				<ul class="list-inline">
 					<small class="text-muted">#:modifiedDate#</small>
@@ -130,7 +132,7 @@
 				</ul>										
 			</figcaption>			
 		</figure>
-		<div class="lb-overlay">
+		<div class="lb-overlay" id="photo-#:imageId#">
 			<a href="\\#page" class="lb-close">x Close</a>
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
 			<div>
