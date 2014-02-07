@@ -1112,7 +1112,7 @@
         
         #personalized-controls-section{
         	margin-top: 50px;
-        	background-color: #FFFFFF;
+        	background-color: #F5F5F5;
         	border-left: solid 4px #47a3da;
         	padding : 0px;
         }
