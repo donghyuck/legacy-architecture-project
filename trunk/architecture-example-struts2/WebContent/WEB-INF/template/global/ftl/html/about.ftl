@@ -97,7 +97,7 @@
 					header_action.click(function (e){
 						e.preventDefault();		
 						var header_action_icon = header_action.find('span');
-						if (header_action.text() == "Minimize"){
+						if (header_action.text() == "Minimize" || header_action.text() == "Maximize"){
 							$("${panel_element_id} .panel-body").toggleClass("hide");				
 							if( header_action_icon.hasClass("k-i-maximize") ){
 								header_action_icon.removeClass("k-i-maximize");
