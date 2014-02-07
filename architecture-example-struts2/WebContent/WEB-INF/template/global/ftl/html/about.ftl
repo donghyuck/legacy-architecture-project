@@ -245,12 +245,12 @@
 										<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
 										<div class="k-window-actions panel-header-actions">
 											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 										</div>
 									</div>		
-									<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
+									<div class="panel-body scrollable hide" style="min-height:200px; max-height:500px;">
 											<ul class="media-list">
 												<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
 											</ul>
