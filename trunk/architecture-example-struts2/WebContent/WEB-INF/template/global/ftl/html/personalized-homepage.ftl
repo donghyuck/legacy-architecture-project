@@ -1155,7 +1155,7 @@
 		}
 
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
-			with:100%;
+			width:100%;
 		}
 		.cbp-hsmenu > li > a {
 			color: #fff;
@@ -1294,7 +1294,7 @@
 						</ul>
 					</div>
 </nav>
-					<div class="blank-space-5"></div>
+					<div class="blank-top-5" ></div>			
 <!--
 
 							<div class="panel panel-flat panel-default panel-border-thick ">
