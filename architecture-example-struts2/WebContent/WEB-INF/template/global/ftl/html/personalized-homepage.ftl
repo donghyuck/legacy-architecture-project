@@ -1132,7 +1132,7 @@
         	margin : 0px;
         	padding : 5px;
         	color : #000000;
-        	background : #46b8da; /* transparent;        	*/
+        	background : #5bc0de; /* transparent;        	*/
         	height : 49px;
         }        
         .overlay{
