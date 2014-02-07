@@ -25,7 +25,7 @@
 .cbp-hsinner {
 	background: #47a3da;
 	position: relative;
-	z-index: 100;
+	z-index: 2070;
 }
 
 /* Main menu style */
@@ -200,7 +200,7 @@
 	width: 100%;
 	top: 100%;
 	left: 0;
-	z-index: 0;
+	z-index: 2055;
 	height: 0px;
 }
 
