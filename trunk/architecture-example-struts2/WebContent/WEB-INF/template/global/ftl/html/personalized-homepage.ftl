@@ -1256,7 +1256,7 @@
 				<nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
 					<div class="cbp-hsinner">
 						<ul class="cbp-hsmenu">
-							<li data-open="open" class="cbp-hsitem-open">
+							<li class="cbp-hsitem-open">
 								<a href="#">기본</a>
 								<ul class="cbp-hssubmenu">
 									<li><a href="#"><i class="fa fa-picture-o fa-2x"></i><span>이미지</span></a></li>
