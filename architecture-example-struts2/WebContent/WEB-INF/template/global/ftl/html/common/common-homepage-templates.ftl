@@ -133,11 +133,11 @@
 			</figcaption>			
 		</figure>
 		<div class="lb-overlay" id="photo-#:imageId#">
-			<a href="\\#page"><i class="fa fa-times fa-2x"></i></a>
+			<a href="\\#page" class="lb-close"><i class="fa fa-times fa-2x"></i></a>
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
 			<div>
 				<h3>pointe <span>/point/</h3>
-				<p>Dance performed on the tips of the toes</p>
+				<p>이미지 글....</p>
 			</div>
 		</div>		
 </script>
