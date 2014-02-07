@@ -1112,15 +1112,13 @@
 			overflow: hidden;
 			background-color: rgba(91,192,222,0.8)		
 		}
+		
+		#personalized-controls-section{
+			margin-top: 0px;
+			border-left: solid 2px #47a3da;
+			padding : 0px;
+		}
 
-
-        
-        #personalized-controls-section{
-        	margin-top: 0px;
-        	border-left: solid 2px #47a3da;
-        	padding : 0px;
-        }
-        
         #personalized-controls-section.cbp-spmenu-vertical {
         	width: 530px;
         }
@@ -1140,23 +1138,25 @@
         	color : #000000;
         	background : #5bc0de; /* transparent;        	*/
         	height: 90px;        	
-        }        
-        .overlay{
+        }
 
-	-webkit-transition: all 0.3s;
-	-moz-transition: all 0.3s;
-	transition: all 0.3s;
-	 position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2000;
- background: rgba(0,0,0,0.7);
- 
- /*dim the background*/
- 
-}
+		.overlay{		
+			-webkit-transition: all 0.3s;
+			-moz-transition: all 0.3s;
+			transition: all 0.3s;
+			 position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 2000;
+			background: rgba(0,0,0,0.7);		
+			/*dim the background*/
+		}
+
+		.cbp-hsmenu-wrapper .cbp-hsmenu {
+			with:100%;
+		}
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
