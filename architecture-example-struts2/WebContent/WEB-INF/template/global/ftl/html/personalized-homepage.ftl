@@ -1133,7 +1133,7 @@
         	padding : 5px;
         	color : #000000;
         	background : #5bc0de; /* transparent;        	*/
-        	height : 49px;
+        	height : 43px;
         }        
         .overlay{
 
@@ -1232,7 +1232,7 @@
   <button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
   <button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
 </div>			
-				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times"></i></button>			
+				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times-circle"></i></button>			
 			</header>
 			
 			<div class="blank-space-5">
