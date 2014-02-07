@@ -182,7 +182,7 @@
 }
 
 .cbp-hsmenu > li.cbp-hsitem-open .cbp-hssubmenu {
-	z-index: 1000;
+	z-index: 2050;
 	visibility: visible;
 }
 
@@ -200,7 +200,7 @@
 	width: 100%;
 	top: 100%;
 	left: 0;
-	z-index: 2055;
+	z-index: 2050;
 	height: 0px;
 }
 
