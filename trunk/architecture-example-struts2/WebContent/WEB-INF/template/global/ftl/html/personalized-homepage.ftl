@@ -1285,9 +1285,9 @@
 							<li><a href="#">Contact</a></li>
 						</ul>
 					</div>
-				</nav>
+</nav>
 
-
+<!--
 
 							<div class="panel panel-flat panel-default panel-border-thick ">
 								<div class="panel-body" style="min-height:300px;">
@@ -1305,7 +1305,7 @@
 									</div>	
 									</div>						
 								</div>
-							</div>	
+							</div>	-->
 <!--										
 				<div class="panel panel-flat panel-primary borderless">
 					<div class="panel-body">		
