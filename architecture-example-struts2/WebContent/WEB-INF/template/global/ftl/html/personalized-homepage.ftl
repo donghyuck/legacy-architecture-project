@@ -1317,7 +1317,7 @@
 							<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
 							</#if>						
 						</ul>								
-						<div class="tab-content">	
+						<div class="tab-content" style="background-color : #FFFFFF;">	
 							<!-- start social -->		
 							<div class="tab-pane" id="my-streams">							
 								<div class="blank-top-5" ></div>		
