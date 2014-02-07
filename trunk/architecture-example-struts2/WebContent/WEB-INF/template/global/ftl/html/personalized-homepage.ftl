@@ -1320,7 +1320,6 @@
 						<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 							<!-- start social -->		
 							<div class="tab-pane" id="my-streams">							
-								<div class="blank-top-5" ></div>		
 									<table id="my-social-streams-grid">
 										<colgroup>
 											<col/>
@@ -1345,7 +1344,6 @@
 							<!-- end social -->				
 							<!-- start attachement -->
 							<div class="tab-pane" id="my-files">
-								<div class="blank-top-5 "></div>
 								<section class="side1">
 									<div class="btn-group">
 										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
@@ -1384,7 +1382,6 @@
 							</div><!-- end attachements -->		
 							<!-- start photos -->
 							<div class="tab-pane" id="my-photo-stream">
-								<div class="blank-top-5" ></div>		
 								<section class="side1">
 									<div class="btn-group">			
 										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>		
