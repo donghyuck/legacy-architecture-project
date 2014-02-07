@@ -1157,6 +1157,17 @@
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
 			with:100%;
 		}
+		.cbp-hsmenu > li > a {
+			color: #fff;
+			font-size: 1em;
+			line-height: 3em;
+			display: inline-block;
+			position: relative;
+			z-index: 10000;
+			outline: none;
+			text-decoration: none;
+		}
+		
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
