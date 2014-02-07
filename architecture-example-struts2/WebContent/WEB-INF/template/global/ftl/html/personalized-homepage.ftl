@@ -1111,7 +1111,7 @@
 
         
         #personalized-controls-section{
-        	margin-top: 50px;
+        	margin-top: 0px;
         	background-color: #F5F5F5;
         	border-left: solid 2px #47a3da;
         	padding : 0px;
@@ -1122,18 +1122,20 @@
         }
         #personalized-controls-section.cbp-spmenu-right {
         	right: -530px;
+        	z-index: 2050;
         }
         
         #personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
         	right : 0px;
-        }        
+        }      
+          
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
         	margin : 0px;
         	padding : 5px;
         	color : #000000;
         	background : #5bc0de; /* transparent;        	*/
-        	
+        	height: 90px;        	
         }        
         .overlay{
 
@@ -1145,8 +1147,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 10;
- background: rgba(0,0,0,0.5);
+  z-index: 2000;
+ background: rgba(0,0,0,0.7);
  
  /*dim the background*/
  
