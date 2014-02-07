@@ -1239,194 +1239,44 @@
 				</div>
 				
 			</div>		
-		 <div class="overlay hide"></div>
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right grey hide"  id="personalized-controls-section">
-			
-			<header>
-							
-<div class="btn-group">
-  <button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
-</div>			
-				<!--<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			-->
+		<div class="overlay hide"></div>
+		
+		<!-- start side menu -->
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right grey hide"  id="personalized-controls-section">			
+			<header>							
+				<div class="btn-group">
+					<button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
+					<button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
+					<button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
+				</div>			
+				<!--<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>-->
 				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
 			</header>
-			
-			<div class="blank-space-5">
-
-<nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
+			<div class="blank-space-5">			
+				<nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
 					<div class="cbp-hsinner">
 						<ul class="cbp-hsmenu">
-							<li>
-								<a href="#">기본 프로그램</a>
+							<li data-open="open" class="cbp-hsitem-open">
+								<a href="#">기본</a>
 								<ul class="cbp-hssubmenu">
 									<li><a href="#"><i class="fa fa-picture-o fa-2x"></i><span>이미지</span></a></li>
 									<li><a href="#"><img src="images/2.png" alt="img02"/><span>파일</span></a></li>
 									<li><a href="#"><img src="images/3.png" alt="img03"/><span>Heavenly Ale</span></a></li>
 									<li><a href="#"><img src="images/4.png" alt="img04"/><span>Juicy Lemonade</span></a></li>
 									<li><a href="#"><img src="images/5.png" alt="img05"/><span>Wise Whiskey</span></a></li>
-									<li><a href="#"><img src="images/6.png" alt="img06"/><span>Sweet Rum</span></a></li>
 								</ul>
 							</li>
 							<li>
-								<a href="#">쇼셜미디어</a>
-								<ul class="cbp-hssubmenu cbp-hssub-rows">
-								
-						<ul class="nav nav-tabs" id="myTab">
-							<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
-							<#if !action.user.anonymous >	
-							<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
-							<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
-							</#if>						
-						</ul>								
-						<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
-							<!-- start social -->		
-							<div class="tab-pane" id="my-streams">							
-									<table id="my-social-streams-grid">
-										<colgroup>
-											<col/>
-										</colgroup>
-										<thead>
-											<tr>
-												<th>미디어</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td></td>
-											</tr>
-										</tbody>
-									</table>												
-								<div class="blank-top-5" ></div>				
-								<div class="alert alert-flat alert-info fade in">
-									<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-									<p><i class="fa fa-info"></i>쇼셜 미디어를 선택하시면, 해당 미디어의 최신 뉴스를 볼수 있습니다.  미디어 추가는 프로파일의 쇼셜네크워크에서 제공합니다. </p>
-								</div>		
-							</div>					
-							<!-- end social -->				
-							<!-- start attachement -->
-							<div class="tab-pane" id="my-files">
-								<section class="side1">
-									<div class="btn-group">
-										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 파일업로드</button>	
-									</div>			
-									<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
-										<label class="btn btn-warning active">
-											<input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
-										</label>
-										<label class="btn btn-warning">
-											<input type="radio" name="attachment-list-view-filters"  value="image"><i class="fa fa-filter"></i> 이미지
-										</label>
-										<label class="btn btn-warning">
-											<input type="radio" name="attachment-list-view-filters"  value="file"><i class="fa fa-filter"></i> 파일
-										</label>	
-									</div>
-									<div class="blank-top-5" ></div>		
-									<div class="panel panel-default panel-flat">
-										<div class="panel-body scrollable" style="max-height:450px;">
-											<div id="attachment-list-view" ></div>
-										</div>	
-										<div class="panel-footer" style="padding:0px;">
-											<div id="pager" class="k-pager-wrap"></div>
-										</div>
-									</div>																							
-								</section>
-								<section class="side2 hide">
-									<div class="btn-group">			
-										<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>		
-									</div>									
-									<div class="blank-top-5 "></div>
-									<#if !action.user.anonymous >									
-									<input name="uploadAttachment" id="attachment-files" type="file" />				
-									<div class="alert alert-info alert-flat"><strong>파일 선택</strong> 버튼을 클릭하여 직접 파일을 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</div>					
-									</#if>									
-								</section>																													
-							</div><!-- end attachements -->		
-							<!-- start photos -->
-							<div class="tab-pane" id="my-photo-stream">
-								<section class="side1">
-									<div class="btn-group">			
-										<button type="button" class="btn btn-info"><i class="fa fa-upload"></i> &nbsp; 사진업로드</button>		
-									</div>		
-									<div class="blank-top-5" ></div>
-									<div class="panel panel-default panel-flat">								
-										<div class="panel-body scrollable" style="max-height:450px;">
-											<div id="photo-list-view" ></div>
-										</div>	
-										<div class="panel-header" style="padding:0px;">
-											<div id="photo-list-pager" class="k-pager-wrap"></div>
-										</div>
-									</div>																
-								</section>							
-								<section class="side2 hide">
-									<div class="btn-group">			
-										<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>			
-									</div>									
-									<div id="my-photo-upload">
-										<#if !action.user.anonymous >		
-										<div class="blank-top-5 "></div>	
-										<input name="uploadPhotos" id="photo-files" type="file" />	
-										<div class="alert alert-info alert-flat"><strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)을 끌어서 놓기(Drag & Drop)를 하세요.</div>
-										</#if>							
-									</div>																		
-								</section>				
-							</div><!-- end photos -->
-						</div><!-- end of tab content -->	
-					</div>								
-					
-								<!--
-									<li><a href="#"><img src="images/7.png" alt="img07"/><span>Lovely Slurp</span></a></li>
-									<li><a href="#"><img src="images/8.png" alt="img08"/><span>Lemony Grappa</span></a></li>
-									<li><a href="#"><img src="images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
-									<li><a href="#"><img src="images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
-									<li><a href="#"><img src="images/1.png" alt="img01"/><span>Delicate Wine</span></a></li>-->
+								<a href="#">미디어</a>
+								<ul class="cbp-hssubmenu cbp-hssub-rows">								
+									<div class="blank-top-5" ></div>	
+						
 								</ul>
 							</li>
-							<!--
-							<li>
-								<a href="#">Fine Liquors</a>
-								<ul class="cbp-hssubmenu">
-									<li><a href="#"><img src="images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
-									<li><a href="#"><img src="images/6.png" alt="img06"/><span>Sweet Rum</span></a></li>
-									<li><a href="#"><img src="images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
-								</ul>
-							</li>
-							<li><a href="#">Our Mission</a></li>
-							<li><a href="#">Contact</a></li>
-							-->
-						</ul>
+						</ul>		
 					</div>
-</nav>
-					<div class="blank-top-5" ></div>			
-<!--
-
-							<div class="panel panel-flat panel-default panel-border-thick ">
-								<div class="panel-body" style="min-height:300px;">
-									<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>		
-																	
-									<div id="panel-available-source">							
-									<div class="btn-group-vertical">
-										<button type="button" class="btn btn-success"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
-										<button type="button" class="btn btn-success"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
-										<button type="button" class="btn btn-success"><i class="fa fa-file-o pull-left"></i> 파일</button>
-									</div>
-									<div class="btn-group-vertical">
-										<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
-										<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
-									</div>	
-									</div>						
-								</div>
-							</div>	-->
-<!--										
-				<div class="panel panel-flat panel-primary borderless">
-					<div class="panel-body">		
--->							
-
-					<!--
-					</div>					
-					</div>
-					-->
+				</nav>
+						
 			</div>	
 		</section>
 		
