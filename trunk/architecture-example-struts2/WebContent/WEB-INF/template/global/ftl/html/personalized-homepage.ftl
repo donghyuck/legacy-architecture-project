@@ -60,6 +60,7 @@
 						});
 					}, 100);					
 				});
+				var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 																
 											
 				// 3. ACCOUNTS LOAD	
