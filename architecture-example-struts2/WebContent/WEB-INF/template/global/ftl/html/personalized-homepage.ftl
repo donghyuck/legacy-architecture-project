@@ -47,11 +47,14 @@
 	
 				var slide_effect = kendo.fx($(".overlay")).fadeIn();
 				
-				$("#personalized-controls-menu").on( "click" , function(e){					
+				$("#personalized-controls-menu").on( "click" , function(e){			
+					
+					if( $('#personalized-controls-section').hasClass("hide") )
+						$('#personalized-controls-section').removeClass("hide");
+									
 					$('.overlay').toggleClass('hide');					
 					slide_effect.play().then(function(){
-						if( $('#personalized-controls-section').hasClass("hide") )
-							$('#personalized-controls-section').removeClass("hide");
+
 							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
