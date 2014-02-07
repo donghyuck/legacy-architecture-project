@@ -237,8 +237,9 @@
 						</div>											
 					</div>					
 					<!-- social media -->
-					<div id="social-media-area" class="row blank-top-5">
+					
 					<#list action.connectedCompanySocialNetworks  as item >	
+					<div id="social-media-area" class="row blank-top-5">
 						<div class="custom-panels-group col-sm-12"> 
 								<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
 									<div class="panel-heading">
@@ -256,10 +257,10 @@
 										</ul>
 									</div>							
 								</div>											
-						</div>
-						<div class="blank-top-5" ></div>													
-					</#list>						
+						</div>														
 					</div>
+					</#list>						
+					
 				</div>				
 			</div>
 		</div>									 
