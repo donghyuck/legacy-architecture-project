@@ -491,7 +491,9 @@
 								panel_header_action.find('span').addClass("k-i-minimize");
 							}							
 						}else if (panel_header_action.text() == "Close"){	
-							$("#announce-panel" ).hide();
+							kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).reverse().then( function(e){							
+								$("#announce-panel" ).hide();
+							});							
 						}
 					});
 				});	
@@ -635,7 +637,9 @@
 					editAnnouncePanel();
 				} );
 			}
-			$("#announce-panel" ).show();
+			$("#announce-panel" ).show();			
+			kendo.fx($( '#'+ #announce-panel )).zoom("in").startValue(0).endValue(1).play();
+			
 		}	
 		
 		
@@ -658,13 +662,10 @@
 							break;
 						case "Refresh" :
 							break;
-						case "Close" :
-							
+						case "Close" :							
 							kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).reverse().then( function(e){							
 								$("#" + renderTo ).remove();
-							});
-							
-							
+							});							
 							break;	
 						case "Custom" :
 							break;																		
@@ -1199,7 +1200,7 @@
 						</label>
 					</div>
 					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
-					<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
+					<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars fa-2x"></i></a>
 				</div>
 			</div>			
 			<div id="personalized-area" class="row blank-top-5">				
