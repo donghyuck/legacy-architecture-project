@@ -1261,7 +1261,7 @@
 							<li>
 								<a href="#">기본 프로그램</a>
 								<ul class="cbp-hssubmenu">
-									<li><a href="#"><img src="images/1.png" alt="img01"/><span>Delicate Wine</span></a></li>
+									<li><a href="#"><i class="fa fa-picture-o"></i><span>이미지 슬라이드</span></a></li>
 									<li><a href="#"><img src="images/2.png" alt="img02"/><span>Fine Spirit</span></a></li>
 									<li><a href="#"><img src="images/3.png" alt="img03"/><span>Heavenly Ale</span></a></li>
 									<li><a href="#"><img src="images/4.png" alt="img04"/><span>Juicy Lemonade</span></a></li>
