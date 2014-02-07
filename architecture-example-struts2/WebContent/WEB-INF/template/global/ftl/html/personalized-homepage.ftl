@@ -491,7 +491,7 @@
 								panel_header_action.find('span').addClass("k-i-minimize");
 							}							
 						}else if (panel_header_action.text() == "Close"){	
-							kendo.fx($(#announce-panel )).zoom("in").startValue(0).endValue(1).reverse().then( function(e){							
+							kendo.fx($("#announce-panel" )).zoom("in").startValue(0).endValue(1).reverse().then( function(e){							
 								$("#announce-panel" ).hide();
 							});							
 						}
