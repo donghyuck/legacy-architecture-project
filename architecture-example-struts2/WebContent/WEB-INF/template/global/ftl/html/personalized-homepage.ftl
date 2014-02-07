@@ -475,7 +475,7 @@
 						this.select("tr:eq(1)");
 					}
 				});		
-				/**
+				
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 					var panel_header_action = $(this);		
 					panel_header_action.click(function (e) {
@@ -495,7 +495,7 @@
 						}
 					});
 				});	
-				**/
+				
 			}	
 		}
 		
