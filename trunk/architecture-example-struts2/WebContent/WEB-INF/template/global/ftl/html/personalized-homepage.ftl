@@ -1232,7 +1232,7 @@
   <button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
   <button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
 </div>			
-				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times-circle"></i></button>			
+				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times-circle fa-2x"></i></button>			
 			</header>
 			
 			<div class="blank-space-5">
