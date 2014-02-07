@@ -1257,8 +1257,8 @@
 					<div class="cbp-hsinner">
 						<ul class="cbp-hsmenu">
 							<li>
-								<a href="#">기본</a>
-								<ul class="cbp-hssubmenu">
+								<a href="#">프로그램</a>
+								<ul class="cbp-hssubmenu cbp-hssub-rows">
 									<li><a href="#"><i class="fa fa-picture-o fa-2x"></i><span>이미지</span></a></li>
 									<li><a href="#"><img src="images/2.png" alt="img02"/><span>파일</span></a></li>
 									<li><a href="#"><img src="images/3.png" alt="img03"/><span>Heavenly Ale</span></a></li>
@@ -1266,6 +1266,7 @@
 									<li><a href="#"><img src="images/5.png" alt="img05"/><span>Wise Whiskey</span></a></li>
 								</ul>
 							</li>
+							
 							<li>
 								<a href="#">미디어</a>
 								<ul class="cbp-hssubmenu cbp-hssub-rows">								
