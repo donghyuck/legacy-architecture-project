@@ -134,7 +134,7 @@
 		</figure>
 		<div class="lb-overlay" id="photo-#:imageId#">
 			<a href="\\#page" class="lb-close"><i class="fa fa-times fa-2x"></i></a>
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" width="100%" height="100%"/>
 			<div>
 				<h3>pointe <span>/point/</h3>
 				<p>이미지 글....</p>
