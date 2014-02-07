@@ -638,7 +638,7 @@
 				} );
 			}
 			$("#announce-panel" ).show();			
-			kendo.fx($( '#'+ #announce-panel )).zoom("in").startValue(0).endValue(1).play();
+			kendo.fx($("#announce-panel")).zoom("in").startValue(0).endValue(1).play();
 			
 		}	
 		
