@@ -1260,9 +1260,8 @@
 
 							<div class="panel panel-flat panel-default panel-border-thick ">
 								<div class="panel-body" style="min-height:300px;">
-									<div class="light-box">
-										<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>										
-									</div> 										
+									<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>		
+																	
 									<div id="panel-available-source">							
 									<div class="btn-group-vertical">
 										<button type="button" class="btn btn-success"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
@@ -1274,14 +1273,6 @@
 										<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
 									</div>	
 									</div>						
-								</div>
-							</div>	
-			
-							<div class="panel panel-flat panel-default panel-border-thick ">
-								<div class="panel-body" style="min-height:300px;">
-									<div class="light-box">
-										<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>										
-									</div>				
 								</div>
 							</div>	
 										
