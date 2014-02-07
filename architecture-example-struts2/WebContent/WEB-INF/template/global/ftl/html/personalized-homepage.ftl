@@ -1254,9 +1254,10 @@
 									</div>						
 								</div>
 							</div>	
-										
+<!--										
 				<div class="panel panel-flat panel-primary borderless">
-					<div class="panel-body">				
+					<div class="panel-body">		
+-->							
 						<ul class="nav nav-tabs" id="myTab">
 							<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
 							<#if !action.user.anonymous >	
@@ -1363,9 +1364,10 @@
 				
 					
 					</div>
-					
+					<!--
+					</div>					
 					</div>
-					</div>
+					-->
 			</div>	
 		</section>
 		
