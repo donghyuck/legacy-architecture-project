@@ -50,6 +50,7 @@
 				$("#personalized-controls-menu").on( "click" , function(e){					
 					$('.overlay').toggleClass('hide');					
 					slide_effect.play().then(function(){
+						$('#personalized-controls-section').show();
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
 				});
@@ -1227,7 +1228,7 @@
 				
 			</div>		
 		 <div class="overlay hide"></div>
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right grey" style="display:none;" id="personalized-controls-section">
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right grey hide"  id="personalized-controls-section">
 			
 			<header>
 							
