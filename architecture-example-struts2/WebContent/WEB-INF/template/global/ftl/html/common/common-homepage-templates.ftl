@@ -117,7 +117,7 @@
 <script type="text/x-kendo-template" id="photo-view-template">	
 		<figure>			
 			<a href="\\#photo-#:imageId#">			
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" class="img-responsive" alt="#:name# 이미지"/>			
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" width="100%" alt="#:name# 이미지"/>			
 			</a>
 			<figcaption>
 				<ul class="list-inline">
