@@ -1240,7 +1240,7 @@
 									-->
 								</div>
 								<div class="panel-body">															
-									<div id="announce-grid" ></div>
+									
 								</div>
 						</div>									
 						
@@ -1316,7 +1316,7 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
-										
+											<div id="announce-grid" ></div>
 										</div>
 										<!-- start social tab-content -->		
 										<div class="tab-pane" id="my-streams">							
