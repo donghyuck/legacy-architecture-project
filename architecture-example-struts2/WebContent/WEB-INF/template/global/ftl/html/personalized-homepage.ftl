@@ -1200,7 +1200,7 @@
 						</label>
 					</div>
 					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
-					<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger">메뉴 &nbsp;<i class="fa fa-bars"></i></a>
+					&nbsp;<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
 				</div>
 			</div>			
 			<div id="personalized-area" class="row blank-top-5">				
