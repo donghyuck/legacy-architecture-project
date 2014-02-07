@@ -153,6 +153,10 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /** color */
 
+div.sky {
+	background-color: #5bc0de;		
+}
+
 div.green {
 	background-color: #c0de5b;	
 }
