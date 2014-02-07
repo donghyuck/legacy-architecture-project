@@ -133,81 +133,27 @@
 					}
 				});	
 				
-				
+				/**
 				$("#panel-available‎-source :button.btn").on("click", function(e){						
 					var panel_source = $(e.currentTarget);					
-					//alert( panel_source.html() );
+					
 					kendo.fx(panel_source).transfer($("#panel-transfer-target"))
 						.duration(700)
 						.play()
 						.then(function(){					 	
-					 		//$(this).fadeOut("slow", function(){
-					 		//$(this).remove();
 					 		$("#panel-transfer-target").html( panel_source.children(":first").html() );
 					 		createPanel();
 					 	//});					 
 					 });
 				});
+				*/
 				
 				// 4. CONTENT 	
-				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
-				// 1. Announces 								
-				$("#announce-grid").kendoGrid({
-					dataSource : new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-announce.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}
-							} 
-						},
-						pageSize: 10,
-						error:handleKendoAjaxError,
-						schema: {
-							data : "targetAnnounces",
-							model : Announce
-						}
-					}),
-					sortable: true,
-					height: 300,
-					columns: [ 
-						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field:"subject", title: "주제"}
-					],
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    							
-							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
-							announcePlaceHolder.announceId = selectedCell.announceId;
-							announcePlaceHolder.subject = selectedCell.subject;
-							announcePlaceHolder.body = selectedCell.body;
-							announcePlaceHolder.startDate = selectedCell.startDate ;
-							announcePlaceHolder.endDate = selectedCell.endDate;
-							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
-							announcePlaceHolder.creationDate = selectedCell.creationDate;
-							announcePlaceHolder.user = selectedCell.user;							
-							if( announcePlaceHolder.user.userId == $("#account-panel").data("currentUser").userId ){
-								announcePlaceHolder.modifyAllowed = true;
-							}else{
-								announcePlaceHolder.modifyAllowed = false;
-							}
-							$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
-							showAnnouncePanel();	
-						}
-					},
-					dataBound: function(e) {					
-						var selectedCells = this.select();
-						this.select("tr:eq(1)");
-					}
-				});
 				
+				// 1. Announces 							
+				$("#announce-panel").data( "announcePlaceHolder", new Announce () );	
+				createNoticeGrid();
+				/**
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 					var panel_header_action = $(this);		
 					panel_header_action.click(function (e) {
@@ -226,7 +172,7 @@
 							$("#announce-panel" ).hide();
 						}
 					});
-				});	
+				});	*/
 															
 				// 4. Right Tabs
 
@@ -238,7 +184,9 @@
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
-					if( show_bs_tab.attr('href') == '#my-streams' ){						
+					if( show_bs_tab.attr('href') == '#my-notice' ){						
+						createNoticeGrid();											
+					} else if( show_bs_tab.attr('href') == '#my-streams' ){						
 						if( !$("#my-social-streams-grid" ).data('kendoGrid') ){ 											
 							$("#my-social-streams-grid").kendoGrid({
 								dataSource : new kendo.data.DataSource({
@@ -490,7 +438,86 @@
 			}
 		}]);	
 		
-		
+		function createNoticeGrid(){
+			if( !$("#announce-grid").data('kendoGrid') ){
+				$("#announce-grid").kendoGrid({
+					dataSource : new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-announce.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}
+							} 
+						},
+						pageSize: 10,
+						error:handleKendoAjaxError,
+						schema: {
+							data : "targetAnnounces",
+							model : Announce
+						}
+					}),
+					sortable: true,
+					height: 300,
+					columns: [ 
+						{field:"announceId", title: "ID", width: 50, attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field:"subject", title: "주제"}
+					],
+					selectable: "row",
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    							
+							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
+							announcePlaceHolder.announceId = selectedCell.announceId;
+							announcePlaceHolder.subject = selectedCell.subject;
+							announcePlaceHolder.body = selectedCell.body;
+							announcePlaceHolder.startDate = selectedCell.startDate ;
+							announcePlaceHolder.endDate = selectedCell.endDate;
+							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
+							announcePlaceHolder.creationDate = selectedCell.creationDate;
+							announcePlaceHolder.user = selectedCell.user;							
+							if( announcePlaceHolder.user.userId == $("#account-panel").data("currentUser").userId ){
+								announcePlaceHolder.modifyAllowed = true;
+							}else{
+								announcePlaceHolder.modifyAllowed = false;
+							}
+							$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
+							showAnnouncePanel();	
+						}
+					},
+					dataBound: function(e) {					
+						var selectedCells = this.select();
+						this.select("tr:eq(1)");
+					}
+				});		
+				
+				$("#announce-panel .panel-header-actions a").each(function( index ) {
+					var panel_header_action = $(this);		
+					panel_header_action.click(function (e) {
+						e.preventDefault();
+						if( panel_header_action.text() == "Minimize" ){
+							$("#announce-panel .panel-body").toggleClass("hide");								
+							var panel_header_action_icon = panel_header_action.find('span');
+							if( panel_header_action_icon.hasClass("k-i-minimize") ){
+								panel_header_action.find('span').removeClass("k-i-minimize");
+								panel_header_action.find('span').addClass("k-i-maximize");
+							}else{
+								panel_header_action.find('span').removeClass("k-i-maximize");
+								panel_header_action.find('span').addClass("k-i-minimize");
+							}							
+						}else if (panel_header_action.text() == "Close"){	
+							$("#announce-panel" ).hide();
+						}
+					});
+				});	
+				
+			}	
+		}
 		
 		/** Announce View Panel */		
 		function editAnnouncePanel (){
@@ -1280,6 +1307,7 @@
 				<div class="blank-top-5" ></div>	
 				
 									<ul class="nav nav-tabs" id="myTab">
+										<li><a href="#my-notice" tabindex="-1" data-toggle="tab">공지 & 이벤트</a></li>	
 										<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
 										<#if !action.user.anonymous >	
 										<li><a href="#my-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
@@ -1287,6 +1315,9 @@
 										</#if>						
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
+										<div class="tab-pane" id="my-notice">
+										
+										</div>
 										<!-- start social tab-content -->		
 										<div class="tab-pane" id="my-streams">							
 											<table id="my-social-streams-grid">
