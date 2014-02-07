@@ -1112,7 +1112,6 @@
         
         #personalized-controls-section{
         	margin-top: 0px;
-        	background-color: #F5F5F5;
         	border-left: solid 2px #47a3da;
         	padding : 0px;
         }
@@ -1225,7 +1224,7 @@
 				
 			</div>		
 		 <div class="overlay hide"></div>
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="personalized-controls-section">
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right gray" id="personalized-controls-section">
 			
 			<header>
 							
