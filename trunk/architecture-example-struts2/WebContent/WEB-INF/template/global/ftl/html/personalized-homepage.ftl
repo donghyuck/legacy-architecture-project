@@ -1261,8 +1261,8 @@
 							<li>
 								<a href="#">기본 프로그램</a>
 								<ul class="cbp-hssubmenu">
-									<li><a href="#"><i class="fa fa-picture-o"></i><span>이미지 슬라이드</span></a></li>
-									<li><a href="#"><img src="images/2.png" alt="img02"/><span>Fine Spirit</span></a></li>
+									<li><a href="#"><i class="fa fa-picture-o fa-2x"></i><span>이미지</span></a></li>
+									<li><a href="#"><img src="images/2.png" alt="img02"/><span>파일</span></a></li>
 									<li><a href="#"><img src="images/3.png" alt="img03"/><span>Heavenly Ale</span></a></li>
 									<li><a href="#"><img src="images/4.png" alt="img04"/><span>Juicy Lemonade</span></a></li>
 									<li><a href="#"><img src="images/5.png" alt="img05"/><span>Wise Whiskey</span></a></li>
@@ -1272,52 +1272,7 @@
 							<li>
 								<a href="#">쇼셜미디어</a>
 								<ul class="cbp-hssubmenu cbp-hssub-rows">
-									<li><a href="#"><img src="images/7.png" alt="img07"/><span>Lovely Slurp</span></a></li>
-									<li><a href="#"><img src="images/8.png" alt="img08"/><span>Lemony Grappa</span></a></li>
-									<li><a href="#"><img src="images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
-									<li><a href="#"><img src="images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
-									<li><a href="#"><img src="images/1.png" alt="img01"/><span>Delicate Wine</span></a></li>
-								</ul>
-							</li>
-							<!--
-							<li>
-								<a href="#">Fine Liquors</a>
-								<ul class="cbp-hssubmenu">
-									<li><a href="#"><img src="images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
-									<li><a href="#"><img src="images/6.png" alt="img06"/><span>Sweet Rum</span></a></li>
-									<li><a href="#"><img src="images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
-								</ul>
-							</li>
-							<li><a href="#">Our Mission</a></li>
-							<li><a href="#">Contact</a></li>
-							-->
-						</ul>
-					</div>
-</nav>
-					<div class="blank-top-5" ></div>			
-<!--
-
-							<div class="panel panel-flat panel-default panel-border-thick ">
-								<div class="panel-body" style="min-height:300px;">
-									<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>		
-																	
-									<div id="panel-available-source">							
-									<div class="btn-group-vertical">
-										<button type="button" class="btn btn-success"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
-										<button type="button" class="btn btn-success"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
-										<button type="button" class="btn btn-success"><i class="fa fa-file-o pull-left"></i> 파일</button>
-									</div>
-									<div class="btn-group-vertical">
-										<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
-										<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
-									</div>	
-									</div>						
-								</div>
-							</div>	-->
-<!--										
-				<div class="panel panel-flat panel-primary borderless">
-					<div class="panel-body">		
--->							
+								
 						<ul class="nav nav-tabs" id="myTab">
 							<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
 							<#if !action.user.anonymous >	
@@ -1417,10 +1372,57 @@
 									</div>																		
 								</section>				
 							</div><!-- end photos -->
-						</div><!-- end of tab content -->												
-				
+						</div><!-- end of tab content -->	
+					</div>								
 					
+								<!--
+									<li><a href="#"><img src="images/7.png" alt="img07"/><span>Lovely Slurp</span></a></li>
+									<li><a href="#"><img src="images/8.png" alt="img08"/><span>Lemony Grappa</span></a></li>
+									<li><a href="#"><img src="images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
+									<li><a href="#"><img src="images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
+									<li><a href="#"><img src="images/1.png" alt="img01"/><span>Delicate Wine</span></a></li>-->
+								</ul>
+							</li>
+							<!--
+							<li>
+								<a href="#">Fine Liquors</a>
+								<ul class="cbp-hssubmenu">
+									<li><a href="#"><img src="images/10.png" alt="img10"/><span>Fresh Juice</span></a></li>
+									<li><a href="#"><img src="images/6.png" alt="img06"/><span>Sweet Rum</span></a></li>
+									<li><a href="#"><img src="images/9.png" alt="img09"/><span>Eggy Liquor</span></a></li>
+								</ul>
+							</li>
+							<li><a href="#">Our Mission</a></li>
+							<li><a href="#">Contact</a></li>
+							-->
+						</ul>
 					</div>
+</nav>
+					<div class="blank-top-5" ></div>			
+<!--
+
+							<div class="panel panel-flat panel-default panel-border-thick ">
+								<div class="panel-body" style="min-height:300px;">
+									<div id="panel-transfer-target"><i class="fa fa-desktop fa-3x"></i></div>		
+																	
+									<div id="panel-available-source">							
+									<div class="btn-group-vertical">
+										<button type="button" class="btn btn-success"><i class="fa fa-info-circle pull-left"></i> 공지 및 이벤트</button>
+										<button type="button" class="btn btn-success"><i class="fa fa-picture-o pull-left"></i> 이미지</button>
+										<button type="button" class="btn btn-success"><i class="fa fa-file-o pull-left"></i> 파일</button>
+									</div>
+									<div class="btn-group-vertical">
+										<button type="button" class="btn btn-info"><i class="fa fa-twitter pull-left"></i> 트위터</button>
+										<button type="button" class="btn btn-info"><i class="fa fa-facebook pull-left"></i> 페이스북</button>
+									</div>	
+									</div>						
+								</div>
+							</div>	-->
+<!--										
+				<div class="panel panel-flat panel-primary borderless">
+					<div class="panel-body">		
+-->							
+
 					<!--
 					</div>					
 					</div>
