@@ -153,27 +153,7 @@
 				// 1. Announces 							
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );	
 				createNoticeGrid();
-				/**
-				$("#announce-panel .panel-header-actions a").each(function( index ) {
-					var panel_header_action = $(this);		
-					panel_header_action.click(function (e) {
-						e.preventDefault();
-						if( panel_header_action.text() == "Minimize" ){
-							$("#announce-panel .panel-body").toggleClass("hide");								
-							var panel_header_action_icon = panel_header_action.find('span');
-							if( panel_header_action_icon.hasClass("k-i-minimize") ){
-								panel_header_action.find('span').removeClass("k-i-minimize");
-								panel_header_action.find('span').addClass("k-i-maximize");
-							}else{
-								panel_header_action.find('span').removeClass("k-i-maximize");
-								panel_header_action.find('span').addClass("k-i-minimize");
-							}							
-						}else if (panel_header_action.text() == "Close"){	
-							$("#announce-panel" ).hide();
-						}
-					});
-				});	*/
-															
+																			
 				// 4. Right Tabs
 
 				$('#myTab a').click(function (e) {
@@ -495,7 +475,7 @@
 						this.select("tr:eq(1)");
 					}
 				});		
-				
+				/**
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 					var panel_header_action = $(this);		
 					panel_header_action.click(function (e) {
@@ -515,7 +495,7 @@
 						}
 					});
 				});	
-				
+				**/
 			}	
 		}
 		
@@ -1207,65 +1187,40 @@
 			<div class="row">
 				<div class="col-sm-6"></div>
 				<div class="col-sm-6">
-						<div class="btn-group" data-toggle="buttons">
-							<label class="btn btn-info">
-								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
-							</label>
-							<label class="btn btn-info active">
-						 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
-							</label>
-							<label class="btn btn-info">
-								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
-							</label>
-						</div>
-						<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	
-						<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-info">
+							<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
+						</label>
+						<label class="btn btn-info active">
+					 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
+						</label>
+						<label class="btn btn-info">
+							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
+						</label>
+					</div>
+					<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	
+					<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
 				</div>
+			</div>			
+			<div id="personalized-area" class="row blank-top-5">				
+				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
+					<div class="panel panel-default">
+						<div class="panel-heading">알림
+							<div class="k-window-actions panel-header-actions">										
+								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+							</div>									
+							</div>
+							<div class="panel-body">					
+								<div  id="announce-view"></div>
+							</div>
+						</div>		
+					</div>
+				</div>		
 			</div>				
-		
-
-				<div id="personalized-area" class="row blank-top-5">				
-					
-						<!-- start announce panel -->			
-						<div class="custom-panels-group col-sm-6">	
-						<div class="panel panel-default panel-flat">
-								<div class="panel-heading">공지 & 이벤트
-									<!--
-									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>
-									-->
-								</div>
-								<div class="panel-body">															
-									
-								</div>
-						</div>									
-						
-						</div>									
-										
-						<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
-							<div class="panel panel-default">
-								<div class="panel-heading">알림
-									<div class="k-window-actions panel-header-actions">										
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-										<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-										<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-									</div>									
-								</div>
-								<div class="panel-body">					
-									<div  id="announce-view"></div>
-								</div>
-							</div>		
-						</div>
-					</div>		
-													
-				</div>
-				
-			</div>		
+		</div>		
 		<div class="overlay hide"></div>
 		
 		<!-- start side menu -->
