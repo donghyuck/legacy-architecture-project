@@ -89,7 +89,7 @@
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 			</div>		
 		</div>	
-		<div class="panel-body hide" style="background:#c0de5b;">
+		<div class="panel-body hide green">
 			<button type="button" class="close" aria-hidden="true">&times;</button>					
 			<div class="btn-group dropup">
 				<a class="btn btn-info" href="\\#"><i class="fa fa-download"></i></a>
