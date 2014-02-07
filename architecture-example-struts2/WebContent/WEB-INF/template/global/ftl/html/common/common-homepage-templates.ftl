@@ -133,8 +133,8 @@
 			</figcaption>			
 		</figure>
 		<div class="lb-overlay" id="photo-#:imageId#">
-			<a href="\\#page" class="lb-close">x Close</a>
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
+			<a href="\\#page" class="lb-close"><i class="fa fa-times-circle"></i></a>
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" width="100%"/>
 			<div>
 				<h3>pointe <span>/point/</h3>
 				<p>Dance performed on the tips of the toes</p>
