@@ -1236,6 +1236,7 @@
 				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
 			</header>
 			<div class="blank-space-5">			
+			<!--
 				<nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
 					<div class="cbp-hsinner">
 						<ul class="cbp-hsmenu">
@@ -1249,17 +1250,10 @@
 									<li><a href="#"><img src="images/5.png" alt="img05"/><span>Wise Whiskey</span></a></li>
 								</ul>
 							</li>
-							<!--
-							<li>
-								<a href="#">미디어</a>
-								<ul class="cbp-hssubmenu cbp-hssub-rows">							
-									<div class="blank-top-5" ></div>	
-								</ul>
-							</li>
-							-->
 						</ul>		
 					</div>
 				</nav>
+				-->
 				<div class="blank-top-5" ></div>	
 				
 									<ul class="nav nav-tabs" id="myTab">
