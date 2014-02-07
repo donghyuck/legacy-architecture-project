@@ -1118,10 +1118,10 @@
         }
         
         #personalized-controls-section.cbp-spmenu-vertical {
-        	width: 540px;
+        	width: 530px;
         }
         #personalized-controls-section.cbp-spmenu-right {
-        	right: -540px;
+        	right: -530px;
         }
         
         #personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
