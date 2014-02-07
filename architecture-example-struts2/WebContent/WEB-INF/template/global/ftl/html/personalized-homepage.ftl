@@ -1153,7 +1153,7 @@
         	margin : 0px;
         	padding : 5px;
         	color : #000000;
-        	background : transparent;        	
+        	background : #46b8da; /* transparent;        	*/
         	height : 49px;
         }        
         .overlay{
@@ -1170,6 +1170,7 @@
  background: rgba(0,0,0,0.5);
  
  /*dim the background*/
+ 
 }
 		</style>   	
 	</head>
@@ -1248,9 +1249,9 @@
 			<header>
 							
 <div class="btn-group">
-  <button type="button" class="btn btn-info"><i class="fa fa-cog fa-2x"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-comment fa-2x"></i></button>
-  <button type="button" class="btn btn-info"><i class="fa fa-envelope fa-2x"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
+  <button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
 </div>			
 				<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>			
 			</header>
