@@ -251,9 +251,9 @@
 										</div>
 									</div>		
 									<div class="panel-body scrollable hide" style="min-height:200px; max-height:500px;">
-											<ul class="media-list">
-												<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
-											</ul>
+										<ul class="media-list">
+											<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
+										</ul>
 									</div>							
 								</div>											
 						</div>													
