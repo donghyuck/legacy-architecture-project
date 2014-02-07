@@ -10,7 +10,7 @@
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 			</div>		
 		</div>
-		<div class="panel-body hide bg-gray">
+		<div class="panel-body hide grey">
 			<button type="button" class="close" aria-hidden="true">&times;</button>			
 			<div class="btn-group dropup">
 				<a class="btn btn-info" href="${request.contextPath}/community/download-my-attachment.do?attachmentId=#= attachmentId #" ><i class="fa fa-download"></i>&nbsp; 다운로드</a>
@@ -89,7 +89,7 @@
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 			</div>		
 		</div>	
-		<div class="panel-body hide green">
+		<div class="panel-body hide sky">
 			<button type="button" class="close" aria-hidden="true">&times;</button>					
 			<div class="btn-group dropup">
 				<a class="btn btn-info" href="\\#"><i class="fa fa-download"></i></a>
