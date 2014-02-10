@@ -1122,7 +1122,8 @@
 		}
 		
 		.personalized-navbar.up {
-		
+			margin-top: 0px;
+			top: 0;
 		}
 		
 		#personalized-controls {
