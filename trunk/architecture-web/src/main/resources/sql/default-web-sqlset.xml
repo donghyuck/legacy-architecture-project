@@ -382,6 +382,7 @@
     	V2_IMAGE
     WHERE 
     	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    order by MODIFIED_DATE desc	
     ]]></sql-query>      
     
     <sql-query name="COUNT_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 해당 이미지 수 조회"><![CDATA[    
