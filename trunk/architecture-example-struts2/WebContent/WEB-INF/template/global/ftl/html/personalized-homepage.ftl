@@ -1192,7 +1192,7 @@
 		-->
 		<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
 
-<nav class="personalized-navbar navbar navbar-default" role="navigation">
+<nav class="personalized-navbar navbar" role="navigation">
   <div class="container">
 					<div class="btn-group" data-toggle="buttons">
 						<label class="btn btn-info">
