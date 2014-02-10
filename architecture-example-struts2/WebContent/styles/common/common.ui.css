@@ -171,6 +171,9 @@ header .personalized-controls-trigger {
 	outline: none;
 }
 
+.personalized-controls-trigger  i {
+	line-height: 0;
+}
 
 /** color */
 
