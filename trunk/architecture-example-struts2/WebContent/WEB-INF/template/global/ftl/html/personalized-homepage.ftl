@@ -1140,10 +1140,10 @@
 		}
 
         #personalized-controls-section.cbp-spmenu-vertical {
-        	width: 530px;
+        	width: 565px;
         }
         #personalized-controls-section.cbp-spmenu-right {
-        	right: -530px;
+        	right: -565px;
         	z-index: 2050;
         }
         
