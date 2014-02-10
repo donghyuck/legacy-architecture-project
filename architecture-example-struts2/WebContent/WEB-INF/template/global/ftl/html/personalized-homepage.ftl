@@ -66,13 +66,10 @@
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 				
 				$('.personalized-navbar').waypoint(function(direction){
-					alert('Basic example callback triggered.' + direction );
-					
-					
-					
+					alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');						 
-						 kendo.fx($('.personalized-navbar')).expand("vertical").reverse();
+						 //kendo.fx($('.personalized-navbar')).expand("vertical").reverse();
 					} else if (  direction = 'up' ){										
 						 $('nav').first().toggleClass('hide');
 					}
