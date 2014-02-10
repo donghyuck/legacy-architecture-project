@@ -70,13 +70,15 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		border-color: #222222;
 	}		
 	
+	
+	/*
 		#account-panel {
 			margin-top : 0 px;
 			padding-top : 10px;
 		}	
+	*/	
 		
-		
-		#account-panel  .dropdown-menu{
+		#account-navbar  .dropdown-menu{
 		 	width : 300px;;
 		 	z-index: 1001;
 		 	color: #000;
