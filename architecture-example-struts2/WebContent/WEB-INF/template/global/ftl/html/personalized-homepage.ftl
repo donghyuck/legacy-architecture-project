@@ -71,9 +71,10 @@
 					
 					
 					if( direction = 'down' ){
-						scroll_effect.reverse();
+						scroll_effect.play();	
 					} else if (  direction = 'up' ){
-						scroll_effect.play();					
+										
+						scroll_effect.reverse();
 					}
 					
 					
