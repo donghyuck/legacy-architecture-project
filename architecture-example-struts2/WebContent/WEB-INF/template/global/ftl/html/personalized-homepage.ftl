@@ -69,8 +69,10 @@
 					alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');
+						 $('.personalized-navbar').toggleClass('up');				
 					} else if (  direction = 'up' ){										
-						$('nav').first().toggleClass('hide');						
+						$('nav').first().toggleClass('hide');		
+						$('.personalized-navbar').toggleClass('up');								
 					}
 					
 					
@@ -1117,6 +1119,10 @@
 		
 		.navbar{
 			margin-bottom: 0px;
+		}
+		
+		.personalized-navbar.up {
+		
 		}
 		
 		#personalized-controls {
