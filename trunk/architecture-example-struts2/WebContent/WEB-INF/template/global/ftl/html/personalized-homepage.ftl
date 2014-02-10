@@ -1182,7 +1182,18 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
+		<!--
 		<header class="personalized-header blue">
+
+					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
+					
+							
+		</header>
+		-->
+		<div  class="container-fload">		
+			<row>
+				<div class="col-xs-6">.col-xs-6</div>
+				<div class="col-xs-6">
 					<div class="btn-group" data-toggle="buttons">
 						<label class="btn btn-info">
 							<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
@@ -1194,10 +1205,10 @@
 							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						</label>
 					</div>
-					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
-					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>
-							
-		</header>
+					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>				
+				</div>
+			</row>
+		</div>
 		<!-- START MAIN CONTENT -->
 		<div  class="container" style="min-height:600px;">		
 			<div id="personalized-area" class="row blank-top-5">				
