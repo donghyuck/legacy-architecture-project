@@ -44,9 +44,10 @@
 						</#if>
 						</#list>
 					</ul>				
-					<ul class="nav navbar-nav navbar-right">
+					<ul id="account-navbar" class="nav navbar-nav navbar-right">
+					<!--
 						<li id="account-panel"></li>
-						<!--
+						
 						<li>
 							<p class="navbar-text"></p>
 						</li>
