@@ -22,7 +22,7 @@
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
 					window.opener.signupCallbackResult("twitter", null);
 				}else{
-					//window.opener.location.reload(${action.signIn()?string("true","false")});
+					window.opener.location.reload(${action.signIn()?string("true","false")});
 				}
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){
