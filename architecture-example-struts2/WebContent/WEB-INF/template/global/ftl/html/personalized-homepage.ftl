@@ -1120,12 +1120,7 @@
 		.navbar{
 			margin-bottom: 0px;
 		}
-		
-		.personalized-navbar.up {
-			margin-top: 0px;
-			top: 0;
-		}
-		
+				
 		#personalized-controls {
 			position: absolute;
 			top: 50px;
