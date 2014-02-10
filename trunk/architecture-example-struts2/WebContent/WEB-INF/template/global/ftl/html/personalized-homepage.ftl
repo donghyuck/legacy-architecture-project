@@ -1204,11 +1204,9 @@
 						<label class="btn btn-info">
 							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						</label>
-					</div>
-					<a href="#"  class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>		
-					
+					</div>					
 					<div class="navbar-right">
-						<a href="#" id="personalized-controls-menu" class="btn btn-link"><i class="fa fa-bars fa-2x"></i></button>
+						<a href="#" id="personalized-controls-menu" class="btn btn-link"><i class="fa fa-bars fa-2x"></i></a>
 					</div>
   </div>
 </nav>
