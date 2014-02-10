@@ -74,7 +74,7 @@
 						$('nav').first().toggleClass('hide');		
 						$('.personalized-navbar').toggleClass('up');								
 					}
-				}, { offset: 50 });												
+				}, { offset: "25%" });												
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
