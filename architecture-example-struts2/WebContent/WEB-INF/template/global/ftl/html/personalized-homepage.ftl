@@ -1206,6 +1206,10 @@
 						</label>
 					</div>
 					<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>		
+					
+					<div class="navbar-right">
+						<button type="button" class="btn btn-link"><i class="fa fa-bars fa-2x"></i></button>
+					</div>
   </div>
 </nav>
 
