@@ -11,7 +11,7 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>					
-						<a class="navbar-brand" href="/main.do">&nbsp;&nbsp;${action.user.company.displayName }</a>
+						<a class=".navbar-ex1-collapse navbar-brand" href="/main.do">&nbsp;&nbsp;${action.user.company.displayName }</a>
 					</div>			
 					</#if>												
 					<div class="navbar-collapse collapse">
