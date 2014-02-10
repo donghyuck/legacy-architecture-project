@@ -400,7 +400,7 @@
 
 
 <script id="account-template" type="text/x-kendo-template">	
-	<div class="dropdown">
+<li class="dropdown">
 	<div class="btn-group">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 		<img src="#:photoUrl#"  height="34"  style="float: left;"  alt="#:name#"/>
@@ -511,6 +511,6 @@
 			# } #
 		</ul>
 	</div>			
-	</div>				
+</li>				
 </script>
 		
