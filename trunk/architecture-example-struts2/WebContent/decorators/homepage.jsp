@@ -65,6 +65,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		font-weight: 300;
 	}
 		
+	/* Top Header Manubar */	
 	.navbar-inverse{
 		border: 0px;
 		border-color: #222222;
