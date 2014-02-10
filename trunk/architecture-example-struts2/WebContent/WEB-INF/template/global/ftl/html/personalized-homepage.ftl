@@ -1182,6 +1182,7 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
+		<!--
 		<header class="personalized-header blue">
 
 					
