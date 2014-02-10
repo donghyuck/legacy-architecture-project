@@ -65,7 +65,7 @@
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 				$('.personalized-navbar').waypoint(function(){
-					notify('Basic example callback triggered.');
+					alert('Basic example callback triggered.');
 				});												
 											
 				// 3. ACCOUNTS LOAD	
