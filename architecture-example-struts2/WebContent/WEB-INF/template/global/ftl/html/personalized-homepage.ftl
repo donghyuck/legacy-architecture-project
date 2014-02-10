@@ -1192,16 +1192,8 @@
 		-->
 		<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
 
-<nav class="personalized-navbar navbar navbar-default navbar-static-top" role="navigation">
+<nav class="personalized-navbar navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
-    ...
-  </div>
-</nav>
-
-		<div  class="container-fload">		
-			<div class="row">
-				<div class="col-xs-6">.col-xs-6</div>
-				<div class="col-xs-6">
 					<div class="btn-group" data-toggle="buttons">
 						<label class="btn btn-info">
 							<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
@@ -1213,6 +1205,14 @@
 							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						</label>
 					</div>
+  </div>
+</nav>
+
+		<div  class="container-fload">		
+			<div class="row">
+				<div class="col-xs-6">.col-xs-6</div>
+				<div class="col-xs-6">
+					
 					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>				
 				</div>
 			</div>
