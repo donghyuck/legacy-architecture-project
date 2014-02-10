@@ -1190,7 +1190,7 @@
 							
 		</header>
 		-->
-		<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
+		<!--	-->
 
 <nav class="personalized-navbar navbar" role="navigation">
   <div class="container">
@@ -1205,6 +1205,7 @@
 							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						</label>
 					</div>
+					<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>
   </div>
 </nav>
 
