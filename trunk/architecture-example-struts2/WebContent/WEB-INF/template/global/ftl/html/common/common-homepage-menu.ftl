@@ -14,6 +14,7 @@
 						<a class="navbar-brand" href="/main.do">&nbsp;&nbsp;${action.user.company.displayName }</a>
 					</div>			
 					</#if>												
+					<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
 						<#list menu.components as item >
 						<#if  item.components?has_content >
@@ -49,6 +50,7 @@
 							<p class="navbar-text"></p>
 						</li>
 					</ul>
+					</div>
 					</div>
 				</nav>
 			</#if>		
