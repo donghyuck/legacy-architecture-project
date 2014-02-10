@@ -1182,7 +1182,9 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-
+		<header class="personalized-header blue">
+		fdafdsa
+		</header>
 		<!-- START MAIN CONTENT -->
 		<div  class="container" style="min-height:600px; margin-top:-14px;">		
 			<div class="row">
