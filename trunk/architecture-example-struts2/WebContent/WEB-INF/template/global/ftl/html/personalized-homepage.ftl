@@ -66,7 +66,7 @@
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 				
 				$('.personalized-navbar').waypoint(function(direction){
-					//alert('Basic example callback triggered.' + direction );					
+					alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');
 						 $('.personalized-navbar').toggleClass('up');				
