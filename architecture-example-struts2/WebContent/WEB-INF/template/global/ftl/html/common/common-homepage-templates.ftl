@@ -400,7 +400,7 @@
 
 
 <script id="account-template" type="text/x-kendo-template">	
-<li class="dropdown">
+<li class="dropdown navbar-btn">
 	<div class="btn-group">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 		<img src="#:photoUrl#"  height="34"  style="float: left;"  alt="#:name#"/>
