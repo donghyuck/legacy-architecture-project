@@ -1182,14 +1182,14 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-		<!--
 		<header class="personalized-header blue">
 
-					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
+					
 					
 							
 		</header>
 		-->
+		<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
 		<div  class="container-fload">		
 			<row>
 				<div class="col-xs-6">.col-xs-6</div>
