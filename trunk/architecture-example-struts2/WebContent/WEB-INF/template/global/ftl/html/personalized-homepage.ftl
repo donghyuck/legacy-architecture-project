@@ -1208,6 +1208,11 @@
 					<div class="navbar-right">
 						<a href="#" id="personalized-controls-menu" class="btn btn-link"><i class="fa fa-bars fa-2x"></i></a>
 					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a href="#">
+<i class="fa fa-bars fa-2x"></i>
+							</a></li>
+					</ul>
   </div>
 </nav>
 
