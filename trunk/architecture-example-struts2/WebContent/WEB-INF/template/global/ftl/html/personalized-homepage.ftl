@@ -71,9 +71,9 @@
 					
 					
 					if( direction = 'down' ){
-						 kendo.fx($('.personalized-navbar')).slideIn("up").play();	
+						 kendo.fx($('.personalized-navbar')).expand("vertical").reverse();	
 					} else if (  direction = 'up' ){										
-						 kendo.fx($('.personalized-navbar')).slideIn("down").play();	
+						 kendo.fx($('.personalized-navbar')).expand("vertical").play();	
 					}
 					
 					
