@@ -71,9 +71,9 @@
 					
 					
 					if( direction = 'down' ){
-						 $('.personalized-navbar').toggleClass('hide');
+						 $('nav').first().toggleClass('hide');
 					} else if (  direction = 'up' ){										
-						 $('.personalized-navbar').toggleClass('hide');
+						 $('nav').first().toggleClass('hide');
 					}
 					
 					
