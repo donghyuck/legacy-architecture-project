@@ -1183,6 +1183,19 @@
 			/*dim the background*/
 		}
 
+		.overlay:target {
+		    width: auto;
+		    height: auto;
+		    bottom: 0px;
+		    right: 0px;
+		    padding: 80px 100px 120px 100px;
+		}
+		
+		.overlay:target img,
+		.overlay:target button.overlay-close{
+    			opacity: 1;
+		}
+
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
 			width:100%;
 		}
