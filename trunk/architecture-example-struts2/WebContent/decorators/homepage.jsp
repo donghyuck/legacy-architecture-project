@@ -25,7 +25,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
-	
+	/**
 	#account-panel .nav .open > a,
 	#account-panel .nav .open > a:hover,
 	#account-panel .nav .open > a:focus {
@@ -33,6 +33,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		border-color: #428bca;
 		height : 30px; 
 	}
+	*/
 	
 	body { 
 		padding-top: 70px; 
@@ -65,6 +66,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	}
 		
 	.navbar-inverse{
+		border: 0px;
 		border-color: #222222;
 	}		
 	
