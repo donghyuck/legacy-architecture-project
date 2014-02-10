@@ -27,7 +27,7 @@
 				$("#top-menu").show();
 				var currentUser = new User({});			
 				// ACCOUNTS LOAD	
-				var accounts = $("#account-panel").kendoAccounts({
+				var accounts = $("#account-navbar").kendoAccounts({
 					dropdown : false,
 					authenticate : function( e ){
 						currentUser = e.token;						
