@@ -164,7 +164,11 @@ nav.personalized-navbar {
 	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
 	border-radius : 0px;
 	top: 0;	
+	left: 0;
+	right: 0;
 	border : 0px;
+	margin-top: -19px;
+	position : fixed;
 }
 
 header.personalized-header {
