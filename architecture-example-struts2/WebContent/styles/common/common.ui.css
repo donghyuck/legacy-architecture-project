@@ -169,6 +169,7 @@ nav.personalized-navbar {
 	border : 0px;
 	margin-top: -19px;
 	position : fixed;
+	min-height: 30px;
 }
 
 nav .personalized-controls-trigger {
@@ -182,8 +183,8 @@ nav .personalized-controls-trigger {
 }
 
 nav.personalized-navbar  .navbar-btn {
-margin-top: 2px;
-margin-bottom: 2px;
+margin-top: 5px;
+margin-bottom: 5px;
 }
 
 
