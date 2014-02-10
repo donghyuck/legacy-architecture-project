@@ -153,6 +153,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /** personalized section  */
 
+
 nav.personalized-navbar {
 	/* height: 120px; */
 	/*margin-top: 0;
@@ -174,6 +175,16 @@ nav.personalized-navbar {
 	z-index: 1000;
 }
 
+.personalized-navbar > li > a:hover  {
+	color : red;
+	background-color : transparent;	
+}
+
+.personalized-navbar.up {
+	margin-top: 0px;
+	top: 0;
+}
+	
 nav .personalized-controls-trigger {
 	width: 35px;
 	position: absolute;
