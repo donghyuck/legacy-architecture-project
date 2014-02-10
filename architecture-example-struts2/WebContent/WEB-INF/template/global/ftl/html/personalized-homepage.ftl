@@ -65,7 +65,7 @@
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 				
-				$($('nav').first()).waypoint(function(direction){
+				$($('personalized-area')).waypoint(function(direction){
 					//alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');
@@ -76,7 +76,7 @@
 						$('.personalized-navbar').toggleClass('up');			
 						$('personalized-area').toggleClass('blank-top-50');					
 					}
-				});												
+				}, { offset: 50 });												
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
