@@ -1191,6 +1191,13 @@
 		</header>
 		-->
 		<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
+
+		<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  <div class="container">
+    ...
+  </div>
+</nav>
+
 		<div  class="container-fload">		
 			<div class="row">
 				<div class="col-xs-6">.col-xs-6</div>
