@@ -1165,6 +1165,7 @@
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
 			width:100%;
 		}
+		
 		.cbp-hsmenu > li > a {
 			color: #fff;
 			font-size: 1em;
@@ -1180,8 +1181,7 @@
 	</head>
 	<body id="doc" class="bg-gray">
 		<!-- START HEADER -->
-		<#include "/html/common/common-homepage-menu.ftl" >	
-		
+		<#include "/html/common/common-homepage-menu.ftl" >			
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-right">
@@ -1205,7 +1205,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<div  class="container" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-5">				
+			<div id="personalized-area" class="row blank-top-50">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
 						<div class="panel-heading">알림
