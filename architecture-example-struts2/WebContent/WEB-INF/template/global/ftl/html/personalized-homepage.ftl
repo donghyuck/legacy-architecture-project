@@ -365,7 +365,7 @@
 										data : "targetImages",
 										total : "totalTargetImageCount"
 									},
-									sort: { field: "imageId", dir: "desc" },
+									/*sort: { field: "imageId", dir: "desc" },*/
 									serverPaging: true
 								},
 								selectable: "single",									
