@@ -71,9 +71,9 @@
 					
 					
 					if( direction = 'down' ){
-						 kendo.fx($('.personalized-navbar')).expand("vertical").reverse();	
+						 $('.personalized-navbar').toggleClass('hide');
 					} else if (  direction = 'up' ){										
-						 kendo.fx($('.personalized-navbar')).expand("vertical").play().stop();	
+						 $('.personalized-navbar').toggleClass('hide');
 					}
 					
 					
