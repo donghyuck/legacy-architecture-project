@@ -68,10 +68,12 @@
 				$('.personalized-navbar').waypoint(function(direction){
 					alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
-						 $('nav').first().toggleClass('hide');						 
+						 $('nav').first().toggleClass('hide');				
+						 $('.personalized-navbar').css("top", "0" );
 						 //kendo.fx($('.personalized-navbar')).expand("vertical").reverse();
 					} else if (  direction = 'up' ){										
-						 $('nav').first().toggleClass('hide');
+						$('nav').first().toggleClass('hide');
+						$('.personalized-navbar').css("top", "" );
 					}
 					
 					
