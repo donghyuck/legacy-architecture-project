@@ -64,8 +64,18 @@
 				});
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
+				var scroll_effect = kendo.fx($('.personalized-navbar')).expand("vertical");
 				$('.personalized-navbar').waypoint(function(direction){
 					alert('Basic example callback triggered.' + direction );
+					
+					
+					
+					if( direction = 'down' ){
+						scroll_effect.stop().reverse();
+					} else if (  direction = 'up' ){
+						scroll_effect.stop().play();					
+					}
+					
 					
 				}, { offset: 100 });												
 											
