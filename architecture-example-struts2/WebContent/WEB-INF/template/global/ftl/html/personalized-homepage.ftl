@@ -70,11 +70,11 @@
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');
 						 $('.personalized-navbar').toggleClass('up');			
-						 $('.personalized-area').removeClass('blank-top-50');			
+						 $('personalized-area').toggleClass('blank-top-50');			
 					} else if (  direction = 'up' ){										
 						$('nav').first().toggleClass('hide');		
 						$('.personalized-navbar').toggleClass('up');			
-						$('.personalized-area').addClass('blank-top-50');					
+						$('personalized-area').toggleClass('blank-top-50');					
 					}
 				});												
 											
@@ -1217,7 +1217,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container" style="min-height:600px;">		
-			<div id="personalized-area" class="row">				
+			<div id="personalized-area" class="row blank-top-50">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
 						<div class="panel-heading">알림
