@@ -72,7 +72,7 @@
 					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');						 
-						 kendo.fx($('.personalized-navbar')).slideIn("up").play();
+						 kendo.fx($('.personalized-navbar')).expand("vertical").reverse();
 					} else if (  direction = 'up' ){										
 						 $('nav').first().toggleClass('hide');
 					}
