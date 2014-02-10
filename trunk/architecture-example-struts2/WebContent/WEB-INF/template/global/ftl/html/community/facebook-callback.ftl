@@ -23,7 +23,7 @@
 					
 					window.opener.signupCallbackResult("facebook", null);
 				}else{
-					//window.opener.location.reload(${action.signIn()?string("true","false")});
+					window.opener.location.reload(${action.signIn()?string("true","false")});
 				}				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
