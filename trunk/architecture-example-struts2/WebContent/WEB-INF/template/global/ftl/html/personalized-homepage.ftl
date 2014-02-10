@@ -1216,15 +1216,6 @@
   </div>
 </nav>
 
-		<div  class="container-fload">		
-			<div class="row">
-				<div class="col-xs-6">.col-xs-6</div>
-				<div class="col-xs-6">
-					
-					&nbsp;		
-				</div>
-			</div>
-		</div>
 		<!-- START MAIN CONTENT -->
 		<div  class="container" style="min-height:600px;">		
 			<div id="personalized-area" class="row blank-top-5">				
