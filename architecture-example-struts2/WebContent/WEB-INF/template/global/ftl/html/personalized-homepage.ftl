@@ -1181,26 +1181,12 @@
 	<body id="doc" class="bg-gray">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<!-- END HEADER -->	
-		<!--
-		<header class="personalized-header blue">
-
-					
-					
-							
-		</header>
-		-->
-		<!--	-->
-
-<nav class="personalized-navbar navbar" role="navigation">
-  <div class="container">
-				
-					<div class="nav navbar-navbar-btn navbar-left">
-								
-					</div>
-					<ul class="nav navbar-nav navbar-right">
-						<li>
-<div class="btn-group navbar-btn" data-toggle="buttons">
+		
+		<nav class="personalized-navbar navbar" role="navigation">
+			<div class="container">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="navbar-btn">
+						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
 							</label>
@@ -1211,14 +1197,12 @@
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
 						</div>										
-						</li>
-						<li><a  id="personalized-controls-menu" href="#">
-<i class="fa fa-bars fa-2x"></i>
-							</a></li>
-					</ul>
-  </div>
-</nav>
-
+					</li>
+					<li><a  id="personalized-controls-menu" href="#"><i class="fa fa-bars fa-2x"></i></a></li>
+				</ul>
+			</div>
+		</nav>
+		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<div  class="container" style="min-height:600px;">		
 			<div id="personalized-area" class="row blank-top-5">				
