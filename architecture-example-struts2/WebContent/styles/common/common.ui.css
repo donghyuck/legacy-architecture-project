@@ -155,7 +155,24 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 header.personalized-header {
 	height: 120px;
-	margin-top: 0;
+	/*margin-top: 0;*/
+	padding : 5px 0;
+	margin-bottom : 10px;
+	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
+}
+
+header .personalized-controls-trigger {
+	width: 80px;
+	height: 80px;
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	overflow: hidden;
+	border: none;
+	text-indent: 200%;
+	color: transparent;
+	outline: none;
+	z-index: 2050;
 }
 
 
