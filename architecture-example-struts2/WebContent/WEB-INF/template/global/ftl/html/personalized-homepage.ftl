@@ -19,7 +19,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
 			'${request.contextPath}/js/common/common.classie.min.js',
-			'${request.contextPath}/js/codedrop/cbpHorizontalSlideOutMenu.min.js'],
+			'${request.contextPath}/js/jqeury.waypoints/waypoints.min.js'],
 			complete: function() {
 			
 			
@@ -64,7 +64,9 @@
 				});
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
-																
+				$('.personalized-navbar').waypoint(function(){
+					notify('Basic example callback triggered.');
+				});												
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
