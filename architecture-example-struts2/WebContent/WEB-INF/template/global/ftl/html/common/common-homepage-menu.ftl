@@ -5,16 +5,16 @@
 					<div class="container">
 					<#if action.user.company ?? >
 					<div class="navbar-header">					
-						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
 							<span class="sr-only">Toggle navigation</span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span>
 						</button>					
-						<a class=".navbar-ex1-collapse navbar-brand" href="/main.do">&nbsp;&nbsp;${action.user.company.displayName }</a>
+						<a class="navbar-brand" href="/main.do">&nbsp;&nbsp;${action.user.company.displayName }</a>
 					</div>			
 					</#if>												
-					<div class="navbar-collapse collapse">
+					<div class="navbar-collapse collapse" id="navbar-ex1-collapse">
 					<ul class="nav navbar-nav">
 						<#list menu.components as item >
 						<#if  item.components?has_content >
