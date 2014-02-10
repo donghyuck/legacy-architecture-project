@@ -619,6 +619,7 @@ a.k-link:hover {
 /* ------------------------------- */
 /* TOPBAR                             */
 /* ------------------------------- */
+/**
 #account {
 	position: absolute;
 	right: 5px;
@@ -889,6 +890,9 @@ body.offline:not (.jolios ) #account {
 		border-bottom-left-radius: 4px
 	}
 }
+
+*/
+
 /* Tables */
 
 /* Caption Common Style */
