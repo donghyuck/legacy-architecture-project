@@ -69,7 +69,7 @@
 					alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');				
-						 $('.personalized-navbar').css("margin-top", "0" );
+						 $('.personalized-navbar').css("margin-top", "20px" );
 						 //kendo.fx($('.personalized-navbar')).expand("vertical").reverse();
 					} else if (  direction = 'up' ){										
 						$('nav').first().toggleClass('hide');
