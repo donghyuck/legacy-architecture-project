@@ -246,7 +246,7 @@
 											}
 										}
 									},
-									pageSize: 10,
+									pageSize: 12,
 									error:handleKendoAjaxError,
 									schema: {
 										model: Attachment,
@@ -349,9 +349,16 @@
 								dataSource: {
 									type: 'json',
 									transport: {
-										read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' }
+										read: { url:'${request.contextPath}/community/list-my-image.do?output=json', type: 'POST' },
+										parameterMap: function (options, operation){
+											if (operation != "read" && options) {										                        								                       	 	
+												return { imageId :options.imageId };									                            	
+											}else{
+												 return { startIndex: options.skip, pageSize: options.pageSize }
+											}
+										}
 									},
-									pageSize: 10,
+									pageSize: 12,
 									error:handleKendoAjaxError,
 									schema: {
 										model: Image,
