@@ -1183,13 +1183,6 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<header class="personalized-header blue">
-		fdafdsa
-		</header>
-		<!-- START MAIN CONTENT -->
-		<div  class="container" style="min-height:600px; margin-top:-14px;">		
-			<div class="row">
-				<div class="col-sm-6"></div>
-				<div class="col-sm-6">
 					<div class="btn-group" data-toggle="buttons">
 						<label class="btn btn-info">
 							<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
@@ -1202,7 +1195,15 @@
 						</label>
 					</div>
 					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
-					&nbsp;<a href="#" id="personalized-controls-menu" class="cbp-spmenu-trigger"><i class="fa fa-bars"></i></a>
+					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars"></i></a>
+							
+		</header>
+		<!-- START MAIN CONTENT -->
+		<div  class="container" style="min-height:600px; margin-top:-14px;">		
+			<div class="row">
+				<div class="col-sm-6"></div>
+				<div class="col-sm-6">
+
 				</div>
 			</div>			
 			<div id="personalized-area" class="row blank-top-5">				
