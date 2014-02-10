@@ -73,7 +73,7 @@
 					if( direction = 'down' ){
 						 kendo.fx($('.personalized-navbar')).expand("vertical").reverse();	
 					} else if (  direction = 'up' ){										
-						 kendo.fx($('.personalized-navbar')).expand("vertical").play();	
+						 kendo.fx($('.personalized-navbar')).expand("vertical").play().stop();	
 					}
 					
 					
