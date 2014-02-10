@@ -1194,7 +1194,7 @@
 
 <nav class="personalized-navbar navbar" role="navigation">
   <div class="container">
-					<div class="btn-group" data-toggle="buttons">
+					<div class="btn-group navbar-btn" data-toggle="buttons">
 						<label class="btn btn-info">
 							<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
 						</label>
@@ -1205,7 +1205,7 @@
 							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						</label>
 					</div>
-					<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>
+					<button type="button" id="personalized-controls-show" class="btn btn-danger navbar-btn"><i class="fa fa-bars"></i></button>
   </div>
 </nav>
 
