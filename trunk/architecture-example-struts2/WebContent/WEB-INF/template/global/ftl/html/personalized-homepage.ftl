@@ -64,9 +64,10 @@
 				});
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
-				$('.personalized-navbar').waypoint(function(){
-					alert('Basic example callback triggered.');
-				});												
+				$('.personalized-navbar').waypoint(function(direction){
+					alert('Basic example callback triggered.' + direction );
+					
+				}, { offset: 100 });												
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
