@@ -1195,7 +1195,7 @@
 						</label>
 					</div>
 					<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
-					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars"></i></a>
+					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>
 							
 		</header>
 		<!-- START MAIN CONTENT -->
