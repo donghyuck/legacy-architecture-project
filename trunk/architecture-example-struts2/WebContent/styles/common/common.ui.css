@@ -151,6 +151,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	box-shadow: none;
 }
 
+/** headers  */
+
+header.personalized-header {
+	height: 120px;
+	margin-top: 0;
+}
+
+
 /** color */
 
 section.sky , div.sky {
@@ -162,6 +170,10 @@ section.green, div.green {
 }
 section.grey , div.grey {
 background-color: #e7ebef;
+}
+
+section.blue , div.blue {
+background-color: #13A7C7;
 }
 
 /** icons & buttons */
