@@ -79,7 +79,7 @@
 					afterAuthenticate : function(){							
 						//$('.dropdown-toggle').dropdown();
 						if( currentUser.anonymous ){
-							$("#account-panel .custom-external-login-groups button").each(function( index ) {
+							$("#account-navbar .custom-external-login-groups button").each(function( index ) {
 									var external_login_button = $(this);
 									external_login_button.click(function (e){																												
 										var target_media = external_login_button.attr("data-target");
@@ -461,7 +461,7 @@
 							announcePlaceHolder.modifiedDate = selectedCell.modifiedDate;
 							announcePlaceHolder.creationDate = selectedCell.creationDate;
 							announcePlaceHolder.user = selectedCell.user;							
-							if( announcePlaceHolder.user.userId == $("#account-panel").data("currentUser").userId ){
+							if( announcePlaceHolder.user.userId == $("#account-navbar").data("currentUser").userId ){
 								announcePlaceHolder.modifyAllowed = true;
 							}else{
 								announcePlaceHolder.modifyAllowed = false;
@@ -575,7 +575,7 @@
 									dataType: "json",
 									data: { 
 										objectType: 1,
-										objectId: $("#account-panel").data("currentUser" ).company.companyId  
+										objectId: $("#account-navbar").data("currentUser" ).company.companyId  
 									}
 								},						
 								thumbnailUrl: function( path, name, imageId ){
@@ -583,7 +583,7 @@
 								},
 								uploadData : {
 									objectType: 1,
-									objectId: $("#account-panel").data("currentUser" ).company.companyId  
+									objectId: $("#account-navbar").data("currentUser" ).company.companyId  
 								},	
 								uploadUrl: "${request.contextPath}/community/imagebrowser-update.do?output=json",							
 								imageUrl: function(path, imageId){
