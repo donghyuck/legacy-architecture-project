@@ -65,6 +65,18 @@
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 				
+				$('#personalized-area').waypoint(function(direction){
+					//alert('Basic example callback triggered.' + direction );					
+					if( direction = 'down' ){
+						 $('nav').first().toggleClass('hide');
+						 $('.personalized-navbar').toggleClass('up');			
+						 $('personalized-area').toggleClass('blank-top-50');			
+					} else if (  direction = 'up' ){										
+						$('nav').first().toggleClass('hide');		
+						$('.personalized-navbar').toggleClass('up');			
+						$('personalized-area').toggleClass('blank-top-50');					
+					}
+				}, { offset: 50 });												
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
