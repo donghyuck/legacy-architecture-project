@@ -132,9 +132,8 @@
 				</ul>										
 			</figcaption>			
 		</figure>
-		<div id="photo-#:imageId#" class="overlay overlay-scale">
-			<button type="button" class="overlay-close">Close</button>			
-			<a href="\\#page" class="lb-close"><i class="fa fa-times fa-2x"></i></a>
+		<div class="lb-overlay" id="photo-#:imageId#">			
+			<a href="\\#page" class="lb-overlay-close">Close</a>
 			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
 			<div>
 				<h3>pointe <span>/point/</h3>
