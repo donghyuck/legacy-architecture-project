@@ -44,12 +44,12 @@
 				});											
 							
 	
-				var slide_effect = kendo.fx($(".overlay")).fadeIn();
+				var slide_effect = kendo.fx($(".screen-overlay")).fadeIn();
 								
 				$("#personalized-controls-menu").on( "click" , function(e){								
 					if( $('#personalized-controls-section').hasClass("hide") )
 						$('#personalized-controls-section').removeClass("hide");									
-					$('.overlay').toggleClass('hide');					
+					$('.screen-overlay').toggleClass('hide');					
 					slide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
@@ -58,7 +58,7 @@
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
-						$('.overlay').toggleClass('hide');
+						$('.screen-overlay').toggleClass('hide');
 						});
 					}, 100);					
 				});
@@ -1168,10 +1168,19 @@
         	height: 90px;        	
         }
 
-		.overlay{		
+		.screen-overlay{		
+			-webkit-transition: all 0.3s;
+			-moz-transition: all 0.3s;
+			transition: all 0.3s;
+			position: fixed; 
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
 			z-index: 2000;
 			background: rgba(0,0,0,0.9);		
-			 text-align: center;
+			text-align: center;
+			/*dim the background*/
 		}
 
 		.overlay:target {
@@ -1249,7 +1258,7 @@
 				</div>		
 			</div>				
 		</section>		
-		<div class="overlay hide"></div>
+		<div class="screen-overlay hide"></div>
 		
 		<!-- start side menu -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right grey hide"  id="personalized-controls-section">			
