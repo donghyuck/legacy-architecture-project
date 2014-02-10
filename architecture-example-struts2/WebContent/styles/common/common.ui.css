@@ -162,17 +162,13 @@ header.personalized-header {
 }
 
 header .personalized-controls-trigger {
-	width: 80px;
-	height: 80px;
+	width: 40px;
 	position: absolute;
 	right: 0px;
-	top: 0px;
 	overflow: hidden;
 	border: none;
-	text-indent: 200%;
-	color: transparent;
+	color: #FFFFFF;
 	outline: none;
-	z-index: 2050;
 }
 
 
