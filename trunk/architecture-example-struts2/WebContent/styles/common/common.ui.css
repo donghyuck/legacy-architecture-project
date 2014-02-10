@@ -169,8 +169,9 @@ nav.personalized-navbar {
 	border : 0px;
 	margin-top: -19px;
 	position : fixed;
-	min-height: 35px;
-	z-index: 1000px;
+	overflow: hidden;
+	min-height: 52px;
+	z-index: 1000;
 }
 
 nav .personalized-controls-trigger {
