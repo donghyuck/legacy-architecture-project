@@ -181,6 +181,12 @@ nav .personalized-controls-trigger {
 	outline: none;
 }
 
+nav.personalized-navbar  .navbar-btn {
+margin-top: 2px;
+margin-bottom: 2px;
+}
+
+
 header.personalized-header {
 	/* height: 120px; */
 	/*margin-top: 0;*/
