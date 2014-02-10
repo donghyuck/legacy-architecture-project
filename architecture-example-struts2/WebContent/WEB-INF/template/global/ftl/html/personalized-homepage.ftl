@@ -1205,7 +1205,7 @@
 							<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 						</label>
 					</div>
-					<button type="button" id="personalized-controls-show" class="btn btn-danger navbar-btn"><i class="fa fa-bars"></i></button>
+					<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>		
   </div>
 </nav>
 
@@ -1214,7 +1214,7 @@
 				<div class="col-xs-6">.col-xs-6</div>
 				<div class="col-xs-6">
 					
-					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>				
+					&nbsp;		
 				</div>
 			</div>
 		</div>
