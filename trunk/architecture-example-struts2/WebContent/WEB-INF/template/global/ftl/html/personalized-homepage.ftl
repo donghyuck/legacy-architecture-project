@@ -28,8 +28,8 @@
 				
 				// 2.  MEUN 설정
 				// START SCRIPT	
-				$("#top-menu").kendoMenu();
-				$("#top-menu").show();
+				//$("#top-menu").kendoMenu();
+				//$("#top-menu").show();
 																																									
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
