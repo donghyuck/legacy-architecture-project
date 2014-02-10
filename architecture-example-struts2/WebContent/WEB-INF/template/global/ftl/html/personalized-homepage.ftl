@@ -242,7 +242,7 @@
 											if (operation != "read" && options) {										                        								                       	 	
 												return { attachmentId :options.attachmentId };									                            	
 											}else{
-												return { };
+												 return { startIndex: options.skip, pageSize: options.pageSize }
 											}
 										}
 									},
