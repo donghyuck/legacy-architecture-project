@@ -1214,7 +1214,7 @@
 		</nav>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-		<div  class="container" style="min-height:600px;">		
+		<section id="personalized-section"  class="container" style="min-height:600px;">		
 			<div id="personalized-area" class="row blank-top-50">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
@@ -1233,7 +1233,7 @@
 					</div>
 				</div>		
 			</div>				
-		</div>		
+		</section>		
 		<div class="overlay hide"></div>
 		
 		<!-- start side menu -->
