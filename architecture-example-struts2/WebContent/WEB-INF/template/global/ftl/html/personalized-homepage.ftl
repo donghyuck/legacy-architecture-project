@@ -1169,18 +1169,9 @@
         }
 
 		.overlay{		
-			-webkit-transition: all 0.3s;
-			-moz-transition: all 0.3s;
-			transition: all 0.3s;
-			/** position: absolute; */
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
 			z-index: 2000;
 			background: rgba(0,0,0,0.9);		
 			 text-align: center;
-			/*dim the background*/
 		}
 
 		.overlay:target {
