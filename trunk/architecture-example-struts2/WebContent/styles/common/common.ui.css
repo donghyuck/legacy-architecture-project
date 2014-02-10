@@ -162,7 +162,7 @@ nav.personalized-navbar {
 	margin-bottom : 10px;
 	*/
 	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
-	
+	border-radius : 0px;
 	top: 0;	
 }
 
