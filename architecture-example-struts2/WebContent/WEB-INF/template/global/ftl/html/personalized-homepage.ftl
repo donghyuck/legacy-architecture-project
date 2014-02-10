@@ -1192,7 +1192,7 @@
 		-->
 		<!--<button type="button" id="personalized-controls-show" class="btn btn-danger"><i class="fa fa-bars"></i></button>	-->
 		<div  class="container-fload">		
-			<row>
+			<div class="row">
 				<div class="col-xs-6">.col-xs-6</div>
 				<div class="col-xs-6">
 					<div class="btn-group" data-toggle="buttons">
@@ -1208,7 +1208,7 @@
 					</div>
 					&nbsp;<a href="#" id="personalized-controls-menu" class="personalized-controls-trigger"><i class="fa fa-bars fa-2x"></i></a>				
 				</div>
-			</row>
+			</div>
 		</div>
 		<!-- START MAIN CONTENT -->
 		<div  class="container" style="min-height:600px;">		
