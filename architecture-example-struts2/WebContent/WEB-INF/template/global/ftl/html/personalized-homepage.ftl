@@ -77,7 +77,7 @@
 					}
 					
 					
-				}, { offset: 100 });												
+				}, { offset: '100%' });												
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
