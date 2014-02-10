@@ -69,11 +69,11 @@
 					alert('Basic example callback triggered.' + direction );					
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');				
-						 $('.personalized-navbar').css({ margin-top: "0px", top:"0" });
+						 $('.personalized-navbar').css({ "margin-top": "0px", "top":"0" });
 						 //kendo.fx($('.personalized-navbar')).expand("vertical").reverse();
 					} else if (  direction = 'up' ){										
 						$('nav').first().toggleClass('hide');
-						$('.personalized-navbar').css({ margin-top: "", top:"" });
+						$('.personalized-navbar').css({"margin-top": "", "top":"" });
 					}
 					
 					
