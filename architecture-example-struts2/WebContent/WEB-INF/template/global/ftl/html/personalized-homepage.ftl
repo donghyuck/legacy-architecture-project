@@ -222,16 +222,13 @@
 							});	
 						}
 					} else if( show_bs_tab.attr('href') == '#my-files' ){					
-						if( !$('#attachment-list-view').data('kendoListView') ){			
-											
+						if( !$('#attachment-list-view').data('kendoListView') ){														
 							var attachementTotalModle = kendo.observable({ 
 								totalAttachCount : "0",
 								totalImageCount : "0",
 								totalFileCount : "0"							
-							});
-							
-							kendo.bind($("#attachment-list-filter"), attachementTotalModle );		
-											
+							});							
+							kendo.bind($("#attachment-list-filter"), attachementTotalModle );													
 							$("#attachment-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
@@ -506,6 +503,17 @@
 								kendo.fx($("#my-notice .side2")).expand("vertical").play();
 							});
 						});
+						
+						
+						// editer ..
+						var newAnnounce = new Announce();
+						var template = kendo.template($('#announcement-edit-template').html());
+						$("#announce-creator").html( template(newAnnounce) );
+						kendo.bind($("#announce-creator"), newAnnounce );			
+						createEditor($("#announce-creator .editor"));		
+						
+						
+						
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
 							kendo.fx($("#my-notice .side2")).expand("vertical").reverse().then(function(){
@@ -640,21 +648,21 @@
 				}		
 		}
 		
-		function editAnnouncePanel (){
-			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );				
+		function editAnnouncePanel (){		
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );		
 			if( announcePlaceHolder.modifyAllowed ){						
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
 				kendo.bind($("#announce-view"), announcePlaceHolder );			
-				createEditor($("#announce-body-editor"));		
+				
+				createEditor($("#announce-panel .editor"));		
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
 					if( panel_button.hasClass( 'custom-update') ){
 						panel_button.click(function (e) { 
 							e.preventDefault();					
-							var data = $("#announce-panel").data( "announcePlaceHolder" );	
-							
-							alert( kendo.stringify( data ) );
+							var data = $("#announce-panel").data( "announcePlaceHolder" );								
+							//alert( kendo.stringify( data ) );
 							$.ajax({
 									dataType : "json",
 									type : 'POST',
