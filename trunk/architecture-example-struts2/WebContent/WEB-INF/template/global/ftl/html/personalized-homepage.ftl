@@ -514,8 +514,7 @@
 										panel_button.click(function (e) { 
 											e.preventDefault();					
 											var data = $("#announce-creator").data( "announcePlaceHolder" );				
-											alert( kendo.stringify( data ) );
-											/*
+											
 											$.ajax({
 													dataType : "json",
 													type : 'POST',
@@ -526,7 +525,7 @@
 													},
 													error:handleKendoAjaxError
 											});	
-											*/
+										
 										} );
 									}			
 								} );									
