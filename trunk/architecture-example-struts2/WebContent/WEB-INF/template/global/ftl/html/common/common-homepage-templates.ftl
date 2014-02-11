@@ -263,7 +263,7 @@
 		</div>
 	</div>
 	<div class="form-group">
-		<textarea id="announce-body-editor" data-bind='value:body'></textarea>		
+		<textarea class="editor" data-bind='value:body'></textarea>		
 	</div>
 </div>	  
 	<div class="blank-top-5" ></div>				
