@@ -1163,10 +1163,10 @@
 
 		@media (max-width: 768px ) {
 			#personalized-controls-section.cbp-spmenu-vertical {
-				width: 100%;
+				width: 99%;
 			}			
 			#personalized-controls-section.cbp-spmenu-right {
-				right: 100%;
+				right: 99%;
 			}		
 		} 
 		
