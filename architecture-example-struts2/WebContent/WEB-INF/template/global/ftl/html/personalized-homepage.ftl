@@ -500,7 +500,7 @@
 						control_button.click( function(e){		
 						
 							// editer ..						
-							if( $( #announce-creator" ).children().length < 1 ){
+							if( $( "#announce-creator" ).children().length < 1 ){
 								var newAnnounce = new Announce();
 								var template = kendo.template($('#announcement-edit-template').html());
 								$("#announce-creator").html( template(newAnnounce) );
