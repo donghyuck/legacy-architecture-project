@@ -507,7 +507,7 @@
 								createEditor($("#announce-creator .editor"));								
 							}
 												
-							kendo.fx($("#my-notice .side1")).fade("vertical").duration(700).reverse().then(function(){
+							kendo.fx($("#my-notice .side1")).expand("vertical").duration(700).reverse().then(function(){
 								$("#my-notice .side2").removeClass("hide");
 								kendo.fx($("#my-notice .side2")).expand("vertical").stop().play();
 							});
