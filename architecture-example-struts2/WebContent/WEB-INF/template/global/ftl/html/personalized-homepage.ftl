@@ -1341,17 +1341,18 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
-											<section class="side2 hide">
+											<section class="side2 hide" style="height:100%;">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp;  목록보기</button>
 												</div>
 												<div id="announce-creator" class="blank-top-15" ></div>
 											</section>
-											<section class="side1">
+											<section class="side1" style="height:100%;">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 공지 & 이벤트 추가</button>		
 												</div>		
-												<div id="announce-grid" class="blank-top-5" ></div>
+												<div class="blank-top-5" ></div>
+												<div id="announce-grid"></div>
 											</section>											
 										</div>
 										<!-- start social tab-content -->		
