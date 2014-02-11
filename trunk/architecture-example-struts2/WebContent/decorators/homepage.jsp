@@ -44,7 +44,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		background: #0070b8;
 		background-size: cover;
 		padding: 22px 0;
-		margin-top : -19px;
+		margin-top : -20px;
 		margin-bottom: 10px;
 	}
 
