@@ -1306,6 +1306,10 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
+											<div class="btn-group">			
+												<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 이벤트 추가</button>		
+											</div>		
+											<div class="blank-top-5" ></div>
 											<div id="announce-grid" ></div>
 										</div>
 										<!-- start social tab-content -->		
