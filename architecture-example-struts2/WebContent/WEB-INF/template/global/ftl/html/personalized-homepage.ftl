@@ -540,15 +540,14 @@
 			}	
 		}
 		
+		
+	
+		
+		
 		/** Announce View Panel */		
-		function editAnnouncePanel (){
-			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );				
-			if( announcePlaceHolder.modifyAllowed ){						
-				var template = kendo.template($('#announcement-edit-template').html());
-				$("#announce-view").html( template(announcePlaceHolder) );	
-				kendo.bind($("#announce-view"), announcePlaceHolder );			
-				if(!$("#announce-body-editor").data("kendoEditor") ){
-					$("#announce-body-editor").kendoEditor({
+		function createEditor( renderTo ){
+			if(!renderTo.data("kendoEditor") ){
+					renderTo.kendoEditor({
 						tools : [
 							'bold',
 							'italic',
@@ -638,7 +637,16 @@
 							}
 						}
 					});
-				}				
+				}		
+		}
+		
+		function editAnnouncePanel (){
+			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );				
+			if( announcePlaceHolder.modifyAllowed ){						
+				var template = kendo.template($('#announcement-edit-template').html());
+				$("#announce-view").html( template(announcePlaceHolder) );	
+				kendo.bind($("#announce-view"), announcePlaceHolder );			
+				createEditor($("#announce-body-editor"));		
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
 					if( panel_button.hasClass( 'custom-update') ){
