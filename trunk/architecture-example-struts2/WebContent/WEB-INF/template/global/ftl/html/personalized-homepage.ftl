@@ -1158,6 +1158,10 @@
         	border-width: 0px;
         }
 
+		.k-editor {
+			height: 500px;
+		}
+		
 		.k-editor-inline {
 			margin: 0;
 			#padding: 21px 21px 11px;
