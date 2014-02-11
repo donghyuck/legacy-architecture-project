@@ -268,7 +268,7 @@
 		</div>			
 		
 		
-		<div class="overlay overlay-hugeinc">
+		<div class="overlay overlay-hugeinc hide">
 			<button type="button" class="overlay-close">Close</button>
 			<nav>
 				<ul>
