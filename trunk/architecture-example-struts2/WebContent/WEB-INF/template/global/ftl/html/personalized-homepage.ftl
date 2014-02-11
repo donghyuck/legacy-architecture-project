@@ -506,13 +506,13 @@
 						
 						
 						// editer ..
+						/**
 						var newAnnounce = new Announce();
 						var template = kendo.template($('#announcement-edit-template').html());
 						$("#announce-creator").html( template(newAnnounce) );
 						kendo.bind($("#announce-creator"), newAnnounce );			
 						createEditor($("#announce-creator .editor"));		
-						
-						
+						*/						
 						
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
