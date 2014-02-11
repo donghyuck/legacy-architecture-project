@@ -1351,8 +1351,7 @@
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 공지 & 이벤트 추가</button>		
 												</div>		
-												<div class="blank-top-5" ></div>
-												<div id="announce-grid" ></div>
+												<div id="announce-grid" class="blank-top-5" ></div>
 											</section>											
 										</div>
 										<!-- start social tab-content -->		
