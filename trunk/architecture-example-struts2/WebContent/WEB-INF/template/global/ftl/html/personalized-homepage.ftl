@@ -1319,16 +1319,15 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
-											<section class="side1">
+											<section class="side1 hide">
+
+											</section>
+											<section class="side2">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 공지 & 이벤트 추가</button>		
 												</div>		
 												<div class="blank-top-5" ></div>
 												<div id="announce-grid" ></div>
-											</section>
-											<section class="side2 hide">
-											
-											
 											</section>											
 										</div>
 										<!-- start social tab-content -->		
