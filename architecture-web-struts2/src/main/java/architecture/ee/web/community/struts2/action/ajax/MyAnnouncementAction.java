@@ -134,9 +134,8 @@ return 0;
 	
 	public String update() throws Exception{
 		
-		if( this.isGuest() )
-			throw new UnAuthorizedException("no permission.");
-		
+		if( isGuest() )
+			throw new UnAuthorizedException("no permission.");		
 		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
 		
 		if( announceId == null){
@@ -166,12 +165,13 @@ return 0;
 		}		
 		
 		//log.debug(targetAnnounce);
-		
-		announceManager.updateAnnounce(targetAnnounce);		
-		
+		if(targetAnnounce.getAnnounceId() > 0 ){
+			announceManager.updateAnnounce(targetAnnounce);		
+		}else{
+			announceManager.addAnnounce(targetAnnounce);		
+		}		
 		return success();
-	}
-	
+	}	
 	
 	public String delete() throws Exception{				
 		announceManager.deleteAnnounce(announceId);				
