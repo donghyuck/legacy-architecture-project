@@ -1343,7 +1343,7 @@
 										<div class="tab-pane" id="my-notice">
 											<section class="side2 hide">
 												<div class="btn-group">			
-													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>
+													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp;  목록보기</button>
 												</div>
 												<div id="announce-creator" class="blank-top-15" ></div>
 											</section>
