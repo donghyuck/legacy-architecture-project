@@ -1,7 +1,7 @@
 		<!-- START MENU -->	
 		<#if action.getMenuComponent("USER_MENU") ?? >
 		<#assign menu = action.getMenuComponent("USER_MENU") />			
-				<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 					<div class="container">
 					<#if action.user.company ?? >
 					<div class="navbar-header">					
