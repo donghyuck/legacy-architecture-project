@@ -506,9 +506,32 @@
 								var template = kendo.template($('#announcement-edit-template').html());
 								$("#announce-creator").html( template(announcePlaceHolder) );
 								kendo.bind($("#announce-creator"), announcePlaceHolder );			
-								createEditor($("#announce-creator .editor"));								
+								createEditor($("#announce-creator .editor"));									
+								
+								$("#announce-creator .btn-group button").each(function( index ) { 
+									var control_button = $(this);								
+									var control_button_icon = control_button.find("i");				
+									if (control_button_icon.hasClass("fa-plus")){									
+										control_button.click( function(e){								
+											if (control_button_icon.hasClass("fa-check")){
+												var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );
+												alert( kendo.stringify( announcePlaceHolder )  );
+												$.ajax({
+													dataType : "json",
+													type : 'POST',
+													url : '${request.contextPath}/community/update-announce.do?output=json',
+													data : { announceId: 0, item: kendo.stringify( announcePlaceHolder ) },
+													success : function( response ){		
+														$('#announce-grid').data('kendoGrid').dataSource.read();	
+													},
+													error:handleKendoAjaxError
+												});	
+											}				
+										});	
+									}	
+								});				
 							}
-												
+																			
 							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
 								$("#my-notice .side2").removeClass("hide");
 								kendo.fx($("#my-notice .side2")).expand("horizontal").stop().play();
@@ -520,20 +543,7 @@
 								kendo.fx($("#my-notice .side1")).expand("horizontal").stop().play();
 							});
 						});								
-					}else if (control_button_icon.hasClass("fa-check")){
-						var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );
-						alert( kendo.stringify( announcePlaceHolder )  );
-						$.ajax({
-							dataType : "json",
-							type : 'POST',
-							url : '${request.contextPath}/community/update-announce.do?output=json',
-							data : { announceId: 0, item: kendo.stringify( announcePlaceHolder ) },
-							success : function( response ){		
-								$('#announce-grid').data('kendoGrid').dataSource.read();	
-							},
-							error:handleKendoAjaxError
-						});	
-					}				
+					}
 				});							
 											
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
