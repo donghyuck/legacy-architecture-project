@@ -554,6 +554,7 @@
 		
 		/** Announce View Panel */		
 		function createEditor( renderTo ){
+			alert( kendo.stringify( $("#account-navbar").data("currentUser" ) ) );
 			if(!renderTo.data("kendoEditor") ){
 					renderTo.kendoEditor({
 						tools : [
