@@ -533,19 +533,24 @@
 						tools : [
 							'bold',
 							'italic',
-							'underline',
+							
+							/* 'underline', 
 							'strikethrough',
 							'justifyLeft',
 							'justifyCenter',
 							'justifyRight',
 							'justifyFull',
+							*/
 							'insertUnorderedList',
 							'insertOrderedList',
+							/* 
 							'indent',
-							'outdent',
+							
+							'outdent',*/
 							'createLink',
 							'unlink',
 							'insertImage',
+							/*
 							'subscript',
 							'superscript',
 							'createTable',
@@ -555,12 +560,14 @@
 							'addColumnRight',
 							'deleteRow',
 							'deleteColumn',
-							'viewHtml',
+							*/
+							'viewHtml'
+							/*,
 							'formatting',
 							'fontName',
 							'fontSize',
 							'foreColor',
-							'backColor'
+							'backColor'*/
 						],
 						imageBrowser: {
 							messages: {
