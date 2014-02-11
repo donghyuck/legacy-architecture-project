@@ -497,8 +497,7 @@
 					var control_button = $(this);								
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
-						control_button.click( function(e){		
-						
+						control_button.click( function(e){								
 							// editer ..						
 							if( $( "#announce-creator" ).children().length < 1 ){
 								var newAnnounce = new Announce();
@@ -508,15 +507,15 @@
 								createEditor($("#announce-creator .editor"));								
 							}
 												
-							kendo.fx($("#my-notice .side1")).expand("vertical").reverse().then(function(){
+							kendo.fx($("#my-notice .side1")).fade("in").play().then(function(){
 								$("#my-notice .side2").removeClass("hide");
-								kendo.fx($("#my-notice .side2")).expand("vertical").play();
+								kendo.fx($("#my-notice .side2")).expand("vertical").stop().play();
 							});
 						});						
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
-							kendo.fx($("#my-notice .side2")).expand("vertical").reverse().then(function(){
-								kendo.fx($("#my-notice .side1")).expand("vertical").play();
+							kendo.fx($("#my-notice .side2")).fade("in").play().then(function(){
+								kendo.fx($("#my-notice .side1")).expand("vertical").stop().play();
 							});
 						});								
 					}								
@@ -763,7 +762,6 @@
 							if( social_header_action_icon.hasClass("k-i-maximize") ){
 								social_header_action_icon.removeClass("k-i-maximize");
 								social_header_action_icon.addClass("k-i-minimize");
-							}else{
 								social_header_action_icon.removeClass("k-i-minimize");
 								social_header_action_icon.addClass("k-i-maximize");
 							}
