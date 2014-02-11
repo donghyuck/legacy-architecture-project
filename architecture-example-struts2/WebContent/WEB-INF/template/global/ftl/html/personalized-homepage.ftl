@@ -1158,7 +1158,7 @@
         	border-width: 0px;
         }
 
-		.k-editor {
+		table.k-editor {
 			height: 500px;
 		}
 		
