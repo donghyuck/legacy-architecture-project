@@ -501,14 +501,14 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
-							kendo.fx($("#my-notice .side1")).tile("left", $("#my-notice .side2")).play().then( function(){
+							kendo.fx($("#my-notice .side1")).tile("right", $("#my-notice .side2")).play().then( function(){
 								$("#my-notice .side1").toggleClass("hide");
 								$("#my-notice .side2").toggleClass("hide");
 							});								
 						});
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
-						kendo.fx($("#my-notice .side2")).tile("left", $("#my-notice .side1")).play().then( function(){
+						kendo.fx($("#my-notice .side2")).tile("right", $("#my-notice .side1")).play().then( function(){
 								$("#my-notice .side1").toggleClass("hide");
 								$("#my-notice .side2").toggleClass("hide");
 							});	
