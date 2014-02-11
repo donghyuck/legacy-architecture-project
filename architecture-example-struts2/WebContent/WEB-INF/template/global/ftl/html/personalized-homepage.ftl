@@ -1161,7 +1161,7 @@
 			right : 0px;
 		}
 
-		@media (min-width: @screen-sm-min) {
+		@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
 			#personalized-controls-section.cbp-spmenu-vertical {
 				width: 100%;
 			}			
