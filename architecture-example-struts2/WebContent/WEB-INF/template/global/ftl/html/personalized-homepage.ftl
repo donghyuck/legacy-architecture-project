@@ -1154,7 +1154,7 @@
 		
 		#personalized-controls-section.cbp-spmenu-right {
 			right: -565px;
-			z-index: 1000;
+			z-index: 2000;
 		}
 		
 		#personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
