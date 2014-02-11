@@ -1343,8 +1343,10 @@
 										<div class="tab-pane" id="my-notice">
 											<section class="side2 hide">
 												<div class="btn-group">			
-													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>		
+													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>
 												</div>
+												<div class="blank-top-5" ></div>
+												<div id="announce-creator"></div>													
 											</section>
 											<section class="side1">
 												<div class="btn-group">			
