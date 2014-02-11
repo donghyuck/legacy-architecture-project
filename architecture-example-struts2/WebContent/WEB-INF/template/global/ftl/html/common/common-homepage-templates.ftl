@@ -250,22 +250,22 @@
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-edit-template">		
-<div  class="form">
-	<div class="form-group">
-		<label class="control-label">제목</label>
-		<input type="text" placeholder="Enter name" data-bind="value: subject"  class="form-control" placeholder="제목" />
-	</div>
-	<div class="form-group">
-		<label class="control-label">기간</label>
-		<div class="col-sm-12" >
-		<input data-role="datetimepicker" data-bind="value:startDate"> ~ <input data-role="datetimepicker" data-bind="value:endDate">
-		<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다. </span>
+	<div  class="form">
+		<div class="form-group">
+			<label class="control-label">제목</label>
+			<input type="text" placeholder="제목을 입력하세요." data-bind="value: subject"  class="form-control" placeholder="제목" />
 		</div>
-	</div>
-	<div class="form-group">
-		<textarea class="editor" data-bind='value:body'></textarea>		
-	</div>
-</div>	  
+		<div class="form-group">
+			<label class="control-label">기간</label>
+			<div class="col-sm-12" >
+			<input data-role="datetimepicker" data-bind="value:startDate"> ~ <input data-role="datetimepicker" data-bind="value:endDate">
+			<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다. </span>
+			</div>
+		</div>
+		<div class="form-group">
+			<textarea class="editor" data-bind='value:body'></textarea>		
+		</div>
+	</div>	  
 	<div class="blank-top-5" ></div>				
 		<div class="pull-right">
 			<div class="btn-group">
