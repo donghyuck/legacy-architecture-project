@@ -495,7 +495,20 @@
 						this.select("tr:eq(1)");
 					}
 				});		
-				
+
+				$("#my-notice .btn-group button").each(function( index ) { 
+					var control_button = $(this);								
+					var control_button_icon = control_button.find("i");				
+					if (control_button_icon.hasClass("fa-plus")){
+						control_button.click( function(e){		
+						
+							kendo.fx($("#my-notice .side1")).tile("right", $("#my-notice .side2")).play();
+							//$("#my-notice .side1").toggleClass("hide");										
+							//$("#my-notice .side2").toggleClass("hide");										
+						});
+					}								
+				});							
+											
 				$("#announce-panel .panel-header-actions a").each(function( index ) {
 					var panel_header_action = $(this);		
 					panel_header_action.click(function (e) {
