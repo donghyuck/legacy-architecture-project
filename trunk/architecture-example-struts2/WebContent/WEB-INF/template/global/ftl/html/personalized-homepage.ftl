@@ -1345,8 +1345,7 @@
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>
 												</div>
-												<div class="blank-top-5" ></div>
-												<div id="announce-creator"></div>													
+												<div id="announce-creator" class="blank-top-15" ></div>
 											</section>
 											<section class="side1">
 												<div class="btn-group">			
