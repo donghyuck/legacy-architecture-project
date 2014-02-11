@@ -1216,7 +1216,7 @@
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-right">
-					<li class="navbar-btn">
+					<li class="navbar-btn visible-lg">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
