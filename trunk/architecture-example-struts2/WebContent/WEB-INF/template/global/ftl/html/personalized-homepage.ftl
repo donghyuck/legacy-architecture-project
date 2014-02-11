@@ -1141,23 +1141,25 @@
 			background-color: rgba(91,192,222,0.8)		
 		}
 		
+		
 		#personalized-controls-section{
 			margin-top: 0px;
 			border-left: solid 2px #47a3da;
 			padding : 0px;
 		}
-
-        #personalized-controls-section.cbp-spmenu-vertical {
-        	width: 565px;
-        }
-        #personalized-controls-section.cbp-spmenu-right {
-        	right: -565px;
-        	z-index: 2050;
-        }
-        
-        #personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
-        	right : 0px;
-        }      
+		
+		#personalized-controls-section.cbp-spmenu-vertical {
+			width: 565px;
+		}
+		
+		#personalized-controls-section.cbp-spmenu-right {
+			right: -565px;
+			z-index: 2050;
+		}
+		
+		#personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
+			right : 0px;
+		}
           
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
