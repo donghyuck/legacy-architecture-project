@@ -502,7 +502,7 @@
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){		
 						
-							kendo.fx($("#my-notice .side1")).tile("right", $("#my-notice .side2")).play();
+							kendo.fx($("#my-notice .side1")).tile("left", $("#my-notice .side2")).play();
 							//$("#my-notice .side1").toggleClass("hide");										
 							//$("#my-notice .side2").toggleClass("hide");										
 						});
