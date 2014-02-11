@@ -510,13 +510,6 @@
 							kendo.fx($("#my-notice .side2")).expand("vertical").reverse().then(function(){
 								kendo.fx($("#my-notice .side1")).expand("vertical").play();
 							);
-							
-						/*
-							kendo.fx($("#my-notice .side2")).tile("right", $("#my-notice .side1")).play().then( function(){
-								$("#my-notice .side1").toggleClass("hide");
-								$("#my-notice .side2").toggleClass("hide");
-							});
-							*/	
 						});								
 					}								
 				});							
