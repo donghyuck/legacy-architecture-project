@@ -507,14 +507,14 @@
 								createEditor($("#announce-creator .editor"));								
 							}
 												
-							kendo.fx($("#my-notice .side1")).fade("out").stop().play().then(function(){
+							kendo.fx($("#my-notice .side1")).fade("vertical").duration(700).reverse().then(function(){
 								$("#my-notice .side2").removeClass("hide");
 								kendo.fx($("#my-notice .side2")).expand("vertical").stop().play();
 							});
 						});						
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
-							kendo.fx($("#my-notice .side2")).fade("out").stop().play().then(function(){
+							kendo.fx($("#my-notice .side2")).expand("vertical").duration(700).reverse().then(function(){
 								kendo.fx($("#my-notice .side1")).expand("vertical").stop().play();
 							});
 						});								
