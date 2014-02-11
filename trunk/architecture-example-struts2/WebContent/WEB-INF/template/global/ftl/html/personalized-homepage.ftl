@@ -507,29 +507,29 @@
 								$("#announce-creator").html( template(announcePlaceHolder) );
 								kendo.bind($("#announce-creator"), announcePlaceHolder );			
 								createEditor($("#announce-creator .editor"));									
-								
-								$("#announce-creator .btn-group button").each(function( index ) { 
-									var control_button = $(this);								
-									var control_button_icon = control_button.find("i");				
-									if (control_button_icon.hasClass("fa-plus")){									
-										control_button.click( function(e){								
-											if (control_button_icon.hasClass("fa-check")){
-												var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );
-												alert( kendo.stringify( announcePlaceHolder )  );
-												$.ajax({
+
+								$("#announce-creator div button").each(function( index ) {			
+									var panel_button = $(this);			
+									if( panel_button.hasClass( 'custom-update') ){
+										panel_button.click(function (e) { 
+											e.preventDefault();					
+											var data = $("#announce-creator").data( "announcePlaceHolder" );				
+											alert( kendo.stringify( data ) );
+											/*
+											$.ajax({
 													dataType : "json",
 													type : 'POST',
 													url : '${request.contextPath}/community/update-announce.do?output=json',
-													data : { announceId: 0, item: kendo.stringify( announcePlaceHolder ) },
+													data : { announceId: data.announceId, item: kendo.stringify( data ) },
 													success : function( response ){		
 														$('#announce-grid').data('kendoGrid').dataSource.read();	
 													},
 													error:handleKendoAjaxError
-												});	
-											}				
-										});	
-									}	
-								});				
+											});	
+											*/
+										} );
+									}			
+								} );									
 							}
 																			
 							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
@@ -673,8 +673,7 @@
 			if( announcePlaceHolder.modifyAllowed ){						
 				var template = kendo.template($('#announcement-edit-template').html());
 				$("#announce-view").html( template(announcePlaceHolder) );	
-				kendo.bind($("#announce-view"), announcePlaceHolder );			
-				
+				kendo.bind($("#announce-view"), announcePlaceHolder );		
 				createEditor($("#announce-panel .editor"));		
 				$("#announce-view div button").each(function( index ) {			
 					var panel_button = $(this);			
