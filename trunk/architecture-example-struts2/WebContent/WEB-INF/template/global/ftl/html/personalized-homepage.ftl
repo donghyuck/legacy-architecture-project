@@ -1160,7 +1160,16 @@
 		#personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
 			right : 0px;
 		}
-          
+
+		@media (min-width: @screen-sm-min) {
+			#personalized-controls-section.cbp-spmenu-vertical {
+				width: 100%;
+			}			
+			#personalized-controls-section.cbp-spmenu-right {
+				right: 100%;
+			}		
+		} 
+		
         .cbp-spmenu-vertical header {
         	1px solid #258ecd;
         	margin : 0px;
