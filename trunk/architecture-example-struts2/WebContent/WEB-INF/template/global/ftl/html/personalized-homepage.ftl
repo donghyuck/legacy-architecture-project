@@ -503,13 +503,13 @@
 						control_button.click( function(e){								
 							kendo.fx($("#my-notice .side1")).expand("vertical").reverse().then(function(){
 								kendo.fx($("#my-notice .side2")).expand("vertical").play();
-							);
+							});
 						});
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
 							kendo.fx($("#my-notice .side2")).expand("vertical").reverse().then(function(){
 								kendo.fx($("#my-notice .side1")).expand("vertical").play();
-							);
+							});
 						});								
 					}								
 				});							
