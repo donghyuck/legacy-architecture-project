@@ -18,6 +18,7 @@ package architecture.ee.web.community.struts2.action.ajax;
 import java.util.List;
 import java.util.Map;
 
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.DateUtils;
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceManager;
@@ -99,7 +100,12 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	}
 	
 	public Announce getTargetAnnounce() throws AnnounceNotFoundException{
-		return announceManager.getAnnounce(announceId);
+		
+		if( announceId > 0 ){
+			return announceManager.getAnnounce(announceId);
+		}else{
+			return announceManager.createAnnounce(getUser());
+		}		
 	}
 	
 	/**
@@ -127,7 +133,10 @@ return 0;
 	}
 	
 	public String update() throws Exception{
-			
+		
+		if( this.isGuest() )
+			throw new UnAuthorizedException("no permission.");
+		
 		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
 		
 		if( announceId == null){
@@ -141,16 +150,15 @@ return 0;
 		String endDateString = (String)map.get("endDate");
 		
 		log.debug( "startDateString:" + startDateString );
-		log.debug( "endDateString:" + endDateString );
+		log.debug( "endDateString:" + endDateString );		
 		
-		Announce targetAnnounce = getTargetAnnounce();
+		Announce targetAnnounce = getTargetAnnounce();		
 		targetAnnounce.setSubject(subject);
-		targetAnnounce.setBody(body);
-		try {
-			
+		targetAnnounce.setBody(body);		
+		
+		try {			
 			targetAnnounce.setStartDate( DateUtils.parseISODate(startDateString) );
-		} catch (Exception ie) {
-		}
+		} catch (Exception ie) { }
 				
 		try {
 			targetAnnounce.setEndDate(DateUtils.parseISODate(endDateString));
