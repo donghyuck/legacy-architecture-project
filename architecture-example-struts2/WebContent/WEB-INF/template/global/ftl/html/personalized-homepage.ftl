@@ -501,8 +501,8 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
+							kendo.fx($("#my-notice .side1")).expand("vertical").reverse();
 							
-							$("#my-notice .side1")).expand("vertical").reverse();
 							/*
 							kendo.fx($("#my-notice .side1")).tile("right", $("#my-notice .side2")).play().then( function(){
 								$("#my-notice .side1").toggleClass("hide");
