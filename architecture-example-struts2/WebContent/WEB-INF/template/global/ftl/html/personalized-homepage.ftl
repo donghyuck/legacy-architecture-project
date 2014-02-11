@@ -501,6 +501,9 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
+							
+							$("#my-notice .side1")).expand("vertical").reverse();
+							
 							kendo.fx($("#my-notice .side1")).tile("right", $("#my-notice .side2")).play().then( function(){
 								$("#my-notice .side1").toggleClass("hide");
 								$("#my-notice .side2").toggleClass("hide");
@@ -1326,12 +1329,12 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
-											<section class="side1 hide">
+											<section class="side2 hide">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>		
 												</div>
 											</section>
-											<section class="side2">
+											<section class="side1">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 공지 & 이벤트 추가</button>		
 												</div>		
