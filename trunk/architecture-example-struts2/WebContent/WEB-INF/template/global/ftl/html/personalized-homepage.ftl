@@ -1273,7 +1273,7 @@
 			display:none;
 		}
 		
-		overlay-hugeinc.open{
+		.overlay-hugeinc.open{
 			display:block;
 		}
 		
