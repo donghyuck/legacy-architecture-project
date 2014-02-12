@@ -41,16 +41,8 @@
 						success : function(response){
 							window.opener.location.reload(true);
 							window.close();	
-						},
-						fail : function(response){
-							alert( "eeee" );
-							window.close();	
-						},
-						error : function(){
-							window.close();
 						}
-					}); 	
-											
+					}); 												
 				}				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
