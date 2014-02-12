@@ -1272,6 +1272,7 @@
 
 		.overlay-hugeinc {
 			display:none;
+			position: relative;
 		}
 		
 		.overlay-hugeinc.open{
