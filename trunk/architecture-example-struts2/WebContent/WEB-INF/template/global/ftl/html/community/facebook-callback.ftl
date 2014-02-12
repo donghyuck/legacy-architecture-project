@@ -17,13 +17,12 @@
 			
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >
-				
+				var onetimeCode = "${action.oneTimeSecureCode}";
 				if(typeof window.opener.handleCallbackResult != "undefined"){
 					// 로그인 처리 수행을 부모 창에서 수행....
-					var onetime = "${action.oneTimeSecureCode}" ;
 					common.api.signin({
 						url : "${request.contextPath}/community/facebook-callback.do?output=json",
-						onetime:  "${action.oneTimeSecureCode}",
+						onetime:  onetimeCode,
 						success : function(response){
 							alert( kendo.stringify( response ) ) ;
 						},
@@ -38,15 +37,20 @@
 					// 기타
 					common.api.signin({
 						url : "${request.contextPath}/community/facebook-callback.do?output=json",
-						onetime:  "${action.oneTimeSecureCode}",
+						onetime:  onetimeCode,
 						success : function(response){
 							window.opener.location.reload(true);
+							window.close();	
 						},
 						fail : function(response){
-							
+							alert( "eeee" );
+							window.close();	
+						},
+						error : function(){
+							window.close();
 						}
 					}); 	
-					window.close();							
+											
 				}				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
