@@ -1245,7 +1245,7 @@
 			background : #5bc0de; /* transparent;        	*/
 			height: 90px;        	
 		}
-
+/*
 		.overlay{		
 			-webkit-transition: all 0.3s;
 			-moz-transition: all 0.3s;
@@ -1257,9 +1257,8 @@
 			height: 100%;
 			z-index: 2000;
 			background: rgba(0,0,0,0.7);		
-			/*dim the background*/
 		}
-
+*/
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
 			width:100%;
 		}
