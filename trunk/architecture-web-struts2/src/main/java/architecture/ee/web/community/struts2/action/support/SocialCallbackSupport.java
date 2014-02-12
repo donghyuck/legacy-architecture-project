@@ -16,8 +16,12 @@
 package architecture.ee.web.community.struts2.action.support;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
+
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,8 +44,39 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	private String accessSecret;	
 	private String accessToken;
 	private UserManager userManager;
+	private Cache socialStreamsCache;
+	private String onetime ;
 	
 	
+	
+		/**
+	 * @return onetime
+	 */
+	public String getOnetime() {
+		return onetime;
+	}
+	
+	/**
+	 * @param onetime 설정할 onetime
+	 */
+	public void setOnetime(String onetime) {
+		this.onetime = onetime;
+	}
+
+	/**
+	 * @return socialStreamsCache
+	 */
+	public Cache getSocialStreamsCache() {
+		return socialStreamsCache;
+	}
+
+	/**
+	 * @param socialStreamsCache 설정할 socialStreamsCache
+	 */
+	public void setSocialStreamsCache(Cache socialStreamsCache) {
+		this.socialStreamsCache = socialStreamsCache;
+	}
+
 	/**
 	 * @return userManager
 	 */
@@ -161,15 +196,28 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		}
 	} 
 	
-	public boolean signIn() {
-		
+	public boolean signIn() {		
 		User userToUse = findUser();
 		log.debug("try ... single sign on ............" + userToUse.getUserId());
 		if( userToUse != null ){			
 			createSecurityContext(userToUse);
 			return true;
 		}
-		return false;
-		
+		return false;		
 	}
+	
+	public Object getOneTimeSecureObject(){
+		Object obj = socialStreamsCache.get( "onetime-" + onetime);
+		if( obj != null ){
+			return ((Element)obj).getValue();
+		}
+		return null;
+	}
+	
+	public String getOneTimeSecureCode(){
+		String uuid = UUID.randomUUID().toString();
+		socialStreamsCache.put(new Element( "onetime-" + uuid, getUserProfile()));		
+		return uuid;
+	}
+	
 }
