@@ -3,9 +3,8 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {};
-	common.apis = {};
-	
-	common.apis.getTargetCompany =  function (url, options){
+	common.api = {};	
+	common.api.getTargetCompany =  function (url, options){
 		if (typeof url === "object") {
 	        options = url;
 	        url = undefined;
@@ -28,12 +27,27 @@
 			dataType : "json"
 		});	
 	};				
-})(jQuery);
-
-;(function($, undefined) {
-	var common = window.common = window.common || {};	
-	common.api = {};
 	
-
+	common.api.signin = function ( options ){		
+		if (typeof url === "object") {
+			options = url;
+			url = undefined;
+		}
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url ,
+			data: { onetime : options.onetime },
+			success : function(response){
+				if( response.error ){ 												
+					options.fail(response) ;
+				} else {					
+					options.success(response) ;					
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	};
 	
 })(jQuery);
