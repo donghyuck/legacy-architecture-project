@@ -498,7 +498,7 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
-							// editer ..																
+							// editer start .....																
 							if( $( "#announce-creator" ).children().length < 1 ){
 								$("#announce-creator").data( "announcePlaceHolder" , new Announce() );	
 								var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );	
@@ -512,7 +512,13 @@
 										panel_button.click(function (e) { 
 											e.preventDefault();					
 											var data = $("#announce-creator").data( "announcePlaceHolder" );		
-											$.ajax({
+											
+											alert( data.startDate );
+											alert) data.endDate );
+											alert( data.subject );
+											alert( data.body );
+											
+											/*$.ajax({
 												dataType : "json",
 												type : 'POST',
 												url : '${request.contextPath}/community/update-announce.do?output=json',
@@ -522,7 +528,8 @@
 													$("#my-notice .btn-group button").first().click();
 												},
 												error:handleKendoAjaxError
-											});											
+											});
+											*/											
 										} );
 									}			
 								} );									
