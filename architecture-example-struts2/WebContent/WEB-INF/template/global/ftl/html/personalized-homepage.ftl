@@ -513,10 +513,10 @@
 											e.preventDefault();					
 											var data = $("#announce-creator").data( "announcePlaceHolder" );		
 											
-											alert( data.startDate );
-											alert) data.endDate );
-											alert( data.subject );
-											alert( data.body );
+											alert( ">" +  data.startDate );
+											alert( ">" +  data.endDate );
+											alert( ">" +  data.subject );
+											alert( ">" +  data.body );
 											
 											/*$.ajax({
 												dataType : "json",
