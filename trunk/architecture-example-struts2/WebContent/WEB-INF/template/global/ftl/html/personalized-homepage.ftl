@@ -47,19 +47,21 @@
 				var slide_effect = kendo.fx($(".overlay")).fadeIn();
 				
 				$("#personalized-controls-menu").on( "click" , function(e){					
-					$('body').toggleClass('noscroll');			
+					
 					if( $('#personalized-controls-section').hasClass("hide") )
 						$('#personalized-controls-section').removeClass("hide");									
 					
 					$('.overlay').toggleClass('hide');				
+					$('body').toggleClass('noscroll');
 						
 					slide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});					
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){
-					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					$('body').toggleClass('noscroll');			
+					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
+					
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
 						$('.overlay').toggleClass('hide');
