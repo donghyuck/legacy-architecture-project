@@ -499,9 +499,10 @@
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
 							// editer ..		
-							$("#announce-creator").data( "announcePlaceHolder" , new Announce() );					
+							$("#announce-creator").data( "announcePlaceHolder" , new Announce() );				
+								
 							if( $( "#announce-creator" ).children().length < 1 ){
-								$("#announce-creator").data( "announcePlaceHolder" , announcePlaceHolder );	
+								$("#announce-creator").data( "announcePlaceHolder" );	
 								var template = kendo.template($('#announcement-edit-template').html());
 								$("#announce-creator").html( template(announcePlaceHolder) );
 								kendo.bind($("#announce-creator"), announcePlaceHolder );			
