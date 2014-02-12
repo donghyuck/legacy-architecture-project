@@ -504,7 +504,8 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
-							// editer start .....																
+							// editer start .....							
+																	
 							if( $( "#announce-creator" ).children().length < 1 ){
 								$("#announce-creator").data( "announcePlaceHolder" , new Announce() );	
 								var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );	
@@ -517,17 +518,14 @@
 									if( panel_button.hasClass( 'custom-update') ){
 										panel_button.click(function (e) { 
 											e.preventDefault();					
-											var data = $("#announce-creator").data( "announcePlaceHolder" );		
-											
+											var data = $("#announce-creator").data( "announcePlaceHolder" );												
 											var hasError = false;
 											if( data.subject == null || data.subject == '' ){
 												hasError = true;
-											}
-											
+											}											
 											if( data.body == null || data.body == '' ){
 												hasError = true;
-											}
-											
+											}											
 											if( hasError ) {
 												$("#announce-creator .form-group").addClass("has-error");
 											}
@@ -547,6 +545,7 @@
 									}			
 								} );									
 							}else{
+								$("#announce-creator .form-group").removeClass("has-error");
 								$("#announce-creator").data( "announcePlaceHolder" ).reset();	
 							}																			
 							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
