@@ -48,7 +48,7 @@
 					});
 				}	
 				</#if>					
-				window.close();				
+				//window.close();				
 			<#else>					
 			
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
