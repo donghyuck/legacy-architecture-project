@@ -23,7 +23,13 @@
 					var onetime = "${action.oneTimeSecureCode}" ;
 					common.api.signin({
 						url : "${request.contextPath}/community/facebook-callback.do?output=json",
-						onetime:  "${action.oneTimeSecureCode}"
+						onetime:  "${action.oneTimeSecureCode}",
+						success : function(response){
+							alert( kendo.stringify( response ) ) ;
+						},
+						fail : function(response){
+							alert( kendo.stringify( response ) ) ;
+						}
 					}); 			
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
 					// 회원가입 : 이미 연결이 존재함. 이사이트에서 보여줌.
