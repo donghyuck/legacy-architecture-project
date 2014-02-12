@@ -63,7 +63,7 @@
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
 						$('.overlay').toggleClass('hide');
-						$('body').toggleClass('noscroll');						
+						//$('body').toggleClass('noscroll');						
 						});
 					}, 100);					
 				});
