@@ -46,9 +46,9 @@
 							
 	
 				var slide_effect = kendo.fx($(".overlay")).fadeIn();
+				var flip_effect = kendo.fx("#container").flipHorizontal($("#library"), $("#store")).duration(1000),
 				
-				$("#personalized-controls-menu").on( "click" , function(e){					
-					
+				$("#personalized-controls-menu").on( "click" , function(e){						
 					$('body').toggleClass('modal-open');		
 					
 					if( $('#personalized-controls-section').hasClass("hide") )
@@ -58,7 +58,6 @@
 					
 					slide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-						//$('body').toggleClass('noscroll');
 					});				
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){						
@@ -67,15 +66,13 @@
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
 						$('.overlay').toggleClass('hide');
-						//$('body').toggleClass('noscroll');						
 						});
 					}, 100);					
 				});
 				
 				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
 				
-				$('#personalized-area').waypoint(function(direction){
-					//alert('Basic example callback triggered.' + direction );					
+				$('#personalized-area').waypoint(function(direction){				
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');
 						 $('.personalized-navbar').toggleClass('up');			
@@ -153,21 +150,6 @@
 						}
 					}
 				});	
-				
-				/**
-				$("#panel-available‎-source :button.btn").on("click", function(e){						
-					var panel_source = $(e.currentTarget);					
-					
-					kendo.fx(panel_source).transfer($("#panel-transfer-target"))
-						.duration(700)
-						.play()
-						.then(function(){					 	
-					 		$("#panel-transfer-target").html( panel_source.children(":first").html() );
-					 		createPanel();
-					 	//});					 
-					 });
-				});
-				*/
 				
 				// 4. CONTENT 	
 				
@@ -551,10 +533,13 @@
 								$("#announce-creator .form-group").removeClass("has-error");
 								$("#announce-creator").data( "announcePlaceHolder" ).reset();	
 							}																			
+							
+							kendo.fx("#my-notice").flipHorizontal($("#my-notice .side1"), $("#my-notice .side2")).duration(1000).play();
+							/**
 							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
 								$("#my-notice .side2").removeClass("hide");
 								kendo.fx($("#my-notice .side2")).expand("horizontal").stop().play();
-							});
+							});**/
 						});						
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
