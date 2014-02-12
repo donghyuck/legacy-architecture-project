@@ -532,18 +532,27 @@
 								$("#announce-creator").data( "announcePlaceHolder" ).reset();	
 							}																			
 							
-							kendo.fx("#my-notice").flipHorizontal($("#my-notice .side1"), $("#my-notice .side2")).duration(1000).play();
+							
+							$("#my-notice .side1").toogleClass("open");
+							$("#my-notice .side2").toogleClass("open");
+							
+							
 							/**
+							kendo.fx("#my-notice").flipHorizontal($("#my-notice .side1"), $("#my-notice .side2")).duration(1000).play();
 							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
 								$("#my-notice .side2").removeClass("hide");
 								kendo.fx($("#my-notice .side2")).expand("horizontal").stop().play();
-							});**/
+							});
+							**/
 						});						
 					}else if (control_button_icon.hasClass("fa-th-list")){
 						control_button.click( function(e){			
-							kendo.fx($("#my-notice .side2")).expand("horizontal").reverse().then(function(){
-								kendo.fx($("#my-notice .side1")).expand("horizontal").stop().play();
-							});
+							//kendo.fx($("#my-notice .side2")).expand("horizontal").reverse().then(function(){
+							//	kendo.fx($("#my-notice .side1")).expand("horizontal").stop().play();
+							//});
+							
+							$("#my-notice .side2").toogleClass("open");
+							$("#my-notice .side1").toogleClass("open");
 						});								
 					}
 				});							
@@ -1259,6 +1268,16 @@
 			background: rgba(0,0,0,0.7);		
 		}
 */
+
+		.overlay-hugeinc {
+			display:none;
+		}
+		
+		overlay-hugeinc.open{
+			display:block;
+		}
+		
+		
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
 			width:100%;
 		}
@@ -1365,13 +1384,13 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
-											<section class="side2 hide">
+											<section class="side2 overlay overlay-hugeinc">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp;  목록보기</button>
 												</div>
 												<div id="announce-creator" class="blank-top-15" ></div>
 											</section>
-											<section class="side1">
+											<section class="side1 overlay overlay-hugeinc open">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 공지 & 이벤트 추가</button>		
 												</div>		
