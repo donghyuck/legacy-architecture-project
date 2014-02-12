@@ -55,12 +55,11 @@
 					
 					slide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-						$('body').toggleClass('noscroll');
+						//$('body').toggleClass('noscroll');
 					});				
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){						
-					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-					
+					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');					
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
 						$('.overlay').toggleClass('hide');
