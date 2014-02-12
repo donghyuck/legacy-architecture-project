@@ -266,7 +266,8 @@
 			<textarea class="editor" data-bind='value:body'></textarea>		
 		</div>
 	</div>	  
-	<div class="blank-top-5" ></div>				
+	<div class="blank-top-5" >			
+		<div class="status"></div>	
 		<div class="pull-right">
 			<div class="btn-group">
 			<button type="button" class="btn btn-primary custom-update" ><i class="fa fa-check"></i> 저장</button>
@@ -277,7 +278,8 @@
 			
 			# } #
 			</div>
-	</div>
+		</div>
+	</div>	
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-template">
