@@ -45,14 +45,15 @@
 				});											
 							
 	
-				var slide_effect = kendo.fx($(".overlay")).fadeIn();				
+				var slide_effect = kendo.fx($("body div.overlay")).fadeIn();
+								
 				$("#personalized-controls-menu").on( "click" , function(e){						
 					$('body').toggleClass('modal-open');		
 					
 					if( $('#personalized-controls-section').hasClass("hide") )
 						$('#personalized-controls-section').removeClass("hide");	
 						
-					$('.overlay').toggleClass('hide');		
+					$('body div.overlay').toggleClass('hide');		
 					
 					slide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
@@ -63,7 +64,7 @@
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');					
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
-						$('.overlay').toggleClass('hide');
+						$('body div.overlay').toggleClass('hide');
 						});
 					}, 100);					
 				});
