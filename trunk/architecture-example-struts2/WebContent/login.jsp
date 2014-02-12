@@ -5,7 +5,6 @@
 <title>로그인</title>
 <%
 	User user = SecurityHelper.getUser();
-	out.println(user.getName());
 	Company company = user.getCompany();
 %>
 <script type="text/javascript">
