@@ -13,16 +13,20 @@
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {				
+			
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >
+				
 				if(typeof window.opener.handleCallbackResult != "undefined"){
-					// do login
-					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});							
+					// 로그인 처리 수행...
+					var onetime = "${action.oneTimeSecureCode}" ;
+					 			
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
-					
+					// 회원가입 : 이미 연결이 존재함. 이사이트에서 보여줌.
 					window.opener.signupCallbackResult("facebook", null);
 				}else{
-					window.opener.location.reload(${action.signIn()?string("true","false")});
+					// 기타
+					
 				}				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
@@ -46,6 +50,7 @@
 				</#if>					
 				window.close();				
 			<#else>					
+			
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
 					
@@ -80,7 +85,7 @@
 					if(typeof window.opener.handleSocialCallbackResult != "undefined"){
 						window.opener.handleSocialCallbackResult(success);							
 					}	
-					window.close();
+					// window.close();
 				}					
 			</#if>				
 			}	
