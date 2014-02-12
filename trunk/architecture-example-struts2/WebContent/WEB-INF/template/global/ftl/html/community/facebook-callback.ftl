@@ -9,8 +9,7 @@
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
-			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			'${request.contextPath}/js/pdfobject/pdfobject.js',
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {				
