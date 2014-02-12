@@ -513,11 +513,18 @@
 											e.preventDefault();					
 											var data = $("#announce-creator").data( "announcePlaceHolder" );		
 											
-											alert( ">" +  data.startDate );
-											alert( ">" +  data.endDate );
-											alert( ">" +  data.subject );
-											alert( ">" +  data.body );
+											var hasError = false;
+											if( data.subject == null || data.subject == '' ){
+												hasError = true;
+											}
 											
+											if( data.body == null || data.body == '' ){
+												hasError = true;
+											}
+											
+											if( hasError ) {
+												$("#announce-creator .form-group").addClass("has-error");
+											}
 											/*$.ajax({
 												dataType : "json",
 												type : 'POST',
