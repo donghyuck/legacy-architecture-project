@@ -52,10 +52,10 @@
 						$('#personalized-controls-section').removeClass("hide");	
 						
 					$('.overlay').toggleClass('hide');		
-					s
+					
 					lide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-						//$('body').toggleClass('noscroll');
+						$('body').toggleClass('noscroll');
 					});				
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){						
