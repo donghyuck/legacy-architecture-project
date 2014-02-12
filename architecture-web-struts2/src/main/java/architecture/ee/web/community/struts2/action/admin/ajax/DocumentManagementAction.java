@@ -30,8 +30,6 @@ public class DocumentManagementAction extends FrameworkActionSupport {
 	
 	private String template = DEFAULT_TEMPLATE ;
 	
-	
-	
 	/**
 	 * @return template
 	 */

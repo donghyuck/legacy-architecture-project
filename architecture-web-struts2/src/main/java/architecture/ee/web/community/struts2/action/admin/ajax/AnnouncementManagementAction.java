@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.struts2.action.ajax;
+package architecture.ee.web.community.struts2.action.admin.ajax;
 
 import java.util.List;
 import java.util.Map;
@@ -26,10 +26,8 @@ import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class MyAnnouncementAction extends FrameworkActionSupport {
+public class AnnouncementManagementAction extends FrameworkActionSupport {
 
-	//private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-	
 	private Long objectId = -1L; 
 	
 	private Integer objectType = 0;
@@ -41,7 +39,7 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	/**
 	 * 
 	 */
-	public MyAnnouncementAction() {
+	public AnnouncementManagementAction() {
 	}
 
 	/**
@@ -104,7 +102,7 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 		if( announceId > 0 ){
 			return announceManager.getAnnounce(announceId);
 		}else{
-			return announceManager.createAnnounce(getUser(), getCompany().getModelObjectType() , getCompany().getCompanyId() );
+			return announceManager.createAnnounce(getUser(), objectType, objectId );
 		}		
 	}
 	
@@ -116,7 +114,8 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	}
 
 	public int getTotalAnnounceCount(){
-return 0;
+		
+		return 0;
 	}
 
 	/**
@@ -132,7 +131,7 @@ return 0;
 		return success();
 	}
 	
-	public String update() throws Exception{
+	public String saveAnnounce() throws Exception{
 		
 		if( isGuest() )
 			throw new UnAuthorizedException("no permission.");		
@@ -177,5 +176,5 @@ return 0;
 		announceManager.deleteAnnounce(announceId);				
 		return success();
 	}
-	
+
 }
