@@ -137,8 +137,8 @@ var Announce = kendo.data.Model.define( {
     	this.set("announceId", -1 );
     	this.set("subject", "" );
     	this.set("body", "" );
-    	this.set("startDate", null );
-    	this.set("endDate", null );
+    	this.set("startDate", new Date() );
+    	this.set("endDate", new Date() );
     }
 });
 
