@@ -53,7 +53,7 @@
 						
 					$('.overlay').toggleClass('hide');		
 					
-					lide_effect.play().then(function(){							
+					slide_effect.play().then(function(){							
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 						$('body').toggleClass('noscroll');
 					});				
