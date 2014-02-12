@@ -11,6 +11,7 @@
 			'${request.contextPath}/js/kendo/kendo.web.js',
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.min.js',
+			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {				
 			
@@ -20,7 +21,10 @@
 				if(typeof window.opener.handleCallbackResult != "undefined"){
 					// 로그인 처리 수행...
 					var onetime = "${action.oneTimeSecureCode}" ;
-					 			
+					common.api.signin({
+						url : "${request.contextPath}/community/facebook-callback.do?output=json",
+						onetime:  "${action.oneTimeSecureCode}"
+					}); 			
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
 					// 회원가입 : 이미 연결이 존재함. 이사이트에서 보여줌.
 					window.opener.signupCallbackResult("facebook", null);
