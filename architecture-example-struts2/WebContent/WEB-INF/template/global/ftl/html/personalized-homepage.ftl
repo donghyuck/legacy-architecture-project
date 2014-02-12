@@ -515,9 +515,7 @@
 												var template = kendo.template('<div class="alert alert-danger">#:message#</div>');
 												$("#announce-creator .status").html(template({message: "모든 항목을 입력하여 주세요. " }));
 											}
-
-											
-											
+																						
 											/*$.ajax({
 												dataType : "json",
 												type : 'POST',
@@ -537,29 +535,14 @@
 								$("#announce-creator .form-group").removeClass("has-error");
 								$("#announce-creator .status").html("");
 								$("#announce-creator").data( "announcePlaceHolder" ).reset();	
-							}																			
-							
-							
-							$("#my-notice .side1").toggleClass("open");
-							$("#my-notice .side2").toggleClass("open");
-							
-							
-							/**
-							kendo.fx("#my-notice").flipHorizontal($("#my-notice .side1"), $("#my-notice .side2")).duration(1000).play();
-							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
-								$("#my-notice .side2").removeClass("hide");
-								kendo.fx($("#my-notice .side2")).expand("horizontal").stop().play();
-							});
-							**/
+							}
+							$("#my-notice .side1").toggleClass("hide");
+							$("#my-notice .side2").toggleClass("hide");
 						});						
 					}else if (control_button_icon.hasClass("fa-th-list")){
-						control_button.click( function(e){			
-							//kendo.fx($("#my-notice .side2")).expand("horizontal").reverse().then(function(){
-							//	kendo.fx($("#my-notice .side1")).expand("horizontal").stop().play();
-							//});
-							
-							$("#my-notice .side2").toggleClass("open");
-							$("#my-notice .side1").toggleClass("open");
+						control_button.click( function(e){										
+							$("#my-notice .side2").toggleClass("hide");
+							$("#my-notice .side1").toggleClass("hide");
 						});								
 					}
 				});							
@@ -1392,13 +1375,13 @@
 									</ul>								
 									<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">	
 										<div class="tab-pane" id="my-notice">
-											<section class="side2 overlay-hugeinc">
+											<section class="side2 hide">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp;  목록보기</button>
 												</div>
 												<div id="announce-creator" class="blank-top-15" ></div>
 											</section>
-											<section class="side1 overlay-hugeinc open">
+											<section class="side1">
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-plus"></i> &nbsp; 공지 & 이벤트 추가</button>		
 												</div>		
@@ -1458,7 +1441,7 @@
 										</section>
 										<section class="side2 hide">
 											<div class="btn-group">			
-												<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>		
+												<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp; 목록보기</button>		
 											</div>									
 											<div class="blank-top-5 "></div>
 											<#if !action.user.anonymous >									
@@ -1485,7 +1468,7 @@
 										</section>							
 										<section class="side2 hide">
 											<div class="btn-group">			
-												<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i></button>			
+												<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp; 목록보기</button>			
 											</div>									
 											<div id="my-photo-upload">
 												<#if !action.user.anonymous >		
