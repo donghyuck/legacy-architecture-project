@@ -1178,7 +1178,7 @@
         }
 
 		table.k-editor {
-			height: 500px;
+			height: 400px;
 		}
 		
 		.k-editor-inline {
@@ -1221,8 +1221,7 @@
 			z-index: 1000;
 			overflow: hidden;
 			background-color: rgba(91,192,222,0.8)		
-		}
-		
+		}		
 		
 		#personalized-controls-section{
 			margin-top: 0px;
@@ -1254,14 +1253,14 @@
 			}		
 		} 
 		
-        .cbp-spmenu-vertical header {
-        	1px solid #258ecd;
-        	margin : 0px;
-        	padding : 5px;
-        	color : #000000;
-        	background : #5bc0de; /* transparent;        	*/
-        	height: 90px;        	
-        }
+		.cbp-spmenu-vertical header {
+			1px solid #258ecd;
+			margin : 0px;
+			padding : 5px;
+			color : #000000;
+			background : #5bc0de; /* transparent;        	*/
+			height: 90px;        	
+		}
 
 		.overlay{		
 			-webkit-transition: all 0.3s;
