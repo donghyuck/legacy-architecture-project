@@ -512,7 +512,12 @@
 											}											
 											if( hasError ) {
 												$("#announce-creator .form-group").addClass("has-error");
+												var template = kendo.template('<div class="alert alert-danger">#:message#</div>');
+												$("#announce-creator .status").html(template({message: "모든 항목을 입력하여 주세요. " }));
 											}
+
+											
+											
 											/*$.ajax({
 												dataType : "json",
 												type : 'POST',
@@ -530,6 +535,7 @@
 								} );									
 							}else{
 								$("#announce-creator .form-group").removeClass("has-error");
+								$("#announce-creator .status").html("");
 								$("#announce-creator").data( "announcePlaceHolder" ).reset();	
 							}																			
 							
