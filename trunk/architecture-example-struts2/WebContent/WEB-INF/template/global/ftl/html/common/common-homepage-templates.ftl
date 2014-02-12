@@ -266,20 +266,14 @@
 			<textarea class="editor" data-bind='value:body'></textarea>		
 		</div>
 	</div>	  
-	<div class="blank-top-5" >			
-		<div class="status"></div>	
-		<div class="pull-right">
-			<div class="btn-group">
-			<button type="button" class="btn btn-primary custom-update" ><i class="fa fa-check"></i> 저장</button>
-			# if( announceId > 0 ){#
-			
-			<button type="button" class="btn btn-primary custom-cancle" >취소</button>
-			<button type="button" class="btn btn-danger custom-delete" ><i class="fa fa-trash-o"></i> 삭제</button>			
-			
-			# } #
-			</div>
-		</div>
-	</div>	
+	<div class="status"></div>	
+	<div class="btn-group">
+		<button type="button" class="btn btn-primary custom-update" ><i class="fa fa-check"></i> 저장</button>
+		# if( announceId > 0 ){#
+		<button type="button" class="btn btn-primary custom-cancle" >취소</button>
+		<button type="button" class="btn btn-danger custom-delete" ><i class="fa fa-trash-o"></i> 삭제</button>			
+		# } #
+	</div>
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-template">
