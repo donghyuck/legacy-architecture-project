@@ -19,7 +19,7 @@
 				<#if action.findUser()?exists >
 				
 				if(typeof window.opener.handleCallbackResult != "undefined"){
-					// 로그인 처리 수행...
+					// 로그인 처리 수행을 부모 창에서 수행....
 					var onetime = "${action.oneTimeSecureCode}" ;
 					common.api.signin({
 						url : "${request.contextPath}/community/facebook-callback.do?output=json",
@@ -36,7 +36,17 @@
 					window.opener.signupCallbackResult("facebook", null);
 				}else{
 					// 기타
-					
+					common.api.signin({
+						url : "${request.contextPath}/community/facebook-callback.do?output=json",
+						onetime:  "${action.oneTimeSecureCode}",
+						success : function(response){
+							window.opener.location.reload(true);
+						},
+						fail : function(response){
+							
+						}
+					}); 	
+					window.close();							
 				}				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
