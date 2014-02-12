@@ -15,8 +15,8 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
 			'${request.contextPath}/js/common/common.cbpBGSlideshow.min.js',
 			'${request.contextPath}/js/jquery.imagesloaded/imagesloaded.min.js',
-			'${request.contextPath}/js/common/modernizr.custom.js',			
-			'${request.contextPath}/js/common/common.models.min.js',
+			'${request.contextPath}/js/common/common.modernizr.custom.js',
+			'${request.contextPath}/js/common/common.classie.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 			
