@@ -45,9 +45,7 @@
 				});											
 							
 	
-				var slide_effect = kendo.fx($(".overlay")).fadeIn();
-				var flip_effect = kendo.fx("#container").flipHorizontal($("#library"), $("#store")).duration(1000),
-				
+				var slide_effect = kendo.fx($(".overlay")).fadeIn();				
 				$("#personalized-controls-menu").on( "click" , function(e){						
 					$('body').toggleClass('modal-open');		
 					
