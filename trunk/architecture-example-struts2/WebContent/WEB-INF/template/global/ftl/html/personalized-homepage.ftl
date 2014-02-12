@@ -499,9 +499,8 @@
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
 							// editer ..		
-											
+							$("#announce-creator").data( "announcePlaceHolder" , new Announce() );					
 							if( $( "#announce-creator" ).children().length < 1 ){
-								var announcePlaceHolder = new Announce() ;
 								$("#announce-creator").data( "announcePlaceHolder" , announcePlaceHolder );	
 								var template = kendo.template($('#announcement-edit-template').html());
 								$("#announce-creator").html( template(announcePlaceHolder) );
@@ -522,6 +521,7 @@
 													data : { announceId: data.announceId, item: kendo.stringify( data ) },
 													success : function( response ){		
 														$('#announce-grid').data('kendoGrid').dataSource.read();	
+														$("#my-notice .btn-group button").first().click();
 													},
 													error:handleKendoAjaxError
 											});	
