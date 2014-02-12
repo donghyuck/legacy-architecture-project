@@ -498,9 +498,8 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
-							// editer ..		
-							
-								
+							// editer ..	
+							alert("fdasf") ;									
 							if( $( "#announce-creator" ).children().length < 1 ){
 								$("#announce-creator").data( "announcePlaceHolder" , new Announce() );	
 								var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );	
