@@ -502,7 +502,7 @@
 							$("#announce-creator").data( "announcePlaceHolder" , new Announce() );				
 								
 							if( $( "#announce-creator" ).children().length < 1 ){
-								$("#announce-creator").data( "announcePlaceHolder" );	
+								var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );	
 								var template = kendo.template($('#announcement-edit-template').html());
 								$("#announce-creator").html( template(announcePlaceHolder) );
 								kendo.bind($("#announce-creator"), announcePlaceHolder );			
@@ -513,8 +513,7 @@
 									if( panel_button.hasClass( 'custom-update') ){
 										panel_button.click(function (e) { 
 											e.preventDefault();					
-											var data = $("#announce-creator").data( "announcePlaceHolder" );				
-											
+											var data = $("#announce-creator").data( "announcePlaceHolder" );		
 											$.ajax({
 													dataType : "json",
 													type : 'POST',
