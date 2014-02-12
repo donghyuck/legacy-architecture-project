@@ -48,6 +48,8 @@
 				
 				$("#personalized-controls-menu").on( "click" , function(e){					
 					
+					$('body').toggleClass('modal-open');		
+					
 					if( $('#personalized-controls-section').hasClass("hide") )
 						$('#personalized-controls-section').removeClass("hide");	
 						
@@ -59,6 +61,7 @@
 					});				
 				});
 				$("#personalized-controls-menu-close").on( "click" , function(e){						
+					$('body').toggleClass('modal-open');		
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');					
 					setTimeout(function() {
 						slide_effect.reverse().then(function(){
