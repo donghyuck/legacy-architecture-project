@@ -498,8 +498,7 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
-							// editer ..	
-							alert("fdasf") ;									
+							// editer ..																
 							if( $( "#announce-creator" ).children().length < 1 ){
 								$("#announce-creator").data( "announcePlaceHolder" , new Announce() );	
 								var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );	
@@ -514,24 +513,22 @@
 											e.preventDefault();					
 											var data = $("#announce-creator").data( "announcePlaceHolder" );		
 											$.ajax({
-													dataType : "json",
-													type : 'POST',
-													url : '${request.contextPath}/community/update-announce.do?output=json',
-													data : { announceId: data.announceId, item: kendo.stringify( data ) },
-													success : function( response ){		
-														$('#announce-grid').data('kendoGrid').dataSource.read();	
-														$("#my-notice .btn-group button").first().click();
-													},
-													error:handleKendoAjaxError
-											});	
-										
+												dataType : "json",
+												type : 'POST',
+												url : '${request.contextPath}/community/update-announce.do?output=json',
+												data : { announceId: data.announceId, item: kendo.stringify( data ) },
+												success : function( response ){		
+													$('#announce-grid').data('kendoGrid').dataSource.read();	
+													$("#my-notice .btn-group button").first().click();
+												},
+												error:handleKendoAjaxError
+											});											
 										} );
 									}			
 								} );									
 							}else{
 								$("#announce-creator").data( "announcePlaceHolder" ).reset();	
-							}
-																			
+							}																			
 							kendo.fx($("#my-notice .side1")).expand("horizontal").reverse().then(function(){
 								$("#my-notice .side2").removeClass("hide");
 								kendo.fx($("#my-notice .side2")).expand("horizontal").stop().play();
