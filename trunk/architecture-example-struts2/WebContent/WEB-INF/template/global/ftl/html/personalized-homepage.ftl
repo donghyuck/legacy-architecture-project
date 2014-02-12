@@ -1234,6 +1234,8 @@
 		
 		#personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
 			right : 0px;
+			overflow-x:hidden;
+			overflow-y:auto;			
 		}
 
 		@media (max-width: 768px ) {
