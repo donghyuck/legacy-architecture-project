@@ -132,6 +132,13 @@ var Announce = kendo.data.Model.define( {
     	endDate: { type: "date" ,  editable: true},
         modifiedDate: { type: "date"},
         creationDate: { type: "date" }
+    },
+    reset: function (){
+    	this.set("announceId", -1 );
+    	this.set("subject", "" );
+    	this.set("body", "" );
+    	this.set("startDate", null );
+    	this.set("endDate", null );
     }
 });
 
