@@ -281,9 +281,9 @@
 					</form>	
 					<form class="form-horizontal" role="form">
 						  <div class="form-group">
-						    <label for="inputPassword" class="col-sm-2 control-label">메일주소</label>
+						    <label for="inputEmail" class="col-sm-2 control-label">메일주소</label>
 						    <div class="col-sm-10">
-						      <input type="email" class="form-control" id="inputPassword" placeholder="메일">
+						      <input type="email" class="form-control" id="inputEmail" placeholder="메일">
 						    </div>
 						  </div>
 					</form>		
