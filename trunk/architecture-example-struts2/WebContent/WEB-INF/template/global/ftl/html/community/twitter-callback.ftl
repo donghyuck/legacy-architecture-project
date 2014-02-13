@@ -34,19 +34,20 @@
 				<#else>		
 				// user does not exist !	
 				var template = kendo.template($('#account-not-found-alert-template').html());
-				$("#status").html(template({media: "twitter"}));
+				$("#status").html(template({media: "twitter"}));				
 				$("#status button.custom-close-window").click(function(e){
 					window.close();	
+				});				
+				$("#status button.custom-signup").click(function(e){				
+					if(typeof window.opener.handleCallbackResult == "function"){		
+						window.opener.handleCallbackResult("twitter", onetimeCode , false);
+						window.close();							
+					}else{
+						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+						window.close();
+					}	
 				});
-				
-				if(typeof window.opener.handleCallbackResult == "function"){		
-					window.opener.handleCallbackResult("twitter", onetimeCode , false);
-					//window.close();							
-				}else{
-					//window.close();
-				}
 				</#if>					
-				
 			<#else>				
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
