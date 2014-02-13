@@ -32,7 +32,7 @@
 			});
 			
 			$('#login-window').modal({show:true, backdrop:true});			
-		//	$('#signup-modal').modal({show:false, backdrop:true});
+			$('#signup-modal').modal({show:false, backdrop:true});
 			
 			
 			$('#login-window').on('hidden.bs.modal', function () {
@@ -177,10 +177,7 @@
 		-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
 		transition: transform 0.4s, opacity 0.4s;
 	}
-	
-	#signup-modal.modal  {
-		display: block;
-	}
+
 	
 </style>
 </head>
