@@ -1,7 +1,7 @@
 var SignupForm = kendo.data.Model.define({
 	id : "id",
 	fields: {
-        "media": {
+		"media": {
             type: "string",
             defaultValue : "internal"
         },
@@ -43,7 +43,10 @@ var SignupForm = kendo.data.Model.define({
         },
         "password2": {
             type: "string"
-        }        
+        },
+        "onetime": {
+            type: "string"
+        }
 	}, 
 	isExternal : function (  ) {
 		return this.get("media") !== "internal" ;		
