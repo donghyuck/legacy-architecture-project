@@ -20,7 +20,9 @@
 			
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >
+				
 				var onetimeCode = "${action.oneTimeSecureCode}";
+				
 				if(typeof window.opener.handleCallbackResult != "undefined"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode);
 					window.close();						
@@ -35,6 +37,7 @@
 						}
 					}); 												
 				}				
+				
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){					
 					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
