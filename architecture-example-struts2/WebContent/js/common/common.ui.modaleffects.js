@@ -11,8 +11,7 @@
 			[].slice.call(document.querySelectorAll('.md-trigger')).forEach(
 					function(el, i) {
 
-						var modal = document.querySelector('#'
-								+ el.getAttribute('data-modal')), close = modal
+						var modal = document.querySelector('#'+ el.getAttribute('data-modal')), close = modal
 								.querySelector('.md-close');
 
 						function removeModal(hasPerspective) {
