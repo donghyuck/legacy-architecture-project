@@ -271,19 +271,15 @@
 				<h3>회원가입</h3>
 				<div>
 					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
-						<h3>회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-danger">이용약관</a> 과  
-						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-danger"> 개인정보 취급방침</a> 에 동의해 주세요.</h3>
+						<h4>
+						회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-danger btn-lg">이용약관</a> 과  
+						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-danger btn-lg"> 개인정보 취급방침</a> 에 동의해 주세요.
+						</h4>
 						<ul>
 							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
 						</ul>
 					</form>	
 					<form class="form-horizontal" role="form">
-						  <div class="form-group">
-						    <label class="col-sm-2 control-label">메일 주소</label>
-						    <div class="col-sm-10">
-						      <p class="form-control-static">email@example.com</p>
-						    </div>
-						  </div>
 						  <div class="form-group">
 						    <label for="inputPassword" class="col-sm-2 control-label">메일주소</label>
 						    <div class="col-sm-10">
