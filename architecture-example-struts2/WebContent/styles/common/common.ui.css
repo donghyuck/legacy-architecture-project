@@ -229,6 +229,20 @@ header .personalized-controls-trigger {
 
 /** color */
 
+
+body.color1 {
+	background: #3498db;			
+}
+
+body.color2 {
+	background: #52be7f;	
+}
+
+body.color3 {
+	background: #e74c3c;	
+}
+
+
 section.sky , div.sky {
 	background-color: #5bc0de;		
 }
