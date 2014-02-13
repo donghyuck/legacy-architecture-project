@@ -26,10 +26,9 @@
 		complete: function() {        	              		              		  
 
 			cbpBGSlideshow.init();
-
 			$("#login").click( function() {           		    	
 				doLogin();
-			});          
+			});
 			
 			$('#login-window').modal({show:true, backdrop:false});
 			
@@ -64,8 +63,11 @@
 						error:handleKendoAjaxError												
 					});	
 				});								
-			});		
+			});
 			
+			
+			// fullscreen overlay !!
+			$( 'button.overlay-close' ).click( toggleOverlay() );			
 		}		
 	}]);
 	
@@ -84,9 +86,29 @@
 				alert( media +  "인증에 실패하였습니다." );
 			}
 		}else{
+			if( code != null && code != ''  ){			
+				toggleOverlay();		
+				alert( media +  "회원 가입 실시 ..." );
+			}else{
+				$("form[name='fm1']")[0].reset();               	                            
+				$("form[name='fm1']").attr("action", "signup.do").submit();			
+			}
+				
 			
-
-			alert( media +  "회원 가입 실시 ..." );
+		}
+	}
+	
+	function toggleOverlay(){
+		var overlay = $('.overlay');
+		if( overlay.hasClass("open") ){
+			overlay.removeClass("open");
+			overlay.addClass("close");	
+			overlay.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(ev){
+				overlay.removeClass("close");
+			});
+		}
+		else if ( !overlay.hasClass("close") ){
+			overlay.addClass("open");	
 		}
 	}
 	
