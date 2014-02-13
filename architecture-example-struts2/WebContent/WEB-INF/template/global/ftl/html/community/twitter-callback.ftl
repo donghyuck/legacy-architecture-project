@@ -17,7 +17,7 @@
 			<#if action.user.anonymous >
 				<#if action.findUser()?exists >						
 				var onetimeCode = "${action.oneTimeSecureCode}";								
-				if(typeof window.opener.handleCallbackResult == "function"){		
+				if(typeof window.opener.handleCallbackResult != "undefined"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode , true);
 					window.close();						
 				}else{
@@ -33,7 +33,7 @@
 				}
 				<#else>		
 				// user does not exist !	
-				var template = $("#account-not-found-alert-template").html();       
+				var template = kendo.template($('#account-not-found-alert-template').html());
 				$("#status").html(template({media: "twitter"}));
 				$("#status button.custom-close-window").click(function(e){
 					window.close();	
@@ -95,10 +95,6 @@
 				</div>
 			</div>
 		</div>		
-	</body>
-	
-	
-
-
-	
+		<#include "/html/common/common-popup-templates.ftl" >		
+	</body>	
 </html>
