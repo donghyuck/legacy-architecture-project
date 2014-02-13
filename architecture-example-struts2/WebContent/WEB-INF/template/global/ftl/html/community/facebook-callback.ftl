@@ -33,14 +33,20 @@
 					}); 												
 				}								
 				<#else>			
-				if(typeof window.opener.handleCallbackResult == "function"){		
-					window.opener.handleCallbackResult("facebook", onetimeCode , false);
-					window.close();							
-				}else{
-					window.close();
-				}
-				</#if>					
-				//window.close();				
+				var template = kendo.template($('#account-not-found-alert-template').html());
+				$("#status").html(template({media: "facebook"}));				
+				$("#status button.custom-close-window").click(function(e){
+					window.close();	
+				});				
+				$("#status button.custom-signup").click(function(e){				
+					if(typeof window.opener.handleCallbackResult == "function"){		
+						window.opener.handleCallbackResult("facebook", onetimeCode , false);
+						window.close();							
+					}else{
+						window.close();
+					}	
+				});
+				</#if>		
 			<#else>					
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
@@ -89,9 +95,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">						
-					
+					<div id="status"></div>
 				</div>
 			</div>
 		</div>		
+		<#include "/html/common/common-popup-templates.ftl" >		
 	</body>
 </html>
