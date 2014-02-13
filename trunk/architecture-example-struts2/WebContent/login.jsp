@@ -93,7 +93,8 @@
 		}else{
 			if( code != null && code != ''  ){			
 				$('#login-window').modal('hide')
-				toggleOverlay();
+				//toggleOverlay();
+				$('#signup-modal').modal('show')
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
 				$("form[name='fm1']").attr("action", "signup.do").submit();			
