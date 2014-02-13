@@ -43,6 +43,7 @@
 						window.opener.handleCallbackResult("facebook", onetimeCode , false);
 						window.close();							
 					}else{
+						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 						window.close();
 					}	
 				});
