@@ -101,7 +101,9 @@
 	}
 	
 	function toggleOverlay(){
+		
 		var overlay = $('.overlay');
+		overlay.toggleClass('hide');
 		if( overlay.hasClass("open") ){
 			overlay.removeClass("open");
 			overlay.addClass("close");	
@@ -262,7 +264,7 @@
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
-	<div class="overlay overlay-scale">
+	<div class="overlay overlay-scale hide">
 		<button type="button" class="overlay-close">Close</button>
 		<div class="md-modal md-effect-1 md-show" >
 			<div class="md-content">
