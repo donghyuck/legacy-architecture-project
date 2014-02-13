@@ -33,7 +33,9 @@
 				doLogin();
 			});
 			
-			$('#login-window').modal({show:true, backdrop:false});
+			$('#login-window').modal({show:true, backdrop:false});			
+			$('#signup-modal').modal({show:false, backdrop:false});
+			
 			
 			$('#login-window').on('hidden.bs.modal', function () {
 				//$("form[name='fm1']")[0].reset();               	   
