@@ -173,7 +173,7 @@
 		transition: transform 0.4s, opacity 0.4s;
 	}
 	
-	#signup-window.modal  {
+	#signup-modal.modal  {
 		display: block;
 	}
 	
