@@ -21,7 +21,7 @@
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >
 				var onetimeCode = "${action.oneTimeSecureCode}";
-				if(typeof window.opener.handleCallbackResult != "undefined"){			
+				if(typeof window.opener.signinCallbackResult != "undefined"){			
 					window.opener.signinCallbackResult("facebook", onetimeCode);
 					window.close();						
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
