@@ -69,17 +69,23 @@
 	}]);
 	
 	function handleCallbackResult( media, code, exists ){		
-		if( exists &&  code != null && code != ''  ){						
-			var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
-			common.api.signin({
-				url : onetime_url,
-				onetime:  code,
-				success : function(response){
-					$("form[name='fm1']").attr("action", "/main.do").submit();
-				}
-			}); 
+		if(exists){
+			if( code != null && code != ''  ){						
+				var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
+				common.api.signin({
+					url : onetime_url,
+					onetime:  code,
+					success : function(response){
+						$("form[name='fm1']").attr("action", "/main.do").submit();
+					}
+				}); 
+			}else{
+				alert( media +  "인증에 실패하였습니다." );
+			}
 		}else{
-			alert( media +  "인증에 실패하였습니다." );
+			
+
+			alert( media +  "회원 가입 실시 ..." );
 		}
 	}
 	
