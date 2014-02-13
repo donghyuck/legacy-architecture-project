@@ -113,6 +113,13 @@
 		}]);
 		
 		
+		var loader = document.getElementById('la-anim-6-loader')
+				, border = document.getElementById('la-anim-6-border')
+				, α = 0
+				, π = Math.PI
+				, t = 15				
+				, tdraw;	
+					
 		function PieDraw() {
 			α++;
 			α %= 360;
@@ -142,7 +149,7 @@
 			</div>
 		</div>
 		
-		<div class="md-modal md-effect-1 md-show" id="modal-1">
+		<div class="md-modal md-effect-1" id="modal-1">
 			<div class="md-content">
 				<h3>Modal Dialog</h3>
 				<div>
