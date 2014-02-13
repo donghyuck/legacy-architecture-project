@@ -113,7 +113,15 @@
 		</script>		
 	</head>
 	<body class="color3">
-			<div class="md-modal md-effect-1" id="modal-1">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-12">
+					<button class="md-trigger btn btn-alert" data-modal="modal-1">Fade in &amp; Scale</button>
+				</div>
+			</div>
+		</div>
+		
+		<div class="md-modal md-effect-1" id="modal-1">
 			<div class="md-content">
 				<h3>Modal Dialog</h3>
 				<div>
@@ -123,12 +131,10 @@
 						<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
 						<li><strong>Close:</strong> click on the button below to close the modal.</li>
 					</ul>
-					<button class="md-close">Close me!</button>
+					<button class="md-close">확인</button>
 				</div>
 			</div>
 		</div>
-	
-	<button class="md-trigger btn btn-alert" data-modal="modal-1">Fade in &amp; Scale</button>
-	<div class="md-overlay"></div><!-- the overlay element -->	
+		<div class="md-overlay"></div><!-- the overlay element -->	
 	</body>
 </html>
