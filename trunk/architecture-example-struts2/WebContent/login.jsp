@@ -304,25 +304,7 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-				
-		<div class="container hide">
-			<div class="row blank-top-45">
-				<div class="col-lg-12">
-					<div class="alert alert-warning">
-					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
-						<h3>회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-danger">이용약관</a> 과  
-						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-danger"> 개인정보 취급방침</a> 에 동의해 주세요.</h3>
-						<ul>
-							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
-						</ul>
-					</form>				
-					</div>
-				</div>			
-			</div>
-			<div class="row">
-				
-			</div>			
-		</div>
+		
 	</div>
 		
 	<script type="text/x-kendo-template" id="alert-template">
