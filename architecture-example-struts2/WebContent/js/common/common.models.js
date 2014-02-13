@@ -41,12 +41,13 @@ var SignupForm = kendo.data.Model.define({
         "password1": {
             type: "string"
         },
-        "v": {
+        "password2": {
             type: "string"
         },
         "onetime": {
             type: "string"
-        }
+        },
+        "agree":  { type:"boolean", defaultVlaue: false }
 	}, 
 	isExternal : function (  ) {
 		return this.get("media") !== "internal" ;		
@@ -66,6 +67,7 @@ var SignupForm = kendo.data.Model.define({
     	this.set("password1", null );
     	this.set("password2", null );
     	this.set("onetime", null )
+    	this.set("agree", false )
     }
 });
 
