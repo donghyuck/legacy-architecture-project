@@ -69,10 +69,12 @@
 			});
 			
 			
-			// fullscreen overlay !!
+			// fullscreen overlay !
+			/*
 			$( 'button.overlay-close' ).click( function(e){ 				
 				toggleOverlay();
-			} );			
+			} );
+			*/
 		}		
 	}]);
 	
@@ -304,14 +306,14 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-		
+		<!-- 
 	<div class="overlay overlay-scale">
 		<button type="button" class="overlay-close">Close</button>
 		
 		
 		
 	</div>
-		
+		 -->
 	<script type="text/x-kendo-template" id="alert-template">
 	<div class="alert alert-danger">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
