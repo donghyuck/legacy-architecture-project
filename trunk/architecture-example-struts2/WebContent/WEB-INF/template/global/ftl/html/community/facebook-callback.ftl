@@ -113,47 +113,14 @@
 		}]);
 		
 		
-		var loader = document.getElementById('la-anim-6-loader')
-				, border = document.getElementById('la-anim-6-border')
-				, α = 0
-				, π = Math.PI
-				, t = 15				
-				, tdraw;	
-					
-		function PieDraw() {
-			α++;
-			α %= 360;
-			var r = ( α * π / 180 )	, x = Math.sin( r ) * 250	, y = Math.cos( r ) * - 250		, mid = ( α > 180 ) ? 1 : 0	, anim = 'M 0 0 v -250 A 250 250 1 ' 	+ mid + ' 1 ' 	+  x  + ' ' 	+  y  + ' z';
-			loader.setAttribute( 'd', anim );
-			border.setAttribute( 'd', anim );
-			if( α != 0 )
-				tdraw = setTimeout(PieDraw, t); // Redraw
-		}
-
-		function PieReset() {
-			clearTimeout(tdraw);
-			var anim = 'M 0 0 v -250 A 250 250 1 0 1 0 -250 z';
-			loader.setAttribute( 'd', anim );
-			border.setAttribute( 'd', anim );
-		}
-									
 		</script>		
 	</head>
 	<body class="color3">
 		
-		<div class="la-anim-6">
-			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewbox="0 0 500 500">
-			  <path id="la-anim-6-border" transform="translate(250, 250)"/>
-			  <path id="la-anim-6-loader" transform="translate(250, 250) scale(0.9)"/>
-			</svg>
-		</div>
 						
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">
-
-
-						
+				<div class="col-sm-12">						
 					<!--<button class="md-trigger btn btn-danger" data-modal="modal-1">Fade in &amp; Scale</button>-->
 				</div>
 			</div>
