@@ -18,7 +18,7 @@
 				<#if action.findUser()?exists >						
 				var onetimeCode = "${action.oneTimeSecureCode}";								
 				if(typeof window.opener.handleCallbackResult == "function"){		
-					window.opener.handleCallbackResult("twitter", onetimeCode);
+					window.opener.handleCallbackResult("twitter", onetimeCode , true);
 					window.close();						
 				}else{
 					// 기타
@@ -31,7 +31,15 @@
 						}
 					}); 												
 				}
-				<#else>			
+				<#else>		
+				// user does not exist !	
+				if(typeof window.opener.handleCallbackResult == "function"){		
+					window.opener.handleCallbackResult("twitter", onetimeCode , false);
+					window.close();							
+				}else{
+					window.close();
+				}
+				
 				if(typeof window.opener.signupCallbackResult != "undefined"){
 					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
 					window.opener.signupCallbackResult("twitter", {
@@ -44,7 +52,7 @@
 					});
 				}	
 				</#if>					
-				window.close();
+				
 			<#else>				
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
 					// 관리자 모드..
