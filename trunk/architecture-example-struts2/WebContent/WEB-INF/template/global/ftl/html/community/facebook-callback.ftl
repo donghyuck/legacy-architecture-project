@@ -140,16 +140,19 @@
 		</script>		
 	</head>
 	<body class="color3">
+		
+		<div class="la-anim-6">
+			<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewbox="0 0 500 500">
+			  <path id="la-anim-6-border" transform="translate(250, 250)"/>
+			  <path id="la-anim-6-loader" transform="translate(250, 250) scale(0.9)"/>
+			</svg>
+		</div>
+						
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
 
-					<div class="la-anim-6">
-						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="500" height="500" viewbox="0 0 500 500">
-						  <path id="la-anim-6-border" transform="translate(250, 250)"/>
-						  <path id="la-anim-6-loader" transform="translate(250, 250) scale(0.9)"/>
-						</svg>
-					</div>
+
 						
 					<!--<button class="md-trigger btn btn-danger" data-modal="modal-1">Fade in &amp; Scale</button>-->
 				</div>
