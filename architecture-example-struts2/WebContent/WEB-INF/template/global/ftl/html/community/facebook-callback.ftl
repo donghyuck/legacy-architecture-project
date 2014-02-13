@@ -16,7 +16,7 @@
 			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {							
 			
-			<#if( action.getUserProfile()?exists >
+			<#if action.userProfile?exists >
 			var onetimeCode = "${action.oneTimeSecureCode}";												
 			<#else>	
 			var onetimeCode = null;					
