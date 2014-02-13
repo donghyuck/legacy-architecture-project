@@ -10,7 +10,6 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
@@ -78,6 +77,13 @@
 		}]);
 		</script>		
 	</head>
-	<body>
+	<body class="color3">						
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12">						
+					
+				</div>
+			</div>
+		</div>		
 	</body>
 </html>
