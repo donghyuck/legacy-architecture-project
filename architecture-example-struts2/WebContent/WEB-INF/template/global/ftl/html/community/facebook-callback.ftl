@@ -33,24 +33,12 @@
 					}); 												
 				}								
 				<#else>			
-				if(typeof window.opener.signupCallbackResult != "undefined"){					
-					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-					window.opener.signupCallbackResult("facebook", {
-						media: "facebook",
-						id: profile.id,
-						firstName: profile.firstName,
-						lastName: profile.lastName,
-						name : profile.name,
-						email: profile.email,
-						gender : profile.gender,
-						locale : profile.locale,
-						location : profile.location,
-						timezone : profile.timezone,
-						education: profile.education,
-						work : profile.work
-						
-					});
-				}	
+				if(typeof window.opener.handleCallbackResult == "function"){		
+					window.opener.handleCallbackResult("facebook", onetimeCode , false);
+					window.close();							
+				}else{
+					window.close();
+				}
 				</#if>					
 				//window.close();				
 			<#else>					
