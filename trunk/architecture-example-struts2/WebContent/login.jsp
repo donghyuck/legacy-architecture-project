@@ -276,10 +276,18 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">회원가입</h4>
       </div>
       <div class="modal-body">
-        <p>One fine body&hellip;</p>
+					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
+						<h4>
+						회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-danger btn-lg">이용약관</a> 과  
+						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-danger btn-lg"> 개인정보 취급방침</a> 에 동의해 주세요.
+						</h4>
+						<ul>
+							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
+						</ul>
+					</form>	
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -293,15 +301,7 @@
 			<div class="md-content">
 				<h3>회원가입</h3>
 				<div>
-					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
-						<h4>
-						회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-danger btn-lg">이용약관</a> 과  
-						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-danger btn-lg"> 개인정보 취급방침</a> 에 동의해 주세요.
-						</h4>
-						<ul>
-							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
-						</ul>
-					</form>	
+
 					<form class="form-horizontal" role="form">
 						  <div class="form-group">
 						    <label for="inputEmail" class="col-sm-2 control-label">메일주소</label>
