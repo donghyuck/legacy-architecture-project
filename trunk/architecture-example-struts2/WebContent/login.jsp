@@ -267,7 +267,8 @@
 			<div class="row">
 				<div class="col-lg-12">
 					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
-						<h2>회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>content.do?contentId=1" target="_blank">이용약관</a>과  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>content.do?contentId=2" target="_blank">개인정보 취급방침</a>에 동의해 주세요.</h2>
+						<h2>회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank">이용약관</a>과  
+						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2" target="_blank">개인정보 취급방침</a>에 동의해 주세요.</h2>
 						<ul>
 							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
 						</ul>
