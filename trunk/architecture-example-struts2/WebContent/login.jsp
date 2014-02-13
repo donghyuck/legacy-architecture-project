@@ -33,8 +33,8 @@
 				doLogin();
 			});
 			
-			$('#login-window').modal({show:true, backdrop:false});			
-			$('#signup-modal').modal({show:false, backdrop:false});
+			$('#login-window').modal({show:true, backdrop:true});			
+			$('#signup-modal').modal({show:false, backdrop:true});
 			
 			
 			$('#login-window').on('hidden.bs.modal', function () {
