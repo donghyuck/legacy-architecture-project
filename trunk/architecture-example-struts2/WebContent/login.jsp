@@ -170,7 +170,7 @@
 	
 </style>
 </head>
-<body class="bg-gray">
+<body class="color1">
 	<!-- Main Page Content  -->
 
 		<div class="main">
@@ -261,15 +261,24 @@
 
 	<div class="overlay overlay-scale">
 		<button type="button" class="overlay-close">Close</button>
-			<nav>
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Work</a></li>
-					<li><a href="#">Clients</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-		</nav>
+
+
+<form class="form-horizontal" role="form">
+  <div class="form-group">
+    <label class="col-sm-2 control-label">메일 주소</label>
+    <div class="col-sm-10">
+      <p class="form-control-static">email@example.com</p>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inputPassword" class="col-sm-2 control-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+  </div>
+</form>
+
+		
 	</div>
 		
 	<script type="text/x-kendo-template" id="alert-template">
