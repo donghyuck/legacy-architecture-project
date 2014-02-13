@@ -14,9 +14,15 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
+			<#if( action.getUserProfile()?exists >
+			var onetimeCode = "${action.oneTimeSecureCode}";												
+			<#else>	
+			var onetimeCode = null;					
+			</#if>
+				
 			<#if action.user.anonymous >
+					
 				<#if action.findUser()?exists >						
-				var onetimeCode = "${action.oneTimeSecureCode}";								
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode , true);
 					window.close();						

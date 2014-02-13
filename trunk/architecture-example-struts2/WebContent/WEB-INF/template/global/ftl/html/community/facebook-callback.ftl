@@ -15,9 +15,14 @@
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {							
+			
+			<#if( action.getUserProfile()?exists >
+			var onetimeCode = "${action.oneTimeSecureCode}";												
+			<#else>	
+			var onetimeCode = null;					
+			</#if>				
 			<#if action.user.anonymous >			
-				<#if action.findUser()?exists >			
-				var onetimeCode = '${action.oneTimeSecureCode}';				
+				<#if action.findUser()?exists >					
 				if( typeof window.opener.handleCallbackResult == "function"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode);
 					window.close();						
