@@ -40,18 +40,13 @@
 				<#else>			
 				var template = kendo.template($('#account-not-found-alert-template').html());
 				$("#status").html(template({media: "facebook"}));				
-				$("#status button.custom-close-window").click(function(e){
-					window.close();	
-				});				
-				$("#status button.custom-signup").click(function(e){				
-					if(typeof window.opener.handleCallbackResult == "function"){		
+				if(typeof window.opener.handleCallbackResult != "undefined"){		
 						window.opener.handleCallbackResult("facebook", onetimeCode , false);
 						window.close();							
-					}else{
+				}else{
 						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 						window.close();
-					}	
-				});
+				}
 				</#if>		
 			<#else>					
 				if( window.opener.location.href.indexOf("/secure/") > -1  ){
