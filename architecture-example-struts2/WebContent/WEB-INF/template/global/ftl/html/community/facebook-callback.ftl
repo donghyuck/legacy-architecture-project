@@ -21,22 +21,12 @@
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >
 				var onetimeCode = "${action.oneTimeSecureCode}";
-				if(typeof window.opener.handleCallbackResult != "undefined"){
-					// 로그인 처리 수행을 부모 창에서 수행....
-					common.api.signin({
-						url : "${request.contextPath}/community/facebook-callback.do?output=json",
-						onetime:  onetimeCode,
-						success : function(response){
-							//alert( kendo.stringify( response ) ) ;
-						},
-						fail : function(response){
-							//alert( kendo.stringify( response ) ) ;
-						}
-					}); 			
-					
+				if(typeof window.opener.handleCallbackResult != "undefined"){			
+					window.opener.signinCallbackResult("facebook", onetimeCode);
+					window.close();						
 				} else if(typeof window.opener.signupCallbackResult != "undefined"){
-					// 회원가입 : 이미 연결이 존재함. 이사이트에서 보여줌.
-					window.opener.signupCallbackResult("facebook", null);
+					window.opener.signupCallbackResult("facebook", onetimeCode);
+					window.close();	
 				}else{
 					// 기타
 					common.api.signin({
