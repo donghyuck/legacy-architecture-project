@@ -33,6 +33,12 @@
 				}
 				<#else>		
 				// user does not exist !	
+				var template = $("#account-not-found-alert-template").html();       
+				$("#status").html(template({media: "twitter"}));
+				$("#status button.custom-close-window").click(function(e){
+					window.close();	
+				});
+				
 				if(typeof window.opener.handleCallbackResult == "function"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode , false);
 					//window.close();							
@@ -85,9 +91,14 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">						
-					
+					<div id="status"></div>
 				</div>
 			</div>
 		</div>		
 	</body>
+	
+	
+
+
+	
 </html>
