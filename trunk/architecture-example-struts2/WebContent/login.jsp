@@ -264,22 +264,20 @@
 
 	<div class="overlay overlay-scale">
 		<button type="button" class="overlay-close">Close</button>
-
-		<div class="md-modal md-effect-1" id="modal-1">
+		<div class="md-modal md-effect-1 md-show" >
 			<div class="md-content">
-				<h3>Modal Dialog</h3>
+				<h3>회원가입</h3>
 				<div>
-					<p>This is a modal window. You can do the following things with it:</p>
-					<ul>
-						<li><strong>Read:</strong> modal windows will probably tell you something important so don't forget to read what they say.</li>
-						<li><strong>Look:</strong> a modal window enjoys a certain kind of attention; just look at it and appreciate its presence.</li>
-						<li><strong>Close:</strong> click on the button below to close the modal.</li>
-					</ul>
+					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
+						<p>회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank">이용약관</a>과  
+						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2" target="_blank">개인정보 취급방침</a>에 동의해 주세요.</p>
+						<ul>
+							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
+						</ul>
+					</form>	
 				</div>
 			</div>
-		</div>
-
-		
+		</div>		
 		<div class="container">
 			<div class="row blank-top-45">
 				<div class="col-lg-12">
