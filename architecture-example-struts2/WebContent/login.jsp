@@ -89,8 +89,7 @@
 			}
 		}else{
 			if( code != null && code != ''  ){			
-				toggleOverlay();		
-				alert( media +  "회원 가입 실시 ..." );
+				toggleOverlay();
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
 				$("form[name='fm1']").attr("action", "signup.do").submit();			
