@@ -88,6 +88,7 @@
 					url : onetime_url,
 					onetime:  code,
 					success : function(response){
+						$("form[name='fm1']")[0].reset();               	    
 						$("form[name='fm1']").attr("action", "/main.do").submit();
 					}
 				}); 
