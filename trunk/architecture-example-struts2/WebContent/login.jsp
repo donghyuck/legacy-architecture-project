@@ -295,18 +295,15 @@
 							</p>
 							<ul>
 								<li><input id="r1" name="r1" type="radio"  data-bind="checked: agree"><label for="r1" >네, 모두 동의합니다.</label></li>
-							</ul>
-
+							</ul>														
+						</form>
+						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
 							<div class="form-group">
 									<label for="input-email" class="control-label">메일</label>
 									<div class="col-lg-9">
 										<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
 									</div>
-							</div>			
-														
-						</form>
-						<form class="form-horizontal" role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
-										
+							</div>										
 						</form>
 					</div>
 					<div class="modal-footer">
