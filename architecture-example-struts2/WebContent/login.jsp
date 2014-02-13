@@ -263,8 +263,13 @@
 
 	<div class="overlay overlay-scale">
 		<button type="button" class="overlay-close">Close</button>
-
-
+				<form class="ac-custom ac-radio ac-fill" autocomplete="off">
+					<h2>회원가입을 위해서 아래 네이버 이용약관·개인정보 수집 및 이용에 대한 안내를 읽고 동의해 주세요.</h2>
+					<ul>
+						<li><input id="r1" name="r1" type="radio"><label for="r1">이용약관, 개인정보 수집 및 이용, 위치정보 이용약관에 모두 동의합니다.</label></li>
+					</ul>
+				</form>
+				
 <form class="form-horizontal" role="form">
   <div class="form-group">
     <label class="col-sm-2 control-label">메일 주소</label>
