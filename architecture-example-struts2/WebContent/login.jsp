@@ -12,6 +12,7 @@
 		load: [ 
 			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/codedrop/fullscreenOverlay.css',
+			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.modaleffects.css',			
 			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.animatedcheckbox.css',			
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js',
