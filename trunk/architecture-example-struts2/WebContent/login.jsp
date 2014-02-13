@@ -160,6 +160,12 @@
 			//$("#login").kendoAnimate("slideIn:up"); 
 		}		
 	}
+	
+	function isTwitter ( media ){
+		if( media == 'twitter')
+			return true;
+		return false;
+	}
 </script>
 <style scoped="scoped">
 	#login-window .modal-dialog {
@@ -294,7 +300,7 @@
 								<li><input id="r1" name="r1" type="radio"  data-bind="checked: agree"><label for="r1" >네, 모두 동의합니다.</label></li>
 							</ul>
 						</form>
-						<form class="form-horizontal" role="form" method="POST" accept-charset="utf-8" data-bind="visible: media =='twitter' ">	
+						<form class="form-horizontal" role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class: isTwitter(media) ? 'hide' : ''  }}">	
 							<div class="form-group">
 									<label for="input-email" class="col-lg-3 control-label">메일</label>
 									<div class="col-lg-9">
