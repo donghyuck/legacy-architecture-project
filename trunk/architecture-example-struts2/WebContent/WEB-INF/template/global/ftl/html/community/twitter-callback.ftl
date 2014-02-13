@@ -35,22 +35,10 @@
 				// user does not exist !	
 				if(typeof window.opener.handleCallbackResult == "function"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode , false);
-					window.close();							
+					//window.close();							
 				}else{
-					window.close();
+					//window.close();
 				}
-				
-				if(typeof window.opener.signupCallbackResult != "undefined"){
-					var profile = ${ HtmlUtils.objectToJson( action.getUserProfile() ) };
-					window.opener.signupCallbackResult("twitter", {
-						media: "twitter",
-						id: profile.id,
-						username: profile.screenName,
-						name : profile.name,
-						location : profile.location,
-						language: profile.language
-					});
-				}	
 				</#if>					
 				
 			<#else>				
