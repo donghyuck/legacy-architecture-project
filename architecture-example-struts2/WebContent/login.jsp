@@ -279,13 +279,13 @@
 						<h4 class="modal-title">회원가입</h4>
 					</div>
 					<div class="modal-body" style="background-color: #428bca;">
-						<form class="ac-custom ac-radio ac-fill" autocomplete="off">
+						<form class="ac-custom ac-radio ac-fill">
 							<p class="bg-primary">
-							연결되어 있지 않은 회원입니다. 회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info btn-lg">이용약관</a> 과  
-							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info btn-lg"> 개인정보 취급방침</a> 에 동의해 주세요.
+							연결되어 있지 않은 회원입니다. 회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">이용약관</a> 과  
+							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a> 에 동의해 주세요.
 							</p>
 							<ul>
-								<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
+								<li><input id="r1" name="r1" type="radio"><label for="r1" style="color:#ffffff;">네, 모두 동의합니다.</label></li>
 							</ul>
 						</form>
 						<form name="fm2" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">	
