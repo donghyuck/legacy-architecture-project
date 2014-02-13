@@ -17,7 +17,7 @@
 			complete: function() {							
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >			
-				var onetimeCode = "${action.oneTimeSecureCode}";								
+				var onetimeCode = '${action.oneTimeSecureCode}';				
 				if( typeof window.opener.handleCallbackResult == "function"){			
 					//window.opener.handleCallbackResult("facebook", onetimeCode);
 					//window.close();						
