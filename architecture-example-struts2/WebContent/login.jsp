@@ -31,7 +31,7 @@
 				doLogin();
 			});
 			
-			$('#login-window').modal({show:true, backdrop:true});			
+			$('#login-window').modal({show:true, backdrop:false});			
 			$('#signup-modal').modal({show:false, backdrop:true});
 			
 			
