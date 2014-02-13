@@ -33,7 +33,8 @@
 			
 			$('#login-window').modal({show:true, backdrop:false});			
 			$('#signup-modal').modal({show:false, backdrop:true});
-			
+			$('#signup-modal').data("signupPlaceHolder", new SignupForm({}) );
+			kendo.bind($("#signup-modal"), $('#signup-modal').data("signupPlaceHolder") );			
 			
 			$('#login-window').on('hidden.bs.modal', function () {
 				//$("form[name='fm1']")[0].reset();               	   
@@ -70,15 +71,7 @@
 						error:handleKendoAjaxError												
 					});	
 				});								
-			});
-			
-			
-			// fullscreen overlay !
-			/*
-			$( 'button.overlay-close' ).click( function(e){ 				
-				toggleOverlay();
-			} );
-			*/
+			});			
 		}		
 	}]);
 	
@@ -99,8 +92,13 @@
 		}else{
 			if( code != null && code != ''  ){			
 				$('#login-window').modal('hide');
-				//toggleOverlay();
-				$('#signup-modal').modal('show');
+				setTimeout(function(){
+					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
+					signupPlaceHolder.reset();
+					signupPlaceHolder.media = media ;
+					signupPlaceHolder.onetime = code ;
+					$('#signup-modal').modal('show');
+				},300);				
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
 				$("form[name='fm1']").attr("action", "signup.do").submit();			
@@ -288,14 +286,14 @@
 							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a> 에 동의해 주세요.
 							</p>
 							<ul>
-								<li><input id="r1" name="r1" type="radio"><label for="r1" >네, 모두 동의합니다.</label></li>
+								<li><input id="r1" name="r1" type="radio"  data-bind="checked: agree"><label for="r1" >네, 모두 동의합니다.</label></li>
 							</ul>
 						</form>
-						<form name="fm2" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">	
+						<form class="form-horizontal" role="form" method="POST" accept-charset="utf-8" data-bind="visible: media =='twitter' ">	
 							<div class="form-group">
 									<label for="input-email" class="col-lg-3 control-label">메일</label>
 									<div class="col-lg-9">
-										<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일">
+										<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
 									</div>
 							</div>						
 						</form>
