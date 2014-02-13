@@ -112,7 +112,7 @@
 			
 		</script>		
 	</head>
-	<body>
+	<body class="color1">
 <div class="md-modal md-effect-1" id="modal-1">
 			<div class="md-content">
 				<h3>Modal Dialog</h3>
