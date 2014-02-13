@@ -272,32 +272,39 @@
 	<div class="overlay overlay-scale hide">
 		<button type="button" class="overlay-close">Close</button>
 		
-<div id="signup-modal" class="modal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">회원가입</h4>
-      </div>
-      <div class="modal-body">
-					<form class="ac-custom ac-radio ac-fill" autocomplete="off">
-						<h4>
-						회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-danger btn-lg">이용약관</a> 과  
-						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-danger btn-lg"> 개인정보 취급방침</a> 에 동의해 주세요.
-						</h4>
-						<ul>
-							<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
-						</ul>
-					</form>	
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-		
-		
+		<div id="signup-modal" class="modal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">회원가입</h4>
+					</div>
+					<div class="modal-body" style="background-color: #428bca;">
+						<form class="ac-custom ac-radio ac-fill" autocomplete="off">
+							<h4>
+							회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info btn-lg">이용약관</a> 과  
+							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info btn-lg"> 개인정보 취급방침</a> 에 동의해 주세요.
+							</h4>
+							<ul>
+								<li><input id="r1" name="r1" type="radio"><label for="r1">네, 모두 동의합니다.</label></li>
+							</ul>
+						</form>
+						<form name="fm2" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">	
+							<div class="form-group">
+									<label for="input-email" class="col-lg-3 control-label">메일</label>
+									<div class="col-lg-9">
+										<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일">
+									</div>
+							</div>						
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+				
 		<div class="container hide">
 			<div class="row blank-top-45">
 				<div class="col-lg-12">
