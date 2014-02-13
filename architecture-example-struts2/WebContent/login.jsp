@@ -68,8 +68,8 @@
 		}		
 	}]);
 	
-	function handleCallbackResult( media, code ){		
-		if( code != null && code != ''  ){						
+	function handleCallbackResult( media, code, exists ){		
+		if( exists &&  code != null && code != ''  ){						
 			var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
 			common.api.signin({
 				url : onetime_url,
@@ -205,7 +205,7 @@
 					<button type="button" class="btn btn-default" >아이디/비밀번호찾기</button>
 					<a id="signup"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do"  class="btn btn-default">회원가입</a>
 				</div>
-					<button id="login" type="button" class="btn btn-primary">로그인</button>
+					<button id="login" type="button" class="btn btn-info">로그인</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
