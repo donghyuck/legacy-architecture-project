@@ -113,10 +113,10 @@
 		</script>		
 	</head>
 	<body class="color3">
-		<div class="container-fluid">
+		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<button class="md-trigger btn btn-alert" data-modal="modal-1">Fade in &amp; Scale</button>
+					<button class="md-trigger btn btn-danger" data-modal="modal-1">Fade in &amp; Scale</button>
 				</div>
 			</div>
 		</div>
