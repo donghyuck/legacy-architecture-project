@@ -173,9 +173,10 @@
 		transition: transform 0.4s, opacity 0.4s;
 	}
 	
-	#login-window.modal  {
-		display : block;
+	#signup-window.modal  {
+		display: block;
 	}
+	
 </style>
 </head>
 <body class="color1">
