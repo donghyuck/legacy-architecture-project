@@ -288,6 +288,7 @@
 						<h4 class="modal-title"  id="myModalLabel2">회원가입</h4>
 					</div>
 					<div class="modal-body" style="background-color: #428bca;">
+						
 						<form class="ac-custom ac-radio ac-fill">
 							<p class="bg-primary">
 							연결되어 있지 않은 회원입니다. 회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">이용약관</a> 과  
@@ -305,6 +306,7 @@
 									</div>
 							</div>										
 						</form>
+						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
