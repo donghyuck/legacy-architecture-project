@@ -297,22 +297,7 @@
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 		
-		<div class="md-modal md-effect-1 md-show" >
-			<div class="md-content">
-				<h3>회원가입</h3>
-				<div>
-
-					<form class="form-horizontal" role="form">
-						  <div class="form-group">
-						    <label for="inputEmail" class="col-sm-2 control-label">메일주소</label>
-						    <div class="col-sm-10">
-						      <input type="email" class="form-control" id="inputEmail" placeholder="메일">
-						    </div>
-						  </div>
-					</form>		
-				</div>
-			</div>
-		</div>		
+		
 		<div class="container hide">
 			<div class="row blank-top-45">
 				<div class="col-lg-12">
