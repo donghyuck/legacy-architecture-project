@@ -71,7 +71,7 @@
 	function handleCallbackResult( media, code ){
 		if( code != null && code != ''  ){			
 			common.api.signin({
-				url : "${request.contextPath}/community/facebook-callback.do?output=json",
+				url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/facebook-callback.do?output=json",
 				onetime:  code,
 				success : function(response){
 					$("form[name='fm1']").attr("action", "/main.do").submit();
