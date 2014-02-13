@@ -103,7 +103,8 @@
 	function toggleOverlay(){
 		
 		var overlay = $('.overlay');
-		overlay.toggleClass('hide');
+		overlay.removeClass('hide');
+		
 		if( overlay.hasClass("open") ){
 			overlay.removeClass("open");
 			overlay.addClass("close");	
