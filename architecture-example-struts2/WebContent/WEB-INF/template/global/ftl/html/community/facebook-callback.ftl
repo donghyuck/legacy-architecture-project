@@ -5,7 +5,7 @@
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css'
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
@@ -19,8 +19,8 @@
 				<#if action.findUser()?exists >			
 				var onetimeCode = '${action.oneTimeSecureCode}';				
 				if( typeof window.opener.handleCallbackResult == "function"){			
-					//window.opener.handleCallbackResult("facebook", onetimeCode);
-					//window.close();						
+					window.opener.handleCallbackResult("facebook", onetimeCode);
+					window.close();						
 				} else {
 					// 기타
 					common.api.signin({
