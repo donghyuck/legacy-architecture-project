@@ -17,7 +17,7 @@
 			<#if action.user.anonymous >
 				<#if action.findUser()?exists >						
 				var onetimeCode = "${action.oneTimeSecureCode}";								
-				if(typeof window.opener.handleCallbackResult != "undefined"){			
+				if(typeof window.opener.handleCallbackResult == "function"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode);
 					window.close();						
 				}else{
