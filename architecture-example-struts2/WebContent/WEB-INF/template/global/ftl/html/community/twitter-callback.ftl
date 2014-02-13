@@ -15,13 +15,21 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 			<#if action.user.anonymous >
-				<#if action.findUser()?exists >		
-				if(typeof window.opener.handleCallbackResult != "undefined"){
-					window.opener.handleCallbackResult(${action.signIn()?string("true","false")});
-				} else if(typeof window.opener.signupCallbackResult != "undefined"){
-					window.opener.signupCallbackResult("twitter", null);
+				<#if action.findUser()?exists >						
+				var onetimeCode = "${action.oneTimeSecureCode}";								
+				if(typeof window.opener.handleCallbackResult != "undefined"){			
+					window.opener.handleCallbackResult("twitter", onetimeCode);
+					window.close();						
 				}else{
-					window.opener.location.reload(${action.signIn()?string("true","false")});
+					// 기타
+					common.api.signin({
+						url : "${request.contextPath}/community/twitter-callback.do?output=json",
+						onetime:  onetimeCode,
+						success : function(response){
+							window.opener.location.reload(true);
+							window.close();	
+						}
+					}); 												
 				}
 				<#else>			
 				if(typeof window.opener.signupCallbackResult != "undefined"){
