@@ -110,6 +110,7 @@
 			overlay.addClass("close");	
 			overlay.bind('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(ev){
 				overlay.removeClass("close");
+				$('#login-window').modal('show')
 			});
 		}
 		else if ( !overlay.hasClass("close") ){
