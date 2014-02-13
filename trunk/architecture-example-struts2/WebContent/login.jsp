@@ -270,13 +270,11 @@
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
-	<div class="overlay overlay-scale">
-		<button type="button" class="overlay-close">Close</button>
-		
-		<div id="signup-modal" class="modal">
+	<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
 			<div class="modal-dialog modal-lg">
 				<div class="modal-content">
 					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">회원가입</h4>
 					</div>
 					<div class="modal-body" style="background-color: #428bca;">
@@ -304,7 +302,12 @@
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
+	</div><!-- /.modal -->
+		
+	<div class="overlay overlay-scale">
+		<button type="button" class="overlay-close">Close</button>
+		
+		
 		
 	</div>
 		
