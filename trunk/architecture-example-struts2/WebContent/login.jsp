@@ -285,7 +285,7 @@
 							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a> 에 동의해 주세요.
 							</p>
 							<ul>
-								<li><input id="r1" name="r1" type="radio"><label for="r1" style="color:#ffffff;">네, 모두 동의합니다.</label></li>
+								<li><input id="r1" name="r1" type="radio"><label for="r1" >네, 모두 동의합니다.</label></li>
 							</ul>
 						</form>
 						<form name="fm2" class="form-horizontal" role="form" method="POST" accept-charset="utf-8">	
