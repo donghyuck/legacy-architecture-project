@@ -298,11 +298,13 @@
 								<li><input id="r1" name="r1" type="radio"  data-bind="checked: agree"><label for="r1" >네, 모두 동의합니다.</label></li>
 							</ul>														
 						</form>
-						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
-							<div class="form-group col-xs-4">
-									<label for="input-email" class="control-label">메일</label>
-									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
-									<span class="help-block">메일주소를 입력하여 주십시오.</span>
+						<form class="form-horizontal" role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
+							<div class="form-group">
+									<label class="control-label col-sm-3" for="input-email">메일</label>
+									<div class="col-sm-9">
+										<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
+										<span class="help-block">메일주소를 입력하여 주십시오.</span>
+									</div>
 							</div>										
 						</form>
 						
