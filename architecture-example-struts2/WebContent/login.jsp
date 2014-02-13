@@ -68,10 +68,11 @@
 		}		
 	}]);
 	
-	function handleCallbackResult( media, code ){
-		if( code != null && code != ''  ){			
+	function handleCallbackResult( media, code ){		
+		if( code != null && code != ''  ){						
+			var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
 			common.api.signin({
-				url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/facebook-callback.do?output=json",
+				url : onetime_url,
 				onetime:  code,
 				success : function(response){
 					$("form[name='fm1']").attr("action", "/main.do").submit();
