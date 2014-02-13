@@ -303,7 +303,7 @@
 						</div>	
 						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
 							<div class="form-group ">
-								<label class="control-label for="input-email">메일 주소 추가 입력이 필요합니다.</label>
+								<label class="control-label for="input-email">메일 주소를 입력하여 주십시오.</label>
 								<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
 								<span class="help-block">메일주소를 입력하여 주십시오.</span>
 							</div>										
