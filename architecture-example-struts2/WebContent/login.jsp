@@ -69,7 +69,7 @@
 	}]);
 	
 	function handleCallbackResult( media, code ){
-		if( onetimeCode != null && onetimeCode != ''  ){			
+		if( code != null && code != ''  ){			
 			common.api.signin({
 				url : "${request.contextPath}/community/facebook-callback.do?output=json",
 				onetime:  code,
