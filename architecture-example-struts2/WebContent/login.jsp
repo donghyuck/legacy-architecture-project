@@ -36,8 +36,8 @@
 			$('#login-window').modal({show:true, backdrop:false});
 			
 			$('#login-window').on('hidden.bs.modal', function () {
-				$("form[name='fm1']")[0].reset();               	   
-				$("form[name='fm1']").attr("action", "/main.do").submit();
+				//$("form[name='fm1']")[0].reset();               	   
+				//$("form[name='fm1']").attr("action", "/main.do").submit();
 			});
 			
 			
@@ -92,6 +92,7 @@
 			}
 		}else{
 			if( code != null && code != ''  ){			
+				$('#login-window').modal('hide')
 				toggleOverlay();
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
