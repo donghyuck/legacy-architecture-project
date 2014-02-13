@@ -173,6 +173,9 @@
 		transition: transform 0.4s, opacity 0.4s;
 	}
 	
+	#login-window.modal  {
+		display : block;
+	}
 </style>
 </head>
 <body class="color1">
@@ -267,7 +270,7 @@
 	<div class="overlay overlay-scale hide">
 		<button type="button" class="overlay-close">Close</button>
 		
-<div class="modal">
+<div id="signup-modal" class="modal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
