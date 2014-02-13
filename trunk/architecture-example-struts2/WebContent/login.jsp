@@ -107,7 +107,7 @@
 		if( overlay.hasClass("open") ){
 			overlay.removeClass("open");
 			overlay.addClass("close");	
-			overlay.one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(ev){
+			overlay.bind('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(ev){
 				overlay.removeClass("close");
 			});
 		}
