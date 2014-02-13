@@ -102,7 +102,7 @@
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;
-					if( media == 'twitter')
+					if( media != 'twitter')
 						signupPlaceHolder.customClass = 'hide' ;
 					$('#signup-modal').modal('show');
 				},300);				
