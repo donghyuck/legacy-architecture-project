@@ -129,7 +129,14 @@
 			if( α != 0 )
 				tdraw = setTimeout(PieDraw, t); // Redraw
 		}
-						
+
+		function PieReset() {
+			clearTimeout(tdraw);
+			var anim = 'M 0 0 v -250 A 250 250 1 0 1 0 -250 z';
+			loader.setAttribute( 'd', anim );
+			border.setAttribute( 'd', anim );
+		}
+									
 		</script>		
 	</head>
 	<body class="color3">
