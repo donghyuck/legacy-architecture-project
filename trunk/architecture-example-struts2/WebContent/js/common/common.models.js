@@ -41,7 +41,7 @@ var SignupForm = kendo.data.Model.define({
         "password1": {
             type: "string"
         },
-        "password2": {
+        "v": {
             type: "string"
         },
         "onetime": {
@@ -50,7 +50,23 @@ var SignupForm = kendo.data.Model.define({
 	}, 
 	isExternal : function (  ) {
 		return this.get("media") !== "internal" ;		
-	}
+	},
+    reset: function (){
+    	this.set("media", "internal" );
+    	this.set("id", null );
+    	this.set("firstName", null );
+    	this.set("lastName", null );
+    	this.set("name", null );
+    	this.set("email", null );
+    	this.set("locale", null );
+    	this.set("location", null );
+    	this.set("language", null );
+    	this.set("timezone", null );
+    	this.set("gender", null );
+    	this.set("password1", null );
+    	this.set("password2", null );
+    	this.set("onetime", null )
+    }
 });
 
 var _TWITTER_FEED_URL = "/community/get-twitter-hometimeline.do?output=json",
