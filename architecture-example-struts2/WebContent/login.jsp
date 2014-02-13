@@ -19,6 +19,7 @@
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.cbpBGSlideshow.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery.imagesloaded/imagesloaded.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.modernizr.custom.js',
+			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.api.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
 		complete: function() {        	              		              		  
@@ -67,11 +68,17 @@
 		}		
 	}]);
 	
-	function handleCallbackResult( success ){
-		if( success ){
-			$("form[name='fm1']").attr("action", "/main.do").submit();
+	function handleCallbackResult( media, code ){
+		if( onetimeCode != null && onetimeCode != ''  ){			
+			common.api.signin({
+				url : "${request.contextPath}/community/facebook-callback.do?output=json",
+				onetime:  code,
+				success : function(response){
+					$("form[name='fm1']").attr("action", "/main.do").submit();
+				}
+			}); 
 		}else{
-			alert( "인증에 실패하였습니다." );
+			alert( media +  "인증에 실패하였습니다." );
 		}
 	}
 	
