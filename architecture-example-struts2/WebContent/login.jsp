@@ -286,7 +286,7 @@
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
-</div><!-- /.modal 
+</div><!-- /.modal -->
 		
 		<div class="md-modal md-effect-1 md-show" >
 			<div class="md-content">
