@@ -207,7 +207,7 @@
 	<div class="modal fade" id="login-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
+				<div class="modal-header" id="myModalLabel">
 					<!-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
 					<h4 class="modal-title">로그인</h4>
 				</div>
@@ -273,8 +273,8 @@
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
 
-	<div class="modal fade" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+	<div class="modal fade bs-modal-lg" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
