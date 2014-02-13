@@ -40,7 +40,7 @@
 				//$("form[name='fm1']").attr("action", "/main.do").submit();
 			});
 
-			$('#signup-moda').on('hidden.bs.modal', function () {
+			$('#signup-modal').on('hidden.bs.modal', function () {
 				$('#login-window').modal('show');
 			});
 			
