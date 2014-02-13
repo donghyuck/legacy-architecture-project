@@ -202,8 +202,8 @@
 			</div>
 			<div class="modal-footer">
 				<div class="btn-group ">
-					<button type="button" class="btn btn-default" >아이디/비밀번호찾기</button>
-					<a id="signup"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do"  class="btn btn-default">회원가입</a>
+					<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
+					<a id="signup"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do"  class="btn btn-info">회원가입</a>
 				</div>
 					<button id="login" type="button" class="btn btn-info">로그인</button>
 				</div>
