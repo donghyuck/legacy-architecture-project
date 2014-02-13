@@ -35,6 +35,11 @@
 			$('#signup-modal').modal({show:false, backdrop:true});
 			$('#signup-modal').data("signupPlaceHolder", new SignupForm({}) );
 			kendo.bind($("#signup-modal"), $('#signup-modal').data("signupPlaceHolder") );			
+			$("#signup-modal button.custom-signup").click(function(e){
+				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );
+				
+			});
+			
 			
 			$('#login-window').on('hidden.bs.modal', function () {
 				//$("form[name='fm1']")[0].reset();               	   
@@ -299,8 +304,8 @@
 						</form>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
 					</div>
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
