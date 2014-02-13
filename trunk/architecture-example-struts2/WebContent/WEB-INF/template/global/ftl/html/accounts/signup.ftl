@@ -341,6 +341,7 @@
 						</div>
 				</div>
 				<div class="modal-footer">
+					<a href="${request.contextPath}/accounts/login.do"  class="btn btn-info">로그인</a>
 					<button type="button" class="btn btn-info signup">확인</button>
 					<!--
 					<div class="btn-group ">
