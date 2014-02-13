@@ -296,7 +296,7 @@
 							<div class="panel-body paddingless" style="background-color: #428bca;">
 								<form class="ac-custom ac-radio ac-fill">
 									<ul>
-										<li><input id="r1" name="r1" type="radio"  data-bind="checked: agree"><label for="r1" >네, 모두 동의합니다.</label></li>
+										<li><input id="r1" name="r1" type="radio"  value="true"><label for="r1" >네, 모두 동의합니다.</label></li>
 									</ul>														
 								</form>							
 							</div>
