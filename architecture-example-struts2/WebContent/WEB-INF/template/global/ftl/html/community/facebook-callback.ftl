@@ -42,7 +42,7 @@
 						onetime:  onetimeCode,
 						success : function(response){
 							window.opener.location.reload(true);
-							window.close();	
+							//window.close();	
 						}
 					}); 												
 				}				
