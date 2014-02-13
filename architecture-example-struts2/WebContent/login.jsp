@@ -39,6 +39,10 @@
 				//$("form[name='fm1']")[0].reset();               	   
 				//$("form[name='fm1']").attr("action", "/main.do").submit();
 			});
+
+			$('#signup-moda').on('hidden.bs.modal', function () {
+				$('#login-window').modal('show');
+			});
 			
 			
 			$("#password").keypress(function(event){
@@ -94,9 +98,9 @@
 			}
 		}else{
 			if( code != null && code != ''  ){			
-				$('#login-window').modal('hide')
+				$('#login-window').modal('hide');
 				//toggleOverlay();
-				$('#signup-modal').modal('show')
+				$('#signup-modal').modal('show');
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
 				$("form[name='fm1']").attr("action", "signup.do").submit();			
