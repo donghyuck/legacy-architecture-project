@@ -112,8 +112,8 @@
 			
 		</script>		
 	</head>
-	<body class="color1">
-<div class="md-modal md-effect-1" id="modal-1">
+	<body class="color3">
+			<div class="md-modal md-effect-1" id="modal-1">
 			<div class="md-content">
 				<h3>Modal Dialog</h3>
 				<div>
@@ -128,9 +128,7 @@
 			</div>
 		</div>
 	
-	<button class="md-trigger" data-modal="modal-1">Fade in &amp; Scale</button>
-	<div class="md-overlay"></div><!-- the overlay element -->
-	
-	
+	<button class="md-trigger btn btn-alert" data-modal="modal-1">Fade in &amp; Scale</button>
+	<div class="md-overlay"></div><!-- the overlay element -->	
 	</body>
 </html>
