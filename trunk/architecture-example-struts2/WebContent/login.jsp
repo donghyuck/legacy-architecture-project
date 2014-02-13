@@ -278,7 +278,7 @@
 				</div>
 			</div>
 		</div>		
-		<div class="container">
+		<div class="container hide">
 			<div class="row blank-top-45">
 				<div class="col-lg-12">
 					<div class="alert alert-warning">
