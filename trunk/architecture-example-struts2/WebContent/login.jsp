@@ -291,17 +291,18 @@
 						
 						<form class="ac-custom ac-radio ac-fill">
 							<p class="bg-primary">
-							연결되어 있지 않은 회원입니다. 회원가입을 위해서 서비스 <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">이용약관</a> 과  
-							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a> 에 동의해 주세요.
+							연결되어 있지 않은 회원입니다. 회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
+							<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
 							</p>
 							<ul>
 								<li><input id="r1" name="r1" type="radio"  data-bind="checked: agree"><label for="r1" >네, 모두 동의합니다.</label></li>
 							</ul>														
 						</form>
 						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
-							<div class="form-group">
+							<div class="form-group col-xs-4">
 									<label for="input-email" class="control-label">메일</label>
 									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
+									<span class="help-block">메일주소를 입력하여 주십시오.</span>
 							</div>										
 						</form>
 						
