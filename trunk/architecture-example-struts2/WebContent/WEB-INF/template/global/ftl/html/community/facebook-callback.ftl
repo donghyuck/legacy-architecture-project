@@ -24,7 +24,7 @@
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >					
 				if( typeof window.opener.handleCallbackResult == "function"){			
-					window.opener.handleCallbackResult("facebook", onetimeCode);
+					window.opener.handleCallbackResult("facebook", onetimeCode, true);
 					window.close();						
 				} else {
 					// 기타
