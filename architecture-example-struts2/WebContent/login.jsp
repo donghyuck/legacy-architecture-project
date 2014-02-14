@@ -38,7 +38,7 @@
 			$("#signup-modal button.custom-signup").click(function(e){
 				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );				
 			});
-			$('form[name='fm2'] input[name=input-agree]:checkbox').click(function () {
+			$('form[name="fm"] input[name="input-agree"]:checkbox').click(function () {
 				alert( $(this).attr('checked') ) ;
 				
 			});
