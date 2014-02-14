@@ -363,7 +363,7 @@
 							<fieldset data-bind="{attr:{class:customClass }}">
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
-									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
+									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
 								</div>
 							</fieldset>								
 							<div class="pull-right">	
