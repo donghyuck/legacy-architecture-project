@@ -330,7 +330,7 @@
 							<div class="form-group ">
 								<div class="checkbox">
 									<label>
-										<input type="checkbox"  name="input-agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
+										<input type="checkbox"  name="input-agree"  validationMessage="회원가입을 위하여 동의가 필요합니다."> 
 											서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 									</label>
 								</div>
@@ -338,7 +338,7 @@
 							<fieldset data-bind="{attr:{class:customClass }}">
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
-									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
+									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email"   data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
 								</div>
 							</fieldset>			
 							<div class="custom-alert"></div>					
