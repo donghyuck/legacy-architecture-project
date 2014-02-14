@@ -44,11 +44,11 @@
 				signupPlaceHolder.agree = $(this).is(':checked');
 			});			
 			
-			$('form[name="fm2"]').submit(function(e) {				
-				
+			$('form[name="fm2"]').submit(function(e) {			
 				var btn = $('.custom-signup');				
-				btn.button('loading');				
+				btn.button('loading');			
 				
+				var input_email_required = (signupPlaceHolder.media == 'twitter') ;
 				var input_checkbox = $("input[name='input-agree']");
 				var input_email = $("input[name='input-email']");
 				var alert_danger = signup_modal.find(".custom-alert");			
@@ -56,33 +56,33 @@
 				var hasError = false;
 				var error_message = null;
 				
-				
-				if ( signupPlaceHolder.email == null ){
-					hasError = true;
-					error_message = input_email.attr('data-required-msg');						
-				}else if ( !common.api.isValidEmail (signupPlaceHolder.email)  ) {
-					hasError = true;
-					error_message = input_email.attr('data-email-msg');		
+				if( input_email_required){
+					if ( signupPlaceHolder.email == null ){
+						hasError = true;
+						error_message = input_email.attr('data-required-msg');						
+					}else if ( !common.api.isValidEmail (signupPlaceHolder.email)  ) {
+						hasError = true;
+						error_message = input_email.attr('data-email-msg');		
+					}
 				}
-
-				
+								
 				if( signupPlaceHolder.agree == false )
 				{
 					error_message = input_checkbox.attr('validationMessage');
 					hasError = true;
 				}else{
-					if( hasError ){
-						$('form[name="fm2"] fieldset' ).addClass("has-error");
-					}else{
-						$('form[name="fm2"] fieldset' ).removeClass("has-error");
-					}					
+					if( input_email_required ){
+						if( hasError ){
+							$('form[name="fm2"] fieldset' ).addClass("has-error");
+						}else{
+							$('form[name="fm2"] fieldset' ).removeClass("has-error");
+						}					
+					}
 				}
-
 			
 				if( hasError ){
 					alert_danger.html( template({message: error_message }) );					
-				}
-				
+				}				
 				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );	
 								
 				btn.button('reset')
@@ -156,9 +156,8 @@
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;
-					//if( media != 'twitter')
-					//	signupPlaceHolder.customClass = 'hide' ;
-					
+					if( media != 'twitter')
+						$('form[name="fm2"] fieldset').removeClass("hide");
 					$('#signup-modal').modal('show');
 				},300);	
 				
