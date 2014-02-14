@@ -97,6 +97,13 @@
 			$('#signup-modal').on('hidden.bs.modal', function () {
 				$('#login-window').modal('show');
 			});
+
+			 $("input[name='input-email']").keypress(function(event){
+				var keycode = (event.keyCode ? event.keyCode : event.which);
+				if(keycode == '13'){
+					$('.custom-signup').focus();
+				}				
+			});
 			
 			$("#password").keypress(function(event){
 				var keycode = (event.keyCode ? event.keyCode : event.which);
