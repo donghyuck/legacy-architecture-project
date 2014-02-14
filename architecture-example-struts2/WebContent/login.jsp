@@ -331,16 +331,20 @@
 									</div>
 								</div>
 								<div class="col-lg-12">
-									<div id="status">
+									<div id="status"></div>
 									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %><br/>
 									<% if ( !user.isAnonymous() ) { %>
 									<span class="label label-warning"><%= user.getUsername() %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
-									<% } %>									
-									</div>
+									<% } %>
+									<div class="pull-right">
+										button id="login" type="button" class="btn btn-info" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >로그인</button>									
+									</div>									
+								</div>
+								<div class="col-lg-12">
+									
 								</div>
 							</form>						
 						</div>
-						<div class="col-lg-12"></div>
 					</div>
 				</div>
 			</div>
@@ -349,7 +353,7 @@
 					<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
 					<a id="signup"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do"  class="btn btn-info">회원가입</a>
 				</div>
-					<button id="login" type="button" class="btn btn-info" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >로그인</button>
+					<
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
