@@ -46,7 +46,11 @@
 				var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
 				
 				if( isValidEmail( signupPlaceHolder.email ) ){
-										
+					
+					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
+						$('form[name="fm2"] fieldset' ).removeClass("has-error");
+					}
+					
 				}else{
 					$('form[name="fm2"] fieldset' ).addClass("has-error");
 				}				
@@ -111,8 +115,10 @@
 		}else{
 			if( code != null && code != ''  ){			
 				$('#login-window').modal('hide');
-				$("form[name='fm2']")[0].reset();              
-				$('form[name="fm2"] fieldset' ).removeClass("has-error");
+				$("form[name='fm2']")[0].reset();        
+				if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
+					$('form[name="fm2"] fieldset' ).removeClass("has-error");
+				}
 				
 				setTimeout(function(){
 					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
