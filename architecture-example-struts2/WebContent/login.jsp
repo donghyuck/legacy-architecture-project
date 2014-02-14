@@ -44,16 +44,7 @@
 				signupPlaceHolder.agree = $(this).is(':checked');
 			});			
 	**/		
-			
-			$("input[name='input-email']").keypress(function(event){
-				var keycode = (event.keyCode ? event.keyCode : event.which);
-				if(keycode == '13'){
-					if( common.api.isValidEmail (signupPlaceHolder.email) ){
-						$('form[name="fm2"] fieldset' ).removeClass("has-error");						
-					}
-				}				
-			});
-	
+			d	
 			$('form[name="fm2"]').submit(function(e) {			
 				var btn = $('.custom-signup');				
 				btn.button('loading');			
@@ -73,6 +64,8 @@
 					}else if ( !common.api.isValidEmail (signupPlaceHolder.email)  ) {
 						hasError = true;
 						error_message = input_email.attr('data-email-msg');		
+					}else{
+						$('form[name="fm2"] fieldset' ).removeClass("has-error");
 					}
 				}
 								
