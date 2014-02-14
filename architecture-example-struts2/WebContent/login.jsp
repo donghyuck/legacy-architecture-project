@@ -335,13 +335,14 @@
 									</label>
 								</div>
 							</div>	
-							<fieldset data-bind="{attr:{class:customClass }}">
+							<fieldset data-bind="{attr:{class:customClass }}" >
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
-									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email"   data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
+									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email"   data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >		
+									<span class="help-block">서비스 이용을 위하여 메일 주소 입력이 필요합니다.</span>							
 								</div>
 							</fieldset>			
-							<div class="custom-alert"></div>					
+							<div class="custom-agree-alert"></div><div class="custom-input-alert"></div>									
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 								<button type="submit" class="btn btn-primary custom-signup" data-loading-text="처리중..."><i class="fa fa-check"></i>&nbsp;확인</button>
