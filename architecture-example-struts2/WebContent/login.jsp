@@ -39,8 +39,7 @@
 			var signupPlaceHolder =  new SignupForm({});
 			signup_modal.data("signupPlaceHolder", signupPlaceHolder );			
 			kendo.bind(signup_modal, signupPlaceHolder  );		
-			signup_modal.kendoValidator();   
-			
+
 			$("input[name='input-agree']:checkbox").click( function () {
 				signupPlaceHolder.agree = $(this).is(':checked');
 			});			
@@ -50,42 +49,18 @@
 				var btn = $('.custom-signup');				
 				btn.button('loading');
 				
-				var template = $("#alert-template").html();
-				var template = kendo.template(template);	          
+				var checkbox_agree = $("input[name='input-agree']");"
+				var alert_danger = signup_modal.find(".custom-alert");			
+				var template = kendo.template($("#alert-template").html());	          
 				
-				//$("#status").html("");
-				if( signup_modal.data('kendoValidator').validate() ){      
-					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
-						$('form[name="fm2"] fieldset' ).removeClass("has-error");
-					}	
-					/**
-					$.ajax({
-						type: "POST",
-						url: "/login",
-						dataType: 'json',
-						data: $("form[name=fm1]").serialize(),
-						success : function( response ) {   
-							if( response.error ){ 
-								$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
-								$("#login").kendoAnimate("slideIn:up");          
-								$("#password").val("").focus();
-							} else {
-								$("form[name='fm1']")[0].reset();               	                            
-								$("form[name='fm1']").attr("action", "/main.do").submit();
-							}                                 
-						},
-						error: function( xhr, ajaxOptions, thrownError){         				        
-							$("form[name='fm1']")[0].reset();                    
-							var status = $(".status");
-							status.text(  "잘못된 접근입니다."  ).addClass("error") ;    
-							$("#login").kendoAnimate("slideIn:up");
-						}
-					});
-					**/
-					alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );	
-				}else{
-					$('form[name="fm2"] fieldset' ).addClass("has-error");
-				}		
+				if( signupPlaceHolder.agree == false )
+				{
+					alert_danger.html( template({message: checkbox_agree.attr('validationMessage')}) );
+				}
+				
+				//$('form[name="fm2"] fieldset' ).addClass("has-error");
+				
+				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );	
 								
 				btn.button('reset')
 				return false ;
@@ -365,7 +340,8 @@
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
 									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
 								</div>
-							</fieldset>								
+							</fieldset>			
+							<div class="custom-alert"></div>					
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 								<button type="submit" class="btn btn-primary custom-signup" data-loading-text="처리중..."><i class="fa fa-check"></i>&nbsp;확인</button>
