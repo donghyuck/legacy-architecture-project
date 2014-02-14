@@ -156,8 +156,8 @@
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;
-					if( media != 'twitter')
-						signupPlaceHolder.customClass = 'hide' ;
+					//if( media != 'twitter')
+					//	signupPlaceHolder.customClass = 'hide' ;
 					$('#signup-modal').modal('show');
 				},300);	
 				
@@ -347,7 +347,7 @@
 						연결되어 있지 않은 <span bind-data="text: media" /> 사용자입니다.  회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
 						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
 						</p>					
-						 <div class="panel panel-default">
+						 <div class="panel panel-default panel-border-thick">
 							<div class="panel-body">
 							
 						<form name="fm2" role="form" method="POST" accept-charset="utf-8" >	
