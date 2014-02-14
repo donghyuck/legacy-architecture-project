@@ -342,7 +342,7 @@
 									<span class="help-block">서비스 이용을 위하여 메일 주소 입력이 필요합니다.</span>							
 								</div>
 							</fieldset>			
-							<div class="custom-agree-alert"></div><div class="custom-input-alert"></div>									
+							<div class="custom-alert"></div>						
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 								<button type="submit" class="btn btn-primary custom-signup" data-loading-text="처리중..."><i class="fa fa-check"></i>&nbsp;확인</button>
