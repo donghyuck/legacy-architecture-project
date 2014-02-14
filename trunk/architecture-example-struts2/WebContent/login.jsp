@@ -195,8 +195,7 @@
 	}**/
 	
 	function doLogin(){
-		var btn = $('#login');				
-		btn.button('loading');			
+		$('#login').button('loading');
 		
 		var templateContent = $("#alert-template").html();
 		var template = kendo.template(templateContent);	              
@@ -209,7 +208,6 @@
 				dataType: 'json',
 				data: $("form[name=fm1]").serialize(),
 				success : function( response ) {   
-					btn.button('reset');		
 					if( response.error ){ 
 						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
 						$("#login").kendoAnimate("slideIn:up");          
@@ -219,12 +217,9 @@
 						$("form[name='fm1']").attr("action", "/main.do").submit();
 					} 	
 				},
-				error: function( xhr, ajaxOptions, thrownError){         	
-					btn.button('reset');		
-					$("form[name='fm1']")[0].reset();                    
-					var status = $(".status");
-					status.text(  "잘못된 접근입니다."  ).addClass("error") ;    
-					$("#login").kendoAnimate("slideIn:up");					
+				error:handleKendoAjaxError,
+				complete: function(){					
+					$('#login').button('reset');
 				}
 			});
 		}else{        			      
