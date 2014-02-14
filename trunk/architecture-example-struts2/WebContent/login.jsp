@@ -56,11 +56,6 @@
 				var hasError = false;
 				var error_message = null;
 				
-				if( signupPlaceHolder.agree == false )
-				{
-					error_message = input_checkbox.attr('validationMessage');
-					hasError = true;
-				}
 				
 				if ( signupPlaceHolder.email == null ){
 					hasError = true;
@@ -69,6 +64,13 @@
 					hasError = true;
 					error_message = input_email.attr('data-email-msg');		
 				}
+				
+				if( signupPlaceHolder.agree == false )
+				{
+					error_message = input_checkbox.attr('validationMessage');
+					hasError = true;
+				}
+
 			
 				if( hasError ){
 					alert_danger.html( template({message: error_message }) );					
