@@ -36,13 +36,11 @@
 			
 			var template = kendo.template($("#alert-template").html());	
 			
-			$('form[name="fm2"]').submit(function(e) {		
+			$('form[name="fm1"]').submit(function(e) {		
 				var btn = $('.custom-signin');
-				btn.button('loading');
-				
+				btn.button('loading');				
 				var validator = $("#login-window").kendoValidator().data("kendoValidator");     
-				$("#status").html("");
-				
+				$("#status").html("");				
 				if( validator.validate() ){        				
 					$.ajax({
 						type: "POST",
@@ -72,7 +70,7 @@
 				}else{        			      
 					btn.button('reset');
 				}			
-				return false;
+				return false ;
 			});			
 			
 			var signup_modal = $('#signup-modal');
