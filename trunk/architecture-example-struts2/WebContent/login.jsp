@@ -329,9 +329,9 @@
 									<% if ( !user.isAnonymous() ) { %>
 									<span class="label label-warning"><%= user.getUsername() %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
 									<% } %>
-									<div id="status"></div>
+									<div id="status" class="blank-top-5"></div>
 									<div class="pull-right">
-										<button type="submit" class="btn btn-info custom-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >로그인</button>									
+										<button type="submit" class="btn btn-info custom-signin" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >로그인</button>									
 									</div>									
 								</div>
 							</form>						
