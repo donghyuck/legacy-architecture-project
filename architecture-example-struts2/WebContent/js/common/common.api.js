@@ -33,36 +33,29 @@
         return expr.test(email);
 	};
 	
-	common.api.getUser = function (url, options){
-		var user = new User ();			
-		if (typeof url === "object") {
-	        options = url;
-	        url = undefined;
-	    }	 
-		
+	common.api.getUser = function (options){	
+		options = options || {};
 		$.ajax({
 			type : 'POST',
 			url : options.url || '/accounts/get-user.do?output=json' ,
 			success : function(response){
-				
-				if( response.error ){ 												
-					//options.fail(response) ;
-				} else {					
-					user = new User (response.currentUser);						
+				var user = new User ();			
+				if( response.error ){ 		
+					if( typeof options.fail === 'function'  )
+						options.fail(response) ;
+				} else {				
+					user = new User (response.currentUser);	
 				}
-				return user;
+				if( typeof options.success === 'function'  )
+					options.success (user);
 			},
-			error:options.error || function(e){ return user },
+			error:options.error || handleKendoAjaxError,
 			dataType : "json"
 		});	
 		
 	}
 	
 	common.api.signin = function ( options ){		
-		if (typeof url === "object") {
-			options = url;
-			url = undefined;
-		}
 		options = options || {};
 		$.ajax({
 			type : 'POST',
