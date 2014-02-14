@@ -98,7 +98,6 @@
 				$('#login-window').modal('show');
 			});
 			
-			
 			$("#password").keypress(function(event){
 				var keycode = (event.keyCode ? event.keyCode : event.which);
 				if(keycode == '13'){
@@ -156,17 +155,23 @@
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;
-					if( media != 'twitter')
+					
+					if( media != 'twitter'){					
+						
+						alert( $('form[name="fm2"] fieldset').html()  );
 						$('form[name="fm2"] fieldset').removeClass("hide");
+						
+					}
+					
 					$('#signup-modal').modal('show');
-				},300);	
-				
+				},300);					
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
 				$("form[name='fm1']").attr("action", "signup.do").submit();			
 			}
 		}
 	}
+	
 	/**
 	function toggleOverlay(){
 		
