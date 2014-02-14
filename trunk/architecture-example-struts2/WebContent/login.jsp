@@ -39,6 +39,7 @@
 			var signupPlaceHolder =  new SignupForm({});
 			signup_modal.data("signupPlaceHolder", signupPlaceHolder );			
 			kendo.bind(signup_modal, signupPlaceHolder  );		
+			signup_modal.kendoValidator();   
 			
 			$("input[name='input-agree']:checkbox").click( function () {
 				signupPlaceHolder.agree = $(this).is(':checked');
@@ -51,13 +52,9 @@
 				
 				var template = $("#alert-template").html();
 				var template = kendo.template(template);	          
-				if( !signup_modal.data("kendoValidator") ){
-					signup_modal.kendoValidator();
-				}
-				var validator = signup_modal.data("kendoValidator");   
 				
 				//$("#status").html("");
-				if( validator.validate() ){      
+				if( signup_modal.data('kendoValidator').validate() ){      
 					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 						$('form[name="fm2"] fieldset' ).removeClass("has-error");
 					}	
