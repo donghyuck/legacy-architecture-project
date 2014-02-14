@@ -217,7 +217,7 @@
 						
 						$("#login").shake({
 							direction: "left",
-							distance: 50,
+							distance: 10,
 							times: 5,
 							speed: 100
 						});
