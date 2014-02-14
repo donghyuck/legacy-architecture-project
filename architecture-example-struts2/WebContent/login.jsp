@@ -290,9 +290,10 @@
 					</div>
 					<div class="modal-body">
 						<p>
-						연결되어 있지 않은 회원입니다. 회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
+						가입되어 있지 회원입니다. 회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
 						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
 						</p>					
+						<!-- 
 						<div class="panel panel-primary">
 							<div class="panel-body paddingless" style="background-color: #428bca;">
 								<form class="ac-custom ac-radio ac-fill">
@@ -301,7 +302,8 @@
 									</ul>														
 								</form>							
 							</div>
-						</div>	
+						</div>
+						 -->	
 						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}" class="form-horizontal">	
 							<div class="form-group ">
 								<div class="col-sm-12">
@@ -310,13 +312,7 @@
 											<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
 												서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 										</label>
-									</div>		
-									<span class="help-block">
-										<div class="btn-group">
-											<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관 보기</a>
-											<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침 보기</a>
-										</div>	
-									</span>				
+									</div>					
 								</div>	
 							</div>	
 							<div class="form-group ">
