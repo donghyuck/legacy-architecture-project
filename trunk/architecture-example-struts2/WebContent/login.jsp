@@ -56,7 +56,7 @@
 				}				
 				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );			
 				btn.button('reset')
-				return ;
+				return false ;
 			} );
 					
 			$('#login-window').on('hidden.bs.modal', function () {
@@ -348,7 +348,7 @@
 							</fieldset>								
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-								<button type="submit" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
+								<button type="submit" class="btn btn-primary custom-signup" data-loading-text="처리중..."><i class="fa fa-check"></i>&nbsp;확인</button>
 							</div>	
 						</form>			
 						</div></div>			
