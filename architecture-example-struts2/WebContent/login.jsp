@@ -38,9 +38,8 @@
 			$("#signup-modal button.custom-signup").click(function(e){
 				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );				
 			});
-			$('form[name="fm"] input[name="input-agree"]:checkbox').click(function () {
-				alert( $(this).attr('checked') ) ;
-				
+			$("input[name='input-agree']:checkbox").click(function () {
+				alert( $(this).attr('checked') ) ;				
 			});
 			
 			
