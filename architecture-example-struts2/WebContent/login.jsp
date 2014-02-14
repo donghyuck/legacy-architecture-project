@@ -305,7 +305,9 @@
 						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
 							<div class="checkbox">
 								<label>
-									<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 서비스 약관과 개인정보취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+									<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
+										<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a>  과 
+										<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a> 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
 								</label>
 							</div>						
 							<div class="form-group ">
