@@ -304,25 +304,27 @@
 							</div>
 						</div>
 						 -->	
-						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}" class="form-horizontal">	
+						 <div class="panel panel-default">
+							<div class="panel-body paddingless">
+							
+						<form role="form" method="POST" accept-charset="utf-8" >	
 							<div class="form-group ">
-								<div class="col-sm-12">
-									<div class="checkbox">
-										<label>
-											<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
-												서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
-										</label>
-									</div>					
-								</div>	
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
+											서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+									</label>
+								</div>
 							</div>	
+							<fieldset data-bind="{attr:{class:customClass }}">
 							<div class="form-group ">
-								<label class="col-sm-2 control-label"  for="input-email">메일 주소</label>
-								<div class="col-sm-10">
-									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
-									<span class="help-block">메일주소를 입력하여 주십시오.</span>
-								</div>		
-							</div>										
-						</form>						
+								<label class="control-label"  for="input-email">메일 주소</label>
+								<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
+								<span class="help-block">메일주소를 입력은 필수 입니다.</span>
+							</div>
+							</fieldset>										
+						</form>			
+						</div></div>			
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
