@@ -33,6 +33,31 @@
         return expr.test(email);
 	};
 	
+	common.api.getUser = function (url, options){
+		var user = new User ();			
+		if (typeof url === "object") {
+	        options = url;
+	        url = undefined;
+	    }	 
+		
+		$.ajax({
+			type : 'POST',
+			url : options.url || '/accounts/get-user.do?output=json' ,
+			success : function(response){
+				
+				if( response.error ){ 												
+					//options.fail(response) ;
+				} else {					
+					user = new User (response.currentUser);						
+				}
+				return user;
+			},
+			error:options.error || function(e){ return user },
+			dataType : "json"
+		});	
+		
+	}
+	
 	common.api.signin = function ( options ){		
 		if (typeof url === "object") {
 			options = url;
