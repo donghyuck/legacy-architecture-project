@@ -158,6 +158,7 @@
 					signupPlaceHolder.onetime = code ;
 					//if( media != 'twitter')
 					//	signupPlaceHolder.customClass = 'hide' ;
+					
 					$('#signup-modal').modal('show');
 				},300);	
 				
@@ -359,7 +360,7 @@
 									</label>
 								</div>
 							</div>	
-							<fieldset data-bind="{attr:{class:customClass }}" >
+							<fieldset class="hide">
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
 									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email"   data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >		
