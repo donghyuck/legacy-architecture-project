@@ -302,23 +302,29 @@
 								</form>							
 							</div>
 						</div>	
-						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}">	
-							<div class="checkbox">
-								<label>
-									<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
-										서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
-								</label>
-							</div>		
-							<span class="help-block">
-								<div class="btn-group">
-									<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관 보기</a>
-									<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침 보기</a>
-								</div>	
-							</span>				
+						<form role="form" method="POST" accept-charset="utf-8" data-bind="{attr:{class:customClass }}" class="form-horizontal">	
 							<div class="form-group ">
-								<!-- <label class="control-label for="input-email">메일 주소를 입력하여 주십시오.</label>-->
-								<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
-								<span class="help-block">메일주소를 입력하여 주십시오.</span>
+								<div class="col-sm-12">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
+												서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+										</label>
+									</div>		
+									<span class="help-block">
+										<div class="btn-group">
+											<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관 보기</a>
+											<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침 보기</a>
+										</div>	
+									</span>				
+								</div>	
+							</div>	
+							<div class="form-group ">
+								<label class="col-sm-2 control-label"  for="input-email">메일 주소</label>
+								<div class="col-sm-10">
+									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
+									<span class="help-block">메일주소를 입력하여 주십시오.</span>
+								</div>		
 							</div>										
 						</form>						
 					</div>
