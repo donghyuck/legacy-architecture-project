@@ -157,7 +157,7 @@
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;
 					//if( media != 'twitter')
-					//	signupPlaceHolder.customClass = 'hide' ;
+						signupPlaceHolder.customClass = 'hide' ;
 					$('#signup-modal').modal('show');
 				},300);	
 				
