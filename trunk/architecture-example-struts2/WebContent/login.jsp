@@ -50,10 +50,11 @@
 				
 				var template = $("#alert-template").html();
 				var template = kendo.template(template);	          
-				if( !signup_modal.kendoValidator().data("kendoValidator") ){
+				if( !signup_modal.data("kendoValidator") ){
 					signup_modal.kendoValidator();
 				}
-				var validator = signup_modal.data("kendoValidator");     				
+				var validator = signup_modal.data("kendoValidator");   
+				
 				//$("#status").html("");
 				if( validator.validate() ){      
 					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
