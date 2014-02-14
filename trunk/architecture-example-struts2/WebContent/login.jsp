@@ -214,6 +214,14 @@
 						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
 						//$("#login").kendoAnimate("slideIn:up");          
 						$("#password").val("").focus();
+						
+						$("#login").shake({
+							direction: "left",
+							distance: 50,
+							times: 5,
+							speed: 100
+						});
+						
 					} else {
 						$("form[name='fm1']")[0].reset();               	                            
 						$("form[name='fm1']").attr("action", "/main.do").submit();
