@@ -64,6 +64,11 @@
 					hasError = true;
 					error_message = input_email.attr('data-email-msg');		
 				}
+				if( hasError ){
+					$('form[name="fm2"] fieldset' ).addClass("has-error");
+				}else{
+					$('form[name="fm2"] fieldset' ).removeClass("has-error");
+				}
 				
 				if( signupPlaceHolder.agree == false )
 				{
