@@ -42,8 +42,11 @@
 				$('#signup-modal').data("signupPlaceHolder").agree = $(this).is(':checked');
 			});			
 			
-			$('form[name="fm2"]').submit(function(e) {
-				var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");				
+			$('form[name="fm2"]').submit(function(e) {				
+				var btn = $(this).find( "input[type='submit']");				
+				btn.button('loading');
+				
+				var signupPlaceHolder = signup_modal.data("signupPlaceHolder");				
 				if( common.api.isValidEmail( signupPlaceHolder.email ) ){					
 					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 						$('form[name="fm2"] fieldset' ).removeClass("has-error");
@@ -51,7 +54,9 @@
 				}else{
 					$('form[name="fm2"] fieldset' ).addClass("has-error");
 				}				
-				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );											
+				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );			
+				btn.button('reset')
+				return ;
 			} );
 					
 			$('#login-window').on('hidden.bs.modal', function () {
@@ -340,9 +345,11 @@
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
 									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >									
 								</div>
-							</fieldset>										
-							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-							<button type="submit" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
+							</fieldset>								
+							<div class="pull-right">	
+								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+								<button type="submit" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
+							</div>	
 						</form>			
 						</div></div>			
 					</div>
