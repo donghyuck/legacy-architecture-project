@@ -32,6 +32,7 @@
 			});
 			
 			$('#login-window').modal({show:true, backdrop:false});			
+			var signupPlaceHolder = signup_modal.data("signupPlaceHolder");				
 			
 			var signup_modal = $('#signup-modal');
 			signup_modal.modal({show:false, backdrop:true});			
@@ -43,18 +44,50 @@
 			});			
 			
 			$('form[name="fm2"]').submit(function(e) {				
+				
 				var btn = $('.custom-signup');				
 				btn.button('loading');
 				
-				var signupPlaceHolder = signup_modal.data("signupPlaceHolder");				
-				if( common.api.isValidEmail( signupPlaceHolder.email ) ){					
+				var template = $("#alert-template").html();
+				var template = kendo.template(template);	          
+				if( !signup_modal.kendoValidator().data("kendoValidator") ){
+					signup_modal.kendoValidator();
+				}
+				var validator = signup_modal.data("kendoValidator");     				
+				//$("#status").html("");
+				if( validator.validate() ){      
 					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 						$('form[name="fm2"] fieldset' ).removeClass("has-error");
-					}					
+					}	
+					/**
+					$.ajax({
+						type: "POST",
+						url: "/login",
+						dataType: 'json',
+						data: $("form[name=fm1]").serialize(),
+						success : function( response ) {   
+							if( response.error ){ 
+								$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
+								$("#login").kendoAnimate("slideIn:up");          
+								$("#password").val("").focus();
+							} else {
+								$("form[name='fm1']")[0].reset();               	                            
+								$("form[name='fm1']").attr("action", "/main.do").submit();
+							}                                 
+						},
+						error: function( xhr, ajaxOptions, thrownError){         				        
+							$("form[name='fm1']")[0].reset();                    
+							var status = $(".status");
+							status.text(  "잘못된 접근입니다."  ).addClass("error") ;    
+							$("#login").kendoAnimate("slideIn:up");
+						}
+					});
+					**/
+					alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );	
 				}else{
 					$('form[name="fm2"] fieldset' ).addClass("has-error");
-				}				
-				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );			
+				}		
+								
 				btn.button('reset')
 				return false ;
 			} );
@@ -119,8 +152,7 @@
 				$("form[name='fm2']")[0].reset();        
 				if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 					$('form[name="fm2"] fieldset' ).removeClass("has-error");
-				}
-				
+				}				
 				setTimeout(function(){
 					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
 					signupPlaceHolder.reset();
@@ -317,17 +349,6 @@
 						연결되어 있지 않은 <span bind-data="text: media" /> 사용자입니다.  회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
 						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
 						</p>					
-						<!-- 
-						<div class="panel panel-primary">
-							<div class="panel-body paddingless" style="background-color: #428bca;">
-								<form class="ac-custom ac-radio ac-fill">
-									<ul>
-										<li><input id="r1" name="r1" type="radio"  value="true"><label for="r1" >네, 모두 동의합니다.</label></li>
-									</ul>														
-								</form>							
-							</div>
-						</div>
-						 -->	
 						 <div class="panel panel-default">
 							<div class="panel-body">
 							
@@ -343,7 +364,7 @@
 							<fieldset data-bind="{attr:{class:customClass }}">
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
-									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  >									
+									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >									
 								</div>
 							</fieldset>								
 							<div class="pull-right">	
