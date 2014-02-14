@@ -224,7 +224,7 @@
 			});
 		}else{        			      
 			//$("#login").kendoAnimate("slideIn:up"); 
-			btn.button('reset');		
+			$('#login').button('reset');
 		}		
 	}
 	
