@@ -42,22 +42,18 @@
 				$('#signup-modal').data("signupPlaceHolder").agree = $(this).is(':checked');
 			});			
 			
-			$("#signup-modal button.custom-signup").click(function(e){
-				var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
-				
-				if( common.api.isValidEmail( signupPlaceHolder.email ) ){
-					
+			$('form[name="fm2"]').submit(function(e) {
+				var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");				
+				if( common.api.isValidEmail( signupPlaceHolder.email ) ){					
 					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 						$('form[name="fm2"] fieldset' ).removeClass("has-error");
-					}
-					
+					}					
 				}else{
 					$('form[name="fm2"] fieldset' ).addClass("has-error");
 				}				
-				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );				
-			});
-			
-			
+				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );											
+			} );
+					
 			$('#login-window').on('hidden.bs.modal', function () {
 				//$("form[name='fm1']")[0].reset();               	   
 				//$("form[name='fm1']").attr("action", "/main.do").submit();
@@ -128,7 +124,8 @@
 					if( media != 'twitter')
 						signupPlaceHolder.customClass = 'hide' ;
 					$('#signup-modal').modal('show');
-				},300);				
+				},300);	
+				
 			}else{
 				$("form[name='fm1']")[0].reset();               	                            
 				$("form[name='fm1']").attr("action", "signup.do").submit();			
@@ -312,7 +309,7 @@
 					</div>
 					<div class="modal-body">
 						<p>
-						가입되어 있지 회원입니다. 회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
+						연결되어 있지 않은 <span bind-data="text: media" /> 사용자입니다.  회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
 						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
 						</p>					
 						<!-- 
@@ -341,17 +338,19 @@
 							<fieldset data-bind="{attr:{class:customClass }}">
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
-									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
-									<span class="help-block"><i class="fa fa-info"></i>&nbsp; 메일주소를 입력은 필수 입니다.</span>
+									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >									
 								</div>
 							</fieldset>										
+							<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+							<button type="submit" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
 						</form>			
 						</div></div>			
 					</div>
+					<!-- 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
 						<button type="button" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
-					</div>
+					</div>-->
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
