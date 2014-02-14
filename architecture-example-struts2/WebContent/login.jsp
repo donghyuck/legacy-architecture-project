@@ -45,7 +45,7 @@
 			$("#signup-modal button.custom-signup").click(function(e){
 				var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
 				
-				if( isValidEmail( signupPlaceHolder.email ) ){
+				if( common.api.isValidEmail( signupPlaceHolder.email ) ){
 					
 					if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 						$('form[name="fm2"] fieldset' ).removeClass("has-error");
