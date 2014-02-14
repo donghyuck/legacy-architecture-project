@@ -307,11 +307,14 @@
 								<label>
 									<input type="checkbox"  name="agree" required validationMessage="회원가입을 위하여 동의가 필요합니다."> 
 										서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
-										
-										
 								</label>
 							</div>		
-							<span class="help-block"><a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a><a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a></span>				
+							<span class="help-block">
+								<div class="btn-group">
+									<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관 보기</a>
+									<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침 보기</a>
+								</div>	
+							</span>				
 							<div class="form-group ">
 								<!-- <label class="control-label for="input-email">메일 주소를 입력하여 주십시오.</label>-->
 								<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >
