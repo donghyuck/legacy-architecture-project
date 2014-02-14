@@ -335,7 +335,7 @@
 					<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
 					<a id="signup"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do"  class="btn btn-info">회원가입</a>
 				</div>
-					<button id="login" type="button" class="btn btn-info">로그인</button>
+					<button id="login" type="button" class="btn btn-info" data-loading-text='<i class="fa fa-spinner fa-spin" >로그인</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
