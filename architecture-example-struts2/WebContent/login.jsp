@@ -33,7 +33,48 @@
 			});
 			
 			$('#login-window').modal({show:true, backdrop:false});			
-						
+			
+			var template = kendo.template($("#alert-template").html());	
+			
+			$('form[name="fm2"]').submit(function(e) {		
+				var btn = $('.custom-signin');
+				btn.button('loading');
+				
+				var validator = $("#login-window").kendoValidator().data("kendoValidator");     
+				$("#status").html("");
+				
+				if( validator.validate() ){        				
+					$.ajax({
+						type: "POST",
+						url: "/login",
+						dataType: 'json',
+						data: $("form[name=fm1]").serialize(),
+						success : function( response ) {   
+							if( response.error ){ 
+								$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
+								$("#password").val("").focus();								
+								$(".custom-signin").shake({
+									direction: "left",
+									distance: 10,
+									times: 5,
+									speed: 100
+								});								
+							} else {
+								$("form[name='fm1']")[0].reset();               	                            
+								$("form[name='fm1']").attr("action", "/main.do").submit();
+							} 	
+						},
+						error:handleKendoAjaxError,
+						complete: function(jqXHR, textStatus ){					
+							btn.button('reset');
+						}
+					});
+				}else{        			      
+					$('#login').button('reset');
+				}			
+				return false;
+			});			
+			
 			var signup_modal = $('#signup-modal');
 			signup_modal.modal({show:false, backdrop:true});			
 			
@@ -49,7 +90,7 @@
 				var input_checkbox = $("input[name='input-agree']");
 				var input_email = $("input[name='input-email']");
 				var alert_danger = signup_modal.find(".custom-alert");			
-				var template = kendo.template($("#alert-template").html());	  
+				  
 				var hasError = false;
 				var error_message = null;
 				
@@ -78,8 +119,7 @@
 							$('form[name="fm2"] fieldset' ).removeClass("has-error");
 						}					
 					}
-				}
-			
+				}			
 				if( hasError ){
 					alert_danger.html( template({message: error_message }) );			
 					btn.button('reset')
@@ -91,8 +131,6 @@
 			} );
 					
 			$('#login-window').on('hidden.bs.modal', function () {
-				//$("form[name='fm1']")[0].reset();               	   
-				//$("form[name='fm1']").attr("action", "/main.do").submit();
 			});
 
 			$('#signup-modal').on('hidden.bs.modal', function () {
@@ -106,10 +144,10 @@
 				}				
 			});
 			
-			$("#password").keypress(function(event){
+			$("input[name="password"]').keypress(function(event){
 				var keycode = (event.keyCode ? event.keyCode : event.which);
 				if(keycode == '13'){
-					doLogin();
+					$('.custom-signin').focus();
 				}				
 			});
 						
@@ -197,45 +235,7 @@
 	
 	function doLogin(){
 		alert($('#login').html());
-		$('#login').button('loading');
-		
-		var templateContent = $("#alert-template").html();
-		var template = kendo.template(templateContent);	              
-		var validator = $("#login-window").kendoValidator().data("kendoValidator");     
-		$("#status").html("");
-		if( validator.validate() ){        				
-			$.ajax({
-				type: "POST",
-				url: "/login",
-				dataType: 'json',
-				data: $("form[name=fm1]").serialize(),
-				success : function( response ) {   
-					if( response.error ){ 
-						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
-						//$("#login").kendoAnimate("slideIn:up");          
-						$("#password").val("").focus();
-						
-						$("#login").shake({
-							direction: "left",
-							distance: 10,
-							times: 5,
-							speed: 100
-						});
-						
-					} else {
-						$("form[name='fm1']")[0].reset();               	                            
-						$("form[name='fm1']").attr("action", "/main.do").submit();
-					} 	
-				},
-				error:handleKendoAjaxError,
-				complete: function(jqXHR, textStatus ){					
-					$('#login').button('reset');
-				}
-			});
-		}else{        			      
-			//$("#login").kendoAnimate("slideIn:up"); 
-			$('#login').button('reset');
-		}		
+	
 	}
 	
 </script>
@@ -330,18 +330,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="col-lg-12">
-									<div id="status"></div>
+								<div class="col-lg-12">									
 									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %><br/>
 									<% if ( !user.isAnonymous() ) { %>
 									<span class="label label-warning"><%= user.getUsername() %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
 									<% } %>
+									<div id="status"></div>
 									<div class="pull-right">
-										<button id="login" type="button" class="btn btn-info" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >로그인</button>									
+										<button type="submit" class="btn btn-info custom-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >로그인</button>									
 									</div>									
-								</div>
-								<div class="col-lg-12">
-									
 								</div>
 							</form>						
 						</div>
