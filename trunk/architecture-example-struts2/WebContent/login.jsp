@@ -210,7 +210,7 @@
 				success : function( response ) {   
 					if( response.error ){ 
 						$("#status").html(  template({ message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." })  );
-						$("#login").kendoAnimate("slideIn:up");          
+						//$("#login").kendoAnimate("slideIn:up");          
 						$("#password").val("").focus();
 					} else {
 						$("form[name='fm1']")[0].reset();               	                            
