@@ -58,8 +58,8 @@
 									speed: 100
 								});								
 							} else {
-								$("form[name='fm1']")[0].reset();               	                            
-								$("form[name='fm1']").attr("action", "/main.do").submit();
+								//$("form[name='fm1']")[0].reset();               	                            
+								$("form[name='fm']").attr("action", "/main.do").submit();
 							} 	
 						},
 						error:handleKendoAjaxError,
@@ -179,8 +179,8 @@
 					url : onetime_url,
 					onetime:  code,
 					success : function(response){
-						$("form[name='fm1']")[0].reset();               	    
-						$("form[name='fm1']").attr("action", "/main.do").submit();
+						//$("form[name='fm']")[0].reset();               	    
+						$("form[name='fm']").attr("action", "/main.do").submit();
 					}
 				}); 
 			}else{
@@ -207,8 +207,8 @@
 					$('#signup-modal').modal('show');
 				},300);					
 			}else{
-				$("form[name='fm1']")[0].reset();               	                            
-				$("form[name='fm1']").attr("action", "signup.do").submit();			
+				//$("form[name='fm']")[0].reset();               	                            
+				$("form[name='fm']").attr("action", "signup.do").submit();			
 			}
 		}
 	}
@@ -397,14 +397,7 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-		<!-- 
-	<div class="overlay overlay-scale">
-		<button type="button" class="overlay-close">Close</button>
-		
-		
-		
-	</div>
-		 -->
+	<form name="fm" role="form" method="POST" accept-charset="utf-8" ></form> 
 	<script type="text/x-kendo-template" id="alert-template">
 	<div class="alert alert-danger">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
