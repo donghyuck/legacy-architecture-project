@@ -195,6 +195,7 @@
 	}**/
 	
 	function doLogin(){
+		alert($('#login').html());
 		$('#login').button('loading');
 		
 		var templateContent = $("#alert-template").html();
