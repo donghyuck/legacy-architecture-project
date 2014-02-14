@@ -171,7 +171,8 @@
 			
 			common.api.getUser( {
 				success : function ( token ) {
-					alert( kendo.stringify( token ) );
+					if( !token.anonymous )
+						alert( "이미 로그인되어 있습니다." );
 				}				
 			} );
 			
@@ -332,7 +333,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12">									
-									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %><span class="label label-warning"></span><br/>
+									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %>  <span class="label label-warning"></span><br/>
 									<% if ( !user.isAnonymous() ) { %>
 									<span class="label label-warning"><%= user.getUsername() %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
 									<% } %>
