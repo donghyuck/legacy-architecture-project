@@ -156,9 +156,11 @@
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;
 					
-					if( media != 'twitter'){					
+					alert( $('form[name="fm2"] fieldset').html()  );
+					
+					if( media == 'twitter'){					
 						
-						alert( $('form[name="fm2"] fieldset').html()  );
+						
 						$('form[name="fm2"] fieldset').removeClass("hide");
 						
 					}
