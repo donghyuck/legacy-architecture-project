@@ -362,7 +362,7 @@
 							<div class="custom-alert"></div>						
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-								<button type="submit" class="btn btn-primary custom-signup" data-loading-text="<i class='a-li fa fa-spinner fa-spin'>"><i class="fa fa-check"></i>&nbsp;확인</button>
+								<button type="submit" class="btn btn-primary custom-signup" data-loading-text='<i class="a-li fa fa-spinner fa-spin">'><i class="fa fa-check"></i>&nbsp;확인</button>
 							</div>	
 						</form>			
 						</div></div>			
