@@ -61,6 +61,7 @@
 						error_message = input_email.attr('data-email-msg');		
 					}else{
 						$('form[name="fm2"] fieldset' ).removeClass("has-error");
+						alert_danger.html( "" );
 					}
 				}
 								
