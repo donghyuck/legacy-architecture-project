@@ -70,7 +70,7 @@
 						}
 					});
 				}else{        			      
-					$('#login').button('reset');
+					btn.button('reset');
 				}			
 				return false;
 			});			
@@ -232,11 +232,7 @@
 			overlay.addClass("open");	
 		}
 	}**/
-	
-	function doLogin(){
-		alert($('#login').html());
-	
-	}
+
 	
 </script>
 <style scoped="scoped">
