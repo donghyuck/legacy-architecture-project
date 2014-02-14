@@ -32,15 +32,16 @@
 			});
 			
 			$('#login-window').modal({show:true, backdrop:false});			
-			var signupPlaceHolder = signup_modal.data("signupPlaceHolder");				
-			
+						
 			var signup_modal = $('#signup-modal');
 			signup_modal.modal({show:false, backdrop:true});			
-			signup_modal.data("signupPlaceHolder", new SignupForm({}) );			
-			kendo.bind(signup_modal, signup_modal.data("signupPlaceHolder") );		
+			
+			var signupPlaceHolder =  new SignupForm({});
+			signup_modal.data("signupPlaceHolder", signupPlaceHolder );			
+			kendo.bind(signup_modal, signupPlaceHolder  );		
 			
 			$("input[name='input-agree']:checkbox").click( function () {
-				$('#signup-modal').data("signupPlaceHolder").agree = $(this).is(':checked');
+				signupPlaceHolder.agree = $(this).is(':checked');
 			});			
 			
 			$('form[name="fm2"]').submit(function(e) {				
