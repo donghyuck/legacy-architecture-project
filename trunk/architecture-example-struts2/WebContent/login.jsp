@@ -168,6 +168,13 @@
 					});	
 				});								
 			});			
+			
+			common.api.getUser( {
+				success : function ( token ) {
+					alert( kendo.stringify( token ) );
+				}				
+			} );
+			
 		}		
 	}]);
 	
