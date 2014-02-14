@@ -37,15 +37,21 @@
 			signup_modal.modal({show:false, backdrop:true});			
 			signup_modal.data("signupPlaceHolder", new SignupForm({}) );			
 			kendo.bind(signup_modal, signup_modal.data("signupPlaceHolder") );		
+			
 			$("input[name='input-agree']:checkbox").click( function () {
 				$('#signup-modal').data("signupPlaceHolder").agree = $(this).is(':checked');
 			});			
 			
 			$("#signup-modal button.custom-signup").click(function(e){
+				var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
+				
+				if( isValidEmail( signupPlaceHolder.email ) ){
+										
+				}else{
+					$('form[name="fm2"] fieldset' ).addClass("has-error");
+				}				
 				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );				
 			});
-			
-
 			
 			
 			$('#login-window').on('hidden.bs.modal', function () {
@@ -106,6 +112,7 @@
 			if( code != null && code != ''  ){			
 				$('#login-window').modal('hide');
 				$("form[name='fm2']")[0].reset();              
+				$('form[name="fm2"] fieldset' ).removeClass("has-error");
 				
 				setTimeout(function(){
 					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
@@ -122,7 +129,7 @@
 			}
 		}
 	}
-	
+	/**
 	function toggleOverlay(){
 		
 		var overlay = $('.overlay');
@@ -138,7 +145,7 @@
 		else if ( !overlay.hasClass("close") ){
 			overlay.addClass("open");	
 		}
-	}
+	}**/
 	
 	function doLogin(){
 		var templateContent = $("#alert-template").html();
