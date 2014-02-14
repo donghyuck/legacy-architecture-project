@@ -43,7 +43,7 @@
 			});			
 			
 			$('form[name="fm2"]').submit(function(e) {				
-				var btn = $(this).find( "input[type='submit']");				
+				var btn = $('.custom-signup');				
 				btn.button('loading');
 				
 				var signupPlaceHolder = signup_modal.data("signupPlaceHolder");				
@@ -343,7 +343,7 @@
 							<fieldset data-bind="{attr:{class:customClass }}">
 								<div class="form-group ">
 									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
-									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" >									
+									<input type="text" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email" required  >									
 								</div>
 							</fieldset>								
 							<div class="pull-right">	
