@@ -81,11 +81,12 @@
 				}
 			
 				if( hasError ){
-					alert_danger.html( template({message: error_message }) );					
-				}				
-				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );	
-								
-				btn.button('reset')
+					alert_danger.html( template({message: error_message }) );			
+					btn.button('reset')
+				}else{
+					alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );
+					btn.button('reset')
+				}
 				return false ;
 			} );
 					
