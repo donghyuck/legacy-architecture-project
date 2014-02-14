@@ -49,7 +49,7 @@
 				var btn = $('.custom-signup');				
 				btn.button('loading');
 				
-				var checkbox_agree = $("input[name='input-agree']");"
+				var checkbox_agree = $("input[name='input-agree']");
 				var alert_danger = signup_modal.find(".custom-alert");			
 				var template = kendo.template($("#alert-template").html());	          
 				
