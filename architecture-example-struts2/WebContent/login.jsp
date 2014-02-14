@@ -47,18 +47,32 @@
 			$('form[name="fm2"]').submit(function(e) {				
 				
 				var btn = $('.custom-signup');				
-				btn.button('loading');
+				btn.button('loading');				
 				
-				var checkbox_agree = $("input[name='input-agree']");
+				var input_checkbox = $("input[name='input-agree']");
+				var input_email = $("input[name='input-email']");
 				var alert_danger = signup_modal.find(".custom-alert");			
-				var template = kendo.template($("#alert-template").html());	          
+				var template = kendo.template($("#alert-template").html());	  
+				var hasError = false;
+				var error_message = null;
 				
 				if( signupPlaceHolder.agree == false )
 				{
-					alert_danger.html( template({message: checkbox_agree.attr('validationMessage')}) );
+					error_message = input_checkbox.attr('validationMessage');
+					hasError = true;
 				}
 				
-				//$('form[name="fm2"] fieldset' ).addClass("has-error");
+				if ( signupPlaceHolder.email == null ){
+					hasError = true;
+					error_message = input_email.attr('data-required-msg');						
+				}else if ( !common.api.isValidEmail (signupPlaceHolder.email)  ) {
+					hasError = true;
+					error_message = input_email.attr('data-email-msg');		
+				}
+			
+				if( hasError ){
+					alert_danger.html( template({message: error_message }) );					
+				}
 				
 				alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );	
 								
