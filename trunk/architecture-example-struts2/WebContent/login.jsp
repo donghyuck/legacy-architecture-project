@@ -39,12 +39,7 @@
 			var signupPlaceHolder =  new SignupForm({});
 			signup_modal.data("signupPlaceHolder", signupPlaceHolder );			
 			kendo.bind(signup_modal, signupPlaceHolder  );		
-/**
-			$("input[name='input-agree']:checkbox").click( function () {
-				signupPlaceHolder.agree = $(this).is(':checked');
-			});			
-	**/		
-			d	
+
 			$('form[name="fm2"]').submit(function(e) {			
 				var btn = $('.custom-signup');				
 				btn.button('loading');			
