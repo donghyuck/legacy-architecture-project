@@ -140,6 +140,7 @@
 			if( code != null && code != ''  ){			
 				$('#login-window').modal('hide');
 				$("form[name='fm2']")[0].reset();        
+				$("#signup-modal' .custom-alert").html("");			
 				if( $('form[name="fm2"] fieldset' ).hasClass("has-error") ){
 					$('form[name="fm2"] fieldset' ).removeClass("has-error");
 				}				
