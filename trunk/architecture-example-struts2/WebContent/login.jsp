@@ -39,7 +39,7 @@
 				alert( kendo.stringify(  $('#signup-modal').data("signupPlaceHolder") ) );				
 			});
 			$("input[name='input-agree']:checkbox").click( function () {
-				alert( $(this).html() ) ;				
+				alert( $(this).is(':checked')) ;				
 			});
 			
 			
