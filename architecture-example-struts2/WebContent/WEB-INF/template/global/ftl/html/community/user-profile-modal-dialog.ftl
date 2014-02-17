@@ -47,29 +47,30 @@
 							change: function(e) { 				
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){
-									var selectedCell = this.dataItem( selectedCells );	    
-									
-									$("#my-social-network-grid").data( "networkPlaceHolder", selectedCell );																		
-									$.ajax({
-										type : 'POST',
-										url : "${request.contextPath}/community/get-" + selectedCell.serviceProviderName + "-profile.do?output=json",
-										data: { socialNetworkId: selectedCell.socialAccountId },
-										success : function(response){
-											if( response.error ){
-												// 연결실패.
-											} else {	
-												var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
-												$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );													
-											}
-										},
-										error:handleKendoAjaxError,
-										beforeSend : function() {
-											kendo.ui.progress($("#my-social-network-account-details"), true);
-										},
-										complete : function(){
-											kendo.ui.progress($("#my-social-network-account-details"), false);
-										}													
-									});	
+									var selectedCell = this.dataItem( selectedCells );	    									
+									$("#my-social-network-grid").data( "networkPlaceHolder", selectedCell );			
+									if( selectedCell.connected ){															
+										$.ajax({
+											type : 'POST',
+											url : "${request.contextPath}/community/get-" + selectedCell.serviceProviderName + "-profile.do?output=json",
+											data: { socialNetworkId: selectedCell.socialAccountId },
+											success : function(response){
+												if( response.error ){
+													// 연결실패.
+												} else {	
+													var myMediaAccountTemplate = kendo.template($('#my-social-network-account-details-template').html());			
+													$("#my-social-network-account-details").html( myMediaAccountTemplate(response) );													
+												}
+											},
+											error:handleKendoAjaxError,
+											beforeSend : function() {
+												kendo.ui.progress($("#my-social-network-account-details"), true);
+											},
+											complete : function(){
+												kendo.ui.progress($("#my-social-network-account-details"), false);
+											}													
+										});
+									}	
 								}							
 							},
 							dataBound: function(e) {
