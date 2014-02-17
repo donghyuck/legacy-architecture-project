@@ -65,15 +65,6 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 		this.oauth_verifier = oauth_verifier;
 	}
 	
-
-	public Object getUserProfile(){
-		if( this.userProfile == null ){
-			TwitterServiceProvider provider = (TwitterServiceProvider) getSocialNetwork().getSocialServiceProvider();		
-			this.userProfile = provider.authenticate();
-		}
-		return this.userProfile;
-	}	
-
 	public String execute() throws Exception {
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
 			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TWITTER);			
@@ -83,12 +74,10 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);			
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
-			Object obj = getOneTimeSecureObject();
-			if( obj != null && obj instanceof TwitterProfile){
-				this.userProfile = (TwitterProfile)obj;
+			if( getUserProfile()!=null){
 				signIn();
 			}
-		}
+		}		
 		return success();
 	}
 	
