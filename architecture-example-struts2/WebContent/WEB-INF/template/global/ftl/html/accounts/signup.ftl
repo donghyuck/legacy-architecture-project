@@ -215,15 +215,26 @@
 			return true;			
 		}
 		
-		function signupCallbackResult( provider, data  ){
-			
-			if( data == null ){
-				homepage();					
+		function signupCallbackResult( provider, code , exists  ){
+			if(exists){
+				if( code != null && code != ''  ){						
+					var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
+					common.api.signin({
+						url : onetime_url,
+						onetime:  code,
+						success : function(response){
+							//$("form[name='fm']")[0].reset();               	    
+							//$("form[name='fm']").attr("action", "/main.do").submit();
+							homepage();
+						}
+					}); 
+				}else{
+					alert( media +  "인증에 실패하였습니다." );
+				}			
 			}else{
-				var signup_form = $("#signup-form");
-				signup_form.data("signupPlaceHolder", new SignupForm(data) );		
-				kendo.bind(signup_form, signup_form.data("signupPlaceHolder") );
-			}			
+				// register ... 
+				
+			}		
 		}
 		
 		function getSignupPlaceHolder(){
