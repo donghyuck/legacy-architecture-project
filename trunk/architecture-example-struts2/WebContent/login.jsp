@@ -135,17 +135,29 @@
 				
 					common.api.signup({
 						data: kendo.stringify( signup_modal.data("signupPlaceHolder") ),
-						success : function(response){
-							alert( kendo.stringify( response ) );
+						success : function(data){
+														
+							if ( !data.anonymous ){
+								var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + signup_modal.data("signupPlaceHolder").media + "-callback.do?output=json";			
+								common.api.signin({
+									url : onetime_url,
+									onetime:  signup_modal.data("signupPlaceHolder").onetime,
+									success : function(response){
+										btn.button('reset')   	    
+										$("form[name='fm']").attr("action", "/main.do").submit();
+									}
+								}); 								
+							}
 						},
 						fail : function(response){
-							alert( kendo.stringify( response ) );
-						}						
+							
+							alert( "회원 가입이 정상적으로 처지되지 못했습니다." );
+							
+							btn.button('reset')
+							$('#signup-modal').modal('hide');
+						}
 					});
-					alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );
-					btn.button('reset')
-				}
-				
+				}				
 				return false ;
 			} );
 					
@@ -193,6 +205,9 @@
 		}		
 	}]);
 	
+	
+	
+	
 	function handleCallbackResult( media, code, exists ){		
 		if(exists){
 			if( code != null && code != ''  ){						
@@ -220,8 +235,7 @@
 					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
-					signupPlaceHolder.onetime = code ;
-					
+					signupPlaceHolder.onetime = code ;					
 					if( media == 'twitter'){					
 						$('form[name="fm2"] fieldset').removeClass("hide");
 					}
