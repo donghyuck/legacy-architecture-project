@@ -76,7 +76,7 @@
 		MODIFIED_DATE = ?
 	WHERE ANNOUNCE_ID = ?	
 	]]></sql-query>
-	<sql-query name="INSERT_ANNOUNCE" description="INSERT_ANNOUNCE"><![CDATA[
+	<sql-query name="INSERT_ANNOUNCE" description="INSERT ANNOUNCE"><![CDATA[
     INSERT INTO V2_ANNOUNCE (
 		ANNOUNCE_ID,
 		OBJECT_TYPE,
@@ -89,7 +89,7 @@
 		STATUS,
 		CREATION_DATE,
 		MODIFIED_DATE
-	) VALUES ( 	?,?,?,?,?,?,?,?,?,?,? )    	
+	) VALUES ( ?,?,?,?,?,?,?,?,0,?,? )    	
 	]]></sql-query>
 	<sql-query name="DELETE_ANNOUNCE" description="DELETE_ANNOUNCE"><![CDATA[
 	DELETE FROM V2_ANNOUNCE WHERE ANNOUNCE_ID = ?

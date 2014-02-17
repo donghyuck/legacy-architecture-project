@@ -59,6 +59,7 @@ public class ParamUtils extends ServletRequestUtils {
             com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
             return (T) mapper.readValue(jsonString, requiredType );
         } catch (Exception e) {
+        	
             if(requiredType == List.class )
                 return (T) Collections.EMPTY_LIST;
             else if (requiredType == Map.class ){

@@ -165,16 +165,20 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	
 	public void insert(Announce announce) {
 		
-		long announceId = announce.getAnnounceId();
-		if( announceId < 0 )
-			announceId = getNextId(sequencerName);
+		long announceIdToUse = announce.getAnnounceId();
+		if( announceIdToUse < 0 )
+			announceIdToUse = getNextId(sequencerName);
+		announce.setAnnounceId(announceIdToUse);
 		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_ANNOUNCE").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, announce.getAnnounceId()),
+				new SqlParameterValue (Types.NUMERIC, announce.getObjectType()),
+				new SqlParameterValue (Types.NUMERIC, announce.getObjectId()),
+				new SqlParameterValue (Types.NUMERIC, announce.getUserId()),
 				new SqlParameterValue (Types.VARCHAR, announce.getSubject()), 
 				new SqlParameterValue (Types.VARCHAR, announce.getBody() ), 
 				new SqlParameterValue(Types.TIMESTAMP, announce.getStartDate()),
-				new SqlParameterValue(Types.DATE, announce.getEndDate()),
+				new SqlParameterValue(Types.TIMESTAMP, announce.getEndDate()),
 				new SqlParameterValue(Types.DATE, announce.getCreationDate()),
 				new SqlParameterValue(Types.DATE, announce.getModifiedDate()) );				
 		setAnnounceProperties(announce.getAnnounceId(), announce.getProperties());				
