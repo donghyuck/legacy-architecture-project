@@ -56,6 +56,7 @@ public class FacebookProfile implements Serializable {
 
 	private String about;
 	
+
 	private String bio;
 	
 	private String birthday;
@@ -387,5 +388,85 @@ public class FacebookProfile implements Serializable {
 
 
 
+	/* (비Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("FacebookProfile [");
+		if (id != null)
+			builder.append("id=").append(id).append(", ");
+		if (username != null)
+			builder.append("username=").append(username).append(", ");
+		if (name != null)
+			builder.append("name=").append(name).append(", ");
+		if (firstName != null)
+			builder.append("firstName=").append(firstName).append(", ");
+		if (middleName != null)
+			builder.append("middleName=").append(middleName).append(", ");
+		if (lastName != null)
+			builder.append("lastName=").append(lastName).append(", ");
+		if (gender != null)
+			builder.append("gender=").append(gender).append(", ");
+		if (locale != null)
+			builder.append("locale=").append(locale).append(", ");
+		if (link != null)
+			builder.append("link=").append(link).append(", ");
+		if (website != null)
+			builder.append("website=").append(website).append(", ");
+		if (email != null)
+			builder.append("email=").append(email).append(", ");
+		if (thirdPartyId != null)
+			builder.append("thirdPartyId=").append(thirdPartyId).append(", ");
+		if (timezone != null)
+			builder.append("timezone=").append(timezone).append(", ");
+		if (updatedTime != null)
+			builder.append("updatedTime=").append(updatedTime).append(", ");
+		if (verified != null)
+			builder.append("verified=").append(verified).append(", ");
+		if (about != null)
+			builder.append("about=").append(about).append(", ");
+		if (bio != null)
+			builder.append("bio=").append(bio).append(", ");
+		if (birthday != null)
+			builder.append("birthday=").append(birthday).append(", ");
+		if (location != null)
+			builder.append("location=").append(location).append(", ");
+		if (hometown != null)
+			builder.append("hometown=").append(hometown).append(", ");
+		if (interestedIn != null)
+			builder.append("interestedIn=").append(interestedIn).append(", ");
+		if (inspirationalPeople != null)
+			builder.append("inspirationalPeople=").append(inspirationalPeople)
+					.append(", ");
+		if (languages != null)
+			builder.append("languages=").append(languages).append(", ");
+		if (sports != null)
+			builder.append("sports=").append(sports).append(", ");
+		if (favoriteTeams != null)
+			builder.append("favoriteTeams=").append(favoriteTeams).append(", ");
+		if (favoriteAthletes != null)
+			builder.append("favoriteAthletes=").append(favoriteAthletes)
+					.append(", ");
+		if (religion != null)
+			builder.append("religion=").append(religion).append(", ");
+		if (political != null)
+			builder.append("political=").append(political).append(", ");
+		if (quotes != null)
+			builder.append("quotes=").append(quotes).append(", ");
+		if (relationshipStatus != null)
+			builder.append("relationshipStatus=").append(relationshipStatus)
+					.append(", ");
+		if (significantOther != null)
+			builder.append("significantOther=").append(significantOther)
+					.append(", ");
+		if (work != null)
+			builder.append("work=").append(work).append(", ");
+		if (education != null)
+			builder.append("education=").append(education);
+		builder.append("]");
+		return builder.toString();
+	}
 	
 }
