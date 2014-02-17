@@ -344,7 +344,9 @@
 				<div class="media">
 					<a class="pull-left" href="\\#"><img class="media-object" src="http://graph.facebook.com/#=facebookProfile.id#/picture" alt="프로파일 이미지" class="img-rounded"></a>
 					<div class="media-body">
-						<h5 class="media-heading">#=facebookProfile.name# (#=facebookProfile.firstName#, #=facebookProfile.lastName#)</h5>
+						<h5 class="media-heading">
+						#=facebookProfile.name# (#=facebookProfile.firstName#, #=facebookProfile.lastName#)
+						</h5>
 						</br>
 						URL : #=facebookProfile.link#</br>
 						로케일 : #=facebookProfile.locale#</br>
