@@ -173,11 +173,8 @@ public class FacebookAction extends SocialNetworkActionSupport {
 	
 	public String execute() throws Exception {
 		if( socialNetworkId < 0 ){			
-
 			List <SocialNetwork> list ;
-			if ( getObjectType() == 1 ){				
-
-				
+			if ( getObjectType() == 1 ){					
 				list = getSocialNetworkManager().getSocialNetworks(getCompany());
 			}else{
 				list = getSocialNetworkManager().getSocialNetworks(getUser());

@@ -24,6 +24,7 @@ public class SocialNetworkActionSupport extends FrameworkActionSupport implement
 	private Cache socialStreamsCache;
 	private SocialNetworkManager socialNetworkManager;	
 	private Integer objectType = 2 ;
+	
 	/**
 	 * @return objectType
 	 */
@@ -72,6 +73,8 @@ public class SocialNetworkActionSupport extends FrameworkActionSupport implement
 		
 		return false;
 	}
+	
+
 
 	
 }

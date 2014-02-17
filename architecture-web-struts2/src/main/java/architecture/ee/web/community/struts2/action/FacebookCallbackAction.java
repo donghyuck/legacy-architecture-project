@@ -15,8 +15,6 @@
  */
 package architecture.ee.web.community.struts2.action;
 
-import java.util.List;
-
 import org.apache.commons.lang.StringUtils;
 import org.scribe.model.Token;
 
@@ -26,6 +24,7 @@ import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
+import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
 public class FacebookCallbackAction  extends SocialCallbackSupport {
@@ -63,14 +62,20 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 			Token token = provider.getTokenWithCallbackReturns(null, code);
 			newSocialNetwork.setAccessSecret(token.getSecret());
 			newSocialNetwork.setAccessToken(token.getToken());
-			setSocialNetwork(newSocialNetwork);
-		}		
+			setSocialNetwork(newSocialNetwork);		
+		}else if ( StringUtils.isNotEmpty( getOnetime())){
+			Object obj = getOneTimeSecureObject();
+			if( obj != null && obj instanceof FacebookProfile){
+				this.userProfile = (FacebookProfile)obj;
+				signIn();
+			}
+		}
+		
 		return success();
 	}
 
 	@Override
-	public User findUser() {
-		
+	public User findUser() {		
 		if( this.foundUser == null){
 			FacebookProfile profileToUse = (FacebookProfile)getUserProfile();
 			if( profileToUse != null ){
@@ -85,5 +90,6 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 		}
 		return this.foundUser;
 	}
-		
+	
+	
 }

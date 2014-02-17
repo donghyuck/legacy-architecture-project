@@ -72,8 +72,7 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 			this.userProfile = provider.authenticate();
 		}
 		return this.userProfile;
-	}
-	
+	}	
 
 	public String execute() throws Exception {
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
@@ -82,9 +81,14 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 			Token token =provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);			
 			newSocialNetwork.setAccessSecret(token.getSecret());
 			newSocialNetwork.setAccessToken(token.getToken());
-			setSocialNetwork(newSocialNetwork);
-			
-		}			
+			setSocialNetwork(newSocialNetwork);			
+		}else if ( StringUtils.isNotEmpty( getOnetime())){
+			Object obj = getOneTimeSecureObject();
+			if( obj != null && obj instanceof TwitterProfile){
+				this.userProfile = (TwitterProfile)obj;
+				signIn();
+			}
+		}
 		return success();
 	}
 	
