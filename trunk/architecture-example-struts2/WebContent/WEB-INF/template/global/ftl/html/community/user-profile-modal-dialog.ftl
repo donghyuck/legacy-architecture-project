@@ -350,7 +350,9 @@
 						</br>
 						URL : #=facebookProfile.link#</br>
 						로케일 : #=facebookProfile.locale#</br>
+						# if ( typeof (facebookProfile.location)  == "object" ) { #
 						위치 : #=facebookProfile.location.name#</br>
+						# } #
 					</div>		
 				</div>								
 				# } else if ( typeof (error)  == "object" ) { #
