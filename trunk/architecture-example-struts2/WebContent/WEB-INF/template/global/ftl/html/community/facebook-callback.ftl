@@ -26,6 +26,8 @@
 				if( typeof window.opener.handleCallbackResult == "function"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode, true);
 					window.close();						
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.handleCallbackResult("facebook", onetimeCode, true);
 				} else {
 					// 기타
 					common.api.signin({
@@ -38,14 +40,15 @@
 					}); 												
 				}								
 				<#else>			
-				var template = kendo.template($('#account-not-found-alert-template').html());
-				
-				//alert("${action.getUserProfile() }");
-				
+				var template = kendo.template($('#account-not-found-alert-template').html());				
+				//alert("${action.getUserProfile() }");				
 				$("#status").html(template({media: "facebook"}));				
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 						window.opener.handleCallbackResult("facebook", onetimeCode , false);
-						window.close();							
+						window.close();	
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.handleCallbackResult("facebook", onetimeCode, false);
+				} else {												
 				}else{
 						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 						window.close();
