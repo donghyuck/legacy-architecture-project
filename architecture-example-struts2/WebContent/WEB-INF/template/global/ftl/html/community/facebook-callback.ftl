@@ -40,7 +40,7 @@
 				<#else>			
 				var template = kendo.template($('#account-not-found-alert-template').html());
 				
-				alert(${userProfile.username});
+				alert(${action.userProfile.username});
 				
 				$("#status").html(template({media: "facebook"}));				
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
