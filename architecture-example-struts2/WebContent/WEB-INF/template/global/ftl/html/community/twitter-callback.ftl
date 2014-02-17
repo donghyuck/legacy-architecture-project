@@ -22,11 +22,11 @@
 				
 			<#if action.user.anonymous >					
 				<#if action.findUser()?exists >						
-				if(typeof window.opener.handleCallbackResult != "undefined"){		
+				if(typeof window.opener.handleCallbackResult == "function"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode , true);
 					window.close();						
-				}else if( typeof window.opener.signupCallbackResult != "undefined"){			
-					window.opener.handleCallbackResult("twitter", onetimeCode, true);
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.signupCallbackResult("twitter", onetimeCode, true);
 				}else{
 					// 기타
 					common.api.signin({
@@ -42,11 +42,11 @@
 				// user does not exist !	
 				var template = kendo.template($('#account-not-found-alert-template').html());
 				$("#status").html(template({media: "twitter"}));				
-				if(typeof window.opener.handleCallbackResult != "undefined"){		
+				if(typeof window.opener.handleCallbackResult == "function"){		
 						window.opener.handleCallbackResult("twitter", onetimeCode , false);
 						window.close();	
-				}else if( typeof window.opener.signupCallbackResult != "undefined"){			
-					window.opener.handleCallbackResult("twitter", onetimeCode, false);
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.signupCallbackResult("twitter", onetimeCode, false);
 				} else {
 						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 						window.close();
