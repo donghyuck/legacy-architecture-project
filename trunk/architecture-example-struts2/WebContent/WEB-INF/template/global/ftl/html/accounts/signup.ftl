@@ -86,8 +86,7 @@
 										url : "${request.contextPath}/accounts/check-username-available.do?output=json",
 										dataType: 'json',
 										data: { username: input.val() },
-										success : function(response){						
-			
+										success : function(response){			
 											if (typeof response.usernameAvailable !== 'undefined' ){	
 												validatorPlaceHolder.set( input.val(), response.usernameAvailable );				
 												if( validator.validateInput(input) ){
