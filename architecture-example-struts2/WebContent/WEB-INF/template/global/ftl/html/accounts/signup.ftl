@@ -215,7 +215,7 @@
 			return true;			
 		}
 		
-		function signupCallbackResult( provider, code , exists  ){
+		function signupCallbackResult( media, code , exists  ){
 			if(exists){
 				if( code != null && code != ''  ){						
 					var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
