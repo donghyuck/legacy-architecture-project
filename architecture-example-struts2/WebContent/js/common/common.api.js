@@ -65,7 +65,7 @@
 				if( response.error ){ 												
 					options.fail(response) ;
 				} else {					
-					options.success(response) ;					
+					options.success( new User(response.account)) ;					
 				}
 			},
 			error:options.error || handleKendoAjaxError,
