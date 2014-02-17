@@ -23,11 +23,11 @@
 			</#if>				
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >					
-				if( typeof window.opener.handleCallbackResult != "undefined"){			
+				if( typeof window.opener.handleCallbackResult == "function"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode, true);
 					window.close();						
-				}else if( typeof window.opener.signupCallbackResult != "undefined"){			
-					window.opener.handleCallbackResult("facebook", onetimeCode, true);
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.signupCallbackResult("facebook", onetimeCode, true);
 				} else {
 					// 기타
 					common.api.signin({
@@ -46,8 +46,8 @@
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 						window.opener.handleCallbackResult("facebook", onetimeCode , false);
 						window.close();	
-				}else if( typeof window.opener.signupCallbackResult != "undefined"){			
-					window.opener.handleCallbackResult("facebook", onetimeCode, false);
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.signupCallbackResult("facebook", onetimeCode, false);
 				} else {												
 				}else{
 						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
