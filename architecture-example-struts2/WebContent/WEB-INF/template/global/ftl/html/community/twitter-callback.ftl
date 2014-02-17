@@ -25,6 +25,8 @@
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 					window.opener.handleCallbackResult("twitter", onetimeCode , true);
 					window.close();						
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.handleCallbackResult("twitter", onetimeCode, true);
 				}else{
 					// 기타
 					common.api.signin({
@@ -42,8 +44,10 @@
 				$("#status").html(template({media: "twitter"}));				
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 						window.opener.handleCallbackResult("twitter", onetimeCode , false);
-						window.close();							
-				}else{
+						window.close();	
+				}else if( typeof window.opener.signupCallbackResult == "function"){			
+					window.opener.handleCallbackResult("twitter", onetimeCode, false);
+				} else {
 						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 						window.close();
 				}	
