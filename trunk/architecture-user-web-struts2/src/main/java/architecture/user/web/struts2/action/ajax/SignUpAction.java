@@ -18,27 +18,27 @@ package architecture.user.web.struts2.action.ajax;
 import org.apache.commons.lang.StringUtils;
 
 import architecture.common.user.UserManager;
+import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class SignUpAction extends  FrameworkActionSupport  {
 	
 	private UserManager userManager ;
 	
-	private String usernameOrEmail ;
-	
+	private String username ;
 	
 	/**
-	 * @return usernameOrEmail
+	 * @return username
 	 */
-	public String getUsernameOrEmail() {
-		return usernameOrEmail;
+	public String getUsername() {
+		return username;
 	}
 
 	/**
-	 * @param usernameOrEmail 설정할 usernameOrEmail
+	 * @param username 설정할 username
 	 */
-	public void setUsernameOrEmail(String usernameOrEmail) {
-		this.usernameOrEmail = usernameOrEmail;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	/**
@@ -62,10 +62,14 @@ public class SignUpAction extends  FrameworkActionSupport  {
 	}
 	
 	public boolean isUsernameAvailable() throws Exception {      	
-		if( StringUtils.isNotEmpty( usernameOrEmail ))
-			return userManager.getFoundUserCount(usernameOrEmail) > 0 ? false : true;
-		else 
-			return false;
+		if( StringUtils.isNotEmpty( username )){
+			try {
+				userManager.getUser(username);
+			} catch (UserNotFoundException e) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }

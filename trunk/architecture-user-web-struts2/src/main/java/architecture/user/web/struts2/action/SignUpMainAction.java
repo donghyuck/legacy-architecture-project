@@ -23,7 +23,7 @@ import architecture.common.user.UserTemplate;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class SignUpAction  extends FrameworkActionSupport  {
+public class SignUpMainAction  extends FrameworkActionSupport  {
 	
 	private UserManager userManager ;
 	
@@ -67,5 +67,5 @@ public class SignUpAction  extends FrameworkActionSupport  {
 		this.targetUser = userManager.createApplicationUser(t);		
 		return success();	
     }
-    
+
 }

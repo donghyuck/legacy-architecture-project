@@ -28,7 +28,6 @@ import architecture.ee.web.ws.Property;
 
 public class GetUserDetailsAction extends  FrameworkActionSupport {
 
-
 	public List<Property> getCurrentUserProperty() {
 		Map<String, String> properties = getCurrentUser().getProperties();
 		List<Property> list = new ArrayList<Property>();

@@ -20,7 +20,7 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">
-				checkUsernameAvailable
+				usernameAvailable
 				</param>
 			</result>	
 		</action>
