@@ -35,11 +35,13 @@
 			$('#login-window').modal({show:true, backdrop:false});			
 			
 			var template = kendo.template($("#alert-template").html());	
+			var validator = $("#login-window").kendoValidator({
+				errorTemplate: '<span class="help-block">#=message#</span>',
+			}).data("kendoValidator");
 			
 			$('form[name="fm1"]').submit(function(e) {		
 				var btn = $('.custom-signin');
-				btn.button('loading');				
-				var validator = $("#login-window").kendoValidator().data("kendoValidator");     
+				btn.button('loading');	
 				$("#status").html("");				
 				if( validator.validate() ){        				
 					$.ajax({
@@ -82,7 +84,7 @@
 
 			$('form[name="fm2"]').submit(function(e) {			
 				var btn = $('.custom-signup');				
-				btn.button('loading');			
+				btn.button('loading');
 				
 				var input_email_required = (signupPlaceHolder.media == 'twitter') ;
 				var input_checkbox = $("input[name='input-agree']");
@@ -388,6 +390,10 @@
 									<span class="help-block">서비스 이용을 위하여 메일 주소 입력이 필요합니다.</span>							
 								</div>
 							</fieldset>			
+							<div class="custom-required-inputs">
+							
+							
+							</div>	
 							<div class="custom-alert"></div>						
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
@@ -405,12 +411,14 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-	<form name="fm" role="form" method="POST" accept-charset="utf-8" ></form> 
+	
+	<form name="fm" role="form" method="POST" accept-charset="utf-8" ></form>
+	
 	<script type="text/x-kendo-template" id="alert-template">
 	<div class="alert alert-danger">
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-          #=message#
-    </div>
+		#=message#
+	</div>
     </script>
     
 	<STYLE type="text/css">	    
@@ -434,6 +442,7 @@
 				    text-indent: 0;
 				    width: 230px;
 				}
+				
 		.k-widget.k-tooltip-validation {
 			background-color: transparent ;
 			color: #a94442;
@@ -444,7 +453,6 @@
 			-webkit-box-shadow : 0 0 0 0 ;
 			box-shadow : 0 0 0 0;
 		}
-		
 						
 	</STYLE>
 	<!-- End Main Content and Sidebar -->
