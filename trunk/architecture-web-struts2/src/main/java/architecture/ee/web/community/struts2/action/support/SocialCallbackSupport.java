@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.community.struts2.action.support;
 
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -31,7 +32,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
+import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
+import architecture.common.user.UserNotFoundException;
+import architecture.common.user.UserTemplate;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
@@ -172,7 +176,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 			if( provider.getMedia() == Media.TWITTER ){
 				this.userProfile = ((TwitterServiceProvider) provider).authenticate();
 			}else if ( provider.getMedia() == Media.FACEBOOK ){
-				this.userProfile = ((FacebookServiceProvider) provider ).getUserProfile();		
+				this.userProfile = ((FacebookServiceProvider) provider ).getUserProfile();	
 			}
 		}
 		return this.userProfile;
@@ -217,7 +221,13 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		User userToUse = findUser();
 		log.debug("try ... single sign on ............" + userToUse.getUserId());
 		if( userToUse != null ){			
-			createSecurityContext(userToUse);
+			createSecurityContext(userToUse);			
+			UserTemplate template = new UserTemplate(userToUse);
+			template.setLastLoggedIn(new Date());				
+			try {
+				userManager.updateUser(template);
+			} catch (Exception e) {} 
+			
 			return true;
 		}
 		return false;		
