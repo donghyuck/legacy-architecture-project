@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -33,7 +34,10 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
+import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
+import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.social.SocialNetworkManager;
+import architecture.ee.web.community.social.SocialServiceProvider;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsService;
 
@@ -46,7 +50,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	private UserManager userManager;
 	private Cache socialStreamsCache;
 	private String onetime ;
-	
+	private Object userProfile = null;
 	
 	
 		/**
@@ -109,21 +113,23 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	 * @return socialNetwork
 	 */
 	public SocialNetwork getSocialNetwork() {
+		if( socialNetwork == null ){
+			if( StringUtils.isNotEmpty(onetime)){
+				socialNetwork = (SocialNetwork)getOneTimeSecureObject();			
+			}
+		}		
 		return socialNetwork;
 	}
 
 	/**
 	 * @param socialNetwork 설정할 socialNetwork
 	 */
-	public void setSocialNetwork(SocialNetwork socialNetwork) {
-		
+	public void setSocialNetwork(SocialNetwork socialNetwork) {		
 		this.socialNetwork = socialNetwork;
 		this.accessSecret = socialNetwork.getAccessSecret();
-		this.accessToken = socialNetwork.getAccessToken();
-		
+		this.accessToken = socialNetwork.getAccessToken();		
 		socialNetwork.getSocialServiceProvider().setAccessToken(socialNetwork.getAccessToken());
 		socialNetwork.getSocialServiceProvider().setAccessSecret(socialNetwork.getAccessSecret());
-
 	}
 
 	/**
@@ -158,9 +164,20 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	protected SocialNetwork newSocialNetwork(Media media){	
 		SocialNetwork network =  socialNetworkManager.createSocialNetwork(getUser(), media );		
 		return network;
-	}
+	}	
 	
-	abstract public Object getUserProfile();
+	public Object getUserProfile(){
+		if( userProfile == null ){
+			SocialServiceProvider provider = getSocialNetwork().getSocialServiceProvider();;
+			if( provider.getMedia() == Media.TWITTER ){
+				this.userProfile = ((TwitterServiceProvider) provider).authenticate();
+			}else if ( provider.getMedia() == Media.FACEBOOK ){
+				this.userProfile = ((FacebookServiceProvider) provider ).getUserProfile();		
+			}
+		}
+		return this.userProfile;
+	}
+		
 	
 	abstract public User findUser();
 			
@@ -216,7 +233,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	
 	public String getOneTimeSecureCode(){
 		String uuid = UUID.randomUUID().toString();
-		socialStreamsCache.put(new Element( "onetime-" + uuid, getUserProfile()));		
+		socialStreamsCache.put(new Element( "onetime-" + uuid, getSocialNetwork()));		
 		return uuid;
 	}
 	
