@@ -23,10 +23,10 @@
 			</#if>				
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >					
-				if( typeof window.opener.handleCallbackResult == "function"){			
+				if( typeof window.opener.handleCallbackResult != "undefined"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode, true);
 					window.close();						
-				}else if( typeof window.opener.signupCallbackResult == "function"){			
+				}else if( typeof window.opener.signupCallbackResult != "undefined"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode, true);
 				} else {
 					// 기타
@@ -46,7 +46,7 @@
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 						window.opener.handleCallbackResult("facebook", onetimeCode , false);
 						window.close();	
-				}else if( typeof window.opener.signupCallbackResult == "function"){			
+				}else if( typeof window.opener.signupCallbackResult != "undefined"){			
 					window.opener.handleCallbackResult("facebook", onetimeCode, false);
 				} else {												
 				}else{
