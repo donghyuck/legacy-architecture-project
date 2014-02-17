@@ -24,8 +24,7 @@ public interface SocialNetwork extends EntityModelObject {
 	
 	public enum Media {
 		TWITTER, 
-		FACEBOOK,
-		UNKNOWN
+		FACEBOOK
 	};	
 		
 	/**
