@@ -18,6 +18,7 @@
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
 			'${request.contextPath}/js/common/common.classie.min.js',
 			'${request.contextPath}/js/common/common.models.js',
+			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
 			
