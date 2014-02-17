@@ -180,6 +180,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 	    	Date now = new Date();
 	    	
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_SECURITY.CREATE_USER").getSql(), new Object[]{
+				user.getCompanyId(),
 				userId,
 				user.getUsername(), 
 				user.getPasswordHash(), 
@@ -201,6 +202,7 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 				user.getModifiedDate() != null ? user.getModifiedDate() : now		
 			},
 			new int [] {
+				Types.NUMERIC,
 				Types.NUMERIC,
 				Types.VARCHAR,
 				Types.VARCHAR,
@@ -317,7 +319,8 @@ public class JdbcUserDao extends ExtendedJdbcDaoSupport implements UserDao {
 		{
 			String emailMatch = email.replace('*', '%');
 			try {				
-				UserTemplate user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_ENAIL").getSql(), userMapper, new Object[]{emailMatch}, new int[]{Types.VARCHAR});
+				
+				UserTemplate user = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_SECURITY.SELECT_USER_BY_EMAIL").getSql(), userMapper, new SqlParameterValue(Types.VARCHAR, emailMatch ) );
 				try{
 					user.setCompany(CompanyUtils.getCompany(user.getCompanyId()));		
 				} catch (CompanyNotFoundException e) {					

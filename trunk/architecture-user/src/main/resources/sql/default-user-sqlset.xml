@@ -313,6 +313,7 @@
 
 	<sql-query name="CREATE_USER" description="사용자 생성"><![CDATA[   
         INSERT INTO V2_USER (
+        	COMPANY_ID,
    			USER_ID, 
    			USERNAME, 
    			PASSWORD_HASH, 
@@ -331,7 +332,7 @@
    			STATUS,
    			CREATION_DATE, 
    			MODIFIED_DATE 
-   		) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+   		) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
      ]]></sql-query>
 
 	<sql-query name="COUNT_USERS_BY_EMAIL_OR_NAME" description="활성화된 내부 사용자 수"><![CDATA[
