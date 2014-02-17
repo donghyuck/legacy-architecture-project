@@ -72,5 +72,23 @@
 			dataType : "json"
 		});	
 	};
+
+	common.api.signup = function ( options ){		
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url || '/accounts/signup-external.do?output=json' ,
+			data: { item : options.data },
+			success : function(response){
+				if( response.error ){ 												
+					options.fail(response) ;
+				} else {					
+					options.success(response) ;					
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	};
 	
 })(jQuery);
