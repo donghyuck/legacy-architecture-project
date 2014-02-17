@@ -28,12 +28,22 @@
 		complete: function() {        	              		              		  
 
 			cbpBGSlideshow.init();
+			
+			common.api.getUser( {
+				success : function ( token ) {
+					if( !token.anonymous )
+						alert( "이미 로그인되어 있습니다." );
+				}				
+			} );		
+			
+			/*
 			$("#login").click( function() {           		    	
 				doLogin();
 			});
+			*/
 			
-			$('#login-window').modal({show:true, backdrop:false});			
-			
+			/* LOGIN */
+			$('#login-window').modal({show:true, backdrop:false});						
 			var template = kendo.template($("#alert-template").html());	
 			var validator = $("#login-window").kendoValidator({
 				errorTemplate: '<span class="help-block">#=message#</span>',
@@ -75,17 +85,15 @@
 				return false ;
 			});			
 			
+			/* SIGNUP */
 			var signup_modal = $('#signup-modal');
-			signup_modal.modal({show:false, backdrop:true});			
-			
+			signup_modal.modal({show:false, backdrop:true});		
 			var signupPlaceHolder =  new SignupForm({});
 			signup_modal.data("signupPlaceHolder", signupPlaceHolder );			
 			kendo.bind(signup_modal, signupPlaceHolder  );		
-
 			$('form[name="fm2"]').submit(function(e) {			
 				var btn = $('.custom-signup');				
-				btn.button('loading');
-				
+				btn.button('loading');				
 				var input_email_required = (signupPlaceHolder.media == 'twitter') ;
 				var input_checkbox = $("input[name='input-agree']");
 				var input_email = $("input[name='input-email']");
@@ -124,9 +132,20 @@
 					alert_danger.html( template({message: error_message }) );			
 					btn.button('reset')
 				}else{
+				
+					common.api.signup({
+						data: kendo.stringify( signup_modal.data("signupPlaceHolder") ),
+						success : function(response){
+							alert( kendo.stringify( response ) );
+						},
+						fail : function(response){
+							alert( kendo.stringify( response ) );
+						}						
+					});
 					alert( kendo.stringify( signup_modal.data("signupPlaceHolder") ) );
 					btn.button('reset')
 				}
+				
 				return false ;
 			} );
 					
@@ -169,15 +188,8 @@
 						error:handleKendoAjaxError												
 					});	
 				});								
-			});			
-			
-			common.api.getUser( {
-				success : function ( token ) {
-					if( !token.anonymous )
-						alert( "이미 로그인되어 있습니다." );
-				}				
-			} );
-			
+			});						
+	
 		}		
 	}]);
 	
