@@ -219,7 +219,7 @@
 		function signupCallbackResult( media, code , exists  ){
 			if(exists){
 				if( code != null && code != ''  ){						
-					var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
+					var onetime_url =  "${request.contextPath}/community/" + media + "-callback.do?output=json";			
 					common.api.signin({
 						url : onetime_url,
 						onetime:  code,
