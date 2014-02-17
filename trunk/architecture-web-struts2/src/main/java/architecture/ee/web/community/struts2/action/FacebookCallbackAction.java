@@ -24,7 +24,6 @@ import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
-import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
 public class FacebookCallbackAction  extends SocialCallbackSupport {
@@ -46,14 +45,6 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 		this.code = code;
 	}
 	
-	public Object getUserProfile(){
-		if( this.userProfile == null ){
-			FacebookServiceProvider provider = (FacebookServiceProvider) getSocialNetwork().getSocialServiceProvider();			
-			this.userProfile = provider.getUserProfile();
-		}
-		return this.userProfile;
-	}
-
 	public String execute() throws Exception {
 		
 		if( StringUtils.isNotEmpty(code) ){
@@ -64,13 +55,10 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);		
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
-			Object obj = getOneTimeSecureObject();
-			if( obj != null && obj instanceof FacebookProfile){
-				this.userProfile = (FacebookProfile)obj;
+			if( getUserProfile()!=null){
 				signIn();
 			}
-		}
-		
+		}		
 		return success();
 	}
 
@@ -90,6 +78,4 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 		}
 		return this.foundUser;
 	}
-	
-	
 }
