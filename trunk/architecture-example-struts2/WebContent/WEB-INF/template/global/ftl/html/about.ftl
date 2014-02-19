@@ -245,47 +245,32 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="company-media">
-								
-
-
-							
-
-								
+									<div id="social-media-area" class="row">
+										<#list action.connectedCompanySocialNetworks  as item >	
+										<div class="col-sm-6">						
+											<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
+												<div class="panel-heading">
+													<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
+													<div class="k-window-actions panel-header-actions">
+														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+													</div>
+												</div>		
+												<div class="panel-body scrollable hide" style="min-height:200px; max-height:500px;">
+													<ul class="media-list">
+														<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
+													</ul>
+												</div>							
+											</div>										
+										</div>
+										</#list>												
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-								
-					<div class="row">
-						<div class="col-sm-12">						
-
-						</div>											
 					</div>					
-					<!-- social media -->
-					
-					<#list action.connectedCompanySocialNetworks  as item >	
-					<div id="social-media-area" class="row blank-top-5">
-						<div class="custom-panels-group col-sm-12"> 
-								<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
-									<div class="panel-heading">
-										<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
-										<div class="k-window-actions panel-header-actions">
-											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-											<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-											<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-										</div>
-									</div>		
-									<div class="panel-body scrollable hide" style="min-height:200px; max-height:500px;">
-										<ul class="media-list">
-											<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
-										</ul>
-									</div>							
-								</div>											
-						</div>														
-					</div>
-					</#list>						
-					
 				</div>				
 			</div>
 		</div>			
