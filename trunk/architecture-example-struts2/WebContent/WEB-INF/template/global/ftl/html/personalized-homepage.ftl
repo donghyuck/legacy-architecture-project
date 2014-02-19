@@ -1301,7 +1301,7 @@
 							</label>
 						</div>										
 					</li>
-					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-plus"></i></a></li>
+					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-lock"></i></a></li>
 				</ul>
 			</div>
 		</nav>
