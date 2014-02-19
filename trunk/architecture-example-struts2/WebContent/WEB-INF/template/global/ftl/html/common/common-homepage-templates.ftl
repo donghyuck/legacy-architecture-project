@@ -405,12 +405,12 @@
 	<div class="btn-group">		
 		<a href="\\#" class="close pull-left">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
-		<img src="#:photoUrl#"  height="34"   alt="#:name#" class="close btn-link"/>
+		<img src="#:photoUrl#"  height="34"   alt="#:name#" class="btn-img"/>
 		# } else { # 
-		<img src="${request.contextPath}/images/common/anonymous.png" height="34" class="close btn-link"/>	
+		<img src="${request.contextPath}/images/common/anonymous.png" height="34" class="btn-img"/>	
 		# } #
 		</a>
-		<a  href="/main.do?view=personalized" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</a>
+		<a  href="/main.do?view=personalized" class="btn-img"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</a>
 		<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 			<!--<span class="caret"></span>-->
 			<i class="fa fa-cogs"></i>
