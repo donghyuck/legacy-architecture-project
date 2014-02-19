@@ -180,6 +180,7 @@
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div class="tab-pane active" id="company-history">
+									<div class="blank-top-5"></div>
 									<div class="panel panel-default panel-flat panel-border-thick">
 										<div class="panel-heading">회사 연혁</div>
 										<div class="panel-body scrollable" style="max-height:400px;">
@@ -245,7 +246,7 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="company-media">
-									<div id="social-media-area" class="row">
+									<div id="social-media-area" class="row blank-top-5">
 										<#list action.connectedCompanySocialNetworks  as item >	
 										<div class="col-sm-6">						
 											<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
@@ -253,8 +254,8 @@
 													<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
 													<div class="k-window-actions panel-header-actions">
 														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
+														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
 														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 													</div>
 												</div>		
