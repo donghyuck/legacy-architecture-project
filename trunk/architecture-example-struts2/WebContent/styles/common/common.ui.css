@@ -62,7 +62,7 @@ button.btn-img {
 .nav .open > a.btn ,
 .nav .open > a.btn:hover,
 .nav .open > a.btn:focus {
-  background-color: #428bca;
+  background-color: rgba( 217, 83, 79, 0.5 );
   /* border-color: #428bca; */
 }
 
