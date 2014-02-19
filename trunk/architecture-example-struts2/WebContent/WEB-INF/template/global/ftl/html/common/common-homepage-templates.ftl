@@ -400,7 +400,7 @@
 
 <!--  Top Munu Account Status Template -->
 <script id="account-template" type="text/x-kendo-template">	
-<li><a href="\\#"><i class="fa fa-bars fa-2x"></i></a></li>
+<li><a href="\\#"><i class="fa fa-cog fa-2x"></i></a></li>
 <li class="dropdown navbar-btn">
 	<div class="btn-group">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
