@@ -21,8 +21,7 @@
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
 			'${request.contextPath}/js/common/common.classie.min.js',
 			'${request.contextPath}/js/jqeury.waypoints/waypoints.min.js'],
-			complete: function() {
-			
+			complete: function() {			
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
@@ -42,8 +41,7 @@
 						custom_panels_group.removeClass("col-sm-" + grid_col_size.oldValue );		
 						custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
 					});
-				});											
-							
+				});					
 	
 				var slide_effect = kendo.fx($("body div.overlay")).fadeIn();
 								
@@ -59,6 +57,7 @@
 						$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
 					});				
 				});
+				
 				$("#personalized-controls-menu-close").on( "click" , function(e){						
 					$('body').toggleClass('modal-open');		
 					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');					
@@ -68,9 +67,7 @@
 						});
 					}, 100);					
 				});
-				
-				//var menu = new cbpHorizontalSlideOutMenu( document.getElementById( 'cbp-hsmenu-wrapper' ) );
-				
+								
 				$('#personalized-area').waypoint(function(direction){				
 					if( direction = 'down' ){
 						 $('nav').first().toggleClass('hide');
