@@ -400,7 +400,7 @@
 
 <!--  Top Munu Account Status Template -->
 <script id="account-template" type="text/x-kendo-template">	
-<li><a href="\\#" class="btn-img"><i class="fa fa-cog"></i></a></li>
+<li><a href="\\#" class="btn-img"><i class="fa fa-cog"></i><span class="sr-only">Toggle Dropdown</span></a></li>
 <li class="dropdown navbar-btn">
 	<div class="btn-group">		
 		<a href="\\#" class="btn-img">
