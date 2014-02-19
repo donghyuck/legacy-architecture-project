@@ -404,9 +404,9 @@
 <li class="dropdown navbar-btn">
 	<div class="btn-group">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
-		<img src="#:photoUrl#"  height="34"  style="float: left;"  alt="#:name#"/>
+		<img src="#:photoUrl#"  height="34"   alt="#:name#" class="close btn-link"/>
 		# } else { # 
-		<img src="${request.contextPath}/images/common/anonymous.png" height="34" style="float: left;"/>	
+		<img src="${request.contextPath}/images/common/anonymous.png" height="34" class="close btn-link"/>	
 		# } #
 		 <button type="button" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
 		<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
