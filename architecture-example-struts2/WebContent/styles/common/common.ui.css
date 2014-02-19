@@ -62,7 +62,7 @@ button.btn-img {
 .nav .open > a.btn ,
 .nav .open > a.btn:hover,
 .nav .open > a.btn:focus {
-  background-color: #eee;
+  background-color: #428bca;
   /* border-color: #428bca; */
 }
 
