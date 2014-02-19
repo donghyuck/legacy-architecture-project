@@ -181,7 +181,7 @@
 							<div class="tab-content">
 								<div class="tab-pane active" id="company-history">
 									<div class="blank-top-5"></div>
-									<div class="panel panel-default panel-flat panel-border-thick">
+									<div class="panel panel-default panel-flat">
 										<!--<div class="panel-heading">회사 연혁</div>-->
 										<div class="panel-body scrollable" style="max-height:400px;">
 											<ul class="cbp_tmtimeline">
@@ -249,7 +249,7 @@
 									<div id="social-media-area" class="row blank-top-5">
 										<#list action.connectedCompanySocialNetworks  as item >	
 										<div class="col-sm-6">						
-											<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat panel-border-thick">
+											<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat">
 												<div class="panel-heading">
 													<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
 													<div class="k-window-actions panel-header-actions">
@@ -259,7 +259,7 @@
 														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 													</div>
 												</div>		
-												<div class="panel-body scrollable hide" style="min-height:200px; max-height:500px;">
+												<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
 													<ul class="media-list">
 														<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
 													</ul>
