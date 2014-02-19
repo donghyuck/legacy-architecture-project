@@ -32,16 +32,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
-import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
-import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
-import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
-import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.SocialServiceProvider;
+import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
+import architecture.ee.web.community.social.tumblr.TumblrServiceProvider;
+import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsService;
 
@@ -177,6 +176,8 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 				this.userProfile = ((TwitterServiceProvider) provider).authenticate();
 			}else if ( provider.getMedia() == Media.FACEBOOK ){
 				this.userProfile = ((FacebookServiceProvider) provider ).getUserProfile();	
+			}else	if( provider.getMedia() == Media.TUMBLR ){
+				this.userProfile = ((TumblrServiceProvider) provider ).getUserProfile();
 			}
 		}
 		return this.userProfile;
@@ -210,8 +211,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
 			SecurityContextImpl context = new SecurityContextImpl ();
 			context.setAuthentication(authentication);				
-			SecurityContextHolder.setContext( context );		
-			
+			SecurityContextHolder.setContext( context );			
 			HttpSession httpsession = request.getSession(true);
 			httpsession.setAttribute("SPRING_SECURITY_CONTEXT", context);		
 		}
@@ -226,8 +226,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 			template.setLastLoggedIn(new Date());				
 			try {
 				userManager.updateUser(template);
-			} catch (Exception e) {} 
-			
+			} catch (Exception e) {} 			
 			return true;
 		}
 		return false;		
