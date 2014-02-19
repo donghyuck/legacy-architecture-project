@@ -1301,7 +1301,7 @@
 							</label>
 						</div>										
 					</li>
-					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><span class="glyphicon glyphicon-cog"></span></a></li>
+					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-cog"></i></a></li>
 				</ul>
 			</div>
 		</nav>
