@@ -410,9 +410,10 @@
 		<img src="${request.contextPath}/images/common/anonymous.png" height="34" class="close btn-link"/>	
 		# } #
 		</a>
-		<button type="button" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
+		<a  href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
 		<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
-			<span class="caret"></span>
+			<!--<span class="caret"></span>-->
+			<i class="fa fa-cogs"></i>
 			<span class="sr-only">Toggle Dropdown</span>
 		</button>  
 		<ul class="dropdown-menu">
