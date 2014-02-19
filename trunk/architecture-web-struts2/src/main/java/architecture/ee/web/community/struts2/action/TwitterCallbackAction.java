@@ -22,7 +22,6 @@ import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
-import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
@@ -82,8 +81,7 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 	}
 	
 
-	public User findUser() {
-		
+	public User findUser() {		
 		if( this.foundUser == null){
 			TwitterProfile profileToUse = (TwitterProfile)getUserProfile();
 			if( profileToUse != null ){
