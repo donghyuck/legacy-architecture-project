@@ -72,7 +72,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		border-color: #222222;
 	}		
 	
-	
+		/*
 	nav.personalized-navbar {
 		height: 51px;
 		margin-top: -27px;
@@ -85,7 +85,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 		}		
 	}
 	
-	/*
+
 		#account-panel {
 			margin-top : 0 px;
 			padding-top : 10px;
