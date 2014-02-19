@@ -400,7 +400,21 @@
 
 <!--  Top Munu Account Status Template -->
 <script id="account-template" type="text/x-kendo-template">	
-<li><a href="\\#" class="btn-img"><i class="fa fa-cog"></i><span class="sr-only">Toggle Dropdown</span></a></li>
+<li>
+						<div class="btn-group navbar-btn" data-toggle="buttons">
+							<label class="btn btn-info">
+								<input type="radio" value="12"><i class="fa fa-square"></i>
+							</label>
+							<label class="btn btn-info active">
+						 		<input type="radio" value="6"> <i class="fa fa-th-large"></i>
+							</label>
+							<label class="btn btn-info">
+								<input type="radio"  value="4"> <i class="fa fa-th"></i>
+							</label>
+						</div>	
+						
+</li>
+<li><a href="\\#" class="btn-img"><i class="fa fa-bars"></i><span class="sr-only">Toggle Dropdown</span></a></li>
 <li class="dropdown navbar-btn">
 	<div class="btn-group">		
 		<a href="\\#" class="btn-img">
