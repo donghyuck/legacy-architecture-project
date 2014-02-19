@@ -79,6 +79,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	@media screen and (min-width: 768px) {
 		nav.personalized-navbar {
 			height: 51px;
+			margin-top: -26px;
 		}
 	}
 	
