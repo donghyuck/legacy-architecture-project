@@ -50,12 +50,20 @@ height:50px;
   filter: alpha(opacity=50);
   opacity: .5;
 }
+
 button.btn-img {
   -webkit-appearance: none;
   padding: 0;
   cursor: pointer;
   background: transparent;
   border: 0;
+}
+
+.nav .open > a.btn ,
+.nav .open > a.btn:hover,
+.nav .open > a.btn:focus {
+  background-color: #eee;
+  /* border-color: #428bca; */
 }
 
 /* Kendoui customize ----------------------- */
