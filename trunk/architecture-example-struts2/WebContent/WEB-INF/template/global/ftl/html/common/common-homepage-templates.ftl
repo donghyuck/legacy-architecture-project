@@ -402,13 +402,15 @@
 <script id="account-template" type="text/x-kendo-template">	
 <li><a href="\\#" class="btn btn-link"><i class="fa fa-cog"></i></a></li>
 <li class="dropdown navbar-btn">
-	<div class="btn-group">
+	<div class="btn-group">		
+		<a href="\\#" class="close pull-left">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 		<img src="#:photoUrl#"  height="34"   alt="#:name#" class="close btn-link"/>
 		# } else { # 
 		<img src="${request.contextPath}/images/common/anonymous.png" height="34" class="close btn-link"/>	
 		# } #
-		 <button type="button" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
+		</a>
+		<button type="button" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</button>
 		<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 			<span class="caret"></span>
 			<span class="sr-only">Toggle Dropdown</span>
