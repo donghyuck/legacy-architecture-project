@@ -16,7 +16,6 @@
 				});
 			});	
 
-
 			$('#my-profile-tab a').click(function (e) {
 				e.preventDefault();				
 				if( $(this).attr('href') == '#profile-social-network' ){					
@@ -125,20 +124,20 @@
 					}	
 				});
 			}
-
-		// Popup window code
-		function goSocialPopup(url) {
-			popupWindow = window.open(
-				url,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-		}
-		
-		function handleSocialCallbackResult( success ){
-			if( success ){
-
-			}else{
-				alert( "연결에 실패하였습니다." );
+	
+			// Popup window code
+			function goSocialPopup(url) {
+				popupWindow = window.open(
+					url,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
 			}
-		}
+			
+			function handleSocialCallbackResult( success ){
+				if( success ){
+	
+				}else{
+					alert( "연결에 실패하였습니다." );
+				}
+			}
 		-->
 		</script>
 		<style>		
@@ -152,9 +151,8 @@
 			
 		</style>			
 		
-		<div id="my-profile-dialog" class="modal-dialog">
-			<div class="modal-content">
-			
+		<div id="my-profile-dialog">
+			<div class="modal-content">			
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title" id="myModalLabel">내정보</h4>
