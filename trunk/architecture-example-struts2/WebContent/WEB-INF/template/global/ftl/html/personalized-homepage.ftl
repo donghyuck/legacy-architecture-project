@@ -1205,7 +1205,6 @@
 		
 		#personalized-controls-section{
 			margin-top: 0px;
-			border-left: solid 2px #47a3da;
 			padding : 0px;
 		}
 		
@@ -1302,7 +1301,7 @@
 							</label>
 						</div>										
 					</li>
-					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-bars"></i></a></li>
+					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-plus"></i></a></li>
 				</ul>
 			</div>
 		</nav>
