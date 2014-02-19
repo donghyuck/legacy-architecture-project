@@ -400,10 +400,10 @@
 
 <!--  Top Munu Account Status Template -->
 <script id="account-template" type="text/x-kendo-template">	
-<li><a href="\\#" class="btn btn-link"><i class="fa fa-cog"></i></a></li>
+<li><a href="\\#" class="btn-img"><i class="fa fa-cog"></i></a></li>
 <li class="dropdown navbar-btn">
 	<div class="btn-group">		
-		<a href="\\#" class="close pull-left">
+		<a href="\\#" class="btn-img">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 		<img src="#:photoUrl#"  height="34"   alt="#:name#" class="btn-img"/>
 		# } else { # 
