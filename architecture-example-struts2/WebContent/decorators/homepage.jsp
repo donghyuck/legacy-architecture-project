@@ -72,7 +72,7 @@ if( userAgent.contains("MSIE 8.0") || userAgent.contains("MSIE 7.0") ){
 	}		
 	
 	nav.personalized-navbar {
-		height: 52px;
+		height: 51px;
 	}
 	/*
 		#account-panel {
