@@ -109,7 +109,7 @@
 		</div>	
 		<div class="panel-body">			
 			<figure>			
-				<a href="\\##:photoId#" data-bind="attr:{href: photoIdLink }">
+				<a href="\\#:photoIdLink#" data-bind="attr:{href: photoIdLink }">
 					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" />			
 				</a>		
 				<figcaption>
