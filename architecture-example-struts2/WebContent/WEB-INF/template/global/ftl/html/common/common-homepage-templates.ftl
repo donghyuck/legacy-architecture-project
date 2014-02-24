@@ -125,10 +125,10 @@
 				</ul>
 				<div class="blank-top-5 "></div>
 				<ul class="pager">
-						#if ( index > 0 || page > 1 ) { # 
-						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
-						# } #	
-						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+					#if ( index > 0 || page > 1 ) { # 
+					<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+					# } #	
+					<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
 				</ul>										
 			</figcaption>			
 		</figure>
