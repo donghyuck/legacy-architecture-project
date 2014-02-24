@@ -949,51 +949,53 @@
 				});
 				
 				$("#" + renderToString ).data("extPanel").body().find('.pager li').each(function( index ) { 
-				var panel_pager = $(this);				
-				if( panel_pager.hasClass('previous') ){
-					panel_pager.click(function (e) { 
-						e.preventDefault();						
-						var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
-						var previous_index = current_index-1;	
-						var listView =  $('#photo-list-view').data('kendoListView');	
-						var list_view_pager = $("#photo-list-pager").data("kendoPager");
-						var current_page = list_view_pager.page();						
-						if( current_index > 0 ){							
-							var item = listView.dataSource.view()[previous_index];
-							item.index = previous_index;		
-							item.page = current_page ;					
-							$("#photo-list-view").data( "photoPlaceHolder", item );														
-							displayPhotoPanel( );
-						} else {
-							if( current_page > 1 ){
-								list_view_pager.page(current_page - 1);
-								listView.select(listView.element.children().last());
+					var panel_pager = $(this);				
+					if( panel_pager.hasClass('previous') ){
+						panel_pager.click(function (e) { 
+							e.preventDefault();						
+							var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
+							var previous_index = current_index-1;	
+							var listView =  $('#photo-list-view').data('kendoListView');	
+							var list_view_pager = $("#photo-list-pager").data("kendoPager");
+							var current_page = list_view_pager.page();						
+							if( current_index > 0 ){							
+								var item = listView.dataSource.view()[previous_index];
+								item.index = previous_index;		
+								item.page = current_page ;					
+								$("#photo-list-view").data( "photoPlaceHolder", item );														
+								displayPhotoPanel( );
+							} else {
+								if( current_page > 1 ){
+									list_view_pager.page(current_page - 1);
+									listView.select(listView.element.children().last());
+								}
 							}
-						}
-					});
-				}else if ( panel_pager.hasClass('next') ){ 
-					panel_pager.click(function (e) { 
-						e.preventDefault();
-						var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
-						var next_index = current_index + 1;				
-						var listView =  $('#photo-list-view').data('kendoListView');
-						var total_index = listView.dataSource.view().length -1 ;
-						var list_view_pager = $("#photo-list-pager").data("kendoPager");
-						var current_page = list_view_pager.page();												
-						if( current_index < total_index  ){
-							var item = listView.dataSource.view()[next_index];
-							item.index = next_index;
-							item.page = current_page ;							
-							$("#photo-list-view").data( "photoPlaceHolder", item );
-							displayPhotoPanel( );						
-						}else {
-							if( current_page <  list_view_pager.totalPages() ){
-								list_view_pager.page(current_page+1);
-								listView.select(listView.element.children().first());
-							}
-						}		
-					}
-				});	 	 
+						});
+					}else if ( panel_pager.hasClass('next') ){ 
+						panel_pager.click(function (e) { 
+							e.preventDefault();
+							var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
+							var next_index = current_index + 1;				
+							var listView =  $('#photo-list-view').data('kendoListView');
+							var total_index = listView.dataSource.view().length -1 ;
+							var list_view_pager = $("#photo-list-pager").data("kendoPager");
+							var current_page = list_view_pager.page();												
+							if( current_index < total_index  ){
+								var item = listView.dataSource.view()[next_index];
+								item.index = next_index;
+								item.page = current_page ;							
+								$("#photo-list-view").data( "photoPlaceHolder", item );
+								displayPhotoPanel( );						
+							}else {
+								if( current_page <  list_view_pager.totalPages() ){
+									list_view_pager.page(current_page+1);
+									listView.select(listView.element.children().first());
+								}
+							}		
+						});
+					}	
+				});	 	
+				 
 			}else{
 				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
 			}			
