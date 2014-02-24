@@ -890,7 +890,7 @@
 			var renderToString =  "photo-panel-0";	
 			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
 			
-			alert(photoPlaceHolder.imageId);
+			//alert(photoPlaceHolder.imageId);
 			
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
@@ -913,7 +913,7 @@
 								e.preventDefault();
 								var _ele = $(this);
 								if( _ele.hasClass( 'custom-delete') ){
-									alert( $("#photo-list-view").data( "photoPlaceHolder").imageId );
+									//alert( $("#photo-list-view").data( "photoPlaceHolder").imageId );
 									/**
 									$.ajax({
 										dataType : "json",
