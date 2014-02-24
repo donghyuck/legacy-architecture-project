@@ -1093,12 +1093,14 @@
 		border-left-color: #787878;
 		}	
 		
+		
+		
 		#attachment-list-view, #photo-list-view, #photo-gallery-view {
 			min-height: 320px;
 			min-width: 320px;
+			width: 100%;
 			padding: 0px;
 			border: 0px;
-			margin-bottom: -1px;
 		}
         		                		
 		.attach
@@ -1117,7 +1119,7 @@
 			width: 160px;
 			height: 160px;
 		}
-		
+				
 		.attach-description {
 			position: absolute;
 			top: 0;
@@ -1144,19 +1146,71 @@
 			padding: 0 10px;
 			font-size: 12px;
         }
-        
+		
+		/** image grid  */		
+		.img-listview {
+			width: 100%;
+			padding: 0px;
+			border: 0px;		
+		}
+
+		.img-wrapper {
+			float: left;
+			position: relative;
+			width: 33.33%;
+			padding: 0;
+			cursor: pointer;
+			overflow: hidden;		
+		}
+		
+		.img-wrapper img{
+			width: 100%;
+			height: 100%;
+		}
+		
+		.img-description {
+			position: absolute;
+			top: 0;
+			width: 100%	;
+			height: 0;
+			overflow: hidden;
+			background-color: rgba(0,0,0,0.8)
+		}
+	
+		.img-wrapper h3
+		{
+			margin: 0;
+            padding: 10px 10px 0 10px;
+            line-height: 1.1em;
+            font-size : 12px;
+            font-weight: normal;
+            color: #ffffff;
+            word-wrap: break-word;
+		}
+
+		.img-wrapper p {
+			color: #ffffff;
+			font-weight: normal;
+			padding: 0 10px;
+			font-size: 12px;
+		}		
+		
+		
 		.k-listview:after, .attach dl:after {
 			content: ".";
 			display: block;
 			height: 0;
 			clear: both;
 			visibility: hidden;
-        }
-        
-        .k-pager-wrap {
-        	border : 0px;
-        	border-width: 0px;
-        }
+		}
+		
+		.k-pager-wrap {
+			border : 0px;
+			border-width: 0px;
+			background : transparent;
+		}
+
+
 
 		table.k-editor {
 			height: 400px;
@@ -1245,20 +1299,6 @@
 			background : #5bc0de; /* transparent;        	*/
 			height: 90px;        	
 		}
-/*
-		.overlay{		
-			-webkit-transition: all 0.3s;
-			-moz-transition: all 0.3s;
-			transition: all 0.3s;
-			 position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 2000;
-			background: rgba(0,0,0,0.7);		
-		}
-*/
 
 		.overlay-hugeinc {
 			display:none;
