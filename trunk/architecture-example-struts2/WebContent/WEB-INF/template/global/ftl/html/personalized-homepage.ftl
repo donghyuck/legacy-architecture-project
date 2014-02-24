@@ -1348,8 +1348,9 @@
 				
 				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
 			</header>
-			<div class="blank-space-5">			
+					
 			<!--
+			<div class="blank-space-5">	
 				<nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
 					<div class="cbp-hsinner">
 						<ul class="cbp-hsmenu">
