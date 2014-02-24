@@ -109,7 +109,7 @@
 		</div>	
 		<div class="panel-body">			
 			<figure>			
-				<a data-bind="attr:{href: photoIdLink }">
+				<a href="\\##:photoId#" data-bind="attr:{href: photoIdLink }">
 					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" />			
 				</a>		
 				<figcaption>
@@ -123,7 +123,7 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay" data-bind="attr: { id: photoId }">			
+			<div class="lb-overlay" id="#:photoId#" data-bind="attr: { id: photoId }">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
 				<img data-bind="attr:{src: photoUrl}" />
 				<div>
