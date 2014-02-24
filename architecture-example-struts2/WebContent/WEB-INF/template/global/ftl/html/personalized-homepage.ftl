@@ -512,19 +512,19 @@
 												var template = kendo.template('<div class="alert alert-danger">#:message#</div>');
 												$("#announce-creator .status").html(template({message: "모든 항목을 입력하여 주세요. " }));
 											}
-																						
-											/*$.ajax({
-												dataType : "json",
-												type : 'POST',
-												url : '${request.contextPath}/community/update-announce.do?output=json',
-												data : { announceId: data.announceId, item: kendo.stringify( data ) },
-												success : function( response ){		
-													$('#announce-grid').data('kendoGrid').dataSource.read();	
-													$("#my-notice .btn-group button").first().click();
-												},
-												error:handleKendoAjaxError
-											});
-											*/											
+											if( !hasError ) {											
+												$.ajax({
+													dataType : "json",
+													type : 'POST',
+													url : '${request.contextPath}/community/update-announce.do?output=json',
+													data : { announceId: data.announceId, item: kendo.stringify( data ) },
+													success : function( response ){		
+														$('#announce-grid').data('kendoGrid').dataSource.read();	
+														$("#my-notice .btn-group button").first().click();
+													},
+													error:handleKendoAjaxError
+												});				
+											}							
 										} );
 									}			
 								} );									
