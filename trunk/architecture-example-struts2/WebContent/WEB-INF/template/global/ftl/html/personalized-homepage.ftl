@@ -1371,6 +1371,7 @@
 				-->
 				<div class="blank-top-5" ></div>	
 									<ul class="nav nav-tabs" id="myTab">
+										<li><a href="" tabindex="-1" data-toggle="tab">&nbsp;</a></li>	
 										<li><a href="#my-notice" tabindex="-1" data-toggle="tab">공지 & 이벤트</a></li>	
 										<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
 										<#if !action.user.anonymous >	
