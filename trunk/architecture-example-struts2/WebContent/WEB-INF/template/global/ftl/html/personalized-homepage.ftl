@@ -940,9 +940,12 @@
 			}else{
 				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
 			}			
-			/**
+			
+			
 			var panel = $("#" + renderToString ).data("extPanel");
 			var panel_body = panel.body() ;			
+			
+			/**
 			var template = kendo.template($('#photo-view-template').html());
 			panel_body.html( template(photoPlaceHolder) );
 			
@@ -995,7 +998,7 @@
 					});				
 				}
 			} );				
-			*//
+			*/
 			panel.show();
 			
 		}				
