@@ -994,7 +994,7 @@
 						}						
 					});				
 				}
-					 	 
+				);	 	 
 			}else{
 				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
 			}			
