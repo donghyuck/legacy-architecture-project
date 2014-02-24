@@ -112,6 +112,16 @@
 				<a data-bind="attr:{href: photoId }">
 					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" />			
 				</a>		
+				<figcaption>
+					<ul class="list-inline">
+						<small class="text-muted" data-bind="text: modifiedDate"></small>
+					</ul>
+					<div class="blank-top-5 "></div>
+					<ul class="pager">
+						<li class="previous" data-bind="invisible: previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						<li class="next"  data-bind="invisible: next" ><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+					</ul>										
+				</figcaption>		
 			</figure>		
 			<div class="lb-overlay" data-bind="id:{href: photoId }">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
