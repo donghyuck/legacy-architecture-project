@@ -264,7 +264,7 @@
 									}
 								}
 							});																	
-							$("#attachment-list-view").on("mouseenter",  ".attach", function(e) {
+							$("#attachment-list-view").on("mouseenter",  ".img-wrapper", function(e) {
 									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
 									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
