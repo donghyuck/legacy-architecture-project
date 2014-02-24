@@ -15,6 +15,7 @@
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.extension/bootstrap.tabcordion.min.js',			
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
@@ -154,12 +155,13 @@
 				createNoticeGrid();
 																			
 				// 4. Right Tabs
+				$('.tabcordion').tabcordion()
 
 				$('#myTab a').click(function (e) {
 					e.preventDefault();	
 					$(this).tab('show');
 				});	
-				
+								
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
@@ -1369,7 +1371,7 @@
 				</nav>
 				-->
 				<div class="blank-top-5" ></div>	
-				
+								<div class="tabcordion">
 									<ul class="nav nav-tabs" id="myTab">
 										<li><a href="#my-notice" tabindex="-1" data-toggle="tab">공지 & 이벤트</a></li>	
 										<li><a href="#my-streams" tabindex="-1" data-toggle="tab">쇼셜</a></li>							
@@ -1485,7 +1487,7 @@
 										</section>				
 									</div><!-- end photos  tab-pane -->
 								</div><!-- end of tab content -->					
-						
+							</div>
 			</div>	
 		</section>
 		
