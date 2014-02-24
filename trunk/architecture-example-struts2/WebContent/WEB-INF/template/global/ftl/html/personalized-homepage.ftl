@@ -904,6 +904,7 @@
 						template : kendo.template($("#photo-panel-template").html()),
 						data : photoPlaceHolder,
 						afterChange : function(data){
+							alert( this.html() );
 							kendo.bind(this, data);
 						},
 						commands:[
