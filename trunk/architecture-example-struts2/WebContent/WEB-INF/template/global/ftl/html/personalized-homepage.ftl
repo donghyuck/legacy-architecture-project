@@ -1007,7 +1007,49 @@
 			} );	
 */			
 			panel.show();			
-		}				
+		}	
+		
+		function previousPhoto (){
+			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
+			var previous_index = current_index-1;	
+			var listView =  $('#photo-list-view').data('kendoListView');	
+			var list_view_pager = $("#photo-list-pager").data("kendoPager");
+			var current_page = list_view_pager.page();						
+			if( current_index > 0 ){							
+				var item = listView.dataSource.view()[previous_index];
+				item.index = previous_index;		
+				item.page = current_page ;					
+				$("#photo-list-view").data( "photoPlaceHolder", item );														
+				displayPhotoPanel( );
+			} else {
+				if( current_page > 1 ){
+					list_view_pager.page(current_page - 1);
+					listView.select(listView.element.children().last());
+				}
+			}		
+		}
+		
+		function nextPhoto (){
+			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
+			var next_index = current_index + 1;				
+			var listView =  $('#photo-list-view').data('kendoListView');
+			var total_index = listView.dataSource.view().length -1 ;
+			var list_view_pager = $("#photo-list-pager").data("kendoPager");
+			var current_page = list_view_pager.page();												
+			if( current_index < total_index  ){
+				var item = listView.dataSource.view()[next_index];
+				item.index = next_index;
+				item.page = current_page ;							
+				$("#photo-list-view").data( "photoPlaceHolder", item );
+				displayPhotoPanel( );						
+			}else {
+				if( current_page <  list_view_pager.totalPages() ){
+					list_view_pager.page(current_page+1);
+					listView.select(listView.element.children().first());
+				}
+			}								
+		}
+					
 		-->
 		</script> 		   
 		
