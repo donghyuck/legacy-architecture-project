@@ -1303,8 +1303,8 @@
 						</div>										
 					</li>
 					<p class="navbar-text">&nbsp;</p>
-					<li><a href="#" class="btn-img"><i class="fa fa-angle-up"></i></a></li>
-					<li><a href="#" class="btn-img"><i class="fa fa-angle-down"></i></a></li>
+					<li><a href="#" class="btn-img"><i class="fa fa-chevron-up"></i></a></li>
+					<li><a href="#" class="btn-img"><i class="fa fa-chevron-down"></i></a></li>
 					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-cog"></i></a></li>
 				</ul>
 			</div>
