@@ -123,7 +123,7 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay" data-bind="attr:{id: photoId }">			
+			<div class="lb-overlay">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
 				<img data-bind="attr:{src: photoUrl}" />
 				<div>
