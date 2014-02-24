@@ -1152,7 +1152,7 @@
 			width: 100%;
 			padding: 0px;
 			border: 0px;		
-			min-height: 150px;
+			min-height: 200px;
 		}
 
 		.img-wrapper {
