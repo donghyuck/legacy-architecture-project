@@ -118,8 +118,8 @@
 					</ul>
 					<div class="blank-top-5 "></div>
 					<ul class="pager">
-						<li class="previous" data-bind="events: {click : previousPhoto }" ><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
-						<li class="next" data-bind="events: {click : nextPhoto }"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+						<li class="previous" data-bind="click: previousPhoto" ><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						<li class="next" data-bind="click: nextPhoto"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
 					</ul>										
 				</figcaption>		
 			</figure>		
