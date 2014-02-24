@@ -1287,8 +1287,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >			
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container">
-				<ul class="nav navbar-nav navbar-right">
-					
+				<ul class="nav navbar-nav navbar-right">					
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
