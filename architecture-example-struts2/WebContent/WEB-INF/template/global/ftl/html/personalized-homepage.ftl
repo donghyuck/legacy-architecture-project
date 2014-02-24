@@ -17,6 +17,7 @@
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
+			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
 			'${request.contextPath}/js/common/common.classie.min.js',
