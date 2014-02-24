@@ -1246,11 +1246,11 @@ figcaption .pager li > a:hover {
 div figure:hover figcaption {
 	opacity: 1;	
 	display: block ;
-	top: 0;
+	buttom: 0;
 	right: 0;
 	text-align: left;	
 	padding-left: 10px;	
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0,0,0,0.6);
 	position: absolute;
 	color: #fff;
 	z-index: 100;
