@@ -903,6 +903,9 @@
 					$("#" + renderToString ).extPanel({
 						template : kendo.template($("#photo-panel-template").html()),
 						data : photoPlaceHolder,
+						afterChange : function(data){
+							kendo.bind(this, data);
+						},
 						commands:[
 							{ selector :   "#" + renderToString + " .panel-body:first .btn", 
 							  handler : function(e){
