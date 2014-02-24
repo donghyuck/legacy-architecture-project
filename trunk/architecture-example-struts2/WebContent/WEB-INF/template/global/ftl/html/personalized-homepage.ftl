@@ -991,10 +991,9 @@
 								list_view_pager.page(current_page+1);
 								listView.select(listView.element.children().first());
 							}
-						}						
-					});				
-				}
-				);	 	 
+						}		
+					}
+				});	 	 
 			}else{
 				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
 			}			
