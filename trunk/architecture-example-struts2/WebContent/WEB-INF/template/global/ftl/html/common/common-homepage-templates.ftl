@@ -107,14 +107,20 @@
 				</ul>
 			</div>
 		</div>	
-		<div class="panel-body">
-			
-		<figure>			
-			<a data-bind="attr:{href: photoId }">
-				<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" />			
-			</a>		
-		</figure>			
-		
+		<div class="panel-body">			
+			<figure>			
+				<a data-bind="attr:{href: photoId }">
+					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" />			
+				</a>		
+			</figure>		
+			<div class="lb-overlay" data-bind="id:{href: photoId }">			
+				<a href="\\#page" class="lb-overlay-close">Close</a>
+				<img data-bind="attr:{src: photoUrl}" />
+				<div>
+					<h3>pointe <span>/point/</h3>
+					<p>image description....</p>
+				</div>
+			</div>							
 		</div>				
 	</div>		
 </script>
