@@ -121,7 +121,7 @@
 			</a>
 			<figcaption>
 				<ul class="list-inline">
-					<small class="text-muted">#:modifiedDate#</small>
+					<small class="text-muted" data-bind="text: modifiedDate"></small>
 				</ul>
 				<div class="blank-top-5 "></div>
 				<ul class="pager">
