@@ -27,6 +27,7 @@ public class SocialPageAction extends PageAction implements SocialNetworkAware {
 
 	private SocialNetworkManager socialNetworkManager;	
 
+	
 	/**
 	 * @return socialNetworkManager
 	 */

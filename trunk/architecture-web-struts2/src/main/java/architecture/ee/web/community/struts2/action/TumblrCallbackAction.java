@@ -28,7 +28,7 @@ import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
-public class SocialCallbackAction extends SocialCallbackSupport {
+public class TumblrCallbackAction extends SocialCallbackSupport {
 
 	private String oauth_token;
 	
@@ -69,17 +69,12 @@ public class SocialCallbackAction extends SocialCallbackSupport {
 
 	public String execute() throws Exception {
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
-			log.debug( request.getRemoteHost() );
-			log.debug( request.getRemoteAddr());
-			log.debug( request.getRemoteUser() );
-			/*}
 			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TUMBLR);			
 			TumblrServiceProvider provider = (TumblrServiceProvider) newSocialNetwork.getSocialServiceProvider();			
 			Token token =provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);			
 			newSocialNetwork.setAccessSecret(token.getSecret());
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);			
-			*/
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
 			if( getUserProfile()!=null){
 				signIn();
@@ -103,6 +98,5 @@ public class SocialCallbackAction extends SocialCallbackSupport {
 			}
 		}
 		return this.foundUser;
-	}
-	
+	}	
 }

@@ -79,22 +79,4 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 		}		
 		return success();
 	}
-	
-
-	public User findUser() {		
-		if( this.foundUser == null){
-			TwitterProfile profileToUse = (TwitterProfile)getUserProfile();
-			if( profileToUse != null ){
-				SocialNetwork found = findSocialNetworkByUsername( Media.TWITTER, Long.toString( profileToUse.getId() ));
-				if( found != null )
-					try {
-						this.foundUser = getUserManager().getUser(found.getObjectId());
-					} catch (UserNotFoundException e) {
-						log.error(e);
-					}
-			}
-		}
-		return this.foundUser;
-	}
-
 }
