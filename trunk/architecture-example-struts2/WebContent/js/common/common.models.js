@@ -241,6 +241,9 @@ var Image = kendo.data.Model.define( {
         modifiedDate: { type: "date"},
         creationDate: { type: "date" },
         index : {type: "number", defaultValue : 0 }
+    },
+    imageUrl : function imageUrl ( prefix ){
+    	return prefix + this.get("imageId");
     }
 });
 
