@@ -1095,7 +1095,7 @@
 		
 		
 		
-		#attachment-list-view, #photo-list-view, #photo-gallery-view {
+		#photo-list-view, #photo-gallery-view {
 			min-height: 320px;
 			min-width: 320px;
 			width: 100%;
