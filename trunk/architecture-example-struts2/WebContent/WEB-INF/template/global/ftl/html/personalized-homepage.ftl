@@ -1211,8 +1211,6 @@
 			background : transparent;
 		}
 
-
-
 		table.k-editor {
 			height: 400px;
 		}
@@ -1507,7 +1505,7 @@
 												<div class="panel-body scrollable" style="max-height:450px;">
 													<div id="photo-list-view" ></div>
 												</div>	
-												<div class="panel-header" style="padding:0px;">
+												<div class="panel-footer" style="padding:0px;">
 													<div id="photo-list-pager" class="k-pager-wrap"></div>
 												</div>
 											</div>																
