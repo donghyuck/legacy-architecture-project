@@ -107,7 +107,27 @@
 				</ul>
 			</div>
 		</div>	
-		<div class="panel-body"></div>				
+		<div class="panel-body">
+			
+		<figure>			
+			<a data-bind="attr:{href: '\\#photo' + imageId }">			
+			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" width="100%" alt="#:name# 이미지"/>			
+			</a>
+			<figcaption>
+				<ul class="list-inline">
+					<small class="text-muted" data-bind="text: modifiedDate"></small>
+				</ul>
+				<div class="blank-top-5 "></div>
+				<ul class="pager">
+					#if ( index > 0 || page > 1 ) { # 
+						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						# } #	
+						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+				</ul>										
+			</figcaption>			
+		</figure>			
+		
+		</div>				
 	</div>		
 </script>
 <script type="text/x-kendo-template" id="photo-view-template">	
@@ -122,9 +142,9 @@
 				<div class="blank-top-5 "></div>
 				<ul class="pager">
 					#if ( index > 0 || page > 1 ) { # 
-					<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
-					# } #	
-					<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
+						<li class="previous"><a href="\\#"><i class="fa fa-chevron-left fa-2x"></i></a></li>
+						# } #	
+						<li class="next"><a href="\\#"><i class="fa fa-chevron-right fa-2x"></i></a></li>
 				</ul>										
 			</figcaption>			
 		</figure>
