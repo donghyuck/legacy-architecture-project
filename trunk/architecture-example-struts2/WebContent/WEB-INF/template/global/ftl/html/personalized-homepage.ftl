@@ -950,6 +950,7 @@
 				
 				$("#" + renderToString ).data("extPanel").body().find('.pager li').each(function( index ) { 
 					var panel_pager = $(this);				
+					alert( "+" );
 					if( panel_pager.hasClass('previous') ){
 						panel_pager.click(function (e) { 
 							e.preventDefault();						
