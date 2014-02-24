@@ -400,9 +400,9 @@
 
 <!--  Top Munu Account Status Template -->
 <script id="account-template" type="text/x-kendo-template">
-<p class="navbar-text">&nbsp;</p>
 <li class="dropdown navbar-btn">
 	<div class="btn-group">		
+		<p class="navbar-text">&nbsp;</p>
 		<a href="\\#" class="btn-img">
 		#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
 		<img src="#:photoUrl#"  height="34"   alt="#:name#" class="btn-img"/>
