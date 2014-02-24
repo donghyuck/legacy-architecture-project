@@ -645,7 +645,7 @@ function handleKendoAjaxError(xhr) {
 		}
 	});
 };
-
+/*
 (function($, window, document, undefined) {
 	'use strict';
 	var settings = {
@@ -657,7 +657,7 @@ function handleKendoAjaxError(xhr) {
 		init : function(options) {
 			settings = $.extend({}, settings, options);
 			return this.each(function() {
-				if (!settings.init)
+//				if (!settings.init)
 					methods.events();
 				if (settings.deep_linking)
 					methods.from_hash();
@@ -690,4 +690,8 @@ function handleKendoAjaxError(xhr) {
 	}
 
 }(jQuery, this, this.document));
+*/
+
+
+
 
