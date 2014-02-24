@@ -1246,7 +1246,7 @@ figcaption .pager li > a:hover {
 div figure:hover figcaption {
 	opacity: 1;	
 	display: block ;
-	bottom: 0;
+	top: 0;
 	right: 0;
 	text-align: left;	
 	padding-left: 10px;	
