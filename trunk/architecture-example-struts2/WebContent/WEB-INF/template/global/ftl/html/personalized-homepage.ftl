@@ -1232,6 +1232,10 @@
 			}		
 		} 
 		
+		.cbp-spmenu {
+			background : #ffffff;
+		}
+		
 		.cbp-spmenu-vertical header {
 			1px solid #258ecd;
 			margin : 0px;
@@ -1333,7 +1337,7 @@
 		<div class="overlay hide"></div>
 		
 		<!-- start side menu -->
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right grey hide"  id="personalized-controls-section">			
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
 			<header>							
 				<div class="btn-group">
 					<button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
