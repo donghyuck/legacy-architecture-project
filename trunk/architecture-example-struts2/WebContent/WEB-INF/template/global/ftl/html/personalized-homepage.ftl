@@ -15,7 +15,7 @@
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.extension/bootstrap.tabcordion.min.js',			
+			'${request.contextPath}/js/bootstrap.extension/bootstrap.tabcordion.min.js',			
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
@@ -155,7 +155,7 @@
 				createNoticeGrid();
 																			
 				// 4. Right Tabs
-				$('.tabcordion').tabcordion()
+				$('.tabcordion').tabcordion();
 
 				$('#myTab a').click(function (e) {
 					e.preventDefault();	
