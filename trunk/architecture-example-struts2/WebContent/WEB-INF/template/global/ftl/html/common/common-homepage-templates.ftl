@@ -110,7 +110,7 @@
 		<div class="panel-body">
 			
 		<figure>			
-			<a data-bind="attr:{href: '\\#photo' + imageId }">			
+			<a attr="\\#photo-" data-bind="attr:{href:imageId }">			
 				
 			</a>		
 		</figure>			
