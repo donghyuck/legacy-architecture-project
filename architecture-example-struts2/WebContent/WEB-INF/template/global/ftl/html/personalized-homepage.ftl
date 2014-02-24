@@ -362,6 +362,9 @@
 									item.page = $("#photo-list-pager").data("kendoPager").page();				
 									item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
 									item.photoId = '#photo-' + +item.imageId ;													
+									item.previous = ( item.index > 0 || item.page > 1 ) ;
+									item.next = true ;
+									
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
 									displayPhotoPanel( ) ;										
 								},
@@ -936,6 +939,7 @@
 							var item = e.response.targetImage;
 							item.index = $("#photo-list-view").data( "photoPlaceHolder" ).index;			
 							item.page = $("#photo-list-view").data( "photoPlaceHolder" ).page				
+							
 							$("#photo-list-view").data( "photoPlaceHolder",  item );
 							displayPhotoPanel();
 						}
