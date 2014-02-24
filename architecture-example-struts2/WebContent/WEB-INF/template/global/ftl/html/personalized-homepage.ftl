@@ -265,9 +265,9 @@
 								}
 							});																	
 							$("#attachment-list-view").on("mouseenter",  ".attach", function(e) {
-									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
+									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".attach", function(e) {
-									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
+									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
 							});															
 														
 							$("input[name='attachment-list-view-filters']").on("change", function () {
