@@ -1288,6 +1288,7 @@
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-right">
+					
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
@@ -1301,6 +1302,9 @@
 							</label>
 						</div>										
 					</li>
+					<p class="navbar-text">&nbsp;</p>
+					<li><a href="#" class="btn-img"><i class="fa fa-angle-up"></i></a></li>
+					<li><a href="#" class="btn-img"><i class="fa fa-angle-down"></i></a></li>
 					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-cog"></i></a></li>
 				</ul>
 			</div>
@@ -1338,6 +1342,7 @@
 					<button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
 				</div>			
 				<!--<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>-->
+				
 				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
 			</header>
 			<div class="blank-space-5">			
