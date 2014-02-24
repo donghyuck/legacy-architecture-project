@@ -44,10 +44,9 @@
 								</#if>
 								</#list>
 							</ul>				
-						
-						
+							<ul id="account-navbar" class="nav navbar-nav navbar-right"></ul>						
 						</div>
-						<ul id="account-navbar" class="nav navbar-nav navbar-right"></ul>
+						
 					</div>
 				</nav>
 			</#if>		
