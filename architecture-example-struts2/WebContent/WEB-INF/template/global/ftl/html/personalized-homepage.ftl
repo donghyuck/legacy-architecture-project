@@ -1007,6 +1007,7 @@
 				 
 			}else{
 				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
+				kendo.bind($("#" + renderToString ).data("extPanel").body(), $("#" + renderToString ).data("extPanel").data());
 			}			
 			var panel = $("#" + renderToString ).data("extPanel");
 			
