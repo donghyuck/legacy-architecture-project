@@ -1201,7 +1201,7 @@ div figure {
 	float: center;
 	clear: both;
 	position: relative;
-	overflow: auto;
+	overflow: hidden;
 	margin: 0 auto;
     padding: 0 0 0 0;
     font-size: 15px;
