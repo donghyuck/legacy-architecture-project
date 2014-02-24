@@ -943,9 +943,9 @@
 			}			
 			
 			
-			var panel = $("#" + renderToString ).data("extPanel");
-			var panel_body = panel.body();
-			kendo.bind(panel_body, photoPlaceHolder );
+//			var panel = $("#" + renderToString ).data("extPanel");
+//			var panel_body = panel.body();
+//			kendo.bind(panel_body, photoPlaceHolder );
 			
 /*
 			var template = kendo.template($('#photo-view-template').html());
