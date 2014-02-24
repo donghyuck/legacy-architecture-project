@@ -110,7 +110,7 @@
 		<div class="panel-body">
 			
 		<figure>			
-			<a attr="\\#photo-" data-bind="attr:{href:imageId }">			
+			<a data-bind="attr:{href: common.api.toId( 'image', imageId ) }">			
 				
 			</a>		
 		</figure>			
