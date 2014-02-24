@@ -361,7 +361,7 @@
 									item.index = this.select().index();			
 									item.page = $("#photo-list-pager").data("kendoPager").page();				
 									item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
-									item.photoId = 'photo-' + +item.imageId ;													
+									item.photoId = '#photo-' + +item.imageId ;													
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
 									displayPhotoPanel( ) ;										
 								},
