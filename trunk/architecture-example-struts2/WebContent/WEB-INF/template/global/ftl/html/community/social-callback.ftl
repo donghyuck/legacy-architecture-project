@@ -22,7 +22,10 @@
 	<body class="color2">						
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">						
+				<div class="col-sm-12">			
+				${request.remoteHost}		
+				${request.remoteAddr}		
+				${request.remoteUser}			
 					<div id="status"></div>
 				</div>
 			</div>
