@@ -399,8 +399,8 @@
 </script>
 
 <!--  Top Munu Account Status Template -->
-<script id="account-template" type="text/x-kendo-template">	
-<li class="clearfix visible-xs"><a href="\\#" class="btn-img"><i class="fa fa-cog"></i><span class="sr-only">Toggle Dropdown</span></a></li>
+<script id="account-template" type="text/x-kendo-template">
+<p class="navbar-text">&nbsp;</p>
 <li class="dropdown navbar-btn">
 	<div class="btn-group">		
 		<a href="\\#" class="btn-img">
