@@ -1030,6 +1030,8 @@
 		}
 		
 		function nextPhoto (){
+		alert( "netz" );
+		/**
 			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
 			var next_index = current_index + 1;				
 			var listView =  $('#photo-list-view').data('kendoListView');
@@ -1047,7 +1049,8 @@
 					list_view_pager.page(current_page+1);
 					listView.select(listView.element.children().first());
 				}
-			}								
+			}				
+			**/				
 		}
 					
 		-->
