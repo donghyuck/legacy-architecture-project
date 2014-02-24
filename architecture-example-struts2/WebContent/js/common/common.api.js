@@ -91,4 +91,7 @@
 		});	
 	};
 	
+	common.api.toId = function ( preifx , value  ){		
+		return prefix + '-' + value;
+	};	
 })(jQuery);
