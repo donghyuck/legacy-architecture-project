@@ -1384,11 +1384,7 @@
 												<div class="btn-group">			
 													<button type="button" class="btn btn-info"><i class="fa fa-th-list"></i>&nbsp;  목록보기</button>
 												</div>
-												<div class="panel panel-default">
-													<div id="announce-creator" class="panel-body">
-													
-													</div>
-												</div>
+												<div id="announce-creator" class="blank-top-15" ></div>
 											</section>
 											<section class="side1">
 												<div class="btn-group">			
