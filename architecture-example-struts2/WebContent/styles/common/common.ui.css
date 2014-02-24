@@ -1250,7 +1250,7 @@ div figure:hover figcaption {
 	right: 0;
 	text-align: left;	
 	padding-left: 10px;	
-	background-color: rgba(0,0,0,0.8);
+	background-color: rgba(0,0,0,0.2);
 	position: absolute;
 	color: #fff;
 	z-index: 100;
