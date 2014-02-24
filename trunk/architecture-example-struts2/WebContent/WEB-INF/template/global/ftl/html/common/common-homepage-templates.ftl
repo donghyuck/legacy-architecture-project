@@ -80,7 +80,7 @@
 <script type="text/x-kendo-template" id="photo-panel-template">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<span data-bind="text: name"></span>
+			<i class="fa fa-cloud"></i>
 			<div class="k-window-actions panel-header-actions">
 				<a role="button" href="\\#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-custom">Custom</span></a>
 				<a role="button" href="\\#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
