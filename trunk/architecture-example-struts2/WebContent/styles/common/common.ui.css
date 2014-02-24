@@ -417,18 +417,19 @@ background-color: #13A7C7;
 }
 .lb-overlay img{
 	/* height: 100%; For Opera max-height does not seem to work */
-	max-width: 100%;
+	max-height: 100%;
 	position: relative;
 	-webkit-box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 	-moz-box-shadow: 1px 1px 4px rgba(0,0,0,0.3);
 	box-shadow: 0px 2px 7px rgba(0,0,0,0.2);
+	float: left;
 }
 .lb-overlay:target {
 	width: auto;
 	height: auto;
 	bottom: 0px;
 	right: 0px;
-	padding: 80px 100px 120px 100px;
+	padding: 10px;/*80px 100px 120px 100px;*/
 }
 .lb-overlay:target img {
 	-webkit-animation: fadeInScale 1.2s ease-in-out;
