@@ -887,6 +887,7 @@
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
 				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
 			}				
+			
 			if( !$("#" + renderToString ).data("extPanel") ){					
 				$("#" + renderToString ).data("extPanel", 
 					$("#" + renderToString ).extPanel({
@@ -944,12 +945,9 @@
 			
 			var panel = $("#" + renderToString ).data("extPanel");
 			var panel_body = panel.body() ;			
-			
-			/**
+
 			var template = kendo.template($('#photo-view-template').html());
 			panel_body.html( template(photoPlaceHolder) );
-			
-			
 			
 			panel_body.find('.pager li').each(function( index ) { 
 				var panel_pager = $(this);				
@@ -997,10 +995,8 @@
 						}						
 					});				
 				}
-			} );				
-			*/
-			panel.show();
-			
+			} );	
+			panel.show();			
 		}				
 		-->
 		</script> 		   
