@@ -367,10 +367,10 @@
 								dataBound: function(e) {
 								}
 							});														
-							$("#photo-list-view").on("mouseenter",  ".attach", function(e) {
-									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().play();
-								}).on("mouseleave", ".attach", function(e) {
-									kendo.fx($(e.currentTarget).find(".attach-description")).expand("vertical").stop().reverse();
+							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
+									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
+								}).on("mouseleave", ".img-wrapper", function(e) {
+									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
 							});											
 							$("#photo-list-pager").kendoPager({
 								refresh : true,
@@ -1095,7 +1095,7 @@
 		
 		
 		
-		#photo-list-view, #photo-gallery-view {
+		 #photo-gallery-view {
 			min-height: 320px;
 			min-width: 320px;
 			width: 100%;
@@ -1148,7 +1148,7 @@
         }
 		
 		/** image grid  */		
-		#attachment-list-view.k-listview {
+		#photo-list-view.k-listview ,#attachment-list-view.k-listview {
 			width: 100%;
 			padding: 0px;
 			border: 0px;		
@@ -1568,13 +1568,13 @@
 			</div>
 		</script>	
 		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
-			<div class="attach">			
+			<div class="img-wrapper">			
 			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" class="img-responsive"/>
+				<img src="${request.contextPath}/community/view-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" />
 			# } else { #			
 				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
 			# } #	
-				<div class="attach-description">
+				<div class="img-description">
 					<h3>#:name#</h3>
 					<p>#:size# 바이트</p>
 				</div>
