@@ -882,7 +882,9 @@
 						
 		<!-- ============================== -->
 		<!-- display photo  panel                                  -->
-		<!-- ============================== -->			
+		<!-- ============================== -->
+		
+		
 		function displayPhotoPanel(){			
 		
 			var renderToString =  "photo-panel-0";	
@@ -955,6 +957,7 @@
 						panel_pager.click(function (e) { 
 							e.preventDefault();						
 							alert("++");
+							/**
 							var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
 							var previous_index = current_index - 1;	
 							var listView =  $('#photo-list-view').data('kendoListView');	
@@ -972,6 +975,8 @@
 									listView.select(listView.element.children().last());
 								}
 							}
+							**/
+							previousPhoto();
 						});
 					}else if ( panel_pager.hasClass('next') ){ 
 						panel_pager.click(function (e) { 
