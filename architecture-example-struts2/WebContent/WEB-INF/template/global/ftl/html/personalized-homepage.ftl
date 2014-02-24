@@ -1148,7 +1148,7 @@
         }
 		
 		/** image grid  */		
-		.img-listview {
+		#attachment-list-view.k-listview {
 			width: 100%;
 			padding: 0px;
 			border: 0px;		
