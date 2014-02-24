@@ -1157,7 +1157,8 @@
 		.img-wrapper {
 			float: left;
 			position: relative;
-			width: 33.33%;
+			width: 32.99%;
+			height: 170px;
 			padding: 0;
 			cursor: pointer;
 			overflow: hidden;		
