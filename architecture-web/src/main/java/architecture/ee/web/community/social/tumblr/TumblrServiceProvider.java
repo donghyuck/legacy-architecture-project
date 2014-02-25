@@ -31,9 +31,7 @@ import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.tumblr.json.TumblrModule;
 import architecture.ee.web.community.social.tumblr.json.TumblrResponse;
 import architecture.ee.web.community.social.tumblr.json.UserInfoResponse;
-import architecture.ee.web.community.social.twitter.api.SSLTwitterApi;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 /**
@@ -70,7 +68,7 @@ public class TumblrServiceProvider extends AbstractSocialServiceProvider {
 	
 	public TumblrServiceProvider(String consumerKey, String consumerSecret, String callbackUrl) {
 		super(new ServiceBuilder()
-                                .provider(SSLTwitterApi.class)                               
+                                .provider(TumblrApi.class)                               
                                 .apiKey(consumerKey)
                                 .apiSecret(consumerSecret)
                                 .callback(callbackUrl)

@@ -15,10 +15,11 @@
  */
 package architecture.ee.web.community.social.twitter;
 
-import java.io.Serializable;
 import java.util.Date;
 
-public class TwitterProfile implements Serializable {
+import architecture.ee.web.community.social.UserProfile;
+
+public class TwitterProfile implements UserProfile {
 	private static final long serialVersionUID = 1L;
 
 	private final long id;
@@ -483,6 +484,10 @@ public class TwitterProfile implements Serializable {
 		result = 31 * result + (linkColor != null ? linkColor.hashCode() : 0);
 		result = 31 * result + (showAllInlineMedia ? 1 : 0);
 		return result;
+	}
+
+	public String getPrimaryKeyString() {
+		return String.valueOf( getId() );
 	}
 
 }

@@ -117,6 +117,4 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 		Token accessToken = new Token( token, secret );
 		return accessToken;
 	}
-	
-	
 }

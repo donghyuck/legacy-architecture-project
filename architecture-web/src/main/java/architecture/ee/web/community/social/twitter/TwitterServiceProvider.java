@@ -145,6 +145,9 @@ public class TwitterServiceProvider extends AbstractSocialServiceProvider {
 		return Media.TWITTER;
 	}
 
+	public Object getUserProfile() {
+		return authenticate();
+	}
 
 	
 }
