@@ -10,7 +10,8 @@
 
 		<!-- SECURE TOOLBAR -->
 		<script id="topbar-template" type="text/x-kendo-template">
-			<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+		<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
+			<div class="container-fluid">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
 						<span class="sr-only">Toggle navigation</span>
@@ -65,6 +66,7 @@
 					</ul>					
 				</div>
 			</div>
+		</div>	
 		</script>	
 	    
 	    <script id="top-menu-template" type="text/x-kendo-template">	    
