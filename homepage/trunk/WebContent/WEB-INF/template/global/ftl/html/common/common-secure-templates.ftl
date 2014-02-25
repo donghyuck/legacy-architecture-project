@@ -1,25 +1,3 @@
-		<script id="account-template" type="text/x-kendo-template">
-			<a id="account-button" data-dropdown="account-dropdown" href="\\#">
-				<span class="avatar-container">				
-					#if (photoUrl != null && photoUrl != 'null' && photoUrl != '')  { #
-					<span class="avatar-wrapper loaded"><img src="#:photoUrl#" /></span>
-					# } else { #
-					<span class="avatar-wrapper"><img class="loading"></span>
-					# } #
-				</span>
-				<i></i>
-			</a>
-			<nav id="account-dropdown" data-dropdown-content >											
-				<ul>
-					<li class="text">이름 : #:name #</li>
-					<li class="text">메일 : #:email #</li>
-					<li class="video"><a href="\\#/welcome"><span class="icon"></span>Video Tour</a></li>
-					<li class="settings"><a href="\\#"><span class="icon"></span>계정설정</a></li>
-					<li class="logout"><a href="/logout"><span class="icon"></span>로그아웃</a></li>
-					<li class="shutdown"><a href="\\#"><span class="icon"></span>Shutdown…</a></li>
-				</ul>
-			</nav>		
-		</script>
 		
 		<script id="image-details-template" type="text/x-kendo-template">	
 			<img id="image-preview" src="${request.contextPath}/secure/view-image.do?imageId=#=imageId#" class="img-thumbnail">
@@ -28,7 +6,9 @@
 		<script id="attach-details-template" type="text/x-kendo-template">	
 			<a href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" class="btn btn-warning">다운로드</a>
 		</script>
-				        
+
+
+		<!-- SECURE TOOLBAR -->
 		<script id="topbar-template" type="text/x-kendo-template">
 			<div class="navbar navbar-inverse navbar-fixed-top " role="navigation">
 				<div class="navbar-header">
