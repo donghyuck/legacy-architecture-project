@@ -724,7 +724,7 @@
 		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container full-width-container">	
+		<div class="container-fluid">	
 			<div class="row">			
 				<div class="col-12 col-lg-12">					
 					<div class="page-header">
@@ -732,7 +732,7 @@
 					</div>			
 				</div>		
 			</div>
-			<div class="row full-width-row">		
+			<div class="row">		
 				<div class="col-sm-12">
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
@@ -753,21 +753,7 @@
 					
 					</div>				
 				</div>			
-			</div>				
-						<!--
-			<div class="row">
-				<div class="col-12 col-lg-12">		
-					<div id="splitter">
-						<div id="list_pane">
-							
-						</div>
-						<div id="datail_pane">
-							<div id="user-details"></div>
-						</div>
-					</div>				
-				</div>	
-			</div>				
-			-->
+			</div>							
 			<form name="fm1" method="POST" accept-charset="utf-8">
 				<input type="hidden" name="companyId"  value="${action.companyId}" />
 			</form>	
