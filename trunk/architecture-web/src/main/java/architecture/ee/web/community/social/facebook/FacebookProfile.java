@@ -15,14 +15,13 @@
  */
 package architecture.ee.web.community.social.facebook;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import architecture.ee.web.community.social.UserProfile;
 
-public class FacebookProfile implements Serializable {
+public class FacebookProfile implements UserProfile {
 
 	private final String id;
 
@@ -54,8 +53,7 @@ public class FacebookProfile implements Serializable {
 
 	private Boolean verified;
 
-	private String about;
-	
+	private String about;	
 
 	private String bio;
 	
@@ -469,4 +467,7 @@ public class FacebookProfile implements Serializable {
 		return builder.toString();
 	}
 	
+	public String getPrimaryKeyString() {
+		return getId();
+	}
 }

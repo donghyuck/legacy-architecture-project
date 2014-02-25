@@ -15,28 +15,10 @@
  */
 package architecture.ee.web.community.social;
 
-import org.scribe.oauth.OAuthService;
+import java.io.Serializable;
 
-public interface SocialServiceProvider {
+public interface UserProfile extends Serializable {
 
-	public OAuthService getOAuthService();
-	
-	public String getAuthorizationUrl();
-	
-	public boolean isAuthorized();
-	
-	public String getAccessToken() ;
-	
-	public void setAccessToken(String accessToken) ;
-	
-	public String getAccessSecret() ;
-		
-	public void setAccessSecret(String accessSecret);
-	
-	public SocialNetwork.Media getMedia();
-	
-	public Object getUserProfile();
-	
-	//public void setAccessSecret(String accessToken, String accessVerifier );
+	public String getPrimaryKeyString();
 	
 }

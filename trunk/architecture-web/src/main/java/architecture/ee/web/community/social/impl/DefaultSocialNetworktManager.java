@@ -29,6 +29,7 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.community.social.ServiceProviderFactory;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.SocialServiceProvider;
@@ -109,31 +110,7 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 	}
 
 	private SocialServiceProvider createSocialServiceProvider(SocialNetwork.Media media){		
-		SocialServiceProvider provider = null;				
-		if(media == SocialNetwork.Media.TWITTER){					
-			String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.twitter.callbackUrl", null);
-			if( callbackUrl!=null ){
-				provider = new TwitterServiceProvider(
-					"4XebpD1MW3CQ8Koh7naQpg",
-					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc",
-					callbackUrl
-				);
-			}else{
-				provider = new TwitterServiceProvider(
-					"4XebpD1MW3CQ8Koh7naQpg",
-					"aFlMLXe7fsyE3EnZtTp1LdAHRqEMROqOFW8ldQNYc"
-				);
-			}					
-		}else if ( media == SocialNetwork.Media.FACEBOOK){		
-			String callbackUrl = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.callbackUrl", null);
-			String scope = ApplicationHelper.getApplicationProperty("components.social.providers.facebook.scope", FacebookServiceProvider.DEFAULT_SCOPE);
-			provider = new FacebookServiceProvider(
-					"251365428350280",
-					"704f08c943c6dfdba328e08a10550d38",							
-					callbackUrl,
-					scope
-			);			
-		}	
+		SocialServiceProvider provider = ServiceProviderFactory.getServiceProvider(media);
 		return provider;
 	} 
 	

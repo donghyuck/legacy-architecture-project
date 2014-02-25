@@ -15,10 +15,11 @@
  */
 package architecture.ee.web.community.social.tumblr;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class UserInfo  implements Serializable  {
+import architecture.ee.web.community.social.UserProfile;
+
+public class UserInfo  implements UserProfile  {
 		
 	private String name ;
 	private String defaultPostFormat;
@@ -119,5 +120,7 @@ public class UserInfo  implements Serializable  {
 		return builder.toString();
 	}
 
-	
+	public String getPrimaryKeyString() {
+		return getName();
+	}
 }

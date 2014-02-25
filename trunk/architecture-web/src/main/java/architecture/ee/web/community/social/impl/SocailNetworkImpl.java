@@ -34,8 +34,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	private boolean isSignedIn = false;
 	private boolean connected = false ;
 	private String username;
-	
-	
+		
 	
 	/**
 	 * @return username
