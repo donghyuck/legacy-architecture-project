@@ -21,7 +21,8 @@
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
 				
-				var currentUser = new User({});			
+				var currentUser = new User({});		
+					
 				// 2. ACCOUNTS LOAD	
 				var accounts = $("#account-navbar").kendoAccounts({
 					dropdown : false,
@@ -64,10 +65,8 @@
 					}
 				});
 				
-				<#if !action.user.anonymous >				
-				
-				</#if>	
-				// END SCRIPT            
+				<#if !action.user.anonymous ></#if>	
+
 			}
 		}]);	
 			
