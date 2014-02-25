@@ -503,35 +503,39 @@
 		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container full-width-container">		
+		<div class="container-fluid">		
 			<div class="row">			
 				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
 				</div>			
 			</row>	
-			<div class="row full-width-row">		
+			<div class="row">		
 				<div class="col-sm-12">
-				<div class="panel panel-default" style="min-height:300px;">
-					<div class="panel-heading" style="padding:5px;">
-						<div class="btn-group">
-							<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
-							<button type="button" class="btn btn-info btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
+					<div class="panel panel-default" style="min-height:300px;">
+						<div class="panel-heading" style="padding:5px;">
+							<div class="btn-group">
+								<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
+								<button type="button" class="btn btn-info btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
+							</div>
+							<div class="btn-group">
+								<button type="button" class="btn btn-success btn-control-group" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
+								<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
+							</div>
+							<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>					
 						</div>
-						<div class="btn-group">
-							<button type="button" class="btn btn-success btn-control-group" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
-							<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
-						</div>
-						<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>					
-					</div>
-					<div class="panel-body" style="padding:5px;">
-						<div class="row marginless paddingless">
-							<div class="col-sm-12 body-group marginless paddingless"><div id="company-grid"></div></div>
-							<div id="company-details" class="col-sm-12 body-group marginless paddingless" style="display:none; padding-top:5px;"></div>
+						<div class="panel-body" style="padding:5px;">
+							<div class="row marginless paddingless">
+								<div class="col-sm-12 body-group marginless paddingless">
+									<div id="company-grid"></div>
+								</div>
+								<div id="company-details" class="col-sm-12 body-group marginless paddingless" style="display:none; padding-top:5px;"></div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>	
+		</div>
+				
 		<div id="account-panel"></div>				
 		<!-- END MAIN CONTENT -->
 		<div id="perms-window" style="display:none;" class="clearfix">
@@ -645,6 +649,6 @@
 			</div>
 		</script>			
 		<!-- 공용 템플릿 -->
-		<#include "/html/common/common-templates.ftl" >		        	
+		<#include "/html/common/common-secure-templates.ftl" >		        	
 	</body>    
 </html>
