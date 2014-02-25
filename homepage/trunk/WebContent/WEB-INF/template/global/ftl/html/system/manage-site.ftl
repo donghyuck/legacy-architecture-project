@@ -602,8 +602,7 @@
 					<img src="${request.contextPath}/images/common/twitter-bird-light-bgs.png" alt="Twitter Logo" class="img-rounded">	
 					# } #	
 				# } #					
-		</script>		
-
-		<#include "/html/common/common-templates.ftl" >		
+		</script>
+		<#include "/html/common/common-secure-templates.ftl" >		
 	</body>
 </html>
