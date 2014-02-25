@@ -242,7 +242,7 @@
 		<section id="navbar" class="layout"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container full-width-container">		
+		<div class="container-fluid">		
 			<div class="row">			
 				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
@@ -294,9 +294,8 @@
 					</div>
 				</div>				
 			</div>			
-			<div class="row full-width-row">			
-				<div class="col-lg-12">	
-			
+			<div class="row">			
+				<div class="col-lg-12">				
 							<ul class="nav nav-tabs" id="myTab">
 							  <li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
 							  <li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
