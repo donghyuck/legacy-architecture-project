@@ -29,7 +29,6 @@ import architecture.ee.web.community.struts2.action.support.SocialCallbackSuppor
 public class FacebookCallbackAction  extends SocialCallbackSupport {
 	
 	private String code;
-	private FacebookProfile userProfile = null;
 	private User foundUser = null;
 	/**
 	 * @return code
