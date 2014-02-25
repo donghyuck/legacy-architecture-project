@@ -36,7 +36,6 @@
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
-						$('.dropdown-toggle').dropdown();					
 						if( currentUser.anonymous ){
 							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
 							$("#login-btn").click(function() { 
