@@ -441,6 +441,6 @@
 		<footer>  		
 		</footer>
 		<!-- END FOOTER -->
-		<#include "/html/common/common-templates.ftl" >	
+		<#include "/html/common/common-secure-templates.ftl" >	
 	</body>
 </html>
