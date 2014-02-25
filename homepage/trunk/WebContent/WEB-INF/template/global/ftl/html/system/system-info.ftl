@@ -240,7 +240,7 @@
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<section id="navbar" class="layout"></section>
+		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
 		<div class="container-fluid">		
