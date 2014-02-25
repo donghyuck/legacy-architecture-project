@@ -304,7 +304,7 @@
 			<!-- system info start -->
 			<div class="row">			
 				<div class="col-lg-12">				
-					<ul class="nav nav-tabs" id="myTab">
+					<ul class="nav nav-tabs" id="myTab" style="min-width:700px;">
 						<li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
 						<li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
 						<li><a href="#system-info"><i class="fa fa-info"></i> 시스템 환경 정보</a></li>
