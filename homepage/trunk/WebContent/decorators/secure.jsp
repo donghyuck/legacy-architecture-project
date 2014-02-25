@@ -18,8 +18,14 @@
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
-
-	
+	body { 
+		padding-top: 70px; 
+		background-color : #F5F5F5;	
+	}
+	.k-grid table tr.k-state-selected{
+		background: #428bca;
+		color: #ffffff; 
+	}	
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
