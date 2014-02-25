@@ -439,7 +439,7 @@
 									</div>
 								</div>
 						</div>					
-					</div><!-- tab contents end -->
+					<!-- tab contents end -->
 				</div>					
 			</div><!-- system info start -->
 		</div>				
