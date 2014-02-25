@@ -1,5 +1,5 @@
 <#ftl encoding="UTF-8"/>
-<html decorator="secure-metro">
+<html decorator="secure">
     <head>
         <title>시스템 정보</title>
         <script type="text/javascript">                
