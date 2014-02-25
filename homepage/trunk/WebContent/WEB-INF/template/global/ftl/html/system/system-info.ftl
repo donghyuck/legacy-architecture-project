@@ -244,16 +244,20 @@
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
 		<div class="container-fluid">		
+			<!-- page header start -->
 			<div class="row">			
 				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
 				</div>			
-			</row>	
+			</row><!-- page header end -->	
+			<!-- memory status start -->
 			<div class="row">	
 				<div class="col-sm-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">Heap 메모리</div>
-						<div id="mem-gen-gauge"></div>						
+						<div class="panel-body">
+							<div id="mem-gen-gauge"></div>
+						</div>						
 						<div class="panel-footer">
 							<table class="table table-striped memory-details">
 							 	<thead>
@@ -275,7 +279,9 @@
 				<div class="col-sm-3">
 					<div class="panel panel-primary">
 						<div class="panel-heading">PermGen 메모리</div>
-						<div id="perm-gen-gauge"></div>						
+						<div class="panel-body">
+							<div id="perm-gen-gauge"></div>						
+						</div>
 						<div class="panel-footer">
 							<table class="table table-striped memory-details">
 							 	<thead>
@@ -294,17 +300,19 @@
 						</div>
 					</div>
 				</div>				
-			</div>			
+			</div><!-- memory status end -->
+			<!-- system info start -->
 			<div class="row">			
 				<div class="col-lg-12">				
-							<ul class="nav nav-tabs" id="myTab">
-							  <li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
-							  <li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
-							  <li><a href="#system-info"><i class="fa fa-info"></i> 시스템 환경 정보</a></li>
-							  <li><a href="#database-info"><i class="fa fa-hdd-o"></i> 데이터베이스 정보</a></li>
-							</ul>
-							<div class="tab-content">
-								<div class="tab-pane active" id="license-info">
+					<ul class="nav nav-tabs" id="myTab">
+						<li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
+						<li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
+						<li><a href="#system-info"><i class="fa fa-info"></i> 시스템 환경 정보</a></li>
+						<li><a href="#database-info"><i class="fa fa-hdd-o"></i> 데이터베이스 정보</a></li>
+					</ul>
+					<!-- tab contents start -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="license-info">
 									<div class="big-box">
 										<div class="panel">
 											<table class="table table-striped .table-hover license-details">
@@ -341,15 +349,15 @@
 											</table>
 										</div>  
 									</div>
-								</div>
-								<div class="tab-pane" id="setup-info">
+						</div>
+						<div class="tab-pane" id="setup-info">
 									<div class="big-box">
 										<div class="panel">
 											<div id="setup-props-grid" ></div>
 										</div>
 									</div>		
-								</div>
-								<div class="tab-pane" id="system-info">
+						</div>
+						<div class="tab-pane" id="system-info">
 									<div class="big-box">
 										<div class="panel">
 										<table class="table table-striped .table-hover system-details">
@@ -422,18 +430,18 @@
 										</table>	
 										</div>
 									</div>	
-								</div>
-								<div class="tab-pane" id="database-info">
+						</div>
+						<div class="tab-pane" id="database-info">
 									<div class="big-box">
 										<div class="panel">
 										<div id="database-info-grid" ></div>
 										</div>
 									</div>
 								</div>
-							</div>					
-						</div>
-				
-			</div>
+						</div>					
+					</div><!-- tab contents end -->
+				</div>					
+			</div><!-- system info start -->
 		</div>				
 		<div id="account-panel"></div>		
 		<!-- END MAIN CONTNET -->
