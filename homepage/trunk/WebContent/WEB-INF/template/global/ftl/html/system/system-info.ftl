@@ -25,16 +25,17 @@
 				// 2. ACCOUNTS LOAD		
 				
 				var currentUser = new User({});
+				var selectedCompany = new Company();		
+				
 				var accounts = $("#account-panel").kendoAccounts({
 					visible : false,
 					authenticate : function( e ){
 						currentUser = e.token;						
 					}
 				});
-				var selectedCompany = new Company();			
+					
 								
 				// 3.MENU LOAD
-			
 				var currentPageName = "MENU_1_5";
 				
 				var topBar = $("#navbar").extTopBar({ 
