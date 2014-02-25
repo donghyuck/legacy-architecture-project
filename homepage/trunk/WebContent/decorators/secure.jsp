@@ -19,7 +19,7 @@
 <decorator:head />
 <style>
 	body { 
-		padding-top: 70px; 
+		padding-top: 65px; 
 		background-color : #F5F5F5;	
 	}
 	.k-grid table tr.k-state-selected{
