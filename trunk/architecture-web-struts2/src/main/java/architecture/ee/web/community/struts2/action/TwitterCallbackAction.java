@@ -79,4 +79,7 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 		}		
 		return success();
 	}
+	public User findUser() {				
+		return this.findUserByMedia(Media.TWITTER);
+	}	
 }

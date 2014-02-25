@@ -172,23 +172,17 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		if( userProfile == null ){
 			SocialServiceProvider provider = getSocialNetwork().getSocialServiceProvider();
 			this.userProfile = provider.getUserProfile();
-			/*
-			if( provider.getMedia() == Media.TWITTER ){
-				this.userProfile = ((TwitterServiceProvider) provider).authenticate();
-			}else if ( provider.getMedia() == Media.FACEBOOK ){
-				this.userProfile = ((FacebookServiceProvider) provider ).getUserProfile();	
-			}else	if( provider.getMedia() == Media.TUMBLR ){
-				this.userProfile = ((TumblrServiceProvider) provider ).getUserProfile();
-			}*/
 		}
 		return this.userProfile;
 	}
+	
+	public abstract User findUser();
 		
-	public User findUser() {		
+	protected User findUserByMedia(Media media) {		
 		if( this.foundUser == null){
 			UserProfile profileToUse = (UserProfile)getUserProfile();
 			if( profileToUse != null ){
-				SocialNetwork found = findSocialNetworkByUsername( Media.FACEBOOK, profileToUse.getPrimaryKeyString());
+				SocialNetwork found = findSocialNetworkByUsername( media, profileToUse.getPrimaryKeyString());
 				if( found != null )
 					try {
 						this.foundUser = getUserManager().getUser(found.getObjectId());
