@@ -431,7 +431,7 @@
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
 		
-		<div class="container full-width-container">		
+		<div class="container-fluid">		
 			<div class="row">			
 				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
