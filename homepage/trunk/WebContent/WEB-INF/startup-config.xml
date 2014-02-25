@@ -121,8 +121,8 @@ PC9saWNlbnNlPg==</file>
 			-->
 			<oracleDataSourceProvider>
 				<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
-				<url> jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB</url>
-				<user>u_framework</user>
+				<url> jdbc:oracle:thin:@//222.122.63.153:1521/IRDS</url>
+				<user>u_portal</user>
 				<password>inkium</password>
 				<connectionCachingEnabled>true</connectionCachingEnabled>
 			</oracleDataSourceProvider>
@@ -130,8 +130,8 @@ PC9saWNlbnNlPg==</file>
 		<external>
 			<oracleDataSourceProvider>
 				<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
-				<url> jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB</url>
-				<user>u_framework</user>
+				<url> jdbc:oracle:thin:@//222.122.63.153:1521/IRDS</url>
+				<user>u_portal</user>
 				<password>inkium</password>
 				<connectionCachingEnabled>true</connectionCachingEnabled>
 			</oracleDataSourceProvider>
