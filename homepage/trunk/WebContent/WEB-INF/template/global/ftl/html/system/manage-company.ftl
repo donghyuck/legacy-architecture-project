@@ -542,11 +542,9 @@
 			<div class="alert alert-info margin-buttom-5">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				그룹 또는 사용자에게 부여 가능한 전체 롤(ROLE)은 다음과 같습니다.
-			</div>		
-										
+			</div>					
 			<div id="role-grid">	</div>            	
-		</div>
-		
+		</div>		
 		<div id="menu-window" style="display:none;" class="gray">
 			<div class="container layout">
 				<div class="row">
@@ -606,13 +604,15 @@
 		<!-- END FOOTER -->		
 		<form name="fm1" method="POST" accept-charset="utf-8" class="details">
 			<input type="hidden" name="companyId" value="0" />
-		</form>			
-					
+		</form>		
+							
 		<script type="text/x-kendo-template" id="company-details-template">			
 			<div class="panel panel-primary marginless" >
+			<!--
 				<div class="panel-heading" >
 					<span data-bind="text: displayName"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button></div>
+			-->
 					<div class="panel-body" style="padding:5px;">
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
