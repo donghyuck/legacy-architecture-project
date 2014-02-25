@@ -436,7 +436,7 @@
 				<div class="page-header">
 					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
 				</div>			
-			</row>	
+			</div>	
 			<div class="row">	
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="min-height:300px;">
