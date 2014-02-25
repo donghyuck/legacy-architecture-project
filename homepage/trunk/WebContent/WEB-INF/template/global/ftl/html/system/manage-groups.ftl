@@ -495,10 +495,7 @@
 		.k-grid-content{
 			height:300px;
 		}
-		
-		#search-window .container {
-			width:"80%";
-		}
+
 		</style>
     </head>
 	<body>
@@ -506,7 +503,7 @@
 		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container full-width-container">	
+		<div class="container-fluid">	
 			<div class="row">			
 				<div class="col-12 col-lg-12">					
 					<div class="page-header">
@@ -514,7 +511,7 @@
 					</div>			
 				</div>		
 			</div>
-			<div class="row full-width-row">		
+			<div class="row">		
 				<div class="col-sm-12">
 					<div class="panel panel-default" style="min-height:300px;" >
 						<div class="panel-heading selected-company-info" style="padding:5px;">
@@ -638,7 +635,7 @@
 		-->		
 		</script>		        
 		<!-- 공용 템플릿 -->
-		<#include "/html/common/common-templates.ftl" >		        
+		<#include "/html/common/common-secure-templates.ftl" >		        
 				
 	<!-- END MAIN CONTENT  -->	  
     </body>
