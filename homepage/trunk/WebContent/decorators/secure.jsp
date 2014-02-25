@@ -20,7 +20,7 @@
 <style>
 	body { 
 		padding-top: 51px; 
-		background-color : #F5F5F5;	
+		background-color : #FFFFFF;	
 	}
 	.k-grid table tr.k-state-selected{
 		background: #428bca;
