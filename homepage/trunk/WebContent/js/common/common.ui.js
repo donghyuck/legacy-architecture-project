@@ -657,7 +657,7 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
-					alert( ev.result + ", "  + ev.type );
+					alert(ev.originalEvent.propertyName + ", "  + ev.type );
 					if( options.transitions ) {						
 						
 						if( ev.propertyName !== 'visibility' ) 
