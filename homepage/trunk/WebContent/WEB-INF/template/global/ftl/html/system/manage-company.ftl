@@ -327,7 +327,7 @@
 
 
 				var menuOverlay = $('#menuOverlay').extOverlay();
-				$('trigger-overlay').click(function(){
+				$('#trigger-overlay').click(function(){
 					menuOverlay.toggleOverlay();
 				});
 				           	                	                
