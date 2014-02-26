@@ -657,15 +657,11 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
-					alert(ev.originalEvent.propertyName + ", "  + ev.type );
-					if( options.transitions ) {						
-						
-						if( ev.propertyName !== 'visibility' ) 
-							return;
-						
+					if( options.transitions ) {					
+						if( ev.originalEvent.propertyName !== 'visibility' ) 
+							return;						
 						overlay.off( options.transEndEventName, onEndTransitionFn );					
 					}
-					alert( " --- " )
 					overlay.removeClass( 'close' );
 				};
 				
