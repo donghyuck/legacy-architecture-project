@@ -77,19 +77,23 @@
 						panes: [
 							{ collapsible: true, size: "50%" },
 							{ collapsible: true, size: "50%" }
-						]
+						],
+					resize: function () {
+					        if(splitter) {
+					            alert(splitter.wrapper.height());
+					        }
+					        //you can also get the panes each on it's own.
+					        //check: console.log(splitter); to see what options are available           
+					    }						
 				}).data("kendoSplitter");
 								
-				$(window).resize(function() {
-					resizeSplitter()
-				});
+				splitter.trigger('resize');
 				
 				var resizeSplitter = function() {
 					splitter = $("#splitter")
     				.data("kendoSplitter")
 					.height($(window).height() - 200)
 				};
-				 resizeSplitter();
 				// END SCRIPT
 			}
 		}]);
@@ -113,7 +117,7 @@
 			<div class="row">		
 				<div class="col-sm-12">
 				
-			<div id="splitter" style="height: 100%; border: 0;">
+			<div id="splitter">
                 <div id="list_pane" class="color1">
                     <p>
                         Left pane
