@@ -99,7 +99,10 @@
 		-->
 		</script> 		 
 		<style>
+			#splitter {
 			
+			height: 100%;
+			}
 		</style>
 	</head>
 	<body>
