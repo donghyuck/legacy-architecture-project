@@ -325,6 +325,8 @@
 				// MENU WINDOW
 				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
 
+
+$('#menuOverlay').extOverlay({}).toggleOverlay();
 				           	                	                
 				// END SCRIPT
 			}
