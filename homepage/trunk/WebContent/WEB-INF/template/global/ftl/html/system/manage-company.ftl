@@ -373,8 +373,17 @@
 							selectedMenu.creationDate = selectedCell.creationDate;	     
 							   
 							kendo.bind($(".menu-details"), selectedMenu );
-							$(".menu-details").show();								 	
+							$(".menu-details").show();								 							 	
+						}
+					},
+					dataBound: function(e){
+						kendo.bind($(".menu-details"), {} );      	
+						$(".menu-details").hide();
+					}
+				});	 						
+
  							$('#update-menu-btn').bind('click' , function(){
+ 								var selectedMenu = $('#menu-grid').data("menuPlaceHolder");
  								if( selectedMenu.menuId > 0){
 									$.ajax({
 										type : 'POST',
@@ -398,19 +407,14 @@
 										dataType : "json"
 									});											
 								}
-							});													 	
-						}
-					},
-					dataBound: function(e){
-						kendo.bind($(".menu-details"), {} );      	
-						$(".menu-details").hide();
-					}
-				});	 						
+							});							
+							
 	
 				$(".newMenuCustomClass").click( function (e){
 					$(".menu-details").show();
 					$("#menu-grid").data("kendoGrid").clearSelection();
-					$('#menu-grid').data("menuPlaceHolder", new Menu() );    
+					$('#menu-grid').data("menuPlaceHolder", new Menu() );
+					    
 					kendo.bind($(".menu-details"), $('#menu-grid').data("menuPlaceHolder") );      
 				});
 						
