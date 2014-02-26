@@ -657,18 +657,17 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
-					if( options.transitions ) {
-						
+					alert( $(this).html() );
+					if( options.transitions ) {						
 						if( ev.propertyName !== 'visibility' ) return;
-							this.removeEventListener( options.transEndEventName, onEndTransitionFn );
-					
+						overlay.unbind( options.transEndEventName, onEndTransitionFn );					
 					}
-					alert( over.html() ) ;
+					
 					overlay.removeClass( 'close' );
 				};
 				
 				if( options.transitions ) {
-					overlay.on( options.transEndEventName, onEndTransitionFn );
+					overlay.bind( options.transEndEventName, onEndTransitionFn );
 				}
 				else {
 					onEndTransitionFn();
