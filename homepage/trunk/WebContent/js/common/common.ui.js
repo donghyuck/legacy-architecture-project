@@ -650,26 +650,20 @@
 		},
 		toggleOverlay : function () {
 			var that = this;
-			
-			
-			
 			var overlay = $(that.element);
-			
-			alert(overlay);
-			
-			var options = that.options ;
-			alert(options);
-			
+			var options = that.options ;			
 			if( overlay.hasClass( 'open') ){
 				overlay.removeClass( 'open' );
 				overlay.addClass( 'close' );
+				
 				var onEndTransitionFn = function( ev ) {
 					if( options.transitions ) {
 						if( ev.propertyName !== 'visibility' ) return;
 						this.removeEventListener( options.transEndEventName, onEndTransitionFn );
 					}
-					overlay.removeClass('close' );
+					overlay.removeClass( 'close' );
 				};
+				
 				if( options.transitions ) {
 					overlay.on( options.transEndEventName, onEndTransitionFn );
 				}
