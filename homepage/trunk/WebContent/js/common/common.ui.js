@@ -640,7 +640,7 @@
 		},
 		toggleOverlay : function () {
 			var that = this;
-			var overlay = that.element;
+			var overlay = $(that.element);
 			var options = that.options ;
 			
 			if( overlay.hasClass( 'open') ){
