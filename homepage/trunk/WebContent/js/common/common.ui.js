@@ -487,7 +487,7 @@
 	PHOTO_URL = "/accounts/view-image.do?width=100&height=150",
 	ERROR = "error",
 	UPDATE = "update",
-	SYSTEM_ROLE = "ROLE_SYSTEM",
+	SYSTEM_ROLE = "ROLE_ADMIN",
     NS = ".kendoAccounts",
 	open = false,
 	DISABLED = "disabled";
