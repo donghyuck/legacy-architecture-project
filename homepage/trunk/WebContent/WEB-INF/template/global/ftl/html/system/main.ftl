@@ -79,7 +79,18 @@
 							{ collapsible: true, size: "50%" }
 						]
 				}).data("kendoSplitter");
-								 
+								
+				$(window).resize(function() {
+					resizeSplitter()
+				});
+				
+				var resizeSplitter = function() {
+					splitter = $("#splitter")
+    				.data("kendoSplitter")
+					.size("#list_pane", $(window).height() - 200 + "px")
+					.trigger("resize")
+				};
+				 resizeSplitter();
 				// END SCRIPT
 			}
 		}]);
