@@ -609,7 +609,7 @@
 			</div>
 		</div>
 		<!-- open/close -->
-		<div class="overlay overlay-hugeinc">
+		<div id="menuOverlay" class="overlay overlay-hugeinc">
 			<button type="button" class="overlay-close">Close</button>
 			<nav>
 				<ul>
