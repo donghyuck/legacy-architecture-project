@@ -326,7 +326,7 @@
 				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
 
 
-$('#menuOverlay').extOverlay({}).toggleOverlay();
+$('#menuOverlay').kendoOverlay().toggleOverlay();
 				           	                	                
 				// END SCRIPT
 			}
