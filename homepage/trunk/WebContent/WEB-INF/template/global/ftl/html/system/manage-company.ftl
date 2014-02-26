@@ -326,7 +326,7 @@
 				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
 
 
-				var menuOverlay = $('#menuOverlay').extOverlay({});
+				var menuOverlay = $('#menuOverlay').extOverlay();
 				$('trigger-overlay').click(function(){
 					menuOverlay.toggleOverlay();
 				});
