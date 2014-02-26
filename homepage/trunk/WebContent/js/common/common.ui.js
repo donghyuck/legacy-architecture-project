@@ -631,8 +631,9 @@
 					'OTransition': 'oTransitionEnd',
 					'msTransition': 'MSTransitionEnd',
 					'transition': 'transitionend'
-				};
+			};			
 			options.transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ] ;			
+			element.find('button.overlay-close').click( that.toggleOverlay );			
 		},
 		options : {
 			name : "Overlay"
