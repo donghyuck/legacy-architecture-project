@@ -362,10 +362,10 @@ var Menu = kendo.data.Model.define( {
 	  	id: "menuId", // the identifier of the model
 	    fields: {
 	    	menuId: { type: "number", editable: false, defaultValue: -1  }, 
-	    	name: { type: "string", editable: true },
-	        title: { type: "string", editable: true },
-	        enabled : {type: "boolean" },
-	        description: { type: "string", editable: true },
+	    	name: { type: "string", editable: true , defaultValue : ""  },
+	        title: { type: "string", editable: true , defaultValue : "" },
+	        enabled : {type: "boolean" defaultValue : true},
+	        description: { type: "string", editable: true ,defaultValue : ""  },
 	        properties : {},
 	        menuData : { type: "string", editable: true, defaultValue : "" },
 	        modifiedDate: { type: "date"},
