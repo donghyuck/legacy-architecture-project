@@ -618,7 +618,7 @@
  */
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	ui.extOverlay = Widget.extend({
+	ui.kendoOverlay = Widget.extend({
 		init: function(element, options) {			
 			var that = this;			
 			Widget.fn.init.call(that, element, options);
@@ -668,7 +668,7 @@
 		}
 	});
 	
-	kendo.ui.plugin(ui.extOverlay);
+	kendo.ui.plugin(ui.kendoOverlay);
 	/* 
 	$.fn.extend( { 
 		extOverlay : function ( options ) {
