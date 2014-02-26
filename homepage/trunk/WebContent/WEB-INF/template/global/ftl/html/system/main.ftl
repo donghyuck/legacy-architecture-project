@@ -72,7 +72,10 @@
 					}
 				 });	
 				 
-				$("#splitter").find(".k-pane").height( $(window).height() - 200 );				 
+				 
+				 
+					$("#splitter").height( $(window).height() - 200 );
+				
  				var splitter = $("#splitter").kendoSplitter({
 					orientation: "horizontal",
 						panes: [
