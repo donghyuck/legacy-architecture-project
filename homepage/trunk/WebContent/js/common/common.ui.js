@@ -654,7 +654,7 @@
 						overlay.removeClass('close' );
 				};
 				if( options.transitions ) {
-					overlay.addEventListener( options.transEndEventName, onEndTransitionFn );
+					overlay.on( options.transEndEventName, onEndTransitionFn );
 				}
 				else {
 					onEndTransitionFn();
