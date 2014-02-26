@@ -326,7 +326,10 @@
 				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
 
 
-$('#menuOverlay').kendoOverlay().toggleOverlay();
+				var menuOverlay = $('#menuOverlay').kendoOverlay({});
+				$('trigger-overlay').click(function(){
+					menuOverlay.toggleOverlay();
+				});
 				           	                	                
 				// END SCRIPT
 			}
