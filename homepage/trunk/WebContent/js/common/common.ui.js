@@ -648,7 +648,7 @@
 		options : {
 			name : "Overlay"
 		},
-		toggle : function () {
+		toggleOverlay : function () {
 			var that = this;
 			var overlay = $(that.element);
 			var options = that.options ;
