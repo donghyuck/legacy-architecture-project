@@ -650,6 +650,9 @@
 		},
 		toggleOverlay : function () {
 			var that = this;
+			
+			alert(this);
+			
 			var overlay = $(that.element);
 			var options = that.options ;
 			
