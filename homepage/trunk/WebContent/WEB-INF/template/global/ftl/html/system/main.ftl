@@ -88,7 +88,6 @@
 					splitter = $("#splitter")
     				.data("kendoSplitter")
 					.size("#list_pane", $(window).height() - 200 + "px")
-					.trigger("resize")
 				};
 				 resizeSplitter();
 				// END SCRIPT
