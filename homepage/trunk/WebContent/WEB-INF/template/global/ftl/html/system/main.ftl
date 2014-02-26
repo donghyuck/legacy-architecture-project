@@ -74,7 +74,7 @@
 				 
 				 
 				 
-					$("#splitter").height( $(window).height() - 200 );
+					$("#splitter").height( $(window).height() - 100 );
 				
  				var splitter = $("#splitter").kendoSplitter({
 					orientation: "horizontal",
@@ -85,8 +85,8 @@
 					resize: function () {
 					        if(splitter) {
 					            //alert(splitter.wrapper.height());
-					$("#splitter").find(".k-splitbar").height( $(window).height() - 200 );
-					$("#splitter").find(".k-pane").height( $(window).height() - 200 );
+					$("#splitter").find(".k-splitbar").height( $(window).height() - 100 );
+					$("#splitter").find(".k-pane").height( $(window).height() - 100 );
 					        }
 					        //you can also get the panes each on it's own.
 					        //check: console.log(splitter); to see what options are available           
