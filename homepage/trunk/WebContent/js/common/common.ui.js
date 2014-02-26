@@ -652,6 +652,11 @@
 			var that = this;
 			var overlay = $(that.element);
 			var options = that.options ;			
+			
+			if( overlay.hasClass( 'hide') ){
+				overlay.removeClass( 'hide')
+			}
+			
 			if( overlay.hasClass( 'open') ){
 				overlay.removeClass( 'open' );
 				overlay.addClass( 'close' );
