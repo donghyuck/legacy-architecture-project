@@ -73,6 +73,11 @@
 		-->
 		</script>		
 		<style scoped="scoped">
+	
+#account-navbar  ul.dropdown-menu {
+	min-width : 350px;
+}
+	
 			
 		</style>   	
 	</head>
