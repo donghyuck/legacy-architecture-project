@@ -72,6 +72,14 @@
 					}
 				 });	
 				 
+ 				var splitter = $("#splitter").kendoSplitter({
+					orientation: "horizontal",
+						panes: [
+							{ collapsible: true, size: "50%" },
+							{ collapsible: true, size: "50%" }
+						]
+				}).data("kendoSplitter");
+								 
 				// END SCRIPT
 			}
 		}]);
@@ -94,6 +102,19 @@
 			</div>	
 			<div class="row">		
 				<div class="col-sm-12">
+				
+			<div id="splitter" style="height: 100%; width: 100%;">
+                <div id="list_pane">
+                    <p>
+                        Left pane
+                    </p>
+                </div>
+                <div id="detail_pane">
+                    <p>
+                        Right pane
+                    </p>
+                </div>
+			</div>
 					
 				</div>
 			</div>
