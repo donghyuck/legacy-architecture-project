@@ -548,9 +548,9 @@
 		</div>		
 
 		<div id="menu-window" style="display:none;" class="gray">
-			<div class="container-fluid">
+			<div class="container-fluid layout">
 				<div class="row">
-					<div class="col-xs-4 marginless paddingless" style="background-color:red;">
+					<div class="col-xs-4 marginless paddingless">
 						<div id="menu-grid"></div>
 					</div>
 					<div class="col-xs-8 marginless paddingless" style="padding-left:5px;">
