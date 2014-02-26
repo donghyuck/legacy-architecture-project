@@ -50,7 +50,6 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
-
 	header h1 {
 		color: white;
 		font-weight: 300;
