@@ -6,122 +6,99 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',			
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',	
+			'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',      	    
        	    '${request.contextPath}/js/kendo/kendo.ko_KR.js',
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',       	    
+       	    '${request.contextPath}/js/common/common.modernizr.custom.js',
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/common/common.api.js'
+			'${request.contextPath}/js/common/common.api.js',
 			],        	  	   
 			complete: function() {      
-				// START SCRIPT
-				
-				var currentUser = new User({});			
-				// ACCOUNTS LOAD	
-				var accounts = $("#account").kendoAccounts({
+				// 1.  한글 지원을 위한 로케일 설정
+				kendo.culture("ko-KR");
+										
+				// 2. ACCOUNTS LOAD		
+				var currentUser = new User({});
+				var accounts = $("#account-panel").kendoAccounts({
+					visible : false,
 					authenticate : function( e ){
 						currentUser = e.token;						
-					},
-					template : kendo.template($("#account-template").html())
+					}
 				});
-								
-				// LEFT MENU !				
-				$("#topbar .open").kendoTopBar({ 
-					template : kendo.template($("#top-menu-template").html()),
+										
+				var currentCompany = new Company();							
+				var selectedCompany = new Company();	
+										
+				// 3.MENU LOAD
+				var currentPageName = "MENU_1_1";
+				
+				var topBar = $("#navbar").extTopBar({ 
+					template : kendo.template($("#topbar-template").html() ),
 					data : currentUser,
-					renderTo : $('.navigation'),
-					dataSource : {
-						transport: {
-							read: {
-								url: "/secure/get-company-menu-component.do?output=json",
-								dataType: "json",
-								data: {
-									menuName: "SYSTEM_MENU"
+					menuName: "SYSTEM_MENU",
+					items: {
+						id:"companyDropDownList", 
+						type: "dropDownList",
+						dataTextField: "displayName",
+						dataValueField: "companyId",
+						value: ${action.companyId},
+						enabled : false,
+						dataSource: {
+							transport: {
+								read: {
+									type: "json",
+									url: '${request.contextPath}/secure/list-company.do?output=json',
+									type:'POST'
 								}
+							},
+							schema: { 
+								data: "companies",
+								model : Company
 							}
 						},
-						schema: {
-							data: "targetCompanyMenuComponent.components"
+						change : function(data){
+							currentCompany = data ;
+							kendo.bind($("#company-info-panel"), selectedCompany );   
 						}
 					},
-					select : function( item ){
-						var url = item.action ;
-						if(url.indexOf("?") != -1){
-							url = url + "&companyId=" + $("#companyList").data("kendoDropDownList").value();
-						}else{
-							url = url + "?companyId=" + $("#companyList").data("kendoDropDownList").value();
-						}
-						 
-						$("#main-content-frame").attr( "src", url );
-						 kendo.bind($("#content_title"), item );
-					},
-					doAfter : function( content ){						
-						$("#companyList").kendoDropDownList({
-							dataTextField: "displayName",
-							dataValueField: "companyId",
-							dataSource: {
-								transport: {
-									read: {
-										type: "json",
-										url: '${request.contextPath}/secure/list-company.do?output=json',
-										type:'POST'
-									}
-								},
-								schema: { 
-									data: "companies",
-									model : Company
-								}
-							}
-						});					
-						if( !user.isSystem )	
-							$("#companyList").data("kendoDropDownList").readonly();
+					doAfter : function(that){
+						var menu = that.getMenuItem(currentPageName);
+						kendo.bind($(".page-header"), menu );   
 					}
 				 });	
-				$("#main-content-frame").css( "height", $(document).height() -51 );
-				$("#main-content-frame").attr("src" , 	"/secure/system-info.do");							
-				$(window).resize(function() {
-					$("#main-content-frame").css( "height", $(document).height() -51 );
-				});
+				 
 				// END SCRIPT
 			}
 		}]);
 		-->
 		</script> 		 
 		<style>
-			body {
-				overflow-y : hidden;
-			}
-					
-			.container {
-				padding-top : 51px;
-				overflow-y : none;
-			}
 			
 		</style>
 	</head>
 	<body>
 		<!-- START HEADER -->
-		<section>
-			<div id="topbar">
-				<button class="square sidebar open">
-					<i>Toggle</i>
-				</button>
-				<article id="content_title"><span data-bind="text:title"></span><span class="desc" data-bind="text:description"></span></article>
-				<div id="account"></div>				
-			</div>			
-			<div class="navigation" style="display:none;">
-			</div>	
-		</section>
+		<section id="navbar"></section>
 		<!-- END HEADER -->
-		<!-- START MAIN CONTENT -->		
-		<section class="container-fluid">			
+		<!-- START MAIN CONTNET -->
+		<div class="container-fluid">		
 			<div class="row">			
-			<iframe id="main-content-frame" style="width: 100%; height: 100%; background-color: #f5e5c5;" frameborder="0"  hspace="0"></iframe>		
+				<div class="page-header">
+					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
+				</div>			
+			</div>	
+			<div class="row">		
+				<div class="col-sm-12">
+					
+				</div>
 			</div>
-		<section>
+		</div>				
+		<div id="account-panel"></div>
 		<!-- END MAIN CONTENT -->					
 		<!-- START FOOTER -->
 		<!-- END FOOTER -->				
