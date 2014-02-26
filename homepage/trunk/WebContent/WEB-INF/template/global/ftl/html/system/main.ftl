@@ -87,7 +87,7 @@
 				var resizeSplitter = function() {
 					splitter = $("#splitter")
     				.data("kendoSplitter")
-					.size("#list_pane", $(window).height() - 200 + "px")
+					.height($(window).height() - 200)
 				};
 				 resizeSplitter();
 				// END SCRIPT
