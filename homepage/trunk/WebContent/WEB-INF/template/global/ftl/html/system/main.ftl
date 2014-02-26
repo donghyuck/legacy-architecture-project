@@ -72,6 +72,7 @@
 					}
 				 });	
 				 
+				$("#splitter").find(".k-pane").height( $(window).height() - 200 );				 
  				var splitter = $("#splitter").kendoSplitter({
 					orientation: "horizontal",
 						panes: [
@@ -87,7 +88,7 @@
 					        //check: console.log(splitter); to see what options are available           
 					    }						
 				}).data("kendoSplitter");
-				$("#splitter").find(".k-pane").height( $(window).height() - 200 );				
+				
 				$(window).resize(function() {
 					$("#splitter").find(".k-pane").height( $(window).height() - 200 );
 				});
