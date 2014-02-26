@@ -18,7 +18,23 @@
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
-		
+	#account-navbar  ul.dropdown-menu {
+		min-width : 320px;
+	}
+	
+	body { 
+		padding-top: 51px; 
+	}
+	
+	.k-grid table tr.k-state-selected{
+		background: #428bca;
+		color: #ffffff; 
+	}		
+	
+	nav.personalized-navbar {
+		min-height: 51px;
+		height: 51px;
+	}		
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
