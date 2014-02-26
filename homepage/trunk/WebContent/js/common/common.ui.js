@@ -657,7 +657,7 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
-					alert( options.transitions );
+					alert( kendo.stringify( ev )  );
 					if( options.transitions ) {						
 						alert( ev.propertyName );
 						if( ev.propertyName !== 'visibility' ) 
