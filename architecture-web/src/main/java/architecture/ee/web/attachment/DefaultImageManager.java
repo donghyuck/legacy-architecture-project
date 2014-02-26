@@ -449,9 +449,10 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			File file = new File(dir, toThumbnailFilename(image, width, height) );		
 			File originalFile = getImageFromCacheIfExist( image );	
 			
-			log.debug( "orignal image source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() + " thumbnail:" + file.getAbsoluteFile() );
+			log.debug( "orignal image source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() + " thumbnail:" + file.getAbsoluteFile() + " - " + file.exists() );
 			
 			if( file.exists() ){
+				log.debug(file.length());
 				if( file.length() > 0 ){
 					image.setThumbnailSize((int)file.length());
 					return file;
