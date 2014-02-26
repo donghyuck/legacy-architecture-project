@@ -90,10 +90,7 @@
 					    }						
 				}).data("kendoSplitter");
 				
-				$(window).resize(function() {				
-					$("#splitter").find(".k-splitbar").height( $(window).height() - 200 );
-					$("#splitter").find(".k-pane").height( $(window).height() - 200 );
-				});
+				splitter.resize();
 				
 				// END SCRIPT
 			}
