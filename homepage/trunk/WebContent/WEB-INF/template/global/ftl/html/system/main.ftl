@@ -89,7 +89,8 @@
 					    }						
 				}).data("kendoSplitter");
 				
-				$(window).resize(function() {
+				$(window).resize(function() {				
+					$("#splitter").find(".k-splitbar").height( $(window).height() - 200 );
 					$("#splitter").find(".k-pane").height( $(window).height() - 200 );
 				});
 				
@@ -99,10 +100,7 @@
 		-->
 		</script> 		 
 		<style>
-			#splitter {
-			
-			height: 100%;
-			}
+
 		</style>
 	</head>
 	<body>
