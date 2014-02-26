@@ -103,13 +103,13 @@
 			<div class="row">		
 				<div class="col-sm-12">
 				
-			<div id="splitter" style="height: 100%; width: 100%;">
-                <div id="list_pane">
+			<div id="splitter" style="height: 100%; border: 0;">
+                <div id="list_pane" class="color1">
                     <p>
                         Left pane
                     </p>
                 </div>
-                <div id="detail_pane">
+                <div id="detail_pane" class="color2">
                     <p>
                         Right pane
                     </p>
