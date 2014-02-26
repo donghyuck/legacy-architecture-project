@@ -429,7 +429,7 @@
 		<img src="${request.contextPath}/images/common/anonymous.png" height="34" class="btn-img"/>	
 		# } #
 		</a>
-		<a  href="/main.do?view=personalized" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</a>
+		<!--<a  href="/main.do?view=personalized" class="btn btn-info"># if ( !anonymous ) { # #:name## } else { # 익명 # } #	</a>-->
 		<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">
 			<!-- <i class="fa fa-cogs"></i> -->			
 			<span class="caret"></span>
