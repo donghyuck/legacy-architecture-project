@@ -649,7 +649,7 @@
 					if( options.transitions ) {
 						if( ev.propertyName !== 'visibility' ) return;
 						this.removeEventListener( options.transEndEventName, onEndTransitionFn );
-					//}
+					}
 						overlay.removeClass('close' );
 				};
 				if( options.transitions ) {
@@ -663,13 +663,11 @@
 			}
 		}
 	});
-
 	$.fn.extend( { 
 		extOverlay : function ( options ) {
 			return new ui.extOverlay ( this , options );		
 		}
-	});
-	
+	});	
 })(jQuery);
 
 
