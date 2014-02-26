@@ -28,6 +28,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.Thumbnails.Builder;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -443,28 +444,32 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		try {
 			lock.lock();
 			
-			log.debug( "thumbnail : " + width + "x" + height );
+			log.debug( "thumbnail : " + width + " x " + height );
 			File dir = getImageCacheDir();
 			File file = new File(dir, toThumbnailFilename(image, width, height) );		
 			File originalFile = getImageFromCacheIfExist( image );	
 			
-			log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() + "target:" + file.getAbsoluteFile() );
+			log.debug( "orignal image source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() + " thumbnail:" + file.getAbsoluteFile() );
 			
-			if( file.exists() && file.length() > 0 ){
-				image.setThumbnailSize((int)file.length());
-				return file;
+			if( file.exists() ){
+				if( file.length() > 0 ){
+					image.setThumbnailSize((int)file.length());
+					return file;
+				}else{
+				}
 			}
+			
 			/**
-			 * TIP : 윈동우 경우 Thumbnail 파일 생성후에도 해당 파일을 참조하는 문제가 있어 이를 임시파일을 사용하여 
-			 * 처리.
+			 * TIP : 윈동우 경우 Thumbnail 파일 생성후에도 해당 파일을 참조하는 문제가 있음. 
 			 */
+			log.debug( "create thumbnail : " + file.getAbsolutePath()  );
 			if( Platform.current() == Platform.WINDOWS ){
 				File tmp = getTemeFile();
 				Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(tmp)); 		
 				image.setThumbnailSize((int)tmp.length());
 				FileUtils.copyFile(tmp, file);			
-			}else{
-				Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(file)); 		
+			}else{				
+				Thumbnails.of(originalFile).allowOverwrite(true).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(file)); 		
 				image.setThumbnailSize((int)file.length());
 			}
 			
