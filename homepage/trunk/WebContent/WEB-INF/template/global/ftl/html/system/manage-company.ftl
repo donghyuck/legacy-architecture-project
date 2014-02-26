@@ -617,6 +617,7 @@
 		<div id="menuOverlay" class="overlay overlay-hugeinc">
 			<button type="button" class="overlay-close">Close</button>
 			<div>
+			
 			<div class="container-fluid layout">
 				<div class="row">
 					<div class="col-xs-4 marginless paddingless">
@@ -668,9 +669,9 @@
 						</div>
 					</div>
 				</div>
-			<div>	
-			</div>
+			</div>			
 			
+			</div>
 		</div>
 		<button id="trigger-overlay" type="button">Open Overlay</button>			
 		<!-- START FOOTER -->
