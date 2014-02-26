@@ -375,31 +375,30 @@
 							kendo.bind($(".menu-details"), selectedMenu );
 							$(".menu-details").show();								 	
  							$('#update-menu-btn').bind('click' , function(){
- 										if( selectedMenu.menuId > 0){
-											$.ajax({
-												type : 'POST',
-												url : "${request.contextPath}/secure/update-menu.do?output=json",
-												data : { menuId:selectedMenu.menuId, item: kendo.stringify( selectedMenu ) },
-												success : function( response ){									
-												    $('#menu-grid').data('kendoGrid').dataSource.read();	
-												},
-												error: handleKendoAjaxError,
-												dataType : "json"
-											});	
-							}else{
-											$.ajax({
-												type : 'POST',
-												url : "${request.contextPath}/secure/create-menu.do?output=json",
-												data : { menuId:selectedMenu.menuId, item: kendo.stringify( selectedMenu ) },
-												success : function( response ){									
-												    $('#menu-grid').data('kendoGrid').dataSource.read();	
-												},
-												error: handleKendoAjaxError,
-												dataType : "json"
-											});											
-										}
-							});	
-												 	
+ 								if( selectedMenu.menuId > 0){
+									$.ajax({
+										type : 'POST',
+										url : "${request.contextPath}/secure/update-menu.do?output=json",
+										data : { menuId:selectedMenu.menuId, item: kendo.stringify( selectedMenu ) },
+										success : function( response ){									
+										    $('#menu-grid').data('kendoGrid').dataSource.read();	
+										},
+										error: handleKendoAjaxError,
+										dataType : "json"
+									});	
+								}else{
+									$.ajax({
+										type : 'POST',
+										url : "${request.contextPath}/secure/create-menu.do?output=json",
+										data : { menuId:selectedMenu.menuId, item: kendo.stringify( selectedMenu ) },
+										success : function( response ){									
+										    $('#menu-grid').data('kendoGrid').dataSource.read();	
+										},
+										error: handleKendoAjaxError,
+										dataType : "json"
+									});											
+								}
+							});													 	
 						}
 					},
 					dataBound: function(e){
@@ -419,7 +418,7 @@
 					// WINDOW 생성
 					$(".menu-details").hide();
 					$("#menu-window").kendoWindow({								
-						actions: ["Close"],
+						actions:  [ "Minimize", "Maximize", "Close"],
 						resizable: false,
 						modal: true,
 						visible: false,
@@ -432,7 +431,7 @@
 				top: 70,
 				left: 15,
 			});					
-			//	menuWindow.maximize();
+			menuWindow.maximize();
 			menuWindow.open();	
 		}
 		
