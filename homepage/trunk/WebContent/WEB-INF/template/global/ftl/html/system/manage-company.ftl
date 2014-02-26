@@ -365,6 +365,7 @@
 							var selectedMenu = $('#menu-grid').data("menuPlaceHolder");                 
 							selectedMenu.menuId = selectedCell.menuId;
 							selectedMenu.name = selectedCell.name;
+							selectedMenu.title = selectedCell.title;
 							selectedMenu.enabled = selectedCell.enabled;
 							selectedMenu.description = selectedCell.description;
 							selectedMenu.properties = selectedCell.properties;
