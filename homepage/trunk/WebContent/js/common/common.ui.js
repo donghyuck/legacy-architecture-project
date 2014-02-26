@@ -681,7 +681,7 @@
 		}
 	});	
 
-})(window.kendo.jQuery);
+})(jQuery);
 
 
 function handleKendoAjaxError(xhr) {
