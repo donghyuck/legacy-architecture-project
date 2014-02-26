@@ -87,14 +87,11 @@
 					        //check: console.log(splitter); to see what options are available           
 					    }						
 				}).data("kendoSplitter");
-								
-				splitter.trigger('resize');
+				$("#splitter").find(".k-pane").height( $(window).height() - 200 );				
+				$(window).resize(function() {
+					$("#splitter").find(".k-pane").height( $(window).height() - 200 );
+				});
 				
-				var resizeSplitter = function() {
-					splitter = $("#splitter")
-    				.data("kendoSplitter")
-					.height($(window).height() - 200)
-				};
 				// END SCRIPT
 			}
 		}]);
