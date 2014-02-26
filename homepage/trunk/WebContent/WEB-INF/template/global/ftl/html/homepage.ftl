@@ -74,10 +74,18 @@
 		</script>		
 		<style scoped="scoped">
 	
-#account-navbar  ul.dropdown-menu {
-	min-width : 350px;
-}
+	#account-navbar  ul.dropdown-menu {
+		min-width : 320px;
+	}
 	
+	body { 
+		padding-top: 51px; 
+	}
+	
+	.k-grid table tr.k-state-selected{
+		background: #428bca;
+		color: #ffffff; 
+	}		
 			
 		</style>   	
 	</head>
