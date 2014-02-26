@@ -622,7 +622,7 @@
 	proxy = $.proxy,
 	ui = window.ui = window.ui || {};
  
-	ui.Overlay = Widget.extend({
+	ui.extOverlay = Widget.extend({
 		init: function(element, options) {			
 			var that = this;			
 			Widget.fn.init.call(that, element, options);
@@ -674,12 +674,14 @@
 			}
 		}
 	});
-	
-	kendo.ui.plugin(ui.Overlay);
+
 	/* 
+	kendo.ui.plugin(ui.Overlay);
+
+*/
+	
 	$.fn.extend( { 
-		extOverlay : function ( options ) {
-			
+		extOverlay : function ( options ) {			
 			return new ui.extOverlay ( this , options );		
 		}
 	});	
