@@ -633,7 +633,7 @@
 					'transition': 'transitionend'
 			};			
 			options.transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ] ;			
-			$(element).find('button.overlay-close').click( that.toggleOverlay );			
+			$(element).find('button.overlay-close').on('click',  that.toggleOverlay );			
 		},
 		options : {
 			name : "Overlay"
