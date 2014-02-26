@@ -677,15 +677,13 @@
 
 	/* 
 	kendo.ui.plugin(ui.Overlay);
-
-*/
-	
+*/	
 	$.fn.extend( { 
 		extOverlay : function ( options ) {			
 			return new ui.extOverlay ( this , options );		
 		}
 	});	
-	*/
+
 })(window.kendo.jQuery);
 
 
