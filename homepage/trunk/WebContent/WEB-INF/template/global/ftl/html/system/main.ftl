@@ -79,7 +79,7 @@
  				var splitter = $("#splitter").kendoSplitter({
 					orientation: "horizontal",
 						panes: [
-							{ collapsible: true, size: "50%" },
+							{ collapsible: false, size: "50%" },
 							{ collapsible: true, size: "50%" }
 						],
 					resize: function () {
