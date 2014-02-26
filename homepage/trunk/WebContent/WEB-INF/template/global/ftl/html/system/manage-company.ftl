@@ -593,7 +593,7 @@
 									</div>									
 								</form>
 							</div>
-							<div class="panel-footer" style="padding:5px;">
+							<div class="panel-footer">
 								<button id="update-menu-btn" class="btn btn-primary"><i class="fa fa-check"></i> 저장</button>
 							</div>
 						</div>
