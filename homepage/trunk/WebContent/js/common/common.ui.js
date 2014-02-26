@@ -662,14 +662,14 @@
 						if( ev.propertyName !== 'visibility' ) 
 							return;
 						
-						overlay.unbind( options.transEndEventName, onEndTransitionFn );					
+						overlay.off( options.transEndEventName, onEndTransitionFn );					
 					}
 					alert( " --- " )
 					overlay.removeClass( 'close' );
 				};
 				
 				if( options.transitions ) {
-					overlay.bind( options.transEndEventName, onEndTransitionFn );
+					overlay.on( options.transEndEventName, onEndTransitionFn );
 				}
 				else {
 					onEndTransitionFn();
