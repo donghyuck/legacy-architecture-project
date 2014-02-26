@@ -659,7 +659,7 @@
 				var onEndTransitionFn = function( ev ) {
 					alert( ev.result + ", "  + ev.type );
 					if( options.transitions ) {						
-						alert( ev.propertyName );
+						
 						if( ev.propertyName !== 'visibility' ) 
 							return;
 						
