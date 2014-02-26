@@ -657,6 +657,7 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
+					alert( ev );
 					if( options.transitions ) {						
 						alert( ev.propertyName );
 						if( ev.propertyName !== 'visibility' ) 
@@ -669,6 +670,7 @@
 				};
 				
 				if( options.transitions ) {
+					
 					overlay.on( options.transEndEventName, onEndTransitionFn );
 				}
 				else {
