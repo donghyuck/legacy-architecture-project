@@ -35,6 +35,33 @@
 		min-height: 51px;
 		height: 51px;
 	}		
+
+	/** Header css */
+	header {
+		background: #0070b8;
+		background-size: cover;
+		padding: 22px 0;
+		margin-top : -20px;   /*navbar-fixed-top*/
+		margin-bottom: 10px;
+	}
+
+	header.cloud {
+	    color: white;
+		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
+	}
+.
+
+	header h1 {
+		color: white;
+		font-weight: 300;
+		margin-bottom: 0;
+	}
+
+	header h4 {
+		color: white;
+		font-weight: 300;
+	}
+		
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" />">
