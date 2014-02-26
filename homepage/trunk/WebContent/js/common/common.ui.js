@@ -651,9 +651,12 @@
 		toggleOverlay : function () {
 			var that = this;
 			
-			alert(this);
+			
 			
 			var overlay = $(that.element);
+			
+			alert(overlay);
+			
 			var options = that.options ;
 			
 			if( overlay.hasClass( 'open') ){
