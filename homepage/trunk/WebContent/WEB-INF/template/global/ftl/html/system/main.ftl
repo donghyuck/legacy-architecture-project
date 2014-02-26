@@ -74,7 +74,7 @@
 				 
 				 
 				 
-					$("#splitter").height( $(window).height() - 100 );
+					$("#splitter").height( $(window).height() - 150 );
 				
  				var splitter = $("#splitter").kendoSplitter({
 					orientation: "horizontal",
@@ -111,8 +111,10 @@
 		<!-- START MAIN CONTNET -->
 		<div class="container-fluid">		
 			<div class="row">			
-				<div class="page-header">
-					<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
+				<div class="col-sm-12">
+					<div class="page-header">
+						<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
+					</div>	
 				</div>			
 			</div>	
 			<div class="row">		
