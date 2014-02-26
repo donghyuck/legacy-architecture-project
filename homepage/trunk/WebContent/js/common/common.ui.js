@@ -668,13 +668,13 @@
 		}
 	});
 
-	/*$.fn.extend( { 
+	$.fn.extend( { 
 		extOverlay : function ( options ) {
 			
 			return new ui.extOverlay ( this , options );		
 		}
 	});	
-	*/
+	
 })(jQuery);
 
 
