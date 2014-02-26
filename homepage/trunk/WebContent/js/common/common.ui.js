@@ -613,6 +613,66 @@
 	});	
 })(jQuery);
 
+/**
+ * extOverlay widget
+ */
+(function($, undefined) {
+	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
+	ui.extOverlay = Widget.extend({
+		init: function(element, options) {			
+			var that = this;			
+			Widget.fn.init.call(that, element, options);
+			options = that.options;
+			element = that.element;			
+			options.transitions = Modernizr.csstransitions ;
+			var transEndEventNames = {
+					'WebkitTransition': 'webkitTransitionEnd',
+					'MozTransition': 'transitionend',
+					'OTransition': 'oTransitionEnd',
+					'msTransition': 'MSTransitionEnd',
+					'transition': 'transitionend'
+				};
+			options.transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ] ;			
+		},
+		options : {
+			name : "Overlay"
+		},
+		function toggleOverlay() {
+			var that = this;
+			var overlay = that.element;
+			var options = that.options ;
+			
+			if( overlay.hasClass( 'open') ){
+				overlay.removeClass( 'open' );
+				overlay.addClass( 'close' );
+				var onEndTransitionFn = function( ev ) {
+					if( options.transitions ) {
+						if( ev.propertyName !== 'visibility' ) return;
+						this.removeEventListener( options.transEndEventName, onEndTransitionFn );
+					//}
+						overlay.removeClass('close' );
+				};
+				if( options.transitions ) {
+					overlay.addEventListener( options.transEndEventName, onEndTransitionFn );
+				}
+				else {
+					onEndTransitionFn();
+				}				
+			}else if( !overlay.hasClass( 'close' ) ) {
+				overlay.addClass( 'open' );
+			}
+		}
+	});
+
+	$.fn.extend( { 
+		extOverlay : function ( options ) {
+			return new ui.extOverlay ( this , options );		
+		}
+	});
+	
+})(jQuery);
+
+
 function handleKendoAjaxError(xhr) {
 	var message = "";
 	if (xhr.status == 0) {
