@@ -617,13 +617,19 @@
  * extOverlay widget
  */
 (function($, undefined) {
-	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	ui.kendoOverlay = Widget.extend({
+	var kendo = window.kendo,
+	Widget = kendo.ui.Widget,
+	proxy = $.proxy,
+	ui = window.ui = window.ui || {};
+ 
+	ui.Overlay = Widget.extend({
 		init: function(element, options) {			
 			var that = this;			
 			Widget.fn.init.call(that, element, options);
-			options = that.options;
-			element = that.element;			
+			
+            element = that.wrapper = that.element;
+            options = that.options;
+            
 			options.transitions = Modernizr.csstransitions ;
 			var transEndEventNames = {
 					'WebkitTransition': 'webkitTransitionEnd',
@@ -633,6 +639,7 @@
 					'transition': 'transitionend'
 			};			
 			options.transEndEventName = transEndEventNames[ Modernizr.prefixed( 'transition' ) ] ;			
+			
 			$(element).find('button.overlay-close').on('click', function (e) {
     			e.preventDefault();
 				that.toggleOverlay();
@@ -668,7 +675,7 @@
 		}
 	});
 	
-	kendo.ui.plugin(ui.kendoOverlay);
+	kendo.ui.plugin(ui.Overlay);
 	/* 
 	$.fn.extend( { 
 		extOverlay : function ( options ) {
@@ -677,7 +684,7 @@
 		}
 	});	
 	*/
-})(jQuery);
+})(window.kendo.jQuery);
 
 
 function handleKendoAjaxError(xhr) {
