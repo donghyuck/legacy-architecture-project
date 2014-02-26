@@ -82,7 +82,8 @@
 					resize: function () {
 					        if(splitter) {
 					            //alert(splitter.wrapper.height());
-					            $("#splitter").find(".k-pane").height( $(window).height() - 200 );
+					$("#splitter").find(".k-splitbar").height( $(window).height() - 200 );
+					$("#splitter").find(".k-pane").height( $(window).height() - 200 );
 					        }
 					        //you can also get the panes each on it's own.
 					        //check: console.log(splitter); to see what options are available           
