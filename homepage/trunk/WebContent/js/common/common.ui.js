@@ -658,9 +658,12 @@
 				
 				var onEndTransitionFn = function( ev ) {
 					if( options.transitions ) {
+						
 						if( ev.propertyName !== 'visibility' ) return;
-						this.removeEventListener( options.transEndEventName, onEndTransitionFn );
+							this.removeEventListener( options.transEndEventName, onEndTransitionFn );
+					
 					}
+					alert( over.html() ) ;
 					overlay.removeClass( 'close' );
 				};
 				
