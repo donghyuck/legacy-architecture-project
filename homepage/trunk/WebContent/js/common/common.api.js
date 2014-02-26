@@ -104,4 +104,6 @@
 		}
 		return result
 	}
+	
+	
 })(jQuery);
