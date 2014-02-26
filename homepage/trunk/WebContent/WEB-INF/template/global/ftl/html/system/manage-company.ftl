@@ -427,10 +427,12 @@
 				}			 		                   								
 			}						
 			var menuWindow = $("#menu-window").data("kendoWindow");
+			/*
 			$("#menu-window").closest(".k-window").css({
 				top: 70,
 				left: 15,
-			});					
+			});		
+			*/			
 			menuWindow.maximize();
 			menuWindow.open();	
 		}
