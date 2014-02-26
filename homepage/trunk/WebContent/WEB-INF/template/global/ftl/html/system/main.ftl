@@ -85,6 +85,7 @@
 					resize: function () {
 					        if(splitter) {
 					            //alert(splitter.wrapper.height());
+					$("#splitter").height( $(window).height() - 150 );            
 					$("#splitter").find(".k-splitbar").height( $(window).height() - 150 );
 					$("#splitter").find(".k-pane").height( $(window).height() - 150 );
 					        }
