@@ -546,8 +546,9 @@
 			</div>					
 			<div id="role-grid">	</div>            	
 		</div>		
+
 		<div id="menu-window" style="display:none;" class="gray">
-			<div class="container layout">
+			<div class="container-fluid">
 				<div class="row">
 					<div class="col-xs-4 marginless paddingless" style="background-color:red;">
 						<div id="menu-grid"></div>
