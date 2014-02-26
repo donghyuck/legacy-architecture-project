@@ -658,6 +658,7 @@
 			alert(overlay);
 			
 			var options = that.options ;
+			alert(options);
 			
 			if( overlay.hasClass( 'open') ){
 				overlay.removeClass( 'open' );
@@ -667,7 +668,7 @@
 						if( ev.propertyName !== 'visibility' ) return;
 						this.removeEventListener( options.transEndEventName, onEndTransitionFn );
 					}
-						overlay.removeClass('close' );
+					overlay.removeClass('close' );
 				};
 				if( options.transitions ) {
 					overlay.on( options.transEndEventName, onEndTransitionFn );
