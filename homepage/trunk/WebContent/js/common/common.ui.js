@@ -657,12 +657,14 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
-					alert( $(this).html() );
 					if( options.transitions ) {						
-						if( ev.propertyName !== 'visibility' ) return;
+						alert( ev.propertyName );
+						if( ev.propertyName !== 'visibility' ) 
+							return;
+						
 						overlay.unbind( options.transEndEventName, onEndTransitionFn );					
 					}
-					
+					alert( " --- " )
 					overlay.removeClass( 'close' );
 				};
 				
