@@ -6,7 +6,8 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',			
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',	
+			'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
        	    '${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',      	    
@@ -606,7 +607,20 @@
 				</div>
 			</div>
 		</div>
-			
+		<!-- open/close -->
+		<div class="overlay overlay-hugeinc">
+			<button type="button" class="overlay-close">Close</button>
+			<nav>
+				<ul>
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Work</a></li>
+					<li><a href="#">Clients</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</nav>
+		</div>
+		<button id="trigger-overlay" type="button">Open Overlay</button>			
 		<!-- START FOOTER -->
 		<!-- END FOOTER -->		
 		<form name="fm1" method="POST" accept-charset="utf-8" class="details">
