@@ -112,7 +112,7 @@
 				<a href="#:photoIdLink#" data-bind="attr:{href: photoIdLink }">
 					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" class="border-buttom-rounded"/>			
 				</a>		
-				<figcaption>
+				<figcaption class="border-buttom-rounded">
 					<ul class="list-inline">
 						<small class="text-muted" data-bind="text: modifiedDate"></small>
 					</ul>
