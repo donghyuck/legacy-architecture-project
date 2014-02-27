@@ -209,7 +209,7 @@ nav.personalized-navbar {
 	border : 0px;
 	position : fixed;
 	overflow: hidden;
-	min-height: 51px;
+	min-height: 50px;
 	z-index: 1000;	
 	/*
 	left: 0;
