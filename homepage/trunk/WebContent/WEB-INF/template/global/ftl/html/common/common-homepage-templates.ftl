@@ -244,7 +244,7 @@
 	<div class="media">
 		<a class="pull-left" href="\\#">
 		#if ( user.properties.imageId != null ) {# 
-		<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-thumbnail">	
+		<img src="${request.contextPath}/accounts/view-image.do?width=100&height=150&imageId=#: user.properties.imageId#" width="30" height="30" class="img-rounded">	
 		# } else {  #	
 		<img src="${request.contextPath}/images/common/anonymous.png" width="30" height="30" class="img-circle">
 		# } #
