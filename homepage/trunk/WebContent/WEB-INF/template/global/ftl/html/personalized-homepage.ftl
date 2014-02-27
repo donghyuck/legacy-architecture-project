@@ -1357,7 +1357,7 @@
 		<!-- START HEADER -->		
 		<#include "/html/common/common-homepage-menu.ftl" >		
 		<nav class="personalized-navbar navbar" role="navigation">
-			<div class="container-fload">
+			<div class="container-fluid">
 				<ul class="nav navbar-nav navbar-left">				
 					<p class="navbar-text">&nbsp;</p>	
 					<li><a href="${request.contextPath}/main.do" class="btn-link"><i class="fa fa-home fa-lg"></i></a></li>
@@ -1400,8 +1400,8 @@
 		</nav>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-		<div class="container-float" style="min-height:600px;">		
-			<div id="personalized-area" class="row">				
+		<div class="container-fluid" style="min-height:600px;">		
+			<div id="personalized-area" class="row top-pading-5">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
 						<div class="panel-heading">알림
