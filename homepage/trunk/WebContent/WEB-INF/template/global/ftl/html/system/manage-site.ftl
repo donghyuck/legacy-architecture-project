@@ -104,7 +104,7 @@
 						});
 					}	
 				});	
-								 			 								
+																 			 								
 				$('#myTab a').click(function (e) {
 					e.preventDefault();
 					if(  $(this).attr('href') == '#site-info' ){
