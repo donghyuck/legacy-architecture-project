@@ -278,6 +278,29 @@ body.color3, div.color3 {
 	background: #e74c3c;	
 }
 
+body.color4, div.color4 {
+	background: #F7F7F7;	
+}
+
+body.color5, div.color5 {
+	background: #BDBEC2;	
+}
+
+body.color6, div.color6 {
+	background: #C7C7CC;	
+}
+
+body.color7, div.color7 {
+	background: #007AFF;	
+}
+
+body.color8, div.color8 {
+	background: #34AADC;	
+}
+
+body.color9, div.color9 {
+	background: #1F1F21;	
+}
 
 section.sky , div.sky {
 	background-color: #5bc0de;		
