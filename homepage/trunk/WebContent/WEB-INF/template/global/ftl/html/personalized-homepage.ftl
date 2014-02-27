@@ -1055,8 +1055,8 @@
 		}
 
 		.k-dropzone {
-		#	width: 808px;
-		#	height: 219px;
+		/*	width: 808px;
+			height: 219px;*/
 			border: 5px dashed #c0dcf2;
 			background: 0;
 			right : 0px;
@@ -1069,12 +1069,12 @@
 			position: relative;
 			z-index: 9000;
 		}
-		
+		/*
 		.k-grid table tr.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
 		}
-
+*/
 		.media, .media .media {
 			margin-top: 5px;
 		}
@@ -1270,10 +1270,11 @@
 			max-width: 600px;
 			width: 100%;
 		}
-		
+		/*
 		.navbar{
 			margin-bottom: 0px;
 		}
+			*/
 				
 		#personalized-controls {
 			position: absolute;
