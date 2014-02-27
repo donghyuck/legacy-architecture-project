@@ -203,11 +203,12 @@ nav.personalized-navbar {
 	*/
 	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
 	border-radius : 0px;
-	/*top: 0;	*/
+	top: 0;
 	left: 0;
 	right: 0;
 	border : 0px;
-	margin-top: -20px;
+	/*
+	margin-top: -20px; */
 	position : fixed;
 	overflow: hidden;
 	/*min-height: 52px;*/
@@ -235,8 +236,8 @@ nav .personalized-controls-trigger {
 }
 
 nav.personalized-navbar  .navbar-btn {
-margin-top: 5px;
-margin-bottom: 5px;
+	margin-top: 4px;
+	margin-bottom: 4px;
 }
 
 
