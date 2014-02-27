@@ -849,10 +849,12 @@
 		
 		<script type="text/x-kendo-template" id="user-details-template">			
 			<div class="panel panel-primary marginless details" >
+			<!--
 				<div class="panel-heading" >
 					<i class="fa fa-male"></i>&nbsp;<span data-bind="text: name"></span>
 					<button type="button" class="close" aria-hidden="true">&times;</button>
-				</div>				
+				</div>
+			-->					
 				<div class="panel-body" style="padding:5px;">		
 					<!--
 					<div class="alert alert-danger margin-buttom-5">
