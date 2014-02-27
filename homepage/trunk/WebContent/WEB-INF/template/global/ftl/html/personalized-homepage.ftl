@@ -724,11 +724,9 @@
 			$("#announce-panel" ).show();			
 			kendo.fx($("#announce-panel")).zoom("in").startValue(0).endValue(1).play();
 			
-		}	
+		}			
 		
-		
-		function createPanel(){
-					
+		function createPanel(){					
 			var renderTo = ui.generateGuid();
 			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");			
 			var template = kendo.template($("#empty-panel-template").html());	
@@ -799,7 +797,7 @@
 			$("#" + renderToString ).parent().show();
 			if(streamsProvider.dataSource.total() == 0 )
 			{
-					streamsProvider.dataSource.read();
+				streamsProvider.dataSource.read();
 			}	
 		}		
 
@@ -1079,7 +1077,7 @@
 			background: #428bca;
 			color: #ffffff; 
 		}
-*/
+		*/
 		.media, .media .media {
 			margin-top: 5px;
 		}
@@ -1103,17 +1101,16 @@
 		 }
 		 
 		.popover.left {
-			float: right;
+			float: right;  
+		}
 		  
-		  }
-		  
-		  .popover.right {
+		.popover.right {
 
-		  }		  
+		}		  
 		 
-		 .popover-title {
+		.popover-title {
 			font-family: "나눔 고딕", "BM_NANUMGOTHIC";
-		 }
+		}
 
 		.k-callout-n {
 		border-bottom-color: #787878;
@@ -1127,23 +1124,21 @@
 		border-left-color: #787878;
 		}	
 		
-		
-		
-		 #photo-gallery-view {
+		#photo-gallery-view {
 			min-height: 320px;
 			min-width: 320px;
 			width: 100%;
 			padding: 0px;
 			border: 0px;
 		}
-        		                		
+	
 		.attach
 		{
 			float: left;
-            position: relative;
-            width: 160px;
-            height: 160px;
-            padding: 0;
+			position: relative;
+			width: 160px;
+			height: 160px;
+			padding: 0;
 			cursor: pointer;
 			overflow: hidden;
 		}
@@ -1166,12 +1161,12 @@
 		.attach h3
 		{
 			margin: 0;
-            padding: 10px 10px 0 10px;
-            line-height: 1.1em;
-            font-size : 12px;
-            font-weight: normal;
-            color: #ffffff;
-            word-wrap: break-word;
+			padding: 10px 10px 0 10px;
+			line-height: 1.1em;
+			font-size : 12px;
+			font-weight: normal;
+			color: #ffffff;
+			word-wrap: break-word;
 		}
 
 		.attach p {
@@ -1275,11 +1270,6 @@
 			max-width: 600px;
 			width: 100%;
 		}
-		/*
-		.navbar{
-			margin-bottom: 0px;
-		}
-			*/
 				
 		#personalized-controls {
 			position: absolute;
@@ -1363,10 +1353,8 @@
 		</style>   	
 	</head>
 	<body id="doc" class="bg-gray">
-		<!-- START HEADER -->
-		
-		<#include "/html/common/common-homepage-menu.ftl" >
-		
+		<!-- START HEADER -->		
+		<#include "/html/common/common-homepage-menu.ftl" >		
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container-fload">
 				<ul class="nav navbar-nav navbar-left">				
@@ -1412,7 +1400,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-50">				
+			<div id="personalized-area" class="row blank-top-5">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
 						<div class="panel-heading">알림
@@ -1431,8 +1419,7 @@
 				</div>		
 			</div>				
 		</section>		
-		<div class="overlay hide"></div>
-		
+		<div class="overlay hide"></div>		
 		<!-- start side menu -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
 			<header>							
@@ -1441,11 +1428,9 @@
 					<button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
 					<button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
 				</div>			
-				<!--<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>-->
-				
+				<!--<button id="personalized-controls-menu-close" type="button" class="close" aria-hidden="true"><i class="fa fa-times fa-2x"></i></button>-->				
 				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
-			</header>
-					
+			</header>					
 			<!--
 			<div class="blank-space-5">	
 				<nav class="cbp-hsmenu-wrapper" id="cbp-hsmenu-wrapper">
@@ -1491,7 +1476,7 @@
 											</section>											
 										</div>
 										<!-- start social tab-content -->		
-										<div class="tab-pane" id="my-streams">							
+										<div class="tab-pane" id="my-streams">
 											<table id="my-social-streams-grid">
 												<colgroup>
 													<col/>
