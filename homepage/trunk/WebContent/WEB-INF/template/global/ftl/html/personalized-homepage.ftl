@@ -1362,7 +1362,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >
 		
 		<nav class="personalized-navbar navbar" role="navigation">
-			<div class="container">
+			<div class="container-fload">
 				<ul class="nav navbar-nav navbar-right">					
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
@@ -1381,6 +1381,7 @@
 					<li><a href="#" class="btn-img"><i class="fa fa-chevron-up"></i></a></li>
 					<li><a href="#" class="btn-img"><i class="fa fa-chevron-down"></i></a></li>
 					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-cog"></i></a></li>
+					<li><span class="sr-only">Toggle Dropdown</span></li>
 				</ul>
 			</div>
 		</nav>
