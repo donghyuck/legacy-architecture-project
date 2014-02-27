@@ -1023,9 +1023,13 @@
 		}
 					
 		-->
-		</script> 		   
-		
+		</script>		
 		<style scoped="scoped">
+
+		nav.navbar-fixed-top {
+			display: none!important;
+		}
+
 
 		.k-tiles-arrange label {
 			font-weight : normal;		
