@@ -33,6 +33,7 @@
 	}		
 	
 	nav.personalized-navbar {
+		top: 0px;
 		min-height: 51px;
 		height: 51px;
 	}		
