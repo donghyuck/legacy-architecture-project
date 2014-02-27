@@ -205,7 +205,12 @@ nav.personalized-navbar {
 	border-radius : 0px;
 	top: 0;
 	right: 0;
+	left: 0;
 	border : 0px;
+	position : fixed;
+	overflow: hidden;
+	min-height: 51px;
+	z-index: 1000;	
 	/*
 	left: 0;
 	right: 0;
