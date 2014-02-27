@@ -1368,7 +1368,7 @@
 		
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container-fload">
-				<ul class="nav navbar-nav navbar-right">					
+				<ul class="nav navbar-nav navbar-left">					
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
@@ -1382,6 +1382,21 @@
 							</label>
 						</div>										
 					</li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">		<!--			
+					<li class="navbar-btn hidden-xs">
+						<div class="btn-group navbar-btn" data-toggle="buttons">
+							<label class="btn btn-info">
+								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
+							</label>
+							<label class="btn btn-info active">
+						 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
+							</label>
+							<label class="btn btn-info">
+								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
+							</label>
+						</div>										
+					</li>-->
 					<p class="navbar-text">&nbsp;</p>
 					<li><a href="#" class="btn-img"><i class="fa fa-chevron-up"></i></a></li>
 					<li><a href="#" class="btn-img"><i class="fa fa-chevron-down"></i></a></li>
