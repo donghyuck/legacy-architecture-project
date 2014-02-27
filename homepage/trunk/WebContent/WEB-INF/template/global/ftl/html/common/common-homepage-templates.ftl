@@ -110,7 +110,7 @@
 		<div class="panel-body block-space-0">			
 			<figure>			
 				<a href="#:photoIdLink#" data-bind="attr:{href: photoIdLink }">
-					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" />			
+					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" class="border-buttom-rounded"/>			
 				</a>		
 				<figcaption>
 					<ul class="list-inline">
