@@ -1368,7 +1368,8 @@
 		
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container-fload">
-				<ul class="nav navbar-nav navbar-left">					
+				<ul class="nav navbar-nav navbar-left">				
+					<p class="navbar-text">&nbsp;</p>	
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
@@ -1401,7 +1402,7 @@
 					<li><a href="#" class="btn-img"><i class="fa fa-chevron-up"></i></a></li>
 					<li><a href="#" class="btn-img"><i class="fa fa-chevron-down"></i></a></li>
 					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-cog"></i></a></li>
-					<p class="navbar-text"></p>
+					<p class="navbar-text">&nbsp;</p>
 				</ul>
 			</div>
 		</nav>
