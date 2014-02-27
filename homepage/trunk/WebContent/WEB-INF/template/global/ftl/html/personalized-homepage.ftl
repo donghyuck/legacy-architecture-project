@@ -1370,6 +1370,8 @@
 			<div class="container-fload">
 				<ul class="nav navbar-nav navbar-left">				
 					<p class="navbar-text">&nbsp;</p>	
+					<li><a href="${request.contextPath}/main.do" class="btn-img"><i class="fa fa-home"></i></a></li>
+					<p class="navbar-text">&nbsp;</p>						
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
