@@ -1400,7 +1400,7 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-5">				
+			<div id="personalized-area" class="row">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
 						<div class="panel-heading">알림
