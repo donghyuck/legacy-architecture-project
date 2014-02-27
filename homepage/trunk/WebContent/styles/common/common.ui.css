@@ -266,39 +266,39 @@ header .personalized-controls-trigger {
 
 /** color */
 
-body.color1 , div.color1 {
+body.color1 , div.color1, ul.color1 {
 	background: #3498db;			
 }
 
-body.color2, div.color2 {
+body.color2, div.color2, ul.color2 {
 	background: #52be7f;	
 }
 
-body.color3, div.color3 {
+body.color3, div.color3, ul.color3 {
 	background: #e74c3c;	
 }
 
-body.color4, div.color4 {
+body.color4, div.color4, ul.color4 {
 	background: #F7F7F7;	
 }
 
-body.color5, div.color5 {
+body.color5, div.color5, ul.color5 {
 	background: #BDBEC2;	
 }
 
-body.color6, div.color6 {
+body.color6, div.color6, ul.color6 {
 	background: #C7C7CC;	
 }
 
-body.color7, div.color7 {
+body.color7, div.color7, ul.color7 {
 	background: #007AFF;	
 }
 
-body.color8, div.color8 {
+body.color8, div.color8, ul.color8 {
 	background: #34AADC;	
 }
 
-body.color9, div.color9 {
+body.color9, div.color9, ul.color9 {
 	background: #1F1F21;	
 }
 
