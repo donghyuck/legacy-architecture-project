@@ -15,6 +15,24 @@
  */
 package architecture.ee.web.community.streams;
 
-public interface SharedImage {
+import java.util.Date;
 
+import architecture.common.cache.Cacheable;
+import architecture.common.user.User;
+
+
+public interface SharedImage  extends Cacheable {
+
+	public long getImageId();
+	
+	public String getExternalId();
+	
+	public User getCreator();
+	
+	public Date getCreationDate() ;
+	
+	public Date getModifiedDate();
+	
+	public boolean isPublicShared() ;
+	
 }
