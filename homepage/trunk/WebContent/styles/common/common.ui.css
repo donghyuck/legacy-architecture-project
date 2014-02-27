@@ -211,7 +211,7 @@ nav.personalized-navbar {
 	margin-top: -20px; */
 	position : fixed;
 	overflow: hidden;
-	/*min-height: 52px;*/
+	min-height: 51px;
 	z-index: 1000;
 }
 
