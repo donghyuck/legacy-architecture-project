@@ -17,8 +17,7 @@
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
-			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/jqeury.waypoints/waypoints.min.js'],
+			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {			
 			
 				// 1.  한글 지원을 위한 로케일 설정
@@ -65,6 +64,8 @@
 						});
 					}, 100);					
 				});
+				
+				/**
 								
 				$('#personalized-area').waypoint(function(direction){				
 					if( direction = 'down' ){
@@ -76,7 +77,7 @@
 						$('.personalized-navbar').toggleClass('up');			
 						$('personalized-area').toggleClass('blank-top-50');					
 					}
-				}, { offset: 50 });												
+				}, { offset: 50 });	*/											
 											
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
