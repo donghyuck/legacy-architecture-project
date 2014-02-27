@@ -1358,9 +1358,9 @@
 	</head>
 	<body id="doc" class="bg-gray">
 		<!-- START HEADER -->
-		<!--
+		
 		<#include "/html/common/common-homepage-menu.ftl" >
-		-->
+		
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-right">					
