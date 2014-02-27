@@ -1370,7 +1370,7 @@
 			<div class="container-fload">
 				<ul class="nav navbar-nav navbar-left">				
 					<p class="navbar-text">&nbsp;</p>	
-					<li><a href="${request.contextPath}/main.do" class="btn-img"><i class="fa fa-home"></i></a></li>
+					<li><a href="${request.contextPath}/main.do" class="btn-link"><i class="fa fa-home fa-lg"></i></a></li>
 					<p class="navbar-text">&nbsp;</p>						
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
@@ -1401,9 +1401,9 @@
 						</div>										
 					</li>-->
 					<p class="navbar-text">&nbsp;</p>
-					<li><a href="#" class="btn-img"><i class="fa fa-chevron-up"></i></a></li>
-					<li><a href="#" class="btn-img"><i class="fa fa-chevron-down"></i></a></li>
-					<li><a  id="personalized-controls-menu" href="#" class="btn-img"><i class="fa fa-cog"></i></a></li>
+					<li><a href="#" class="btn-link"><i class="fa fa-chevron-up fa-lg"></i></a></li>
+					<li><a href="#" class="btn-link"><i class="fa fa-chevron-down fa-lg"></i></a></li>
+					<li><a  id="personalized-controls-menu" href="#" class="btn-link"><i class="fa fa-cog fa-lg"></i></a></li>
 					<p class="navbar-text">&nbsp;</p>
 				</ul>
 			</div>
