@@ -1027,7 +1027,8 @@
 		<style scoped="scoped">
 
 		nav.navbar-fixed-top {
-			display: none!important;
+			opacity: 0;
+			z-index: 100;	
 		}
 
 
