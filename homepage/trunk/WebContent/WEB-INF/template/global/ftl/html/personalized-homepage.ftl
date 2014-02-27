@@ -1399,7 +1399,7 @@
 		</nav>
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-		<section class="container-float" style="min-height:600px;">		
+		<div class="container-float" style="min-height:600px;">		
 			<div id="personalized-area" class="row">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
@@ -1418,7 +1418,7 @@
 					</div>
 				</div>		
 			</div>				
-		</section>		
+		</div>		
 		<div class="overlay hide"></div>		
 		<!-- start side menu -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
