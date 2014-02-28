@@ -104,6 +104,22 @@
 		}
 		return result
 	}
-	
+		
+	common.api.photoStreamsDataSource = new kendo.data.DataSource({		
+		serverPaging: true,
+		pageSize: 15,
+		transport: { 
+            read: { '/community/list-streams-photo.do?output=json', type: 'POST', dataType: "json" },
+            parameterMap: function (options, type){
+                return { startIndex: options.skip, pageSize: options.pageSize }
+            }
+		},
+        schema: {
+            total: "photoCount",
+            data: "photos",
+            model: models.Photo
+        },
+        error:handleKendoAjaxError,		
+	});
 	
 })(jQuery);
