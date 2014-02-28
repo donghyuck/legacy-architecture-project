@@ -32,7 +32,7 @@
 				common.api.photoStreamsDataSource.fetch(function(){
 					var data = this.data();
 					$.each( data , function(index, item ){
-						$('#cbp-bislideshow').append(photo_template(item));						
+						$('#cbp-bislideshow').html( kendo.render( photo_template, data ) ) ;
 					});		
 					cbpBGSlideshow.init();						
 				});
