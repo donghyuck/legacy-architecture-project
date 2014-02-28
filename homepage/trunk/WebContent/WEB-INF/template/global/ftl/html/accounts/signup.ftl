@@ -34,9 +34,10 @@
 					$.each( data , function(index, item ){
 						//$('#cbp-bislideshow').append(photo_template(item));
 						
-					});						
+					});		
+					cbpBGSlideshow.init();						
 				});
-				cbpBGSlideshow.init();				
+						
 				$('#signup-window').modal({show:true, backdrop:false});
 				$("#signup-window button.custom-social-groups").each(function( index ) {
 					var external_button = $(this);
