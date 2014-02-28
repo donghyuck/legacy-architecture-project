@@ -280,7 +280,11 @@
 
 			<ul id="cbp-bislideshow" class="cbp-bislideshow">
 			</ul>
-			
+				<div id="cbp-bicontrols" class="cbp-bicontrols">
+					<span class="fa cbp-biprev"></span>
+					<span class="fa cbp-bipause"></span>
+					<span class="fa cbp-binext"></span>
+				</div>			
 			
 			
 			
@@ -288,11 +292,7 @@
 <ul id="cbp-bislideshow" class="cbp-bislideshow"><li><img src="/community/view-streams-photo.do?key=00JAFHbnp5Rx8HIPPFcQwnwwcoUeGGqox0GIMJmAY9x7u1H25I5Rrmu19eeef6rV" alt="이미지"></li><li><img src="/community/view-streams-photo.do?key=62aGrArtjoBgyRmJvOmkU2DJatMNcPP38QnkELJyvgQqhjEmFUggsim9z37qmZCW" alt="이미지"></li><li><img src="/community/view-streams-photo.do?key=XqrVdkOCL2NFK3xroAzy982sZm6tSFbvlzVzkeTmOdkG9ceXlCAnEwpaRsyuX8Pd" alt="이미지"></li></ul>
 			
 			
-				<div id="cbp-bicontrols" class="cbp-bicontrols">
-					<span class="fa cbp-biprev"></span>
-					<span class="fa cbp-bipause"></span>
-					<span class="fa cbp-binext"></span>
-				</div>
+
 				 -->
 		</div>
 
