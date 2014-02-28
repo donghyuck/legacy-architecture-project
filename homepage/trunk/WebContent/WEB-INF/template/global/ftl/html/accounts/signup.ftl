@@ -35,7 +35,7 @@
 						$('#cbp-bislideshow').append(photo_template(item));
 						alert("a");
 					});
-					alert("a");
+					alert("b");
 					cbpBGSlideshow.init();					
 				});
 				
