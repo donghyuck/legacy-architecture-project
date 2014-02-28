@@ -26,7 +26,7 @@
 				kendo.culture("ko-KR");
 				
 				// START SCRIPT	
-				common.api.photoStreamsDataSource.fetch(function(){
+				api.photoStreamsDataSource.fetch(function(){
 					alert("fdsaf");
 				});
 				
