@@ -13,14 +13,14 @@
 			publicShared: { type: "boolean", editable: false, defaultValue: false },
 	        modifiedDate: { type: "date"},
 	        creationDate: { type: "date" } 			
-		},
+		}
+	/*,
+		
 		getUrl : function(){
 			var that = this;
-			return that.options.template(this);
+			return that.template(this);
 		},
-		options : {
-			template = kendo.template("/community/view-streams-photo.do?key=#=externalId#");
-		}
+		template = kendo.template("/community/view-streams-photo.do?key=#=externalId#");*/
 	})
 	
 	
