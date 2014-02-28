@@ -123,7 +123,38 @@
             data: "photos",
             model: models.Photo
         },
-        error:handleKendoAjaxError
+        error:common.api.handleKendoAjaxError
 	});
+	
+	common.api.handleKendoAjaxError = function (xhr) {
+		var message = "";
+		if (xhr.status == 0) {
+			message = "오프라인 상태입니다.";
+		} else if (xhr.status == 404) {
+			message = "요청하신 페이지를 찾을 수 없습니다.";
+		} else if (xhr.status == 500) {
+			message = "시스템 내부 오류가 발생하였습니다.";
+		} else if (xhr.status == 403 || xhr.errorThrown == "Forbidden") {
+			message =  "접근 권한이 없습니다."; // "Access to the specified resource has
+										// been forbidden.";
+		} else if (xhr.errorThrown == 'timeout') {
+			message = "처리 대기 시간을 초가하였습니다. 잠시 후 다시 시도하여 주십시오.";
+		} else if (xhr.errorThrown == 'parsererror') {
+			message = "데이터 파싱 중에 오류가 발생하였습니다.";
+		} else {
+			message = "오류가 발생하였습니다." ;
+		}
+
+		$.jGrowl(message, {
+			sticky : false,
+			life : 1000,
+			animateOpen : {
+				height : "show"
+			},
+			animateClose : {
+				height : "hide"
+			}
+		});
+	};
 	
 })(jQuery);
