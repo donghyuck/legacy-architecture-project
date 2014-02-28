@@ -49,7 +49,28 @@
 	<!--  COMMUNITY USER ACTIONS -->	
 
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
-
+		<!--  streams  -->	
+		<action name="list-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.PhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				photoCount
+				</param>
+			</result>
+		</action>			
+		
+		<action name="view-streams-photo"  method="viewPhoto" class="architecture.ee.web.community.struts2.action.ajax.PhotoStreamsAction">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>	
+		</action>		
+				
 		<!--  social network  -->					
 		<action name="list-socialnetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
