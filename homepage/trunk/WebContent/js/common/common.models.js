@@ -1,3 +1,31 @@
+(function($, undefined) {
+	var Model = kendo.data.Model;
+	var models = window.models = window.models || {};
+	
+
+	
+	models.Photo =  kendo.data.Model.define({
+		id : "externalId",
+		fields: { 
+			externalId: { type: "string", editable: false },
+			imageId : { type: "number", editable: false, defaultValue: 0},
+			externalId: { type: "string", editable: false },
+			publicShared: { type: "boolean", editable: false, defaultValue: false },
+	        modifiedDate: { type: "date"},
+	        creationDate: { type: "date" } 			
+		},
+		getUrl : function(){
+			var that = this;
+			return that.options.template(this);
+		},
+		options : {
+			template = kendo.template("/community/view-streams-photo.do?key=#=externalId#");
+		}
+	})
+	
+	
+})(jQuery);	
+	
 var SignupForm = kendo.data.Model.define({
 	id : "id",
 	fields: {
