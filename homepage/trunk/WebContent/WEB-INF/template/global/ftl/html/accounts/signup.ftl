@@ -24,12 +24,15 @@
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
-				      
+				
 				// START SCRIPT	
+				common.api.photoStreamsDataSource.fetch(function(){
+					alert("fdsaf");
+				});
+				
 				cbpBGSlideshow.init();
-
+				
 				$('#signup-window').modal({show:true, backdrop:false});
-
 				$("#signup-window button.custom-social-groups").each(function( index ) {
 					var external_button = $(this);
 					external_button.click(function (e){	
