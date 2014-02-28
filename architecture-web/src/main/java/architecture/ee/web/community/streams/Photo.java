@@ -21,7 +21,7 @@ import architecture.common.cache.Cacheable;
 import architecture.common.user.User;
 
 
-public interface SharedImage  extends Cacheable {
+public interface Photo  extends Cacheable {
 
 	public long getImageId();
 	

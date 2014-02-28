@@ -470,7 +470,11 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 				image.setThumbnailSize((int)tmp.length());
 				FileUtils.copyFile(tmp, file);			
 			}else{				
-				Thumbnails.of(originalFile).allowOverwrite(true).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(file)); 		
+				try {
+					Thumbnails.of(originalFile).allowOverwrite(true).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(file));
+				} catch (Throwable e) {
+					log.error(e);
+				} 		
 				image.setThumbnailSize((int)file.length());
 			}
 			
