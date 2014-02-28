@@ -7,7 +7,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
@@ -27,12 +27,12 @@
 				
 				// START SCRIPT	
 				
-				var photo_template = kendo.template('<li><img src="${request.contextPath}/community/list-streams-photo.do?key=#= externalId#" alt="image03"/></li>');
+				var photo_template = kendo.template('<li><img src="${request.contextPath}/community/list-streams-photo.do?key=#= externalId#" alt="이미지"/></li>');
 				
 				common.api.photoStreamsDataSource.fetch(function(){
 					var data = this.data();
 					$.each( data , function(index, item ){
-						$('#bislideshow').append(bislideshow(item));
+						$('#cbp-bislideshow').append(photo_template(item));
 					});
 					cbpBGSlideshow.init();					
 				});
@@ -277,9 +277,6 @@
 	<body>
 		<div class="main">
 			<ul id="cbp-bislideshow" class="cbp-bislideshow">
-				<li><img src="${request.contextPath}/community/download-image.do?imageId=175" alt="image01"/></li>
-				<li><img src="${request.contextPath}/community/download-image.do?imageId=808" alt="image02"/></li>
-				<li><img src="${request.contextPath}/community/download-image.do?imageId=810" alt="image03"/></li>
 			</ul>
 				<!-- 
 				<div id="cbp-bicontrols" class="cbp-bicontrols">
