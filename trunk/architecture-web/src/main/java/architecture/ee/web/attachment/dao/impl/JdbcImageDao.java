@@ -67,6 +67,7 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 		
 		Image toUse = image;		
 		if( toUse.getImageId() <1L){
+
 			long imageId = getNextId(sequencerName);		
 			if( image instanceof ImageImpl){
 				ImageImpl impl = (ImageImpl)toUse;

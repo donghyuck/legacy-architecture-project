@@ -17,23 +17,48 @@ package architecture.ee.web.community.streams;
 
 import java.util.List;
 
-import architecture.common.user.User;
-import architecture.ee.web.attachment.Image;
+import architecture.ee.web.community.PhotoNotFoundException;
 
 public interface PhotoStreamsManager {
 
+	
+	public Photo getPhotoById(String externalId) throws PhotoNotFoundException ;	
+	
+	public int getPhotoCount(int objectType, long objectId);
+	
+	public int getPhotoCount(int objectType);
+	
+	public int getTotalPhotoCount();
+	
+	
+	public List<Photo> getPhotos(int objectType, long objectId); 
+	
+	public List<Photo> getPhotos(int objectType, long objectId, int startIndex, int maxResults );
+	
+	public List<Photo> getPhotos(int objectType);
+	
+	public List<Photo> getPhotos(int objectType, int startIndex, int maxResults );
+	
+	public List<Photo> getPhotos();
+	
+	public List<Photo> getPhotos(int startIndex, int maxResults );
+	
+	
+	
+	
+	/*
 	public int getTotalSharedImageCount(int objectyType ,  long objectId);
 		
-	public List<SharedImage> getSharedImages( int objectyType ,  long objectId, int startIndex, int maxResults );
+	public List<Photo> getSharedImages( int objectyType ,  long objectId, int startIndex, int maxResults );
 	
 	public int getTotalSharedImageCount(User creator);
 	
-	public List<SharedImage> getSharedImages( User creator, int startIndex, int maxResults );
+	public List<Photo> getSharedImages( User creator, int startIndex, int maxResults );
 	
-	public SharedImage createSharedImage(  int objectyType ,  long objectId, User creator, Image image );
+	public Photo createSharedImage(  int objectyType ,  long objectId, User creator, Image image );
 	
-	public void updateSharedImage(  SharedImage image );
+	public void updateSharedImage(  Photo image );
 	
-	public void deleteSharedImage(  SharedImage image );
-		
+	public void deleteSharedImage(  Photo image );
+		*/
 }
