@@ -109,7 +109,7 @@
 		serverPaging: true,
 		pageSize: 15,
 		transport: { 
-            read: { '/community/list-streams-photo.do?output=json', type: 'POST', dataType: "json" },
+            read: { '/community/list-streams-photo.do?output=json', type: 'POST', dataType: 'json' },
             parameterMap: function (options, type){
                 return { startIndex: options.skip, pageSize: options.pageSize }
             }
@@ -119,7 +119,7 @@
             data: "photos",
             model: models.Photo
         },
-        error:handleKendoAjaxError,		
+        error:handleKendoAjaxError
 	});
 	
 })(jQuery);
