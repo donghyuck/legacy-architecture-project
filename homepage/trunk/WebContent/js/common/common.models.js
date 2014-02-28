@@ -1,10 +1,10 @@
 (function($, undefined) {
-	var Model = kendo.data.Model;
-	var models = window.models = window.models || {};
+	var common = window.common = window.common || {};
+	common.models = {};	
 	
 
 	
-	models.Photo =  kendo.data.Model.define({
+	common.models.Photo =  kendo.data.Model.define({
 		id : "externalId",
 		fields: { 
 			externalId: { type: "string", editable: false },
@@ -14,14 +14,7 @@
 	        modifiedDate: { type: "date"},
 	        creationDate: { type: "date" } 			
 		}
-	/*,
-		
-		getUrl : function(){
-			var that = this;
-			return that.template(this);
-		},
-		template = kendo.template("/community/view-streams-photo.do?key=#=externalId#");*/
-	})
+	});
 	
 	
 })(jQuery);	
