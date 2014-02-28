@@ -121,7 +121,7 @@
         schema: {
             total: "photoCount",
             data: "photos",
-            model: models.Photo
+            model: common.models.Photo
         },
         error:common.api.handleKendoAjaxError
 	});
