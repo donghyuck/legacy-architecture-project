@@ -26,11 +26,16 @@
 				kendo.culture("ko-KR");
 				
 				// START SCRIPT	
-				common.api.photoStreamsDataSource.fetch(function(){
-					alert("fdsaf");
-				});
 				
-				cbpBGSlideshow.init();
+				var photo_template = kendo.template('<li><img src="${request.contextPath}/community/list-streams-photo.do?key=#= externalId#" alt="image03"/></li>');
+				
+				common.api.photoStreamsDataSource.fetch(function(){
+					var data = this.data();
+					$.each( data , function(index, item ){
+						$('#bislideshow').append(bislideshow(item));
+					});
+					cbpBGSlideshow.init();					
+				});
 				
 				$('#signup-window').modal({show:true, backdrop:false});
 				$("#signup-window button.custom-social-groups").each(function( index ) {
