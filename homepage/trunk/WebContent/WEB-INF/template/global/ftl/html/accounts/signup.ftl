@@ -33,7 +33,9 @@
 					var data = this.data();
 					$.each( data , function(index, item ){
 						$('#cbp-bislideshow').append(photo_template(item));
+						alert("a");
 					});
+					alert("a");
 					cbpBGSlideshow.init();					
 				});
 				
