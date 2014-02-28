@@ -27,7 +27,7 @@
 				
 				// START SCRIPT	
 				
-				var photo_template = kendo.template('<li><img src="${request.contextPath}/community/list-streams-photo.do?key=#= externalId#" alt="이미지"/></li>');
+				var photo_template = kendo.template('<li><img src="${request.contextPath}/community/view-streams-photo.do?key=#= externalId#" alt="이미지"/></li>');
 				
 				common.api.photoStreamsDataSource.fetch(function(){
 					var data = this.data();
