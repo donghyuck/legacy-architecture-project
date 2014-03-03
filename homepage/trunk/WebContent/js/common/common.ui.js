@@ -771,7 +771,7 @@
 			var that = this;
 			var options = that.options ;			
 			var navigation =  options.navigation;
-			alert();
+
 			if( typeof navigation ===  'object'){
 				navigation.find('span.cbp-bipause').on( 'click', function(){
 					var control = $( this );
