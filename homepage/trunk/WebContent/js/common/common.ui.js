@@ -711,6 +711,8 @@
 			options.items = slideshow.find('li');		
 			options.itemsCount = options.items.length;
 			
+			alert( options.navigation );
+			
 			slideshow.imagesLoaded(function(){
 				if( Modernizr.backgroundsize ) {
 					options.items.each( function(){
@@ -730,8 +732,7 @@
 			current : 0,
 			slideshowtime: 0,
 			isSlideshowActive : true,
-			navigation: {},
-			interval : 3500,
+			interval : 6000,
 			items : [],
 			itemsCount : 0
 		},
@@ -769,6 +770,8 @@
 			clearTimeout( options.slideshowtime );
 		},
 		_initEvents : function () {
+			
+			
 			/*
 			navigation.$navPlayPause.on( 'click', function() {
 
