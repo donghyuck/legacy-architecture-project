@@ -720,7 +720,7 @@
 				}else {
 					slideshow.find( 'img' ).show();					
 				}
-				options.items.eq( current ).css( 'opacity', 1 );
+				options.items.eq( options.current  ).css( 'opacity', 1 );
 				_initEvents();
 				_start();
 			});
