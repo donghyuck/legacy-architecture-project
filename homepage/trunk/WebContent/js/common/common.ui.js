@@ -733,7 +733,7 @@
 			navigation: {},
 			interval : 3500,
 			items : [],
-			itemsCount
+			itemsCount : 0
 		},
 		_navigate : function( direction ) {
 			// current item
