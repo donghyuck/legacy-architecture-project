@@ -728,11 +728,11 @@
 		options : {
 			name : "Slideshow",
 			current : 0,
-			slideshowtime,
+			slideshowtime: 0,
 			isSlideshowActive : true,
-			navigation,
+			navigation: {},
 			interval : 3500,
-			items,
+			items : [],
 			itemsCount
 		},
 		_navigate : function( direction ) {
