@@ -289,7 +289,7 @@
 				<ul class="nav navbar-nav navbar-left">
 					 <li><a href="#">약관</a></li>
 					 <li><a href="#">개인정보보호</a></li>
-					 <li><a href="#">로그인</a></li>
+					 <li><a href="${request.contextPath}/accounts/login.do">로그인</a></li>
 					 <li><a href="#">회원가입</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
