@@ -32,7 +32,7 @@
 				}				
 			} );		
 			
-			var photo_template = kendo.template("<li><img src='${request.contextPath}/community/view-streams-photo.do?key=#= externalId#' alt='이미지'/></li>");				
+			var photo_template = kendo.template("<li><img src='<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/view-streams-photo.do?key=#= externalId#' alt='이미지'/></li>");				
 			common.api.photoStreamsDataSource.fetch(function(){
 				var data = this.data();
 				$.each( data , function(index, item ){
