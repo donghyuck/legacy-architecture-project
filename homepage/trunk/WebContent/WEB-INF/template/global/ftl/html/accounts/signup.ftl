@@ -284,7 +284,7 @@
 				<span class="fa cbp-binext"></span>
 			</div>			
 		</div>
-		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+		<nav class="navbar navbar-fixed-bottom" role="navigation" class="color:#000000;">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav navbar-left">
 					 <li><a href="#">약관</a></li>
