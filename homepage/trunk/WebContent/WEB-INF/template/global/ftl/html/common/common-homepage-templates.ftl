@@ -123,13 +123,15 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
+			<div class="lb-overlay blue container-fluid" id="#:photoId#" data-bind="attr: { id: photoId }">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
+				<!--
 				<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 				<div>
 					<h3>pointe <span>/point/</h3>
 					<p>image description....</p>
 				</div>
+				-->
 			</div>							
 		</div>				
 	</div>		
