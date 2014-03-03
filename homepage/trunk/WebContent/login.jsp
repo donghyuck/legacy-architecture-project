@@ -12,22 +12,18 @@
 		load: [ 
 			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.animatedcheckbox.css',			
-			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.9.1/jquery.min.js',
+			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.10.2/jquery.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery.extension/jquery.ui.shake.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.web.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.ko_KR.js',			
-			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.3/bootstrap.min.js',	
-			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.cbpBGSlideshow.min.js',
+			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.3/bootstrap.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery.imagesloaded/imagesloaded.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.modernizr.custom.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.api.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js',
-			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.svgcheckbox.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
 		complete: function() {        	              		              		  
-
-			cbpBGSlideshow.init();
 			
 			common.api.getUser( {
 				success : function ( token ) {
@@ -36,11 +32,16 @@
 				}				
 			} );		
 			
-			/*
-			$("#login").click( function() {           		    	
-				doLogin();
+			var photo_template = kendo.template("<li><img src='${request.contextPath}/community/view-streams-photo.do?key=#= externalId#' alt='이미지'/></li>");				
+			common.api.photoStreamsDataSource.fetch(function(){
+				var data = this.data();
+				$.each( data , function(index, item ){
+					$('#cbp-bislideshow').html( kendo.render( photo_template, data ) ) ;
+				});
+				var slideshow = $('#cbp-bislideshow').extSlideshow({
+					navigation: $('#cbp-bicontrols')
+				});
 			});
-			*/
 			
 			/* LOGIN */
 			$('#login-window').modal({show:true, backdrop:false});						
@@ -300,18 +301,12 @@
 	<!-- Main Page Content  -->
 
 		<div class="main">
-				<ul id="cbp-bislideshow" class="cbp-bislideshow">
-					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/download-image.do?imageId=175" alt="image01"/></li>
-					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/download-image.do?imageId=808" alt="image02"/></li>
-					<li><img src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/download-image.do?imageId=810" alt="image03"/></li>
-				</ul>
-				<!-- 
+				<ul id="cbp-bislideshow" class="cbp-bislideshow"></ul>
 				<div id="cbp-bicontrols" class="cbp-bicontrols">
 					<span class="fa cbp-biprev"></span>
 					<span class="fa cbp-bipause"></span>
 					<span class="fa cbp-binext"></span>
 				</div>
-				 -->
 			</div>
 	
 	
