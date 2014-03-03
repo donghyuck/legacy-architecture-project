@@ -275,7 +275,7 @@
 		
 		</style>
 	</head>
-	<body>
+	<body class="color3">
 		<div class="main">
 			<ul id="cbp-bislideshow" class="cbp-bislideshow"></ul>
 			<div id="cbp-bicontrols" class="cbp-bicontrols">
