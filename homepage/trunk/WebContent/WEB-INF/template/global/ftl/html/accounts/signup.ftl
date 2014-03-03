@@ -27,14 +27,15 @@
 				
 				// START SCRIPT	
 				
-				var photo_template = kendo.template("<li><img src='${request.contextPath}/community/view-streams-photo.do?key=#= externalId#' alt='이미지'/></li>");
-				
+				var photo_template = kendo.template("<li><img src='${request.contextPath}/community/view-streams-photo.do?key=#= externalId#' alt='이미지'/></li>");				
 				common.api.photoStreamsDataSource.fetch(function(){
 					var data = this.data();
 					$.each( data , function(index, item ){
 						$('#cbp-bislideshow').html( kendo.render( photo_template, data ) ) ;
-					});		
-					var slideshow = $('#cbp-bislideshow').extSlideshow();
+					});
+					var slideshow = $('#cbp-bislideshow').extSlideshow({
+						navigation: $('#cbp-bicontrols')
+					});
 				});
 						
 				$('#signup-window').modal({show:true, backdrop:false});
