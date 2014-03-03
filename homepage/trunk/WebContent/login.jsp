@@ -249,6 +249,10 @@
 			}
 		}
 	}
+
+	function toggleWindow(){
+		$('#login-window').modal('toggle');
+	}
 		
 </script>
 <style scoped="scoped">
@@ -290,7 +294,20 @@
 			</div>			
 		</div>
 	
-	
+		<nav class="navbar navbar-fixed-bottom" role="navigation" class="color:#000000;">
+			<div class="container-fluid">
+				<ul class="nav navbar-nav navbar-left">
+					 <li><a href="#">약관</a></li>
+					 <li><a href="#">개인정보보호</a></li>
+					 <li><a href="#" onClick="toggleWindow(); return false;">로그인</a></li>
+					 <li><a href="${request.contextPath}/accounts/signup.do">회원가입</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					 <li><a href="#">Link</a></li>
+				</ul>
+			</div>
+		</nav>
+			
 	<!-- Modal -->
 	<div class="modal fade" id="login-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
