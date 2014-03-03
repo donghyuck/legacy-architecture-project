@@ -721,8 +721,8 @@
 					slideshow.find( 'img' ).show();					
 				}
 				options.items.eq( options.current  ).css( 'opacity', 1 );
-				_initEvents();
-				_start();
+				that._initEvents();
+				that._start();
 			});
 		},
 		options : {
