@@ -286,7 +286,15 @@
 		</div>
 		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 			<div class="container-fluid">
-			
+				<ul class="nav navbar-nav navbar-left">
+					 <li><a href="#">약관</a></li>
+					 <li><a href="#">개인정보보호</a></li>
+					 <li><a href="#">로그인</a></li>
+					 <li><a href="#">회원가입</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					 <li><a href="#">Link</a></li>
+				</ul>
 			</div>
 		</nav>
 	<!-- Modal -->
