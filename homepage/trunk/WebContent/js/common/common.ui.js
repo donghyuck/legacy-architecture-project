@@ -303,8 +303,7 @@
 				options.renderTo = element;
 			}
 			that.items = new Array();
-			that.render(options);	
-			
+			that.render(options);				
 		},
 		events : {			
 		},
@@ -341,8 +340,7 @@
 			var that = this;
 			that.dataSource.fetch(function(){
 			var items = that.dataSource.data();
-			content.append( options.template( items ) );	
-				
+			content.append( options.template( items ) );					
 				content.find('.nav a').click(function( e ){
 					if( $(e.target).is('[action]') ){
 						var selected = $(e.target);
@@ -366,7 +364,6 @@
 					options.doAfter(that);    					
 				}
 			});
-
 		},
 		select : function( item ){
 			var content = this.options.renderTo ;			
@@ -397,7 +394,6 @@
 			return $('#' + id ).data("extDropDownList");			
 		}
 	});
-
 	$.fn.extend( { 
 		extTopBar : function ( options ) {
 			return new ui.extTopBar ( this , options );		
@@ -491,7 +487,6 @@
     NS = ".kendoAccounts",
 	open = false,
 	DISABLED = "disabled";
-
 	ui.kendoAccounts = Widget.extend( {		
 		init: function(element, options) {	
 			var that = this;			
@@ -613,6 +608,11 @@
 	});	
 })(jQuery);
 
+
+/**
+ * extSlideshow widget
+ */
+
 /**
  * extOverlay widget
  */
@@ -686,6 +686,122 @@
 	$.fn.extend( { 
 		extOverlay : function ( options ) {			
 			return new ui.extOverlay ( this , options );		
+		}
+	});	
+
+})(jQuery);
+
+/**
+ * extSlideshow widget
+ */
+(function($, undefined) {
+	var kendo = window.kendo,
+	Widget = kendo.ui.Widget,
+	proxy = $.proxy,	
+	ui = window.ui = window.ui || {};
+ 
+	ui.extSlideshow = Widget.extend({
+		init: function(element, options) {			
+			var that = this;			
+			Widget.fn.init.call(that, element, options);			
+			that.wrapper = that.element;
+			options = that.options;			
+			var slideshow = $(that.element),
+			options.items = shlideshow.find('li');		
+			options.itemsCount = options.items.length;
+			
+			slideshow.imagesLoaded(function(){
+				if( Modernizr.backgroundsize ) {
+					options.items.each( function(){
+						 var item = $( this );
+						 item.css( 'background-image', 'url(' + item.find( 'img' ).attr( 'src' ) + ')' );						
+					} );					
+				}else {
+					slideshow.find( 'img' ).show();					
+				}
+				options.items.eq( current ).css( 'opacity', 1 );
+				_initEvents();
+				_start();
+			});
+		},
+		options : {
+			name : "Slideshow",
+			current : 0,
+			slideshowtime,
+			isSlideshowActive : true,
+			navigation,
+			interval : 3500,
+			items,
+			itemsCount
+		},
+		_navigate : function( direction ) {
+			// current item
+			var that = this;
+			var options = that.options ;				
+			var oldItem = options.items.eq( options.current );			
+			if( direction === 'next' ) {
+				options.current = options.current < options.itemsCount - 1 ? ++options.current : 0;
+			}
+			else if( direction === 'prev' ) {
+				options.current = options.current > 0 ? --options.current : options.itemsCount - 1;
+			}
+			// new item
+			var newItem = options.items.eq( current );
+			// show / hide items
+			oldItem.css( 'opacity', 0 );
+			newItem.css( 'opacity', 1 );
+		},
+		_start : function () {
+			var that = this;
+			var options = that.options ;				
+			options.isSlideshowActive = true;
+			clearTimeout( options.slideshowtime );
+			options.slideshowtime = setTimeout( function() {
+				that._navigate( 'next' );
+				that._start();
+			}, options.interval );
+		},
+		_stop : function () {
+			var that = this;
+			var options = that.options ;				
+			options.isSlideshowActive = false;
+			clearTimeout( options.slideshowtime );
+		},
+		_initEvents : function () {
+			/*
+			navigation.$navPlayPause.on( 'click', function() {
+
+				var $control = $( this );
+				if( $control.hasClass( 'cbp-biplay' ) ) {
+					$control.removeClass( 'cbp-biplay' ).addClass( 'cbp-bipause' );
+					startSlideshow();
+				}
+				else {
+					$control.removeClass( 'cbp-bipause' ).addClass( 'cbp-biplay' );
+					stopSlideshow();
+				}
+
+			} );
+
+			navigation.$navPrev.on( 'click', function() { 
+				navigate( 'prev' ); 
+				if( isSlideshowActive ) { 
+					startSlideshow(); 
+				} 
+			} );
+			navigation.$navNext.on( 'click', function() { 
+				navigate( 'next' ); 
+				if( isSlideshowActive ) { 
+					startSlideshow(); 
+				}
+			} );
+*/
+		}
+	});
+
+	$.fn.extend( { 
+		extSlideshow : function ( options ) {			
+			return new ui.extSlideshow ( this , options );		
 		}
 	});	
 
