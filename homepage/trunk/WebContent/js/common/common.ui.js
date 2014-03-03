@@ -747,7 +747,7 @@
 				options.current = options.current > 0 ? --options.current : options.itemsCount - 1;
 			}
 			// new item
-			var newItem = options.items.eq( current );
+			var newItem = options.items.eq( options.current  );
 			// show / hide items
 			oldItem.css( 'opacity', 0 );
 			newItem.css( 'opacity', 1 );
