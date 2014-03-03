@@ -710,9 +710,7 @@
 			
 			options.items = slideshow.find('li');		
 			options.itemsCount = options.items.length;
-			
-			alert( typeof options.navigation );
-			
+
 			slideshow.imagesLoaded(function(){
 				if( Modernizr.backgroundsize ) {
 					options.items.each( function(){
@@ -731,7 +729,7 @@
 			name : "Slideshow",
 			current : 0,
 			slideshowtime: 0,
-			isSlideshowActive : true,
+			slideshowActive : true,
 			interval : 6000,
 			items : [],
 			itemsCount : 0
@@ -756,7 +754,7 @@
 		_start : function () {
 			var that = this;
 			var options = that.options ;				
-			options.isSlideshowActive = true;
+			options.slideshowActive = true;
 			clearTimeout( options.slideshowtime );
 			options.slideshowtime = setTimeout( function() {
 				that._navigate( 'next' );
@@ -766,40 +764,40 @@
 		_stop : function () {
 			var that = this;
 			var options = that.options ;				
-			options.isSlideshowActive = false;
+			options.slideshowActive = false;
 			clearTimeout( options.slideshowtime );
 		},
 		_initEvents : function () {
-			
-			
-			/*
-			navigation.$navPlayPause.on( 'click', function() {
-
-				var $control = $( this );
-				if( $control.hasClass( 'cbp-biplay' ) ) {
-					$control.removeClass( 'cbp-biplay' ).addClass( 'cbp-bipause' );
-					startSlideshow();
-				}
-				else {
-					$control.removeClass( 'cbp-bipause' ).addClass( 'cbp-biplay' );
-					stopSlideshow();
-				}
-
-			} );
-
-			navigation.$navPrev.on( 'click', function() { 
-				navigate( 'prev' ); 
-				if( isSlideshowActive ) { 
-					startSlideshow(); 
-				} 
-			} );
-			navigation.$navNext.on( 'click', function() { 
-				navigate( 'next' ); 
-				if( isSlideshowActive ) { 
-					startSlideshow(); 
-				}
-			} );
-*/
+			var that = this;
+			var options = that.options ;			
+			var navigation =  options.navigation;
+			if(navigation == 'object'){
+				navigation.find('span.cbp-bipause').on( 'click', function(){
+					var control = $( this );
+					if( control.hasClass( 'cbp-biplay' ) ) {
+						control.removeClass( 'cbp-biplay' ).addClass( 'cbp-bipause' );
+						that._start();
+					}
+					else {
+						control.removeClass( 'cbp-bipause' ).addClass( 'cbp-biplay' );
+						that._stop();
+					}
+				});
+				
+				var prev = navigation.find('span.cbp-biprev').on('click', function(){
+					navigate( 'prev' ); 
+					if( options.slideshowActive ) { 
+						startSlideshow(); 
+					} 
+				});
+				
+				var next = navigation.find('span.cbp-binext').on('click', function(){
+					navigate( 'next' ); 
+					if( options.slideshowActive ) { 
+						that._start();
+					}
+				});
+			}
 		}
 	});
 
