@@ -6,7 +6,7 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
@@ -17,11 +17,10 @@
 			complete: function() {							
 			
 			<#if action.userProfile?exists >
-			var onetimeCode = "${action.oneTimeSecureCode}";												
+			var onetimeCode = "${action.oneTimeSecureCode}";	
 			<#else>	
 			var onetimeCode = null;					
-			</#if>				
-			
+			</#if>			
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >					
 				if( typeof window.opener.handleCallbackResult == "function"){			
@@ -41,15 +40,13 @@
 					}); 												
 				}								
 				<#else>			
-				var template = kendo.template($('#account-not-found-alert-template').html());				
-				//alert("${action.getUserProfile() }");				
+				var template = kendo.template($('#account-not-found-alert-template').html());
 				$("#status").html(template({media: "facebook"}));				
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
 						window.opener.handleCallbackResult("facebook", onetimeCode , false);
 						window.close();	
 				}else if( typeof window.opener.signupCallbackResult == "function"){			
 					window.opener.signupCallbackResult("facebook", onetimeCode, false);
-				} else {												
 				}else{
 						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 						window.close();
