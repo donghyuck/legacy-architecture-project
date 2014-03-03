@@ -131,13 +131,17 @@
 				</ul>										
 			</figcaption>			
 		</figure>
-		<div class="lb-overlay" id="photo-#:imageId#">			
+		<div class="lb-overlay" id="photo-#:imageId#">
 			<a href="\\#page" class="lb-overlay-close">Close</a>
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
-			<div>
-				<h3>pointe <span>/point/</h3>
-				<p>image description....</p>
-			</div>
+			<div class="container-fluid">
+				<div class="row" >
+					<div class="col-md-8"><img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" /></div>
+					<div class="col-md-4">
+						<h3>pointe <span>/point/</h3>
+						<p>image description....</p>				
+					</div>				
+				</div>
+			</div>		
 		</div>		
 </script>
 
