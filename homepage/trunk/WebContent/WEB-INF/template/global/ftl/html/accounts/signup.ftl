@@ -34,7 +34,7 @@
 					$.each( data , function(index, item ){
 						$('#cbp-bislideshow').html( kendo.render( photo_template, data ) ) ;
 					});		
-					cbpBGSlideshow.init();						
+					var slideshow = $('#cbp-bislideshow').extSlideshow();
 				});
 						
 				$('#signup-window').modal({show:true, backdrop:false});
