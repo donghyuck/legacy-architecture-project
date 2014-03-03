@@ -247,6 +247,10 @@
 			}		
 		}
 		
+		function toggleWindow(){
+			$('#signup-window').modal('toggle');
+		}
+		
 		function getSignupPlaceHolder(){
 			var signupPlaceHolder =  $("#signup-form").data("signupPlaceHolder");				
 			return signupPlaceHolder ;	
