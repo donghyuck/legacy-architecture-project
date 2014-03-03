@@ -284,7 +284,11 @@
 				<span class="fa cbp-binext"></span>
 			</div>			
 		</div>
-
+		<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+			<div class="container-fluid">
+			
+			</div>
+		</nav>
 	<!-- Modal -->
 	<div class="modal fade" id="signup-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
