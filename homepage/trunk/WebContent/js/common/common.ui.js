@@ -711,7 +711,7 @@
 			options.items = slideshow.find('li');		
 			options.itemsCount = options.items.length;
 			
-			alert( options.navigation );
+			alert( typeof options.navigation );
 			
 			slideshow.imagesLoaded(function(){
 				if( Modernizr.backgroundsize ) {
