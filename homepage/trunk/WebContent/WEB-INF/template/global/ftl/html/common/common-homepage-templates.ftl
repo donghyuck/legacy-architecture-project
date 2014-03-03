@@ -123,12 +123,18 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
-				<a href="\\#page" class="lb-overlay-close">Close</a>
-				<img data-bind="attr:{src: photoUrl}" />
-				<div>
-					<h3>pointe <span>/point/</h3>
-					<p>image description....</p>
+			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">		
+				<a href="\\#page" class="lb-overlay-close">Close</a>	
+				<div class="container-fluid">
+					<div class="row" >
+						<div class="col-md-8">							
+							<img data-bind="attr:{src: photoUrl}" />
+						</div>
+						<div class="col-md-4">							
+							<h3>pointe <span>/point/</h3>
+							<p>image description....</p>
+						</div>
+					</div>
 				</div>
 			</div>							
 		</div>				
