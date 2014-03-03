@@ -249,26 +249,7 @@
 			}
 		}
 	}
-	
-	/**
-	function toggleOverlay(){
 		
-		var overlay = $('.overlay');
-				
-		if( overlay.hasClass("open") ){
-			overlay.removeClass("open");
-			overlay.addClass("close");	
-			overlay.bind('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(ev){
-				overlay.removeClass("close");
-				$('#login-window').modal('show')
-			});
-		}
-		else if ( !overlay.hasClass("close") ){
-			overlay.addClass("open");	
-		}
-	}**/
-
-	
 </script>
 <style scoped="scoped">
 	#login-window .modal-dialog {
@@ -301,13 +282,13 @@
 	<!-- Main Page Content  -->
 
 		<div class="main">
-				<ul id="cbp-bislideshow" class="cbp-bislideshow"></ul>
-				<div id="cbp-bicontrols" class="cbp-bicontrols">
-					<span class="fa cbp-biprev"></span>
-					<span class="fa cbp-bipause"></span>
-					<span class="fa cbp-binext"></span>
-				</div>
-			</div>
+			<ul id="cbp-bislideshow" class="cbp-bislideshow"></ul>
+			<div id="cbp-bicontrols" class="cbp-bicontrols">
+				<span class="fa cbp-biprev"></span>
+				<span class="fa cbp-bipause"></span>
+				<span class="fa cbp-binext"></span>
+			</div>			
+		</div>
 	
 	
 	<!-- Modal -->
