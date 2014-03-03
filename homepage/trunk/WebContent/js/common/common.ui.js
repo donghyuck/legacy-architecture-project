@@ -708,7 +708,7 @@
 			options = that.options,	
 			slideshow = $(that.element);
 			
-			options.items = shlideshow.find('li');		
+			options.items = slideshow.find('li');		
 			options.itemsCount = options.items.length;
 			
 			slideshow.imagesLoaded(function(){
