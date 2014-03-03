@@ -259,26 +259,6 @@
 	#login-window .modal-dialog {
 		width : 550px;
 	}
-
-	/* Effects */
-	.overlay-scale {
-		visibility: hidden;
-		opacity: 0;
-		-webkit-transform: scale(0.9);
-		transform: scale(0.9);
-		-webkit-transition: -webkit-transform 0.2s, opacity 0.2s, visibility 0s 0.2s;
-		transition: transform 0.2s, opacity 0.2s, visibility 0s 0.2s;
-	}
-	
-	.overlay-scale.open {
-		visibility: visible;
-		opacity: 1;
-		-webkit-transform: scale(1);
-		transform: scale(1);	
-		-webkit-transition: -webkit-transform 0.4s, opacity 0.4s;
-		transition: transform 0.4s, opacity 0.4s;
-	}
-
 	
 </style>
 </head>
