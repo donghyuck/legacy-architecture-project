@@ -705,8 +705,9 @@
 			var that = this;			
 			Widget.fn.init.call(that, element, options);			
 			that.wrapper = that.element;
-			options = that.options;			
-			var slideshow = $(that.element),
+			options = that.options,	
+			slideshow = $(that.element);
+			
 			options.items = shlideshow.find('li');		
 			options.itemsCount = options.items.length;
 			
