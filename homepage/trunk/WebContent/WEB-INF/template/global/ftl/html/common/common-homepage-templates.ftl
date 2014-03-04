@@ -135,9 +135,9 @@
 					<div class="panel-body">
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left" href="\\#">
+								<div class="pull-left" >
 									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</a>
+								</div>
 								<div class="media-body">
 									<h4 class="media-heading">Media heading</h4>
 								</div>
