@@ -1338,6 +1338,9 @@
 			background : #5bc0de; /* transparent;        	*/
 			height: 90px;        	
 		}
+		
+		
+		/**
 
 		.overlay-hugeinc {
 			display:none;
@@ -1347,7 +1350,7 @@
 		.overlay-hugeinc.open{
 			display:block;
 		}
-		
+		*/
 		
 		.cbp-hsmenu-wrapper .cbp-hsmenu {
 			width:100%;
