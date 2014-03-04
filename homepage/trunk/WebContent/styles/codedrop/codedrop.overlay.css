@@ -26,7 +26,7 @@
 }
 
 /* Menu style */
-
+/*
 .overlay nav {
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
@@ -60,7 +60,7 @@
 .overlay ul li a:focus {
 	color: #e3fcb1;
 }
-
+*/
 /* Effects */
 .overlay-hugeinc {
 	opacity: 0;
