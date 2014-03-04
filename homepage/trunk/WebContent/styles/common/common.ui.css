@@ -1448,7 +1448,10 @@ span.cbp-biprev:before {
 }
 
 /* Intro sides */
-.splitlayout-side {	/*
+.splitlayout-side {
+	top: 0;
+	height: 100%;
+	/*
 	position: fixed;
 	top: 0;
 	z-index: 100;
