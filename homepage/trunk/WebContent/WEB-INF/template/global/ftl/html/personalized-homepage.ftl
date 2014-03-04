@@ -924,7 +924,7 @@
 						]
 					})
 				 );		
-				alert( $("#" + renderToString + " .panel-body img" ).html() );			
+				
 				$("#update-photo-file").kendoUpload({
 					multiple: false,
 					async: {
@@ -947,6 +947,8 @@
 						}
 					} 
 				});
+				
+				alert( $("#" + renderToString ).data("extPanel").body().find('img').html() );			
 				
 				$("#" + renderToString ).data("extPanel").body().find('.pager li').each(function( index ) { 
 					var panel_pager = $(this);	
