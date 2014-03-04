@@ -127,15 +127,35 @@
 				<div class="row">
 					<div class="col-sm-8 col-xs-12"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 					<div class="col-sm-4 col-xs-12">
-					<div class="media">
-					  <a class="pull-left" href="\\#">
-					    <img class="media-object" src="..." alt="...">
-					  </a>
-					  <div class="media-body">
-					    <h4 class="media-heading">Media heading</h4>
-					    ...
-					  </div>
-					</div>
+					<ul class="media-list">
+					  <li class="media">
+					    <a class="pull-left" href="#">
+					      <img class="media-object" src="..." alt="...">
+					    </a>
+					    <div class="media-body">
+					      <h4 class="media-heading">Media heading</h4>
+					      ...
+					    </div>
+					  </li>
+					<li class="media">
+					    <a class="pull-left" href="#">
+					      <img class="media-object" src="..." alt="...">
+					    </a>
+					    <div class="media-body">
+					      <h4 class="media-heading">Media heading</h4>
+					      ...
+					    </div>
+					  </li>
+						<li class="media">
+					    <a class="pull-left" href="#">
+					      <img class="media-object" src="..." alt="...">
+					    </a>
+					    <div class="media-body">
+					      <h4 class="media-heading">Media heading</h4>
+					      ...
+					    </div>
+					  </li>					  					  
+					</ul>
 					</div>
 				</div>				
 				<a href="\\#page" class="lb-overlay-close">Close</a>
