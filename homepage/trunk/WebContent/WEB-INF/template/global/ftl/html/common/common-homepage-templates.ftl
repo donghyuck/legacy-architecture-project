@@ -132,16 +132,16 @@
 
 				<nav class="navbar navbar-fixed-bottom" role="navigation">
 					<div class="container-fluid">
-						<ul class="nav navbar-nav navbar-left">
+						<!--<ul class="nav navbar-nav navbar-left">
 							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-up fa-lg"></i></a></li>
 							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-down fa-lg"></i></a></li>
-						</ul>
+						</ul>-->
 						<ul class="nav navbar-nav navbar-right">
-							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-left"></i></a></li>
-							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-right"></i></a></li>
-							<li><a href="\\#" class="btn-link"><i class="fa fa-thumbs-o-up"></i></a></li>			
-							<li><a href="\\#" class="btn-link"><i class="fa fa-share"></i></a></li>			
-							<li><a href="\\#" class="btn-link"><i class="fa fa-comment"></i></a></li>							
+							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-thumbs-o-up fa-lg"></i></a></li>			
+							<li><a href="\\#" class="btn-link"><i class="fa fa-share fa-lg"></i></a></li>			
+							<li><a href="\\#" class="btn-link"><i class="fa fa-comment fa-lg"></i></a></li>							
 						</ul>
 					</div>
 				</nav>
