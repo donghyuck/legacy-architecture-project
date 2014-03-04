@@ -61,7 +61,18 @@
 	color: #e3fcb1;
 }
 */
+
+
+.overlay-hugeinc img {
+	-webkit-animation: fadeInScale 1.2s ease-in-out;
+	-moz-animation: fadeInScale 1.2s ease-in-out;
+	-o-animation: fadeInScale 1.2s ease-in-out;
+	-ms-animation: fadeInScale 1.2s ease-in-out;
+	animation: fadeInScale 1.2s ease-in-out;
+}
+
 /* Effects */
+
 .overlay-hugeinc {
 	opacity: 0;
 	visibility: hidden;
