@@ -133,8 +133,8 @@
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
 	<div class="container">
 		<ul class="nav navbar-nav navbar-right">
-			<li class="previous" data-bind="visible: previous"><a href="#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
-			<li class="next" data-bind="visible: next"><a href="#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>			
+			<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
+			<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>			
 			<li class="dropdown">
 			<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
 			<ul class="dropdown-menu">
