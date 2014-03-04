@@ -129,7 +129,7 @@
 					<div class="col-sm-4 col-xs-12">
 					<ul class="media-list">
 					  <li class="media">
-					    <a class="pull-left" href="#">
+					    <a class="pull-left" href="\\#">
 					      <img class="media-object" src="..." alt="...">
 					    </a>
 					    <div class="media-body">
@@ -138,7 +138,7 @@
 					    </div>
 					  </li>
 					<li class="media">
-					    <a class="pull-left" href="#">
+					    <a class="pull-left" href="\\#">
 					      <img class="media-object" src="..." alt="...">
 					    </a>
 					    <div class="media-body">
@@ -147,7 +147,7 @@
 					    </div>
 					  </li>
 						<li class="media">
-					    <a class="pull-left" href="#">
+					    <a class="pull-left" href="\\#">
 					      <img class="media-object" src="..." alt="...">
 					    </a>
 					    <div class="media-body">
