@@ -952,7 +952,7 @@
 				});				
 				
 				
-				var overlay  = $("#" + renderToString + ".overlay");
+				var overlay  = $("#" + renderToString + " .overlay");
 				overlay.data("extOverlay", overlay.extOverlay());
 								
 				$("#" + renderToString ).data("extPanel").body().find('img').click( function(e){
