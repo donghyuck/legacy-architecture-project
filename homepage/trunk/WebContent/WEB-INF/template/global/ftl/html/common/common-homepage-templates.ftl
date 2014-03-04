@@ -116,11 +116,13 @@
 					<ul class="list-inline">
 						<small class="text-muted" data-bind="text: modifiedDate"></small>
 					</ul>
+					<!--
 					<div class="blank-top-5 "></div>
 					<ul class="pager">
 						<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-2x"></i></a></li>
 						<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-2x"></i></a></li>
-					</ul>										
+					</ul>			
+					-->							
 				</figcaption>		
 			</figure>		
 			<div id="photo_overlay" class="overlay overlay-hugeinc">
@@ -129,21 +131,22 @@
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-  <div class="container">
-<ul class="nav navbar-nav navbar-right">
-        <li><a href="\\#">Link</a></li>
-        <li class="dropdown">
-          <a href="\\#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="\\#">Action</a></li>
-            <li><a href="\\#">Another action</a></li>
-            <li><a href="\\#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="\\#">Separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-  </div>
+	<div class="container">
+		<ul class="nav navbar-nav navbar-right">
+			<li class="previous" data-bind="visible: previous"><a href="#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
+			<li class="next" data-bind="visible: next"><a href="#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>			
+			<li class="dropdown">
+			<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+			<ul class="dropdown-menu">
+			<li><a href="\\#">Action</a></li>
+			<li><a href="\\#">Another action</a></li>
+			<li><a href="\\#">Something else here</a></li>
+			<li class="divider"></li>
+			<li><a href="\\#">Separated link</a></li>
+			</ul>
+			</li>
+		</ul>
+	</div>
 </nav>				
 			
 			</div>
