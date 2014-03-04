@@ -96,6 +96,12 @@
 	*/
 }
 
+@media (min-width: @screen-sm-min) {
+	.overlay {
+	min-width : 765px;
+	}
+}
+
 /*
 .overlay-hugeinc nav ul {
 	opacity: 0.4;
