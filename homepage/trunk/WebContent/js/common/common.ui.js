@@ -646,7 +646,7 @@
 			});			
 		},
 		options : {
-			name : "extOverlay"
+			name : "Overlay"
 		},
 		toggleOverlay : function () {
 			var that = this;
