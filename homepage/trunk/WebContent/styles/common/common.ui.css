@@ -1466,14 +1466,12 @@ span.cbp-biprev:before {
 
 .splitlayout-side-left {
 	left: 0;
-	background: #47a3da;
 	color: #fff;
 	/* avoid gap outline: 1px solid #47a3da;  */
 }
 
 .splitlayout-side-right {
 	right: 0;
-	background: #fff;
 	color: #47a3da;
 	/* avoid gap outline: 1px solid #fff;  */
 }
