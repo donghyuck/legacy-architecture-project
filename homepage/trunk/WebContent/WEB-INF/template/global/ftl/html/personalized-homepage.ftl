@@ -948,7 +948,13 @@
 					} 
 				});
 				
-				alert( $("#" + renderToString ).data("extPanel").body().find('img').attr('src') );			
+				
+				var overlay  = $("#" + renderToString ).data("extPanel").body().find('.overlay').extOverlay();
+				
+				$("#" + renderToString ).data("extPanel").body().find('img').click( 
+					funtion(e) ){
+					overlay.toggleOverlay();
+				});			
 				
 				$("#" + renderToString ).data("extPanel").body().find('.pager li').each(function( index ) { 
 					var panel_pager = $(this);	
