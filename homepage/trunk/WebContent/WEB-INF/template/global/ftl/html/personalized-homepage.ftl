@@ -957,15 +957,16 @@
 					overlay.toggleOverlay();
 				});			
 				
-				$("#" + renderToString ).data("extPanel").body().find('.pager li').each(function( index ) { 
-					var panel_pager = $(this);	
-					if( panel_pager.hasClass('previous') ){
-						panel_pager.click(function (e) { 
+				
+				$("#" + renderToString ).find('.overlay nav li').each(function( index ) { 
+					var pager = $(this);	
+					if( pager.hasClass('previous') ){
+						pager.click(function (e) { 
 							e.preventDefault();								
 							previousPhoto();
 						});
-					}else if ( panel_pager.hasClass('next') ){ 
-						panel_pager.click(function (e) { 
+					}else if ( pager.hasClass('next') ){ 
+						pager.click(function (e) { 
 							e.preventDefault();
 							nextPhoto();
 						});
