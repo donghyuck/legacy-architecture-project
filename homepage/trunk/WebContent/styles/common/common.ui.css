@@ -1451,8 +1451,10 @@ span.cbp-biprev:before {
 .splitlayout-side {
 	top: 0;
 	height: 100%;
+	position: absolute;
+	width: 50%;
 	/*
-	position: fixed;
+	
 	top: 0;
 	z-index: 100;
 	width: 50%;
@@ -1466,12 +1468,12 @@ span.cbp-biprev:before {
 	left: 0;
 	background: #47a3da;
 	color: #fff;
-	outline: 1px solid #47a3da; /* avoid gap */
+	/* avoid gap outline: 1px solid #47a3da;  */
 }
 
 .splitlayout-side-right {
 	right: 0;
 	background: #fff;
 	color: #47a3da;
-	outline: 1px solid #fff; /* avoid gap */
+	/* avoid gap outline: 1px solid #fff;  */
 }
