@@ -128,7 +128,7 @@
 					<div class="col-sm-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 					<div class="col-sm-4">
 					<div class="media">
-					  <a class="pull-left" href="#">
+					  <a class="pull-left" href="\\#">
 					    <img class="media-object" src="..." alt="...">
 					  </a>
 					  <div class="media-body">
