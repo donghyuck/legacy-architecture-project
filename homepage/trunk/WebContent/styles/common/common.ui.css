@@ -1453,13 +1453,14 @@ span.cbp-biprev:before {
 	height: 100%;
 	position: absolute;
 	width: 50%;
+	text-align: center;
 	/*
 	
 	top: 0;
 	z-index: 100;
 	width: 50%;
 	height: 100%;
-	text-align: center;
+	
 
 	-webkit-backface-visibility: hidden;*/
 }
