@@ -1455,7 +1455,8 @@ span.cbp-biprev:before {
 	width: 50%;
 	height: 100%;
 	text-align: center;
-	-webkit-backface-visibility: hidden;
+	/*
+	-webkit-backface-visibility: hidden;*/
 }
 
 .splitlayout-side-left {
