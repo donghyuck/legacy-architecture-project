@@ -651,7 +651,7 @@
 		toggleOverlay : function () {
 			var that = this;
 			var overlay = $(that.element);
-			alert( overlay.html() );
+			
 			var options = that.options ;			
 			
 			if( overlay.hasClass( 'hide') ){
@@ -671,7 +671,7 @@
 					}
 					overlay.removeClass( 'close' );
 				};
-				alert( options.transitions  );
+				
 				if( options.transitions ) {					
 					overlay.on( options.transEndEventName, onEndTransitionFn );
 				}
