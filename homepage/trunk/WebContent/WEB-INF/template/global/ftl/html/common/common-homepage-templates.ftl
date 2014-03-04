@@ -123,7 +123,21 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay blue container-fluid" id="#:photoId#" data-bind="attr: { id: photoId }">				
+			<div class="lb-overlay blue container-fluid" id="#:photoId#" data-bind="attr: { id: photoId }">		
+				<a href="\\#page" class="lb-overlay-close">Close</a>
+				<div class="splitlayout">
+					<div class="intro">
+						<div class="side side-left">
+						</div>
+					</div>
+					<div class="page page-left">
+						<div class="page-inner">
+						
+						</div>
+					</div>
+				
+				</div>
+			<!--		
 				<div class="row">
 					<div class="col-sm-8 col-xs-12"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 					<div class="col-sm-4 col-xs-12">
@@ -158,11 +172,11 @@
 					</ul>
 					</div>
 				</div>				
-				<a href="\\#page" class="lb-overlay-close">Close</a>
+				
 				
 				<div style="buttom:0px;">
 				
-				</div>
+				</div>	-->		
 			<!--
 				<nav class="navbar navbar-fixed-bottom" role="navigation">
 					<div class="container">
@@ -182,8 +196,8 @@
 					<h3>pointe <span>/point/</h3>
 					<p>image description....</p>
 				</div>
-				-->
-			</div>							
+					-->		
+			</div>				
 		</div>				
 	</div>		
 </script>
