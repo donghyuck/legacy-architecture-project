@@ -946,12 +946,10 @@
 							displayPhotoPanel();
 						}
 					} 
-				});
-				
+				});				
 				
 				var overlay  = $("#" + renderToString ).data("extPanel").body().find('.overlay').extOverlay();				
-				$("#" + renderToString ).data("extPanel").body().find('img').click( 
-					funtion(e) ){
+				$("#" + renderToString ).data("extPanel").body().find('img').click( function(e){
 					overlay.toggleOverlay();
 				});			
 				
