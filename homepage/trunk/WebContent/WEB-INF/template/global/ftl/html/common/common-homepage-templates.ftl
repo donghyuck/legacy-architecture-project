@@ -123,14 +123,14 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }" style="padding:0px;">			
+			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
-				<div class="container-fluid" >
-					<div class="col-sm-8">
+				<div class="splitlayout" >
+					<div class="splitlayout-side splitlayout-side-left " >
 						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 					</div>
-					<div class="col-sm-4">
-
+					<div class="splitlayout-side splitlayout-side-right " >
+				<div class="splitlayout-side-body">
 				<div class="panel panel-default ">					
 					<div class="panel-body scrollable">
 						<ul class="media-list">
@@ -177,19 +177,8 @@
 						</ul>
 					</div>
 				</div>
-					
-					</div>					
 				</div>
-				<!--
-				<div class="splitlayout" >
-					<div class="splitlayout-side splitlayout-side-left " >
-						
-					</div>
-					<div class="splitlayout-side splitlayout-side-right " >
-				<div class="splitlayout-side-body">
 
-				</div>
-				-->
 				
 					</div>			
 				</div>							
