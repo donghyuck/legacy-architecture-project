@@ -1452,7 +1452,6 @@ span.cbp-biprev:before {
 	top: 0;
 	height: 100%;
 	position: absolute;
-
 	
 	/*text-align: center;
 		width: 50%;
@@ -1460,24 +1459,24 @@ span.cbp-biprev:before {
 	z-index: 100;
 	width: 50%;
 	height: 100%;
-	
-
 	-webkit-backface-visibility: hidden;*/
 }
 
 .splitlayout-side-body {
-	padding-top: 150px;
+	padding-top: 100px;
+	min-width: 350px;
 }
 
 .splitlayout-side-left {
 	left: 0;
 	color: #fff;
+	width: 100%;
 	/* avoid gap outline: 1px solid #47a3da;  */
 }
 
 .splitlayout-side-right {
 	right: 0;
 	color: #47a3da;
-	width: 30%;
+	min-width: 350px;
 	/* avoid gap outline: 1px solid #fff;  */
 }
