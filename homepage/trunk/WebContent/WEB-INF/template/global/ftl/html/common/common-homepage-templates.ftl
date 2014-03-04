@@ -134,7 +134,7 @@
 				
 						<ul class="media-list">
 							<li class="media">
-								<a class="pull-left" href="#">
+								<a class="pull-left" href="\\#">
 									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
 								</a>
 								<div class="media-body">
@@ -142,7 +142,7 @@
 								</div>
 							</li>
 							<li class="media">
-								<a class="pull-left" href="#">
+								<a class="pull-left" href="\\#">
 									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
 								</a>
 								<div class="media-body">
@@ -150,7 +150,7 @@
 								</div>
 							</li>
 							<li class="media">
-								<a class="pull-left" href="#">
+								<a class="pull-left" href="\\#">
 									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
 								</a>
 								<div class="media-body">
