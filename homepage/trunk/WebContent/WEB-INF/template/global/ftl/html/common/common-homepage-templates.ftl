@@ -125,7 +125,7 @@
 			</figure>		
 			<div id="photo_overlay" class="overlay overlay-hugeinc">
 				<button type="button" class="overlay-close">Close</button>
-				hello
+				<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
@@ -154,7 +154,7 @@
 
 				<div class="splitlayout" >
 					<div class="splitlayout-side splitlayout-side-left " >
-						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
+						
 					</div>
 					<div class="splitlayout-side splitlayout-side-right " >
 				<div class="splitlayout-side-body">
