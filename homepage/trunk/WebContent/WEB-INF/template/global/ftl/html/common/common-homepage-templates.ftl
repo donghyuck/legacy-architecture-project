@@ -123,14 +123,10 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="overlay overlay-hugeinc">
+			<div id="photo_overlay" class="overlay overlay-hugeinc">
 				<button type="button" class="overlay-close">Close</button>
 				hello
-			
-			</div>
-			<!--
-			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
-				<a href="\\#page" class="lb-overlay-close">Close</a>
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
   <div class="container">
@@ -149,6 +145,13 @@
       </ul>
   </div>
 </nav>				
+			
+			</div>
+			<!--
+			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
+				<a href="\\#page" class="lb-overlay-close">Close</a>
+
+
 				<div class="splitlayout" >
 					<div class="splitlayout-side splitlayout-side-left " >
 						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
