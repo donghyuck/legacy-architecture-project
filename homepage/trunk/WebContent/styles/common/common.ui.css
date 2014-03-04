@@ -1453,8 +1453,8 @@ span.cbp-biprev:before {
 	height: 100%;
 	position: absolute;
 
-	text-align: center;
-	/*
+	
+	/*text-align: center;
 		width: 50%;
 	top: 0;
 	z-index: 100;
@@ -1474,5 +1474,6 @@ span.cbp-biprev:before {
 .splitlayout-side-right {
 	right: 0;
 	color: #47a3da;
+	width: 30%;
 	/* avoid gap outline: 1px solid #fff;  */
 }
