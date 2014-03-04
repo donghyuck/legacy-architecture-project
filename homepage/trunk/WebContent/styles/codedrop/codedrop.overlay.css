@@ -26,12 +26,8 @@
 }
 
 /* Menu style */
+
 .overlay nav {
-	text-align: center;
-	position: relative;
-	top: 50%;
-	height: 60%;
-	font-size: 54px;
 	-webkit-transform: translateY(-50%);
 	transform: translateY(-50%);
 }
