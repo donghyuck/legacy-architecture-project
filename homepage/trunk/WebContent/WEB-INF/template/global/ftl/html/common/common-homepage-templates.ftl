@@ -180,7 +180,7 @@
 								</a>
 								<div class="media-body">
 									<textarea class="form-control" rows="3"></textarea>
-									<button type="button" class="btn btn-info">확인</button>
+									<p><button type="button" class="btn btn-info">확인</button></p>
 								</div>
 							</li>																	
 						</ul>
