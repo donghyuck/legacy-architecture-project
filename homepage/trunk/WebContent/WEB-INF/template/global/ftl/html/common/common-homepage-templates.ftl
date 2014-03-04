@@ -132,14 +132,14 @@
 					</div>
 					<div class="page page-left">
 						<div class="page-inner">
-						
+							<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 						</div>
 					</div>
 				
 				</div>
 			<!--		
 				<div class="row">
-					<div class="col-sm-8 col-xs-12"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
+					<div class="col-sm-8 col-xs-12"></div>
 					<div class="col-sm-4 col-xs-12">
 					<ul class="media-list">
 					  <li class="media">
