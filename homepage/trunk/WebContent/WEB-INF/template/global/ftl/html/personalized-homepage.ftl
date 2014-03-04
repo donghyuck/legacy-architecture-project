@@ -949,8 +949,7 @@
 				});
 				
 				
-				var overlay  = $("#" + renderToString ).data("extPanel").body().find('.overlay').extOverlay();
-				
+				var overlay  = $("#" + renderToString ).data("extPanel").body().find('.overlay').extOverlay();				
 				$("#" + renderToString ).data("extPanel").body().find('img').click( 
 					funtion(e) ){
 					overlay.toggleOverlay();
