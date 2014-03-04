@@ -94,6 +94,8 @@
 	-webkit-perspective: 1200px;
 	perspective: 1200px;
 	*/
+	background-color: transparent;
+	border : 0px;
 }
 
 @media (max-width: 767px) {
@@ -101,7 +103,7 @@
 	/* Reset the container */
 	.container {
 	  max-width: none !important;
-	  width: 970px;
+	  /*width: 970px;*/
 	}
 	
 	/* Demonstrate the grids */
