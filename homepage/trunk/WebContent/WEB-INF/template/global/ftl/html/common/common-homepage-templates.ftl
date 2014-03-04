@@ -131,7 +131,7 @@
 					</div>
 					<div class="splitlayout-side splitlayout-side-right " >
 				<div class="splitlayout-side-body">
-				<div class="panel panel-default ">					
+				<div class="panel panel-primary ">					
 					<div class="panel-body">
 						<ul class="media-list">
 							<li class="media">
@@ -180,6 +180,7 @@
 								</a>
 								<div class="media-body">
 									<textarea class="form-control" rows="3"></textarea>
+									<button type="button" class="btn btn-info">확인</button>
 								</div>
 							</li>																	
 						</ul>
