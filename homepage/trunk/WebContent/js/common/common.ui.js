@@ -664,6 +664,9 @@
 				
 				var onEndTransitionFn = function( ev ) {
 					if( options.transitions ) {					
+						
+						alert( ev.originalEvent.propertyName  );
+						
 						if( ev.originalEvent.propertyName !== 'visibility' ) 
 							return;						
 						overlay.off( options.transEndEventName, onEndTransitionFn );					
