@@ -126,12 +126,40 @@
 			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
 				<div class="splitlayout" >
-								<div class="splitlayout-side splitlayout-side-left " >
-									<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
+					<div class="splitlayout-side splitlayout-side-left " >
+						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
+					</div>
+					<div class="splitlayout-side splitlayout-side-right " >
+				
+				
+						<ul class="media-list">
+							<li class="media">
+								<a class="pull-left" href="#">
+									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading">Media heading</h4>
 								</div>
-								<div class="splitlayout-side splitlayout-side-right " >
-								
-								</div>			
+							</li>
+							<li class="media">
+								<a class="pull-left" href="#">
+									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading">Media heading</h4>
+								</div>
+							</li>
+							<li class="media">
+								<a class="pull-left" href="#">
+									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+								</a>
+								<div class="media-body">
+									<h4 class="media-heading">Media heading</h4>
+								</div>
+							</li>										
+						</ul>
+				
+					</div>			
 				</div>							
 			</div>							
 		</div>				
