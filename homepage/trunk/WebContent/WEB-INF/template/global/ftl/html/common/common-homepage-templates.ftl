@@ -123,82 +123,10 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay blue container-fluid" id="#:photoId#" data-bind="attr: { id: photoId }">		
+			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
+				<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 				<a href="\\#page" class="lb-overlay-close">Close</a>
-				<div class="splitlayout">
-					<div class="intro">
-						<div class="side side-left">
-						</div>
-					</div>
-					<div class="page page-left">
-						<div class="page-inner">
-							<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
-						</div>
-					</div>
-				
-				</div>
-			</div>
-			<!--		
-				<div class="row">
-					<div class="col-sm-8 col-xs-12"></div>
-					<div class="col-sm-4 col-xs-12">
-					<ul class="media-list">
-					  <li class="media">
-					    <a class="pull-left" href="\\#">
-					      <img class="media-object" src="..." alt="...">
-					    </a>
-					    <div class="media-body">
-					      <h4 class="media-heading">Media heading</h4>
-					      ...
-					    </div>
-					  </li>
-					<li class="media">
-					    <a class="pull-left" href="\\#">
-					      <img class="media-object" src="..." alt="...">
-					    </a>
-					    <div class="media-body">
-					      <h4 class="media-heading">Media heading</h4>
-					      ...
-					    </div>
-					  </li>
-						<li class="media">
-					    <a class="pull-left" href="\\#">
-					      <img class="media-object" src="..." alt="...">
-					    </a>
-					    <div class="media-body">
-					      <h4 class="media-heading">Media heading</h4>
-					      ...
-					    </div>
-					  </li>					  					  
-					</ul>
-					</div>
-				</div>				
-				
-				
-				<div style="buttom:0px;">
-				
-				</div>	-->		
-			<!--
-				<nav class="navbar navbar-fixed-bottom" role="navigation">
-					<div class="container">
-						<ul class="nav navbar-nav navbar-right">
-							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
-							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>
-							<li><a href="\\#" class="btn-link"><i class="fa fa-thumbs-o-up fa-lg"></i></a></li>			
-							<li><a href="\\#" class="btn-link"><i class="fa fa-share fa-lg"></i></a></li>			
-							<li><a href="\\#" class="btn-link"><i class="fa fa-comment fa-lg"></i></a></li>							
-						</ul>
-					</div>
-				</nav>
-				-->		
-				<!--
-				
-				<div>
-					<h3>pointe <span>/point/</h3>
-					<p>image description....</p>
-				</div>
-					-->		
-			</div>				
+			</div>							
 		</div>				
 	</div>		
 </script>
@@ -222,10 +150,13 @@
 		</figure>
 		<div class="lb-overlay" id="photo-#:imageId#">			
 			<a href="\\#page" class="lb-overlay-close">Close</a>
-			<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
-			<div>
-				<h3>pointe <span>/point/</h3>
-				<p>image description....</p>
+			<div class="splitlayout" >
+				<div class="splitlayout-side splitlayout-side-left " >
+					<img src="${request.contextPath}/community/view-my-image.do?imageId=#:imageId#" />
+				</div>
+				<div class="splitlayout-side splitlayout-side-right " >
+				
+				</div>			
 			</div>
 		</div>		
 </script>
