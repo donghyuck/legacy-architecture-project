@@ -131,15 +131,19 @@
 				<a href="\\#page" class="lb-overlay-close">Close</a>
 
 				<nav class="navbar navbar-fixed-bottom" role="navigation">
-			<div class="container-fluid">
-				<ul class="nav navbar-nav navbar-left">
-					<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-up fa-lg"></i></a></li>
-					<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-down fa-lg"></i></a></li>
-				</ul>
-				<ul class="nav navbar-nav navbar-right">
-					 <li><a href="\\#">Link</a></li>
-				</ul>
-			</div>
+					<div class="container-fluid">
+						<ul class="nav navbar-nav navbar-left">
+							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-up fa-lg"></i></a></li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-down fa-lg"></i></a></li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-left"></i></a></li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-right"></i></a></li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-thumbs-o-up"></i></a></li>			
+							<li><a href="\\#" class="btn-link"><i class="fa fa-share"></i></a></li>			
+							<li><a href="\\#" class="btn-link"><i class="fa fa-comment"></i></a></li>							
+						</ul>
+					</div>
 				</nav>
 						
 				<!--
