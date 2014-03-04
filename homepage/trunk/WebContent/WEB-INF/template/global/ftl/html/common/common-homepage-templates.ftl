@@ -130,16 +130,7 @@
 						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 					</div>
 					<div class="col-sm-4">
-					
-					</div>					
-				</div>
-				<!--
-				<div class="splitlayout" >
-					<div class="splitlayout-side splitlayout-side-left " >
-						
-					</div>
-					<div class="splitlayout-side splitlayout-side-right " >
-				<div class="splitlayout-side-body">
+
 				<div class="panel panel-default ">					
 					<div class="panel-body scrollable">
 						<ul class="media-list">
@@ -186,6 +177,17 @@
 						</ul>
 					</div>
 				</div>
+					
+					</div>					
+				</div>
+				<!--
+				<div class="splitlayout" >
+					<div class="splitlayout-side splitlayout-side-left " >
+						
+					</div>
+					<div class="splitlayout-side splitlayout-side-right " >
+				<div class="splitlayout-side-body">
+
 				</div>
 				-->
 				
