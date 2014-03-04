@@ -1465,6 +1465,10 @@ span.cbp-biprev:before {
 	-webkit-backface-visibility: hidden;*/
 }
 
+.splitlayout-side-body {
+	padding-top: 150px;
+}
+
 .splitlayout-side-left {
 	left: 0;
 	color: #fff;
