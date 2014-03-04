@@ -130,8 +130,8 @@
 						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 					</div>
 					<div class="splitlayout-side splitlayout-side-right " >
-				
-				<div class="panel panel-default ">
+				<div class="splitlayout-side-body">
+				<div class="panel panel-default ">					
 					<div class="panel-body scrollable">
 						<ul class="media-list">
 							<li class="media">
@@ -177,7 +177,7 @@
 						</ul>
 					</div>
 				</div>
-				
+				</div>
 
 				
 					</div>			
