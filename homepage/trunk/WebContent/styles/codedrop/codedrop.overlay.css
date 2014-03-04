@@ -77,8 +77,10 @@
 }
 
 .overlay-hugeinc nav {
+	/**
 	-webkit-perspective: 1200px;
 	perspective: 1200px;
+	*/
 }
 
 /*
