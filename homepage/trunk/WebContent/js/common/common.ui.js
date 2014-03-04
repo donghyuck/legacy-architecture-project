@@ -663,20 +663,16 @@
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
-					alert( options.transitions  );
-					if( options.transitions ) {					
-						
-						
-						
+					
+					if( options.transitions ) {								
 						if( ev.originalEvent.propertyName !== 'visibility' ) 
 							return;						
 						overlay.off( options.transEndEventName, onEndTransitionFn );					
 					}
 					overlay.removeClass( 'close' );
 				};
-				
-				if( options.transitions ) {
-					
+				alert( options.transitions  );
+				if( options.transitions ) {					
 					overlay.on( options.transEndEventName, onEndTransitionFn );
 				}
 				else {
