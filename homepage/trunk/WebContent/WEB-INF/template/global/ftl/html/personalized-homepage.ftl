@@ -923,7 +923,8 @@
 							}}
 						]
 					})
-				 );					
+				 );		
+				alert( $("#" + renderToString + " .panel-body img" ).html() );			
 				$("#update-photo-file").kendoUpload({
 					multiple: false,
 					async: {
