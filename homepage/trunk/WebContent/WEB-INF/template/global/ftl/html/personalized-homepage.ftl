@@ -950,9 +950,12 @@
 					} 
 				});				
 				
-				var overlay  = $("#" + renderToString ).data("extPanel").body().find('.overlay').extOverlay();				
+				
+				var overlay  = $("#" + renderToString + ".overlay");;
+				overlay.data("extOverlay", overlay.extOverlay({}));
+				
 				$("#" + renderToString ).data("extPanel").body().find('img').click( function(e){
-					overlay.toggleOverlay();
+					overlay.data("extOverlay").toggleOverlay();
 				});			
 				
 				$("#" + renderToString ).data("extPanel").body().find('.pager li').each(function( index ) { 
