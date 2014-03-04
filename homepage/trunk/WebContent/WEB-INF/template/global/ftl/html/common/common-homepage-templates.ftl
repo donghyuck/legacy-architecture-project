@@ -178,9 +178,9 @@
 								<a class="pull-left" href="\\#">
 									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
 								</a>
-								<div class="media-body">
-									<textarea class="form-control" rows="3"></textarea>
-									<p><button type="button" class="btn btn-info">확인</button></p>
+								<div class="media-body">									
+									<p><textarea class="form-control" rows="3"></textarea></p>
+									<button type="button" class="btn btn-info">확인</button>
 								</div>
 							</li>																	
 						</ul>
