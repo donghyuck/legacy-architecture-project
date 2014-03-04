@@ -125,8 +125,8 @@
 			</figure>		
 			<div class="lb-overlay blue container-fluid" id="#:photoId#" data-bind="attr: { id: photoId }">				
 				<div class="row">
-					<div class="col-sm-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
-					<div class="col-sm-4">
+					<div class="col-sm-8 col-xs-12"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
+					<div class="col-sm-4 col-xs-12">
 					<div class="media">
 					  <a class="pull-left" href="\\#">
 					    <img class="media-object" src="..." alt="...">
@@ -139,13 +139,13 @@
 					</div>
 				</div>				
 				<a href="\\#page" class="lb-overlay-close">Close</a>
-
+				
+				<div style="buttom:0px;">
+				
+				</div>
+			<!--
 				<nav class="navbar navbar-fixed-bottom" role="navigation">
 					<div class="container">
-						<!--<ul class="nav navbar-nav navbar-left">
-							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-up fa-lg"></i></a></li>
-							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-down fa-lg"></i></a></li>
-						</ul>-->
 						<ul class="nav navbar-nav navbar-right">
 							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
 							<li><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>
@@ -155,7 +155,7 @@
 						</ul>
 					</div>
 				</nav>
-						
+				-->		
 				<!--
 				
 				<div>
