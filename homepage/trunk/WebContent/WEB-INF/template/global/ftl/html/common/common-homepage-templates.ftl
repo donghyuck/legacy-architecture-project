@@ -123,8 +123,10 @@
 					</ul>										
 				</figcaption>		
 			</figure>		
-			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
+			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }" style="padding:0px;">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
+				
+				<!--
 				<div class="splitlayout" >
 					<div class="splitlayout-side splitlayout-side-left " >
 						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
@@ -178,7 +180,7 @@
 					</div>
 				</div>
 				</div>
-
+				-->
 				
 					</div>			
 				</div>							
