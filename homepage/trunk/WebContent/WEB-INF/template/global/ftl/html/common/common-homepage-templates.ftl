@@ -124,7 +124,6 @@
 				</figcaption>		
 			</figure>		
 			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
-				<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 				<a href="\\#page" class="lb-overlay-close">Close</a>
 				<div class="splitlayout" >
 								<div class="splitlayout-side splitlayout-side-left " >
