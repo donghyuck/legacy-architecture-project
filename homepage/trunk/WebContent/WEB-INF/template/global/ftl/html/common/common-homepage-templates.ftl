@@ -125,7 +125,7 @@
 					-->							
 				</figcaption>		
 			</figure>		
-			<div id="photo_overlay" class="overlay overlay-hugeinc">
+			<div id="photo_overlay" class="overlay overlay-hugeinc color9">
 				<button type="button" class="overlay-close">Close</button>
 				<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
 
