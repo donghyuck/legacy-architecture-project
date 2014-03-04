@@ -20,7 +20,8 @@
 			var onetimeCode = "${action.oneTimeSecureCode}";	
 			<#else>	
 			var onetimeCode = null;					
-			</#if>			
+			</#if>	
+					
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >					
 				if( typeof window.opener.handleCallbackResult == "function"){			
@@ -43,13 +44,13 @@
 				var template = kendo.template($('#account-not-found-alert-template').html());
 				$("#status").html(template({media: "facebook"}));				
 				if(typeof window.opener.handleCallbackResult != "undefined"){		
-						window.opener.handleCallbackResult("facebook", onetimeCode , false);
-						window.close();	
+					window.opener.handleCallbackResult("facebook", onetimeCode , false);
+					window.close();	
 				}else if( typeof window.opener.signupCallbackResult == "function"){			
 					window.opener.signupCallbackResult("facebook", onetimeCode, false);
 				}else{
-						window.opener.location.href = "${request.contextPath}/accounts/signup.do";
-						window.close();
+					window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+					window.close();
 				}
 				</#if>		
 			<#else>					
