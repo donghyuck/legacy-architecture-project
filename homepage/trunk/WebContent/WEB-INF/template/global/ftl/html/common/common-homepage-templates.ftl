@@ -125,11 +125,18 @@
 			</figure>		
 			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }" style="padding:0px;">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
-				
+				<div class="container-fluid" >
+					<div class="col-sm-8">
+						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
+					</div>
+					<div class="col-sm-4">
+					
+					</div>					
+				</div>
 				<!--
 				<div class="splitlayout" >
 					<div class="splitlayout-side splitlayout-side-left " >
-						<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
+						
 					</div>
 					<div class="splitlayout-side splitlayout-side-right " >
 				<div class="splitlayout-side-body">
