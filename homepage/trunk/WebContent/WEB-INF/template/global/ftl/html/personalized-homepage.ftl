@@ -29,6 +29,8 @@
 				// START SCRIPT	
 				//$("#top-menu").kendoMenu();
 				//$("#top-menu").show();
+				
+				$('body nav').first().addClass('hide');										
 																																									
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
