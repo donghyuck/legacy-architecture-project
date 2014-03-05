@@ -142,7 +142,7 @@
 						</div>					
 					</div>
 				</div>
-				<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+				<nav class="navbar navbar-default navbar-static-top" role="navigation">
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
