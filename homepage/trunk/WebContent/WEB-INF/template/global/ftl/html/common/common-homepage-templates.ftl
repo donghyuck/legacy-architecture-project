@@ -134,7 +134,7 @@
 							<li class="dropdown">
 							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown"> <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-							<li><a href="\\#">공유</a></li>
+							<li class="share" ><a href="\\#">공유</a></li>
 							<li><a href="\\#">댓글</a></li>
 							<li><a href="\\#">태그</a></li>
 							<li class="divider"></li>
