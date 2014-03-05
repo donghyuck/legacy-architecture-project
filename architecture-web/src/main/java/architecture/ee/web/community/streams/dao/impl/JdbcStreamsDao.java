@@ -133,4 +133,9 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 				String.class);
 	}
 
+	public List<String> getPhotoIdsByImage(long imageId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID").getSql(), 				
+				String.class, new SqlParameterValue (Types.NUMERIC, imageId ));	
+	}
+
 }
