@@ -165,31 +165,13 @@
     </div>
     <div id="collapseOne" class="panel-collapse collapse in">
       <div class="panel-body">
-        fdsafsdafdsfdsa
+									<p>파일: <span  data-bind="text: name"/></p>
+									<p>크기: <span  data-bind="text: size"/> 바이트</p>			
       </div>
     </div>
   </div>	
 </div>  
-	
-							
-							<!-- Nav tabs -->
-							<ul class="nav nav-tabs">
-							  <li class="active"><a href="\\#home" data-toggle="tab">정보</a></li>
-							  <li><a href="\\#profile" data-toggle="tab">댓글</a></li>
-							  <li><a href="\\#messages" data-toggle="tab">공유</a></li>
-							  <li><a href="\\#settings" data-toggle="tab">Settings</a></li>
-							</ul>
-							
-							<!-- Tab panes -->
-							<div class="tab-content">
-								<div class="tab-pane active" id="home">
-									<p>파일: <span  data-bind="text: name"/></p>
-									<p>크기: <span  data-bind="text: size"/> 바이트</p>								
-								</div>
-								<div class="tab-pane" id="profile">...</div>
-								<div class="tab-pane" id="messages">...</div>
-								<div class="tab-pane" id="settings">...</div>
-							</div>										
+								
 						<!-- end photo details -->
 						</div>					
 					</div>
