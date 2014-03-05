@@ -150,7 +150,28 @@
 					<div class="row" >
 						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 						<div class="col-md-4"
-						<!-- start photo details -->		
+						<!-- start photo details -->	
+	
+
+
+<div class="panel-group" id="photo-details-accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="\\#collapseOne">
+          Collapsible Group Item
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in">
+      <div class="panel-body">
+        fdsafsdafdsfdsa
+      </div>
+    </div>
+  </div>	
+</div>  
+	
+							
 							<!-- Nav tabs -->
 							<ul class="nav nav-tabs">
 							  <li class="active"><a href="\\#home" data-toggle="tab">정보</a></li>
