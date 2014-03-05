@@ -979,7 +979,7 @@
 							common.api.getPhotoDetails({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ){
-									alert('s');
+									alert('s' + data.photos.length );
 									kendo.stringify(data);
 								}
 							});
