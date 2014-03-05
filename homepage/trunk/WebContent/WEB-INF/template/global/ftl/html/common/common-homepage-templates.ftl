@@ -158,7 +158,7 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="#accordion" href="\\#collapseOne">
+        <a data-toggle="collapse" data-parent="\\#accordion" href="\\#collapseOne">
           Collapsible Group Item
         </a>
       </h4>
