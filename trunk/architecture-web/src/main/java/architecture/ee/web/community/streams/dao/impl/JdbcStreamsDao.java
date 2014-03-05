@@ -102,13 +102,15 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 	}
 
 	public List<String> getPhotoIds(int startIndex, int maxResults) {
+		
 		return getExtendedJdbcTemplate().queryScrollable(
 				getBoundSql("ARCHITECTURE_WEB.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), 
 				startIndex, 
 				maxResults, 
 				new Object[0], 
 				new int[0], 
-				String.class);		
+				String.class);
+		
 	}
 
 	public List<String> getPhotoIds(int objectType, int startIndex, int maxResults) {

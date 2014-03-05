@@ -45,7 +45,7 @@ public class PhotoImpl implements Photo {
 	 * @param creator
 	 */
 	public PhotoImpl(String externalId, long imageId, boolean publicShared, User creator) {
-		this.creatorId = creatorId;
+		this.externalId = externalId;
 		this.imageId = imageId;
 		this.publicShared = publicShared;
 		this.creator = creator;
@@ -53,10 +53,10 @@ public class PhotoImpl implements Photo {
 	}
 
 	public PhotoImpl(String externalId, long imageId, boolean publicShared, long creatorId) {
-		this.creatorId = creatorId;
+		this.externalId = externalId;
 		this.imageId = imageId;
 		this.publicShared = publicShared;
-		this.creatorId = creator.getUserId();
+		this.creatorId = creatorId ;
 	}
 
 	
