@@ -80,6 +80,8 @@
 	visibility: hidden;
 	-webkit-transition: opacity 0.5s, visibility 0s 0.5s;
 	transition: opacity 0.5s, visibility 0s 0.5s;
+	overflow-x: hidden;
+	overflow-y: auto;	
 }
 
 .overlay-hugeinc.open {
