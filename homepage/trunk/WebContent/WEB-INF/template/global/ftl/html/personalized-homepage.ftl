@@ -980,7 +980,7 @@
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ){
 									alert('s' + data.photos.length );
-									kendo.stringify(data);
+									kendo.stringify(data.targetImage);
 								}
 							});
 							
