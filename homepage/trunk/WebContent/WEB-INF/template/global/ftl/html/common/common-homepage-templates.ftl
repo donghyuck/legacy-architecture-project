@@ -131,8 +131,8 @@
 
 				<div class="container">
 					<div class="row" >
-						<div class="col-sm-6 col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
-						<div class="col-sm-6 col-md-4"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>					
+						<div class="col-sm-8 col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
+						<div class="col-sm-4 col-md-4"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>					
 					</div>
 				</div>
 				<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
