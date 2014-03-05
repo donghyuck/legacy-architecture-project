@@ -130,11 +130,9 @@
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-angle-left fa-lg"></i></a></li>
-							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>		
-							<li class="like"><a href="\\#" class="btn-link"><i class="fa fa-thumbs-o-up fa-lg"></i></a></li>
-							<li class="comment"><a href="\\#" class="btn-link"><i class="fa fa-comment-o fa-lg"></i></a></li>			
+							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>			
 							<li class="dropdown">
-							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-lg"></i></a>
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <b class="caret"></b></a>
 							<ul class="dropdown-menu">
 							<li><a href="\\#">Action</a></li>
 							<li><a href="\\#">Another action</a></li>
@@ -143,23 +141,21 @@
 							<li><a href="\\#">Separated link</a></li>
 							</ul>
 							</li>
-							<!--<li><a href="\\#" class="btn-link"><i class="fa fa-times fa-lg"></i></a></li>-->
 						</ul>
 					</div>
-				</nav>				
+				</nav>		
+							
 				<button type="button" class="overlay-close">Close</button>
 				<div class="container">
 					<div class="row" >
 						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 						<div class="col-md-4"
-						<!-- start photo details -->
-
-						
+						<!-- start photo details -->						
 						<!-- end photo details -->
 						</div>					
 					</div>
 				</div>
-			
+		
 			
 			</div>
 			<!--
