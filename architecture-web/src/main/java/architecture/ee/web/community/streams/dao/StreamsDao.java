@@ -22,6 +22,8 @@ import architecture.ee.web.community.streams.Photo;
 
 public interface StreamsDao {
 	
+	public List<String> getPhotoIdsByImage(long imageId);
+	
 	public List<String> getPhotoIds () ;
 
 	public List<String> getPhotoIds (int objectType) ;
@@ -44,6 +46,7 @@ public interface StreamsDao {
 	
 	public int getPhotoCount(int objectType);
 	
-	public int getPhotoCount(int objectType, long objectId);	
+	public int getPhotoCount(int objectType, long objectId);
+	
 	
 }
