@@ -132,7 +132,7 @@
 							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-angle-left fa-lg"></i></a></li>
 							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>			
 							<li class="dropdown">
-							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <b class="caret"></b></a>
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <i class="fa fa-angle-down fa-lg"></i></a>
 							<ul class="dropdown-menu">
 							<li><a href="\\#">Action</a></li>
 							<li><a href="\\#">Another action</a></li>
@@ -141,6 +141,7 @@
 							<li><a href="\\#">Separated link</a></li>
 							</ul>
 							</li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-times-circle fa-lg"></i></a></li>
 						</ul>
 					</div>
 				</nav>				
