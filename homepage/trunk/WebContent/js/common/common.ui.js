@@ -660,6 +660,10 @@
 			
 			if( overlay.hasClass( 'open') ){
 				overlay.removeClass( 'open' );
+				
+				if( $('body').hasClass('modal-open') )
+					$('body').removeClass('modal-open') 
+					
 				overlay.addClass( 'close' );
 				
 				var onEndTransitionFn = function( ev ) {
@@ -679,6 +683,8 @@
 					onEndTransitionFn();
 				}				
 			}else if( !overlay.hasClass( 'close' ) ) {
+				if( !$('body').hasClass('modal-open') )
+					$('body').addClass('modal-open') 				
 				overlay.addClass( 'open' );
 			}
 		}
