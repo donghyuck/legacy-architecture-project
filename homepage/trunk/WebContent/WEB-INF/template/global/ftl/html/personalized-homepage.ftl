@@ -1370,12 +1370,13 @@
 	<body id="doc" class="bg-gray">
 		<!-- START HEADER -->		
 		<#include "/html/common/common-homepage-menu.ftl" >		
+		<!-- start of personalized menu -->
 		<nav class="personalized-navbar navbar" role="navigation">
 			<div class="container-fluid">
 				<ul class="nav navbar-nav navbar-left">				
-					<p class="navbar-text">&nbsp;</p>	
+					<p class="navbar-text hidden-xs">&nbsp;</p>	
 					<li><a href="${request.contextPath}/main.do" class="btn-link"><i class="fa fa-home fa-lg"></i></a></li>
-					<p class="navbar-text">&nbsp;</p>						
+					<p class="navbar-text hidden-xs">&nbsp;</p>						
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
@@ -1390,28 +1391,16 @@
 						</div>										
 					</li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">		<!--			
-					<li class="navbar-btn hidden-xs">
-						<div class="btn-group navbar-btn" data-toggle="buttons">
-							<label class="btn btn-info">
-								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
-							</label>
-							<label class="btn btn-info active">
-						 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
-							</label>
-							<label class="btn btn-info">
-								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
-							</label>
-						</div>										
-					</li>-->
-					<p class="navbar-text">&nbsp;</p>
+				<ul class="nav navbar-nav navbar-right">		
+					<p class="navbar-text hidden-xs">&nbsp;</p>
 					<li><a href="#" class="btn-link"><i class="fa fa-chevron-up fa-lg"></i></a></li>
 					<li><a href="#" class="btn-link"><i class="fa fa-chevron-down fa-lg"></i></a></li>
 					<li><a  id="personalized-controls-menu" href="#" class="btn-link"><i class="fa fa-cog fa-lg"></i></a></li>
-					<p class="navbar-text">&nbsp;</p>
+					<p class="navbar-text hidden-xs">&nbsp;</p>
 				</ul>
 			</div>
 		</nav>
+		<!-- end of personalized menu -->
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container-fluid" style="min-height:600px;">		
