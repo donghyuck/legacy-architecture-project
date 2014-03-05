@@ -313,6 +313,15 @@ body.color9, div.color9, ul.color9 {
 	background: #1F1F21;	
 }
 
+body.color10, div.color10, ul.color10 {
+	background: #4A4A4A;	
+}
+
+body.color11, div.color11, ul.color11 {
+	background: #2B2B2B;	
+}
+
+
 section.sky , div.sky {
 	background-color: #5bc0de;		
 }
