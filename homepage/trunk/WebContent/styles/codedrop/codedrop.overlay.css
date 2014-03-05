@@ -98,8 +98,7 @@
 	perspective: 1200px;
 	*/
 	background-color: rgba(31,31,33, 0.9);
-	/*border : 0px;*/
-	border-color: #000;
+	border : 0px;
 }
 
 @media (max-width: 767px) {
