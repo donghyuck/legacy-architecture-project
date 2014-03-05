@@ -126,18 +126,6 @@
 				</figcaption>		
 			</figure>		
 			<div id="photo_overlay" class="overlay overlay-hugeinc color9">
-				<button type="button" class="overlay-close">Close</button>
-				<div class="container">
-					<div class="row" >
-						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
-						<div class="col-md-4"
-						<!-- start photo details -->
-
-						
-						<!-- end photo details -->
-						</div>					
-					</div>
-				</div>
 				<nav class="navbar navbar-default navbar-static-top" role="navigation">
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
@@ -156,6 +144,19 @@
 						</ul>
 					</div>
 				</nav>				
+				<button type="button" class="overlay-close">Close</button>
+				<div class="container">
+					<div class="row" >
+						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
+						<div class="col-md-4"
+						<!-- start photo details -->
+
+						
+						<!-- end photo details -->
+						</div>					
+					</div>
+				</div>
+			
 			
 			</div>
 			<!--
