@@ -132,7 +132,12 @@
 						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 						<div class="col-md-4"
 						<!-- start photo details -->
-												
+							<div class="btn-group">
+								<button type="button" class="btn btn-default">Left</button>
+								<button type="button" class="btn btn-default">Middle</button>
+								<button type="button" class="btn btn-default">Right</button>
+							</div>
+						
 						<!-- end photo details -->
 						</div>					
 					</div>
