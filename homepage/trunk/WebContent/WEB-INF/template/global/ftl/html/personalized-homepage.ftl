@@ -959,20 +959,33 @@
 					overlay.toggleOverlay();
 				});			
 				
-				
+				// start define over nav events
 				$("#" + renderToString ).find('.overlay nav li').each(function( index ) { 
-					var pager = $(this);	
-					if( pager.hasClass('previous') ){
-						pager.click(function (e) { 
+					var command = $(this);	
+					if( command.hasClass('previous') ){
+						command.click(function (e) { 
 							e.preventDefault();								
 							previousPhoto();
 						});
-					}else if ( pager.hasClass('next') ){ 
-						pager.click(function (e) { 
+					}else if ( command.hasClass('next') ){ 
+						command.click(function (e) { 
 							e.preventDefault();
 							nextPhoto();
 						});
-					}	
+					}else if ( command.hasClass('share') ){ 
+						command.click(function (e) { 
+							e.preventDefault();
+							common.api.getPhotoDetails({
+								 imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId 
+								success : function( data ){
+									kendo.stringify(data);
+								}
+							});
+							
+							
+							
+						});
+					}		
 				});	 	
 				 
 			}else{
