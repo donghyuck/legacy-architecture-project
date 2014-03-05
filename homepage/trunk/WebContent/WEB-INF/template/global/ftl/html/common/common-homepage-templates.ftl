@@ -127,27 +127,32 @@
 			</figure>		
 			<div id="photo_overlay" class="overlay overlay-hugeinc color9">
 				<button type="button" class="overlay-close">Close</button>
-				<img data-bind="attr:{src: photoUrl}" class="img-responsive" />
+				
 
-
-<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-	<div class="container">
-		<ul class="nav navbar-nav navbar-right">
-			<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
-			<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>			
-			<li class="dropdown">
-			<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <b class="caret"></b></a>
-			<ul class="dropdown-menu">
-			<li><a href="\\#">Action</a></li>
-			<li><a href="\\#">Another action</a></li>
-			<li><a href="\\#">Something else here</a></li>
-			<li class="divider"></li>
-			<li><a href="\\#">Separated link</a></li>
-			</ul>
-			</li>
-		</ul>
-	</div>
-</nav>				
+				<div class="container">
+					<div class="row" >
+						<div class="col-sm-6 col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
+						<div class="col-sm-6 col-md-4"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>					
+					</div>
+				</div>
+				<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+					<div class="container">
+						<ul class="nav navbar-nav navbar-right">
+							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
+							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>			
+							<li class="dropdown">
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+							<li><a href="\\#">Action</a></li>
+							<li><a href="\\#">Another action</a></li>
+							<li><a href="\\#">Something else here</a></li>
+							<li class="divider"></li>
+							<li><a href="\\#">Separated link</a></li>
+							</ul>
+							</li>
+						</ul>
+					</div>
+				</nav>				
 			
 			</div>
 			<!--
