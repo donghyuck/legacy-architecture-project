@@ -107,7 +107,9 @@ UUID.randomUUID().toString();
 	}
 
 	public List<Photo> getPhotos(int startIndex, int maxResults) {
+		
 		List<String> ids = getStreamsDao().getPhotoIds(startIndex, maxResults);		
+		
 		return toPhotoList(ids);
 	}
 	
