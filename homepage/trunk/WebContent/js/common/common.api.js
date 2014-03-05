@@ -125,6 +125,25 @@
         },
         error:common.api.handleKendoAjaxError
 	});
+
+	common.api.photoDetailsDataSource = function ( options ){		
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url || '/community/get-streams-photo.do?output=json' ,
+			data: { imageId : options.imageId },
+			success : function(response){
+				if( response.error ){ 												
+					options.fail(response) ;
+				} else {					
+					options.success(response) ;					
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	};
+	
 	
 	common.api.handleKendoAjaxError = function (xhr) {
 		var message = "";
