@@ -976,7 +976,7 @@
 						command.click(function (e) { 
 							e.preventDefault();
 							common.api.getPhotoDetails({
-								 imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId 
+								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ){
 									kendo.stringify(data);
 								}
