@@ -141,7 +141,7 @@
 							<li><a href="\\#">Separated link</a></li>
 							</ul>
 							</li>
-							<li><a href="\\#" class="btn-link"><i class="fa fa-times-circle fa-lg"></i></a></li>
+							<li><a href="\\#" class="btn-link"><i class="fa fa-times fa-lg"></i></a></li>
 						</ul>
 					</div>
 				</nav>				
