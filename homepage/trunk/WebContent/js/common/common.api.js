@@ -126,7 +126,7 @@
         error:common.api.handleKendoAjaxError
 	});
 
-	common.api.photoDetailsDataSource = function ( options ){		
+	common.api.getPhotoDetails = function ( options ){		
 		options = options || {};
 		$.ajax({
 			type : 'POST',
