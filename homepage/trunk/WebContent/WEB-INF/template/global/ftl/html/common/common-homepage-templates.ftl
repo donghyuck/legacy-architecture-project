@@ -130,9 +130,11 @@
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
 							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-angle-left fa-lg"></i></a></li>
-							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>			
+							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>		
+							<li class="like"><a href="\\#" class="btn-link"><i class="fa fa-thumbs-o-up fa-lg"></i></a></li>
+							<li class="comment"><a href="\\#" class="btn-link"><i class="fa fa-comment-o fa-lg"></i></a></li>			
 							<li class="dropdown">
-							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <i class="fa fa-caret-down fa-lg"></i></a>
+							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog fa-lg"></i></a>
 							<ul class="dropdown-menu">
 							<li><a href="\\#">Action</a></li>
 							<li><a href="\\#">Another action</a></li>
