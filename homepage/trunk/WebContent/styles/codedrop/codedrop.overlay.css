@@ -160,6 +160,11 @@
 	  float: right;
 	}
 	
+	.navbar-right .dropdown-menu {
+	left: auto;
+	right: 0;
+	}
+		
 	/* Undo custom dropdowns */
 	.navbar .open .dropdown-menu {
 	  position: absolute;
