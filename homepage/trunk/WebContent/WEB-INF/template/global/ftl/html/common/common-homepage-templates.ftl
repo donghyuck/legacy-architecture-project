@@ -132,11 +132,7 @@
 						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 						<div class="col-md-4"
 						<!-- start photo details -->
-							<div class="btn-group">
-								<button type="button" class="btn btn-default">Left</button>
-								<button type="button" class="btn btn-default">Middle</button>
-								<button type="button" class="btn btn-default">Right</button>
-							</div>
+
 						
 						<!-- end photo details -->
 						</div>					
@@ -145,8 +141,8 @@
 				<nav class="navbar navbar-default navbar-static-top" role="navigation">
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
-							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-lg"></i></a></li>
-							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-lg"></i></a></li>			
+							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-angle-left fa-lg"></i></a></li>
+							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>			
 							<li class="dropdown">
 							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">옵션 <b class="caret"></b></a>
 							<ul class="dropdown-menu">
