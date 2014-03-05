@@ -962,6 +962,7 @@
 				// start define over nav events
 				$("#" + renderToString ).find('.overlay nav li').each(function( index ) { 
 					var command = $(this);	
+					alert('s' + command.html());
 					if( command.hasClass('previous') ){
 						command.click(function (e) { 
 							e.preventDefault();								
@@ -975,6 +976,7 @@
 					}else if ( command.hasClass('share') ){ 
 						command.click(function (e) { 
 							e.preventDefault();
+							alert('s');
 							common.api.getPhotoDetails({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ){
