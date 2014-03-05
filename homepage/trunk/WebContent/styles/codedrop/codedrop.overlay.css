@@ -74,6 +74,7 @@
 	/*max-height: 100%;*/
 }
 
+
 /* Effects */
 
 .overlay-hugeinc {
@@ -102,6 +103,9 @@
 	border-color: #060607;
 }
 
+.overlay-hugeinc .nav-tabs>li>a {
+	color : #8E8E93;	
+}
 @media (max-width: 767px) {
 
 	/* Reset the container */
