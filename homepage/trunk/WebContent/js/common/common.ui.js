@@ -192,7 +192,7 @@
 		},
 		body: function(){
 			var that = this;
-			return $(that.element).find(".panel-body:last");
+			return $(that.element).find(".panel:first > .panel-body:last");
 		},
         destroy: function() {
         	var that = this;
