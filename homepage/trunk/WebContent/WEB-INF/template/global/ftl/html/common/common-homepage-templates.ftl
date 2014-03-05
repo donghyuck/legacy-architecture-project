@@ -138,7 +138,7 @@
 							<li><a href="\\#">댓글</a></li>
 							<li><a href="\\#">태그</a></li>
 							<li class="divider"></li>
-							<li><a href="\\#">Separated link</a></li>
+							<li><a href="\\#">스트림</a></li>
 							</ul>
 							</li>
 						</ul>
