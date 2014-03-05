@@ -61,7 +61,18 @@
 				</param>
 			</result>
 		</action>			
-		
+
+		<action name="get-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.PhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*
+				</param>
+			</result>
+		</action>	
+				
 		<action name="view-streams-photo"  method="viewPhoto" class="architecture.ee.web.community.struts2.action.ajax.PhotoStreamsAction">
 			<result name="success" type="stream">
 			  <param name="contentType">${targetImageContentType}</param>
