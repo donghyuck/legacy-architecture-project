@@ -68,7 +68,7 @@
 			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash, targetImage.inputStream</param>
 			  <param name="excludeNullProperties">false</param>     
 				<param name="includeProperties">
-				photos.*
+				photos.*,
 				targetImage.*
 				</param>
 			</result>
