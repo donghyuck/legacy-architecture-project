@@ -1,4 +1,4 @@
-package architecture.ee.web.struts2.action;
+package architecture.ee.web.community.struts2.action;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,9 +6,11 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import architecture.common.user.Company;
+
+import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
