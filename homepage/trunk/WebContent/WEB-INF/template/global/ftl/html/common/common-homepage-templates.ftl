@@ -153,10 +153,10 @@
 						<!-- start photo details -->		
 <!-- Nav tabs -->
 <ul class="nav nav-tabs">
-  <li class="active"><a href="#home" data-toggle="tab">정보</a></li>
-  <li><a href="#profile" data-toggle="tab">댓글</a></li>
-  <li><a href="#messages" data-toggle="tab">공유</a></li>
-  <li><a href="#settings" data-toggle="tab">Settings</a></li>
+  <li class="active"><a href="\\#home" data-toggle="tab">정보</a></li>
+  <li><a href="\\#profile" data-toggle="tab">댓글</a></li>
+  <li><a href="\\#messages" data-toggle="tab">공유</a></li>
+  <li><a href="\\#settings" data-toggle="tab">Settings</a></li>
 </ul>
 
 <!-- Tab panes -->
