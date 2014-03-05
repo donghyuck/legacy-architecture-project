@@ -28,8 +28,7 @@ public interface PhotoStreamsManager {
 	
 	public int getPhotoCount(int objectType);
 	
-	public int getTotalPhotoCount();
-	
+	public int getTotalPhotoCount();	
 	
 	public List<Photo> getPhotos(int objectType, long objectId); 
 	
@@ -41,10 +40,7 @@ public interface PhotoStreamsManager {
 	
 	public List<Photo> getPhotos();
 	
-	public List<Photo> getPhotos(int startIndex, int maxResults );
-	
-	
-	
+	public List<Photo> getPhotos(int startIndex, int maxResults );	
 	
 	/*
 	public int getTotalSharedImageCount(int objectyType ,  long objectId);
