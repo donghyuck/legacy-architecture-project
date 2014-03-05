@@ -787,14 +787,14 @@
 				});
 				
 				var prev = navigation.find('span.cbp-biprev').on('click', function(){
-					navigate( 'prev' ); 
+					that._navigate( 'prev' ); 
 					if( options.slideshowActive ) { 
-						startSlideshow(); 
+						that._start();
 					} 
 				});
 				
 				var next = navigation.find('span.cbp-binext').on('click', function(){
-					navigate( 'next' ); 
+					that._navigate( 'next' ); 
 					if( options.slideshowActive ) { 
 						that._start();
 					}
