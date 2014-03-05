@@ -97,8 +97,9 @@
 	-webkit-perspective: 1200px;
 	perspective: 1200px;
 	*/
-	background-color: rgba(31,31,33, 0.9);
-	border : 0px;
+	background-color: rgba(19,19,20, 0.9);
+	border: 1px;
+	border-color: #060607;
 }
 
 @media (max-width: 767px) {
