@@ -1035,12 +1035,12 @@
 		-->
 		</script>		
 		<style scoped="scoped">
-
+/**
 		nav.navbar-fixed-top {
 			opacity: 0;
 			z-index: 100;	
 		}
-
+**/
 
 		.k-tiles-arrange label {
 			font-weight : normal;		
