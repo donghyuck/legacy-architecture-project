@@ -69,8 +69,8 @@
 	-o-animation: fadeInScale 1.2s ease-in-out;
 	-ms-animation: fadeInScale 1.2s ease-in-out;
 	animation: fadeInScale 1.2s ease-in-out;
-	padding: 10px;
-	max-height: 100%;
+	padding: 10px;/*
+	max-height: 100%;*/
 }
 
 /* Effects */
