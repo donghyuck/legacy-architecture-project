@@ -129,18 +129,8 @@
 				<nav class="navbar navbar-default navbar-static-top" role="navigation">
 					<div class="container">
 						<ul class="nav navbar-nav navbar-right">
-							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-angle-left fa-lg"></i></a></li>
-							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-lg"></i></a></li>			
-							<li class="dropdown">
-							<a href="\\#" class="dropdown-toggle" data-toggle="dropdown"> <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-							<li class="share" ><a href="\\#">공유</a></li>
-							<li><a href="\\#">댓글</a></li>
-							<li><a href="\\#">태그</a></li>
-							<li class="divider"></li>
-							<li><a href="\\#">스트림</a></li>
-							</ul>
-							</li>
+							<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-angle-left fa-3x"></i></a></li>
+							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-3x"></i></a></li>								
 						</ul>
 					</div>
 				</nav>		
@@ -158,12 +148,12 @@
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="\\#accordion" href="\\#collapseOne">
+        <a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-info">
           Collapsible Group Item
         </a>
       </h4>
     </div>
-    <div id="collapseOne" class="panel-collapse collapse in">
+    <div id="photo-details-info" class="panel-collapse collapse in">
       <div class="panel-body">
 									<p>파일: <span  data-bind="text: name"/></p>
 									<p>크기: <span  data-bind="text: size"/> 바이트</p>			
