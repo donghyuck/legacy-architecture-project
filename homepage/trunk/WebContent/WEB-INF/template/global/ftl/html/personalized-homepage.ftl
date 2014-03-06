@@ -945,18 +945,7 @@
 						}
 					} 
 				});				
-				
-				var listView =  $('#photo-list-view').data('kendoListView');	
-				var list_view_pager = $("#photo-list-pager").data("kendoPager");
-				list_view_pager.bind('change', function() {
-					if( $("#" + renderToString + ".open").length  > 0 ){
-						alert( kendo.stringify(
-						$("#photo-list-view").data( "photoPlaceHolder" ) ) );		
-						
-						listView.select(listView.element.children().last());
-					}
-				});
-								
+												
 				var overlay  = $("#" + renderToString ).find('.overlay').extOverlay();								
 				$("#" + renderToString ).data("extPanel").body().find('figure img').click( function(e){
 					overlay.toggleOverlay();
@@ -1026,8 +1015,18 @@
 			var current_page = list_view_pager.page();		
 			var total_page = list_view_pager.totalPages();						
 			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );					
-			if( current_index == total_index && ( total_page - current_page ) > 0 )	{
-				list_view_pager.page(current_page + 1);
+						
+			if( current_index == total_index && ( total_page - current_page ) > 0 )	{				
+				list_view_pager.on('change', function(){	
+					if( $("#" + renderToString + ".open").length  > 0 ){
+						var item = listView.dataSource.view()[0];
+						item.manupulate();
+						common.api.pager( item, 0, total_index, current_page + 1, total_page );			
+						$("#photo-list-view").data( "photoPlaceHolder", item );
+						displayPhotoPanel( );						
+					}
+				});
+				list_view_pager.page(current_page + 1);			
 			}else{
 				var next_index = current_index + 1;				
 				var item = listView.dataSource.view()[next_index];
