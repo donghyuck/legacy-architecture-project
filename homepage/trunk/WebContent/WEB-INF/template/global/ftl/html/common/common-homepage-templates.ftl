@@ -168,7 +168,7 @@
 				</a>
 			</h4>
 		</div>
-		<div id="photo-details-tags" class="panel-collapse collapse in">
+		<div id="photo-details-tags" class="panel-collapse collapse">
 			<div class="panel-body">
 	
 			</div>
@@ -182,7 +182,7 @@
 				</a>
 			</h4>
 		</div>
-		<div id="photo-details-comments" class="panel-collapse collapse in">
+		<div id="photo-details-comments" class="panel-collapse collapse">
 			<div class="panel-body">
 	
 			</div>
