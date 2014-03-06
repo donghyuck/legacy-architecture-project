@@ -100,7 +100,7 @@
  */
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui || {};
-	var proxy = $.proxy, CHANGE = "change" , observable = new kendo.data.ObservableObject( { title : "&nbsp;"} );
+	var proxy = $.proxy, OPEN = 'open', CHANGE = "change" , observable = new kendo.data.ObservableObject( { title : "&nbsp;"} );
 	
 	ui.extPanel = Widget.extend({
 		init: function(element, options) {			
@@ -111,7 +111,8 @@
 			kendo.notify(that);			
 		},
 		events : [
-			CHANGE
+			CHANGE,
+			OPEN
 		],
 		options : {
 			name: "extPanel",
@@ -166,8 +167,8 @@
 							$(that.element).find(".panel-body, .panel-footer").addClass("hide");
 						}else{
 							header_action_icon.removeClass("k-i-maximize");
-							header_action_icon.addClass("k-i-minimize");
-							$(that.element).find(".panel-body, .panel-footer").removeClass("hide");
+							header_action_icon.addClass("k-i-minimize");							
+							$(that.element).find(".panel:first > .panel-body:last, .panel-footer").removeClass("hide");
 						}
 						
         			}else if ( header_action.text() == "Close"){
@@ -176,8 +177,15 @@
         			
         			// custom
         			}else if ( header_action.text() == "Custom" ){
-        				$(that.element).find(".panel-body:first").toggleClass("hide");
-        			}        			
+        				
+        				var _body = $(that.element).find(".panel-body:first");
+        				if( _body.hasClass('open') ){
+        					_body.removeClass('open');        					
+        				}else{
+        					_body.addClass('open');        					
+        					that.trigger( OPEN, { element: (that.element).find(".panel-body:first")});
+        				}
+        			}			
         		});
         	});        	
         	// custom 
