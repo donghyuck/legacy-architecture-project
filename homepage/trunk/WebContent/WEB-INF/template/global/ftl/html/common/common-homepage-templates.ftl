@@ -102,10 +102,14 @@
 				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
 					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
 					<li>
-						<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
+						
 					</li>
 				</ul>
 			</div>
+			
+			
+			<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
+			
 		</div>	
 		<div class="panel-body block-space-0">			
 			<figure>			
