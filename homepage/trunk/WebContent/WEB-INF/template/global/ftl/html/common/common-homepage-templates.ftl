@@ -145,21 +145,49 @@
 
 
 <div class="panel-group" id="photo-details-accordion">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-info">
-          Collapsible Group Item
-        </a>
-      </h4>
-    </div>
-    <div id="photo-details-info" class="panel-collapse collapse in">
-      <div class="panel-body">
-									<p>파일: <span  data-bind="text: name"/></p>
-									<p>크기: <span  data-bind="text: size"/> 바이트</p>			
-      </div>
-    </div>
-  </div>	
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-info">
+				<i class="fa fa-info"></i>사진정보
+				</a>
+			</h4>
+		</div>
+		<div id="photo-details-info" class="panel-collapse collapse in">
+			<div class="panel-body">
+				<p>파일: <span  data-bind="text: name"/></p>
+				<p>크기: <span  data-bind="text: size"/> 바이트</p>			
+			</div>
+		</div>
+	</div>	
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-tags">
+				<i class="fa fa-tags"></i>태그
+				</a>
+			</h4>
+		</div>
+		<div id="photo-details-tags" class="panel-collapse collapse in">
+			<div class="panel-body">
+	
+			</div>
+		</div>
+	</div>	
+	<div class="panel panel-primary">
+		<div class="panel-heading">
+			<h4 class="panel-title">
+				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-comments">
+				<i class="fa fa-comment-o"></i>댓글
+				</a>
+			</h4>
+		</div>
+		<div id="photo-details-comments" class="panel-collapse collapse in">
+			<div class="panel-body">
+	
+			</div>
+		</div>
+	</div>			
 </div>  
 								
 						<!-- end photo details -->
