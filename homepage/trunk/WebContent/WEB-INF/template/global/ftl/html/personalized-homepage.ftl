@@ -1021,7 +1021,7 @@
 					if( $("#photo_overlay.open").length  > 0 ){
 						var item = this.dataSource.view()[0];
 						item.manupulate();
-						common.api.pager( item, 0, this..dataSource.view().length -1, current_page + 1, total_page );	
+						common.api.pager( item, 0, this.dataSource.view().length -1, current_page + 1, total_page );	
 						$("#photo-list-view").data( "photoPlaceHolder", item );
 						displayPhotoPanel( );
 					}
