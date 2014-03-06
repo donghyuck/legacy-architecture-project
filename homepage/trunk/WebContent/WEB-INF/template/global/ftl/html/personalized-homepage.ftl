@@ -952,7 +952,7 @@
 				var listView =  $('#photo-list-view').data('kendoListView');	
 				var list_view_pager = $("#photo-list-pager").data("kendoPager");
 				list_view_pager.bind('change', function() {
-					if( $("#" + renderToString + ".open").length ) > 0 ){
+					if( $("#" + renderToString + ".open").length  > 0 ){
 						alert( kendo.stringify(
 						$("#photo-list-view").data( "photoPlaceHolder" ) );		
 						
