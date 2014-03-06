@@ -239,8 +239,9 @@ public class PhotoStreamsAction extends FrameworkActionSupport  implements Prepa
 	public Image getTargetImage() {
 		if(targetImage == null && imageId > 0){
 			try {
-				targetImage = this.imageManager.getImage(imageId);
+				this.targetImage = this.imageManager.getImage(imageId);
 			} catch (NotFoundException e) {
+				log.warn(e);
 			}
 		}
 		return targetImage;
