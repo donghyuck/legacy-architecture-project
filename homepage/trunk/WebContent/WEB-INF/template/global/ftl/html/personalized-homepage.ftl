@@ -924,7 +924,7 @@
 							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
 							success : function( data ) {
 								if( data.photos.length > 0 )
-									$("#photo-list-view").data( "photoPlaceHolder").shared = true ;
+									$("#photo-list-view").data( "photoPlaceHolder").shared = "public" ;
 							}
 						});					
 						//alert( e.element.html() );						
