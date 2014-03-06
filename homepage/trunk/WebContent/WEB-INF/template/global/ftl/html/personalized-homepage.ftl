@@ -954,7 +954,7 @@
 				list_view_pager.bind('change', function() {
 					if( $("#" + renderToString + ".open").length  > 0 ){
 						alert( kendo.stringify(
-						$("#photo-list-view").data( "photoPlaceHolder" ) );		
+						$("#photo-list-view").data( "photoPlaceHolder" ) ) );		
 						
 						listView.select(listView.element.children().last());
 					}
