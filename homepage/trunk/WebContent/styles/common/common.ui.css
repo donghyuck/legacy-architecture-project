@@ -73,20 +73,21 @@ button.btn-img {
 	min-width: 120px;
 }
 
+.panel .k-button.k-upload-button {
+	min-width: 120px; 
+	float: right;
+}
 
 .panel .k-dropzone {
 	border: 2px dashed #d4d4d4;
 	background-color: #f7f7f7;
-	position: absolute;
-	
-	right : 0px;
+	position: relative;	
 	text-align: center;
-	padding: 34px 10px 10px;
+	padding: 34px 34px 40px 10px;
 	-webkit-border-radius: 18px;
 	-moz-border-radius: 18px;
 	border-radius: 18px;
-	margin: 0 0 10px;
-	
+	margin: 20px 0 0 0;
 }
 		
 
