@@ -923,14 +923,22 @@
 						common.api.getPhotoDetails({
 							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
 							success : function( data ) {
-								if( data.photos.length > 0 )
-									$("#photo-list-view").data( "photoPlaceHolder").shared = "public" ;
+								if( data.photos.length > 0 ){
+									$("#photo-list-view").data( "photoPlaceHolder").shared = true ;
+									
+								}else{
+									
+								}
 							}
 						});					
 						//alert( e.element.html() );						
 					} )
 				 );	
-				
+
+				$("input[name='photo-public-shared']").on("change", function () {					
+					alert( this.value );
+				});				
+								
 				$("#update-photo-file").kendoUpload({
 					showFileList: false,
 					multiple: false,
