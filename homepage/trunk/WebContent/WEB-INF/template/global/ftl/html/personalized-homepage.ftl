@@ -921,7 +921,7 @@
 						],						
 					}).bind('open', function( e ) {
 						alert( e.element.html() );
-					} );  
+					} )
 				 );	
 				
 				$("#update-photo-file").kendoUpload({
