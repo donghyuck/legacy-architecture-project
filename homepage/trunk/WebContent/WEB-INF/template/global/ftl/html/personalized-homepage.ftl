@@ -937,11 +937,14 @@
 				 );	
 
 				$("input[name='photo-public-shared']").on("change", function () {					
-					;
+					
 					var newValue = ( this.value == 1 ) ;
 					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;
+					if( oldValue != newValue){
+						// fixed ..
+						alert(oldValue + ">" + newValue ) ;
+					}
 					
-					alert(oldValue + ">" + newValue ) 
 				});				
 								
 				$("#update-photo-file").kendoUpload({
@@ -961,7 +964,7 @@
 							var item = e.response.targetImage;
 							item.index = $("#photo-list-view").data( "photoPlaceHolder" ).index;			
 							item.page = $("#photo-list-view").data( "photoPlaceHolder" ).page;		
-							
+							// need fix!!
 							$("#photo-list-view").data( "photoPlaceHolder",  item );
 							displayPhotoPanel();
 						}
