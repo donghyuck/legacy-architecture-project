@@ -91,25 +91,11 @@
 		</div>	
 		<div class="panel-body hide">
 			<button type="button" class="close" aria-hidden="true">&times;</button>					
-			<div class="btn-group dropup">
-				<a class="btn btn-info" href="\\#"><i class="fa fa-download"></i></a>
-				<button  type="button" class="btn btn-info"><i class="fa fa-share"></i></button>	
-				<button  type="button" class="btn btn-info"><i class="fa fa-comment-o"></i></button>						
-			</div>						
 			<div class="btn-group dropup" data-bind="visible: editable">
-				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>
-				<button  type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-upload"></i> 사진 변경하기</button>	
-				<ul class="dropdown-menu" style="min-width:300px; padding:10px;">
-					<li role="presentation" class="dropdown-header">마우스로 사진을 끌어 놓으세요.</li>
-					<li>
-						
-					</li>
-				</ul>
-			</div>
-			
-			
-			<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />
-			
+				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>				
+			</div>			
+			<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small>
+			<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />			
 		</div>	
 		<div class="panel-body block-space-0">			
 			<figure>			
@@ -117,14 +103,7 @@
 				<figcaption class="border-buttom-rounded">
 					<ul class="list-inline">
 						<small class="text-muted" data-bind="text: modifiedDate"></small>
-					</ul>
-					<!--
-					<div class="blank-top-5 "></div>
-					<ul class="pager">
-						<li class="previous" data-bind="visible: previous"><a href="\\#" class="btn-link"><i class="fa fa-chevron-left fa-2x"></i></a></li>
-						<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-chevron-right fa-2x"></i></a></li>
-					</ul>			
-					-->							
+					</ul>					
 				</figcaption>		
 			</figure>		
 			<div id="photo_overlay" class="overlay overlay-hugeinc color9">
