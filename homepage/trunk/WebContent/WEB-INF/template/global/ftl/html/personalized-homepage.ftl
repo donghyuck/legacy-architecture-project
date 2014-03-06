@@ -918,9 +918,11 @@
 									*/								
 								}
 							}}
-						]
-					})
-				 );		
+						],						
+					}).bind('open', function( e ) {
+						alert( e.element.html() );
+					} );  
+				 );	
 				
 				$("#update-photo-file").kendoUpload({
 					showFileList: false,
@@ -950,7 +952,7 @@
 				$("#" + renderToString ).data("extPanel").body().find('figure img').click( function(e){
 					overlay.toggleOverlay();
 				});			
-				
+								
 				// start define over nav events
 				$("#" + renderToString ).find('.overlay nav li').each(function( index ) { 
 					var command = $(this);
@@ -966,8 +968,7 @@
 						});
 					}else if ( command.hasClass('share') ){ 
 						command.click(function (e) { 
-							e.preventDefault();
-							
+							e.preventDefault();							
 							common.api.getPhotoDetails({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ){
