@@ -1033,7 +1033,9 @@
 			var total_index = listView.dataSource.view().length -1 ;
 			var list_view_pager = $("#photo-list-pager").data("kendoPager");
 			var current_page = list_view_pager.page();		
-			alert( current_index + "/"  + total_index );										
+			
+			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + list_view_pager.totalPages() );				
+									
 			if( current_index < total_index  ){
 				var item = listView.dataSource.view()[next_index];
 				item.index = next_index;
