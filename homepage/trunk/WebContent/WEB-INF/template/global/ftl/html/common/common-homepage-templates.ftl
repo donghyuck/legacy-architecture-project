@@ -98,10 +98,10 @@
 
 <div class="btn-group" data-toggle="buttons">
 	<label class="btn btn-primary">
-	<input type="radio" name="options"> ON
+	<input type="radio" name="options" value="true" data-bind="checked:shared"> ON
 	</label>
 	<label class="btn btn-primary">
-	<input type="radio" name="options"> OFF
+	<input type="radio" name="options" value="false" data-bind="checked:shared"> OFF
 	</label>
 </div>
 
