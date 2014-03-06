@@ -1040,8 +1040,8 @@
 				list_view_pager.page(current_page + 1);
 			}else{
 				var next_index = current_index + 1;				
-				var item = listView.dataSource.view()[next_index];						
-				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;				
+				var item = listView.dataSource.view()[next_index];
+				item.manupulate();
 				common.api.pager( item, next_index, total_index, current_page, total_page );
 				$("#photo-list-view").data( "photoPlaceHolder", item );
 				displayPhotoPanel( );
