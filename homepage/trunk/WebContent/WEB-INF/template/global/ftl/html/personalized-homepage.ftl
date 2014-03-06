@@ -1000,18 +1000,22 @@
 		function previousPhoto (){
 			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
 			var previous_index = current_index - 1;	
+			
 			var listView =  $('#photo-list-view').data('kendoListView');	
 			var list_view_pager = $("#photo-list-pager").data("kendoPager");
+			
 			var current_page = list_view_pager.page();						
+			
 			if( current_index > 0 ){							
 				var item = listView.dataSource.view()[previous_index];
+				
 				item.index = previous_index;		
 				item.page = current_page ;		
 				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
-				item.photoId = '#photo-' + +item.imageId ;				
-				//item.photoIdLink = '#' + item.photoId;										
 				item.previous = ( item.index > 0 || item.page > 1 ) ;
 				item.next = true ;									
+				item.manupulate();
+				
 				$("#photo-list-view").data( "photoPlaceHolder", item );														
 				displayPhotoPanel( );
 			} else {
@@ -1034,11 +1038,11 @@
 				item.index = next_index;
 				item.page = current_page ;			
 				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
-				item.photoId = '#photo-' + +item.imageId ;					
-				//item.photoIdLink = '#' + item.photoId;									
 				item.previous = ( item.index > 0 || item.page > 1 ) ;
-				item.next = true ;										
+				item.next = true ;	
+				item.manupulate();									
 				$("#photo-list-view").data( "photoPlaceHolder", item );
+				
 				displayPhotoPanel( );						
 			}else {
 				if( current_page <  list_view_pager.totalPages() ){
