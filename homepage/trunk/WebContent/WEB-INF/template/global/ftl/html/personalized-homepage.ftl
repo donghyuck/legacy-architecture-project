@@ -892,7 +892,8 @@
 			var renderToString =  "photo-panel-0";	
 			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
 			
-			//alert(photoPlaceHolder.imageId);
+			
+			alert(kendo.stringify( photoPlaceHolder));
 			
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
