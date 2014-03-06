@@ -176,14 +176,13 @@
         			}else if ( header_action.text() == "Refresh"){	
         			
         			// custom
-        			}else if ( header_action.text() == "Custom" ){
-        				
+        			}else if ( header_action.text() == "Custom" ){        				
         				var _body = $(that.element).find(".panel-body:first");
-        				if( _body.hasClass('open') ){
-        					_body.removeClass('open');        					
-        				}else{
-        					_body.addClass('open');        					
+        				if( _body.hasClass('hide') ){
+        					_body.removeClass('hide');        					
         					that.trigger( OPEN, { element: (that.element).find(".panel-body:first")});
+        				}else{
+        					_body.addClass('hide');        					
         				}
         			}			
         		});
