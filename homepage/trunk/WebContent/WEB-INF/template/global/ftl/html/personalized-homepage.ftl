@@ -923,7 +923,8 @@
 						common.api.getPhotoDetails({
 							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
 							success : function( data ) {
-								alert( kendo.stringify( data ) );
+								if( data.photos.length > 0 )
+									$("#photo-list-view").data( "photoPlaceHolder").shared = true ;
 							}
 						});					
 						//alert( e.element.html() );						
