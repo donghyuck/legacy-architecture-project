@@ -368,6 +368,8 @@
 									item.previous = ( item.index > 0 || item.page > 1 ) ;
 									item.next = true ;
 									
+									alert(item.getFormattedSize());
+									
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
 									displayPhotoPanel( ) ;										
 								},
