@@ -259,7 +259,7 @@ var Image = kendo.data.Model.define( {
     	name: { type: "string", editable: true , validation: { required: true }},
         contentType: { type: "string", editable: false },
         size: { type: "number", defaultValue : 0,  editable: false },
-        shared : { type: "string", defaultValue : "none",  editable: true },
+        shared : { type: "boolean", defaultValue : false,  editable: true },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" },
         index : {type: "number", defaultValue : 0 }
