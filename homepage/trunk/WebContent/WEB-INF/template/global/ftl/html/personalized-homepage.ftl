@@ -996,6 +996,16 @@
 			var total_page = list_view_pager.totalPages();		
 			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );		
 			if( current_index == 0 && current_page > 1 ){
+				listView.one('dataBound', function(){
+					if( $("#photo_overlay.open").length  > 0 ){
+						var previous_index = this.dataSource.view().length -1;
+						var item = this.dataSource.view()[previous_index];
+						item.manupulate();
+						common.api.pager( item, previous_index, previous_index, current_page - 1, total_page );	
+						$("#photo-list-view").data( "photoPlaceHolder", item );
+						displayPhotoPanel( );
+					}
+				});
 				list_view_pager.page(current_page - 1);
 			}else{
 				var previous_index = current_index - 1;
@@ -1014,8 +1024,6 @@
 			var total_index = listView.dataSource.view().length -1 ;
 			var current_page = list_view_pager.page();		
 			var total_page = list_view_pager.totalPages();						
-			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );					
-						
 			if( current_index == total_index && ( total_page - current_page ) > 0 )	{		
 				listView.one('dataBound', function(){
 					if( $("#photo_overlay.open").length  > 0 ){
