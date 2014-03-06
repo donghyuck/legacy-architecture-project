@@ -105,6 +105,18 @@
 		return result
 	}
 
+	common.api.pager = function (item, current_index, total_index, current_page, total_page) {		
+		if( current_index < 0 )
+			current_index = 0;		
+		item.index = current_index ;
+		item.page = current_page;
+		item.previous = ( currentIndex > 0 || current_page > 1 ) ;
+		item.next = true ;			
+		if( (total_index - current_index) == 0 && (total_page - current_page) == 0 )
+			item.next = false;		
+		return item;
+	}
+	
 	common.api.photoStreamsDataSource = new kendo.data.DataSource({		
 		serverPaging: true,
 		pageSize: 15,
