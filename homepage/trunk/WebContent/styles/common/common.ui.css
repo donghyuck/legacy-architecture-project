@@ -132,6 +132,26 @@ button.btn-img {
 	padding : 0px;		
 }
 
+.panel-dark {
+	border-color: rgb(19,19,20);
+	background-color: rgba(19,19,20, 0.8);
+	font-size: 10pt;
+}
+
+.panel-dark>.panel-heading {
+	color: #fff;
+	background-color: rgba(19,19,20, 0.9);
+	border-color: #060607;
+}
+
+.panel-dark>.panel-heading+.panel-collapse .panel-body {
+border-top-color: rgb(19,19,20);
+color: #FFF;
+}
+.panel-title { 
+	font-size : 11pt;	
+}
+
 .panel-border-thick {
 	border: 6px solid rgba(0,0,0,0.1);
 }
