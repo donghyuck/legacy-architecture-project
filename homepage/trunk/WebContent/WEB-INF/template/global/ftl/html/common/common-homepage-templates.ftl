@@ -198,7 +198,7 @@
 			
 			</div>
 			<!--
-			<div class="lb-overlay blue" id="#:photoId#" data-bind="attr: { id: photoId }">			
+			<div class="lb-overlay blue">			
 				<a href="\\#page" class="lb-overlay-close">Close</a>
 
 
