@@ -359,13 +359,12 @@
 								selectable: "single",									
 								change: function(e) {									
 									var data = this.dataSource.view() ;
-									var item = data[this.select().index()];		
-									item.manupulate();							
-									item.index = this.select().index();			
-									item.page = $("#photo-list-pager").data("kendoPager").page();				
-									item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;		
-									item.previous = ( item.index > 0 || item.page > 1 ) ;
-									item.next = true ;																		
+									var current_index = this.select().index();
+									var total_index = this.dataSource.view().length -1 ;
+									var list_view_pager = $("#photo-list-pager").data("kendoPager");			
+									var item = data[current_index];																		
+									item.manupulate();								
+									common.api.pager(item, current_index,total_index, list_view_pager.page(), list_view_pager.totalPages());
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
 									displayPhotoPanel( ) ;										
 								},
