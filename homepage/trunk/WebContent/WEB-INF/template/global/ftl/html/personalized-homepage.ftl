@@ -920,7 +920,13 @@
 							}}
 						],						
 					}).bind('open', function( e ) {
-						alert( e.element.html() );
+						common.api.getPhotoDetails({
+							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
+							success : function( data ) {
+								alert( kendo.stringify( data ) );
+							}
+						});					
+						//alert( e.element.html() );						
 					} )
 				 );	
 				
