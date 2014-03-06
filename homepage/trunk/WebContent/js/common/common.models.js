@@ -258,10 +258,19 @@ var Image = kendo.data.Model.define( {
     	objectId: { type: "number", editable: false, defaultValue: -1  },    	
     	name: { type: "string", editable: true , validation: { required: true }},
         contentType: { type: "string", editable: false },
-        imageId: { type: "number", editable: false },
+        size: { type: "number", defaultValue : 0,  editable: false },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" },
         index : {type: "number", defaultValue : 0 }
+    },
+    getFormattedCreationDate : function () {
+    	return kendo.toString(this.get('creationDate'),  'D');
+    },
+    getFormattedModifiedDate : function () {
+    	return kendo.toString(this.get('modifiedDate'),  'D');
+    },
+    getFormattedSize : function () {
+    	return kendo.toString(this.get('size'),  'n');    	
     }
 });
 
