@@ -93,7 +93,19 @@
 			<button type="button" class="close" aria-hidden="true">&times;</button>					
 			<div class="btn-group dropup" data-bind="visible: editable">
 				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>				
-			</div>			
+			</div>		
+
+
+<div class="btn-group" data-toggle="buttons">
+	<label class="btn btn-primary">
+	<input type="radio" name="options"> ON
+	</label>
+	<label class="btn btn-primary">
+	<input type="radio" name="options"> OFF
+	</label>
+</div>
+
+				
 			<div class="checkbox">
 				<label>
 					<input type="checkbox" data-bind="checked: shared "> 모두에게 공개
