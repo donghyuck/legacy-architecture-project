@@ -157,6 +157,8 @@
 			<div class="panel-body">
 				<p>파일: <span  data-bind="text: name"/></p>
 				<p>크기: <span  data-bind="text: size"/> 바이트</p>			
+				<p>생성일: <span  data-bind="text: creationDate"/></p>			
+				<p>수정일: <span  data-bind="text: modifiedDate"/></p>			
 			</div>
 		</div>
 	</div>	
