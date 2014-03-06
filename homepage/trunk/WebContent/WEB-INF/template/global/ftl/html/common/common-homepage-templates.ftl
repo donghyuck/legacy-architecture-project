@@ -156,7 +156,7 @@
 				<p>파일: <span  data-bind="text: name"/></p>
 				<p>크기: <span  data-bind="text: formattedSize" /> 바이트</p>			
 				<p>생성일: <span  data-bind="text: formattedCreationDate" /></p>			
-				<p>수정일: <span  data-bind="text: modifiedDate"/></p>			
+				<p>수정일: <span  data-bind="text: formattedModifiedDate"/></p>			
 			</div>
 		</div>
 	</div>	
