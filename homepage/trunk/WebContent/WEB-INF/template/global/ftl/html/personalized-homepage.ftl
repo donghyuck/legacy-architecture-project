@@ -1009,7 +1009,7 @@
 			if( current_index == 0 && current_page > 1 ){
 				list_view_pager.page(current_page - 1);
 			}else{
-				var previous_index = current_index + 1;
+				var previous_index = current_index - 1;
 				var item = listView.dataSource.view()[previous_index];		
 				item.manupulate();
 				common.api.pager( item, previous_index, total_index, current_page, total_page );
