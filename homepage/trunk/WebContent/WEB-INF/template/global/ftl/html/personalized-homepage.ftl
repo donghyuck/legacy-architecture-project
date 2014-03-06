@@ -937,7 +937,9 @@
 				 );	
 
 				$("input[name='photo-public-shared']").on("change", function () {					
-					alert("fdasfasd") ;
+					alert("fdasfasd" + this.value ) ;
+					var newValue = ( this.value == 1 ) ;
+					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;
 				});				
 								
 				$("#update-photo-file").kendoUpload({
