@@ -145,11 +145,11 @@
 
 
 <div class="panel-group" id="photo-details-accordion">
-	<div class="panel panel-primary">
+	<div class="panel panel-dark">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-info">
-				<i class="fa fa-info"></i>사진정보
+				<i class="fa fa-info"></i>&nbsp;사진정보
 				</a>
 			</h4>
 		</div>
@@ -160,11 +160,11 @@
 			</div>
 		</div>
 	</div>	
-	<div class="panel panel-primary">
+	<div class="panel panel-dark">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-tags">
-				<i class="fa fa-tags"></i>태그
+				<i class="fa fa-tags"></i>&nbsp;태그
 				</a>
 			</h4>
 		</div>
@@ -174,11 +174,11 @@
 			</div>
 		</div>
 	</div>	
-	<div class="panel panel-primary">
+	<div class="panel panel-dark">
 		<div class="panel-heading">
 			<h4 class="panel-title">
 				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-comments">
-				<i class="fa fa-comment-o"></i>댓글
+				<i class="fa fa-comment-o"></i>&nbsp;댓글
 				</a>
 			</h4>
 		</div>
