@@ -96,14 +96,14 @@
 			</div>		
 
 
-<div class="btn-group" data-toggle="buttons">
-	<label class="btn btn-primary">
-	<input type="radio" name="options" value="public" data-bind="checked:shared"> ON
-	</label>
-	<label class="btn btn-primary">
-	<input type="radio" name="options" value="none" data-bind="checked:shared"> OFF
-	</label>
-</div>
+			<div class="btn-group" data-toggle="buttons">
+				<label class="btn btn-primary">
+				<input type="radio" name="photo-public-shared" value="1"> 공개
+				</label>
+				<label class="btn btn-primary">
+				<input type="radio" name="photo-public-shared" value="0" active> 비공개
+				</label>
+			</div>
 
 				
 			<div class="checkbox">
