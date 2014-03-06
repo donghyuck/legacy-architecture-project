@@ -364,8 +364,8 @@
 									item.index = this.select().index();			
 									item.page = $("#photo-list-pager").data("kendoPager").page();				
 									item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
-									item.photoId = 'photo-' + +item.imageId ;								
-									item.photoIdLink = '#' + item.photoId;									
+									//item.photoId = 'photo-' + +item.imageId ;								
+									//item.photoIdLink = '#' + item.photoId;									
 									item.previous = ( item.index > 0 || item.page > 1 ) ;
 									item.next = true ;
 																		
