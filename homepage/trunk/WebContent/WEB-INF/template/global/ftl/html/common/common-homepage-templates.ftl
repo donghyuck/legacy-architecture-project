@@ -100,8 +100,8 @@
 				<label class="btn btn-primary">
 				<input type="radio" name="photo-public-shared" value="1"> 공개
 				</label>
-				<label class="btn btn-primary">
-				<input type="radio" name="photo-public-shared" value="0" active> 비공개
+				<label class="btn btn-primary active">
+				<input type="radio" name="photo-public-shared" value="0"> 비공개
 				</label>
 			</div>
 
