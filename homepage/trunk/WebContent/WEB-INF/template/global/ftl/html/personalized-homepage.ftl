@@ -1017,7 +1017,7 @@
 			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );					
 						
 			if( current_index == total_index && ( total_page - current_page ) > 0 )	{				
-				list_view_pager.on('change', function(){	
+				list_view_pager.one('change', function(){	
 					if( $("#" + renderToString + ".open").length  > 0 ){
 						var item = listView.dataSource.view()[0];
 						item.manupulate();
