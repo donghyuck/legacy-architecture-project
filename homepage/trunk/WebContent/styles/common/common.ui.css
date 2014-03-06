@@ -73,6 +73,21 @@ button.btn-img {
 	min-width: 120px;
 }
 
+
+.panel .k-dropzone {
+	border: 5px dashed #c0dcf2;
+	background: 0;
+	right : 0px;
+	text-align: center;
+	padding: 34px 10px 10px;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+	margin: 0 0 10px;
+	position: relative;
+}
+		
+
 /* Bootstrap customize---------------------- */
 .jumbotron-page-header {
 	margin-top: -20px;
