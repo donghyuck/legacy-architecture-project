@@ -109,9 +109,7 @@
 		</div>	
 		<div class="panel-body block-space-0">			
 			<figure>			
-				<a href="#:photoIdLink#" data-bind="attr:{href: photoIdLink }">
-					<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" class="border-buttom-rounded"/>			
-				</a>		
+				<img data-bind="attr:{src: photoUrl, alt : name }" width="100%" class="border-buttom-rounded"/>			
 				<figcaption class="border-buttom-rounded">
 					<ul class="list-inline">
 						<small class="text-muted" data-bind="text: modifiedDate"></small>
