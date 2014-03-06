@@ -1011,7 +1011,7 @@
 				item.page = current_page ;		
 				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
 				item.photoId = '#photo-' + +item.imageId ;				
-				item.photoIdLink = '#' + item.photoId;										
+				//item.photoIdLink = '#' + item.photoId;										
 				item.previous = ( item.index > 0 || item.page > 1 ) ;
 				item.next = true ;									
 				$("#photo-list-view").data( "photoPlaceHolder", item );														
@@ -1037,7 +1037,7 @@
 				item.page = current_page ;			
 				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
 				item.photoId = '#photo-' + +item.imageId ;					
-				item.photoIdLink = '#' + item.photoId;									
+				//item.photoIdLink = '#' + item.photoId;									
 				item.previous = ( item.index > 0 || item.page > 1 ) ;
 				item.next = true ;										
 				$("#photo-list-view").data( "photoPlaceHolder", item );
@@ -1087,27 +1087,6 @@
 		   border: solid 1px #787878;
 		}
 
-		.k-dropzone {
-		/*	width: 808px;
-			height: 219px;*/
-			border: 5px dashed #c0dcf2;
-			background: 0;
-			right : 0px;
-			text-align: center;
-			padding: 34px 10px 10px;
-			-webkit-border-radius: 18px;
-			-moz-border-radius: 18px;
-			border-radius: 18px;
-			margin: 0 0 10px;
-			position: relative;
-			z-index: 9000;
-		}
-		/*
-		.k-grid table tr.k-state-selected{
-			background: #428bca;
-			color: #ffffff; 
-		}
-		*/
 		.media, .media .media {
 			margin-top: 5px;
 		}
