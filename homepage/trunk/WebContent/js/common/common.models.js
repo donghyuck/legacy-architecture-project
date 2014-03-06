@@ -263,13 +263,13 @@ var Image = kendo.data.Model.define( {
         creationDate: { type: "date" },
         index : {type: "number", defaultValue : 0 }
     },
-    getFormattedCreationDate : function () {
+    toFormattedCreationDate : function () {
     	return kendo.toString(this.get('creationDate'),  'D');
     },
-    getFormattedModifiedDate : function () {
+    toFormattedModifiedDate : function () {
     	return kendo.toString(this.get('modifiedDate'),  'D');
     },
-    getFormattedSize : function () {
+    toFormattedSize : function () {
     	return kendo.toString(this.get('size'),  'n');    	
     }
 });
