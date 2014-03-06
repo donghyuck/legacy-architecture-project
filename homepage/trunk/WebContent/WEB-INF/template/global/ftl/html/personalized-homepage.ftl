@@ -367,9 +367,7 @@
 									item.photoIdLink = '#' + item.photoId;									
 									item.previous = ( item.index > 0 || item.page > 1 ) ;
 									item.next = true ;
-									
-									alert(item.getFormattedSize());
-									
+																		
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
 									displayPhotoPanel( ) ;										
 								},
@@ -895,7 +893,6 @@
 			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
 			
 			
-			alert(kendo.stringify( photoPlaceHolder));
 			
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
