@@ -184,32 +184,6 @@
 		</div>
 		<div id="photo-details-comments" class="panel-collapse collapse">
 			<div class="panel-body">
-	
-			</div>
-		</div>
-	</div>			
-</div>  
-								
-						<!-- end photo details -->
-						</div>					
-					</div>
-				</div>
-		
-			
-			</div>
-			<!--
-			<div class="lb-overlay blue">			
-				<a href="\\#page" class="lb-overlay-close">Close</a>
-
-
-				<div class="splitlayout" >
-					<div class="splitlayout-side splitlayout-side-left " >
-						
-					</div>
-					<div class="splitlayout-side splitlayout-side-right " >
-				<div class="splitlayout-side-body">
-				<div class="panel panel-primary ">					
-					<div class="panel-body">
 						<ul class="media-list">
 							<li class="media">
 								<div class="pull-left" >
@@ -260,12 +234,17 @@
 									<button type="button" class="btn btn-info">확인</button>
 								</div>
 							</li>																	
-						</ul>
+						</ul>	
+			</div>
+		</div>
+	</div>			
+</div>  
+								
+						<!-- end photo details -->
+						</div>					
 					</div>
-				</div>
-				</div>
--->
-				
+				</div>			
+			</div>
 					</div>			
 				</div>							
 			</div>							
