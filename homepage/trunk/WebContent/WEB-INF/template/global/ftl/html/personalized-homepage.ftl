@@ -1031,6 +1031,9 @@
 			var total_index = listView.dataSource.view().length -1 ;
 			var current_page = list_view_pager.page();		
 			var total_page = list_view_pager.totalPages();			
+			
+			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );		
+			
 			if( current_index == total_index && ( total_page - current_page ) > 0 )
 			{
 				// move next page ;
@@ -1056,7 +1059,7 @@
 			/*
 			
 			
-			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );				
+					
 									
 									
 									
