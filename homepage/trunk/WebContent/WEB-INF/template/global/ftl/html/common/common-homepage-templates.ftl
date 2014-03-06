@@ -94,21 +94,12 @@
 			<div class="btn-group dropup" data-bind="visible: editable">
 				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>				
 			</div>		
-
-
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary">
-				<input type="radio" name="photo-public-shared" value="1"> 공개
+				<input type="radio" name="photo-public-shared" value="1">모두에게 공개
 				</label>
 				<label class="btn btn-primary active">
 				<input type="radio" name="photo-public-shared" value="0"> 비공개
-				</label>
-			</div>
-
-				
-			<div class="checkbox">
-				<label>
-					<input type="checkbox" data-bind="checked: shared "> 모두에게 공개
 				</label>
 			</div>
 			<p><small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></p>
