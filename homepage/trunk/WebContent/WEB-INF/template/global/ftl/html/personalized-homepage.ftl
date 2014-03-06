@@ -925,9 +925,10 @@
 							success : function( data ) {
 								if( data.photos.length > 0 ){
 									$("#photo-list-view").data( "photoPlaceHolder").shared = true ;
-									
+									$("input[name='photo-public-shared']").first().click();
 								}else{
-									
+									$("#photo-list-view").data( "photoPlaceHolder").shared = false ;
+									$("input[name='photo-public-shared']").last().click();
 								}
 							}
 						});					
@@ -936,7 +937,7 @@
 				 );	
 
 				$("input[name='photo-public-shared']").on("change", function () {					
-					alert( this.value );
+					alert("fdasfasd") ;
 				});				
 								
 				$("#update-photo-file").kendoUpload({
