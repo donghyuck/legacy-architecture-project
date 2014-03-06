@@ -892,9 +892,6 @@
 		
 			var renderToString =  "photo-panel-0";	
 			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
-			
-			
-			
 			if( $("#" + renderToString ).length == 0  ){			
 				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
 				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
@@ -932,6 +929,7 @@
 				 );		
 				
 				$("#update-photo-file").kendoUpload({
+					showFileList: false,
 					multiple: false,
 					async: {
 						saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
