@@ -359,7 +359,8 @@
 								selectable: "single",									
 								change: function(e) {									
 									var data = this.dataSource.view() ;
-									var item = data[this.select().index()];									
+									var item = data[this.select().index()];		
+									item.manupulate();							
 									item.index = this.select().index();			
 									item.page = $("#photo-list-pager").data("kendoPager").page();				
 									item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
