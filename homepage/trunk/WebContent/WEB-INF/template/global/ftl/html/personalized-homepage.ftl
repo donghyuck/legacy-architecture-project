@@ -493,8 +493,7 @@
 					var control_button_icon = control_button.find("i");				
 					if (control_button_icon.hasClass("fa-plus")){
 						control_button.click( function(e){								
-							// editer start .....							
-																	
+							// editer start .....																		
 							if( $( "#announce-creator" ).children().length < 1 ){
 								$("#announce-creator").data( "announcePlaceHolder" , new Announce() );	
 								var announcePlaceHolder = $("#announce-creator").data( "announcePlaceHolder" );	
@@ -1003,13 +1002,10 @@
 												
 		function previousPhoto (){
 			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;				
-			var previous_index = current_index - 1;	
-			
+			var previous_index = current_index - 1;				
 			var listView =  $('#photo-list-view').data('kendoListView');	
-			var list_view_pager = $("#photo-list-pager").data("kendoPager");
-			
+			var list_view_pager = $("#photo-list-pager").data("kendoPager");			
 			var current_page = list_view_pager.page();						
-			
 			if( current_index > 0 ){							
 				var item = listView.dataSource.view()[previous_index];				
 				item.index = previous_index;		
@@ -1029,27 +1025,49 @@
 		}
 		
 		function nextPhoto (){
-			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;
-			var next_index = current_index + 1;				
 			var listView =  $('#photo-list-view').data('kendoListView');
+			var list_view_pager = $("#photo-list-pager").data("kendoPager");			
+			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;
 			var total_index = listView.dataSource.view().length -1 ;
-			var list_view_pager = $("#photo-list-pager").data("kendoPager");
 			var current_page = list_view_pager.page();		
-			var total_page = list_view_pager.totalPages();
+			var total_page = list_view_pager.totalPages();			
+			if( current_index == total_index && ( total_page - current_page ) > 0 )
+			{
+				// move next page ;
+				list_view_pager.page(current_page + 1);
+			}else{
+				var next_index = current_index + 1;				
+				var item = listView.dataSource.view()[next_index];						
+				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;				
+				common.api.pager( item, next_index, total_index, current_page, total_page );
+				$("#photo-list-view").data( "photoPlaceHolder", item );
+				displayPhotoPanel( );
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			/*
+			
+			
 			alert( current_index + "/"  + total_index  + ", " + current_page + "/" + total_page );				
 									
+									
+									
 			if( current_index < total_index  ){
-				var item = listView.dataSource.view()[next_index];
+				
 				item.index = next_index;
 				item.page = current_page ;			
-				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;
-				item.previous = ( item.index > 0 || item.page > 1 ) ;
-				item.next = true ;	
+				item.photoUrl = '${request.contextPath}/community/view-my-image.do?imageId=' +item.imageId ;				
+				common.api.pager( item );
 				
-				if( total_index / current_index == 1 && total_page / current_page == 1 )
-					item.next = false;
-				
-				item.manupulate();									
+											
 				$("#photo-list-view").data( "photoPlaceHolder", item );
 				
 				displayPhotoPanel( );						
@@ -1063,7 +1081,7 @@
 					list_view_pager.page(current_page+1);
 					listView.select(listView.element.children().first());
 				}
-			}						
+			}						*/
 		}
 					
 		-->
