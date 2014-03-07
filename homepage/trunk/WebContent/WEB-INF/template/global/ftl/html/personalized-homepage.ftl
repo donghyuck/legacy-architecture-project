@@ -371,13 +371,9 @@
 									var data = this.dataSource.view() ;
 									var current_index = this.select().index();
 									var total_index = this.dataSource.view().length -1 ;
-									var list_view_pager = $("#photo-list-pager").data("kendoPager");			
-									
-									
+									var list_view_pager = $("#photo-list-pager").data("kendoPager");	
 									var item = data[current_index];			
-									alert( current_index + "/" + kendo.stringify(item));
 									item.manupulate();								
-									
 									common.api.pager(item, current_index,total_index, list_view_pager.page(), list_view_pager.totalPages());
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
 									displayPhotoPanel( ) ;										
@@ -386,7 +382,11 @@
 								template: kendo.template($("#photo-list-view-template").html()),								
 								dataBound: function(e) {;		
 								}
-							});														
+							}).one('dataBound', function(){  
+								this.select(this.element.children().first());
+							} );				
+							
+																	
 							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
 									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
 								}).on("mouseleave", ".img-wrapper", function(e) {
