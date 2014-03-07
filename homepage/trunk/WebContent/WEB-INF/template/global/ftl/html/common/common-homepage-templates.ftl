@@ -102,6 +102,9 @@
 				<input type="radio" name="photo-public-shared" value="0"> 비공개
 				</label>
 			</div>
+			
+			<div id="photo-prop-grid"></div>
+			
 			<p><small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></p>
 			<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />			
 		</div>	
