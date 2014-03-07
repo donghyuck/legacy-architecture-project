@@ -26,10 +26,6 @@
 				kendo.culture("ko-KR");
 				
 				// 2.  MEUN 설정
-				// START SCRIPT	
-				//$("#top-menu").kendoMenu();
-				//$("#top-menu").show();
-				
 				$('body nav').first().addClass('hide');										
 																																									
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
@@ -952,15 +948,24 @@
 					} )
 				 );	
 
-				$("input[name='photo-public-shared']").on("change", function () {					
-					
+				$("input[name='photo-public-shared']").on("change", function () {
 					var newValue = ( this.value == 1 ) ;
-					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;
+					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;					
 					if( oldValue != newValue){
-						// fixed ..
-						alert(oldValue + ">" + newValue ) ;
-					}
-					
+						if(newValue){
+							common.api.removeFromStreams({imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId
+								success : function( data ) {
+									kendo.stringify(data);
+								}
+							});							
+						}else{
+							common.api.removeFromStreams({imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId
+								success : function( data ) {
+									kendo.stringify(data);
+								}
+							});					
+						}
+					}					
 				});				
 								
 				$("#update-photo-file").kendoUpload({
