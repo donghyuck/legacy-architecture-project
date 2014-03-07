@@ -30,7 +30,11 @@ import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.struts2.action.UploadImageAction;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
-import architecture.user.CompanyAlreadyExistsException;
+
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.metadata.Directory;
+import com.drew.metadata.Metadata;
+import com.drew.metadata.Tag;
 
 public class MyImageAction extends UploadImageAction  {
 
@@ -128,8 +132,7 @@ public class MyImageAction extends UploadImageAction  {
 	
 	public List<Image> getTargetImages(){    	
     	if( getUser().getUserId() < 1 )
-    		return Collections.EMPTY_LIST;
-    	
+    		return Collections.EMPTY_LIST;    	
         if( pageSize > 0 ){
             return getImageManager().getImages(DEFAULT_OBJEDT_TYPE, getUser().getUserId(), startIndex, pageSize);            
         }else{            
@@ -146,9 +149,31 @@ public class MyImageAction extends UploadImageAction  {
 		if( image.getImageId() > 0)
 		{
 			
-			
-		}		
+		}	
 		return success();
+	}
+	
+	protected void extractMetadata( Image image , File file){
+		
+		// jpeg
+		Metadata metadata ;
+		if( "image/jpeg".equalsIgnoreCase(image.getContentType())){
+			metadata = JpegMetadataReader.readMetadata(file);
+		}else{
+			metadata = ImageMetadataReader.readMetadata(file);
+		}		
+		for (Directory direct :  metadata.getDirectories() ){
+			for( Tag tag : direct.getTags()	){
+				log.debug( "Tag(" +"\n" +
+				tag.getTagName() + "\n" +
+				tag.getDescription() + "\n" +
+				tag.getDirectoryName() + "\n" +
+				tag.getTagType() + "\n" +
+				tag.getTagTypeHex() + ")" 
+				);
+			}
+		}	
+		
 	}
 	
 	public String updateImage() throws Exception {		
@@ -156,21 +181,27 @@ public class MyImageAction extends UploadImageAction  {
 			Image imageToUse;
 			if( this.imageId < 0  ){	
 				File fileToUse = getUploadImage();			
+				
+
+				
 				imageToUse = getImageManager().createImage(
 					DEFAULT_OBJEDT_TYPE, 
 					getUser().getUserId(), 
 					getUploadImageFileName(), 
 					getUploadImageContentType(), 
 					fileToUse);	
-				this.imageId = getImageManager().saveImage(imageToUse).getImageId();	
+				this.imageId = getImageManager().saveImage(imageToUse).getImageId();					
 			}else{
 				imageToUse = getTargetImage();
 				File fileToUse = getUploadImage();			
+				
+				Metadata metadata = ImageMetadataReader.readMetadata(fileToUse);
+				
 				((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
 				((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
 				log.debug("image size:" + imageToUse.getSize());
 				log.debug("image stream:" + imageToUse.getInputStream());
-				getImageManager().saveImage(imageToUse);
+				getImageManager().saveImage(imageToUse);			
 			}		
 		}
 		return success();
@@ -186,7 +217,7 @@ public class MyImageAction extends UploadImageAction  {
 		return list;
 	}
 	
-	public String updateTargetImageProperty() throws Exception {		
+	public String updateImageProperties() throws Exception {		
 		Image group = getTargetImage();
 		Map<String, String> properties = group.getProperties();
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);		
@@ -199,7 +230,7 @@ public class MyImageAction extends UploadImageAction  {
 		return success();	
 	}
 	
-	public String deleteCompanyProperties() throws Exception {
+	public String deleteImageProperties() throws Exception {
 		Image group = getTargetImage();
 		Map<String, String> properties = group.getProperties();
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);
@@ -215,8 +246,9 @@ public class MyImageAction extends UploadImageAction  {
 	protected void updateTargetImageProperties(Image image, Map<String, String> properties) {
 		if (properties.size() > 0) {
 			image.setProperties(properties);
-			this.targetImage = image;
-			imageManager.saveImage(targetImage);
+			this.targetImage = image;			
+			imageManager.updateImageProperties(targetImage);
+			
 		}
 	}
 	
