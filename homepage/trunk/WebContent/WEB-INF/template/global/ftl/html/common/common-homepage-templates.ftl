@@ -95,7 +95,9 @@
 				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>				
 			</div>		
 			
-			<p class="text-primary">공개<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></p>
+			<div class="page-header text-primary">
+				<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>
+			</div>			
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary">
 				<input type="radio" name="photo-public-shared" value="1">모두에게 공개
@@ -105,12 +107,14 @@
 				</label>
 			</div>
 			
-			<div class="page-header">
-				<h5><i class="fa fa-upload"></i><strong>이미지 속성</strong></h5>
+			<div class="page-header text-primary">
+				<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 속성</strong></h5>
 			</div>
 			<div id="photo-prop-grid"></div>
-						
-			<p class="text-primary">이미지 변경<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></p>
+			
+			<div class="page-header text-primary">
+				<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 변경</strong>&nbsp;<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></h5>
+			</div>
 			<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />			
 		</div>	
 		<div class="panel-body block-space-0">			
