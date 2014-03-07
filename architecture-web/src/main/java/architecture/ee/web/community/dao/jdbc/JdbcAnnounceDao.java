@@ -27,7 +27,6 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-
 import architecture.ee.web.community.Announce;
 import architecture.ee.web.community.AnnounceNotFoundException;
 import architecture.ee.web.community.dao.AnnounceDao;

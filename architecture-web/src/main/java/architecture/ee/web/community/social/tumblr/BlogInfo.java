@@ -16,7 +16,6 @@
 package architecture.ee.web.community.social.tumblr;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class BlogInfo  implements Serializable  {
 

@@ -15,7 +15,6 @@
  */
 package architecture.ee.web.attachment.dao.impl;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,11 +27,9 @@ import org.springframework.jdbc.core.SqlParameterValue;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
 import architecture.common.jdbc.schema.DatabaseType;
-import architecture.common.util.io.SharedByteArrayOutputStream;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.dao.ImageDao;
 import architecture.ee.web.attachment.impl.ImageImpl;

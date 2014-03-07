@@ -33,7 +33,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 import architecture.common.util.StringUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.WebApplicatioinConstants;
-
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
 import freemarker.cache.TemplateLoader;

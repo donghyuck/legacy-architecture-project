@@ -19,8 +19,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import architecture.ee.web.community.social.tumblr.Photo;
 import architecture.ee.web.community.social.tumblr.ChatMessage;
+import architecture.ee.web.community.social.tumblr.Photo;
 import architecture.ee.web.community.social.tumblr.PhotoSize;
 import architecture.ee.web.community.social.tumblr.Post;
 import architecture.ee.web.community.social.tumblr.PostType;
