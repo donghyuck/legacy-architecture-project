@@ -953,13 +953,15 @@
 					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;					
 					if( oldValue != newValue){
 						if(newValue){
-							common.api.removeFromStreams({imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId
+							common.api.removeFromStreams({
+								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ) {
 									kendo.stringify(data);
 								}
 							});							
 						}else{
-							common.api.removeFromStreams({imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId
+							common.api.removeFromStreams({
+								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ) {
 									kendo.stringify(data);
 								}
