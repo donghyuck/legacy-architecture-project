@@ -62,6 +62,30 @@
 			</result>
 		</action>			
 
+		<action name="add-streams-photo" method="addImageToStreams" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash, targetImage.inputStream, targetImageContentLength, targetImageContentType, targetImageFileName, targetImageInputStream</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				targetImage.*
+				</param>
+			</result>
+		</action>	
+
+		<action name="remove-streams-photo" method="removeImageFromStreams" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash, targetImage.inputStream, targetImageContentLength, targetImageContentType, targetImageFileName, targetImageInputStream</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				targetImage.*
+				</param>
+			</result>
+		</action>	
+				
 		<action name="get-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
