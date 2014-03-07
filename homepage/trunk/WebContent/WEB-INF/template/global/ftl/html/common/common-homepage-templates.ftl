@@ -94,6 +94,8 @@
 			<div class="btn-group dropup" data-bind="visible: editable">
 				<button  type="button" class="btn btn-danger custom-delete"  data-bind="enabled: editable"><i class="fa fa-trash-o"></i> 삭제</button>				
 			</div>		
+			
+			<p class="text-primary">공개<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></p>
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary">
 				<input type="radio" name="photo-public-shared" value="1">모두에게 공개
@@ -103,10 +105,10 @@
 				</label>
 			</div>
 			
-			<h5>속성</h5>
+			<p class="text-primary">이미지 속성</p>
 			<div id="photo-prop-grid"></div>
-			
-			<h5>사진변경<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></h5>
+						
+			<p class="text-primary">이미지 변경<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></p>
 			<input name="update-photo-file" type="file" id="update-photo-file" data-bind="enabled: editable" class="pull-right" />			
 		</div>	
 		<div class="panel-body block-space-0">			
