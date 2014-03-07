@@ -16,7 +16,6 @@
 package architecture.ee.web.community.social.twitter;
 
 import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.Module.SetupContext;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 

@@ -18,7 +18,6 @@ package architecture.ee.web.community.social.facebook;
 import java.util.Date;
 import java.util.List;
 
-
 import com.opensymphony.module.sitemesh.Page;
 
 

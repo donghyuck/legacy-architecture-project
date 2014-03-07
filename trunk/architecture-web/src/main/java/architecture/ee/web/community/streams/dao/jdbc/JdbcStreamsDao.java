@@ -23,7 +23,6 @@ import java.util.List;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
-import architecture.common.user.User;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.Photo;

@@ -33,7 +33,6 @@ import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentNotFoundException;
 import architecture.ee.web.community.dao.ContentDao;
 import architecture.ee.web.community.impl.ContentImpl;
-import architecture.ee.web.community.template.Template;
 
 public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao {
 

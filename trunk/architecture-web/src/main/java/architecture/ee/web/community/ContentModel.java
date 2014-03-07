@@ -17,7 +17,6 @@ package architecture.ee.web.community;
 import architecture.common.model.v2.DateModel;
 import architecture.common.model.v2.EntityModel;
 import architecture.common.model.v2.PropertyModel;
-
 import architecture.common.user.User;
 
 public interface ContentModel extends EntityModel<Content>, DateModel, PropertyModel {

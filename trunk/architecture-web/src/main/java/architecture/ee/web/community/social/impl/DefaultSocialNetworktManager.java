@@ -28,16 +28,12 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.social.ServiceProviderFactory;
 import architecture.ee.web.community.social.SocialNetwork;
+import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.SocialServiceProvider;
-import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.dao.SocialNetworkDao;
-
-import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
-import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 
 public class DefaultSocialNetworktManager implements SocialNetworkManager {
 

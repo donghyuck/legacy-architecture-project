@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.template.dao;
+package architecture.ee;
 
-import java.util.List;
+import java.util.UUID;
 
-import architecture.ee.web.community.template.Template;
+import org.apache.commons.lang.RandomStringUtils;
+import org.junit.Test;
 
-public interface TemplateDao {
+public class uuidTest {
 
-	public Template createTemplate(Template content);
 	
-	public void deleteTemplate(Template content);	
-	
-	public void updateTemplate(Template content);
+	@Test
+	public void uuid(){
+		String str = "1" + '-' + "1" + "-" + "21";
 		
-	public Template getTemplate(long contentId);
 		
-	public List<Long> getTemplateIds(int objectType, long objectId);
-	
-	public List<Long> getTemplateIds(int objectType, long objectId, int startIndex, int numResults);
-	
-	public int getTemplateCount(int objectType, long objectId);
+		System.out.println( RandomStringUtils.random(64, true, true) );
 		
+	}
 }

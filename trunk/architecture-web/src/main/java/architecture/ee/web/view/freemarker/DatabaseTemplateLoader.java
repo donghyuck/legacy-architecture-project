@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.Collections;
 import java.util.List;
 
 import net.sf.ehcache.Cache;
