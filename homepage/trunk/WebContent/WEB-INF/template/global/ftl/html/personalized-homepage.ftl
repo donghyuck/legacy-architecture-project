@@ -945,7 +945,7 @@
 								}
 							}
 						});		
-						/**
+						
 						if( ! $('#photo-prop-grid').data("kendoGrid") ){
 							$('#photo-prop-grid').kendoGrid({
 								dataSource : {		
@@ -988,7 +988,7 @@
 							});		
 						}
 						$('#photo-prop-grid').data("kendoGrid").dataSource.read();
-						*/
+						
 						// start open event handler 
 					})													
 				);	
