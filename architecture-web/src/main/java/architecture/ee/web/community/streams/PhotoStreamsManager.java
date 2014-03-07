@@ -17,10 +17,12 @@ package architecture.ee.web.community.streams;
 
 import java.util.List;
 
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.PhotoNotFoundException;
 
 public interface PhotoStreamsManager {
 
+	public List<Photo> getPhotosByImage(Image image);
 	
 	public Photo getPhotoById(String externalId) throws PhotoNotFoundException ;	
 	
