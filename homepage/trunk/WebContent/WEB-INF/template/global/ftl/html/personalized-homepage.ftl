@@ -383,8 +383,8 @@
 								dataBound: function(e) {;		
 								}
 							}).one('dataBound', function(){  
-								this.select(this.element.children().first());
-							} );				
+								alert( "--" );
+							});				
 							
 																	
 							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
