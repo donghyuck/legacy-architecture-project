@@ -187,10 +187,8 @@ public class JdbcImageDao  extends ExtendedJdbcDaoSupport implements ImageDao {
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_IMAGE_DATA_BY_ID").getSql(), SqlQueryHelper.getInputStreamRowMapper(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));		
 	}
 	
-	public void saveImageInputStream(Image image, InputStream inputStream) {
-		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_IMAGE_DATA_BY_ID").getSql(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));
-		
+	public void saveImageInputStream(Image image, InputStream inputStream) {		
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.DELETE_IMAGE_DATA_BY_ID").getSql(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));		
 		if( getExtendedJdbcTemplate().getDatabaseType() == DatabaseType.oracle ){						
 			
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_EMPTY_IMAGE_DATA").getSql(), new SqlParameterValue (Types.NUMERIC, image.getImageId()));

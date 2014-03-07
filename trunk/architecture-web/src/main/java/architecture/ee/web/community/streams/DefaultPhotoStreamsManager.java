@@ -26,6 +26,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.AnonymousUser;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.dao.StreamsDao;
 import architecture.ee.web.community.streams.impl.PhotoImpl;
@@ -195,6 +196,14 @@ UUID.randomUUID().toString();
 
 	protected void updatePhotoInCache( Photo photo ){
 		photoStreamCache.put(new Element(photo.getExternalId(), photo));		
+	}
+
+
+
+
+	public List<Photo> getPhotosByImage(Image image) {
+		List<String> ids = streamsDao.getPhotoIdsByImage(image.getImageId());
+		return toPhotoList(ids);
 	}
 
 }

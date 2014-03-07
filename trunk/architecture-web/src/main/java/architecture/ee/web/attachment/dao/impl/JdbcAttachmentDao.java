@@ -145,7 +145,9 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 					new SqlParameterValue (Types.VARCHAR, toUse.getName() ), 
 					new SqlParameterValue (Types.INTEGER, toUse.getSize() ), 					
 					new SqlParameterValue(Types.DATE, toUse.getCreationDate()),
-					new SqlParameterValue(Types.DATE, toUse.getModifiedDate()));			
+					new SqlParameterValue(Types.DATE, toUse.getModifiedDate()));		
+		if(!attachment.getProperties().isEmpty())
+			setAttachmentProperties(attachment.getAttachmentId(), attachment.getProperties());	
 		
 		return toUse;
 		
