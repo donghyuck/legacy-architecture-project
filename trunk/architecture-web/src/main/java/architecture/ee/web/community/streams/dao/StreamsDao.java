@@ -17,6 +17,7 @@ package architecture.ee.web.community.streams.dao;
 
 import java.util.List;
 
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.Photo;
 
@@ -40,7 +41,9 @@ public interface StreamsDao {
 	
 	public void addPhoto(Photo photo) ;
 	
-	public void remove(Photo photo) ;
+	public void removePhoto(Photo photo) ;
+	
+	public void removePhotos(Image image) ;
 	
 	public int getPhotoCount();
 	

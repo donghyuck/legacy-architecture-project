@@ -20,6 +20,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang.RandomStringUtils;
+
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 import architecture.common.user.User;
@@ -33,13 +35,6 @@ import architecture.ee.web.community.streams.impl.PhotoImpl;
 
 public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 	
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO 자동 생성된 메소드 스텁
-UUID.randomUUID().toString();
-	}
 	
 	private Cache photoStreamCache;
 	
@@ -204,6 +199,23 @@ UUID.randomUUID().toString();
 	public List<Photo> getPhotosByImage(Image image) {
 		List<String> ids = streamsDao.getPhotoIdsByImage(image.getImageId());
 		return toPhotoList(ids);
+	}
+
+
+
+
+	public void addImage(Image image, User creator) {		
+		Photo photoToUse = new PhotoImpl(RandomStringUtils.random(64, true, true), image.getImageId(), true, creator);
+		this.streamsDao.addPhoto(photoToUse);		
+	}
+
+
+
+	public void deletePhotos(Image image, User creator) {
+		List<Photo> list = getPhotosByImage(image);
+		streamsDao.removePhotos(image);
+		for( Photo p : list)
+			photoStreamCache.remove(p.getExternalId());
 	}
 
 }
