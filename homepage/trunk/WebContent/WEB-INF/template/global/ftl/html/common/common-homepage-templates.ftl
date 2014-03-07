@@ -96,7 +96,7 @@
 			</div>		
 			
 			<div class="page-header text-primary">
-				<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>
+				<h5 ><i class="fa fa-share"></i>&nbsp;<strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>
 			</div>			
 			<div class="btn-group" data-toggle="buttons">
 				<label class="btn btn-primary">
@@ -108,7 +108,7 @@
 			</div>
 			
 			<div class="page-header text-primary">
-				<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 속성</strong></h5>
+				<h5 ><i class="fa fa-info"></i>&nbsp;<strong>이미지 속성</strong></h5>
 			</div>
 			<div id="photo-prop-grid"></div>
 			
