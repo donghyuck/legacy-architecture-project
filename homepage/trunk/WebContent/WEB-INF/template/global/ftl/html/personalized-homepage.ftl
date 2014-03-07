@@ -953,7 +953,7 @@
 					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;					
 					if( oldValue != newValue){
 						if(newValue){
-							common.api.removeFromStreams({
+							common.api.addToStreams({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ) {
 									kendo.stringify(data);
