@@ -69,6 +69,13 @@
 					}, 100);					
 				});
 				
+				
+				createPhotoListView();
+				$('#photo-list-view').data('kendoListView').one('dataBound', function(){
+				alert( "hello" );
+				
+				});
+				
 				/**
 								
 				$('#personalized-area').waypoint(function(direction){				
@@ -382,9 +389,7 @@
 								template: kendo.template($("#photo-list-view-template").html()),								
 								dataBound: function(e) {;		
 								}
-							}).one('dataBound', function(){  
-								alert( "--" );
-							});				
+							});	
 							
 																	
 							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
