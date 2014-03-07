@@ -987,7 +987,7 @@
 								}
 							});		
 						}
-						$('#photo-prop-grid').data("kendoGrid").dataSource.read();
+						//$('#photo-prop-grid').data("kendoGrid").dataSource.read();
 						
 						// start open event handler 
 					})													
