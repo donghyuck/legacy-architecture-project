@@ -24,6 +24,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.dao.StreamsDao;
@@ -76,10 +77,10 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 				new SqlParameterValue(Types.DATE, photo.getModifiedDate()));	
 	}
 
-	public void remove(Photo photo) {
+	public void removePhoto(Photo photo) {
 		getExtendedJdbcTemplate().update(
-				getBoundSql("ARCHITECTURE_WEB.DELETE_SOCIAL_ACCOUNT_BY_ID").getSql(), 	
-				new SqlParameterValue (Types.VARCHAR, photo.getCachedSize() ));		
+				getBoundSql("ARCHITECTURE_WEB.DELETE_STREAM_PHOTO_BY_ID").getSql(), 	
+				new SqlParameterValue (Types.VARCHAR, photo.getExternalId() ));		
 	}
 
 	public int getPhotoCount() {
@@ -135,6 +136,13 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 	public List<String> getPhotoIdsByImage(long imageId) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID").getSql(), 				
 				String.class, new SqlParameterValue (Types.NUMERIC, imageId ));	
+	}
+
+	public void removePhotos(Image image) {
+		getExtendedJdbcTemplate().update(
+				getBoundSql("ARCHITECTURE_WEB.DELETE_STREAM_PHOTOS_BY_IMAGE_ID").getSql(), 	
+				new SqlParameterValue (Types.NUMERIC, image.getImageId() ));		
+		
 	}
 
 }
