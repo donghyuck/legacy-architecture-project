@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.StringUtils;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
@@ -264,4 +265,22 @@ public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Pre
 		return getTargetImage().getSize();	
 	}
 	
+	public String addPublicStreams() throws Exception {
+		if(getUser().isAnonymous())
+			throw new UnAuthorizedException();
+		
+		Image imageToUse = this.getTargetImage();
+		getPhotoStreamsManager().addImage(imageToUse, getUser());
+		return success();
+    }
+	
+	public String removePublicStreams() throws Exception {
+		if(getUser().isAnonymous())
+			throw new UnAuthorizedException();
+						
+		Image imageToUse = this.getTargetImage();
+		getPhotoStreamsManager().deletePhotos(imageToUse, getUser());
+		
+		return success();
+    }
 }
