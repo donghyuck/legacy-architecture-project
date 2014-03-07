@@ -384,9 +384,7 @@
 								},
 								navigatable: false,
 								template: kendo.template($("#photo-list-view-template").html()),								
-								dataBound: function(e) {
-									var selectedCells = this.select();
-									this.select("tr:eq(1)");		
+								dataBound: function(e) {;		
 								}
 							});														
 							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
