@@ -70,9 +70,9 @@
 				});
 				
 				
+				// photo panel showing				
 				createPhotoListView();
 				$('#photo-list-view').data('kendoListView').one('dataBound', function(){
-				alert( "hello" );
 					this.select(this.element.children().first());
 				});
 				
