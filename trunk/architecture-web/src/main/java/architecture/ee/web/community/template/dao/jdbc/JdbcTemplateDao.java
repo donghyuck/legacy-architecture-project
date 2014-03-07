@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.template.dao.impl;
+package architecture.ee.web.community.template.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
