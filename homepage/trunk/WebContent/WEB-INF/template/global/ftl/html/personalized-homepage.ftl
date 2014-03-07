@@ -202,7 +202,7 @@
 												selectedStreams.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
 											}
 											selectedStreams.createDataSource({});											
-											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams )
+											$("#my-social-streams-grid").data(selectedCell.serviceProviderName + "-streams-" + selectedCell.socialAccountId , selectedStreams );
 										}
 										displaySocialPanel();
 									}							
@@ -371,6 +371,8 @@
 								navigatable: false,
 								template: kendo.template($("#photo-list-view-template").html()),								
 								dataBound: function(e) {
+									var selectedCells = this.select();
+									this.select("tr:eq(1)");		
 								}
 							});														
 							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
@@ -403,9 +405,12 @@
 												    },
 												    success : function(e) {								    
 														if( e.response.targetImage ){
-															e.response.targetImage.imageId;
+															//e.response.targetImage.imageId;
 															// LIST VIEW REFRESH...
-															$('#photo-list-view').data('kendoListView').dataSource.read();
+															var photo_list_view = $('#photo-list-view').data('kendoListView');
+															photo_list_view.dataSource.read();
+															var selectedCells = photo_list_view.select();
+															photo_list_view.select("tr:eq(1)");															
 														}				
 													}
 											});		
