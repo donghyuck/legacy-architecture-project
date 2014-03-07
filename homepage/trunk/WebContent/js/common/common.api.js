@@ -153,6 +153,7 @@
 		});	
 	}
 	
+	
 	common.api.photoStreamsDataSource = new kendo.data.DataSource({		
 		serverPaging: true,
 		pageSize: 15,
