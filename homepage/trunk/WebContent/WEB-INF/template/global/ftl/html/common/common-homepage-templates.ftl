@@ -105,7 +105,9 @@
 				</label>
 			</div>
 			
-			<p class="bg-primary">이미지 속성</p>
+			<div class="page-header">
+				<h5>이미지 속성</h5>
+			</div>
 			<div id="photo-prop-grid"></div>
 						
 			<p class="text-primary">이미지 변경<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></p>
