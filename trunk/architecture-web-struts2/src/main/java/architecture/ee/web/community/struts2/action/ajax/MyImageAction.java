@@ -17,6 +17,7 @@ package architecture.ee.web.community.struts2.action.ajax;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -32,6 +33,9 @@ import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
 
 import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.imaging.jpeg.JpegMetadataReader;
+import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
@@ -156,22 +160,27 @@ public class MyImageAction extends UploadImageAction  {
 	protected void extractMetadata( Image image , File file){
 		
 		// jpeg
-		Metadata metadata ;
-		if( "image/jpeg".equalsIgnoreCase(image.getContentType())){
-			metadata = JpegMetadataReader.readMetadata(file);
-		}else{
-			metadata = ImageMetadataReader.readMetadata(file);
-		}		
-		for (Directory direct :  metadata.getDirectories() ){
-			for( Tag tag : direct.getTags()	){
-				log.debug( "Tag(" +"\n" +
-				tag.getTagName() + "\n" +
-				tag.getDescription() + "\n" +
-				tag.getDirectoryName() + "\n" +
-				tag.getTagType() + "\n" +
-				tag.getTagTypeHex() + ")" 
-				);
+		try {
+			Metadata metadata ;
+			if( "image/jpeg".equalsIgnoreCase(image.getContentType())){
+				metadata = JpegMetadataReader.readMetadata(file);
+			}else{
+				metadata = ImageMetadataReader.readMetadata(file);
+			}		
+			for (Directory direct :  metadata.getDirectories() ){
+				for( Tag tag : direct.getTags()	){
+					log.debug( "Tag(" +"\n" +
+					tag.getTagName() + "\n" +
+					tag.getDescription() + "\n" +
+					tag.getDirectoryName() + "\n" +
+					tag.getTagType() + "\n" +
+					tag.getTagTypeHex() + ")" 
+					);
+				}
 			}
+			//image.getProperties();
+		} catch (Exception e) {
+			log.warn(e);
 		}	
 		
 	}
@@ -180,22 +189,22 @@ public class MyImageAction extends UploadImageAction  {
 		if(isMultiPart() ){
 			Image imageToUse;
 			if( this.imageId < 0  ){	
-				File fileToUse = getUploadImage();			
-				
-
-				
+				File fileToUse = getUploadImage();							
 				imageToUse = getImageManager().createImage(
 					DEFAULT_OBJEDT_TYPE, 
 					getUser().getUserId(), 
 					getUploadImageFileName(), 
 					getUploadImageContentType(), 
 					fileToUse);	
+				
+				extractMetadata( imageToUse, fileToUse);
+				
 				this.imageId = getImageManager().saveImage(imageToUse).getImageId();					
 			}else{
 				imageToUse = getTargetImage();
 				File fileToUse = getUploadImage();			
-				
-				Metadata metadata = ImageMetadataReader.readMetadata(fileToUse);
+
+				extractMetadata( imageToUse, fileToUse);
 				
 				((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
 				((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
