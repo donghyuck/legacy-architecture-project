@@ -932,7 +932,7 @@
 							}}
 						],						
 					}).bind('open', function( e ) {
-					
+						// start open event handler  	
 						common.api.getPhotoDetails({
 							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
 							success : function( data ) {
@@ -989,9 +989,9 @@
 						}
 						$('#photo-prop-grid').data("kendoGrid").dataSource.read();
 						*/
-					}								
+						// start open event handler 
+					})													
 				);	
-
 
 				$("input[name='photo-public-shared']").on("change", function () {
 					var newValue = ( this.value == 1 ) ;
