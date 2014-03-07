@@ -106,7 +106,7 @@
 			</div>
 			
 			<div class="page-header">
-				<h5><strong>이미지 속성</strong></h5>
+				<h5><i class="fa fa-upload"></i><strong>이미지 속성</strong></h5>
 			</div>
 			<div id="photo-prop-grid"></div>
 						
