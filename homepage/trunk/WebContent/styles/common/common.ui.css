@@ -101,6 +101,10 @@ button.btn-img {
 	box-shadow: 0 1px 1px 0px #dddddd;	
 }
 
+.panel-body .page-header { 
+	padding-left: 5px;	
+}
+
 .bg-flat {
 	background-color: #10c4b2 ;	
 	color: #ffffff;
