@@ -977,7 +977,7 @@
 								resizable: true,
 								editable : true,
 								scrollable: true,
-								height: 150,
+								height: 180,
 								toolbar: [
 									{ name: "create", text: "추가" },
 									{ name: "save", text: "저장" },
