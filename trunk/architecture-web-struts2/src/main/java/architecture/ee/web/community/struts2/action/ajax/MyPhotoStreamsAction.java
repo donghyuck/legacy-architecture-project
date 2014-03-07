@@ -29,7 +29,7 @@ import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class PhotoStreamsAction extends FrameworkActionSupport  implements Preparable  {
+public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Preparable  {
 
 	private PhotoStreamsManager photoStreamsManager ;
 
