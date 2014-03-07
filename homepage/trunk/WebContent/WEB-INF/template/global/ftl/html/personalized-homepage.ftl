@@ -372,7 +372,7 @@
 									var current_index = this.select().index();
 									var total_index = this.dataSource.view().length -1 ;
 									var list_view_pager = $("#photo-list-pager").data("kendoPager");			
-									var item = data[current_index];																		
+									var item = data[current_index];			
 									item.manupulate();								
 									common.api.pager(item, current_index,total_index, list_view_pager.page(), list_view_pager.totalPages());
 									$("#photo-list-view").data( "photoPlaceHolder", item );														
