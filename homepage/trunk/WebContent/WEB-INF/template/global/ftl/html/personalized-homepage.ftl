@@ -331,8 +331,18 @@
 								}								
 							});									
 						}
-					} else if(show_bs_tab.attr('href') == '#my-photo-stream' ){							
-						if( !$('#photo-list-view').data('kendoListView') ){
+					} else if(show_bs_tab.attr('href') == '#my-photo-stream' ){					
+						createPhotoListView();
+					}					
+				});
+
+				$('#myTab a:first').tab('show') ;
+				// END SCRIPT 
+			}
+		}]);	
+		
+		function createPhotoListView(){
+			if( !$('#photo-list-view').data('kendoListView') ){
 							$("#photo-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
@@ -426,13 +436,7 @@
 								}								
 							});
 						}
-					}					
-				});
-
-				$('#myTab a:first').tab('show') ;
-				// END SCRIPT 
-			}
-		}]);	
+		}
 		
 		function createNoticeGrid(){
 			if( !$("#announce-grid").data('kendoGrid') ){
