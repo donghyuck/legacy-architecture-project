@@ -117,6 +117,42 @@
 		return item;
 	}
 	
+	common.api.addToStreams = function (options){
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url || '/community/add-streams-photo.do?output=json' ,
+			data: { imageId : options.imageId },
+			success : function(response){
+				if( response.error ){ 												
+					options.fail(response) ;
+				} else {					
+					options.success(response) ;					
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	}
+
+	common.api.removeFromStreams = function (options){
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url || '/community/remove-streams-photo.do?output=json' ,
+			data: { imageId : options.imageId },
+			success : function(response){
+				if( response.error ){ 												
+					options.fail(response) ;
+				} else {					
+					options.success(response) ;					
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	}
+	
 	common.api.photoStreamsDataSource = new kendo.data.DataSource({		
 		serverPaging: true,
 		pageSize: 15,
