@@ -16,10 +16,17 @@
 			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {	
 				<#if action.userProfile?exists >
-					// 인증 성공..
-					${ action.getOnetime() }
+					// 1. 인증 성공..
+					var onetime = ${ action.getOnetime() }
+					<#if action.user.anonymous >			
+						// 1-1. 로그인 필요. 
+						${user.company.domainName}
+					<#else>		
+						// 1-1. 이미 로그인됨.
+						
+					</#if>
 				<#else>	
-					// 인증 실패..
+					// 2. 인증 실패..
 				</#if>
 			}	
 		}]);
