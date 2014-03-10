@@ -14,18 +14,19 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.min.js'],
-			complete: function() {							
-			
+			complete: function() {	
+				
 			<#if action.userProfile?exists >
-			var onetimeCode = "${action.oneTimeSecureCode}";	
+				<# setOnetimeSecureObject >
+				var onetimeCode = "${action.onetime}";	
 			<#else>	
-			var onetimeCode = null;					
-			</#if>	
-					
+				var onetimeCode = null;					
+			</#if>
+								
 			<#if action.user.anonymous >			
 				<#if action.findUser()?exists >					
 				if( typeof window.opener.handleCallbackResult == "function"){			
-					window.opener.handleCallbackResult("facebook", onetimeCode, true);
+					window.opener.handleCallbackResult("${media}", onetimeCode, true);
 					window.close();						
 				}else if( typeof window.opener.signupCallbackResult == "function"){			
 					window.opener.signupCallbackResult("facebook", onetimeCode, true);
@@ -97,7 +98,7 @@
 		
 		</script>		
 	</head>
-	<body class="color3">						
+	<body class="color7">						
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">						
