@@ -52,7 +52,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	private String accessToken;
 	private UserManager userManager;
 	private Cache socialOnetimeCache;
-	private String onetime ;
+	private String onetime = null ;
 	private Object userProfile = null;
 	private User foundUser = null;
 	
