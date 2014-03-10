@@ -17,7 +17,7 @@
 			complete: function() {	
 				
 			<#if action.userProfile?exists >
-				<# setOnetimeSecureObject >
+				<# action.setOnetimeSecureObject >
 				var onetimeCode = "${action.onetime}";	
 			<#else>	
 				var onetimeCode = null;					
