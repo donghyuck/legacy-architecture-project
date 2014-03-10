@@ -15,6 +15,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {	
+			${action.referer}
 				<#if action.userProfile?exists >
 					// 1. 인증 성공..
 					var onetime = ${ action.getOnetime() }
