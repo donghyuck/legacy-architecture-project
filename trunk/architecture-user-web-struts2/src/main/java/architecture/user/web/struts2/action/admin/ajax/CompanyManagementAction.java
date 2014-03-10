@@ -127,7 +127,7 @@ public class CompanyManagementAction extends FrameworkActionSupport  {
 		String displayName = (String)map.get("displayName");
 		String description = (String)map.get("description");
 		String domainName = (String)map.get("domainName");
-		this.targetCompany = companyManager.createCompany(name, displayName, description);
+		this.targetCompany = companyManager.createCompany(name, displayName, domainName, description);
 		return success();	
 	}
 
