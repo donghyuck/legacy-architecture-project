@@ -17,6 +17,7 @@
 			complete: function() {	
 				<#if action.userProfile?exists >
 					// 인증 성공..
+					${action.getOnetime() }
 				<#else>	
 					// 인증 실패..
 				</#if>
