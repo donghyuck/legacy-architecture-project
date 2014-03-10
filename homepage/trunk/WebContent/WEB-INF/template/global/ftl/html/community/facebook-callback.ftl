@@ -20,7 +20,7 @@
 					var onetime = ${ action.getOnetime() }
 					<#if action.user.anonymous >			
 						// 1-1. 로그인 필요. 
-						${action.user.company.domainName}
+						${action.user.company.name}
 					<#else>		
 						// 1-1. 이미 로그인됨.
 						
