@@ -15,8 +15,11 @@
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {	
-				
-					
+				<#if action.userProfile?exists >
+					// 인증 성공..
+				<#else>	
+					// 인증 실패..
+				</#if>
 			}	
 		}]);
 		
