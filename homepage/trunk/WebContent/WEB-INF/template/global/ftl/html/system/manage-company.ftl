@@ -426,7 +426,7 @@
 					$(".menu-details").hide();
 					$("#menu-window").kendoWindow({								
 						actions:  [ "Minimize", "Maximize", "Close"],
-						resizable: false,
+						resizable: true,
 						modal: true,
 						visible: false,
 						title: '메뉴'
