@@ -18,7 +18,7 @@
 				
 			<#if action.userProfile?exists >
 				<# action.setOnetimeSecureObject >
-				var onetimeCode = "${action.onetime}";	
+				var onetimeCode = "${action.getOnetime()}";	
 			<#else>	
 				var onetimeCode = null;					
 			</#if>
