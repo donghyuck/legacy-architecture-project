@@ -439,7 +439,7 @@
 				left: 15,
 				width: 800
 			});		
-			menuWindow.maximize();
+			//menuWindow.maximize();
 			menuWindow.open();	
 		}
 		
