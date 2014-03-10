@@ -33,10 +33,6 @@ public class TumblrCallbackAction extends SocialCallbackSupport {
 	private String oauth_token;
 	
 	private String oauth_verifier;
-
-	private UserInfo userProfile = null;
-	
-	private User foundUser = null;
 	
 	/**
 	 * @return oauth_token
@@ -76,27 +72,13 @@ public class TumblrCallbackAction extends SocialCallbackSupport {
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);			
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
-			if( getUserProfile()!=null){
-				signIn();
-			}
+			restoreOnetimeSecureObject();
 		}		
 		return success();
 	}
 	
 
 	public User findUser() {		
-		if( this.foundUser == null){
-			TwitterProfile profileToUse = (TwitterProfile)getUserProfile();
-			if( profileToUse != null ){
-				SocialNetwork found = findSocialNetworkByUsername( Media.TWITTER, Long.toString( profileToUse.getId() ));
-				if( found != null )
-					try {
-						this.foundUser = getUserManager().getUser(found.getObjectId());
-					} catch (UserNotFoundException e) {
-						log.error(e);
-					}
-			}
-		}
-		return this.foundUser;
+		return this.findUserByMedia(Media.TUMBLR);
 	}	
 }

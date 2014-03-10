@@ -19,17 +19,15 @@ import org.apache.commons.lang.StringUtils;
 import org.scribe.model.Token;
 
 import architecture.common.user.User;
-import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
-import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
 public class FacebookCallbackAction  extends SocialCallbackSupport {
 	
 	private String code;
-	private User foundUser = null;
+	
 	/**
 	 * @return code
 	 */
@@ -44,8 +42,8 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 		this.code = code;
 	}
 	
-	public String execute() throws Exception {
-		
+	public String execute() throws Exception {		
+		// Facebook response with code value ..
 		if( StringUtils.isNotEmpty(code) ){
 			SocialNetwork newSocialNetwork = newSocialNetwork(Media.FACEBOOK);			
 			FacebookServiceProvider provider = (FacebookServiceProvider) newSocialNetwork.getSocialServiceProvider();			
@@ -54,27 +52,13 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);		
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
-			if( getUserProfile()!=null){
-				signIn();
-			}
+			restoreOnetimeSecureObject();
 		}		
 		return success();
 	}
 
 	@Override
 	public User findUser() {		
-		if( this.foundUser == null){
-			FacebookProfile profileToUse = (FacebookProfile)getUserProfile();
-			if( profileToUse != null ){
-				SocialNetwork found = findSocialNetworkByUsername( Media.FACEBOOK, profileToUse.getId());
-				if( found != null )
-					try {
-						this.foundUser = getUserManager().getUser(found.getObjectId());
-					} catch (UserNotFoundException e) {
-						log.error(e);
-					}
-			}
-		}
-		return this.foundUser;
+		return this.findUserByMedia(Media.FACEBOOK);
 	}
 }

@@ -265,7 +265,7 @@ public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Pre
 		return getTargetImage().getSize();	
 	}
 	
-	public String addPublicStreams() throws Exception {
+	public String addImageToStreams() throws Exception {
 		if(getUser().isAnonymous())
 			throw new UnAuthorizedException();
 		
@@ -274,7 +274,7 @@ public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Pre
 		return success();
     }
 	
-	public String removePublicStreams() throws Exception {
+	public String removeImageFromStreams() throws Exception {
 		if(getUser().isAnonymous())
 			throw new UnAuthorizedException();
 						

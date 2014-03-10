@@ -24,6 +24,7 @@ import javax.servlet.http.HttpSession;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -50,7 +51,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	private String accessSecret;	
 	private String accessToken;
 	private UserManager userManager;
-	private Cache socialStreamsCache;
+	private Cache socialOnetimeCache;
 	private String onetime ;
 	private Object userProfile = null;
 	private User foundUser = null;
@@ -69,18 +70,20 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		this.onetime = onetime;
 	}
 
+	
+
 	/**
-	 * @return socialStreamsCache
+	 * @return socialOnetimeCache
 	 */
-	public Cache getSocialStreamsCache() {
-		return socialStreamsCache;
+	public Cache getSocialOnetimeCache() {
+		return socialOnetimeCache;
 	}
 
 	/**
-	 * @param socialStreamsCache 설정할 socialStreamsCache
+	 * @param socialOnetimeCache 설정할 socialOnetimeCache
 	 */
-	public void setSocialStreamsCache(Cache socialStreamsCache) {
-		this.socialStreamsCache = socialStreamsCache;
+	public void setSocialOnetimeCache(Cache socialOnetimeCache) {
+		this.socialOnetimeCache = socialOnetimeCache;
 	}
 
 	/**
@@ -114,20 +117,15 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	/**
 	 * @return socialNetwork
 	 */
-	public SocialNetwork getSocialNetwork() {
-		if( socialNetwork == null ){
-			if( StringUtils.isNotEmpty(onetime)){
-				socialNetwork = (SocialNetwork)getOneTimeSecureObject();			
-			}
-		}		
+	public SocialNetwork getSocialNetwork() {	
 		return socialNetwork;
 	}
 
 	/**
 	 * @param socialNetwork 설정할 socialNetwork
 	 */
-	public void setSocialNetwork(SocialNetwork socialNetwork) {		
-		this.socialNetwork = socialNetwork;
+	public void setSocialNetwork(SocialNetwork socialNetwork) {				
+		this.socialNetwork = socialNetwork;		
 		this.accessSecret = socialNetwork.getAccessSecret();
 		this.accessToken = socialNetwork.getAccessToken();		
 		socialNetwork.getSocialServiceProvider().setAccessToken(socialNetwork.getAccessToken());
@@ -177,15 +175,82 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	}
 	
 	public abstract User findUser();
-		
+	
+	public boolean signIn() {		
+		User userToUse = findUser();
+		log.debug("try ... single sign on ............" + userToUse.getUserId());
+		if( userToUse != null ){			
+			createSecurityContext(userToUse);			
+			UserTemplate template = new UserTemplate(userToUse);
+			template.setLastLoggedIn(new Date());				
+			try {
+				userManager.updateUser(template);
+			} catch (Exception e) {} 			
+			
+			return true;
+		}else{
+			return false;		
+		}
+	}
+	
+	private void createSecurityContext(User userToUse) {				
+		if( userToUse.getUserId() > 0 ){
+			ExtendedUserDetailsService detailsService = getComponent(ExtendedUserDetailsService.class);
+			UserDetails details = detailsService.loadUserByUsername(userToUse.getUsername());
+			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
+			SecurityContextImpl context = new SecurityContextImpl ();
+			context.setAuthentication(authentication);				
+			SecurityContextHolder.setContext( context );			
+			HttpSession httpsession = request.getSession(true);
+			httpsession.setAttribute("SPRING_SECURITY_CONTEXT", context);		
+		}
+	} 
+	
+	public Object getOnetimeSecureObject(){
+		Object obj = socialOnetimeCache.get(onetime);
+		if( obj != null ){
+			return ((Element)obj).getValue();
+		}
+		return null;
+	}
+
+	protected void restoreOnetimeSecureObject(){
+		if( StringUtils.isNotEmpty(this.onetime) ){
+			this.userProfile = getOnetimeSecureObject();				
+		}
+	}
+	
+	protected void setOnetimeSecureObject() {
+		if(this.socialNetwork  != null ){
+			if( StringUtils.isEmpty( this.onetime )){
+				this.onetime = createOnetimeCode();
+			}
+			socialOnetimeCache.put(new Element(this.onetime, this.socialNetwork ));	
+		}
+	}
+	
+	/**
+	 * 랜덤 키를 생성하여 린턴한다.
+	 * @return
+	 */
+	protected String createOnetimeCode(){
+		return RandomStringUtils.random(64, true, true);		
+	}
+	
+	/**
+	 * 소셜 미디어 인자에 따라 로컬 사용자를 검색한다.
+	 * 
+	 * @param media
+	 * @return
+	 */
 	protected User findUserByMedia(Media media) {		
 		if( this.foundUser == null){
 			UserProfile profileToUse = (UserProfile)getUserProfile();
 			if( profileToUse != null ){
-				SocialNetwork found = findSocialNetworkByUsername( media, profileToUse.getPrimaryKeyString());
-				if( found != null )
+				SocialNetwork socialNetworkToUse = findSocialNetworkByUsername( media, profileToUse.getPrimaryKeyString());
+				if( socialNetworkToUse != null )
 					try {
-						this.foundUser = getUserManager().getUser(found.getObjectId());
+						this.foundUser = getUserManager().getUser(socialNetworkToUse.getObjectId());
 					} catch (UserNotFoundException e) {
 						log.error(e);
 					}
@@ -193,12 +258,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		}
 		return this.foundUser;
 	}
-			
-	protected  List<SocialNetwork> findSocialNetworksByUsername(String username){				
-		int objectType = ModelTypeFactory.getTypeIdFromCode("USER") ;
-		return socialNetworkManager.getSocialNetworks(objectType, username);		
-	}
-	
+
 	protected  SocialNetwork findSocialNetworkByUsername(Media media, String username ){		
 		List<SocialNetwork> list = findSocialNetworksByUsername(username);
 		SocialNetwork found = null;
@@ -212,46 +272,15 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		return found;
 	}
 	
-	protected void createSecurityContext(User userToUse) {				
-		if( userToUse.getUserId() > 0 ){
-			ExtendedUserDetailsService detailsService = getComponent(ExtendedUserDetailsService.class);
-			UserDetails details = detailsService.loadUserByUsername(userToUse.getUsername());
-			UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(details, null, details.getAuthorities());
-			SecurityContextImpl context = new SecurityContextImpl ();
-			context.setAuthentication(authentication);				
-			SecurityContextHolder.setContext( context );			
-			HttpSession httpsession = request.getSession(true);
-			httpsession.setAttribute("SPRING_SECURITY_CONTEXT", context);		
-		}
-	} 
-	
-	public boolean signIn() {		
-		User userToUse = findUser();
-		log.debug("try ... single sign on ............" + userToUse.getUserId());
-		if( userToUse != null ){			
-			createSecurityContext(userToUse);			
-			UserTemplate template = new UserTemplate(userToUse);
-			template.setLastLoggedIn(new Date());				
-			try {
-				userManager.updateUser(template);
-			} catch (Exception e) {} 			
-			return true;
-		}
-		return false;		
+	/**
+	 * 인자로 전달된 ID 값에 해당하는 쇼셜네트워크 연결정보가 존재하는 가를 검색한다.
+	 * @param username
+	 * @return
+	 */
+	protected  List<SocialNetwork> findSocialNetworksByUsername(String username){				
+		int objectType = ModelTypeFactory.getTypeIdFromCode("USER") ;
+		return socialNetworkManager.getSocialNetworks(objectType, username);
 	}
 	
-	public Object getOneTimeSecureObject(){
-		Object obj = socialStreamsCache.get( "onetime-" + onetime);
-		if( obj != null ){
-			return ((Element)obj).getValue();
-		}
-		return null;
-	}
-	
-	public String getOneTimeSecureCode(){
-		String uuid = UUID.randomUUID().toString();
-		socialStreamsCache.put(new Element( "onetime-" + uuid, getSocialNetwork()));		
-		return uuid;
-	}
 	
 }
