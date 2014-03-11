@@ -46,18 +46,22 @@
 									id : "${action.userProfile.id}",
 									name: "${action.userProfile.name}"
 								}
-							}));							
-							$('.alert button i.fa-check').click( function() {
-							alert("fdsa") ;
-								if(typeof window.opener.handleCallbackResult == "function"){		
-									window.opener.handleCallbackResult("facebook", onetime , false);	
-								}else if( typeof window.opener.signupCallbackResult == "function"){			
-									window.opener.signupCallbackResult("facebook", onetime, false);
-								} else {
-									window.opener.location.href = "${request.contextPath}/accounts/signup.do";
-								}		
-								window.close();								
-							});							
+							}));				
+										
+							var timer = setInterval(function () {
+								$('.alert button i.fa-check').click( function() {													
+									if(typeof window.opener.handleCallbackResult == "function"){		
+										window.opener.handleCallbackResult("facebook", onetime , false);	
+									}else if( typeof window.opener.signupCallbackResult == "function"){			
+										window.opener.signupCallbackResult("facebook", onetime, false);
+									} else {
+										window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+									}		
+									window.close();							
+								});		        
+								clearInterval(timer);
+	    					}, 300);			
+						
 							</#if>
 						<#else>
 						
@@ -68,6 +72,9 @@
 				</#if>
 			}	
 		}]);		
+		
+		 
+		
 		</script>		
 	</head>
 	<body class="color7">						
