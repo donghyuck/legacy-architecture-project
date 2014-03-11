@@ -10,7 +10,7 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			'${request.contextPath}/js/common/common.models.min.js',
+			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.min.js'],
@@ -24,9 +24,9 @@
 					<#if before_domain !=  after_domain >
 						${response.sendRedirect("http://" + before_domain + "/community/facebook-callback.do?onetime=" + onetime  )}						
 					<#else>						
+						var onetime = '${onetime}' ;
 						<#if action.user.anonymous >
-							// is anonymous
-							var onetime = '${onetime}' ;
+							// is anonymous							
 							<#if action.findUser()?exists >
 							// is connected 						
 							if(typeof window.opener.handleCallbackResult == "function"){		
@@ -46,8 +46,18 @@
 									id : "${action.userProfile.id}",
 									name: "${action.userProfile.name}"
 								}
-							}));
-							
+							}));							
+							$('.alert button i.fa-check').on('click', function() {
+								if(typeof window.opener.handleCallbackResult == "function"){		
+										window.opener.handleCallbackResult("facebook", onetime , false);
+										window.close();	
+								}else if( typeof window.opener.signupCallbackResult == "function"){			
+									window.opener.signupCallbackResult("facebook", onetime, false);
+								} else {
+										window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+										window.close();
+								}								
+							});							
 							</#if>
 						<#else>
 						
@@ -71,7 +81,8 @@
 		<script type="text/x-kendo-template" id="account-not-found-alert-template">
 			<div class="alert alert-info alert-dismissable">
 				<img class="media-object img-circle" src="http://graph.facebook.com/#=user.id#/picture" alt="프로파일 이미지">
-				<p>연결되지 않는 #=media# 계정입니다. 회원가입을 하시겠습니까?  <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp; 예</button> <button type="button" class="btn btn-info" onclick="javascript: window.close();">아니오</button></p>	
+				<p>연결되지 않는 #=media# 계정입니다. 회원가입을 하시겠습니까?</p>
+				<p class="pull-right"> <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp; 예</button> <button type="button" class="btn btn-info" onclick="javascript: window.close();">아니오</button></p>	
 			</div>
 		</script>
 		
