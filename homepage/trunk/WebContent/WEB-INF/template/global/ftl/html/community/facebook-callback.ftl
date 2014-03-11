@@ -49,14 +49,13 @@
 							}));							
 							$('.alert button i.fa-check').on('click', function() {
 								if(typeof window.opener.handleCallbackResult == "function"){		
-										window.opener.handleCallbackResult("facebook", onetime , false);
-										window.close();	
+									window.opener.handleCallbackResult("facebook", onetime , false);	
 								}else if( typeof window.opener.signupCallbackResult == "function"){			
 									window.opener.signupCallbackResult("facebook", onetime, false);
 								} else {
-										window.opener.location.href = "${request.contextPath}/accounts/signup.do";
-										window.close();
-								}								
+									window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+								}		
+								window.close();								
 							});							
 							</#if>
 						<#else>
