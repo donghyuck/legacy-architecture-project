@@ -46,12 +46,7 @@
 									id : "${action.userProfile.id}",
 									name: "${action.userProfile.name}"
 								}
-							}));				
-										
-							var timer = setInterval(function () {
-	        
-								clearInterval(timer);
-	    					}, 300);			
+							}));					
 							$('.alert button').first().click( function() {													
 								if(typeof window.opener.handleCallbackResult == "function"){		
 									window.opener.handleCallbackResult("facebook", onetime , false);	
