@@ -15,12 +15,18 @@
 			'${request.contextPath}/js/common/common.ui.min.js',
 			'${request.contextPath}/js/common/common.classie.min.js'],
 			complete: function() {	
-			${action.referer}
+			
 				<#if action.userProfile?exists >
+					<#assign before_domain = ServletUtils.getDomainName(action.referer, false) >
+					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 					// 1. 인증 성공..
 					var onetime = ${ action.getOnetime() }
-					var domain0 = ${ServletUtils.getDomainName(action.referer, false)} 
-					var domain2 =${ServletUtils.getDomainName( request.getRequestURL().toString() , false)} 
+					var domain0 = ${before_domain} 
+					var domain2 =${after_domain} 
+					
+					<#if before_domain !=  after_domain >
+						${response.sendRedirect("http://" + before_domain + "/community/facebook-callback.do?onetime=" + onetime  )}
+					</#if>
 					var domain2 = ${action.referer}
 					<#if action.user.anonymous >			
 						// 1-1. 로그인 필요. 
