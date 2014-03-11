@@ -71,7 +71,7 @@
 		<script type="text/x-kendo-template" id="account-not-found-alert-template">
 			<div class="alert alert-info alert-dismissable">
 				<img class="media-object img-circle" src="http://graph.facebook.com/#=user.id#/picture" alt="프로파일 이미지">
-				<p>연결되지 않는 #=media# 계정입니다. 회원가입을 하시겠습니까?  <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp; 예</button></p>	
+				<p>연결되지 않는 #=media# 계정입니다. 회원가입을 하시겠습니까?  <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp; 예</button> <button type="button" class="btn btn-info">아니오</button></p>	
 			</div>
 		</script>
 		
