@@ -19,8 +19,8 @@
 				<#if action.userProfile?exists >
 					// 1. 인증 성공..
 					var onetime = ${ action.getOnetime() }
-					var domain0 = ${ServletUtils.getDomainName(request, false)} 
-					var domain2 = ${request.getRequestURL()}
+					var domain0 = ${ServletUtils.getDomainName(action.referer, false)} 
+					var domain2 =${ServletUtils.getDomainName( request.getRequestURL().toString() , false)} 
 					var domain2 = ${action.referer}
 					<#if action.user.anonymous >			
 						// 1-1. 로그인 필요. 
