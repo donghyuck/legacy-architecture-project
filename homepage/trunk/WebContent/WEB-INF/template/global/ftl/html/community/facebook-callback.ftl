@@ -48,6 +48,7 @@
 								}
 							}));							
 							$('.alert button i.fa-check').click( function() {
+							alert("fdsa") ;
 								if(typeof window.opener.handleCallbackResult == "function"){		
 									window.opener.handleCallbackResult("facebook", onetime , false);	
 								}else if( typeof window.opener.signupCallbackResult == "function"){			
