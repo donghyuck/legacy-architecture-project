@@ -49,19 +49,19 @@
 							}));				
 										
 							var timer = setInterval(function () {
-								$('.alert button i.fa-check').click( function() {													
-									if(typeof window.opener.handleCallbackResult == "function"){		
-										window.opener.handleCallbackResult("facebook", onetime , false);	
-									}else if( typeof window.opener.signupCallbackResult == "function"){			
-										window.opener.signupCallbackResult("facebook", onetime, false);
-									} else {
-										window.opener.location.href = "${request.contextPath}/accounts/signup.do";
-									}		
-									window.close();							
-								});		        
+	        
 								clearInterval(timer);
 	    					}, 300);			
-						
+							$('.alert button').first().click( function() {													
+								if(typeof window.opener.handleCallbackResult == "function"){		
+									window.opener.handleCallbackResult("facebook", onetime , false);	
+								}else if( typeof window.opener.signupCallbackResult == "function"){			
+									window.opener.signupCallbackResult("facebook", onetime, false);
+								} else {
+									window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+								}		
+								window.close();							
+							});							
 							</#if>
 						<#else>
 						
