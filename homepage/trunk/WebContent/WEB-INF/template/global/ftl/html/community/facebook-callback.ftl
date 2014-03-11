@@ -17,31 +17,33 @@
 			complete: function() {	
 			
 				<#if action.userProfile?exists >
+					<#assign onetime = action.onetime >
 					<#assign before_domain = ServletUtils.getDomainName(action.referer, false) >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
-					// 1. 인증 성공..
-					var onetime = ${ action.getOnetime() }
-					var domain0 = ${before_domain} 
-					var domain2 =${after_domain} 
-					
+					// 1. 인증 성공
 					<#if before_domain !=  after_domain >
-						${response.sendRedirect("http://" + before_domain + "/community/facebook-callback.do?onetime=" + onetime  )}
-					</#if>
-					var domain2 = ${action.referer}
-					<#if action.user.anonymous >			
-						// 1-1. 로그인 필요. 
-						${action.user.company.name}
-					<#else>		
-						// 1-1. 이미 로그인됨.
-						
+						${response.sendRedirect("http://" + before_domain + "/community/facebook-callback.do?onetime=" + onetime  )}						
+					<#else>							
+						var onetime = '${onetime}' ;
+						<#if action.user.anonymous >
+							// is anonymous
+							<#if action.findUser()?exists >						
+							if(typeof window.opener.handleCallbackResult == "function"){		
+								window.opener.handleCallbackResult("facebook", onetime , true);
+								window.close();						
+							}else if( typeof window.opener.signupCallbackResult == "function"){			
+								window.opener.signupCallbackResult("facebook", onetime, true);
+							}else{
+							
+							}								
+							</#if>
+						</#if>
 					</#if>
 				<#else>	
 					// 2. 인증 실패..
 				</#if>
 			}	
-		}]);
-		
-		
+		}]);		
 		</script>		
 	</head>
 	<body class="color7">						
