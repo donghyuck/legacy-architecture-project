@@ -43,7 +43,7 @@
 							$("#status").html(template({
 								media: "facebook",
 								user : {
-									id : "${action.userProfile.name}",
+									id : "${action.userProfile.id}",
 									name: "${action.userProfile.name}"
 								}
 							}));
@@ -69,12 +69,10 @@
 			</div>
 		</div>		
 		<script type="text/x-kendo-template" id="account-not-found-alert-template">
-		<!--
 			<div class="alert alert-info alert-dismissable">
 				<p>#= user.name #는  연결되지 않는 #=media# 계정입니다.</p>	
 				<img class="media-object img-circle" src="http://graph.facebook.com/#=user.id#/picture" alt="프로파일 이미지">
 			</div>
-		-->
 		</script>
 		
 		
