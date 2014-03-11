@@ -20,7 +20,7 @@
 					// 1. 인증 성공..
 					var onetime = ${ action.getOnetime() }
 					var domain0 = ${ServletUtils.getDomainName(request, false)} 
-					var domain2 = ${request.getRequestURI()}
+					var domain2 = ${request.getRemoteHost()}
 					var domain2 = ${action.referer}
 					<#if action.user.anonymous >			
 						// 1-1. 로그인 필요. 
