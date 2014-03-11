@@ -51,6 +51,7 @@
 								if(typeof window.opener.handleCallbackResult == "function"){		
 									window.opener.handleCallbackResult("facebook", onetime , false);	
 								}else if( typeof window.opener.signupCallbackResult == "function"){			
+									// goto signup
 									window.opener.signupCallbackResult("facebook", onetime, false);
 								} else {
 									window.opener.location.href = "${request.contextPath}/accounts/signup.do";
