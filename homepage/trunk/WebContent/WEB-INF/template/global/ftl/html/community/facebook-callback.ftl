@@ -40,7 +40,11 @@
 							<#else>
 							// is not connected 
 							var template = kendo.template($('#account-not-found-alert-template').html());
-							$("#status").html(template({media: "facebook"}));
+							$("#status").html(template({
+								media: "facebook",
+								id : "${action.userProfile.name}",
+								name: "${action.userProfile.name}"
+							}));
 							
 							</#if>
 						<#else>
