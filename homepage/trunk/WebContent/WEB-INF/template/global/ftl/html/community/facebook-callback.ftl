@@ -23,11 +23,12 @@
 					// 1. 인증 성공
 					<#if before_domain !=  after_domain >
 						${response.sendRedirect("http://" + before_domain + "/community/facebook-callback.do?onetime=" + onetime  )}						
-					<#else>							
-						var onetime = '${onetime}' ;
+					<#else>						
 						<#if action.user.anonymous >
 							// is anonymous
-							<#if action.findUser()?exists >						
+							var onetime = '${onetime}' ;
+							<#if action.findUser()?exists >
+							// is connected 						
 							if(typeof window.opener.handleCallbackResult == "function"){		
 								window.opener.handleCallbackResult("facebook", onetime , true);
 								window.close();						
@@ -35,8 +36,15 @@
 								window.opener.signupCallbackResult("facebook", onetime, true);
 							}else{
 							
-							}								
+							}		
+							<#else>
+							// is not connected 
+							var template = kendo.template($('#account-not-found-alert-template').html());
+							$("#status").html(template({media: "facebook"}));
+							
 							</#if>
+						<#else>
+						
 						</#if>
 					</#if>
 				<#else>	
