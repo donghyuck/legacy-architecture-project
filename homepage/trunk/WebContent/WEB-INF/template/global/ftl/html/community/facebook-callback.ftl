@@ -21,7 +21,7 @@
 					var onetime = ${ action.getOnetime() }
 					var domain0 = ${ServletUtils.getDomainName(request, false)} 
 					var domain2 = ${request.getRequestURI()}
-					var domain2 = ${action.refer}
+					var domain2 = ${action.referer}
 					<#if action.user.anonymous >			
 						// 1-1. 로그인 필요. 
 						${action.user.company.name}
