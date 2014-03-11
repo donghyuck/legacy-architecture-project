@@ -243,6 +243,7 @@
 				}			
 			}else{
 				// register ... 
+				alert( "singup" );
 				
 			}		
 		}
@@ -258,8 +259,6 @@
 		
 		function homepage(){
 			window.location.replace("/main.do");
-			//$("#signup-form")[0].reset();               	   
-			//$("#signup-form").attr("action", "/main.do").submit();
 		}
 		
 		-->
