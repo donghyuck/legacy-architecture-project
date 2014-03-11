@@ -47,7 +47,7 @@
 									name: "${action.userProfile.name}"
 								}
 							}));							
-							$('.alert button i.fa-check').on('click', function() {
+							$('.alert button i.fa-check').click( function() {
 								if(typeof window.opener.handleCallbackResult == "function"){		
 									window.opener.handleCallbackResult("facebook", onetime , false);	
 								}else if( typeof window.opener.signupCallbackResult == "function"){			
