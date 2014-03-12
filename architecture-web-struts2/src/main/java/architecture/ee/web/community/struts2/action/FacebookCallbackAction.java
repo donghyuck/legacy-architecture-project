@@ -55,6 +55,7 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 			setSocialNetwork(newSocialNetwork);		
 			setOnetimeSecureObject();
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
+			log.debug("restore secure object");
 			restoreOnetimeSecureObject();
 		}		
 		return success();
