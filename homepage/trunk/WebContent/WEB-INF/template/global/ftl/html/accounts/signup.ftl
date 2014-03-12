@@ -249,7 +249,12 @@
 				$('.has-error').each(function( index ) {				
 					$(this).removeClass('has-error');
 				}
-				
+				common.api.getEngageSocailProfile({
+					onetime : code,
+					success : function( data ){
+						alert( stringify( data ) );
+					}
+				});
 				var signupPlaceHolder = getSignupPlaceHolder();
 				
 			}		
