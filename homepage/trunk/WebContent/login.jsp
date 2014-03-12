@@ -345,12 +345,14 @@
 					</div>
 				</div>
 			</div>
+			<!-- 
 			<div class="modal-footer">
 				<div class="btn-group ">
 					<button type="button" class="btn btn-link" >아이디/비밀번호찾기</button>
 					<a id="signup"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do"  class="btn btn-link">회원가입</a>
 				</div>					
-				</div>
+				</div> 
+			-->
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
