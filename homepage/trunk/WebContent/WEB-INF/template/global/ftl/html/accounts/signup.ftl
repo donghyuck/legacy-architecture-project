@@ -306,9 +306,10 @@
 					 <li><a href="${request.contextPath}/accounts/login.do">로그인</a></li>
 					 <li><a href="#" onClick="toggleWindow(); return false;">회원가입</a></li>
 				</ul>
+				<!--
 				<ul class="nav navbar-nav navbar-right">
 					 <li><a href="#">Link</a></li>
-				</ul>
+				</ul>-->
 			</div>
 		</nav>
 	<!-- Modal -->
