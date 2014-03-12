@@ -257,11 +257,18 @@
 						btn.button('reset')
 					}else{
 					
-					}				
+					}		
+					return false ;		
 				});													
+
+				$('#signup-modal').on('hidden.bs.modal', function () {
+					$('#signup-window').modal('show');
+				});
+
 				// END SCRIPT            
 			}
 		}]);	
+
 		
 		function validateRequired ( input ) {
 			var signupPlaceHolder = getSignupPlaceHolder();
