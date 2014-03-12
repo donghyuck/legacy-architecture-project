@@ -277,7 +277,7 @@
 					 <li><a href="#">약관</a></li>
 					 <li><a href="#">개인정보보호</a></li>
 					 <li><a href="#" onClick="toggleWindow(); return false;">로그인</a></li>
-					 <li><a href="${request.contextPath}/accounts/signup.do">회원가입</a></li>
+					 <li><a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do">회원가입</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					 <li><a href="#">Link</a></li>
