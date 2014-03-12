@@ -365,13 +365,15 @@
 											</label>
 										</div>
 									</fieldset>	
-									<button type="reset" class="btn btn-info">확인</button>
+									<div class="pull-right">	
+										<button type="button" class="btn btn-info signup">확인</button>
+									</div>	
 								</form>
 							</div>
 						</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-info signup">확인</button>
+					
 					
 					<!--
 					<div class="btn-group ">
