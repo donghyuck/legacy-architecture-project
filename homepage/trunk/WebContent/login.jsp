@@ -204,10 +204,7 @@
 			});						
 	
 		}		
-	}]);
-	
-	
-	
+	}]);	
 	
 	function handleCallbackResult( media, code, exists ){		
 		if(exists){
@@ -367,7 +364,7 @@
 					</div>
 					<div class="modal-body">
 						<p>
-						연결되어 있지 않은 <span bind-data="text: media" ></span> 사용자입니다.  회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
+						회원가입을 위해서  <a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
 						<a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
 						</p>					
 						 <div class="panel panel-default panel-border-thick">
@@ -389,15 +386,11 @@
 									<span class="help-block">서비스 이용을 위하여 메일 주소 입력이 필요합니다.</span>							
 								</div>
 							</fieldset>			
-							<div class="custom-required-inputs">
-							
-							
-							</div>	
+							<div class="custom-required-inputs">	</div>	
 							<div class="custom-alert"></div>						
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-								<button type="submit" class="btn btn-primary custom-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' ><i class="fa fa-check"></i>&nbsp;확인</button>
-								
+								<button type="submit" class="btn btn-primary custom-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' ><i class="fa fa-check"></i>&nbsp;확인</button>								
 							</div>	
 						</form>			
 						</div></div>			
