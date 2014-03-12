@@ -243,14 +243,10 @@
 					alert( media +  "인증에 실패하였습니다." );
 				}			
 			}else{
-				// register ... 
-				alert( "singup" );
-				
 				$("#signup-form").data('kendoValidator').hideMessages();
 				$('.has-error').each(function( index ) {				
 					$(this).removeClass('has-error');
-				});
-				
+				});				
 				common.api.getEngageSocailProfile({
 					onetime : code,
 					url: onetime_url,
@@ -262,9 +258,7 @@
 					fail : function( data ){
 						
 					}
-				});
-				
-				
+				});				
 			}		
 		}
 		
