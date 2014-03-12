@@ -207,7 +207,13 @@
 				$(":button.homepage").click( function(e) {					
 					homepage();					
 				} );		
-								
+
+
+				/* SIGNUP */
+				var signup_modal = $('#signup-modal');
+				signup_modal.modal({show:false, backdrop:true});
+				kendo.bind(signup_modal, signupPlaceHolder  );		
+												
 				// END SCRIPT            
 			}
 		}]);	
