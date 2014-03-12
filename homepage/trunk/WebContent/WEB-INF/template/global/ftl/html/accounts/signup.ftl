@@ -322,7 +322,7 @@
 					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					<h4 class="modal-title">회원가입</h4>
 				</div>
-				<div class="modal-body bg-gray">
+				<div class="modal-body color4">
 					<fieldset <#if !action.user.anonymous >disabled</#if>>
 						<div class="col-sm-6">
 							<button class="btn btn-block btn-primary btn-lg custom-social-groups"  data-target="facebook"><i class="fa fa-facebook"></i> | 페이스북으로 회원가입</button>
@@ -387,16 +387,13 @@
 							</div>
 						</div>
 				</div>
-				<div class="modal-footer">
-					
-					
-					<!--
+				<!--<div class="modal-footer">					
 					<div class="btn-group ">
 						<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
 						<a id="signup"  href="${request.contextPath}/accounts/login.do"  class="btn btn-info">로그인</a>
 					</div>
-					-->
-				</div>
+					
+				</div>-->
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -
