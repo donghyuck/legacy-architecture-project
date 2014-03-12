@@ -215,7 +215,7 @@
 				kendo.bind(signup_modal, getSignupPlaceHolder() );		
 
 				$('form[name="fm2"]').submit(function(e) {			
-					alert("fdasf");
+
 					var signupPlaceHolder = getSignupPlaceHolder();
 					var btn = $('.social-signup');				
 					btn.button('loading');				
@@ -258,7 +258,7 @@
 						alert_danger.html( template({message: error_message }) );			
 						btn.button('reset')
 					}else{
-					
+											alert("fdasf");
 					}		
 					return false ;		
 				});													
