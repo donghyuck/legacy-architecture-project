@@ -23,7 +23,7 @@
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.api.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
-		complete: function() {        	              		              		  
+		complete: function() {
 			
 			common.api.getUser( {
 				success : function ( token ) {
