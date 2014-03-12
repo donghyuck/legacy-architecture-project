@@ -50,7 +50,7 @@ var SignupForm = kendo.data.Model.define({
         "location": {
             type: "string"
         },
-        "language": {
+        "languages": {
             type: "string"
         },
         "timezone": {
@@ -80,10 +80,11 @@ var SignupForm = kendo.data.Model.define({
     	this.set("firstName", null );
     	this.set("lastName", null );
     	this.set("name", null );
+    	this.set("username", null );
     	this.set("email", null );
     	this.set("locale", null );
     	this.set("location", null );
-    	this.set("language", null );
+    	this.set("languages", null );
     	this.set("timezone", null );
     	this.set("gender", null );
     	this.set("password1", null );
@@ -91,6 +92,26 @@ var SignupForm = kendo.data.Model.define({
     	this.set("onetime", null );
     	this.set("agree", false );
     	this.set("customClass", "" );
+    },
+    inject: function( media, profile ){
+    	this.set("media",  media  );
+    	if( media == "facebook" ){
+        	this.set("id", profile.primaryKeyString );
+        	this.set("firstName", profile.firstName );
+        	this.set("lastName", profile.lastName );
+        	this.set("name", profile.name );
+        	this.set("username", profile.username );
+        	this.set("email", profile.email );
+        	this.set("locale", profile.locale );
+        	this.set("location", profile.location.name );
+        	this.set("languages", profile.languages );
+        	this.set("timezone", profile.timezone  );
+        	this.set("gender", profile.gender );
+        	this.set("password1", null );
+        	this.set("password2", null );
+        	this.set("onetime", null );
+        	this.set("agree", false );
+    	}
     }
 });
 
@@ -241,12 +262,12 @@ var Template = kendo.data.Model.define( {
     	templateId: { type: "number", editable: false, defaultValue: -1  },    	
     	objectType: { type: "number", editable: false, defaultValue: -1  },    	
     	objectId: { type: "number", editable: false, defaultValue: -1  },    	
-        title: { type: "string", editable: true , validation: { required: true }},
-        templateType: { type: "string", editable: true },
-        location : { type: "string", editable: true },
-        body: { type: "string", editable: true },
-        modifiedDate: { type: "date"},
-        creationDate: { type: "date" } 
+    	title: { type: "string", editable: true , validation: { required: true }},
+    	templateType: { type: "string", editable: true },
+    	location : { type: "string", editable: true },
+    	body: { type: "string", editable: true },
+    	modifiedDate: { type: "date"},
+    	creationDate: { type: "date" } 
     }
 });
 
