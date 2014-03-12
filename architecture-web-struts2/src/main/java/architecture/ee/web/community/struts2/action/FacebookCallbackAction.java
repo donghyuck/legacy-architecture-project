@@ -44,6 +44,8 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 	
 	public String execute() throws Exception {		
 		// Facebook response with code value ..
+		log.debug(">" + StringUtils.isNotEmpty(code));
+		log.debug(">" +  StringUtils.isNotEmpty( getOnetime()) );
 		if( StringUtils.isNotEmpty(code) ){
 			SocialNetwork newSocialNetwork = newSocialNetwork(Media.FACEBOOK);			
 			FacebookServiceProvider provider = (FacebookServiceProvider) newSocialNetwork.getSocialServiceProvider();			
@@ -51,6 +53,7 @@ public class FacebookCallbackAction  extends SocialCallbackSupport {
 			newSocialNetwork.setAccessSecret(token.getSecret());
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);		
+			setOnetimeSecureObject();
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
 			restoreOnetimeSecureObject();
 		}		
