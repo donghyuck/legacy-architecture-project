@@ -2,8 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title>회원가입</title>
-		<script type="text/javascript">
-		<!--
+		<script type="text/javascript"><!--
 		<#compress>
 		yepnope([{
 			load: [
@@ -263,9 +262,8 @@
 			window.location.replace("/main.do");
 		}
 		
-		</#compress>
-		-->
-		</script>
+		</#compress>		
+		--></script>
 		<style>
 
 		.k-widget.k-tooltip-validation {
