@@ -226,9 +226,10 @@
 		}
 		
 		function signupCallbackResult( media, code , exists  ){
+			var onetime_url =  "${request.contextPath}/community/" + media + "-callback.do?output=json";			
 			if(exists){
 				if( code != null && code != ''  ){						
-					var onetime_url =  "${request.contextPath}/community/" + media + "-callback.do?output=json";			
+					
 					common.api.signin({
 						url : onetime_url,
 						onetime:  code,
@@ -252,14 +253,17 @@
 				
 				common.api.getEngageSocailProfile({
 					onetime : code,
+					url: onetime_url,
 					success : function( data ){
-						alert( kendo.stringify( data ) );
+						var signupPlaceHolder = getSignupPlaceHolder();
+						signupPlaceHolder.reset();
+						signupPlaceHolder.inject( media, data );
 					},
 					fail : function( data ){
-						alert( kendo.stringify( data ) );
+						
 					}
 				});
-				var signupPlaceHolder = getSignupPlaceHolder();
+				
 				
 			}		
 		}
