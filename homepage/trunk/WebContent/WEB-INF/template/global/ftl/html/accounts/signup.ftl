@@ -4,6 +4,7 @@
 		<title>회원가입</title>
 		<script type="text/javascript">
 		<!--
+		<#compress>
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
@@ -157,10 +158,9 @@
 						}
 					});
 				});				
-					
-					
+										
 				$(":button.logout").click( function(e) {					
-					$(this).button("로그아웃...");
+					$(this).button("로그아웃.....");
 					var text_danger = $(this).parent().parent();
 					$.ajax({
 						type : 'GET',
@@ -245,6 +245,7 @@
 			}else{
 				// register ... 
 				alert( "singup" );
+				var signupPlaceHolder = getSignupPlaceHolder();
 				
 			}		
 		}
@@ -262,6 +263,7 @@
 			window.location.replace("/main.do");
 		}
 		
+		</#compress>
 		-->
 		</script>
 		<style>
