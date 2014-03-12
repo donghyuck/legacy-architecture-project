@@ -253,7 +253,7 @@
 					onetime : code,
 					success : function( data ){
 						alert( stringify( data ) );
-					}
+					})
 				});
 				var signupPlaceHolder = getSignupPlaceHolder();
 				
