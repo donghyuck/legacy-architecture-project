@@ -1,9 +1,9 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
+<#compress>
 		<title>회원가입</title>
-		<script type="text/javascript"><!--
-		<#compress>
+		<script type="text/javascript"><!--		
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
@@ -260,10 +260,7 @@
 		
 		function homepage(){
 			window.location.replace("/main.do");
-		}
-		
-		</#compress>
-		
+		}		
 		--></script>
 		<style>
 
@@ -279,6 +276,7 @@
 		}
 		
 		</style>
+		</#compress>		
 	</head>
 	<body class="color3">
 		<div class="main">
