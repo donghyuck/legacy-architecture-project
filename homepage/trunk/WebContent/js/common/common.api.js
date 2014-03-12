@@ -51,9 +51,26 @@
 			},
 			error:options.error || handleKendoAjaxError,
 			dataType : "json"
-		});	
-		
+		});			
 	}
+	
+	common.api.getEngageSocailProfile = function ( options ){		
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url || '/community/facebook-callback.do?output=json',
+			data: { onetime : options.onetime },
+			success : function(response){
+				if( response.error ){ 												
+					options.fail(response) ;
+				} else {					
+					options.success(response) ;					
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	};
 	
 	common.api.signin = function ( options ){		
 		options = options || {};
@@ -151,8 +168,7 @@
 			error:options.error || handleKendoAjaxError,
 			dataType : "json"
 		});	
-	}
-	
+	}	
 	
 	common.api.photoStreamsDataSource = new kendo.data.DataSource({		
 		serverPaging: true,
