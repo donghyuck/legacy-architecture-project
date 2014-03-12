@@ -248,7 +248,8 @@
 				$("#signup-form").data('kendoValidator').hideMessages();
 				$('.has-error').each(function( index ) {				
 					$(this).removeClass('has-error');
-				}
+				});
+				
 				common.api.getEngageSocailProfile({
 					onetime : code,
 					success : function( data ){
