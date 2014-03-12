@@ -158,6 +158,7 @@
 					});
 				});				
 					
+					
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃...");
 					var text_danger = $(this).parent().parent();
@@ -365,13 +366,14 @@
 											</label>
 										</div>
 									</fieldset>	
+									<button type="reset" class="btn btn-info">확인</button>
 								</form>
 							</div>
 						</div>
 				</div>
 				<div class="modal-footer">
-					<a href="${request.contextPath}/accounts/login.do"  class="btn btn-link">로그인</a>
 					<button type="button" class="btn btn-info signup">확인</button>
+					
 					<!--
 					<div class="btn-group ">
 						<button type="button" class="btn btn-info" >아이디/비밀번호찾기</button>
