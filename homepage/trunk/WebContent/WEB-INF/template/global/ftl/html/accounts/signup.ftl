@@ -253,7 +253,7 @@
 				common.api.getEngageSocailProfile({
 					onetime : code,
 					success : function( data ){
-						alert( stringify( data ) );
+						alert( kendo.stringify( data ) );
 					}
 				});
 				var signupPlaceHolder = getSignupPlaceHolder();
