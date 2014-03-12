@@ -262,7 +262,8 @@
 			window.location.replace("/main.do");
 		}
 		
-		</#compress>		
+		</#compress>
+		
 		--></script>
 		<style>
 
