@@ -209,6 +209,7 @@
 
 
 				/* SIGNUP for socialmedia */
+				var template = kendo.template($("#alert-template").html());	
 				var signup_modal = $('#signup-modal');
 				signup_modal.modal({show:false, backdrop:true});
 				kendo.bind(signup_modal, getSignupPlaceHolder() );		
@@ -508,6 +509,11 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-				
+	<script type="text/x-kendo-template" id="alert-template">
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		#=message#
+	</div>
+    </script>				
 	</body>    
 </html>
