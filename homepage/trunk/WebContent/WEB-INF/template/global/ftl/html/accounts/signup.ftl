@@ -209,11 +209,56 @@
 				} );		
 
 
-				/* SIGNUP */
+				/* SIGNUP for socialmedia */
 				var signup_modal = $('#signup-modal');
 				signup_modal.modal({show:false, backdrop:true});
 				kendo.bind(signup_modal, getSignupPlaceHolder() );		
-												
+
+				$('form[name="fm2"]').submit(function(e) {			
+					var btn = $('.social-signup');				
+					btn.button('loading');				
+					var input_email_required = (signupPlaceHolder.media == 'twitter') ;
+					var input_checkbox = $("input[name='input-agree']");
+					var input_email = $("input[name='input-email']");
+					var alert_danger = signup_modal.find(".custom-alert");			
+				  
+					var hasError = false;
+					var error_message = null;
+				
+					if( input_email_required){
+						if ( signupPlaceHolder.email == null ){
+							hasError = true;
+							error_message = input_email.attr('data-required-msg');						
+						}else if ( !common.api.isValidEmail (signupPlaceHolder.email)  ) {
+							hasError = true;
+							error_message = input_email.attr('data-email-msg');		
+						}else{
+							$('form[name="fm2"] fieldset' ).removeClass("has-error");
+							alert_danger.html( "" );
+						}
+					}
+								
+					if( signupPlaceHolder.agree == false )
+					{
+						error_message = input_checkbox.attr('validationMessage');
+						hasError = true;
+					}else{
+						if( input_email_required ){
+							if( hasError ){
+								$('form[name="fm2"] fieldset' ).addClass("has-error");
+							}else{
+								$('form[name="fm2"] fieldset' ).removeClass("has-error");
+							}					
+						}
+					}		
+						
+					if( hasError ){
+						alert_danger.html( template({message: error_message }) );			
+						btn.button('reset')
+					}else{
+					
+					}				
+				});													
 				// END SCRIPT            
 			}
 		}]);	
@@ -450,7 +495,7 @@
 					<!-- 
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-						<button type="button" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
+						<button type="button" class="btn btn-primary social-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
 					</div>-->
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
