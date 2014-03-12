@@ -397,6 +397,56 @@
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal-dialog -->
 	</div><!-- /.modal -
-			
+
+
+	<div class="modal fade bs-modal-lg" id="signup-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title"  id="myModalLabel2">회원가입</h4>
+					</div>
+					<div class="modal-body">
+						<p>
+						회원가입을 위해서  <a href="${request.contextPath}/content.do?contentId=1" target="_blank" class="btn btn-info">서비스 이용약관</a> 과  
+						<a href="${request.contextPath}/content.do?contentId=2"  target="_blank" class="btn btn-info"> 개인정보 취급방침</a>을 읽고 동의해 주세요.
+						</p>					
+						 <div class="panel panel-default panel-border-thick">
+							<div class="panel-body">
+							
+						<form name="fm2" role="form" method="POST" accept-charset="utf-8" >	
+							<div class="form-group ">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox"  name="input-agree"  data-bind="checked: agree"  validationMessage="회원가입을 위하여 동의가 필요합니다."> 
+											서비스 이용약관과  개인정보 취급방침 및 개인정보 수집항목•이용목적•보유기간에 동의합니다.
+									</label>
+								</div>
+							</div>	
+							<fieldset class="hide">
+								<div class="form-group ">
+									<label class="control-label"  for="input-email"><span class="label label-primary">메일주소 입력</span></label>
+									<input type="email" class="form-control"  id="input-email" name="input-email" placeholder="메일" data-bind="value: email"   data-required-msg="메일주소를 입력하여 주십시오." data-email-msg="메일주소 형식이 바르지 않습니다." >		
+									<span class="help-block">서비스 이용을 위하여 메일 주소 입력이 필요합니다.</span>							
+								</div>
+							</fieldset>			
+							<div class="custom-required-inputs">	</div>	
+							<div class="custom-alert"></div>						
+							<div class="pull-right">	
+								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+								<button type="submit" class="btn btn-primary custom-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' ><i class="fa fa-check"></i>&nbsp;확인</button>								
+							</div>	
+						</form>			
+						</div></div>			
+					</div>
+					<!-- 
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+						<button type="button" class="btn btn-primary custom-signup"><i class="fa fa-check"></i>&nbsp;확인</button>
+					</div>-->
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+				
 	</body>    
 </html>
