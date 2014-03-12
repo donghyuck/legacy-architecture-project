@@ -247,18 +247,20 @@
 				$('.has-error').each(function( index ) {				
 					$(this).removeClass('has-error');
 				});				
-				common.api.getEngageSocailProfile({
-					onetime : code,
-					url: onetime_url,
-					success : function( data ){
-						var signupPlaceHolder = getSignupPlaceHolder();
-						signupPlaceHolder.reset();
-						signupPlaceHolder.inject( media, data );
-					},
-					fail : function( data ){
-						
+				$('#signup-window').modal('hide');
+
+				setTimeout(function(){
+					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
+					signupPlaceHolder.reset();
+					signupPlaceHolder.media = media ;
+					signupPlaceHolder.onetime = code ;					
+					if( media == 'twitter'){					
+						$('form[name="fm2"] fieldset').removeClass("hide");
 					}
-				});				
+					
+					$('#signup-modal').modal('show');
+				},300);	
+								
 			}		
 		}
 		
