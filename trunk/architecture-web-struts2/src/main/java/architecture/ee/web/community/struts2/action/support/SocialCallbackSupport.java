@@ -214,9 +214,15 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	}
 
 	protected void restoreOnetimeSecureObject(){
+		
 		if( StringUtils.isNotEmpty(this.onetime) ){
-			this.socialNetwork = (SocialNetwork)getOnetimeSecureObject();				
+			this.socialNetwork = (SocialNetwork)getOnetimeSecureObject();			
+			
+			log.debug("network:" + socialNetwork.getServiceProviderName());
 		}
+		
+		
+		
 	}
 	
 	protected void setOnetimeSecureObject() {
