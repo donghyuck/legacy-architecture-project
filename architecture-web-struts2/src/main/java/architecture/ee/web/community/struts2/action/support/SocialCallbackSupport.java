@@ -186,7 +186,6 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 			try {
 				userManager.updateUser(template);
 			} catch (Exception e) {} 			
-			
 			return true;
 		}else{
 			return false;		
@@ -216,7 +215,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 
 	protected void restoreOnetimeSecureObject(){
 		if( StringUtils.isNotEmpty(this.onetime) ){
-			this.userProfile = getOnetimeSecureObject();				
+			this.socialNetwork = (SocialNetwork)getOnetimeSecureObject();				
 		}
 	}
 	
@@ -225,6 +224,7 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 			if( StringUtils.isEmpty( this.onetime )){
 				this.onetime = createOnetimeCode();
 			}
+			log.debug(this.onetime + "," + this.socialNetwork );
 			socialOnetimeCache.put(new Element(this.onetime, this.socialNetwork ));	
 		}
 	}
