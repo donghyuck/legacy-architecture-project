@@ -254,6 +254,9 @@
 					onetime : code,
 					success : function( data ){
 						alert( kendo.stringify( data ) );
+					},
+					fail : function( data ){
+						alert( kendo.stringify( data ) );
 					}
 				});
 				var signupPlaceHolder = getSignupPlaceHolder();
