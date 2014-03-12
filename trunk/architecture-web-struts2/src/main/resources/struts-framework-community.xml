@@ -161,7 +161,6 @@
 			</result>
 		</action>
 					
-
 		<action name="tumblr-callback" class="architecture.ee.web.community.struts2.action.TumblrCallbackAction">
 			<result name="success" type="freemarker">/html/community/tumblr-callback.ftl</result>
 			<result name="json-success" type="json">
@@ -170,7 +169,7 @@
 			  <param name="excludeNullProperties">false</param>     
 			  <param name="excludeProperties">user.password, user.passwordHash</param>
 			  <param name="includeProperties">
-				user
+				user, userProfile
 			  </param>				
 			</result>			
 		</action>					
@@ -183,11 +182,10 @@
 			  <param name="excludeNullProperties">false</param>     
 			  <param name="excludeProperties">user.password, user.passwordHash</param>
 			  <param name="includeProperties">
-				user
+				user, userProfile
 			  </param>				
 			</result>			
-		</action>
-		
+		</action>		
 					
 		<action name="facebook-callback" class="architecture.ee.web.community.struts2.action.FacebookCallbackAction">
 			<result name="success" type="freemarker">/html/community/facebook-callback.ftl</result>
@@ -195,9 +193,9 @@
 			  <param name="contentType">application/json</param>
 			  <param name="enableGZIP">true</param>
 			  <param name="excludeNullProperties">false</param>     
-			  <param name="excludeProperties">user.password*</param>
+			 <param name="excludeProperties">user.password, user.passwordHash</param>
 			  <param name="includeProperties">
-				user
+				user, userProfile
 			  </param>				
 			</result>				
 		</action>	
