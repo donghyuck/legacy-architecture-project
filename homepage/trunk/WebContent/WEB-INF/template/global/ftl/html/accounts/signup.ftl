@@ -215,6 +215,8 @@
 				kendo.bind(signup_modal, getSignupPlaceHolder() );		
 
 				$('form[name="fm2"]').submit(function(e) {			
+					alert("fdasf");
+					var signupPlaceHolder = getSignupPlaceHolder();
 					var btn = $('.social-signup');				
 					btn.button('loading');				
 					var input_email_required = (signupPlaceHolder.media == 'twitter') ;
