@@ -244,6 +244,12 @@
 			}else{
 				// register ... 
 				alert( "singup" );
+				
+				$("#signup-form").data('kendoValidator').hideMessages();
+				$('.has-error').each(function( index ) {				
+					$(this).removeClass('has-error');
+				}
+				
 				var signupPlaceHolder = getSignupPlaceHolder();
 				
 			}		
