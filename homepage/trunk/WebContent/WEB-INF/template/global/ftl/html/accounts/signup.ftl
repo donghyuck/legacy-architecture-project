@@ -212,7 +212,7 @@
 				/* SIGNUP */
 				var signup_modal = $('#signup-modal');
 				signup_modal.modal({show:false, backdrop:true});
-				kendo.bind(signup_modal, $("#signup-form").data("signupPlaceHolder")  );		
+				kendo.bind(signup_modal, getSignupPlaceHolder() );		
 												
 				// END SCRIPT            
 			}
@@ -256,7 +256,7 @@
 				$('#signup-window').modal('hide');
 
 				setTimeout(function(){
-					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
+					var signupPlaceHolder = getSignupPlaceHolder();
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;					
