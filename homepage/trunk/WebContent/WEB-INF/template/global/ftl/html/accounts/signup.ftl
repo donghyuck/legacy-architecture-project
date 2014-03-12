@@ -366,6 +366,7 @@
 										</div>
 									</fieldset>	
 									<div class="pull-right">	
+										<button type="reset" value="Reset" class="btn btn-info">취소</button>
 										<button type="button" class="btn btn-info signup">확인</button>
 									</div>	
 								</form>
