@@ -259,7 +259,7 @@
 							onetime: signupPlaceHolder.onetime,
 							media: signupPlaceHolder.media,
 							success: function(data){
-								kendo.stringify(data);
+							alert(">>" + kendo.stringify(data) );
 							},
 							fail: function(data){ 
 								alert_danger.html( template({message: "회원가입에 실패하였습니다." }) );	
