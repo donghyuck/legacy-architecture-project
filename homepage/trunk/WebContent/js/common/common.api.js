@@ -3,7 +3,24 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {};
-	common.api = {};	
+	common.api = {};
+	common.api.user = {};
+	
+	common.api.user.logout = function (options){
+		options = options || {};
+		$.ajax({
+			type : 'GET',
+			url : "/logout?output=json",
+			success : function(response){
+				if( options.success ){
+					options.success(response);
+				}
+			},
+			error:handleKendoAjaxError												
+		});			
+	}
+	
+	
 	common.api.getTargetCompany =  function (url, options){
 		if (typeof url === "object") {
 	        options = url;
