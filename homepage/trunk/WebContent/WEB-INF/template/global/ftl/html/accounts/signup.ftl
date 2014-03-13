@@ -46,16 +46,13 @@
 					var external_button = $(this);
 					external_button.click(function (e){	
 						$("#status").html("");																																
-						var target_media = external_button.attr("data-target");
-						
-						
-						"${ServletUtils.getLocalHostAddr()}"
-						
-						
-						common.api.user.domain({
-							data : { domainName:  "${ServletUtils.getDomainName( request.getRequestURL().toString() , false)}" }
-						});
-						
+						var target_media = external_button.attr("data-target");						
+						if( target_media == "twitter" ){
+							common.api.user.domain({
+								url : "http://${ServletUtils.getLocalHostAddr()}/community/my-domain.do?output=json",
+								data : { domainName:  "${ServletUtils.getDomainName( request.getRequestURL().toString() , false)}" }
+							});
+						}						
 						$.ajax({
 							type : 'POST',
 							url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
