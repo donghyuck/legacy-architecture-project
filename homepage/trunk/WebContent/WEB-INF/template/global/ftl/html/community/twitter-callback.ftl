@@ -44,15 +44,16 @@
 								media: "twitter",
 								user : {
 									id : "${action.userProfile.id}",
-									name: "${action.userProfile.name}"
+									name: "${action.userProfile.name}",
+									profileImageUrl : "${action.userProfile.profileImageUrl}"
 								}
 							}));					
 							$('.alert button').first().click( function() {													
 								if(typeof window.opener.handleCallbackResult == "function"){		
-									window.opener.handleCallbackResult("facebook", onetime , false);	
+									window.opener.handleCallbackResult("twitter", onetime , false);	
 								}else if( typeof window.opener.signupCallbackResult == "function"){			
 									// goto signup
-									window.opener.signupCallbackResult("facebook", onetime, false);
+									window.opener.signupCallbackResult("twitter", onetime, false);
 								} else {
 									window.opener.location.href = "${request.contextPath}/accounts/signup.do";
 								}		
@@ -82,7 +83,7 @@
 		</div>		
 		<script type="text/x-kendo-template" id="account-not-found-alert-template">
 			<div class="alert alert-info alert-dismissable">
-				<img class="media-object img-circle" src="http://graph.facebook.com/#=user.id#/picture" alt="프로파일 이미지">
+				<img class="media-object img-circle" src="#=user.profileImageUrl#" alt="프로파일 이미지">
 				<p>연결되지 않는 #=media# 계정입니다. 회원가입을 하시겠습니까?</p>
 				<p> <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp; 예</button> <button type="button" class="btn btn-info" onclick="javascript: window.close();">아니오</button></p>	
 			</div>
