@@ -55,7 +55,7 @@
 								if( response.error ){
 									// 연결실패.
 								} else {	
-									window.open( response.authorizationUrl + '&display=popup&isSignup=ture' ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
+									window.open( response.authorizationUrl + '&display=popup' ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
 								}
 							},
 							error:handleKendoAjaxError												
