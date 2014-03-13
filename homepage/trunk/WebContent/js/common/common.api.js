@@ -5,22 +5,6 @@
 ;(function($, undefined) {
 	var common = window.common = window.common || {};
 	common.api =  common.api || {};
-	common.api.user = common.api.user || {} ;
-		
-	common.api.user.logout = function (options){
-		options = options || {};
-		$.ajax({
-			type : 'GET',
-			url : options.url || "/logout?output=json",
-			success : function(response){
-				if( options.success ){
-					options.success(response);
-				}
-			},
-			error:handleKendoAjaxError												
-		});			
-	}
-		
 	
 	common.api.getTargetCompany =  function (url, options){
 		if (typeof url === "object") {
@@ -261,7 +245,30 @@
 	
 })(jQuery);
 
-
+;(function($, undefined) {
+	var common = window.common = window.common || {} ;
+	common.api.user = common.api.user || {} ;
+		
+	common.api.user.logout = function (options){
+		options = options || {};
+		$.ajax({
+			type : 'GET',
+			url : options.url || "/community/my-domain.do?output=json",
+			success : function(response){
+				if( options.success ){
+					options.success(response);
+				}
+			},
+			error:handleKendoAjaxError												
+		});			
+	}
+	
+	common.api.user.domain = function (options){
+		
+		
+	}
+	
+})(jQuery);	
 /**
  * Social  
  */
