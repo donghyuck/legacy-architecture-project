@@ -16,6 +16,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 				<#assign onetime = action.onetime >
+				${ request.getRemoteHost()}
 				<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 			}	
 		}]);
