@@ -59,6 +59,7 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 	}
 	
 	public String execute() throws Exception {
+		
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
 			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TWITTER);			
 			TwitterServiceProvider provider = (TwitterServiceProvider) newSocialNetwork.getSocialServiceProvider();			
@@ -67,6 +68,7 @@ public class TwitterCallbackAction extends SocialCallbackSupport {
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);			
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
+			log.debug("restore secure object");
 			restoreOnetimeSecureObject();
 		}		
 		return success();
