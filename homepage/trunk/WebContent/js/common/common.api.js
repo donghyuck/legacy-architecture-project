@@ -274,10 +274,12 @@
 	
 	common.api.social.getProfile = function ( options ){				
 
+		alert( social_url_template({media : option.media}) );
+		
 		options = options || {};
 		options.url = options.url || social_url_template({media : option.media});
 		
-		alert( options.url );
+		
 		
 		$.ajax({
 			type : 'POST',
