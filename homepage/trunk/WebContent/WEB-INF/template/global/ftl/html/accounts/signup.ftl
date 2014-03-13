@@ -250,16 +250,16 @@
 							}					
 						}
 					}		
-					
-					alert( 	hasError );
+										
 					if( hasError ){
 						alert_danger.html( template({message: error_message }) );			
-						btn.button('reset')
+						btn.button('reset');
 					}else{
 						common.api.social.getProfile({
 							onetime: signupPlaceHolder.onetime,
 							media: signupPlaceHolder.media
 						});
+						alert( 	hasError );
 					}		
 					
 					
