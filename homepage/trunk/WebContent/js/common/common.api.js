@@ -278,7 +278,7 @@
 			options.data = {};
 		}
 		$.ajax({
-			type : 'GET',
+			type : 'POST',
 			url : options.url || "/community/my-domain.do?output=json",
 			data : options.data,
 			success : function(response){
