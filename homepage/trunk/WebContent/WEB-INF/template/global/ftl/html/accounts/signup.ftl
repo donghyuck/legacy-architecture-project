@@ -255,7 +255,7 @@
 						alert_danger.html( template({message: error_message }) );			
 						btn.button('reset');
 					}else{
-						alert( 	"----------------------" );
+						alert( signupPlaceHolder.media+  	"----------------------"  + signupPlaceHolder.onetime );
 						common.api.social.getProfile({
 							onetime: signupPlaceHolder.onetime,
 							media: signupPlaceHolder.media
