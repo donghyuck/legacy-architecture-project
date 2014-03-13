@@ -274,9 +274,13 @@
 	
 	common.api.social.getProfile = function ( options ){				
 		options = options || {};
+		options.url = options.url || social_url_template(option.media);
+		
+		alert( options.url );
+		
 		$.ajax({
 			type : 'POST',
-			url : options.url || social_url_template(option.media),
+			url : options.url,
 			data: { onetime : options.onetime },
 			success : function(response){
 				if( response.error ){ 		
