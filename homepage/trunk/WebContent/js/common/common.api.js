@@ -266,9 +266,9 @@
  * Social  
  */
 ;(function($, undefined) {
-	var common = window.common = window.common || {};
-	var common.api = common.api || {};
-	var common.api.social = common.api.social || {};
+	var common = window.common = window.common || {}, common.api = common.api || {};
+	var common.api.social = {};
+	
 	var CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
 	
 	common.api.social.getProfile = function ( options ){				
