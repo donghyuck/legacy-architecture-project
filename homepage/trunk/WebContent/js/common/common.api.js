@@ -288,15 +288,14 @@
 			url : options.url,
 			data: { onetime : options.onetime },
 			success : function(response){
+				//alert( ">" + (typeof response.error === UNDEFINED) );
 				if( typeof response.error === UNDEFINED ){ 		
-					if( isFunction( options.fail ) ){
-						alert(isFunction( options.fail ));
-						options.fail(response) ;
+					if( isFunction( options.success ) ){						
+						options.success(response) ;
 					}
 				} else {									
-					if( isFunction( options.success ) ){
-						alert(isFunction( options.success ));
-						options.success(response) ;
+					if( isFunction( options.fail ) ){
+						options.fail(response) ;
 					}
 				}
 			},
