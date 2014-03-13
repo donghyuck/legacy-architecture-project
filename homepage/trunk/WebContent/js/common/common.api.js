@@ -248,12 +248,20 @@
 ;(function($, undefined) {
 	var common = window.common = window.common || {} ;
 	common.api.user = common.api.user || {} ;
-		
+	var kendo = window.kendo,
+	handleKendoAjaxError = common.api.handleKendoAjaxError ;
+	stringify = kendo.stringify,
+	isFunction = kendo.isFunction,
+	UNDEFINED = 'undefined',
+	POST = 'POST',
+	JSON = 'json';
+	
+	
 	common.api.user.logout = function (options){
 		options = options || {};
 		$.ajax({
 			type : 'GET',
-			url : options.url || "/community/my-domain.do?output=json",
+			url : options.url || "/logout?output=json",
 			success : function(response){
 				if( options.success ){
 					options.success(response);
@@ -264,7 +272,20 @@
 	}
 	
 	common.api.user.domain = function (options){
-		
+		if( typeof options.data ===UNDEFINED ){			
+			options.data = {};
+		}
+		$.ajax({
+			type : 'GET',
+			url : options.url || "/community/my-domain.do?output=json",
+			success : function(response){
+				if( options.success ){
+					if( isFunction(options.success)  )
+						options.success(response);
+				}
+			},
+			error:handleKendoAjaxError												
+		});			
 		
 	}
 	
