@@ -288,7 +288,6 @@
 			url : options.url,
 			data: { onetime : options.onetime },
 			success : function(response){
-				alert(typeof response.error === UNDEFINED);
 				if( typeof response.error === UNDEFINED ){ 		
 					if( isFunction( options.fail ) ){
 						options.fail(response) ;
