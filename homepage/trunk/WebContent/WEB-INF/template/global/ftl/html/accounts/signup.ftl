@@ -161,7 +161,7 @@
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃.....");
 					var text_danger = $(this).parent().parent();
-					common.api.user.logout(
+					common.api.user.logout({
 						success : function(response){
 							text_danger.remove();
 							$("fieldset").each(function( index ) {					
@@ -169,7 +169,7 @@
 							});
 							$("#form :input:visible:enabled:first").focus();
 						}
-					);							
+					});							
 				} );
 						
 				/*   signup button 	*/					
