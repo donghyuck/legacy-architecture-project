@@ -17,11 +17,10 @@
 			complete: function() {
 				<#if action.userProfile?exists >
 					<#assign onetime = action.onetime >
-					<#assign before_domain = action.session.get("domainName") >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 					
 					${onetime}
-					${before_domain}
+					${ action.getSession().get("domainName") }
 					${after_domain}
 										
 				<#else>	
