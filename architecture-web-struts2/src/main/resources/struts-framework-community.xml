@@ -49,6 +49,19 @@
 	<!--  COMMUNITY USER ACTIONS -->	
 
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
+
+		<action name="my-domain" class="architecture.ee.web.community.struts2.action.ajax.MyDomainAction">
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>
+			  <param name="includeProperties">
+				domainName
+			  </param>				
+			</result>			
+		</action>		
+		
+	
 		<!--  streams  -->	
 		<action name="list-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
 			<result name="json-success" type="json">
@@ -169,7 +182,7 @@
 			  <param name="excludeNullProperties">false</param>     
 			  <param name="excludeProperties">user.password, user.passwordHash</param>
 			  <param name="includeProperties">
-				user, userProfile
+				user.*, userProfile.*
 			  </param>				
 			</result>			
 		</action>					
@@ -182,7 +195,7 @@
 			  <param name="excludeNullProperties">false</param>     
 			  <param name="excludeProperties">user.password, user.passwordHash</param>
 			  <param name="includeProperties">
-				user, userProfile
+				user.*, userProfile.*
 			  </param>				
 			</result>			
 		</action>		
@@ -194,9 +207,17 @@
 			  <param name="enableGZIP">true</param>
 			  <param name="excludeNullProperties">false</param>     
 			 <param name="excludeProperties">user.password, user.passwordHash</param>
+			
+			  <param name="root">
+			  userProfile
+			  </param>
+			
+			   <!--  
 			  <param name="includeProperties">
-				user, userProfile
-			  </param>				
+			  
+				user.*, userProfile.*
+			  </param>
+			     -->				
 			</result>				
 		</action>	
 
