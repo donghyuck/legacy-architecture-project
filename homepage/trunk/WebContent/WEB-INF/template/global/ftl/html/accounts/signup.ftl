@@ -499,7 +499,7 @@
 							<div class="custom-alert"></div>						
 							<div class="pull-right">	
 								<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-								<button type="submit" class="btn btn-primary custom-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' ><i class="fa fa-check"></i>&nbsp;확인</button>								
+								<button type="submit" class="btn btn-primary social-signup" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' ><i class="fa fa-check"></i>&nbsp;확인</button>								
 							</div>	
 						</form>			
 						</div></div>			
