@@ -284,6 +284,7 @@
 			url : options.url,
 			data: { onetime : options.onetime },
 			success : function(response){
+				alert( response.error );
 				if( response.error ){ 		
 					if( isFunction( options.fail ) ){
 						options.fail(response) ;
