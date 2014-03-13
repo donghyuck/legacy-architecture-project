@@ -263,6 +263,7 @@
 							},
 							fail: function(data){ 
 								alert_danger.html( template({message: "회원가입에 실패하였습니다." }) );	
+								btn.button('reset');
 							}
 						});
 					}	
