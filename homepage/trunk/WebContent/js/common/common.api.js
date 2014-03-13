@@ -267,7 +267,7 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {} ;
-	var common.api = common.api || {};
+	var common.api = {};
 	var kendo = window.kendo,
 		stringify = kendo.stringify,
 		CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
