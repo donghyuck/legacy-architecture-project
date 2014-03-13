@@ -267,6 +267,7 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {} ;
+	common.api.social = {}
 	
 	var kendo = window.kendo,
 		stringify = kendo.stringify,
