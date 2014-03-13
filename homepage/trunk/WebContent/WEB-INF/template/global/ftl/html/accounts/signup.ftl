@@ -255,14 +255,13 @@
 						alert_danger.html( template({message: error_message }) );			
 						btn.button('reset');
 					}else{
+						alert( 	"----------------------" );
 						common.api.social.getProfile({
 							onetime: signupPlaceHolder.onetime,
 							media: signupPlaceHolder.media
 						});
-						alert( 	hasError );
-					}		
-					
-					
+						alert( 	"----------------------" );
+					}	
 					return false ;		
 				});													
 
