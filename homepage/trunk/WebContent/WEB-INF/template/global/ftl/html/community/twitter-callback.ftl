@@ -15,8 +15,8 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
-			
-				${ action.referer }
+				<#assign onetime = action.onetime >
+				<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 			}	
 		}]);
 		</script>		
