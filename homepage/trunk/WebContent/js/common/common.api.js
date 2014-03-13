@@ -289,13 +289,13 @@
 			data: { onetime : options.onetime },
 			success : function(response){
 				if( typeof response.error === UNDEFINED ){ 		
+					if( isFunction( options.fail ) ){
+						options.fail(response) ;
+					}
+				} else {									
 					if( isFunction( options.success ) ){
 						options.success(response) ;
 					}
-				} else {					
-					if( isFunction( options.fail ) ){
-						options.fail(response) ;
-					}				
 				}
 			},
 			error:options.error || handleKendoAjaxError ,
