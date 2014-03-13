@@ -1,7 +1,4 @@
 
-/**
- * User  
- */
 ;(function($, undefined) {
 	var common = window.common = window.common || {};
 	common.api =  common.api || {};
@@ -245,6 +242,11 @@
 	
 })(jQuery);
 
+
+/**
+ * User  
+ */
+
 ;(function($, undefined) {
 	var common = window.common = window.common || {} ;
 	common.api.user = common.api.user || {} ;
@@ -278,6 +280,7 @@
 		$.ajax({
 			type : 'GET',
 			url : options.url || "/community/my-domain.do?output=json",
+			data : options.data,
 			success : function(response){
 				if( options.success ){
 					if( isFunction(options.success)  )
