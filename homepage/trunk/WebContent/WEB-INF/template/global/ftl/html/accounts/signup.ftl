@@ -355,7 +355,7 @@
 		}
 
 		.nav>li>a:hover {
-			background-color:yellow;
+			background-color:#007AFF;
 			color : #ffffff;
 		}
 		
