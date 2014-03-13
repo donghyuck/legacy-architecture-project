@@ -169,8 +169,7 @@
 							header_action_icon.removeClass("k-i-maximize");
 							header_action_icon.addClass("k-i-minimize");							
 							$(that.element).find(".panel:first > .panel-body:last, .panel-footer").removeClass("hide");
-						}
-						
+						}						
         			}else if ( header_action.text() == "Close"){
         				that.destroy();
         			}else if ( header_action.text() == "Refresh"){	
