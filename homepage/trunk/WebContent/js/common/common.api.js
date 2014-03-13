@@ -267,28 +267,17 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {};
-	common.api = common.api || {};
-	common.api.social = common.api.social || {};
-	
-	var social_url_template = kendo.template("/community/#= media #-callback.do?output=json");		
+	var common.api = common.api || {};
+	var common.api.social = common.api.social || {};
+	var CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
 	
 	common.api.social.getProfile = function ( options ){				
 
-		//alert( social_url_template({media : option.media}) );
-		
 		options = options || {};		
 		if( typeof options.url == 'undefined' && typeof options.media == 'string' ){
-			
-			var _t = kendo.template("/community/#= media #-callback.do?output=json");
-			
-			alert( _t({media : options.media}) );
-			
+			options.url = CALLBACK_URL_TEMPLATE ({media : options.media});
 		}		
-		
-		options.url = options.url || social_url_template({media : option.media});
-		
-		
-		
+
 		$.ajax({
 			type : 'POST',
 			url : options.url,
