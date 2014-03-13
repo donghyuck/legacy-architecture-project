@@ -255,12 +255,13 @@
 						alert_danger.html( template({message: error_message }) );			
 						btn.button('reset');
 					}else{
-						alert( signupPlaceHolder.media+  	"----------------------"  + signupPlaceHolder.onetime );
 						common.api.social.getProfile({
 							onetime: signupPlaceHolder.onetime,
-							media: signupPlaceHolder.media
+							media: signupPlaceHolder.media,
+							success: function(data){
+								kendo.stringify(data);
+							}
 						});
-						alert( 	"----------------------" );
 					}	
 					return false ;		
 				});													
