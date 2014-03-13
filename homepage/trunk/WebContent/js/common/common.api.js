@@ -3,7 +3,7 @@
  * User  
  */
 ;(function($, undefined) {
-	var common = window.common = window.common || {}, common.api = {}, common.api.user = {}, common.api.social = {};
+	var common = window.common = window.common || {}, common.api =  common.api || {}, common.api.user = common.api.user || {} ;
 		
 	common.api.user.logout = function (options){
 		options = options || {};
