@@ -267,12 +267,11 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {}, common.api = common.api || {};
-	var common.api.social = {};
-	
-	var CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
+	var kendo = window.kendo,
+		stringify = kendo.stringify,
+		CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
 	
 	common.api.social.getProfile = function ( options ){				
-
 		options = options || {};		
 		if( typeof options.url == 'undefined' && typeof options.media == 'string' ){
 			options.url = CALLBACK_URL_TEMPLATE ({media : options.media});
