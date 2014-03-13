@@ -136,8 +136,7 @@
 				
 					common.api.signup({
 						data: kendo.stringify( signup_modal.data("signupPlaceHolder") ),
-						success : function(data){
-														
+						success : function(data){														
 							if ( !data.anonymous ){
 								var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + signup_modal.data("signupPlaceHolder").media + "-callback.do?output=json";			
 								common.api.signin({
