@@ -276,9 +276,11 @@
 
 		//alert( social_url_template({media : option.media}) );
 		
-		options = options || {};
-		
-alert( typeof options.url );		
+		options = options || {};		
+		if( typeof options.url == 'undefined' && typeof options.media == 'string' ){
+			alert("s");
+			
+		}		
 		
 		options.url = options.url || social_url_template({media : option.media});
 		
