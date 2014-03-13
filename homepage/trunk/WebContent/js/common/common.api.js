@@ -1,11 +1,10 @@
+
 /**
- * User 
+ * User  
  */
 ;(function($, undefined) {
-	var common = window.common = window.common || {};
-	common.api = {};
-	common.api.user = {};
-	
+	var common = window.common = window.common || {}, common.api = {}, common.api.user = {}, common.api.social = {};
+		
 	common.api.user.logout = function (options){
 		options = options || {};
 		$.ajax({
@@ -19,7 +18,7 @@
 			error:handleKendoAjaxError												
 		});			
 	}
-	
+		
 	
 	common.api.getTargetCompany =  function (url, options){
 		if (typeof url === "object") {
@@ -258,4 +257,39 @@
 		});
 	};
 	
+})(jQuery);
+
+
+/**
+ * Social  
+ */
+;(function($, undefined) {
+	var common = window.common = window.common || {}, common.api = common.api || {}, common.api.social = common.api.social || {};
+	var social_url_template = kendo.template("/community/#= midia #-callback.do?output=json");		
+	common.api.social.getProfile = function ( options ){				
+		options = options || {};
+		$.ajax({
+			type : 'POST',
+			url : options.url || social_url_template(option.media),
+			data: { onetime : options.onetime },
+			success : function(response){
+				if( response.error ){ 		
+					if( typeof options.fail == "function" ){
+						options.fail(response) ;
+					}
+					else{
+						kendo.stringify(response);
+					}
+				} else {					
+					if( typeof options.success == "function" ){
+						options.success(response) ;
+					}else{
+						kendo.stringify(response);
+					}						
+				}
+			},
+			error:options.error || handleKendoAjaxError,
+			dataType : "json"
+		});	
+	};	
 })(jQuery);
