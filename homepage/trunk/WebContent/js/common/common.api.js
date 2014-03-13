@@ -274,9 +274,12 @@
 	
 	common.api.social.getProfile = function ( options ){				
 
-		alert( social_url_template({media : option.media}) );
+		//alert( social_url_template({media : option.media}) );
 		
 		options = options || {};
+		
+alert( typeof options.url );		
+		
 		options.url = options.url || social_url_template({media : option.media});
 		
 		
