@@ -16,8 +16,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 			
-				${ ServletUtils.getDomainName(action.referer, false) }
-				${ ServletUtils.getDomainName( request.getRequestURL().toString() , false) }
+				${ action.referer }
 			}	
 		}]);
 		</script>		
