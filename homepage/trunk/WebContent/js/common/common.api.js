@@ -278,7 +278,10 @@
 		
 		options = options || {};		
 		if( typeof options.url == 'undefined' && typeof options.media == 'string' ){
-			alert( social_url_template({media : option.media}) );
+			
+			var _t = kendo.template("/community/#= media #-callback.do?output=json");
+			
+			alert( _t({media : options.media}) );
 			
 		}		
 		
