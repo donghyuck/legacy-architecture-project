@@ -37,6 +37,10 @@
 					});
 				});
 						
+				$("#signup-form").data("signupPlaceHolder", new  SignupForm({}) );		
+				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
+										
+				// INTERNAL SIGNUP WINDOW		
 				$('#signup-window').modal({show:true, backdrop:false});
 				$("#signup-window button.custom-social-groups").each(function( index ) {
 					var external_button = $(this);
@@ -58,11 +62,7 @@
 						});
 					});		
 				});						
-				
-				//$("#signup-form :input:visible:enabled:first").select();				
-				$("#signup-form").data("signupPlaceHolder", new  SignupForm({}) );		
-				$("#signup-form").data("validatorPlaceHolder", new kendo.data.ObservableObject({}) );			
-				
+								
 				var validator = $("#signup-form").kendoValidator({
 					errorTemplate: '<span class="help-block">#=message#</span>',
 					rules: {
@@ -156,27 +156,27 @@
 						}
 					});
 				});				
-										
+								
+				/*   logout button 	*/					
 				$(":button.logout").click( function(e) {					
 					$(this).button("로그아웃.....");
 					var text_danger = $(this).parent().parent();
-					$.ajax({
-						type : 'GET',
-						url : "${request.contextPath}/logout?output=json",
+					common.api.user.logout(
 						success : function(response){
 							text_danger.remove();
 							$("fieldset").each(function( index ) {					
 								$(this).removeAttr("disabled"); 
 							});
 							$("#form :input:visible:enabled:first").focus();
-						},
-						error:handleKendoAjaxError												
-					});						
+						}
+					);							
 				} );
 						
-				
+				/*   signup button 	*/					
 				$(":button.signup").click( function(e) {	
+					
 					var hasError = false;				
+					
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
 						if( validateRequired( input_to_use ) ){
@@ -200,7 +200,9 @@
 								$("#signupInputAgree").focus();
 							}							
 						}
-					});			
+					});
+					
+								
 				});				
 				
 				$(":button.homepage").click( function(e) {					
@@ -258,7 +260,10 @@
 						alert_danger.html( template({message: error_message }) );			
 						btn.button('reset')
 					}else{
-											alert("fdasf");
+						common.api.social.getProfile({
+							onetime: signupPlaceHolder.onetime,
+							media: signupPlaceHolder.media
+						});
 					}		
 					return false ;		
 				});													
