@@ -2,7 +2,7 @@
 <%@ page import="architecture.common.user.*"%>
 <html decorator="homepage">
 <head>
-<title>로그인</title>
+<title>로그인<%= java.net.InetAddress.getLocalHost().getHostAddress()  %></title>
 <%
 	User user = SecurityHelper.getUser();
 	Company company = user.getCompany();
