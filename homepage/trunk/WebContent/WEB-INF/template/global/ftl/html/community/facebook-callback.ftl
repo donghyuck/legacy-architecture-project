@@ -2,6 +2,7 @@
 <html decorator="secure-metro">
 	<head>
 		<title>페이스북 인증</title>
+		<#compress>
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [
@@ -12,8 +13,7 @@
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
-			'${request.contextPath}/js/common/common.ui.min.js',
-			'${request.contextPath}/js/common/common.classie.min.js'],
+			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {	
 			
 				<#if action.userProfile?exists >
@@ -71,7 +71,8 @@
 		
 		 
 		
-		</script>		
+		</script>	
+		</#compress>	
 	</head>
 	<body class="color7">						
 		<div class="container">
@@ -88,7 +89,5 @@
 				<p> <button type="button" class="btn btn-primary"><i class="fa fa-check"></i> &nbsp; 예</button> <button type="button" class="btn btn-info" onclick="javascript: window.close();">아니오</button></p>	
 			</div>
 		</script>
-		
-		
 	</body>
 </html>
