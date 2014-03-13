@@ -173,10 +173,8 @@
 				} );
 						
 				/*   signup button 	*/					
-				$(":button.signup").click( function(e) {	
-					
-					var hasError = false;				
-					
+				$(":button.signup").click( function(e) {						
+					var hasError = false;									
 					$("#signup-form :input").each(function( index ) {				
 						var input_to_use = $(this);
 						if( validateRequired( input_to_use ) ){
@@ -200,15 +198,12 @@
 								$("#signupInputAgree").focus();
 							}							
 						}
-					});
-					
-								
+					});								
 				});				
 				
 				$(":button.homepage").click( function(e) {					
 					homepage();					
 				} );		
-
 
 				/* SIGNUP for socialmedia */
 				var template = kendo.template($("#alert-template").html());	
@@ -255,7 +250,8 @@
 							}					
 						}
 					}		
-						
+					
+					alert( 	hasError );
 					if( hasError ){
 						alert_danger.html( template({message: error_message }) );			
 						btn.button('reset')
@@ -265,6 +261,8 @@
 							media: signupPlaceHolder.media
 						});
 					}		
+					
+					
 					return false ;		
 				});													
 
