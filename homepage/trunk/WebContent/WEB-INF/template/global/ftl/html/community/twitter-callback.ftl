@@ -15,10 +15,18 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
-				<#assign onetime = action.onetime >
-				${ request.getLocalAddr()} 
-				${ request.getLocalName()}
-				<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
+				<#if action.userProfile?exists >
+					<#assign onetime = action.onetime >
+					<#assign before_domain = action.session.get("domainName") >
+					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
+					
+					${onetime}
+					${before_domain}
+					${after_domain}
+										
+				<#else>	
+					// 2. 인증 실패..
+				</#if>	
 			}	
 		}]);
 		</script>		
