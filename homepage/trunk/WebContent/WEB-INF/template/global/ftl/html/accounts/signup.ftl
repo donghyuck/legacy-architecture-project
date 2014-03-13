@@ -49,7 +49,7 @@
 						var target_media = external_button.attr("data-target");
 						
 						
-						"${java.net.InetAddress.getLocalHost().getHostAddress()}"
+						"${ServletUtils.getLocalHostAddr()}"
 						
 						
 						common.api.user.domain({
