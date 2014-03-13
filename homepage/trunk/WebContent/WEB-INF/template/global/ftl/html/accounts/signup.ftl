@@ -49,7 +49,7 @@
 						var target_media = external_button.attr("data-target");
 						
 						common.api.user.domain({
-							data : { domainName:  "ServletUtils.getDomainName( request.getRequestURL().toString() , false)" }
+							data : { domainName:  "${ServletUtils.getDomainName( request.getRequestURL().toString() , false)}" }
 						});
 						
 						$.ajax({
