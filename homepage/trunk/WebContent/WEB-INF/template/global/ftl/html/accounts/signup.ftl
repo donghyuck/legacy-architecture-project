@@ -356,7 +356,7 @@
 
 		.nav>li>a:hover {
 			background-color:yellow;
-			clolr : #ffffff;
+			color : #ffffff;
 		}
 		
 		</style>
