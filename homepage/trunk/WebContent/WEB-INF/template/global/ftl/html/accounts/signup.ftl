@@ -260,6 +260,9 @@
 							media: signupPlaceHolder.media,
 							success: function(data){
 								kendo.stringify(data);
+							},
+							fail: function(data){ 
+								alert_danger.html( template({message: "회원가입에 실패하였습니다." }) );	
 							}
 						});
 					}	
@@ -311,7 +314,6 @@
 					$(this).removeClass('has-error');
 				});				
 				$('#signup-window').modal('hide');
-
 				setTimeout(function(){
 					var signupPlaceHolder = getSignupPlaceHolder();
 					signupPlaceHolder.reset();
@@ -319,11 +321,9 @@
 					signupPlaceHolder.onetime = code ;					
 					if( media == 'twitter'){					
 						$('form[name="fm2"] fieldset').removeClass("hide");
-					}
-					
+					}					
 					$('#signup-modal').modal('show');
-				},300);	
-								
+				},300);									
 			}		
 		}
 		
