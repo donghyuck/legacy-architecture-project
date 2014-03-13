@@ -267,10 +267,11 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {} ;
-	common.api.social = {} ;
+	common.api.social = common.api.social || {} ;
 	
 	var kendo = window.kendo,
 		stringify = kendo.stringify,
+		isFunction = kendo.isFunction,
 		CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
 	
 	common.api.social.getProfile = function ( options ){				
@@ -285,21 +286,21 @@
 			data: { onetime : options.onetime },
 			success : function(response){
 				if( response.error ){ 		
-					if( typeof options.fail == "function" ){
+					if( isFunction( options.fail ) ){
 						options.fail(response) ;
 					}
 					else{
-						kendo.stringify(response);
+						stringify(response);
 					}
 				} else {					
-					if( typeof options.success == "function" ){
+					if( isFunction( options.success ) ){
 						options.success(response) ;
 					}else{
-						kendo.stringify(response);
+						stringify(response);
 					}						
 				}
 			},
-			error:options.error || handleKendoAjaxError,
+			error:options.error || common.api.handleKendoAjaxError ,
 			dataType : "json"
 		});	
 	};	
