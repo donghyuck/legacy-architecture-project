@@ -278,8 +278,7 @@
 		options = options || {};		
 		if( typeof options.url == 'undefined' && typeof options.media == 'string' ){
 			options.url = CALLBACK_URL_TEMPLATE ({media : options.media});
-		}		
-
+		}	
 		$.ajax({
 			type : 'POST',
 			url : options.url,
@@ -289,15 +288,10 @@
 					if( isFunction( options.fail ) ){
 						options.fail(response) ;
 					}
-					else{
-						stringify(response);
-					}
 				} else {					
 					if( isFunction( options.success ) ){
 						options.success(response) ;
-					}else{
-						stringify(response);
-					}						
+					}				
 				}
 			},
 			error:options.error || common.api.handleKendoAjaxError ,
