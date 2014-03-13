@@ -273,6 +273,7 @@
 	var social_url_template = kendo.template("/community/#= midia #-callback.do?output=json");		
 	
 	common.api.social.getProfile = function ( options ){				
+		alert( "hello" );
 		options = options || {};
 		options.url = options.url || social_url_template(option.media);
 		
