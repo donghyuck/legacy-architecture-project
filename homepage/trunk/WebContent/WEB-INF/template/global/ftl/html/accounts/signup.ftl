@@ -353,6 +353,10 @@
 			-webkit-box-shadow : 0 0 0 0 ;
 			box-shadow : 0 0 0 0;
 		}
+
+		.nav>li>a:hover {
+			background-color:yellow;
+		}
 		
 		</style>
 		</#compress>		
