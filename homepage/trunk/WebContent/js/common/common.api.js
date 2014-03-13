@@ -10,7 +10,7 @@
 		options = options || {};
 		$.ajax({
 			type : 'GET',
-			url : "/logout?output=json",
+			url : options.url || "/logout?output=json",
 			success : function(response){
 				if( options.success ){
 					options.success(response);
