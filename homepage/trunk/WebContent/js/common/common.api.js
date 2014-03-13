@@ -3,7 +3,9 @@
  * User  
  */
 ;(function($, undefined) {
-	var common = window.common = window.common || {}, common.api =  common.api || {}, common.api.user = common.api.user || {} ;
+	var common = window.common = window.common || {};
+	common.api =  common.api || {};
+	common.api.user = common.api.user || {} ;
 		
 	common.api.user.logout = function (options){
 		options = options || {};
@@ -264,8 +266,12 @@
  * Social  
  */
 ;(function($, undefined) {
-	var common = window.common = window.common || {}, common.api = common.api || {}, common.api.social = common.api.social || {};
+	var common = window.common = window.common || {};
+	common.api = common.api || {};
+	common.api.social = common.api.social || {};
+	
 	var social_url_template = kendo.template("/community/#= midia #-callback.do?output=json");		
+	
 	common.api.social.getProfile = function ( options ){				
 		options = options || {};
 		$.ajax({
