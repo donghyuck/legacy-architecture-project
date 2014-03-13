@@ -290,10 +290,12 @@
 			success : function(response){
 				if( typeof response.error === UNDEFINED ){ 		
 					if( isFunction( options.fail ) ){
+						alert(isFunction( options.fail ));
 						options.fail(response) ;
 					}
 				} else {									
 					if( isFunction( options.success ) ){
+						alert(isFunction( options.success ));
 						options.success(response) ;
 					}
 				}
