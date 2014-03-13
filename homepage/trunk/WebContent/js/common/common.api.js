@@ -270,8 +270,12 @@
 	common.api.social = common.api.social || {} ;
 	
 	var kendo = window.kendo,
+		handleKendoAjaxError = common.api.handleKendoAjaxError ;
 		stringify = kendo.stringify,
 		isFunction = kendo.isFunction,
+		UNDEFINED = 'undefined',
+		POST = 'POST',
+		JSON = 'json',
 		CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
 	
 	common.api.social.getProfile = function ( options ){				
@@ -280,23 +284,22 @@
 			options.url = CALLBACK_URL_TEMPLATE ({media : options.media});
 		}	
 		$.ajax({
-			type : 'POST',
+			type : POST,
 			url : options.url,
 			data: { onetime : options.onetime },
 			success : function(response){
-				alert( response.error );
-				if( response.error ){ 		
-					if( isFunction( options.fail ) ){
-						options.fail(response) ;
-					}
-				} else {					
+				if( typeof response.error === UNDEFINED ){ 		
 					if( isFunction( options.success ) ){
 						options.success(response) ;
+					}
+				} else {					
+					if( isFunction( options.fail ) ){
+						options.fail(response) ;
 					}				
 				}
 			},
-			error:options.error || common.api.handleKendoAjaxError ,
-			dataType : "json"
+			error:options.error || handleKendoAjaxError ,
+			dataType : JSON
 		});	
 	};	
 })(jQuery);
