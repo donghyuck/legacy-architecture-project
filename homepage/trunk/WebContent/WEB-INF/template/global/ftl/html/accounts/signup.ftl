@@ -47,7 +47,7 @@
 					external_button.click(function (e){	
 						$("#status").html("");																																
 						var target_media = external_button.attr("data-target");
-						// ${ServletUtils.getLocalHostAddr()}
+						// ${ ServletUtils.getLocalHostAddr() }
 						common.api.user.domain({
 							data : { domainName:  "${ServletUtils.getDomainName( request.getRequestURL().toString() , false)}" }
 						});
