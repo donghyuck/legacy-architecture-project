@@ -270,7 +270,7 @@
 	common.api = common.api || {};
 	common.api.social = common.api.social || {};
 	
-	var social_url_template = kendo.template("/community/#= midia #-callback.do?output=json");		
+	var social_url_template = kendo.template("/community/#= media #-callback.do?output=json");		
 	
 	common.api.social.getProfile = function ( options ){				
 
@@ -278,7 +278,7 @@
 		
 		options = options || {};		
 		if( typeof options.url == 'undefined' && typeof options.media == 'string' ){
-			alert("s");
+			alert( social_url_template({media : option.media}) );
 			
 		}		
 		
