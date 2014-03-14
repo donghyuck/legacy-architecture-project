@@ -15,13 +15,15 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.opensymphony.xwork2.Preparable;
-
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+
+import com.opensymphony.xwork2.Preparable;
 
 public class MyDomainAction extends FrameworkActionSupport implements  Preparable {
 
@@ -40,6 +42,8 @@ public class MyDomainAction extends FrameworkActionSupport implements  Preparabl
 				this.domainName = request.getLocalName() ;
 			}
 		}		
+		//session.containsKey("domainName")
+		//session.keySet()
 		//request.getLocalAddr()
 		return domainName;
 	}
@@ -56,11 +60,12 @@ public class MyDomainAction extends FrameworkActionSupport implements  Preparabl
 	}
 	
 	public String execute() throws Exception {		
+		HttpSession session = request.getSession(true);			
+		
 		if(StringUtils.isNotEmpty(domainName)){			
-			HttpSession session = request.getSession();			
-			//String domainNameInSession = (String) getSession().get(DOMAIN_NAME_KEY); // 
-			String domainNameInSession = (String) session.getAttribute(DOMAIN_NAME_KEY);
 			
+			//String domainNameInSession = (String) getSession().get(DOMAIN_NAME_KEY); // 
+			String domainNameInSession = (String) session.getAttribute(DOMAIN_NAME_KEY);			
 			log.debug("domainName: " + domainName);
 			log.debug("domainNameInSession: " + domainNameInSession);
 			log.debug(StringUtils.equals(domainName, domainNameInSession));
@@ -68,8 +73,16 @@ public class MyDomainAction extends FrameworkActionSupport implements  Preparabl
 			if( !StringUtils.equals(domainName, domainNameInSession)){
 				//getSession().put(DOMAIN_NAME_KEY, domainName);
 				session.setAttribute(DOMAIN_NAME_KEY, domainName);
-			}			
+			}
 		}
+		 
+		Enumeration names = session.getAttributeNames();
+		 while( names.hasMoreElements() ){
+			 String key = (String) names.nextElement();
+			 Object value = session.getAttribute(key);
+			 log.debug( key + "=" + value);
+		 }
+		 
 		return success();
 	}
 
