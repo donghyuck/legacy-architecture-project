@@ -17,7 +17,8 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {				
 				//$("form[name='fm']").attr("action", "${action.socialNetwork.authorizationUrl}").submit();
-				window.location.replace("${action.socialNetwork.authorizationUrl}&display=popup");
+				//window.location.replace("${action.socialNetwork.authorizationUrl}&display=popup");
+				${action.session}
 			}	
 		}]);
 		</script>		
