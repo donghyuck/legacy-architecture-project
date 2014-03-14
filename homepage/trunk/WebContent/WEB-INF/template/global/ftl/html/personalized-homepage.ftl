@@ -1035,7 +1035,7 @@
 					}else if ( command.hasClass('share') ){ 
 						command.click(function (e) { 
 							e.preventDefault();							
-							common.api.getPhotoDetails({
+							common.api.streams.details({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ){
 									alert('s' + data.photos.length );
