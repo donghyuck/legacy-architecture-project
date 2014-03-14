@@ -326,7 +326,7 @@
 		
 		function createPhotoListView(){
 			if( !$('#photo-list-view').data('kendoListView') ){
-							$("#photo-list-view").kendoListView({
+				$("#photo-list-view").kendoListView({
 								dataSource: {
 									type: 'json',
 									transport: {
@@ -365,8 +365,7 @@
 								template: kendo.template($("#photo-list-view-template").html()),								
 								dataBound: function(e) {;		
 								}
-							});	
-							
+							});								
 																	
 							$("#photo-list-view").on("mouseenter",  ".img-wrapper", function(e) {
 									kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
@@ -418,7 +417,7 @@
 									});								
 								}								
 							});
-						}
+			}
 		}
 		
 		function createNoticeGrid(){
@@ -871,11 +870,8 @@
 		<!-- ============================== -->
 		<!-- display photo  panel                                  -->
 		<!-- ============================== -->
-		
-		
-		
-		function displayPhotoPanel(){			
-		
+				
+		function displayPhotoPanel(){					
 			var renderToString =  "photo-panel-0";	
 			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
 			if( $("#" + renderToString ).length == 0  ){			
@@ -924,8 +920,7 @@
 									$("input[name='photo-public-shared']").last().click();
 								}
 							}
-						});		
-						
+						});						
 						if( ! $('#photo-prop-grid').data("kendoGrid") ){
 							$('#photo-prop-grid').kendoGrid({
 								dataSource : {		
@@ -978,14 +973,14 @@
 					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;					
 					if( oldValue != newValue){
 						if(newValue){
-							common.api.addToStreams({
+							common.api.streams.add({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ) {
 									kendo.stringify(data);
 								}
 							});							
 						}else{
-							common.api.removeFromStreams({
+							common.api.streams.remove({
 								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
 								success : function( data ) {
 									kendo.stringify(data);
