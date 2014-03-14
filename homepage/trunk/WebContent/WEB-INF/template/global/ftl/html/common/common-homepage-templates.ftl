@@ -134,114 +134,111 @@
 							<li class="next" data-bind="visible: next"><a href="\\#" class="btn-link"><i class="fa fa-angle-right fa-3x"></i></a></li>								
 						</ul>
 					</div>
-				</nav>		
-							
+				</nav>								
 				<button type="button" class="overlay-close">Close</button>
 				<div class="container">
 					<div class="row" >
 						<div class="col-md-8"><img data-bind="attr:{src: photoUrl}" class="img-responsive" /></div>
 						<div class="col-md-4"
 						<!-- start photo details -->	
-	
 
-
-<div class="panel-group" id="photo-details-accordion">
-	<div class="panel panel-dark">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-info">
-				<i class="fa fa-info"></i>&nbsp;사진정보
-				</a>
-			</h4>
-		</div>
-		<div id="photo-details-info" class="panel-collapse collapse in">
-			<div class="panel-body">
-				<p>파일: <span  data-bind="text: name"/></p>
-				<p>크기: <span  data-bind="text: formattedSize" /> 바이트</p>			
-				<p>생성일: <span  data-bind="text: formattedCreationDate" /></p>			
-				<p>수정일: <span  data-bind="text: formattedModifiedDate"/></p>			
-			</div>
-		</div>
-	</div>	
-	<div class="panel panel-dark">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-tags">
-				<i class="fa fa-tags"></i>&nbsp;태그
-				</a>
-			</h4>
-		</div>
-		<div id="photo-details-tags" class="panel-collapse collapse">
-			<div class="panel-body">
-	
-			</div>
-		</div>
-	</div>	
-	<div class="panel panel-dark">
-		<div class="panel-heading">
-			<h4 class="panel-title">
-				<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-comments">
-				<i class="fa fa-comment-o"></i>&nbsp;댓글
-				</a>
-			</h4>
-		</div>
-		<div id="photo-details-comments" class="panel-collapse collapse">
-			<div class="panel-body">
-						<ul class="media-list">
-							<li class="media">
-								<div class="pull-left" >
-									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</div>
-								<div class="media-body">
-									<h4 class="media-heading">Media heading</h4>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="\\#">
-									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading">Media heading</h4>
-								</div>
-							</li>
-							<li class="media">
-								<a class="pull-left" href="\\#">
-									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading">Media heading</h4>
-								</div>
-							</li>	
-							<li class="media">
-								<a class="pull-left" href="\\#">
-									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading">Media heading</h4>
-								</div>
-							</li>								
-							<li class="media">
-								<a class="pull-left" href="\\#">
-									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</a>
-								<div class="media-body">
-									<h4 class="media-heading">Media heading</h4>
-								</div>
-							</li>	
-							<li class="media">
-								<a class="pull-left" href="\\#">
-									<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
-								</a>
-								<div class="media-body">									
-									<p><textarea class="form-control" rows="3"></textarea></p>
-									<button type="button" class="btn btn-info">확인</button>
-								</div>
-							</li>																	
-						</ul>	
-			</div>
-		</div>
-	</div>			
-</div>  
+							<div class="panel-group" id="photo-details-accordion">
+								<div class="panel panel-dark">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-info">
+											<i class="fa fa-info"></i>&nbsp;사진정보
+											</a>
+										</h4>
+									</div>
+									<div id="photo-details-info" class="panel-collapse collapse in">
+										<div class="panel-body">
+											<p>파일: <span  data-bind="text: name"/></p>
+											<p>크기: <span  data-bind="text: formattedSize" /> 바이트</p>			
+											<p>생성일: <span  data-bind="text: formattedCreationDate" /></p>			
+											<p>수정일: <span  data-bind="text: formattedModifiedDate"/></p>			
+										</div>
+									</div>
+								</div>	
+								<div class="panel panel-dark">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-tags">
+											<i class="fa fa-tags"></i>&nbsp;태그
+											</a>
+										</h4>
+									</div>
+									<div id="photo-details-tags" class="panel-collapse collapse">
+										<div class="panel-body">
+								
+										</div>
+									</div>
+								</div>	
+								<div class="panel panel-dark">
+									<div class="panel-heading">
+										<h4 class="panel-title">
+											<a data-toggle="collapse" data-parent="\\#photo-details-accordion" href="\\#photo-details-comments">
+											<i class="fa fa-comment-o"></i>&nbsp;댓글
+											</a>
+										</h4>
+									</div>
+									<div id="photo-details-comments" class="panel-collapse collapse">
+										<div class="panel-body">
+													<ul class="media-list">
+														<li class="media">
+															<div class="pull-left" >
+																<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+															</div>
+															<div class="media-body">
+																<h4 class="media-heading">Media heading</h4>
+															</div>
+														</li>
+														<li class="media">
+															<a class="pull-left" href="\\#">
+																<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+															</a>
+															<div class="media-body">
+																<h4 class="media-heading">Media heading</h4>
+															</div>
+														</li>
+														<li class="media">
+															<a class="pull-left" href="\\#">
+																<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+															</a>
+															<div class="media-body">
+																<h4 class="media-heading">Media heading</h4>
+															</div>
+														</li>	
+														<li class="media">
+															<a class="pull-left" href="\\#">
+																<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+															</a>
+															<div class="media-body">
+																<h4 class="media-heading">Media heading</h4>
+															</div>
+														</li>								
+														<li class="media">
+															<a class="pull-left" href="\\#">
+																<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+															</a>
+															<div class="media-body">
+																<h4 class="media-heading">Media heading</h4>
+															</div>
+														</li>	
+														<li class="media">
+															<a class="pull-left" href="\\#">
+																<img class="media-object" src="http://www.inkium.com/accounts/view-image.do?width=100&height=150&imageId=1" alt="...">
+															</a>
+															<div class="media-body">									
+																<p><textarea class="form-control" rows="3"></textarea></p>
+																<button type="button" class="btn btn-info">확인</button>
+															</div>
+														</li>																	
+													</ul>	
+										</div>
+									</div>
+								</div>			
+							</div>  
 								
 						<!-- end photo details -->
 						</div>					
