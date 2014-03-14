@@ -76,13 +76,11 @@ public class SocialSignupAction extends SocialCallbackSupport {
 		log.debug(">>" + form.toString());		
 		return success();
 	}
-	
-	
+		
 	private void signup( SignupForm form ){		
 		
 		UserTemplate t = new UserTemplate(form.username, form.password1, form.email, form.name );
-		t.setExternal(true);		
-		
+		t.setExternal(true);	
 		try {
 			this.newUser = getUserManager().createUser(t, getCompany());
 			SocialNetwork networkToUse = getSocialNetwork();
