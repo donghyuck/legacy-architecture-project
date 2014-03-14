@@ -15,6 +15,8 @@
  */
 package architecture.ee.web.community.struts2.action;
 
+import java.util.Enumeration;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
@@ -42,17 +44,27 @@ public class SocialConnectAction extends FrameworkActionSupport implements  Prep
 	private SocialNetwork socialNetwork = null ;	
 		
 	public String execute() throws Exception {
-		
-		if(StringUtils.isNotEmpty(domainName)){			
-			HttpSession session = request.getSession(true);
+		HttpSession session = request.getSession(true);
+		if(StringUtils.isNotEmpty(domainName)){						
 			String domainNameInSession = (String) session.getAttribute(DOMAIN_NAME_KEY);
+			
+			log.debug("domainName: " + domainName);
+			log.debug("domainNameInSession: " + domainNameInSession);
+			log.debug(StringUtils.equals(domainName, domainNameInSession));
 			
 			if( !StringUtils.equals(domainName, domainNameInSession)){
 				session.setAttribute(DOMAIN_NAME_KEY, domainName);
-				getSession().put(domainName, domainName);
+				//getSession().put(DOMAIN_NAME_KEY, domainName);
 			}	
 			
 		}
+		Enumeration names = session.getAttributeNames();
+		 while( names.hasMoreElements() ){
+			 String key = (String) names.nextElement();
+			 Object value = session.getAttribute(key);
+			 log.debug( key + "=" + value);
+		 }
+		 
 		return success();
 	}	
 	
