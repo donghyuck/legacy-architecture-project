@@ -17,8 +17,8 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 				
-				document.domain = "${action.domainName}"; 
-
+				"${action.domainName}"; 
+				
 			}	
 		}]);
 		</script>		
