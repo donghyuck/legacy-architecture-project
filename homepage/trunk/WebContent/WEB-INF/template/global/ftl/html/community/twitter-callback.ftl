@@ -19,7 +19,7 @@
 					<#assign onetime = action.onetime >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 					
-					${request.session} 
+					${request.session.entrySet()} 
 					${after_domain}
 										
 				<#else>	
