@@ -15,6 +15,7 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
 			'${request.contextPath}/js/common/common.cbpBGSlideshow.min.js',
 			'${request.contextPath}/js/jquery.imagesloaded/imagesloaded.min.js',
+			'${request.contextPath}/js/jquery.cookie/jquery.cookie.min.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
@@ -50,8 +51,8 @@
 						$("#status").html("");																																
 						var target_media = external_button.attr("data-target");		
 						
-						document.domain = "${ServletUtils.getLocalHostAddr()}"; 
-										
+						$.cookie('domainName', document.domain, { expires: 1, path: '/', domain: '${ServletUtils.getLocalHostAddr()}', secure: false });
+																
 						if( target_media == "twitter" ){
 							common.api.user.domain({
 								url : "http://${ServletUtils.getLocalHostAddr()}/community/my-domain.do?output=json",
