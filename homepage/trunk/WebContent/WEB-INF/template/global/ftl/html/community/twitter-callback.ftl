@@ -15,19 +15,57 @@
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
-			complete: function() {
-				
-				
-				
+			complete: function() {				
 				<#if action.userProfile?exists >
-					<#assign before_domain = action.session.get("domainName") >
+					<#assign onetime = action.onetime >
+					<#assign before_domain = action.domainName >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
-					${before_domain}
-					${after_domain}
-										
+					// 1. 인증 성공
+					<#if before_domain !=  after_domain >
+						${response.sendRedirect("http://" + before_domain + "/community/twitter-callback.do?onetime=" + onetime  )}						
+					<#else>						
+						var onetime = '${onetime}' ;
+						<#if action.user.anonymous >
+							// is anonymous							
+							<#if action.findUser()?exists >
+							// is connected 						
+							if(typeof window.opener.handleCallbackResult == "function"){		
+								window.opener.handleCallbackResult("twitter", onetime , true);
+								window.close();						
+							}else if( typeof window.opener.signupCallbackResult == "function"){			
+								window.opener.signupCallbackResult("twitter", onetime, true);
+							}else{
+							
+							}		
+							<#else>
+							// is not connected 
+							var template = kendo.template($('#account-not-found-alert-template').html());
+							$("#status").html(template({
+								media: "twitter",
+								user : {
+									id : "${action.userProfile.id}",
+									name: "${action.userProfile.name}"
+								}
+							}));					
+							$('.alert button').first().click( function() {													
+								if(typeof window.opener.handleCallbackResult == "function"){		
+									window.opener.handleCallbackResult("twitter", onetime , false);	
+								}else if( typeof window.opener.signupCallbackResult == "function"){			
+									// goto signup
+									window.opener.signupCallbackResult("twitter", onetime, false);
+								} else {
+									window.opener.location.href = "${request.contextPath}/accounts/signup.do";
+								}		
+								window.close();							
+							});							
+							</#if>
+						<#else>
+						
+						</#if>
+					</#if>
 				<#else>	
 					// 2. 인증 실패..
-				</#if>	
+				</#if>
 			}	
 		}]);
 		</script>		
