@@ -19,13 +19,9 @@ import org.apache.commons.lang.StringUtils;
 import org.scribe.model.Token;
 
 import architecture.common.user.User;
-import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.tumblr.TumblrServiceProvider;
-import architecture.ee.web.community.social.tumblr.UserInfo;
-import architecture.ee.web.community.social.twitter.TwitterProfile;
-import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 
 public class TumblrCallbackAction extends SocialCallbackSupport {
@@ -71,6 +67,7 @@ public class TumblrCallbackAction extends SocialCallbackSupport {
 			newSocialNetwork.setAccessSecret(token.getSecret());
 			newSocialNetwork.setAccessToken(token.getToken());
 			setSocialNetwork(newSocialNetwork);			
+			setOnetimeSecureObject();			
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
 			restoreOnetimeSecureObject();
 		}		
