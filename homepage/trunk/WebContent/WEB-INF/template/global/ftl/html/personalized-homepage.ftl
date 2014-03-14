@@ -98,6 +98,8 @@
 					</#if>
 					afterAuthenticate : function(){							
 						//$('.dropdown-toggle').dropdown();
+						alert( currentUser.anonymous );
+						
 						if( currentUser.anonymous ){
 							$("#account-navbar .custom-external-login-groups button").each(function( index ) {
 									var external_login_button = $(this);
