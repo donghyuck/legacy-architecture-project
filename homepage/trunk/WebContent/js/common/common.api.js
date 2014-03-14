@@ -133,82 +133,6 @@
 		return item;
 	}
 	
-	common.api.addToStreams = function (options){
-		options = options || {};
-		$.ajax({
-			type : 'POST',
-			url : options.url || '/community/add-streams-photo.do?output=json' ,
-			data: { imageId : options.imageId },
-			success : function(response){
-				if( response.error ){ 												
-					options.fail(response) ;
-				} else {					
-					options.success(response) ;					
-				}
-			},
-			error:options.error || handleKendoAjaxError,
-			dataType : "json"
-		});	
-	}
-
-	common.api.removeFromStreams = function (options){
-		options = options || {};
-		$.ajax({
-			type : 'POST',
-			url : options.url || '/community/remove-streams-photo.do?output=json' ,
-			data: { imageId : options.imageId },
-			success : function(response){
-				if( response.error ){ 												
-					options.fail(response) ;
-				} else {					
-					options.success(response) ;					
-				}
-			},
-			error:options.error || handleKendoAjaxError,
-			dataType : "json"
-		});	
-	}	
-	
-	common.api.photoStreamsDataSource = new kendo.data.DataSource({		
-		serverPaging: true,
-		pageSize: 15,
-		transport: { 
-			read: {
-				url : '/community/list-streams-photo.do?output=json',
-				type: 'POST',
-				dataType: 'json'
-			},
-            parameterMap: function (options, type){
-                return { startIndex: options.skip, pageSize: options.pageSize }
-            }
-		},
-        schema: {
-            total: "photoCount",
-            data: "photos",
-            model: common.models.Photo
-        },
-        error:common.api.handleKendoAjaxError
-	});
-
-	common.api.getPhotoDetails = function ( options ){		
-		options = options || {};
-		$.ajax({
-			type : 'POST',
-			url : options.url || '/community/get-streams-photo.do?output=json' ,
-			data: { imageId : options.imageId },
-			success : function(response){
-				if( response.error ){ 												
-					options.fail(response) ;
-				} else {					
-					options.success(response) ;					
-				}
-			},
-			error:options.error || handleKendoAjaxError,
-			dataType : "json"
-		});	
-	};
-	
-	
 	common.api.handleKendoAjaxError = function (xhr) {
 		var message = "";
 		if (xhr.status == 0) {
@@ -273,26 +197,109 @@
 		});			
 	}
 	
-	common.api.user.domain = function (options){
-		if( typeof options.data ===UNDEFINED ){			
-			options.data = {};
-		}
-		$.ajax({
-			type : 'POST',
-			url : options.url || "/community/my-domain.do?output=json",
-			data : options.data,
-			success : function(response){
-				if( options.success ){
-					if( isFunction(options.success)  )
-						options.success(response);
-				}
-			},
-			error:handleKendoAjaxError												
-		});			
-		
-	}
-	
 })(jQuery);	
+
+/**
+ * Streams  
+ */
+;(function($, undefined) {
+	var common = window.common = window.common || {} ;
+	common.api.streams = common.api.streams || {} ;
+	
+	var kendo = window.kendo,
+		handleKendoAjaxError = common.api.handleKendoAjaxError ;
+		stringify = kendo.stringify,
+		Photo = common.models.Photo,
+		isFunction = kendo.isFunction,
+		UNDEFINED = 'undefined',
+		POST = 'POST',
+		JSON = 'json',
+		CALLBACK_URL_TEMPLATE = kendo.template("/community/#= media #-callback.do?output=json");
+
+		common.api.streams.add = function (options){
+			options = options || {};
+			$.ajax({
+				type : 'POST',
+				url : options.url || '/community/add-streams-photo.do?output=json' ,
+				data: { imageId : options.imageId },
+				success : function(response){
+					if( response.error ){ 												
+						if( isFunction (options.fail) )
+							options.fail(response) ;
+					} else {					
+						if( isFunction(options.success) )
+							options.success(response) ;					
+					}
+				},
+				error:options.error || handleKendoAjaxError,
+				dataType : "json"
+			});	
+		}
+
+		common.api.streams.remove = function (options){
+			options = options || {};
+			$.ajax({
+				type : 'POST',
+				url : options.url || '/community/remove-streams-photo.do?output=json' ,
+				data: { imageId : options.imageId },
+				success : function(response){
+					if( response.error ){ 												
+						if( isFunction (options.fail) )
+							options.fail(response) ;
+					} else {					
+						if( isFunction(options.success) )
+							options.success(response) ;					
+					}
+				},
+				error:options.error || handleKendoAjaxError,
+				dataType : "json"
+			});	
+		}	
+		
+		common.api.streams.dataSource = new kendo.data.DataSource({		
+			serverPaging: true,
+			pageSize: 15,
+			transport: { 
+				read: {
+					url : '/community/list-streams-photo.do?output=json',
+					type: 'POST',
+					dataType: 'json'
+				},
+	            parameterMap: function (options, type){
+	                return { startIndex: options.skip, pageSize: options.pageSize }
+	            }
+			},
+	        schema: {
+	            total: "photoCount",
+	            data: "photos",
+	            model: Photo
+	        },
+	        error:options.error || handleKendoAjaxError,
+		});
+
+		common.api.streams.details = function ( options ){		
+			options = options || {};
+			$.ajax({
+				type : 'POST',
+				url : options.url || '/community/get-streams-photo.do?output=json' ,
+				data: { imageId : options.imageId },
+				success : function(response){
+					if( response.error ){ 												
+						if( isFunction (options.fail) )
+							options.fail(response) ;
+					} else {					
+						if( isFunction(options.success) )
+							options.success(response) ;					
+					}
+				},
+				error:options.error || handleKendoAjaxError,
+				dataType : "json"
+			});	
+		};		
+		
+
+})(jQuery);
+
 /**
  * Social  
  */
