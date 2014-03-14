@@ -18,7 +18,7 @@
 			
 				<#if action.userProfile?exists >
 					<#assign onetime = action.onetime >
-					<#assign before_domain = ServletUtils.getDomainName(action.referer, false) >
+					<#assign before_domain = action.domainName >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 					// 1. 인증 성공
 					<#if before_domain !=  after_domain >
