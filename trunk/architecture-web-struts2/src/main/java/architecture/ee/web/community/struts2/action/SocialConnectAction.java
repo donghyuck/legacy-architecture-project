@@ -80,6 +80,13 @@ public class SocialConnectAction extends FrameworkActionSupport implements  Prep
 	}
 	
 	/**
+	 * @param domainName 설정할 domainName
+	 */
+	public void setDomainName(String domainName) {
+		this.domainName = domainName;
+	}
+
+	/**
 	 * @return socialNetworkId
 	 */
 	public Long getSocialNetworkId() {

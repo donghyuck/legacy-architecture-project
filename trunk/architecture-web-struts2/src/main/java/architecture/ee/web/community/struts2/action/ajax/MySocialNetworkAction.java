@@ -32,7 +32,7 @@ import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class MySocialNetworkAction extends FrameworkActionSupport implements SocialNetworkAware  {
+public class MySocialNetworkAction extends FrameworkActionSupport implements SocialNetworkAware   {
     
 	private Long socialNetworkId = -1L; 
 	

@@ -55,7 +55,47 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	private String onetime = null ;
 	private Object userProfile = null;
 	private User foundUser = null;
+	private Boolean signin = false;
+	private Boolean signup = false;
 	
+	public String getDomainName () {
+		String domainToUse = null;
+		if( getSession().containsKey("domainName")){
+			domainToUse = (String) getSession().get("domainName");
+		}else{
+			domainToUse = request.getLocalName() ;
+		}
+		return domainToUse;
+	}
+	
+		/**
+	 * @return signin
+	 */
+	public Boolean getSignin() {
+		return signin;
+	}
+
+	/**
+	 * @param signin 설정할 signin
+	 */
+	public void setSignin(Boolean signin) {
+		this.signin = signin;
+	}
+
+	/**
+	 * @return signup
+	 */
+	public Boolean getSignup() {
+		return signup;
+	}
+
+	/**
+	 * @param signup 설정할 signup
+	 */
+	public void setSignup(Boolean signup) {
+		this.signup = signup;
+	}
+
 		/**
 	 * @return onetime
 	 */
@@ -178,7 +218,6 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 	
 	public boolean signIn() {		
 		User userToUse = findUser();
-		log.debug("try ... single sign on ............" + userToUse.getUserId());
 		if( userToUse != null ){			
 			createSecurityContext(userToUse);			
 			UserTemplate template = new UserTemplate(userToUse);
