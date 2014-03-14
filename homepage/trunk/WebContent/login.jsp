@@ -96,7 +96,7 @@
 				var btn = $('.custom-signup');				
 				btn.button('loading');				
 				
-				//var input_email_required = (signupPlaceHolder.media == 'twitter') ;
+				var input_email_required = (signupPlaceHolder.media == 'twitter') ;
 				
 				var input_checkbox = $("input[name='input-agree']");
 				var input_email = $("input[name='input-email']");
@@ -105,7 +105,7 @@
 				var hasError = false;
 				var error_message = null;
 				
-				if( signupPlaceHolder.media === 'twitter' ){
+				if( input_email_required){
 					if ( signupPlaceHolder.email == null ){
 						hasError = true;
 						error_message = input_email.attr('data-required-msg');						
@@ -240,7 +240,7 @@
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
 					signupPlaceHolder.onetime = code ;					
-					if( media == 'twitter'){					
+					if( media === 'twitter'){					
 						$('form[name="fm2"] fieldset').removeClass("hide");
 					}
 					
