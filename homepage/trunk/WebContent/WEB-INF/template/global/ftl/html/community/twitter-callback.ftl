@@ -17,7 +17,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 				
-				document.domain = "${ServletUtils.getLocalHostAddr()}"; 
+				${action.session} 
 				
 				<#if action.userProfile?exists >
 					<#assign onetime = action.onetime >
