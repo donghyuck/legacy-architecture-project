@@ -30,7 +30,6 @@ import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.facebook.FacebookProfile;
 import architecture.ee.web.community.social.impl.SocailNetworkImpl;
 import architecture.ee.web.community.social.twitter.TwitterProfile;
-import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 import architecture.ee.web.util.ParamUtils;
 
@@ -64,28 +63,26 @@ public class SocialSignupAction extends SocialCallbackSupport {
 				form.username = t.getName();
 				form.name = t.getScreenName();
 				form.id = String.valueOf( t.getId() )						;
-			}
-		
+			}		
 			if( form.agree ){
 				if( StringUtils.isEmpty( form.getPassword1() ))
 					form.setPassword1( getRandomPassword() );
-			}
-			
+			}			
 			if( StringUtils.isEmpty(form.username) && StringUtils.isNotEmpty(form.email)){
 				form.username = form.email;
 			}
-			newAccount(form);
-		}		
-		
-		log.debug(">>" + form.toString());
-		
+			signup(form);			
+		}
+		log.debug(">>" + form.toString());		
 		return success();
 	}
 	
-	private void newAccount( SignupForm form ){
+	
+	private void signup( SignupForm form ){		
 		
 		UserTemplate t = new UserTemplate(form.username, form.password1, form.email, form.name );
 		t.setExternal(true);		
+		
 		try {
 			this.newUser = getUserManager().createUser(t, getCompany());
 			SocialNetwork networkToUse = getSocialNetwork();
@@ -93,15 +90,13 @@ public class SocialSignupAction extends SocialCallbackSupport {
 			((SocailNetworkImpl)networkToUse).setObjectId(newUser.getUserId());				
 			networkToUse.setUsername(form.id);
 			getSocialNetworkManager().saveSocialNetwork(networkToUse);		
-		} catch (UserAlreadyExistsException e) {
-			
-		} catch (EmailAlreadyExistsException e) {			
-		
-		}
-	}
+		} catch (UserAlreadyExistsException e) {			
+		} catch (EmailAlreadyExistsException e) {}
 	
+	}
+		
 	private SecureRandom random = new SecureRandom();
-
+	
 	private String getRandomPassword() {
 		return new BigInteger(130, random).toString(32);
 	}
@@ -117,7 +112,6 @@ public class SocialSignupAction extends SocialCallbackSupport {
 		return false;
 	}
 	
-    
     public static class SignupForm {
     	
     	String media = "UNKNOWN" ;
