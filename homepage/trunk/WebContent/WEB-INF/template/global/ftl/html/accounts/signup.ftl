@@ -49,10 +49,10 @@
 					var external_button = $(this);
 					external_button.click(function (e){	
 						$("#status").html("");																																
-						var target_media = external_button.attr("data-target");		
-						
+						var target_media = external_button.attr("data-target");								
+						var target_url = "http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?media=" + target_media + "&domain=" + document.domain ; 
 						window.open( 
-							'http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?domain=' + document.domain ,
+							target_url,
 							'popUpWindow',
 							'height=500,
 							width=600,
@@ -65,8 +65,7 @@
 							location=no,
 							directories=no,
 							status=yes');
-						
-						
+												
 						/*
 						$.cookie('domainName', document.domain, { expires: 1, path: '/community', domain: '${ServletUtils.getLocalHostAddr()}', secure: false });
 																
@@ -82,7 +81,6 @@
 							data: { media: target_media },
 							success : function(response){
 								if( response.error ){
-									// 연결실패.
 								} else {	
 									window.open( response.authorizationUrl + '&display=popup' ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
 								}
@@ -90,6 +88,8 @@
 							error:handleKendoAjaxError												
 						});
 						*/
+						
+						
 					});		
 				});						
 								
