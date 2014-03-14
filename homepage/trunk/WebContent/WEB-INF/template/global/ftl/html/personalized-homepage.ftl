@@ -909,7 +909,7 @@
 						],						
 					}).bind('open', function( e ) {
 						// start open event handler  	
-						common.api.getPhotoDetails({
+						common.api.streams.details({
 							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
 							success : function( data ) {
 								if( data.photos.length > 0 ){
