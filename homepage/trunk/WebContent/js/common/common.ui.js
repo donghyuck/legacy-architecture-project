@@ -483,6 +483,8 @@
 	var Widget = kendo.ui.Widget, ui = window.ui = window.ui || {};
 	var proxy = $.proxy,
 	template = kendo.template,
+	stringify = kendo.stringify,
+	isFunction = kendo.isFunction,	
 	AUTHENTICATE_URL = "/accounts/get-user.do?output=json",
 	AUTHENTICATE = "authenticate", 
 	LOGIN_URL = "/login", 
@@ -492,7 +494,7 @@
 	SYSTEM_ROLE = "ROLE_ADMIN",
     NS = ".kendoAccounts",
 	open = false,
-	DISABLED = "disabled";
+	DISABLED = "disabled";	
 	ui.kendoAccounts = Widget.extend( {		
 		init: function(element, options) {	
 			var that = this;			
@@ -500,8 +502,8 @@
 			options = that.options;
 			element = that.element;			
 			if (options.doAuthenticate) {
-                that.authenticate();
-            }            
+				that.authenticate();
+			}
 			kendo.notify(that);
 		},	
 		options : {	
@@ -532,8 +534,8 @@
     				if(that.options.visible){
     					that.render();
     				}
-    				if( that.options.afterAuthenticate != null ){
-    					that.options.afterAuthenticate();    					
+    				if( isFunction(that.options.afterAuthenticate) ){
+    					that.options.afterAuthenticate();
     				}
     			},
     			error: that.options.ajax.error || handleKendoAjaxError,
