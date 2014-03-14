@@ -489,6 +489,7 @@
 	AUTHENTICATE = "authenticate", 
 	LOGIN_URL = "/login", 
 	PHOTO_URL = "/accounts/view-image.do?width=100&height=150",
+	CALLBACK_URL_TEMPLATE = kendo.template("#if ( typeof( connectorHostname ) == 'string'  ) { #http://#= connectorHostname ## } #/community/connect-socialnetwork.do?media=#= media #&domainName=#= domain #"),
 	ERROR = "error",
 	UPDATE = "update",
 	SYSTEM_ROLE = "ROLE_ADMIN",
@@ -513,7 +514,8 @@
 			visible: true,
 			ajax : { url : AUTHENTICATE_URL },
 			template : null,
-			dropdown : true
+			dropdown : true,
+			connectorHostname : null ,
 		},
 		events : [
 			AUTHENTICATE,
@@ -534,7 +536,23 @@
     				if(that.options.visible){
     					that.render();
     				}
-    				if( isFunction(that.options.afterAuthenticate) ){
+    				
+					if( that.token.anonymous ){
+						$(that.element).find(".custom-external-login-groups button").each(function( index ) {
+								var external_login_button = $(this);
+								external_login_button.click(function (e){										
+									var target_media = external_login_button.attr("data-target");
+									var target_url = CALLBACK_URL_TEMPLATE({connectorHostname: that.options.connectorHostname, media: target_media, domain: document.domain });
+									window.open( 
+									target_url,
+									'popUpWindow', 
+									'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
+								});								
+						});	
+					}	
+					    				
+    				    				
+    				if( isFunction(that.options.afterAuthenticate) ){    					   					
     					that.options.afterAuthenticate();
     				}
     			},
