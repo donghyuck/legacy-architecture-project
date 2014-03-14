@@ -50,7 +50,7 @@
 					external_button.click(function (e){	
 						$("#status").html("");																																
 						var target_media = external_button.attr("data-target");								
-						var target_url = "http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?media=" + target_media + "&domain=" + document.domain ; 
+						var target_url = "http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?media=" + target_media + "&domainName=" + document.domain ; 
 						window.open( 
 							target_url,
 							'popUpWindow', 
