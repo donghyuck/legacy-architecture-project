@@ -132,8 +132,7 @@
 				if( hasError ){
 					alert_danger.html( template({message: error_message }) );			
 					btn.button('reset')
-				}else{
-				
+				}else{				
 					common.api.signup({
 						data: kendo.stringify( signup_modal.data("signupPlaceHolder") ),
 						success : function(data){														
@@ -149,10 +148,8 @@
 								}); 								
 							}
 						},
-						fail : function(response){
-							
-							alert( "회원 가입이 정상적으로 처지되지 못했습니다." );
-							
+						fail : function(response){							
+							alert( "회원 가입이 정상적으로 처지되지 못했습니다." );							
 							btn.button('reset')
 							$('#signup-modal').modal('hide');
 						}
@@ -186,6 +183,13 @@
 				var external_login_button = $(this);
 				external_login_button.click(function (e){																												
 					var target_media = external_login_button.attr("data-target");
+					var target_url = "http://<%= architecture.ee.web.util.ServletUtils.getLocalHostAddr()%>/community/connect-socialnetwork.do?media=" + target_media + "&domainName=" + document.domain ; 
+					window.open( 
+							target_url,
+							'popUpWindow', 
+							'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
+					
+					/**
 					$.ajax({
 						type : 'POST',
 						url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/get-socialnetwork.do?output=json",
@@ -199,6 +203,7 @@
 						},
 						error:handleKendoAjaxError												
 					});	
+					**/
 				});								
 			});						
 	
