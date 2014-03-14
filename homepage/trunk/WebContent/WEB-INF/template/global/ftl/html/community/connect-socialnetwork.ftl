@@ -17,7 +17,7 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 				
-				document.domain = "${ServletUtils.getLocalHostAddr()}"; 
+				document.domain = "${action.domainName}"; 
 
 			}	
 		}]);
