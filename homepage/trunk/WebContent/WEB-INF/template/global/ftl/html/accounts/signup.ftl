@@ -51,7 +51,7 @@
 						$("#status").html("");																																
 						var target_media = external_button.attr("data-target");		
 						
-						$.cookie('domainName', document.domain, { expires: 1, path: '/', domain: '${ServletUtils.getLocalHostAddr()}', secure: false });
+						$.cookie('domainName', document.domain, { expires: 1, path: '/community', domain: '${ServletUtils.getLocalHostAddr()}', secure: false });
 																
 						if( target_media == "twitter" ){
 							common.api.user.domain({
