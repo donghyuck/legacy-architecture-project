@@ -17,12 +17,14 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 				
-				${action.session} 
+				
 				
 				<#if action.userProfile?exists >
-					<#assign onetime = action.onetime >
+					<#assign before_domain = ServletUtils.getDomainName(action.referer, false) >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
-					
+					${before_domain}
+					${after_domain}
+					${action.session.get("domainName")} 
 										
 				<#else>	
 					// 2. 인증 실패..
