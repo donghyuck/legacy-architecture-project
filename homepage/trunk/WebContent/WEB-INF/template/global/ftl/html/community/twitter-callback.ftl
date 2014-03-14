@@ -19,8 +19,13 @@
 					<#assign onetime = action.onetime >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 					
-					${request.getSession().containsKey("domainName")} 
-					${after_domain}
+					common.api.user.domain({							
+						success: function(data){
+							alert( kendo.stringify( data ) ) ;
+						}
+					});
+							
+					//${after_domain}
 										
 				<#else>	
 					// 2. 인증 실패..
