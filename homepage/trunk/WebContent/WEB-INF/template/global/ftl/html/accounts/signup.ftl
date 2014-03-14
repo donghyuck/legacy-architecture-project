@@ -51,6 +51,23 @@
 						$("#status").html("");																																
 						var target_media = external_button.attr("data-target");		
 						
+						window.open( 
+							'http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?domain=' + document.domain ,
+							'popUpWindow',
+							'height=500,
+							width=600,
+							left=10,
+							top=10,
+							resizable=yes,
+							scrollbars=yes,
+							toolbar=yes,
+							menubar=no,
+							location=no,
+							directories=no,
+							status=yes');
+						
+						
+						/*
 						$.cookie('domainName', document.domain, { expires: 1, path: '/community', domain: '${ServletUtils.getLocalHostAddr()}', secure: false });
 																
 						if( target_media == "twitter" ){
@@ -72,6 +89,7 @@
 							},
 							error:handleKendoAjaxError												
 						});
+						*/
 					});		
 				});						
 								
