@@ -23,16 +23,6 @@
 					<#assign onetime = action.onetime >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
 					
-					common.api.user.domain({	
-						url : "http://${ServletUtils.getLocalHostAddr()}/community/my-domain.do?output=json",		
-						success: function(data){
-							alert( kendo.stringify( data ) ) ;
-						}
-					});
-					
-					alert( $.cookie('domainName', { expires: 1, path: '/community', domain: '${ServletUtils.getLocalHostAddr()}', secure: false }));
-							
-					//${after_domain}
 										
 				<#else>	
 					// 2. 인증 실패..
