@@ -15,18 +15,16 @@
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
-			complete: function() {
-				
-				"${action.domainName}"; 
-				
-				${action.session}
-				
+			complete: function() {				
+				$("form[name='fm']").attr("action", "${action.socialNetwork.authorizationUrl}").submit();
 			}	
 		}]);
 		</script>		
 		</#compress>
 	</head>
 	<body class="color2">						
-		<form name="fm" method="POST" ></form>	
+		<form name="fm" method="POST" >
+			<input type="hidden" name="display" value="popup"/>
+		</form>	
 	</body>	
 </html>
