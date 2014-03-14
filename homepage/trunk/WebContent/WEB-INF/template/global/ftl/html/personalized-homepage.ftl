@@ -125,7 +125,8 @@
 										});										
 									**/		
 									});								
-							});						
+							});	
+												
 							var validator = $("#login-navbar").kendoValidator({validateOnBlur:false}).data("kendoValidator");
 							$("#login-btn").click(function() { 
 								$("#login-status").html("");
