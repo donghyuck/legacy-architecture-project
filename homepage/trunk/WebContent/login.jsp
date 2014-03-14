@@ -239,9 +239,13 @@
 					var signupPlaceHolder = $('#signup-modal').data("signupPlaceHolder");
 					signupPlaceHolder.reset();
 					signupPlaceHolder.media = media ;
-					signupPlaceHolder.onetime = code ;					
+					signupPlaceHolder.onetime = code ;			
+					
 					if( media === 'twitter'){					
 						$('form[name="fm2"] fieldset').removeClass("hide");
+					} else {
+						if( $('form[name="fm2"] fieldset').hasClass("hide") )
+							$('form[name="fm2"] fieldset').addClass("hide");
 					}
 					
 					$('#signup-modal').modal('show');
