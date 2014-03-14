@@ -8,6 +8,7 @@
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+			'${request.contextPath}/js/jquery.cookie/jquery.cookie.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.js',
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
@@ -28,6 +29,8 @@
 							alert( kendo.stringify( data ) ) ;
 						}
 					});
+					
+					alert( $.cookie('domainName', { expires: 1, path: '/', domain: '${ServletUtils.getLocalHostAddr()}', secure: false }));
 							
 					//${after_domain}
 										
