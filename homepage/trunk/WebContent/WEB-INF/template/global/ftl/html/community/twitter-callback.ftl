@@ -15,6 +15,9 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
+				
+				document.domain = "${ServletUtils.getLocalHostAddr()}"; 
+				
 				<#if action.userProfile?exists >
 					<#assign onetime = action.onetime >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
