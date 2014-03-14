@@ -87,7 +87,8 @@
 
 				// 3. ACCOUNTS LOAD	
 				var currentUser = new User({});			
-				var accounts = $("#account-navbar").kendoAccounts({					
+				var accounts = $("#account-navbar").kendoAccounts({				
+					connectorHostname: ${ServletUtils.getLocalHostAddr()},	
 					authenticate : function( e ){
 						currentUser = e.token;
 					},
