@@ -33,7 +33,7 @@
 
 	</package>	
 
-
+	<!--  ACCOUNTS USER ACTIONS -->	
 	<package name="framework-community-accounts-actions" namespace="/accounts" extends="framework-default">
 		<action name="signup-external" class="architecture.ee.web.community.struts2.action.ajax.SocialSignupAction">
 			<result name="json-success" type="json">
@@ -46,6 +46,7 @@
 			</result>	
 		</action>		
 	</package>	
+	
 	<!--  COMMUNITY USER ACTIONS -->	
 
 	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
@@ -163,6 +164,7 @@
 			  </param>				
 			</result>
 		</action>
+		
 		<action name="delete-socialnetwork"  method="deleteSocialNetwork"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
 			  <param name="contentType">application/json</param>
@@ -173,6 +175,18 @@
 			  </param>				
 			</result>
 		</action>
+		
+		<action name="connect-socialnetwork"  class="architecture.ee.web.community.struts2.action.SocialConnectAction">
+			<result name="success" type="freemarker">/html/community/connect-socialnetwork.ftl</result>
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>
+			  <param name="includeProperties">
+				domainName
+			  </param>				
+			</result>	
+		</action>		
 					
 		<action name="tumblr-callback" class="architecture.ee.web.community.struts2.action.TumblrCallbackAction">
 			<result name="success" type="freemarker">/html/community/tumblr-callback.ftl</result>
@@ -181,9 +195,9 @@
 			  <param name="enableGZIP">true</param>
 			  <param name="excludeNullProperties">false</param>     
 			  <param name="excludeProperties">user.password, user.passwordHash</param>
-			  <param name="includeProperties">
-				user.*, userProfile.*
-			  </param>				
+			  <param name="root">
+			  userProfile
+			  </param>		
 			</result>			
 		</action>					
 										
@@ -194,9 +208,9 @@
 			  <param name="enableGZIP">true</param>
 			  <param name="excludeNullProperties">false</param>     
 			  <param name="excludeProperties">user.password, user.passwordHash</param>
-			  <param name="includeProperties">
-				user.*, userProfile.*
-			  </param>				
+			  <param name="root">
+			  userProfile
+			  </param>		
 			</result>			
 		</action>		
 					
@@ -206,8 +220,7 @@
 			  <param name="contentType">application/json</param>
 			  <param name="enableGZIP">true</param>
 			  <param name="excludeNullProperties">false</param>     
-			 <param name="excludeProperties">user.password, user.passwordHash</param>
-			
+			 <param name="excludeProperties">user.password, user.passwordHash</param>			
 			  <param name="root">
 			  userProfile
 			  </param>
