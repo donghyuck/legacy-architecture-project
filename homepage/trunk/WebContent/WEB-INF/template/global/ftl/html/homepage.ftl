@@ -25,7 +25,7 @@
 					
 				// 2. ACCOUNTS LOAD	
 				var accounts = $("#account-navbar").kendoAccounts({
-					dropdown : false,
+					connectorHostname: ${ServletUtils.getLocalHostAddr()},
 					authenticate : function( e ){
 						currentUser = e.token;										
 					},
