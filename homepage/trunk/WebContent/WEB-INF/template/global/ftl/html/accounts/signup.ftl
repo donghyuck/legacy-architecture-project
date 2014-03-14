@@ -49,19 +49,20 @@
 					var external_button = $(this);
 					external_button.click(function (e){	
 						$("#status").html("");																																
-						var target_media = external_button.attr("data-target");					
-						/**			
+						
+						var target_media = external_button.attr("data-target");	
+										
+						
 						var target_url = "http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?media=" + target_media + "&domainName=" + document.domain ; 
 						window.open( 
 							target_url,
 							'popUpWindow', 
 							'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
-							$.cookie('domainName', document.domain, { expires: 1, path: '/community', domain: '${ServletUtils.getLocalHostAddr()}', secure: false });
-						*/		
+							
 										
 						
 						
-																
+						/*										
 						if( target_media == "twitter" ){
 							common.api.user.domain({
 								url : "http://${ServletUtils.getLocalHostAddr()}/community/my-domain.do?output=json",
@@ -81,7 +82,7 @@
 							error:handleKendoAjaxError												
 						});
 						
-						
+						**/
 						
 					});		
 				});						
