@@ -21,7 +21,7 @@
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
 				
-				document.domain = "${ServletUtils.getLocalHostAddr()}"; 
+				
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
@@ -48,7 +48,10 @@
 					var external_button = $(this);
 					external_button.click(function (e){	
 						$("#status").html("");																																
-						var target_media = external_button.attr("data-target");						
+						var target_media = external_button.attr("data-target");		
+						
+						document.domain = "${ServletUtils.getLocalHostAddr()}"; 
+										
 						if( target_media == "twitter" ){
 							common.api.user.domain({
 								url : "http://${ServletUtils.getLocalHostAddr()}/community/my-domain.do?output=json",
