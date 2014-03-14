@@ -274,7 +274,7 @@
 	            data: "photos",
 	            model: Photo
 	        },
-	        error:options.error || handleKendoAjaxError,
+	        error: handleKendoAjaxError,
 		});
 
 		common.api.streams.details = function ( options ){		
