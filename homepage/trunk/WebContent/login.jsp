@@ -255,7 +255,12 @@
 	#login-window .modal-dialog {
 		width : 550px;
 	}
-	
+
+	.nav>li>a:hover {
+		background-color:#007AFF;
+		color : #ffffff;
+	}
+			
 </style>
 </head>
 <body class="color1">
