@@ -18,8 +18,8 @@
 				<#if action.userProfile?exists >
 					<#assign onetime = action.onetime >
 					<#assign after_domain = ServletUtils.getDomainName( request.getRequestURL().toString() , false) >
-					${action.session}
-					${onetime}
+					
+					${request.session} 
 					${after_domain}
 										
 				<#else>	
