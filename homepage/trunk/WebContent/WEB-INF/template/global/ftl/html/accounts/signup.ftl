@@ -50,18 +50,12 @@
 					external_button.click(function (e){	
 						$("#status").html("");																																
 						
-						var target_media = external_button.attr("data-target");	
-										
-						
+						var target_media = external_button.attr("data-target");
 						var target_url = "http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?media=" + target_media + "&domainName=" + document.domain ; 
 						window.open( 
 							target_url,
 							'popUpWindow', 
 							'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
-							
-										
-						
-						
 						/*										
 						if( target_media == "twitter" ){
 							common.api.user.domain({
@@ -80,8 +74,7 @@
 								}
 							},
 							error:handleKendoAjaxError												
-						});
-						
+						});						
 						**/
 						
 					});		
@@ -284,6 +277,7 @@
 							media: signupPlaceHolder.media,
 							success: function(data){
 							alert(">>" + kendo.stringify(data) );
+							btn.button('reset');
 							},
 							fail: function(data){ 
 								alert_danger.html( template({message: "회원가입에 실패하였습니다." }) );	
