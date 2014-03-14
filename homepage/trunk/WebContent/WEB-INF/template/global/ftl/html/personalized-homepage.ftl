@@ -26,7 +26,7 @@
 				kendo.culture("ko-KR");
 				
 				// 2.  MEUN 설정
-				$('body nav').first().addClass('hide');										
+				// $('body nav').first().addClass('hide');										
 																																									
 				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
 				$("input[name='personalized-area-col-size']").on("change", function () {					
@@ -91,6 +91,9 @@
 					connectorHostname: "${ServletUtils.getLocalHostAddr()}",	
 					authenticate : function( e ){
 						currentUser = e.token;
+						if(!currentUser.anonymous){
+							$('body nav').first().addClass('hide');			
+						}
 					},
 					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  || action.view! == "personalized" >
 					template : kendo.template($("#account-template").html()),
