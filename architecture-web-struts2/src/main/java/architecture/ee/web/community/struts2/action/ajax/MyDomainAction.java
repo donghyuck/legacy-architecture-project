@@ -19,9 +19,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.opensymphony.xwork2.Preparable;
+
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
-public class MyDomainAction extends FrameworkActionSupport  {
+public class MyDomainAction extends FrameworkActionSupport implements  Preparable {
 
 	private static final String DOMAIN_NAME_KEY = "domainName";
 	
@@ -38,6 +40,7 @@ public class MyDomainAction extends FrameworkActionSupport  {
 				this.domainName = request.getLocalName() ;
 			}
 		}		
+		//request.getLocalAddr()
 		return domainName;
 	}
 
@@ -55,18 +58,24 @@ public class MyDomainAction extends FrameworkActionSupport  {
 	public String execute() throws Exception {		
 		if(StringUtils.isNotEmpty(domainName)){			
 			HttpSession session = request.getSession();			
-			String domainNameInSession = (String) getSession().get(DOMAIN_NAME_KEY); // (String) session.getAttribute(DOMAIN_NAME_KEY);
+			//String domainNameInSession = (String) getSession().get(DOMAIN_NAME_KEY); // 
+			String domainNameInSession = (String) session.getAttribute(DOMAIN_NAME_KEY);
 			
 			log.debug("domainName: " + domainName);
 			log.debug("domainNameInSession: " + domainNameInSession);
 			log.debug(StringUtils.equals(domainName, domainNameInSession));
 			
 			if( !StringUtils.equals(domainName, domainNameInSession)){
-				getSession().put(DOMAIN_NAME_KEY, domainName);
-				//session.setAttribute(DOMAIN_NAME_KEY, domainName);
+				//getSession().put(DOMAIN_NAME_KEY, domainName);
+				session.setAttribute(DOMAIN_NAME_KEY, domainName);
 			}			
 		}
 		return success();
+	}
+
+	public void prepare() throws Exception {
+		response.addHeader("Access-Control-Allow-Origin", "*");
+		//response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 	}
 	
 }
