@@ -97,36 +97,7 @@
 					</#if>
 					afterAuthenticate : function(){							
 						//$('.dropdown-toggle').dropdown();
-						alert( currentUser.anonymous );
-						
-						if( currentUser.anonymous ){
-							$("#account-navbar .custom-external-login-groups button").each(function( index ) {
-									var external_login_button = $(this);
-									external_login_button.click(function (e){										
-										var target_media = external_login_button.attr("data-target");
-										var target_url = "http://${ServletUtils.getLocalHostAddr()}/community/connect-socialnetwork.do?media=" + target_media + "&domainName=" + document.domain ; 
-										window.open( 
-										target_url,
-										'popUpWindow', 
-										'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
-									/**
-										$.ajax({
-											type : 'POST',
-											url : "${request.contextPath}/community/get-socialnetwork.do?output=json",
-											data: { media: target_media },
-											success : function(response){
-												if( response.error ){
-													// 연결실패.
-												} else {	
-													window.open( response.authorizationUrl + '&display=popup'  ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-												}
-											},
-											error:handleKendoAjaxError												
-										});										
-									**/		
-									});								
-							});	
-												
+																		
 							var validator = $("#login-navbar").kendoValidator({validateOnBlur:false}).data("kendoValidator");
 							$("#login-btn").click(function() { 
 								$("#login-status").html("");
