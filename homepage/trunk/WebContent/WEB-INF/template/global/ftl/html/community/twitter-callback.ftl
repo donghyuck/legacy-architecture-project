@@ -44,7 +44,8 @@
 								media: "twitter",
 								user : {
 									id : "${action.userProfile.id}",
-									name: "${action.userProfile.name}"
+									name: "${action.userProfile.name}",
+									profileImageUrl :  "${action.userProfile.profileImageUrl}"
 								}
 							}));					
 							$('.alert button').first().click( function() {													
