@@ -9,7 +9,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.ServletActionContext;
@@ -92,6 +91,11 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 
 	public void setSession(final Map<String, Object> session) {
 		this.session = session;
+	}
+	
+	public String getReferer(){		
+		
+		return request.getHeader("Referer");
 	}
 	
 	public OutputFormat getOutputFormat() {
