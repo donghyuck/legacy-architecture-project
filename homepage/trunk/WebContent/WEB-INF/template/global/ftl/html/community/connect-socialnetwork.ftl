@@ -19,6 +19,8 @@
 				
 				"${action.domainName}"; 
 				
+				${action.session}
+				
 			}	
 		}]);
 		</script>		
