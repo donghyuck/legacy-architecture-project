@@ -30,7 +30,7 @@
 						}
 					});
 					
-					alert( $.cookie('domainName', { expires: 1, path: '/', domain: '${ServletUtils.getLocalHostAddr()}', secure: false }));
+					alert( $.cookie('domainName', { expires: 1, path: '/community', domain: '${ServletUtils.getLocalHostAddr()}', secure: false }));
 							
 					//${after_domain}
 										
