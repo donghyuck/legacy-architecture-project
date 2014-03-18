@@ -24,6 +24,7 @@ import org.scribe.model.OAuthRequest;
 import org.scribe.model.Response;
 import org.scribe.model.Token;
 import org.scribe.model.Verb;
+import org.scribe.model.Verifier;
 
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.web.community.social.AbstractSocialServiceProvider;
@@ -81,7 +82,12 @@ public class TumblrServiceProvider extends AbstractSocialServiceProvider {
 	public Token getTokenWithCallbackReturns(String oAuthToken, String oAuthVarifier){	
 		return this.getAccessTokenWithCallbackReturns(oAuthToken, oAuthVarifier);
 	}
-	
+
+	public Token getTokenWithCallbackReturns(String oAuthToken, String oAuthSecret, String oAuthVarifier){	
+		Verifier verifier = new Verifier(oAuthVarifier) ;
+		Token requestToken = new Token(oAuthToken, oAuthSecret);		
+		return getOAuthService().getAccessToken(requestToken, verifier );
+	}	
 	
 	public UserInfo getUserProfile(){
 		Token accessToken = getAccessToken(getAccessToken(), getAccessSecret());
