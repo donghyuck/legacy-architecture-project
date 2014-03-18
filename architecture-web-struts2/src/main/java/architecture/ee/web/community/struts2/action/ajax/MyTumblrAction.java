@@ -150,4 +150,8 @@ public class MyTumblrAction extends SocialNetworkActionSupport {
 		}
 		return success();
 	}
+	
+	public String showAvatar() throws Exception {
+		
+	}
 }
