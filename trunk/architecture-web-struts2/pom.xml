@@ -207,6 +207,16 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>xmpcore</groupId>
+			<artifactId>xmpcore</artifactId>
+			<version>5.1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>metadata-extractor</groupId>
+			<artifactId>metadata-extractor</artifactId>
+			<version>2.6.4</version>
+		</dependency>
 	</dependencies>
 
 	<distributionManagement>
