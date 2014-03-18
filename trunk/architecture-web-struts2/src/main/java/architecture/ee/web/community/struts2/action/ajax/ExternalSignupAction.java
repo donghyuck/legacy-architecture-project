@@ -33,7 +33,7 @@ import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.struts2.action.support.SocialCallbackSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class SocialSignupAction extends SocialCallbackSupport {
+public class ExternalSignupAction extends SocialCallbackSupport {
 	
 	private User newUser ;
 	
@@ -77,8 +77,7 @@ public class SocialSignupAction extends SocialCallbackSupport {
 		return success();
 	}
 		
-	private void signup( SignupForm form ){		
-		
+	private void signup( SignupForm form ){			
 		UserTemplate t = new UserTemplate(form.username, form.password1, form.email, form.name );
 		t.setExternal(true);	
 		try {
@@ -89,8 +88,7 @@ public class SocialSignupAction extends SocialCallbackSupport {
 			networkToUse.setUsername(form.id);
 			getSocialNetworkManager().saveSocialNetwork(networkToUse);		
 		} catch (UserAlreadyExistsException e) {			
-		} catch (EmailAlreadyExistsException e) {}
-	
+		} catch (EmailAlreadyExistsException e) {}	
 	}
 		
 	private SecureRandom random = new SecureRandom();
@@ -109,6 +107,9 @@ public class SocialSignupAction extends SocialCallbackSupport {
 		}
 		return false;
 	}
+	
+	
+	
 	
     public static class SignupForm {
     	

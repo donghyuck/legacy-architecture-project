@@ -21,9 +21,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
+
 import org.apache.commons.lang3.StringUtils;
 import org.scribe.model.Token;
 
+import architecture.common.exception.ComponentNotFoundException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
@@ -41,12 +45,25 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 	private static final Token EMPTY_TOKEN = null;
 	
 	private SocialNetworkManager socialNetworkManager;
+		
+	private String media;	
+		
+	private String onetime;
 	
-	
-	private String media;
-	
-	
-	
+	/**
+	 * @return onetime
+	 */
+	public String getOnetime() {
+		return onetime;
+	}
+
+	/**
+	 * @param onetime 설정할 onetime
+	 */
+	public void setOnetime(String onetime) {
+		this.onetime = onetime;
+	}
+
 	/**
 	 * @return media
 	 */
@@ -141,54 +158,101 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 		return success();
 	}
 	
-	public String updateSocialNetwork() throws Exception{		
-		
-		try {
-			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
-			String accessSecret = (String)map.get("accessSecret");
-			String accessToken = (String)map.get("accessToken");
-			String username = (String)map.get("username");
-			Boolean signedIn = (Boolean)map.get("signedIn");
-			Integer  socialAccountId = (Integer)map.get("socialAccountId");			
-			String serviceProviderName = (String)map.get("serviceProviderName");
-			Media media = SocialNetwork.Media.valueOf(serviceProviderName.toUpperCase());
-			
-			if( socialNetworkId == null){				
-				socialNetworkId = socialAccountId.longValue();
-			}				
-			SocialNetwork account = null;
-			if( socialNetworkId > 0 ){				
-				try {
-					account = getSocialNetwork();
-				} catch (NotFoundException e) {
-					account = null;
+	protected SocialNetwork getSocialNetworkByOnetime(){
+		SocialNetwork socialNetworkToUse = null;
+		if( StringUtils.isNotEmpty(onetime)){
+			try {
+				Cache cache = getComponent("socialOnetimeCache", Cache.class);				
+				Object obj = cache.get(onetime);				
+				if( obj != null ){
+					socialNetworkToUse = (SocialNetwork)((Element)obj).getValue();
+					if( StringUtils.isEmpty(this.media)){
+						this.media = socialNetworkToUse.getServiceProviderName();
+					}
+					cache.remove(onetime);
 				}
+			} catch (ComponentNotFoundException e) {
+			}
+		}		
+		return socialNetworkToUse;
+	}
+	
+	public String updateSocialNetwork() throws Exception{	
+		if( StringUtils.isNotEmpty(onetime)){			
+			SocialNetwork socialNetworkFromCache = getSocialNetworkByOnetime();			
+			SocialNetwork socialNetworkToUse = null;			
+			if( this.socialNetworkId > 0){
+				socialNetworkToUse = getSocialNetwork();				
+			}else{
+				socialNetworkToUse = newSocialNetwork(SocialNetwork.Media.valueOf(media.toUpperCase()));				
 			}
 			
-			if( account == null ){				
-				Map<Media, SocialNetwork> listMap = getConnectedSocialNetworkMap();
-				if( listMap.containsKey(media)){
-					account = listMap.get(media);
-				}else{
-					account = newSocialNetwork(media);				
-				}				
+			socialNetworkToUse.setAccessSecret(socialNetworkFromCache.getAccessSecret());
+			socialNetworkToUse.setAccessToken(socialNetworkFromCache.getAccessToken());
+			
+			Object profile = socialNetworkFromCache.getSocialServiceProvider().getUserProfile();			
+			String usernameToUse = ((architecture.ee.web.community.social.UserProfile)profile).getPrimaryKeyString();
+			if( StringUtils.isNotEmpty(usernameToUse) ){
+				socialNetworkToUse.setUsername(usernameToUse);
 			}
 			
-			if(!StringUtils.isEmpty(accessSecret))
-				account.setAccessSecret(accessSecret);
-			if(!StringUtils.isEmpty(accessToken))
-				account.setAccessToken(accessToken);
-			if(!StringUtils.isEmpty(username))
-				account.setUsername(username);
+			this.socialNetworkManager.saveSocialNetwork(socialNetworkToUse);			
+			this.socialNetworkId =socialNetworkToUse.getSocialAccountId();
+			this.mySocialNetwork = socialNetworkToUse;
 			
-			socialNetworkManager.saveSocialNetwork(account);					
-			this.socialNetworkId =account.getSocialAccountId();
-			this.mySocialNetwork = account;
+		}else{
+
+			try {
+				Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
+				String accessSecret = (String)map.get("accessSecret");
+				String accessToken = (String)map.get("accessToken");
+				String username = (String)map.get("username");
+				Boolean signedIn = (Boolean)map.get("signedIn");
+				Integer  socialAccountId = (Integer)map.get("socialAccountId");			
+				String serviceProviderName = (String)map.get("serviceProviderName");
+				Media media = SocialNetwork.Media.valueOf(serviceProviderName.toUpperCase());
+				
+				if( socialNetworkId == null){				
+					socialNetworkId = socialAccountId.longValue();
+				}
+				
+				SocialNetwork account = null;
+				if( socialNetworkId > 0 ){				
+					try {
+						account = getSocialNetwork();
+					} catch (NotFoundException e) {
+						account = null;
+					}
+				}
+				
+				if( account == null ){				
+					Map<Media, SocialNetwork> listMap = getConnectedSocialNetworkMap();
+					if( listMap.containsKey(media)){
+						account = listMap.get(media);
+					}else{
+						account = newSocialNetwork(media);				
+					}				
+				}
+				
+				if(!StringUtils.isEmpty(accessSecret))
+					account.setAccessSecret(accessSecret);
+				if(!StringUtils.isEmpty(accessToken))
+					account.setAccessToken(accessToken);
+				if(!StringUtils.isEmpty(username))
+					account.setUsername(username);
+				
+				socialNetworkManager.saveSocialNetwork(account);					
+				this.socialNetworkId =account.getSocialAccountId();
+				this.mySocialNetwork = account;
+				
+				
+			} catch (Throwable e) {
+				throw new Exception(e);
+			}
 			
-			return success();
-		} catch (Throwable e) {
-			throw new Exception(e);
 		}
+		
+		return success();
 	}
 	
 	protected SocialNetwork newSocialNetwork( SocialNetwork.Media media ){	

@@ -65,8 +65,7 @@ public class TumblrCallbackAction extends SocialCallbackSupport {
 		return (String)session.getAttribute("oauth_secret");		
 	}
 
-	public String execute() throws Exception {
-		
+	public String execute() throws Exception {		
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
 			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TUMBLR);						
 			TumblrServiceProvider provider = (TumblrServiceProvider) newSocialNetwork.getSocialServiceProvider();			
