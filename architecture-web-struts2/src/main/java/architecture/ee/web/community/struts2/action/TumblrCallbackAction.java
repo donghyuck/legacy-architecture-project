@@ -15,6 +15,8 @@
  */
 package architecture.ee.web.community.struts2.action;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.scribe.model.Token;
 
@@ -58,17 +60,23 @@ public class TumblrCallbackAction extends SocialCallbackSupport {
 		this.oauth_verifier = oauth_verifier;
 	}
 	
+	private String getOauth_secret(){
+		HttpSession session = request.getSession(true);
+		return (String)session.getAttribute("oauth_secret");		
+	}
 
 	public String execute() throws Exception {
+		
 		if( StringUtils.isNotEmpty(oauth_token) && StringUtils.isNotEmpty(oauth_verifier) ){
-			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TUMBLR);			
+			SocialNetwork newSocialNetwork = newSocialNetwork(Media.TUMBLR);						
 			TumblrServiceProvider provider = (TumblrServiceProvider) newSocialNetwork.getSocialServiceProvider();			
-			Token token =provider.getTokenWithCallbackReturns(oauth_token, oauth_verifier);			
+			Token token = provider.getTokenWithCallbackReturns(oauth_token, getOauth_secret(), oauth_verifier);			
 			newSocialNetwork.setAccessSecret(token.getSecret());
-			newSocialNetwork.setAccessToken(token.getToken());
+			newSocialNetwork.setAccessToken(token.getToken());			
 			setSocialNetwork(newSocialNetwork);			
 			setOnetimeSecureObject();			
 		}else if ( StringUtils.isNotEmpty( getOnetime())){
+			log.debug("restore secure object");
 			restoreOnetimeSecureObject();
 		}		
 		return success();
