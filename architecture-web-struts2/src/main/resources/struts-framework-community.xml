@@ -51,8 +51,10 @@
 			    <param name="excludeNullProperties">false</param>
 			    <param name="excludeProperties">account.password, account.passwordHash</param>
 				<param name="includeProperties">
-				  account.*
 				</param>
+				 <param name="root">
+				 signinUser
+				 </param>
 			</result>	
 		</action>	
 	</package>	
