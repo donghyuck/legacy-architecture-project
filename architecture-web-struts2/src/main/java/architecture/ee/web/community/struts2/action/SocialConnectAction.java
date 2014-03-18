@@ -20,6 +20,7 @@ import java.util.Enumeration;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang3.StringUtils;
+import org.scribe.model.Token;
 
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
@@ -33,6 +34,8 @@ public class SocialConnectAction extends FrameworkActionSupport implements  Prep
 	
 	private static final String DOMAIN_NAME_KEY = "domainName";
 	
+	private static final String OAUTH_SECRET_KEY = "oauth_secret";
+	
 	private String domainName ;
 	
 	private String media ;
@@ -43,28 +46,35 @@ public class SocialConnectAction extends FrameworkActionSupport implements  Prep
 	
 	private SocialNetwork socialNetwork = null ;	
 		
+	public String getAuthorizationUrl() throws NotFoundException {		
+		SocialNetwork socialNetworkToUse = getSocialNetwork();
+		if( socialNetworkToUse.getSocialServiceProvider().getMedia() == Media.TUMBLR ){			
+			Token requestToken = socialNetworkToUse.getSocialServiceProvider().getOAuthService().getRequestToken();		
+			HttpSession session = request.getSession(true);
+			session.setAttribute(OAUTH_SECRET_KEY, requestToken.getSecret());			
+			return socialNetworkToUse.getSocialServiceProvider().getOAuthService().getAuthorizationUrl(requestToken);			
+		}else{		
+			return socialNetworkToUse.getAuthorizationUrl();
+		}	
+	}
+		
 	public String execute() throws Exception {
 		HttpSession session = request.getSession(true);
 		if(StringUtils.isNotEmpty(domainName)){						
-			String domainNameInSession = (String) session.getAttribute(DOMAIN_NAME_KEY);
-			
+			String domainNameInSession = (String) session.getAttribute(DOMAIN_NAME_KEY);			
 			log.debug("domainName: " + domainName);
 			log.debug("domainNameInSession: " + domainNameInSession);
-			log.debug(StringUtils.equals(domainName, domainNameInSession));
-			
+			log.debug(StringUtils.equals(domainName, domainNameInSession));			
 			if( !StringUtils.equals(domainName, domainNameInSession)){
 				session.setAttribute(DOMAIN_NAME_KEY, domainName);
-				//getSession().put(DOMAIN_NAME_KEY, domainName);
-			}	
-			
+			}
 		}
 		Enumeration names = session.getAttributeNames();
 		 while( names.hasMoreElements() ){
 			 String key = (String) names.nextElement();
 			 Object value = session.getAttribute(key);
 			 log.debug( key + "=" + value);
-		 }
-		 
+		 }		 
 		return success();
 	}	
 	
@@ -153,7 +163,7 @@ public class SocialConnectAction extends FrameworkActionSupport implements  Prep
 		}else{		
 			if( StringUtils.isNotEmpty(media)){
 				Media selectedMedia = SocialNetwork.Media.valueOf(media.toUpperCase());
-				socialNetwork = newSocialNetwork(selectedMedia);				
+				socialNetwork = newSocialNetwork(selectedMedia);
 			}
 		}
 		return socialNetwork;

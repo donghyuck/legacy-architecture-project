@@ -17,7 +17,6 @@ package architecture.ee.web.community.struts2.action.support;
 
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -252,16 +251,12 @@ public abstract class SocialCallbackSupport extends FrameworkActionSupport imple
 		return null;
 	}
 
-	protected void restoreOnetimeSecureObject(){
-		
+	protected void restoreOnetimeSecureObject(){		
 		if( StringUtils.isNotEmpty(this.onetime) ){
-			this.socialNetwork = (SocialNetwork)getOnetimeSecureObject();			
-			
+			this.socialNetwork = (SocialNetwork)getOnetimeSecureObject();				
+		
 			log.debug("network:" + socialNetwork.getServiceProviderName());
 		}
-		
-		
-		
 	}
 	
 	protected void setOnetimeSecureObject() {
