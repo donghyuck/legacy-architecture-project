@@ -45,7 +45,7 @@
 				</param>
 			</result>	
 		</action>		
-		<action name="external-singin" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
+		<action name="external-singin" class="architecture.ee.web.community.struts2.action.ajax.ExternalSigninAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param>
