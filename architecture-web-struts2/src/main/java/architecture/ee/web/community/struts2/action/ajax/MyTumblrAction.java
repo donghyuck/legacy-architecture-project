@@ -19,14 +19,12 @@ import java.util.Collections;
 import java.util.List;
 
 import net.sf.ehcache.Element;
-
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.tumblr.BlogInfo;
 import architecture.ee.web.community.social.tumblr.Post;
 import architecture.ee.web.community.social.tumblr.TumblrServiceProvider;
 import architecture.ee.web.community.social.tumblr.UserInfo;
-import architecture.ee.web.community.social.twitter.Tweet;
 import architecture.ee.web.community.struts2.action.support.SocialNetworkActionSupport;
 
 public class MyTumblrAction extends SocialNetworkActionSupport {
@@ -143,7 +141,7 @@ public class MyTumblrAction extends SocialNetworkActionSupport {
 				list = getSocialNetworkManager().getSocialNetworks(getUser());
 			}			
 			for( SocialNetwork network : list ){
-				if( "facebook".toLowerCase().equals(network.getServiceProviderName()) ){				
+				if( "tumblr".toLowerCase().equals(network.getServiceProviderName()) ){				
 					this.socialNetworkId = network.getSocialAccountId();
 					this.targetSocialNetwork = network;
 					break;
