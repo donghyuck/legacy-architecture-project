@@ -246,6 +246,38 @@
 			</result>				
 		</action>	
 
+		<action name="get-tumblr-profile" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  tumblrProfile.*
+				</param>
+			</result>	
+		</action>
+
+		<action name="get-tumblr-blog-info" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  blogInfo.* , blogAvatar
+				</param>
+			</result>	
+		</action>		
+		
+		<action name="get-tumblr-dashboard" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  dashboardPosts.*
+				</param>
+			</result>	
+		</action>				
+		
+		
+		
 		<action name="get-twitter-profile" class="architecture.ee.web.community.struts2.action.ajax.TwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
