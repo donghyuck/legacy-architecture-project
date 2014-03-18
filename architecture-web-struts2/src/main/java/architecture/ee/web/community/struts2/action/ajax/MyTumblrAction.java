@@ -152,6 +152,6 @@ public class MyTumblrAction extends SocialNetworkActionSupport {
 	}
 	
 	public String showAvatar() throws Exception {
-		
+		return execute();
 	}
 }
