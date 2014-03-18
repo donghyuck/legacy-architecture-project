@@ -35,7 +35,7 @@
 
 	<!--  ACCOUNTS USER ACTIONS -->	
 	<package name="framework-community-accounts-actions" namespace="/accounts" extends="framework-default">
-		<action name="signup-external" class="architecture.ee.web.community.struts2.action.ajax.SocialSignupAction">
+		<action name="external-singup" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param>
@@ -45,6 +45,16 @@
 				</param>
 			</result>	
 		</action>		
+		<action name="external-singin" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+			    <param name="excludeProperties">account.password, account.passwordHash</param>
+				<param name="includeProperties">
+				  account.*
+				</param>
+			</result>	
+		</action>	
 	</package>	
 	
 	<!--  COMMUNITY USER ACTIONS -->	
@@ -60,8 +70,7 @@
 				domainName
 			  </param>				
 			</result>			
-		</action>		
-		
+		</action>
 	
 		<!--  streams  -->	
 		<action name="list-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
@@ -147,10 +156,10 @@
 			  <param name="contentType">application/json</param>
 			  <param name="enableGZIP">true</param>
 			   <param name="excludeProperties">socialNetwork.socialServiceProvider, socialServiceProvider</param>
-			  <param name="excludeNullProperties">false</param>     
+			  <param name="excludeNullProperties">false</param>
 			  <param name="root">
 				socialNetwork
-			  </param>				
+			  </param>	
 			</result>
 		</action>	
 		<action name="get-socialnetwork"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
