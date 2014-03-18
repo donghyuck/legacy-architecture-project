@@ -35,7 +35,8 @@
 
 	<!--  ACCOUNTS USER ACTIONS -->	
 	<package name="framework-community-accounts-actions" namespace="/accounts" extends="framework-default">
-		<action name="external-singup" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
+	
+		<action name="external-signup" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param>
@@ -45,16 +46,18 @@
 				</param>
 			</result>	
 		</action>		
-		<action name="external-singin" class="architecture.ee.web.community.struts2.action.ajax.ExternalSigninAction">
+		
+		<action name="external-signin" class="architecture.ee.web.community.struts2.action.ajax.ExternalSigninAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param>
 			    <param name="excludeProperties">account.password, account.passwordHash</param>
-				 <param name="root">
-				 signinUser
-				 </param>
+				<param name="root">
+				signinUser
+				</param>
 			</result>	
 		</action>	
+		
 	</package>	
 	
 	<!--  COMMUNITY USER ACTIONS -->	
