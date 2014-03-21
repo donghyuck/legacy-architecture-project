@@ -29,12 +29,14 @@ import org.scribe.model.Token;
 
 import architecture.common.exception.ComponentNotFoundException;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.ws.Property;
 
 public class MySocialNetworkAction extends FrameworkActionSupport implements SocialNetworkAware   {
     
@@ -258,6 +260,55 @@ public class MySocialNetworkAction extends FrameworkActionSupport implements Soc
 	protected SocialNetwork newSocialNetwork( SocialNetwork.Media media ){	
 		SocialNetwork network =  socialNetworkManager.createSocialNetwork(getUser(), media);
 		return network;
+	}
+	
+	
+	public List<Property> getSocialNetworkProperties() {
+		try {
+			Map<String, String> properties = getSocialNetwork().getProperties();
+			List<Property> list = new ArrayList<Property>();
+			for (String key : properties.keySet()) {
+				String value = properties.get(key);
+				list.add(new Property(key, value));
+			}
+			return list;
+		} catch (NotFoundException e) {
+			return Collections.EMPTY_LIST;
+		}		
+	}
+	
+	public String updateSocialNetworkProperties() throws Exception {		
+		SocialNetwork networkToUse = getSocialNetwork();
+		Map<String, String> properties = networkToUse.getProperties();
+		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);		
+		for (Map row : list) {
+			String n = (String) row.get("name");
+			String v = (String) row.get("value");
+			properties.put(n, v);
+		}		
+		updateSocialNetworkProperties(networkToUse, networkToUse.getProperties());
+		return success();	
+	}
+	
+	public String deleteSocialNetworkProperties() throws Exception {
+		SocialNetwork networkToUse = getSocialNetwork();
+		Map<String, String> properties = networkToUse.getProperties();
+		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);
+		for (Map row : list) {
+			String n = (String) row.get("name");
+			String v = (String) row.get("value");
+			properties.remove(n);
+		}
+		updateSocialNetworkProperties( networkToUse, properties );		
+		return success();
+	}
+
+	protected void updateSocialNetworkProperties(SocialNetwork networkToUse, Map<String, String> properties) {
+		if (properties.size() > 0) {
+			networkToUse.setProperties(properties);
+			this.mySocialNetwork = networkToUse;			
+			socialNetworkManager.saveSocialNetwork(networkToUse);			
+		}
 	}
 	
 }
