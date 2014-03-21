@@ -188,6 +188,37 @@
 			</result>
 		</action>
 		
+	<action name="get-my-socialnetwork-property"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				socialNetworkProperties.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-socialnetwork-property" method="updateSocialNetworkProperties" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				socialNetworkProperties.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-socialnetwork-property" method="deleteSocialNetworkProperties" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				socialNetworkProperties.*
+				</param>
+			</result>
+		</action>
+				
+		
 		<action name="connect-socialnetwork"  class="architecture.ee.web.community.struts2.action.SocialConnectAction">
 			<result name="success" type="freemarker">/html/community/connect-socialnetwork.ftl</result>
 			<result name="json-success" type="json">
@@ -256,6 +287,13 @@
 			</result>	
 		</action>
 
+		<action name="show-tumblr-avatar" method="showAvatar" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="success" type="httpheader">
+			  <param name="status">301</param>
+			  <param name="headers.Location">${blogAvatar}</param>
+			</result>	
+		</action>
+		
 		<action name="get-tumblr-blog-info" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -274,9 +312,7 @@
 				  dashboardPosts.*
 				</param>
 			</result>	
-		</action>				
-		
-		
+		</action>
 		
 		<action name="get-twitter-profile" class="architecture.ee.web.community.struts2.action.ajax.TwitterAction">
 			<result name="json-success" type="json">
