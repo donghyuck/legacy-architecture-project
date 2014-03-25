@@ -63,7 +63,7 @@ PC9saWNlbnNlPg==</file>
 					<scope>export_stream, read_stream, photo_upload, publish_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history, email</scope>
 				</facebook>	
 				<tumblr>
-					<callbackUrl>http://222.122.63.147/community/social-callback.do</callbackUrl>
+					<callbackUrl>http://222.122.63.147/community/tumblr-callback.do</callbackUrl>
 				</tumblr>			
 			</providers>
 		</social>
@@ -122,7 +122,7 @@ PC9saWNlbnNlPg==</file>
 			<oracleDataSourceProvider>
 				<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
 				<url> jdbc:oracle:thin:@//222.122.63.153:1521/IRDS</url>
-				<user>u_portal</user>
+				<user>u_inkium</user>
 				<password>inkium</password>
 				<connectionCachingEnabled>true</connectionCachingEnabled>
 			</oracleDataSourceProvider>
@@ -131,7 +131,7 @@ PC9saWNlbnNlPg==</file>
 			<oracleDataSourceProvider>
 				<driverClassName>oracle.jdbc.pool.OracleDataSource</driverClassName>
 				<url> jdbc:oracle:thin:@//222.122.63.153:1521/IRDS</url>
-				<user>u_portal</user>
+				<user>u_inkium</user>
 				<password>inkium</password>
 				<connectionCachingEnabled>true</connectionCachingEnabled>
 			</oracleDataSourceProvider>
