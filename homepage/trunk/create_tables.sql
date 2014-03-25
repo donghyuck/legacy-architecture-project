@@ -305,14 +305,15 @@
 --------------------------------------------------------
 
   CREATE TABLE "V2_IMAGE" 
-   (	"IMAGE_ID" NUMBER(*,0), 
+   (	
+   	"IMAGE_ID" NUMBER(*,0), 
 	"OBJECT_TYPE" NUMBER(*,0), 
 	"OBJECT_ID" NUMBER(*,0), 
 	"FILE_NAME" VARCHAR2(255 BYTE), 
 	"FILE_SIZE" NUMBER(*,0), 
 	"CONTENT_TYPE" VARCHAR2(50 BYTE), 
-	"CREATION_DATE" DATE DEFAULT SYSDATE, 
-	"MODIFIED_DATE" DATE DEFAULT SYSDATE
+	"CREATION_DATE" TIMESTAMP  DEFAULT SYSTIMESTAMP , 
+	"MODIFIED_DATE" TIMESTAMP  DEFAULT SYSTIMESTAMP 
    ) ;
  
 
@@ -334,6 +335,23 @@
  
    COMMENT ON TABLE "V2_IMAGE"  IS '이미지 테이블';
 /
+
+  CREATE TABLE "V2_IMAGE_PROPERTY" 
+   (	"IMAGE_ID" NUMBER(*,0), 
+	"PROPERTY_NAME" VARCHAR2(100 BYTE), 
+	"PROPERTY_VALUE" VARCHAR2(1024 BYTE)
+   ) ;
+ 
+
+   COMMENT ON COLUMN "V2_IMAGE_PROPERTY"."IMAGE_ID" IS '이미지 ID';
+ 
+   COMMENT ON COLUMN "V2_IMAGE_PROPERTY"."PROPERTY_NAME" IS '이미지 프로퍼티 이름';
+ 
+   COMMENT ON COLUMN "V2_IMAGE_PROPERTY"."PROPERTY_VALUE" IS '이미지 프로퍼티 값';
+ 
+   COMMENT ON TABLE "V2_IMAGE_PROPERTY"  IS '이미지 프로퍼티 테이블';
+/
+
 --------------------------------------------------------
 --  DDL for Table V2_IMAGE_DATA
 --------------------------------------------------------
@@ -1520,7 +1538,6 @@
   ALTER TABLE "V2_USER_ROLES" ADD CONSTRAINT "V2_USER_ROLES_PK" PRIMARY KEY ("USER_ID", "ROLE_ID") ENABLE;
 /
 
-
 Insert into V2_SEQUENCER (SEQUENCER_ID,NAME,VALUE) values (19,'SOCIAL_NETWORK',1);
 Insert into V2_SEQUENCER (SEQUENCER_ID,NAME,VALUE) values (22,'ANNOUNCE',1);
 Insert into V2_SEQUENCER (SEQUENCER_ID,NAME,VALUE) values (1,'COMPANY',2);
@@ -1531,8 +1548,7 @@ Insert into V2_SEQUENCER (SEQUENCER_ID,NAME,VALUE) values (16,'IMAGE',1);
 Insert into V2_SEQUENCER (SEQUENCER_ID,NAME,VALUE) values (17,'ATTACHMENT',1);
 Insert into V2_SEQUENCER (SEQUENCER_ID,NAME,VALUE) values (18,'MENU',2);
 
-Insert into V2_COMPANY (COMPANY_ID,DISPLAY_NAME,NAME,DESCRIPTION,DOMAIN_NAME) values (1, '공용', 'PUBLIC','공용 디폴트 회사', null);
-
+Insert into V2_COMPANY (COMPANY_ID,DISPLAY_NAME,NAME,DESCRIPTION,DOMAIN_NAME) values (1, '인키움', 'INKIUM','주식회사 인키움', null);
 
 Insert into V2_USER (COMPANY_ID,USER_ID,USERNAME,PASSWORD_HASH,NAME,NAME_VISIBLE,FIRST_NAME,LAST_NAME,EMAIL,EMAIL_VISIBLE,USER_ENABLED,VISIBLE,IS_EXTERNAL,FEDERATED,STATUS) 
 values (1, 1, 'system','b524ac69d3f8516d3f90679d983cc797b91ddd2daa85f97696722e3e4701275b','운영자',1,null,null,'system@demo.com',1,1,1,0,0,0);
@@ -1544,13 +1560,12 @@ Insert into V2_ROLE (ROLE_ID,NAME,DESCRIPTION,MASK) values (2,'ROLE_ADMIN','관�
 Insert into V2_ROLE (ROLE_ID,NAME,DESCRIPTION,MASK) values (3,'ROLE_SYSTEM','시스템 ROLE',0);
 
 insert into V2_USER_ROLES ( USER_ID,  ROLE_ID) values ( 1, 2);
+
 insert into V2_USER_ROLES ( USER_ID,  ROLE_ID) values ( 1, 3);
 
 Insert into V2_MENU (MENU_ID,NAME,TITLE,LOCATION,MENU_ENABLED) values (1,'PUBLIC_MENU','디폴트 메뉴',null, 1 );
 
-
 /**
-
 <?xml version="1.0" encoding="UTF-8" ?>
 <MenuConfig>
   <Menus>
