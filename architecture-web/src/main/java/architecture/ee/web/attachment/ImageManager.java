@@ -82,6 +82,8 @@ public interface ImageManager {
 	
 	public abstract Image saveImage( Image image );
 	
+	public abstract void updateImageProperties( Image image );
+	
 	public abstract InputStream getImageInputStream(Image image);
 	
 	public abstract InputStream getImageThumbnailInputStream(Image image, int width, int height ) ;
