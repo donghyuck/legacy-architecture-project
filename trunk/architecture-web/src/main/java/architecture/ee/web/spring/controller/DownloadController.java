@@ -57,19 +57,35 @@ public class DownloadController {
 
 	@RequestMapping(value = "/image/{fileName}", method = RequestMethod.GET)
 	@ResponseBody
-	public void handleImage(@PathVariable("fileName") String fileName, @RequestParam(value="width") int width, @RequestParam(value="height") int height, HttpServletResponse response )throws IOException {
-		log.debug("download ------------------------------------------");
+	public void handleImage(@PathVariable("fileName") String fileName, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
+		
+		
+		log.debug(" ------------------------------------------");
 		log.debug("fileName:" + fileName);
 		log.debug("width:"+ width);
 		log.debug("height:" + height);
 		log.debug("------------------------------------------");			
+		
 		try {
-
+			Image image =imageManager.getImageByImageLink(fileName);
 			
-			Image image = imageManager.getImage(1);			
-			InputStream input = imageManager.getImageInputStream(image);
-			response.setContentType(image.getContentType());
-			response.setContentLength(image.getSize());			
+			InputStream input ;
+			String contentType ;
+			int contentLength ;
+			
+			if( width > 0 && width > 0 )			{
+				input = imageManager.getImageThumbnailInputStream(image, width, height);
+				contentType = image.getThumbnailContentType();
+				contentLength = image.getThumbnailSize();
+			}else{
+				input = imageManager.getImageInputStream(image);
+				contentType = image.getContentType();
+				contentLength = image.getSize();			
+				
+			}			
+			
+			response.setContentType(contentType);
+			response.setContentLength(contentLength);			
 			IOUtils.copy(input, response.getOutputStream());
 			response.flushBuffer();			
 		
@@ -77,5 +93,7 @@ public class DownloadController {
 			response.sendError(404);
 		}		
 	}
+	
+	
 	
 }
