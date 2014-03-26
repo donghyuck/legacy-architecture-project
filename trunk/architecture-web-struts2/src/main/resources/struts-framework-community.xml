@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<!--  PUBLIC ACTIONS -->
+	<!--  COMMON NAV ACTIONS -->
 	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
 	
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
@@ -33,7 +33,7 @@
 
 	</package>	
 
-	<!--  ACCOUNTS USER ACTIONS -->	
+	<!--  ACCOUNTS USER EXTEND ACTIONS -->	
 	<package name="framework-community-accounts-actions" namespace="/accounts" extends="framework-default">
 	
 		<action name="external-signup" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
@@ -535,7 +535,7 @@
 			</result>
 		</action>
 		
-		<action name="view-my-image" class="architecture.ee.web.struts2.action.DownloadImageActioin">
+		<action name="download-my-image" class="architecture.ee.web.struts2.action.DownloadImageActioin">
 			<result name="success" type="stream">
 			  <param name="contentType">${targetImageContentType}</param>
 			  <param name="contentLength">${targetImageContentLength}</param>
