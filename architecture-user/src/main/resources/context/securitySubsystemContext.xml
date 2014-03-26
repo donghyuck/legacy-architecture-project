@@ -21,23 +21,24 @@
     <security:http pattern="/favicon.ico"             security="none" />
     <security:http pattern="/decorators/**"          security="none" /> 
     <security:http pattern="/images/**"              security="none" />
-    <security:http pattern="/fonts"               security="none" />
+    <security:http pattern="/fonts"                    security="none" />
     <security:http pattern="/includes/**"             security="none" /> 
     <security:http pattern="/js/**"                      security="none" />
     <security:http pattern="/styles/**"                 security="none" />
     <security:http pattern="/404.jsp*"                 security="none" />
     <security:http pattern="/500.jsp*"                 security="none" />
     <security:http pattern="/login.jsp*"               security="none" />
-         
-     <security:http pattern="/accounts/login.do*"               security="none" />
+    <security:http pattern="/accounts/login.do*"  security="none" />
     <security:http pattern="/index.jsp"                security="none" />
-    
+   
+        
     <security:http entry-point-ref="authenticationEntryPoint">    	
         <security:intercept-url pattern="/main.do*"            access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/accounts/*"          access="IS_AUTHENTICATED_ANONYMOUSLY" />    
         <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/content/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />
   
+  		<security:intercept-url pattern="/download/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" />   
         
         <security:intercept-url pattern="/content.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
