@@ -368,6 +368,23 @@
  
    COMMENT ON TABLE "V2_IMAGE_DATA"  IS '이미지 데이터 테이블';
 /
+
+--------------------------------------------------------
+--  DDL for Table V2_IMAGE_STREAMS
+--------------------------------------------------------
+		CREATE TABLE V2_IMAGE_STREAMS ( 
+			EXTERNAL_ID	VARCHAR2(255)   NOT NULL, 
+			IMAGE_ID		INTEGER NOT NULL,
+			PUBLIC_SHARED			NUMBER(1, 0)  DEFAULT 1,
+			CREATOR		INTEGER,
+			CREATION_DATE          DATE DEFAULT  SYSDATE NOT NULL,
+			MODIFIED_DATE          DATE DEFAULT  SYSDATE NOT NULL,
+			CONSTRAINT V2_IMAGE_STREAMS_PK PRIMARY KEY (EXTERNAL_ID)
+		);
+		
+		 CREATE INDEX V2_IMAGE_STREAMS_IDX ON V2_IMAGE_STREAMS( EXTERNAL_ID, PUBLIC_SHARED ) ;	
+/
+
 --------------------------------------------------------
 --  DDL for Table V2_LOCALIZED_PROPERTY
 --------------------------------------------------------
