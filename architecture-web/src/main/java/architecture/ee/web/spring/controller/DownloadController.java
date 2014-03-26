@@ -35,7 +35,6 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 
 @Controller 
-@RequestMapping("/download")
 public class DownloadController {
 
 	private static final Log log = LogFactory.getLog(DownloadController.class);
