@@ -55,9 +55,14 @@
 		?,?,?,?,?,?
 	)		
 	]]></sql-query>
-	<sql-query name="DELETE_SOCIAL_ACCOUNT_BY_ID" description="DELETE_SOCIAL_ACCOUNT_BY_ID"><![CDATA[
+	<sql-query name="DELETE_STREAM_PHOTO_BY_ID" description="DELETE_IMAGE_STREAMS_BY_ID"><![CDATA[
 	DELETE FROM V2_IMAGE_STREAMS WHERE EXTERNAL_ID = ?
 	]]></sql-query>
+	
+	<sql-query name="DELETE_STREAM_PHOTOS_BY_IMAGE_ID" description="DELETE_STREAM_PHOTOS_BY_IMAGE_ID"><![CDATA[
+	DELETE FROM V2_IMAGE_STREAMS WHERE IMAGE_ID = ?
+	]]></sql-query>
+		
 	<sql-query name="COUNT_ALL_STREAM_PHOTO" description="COUNT_ALL_STREAM_PHOTO"><![CDATA[
 	SELECT 
 		count (EXTERNAL_ID)
@@ -377,6 +382,40 @@
     
         
     <!--  IMAGE -->	 
+	<sql-query name="SELECT_IMAGE_LINK_BY_LINK_ID" description="SELECT_IMAGE_LINK_BY_LINK_ID"><![CDATA[    
+	SELECT 
+		LINK_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED
+	FROM V2_IMAGE_LINK 
+	WHERE LINK_ID = ? 
+    ]]></sql-query>	
+	
+	<sql-query name="SELECT_IMAGE_LINK_BY_IMAGE_ID" description="SELECT_IMAGE_LINK_BY_IMAGE_ID"><![CDATA[    
+	SELECT 
+		LINK_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED
+	FROM V2_IMAGE_LINK 
+	WHERE IMAGE_ID = ? 	
+    ]]></sql-query>
+	
+	<sql-query name="INSERT_IMAGE_LINK" description="INSERT_IMAGE_LINK"><![CDATA[    
+	INSERT INTO V2_IMAGE (
+		LINK_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED
+	) VALUES ( ?, ? ,? )	
+    ]]></sql-query>
+	
+	<sql-query name="DELETE_IMAGE_LINK_BY_LINK_ID" description="DELETE_IMAGE_LINK_BY_LINK_ID"><![CDATA[    
+	DELETE FROM V2_IMAGE_LINK WHERE LINK_ID = ?
+    ]]></sql-query>
+	
+	<sql-query name="DELETE_IMAGE_LINK_BY_IMAGE_ID" description="DELETE_IMAGE_LINK_BY_IMAGE_ID"><![CDATA[    
+	DELETE FROM V2_IMAGE_LINK WHERE IMAGE_ID = ?
+    ]]></sql-query>
+		
 	<sql-query name="CREATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
   		INSERT INTO V2_IMAGE (
 	  		IMAGE_ID,
