@@ -75,7 +75,9 @@
 			</result>			
 		</action>
 	
-		<!--  streams  -->	
+		<!--  ================================== -->		
+		<!--   Streams															-->
+		<!--  ================================== -->	
 		<action name="list-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
@@ -133,7 +135,9 @@
 			</result>	
 		</action>		
 				
-		<!--  social network  -->					
+		<!--  ================================== -->		
+		<!--   Socialnetwork													-->
+		<!--  ================================== -->					
 		<action name="list-socialnetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
@@ -364,7 +368,9 @@
 			</result>	
 		</action>	
 							
-		<!--  image broswer  -->
+		<!--  ================================== -->		
+		<!--   Image Broswer												-->
+		<!--  ================================== -->	
 		<action name="download-image" class="architecture.ee.web.community.struts2.action.DownloadImageActioin">
 			<result name="success" type="stream">
 			  <param name="contentType">${targetImageContentType}</param>
@@ -372,8 +378,8 @@
 			  <param name="inputName">targetImageInputStream</param>
 			  <param name="bufferSize">1024</param>
 			</result>			
-		</action>			
-		
+		</action>	
+								
 		<action name="imagebrowser-list" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -418,7 +424,9 @@
 			</result>
 		</action>
 				
-		<!--  profile  -->
+		<!--  ================================== -->		
+		<!--   Profiles															-->
+		<!--  ================================== -->	
 		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.UserProfileAction">
 			<result name="success" type="freemarker">/html/community/user-profile.ftl</result>
 			<result name="modal-dialog" type="freemarker">/html/community/user-profile-modal-dialog.ftl</result>
@@ -432,9 +440,11 @@
 				photo.*
 				</param>
 			</result>
-		</action>		
+		</action>	
 		
-		<!--  contents  -->
+		<!--  ================================== -->		
+		<!--   Content : Forums, Blogs									-->
+		<!--  ================================== -->	
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">${template}</result>	
 			<!-- 
@@ -448,7 +458,14 @@
 			-->
 		</action>	
 					
-		<!--  announce  -->			
+		<!--  ================================== -->		
+		<!--   Pages		  													-->
+		<!--  ================================== -->	
+		
+					
+		<!--  ================================== -->		
+		<!--   Announce  													-->
+		<!--  ================================== -->			
 		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
 			  <param name="enableGZIP">true</param>
@@ -488,9 +505,30 @@
 				targetAnnounce.*
 				</param>
 			</result>
+		</action>		
+		
+		<!--  ================================== -->		
+		<!--   My Images 													-->
+		<!--  ================================== -->								
+		<action name="get-image-link" class="architecture.ee.web.community.struts2.action.ajax.MyImageLinkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>	    
+				<param name="includeProperties">
+				imageLink.*
+				</param>
+			</result>
+		</action>		
+		<action name="delete-image-link" class="architecture.ee.web.community.struts2.action.ajax.MyImageLinkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>	    
+				<param name="includeProperties">
+				imageId
+				</param>
+			</result>
 		</action>
-	
-		<!--  images  -->				
+						
 		<action name="list-my-image" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -574,7 +612,9 @@
 			</result>
 		</action>
 										
-		<!--  attachements  -->
+		<!--  ================================== -->		
+		<!--   My Attachements											-->
+		<!--  ================================== -->		
 		<action name="download-my-attachment" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
 			<result name="success" type="stream">
 			  <param name="contentType">${targetAttachmentContentType}</param>
