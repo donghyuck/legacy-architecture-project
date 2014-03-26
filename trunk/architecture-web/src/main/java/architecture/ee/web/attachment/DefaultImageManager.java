@@ -248,7 +248,8 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 			}else{
 				Date now = new Date();
 				((ImageImpl)image).setModifiedDate(now);
-				imageDao.updateImage(image);
+				imageDao.updateImage(image)
+				;
 				imageDao.saveImageInputStream(image, image.getInputStream());
 			}
 			
@@ -533,6 +534,20 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 
 	public int getTotalImageCount(int objectType, long objectId) {
 		return imageDao.getImageCount(objectType, objectId);
+	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	public void updateImageProperties(Image image) {
+		try {
+			if( image.getImageId() > 0 ){
+				Date now = new Date();
+				((ImageImpl)image).setModifiedDate(now);
+				imageDao.updateImage(image);
+			}
+			imageCache.remove(image.getImageId());
+		} catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}	
 
 }
