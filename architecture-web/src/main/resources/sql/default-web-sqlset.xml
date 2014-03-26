@@ -401,7 +401,7 @@
     ]]></sql-query>
 	
 	<sql-query name="INSERT_IMAGE_LINK" description="INSERT_IMAGE_LINK"><![CDATA[    
-	INSERT INTO V2_IMAGE (
+	INSERT INTO V2_IMAGE_LINK (
 		LINK_ID,
 		IMAGE_ID,
 		PUBLIC_SHARED
