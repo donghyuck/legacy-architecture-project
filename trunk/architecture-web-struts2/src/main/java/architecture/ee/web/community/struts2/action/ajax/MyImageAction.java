@@ -39,10 +39,11 @@ import com.drew.imaging.jpeg.JpegProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import com.drew.metadata.exif.ExifSubIFDDirectory;
 
 public class MyImageAction extends UploadImageAction  {
 
-	private int DEFAULT_OBJEDT_TYPE = 2 ;
+	private static final Integer DEFAULT_OBJEDT_TYPE = 2 ;
 	
     private int pageSize = 0 ;
     
@@ -128,19 +129,30 @@ public class MyImageAction extends UploadImageAction  {
 		}
 	}
 	
+	
+	@Override
+	public Integer getObjectType() {
+		return DEFAULT_OBJEDT_TYPE;
+	}
+
+	@Override
+	public Long getObjectId() {
+		return getUser().getUserId();
+	}
+
 	public int getTotalTargetImageCount(){
 		if( getUser().getUserId() < 1 )
 			return 0 ;
-		return getImageManager().getTotalImageCount(DEFAULT_OBJEDT_TYPE, getUser().getUserId());
+		return getImageManager().getTotalImageCount(getObjectType(), getObjectId());
 	}
 	
 	public List<Image> getTargetImages(){    	
     	if( getUser().getUserId() < 1 )
     		return Collections.EMPTY_LIST;    	
         if( pageSize > 0 ){
-            return getImageManager().getImages(DEFAULT_OBJEDT_TYPE, getUser().getUserId(), startIndex, pageSize);            
+            return getImageManager().getImages(getObjectType(), getObjectId(), startIndex, pageSize);            
         }else{            
-            return getImageManager().getImages(DEFAULT_OBJEDT_TYPE, getUser().getUserId());
+            return getImageManager().getImages(getObjectType(), getObjectId());
         }
     }
 	
@@ -157,8 +169,7 @@ public class MyImageAction extends UploadImageAction  {
 		return success();
 	}
 	
-	protected void extractMetadata( Image image , File file){
-		
+	protected void extractMetadata( Image image , File file){		
 		// jpeg
 		try {
 			Metadata metadata ;
@@ -166,9 +177,9 @@ public class MyImageAction extends UploadImageAction  {
 				metadata = JpegMetadataReader.readMetadata(file);
 			}else{
 				metadata = ImageMetadataReader.readMetadata(file);
-			}		
-			for (Directory direct :  metadata.getDirectories() ){
-				for( Tag tag : direct.getTags()	){
+			}			
+			for (Directory directory :  metadata.getDirectories() ){
+				for( Tag tag : directory.getTags()	){
 					log.debug( "Tag(" +"\n" +
 					tag.getTagName() + "\n" +
 					tag.getDescription() + "\n" +
@@ -191,21 +202,16 @@ public class MyImageAction extends UploadImageAction  {
 			if( this.imageId < 0  ){	
 				File fileToUse = getUploadImage();							
 				imageToUse = getImageManager().createImage(
-					DEFAULT_OBJEDT_TYPE, 
-					getUser().getUserId(), 
+					getObjectType(), getObjectId(),
 					getUploadImageFileName(), 
 					getUploadImageContentType(), 
-					fileToUse);	
-				
-				extractMetadata( imageToUse, fileToUse);
-				
+					fileToUse);					
+				extractMetadata( imageToUse, fileToUse);				
 				this.imageId = getImageManager().saveImage(imageToUse).getImageId();					
 			}else{
 				imageToUse = getTargetImage();
-				File fileToUse = getUploadImage();			
-
-				extractMetadata( imageToUse, fileToUse);
-				
+				File fileToUse = getUploadImage();
+				extractMetadata( imageToUse, fileToUse);				
 				((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
 				((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
 				log.debug("image size:" + imageToUse.getSize());
@@ -240,15 +246,15 @@ public class MyImageAction extends UploadImageAction  {
 	}
 	
 	public String deleteImageProperties() throws Exception {
-		Image group = getTargetImage();
-		Map<String, String> properties = group.getProperties();
+		Image img = getTargetImage();
+		Map<String, String> properties = img.getProperties();
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);
 		for (Map row : list) {
 			String n = (String) row.get("name");
 			String v = (String) row.get("value");
 			properties.remove(n);
 		}
-		updateTargetImageProperties( group, properties );		
+		updateTargetImageProperties( img, properties );		
 		return success();
 	}
 
