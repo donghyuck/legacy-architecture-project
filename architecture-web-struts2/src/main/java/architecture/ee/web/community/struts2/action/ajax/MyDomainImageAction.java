@@ -15,19 +15,55 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.Collections;
+import java.util.List;
+
+import architecture.ee.web.attachment.Image;
+import architecture.ee.web.attachment.impl.ImageImpl;
+
 
 public class MyDomainImageAction extends MyImageAction  {
 
-	private static final  int DEFAULT_OBJEDT_TYPE = 1 ;
-	
-	@Override
-	public Integer getObjectType() {
-		return DEFAULT_OBJEDT_TYPE;
-	}
+	private static final  int DOMAIN_OBJEDT_TYPE = 1 ;
 
-	@Override
-	public Long getObjectId() {
-		return getUser().getCompanyId();
+	public int getTotalTargetImageCount(){
+		if( getUser().getUserId() < 1 )
+			return 0 ;
+		return getImageManager().getTotalImageCount(DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId());
+	}
+	
+	public List<Image> getTargetImages(){    	
+    	if( getUser().getUserId() < 1 )
+    		return Collections.EMPTY_LIST;    	
+        if( getPageSize() > 0 ){
+            return getImageManager().getImages(DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId(), getStartIndex(),getPageSize());            
+        }else{            
+            return getImageManager().getImages(DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId());
+        }
+    }	
+
+	public String updateImage() throws Exception {		
+		if(isMultiPart() ){
+			Image imageToUse;
+			if( getImageId()< 0  ){	
+				File fileToUse = getUploadImage();							
+				imageToUse = getImageManager().createImage( DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId(),  getUploadImageFileName(),  getUploadImageContentType(),  fileToUse);					
+				extractMetadata( imageToUse, fileToUse);				
+				setImageId ( getImageManager().saveImage(imageToUse).getImageId() );					
+			}else{
+				imageToUse = getTargetImage();
+				File fileToUse = getUploadImage();
+				extractMetadata( imageToUse, fileToUse);				
+				((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
+				((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
+				log.debug("image size:" + imageToUse.getSize());
+				log.debug("image stream:" + imageToUse.getInputStream());
+				getImageManager().saveImage(imageToUse);			
+			}		
+		}
+		return success();
 	}
 	
 }
