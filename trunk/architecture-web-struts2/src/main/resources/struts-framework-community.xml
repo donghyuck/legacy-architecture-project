@@ -751,7 +751,7 @@
 				</param>
 			</result>
 		</action>
-							
+									
 		<action name="save-my-attachments" method="saveAttachments" class="architecture.ee.web.community.struts2.action.ajax.MyAttachmentAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -760,9 +760,6 @@
 				targetAttachment.*
 				</param>
 			</result>
-		</action>
-				
-	</package>
-		
-		
+		</action>				
+	</package>		
 </struts>
