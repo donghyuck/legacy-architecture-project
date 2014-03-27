@@ -611,7 +611,93 @@
 				</param>
 			</result>
 		</action>
-										
+
+		<!--  ================================== -->		
+		<!--   My Domain Images 													-->
+		<!--  ================================== -->														
+		<action name="list-my-domain-image" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImages.*\.inputStream</param>
+				<param name="includeProperties">
+				targetImages.*, totalTargetImageCount
+				</param>
+			</result>
+		</action>
+				
+		<action name="get-my-domain-image" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+						
+		<action name="delete-my-domain-image" method="deleteImage" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-domain-image" method="updateImage" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+		
+		<action name="download-my-domain-image" class="architecture.ee.web.struts2.action.DownloadImageActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>	
+
+		<action name="get-my-domain-image-property"  class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-domain-image-property" method="updateImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-domain-image-property" method="deleteImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>							
+																	
 		<!--  ================================== -->		
 		<!--   My Attachements											-->
 		<!--  ================================== -->		
