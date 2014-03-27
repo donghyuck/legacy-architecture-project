@@ -49,6 +49,7 @@
         <security:intercept-url pattern="/customers.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         
         <security:intercept-url pattern="/**"                      access="ROLE_USER" />
+        <security:intercept-url pattern="/secure/**"                      access="ROLE_SYSTEM, ROLE_ADMIN" />
         
         <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
