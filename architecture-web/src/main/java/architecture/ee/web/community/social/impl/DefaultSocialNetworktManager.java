@@ -28,6 +28,9 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.exception.SystemException;
+import architecture.ee.web.attachment.Image;
+import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.community.social.ServiceProviderFactory;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
@@ -178,4 +181,14 @@ public class DefaultSocialNetworktManager implements SocialNetworkManager {
 	public void removeSocialNetwork(SocialNetwork socialNetwork) {
 		socialNetworkDao.deleteSocialAccount(socialNetwork);
 	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	public void updateSocialNetworkProperties(SocialNetwork socialNetwork) {
+		if( socialNetwork.getSocialAccountId() > 0 ){
+			Date now = new Date();
+			socialNetwork.setModifiedDate(now);
+			getSocialNetworkDao().updateSocialAccount(socialNetwork);
+		}
+	}
+	
 }
