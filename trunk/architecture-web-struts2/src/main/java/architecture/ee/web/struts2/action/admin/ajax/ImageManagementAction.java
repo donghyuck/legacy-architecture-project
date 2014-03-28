@@ -17,8 +17,10 @@ package architecture.ee.web.struts2.action.admin.ajax;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
@@ -27,6 +29,8 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.struts2.action.UploadImageAction;
+import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.ws.Property;
 
 public class ImageManagementAction extends UploadImageAction  {
 
@@ -206,5 +210,51 @@ public class ImageManagementAction extends UploadImageAction  {
 			}		
 		}
 		return success();
+	}
+	
+
+	public List<Property> getTargetImageProperty() {
+		Map<String, String> properties = getTargetImage().getProperties();
+		List<Property> list = new ArrayList<Property>();
+		for (String key : properties.keySet()) {
+			String value = properties.get(key);
+			list.add(new Property(key, value));
+		}
+		return list;
+	}
+	
+	public String updateImageProperties() throws Exception {		
+		Image group = getTargetImage();
+		Map<String, String> properties = group.getProperties();
+		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);		
+		for (Map row : list) {
+			String n = (String) row.get("name");
+			String v = (String) row.get("value");
+			properties.put(n, v);
+		}		
+		updateTargetImageProperties(group, group.getProperties());
+		return success();	
+	}
+	
+	public String deleteImageProperties() throws Exception {
+		Image img = getTargetImage();
+		Map<String, String> properties = img.getProperties();
+		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);
+		for (Map row : list) {
+			String n = (String) row.get("name");
+			String v = (String) row.get("value");
+			properties.remove(n);
+		}
+		updateTargetImageProperties( img, properties );		
+		return success();
+	}
+
+	protected void updateTargetImageProperties(Image image, Map<String, String> properties) {
+		if (properties.size() > 0) {
+			image.setProperties(properties);
+			this.targetImage = image;			
+			imageManager.updateImageProperties(targetImage);
+			
+		}
 	}
 }

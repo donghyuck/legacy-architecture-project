@@ -20,9 +20,9 @@ import java.util.Map;
 
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.DateUtils;
-import architecture.ee.web.community.Announce;
-import architecture.ee.web.community.AnnounceManager;
-import architecture.ee.web.community.AnnounceNotFoundException;
+import architecture.ee.web.community.announce.Announce;
+import architecture.ee.web.community.announce.AnnounceManager;
+import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 

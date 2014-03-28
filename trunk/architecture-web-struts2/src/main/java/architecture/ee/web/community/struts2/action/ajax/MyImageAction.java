@@ -43,7 +43,7 @@ import com.drew.metadata.exif.ExifSubIFDDirectory;
 
 public class MyImageAction extends UploadImageAction  {
 
-	private static final Integer DEFAULT_OBJEDT_TYPE = 2 ;
+	private static final Integer USER_OBJEDT_TYPE = 2 ;
 	
     private int pageSize = 0 ;
     
@@ -129,30 +129,19 @@ public class MyImageAction extends UploadImageAction  {
 		}
 	}
 	
-	
-	@Override
-	public Integer getObjectType() {
-		return DEFAULT_OBJEDT_TYPE;
-	}
-
-	@Override
-	public Long getObjectId() {
-		return getUser().getUserId();
-	}
-
 	public int getTotalTargetImageCount(){
 		if( getUser().getUserId() < 1 )
 			return 0 ;
-		return getImageManager().getTotalImageCount(getObjectType(), getObjectId());
+		return getImageManager().getTotalImageCount(USER_OBJEDT_TYPE, getUser().getUserId());
 	}
 	
 	public List<Image> getTargetImages(){    	
     	if( getUser().getUserId() < 1 )
     		return Collections.EMPTY_LIST;    	
         if( pageSize > 0 ){
-            return getImageManager().getImages(getObjectType(), getObjectId(), startIndex, pageSize);            
+            return getImageManager().getImages(USER_OBJEDT_TYPE, getUser().getUserId(), startIndex, pageSize);            
         }else{            
-            return getImageManager().getImages(getObjectType(), getObjectId());
+            return getImageManager().getImages(USER_OBJEDT_TYPE, getUser().getUserId());
         }
     }
 	
@@ -189,11 +178,9 @@ public class MyImageAction extends UploadImageAction  {
 					);
 				}
 			}
-			//image.getProperties();
 		} catch (Exception e) {
 			log.warn(e);
-		}	
-		
+		}			
 	}
 	
 	public String updateImage() throws Exception {		
@@ -201,11 +188,7 @@ public class MyImageAction extends UploadImageAction  {
 			Image imageToUse;
 			if( this.imageId < 0  ){	
 				File fileToUse = getUploadImage();							
-				imageToUse = getImageManager().createImage(
-					getObjectType(), getObjectId(),
-					getUploadImageFileName(), 
-					getUploadImageContentType(), 
-					fileToUse);					
+				imageToUse = getImageManager().createImage( USER_OBJEDT_TYPE, getUser().getUserId(),  getUploadImageFileName(),  getUploadImageContentType(),  fileToUse);					
 				extractMetadata( imageToUse, fileToUse);				
 				this.imageId = getImageManager().saveImage(imageToUse).getImageId();					
 			}else{
@@ -221,7 +204,7 @@ public class MyImageAction extends UploadImageAction  {
 		}
 		return success();
 	}
-	
+		
 	public List<Property> getTargetImageProperty() {
 		Map<String, String> properties = getTargetImage().getProperties();
 		List<Property> list = new ArrayList<Property>();
