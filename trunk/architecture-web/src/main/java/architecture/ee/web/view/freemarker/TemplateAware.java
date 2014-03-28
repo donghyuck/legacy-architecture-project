@@ -16,7 +16,7 @@
 package architecture.ee.web.view.freemarker;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.template.Template;
+import architecture.ee.web.template.Template;
 
 public interface TemplateAware {
 	

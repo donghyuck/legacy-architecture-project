@@ -31,8 +31,8 @@ import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.web.community.template.Template;
-import architecture.ee.web.community.template.TemplateManager;
+import architecture.ee.web.template.Template;
+import architecture.ee.web.template.TemplateManager;
 import freemarker.cache.FileTemplateLoader;
 /**
  * 
