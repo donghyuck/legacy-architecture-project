@@ -138,7 +138,37 @@
 			  <param name="bufferSize">1024</param>
 			</result>			
 		</action>		
-		
+
+		<action name="get-image-property"  class="architecture.ee.web.struts2.action.admin.ajax.ImageManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-image-property" method="updateImageProperties" class="architecture.ee.web.struts2.action.admin.ajax.ImageManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-image-property" method="deleteImageProperties" class="architecture.ee.web.struts2.action.admin.ajax.ImageManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+				
 		<!--  attachments  -->
 		<action name="download-attachment" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
 			<result name="success" type="stream">
