@@ -31,7 +31,7 @@ import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class UploadImageAction extends FrameworkActionSupport  implements Preparable {
+public class MyUploadImageAction extends FrameworkActionSupport  implements Preparable {
 
 	private File uploadImage;
 
