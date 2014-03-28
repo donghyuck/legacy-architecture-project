@@ -28,15 +28,15 @@
 	
 	<bean id="photoStreamCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="photoStreamCache"  p:maxElementsInMemory="1000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="300" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 		
-	<bean id="templateDao" class="architecture.ee.web.community.template.dao.jdbc.JdbcTemplateDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	<bean id="templateDao" class="architecture.ee.web.template.dao.jdbc.JdbcTemplateDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	<bean id="contentDao" class="architecture.ee.web.community.dao.jdbc.JdbcContentDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
-	<bean id="announceDao" class="architecture.ee.web.community.dao.jdbc.JdbcAnnounceDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
+	<bean id="announceDao" class="architecture.ee.web.community.announce.dao.jdbc.JdbcAnnounceDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	<bean id="socialNetworkDao" class="architecture.ee.web.community.social.dao.jdbc.JdbcSocialNetworkDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="photoStreamsDao" class="architecture.ee.web.community.streams.dao.jdbc.JdbcStreamsDao" parent="jdbcDaoSupport"  />	
 	
-	<bean id="templateManager" class="architecture.ee.web.community.template.DefaultTemplateManager" depends-on="templateDao"  p:templateDao-ref="templateDao" p:objectCache-ref="templateCache" p:userManager-ref="userManager" />		
+	<bean id="templateManager" class="architecture.ee.web.template.DefaultTemplateManager" depends-on="templateDao"  p:templateDao-ref="templateDao" p:objectCache-ref="templateCache" p:userManager-ref="userManager" />		
 	<bean id="contentManager" class="architecture.ee.web.community.impl.ContentManagerImpl" depends-on="contentDao"  p:contentDao-ref="contentDao" p:contentCache-ref="contentCache"  p:eventPublisher-ref="eventPublisher"  p:userManager-ref="userManager" />		
-	<bean id="announceManager" class="architecture.ee.web.community.impl.AnnounceManagerImpl" depends-on="announceDao"  p:userManager-ref="userManager" p:eventPublisher-ref="eventPublisher" p:announceDao-ref="announceDao" p:announceCache-ref="announceCache" />		
+	<bean id="announceManager" class="architecture.ee.web.community.announce.impl.AnnounceManagerImpl" depends-on="announceDao"  p:userManager-ref="userManager" p:eventPublisher-ref="eventPublisher" p:announceDao-ref="announceDao" p:announceCache-ref="announceCache" />		
 	<bean id="socialNetworkManager" class="architecture.ee.web.community.social.impl.DefaultSocialNetworktManager" depends-on="socialNetworkDao"  p:socialNetworkDao-ref="socialNetworkDao" p:socialNetworkCache-ref="socialNetworkCache"/>		
 	<bean id="photoStreamsManager" class="architecture.ee.web.community.streams.DefaultPhotoStreamsManager" depends-on="photoStreamsDao"  p:streamsDao-ref="photoStreamsDao" p:userManager-ref="userManager"  p:photoStreamCache-ref="photoStreamCache"/>		
 		
