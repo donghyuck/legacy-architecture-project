@@ -23,12 +23,16 @@
 	 -->	 
 	 
 	<bean id="imageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="imageLinkCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageLinkCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="imageLinkIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageLinkIdCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
 	<bean id="attachmentCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="attachmentCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="menuCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="menuCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="menuIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="menuIdCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 					
 	<bean id="imageDao" class="architecture.ee.web.attachment.dao.impl.JdbcImageDao" parent="jdbcDaoSupport"  p:extendedPropertyDao-ref="extendedPropertyDao"  />
-	<bean id="imageManager" class="architecture.ee.web.attachment.DefaultImageManager"  init-method="initialize" destroy-method="destroy"  depends-on="imageDao eventPublisher" 	p:imageDao-ref="imageDao" p:eventPublisher-ref="eventPublisher"  p:imageCache-ref="imageCache" />
+	<bean id="imageLinkDao" class="architecture.ee.web.attachment.dao.impl.JdbcImageLinkDao" parent="jdbcDaoSupport"  />	
+	<bean id="imageManager" class="architecture.ee.web.attachment.DefaultImageManager"  init-method="initialize" destroy-method="destroy"  depends-on="imageDao eventPublisher"  p:imageLinkDao-ref="imageLinkDao" 	p:imageDao-ref="imageDao" p:eventPublisher-ref="eventPublisher"  p:imageCache-ref="imageCache"  p:imageLinkCache-ref="imageLinkCache"  p:imageLinkIdCache-ref="imageLinkIdCache" />
 
 	<bean id="attachmentDao" class="architecture.ee.web.attachment.dao.impl.JdbcAttachmentDao" parent="jdbcDaoSupport"  p:extendedPropertyDao-ref="extendedPropertyDao" 	/>
 	<bean id="attachmentManager" class="architecture.ee.web.attachment.DefaultAttachmentManager"  init-method="initialize" destroy-method="destroy"  depends-on="attachmentDao, eventPublisher"  p:attachmentDao-ref="attachmentDao" p:eventPublisher-ref="eventPublisher"  p:attachmentCache-ref="attachmentCache" />
@@ -38,6 +42,6 @@
 
 	<bean id="menuDao" class="architecture.ee.web.navigator.dao.impl.JdbcMenuDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="menuRepository" class="architecture.ee.web.navigator.DefaultMenuRepository"  init-method="initialize" destroy-method="destory"  depends-on="menuDao, eventPublisher" 	p:menuDao-ref="menuDao" p:eventPublisher-ref="eventPublisher"  p:menuCache-ref="menuCache"  p:menuIdCache-ref="menuIdCache" />
-
-
+	
+	
 </beans>
