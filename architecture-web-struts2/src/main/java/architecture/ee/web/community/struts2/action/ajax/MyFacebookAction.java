@@ -27,7 +27,7 @@ import architecture.ee.web.community.social.facebook.FacebookServiceProvider;
 import architecture.ee.web.community.social.facebook.Post;
 import architecture.ee.web.community.struts2.action.support.SocialNetworkActionSupport;
 
-public class FacebookAction extends SocialNetworkActionSupport {
+public class MyFacebookAction extends SocialNetworkActionSupport {
 
 	private int offset = 0;
 			

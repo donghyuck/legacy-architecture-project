@@ -36,7 +36,7 @@ import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class TwitterAction extends SocialNetworkActionSupport {
+public class MyTwitterAction extends SocialNetworkActionSupport {
 
 	private Long socialNetworkId = -1L; 
 	

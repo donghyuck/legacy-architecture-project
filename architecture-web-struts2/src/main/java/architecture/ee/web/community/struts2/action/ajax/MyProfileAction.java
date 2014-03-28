@@ -38,7 +38,7 @@ import architecture.user.GroupManager;
 import architecture.user.Role;
 import architecture.user.RoleManager;
 
-public class MyProfileAction extends UploadImageAction {
+public class MyProfileAction extends MyUploadImageAction {
 
 	private UserManager userManager;
 	
