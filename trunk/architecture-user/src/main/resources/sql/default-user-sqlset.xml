@@ -18,6 +18,13 @@
   		) VALUES ( ?, ?, ?, ?, ?, ?, ?)
     ]]></sql-query>
 
+	<sql-query name="SELECT_All_COMPANY_DOMAIN_AND_ID" description="SELECT_All_COMPANY_DOMAIN_AND_ID 조회"><![CDATA[    
+        SELECT
+   			COMPANY_ID, 
+   			DOMAIN_NAME
+  		FROM V2_COMPANY
+    ]]></sql-query>
+    
 	<sql-query name="SELECT_COMPANY_BY_ID" description="COMPANY 조회"><![CDATA[    
         SELECT
    			COMPANY_ID, 

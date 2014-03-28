@@ -35,7 +35,8 @@ public interface CompanyManager {
 	public abstract Company getCompany(String name) throws CompanyNotFoundException;
 	
 	public abstract Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException;
-		
+			
+	public abstract List<DomainMatcher> getDomainMatchers();
 	
 	public abstract void updateCompany(Company group) throws CompanyNotFoundException, CompanyAlreadyExistsException;
 	
@@ -66,5 +67,7 @@ public interface CompanyManager {
 	public abstract List<User> findCompanyUsers(Company company, String nameOrEmail, int startIndex, int numResults);
 	
 	public abstract int getFoundCompanyUserCount(Company company, String nameOrEmail);
+	
+	
 	
 }

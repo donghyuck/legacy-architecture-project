@@ -15,6 +15,8 @@
  */
 package architecture.user;
 
+import java.util.List;
+
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -33,7 +35,14 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 	protected boolean caseInsensitiveCompanyNameMatch;
 	protected Cache companyCache;
     protected Cache companyIdCache ;
-    protected Cache companyDomainCache ;
+    
+    /* (비Javadoc)
+	 * @see architecture.user.CompanyManager#getDomainMatchers()
+	 */
+	
+
+
+	protected Cache companyDomainCache ;
         
 	public AbstractCompanyManager() {
         this.caseInsensitiveCompanyNameMatch = true;
@@ -53,6 +62,7 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 		return companyDomainCache;
 	}
 
+	
 	/**
 	 * @param companyDomainCache 설정할 companyDomainCache
 	 */
@@ -71,22 +81,7 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
 	public void setEventPublisher(EventPublisher eventPublisher) {
 		this.eventPublisher = eventPublisher;
 	}	
-		
-	 public Company getCompanyByDomainName(String name)
-		        throws CompanyNotFoundException
-		    {
-		    	String nameToUse = name.toLowerCase();
-		    	if( companyDomainCache.get(nameToUse)  != null ){
-		    		log.debug( companyDomainCache.get(nameToUse )) ;
-		    		Long companyId = (Long)companyDomainCache.get(nameToUse).getValue();    		
-		    		return getCompany(companyId);
-		    	}else{
-		    		Company c = lookupCompanyByDomainName(nameToUse);
-		    		companyDomainCache.put( new Element( nameToUse, c.getCompanyId() ) );
-		    		return getCompany(c.getCompanyId());
-		    	}
-		    }
-	 
+			    
     public Company getCompany(String name)
         throws CompanyNotFoundException
     {
@@ -123,7 +118,8 @@ public abstract class AbstractCompanyManager implements CompanyManager , EventSo
         return caseInsensitiveCompanyNameMatch ? name.toLowerCase() : name;
     }
     
-    protected abstract Company lookupCompanyByDomainName(String name) throws CompanyNotFoundException;
+    
+    //protected abstract Company lookupCompanyByDomainName(String name) throws CompanyNotFoundException;
     
     protected abstract Company lookupCompany(String name) throws CompanyNotFoundException;
 	
