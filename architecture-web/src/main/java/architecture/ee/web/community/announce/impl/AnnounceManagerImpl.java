@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.announce;
+package architecture.ee.web.community.announce.impl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,6 +33,9 @@ import architecture.common.event.api.EventSource;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
+import architecture.ee.web.community.announce.Announce;
+import architecture.ee.web.community.announce.AnnounceManager;
+import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.dao.AnnounceDao;
 
 public class AnnounceManagerImpl implements AnnounceManager, EventSource {
