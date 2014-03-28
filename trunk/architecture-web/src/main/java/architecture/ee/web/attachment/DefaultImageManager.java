@@ -33,6 +33,7 @@ import net.sf.ehcache.Element;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.lang.RandomStringUtils;
 import org.apache.poi.util.IOUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +43,7 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.dao.ImageDao;
+import architecture.ee.web.attachment.dao.ImageLinkDao;
 import architecture.ee.web.attachment.impl.ImageImpl;
 
 public class DefaultImageManager extends AbstractAttachmentManager implements ImageManager {
@@ -49,9 +51,57 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	private Lock lock = new ReentrantLock();
 	private ImageConfig imageConfig;
 	private ImageDao imageDao;
+	private ImageLinkDao imageLinkDao;
+	
+	private Cache imageLinkIdCache;	
+	private Cache imageLinkCache;
 	private Cache imageCache;
 	private File imageDir;	
 	
+	
+	
+	/**
+	 * @return imageLinkIdCache
+	 */
+	public Cache getImageLinkIdCache() {
+		return imageLinkIdCache;
+	}
+
+	/**
+	 * @param imageLinkIdCache 설정할 imageLinkIdCache
+	 */
+	public void setImageLinkIdCache(Cache imageLinkIdCache) {
+		this.imageLinkIdCache = imageLinkIdCache;
+	}
+
+	/**
+	 * @return imageLinkDao
+	 */
+	public ImageLinkDao getImageLinkDao() {
+		return imageLinkDao;
+	}
+
+	/**
+	 * @param imageLinkDao 설정할 imageLinkDao
+	 */
+	public void setImageLinkDao(ImageLinkDao imageLinkDao) {
+		this.imageLinkDao = imageLinkDao;
+	}
+
+	/**
+	 * @return imageLinkCache
+	 */
+	public Cache getImageLinkCache() {
+		return imageLinkCache;
+	}
+
+	/**
+	 * @param imageLinkCache 설정할 imageLinkCache
+	 */
+	public void setImageLinkCache(Cache imageLinkCache) {
+		this.imageLinkCache = imageLinkCache;
+	}
+
 	public ImageConfig getImageConfig() {
 		return imageConfig;
 	}
@@ -548,6 +598,66 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		} catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	public Image getImageByImageLink(String linkId) throws NotFoundException {
+		Long imageIdToUse = -1L ;		
+		if( imageLinkIdCache.get(linkId) == null){
+			try {
+				ImageLink link = imageLinkDao.getImageLink(linkId);
+				imageLinkIdCache.put(new Element(link.getLinkId(), link.getImageId()));				
+				return getImageById(link.getImageId());
+			} catch (Exception e) {
+				String msg = (new StringBuilder()).append("Unable to find image ").append(linkId).toString();
+				throw new NotFoundException(msg, e);
+			}
+		}else{
+			imageIdToUse =  (Long) imageLinkIdCache.get( linkId ).getValue();
+		}		
+		return getImage(imageIdToUse);
+	}
+
+	public ImageLink getImageLink(Image image) throws NotFoundException {
+		ImageLink link = null  ;
+		Long imageIdToUse = image.getImageId();
+		if( imageLinkCache.get(imageIdToUse) == null){
+			try {
+				link = imageLinkDao.getImageLinkByImageId(imageIdToUse);				
+				imageLinkCache.put(new Element(imageIdToUse, link));
+			} catch (Exception e) {
+				 String msg = (new StringBuilder()).append("Unable to find image link for iamge : ").append(imageIdToUse).toString();
+	             throw new NotFoundException(msg, e);
+			}
+		}else{
+			link =  (ImageLink) imageLinkCache.get( imageIdToUse ).getValue();
+		}
+		return link;
+	}
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
+	public ImageLink getImageLink(Image image, boolean createIfNotExist) throws NotFoundException {
+		try {
+			return getImageLink(image);
+		} catch (NotFoundException e) {
+			if(createIfNotExist){
+				ImageLink link = new ImageLink(RandomStringUtils.random(64, true, true), image.getImageId(), true );
+				imageLinkDao.saveImageLink(link);
+				imageLinkCache.put(new Element(image.getImageId(), link));
+				return link;
+			}else{
+				throw e;
+			}
+		}
+	}
+
+	public void removeImageLink(Image image) {		
+		try {
+			ImageLink link = getImageLink(image);						
+			imageLinkIdCache.remove(link.getLinkId());		
+			imageLinkCache.remove(image.getImageId());		
+			imageLinkDao.removeImageLink(link);	
+		} catch (NotFoundException e) {
+		}				
 	}	
 
 }

@@ -17,6 +17,8 @@ package architecture.ee.web.community.social.impl;
 
 import java.io.Serializable;
 
+import org.scribe.model.Token;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
@@ -257,7 +259,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	public String getAuthorizationUrl() {
 		if(serviceProvider!=null)
 			try {
-				return serviceProvider.getAuthorizationUrl();
+				return serviceProvider.getAuthorizationUrl();						
 			} catch (Exception e) {
 			}		
 		return "";

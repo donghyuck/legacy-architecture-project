@@ -41,4 +41,5 @@ public interface SocialNetworkManager {
 
 	public abstract void removeSocialNetwork( SocialNetwork socialNetwork );
 	
+	public abstract void updateSocialNetworkProperties( SocialNetwork socialNetwork );
 }

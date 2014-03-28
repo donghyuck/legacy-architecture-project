@@ -16,6 +16,10 @@
    
 package architecture.ee.web.util;
 
+import java.net.InetAddress;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.UnknownHostException;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +39,44 @@ public class ServletUtils {
 			modelMap = new ModelMap();
 		}
 		return modelMap;
-	}
+	}    
+    
+    
+    public static  InetAddress getLocalHost(){
+    	try {
+			return InetAddress.getLocalHost();
+		} catch (UnknownHostException e) {
+			return null ;
+		}
+    }
+    
+    public static  String  getLocalHostAddr(){
+    	InetAddress addr = getLocalHost();
+    	if( addr == null )
+    		return null;
+    	return addr.getHostAddress();
+    }
+    
+    public static String getDomainName(HttpServletRequest request, boolean opt){    	
+    	String url = request.getHeader("Referer");
+    	
+    	return getDomainName( url , opt);
+    }
+    
+    public static String getDomainName(String url, boolean opt){
+    	
+    	if( StringUtils.isNotEmpty(url)){
+    		try {
+				URI uri = new URI(url);
+				String domain = uri.getHost();
+				if( opt )
+					return domain.startsWith("www.") ? domain.substring(4) : domain;				
+				return domain;	
+			} catch (URISyntaxException e) {
+			}
+    	}
+    	return null;
+    }    
     
     public static String getContextPath(HttpServletRequest request){    	
     	
