@@ -19,9 +19,9 @@ import java.util.Collections;
 import java.util.List;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.community.template.Template;
-import architecture.ee.web.community.template.TemplateManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.template.Template;
+import architecture.ee.web.template.TemplateManager;
 
 public class TemplateManagementAction extends FrameworkActionSupport {
 
