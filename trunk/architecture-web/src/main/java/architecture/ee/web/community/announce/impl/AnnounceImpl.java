@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.announce;
+package architecture.ee.web.community.announce.impl;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,6 +24,7 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.NoNamedEntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
+import architecture.ee.web.community.announce.Announce;
 
 public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Announce {
 
