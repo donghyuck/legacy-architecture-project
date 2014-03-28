@@ -18,6 +18,7 @@ package architecture.user.dao;
 import java.util.List;
 
 import architecture.common.user.Company;
+import architecture.user.DomainMatcher;
 
 public interface CompanyDao {
 
@@ -29,8 +30,10 @@ public interface CompanyDao {
 	
 	public void updateCompany(Company company);
 	
-	public Company getCompanyByDomainName(String domainName);
+	//public Company getCompanyByDomainName(String domainName);
 
+	public List<DomainMatcher>  getCompanyDomainMatchers();
+	
 	/**
 	 * 제공되지 않는 기능
 	 * @return

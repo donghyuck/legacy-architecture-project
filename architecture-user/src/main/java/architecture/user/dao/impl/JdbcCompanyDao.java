@@ -30,6 +30,7 @@ import org.springframework.jdbc.core.SqlParameterValue;
 import architecture.common.user.Company;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.user.DomainMatcher;
 import architecture.user.dao.CompanyDao;
 import architecture.user.impl.CompanyImpl;
 
@@ -86,8 +87,8 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 				new SqlParameterValue (Types.NUMERIC, companyId), 
 				new SqlParameterValue(Types.VARCHAR, company.getName()),
 				new SqlParameterValue(Types.VARCHAR, company.getDisplayName()),
-				new SqlParameterValue(Types.VARCHAR, company.getDescription()),
 				new SqlParameterValue(Types.VARCHAR, company.getDomainName()),
+				new SqlParameterValue(Types.VARCHAR, company.getDescription()),
 				new SqlParameterValue(Types.DATE, company.getCreationDate()),
 				new SqlParameterValue(Types.DATE, company.getModifiedDate()));		
 		company.setCompanyId(companyId);		
@@ -229,4 +230,15 @@ public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDa
 				Long.class);
 	}
 
+	public List<DomainMatcher> getCompanyDomainMatchers() {
+		return getExtendedJdbcTemplate().query(
+			getBoundSql("ARCHITECTURE_SECURITY.SELECT_All_COMPANY_DOMAIN_AND_ID").getSql(),
+			new RowMapper<DomainMatcher>(){
+				public DomainMatcher mapRow(ResultSet rs, int rowNum)
+					throws SQLException {
+					DomainMatcher matcher = new DomainMatcher(1, rs.getLong("COMPANY_ID"), rs.getString("DOMAIN_NAME") );
+					return matcher;
+				}	
+		});
+	}
 }

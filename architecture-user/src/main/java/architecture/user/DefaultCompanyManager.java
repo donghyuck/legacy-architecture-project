@@ -19,6 +19,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.sf.ehcache.Element;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,7 +37,6 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 	private CompanyDao companyDao;
 	private GroupManager groupManager;	
 	private UserManager userManager;
-	
 	
 	
 	public UserManager getUserManager() {
@@ -60,6 +61,40 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 
 	public void setCompanyDao(CompanyDao companyDao) {
 		this.companyDao = companyDao;
+	}
+	
+	public Company getCompanyByDomainName(String name) throws CompanyNotFoundException
+	{
+		long foundCompanyId = -1L;		
+		
+		List<DomainMatcher> list = getDomainMatchers();		
+		
+		log.debug( name );
+		log.debug( list );
+		
+		for( DomainMatcher matcher : list ){
+			if( matcher.match(name, false))
+			{
+				foundCompanyId = matcher.getObjectId();
+				break;
+			}	
+		}		
+		
+		if( foundCompanyId > 0 )
+			return getCompany(foundCompanyId);
+		else
+			 throw CodeableException.newException(CompanyNotFoundException.class, 5142, name);
+	 }	
+	
+	public List<DomainMatcher> getDomainMatchers() {		
+		List<DomainMatcher> list ;
+		if( getCompanyDomainCache().get("companyDomainMatchers") == null ){
+			 list = companyDao.getCompanyDomainMatchers();		
+			 getCompanyDomainCache().put(new Element("companyDomainMatchers", list));
+		}else{
+			 list = (List<DomainMatcher>) getCompanyDomainCache().get("companyDomainMatchers").getValue();	
+		}		
+		return list;
 	}
 	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
@@ -126,8 +161,7 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 	}
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
-	public Company createCompany(String name, String displayName,
-			String domainName, String description)
+	public Company createCompany(String name, String displayName, String domainName, String description)
 			throws CompanyAlreadyExistsException {
 		try
         {
@@ -139,8 +173,11 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
         	if( !StringUtils.isEmpty(domainName)){
         		try {
 					getCompanyByDomainName(domainName);
+					throw new CompanyAlreadyExistsException();
 				} catch (CompanyNotFoundException e) {
-					 throw new CompanyAlreadyExistsException();
+					// ignore ..
+					
+					
 				}
         	}        	
         	Company company = new CompanyImpl();
@@ -148,9 +185,9 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
         	company.setDisplayName(displayName);
         	company.setName(name);
         	company.setDomainName(domainName);
-        	Date groupCreateDate = new Date();
-        	company.setCreationDate(groupCreateDate);
-        	company.setModifiedDate(groupCreateDate);
+        	Date now = new Date();
+        	company.setCreationDate(now);
+        	company.setModifiedDate(now);
         	companyDao.createCompany(company);
         	return company;
         }
@@ -229,27 +266,26 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 	}
 
 
-	@Override
-	protected Company lookupCompanyByDomainName(String name)
-			throws CompanyNotFoundException {
+/*	@Override
+		protected Company lookupCompanyByDomainName(String name) throws CompanyNotFoundException {
 		Company g = companyDao.getCompanyByDomainName(name);
 	    if(g == null)
-	        throw CodeableException.newException(CompanyNotFoundException.class, 5142, name);//new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
-	    else
-	        return g;
-	}
+	    	throw CodeableException.newException(CompanyNotFoundException.class, 5142, name);//new GroupNotFoundException((new StringBuilder()).append("No group found for with name ").append(name).toString());
+		 else
+	    	return g;
+	}*/
 
 	
 	@Override
-	protected Company lookupCompany(long groupId)
+	protected Company lookupCompany(long companyId)
 			throws CompanyNotFoundException {
-	    if(groupId == -2L)
+	    if(companyId == -2L)
 	        return null ; //new RegisteredUsersGroup();
-	    Company group = companyDao.getCompanyById(groupId);
-	    if(group == null)
-	        throw CodeableException.newException(CompanyNotFoundException.class, 5141, groupId); //new GroupNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
+	    Company foundCompany = companyDao.getCompanyById(companyId);
+	    if(foundCompany == null)
+	        throw CodeableException.newException(CompanyNotFoundException.class, 5141, companyId); //new GroupNotFoundException((new StringBuilder()).append("No group found for with id ").append(groupId).toString());
 	    else
-	        return group;
+	        return foundCompany;
 	}
 
 	public int getTotalCompanyGroupCount(Company group) {

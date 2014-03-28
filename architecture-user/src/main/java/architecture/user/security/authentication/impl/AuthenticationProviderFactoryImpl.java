@@ -82,8 +82,7 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		}
 		
 		protected AnonymousUser createAnonymousUser(){
-			boolean getByDomainName = CompanyUtils.isAllowedGetByDomainName();
-			log.debug("getByDomainName:" + getByDomainName);			
+			boolean getByDomainName = CompanyUtils.isAllowedGetByDomainName();	
 			if( getByDomainName )
 			try {
 				String localName = getLocalName();

@@ -30,8 +30,7 @@ public class CompanyUtils {
 	public static Company getCompanyByDomainName(String domainName) throws CompanyNotFoundException{
 		CompanyManager companyManger = getCompanyManager();
 		return companyManger.getCompanyByDomainName(domainName);
-	}	
-	
+	}		
 	
 	public static Company getDefaultCompany() throws CompanyNotFoundException {
 		long companuId = getDefaultCompanyId();
