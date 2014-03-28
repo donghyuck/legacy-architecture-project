@@ -5,6 +5,7 @@
 <struts>
 
 	<package name="framework-user-actions" namespace="/accounts"  extends="framework-default" >			
+		
 		<default-interceptor-ref name="defaultStack" />		
 		
 		<action name="login" class="architecture.user.web.struts2.action.LoginAction">
