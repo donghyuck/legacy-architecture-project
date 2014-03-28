@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.dao;
+package architecture.ee.web.community.announce.dao;
 
 import java.util.List;
 
-import architecture.ee.web.community.Announce;
-import architecture.ee.web.community.AnnounceNotFoundException;
+import architecture.ee.web.community.announce.Announce;
+import architecture.ee.web.community.announce.AnnounceNotFoundException;
 
 public interface AnnounceDao {
 	

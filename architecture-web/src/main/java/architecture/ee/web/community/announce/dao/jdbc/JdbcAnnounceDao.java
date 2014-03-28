@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.dao.jdbc;
+package architecture.ee.web.community.announce.dao.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,10 +27,10 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.community.Announce;
-import architecture.ee.web.community.AnnounceNotFoundException;
-import architecture.ee.web.community.dao.AnnounceDao;
-import architecture.ee.web.community.impl.AnnounceImpl;
+import architecture.ee.web.community.announce.Announce;
+import architecture.ee.web.community.announce.AnnounceImpl;
+import architecture.ee.web.community.announce.AnnounceNotFoundException;
+import architecture.ee.web.community.announce.dao.AnnounceDao;
 
 public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceDao {
 
