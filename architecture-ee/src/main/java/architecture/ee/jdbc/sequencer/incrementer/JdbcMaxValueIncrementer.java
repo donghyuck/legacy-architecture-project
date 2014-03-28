@@ -14,7 +14,8 @@ public class JdbcMaxValueIncrementer implements MaxValueIncrementer {
 	
 	/**
 	 * @uml.property  name="factory"
-	 * @uml.associationEnd  
+	 * @uml.associationEnd  ls
+	 * 
 	 */
 	private SequencerFactory factory ;	
 	
