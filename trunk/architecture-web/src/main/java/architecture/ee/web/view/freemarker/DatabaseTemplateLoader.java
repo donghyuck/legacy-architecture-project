@@ -102,11 +102,9 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				invoker.prepare();
 				Object action = invoker.invoke();
 				if( action instanceof TemplateAware ){
-					Template template = ((TemplateAware)action).getTargetTemplate();
-					
+					Template template = ((TemplateAware)action).getTargetTemplate();					
 					if( log.isDebugEnabled() )
-						log.debug( name + " < compare > template from action:" + template.getTitle() + ", type=" + template.getTemplateType() + ", locaion=" + template.getLocation());
-					
+						log.debug( name + " < compare > template from action:" + template.getTitle() + ", type=" + template.getTemplateType() + ", locaion=" + template.getLocation());					
 					if(  "ftl".equals(template.getTemplateType()) && name.contains(template.getLocation() ))
 						return template;
 				}
