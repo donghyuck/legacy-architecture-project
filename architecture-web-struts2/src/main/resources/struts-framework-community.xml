@@ -6,7 +6,13 @@
 
 	<!--  COMMON NAV ACTIONS -->
 	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
-	
+
+		<action name="main" class="architecture.ee.web.community.struts2.action.MainAction">
+			<result name="streams">/html/community/my-streams.ftl</result>
+			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
+			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
+		</action>	
+			
 		<action name="content" class="architecture.ee.web.community.struts2.action.PageAction">
 			<result name="success" type="freemarker">${template}</result>	
 		</action>
@@ -318,7 +324,7 @@
 			</result>	
 		</action>
 		
-		<action name="get-twitter-profile" class="architecture.ee.web.community.struts2.action.ajax.TwitterAction">
+		<action name="get-twitter-profile" class="architecture.ee.web.community.struts2.action.ajax.MyTwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>
@@ -328,7 +334,7 @@
 			</result>	
 		</action>
 				
-		<action name="get-twitter-hometimeline" class="architecture.ee.web.community.struts2.action.ajax.TwitterAction">
+		<action name="get-twitter-hometimeline" class="architecture.ee.web.community.struts2.action.ajax.MyTwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>
@@ -338,7 +344,7 @@
 			</result>	
 		</action>			
 				
-		<action name="get-twitter-usertimeline" class="architecture.ee.web.community.struts2.action.ajax.TwitterAction">
+		<action name="get-twitter-usertimeline" class="architecture.ee.web.community.struts2.action.ajax.MyTwitterAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>
@@ -348,7 +354,7 @@
 			</result>	
 		</action>	
 		
-		<action name="get-facebook-profile" class="architecture.ee.web.community.struts2.action.ajax.FacebookAction">
+		<action name="get-facebook-profile" class="architecture.ee.web.community.struts2.action.ajax.MyFacebookAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param>
@@ -358,7 +364,7 @@
 			</result>	
 		</action>
 		
-		<action name="get-facebook-homefeed" class="architecture.ee.web.community.struts2.action.ajax.FacebookAction">
+		<action name="get-facebook-homefeed" class="architecture.ee.web.community.struts2.action.ajax.MyFacebookAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param>
