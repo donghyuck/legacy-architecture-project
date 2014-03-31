@@ -8,7 +8,7 @@
 	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
 		
 		<action name="main" class="architecture.ee.web.community.struts2.action.MainAction">
-			<result name="streams">/html/community/my-streams.ftl</result>
+			<result name="streams" type="freemarker">/html/community/my-streams.ftl</result>
 			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
 		</action>
