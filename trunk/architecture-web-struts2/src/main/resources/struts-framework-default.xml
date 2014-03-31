@@ -72,17 +72,17 @@
 	<package name="framework-actions" extends="framework-default" namespace="/">
 		
 		<default-interceptor-ref name="defaultStack" />
-		
+		<!-- 
 		<action name="main" class="architecture.ee.web.community.struts2.action.MainAction">
 			<result name="success">/main.jsp</result>
 			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
-		</action>	
+		</action>			
 		
 		<action name="profile" class="architecture.ee.web.struts2.action.MyPageAction">
 			<result name="homepage" type="freemarker">/html/my-profile.ftl</result>
 		</action>		
-						
+		-->				
 	</package>
 
 </struts>
