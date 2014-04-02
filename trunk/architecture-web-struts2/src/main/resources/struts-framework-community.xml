@@ -446,8 +446,7 @@
 				photo.*
 				</param>
 			</result>
-		</action>	
-		
+		</action>		
 		<!--  ================================== -->		
 		<!--   Content : Forums, Blogs									-->
 		<!--  ================================== -->	
@@ -474,8 +473,14 @@
 		<!--  ================================== -->			
 		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
 			<result name="json-success" type="json">
-			  <param name="enableGZIP">true</param>
-			  <param name="excludeNullProperties">true</param>     
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				*\.primaryKeyObject,
+				*\.modelObjectType,
+				*\.cachedSize,				
+				*\.passwordHash
+				</param>
 				<param name="includeProperties">
 				targetAnnounces.*,
 				totalAnnounceCount
