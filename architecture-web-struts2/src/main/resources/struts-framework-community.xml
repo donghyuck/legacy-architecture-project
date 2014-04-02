@@ -476,10 +476,13 @@
 				<param name="enableGZIP">true</param>
 				<param name="excludeNullProperties">true</param>     
 				<param name="excludeProperties"> 	
-				*\.primaryKeyObject,
-				*\.modelObjectType,
-				*\.cachedSize,				
-				*\.passwordHash
+				targetAnnounces.*\.primaryKeyObject,
+				targetAnnounces.*\.modelObjectType,
+				targetAnnounces.*\.cachedSize,				
+				targetAnnounces.*\.user.passwordHash,
+				targetAnnounces.*\.user.primaryKeyObject,
+				targetAnnounces.*\.user.modelObjectType,
+				targetAnnounces.*\.user.cachedSize					
 				</param>
 				<param name="includeProperties">
 				targetAnnounces.*,
