@@ -50,7 +50,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 			announce.setSubject(rs.getString("SUBJECT"));
 			announce.setBody(rs.getString("BODY"));
 			announce.setStartDate(rs.getTimestamp("START_DATE"));
-			announce.setEndDate(rs.getDate("END_DATE"));		
+			announce.setEndDate(rs.getTimestamp("END_DATE"));		
 			announce.setCreationDate(rs.getDate("CREATION_DATE"));
 			announce.setModifiedDate(rs.getDate("MODIFIED_DATE"));					
 			return announce;
@@ -145,7 +145,6 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 			announce.setProperties( getAnnounceProperties(announceId) );
 			return announce;
 		} catch (DataAccessException e) {
-			e.printStackTrace();
 			throw new AnnounceNotFoundException(e);
 		}
 	}
