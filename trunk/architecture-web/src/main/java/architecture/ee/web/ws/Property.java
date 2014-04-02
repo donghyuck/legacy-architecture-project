@@ -25,6 +25,7 @@ package architecture.ee.web.ws;
 public class Property implements java.io.Serializable {
     
     private static final long serialVersionUID = -2672216687853105936L;
+    
     private String name;
     private Object value;
 

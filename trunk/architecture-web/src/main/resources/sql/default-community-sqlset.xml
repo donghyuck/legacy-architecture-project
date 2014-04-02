@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_COMMUNITY</name>
+    <version>2.0</version>
+    <description>Queries for COMMUNITY COMPONENTS</description>
+
+	<sql-query name="DELETE_PROFILE_IMAGE_BY_ID" description=""><![CDATA[
+	DELETE FROM V2_PROFILE_IMAGE  
+	WHERE PROFILE_IMAGE_ID = ?
+	]]></sql-query>       
+
+	<sql-query name="DELETE_PROFILE_IMAGE_DATA_BY_ID" description=""><![CDATA[
+	DELETE FROM V2_PROFILE_IMAGE_DATA  
+	WHERE PROFILE_IMAGE_ID = ?	
+	]]></sql-query>
+	
+	<sql-query name="INSERT_PROFILE_IMAGE" description=""><![CDATA[
+	INSERT INTO V2_PROFILE_IMAGE (
+		PROFILE_IMAGE_ID,
+		USER_ID,
+		FILE_NAME,
+		FILE_SIZE,
+		CONTENT_TYPE,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( ?,?,?,?,?,?,? )
+		
+	]]></sql-query>
+	
+	<sql-query name="INSERT_EMPTY_PROFILE_IMAGE_DATA" description=""><![CDATA[
+	INSERT INTO V2_PROFILE_IMAGE_DATA (PROFILE_IMAGE_ID, PROFILE_IMAGE_DATA) VALUES (?, EMPTY_BLOB())
+	]]></sql-query>
+	
+	<sql-query name="INSERT_PROFILE_IMAGE_DATA" description=""><![CDATA[
+	INSERT V2_PROFILE_IMAGE_DATA  (PROFILE_IMAGE_ID, PROFILE_IMAGE_DATA) VALUES (?, ?)
+	]]></sql-query>
+	
+	<sql-query name="UPDATE_PROFILE_IMAGE_DATA" description=""><![CDATA[
+	UPDATE V2_PROFILE_IMAGE_DATA SET PROFILE_IMAGE_DATA = ? WHERE PROFILE_IMAGE_ID = ?
+	]]></sql-query>
+	
+	<sql-query name="SELECT_PRIMARY_PROFILE_IMAGE_ID_BY_USER" description=""><![CDATA[
+	SELECT 
+		PROFILE_IMAGE_ID,
+		USER_ID,
+		PRIMARY_IMAGE,
+		FILE_NAME,
+		FILE_SIZE,
+		CONTENT_TYPE,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_PROFILE_IMAGE 
+	WHERE 
+		PRIMARY_IMAGE = 1 AND
+		PROFILE_IMAGE_ID = ?			
+	]]></sql-query>	
+			
+	<sql-query name="SELECT_PROFILE_IMAGE_BY_ID" description=""><![CDATA[
+	SELECT 
+		PROFILE_IMAGE_ID,
+		USER_ID,
+		PRIMARY_IMAGE,
+		FILE_NAME,
+		FILE_SIZE,
+		CONTENT_TYPE,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_PROFILE_IMAGE WHERE PROFILE_IMAGE_ID = ?	
+	]]></sql-query>						
+
+	<sql-query name="SELECT_PROFILE_IMAGE_IDS_BY_USER" description=""><![CDATA[
+	SELECT PROFILE_IMAGE_ID FROM V2_PROFILE_IMAGE WHERE USER_ID = ?
+	]]></sql-query>		
+	
+	<sql-query name="COUNT_PROFILE_IMAGE_BY_USER" description=""><![CDATA[
+	SELECT COUNT(PROFILE_IMAGE_ID) FROM V2_PROFILE_IMAGE WHERE USER_ID = ?
+	]]></sql-query>			
+
+	<sql-query name="SELECT_PROFILE_IMAGE_DATA_BY_ID" description=""><![CDATA[
+	SELECT PROFILE_IMAGE_DATA FROM V2_PROFILE_IMAGE_DATA WHERE PROFILE_IMAGE_ID = ?
+	]]></sql-query>		
+
+	<sql-query name="RESET_PROFILE_IMAGE_BY_USER" description=""><![CDATA[
+	UPDATE V2_PROFILE_IMAGE 
+	SET PRIMARY_IMAGE = 0  
+	WHERE USER_ID = ?
+	]]></sql-query>		
+		
+</sqlset>
