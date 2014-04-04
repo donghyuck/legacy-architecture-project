@@ -22,7 +22,7 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.DateModelObjectSupport;
 import architecture.user.permission.PermissionMask;
 
-public class PermissionMaskImpl extends DateModelObjectSupport implements PermissionMask {
+public class DefaultPermissionMask extends DateModelObjectSupport implements PermissionMask {
 
 	public String getName() {
 		// TODO 자동 생성된 메소드 스텁

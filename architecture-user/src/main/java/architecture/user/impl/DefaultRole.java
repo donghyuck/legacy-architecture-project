@@ -23,7 +23,7 @@ import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.user.Role;
 
 
-public class RoleImpl extends BaseModelObjectSupport  implements Role  {
+public class DefaultRole extends BaseModelObjectSupport  implements Role  {
 
 	private Long roleId;
 	
