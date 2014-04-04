@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.exception.CodeableException;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.component.admin.AdminHelper;

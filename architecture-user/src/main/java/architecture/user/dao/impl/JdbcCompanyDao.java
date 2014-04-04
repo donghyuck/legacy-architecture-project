@@ -29,9 +29,9 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyTemplate;
+import architecture.common.user.DomainMatcher;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.DomainMatcher;
 import architecture.user.dao.CompanyDao;
 
 public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDao {

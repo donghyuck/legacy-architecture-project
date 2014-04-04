@@ -27,7 +27,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.exception.CodeableException;
 import architecture.common.user.Company;
+import architecture.common.user.CompanyAlreadyExistsException;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.CompanyTemplate;
+import architecture.common.user.DomainMatcher;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.user.dao.CompanyDao;

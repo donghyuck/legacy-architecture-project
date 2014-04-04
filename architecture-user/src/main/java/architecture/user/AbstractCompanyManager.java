@@ -26,6 +26,8 @@ import org.apache.commons.logging.LogFactory;
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
 import architecture.common.user.Company;
+import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.ee.component.admin.AdminHelper;
 
 public abstract class AbstractCompanyManager implements CompanyManager , EventSource {

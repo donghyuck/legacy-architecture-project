@@ -31,10 +31,10 @@ import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
+import architecture.common.user.Group;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.DefaultGroup;
-import architecture.user.Group;
 import architecture.user.dao.GroupDao;
 
 import com.google.common.collect.Lists;
