@@ -15,7 +15,6 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.dao.GroupDao;
-import architecture.user.impl.GroupImpl;
 import architecture.user.util.CompanyUtils;
 
 import com.google.common.collect.Sets;
@@ -56,7 +55,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
         }
         catch(GroupNotFoundException unfe)
         {
-        	Group g = new GroupImpl();
+        	Group g = new DefaultGroup();
         	g.setDescription(name);
         	g.setName(name);
         	Date groupCreateDate = new Date();
@@ -76,7 +75,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
         }
         catch(GroupNotFoundException unfe)
         {
-        	Group g = new GroupImpl();
+        	Group g = new DefaultGroup();
         	g.setDisplayName(displayName);
         	g.setDescription(displayName);
         	g.setName(name);
@@ -97,7 +96,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
         }
         catch(GroupNotFoundException unfe)
         {
-        	Group g = new GroupImpl();
+        	Group g = new DefaultGroup();
         	g.setDisplayName(displayName);
         	g.setDescription(displayName);
         	g.setName(name);
@@ -120,7 +119,7 @@ public class DefaultGroupManager extends AbstractGroupManager {
         }
         catch(GroupNotFoundException unfe)
         {
-        	Group g = new GroupImpl();
+        	Group g = new DefaultGroup();
         	g.setDisplayName(displayName);
         	g.setDescription(description);
         	g.setName(name);

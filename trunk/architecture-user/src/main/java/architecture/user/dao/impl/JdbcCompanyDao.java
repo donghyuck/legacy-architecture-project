@@ -28,18 +28,18 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.DomainMatcher;
 import architecture.user.dao.CompanyDao;
-import architecture.user.impl.CompanyImpl;
 
 public class JdbcCompanyDao  extends ExtendedJdbcDaoSupport implements CompanyDao {
 
 	
 	private final RowMapper<Company> companyMapper = new RowMapper<Company>(){		
 		public Company mapRow(ResultSet rs, int rowNum) throws SQLException {			
-			Company g = new CompanyImpl();
+			Company g = new CompanyTemplate();
 			g.setCompanyId(rs.getLong("COMPANY_ID"));
 			g.setDisplayName(rs.getString("DISPLAY_NAME"));
 			g.setName(rs.getString("NAME"));

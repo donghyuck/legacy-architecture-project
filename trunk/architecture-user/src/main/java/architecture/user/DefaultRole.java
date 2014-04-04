@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.user.impl;
+package architecture.user;
 
 import java.io.Serializable;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
-import architecture.user.Role;
 
 
 public class DefaultRole extends BaseModelObjectSupport  implements Role  {

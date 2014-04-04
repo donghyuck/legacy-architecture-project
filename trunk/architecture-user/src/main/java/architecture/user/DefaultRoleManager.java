@@ -19,7 +19,6 @@ import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.user.dao.RoleDao;
-import architecture.user.impl.RoleImpl;
 import architecture.user.spi.ExtendedRoleManager;
 
 /**
@@ -154,7 +153,7 @@ public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
 	public void createRole(String name, String description) {
-		Role newRole = new RoleImpl();
+		Role newRole = new DefaultRole();
 		newRole.setName(name);
 		newRole.setDescription(description);
 		newRole.setMask(0);		

@@ -27,10 +27,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.exception.CodeableException;
 import architecture.common.user.Company;
+import architecture.common.user.CompanyTemplate;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.user.dao.CompanyDao;
-import architecture.user.impl.CompanyImpl;
 
 public class DefaultCompanyManager extends AbstractCompanyManager {
 
@@ -106,7 +106,7 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
         }
         catch(CompanyNotFoundException unfe)
         {
-        	Company company = new CompanyImpl();
+        	Company company = new CompanyTemplate();
         	company.setDescription(name);
         	company.setName(name);
         	company.setDisplayName(name);
@@ -127,7 +127,7 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
         }
         catch(CompanyNotFoundException unfe)
         {
-        	Company company = new CompanyImpl();
+        	Company company = new CompanyTemplate();
         	company.setDescription(name);
         	company.setDisplayName(displayName);
         	company.setName(name);
@@ -148,7 +148,7 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
         }
         catch(CompanyNotFoundException unfe)
         {
-        	Company company = new CompanyImpl();
+        	Company company = new CompanyTemplate();
         	company.setDescription(description);
         	company.setDisplayName(displayName);
         	company.setName(name);
@@ -180,7 +180,7 @@ public class DefaultCompanyManager extends AbstractCompanyManager {
 					
 				}
         	}        	
-        	Company company = new CompanyImpl();
+        	Company company = new CompanyTemplate();
         	company.setDescription(description);
         	company.setDisplayName(displayName);
         	company.setName(name);

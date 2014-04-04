@@ -10,9 +10,9 @@ import org.springframework.jdbc.core.RowMapper;
 
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.user.DefaultRole;
 import architecture.user.Role;
 import architecture.user.dao.RoleDao;
-import architecture.user.impl.RoleImpl;
 
 /**
  * @author  donghyuck
@@ -21,7 +21,7 @@ public class JdbcRoleDao extends ExtendedJdbcDaoSupport implements RoleDao {
 
 	private final RowMapper<Role> roleRowMapper = new RowMapper<Role>(){
 		public Role mapRow(ResultSet rs, int rowNum) throws SQLException {  			
-			RoleImpl model = new RoleImpl();			
+			DefaultRole model = new DefaultRole();			
 			model.setRoleId( rs.getLong("ROLE_ID") );
 			model.setName(rs.getString("NAME"));
 			model.setMask(rs.getInt("MASK"));

@@ -33,9 +33,9 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.user.DefaultGroup;
 import architecture.user.Group;
 import architecture.user.dao.GroupDao;
-import architecture.user.impl.GroupImpl;
 
 import com.google.common.collect.Lists;
 
@@ -44,7 +44,7 @@ public class JdbcGroupDao  extends ExtendedJdbcDaoSupport implements GroupDao  {
 	
 	private final RowMapper<Group> groupMapper = new RowMapper<Group>(){
 		public Group mapRow(ResultSet rs, int rowNum) throws SQLException {			
-			Group g = new GroupImpl();
+			Group g = new DefaultGroup();
 			g.setCompanyId(rs.getLong("COMPANY_ID"));
 			g.setGroupId(rs.getLong("GROUP_ID"));
 			g.setName(rs.getString("NAME"));

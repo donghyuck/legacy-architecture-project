@@ -9,8 +9,8 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.user.DefaultPermissionMask;
 import architecture.user.Group;
-import architecture.user.impl.PermissionMaskImpl;
 import architecture.user.permission.Permission;
 import architecture.user.permission.PermissionMask;
 import architecture.user.permission.dao.PermissionDao;
@@ -19,7 +19,7 @@ public class JdbcPermissionDao extends ExtendedJdbcDaoSupport implements Permiss
 
 	private final RowMapper<PermissionMask> permsRowMapper = new RowMapper<PermissionMask>(){		
 		public PermissionMask mapRow(ResultSet rs, int rowNum) throws SQLException {  			
-			PermissionMaskImpl model = new PermissionMaskImpl();
+			DefaultPermissionMask model = new DefaultPermissionMask();
 			model.setName(rs.getString("NAME"));
 			model.setMask(rs.getInt(2));
 			return (PermissionMask)model;

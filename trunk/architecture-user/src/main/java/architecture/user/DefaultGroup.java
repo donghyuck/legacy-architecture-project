@@ -1,4 +1,4 @@
-package architecture.user.impl;
+package architecture.user;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +12,6 @@ import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
-import architecture.user.Group;
 
 
 public class DefaultGroup extends BaseModelObjectSupport implements Group {
