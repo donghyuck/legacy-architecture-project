@@ -60,8 +60,8 @@ public class AESTest {
 	@Test 
 	public void testASEEncodeWithKey() throws Exception {
 		
-		String password = "2081";
-		String username = "andang72";
+		String password = "1234";
+		String username = "원문";
 		byte[] seedB = password.getBytes();
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 		sr.setSeed(seedB);		
@@ -82,7 +82,7 @@ public class AESTest {
 	
 	@Test 
 	public void testASEDecodeWithKey() throws Exception {
-		String password = "2081";
+		String password = "1234";
 		byte[] seedB = password.getBytes();
 		SecureRandom sr = SecureRandom.getInstance("SHA1PRNG");
 		sr.setSeed(seedB);
