@@ -45,6 +45,7 @@ public class PasswordEncoderFactory implements FactoryBean <PasswordEncoder> {
 			if(StringUtils.isEmpty(algorithm))
 				algorithm = DEFAUTL_ENCODING_ALGORITHM ;			
 			MessageDigestPasswordEncoder encoder = new MessageDigestPasswordEncoder(algorithm);
+
 			this.passwordEncoder = encoder;
 		}
 		return passwordEncoder;
