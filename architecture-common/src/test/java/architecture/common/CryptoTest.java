@@ -85,13 +85,9 @@ public class CryptoTest {
 
 	public static Key generateKey(String algorithm)
 			throws NoSuchAlgorithmException {
-
 		KeyGenerator keyGenerator = KeyGenerator.getInstance(algorithm);
-
 		SecretKey key = keyGenerator.generateKey();
-
 		return key;
-
 	}
 	
 	@Test
