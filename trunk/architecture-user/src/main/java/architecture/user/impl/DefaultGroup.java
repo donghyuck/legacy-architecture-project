@@ -15,7 +15,7 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.user.Group;
 
 
-public class GroupImpl extends BaseModelObjectSupport implements Group {
+public class DefaultGroup extends BaseModelObjectSupport implements Group {
 
 	private Company company;
 	
@@ -55,7 +55,7 @@ public class GroupImpl extends BaseModelObjectSupport implements Group {
 
 	private Set<Long> removedMembers;		
 	
-	public GroupImpl () {
+	public DefaultGroup () {
 		groupId = -1L;
 		companyId = -1L;
 	}
