@@ -18,7 +18,7 @@ package architecture.user.dao;
 import java.util.List;
 
 import architecture.common.user.Company;
-import architecture.user.DomainMatcher;
+import architecture.common.user.DomainMatcher;
 
 public interface CompanyDao {
 

@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 
 import architecture.common.event.api.EventPublisher;
 import architecture.common.event.api.EventSource;
+import architecture.common.user.Group;
 import architecture.ee.component.admin.AdminHelper;
 
 /**

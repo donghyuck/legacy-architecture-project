@@ -16,9 +16,9 @@
 package architecture.user.util;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.ee.util.ApplicationHelper;
-import architecture.user.CompanyManager;
-import architecture.user.CompanyNotFoundException;
 
 public class CompanyUtils {
 	

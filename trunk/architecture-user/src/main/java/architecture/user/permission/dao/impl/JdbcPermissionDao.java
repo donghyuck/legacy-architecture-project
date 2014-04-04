@@ -8,9 +8,9 @@ import java.util.List;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 
+import architecture.common.user.Group;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.user.DefaultPermissionMask;
-import architecture.user.Group;
 import architecture.user.permission.Permission;
 import architecture.user.permission.PermissionMask;
 import architecture.user.permission.dao.PermissionDao;

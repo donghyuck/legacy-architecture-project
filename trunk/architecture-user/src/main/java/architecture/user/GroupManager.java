@@ -18,6 +18,7 @@ package architecture.user;
 import java.util.List;
 
 import architecture.common.user.Company;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 

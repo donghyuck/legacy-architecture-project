@@ -2,7 +2,7 @@ package architecture.user.permission.dao;
 
 import java.util.List;
 
-import architecture.user.Group;
+import architecture.common.user.Group;
 import architecture.user.permission.Permission;
 import architecture.user.permission.PermissionMask;
 

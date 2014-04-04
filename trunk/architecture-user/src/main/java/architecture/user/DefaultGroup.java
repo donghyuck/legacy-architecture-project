@@ -9,6 +9,7 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;

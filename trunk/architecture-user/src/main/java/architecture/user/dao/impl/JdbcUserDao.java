@@ -15,11 +15,11 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.user.CompanyNotFoundException;
 import architecture.user.dao.UserDao;
 import architecture.user.util.CompanyUtils;
 
