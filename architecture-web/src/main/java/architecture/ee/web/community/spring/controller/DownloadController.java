@@ -74,6 +74,7 @@ public class DownloadController {
 		log.debug("------------------------------------------");			
 		
 		try {
+			
 			ProfileImage image = profileManager.getProfileImageByUsername(userName);			
 			
 			log.debug( "using profile image : " + image.getFilename()  );

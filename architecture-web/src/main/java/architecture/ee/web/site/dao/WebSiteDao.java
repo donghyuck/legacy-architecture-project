@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.site.dao;
+package architecture.ee.web.site.dao;
 
 import java.util.List;
 
-import architecture.ee.web.community.site.WebSite;
+import architecture.ee.web.site.WebSite;
+import architecture.ee.web.site.WebSiteNotFoundException;
 
 public interface WebSiteDao {
 	
@@ -25,11 +26,15 @@ public interface WebSiteDao {
 	
 	public void updateWebSite(WebSite webSite);
 		
-	public WebSite getWebSiteById(long webSiteId);
+	public WebSite getWebSiteById(long webSiteId) throws WebSiteNotFoundException;
 	
-	public WebSite getWebSiteByName(String name);
+	public WebSite getWebSiteByName(String name) throws WebSiteNotFoundException;
 	
-	public WebSite getWebSiteByUrl(String url);
+	public WebSite getWebSiteByUrl(String url) throws WebSiteNotFoundException;
+		
+	public List<Long> findWebSitesByUrl(String url);
+	
+	public List<Long> findWebSitesByName(String name);
 	
 	public int getWebSiteCount(long companyId );
 	

@@ -41,18 +41,11 @@
 	
 	<sql-query name="SELECT_PRIMARY_PROFILE_IMAGE_ID_BY_USER" description=""><![CDATA[
 	SELECT 
-		PROFILE_IMAGE_ID,
-		USER_ID,
-		PRIMARY_IMAGE,
-		FILE_NAME,
-		FILE_SIZE,
-		CONTENT_TYPE,
-		CREATION_DATE,
-		MODIFIED_DATE	
+		PROFILE_IMAGE_ID
 	FROM V2_PROFILE_IMAGE 
 	WHERE 
 		PRIMARY_IMAGE = 1 AND
-		PROFILE_IMAGE_ID = ?			
+		USER_ID = ?			
 	]]></sql-query>	
 			
 	<sql-query name="SELECT_PROFILE_IMAGE_BY_ID" description=""><![CDATA[
@@ -85,5 +78,113 @@
 	SET PRIMARY_IMAGE = 0  
 	WHERE USER_ID = ?
 	]]></sql-query>		
-		
+
+	<sql-query name="CREATE_WEBSITE" description=""><![CDATA[
+	INSERT INTO V2_WEBSITE (
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		USER_ID
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( ?,?,?,?,?,?,?,?,?,?,? )		
+	]]></sql-query>		
+	<sql-query name="UPDATE_WEBSITE" description=""><![CDATA[
+	UPDATE V2_WEBSITE SET
+		NAME = ?,		
+		DESCRIPTION = ?,
+		DISPLAY_NAME = ?,
+		URL = ?,
+		PUBLIC_SHARED = ?,
+		ENABLED = ?,		
+		MODIFIED_DATE = ?
+	WHERE WEBSITE_ID = ?			
+	]]></sql-query>	
+	<sql-query name="SELECT_WEBSITE_BY_ID" description=""><![CDATA[
+	SELECT
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBSITE
+	WHERE WEBSITE_ID = ?
+	]]></sql-query>	
+	<sql-query name="SELECT_WEBSITE_BY_NAME" description=""><![CDATA[
+	SELECT
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBSITE
+	WHERE NAME = ?				
+	]]></sql-query>	
+	<sql-query name="SELECT_WEBSITE_BY_URL" description=""><![CDATA[
+	SELECT
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBSITE
+	WHERE URL = ?		
+	]]></sql-query>	
+	<sql-query name="COUNT_COMPANY_WEBSITE" description=""><![CDATA[
+	SELECT 
+		COUNT(	WEBSITE_ID )
+	FROM V2_WEBSITE
+	WHERE 
+		COMPANY_ID = ?
+	]]></sql-query>	
+	<sql-query name="SELECT_COMPANY_WEBSITE_IDS" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID
+	FROM V2_WEBSITE
+	WHERE 
+		COMPANY_ID = ?		
+	]]></sql-query>	
+	<sql-query name="SELECT_COMPANY_WEBSITE_IDS_BY_URL" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID
+	FROM V2_WEBSITE
+	WHERE 
+		URL LIKE ?				
+	]]></sql-query>	
+		<sql-query name="SELECT_COMPANY_WEBSITE_IDS_BY_NAME" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID
+	FROM V2_WEBSITE
+	WHERE 
+		NAME LIKE  = ?			
+	]]></sql-query>					
+	
+	
+	<!-- ANNOUNCE -->			
+	<sql-query name="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT COUNT(ANNOUNCE_ID) FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>	
 </sqlset>

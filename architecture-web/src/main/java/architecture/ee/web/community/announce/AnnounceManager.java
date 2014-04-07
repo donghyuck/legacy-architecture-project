@@ -44,4 +44,6 @@ public interface AnnounceManager {
 	
 	public abstract void moveAnnounces( int fromObjectType, long fromObjectId,  int toObjectType, long toObjectId );
 	
+	public abstract int countAnnounce(int objectType, long objectId);
+	
 }

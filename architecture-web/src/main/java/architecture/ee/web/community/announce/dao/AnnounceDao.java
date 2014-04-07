@@ -40,4 +40,6 @@ public interface AnnounceDao {
 	
 	public abstract List<Long> getAnnounceIds ();
 	
+	public abstract int getAnnounceCount ( int objectType, long objectId );
+	
 }

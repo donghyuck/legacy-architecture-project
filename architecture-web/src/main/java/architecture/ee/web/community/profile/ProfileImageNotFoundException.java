@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community;
+package architecture.ee.web.community.profile;
 
 import architecture.ee.exception.NotFoundException;
 

@@ -44,7 +44,6 @@ import architecture.common.util.PlatformHelper.Platform;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.web.community.ProfileImageNotFoundException;
 import architecture.ee.web.community.profile.dao.ProfileDao;
 
 public class DefaultProfileManager implements ProfileManager {
@@ -55,14 +54,30 @@ public class DefaultProfileManager implements ProfileManager {
 	
 	private ProfileDao profileDao ;
 	
+	private Cache userProfileImageIdCache ;
+	
 	private Cache profileImageCache ;
 	
-	private File imageDir;	
+	private File imageDir;
 	
 	private UserManager userManager;
 	
 	
 	
+	/**
+	 * @return userProfileImageIdCache
+	 */
+	public Cache getUserProfileImageIdCache() {
+		return userProfileImageIdCache;
+	}
+
+	/**
+	 * @param userProfileImageIdCache 설정할 userProfileImageIdCache
+	 */
+	public void setUserProfileImageIdCache(Cache userProfileImageIdCache) {
+		this.userProfileImageIdCache = userProfileImageIdCache;
+	}
+
 	/**
 	 * @return userManager
 	 */
@@ -106,14 +121,24 @@ public class DefaultProfileManager implements ProfileManager {
 	}
 	
 	public ProfileImage getProfileImage(User user) throws ProfileImageNotFoundException {	
+				
+		Long profileImageId = -1L;
+		if ( userProfileImageIdCache.get(user.getUserId()) == null ){
+			profileImageId = profileDao.getPrimaryProfileImageByUser(user.getUserId());
+			userProfileImageIdCache.put(new Element(user.getUserId(), profileImageId));
+		}else{
+			profileImageId = (Long) userProfileImageIdCache.get(user.getUserId()).getValue();
+		}
 		
-		Long profileImageId = profileDao.getPrimaryProfileImageByUser(user.getUserId());		
+		if( profileImageId == -1L )
+			throw new ProfileImageNotFoundException();
+		
 		return getProfileImageById(profileImageId);
 	}
 	
 	public List<ProfileImage> getProfileImages(User user) {
 		List<Long> ids = profileDao.getProfileImageIds(user.getUserId());
-		List<ProfileImage> list = new ArrayList(ids.size());
+		List<ProfileImage> list = new ArrayList<ProfileImage>(ids.size());
 		for(Long id : ids){
 			try {
 				list.add(getProfileImageById(id));
@@ -153,8 +178,6 @@ public class DefaultProfileManager implements ProfileManager {
 		}
 		return image;
 	}
-
-	
 	
 	public InputStream getImageInputStream(ProfileImage image) {		
 		try {
@@ -185,7 +208,6 @@ public class DefaultProfileManager implements ProfileManager {
                 boolean result = imageDir.mkdir();
                 if(!result)
                     log.error((new StringBuilder()).append("Unable to create image directory: '").append(imageDir).append("'").toString());
-                
                 getImageCacheDir(); //new File(imageDir, "cache");                
                 getImageTempDir();                
             }else{

@@ -34,9 +34,9 @@ import org.springframework.jdbc.core.support.SqlLobValue;
 import architecture.common.jdbc.schema.DatabaseType;
 import architecture.ee.jdbc.sqlquery.SqlQueryHelper;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.community.ProfileImageNotFoundException;
 import architecture.ee.web.community.profile.DefaultProfileImage;
 import architecture.ee.web.community.profile.ProfileImage;
+import architecture.ee.web.community.profile.ProfileImageNotFoundException;
 import architecture.ee.web.community.profile.dao.ProfileDao;
 
 public class JdbcProfileDao extends ExtendedJdbcDaoSupport  implements ProfileDao {
@@ -57,6 +57,7 @@ public class JdbcProfileDao extends ExtendedJdbcDaoSupport  implements ProfileDa
 			return image;			
 		}		
 	};
+	
 	
 	/**
 	 * @return sequencerName
@@ -168,12 +169,10 @@ public class JdbcProfileDao extends ExtendedJdbcDaoSupport  implements ProfileDa
 		}				
 	}
 
-	public Long getPrimaryProfileImageByUser(Long userId)
-			throws ProfileImageNotFoundException {
+	public Long getPrimaryProfileImageByUser(Long userId) throws ProfileImageNotFoundException {
 		try{
 			return getExtendedJdbcTemplate().queryForLong(
-				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PRIMARY_PROFILE_IMAGE_ID_BY_USER").getSql(), 
-				imageMapper, 
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PRIMARY_PROFILE_IMAGE_ID_BY_USER").getSql(),
 				new SqlParameterValue (Types.NUMERIC, userId ));			
 		} catch (DataAccessException e) {
 			throw new ProfileImageNotFoundException(e);
