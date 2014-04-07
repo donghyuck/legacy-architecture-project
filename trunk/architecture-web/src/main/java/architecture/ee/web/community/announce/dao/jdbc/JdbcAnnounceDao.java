@@ -227,6 +227,13 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 					}}
 		);
 	}
+
+	public int getAnnounceCount(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ));
+	}
 	
 	
 	

@@ -256,4 +256,8 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 		// TODO 자동 생성된 메소드 스텁		
 	}
 
+	public int countAnnounce(int objectType, long objectId) {
+		return announceDao.getAnnounceCount(objectType, objectId);
+	}
+
 }

@@ -19,8 +19,8 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.List;
 
-import architecture.ee.web.community.ProfileImageNotFoundException;
 import architecture.ee.web.community.profile.ProfileImage;
+import architecture.ee.web.community.profile.ProfileImageNotFoundException;
 
 public interface ProfileDao {
 

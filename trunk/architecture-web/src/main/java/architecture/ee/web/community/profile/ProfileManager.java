@@ -21,7 +21,6 @@ import java.util.List;
 
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
-import architecture.ee.web.community.ProfileImageNotFoundException;
 
 public interface ProfileManager {
 		

@@ -33,38 +33,9 @@ public class WebSiteUtils {
 	public WebSiteUtils() {
 	}
 
-	public static Long getDefaultWebSiteId(){
-		return  ApplicationHelper.getApplicationLongProperty("components.website.default.websiteId", 1L);
-	}
-	
-	public static Long getDefaultMenuId(){
-		return ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
-	}
-	
-	public static WebSite getDefaultWebSite() throws WebSiteNotFoundException {
-		return getWebSiteManager().getWebSiteById(getDefaultWebSiteId());
-	}
-
-	public static Menu getDefaultMenu() throws MenuNotFoundException {
-		return getMenuRepository().getMenu(getDefaultMenuId());
-	}
-	
-	public static MenuRepository getMenuRepository(){
-		return ApplicationHelper.getComponent(MenuRepository.class);
-	}
-	
-	
 
 	public static WebSiteManager getWebSiteManager(){
 		return ApplicationHelper.getComponent(WebSiteManager.class);
-	}
-	
-	public static boolean isallowedSignIn(WebSite website){
-		return website.getBooleanProperty("allowedSignIn", true);
-	}
-	
-	public static boolean isAllowedSignup(WebSite website){
-		return website.getBooleanProperty("allowedSignup", true);
 	}
 	
 	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
@@ -74,4 +45,44 @@ public class WebSiteUtils {
 		}
 		return getDefaultWebSite();
 	}
+	
+	public static Long getDefaultWebSiteId(){
+		return  ApplicationHelper.getApplicationLongProperty("components.website.default.websiteId", 1L);
+	}
+
+	
+	public static WebSite getDefaultWebSite() throws WebSiteNotFoundException {
+		return getWebSiteManager().getWebSiteById(getDefaultWebSiteId());
+	}
+
+	public static MenuRepository getMenuRepository(){
+		return ApplicationHelper.getComponent(MenuRepository.class);
+	}
+	
+	public static Long getDefaultMenuId(){
+		return ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
+	}
+	
+	public static Menu getDefaultMenu() throws MenuNotFoundException {
+		return getMenuRepository().getMenu(getDefaultMenuId());
+	}
+	
+	public static Menu getMenu(long menuId) throws MenuNotFoundException {
+		return getMenuRepository().getMenu(menuId);
+	}
+
+	
+	public static Menu getWebSiteMenu(WebSite webSite) throws MenuNotFoundException{
+		return getMenu(webSite.getLongProperty("menuId", getDefaultMenuId()));		
+	}	
+
+	public static boolean isallowedSignIn(WebSite website){
+		return website.getBooleanProperty("allowedSignIn", true);
+	}
+	
+	public static boolean isAllowedSignup(WebSite website){
+		return website.getBooleanProperty("allowedSignup", true);
+	}
+	
+
 }
