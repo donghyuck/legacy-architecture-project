@@ -22,15 +22,15 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
+import architecture.common.user.Group;
 import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
-import architecture.user.CompanyManager;
-import architecture.user.CompanyNotFoundException;
-import architecture.user.Group;
 import architecture.user.GroupAlreadyExistsException;
 import architecture.user.GroupNotFoundException;
 
