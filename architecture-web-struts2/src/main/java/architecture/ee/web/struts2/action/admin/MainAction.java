@@ -16,9 +16,9 @@
 package architecture.ee.web.struts2.action.admin;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
-import architecture.user.CompanyManager;
-import architecture.user.CompanyNotFoundException;
 
 public class MainAction extends FrameworkActionSupport {
 	
