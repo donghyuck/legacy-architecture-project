@@ -151,6 +151,10 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 		if( form.getAnnounceId() > 0 ){
 			this.announceId = form.getAnnounceId();
 		}
+		if( form.getObjectType() > 0 ){
+			this.objectType = form.getObjectType();
+		}
+		
 		prepareObjectTypeAndObjectId();		
 		Announce targetAnnounce = getTargetAnnounce();
 		targetAnnounce.setSubject(form.getSubject());
@@ -158,40 +162,6 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 		targetAnnounce.setStartDate( form.getStartDate());
 		targetAnnounce.setEndDate(form.getEndDate());
 		
-		/*
-		
-		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
-		
-		if( this.announceId == null){
-			Integer  selectedAnnounceId= (Integer)map.get("announceId");	
-			this.announceId = selectedAnnounceId.longValue();
-		}			
-		
-		
-		
-		String subject = (String)map.get("subject");
-		String body = (String)map.get("body");
-		String startDateString = (String)map.get("startDate");
-		String endDateString = (String)map.get("endDate");
-		
-		log.debug( "startDateString:" + startDateString );
-		log.debug( "endDateString:" + endDateString );		
-		
-		Announce targetAnnounce = getTargetAnnounce();		
-		targetAnnounce.setSubject(subject);
-		targetAnnounce.setBody(body);		
-		
-		try {			
-			targetAnnounce.setStartDate( DateUtils.parseISODate(startDateString) );
-		} catch (Exception ie) { }
-				
-		try {
-			targetAnnounce.setEndDate(DateUtils.parseISODate(endDateString));
-		} catch (Exception ie) {
-		}		
-		*/
-		
-		//log.debug(targetAnnounce);
 		if(targetAnnounce.getAnnounceId() > 0 ){
 			announceManager.updateAnnounce(targetAnnounce);		
 		}else{
