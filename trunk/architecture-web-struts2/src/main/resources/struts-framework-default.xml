@@ -33,6 +33,7 @@
 			<interceptor name="outputFormat" class="architecture.ee.web.struts2.interceptor.OutputFormatInterceptor" />
 			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
 			<interceptor name="referer" class="architecture.ee.web.struts2.interceptor.RefererInterceptor" />
+            <interceptor name="website" class="architecture.ee.web.struts2.interceptor.WebSiteInterceptor" />
             
 			<interceptor-stack name="defaultStack">
 				<interceptor-ref name="exception">
@@ -42,6 +43,7 @@
 				<interceptor-ref name="referer" />
 				<interceptor-ref name="servletConfig" />
 				<interceptor-ref name="prepare" />
+				<interceptor-ref name="website" />
 				<!-- <interceptor-ref name="chain"/>-->
 				<interceptor-ref name="staticParams"/>
 				<interceptor-ref name="params" />
