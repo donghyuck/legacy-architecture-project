@@ -20,12 +20,12 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
+import architecture.common.user.Group;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
-import architecture.user.Group;
 
 public class SocialManagementAction extends FrameworkActionSupport  {
 

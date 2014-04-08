@@ -16,20 +16,18 @@
 package architecture.ee.web.community.struts2.action.ajax;
 
 import java.util.List;
-import java.util.Map;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.authentication.UnAuthorizedException;
-import architecture.common.util.DateUtils;
 import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
+import architecture.ee.web.community.announce.impl.AnnounceImpl;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
 public class MyAnnouncementAction extends FrameworkActionSupport {
 
-	//private static final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
-	
 	private Long objectId = -1L; 
 	
 	private Integer objectType = 0;
@@ -92,10 +90,6 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 
 
 	public List<Announce> getTargetAnnounces(){		
-		if( objectType == 0 ){
-			this.objectType = getCompany().getModelObjectType() ;
-			this.objectId = getCompany().getCompanyId();
-		}
 		return announceManager.getAnnounces(objectType, objectId);
 	}
 	
@@ -104,7 +98,7 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 		if( announceId > 0 ){
 			return announceManager.getAnnounce(announceId);
 		}else{
-			return announceManager.createAnnounce(getUser(), getCompany().getModelObjectType() , getCompany().getCompanyId() );
+			return announceManager.createAnnounce(getUser(), objectType , objectId);
 		}		
 	}
 	
@@ -116,7 +110,7 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	}
 
 	public int getTotalAnnounceCount(){
-return 0;
+		return announceManager.countAnnounce(objectType, objectId);
 	}
 
 	/**
@@ -126,9 +120,25 @@ return 0;
 		this.announceManager = announceManager;
 	}
 
+	private void prepareObjectTypeAndObjectId(){
+		if( this.isGuest() ){
+			 this.objectType = ModelTypeFactory.getTypeIdFromCode("WEBSITE");
+			this.objectId = getWebSite().getWebSiteId();
+		}else{
+			if( objectType == 0 ){
+				this.objectType = getUser().getCompany().getModelObjectType() ;
+				this.objectId = getUser().getCompany().getCompanyId();
+			} else if ( objectType == ModelTypeFactory.getTypeIdFromCode("WEBSITE")){
+				this.objectId = getWebSite().getWebSiteId();
+			} else if ( objectType == ModelTypeFactory.getTypeIdFromCode("COMPANY")){
+				this.objectId = getUser().getCompany().getCompanyId();
+			}	
+		}
+	}
 
 	@Override
 	public String execute() throws Exception {
+		prepareObjectTypeAndObjectId();	
 		return success();
 	}
 	
@@ -136,13 +146,29 @@ return 0;
 		
 		if( isGuest() )
 			throw new UnAuthorizedException("no permission.");		
+				
+		Announce form = ParamUtils.getJsonParameter(request, "item", AnnounceImpl.class);
+		if( form.getAnnounceId() > 0 ){
+			this.announceId = form.getAnnounceId();
+		}
+		prepareObjectTypeAndObjectId();		
+		Announce targetAnnounce = getTargetAnnounce();
+		targetAnnounce.setSubject(form.getSubject());
+		targetAnnounce.setBody(form.getBody());	
+		targetAnnounce.setStartDate( form.getStartDate());
+		targetAnnounce.setEndDate(form.getEndDate());
+		
+		/*
+		
 		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
 		
-		if( announceId == null){
+		if( this.announceId == null){
 			Integer  selectedAnnounceId= (Integer)map.get("announceId");	
-			announceId = selectedAnnounceId.longValue();
+			this.announceId = selectedAnnounceId.longValue();
 		}			
-
+		
+		
+		
 		String subject = (String)map.get("subject");
 		String body = (String)map.get("body");
 		String startDateString = (String)map.get("startDate");
@@ -163,6 +189,7 @@ return 0;
 			targetAnnounce.setEndDate(DateUtils.parseISODate(endDateString));
 		} catch (Exception ie) {
 		}		
+		*/
 		
 		//log.debug(targetAnnounce);
 		if(targetAnnounce.getAnnounceId() > 0 ){
@@ -174,7 +201,8 @@ return 0;
 	}	
 	
 	public String delete() throws Exception{				
-		announceManager.deleteAnnounce(announceId);				
+		if( this.announceId > 0)
+			announceManager.deleteAnnounce(announceId);			
 		return success();
 	}
 	
