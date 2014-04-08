@@ -29,11 +29,14 @@ import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.navigator.MenuRepository;
+import architecture.ee.web.site.WebSite;
 import architecture.ee.web.struts2.interceptor.OutputFormatAware;
+import architecture.ee.web.struts2.interceptor.WebSiteAware;
 import architecture.ee.web.struts2.util.FrameworkTextProvider;
 import architecture.ee.web.util.CookieUtils;
 import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicationHelper;
+import architecture.ee.web.util.WebSiteUtils;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.util.CompanyUtils;
 
@@ -41,7 +44,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.opensymphony.xwork2.util.ValueStack;
 
-public class FrameworkActionSupport extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware, ParameterNameAware, OutputFormatAware {
+public class FrameworkActionSupport extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware, ParameterNameAware, OutputFormatAware, WebSiteAware {
    
 	public static final String CANCEL = "cancel";
 	public static final String NOTFOUND = "notfound";
@@ -67,6 +70,10 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 	private AuthToken authToken;
 
 	private User user;
+	
+	private WebSite webSite;
+	
+	private Menu webSiteMenu;
 	
 	private MenuRepository menuRepository ;
 	
@@ -105,11 +112,59 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 	public void setOutputFormat(OutputFormat outputFormat) {
 		this.outputFormat = outputFormat;
 	}
-
-	public Menu getMenu(Long menuId) throws MenuNotFoundException{
-		return menuRepository.getMenu(menuId);		
-	}
 	
+	/**
+	 * @return webSite
+	 */
+	public WebSite getWebSite() {
+		return webSite;
+	}
+
+	/**
+	 * @param webSite 설정할 webSite
+	 */
+	public void setWebSite(WebSite webSite) {
+		this.webSite = webSite;
+		try {
+			this.webSiteMenu = WebSiteUtils.getWebSiteMenu(webSite);
+		} catch (MenuNotFoundException e) {
+			log.error(e);
+		}
+	}
+
+	public MenuComponent getWebSiteMenu(String name) throws MenuNotFoundException { 
+		if( webSiteMenu != null ){
+			return menuRepository.getMenuComponent(webSiteMenu, name);
+		}else{
+			throw new MenuNotFoundException();
+		}
+	}
+
+	public MenuComponent getWebSiteMenu(String name, String child) throws MenuNotFoundException { 
+		if( webSiteMenu != null ){
+			MenuComponent parentMenu = getWebSiteMenu(name);
+			MenuComponent selectedMenu = null;
+			for( MenuComponent childMenu : parentMenu.getComponents() )
+			{
+				if( child.equals( childMenu.getName() ) ){
+					selectedMenu = childMenu;		
+					break;
+				}
+				if( childMenu.getComponents().size() > 0 ){
+					for( MenuComponent childMenu2 : childMenu.getComponents() ){
+						if( child.equals( childMenu2.getName() ) ){
+							selectedMenu = childMenu2;		
+							break;
+						}
+					}
+				}
+			}
+			return selectedMenu;		
+		}else{
+			throw new MenuNotFoundException();
+		}
+	}
+		
 	public MenuComponent getMenuComponent(String name){ 
 		MenuComponent menuComp = null;
 		try {
@@ -128,18 +183,18 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		return menuComp;
 	}
 	
-	public MenuComponent findMenuComponent(String parentMenuName, String childMenuName){ 
-		MenuComponent parentMenu = getMenuComponent(parentMenuName);
+	public MenuComponent findMenuComponent(String parent, String child){ 
+		MenuComponent parentMenu = getMenuComponent(parent);
 		MenuComponent selectedMenu = null;
 		for( MenuComponent childMenu : parentMenu.getComponents() )
 		{
-			if( childMenuName.equals( childMenu.getName() ) ){
+			if( child.equals( childMenu.getName() ) ){
 				selectedMenu = childMenu;		
 				break;
 			}
 			if( childMenu.getComponents().size() > 0 ){
 				for( MenuComponent childMenu2 : childMenu.getComponents() ){
-					if( childMenuName.equals( childMenu2.getName() ) ){
+					if( child.equals( childMenu2.getName() ) ){
 						selectedMenu = childMenu2;		
 						break;
 					}
@@ -147,6 +202,11 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			}
 		}
 		return selectedMenu;		
+	}
+	
+	
+	public Menu getMenu(Long menuId) throws MenuNotFoundException{
+		return menuRepository.getMenu(menuId);		
 	}
 	
 	public AuthToken getAuthToken() {
@@ -179,6 +239,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
        return SUCCESS;
 	}
     
+   
     
     public final Company getCompany(){
     	return getUser().getCompany();
