@@ -25,7 +25,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.ee.web.navigator.dao.MenuDao;
-import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class DefaultMenuRepository extends AbstractMenuRepository {
 	
@@ -67,7 +66,7 @@ public class DefaultMenuRepository extends AbstractMenuRepository {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void createMenu(String name, String title, String location, String xml) throws MenuAlreadyExistsException {
 		Date now = new Date(System.currentTimeMillis());
-		MenuImpl imp = new MenuImpl();
+		DefaultMenu imp = new DefaultMenu();
 		imp.setName(name);
 		imp.setLoaction(location);
 		imp.setTitle(title);

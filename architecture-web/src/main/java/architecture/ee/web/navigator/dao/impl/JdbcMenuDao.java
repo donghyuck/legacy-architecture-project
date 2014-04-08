@@ -30,15 +30,15 @@ import org.springframework.jdbc.core.support.SqlLobValue;
 
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
+import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.dao.MenuDao;
-import architecture.ee.web.navigator.impl.MenuImpl;
 
 public class JdbcMenuDao extends ExtendedJdbcDaoSupport implements MenuDao {
 	
 	private final RowMapper<Menu> menuMapper = new RowMapper<Menu>(){
 		public Menu mapRow(ResultSet rs, int rowNum) throws SQLException {
-			MenuImpl menu = new MenuImpl();			
+			DefaultMenu menu = new DefaultMenu();			
 			menu.setMenuId(rs.getLong("MENU_ID"));
 			menu.setName(rs.getString("NAME"));
 			menu.setTitle(rs.getString("TITLE"));
@@ -199,7 +199,7 @@ public class JdbcMenuDao extends ExtendedJdbcDaoSupport implements MenuDao {
 	public Menu createMenu(Menu menu) {
 		
 		long menuId = getNextId(sequencerName);
-		((MenuImpl)menu).setMenuId(menuId);
+		((DefaultMenu)menu).setMenuId(menuId);
 		if("".equals(menu.getTitle()))
             menu.setTitle(null);
 		if("".equals(menu.getLocation()))
