@@ -19,6 +19,8 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 	public static final String VIEW_HOMEPAGE = "homepage";
 
 	public static final String VIEW_PERSONALIZED = "personalized";
+	
+	public static final String VIEW_STREAMS = "streams";
 
 	private String view;
 
@@ -84,6 +86,9 @@ public class MainAction extends FrameworkActionSupport implements Preparable {
 		
 			if(view.equals( VIEW_PERSONALIZED ) )
 				return VIEW_PERSONALIZED;	
+			
+			if( view.equals(VIEW_STREAMS))
+				return VIEW_STREAMS;
 		}
 		return SUCCESS;
 	}

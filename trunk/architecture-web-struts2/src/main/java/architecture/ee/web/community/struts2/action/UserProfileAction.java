@@ -22,9 +22,9 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 
+import architecture.common.user.Group;
 import architecture.common.user.authentication.AuthToken;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
-import architecture.user.Group;
 import architecture.user.GroupManager;
 
 public class UserProfileAction extends FrameworkActionSupport {

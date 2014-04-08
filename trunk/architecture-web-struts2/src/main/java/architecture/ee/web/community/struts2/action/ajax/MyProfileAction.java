@@ -16,12 +16,11 @@
 package architecture.ee.web.community.struts2.action.ajax;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.user.CompanyManager;
 import architecture.common.user.User;
 import architecture.common.user.UserAlreadyExistsException;
 import architecture.common.user.UserManager;
@@ -30,10 +29,11 @@ import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.attachment.impl.ImageImpl;
+import architecture.ee.web.community.profile.DefaultProfileImage;
+import architecture.ee.web.community.profile.ProfileImage;
+import architecture.ee.web.community.profile.ProfileManager;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
-import architecture.user.CompanyManager;
 import architecture.user.GroupManager;
 import architecture.user.Role;
 import architecture.user.RoleManager;
@@ -48,9 +48,12 @@ public class MyProfileAction extends MyUploadImageAction {
 
 	private CompanyManager companyManager;
 
+	private ProfileManager profileManager ;
+		
 	private String password ;
 		
 	private Long photoId = -1L;
+		
 	
 	/**
 	 * @return photoId
@@ -67,8 +70,19 @@ public class MyProfileAction extends MyUploadImageAction {
 	}
 
 	/**
-	 * @return userManager
+	 * @return profileManager
 	 */
+	public ProfileManager getProfileManager() {
+		return profileManager;
+	}
+
+	/**
+	 * @param profileManager 설정할 profileManager
+	 */
+	public void setProfileManager(ProfileManager profileManager) {
+		this.profileManager = profileManager;
+	}
+
 	public UserManager getUserManager() {
 		return userManager;
 	}
@@ -235,9 +249,9 @@ public class MyProfileAction extends MyUploadImageAction {
     	return roleForUser;
     }
     
-	public Image getPhoto( ){
+	public ProfileImage getPhoto( ){
 		try {	
-			return getImageManager().getImage(photoId);
+			return profileManager.getProfileImage(getUser());
 		} catch (NotFoundException e) {
 			log.error(e);
 			return null;
@@ -246,35 +260,17 @@ public class MyProfileAction extends MyUploadImageAction {
     
     public String updatePhoto () throws Exception {			
     	User user = getUser();
-    	this.photoId = user.getLongProperty("imageId", -1L);	
     	Image imageToUse;
-    	if(isMultiPart() ){	    	
+    	if(isMultiPart() ){    		
 	    	File fileToUse = getUploadImage();	    	
-	    	if( this.photoId < 0  ){	
-				imageToUse = getImageManager().createImage(
-					ModelTypeFactory.getTypeIdFromCode("USER"),
-					user.getUserId(), 
-					getUploadImageFileName(), 
-					getUploadImageContentType(), 
-					fileToUse);					
-				this.photoId = getImageManager().saveImage(imageToUse).getImageId();
-				
-				Map<String, String> properties = user.getProperties();			
-				properties.put("imageId", photoId.toString());	
-				((UserTemplate) user).setProperties(properties);
-				userManager.updateUser(user);				
-			}else{
-				imageToUse = getPhoto();
-				((ImageImpl)imageToUse).setSize( (int)fileToUse.length());
-				((ImageImpl)imageToUse).setInputStream( new FileInputStream(fileToUse));
-				log.debug("image size:" + imageToUse.getSize());
-				log.debug("image stream:" + imageToUse.getInputStream());
-				getImageManager().saveImage(imageToUse);
-			}
+	    	DefaultProfileImage image = new DefaultProfileImage(user);
+	    	image.setFilename(getUploadImageFileName());
+	    	image.setImageContentType(getUploadImageContentType());	    	
+	    	profileManager.addProfileImage(image, fileToUse, user);	    	
     	}
     	return success();		
     }
-    
+
 	public String updateUserRoles() throws Exception {			
 		List<Role> oleRoles = getUserRoles();
 		List<Role> groupRoles = getUserGroupRoles();		
