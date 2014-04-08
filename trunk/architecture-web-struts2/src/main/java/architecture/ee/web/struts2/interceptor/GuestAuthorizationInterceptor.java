@@ -18,6 +18,7 @@ import com.opensymphony.xwork2.interceptor.Interceptor;
 public class GuestAuthorizationInterceptor implements Interceptor {
 
 	private AuthenticationProvider authProvider;
+	
 	private Log log = LogFactory.getLog(getClass());
 	
 	public void destroy() {
