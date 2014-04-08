@@ -18,9 +18,6 @@ package architecture.ee.web.struts2.action.admin.ajax;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
-
-import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.navigator.Menu;
@@ -30,19 +27,23 @@ import architecture.ee.web.util.ParamUtils;
 
 public class MenuManagementAction  extends FrameworkActionSupport {
 
-    private int pageSize = 0 ;
-    
-    private int startIndex = 0 ;    
-
-    private Long companyId = 1L ;
+	private int pageSize = 0 ;
+	private int startIndex = 0 ;    
+	private Long menuId = -1L;
+	
+	private CompanyManager companyManager ;
+	
+	
+	
+	private Long companyId = 1L ;
 /*
 	private Company targetCompany;
 */	
-	private CompanyManager companyManager ;
 	
 	private String menuName ;
 	
-	private Long menuId = -1L;
+
+	
 	
 	public int getStartIndex() {
 		return startIndex;
@@ -50,6 +51,7 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	public void setStartIndex(int startIndex) {
 		this.startIndex = startIndex;
 	}
+	
 	public String getMenuName() {
 		return menuName;
 	}
@@ -57,10 +59,14 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 		this.menuName = menuName;
 	}
 	
+	
+	
 	/*
 	public void setTargetCompany(Company targetCompany) {
 		this.targetCompany = targetCompany;
 	}*/
+	
+	
 	
 	public CompanyManager getCompanyManager() {
 		return companyManager;
@@ -85,23 +91,25 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 		this.companyId = companyId;
 	}
 
-    public int getTotalMenuCount(){    	
-    	return getMenuRepository().getTotalMenuCount();
-    }
-    
-    public List<Menu> getMenus(){    	
-    	if( pageSize > 0 ){  
-    		return getMenuRepository().getMenus(startIndex, pageSize);    		
-    	}
-    	return getMenuRepository().getMenus();
-    }
+	
+	public int getTotalMenuCount(){    	
+		return getMenuRepository().getTotalMenuCount();
+	}
 
+	public List<Menu> getTargetMenus(){
+		if( pageSize > 0 ){  
+			return getMenuRepository().getMenus(startIndex, pageSize);    		
+		}	
+		return getMenuRepository().getMenus();
+	}
+	
 	public Menu getTargetMenu() throws MenuNotFoundException {
 		return getMenuRepository().getMenu(menuId);
 	}
-    
-    
-    
+
+	
+	
+	
     /*
     public Company getTargetCompany() {		
     	if (companyId == null){
