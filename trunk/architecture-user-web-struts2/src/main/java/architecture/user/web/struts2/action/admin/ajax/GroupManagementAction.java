@@ -22,14 +22,14 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
+import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
-import architecture.user.CompanyManager;
-import architecture.user.CompanyNotFoundException;
-import architecture.user.Group;
 import architecture.user.GroupAlreadyExistsException;
 import architecture.user.GroupManager;
 import architecture.user.GroupNotFoundException;
