@@ -1,3 +1,9 @@
+package tests;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+import org.junit.Test;
+
 /*
  * Copyright 2012, 2013 Donghyuck, Son
  *
@@ -14,15 +20,24 @@
  * limitations under the License.
  */
 
-public class SocialNetworkTest {
+public class MD5Test {
 
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
+	public MD5Test() {
+		// TODO 자동 생성된 생성자 스텁
+	}
+	
+	@Test
+	public void testMD5() throws NoSuchAlgorithmException{
 		
+		MessageDigest md = MessageDigest.getInstance("MD5"); 
+		md.update("son3107".getBytes());
+		byte byteData[] = md.digest();
+		StringBuffer sb = new StringBuffer(); 
+		for(int i = 0 ; i < byteData.length ; i++){
+			sb.append(Integer.toString((byteData[i]&0xff) + 0x100, 16).substring(1));
+		}
+		System.out.println( sb.toString());
 		
-
 	}
 
 }
