@@ -18,24 +18,33 @@ package architecture.ee.web.struts2.action.admin.ajax;
 import java.util.List;
 import java.util.Map;
 
-import architecture.common.user.CompanyManager;
 import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.navigator.Menu;
+import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
+import architecture.ee.web.site.WebSite;
+import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.util.WebSiteUtils;
 
 public class MenuManagementAction  extends FrameworkActionSupport {
 
 	private int pageSize = 0 ;
 	private int startIndex = 0 ;    
 	private Long menuId = -1L;
+	private Long targetWebSiteId = -1L;
+	private WebSite targetWebSite = null;
 	
-	private CompanyManager companyManager ;
 	
 	
 	
-	private Long companyId = 1L ;
+	
+	//private CompanyManager companyManager ;
+	
+	
+	
+	//private Long companyId = 1L ;
 /*
 	private Company targetCompany;
 */	
@@ -68,13 +77,26 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	
 	
 	
+	/**
+	 * @return targetWebSiteId
+	 */
+	public Long getTargetWebSiteId() {
+		return targetWebSiteId;
+	}
+	/**
+	 * @param targetWebSiteId 설정할 targetWebSiteId
+	 */
+	public void setTargetWebSiteId(Long targetWebSiteId) {
+		this.targetWebSiteId = targetWebSiteId;
+	}
+	/*
 	public CompanyManager getCompanyManager() {
 		return companyManager;
 	}
 	public void setCompanyManager(CompanyManager companyManager) {
 		this.companyManager = companyManager;
 	}
-	
+	*/
     public int getPageSize() {
 		return pageSize;
 	}
@@ -82,7 +104,7 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
-
+/*
 	public Long getCompanyId() {
 		return companyId;
 	}
@@ -90,8 +112,7 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	public void setCompanyId(Long companyId) {
 		this.companyId = companyId;
 	}
-
-	
+	*/
 	public int getTotalMenuCount(){    	
 		return getMenuRepository().getTotalMenuCount();
 	}
@@ -105,6 +126,32 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	
 	public Menu getTargetMenu() throws MenuNotFoundException {
 		return getMenuRepository().getMenu(menuId);
+	}
+
+	public MenuComponent getTargetMenuComponent( ) throws MenuNotFoundException {
+		return getMenuRepository().getMenuComponent(getTargetMenu(), menuName);
+	}
+	
+	public WebSite getTargetWebSite() throws WebSiteNotFoundException {		
+		if( targetWebSite == null ){
+			if( targetWebSiteId > 0 ){
+				targetWebSite = WebSiteUtils.getWebSiteManager().getWebSiteById(targetWebSiteId);	
+			}else{
+				targetWebSite = getWebSite();
+				targetWebSiteId = targetWebSite.getWebSiteId();
+			}
+				
+		}
+		return targetWebSite;
+	}
+		
+	public Menu getTargetWebSiteMenu() throws WebSiteNotFoundException, MenuNotFoundException {		
+		WebSite webSiteToUse = getTargetWebSite();
+		return WebSiteUtils.getWebSiteMenu(webSiteToUse);
+	}
+	
+	public MenuComponent getTargetWebSiteMenuComponent() throws MenuNotFoundException, WebSiteNotFoundException {
+		return getMenuRepository().getMenuComponent(getTargetWebSiteMenu(), menuName);
 	}
 
 	
@@ -169,7 +216,7 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 		return list;
 	}
 	
-	*/
+
 		
 	public String updateGroupProperties() throws Exception {		
 		Menu menu = getTargetMenu();
@@ -183,17 +230,18 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 		updateTargetMenuProperties(menu, menu.getProperties());
 		return success();	
 	}
+		*/
 	
 	public String deleteMenuProperties() throws Exception {
-		Menu menu = getTargetMenu();
-		Map<String, String> properties = menu.getProperties();
+		Menu menuToUse = getTargetMenu();
+		Map<String, String> properties = menuToUse.getProperties();
 		List<Map> list = ParamUtils.getJsonParameter(request, "items", List.class);
 		for (Map row : list) {
 			String n = (String) row.get("name");
 			String v = (String) row.get("value");
 			properties.remove(n);
 		}
-		updateTargetMenuProperties( menu, properties );		
+		updateTargetMenuProperties( menuToUse, properties );		
 		return success();
 	}
 
@@ -204,11 +252,11 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 		}
 	}
 	
-	
+	/*	
 	public String createMenu() throws Exception {		
 		
 		Menu form = ParamUtils.getJsonParameter(request, "item", DefaultMenu.class);
-/*		
+	
 		
 		String name = (String)map.get("name");
 		String title = (String)map.get("title");
@@ -225,15 +273,35 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 			name = sb.toString();
 		}
 		getMenuRepository().createMenu(name, title, location, menuData);		
-		this.menuId = getMenuRepository().getMenu(menuName).getMenuId();		*/
+		this.menuId = getMenuRepository().getMenu(menuName).getMenuId();		
 		
 		
 		return success();	
 	}
+	*/
 	
 	
 	public String updateMenu() throws Exception {	
 		try {
+			
+			Menu form = ParamUtils.getJsonParameter(request, "item", DefaultMenu.class);
+			if( form.getMenuId() > 0 ){
+				this.menuId = form.getMenuId();				
+				Menu menuToUse = getTargetMenu();	
+				menuToUse.setName(form.getName());
+				menuToUse.setTitle(form.getTitle());
+				menuToUse.setLoaction(form.getLocation());
+				menuToUse.setEnabled(form.isEnabled());
+				menuToUse.setMenuData(form.getMenuData());				
+				getMenuRepository().updateMenu(menuToUse);				
+			}else{				
+				getMenuRepository().createMenu(form.getName(), form.getTitle(), form.getLocation(), form.getMenuData());
+				this.menuId = getMenuRepository().getMenu(form.getName()).getMenuId();
+			};
+			
+			
+			
+			
 /*			Map map = ParamUtils.getJsonParameter(request, "item", Map.class);						
 			String name = (String)map.get("name");
 			String title = (String)map.get("title");
