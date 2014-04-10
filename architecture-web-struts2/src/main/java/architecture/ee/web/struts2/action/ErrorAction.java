@@ -24,7 +24,6 @@ public class ErrorAction extends FrameworkActionSupport {
 	
 	@Override
 	public String execute() throws Exception {
-
 		if(!StringUtils.isEmpty(ParamUtils.getParameter(request, "status"))){
 			setStatus(ParamUtils.getParameter(request, "status"));
 			return SUCCESS;
