@@ -239,6 +239,88 @@
 				</param>
 			</result>
 		</action>	
+		
+		<!--  website  -->
+		<action name="list-site" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 		    
+				<param name="includeProperties">
+				targetWebSites.*, targetWebSiteCount
+				</param>
+			</result>
+		</action>		
+
+		<action name="get-site" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 		    
+				<param name="includeProperties">
+				targetWebSite
+				</param>
+			</result>
+		</action>
+
+		<action name="list-site-property"  class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				targetWebSiteProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-site-property" method="updateSiteProperties" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetWebSiteSiteProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-site-property" method="deleteSiteProperties" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetWebSiteProperty.*
+				</param>
+			</result>
+		</action>
+		
+		
+		<!--  social  -->
+		<action name="list-social-account" class="architecture.ee.web.community.struts2.action.admin.ajax.SocialManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+			    <param name="excludeProperties">targetSocialAccounts.*\.socialServiceProvider</param>
+				<param name="includeProperties">
+				  targetSocialAccounts.*
+				</param>
+			</result>	
+		</action>		
+		<action name="get-social-account" class="architecture.ee.web.community.struts2.action.admin.ajax.SocialManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  targetSocialAccount.*
+				</param>
+			</result>	
+		</action>		
+		<action name="update-social-account" method="updateSocialAccount" class="architecture.ee.web.community.struts2.action.admin.ajax.SocialManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  targetSocialAccount.*
+				</param>
+			</result>	
+		</action>										
 	</package>
 	
 </struts>
