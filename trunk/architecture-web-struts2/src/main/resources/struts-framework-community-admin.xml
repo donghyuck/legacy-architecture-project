@@ -261,8 +261,9 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 		    
+				<param name="excludeProperties">targetWebSite.primaryKeyObject, targetWebSite.modelObjectType, targetWebSite.cachedSize</param>			    
 				<param name="includeProperties">
-				targetWebSite
+				targetWebSite.*
 				</param>
 			</result>
 		</action>
