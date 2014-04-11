@@ -21,6 +21,8 @@
 		<action name="main-site" class="architecture.ee.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/system/manage-site.ftl</result>
 		</action>	
+		
+		
 						
 		<action name="view-system-details" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
@@ -249,6 +251,10 @@
 				targetWebSites.*, targetWebSiteCount
 				</param>
 			</result>
+		</action>		
+		
+		<action name="view-site" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="success" type="freemarker">/html/system/manage-target-site.ftl</result>
 		</action>		
 
 		<action name="get-site" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
