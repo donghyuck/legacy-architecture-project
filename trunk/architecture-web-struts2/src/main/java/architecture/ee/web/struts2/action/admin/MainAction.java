@@ -22,13 +22,12 @@ import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class MainAction extends FrameworkActionSupport {
 	
-	private Long companyId = -1L ;
+	private Long targetCompanyId = -1L ;
 	
 	private Company targetCompany ;
 	
 	private CompanyManager companyManager ;
-	
-	
+		
 	/**
 	 * @return companyManager
 	 */
@@ -41,28 +40,30 @@ public class MainAction extends FrameworkActionSupport {
 	public void setCompanyManager(CompanyManager companyManager) {
 		this.companyManager = companyManager;
 	}
-	public Long getCompanyId() {
-		if( companyId == -1L ){
-			companyId = getCompany().getCompanyId();
+	public Long getTargetCompanyId() {
+		if( targetCompanyId == -1L ){
+			targetCompanyId = getUser().getCompany().getCompanyId();
 		}
-		return companyId;
+		return targetCompanyId;
 	}
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
+	public void setTargetCompanyId(Long companyId) {
+		this.targetCompanyId = companyId;
 	}
 	
     public Company getTargetCompany() {
 
-		if (companyId == null)
+		if (targetCompanyId == null)
 			log.warn("Edit profile for unspecified company.");
 		
-		this.companyId = getCompanyId();
+		if( this.targetCompanyId < 1 ){
+			targetCompanyId = getUser().getCompany().getCompanyId();			
+		}
 		
 		if(targetCompany == null){
 			try {
-				targetCompany = companyManager.getCompany( (companyId).longValue() );
+				targetCompany = companyManager.getCompany( (targetCompanyId).longValue() );
 			} catch (CompanyNotFoundException e) {
-				log.warn((new StringBuilder()).append("Could not load company object for id: ").append(companyId).toString());
+				log.warn((new StringBuilder()).append("Could not load company object for id: ").append(targetCompanyId).toString());
 				return null;
 			}
 		}
