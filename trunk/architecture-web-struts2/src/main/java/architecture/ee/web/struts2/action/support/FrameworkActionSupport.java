@@ -38,7 +38,6 @@ import architecture.ee.web.util.ServletUtils;
 import architecture.ee.web.util.WebApplicationHelper;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
-import architecture.user.util.CompanyUtils;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
@@ -164,7 +163,8 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			throw new MenuNotFoundException();
 		}
 	}
-		
+
+	/*
 	public MenuComponent getMenuComponent(String name){ 
 		MenuComponent menuComp = null;
 		try {
@@ -203,11 +203,13 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		}
 		return selectedMenu;		
 	}
-	
-	
+		
 	public Menu getMenu(Long menuId) throws MenuNotFoundException{
 		return menuRepository.getMenu(menuId);		
 	}
+	*/
+	
+
 	
 	public AuthToken getAuthToken() {
 		if ( null == authToken )
