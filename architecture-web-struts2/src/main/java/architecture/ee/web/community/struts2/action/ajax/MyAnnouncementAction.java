@@ -161,19 +161,11 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 		this.objectType = form.getObjectType();		
 		this.prepareObjectTypeAndObjectId();		
 		Announce targetAnnounce = getTargetAnnounce();
-		
-		
-		log.debug(">>" + form.toString() );
-		log.debug(">>" + form.getStartDate() );
-		log.debug(">>" + form.getEndDate() );
-		
-		log.debug(">>" + ( form.getStartDate().getTime() > form.getEndDate().getTime() ) );
-		
-		
+
 		targetAnnounce.setSubject(form.getSubject());
 		targetAnnounce.setBody(form.getBody());	
-		targetAnnounce.setStartDate( form.getStartDate());
 		targetAnnounce.setEndDate(form.getEndDate());
+		targetAnnounce.setStartDate( form.getStartDate());
 		
 		if(targetAnnounce.getAnnounceId() > 0 ){
 			announceManager.updateAnnounce(targetAnnounce);		
