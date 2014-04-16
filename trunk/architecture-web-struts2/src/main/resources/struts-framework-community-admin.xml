@@ -247,10 +247,10 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 		    
-				<param name="excludeProperties">
-					*\.*\.primaryKeyObject, *\.*\.modelObjectType, *\.*\.cachedSize, *\.*\.passwordHash,
-					*\.*\.*\.primaryKeyObject, *\.*\.*\.modelObjectType, *\.*\.*\.cachedSize, *\.*\.*\.passwordHash,
-					targetWebSite.*\.menu.menuData
+				<param name="excludeProperties">				
+					.*\.primaryKeyObject, .*\.modelObjectType, .*\.cachedSize,
+					.*\.*\.primaryKeyObject,.*\.*\.modelObjectType, .*\.*\.cachedSize, .*\.*\.passwordHash,
+					.*\.menu.menuData
 				</param>				    
 				<param name="includeProperties">
 				targetWebSites.*, targetWebSiteCount
@@ -267,8 +267,9 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 		    
 				<param name="excludeProperties">
-					*\.primaryKeyObject, *\.modelObjectType, *\.cachedSize, *\.passwordHash, 
-					*\.*\.primaryKeyObject, *\.*\.modelObjectType, *\.*\.cachedSize, *\.*\.passwordHash,
+					targetWebSite.primaryKeyObject, targetWebSite.modelObjectType, targetWebSite.cachedSize,
+					targetWebSite.*\.primaryKeyObject, targetWebSite.*\.modelObjectType, targetWebSite.*\.cachedSize, targetWebSite.*\.passwordHash,
+					targetWebSite.*\.*\.primaryKeyObject,targetWebSite.*\.*\.modelObjectType, targetWebSite.*\.*\.cachedSize, targetWebSite.*\.*\.passwordHash,
 					targetWebSite.menu.menuData
 				</param>			    
 				<param name="includeProperties">
