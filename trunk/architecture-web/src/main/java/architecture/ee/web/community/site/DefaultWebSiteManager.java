@@ -29,11 +29,13 @@ import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
+import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteAlreadyExistsExcaption;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
+import architecture.ee.web.util.WebSiteUtils;
 
 public class DefaultWebSiteManager implements WebSiteManager {
 	
@@ -270,6 +272,11 @@ public class DefaultWebSiteManager implements WebSiteManager {
 			try {
 				((DefaultWebSite)webSite).setUser( userManager.getUser(webSite.getUser().getUserId()));
 				((DefaultWebSite)webSite).setCompany( companyManager.getCompany(webSite.getCompany().getCompanyId()));
+				if( webSite.getMenu().getMenuId() > 0 )
+					((DefaultWebSite)webSite).setMenu(WebSiteUtils.getMenu(webSite.getMenu().getMenuId()));
+				else
+					((DefaultWebSite)webSite).setMenu(WebSiteUtils.getDefaultMenu());				
+			} catch (MenuNotFoundException e){	
 			} catch (UserNotFoundException e) {
 			} catch (CompanyNotFoundException e) {
 			}
