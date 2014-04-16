@@ -247,6 +247,11 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 		    
+				<param name="excludeProperties">
+					*\.*\.primaryKeyObject, *\.*\.modelObjectType, *\.*\.cachedSize, *\.*\.passwordHash,
+					*\.*\.*\.primaryKeyObject, *\.*\.*\.modelObjectType, *\.*\.*\.cachedSize, *\.*\.*\.passwordHash,
+					targetWebSite.*\.menu.menuData
+				</param>				    
 				<param name="includeProperties">
 				targetWebSites.*, targetWebSiteCount
 				</param>
@@ -261,7 +266,11 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 		    
-				<param name="excludeProperties">targetWebSite.primaryKeyObject, targetWebSite.modelObjectType, targetWebSite.cachedSize</param>			    
+				<param name="excludeProperties">
+					*\.primaryKeyObject, *\.modelObjectType, *\.cachedSize, *\.passwordHash, 
+					*\.*\.primaryKeyObject, *\.*\.modelObjectType, *\.*\.cachedSize, *\.*\.passwordHash,
+					targetWebSite.menu.menuData
+				</param>			    
 				<param name="includeProperties">
 				targetWebSite.*
 				</param>
