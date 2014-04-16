@@ -267,13 +267,11 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 		    
 				<param name="excludeProperties">
-					targetWebSite.primaryKeyObject, targetWebSite.modelObjectType, targetWebSite.cachedSize,
-					targetWebSite.*\.primaryKeyObject, targetWebSite.*\.modelObjectType, targetWebSite.*\.cachedSize, targetWebSite.*\.passwordHash,
-					targetWebSite.*\.*\.primaryKeyObject,targetWebSite.*\.*\.modelObjectType, targetWebSite.*\.*\.cachedSize, targetWebSite.*\.*\.passwordHash,
+					.*\.primaryKeyObject, .*\.modelObjectType, .*\.cachedSize, .*\.passwordHash,
 					targetWebSite.menu.menuData
 				</param>			    
 				<param name="includeProperties">
-				targetWebSite.*
+				targetWebSite
 				</param>
 			</result>
 		</action>
