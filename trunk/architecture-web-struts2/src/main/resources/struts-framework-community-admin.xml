@@ -267,10 +267,10 @@
 			    <param name="excludeNullProperties">true</param> 		    
 				<param name="excludeProperties">
 					.*\.primaryKeyObject, .*\.modelObjectType, .*\.cachedSize, .*\.passwordHash,
-					targetWebSite.menu.menuData
+					targetWebSites.*, targetWebSiteCount, targetWebSiteProperty.*, 
 				</param>			    
 				<param name="includeProperties">
-				^targetWebSite.*\
+				targetWebSite.*
 				</param>
 			</result>
 		</action>
@@ -290,7 +290,7 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param> 	    
 				<param name="includeProperties">
-				targetWebSiteSiteProperty.*
+				targetWebSiteProperty.*
 				</param>
 			</result>
 		</action>
