@@ -22,6 +22,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 public class HtmlUtils {
 
+	private static final com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+	
     public static String getStackTrace(Throwable t)
     {
         if(t == null)
@@ -41,7 +43,6 @@ public class HtmlUtils {
     }
     
 	public static String objectToJson(Object obj) {
-		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
 		try {
 			return mapper.writeValueAsString(obj);
 		} catch (JsonProcessingException e) {

@@ -18,6 +18,7 @@ package architecture.ee.web.site;
 import architecture.common.model.BaseModelObject;
 import architecture.common.user.Company;
 import architecture.common.user.User;
+import architecture.ee.web.navigator.Menu;
 
 public interface WebSite extends BaseModelObject {
 	
@@ -42,5 +43,9 @@ public interface WebSite extends BaseModelObject {
 	public String getUrl();
 	
 	public void setUrl(String url);
+	
+	public void setMenu(Menu menu);
+	
+	public Menu getMenu();
 		
 }

@@ -144,7 +144,7 @@ public class ViewRendererServlet extends HttpServlet {
             	
             	OutputFormat format = ServletUtils.getOutputFormat(httpservletrequest, httpservletresponse);
             	if(log.isDebugEnabled())
-            	    log.debug("content: " + format );            	
+            	    log.debug("architecture.ee.web.community.content: " + format );            	
             	if( format == OutputFormat.XML )
             	{
             		httpservletresponse.setContentType(null);            		
@@ -157,8 +157,8 @@ public class ViewRendererServlet extends HttpServlet {
         }
         
         if(log.isDebugEnabled()){
-        	log.debug("response content type: " + httpservletresponse.getContentType());
-        	log.debug("content type : " + view.getContentType());        	
+        	log.debug("response architecture.ee.web.community.content type: " + httpservletresponse.getContentType());
+        	log.debug("architecture.ee.web.community.content type : " + view.getContentType());        	
         }
         return view;
     }

@@ -89,10 +89,11 @@
 		PUBLIC_SHARED,
 		ENABLED,
 		COMPANY_ID,
-		USER_ID
+		MENU_ID,
+		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE
-	) VALUES ( ?,?,?,?,?,?,?,?,?,?,? )		
+	) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,? )		
 	]]></sql-query>		
 	<sql-query name="UPDATE_WEBSITE" description=""><![CDATA[
 	UPDATE V2_WEBSITE SET
@@ -102,6 +103,7 @@
 		URL = ?,
 		PUBLIC_SHARED = ?,
 		ENABLED = ?,		
+		MENU_ID = ?,
 		MODIFIED_DATE = ?
 	WHERE WEBSITE_ID = ?			
 	]]></sql-query>	
@@ -115,6 +117,7 @@
 		PUBLIC_SHARED,
 		ENABLED,
 		COMPANY_ID,
+		MENU_ID,
 		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE	
@@ -131,6 +134,7 @@
 		PUBLIC_SHARED,
 		ENABLED,
 		COMPANY_ID,
+		MENU_ID,
 		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE	
@@ -147,6 +151,7 @@
 		PUBLIC_SHARED,
 		ENABLED,
 		COMPANY_ID,
+		MENU_ID,
 		USER_ID,
 		CREATION_DATE,
 		MODIFIED_DATE	

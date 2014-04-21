@@ -29,6 +29,20 @@ public class DefaultMenu  extends EntityModelObjectSupport implements Menu {
 	private boolean enabled = false;
 	private String menuData;
 	
+	public DefaultMenu() {
+		super();
+	}
+	
+	/**
+	 * @param menuId
+	 */
+	public DefaultMenu(long menuId) {
+		super();
+		this.menuId = menuId;
+	}
+
+
+
 	public long getMenuId() {
 		return menuId;
 	}

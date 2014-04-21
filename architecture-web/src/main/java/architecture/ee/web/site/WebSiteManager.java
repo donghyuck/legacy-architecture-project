@@ -42,4 +42,6 @@ public interface WebSiteManager {
 	
 	public WebSite getWebSiteById(long webSiteId) throws WebSiteNotFoundException;
 	
+	public void refreshWebSite(WebSite webSite);
+	
 }
