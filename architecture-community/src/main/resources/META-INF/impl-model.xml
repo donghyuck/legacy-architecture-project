@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+	<rank>1000</rank>
+
+	<model id="19" code="SOCIAL_NETWORK" />
+	<model id="20" code="CONTENT" />
+	<model id="21" code="TEMPLATE" />
+	<model id="22" code="ANNOUNCE" />
+	<model id="23" code="PROFILE_IMAGE" />
+	<model id="30" code="WEBSITE" />
+		
+</models>
