@@ -120,24 +120,24 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 	}
 
 	public List<Long> getSocialAccountIds( int objectType, String username) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_USERNAME").getSql(), 				
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_USERNAME").getSql(), 				
 				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.VARCHAR, username ));	
 	}
 	
 	public List<Long> getSocialAccountIds( int objectType, long objectId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
 				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
 	}
 	
 	public SocialNetwork getSocialAccountById(long socialAccountId) {
-		SocialNetwork account = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_SOCIAL_ACCOUNT_BY_ID").getSql(), socialAccountMapper, new SqlParameterValue (Types.NUMERIC, socialAccountId ));		
+		SocialNetwork account = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_ACCOUNT_BY_ID").getSql(), socialAccountMapper, new SqlParameterValue (Types.NUMERIC, socialAccountId ));		
 		account.setProperties(getSocialAccountProperties( account.getSocialAccountId() ));
 		return account;		
 	}
 
 	public void updateSocialAccount(SocialNetwork socialNetwork) {
 		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_SOCIAL_ACCOUNT").getSql(), 	
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_SOCIAL_ACCOUNT").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, socialNetwork.getAccessToken()), 
 				new SqlParameterValue (Types.VARCHAR, socialNetwork.getAccessSecret()), 
 				new SqlParameterValue(Types.DATE, socialNetwork.getModifiedDate()),
@@ -156,7 +156,7 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 				SocailNetworkImpl impl = (SocailNetworkImpl)toUse;
 				impl.setSocialAccountId(imageId);
 			}			
-			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_SOCIAL_ACCOUNT").getSql(), 	
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.CREATE_SOCIAL_ACCOUNT").getSql(), 	
 					new SqlParameterValue (Types.NUMERIC, imageId), 
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectType() ), 
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectId() ), 
@@ -176,7 +176,7 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 
 	public void deleteSocialAccount(SocialNetwork socialNetwork) {
 		getExtendedJdbcTemplate().update(
-			getBoundSql("ARCHITECTURE_WEB.DELETE_SOCIAL_ACCOUNT_BY_ID").getSql(), 	
+			getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_SOCIAL_ACCOUNT_BY_ID").getSql(), 	
 			new SqlParameterValue (Types.NUMERIC, socialNetwork.getSocialAccountId() ));		
 		deleteSocialAccountProperties(socialNetwork.getSocialAccountId());
 	}

@@ -49,26 +49,26 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 	};
 	
 	public List<String> getPhotoIds() {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), String.class);	
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), String.class);	
 	}
 
 	public List<String> getPhotoIds(int objectType) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE").getSql(), 				
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE").getSql(), 				
 				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectType ));	
 	}
 
 	public List<String> getPhotoIds(int objectType, long objectId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
 				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
 	}
 
 	public Photo getPhotoStream(String photoId) throws PhotoNotFoundException {
-		Photo photo = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_BY_ID").getSql(), photoMapper, new SqlParameterValue (Types.VARCHAR, photoId ));		
+		Photo photo = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_BY_ID").getSql(), photoMapper, new SqlParameterValue (Types.VARCHAR, photoId ));		
 		return photo;		
 	}
 
 	public void addPhoto(Photo photo) {
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.CREATE_STREAM_PHOTO").getSql(), 	
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.CREATE_STREAM_PHOTO").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, photo.getExternalId()), 
 				new SqlParameterValue (Types.INTEGER, photo.getImageId() ), 
 				new SqlParameterValue (Types.INTEGER, photo.isPublicShared() ? 1 : 0 ), 
@@ -79,24 +79,24 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 
 	public void removePhoto(Photo photo) {
 		getExtendedJdbcTemplate().update(
-				getBoundSql("ARCHITECTURE_WEB.DELETE_STREAM_PHOTO_BY_ID").getSql(), 	
+				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_STREAM_PHOTO_BY_ID").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, photo.getExternalId() ));		
 	}
 
 	public int getPhotoCount() {
 		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_WEB.COUNT_ALL_STREAM_PHOTO").getSql());
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ALL_STREAM_PHOTO").getSql());
 	}
 
 	public int getPhotoCount(int objectType) {
 		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_WEB.COUNT_STREAM_PHOTO_BY_OBJECT_TYPE").getSql(), 
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_STREAM_PHOTO_BY_OBJECT_TYPE").getSql(), 
 				new SqlParameterValue(Types.NUMERIC, objectType ));
 	}
 
 	public int getPhotoCount(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().queryForInt(
-				getBoundSql("ARCHITECTURE_WEB.COUNT_STREAM_PHOTO_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_STREAM_PHOTO_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
 				new SqlParameterValue(Types.NUMERIC, objectType ), 
 				new SqlParameterValue(Types.NUMERIC, objectId ));
 	}
@@ -104,7 +104,7 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 	public List<String> getPhotoIds(int startIndex, int maxResults) {
 		
 		return getExtendedJdbcTemplate().queryScrollable(
-				getBoundSql("ARCHITECTURE_WEB.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), 
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_STREAM_PHOTO_IDS").getSql(), 
 				startIndex, 
 				maxResults, 
 				new Object[0], 
@@ -115,7 +115,7 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 
 	public List<String> getPhotoIds(int objectType, int startIndex, int maxResults) {
 		return getExtendedJdbcTemplate().queryScrollable(
-				getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE").getSql(), 
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE").getSql(), 
 				startIndex, 
 				maxResults, 
 				new Object[ ] {objectType }, 
@@ -125,7 +125,7 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 
 	public List<String> getPhotoIds(int objectType, long objectId, int startIndex, int maxResults) {
 		return getExtendedJdbcTemplate().queryScrollable(
-				getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
 				startIndex, 
 				maxResults, 
 				new Object[ ] {objectType, objectId }, 
@@ -134,13 +134,13 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 	}
 
 	public List<String> getPhotoIdsByImage(long imageId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_WEB.SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID").getSql(), 				
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID").getSql(), 				
 				String.class, new SqlParameterValue (Types.NUMERIC, imageId ));	
 	}
 
 	public void removePhotos(Image image) {
 		getExtendedJdbcTemplate().update(
-				getBoundSql("ARCHITECTURE_WEB.DELETE_STREAM_PHOTOS_BY_IMAGE_ID").getSql(), 	
+				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_STREAM_PHOTOS_BY_IMAGE_ID").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, image.getImageId() ));		
 		
 	}
