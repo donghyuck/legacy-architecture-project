@@ -25,8 +25,8 @@ import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.Photo;
+import architecture.ee.web.community.streams.PhotoNotFoundException;
 import architecture.ee.web.community.streams.dao.StreamsDao;
 import architecture.ee.web.community.streams.impl.PhotoImpl;
 

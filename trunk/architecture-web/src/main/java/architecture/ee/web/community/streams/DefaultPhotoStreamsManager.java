@@ -32,7 +32,6 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.dao.StreamsDao;
 import architecture.ee.web.community.streams.impl.PhotoImpl;
 

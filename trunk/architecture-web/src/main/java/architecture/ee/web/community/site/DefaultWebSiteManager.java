@@ -285,4 +285,10 @@ public class DefaultWebSiteManager implements WebSiteManager {
 		return webSite;
 	}
 
+	public void refreshWebSite(WebSite webSite) {
+		if( webSite.getWebSiteId() > 0 ){
+			webSiteCache.remove(webSite.getWebSiteId());
+		}		
+	}
+
 }

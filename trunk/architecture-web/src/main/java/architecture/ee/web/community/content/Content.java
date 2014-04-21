@@ -13,10 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community;
+package architecture.ee.web.community.content;
+
+import architecture.common.model.BaseModelObject;
+import architecture.common.user.User;
 
 
-public interface Content extends ContentModel {
+public interface Content extends BaseModelObject {
+	
+	public Long getContentId();
+	
+	public String getTitle();
+	
+	public void setTitle(String title);
+	
+	public String getBodyString();
+	
+	public void setBodyString(String body);
+	
+	public User getCreator();
+	
+	public User getModifier();
 	
 	
 }

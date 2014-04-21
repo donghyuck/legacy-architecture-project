@@ -65,8 +65,8 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 		subject = "";
 		attachments = new ArrayList<Attachment>();
 		Date now = new Date();
-		startDate = now;
-		endDate = now;
+		startDate = null;
+		endDate = null;
 		super.setCreationDate(now);
 		super.setModifiedDate(now);
 	}
@@ -87,8 +87,8 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 		subject = "";
 		attachments = new ArrayList<Attachment>();
 		Date now = new Date();
-		startDate = now;
-		endDate = now;
+		startDate = null;
+		endDate = null;
 		userId = user == null ? -1L : user.getUserId();				
 		super.setCreationDate(now);
 		super.setModifiedDate(now);

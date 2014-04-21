@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community;
+package architecture.ee.web.community.content;
 
-import java.util.List;
+public enum PageStatus {
 
-import architecture.common.user.User;
-import architecture.ee.web.community.content.Content;
-
-public interface ContentManager {
+	DRAFT(0), PUBLISHED(1);
 	
-	public int getContentCount(User user);
+	private int id;
 	
-	public abstract List<Content> getContents(User user);
-		
-	public abstract List<Content> getContents(User user, int startIndex, int maxResults);
-	
-	public abstract Content getContent(long contentId) throws ContentNotFoundException;
-	
-	public abstract void updateContent(Content content);
+	private PageStatus(int id){
+		this.id = id ;
+	}
 	
 }
