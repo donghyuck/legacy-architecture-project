@@ -2,13 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>architecture.user</groupId>
   <artifactId>architecture-user-web-struts2</artifactId>
-  <version>1.0.5.RELEASE</version>
+  <version>1.1.0.RELEASE</version>
   
 <dependencies>
 	<dependency>
 		<groupId>architecture.web</groupId>
 		<artifactId>architecture-web-struts2</artifactId>
-		<version>1.0.5.RELEASE</version>
+		<version>1.1.0.RELEASE</version>
 		<exclusions>
 			<exclusion>
 				<artifactId>tools</artifactId>
