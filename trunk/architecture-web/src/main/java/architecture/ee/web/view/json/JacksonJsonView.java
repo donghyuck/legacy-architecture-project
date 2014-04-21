@@ -183,8 +183,7 @@ public class JacksonJsonView extends AbstractView {
 			HttpServletResponse response) throws Exception {
 
 		Object value = filterModel(model);
-		JsonGenerator generator =
-				this.objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(), this.encoding);
+		JsonGenerator generator = this.objectMapper.getJsonFactory().createJsonGenerator(response.getOutputStream(), this.encoding);
 		if (this.prefixJson) {
 			generator.writeRaw("{} && ");
 		}
