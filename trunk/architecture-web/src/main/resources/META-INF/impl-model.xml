@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
 	<rank>1000</rank>
-	<!-- 
-	<model id="0" code="UNKNOWN" />
-	<model id="1" code="COMPANY" />
-	<model id="2" code="USER" />
-	<model id="3" code="GROUP" />
-	<model id="4" code="ROLE" />	
-	<model id="12" code="I18N_TEXT" />	
-	<model id="13" code="ANONYMOUS" />
-	<model id="14" code="SYSTEM" />
-	<model id="15" code="I18N_LOCALE" />
-	 -->
 	<model id="16" code="IMAGE" />
 	<model id="17" code="ATTACHMENT" />
-	<model id="18" code="MENU" />
-	<model id="19" code="SOCIAL_NETWORK" />
-	<model id="20" code="CONTENT" />
-	<model id="21" code="TEMPLATE" />
-	<model id="22" code="ANNOUNCE" />
-	<model id="23" code="PROFILE_IMAGE" />
-	<model id="30" code="WEBSITE" />
-		
+	<model id="18" code="MENU" />		
 </models>

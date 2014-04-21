@@ -43,7 +43,7 @@ import com.fasterxml.jackson.databind.ser.SerializerFactory;
 public class JacksonJsonView extends AbstractView {
 
 	/**
-	 * Default content type. Overridable as bean property.
+	 * Default architecture.ee.web.community.content type. Overridable as bean property.
 	 */
 	public static final String DEFAULT_CONTENT_TYPE = "application/json";
 
@@ -62,7 +62,7 @@ public class JacksonJsonView extends AbstractView {
 	
 
 	/**
-	 * Construct a new {@code JacksonJsonView}, setting the content type to {@code application/json}.
+	 * Construct a new {@code JacksonJsonView}, setting the architecture.ee.web.community.content type to {@code application/json}.
 	 */
 	public JacksonJsonView() {
 		setContentType(DEFAULT_CONTENT_TYPE);

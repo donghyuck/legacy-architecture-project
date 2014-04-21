@@ -32,7 +32,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 public abstract class AbstractPdfView extends AbstractView {
 
 	/**
-	 * This constructor sets the appropriate content type "application/pdf".
+	 * This constructor sets the appropriate architecture.ee.web.community.content type "application/pdf".
 	 * Note that IE won't take much notice of this, but there's not a lot we
 	 * can do about this. Generated documents should have a ".pdf" extension.
 	 */

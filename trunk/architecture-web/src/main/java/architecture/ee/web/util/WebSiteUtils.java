@@ -22,6 +22,7 @@ import org.apache.commons.lang.StringUtils;
 import architecture.common.util.TextUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.navigator.Menu;
+import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSite;
@@ -73,7 +74,10 @@ public class WebSiteUtils {
 
 	
 	public static Menu getWebSiteMenu(WebSite webSite) throws MenuNotFoundException{
-		return getMenu(webSite.getLongProperty("menuId", getDefaultMenuId()));		
+		if( webSite.getMenu().getMenuId() < 1 )
+			return getDefaultMenu();
+		else 
+			return webSite.getMenu();
 	}	
 
 	public static boolean isallowedSignIn(WebSite website){
@@ -84,5 +88,16 @@ public class WebSiteUtils {
 		return website.getBooleanProperty("allowedSignup", true);
 	}
 	
-
+	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
+		if(StringUtils.isNotEmpty(menu.getRoles())){			
+			for( String role : StringUtils.split(menu.getRoles(), ",")){
+				if( request.isUserInRole( role ) )
+					return true;
+			}
+			
+		}else{
+			return true;
+		}
+		return false;
+	}
 }

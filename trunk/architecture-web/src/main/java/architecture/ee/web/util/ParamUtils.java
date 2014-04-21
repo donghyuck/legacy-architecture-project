@@ -23,10 +23,14 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.ServletRequestUtils;
 
 public class ParamUtils extends ServletRequestUtils {
 		
+	private static final Log log = LogFactory.getLog(ParamUtils.class);
+	
     public ParamUtils()
     {
     }
@@ -58,6 +62,8 @@ public class ParamUtils extends ServletRequestUtils {
             return (T) mapper.readValue(jsonString, requiredType );
         } catch (Exception e) {
         	
+        	log.error(e);
+        	
             if(requiredType == List.class )
                 return (T) Collections.EMPTY_LIST;
             else if (requiredType == Map.class ){
@@ -72,6 +78,7 @@ public class ParamUtils extends ServletRequestUtils {
         	Map map = getJsonParameter(request, name);
         	return (T) map.get(key);
         } catch (Exception e) {
+        	log.error(e);
             if(requiredType == List.class )
                 return (T) Collections.EMPTY_LIST;
             else if (requiredType == Map.class ){
