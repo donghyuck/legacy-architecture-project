@@ -30,7 +30,7 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.dao.AnnounceDao;
-import architecture.ee.web.community.announce.impl.AnnounceImpl;
+import architecture.ee.web.community.announce.impl.DefaultAnnounce;
 
 public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceDao {
 
@@ -42,7 +42,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	
 	private final RowMapper<Announce> announceMapper = new RowMapper<Announce>(){
 		public Announce mapRow(ResultSet rs, int rowNum) throws SQLException {
-			AnnounceImpl announce = new AnnounceImpl();
+			DefaultAnnounce announce = new DefaultAnnounce();
 			announce.setAnnounceId(rs.getLong("ANNOUNCE_ID"));
 			announce.setObjectType(rs.getInt("OBJECT_TYPE"));
 			announce.setObjectId(rs.getLong("OBJECT_ID"));
@@ -139,7 +139,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	public Announce load(long announceId) throws AnnounceNotFoundException {		
 		try {
 			Announce announce = getExtendedJdbcTemplate().queryForObject(
-					getBoundSql("ARCHITECTURE_WEB.SELECT_ANNOUNCE_BY_ID").getSql(), 
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_BY_ID").getSql(), 
 					announceMapper, 
 					new SqlParameterValue (Types.NUMERIC, announceId ));
 			announce.setProperties( getAnnounceProperties(announceId) );
@@ -150,7 +150,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	}
 	public void update(Announce annoucne) {
 		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.UPDATE_ANNOUNCE").getSql(), 	
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_ANNOUNCE").getSql(), 	
 				new SqlParameterValue (Types.VARCHAR, annoucne.getSubject()), 
 				new SqlParameterValue (Types.VARCHAR, annoucne.getBody() ), 
 				new SqlParameterValue(Types.TIMESTAMP, annoucne.getStartDate()),
@@ -168,7 +168,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 			announceIdToUse = getNextId(sequencerName);
 		announce.setAnnounceId(announceIdToUse);
 		
-		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_WEB.INSERT_ANNOUNCE").getSql(), 	
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_ANNOUNCE").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, announce.getAnnounceId()),
 				new SqlParameterValue (Types.NUMERIC, announce.getObjectType()),
 				new SqlParameterValue (Types.NUMERIC, announce.getObjectId()),
@@ -185,7 +185,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	
 	public void delete(Announce annoucne) {
 		getJdbcTemplate().update(
-				getBoundSql("ARCHITECTURE_WEB.DELETE_ANNOUNCE" ).getSql(),
+				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_ANNOUNCE" ).getSql(),
 				new SqlParameterValue (Types.NUMERIC, annoucne.getAnnounceId())
 		);
 		deleteAnnounceProperties(annoucne.getAnnounceId());		
@@ -197,7 +197,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	
 	public List<Long> getAnnounceIdsForUser(long userId) {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("ARCHITECTURE_WEB.SELECT_ANNOUNCE_IDS_BY_USER_ID").getSql(),
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_IDS_BY_USER_ID").getSql(),
 				new RowMapper<Long>(){
 					public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return rs.getLong(1);
@@ -209,7 +209,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	
 	public List<Long> getAnnounceIds(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("ARCHITECTURE_WEB.SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(),
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(),
 				new RowMapper<Long>(){
 					public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return rs.getLong(1);
@@ -220,7 +220,7 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	
 	public List<Long> getAnnounceIds() {
 		return getExtendedJdbcTemplate().query(
-				getBoundSql("ARCHITECTURE_WEB.SELECT_ALL_ANNOUNCE_IDS" ).getSql(),
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_ANNOUNCE_IDS" ).getSql(),
 				new RowMapper<Long>(){
 					public Long mapRow(ResultSet rs, int rowNum) throws SQLException {
 						return rs.getLong(1);
