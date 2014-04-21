@@ -7,7 +7,7 @@
 		<version>1.0.0.RELEASE</version>
 	</parent>
 	<artifactId>architecture-web-struts2</artifactId>
-	<version>1.0.5.RELEASE</version>
+	<version>1.1.0.RELEASE</version>
 	<name>APPLICATION WEB STRUTS2 SUPPORT</name>
 	<description>웹 어플리케이션 개발을 위한 스트럿츠 2 지원 패키지</description>
 	<build>
@@ -129,7 +129,7 @@
 		<dependency>
 			<groupId>architecture.web</groupId>
 			<artifactId>architecture-web</artifactId>
-			<version>1.0.5.RELEASE</version>
+			<version>1.1.0.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>architecture.user</groupId>
