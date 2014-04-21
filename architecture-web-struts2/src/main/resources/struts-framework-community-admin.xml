@@ -275,7 +275,35 @@
 			</result>
 		</action>
 
-		<action name="list-site-property"  class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+		<action name="update-website"  method="updateSite"  class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 		    
+				<param name="excludeProperties">
+					.*\.primaryKeyObject, .*\.modelObjectType, .*\.cachedSize, .*\.passwordHash,
+					targetWebSites.*, targetWebSiteCount, targetWebSiteProperty.*, 
+				</param>			    
+				<param name="includeProperties">
+				targetWebSite.*
+				</param>
+			</result>
+		</action>	
+
+		<action name="update-site-menu"  method="updateSiteMenu"  class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 		    
+				<param name="excludeProperties">
+					.*\.primaryKeyObject, .*\.modelObjectType, .*\.cachedSize, .*\.passwordHash,
+					targetWebSites.*, targetWebSiteCount, targetWebSiteProperty.*, 
+				</param>			    
+				<param name="includeProperties">
+				targetWebSite.*
+				</param>
+			</result>
+		</action>				
+
+		<action name="list-website-property"  class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param> 		    
@@ -285,7 +313,7 @@
 			</result>
 		</action>
 
-		<action name="update-site-property" method="updateSiteProperties" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+		<action name="update-website-property" method="updateSiteProperties" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param> 	    
@@ -295,7 +323,7 @@
 			</result>
 		</action>
 
-		<action name="delete-site-property" method="deleteSiteProperties" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
+		<action name="delete-website-property" method="deleteSiteProperties" class="architecture.ee.web.community.struts2.action.admin.ajax.SiteManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">false</param> 	    
@@ -305,7 +333,12 @@
 			</result>
 		</action>
 		
+
+		<action name="view-website-pages" class="architecture.ee.web.community.struts2.action.admin.ajax.WebsitePagesManagementAction">
+			<result name="success" type="freemarker">/html/system/manage-target-website-pages.ftl</result>
+		</action>		
 		
+				
 		<!--  social  -->
 		<action name="list-social-account" class="architecture.ee.web.community.struts2.action.admin.ajax.SocialManagementAction">
 			<result name="json-success" type="json">
