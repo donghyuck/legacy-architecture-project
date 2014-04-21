@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<!--  COMMON MAIN ACTIONS -->
+	<package name="framework-community-site-actions" namespace="/" extends="framework-default">
+		
+		<action name="main" class="architecture.ee.web.community.struts2.action.MainAction">
+			<result name="streams" type="freemarker">/html/community/my-streams.ftl</result>
+			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
+			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
+		</action>
+					
+		<action name="architecture.ee.web.community.content" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">${template}</result>	
+		</action>
+
+		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
+			<result name="success" type="freemarker">/html/about.ftl</result>	
+		</action>		
+
+		<action name="events" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/events.ftl</result>	
+		</action>	
+
+		<action name="contact" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/contact.ftl</result>	
+		</action>		
+
+		<action name="customers" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/customers.ftl</result>	
+		</action>		
+
+		<action name="press" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">/html/press.ftl</result>
+		</action>										
+
+	</package>	
+
+	<!--  ACCOUNTS USER EXTEND ACTIONS -->	
+	<package name="framework-community-accounts-actions" namespace="/accounts" extends="framework-default">
+	
+		<action name="external-signup" class="architecture.ee.web.community.struts2.action.ajax.ExternalSignupAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+			    <param name="excludeProperties">account.password, account.passwordHash</param>
+				<param name="includeProperties">
+				  account.*
+				</param>
+			</result>	
+		</action>		
+		
+		<action name="external-signin" class="architecture.ee.web.community.struts2.action.ajax.ExternalSigninAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+			    <param name="excludeProperties">account.password, account.passwordHash</param>
+				<param name="root">
+				signinUser
+				</param>
+			</result>	
+		</action>	
+		
+	</package>	
+	
+	<!--  COMMUNITY USER ACTIONS -->	
+
+	<package name="framework-community-actions" namespace="/community" extends="framework-default">	
+
+		<action name="my-site" class="architecture.ee.web.community.struts2.action.ajax.MySiteAction">
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>
+			  <param name="includeProperties">
+				webSite
+			  </param>				
+			</result>			
+		</action>
+		
+		<action name="my-domain" class="architecture.ee.web.community.struts2.action.ajax.MyDomainAction">
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>
+			  <param name="includeProperties">
+				domainName
+			  </param>				
+			</result>			
+		</action>
+	
+		<!--  ================================== -->		
+		<!--   Streams															-->
+		<!--  ================================== -->	
+		<action name="list-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				photoCount
+				</param>
+			</result>
+		</action>			
+
+		<action name="add-streams-photo" method="addImageToStreams" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash, targetImage.inputStream, targetImageContentLength, targetImageContentType, targetImageFileName, targetImageInputStream</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				targetImage.*
+				</param>
+			</result>
+		</action>	
+
+		<action name="remove-streams-photo" method="removeImageFromStreams" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash, targetImage.inputStream, targetImageContentLength, targetImageContentType, targetImageFileName, targetImageInputStream</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				targetImage.*
+				</param>
+			</result>
+		</action>	
+				
+		<action name="get-streams-photo" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">photos.*\.creator.password, photos.*\.creator.passwordHash, targetImage.inputStream, targetImageContentLength, targetImageContentType, targetImageFileName, targetImageInputStream</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				photos.*,
+				targetImage.*
+				</param>
+			</result>
+		</action>	
+				
+		<action name="view-streams-photo"  method="viewPhoto" class="architecture.ee.web.community.struts2.action.ajax.MyPhotoStreamsAction">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>	
+		</action>		
+				
+		<!--  ================================== -->		
+		<!--   Socialnetwork													-->
+		<!--  ================================== -->					
+		<action name="list-socialnetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">socialNetworks.*\.socialServiceProvider</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				socialNetworks.*
+				</param>
+			</result>
+		</action>	
+		<action name="list-my-socialnetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">connectedSocialNetworks.*\.socialServiceProvider</param>
+			  <param name="excludeNullProperties">false</param>     
+				<param name="includeProperties">
+				connectedSocialNetworks.*
+				</param>
+			</result>
+		</action>					
+		<action name="update-socialnetwork"  method="updateSocialNetwork" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">socialNetwork.socialServiceProvider, socialServiceProvider</param>
+			  <param name="excludeNullProperties">false</param>
+			  <param name="root">
+				socialNetwork
+			  </param>	
+			</result>
+		</action>	
+		<action name="get-socialnetwork"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			   <param name="excludeProperties">socialNetwork.socialServiceProvider, socialServiceProvider</param>
+			  <param name="excludeNullProperties">false</param>     
+			  <param name="root">
+				socialNetwork
+			  </param>				
+			</result>
+		</action>
+		
+		<action name="delete-socialnetwork"  method="deleteSocialNetwork"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>     
+			  <param name="root">
+				socialNetworkId
+			  </param>				
+			</result>
+		</action>
+		
+	<action name="get-my-socialnetwork-property"  class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				socialNetworkProperties.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-socialnetwork-property" method="updateSocialNetworkProperties" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				socialNetworkProperties.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-socialnetwork-property" method="deleteSocialNetworkProperties" class="architecture.ee.web.community.struts2.action.ajax.MySocialNetworkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				socialNetworkProperties.*
+				</param>
+			</result>
+		</action>
+				
+		
+		<action name="connect-socialnetwork"  class="architecture.ee.web.community.struts2.action.SocialConnectAction">
+			<result name="success" type="freemarker">/html/community/connect-socialnetwork.ftl</result>
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>
+			  <param name="includeProperties">
+				domainName
+			  </param>				
+			</result>	
+		</action>		
+					
+		<action name="tumblr-callback" class="architecture.ee.web.community.struts2.action.TumblrCallbackAction">
+			<result name="success" type="freemarker">/html/community/tumblr-callback.ftl</result>
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>     
+			  <param name="excludeProperties">user.password, user.passwordHash</param>
+			  <param name="root">
+			  userProfile
+			  </param>		
+			</result>			
+		</action>					
+										
+		<action name="twitter-callback" class="architecture.ee.web.community.struts2.action.TwitterCallbackAction">
+			<result name="success" type="freemarker">/html/community/twitter-callback.ftl</result>
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>     
+			  <param name="excludeProperties">user.password, user.passwordHash</param>
+			  <param name="root">
+			  userProfile
+			  </param>		
+			</result>			
+		</action>		
+					
+		<action name="facebook-callback" class="architecture.ee.web.community.struts2.action.FacebookCallbackAction">
+			<result name="success" type="freemarker">/html/community/facebook-callback.ftl</result>
+			<result name="json-success" type="json">
+			  <param name="contentType">application/json</param>
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">false</param>     
+			 <param name="excludeProperties">user.password, user.passwordHash</param>			
+			  <param name="root">
+			  userProfile
+			  </param>
+			
+			   <!--  
+			  <param name="includeProperties">
+			  
+				user.*, userProfile.*
+			  </param>
+			     -->				
+			</result>				
+		</action>	
+
+		<action name="get-tumblr-profile" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  tumblrProfile.*
+				</param>
+			</result>	
+		</action>
+
+		<action name="show-tumblr-avatar" method="showAvatar" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="success" type="httpheader">
+			  <param name="status">301</param>
+			  <param name="headers.Location">${blogAvatar}</param>
+			</result>	
+		</action>
+		
+		<action name="get-tumblr-blog-info" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  blogInfo.* , blogAvatar
+				</param>
+			</result>	
+		</action>		
+		
+		<action name="get-tumblr-dashboard" class="architecture.ee.web.community.struts2.action.ajax.MyTumblrAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  dashboardPosts.*
+				</param>
+			</result>	
+		</action>
+		
+		<action name="get-twitter-profile" class="architecture.ee.web.community.struts2.action.ajax.MyTwitterAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  twitterProfile.*
+				</param>
+			</result>	
+		</action>
+				
+		<action name="get-twitter-hometimeline" class="architecture.ee.web.community.struts2.action.ajax.MyTwitterAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  homeTimeline.*
+				</param>
+			</result>	
+		</action>			
+				
+		<action name="get-twitter-usertimeline" class="architecture.ee.web.community.struts2.action.ajax.MyTwitterAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  userTimeline.*
+				</param>
+			</result>	
+		</action>	
+		
+		<action name="get-facebook-profile" class="architecture.ee.web.community.struts2.action.ajax.MyFacebookAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  facebookProfile.*
+				</param>
+			</result>	
+		</action>
+		
+		<action name="get-facebook-homefeed" class="architecture.ee.web.community.struts2.action.ajax.MyFacebookAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param>
+				<param name="includeProperties">
+				  homeFeed.*
+				</param>
+			</result>	
+		</action>	
+							
+		<!--  ================================== -->		
+		<!--   Image Broswer												-->
+		<!--  ================================== -->	
+		<action name="download-image" class="architecture.ee.web.community.struts2.action.DownloadImageActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>	
+								
+		<action name="imagebrowser-list" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImages.inputStream</param>			    
+				<param name="includeProperties">
+				targetImages.*, totalTargetImageCount
+				</param>
+			</result>
+		</action>
+		
+		<action name="imagebrowser-get" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+						
+		<action name="imagebrowser-delete" method="deleteImage" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="imagebrowser-update" method="updateImage" class="architecture.ee.web.community.struts2.action.ajax.MyImageBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+				
+		<!--  ================================== -->		
+		<!--   Profiles															-->
+		<!--  ================================== -->	
+		<action name="view-myprofile" class="architecture.ee.web.community.struts2.action.UserProfileAction">
+			<result name="success" type="freemarker">/html/community/user-profile.ftl</result>
+			<result name="modal-dialog" type="freemarker">/html/community/user-profile-modal-dialog.ftl</result>
+		</action>
+		
+		<action name="update-my-photo" method="updatePhoto" class="architecture.ee.web.community.struts2.action.ajax.MyProfileAction">
+			<result name="json-success" type="json">
+			  <param name="enableGZIP">true</param>
+			  <param name="excludeNullProperties">true</param>     
+				<param name="includeProperties">
+				photo.*
+				</param>
+			</result>
+		</action>		
+		<!--  ================================== -->		
+		<!--   Content : Forums, Blogs									-->
+		<!--  ================================== -->	
+		<action name="architecture.ee.web.community.content" class="architecture.ee.web.community.struts2.action.PageAction">
+			<result name="success" type="freemarker">${template}</result>	
+			<!-- 
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>     
+				<param name="includeProperties">
+				targetContent.*
+				</param>
+			</result>
+			-->
+		</action>	
+					
+		<!--  ================================== -->		
+		<!--   Pages		  													-->
+		<!--  ================================== -->	
+		
+					
+		<!--  ================================== -->		
+		<!--   Announce  													-->
+		<!--  ================================== -->			
+		<action name="list-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				targetAnnounces.*\.primaryKeyObject,
+				targetAnnounces.*\.modelObjectType,
+				targetAnnounces.*\.cachedSize,				
+				targetAnnounces.*\.user.passwordHash,
+				targetAnnounces.*\.user.primaryKeyObject,
+				targetAnnounces.*\.user.modelObjectType,
+				targetAnnounces.*\.user.cachedSize					
+				</param>
+				<param name="includeProperties">
+				targetAnnounces.*,
+				totalAnnounceCount
+				</param>
+			</result>
+		</action>		
+
+		<action name="get-announce" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				targetAnnounce.primaryKeyObject,
+				targetAnnounce.modelObjectType,
+				targetAnnounce.cachedSize,				
+				targetAnnounce.user.passwordHash,
+				targetAnnounce.user.primaryKeyObject,
+				targetAnnounce.user.modelObjectType,
+				targetAnnounce.user.cachedSize					
+				</param>			    
+				<param name="includeProperties">
+				targetAnnounce.*	
+				</param>
+			</result>
+		</action>
+
+		<action name="update-announce" method="update" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>	  
+				<param name="excludeProperties"> 	
+				targetAnnounce.primaryKeyObject,
+				targetAnnounce.modelObjectType,
+				targetAnnounce.cachedSize,				
+				targetAnnounce.user.passwordHash,
+				targetAnnounce.user.primaryKeyObject,
+				targetAnnounce.user.modelObjectType,
+				targetAnnounce.user.cachedSize	,
+				targetAnnounces				
+				</param>
+				<param name="includeProperties">
+				targetAnnounce.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-announce" method="delete" class="architecture.ee.web.community.struts2.action.ajax.MyAnnouncementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>		    			    
+				<param name="includeProperties">
+				announceId
+				</param>
+			</result>
+		</action>		
+		
+		<!--  ================================== -->		
+		<!--   My Images 													-->
+		<!--  ================================== -->								
+		<action name="get-image-link" class="architecture.ee.web.community.struts2.action.ajax.MyImageLinkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>	    
+				<param name="includeProperties">
+				imageLink.*
+				</param>
+			</result>
+		</action>		
+		<action name="delete-image-link" class="architecture.ee.web.community.struts2.action.ajax.MyImageLinkAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>	    
+				<param name="includeProperties">
+				imageId
+				</param>
+			</result>
+		</action>
+						
+		<action name="list-my-image" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImages.*\.inputStream</param>
+				<param name="includeProperties">
+				targetImages.*, totalTargetImageCount
+				</param>
+			</result>
+		</action>
+				
+		<action name="get-my-image" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+						
+		<action name="delete-my-image" method="deleteImage" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-image" method="updateImage" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+		
+		<action name="download-my-image" class="architecture.ee.web.struts2.action.DownloadImageActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>	
+
+		<action name="get-my-image-property"  class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-image-property" method="updateImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-image-property" method="deleteImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<!--  ================================== -->		
+		<!--   My Domain & Website Images							-->
+		<!--  ================================== -->														
+		<action name="list-my-domain-image" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImages.*\.inputStream</param>
+				<param name="includeProperties">
+				targetImages.*, totalTargetImageCount
+				</param>
+			</result>
+		</action>
+				
+		<action name="get-my-domain-image" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+						
+		<action name="delete-my-domain-image" method="deleteImage" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-domain-image" method="updateImage" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+		
+		<action name="download-my-domain-image" class="architecture.ee.web.struts2.action.DownloadImageActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>	
+
+		<action name="get-my-domain-image-property"  class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-domain-image-property" method="updateImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-domain-image-property" method="deleteImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>							
+
+		<action name="list-my-website-image" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImages.*\.inputStream</param>
+				<param name="includeProperties">
+				targetImages.*, totalTargetImageCount
+				</param>
+			</result>
+		</action>
+				
+		<action name="get-my-website-image" class="architecture.ee.web.community.struts2.action.ajax.MyDomainImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+						
+		<action name="delete-my-website-image" method="deleteImage" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-website-image" method="updateImage" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>
+		
+		<action name="download-my-website-image" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>	
+
+		<action name="get-my-website-image-property"  class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-website-image-property" method="updateImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="delete-my-website-image-property" method="deleteImageProperties" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 	    
+				<param name="includeProperties">
+				targetImageProperty.*
+				</param>
+			</result>
+		</action>			
+																			
+		<!--  ================================== -->		
+		<!--   My Attachements											-->
+		<!--  ================================== -->		
+		<action name="download-my-attachment" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetAttachmentContentType}</param>
+			  <param name="contentLength">${targetAttachmentContentLength}</param>
+			  <param name="inputName">targetAttachmentInputStream</param>
+			  <param name="contentDisposition">attachment;filename="${encodedTargetAttachmentFileName}"</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>
+
+		<action name="view-my-attachment" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetAttachmentContentType}</param>
+			  <param name="contentLength">${targetAttachmentContentLength}</param>
+			  <param name="inputName">targetAttachmentInputStream</param>
+			  <!-- <param name="contentDisposition">attachment;filename="${targetAttachmentFileName}"</param>-->
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>
+
+					
+		<action name="list-my-attachement" class="architecture.ee.web.community.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+				<param name="includeProperties">
+				  targetAttachments.*, totalTargetAttachmentCount
+				</param>
+			</result>	
+		</action>			
+		
+		<action name="delete-my-attachment" method="deleteAttachment" class="architecture.ee.web.community.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+				<param name="includeProperties">
+				targetAttachment.*
+				</param>
+			</result>
+		</action>
+
+		<action name="update-my-attachment" method="updateAttachment" class="architecture.ee.web.community.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+				<param name="includeProperties">
+				targetAttachment.*
+				</param>
+			</result>
+		</action>
+									
+		<action name="save-my-attachments" method="saveAttachments" class="architecture.ee.web.community.struts2.action.ajax.MyAttachmentAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+				<param name="includeProperties">
+				targetAttachment.*
+				</param>
+			</result>
+		</action>				
+	</package>		
+</struts>

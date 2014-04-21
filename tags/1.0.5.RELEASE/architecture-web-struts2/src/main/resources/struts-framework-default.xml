@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory.spring.autoWire" value="name" />
+	<constant name="struts.freemarker.manager.classname" value="freemarkerManager" />
+	<constant name="struts.multipart.maxSize" value="20000000" />
+
+	<package name="framework-default" extends="struts-default">
+	
+		<!-- Result Type Overrides and Additions -->
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+			<result-type name="dispatcher" class="org.apache.struts2.dispatcher.ServletDispatcherResult" default="true" />
+			<result-type name="freemarker" class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerResult" />			
+			<result-type name="redirect" class="org.apache.struts2.dispatcher.ServletRedirectResult" />
+			<result-type name="redirectAction" class="org.apache.struts2.dispatcher.ServletActionRedirectResult" />
+			<result-type name="stream" class="org.apache.struts2.dispatcher.StreamResult" />
+			<result-type name="xslt" class="org.apache.struts2.views.xslt.XSLTResult" />
+			<result-type name="plainText" class="org.apache.struts2.dispatcher.PlainTextResult" />
+			<result-type name="httpheader" class="org.apache.struts2.dispatcher.HttpHeaderResult" />	
+		</result-types>
+		
+		<!-- Interceptor overrides and additions -->
+		<interceptors>
+			<interceptor name="locale" class="architecture.ee.web.struts2.interceptor.LocaleInterceptor" />
+			<interceptor name="outputFormat" class="architecture.ee.web.struts2.interceptor.OutputFormatInterceptor" />
+			<interceptor name="json" class="org.apache.struts2.json.JSONInterceptor" />
+			<interceptor name="referer" class="architecture.ee.web.struts2.interceptor.RefererInterceptor" />
+            <interceptor name="website" class="architecture.ee.web.struts2.interceptor.WebSiteInterceptor" />
+            
+			<interceptor-stack name="defaultStack">
+				<interceptor-ref name="exception">
+					<param name="logEnabled">true</param>
+					<param name="logLevel">DEBUG</param>
+				</interceptor-ref>
+				<interceptor-ref name="referer" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="website" />
+				<!-- <interceptor-ref name="chain"/>-->
+				<interceptor-ref name="staticParams"/>
+				<interceptor-ref name="params" />
+				<interceptor-ref name="outputFormat" />
+				<interceptor-ref name="locale" />
+				<interceptor-ref name="validation" />	
+			</interceptor-stack>		
+		</interceptors>
+				
+		<default-interceptor-ref name="defaultStack" />
+		
+		<global-results>
+			<result name="redirect" type="redirect">${url}</result>	
+            <result name="notfound" type="httpheader">
+                <param name="status">404</param>        
+            </result>
+            <result name="error" >/includes/jsp/error.jsp</result>                                      
+		</global-results>
+
+        <global-exception-mappings>            
+			<exception-mapping exception="java.lang.Exception" result="error"/> 
+			<exception-mapping exception="java.lang.Error"        result="error"/> 
+			<exception-mapping exception="java.lang.Throwable" result="error"/> 
+        </global-exception-mappings>
+        		
+	</package>
+	
+	<package name="framework-actions" extends="framework-default" namespace="/">
+		
+		<default-interceptor-ref name="defaultStack" />
+		<!-- 
+		<action name="main" class="architecture.ee.web.community.struts2.action.MainAction">
+			<result name="success">/main.jsp</result>
+			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
+			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
+		</action>			
+		
+		<action name="profile" class="architecture.ee.web.struts2.action.MyPageAction">
+			<result name="homepage" type="freemarker">/html/my-profile.ftl</result>
+		</action>		
+		-->				
+	</package>
+
+</struts>
