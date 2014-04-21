@@ -348,15 +348,13 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 		return success();
 	}
 
-	protected void updateTargetGroupProperties(Group group, Map<String, String> properties) throws GroupNotFoundException, GroupAlreadyExistsException {
-		if (properties.size() > 0) {
+	protected void updateTargetGroupProperties(Group group, Map<String, String> properties) throws GroupNotFoundException, GroupAlreadyExistsException {		
+		if (properties.size() > 0 || (properties.size() == 0 && group.getProperties().size() > 0)) {
 			group.setProperties(properties);
 			this.targetGroup = group;
 			groupManager.updateGroup(group);
 		}
 	}
-	
-	
 	
     @Override
     public String execute() throws Exception {  

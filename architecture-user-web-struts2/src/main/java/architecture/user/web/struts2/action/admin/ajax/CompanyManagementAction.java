@@ -188,11 +188,13 @@ public class CompanyManagementAction extends FrameworkActionSupport  {
 	}
 
 	protected void updateTargetCompanyProperties(Company group, Map<String, String> properties) throws CompanyNotFoundException, CompanyAlreadyExistsException {
-		if (properties.size() > 0) {
+		
+		if (group.getProperties().size() > 0  || properties.size() > 0) {
 			group.setProperties(properties);
 			this.targetCompany = group;
 			companyManager.updateCompany(group);
 		}
+		
 	}
     public String execute() throws Exception {      	
         return success();
