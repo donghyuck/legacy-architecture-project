@@ -78,33 +78,7 @@
 				</param>
 			</result>
 		</action>
-
-			
-		<!--
-		<action name="get-company-menu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
-			<result name="json-success"  type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">targetCompanyMenu.properties</param>
-			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">
-				targetCompanyMenu.*
-				</param>
-			</result>
-		</action>
-
-
-		<action name="create-menu" method="createMenu"  class="architecture.user.web.struts2.action.admin.ajax.MenuManagementAction">
-			<result name="json-success" type="json">
-			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">targetMenu.properties</param>
-			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">
-				targetMenu.*
-				</param>
-			</result>		
-		</action>				
-		-->
-			
+		
 		<action name="update-menu" method="updateMenu"  class="architecture.ee.web.struts2.action.admin.ajax.MenuManagementAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
@@ -146,9 +120,6 @@
 			</result>		
 		</action>		
 
-
-
-						
 		<action name="view-system-details" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
