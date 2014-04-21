@@ -15,9 +15,11 @@
  */
 package architecture.ee.web.struts2.action.admin.ajax;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import architecture.common.util.StringUtils;
 import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuComponent;
@@ -35,11 +37,7 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	private Long menuId = -1L;
 	private Long targetWebSiteId = -1L;
 	private WebSite targetWebSite = null;
-	
-	
-	
-	
-	
+		
 	//private CompanyManager companyManager ;
 	
 	
@@ -129,7 +127,9 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	}
 
 	public MenuComponent getTargetMenuComponent( ) throws MenuNotFoundException {
+		
 		return getMenuRepository().getMenuComponent(getTargetMenu(), menuName);
+	
 	}
 	
 	public WebSite getTargetWebSite() throws WebSiteNotFoundException {		
@@ -151,7 +151,32 @@ public class MenuManagementAction  extends FrameworkActionSupport {
 	}
 	
 	public MenuComponent getTargetWebSiteMenuComponent() throws MenuNotFoundException, WebSiteNotFoundException {
-		return getMenuRepository().getMenuComponent(getTargetWebSiteMenu(), menuName);
+		MenuComponent comp = getMenuRepository().getMenuComponent(getTargetWebSiteMenu(), menuName);		
+		if( StringUtils.isNotEmpty( comp.getRoles()  )){
+			for( String role : StringUtils.split( comp.getRoles(), ',' ) ){
+				if(! request.isUserInRole(role) ){
+					comp.removeChildren();					
+				}					
+			}
+		}
+		checkRequiredRoles( comp.getComponents() );
+		return comp;
+	}
+	
+	private void checkRequiredRoles (List<MenuComponent> items){		
+		List<MenuComponent> list = new ArrayList<MenuComponent>();
+		for(MenuComponent item : items){
+			if( StringUtils.isNotEmpty( item.getRoles()) ){
+				for( String role : StringUtils.split( item.getRoles(), ',' ) ){
+					if(! request.isUserInRole(role) ){
+						list.add(item);	
+					}else{	
+						checkRequiredRoles(item.getComponents());
+					}
+				}
+			}
+		}
+		items.removeAll(list);
 	}
 
 	

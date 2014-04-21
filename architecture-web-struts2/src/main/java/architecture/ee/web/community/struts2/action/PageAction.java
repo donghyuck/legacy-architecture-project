@@ -20,9 +20,9 @@ import java.io.StringWriter;
 
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
-import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
+import architecture.ee.web.community.content.Content;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class PageAction extends FrameworkActionSupport {

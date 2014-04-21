@@ -24,23 +24,23 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.impl.ImageImpl;
 
 
-public class MyDomainImageAction extends MyImageAction  {
+public class MyWebSiteImageAction extends MyImageAction  {
 
-	private static final  int DOMAIN_OBJEDT_TYPE = 1 ;
+	private static final  int WEBSITE_OBJEDT_TYPE = 30 ;
 
 	public int getTotalTargetImageCount(){
 		if( getUser().getUserId() < 1 )
 			return 0 ;
-		return getImageManager().getTotalImageCount(DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId());
+		return getImageManager().getTotalImageCount(WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId());
 	}
 	
 	public List<Image> getTargetImages(){    	
     	if( getUser().getUserId() < 1 )
     		return Collections.EMPTY_LIST;    	
         if( getPageSize() > 0 ){
-            return getImageManager().getImages(DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId(), getStartIndex(),getPageSize());            
+            return getImageManager().getImages(WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId(), getStartIndex(),getPageSize());            
         }else{            
-            return getImageManager().getImages(DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId());
+            return getImageManager().getImages(WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId());
         }
     }	
 
@@ -49,7 +49,7 @@ public class MyDomainImageAction extends MyImageAction  {
 			Image imageToUse;
 			if( getImageId()< 0  ){	
 				File fileToUse = getUploadImage();							
-				imageToUse = getImageManager().createImage( DOMAIN_OBJEDT_TYPE, getUser().getCompany().getCompanyId(),  getUploadImageFileName(),  getUploadImageContentType(),  fileToUse);					
+				imageToUse = getImageManager().createImage( WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId(),  getUploadImageFileName(),  getUploadImageContentType(),  fileToUse);					
 				extractMetadata( imageToUse, fileToUse);				
 				setImageId ( getImageManager().saveImage(imageToUse).getImageId() );					
 			}else{
@@ -64,30 +64,6 @@ public class MyDomainImageAction extends MyImageAction  {
 			}		
 		}
 		return success();
-	}
-	
-	/* (비Javadoc)
-	 * @see architecture.ee.web.community.struts2.action.ajax.MyImageAction#deleteImage()
-	 */
-	@Override
-	public String deleteImage() throws Exception {
-		return super.deleteImage();
-	}
-
-	/* (비Javadoc)
-	 * @see architecture.ee.web.community.struts2.action.ajax.MyImageAction#updateImageProperties()
-	 */
-	@Override
-	public String updateImageProperties() throws Exception {
-		return super.updateImageProperties();
-	}
-
-	/* (비Javadoc)
-	 * @see architecture.ee.web.community.struts2.action.ajax.MyImageAction#deleteImageProperties()
-	 */
-	@Override
-	public String deleteImageProperties() throws Exception {
-		return super.deleteImageProperties();
 	}
 	
 }
