@@ -26,7 +26,7 @@ import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.community.announce.Announce;
 
-public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Announce {
+public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements Announce {
 
 	private Long announceId;
 	private int objectType ;
@@ -44,7 +44,7 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 	/**
 	 * 
 	 */
-	public AnnounceImpl() {
+	public DefaultAnnounce() {
 		announceId = -1L;
 		subject = "";
 		attachments = new ArrayList<Attachment>();
@@ -60,7 +60,7 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 	/**
 	 * @param announceId
 	 */
-	public AnnounceImpl(Long announceId) {
+	public DefaultAnnounce(Long announceId) {
 		this.announceId = announceId;
 		subject = "";
 		attachments = new ArrayList<Attachment>();
@@ -79,7 +79,7 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 	 * @param objectId
 	 * @param user
 	 */
-	public AnnounceImpl(Long announceId, int objectType, Long objectId, User user) {
+	public DefaultAnnounce(Long announceId, int objectType, Long objectId, User user) {
 		this.announceId = announceId;
 		this.objectType = objectType;
 		this.objectId = objectId;
@@ -282,7 +282,7 @@ public class AnnounceImpl extends NoNamedEntityModelObjectSupport implements Ann
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("AnnounceImpl [");
+		builder.append("DefaultAnnounce [");
 		if (announceId != null) {
 			builder.append("announceId=");
 			builder.append(announceId);

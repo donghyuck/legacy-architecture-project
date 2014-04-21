@@ -38,7 +38,7 @@ import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.dao.AnnounceDao;
 
-public class AnnounceManagerImpl implements AnnounceManager, EventSource {
+public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 	protected Log log = LogFactory.getLog(getClass());	
 	private EventPublisher eventPublisher;
 	
@@ -106,12 +106,12 @@ public class AnnounceManagerImpl implements AnnounceManager, EventSource {
 
 	public Announce createAnnounce(User user) {
 		// TODO 자동 생성된 메소드 스텁
-		AnnounceImpl impl = new AnnounceImpl(-1L, 0, -1L , user);
+		DefaultAnnounce impl = new DefaultAnnounce(-1L, 0, -1L , user);
 		return impl;
 	}
 
 	public Announce createAnnounce(User user, int objectType, long objectId) {
-		AnnounceImpl impl = new AnnounceImpl(-1L, objectType, objectId , user);
+		DefaultAnnounce impl = new DefaultAnnounce(-1L, objectType, objectId , user);
 		return impl;
 	}
 
