@@ -29,8 +29,8 @@ import org.springframework.jdbc.core.support.SqlLobValue;
 import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentNotFoundException;
+import architecture.ee.web.community.content.Content;
 import architecture.ee.web.community.dao.ContentDao;
 import architecture.ee.web.community.impl.ContentImpl;
 
@@ -167,7 +167,7 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 				new SqlParameterValue(Types.NUMERIC, content.getContentId()));
 		
 		setContentProperties(content.getContentId(), content.getProperties());
-		//saveContentBody(content);		
+		//saveContentBody(architecture.ee.web.community.content);		
 	}
 	public void insertContent(Content content) {
 		long contentId = nextId();
@@ -186,7 +186,7 @@ public class JdbcContentDao extends ExtendedJdbcDaoSupport implements ContentDao
 				new SqlParameterValue(Types.DATE, content.getModifiedDate()));		
 		
 		setContentProperties(content.getContentId(), content.getProperties());
-		//saveContentBody(content);
+		//saveContentBody(architecture.ee.web.community.content);
 	}
 	
 	
