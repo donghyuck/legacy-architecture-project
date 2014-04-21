@@ -30,6 +30,7 @@ import architecture.common.user.UserTemplate;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.site.DefaultWebSite;
+import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
@@ -50,7 +51,8 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 			site.setDisplayName(rs.getString("DISPLAY_NAME"));
 			site.setAllowAnonymousAccess(rs.getInt("PUBLIC_SHARED") == 1 ? true : false);
 			site.setEnabled(rs.getInt("ENABLED") == 1 ? true : false );
-			site.setUrl(rs.getString("URL"));						
+			site.setUrl(rs.getString("URL"));			
+			site.setMenu( new DefaultMenu( rs.getLong("MENU_ID") ) );
 			site.setCompany( new CompanyTemplate( rs.getLong("COMPANY_ID") ) );
 			site.setUser( new UserTemplate( rs.getLong("USER_ID") ) );	
 			site.setCreationDate(rs.getTimestamp("CREATION_DATE"));
@@ -157,6 +159,7 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 				new SqlParameterValue(Types.NUMERIC, webSite.isAllowAnonymousAccess() ? 1: 0),
 				new SqlParameterValue(Types.NUMERIC, webSite.isEnabled() ? 1 : 0),
 				new SqlParameterValue(Types.NUMERIC, webSite.getCompany().getCompanyId()),
+				new SqlParameterValue(Types.NUMERIC, webSite.getMenu().getMenuId()),
 				new SqlParameterValue(Types.NUMERIC, webSite.getUser().getUserId()),
 				new SqlParameterValue(Types.DATE, webSite.getModifiedDate()),
 				new SqlParameterValue(Types.DATE, webSite.getCreationDate())
@@ -173,6 +176,7 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 				new SqlParameterValue(Types.VARCHAR, webSite.getUrl()),
 				new SqlParameterValue(Types.NUMERIC, webSite.isAllowAnonymousAccess() ? 1: 0),
 				new SqlParameterValue(Types.NUMERIC, webSite.isEnabled() ? 1 : 0),
+				new SqlParameterValue(Types.NUMERIC, webSite.getMenu().getMenuId()),
 				new SqlParameterValue(Types.TIMESTAMP, webSite.getModifiedDate()),
 				new SqlParameterValue (Types.NUMERIC, webSite.getWebSiteId() ) );			
 		setWebSiteProperties(webSite.getWebSiteId(), webSite.getProperties());				

@@ -19,7 +19,6 @@ import java.util.List;
 
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.community.PhotoNotFoundException;
 
 public interface PhotoStreamsManager {
 

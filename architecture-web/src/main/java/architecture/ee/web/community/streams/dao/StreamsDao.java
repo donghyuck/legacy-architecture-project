@@ -18,8 +18,8 @@ package architecture.ee.web.community.streams.dao;
 import java.util.List;
 
 import architecture.ee.web.attachment.Image;
-import architecture.ee.web.community.PhotoNotFoundException;
 import architecture.ee.web.community.streams.Photo;
+import architecture.ee.web.community.streams.PhotoNotFoundException;
 
 public interface StreamsDao {
 	

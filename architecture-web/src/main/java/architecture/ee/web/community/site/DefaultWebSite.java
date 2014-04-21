@@ -23,6 +23,8 @@ import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
+import architecture.ee.web.navigator.DefaultMenu;
+import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.site.WebSite;
 
 public class DefaultWebSite extends BaseModelObjectSupport  implements WebSite {
@@ -41,6 +43,8 @@ public class DefaultWebSite extends BaseModelObjectSupport  implements WebSite {
 	
 	private String url;
 		
+	private Menu menu;
+	
 	/**
 	 * 
 	 * @param name
@@ -57,6 +61,7 @@ public class DefaultWebSite extends BaseModelObjectSupport  implements WebSite {
 		this.enabled = enabled;
 		this.allowAnonymousAccess = allowAnonymousAccess;
 		this.user = user;
+		this.menu = new DefaultMenu();
 		this.company = company;
 		this.url = url;
 		this.setName(name);
@@ -72,6 +77,7 @@ public class DefaultWebSite extends BaseModelObjectSupport  implements WebSite {
 		this.enabled = enabled;
 		this.allowAnonymousAccess = allowAnonymousAccess;
 		this.user = user;
+		this.menu = new DefaultMenu();
 		this.company = user.getCompany();
 		this.url = url;
 		this.setName(name);
@@ -185,6 +191,22 @@ public class DefaultWebSite extends BaseModelObjectSupport  implements WebSite {
 	 */
 	public void setWebSiteId(long webSiteId) {
 		this.webSiteId = webSiteId;
+	}
+
+	
+	
+	/**
+	 * @return menu
+	 */
+	public Menu getMenu() {
+		return menu;
+	}
+
+	/**
+	 * @param menu 설정할 menu
+	 */
+	public void setMenu(Menu menu) {
+		this.menu = menu;
 	}
 
 	public int getModelObjectType() {
