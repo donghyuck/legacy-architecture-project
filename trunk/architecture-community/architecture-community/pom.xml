@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>architecture.community</groupId>
+  <artifactId>architecture-community</artifactId>
+  <version>1.0.0.RELEASE</version>
+  <name>APPLICATION WEB COMMUNITY</name>
+  <parent>
+  	<groupId>architecture.parent</groupId>
+  	<artifactId>architecture-parent</artifactId>
+  	<version>1.0.0.RELEASE</version>
+  </parent>
+  <description>웹 어플리케이션 개발에 필수적인 기능을 포함하는 프로토타입 형식의 웹 응용프로그램.</description>
+  <scm>
+  	<url>https://power-j.googlecode.com/svn/trunk/architecture-community</url>
+  </scm>
+  <dependencies>
+  	<dependency>
+  		<groupId>architecture</groupId>
+  		<artifactId>architecture-web</artifactId>
+  		<version>1.1.0.RELEASE</version>
+  	</dependency>
+  </dependencies>
+</project>
