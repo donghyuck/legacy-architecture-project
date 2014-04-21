@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<groupId>architecture.web</groupId>
 	<artifactId>architecture-web</artifactId>
-	<version>1.0.5.RELEASE</version>
+	<version>1.1.0.RELEASE</version>
 	<name>APPLICATION WEB ARCHITECTURE</name>
 	<description>웹 어플리케이션 개발을 위한 아키텍처</description>
 	<scm>
