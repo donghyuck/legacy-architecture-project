@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_COMMUNITY</name>
+    <version>2.0</version>
+    <description>Queries for COMMUNITY COMPONENTS</description>
+	<!--  SOCIAL  -->
+ <sql-query name="SELECT_SOCIAL_ACCOUNT_BY_ID" description="ID로 쇼셜계정  조회"><![CDATA[    
+	SELECT 
+		ACCOUNT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		SOCIAL_PROVIDER,
+		ACCESS_TOKEN,
+		ACCESS_SECRET,
+		USERNAME,
+		SIGNED,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_SOCIAL_ACCOUNT
+    WHERE 
+    	ACCOUNT_ID = ?	    
+    ]]></sql-query>
+
+	<sql-query name="CREATE_SOCIAL_ACCOUNT" description="SOCIAL_ACCOUNT 생성"><![CDATA[    
+  		INSERT INTO V2_SOCIAL_ACCOUNT (
+			ACCOUNT_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			SOCIAL_PROVIDER,
+			ACCESS_TOKEN,
+			ACCESS_SECRET,
+			USERNAME,
+			SIGNED,
+			CREATION_DATE,
+			MODIFIED_DATE
+		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ?, ?, ? )
+    ]]></sql-query>
+    
+	<sql-query name="DELETE_SOCIAL_ACCOUNT_BY_ID" description="SOCIAL_ACCOUNT  삭제"><![CDATA[    
+ 		DELETE FROM V2_SOCIAL_ACCOUNT WHERE ACCOUNT_ID = ?
+    ]]></sql-query>
+	
+	<sql-query name="UPDATE_SOCIAL_ACCOUNT" description="ID로 SOCIAL_ACCOUNT 조회"><![CDATA[    
+  		UPDATE V2_SOCIAL_ACCOUNT SET
+	  		ACCESS_TOKEN = ?,
+			ACCESS_SECRET = ?,
+			MODIFIED_DATE = ?
+		WHERE ACCOUNT_ID = ?
+    ]]></sql-query>
+    <sql-query name="SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 SOCIAL_ACCOUNT  아이디 조회"><![CDATA[    
+    SELECT 
+	  		ACCOUNT_ID
+    FROM 
+    	V2_SOCIAL_ACCOUNT
+    WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ? 
+    ]]></sql-query>       
+
+    <sql-query name="SELECT_SOCIAL_ACCOUNT_IDS_BY_OBJECT_TYPE_AND_USERNAME" description="OBJECT_TYPE, USERNAME  값으로 SOCIAL_ACCOUNT  아이디 조회"><![CDATA[    
+    SELECT 
+	  		ACCOUNT_ID
+    FROM 
+    	V2_SOCIAL_ACCOUNT
+    WHERE 
+    	OBJECT_TYPE = ?	AND USERNAME = ?
+    ]]></sql-query>       
+    
+        
+    <!--  ANNOUNCE-->	
+	<sql-query name="SELECT_ANNOUNCE_BY_ID" description="SELECT_ANNOUNCE_BY_ID"><![CDATA[
+	SELECT 
+		ANNOUNCE_ID,
+		OBJECT_TYPE,
+		OBJECT_ID, 		
+		USER_ID,	 		
+		SUBJECT,
+		BODY,
+		START_DATE,
+		END_DATE,
+		STATUS,
+		CREATION_DATE,
+		MODIFIED_DATE
+	FROM V2_ANNOUNCE
+	WHERE ANNOUNCE_ID = ?
+	]]></sql-query>
+	<sql-query name="UPDATE_ANNOUNCE" description="UPDATE_ANNOUNCE"><![CDATA[
+ 	UPDATE V2_ANNOUNCE SET 		
+		SUBJECT = ?,
+		BODY = ?,
+	  	START_DATE = ?,
+	  	END_DATE = ?,
+		MODIFIED_DATE = ?
+	WHERE ANNOUNCE_ID = ?	
+	]]></sql-query>
+	<sql-query name="INSERT_ANNOUNCE" description="INSERT ANNOUNCE"><![CDATA[
+    INSERT INTO V2_ANNOUNCE (
+		ANNOUNCE_ID,
+		OBJECT_TYPE,
+		OBJECT_ID, 		
+		USER_ID,	 		
+		SUBJECT,
+		BODY,
+		START_DATE,
+		END_DATE,
+		STATUS,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( ?,?,?,?,?,?,?,?,0,?,? )    	
+	]]></sql-query>
+	<sql-query name="DELETE_ANNOUNCE" description="DELETE_ANNOUNCE"><![CDATA[
+	DELETE FROM V2_ANNOUNCE WHERE ANNOUNCE_ID = ?
+	]]></sql-query>			
+	<sql-query name="SELECT_ANNOUNCE_IDS_BY_USER_ID" description="SELECT_ANNOUNCE_IDS_BY_USER_ID"><![CDATA[
+	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE WHERE USER_ID = ? 
+	order by MODIFIED_DATE desc
+	]]></sql-query>		
+	<sql-query name="SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_ANNOUNCE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	order by MODIFIED_DATE desc
+	]]></sql-query>		
+	<sql-query name="SELECT_ALL_ANNOUNCE_IDS" description="SELECT_ALL_ANNOUNCE_IDS"><![CDATA[
+	SELECT ANNOUNCE_ID FROM V2_ANNOUNCE 
+	order by MODIFIED_DATE desc
+	]]></sql-query>			
+    <!--  STREMAS PHOTO -->
+	<sql-query name="SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID" description="SELECT_STREAM_PHOTO_IDS_BY_IMAGE_ID"><![CDATA[
+	SELECT 
+		EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS WHERE IMAGE_ID = ?
+	]]></sql-query>
+	<sql-query name="SELECT_ALL_STREAM_PHOTO_IDS" description="SELECT_ALL_STREAM_PHOTO_IDS"><![CDATA[
+	SELECT 
+		EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS	
+	]]></sql-query>
+	<sql-query name="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE" description="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE"><![CDATA[
+	SELECT 
+		T1.EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS T1 , V2_IMAGE T2		
+	WHERE 
+    T1.IMAGE_ID = T2.IMAGE_ID 
+    AND T2.OBJECT_TYPE = ?
+	]]></sql-query>
+	<sql-query name="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_STREAM_PHOTO_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT 
+		T1.EXTERNAL_ID
+	FROM V2_IMAGE_STREAMS T1 , V2_IMAGE T2		
+	WHERE 
+    T1.IMAGE_ID = T2.IMAGE_ID 
+    AND T2.OBJECT_TYPE = ?
+    AND T2.OBJECT_ID = ?
+	]]></sql-query>
+	<sql-query name="SELECT_STREAM_PHOTO_BY_ID" description="SELECT_STREAM_PHOTO_BY_ID"><![CDATA[
+	SELECT 
+		EXTERNAL_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED,
+		CREATOR,
+		CREATION_DATE,
+		MODIFIED_DATE
+	FROM V2_IMAGE_STREAMS	
+	WHERE 
+		EXTERNAL_ID = ? 
+	]]></sql-query>
+	<sql-query name="CREATE_STREAM_PHOTO" description="CREATE_STREAM_PHOTO"><![CDATA[
+	INSERT INTO V2_IMAGE_STREAMS (
+		EXTERNAL_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED,
+		CREATOR,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES (
+		?,?,?,?,?,?
+	)		
+	]]></sql-query>
+	<sql-query name="DELETE_STREAM_PHOTO_BY_ID" description="DELETE_IMAGE_STREAMS_BY_ID"><![CDATA[
+	DELETE FROM V2_IMAGE_STREAMS WHERE EXTERNAL_ID = ?
+	]]></sql-query>
+	
+	<sql-query name="DELETE_STREAM_PHOTOS_BY_IMAGE_ID" description="DELETE_STREAM_PHOTOS_BY_IMAGE_ID"><![CDATA[
+	DELETE FROM V2_IMAGE_STREAMS WHERE IMAGE_ID = ?
+	]]></sql-query>
+		
+	<sql-query name="COUNT_ALL_STREAM_PHOTO" description="COUNT_ALL_STREAM_PHOTO"><![CDATA[
+	SELECT 
+		count (EXTERNAL_ID)
+	FROM V2_IMAGE_STREAMS 	
+	]]></sql-query>
+	<sql-query name="COUNT_STREAM_PHOTO_BY_OBJECT_TYPE" description="COUNT_STREAM_PHOTO_BY_OBJECT_TYPE"><![CDATA[
+	SELECT 
+		count (T1.EXTERNAL_ID)
+	FROM V2_IMAGE_STREAMS T1 , V2_IMAGE T2		
+	WHERE 
+    T1.IMAGE_ID = T2.IMAGE_ID 
+    AND T2.OBJECT_TYPE = ?	
+	]]></sql-query>
+	<sql-query name="COUNT_STREAM_PHOTO_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_STREAM_PHOTO_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT 
+		count (T1.EXTERNAL_ID)
+	FROM V2_IMAGE_STREAMS T1 , V2_IMAGE T2		
+	WHERE 
+    T1.IMAGE_ID = T2.IMAGE_ID 
+    AND T2.OBJECT_TYPE = ?
+    AND T2.OBJECT_ID = 1?
+	]]></sql-query>
+	
+
+	<!-- PROFILE PHOTO -->
+	<sql-query name="DELETE_PROFILE_IMAGE_BY_ID" description=""><![CDATA[
+	DELETE FROM V2_PROFILE_IMAGE  
+	WHERE PROFILE_IMAGE_ID = ?
+	]]></sql-query>       
+
+	<sql-query name="DELETE_PROFILE_IMAGE_DATA_BY_ID" description=""><![CDATA[
+	DELETE FROM V2_PROFILE_IMAGE_DATA  
+	WHERE PROFILE_IMAGE_ID = ?	
+	]]></sql-query>
+	
+	<sql-query name="INSERT_PROFILE_IMAGE" description=""><![CDATA[
+	INSERT INTO V2_PROFILE_IMAGE (
+		PROFILE_IMAGE_ID,
+		USER_ID,
+		FILE_NAME,
+		FILE_SIZE,
+		CONTENT_TYPE,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( ?,?,?,?,?,?,? )
+		
+	]]></sql-query>
+	
+	<sql-query name="INSERT_EMPTY_PROFILE_IMAGE_DATA" description=""><![CDATA[
+	INSERT INTO V2_PROFILE_IMAGE_DATA (PROFILE_IMAGE_ID, PROFILE_IMAGE_DATA) VALUES (?, EMPTY_BLOB())
+	]]></sql-query>
+	
+	<sql-query name="INSERT_PROFILE_IMAGE_DATA" description=""><![CDATA[
+	INSERT V2_PROFILE_IMAGE_DATA  (PROFILE_IMAGE_ID, PROFILE_IMAGE_DATA) VALUES (?, ?)
+	]]></sql-query>
+	
+	<sql-query name="UPDATE_PROFILE_IMAGE_DATA" description=""><![CDATA[
+	UPDATE V2_PROFILE_IMAGE_DATA SET PROFILE_IMAGE_DATA = ? WHERE PROFILE_IMAGE_ID = ?
+	]]></sql-query>
+	
+	<sql-query name="SELECT_PRIMARY_PROFILE_IMAGE_ID_BY_USER" description=""><![CDATA[
+	SELECT 
+		PROFILE_IMAGE_ID
+	FROM V2_PROFILE_IMAGE 
+	WHERE 
+		PRIMARY_IMAGE = 1 AND
+		USER_ID = ?			
+	]]></sql-query>	
+			
+	<sql-query name="SELECT_PROFILE_IMAGE_BY_ID" description=""><![CDATA[
+	SELECT 
+		PROFILE_IMAGE_ID,
+		USER_ID,
+		PRIMARY_IMAGE,
+		FILE_NAME,
+		FILE_SIZE,
+		CONTENT_TYPE,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_PROFILE_IMAGE WHERE PROFILE_IMAGE_ID = ?	
+	]]></sql-query>						
+
+	<sql-query name="SELECT_PROFILE_IMAGE_IDS_BY_USER" description=""><![CDATA[
+	SELECT PROFILE_IMAGE_ID FROM V2_PROFILE_IMAGE WHERE USER_ID = ?
+	]]></sql-query>		
+	
+	<sql-query name="COUNT_PROFILE_IMAGE_BY_USER" description=""><![CDATA[
+	SELECT COUNT(PROFILE_IMAGE_ID) FROM V2_PROFILE_IMAGE WHERE USER_ID = ?
+	]]></sql-query>			
+
+	<sql-query name="SELECT_PROFILE_IMAGE_DATA_BY_ID" description=""><![CDATA[
+	SELECT PROFILE_IMAGE_DATA FROM V2_PROFILE_IMAGE_DATA WHERE PROFILE_IMAGE_ID = ?
+	]]></sql-query>		
+
+	<sql-query name="RESET_PROFILE_IMAGE_BY_USER" description=""><![CDATA[
+	UPDATE V2_PROFILE_IMAGE 
+	SET PRIMARY_IMAGE = 0  
+	WHERE USER_ID = ?
+	]]></sql-query>		
+	
+	
+	<!--  WEBSITE  -->
+	<sql-query name="CREATE_WEBSITE" description=""><![CDATA[
+	INSERT INTO V2_WEBSITE (
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		MENU_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( ?,?,?,?,?,?,?,?,?,?,?,? )		
+	]]></sql-query>		
+	<sql-query name="UPDATE_WEBSITE" description=""><![CDATA[
+	UPDATE V2_WEBSITE SET
+		NAME = ?,		
+		DESCRIPTION = ?,
+		DISPLAY_NAME = ?,
+		URL = ?,
+		PUBLIC_SHARED = ?,
+		ENABLED = ?,		
+		MENU_ID = ?,
+		MODIFIED_DATE = ?
+	WHERE WEBSITE_ID = ?			
+	]]></sql-query>	
+	<sql-query name="SELECT_WEBSITE_BY_ID" description=""><![CDATA[
+	SELECT
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		MENU_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBSITE
+	WHERE WEBSITE_ID = ?
+	]]></sql-query>	
+	<sql-query name="SELECT_WEBSITE_BY_NAME" description=""><![CDATA[
+	SELECT
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		MENU_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBSITE
+	WHERE NAME = ?				
+	]]></sql-query>	
+	<sql-query name="SELECT_WEBSITE_BY_URL" description=""><![CDATA[
+	SELECT
+		WEBSITE_ID,
+		NAME,
+		DESCRIPTION,
+		DISPLAY_NAME,
+		URL,
+		PUBLIC_SHARED,
+		ENABLED,
+		COMPANY_ID,
+		MENU_ID,
+		USER_ID,
+		CREATION_DATE,
+		MODIFIED_DATE	
+	FROM V2_WEBSITE
+	WHERE URL = ?		
+	]]></sql-query>	
+	<sql-query name="COUNT_COMPANY_WEBSITE" description=""><![CDATA[
+	SELECT 
+		COUNT(	WEBSITE_ID )
+	FROM V2_WEBSITE
+	WHERE 
+		COMPANY_ID = ?
+	]]></sql-query>	
+	<sql-query name="SELECT_COMPANY_WEBSITE_IDS" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID
+	FROM V2_WEBSITE
+	WHERE 
+		COMPANY_ID = ?		
+	]]></sql-query>	
+	<sql-query name="SELECT_COMPANY_WEBSITE_IDS_BY_URL" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID
+	FROM V2_WEBSITE
+	WHERE 
+		URL LIKE ?				
+	]]></sql-query>	
+		<sql-query name="SELECT_COMPANY_WEBSITE_IDS_BY_NAME" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID
+	FROM V2_WEBSITE
+	WHERE 
+		NAME LIKE  = ?			
+	]]></sql-query>					
+	
+	
+	<!-- ANNOUNCE -->			
+	<sql-query name="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+	SELECT COUNT(ANNOUNCE_ID) FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>	
+</sqlset>
