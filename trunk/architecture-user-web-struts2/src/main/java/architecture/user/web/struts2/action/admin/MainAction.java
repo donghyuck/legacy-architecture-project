@@ -15,18 +15,59 @@
  */
 package architecture.user.web.struts2.action.admin;
 
+import architecture.common.user.Company;
+import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class MainAction extends FrameworkActionSupport  {
 
-	private Long companyId = 1L ;
-		
-    public Long getCompanyId() {
-		return companyId;
+	private Long targetCompanyId = -1L ;
+	
+	private Company targetCompany ;
+
+	private CompanyManager companyManager ;
+	
+	/**
+	 * @return targetCompanyId
+	 */
+	public Long getTargetCompanyId() {
+		return targetCompanyId;
 	}
 
-	public void setCompanyId(Long companyId) {
-		this.companyId = companyId;
+	/**
+	 * @param targetCompanyId 설정할 targetCompanyId
+	 */
+	public void setTargetCompanyId(Long targetCompanyId) {
+		this.targetCompanyId = targetCompanyId;
+	}
+	
+    public Company getTargetCompany() {
+
+		if (targetCompanyId == null)
+			log.warn("Edit profile for unspecified company.");
+		
+		if( this.targetCompanyId < 1 ){
+			targetCompanyId = getUser().getCompany().getCompanyId();			
+		}
+		
+		if(targetCompany == null){
+			try {
+				targetCompany = companyManager.getCompany( (targetCompanyId).longValue() );
+			} catch (CompanyNotFoundException e) {
+				log.warn((new StringBuilder()).append("Could not load company object for id: ").append(targetCompanyId).toString());
+				return null;
+			}
+		}
+		return targetCompany ;
+	}   
+
+    
+	/**
+	 * @param companyManager 설정할 companyManager
+	 */
+	public void setCompanyManager(CompanyManager companyManager) {
+		this.companyManager = companyManager;
 	}
 
 	@Override
