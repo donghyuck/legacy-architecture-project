@@ -24,19 +24,16 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.support.DatabaseMetaDataCallback;
 import org.springframework.jdbc.support.MetaDataAccessException;
 
 import architecture.common.jdbc.schema.Database;
 import architecture.common.jdbc.schema.DatabaseFactory;
 import architecture.common.jdbc.schema.DatabaseType;
-import architecture.common.lifecycle.DatabaseInfo;
 
 public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUtils {
 	
-	private static final Log log = LogFactory.getLog(JdbcUtils.class);
+//	/private static final Log log = LogFactory.getLog(JdbcUtils.class);
 		
 	public static DatabaseType getDatabaseType( DatabaseMetaData dbmd ) throws SQLException{
 		
