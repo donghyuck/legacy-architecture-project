@@ -15,9 +15,9 @@
  */
 package architecture.ee.web.community.struts2.action.admin.ajax;
 
-import architecture.ee.web.community.Content;
 import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
+import architecture.ee.web.community.content.Content;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class DocumentManagementAction extends FrameworkActionSupport {

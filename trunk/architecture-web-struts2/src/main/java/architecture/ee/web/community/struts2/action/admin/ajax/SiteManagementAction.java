@@ -23,18 +23,19 @@ import java.util.Map;
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
-import architecture.ee.web.attachment.Image;
+import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.site.WebSite;
-import architecture.ee.web.site.WebSiteAlreadyExistsExcaption;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
+import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 
 public class SiteManagementAction extends FrameworkActionSupport {
 
 	private Long targetCompanyId;
+	
 	private Long targetSiteId;
 	
 	private WebSite targetWebSite ;
@@ -89,7 +90,7 @@ public class SiteManagementAction extends FrameworkActionSupport {
 			if( targetSiteId < 1 )
 				targetWebSite = getWebSite();			
 			else
-				targetWebSite = webSiteManager.getWebSiteById(targetSiteId);
+				this.targetWebSite = webSiteManager.getWebSiteById(targetSiteId);
 		}
 		return targetWebSite;
 	}
@@ -176,7 +177,7 @@ public class SiteManagementAction extends FrameworkActionSupport {
 	}
 
 	protected void updateTargetImageProperties(WebSite image, Map<String, String> properties){
-		if (properties.size() > 0) {
+		if ( properties.size() > 0 ||  ( image.getProperties().size() > 0 &&  properties.size() == 0 ) ){
 			image.setProperties(properties);
 			this.targetWebSite = image;			
 			try {
@@ -189,6 +190,35 @@ public class SiteManagementAction extends FrameworkActionSupport {
 	public String execute() throws Exception {
 		return success();
 	}
+
+	public String updateSite() throws Exception {
+		return success();
+	}
 	
+	public String updateSiteMenu() throws Exception {
+			
+		DefaultMenu menuToUse = ParamUtils.getJsonParameter(request, "item", DefaultMenu.class);
+		log.debug( menuToUse.toString() );
+		
+		if( menuToUse.getMenuId() != WebSiteUtils.getDefaultMenuId() )
+		{
+			WebSite siteToUse = getTargetWebSite();
+			getMenuRepository().updateMenu(menuToUse);	
+			getMenuRepository().refershMenu(menuToUse);
+			if( menuToUse.getMenuId() != siteToUse.getMenu().getMenuId() ){
+				siteToUse.setMenu(menuToUse);
+				webSiteManager.updateWebSite(siteToUse);
+			}else{
+				webSiteManager.refreshWebSite(siteToUse);
+			}
+		}			
+		return success();
+	}
+	
+	 public static class WebSiteForm {
+		
+	 }
+	 
+
 	
 }
