@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="framework-user-actions" namespace="/accounts"  extends="framework-default" >			
+		
+		<default-interceptor-ref name="defaultStack" />		
+		
+		<action name="login" class="architecture.user.web.struts2.action.LoginAction">
+			<result name="input" >/login.jsp</result>
+		</action>
+		
+		<action name="signup" class="architecture.user.web.struts2.action.SignUpMainAction">
+			<result name="success" type="freemarker">/html/accounts/signup.ftl</result>		
+		</action>
+
+		<action name="check-username-available" class="architecture.user.web.struts2.action.ajax.SignUpAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				usernameAvailable
+				</param>
+			</result>	
+		</action>
+		
+		<action name="create-user"  method="createUser"  class="architecture.user.web.struts2.action.ajax.SignUpAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				targetUser.username
+				</param>
+			</result>
+		</action>
+				
+		<action name="view-image" class="architecture.user.web.struts2.action.ViewUserImageAction">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <!-- <param name="contentDisposition">attachment;filename="${targetImageFileName}"</param>-->
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>
+							
+		<action name="get-user" class="architecture.user.web.struts2.action.ajax.GetUserDetailsAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">currentUser.cachedSize, currentUser.modelObjectType, currentUser.password, currentUser.passwordHash, currentUser.primaryKey, currentUser.primaryKeyObject , currentUserProperty</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				currentUser.*,roles.*
+				</param>
+			</result>
+		</action>
+
+		<action name="get-user-roles" class="architecture.user.web.struts2.action.ajax.GetUserDetailsAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				roles.*
+				</param>
+			</result>
+		</action>
+				
+		<action name="get-user-token" class="architecture.user.web.struts2.action.ajax.GetUserDetailsAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				currentAuthToken.*
+				</param>
+			</result>
+		</action>
+		
+		<action name="get-user-props" class="architecture.user.web.struts2.action.ajax.GetUserDetailsAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">
+				currentUserProperty.*
+				</param>
+			</result>
+		</action>
+
+		<action name="save-user-image" class="architecture.ee.web.struts2.action.UploadImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetUserImage.inputStream</param>
+				<param name="includeProperties">
+				targetUserImage.*
+				</param>
+			</result>
+		</action>
+
+		<action name="get-user-attachements" class="architecture.user.web.struts2.action.ajax.UserAttachementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param>
+			    <param name="excludeProperties">userAttachments.inputStream</param>
+				<param name="includeProperties">
+				  userAttachments.*
+				</param>
+			</result>	
+		</action>	
+		
+		<action name="delete-user-attachment" method="deleteUserAttachment" class="architecture.user.web.struts2.action.ajax.UserAttachementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+				<param name="includeProperties">
+				currentUser.*
+				</param>
+			</result>
+		</action>
+					
+		<action name="save-user-attachments" class="architecture.user.web.struts2.action.ajax.UploadUserAttachmentAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 	    
+			    <param name="excludeProperties">targetAttachment.inputStream</param>
+				<param name="includeProperties">
+				targetAttachment.*
+				</param>
+			</result>
+		</action>
+								
+	</package>
+		
+</struts>
