@@ -13,23 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community;
+package architecture.ee.web.community.page;
 
-import java.util.List;
 
-import architecture.common.user.User;
-import architecture.ee.web.community.page.Content;
+public interface Page {
 
-public interface ContentManager {
+	public Long getPageId();
 	
-	public int getContentCount(User user);
+	public PageState getPageState();
 	
-	public abstract List<Content> getContents(User user);
+	public void setPageState();
 		
-	public abstract List<Content> getContents(User user, int startIndex, int maxResults);
+	public String getTitle();
 	
-	public abstract Content getContent(long contentId) throws ContentNotFoundException;
+	public void setTitle(String title);
+			
+	public String getBodyStrinDdg();
 	
-	public abstract void updateContent(Content content);
-	
+	public void setBodyString(String body);
+		
 }

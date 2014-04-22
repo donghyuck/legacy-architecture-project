@@ -13,27 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.content;
+package architecture.ee.web.community.page;
 
-import architecture.common.model.BaseModelObject;
-import architecture.common.user.User;
+import java.io.Serializable;
 
-
-public interface Content extends BaseModelObject {
+public interface BodyContent extends Cloneable, Serializable {
+	 
+	private long id;
 	
-	public Long getContentId();
+	private BodyType bodyType;
 	
-	public String getTitle();
-	
-	public void setTitle(String title);
-	
-	public String getBodyString();
-	
-	public void setBodyString(String body);
-	
-	public User getCreator();
-	
-	public User getModifier();
-	
-	
+	 private String body;
+	 
+	 
 }

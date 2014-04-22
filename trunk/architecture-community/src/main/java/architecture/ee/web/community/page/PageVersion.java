@@ -13,12 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.content;
+package architecture.ee.web.community.page;
 
-public interface Page {
+import java.util.Date;
 
-	public PageStatus getStatus();
+import architecture.common.user.User;
+
+public interface PageVersion {
+
+	public int getVersionNumber();
 	
-	public void setStatus(PageStatus status);
+	public void setVersionNumber(int versionNumber);
+	
+	public Page getPage();
+	
+	public void setCreator(User creator);
+	
+	public User getAuthor();
+	
+	public void setAuthor(User author);
+	
+	public PageState getPageState();
+	
+	public void setPageState(PageState state);
+		
+	public Date getCreationDate();
+
+	public void setCreationDate(Date creationDate) ;
+
+	public Date getModifiedDate() ;
+
+	public void setModifiedDate(Date modifiedDate) ;
 	
 }

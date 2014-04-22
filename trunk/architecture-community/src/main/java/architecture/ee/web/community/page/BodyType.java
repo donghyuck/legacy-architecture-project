@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.content;
+package architecture.ee.web.community.page;
 
 public enum BodyType {
 
-	RAW(1), XHTML(2);
+	RAW(1), XHTML(2), FREEMARKER(3), VELOCITY(4);
 
 	private int id;
 	
