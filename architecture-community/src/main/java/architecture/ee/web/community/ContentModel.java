@@ -18,7 +18,7 @@ import architecture.common.model.v2.DateModel;
 import architecture.common.model.v2.EntityModel;
 import architecture.common.model.v2.PropertyModel;
 import architecture.common.user.User;
-import architecture.ee.web.community.content.Content;
+import architecture.ee.web.community.page.Content;
 
 public interface ContentModel extends EntityModel<Content>, DateModel, PropertyModel {
 

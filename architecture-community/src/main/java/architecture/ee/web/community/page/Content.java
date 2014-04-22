@@ -13,23 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community;
+package architecture.ee.web.community.page;
 
-import java.util.List;
-
+import architecture.common.model.BaseModelObject;
 import architecture.common.user.User;
-import architecture.ee.web.community.page.Content;
 
-public interface ContentManager {
+
+public interface Content extends BaseModelObject {
 	
-	public int getContentCount(User user);
+	public Long getContentId();
 	
-	public abstract List<Content> getContents(User user);
-		
-	public abstract List<Content> getContents(User user, int startIndex, int maxResults);
+
 	
-	public abstract Content getContent(long contentId) throws ContentNotFoundException;
-	
-	public abstract void updateContent(Content content);
 	
 }

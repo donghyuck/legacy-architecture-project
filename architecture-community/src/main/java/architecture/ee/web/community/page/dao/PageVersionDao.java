@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.content;
+package architecture.ee.web.community.page.dao;
 
-public enum PageStatus {
+import architecture.ee.web.community.page.PageVersion;
 
-	DRAFT(0), PUBLISHED(1);
+public interface PageVersionDao {
 	
-	private int id;
+	public abstract void update (PageVersion pageVersion);
 	
-	private PageStatus(int id){
-		this.id = id ;
-	}
+	public abstract void delete (PageVersion pageVersion);
+	
+	public abstract PageVersion getPageVersionById( long pageId, int versionNumber);
 	
 }

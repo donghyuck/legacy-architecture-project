@@ -18,7 +18,7 @@ package architecture.ee.web.community.dao;
 import java.util.List;
 
 import architecture.ee.web.community.ContentNotFoundException;
-import architecture.ee.web.community.content.Content;
+import architecture.ee.web.community.page.Content;
 
 public interface ContentDao {
 
