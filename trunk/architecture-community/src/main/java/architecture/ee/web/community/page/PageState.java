@@ -17,7 +17,7 @@ package architecture.ee.web.community.page;
 
 public enum PageState {
 
-	INCOMPLETE("incomplete"), PUBLISHED("published"), ARCHIVED("archived"), DELETED("deleted");
+	INCOMPLETE("incomplete"), APPROVAL("approval"), PUBLISHED("published"), REJECTED("rejected"),  ARCHIVED("archived"), DELETED("deleted");
 
 	private String stage ;
 	

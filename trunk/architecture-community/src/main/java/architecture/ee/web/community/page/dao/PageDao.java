@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.page;
+package architecture.ee.web.community.page.dao;
 
-import java.io.Serializable;
+import architecture.ee.web.community.page.Page;
 
-public interface BodyContent extends Cloneable, Serializable {
+public interface PageDao {
 	
-	public long getBodyId();
+	public abstract void create(Page page);
 	
-	public void setBodyId(long bodyId);
-	 
-	public long getPageId();
-	 
-	public void setPageId(long pageId);
-	 
-	public BodyType getBodyType();
-	 
-	public void setBodyType(BodyType bodyType);
+	public abstract void update(Page page, boolean flag);
 	
-	public String getBodyText();
+	public abstract void delete(Page page);
 	
-	public void setBodyText(String bodyText);
-		 
+	public abstract Page getPageById(long pageId);
+	
+	public abstract Page getPageById(long pageId, int versionNumber);
+	
+	public abstract Page getPageByName(String name);
+	
+	public abstract Page getPageByName(String name, int versionNumber);
+	
+	public abstract Page getPageByTitle(int objectType, long objectId, String title);	
+	
 }
