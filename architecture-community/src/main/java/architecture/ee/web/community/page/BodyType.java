@@ -25,6 +25,13 @@ public enum BodyType {
 		this.id = id ;
 	}
 
+	/**
+	 * @return id
+	 */
+	public int getId() {
+		return id;
+	}
+
 	/* (비Javadoc)
 	 * @see java.lang.Enum#toString()
 	 */
@@ -40,7 +47,12 @@ public enum BodyType {
 	        case 2: // '\002'
 	            builder.append("XHTML");
 	            break;
-
+	        case 3: // '\002'
+	            builder.append("FREEMARKER");
+	            break;
+	        case 4: // '\002'
+	            builder.append("VELOCITY");
+	            break;	            
 	        default:
 	            builder.append("id=").append(id);
 	            break;
@@ -48,6 +60,12 @@ public enum BodyType {
 	        return builder.toString();
 	}
     
-
+	public static BodyType getBodyTypeById(int typeId){
+		for( BodyType type : BodyType.values()){
+			if( type.getId() == typeId)
+				return type;
+		}
+		return BodyType.RAW;
+	}
     
 }
