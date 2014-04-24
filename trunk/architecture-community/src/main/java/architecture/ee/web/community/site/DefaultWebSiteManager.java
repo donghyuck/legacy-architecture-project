@@ -22,6 +22,8 @@ import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
@@ -162,11 +164,13 @@ public class DefaultWebSiteManager implements WebSiteManager {
             return null;
     }
 
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void createWebSite(String name, String description, String displayName, String url, boolean allowAnonymousAccess, Company company, User user) throws WebSiteAlreadyExistsExcaption {		
 		DefaultWebSite site = new DefaultWebSite( name, description, displayName, url, allowAnonymousAccess, true, company, user);		
 		createWebSite(site);		
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void createWebSite(WebSite webSite) throws WebSiteAlreadyExistsExcaption {		
 		
 		if( StringUtils.isNotEmpty(webSite.getName()) &&  webSiteDao.findWebSitesByName(webSite.getName()).size() > 0 ){
@@ -180,6 +184,7 @@ public class DefaultWebSiteManager implements WebSiteManager {
 		webSiteDao.createWebSite(webSite);
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void updateWebSite(WebSite webSite) throws WebSiteAlreadyExistsExcaption, WebSiteNotFoundException {		
 		WebSite old = getWebSiteById(webSite.getWebSiteId());
 		if( !StringUtils.equals( old.getUrl(), webSite.getUrl())){

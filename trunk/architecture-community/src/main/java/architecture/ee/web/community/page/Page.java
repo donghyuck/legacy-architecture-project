@@ -18,10 +18,11 @@ package architecture.ee.web.community.page;
 import java.util.Date;
 import java.util.Map;
 
+import architecture.common.cache.Cacheable;
 import architecture.common.user.User;
 
 
-public interface Page {
+public interface Page extends Cacheable {
 
 	public Integer getObjectType();
 	
@@ -45,8 +46,6 @@ public interface Page {
 	
 	public PageState getPageState();
 	
-	public void setPageState();
-		
 	public String getTitle();
 	
 	public void setTitle(String title);

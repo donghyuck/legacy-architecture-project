@@ -16,7 +16,6 @@
 package architecture.ee.web.community.page;
 
 import architecture.common.model.BaseModelObject;
-import architecture.common.user.User;
 
 
 public interface Content extends BaseModelObject {

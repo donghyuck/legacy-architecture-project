@@ -32,9 +32,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.attachment.Image;
-import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.profile.ProfileImage;
 import architecture.ee.web.community.profile.ProfileManager;
 

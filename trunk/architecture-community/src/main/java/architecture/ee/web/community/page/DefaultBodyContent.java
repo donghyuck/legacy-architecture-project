@@ -26,9 +26,32 @@ public class DefaultBodyContent implements BodyContent {
 	private String bodyText;
 	
 	public DefaultBodyContent() {
+		this.bodyId = -1L;
+		this.pageId = -1L;
+		this.bodyType = BodyType.FREEMARKER;
 	}
 	
-	
+	public DefaultBodyContent(long pageId, String bodyText) {
+		this.bodyId = -1L;
+		this.pageId = pageId;
+		this.bodyType = BodyType.FREEMARKER;
+		this.bodyText = bodyText;
+	}	
+
+	/**
+	 * @param bodyId
+	 * @param pageId
+	 * @param bodyType
+	 * @param bodyText
+	 */
+	public DefaultBodyContent(long bodyId, long pageId, BodyType bodyType, String bodyText) {
+		this.bodyId = bodyId;
+		this.pageId = pageId;
+		this.bodyType = bodyType;
+		this.bodyText = bodyText;
+	}
+
+
 
 	/**
 	 * @return bodyText
