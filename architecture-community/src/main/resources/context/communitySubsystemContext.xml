@@ -39,7 +39,6 @@
 	<bean id="pageDao" class="architecture.ee.web.community.page.dao.jdbc.JdbcPageDao" parent="jdbcDaoSupport"  />		
 	<bean id="pageVersionDao" class="architecture.ee.web.community.page.dao.jdbc.JdbcPageVersionDao" parent="jdbcDaoSupport" />			
 		
-		
 	<bean id="webSiteDao" class="architecture.ee.web.community.site.dao.jdbc.JdbcWebSiteDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />			
 	<bean id="templateDao" class="architecture.ee.web.template.dao.jdbc.JdbcTemplateDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />	
 	
@@ -47,9 +46,6 @@
 	<bean id="socialNetworkDao" class="architecture.ee.web.community.social.dao.jdbc.JdbcSocialNetworkDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="photoStreamsDao" class="architecture.ee.web.community.streams.dao.jdbc.JdbcStreamsDao" parent="jdbcDaoSupport"  />	
 	<bean id="profileDao" class="architecture.ee.web.community.profile.dao.jdbc.JdbcProfileDao" parent="jdbcDaoSupport"  />	
-	<bean id="pageVersionManager" class="architecture.ee.web.community.page.DefaultPageVersionManager" 
-		depends-on="pageVersionDao"  	
-		p:pageDao-ref="pageVersionDao" />
 		
 	<bean id="pageManager" class="architecture.ee.web.community.page.DefaultPageManager" 
 		depends-on="pageDao, pageVersionDao"  
