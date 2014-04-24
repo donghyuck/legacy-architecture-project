@@ -20,24 +20,35 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.core.support.SqlLobValue;
 
+import architecture.common.user.SecurityHelper;
+import architecture.common.user.UserTemplate;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.page.BodyContent;
 import architecture.ee.web.community.page.BodyType;
 import architecture.ee.web.community.page.DefaultBodyContent;
+import architecture.ee.web.community.page.DefaultPage;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageState;
+import architecture.ee.web.community.page.PageVersion;
+import architecture.ee.web.community.page.PageVersionHelper;
 import architecture.ee.web.community.page.dao.PageDao;
 
 public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
@@ -45,7 +56,8 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	
 	private String sequencerName = "PAGE";
 	private int DEFAULT_PAGE_VERSION = 1;
-
+	
+	
 	private final RowMapper<BodyContent> bodyContentMapper = new RowMapper<BodyContent>(){
 		public BodyContent mapRow(ResultSet rs, int rowNum) throws SQLException {
 			DefaultBodyContent body = new DefaultBodyContent();
@@ -93,7 +105,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			page.setName(
 					(new StringBuilder()).append(
 						ApplicationHelper.getApplicationProperty("components.page.pagePrefix", "PAGE-")
-					).toString()
+					).append(nextPageId).toString()
 				);			
 		}		
 		
@@ -104,7 +116,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			new SqlParameterValue(Types.NUMERIC, page.getObjectId() ),
 			new SqlParameterValue(Types.VARCHAR, page.getName() ),
 			new SqlParameterValue(Types.NUMERIC, page.getVersionId()),
-			new SqlParameterValue(Types.NUMERIC, page.getUser()),
+			new SqlParameterValue(Types.NUMERIC, page.getUser().getUserId()),
 			new SqlParameterValue(Types.DATE, page.getCreationDate()),
 			new SqlParameterValue(Types.DATE, page.getModifiedDate())
 		);		
@@ -113,6 +125,10 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		
 		insertPageBody(page);
 		
+		insertProperties(page);
+	}
+	
+	private void insertProperties(Page page){
 		if( page.getProperties() != null && !page.getProperties().isEmpty() ){
 			Map<String, String> properties = page.getProperties();
 			final List<Map.Entry<String, String>> entryList = new ArrayList<Map.Entry<String, String>>(properties.entrySet());
@@ -132,7 +148,114 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 					}
 				}
 			);
+		}		
+	}
+	
+	private void updateProperties(final Page page){
+		Map<String, String> oldProps = loadProperties(page);
+		final List<String> deleteKeys = getDeletedPropertyKeys(oldProps, page.getProperties());
+		final List<String> modifiedKeys = getModifiedPropertyKeys(oldProps, page.getProperties());
+		final List<String> addedKeys = getAddedPropertyKeys(oldProps, page.getProperties());
+		if( !deleteKeys.isEmpty() ){
+			getExtendedJdbcTemplate().batchUpdate(
+				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_PROPERTY_BY_NAME").getSql(), 
+				new BatchPreparedStatementSetter(){
+					public void setValues(PreparedStatement ps, int i)
+							throws SQLException {
+						ps.setLong(1, page.getPageId());
+						ps.setLong(2,  page.getVersionId());
+						ps.setString(3, deleteKeys.get(i));
+					}
+					public int getBatchSize() {
+						return deleteKeys.size();
+					}					
+				}
+			);	
 		}
+		if( !modifiedKeys.isEmpty() ){
+			getExtendedJdbcTemplate().batchUpdate(
+				getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_PROPERTY_BY_NAME").getSql(), 
+				new BatchPreparedStatementSetter(){
+					public void setValues(PreparedStatement ps, int i)
+							throws SQLException {
+						String key = modifiedKeys.get(i);
+						ps.setString(1, key);
+						ps.setString(2, page.getProperties().get(key));
+						ps.setLong(3, page.getPageId());
+						ps.setLong(4,  page.getVersionId());
+					}
+					public int getBatchSize() {
+						return modifiedKeys.size();
+					}					
+				}
+			);	
+		}
+		if( !addedKeys.isEmpty() ){
+			getExtendedJdbcTemplate().batchUpdate(
+				getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_PAGE_PROPERTY").getSql(), 
+				new BatchPreparedStatementSetter(){
+					public void setValues(PreparedStatement ps, int i)
+							throws SQLException {
+						ps.setLong(1, page.getPageId());
+						ps.setLong(2,  page.getVersionId());
+						String key = addedKeys.get(i);
+						ps.setString(3, key);
+						ps.setString(4, page.getProperties().get(key));
+					}
+					public int getBatchSize() {
+						return modifiedKeys.size();
+					}					
+				}
+			);	
+		}				
+	}
+	
+	private List<String> getDeletedPropertyKeys(Map<String, String> oldProps, Map<String, String> newProps){
+		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
+		Set<String> oldKeys = temp.keySet();
+		Set<String> newKeys = newProps.keySet();
+		oldKeys.removeAll(newKeys);
+		return Arrays.asList( 
+			oldKeys.toArray( new String[oldKeys.size()] )
+		); 
+	}
+
+	private List<String> getModifiedPropertyKeys(Map<String, String> oldProps, Map<String, String> newProps){
+		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
+		Set<String> oldKeys = temp.keySet();
+		Set<String> newKeys = newProps.keySet();
+		oldKeys.retainAll(newKeys);
+		List<String> modified = new ArrayList<String>();
+		for( String key : oldKeys){
+			if( newProps.get(key).equals(oldProps.get(key)))
+				modified.add(key);
+		}		
+		return modified;
+	}
+	
+	private List<String> getAddedPropertyKeys(Map<String, String> oldProps, Map<String, String> newProps){
+		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
+		Set<String> oldKeys = temp.keySet();
+		Set<String> newKeys = newProps.keySet();
+		newKeys.removeAll(oldKeys);
+		return Arrays.asList( 
+			newKeys.toArray( new String[newKeys.size()] )
+		); 
+	}	
+	
+	private Map<String, String> loadProperties(Page page){
+		return getExtendedJdbcTemplate().query(
+			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_PROPERTY").getSql(), 
+			new Object[] { page.getPageId(), page.getVersionId() }, new ResultSetExtractor<Map<String, String>>(){
+			public Map<String, String> extractData(ResultSet rs) throws SQLException, DataAccessException {				
+				Map<String, String> rows = new HashMap<String, String>();				
+				while(rs.next()){
+					String key = rs.getString(1);
+					String value = rs.getString(2);
+					rows.put(key, value);
+				}
+				return rows;
+		}});	
 	}
 	
 	private void insertPageVersion(Page page){
@@ -151,10 +274,10 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			new SqlParameterValue(Types.NUMERIC, page.getVersionId() ),
 			new SqlParameterValue(Types.VARCHAR, page.getPageState().name().toLowerCase()),
 			new SqlParameterValue(Types.VARCHAR, page.getTitle()),
-			page.getSummary()== null ? new SqlParameterValue(Types.NULL, null) : new SqlParameterValue(Types.VARCHAR, page.getSummary()),
-			new SqlParameterValue(Types.NUMERIC, page.getVersionId() <= 1 ? page.getUser() : page.getUser() ),
+			page.getSummary() == null ? new SqlParameterValue(Types.NULL, null) : new SqlParameterValue(Types.VARCHAR, page.getSummary()),
+			new SqlParameterValue(Types.NUMERIC, page.getVersionId() <= 1 ? page.getUser().getUserId() : SecurityHelper.getUser().getUserId() ),
 			new SqlParameterValue(Types.DATE, page.getCreationDate()),
-			new SqlParameterValue(Types.DATE, page.getModifiedDate())			
+			new SqlParameterValue(Types.DATE, page.getModifiedDate())				
 		);				
 	}
 	
@@ -183,7 +306,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				deleteVersion( page, version.intValue() );			
 		}
 		getExtendedJdbcTemplate().update(
-			getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_ARCHIVED_PAGE_STATE").getSql(), 	
+			getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_STATE_TO_ARCHIVED").getSql(), 	
 			new SqlParameterValue(Types.NUMERIC, page.getPageId() ),
 			new SqlParameterValue(Types.NUMERIC, page.getVersionId() )
 		);
@@ -250,39 +373,277 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		}
 	}
 	
-	public void update(Page page, boolean flag) {
-		// TODO 자동 생성된 메소드 스텁
+	public void update(Page page, boolean isNewVersion) {
+		int prevVersionId = page.getVersionId();
+		Date now = Calendar.getInstance().getTime();
+		if( isNewVersion ){
+			int maxVersionId = getExtendedJdbcTemplate().queryForInt(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_MAX_PAGE_VERSION_NUMBER").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() )	
+				);
+			page.setVersionId(maxVersionId + 1);			
+		}
 		
+		page.setModifiedDate(now);
+		// update page ...
+		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE").getSql(), 
+			new SqlParameterValue(Types.NUMERIC, page.getPageId() ),
+			new SqlParameterValue(Types.NUMERIC, page.getObjectType() ),
+			new SqlParameterValue(Types.NUMERIC, page.getObjectId() ),
+			new SqlParameterValue(Types.VARCHAR, page.getName() ),
+			new SqlParameterValue(Types.NUMERIC, page.getVersionId()),
+			new SqlParameterValue(Types.NUMERIC, page.getUser().getUserId()),
+			new SqlParameterValue(Types.DATE, page.getModifiedDate()),
+			new SqlParameterValue(Types.NUMERIC, page.getPageId() )
+		);	
+		
+		updateProperties(page);
+		if( isNewVersion ){
+			insertPageVersion(page);			
+			insertPageBody(page);			
+		}else{
+			updatePageVersion(page, prevVersionId);			
+			updatePageBody(page, prevVersionId);		
+		}		
+	}
+	
+	private void updatePageVersion(Page page, int prevVersionId){
+		Date now = Calendar.getInstance().getTime();
+		
+		if( page.getPageState() == PageState.PUBLISHED ){
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_STATE_TO_ARCHIVED").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() ),
+					new SqlParameterValue(Types.NUMERIC, page.getVersionId())
+			);
+		}
+		if( page.getVersionId() > 0){
+			page.setModifiedDate(now);
+			long modifierId = page.getUser().getUserId()<= 0L ? page.getUser().getUserId() : page.getUser().getUserId();
+			// update page version
+			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_VERSION").getSql(), 
+					new SqlParameterValue(Types.VARCHAR, page.getPageState().name() ),
+					new SqlParameterValue(Types.VARCHAR, page.getTitle() ),
+					new SqlParameterValue(Types.VARCHAR, page.getSummary() ),
+					new SqlParameterValue(Types.NUMERIC, modifierId),
+					new SqlParameterValue(Types.DATE, page.getModifiedDate()),
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() ),
+					new SqlParameterValue(Types.NUMERIC, page.getVersionId())
+			);			
+			
+		}
+	}
+	
+	private void updatePageBody(Page page, int prevVersionId){
+		long bodyId = -1L;
+		
+		try {
+			bodyId = getExtendedJdbcTemplate().queryForLong(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELETE_PAGE_BODY_ID").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() ),	
+					new SqlParameterValue(Types.NUMERIC, prevVersionId )	
+				);
+		} catch (EmptyResultDataAccessException e) {
+		}
+		if( page.getBodyText() != null ){
+			if( bodyId != -1L ){
+				final long bodyIdToUse = bodyId;
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_BODY").getSql(), 
+					new SqlParameterValue(Types.INTEGER, page.getBodyContent().getBodyType().getId() ),
+					new SqlParameterValue(Types.VARCHAR, page.getBodyContent().getBodyText() ),	
+					new SqlParameterValue(Types.NUMERIC, bodyIdToUse )
+				);				
+			}else{
+				final long bodyIdToUse = getNextId("PAGE_BODY");
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_PAGE_BODY").getSql(), 
+						new SqlParameterValue(Types.NUMERIC, bodyIdToUse ),
+						new SqlParameterValue(Types.NUMERIC, page.getPageId() ),	
+						new SqlParameterValue(Types.INTEGER, page.getBodyContent().getBodyType().getId() ),
+						new SqlParameterValue(Types.VARCHAR, page.getBodyContent().getBodyText() )						
+					);
+				getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_PAGE_BODY_VERSION").getSql(), 
+						new SqlParameterValue(Types.NUMERIC, bodyId ),	
+						new SqlParameterValue(Types.NUMERIC, page.getPageId() ),
+						new SqlParameterValue(Types.NUMERIC, prevVersionId )
+				);
+			}
+		}
 	}
 
 	public void delete(Page page) {
-		// TODO 자동 생성된 메소드 스텁
 		
+		if( page.getVersionId() == -1){
+			List<Long> bodyIds = getExtendedJdbcTemplate().queryForList(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELETE_PAGE_BODY_IDS").getSql(), 
+					Long.class, 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() ));
+			getExtendedJdbcTemplate().update(
+					getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_BODY_VERSIONS").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() )
+					);
+			for( long bodyId : bodyIds){
+				getExtendedJdbcTemplate().update(
+						getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_BODY").getSql(), 
+						new SqlParameterValue(Types.NUMERIC, bodyId )
+						);
+			}
+			getExtendedJdbcTemplate().update(
+					getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_VERSIONS").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() )
+					);		
+			getExtendedJdbcTemplate().update(
+					getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_PROPERTIES").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() )
+					);
+			getExtendedJdbcTemplate().update(
+					getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE").getSql(), 
+					new SqlParameterValue(Types.NUMERIC, page.getPageId() )
+					);		
+		}
 	}
 
-	public Page getPageById(long pageId) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+	public Page getPageById(long pageId) {		
+		return getPageById(pageId, -1);
 	}
-
+	
 	public Page getPageById(long pageId, int versionNumber) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		return load( pageId, versionNumber <= 0 ? getPageVersion(pageId) : versionNumber);
 	}
+	
+	private Page load( long pageId, int versionNumber ){
+		if( pageId <= 0 )
+			return null;
+		
+		final Page page = new DefaultPage();
+		page.setPageId(pageId);
+		page.setVersionId(versionNumber);
+		getExtendedJdbcTemplate().query(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_BY_ID_AND_VERSION").getSql(), 
+				new ParameterizedRowMapper<Page>(){
+					public Page mapRow(ResultSet rs, int rowNum)
+							throws SQLException {						
+						page.setName(rs.getString("NAME"));
+						page.setObjectType(rs.getInt("OBJECT_TYPE"));
+						page.setObjectId(rs.getLong("OBJECT_ID"));
+						page.setPageState( PageState.valueOf( rs.getString("STATE") ));
+						page.setUser(new UserTemplate(rs.getLong("USER_ID")) );
+						if(rs.wasNull())
+							page.setUser(new UserTemplate(-1L));
+						page.setTitle(rs.getString("TITLE"));
+						page.setSummary(rs.getString("SUMMARY"));
+						page.setCreationDate(rs.getDate("CREATION_DATE"));
+						page.setModifiedDate(rs.getDate("MODIFIED_DATE"));						
+						return page;
+					}					
+				},
+				new SqlParameterValue(Types.NUMERIC, page.getPageId() ),
+				new SqlParameterValue(Types.NUMERIC, page.getVersionId() )
+		);
+		
+		if( page.getName() == null )
+			return null;
+		
+		try {
+			BodyContent bodyContent = getExtendedJdbcTemplate().queryForObject(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_BODY").getSql(), 
+					bodyContentMapper,
+					new SqlParameterValue(Types.NUMERIC, page.getPageId()), 
+					new SqlParameterValue(Types.NUMERIC, page.getVersionId() )
+				);
+			page.setBodyContent(bodyContent);
+		} catch (EmptyResultDataAccessException e) {			
+		}	
+		if( page.getBodyText() == null ){
+			long bodyId = -1L;
+			try {
+				bodyId = getExtendedJdbcTemplate().queryForLong(
+						getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_BODY_VERSION").getSql(), 
+						new SqlParameterValue(Types.NUMERIC, page.getPageId()), 
+						new SqlParameterValue(Types.NUMERIC, page.getVersionId() )
+						);
+			} catch (EmptyResultDataAccessException e) {			
+			}	
+		}
+		
+		loadProperties(page);		
+		return page;
+	}
+	
+	public int getPageVersion(long pageId){
+		
+		PageVersion v = PageVersionHelper.getDeletedPageVersion(pageId);
+		if( v == null)
+			v = PageVersionHelper.getPublishedPageVersion(pageId);
+		if(v == null)
+			v = PageVersionHelper.getNewestPageVersion(pageId);
+		if(v != null)
+			return v.getVersionNumber();
+		else
+			return -1;		
+	}
+	
+	
+
 
 	public Page getPageByName(String name) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		long pageId = -1L;
+		try {
+			pageId = getExtendedJdbcTemplate().queryForLong(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_ID_BY_NAME").getSql(), 		
+					new SqlParameterValue(Types.VARCHAR, name )					
+			);
+		} catch (DataAccessException e) {
+			return null;
+		}
+		
+		return getPageById(pageId, -1);
 	}
 
 	public Page getPageByName(String name, int versionNumber) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		long pageId = -1L;
+		try {
+			pageId = getExtendedJdbcTemplate().queryForLong(
+					getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_ID_BY_NAME").getSql(), 		
+					new SqlParameterValue(Types.VARCHAR, name )					
+			);
+		} catch (DataAccessException e) {
+			return null;
+		}		
+		return load( pageId, versionNumber );
 	}
 
 	public Page getPageByTitle(int objectType, long objectId, String title) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		Long resutls[] = getExtendedJdbcTemplate().queryForObject(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_TITLE").getSql(), 	
+				new ParameterizedRowMapper<Long[]>(){
+					public Long[] mapRow(ResultSet rs, int rowNum) throws SQLException {
+						return new Long[]{ rs.getLong("PAGE_ID"), rs.getLong("VERSION_ID") };
+					}					
+				},
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ),
+				new SqlParameterValue(Types.VARCHAR, title )
+		);
+		if( resutls == null || resutls.length == 0 ){
+			return null;
+		}
+		return load(resutls[0].longValue(), resutls[1].intValue());
+	}
+
+	public int getPageCount(int objectType, long objectId) {		
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 		
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId )
+		);
+	}
+
+	public List<Long> getPageIds(int objectType, long objectId) {
+		return getExtendedJdbcTemplate().queryForList(				
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 		
+				Long.class,
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId )
+				);
 	}
 
 }

@@ -27,8 +27,6 @@ public interface PageVersion {
 	
 	public Page getPage();
 	
-	public void setCreator(User creator);
-	
 	public User getAuthor();
 	
 	public void setAuthor(User author);

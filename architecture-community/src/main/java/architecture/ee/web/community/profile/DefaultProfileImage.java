@@ -15,7 +15,6 @@
  */
 package architecture.ee.web.community.profile;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
 

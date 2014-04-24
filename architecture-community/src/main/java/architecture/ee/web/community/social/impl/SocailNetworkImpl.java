@@ -17,8 +17,6 @@ package architecture.ee.web.community.social.impl;
 
 import java.io.Serializable;
 
-import org.scribe.model.Token;
-
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
