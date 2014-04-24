@@ -8,5 +8,7 @@
 	<model id="22" code="ANNOUNCE" />
 	<model id="23" code="PROFILE_IMAGE" />
 	<model id="30" code="WEBSITE" />
+	<model id="31" code="PAGE" />
+	<model id="32" code="PAGE_BODY" />
 		
 </models>
