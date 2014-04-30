@@ -80,12 +80,28 @@ public class WebSiteUtils {
 			return webSite.getMenu();
 	}	
 
-	public static boolean isallowedSignIn(WebSite website){
+	public static boolean isAllowedSignIn(WebSite website){
 		return website.getBooleanProperty("allowedSignIn", true);
 	}
 	
 	public static boolean isAllowedSignup(WebSite website){
 		return website.getBooleanProperty("allowedSignup", true);
+	}
+
+	public static boolean isAllowedSocialConnect(WebSite website){
+		return website.getBooleanProperty("allowedSocialConnect", true);
+	}
+
+	public static void setIsAllowedSignIn(WebSite website, boolean isAllowedSignIn){
+		website.getProperties().put("allowedSignIn", Boolean.toString(isAllowedSignIn));
+	}
+	
+	public static void setIsAllowedSignup(WebSite website, boolean isAllowedSignup){
+		website.getProperties().put("allowedSignup", Boolean.toString(isAllowedSignup));
+	}
+
+	public static void setIsAllowedSocialConnect(WebSite website, boolean isAllowedSocialConnect){
+		website.getProperties().put("allowedSocialConnect", Boolean.toString(isAllowedSocialConnect));
 	}
 	
 	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
@@ -93,8 +109,7 @@ public class WebSiteUtils {
 			for( String role : StringUtils.split(menu.getRoles(), ",")){
 				if( request.isUserInRole( role ) )
 					return true;
-			}
-			
+			}			
 		}else{
 			return true;
 		}
