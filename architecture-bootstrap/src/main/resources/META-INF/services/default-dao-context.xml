@@ -24,6 +24,7 @@
     	<property name="resourceLocations">
 			<list>
 			   <value>res:sql/default-framework-sqlset.xml</value>
+			   <value>res:sql/default-community-sqlset.xml</value>
 			   <value>res:sql/default-web-sqlset.xml</value>
 			   <value>res:sql/default-user-sqlset.xml</value>
 			</list>
