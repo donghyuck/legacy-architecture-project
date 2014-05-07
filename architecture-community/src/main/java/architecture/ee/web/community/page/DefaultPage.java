@@ -291,5 +291,42 @@ public class DefaultPage implements Page {
 		return StringUtils.defaultString(value, defaultString);
 	}
 
+	/* (비Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DefaultPage [");
+		if (objectType != null)
+			builder.append("objectType=").append(objectType).append(", ");
+		if (objectId != null)
+			builder.append("objectId=").append(objectId).append(", ");
+		if (pageId != null)
+			builder.append("pageId=").append(pageId).append(", ");
+		if (name != null)
+			builder.append("name=").append(name).append(", ");
+		if (versionId != null)
+			builder.append("versionId=").append(versionId).append(", ");
+		if (pageState != null)
+			builder.append("pageState=").append(pageState).append(", ");
+		if (title != null)
+			builder.append("title=").append(title).append(", ");
+		if (summary != null)
+			builder.append("summary=").append(summary).append(", ");
+		if (bodyContent != null)
+			builder.append("bodyContent=").append(bodyContent).append(", ");
+		if (creationDate != null)
+			builder.append("creationDate=").append(creationDate).append(", ");
+		if (modifiedDate != null)
+			builder.append("modifiedDate=").append(modifiedDate).append(", ");
+		if (properties != null)
+			builder.append("properties=").append(properties).append(", ");
+		if (user != null)
+			builder.append("user=").append(user);
+		builder.append("]");
+		return builder.toString();
+	}
+
 	
 }

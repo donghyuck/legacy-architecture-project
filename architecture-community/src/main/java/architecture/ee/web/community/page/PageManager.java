@@ -27,13 +27,13 @@ public interface PageManager {
 		
 		public abstract void updatePage(Page page, boolean forceNewVersion);
 		
-		public abstract Page getPage(long pageId);
+		public abstract Page getPage(long pageId) throws PageNotFoundException;
 		
-		public abstract Page getPage(long pageId, int versionId);
+		public abstract Page getPage(long pageId, int versionId) throws PageNotFoundException ;
 		
-		public abstract Page getPage(String name);
+		public abstract Page getPage(String name) throws PageNotFoundException;
 		
-		public abstract Page getPage(String name, int versionId);
+		public abstract Page getPage(String name, int versionId)throws PageNotFoundException;
 		
 		public abstract List<Page> getPages(int objectType);
 		

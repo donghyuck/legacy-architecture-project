@@ -38,7 +38,7 @@ public class JdbcPageVersionDao extends ExtendedJdbcDaoSupport  implements PageV
 			DefaultPageVersion version = new DefaultPageVersion();
 			version.setPage(new DefaultPage(rs.getLong("PAGE_ID")));
 			version.setVersionNumber( rs.getInt("VERSION_ID"));
-			version.setPageState(PageState.valueOf(rs.getString("STATE")));
+			version.setPageState(PageState.valueOf(rs.getString("STATE").toUpperCase()));
 			version.setCreationDate(rs.getDate("CREATION_DATE"));
 			version.setModifiedDate(rs.getDate("MODIFIED_DATE"));
 			version.setAuthor(new UserTemplate(rs.getLong("USER_ID")));
@@ -93,7 +93,4 @@ public class JdbcPageVersionDao extends ExtendedJdbcDaoSupport  implements PageV
 				new SqlParameterValue(Types.NUMERIC, pageId )
 				);
 	}
-
-
-
 }
