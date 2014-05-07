@@ -21,6 +21,8 @@ import java.util.List;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,7 @@ import architecture.ee.web.community.page.dao.PageVersionDao;
 
 public class DefaultPageManager implements PageManager  {
 
+	private Log log = LogFactory.getLog(getClass());
 	private UserManager userManager;
 	
 	//private PageVersionManager pageVersionManager;
@@ -44,7 +47,7 @@ public class DefaultPageManager implements PageManager  {
 	
 	private Cache pageIdCache;
 	
-	private Cache versionCache;
+	private Cache pageVersionCache;
 	
 	private Cache pageVersionsCache;
 	
@@ -53,6 +56,22 @@ public class DefaultPageManager implements PageManager  {
 	}
 	
 	
+	/**
+	 * @return pageVersionCache
+	 */
+	public Cache getPageVersionCache() {
+		return pageVersionCache;
+	}
+
+
+	/**
+	 * @param pageVersionCache 설정할 pageVersionCache
+	 */
+	public void setPageVersionCache(Cache pageVersionCache) {
+		this.pageVersionCache = pageVersionCache;
+	}
+
+
 	/**
 	 * @return pageVersionDao
 	 */
@@ -109,9 +128,7 @@ public class DefaultPageManager implements PageManager  {
 		if(isNewPage){
 			pageDao.create(page);			
 		}else{
-			if( isNewVersionRequired ){
-				pageDao.update(page, isNewVersionRequired);
-			}
+			pageDao.update(page, isNewVersionRequired);
 		}		
 	}
 	
@@ -124,35 +141,99 @@ public class DefaultPageManager implements PageManager  {
 		return isNewVersionRequired;		
 	}
 
-	public Page getPage(long pageId) {
-		Page page;
+	public Page getPage(long pageId)throws PageNotFoundException {
+		if( pageId < 1)
+			throw new PageNotFoundException();	
+		
+		Page page = null;
 		if( pageCache.get(pageId) != null ){
-			page = (Page)pageCache.get(pageId).getObjectValue();
-		}else{
-			
-			page = pageDao.getPageById(pageId);
-			long userId = page.getUser().getUserId();
+			page = (Page)pageCache.get(pageId).getValue();
+		}
+		
+		if( page == null)
+		{			
 			try {
-				page.setUser(userManager.getUser(userId));
-			} catch (UserNotFoundException e) {
+				page = pageDao.getPageById(pageId);
+				if( page == null )
+					throw new PageNotFoundException();
+				setUserInPage(page);
+				
+				if( PageState.PUBLISHED == page.getPageState())
+					pageCache.put(new Element(pageId, page));				
+				pageIdCache.put(new Element(page.getName(), pageId));
+			} catch (Exception e) {
+				throw new PageNotFoundException(e);	
 			}
-			pageCache.put(new Element( pageId, page));
 		}		
 		return page;
 	}
 
-	public Page getPage(long pageId, int versionId) {
-		
-		
-		return null;
+	public Page getPage(long pageId, int versionId) throws PageNotFoundException {
+		if( pageId < 1)
+			throw new PageNotFoundException();		
+		Page page = findInLocalCache(pageId, versionId);
+		if( page == null ){		
+			try {
+				page = pageDao.getPageById(pageId, versionId);
+				if( page == null )
+					throw new PageNotFoundException();
+				
+				setUserInPage(page);
+				PageVersion pageVersion = PageVersionHelper.getPublishedPageVersion(pageId);
+				if( pageVersion != null && pageVersion.getVersionNumber() == versionId ){
+					if( PageState.PUBLISHED == page.getPageState() )
+						pageCache.put(new Element(pageId, page));
+					pageIdCache.put(new Element(page.getName(), pageId));			
+				}
+			} catch (Exception e) {
+				throw new PageNotFoundException(e);		
+			}
+		}		
+		return page;
 	}
 
-	public Page getPage(String name) {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+	protected void setUserInPage(Page page){
+		long userId = page.getUser().getUserId();
+		try {
+			page.setUser(userManager.getUser(userId));
+		} catch (UserNotFoundException e) {
+		}		
+	}
+	public Page findInLocalCache(long pageId, int versionNumber){
+		
+		if( pageCache.get(pageId) != null ){
+			Page page = (Page)pageCache.get(pageId).getValue();
+			if( page.getVersionId() == versionNumber )
+				return page;		
+		}
+		return null;		
+	}
+	
+	public Page getPage(String name) throws PageNotFoundException {
+		Page pageToUse = null;
+		if( pageIdCache.get(name) != null){
+			Long pageId = (Long) pageIdCache.get(name).getValue();
+			log.debug("using cached pageId : " + pageId );
+			pageToUse = getPage(pageId);		
+		}
+		if( pageToUse == null )
+		{			
+			try {
+				pageToUse = pageDao.getPageByName(name);
+				if( pageToUse == null )
+					throw new PageNotFoundException();		
+				setUserInPage(pageToUse);
+				if( PageState.PUBLISHED == pageToUse.getPageState() )
+					pageCache.put(new Element(pageToUse.getPageId(), pageToUse));				
+				pageIdCache.put(new Element(pageToUse.getName(), pageToUse.getPageId()));		
+			} catch (Exception e) {
+				throw new PageNotFoundException(e);	
+			}
+		}
+		return pageToUse;
 	}
 
-	public Page getPage(String name, int versionId) {
+	public Page getPage(String name, int versionId) throws PageNotFoundException {
 		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
@@ -166,7 +247,10 @@ public class DefaultPageManager implements PageManager  {
 		List<Long> ids = pageDao.getPageIds(objectType, objectId);
 		ArrayList<Page> list = new ArrayList<Page>(ids.size());
 		for( Long pageId : ids ){
-			list.add(getPage(pageId));		
+			try {
+				list.add(getPage(pageId));
+			} catch (PageNotFoundException e) {
+			}		
 		}
 		return list;
 	}
@@ -235,21 +319,6 @@ public class DefaultPageManager implements PageManager  {
 		this.pageIdCache = pageIdCache;
 	}
 
-	/**
-	 * @return versionCache
-	 */
-	public Cache getVersionCache() {
-		return versionCache;
-	}
-
-	/**
-	 * @param versionCache 설정할 versionCache
-	 */
-	public void setVersionCache(Cache versionCache) {
-		this.versionCache = versionCache;
-	}
-
-
 	public List<PageVersion> getPageVersions(long pageId) {
 		String key = getVersionListCacheKey(pageId);
 		List<Integer> versions ;
@@ -277,11 +346,11 @@ public class DefaultPageManager implements PageManager  {
 	protected PageVersion getPageVersion(long pageId, int versionNumber){
 		String key = getVersionCacheKey(pageId, versionNumber);
 		PageVersion pv ;
-		if( versionCache.get(key) != null ){
-			pv = (PageVersion)versionCache.get(key).getObjectValue();
+		if( pageVersionCache.get(key) != null ){
+			pv = (PageVersion)pageVersionCache.get(key).getObjectValue();
 		}else{
 			pv = pageVersionDao.getPageVersion(pageId, versionNumber);
-			versionCache.put(new Element(key, pv));
+			pageVersionCache.put(new Element(key, pv));
 		}
 		return pv;
 	}

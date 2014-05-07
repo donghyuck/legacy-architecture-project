@@ -13,10 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.page;
+package architecture.ee;
 
-public enum PageState {
+import org.junit.Test;
 
-	INCOMPLETE, APPROVAL, PUBLISHED, REJECTED, ARCHIVED, DELETED;
+import architecture.ee.web.community.page.PageState;
 
+public class PageStateTest {
+
+	public PageStateTest() {
+		// TODO 자동 생성된 생성자 스텁
+	}
+
+	@Test
+	public void testGetPageState(){
+		PageState.valueOf("incomplete".toUpperCase());
+		
+	}
 }

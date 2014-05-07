@@ -245,7 +245,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	
 	private Map<String, String> loadProperties(Page page){
 		return getExtendedJdbcTemplate().query(
-			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_PROPERTY").getSql(), 
+			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_PROPERTIES").getSql(), 
 			new Object[] { page.getPageId(), page.getVersionId() }, new ResultSetExtractor<Map<String, String>>(){
 			public Map<String, String> extractData(ResultSet rs) throws SQLException, DataAccessException {				
 				Map<String, String> rows = new HashMap<String, String>();				
@@ -421,7 +421,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			long modifierId = page.getUser().getUserId()<= 0L ? page.getUser().getUserId() : page.getUser().getUserId();
 			// update page version
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_VERSION").getSql(), 
-					new SqlParameterValue(Types.VARCHAR, page.getPageState().name() ),
+					new SqlParameterValue(Types.VARCHAR, page.getPageState().name().toLowerCase() ),
 					new SqlParameterValue(Types.VARCHAR, page.getTitle() ),
 					new SqlParameterValue(Types.VARCHAR, page.getSummary() ),
 					new SqlParameterValue(Types.NUMERIC, modifierId),
@@ -524,7 +524,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 						page.setName(rs.getString("NAME"));
 						page.setObjectType(rs.getInt("OBJECT_TYPE"));
 						page.setObjectId(rs.getLong("OBJECT_ID"));
-						page.setPageState( PageState.valueOf( rs.getString("STATE") ));
+						page.setPageState( PageState.valueOf( rs.getString("STATE").toUpperCase() ));
 						page.setUser(new UserTemplate(rs.getLong("USER_ID")) );
 						if(rs.wasNull())
 							page.setUser(new UserTemplate(-1L));
