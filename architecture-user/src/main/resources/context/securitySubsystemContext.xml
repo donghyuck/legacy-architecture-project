@@ -39,9 +39,8 @@
         <security:intercept-url pattern="/content/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />
   
   		<security:intercept-url pattern="/download/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" />   
-        
-        <security:intercept-url pattern="/content.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
+        <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
+        <security:intercept-url pattern="/page.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/about.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/events.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/press.do*"				access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
