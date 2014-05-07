@@ -349,7 +349,7 @@ public class GroupManagementAction  extends FrameworkActionSupport  {
 	}
 
 	protected void updateTargetGroupProperties(Group group, Map<String, String> properties) throws GroupNotFoundException, GroupAlreadyExistsException {		
-		if (properties.size() > 0 || (properties.size() == 0 && group.getProperties().size() > 0)) {
+		if( (group.getProperties().size() > 0 &&  properties.size() == 0 ) || properties.size() > 0 ){
 			group.setProperties(properties);
 			this.targetGroup = group;
 			groupManager.updateGroup(group);

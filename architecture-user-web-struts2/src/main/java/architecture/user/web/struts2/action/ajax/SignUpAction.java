@@ -22,7 +22,6 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.UnAuthorizedException;
-import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.user.util.CompanyUtils;
@@ -428,9 +427,9 @@ public class SignUpAction extends  FrameworkActionSupport  {
 			this.customClass = customClass;
 		}
 
-		public Media getMediaType(){
+/*		public Media getMediaType(){
 			return Media.valueOf(media.toUpperCase());
-		}
+		}*/
 
 
 		@Override
