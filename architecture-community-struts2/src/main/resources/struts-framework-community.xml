@@ -9,8 +9,11 @@
 		
 		<action name="main" class="architecture.ee.web.community.struts2.action.MainPageAction">
 			<param name="template">/html/homepage.ftl</param> 	
-			<result name="homepage" type="freemarker">${template}</result>					
+			<result name="customize-success" type="freemarker">${template}</result>	
+			
+			<result name="homepage" type="freemarker">/html/homepage.ftl</result>					
 			<result name="streams" type="freemarker">/html/community/my-streams.ftl</result>
+			<result name="manage" type="freemarker">/html/community/my-website.ftl</result>
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
 		</action>
 					
