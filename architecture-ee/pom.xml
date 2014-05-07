@@ -53,14 +53,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>${project.dependency.spring.version}</version>			
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${project.dependency.spring.version}</version>
-			<type>jar</type>
-			<scope>compile</scope>			
+			<version>3.2.1.RELEASE</version>			
 		</dependency>
 		<dependency>
 			<groupId>commons-primitives</groupId>
