@@ -59,7 +59,7 @@
 			<result name="redirect" type="redirect">${url}</result>	
             <result name="notfound" type="httpheader">
                 <param name="status">404</param>        
-            </result>
+            </result>            
             <result name="error" >/includes/jsp/error.jsp</result>                                      
 		</global-results>
 
