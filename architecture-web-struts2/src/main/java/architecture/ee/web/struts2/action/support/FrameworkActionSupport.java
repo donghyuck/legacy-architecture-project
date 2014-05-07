@@ -163,53 +163,6 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 			throw new MenuNotFoundException();
 		}
 	}
-
-	/*
-	public MenuComponent getMenuComponent(String name){ 
-		MenuComponent menuComp = null;
-		try {
-			if( menuRepository != null ){
-				Menu menu = null;
-				if( getUser().getCompany()!=null ){
-					menu = getMenu(getUser().getCompany().getLongProperty("menuId", CompanyUtils.getDefaultMenuId()));
-				}else{
-					menu = menuRepository.getMenu(CompanyUtils.getDefaultMenuId());		
-				}	
-				menuComp = menuRepository.getMenuComponent(menu, name);
-			}
-		} catch (MenuNotFoundException e) {
-			log.error(e);
-		}	
-		return menuComp;
-	}
-	
-	public MenuComponent findMenuComponent(String parent, String child){ 
-		MenuComponent parentMenu = getMenuComponent(parent);
-		MenuComponent selectedMenu = null;
-		for( MenuComponent childMenu : parentMenu.getComponents() )
-		{
-			if( child.equals( childMenu.getName() ) ){
-				selectedMenu = childMenu;		
-				break;
-			}
-			if( childMenu.getComponents().size() > 0 ){
-				for( MenuComponent childMenu2 : childMenu.getComponents() ){
-					if( child.equals( childMenu2.getName() ) ){
-						selectedMenu = childMenu2;		
-						break;
-					}
-				}
-			}
-		}
-		return selectedMenu;		
-	}
-		
-	public Menu getMenu(Long menuId) throws MenuNotFoundException{
-		return menuRepository.getMenu(menuId);		
-	}
-	*/
-	
-
 	
 	public AuthToken getAuthToken() {
 		if ( null == authToken )
@@ -284,8 +237,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 	protected final  int getApplicationIntProperty(String name, int defaultValue){		
 		return ApplicationHelper.getApplicationIntProperty(name, defaultValue);
 	}
-	
-	
+		
 	public HttpServletRequest getRequest() {
 		return request;
 	}
