@@ -16,7 +16,7 @@
         
     <decorator name="main" page="main.jsp">
         <pattern>/*</pattern>
-    </decorator> 
+    </decorator>
     
     <decorator name="secure" page="secure.jsp">
         <pattern>/*</pattern>
