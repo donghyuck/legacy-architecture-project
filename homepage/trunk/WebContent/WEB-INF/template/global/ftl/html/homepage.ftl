@@ -1,5 +1,5 @@
 <#ftl encoding="UTF-8"/>
-<html>
+<html decorator="homepage">
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
 		<script type="text/javascript">
