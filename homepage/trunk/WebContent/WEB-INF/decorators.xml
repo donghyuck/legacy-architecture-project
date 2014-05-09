@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <decorators defaultdir="/decorators">
-    <!-- Any urls that are excluded will never be decorated by Sitemesh -->
-    
-    <excludes>
-        <pattern>/client/*</pattern>
-        <pattern>/images/*</pattern>
-        <pattern>/templates/*</pattern>
-        <pattern>/styles/*</pattern>
-        <pattern>/js/*</pattern>
-        <pattern>/fonts/*</pattern>
-        <pattern>*output=xml*</pattern>
-        <pattern>*output=json*</pattern>
-    </excludes>
-        
-    <decorator name="main" page="main.jsp">
-        <pattern>/*</pattern>
-    </decorator>    
-    <decorator name="secure" page="secure.jsp">
-        <pattern>/*</pattern>
-    </decorator>
-    <decorator name="homepage" page="homepage.jsp">
-        <pattern>/*</pattern>
-    </decorator>
-    <decorator name="black" page="black.jsp"/>
-	<decorator name="none" page="none.jsp"/>
+	<!-- Any urls that are excluded will never be decorated by Sitemesh -->
+
+	<excludes>
+		<pattern>/client/*</pattern>
+		<pattern>/images/*</pattern>
+		<pattern>/templates/*</pattern>
+		<pattern>/styles/*</pattern>
+		<pattern>/js/*</pattern>
+		<pattern>/fonts/*</pattern>
+		<pattern>*output=xml*</pattern>
+		<pattern>*output=json*</pattern>
+	</excludes>
+
+	<decorator name="main" page="main.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<decorator name="secure" page="secure.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<decorator name="homepage" page="homepage.jsp">
+		<pattern>/*</pattern>
+	</decorator>
+	<decorator name="black" page="black.jsp" />
+	<decorator name="none" page="none.jsp" />
 </decorators>
