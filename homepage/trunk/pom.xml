@@ -130,10 +130,10 @@
 			<version>1.7.2</version>
 		</dependency>
 		<dependency>
-			<groupId>architecture.user</groupId>
-			<artifactId>architecture-user-web-struts2</artifactId>
-			<version>1.0.5.RELEASE</version>
-		</dependency>
+			<groupId>architecture.community</groupId>
+			<artifactId>architecture-community-struts2</artifactId>
+			<version>1.0.0.RELEASE</version>
+		</dependency>		
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc5</artifactId>
