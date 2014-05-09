@@ -37,27 +37,53 @@
 	header {
 		background: #0070b8;
 		background-size: cover;
-		padding: 22px 0;
-		margin-top : -20px;   /*navbar-fixed-top*/
+		padding: 12px 0;
+		 /*margin-top : -20px;   navbar-fixed-top*/
 		margin-bottom: 10px;
 	}
 
 	header.cloud {
-	    color: white;
+		color: white;
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
-	header h1 {
+	header h1 ,  header h2, h4 {
 		color: white;
 		font-weight: 300;
 		margin-bottom: 0;
 	}
-
-	header h4 {
+	
+	header.cloud h4 small {
 		color: white;
-		font-weight: 300;
+	}	
+	
+	.navbar-inverse {
+		background-color: #333;
+		border-color: #222;
 	}
-		
+
+	.k-editor-toolbar .k-tool {
+		border : 0px;
+		color: #34AADC;
+	}
+
+	.k-editor-toolbar .k-tool:hover {
+		background-color: #428bca;
+	}
+
+	.k-editor-toolbar .k-state-hover {
+		background-image: none, linear-gradient( to bottom, #428bca 0, #428bca 100%) ;
+	}	
+	
+	.k-editor-toolbar .k-state-selected {
+		background-color: #428bca;
+	}
+			
+	.navbar-nav>li>a.btn-link {
+		padding-top: 14px;
+		padding-bottom: 14px;
+	}
+				
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" default="color4" />">
