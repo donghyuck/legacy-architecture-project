@@ -89,7 +89,7 @@
 		<filter-name>struts2-prepare</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-
+	
 	<filter-mapping>
 		<filter-name>sitemesh</filter-name>
 		<url-pattern>/*</url-pattern>
