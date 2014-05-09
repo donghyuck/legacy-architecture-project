@@ -5,12 +5,13 @@
 	<artifactId>homepage</artifactId>
 	<version>1.0.0.RELEASE</version>
 	<name>HOMEPAGE</name>
-	<description>Multi Site 모듈....</description>
+	<description>homepage</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javac.src.version>1.5</javac.src.version>
-		<javac.target.version>1.5</javac.target.version>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
 		<project.build.version>1.0.0.RELEASE</project.build.version>
 		<project.architecture.version>1.1.0.RELEASE</project.architecture.version>
 	</properties>
