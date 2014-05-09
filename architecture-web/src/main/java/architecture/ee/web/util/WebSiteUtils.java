@@ -31,6 +31,8 @@ import architecture.ee.web.site.WebSiteNotFoundException;
 
 public class WebSiteUtils {
 
+	public static final String MAIN_PAGE_VIEW_PREFIX = "main.view";
+	
 	public WebSiteUtils() {
 	}
 
@@ -102,6 +104,11 @@ public class WebSiteUtils {
 
 	public static void setIsAllowedSocialConnect(WebSite website, boolean isAllowedSocialConnect){
 		website.getProperties().put("allowedSocialConnect", Boolean.toString(isAllowedSocialConnect));
+	}
+
+	public static void setMainTemplate(WebSite website, String templage){
+		if(StringUtils.isNotBlank(templage))
+			website.getProperties().put(MAIN_PAGE_VIEW_PREFIX, templage);
 	}
 	
 	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){

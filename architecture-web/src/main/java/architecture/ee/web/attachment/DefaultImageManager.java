@@ -339,8 +339,7 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		}
 	}
 	
-	private void deleteImageFileCache(Image image ){
-		
+	private void deleteImageFileCache(Image image ){		
 		Collection<File> files = FileUtils.listFiles(
 				getImageCacheDir(), 
 				FileFilterUtils.prefixFileFilter(String.valueOf( image.getImageId())),
