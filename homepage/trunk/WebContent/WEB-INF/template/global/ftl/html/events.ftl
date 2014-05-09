@@ -8,14 +8,15 @@
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'css!${request.contextPath}/styles/jquery.extension/component.min.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
-			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
+			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
-			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
-			'${request.contextPath}/js/common/common.models.min.js',
-			'${request.contextPath}/js/common/common.ui.min.js',
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
+			'${request.contextPath}/js/common/common.models.js',
+			'${request.contextPath}/js/common/common.api.js',			
+			'${request.contextPath}/js/common/common.ui.js',
 			'${request.contextPath}/js/jquery.extension/modernizr.custom.js',
 			'${request.contextPath}/js/jquery.extension/classie.js',
 			],
@@ -23,59 +24,23 @@
 			
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");
-				      
 				// START SCRIPT	
-				$("#top-menu").kendoMenu();
-				$("#top-menu").show();
-				var currentUser = new User({});			
+
 				// ACCOUNTS LOAD	
-				var accounts = $("#account-navbar").kendoAccounts({
-					connectorHostname: "${ServletUtils.getLocalHostAddr()}",	
-					authenticate : function( e ){
-						currentUser = e.token;						
-					},
-					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  >
+				var currentUser = new User();			
+				$("#account-navbar").extAccounts({
+					externalLoginHost: "${ServletUtils.getLocalHostAddr()}",	
+					<#if action.isAllowedSignIn() ||  !action.user.anonymous  >
 					template : kendo.template($("#account-template").html()),
 					</#if>
-					afterAuthenticate : function(){
-						//$('.dropdown-toggle').dropdown();
-						if( currentUser.anonymous ){
-							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
-							$("#login-btn").click(function() { 
-								$("#login-status").html("");
-								if( validator.validate() )
-								{								
-									accounts.login({
-										data: $("form[name=login-form]").serialize(),
-										success : function( response ) {
-											$("form[name='login-form']")[0].reset();               
-											$("form[name='login-form']").attr("action", "/main.do").submit();										
-										},
-										fail : function( response ) {  
-											$("#login-password").val("").focus();												
-											$("#login-status").kendoAlert({ 
-												data : { message: "입력한 사용자 이름 또는 비밀번호가 잘못되었습니다." },
-												close : function(){	
-													$("#login-password").focus();										
-												 }
-											}); 										
-										},		
-										error : function( thrownError ) {
-											$("form[name='login-form']")[0].reset();                    
-											$("#login-status").kendoAlert({ data : { message: "잘못된 접근입니다." } }); 									
-										}																
-									});															
-								}else{	}
-							});	
-						}
-					}
-				});				
+					authenticate : function( e ){
+						e.token.copy(currentUser);
+					}				
+				});		
 
 				// 1. Announces 				
-				
-				//var effect =  kendo.fx($("#announce-list-view-panel")).fadeOut().duration(700); 
-				$("#announce-list-view").data( "announcePlaceHolder", new Announce () );	
-				$("#announce-list-view").kendoListView({
+				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );					
+				$("#announce-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
 							read: {
@@ -86,57 +51,34 @@
 							parameterMap: function(options, operation) {
 								if (operation != "read" && options.models) {
 									return {models: kendo.stringify(options.models)};
+								}else{
+									return {objectType:30}
 								}
-							} 
+							},
 						},
-						pageSize: 10,
-						error:handleKendoAjaxError,				
+						pageSize: 15,
+						error:common.api.handleKendoAjaxError,				
 						schema: {
 							data : "targetAnnounces",
 							model : Announce
 						}
-					}),
+					}),	
+					columns: [
+						{field: "subject", title: "제목", sortable : false },
+						{field: "creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}"}
+					],
+					sortable: true,
+					pageable: false,
 					selectable: "single",
-					template: kendo.template($("#announce-list-view-template").html()),
+					rowTemplate: kendo.template($("#announce-row-template").html()),
+					height: 430,
 					change: function(e) { 
-						var data = this.dataSource.view() ;
-						var selectedCell = data[this.select().index()];		
-						$("#announce-list-view").data( "announcePlaceHolder", selectedCell );
-						//effect.play();					
-						displayAnnouncement();							
-					},
-					dataBound: function(e) {
-						if( this.dataSource.data().length == 0 ){
-						//	$("#announce-view-panel").html( 
-						//		$('#alert-message-template').html() 
-						//	);
-						}							
-						//this.select( this.element.children().first() );				
-					}
-				});
-            			
-				$("#announce-list-view-panel .panel-header-actions a").each(function( index ) {
-						var panel_header_action = $(this);						
-						if( panel_header_action.text() == "Minimize" ||  panel_header_action.text() == "Maximize" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-list-view-panel .panel-body, #announce-list-view-panel .list-group ").toggleClass("hide");
-								var panel_header_action_icon = panel_header_action.find('span');
-								if( panel_header_action_icon.hasClass("k-i-minimize") ){
-									panel_header_action.find('span').removeClass("k-i-minimize");
-									panel_header_action.find('span').addClass("k-i-maximize");
-								}else{
-									panel_header_action.find('span').removeClass("k-i-maximize");
-									panel_header_action.find('span').addClass("k-i-minimize");
-								}								
-							});
-						} else if (panel_header_action.text() == "Refresh" ){
-							panel_header_action.click(function (e) {
-								e.preventDefault();		
-								$("#announce-list-view").data( "kendoListView").refresh();
-							});
-						}
-				} );											
+						var selectedCells = this.select();
+						var selectedCell = this.dataItem( selectedCells );	
+						$("#announce-grid").data( "announcePlaceHolder", selectedCell );
+						displayAnnouncement();
+					}			
+				});							
 				<#if !action.user.anonymous >				
 				
 				</#if>	
@@ -145,23 +87,27 @@
 		}]);	
 		
 		function displayAnnouncement () {			
-			var announcePlaceHolder = $("#announce-list-view").data( "announcePlaceHolder" );
+			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );			
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
+			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
-			kendo.bind($("#announce-view-panel"), announcePlaceHolder );				
+			kendo.bind($("#announce-view-panel"), announcePlaceHolder );					
+			$("#announce-view-panel").removeClass('hide');				
 			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1), slide = kendo.fx($("#announce-view-content-section")).slideIn("up") ;
-			zoom.play();
+			zoom.play();			
 			setTimeout(function() {
 				zoom.stop();
 				slide.play();
-			}, 100);			
+			}, 100);					
+			
 			$("#announce-view-panel").find(".close").click(function (e) {
 				slide.reverse();
 				setTimeout(function() {
 					slide.stop();
 					zoom.reverse();
+					$("#announce-view-panel").addClass('hide');
 				}, 100);
-			});
+			});			
 		}				
 		-->
 		</script>		
@@ -170,45 +116,12 @@
 			font-size: 15px;
 		}
 
-		.k-grid table tr.k-state-selected{
-			background: #428bca;
-			color: #ffffff; 
+		#announce-list-section .k-grid-header .k-header {
+			text-align: center;
 		}
 
-		.k-listview div.k-state-selected{
-			background: #F98262;
-			color: #ffffff; 
-		}
-
-		.k-listview:after
-		{
-			content: ".";
-			display: block;
-			height: 0;
-			clear: both;
-			visibility: hidden;
-		}
-		
-		.k-listview
-		{
-			padding: 0;
-			min-width: 300px;
-			min-height: 100px;
-			background-color: transparent;
-		}
-				
-		#announce-list-view {
-			padding: 0px;
-			border: 0px;		
-		}
-				
-		.announcement {
-			cursor: pointer;
-		}
-		
 		.content-main-section {
-			/** background: #F98262;	 */
-			overflow: hidden;			
+			/** background: #F98262;	 */	
 			width: 100%;
 			height: 100%;
 			min-height:500px;
@@ -216,15 +129,15 @@
 							
 		</style>   	
 	</head>
-	<body>
+	<body class="color0">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<#assign current_menu = action.findMenuComponent("USER_MENU", "MENU_1_2") />
+		<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_2") />
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h1>${ current_menu.title }</h1>
-					<h4><i class="fa fa-quote-left"></i>&nbsp;모든 이벤트와 공지사항을 한눈에 ~! &nbsp;<i class="fa fa-quote-right"></i></h4>
+					<h2>${ current_menu.title }</h2>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>		
@@ -247,10 +160,14 @@
 				</div>
 				<div class="col-lg-9">		
 				<div class="content-main-section">
+					<div class="page-header text-primary">
+						<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
+					</div>	
+													
 					<section id="announce-list-section" style="position: absolute;	">
-						<div id="announce-list-view"></div>	
+						<div id="announce-grid"></div>
 					</section>
-					<section id="announce-view-content-section" style="overflow: hidden; display:none;">						
+					<section id="announce-view-content-section" style="display:none;">						
 						<div id="announce-view-panel"></div>
 					</section>						
 				</div>
@@ -258,21 +175,17 @@
 			</div>
 		</div>									 			
 		<!-- END MAIN CONTENT -->	
-		<script id="announce-list-view-template" type="text/x-kendo-tmpl">
-		<div class="blank-space-5 col-xs-12 col-sm-6 col-md-4">
-			<div class="thumbnail thumbnail-flat"><!--
-				<img src="http://fc00.deviantart.net/fs71/f/2010/190/8/2/Notice_by_kerokero13.jpg" alt="...">-->
-				<div class="caption">
-					<h5>#: subject #</h5>
-					<p class="text-muted"><small>#: kendo.toString(startDate, "yyyy.MM.dd hh:mm") # ~  #: kendo.toString(endDate, "yyyy.MM.dd hh:mm") #</small></p>
-				</div>
-			</div>
-		</div>
+		<script id="announce-row-template" type="text/x-kendo-tmpl">
+			<tr data-uid="#: uid #">
+				<td><span class="label label-info">공지</span>&nbsp;#: subject #	 </td>
+				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
+			</tr>
 		</script>
-		
+						
 		<script id="alert-message-template" type="text/x-kendo-tmpl">
 			<div class="alert alert-warning">새로운 공지 & 이벤트가 없습니다.</div>
-		</script>				
+		</script>			
+			
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	

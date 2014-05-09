@@ -7,11 +7,11 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'${request.contextPath}/js/jquery/1.9.1/jquery.min.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
-			'${request.contextPath}/js/kendo/kendo.ko_KR.js',			
-			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',	
+			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.min.js',
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
@@ -20,8 +20,7 @@
 				kendo.culture("ko-KR");
 				      
 				// START SCRIPT	
-				$("#top-menu").kendoMenu();
-				$("#top-menu").show();
+
 				var currentUser = new User({});			
 				// ACCOUNTS LOAD	
 				var accounts = $("#account-navbar").kendoAccounts({
@@ -29,13 +28,13 @@
 					authenticate : function( e ){
 						currentUser = e.token;						
 					},
-					<#if CompanyUtils.isallowedSignIn(action.company) ||  !action.user.anonymous  >
+					<#if action.isAllowedSignIn() ||  !action.user.anonymous  >
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					afterAuthenticate : function(){
 						$('.dropdown-toggle').dropdown();			
 						if( currentUser.anonymous ){
-							var validator = $("#login-panel").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
+							var validator = $("#login-navbar").kendoValidator({validateOnBlur:false}).data("kendoValidator");							
 							$("#login-btn").click(function() { 
 								$("#login-status").html("");
 								if( validator.validate() )
