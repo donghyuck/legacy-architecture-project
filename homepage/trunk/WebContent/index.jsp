@@ -4,7 +4,6 @@
         response.sendRedirect(request.getContextPath() + "/main.do");
         return;
     }
-
 %>
 <html>
 	<head>

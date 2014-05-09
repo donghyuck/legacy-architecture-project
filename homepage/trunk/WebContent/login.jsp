@@ -6,25 +6,30 @@
 <%
 	User user = SecurityHelper.getUser();
 	Company company = user.getCompany();
+	architecture.ee.web.site.WebSite website = architecture.ee.web.util.WebSiteUtils.getWebSite(request);
+	
+	boolean isAllowedSocialConnect = architecture.ee.web.util.WebSiteUtils.isAllowedSocialConnect(website);
+	boolean isAllowedSignup = architecture.ee.web.util.WebSiteUtils.isAllowedSignup(website);
+	boolean isAllowedSignIn = architecture.ee.web.util.WebSiteUtils.isAllowedSignIn(website);
+	
 %>
 <script type="text/javascript">
 	yepnope([{
 		load: [ 
 			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.ui.animatedcheckbox.css',			
+			'css!<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.1.0/non-responsive.css',		
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery/1.10.2/jquery.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery.extension/jquery.ui.shake.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jgrowl/jquery.jgrowl.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.web.min.js',
-			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo/kendo.ko_KR.js',			
-			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.0.3/bootstrap.min.js',
+			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/kendo.extension/kendo.ko_KR.js',			
+			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/bootstrap/3.1.0/bootstrap.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/jquery.imagesloaded/imagesloaded.min.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.modernizr.custom.js',			
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.models.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.api.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
-		complete: function() {
-			
+		complete: function() {			
 			common.api.getUser( {
 				success : function ( token ) {
 					if( !token.anonymous )
@@ -32,16 +37,7 @@
 				}				
 			} );		
 			
-			var photo_template = kendo.template("<li><img src='<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/view-streams-photo.do?key=#= externalId#' alt='이미지'/></li>");				
-			common.api.streams.dataSource.fetch(function(){
-				var data = this.data();
-				$.each( data , function(index, item ){
-					$('#cbp-bislideshow').html( kendo.render( photo_template, data ) ) ;
-				});
-				var slideshow = $('#cbp-bislideshow').extSlideshow({
-					navigation: $('#cbp-bicontrols')
-				});
-			});
+			var slideshow = $('#slideshow').extFullscreenSlideshow();
 			
 			/* LOGIN */
 			$('#login-window').modal({show:true, backdrop:false});						
@@ -135,13 +131,11 @@
 					alert_danger.html( template({message: error_message }) );			
 					btn.button('reset')
 				}else{				
-					common.api.signup({
+					common.api.user.signup({
 						data: kendo.stringify( signup_modal.data("signupPlaceHolder") ),
 						success : function(data){														
-							if ( !data.anonymous ){
-								var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + signup_modal.data("signupPlaceHolder").media + "-callback.do?output=json";			
-								common.api.signin({
-									url : onetime_url,
+							if ( !data.anonymous ){	
+								common.api.user.signin({
 									onetime:  signup_modal.data("signupPlaceHolder").onetime,
 									success : function(response){
 										btn.button('reset')   	    
@@ -190,22 +184,6 @@
 							target_url,
 							'popUpWindow', 
 							'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
-					
-					/**
-					$.ajax({
-						type : 'POST',
-						url : "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/get-socialnetwork.do?output=json",
-						data: { media: target_media },
-						success : function(response){
-							if( response.error ){
-								// 연결실패.
-							} else {	
-								window.open( response.authorizationUrl + '&display=popup' ,'popUpWindow','height=500,width=600,left=10,top=10,resizable=yes,scrollbars=yes,toolbar=yes,menubar=no,location=no,directories=no,status=yes')
-							}
-						},
-						error:handleKendoAjaxError												
-					});	
-					**/
 				});								
 			});						
 	
@@ -214,10 +192,8 @@
 	
 	function handleCallbackResult( media, code, exists ){		
 		if(exists){
-			if( code != null && code != ''  ){						
-				var onetime_url =  "<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/community/" + media + "-callback.do?output=json";			
-				common.api.signin({
-					url : onetime_url,
+			if( code != null && code != ''  ){							
+				common.api.user.signin({
 					onetime:  code,
 					success : function(response){
 						//$("form[name='fm']")[0].reset();               	    
@@ -263,28 +239,27 @@
 		
 </script>
 <style scoped="scoped">
-	#login-window .modal-dialog {
-		width : 550px;
-	}
 
 	.nav>li>a:hover {
 		background-color:#007AFF;
 		color : #ffffff;
 	}
-			
+
+	.cbp-bicontrols {
+			top: 80%;
+	}
+	.cbp-bicontrols span:before {
+		font-size: 40px;
+		opacity: 0.7;
+	}	
+		
+					
 </style>
 </head>
 <body class="color1">
 	<!-- Main Page Content  -->
 
-		<div class="main">
-			<ul id="cbp-bislideshow" class="cbp-bislideshow"></ul>
-			<div id="cbp-bicontrols" class="cbp-bicontrols">
-				<span class="fa cbp-biprev"></span>
-				<span class="fa cbp-bipause"></span>
-				<span class="fa cbp-binext"></span>
-			</div>			
-		</div>
+		<div class="main" id="slideshow"></div>
 	
 		<nav class="navbar navbar-fixed-bottom" role="navigation" class="color:#000000;">
 			<div class="container-fluid">
@@ -292,16 +267,20 @@
 					 <li><a href="#">약관</a></li>
 					 <li><a href="#">개인정보보호</a></li>
 					 <li><a href="#" onClick="toggleWindow(); return false;">로그인</a></li>
+					 <% if (isAllowedSignup){ %>
 					 <li><a href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/accounts/signup.do">회원가입</a></li>
+					 <% } %>
 				</ul>
+				<!-- 
 				<ul class="nav navbar-nav navbar-right">
 					 <li><a href="#">Link</a></li>
 				</ul>
+				-->
 			</div>
 		</nav>
 			
 	<!-- Modal -->
-	<div class="modal fade" id="login-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade bs-modal-lg" id="login-window" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header" id="myModalLabel">
@@ -309,6 +288,7 @@
 					<h4 class="modal-title">로그인</h4>
 				</div>
 			<div class="modal-body">
+				<% if (isAllowedSocialConnect) { %>
 				<div class="container custom-external-login-groups" style="width:100%;">
 					<div class="row blank-top-5 ">
 						<div class="col-sm-6">
@@ -319,6 +299,7 @@
 						</div>
 					</div>							
 				</div>
+				<% } %>
 				<div class="container" style="width:100%;">					
 					<div class="row blank-top-15">
 						<div class="col-lg-12">
@@ -327,7 +308,7 @@
 								<div class="form-group">
 									<label for="username" class="col-lg-3 control-label">아이디</label>
 									<div class="col-lg-9">
-										<input type="text" class="form-control"  id="username" name="username"  pattern="[^0-9][A-Za-z]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요.">
+										<input type="text" class="form-control"  id="username" name="username"  pattern="[^-][A-Za-z0-9]{2,20}" placeholder="아이디" required validationMessage="아이디를 입력하여 주세요.">
 									</div>
 								</div>
 								<div class="form-group">
@@ -346,7 +327,7 @@
 									</div>
 								</div>
 								<div class="col-lg-12">									
-									<span class="label label-primary">접속 IP</span>&nbsp;<%= request.getRemoteAddr() %>  <span class="label label-warning"></span><br/>
+									<span class="label label-primary">접속 IP</span>&nbsp;<small><%= request.getRemoteAddr() %></small><span class="label label-warning"></span><br/>
 									<% if ( !user.isAnonymous() ) { %>
 									<span class="label label-warning"><%= user.getUsername() %> 로그인됨</span>&nbsp; <button type="button" class="btn btn-danger btn-sm">로그아웃</button><br/>
 									<% } %>
@@ -429,7 +410,6 @@
 		#=message#
 	</div>
     </script>
-    
 	<STYLE type="text/css">	    
 
                 span.k-tooltip {
