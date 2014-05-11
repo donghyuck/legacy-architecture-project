@@ -145,7 +145,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-danger block-space-10">							
-						<i class="fa fa-info"></i> 마지막으로 <span data-bind="text: lastProfileUpdate">${user.lastProfileUpdate}</span> 에 수정하였습니다. 사진를 클릭하면 새로운 사진을 업로드 하실 수 있습니다. 
+						<i class="fa fa-info"></i> 마지막으로 <span data-bind="text: lastProfileUpdate">${user.lastProfileUpdate}</span> 에 수정하였습니다.
 					</div>				
 					<p class="text-muted"><small><i class="fa fa-info"></i> 사진를 클릭하면 새로운 사진을 업로드 하실 수 있습니다.</small></p>
 					<div class="media">
@@ -162,19 +162,19 @@
 							<form class="form-horizontal" role="form">
 								<fieldset disabled>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">아이디</label>
+										<label class="col-sm-2 control-label"><small>아이디</small></label>
 										<div class="col-sm-10">
 											<h5 data-bind="text:username" >${ user.username }</h5>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">이름</label>
+										<label class="col-sm-2 control-label"><small>이름</small></label>
 										<div class="col-sm-10">
 											<input type="email" class="form-control" placeholder="이름" data-bind="value:name" value="${ user.name }"/>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label">메일</label>
+										<label class="col-sm-2 control-label"><small>메일</small></label>
 										<div class="col-sm-10">
 											<input type="email" class="form-control" placeholder="메일" data-bind="value:email" value="${ user.email }"/>
 										</div>
@@ -215,18 +215,18 @@
 								<table class="table  table-hover no-margin-bottom" >
 									<tbody>
 										<tr>
-											<td>회사</td>
-											<td>${user.company.displayName}<small>(${user.company.description})</small></td>
-										</tr>
-										<tr>
-											<td>외부 계정</td>
+											<td><small>외부 계정</small></td>
 											<td>${user.external?string("네", "아니오")}</td>
+										</tr>									
+										<tr>
+											<td><small>회사</small></td>
+											<td>${user.company.displayName} <small>(${user.company.description})</small></td>
 										</tr>
 										<tr>
-											<td>그룹</td>
+											<td><small>그룹</small></td>
 											<td>
 												<#list groups as item >								
-												<span class="label label-info" style="font-size:100%; font-weight:normal;"><i class="fa fa-folder-o"></i> ${item.displayName}</span>
+												<small><span class="label label-info" style="font-size:100%; font-weight:normal;">${item.displayName}</span></small>
 												</#list>  										
 											</td>
 										</tr>																						
