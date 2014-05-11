@@ -79,7 +79,7 @@
 					showFileList : false,
 					localization:{ select : '사진변경' , dropFilesHere : '업로드할 이미지를 이곳에 끌어 놓으세요.' },
 					async: {
-						saveUrl:  '${request.contextPath}/community/update-my-photo.do?output=json',							   
+						saveUrl:  '${request.contextPath}/community/update-my-photo.do?output=json',
 						autoUpload: true
 					},
 					upload: function (e) {								         						    								    	 		    	 
@@ -234,7 +234,7 @@
 											<td><small>권한</small></td>
 											<td>
 												<#list roles as item >								
-													<span class="label label-success" style="font-size:100%; font-weight:normal;"><i class="fa fa-key"></i> ${item}</span>						
+													<small><span class="label label-success" style="font-size:100%; font-weight:normal;"><i class="fa fa-key"></i> ${item}</span></small>						
 												</#list>  										
 											</td>
 										</tr>		
