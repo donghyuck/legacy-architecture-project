@@ -231,7 +231,7 @@
 											</td>
 										</tr>																						
 										<tr>
-											<td>권한</td>
+											<td><small>권한</small></td>
 											<td>
 												<#list roles as item >								
 													<span class="label label-success" style="font-size:100%; font-weight:normal;"><i class="fa fa-key"></i> ${item}</span>						
@@ -239,7 +239,7 @@
 											</td>
 										</tr>		
 										<tr>
-											<td>마지막 로그인</td>
+											<td><small>마지막 로그인</small></td>
 											<td><span class="text-muted data-bind="text: lastLoggedIn">${user.lastLoggedIn}</span></td>
 										</tr>																				
 									</tbody>
