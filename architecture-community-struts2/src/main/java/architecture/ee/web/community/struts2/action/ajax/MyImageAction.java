@@ -59,9 +59,7 @@ public class MyImageAction extends UploadImageAction  {
 	private Image targetImage;
 	
 	private ImageManager imageManager;
-	
-	
-	
+		
 	/**
 	 * @return imageManager
 	 */

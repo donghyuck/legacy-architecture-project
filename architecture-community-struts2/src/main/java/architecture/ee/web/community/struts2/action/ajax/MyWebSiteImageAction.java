@@ -22,7 +22,8 @@ import java.util.List;
 
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.impl.ImageImpl;
-
+import architecture.ee.web.community.struts2.action.ajax.MyImageAction.ImageUploadForm;
+import architecture.ee.web.util.ParamUtils;
 
 public class MyWebSiteImageAction extends MyImageAction  {
 
@@ -40,9 +41,9 @@ public class MyWebSiteImageAction extends MyImageAction  {
         if( getPageSize() > 0 ){
             return getImageManager().getImages(WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId(), getStartIndex(),getPageSize());            
         }else{            
-            return getImageManager().getImages(WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId());
+        	return getImageManager().getImages(WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId());
         }
-    }	
+	}	
 
 	public String updateImage() throws Exception {		
 		if(isMultiPart() ){
@@ -66,4 +67,15 @@ public class MyWebSiteImageAction extends MyImageAction  {
 		return success();
 	}
 	
+	public String uploadByUrl() throws Exception {		
+		ImageUploadForm form = ParamUtils.getJsonParameter(request, "item", ImageUploadForm.class);
+		Image imageToUse; 		
+		File fileToUse = form.readFileFromUrl();
+		imageToUse = getImageManager().createImage( WEBSITE_OBJEDT_TYPE, getWebSite().getWebSiteId(),  form.getFileName(),  form.getContentType(),  fileToUse);
+		imageToUse.getProperties().put("source", form.getSourceUrl().toString());
+		imageToUse.getProperties().put("url", form.getSourceUrl().toString());		
+		log.debug(imageToUse);
+		setImageId(getImageManager().saveImage(imageToUse).getImageId());
+		return success();
+	}
 }

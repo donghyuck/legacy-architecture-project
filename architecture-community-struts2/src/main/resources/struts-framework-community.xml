@@ -775,7 +775,9 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 
-			    <param name="excludeProperties">targetImage.inputStream</param>			    
+			    <param name="excludeProperties">
+			    	targetImage.inputStream, totalTargetImageCount, targetImages, targetImageProperty, targetImageCount
+			    </param>			    
 				<param name="includeProperties">
 				targetImage.*
 				</param>
@@ -786,7 +788,9 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 
-			    <param name="excludeProperties">targetImage.inputStream</param>			    
+			    <param name="excludeProperties">
+			    	targetImage.inputStream, totalTargetImageCount, targetImages, targetImageProperty, targetImageCount
+			    </param>	  
 				<param name="includeProperties">
 				targetImage.*
 				</param>
@@ -797,13 +801,24 @@
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeNullProperties">true</param> 
-			    <param name="excludeProperties">targetImage.inputStream</param>			    
+			    <param name="excludeProperties">
+			    	targetImage.inputStream, totalTargetImageCount, targetImages, targetImageProperty, targetImageCount
+			    </param>		    
 				<param name="includeProperties">
 				targetImage.*
 				</param>
 			</result>
 		</action>
-		
+		<action name="upload-my-website-by-url" method="uploadByUrl" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">true</param> 
+			    <param name="excludeProperties">targetImage.inputStream, targetImages.*, targetImageProperty, targetImageCount</param>			    
+				<param name="includeProperties">
+				targetImage.*
+				</param>
+			</result>
+		</action>		
 		<action name="download-my-website-image" class="architecture.ee.web.community.struts2.action.ajax.MyWebSiteImageAction">
 			<result name="success" type="stream">
 			  <param name="contentType">${targetImageContentType}</param>
