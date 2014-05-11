@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 
 import architecture.common.user.Company;
+import architecture.ee.util.OutputFormat;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.site.WebSite;
@@ -20,6 +21,8 @@ public class MainPageAction extends PageAction implements Preparable {
 	public static final String VIEW_PERSONALIZED = "personalized";
 	
 	public static final String VIEW_STREAMS = "streams";
+	
+	public static final String VIEW_MANAGE = "manage";
 
 	private String view;
 
@@ -62,10 +65,9 @@ public class MainPageAction extends PageAction implements Preparable {
 		}
 	}
 	
-	public void prepare() throws Exception {
-		if( StringUtils.isEmpty(view)){
-			view = getApplicationProperty("view.html.page.main", VIEW_HOMEPAGE);
-		}	
+	public void prepare() throws Exception {		
+		if( StringUtils.isEmpty( view ) )
+			view = getApplicationProperty( "view.html.page.main" , VIEW_HOMEPAGE );
 	}
 
 	public void setView(String view) {
@@ -75,26 +77,35 @@ public class MainPageAction extends PageAction implements Preparable {
 	public String getView() {
 		return view;
 	}
-
+	
+	protected boolean isCustomized(){
+		return StringUtils.isNotEmpty(getName()) && ( this.getPageId() > 1 ) ;
+	}
+	
 	@Override
 	public String execute() throws Exception {
-		if( view.equals( VIEW_HOMEPAGE ) ){
-			WebSite webSiteUse = getWebSite();
-			String templateToUse = webSiteUse.getProperty(WebSiteUtils.MAIN_PAGE_TEMPLATE_KEY, null);
-			if( StringUtils.isNotEmpty(templateToUse)){
-				setTemplate(templateToUse);
-			}			
-			log.debug( "template : " +  getTemplate()  );
-			
+		
+		String viewToUse = getView();
+		WebSite webSiteUse = getWebSite();		
+		String keyToUse = (new StringBuilder(WebSiteUtils.MAIN_PAGE_VIEW_PREFIX )).append(".").append(getView()).toString();
+		setPageId(webSiteUse.getLongProperty(keyToUse, -1L));		
+				
+		if( viewToUse.equals( VIEW_HOMEPAGE ) ){
 			return VIEW_HOMEPAGE;
-		}
-		else	if(view.equals( VIEW_PERSONALIZED ) ){
+		}else	if(viewToUse.equals( VIEW_PERSONALIZED ) ){
 			return VIEW_PERSONALIZED;	
-		}	
-		else	if( view.equals(VIEW_STREAMS)){
+		}else	if( viewToUse.equals(VIEW_STREAMS)){
 			return VIEW_STREAMS;
+		}else	if( viewToUse.equals(VIEW_MANAGE)){
+			return VIEW_MANAGE;
 		}		
-		return SUCCESS;
+		return success();
 	}
 
+	public String success(){
+		if( getOutputFormat() ==  OutputFormat.HTML && isCustomized()){
+			return "customize-success" ;			
+		}
+		return super.success();		
+	}
 }
