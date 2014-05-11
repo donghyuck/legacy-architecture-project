@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_COMMUNITY_FORUM</name>
+    <version>1.0</version>
+    <description>Queries for COMMUNITY FORUM COMPONENTS</description>
+</sqlset>
