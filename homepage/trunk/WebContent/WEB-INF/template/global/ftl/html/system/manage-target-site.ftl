@@ -719,9 +719,10 @@
 													</td>
 												</tr>	
 												<tr>
-													<th><small>로고</small></th>	
+													<th><small>사이트 로고</small></th>	
 													<td>
-														<img class="media-object" src="${request.contextPath}/download/logo/site/${action.targetWebSite.name}" height="100" alt="...">
+														<img class="thumbnail" src="${request.contextPath}/download/logo/site/${action.targetWebSite.name}" height="100" alt="...">
+														<small><i class="fa fa-info"></i>등록된 로고 이미지가 없습니다.</small>
 													</td>
 												</tr>													
 												<tr>
