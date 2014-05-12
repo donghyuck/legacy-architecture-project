@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-6">  
                 <a href="index.html">
-                    <img id="logo-footer" src="http://htmlstream.com/preview/unify/assets/img/logo1-default.png" class="pull-right" alt="" />
+                    <img id="logo-footer" src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="pull-right" alt="" />
                 </a>
             </div>
         </div><!--/row-->
