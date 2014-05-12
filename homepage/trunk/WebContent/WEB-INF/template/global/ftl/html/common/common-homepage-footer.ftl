@@ -5,7 +5,7 @@
             <div class="col-md-4 md-margin-bottom-40">
                 <!-- About -->
                 <div class="headline"><h2> 회사소개 </h2></div>  
-                <p class="margin-bottom-25 md-margin-bottom-40">Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals.</p>    
+                <p class="margin-bottom-25 md-margin-bottom-40">${action.webSite.company.description}</p>    
             </div><!--/col-md-4-->  
             
             <div class="col-md-4 md-margin-bottom-40">
