@@ -240,7 +240,7 @@
 										</tr>		
 										<tr>
 											<td><small>마지막 로그인</small></td>
-											<td><span class="text-muted data-bind="text: lastLoggedIn"><#if user.lastLoggedIn?? >${user.lastLoggedIn}<#/if></span></td>
+											<td><span class="text-muted data-bind="text: lastLoggedIn"><#if user.lastLoggedIn?? >${user.lastLoggedIn}</#if></span></td>
 										</tr>																				
 									</tbody>
 								</table>								
