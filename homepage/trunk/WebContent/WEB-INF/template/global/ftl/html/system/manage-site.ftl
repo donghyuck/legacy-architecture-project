@@ -687,7 +687,10 @@
 								<div class="col-lg-7 col-xs-12 hide" id="company-details">								
 									<div class="panel panel-default">
 										<div class="panel-body" style="padding:5px;">			
-											<p><button type="button" class="close" aria-hidden="true">&times;</button></p>											
+											<div class="page-header text-primary">
+												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어를 관리합니다.</h5>
+												<button type="button" class="close" aria-hidden="true">&times;</button>
+											</div>										
 											<ul class="nav nav-tabs" id="myTab">
 											  <li><a href="#image-mgmt" data-toggle="tab">이미지</a></li>
 											  <li><a href="#attachment-mgmt" data-toggle="tab">첨부파일</a></li>
