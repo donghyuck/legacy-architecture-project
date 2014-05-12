@@ -477,7 +477,7 @@
 						},
 						editable : function(){
 							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_ADMIN_SITE") ){
+							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
 								return true;
 							}
 							return false;
