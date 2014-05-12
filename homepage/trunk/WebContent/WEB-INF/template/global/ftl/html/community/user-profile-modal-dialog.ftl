@@ -145,7 +145,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="alert alert-danger block-space-10">							
-						<i class="fa fa-info"></i> 마지막으로 <span data-bind="text: lastProfileUpdate">${user.lastProfileUpdate}</span> 에 수정하였습니다.
+						<i class="fa fa-info"></i> 마지막으로 <span data-bind="text: lastProfileUpdate"><#if user.lastProfileUpdate?? >${ user.lastProfileUpdate }</#if></span> 에 수정하였습니다.
 					</div>				
 					<p class="text-muted"><small><i class="fa fa-info"></i> 사진를 클릭하면 새로운 사진을 업로드 하실 수 있습니다.</small></p>
 					<div class="media">
