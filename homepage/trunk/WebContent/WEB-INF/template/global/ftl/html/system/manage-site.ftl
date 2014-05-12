@@ -610,9 +610,7 @@
 		
 		.k-grid-content{
 			height:200px;
-		}			
-		
-		
+		}		
 		</style>
 </#compress>		
 	</head>
@@ -661,7 +659,11 @@
 												<tr>
 													<th><small>도메인</small></th>								
 													<td><span data-bind="text: domainName"></span></td>
-												</tr>		
+												</tr>	
+												<tr>
+													<th><small>회사 로고</small></th>								
+													<td><img class="img-rounded" src="${request.contextPath}/download/logo/company/${action.targetCompany.name}" height="100" alt="..." /></td>
+												</tr>														
 												<tr>
 													<th><small>설명</small></th>
 													<td><span data-bind="text: description"></span></td>
