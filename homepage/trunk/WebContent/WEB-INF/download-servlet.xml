@@ -23,7 +23,7 @@
 				<value>
 					/image/*=download-controller1
 					/profile/*=download-controller2
-					/logo/*=download-controller2
+					/logo/**=download-controller2
 				</value>
 		</property>
 	</bean>	
