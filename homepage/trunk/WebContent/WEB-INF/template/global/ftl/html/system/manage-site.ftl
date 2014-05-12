@@ -688,8 +688,8 @@
 									<div class="panel panel-default">
 										<div class="panel-body" style="padding:5px;">			
 											<div class="page-header text-primary">
-												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어를 관리합니다.</h5>
 												<button type="button" class="close" aria-hidden="true">&times;</button>
+												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어를 관리합니다.</small></h5>												
 											</div>										
 											<ul class="nav nav-tabs" id="myTab">
 											  <li><a href="#image-mgmt" data-toggle="tab">이미지</a></li>
