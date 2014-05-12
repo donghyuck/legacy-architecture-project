@@ -554,7 +554,7 @@
 					updateRequired : false,
 					editable : function(){
 						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_ADMIN_SITE") ){
+						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
 							return true;
 						}
 						return false;
@@ -1318,7 +1318,7 @@
 						<ul class="dropdown-menu">
 							<li><a href="${request.contextPath}/main.do?view=personalized">My 페이지</a></li>
 							<li><a href="${request.contextPath}/main.do?view=streams">My 스트림</a></li>
-							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_ADMIN_SITE") >
+							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
 							<li class="divider"></li>
 							<li><a href="${request.contextPath}/main.do?view=manage">My 웹사이트</a></li>					
 							</#if>								
@@ -1360,7 +1360,7 @@
 											</div>											
 										</p>
 									</h5>
-									<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_ADMIN_SITE") >
+									<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
 										<div class="pull-right">
 											<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new-notice"><i class="fa fa-plus"></i> 공지 및 이벤트 추가</button>
 										</div>											
