@@ -31,7 +31,7 @@
         <div class="row">
             <div class="col-md-6">                      
                 <p class="copyright-space">
-                    <#if action.webSite ?? >2013 &copy; ${action.webSite.company.displayName }. 모든 권리 보유.<#else></#if>
+                    <#if action.webSite ?? >${.now?string("yyyy")} &copy; ${action.webSite.company.displayName }. 모든 권리 보유.<#else></#if>
                     <a href="${request.contextPath}/content.do?contentId=2">개인정보 취급방침</a> | <a href="${request.contextPath}/content.do?contentId=1">이용약관</a>
                 </p>
             </div>
