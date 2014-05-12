@@ -722,9 +722,6 @@
 													<th><small>사이트 로고</small></th>	
 													<td>
 														<img class="img-rounded" src="${request.contextPath}/download/logo/site/${action.targetWebSite.name}" height="100" alt="..." />
-														<#if !WebSiteUtils.hasLogo( action.targetWebSite ) >
-														<p class="text-danger"><small><i class="fa fa-info"></i> 등록된 로고 이미지가 없습니다.</small></p>
-														</#if>
 													</td>
 												</tr>													
 												<tr>
