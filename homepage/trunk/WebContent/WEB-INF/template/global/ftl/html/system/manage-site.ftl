@@ -687,7 +687,7 @@
 								<div class="col-lg-7 col-xs-12 hide" id="company-details">								
 									<div class="panel panel-default">
 										<div class="panel-body" style="padding:5px;">			
-											<button type="button" class="close" aria-hidden="true">&times;</button>											
+											<p><button type="button" class="close" aria-hidden="true">&times;</button></p>											
 											<ul class="nav nav-tabs" id="myTab">
 											  <li><a href="#image-mgmt" data-toggle="tab">이미지</a></li>
 											  <li><a href="#attachment-mgmt" data-toggle="tab">첨부파일</a></li>
