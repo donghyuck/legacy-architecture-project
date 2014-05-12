@@ -662,7 +662,12 @@
 												</tr>	
 												<tr>
 													<th><small>회사 로고</small></th>								
-													<td><img class="img-rounded" src="${request.contextPath}/download/logo/company/${action.targetCompany.name}" height="100" alt="..." /></td>
+													<td>
+														<img class="img-rounded" src="${request.contextPath}/download/logo/company/${action.targetCompany.name}" height="80" alt="..." />
+														<p class="pull-right">											
+															<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="logo">회사 로고</button>															
+														<p>
+													</td>
 												</tr>														
 												<tr>
 													<th><small>설명</small></th>
