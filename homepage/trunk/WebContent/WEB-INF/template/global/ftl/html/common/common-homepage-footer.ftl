@@ -37,7 +37,7 @@
             </div>
             <div class="col-md-6">  
                 <a href="index.html">
-                    <img id="logo-footer" src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" height="50" class="pull-right" alt="" />
+                    <img id="logo-footer" src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" height="80" class="pull-right" alt="" />
                 </a>
             </div>
         </div><!--/row-->
