@@ -25,7 +25,6 @@
     </div><!--/container--> 
 </div><!--/footer-->    
 <!--=== End Footer ===-->
-
 <!--=== Copyright ===-->
 <div class="copyright">
     <div class="container layout">
