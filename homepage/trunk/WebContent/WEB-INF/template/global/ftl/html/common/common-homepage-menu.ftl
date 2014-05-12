@@ -61,7 +61,7 @@
 			<!-- START My profile Modal -->
 			<div class="modal fade" id="myProfileModal" tabindex="-1" role="dialog" aria-labelledby="myProfileModalLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-lg">
-			    <div class="modal-content">
+			    <div class="modal-content" style="min-height:600px;">
 			      <div class="modal-header">
 			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 			        <h4 class="modal-title" id="myProfileModalLabel">내정보</h4>
