@@ -34,7 +34,7 @@ PC9saWNlbnNlPg==</file>
 			<freemarker>
 				<debug>true</debug>
 				<enabled>true</enabled>
-				<usingDatabase>true</usingDatabase>
+				<usingDatabase>false</usingDatabase>
 				<source>
 					<location>/WEB-INF/template/global/ftl/</location>
 				</source>
