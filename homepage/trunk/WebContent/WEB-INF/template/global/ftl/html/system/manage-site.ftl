@@ -113,6 +113,7 @@
 		
 		function createLogoPanel(){
 			if( !$('#logo-file').data('kendoUpload') ){		
+				var selectedCompany = $("#navbar").data("companyPlaceHolder");
 				$("#logo-file").kendoUpload({
 					multiple : false,
 					width: 300,
@@ -124,8 +125,8 @@
 					},
 					upload: function (e) {								         
 						e.data = {
-							objectType :
-							objectId: 
+							objectType : 1,
+							objectId: selectedCompany.companyId
 						};														    								    	 		    	 
 					},
 					success : function(e) {								    
