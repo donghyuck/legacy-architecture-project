@@ -686,7 +686,17 @@
 										 	</tbody>
 									</table>
 								</div>
-								<div class="col-lg-7 col-xs-12" id="company-details">								
+								<div class="col-lg-7 col-xs-12" id="company-details">			
+									<div class="panel panel-default hide" role="timeline">
+										<div class="panel-body" style="padding:5px;">
+											<div style="padding:5px;">
+												<button type="button" class="btn-control-group close" data-action="close-timeline">&times;</button>
+											</div>
+											<div class="page-header text-primary">							
+												<h5><i class="fa fa-clock-o"></i> 타임라인</strong>&nbsp;<small>회사 타임라인을 관리합니다.</small></h5>												
+											</div>										
+										</div>
+									</div>													
 									<div class="panel panel-default hide" role="media">
 										<div class="panel-body" style="padding:5px;">
 											<div style="padding:5px;">
