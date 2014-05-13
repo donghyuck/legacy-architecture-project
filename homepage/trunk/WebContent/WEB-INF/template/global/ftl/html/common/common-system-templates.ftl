@@ -140,8 +140,7 @@
 		<script id="attach-details-template" type="text/x-kendo-template">	
 			<span class="label label-info">#= contentType #</span>
 			<a href="${request.contextPath}/secure/download-attachment.do?attachmentId=#= attachmentId #" class="btn btn-sm btn-warning">다운로드</a>
-		</script>
-		
+		</script>		
 	<!- ================================ ->
 	<!-- COMPANY SETTING MODAL TEMPLAGE 		 -->
 	<!- ================================ ->			
@@ -205,8 +204,7 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-	</script>		
-		
+	</script>				
 	<!- ================================ ->
 	<!-- WEBSITE SETTING MODAL TEMPLAGE 		 -->
 	<!- ================================ ->			
@@ -284,8 +282,7 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-	</script>						
-
+	</script>		
 	<!- ================================ ->
 	<!-- WEBSITE MENU MODAL TEMPLAGE 				 -->
 	<!- ================================ ->			
@@ -342,3 +339,15 @@
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->				
 	</script>
+
+<script type="text/x-kendo-tmpl" id="logo-list-view-template">
+	<div class="media">
+		<a class="pull-left" href="\\#">
+		<img class="media-object" src="..." alt="...">
+		</a>
+		<div class="media-body">
+			<h4 class="media-heading">#:filename#</h4>
+		</div>
+	</div>
+</script>		
+	
