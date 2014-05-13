@@ -214,14 +214,22 @@
 										</div>
 									</div>
 								</div>
-								<div class="tab-pane" id="company-logo" style="min-height:300px;">
-									<div class="page-header page-nounderline-header text-primary">
-										<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
+								<div class="tab-pane" id="company-logo">
+									<div class="panel panel-default">
+										<div class="panel-body" style="min-height:300px;">
+											<div class="page-header page-nounderline-header text-primary">
+												<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
+											</div>
+											<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-rounded" />
+											<p class="pull-right">
+											<button type="button" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</button>	
+											</p>
+										</div>
 									</div>
-									<div class="center-block">
-										<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-rounded" />
-									</div>
-									<button type="button" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</button>
+
+								
+
+									
 								</div>
 								<div class="tab-pane" id="company-media" style="min-height:300px;">
 									<div id="social-media-area" class="row">
@@ -254,20 +262,6 @@
 				</div>				
 			</div>
 		</div>		
-		<div class="overlay overlay-hugeinc hide">
-			<button type="button" class="overlay-close">Close</button>
-			<nav>
-				<ul>
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Work</a></li>
-					<li><a href="#">Clients</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</nav>
-		</div>
-
-								 
 		<!-- END MAIN CONTENT -->	
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
