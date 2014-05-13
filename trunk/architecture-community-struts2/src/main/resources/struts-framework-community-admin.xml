@@ -394,6 +394,39 @@
 			<result name="success" type="freemarker">/html/system/manage-target-website-pages.ftl</result>
 		</action>		
 		
+		<!-- logo  -->
+		<action name="add-logo-image" method="addLogoImage" class="architecture.ee.web.community.struts2.action.admin.ajax.LogoManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		 
+			    <param name="excludeProperties">targetLogoImage</param>   
+				<param name="includeProperties">
+				targetPrimaryLogoImage
+				</param>
+			</result>
+		</action>	
+		
+		<action name="list-logo-image"  class="architecture.ee.web.community.struts2.action.admin.ajax.LogoManagementAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeNullProperties">false</param> 		    
+			    <param name="excludeProperties">targetLogoImage</param>
+				<param name="includeProperties">
+				targetLogoImageCount,
+				targetLogoImages.*
+				</param>
+			</result>
+		</action>			
+
+		<action name="download-logo-image" class="architecture.ee.web.community.struts2.action.admin.ajax.LogoManagementAction">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>	
+					
 				
 		<!--  social  -->
 		<action name="list-social-account" class="architecture.ee.web.community.struts2.action.admin.ajax.SocialManagementAction">
