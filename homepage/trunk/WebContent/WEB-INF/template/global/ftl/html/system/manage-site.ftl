@@ -181,7 +181,7 @@
 					},
 					columns:[
 						{ field: "logoId", title: "ID",  width: 50, filterable: false, sortable: false },
-						{ field: "filename", title: "파일", width: 250, template="#:filename# <span class='label label-info'>#: imageContentType #</span>" },
+						{ field: "filename", title: "파일", width: 250, template:"#:filename# <span class='label label-info'>#: imageContentType #</span>" },
 						{ field: "imageSize", title: "파일크기",  width: 100 , format: "{0:##,### bytes}" }
 					]				
 				});			
