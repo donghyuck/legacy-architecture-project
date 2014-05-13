@@ -688,7 +688,7 @@
 										<div class="panel-body" style="padding:5px;">
 											<div style="padding:5px;">
 											<button type="button" class="close">&times;</button>
-											<div>
+											</div>
 											<div class="page-header text-primary">							
 												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어(이미지, 파일, 쇼셜 등)를 관리합니다.</small></h5>												
 											</div>										
