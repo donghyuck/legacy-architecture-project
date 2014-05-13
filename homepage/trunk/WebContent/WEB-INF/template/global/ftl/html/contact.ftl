@@ -2,13 +2,13 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
+		<script type="text/javascript" src="${request.contextPath}/js/jquery/1.10.2/jquery.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'http://maps.google.com/maps/api/js?sensor=true',
 			'${request.contextPath}/js/gmaps/gmaps.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
