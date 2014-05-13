@@ -155,7 +155,7 @@
 						},
 						error: common.api.handleKendoAjaxError
 					},
-					selectable: "single",
+					//selectable: "single",
 					template: kendo.template($('#logo-list-view-template').html())
 				});				
 			}
