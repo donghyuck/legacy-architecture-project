@@ -156,7 +156,11 @@
 							model : common.models.Logo
 						},
 						error: common.api.handleKendoAjaxError
-					}				
+					},
+					columns:[
+						{ field: "logoId", title: "ID",  width: 50, filterable: false, sortable: false },
+						{ field: "filename", title: "파일", width: 250 }
+					]				
 				});			
 			}						
 		}
