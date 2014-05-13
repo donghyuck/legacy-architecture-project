@@ -123,7 +123,9 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
-					<div id="map"></div>					
+					<#if action.hasWebSitePage("pages.contact.pageId") >							
+					${ processedBodyText }
+					</#if> 				
 				</div>				
 			</div>
 		</div>									 
