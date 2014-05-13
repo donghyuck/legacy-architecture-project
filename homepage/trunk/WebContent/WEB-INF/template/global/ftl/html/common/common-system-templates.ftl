@@ -346,8 +346,9 @@
 		<img class="media-object" src="${request.contextPath}/secure/download-logo-image.do?logoId=#=logoId#" alt="...">
 		</a>
 		<div class="media-body">
-			<h4 class="media-heading">#:filename#</h4>
-			<p>size : #= imageSize #</p>
+			<p>파일 : #: filename#</p>
+			<p>타입 : #: imageContentType #</p>
+			<p>크기 : #= kendo.toString( imageSize , "##.###" ) #</p>
 		</div>
 	</div>
 </script>		
