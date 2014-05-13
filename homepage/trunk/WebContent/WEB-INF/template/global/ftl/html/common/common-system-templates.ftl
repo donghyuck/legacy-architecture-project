@@ -347,6 +347,7 @@
 		</a>
 		<div class="media-body">
 			<h4 class="media-heading">#:filename#</h4>
+			<p>size : #= getImageSize #</p>
 		</div>
 	</div>
 </script>		
