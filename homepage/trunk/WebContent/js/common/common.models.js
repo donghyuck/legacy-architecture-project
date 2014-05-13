@@ -62,7 +62,13 @@
 			imageContentType : { type: "string", editable: true},
 			modifiedDate: { type: "date"},
 			creationDate: { type: "date" }
-		}
+		},
+	    formattedCreationDate : function(){
+	    	return kendo.toString(this.get("creationDate"), "g");
+	    },
+	    formattedModifiedDate : function(){
+	    	return kendo.toString(this.get("modifiedDate"), "g");
+	    }
 	});
 	
 	common.models.WebSite =  kendo.data.Model.define({
