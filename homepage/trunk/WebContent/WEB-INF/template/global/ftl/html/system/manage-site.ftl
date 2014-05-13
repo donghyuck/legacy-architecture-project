@@ -133,11 +133,12 @@
 						if( e.response.targetPrimaryLogoImage ){
 							//e.response.targetAttachment.attachmentId;
 							// LIST VIEW REFRESH...
-							$('#logo-list-view').data('kendoListView').dataSource.read(); 
+							$('#logo-grid').data('kendoGrid').dataSource.read(); 
 						}				
 					}
 				});						
 			}
+			/*
 			if(!$('#logo-list-view').data('kendoListView')){
 				$("#logo-list-view").kendoListView({
 					dataSource: {
@@ -159,9 +160,9 @@
 					template: kendo.template($('#logo-list-view-template').html())
 				});				
 			}
-			/*
-			if(!$('#logo-grid').data('kendoGrid')){
-				
+			*/
+			
+			if(!$('#logo-grid').data('kendoGrid')){				
 				$("#logo-grid").kendoGrid({
 					dataSource: {
 						dataType: 'json',
@@ -183,8 +184,7 @@
 						{ field: "filename", title: "파일", width: 250 }
 					]				
 				});			
-			}
-			*/						
+			}								
 		}
 
 		function createSocialPane(){
@@ -785,7 +785,7 @@
 											<input name="logo-file" id="logo-file" type="file" />											
 										</div>
 										<div class="panel-body scrollable" style="max-height:450px;">
-											<div id="logo-list-view"></div>
+											<div id="logo-grid"></div>
 										</div>										
 									</div>		
 									<div class="panel panel-default hide" role="timeline">
