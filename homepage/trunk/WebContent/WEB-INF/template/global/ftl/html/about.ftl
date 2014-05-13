@@ -215,6 +215,7 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="company-logo">
+									<div class="blank-top-5"></div>
 									<div class="panel panel-default">
 										<div class="panel-body" style="min-height:300px;">
 											<div class="page-header page-nounderline-header text-primary">
