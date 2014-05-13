@@ -710,7 +710,7 @@
 									<div class="panel panel-default hide" role="timeline">
 										<div class="panel-heading">
 											<button type="button" class="btn-control-group close" data-action="close-timeline">&times;</button>
-											<i class="fa fa-clock-o"></i> 타임라인</strong> <small>회사 타임라인을 관리합니다.</small>
+											<i class="fa fa-clock-o"></i> <small>회사 타임라인을 관리합니다.</small>
 										</div>									
 										<div class="panel-body" style="padding:5px;">
 																			
