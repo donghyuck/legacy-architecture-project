@@ -63,7 +63,7 @@
 			modifiedDate: { type: "date"},
 			creationDate: { type: "date" }
 		},
-		getFormattedImageSize : function(){
+		formattedImageSize : function(){
 			return kendo.toString(this.get("imageSize"), "##,###");
 		},
 		formattedCreationDate : function(){
