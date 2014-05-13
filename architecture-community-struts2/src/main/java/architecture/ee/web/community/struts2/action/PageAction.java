@@ -31,6 +31,7 @@ import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.PageNotFoundException;
 import architecture.ee.web.community.page.PageState;
+import architecture.ee.web.site.WebSite;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.WebSiteUtils;
 
@@ -199,10 +200,7 @@ public class PageAction extends FrameworkActionSupport {
 		return ( StringUtils.isEmpty(getName()) && this.getPageId() < 1 ) ? false : true;
 	}
 	
-	public String execute() throws Exception {
-		
-		log.debug(getTargetPage());
-		
+	public String execute() throws Exception {		
 		if( !isCustomized())	
 			return super.success();	
 				
