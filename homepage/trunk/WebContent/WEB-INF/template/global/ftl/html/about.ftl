@@ -139,7 +139,7 @@
 					<div class="row">
 						<div class="col-sm-12">					
 							<#if action.hasWebSitePage("pages.about.pageId") >							
-							hello
+							${ processedBodyText }
 							</#if> 														
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#company-history" data-toggle="tab">회사연역</a></li>
