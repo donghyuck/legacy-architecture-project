@@ -227,10 +227,6 @@
 											</p>
 										</div>
 									</div>
-
-								
-
-									
 								</div>
 								<div class="tab-pane" id="company-media" style="min-height:300px;">
 									<div id="social-media-area" class="row">
