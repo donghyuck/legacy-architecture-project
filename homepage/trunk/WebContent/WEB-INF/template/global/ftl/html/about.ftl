@@ -212,7 +212,7 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="company-logo">
-								
+									로고 파일은 AI 와 JPG 형식을 제공됩니다. 
 								</div>
 								<div class="tab-pane" id="company-media">
 									<div id="social-media-area" class="row">
