@@ -220,7 +220,7 @@
 									</div>
 									<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-thumbnail" />									
 								</div>
-								<div class="tab-pane" id="company-media">
+								<div class="tab-pane" id="company-media" style="min-height:300px;">
 									<div id="social-media-area" class="row">
 										<#list action.connectedCompanySocialNetworks  as item >	
 										<div class="col-sm-6">						
