@@ -637,8 +637,7 @@
 							</div>
 							<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="setting"><i class="fa fa-cog"></i> 회사 정보변경</button>								
 						</div>
-						<div class="panel-body" style="padding:5px;">						
-														
+						<div class="panel-body" style="padding:5px;">	
 							<div class="row">
 								<div id="company-info" class="col-lg-5 col-xs-12>					
 									<div class="page-header page-nounderline-header text-primary">
