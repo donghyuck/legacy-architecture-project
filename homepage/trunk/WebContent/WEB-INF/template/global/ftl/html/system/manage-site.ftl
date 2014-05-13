@@ -684,9 +684,9 @@
 										 	</tbody>
 									</table>
 								</div>
-								<div class="col-lg-7 col-xs-12 hide" id="company-details">								
+								<div class="col-lg-7 col-xs-12" id="company-details">								
 									<div class="panel panel-default">
-										<div class="panel-body" style="padding:5px;">
+										<div class="panel-body hide" style="padding:5px;">
 											<button type="button" class="close" aria-hidden="true"><i class="fa fa-times"></i></button>
 											<div class="page-header text-primary">												
 												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어를 관리합니다.</small></h5>												
