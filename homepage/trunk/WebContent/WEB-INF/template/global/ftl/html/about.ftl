@@ -140,7 +140,8 @@
 						<div class="col-sm-12">					
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#company-history" data-toggle="tab">회사연역</a></li>
-								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>
+								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
+								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>								
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content">
@@ -209,6 +210,9 @@
 											</ul>							
 										</div>
 									</div>
+								</div>
+								<div class="tab-pane" id="company-logo">
+								
 								</div>
 								<div class="tab-pane" id="company-media">
 									<div id="social-media-area" class="row">
