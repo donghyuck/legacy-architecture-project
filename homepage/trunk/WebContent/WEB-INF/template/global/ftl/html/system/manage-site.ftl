@@ -156,7 +156,7 @@
 						error: common.api.handleKendoAjaxError
 					},
 					selectable: "single",
-					template: "<div>#: filename #</div>"
+					template: kendo.templage($('#logo-list-view-template').html())
 				});				
 			}
 			/*
