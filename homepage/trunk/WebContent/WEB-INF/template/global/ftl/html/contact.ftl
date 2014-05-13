@@ -2,14 +2,12 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
-		<script type="text/javascript" src="${request.contextPath}/js/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'${request.contextPath}/js/gmaps/gmaps.js',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
@@ -38,38 +36,7 @@
 				<#if !action.user.anonymous >				
 				
 				</#if>	
-				
-   var map = new GMaps({
-        el: '#map',
-        lat: -12.043333,
-        lng: -77.028333
-      });
-      map.addMarker({
-        lat: -12.043333,
-        lng: -77.03,
-        title: 'Lima',
-        details: {
-          database_id: 42,
-          author: 'HPNeo'
-        },
-        click: function(e){
-          if(console.log)
-            console.log(e);
-          alert('You clicked in this marker');
-        },
-        mouseover: function(e){
-          if(console.log)
-            console.log(e);
-        }
-      });
-      map.addMarker({
-        lat: -12.042,
-        lng: -77.028333,
-        title: 'Marker with InfoWindow',
-        infoWindow: {
-          content: '<p>HTML Content</p>'
-        }
-      });
+			
 			
 				// END SCRIPT            
 			}
