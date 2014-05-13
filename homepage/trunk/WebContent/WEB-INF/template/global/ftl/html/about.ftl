@@ -2,7 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.timeline.cs" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.timeline.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
