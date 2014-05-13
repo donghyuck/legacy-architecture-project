@@ -154,6 +154,17 @@ public class PageAction extends FrameworkActionSupport {
 		return targetPage;
 	}
 	
+	
+	public boolean hasWebSitePage(String name){
+		WebSite webSiteToUse = getWebSite();
+		long pageIdToUse  =webSiteToUse.getLongProperty(name, -1L);
+		if( pageIdToUse > 0 ){
+			this.targetPageId = pageIdToUse ;
+			this.targetPage = null;
+		}
+		return hasPage();		
+	}
+	
 	public boolean hasPage(){
 		return this.getTargetPage().getPageId() > 0 ? true : false;		 
 	}
