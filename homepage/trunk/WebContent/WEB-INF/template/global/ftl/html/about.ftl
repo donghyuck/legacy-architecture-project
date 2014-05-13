@@ -2,12 +2,12 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.timeline.cs" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common/common.timeline.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
