@@ -96,7 +96,7 @@
 	<body class="color0">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_5") />
+		<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_6") />
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
