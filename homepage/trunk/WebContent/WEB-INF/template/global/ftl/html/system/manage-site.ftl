@@ -640,7 +640,7 @@
 						<div class="panel-body" style="padding:5px;">						
 														
 							<div class="row">
-								<div c id="company-info" class="col-lg-5 col-xs-12>					
+								<div id="company-info" class="col-lg-5 col-xs-12>					
 									<div class="page-header page-nounderline-header text-primary">
 										<h5 >
 											<small><i class="fa fa-info"></i> 미디어 버튼을 클릭하면 회사가 보유한 미디어(이미지, 파일 등)을 관리할 수 있습니다.</small>
