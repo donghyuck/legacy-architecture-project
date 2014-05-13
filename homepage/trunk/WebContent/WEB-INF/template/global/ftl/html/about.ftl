@@ -138,10 +138,9 @@
 				<div class="col-lg-9">
 					<div class="row">
 						<div class="col-sm-12">					
-							<if action.hasWebSitePage("pages.about.pageId") >							
+							<#if action.hasWebSitePage("pages.about.pageId") >							
 							hello
-							</#if>
- 														
+							</#if> 														
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#company-history" data-toggle="tab">회사연역</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
