@@ -76,7 +76,8 @@
 							$("button.btn-control-group[data-action='timeline']").click();
 						},
 						logo: function(e){
-							$('#company-details .panel[role="logo"]').toggleClass('hide');
+							createLogoPanel();
+							$('#company-details .panel[role="logo"]').toggleClass('hide');							
 						},
 						'close-logo': function(e){
 							$("button.btn-control-group[data-action='logo']").click();
@@ -107,110 +108,112 @@
 				$('#myTab a:first').tab('show') ;
 			}	
 		}]);
+		
+		function createLogoPanel(){
+		
+		}
 
 		function createSocialPane(){
 			var selectedCompany = $("#navbar").data("companyPlaceHolder");
-						if( ! $("#social-grid").data("kendoGrid") ){	
-							
-							$("#social-grid").kendoGrid({
-								dataSource: {
-									dataType: 'json',
-									transport: {
-										read: { url:'${request.contextPath}/secure/list-social-account.do?output=json', type: 'POST' },
-										update: { url:'${request.contextPath}/secure/update-social-account.do?output=json', type:'POST' },
-										parameterMap: function (options, operation){
-											if (operation != "read" && options) {										                        								                       	 	
-												return { objectType: 1, objectId : selectedCompany.companyId , item: kendo.stringify(options)};									                            	
-											}else{
-												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 1, objectId: selectedCompany.companyId }
-											}
-										} 
-									},
-									schema: {
-										data: "targetSocialAccounts",
-										model : SocialAccount
-									},
-									pageSize: 15,
-									serverPaging: false,
-									serverFiltering: false,
-									serverSorting: false,                        
-									error: common.api.handleKendoAjaxError
-								},
-								columns:[
-									{ field: "socialAccountId", title: "ID",  width: 50, filterable: false, sortable: false },
-									{ field: "serviceProviderName", title: "쇼셜", width: 100 },
-									{ field: "signedIn", title: "로그인",  width: 80 },
-									{ field: "accessSecret", title: "Access Secret", sortable: false },
-									{ field: "accessToken", title: "Access Token", sortable: false },
-									{ field: "creationDate", title: "생성일", width: 100, format: "{0:yyyy/MM/dd}" },
-									{ field: "modifiedDate", title: "수정일", width: 100, format: "{0:yyyy/MM/dd}" },
-									{ command: [ {  text: "상세" , click: function(e){										
-										e.preventDefault();										
-										selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));											
-										if(! $("#social-detail-window").data("kendoWindow")){       
-											// WINDOW 생성
-											$("#social-detail-window").kendoWindow({
-												actions: ["Close"],
-												resizable: false,
-												modal: true,
-												visible: false,
-												minWidth: 300,
-												minHeight: 300
-											});
-										}																				
-										// load social template ...										
-										var socialWindow = $("#social-detail-window").data("kendoWindow");
-										var socialMediaName = selectedSocial.serviceProviderName ;										
-										var template = kendo.template($('#social-details-template').html());											
-										socialWindow.title( socialMediaName + ' 연결정보' );
-										socialWindow.content(template({ 'socialAccount' : selectedSocial }));
-										$.ajax({
-											type : 'POST',
-											url : '${request.contextPath}/social/get-' + socialMediaName + '-profile.do?output=json',
-											data: { socialAccountId: selectedSocial.socialAccountId },
-											beforeSend: function(){																					
-												socialWindow.center();
-												socialWindow.open();
-												kendo.ui.progress($("#social-detail-window"), true);												
-											},
-											success : function(response){
-												if( response.error ){
-													// 오류 발생..
-													socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
-												} else {														
-													socialWindow.content( template(response) );
-												}										
-												$('#connect-social-btn').click( function(e){
-													socialWindow.close();													
-													var w = window.open(
-														selectedSocial.authorizationUrl, 
-														"_blank",
-														"toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400"
-													);
-													w.focus();
-												});		
-											},
-											error: function(){
-												socialWindow.close();
-												common.api.handleKendoAjaxError();
-											},
-											dataType : 'json'
-										});	
-										
-									}}, { name: "destroy", text: "삭제" } ], title: " ", width: "230px"  }
-								],
-								filterable: true,
-								editable: "inline",
-								sortable: true,
-								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
-								//height: 500,
-								dataBound: function(e) {								
-								},
-								change: function(e) {          
-									var selectedCells = this.select();     
+			if( ! $("#social-grid").data("kendoGrid") ){
+				$("#social-grid").kendoGrid({
+					dataSource: {
+						dataType: 'json',
+						transport: {
+							read: { url:'${request.contextPath}/secure/list-social-account.do?output=json', type: 'POST' },
+							update: { url:'${request.contextPath}/secure/update-social-account.do?output=json', type:'POST' },
+							parameterMap: function (options, operation){
+								if (operation != "read" && options) {
+									return { objectType: 1, objectId : selectedCompany.companyId , item: kendo.stringify(options)};
+								}else{
+									return { startIndex: options.skip, pageSize: options.pageSize, objectType: 1, objectId: selectedCompany.companyId }
 								}
+							}
+						},
+						schema: {
+							data: "targetSocialAccounts",
+							model : SocialAccount
+						},
+						pageSize: 15,
+						serverPaging: false,
+						serverFiltering: false,
+						serverSorting: false,
+						error: common.api.handleKendoAjaxError
+					},
+					columns:[
+						{ field: "socialAccountId", title: "ID",  width: 50, filterable: false, sortable: false },
+						{ field: "serviceProviderName", title: "쇼셜", width: 100 },
+						{ field: "signedIn", title: "로그인",  width: 80 },
+						{ field: "accessSecret", title: "Access Secret", sortable: false },
+						{ field: "accessToken", title: "Access Token", sortable: false },
+						{ field: "creationDate", title: "생성일", width: 100, format: "{0:yyyy/MM/dd}" },
+						{ field: "modifiedDate", title: "수정일", width: 100, format: "{0:yyyy/MM/dd}" },
+						{ command: [ {  text: "상세" , click: function(e){
+							e.preventDefault();
+							selectedSocial =  this.dataItem($(e.currentTarget).closest("tr"));
+							if(! $("#social-detail-window").data("kendoWindow")){
+								// WINDOW 생성
+								$("#social-detail-window").kendoWindow({
+									actions: ["Close"],
+									resizable: false,
+									modal: true,
+									visible: false,
+									minWidth: 300,
+									minHeight: 300
+								});
+							}
+							// load social template ...
+							var socialWindow = $("#social-detail-window").data("kendoWindow");
+							var socialMediaName = selectedSocial.serviceProviderName ;
+							var template = kendo.template($('#social-details-template').html());
+							socialWindow.title( socialMediaName + ' 연결정보' );
+							socialWindow.content(template({ 'socialAccount' : selectedSocial }));
+							$.ajax({
+								type : 'POST',
+								url : '${request.contextPath}/social/get-' + socialMediaName + '-profile.do?output=json',
+								data: { socialAccountId: selectedSocial.socialAccountId },
+								beforeSend: function(){
+									socialWindow.center();
+									socialWindow.open();
+									kendo.ui.progress($("#social-detail-window"), true);
+								},
+								success : function(response){
+									if( response.error ){
+										// 오류 발생..
+										socialWindow.content( template( { 'socialAccount' : selectedSocial, 'error': response.error } ) );
+									} else {
+										socialWindow.content( template(response) );
+									}
+									$('#connect-social-btn').click( function(e){
+										socialWindow.close();
+										var w = window.open(
+											selectedSocial.authorizationUrl,
+											"_blank",
+											"toolbar=yes, location=yes, directories=no, status=no, menubar=yes, scrollbars=yes, resizable=no, copyhistory=yes, width=500, height=400"
+										);
+										w.focus();
+									});
+								},
+								error: function(){
+									socialWindow.close();
+									common.api.handleKendoAjaxError();
+								},
+								dataType : 'json'
 							});
-						}			
+						}}, { name: "destroy", text: "삭제" } ], title: " ", width: "230px"  }
+					],
+					filterable: true,
+					editable: "inline",
+					sortable: true,
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+					//height: 500,
+					dataBound: function(e) {
+					},
+					change: function(e) {
+						var selectedCells = this.select();
+					}
+				});
+			}
 		}
 
 		function createAttachPane(){		
