@@ -50,6 +50,20 @@
 	    		
 		}
 	});
+
+	common.models.Logo =  kendo.data.Model.define({
+		id : "logoId",
+		fields: { 
+			objectType: { type: "number", editable: false, defaultValue: 0 },
+			objectId : { type: "number", editable: false, defaultValue: 0},
+			primary: { type: "boolean", editable: false, defaultValue: false },
+			filename : { type: "string", editable: true},
+			imageSize : { type: "number", editable: true, defaultValue: 0},
+			imageContentType : { type: "string", editable: true},
+			modifiedDate: { type: "date"},
+			creationDate: { type: "date" }
+		}
+	});
 	
 	common.models.WebSite =  kendo.data.Model.define({
 		id : "webSiteId",
