@@ -89,14 +89,9 @@
 				</div>
 				<div class="col-lg-9">
 
-					<div class="row">
-						<div class="col-lg-6">
-																							
-						</div>							
-						<div class="col-lg-6">			
-											
-						</div>								
-					</div>	
+							<#if action.hasWebSitePage("pages.welcome.pageId") >							
+							${ processedBodyText }
+							</#if> 	
 					
 				</div>				
 			</div>
