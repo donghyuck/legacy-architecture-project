@@ -64,7 +64,7 @@
 							topBar.go('main-user.do');			
 						}, 							
 						details : function(e){
-							$('#company-details').toggleClass('hide');
+							$('#company-details .panel').toggleClass('hide');
 						},
 						connect : function(e){
 							alert("social modal");	 					
