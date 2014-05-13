@@ -120,7 +120,7 @@
 				 	showFileList : false,
 					localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
 					async: {
-						saveUrl:  '${request.contextPath}/community/add-logo-image.do?output=json',							   
+						saveUrl:  '${request.contextPath}/secure/add-logo-image.do?output=json',							   
 						autoUpload: true
 					},
 					upload: function (e) {								         
