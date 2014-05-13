@@ -343,7 +343,7 @@
 <script type="text/x-kendo-tmpl" id="logo-list-view-template">
 	<div class="media">
 		<a class="pull-left" href="\\#">
-		<img class="media-object" src="..." alt="...">
+		<img class="media-object" src="${request.contextPath}/secure/download-logo-image.do?logoId=#=logoId#" alt="...">
 		</a>
 		<div class="media-body">
 			<h4 class="media-heading">#:filename#</h4>
