@@ -230,7 +230,7 @@
 										    	 e.data = {};														    								    	 		    	 
 										    },
 										    success : function(e) {								    
-												if( e.response.targetAttachment ){
+												if( e.response.targetPrimaryLogoImage ){
 													e.response.targetAttachment.attachmentId;
 													// LIST VIEW REFRESH...
 													$('#attachment-list-view').data('kendoListView').dataSource.read(); 
