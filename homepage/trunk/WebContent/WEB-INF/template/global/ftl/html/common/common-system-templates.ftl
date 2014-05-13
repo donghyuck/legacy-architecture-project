@@ -348,8 +348,8 @@
 		<div class="media-body">
 			<p>파일 : #: filename#</p>
 			<p>타입 : #: imageContentType #</p>
-			<p>크기 : #: formattedImageSize #</p>
-			<p>수정일 : #: formattedModifiedDate #</p>
+			<p>크기 : # formattedImageSize #</p>
+			<p>수정일 : #= formattedModifiedDate #</p>
 		</div>
 	</div>
 </script>		
