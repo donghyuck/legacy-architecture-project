@@ -734,7 +734,7 @@
 											<button type="button" class="btn-control-group close" data-action="close-logo">&times;</button>
 											<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</small>
 										</div>
-										<div class="panel-body" style="padding:5px;">											
+										<div class="panel-body">											
 											<input name="logo-file" id="logo-file" type="file" />											
 										</div>
 										<div class="panel-body scrollable" style="max-height:450px;">
