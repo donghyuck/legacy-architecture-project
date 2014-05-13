@@ -64,7 +64,7 @@
 			creationDate: { type: "date" }
 		},
 	    formattedImageSize : function(){
-	    	return kendo.toString(this.get("imageSize"), "##.###");
+	    	return kendo.toString(this.get("imageSize"), "##,###");
 	    },
 		formattedCreationDate : function(){
 	    	return kendo.toString(this.get("creationDate"), "g");
