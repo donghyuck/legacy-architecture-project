@@ -700,7 +700,8 @@
 								</div>
 								<div class="col-lg-7 col-xs-12" id="company-details">			
 									<div class="panel panel-default hide" role="logo">
-										<div class="panel-body" style="padding:5px;">
+										<div class="panel-heading"></div>
+										<div class="panel-body" style="padding:5px;">											
 											<div style="padding:5px;">
 												<button type="button" class="btn-control-group close" data-action="close-logo">&times;</button>
 											</div>
