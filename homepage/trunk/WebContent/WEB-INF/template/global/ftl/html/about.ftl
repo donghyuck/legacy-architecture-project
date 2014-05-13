@@ -155,8 +155,8 @@
 										<div class="panel-body scrollable" style="max-height:400px;">
 											<ul class="cbp_tmtimeline">
 												<li>
-													<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>4/10/13</span> <span>18:30</span></time>
-													<div class="cbp_tmicon cbp_tmicon-phone"></div>
+													<time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>2012.04.03</span> <span>4월</span></time>
+													<div class="cbp_tmicon"></div>
 													<div class="cbp_tmlabel">
 														<h2>Ricebean black-eyed pea</h2>
 														<p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape radish bush tomato ricebean black-eyed pea maize eggplant. Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok choy squash cress potato summer purslane salsify fennel horseradish dulse. Winter purslane garbanzo artichoke broccoli lentil corn okra silver beet celery quandong. Plantain salad beetroot bunya nuts black-eyed pea collard greens radish water spinach gourd chicory prairie turnip avocado sierra leone bologi.</p>
