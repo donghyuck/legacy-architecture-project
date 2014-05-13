@@ -756,7 +756,7 @@
 												<tr>
 													<th><small>회사 로고</small></th>								
 													<td>
-														<img class="img-rounded" src="${request.contextPath}/download/logo/company/${action.targetCompany.name}" height="80" alt="..." />
+														<img class="img-responsive" src="${request.contextPath}/download/logo/company/${action.targetCompany.name}" height="80" alt="..." />
 														<p class="pull-right">											
 															<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="logo" disabled="disabled">회사 로고</button>															
 														<p>
