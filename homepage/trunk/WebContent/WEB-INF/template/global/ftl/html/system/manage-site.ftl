@@ -113,7 +113,7 @@
 		
 		function createLogoPanel(){
 			if( !$('#logo-file').data('kendoUpload') ){		
-				var selectedCompany = $("#navbar").data("companyPlaceHolder");
+				var selectedCompany = $("#navbar").data("companyPlaceHolder");				
 				$("#logo-file").kendoUpload({
 					multiple : false,
 					width: 300,
@@ -137,6 +137,27 @@
 						}				
 					}
 				});						
+			}
+			
+			if(!$('#logo-grid')){
+				var selectedCompany = $("#navbar").data("companyPlaceHolder");
+				$("#logo-grid").kendoGrid({
+					dataSource: {
+						dataType: 'json',
+						transport: {
+							read: { url:'${request.contextPath}/secure/list-logo-image.do?output=json', type: 'POST' },
+							parameterMap: function (options, operation){
+								return { objectType: 1, objectId: selectedCompany.companyId }
+							} 
+						},
+						schema: {
+							data: "targetLogoImages",
+							total: "targetLogoImageCount",
+							model : common.models.Logo
+						},
+						error: common.api.handleKendoAjaxError
+					}				
+				});			
 			}						
 		}
 
@@ -738,7 +759,7 @@
 											<input name="logo-file" id="logo-file" type="file" />											
 										</div>
 										<div class="panel-body scrollable" style="max-height:450px;">
-											<div id="logo-list-grid"></div>
+											<div id="logo-grid"></div>
 										</div>										
 									</div>		
 									<div class="panel panel-default hide" role="timeline">
