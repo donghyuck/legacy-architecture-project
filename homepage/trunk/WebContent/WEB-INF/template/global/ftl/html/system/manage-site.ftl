@@ -139,7 +139,7 @@
 				});						
 			}
 			
-			if(!$('#logo-grid')){
+			if(!$('#logo-grid').data('kendoGrid')){
 				var selectedCompany = $("#navbar").data("companyPlaceHolder");
 				$("#logo-grid").kendoGrid({
 					dataSource: {
