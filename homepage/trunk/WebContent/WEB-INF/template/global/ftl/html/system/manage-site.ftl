@@ -717,13 +717,11 @@
 										</div>
 									</div>													
 									<div class="panel panel-default hide" role="media">
-										<div class="panel-body" style="padding:5px;">
-											<div style="padding:5px;">
-												<button type="button" class="btn-control-group close" data-action="close-media">&times;</button>
-											</div>
-											<div class="page-header text-primary">							
-												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어(이미지, 파일, 쇼셜 등)를 관리합니다.</small></h5>												
-											</div>										
+										<div class="panel-heading">
+											<button type="button" class="btn-control-group close" data-action="close-media">&times;</button>
+											<i class="fa fa-cloud"></i> <small>회사 미디어(이미지, 파일, 쇼셜 등)를 관리합니다.</small>
+										</div>
+										<div class="panel-body" style="padding:5px;">									
 											<ul class="nav nav-tabs" id="myTab">
 											  <li><a href="#image-mgmt" data-toggle="tab">이미지</a></li>
 											  <li><a href="#attachment-mgmt" data-toggle="tab">첨부파일</a></li>
