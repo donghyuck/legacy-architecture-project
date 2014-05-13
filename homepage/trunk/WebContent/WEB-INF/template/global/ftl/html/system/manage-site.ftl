@@ -646,7 +646,7 @@
 										</h5>
 										<p class="pull-right">											
 											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="details"><i class="fa fa-cloud"></i> 회사 미디어</button>
-											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="timeline" disabled="disabled"><i class="fa fa-clock-o"></i> 회사 타임라인</button>
+											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="timeline"><i class="fa fa-clock-o"></i> 회사 타임라인</button>
 										<p>
 									</div>											
 									<table class="table table-hover">
@@ -687,7 +687,7 @@
 									<div class="panel panel-default hide">
 										<div class="panel-body" style="padding:5px;">
 											<div style="padding:5px;">
-											<button type="button" class="close">&times;</button>
+												<button type="button" class="btn-control-group close" data-action="close-media">&times;</button>
 											</div>
 											<div class="page-header text-primary">							
 												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어(이미지, 파일, 쇼셜 등)를 관리합니다.</small></h5>												
