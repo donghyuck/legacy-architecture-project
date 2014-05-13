@@ -46,7 +46,7 @@ import architecture.ee.web.util.WebSiteUtils;
  */
 public class PageAction extends FrameworkActionSupport {
 	
-	private static final String DEFAULT_TEMPLATE = "/html/community/page.ftl" ;
+	private static final String DEFAULT_TEMPLATE = "/html/page.ftl" ;
 		
 	private String NOT_FOUND = "page-not-found";
 	private String template = DEFAULT_TEMPLATE ;
@@ -128,6 +128,7 @@ public class PageAction extends FrameworkActionSupport {
 		this.targetPageId = pageId;
 	}
 
+		
 	/**
 	 * @return targetPage
 	 */
