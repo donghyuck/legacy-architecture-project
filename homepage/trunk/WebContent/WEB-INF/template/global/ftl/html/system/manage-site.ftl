@@ -64,7 +64,7 @@
 							topBar.go('main-user.do');			
 						}, 							
 						media : function(e){
-							$('#company-details .panel').toggleClass('hide');
+							$('#company-details .panel[role="media"]').toggleClass('hide');
 						},
 						'close-media' : function(e){
 							$("button.btn-control-group[data-action='media']").click();
