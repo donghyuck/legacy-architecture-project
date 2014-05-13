@@ -139,7 +139,7 @@
 				});						
 			}
 			if(!$('#logo-list-view').data('kendoListView')){
-				$("#listView").kendoListView({
+				$("#logo-list-view").kendoListView({
 					dataSource: {
 						dataType: 'json',
 						transport: {
