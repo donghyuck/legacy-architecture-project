@@ -63,8 +63,11 @@
 						user : function(e){
 							topBar.go('main-user.do');			
 						}, 							
-						details : function(e){
+						media : function(e){
 							$('#company-details .panel').toggleClass('hide');
+						},
+						'close-media' : function(e){
+						
 						},
 						connect : function(e){
 							alert("social modal");	 					
@@ -645,7 +648,7 @@
 											<small><i class="fa fa-info"></i> 미디어 버튼을 클릭하면 회사가 보유한 미디어(이미지, 파일 등)을 관리할 수 있습니다.</small>
 										</h5>
 										<p class="pull-right">											
-											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="details"><i class="fa fa-cloud"></i> 회사 미디어</button>
+											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="media"><i class="fa fa-cloud"></i> 회사 미디어</button>
 											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="timeline"><i class="fa fa-clock-o"></i> 회사 타임라인</button>
 										<p>
 									</div>											
