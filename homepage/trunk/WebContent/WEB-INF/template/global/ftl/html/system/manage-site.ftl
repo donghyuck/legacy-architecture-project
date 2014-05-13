@@ -43,12 +43,14 @@
 						change : function(data){
 							data.copy(companyPlaceHolder);
 							kendo.bind($("#company-info"), companyPlaceHolder );
+							$('button.btn-control-group').removeAttr("disabled");				
 						}	
 					}]
 				});
 												 
 				 // 4. PAGE MAIN		
-				 var selectedSocial = {};			
+				 var selectedSocial = {};		
+				 	
 				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );				 
 				 createSiteGrid();				 
 				 common.ui.handleButtonActionEvents(
@@ -110,7 +112,31 @@
 		}]);
 		
 		function createLogoPanel(){
-		
+			if( !$('#logo-file').data('kendoUpload') ){		
+				$("#logo-file").kendoUpload({
+					multiple : false,
+					width: 300,
+				 	showFileList : false,
+					localization:{ select : '파일 선택' , dropFilesHere : '업로드할 파일을 이곳에 끌어 놓으세요.' },
+					async: {
+						saveUrl:  '${request.contextPath}/community/add-logo-image.do?output=json',							   
+						autoUpload: true
+					},
+					upload: function (e) {								         
+						e.data = {
+							objectType :
+							objectId: 
+						};														    								    	 		    	 
+					},
+					success : function(e) {								    
+						if( e.response.targetPrimaryLogoImage ){
+							//e.response.targetAttachment.attachmentId;
+							// LIST VIEW REFRESH...
+							//$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+						}				
+					}
+				});						
+			}						
 		}
 
 		function createSocialPane(){
@@ -653,7 +679,7 @@
 								<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
 								<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
 							</div>
-							<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="setting"><i class="fa fa-cog"></i> 회사 정보변경</button>								
+							<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="setting" disabled="disabled"><i class="fa fa-cog"></i> 회사 정보변경</button>								
 						</div>
 						<div class="panel-body" style="padding:5px;">	
 							<div class="row">
@@ -663,8 +689,8 @@
 											<small><i class="fa fa-info"></i> 미디어 버튼을 클릭하면 회사가 보유한 미디어(이미지, 파일 등)을 관리할 수 있습니다.</small>
 										</h5>
 										<p class="pull-right">											
-											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="media"><i class="fa fa-cloud"></i> 회사 미디어</button>
-											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="timeline"><i class="fa fa-clock-o"></i> 회사 타임라인</button>
+											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="media" disabled="disabled"><i class="fa fa-cloud"></i> 회사 미디어</button>
+											<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="timeline" disabled="disabled"><i class="fa fa-clock-o"></i> 회사 타임라인</button>
 										<p>
 									</div>											
 									<table class="table table-hover">
@@ -682,7 +708,7 @@
 													<td>
 														<img class="img-rounded" src="${request.contextPath}/download/logo/company/${action.targetCompany.name}" height="80" alt="..." />
 														<p class="pull-right">											
-															<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="logo">회사 로고</button>															
+															<button type="button" class="btn btn-success btn-control-group btn-sm" data-toggle="button" data-action="logo" disabled="disabled">회사 로고</button>															
 														<p>
 													</td>
 												</tr>														
