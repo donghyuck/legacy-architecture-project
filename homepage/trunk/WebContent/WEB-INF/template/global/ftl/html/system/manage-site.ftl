@@ -112,8 +112,8 @@
 		}]);
 		
 		function createLogoPanel(){
-			if( !$('#logo-file').data('kendoUpload') ){		
-				var selectedCompany = $("#navbar").data("companyPlaceHolder");				
+			var selectedCompany = $("#navbar").data("companyPlaceHolder");
+			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
 					width: 300,
@@ -133,14 +133,36 @@
 						if( e.response.targetPrimaryLogoImage ){
 							//e.response.targetAttachment.attachmentId;
 							// LIST VIEW REFRESH...
-							$('#logo-grid').data('kendoGrid').dataSource.read(); 
+							$('#logo-list-view').data('kendoListView').refresh(); 
 						}				
 					}
 				});						
 			}
-			
+			if(!$('#logo-list-view').data('kendoListView')){
+				var dataSource = new kendo.data.DataSource({
+					dataType: 'json',
+					transport: {
+						read: { url:'${request.contextPath}/secure/list-logo-image.do?output=json', type: 'POST' },
+						parameterMap: function (options, operation){
+							return { objectType: 1, objectId: selectedCompany.companyId }
+						} 
+					},
+					schema: {
+						data: "targetLogoImages",
+						total: "targetLogoImageCount",
+						model : common.models.Logo
+					},
+					error: common.api.handleKendoAjaxError
+				});
+				$("#listView").kendoListView({
+					dataSource: dataSource,
+					selectable: "single",
+					template: "<div>#: filename #</div>"
+				});				
+			}
+			/*
 			if(!$('#logo-grid').data('kendoGrid')){
-				var selectedCompany = $("#navbar").data("companyPlaceHolder");
+				
 				$("#logo-grid").kendoGrid({
 					dataSource: {
 						dataType: 'json',
@@ -162,7 +184,8 @@
 						{ field: "filename", title: "파일", width: 250 }
 					]				
 				});			
-			}						
+			}
+			*/						
 		}
 
 		function createSocialPane(){
@@ -763,7 +786,7 @@
 											<input name="logo-file" id="logo-file" type="file" />											
 										</div>
 										<div class="panel-body scrollable" style="max-height:450px;">
-											<div id="logo-grid"></div>
+											<div id="logo-list-view"></div>
 										</div>										
 									</div>		
 									<div class="panel panel-default hide" role="timeline">
