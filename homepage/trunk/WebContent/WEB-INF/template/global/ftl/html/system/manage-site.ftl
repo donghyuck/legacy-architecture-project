@@ -687,7 +687,7 @@
 									</table>
 								</div>
 								<div class="col-lg-7 col-xs-12" id="company-details">								
-									<div class="panel panel-default hide">
+									<div class="panel panel-default hide" role="media">
 										<div class="panel-body" style="padding:5px;">
 											<div style="padding:5px;">
 												<button type="button" class="btn-control-group close" data-action="close-media">&times;</button>
