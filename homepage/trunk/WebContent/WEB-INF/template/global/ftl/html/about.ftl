@@ -138,6 +138,9 @@
 				<div class="col-lg-9">
 					<div class="row">
 						<div class="col-sm-12">					
+						
+							<#assign targetPageId = action.webSite.getLongProperty("", -1L) />
+							
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#company-history" data-toggle="tab">회사연역</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
@@ -212,12 +215,9 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="company-logo">
-									
-									
 									<div class="page-header text-primary">
 										<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
-									</div>	
-																		
+									</div>
 								</div>
 								<div class="tab-pane" id="company-media">
 									<div id="social-media-area" class="row">
@@ -249,9 +249,7 @@
 					</div>					
 				</div>				
 			</div>
-		</div>			
-		
-		
+		</div>		
 		<div class="overlay overlay-hugeinc hide">
 			<button type="button" class="overlay-close">Close</button>
 			<nav>
