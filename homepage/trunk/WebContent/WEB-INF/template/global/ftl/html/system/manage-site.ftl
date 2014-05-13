@@ -133,7 +133,7 @@
 						if( e.response.targetPrimaryLogoImage ){
 							//e.response.targetAttachment.attachmentId;
 							// LIST VIEW REFRESH...
-							//$('#attachment-list-view').data('kendoListView').dataSource.read(); 
+							$('#logo-grid').data('kendoGrid').dataSource.read(); 
 						}				
 					}
 				});						
