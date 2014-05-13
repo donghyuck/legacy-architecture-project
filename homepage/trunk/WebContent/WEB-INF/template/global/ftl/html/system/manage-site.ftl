@@ -67,7 +67,7 @@
 							$('#company-details .panel').toggleClass('hide');
 						},
 						'close-media' : function(e){
-						
+							$("button.btn-control-group[data-action='media']").click();
 						},
 						connect : function(e){
 							alert("social modal");	 					
