@@ -685,10 +685,10 @@
 								</div>
 								<div class="col-lg-7 col-xs-12" id="company-details">								
 									<div class="panel panel-default hide">
-										<div class="panel-body" style="padding:5px;">
-											<button type="button" class="close" aria-hidden="true"><i class="fa fa-times"></i></button>
-											<div class="page-header text-primary">												
-												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어를 관리합니다.</small></h5>												
+										<div class="panel-body">
+											<button type="button" class="close"><i class="fa fa-times"></i></button>
+											<div class="page-header text-primary">							
+												<h5><i class="fa fa-cloud"></i> 미디어</strong>&nbsp;<small>회사 미디어(이미지, 파일, 쇼셜 등)를 관리합니다.</small></h5>												
 											</div>										
 											<ul class="nav nav-tabs" id="myTab">
 											  <li><a href="#image-mgmt" data-toggle="tab">이미지</a></li>
