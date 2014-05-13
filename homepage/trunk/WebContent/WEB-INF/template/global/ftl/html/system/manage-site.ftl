@@ -133,29 +133,28 @@
 						if( e.response.targetPrimaryLogoImage ){
 							//e.response.targetAttachment.attachmentId;
 							// LIST VIEW REFRESH...
-							$('#logo-list-view').data('kendoListView').refresh(); 
+							$('#logo-list-view').data('kendoListView').dataSource.read(); 
 						}				
 					}
 				});						
 			}
 			if(!$('#logo-list-view').data('kendoListView')){
-				var dataSource = new kendo.data.DataSource({
-					dataType: 'json',
-					transport: {
-						read: { url:'${request.contextPath}/secure/list-logo-image.do?output=json', type: 'POST' },
-						parameterMap: function (options, operation){
-							return { objectType: 1, objectId: selectedCompany.companyId }
-						} 
-					},
-					schema: {
-						data: "targetLogoImages",
-						total: "targetLogoImageCount",
-						model : common.models.Logo
-					},
-					error: common.api.handleKendoAjaxError
-				});
 				$("#listView").kendoListView({
-					dataSource: dataSource,
+					dataSource: {
+						dataType: 'json',
+						transport: {
+							read: { url:'${request.contextPath}/secure/list-logo-image.do?output=json', type: 'POST' },
+							parameterMap: function (options, operation){
+								return { objectType: 1, objectId: selectedCompany.companyId }
+							} 
+						},
+						schema: {
+							data: "targetLogoImages",
+							total: "targetLogoImageCount",
+							model : common.models.Logo
+						},
+						error: common.api.handleKendoAjaxError
+					},
 					selectable: "single",
 					template: "<div>#: filename #</div>"
 				});				
