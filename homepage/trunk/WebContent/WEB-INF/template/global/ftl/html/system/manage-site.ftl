@@ -69,6 +69,18 @@
 						'close-media' : function(e){
 							$("button.btn-control-group[data-action='media']").click();
 						},
+						timeline: function(e){
+							$('#company-details .panel[role="timeline"]').toggleClass('hide');
+						},
+						'close-timeline': function(e){
+							$("button.btn-control-group[data-action='timeline']").click();
+						},
+						logo: function(e){
+							$('#company-details .panel[role="logo"]').toggleClass('hide');
+						},
+						'close-logo': function(e){
+							$("button.btn-control-group[data-action='logo']").click();
+						},						
 						connect : function(e){
 							alert("social modal");	 					
 						}			  						 
