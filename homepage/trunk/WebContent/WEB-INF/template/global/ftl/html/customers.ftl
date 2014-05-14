@@ -87,14 +87,14 @@
 						<a href="${item.page}" class="list-group-item active">${ item.title } </a>
 						<#else>
 						<a href="${item.page}" class="list-group-item">${ item.title } </a>
-						</#if>						
-					</#list>										
+						</#if>
+					</#list>
 					</div>	
-					<!-- end side menu -->						
+					<!-- end side menu -->
 				</div>
 				<div class="col-lg-9">
 					<div class="owl-carousel-v1 margin-bottom-50">
-						<h3 class="heading-md">Default example</h3>
+						<h3 class="heading-md">고객사</h3>
 						<p>For default carousel you should use a class <code>.owl-carousel-v1</code>. Moreover, you are also able to use it without navigation. You should just remove <code>owl-navigation</code> block from the HTML code.</p>
 						<div class="owl-navigation">
 							<div class="customNavigation">
