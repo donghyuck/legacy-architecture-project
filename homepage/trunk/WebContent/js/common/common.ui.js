@@ -1007,31 +1007,13 @@
 																"mouseenter",
 																".img-wrapper",
 																function(e) {
-																	kendo
-																			.fx(
-																					$(
-																							e.currentTarget)
-																							.find(
-																									".img-description"))
-																			.expand(
-																					"vertical")
-																			.stop()
-																			.play();
+																	kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
 																})
 														.on(
 																"mouseleave",
 																".img-wrapper",
 																function(e) {
-																	kendo
-																			.fx(
-																					$(
-																							e.currentTarget)
-																							.find(
-																									".img-description"))
-																			.expand(
-																					"vertical")
-																			.stop()
-																			.reverse();
+																	kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
 																});
 												my_list_pager
 														.kendoPager({
@@ -1161,21 +1143,14 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane
-																		.find(
-																				'.panel-body.custom-selected-image')
-																		.remove();
-																var data = this.dataSource
-																		.view();
-																var current_index = this
-																		.select()
-																		.index();
+																tab_pane.find('.panel-body.custom-selected-image').remove();
+																var data = this.dataSource.view();
+																var current_index = this.select().index();
 																if (current_index >= 0) {
 																	var item = data[current_index];
 																	var imageId = item.imageId;
 																	if (imageId > 0) {
-																		that
-																				._getImageLink(
+																		that._getImageLink(
 																						item,
 																						function(
 																								data) {
@@ -1306,10 +1281,7 @@
 										var selected_url;
 										switch (tab_pane.attr('id')) {
 										case that.options.guid[TAB_PANE_URL_ID]:
-											selected_url = that.element
-													.find(
-															'.modal-body input[name="custom-selected-url"]')
-													.val();
+											selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();
 											break;
 										case that.options.guid[TAB_PANE_DOMAIN_ID]:
 											var my_list_view = tab_pane
