@@ -1271,9 +1271,7 @@
 										}
 									});
 
-					that.element.find('.modal-footer .btn.custom-insert-img').on(
-									'click',
-									function() {
+					that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {
 										var tab_pane = that._activePane();
 										var selected_url;
 										switch (tab_pane.attr('id')) {
