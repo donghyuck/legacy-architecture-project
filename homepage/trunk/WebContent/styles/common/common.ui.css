@@ -265,7 +265,7 @@ img.img-full-height {
 	border-bottom: 1px dotted ;
 }
 
-.headline h2, .headline h3, .headline h4 {
+.headline h2, .headline h3, .headline h4, .headline h5 {
 	margin: 0 0 -2px 0;
 	padding-bottom: 5px;
 	display: inline-block;
