@@ -94,7 +94,7 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="page-header text-primary">
-						<h5>주요 고객사<small> 공공.금융기관, 정보통신, 서비스/유통, 제조/건설등 국내 여러 기업이 인키움의 제품과 서비스를 사용하고 있습니다.</small></h5>
+						<h4>주요 고객사<small> 공공.금융기관, 정보통신, 서비스/유통, 제조/건설등 국내 여러 기업이 인키움의 제품과 서비스를 사용하고 있습니다.</small></h4>
 					</div>					
 					<div class="owl-carousel-v1 margin-bottom-50">
 						<h3 class="heading-md">고객사</h3>
