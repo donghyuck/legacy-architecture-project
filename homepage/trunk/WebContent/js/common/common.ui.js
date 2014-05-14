@@ -844,7 +844,7 @@
 		POST = 'POST', 
 		JSON = 'json', 
 		templates = {
-			selected  : template('<div class="panel-body custom-selected-image">'
+			selected  : template('<div class="panel-heading custom-selected-image">'
 					+ '<div class="media">'
 					+ '<a class="pull-left" href="\\#">'
 					+ '<img class="media-object img-thumbnail" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
@@ -978,7 +978,7 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane.find(	'.panel-body.custom-selected-image').remove();
+																tab_pane.find(	'.panel-heading.custom-selected-image').remove();
 																var data = this.dataSource.view();
 																var current_index = this.select().index();
 																if (current_index >= 0) {
@@ -999,7 +999,7 @@
 															navigatable : false,
 															template : kendo.template($("#photo-list-view-template").html()),
 															dataBound : function(e) {
-																tab_pane.find('.panel-body.custom-selected-image').remove();
+																tab_pane.find('.panel-heading.custom-selected-image').remove();
 																that._changeState(false);
 															}
 														});
@@ -1066,7 +1066,7 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane.find('.panel-body.custom-selected-image').remove();
+																tab_pane.find('.panel-heading.custom-selected-image').remove();
 																var data = this.dataSource.view();
 																var current_index = this.select().index();
 																if (current_index >= 0) {
@@ -1087,7 +1087,7 @@
 															navigatable : false,
 															template : kendo.template($("#photo-list-view-template").html()),
 															dataBound : function(e) {
-																tab_pane.find('.panel-body.custom-selected-image').remove();
+																tab_pane.find('.panel-heading.custom-selected-image').remove();
 																that._changeState(false);
 															}
 														});
@@ -1143,7 +1143,7 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane.find('.panel-body.custom-selected-image').remove();
+																tab_pane.find('.panel-heading.custom-selected-image').remove();
 																var data = this.dataSource.view();
 																var current_index = this.select().index();
 																if (current_index >= 0) {
@@ -1155,79 +1155,39 @@
 																						function(
 																								data) {
 																							if (typeof data.imageLink === 'object') {
-																								my_list_view
-																										.data(
-																												"linkId",
-																												data.imageLink.linkId);
-																								that
-																										._changeState(true);
-																								tab_pane
-																										.find(
-																												'.panel')
-																										.prepend(
-																												templates.selected(item));
+																								my_list_view.data("linkId",data.imageLink.linkId);
+																								that._changeState(true);
+																								tab_pane.find('.panel').prepend(templates.selected(item));
 																							}
-																						});
+																		});
 																	}
 																}
 															},
 															navigatable : false,
-															template : kendo
-																	.template($(
-																			"#photo-list-view-template")
-																			.html()),
-															dataBound : function(
-																	e) {
-																tab_pane
-																		.find(
-																				'.panel-body.custom-selected-image')
-																		.remove();
-																that
-																		._changeState(false);
+															template : kendo.template($("#photo-list-view-template").html()),
+															dataBound : function(e) {
+																tab_pane.find('.panel-body.custom-selected-image').remove();
+																that._changeState(false);
 															}
 														});
-												my_list_view
-														.on(
+												my_list_view.on(
 																"mouseenter",
 																".img-wrapper",
 																function(e) {
-																	kendo
-																			.fx(
-																					$(
-																							e.currentTarget)
-																							.find(
-																									".img-description"))
-																			.expand(
-																					"vertical")
-																			.stop()
-																			.play();
-																})
-														.on(
+																	kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
+																}).on(
 																"mouseleave",
 																".img-wrapper",
 																function(e) {
-																	kendo
-																			.fx(
-																					$(
-																							e.currentTarget)
-																							.find(
-																									".img-description"))
-																			.expand(
-																					"vertical")
-																			.stop()
-																			.reverse();
+																	kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
 																});
-												my_list_pager
-														.kendoPager({
+												my_list_pager.kendoPager({
 															refresh : true,
 															buttonCount : 5,
-															dataSource : my_list_view
-																	.data('kendoListView').dataSource
+															dataSource : my_list_view.data('kendoListView').dataSource
 														});
 											} else {
-												my_list_view.data(
-														'kendoListView')
-														.clearSelection();
+												my_list_view.data('kendoListView').clearSelection();
 											}
 											break;
 										case "#" + that.options.guid[TAB_PANE_URL_ID]:
