@@ -36,10 +36,11 @@
 						e.token.copy(currentUser);
 					}				
 				});				
-				 common.ui.initializeOwlCarousel();
+				
 				<#if !action.user.anonymous >				
 				
 				</#if>	
+				 common.ui.initializeOwlCarousel();
 				// END SCRIPT            
 			}
 		}]);	
