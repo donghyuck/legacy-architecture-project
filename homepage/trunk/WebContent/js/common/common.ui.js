@@ -847,7 +847,7 @@
 			selected  : template('<div class="panel-body custom-selected-image">'
 					+ '<div class="media">'
 					+ '<a class="pull-left" href="\\#">'
-					+ '<img class="media-object" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
+					+ '<img class="media-object img-thumbnail" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
 					+ '</a>'
 					+ '<div class="media-body">'
 					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span> #=name#</h5>'
