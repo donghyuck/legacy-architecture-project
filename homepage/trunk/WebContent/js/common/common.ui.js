@@ -845,9 +845,9 @@
 		JSON = 'json', 
 		templates = {
 			selected  : template('<div class="panel-heading custom-selected-image">'
-					+ '<div class="media">'
+					+ '<div class="media" style="max-height:110px;">'
 					+ '<a class="pull-left" href="\\#">'
-					+ '<img class="media-object img-thumbnail" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
+					+ '<img class="media-object img-responsive" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
 					+ '</a>'
 					+ '<div class="media-body">'
 					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span></h5>'
