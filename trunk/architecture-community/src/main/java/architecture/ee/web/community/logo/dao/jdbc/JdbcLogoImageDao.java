@@ -94,7 +94,8 @@ public class JdbcLogoImageDao extends ExtendedJdbcDaoSupport implements LogoImag
 					getBoundSql("ARCHITECTURE_COMMUNITY.RESET_LOGO_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 	
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectType() )	,
 					new SqlParameterValue (Types.NUMERIC, toUse.getObjectId() )	
-			);				
+			);			
+				
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.CREATE_LOGO_IMAGE").getSql(), 	
 				new SqlParameterValue (Types.NUMERIC, logoImage.getLogoId()),
 				new SqlParameterValue(Types.NUMERIC, logoImage.getObjectType()),
@@ -106,6 +107,9 @@ public class JdbcLogoImageDao extends ExtendedJdbcDaoSupport implements LogoImag
 				new SqlParameterValue(Types.DATE, logoImage.getModifiedDate()),
 				new SqlParameterValue(Types.DATE, logoImage.getCreationDate())
 			);			
+			
+			//log.debug("file:" + file.getAbsolutePath());
+			
 			updateImageImputStream(logoImage, FileUtils.openInputStream(file) );
 		} catch (DataAccessException e) {
 		} catch (IOException e) {
@@ -113,6 +117,7 @@ public class JdbcLogoImageDao extends ExtendedJdbcDaoSupport implements LogoImag
 	}	
 
 	protected void updateImageImputStream(LogoImage logoImage, InputStream inputStream){
+		
 		getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_LOGO_IMAGE_DATA_BY_ID").getSql(), new SqlParameterValue (Types.NUMERIC, logoImage.getLogoId()));		
 		if( getExtendedJdbcTemplate().getDatabaseType() == DatabaseType.oracle ){				
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_EMPTY_LOGO_IMAGE_DATA").getSql(), new SqlParameterValue (Types.NUMERIC, logoImage.getLogoId()));

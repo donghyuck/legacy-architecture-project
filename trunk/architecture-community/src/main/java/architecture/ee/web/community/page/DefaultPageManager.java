@@ -130,6 +130,14 @@ public class DefaultPageManager implements PageManager  {
 		}else{
 			pageDao.update(page, isNewVersionRequired);
 		}		
+		
+		if( pageCache.get(page.getPageId()) != null ){
+			pageCache.remove(page.getPageId());
+		}
+		String key = getVersionListCacheKey(page.getPageId());
+		if( pageVersionsCache.get(key) != null ){
+			pageVersionsCache.remove(key);
+		}
 	}
 	
 	private boolean isNewVersionRequired( boolean forceNewVersion, boolean isNewPage ){
