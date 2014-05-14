@@ -103,8 +103,10 @@
 									</div>
 									<div class="panel panel-default panel-flat">								
 										<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
+											<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
 										</div>	
 										<div class="panel-footer" style="padding:0px;">
+											<div></div>
 										</div>
 									</div>																											  
 								</div>
@@ -127,10 +129,8 @@
 								</div>		
 								<div class="panel panel-default panel-flat">								
 									<div class="panel-body scrollable color4" style="max-height:450px; min-height:360px;">											
-										<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
 									</div>	
 									<div class="panel-footer" style="padding:0px;">
-										<div></div>
 									</div>
 								</div>														  
 							  </div>							  
