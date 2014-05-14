@@ -144,6 +144,10 @@ img.img-full-height {
 /* -------------------------------------------- */
 /* Bootstrap customize                             */
 /* -------------------------------------------- */
+.color-green {
+	color: #72c02c;
+}
+
 .editor-popup .modal-dialog {
 	margin: 40px auto;
 }
