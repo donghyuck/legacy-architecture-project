@@ -103,9 +103,10 @@
 		.cbp_tmtimeline > li .cbp_tmicon { 
 			position : relative;
 		}				
-		.timeline-v2>p , .timeline-v2>a, .timeline-v2>h2 { 
+		.timeline-v2 > li .cbp_tmlabel{ 
 			color: #555;
 		}
+		
 		</style>   	
 </#compress>				
 	</head>
