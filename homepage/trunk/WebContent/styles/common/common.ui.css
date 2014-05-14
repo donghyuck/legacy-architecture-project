@@ -145,13 +145,11 @@ img.img-full-height {
 /*Spaces
 ------------------------------------*/
 .padding-left-10 {
-	clearfix: both;
-}
-
-.padding-left-10 {
 	padding-left: 10px;
 }
-
+.page-header.padding-left-10 {
+	padding-left: 10px;
+}
 
 .margin-left-5 { margin-left: 5px;}
 .margin-right-5 { margin-right: 5px;}
