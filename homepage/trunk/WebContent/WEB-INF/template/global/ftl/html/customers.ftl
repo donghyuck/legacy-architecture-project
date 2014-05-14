@@ -93,49 +93,45 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
-
-<div class="owl-carousel-v1 margin-bottom-50">
-                    <h3 class="heading-md">Default example</h3>
-                    <p>For default carousel you should use a class <code>.owl-carousel-v1</code>. Moreover, you are also able to use it without navigation. You should just remove <code>owl-navigation</code> block from the HTML code.</p>
-
-                    <div class="owl-navigation">
-                        <div class="customNavigation">
-                            <a class="owl-btn prev-v1"><i class="fa fa-angle-left"></i></a>
-                            <a class="owl-btn next-v1"><i class="fa fa-angle-right"></i></a>
-                        </div>
-                    </div><!--/navigation-->
-
-                    <div class="owl-slider owl-carousel owl-theme" style="opacity: 1; display: block;">
-                        <div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 3060px; left: 0px; display: block; -webkit-transform: translate3d(-340px, 0px, 0px); -webkit-transition: all 200ms ease; transition: all 200ms ease;"><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/emirates.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/marianos.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ucweb.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/national-geographic.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/much-more.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/baderbrau.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/co-wheels.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/bellfield.png" alt="">
-                        </div></div><div class="owl-item" style="width: 170px;"><div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/fddw.png" alt="">
-                        </div></div></div></div>
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                        
-                    <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div></div></div>
-                </div>
-					
+					<div class="owl-carousel-v1 margin-bottom-50">
+						<h3 class="heading-md">Default example</h3>
+						<p>For default carousel you should use a class <code>.owl-carousel-v1</code>. Moreover, you are also able to use it without navigation. You should just remove <code>owl-navigation</code> block from the HTML code.</p>
+						<div class="owl-navigation">
+							<div class="customNavigation">
+								<a class="owl-btn prev-v1"><i class="fa fa-angle-left"></i></a>
+								<a class="owl-btn next-v1"><i class="fa fa-angle-right"></i></a>
+							</div>
+						</div><!--/navigation-->					
+						<div class="owl-slider">
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/emirates.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/marianos.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ucweb.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/national-geographic.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/much-more.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/baderbrau.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/co-wheels.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/bellfield.png" alt="">
+							</div>
+							<div class="item">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/fddw.png" alt="">
+							</div>
+						</div>	
+					</div>	
 				</div>				
 			</div>
 		</div>									 
