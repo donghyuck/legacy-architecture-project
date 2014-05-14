@@ -18,13 +18,20 @@
 <decorator:head />
 <style>
 	body { 
-		padding-top: 51px; 
+		/*padding-top: 51px; */
 		background-color : #FFFFFF;	
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		overflow : hidden;
+		background : url (<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/images/bg.png ) #FFF ;
 	}
+	
 	.k-grid table tr.k-state-selected{
 		background: #428bca;
 		color: #ffffff; 
-	}	
+	}
+	
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" default="color4" />">
