@@ -851,10 +851,12 @@
 					+ '</a>'
 					+ '<div class="media-body">'
 					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span> #=name#</h5>'
-					+ '<small><p class="text-muted">생성일: #= formattedCreationDate() #</p>'
-					+ '<p class="text-muted">수정일: #= formattedModifiedDate() #</p>'
-					+ '<p class="text-muted">크기: #= formattedSize() #</p>'
-					+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></small>'
+					+ '<ul class="list-unstyled">'
+					+ '<li><i class="fa fa-calendar color-green"></i> #: formattedCreationDate() #</li>'
+					+ '<li><i class="fa fa-calendar color-green"></i> #: formattedModifiedDate() #</li>'
+					+ '<li><i class="fa fa-angle-right"></i> #: formattedSize() #</li>'
+					+ '<li><i class="fa fa-info"></i> <span class="text-danger"><small><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</small></span></li>'
+					+ '</ul>'
 					+ '</div>' + '</div>' + '</div>'),
 			image : template('<img src="#: url #" class="img-responsive"/>'),
 			url : template('/download/image/#= key #')
