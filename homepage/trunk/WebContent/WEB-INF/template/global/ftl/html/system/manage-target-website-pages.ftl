@@ -383,7 +383,7 @@
 					if( newValue.length != oldValue.length ){
 						
 						alert( renderToString.replace('-html-editor' , '' ) );
-						alert('changed' + editor. );
+						alert('changed');
 						
 					}
 					renderTo.data('kendoExtModalWindow').close();
