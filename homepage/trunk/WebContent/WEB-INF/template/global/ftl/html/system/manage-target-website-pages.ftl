@@ -379,9 +379,12 @@
 					var btn = $(this)			
 					var newValue = ace.edit("htmleditor").getValue();
 					var oldValue = editor.data("kendoEditor").value();
-					editor.data("kendoEditor").value( newValue  );
+					editor.data("kendoEditor").value(newValue);
 					if( newValue.length != oldValue.length ){
-					alert('changed');
+						
+						alert( renderToString.replace('-html-editor' , '' ) );
+						alert('changed' + editor. );
+						
 					}
 					renderTo.data('kendoExtModalWindow').close();
 				});
