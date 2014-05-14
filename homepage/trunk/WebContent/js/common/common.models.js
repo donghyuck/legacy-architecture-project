@@ -441,7 +441,7 @@ var Image = kendo.data.Model.define( {
     },
     formattedModifiedDate : function(){
     	return kendo.toString(this.get("modifiedDate"), "g");
-    }
+    },
     manupulate : function () {
     	this.set( "photoUrl" , '/community/download-my-image.do?imageId=' + this.get('imageId') );
     	this.set( "formattedCreationDate" , kendo.toString(this.get('creationDate'),  'F') );
