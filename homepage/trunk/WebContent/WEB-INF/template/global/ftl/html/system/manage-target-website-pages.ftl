@@ -300,7 +300,8 @@
 						});
 					}
 				});				
-				pageEditorModel.bind("change", function(e){				
+				pageEditorModel.bind("change", function(e){
+					alert( e.field ) ;				
 					if( e.field.match('^page.')){ 						
 						if( this.page.title.length > 0 && this.page.bodyText.length  > 0 )					
 							pageEditorModel.set("updateRequired", true);
@@ -376,8 +377,12 @@
 				});					
 				renderTo.find('button.custom-update').click(function () {
 					var btn = $(this)			
-					editor.data("kendoEditor").value( ace.edit("htmleditor").getValue() );
-					editor.data("kendoEditor").update();
+					var newValue = ace.edit("htmleditor").getValue();
+					var oldValue = editor.data("kendoEditor").value();
+					editor.data("kendoEditor").value( newValue  );
+					if( newValue.length != oldValue.length ){
+					alert('changed');
+					}
 					renderTo.data('kendoExtModalWindow').close();
 				});
 			}
