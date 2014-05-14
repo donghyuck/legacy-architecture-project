@@ -29,10 +29,14 @@ import net.sf.ehcache.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.user.Company;
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.logo.dao.LogoImageDao;
 import architecture.ee.web.logo.LogoImage;
 import architecture.ee.web.logo.LogoImageNotFoundException;
@@ -73,8 +77,6 @@ public class DefaultLogoManager implements LogoManager{
 	}
 
 
-
-
 	/**
 	 * @param logoImageDao 설정할 logoImageDao
 	 */
@@ -82,6 +84,7 @@ public class DefaultLogoManager implements LogoManager{
 		this.logoImageDao = logoImageDao;
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void addLogoImage(LogoImage logoImage, File file) {
 		if( logoImage.getLogoId() < 1) {
 			// clear cache  			
@@ -94,6 +97,7 @@ public class DefaultLogoManager implements LogoManager{
 		}
 	}
 
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void removeLogoImage(LogoImage logoImage) throws LogoImageNotFoundException {
 		if( logoImage.getLogoId() > 1) {
 			// clear cache  			
