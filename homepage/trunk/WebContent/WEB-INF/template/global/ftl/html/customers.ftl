@@ -40,8 +40,9 @@
 				<#if !action.user.anonymous >				
 				
 				</#if>	
-				$('.owl-carousel-v1, .owl-carousel-v2').show();
+				
 				 common.ui.initializeOwlCarousel();
+				 $('.owl-carousel-v1, .owl-carousel-v2').show();
 				// END SCRIPT            
 			}
 		}]);	
