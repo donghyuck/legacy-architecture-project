@@ -157,6 +157,14 @@ img.img-full-height {
 	border-bottom: 2px solid @brand-primary;
 }
 
+.counters {
+	color: #555;
+	text-align: center;
+}
+
+.counters span {
+	font-size: 35px;
+}
 
 .color-green {
 	color: #72c02c;
