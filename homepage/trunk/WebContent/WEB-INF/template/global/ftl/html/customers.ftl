@@ -34,7 +34,7 @@
 						e.token.copy(currentUser);
 					}				
 				});				
-				 OwlCarousel.initOwlCarousel();
+				 common.ui.initializeOwlCarousel();
 				<#if !action.user.anonymous >				
 				
 				</#if>	
