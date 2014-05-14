@@ -265,6 +265,13 @@
 						this.page.set('pageState', 'PUBLISHED');
 						this.doSave(e);
 					},
+					value : function( value ){
+						if( typeof value === 'undefined' ){
+							return this.page.bodyText ;
+						}else{
+							this.page.set('bodyText' , value);
+						}
+					},
 					showProps: function(e){
 						renderTo.find('.custom-props' ).toggleClass('hide');
 					},	
@@ -311,7 +318,7 @@
 				renderTo.data("model", pageEditorModel );										
 				var imageBroswer = createPageImageBroswer( renderToString + "-imagebroswer", bodyEditor);				
 				var linkPopup = createPageLinkPopup(renderToString + "-linkpopup", bodyEditor);	
-				var htmlEditor = createCodeEditor(renderToString + "-html-editor", bodyEditor);									
+				var htmlEditor = createCodeEditor(renderToString + "-html-editor", bodyEditor, pageEditorModel);									
 				bodyEditor.kendoEditor({
 						tools : [
 							'bold',
@@ -356,7 +363,7 @@
 			renderTo.data("model").set("updateRequired", false);		
 		}	
 		
-		function createCodeEditor( renderToString, editor ) {		
+		function createCodeEditor( renderToString, editor, pageEditorModel ) {		
 			if( $("#"+ renderToString).length == 0 ){
 				$('body').append('<div id="'+ renderToString +'"></div>');
 			}							
@@ -372,19 +379,17 @@
 						editor.getSession().setUseWrapMode(true);
 					},
 					open: function (e){
-						ace.edit("htmleditor").setValue(editor.data('kendoEditor').value());
+						//ace.edit("htmleditor").setValue(editor.data('kendoEditor').value());
+						ace.edit("htmleditor").setValue(pageEditorModel.value());
 					}					
 				});					
 				renderTo.find('button.custom-update').click(function () {
 					var btn = $(this)			
 					var newValue = ace.edit("htmleditor").getValue();
-					var oldValue = editor.data("kendoEditor").value();
-					editor.data("kendoEditor").value(newValue);
+					var oldValue = pageEditorModel.value(); // editor.data("kendoEditor").value();
+					// editor.data("kendoEditor").value(newValue);
 					if( newValue.length != oldValue.length ){
-						
-						alert( renderToString.replace('-html-editor' , '' ) );
-						alert('changed');
-						
+						pageEditorModel.value( newValue ) ;
 					}
 					renderTo.data('kendoExtModalWindow').close();
 				});
