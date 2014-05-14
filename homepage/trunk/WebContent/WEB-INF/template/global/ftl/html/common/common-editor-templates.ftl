@@ -94,12 +94,12 @@
 							<div class="tab-content">
 								<div class="tab-pane fade  active" id=#:upload_guid#>
 									<div class="page-header text-primary">
-										<h5 ><strong>업로드</strong>&nbsp;<small>여러개의 파일을 한번에 업로드할 수 있습니다.</small></h5>
+										<h5 ><i class="fa fa-upload"></i> <strong>업로드</strong>&nbsp;<small>여러개의 파일을 한번에 업로드할 수 있습니다.</small></h5>
 									</div>														  
 								</div>
 								<div class="tab-pane fade" id=#:my_guid#>
 									<div class="page-header text-primary">
-										<h5 ><strong>MY 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
+										<h5 ><i class="fa fa-picture-o"></i> <strong>MY 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
 									</div>
 									<div class="panel panel-default panel-flat">								
 										<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
@@ -112,7 +112,7 @@
 								</div>
 							  <div class="tab-pane fade" id=#:domain_guid#>
 								<div class="page-header text-primary">
-									<h5 ><strong>도메인 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
+									<h5 ><i class="fa fa-picture-o"></i> <strong>도메인 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
 								</div>		
 								<div class="panel panel-default panel-flat">								
 									<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
@@ -125,7 +125,7 @@
 							  </div>
  							  <div class="tab-pane fade" id=#:website_guid#>
 								<div class="page-header text-primary">
-									<h5 ><strong>사이트 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
+									<h5 ><i class="fa fa-picture-o"></i> <strong>사이트 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
 								</div>		
 								<div class="panel panel-default panel-flat">								
 									<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
@@ -138,7 +138,7 @@
 							  </div>							  
 							  <div class="tab-pane fade" id=#:url_guid#>
 								<div class="page-header text-primary">
-									<h5 ><strong>URL 이미지</strong>&nbsp;<small>삽입할 이미지 URL 경로를 입력하세요.</small></h5>
+									<h5 ><i class="fa fa-link"></i> <strong>URL 이미지</strong>&nbsp;<small>삽입할 이미지 URL 경로를 입력하세요.</small></h5>
 								</div>
 								<div class='form-group'>					
 									<input type="url" name="custom-selected-url" class="form-control" placeholder="URL 입력">
