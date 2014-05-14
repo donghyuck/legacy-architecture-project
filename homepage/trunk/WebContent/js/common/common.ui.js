@@ -826,21 +826,22 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.ui = common.ui || {};
-	var kendo = window.kendo, Widget = kendo.ui.Widget, isPlainObject = $.isPlainObject, proxy = $.proxy, extend = $.extend, placeholderSupported = kendo.support.placeholder, browser = kendo.support.browser, isFunction = kendo.isFunction, trimSlashesRegExp = /(^\/|\/$)/g, CHANGE = "change", APPLY = "apply", ERROR = "error", CLICK = "click", MODAL_TITIL_ID = "title_guid", TAB_PANE_URL_ID = "url_guid", TAB_PANE_UPLOAD_ID = "upload_guid", TAB_PANE_MY_ID = "my_guid", TAB_PANE_WEBSITE_ID = "website_guid", TAB_PANE_DOMAIN_ID = "domain_guid", UNDEFINED = 'undefined', POST = 'POST', JSON = 'json', VALUE_TEMPLATE = kendo
-			.template('<img src="#: url #" class="img-responsive"/>'), SELECTED_IMAGE_TEMPLAGE = kendo
-			.template('<div class="panel-body custom-selected-image">'
+	var kendo = window.kendo, Widget = kendo.ui.Widget, isPlainObject = $.isPlainObject, proxy = $.proxy, extend = $.extend, placeholderSupported = kendo.support.placeholder, browser = kendo.support.browser, isFunction = kendo.isFunction, trimSlashesRegExp = /(^\/|\/$)/g, CHANGE = "change", APPLY = "apply", ERROR = "error", CLICK = "click", MODAL_TITIL_ID = "title_guid", TAB_PANE_URL_ID = "url_guid", TAB_PANE_UPLOAD_ID = "upload_guid", TAB_PANE_MY_ID = "my_guid", TAB_PANE_WEBSITE_ID = "website_guid", TAB_PANE_DOMAIN_ID = "domain_guid", UNDEFINED = 'undefined', POST = 'POST', JSON = 'json', 
+		VALUE_TEMPLATE = kendo.template('<img src="#: url #" class="img-responsive"/>'), 
+			SELECTED_IMAGE_TEMPLAGE = kendo.template('<div class="panel-body custom-selected-image">'
 					+ '<div class="media">'
 					+ '<a class="pull-left" href="\\#">'
 					+ '<img class="media-object" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
 					+ '</a>'
 					+ '<div class="media-body">'
 					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span> #=name#</h5>'
-					+ '<small><p class="text-muted">생성일: #= kendo.toString( creationDate, "yyyy.MM.dd hh:mm tt" )#</p>'
-					+ '<p class="text-muted">수정일: #= kendo.toString( modifiedDate, "yyyy.MM.dd hh:mm tt" )#</p>'
-					+ '<p class="text-muted">크기: #= kendo.toString( size, "\\#\\#,\\#" ) #</p>'
-					+ '<p class="text-danger">이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></small>'
-					+ '</div>' + '</div>' + '</div>'), URL_TEMPLATE = kendo
-			.template('/download/image/#= key #'), handleKendoAjaxError = common.api.handleKendoAjaxError;
+					+ '<small><p class="text-muted">생성일: #= formattedCreationDate() #</p>'
+					+ '<p class="text-muted">수정일: #= formattedModifiedDate() #</p>'
+					+ '<p class="text-muted">크기: #= formattedSize() #</p>'
+					+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></small>'
+					+ '</div>' + '</div>' + '</div>'), 
+			URL_TEMPLATE = kendo.template('/download/image/#= key #'), 
+			handleKendoAjaxError = common.api.handleKendoAjaxError;
 
 	common.ui.extImageBrowser = Widget
 			.extend({
@@ -898,30 +899,21 @@
 					var template = that._dialogTemplate();
 					that.element.html(template(that.options.guid));
 					that.element.children('.modal').css('z-index', '2000');
-					that.element
-							.find('.modal-body a[data-toggle="tab"]')
-							.on(
+					that.element.find('.modal-body a[data-toggle="tab"]').on(
 									'shown.bs.tab',
 									function(e) {
 										e.target // activated tab
 										e.relatedTarget // previous tab
 										that._changeState(false);
-										var tab_pane_id = $(e.target).attr(
-												'href');
+										var tab_pane_id = $(e.target).attr('href');
 										var tab_pane = $(tab_pane_id);
 										switch (tab_pane_id) {
-										case "#"
-												+ that.options.guid[TAB_PANE_DOMAIN_ID]:
+										case "#" + that.options.guid[TAB_PANE_DOMAIN_ID]:
 											// domain images
-											var my_list_view = tab_pane
-													.find('.panel-body div');
-											var my_list_pager = tab_pane
-													.find('.panel-footer div');
-
-											if (!my_list_view
-													.data('kendoListView')) {
-												my_list_view
-														.kendoListView({
+											var my_list_view = tab_pane.find('.panel-body div');
+											var my_list_pager = tab_pane.find('.panel-footer div');
+											if (!my_list_view.data('kendoListView')) {
+												my_list_view.kendoListView({
 															dataSource : {
 																type : 'json',
 																transport : {
@@ -932,8 +924,7 @@
 																	parameterMap : function(
 																			options,
 																			operation) {
-																		if (operation != "read"
-																				&& options) {
+																		if (operation != "read" && options) {
 																			return {};
 																		} else {
 																			return {
@@ -954,64 +945,35 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane
-																		.find(
-																				'.panel-body.custom-selected-image')
-																		.remove();
-																var data = this.dataSource
-																		.view();
-																var current_index = this
-																		.select()
-																		.index();
+																tab_pane.find(	'.panel-body.custom-selected-image').remove();
+																var data = this.dataSource.view();
+																var current_index = this.select().index();
 																if (current_index >= 0) {
 																	var item = data[current_index];
 																	var imageId = item.imageId;
 																	if (imageId > 0) {
-																		that
-																				._getImageLink(
-																						item,
-																						function(
-																								data) {
-																							if (typeof data.imageLink === 'object') {
-																								my_list_view
-																										.data(
-																												"linkId",
-																												data.imageLink.linkId);
-																								that
-																										._changeState(true);
-
-																								var t = kendo
-																										.template('<div class="panel-body custom-selected-image">'
-																												+ '<p><img src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" class="img-rounded" ></p>'
-																												+ '<p class="text-danger">이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></div>');
-
-																								tab_pane
-																										.find(
-																												'.panel')
-																										.prepend(
-																												SELECTED_IMAGE_TEMPLAGE(item));
-																							}
-																						});
+																		that._getImageLink(item,
+																			function(data) {
+																				if (typeof data.imageLink === 'object') {
+																					my_list_view.data("linkId",data.imageLink.linkId);
+																					that._changeState(true);
+																					var t = kendo.template('<div class="panel-body custom-selected-image">'
+																						+ '<p><img src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" class="img-rounded" ></p>'
+																						+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></div>');
+																					tab_pane.find('.panel').prepend(SELECTED_IMAGE_TEMPLAGE(item));
+																				}
+																		});
 																	}
 																}
 															},
 															navigatable : false,
-															template : kendo
-																	.template($(
-																			"#photo-list-view-template")
-																			.html()),
-															dataBound : function(
-																	e) {
-																tab_pane
-																		.find(
-																				'.panel-body.custom-selected-image')
-																		.remove();
-																that
-																		._changeState(false);
+															template : kendo.template($("#photo-list-view-template").html()),
+															dataBound : function(e) {
+																tab_pane.find('.panel-body.custom-selected-image').remove();
+																that._changeState(false);
 															}
 														});
-												my_list_view
-														.on(
+												my_list_view.on(
 																"mouseenter",
 																".img-wrapper",
 																function(e) {
@@ -1054,17 +1016,12 @@
 														.clearSelection();
 											}
 											break;
-										case "#"
-												+ that.options.guid[TAB_PANE_WEBSITE_ID]:
+										case "#" + that.options.guid[TAB_PANE_WEBSITE_ID]:
 											// website images
-											var my_list_view = tab_pane
-													.find('.panel-body div');
-											var my_list_pager = tab_pane
-													.find('.panel-footer div');
-											if (!my_list_view
-													.data('kendoListView')) {
-												my_list_view
-														.kendoListView({
+											var my_list_view = tab_pane.find('.panel-body div');
+											var my_list_pager = tab_pane.find('.panel-footer div');
+											if (!my_list_view.data('kendoListView')) {
+												my_list_view.kendoListView({
 															dataSource : {
 																type : 'json',
 																transport : {
@@ -1097,115 +1054,51 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane
-																		.find(
-																				'.panel-body.custom-selected-image')
-																		.remove();
-																var data = this.dataSource
-																		.view();
-																var current_index = this
-																		.select()
-																		.index();
+																tab_pane.find('.panel-body.custom-selected-image').remove();
+																var data = this.dataSource.view();
+																var current_index = this.select().index();
 																if (current_index >= 0) {
 																	var item = data[current_index];
 																	var imageId = item.imageId;
 																	if (imageId > 0) {
-																		that
-																				._getImageLink(
-																						item,
-																						function(
-																								data) {
-																							if (typeof data.imageLink === 'object') {
-																								my_list_view
-																										.data(
-																												"linkId",
-																												data.imageLink.linkId);
-																								that
-																										._changeState(true);
-																								var t = kendo
-																										.template('<div class="panel-body custom-selected-image">'
-																												+ '<p><img src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" class="img-rounded" ></p>'
-																												+ '<p class="text-danger">이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></div>');
-
-																								tab_pane
-																										.find(
-																												'.panel')
-																										.prepend(
-																												SELECTED_IMAGE_TEMPLAGE(item));
-																							}
-																						});
+																		that._getImageLink(item,
+																				function(data) {
+																					if (typeof data.imageLink === 'object') {
+																						my_list_view.data("linkId", data.imageLink.linkId);
+																						that._changeState(true);
+																						tab_pane.find('.panel').prepend(SELECTED_IMAGE_TEMPLAGE(item));
+																					}
+																			});
 																	}
 																}
 															},
 															navigatable : false,
-															template : kendo
-																	.template($(
-																			"#photo-list-view-template")
-																			.html()),
-															dataBound : function(
-																	e) {
-																tab_pane
-																		.find(
-																				'.panel-body.custom-selected-image')
-																		.remove();
-																that
-																		._changeState(false);
+															template : kendo.template($("#photo-list-view-template").html()),
+															dataBound : function(e) {
+																tab_pane.find('.panel-body.custom-selected-image').remove();
+																that._changeState(false);
 															}
 														});
-												my_list_view
-														.on(
-																"mouseenter",
-																".img-wrapper",
-																function(e) {
-																	kendo
-																			.fx(
-																					$(
-																							e.currentTarget)
-																							.find(
-																									".img-description"))
-																			.expand(
-																					"vertical")
-																			.stop()
-																			.play();
-																})
-														.on(
-																"mouseleave",
-																".img-wrapper",
-																function(e) {
-																	kendo
-																			.fx(
-																					$(
-																							e.currentTarget)
-																							.find(
-																									".img-description"))
-																			.expand(
-																					"vertical")
-																			.stop()
-																			.reverse();
-																});
-												my_list_pager
-														.kendoPager({
-															refresh : true,
-															buttonCount : 5,
-															dataSource : my_list_view
-																	.data('kendoListView').dataSource
-														});
+												my_list_view.on("mouseenter",".img-wrapper", function(e) {
+													kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
+												}).on("mouseleave", ".img-wrapper",function(e) {
+													kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
+												});
+												
+												my_list_pager.kendoPager({
+													refresh : true,
+													buttonCount : 5,
+													dataSource : my_list_view.data('kendoListView').dataSource
+												});
 											} else {
-												my_list_view.data(
-														'kendoListView')
-														.clearSelection();
+												my_list_view.data('kendoListView').clearSelection();
 											}
 											break;
-										case "#"
-												+ that.options.guid[TAB_PANE_MY_ID]:
-											var my_list_view = tab_pane
-													.find('.panel-body div');
-											var my_list_pager = tab_pane
-													.find('.panel-footer div');
-											if (!my_list_view
-													.data('kendoListView')) {
-												my_list_view
-														.kendoListView({
+										case "#"+ that.options.guid[TAB_PANE_MY_ID]:
+											var my_list_view = tab_pane.find('.panel-body div');
+											var my_list_pager = tab_pane.find('.panel-footer div');
+											if (!my_list_view.data('kendoListView')) {
+												my_list_view.kendoListView({
 															dataSource : {
 																type : 'json',
 																transport : {
@@ -1263,12 +1156,6 @@
 																												data.imageLink.linkId);
 																								that
 																										._changeState(true);
-
-																								var t = kendo
-																										.template('<div class="panel-body custom-selected-image">'
-																												+ '<p><img src="/community/download-my-image.do?imageId=#=imageId#&width=150&height=150" class="img-rounded" ></p>'
-																												+ '<p class="text-danger">이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></div>');
-
 																								tab_pane
 																										.find(
 																												'.panel')
@@ -1338,106 +1225,53 @@
 														.clearSelection();
 											}
 											break;
-										case "#"
-												+ that.options.guid[TAB_PANE_URL_ID]:
-											var form_input = that.element
-													.find('.modal-body input[name="custom-selected-url"]');
-											var selected_img = $(
-													"#"
-															+ that.options.guid[TAB_PANE_URL_ID])
-													.children('img');
+										case "#" + that.options.guid[TAB_PANE_URL_ID]:
+											var form_input = that.element.find('.modal-body input[name="custom-selected-url"]');
+											var selected_img = $("#" + that.options.guid[TAB_PANE_URL_ID]).children('img');
 											form_input.val("");
-											if (form_input.parent().hasClass(
-													'has-error'))
-												form_input.parent()
-														.removeClass(
-																'has-error');
-											if (form_input.parent().hasClass(
-													'has-success'))
-												form_input.parent()
-														.removeClass(
-																'has-success');
+											if (form_input.parent().hasClass('has-error'))
+												form_input.parent().removeClass('has-error');
+											if (form_input.parent().hasClass('has-success'))
+												form_input.parent().removeClass('has-success');
 											if (!selected_img.hasClass('hide'))
 												selected_img.addClass('hide');
 											break;
 										}
 									});
-
-					that.element
-							.find(
-									'.modal-body input[name="custom-selected-url"]')
-							.on(
+					that.element.find('.modal-body input[name="custom-selected-url"]').on(
 									'change',
 									function() {
 										var form_input = $(this);
-										var selected_img = $(
-												"#"
-														+ that.options.guid[TAB_PANE_URL_ID])
-												.children('img');
+										var selected_img = $("#"+ that.options.guid[TAB_PANE_URL_ID]).children('img');
 										if (form_input.val().length == 0) {
 											if (!selected_img.hasClass('hide'))
 												selected_img.addClass('hide');
-											if (form_input.parent().hasClass(
-													'has-error'))
-												form_input.parent()
-														.removeClass(
-																'has-error');
-											if (form_input.parent().hasClass(
-													'has-success'))
-												form_input.parent()
-														.removeClass(
-																'has-success');
+											if (form_input.parent().hasClass('has-error'))
+												form_input.parent().removeClass('has-error');
+											if (form_input.parent().hasClass('has-success'))
+												form_input.parent().removeClass('has-success');
 											that._changeState(false);
 										} else {
-											selected_img
-													.attr('src',
-															form_input.val())
-													.load(
+											selected_img.attr('src',form_input.val()).load(
 															function() {
-																if (form_input
-																		.parent()
-																		.hasClass(
-																				'has-error'))
-																	form_input
-																			.parent()
-																			.removeClass(
-																					'has-error');
-																form_input
-																		.parent()
-																		.addClass(
-																				'has-success');
-																selected_img
-																		.removeClass('hide');
-																that
-																		._changeState(true);
-															})
-													.error(
+																if (form_input.parent().hasClass('has-error'))
+																	form_input.parent().removeClass('has-error');
+																form_input.parent().addClass('has-success');
+																selected_img.removeClass('hide');
+																that._changeState(true);
+															}).error(
 															function() {
-																if (!selected_img
-																		.hasClass('hide'))
-																	selected_img
-																			.addClass('hide');
-																if (form_input
-																		.parent()
-																		.hasClass(
-																				'has-success'))
-																	form_input
-																			.parent()
-																			.removeClass(
-																					'has-success');
-																form_input
-																		.parent()
-																		.addClass(
-																				'has-error');
-																that
-																		._changeState(false);
+																if (!selected_img.hasClass('hide'))
+																	selected_img.addClass('hide');
+																if (form_input.parent().hasClass('has-success'))
+																	form_input.parent().removeClass('has-success');
+																form_input.parent().addClass('has-error');
+																that._changeState(false);
 															});
 										}
 									});
 
-					that.element
-							.find('.modal-footer .btn.custom-insert-img')
-							.on(
+					that.element.find('.modal-footer .btn.custom-insert-img').on(
 									'click',
 									function() {
 										var tab_pane = that._activePane();
