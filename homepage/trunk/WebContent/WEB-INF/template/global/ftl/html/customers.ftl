@@ -93,6 +93,9 @@
 					<!-- end side menu -->
 				</div>
 				<div class="col-lg-9">
+					<div class="page-header text-primary">
+						<h5>주요 고객사<small> 공공.금융기관, 정보통신, 서비스/유통, 제조/건설등 국내 여러 기업이 인키움의 제품과 서비스를 사용하고 있습니다.</small></h5>
+					</div>					
 					<div class="owl-carousel-v1 margin-bottom-50">
 						<h3 class="heading-md">고객사</h3>
 						<p>공공.금융기관, 정보통신, 서비스/유통, 제조/건설등 국내 여러 기업이 인키움의 제품과 서비스를 사용하고 있습니다.</p>
@@ -132,8 +135,7 @@
 							</div>
 						</div>	
 					</div>
-					<div class="margin-bottom-60"><hr></div>
-					
+					<div class="margin-bottom-60"><hr></div>					
 					<div class="owl-carousel-v2 owl-carousel-style-v1 margin-bottom-50">
                     <h3 class="heading-md">제휴 파트너 </h3>
                     <p>고객에게 더나은 가치를 제공하고 위하여 여러 국내 업체들과 제휴 관계에 있습니다.<br>
