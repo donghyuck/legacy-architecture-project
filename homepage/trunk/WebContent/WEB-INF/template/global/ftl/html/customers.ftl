@@ -166,9 +166,6 @@
                         <div class="item">
                             <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/emirates.png" alt="">
                         </div>
-                        <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/co-wheels.png" alt="">
-                        </div>
                     </div>
                     <div class="owl-navigation">
                         <div class="customNavigation">
