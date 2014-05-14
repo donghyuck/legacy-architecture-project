@@ -433,6 +433,15 @@ var Image = kendo.data.Model.define( {
         creationDate: { type: "date" },
         index : {type: "number", defaultValue : 0 }
     },
+	formattedSize : function(){
+		return kendo.toString(this.get("size"), "##,###");
+	},
+	formattedCreationDate : function(){
+    	return kendo.toString(this.get("creationDate"), "g");
+    },
+    formattedModifiedDate : function(){
+    	return kendo.toString(this.get("modifiedDate"), "g");
+    }
     manupulate : function () {
     	this.set( "photoUrl" , '/community/download-my-image.do?imageId=' + this.get('imageId') );
     	this.set( "formattedCreationDate" , kendo.toString(this.get('creationDate'),  'F') );
