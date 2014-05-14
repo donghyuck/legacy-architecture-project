@@ -131,7 +131,52 @@
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/fddw.png" alt="">
 							</div>
 						</div>	
-					</div>	
+					</div>
+					<div class="margin-bottom-60"><hr></div>
+					
+					<div class="owl-carousel-v2 owl-carousel-style-v1 margin-bottom-50">
+                    <h3 class="heading-md">제휴 파트너 </h3>
+                    <p>고객에게 더나은 가치를 제공하고 위하여 여러 국내 업체들과 제휴 관계에 있습니다.<br>
+
+                    <div class="owl-slider-v2">
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/baderbrau.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/fddw.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/inspiring.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/ea-canada.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/marianos.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/bellfield.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/national-geographic.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/emirates.png" alt="">
+                        </div>
+                        <div class="item">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/co-wheels.png" alt="">
+                        </div>
+                    </div>
+
+                    <div class="owl-navigation">
+                        <div class="customNavigation">
+                            <a class="owl-btn prev-v2"><i class="fa fa-angle-left"></i></a>
+                            <a class="owl-btn next-v2"><i class="fa fa-angle-right"></i></a>
+                        </div>
+                    </div><!--/navigation-->              
+                </div>    
+                <!-- End Owl Carousel v2 --> 					
+						
 				</div>				
 			</div>
 		</div>									 
