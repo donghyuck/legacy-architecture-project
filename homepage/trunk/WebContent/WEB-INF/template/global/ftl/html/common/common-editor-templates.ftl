@@ -233,7 +233,7 @@
 			# } #	
 				<div class="img-description">
 					<h3>#:name#</h3>
-					<p>#:formattedImageSize()# 바이트</p>
+					<p>#:formattedSize() # 바이트</p>
 				</div>
 	</div>
 </script>					
