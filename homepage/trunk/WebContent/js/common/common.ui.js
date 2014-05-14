@@ -1279,6 +1279,9 @@
 					that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {
 										var tab_pane = that._activePane();
 										var selected_url;
+										
+										alert(tab_pane.html());
+										
 										switch (tab_pane.attr('id')) {
 										case that.options.guid[TAB_PANE_URL_ID]:
 											selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();
