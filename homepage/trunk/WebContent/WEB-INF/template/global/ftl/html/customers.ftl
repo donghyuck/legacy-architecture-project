@@ -140,28 +140,28 @@
 
                     <div class="owl-slider-v2">
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/baderbrau.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/baderbrau.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/fddw.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/fddw.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/inspiring.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/inspiring.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/ea-canada.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/marianos.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/marianos.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/bellfield.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/bellfield.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/national-geographic.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/national-geographic.png" alt="">
                         </div>
                         <div class="item">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/emirates.png" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/emirates.png" alt="">
                         </div>
                         <div class="item">
                             <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4assets/img/clients2/co-wheels.png" alt="">
