@@ -132,8 +132,7 @@
 	LOGIN_URL = "/login",
 	CALLBACK_URL_TEMPLATE = kendo.template("#if ( typeof( externalLoginHost ) == 'string'  ) { #http://#= externalLoginHost ## } #/community/connect-socialnetwork.do?media=#= media #&domainName=#= domain #"), 
 	AUTHENTICATE_URL = "/accounts/get-user.do?output=json",	
-	handleKendoAjaxError = common.api.handleKendoAjaxError;
-	
+	handleKendoAjaxError = common.api.handleKendoAjaxError;	
 	common.ui.extAccounts = Widget.extend({
 		init : function(element, options) {
 			var that = this;
@@ -826,9 +825,43 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.ui = common.ui || {};
-	var kendo = window.kendo, Widget = kendo.ui.Widget, isPlainObject = $.isPlainObject, proxy = $.proxy, extend = $.extend, placeholderSupported = kendo.support.placeholder, browser = kendo.support.browser, isFunction = kendo.isFunction, trimSlashesRegExp = /(^\/|\/$)/g, CHANGE = "change", APPLY = "apply", ERROR = "error", CLICK = "click", MODAL_TITIL_ID = "title_guid", TAB_PANE_URL_ID = "url_guid", TAB_PANE_UPLOAD_ID = "upload_guid", TAB_PANE_MY_ID = "my_guid", TAB_PANE_WEBSITE_ID = "website_guid", TAB_PANE_DOMAIN_ID = "domain_guid", UNDEFINED = 'undefined', POST = 'POST', JSON = 'json', 
+	var kendo = window.kendo, 
+		Widget = kendo.ui.Widget, 
+		isPlainObject = $.isPlainObject, 
+		proxy = $.proxy, 
+		extend = $.extend, 
+		template = kendo.template,
+		placeholderSupported = kendo.support.placeholder, 
+		browser = kendo.support.browser, 
+		isFunction = kendo.isFunction, 
+		trimSlashesRegExp = /(^\/|\/$)/g, 
+		CHANGE = "change", 
+		APPLY = "apply", 
+		ERROR = "error", 
+		CLICK = "click", 
+		MODAL_TITIL_ID = "title_guid", TAB_PANE_URL_ID = "url_guid", TAB_PANE_UPLOAD_ID = "upload_guid", TAB_PANE_MY_ID = "my_guid", TAB_PANE_WEBSITE_ID = "website_guid", TAB_PANE_DOMAIN_ID = "domain_guid", 
+		UNDEFINED = 'undefined',
+		POST = 'POST', 
+		JSON = 'json', 
+		templates = {
+			selected  : template('<div class="panel-body custom-selected-image">'
+					+ '<div class="media">'
+					+ '<a class="pull-left" href="\\#">'
+					+ '<img class="media-object" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
+					+ '</a>'
+					+ '<div class="media-body">'
+					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span> #=name#</h5>'
+					+ '<small><p class="text-muted">생성일: #= formattedCreationDate() #</p>'
+					+ '<p class="text-muted">수정일: #= formattedModifiedDate() #</p>'
+					+ '<p class="text-muted">크기: #= formattedSize() #</p>'
+					+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></small>'
+					+ '</div>' + '</div>' + '</div>'),
+			image : template('<img src="#: url #" class="img-responsive"/>'),
+			url : template('/download/image/#= key #')
+		},
+		/*templates.url
 		VALUE_TEMPLATE = kendo.template('<img src="#: url #" class="img-responsive"/>'), 
-			SELECTED_IMAGE_TEMPLAGE = kendo.template('<div class="panel-body custom-selected-image">'
+		SELECTED_IMAGE_TEMPLAGE = kendo.template('<div class="panel-body custom-selected-image">'
 					+ '<div class="media">'
 					+ '<a class="pull-left" href="\\#">'
 					+ '<img class="media-object" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
@@ -840,11 +873,11 @@
 					+ '<p class="text-muted">크기: #= formattedSize() #</p>'
 					+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></small>'
 					+ '</div>' + '</div>' + '</div>'), 
-			URL_TEMPLATE = kendo.template('/download/image/#= key #'), 
-			handleKendoAjaxError = common.api.handleKendoAjaxError;
-
-	common.ui.extImageBrowser = Widget
-			.extend({
+		URL_TEMPLATE = kendo.template('/download/image/#= key #'), 
+		*/
+		
+		handleKendoAjaxError = common.api.handleKendoAjaxError;
+	common.ui.extImageBrowser = Widget.extend({
 				init : function(element, options) {
 					var that = this;
 					Widget.fn.init.call(that, element, options);
@@ -957,10 +990,7 @@
 																				if (typeof data.imageLink === 'object') {
 																					my_list_view.data("linkId",data.imageLink.linkId);
 																					that._changeState(true);
-																					var t = kendo.template('<div class="panel-body custom-selected-image">'
-																						+ '<p><img src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" class="img-rounded" ></p>'
-																						+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></div>');
-																					tab_pane.find('.panel').prepend(SELECTED_IMAGE_TEMPLAGE(item));
+																					tab_pane.find('.panel').prepend(templates.selected(item));
 																				}
 																		});
 																	}
@@ -1066,7 +1096,7 @@
 																					if (typeof data.imageLink === 'object') {
 																						my_list_view.data("linkId", data.imageLink.linkId);
 																						that._changeState(true);
-																						tab_pane.find('.panel').prepend(SELECTED_IMAGE_TEMPLAGE(item));
+																						tab_pane.find('.panel').prepend(templates.selected(item));
 																					}
 																			});
 																	}
@@ -1160,7 +1190,7 @@
 																										.find(
 																												'.panel')
 																										.prepend(
-																												SELECTED_IMAGE_TEMPLAGE(item));
+																												templates.selected(item));
 																							}
 																						});
 																	}
@@ -1286,7 +1316,7 @@
 													.find('.panel-body div');
 											var linkId = my_list_view
 													.data("linkId");
-											selected_url = URL_TEMPLATE({
+											selected_url = templates.url({
 												key : linkId
 											});
 											my_list_view.data("linkId", null);
@@ -1296,7 +1326,7 @@
 													.find('.panel-body div');
 											var linkId = my_list_view
 													.data("linkId");
-											selected_url = URL_TEMPLATE({
+											selected_url = templates.url({
 												key : linkId
 											});
 											my_list_view.data("linkId", null);
@@ -1306,14 +1336,15 @@
 													.find('.panel-body div');
 											var linkId = my_list_view
 													.data("linkId");
-											selected_url = URL_TEMPLATE({
+											selected_url = templates.url({
 												key : linkId
 											});
 											my_list_view.data("linkId", null);
 											break;
 										}
+										
 										that.trigger(APPLY, {
-											html : VALUE_TEMPLATE({
+											html : templates.image({
 												url : selected_url
 											})
 										});
