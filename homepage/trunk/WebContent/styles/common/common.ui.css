@@ -144,9 +144,24 @@ img.img-full-height {
 /* -------------------------------------------- */
 /* Bootstrap customize                             */
 /* -------------------------------------------- */
+.headline {
+	display: block;
+	margin: 10px 0 25px 0;
+	border-bottom: 1px dotted ;
+}
+
+.headline h2, .headline h3, .headline h4 {
+	margin: 0 0 -2px 0;
+	padding-bottom: 5px;
+	display: inline-block;
+	border-bottom: 2px solid @brand-primary;
+}
+
+
 .color-green {
 	color: #72c02c;
 }
+
 
 .editor-popup .modal-dialog {
 	margin: 40px auto;
