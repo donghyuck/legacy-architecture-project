@@ -1030,8 +1030,8 @@
 											break;
 										case "#" + that.options.guid[TAB_PANE_WEBSITE_ID]:
 											// website images
-											var my_list_view = tab_pane.find('.panel-body');
-											var my_list_pager = tab_pane.find('.panel-footer');
+											var my_list_view = tab_pane.find('.panel-body div');
+											var my_list_pager = tab_pane.find('.panel-footer div');
 											if (!my_list_view.data('kendoListView')) {
 												my_list_view.kendoListView({
 															dataSource : {
