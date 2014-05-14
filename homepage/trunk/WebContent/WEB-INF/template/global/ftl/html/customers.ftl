@@ -2,8 +2,9 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
-		<script type="text/javascript">
+<#compress>			
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/owl.carousel/owl.carousel.css" />
+		<script type="text/javascript">		
 		<!--
 		yepnope([{
 			load: [
@@ -61,9 +62,9 @@
 		#announce-view .popover {
 			position : relative;
 			max-width : 500px;
-		}
-						
+		}						
 		</style>   	
+</#compress>			
 	</head>
 	<body class="color0">
 		<!-- START HEADER -->
