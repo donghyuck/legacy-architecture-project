@@ -2,6 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
+<#compress>			
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.timeline.css" />
 		<script type="text/javascript">
 		<!--
@@ -101,10 +102,9 @@
 		}
 		.cbp_tmtimeline > li .cbp_tmicon { 
 			position : relative;
-		}
-					
-						
+		}				
 		</style>   	
+</#compress>				
 	</head>
 	<body class="color0">
 		<!-- START HEADER -->
