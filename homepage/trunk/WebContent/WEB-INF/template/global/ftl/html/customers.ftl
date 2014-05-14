@@ -40,6 +40,7 @@
 				<#if !action.user.anonymous >				
 				
 				</#if>	
+				$('.owl-carousel-v1, .owl-carousel-v2').show();
 				 common.ui.initializeOwlCarousel();
 				// END SCRIPT            
 			}
@@ -96,7 +97,7 @@
 					<div class="page-header padding-left-10 text-primary">
 						<h5><strong> 주요 고객사</strong> <small> 공공.금융기관, 정보통신, 서비스/유통, 제조/건설등 국내 여러 기업이 인키움의 제품과 서비스를 사용하고 있습니다.</small></h5>
 					</div>					
-					<div class="owl-carousel-v1 margin-bottom-50">
+					<div class="owl-carousel-v1 margin-bottom-50" style="display:none;">
 						<div class="owl-navigation">
 							<div class="customNavigation">
 								<a class="owl-btn prev-v1"><i class="fa fa-angle-left"></i></a>
@@ -137,7 +138,7 @@
 					<div class="page-header padding-left-10 text-primary">
 						<h5><strong>제휴 파트너</strong> <small> 고객에게 더나은 가치를 제공하고 위하여 여러 국내 업체들과 제휴 관계에 있습니다.</small></h5>
 					</div>								
-					<div class="owl-carousel-v2 owl-carousel-style-v1 margin-bottom-50">
+					<div class="owl-carousel-v2 owl-carousel-style-v1 margin-bottom-50"  style="display:none;">
                     <div class="owl-slider-v2">
                         <div class="item">
                             <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/baderbrau.png" alt="">
