@@ -155,7 +155,7 @@
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div class="tab-pane active" id="company-history">
-									<div class="panel panel-default panel-flat">
+									<div class="panel panel-default">
 										<div class="panel-body">
 										
 <ul class="timeline-v2">
