@@ -439,7 +439,7 @@
 		<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
 		<p class="text-muted">
 			<span class="label label-default label-lightweight">생성일</span> <small><span data-bind="text: announce.formattedCreationDate"></span> </small>
-			<span class="label label-default ">수정일</span> <small><span data-bind="text: announce.formattedModifiedDate"></span> </small>
+			<span class="label label-default label-lightweight">수정일</span> <small><span data-bind="text: announce.formattedModifiedDate"></span> </small>
 		</p>
 	</div>													
 	<div class="media">
