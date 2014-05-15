@@ -49,8 +49,8 @@
 		border-top: solid 1px #777;
 	}	
 	.footer {
-		color: #dadada;
-		background: #585f69;
+		color: #777;
+		background: #eee;
 		padding: 20px 0 30px;
 	}	
 	/** Header css */
