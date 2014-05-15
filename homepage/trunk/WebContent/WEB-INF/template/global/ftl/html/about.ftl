@@ -155,9 +155,10 @@
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div class="tab-pane active" id="company-history">
+								<!--
 									<div class="panel panel-default">
 										<div class="panel-body">
-										
+								-->		
 <ul class="timeline-v2">
                     <li>
                         <time class="cbp_tmtime" datetime=""><span>4/1/08</span> <span>January</span></time>
@@ -361,9 +362,10 @@
 													</div>
 												</li>
 											</ul>		
-											-->					
+											-->	
+											<!--				
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div class="tab-pane" id="company-logo">
 											<div class="page-header page-nounderline-header padding-left-10 ">
