@@ -492,7 +492,7 @@ img.img-full-height {
 .headline {
 	display: block;
 	margin: 10px 0 25px 0;
-	border-bottom: 1px dotted ;
+	border-bottom: 1px  ;
 }
 
 .headline h2, .headline h3, .headline h4, .headline h5 {
