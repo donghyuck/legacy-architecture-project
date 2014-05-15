@@ -516,6 +516,13 @@
 				$('#notice-editor').html( template );	
 				var noticeEditorModel =  kendo.observable({ 
 					announce : announcePlaceHolder,
+					value : function( value ){
+						if( typeof value === 'undefined' ){
+							return this.announce.body ;
+						}else{
+							this.announce.set('body' , value);
+						}
+					},					
 					profilePhotoUrl : function(){
 						return common.api.user.photoUrl (this.get("announce").user, 150,150);
 					},
@@ -577,7 +584,7 @@
 				kendo.bind(renderTo, noticeEditorModel );
 				renderTo.data("model", noticeEditorModel );
 				var bodyEditor =  $("#notice-editor-body" );
-				createEditor( "notice-editor" , bodyEditor );
+				createEditor( "notice-editor" , bodyEditor, noticeEditorModel );
 			}
 			
 			renderTo.data("model").set("updateRequired", false);			
@@ -588,7 +595,6 @@
 			}else{			
 				renderTo.find('input[name="announce-type"]:last').click();
 			}
-
 			$('#announce-panel > .panel > .panel-body').hide();
 			kendo.fx(renderTo).expand("vertical").duration(200).play();			
 		}
@@ -596,11 +602,11 @@
 		<!-- ============================== -->
 		<!-- Utils for editor									       -->
 		<!-- ============================== -->						
-		function createEditor( renderToString, bodyEditor ){
+		function createEditor( renderToString, bodyEditor, model ){
 			if(!bodyEditor.data("kendoEditor") ){			
 				var imageBroswer = createEditorImageBroswer( renderToString + "-imagebroswer", bodyEditor);				
 				var linkPopup = createEditorLinkPopup(renderToString + "-linkpopup", bodyEditor);	
-				var htmlEditor = createCodeEditor(renderToString + "-html-editor", bodyEditor);									
+				var htmlEditor = createCodeEditor(renderToString + "-html-editor", bodyEditor, model );									
 				bodyEditor.kendoEditor({
 						tools : [ 'bold', 'italic', 'insertUnorderedList', 'insertOrderedList',
 							{	
@@ -631,7 +637,7 @@
 			}			
 		}
 
-		function createCodeEditor( renderToString, editor ) {		
+		function createCodeEditor( renderToString, editor, model ) {		
 			if( $("#"+ renderToString).length == 0 ){
 				$('body').append('<div id="'+ renderToString +'"></div>');
 			}							
@@ -645,14 +651,20 @@
 						var editor = ace.edit("htmleditor");
 						editor.getSession().setMode("ace/mode/xml");
 						editor.getSession().setUseWrapMode(true);
+						
 					},
 					open: function (e){
-						ace.edit("htmleditor").setValue(editor.data('kendoEditor').value());
+						ace.edit("htmleditor").setValue(model.value());
 					}					
 				});					
 				renderTo.find('button.custom-update').click(function () {
 					var btn = $(this)			
-					editor.data("kendoEditor").value( ace.edit("htmleditor").getValue() );
+					var newValue = ace.edit("htmleditor").getValue();
+					var oldValue = model.value();
+					if( newValue.length != oldValue.length ){
+						ace.edit("htmleditor").setValue("");
+					}		
+					ace.edit("htmleditor").setValue("");			
 					renderTo.data('kendoExtModalWindow').close();
 				});
 			}

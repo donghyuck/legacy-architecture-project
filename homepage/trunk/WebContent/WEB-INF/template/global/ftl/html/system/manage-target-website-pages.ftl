@@ -377,6 +377,7 @@
 						var editor = ace.edit("htmleditor");
 						editor.getSession().setMode("ace/mode/xml");
 						editor.getSession().setUseWrapMode(true);
+						
 					},
 					open: function (e){
 						//ace.edit("htmleditor").setValue(editor.data('kendoEditor').value());
@@ -391,6 +392,7 @@
 					if( newValue.length != oldValue.length ){
 						pageEditorModel.value( newValue ) ;
 					}
+					ace.edit("htmleditor").setValue("");
 					renderTo.data('kendoExtModalWindow').close();
 				});
 			}
