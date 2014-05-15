@@ -535,6 +535,9 @@
 							common.ui.notification({title:"공지 & 이베트", message: "시작일자가 종료일자보다 이후일 수 없습니다." });
 							return ;
 						}
+						
+						this.announce.user = null;
+						
 						common.api.callback({  
 							url : '${request.contextPath}/community/update-announce.do?output=json',
 							data : { item: kendo.stringify( this.announce ) },
