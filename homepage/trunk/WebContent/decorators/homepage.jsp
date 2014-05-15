@@ -34,7 +34,7 @@
 		color: #ffffff; 
 	}		
 
-	* {
+	.btn, .panel, .label {
 		border-radius: 0 !important;
 	}
 	.form-control {
