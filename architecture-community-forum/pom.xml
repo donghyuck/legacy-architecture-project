@@ -139,4 +139,15 @@
 			<url>http://222.122.63.146/artifactory/ext-release-local</url>
 		</repository>
 	</distributionManagement> 
+	<repositories>
+		<repository>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<id>central</id>
+			<name>Donghyuck's Maven Repository</name>
+			<url>http://222.122.63.146/artifactory/repo</url>
+		</repository>
+	</repositories>
+		
 </project>
