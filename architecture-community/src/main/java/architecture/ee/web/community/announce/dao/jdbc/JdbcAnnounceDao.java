@@ -18,6 +18,8 @@ package architecture.ee.web.community.announce.dao.jdbc;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -233,6 +235,14 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
 				new SqlParameterValue(Types.NUMERIC, objectType ),
 				new SqlParameterValue(Types.NUMERIC, objectId ));
+	}
+
+	public int getAnnounceCount(int objectType, long objectId, Date endDate) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_END_DATE").getSql(), 
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ),
+				new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() :  endDate ));
 	}
 	
 	
