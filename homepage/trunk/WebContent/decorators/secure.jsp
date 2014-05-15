@@ -18,7 +18,7 @@
 <decorator:head />
 <style>
 	body { 
-		/*padding-top: 51px; */
+		padding-top: 51px;
 		background-color : #FFFFFF;	
 		margin: 0;
 		padding: 0;
