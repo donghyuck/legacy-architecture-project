@@ -1573,20 +1573,20 @@
 		</script>						
 		<script type="text/x-kendo-tmpl" id="notice-editor-template">
 			<div class="panel panel-default">
-				<div class="panel-body"  style="padding:5px;">		
-					<div class="page-header text-primary" data-bind="visible: isNew">
-						<h5>
+				<div class="panel-heading" data-bind="visible: isNew">
+					<h5>
 							<small><span class="label label-danger">NEW</span> 공지 및 이벤트 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
 							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-info btn-sm active"  data-bind="enabled: isNew">
+								<label class="btn btn-info btn-sm active" data-bind="enabled: isNew">
 								<input type="radio" name="announce-type" value="30" data-bind="checked: announce.objectType">사이트
 								</label>
 								<label class="btn btn-info btn-sm" data-bind="enabled: isNew">
 								<input type="radio" name="announce-type" value="1" data-bind="checked: announce.objectType">회사
 								</label>
 							</div>						
-						</h5>
-					</div>								
+					</h5>				
+				</div>
+				<div class="panel-body"  style="padding:5px;">									
 					<div  class="form">
 						<div class="form-group">
 							<label class="control-label"><small>제목</small></label>							
