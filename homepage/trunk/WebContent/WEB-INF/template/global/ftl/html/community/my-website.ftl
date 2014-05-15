@@ -1573,7 +1573,7 @@
 		</script>						
 		<script type="text/x-kendo-tmpl" id="notice-editor-template">
 			<div class="panel panel-default">
-				<div class="panel-heading" data-bind="visible: isNew">
+				<div class="panel-heading" data-bind="visible: isNew" style="padding:5px;">
 					<h5>
 							<small><span class="label label-danger">NEW</span> 공지 및 이벤트 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
 							<div class="btn-group" data-toggle="buttons">
