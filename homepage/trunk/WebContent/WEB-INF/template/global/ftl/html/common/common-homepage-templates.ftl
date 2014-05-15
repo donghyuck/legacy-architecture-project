@@ -485,8 +485,8 @@
 		</div>			
 	</div>	
 	<div class="margin-bottom-20"><hr class="devider"></div>
-	<div data-bind="html: announce.body " />
-	<div class="blank-top-5" ></div>
+	<div data-bind="html: body " />
+	<div class="margin-bottom-20"></div>
 	<div class="btn-group pull-right">
 		<button  type="button" class="btn btn-info btn-sm custom-list "><i class="fa fa-angle-double-up"></i> 목록</button>		
 	</div>
