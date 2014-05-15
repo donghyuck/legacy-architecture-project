@@ -366,7 +366,7 @@
 									</div>
 								</div>
 								<div class="tab-pane" id="company-logo">
-											<div class="page-header page-nounderline-header">
+											<div class="page-header page-nounderline-header padding-left-10 ">
 												<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
 											</div>
 											<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-rounded" />
