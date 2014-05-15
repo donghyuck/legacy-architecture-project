@@ -30,7 +30,7 @@
 	}
 	
 	.k-grid table tr.k-state-selected{
-		background: #428bca;
+		background: #5bc0de;
 		color: #ffffff; 
 	}		
 
