@@ -184,7 +184,7 @@ img.img-full-height {
 .tab-v1 .nav-tabs > .active > a:focus { 
   color: #fff;
   border: none; 
-  background: #72c02c; 
+  background: #428bca; 
 }
 
 .tab-v1 .nav-tabs > li > a { 
@@ -192,7 +192,7 @@ img.img-full-height {
 }
 .tab-v1 .nav-tabs > li > a:hover { 
   color: #fff; 
-  background: #72c02c; 
+  background: #428bca; 
 }
 
 .tab-v1 .tab-content { 
