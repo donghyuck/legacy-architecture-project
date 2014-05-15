@@ -42,11 +42,16 @@
 		box-shadow: none;
 	}
 
-	copyright {
+	.copyright {
 		font-size: 12px;
 		padding: 11px 0 7px;
 		background: #3e4753;
 		border-top: solid 1px #777;
+	}	
+	.footer {
+		color: #dadada;
+		background: #585f69;
+		padding: 20px 0 30px;
 	}	
 	/** Header css */
 	header {
