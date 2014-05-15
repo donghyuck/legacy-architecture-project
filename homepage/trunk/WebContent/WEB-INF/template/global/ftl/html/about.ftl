@@ -144,7 +144,9 @@
 						<div class="col-sm-12">					
 							<#if action.hasWebSitePage("pages.about.pageId") >							
 							${ processedBodyText }
-							</#if> 														
+							</#if> 
+							<!-- start of tabs -->					
+							<div class="tab-v1">									
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#company-history" data-toggle="tab">연역</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
@@ -405,6 +407,7 @@
 									</div>
 								</div>
 							</div>
+							</div><!-- end of tabs -->
 						</div>
 					</div>					
 				</div>				
