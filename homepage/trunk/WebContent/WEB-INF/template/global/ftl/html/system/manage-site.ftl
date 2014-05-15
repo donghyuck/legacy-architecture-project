@@ -1,7 +1,7 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="secure">
 	<head>
-		<title>시스템 정보</title>
+		<title>웹사이트관리</title>
 <#compress>		
 		<script type="text/javascript"> 
 		yepnope([{
