@@ -34,7 +34,7 @@
 		color: #ffffff; 
 	}		
 
-	.nav-tabs a, .btn, .panel, .label, .modal, .form-group input, .alert {
+	.modal-dialog, .nav-tabs a, .btn, .panel, .label, .form-group input, .alert {
 		border-radius: 0 !important;
 	}
 	
