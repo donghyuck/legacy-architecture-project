@@ -37,7 +37,9 @@
 	* {
 		border-radius: 0 !important;
 	}
-
+	.form-control {
+		box-shadow: none;
+	}
 	/** Header css */
 	header {
 		background: #0070b8;
