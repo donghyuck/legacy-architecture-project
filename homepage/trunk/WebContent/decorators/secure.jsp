@@ -24,7 +24,6 @@
 		margin: 0;
 		
 		height: 100%;
-		overflow : hidden;
 		background : url (<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/images/bg.png ) #FFF ;
 	}
 	
