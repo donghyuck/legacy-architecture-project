@@ -15,19 +15,19 @@
 					<div class="container">
 						<div class="navbar-header">					
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
-								<span class="sr-only">Toggle navigation</span>
+								<span class="sr-only">${webSite.description} toggle navigation</span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>					
-							<a class="navbar-brand" href="/main.do">&nbsp;&nbsp;${webSite.displayName}</a>
+							<a class="navbar-brand" href="/main.do">   ${webSite.displayName}</a>
 						</div>												
 						<div class="navbar-collapse collapse" id="navbar-ex1-collapse">
 							<ul class="nav navbar-nav">
 								<#list webSiteMenu.components as item >
 								<#if  item.components?has_content >
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}<b class="caret"></b></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title} <i class="fa fa-angle-down"></i></a>
 										<ul class="dropdown-menu">
 										<#list item.components as sub_item >
 											<#if sub_item.components?has_content >
