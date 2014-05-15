@@ -45,8 +45,8 @@
 	.copyright {
 		font-size: 12px;
 		padding: 11px 0 7px;
-		background: #3e4753;
-		border-top: solid 1px #777;
+		/*background: #3e4753;*/
+		/*border-top: solid 1px #777;*/
 	}	
 	.footer {
 		color: #777;
