@@ -462,7 +462,7 @@
 		function showAnnouncePanel (){			
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 			
-			var template = kendo.template($('#announcement-viewer-template').html());
+			var template = kendo.template($('#announcement-view-template').html());
 			$("#announce-view").html( template(announcePlaceHolder) );	
 			kendo.bind($("#announce-view"), announcePlaceHolder );	
 			$("#announce-view button[class*=custom-list]").click( function (e){
