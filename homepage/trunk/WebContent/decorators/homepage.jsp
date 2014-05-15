@@ -54,12 +54,6 @@
 		padding: 20px 0 30px;
 	}	
 
-a {
-	color:#EB7F37;
-}
-a:hover, .scrollspyNav .active a {
-	color:#EB7F37;
-}	
 	/** Header css */
 	header {
 		background: #0070b8;
