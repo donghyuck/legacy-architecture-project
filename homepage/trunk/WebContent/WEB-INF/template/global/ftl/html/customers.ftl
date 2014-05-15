@@ -136,7 +136,7 @@
 							</div>
 						</div>	
 					</div>
-					<div class="margin-bottom-60"><hr></div>				
+					<div class="margin-bottom-40"><hr class="devider devider-dotted"></div>				
 					<div class="page-header padding-left-10">
 						<h5><strong>제휴 파트너</strong> <small> 고객에게 더나은 가치를 제공하고 위하여 여러 국내 업체들과 제휴 관계에 있습니다.</small></h5>
 					</div>								
