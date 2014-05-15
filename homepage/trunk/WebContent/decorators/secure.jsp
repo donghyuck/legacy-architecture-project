@@ -18,10 +18,11 @@
 <decorator:head />
 <style>
 	body { 
+		padding: 0;
 		padding-top: 51px;
 		background-color : #FFFFFF;	
 		margin: 0;
-		padding: 0;
+		
 		height: 100%;
 		overflow : hidden;
 		background : url (<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/images/bg.png ) #FFF ;
