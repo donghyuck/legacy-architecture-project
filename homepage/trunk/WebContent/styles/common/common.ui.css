@@ -485,6 +485,7 @@ img.img-full-height {
 .rounded-right { border-radius: 0 4px 4px 0 !important;}
 .rounded-bottom { border-radius: 0 0 4px 4px !important;}
 
+.unrounded { border-radius: 0 !important; }
 /* -------------------------------------------- */
 /* Bootstrap customize                             */
 /* -------------------------------------------- */
