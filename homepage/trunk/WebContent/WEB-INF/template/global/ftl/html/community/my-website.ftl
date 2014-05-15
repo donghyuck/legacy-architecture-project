@@ -534,8 +534,7 @@
 						if( this.announce.startDate >= this.announce.endDate  ){
 							common.ui.notification({title:"공지 & 이베트", message: "시작일자가 종료일자보다 이후일 수 없습니다." });
 							return ;
-						}			
-
+						}
 						common.api.callback({  
 							url : '${request.contextPath}/community/update-announce.do?output=json',
 							data : { item: kendo.stringify( this.announce ) },
@@ -662,7 +661,7 @@
 					var newValue = ace.edit("htmleditor").getValue();
 					var oldValue = model.value();
 					if( newValue.length != oldValue.length ){
-						ace.edit("htmleditor").setValue("");
+						model.value(newValue);
 					}		
 					ace.edit("htmleditor").setValue("");			
 					renderTo.data('kendoExtModalWindow').close();
