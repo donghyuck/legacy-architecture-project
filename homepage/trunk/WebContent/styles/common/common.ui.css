@@ -510,6 +510,12 @@ img.img-full-height {
 	font-size: 30px;
 }
 
+.label-lightweight {
+	font-weight : normal;
+}
+
+
+
 .editor-popup .modal-dialog {
 	margin: 40px auto;
 }
