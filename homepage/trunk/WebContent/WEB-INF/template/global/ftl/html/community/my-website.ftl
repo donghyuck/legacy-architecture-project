@@ -1429,7 +1429,7 @@
 		<!-- start side menu -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
 			<header>	
-				<span class="label label-warning">${webSite.name}</span>
+				<span class="label label-primary label-lightweight"><i class="fa fa-briefcase fa-lg"></i> ${webSite.name}</span>
 				<p class="text-muted"><small>${webSite.description}</small></p>											
 				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
 			</header>	
