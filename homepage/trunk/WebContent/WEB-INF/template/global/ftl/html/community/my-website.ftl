@@ -1574,7 +1574,7 @@
 		<script type="text/x-kendo-tmpl" id="notice-editor-template">
 			<div class="panel panel-default">
 				<div class="panel-heading" data-bind="visible: isNew" style="padding:5px;">
-					<h5>
+
 							<small><span class="label label-danger label-lightweight">NEW</span> 공지 및 이벤트 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
 							<div class="btn-group" data-toggle="buttons">
 								<label class="btn btn-info btn-sm active" data-bind="enabled: isNew">
@@ -1584,7 +1584,7 @@
 								<input type="radio" name="announce-type" value="1" data-bind="checked: announce.objectType">회사
 								</label>
 							</div>						
-					</h5>				
+			
 				</div>
 				<div class="panel-body"  style="padding:5px;">									
 					<div  class="form">
