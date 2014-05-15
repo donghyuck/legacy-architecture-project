@@ -157,8 +157,7 @@
 								<div class="tab-pane active" id="company-history">
 									<div class="blank-top-5"></div>
 									<div class="panel panel-default panel-flat">
-										<!--<div class="panel-heading">회사 연혁</div>-->
-										<div class="panel-body scrollable" style="max-height:400px;">
+										<div class="panel-body">
 										
 <ul class="timeline-v2">
                     <li>
