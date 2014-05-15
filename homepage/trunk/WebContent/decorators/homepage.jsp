@@ -34,6 +34,10 @@
 		color: #ffffff; 
 	}		
 
+	* {
+		border-radius: 0 !important;
+	}
+
 	/** Header css */
 	header {
 		background: #0070b8;
@@ -42,7 +46,7 @@
 		 /*margin-top : -20px;   navbar-fixed-top*/
 		margin-bottom: 10px;
 	}
-
+	
 	header.cloud {
 		color: white;
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
