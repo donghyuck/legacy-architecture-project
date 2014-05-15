@@ -141,8 +141,7 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="row">
-						<div class="col-sm-12">
-						<h5><span class="label label-lightweight label-info"><i class="fa fa-asterisk"></i> 한눈에 보기</span></h5>					
+						<div class="col-sm-12">		
 							<#if action.hasWebSitePage("pages.about.pageId") >							
 							${ processedBodyText }
 							</#if> 
