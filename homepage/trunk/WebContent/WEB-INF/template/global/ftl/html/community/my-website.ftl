@@ -1395,7 +1395,7 @@
 									</div>
 							</div>
 							<div  id="notice-editor-panel" class="panel-body" style="display:none;">
-								<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
+								<div class="page-header page-nounderline-header" style="min-height: 45px;">
 									<h5 >
 										<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
 									</h5>
@@ -1406,7 +1406,7 @@
 											<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeEditor">&times;  닫기</button>
 										</div>
 									</div>
-								</div>								
+								</div>				
 								<div  id="notice-editor"></div>	
 							</div>
 						</div>		
