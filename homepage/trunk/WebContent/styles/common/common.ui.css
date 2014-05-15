@@ -179,7 +179,7 @@ img.img-full-height {
   padding: 5px 15px; 
 }
 
-.tab-v1 .nav-tabs > li {
+.tab-v1 .nav-tabs > li > a {
 	border-radius: 0 !important; */
 }
 
