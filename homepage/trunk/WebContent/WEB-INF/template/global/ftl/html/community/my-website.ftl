@@ -553,7 +553,7 @@
 							},
 							always : function(e){
 								btn.button('reset');
-								this.closeEditor(e);
+								noticeEditorModel.closeEditor(e);
 							}
 						});
 					},
@@ -570,7 +570,7 @@
 					},
 					closeEditor : function(e){
 						kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
-						kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
+						kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
 					}
 				});
 				noticeEditorModel.bind("change", function(e){				
