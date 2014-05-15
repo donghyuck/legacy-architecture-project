@@ -537,7 +537,7 @@
 						}
 						
 						this.announce.user = null;
-						this.announce.properties = {};
+						this.announce.properties = null;
 						
 						common.api.callback({  
 							url : '${request.contextPath}/community/update-announce.do?output=json',

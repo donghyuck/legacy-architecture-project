@@ -460,15 +460,16 @@
 <script type="text/x-kendo-tmpl" id="announcement-view-template">		
 	<div class="page-heading">
 		<h4 data-bind="html:subject"></h4>		
-		<small class="text-muted"><span class="label label-primary">게시 기간</span> #: kendo.toString(startDate, "g") # ~  #: kendo.toString(endDate, "g") #</small>
+		<hr class="devider">
+		<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: formattedStartDate"></span> ~ <span data-bind="text: formattedEndDate"></span></small>
 		<p class="text-muted">
-			<small><span class="label label-default">생성일</span> #: kendo.toString(creationDate, "g") #</small>
-			<small><span class="label label-default">수정일</span> #: kendo.toString(modifiedDate, "g") #</small>
+			<span class="label label-default label-lightweight">생성일</span> <small><span data-bind="text: formattedCreationDate"></span> </small>
+			<span class="label label-default ">수정일</span> <small><span data-bind="text: formattedModifiedDate"></span> </small>
 		</p>
-	</div>
+	</div>													
 	<div class="media">
 		<a class="pull-left" href="\\#">
-		<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
+			<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
 		</a>
 		<div class="media-body">
 			<h5 class="media-heading">
@@ -481,10 +482,10 @@
 				<br>(#: user.email #)
 				# } #	
 			</h5>		
-		</div>
+		</div>			
 	</div>	
-	<div class="blank-top-5" ></div>
-	<div data-bind="html:body"></div>	
+	<div class="margin-bottom-20"><hr class="devider"></div>
+	<div data-bind="html: announce.body " />
 	<div class="blank-top-5" ></div>
 	<div class="btn-group pull-right">
 		<button  type="button" class="btn btn-info btn-sm custom-list "><i class="fa fa-angle-double-up"></i> 목록</button>		
