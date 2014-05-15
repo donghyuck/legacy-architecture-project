@@ -435,10 +435,11 @@
 <script type="text/x-kendo-tmpl" id="announcement-viewer-template">		
 	<div class="page-heading">
 		<h4 data-bind="html:announce.subject"></h4>		
-		<small class="text-muted"><span class="label label-primary">게시 기간</span> <span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
+		<hr class="devider">
+		<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
 		<p class="text-muted">
-			<small><span class="label label-default">생성일</span> <span data-bind="text: announce.formattedCreationDate"></span> </small>
-			<small><span class="label label-default">수정일</span> <span data-bind="text: announce.formattedModifiedDate"></span> </small>
+			<span class="label label-default label-lightweight">생성일</span> <small><span data-bind="text: announce.formattedCreationDate"></span> </small>
+			<span class="label label-default ">수정일</span> <small><span data-bind="text: announce.formattedModifiedDate"></span> </small>
 		</p>
 	</div>													
 	<div class="media">
@@ -450,9 +451,10 @@
 				<p><span data-bind="visible:announce.user.nameVisible, text: announce.user.name"></span> <code data-bind="text: announce.user.username"></code></p>
 				<p data-bind="visible:announce.user.emailVisible, text: announce.user.email"></p>
 			</h5>		
-		</div>
-		<div data-bind="html: announce.body " />
+		</div>		
 	</div>	
+	<div class="margin-bottom-20"><hr class="devider"></div>
+	<div data-bind="html: announce.body " />
 </script>
 
 <script type="text/x-kendo-tmpl" id="announcement-view-template">		
