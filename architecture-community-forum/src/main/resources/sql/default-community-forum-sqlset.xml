@@ -3,4 +3,80 @@
     <name>ARCHITECTURE_COMMUNITY_FORUM</name>
     <version>1.0</version>
     <description>Queries for COMMUNITY FORUM COMPONENTS</description>
+    <sql-query name="INSERT_TOPIC" description="INSERT_TOPIC"><![CDATA[
+		    INSERT INTO V2_THREAD
+	    	(THREAD_ID, THREAD_TITLE, THREAD_CONTENT, PASSWD, ATTACHMENT_ID, 
+	    	VIEW_CNT, CREATE_ID, CREATE_NAME,  CREATION_DATE, PARENT_THREAD_ID, 
+	    	REPLY_DEPTH, DEL_YN, COMMENT_CNT, BOARD_ID)
+	 		VALUES
+	 		(?, ?, ?, ?, ?, 
+	 		0, ?, ?, sysdate, ?, 
+	 		?, 0, 0, ?)
+	    	-- (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 	
+	]]></sql-query>
+	 <sql-query name="SELECT_TOPIC_BY_ID" description="SELECT_TOPIC_BY_ID"><![CDATA[
+		   SELECT T.THREAD_ID,
+			       T.BOARD_ID,
+			       T.THREAD_TITLE,
+			       T.THREAD_CONTENT,
+			       T.PASSWD,
+			       T.ATTACHMENT_ID,
+			       T.VIEW_CNT,
+			       T.CREATE_ID,
+			       T.CREATE_NAME,
+			       T.CREATION_DATE,
+			       T.MODIFY_ID,
+			       T.MODIFY_NAME,
+			       T.PARENT_THREAD_ID,
+			       T.REPLY_DEPTH,
+			       T.DEL_YN,
+			       T.COMMENT_CNT
+			 FROM V2_THREAD T
+			WHERE T.THREAD_ID = ?
+	]]></sql-query>
+	 <sql-query name="SELECT_TOPICS_BY_FORUM_ID" description="SELECT_TOPICS_BY_FORUM_ID"><![CDATA[
+		   SELECT T.THREAD_ID,
+			       T.BOARD_ID,
+			       T.THREAD_TITLE,
+			       T.THREAD_CONTENT,
+			       T.PASSWD,
+			       T.ATTACHMENT_ID,
+			       T.VIEW_CNT,
+			       T.CREATE_ID,
+			       T.CREATE_NAME,
+			       T.CREATION_DATE,
+			       T.MODIFY_ID,
+			       T.MODIFIED_DATE,
+			       T.PARENT_THREAD_ID,
+			       T.REPLY_DEPTH,
+			       T.DEL_YN,
+			       T.COMMENT_CNT
+			 FROM V2_THREAD T
+			WHERE T.BOARD_ID = ?
+	]]></sql-query>
+	<sql-query name="DELETE_TOPIC" description="DELETE_TOPIC"><![CDATA[
+		   UPDATE V2_THREAD T
+		     SET DEL_YN = 1
+			WHERE T.THREAD_ID = ?
+	]]></sql-query>
+	<sql-query name="UPDATE_TOPIC" description="UPDATE_TOPIC"><![CDATA[
+		  	UPDATE V2_THREAD 
+			  SET THREAD_TITLE = ?,
+			      THREAD_CONTENT = ?,
+			      ATTACHMENT_ID = ?,
+			      MODIFY_ID = ?,
+			      MODIFY_NAME = ?,
+			      
+			 WHERE THREAD_ID = ?
+	]]></sql-query>
+	<sql-query name="UPDATE_TOPIC_VIEW_CNT" description="UPDATE_TOPIC_VIEW_CNT"><![CDATA[
+		  	UPDATE V2_THREAD 
+			  SET VIEW_CNT = ?
+			 WHERE THREAD_ID = ?
+	]]></sql-query>
+	<sql-query name="UPDATE_TOPIC_COMMENT_CNT" description="UPDATE_TOPIC_COMMENT_CNT"><![CDATA[
+		  	UPDATE V2_THREAD 
+			  SET COMMENT_CNT = ?
+			 WHERE THREAD_ID = ?
+	]]></sql-query>
 </sqlset>
