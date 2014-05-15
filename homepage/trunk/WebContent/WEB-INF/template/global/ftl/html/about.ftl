@@ -155,7 +155,6 @@
 							<!-- Tab panes -->
 							<div class="tab-content">
 								<div class="tab-pane active" id="company-history">
-									<div class="blank-top-5"></div>
 									<div class="panel panel-default panel-flat">
 										<div class="panel-body">
 										
