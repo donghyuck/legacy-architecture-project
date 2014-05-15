@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-4 md-margin-bottom-40">
                 <!-- About -->
-                <div class="headline"><h4> 회사소개 </h4></div>  
+                <div class="headline"><h5> 회사소개 </h5></div>  
                 <p class="margin-bottom-25 md-margin-bottom-40">${action.webSite.company.description}</p>    
             </div><!--/col-md-4-->  
             
@@ -13,7 +13,7 @@
             </div><!--/col-md-4-->
 
             <div class="col-md-4">
-                <div class="headline"><h4> 연락처 </h4></div> 
+                <div class="headline"><h5> 연락처 </h5></div> 
                 <address class="md-margin-bottom-40">
                     25, Lorem Lis Street, Orange <br />
                     California, US <br />
