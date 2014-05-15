@@ -34,9 +34,10 @@
 		color: #ffffff; 
 	}		
 
-	.btn, .panel, .label {
+	.btn, .panel, .label, .modal, .nav-tabs li {
 		border-radius: 0 !important;
 	}
+	
 	.form-control {
 		box-shadow: none;
 	}
