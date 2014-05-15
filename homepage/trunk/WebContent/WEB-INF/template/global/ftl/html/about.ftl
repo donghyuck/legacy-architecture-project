@@ -142,7 +142,7 @@
 				<div class="col-lg-9">
 					<div class="row">
 						<div class="col-sm-12">
-						<span class="label label-info rounded"><i class="fa fa-asterisk"></i> Similique atin culpa</span>					
+						<h5><span class="label label-info rounded"><i class="fa fa-asterisk"></i> Similique atin culpa</span></h5>					
 							<#if action.hasWebSitePage("pages.about.pageId") >							
 							${ processedBodyText }
 							</#if> 
