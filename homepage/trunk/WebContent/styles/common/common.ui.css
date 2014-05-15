@@ -179,6 +179,10 @@ img.img-full-height {
   padding: 5px 15px; 
 }
 
+.tab-v1 .nav-tabs > li {
+	border-radius: 0 !important; */
+}
+
 .tab-v1 .nav-tabs > .active > a, 
 .tab-v1 .nav-tabs > .active > a:hover, 
 .tab-v1 .nav-tabs > .active > a:focus { 
