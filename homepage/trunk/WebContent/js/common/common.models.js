@@ -17,7 +17,7 @@
 		formattedStartDate : function(){
 	    	return kendo.toString(this.get("startDate"), "yyyy.MM");
 	    },
-	    formattedEndDateDate : function(){
+	    formattedEndDate : function(){
 	    	return kendo.toString(this.get("endDate"), "yyyy.MM");
 	    }		
 	});
