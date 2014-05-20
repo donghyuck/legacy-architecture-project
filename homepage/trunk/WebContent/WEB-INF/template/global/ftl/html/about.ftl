@@ -92,7 +92,7 @@
 			                    }
 			                },
 			                schema : {
-			                	data : timelines,
+			                	data : "timelines",
 			                	model : common.models.Timeline
 			                },			                
 			                requestStart: function() {
