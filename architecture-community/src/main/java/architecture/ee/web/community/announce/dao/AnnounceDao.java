@@ -15,6 +15,7 @@
  */
 package architecture.ee.web.community.announce.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import architecture.ee.web.community.announce.Announce;
@@ -41,5 +42,7 @@ public interface AnnounceDao {
 	public abstract List<Long> getAnnounceIds ();
 	
 	public abstract int getAnnounceCount ( int objectType, long objectId );
+	
+	public abstract int getAnnounceCount ( int objectType, long objectId, Date endDate );
 	
 }
