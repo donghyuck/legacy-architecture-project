@@ -1,6 +1,26 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.models = {};
+
+	common.models.Timeline =  kendo.data.Model.define({
+		id : "timelineId",
+		fields: { 
+			timelineId: { type: "number", editable: false, defaultValue: 0 },
+			objectType: { type: "string", objectType: false, defaultValue:0  },
+			objectId: { type: "number", objectId: false, defaultValue:0 },
+			headline : { type: "string", editable: true},
+			body : { type: "string", editable: true},			
+			hasMedia: { type: "boolean", editable: false, defaultValue: false },
+			startDate: { type: "date"},
+			endDate: { type: "date" } 			
+		},
+		formattedStartDate : function(){
+	    	return kendo.toString(this.get("startDate"), "yyyy.MM");
+	    },
+	    formattedEndDateDate : function(){
+	    	return kendo.toString(this.get("endDate"), "yyyy.MM");
+	    }		
+	});
 	
 	common.models.Photo =  kendo.data.Model.define({
 		id : "externalId",
