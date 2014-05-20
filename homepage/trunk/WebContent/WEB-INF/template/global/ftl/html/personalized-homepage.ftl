@@ -1124,7 +1124,8 @@
 							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
 								<div class="alert alert-danger alert-dismissable">
 								 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								 공지 & 이벤트 편집 및 게시는 My 웹사이트에서 지원합니다.
+								 <p><i class="fa fa-info"></i> 공지 & 이벤트 편집 및 게시는 My 웹사이트에서 지원합니다.</p>
+								 <p><a href="${request.contextPath}/main.do?view=manage" class="btn btn-info btn-sm">My 웹사이트</a></p>
 								</div>
 							</#if>
 							<div class="page-header text-primary">
