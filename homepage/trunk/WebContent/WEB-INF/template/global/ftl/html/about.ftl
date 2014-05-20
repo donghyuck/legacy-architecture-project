@@ -102,7 +102,7 @@
 			                    kendo.ui.progress($("#company-history"), false);
 			                },
 			                change: function() {
-								$("#company-history").html(kendo.render(template, this.view()));
+								$("#company-history .timeline-v2").html(kendo.render(template, this.view()));
 			                }
 			            });
 						dataSource.read();            
