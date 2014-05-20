@@ -1121,6 +1121,12 @@
 							</div>									
 							</div>
 							<div class="panel-body">		
+							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
+								<div class="alert alert-danger alert-dismissable">
+								 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								 공지 & 이벤트 편집 및 게시는 My 웹사이트에서 지원합니다.
+								</div>
+							</#if>
 							<div class="page-header text-primary">
 								<h5 ><small><i class="fa fa-info"></i> 우측 회사 버튼을 클릭하면 회사(${user.company.displayName}) 에 해당하는 공지 & 이벤트 목록이 보여집니다. </small></h5>	
 								<p>
