@@ -188,9 +188,7 @@
 									<div class="panel panel-default">
 										<div class="panel-body">
 								-->		
-									<ul class="timeline-v2">
-
-									</ul>
+									<ul class="timeline-v2"></ul>
 											<!--				
 										</div>
 									</div> -->
