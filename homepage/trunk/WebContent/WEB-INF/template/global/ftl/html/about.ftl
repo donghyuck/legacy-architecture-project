@@ -188,17 +188,15 @@
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade" id="company-history">
-								
-								<!--
+								<div class="tab-pane fade" id="company-history">								
+									<!--
 									<div class="panel panel-default">
 										<div class="panel-body">
-								-->		
+									-->		
 									<ul class="timeline-v2"></ul>
-											<!--				
+									<!--				
 										</div>
-									</div> -->
-								
+									</div> -->								
 								</div>
 								<div class="tab-pane fade" id="company-logo" style="min-height:300px;">
 											<div class="page-header page-nounderline-header padding-left-10 ">
@@ -247,7 +245,7 @@
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
 					<h2>#:headline#</h2>
-					#if(body != null || body != 'null'){#
+					#if(body !== null && body !== 'null'){#
 					<p>#= body #</p>
 					#}#
 				</div>
