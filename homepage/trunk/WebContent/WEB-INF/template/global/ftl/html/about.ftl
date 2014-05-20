@@ -79,7 +79,7 @@
 				<#if !action.user.anonymous >							
 				</#if>	
 				
-				$('.myTab a:first').tab('show') ;
+				$('.nav-tabs a:first').tab('show');
 				// END SCRIPT            
 			}
 		}]);	
