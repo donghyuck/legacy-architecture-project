@@ -1109,7 +1109,15 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container-fluid" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-10">				
+			<div id="personalized-area" class="row blank-top-10">			
+							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
+								<div class="alert alert-danger alert-dismissable">
+								 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								 <p><i class="fa fa-info"></i> 공지 & 이벤트 편집 및 게시는 My 웹사이트에서 지원합니다.</p>
+								 <p><a href="${request.contextPath}/main.do?view=manage" class="btn btn-info btn-sm">My 웹사이트</a></p>
+								</div>
+							</#if>
+											
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp;공지 & 이벤트
@@ -1121,13 +1129,6 @@
 							</div>									
 							</div>
 							<div class="panel-body">		
-							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
-								<div class="alert alert-danger alert-dismissable">
-								 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								 <p><i class="fa fa-info"></i> 공지 & 이벤트 편집 및 게시는 My 웹사이트에서 지원합니다.</p>
-								 <p><a href="${request.contextPath}/main.do?view=manage" class="btn btn-info btn-sm">My 웹사이트</a></p>
-								</div>
-							</#if>
 							<div class="page-header text-primary">
 								<h5 ><small><i class="fa fa-info"></i> 우측 회사 버튼을 클릭하면 회사(${user.company.displayName}) 에 해당하는 공지 & 이벤트 목록이 보여집니다. </small></h5>	
 								<p>
