@@ -79,6 +79,13 @@
 				<#if !action.user.anonymous >							
 				</#if>	
 				
+				$('#aboutTab').on( 'show.bs.tab', function (e) {
+					//e.preventDefault();		
+					var show_bs_tab = $(e.target);
+					if( show_bs_tab.attr('href') == '#company-history' ){					
+						
+					} 				
+				});				
 				$('#aboutTab a:first').tab('show');
 				// END SCRIPT            
 			}
