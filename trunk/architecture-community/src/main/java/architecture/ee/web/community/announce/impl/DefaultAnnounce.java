@@ -209,8 +209,10 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	public void setStartDate(Date startDate) {
 		if( startDate == null )
 			throw new NullPointerException("Start data cannot be null.");
-		if( startDate.getTime() == this.startDate.getTime())
+		
+		if( this.startDate != null && this.startDate.getTime() == startDate.getTime())
 			return;
+		
 		if( endDate != null && startDate.getTime() > endDate.getTime())
 		{
 			throw new IllegalArgumentException();

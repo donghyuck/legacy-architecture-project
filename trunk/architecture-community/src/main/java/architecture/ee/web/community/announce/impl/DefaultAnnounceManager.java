@@ -260,4 +260,8 @@ public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 		return announceDao.getAnnounceCount(objectType, objectId);
 	}
 
+	public int getAnnounceCount(int objectType, long objectId, Date endDate) {
+		return announceDao.getAnnounceCount(objectType, objectId, endDate);
+	}
+
 }
