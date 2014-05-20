@@ -247,7 +247,9 @@
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
 					<h2>#:headline#</h2>
+					#if(body != null ){#
 					<p>#= body #</p>
+					#}#
 				</div>
 			</li>
 		</script>			
