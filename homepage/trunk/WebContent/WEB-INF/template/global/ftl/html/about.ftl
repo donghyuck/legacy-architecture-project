@@ -83,7 +83,7 @@
 					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
 					if( show_bs_tab.attr('href') == '#company-history' ){					
-						
+						 var template = kendo.template($("#timeline-template").html());
 						 var dataSource = new kendo.data.DataSource({
 			                transport: {
 			                    read: {
@@ -102,7 +102,7 @@
 			                    kendo.ui.progress($("#company-history"), false);
 			                },
 			                change: function() {
-								//$("#company-history").html(kendo.render(template, this.view()));
+								$("#company-history").html(kendo.render(template, this.view()));
 			                }
 			            });
 						dataSource.read();            
@@ -189,27 +189,12 @@
 										<div class="panel-body">
 								-->		
 									<ul class="timeline-v2">
-										<li>
-	<time class="cbp_tmtime" datetime=""><span>4/1/08</span> <span>January</span></time>
-                        <i class="cbp_tmicon rounded-x hidden-xs"></i>
-                        <div class="cbp_tmlabel">
-                            <h2>Our first step</h2>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    <img class="img-responsive" src="assets/img/job/high-rated-job-3.1.jpg" alt=""> 
-                                    <div class="md-margin-bottom-20"></div>
-                                </div>
-                                <div class="col-md-8">    
-                                    <p>Winter purslane courgette pumpkin quandong komatsuna fennel green bean cucumber watercress. Pea sprouts wattle seed rutabaga okra yarrow cress avocado grape.</p> 
-                                    <p>Cabbage lentil cucumber chickpea sorrel gram garbanzo plantain lotus root bok choy squash cress potato.</p>
-                                </div>
-                            </div>        
-                        </div>
-                    </li>
-											</ul>
+
+									</ul>
 											<!--				
 										</div>
 									</div> -->
+								
 								</div>
 								<div class="tab-pane fade" id="company-logo" style="min-height:300px;">
 											<div class="page-header page-nounderline-header padding-left-10 ">
@@ -252,6 +237,17 @@
 				</div>				
 			</div>
 		</div>		
+		<script type="text/x-kendo-tmpl" id="timeline-template">
+ 			<li>
+				<time class="cbp_tmtime" datetime=""><span>7/2/09</span> <span>February</span></time>
+				<i class="cbp_tmicon rounded-x hidden-xs"></i>
+				<div class="cbp_tmlabel">
+					<h2>First achievements</h2>
+					<p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.</p>
+				</div>
+			</li>
+		</script>			
+				
 		<!-- END MAIN CONTENT -->	
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
