@@ -243,10 +243,10 @@
 		</div>		
 		<script type="text/x-kendo-tmpl" id="timeline-template">
  			<li>
-				<time class="cbp_tmtime" datetime=""><span>7/2/09</span> <span>February</span></time>
+				<time class="cbp_tmtime" datetime=""><span>#: formattedStartDate #</span> <span>February</span></time>
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
-					<h2>First achievements</h2>
+					<h2>#:headline#</h2>
 					<p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.</p>
 				</div>
 			</li>
