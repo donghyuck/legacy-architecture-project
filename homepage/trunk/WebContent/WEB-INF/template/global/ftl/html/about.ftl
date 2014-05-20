@@ -79,7 +79,7 @@
 				<#if !action.user.anonymous >							
 				</#if>	
 				
-				$('.nav-tabs a:first').tab('show');
+				$('#aboutTab a:first').tab('show');
 				// END SCRIPT            
 			}
 		}]);	
@@ -146,14 +146,14 @@
 							</#if> 
 							<!-- start of tabs -->					
 							<div class="tab-v1">									
-							<ul class="nav nav-tabs">
+							<ul class="nav nav-tabs" id="aboutTab">
 								<li><a href="#company-history" data-toggle="tab">연역</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
 								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>								
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade active" id="company-history">
+								<div class="tab-pane fade" id="company-history">
 								<!--
 									<div class="panel panel-default">
 										<div class="panel-body">
