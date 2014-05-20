@@ -247,7 +247,7 @@
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
 					<h2>#:headline#</h2>
-					<p>Caulie dandelion maize lentil collard greens radish arugula sweet pepper water spinach kombu courgette lettuce. Celery coriander bitterleaf epazote radicchio shallot winter purslane collard greens spring onion squash lentil. Artichoke salad bamboo shoot black-eyed pea brussels sprout garlic kohlrabi.</p>
+					<p>#= body #</p>
 				</div>
 			</li>
 		</script>			
