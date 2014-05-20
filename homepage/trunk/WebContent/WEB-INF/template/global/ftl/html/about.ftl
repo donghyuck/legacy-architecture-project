@@ -41,9 +41,8 @@
 				// Start : Company Social Content 
 				<#list action.connectedCompanySocialNetworks  as item >				
 				<#assign stream_name = item.serviceProviderName + "_streams_" + item.socialAccountId  />	
-				<#assign panel_element_id = "#" + item.serviceProviderName + "-panel-" + item.socialAccountId  />	
-											
-				var ${stream_name} = new MediaStreams(${ item.socialAccountId}, "${item.serviceProviderName}" );							
+				<#assign panel_element_id = "#" + item.serviceProviderName + "-panel-" + item.socialAccountId  />												
+				var ${stream_name} = new MediaStreams(${ item.socialAccountId}, "${item.serviceProviderName}" );
 				<#if  item.serviceProviderName == "twitter" >
 				${stream_name}.setTemplate ( kendo.template($("#twitter-timeline-template").html()) );				
 				<#elseif  item.serviceProviderName == "facebook" >
@@ -55,10 +54,8 @@
 							return { objectType : 1 };
 						} 
 					}
-				});
-							
-				${stream_name}.dataSource.read();
-				
+				});							
+				${stream_name}.dataSource.read();				
 				$( "${panel_element_id} .panel-header-actions a").each(function( index ) {
 					var header_action = $(this);
 					header_action.click(function (e){
@@ -81,6 +78,8 @@
 				</#list>	
 				<#if !action.user.anonymous >							
 				</#if>	
+				
+				$('.myTab a:first').tab('show') ;
 				// END SCRIPT            
 			}
 		}]);	
@@ -148,7 +147,7 @@
 							<!-- start of tabs -->					
 							<div class="tab-v1">									
 							<ul class="nav nav-tabs">
-								<li class="active"><a href="#company-history" data-toggle="tab">연역</a></li>
+								<li><a href="#company-history" data-toggle="tab">연역</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
 								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>								
 							</ul>
