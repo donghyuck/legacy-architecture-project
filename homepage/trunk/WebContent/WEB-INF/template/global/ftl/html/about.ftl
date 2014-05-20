@@ -243,7 +243,7 @@
 		</div>		
 		<script type="text/x-kendo-tmpl" id="timeline-template">
  			<li>
-				<time class="cbp_tmtime" datetime=""><span>#: formattedStartDate() #</span> <span>February</span></time>
+				<time class="cbp_tmtime" datetime=""><span>#: formattedStartDate() # ~ #: formattedEndDate() #</span> <span>February</span></time>
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
 					<h2>#:headline#</h2>
