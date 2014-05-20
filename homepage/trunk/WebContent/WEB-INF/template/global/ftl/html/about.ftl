@@ -82,36 +82,42 @@
 				$('#aboutTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
-					if( show_bs_tab.attr('href') == '#company-history' ){					
-						 var template = kendo.template($("#timeline-template").html());
-						 var dataSource = new kendo.data.DataSource({
-			                transport: {
-			                    read: {
-			                        url: "/community/website-company-timeline.do?output=json",
-			                        dataType: "json"
-			                    }
-			                },
-			                schema : {
-			                	data : "timelines",
-			                	model : common.models.Timeline
-			                },			                
-			                requestStart: function() {
-			                    kendo.ui.progress($("#company-history"), true);
-			                },
-			                requestEnd: function() {
-			                    kendo.ui.progress($("#company-history"), false);
-			                },
-			                change: function() {
-								$("#company-history .timeline-v2").html(kendo.render(template, this.view()));
-			                }
-			            });
-						dataSource.read();            
+					if( show_bs_tab.attr('href') == '#company-history' ){
+									
+						if( $("#company-history .timeline-v2").text().trim().length == 0 ){
+							var template = kendo.template($("#timeline-template").html());
+							var dataSource = new kendo.data.DataSource({
+				                transport: {
+				                    read: {
+				                        url: "/community/website-company-timeline.do?output=json",
+				                        dataType: "json"
+				                    }
+				                },
+				                schema : {
+				                	data : "timelines",
+				                	model : common.models.Timeline
+				                },			                
+				                requestStart: function() {
+				                    kendo.ui.progress($("#company-history .timeline-v2"), true);
+				                },
+				                requestEnd: function() {
+				                    kendo.ui.progress($("#company-history .timeline-v2"), false);
+				                },
+				                change: function() {
+									$("#company-history .timeline-v2").html(kendo.render(template, this.view()));
+				                }
+				            });		
+				            dataSource.read();
+						}
+						 
 					} 				
 				});				
 				$('#aboutTab a:first').tab('show');
 				// END SCRIPT            
 			}
 		}]);	
+
+		
 		-->
 		</script>		
 		<style scoped="scoped">
