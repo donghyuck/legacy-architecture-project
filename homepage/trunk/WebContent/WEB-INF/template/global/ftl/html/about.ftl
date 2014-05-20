@@ -84,6 +84,28 @@
 					var show_bs_tab = $(e.target);
 					if( show_bs_tab.attr('href') == '#company-history' ){					
 						
+						 var dataSource = new kendo.data.DataSource({
+			                transport: {
+			                    read: {
+			                        url: "/community/website-company-timeline.do?output=json",
+			                        dataType: "json"
+			                    }
+			                },
+			                schema : {
+			                	data : timelines,
+			                	model : common.models.Timeline
+			                },			                
+			                requestStart: function() {
+			                    kendo.ui.progress($("#company-history"), true);
+			                },
+			                requestEnd: function() {
+			                    kendo.ui.progress($("#company-history"), false);
+			                },
+			                change: function() {
+								//$("#company-history").html(kendo.render(template, this.view()));
+			                }
+			            });
+						dataSource.read();            
 					} 				
 				});				
 				$('#aboutTab a:first').tab('show');
