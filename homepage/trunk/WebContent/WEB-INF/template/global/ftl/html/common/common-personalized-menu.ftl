@@ -12,7 +12,7 @@
 							<label class="btn btn-info active">
 						 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
 							</label>
-							<#if( ${action.view} != 'manage') >
+							<#if "${action.view}" != 'manage'  >
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
