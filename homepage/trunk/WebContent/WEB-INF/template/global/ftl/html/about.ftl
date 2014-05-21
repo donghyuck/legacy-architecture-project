@@ -243,10 +243,10 @@
  			<li>
  				<time class="cbp_tmtime" datetime="">
  					<span>
-	 				#if(endDate.getTime() > startDate.getTime()){#
-	 					#: formattedStartDate # ~ #: formattedEndDate #
+	 				#if(isPeriod()){#
+	 					#: getFormattedStartDate() # ~ #: getFormattedEndDate() #
 	 				#}else{#
-	 					#: formattedStartDate #
+	 					#: getFormattedStartDate() #
 	 				#}#				
 					</span> 
 					<span>February</span>
