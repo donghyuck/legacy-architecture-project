@@ -35,7 +35,7 @@
 					</li>
 					<#if "${action.view}" == "manage"  >					
 					<li><a href="#" class="btn btn-link btn-control-group" data-action="open-spmenu"><i class="fa fa-briefcase fa-lg"></i></a></li>
-					<#else if "${action.view}"== "streams">	
+					<#elseif "${action.view}"== "streams">	
 					<li><a href="#" class="btn btn-link btn-control-group" data-action="open-spmenu"><i class="fa fa-cog fa-lg"></i></a></li>
 					<#else>	
 					<li><a href="#" class="btn btn-link btn-control-group" data-action="open-spmenu"><i class="fa fa-cloud fa-lg"></i></a></li>			
