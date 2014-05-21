@@ -118,6 +118,9 @@
 				});
 				$('#myTab a:first').tab('show') ;
 				
+				<#if request.isUserInRole("ROLE_COMPANY_ADMIN") >
+				
+				</#if> 
 				
 				// END SCRIPT 
 			}
