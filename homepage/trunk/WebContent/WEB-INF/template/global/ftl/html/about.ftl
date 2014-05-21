@@ -206,7 +206,7 @@
 										<div class="panel-body">
 										<#if action.webSite.getProperty("logo.downloadUrl", null )?? >
 											<p class="pull-right">
-											<a href="${request.contextPath}/${action.webSite.getProperty("logo.downloadUrl", null )}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</a>	
+											<a href="${action.webSite.getProperty("logo.downloadUrl", null )}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</a>	
 											</p>											
 										</#if> 
 											<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-rounded" />
