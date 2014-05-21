@@ -244,9 +244,9 @@
  				<time class="cbp_tmtime" datetime="">
  					<span>
 	 				#if(isPeriod()){#
-	 					#: getFormattedStartDate() # ~ #: getFormattedEndDate() #
+	 					<small>#: getFormattedStartDate() # ~ #: getFormattedEndDate() #</small>
 	 				#}else{#
-	 					#: getFormattedStartDate() #
+	 					<small>#: getFormattedStartDate() #</small>
 	 				#}#				
 					</span> 
 					<span style='color:\\#e67e22;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;'><strong>#: getEndDateYear() #</strong></span>
