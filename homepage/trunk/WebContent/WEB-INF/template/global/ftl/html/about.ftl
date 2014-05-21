@@ -98,10 +98,10 @@
 				                	model : common.models.Timeline
 				                },			                
 				                requestStart: function() {
-				                    kendo.ui.progress($("#company-history .timeline-v2"), true);
+				                    kendo.ui.progress($("#company-history"), true);
 				                },
 				                requestEnd: function() {
-				                    kendo.ui.progress($("#company-history .timeline-v2"), false);
+				                    kendo.ui.progress($("#company-history"), false);
 				                },
 				                change: function() {
 									$("#company-history .timeline-v2").html(kendo.render(template, this.view()));
