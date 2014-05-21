@@ -424,7 +424,7 @@
 		<div class="panel-heading">
 			<button type="button" class="close" aria-hidden="true"><img src="${request.contextPath}/images/close.png" /></button>
 			<h4 data-bind="html:subject"></h4>
-			<small class="text-muted"><span class="label label-info label-lightweight">게시 기간</span> #: kendo.toString(startDate, "g") # ~  #: kendo.toString(endDate, "g") #</small>					
+			<small class="text-muted"><span class="label label-info label-lightweight">게시 기간</span> #: formattedStartDate() # ~  #: formattedEndDate() #</small>					
 		</div>
 		<div class="panel-body" data-bind="html:body"></div>	
 	</div>
