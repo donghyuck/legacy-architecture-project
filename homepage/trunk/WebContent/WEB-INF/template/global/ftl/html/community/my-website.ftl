@@ -104,10 +104,8 @@
 				 $("#site-info").data("sitePlaceHolder", sitePlaceHolder );
 								
 				// 4-1. Announces 							
-				$("#announce-panel").data( "announcePlaceHolder", new Announce () );	
-				
-				createNoticeGrid();
-																			
+				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
+				createNoticeGrid();									
 				// 4-2. Right Tabs								
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
@@ -119,6 +117,8 @@
 					}					
 				});
 				$('#myTab a:first').tab('show') ;
+				
+				
 				// END SCRIPT 
 			}
 		}]);	
