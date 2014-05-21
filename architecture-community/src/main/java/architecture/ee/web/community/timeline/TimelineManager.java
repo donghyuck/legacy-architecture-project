@@ -15,6 +15,34 @@
  */
 package architecture.ee.web.community.timeline;
 
-public interface TimelineManager {
+import java.util.List;
 
+import architecture.common.user.Company;
+import architecture.common.user.User;
+import architecture.ee.web.site.WebSite;
+
+public interface TimelineManager {
+	
+	public Timeline getTimelineById(long timelineId) throws TimelineNotFoundException ;
+	
+	public int getTimelineCount(int objectType, long objectId);
+	
+	public List<Timeline> getTimelines (int objectType, long objectId);
+	
+	public List<Timeline> getTimelines(WebSite webSite);
+	
+	public List<Timeline> getTimelines(Company company);
+	
+	public List<Timeline> getTimelines(User user);
+	
+	public int getTimelineCount(WebSite webSite);
+	
+	public int getTimelineCount(Company company);
+	
+	public int getTimelineCount(User user);	
+
+	public void updateTimeline(Timeline timeline);
+	
+	public void deleteTimeline(Timeline timeline);
+	
 }

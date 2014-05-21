@@ -18,6 +18,8 @@ package architecture.ee.web.community.timeline;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
 import architecture.common.cache.CacheSizes;
 
 public class DefaultTimeline implements Timeline {
@@ -162,9 +164,12 @@ public class DefaultTimeline implements Timeline {
 		this.media = media;
 	}
 
-	public boolean hasMedia() {
+	public boolean isHasMedia() {
 		if( this.media == null)
 			return false;
+		if( StringUtils.isBlank(media.getUrl()))
+			return false;
+		
 		return true;
 	}
 
@@ -175,7 +180,7 @@ public class DefaultTimeline implements Timeline {
 				+ CacheSizes.sizeOfString(this.headline)
 				+ CacheSizes.sizeOfString(this.body) + CacheSizes.sizeOfDate()
 				+ CacheSizes.sizeOfDate() 
-				+ ( this.hasMedia() ? this.media.getCachedSize() : 0 );
+				+ ( this.isHasMedia() ? this.media.getCachedSize() : 0 );
 	}
 	
 }

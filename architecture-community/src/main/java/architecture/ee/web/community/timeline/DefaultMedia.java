@@ -23,7 +23,45 @@ public class DefaultMedia implements Media{
 	private String thumbnailUrl;
 	private String caption;
 	private String credit;
-	
+
+
+
+	/**
+	 * @param url
+	 * @param caption
+	 */
+	public DefaultMedia(String url, String caption) {
+		this.url = url;
+		this.caption = caption;
+		this.thumbnailUrl = null;
+		this.credit = null;
+	}
+
+	/**
+	 * @param url
+	 * @param caption
+	 * @param credit
+	 */
+	public DefaultMedia(String url, String caption, String credit) {
+		this.url = url;
+		this.caption = caption;
+		this.credit = credit;
+		this.thumbnailUrl = null;
+	}
+
+	/**
+	 * @param url
+	 * @param caption
+	 * @param credit
+	 * @param thumbnailUrl
+	 */
+	public DefaultMedia(String url, String caption, String credit, String thumbnailUrl) {
+		this.url = url;
+		this.caption = caption;
+		this.credit = credit;
+		this.thumbnailUrl = thumbnailUrl;
+	}
+
 	public DefaultMedia() {
 	}
 

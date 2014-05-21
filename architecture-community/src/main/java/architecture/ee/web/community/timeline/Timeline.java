@@ -37,7 +37,7 @@ public interface Timeline  extends Cacheable {
 	
 	public Date getEndDate();
 	
-	public boolean hasMedia();
+	public boolean isHasMedia();
 	
 	public void setObjectType(int objectType);
 	
