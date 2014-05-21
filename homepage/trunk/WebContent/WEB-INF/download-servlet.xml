@@ -11,7 +11,7 @@
 	<context:component-scan base-package="org.springframework.samples.petclinic.web" />
 -->
 
-	<bean id="download-controller1" class="architecture.ee.web.spring.controller.DownloadController"  p:imageManager-ref="imageManager" />
+	<bean id="download-controller1" class="architecture.ee.web.spring.controller.DownloadController"  p:imageManager-ref="imageManager"  p:attachmentManager-ref="attachmentManager" />
 	<bean id="download-controller2" class="architecture.ee.web.community.spring.controller.DownloadController"  
 			p:profileManager-ref="profileManager"  
 			p:companyManager-ref="companyManager"  
@@ -22,6 +22,7 @@
 			<property name="mappings">
 				<value>
 					/image/*=download-controller1
+					/file/**=download-controller1
 					/profile/*=download-controller2
 					/logo/**=download-controller2
 				</value>
