@@ -3,7 +3,7 @@
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left">				
 					<p class="navbar-text hidden-xs">&nbsp;</p>	
-					<p class="navbar-text hidden-xs text-primary"><small>위젯 레이아웃(${action.view})</small></p>	
+					<p class="navbar-text hidden-xs text-primary"><small>위젯 레이아웃</small></p>	
 					<li class="navbar-btn hidden-xs">
 						<div class="btn-group navbar-btn" data-toggle="buttons">
 							<label class="btn btn-info">
@@ -12,10 +12,11 @@
 							<label class="btn btn-info active">
 						 		<input type="radio" name="personalized-area-col-size"  value="6"> <i class="fa fa-th-large"></i>
 							</label>
-							<!--
+							<#if( ${action.view} != 'manage') >
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
-							</label>-->
+							</label>
+							</#if>
 						</div>										
 					</li>
 				</ul>
