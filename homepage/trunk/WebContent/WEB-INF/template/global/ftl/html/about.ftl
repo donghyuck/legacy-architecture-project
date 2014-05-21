@@ -187,7 +187,7 @@
 								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>								
 							</ul>
 							<!-- Tab panes -->
-							<div class="tab-content">
+							<div class="tab-content" style="min-height:300px;">
 								<div class="tab-pane fade" id="company-history" style="min-height:300px;">								
 									<!--
 									<div class="panel panel-default">
