@@ -249,7 +249,7 @@
 	 					#: getFormattedStartDate() #
 	 				#}#				
 					</span> 
-					<span>February</span>
+					<span>#: getEndDateYear() #</span>
 				</time>
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
