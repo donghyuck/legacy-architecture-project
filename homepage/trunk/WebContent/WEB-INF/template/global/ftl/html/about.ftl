@@ -249,7 +249,7 @@
 	 					#: getFormattedStartDate() #
 	 				#}#				
 					</span> 
-					<span style="color:\\#e67e22;"><strong>#: getEndDateYear() #</strong></span>
+					<span style='color:\\#e67e22;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;'><strong>#: getEndDateYear() #</strong></span>
 				</time>
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
