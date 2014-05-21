@@ -10,5 +10,6 @@
 	<model id="30" code="WEBSITE" />
 	<model id="31" code="PAGE" />
 	<model id="32" code="PAGE_BODY" />
+	<model id="33" code="LOGO_IMAGE" />
 		
 </models>

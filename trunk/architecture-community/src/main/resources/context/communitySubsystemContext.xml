@@ -42,6 +42,13 @@
 	<bean id="photoStreamCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="photoStreamCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="profileImageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="profileImageCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
 	<bean id="userProfileImageIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="userProfileImageIdCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<bean id="logoImageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="logoImageCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="logoImageIdsCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="logoImageIdsCache"  p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="60"  p:timeToLive="600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<bean id="timelineCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="timelineCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	
 		
 	<bean id="pageDao" class="architecture.ee.web.community.page.dao.jdbc.JdbcPageDao" parent="jdbcDaoSupport"  />		
 	<bean id="pageVersionDao" class="architecture.ee.web.community.page.dao.jdbc.JdbcPageVersionDao" parent="jdbcDaoSupport" />			
@@ -53,6 +60,8 @@
 	<bean id="socialNetworkDao" class="architecture.ee.web.community.social.dao.jdbc.JdbcSocialNetworkDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
 	<bean id="photoStreamsDao" class="architecture.ee.web.community.streams.dao.jdbc.JdbcStreamsDao" parent="jdbcDaoSupport"  />	
 	<bean id="profileDao" class="architecture.ee.web.community.profile.dao.jdbc.JdbcProfileDao" parent="jdbcDaoSupport"  />	
+	<bean id="logoImageDao" class="architecture.ee.web.community.logo.dao.jdbc.JdbcLogoImageDao" parent="jdbcDaoSupport"  />	
+	<bean id="timelineDao" class="architecture.ee.web.community.timeline.dao.jdbc.JdbcTimelineDao" parent="jdbcDaoSupport"  />	
 		
 	<bean id="pageManager" class="architecture.ee.web.community.page.DefaultPageManager" 
 		depends-on="pageDao, pageVersionDao"  
@@ -71,6 +80,7 @@
 	<bean id="socialNetworkManager" class="architecture.ee.web.community.social.impl.DefaultSocialNetworktManager" depends-on="socialNetworkDao"  p:socialNetworkDao-ref="socialNetworkDao" p:socialNetworkCache-ref="socialNetworkCache"/>		
 	<bean id="photoStreamsManager" class="architecture.ee.web.community.streams.DefaultPhotoStreamsManager" depends-on="photoStreamsDao"  p:streamsDao-ref="photoStreamsDao" p:userManager-ref="userManager"  p:photoStreamCache-ref="photoStreamCache"/>		
 	<bean id="profileManager" class="architecture.ee.web.community.profile.DefaultProfileManager" depends-on="profileDao"  p:profileDao-ref="profileDao" p:userManager-ref="userManager"  p:profileImageCache-ref="profileImageCache" p:userProfileImageIdCache-ref="userProfileImageIdCache"/>		
-		
+	<bean id="logoManager" class="architecture.ee.web.community.logo.DefaultLogoManager" depends-on="logoImageDao"  p:logoImageDao-ref="logoImageDao"  p:logoImageCache-ref="logoImageCache" p:logoImageIdsCache-ref="logoImageIdsCache"/>			
+	<bean id="timelineManager" class="architecture.ee.web.community.timeline.DefaultTimelineManager" depends-on="timelineDao"  p:timelineDao-ref="timelineDao"  p:timelineCache-ref="timelineCache"/>			
 	
 </beans>
