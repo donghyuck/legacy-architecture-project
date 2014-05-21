@@ -17,10 +17,13 @@ package architecture.ee.web.spring.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
@@ -31,6 +34,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.attachment.Attachment;
+import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 
@@ -39,8 +44,25 @@ public class DownloadController {
 
 	private static final Log log = LogFactory.getLog(DownloadController.class);
 	
-	ImageManager imageManager ;
+	private ImageManager imageManager ;
 	
+	private AttachmentManager attachmentManager;
+	
+	
+	/**
+	 * @return attachmentManager
+	 */
+	public AttachmentManager getAttachmentManager() {
+		return attachmentManager;
+	}
+
+	/**
+	 * @param attachmentManager 설정할 attachmentManager
+	 */
+	public void setAttachmentManager(AttachmentManager attachmentManager) {
+		this.attachmentManager = attachmentManager;
+	}
+
 	/**
 	 * @return imageManager
 	 */
@@ -53,6 +75,47 @@ public class DownloadController {
 	 */
 	public void setImageManager(ImageManager imageManager) {
 		this.imageManager = imageManager;
+	}
+	
+	@RequestMapping(value = "/logo/{attachmentId}/{filename}", method = RequestMethod.GET)
+	@ResponseBody
+	public void handleFile( @PathVariable("attachmentId") Long attachmentId, @PathVariable("filename") String filename , HttpServletResponse response )throws IOException {
+		log.debug(" ------------------------------------------");
+		log.debug("attachment:" + attachmentId);
+		log.debug("filename:"+ filename);
+		log.debug("------------------------------------------");
+		try {
+			if( attachmentId > 0 && StringUtils.isNotEmpty(filename)){
+				Attachment attachment = attachmentManager.getAttachment(attachmentId);
+				if( StringUtils.equals(filename, attachment.getName() ) ){
+					InputStream input = attachmentManager.getAttachmentInputStream(attachment);
+					String contentType  = attachment.getContentType();
+					int contentLength = attachment.getSize();
+					
+					
+					response.setContentType(contentType);
+					response.setContentLength(contentLength);			
+					response.setHeader("contentDisposition", "attachment;filename=" + getEncodedFileName(attachment) );
+					IOUtils.copy(input, response.getOutputStream());					
+					response.flushBuffer();
+					
+				}else{
+					throw new NotFoundException();
+				}
+			}else{
+				throw new NotFoundException();
+			}
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}		
+	}
+	
+	protected String getEncodedFileName(Attachment attachment) {
+		try {
+			return URLEncoder.encode(attachment.getName(), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return attachment.getName();
+		}
 	}
 
 	@RequestMapping(value = "/image/{fileName}", method = RequestMethod.GET)
