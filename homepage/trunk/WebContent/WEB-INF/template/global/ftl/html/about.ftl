@@ -258,7 +258,7 @@
 					<h4>#:headline#</h4>
 					<p>#= body #</p>
 					#}else{#
-					<h4 style="border-buttom:0px;">#:headline#</h4>
+					<h4 style="border-bottom:0px;">#:headline#</h4>
 					#}#
 				</div>
 			</li>
