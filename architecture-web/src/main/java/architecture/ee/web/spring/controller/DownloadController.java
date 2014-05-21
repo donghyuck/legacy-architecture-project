@@ -77,7 +77,7 @@ public class DownloadController {
 		this.imageManager = imageManager;
 	}
 	
-	@RequestMapping(value = "/logo/{attachmentId}/{filename}", method = RequestMethod.GET)
+	@RequestMapping(value = "/file/{attachmentId}/{filename:.+}", method = RequestMethod.GET)
 	@ResponseBody
 	public void handleFile( @PathVariable("attachmentId") Long attachmentId, @PathVariable("filename") String filename , HttpServletResponse response )throws IOException {
 		log.debug(" ------------------------------------------");
@@ -92,13 +92,11 @@ public class DownloadController {
 					String contentType  = attachment.getContentType();
 					int contentLength = attachment.getSize();
 					
-					
 					response.setContentType(contentType);
 					response.setContentLength(contentLength);			
 					response.setHeader("contentDisposition", "attachment;filename=" + getEncodedFileName(attachment) );
 					IOUtils.copy(input, response.getOutputStream());					
-					response.flushBuffer();
-					
+					response.flushBuffer();					
 				}else{
 					throw new NotFoundException();
 				}
@@ -109,6 +107,7 @@ public class DownloadController {
 			response.sendError(404);
 		}		
 	}
+	
 	
 	protected String getEncodedFileName(Attachment attachment) {
 		try {
