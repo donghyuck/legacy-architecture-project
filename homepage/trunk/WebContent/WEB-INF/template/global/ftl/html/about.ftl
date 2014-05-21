@@ -188,7 +188,7 @@
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content">
-								<div class="tab-pane fade" id="company-history">								
+								<div class="tab-pane fade" id="company-history" style="min-height:300px;">								
 									<!--
 									<div class="panel panel-default">
 										<div class="panel-body">
