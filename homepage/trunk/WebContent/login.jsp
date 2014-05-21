@@ -36,7 +36,7 @@
 						alert( "이미 로그인되어 있습니다." );
 				}				
 			} );		
-			
+			// <%= request.getContextPath() %>
 			var slideshow = $('#slideshow').extFullscreenSlideshow();
 			
 			/* LOGIN */
