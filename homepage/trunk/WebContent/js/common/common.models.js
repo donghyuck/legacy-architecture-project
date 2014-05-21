@@ -14,12 +14,18 @@
 			startDate: { type: "date"},
 			endDate: { type: "date" } 			
 		},
-		formattedStartDate : function(){
+		getFormattedStartDate : function(){
 	    	return kendo.toString(this.get("startDate"), "yyyy.MM");
 	    },
-	    formattedEndDate : function(){
+	    getFormattedEndDate : function(){
 	    	return kendo.toString(this.get("endDate"), "yyyy.MM");
-	    }		
+	    },
+	    isPeriod : function () {
+	    	return ( this.get("endDate").getTime() > this.get("startDate").getTime() )
+	    },
+	    getEndDateYear() : function () {
+	    	return kendo.toString(this.get("endDate"), "yyyy");
+	    }
 	});
 	
 	common.models.Photo =  kendo.data.Model.define({
