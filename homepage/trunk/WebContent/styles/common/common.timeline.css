@@ -268,7 +268,7 @@
 }
 */
 
-.timeline-v2 > li .cbp_tmlabel h2, .timeline-v2 > li .cbp_tmlabel h4 { 
+.timeline-v2 > li .cbp_tmlabel h2, .timeline-v2 > li .cbp_tmlabel h3, .timeline-v2 > li .cbp_tmlabel h4 { 
 	margin-top: 0px;
 	font-size: 21px;
 	padding: 0 0 5px;
