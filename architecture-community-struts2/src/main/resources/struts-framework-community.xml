@@ -15,12 +15,7 @@
 			<result name="manage" type="freemarker">/html/community/my-website.ftl</result>
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
 		</action>
-					
-		<action name="page" class="architecture.ee.web.community.struts2.action.PageAction">
-			<param name="template">/html/community/page.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
-			<result name="success" type="freemarker">${template}</result>	
-		</action>
+
 
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
 			<param name="template">/html/community/about.ftl</param> 	
@@ -58,6 +53,18 @@
 			<result name="success" type="freemarker">/html/press.ftl</result>
 		</action>										
 
+					
+		<action name="page" class="architecture.ee.web.community.struts2.action.PageAction">
+			<param name="template">/html/community/page.ftl</param> 	
+			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="success" type="freemarker">${template}</result>	
+		</action>
+		
+		<action name="display" class="architecture.ee.web.community.struts2.action.PageDisplayAction">
+			<param name="template">/html/subpage.ftl</param>
+			<result name="success" type="freemarker">${template}</result>	
+		</action>
+		
 	</package>	
 
 	<!--  ACCOUNTS USER EXTEND ACTIONS -->	
