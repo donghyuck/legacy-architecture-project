@@ -255,10 +255,10 @@
 				<div class="cbp_tmlabel">
 					
 					#if(body !== null && body !== 'null'){#
-					<h3>#:headline#</h3>
+					<h4>#:headline#</h4>
 					<p>#= body #</p>
 					#}else{#
-					<h3 class="nounderline">#:headline#</h3>
+					<h4 style="border-buttom:0px;">#:headline#</h4>
 					#}#
 				</div>
 			</li>
