@@ -253,12 +253,11 @@
 				</time>
 				<i class="cbp_tmicon rounded-x hidden-xs"></i>
 				<div class="cbp_tmlabel">
-					
-					#if(body !== null && body !== 'null'){#
+					#if(headline !== null && headline !== 'null'){#
 					<h4>#:headline#</h4>
+					#}#
+					#if(body !== null && body !== 'null'){#					
 					<p>#= body #</p>
-					#}else{#
-					<h4 style="border-bottom:0px;">#:headline#</h4>
 					#}#
 				</div>
 			</li>
