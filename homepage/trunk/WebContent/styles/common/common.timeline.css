@@ -51,7 +51,7 @@
 	color: #3594cb;
 }
 
-.cbp_tmtimeline > li .cbp_tmtime span:first-child.orange-color, .cbp_tmtimeline > li .cbp_tmtime span:last-child.orange-color {
+.cbp_tmtimeline > li .cbp_tmtime span.orange-color:first-child, .cbp_tmtimeline > li .cbp_tmtime span.orange-color:last-child{
 	color: #e67e22;
 }
 
