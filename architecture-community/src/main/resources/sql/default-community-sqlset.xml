@@ -3,6 +3,157 @@
     <name>ARCHITECTURE_COMMUNITY</name>
     <version>2.0</version>
     <description>Queries for COMMUNITY COMPONENTS</description>
+    <!--  TIMELINE  -->
+    <sql-query name="SELECT_TIMELINE_BY_ID" description="SELECT_TIMELINE_BY_ID"><![CDATA[    	
+    SELECT 
+		TIMELINE_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		SUBJECT,
+		BODY,
+		START_DATE,
+		END_DATE,
+		MEDIA_URL,
+		MEDIA_THUMBNAIL_URL,
+		MEDIA_CAPTION,
+		MEDIA_CREDIT
+	FROM V2_TIMELINE 
+	WHERE 	TIMELINE_ID = ?
+    ]]></sql-query>		
+    <sql-query name="SELECT_TIMELINE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_TIMELINE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    		
+    SELECT
+    	TIMELINE_ID
+    FROM V2_TIMELINE 
+    WHERE 	OBJECT_TYPE =? AND OBJECT_ID = ?
+    ]]></sql-query>	
+    <sql-query name="SELECT_TIMELINE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_WITH_DATE_DESC" description="SELECT_TIMELINE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    		
+    SELECT
+    	TIMELINE_ID
+    FROM V2_TIMELINE 
+    WHERE 	OBJECT_TYPE =? AND OBJECT_ID = ? 
+    order by start_date desc
+    ]]></sql-query>	    	
+    <sql-query name="COUNT_TIMELINE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_TIMELINE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    		
+    SELECT
+    	COUNT(TIMELINE_ID)
+    FROM V2_TIMELINE 
+    WHERE 	OBJECT_TYPE =? AND OBJECT_ID = ?
+    ]]></sql-query>		
+    <sql-query name="INSERT_TIMELINE" description="INSERT_TIMELINE"><![CDATA[    	
+		INSERT INTO V2_TIMELINE (
+			TIMELINE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			SUBJECT,
+			BODY,
+			START_DATE,
+			END_DATE,
+			MEDIA_URL,			
+			MEDIA_CAPTION,
+			MEDIA_CREDIT,
+			MEDIA_THUMBNAIL_URL
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
+    ]]></sql-query>	
+    <sql-query name="UPDATE_TIMELINE" description="UPDATE_TIMELINE"><![CDATA[    	
+		UPDATE V2_TIMELINE
+		SET 
+			SUBJECT = ?,
+			BODY = ?,
+			START_DATE = ?,
+			END_DATE = ?,
+			MEDIA_URL = ?,
+			MEDIA_CAPTION = ?,
+			MEDIA_CREDIT = ?			
+			MEDIA_THUMBNAIL_URL = ?
+		WHERE
+			TIMELINE_ID = ?
+    ]]></sql-query>		
+    <sql-query name="DELETE_TIMELINE_BY_ID" description="DELETE_TIMELINE_BY_ID"><![CDATA[    		
+	DELETE FROM V2_TIMELINE
+	WHERE
+		TIMELINE_ID = ?	    
+    ]]></sql-query>	
+      	
+	<!--  LOGO  -->
+	<sql-query name="RESET_LOGO_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="RESET_LOGO_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    	
+	UPDATE V2_LOGO 
+	SET PRIMARY_IMAGE = 0  
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>	
+	<sql-query name="CREATE_LOGO_IMAGE" description="CREATE_LOGO_IMAGE"><![CDATA[
+		INSERT INTO V2_LOGO (
+			LOGO_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			PRIMARY_IMAGE,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		) VALUES (
+			?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
+	]]></sql-query>	
+	<sql-query name="DELETE_LOGO_IMAGE_DATA_BY_ID" description="DELETE_LOGO_IMAGE_DATA_BY_ID"><![CDATA[    	
+	DELETE FROM V2_LOGO_DATA
+	WHERE
+		LOGO_ID = ?	
+	]]></sql-query>	
+	<sql-query name="INSERT_EMPTY_LOGO_IMAGE_DATA" description="INSERT_EMPTY_LOGO_IMAGE_DATA"><![CDATA[    	
+	INSERT INTO V2_LOGO_DATA (LOGO_ID, LOGO_DATA) VALUES (?, EMPTY_BLOB())
+	]]></sql-query>	
+	<sql-query name="UPDATE_LOGO_IMAGE_DATA" description="UPDATE_LOGO_IMAGE_DATA"><![CDATA[    	
+		UPDATE V2_LOGO_DATA
+		SET 
+			LOGO_DATA = ?
+		WHERE
+			LOGO_ID = ?	
+	]]></sql-query>	
+	<sql-query name="INSERT_LOGO_IMAGE_DATA" description="INSERT_LOGO_IMAGE_DATA"><![CDATA[    	
+	INSERT INTO V2_LOGO_DATA ( LOGO_ID, LOGO_DATA ) VALUES (?, ?)
+	]]></sql-query>	
+	<sql-query name="DELETE_LOGO_IMAGE_BY_ID" description="DELETE_LOGO_IMAGE_BY_ID"><![CDATA[    	
+	DELETE FROM V2_LOGO
+	WHERE
+		LOGO_ID = ?	
+	]]></sql-query>	
+	<sql-query name="SELECT_LOGO_IMAGE_DATA_BY_ID" description="SELECT_LOGO_IMAGE_DATA_BY_ID"><![CDATA[    	
+	SELECT LOGO_DATA FROM V2_LOGO_DATA WHERE LOGO_ID = ?	
+	]]></sql-query>	
+	<sql-query name="SELECT_PRIMARY_LOGO_IMAGE_ID_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_PRIMARY_LOGO_IMAGE_ID_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[ 
+	SELECT LOGO_ID 
+	FROM V2_LOGO 
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? AND  PRIMARY_IMAGE = 1	
+	]]></sql-query>	
+	<sql-query name="SELECT_LOGO_IMAGE_BY_ID" description="SELECT_LOGO_IMAGE_BY_ID"><![CDATA[    	
+	SELECT 
+		LOGO_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		PRIMARY_IMAGE,
+		FILE_NAME,
+		FILE_SIZE,
+		CONTENT_TYPE,
+		CREATION_DATE,
+		MODIFIED_DATE
+	FROM V2_LOGO 	
+	WHERE LOGO_ID = ?	
+	]]></sql-query>		
+	<sql-query name="SELECT_LOGO_IMAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_LOGO_IMAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    	
+	SELECT 
+		LOGO_ID 
+	FROM V2_LOGO 
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>	
+	<sql-query name="COUNT_LOGO_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_LOGO_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    	
+	SELECT 
+		COUNT(LOGO_ID)
+	FROM V2_LOGO 
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
+	]]></sql-query>						
 	<!--  PAGE  -->
  	<sql-query name="COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_PAGE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[    	
  	SELECT count( PAGE_ID ) FROM V2_PAGE 
@@ -713,4 +864,11 @@
 	<sql-query name="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
 	SELECT COUNT(ANNOUNCE_ID) FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
 	]]></sql-query>	
+	
+	<sql-query name="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_END_DATE" description="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_END_DATE"><![CDATA[
+	SELECT 
+		COUNT(ANNOUNCE_ID) FROM V2_ANNOUNCE 
+	WHERE OBJECT_TYPE = ? AND OBJECT_ID = ? AND END_DATE >=  ?
+	]]></sql-query>	
+		
 </sqlset>
