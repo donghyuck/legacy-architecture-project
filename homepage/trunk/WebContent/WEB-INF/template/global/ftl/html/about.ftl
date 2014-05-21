@@ -199,15 +199,19 @@
 									</div> -->								
 								</div>
 								<div class="tab-pane fade" id="company-logo" style="min-height:300px;">
-											<div class="page-header page-nounderline-header padding-left-10 ">
-												<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
-											</div>
-											<#if action.webSite.getProperty("logo.downloadUrl", null )?? >
+									<div class="page-header page-nounderline-header padding-left-10 ">
+										<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
+									</div>
+									<div class="panel panel-default">
+										<div class="panel-body">
+										<#if action.webSite.getProperty("logo.downloadUrl", null )?? >
 											<p class="pull-right">
 											<a href="${request.contextPath}/${action.webSite.getProperty("logo.downloadUrl", null )}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</button>	
 											</p>											
-											</#if> 
+										</#if> 
 											<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-rounded" />
+										</div>
+									</div>	
 								</div>
 								<div class="tab-pane fade" id="company-media" style="min-height:300px;">
 									<div id="social-media-area" class="row">
