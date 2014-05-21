@@ -51,10 +51,6 @@
 	color: #3594cb;
 }
 
-.cbp_tmtimeline > li .cbp_tmtime span.orange-color{ 
-	color: #e67e22;
-}
-
 .cbp_tmtimeline > li:nth-child(odd) .cbp_tmtime span:last-child {
 	color: #6cbfee;
 }
