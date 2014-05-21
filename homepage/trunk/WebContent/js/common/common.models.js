@@ -21,7 +21,7 @@
 	    	return kendo.toString(this.get("endDate"), "yyyy.MM");
 	    },
 	    isPeriod : function () {
-	    	return ( this.get("endDate").getTime() > this.get("startDate").getTime() )
+	    	return ( this.get("endDate").getTime() > this.get("startDate").getTime() );
 	    },
 	    getEndDateYear() : function () {
 	    	return kendo.toString(this.get("endDate"), "yyyy");
