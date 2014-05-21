@@ -204,11 +204,10 @@
 											</div>
 											<#if action.webSite.getProperty("logo.downloadUrl", null )?? >
 											<p class="pull-right">
-											<button type="button" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</button>	
+											<a href="${request.contextPath}/${action.webSite.getProperty("logo.downloadUrl", null )}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</button>	
 											</p>											
 											</#if> 
 											<img src="${request.contextPath}/download/logo/company/${action.webSite.company.name}" class="img-rounded" />
-
 								</div>
 								<div class="tab-pane fade" id="company-media" style="min-height:300px;">
 									<div id="social-media-area" class="row">
