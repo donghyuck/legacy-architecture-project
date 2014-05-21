@@ -202,7 +202,7 @@
 											<div class="page-header page-nounderline-header padding-left-10 ">
 												<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
 											</div>
-											<#if action.webSite.getProperty("logo.downloadUrl", null ) ?? >
+											<#if action.webSite.getProperty("logo.downloadUrl", null )?? >
 											<p class="pull-right">
 											<button type="button" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</button>	
 											</p>											
