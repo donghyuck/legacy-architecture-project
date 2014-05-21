@@ -16,10 +16,6 @@
 	position: relative;
 } 
 
-.cbp_tmtimeline h2.nounderline, .cbp_tmtimeline h3.nounderline, .cbp_tmtimeline h4.nounderline { 
-	border-bottom: 0px ;
-}
-
 /* The line */
 .cbp_tmtimeline:before {
 	content: '';
@@ -282,6 +278,16 @@
 	text-transform: capitalize;
 	border-bottom: 1px solid #ddd;	
 }
+
+
+.timeline-v2 > li .cbp_tmlabel h3, .timeline-v2 > li .cbp_tmlabel h4 { 
+	margin-top: 0px;
+	padding: 0 0 5px;
+	margin-bottom: 10px;
+	text-transform: capitalize;
+	border-bottom: 1px solid #ddd;	
+}
+
 
 .timeline-v2 > li .cbp_tmlabel .text-left {
 	float: left;
