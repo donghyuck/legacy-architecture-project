@@ -244,9 +244,9 @@
  				<time class="cbp_tmtime" datetime="">
  					<span>
 	 				#if(endDate.getTime() > startDate.getTime()){#
-	 					#: formattedStartDate() # ~ #: formattedEndDate() #
+	 					#: formattedStartDate # ~ #: formattedEndDate #
 	 				#}else{#
-	 					#: formattedStartDate() #
+	 					#: formattedStartDate #
 	 				#}#				
 					</span> 
 					<span>February</span>
