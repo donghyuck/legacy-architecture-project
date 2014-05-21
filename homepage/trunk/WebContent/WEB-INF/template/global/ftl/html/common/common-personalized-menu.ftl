@@ -33,7 +33,11 @@
 							</#if>								
 						</ul>
 					</li>
-					<li><a href="#" class="btn btn-link btn-control-group" data-action="open-spmenu"><i class="fa fa-briefcase fa-lg"></i></a></li>					
+					<#if "${action.view}" != "manage"  >					
+					<li><a href="#" class="btn btn-link btn-control-group" data-action="open-spmenu"><i class="fa fa-briefcase fa-lg"></i></a></li>
+					<#else>	
+					<li><a href="#" class="btn btn-link btn-control-group" data-action="open-spmenu"><i class="fa fa-cloud fa-lg"></i></a></li>			
+					</#if>					
 					<li><a href="#" class="btn btn-link btn-control-group" data-action="hide"><i class="fa fa-angle-double-up fa-lg"></i></a></li>
 					<p class="navbar-text hidden-xs">&nbsp;</p>
 				</ul>
