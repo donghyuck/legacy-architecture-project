@@ -72,7 +72,7 @@
 							</#if>
 						<#else>
 							// is login user ;							
-							if(typeof window.opener.handleSocialCallbackResult == "function"){		
+							if(typeof window.opener.handleSocialCallbackResult != "function"){		
 								window.opener.handleSocialCallbackResult("tumblr", onetime , true);
 								window.close();
 							}
