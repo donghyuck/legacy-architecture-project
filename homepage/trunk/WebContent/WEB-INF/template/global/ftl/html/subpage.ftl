@@ -61,7 +61,8 @@
 			<div class="row">
 				<div class="col-lg-3 visible-lg">	
 					<div class="headline"><h4> 회사소개 </h4></div>  
-                	<p class="margin-bottom-25"></p>					
+                	<p class="margin-bottom-25">&nbsp;</p>					
+					<div class="list-group">
 					<#list current_menu.parent.components as item >
 						<#if item.name ==  current_menu.name >
 						<a href="${item.page}" class="list-group-item active">${ item.title } </a>
@@ -69,6 +70,7 @@
 						<a href="${item.page}" class="list-group-item">${ item.title } </a>
 						</#if>						
 					</#list>
+					</div>
 				</div>
 				<div class="col-lg-9">		
 					<div class="content-main-section" style="min-height:300px;">
