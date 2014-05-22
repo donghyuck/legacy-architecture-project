@@ -923,7 +923,7 @@
 					+ '</ul>'
 					+ '</div>' 
 					+ '</div>' 
-					+ '<div class="margin-bottom-20"><hr class="devider devider-dotted"></div>'					
+					+ '<div class="margin-bottom-10"><hr class="devider devider-dotted"></div>'					
 					+ '</div>'),
 			image : template('<img src="#: url #" class="img-responsive"/>'),
 			url : template('/download/image/#= key #')
