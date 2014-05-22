@@ -1068,7 +1068,7 @@
 															navigatable : false,
 															template : kendo.template($("#photo-list-view-template").html()),
 															dataBound : function(e) {
-																tab_pane.find('.panel-heading.custom-selected-image').remove();
+																tab_pane.find('.panel-body.custom-selected-image').remove();
 																that._changeState(false);
 															}
 														});
@@ -1156,7 +1156,7 @@
 															navigatable : false,
 															template : kendo.template($("#photo-list-view-template").html()),
 															dataBound : function(e) {
-																tab_pane.find('.panel-heading.custom-selected-image').remove();
+																tab_pane.find('.panel-body.custom-selected-image').remove();
 																that._changeState(false);
 															}
 														});
