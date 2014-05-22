@@ -1033,7 +1033,9 @@
 												},
 												parameterMap : function(options, operation) {
 													if (operation != "read" && options) {
-														return {};
+														return {
+															pageId : options.pageId
+														};
 													} else {
 														return {
 															startIndex : options.skip,
