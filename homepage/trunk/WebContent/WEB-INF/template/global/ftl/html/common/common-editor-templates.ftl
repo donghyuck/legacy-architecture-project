@@ -101,9 +101,11 @@
 													<small><i class="fa fa-info"></i> 업로드 버튼을 클릭하여 여러개의 파일을 한번에 업로드할 수 있습니다.</small>
 													<span class="pull-right"><button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button></span>			
 												</p>
-												<p class="pull-right">				
-													<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button>																		
-												</p>
+												<div class="tag-box tag-box-v4">
+													<button type="button" class="close" data-dismiss="alert">×</button>
+													<h2>Expedita distinctio lorem ipsum!</h2>
+													<p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
+												</div>
 											</div>
 											<div class="panel-body scrollable color4" style="max-height:450px;">
 												<div id="#=upload_guid#-list-view" class="color4" style="padding:0px; border: 0px; min-height: 200px;"></div>
