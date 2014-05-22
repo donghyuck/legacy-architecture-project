@@ -907,7 +907,7 @@
 		POST = 'POST', 
 		JSON = 'json', 
 		templates = {
-			selected  : template('<div class="panel-heading custom-selected-image">'
+			selected  : template('<div class="panel-body custom-selected-image">'
 					+ '<div class="media" style="max-height:110px;">'
 					+ '<a class="pull-left" href="\\#">'
 					+ '<img class="media-object img-responsive" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
