@@ -1040,7 +1040,7 @@
 														return {
 															startIndex : options.skip,
 															pageSize : options.pageSize,
-															pageId : options.pageId
+															pageId : options.pageId ! that._objectId()
 														}
 													}
 												}
