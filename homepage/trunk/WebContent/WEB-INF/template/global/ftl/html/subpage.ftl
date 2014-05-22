@@ -56,7 +56,7 @@
 				
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">
-			${ action.isSetNavigator()?string}
+			${ action.isSetNavigator()?string}, ${targetPage.pageId} , ${targetPage.properties}
 			<#if action.isSetNavigator()  >
 				<div class="col-lg-3 visible-lg">	
 				menu
