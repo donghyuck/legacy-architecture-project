@@ -1010,6 +1010,7 @@
 						objectId = that.options.data.announceId;
 					}
 				}
+				alert(objectId);
 				that.element.html(template(that.options.guid));				
 				that.element.children('.modal').css('z-index', '2000');
 				that.element.find('.modal-body a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
