@@ -913,7 +913,7 @@
 					+ '<img class="media-object img-responsive" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
 					+ '</a>'
 					+ '<div class="media-body">'
-					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span></h5>'
+					+ '<h5 class="media-heading"><span class="label label-warning label-lightweight">#= contentType #</span></h5>'
 					+ '<ul class="list-unstyled">'
 					+ '<li class="text-muted small"><i class="fa fa-picture-o color-green"></i> #: name #</li>'
 					+ '<li class="text-muted small"><i class="fa fa-calendar color-green"></i> 생성일: #: formattedCreationDate() #</li>'
