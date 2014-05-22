@@ -182,7 +182,7 @@
 							<!-- start of tabs -->					
 							<div class="tab-v1">									
 							<ul class="nav nav-tabs" id="aboutTab">
-								<li><a href="#company-history" data-toggle="tab">연역</a></li>
+								<li><a href="#company-history" data-toggle="tab">회사연역</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
 								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>								
 							</ul>
