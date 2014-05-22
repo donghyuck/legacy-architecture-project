@@ -320,7 +320,7 @@
 				});								
 				kendo.bind(renderTo, pageEditorModel );
 				renderTo.data("model", pageEditorModel );										
-				var imageBroswer = createPageImageBroswer( renderToString + "-imagebroswer", bodyEditor);				
+				var imageBroswer = createPageImageBroswer( renderToString + "-imagebroswer", bodyEditor, pageEditorModel);				
 				var linkPopup = createPageLinkPopup(renderToString + "-linkpopup", bodyEditor);	
 				var htmlEditor = createCodeEditor(renderToString + "-html-editor", bodyEditor, pageEditorModel);									
 				bodyEditor.kendoEditor({
@@ -405,13 +405,14 @@
 			return renderTo.data('kendoExtModalWindow');			
 		}
 				
-		function createPageImageBroswer(renderToString, editor ){			
+		function createPageImageBroswer(renderToString, editor, pageEditorModel ){			
 			if( $("#"+ renderToString).length == 0 ){
 				$('body').append('<div id="'+ renderToString +'"></div>');
 			}					
 			var renderTo = $("#"+ renderToString);	
 			if(!renderTo.data("kendoExtImageBrowser")){
 				var imageBrowser = renderTo.extImageBrowser({
+					data : pageEditorModel.page,
 					template : $("#image-broswer-template").html(),
 					apply : function(e){						
 						editor.data("kendoEditor").exec("inserthtml", { value : e.html } );
