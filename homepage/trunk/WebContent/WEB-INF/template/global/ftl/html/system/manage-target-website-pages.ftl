@@ -439,7 +439,7 @@
 		<style type="text/css" media="screen">
 
 		.k-grid-content{
-			height:200px;
+			height:400px;
 		}			
 		
 		table.k-editor{
