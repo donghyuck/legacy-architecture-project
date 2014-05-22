@@ -97,9 +97,9 @@
 										<h5 ><i class="fa fa-upload"></i> <strong>업로드</strong>&nbsp;<small> 삽입할 이미지를 선택하세요.</small></h5>
 										<div class="panel panel-default">			
 											<div class="panel-body">
-												<p class="text-muted"><small><i class="fa fa-info"></i> 여러개의 파일을 한번에 업로드할 수 있습니다.</small></p>
+												<p class="text-muted"><small><i class="fa fa-info"></i> 업로드 버튼을 클릭하여 여러개의 파일을 한번에 업로드할 수 있습니다.</small></p>
 												<p class="pull-right">				
-													<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 사진업로드</button>																		
+													<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 이미지 업로드</button>																		
 												</p>											
 											</div>
 											<div class="panel-body scrollable color4" style="max-height:450px;">
