@@ -999,18 +999,18 @@
 			_createDialog : function() {
 				var that = this;
 				var template = that._dialogTemplate();
-				var objectType = 0,  objectId = 0 ;		
+				var observable = new kendo.data.ObservableObject({ objectType: 0, objectId : 0 });				
 				if( typeof that.options.data === 'object' ){														
 					if( that.options.data instanceof common.models.Page )
 					{
-						objectType = 31;
-						objectId = that.options.data.pageId;
+						observable.set('objectType' , 31);
+						observable.set('objectId', that.options.data.pageId);
 					}else if ( that.options.data instanceof Announce ) {
-						objectType = 22;
-						objectId = that.options.data.announceId;
+						observable.set('objectType' , 22);
+						observable.set('objectId', that.options.data.announceId);
 					}
 				}
-				alert(objectId);
+				
 				that.element.html(template(that.options.guid));				
 				that.element.children('.modal').css('z-index', '2000');
 				that.element.find('.modal-body a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -1021,9 +1021,9 @@
 					var tab_pane = $(tab_pane_id);
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
-							alert(objectId);
+							alert(observable.objectId);
 							alert(that.options.data.pageId);
-							if( objectId > 0 && objectType > 0){
+							if( observable.objectId > 0 && observable.objectType > 0){
 								alert(tab_pane_id + "-list-view");
 								var my_list_view = $(tab_pane_id + "-list-view");
 								var my_list_pager = $(tab_pane_id + "-list-pager");
