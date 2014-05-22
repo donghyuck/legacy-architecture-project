@@ -576,7 +576,7 @@
 		<!-- END FOOTER -->
 		<script id="webpage-name-template" type="text/x-kendo-template">
 			<span class="label label-primary label-lightweight">#= name #</span>
-			<div class="btn-group btn-group-sm">
+			<div class="btn-group btn-group-xs">
 				<a href="\\#" onclick="doPageEdit(); return false;" class="btn btn-info btn-sm">편집</a>
 				<a href="\\#" onclick="openPage(); return false;" class="btn btn-info btn-sm">미리보기</a>
 			</div>	
