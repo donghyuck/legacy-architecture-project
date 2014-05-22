@@ -15,13 +15,18 @@
  */
 package architecture.ee.web.community.struts2.action.admin.ajax;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
+import architecture.ee.exception.NotFoundException;
+import architecture.ee.exception.SystemException;
 import architecture.ee.web.attachment.FileInfo;
+import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.logo.DefaultLogoImage;
 import architecture.ee.web.logo.LogoImage;
 import architecture.ee.web.logo.LogoImageNotFoundException;
@@ -41,6 +46,8 @@ public class LogoManagementAction extends UploadFileAction {
 	
 	private Long objectId;
 	
+	private Long targetLogoImageId;
+
 	private WebSiteManager webSiteManager;
 	
 	private CompanyManager companyManager;
@@ -51,13 +58,34 @@ public class LogoManagementAction extends UploadFileAction {
 	
 	private Company targetCompany;
 	
+	private LogoImage targetLogoImage;
+	
+	private InputStream imputStream = null;
+	
+	
 	public LogoManagementAction() {
 		this.objectType = 0 ;
 		this.objectId = -1L;
 		this.targetCompanyId = -1L;
 		this.targetWebSiteId = -1L;
+		this.targetLogoImageId = -1L;
 	}
 	
+	
+	
+	/**
+	 * @return targetLogoImageId
+	 */
+	public Long getLogoId() {
+		return targetLogoImageId;
+	}
+
+	/**
+	 * @param targetLogoImageId 설정할 targetLogoImageId
+	 */
+	public void setLogoId(Long logoId) {
+		this.targetLogoImageId = logoId;
+	}
 	/**
 	 * @return targetCompanyId
 	 */
@@ -193,19 +221,51 @@ public class LogoManagementAction extends UploadFileAction {
 		}		
 		return Collections.EMPTY_LIST;
 	}
+
+	public LogoImage getTargetLogoImage() {
+		try {
+			if( targetLogoImage == null && targetLogoImageId > 0){
+				targetLogoImage = logoManager.getLogoImageById(targetLogoImageId);	
+			}
+			return targetLogoImage;
+		} catch (Exception e) {
+			throw new SystemException(e);
+		}		
+	}
+	
+	
+	public InputStream getTargetImageInputStream() throws IOException {
+		LogoImage imageToUse = getTargetLogoImage();	
+		if( imputStream == null )
+			imputStream = logoManager.getImageInputStream(imageToUse);			
+		return imputStream;
+	}
+	
+	public String getTargetImageContentType(){
+		return getTargetLogoImage().getImageContentType();
+	}
+
+	public String getTargetImageFileName(){
+		return getTargetLogoImage().getFilename();
+	}	
+	
+	public int getTargetImageContentLength(){
+		return getTargetLogoImage().getImageSize();	
+	}
 	
 	public String addLogoImage () throws Exception {			
 		List<FileInfo> uploadFilesToUse = getUploadedFiles();
 		if( uploadFilesToUse.size() > 0 && (objectType > 0 && objectId > 0 )){
 			for( FileInfo fi : uploadFilesToUse ){				
+				
 				DefaultLogoImage logo = new DefaultLogoImage();
 				logo.setFilename(fi.getName());
 				logo.setImageContentType(fi.getContentType());
 				logo.setObjectType(objectType);
 				logo.setObjectId(objectId);				
 				logo.setPrimary(true);
-				logoManager.addLogoImage(logo, fi.getFile());
-			
+				
+				logoManager.addLogoImage(logo, fi.getFile());			
 			}
 		}
 		return success();		

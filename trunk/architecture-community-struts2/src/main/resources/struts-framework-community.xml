@@ -9,60 +9,53 @@
 		
 		<action name="main" class="architecture.ee.web.community.struts2.action.MainPageAction">
 			<param name="template">/html/community/homepage.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>
+			<result name="customized-success" type="freemarker">${template}</result>
 			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
 			<result name="streams" type="freemarker">/html/community/my-streams.ftl</result>
 			<result name="manage" type="freemarker">/html/community/my-website.ftl</result>
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
 		</action>
 
-
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
 			<param name="template">/html/community/about.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="customized-success" type="freemarker">${template}</result>	
 			<result name="success" type="freemarker">/html/about.ftl</result>	
 		</action>		
 
 		<action name="events" class="architecture.ee.web.community.struts2.action.PageAction">
 			<param name="template">/html/community/events.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="customized-success" type="freemarker">${template}</result>	
 			<result name="success" type="freemarker">/html/events.ftl</result>	
 		</action>	
 
 		<action name="welcome" class="architecture.ee.web.community.struts2.action.PageAction">
 			<param name="template">/html/community/welcome.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="customized-success" type="freemarker">${template}</result>	
 			<result name="success" type="freemarker">/html/welcome.ftl</result>	
 		</action>
 		
 		<action name="contact" class="architecture.ee.web.community.struts2.action.PageAction">
 			<param name="template">/html/community/contact.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="customized-success" type="freemarker">${template}</result>	
 			<result name="success" type="freemarker">/html/contact.ftl</result>	
 		</action>		
 
 		<action name="customers" class="architecture.ee.web.community.struts2.action.PageAction">
 			<param name="template">/html/community/customers.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="customized-success" type="freemarker">${template}</result>	
 			<result name="success" type="freemarker">/html/customers.ftl</result>	
 		</action>		
 
 		<action name="press" class="architecture.ee.web.community.struts2.action.PageAction">
 			<param name="template">/html/community/press.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>
+			<result name="customized-success" type="freemarker">${template}</result>
 			<result name="success" type="freemarker">/html/press.ftl</result>
 		</action>										
 
-					
 		<action name="page" class="architecture.ee.web.community.struts2.action.PageAction">
-			<param name="template">/html/community/page.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
-			<result name="success" type="freemarker">${template}</result>	
-		</action>
-		
-		<action name="display" class="architecture.ee.web.community.struts2.action.PageDisplayAction">
-			<param name="template">/html/subpage.ftl</param>
-			<result name="success" type="freemarker">${template}</result>	
+			<result name="success" type="freemarker">/html/subpage.ftl</result>	
+			<result name="customized-success" type="freemarker">${template}</result>
+			<result name="page-not-found" >/includes/jsp/404.jsp</result>
 		</action>
 		
 	</package>	
@@ -116,7 +109,7 @@
 		<!--  ================================== -->	
 		<action name="page" class="architecture.ee.web.community.struts2.action.PageAction">
 			<param name="template">/html/community/page.ftl</param> 	
-			<result name="customize-success" type="freemarker">${template}</result>	
+			<result name="customized-success" type="freemarker">${template}</result>	
 			<result name="page-not-found" >/includes/jsp/404.jsp</result>   
 		</action>
 
