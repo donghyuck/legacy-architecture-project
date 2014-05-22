@@ -1016,11 +1016,14 @@
 					that._changeState(false);
 					var tab_pane_id = $(e.target).attr('href');
 					var tab_pane = $(tab_pane_id);
+					alert( tab_pane.html() );
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
 							if(that._objectId() > 0){
+								
 								var my_list_view = $(tab_pane_id + "-list-view");
 								var my_list_pager = $(tab_pane_id + "-list-pager");
+								
 								// list view 
 								if (!my_list_view.data('kendoListView')) {
 									my_list_view.kendoListView({
