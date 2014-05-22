@@ -1022,7 +1022,7 @@
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
 							alert(objectId);
-							alert(that.options.data.announceId);
+							alert(that.options.data.pageId);
 							if( objectId > 0 && objectType > 0){
 								alert(tab_pane_id + "-list-view");
 								var my_list_view = $(tab_pane_id + "-list-view");
