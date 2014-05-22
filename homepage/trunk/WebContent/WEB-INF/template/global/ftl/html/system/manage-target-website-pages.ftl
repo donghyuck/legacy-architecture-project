@@ -450,7 +450,7 @@
 		
 		table.k-editor{
 			border : 0px;
-			height : 600px;
+			height : 400px;
 		}
 		
 						
