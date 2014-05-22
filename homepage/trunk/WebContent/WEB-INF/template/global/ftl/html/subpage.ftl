@@ -56,7 +56,6 @@
 				
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">
-			${ action.isSetNavigator()?string}, ${targetPage.pageId} , ${targetPage.properties}
 			<#if action.isSetNavigator()  >
 			<#assign current_menu = action.getNavigator() />
 			<div class="row">
