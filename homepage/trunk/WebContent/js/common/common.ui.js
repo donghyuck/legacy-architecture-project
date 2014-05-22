@@ -1044,7 +1044,7 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane.find(	'.panel-heading.custom-selected-image').remove();
+																tab_pane.find(	'.panel-body.custom-selected-image').remove();
 																var data = this.dataSource.view();
 																var current_index = this.select().index();
 																if (current_index >= 0) {
@@ -1132,7 +1132,7 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane.find('.panel-heading.custom-selected-image').remove();
+																tab_pane.find('.panel-body.custom-selected-image').remove();
 																var data = this.dataSource.view();
 																var current_index = this.select().index();
 																if (current_index >= 0) {
@@ -1209,7 +1209,7 @@
 															},
 															selectable : "single",
 															change : function(e) {
-																tab_pane.find('.panel-heading.custom-selected-image').remove();
+																tab_pane.find('.panel-body.custom-selected-image').remove();
 																var data = this.dataSource.view();
 																var current_index = this.select().index();
 																if (current_index >= 0) {
