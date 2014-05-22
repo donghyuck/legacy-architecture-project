@@ -15,6 +15,8 @@
  */
 package architecture.ee.web.community.struts2.action.admin.ajax;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -114,8 +116,8 @@ public class AnnouncementManagementAction extends FrameworkActionSupport {
 	}
 
 	public int getTotalAnnounceCount(){
-		
-		return 0;
+		Date now = Calendar.getInstance().getTime();
+		return announceManager.getAnnounceCount(objectType, objectId, now);
 	}
 
 	/**

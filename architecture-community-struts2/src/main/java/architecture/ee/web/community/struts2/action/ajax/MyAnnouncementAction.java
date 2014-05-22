@@ -15,8 +15,10 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.user.User;
@@ -111,7 +113,8 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	}
 
 	public int getTotalAnnounceCount(){
-		return announceManager.countAnnounce(objectType, objectId);
+		Date now = Calendar.getInstance().getTime();		
+		return announceManager.getAnnounceCount(objectType, objectId, now);
 	}
 
 	/**
@@ -146,26 +149,17 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	public String update() throws Exception{
 		
 		if( isGuest() )
-			throw new UnAuthorizedException("no permission.");		
-				
-		//AnnounceForm form = ParamUtils.getJsonParameter(request, "item", AnnounceForm.class);
-		
-		 //com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();		
-		// AnnounceForm form = mapper.readValue( ParamUtils.getParameter(request, "item"), AnnounceForm.class);
-		 
-		//log.debug( form.toString() );
-		
-		
+			throw new UnAuthorizedException("no permission.");								
 		AnnounceForm form = ParamUtils.getJsonParameter(request, "item", AnnounceForm.class);
 		this.announceId = form.getAnnounceId();		
 		this.objectType = form.getObjectType();		
 		this.prepareObjectTypeAndObjectId();		
+		
 		Announce targetAnnounce = getTargetAnnounce();
-
 		targetAnnounce.setSubject(form.getSubject());
 		targetAnnounce.setBody(form.getBody());	
-		targetAnnounce.setEndDate(form.getEndDate());
 		targetAnnounce.setStartDate( form.getStartDate());
+		targetAnnounce.setEndDate(form.getEndDate());
 		
 		if(targetAnnounce.getAnnounceId() > 0 ){
 			announceManager.updateAnnounce(targetAnnounce);		
@@ -173,6 +167,7 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 			announceManager.addAnnounce(targetAnnounce);		
 			 this.announceId = targetAnnounce.getAnnounceId();
 		}		
+		
 		return success();
 	}	
 	
@@ -203,6 +198,23 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 		
 		private User user;
 		
+		private Map properties;
+		
+		
+		/**
+		 * @return properties
+		 */
+		public Map getProperties() {
+			return properties;
+		}
+
+		/**
+		 * @param properties 설정할 properties
+		 */
+		public void setProperties(Map properties) {
+			this.properties = properties;
+		}
+
 		/**
 		 * @return user
 		 */
