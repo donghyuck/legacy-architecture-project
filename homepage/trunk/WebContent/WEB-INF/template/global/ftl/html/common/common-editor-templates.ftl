@@ -201,7 +201,7 @@
 	<script id="code-editor-modal-template" type="text/x-kendo-template">
 	<style type="text/css" media="screen">
 		\\#htmleditor { 
-			height: 500px;
+			height: 600px;
 			border: 0px solid \\#ddd;
 		}		
 	</style>			
