@@ -999,7 +999,18 @@
 			_createDialog : function() {
 				var that = this;
 				var template = that._dialogTemplate();
-				that.element.html(template(that.options.guid));
+				var objectType = 0,  objectId = 0 ;		
+				if( typeof that.options.data === 'object' ){														
+					if( that.options.data instanceof common.models.Page )
+					{
+						objectType = 31;
+						objectId = that.options.data.pageId;
+					}else if ( that.options.data instanceof Announce ) {
+						objectType = 22;
+						objectId = that.options.data.announceId;
+					}
+				}
+				that.element.html(template(that.options.guid));				
 				that.element.children('.modal').css('z-index', '2000');
 				that.element.find('.modal-body a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 					e.target // activated tab
@@ -1008,20 +1019,84 @@
 					var tab_pane_id = $(e.target).attr('href');
 					var tab_pane = $(tab_pane_id);
 					switch (tab_pane_id) {
-						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:
-							var objectType = 0,  objectId = 0 ;		
-							if( typeof that.options.data === 'object' ){														
-								if( that.options.data instanceof common.models.Page )
-								{
-									objectId = that.options.data.pageId;
-								}else if ( that.options.data instanceof Announce ) {
-									objectId = that.options.data.announceId;
-								}
-							}  				
-							alert(objectId);
-											
+						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:							
+							if( objectId > 0 && objectType > 0){
+								var my_list_view = $(tab_pane_id + "list-view");
+								var my_list_pager = $(tab_pane_id + "list-pager");
+								// list view 
+								if (!my_list_view.data('kendoListView')) {
+									my_list_view.kendoListView({
+										dataSource : {
+											type : 'json',
+											transport : {
+												read : {
+													url : '/community/list-my-page-image.do?output=json',
+													type : 'POST'
+												},
+												parameterMap : function(options, operation) {
+													if (operation != "read" && options) {
+														return {};
+													} else {
+														return {
+															startIndex : options.skip,
+															pageSize : options.pageSize,
+															pageId : options.pageId
+														}
+													}
+												}
+											},
+											pageSize : 12,
+											error : handleKendoAjaxError,
+											schema : {
+												model : Image,
+												data : "targetImages",
+												total : "totalTargetImageCount"
+											},
+											serverPaging : true
+										},
+										selectable : "single",
+										change : function(e) {
+											tab_pane.find(	'.panel-body.custom-selected-image').remove();
+											var data = this.dataSource.view();
+											var current_index = this.select().index();
+											if (current_index >= 0) {
+												var item = data[current_index];
+												var imageId = item.imageId;
+												if (imageId > 0) {
+													that._getImageLink(item,
+														function(data) {
+															if (typeof data.imageLink === 'object') {
+																my_list_view.data("linkId",data.imageLink.linkId);
+															that._changeState(true);
+															tab_pane.find('.panel').prepend(templates.selected(item));
+														}
+													});
+												}
+											}
+										},
+										navigatable : false,
+										template : kendo.template($("#photo-list-view-template").html()),
+										dataBound : function(e) {
+											tab_pane.find('.panel-body.custom-selected-image').remove();
+											that._changeState(false);
+										}
+									});
+									my_list_view.on("mouseenter",".img-wrapper", function(e) {
+										kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
+									}).on("mouseleave", ".img-wrapper", function(e) {
+										kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
+									});
+									my_list_pager.kendoPager({
+										refresh : true,
+										buttonCount : 5,
+										dataSource : my_list_view.data('kendoListView').dataSource
+									});
+								}								
+								my_list_view.data('kendoListView').dataSource.read({pageId: objectId});
+							}
+						
 											/*
-											var my_list_view = tab_pane.find('.panel-body div');
+											
 											var my_list_pager = tab_pane.find('.panel-footer div');
 											if (!my_list_view.data('kendoListView')) {
 												my_list_view.kendoListView({
