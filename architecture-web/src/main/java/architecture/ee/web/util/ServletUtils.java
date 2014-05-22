@@ -82,7 +82,7 @@ public class ServletUtils {
     	
     	if( StringUtils.isEmpty(request.getContextPath())){
     		return CONTEXT_ROOT_PATH ;
-    	}else if ( "/".equals( request.getContextPath()  ) ){
+    	}else if ( StringUtils.equals( "/",  request.getContextPath().trim() ) ){
     		return CONTEXT_ROOT_PATH ;    		
     	}else{
     		return request.getContextPath();
