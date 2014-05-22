@@ -152,10 +152,16 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	}
 	
 	private void updateProperties(final Page page){
+		
 		Map<String, String> oldProps = loadProperties(page);
+		
 		final List<String> deleteKeys = getDeletedPropertyKeys(oldProps, page.getProperties());
 		final List<String> modifiedKeys = getModifiedPropertyKeys(oldProps, page.getProperties());
 		final List<String> addedKeys = getAddedPropertyKeys(oldProps, page.getProperties());
+		
+		log.debug("old:" + oldProps );
+		log.debug("new:" + page.getProperties() );
+		
 		if( !deleteKeys.isEmpty() ){
 			getExtendedJdbcTemplate().batchUpdate(
 				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_PAGE_PROPERTY_BY_NAME").getSql(), 
@@ -178,9 +184,12 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				new BatchPreparedStatementSetter(){
 					public void setValues(PreparedStatement ps, int i)
 							throws SQLException {
+						
 						String key = modifiedKeys.get(i);
+						String value = page.getProperty(key, null);						
+						log.debug("batch[" + key + "=" + value +  "]");
 						ps.setString(1, key);
-						ps.setString(2, page.getProperties().get(key));
+						ps.setString(2, value);
 						ps.setLong(3, page.getPageId());
 						ps.setLong(4,  page.getVersionId());
 					}
@@ -248,6 +257,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	}	
 	
 	private Map<String, String> loadProperties(Page page){
+		
 		return getExtendedJdbcTemplate().query(
 			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_PROPERTIES").getSql(), 
 			new Object[] { page.getPageId(), page.getVersionId() }, new ResultSetExtractor<Map<String, String>>(){
@@ -259,7 +269,8 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 					rows.put(key, value);
 				}
 				return rows;
-		}});	
+		}});
+		
 	}
 	
 	private void insertPageVersion(Page page){
@@ -402,6 +413,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		);	
 		
 		updateProperties(page);
+		
 		if( isNewVersion ){
 			insertPageVersion(page);			
 			insertPageBody(page);			
@@ -568,7 +580,9 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			}	
 		}
 		
-		loadProperties(page);		
+		Map<String,String> properties = loadProperties(page);	
+		page.getProperties().putAll(properties);
+		
 		return page;
 	}
 	
