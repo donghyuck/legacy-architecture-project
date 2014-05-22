@@ -946,70 +946,165 @@
 		*/
 		
 		handleKendoAjaxError = common.api.handleKendoAjaxError;
-	common.ui.extImageBrowser = Widget.extend({
-				init : function(element, options) {
-					var that = this;
-					Widget.fn.init.call(that, element, options);
-					options = that.options;
-					options.guid = {
-						title_guid : common.api.guid().toLowerCase(),
-						url_guid : common.api.guid().toLowerCase(),
-						upload_guid : common.api.guid().toLowerCase(),
-						my_guid : common.api.guid().toLowerCase(),
-						domain_guid : common.api.guid().toLowerCase(),
-						website_guid : common.api.guid().toLowerCase()
-					};
-					that.refresh();
-				},
-				events : [ ERROR, CHANGE, APPLY ],
-				options : {
-					name : "ExtImageBrowser",
-					transport : {}
-				},
-				show : function() {
-					var that = this;
-					that._modal().modal('show');
-					that.element.find('.modal-body ul.nav a:first').tab('show');
-				},
-				close : function() {
-					var that = this;
-					that._modal().modal('hide');
-				},
-				refresh : function() {
-					var that = this;
-					that._createDialog();
-				},
-				destroy : function() {
-					var that = this;
-					Widget.fn.destroy.call(that);
-					$(that.element).remove();
-				},
-				_getImageLink : function(image, callback) {
-					common.api.getImagelink({
-						imageId : image.imageId,
-						success : function(data) {
-							callback(data);
-						}
-					});
-				},
-				_modal : function() {
-					var that = this;
-					return that.element.children('.modal');
-				},
-				_createDialog : function() {
-					var that = this;
-					var template = that._dialogTemplate();
-					that.element.html(template(that.options.guid));
-					that.element.children('.modal').css('z-index', '2000');
-					that.element.find('.modal-body a[data-toggle="tab"]').on(
-									'shown.bs.tab',
-									function(e) {
-										e.target // activated tab
-										e.relatedTarget // previous tab
-										that._changeState(false);
-										var tab_pane_id = $(e.target).attr('href');
-										var tab_pane = $(tab_pane_id);
-										switch (tab_pane_id) {
+		common.ui.extImageBrowser = Widget.extend({
+			init : function(element, options) {
+				var that = this;
+				Widget.fn.init.call(that, element, options);
+				options = that.options;
+				options.guid = {
+					title_guid : common.api.guid().toLowerCase(),
+					url_guid : common.api.guid().toLowerCase(),
+					upload_guid : common.api.guid().toLowerCase(),
+					my_guid : common.api.guid().toLowerCase(),
+					domain_guid : common.api.guid().toLowerCase(),
+					website_guid : common.api.guid().toLowerCase()
+				};
+				that.refresh();
+			},
+			events : [ ERROR, CHANGE, APPLY ],
+			options : {
+				name : "ExtImageBrowser",
+				transport : {}
+			},
+			show : function() {
+				var that = this;
+				that._modal().modal('show');
+				that.element.find('.modal-body ul.nav a:first').tab('show');
+			},
+			close : function() {
+				var that = this;
+				that._modal().modal('hide');
+			},
+			refresh : function() {
+				var that = this;
+				that._createDialog();
+			},
+			destroy : function() {
+				var that = this;
+				Widget.fn.destroy.call(that);
+				$(that.element).remove();
+			},
+			_getImageLink : function(image, callback) {
+				common.api.getImagelink({
+					imageId : image.imageId,
+					success : function(data) {
+						callback(data);
+					}
+				});
+			},
+			_modal : function() {
+				var that = this;
+				return that.element.children('.modal');
+			},
+			_createDialog : function() {
+				var that = this;
+				var template = that._dialogTemplate();
+				that.element.html(template(that.options.guid));
+				that.element.children('.modal').css('z-index', '2000');
+				that.element.find('.modal-body a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+					e.target // activated tab
+					e.relatedTarget // previous tab
+					that._changeState(false);
+					var tab_pane_id = $(e.target).attr('href');
+					var tab_pane = $(tab_pane_id);
+					switch (tab_pane_id) {
+						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:
+							var objectType = 0,  objectId = 0 ;		
+							if( typeof that.options.data === 'object' ){														
+								if( that.options.data instanceof common.models.Page )
+								{
+									objectId = that.options.data.pageId;
+								}else if ( that.options.data instanceof Announce ) {
+									objectId = that.options.data.announceId;
+								}
+							}  				
+							alert(objectId);
+											
+											/*
+											var my_list_view = tab_pane.find('.panel-body div');
+											var my_list_pager = tab_pane.find('.panel-footer div');
+											if (!my_list_view.data('kendoListView')) {
+												my_list_view.kendoListView({
+													dataSource : {
+														type : 'json',
+														transport : {
+															read : {
+																url : '/community/list-my-domain-image.do?output=json',
+																type : 'POST'
+															},
+															parameterMap : function(options, operation) {
+																if (operation != "read" && options) {
+																	return {};
+																} else {
+																	return {
+																		startIndex : options.skip,
+																		pageSize : options.pageSize
+																	}
+																}
+															}
+														},
+														pageSize : 12,
+														error : handleKendoAjaxError,
+														schema : {
+															model : Image,
+															data : "targetImages",
+															total : "totalTargetImageCount"
+														},
+														serverPaging : true
+													},
+														selectable : "single",
+														change : function(e) {
+															tab_pane.find(	'.panel-body.custom-selected-image').remove();
+															var data = this.dataSource.view();
+															var current_index = this.select().index();
+															if (current_index >= 0) {
+																var item = data[current_index];
+																var imageId = item.imageId;
+																if (imageId > 0) {
+																	that._getImageLink(item,
+																		function(data) {
+																			if (typeof data.imageLink === 'object') {
+																				my_list_view.data("linkId",data.imageLink.linkId);
+																				that._changeState(true);
+																				tab_pane.find('.panel').prepend(templates.selected(item));
+																			}
+																	});
+																}
+															}
+														},
+														navigatable : false,
+														template : kendo.template($("#photo-list-view-template").html()),
+														dataBound : function(e) {
+															tab_pane.find('.panel-body.custom-selected-image').remove();
+															that._changeState(false);
+														}
+													});
+											my_list_view.on(
+															"mouseenter",
+															".img-wrapper",
+															function(e) {
+																kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
+															})
+													.on(
+															"mouseleave",
+															".img-wrapper",
+															function(e) {
+																kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
+															});
+											my_list_pager
+													.kendoPager({
+														refresh : true,
+														buttonCount : 5,
+														dataSource : my_list_view
+																.data('kendoListView').dataSource
+													});
+										} else {
+											my_list_view.data(
+													'kendoListView')
+													.clearSelection();
+										}		
+										*/									
+											break;
 										case "#" + that.options.guid[TAB_PANE_DOMAIN_ID]:
 											// domain images
 											var my_list_view = tab_pane.find('.panel-body div');
