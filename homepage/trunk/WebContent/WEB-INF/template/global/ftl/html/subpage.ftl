@@ -69,7 +69,7 @@
 					</#list>
 				</div>
 				<div class="col-lg-9">		
-					<div class="content-main-section">
+					<div class="content-main-section" style="min-height:300px;">
 					${ action.processedBodyText }
 					</div>
 				</div>
