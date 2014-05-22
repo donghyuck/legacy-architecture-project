@@ -61,7 +61,7 @@
 			<div class="row">
 				<div class="col-lg-3 visible-lg">	
 					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
-                	<p class="margin-bottom-25"><small>${current_menu.parent.description}</small></p>					
+                	<p class="margin-bottom-25"><small>${current_menu.parent.description??}</small></p>					
 					<div class="list-group">
 					<#list current_menu.parent.components as item >
 						<#if item.name ==  current_menu.name >
