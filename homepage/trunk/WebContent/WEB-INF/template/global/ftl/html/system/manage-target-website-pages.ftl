@@ -292,7 +292,7 @@
 								common.ui.notification({title:"페이지 저장", message: "페이지 가 정상적으로 저장되었습니다.", type: "success" });
 								var pageToUse = new common.models.Page(response.targetPage);																
 								pageToUse.copy( pagePlaceHolder );
-								$("#website-page-grid").data('kendoGrid').read();
+								$("#website-page-grid").data('kendoGrid').dataSource.read();
 							},
 							fail: function(){								
 								common.ui.notification({title:"페이지 저장 오류", message: "시스템 운영자에게 문의하여 주십시오." });
