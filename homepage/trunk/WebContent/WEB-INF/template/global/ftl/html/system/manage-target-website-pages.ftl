@@ -447,13 +447,6 @@
 			height : 400px;
 		}
 		
-		#website-page-grid.k-grid td{
-			overflow : visible;
-		}
-		
-		#website-page-grid.k-grid .k-grid-content-locked {
-			overflow : visible;
-		}
 						
 		</style>		
 		</#compress>		
