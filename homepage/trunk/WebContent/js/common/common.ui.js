@@ -1019,10 +1019,8 @@
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
 							if(that._objectId() > 0){
-								alert(tab_pane_id + "-list-view");
 								var my_list_view = $(tab_pane_id + "-list-view");
 								var my_list_pager = $(tab_pane_id + "-list-pager");
-								alert(my_list_view.html());
 								// list view 
 								if (!my_list_view.data('kendoListView')) {
 									my_list_view.kendoListView({
