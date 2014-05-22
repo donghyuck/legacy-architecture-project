@@ -73,7 +73,7 @@
 					${ action.processedBodyText }
 					</div>
 				</div>
-			<div>
+			</div>
 			<#else>
 			<div class="row">
 				<div class="col-sm-12">
@@ -87,6 +87,7 @@
 			</div>	
 			</#if>
 		</div>
+		
 		<!-- END MAIN CONTENT -->	
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
