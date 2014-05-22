@@ -274,7 +274,7 @@
 					},
 					showProps: function(e){
 						if( this.page.pageId > 0 ){
-							this.properties.fetch();				
+							this.properties.read();				
 						}							
 						renderTo.find('.custom-props' ).toggleClass('hide');
 					},	
