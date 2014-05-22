@@ -21,6 +21,7 @@ import org.apache.commons.lang.StringUtils;
 
 import architecture.common.util.TextUtils;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
@@ -29,6 +30,7 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 
+
 public class WebSiteUtils {
 
 	public static final String MAIN_PAGE_VIEW_PREFIX = "main.view";
@@ -36,10 +38,15 @@ public class WebSiteUtils {
 	public WebSiteUtils() {
 	}
 
+	public static LogoManager getLogoManager(){
+		return ApplicationHelper.getComponent(LogoManager.class);
+	}
 
 	public static WebSiteManager getWebSiteManager(){
 		return ApplicationHelper.getComponent(WebSiteManager.class);
 	}
+	
+	
 	
 	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
 		String localName = request.getLocalName();		
@@ -81,10 +88,15 @@ public class WebSiteUtils {
 		else 
 			return webSite.getMenu();
 	}	
-
+	
+	public static boolean hasLogo(WebSite website){
+		return getLogoManager().getLogoImages(website).size() > 0 ? true : false;
+	}
+	
 	public static boolean isAllowedSignIn(WebSite website){
 		return website.getBooleanProperty("allowedSignIn", true);
 	}
+
 	
 	public static boolean isAllowedSignup(WebSite website){
 		return website.getBooleanProperty("allowedSignup", true);
@@ -110,7 +122,7 @@ public class WebSiteUtils {
 		if(StringUtils.isNotBlank(templage))
 			website.getProperties().put(MAIN_PAGE_VIEW_PREFIX, templage);
 	}
-	
+		
 	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
 		if(StringUtils.isNotEmpty(menu.getRoles())){			
 			for( String role : StringUtils.split(menu.getRoles(), ",")){

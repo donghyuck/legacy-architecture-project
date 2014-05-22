@@ -47,5 +47,6 @@ public interface WebSite extends BaseModelObject {
 	public void setMenu(Menu menu);
 	
 	public Menu getMenu();
-		
+	
+			
 }

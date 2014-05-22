@@ -19,7 +19,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.List;
 
 import net.sf.ehcache.Cache;
 
@@ -31,8 +30,9 @@ import architecture.common.exception.ComponentNotFoundException;
 import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.site.WebSite;
+import architecture.ee.web.site.support.WebSiteAware;
 import architecture.ee.web.template.Template;
-import architecture.ee.web.template.TemplateManager;
 import freemarker.cache.FileTemplateLoader;
 /**
  * 
@@ -89,29 +89,52 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
-
-		if( !isCustomizedEnabled() )
+		if(isCustomizedEnabled() )
 		{
-			return null;
+			try {
+				MethodInvoker invoker = new MethodInvoker();		
+				invoker.setStaticMethod("architecture.ee.web.struts2.util.ActionUtils.getAction");
+				invoker.prepare();
+				Object action = invoker.invoke();			
+				if( action instanceof WebSiteAware ){					
+					WebSite site = ((WebSiteAware)action).getWebSite();
+					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;				
+					
+					if(nameToUse.charAt(0) == File.separatorChar ){
+						nameToUse = File.separatorChar + "sites"+ File.separatorChar  + site.getName().toLowerCase() + nameToUse ;
+					}else{
+						nameToUse = File.separatorChar + "sites" + File.separatorChar  + site.getName().toLowerCase() + File.separatorChar + nameToUse ;
+					}					
+					log.debug("find template:" + nameToUse  );					
+					return super.findTemplateSource(nameToUse);
+				}			
+			} catch (Exception e) {
+				log.warn(e);			
+			}	
 		}		
+		return null;		
+	
 		
-		if( usingDatabase()){
+		
+				
+/*		if( usingDatabase() ){
 			try {				
 				MethodInvoker invoker = new MethodInvoker();		
 				invoker.setStaticMethod("architecture.ee.web.struts2.util.ActionUtils.getAction");
 				invoker.prepare();
 				Object action = invoker.invoke();
+				
 				if( action instanceof TemplateAware ){
-					Template template = ((TemplateAware)action).getTargetTemplate();					
+					Template template = ((TemplateAware)action).getTargetTemplate();
 					if( log.isDebugEnabled() )
 						log.debug( name + " < compare > template from action:" + template.getTitle() + ", type=" + template.getTemplateType() + ", locaion=" + template.getLocation());					
 					if(  "ftl".equals(template.getTemplateType()) && name.contains(template.getLocation() ))
 						return template;
 				}
+				
 			} catch (Exception e) {
 				log.warn(e);				
 			}
-
 			List<Template> contents = getCurrentCompanyTemplates();
 			for( Template template : contents){
 				if( log.isDebugEnabled() )
@@ -120,20 +143,21 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 					return template;
 				}
 			}			
-		}
-		String nameToUse = getCustomizedTemplateFileName(name);
-		return super.findTemplateSource(nameToUse);
+		}	*/	
+
+	
 	}
 	
 
+	
+	
+	
 	/**
 	 * @return templateListCache
 	 */
 	public Cache getTemplateListCache() {
 		return templateListCache;
 	}
-
-
 
 	/**
 	 * @param templateListCache 설정할 templateListCache
@@ -162,7 +186,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		
 	}
 
-	
+/*	
 	protected List<Template> getCurrentCompanyTemplates(){
 		List<Template> list = null;
 		Company targetCompany = getCurrentCompany();
@@ -183,17 +207,9 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		}
 		
 		return list ;
-	}
+	}*/
 	
-	protected final String getCustomizedTemplateFileName(String name){
-		String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;		
-		if(nameToUse.charAt(0) == File.separatorChar ){
-			nameToUse = File.separatorChar + getCurrentCompany().getName() + nameToUse ;
-		}else{
-			nameToUse = File.separatorChar + getCurrentCompany().getName() + File.separatorChar + nameToUse ;
-		}		
-		return nameToUse;
-	}
+
 
 	protected final boolean usingDatabase(){		
 		return ApplicationHelper.getApplicationBooleanProperty("view.render.freemarker.usingDatabase", false);
