@@ -273,6 +273,9 @@
 						}
 					},
 					showProps: function(e){
+						if( this.page.pageId > 0 ){
+							this.properties.fetch();				
+						}							
 						renderTo.find('.custom-props' ).toggleClass('hide');
 					},	
 					openPage: function(e){
@@ -359,9 +362,7 @@
 			if( pagePlaceHolder.pageState === 'pagePlaceHolder' ){
 				renderTo.data("model").set("isPublished", true );				
 			}			
-			if( pagePlaceHolder.pageId > 0 ){
-				renderTo.data("model").properties.fetch();				
-			}			
+		
 			renderTo.data("model").set("isPublished", (pagePlaceHolder.pageState ==='PUBLISHED') ? true : false );			
 			renderTo.data("model").set("isNew", (pagePlaceHolder.pageId > 0) ? false : true );		
 			renderTo.data("model").set("updateRequired", false);		
