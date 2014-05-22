@@ -1018,8 +1018,6 @@
 					var tab_pane = $(tab_pane_id);
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
-							alert(that._objectId());
-							alert(that.options.data.pageId);
 							if(that._objectId() > 0){
 								alert(tab_pane_id + "-list-view");
 								var my_list_view = $(tab_pane_id + "-list-view");
@@ -1094,7 +1092,8 @@
 										dataSource : my_list_view.data('kendoListView').dataSource
 									});
 								}								
-								my_list_view.data('kendoListView').dataSource.read({pageId: objectId});
+								my_list_view.data('kendoListView').dataSource.read({pageId: that._objectId() });								
+							}else{
 								
 							}
 						
