@@ -56,6 +56,16 @@
 				
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">
+			<#if action.isSetNavigator()  >
+				<div class="col-lg-3 visible-lg">	
+				menu
+				
+				</div>
+				<div class="col-lg-9">		
+				content
+				
+				<div>
+			</#if>
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="page-header">
