@@ -575,7 +575,13 @@
 		<footer>  		
 		</footer>
 		<!-- END FOOTER -->
-		<script id="webpage-name-template" type="text/x-kendo-template">	
+		<script id="webpage-name-template" type="text/x-kendo-template">
+			<span class="label label-primary label-lightweight">#= name #</span>
+			<div class="btn-group btn-group-sm">
+				<a href="\\#" onclick="doPageEdit(); return false;" class="btn btn-info">편집</a>
+				<a href="\\#" onclick="openPage(); return false;" class="btn btn-info">미리보기</a>
+			</div>	
+			<!--
 			<div class="btn-group">
 			  <button type="button" class="btn btn-info btn-sm dropdown-toggle" data-toggle="dropdown">
 			    #= name # <span class="caret"></span>
@@ -586,6 +592,7 @@
 			    <li><a href="\\#" onclick="doPageDelete(); return false;">삭제</a></li>
 			  </ul>
 			</div>
+			-->
 		</script>			
 		<#include "/html/common/common-system-templates.ftl" >		
 		<#include "/html/common/common-editor-templates.ftl" >	
