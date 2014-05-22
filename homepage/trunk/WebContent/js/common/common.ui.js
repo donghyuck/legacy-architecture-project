@@ -996,21 +996,18 @@
 				var that = this;
 				return that.element.children('.modal');
 			},
+			_objectId : function(){
+				var that = this;
+				if( typeof that.options.data === 'object' ){	
+					if( that.options.data instanceof common.models.Page ){
+						return that.options.data.pageId ;
+					}
+				}
+				return 0;
+			},
 			_createDialog : function() {
 				var that = this;
 				var template = that._dialogTemplate();
-				var observable = new kendo.data.ObservableObject({ objectType: 0, objectId : 0 });				
-				if( typeof that.options.data === 'object' ){														
-					if( that.options.data instanceof common.models.Page )
-					{
-						observable.set('objectType' , 31);
-						observable.set('objectId', that.options.data.pageId);
-					}else if ( that.options.data instanceof Announce ) {
-						observable.set('objectType' , 22);
-						observable.set('objectId', that.options.data.announceId);
-					}
-				}
-				
 				that.element.html(template(that.options.guid));				
 				that.element.children('.modal').css('z-index', '2000');
 				that.element.find('.modal-body a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
@@ -1021,9 +1018,9 @@
 					var tab_pane = $(tab_pane_id);
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
-							alert(observable.objectId);
+							alert(that._objectId());
 							alert(that.options.data.pageId);
-							if( observable.objectId > 0 && observable.objectType > 0){
+							if(that._objectId() > 0){
 								alert(tab_pane_id + "-list-view");
 								var my_list_view = $(tab_pane_id + "-list-view");
 								var my_list_pager = $(tab_pane_id + "-list-pager");
