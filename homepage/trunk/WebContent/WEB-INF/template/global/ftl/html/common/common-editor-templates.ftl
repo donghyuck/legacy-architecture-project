@@ -94,7 +94,21 @@
 							<div class="tab-content">
 								<div class="tab-pane fade  active" id=#:upload_guid#>
 									<div class="page-header padding-left-10 text-primary">
-										<h5 ><i class="fa fa-upload"></i> <strong>업로드</strong>&nbsp;<small>여러개의 파일을 한번에 업로드할 수 있습니다.</small></h5>
+										<h5 ><i class="fa fa-upload"></i> <strong>업로드</strong>&nbsp;<small> 삽입할 이미지를 선택하세요.</small></h5>
+										<div class="panel panel-default">			
+											<div class="panel-body">
+												<p class="text-muted"><small><i class="fa fa-info"></i> 여러개의 파일을 한번에 업로드할 수 있습니다.</small></p>
+												<p class="pull-right">				
+													<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 사진업로드</button>																		
+												</p>											
+											</div>
+											<div class="panel-body scrollable color4" style="max-height:450px;">
+												<div id="#=upload_guid#-list-view" class="color4" ></div>
+											</div>	
+											<div class="panel-footer" style="padding:0px;">
+												<div id="#=upload_guid#-list-pager" class="k-pager-wrap"></div>
+											</div>
+										</div>						
 									</div>														  
 								</div>
 								<div class="tab-pane fade" id=#:my_guid#>
