@@ -56,7 +56,7 @@
 				
 		<!-- START MAIN CONTENT -->	
 		<div class="container layout">
-			${ action.isSetNavigator() }
+			${ action.isSetNavigator()?string}
 			<#if action.isSetNavigator()  >
 				<div class="col-lg-3 visible-lg">	
 				menu
