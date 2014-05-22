@@ -1034,7 +1034,7 @@
 												parameterMap : function(options, operation) {
 													if (operation != "read" && options) {
 														return {
-															pageId : options.pageId
+															pageId : that._objectId()
 														};
 													} else {
 														return {
