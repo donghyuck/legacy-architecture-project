@@ -1093,6 +1093,7 @@
 									});
 								}								
 								my_list_view.data('kendoListView').dataSource.read({pageId: objectId});
+								
 							}
 						
 											/*
