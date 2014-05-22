@@ -921,6 +921,7 @@
 					+ '<li class="text-muted small"><i class="fa fa-angle-right color-green"></i> 크기 : #: formattedSize() #</li>'
 					+ '<li class="text-muted small"><span class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</span></li>'
 					+ '</ul>'
+					+ '<div class="margin-bottom-20"><hr class="devider devider-dotted"></div>''
 					+ '</div>' + '</div>' + '</div>'),
 			image : template('<img src="#: url #" class="img-responsive"/>'),
 			url : template('/download/image/#= key #')
