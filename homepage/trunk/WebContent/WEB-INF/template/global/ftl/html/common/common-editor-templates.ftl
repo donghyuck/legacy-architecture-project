@@ -84,8 +84,8 @@
 							<ul class="nav nav-pills nav-stacked">
 							  <li><a href="\\##=upload_guid#" data-toggle="tab">업로드</a></li>
 							  <li><a href="\\##=my_guid#" data-toggle="tab">My 포토에서 선택</a></li>
-							  <li><a href="\\##=website_guid#" data-toggle="tab">사이트 이미지에서 선택</a></li>
-							  <li><a href="\\##=domain_guid#" data-toggle="tab">회사 이미지에서 선택</a></li>
+							  <li><a href="\\##=website_guid#" data-toggle="tab">My 사이트에서 선택</a></li>
+							  <li><a href="\\##=domain_guid#" data-toggle="tab">My 회사에서 선택</a></li>
 							  <li><a href="\\##=url_guid#" data-toggle="tab">URL에서 선택</a></li>
 							</ul>
 						</div>
@@ -97,10 +97,13 @@
 										<h5 ><i class="fa fa-upload"></i> <strong>업로드</strong>&nbsp;<small> 삽입할 이미지를 선택하세요.</small></h5>
 										<div class="panel panel-default">			
 											<div class="panel-body">
-												<p class="text-muted"><small><i class="fa fa-info"></i> 업로드 버튼을 클릭하여 여러개의 파일을 한번에 업로드할 수 있습니다.</small></p>
+												<p class="text-muted">
+													<small><i class="fa fa-info"></i> 업로드 버튼을 클릭하여 여러개의 파일을 한번에 업로드할 수 있습니다.</small>
+													<span class="pull-right"><button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button></span>			
+												</p>
 												<p class="pull-right">				
 													<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button>																		
-												</p>											
+												</p>
 											</div>
 											<div class="panel-body scrollable color4" style="max-height:450px;">
 												<div id="#=upload_guid#-list-view" class="color4" style="padding:0px; border: 0px; min-height: 200px;"></div>
