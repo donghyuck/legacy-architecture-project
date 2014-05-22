@@ -194,16 +194,20 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 			getExtendedJdbcTemplate().batchUpdate(
 				getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_PAGE_PROPERTY").getSql(), 
 				new BatchPreparedStatementSetter(){
-					public void setValues(PreparedStatement ps, int i)
-							throws SQLException {
+					public void setValues(PreparedStatement ps, int i) throws SQLException {
 						ps.setLong(1, page.getPageId());
 						ps.setLong(2,  page.getVersionId());
 						String key = addedKeys.get(i);
+						String value = page.getProperty(key, null);
+						
+						log.debug("batch[" + key + "=" + value +  "]");
+						
 						ps.setString(3, key);
-						ps.setString(4, page.getProperties().get(key));
+						ps.setString(4, value );
+												
 					}
 					public int getBatchSize() {
-						return modifiedKeys.size();
+						return addedKeys.size();
 					}					
 				}
 			);	
