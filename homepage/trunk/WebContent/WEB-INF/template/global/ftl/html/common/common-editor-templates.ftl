@@ -82,7 +82,7 @@
 						<div class="col-sm-3">
 							<!-- Nav tabs -->
 							<ul class="nav nav-pills nav-stacked">
-							  <li class="active"><a href="\\##=upload_guid#" data-toggle="tab">업로드</a></li>
+							  <li><a href="\\##=upload_guid#" data-toggle="tab">업로드</a></li>
 							  <li><a href="\\##=my_guid#" data-toggle="tab">My 포토에서 선택</a></li>
 							  <li><a href="\\##=website_guid#" data-toggle="tab">사이트 이미지에서 선택</a></li>
 							  <li><a href="\\##=domain_guid#" data-toggle="tab">회사 이미지에서 선택</a></li>
