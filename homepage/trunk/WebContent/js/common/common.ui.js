@@ -1020,7 +1020,9 @@
 					var tab_pane_id = $(e.target).attr('href');
 					var tab_pane = $(tab_pane_id);
 					switch (tab_pane_id) {
-						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:							
+						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
+							alert(objectId);
+							alert(that.options.data.announceId);
 							if( objectId > 0 && objectType > 0){
 								alert(tab_pane_id + "-list-view");
 								var my_list_view = $(tab_pane_id + "-list-view");
