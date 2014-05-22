@@ -58,27 +58,35 @@
 		<div class="container layout">
 			${ action.isSetNavigator()?string}, ${targetPage.pageId} , ${targetPage.properties}
 			<#if action.isSetNavigator()  >
+			<#assign current_menu = action.getNavigator() />
+			<div class="row">
 				<div class="col-lg-3 visible-lg">	
-				menu
-				
+					<#list current_menu.parent.components as item >
+						<#if item.name ==  current_menu.name >
+						<a href="${item.page}" class="list-group-item active">${ item.title } </a>
+						<#else>
+						<a href="${item.page}" class="list-group-item">${ item.title } </a>
+						</#if>						
+					</#list>
 				</div>
 				<div class="col-lg-9">		
-				content
-				
-				<div>
-			</#if>
+					<div class="content-main-section">
+					${ action.processedBodyText }
+					</div>
+				</div>
+			<div>
+			<#else>
 			<div class="row">
 				<div class="col-sm-12">
-					<div class="page-header">
-						<h2>${action.targetPage.title}</h2>
-					</div>				
+					<div class="content-main-section">
+						<div class="page-header">
+							<h2>${action.targetPage.title}</h2>
+						</div>			
+						${ action.processedBodyText }			
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-				${ action.processedBodyText }		
-				</div>
-			</div>
+			</div>	
+			</#if>
 		</div>
 		<!-- END MAIN CONTENT -->	
  		<!-- START FOOTER -->
