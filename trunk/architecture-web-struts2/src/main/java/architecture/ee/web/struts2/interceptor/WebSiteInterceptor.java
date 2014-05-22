@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.StrutsStatics;
 
 import architecture.ee.web.site.WebSiteNotFoundException;
+import architecture.ee.web.site.support.WebSiteAware;
 import architecture.ee.web.util.WebSiteUtils;
 
 import com.opensymphony.xwork2.ActionContext;
