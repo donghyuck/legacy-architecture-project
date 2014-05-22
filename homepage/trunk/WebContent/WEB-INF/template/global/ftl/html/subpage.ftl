@@ -60,6 +60,8 @@
 			<#assign current_menu = action.getNavigator() />
 			<div class="row">
 				<div class="col-lg-3 visible-lg">	
+					<div class="headline"><h4> 회사소개 </h4></div>  
+                	<p class="margin-bottom-25"></p>					
 					<#list current_menu.parent.components as item >
 						<#if item.name ==  current_menu.name >
 						<a href="${item.page}" class="list-group-item active">${ item.title } </a>
