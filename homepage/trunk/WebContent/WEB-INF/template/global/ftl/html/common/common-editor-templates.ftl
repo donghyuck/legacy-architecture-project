@@ -101,24 +101,7 @@
 													<small><i class="fa fa-info"></i> 업로드 버튼을 클릭하여 여러개의 파일을 한번에 업로드할 수 있습니다.</small>
 													<span class="pull-right"><button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button></span>			
 												</p>
-												<div id="#=upload_guid#-selected-image" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;">
-													<div class="row">
-														<div class="col-xs-4">
-															<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">
-														</div>
-														<div class="col-xs-8">
-															
-															<h5><span class="label label-warning label-lightweight">image/jpeg</span> a.png <small>(12,222 bytes)</small></h5>
-															<ul class="list-unstyled">
-																<li></li>
-																<li><i class="fa fa-user color-green"></i> Jack Baur</li>
-																<li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
-																<li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
-																<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>
-															</ul>
-														</div>
-													</div>
-												</div>
+												<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
 											</div>
 											<div class="panel-body scrollable color4" style="max-height:450px;">
 												<div id="#=upload_guid#-list-view" class="color4" style="padding:0px; border: 0px; min-height: 200px;"></div>
@@ -134,6 +117,9 @@
 										<h5 ><i class="fa fa-picture-o"></i> <strong>MY 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
 									</div>
 									<div class="panel panel-default panel-flat">								
+										<div class="panel-body">	
+											<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
+										</div>
 										<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
 											<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
 										</div>	
@@ -146,7 +132,10 @@
 								<div class="page-header padding-left-10 text-primary">
 									<h5 ><i class="fa fa-picture-o"></i> <strong>도메인 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
 								</div>		
-								<div class="panel panel-default panel-flat">								
+								<div class="panel panel-default panel-flat">			
+									<div class="panel-body">	
+										<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
+									</div>													
 									<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
 										<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
 									</div>	
@@ -160,6 +149,9 @@
 									<h5 ><i class="fa fa-picture-o"></i> <strong>사이트 이미지</strong>&nbsp;<small>삽입할 이미지를 선택하세요.</small></h5>
 								</div>		
 								<div class="panel panel-default panel-flat">								
+									<div class="panel-body">	
+										<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
+									</div>									
 									<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
 										<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
 									</div>	
