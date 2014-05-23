@@ -221,10 +221,15 @@
 			<div class="page-heading">
 				<h4 data-bind="html:topic.subject"></h4>		
 				<hr class="devider">
+				<ul class="list-unstyled">
+					<li><i class="fa fa-angle-right color-green"></i> <span data-bind="text: topic.viewCnt"></span></li>
+					<li><i class="fa fa-calendar color-green"></i> <span data-bind="text: topic.formattedCreationDate"></span></li>
+					<li><i class="fa fa-tags color-green"></i></li></ul>
+				
 				<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
 				<p class="text-muted">
 					<span class="label label-default label-lightweight">게시일</span> <small><span data-bind="text: topic.formattedCreationDate"></span> </small>
-					<span class="label label-default label-lightweight">수정일</span> <small><span data-bind="text: announce.formattedModifiedDate"></span> </small>
+					<span class="label label-default label-lightweight">조회수</span> <small><span data-bind="text: announce.formattedModifiedDate"></span> </small>
 				</p>
 			</div>													
 			<div class="media">
