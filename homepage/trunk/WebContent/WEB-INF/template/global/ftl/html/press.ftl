@@ -79,7 +79,7 @@
 						}
 					},
 					dataBound: function(e) {		
-					
+						kendo.fx($('#topic-viewer-panel')).slideIn("down").reverse();
 					}			
 				});									
 				<#if !action.user.anonymous >				
