@@ -106,7 +106,7 @@
 				var topicModel = kendo.observable({
 					topic : topicPlaceHolder
 				});
-				topicModel.set( "authorPhotoUrl", "${request.contextPath}/download/profile/" + this.topic.user.username + "?width=150&height=150" ); 
+				topicModel.set( "authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" ); 
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
 			//kendo.bind( renderTo , topicPlaceHolder );
