@@ -173,7 +173,11 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
-					<div id="topic-grid"></div>					
+					<div class="page-header padding-left-10">
+						<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
+					</div>						
+					<div id="topic-grid"></div>		
+								
 				</div>				
 			</div>
 			<div id="news-panel" class="custom-panels-group col-sm-6" >
