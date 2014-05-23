@@ -20,6 +20,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -28,6 +29,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileObject;
+import org.apache.commons.vfs2.FileSelectInfo;
+import org.apache.commons.vfs2.FileSelector;
+import org.apache.commons.vfs2.FileSystemException;
 
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.util.StringUtils;
@@ -93,19 +97,51 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		builder.build();
 	}
 	
-	protected void loadResourceLocations() {
+	protected void loadResourceLocations() {		
+		List<FileObject> list = new ArrayList<FileObject>();		
 		for (String path : resourceLocations) {
 			try {
-				FileObject fo = VFSUtils.resolveFile(path);
-				if (fo.exists()) {
-					if (!configuration.isResourceLoaded(fo.getName().getURI())) {
-						buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
-						configuration.addLoadedResource(fo.getName().getURI());
-					}
+				FileObject f = VFSUtils.resolveFile(path);
+				if (f.exists()) {
+					list.add(f);
 				}
 			} catch (Throwable e) {
 				log.warn(path + " not found.", e);
 			}
+		}		
+		try {
+			log.debug("searching sql in jar...");
+			
+			FileObject fo = VFSUtils.resolveFile("res:sql/");
+			
+			FileObject[] selected = fo.findFiles(new FileSelector(){
+				public boolean includeFile(FileSelectInfo fileInfo) throws Exception {
+					FileObject f = fileInfo.getFile();
+					log.debug("varifing : " + f.getName() );
+					return StringUtils.endsWith(f.getName().getBaseName(), DEFAULT_FILE_SUFFIX);	
+				}
+				public boolean traverseDescendents(FileSelectInfo fileInfo) throws Exception {
+					return false;
+				}});			
+			for( FileObject f : selected ){
+				if( ! list.contains(f) ){
+					list.add(f);
+				}				
+			}			
+		} catch (Throwable e) {
+			log.warn(e);
+		}
+		
+		for( FileObject fo : list){
+			try {
+				log.debug("sql : " + fo.getName() );
+				if (!configuration.isResourceLoaded(fo.getName().getURI())) {
+					buildSqlFromInputStream(fo.getContent().getInputStream(), configuration);
+					configuration.addLoadedResource(fo.getName().getURI());
+				}
+			} catch (FileSystemException e) {
+				log.warn(e);
+			}			
 		}
 	}
 	
