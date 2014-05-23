@@ -189,6 +189,7 @@
 							<h5><small>게시일 순서로 뉴스가 보여집니다.</small></h5>
 						</div>						
 						<div id="topic-grid"></div>		
+						<div class="margin-bottom-40"></div>
 						<div class="panel panel-default" style="margin-bottom: 20px;">
 							<div class="panel-body">													
 								<div id="topic-viewer"></div>
