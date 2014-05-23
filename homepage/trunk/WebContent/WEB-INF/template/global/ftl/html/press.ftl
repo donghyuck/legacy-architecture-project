@@ -104,9 +104,9 @@
 			if( renderTo.text().length == 0 ){
 				renderTo.html($('#topic-viewer-template').html());
 				var topicModel = kendo.observable({
-					topic : topicPlaceHolder
+					topic : topicPlaceHolder,
+					authorPhotoUrl : "${request.contextPath}/download/profile/inkium?width=150&height=150"
 				});
-				topicModel.set( "authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" ); 
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
