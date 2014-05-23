@@ -127,18 +127,21 @@
 		-->
 		</script>		
 		<style scoped="scoped">
-		blockquote p {
-			font-size: 15px;
-		}
 
 		.k-grid table tr.k-state-selected{
 			background: #428bca;
 			color: #ffffff; 
 		}
 		
-		#announce-view .popover {
-			position : relative;
-			max-width : 500px;
+		#topic-grid .k-grid-header .k-header {
+			text-align: center;
+		}
+
+		.content-main-section {
+			/** background: #F98262;	 */	
+			width: 100%;
+			height: 100%;
+			min-height:500px;
 		}
 						
 		</style>   	
@@ -173,11 +176,12 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
-					<div class="page-header padding-left-10">
-						<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
-					</div>						
-					<div id="topic-grid"></div>		
-								
+					<div class="content-main-section">
+						<div class="page-header padding-left-10">
+							<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
+						</div>						
+						<div id="topic-grid"></div>		
+					</div>				
 				</div>				
 			</div>
 			<div id="news-panel" class="custom-panels-group col-sm-6" >
