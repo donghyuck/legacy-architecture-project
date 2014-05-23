@@ -109,13 +109,14 @@
 					topic : topicPlaceHolder,
 					authorPhotoUrl : "${request.contextPath}/download/profile/inkium?width=150&height=150",
 					show : function(){
+						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).reverse();
 						kendo.fx($('#topic-viewer-panel')).slideIn("down").play();	
 						this.shown = true;
 					},
 					shown : false,
 					hide : function () {
 						kendo.fx($('#topic-viewer-panel')).slideIn("down").reverse();	
-						//kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
+						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 						this.shown = false;
 					},
 					scrollup:function(e){
