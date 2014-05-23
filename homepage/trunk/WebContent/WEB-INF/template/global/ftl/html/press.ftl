@@ -105,7 +105,7 @@
 				renderTo.html($('#topic-viewer-template').html());
 				var topicModel = kendo.observable({
 					topic : topicPlaceHolder,
-					userPhotoUrl : "${request.contextPath}/download/profile/" + this.topic.user.username + "?width=150&height=150"
+					authorPhotoUrl : "${request.contextPath}/download/profile/" + this.topic.user.username + "?width=150&height=150"
 				});
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
