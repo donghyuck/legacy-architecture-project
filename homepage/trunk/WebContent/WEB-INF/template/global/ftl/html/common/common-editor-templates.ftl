@@ -101,7 +101,7 @@
 													<small><i class="fa fa-info"></i> 업로드 버튼을 클릭하여 여러개의 파일을 한번에 업로드할 수 있습니다.</small>
 													<span class="pull-right"><button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button></span>			
 												</p>
-												<div class="tag-box tag-box-v4" style="margin: 20px 0 0 0;">
+												<div id="#=upload_guid#-selected-image" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;">
 													<!--<button type="button" class="close" data-dismiss="alert">×</button>-->
 													<div class="row">
 														<div class="col-xs-4">
