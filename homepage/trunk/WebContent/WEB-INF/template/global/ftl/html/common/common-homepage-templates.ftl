@@ -499,6 +499,30 @@
 	</tr>
 </script>
 
+
+
+<!-- ============================== -->
+<!-- news viewer template                          -->
+<!-- ============================== -->
+<script type="text/x-kendo-tmpl" id="news-viewer-template">		
+	<div class="page-heading">
+		<h4 data-bind="html:news.subject"></h4>		
+	</div>													
+	<div class="media">
+		<a class="pull-left" href="\\#">
+			<img data-bind="attr:{ src: profilePhotoUrl }" width="30" height="30" class="img-rounded">
+		</a>
+		<div class="media-body">
+			<h5 class="media-heading">																	
+				<p><span data-bind="visible:news.user.nameVisible, text: news.user.name"></span> <code data-bind="text: news.user.username"></code></p>
+				<p data-bind="visible:news.user.emailVisible, text: news.user.email"></p>
+			</h5>		
+		</div>
+		<div data-bind="html: news.content " />
+	</div>	
+</script>
+
+
 <!-- ============================== -->
 <!-- my socialnetwork view panel template          -->
 <!-- ============================== -->
