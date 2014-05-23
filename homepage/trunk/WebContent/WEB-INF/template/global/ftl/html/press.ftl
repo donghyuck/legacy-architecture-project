@@ -92,13 +92,12 @@
 			jQuery.ajax({	
 				url : '${request.contextPath}/community/update-topic-view-count.do?output=json&topicId='+topicId
 				}).done(function(data){
-					//alert('카운트 증가');
-					
-					showNewsPanel(); // 상세 화면 호출
+					//alert('카운트 증가');					
+					displayTopic(); // 상세 화면 호출
 				});
 		}
 		
-		function showNewsPanel (){			
+		function displayTopic (){			
 			var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); // 데이터 GET
 			//alert(newsPlaceHolder.subject);
 			var template = kendo.template($('#news-view-template').html()); // 템플릿 GET
