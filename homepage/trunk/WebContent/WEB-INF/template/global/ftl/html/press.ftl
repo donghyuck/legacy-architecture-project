@@ -101,7 +101,7 @@
 			var renderToString = "topic-viewer";
 			var renderTo = $("#"+ renderToString );	
 			if( renderTo.text().length == 0 ){
-				alert( "create" );
+				renderTo.html($('#topic-viewer-template').html());
 			}
 		}
 		
