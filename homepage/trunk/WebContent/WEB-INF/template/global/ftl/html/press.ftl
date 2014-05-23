@@ -115,7 +115,7 @@
 					shown : false,
 					hide : function () {
 						kendo.fx($('#topic-viewer-panel')).slideIn("down").reverse();	
-						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
+						//kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 						this.shown = false;
 					},
 					scrollup:function(e){
