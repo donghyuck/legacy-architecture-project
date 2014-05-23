@@ -107,11 +107,17 @@
 				renderTo.html($('#topic-viewer-template').html());
 				var topicModel = kendo.observable({
 					topic : topicPlaceHolder,
-					authorPhotoUrl : "${request.contextPath}/download/profile/inkium?width=150&height=150"
+					authorPhotoUrl : "${request.contextPath}/download/profile/inkium?width=150&height=150",
+					show : function(){
+						kendo.fx($('#topic-viewer-panel')).slideIn("down").play();	
+					},
+					hide : fucntion () {
+						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
+					}
 				});
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
-				kendo.fx($('#topic-viewer-panel')).slideIn("down").play();
+				
 			}
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 		}
