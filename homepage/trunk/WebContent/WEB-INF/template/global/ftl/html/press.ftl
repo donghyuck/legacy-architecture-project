@@ -117,7 +117,7 @@
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 						this.shown = false;
 					},
-					scrollUp : function(e){
+					scrollUp:function(e){
 						$('html,body').animate({ scrollTop:  0 }, 300);
 					},
 					scrollDown : function(e){
@@ -267,7 +267,7 @@
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 			<div class="pull-right">
-				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{ click: scrollUp }><i class="fa fa-angle-double-up"></i> 목록</button>		
+				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{ click:scrollUp }><i class="fa fa-angle-double-up"></i> 목록</button>		
 			</div>			
 		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
