@@ -176,7 +176,7 @@
 					<div id="topic-grid"></div>					
 				</div>				
 			</div>
-				<div id="news-panel" class="custom-panels-group col-sm-6" >
+			<div id="news-panel" class="custom-panels-group col-sm-6" >
 				<div class="panel-body">					
 					<div  id="news-view"></div>
 				</div>
