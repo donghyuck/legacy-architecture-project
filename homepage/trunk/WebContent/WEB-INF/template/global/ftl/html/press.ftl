@@ -235,7 +235,7 @@
 				</div>		
 			</div>	
 			<div class="margin-bottom-20"><hr class="devider"></div>
-			<div data-bind="html: announce.body " />
+			<div data-bind="html:content"></div>
 	
 /**
 					
