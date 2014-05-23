@@ -115,10 +115,15 @@
 					shown : false,
 					hide : function () {
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
-						this.shown = true;
+						this.shown = false;
+					},
+					scrollUp : function(e){
+						$('html,body').animate({ scrollTop:  0 }, 300);
+					},
+					scrollDown : function(e){
+						$('html,body').animate({scrollTop: renderTo.offset().top - 80 }, 300);
 					}
-				});
-				
+				});				
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
