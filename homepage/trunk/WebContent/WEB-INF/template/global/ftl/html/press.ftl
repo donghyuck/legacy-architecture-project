@@ -34,8 +34,7 @@
 					}				
 				});			
 
-				$("#news-panel").data( "newsPlaceHolder", new common.models.ForumTopic () );
-								
+				$("#news-panel").data( "newsPlaceHolder", new common.models.ForumTopic () );								
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -61,7 +60,7 @@
 						}
 					}),	
 					columns: [
-						{field: "topicId", title: "ID", sortable : false , width:100 , attributes: { "class": "table-cell", style: "text-align: center " }},
+						{field: "topicId", title: "ID", sortable : false , width:80 , attributes: { "class": "table-cell", style: "text-align: center " }},
 						{field: "subject", title: "제목", sortable : false, template: '<span class="label label-warning label-lightweight rounded">#= $.timeago(creationDate) #</span> #: subject #' },						
 						{field: "viewCnt", title: "조회수", width: "100px", sortable : false, attributes: { "class": "table-cell", style: "text-align: center " } },
 						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " } }
@@ -73,9 +72,6 @@
 					change: function(e) { 
 						var selectedCells = this.select();
 						var selectedCell = this.dataItem( selectedCells );	
-						//alert( kendo.stringify(selectedCell) );
-						//alert(selectedCell.topicId);
-						
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	    							
 							var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); 
@@ -83,8 +79,6 @@
 							$("#news-panel").data( "newsPlaceHolder", newsPlaceHolder ); // 로우 데이터 저장							 
 							updateViewCount(selectedCell.topicId);
 						}
-								
-											
 					}			
 				});		
 								
