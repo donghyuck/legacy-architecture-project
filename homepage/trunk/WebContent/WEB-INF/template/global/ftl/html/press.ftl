@@ -249,35 +249,7 @@
 			<div data-bind="html:topic.content"></div>
 			<div class="pull-right">
 				<button  type="button" class="btn btn-info btn-sm custom-list "><i class="fa fa-angle-double-up"></i> 목록</button>		
-			</div>	
-/**
-					
-			<div class="page-heading">
-				<h4 data-bind="html:subject"></h4>				
 			</div>			
-			<div class="media">
-				<a class="pull-left" href="\\#">
-				<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
-				</a>
-				<div class="media-body">
-					<h5 class="media-heading">
-						# if( user.nameVisible ){#
-						#: user.name # (#: user.username #)
-						# } else { #
-						#: user.username #
-						# } # 		
-						# if( user.emailVisible ){#
-						<br>(#: user.email #)
-						# } #	
-					</h5>		
-				</div>
-			</div>				
-			<div class="blank-top-5" ></div>
-			<div data-bind="html:content"></div>	
-			<div class="blank-top-5" ></div>
-			
-			**/
-			
 		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
