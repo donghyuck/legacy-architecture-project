@@ -79,8 +79,8 @@
 						}
 					},
 					dataBound: function(e) {		
-						if( $('#topic-viewer').text().length> 0 ) 
-							kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
+						if( $('#topic-viewer').data("model") != null ) 
+							$('#topic-viewer').data("model").hide();
 					}			
 				});									
 				<#if !action.user.anonymous >				
@@ -115,9 +115,10 @@
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 					}
 				});
+				
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
-				
+				topicModel.show();
 			}
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 		}
