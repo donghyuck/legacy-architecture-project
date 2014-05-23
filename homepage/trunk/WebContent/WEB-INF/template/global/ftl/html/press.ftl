@@ -78,6 +78,9 @@
 							$("#news-panel").data( "newsPlaceHolder", newsPlaceHolder ); // 로우 데이터 저장							 
 							updateViewCount(selectedCell.topicId);
 						}
+					},
+					dataBound: function(e) {		
+					
 					}			
 				});									
 				<#if !action.user.anonymous >				
