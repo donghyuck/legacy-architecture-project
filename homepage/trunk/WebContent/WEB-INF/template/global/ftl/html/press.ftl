@@ -35,6 +35,7 @@
 					}				
 				});	
 						
+				var forumId = 1;		
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -47,7 +48,7 @@
 								if (operation != "read" && options.models) {
 									return {models: kendo.stringify(options.models)};
 								}else{
-									return {forumId:1}
+									return {forumId: forumId}
 								}
 							},
 						},
