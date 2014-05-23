@@ -267,6 +267,77 @@ img.img-full-height {
   border: solid 1px #eee;
 }
 
+
+/*Tag Boxes
+------------------------------------*/
+.tag-box  {
+  /* padding: 20px; */
+  /* background: #fff; */
+  /* margin-bottom: 30px; */
+}
+
+.tag-box h2 {
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.tag-box p {
+  margin-bottom: 0;
+}
+
+.tag-box.tag-text-space p {
+  margin-bottom: 10px;
+}
+
+/*Tag Boxes v1*/
+.tag-box-v1 {
+  border: solid 1px #eee;
+  border-top: solid 2px #72c02c;
+}
+
+/*Tag Boxes v2*/
+.tag-box-v2 {
+  background: #fafafa;
+  border: solid 1px #eee;
+  border-left: solid 2px #72c02c;
+}
+
+/*Tag Boxes v3*/
+.tag-box-v3 {
+  border: solid 2px #eee;
+}
+
+/*Tag Boxes v4*/
+.tag-box-v4 {
+  /* border: dashed 1px #bbb; */
+}
+
+/*Tag Boxes v5*/
+.tag-box-v5 {
+  margin: 20px 0;
+  text-align: center;
+  border: dashed 1px #ccc;
+}
+
+.tag-box-v5 span {
+  color: #555;
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+/*Tag Boxes v6*/
+.tag-box-v6 {
+  background: #fafafa;
+  border: solid 1px #eee; 
+}
+
+/*Tag Boxes v7*/
+.tag-box-v7 {
+  border: solid 1px #eee;
+  border-bottom: solid 2px #72c02c;
+}
+
+
 /*Typography
 ------------------------------------*/
 /*Text Dropcap*/
@@ -474,6 +545,40 @@ img.img-full-height {
 .color-light-grey { color: #585f69;}
 .color-light-green { color: #79d5b3;}
 
+/*Background Colors
+------------------------------------*/
+.bg-color-dark,
+.bg-color-sea,
+.bg-color-red,
+.bg-color-aqua,
+.bg-color-blue,
+.bg-color-grey,
+.bg-color-green,
+.bg-color-brown,
+.bg-color-orange,
+.bg-color-green1,
+.bg-color-purple,
+.bg-color-dark-blue,
+.bg-color-light-grey,
+.bg-color-light-green {
+  color: #fff;
+}
+.bg-color-dark { background-color: #555;}
+.bg-color-sea { background-color: #1abc9c;}
+.bg-color-red { background-color: #e74c3c;}
+.bg-color-aqua { background-color: #27d7e7;}
+.bg-color-blue { background-color: #3498db;}
+.bg-color-grey { background-color: #95a5a6;}
+.bg-color-green { background-color: #72c02c;}
+.bg-color-brown { background-color: #9c8061;}
+.bg-color-orange { background-color: #e67e22;}
+.bg-color-green1 { background-color: #2ecc71;}
+.bg-color-purple { background-color: #9b6bcc;}
+.bg-color-dark-blue { background-color: #4765a0;}
+.bg-color-light-grey { background-color: #585f69;}
+.bg-color-light-green { background-color: #79d5b3;}
+
+
 /*Rounded and Circle Classes
 ------------------------------------*/
 .rounded { border-radius: 4px !important;}
@@ -486,77 +591,20 @@ img.img-full-height {
 .rounded-right { border-radius: 0 4px 4px 0 !important;}
 .rounded-bottom { border-radius: 0 0 4px 4px !important;}
 
-.unrounded { border-radius: 0 !important; }
 
-
-/*Tag Boxes
+/*Others
 ------------------------------------*/
-.tag-box  {
-  /* padding: 20px; */
-  /* background: #fff; */
-  /* margin-bottom: 30px; */
-}
+.overflow-h { overflow: hidden;}
+.overflow-a { overflow: auto;}
+.overflow-hidden { overflow:hidden;}
 
-.tag-box h2 {
-  font-size: 20px;
-  line-height: 25px;
-}
+.lft-img-margin { margin:0 20px 5px 0;}
+.rgt-img-margin { margin:0 0 5px 10px;}
 
-.tag-box p {
-  margin-bottom: 0;
-}
+.padding-left-5 { padding-left:5px;}
+.img-width-200 { width:200px;}
 
-.tag-box.tag-text-space p {
-  margin-bottom: 10px;
-}
-
-/*Tag Boxes v1*/
-.tag-box-v1 {
-  border: solid 1px #eee;
-  border-top: solid 2px #72c02c;
-}
-
-/*Tag Boxes v2*/
-.tag-box-v2 {
-  background: #fafafa;
-  border: solid 1px #eee;
-  border-left: solid 2px #72c02c;
-}
-
-/*Tag Boxes v3*/
-.tag-box-v3 {
-  border: solid 2px #eee;
-}
-
-/*Tag Boxes v4*/
-.tag-box-v4 {
-  /* border: dashed 1px #bbb; */
-}
-
-/*Tag Boxes v5*/
-.tag-box-v5 {
-  margin: 20px 0;
-  text-align: center;
-  border: dashed 1px #ccc;
-}
-
-.tag-box-v5 span {
-  color: #555;
-  font-size: 28px;
-  margin-bottom: 0;
-}
-
-/*Tag Boxes v6*/
-.tag-box-v6 {
-  background: #fafafa;
-  border: solid 1px #eee; 
-}
-
-/*Tag Boxes v7*/
-.tag-box-v7 {
-  border: solid 1px #eee;
-  border-bottom: solid 2px #72c02c;
-}
+.unrounded { border-radius: 0 !important; }
 
 /* -------------------------------------------- */
 /* Bootstrap customize                             */
