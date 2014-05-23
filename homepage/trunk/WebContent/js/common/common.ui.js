@@ -1035,12 +1035,11 @@
 					var tab_pane_id = $(e.target).attr('href');
 					var tab_pane = $(tab_pane_id);
 					var my_selected = $(tab_pane_id + "-selected");
-					
+					var my_list_view = $(tab_pane_id + "-list-view");
+					var my_list_pager = $(tab_pane_id + "-list-pager");						
 					switch (tab_pane_id) {
 						case "#" + that.options.guid[TAB_PANE_UPLOAD_ID]:					
-							if(that._objectId() > 0){
-								var my_list_view = $(tab_pane_id + "-list-view");
-								var my_list_pager = $(tab_pane_id + "-list-pager");								
+							if(that._objectId() > 0){							
 								// list view 
 								if (!my_list_view.data('kendoListView')) {
 									my_list_view.kendoListView({
@@ -1203,11 +1202,8 @@
 										*/									
 							break;
 						case "#" + that.options.guid[TAB_PANE_DOMAIN_ID]:
-											// domain images
-											
-											var my_list_view = tab_pane.find('.panel-body div');
-											var my_list_pager = tab_pane.find('.panel-footer div');
-											if (!my_list_view.data('kendoListView')) {
+							// domain images
+							if (!my_list_view.data('kendoListView')) {
 												my_list_view.kendoListView({
 															dataSource : {
 																type : 'json',
@@ -1287,12 +1283,10 @@
 												my_list_view.data(
 														'kendoListView')
 														.clearSelection();
-											}
-											break;
+							}
+							break;
 						case "#" + that.options.guid[TAB_PANE_WEBSITE_ID]:
 							// website images
-							var my_list_view = tab_pane.find('.panel-body div');
-							var my_list_pager = tab_pane.find('.panel-footer div');
 							if (!my_list_view.data('kendoListView')) {
 								my_list_view.kendoListView({
 									dataSource : {
@@ -1362,8 +1356,6 @@
 							}
 							break;
 						case "#"+ that.options.guid[TAB_PANE_MY_ID]:
-							var my_list_view = $(tab_pane_id + "-list-view");
-							var my_list_pager = $(tab_pane_id + "-list-pager");		
 							if (!my_list_view.data('kendoListView')) {
 								my_list_view.kendoListView({
 									dataSource : {
