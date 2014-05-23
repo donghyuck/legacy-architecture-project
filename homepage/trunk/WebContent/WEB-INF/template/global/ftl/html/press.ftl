@@ -224,23 +224,25 @@
 				<ul class="list-unstyled">
 					<li><span class="label label-info label-lightweight">조회수</span> <code data-bind="text: topic.viewCnt"></code></li>
 					<li><span class="label label-info label-lightweight">게시일</span> <span class="text-muted" data-bind="text: topic.formattedCreationDate"></span></li>
-					<li><i class="fa fa-tags color-green"></i></li>
+					<li>
+						<div class="media">
+							<a class="pull-left" href="\\#">
+								<img data-bind="attr:{ src: topic.user.photoUrl }" width="30" height="30" class="img-rounded">
+								
+								<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
+								
+							</a>
+							<div class="media-body">
+								<h5 class="media-heading">																	
+									<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
+									<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
+								</h5>		
+							</div>		
+						</div>						
+					</li>
 				</ul>
 			</div>													
-			<div class="media">
-				<a class="pull-left" href="\\#">
-					<img data-bind="attr:{ src: topic.user.photoUrl }" width="30" height="30" class="img-rounded">
-					
-					<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
-					
-				</a>
-				<div class="media-body">
-					<h5 class="media-heading">																	
-						<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
-						<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
-					</h5>		
-				</div>		
-			</div>	
+			
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 	
