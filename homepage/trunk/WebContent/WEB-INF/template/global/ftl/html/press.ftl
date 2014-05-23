@@ -111,7 +111,7 @@
 					show : function(){
 						kendo.fx($('#topic-viewer-panel')).slideIn("down").play();	
 					},
-					hide : fucntion () {
+					hide : function () {
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 					}
 				});
