@@ -102,7 +102,7 @@
 													<span class="pull-right"><button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button></span>			
 												</p>
 												<div class="tag-box tag-box-v4" style="margin: 20px 0 0 0;">
-													<button type="button" class="close" data-dismiss="alert">×</button>
+													<!--<button type="button" class="close" data-dismiss="alert">×</button>-->
 													<h2>Expedita distinctio lorem ipsum!</h2>
 													<p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
 												</div>
