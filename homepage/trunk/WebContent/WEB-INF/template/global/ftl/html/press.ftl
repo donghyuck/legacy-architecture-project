@@ -219,7 +219,7 @@
 		<!-- START TEMPLATE -->		
 		<script type="text/x-kendo-tmpl" id="topic-viewer-template">		
 			<div class="page-heading">
-				<h4 data-bind="html:subject"></h4>		
+				<h4 data-bind="html:topic.subject"></h4>		
 				<hr class="devider">
 				<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
 				<p class="text-muted">
@@ -229,17 +229,17 @@
 			</div>													
 			<div class="media">
 				<a class="pull-left" href="\\#">
-					<img data-bind="attr:{ src: user.photoUrl() }" width="30" height="30" class="img-rounded">
+					<img data-bind="attr:{ src: topic.user.photoUrl }" width="30" height="30" class="img-rounded">
 				</a>
 				<div class="media-body">
 					<h5 class="media-heading">																	
-						<p><span data-bind="visible:announce.user.nameVisible, text: announce.user.name"></span> <code data-bind="text: announce.user.username"></code></p>
-						<p data-bind="visible:announce.user.emailVisible, text: announce.user.email"></p>
+						<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
+						<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
 					</h5>		
 				</div>		
 			</div>	
 			<div class="margin-bottom-20"><hr class="devider"></div>
-			<div data-bind="html:content"></div>
+			<div data-bind="html:topic.content"></div>
 	
 /**
 					
