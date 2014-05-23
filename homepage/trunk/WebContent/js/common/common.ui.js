@@ -910,7 +910,7 @@
 			selected : template(
 				'<div class="row">' +
 				'<div class="col-xs-4">'+
-				'<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">' +
+				'<img "/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#" class="img-responsive">' +
 				'</div>' +
 				'<div class="col-xs-8">' +						
 				'<h5><span class="label label-warning label-lightweight">#: contentType #</span> #:name# <small>(#: formattedSize() #)</small></h5>' +
