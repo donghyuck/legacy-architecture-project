@@ -103,8 +103,15 @@
 												</p>
 												<div class="tag-box tag-box-v4" style="margin: 20px 0 0 0;">
 													<!--<button type="button" class="close" data-dismiss="alert">×</button>-->
-													<h2>Expedita distinctio lorem ipsum!</h2>
-													<p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
+													<div class="row">
+														<div class="col-xs-4">
+															<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">
+														</div>
+														<div class="col-xs-8">
+															<h4>선택된 이미지</h4>
+															<p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
+														</div>
+													</div>
 												</div>
 											</div>
 											<div class="panel-body scrollable color4" style="max-height:450px;">
