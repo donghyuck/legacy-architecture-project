@@ -61,7 +61,7 @@
 					}),	
 					columns: [
 						/*{field: "topicId", title: "ID", sortable : false , width:80 , attributes: { "class": "table-cell", style: "text-align: center " }},*/
-						{field: "subject", title: "제목", sortable : false, template: '#: subject # <span class="label label-warning label-lightweight rounded">#= $.timeago(creationDate) #</span>' },						
+						{field: "subject", title: "제목", sortable : false, template: '#: subject # <span class="label label-success label-lightweight rounded">#= $.timeago(creationDate) #</span>' },						
 						{field: "viewCnt", title: "조회수", width: "100px", sortable : false, attributes: { "class": "table-cell", style: "text-align: center " } },
 						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " } }
 					],
@@ -138,32 +138,7 @@
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 			renderTo.data("model").scrolldown();
 		}
-		
-		function updateViewCount(topicId){
-			// jquery http send
-			$.ajax({	
-				url : '${request.contextPath}/community/update-topic-view-count.do?output=json&topicId='+topicId
-			});
-		}
-		
-		function displayTopic2 (){			
-			var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); 
-			//alert(newsPlaceHolder.subject);
-			var template = kendo.template($('#news-view-template').html()); // 템플릿 GET
-			console.log('1');
-			$("#news-view").html( template(newsPlaceHolder) );	 //html 세팅
-			console.log('2');
-			kendo.bind($("#news-view"), newsPlaceHolder );	//데이터 바인딩
-			console.log('3');
-			$("#news-view button[class*=custom-list]").click( function (e){
-					$('html,body').animate({ scrollTop:  0 }, 300);
-			} ); //목록 버튼 이벤트 설정
-			console.log('4');
-			$('html,body').animate({scrollTop: $("#news-view").offset().top - 80 }, 300); // 화면이동 이벤트
-			console.log('5');
-			//alert($('#news-view').html());	
-		}
-				
+						
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -228,11 +203,6 @@
 						</div>
 					</div>				
 				</div>				
-			</div>
-			<div id="news-panel" class="custom-panels-group col-sm-6" >
-				<div class="panel-body">					
-					<div  id="news-view"></div>
-				</div>
 			</div>					
 		</div>	
 				
