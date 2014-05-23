@@ -189,8 +189,11 @@
 							<h5><small>게시일 순서로 뉴스가 보여집니다.</small></h5>
 						</div>						
 						<div id="topic-grid"></div>		
-						
-						<div id="topic-viewer"></div>
+						<div class="panel panel-default" style="margin-bottom: 20px;">
+							<div class="panel-body">													
+								<div id="topic-viewer"></div>
+							</div>
+						</div>
 					</div>				
 				</div>				
 			</div>
@@ -207,7 +210,7 @@
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->		
-		<script type="text/x-kendo-tmpl" id="topic-viewer-template">
+		<script type="text/x-kendo-tmpl" id="topic-viewer-template">		
 			<div class="page-heading">
 				<h4 data-bind="html:announce.subject"></h4>		
 				<hr class="devider">
