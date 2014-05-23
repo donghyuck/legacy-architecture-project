@@ -108,9 +108,9 @@
 															<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">
 														</div>
 														<div class="col-xs-8">
-															<h5>선택된 이미지</h5>
+															<h5><span class="label label-warning label-lightweight">image/jpeg</span> a.png <small>(12,222 bytes)</small></h5>
 															<ul class="list-unstyled">
-																<li><span class="label label-warning label-lightweight">image/jpeg</span></li>
+																<li></li>
 																<li><i class="fa fa-user color-green"></i> Jack Baur</li>
 																<li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
 																<li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
