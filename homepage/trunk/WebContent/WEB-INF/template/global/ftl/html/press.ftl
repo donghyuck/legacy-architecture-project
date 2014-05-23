@@ -33,7 +33,7 @@
 						e.token.copy(currentUser);
 					}				
 				});	
-				$("#news-panel").data( "newsPlaceHolder", new common.models.ForumTopic () );								
+						
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -72,11 +72,9 @@
 						var selectedCells = this.select();
 						var selectedCell = this.dataItem( selectedCells );	
 						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    							
-							var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); 
-							selectedCell.copy(newsPlaceHolder);					
-							$("#news-panel").data( "newsPlaceHolder", newsPlaceHolder ); // 로우 데이터 저장							 
-							updateViewCount(selectedCell.topicId);
+							var selectedCell = this.dataItem( selectedCells );	  
+							setTopicViewerSource(selectedCell); 
+							displayTopic();
 						}
 					},
 					dataBound: function(e) {		
@@ -90,6 +88,23 @@
 			}
 		}]);	
 		
+		function setTopicViewerSource(source){
+			var renderToString = "topic-viewer";				
+			var renderTo = $("#"+ renderToString );						
+			if( !renderTo.data("topicPlaceHolder") ){
+				renderTo.data("topicPlaceHolder", new common.models.ForumTopic() );
+			}		
+			source.copy(renderTo.data("topicPlaceHolder"));
+		}		
+
+		function displayTopic (){			
+			var renderToString = "topic-viewer";
+			var renderTo = $("#"+ renderToString );	
+			if( renderTo.text().length == 0 ){
+				alert( "create" );
+			}
+		}
+		
 		function updateViewCount(topicId){
 			// jquery http send
 			jQuery.ajax({	
@@ -100,8 +115,8 @@
 				});
 		}
 		
-		function displayTopic (){			
-			var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); // 데이터 GET
+		function displayTopic2 (){			
+			var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); 
 			//alert(newsPlaceHolder.subject);
 			var template = kendo.template($('#news-view-template').html()); // 템플릿 GET
 			console.log('1');
