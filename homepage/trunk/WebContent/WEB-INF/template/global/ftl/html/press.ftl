@@ -117,10 +117,10 @@
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 						this.shown = false;
 					},
-					scrollup: function(e){
+					scrollup:function(e){
 						$('html,body').animate({ scrollTop:  0 }, 300);
 					},
-					scrolldown : function(e){
+					scrolldown :function(e){
 						$('html,body').animate({scrollTop: renderTo.offset().top - 80 }, 300);
 					}
 				});				
