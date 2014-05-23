@@ -907,9 +907,9 @@
 		POST = 'POST', 
 		JSON = 'json', 
 		templates = {
-			selected : templage(''
+			selected : templage(
 				'<div class="row">' +
-				'<div class="col-xs-4">
+				'<div class="col-xs-4">'+
 				'<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">' +
 				'</div>' +
 				'<div class="col-xs-8">' +						
