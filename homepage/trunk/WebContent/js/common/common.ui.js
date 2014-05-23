@@ -907,6 +907,23 @@
 		POST = 'POST', 
 		JSON = 'json', 
 		templates = {
+			selected : templage(''
+				'<div class="row">' +
+				'<div class="col-xs-4">
+				'<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">' +
+				'</div>' +
+				'<div class="col-xs-8">' +						
+				'<h5><span class="label label-warning label-lightweight">#: contentType #</span> #:name# <small>(#: formattedSize() #)</small></h5>' +
+				'<ul class="list-unstyled">' +
+				'<li><i class="fa fa-user color-green"></i></li>' +
+				'<li><i class="fa fa-calendar color-green"></i> #: formattedCreationDate() #</li>' +
+				'<li><i class="fa fa-calendar color-green"></i> #: formattedModifiedDate() #</li>' +
+				'<li><i class="fa fa-tags color-green"></i></li>' +
+				'</ul>' +
+				'</div>' +
+				'</div>'					
+			),
+			/*
 			selected  : template('<div class="panel-body custom-selected-image">'
 					+ '<div class="media" style="max-height:120px;">'
 					+ '<a class="pull-left" href="\\#">'
@@ -925,6 +942,7 @@
 					+ '</div>' 
 					+ '<div class="margin-bottom-10"><hr class="devider devider-dotted"></div>'					
 					+ '</div>'),
+*/
 			image : template('<img src="#: url #" class="img-responsive"/>'),
 			url : template('/download/image/#= key #')
 		},
