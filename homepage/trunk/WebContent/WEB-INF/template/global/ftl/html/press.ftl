@@ -117,11 +117,11 @@
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 						this.shown = false;
 					},
-					scrollUp: function(e){
+					scrollup: function(e){
 						e.preventDefault();
 						$('html,body').animate({ scrollTop:  0 }, 300);
 					},
-					scrollDown : function(e){
+					scrolldown : function(e){
 						e.preventDefault();
 						$('html,body').animate({scrollTop: renderTo.offset().top - 80 }, 300);
 					}
@@ -132,7 +132,7 @@
 			if(!renderTo.data("model").shown)
 				renderTo.data("model").show();
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
-			renderTo.data("model").scrollDown();
+			renderTo.data("model").scrolldown();
 		}
 		
 		function updateViewCount(topicId){
@@ -269,7 +269,7 @@
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 			<div class="pull-right">
-				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{ click:scrollUp }><i class="fa fa-angle-double-up"></i> 목록</button>		
+				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{ click:scrollup }"><i class="fa fa-angle-double-up"></i> 목록</button>		
 			</div>			
 		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
