@@ -65,7 +65,7 @@
 						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " } }
 					],
 					sortable: true,
-					pageable: true,
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
 					selectable: "single",
 					height: 430,
 					change: function(e) { 
@@ -171,6 +171,8 @@
 							<h5><small>게시일 순서로 뉴스가 보여집니다.</small></h5>
 						</div>						
 						<div id="topic-grid"></div>		
+						
+						<div id="topic-viewer"></div>
 					</div>				
 				</div>				
 			</div>
