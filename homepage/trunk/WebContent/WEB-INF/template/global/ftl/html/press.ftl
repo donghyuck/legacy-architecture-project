@@ -199,7 +199,7 @@
 						</div>						
 						<div id="topic-grid"></div>		
 						<div class="margin-bottom-40"></div>
-						<div class="panel panel-default" style="margin-bottom: 20px;">
+						<div class="panel panel-default" style="margin-bottom: 20px; display:none;">
 							<div class="panel-body">													
 								<div id="topic-viewer"></div>
 							</div>
