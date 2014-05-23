@@ -118,13 +118,13 @@
 									</div>
 									<div class="panel panel-default panel-flat">								
 										<div class="panel-body">	
-											<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
+											<div id="#=my_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
 										</div>
 										<div class="panel-body scrollable color4" style="max-height:450px;">
-											<div id="#=upload_guid#-list-view" class="color4" style="padding:0px; border: 0px; min-height: 200px;"></div>
+											<div id="#=my_guid#-list-view" class="color4" style="padding:0px; border: 0px; min-height: 200px;"></div>
 										</div>	
 										<div class="panel-footer" style="padding:0px;">
-											<div id="#=upload_guid#-list-pager" class="k-pager-wrap"></div>
+											<div id="#=my_guid#-list-pager" class="k-pager-wrap"></div>
 										</div>
 									</div>																											  
 								</div>
@@ -134,7 +134,7 @@
 								</div>		
 								<div class="panel panel-default panel-flat">			
 									<div class="panel-body">	
-										<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
+										<div id="#=domain_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
 									</div>													
 									<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
 										<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
@@ -150,7 +150,7 @@
 								</div>		
 								<div class="panel panel-default panel-flat">								
 									<div class="panel-body">	
-										<div id="#=upload_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
+										<div id="#=website_guid#-selected" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;"></div>
 									</div>									
 									<div class="panel-body scrollable" style="max-height:450px; min-height:360px;">											
 										<div style="width:100%; padding:0px; border: 0px; min-height: 200px;"></div>
