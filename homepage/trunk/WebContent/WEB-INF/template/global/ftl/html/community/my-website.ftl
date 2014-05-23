@@ -105,8 +105,13 @@
 								
 				// 4-1. Announces 							
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
-				createNoticeGrid();									
-				// 4-2. Right Tabs								
+				createNoticeGrid();	
+				
+				 // 4-2. News
+             	 createNewsGrid();
+             	$('#announce-panel').data("newsPlaceHolder", new common.models.ForumTopic());
+												
+				// 4-3. Right Tabs								
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
@@ -605,9 +610,267 @@
 			kendo.fx(renderTo).expand("vertical").duration(200).play();			
 		}
 		
+		
+		<!-- ============================== -->
+		<!-- create news grid		2014.05.21 jwmoon 								-->
+		<!-- ============================== -->								
+		function createNewsGrid(){
+			if( !$("#news-grid").data('kendoGrid') ){				
+				$("#news-grid").data('newsTargetPlaceHolder', 1);				
+				$("#news-grid").kendoGrid({
+					dataSource : new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-forum-topics.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}else{								
+									return {forumId: 1 };								
+								}
+							} 
+						},
+						pageSize: 10,
+						error:common.api.handleKendoAjaxError,
+						schema: {
+							total : "targetTopicCount",
+							data : "targetTopics",
+							model : common.models.ForumTopic
+						}
+					}),
+					sortable: true,
+					columns: [ 
+						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field: "subject", title: "제목", headerAttributes: { "class": "table-header-cell", style: "text-align: center"}, 
+																			template: '#: subject # <div class="btn-group">'
+																			+'<button type="button" class="btn btn-warning btn-xs" onclick="showNewsEditor();return false;">편집</a>'
+																			+'<button type="button" class="btn btn-warning btn-xs" onclick="showNewsViewer();return false;">보기</a></div>'
+																			+'<button type="button" class="btn btn-warning btn-xs" onclick="deleteNews();return false;">삭제</a></div>'
+																			},
+						{field: "viewCnt", title: "조회수", sortable : false , width: "100px"}
+					],
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
+					selectable: "row",
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    							
+							setNewsEditorSource(selectedCell);	
+						}
+					},
+					dataBound: function(e) {					
+					},
+					schema: {
+							total : "targetTopicCount",
+							data : "targetTopics",
+							model : common.models.ForumTopic
+						}
+				});
+				
+				//common.api.handlePanelHeaderActions($("#announce-panel")); // panel header event setting 
+				common.ui.handleButtonActionEvents($("#announce-panel button.btn-control-group"), 	{event: 'click', handlers: {
+						'new-news' : function(e){
+							var newsPlaceHolder = new common.models.ForumTopic();
+							newsPlaceHolder.set("objectType", 30); //default site(30)
+							setNewsEditorSource(newsPlaceHolder);
+							showNewsEditor();			
+						}
+					}}				
+				);
+				
+				common.ui.handleActionEvents( $('input[name="news-selected-target"]'), { event: 'change' , handler: function(e){				
+					var oldSelectedSource = $("#news-grid").data('newsTargetPlaceHolder');
+					if( oldSelectedSource != this.value ){
+						$("#news-grid").data('newsTargetPlaceHolder', this.value );
+						$("#news-grid").data('kendoGrid').dataSource.read();
+					}					
+				}});
+				
+				$("#announce-panel" ).show();
+				
+				
+				
+			}
+		}
+		<!-- ============================== -->
+		<!-- news viewer , editor 						       -->
+		<!-- ============================== -->		
+		function deleteNews(){
+			var newsPlaceHolder = getNewsPlaceHolder();
+			var renderTo = $('#news-panel-body');
+			
+			common.api.callback({
+				url : '${request.contextPath}/community/delete-forum-topics.do?output=json',
+				data : { item: kendo.stringify( newsPlaceHolder ) },
+				success : function(response){
+								common.ui.notification({title:"뉴스", message: "정상적으로 삭제되었습니다.", type: "success" });
+								$("#news-grid").data('kendoGrid').dataSource.read();
+				},
+			 	fail: function(){								
+						common.ui.notification({title:"뉴스", message: "시스템 운영자에게 문의하여 주십시오." });
+				},
+				requestStart : function(){
+						kendo.ui.progress(renderTo, true);
+				},
+				requestEnd : function(){
+						kendo.ui.progress(renderTo, false);
+				},
+			});
+			
+		}
+					
+		function showNewsViewer(){
+			var newsPlaceHolder = getNewsPlaceHolder();
+			if( newsPlaceHolder.topicId > 0 ){					
+				if( $('#news-viewer').text().trim().length == 0 ){			
+					var template = kendo.template($('#news-viewer-template').html());
+					$('#news-viewer').html( template );				
+					var newsViewerModel =  kendo.observable({ 
+						news : newsPlaceHolder,
+						profilePhotoUrl : function(){
+							return common.api.user.photoUrl (this.get("news").user, 150,150);
+						},
+						editable : function(){
+							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
+							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
+								return true;
+							}
+							return false;
+						},
+						openNewsEditor : showNewsEditor,
+						closeViewer : function(e){
+							kendo.fx($("#news-viewer-panel")).expand("vertical").duration(200).reverse();								
+							kendo.fx($('#news-panel-body')).expand("vertical").duration(200).play();							
+						}
+					});						
+					kendo.bind($("#news-viewer-panel"), newsViewerModel );
+				}
+				//$('#notice-panel-body').hide();
+				$('#news-panel-body').hide();
+				//kendo.fx($('#announce-panel')).expand("vertical").duration(200).reverse();	
+				kendo.fx($("#news-viewer-panel")).expand("vertical").duration(200).play();			
+			}
+		}
+		
+		function getNewsPlaceHolder(){
+			if( !$("#news-editor").data("newsPlaceHolder") ){
+				//alert('make');
+				var newsPlaceHolder = new common.models.ForumTopic();
+				newsPlaceHolder.set("objectType", 30); //default site(30)
+				//newsPlaceHolder.set("forumId", 1);
+				$("#news-editor").data("newsPlaceHolder", newsPlaceHolder );				
+			}
+			return $("#news-editor").data("newsPlaceHolder");			
+		}
+		
+		function setNewsEditorSource(source){	
+			source.copy(getNewsPlaceHolder());		
+		}
+		
+		function showNewsEditor(){			
+			var newsPlaceHolder = getNewsPlaceHolder();
+			var renderTo = $("#news-editor-panel");			
+			if( $('#news-editor').text().trim().length == 0 ){			
+				var template = kendo.template($('#news-editor-template').html());		
+				$('#news-editor').html( template );	
+				var newsEditorModel =  kendo.observable({ 
+					news : newsPlaceHolder,
+					profilePhotoUrl : function(){
+						return common.api.user.photoUrl (this.get("news").user, 150,150);
+					},
+					isNew : false,
+					doSave : function (e) {
+						//alert(kendo.stringify(newsPlaceHolder));
+					
+						
+						var btn = $(e.target);
+						btn.button('loading');
+						var template = kendo.template('<p class="text-danger">#:message#</p>');	
+
+						common.api.callback({  
+							url : '${request.contextPath}/community/update-forum-topics.do?output=json',
+							data : { item: kendo.stringify( this.news ) },
+							success : function(response){
+								common.ui.notification({title:"뉴스", message: "정상적으로 저장되었습니다.", type: "success" });
+								$("#news-grid").data('kendoGrid').dataSource.read();
+							},
+							fail: function(){								
+								common.ui.notification({title:"뉴스", message: "시스템 운영자에게 문의하여 주십시오." });
+							},
+							requestStart : function(){
+								kendo.ui.progress(renderTo, true);
+							},
+							requestEnd : function(){
+								kendo.ui.progress(renderTo, false);
+							},
+							always : function(e){
+								btn.button('reset');
+								//this.closeNewsEditor(e);
+								closeEditor(renderTo);
+							}
+						});
+						
+						
+					},
+					updateRequired : false,
+					editable : function(){
+						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
+						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
+							return true;
+						}
+						return false;
+					},
+					openNewsProps : function(e){
+					
+					},
+					closeNewsEditor : function(e){
+						kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
+						//kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
+						//kendo.fx($('.panel-default > .panel-body')).expand("vertical").duration(200).play();
+						kendo.fx($('#notice-panel-body')).expand("vertical").duration(200).play();
+						kendo.fx($('#news-panel-body')).expand("vertical").duration(200).play();							
+					}
+				});
+				newsEditorModel.bind("change", function(e){				
+					if( e.field.match('^news.')){ 						
+						if( this.news.subject.length > 0 && this.news.content.length  > 0 )	{			
+							newsEditorModel.set("updateRequired", true);
+						}
+					}	
+				});	
+				kendo.bind(renderTo, newsEditorModel );
+				renderTo.data("model", newsEditorModel );
+				var bodyEditor =  $("#news-editor-body" );
+				createEditor( "news-editor" , bodyEditor );
+			}
+			
+			renderTo.data("model").set("updateRequired", false);			
+			renderTo.data("model").set("isNew", (newsPlaceHolder.topicId < 1 ));
+				
+			if(newsPlaceHolder.objectType == 30){				
+				renderTo.find('input[name="news-type"]:first').click();
+			}else{			
+				renderTo.find('input[name="news-type"]:last').click();
+			}
+
+			$('#announce-panel > .panel > .panel-body').hide();
+			kendo.fx(renderTo).expand("vertical").duration(200).play();			
+		}
+		
+		
+		
 		<!-- ============================== -->
 		<!-- Utils for editor									       -->
-		<!-- ============================== -->						
+		<!-- ============================== -->				
+		function closeEditor(renderTo){
+			kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
+			kendo.fx($('#notice-panel-body')).expand("vertical").duration(200).play();
+			kendo.fx($('#news-panel-body')).expand("vertical").duration(200).play();	
+		}
+				
 		function createEditor( renderToString, bodyEditor, model ){
 			if(!bodyEditor.data("kendoEditor") ){			
 				var imageBroswer = createEditorImageBroswer( renderToString + "-imagebroswer", bodyEditor);				
@@ -1387,7 +1650,89 @@
 								</div>				
 								<div  id="notice-editor"></div>	
 							</div>
-						</div>		
+						</div>
+						
+					<!-- 뉴스 -->	
+					<div class="panel panel-default">
+						<!--panel-heading-->
+						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp; 뉴스
+							<div class="k-window-actions panel-header-actions">			
+								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
+								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
+								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
+								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
+							</div>
+						</div>
+						<!--panel-body-->
+						<div class="panel-body" style="padding:5px;" id="news-panel-body">
+							<div class="page-header text-primary" style="height:100px;">
+								<h5>
+									<small><i class="fa fa-info"></i> 사이트(${webSite.displayName})/회사(${user.company.displayName}) 버튼을 클릭하면 해당하는 뉴스 목록이 보여집니다.</small>
+									<p>
+										<div class="btn-group" data-toggle="buttons">
+											<label class="btn btn-info btn-sm active">
+												<input type="radio" name="news-selected-target" value="30" >사이트
+											</label>
+											<label class="btn btn-info btn-sm ">
+												<input type="radio" name="news-selected-target" value="1">회사
+											</label>
+										</div>
+									</p>
+								</h5>
+								<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
+									<div class="pull-right">
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new-news"><i class="fa fa-plus"></i> 뉴스 추가</button>
+									</div>											
+								</#if>
+							</div>
+							<div  id="news-grid"></div>
+						</div>
+						<!--news-viewer-panel -->
+						<div  id="news-viewer-panel" class="panel-body"  style="display:none;">
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
+										<h5 >
+											<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
+										</h5>
+										<div class="pull-right">
+											<div class="btn-group">
+												<button type="button" class="btn btn-primary btn-sm" data-bind="click: openNewsEditor, enabled: editable" >편집</button>													
+											</div>						
+											<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeViewer">&times;  닫기</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-12">
+									<div class="panel panel-default" style="margin-bottom: 20px;">
+										<div class="panel-body">													
+											<div  id="news-viewer"></div>																										
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!--news-editor-panel -->
+						<div  id="news-editor-panel" class="panel-body" style="display:none;">
+							<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
+								<h5 >
+									<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
+								</h5>
+								<div class="pull-right">
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary btn-sm" data-bind="click: doSave, enabled: updateRequired" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >저장</button>			
+										<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: openNoticeProps, enabled: editable, invisible:isNew">프로퍼티</button>
+									</div>						
+									<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeNewsEditor">&times;  닫기</button>
+								</div>
+							</div>								
+							<div  id="news-editor"></div>	
+						</div>
+						
+						
+								
 					</div>
 				</div>		
 			</div>				
@@ -1583,6 +1928,34 @@
 				</div>	
 			</div>								
 		</script>
+		<script type="text/x-kendo-tmpl" id="news-editor-template">
+			<div class="panel panel-default">
+				<div class="panel-body"  style="padding:5px;">		
+					<div class="page-header text-primary" data-bind="visible: isNew">
+						<h5>
+							<small><span class="label label-danger">NEW</span> 뉴스 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
+							<div class="btn-group" data-toggle="buttons">
+								<label class="btn btn-info btn-sm active"  data-bind="enabled: isNew">
+								<input type="radio" name="news-type" value="30" data-bind="checked: news.objectType">사이트
+								</label>
+								<label class="btn btn-info btn-sm" data-bind="enabled: isNew">
+								<input type="radio" name="news-type" value="1" data-bind="checked: news.objectType">회사
+								</label>
+							</div>						
+						</h5>
+					</div>								
+					<div  class="form">
+						<div class="form-group">
+							<label class="control-label"><small>제목</small></label>							
+							<input type="text" placeholder="제목을 입력하세요." data-bind="value: news.subject"  class="form-control" placeholder="제목" />
+						</div>
+						<label class="control-label"><small>본문</small></label>
+						<textarea id="news-editor-body" data-bind='value:news.content'></textarea>
+					</div>									
+				</div>	
+			</div>								
+		</script>
+		
 		<#include "/html/common/common-homepage-templates.ftl" >	
 		<#include "/html/common/common-editor-templates.ftl" >	
 		<!-- END TEMPLATE -->
