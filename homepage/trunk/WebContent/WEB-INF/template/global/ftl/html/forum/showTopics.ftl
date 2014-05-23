@@ -174,8 +174,8 @@
 					</div>	
 					<!-- end side menu -->						
 				</div>
-				<div class="col-lg-9">
-					<div id="topic-grid"></div>					
+				<div class="col-lg-9">					
+					<div id="topic-grid"></div>		
 				</div>							
 			</div>
 			<div id="news-panel" class="custom-panels-group col-sm-6" >
