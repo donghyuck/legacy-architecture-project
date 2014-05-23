@@ -2,6 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
+<#compress>		
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -125,9 +126,9 @@
 			width: 100%;
 			height: 100%;
 			min-height:500px;
-		}
-							
-		</style>   	
+		}							
+		</style>
+</#compress>		   	
 	</head>
 	<body class="color0">
 		<!-- START HEADER -->
@@ -159,18 +160,18 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-				<div class="content-main-section">
-					<div class="page-header padding-left-10">
-						<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
-					</div>	
-													
-					<section id="announce-list-section" style="position: absolute;	">
-						<div id="announce-grid"></div>
-					</section>
-					<section id="announce-view-content-section" style="display:none;">						
-						<div id="announce-view-panel"></div>
-					</section>						
-				</div>
+					<div class="content-main-section">
+						<div class="page-header padding-left-10">
+							<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
+						</div>	
+														
+						<section id="announce-list-section" style="position: absolute;	">
+							<div id="announce-grid"></div>
+						</section>
+						<section id="announce-view-content-section" style="display:none;">						
+							<div id="announce-view-panel"></div>
+						</section>						
+					</div>
 				</div>				
 			</div>
 		</div>									 			
