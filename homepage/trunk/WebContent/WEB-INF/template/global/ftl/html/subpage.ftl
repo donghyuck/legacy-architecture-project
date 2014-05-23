@@ -41,7 +41,7 @@
 		</script>
 		</#compress>	
 	</head>
-	<body>
+	<body class="color0">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->
