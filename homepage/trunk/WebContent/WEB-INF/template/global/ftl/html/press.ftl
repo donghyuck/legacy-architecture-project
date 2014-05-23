@@ -35,7 +35,7 @@
 					}				
 				});	
 						
-				var forumId = 1;		
+				var forumId = ${action.webSite.getProperty( "pages.press.forumId", 1)};		
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
