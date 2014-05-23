@@ -141,74 +141,6 @@ img.img-full-height {
 	margin: 30px 15px 30px 30px;
 }
 
-/*Tag Boxes
-------------------------------------*/
-.tag-box  {
-  /* padding: 20px; */
-  /* background: #fff; */
-  /* margin-bottom: 30px; */
-}
-
-.tag-box h2 {
-  font-size: 20px;
-  line-height: 25px;
-}
-
-.tag-box p {
-  margin-bottom: 0;
-}
-
-.tag-box.tag-text-space p {
-  margin-bottom: 10px;
-}
-
-/*Tag Boxes v1*/
-.tag-box-v1 {
-  border: solid 1px #eee;
-  border-top: solid 2px #72c02c;
-}
-
-/*Tag Boxes v2*/
-.tag-box-v2 {
-  background: #fafafa;
-  border: solid 1px #eee;
-  border-left: solid 2px #72c02c;
-}
-
-/*Tag Boxes v3*/
-.tag-box-v3 {
-  border: solid 2px #eee;
-}
-
-/*Tag Boxes v4*/
-.tag-box-v4 {
-  /* border: dashed 1px #bbb; */
-}
-
-/*Tag Boxes v5*/
-.tag-box-v5 {
-  margin: 20px 0;
-  text-align: center;
-  border: dashed 1px #ccc;
-}
-
-.tag-box-v5 span {
-  color: #555;
-  font-size: 28px;
-  margin-bottom: 0;
-}
-
-/*Tag Boxes v6*/
-.tag-box-v6 {
-  background: #fafafa;
-  border: solid 1px #eee; 
-}
-
-/*Tag Boxes v7*/
-.tag-box-v7 {
-  border: solid 1px #eee;
-  border-bottom: solid 2px #72c02c;
-}
 
 /*Deviders*/
 .devider.devider-dotted {
@@ -555,6 +487,76 @@ img.img-full-height {
 .rounded-bottom { border-radius: 0 0 4px 4px !important;}
 
 .unrounded { border-radius: 0 !important; }
+
+
+/*Tag Boxes
+------------------------------------*/
+.tag-box  {
+  /* padding: 20px; */
+  /* background: #fff; */
+  /* margin-bottom: 30px; */
+}
+
+.tag-box h2 {
+  font-size: 20px;
+  line-height: 25px;
+}
+
+.tag-box p {
+  margin-bottom: 0;
+}
+
+.tag-box.tag-text-space p {
+  margin-bottom: 10px;
+}
+
+/*Tag Boxes v1*/
+.tag-box-v1 {
+  border: solid 1px #eee;
+  border-top: solid 2px #72c02c;
+}
+
+/*Tag Boxes v2*/
+.tag-box-v2 {
+  background: #fafafa;
+  border: solid 1px #eee;
+  border-left: solid 2px #72c02c;
+}
+
+/*Tag Boxes v3*/
+.tag-box-v3 {
+  border: solid 2px #eee;
+}
+
+/*Tag Boxes v4*/
+.tag-box-v4 {
+  /* border: dashed 1px #bbb; */
+}
+
+/*Tag Boxes v5*/
+.tag-box-v5 {
+  margin: 20px 0;
+  text-align: center;
+  border: dashed 1px #ccc;
+}
+
+.tag-box-v5 span {
+  color: #555;
+  font-size: 28px;
+  margin-bottom: 0;
+}
+
+/*Tag Boxes v6*/
+.tag-box-v6 {
+  background: #fafafa;
+  border: solid 1px #eee; 
+}
+
+/*Tag Boxes v7*/
+.tag-box-v7 {
+  border: solid 1px #eee;
+  border-bottom: solid 2px #72c02c;
+}
 
 /* -------------------------------------------- */
 /* Bootstrap customize                             */
