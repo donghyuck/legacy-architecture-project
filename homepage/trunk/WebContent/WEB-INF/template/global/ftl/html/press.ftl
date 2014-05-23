@@ -99,10 +99,12 @@
 
 		function displayTopic (){			
 			var renderToString = "topic-viewer";
-			var renderTo = $("#"+ renderToString );	
+			var renderTo = $("#"+ renderToString );
+			topicPlaceHolder =renderTo.data("topicPlaceHolder")	
 			if( renderTo.text().length == 0 ){
 				renderTo.html($('#topic-viewer-template').html());
 			}
+			kendo.bind( renderTo , topicPlaceHolder );
 		}
 		
 		function updateViewCount(topicId){
