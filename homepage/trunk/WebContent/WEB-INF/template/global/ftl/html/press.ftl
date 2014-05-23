@@ -32,13 +32,98 @@
 						e.token.copy(currentUser);
 					}				
 				});			
-				
+
+				$("#news-panel").data( "newsPlaceHolder", new common.models.ForumTopic () );
+								
+				$("#topic-grid").kendoGrid({
+					dataSource: new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-forum-topics.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}else{
+									return {forumId:1}
+								}
+							},
+						},
+						pageSize: 15,
+						error:common.api.handleKendoAjaxError,				
+						schema: {
+							total : "targetTopicCount",
+							data : "targetTopics",
+							model : common.models.ForumTopic
+						}
+					}),	
+					columns: [
+						{field: "topicId", title: "ID", sortable : false , width:100 },
+						{field: "subject", title: "제목", sortable : false},
+						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field: "content", title: "내용", sortable : true},
+						{field: "viewCnt", title: "조회수", sortable : false},
+					],
+					sortable: true,
+					pageable: true,
+					selectable: "single",
+					height: 430,
+					change: function(e) { 
+						var selectedCells = this.select();
+						var selectedCell = this.dataItem( selectedCells );	
+						//alert( kendo.stringify(selectedCell) );
+						//alert(selectedCell.topicId);
+						
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    							
+							var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); 
+							selectedCell.copy(newsPlaceHolder);					
+							$("#news-panel").data( "newsPlaceHolder", newsPlaceHolder ); // 로우 데이터 저장							 
+							updateViewCount(selectedCell.topicId);
+						}
+								
+											
+					}			
+				});		
+								
 				<#if !action.user.anonymous >				
 				
 				</#if>	
 				// END SCRIPT            
 			}
 		}]);	
+		
+		function updateViewCount(topicId){
+			// jquery http send
+			jQuery.ajax({	
+				url : '${request.contextPath}/community/update-topic-view-count.do?output=json&topicId='+topicId
+				}).done(function(data){
+					//alert('카운트 증가');
+					
+					showNewsPanel(); // 상세 화면 호출
+				});
+		}
+		
+		function showNewsPanel (){			
+			var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); // 데이터 GET
+			//alert(newsPlaceHolder.subject);
+			var template = kendo.template($('#news-view-template').html()); // 템플릿 GET
+			console.log('1');
+			$("#news-view").html( template(newsPlaceHolder) );	 //html 세팅
+			console.log('2');
+			kendo.bind($("#news-view"), newsPlaceHolder );	//데이터 바인딩
+			console.log('3');
+			$("#news-view button[class*=custom-list]").click( function (e){
+					$('html,body').animate({ scrollTop:  0 }, 300);
+			} ); //목록 버튼 이벤트 설정
+			console.log('4');
+			$('html,body').animate({scrollTop: $("#news-view").offset().top - 80 }, 300); // 화면이동 이벤트
+			console.log('5');
+			//alert($('#news-view').html());	
+		}
+				
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -88,30 +173,55 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
-
-					<div class="row">
-						<div class="col-lg-6">
-																							
-						</div>							
-						<div class="col-lg-6">			
-											
-						</div>								
-					</div>	
-					
+					<div id="topic-grid"></div>					
 				</div>				
 			</div>
-		</div>									 
-		<div class="container layout">						
-				<div class="row">
-				</div>		
-			</div>				
+				<div id="news-panel" class="custom-panels-group col-sm-6" >
+				<div class="panel-body">					
+					<div  id="news-view"></div>
+				</div>
+			</div>					
+		</div>	
+				
 		<!-- END MAIN CONTENT -->	
 
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
 		<!-- START TEMPLATE -->
+		<script type="text/x-kendo-tmpl" id="news-view-template">		
+			
+			<div class="page-heading">
+				<h4 data-bind="html:subject"></h4>				
+			</div>
+			
+			<div class="media">
+				<a class="pull-left" href="\\#">
+				<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
+				</a>
+				<div class="media-body">
+					<h5 class="media-heading">
+						# if( user.nameVisible ){#
+						#: user.name # (#: user.username #)
+						# } else { #
+						#: user.username #
+						# } # 		
+						# if( user.emailVisible ){#
+						<br>(#: user.email #)
+						# } #	
+					</h5>		
+				</div>
+			</div>	
+			
+			<div class="blank-top-5" ></div>
+			<div data-bind="html:content"></div>	
+			<div class="blank-top-5" ></div>
+			<div class="btn-group pull-right">
+				<button  type="button" class="btn btn-info btn-sm custom-list "><i class="fa fa-angle-double-up"></i> 목록</button>		
+			</div>
+		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
+		
 	</body>    
 </html>
