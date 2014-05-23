@@ -12,6 +12,7 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.js',			
 			'${request.contextPath}/js/common/common.api.js',
@@ -227,29 +228,23 @@
 					<li><span class="label label-info label-lightweight">조회수</span> <code data-bind="text: topic.viewCnt"></code></li>
 					<li><span class="label label-info label-lightweight">게시일</span> <span class="text-muted" data-bind="text: topic.formattedCreationDate"></span></li>
 				</ul>
-						<div class="media">
-							<a class="pull-left" href="\\#">
-								<img data-bind="attr:{ src:authorPhotoUrl }" width="30" height="30" class="img-rounded">
-							</a>
-							<div class="media-body">
-								<h5 class="media-heading">																	
-									<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
-									<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
-								</h5>		
-							</div>		
-						</div>					
-			</div>													
-									<div class="media">
-							<a class="pull-left" href="\\#">
-								<img data-bind="attr:{ src:authorPhotoUrl }" width="30" height="30" class="img-rounded">
-							</a>
-							<div class="media-body">
-								<h5 class="media-heading">																	
-									<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
-									<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
-								</h5>		
-							</div>		
-						</div>	
+				<div class="media">
+					<a class="pull-left" href="\\#">
+						<img data-bind="attr:{ src:authorPhotoUrl }" width="30" height="30" class="img-rounded">
+					</a>
+					<div class="media-body"><!--
+						<h5 class="media-heading">																	
+							<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
+							<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
+						</h5>		
+						-->
+						<ul class="list-unstyled">
+							<li><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></li>
+							<li><span data-bind="visible:topic.user.emailVisible, text: topic.user.email"></span></li>
+						</ul>					
+					</div>		
+				</div>					
+			</div>
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 	
