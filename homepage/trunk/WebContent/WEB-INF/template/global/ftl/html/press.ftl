@@ -2,6 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
+<#compress>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -160,6 +161,7 @@
 		}
 						
 		</style>   	
+</#compress>
 	</head>
 	<body class="color0">
 		<!-- START HEADER -->
