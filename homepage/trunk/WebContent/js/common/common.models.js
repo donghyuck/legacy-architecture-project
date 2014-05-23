@@ -1,6 +1,42 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.models = {};
+	
+	common.models.ForumTopic =  kendo.data.Model.define({
+		id : "topicId",
+		fields: { 
+			topicId: { type: "number", editable: false, defaultValue: 0 },
+			subject: { type: "string", editable: true },
+			content: { type: "string", editable: true },
+			viewCnt: { type: "number", editable: false, defaultValue: 0 },
+			forumId: { type: "number", editable: false, defaultValue: 1 },
+			totalReplies: { type: "number", editable: false, defaultValue: 0 },
+			attachmentId: { type: "number", editable: false, defaultValue: 0 },
+	        modifiedDate: { type: "date"},
+	        creationDate: { type: "date" } 			
+		},
+		formattedCreationDate : function(){
+	    	return kendo.toString(this.get("creationDate"), "g");
+	    },
+	    formattedModifiedDate : function(){
+	    	return kendo.toString(this.get("modifiedDate"), "g");
+	    },
+	    copy: function ( target ){
+	    	target.topicId = this.get("topicId");
+	    	target.set("subject",this.get("subject") );
+	    	target.set("content", this.get("content"));
+	    	target.set("viewCnt",this.get("viewCnt") );
+	    	target.set("totalReplies", this.get("totalReplies"));
+	    	target.set("modifiedDate",this.get("modifiedDate") );
+	    	target.set("creationDate", this.get("creationDate") );
+	    	target.set("forumId", this.get("forumId") );
+	    	if( typeof this.get("user") === 'object' )
+	    		target.set("user", this.get("user") );
+	    	if( typeof this.get("properties") === 'object' )
+	    		target.set("properties", this.get("properties") );
+	    }
+	});
+	
 
 	common.models.Timeline =  kendo.data.Model.define({
 		id : "timelineId",
