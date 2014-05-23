@@ -251,12 +251,7 @@
 					<a class="pull-left" href="\\#">
 						<img data-bind="attr:{ src:authorPhotoUrl }" width="30" height="30" class="img-rounded">
 					</a>
-					<div class="media-body"><!--
-						<h5 class="media-heading">																	
-							<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
-							<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
-						</h5>		
-						-->
+					<div class="media-body">
 						<ul class="list-unstyled">
 							<li><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></li>
 							<li><span data-bind="visible:topic.user.emailVisible, text: topic.user.email"></span></li>
@@ -267,7 +262,7 @@
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 			<div class="pull-right">
-				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{ click:scrollup }"><i class="fa fa-angle-double-up"></i> 목록</button>		
+				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{click:scrollup}"><i class="fa fa-angle-double-up"></i> 목록</button>		
 			</div>			
 		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
