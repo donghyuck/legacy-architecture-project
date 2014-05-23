@@ -61,11 +61,10 @@
 						}
 					}),	
 					columns: [
-						{field: "topicId", title: "ID", sortable : false , width:100 },
+						{field: "topicId", title: "ID", sortable : false , width:100 , attributes: { "class": "table-cell", style: "text-align: center " }},
 						{field: "subject", title: "제목", sortable : false, template: '<span class="label label-primary label-lightweight rounded">#= $.timeago(creationDate)  #</span> #: subject #' },
 						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field: "content", title: "내용", sortable : true},
-						{field: "viewCnt", title: "조회수", sortable : false},
+						{field: "viewCnt", title: "조회수", sortable : false, attributes: { "class": "table-cell", style: "text-align: center " } },
 					],
 					sortable: true,
 					pageable: true,
