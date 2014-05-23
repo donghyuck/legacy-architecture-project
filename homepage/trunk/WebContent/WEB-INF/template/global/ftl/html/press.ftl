@@ -110,16 +110,20 @@
 					authorPhotoUrl : "${request.contextPath}/download/profile/inkium?width=150&height=150",
 					show : function(){
 						kendo.fx($('#topic-viewer-panel')).slideIn("down").play();	
+						this.shown = true;
 					},
+					shown : false,
 					hide : function () {
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
+						this.shown = true;
 					}
 				});
 				
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
-				topicModel.show();
 			}
+			if(!renderTo.data("model").shown)
+				renderTo.data("model").show();
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 		}
 		
