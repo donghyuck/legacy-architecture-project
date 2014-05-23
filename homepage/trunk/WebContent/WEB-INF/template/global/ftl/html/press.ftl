@@ -265,7 +265,7 @@
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 			<div class="pull-right">
-				<button  type="button" class="btn btn-info btn-sm custom-btn-list" data-bind="events:{click:scrollup}"><i class="fa fa-angle-double-up"></i> 목록</button>		
+				<button  type="button" class="btn btn-info btn-sm custom-btn-list"><i class="fa fa-angle-double-up"></i> 목록</button>		
 			</div>			
 		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
