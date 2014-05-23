@@ -109,7 +109,11 @@
 														</div>
 														<div class="col-xs-8">
 															<h4>선택된 이미지</h4>
-															<p>Et harum quidem rerum facilis est et expedita distinctio lorem ipsum dolor sit amet consectetur adipiscing elit. Ut non libero consectetur adipiscing elit magna. Sed et quam lacus. Fusce condimentum eleifend enim a feugiat.</p>
+															<ul class="list-unstyled">
+																<li><i class="fa fa-user color-green"></i> Jack Baur</li>
+																<li><i class="fa fa-calendar color-green"></i> 14,2003 February</li>
+																<li><i class="fa fa-tags color-green"></i> Websites, Google, HTML5/CSS3</li>
+															</ul>
 														</div>
 													</div>
 												</div>
