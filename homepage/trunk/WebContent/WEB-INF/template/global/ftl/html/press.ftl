@@ -172,7 +172,7 @@
 				<div class="col-lg-9">
 					<div class="content-main-section">
 						<div class="page-header padding-left-10">
-							<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
+							<h5><small>게시일 순서로 뉴스가 보여집니다.</small></h5>
 						</div>						
 						<div id="topic-grid"></div>		
 					</div>				
