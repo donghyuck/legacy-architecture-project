@@ -8,10 +8,10 @@
 			topicId: { type: "number", editable: false, defaultValue: 0 },
 			subject: { type: "string", editable: true },
 			content: { type: "string", editable: true },
-			viewCnt: { type: "number", editable: false, defaultValue: 0 },
+			viewCnt: { type: "number", editable: true, defaultValue: 0 },
 			forumId: { type: "number", editable: false, defaultValue: 1 },
-			totalReplies: { type: "number", editable: false, defaultValue: 0 },
-			attachmentId: { type: "number", editable: false, defaultValue: 0 },
+			totalReplies: { type: "number", editable: true, defaultValue: 0 },
+			attachmentId: { type: "number", editable: true, defaultValue: 0 },
 	        modifiedDate: { type: "date"},
 	        creationDate: { type: "date" } 			
 		},
@@ -29,7 +29,7 @@
 	    	target.set("totalReplies", this.get("totalReplies"));
 	    	target.set("modifiedDate",this.get("modifiedDate") );
 	    	target.set("creationDate", this.get("creationDate") );
-	    	target.set("forumId", this.get("forumId") );
+	    	target.forumId = this.get("forumId");
 	    	if( typeof this.get("user") === 'object' )
 	    		target.set("user", this.get("user") );
 	    	if( typeof this.get("properties") === 'object' )
