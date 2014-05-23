@@ -80,7 +80,7 @@
 					},
 					dataBound: function(e) {		
 						if( $('#topic-viewer').text().length> 0 ) 
-							kendo.fx($('#topic-viewer-panel')).slideIn("down").reverse();
+							kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).play();
 					}			
 				});									
 				<#if !action.user.anonymous >				
