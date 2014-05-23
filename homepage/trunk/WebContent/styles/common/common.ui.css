@@ -271,9 +271,9 @@ img.img-full-height {
 /*Tag Boxes
 ------------------------------------*/
 .tag-box  {
-  /* padding: 20px; */
-  /* background: #fff; */
-  /* margin-bottom: 30px; */
+  padding: 20px;
+  background: #fff;
+  margin-bottom: 30px;
 }
 
 .tag-box h2 {
@@ -309,7 +309,7 @@ img.img-full-height {
 
 /*Tag Boxes v4*/
 .tag-box-v4 {
-  /* border: dashed 1px #bbb; */
+  border: dashed 1px #bbb;
 }
 
 /*Tag Boxes v5*/
@@ -336,6 +336,7 @@ img.img-full-height {
   border: solid 1px #eee;
   border-bottom: solid 2px #72c02c;
 }
+
 
 
 /*Typography
