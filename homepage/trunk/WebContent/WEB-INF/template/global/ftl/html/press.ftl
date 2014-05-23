@@ -110,7 +110,7 @@
 				});
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
-				kendo.fx(renderTo).slideIn("down");
+				kendo.fx($('#topic-viewer-panel')).slideIn("down");
 			}
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 		}
@@ -200,7 +200,7 @@
 						</div>						
 						<div id="topic-grid"></div>		
 						<div class="margin-bottom-40"></div>
-						<div class="panel panel-default" style="margin-bottom: 20px; display:none;">
+						<div id="topic-viewer-panel" class="panel panel-default" style="margin-bottom: 20px; display:none;">
 							<div class="panel-body">													
 								<div id="topic-viewer"></div>
 							</div>
