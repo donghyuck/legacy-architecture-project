@@ -62,9 +62,9 @@
 					}),	
 					columns: [
 						{field: "topicId", title: "ID", sortable : false , width:100 , attributes: { "class": "table-cell", style: "text-align: center " }},
-						{field: "subject", title: "제목", sortable : false, template: '<span class="label label-primary label-lightweight rounded">#= $.timeago(modifiedDate)  #</span><span class="overflow-h"> #: subject # </span>' },						
+						{field: "subject", title: "제목", sortable : false, template: '<span class="label label-primary label-lightweight rounded">#= $.timeago(modifiedDate) #</span> #: subject #' },						
 						{field: "viewCnt", title: "조회수", width: "100px", sortable : false, attributes: { "class": "table-cell", style: "text-align: center " } },
-						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }}
+						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " } }
 					],
 					sortable: true,
 					pageable: true,
