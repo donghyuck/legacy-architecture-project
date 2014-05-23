@@ -225,8 +225,8 @@
 				<h4 data-bind="html:topic.subject"></h4>		
 				<hr class="devider">
 				<ul class="list-unstyled">
-					<li><span class="label label-info label-lightweight">조회수</span> <code data-bind="text: topic.viewCnt"></code></li>
 					<li><span class="label label-info label-lightweight">게시일</span> <span class="text-muted" data-bind="text: topic.formattedCreationDate"></span></li>
+					<li><span class="label label-info label-lightweight">조회수</span> <code data-bind="text: topic.viewCnt"></code></li>					
 				</ul>
 				<div class="media">
 					<a class="pull-left" href="\\#">
