@@ -32,8 +32,7 @@
 					authenticate : function( e ){
 						e.token.copy(currentUser);
 					}				
-				});			
-
+				});	
 				$("#news-panel").data( "newsPlaceHolder", new common.models.ForumTopic () );								
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
@@ -80,8 +79,7 @@
 							updateViewCount(selectedCell.topicId);
 						}
 					}			
-				});		
-								
+				});									
 				<#if !action.user.anonymous >				
 				
 				</#if>	
