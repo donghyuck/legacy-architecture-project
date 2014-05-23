@@ -104,7 +104,8 @@
 			if( renderTo.text().length == 0 ){
 				renderTo.html($('#topic-viewer-template').html());
 				var topicModel = kendo.observable({
-					topic : topicPlaceHolder
+					topic : topicPlaceHolder,
+					userPhotoUrl : "${request.contextPath}/download/profile/" + this.topic.user.username + "?width=150&height=150"
 				});
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
@@ -227,10 +228,8 @@
 					<li>
 						<div class="media">
 							<a class="pull-left" href="\\#">
-								<img data-bind="attr:{ src: topic.user.photoUrl }" width="30" height="30" class="img-rounded">
-								
-								<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
-								
+								<img data-bind="attr:{ src: topic.user.photoUrl }" width="30" height="30" class="img-rounded">								
+								<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">								
 							</a>
 							<div class="media-body">
 								<h5 class="media-heading">																	
