@@ -215,7 +215,7 @@
 		<!-- START TEMPLATE -->		
 		<script type="text/x-kendo-tmpl" id="topic-viewer-template">		
 			<div class="page-heading">
-				<h4 data-bind="html:announce.subject"></h4>		
+				<h4 data-bind="html:subject"></h4>		
 				<hr class="devider">
 				<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
 				<p class="text-muted">
