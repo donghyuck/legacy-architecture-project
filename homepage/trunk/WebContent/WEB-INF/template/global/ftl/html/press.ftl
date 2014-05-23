@@ -111,7 +111,8 @@
 					show : function(){
 						kendo.fx($('#topic-viewer-panel')).fadeOut().duration(700).reverse();
 						kendo.fx($('#topic-viewer-panel')).slideIn("down").play();	
-						this.shown = true;
+						this.shown = true;						
+						$.ajax({ url : '${request.contextPath}/community/update-topic-view-count.do?output=json&topicId='+ this.topic.get('topicId')});
 					},
 					shown : false,
 					hide : function () {
@@ -140,12 +141,9 @@
 		
 		function updateViewCount(topicId){
 			// jquery http send
-			jQuery.ajax({	
+			$.ajax({	
 				url : '${request.contextPath}/community/update-topic-view-count.do?output=json&topicId='+topicId
-				}).done(function(data){
-					//alert('카운트 증가');					
-					displayTopic(); // 상세 화면 호출
-				});
+			});
 		}
 		
 		function displayTopic2 (){			
@@ -222,7 +220,7 @@
 							<h5><small>게시일 순서로 뉴스가 보여집니다.</small></h5>
 						</div>						
 						<div id="topic-grid"></div>		
-						<div class="margin-bottom-40"></div>
+						<div class="margin-bottom-20"></div>
 						<div id="topic-viewer-panel" class="panel panel-default" style="margin-bottom: 20px; display:none;">
 							<div class="panel-body">													
 								<div id="topic-viewer"></div>
