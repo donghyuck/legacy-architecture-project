@@ -102,12 +102,13 @@
 													<span class="pull-right"><button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> &nbsp; 이미지 업로드</button></span>			
 												</p>
 												<div id="#=upload_guid#-selected-image" class="tag-box tag-box-v4" style="margin: 20px 0 0 0;">
-													<button type="button" class="close" data-dismiss="alert">×</button>
+													
 													<div class="row">
 														<div class="col-xs-4">
 															<img src="http://preview.webpixels.ro/boomerang/images/prv/wk-big-img-5.jpg" alt="" class="img-responsive">
 														</div>
 														<div class="col-xs-8">
+															<button type="button" class="close" data-dismiss="alert">×</button>
 															<h5><span class="label label-warning label-lightweight">image/jpeg</span> a.png <small>(12,222 bytes)</small></h5>
 															<ul class="list-unstyled">
 																<li></li>
