@@ -8,6 +8,7 @@
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+			'${request.contextPath}/js/jquery.extension/jquery.timeago.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
