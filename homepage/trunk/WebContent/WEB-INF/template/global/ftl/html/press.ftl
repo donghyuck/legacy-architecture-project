@@ -122,7 +122,6 @@
 						$('html,body').animate({ scrollTop:  0 }, 300);
 					},
 					scrolldown : function(e){
-						e.preventDefault();
 						$('html,body').animate({scrollTop: renderTo.offset().top - 80 }, 300);
 					}
 				});				
