@@ -127,8 +127,6 @@
 			console.log('5');
 			//alert($('#news-view').html());	
 		}
-		
-		
 		</script>		
 		<style scoped="scoped">
 		blockquote p {
@@ -178,8 +176,7 @@
 				</div>
 				<div class="col-lg-9">
 					<div id="topic-grid"></div>					
-				</div>	
-							
+				</div>							
 			</div>
 			<div id="news-panel" class="custom-panels-group col-sm-6" >
 				<div class="panel-body">					
@@ -192,10 +189,11 @@
 		
 
 		<script type="text/x-kendo-tmpl" id="news-view-template">		
+			
 			<div class="page-heading">
-				<h4 data-bind="html:subject"></h4>		
-				
+				<h4 data-bind="html:subject"></h4>				
 			</div>
+			
 			<div class="media">
 				<a class="pull-left" href="\\#">
 				<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
@@ -213,6 +211,7 @@
 					</h5>		
 				</div>
 			</div>	
+			
 			<div class="blank-top-5" ></div>
 			<div data-bind="html:content"></div>	
 			<div class="blank-top-5" ></div>
