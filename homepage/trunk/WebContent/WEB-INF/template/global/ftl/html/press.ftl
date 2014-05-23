@@ -107,9 +107,10 @@
 					topic : topicPlaceHolder
 				});
 				topicModel.set( "authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" ); 
+				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
-			//kendo.bind( renderTo , topicPlaceHolder );
+			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 		}
 		
 		function updateViewCount(topicId){
