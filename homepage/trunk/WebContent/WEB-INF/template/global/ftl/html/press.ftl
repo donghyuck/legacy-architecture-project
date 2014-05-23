@@ -124,6 +124,9 @@
 						$('html,body').animate({scrollTop: renderTo.offset().top - 80 }, 300);
 					}
 				});				
+				renderTo.find("button[class*=custom-btn-list]").click( function (e){
+					topicModel.scrollup();
+				});
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
 			}
@@ -262,7 +265,7 @@
 			<div class="margin-bottom-20"><hr class="devider"></div>
 			<div data-bind="html:topic.content"></div>
 			<div class="pull-right">
-				<button  type="button" class="btn btn-info btn-sm" data-bind="events:{click:scrollup}"><i class="fa fa-angle-double-up"></i> 목록</button>		
+				<button  type="button" class="btn btn-info btn-sm custom-btn-list" data-bind="events:{click:scrollup}"><i class="fa fa-angle-double-up"></i> 목록</button>		
 			</div>			
 		</script>
 		<#include "/html/common/common-homepage-templates.ftl" >		
