@@ -110,7 +110,7 @@
 				});
 				renderTo.data("model", topicModel );
 				kendo.bind( renderTo , topicPlaceHolder );
-				kendo.fx($('#topic-viewer-panel')).slideIn("down");
+				kendo.fx($('#topic-viewer-panel')).slideIn("down").play();
 			}
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 		}
