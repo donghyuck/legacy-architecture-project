@@ -62,7 +62,7 @@
 					}),	
 					columns: [
 						{field: "topicId", title: "ID", sortable : false , width:100 },
-						{field: "subject", title: "제목", sortable : false},
+						{field: "subject", title: "제목", sortable : false, template: '<span class="label label-info label-lightweight">#= $.timeago(creationDate)  #</span>#: subject #' },
 						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
 						{field: "content", title: "내용", sortable : true},
 						{field: "viewCnt", title: "조회수", sortable : false},
@@ -193,7 +193,7 @@
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
-		<!-- START TEMPLATE -->
+		<!-- START TEMPLATE -->		
 		<script type="text/x-kendo-tmpl" id="news-view-template">		
 			
 			<div class="page-heading">
