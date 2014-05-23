@@ -223,7 +223,7 @@
 				<hr class="devider">
 				<ul class="list-unstyled">
 					<li><span class="label label-info label-lightweight">조회수</span> <code data-bind="text: topic.viewCnt"></code></li>
-					<li><i class="fa fa-calendar color-green"></i> <span class="label label-info label-lightweight">게시일</span><span data-bind="text: topic.formattedCreationDate"></span></li>
+					<li><i class="fa fa-calendar color-green"></i> <span class="label label-info label-lightweight">게시일</span><span class="text-muted" data-bind="text: topic.formattedCreationDate"></span></li>
 					<li><i class="fa fa-tags color-green"></i></li></ul>
 				
 				<span class="label label-primary label-lightweight">게시 기간</span> <small class="text-primary"><span data-bind="text: announce.formattedStartDate"></span> ~ <span data-bind="text: announce.formattedEndDate"></span></small>
