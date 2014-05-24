@@ -144,7 +144,8 @@
 		</style>   	
 </#compress>				
 	</head>
-	<body class="color0">
+	<body>		
+	<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_1") />
@@ -246,6 +247,8 @@
 				</div>				
 			</div>
 		</div>		
+	</div>
+	<!-- /wrapper -->	
 		<script type="text/x-kendo-tmpl" id="timeline-template">
  			<li>
  				<time class="cbp_tmtime" datetime="">
