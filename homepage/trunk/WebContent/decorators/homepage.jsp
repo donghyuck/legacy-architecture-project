@@ -23,10 +23,11 @@
 <decorator:head />
 
 <style>
+/*
 	#account-navbar  ul.dropdown-menu {
 		min-width : 320px;
 	}
-	
+*/	
 	body { 
 		padding-top: 51px; 
 		/*color: #666;*/		
@@ -36,7 +37,7 @@
 		background: #5bc0de;
 		color: #ffffff; 
 	}		
-
+/*
 	.modal, .modal-content, .modal-dialog, .nav-tabs a, .btn, .label, .form-group input, .alert {
 		border-radius: 0 !important;
 	}
@@ -44,7 +45,7 @@
 	.form-control {
 		box-shadow: none;
 	}
-
+*/
 	.copyright {
 		font-size: 12px;
 		padding: 11px 0 7px;
@@ -80,12 +81,12 @@
 	header.cloud h4 small {
 		color: white;
 	}	
-	
+	/*
 	.navbar-inverse {
 		background-color: #333;
 		border-color: #222;
 	}
-
+	*/
 	.k-editor-toolbar .k-tool {
 		border : 0px;
 		color: #34AADC;
@@ -102,11 +103,12 @@
 	.k-editor-toolbar .k-state-selected {
 		background-color: #428bca;
 	}
-			
+	/*		
 	.navbar-nav>li>a.btn-link {
 		padding-top: 14px;
 		padding-bottom: 14px;
 	}
+	*/
 				
 </style>
 </head>
