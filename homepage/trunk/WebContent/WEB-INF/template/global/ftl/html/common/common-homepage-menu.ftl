@@ -45,6 +45,8 @@
 						</div>												
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse navbar-responsive-collapse">
+							<ul id="account-navbar" class="nav navbar-nav navbar-right"></ul>
+							<!-- /account -->
 							<ul class="nav navbar-nav">
 								<#list webSiteMenu.components as item >
 								<#if  item.components?has_content >
@@ -74,7 +76,6 @@
 								</#if>
 								</#list>
 							</ul>				
-							<ul id="account-navbar" class="nav navbar-nav navbar-right"></ul>						
 						</div>						
 					</div>
 				</nav>
