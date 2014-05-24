@@ -11,23 +11,24 @@
 			<#if action.webSite ?? >
 			<#assign webSite = webSite />				
 			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />	
-				<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			
+				<nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
 					<div class="container">
+						<!-- Brand and toggle get grouped for better mobile display -->
 						<div class="navbar-header">					
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
 								<span class="sr-only">${webSite.description} toggle navigation</span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
-								<span class="icon-bar"></span>
+								<span class="fa fa-bars"></span>
 							</button>					
-							<a class="navbar-brand" href="/main.do">   ${webSite.displayName}</a>
+							<a class="navbar-brand" href="/main.do">${webSite.displayName}</a>
 						</div>												
-						<div class="navbar-collapse collapse" id="navbar-ex1-collapse">
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse navbar-responsive-collapse">
 							<ul class="nav navbar-nav">
 								<#list webSiteMenu.components as item >
 								<#if  item.components?has_content >
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title} <i class="fa fa-angle-down"></i></a>
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}</a>
 										<ul class="dropdown-menu">
 										<#list item.components as sub_item >
 											<#if sub_item.components?has_content >
