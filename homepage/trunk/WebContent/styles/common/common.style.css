@@ -744,6 +744,11 @@
     content: "\f107";
 }
 
+.header .dropdown > a:after {
+    top: 9px;
+    right: 15px;	
+}
+
 .dropdown-submenu > .dropdown-menu { 
    top: 0; 
    left: 100%; 
