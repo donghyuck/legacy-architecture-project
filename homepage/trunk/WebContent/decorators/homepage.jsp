@@ -29,7 +29,7 @@
 	
 	body { 
 		padding-top: 51px; 
-		color: #666;		
+		/*color: #666;*/		
 	}
 	
 	.k-grid table tr.k-state-selected{
