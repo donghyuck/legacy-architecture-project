@@ -51,7 +51,7 @@
 								<#list webSiteMenu.components as item >
 								<#if  item.components?has_content >
 									<li class="dropdown">
-										<a href="#" class="dropdown-toggle" data-toggle="dropdown">${item.title}</a>
+										<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">${item.title}</a>
 										<ul class="dropdown-menu">
 										<#list item.components as sub_item >
 											<#if sub_item.components?has_content >
