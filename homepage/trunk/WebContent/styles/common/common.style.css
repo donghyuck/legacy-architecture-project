@@ -737,8 +737,10 @@
 }
 
 .dropdown > a:after {
-    top: 9px;
-    right: 15px;
+    /*top: 9px;
+    right: 15px;*/
+    top: 17px;
+    right: 5px;
     content: "\f107";
 }
 
