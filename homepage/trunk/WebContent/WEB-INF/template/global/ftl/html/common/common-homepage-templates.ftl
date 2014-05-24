@@ -768,7 +768,7 @@
 		<ul class="dropdown-menu">
 			# if ( !anonymous ) { # 
 			<li>
-				<div class="blank-space-5">	
+				<div class="blank-space-5" style="min-width:400px;">	
 					<ul class="media-list">
 						<li class="media">
 							<a class="pull-left" href="\\#">
@@ -803,15 +803,11 @@
 							</div>
 						</li>
 					</ul>
-		
 			</li>
-			<li class="divider"></li>
-			<!--<li><a href="/community/view-myprofile.do?view=modal-dialog" data-toggle="modal" data-target="\\#myModal" ><i class="fa fa-user"></i> 프로필 보기</a></li>-->			
 			<li><a href="${request.contextPath}/main.do?view=personalized">마이 페이지</a></li>
 			#if ( isSystem ) {#
 			<li><a href="/secure/main-site.do">시스템 관리</a></li>
 			# } #
-			<li class="divider"></li>
 			<li><a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
 			# } else { # 						
 			<li>
