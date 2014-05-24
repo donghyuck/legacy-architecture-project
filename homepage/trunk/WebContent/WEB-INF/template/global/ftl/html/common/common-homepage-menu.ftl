@@ -12,7 +12,25 @@
 			<#assign webSite = webSite />				
 			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />
 			<div class="header">
-				<div class="topbar"></div>
+				<div class="topbar">
+					<div class="container">
+						<!-- Topbar Navigation -->
+						<ul class="loginbar pull-right">
+							<li>
+								<i class="fa fa-globe"></i>
+								<a>Languages</a>
+								<ul class="lenguages">
+									<li class="active">
+										<a href="#">한국어 <i class="fa fa-check"></i></a> 
+									</li>
+								</ul>
+							</li>
+							<li class="topbar-devider"></li>   
+							<li><a href="page_faq.html">Help</a></li>  
+						</ul>
+						<!-- End Topbar Navigation -->
+					</div>
+				</div>
 				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
