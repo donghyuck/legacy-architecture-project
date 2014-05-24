@@ -20,7 +20,9 @@
 								<span class="sr-only">${webSite.description} toggle navigation</span>
 								<span class="fa fa-bars"></span>
 							</button>					
-							<a class="navbar-brand" href="/main.do">${webSite.displayName}</a>
+							<a class="navbar-brand" href="/main.do">
+								<img id="logo-header" src="/download/logo/company/INKIUM" alt="Logo">
+							</a>
 						</div>												
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse navbar-responsive-collapse">
