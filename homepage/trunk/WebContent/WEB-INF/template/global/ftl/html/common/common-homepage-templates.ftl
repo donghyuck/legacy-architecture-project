@@ -756,7 +756,7 @@
 <!-- ============================== -->
 <script id="account-template" type="text/x-kendo-template">
 <li class="dropdown">
-		<a href="\\#" class="btn btn-img dropdown-toggle" data-toggle="dropdown">
+		<a href="javascript:void(0);" class="btn btn-img dropdown-toggle" data-toggle="dropdown">
 		# if ( anonymous ) { # 
 			<img src="${request.contextPath}/images/common/anonymous.png" height="34"/>	
 		# }else{ # 
