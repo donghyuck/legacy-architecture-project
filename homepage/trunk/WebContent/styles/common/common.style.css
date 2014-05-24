@@ -11,8 +11,8 @@
 @import url(common.extension.css);
 
 /*Import CSS Plugins*/
-@import url(animate.css);
-@import url(box-shadows.css);
+@import url(../common.extension/animate.css);
+@import url(../common.extension/box-shadows.css);
 
 /*Boxed Layout
 ------------------------------------*/
