@@ -8,7 +8,7 @@
 
 /*Import Global Compulsory CSS Files*/
 @import url(common.ui.css);
-@import url(common.extension.css);
+@import url(common.ui.extension.css);
 
 /*Import CSS Plugins*/
 @import url(../common.extension/animate.css);
