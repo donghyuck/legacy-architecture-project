@@ -10,8 +10,8 @@
 			</#if>		
 			<#if action.webSite ?? >
 			<#assign webSite = webSite />				
-			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />	
-			
+			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />
+			<div class="header">
 				<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
@@ -57,6 +57,7 @@
 						</div>						
 					</div>
 				</nav>
+			</div>
 			</#if>		
 			<!-- END MENU -->		
 			<!-- START My profile Modal -->
