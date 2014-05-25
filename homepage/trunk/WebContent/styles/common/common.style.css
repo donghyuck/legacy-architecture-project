@@ -293,8 +293,13 @@
 		border-bottom: solid 1px #eee;
 	}
 	.dropdown > a.btn-account:after{
-		content: "\f105";
+		content: "\f107";
 	}
+	
+	.header .navbar-nav {
+		margin: 5px -15px;
+	}
+	
 }
 
 
