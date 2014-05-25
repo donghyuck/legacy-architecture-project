@@ -278,6 +278,11 @@
 	content : none;
 }
 
+.header .dropdown-menu.profile {
+	border-top : 0px;
+	
+}
+
 /*Header Default
 ------------------------------------*/
 .header {
@@ -300,6 +305,7 @@
 	position: relative;
 	/*max-height: inherit;*/
 }
+
 
 /*Brand*/
 .header .navbar-brand { 
