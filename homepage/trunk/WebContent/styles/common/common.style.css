@@ -263,6 +263,25 @@
 	}		
 }
 
+.btn-img {
+  font-weight: normal;
+  color: #428bca;
+  cursor: pointer;
+  border-radius: 0;
+}
+.btn-img,.btn-img:hover,.btn-img:focus,.btn-img:active {
+  border-color: transparent;
+}
+.btn-img:hover, .btn-img:focus {
+  background-color: transparent;
+  opacity : .7;
+}
+
+.nav>li>a.btn-img {
+	padding: 7px 15px;
+}
+
+
 /*Header Default
 ------------------------------------*/
 .header {
