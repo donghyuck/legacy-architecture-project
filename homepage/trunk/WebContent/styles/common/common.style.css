@@ -266,6 +266,7 @@
 
 
 .header .navbar-default .navbar-nav > li > a.btn-account {
+	border: 0px;
 	padding: 0px 20px 3px 20px;
 }
 
