@@ -1,9 +1,11 @@
+
 /* import naver nanumgothic font ---------------------- */
 @font-face {
 	font-family: "BM_NANUMGOTHIC";
 	src: url('../fonts/nanumgothic.eot');
 	src: local('☺'), url('../fonts/nanumgothic.woff') format('woff'), url('../fonts/nanumgothic.woff') format('truetype');
 }
+
 
 /*Reset Styles
 ------------------------------------*/
@@ -78,7 +80,8 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 5px;
   text-shadow: none; 
   font-weight: normal; 
-  font-family: 'Open Sans', sans-serif;
+  /*font-family: 'Open Sans', sans-serif;*/
+  font-family: BM_NANUMGOTHIC;
 } 
 
 h1 i, h2 i, h3 i, h4 i, h5 i, h6 i {
