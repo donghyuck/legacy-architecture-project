@@ -272,6 +272,7 @@
 .btn-account:hover, .btn-account:focus, .btn-account:active {
   background-color: transparent;
   opacity : .7;
+  border: 0px;
 }
 
 .dropdown > a.btn-account:after{
