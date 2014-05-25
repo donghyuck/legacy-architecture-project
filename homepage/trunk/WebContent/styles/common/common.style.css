@@ -279,8 +279,11 @@
 }
 
 .header .dropdown-menu.account-open{
-	border-top : 0px;
-	
+	border-top : 0px;	
+}
+
+.header .navbar-right .dropdown-menu.account-open {
+	right:0px;
 }
 
 /*Header Default
