@@ -274,13 +274,6 @@
   opacity : .7;
 }
 
-.btn-account {
-  font-weight: normal;
-  color: #428bca;
-  cursor: pointer;
-  border-radius: 0;
-}
-
 .dropdown > a.btn-account:after{
 	content : none;
 }
