@@ -276,6 +276,9 @@
   border-radius: 0;
 }
 
+.dropdown > a.btn-account {
+	content : none;
+}
 
 /*Header Default
 ------------------------------------*/
