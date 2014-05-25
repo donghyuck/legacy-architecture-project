@@ -269,6 +269,11 @@
 	padding: 0px 20px 3px 20px;
 }
 
+.btn-account:hover, .btn-account:focus {
+  background-color: transparent;
+  opacity : .7;
+}
+
 .btn-account {
   font-weight: normal;
   color: #428bca;
