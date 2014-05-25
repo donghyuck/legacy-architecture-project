@@ -299,8 +299,13 @@
 	.header .navbar-nav {
 		margin: 5px -15px;
 	}
-	
+
+	.header .navbar-default .navbar-nav > li > a {
+		min-height : 24px;
+	}
 }
+
+
 
 
 /*Header Default
