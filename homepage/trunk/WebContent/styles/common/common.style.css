@@ -276,7 +276,7 @@
   border-radius: 0;
 }
 
-.dropdown > a.btn-account {
+.dropdown > a.btn-account:after{
 	content : none;
 }
 
