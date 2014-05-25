@@ -763,7 +763,7 @@
 			<img src="${request.contextPath}/download/profile/#: username #?width=100&height=150" height="34">
 		# } #
 		</a>			
-		<ul class="dropdown-menu profile">
+		<ul class="dropdown-menu account-open">
 			# if ( !anonymous ) { # 
 			<li>
 				<div class="blank-space-5" style="min-width:400px;">	
