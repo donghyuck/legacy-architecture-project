@@ -265,26 +265,15 @@
 
 
 
-.header .navbar-default .navbar-nav > li > a.btn-img {
-	padding: 9px 30px 9px 20px;
+.header .navbar-default .navbar-nav > li > a.btn-account {
+	padding: 0px 30px 9px 20px;
 }
 
-.btn-img {
+.btn-account {
   font-weight: normal;
   color: #428bca;
   cursor: pointer;
   border-radius: 0;
-}
-.btn-img,.btn-img:hover,.btn-img:focus,.btn-img:active {
-  border-color: transparent;
-}
-.btn-img:hover, .btn-img:focus {
-  background-color: transparent;
-  opacity : .7;
-}
-
-.nav>li>a.btn-img {
-	padding: 7px 15px;
 }
 
 
