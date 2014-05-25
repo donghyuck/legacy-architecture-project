@@ -287,6 +287,12 @@
 	right:0px;
 }
 
+@media (max-width: 767px)
+.header .navbar-default .navbar-nav > li a.btn-account {
+	border-bottom: solid 1px #eee;
+}
+
+
 /*Header Default
 ------------------------------------*/
 .header {
