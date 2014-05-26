@@ -40,7 +40,7 @@
 								<span class="fa fa-bars"></span>
 							</button>					
 							<a class="navbar-brand" href="/main.do">
-								<img id="logo-header" src="/download/logo/company/INKIUM" style="width:"80%;" alt="Logo">
+								<img id="logo-header" src="/download/logo/company/INKIUM" width="65%" alt="Logo">
 							</a>
 						</div>												
 						<!-- Collect the nav links, forms, and other content for toggling -->
