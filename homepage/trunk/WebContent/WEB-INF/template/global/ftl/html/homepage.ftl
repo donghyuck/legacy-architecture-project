@@ -43,11 +43,10 @@
 		-->
 		</script>		
 		<style scoped="scoped">
-	
-			
 		</style>   	
 	</head>
 	<body>
+		<div class="wrapper">	
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
@@ -131,7 +130,7 @@
 
 		
 		<!-- END MAIN CONTENT -->	
-
+		</div><!-- /wrapper -->	
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
