@@ -29,7 +29,7 @@
 	}
 */	
 	body { 
-		padding-top: 51px; 
+		/*padding-top: 51px; */
 		/*color: #666;*/		
 	}
 	
@@ -37,15 +37,7 @@
 		background: #5bc0de;
 		color: #ffffff; 
 	}		
-/*
-	.modal, .modal-content, .modal-dialog, .nav-tabs a, .btn, .label, .form-group input, .alert {
-		border-radius: 0 !important;
-	}
-	
-	.form-control {
-		box-shadow: none;
-	}
-*/
+
 	.copyright {
 		font-size: 12px;
 		padding: 11px 0 7px;
