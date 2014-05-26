@@ -338,6 +338,7 @@ border-top-right-radius: 4px;
 	border-radius: 4px;
 	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);	
+	font-size: 13px;
 }
 
  .account-content  img.img-profile {
