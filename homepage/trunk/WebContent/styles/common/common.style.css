@@ -280,6 +280,11 @@ border-top-right-radius: 4px;
 }
 */
 
+.header .navbar-default .navbar-nav > li > a.btn-account {
+	border: 0px;
+	padding: 2px 0px 2px 0px;
+}
+
 .header li.account {
 	color: #aaa;
 	cursor: pointer;
@@ -293,10 +298,7 @@ border-top-right-radius: 4px;
 }
 
 /*
-.header .navbar-default .navbar-nav > li > a.btn-account {
-	border: 0px;
-	padding: 2px 0px 2px 0px;
-}
+
 
 .btn-account:hover, .btn-account:focus, .btn-account:active {
   background-color: transparent;
