@@ -772,6 +772,7 @@
 		<img class="img-profile img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
 		<div class="overflow-h">
                             <span class="font-s">#:name#</span>
+                            <p> #:email #</p>
                             <p class="color-green">소속: <span class="hex"> #= company.displayName #</span></p>
                             <ul class="social-icons">
                                 <li><a class="social_facebook" data-original-title="Facebook" href="\\#"></a></li>
