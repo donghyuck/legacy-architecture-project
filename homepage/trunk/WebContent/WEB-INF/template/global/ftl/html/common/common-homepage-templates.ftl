@@ -780,7 +780,8 @@
 			<div class="col-md-6">			
 			</div>			
 		</div>
-		
+		<hr>
+		<a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a>
 		# }else{ # 
 	
 		# } #
