@@ -764,7 +764,7 @@
 		<img src="${request.contextPath}/download/profile/#: username #?width=100&height=150" height="34">
 	# } #
 	</a>			
-	<div class="account-content" >
+	<div class="account-content hide" >
 		# if ( !anonymous ) { # 
 		<p><i class="fa fa-warning"></i> You have 3 products on your cart</p>
 		
