@@ -400,6 +400,12 @@
 
 /** personalized section  */
 
+nav.personalized-navbar .dropdown > a:after {
+top: 17px;
+right: 0px;
+content: "\f107";
+}
+
 nav.personalized-navbar {
 	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
 	right: 0;
@@ -470,6 +476,7 @@ header .personalized-controls-trigger {
 .personalized-controls-trigger  i {
 	line-height: 1.3;
 }
+
 
 
 /*Header Default
