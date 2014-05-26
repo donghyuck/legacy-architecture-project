@@ -43,18 +43,7 @@
 				});					
 			
 				$('#da-slider').cslider();
-				$('#clients-flexslider').flexslider({
-					animation: "slide",
-					easing: "swing",
-					animationLoop: true,
-					itemWidth: 1,
-					itemMargin: 1,
-					minItems: 2,
-					maxItems: 9,
-					controlNav: false,
-					directionNav: false,
-					move: 2
-				 });				
+				
 				// top nav bar 
 				$("nav.navbar:first").headroom();				
 				<#if !action.user.anonymous ></#if>	
@@ -191,7 +180,7 @@
 
                 <blockquote class="hero-unify">
                     <p>Award winning digital agency. We bring a personal and effective approach to every project we work on, which is why. Unify is an incredibly beautiful responsive Bootstrap Template for corporate professionals.</p>
-                    <small>CEO, Jack Bour</small>
+                    <small>홍</small>
                 </blockquote>
             </div><!--/col-md-8-->        
 
@@ -234,30 +223,7 @@
     	<!-- End Info Blokcs -->
 
         <!-- Our Clients -->
-        <div id="clients-flexslider" class="flexslider home clients">
-            <div class="headline"><h2>Family Site</h2></div>    
-            
-        <div class="flex-viewport" style="overflow: hidden; position: relative;">
-        	<ul class="slides" style="width: 3400%; -webkit-transition: 0.6s; transition: 0.6s; -webkit-transform: translate3d(-1012.3333333333335px, 0px, 0px);">
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/hp_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/hp.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/vadafone_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/vadafone.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/walmart_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/walmart.png" class="color-img" alt="">
-                    </a>
-                </li>
-            </ul></div></div><!--/flexslider-->
+
         <!-- End Our Clients -->
     </div>
 		<!-- END MAIN CONTENT -->	
