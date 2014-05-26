@@ -353,9 +353,6 @@
 	
 })(jQuery);
 
-
-
-
 /**
  * User 
  *  - signin
