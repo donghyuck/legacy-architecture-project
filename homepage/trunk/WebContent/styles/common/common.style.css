@@ -308,7 +308,6 @@ border-top-right-radius: 4px;
 }
 
 .header li.account.open .account-content {
-	cursor: default;
 	position: absolute;
 	left: auto;
 	right: 0;
@@ -320,11 +319,18 @@ border-top-right-radius: 4px;
 	width: 250px;
 	right: 0;
 	z-index: 9999 !important;
-	background-color: #F8F8F8;
 	text-align: left;
 	padding: 10px;
 	font-family: "BM_NANUMGOTHIC";
 	line-height: 24px;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,.15);
+	border-radius: 4px;
+	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);	
 }
 
 .header li.account .account-content p {
