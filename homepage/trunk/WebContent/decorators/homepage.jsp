@@ -55,7 +55,6 @@
 		background: #0070b8;
 		background-size: cover;
 		padding: 12px 0;
-		 /*margin-top : -20px;   navbar-fixed-top*/
 		margin-bottom: 10px;
 	}
 	
@@ -64,7 +63,7 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
-	header h1 ,  header h2, h4 {
+	header h1 ,  header h2, header h4 {
 		color: white;
 		font-weight: 300;
 		margin-bottom: 0;
