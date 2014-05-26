@@ -67,7 +67,7 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 
-	h2{	
+	.cloud h2{	
 		color: white;
 	}
 	
