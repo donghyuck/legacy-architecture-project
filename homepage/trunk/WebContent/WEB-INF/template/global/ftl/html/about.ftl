@@ -202,7 +202,7 @@
 								</div>
 								<div class="tab-pane fade" id="company-logo" style="min-height:300px;">
 									<div class="page-header page-nounderline-header padding-left-10 ">
-										<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 형식을 제공됩니다.</small></h5>
+										<h5><i class="fa fa-info"></i> <small>로고 파일은 AI 와 JPG 파일로 제공됩니다.</small></h5>
 									</div>
 									<div class="panel panel-default">
 										<div class="panel-body">
