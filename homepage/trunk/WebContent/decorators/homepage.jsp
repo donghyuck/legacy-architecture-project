@@ -36,7 +36,7 @@
 	}	
 
 	.copyright p {
-		color: #333;
+		color: #777;
 	}
 	
 	.footer {
