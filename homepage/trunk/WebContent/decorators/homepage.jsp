@@ -23,15 +23,6 @@
 <decorator:head />
 
 <style>
-/*
-	#account-navbar  ul.dropdown-menu {
-		min-width : 320px;
-	}
-*/	
-	body { 
-		/*padding-top: 51px; */
-		/*color: #666;*/		
-	}
 	
 	.k-grid table tr.k-state-selected{
 		background: #5bc0de;
@@ -89,12 +80,6 @@
 	.k-editor-toolbar .k-state-selected {
 		background-color: #428bca;
 	}
-	/*		
-	.navbar-nav>li>a.btn-link {
-		padding-top: 14px;
-		padding-bottom: 14px;
-	}
-	*/
 				
 </style>
 </head>
