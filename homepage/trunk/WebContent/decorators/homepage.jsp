@@ -54,13 +54,13 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
-	header.cloud h1 ,  header.cloud  h2, header.cloud  h4 {
+	.cloud h1 ,  .cloud  h2, .cloud  h4 {
 		color: white;
 		font-weight: 300;
 		margin-bottom: 0;
 	}
 	
-	header.cloud h4 small {
+	.cloud h4 small {
 		color: white;
 	}	
 
