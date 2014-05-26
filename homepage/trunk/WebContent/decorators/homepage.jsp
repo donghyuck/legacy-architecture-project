@@ -30,9 +30,8 @@
 	}		
 
 	.copyright {
-		font-size: 12px;
-		padding: 11px 0 7px;
-		/*background: #3e4753;*/
+		background: #283645;
+		color: #707E8C;
 		/*border-top: solid 1px #777;*/
 	}	
 	.footer {
