@@ -282,7 +282,8 @@ border-top-right-radius: 4px;
 	font-weight: normal;
 	line-height: 1;
 	cursor: pointer;
-	background: rgba(0,0,0,0.03);
+	/*
+	background: rgba(0,0,0,0.03); */
 	line-height: 40px;
 	width: 40px;
 	height: 40px;
