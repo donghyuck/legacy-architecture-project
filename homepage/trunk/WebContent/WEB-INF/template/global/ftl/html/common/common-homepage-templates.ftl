@@ -756,17 +756,26 @@
 <!-- ============================== -->
 <script id="account-template" type="text/x-kendo-template">
 <li class="account">
-		<a href="javascript:void(0);" class="btn btn-link btn-account dropdown-toggle" data-toggle="dropdown">
-		# if ( anonymous ) { # 
-			<img src="${request.contextPath}/images/common/anonymous.png" height="34"/>	
-		# }else{ # 
-			<span class="badge badge-blue rounded-2x pull-right">3</span>
-			<img src="${request.contextPath}/download/profile/#: username #?width=100&height=150" height="34">
-		# } #
-		</a>			
-		<div class="account-content" >
-		ss
+	<a href="javascript:void(0);" class="btn btn-link btn-account dropdown-toggle" data-toggle="dropdown">
+	# if ( anonymous ) { # 
+		<img src="${request.contextPath}/images/common/anonymous.png" height="34"/>	
+	# }else{ # 
+		<span class="badge badge-blue rounded-2x pull-right">3</span>
+		<img src="${request.contextPath}/download/profile/#: username #?width=100&height=150" height="34">
+	# } #
+	</a>			
+	<div class="account-content" >
+		# if ( !anonymous ) { # 
+		<img class="pull-left img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
+		<div class="inline-block">
+			<p class="text-muted"><strong> #:name#</strong></p>
+			<p class="text-muted"> #:email #</p>	
+			<p><a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary btn-sm" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a></p>
 		</div>
+		# }else{ # 
+	
+		# } #
+	</div>
 		<ul class="account-content hide">
 			# if ( !anonymous ) { # 
 			<li>
