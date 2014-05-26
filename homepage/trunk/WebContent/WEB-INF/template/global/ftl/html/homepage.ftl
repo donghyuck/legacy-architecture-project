@@ -59,7 +59,7 @@
             <div class="da-slide da-slide-toleft">
                 <h2><i>CLEAN &amp; FRESH</i> <br> <i>FULLY RESPONSIVE</i> <br> <i>DESIGN</i></h2>
                 <p><i>Lorem ipsum dolor amet</i> <br> <i>tempor incididunt ut</i> <br> <i>veniam omnis </i></p>
-                <div class="da-img"><img src="assets/plugins/parallax-slider/img/1.png" alt=""></div>
+                <div class="da-img"><img src="http://htmlstream.com/preview/unify-v1.4/assets/plugins/parallax-slider/img/1.png" alt=""></div>
             </div>
             <div class="da-slide da-slide-fromright da-slide-current">
                 <h2><i>RESPONSIVE VIDEO</i> <br> <i>SUPPORT AND</i> <br> <i>MANY MORE</i></h2>
@@ -71,7 +71,7 @@
             <div class="da-slide">
                 <h2><i>USING BEST WEB</i> <br> <i>SOLUTIONS WITH</i> <br> <i>HTML5/CSS3</i></h2>
                 <p><i>Lorem ipsum dolor amet</i> <br> <i>tempor incididunt ut</i> <br> <i>veniam omnis </i></p>
-                <div class="da-img"><img src="assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01"></div>
+                <div class="da-img"><img src="http://htmlstream.com/preview/unify-v1.4/assets/plugins/parallax-slider/img/html5andcss3.png" alt="image01"></div>
             </div>
             <div class="da-arrows">
                 <span class="da-arrows-prev"></span>
@@ -163,7 +163,7 @@
                 <div class="thumbnails thumbnail-style thumbnail-kenburn">
                     <div class="thumbnail-img">
                         <div class="overflow-hidden">
-                            <img class="img-responsive" src="assets/img/main/10.jpg" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/10.jpg" alt="">
                         </div>
                         <a class="btn-more hover-effect" href="#">read more +</a>                   
                     </div>
