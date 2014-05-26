@@ -39,9 +39,7 @@
 				});				
 				
 				<#if !action.user.anonymous >				
-				
-				</#if>	
-				
+				</#if>				
 				 common.ui.initializeOwlCarousel();
 				 $('.owl-carousel-v1, .owl-carousel-v2').show();
 				// END SCRIPT            
@@ -96,6 +94,9 @@
 					<!-- end side menu -->
 				</div>
 				<div class="col-lg-9">
+				<#if action.hasWebSitePage("pages.customers.pageId") >		
+				${ processedBodyText }		
+				<#else> 
 					<div class="page-header padding-left-10">
 						<h5><strong> 주요 고객사</strong> <small> 공공.금융기관, 정보통신, 서비스/유통, 제조/건설등 국내 여러 기업이 인키움의 제품과 서비스를 사용하고 있습니다.</small></h5>
 					</div>					
@@ -105,7 +106,7 @@
 								<a class="owl-btn prev-v1"><i class="fa fa-angle-left"></i></a>
 								<a class="owl-btn next-v1"><i class="fa fa-angle-right"></i></a>
 							</div>
-						</div><!--/navigation-->					
+						</div>				
 						<div class="owl-slider">
 							<div class="item">
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/emirates.png" alt="">
@@ -175,7 +176,7 @@
                     </div><!--/navigation-->              
                 </div>    
                 <!-- End Owl Carousel v2 --> 					
-						
+				</#if> 		
 				</div>				
 			</div>
 		</div>									 
