@@ -63,7 +63,7 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 .
-	header h1 ,  header h2, header h4 {
+	header.cloud h1 ,  header.cloud  h2, header.cloud  h4 {
 		color: white;
 		font-weight: 300;
 		margin-bottom: 0;
@@ -72,12 +72,7 @@
 	header.cloud h4 small {
 		color: white;
 	}	
-	/*
-	.navbar-inverse {
-		background-color: #333;
-		border-color: #222;
-	}
-	*/
+
 	.k-editor-toolbar .k-tool {
 		border : 0px;
 		color: #34AADC;
