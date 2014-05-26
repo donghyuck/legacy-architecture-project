@@ -73,6 +73,11 @@
 		margin-bottom: 0;
 	}
 	
+	h2{
+	
+	color: white;
+	}
+	
 	.cloud h4 small {
 		color: white;
 	}	
