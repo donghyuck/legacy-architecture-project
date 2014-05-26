@@ -396,7 +396,11 @@
 
 }
 */
-
+/** panel section  */
+.panel-header-actions {
+	float: right;
+	padding-top:2px;
+}
 
 /** personalized section  */
 
