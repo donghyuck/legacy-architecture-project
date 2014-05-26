@@ -66,16 +66,9 @@
 		color: white;
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
-.
-	.cloud h2{
+
+	h2{	
 		color: white;
-		font-weight: 300;
-		margin-bottom: 0;
-	}
-	
-	h2{
-	
-	color: white;
 	}
 	
 	.cloud h4 small {
