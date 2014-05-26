@@ -17,7 +17,7 @@
 								<input type="radio" name="personalized-area-col-size"  value="4"> <i class="fa fa-th"></i>
 							</label>
 							</#if>
-						</div>										
+						</div>
 					</li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">		
