@@ -263,6 +263,9 @@
 	}		
 }
 
+/*
+* Account nav ..
+**/
 .header li.account.open {
 -webkit-border-radius: 0;
 -moz-border-radius: 0;
@@ -282,8 +285,7 @@ border-top-right-radius: 4px;
 	font-weight: normal;
 	line-height: 1;
 	cursor: pointer;
-	/*
-	background: rgba(0,0,0,0.03); */
+	/*	background: rgba(0,0,0,0.03); */
 	line-height: 40px;
 	width: 40px;
 	height: 40px;
@@ -297,15 +299,29 @@ border-top-right-radius: 4px;
 .header .navbar-default .navbar-nav > li > a.btn-account {
 	border: 0px;
 	padding: 2px 0px 2px 0px;
-	-webkit-border-radius: 2px;
-	-moz-border-radius: 2px;
-	border-radius: 2px;	
 }
 
 .btn-account:hover, .btn-account:focus, .btn-account:active {
   background-color: transparent;
   opacity : .7;
   border: 0px;
+}
+
+.header li.account.open .account-content {
+	cursor: default;
+	position: absolute;
+	left: auto;
+	right: 0;
+}
+
+.header li.account .account-content {
+	position: fixed;
+	left: -999px;
+	width: 250px;
+	right: 0;
+	background-color: #F8F8F8;
+	text-align: left;
+	padding: 10px;
 }
 
 
