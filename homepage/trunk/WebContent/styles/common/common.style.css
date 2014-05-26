@@ -315,6 +315,12 @@ border-top-right-radius: 4px;
 	border-bottom: solid 2px #aaa;
 }
 
+.header li.account.open .account-content {
+	position: absolute;
+	left: auto;
+	right: 0;
+}
+
 .header li.account .account-content {
 	position: fixed;
 	left: -999px;
