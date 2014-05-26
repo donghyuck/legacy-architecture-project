@@ -5,7 +5,7 @@
 					<p class="navbar-text hidden-xs">&nbsp;</p>	
 					<p class="navbar-text hidden-xs text-primary"><small>위젯 레이아웃</small></p>	
 					<li class="navbar-btn hidden-xs">
-						<div class="btn-group navbar-btn" data-toggle="buttons">
+						<div class="btn-group navbar-btn btn-group-sm" data-toggle="buttons">
 							<label class="btn btn-info">
 								<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
 							</label>
