@@ -766,8 +766,12 @@
 	</a>			
 	<div class="account-content" >
 		# if ( !anonymous ) { # 
-		<p><i class="fa fa-warning"></i> You have 3 products on your cart</p>
-		
+		<div class="alert alert-danger fade in">
+			<strong>Oh snap!</strong> Change a few things up and try submitting again.
+		</div>
+                            
+		<p><i class="fa fa-warning"></i> You have 3 products on your cart</p>	
+			
 		<img class="pull-left img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
 		<div class="inline-block">
 			<p class="text-muted"><strong> #:name#</strong></p>
