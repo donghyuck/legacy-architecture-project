@@ -315,6 +315,25 @@ border-top-right-radius: 4px;
 	border-bottom: solid 2px #aaa;
 }
 
+.header li.account .account-content {
+	position: fixed;
+	left: -999px;
+	width: 250px;
+	right: 0;
+	text-align: left;
+	padding: 10px;
+	font-family: "BM_NANUMGOTHIC";
+	line-height: 24px;
+	list-style: none;
+	background-color: #fff;
+	background-clip: padding-box;
+	border: 1px solid #ccc;
+	border: 1px solid rgba(0,0,0,.15);
+	border-radius: 4px;
+	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+	box-shadow: 0 6px 12px rgba(0,0,0,.175);	
+}
+
 /*
 
 
