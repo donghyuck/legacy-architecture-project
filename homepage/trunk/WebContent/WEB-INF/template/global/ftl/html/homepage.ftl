@@ -50,6 +50,9 @@
 		-->
 		</script>		
 		<style scoped="scoped">
+		.da-slider{
+			background: transparent url(${request.contextPath}/images/slider-bg.jpg) repeat 0% 0%;
+		}
 		</style>   	
 	</head>
 	<body>
