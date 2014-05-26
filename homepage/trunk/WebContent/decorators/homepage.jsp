@@ -37,10 +37,14 @@
 	}	
 	.footer {
 		color: #777;
-		background: #eee;
+		background: #2F4052;
 		padding: 20px 0 30px;
 	}	
-
+	
+	.footer h4{
+		color: #2F4052;
+	}
+	
 	/** Header css */
 	header {
 		background: #0070b8;
