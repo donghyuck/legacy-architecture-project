@@ -26,7 +26,7 @@
 								</ul>
 							</li>
 							<li class="topbar-devider"></li>   
-							<li><a href="page_faq.html">Help</a></li>  
+							<li><a href="page_faq.html">도움말</a></li>  
 						</ul>
 						<!-- End Topbar Navigation -->
 					</div>
