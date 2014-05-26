@@ -16,7 +16,8 @@
 			'${request.contextPath}/js/headroom/jquery.headroom.min.js',
 			
 			'${request.contextPath}/js/flexslider/jquery.flexslider-min.js',
-			'${request.contextPath}/js/common/common.modernizr.custom.js',
+			'${request.contextPath}/js/parallax-slider/modernizer.js',
+		/*	'${request.contextPath}/js/common/common.modernizr.custom.js',*/
 			'${request.contextPath}/js/parallax-slider/jquery.cslider.js',
 			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
