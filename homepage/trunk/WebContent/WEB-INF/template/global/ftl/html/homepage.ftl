@@ -42,6 +42,8 @@
 						e.token.copy(currentUser);
 					}				
 				});					
+			
+				Index.initParallaxSlider(); 
 				
 				// top nav bar 
 				$("nav.navbar:first").headroom();				
