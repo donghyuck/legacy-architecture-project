@@ -49,6 +49,11 @@
 		color: #777;
 	}
 	
+	.footer p{
+		color: #777;
+	}
+		
+	
 	/** Header css */
 	header {
 		background: #0070b8;
