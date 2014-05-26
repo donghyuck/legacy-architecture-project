@@ -300,6 +300,7 @@ border-top-right-radius: 4px;
   background-color: transparent;
   opacity : .7;
   border: 0px;
+  border-bottom: 0px;
 }
 
 
