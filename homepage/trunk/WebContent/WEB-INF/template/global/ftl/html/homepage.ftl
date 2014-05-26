@@ -131,7 +131,7 @@
                 <div class="thumbnails thumbnail-style thumbnail-kenburn">
                 	<div class="thumbnail-img">
                         <div class="overflow-hidden">
-                            <img class="img-responsive" src="assets/img/main/2.jpg" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
                         </div>
                         <a class="btn-more hover-effect" href="#">read more +</a>					
                     </div>
@@ -145,7 +145,7 @@
                 <div class="thumbnails thumbnail-style thumbnail-kenburn">
                     <div class="thumbnail-img">
                         <div class="overflow-hidden">
-                            <img class="img-responsive" src="assets/img/main/3.jpg" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
                         </div>
                         <a class="btn-more hover-effect" href="#">read more +</a>                   
                     </div>
@@ -159,7 +159,7 @@
                 <div class="thumbnails thumbnail-style thumbnail-kenburn">
                     <div class="thumbnail-img">
                         <div class="overflow-hidden">
-                            <img class="img-responsive" src="assets/img/main/9.jpg" alt="">
+                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/9.jpg" alt="">
                         </div>
                         <a class="btn-more hover-effect" href="#">read more +</a>                   
                     </div>
@@ -193,7 +193,7 @@
     			<div class="headline"><h2>Welcome To Unify</h2></div>
                 <div class="row">
                     <div class="col-sm-4">
-                        <img class="img-responsive margin-bottom-20" src="assets/img/main/6.jpg" alt="">
+                        <img class="img-responsive margin-bottom-20" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
                     </div>
                     <div class="col-sm-8">
                         <p>Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals. It works on all major web browsers, tablets and phone.</p>
@@ -218,19 +218,19 @@
     			<div id="myCarousel" class="carousel slide carousel-v1">
                     <div class="carousel-inner">
                         <div class="item active">
-                            <img src="assets/img/main/5.jpg" alt="">
+                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/5.jpg" alt="">
                             <div class="carousel-caption">
                                 <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
                             </div>
                         </div>
                         <div class="item">
-                            <img src="assets/img/main/4.jpg" alt="">
+                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="">
                             <div class="carousel-caption">
                                 <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
                             </div>
                             </div>
                         <div class="item">
-                            <img src="assets/img/main/3.jpg" alt="">
+                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
                             <div class="carousel-caption">
                                 <p>Justo cras odio apibus ac afilisis lingestas de.</p>
                             </div>
@@ -257,104 +257,62 @@
         <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides" style="width: 3400%; -webkit-transition: 0.6s; transition: 0.6s; -webkit-transform: translate3d(-1012.3333333333335px, 0px, 0px);">
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/hp_grey.png" alt=""> 
-                        <img src="assets/img/clients/hp.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/hp_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/hp.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/igneus_grey.png" alt=""> 
-                        <img src="assets/img/clients/igneus.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/vadafone_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/vadafone.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/vadafone_grey.png" alt=""> 
-                        <img src="assets/img/clients/vadafone.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/walmart_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/walmart.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/walmart_grey.png" alt=""> 
-                        <img src="assets/img/clients/walmart.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/shell_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/shell.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/shell_grey.png" alt=""> 
-                        <img src="assets/img/clients/shell.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/natural_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/natural.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/natural_grey.png" alt=""> 
-                        <img src="assets/img/clients/natural.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/aztec_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/aztec.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/aztec_grey.png" alt=""> 
-                        <img src="assets/img/clients/aztec.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/gamescast_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/gamescast.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/gamescast_grey.png" alt=""> 
-                        <img src="assets/img/clients/gamescast.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cisco_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cisco.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/cisco_grey.png" alt=""> 
-                        <img src="assets/img/clients/cisco.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/everyday_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/everyday.png" class="color-img" alt="">
                     </a>
                 </li>
                 <li style="width: 125.66666666666667px; float: left; display: block;">
                     <a href="#">
-                        <img src="assets/img/clients/everyday_grey.png" alt=""> 
-                        <img src="assets/img/clients/everyday.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/cocacola_grey.png" alt=""> 
-                        <img src="assets/img/clients/cocacola.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/spinworkx_grey.png" alt=""> 
-                        <img src="assets/img/clients/spinworkx.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/shell_grey.png" alt=""> 
-                        <img src="assets/img/clients/shell.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/natural_grey.png" alt=""> 
-                        <img src="assets/img/clients/natural.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/gamescast_grey.png" alt=""> 
-                        <img src="assets/img/clients/gamescast.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/everyday_grey.png" alt=""> 
-                        <img src="assets/img/clients/everyday.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="assets/img/clients/spinworkx_grey.png" alt=""> 
-                        <img src="assets/img/clients/spinworkx.png" class="color-img" alt="">
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cocacola_grey.png" alt=""> 
+                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cocacola.png" class="color-img" alt="">
                     </a>
                 </li>
             </ul></div></div><!--/flexslider-->
