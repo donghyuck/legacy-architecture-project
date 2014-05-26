@@ -402,12 +402,9 @@
 
 nav.personalized-navbar {
 	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
-	border-radius : 0px;
-	top: 0;
 	right: 0;
 	left: 0;
 	border : 0px;
-	position : fixed;
 	min-height: 50px;
 	z-index: 1000;	
 }
