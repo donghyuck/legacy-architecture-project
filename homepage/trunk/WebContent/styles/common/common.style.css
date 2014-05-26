@@ -311,6 +311,10 @@ border-top-right-radius: 4px;
 	opacity : .7;
 }
 
+.header .navbar-default .navbar-nav > li > a.btn-account:focusout{
+	border-bottom: solid 2px #aaa;
+}
+
 /*
 
 
