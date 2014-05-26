@@ -266,7 +266,7 @@
 
         <!-- Our Clients -->
         <div id="clients-flexslider" class="flexslider home clients">
-            <div class="headline"><h2>Our Clients</h2></div>    
+            <div class="headline"><h2>Family Site</h2></div>    
             
         <div class="flex-viewport" style="overflow: hidden; position: relative;"><ul class="slides" style="width: 3400%; -webkit-transition: 0.6s; transition: 0.6s; -webkit-transform: translate3d(-1012.3333333333335px, 0px, 0px);">
                 <li style="width: 125.66666666666667px; float: left; display: block;">
