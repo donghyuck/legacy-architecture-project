@@ -324,7 +324,7 @@ border-top-right-radius: 4px;
 .header li.account .account-content {
 	position: fixed;
 	left: -999px;
-	width: 250px;
+	width: 350px;
 	right: 0;
 	text-align: left;
 	padding: 10px;
