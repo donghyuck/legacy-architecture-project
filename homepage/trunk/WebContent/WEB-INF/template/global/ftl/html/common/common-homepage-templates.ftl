@@ -782,9 +782,9 @@
 		</div>
 		<hr>
 <ul class="list-unstyled save-job">
-                            <li><i class="fa fa-download"></i> <a href="#">Save job</a></li>
-                            <li><i class="fa fa-eye"></i> <a href="#">View saved jobs</a></li>
-                            <li><i class="fa fa-plus"></i> <a href="#">Follow us</a></li>
+                            <li><i class="fa fa-download"></i> <a href="\\#">Save job</a></li>
+                            <li><i class="fa fa-eye"></i> <a href="\\#">View saved jobs</a></li>
+                            <li><i class="fa fa-plus"></i> <a href="\\#">Follow us</a></li>
                         </ul>		
 		
 		<div class="inline-block">
