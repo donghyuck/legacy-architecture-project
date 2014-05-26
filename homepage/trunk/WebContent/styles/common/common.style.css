@@ -402,6 +402,8 @@
 
 nav.personalized-navbar .dropdown > a {
 border-bottom: 0px;
+min-height: 52px;
+color: #428bca;
 }
 
 nav.personalized-navbar .dropdown > a:after {
