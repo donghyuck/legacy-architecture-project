@@ -43,7 +43,7 @@
 					}				
 				});					
 			
-				Index.initParallaxSlider(); 
+				$('#da-slider').cslider();
 				
 				// top nav bar 
 				$("nav.navbar:first").headroom();				
