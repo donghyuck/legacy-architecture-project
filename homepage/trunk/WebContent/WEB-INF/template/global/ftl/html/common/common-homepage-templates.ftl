@@ -772,7 +772,7 @@
 		<img class="img-profile img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
 		<div class="overflow-h">
                             <span class="font-s">Steve Andersson</span>
-                            <p class="color-green">Position: <span class="hex">Manager, Accounter</span></p>
+                            <p class="color-green">Position: <span class="hex"> #:name#</span></p>
                             <ul class="social-icons">
                                 <li><a class="social_facebook" data-original-title="Facebook" href="\\#"></a></li>
                                 <li><a class="social_googleplus" data-original-title="Google Plus" href="\\#"></a></li>
