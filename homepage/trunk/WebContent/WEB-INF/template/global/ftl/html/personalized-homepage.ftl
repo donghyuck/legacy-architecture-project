@@ -19,8 +19,7 @@
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/pdfobject/pdfobject.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.js',
-			'${request.contextPath}/js/common/common.models.js',
-			'${request.contextPath}/js/common/common.api.js',
+			'${request.contextPath}/js/common/common.models.js','${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {			
 			
@@ -111,8 +110,6 @@
 				$("#announce-panel").data( "announcePlaceHolder", new Announce () );	
 				
 				createNoticeGrid();
-				
-				createNewsGrid();
 																			
 				// 4. Right Tabs								
 				$('#myTab').on( 'show.bs.tab', function (e) {
@@ -440,7 +437,7 @@
 							var selectedCell = this.dataItem( selectedCells );	    							
 							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
 							selectedCell.copy(announcePlaceHolder);					
-							$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
+							//$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
 							showAnnouncePanel();	
 						}
 					},
@@ -460,80 +457,6 @@
 				$("#announce-panel" ).show();
 			}	
 		}	
-		
-			<!-- ============================== -->
-		<!-- create news grid										-->
-		<!-- ============================== -->								
-		function createNewsGrid(){
-			if( !$("#news-grid").data('kendoGrid') ){				
-				//$("#news-grid").data('newsTargetPlaceHolder', 1);				
-				$("#news-grid").kendoGrid({
-					dataSource : new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-forum-topics.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}else{								
-									return {forumId: 1 };								
-								}
-							} 
-						},
-						pageSize: 10,
-						error:common.api.handleKendoAjaxError,
-						schema: {
-							total : "targetTopicCount",
-							data : "targetTopics",
-							model : common.models.ForumTopic
-						}
-					}),
-					sortable: true,
-					columns: [ 
-						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field:"subject", title: "제목"}
-					],
-					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						var selectedCell = this.dataItem( selectedCells );	
-						//alert(kendo.stringify(selectedCell));
-						//var selectedCells = this.select();
-						//alert($("#announce-grid").data('announceTargetPlaceHolder'));
-						/*if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    							
-							var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
-							selectedCell.copy(announcePlaceHolder);					
-							$("#announce-panel").data( "announcePlaceHolder", announcePlaceHolder );							 
-							showAnnouncePanel();	
-						}*/
-					},
-					dataBound: function(e) {					
-						//var selectedCells = this.select();
-						//this.select("tr:eq(1)");						
-					},
-					schema: {
-							total : "targetTopicCount",
-							data : "targetTopics",
-							model : common.models.ForumTopic
-						}
-				});	
-				/*common.api.handlePanelHeaderActions($("#announce-panel"));
-				common.ui.handleActionEvents( $('input[name="announce-selected-target"]'), { event: 'change' , handler: function(e){				
-					var oldSelectedSource = $("#announce-grid").data('announceTargetPlaceHolder');
-					if( oldSelectedSource != this.value ){
-						$("#announce-grid").data('announceTargetPlaceHolder', this.value );
-						$("#announce-grid").data('kendoGrid').dataSource.read();
-					}					
-				}});*/
-				//$("#announce-panel" ).show();
-			}
-				
-		}
 						
 		function showAnnouncePanel (){			
 			var announcePlaceHolder = $("#announce-panel").data( "announcePlaceHolder" );
@@ -1182,37 +1105,6 @@
 							</div>
 							<div class="panel-body">					
 								<div  id="announce-view"></div>
-							</div>
-						</div>		
-						
-						<!--뉴스 -->
-						<div class="panel panel-default">
-						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp;뉴스
-							<div class="k-window-actions panel-header-actions">										
-								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-							</div>									
-							</div>
-							<div class="panel-body">		
-							<div class="page-header text-primary">
-								<h5 ><small><i class="fa fa-info"></i> 우측 회사 버튼을 클릭하면 회사(${user.company.displayName}) 에 해당하는 뉴스 목록이 보여집니다. </small></h5>	
-								<p>
-								<div class="btn-group" data-toggle="buttons">
-									<label class="btn btn-info btn-sm active">
-										<input type="radio" name="announce-selected-target" value="30" >사이트
-									</label>
-									<label class="btn btn-info btn-sm ">
-										<input type="radio" name="announce-selected-target" value="1">회사
-									</label>
-								</div>
-								</p>					
-							</div>										
-							<div  id="news-grid"></div>	
-							</div>
-							<div class="panel-body">					
-								<div  id="news-view"></div>
 							</div>
 						</div>		
 					</div>
