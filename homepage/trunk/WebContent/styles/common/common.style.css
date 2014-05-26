@@ -403,7 +403,7 @@
 nav.personalized-navbar .dropdown > a:after {
 top: 17px;
 right: 0px;
-content: "\f107";
+content: none;
 }
 
 nav.personalized-navbar {
