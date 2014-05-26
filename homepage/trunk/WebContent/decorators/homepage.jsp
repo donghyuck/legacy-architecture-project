@@ -42,7 +42,7 @@
 	}	
 	
 	.footer h4{
-		color: #2F4052;
+		color: #ffffff;
 	}
 	
 	/** Header css */
