@@ -276,6 +276,37 @@
   border: 0px;
 }
 
+.header li.account.open {
+-webkit-border-radius: 0;
+-moz-border-radius: 0;
+border-radius: 0;
+-webkit-border-top-left-radius: 4px;
+-webkit-border-top-right-radius: 4px;
+-moz-border-radius-topleft: 4px;
+-moz-border-radius-topright: 4px;
+border-top-left-radius: 4px;
+border-top-right-radius: 4px;
+}
+
+.header li.account {
+	display: inline-block;
+	font-family: FontAwesome;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	cursor: pointer;
+	background: rgba(0,0,0,0.03);
+	line-height: 40px;
+	width: 40px;
+	height: 40px;
+	text-align: center;
+	font-size: 17px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+/*
 .dropdown > a.btn-account:after{
 	content : none;
 }
@@ -301,7 +332,7 @@
 	}
 
 }
-
+*/
 
 
 
