@@ -305,7 +305,6 @@ border-top-right-radius: 4px;
   background-color: transparent;
   opacity : .7;
   border: 0px;
-  border-bottom: solid 2px transparent;
 }
 
 .header li.account.open .account-content {
