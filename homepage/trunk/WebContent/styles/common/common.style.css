@@ -295,14 +295,19 @@ border-top-right-radius: 4px;
 	display: inline-block;
 	border-bottom: solid 2px #aaa;
 }
-
+/*
 .btn-account:hover, .btn-account:focus, .btn-account:active {
   background-color: transparent;
   opacity : .7;
   border: 0px;
   border-bottom: 0px;
-}
+}*/
 
+.header .navbar-default .navbar-nav > li > a.btn-account:hover, .header .navbar-default .navbar-nav > li.account.active > a {
+	background-color: transparent;
+	opacity : .7;
+	border-bottom: solid 2px #72c02c;
+}
 
 /*
 
