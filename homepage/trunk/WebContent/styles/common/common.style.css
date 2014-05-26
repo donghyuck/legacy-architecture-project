@@ -347,7 +347,7 @@ border-top-right-radius: 4px;
 	margin-right: 10px;
 }
  
-.account-content hr {
+.account-content > hr {
 	margin: 15px 0;
 }
  
