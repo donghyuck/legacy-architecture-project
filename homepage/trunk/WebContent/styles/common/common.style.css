@@ -263,19 +263,6 @@
 	}		
 }
 
-
-
-.header .navbar-default .navbar-nav > li > a.btn-account {
-	border: 0px;
-	padding: 0px 20px 3px 20px;
-}
-
-.btn-account:hover, .btn-account:focus, .btn-account:active {
-  background-color: transparent;
-  opacity : .7;
-  border: 0px;
-}
-
 .header li.account.open {
 -webkit-border-radius: 0;
 -moz-border-radius: 0;
@@ -300,11 +287,23 @@ border-top-right-radius: 4px;
 	width: 40px;
 	height: 40px;
 	text-align: center;
-	font-size: 15px;
+	font-size: 17px;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 }
+
+.header .navbar-default .navbar-nav > li > a.btn-account {
+	border: 0px;
+	padding: 0px 20px 3px 20px;
+}
+
+.btn-account:hover, .btn-account:focus, .btn-account:active {
+  background-color: transparent;
+  opacity : .7;
+  border: 0px;
+}
+
 
 /*
 .dropdown > a.btn-account:after{
