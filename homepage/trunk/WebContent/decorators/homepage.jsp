@@ -41,12 +41,12 @@
 	
 	.footer {
 		color: #777;
-		background: #2F4052;
+		background: #dadada;
 		padding: 20px 0 30px;
 	}	
 	
 	.footer h4{
-		color: #ffffff;
+		color: #777;
 	}
 	
 	/** Header css */
