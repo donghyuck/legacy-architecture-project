@@ -769,9 +769,16 @@
 		<img class="pull-left img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
 		<div class="inline-block">
 			<p class="text-muted"><strong> #:name#</strong></p>
-			<p class="text-muted"> #:email #</p>	
-			<p><a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary btn-sm" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a></p>
+			<p class="text-muted"> #:email #</p>				
 		</div>
+		<div class="row">
+			<div class="col-md-6">
+				<a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary btn-sm" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a>
+			</div>
+			<div class="col-md-6">			
+			</div>			
+		</div>
+		
 		# }else{ # 
 	
 		# } #
