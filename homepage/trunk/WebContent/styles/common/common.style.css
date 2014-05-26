@@ -296,6 +296,9 @@ border-top-right-radius: 4px;
 .header .navbar-default .navbar-nav > li > a.btn-account {
 	border: 0px;
 	padding: 2px 0px 2px 0px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;	
 }
 
 .btn-account:hover, .btn-account:focus, .btn-account:active {
