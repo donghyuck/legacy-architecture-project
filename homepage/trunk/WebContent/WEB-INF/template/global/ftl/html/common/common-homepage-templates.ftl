@@ -777,11 +777,11 @@
 		</div>
 		<hr>
 		<ul class="list-unstyled save-job">
-			<li><a href="${request.contextPath}/main.do?view=personalized">마이 페이지</a></li>
+			<li><a href="${request.contextPath}/main.do?view=personalized" class="btn-link">마이 페이지</a></li>
 			#if ( isSystem ) {#
-			<li><a href="/secure/main-site.do" href="\\#">시스템 관리</a></li>
+			<li><a href="/secure/main-site.do" class="btn-link">시스템 관리</a></li>
 			# } #			
-			<li><a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
+			<li><a href="/logout"><i class="fa fa-sign-out" class="btn-link"></i> 로그아웃</a></li>
 		</ul>		
 		# }else{ # 
 			<li>
