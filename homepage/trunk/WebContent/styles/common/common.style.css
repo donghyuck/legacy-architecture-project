@@ -295,7 +295,7 @@ border-top-right-radius: 4px;
 
 .header .navbar-default .navbar-nav > li > a.btn-account {
 	border: 0px;
-	padding: 0px 20px 3px 20px;
+	padding: 2px 0px 2px 0px;
 }
 
 .btn-account:hover, .btn-account:focus, .btn-account:active {
