@@ -774,10 +774,10 @@
                             <span class="font-s">Steve Andersson</span>
                             <p class="color-green">Position: <span class="hex">Manager, Accounter</span></p>
                             <ul class="social-icons">
-                                <li><a class="social_facebook" data-original-title="Facebook" href="#"></a></li>
-                                <li><a class="social_googleplus" data-original-title="Google Plus" href="#"></a></li>
-                                <li><a class="social_tumblr" data-original-title="Tumblr" href="#"></a></li>
-                                <li><a class="social_twitter" data-original-title="Twitter" href="#"></a></li>
+                                <li><a class="social_facebook" data-original-title="Facebook" href="\\#"></a></li>
+                                <li><a class="social_googleplus" data-original-title="Google Plus" href="\\#"></a></li>
+                                <li><a class="social_tumblr" data-original-title="Tumblr" href="\\#"></a></li>
+                                <li><a class="social_twitter" data-original-title="Twitter" href="\\#"></a></li>
                             </ul>
 		</div>
 		
