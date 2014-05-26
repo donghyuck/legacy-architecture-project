@@ -3,6 +3,7 @@
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/flexslider/flexslider.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/parallax-slider/parallax-slider.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -15,6 +16,7 @@
 			'${request.contextPath}/js/headroom/jquery.headroom.min.js',
 			
 			'${request.contextPath}/js/flexslider/jquery.flexslider-min.js',
+			'${request.contextPath}/js/parallax-slider/jquery.cslider.js',
 			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
