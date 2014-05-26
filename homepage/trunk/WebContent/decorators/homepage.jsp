@@ -32,7 +32,7 @@
 	.copyright {
 		background: #283645;
 		color: #707E8C;
-		/*border-top: solid 1px #777;*/
+		border-top: solid 0px #777;
 	}	
 	.footer {
 		color: #777;
