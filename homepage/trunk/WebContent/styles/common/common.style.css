@@ -324,7 +324,7 @@ border-top-right-radius: 4px;
 	text-align: left;
 	padding: 10px;
 	font-family: "BM_NANUMGOTHIC";
-	line-height: 40px;
+	line-height: 1.2px;
 }
 
 .header li.account .account-content p {
