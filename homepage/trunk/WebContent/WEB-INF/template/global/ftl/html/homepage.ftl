@@ -2,6 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/flexslider/flexslider.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
