@@ -340,7 +340,7 @@ border-top-right-radius: 4px;
 	box-shadow: 0 6px 12px rgba(0,0,0,.175);	
 }
 
- .account-content  img.profile {
+ .account-content  img.img-profile {
  	float: left;	
 	width: 90px;
 	height: auto;
