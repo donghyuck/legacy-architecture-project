@@ -287,48 +287,6 @@
                         <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/walmart.png" class="color-img" alt="">
                     </a>
                 </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/shell_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/shell.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/natural_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/natural.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/aztec_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/aztec.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/gamescast_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/gamescast.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cisco_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cisco.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/everyday_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/everyday.png" class="color-img" alt="">
-                    </a>
-                </li>
-                <li style="width: 125.66666666666667px; float: left; display: block;">
-                    <a href="#">
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cocacola_grey.png" alt=""> 
-                        <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients/cocacola.png" class="color-img" alt="">
-                    </a>
-                </li>
             </ul></div></div><!--/flexslider-->
         <!-- End Our Clients -->
     </div>
