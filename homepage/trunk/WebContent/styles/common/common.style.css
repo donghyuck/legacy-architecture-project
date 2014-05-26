@@ -319,10 +319,10 @@ border-top-right-radius: 4px;
 	left: -999px;
 	width: 250px;
 	right: 0;
+	z-index: 9999 !important;
 	background-color: #F8F8F8;
 	text-align: left;
 	padding: 10px;
-	z-index: 9999 !important;
 }
 
 
