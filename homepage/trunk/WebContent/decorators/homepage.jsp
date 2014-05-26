@@ -30,10 +30,15 @@
 	}		
 
 	.copyright {
-		background: #283645;
+		background: #ffffff;
 		color: #707E8C;
 		border-top: solid 0px #777;
 	}	
+
+	.copyright p {
+		color: #333;
+	}
+	
 	.footer {
 		color: #777;
 		background: #2F4052;
