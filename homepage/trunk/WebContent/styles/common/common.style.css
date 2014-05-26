@@ -306,7 +306,7 @@ border-top-right-radius: 4px;
 	border-bottom: solid 2px #aaa;
 }
 
-.header .navbar-default .navbar-nav > li > a.btn-account:hover, .header .navbar-default .navbar-nav > li > a.btn-account:focus, .header .navbar-default .navbar-nav > li.account.active > a {
+.header .navbar-default .navbar-nav > li > a.btn-account:hover, .header .navbar-default .navbar-nav > li > a.btn-account:focus, .header .navbar-default .navbar-nav > li >  a.btn-account:active {
 	background-color: transparent;
 	opacity : .7;
 }
