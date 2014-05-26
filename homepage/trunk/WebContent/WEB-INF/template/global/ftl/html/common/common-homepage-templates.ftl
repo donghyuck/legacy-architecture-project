@@ -756,7 +756,6 @@
 <!-- ============================== -->
 <script id="account-template" type="text/x-kendo-template">
 <li class="account">
-	<span class="badge pull-right">3</span>
 		<a href="javascript:void(0);" class="btn btn-link btn-account dropdown-toggle" data-toggle="dropdown">
 		# if ( anonymous ) { # 
 			<img src="${request.contextPath}/images/common/anonymous.png" height="34"/>	
@@ -768,7 +767,7 @@
 		<div class="account-content" >
 		ss
 		</div>
-		<ul class="account-content">
+		<ul class="account-content hide">
 			# if ( !anonymous ) { # 
 			<li>
 				<div class="blank-space-5" style="min-width:400px;">	
