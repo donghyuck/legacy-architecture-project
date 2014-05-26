@@ -771,84 +771,19 @@
 		</div>			
 		<img class="img-profile img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
 		<div class="overflow-h">
-                            <span class="font-s">#:name# (#:email #)</span>
-                            <p class="color-green">소속: <span class="hex"> #= company.displayName #</span></p>
-                            <ul class="social-icons">
-                                <li><a class="social_facebook" data-original-title="Facebook" href="\\#"></a></li>
-                                <li><a class="social_googleplus" data-original-title="Google Plus" href="\\#"></a></li>
-                                <li><a class="social_tumblr" data-original-title="Tumblr" href="\\#"></a></li>
-                                <li><a class="social_twitter" data-original-title="Twitter" href="\\#"></a></li>
-                            </ul>
+			<span class="font-s">#:name# (#:email #)</span>
+			<p class="color-green">소속: <span class="hex"> #= company.displayName #</span></p>	
+			<a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary btn-sm" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a>
 		</div>
 		<hr>
-<ul class="list-unstyled save-job">
-                            <li><i class="fa fa-download"></i> <a href="\\#">Save job</a></li>
-                            <li><i class="fa fa-eye"></i> <a href="\\#">View saved jobs</a></li>
-                            <li><i class="fa fa-plus"></i> <a href="\\#">Follow us</a></li>
-                        </ul>		
-		
-		<div class="inline-block">
-			<p class="text-muted"><strong> #:name#</strong></p>
-			<p class="text-muted"> #:email #</p>				
-		</div>
-		<div class="row">
-			<div class="col-md-6">
-				<a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary btn-sm" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a>
-			</div>
-			<div class="col-md-6">			
-			</div>			
-		</div>
-		<hr>
-		<a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a>
-		# }else{ # 
-	
-		# } #
-	</div>
-		<ul class="account-content hide">
-			# if ( !anonymous ) { # 
-			<li>
-				<div class="blank-space-5" style="min-width:400px;">	
-					<ul class="media-list">
-						<li class="media">
-							<a class="pull-left" href="\\#">
-								<img class="media-object img-thumbnail" src="${request.contextPath}/download/profile/#: username #?width=100&height=150" />
-							</a>
-							<div class="media-body" style="color:ccc;">
-								<p class="text-muted"><strong> #:name#</strong></p>
-								<p class="text-muted"> #:email #</p>	
-								<p><a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary btn-sm" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a></p>		
-								<!--						
-								<ul class="nav nav-pills nav-stacked">
-									<li class="active">
-										<a href="\\#">
-										<span class="badge pull-right">3</span>
-										Home
-										</a>
-									</li>
-									<li>
-										<a href="\\#">
-										<span class="badge pull-right">1</span>
-										알림
-										</a>
-									</li>
-									<li>
-										<a href="\\#">
-										<span class="badge pull-right">2</span>
-										메시지
-										</a>
-									</li>																			
-								</ul>
-								-->
-							</div>
-						</li>
-					</ul>
-			</li>
+		<ul class="list-unstyled save-job">
 			<li><a href="${request.contextPath}/main.do?view=personalized">마이 페이지</a></li>
 			#if ( isSystem ) {#
-			<li><a href="/secure/main-site.do">시스템 관리</a></li>
-			# } #
+			<li><a href="/secure/main-site.do" href="\\#">시스템 관리</a></li>
+			# } #			
 			<li><a href="/logout"><i class="fa fa-sign-out"></i> 로그아웃</a></li>
-			# } else { # 						
+		</ul>		
+		# }else{ # 
 			<li>
 				<div class="container" style="width:100%;">
 					<div class="row blank-top-5 ">
@@ -891,10 +826,9 @@
 			</li>
 			<li class="divider"></li>
 			<li><a href="\\#">아이디/비밀번호찾기</a></li>
-			<li><a href="${request.contextPath}/accounts/signup.do">회원가입</a></li>
-			# } #
-		</ul>
-	</div>			
+			<li><a href="${request.contextPath}/accounts/signup.do">회원가입</a></li>	
+		# } #
+	</div>
 </li>				
 </script>	
 		
