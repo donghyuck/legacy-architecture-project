@@ -1615,8 +1615,8 @@
 	</head>
 	<body id="doc" class="bg-gray">
 		<!-- START HEADER -->		
-		<#include "/html/common/common-homepage-menu.ftl" >		
-		<#include "/html/common/common-personalized-menu.ftl" >
+		<#include "/html/common/common-homepage-menu.ftl" >
+		<#include "/html/common/common-personalized-menu.ftl">
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container-fluid" style="min-height:600px;">		
