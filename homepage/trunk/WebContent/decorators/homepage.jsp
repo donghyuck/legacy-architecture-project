@@ -63,14 +63,14 @@
 		
 	
 	/** Header css */
-	/*
+	
 	header {
-		background: #0070b8;
+		/*background: #0070b8;*/
 		background-size: cover;
 		padding: 12px 0;
 		margin-bottom: 10px;
 	}
-	*/
+	
 		
 	header.cloud {
 		color: white;
