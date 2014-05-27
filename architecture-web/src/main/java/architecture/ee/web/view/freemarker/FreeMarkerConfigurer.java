@@ -87,12 +87,14 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 			
 			logger.debug( "template customized enabled : " + isCustomizedEnabled() );			
 			if( isCustomizedEnabled() ){
+				
 				File home = getCustomizedTemplateHome();
 				logger.debug( "customized template source path : " + home );
 				if( home != null ){
 					DatabaseTemplateLoader templateLoader = new DatabaseTemplateLoader(home);
 					templateLoader.initialize();
-					this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
+					//this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
+					this.setPostTemplateLoaders(templateLoader);
 				}
 			}			
 			this.configuration = createConfiguration();
@@ -141,8 +143,7 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	
 	@Override
 	public void setTemplateLoaderPaths(String[] templateLoaderPaths) {
-		String[] paths  = getFreemarkerSourceLoactions();
-		
+		String[] paths  = getFreemarkerSourceLoactions();		
 		if( paths.length > 0 ){
 			logger.debug("setting template source paths from startup-config.xml");
 			List<String> list = new ArrayList<String>();
