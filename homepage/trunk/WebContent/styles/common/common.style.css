@@ -437,7 +437,7 @@ nav.personalized-navbar {
 	left: 0;
 	border : 0px;
 	min-height: 52px;
-	z-index: 1000;	
+	/*z-index: 1000;	*/
 }
 
 .personalized-navbar > li > a:hover  {
