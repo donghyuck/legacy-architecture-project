@@ -23,7 +23,23 @@ public class MainPageAction extends PageAction implements Preparable {
 	public static final String VIEW_STREAMS = "streams";
 	
 	public static final String VIEW_MANAGE = "manage";
+	
+	public static final String VIEW_MANAGE_COMPANY = "manage-company";
+	
+	public static final String VIEW_MANAGE_WEBSITE = "manage-website";
+	
+	public static final String VIEW_MANAGE_FORUM = "manage-forum";
 
+	private static final String[] avaliableViews = new String[] {
+		VIEW_HOMEPAGE,
+		VIEW_PERSONALIZED,
+		VIEW_STREAMS,
+		VIEW_MANAGE,
+		VIEW_MANAGE_COMPANY,
+		VIEW_MANAGE_WEBSITE,
+		VIEW_MANAGE_FORUM		
+	};
+	
 	private String view;
 
 	private SocialNetworkManager socialNetworkManager;
@@ -89,16 +105,11 @@ public class MainPageAction extends PageAction implements Preparable {
 		WebSite webSiteUse = getWebSite();		
 		String keyToUse = (new StringBuilder(WebSiteUtils.MAIN_PAGE_VIEW_PREFIX )).append(".").append(getView()).toString();
 		setPageId(webSiteUse.getLongProperty(keyToUse, -1L));		
-				
-		if( viewToUse.equals( VIEW_HOMEPAGE ) ){
-			return VIEW_HOMEPAGE;
-		}else	if(viewToUse.equals( VIEW_PERSONALIZED ) ){
-			return VIEW_PERSONALIZED;	
-		}else	if( viewToUse.equals(VIEW_STREAMS)){
-			return VIEW_STREAMS;
-		}else	if( viewToUse.equals(VIEW_MANAGE)){
-			return VIEW_MANAGE;
-		}		
+		for( String avaliable_view : avaliableViews){
+			if( StringUtils.equals(viewToUse, avaliable_view) ){
+				return avaliable_view;
+			}
+		}
 		return success();
 	}
 
