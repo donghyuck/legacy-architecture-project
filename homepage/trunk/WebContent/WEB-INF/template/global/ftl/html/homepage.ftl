@@ -2,8 +2,8 @@
 <html decorator="homepage">
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/flexslider/flexslider.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/parallax-slider/parallax-slider.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -12,12 +12,10 @@
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			
-			'${request.contextPath}/js/headroom/headroom.min.js',
-			'${request.contextPath}/js/headroom/jquery.headroom.min.js',
-			
-			'${request.contextPath}/js/flexslider/jquery.flexslider-min.js',
-			'${request.contextPath}/js/common/common.modernizr.custom.js',
-			'${request.contextPath}/js/parallax-slider/jquery.cslider.js',
+			'${request.contextPath}/js/jquery.plugins/easing/jquery.easing.1.3.js',
+			'${request.contextPath}/js/layer-slider/jquery.transit.modified.js',
+			'${request.contextPath}/js/layer-slider/layerslider.transitions.js',
+			'${request.contextPath}/js/layer-slider/layerslider.kreaturamedia.jquery.js',
 			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
@@ -42,10 +40,16 @@
 					}				
 				});					
 			
-				$('#da-slider').cslider();
+				$('#layerslider').layerSlider({
+					skinsPath : '/styles/layer-slider/skins/',
+					skin : 'fullwidth',
+					thumbnailNavigation : 'hover',
+					hoverPrevNext : true,
+					responsive : true,
+					responsiveUnder : 960,
+					sublayerContainer : 960
+		        });
 				
-				// top nav bar 
-				$("nav.navbar:first").headroom();				
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
