@@ -75,8 +75,13 @@
 		height : 110px;
 	}	
 	.cloud h2{	
+		text-align: right;
 		padding: 12px 12px 0 0;
 	}		
+	.cloud h4 {
+		text-align: right;
+		color: #999;
+	}	
 	
 	/*	
 	header {
