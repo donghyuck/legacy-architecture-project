@@ -70,7 +70,11 @@
 	.cloud h2{	
 		color: white;
 	}
-	
+
+	.cloud h4 {
+		color: white;
+	}
+		
 	.cloud h4 small {
 		color: white;
 	}	
