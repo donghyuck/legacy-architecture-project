@@ -64,19 +64,18 @@
 	
 	/** Header css */
 	
-	header {
-		/*background: #0070b8;*/
+	header.cloud {
 		background: url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
 		background-size: cover;
 		padding: 12px 0;
 		margin-bottom: 10px;
 	}
-	
-		
-	header.cloud {
+			
+	header container.cloud {
 		color: white;
 		background: url('/download/image/CzIW9fRq6y5hEH81CSw5bwjM2aWd0vCif7r0gVdpekikRIZCU8ktt9lKxnyld2jx') bottom right no-repeat;
 	}	
+	
 	/*	
 	header {
 		background: #0070b8;
