@@ -55,9 +55,9 @@
 		#announce-view .popover {
 			position : relative;
 			max-width : 500px;
-		}
-						
-		</style>   	
+		}						
+		</style>
+		</#compress>	   	
 	</head>
 	<body class="color0">
 		<!-- START HEADER -->
