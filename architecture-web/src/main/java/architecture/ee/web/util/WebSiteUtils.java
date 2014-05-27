@@ -18,6 +18,8 @@ package architecture.ee.web.util;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import architecture.common.util.TextUtils;
 import architecture.ee.util.ApplicationHelper;
@@ -34,7 +36,7 @@ import architecture.ee.web.site.WebSiteNotFoundException;
 public class WebSiteUtils {
 
 	public static final String MAIN_PAGE_VIEW_PREFIX = "main.view";
-	
+	private static final Log log = LogFactory.getLog(WebSiteUtils.class);
 	public WebSiteUtils() {
 	}
 
@@ -50,6 +52,8 @@ public class WebSiteUtils {
 	
 	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
 		String localName = request.getLocalName();		
+		log.debug("check: " + localName + " - " + ( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)) );
+		
 		if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){	
 			return getWebSiteManager().getWebSiteByUrl(localName);			
 		}

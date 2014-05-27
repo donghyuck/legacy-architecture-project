@@ -88,14 +88,13 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 			logger.debug( "template customized enabled : " + isCustomizedEnabled() );			
 			if( isCustomizedEnabled() ){
 				File home = getCustomizedTemplateHome();
-				logger.debug( "template customized home : " + home );
+				logger.debug( "customized template source path : " + home );
 				if( home != null ){
 					DatabaseTemplateLoader templateLoader = new DatabaseTemplateLoader(home);
 					templateLoader.initialize();
 					this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
-				}				
-			}
-			
+				}
+			}			
 			this.configuration = createConfiguration();
 		}
 	}
@@ -143,8 +142,9 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	@Override
 	public void setTemplateLoaderPaths(String[] templateLoaderPaths) {
 		String[] paths  = getFreemarkerSourceLoactions();
+		
 		if( paths.length > 0 ){
-			logger.debug("using template paths from startup-config.xml");
+			logger.debug("setting template source paths from startup-config.xml");
 			List<String> list = new ArrayList<String>();
 			if( templateLoaderPaths != null ){
 				for(String path:templateLoaderPaths){
@@ -156,13 +156,15 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 				if( ! list.contains( path) )
 					list.add(path);
 			}
-			logger.debug("templates paths : " + list );	
+			logger.debug("template source paths : " + list );
+			
 			String[] pathsToUse = new String[list.size()] ; 
 			list.toArray(pathsToUse);
 			super.setTemplateLoaderPaths( pathsToUse );
 		}else{
 			super.setTemplateLoaderPaths(templateLoaderPaths);
 		}
+		
 	}
 
 	/**
