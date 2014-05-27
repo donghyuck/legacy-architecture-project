@@ -2,12 +2,12 @@
 <html decorator="homepage">
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
-		<#compress>		
+		<#compress>				
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/orange.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'css!${request.contextPath}/styles/codedrop/cbpSlidePushMenus.css',
 			'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
