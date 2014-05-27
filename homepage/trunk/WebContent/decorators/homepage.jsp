@@ -75,13 +75,15 @@
 		#ecf0f1;
 		background-size: 16px 48px;
 		
-		padding: 12px 0;
-		margin-bottom: 10px;
+		/*padding: 12px 0;*/
+		height : 110px;
+		margin-bottom: 20px;
 	}
 			
 	header.cloud > div.container {
 		color: white;
 		background: url('/download/image/CzIW9fRq6y5hEH81CSw5bwjM2aWd0vCif7r0gVdpekikRIZCU8ktt9lKxnyld2jx') bottom right no-repeat;
+		height : 110px;
 	}	
 	
 	/*	
