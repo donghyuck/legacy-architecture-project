@@ -63,6 +63,11 @@
 		
 	
 	/** Header css */
+	header.cloud {
+		color: white;
+		background: #3ba5db url('/download/image/CzIW9fRq6y5hEH81CSw5bwjM2aWd0vCif7r0gVdpekikRIZCU8ktt9lKxnyld2jx') bottom right no-repeat;
+	}	
+	/*	
 	header {
 		background: #0070b8;
 		background-size: cover;
@@ -75,6 +80,8 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 
+
+
 	.cloud h2{	
 		color: white;
 	}
@@ -86,7 +93,8 @@
 	.cloud h4 small {
 		color: white;
 	}	
-
+	*/
+	
 	.k-editor-toolbar .k-tool {
 		border : 0px;
 		color: #34AADC;
