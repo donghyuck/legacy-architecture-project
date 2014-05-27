@@ -3,7 +3,7 @@
 	<head>
 		<title> ${action.targetPage.title}</title>
 		<#compress>				
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/orange.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{

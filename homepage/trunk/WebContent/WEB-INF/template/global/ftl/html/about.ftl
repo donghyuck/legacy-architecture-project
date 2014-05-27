@@ -4,7 +4,7 @@
 		<title>기업소개</title>
 <#compress>			
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.timeline-v2.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/orange.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
