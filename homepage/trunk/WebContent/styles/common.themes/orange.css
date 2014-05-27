@@ -300,6 +300,7 @@ blockquote:hover {
 	border: solid 1px #d35400;
 }
 
+/* List group */
 a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
 	z-index: 2;
 	color: #fff;
