@@ -39,6 +39,8 @@ public interface LogoManager {
 	
 	public InputStream getImageInputStream(LogoImage logoImage )  throws IOException ;
 	
+	public InputStream getImageThumbnailInputStream(LogoImage image, int width, int height ) ;
+	
 	public LogoImage getPrimaryLogoImage(Company company)  throws LogoImageNotFoundException  ;
 	
 	public LogoImage getPrimaryLogoImage(WebSite site)  throws LogoImageNotFoundException  ;

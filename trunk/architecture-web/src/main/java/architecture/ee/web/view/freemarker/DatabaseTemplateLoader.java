@@ -27,8 +27,8 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.util.MethodInvoker;
 
 import architecture.common.exception.ComponentNotFoundException;
-import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
+import architecture.common.user.User;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.support.WebSiteAware;
@@ -89,7 +89,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
-		log.debug("isCustomizedEnabled : " + isCustomizedEnabled() );	
+		log.debug( name + ", customized : " + isCustomizedEnabled() );	
 		if(isCustomizedEnabled() )
 		{
 			try {
@@ -98,18 +98,20 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				invoker.prepare();
 				Object action = invoker.invoke();			
 				if( action instanceof WebSiteAware ){				
-				
 					WebSite site = ((WebSiteAware)action).getWebSite();
-					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;				
+					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;
 					
 					if(nameToUse.charAt(0) == File.separatorChar ){
 						nameToUse = File.separatorChar + "sites"+ File.separatorChar  + site.getName().toLowerCase() + nameToUse ;
 					}else{
 						nameToUse = File.separatorChar + "sites" + File.separatorChar  + site.getName().toLowerCase() + File.separatorChar + nameToUse ;
-					}			
+					}
+					log.debug(
+						(new StringBuilder()).append("website:").append(site.getName().toLowerCase() ).append(", template: ").append(nameToUse ).toString()
+					);
 					
-					log.debug("website : " + site.getName() );					
-					log.debug("template : " + nameToUse  );
+					
+                    File source = new File(baseDir, SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar));
 					
 					return super.findTemplateSource(nameToUse);
 				}			
@@ -118,10 +120,6 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 			}	
 		}		
 		return null;		
-	
-		
-		
-				
 /*		if( usingDatabase() ){
 			try {				
 				MethodInvoker invoker = new MethodInvoker();		
@@ -153,7 +151,9 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	
 	}
 	
-
+	protected final User getUser(){
+		return SecurityHelper.getUser();
+	}
 	
 	
 	
@@ -177,8 +177,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		return templateListCache == null ? false : true;
 	}
 	
-	protected void initialize(){
-		
+	protected void initialize(){		
 		try {
 			templateListCache = ApplicationHelper.getComponent("templateListCache", Cache.class);
 			if(log.isDebugEnabled())
@@ -187,8 +186,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 			if(log.isDebugEnabled())
 				log.debug("no cache exist..");
 			templateListCache = null;
-		}
-		
+		}		
 	}
 
 /*	
@@ -224,8 +222,4 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		return ApplicationHelper.getApplicationBooleanProperty("view.html.customize.enabled", false);
 	}
 	
-	protected final Company getCurrentCompany(){
-		return SecurityHelper.getUser().getCompany();
-	}
-
 }
