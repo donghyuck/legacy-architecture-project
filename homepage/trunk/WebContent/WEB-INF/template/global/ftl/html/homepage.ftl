@@ -77,11 +77,11 @@
                 <!--First Slide-->
                 <div class="ls-layer" style="slidedirection: right; transition2d: 24,25,27,28; ">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4assets/img/sliders/layer/bg1.jpg" class="ls-bg" alt="Slide background">
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg1.jpg" class="ls-bg" alt="Slide background">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
 
                     <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
                         Fully Responsive <br> Bootstrap 3 Template
