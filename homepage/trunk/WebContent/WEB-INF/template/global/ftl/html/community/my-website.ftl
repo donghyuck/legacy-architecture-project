@@ -670,7 +670,7 @@
 						}
 				});
 				
-				//common.api.handlePanelHeaderActions($("#announce-panel")); // panel header event setting 
+				//common.api.handlePanelHeaderActions($("#news-panel")); // panel header event setting 
 				common.ui.handleButtonActionEvents($("#announce-panel button.btn-control-group"), 	{event: 'click', handlers: {
 						'new-news' : function(e){
 							var newsPlaceHolder = new common.models.ForumTopic();
@@ -1577,7 +1577,7 @@
 		<section class="container-fluid" style="min-height:600px;">		
 			<div id="personalized-area" class="row blank-top-10">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
-					<div class="panel panel-default">
+					<div class="panel panel-default" id="notice-panel">
 						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp;공지 & 이벤트
 							<div class="k-window-actions panel-header-actions">										
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
@@ -1653,7 +1653,7 @@
 						</div>
 						
 					<!-- 뉴스 -->	
-					<div class="panel panel-default">
+					<div class="panel panel-default" id="news-panel">
 						<!--panel-heading-->
 						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp; 뉴스
 							<div class="k-window-actions panel-header-actions">			
