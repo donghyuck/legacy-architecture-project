@@ -69,90 +69,93 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->	
 		
-	<!-- Slider
-	================================================== -->
-	<div class="layer_slider">
+
+<!--=== Slider ===-->
+    <div class="layer_slider">
         <div id="layerslider-container-fw">        
-            <div id="layerslider" style="width: 100%; height: 500px; margin: 0px auto; visibility: visible;" class="ls-container ls-fullwidth"><div class="ls-webkit-hack"></div>
+            <div id="layerslider" style="width: 100%; height: 500px; margin: 0px auto; ">
                 <!--First Slide-->
-                <div class="ls-inner" style="background-color: transparent; width: 1104px; height: 500px;"><div class="ls-lt-container ls-overflow-hidden" style="width: 1104px; height: 500px;"><div class="ls-curtiles" style="overflow: hidden;"><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: 0px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -71px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -142px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -213px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -284px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -355px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 74px; overflow: hidden;"><div class="ls-curtile" style="top: 0px; left: -1104px; -webkit-transform: rotate(0deg) scale(1, 1); opacity: 1;"><img src="assets/img/sliders/layer/bg2.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -426px;"></div></div></div><div class="ls-nexttiles"><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: 0px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -71px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -142px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -213px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -284px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 71px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -355px;"></div></div><div class="ls-lt-tile" style="width: 1104px; height: 74px; overflow: hidden;"><div class="ls-nexttile" style="top: 0px; left: 0px; opacity: 1; -webkit-transform: rotate(0deg) rotateX(0deg) rotateY(0deg) scale(1, 1);"><img src="assets/img/sliders/layer/bg1.jpg" style="width: 1920px; height: 500px; margin-left: -408px; margin-top: -426px;"></div></div></div></div><div class="ls-layer ls-active" style="width: 1104px; height: 500px; visibility: visible; display: none; left: auto; right: 0px; top: 0px; bottom: auto;">
+                <div class="ls-layer" style="slidedirection: right; transition2d: 24,25,27,28; ">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg1.jpg" class="ls-bg" alt="Slide background" style="padding: 0px; border-width: 0px; width: 1920px; height: 500px; margin-left: -960px; margin-top: -250px; visibility: visible;">
+                    <img src="http://htmlstream.com/preview/unify-v1.4assets/img/sliders/layer/bg1.jpg" class="ls-bg" alt="Slide background">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style="top: 110px; left: 312px; width: 305px; height: 641px; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: -41.51172189706483px; margin-top: 0px; display: block; visibility: visible;">
+                    <img src="http://htmlstream.com/preview/unify-v1.4assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style="top: 60px; left: 112px; width: 305px; height: 641px; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: -350.196997268533px; margin-top: 0px; display: block; visibility: visible;">
+                    <img src="http://htmlstream.com/preview/unify-v1.4assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
 
-                    <span class="ls-s-1" style="text-transform: uppercase; line-height: 45px; font-size: 35px; color: rgb(255, 255, 255); top: 200px; left: 662px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -369.5090100975879px; display: block; visibility: visible;">
+                    <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
                         Fully Responsive <br> Bootstrap 3 Template
                     </span>
 
-                    <a class="btn-u btn-u-orange ls-s1" href="#" style="padding: 9px 20px; font-size: 25px; top: 340px; left: 662px; width: auto; height: auto; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 218.21398234109523px; display: block; visibility: visible;">
+                    <a class="btn-u btn-u-orange ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
                         Download Now
                     </a>
-                </div><div class="ls-layer" style="width: 0px; height: 500px; visibility: visible; display: none; left: 0px; right: auto; top: 0px; bottom: auto;">
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/bg/5.jpg" class="ls-bg" alt="Slide background" style="padding: 0px; border-width: 0px; width: 1600px; height: 1200px; margin-left: -800px; margin-top: -600px;">
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style="color: rgb(255, 255, 255); font-size: 24px; top: 70px; left: 112px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -96px; display: block; visibility: visible;"></i> 
-
-                    <span class="ls-s-2" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 22px; top: 70px; left: 142px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -450px; display: block; visibility: visible;">
-                        Fully Responsive and Easy to Customize
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style="color: rgb(255, 255, 255); font-size: 24px; top: 120px; left: 112px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -146px; display: block; visibility: visible;"></i> 
-
-                    <span class="ls-s-2" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 22px; top: 120px; left: 142px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -450px; display: block; visibility: visible;">
-                        Revolution and Layer Slider Included 
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style="color: rgb(255, 255, 255); font-size: 24px; top: 170px; left: 112px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -196px; display: block; visibility: visible;"></i> 
-
-                    <span class="ls-s-2" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 22px; top: 170px; left: 142px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -450px; display: block; visibility: visible;">
-                        1000+ Glyphicons Pro and Font Awesome Icons 
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style="color: rgb(255, 255, 255); font-size: 24px; top: 220px; left: 112px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -246px; display: block; visibility: visible;"></i> 
-
-                    <span class="ls-s-2" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 22px; top: 220px; left: 142px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -450px; display: block; visibility: visible;">
-                        Revolution and Layer Slider Included 
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style="color: rgb(255, 255, 255); font-size: 24px; top: 270px; left: 112px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -296px; display: block; visibility: visible;"></i> 
-
-                    <span class="ls-s-2" style="color: rgb(255, 255, 255); font-weight: 200; font-size: 22px; top: 270px; left: 142px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: -450px; display: block; visibility: visible;">
-                        60+ Template Pages and 20+ Plugins Included
-                    </span>
-
-                    <a class="btn-u btn-u-blue ls-s1" href="#" style="padding: 9px 20px; font-size: 25px; top: 340px; left: 112px; width: auto; height: auto; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 225px; display: block; visibility: visible;">
-                        Twitter Bootstrap 3
-                    </a>
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style="top: 30px; left: 722px; width: 305px; height: 641px; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 471px; display: block; visibility: visible;">
-                </div><div class="ls-layer" style="width: 0px; height: 500px; left: 0px; right: auto; top: 0px; bottom: auto; visibility: visible; display: none;">
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg2.jpg" class="ls-bg" alt="Slide background" style="padding: 0px; border-width: 0px; width: 1920px; height: 500px; margin-left: -960px; margin-top: -250px; visibility: visible;">
-
-                    <span class="ls-s-1" style="color: rgb(119, 119, 119); line-height: 45px; font-weight: 200; font-size: 35px; top: 100px; left: 122px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 401px; display: block; visibility: visible;">
-                        Unify is Fully Responsive <br> Twitter Bootstrap 3 Template
-                    </span>
-
-                    <a class="btn-u btn-u-green ls-s-1" href="#" style="padding: 9px 20px; font-size: 25px; top: 220px; left: 122px; width: auto; height: auto; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 281px; display: block; visibility: visible;">
-                        Find Out More
-                    </a>
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider Image" class="ls-s-1" style="top: 30px; left: 742px; width: 305px; height: 641px; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 471px; display: block; visibility: visible;">
-                </div><div class="ls-circle-timer" style="display: block;"><div class="ls-ct-left"><div class="ls-ct-rotate" style="-webkit-transform: rotate(0deg);"><div class="ls-ct-hider"><div class="ls-ct-half"></div></div></div></div><div class="ls-ct-right"><div class="ls-ct-rotate" style="-webkit-transform: rotate(88.92deg);"><div class="ls-ct-hider"><div class="ls-ct-half"></div></div></div></div><div class="ls-ct-center"></div></div></div>
+                </div>
                 <!--End First Slide-->
 
                 <!--Second Slide-->
-                
+                <div class="ls-layer" style="slidedirection: top; ">
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/bg/5.jpg" class="ls-bg" alt="Slide background">
+
+                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
+
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
+                        Fully Responsive and Easy to Customize
+                    </span>
+
+                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 
+
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
+                        Revolution and Layer Slider Included 
+                    </span>
+
+                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i> 
+
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
+                        1000+ Glyphicons Pro and Font Awesome Icons 
+                    </span>
+
+                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:220px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 4500; durationout : 3500; "></i> 
+
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:220px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 3500; ">
+                        Revolution and Layer Slider Included 
+                    </span>
+
+                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:270px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 5500; durationout : 4500; "></i> 
+
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:270px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 5500; durationout : 4500; ">
+                        60+ Template Pages and 20+ Plugins Included
+                    </span>
+
+                    <a class="btn-u btn-u-blue ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 40px; slidedirection : bottom; slideoutdirection : bottom; durationin : 6500; durationout : 3500; ">
+                        Twitter Bootstrap 3
+                    </a>
+
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 650px; slidedirection : right; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+                </div>
                 <!--End Second Slide-->
 
                 <!--Third Slide-->
-                
+                <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105; ">
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg2.jpg" class="ls-bg" alt="Slide background">
+
+                    <span class="ls-s-1" style=" color: #777; line-height:45px; font-weight: 200; font-size: 35px; top:100px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
+                        Unify is Fully Responsive <br> Twitter Bootstrap 3 Template
+                    </span>
+
+                    <a class="btn-u btn-u-green ls-s-1" href="#" style=" padding: 9px 20px; font-size:25px; top:220px; left: 50px; slidedirection : bottom; slideoutdirection : bottom; durationin : 2000; durationout : 2000; ">
+                        Find Out More
+                    </a>
+
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 670px; slidedirection : right; slideoutdirection : bottom; durationin : 3000; durationout : 3000; ">
+                </div>
                 <!--End Third Slide-->
-            <div class="ls-loading-container" style="z-index: -1; display: none;"><div class="ls-loading-indicator"></div></div><a class="ls-nav-prev" href="#" style="visibility: visible; display: none;"></a><a class="ls-nav-next" href="#" style="visibility: visible; display: none;"></a><div class="ls-bottom-nav-wrapper" style="visibility: visible;"><a class="ls-nav-start ls-nav-start-active" href="#"></a><span class="ls-bottom-slidebuttons"><a href="#" class="ls-nav-active"></a><a href="#" class=""></a><a href="#" class=""></a><div class="ls-thumbnail-hover" style="width: 100px; height: 60px;"><div class="ls-thumbnail-hover-inner" style="visibility: hidden; display: block;"><div class="ls-thumbnail-hover-bg"></div><div class="ls-thumbnail-hover-img" style="width: 100px; height: 60px;"><img style="height: 60px;"></div><span></span></div></div></span><a class="ls-nav-stop" href="#"></a></div><div class="ls-shadow"></div></div>         
+            </div>         
         </div>
-    </div>
+    </div><!--/layer_slider-->
+    <!--=== End Slider ===-->
+
+
     <!-- content
     ================================================== -->
 <div class="container content">	
