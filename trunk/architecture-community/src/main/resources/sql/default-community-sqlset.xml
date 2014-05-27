@@ -326,7 +326,7 @@
 			AND PROPERTY_NAME = ?
     ]]></sql-query>	
 
- 	<sql-query name="UPDATE_PAGE_PROPERTY" description="UPDATE_PAGE_PROPERTY"><![CDATA[    	
+ 	<sql-query name="UPDATE_PAGE_PROPERTY_BY_NAME" description="UPDATE_PAGE_PROPERTY_BY_NAME"><![CDATA[    	
  		UPDATE V2_PAGE_PROPERTY 
  		SET 
  			PROPERTY_NAME = ?,
