@@ -170,7 +170,7 @@
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2>${ current_menu.title }</h2>
+					<h2 class="color-green">${ current_menu.title }</h2>
 					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
