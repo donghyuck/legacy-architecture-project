@@ -98,9 +98,12 @@
 					</#if>
 					authenticate : function( e ){
 						e.token.copy(currentUser);
-						if(!currentUser.anonymous){							
+						//if(!currentUser.anonymous){							
 							//$('body nav').first().addClass('hide');
-						}						
+							
+							
+						//}
+						$(".personalized-navbar").headroom();						
 					},
 					shown : function(e){						
 						//$('#account-navbar').append('<li><a href="#" class="btn btn-link custom-nabvar-hide"><i class="fa fa-angle-double-down fa-lg"></i></a></li>');
