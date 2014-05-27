@@ -13,6 +13,7 @@
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'${request.contextPath}/js/headroom/headroom.min.js',
 			'${request.contextPath}/js/headroom/jquery.headroom.min.js',
 			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
