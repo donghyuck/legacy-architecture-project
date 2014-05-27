@@ -65,7 +65,7 @@
 	/** Header css */
 	
 	header.cloud {
-		background: url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
+		background: #fff url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
 		background-size: cover;
 		padding: 12px 0;
 		margin-bottom: 10px;
