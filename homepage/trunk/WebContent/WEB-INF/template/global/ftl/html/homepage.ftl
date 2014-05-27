@@ -129,7 +129,7 @@
 
                     <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style="top: 30px; left: 722px; width: 305px; height: 641px; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 471px; display: block; visibility: visible;">
                 </div><div class="ls-layer" style="width: 0px; height: 500px; left: 0px; right: auto; top: 0px; bottom: auto; visibility: visible; display: none;">
-                    <img src="assets/img/sliders/layer/bg2.jpg" class="ls-bg" alt="Slide background" style="padding: 0px; border-width: 0px; width: 1920px; height: 500px; margin-left: -960px; margin-top: -250px; visibility: visible;">
+                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg2.jpg" class="ls-bg" alt="Slide background" style="padding: 0px; border-width: 0px; width: 1920px; height: 500px; margin-left: -960px; margin-top: -250px; visibility: visible;">
 
                     <span class="ls-s-1" style="color: rgb(119, 119, 119); line-height: 45px; font-weight: 200; font-size: 35px; top: 100px; left: 122px; width: auto; height: auto; padding: 0px; border-width: 0px; opacity: 1; -webkit-transform: rotate(0deg) scale(1, 1); margin-left: 0px; margin-top: 401px; display: block; visibility: visible;">
                         Unify is Fully Responsive <br> Twitter Bootstrap 3 Template
