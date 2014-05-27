@@ -437,6 +437,7 @@ nav.personalized-navbar {
 	left: 0;
 	border : 0px;
 	min-height: 52px;
+	margin-top: -1px;
 	/*z-index: 1000;	*/
 }
 
