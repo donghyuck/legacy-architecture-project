@@ -89,6 +89,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
+		log.debug("isCustomizedEnabled : " + isCustomizedEnabled() );	
 		if(isCustomizedEnabled() )
 		{
 			try {
@@ -96,7 +97,8 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				invoker.setStaticMethod("architecture.ee.web.struts2.util.ActionUtils.getAction");
 				invoker.prepare();
 				Object action = invoker.invoke();			
-				if( action instanceof WebSiteAware ){					
+				if( action instanceof WebSiteAware ){				
+				
 					WebSite site = ((WebSiteAware)action).getWebSite();
 					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;				
 					
@@ -104,8 +106,11 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 						nameToUse = File.separatorChar + "sites"+ File.separatorChar  + site.getName().toLowerCase() + nameToUse ;
 					}else{
 						nameToUse = File.separatorChar + "sites" + File.separatorChar  + site.getName().toLowerCase() + File.separatorChar + nameToUse ;
-					}					
-					log.debug("find template:" + nameToUse  );					
+					}			
+					
+					log.debug("website : " + site.getName() );					
+					log.debug("template : " + nameToUse  );
+					
 					return super.findTemplateSource(nameToUse);
 				}			
 			} catch (Exception e) {

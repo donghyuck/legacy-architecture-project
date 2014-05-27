@@ -143,7 +143,6 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 	@Override
 	public void setTemplateLoaderPaths(String[] templateLoaderPaths) {
 		String[] paths  = getFreemarkerSourceLoactions();
-		//if( StringUtils.isNotEmpty(pathString)){
 		if( paths.length > 0 ){
 			logger.debug("using template paths from startup-config.xml");
 			List<String> list = new ArrayList<String>();
