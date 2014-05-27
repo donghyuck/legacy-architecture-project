@@ -5,6 +5,7 @@
 		<#compress>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/orange.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
