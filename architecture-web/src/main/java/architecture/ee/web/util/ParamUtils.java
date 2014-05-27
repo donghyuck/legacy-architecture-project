@@ -318,7 +318,7 @@ public class ParamUtils extends ServletRequestUtils {
 	 * @return
 	 */
 	public static void printParameter(HttpServletRequest request, Log log){
-    	StringBuffer sb = new StringBuffer();
+    	StringBuilder sb = new StringBuilder();
     	Enumeration e = request.getParameterNames();
 
     	sb.append("\n ==================== printParameter ====================");
