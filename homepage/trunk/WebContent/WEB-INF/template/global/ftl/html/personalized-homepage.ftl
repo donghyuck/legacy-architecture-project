@@ -58,7 +58,7 @@
 					$(".personalized-navbar .nav a.btn-control-group"), 
 					{event: 'click', handlers: {
 						hide : function(e){
-							$('body nav').first().removeClass('hide');
+							//$('body nav').first().removeClass('hide');
 						},
 						'open-spmenu' : function(e){						
 							$('body').toggleClass('modal-open');						
@@ -106,7 +106,7 @@
 						$('#account-navbar').append('<li><a href="#" class="btn btn-link custom-nabvar-hide"><i class="fa fa-angle-double-down fa-lg"></i></a></li>');
 						$('#account-navbar').append('<p class="navbar-text hidden-xs">&nbsp;</p>');	
 						$('#account-navbar li a.custom-nabvar-hide').on('click', function(){
-							$('body nav').first().addClass('hide');
+							//$('body nav').first().addClass('hide');
 						});							
 					},									
 				});				
