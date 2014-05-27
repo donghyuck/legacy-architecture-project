@@ -11,7 +11,9 @@
 			'css!${request.contextPath}/styles/codedrop/cbpSlidePushMenus.css',
 			'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+			
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'${request.contextPath}/js/headroom/jquery.headroom.min.js',
 			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',	
