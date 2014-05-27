@@ -84,7 +84,12 @@
 		color: white;
 		background: url('/download/image/CzIW9fRq6y5hEH81CSw5bwjM2aWd0vCif7r0gVdpekikRIZCU8ktt9lKxnyld2jx') bottom right no-repeat;
 		height : 110px;
-	}	
+	}
+	
+	.cloud h2{	
+		padding: 12px 0;
+		color: white;
+	}		
 	
 	/*	
 	header {
