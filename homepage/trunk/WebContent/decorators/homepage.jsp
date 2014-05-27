@@ -68,18 +68,15 @@
 		background: #fff url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
 		height : 110px;
 		margin-bottom: 20px;
-	}
-			
+	}			
 	header.cloud > div.container {
 		color: white;
 		background: url('/download/image/CzIW9fRq6y5hEH81CSw5bwjM2aWd0vCif7r0gVdpekikRIZCU8ktt9lKxnyld2jx') bottom right no-repeat;
 		height : 110px;
-	}
-	
+	}	
 	.cloud h2{	
 		padding: 12px 12px 0 0;
-	}	
-	
+	}		
 	
 	/*	
 	header {
