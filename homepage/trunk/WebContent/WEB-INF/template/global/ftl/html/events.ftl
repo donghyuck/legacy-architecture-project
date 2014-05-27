@@ -3,11 +3,11 @@
 <head>
 		<title>기업소개</title>
 <#compress>		
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/orange.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'css!${request.contextPath}/styles/jquery.extension/component.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
