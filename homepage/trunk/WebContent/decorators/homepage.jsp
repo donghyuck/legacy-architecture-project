@@ -68,9 +68,12 @@
 		/*background: #fff url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
 		background-size: cover;
 		*/
-		background-color: gray;
-		background-image: linear-gradient(90deg, transparent 50%, rgba(255,255,255,.5) 50%);
-		background-size: 50px 50px;
+		background: 
+		linear-gradient(63deg, #999 23%, transparent 23%) 7px 0, 
+		linear-gradient(63deg, transparent 74%, #999 78%), 
+		linear-gradient(63deg, transparent 34%, #999 38%, #999 58%, transparent 62%), 
+		#444;
+		background-size: 16px 48px;
 		
 		padding: 12px 0;
 		margin-bottom: 10px;
