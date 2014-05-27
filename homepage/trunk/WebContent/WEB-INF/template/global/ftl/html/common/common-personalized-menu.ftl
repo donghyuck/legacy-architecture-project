@@ -1,5 +1,5 @@
 		<!-- start of personalized menu -->
-		<nav class="personalized-navbar navbar" role="navigation">
+		<nav class="personalized-navbar navbar headroom" role="navigation">
 			<div class="container">
 				<ul class="nav navbar-nav navbar-left">				
 					<p class="navbar-text hidden-xs">&nbsp;</p>	
