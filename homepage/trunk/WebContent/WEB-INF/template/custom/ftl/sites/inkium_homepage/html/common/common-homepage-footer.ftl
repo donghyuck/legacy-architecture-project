@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-6">  
                 <a href="#">
-                    <img src="${request.contextPath}/download/image/LQwoV8Jx4vXnEPGzIlAiYWuC19cqNKPlh60LDbLzvTja9m0UjX1ok2ap79apr5V1?width=80&height:80" class="pull-right" alt="" />
+                    <img src="${request.contextPath}/download/image/LQwoV8Jx4vXnEPGzIlAiYWuC19cqNKPlh60LDbLzvTja9m0UjX1ok2ap79apr5V1?width=80&height=80" class="pull-right" alt="" />
                 </a>
             </div>
         </div><!--/row-->
