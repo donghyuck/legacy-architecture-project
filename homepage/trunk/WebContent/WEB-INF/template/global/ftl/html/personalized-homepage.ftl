@@ -1063,11 +1063,13 @@
 		</style>   	
 		</#compress>
 	</head>
-	<body id="doc" class="bg-gray">
+	<body>	
+		<div class="wrapper">
 		<!-- START HEADER -->		
 		<#include "/html/common/common-homepage-menu.ftl" >		
 		<#include "/html/common/common-personalized-menu.ftl" >
 		<!-- END HEADER -->	
+		
 		<!-- START MAIN CONTENT -->
 		<section class="container-fluid" style="min-height:600px;">		
 			<div id="personalized-area" class="row blank-top-10">			
@@ -1112,6 +1114,8 @@
 				</div>		
 			</div>				
 		</section>		
+		</div>
+		
 		<div class="overlay hide"></div>		
 		<!-- start side menu -->
 		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
