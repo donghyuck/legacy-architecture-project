@@ -211,6 +211,7 @@ public class SitePageManagementAction extends FrameworkActionSupport {
 		String summary =(String)map.get("summary");
 		String bodyText = (String)map.get("bodyText");
 		String pageState = (String)map.get("pageState");
+		
 		boolean doPublish = false;
 		this.targetPageId = pageId.longValue();
 		this.targetSiteId = objectId.longValue();		
