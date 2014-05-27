@@ -27,8 +27,6 @@ import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactoryBuilder.Implementati
 
 public class SqlQueryFactoryBuilderImpl implements Implementation {
 
-	/**
-	 */
 	private SqlQueryFactory factory = null;
 			
 	public SqlQueryFactory getSqlQueryFactory() {		

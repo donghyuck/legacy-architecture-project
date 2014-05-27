@@ -20,8 +20,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,7 +99,20 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		builder.build();
 	}
 	
-	protected void loadResourceLocations() {		
+	private FileObject[] findSqlFiles ( FileObject fo ) throws FileSystemException {
+		return fo.findFiles(new FileSelector(){
+			public boolean includeFile(FileSelectInfo fileInfo) throws Exception {
+				FileObject f = fileInfo.getFile();
+				log.debug("varifing : " + f.getName() );
+				return StringUtils.endsWith(f.getName().getBaseName(), DEFAULT_FILE_SUFFIX);	
+			}
+			public boolean traverseDescendents(FileSelectInfo fileInfo) throws Exception {	
+				return VFSUtils.isFolder(fileInfo.getFile());
+		}});			
+	}
+	
+	protected void loadResourceLocations() {
+		
 		List<FileObject> list = new ArrayList<FileObject>();		
 		for (String path : resourceLocations) {
 			try {
@@ -108,30 +123,29 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 			} catch (Throwable e) {
 				log.warn(path + " not found.", e);
 			}
-		}		
+		}	
+		
 		try {
-			log.debug("searching sql in jar...");
-			
-			FileObject fo = VFSUtils.resolveFile("res:sql/");
-			
-			FileObject[] selected = fo.findFiles(new FileSelector(){
-				public boolean includeFile(FileSelectInfo fileInfo) throws Exception {
-					FileObject f = fileInfo.getFile();
-					log.debug("varifing : " + f.getName() );
-					return StringUtils.endsWith(f.getName().getBaseName(), DEFAULT_FILE_SUFFIX);	
-				}
-				public boolean traverseDescendents(FileSelectInfo fileInfo) throws Exception {
-					return false;
-				}});			
-			for( FileObject f : selected ){
-				if( ! list.contains(f) ){
-					list.add(f);
-				}				
-			}			
+			log.debug("searching sql ...");
+			ClassLoader cl = Thread.currentThread().getContextClassLoader();
+			Enumeration<URL> paths = cl.getResources("sql/");
+			do {
+				if (!paths.hasMoreElements())
+					break;			
+				URL url = paths.nextElement();
+				String pathToUse = "jar:" + url.getPath();				
+				log.debug( "target:" + pathToUse);				
+				FileObject fo = VFSUtils.resolveFile(pathToUse);				
+				FileObject[] selected = findSqlFiles(fo);				
+				for( FileObject f : selected ){
+					if( ! list.contains(f) ){
+						list.add(f);
+					}						
+				}			
+			} while ( true );	
 		} catch (Throwable e) {
 			log.warn(e);
-		}
-		
+		}					
 		for( FileObject fo : list){
 			try {
 				log.debug("sql : " + fo.getName() );
@@ -144,6 +158,8 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 			}			
 		}
 	}
+	
+	
 	
 	static class DeployedInfo {
 

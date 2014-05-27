@@ -23,7 +23,7 @@ import architecture.ee.jdbc.sqlquery.factory.ConfigurationFactory;
  */
 public class ConfigurationFactoryImpl implements ConfigurationFactory.Implementation {
 
-	private final Configuration configuration = new Configuration();;
+	private final Configuration configuration = new Configuration();
 
 	public Configuration getConfiguration() {
 		return configuration;
