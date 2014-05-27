@@ -69,10 +69,10 @@
 		background-size: cover;
 		*/
 		background: 
-		linear-gradient(63deg, #bdc3c7 23%, transparent 23%) 7px 0, 
-		linear-gradient(63deg, transparent 74%, #bdc3c7 78%), 
-		linear-gradient(63deg, transparent 34%, #bdc3c7 38%, #bdc3c7 58%, transparent 62%), 
-		#ecf0f1;
+		linear-gradient(63deg, #ecf0f1 23%, transparent 23%) 7px 0, 
+		linear-gradient(63deg, transparent 74%, #ecf0f1 78%), 
+		linear-gradient(63deg, transparent 34%, #ecf0f1 38%, #ecf0f1 58%, transparent 62%), 
+		#bdc3c7;
 		background-size: 16px 48px;
 		
 		/*padding: 12px 0;*/
