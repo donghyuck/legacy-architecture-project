@@ -79,7 +79,7 @@
 		font-weight: bold;
 		padding: 12px 12px 0 0;
 	}		
-	.cloud h4 {
+	.cloud h4, 	.cloud h5 {
 		text-align: right;
 		color: #999;
 	}	
