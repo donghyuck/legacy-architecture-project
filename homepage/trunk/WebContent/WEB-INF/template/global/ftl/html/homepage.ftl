@@ -2,6 +2,7 @@
 <html decorator="homepage">
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
+		<#compress>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
 		<script type="text/javascript">
@@ -60,7 +61,8 @@
 		.da-slider{
 			background: transparent url(${request.contextPath}/images/slider-bg.jpg) repeat 0% 0%;
 		}
-		</style>   	
+		</style>   
+		</#compress>			
 	</head>
 	<body>
 		<div class="wrapper">	
