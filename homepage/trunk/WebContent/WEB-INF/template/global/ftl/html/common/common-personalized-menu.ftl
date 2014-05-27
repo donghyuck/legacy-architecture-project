@@ -29,7 +29,9 @@
 							<li><a href="${request.contextPath}/main.do?view=streams">My 스트림</a></li>
 							<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
 							<li class="divider"></li>
-							<li><a href="${request.contextPath}/main.do?view=manage">My 웹사이트</a></li>
+							<li><a href="${request.contextPath}/main.do?view=manage-company">My 회사</a></li>
+							<li><a href="${request.contextPath}/main.do?view=manage-website">My 웹사이트</a></li>
+							<li><a href="${request.contextPath}/main.do?view=manage-forum">My 게시판</a></li>
 							</#if>								
 						</ul>
 					</li>
