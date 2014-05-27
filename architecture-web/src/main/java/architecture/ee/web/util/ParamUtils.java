@@ -18,6 +18,7 @@ package architecture.ee.web.util;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +41,7 @@ public class ParamUtils extends ServletRequestUtils {
     }
     
     /**
-     * Json 형식의 문자열을 Map 타입의 데이터로 변환한다.
+     * Json �뺤떇��臾몄옄�댁쓣 Map ��엯���곗씠�곕줈 蹂�솚�쒕떎.
      * @param request
      * @param name
      * @return
@@ -310,4 +311,25 @@ public class ParamUtils extends ServletRequestUtils {
         }
     }
     
+
+    /**
+	 * request String 반환
+	 * @param request
+	 * @return
+	 */
+	public static void printParameter(HttpServletRequest request, Log log){
+    	StringBuffer sb = new StringBuffer();
+    	Enumeration e = request.getParameterNames();
+
+    	sb.append("\n ==================== printParameter ====================");
+    	while(e.hasMoreElements()) {
+    	    String key   = (String)e.nextElement();
+    	    String value = request.getParameter(key);
+    	    sb.append("\n ==== "+key+ " : " + value+" ");
+    	}
+    	sb.append("\n ==================== printParameter ====================\n");
+
+    	//return sb.toString();
+    	log.debug(sb);
+    }
 }
