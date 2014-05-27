@@ -66,16 +66,6 @@
 	
 	header.cloud {
 		background: #fff url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
-		/*
-		background-size: cover;
-		background: 
-		linear-gradient(63deg, #f5f5f5 23%, transparent 23%) 7px 0, 
-		linear-gradient(63deg, transparent 74%, #f5f5f5 78%), 
-		linear-gradient(63deg, transparent 34%, #f5f5f5 38%, #f5f5f5 58%, transparent 62%), 
-		#ecf0f1;
-		background-size: 16px 48px;
-		*/
-		/*padding: 12px 0;*/
 		height : 110px;
 		margin-bottom: 20px;
 	}
@@ -87,9 +77,9 @@
 	}
 	
 	.cloud h2{	
-		padding: 12px 0;
-		color: white;
-	}		
+		padding: 12px 12px 0 0;
+	}	
+	
 	
 	/*	
 	header {
