@@ -26,6 +26,8 @@ a.read-more:hover {
 	color:#e67e22;
 }
 
+
+
 /*Header v1
 ------------------------------------*/
 /*Navber*/
@@ -297,6 +299,15 @@ blockquote:hover {
 	background: #e67e22;
 	border: solid 1px #d35400;
 }
+
+a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item.active:focus {
+	z-index: 2;
+	color: #fff;
+	background-color: #e67e22;
+	border-color: #d35400;
+}
+
+
 
 /*Accardion
 ------------------------------------*/
