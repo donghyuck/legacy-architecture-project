@@ -27,7 +27,11 @@
 <div class="copyright">
     <div class="container layout">
         <div class="row">
-            <div class="col-md-6">                      
+            <div class="col-md-6">
+				<ul class="list-unstyled">
+				    <li>서울특별시 구로구 디티털로 30길 31 코오롱빌란트2차 701호 ~ 704호 (주)인키움 | 대표이사 : 조재천 | TEL: 02 555 1965 | FAX: 02 2081 1090 </li>
+				    <li>sss</li>
+				</ul>
                 <p class="copyright-space">
                     <#if action.webSite ?? >${.now?string("yyyy")} &copy; ${action.webSite.company.displayName }. 모든 권리 보유.<#else></#if>
                 </p>
