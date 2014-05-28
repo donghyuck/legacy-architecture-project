@@ -154,7 +154,7 @@
 					<div class="row">	
 						<div class="col-sm-6">
 							<div class="view view-tenth">
-								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="" />
+								<img class="img-responsive" src="${request.contextPath}/download/image/94/main-ehrd.jp" alt="" />
 								<div class="mask">
 									<div class="headline">인키움 e-HRD</div>
 									<p class="text-left">조직의 인재양성전략 실현을 위한 최적의 e-HRD 솔루션</p>
