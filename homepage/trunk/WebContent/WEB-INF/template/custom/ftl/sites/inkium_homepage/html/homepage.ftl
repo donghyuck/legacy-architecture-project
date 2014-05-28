@@ -97,7 +97,7 @@
 						<div class="col-lg-6">
 <div class="panel panel-default">
                             <div class="panel-heading">
-                                <h4 class="panel-title">뉴스</h4>
+                                공지 / 뉴스
                             </div>
                             <div class="panel-body">
 									<ul class="list-unstyled">
