@@ -128,9 +128,9 @@
 						<div class="col-lg-6"></div>
 						<div class="col-lg-6">
 						
-<div class="easy-block-v2">
+				<div class="easy-block-v2">
                     <div class="easy-bg-v2 rgba-red">New</div>
-                    <img alt="" src="assets/img/job/high-rated-job-3.1.jpg">
+                    <img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
                     <h3>Royal Dutch Shell</h3>
                     <ul class="list-unstyled">
                         <li><span class="color-green">Position:</span> Marketing / Advertising</li>
