@@ -94,7 +94,7 @@
                                     </ul>
 							</div>
 						</div>	
-<div class="col-lg-6">
+						<div class="col-lg-6">
 							<div class="panel panel-default">
                             <div class="panel-body">
                             									<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 서비스 바로 가기</small></p>												
@@ -123,9 +123,10 @@
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
                                     </ul>
                              </div>
-                        </div>
+                        	</div>
 						</div>												
 					</div>					
+				</div>
 				</div>			
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<!-- product & service -->				
