@@ -36,16 +36,6 @@
 		background: #5bc0de;
 		color: #ffffff; 
 	}		
-
-	.copyright {
-		background: #ffffff;
-		color: #707E8C;
-		border-top: solid 0px #777;
-	}	
-
-	.copyright p {
-		color: #777;
-	}
 	
 	.footer {
 		color: #777;
