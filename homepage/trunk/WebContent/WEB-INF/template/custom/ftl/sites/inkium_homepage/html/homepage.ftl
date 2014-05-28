@@ -78,9 +78,9 @@
                     </div>                
                 </div>
             </div>  
-            <div class="col-sm-6 " style="min-height:400px;">
+            <div class="col-sm-6 ">
                 <div class="view view-tenth" >
-                    <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="" />
+                    <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt=""  style="min-height:400px;"/>
                     <div class="mask">
                         <h2>Portfolio Item</h2>
                         <p>At vero eos et accusamus et iusto odio dignissimos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
