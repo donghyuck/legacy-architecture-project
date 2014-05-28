@@ -72,7 +72,7 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left"></p>
+									<div class="headline">스터디마트</div>
 									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 									</div>                
