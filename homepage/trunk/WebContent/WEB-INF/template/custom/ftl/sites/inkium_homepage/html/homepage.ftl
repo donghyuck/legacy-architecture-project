@@ -142,6 +142,10 @@
 					
 					<div class="row">
 						<div calss="col-sm-6">
+							<div class="title-box-v2">
+								<h2>Our <span class="color-green">Featured</span> Partners</h2>
+								<p>서비스 링크</p>
+							</div>
 							<ul class="list-inline our-clients" id="effect-2">
 								<li>
 									<figure>
