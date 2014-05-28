@@ -1315,8 +1315,8 @@ header .personalized-controls-trigger {
 .copyright {
 	font-size: 12px;
 	padding: 11px 0 7px;
-	background: #ecf0f1;
-	border-top: solid 1px #bdc3c7;
+	background: #f3f3f3;
+	border-top: solid 1px #ecf0f1;
 }
 
 .copyright p {
