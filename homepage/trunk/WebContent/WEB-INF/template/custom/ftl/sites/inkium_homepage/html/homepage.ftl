@@ -180,7 +180,7 @@
 											<div class="img-hover rounded">
 												<figcaption>
 												영수증
-												<a class="btn-u btn-u-red  btn-u-xs rounded"><i class="fa fa-print"></i> 출력</a>
+												<a class="btn-u btn-u-red  btn-u-xs rounded">출력</a>
 												</figcaption>
 												
 											</div>
