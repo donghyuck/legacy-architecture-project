@@ -89,8 +89,8 @@
                     </div>                
                 </div>
             </div>  
-            <div class="col-sm-6">
-                <div class="view view-tenth" style="min-height:400px;">
+            <div class="col-sm-6 " style="min-height:400px;">
+                <div class="view view-tenth" >
                     <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="" />
                     <div class="mask">
                         <h2>Portfolio Item</h2>
