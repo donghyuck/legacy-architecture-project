@@ -1,10 +1,11 @@
 /*Portfolio v1
 ------------------------------------*/
 .view .headline {
-	 background: rgba(0, 0, 0, 0.9);
+	 background: rgba(0, 0, 0, 0.8);
 	 margin: 0px 0 25px 0;
 	 padding: 10px 0 10px 0;
 	 border-bottom : 0;
+	 color : #fff;
 }
 
 
