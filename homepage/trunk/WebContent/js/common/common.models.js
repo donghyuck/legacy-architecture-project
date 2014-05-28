@@ -2,6 +2,49 @@
 	var common = window.common = window.common || {};
 	common.models = {};
 	
+	common.models.Forum =  kendo.data.Model.define({
+		id : "forumId",
+		fields: { 
+			forumId: { type: "number", editable: false, defaultValue: -1 },
+			objectType: { type: "number", editable: false, defaultValue: -1 },
+			objectId: { type: "number", editable: false, defaultValue: -1 },
+			boardName: { type: "string", editable: true },
+			boardDesc: { type: "string", editable: true },
+			commentYn: { type: "boolean", editable: false},
+			fileYn: { type: "boolean", editable: false},
+			anonyYn: { type: "boolean", editable: false},
+			useYn: { type: "boolean", editable: false},
+			lastThreadDate: { type: "date", editable: false},
+			totalCnt: { type: "number", editable: false, defaultValue: 0 },
+			createId: { type: "number", editable: false},
+			modifyId: { type: "number", editable: false},
+	        modifiedDate: { type: "date"},
+	        creationDate: { type: "date" } 			
+		},
+		formattedCreationDate : function(){
+	    	return kendo.toString(this.get("creationDate"), "g");
+	    },
+	    formattedModifiedDate : function(){
+	    	return kendo.toString(this.get("modifiedDate"), "g");
+	    }
+	    /*,
+	    copy: function ( target ){
+	    	target.topicId = this.get("topicId");
+	    	target.set("subject",this.get("subject") );
+	    	target.set("content", this.get("content"));
+	    	target.set("viewCnt",this.get("viewCnt") );
+	    	target.set("totalReplies", this.get("totalReplies"));
+	    	target.set("modifiedDate",this.get("modifiedDate") );
+	    	target.set("creationDate", this.get("creationDate") );
+	    	target.forumId = this.get("forumId");
+	    	if( typeof this.get("user") === 'object' )
+	    		target.set("user", this.get("user") );
+	    	if( typeof this.get("properties") === 'object' )
+	    		target.set("properties", this.get("properties") );
+	    }*/
+	});
+	
+	
 	common.models.ForumTopic =  kendo.data.Model.define({
 		id : "topicId",
 		fields: { 
