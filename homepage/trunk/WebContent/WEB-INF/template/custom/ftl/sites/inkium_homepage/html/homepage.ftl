@@ -87,7 +87,30 @@
 							<div class="tag-box tag-box-v7"  style="padding:5px;">				
 								<div class="headline">
 									<h4>뉴스</h4>
-								</div>							
+								</div>					
+<table class="table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>제목</th>
+                            
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>장미여관이 부른 나성에 가면...</td>
+                            
+                            
+                                                      
+                        </tr>
+                        
+                        
+                        
+                    </tbody>
+                </table>										
 							</div>						
 						</div>						
 					</div>					
