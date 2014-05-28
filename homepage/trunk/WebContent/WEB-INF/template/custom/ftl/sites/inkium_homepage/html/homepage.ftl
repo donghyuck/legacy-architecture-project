@@ -79,6 +79,8 @@
 								</div>                
 							</div>
 						</div>
+					</div>	
+					<div class="row">	
 						<div class="col-sm-6">
 							<div class="view view-tenth">
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
