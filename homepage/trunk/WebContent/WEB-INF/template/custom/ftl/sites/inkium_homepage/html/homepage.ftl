@@ -142,10 +142,6 @@
 					
 					<div class="row">
 						<div class="col-sm-6">
-							<div class="title-box-v2">
-								<h2>Our <span class="color-green">Featured</span> Partners</h2>
-								<p>서비스</p>
-							</div>
 							<ul class="list-inline our-clients" id="effect-2">
 								<li>
 									<figure>
@@ -186,7 +182,9 @@
 							</ul>						
 						</div>
 						<div class="col-sm-6">
-						news
+						<div class="headline">
+							<h4>뉴스</h4>
+						</div>
 						</div>
 					</div>
 
