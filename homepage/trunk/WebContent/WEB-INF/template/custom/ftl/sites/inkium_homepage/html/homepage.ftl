@@ -142,7 +142,7 @@
 					
 					<div class="row">
 						<div class="col-sm-4">		
-							<div class="page-header text-primary marginless">
+							<div class="page-header color-green" style="margin: 0 0 15px 0;">
 								<h5><small><i class="fa fa-info"></i> 서비스 바로 가기</small></h5>									
 							</div>			
 							<ul class="list-inline our-family" id="effect-2">
