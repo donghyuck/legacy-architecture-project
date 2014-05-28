@@ -64,7 +64,7 @@
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">HRD 컨설팅</div>
-									<p class="text-left">HRD 관련 분야의 토탈 솔루션을 제공하여 유기적으로 시스템 연계까지 구현하는 최적의 컨설팅 솔루션..</p>
+									<p class="text-left">기업의 인재육성전략 실현을 위한 HRD 통합 솔루션</p>
 									<a href="portfolio_item.html" class="info">Read More</a>
 									</div>                
 								</div>
