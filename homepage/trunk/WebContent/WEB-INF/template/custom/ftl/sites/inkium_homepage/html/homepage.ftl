@@ -141,10 +141,10 @@
 			</div>
 					
 					<div class="row">
-						<div calss="col-sm-6">
+						<div class="col-sm-6">
 							<div class="title-box-v2">
 								<h2>Our <span class="color-green">Featured</span> Partners</h2>
-								<p>서비스 링크</p>
+								<p>서비스</p>
 							</div>
 							<ul class="list-inline our-clients" id="effect-2">
 								<li>
@@ -185,7 +185,7 @@
 								</li>								
 							</ul>						
 						</div>
-						<div calss="col-sm-6">
+						<div class="col-sm-6">
 						news
 						</div>
 					</div>
