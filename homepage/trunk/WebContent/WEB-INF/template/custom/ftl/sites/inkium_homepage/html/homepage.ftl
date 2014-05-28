@@ -65,8 +65,7 @@
 		<div style="background-color: #f5f5f5;"> 
 		<div class="container content">	
 			<div class="row margin-bottom-20">
-				<div class="col-lg-6">
-					
+				<div class="col-lg-6">					
 					<div class="row">
 						<div class="visible-lg col-lg-12">
 							<img src="${request.contextPath}/download/image/81/main_visual1.jpg" class="img-responsive"  alt="">
@@ -93,8 +92,7 @@
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
                                     </ul>
 							</div>
-						</div>	
-						
+						</div>
 						<div class="col-lg-6">
 							<div class="panel panel-default">
                             <div class="panel-body">
@@ -105,12 +103,11 @@
 									<li><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" class="img-responsive" style="width:75px;"></li>
 								</ul>	
                              </div>
-                        </div>
-                        						
+                        </div>               						
 						<div class="col-lg-6">
 							<div class="panel panel-default">
-                            <div class="panel-body">
-                            	<p class="text-muted"><small><i class="fa fa-info"></i> 공지 | 뉴스</small></p>
+                            	<div class="panel-body">
+                            		<p class="text-muted"><small><i class="fa fa-info"></i> 공지 | 뉴스</small></p>
 									<ul class="list-unstyled">
                                         <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
@@ -124,11 +121,11 @@
                                         <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
                                     </ul>
-                             </div>
-                        	</div>
-						</div>								
-					</div>					
-				</div>
+                             	</div>
+                        	</div>						
+						</div>										
+					</div><!-- /row -->					
+				
 				</div>			
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<!-- product & service -->				
