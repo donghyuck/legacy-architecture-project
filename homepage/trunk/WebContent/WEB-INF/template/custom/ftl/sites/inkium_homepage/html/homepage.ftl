@@ -117,6 +117,7 @@
 								</div>                
 							</div>	
 							<div class="view view-tenth">
+								<div class="easy-bg-v2 rgba-red" style="z-index:1000">New</div>
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">직립보행</div>
