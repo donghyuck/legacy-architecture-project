@@ -1,5 +1,10 @@
 /*Portfolio v1
 ------------------------------------*/
+.view .headline {
+	background-color : rgba(0, 0, 0, 0.9);
+}
+
+
 .view {
    /*z-index:9;*/
    cursor: default;
