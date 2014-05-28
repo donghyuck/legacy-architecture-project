@@ -72,13 +72,8 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
 								<div class="mask">
-									<p>
-										<ul class="list-unstyled">
-	                                        <li><i class="fa fa-check color-green"></i> 우리회사 인재양성 교육처널</li>
-	                                        <li><i class="fa fa-check color-green"></i> 온라인 통합 연수원</li>
-	                                    </ul>									
-									</p>
-									<p class="text-left">우리회사 인재양성 교육처널 온라인 통합 연수원</p>
+									<p class="text-left">우리회사 인재양성 교육채널</p>
+									<p class="text-left">온라인 통합 연수원</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 									</div>                
 								</div>
