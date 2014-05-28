@@ -93,7 +93,18 @@
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
                                     </ul>
 							</div>
-						</div>						
+						</div>	
+						<div class="col-lg-6">
+<div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">뉴스</h3>
+                            </div>
+                            <div class="panel-body">
+                                <h4>Accusamus et iusto odio</h4>   
+                                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+                            </div>
+                        </div>
+						</div>												
 						<div class="col-lg-6">
 							<div class="tag-box tag-box-v7"  style="padding:5px;">				
 								<div class="headline">
