@@ -139,20 +139,6 @@
 									<a href="portfolio_item.html" class="info">Read More</a>
 									</div>                
 								</div>
-							</div>
-						<div class="col-sm-6">
-							<div class="view view-tenth">
-								<img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
-								<div class="mask">
-									<div class="headline">스터디마트</div>
-									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
-								</div>                
-							</div>
-						</div>
-					</div>	
-					<div class="row">	
-						<div class="col-sm-6">
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/94/main-ehrd.jpg" alt="" />
 								<div class="mask">
@@ -176,9 +162,17 @@
 									<p class="text-left">위탁교육</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
-							</div>																		
+							</div>																
 						</div>
 						<div class="col-sm-6">
+							<div class="view view-tenth">
+								<img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
+								<div class="mask">
+									<div class="headline">스터디마트</div>
+									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
+									<a href="portfolio_item.html" class="info">더 알아보기</a>
+								</div>                
+							</div>
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/91/main_university.jpg" alt="" />
 								<div class="mask">
@@ -186,7 +180,7 @@
 									<p class="text-left">대학경쟁력 확보를 위한 토탈 서비스</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
-							</div>	
+							</div>								
 							<div class="view view-tenth">
 								<div class="easy-bg-v2 rgba-red" style="z-index:1000">New</div>
 								<img class="img-responsive" src="${request.contextPath}/download/image/92/main_vod.jpg" alt="" />
@@ -195,8 +189,8 @@
 									<p class="text-left">비즈니스 메너 동영상 컨텐츠</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
-							</div>									
-						</div>																									                              
+							</div>								
+						</div>
 					</div><!--/row-->				
 					<!-- end of product & service -->			
 				</div>
