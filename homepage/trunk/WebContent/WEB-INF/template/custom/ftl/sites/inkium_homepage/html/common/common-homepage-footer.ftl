@@ -1,16 +1,4 @@
 <!--=== Footer ===-->
-<div class="footer">
-	<div class="container layout">
-		<div class="row">
-			<div class="col-md-4">				
-			</div><!--/col-md-4-->  
-			<div class="col-md-4">
-			</div><!--/col-md-4-->
-			<div class="col-md-4">			
-			</div><!--/col-md-4-->
-		</div><!--/row-->   
-	</div><!--/container--> 
-</div><!--/footer-->    
 <!--=== End Footer ===-->
 <!--=== Copyright ===-->
 <div class="copyright">
