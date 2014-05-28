@@ -36,22 +36,7 @@
 		background: #5bc0de;
 		color: #ffffff; 
 	}		
-	
-	.footer {
-		color: #777;
-		background: #dadada;
-		padding: 20px 0 30px;
-	}	
-	
-	.footer h4{
-		color: #777;
-	}
-	
-	.footer p{
-		color: #777;
-	}
 		
-	
 	/** Header css */
 	
 	header.cloud {
