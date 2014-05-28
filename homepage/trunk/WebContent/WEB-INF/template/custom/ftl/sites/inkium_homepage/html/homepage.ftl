@@ -148,8 +148,8 @@
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
 										<div class="img-hover">
 											<figcaption>
-												<h5 class="color-white">ASTD 참가 문의</h5>
-												<small> 02 2081 1092</small>
+												<small>ASTD 문의</small>
+												<small>02 2081 1092</small>
 											</figcaption>
 											
 										</div>
