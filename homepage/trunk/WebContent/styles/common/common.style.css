@@ -280,7 +280,7 @@
 .header .navbar-default .navbar-nav > li > a.btn-account {
 	border: 0px;
 	padding: 2px 2px 2px 2px;
-	border-bottom: solid 2px #aaa;
+	border-bottom: solid 2px transparent;
 }
 
 .header .navbar-default .navbar-nav > li > a.btn-account:hover, .header .navbar-default .navbar-nav > li > a.btn-account:focus, .header .navbar-default .navbar-nav > li >  a.btn-account:active {
