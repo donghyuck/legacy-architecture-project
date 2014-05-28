@@ -146,7 +146,7 @@
 								<li>
 									<figure>
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
-										<div class="img-hover">
+										<div class="img-hover rounded">
 											<figcaption>
 												ASTD
 												<a class="btn-u btn-u-red  btn-xs rounded">바로가기</a>
@@ -158,7 +158,7 @@
 								<li>
 									<figure>
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
-										<div class="img-hover">
+										<div class="img-hover rounded">
 											<figcaption>
 											ICPI
 											<a class="btn-u btn-u-red  btn-xs rounded">바로가기</a>
@@ -170,7 +170,7 @@
 								<li>
 									<figure>
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
-										<div class="img-hover">
+										<div class="img-hover rounded">
 											<figcaption>
 											영수증
 											<a class="btn-u btn-u-red  btn-xs rounded"><i class="fa fa-print"></i> 출력</a>
