@@ -159,7 +159,7 @@
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
 										<div class="img-hover">
 											<figcaption>
-											<small>문의 02 2081 1026</small>
+											<a class="u-btn btn-sm rounded">바로가기</a>
 											</figcaption>
 											
 										</div>
