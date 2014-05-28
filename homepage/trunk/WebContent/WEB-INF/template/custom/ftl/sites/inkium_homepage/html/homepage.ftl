@@ -189,7 +189,7 @@
 							</div>	
 							<div class="view view-tenth">
 								<div class="easy-bg-v2 rgba-red" style="z-index:1000">New</div>
-								<img class="img-responsive" src="${request.contextPath}/download/image/91/main_university.jpg" alt="" />
+								<img class="img-responsive" src="${request.contextPath}/download/image/92/main_vod.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">직립보행</div>
 									<p class="text-left">비즈니스 메너 동영상 컨텐츠</p>
