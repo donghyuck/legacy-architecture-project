@@ -85,7 +85,9 @@
 						</div>
 						<div class="col-lg-6">
 							<div class="tag-box tag-box-v7 paddingless">				
-							
+								<div class="headline">
+									<h4>뉴스</h4>
+								</div>							
 							</div>						
 						</div>						
 					</div>					
