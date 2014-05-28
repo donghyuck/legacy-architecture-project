@@ -59,7 +59,7 @@
 		<!-- START MAIN CONTENT -->			
 		<!-- content
 		================================================== -->
-		
+		<div style="background-color: #f5f5f5;"> 
 		<div class="container content">	
 			<div class="row margin-bottom-20">
 				<div class="visible-lg col-lg-6">
@@ -192,6 +192,7 @@
 					</div>
 
 		</div><!-- /content -->	
+		</div>
 		<!-- END MAIN CONTENT -->	
 		</div><!-- /wrapper -->	
  		<!-- START FOOTER -->
