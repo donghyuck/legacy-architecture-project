@@ -59,10 +59,8 @@
 <!-- product & service -->				
         <div class="row"> 
             <div class="col-sm-6">
-                <div class="view view-tenth">
-                <div class="box-shadow shadow-effect-2">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="" />
-                        </div>
+                <div class="view view-tenth box-shadow shadow-effect-2">
+                <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="" />
                     
                     <div class="mask">
                         <h2>Portfolio Item</h2>
