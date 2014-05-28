@@ -1,9 +1,29 @@
-.job-partners {
+.job-partners{
 	padding-bottom: 50px;
 }
 
+/*Our-family*/
+.our-family  {
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.our-family  li {
+	padding: 0;
+	width: 142px;
+	margin: -1px;
+	margin-bottom: 3px;
+	background: #f7f7f7;
+}
+
+.our-family  img {
+	padding: 15px;
+    width: 142px;
+    height: auto;
+	vertical-align: middle;
+}
 /*Our-clients*/
-.job-partners .our-clients {
+.job-partners .our-clients  {
 	margin-bottom: 0;
 	text-align: center;
 }
