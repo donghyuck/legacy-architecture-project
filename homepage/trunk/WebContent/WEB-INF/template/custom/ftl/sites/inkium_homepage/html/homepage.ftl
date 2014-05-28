@@ -84,6 +84,17 @@
 							</div>
 						</div>
 						<div class="col-lg-6">
+							<div class="tag-box tag-box-v7 paddingless">				
+								<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 뉴스</small></p>												
+<ul class="list-unstyled">
+                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+                                    </ul>
+							</div>
+						</div>						
+						<div class="col-lg-6">
 							<div class="tag-box tag-box-v7"  style="padding:5px;">				
 								<div class="headline">
 									<h4>뉴스</h4>
