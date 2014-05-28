@@ -2,6 +2,9 @@
 ------------------------------------*/
 .view .headline {
 	 background: rgba(0, 0, 0, 0.9);
+	 margin: 0px 0 25px 0;
+	 padding: 10px 0 5px 0;
+	 border-bottom : 0;
 }
 
 
