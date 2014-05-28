@@ -82,7 +82,7 @@
                 <div class="view view-tenth">
                     <img class="img-responsive" src="${request.contextPath}/download/image/RfGo6CKryJR56ww6GREJ3W9Jt9uRB5UtlhhZChY4yyP76niwN2OQAqkhDUUgRnGu" alt="" />
                     <div class="mask">
-                        <div class="headline"><h4> 인키움 HRD컨설팅 </h4></div>
+                        <div class="headline">인키움 HRD컨설팅</div>
                         <p class="text-left">다양한 업종과 규모의 기업에서 수행한 프로젝트 경험 및 HRD 전문지식을 보유한 전문 컨설턴트의 역량을 바탕으로 각 프로세스별 방법론을 보유하여 HRD 관련 분야의 토탈 솔루션을 제공하여 유기적으로 시스템 연계까지 구현하는 최적의 컨설팅 솔루션..</p>
                         <a href="portfolio_item.html" class="info">더 알아보기</a>
                     </div>                
