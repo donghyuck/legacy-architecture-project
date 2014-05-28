@@ -190,9 +190,11 @@
 							</div><!-- /quick link -->	
 						</div>
 						<div class="col-sm-6">
-						<div class="headline">
-							<h4>뉴스</h4>
-						</div>
+							<div class="tag-box tag-box-v7">		
+								<div class="headline">
+									<h4>뉴스</h4>
+								</div>
+							</div><!-- /news -->	
 						</div>
 					</div>
 
