@@ -124,7 +124,48 @@
                                     </ul>
                              </div>
                         	</div>
-						</div>							
+						</div>			
+						<div class="col-lg-6"></div>
+						<div class="col-lg-6">
+						
+					<div class="easy-block-v1">
+                    <div class="easy-block-v1-badge rgba-red">Marketing</div>
+                    <div id="carousel-example-generic-2" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li class="rounded-x" data-target="#carousel-example-generic-2" data-slide-to="0"></li>
+                            <li class="rounded-x" data-target="#carousel-example-generic-2" data-slide-to="1"></li>
+                            <li class="rounded-x active" data-target="#carousel-example-generic-2" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item">
+                                <img alt="" src="assets/img/job/high-rated-job-2.1.jpg">
+                            </div>
+                            <div class="item">
+                                <img alt="" src="assets/img/job/high-rated-job-2.2.jpg">
+                            </div>
+                            <div class="item active">
+                                <img alt="" src="assets/img/job/high-rated-job-2.3.jpg">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overflow-h">
+                        <h3>Thomas Cook Holidays</h3>
+                        <ul class="list-inline star-vote">
+                            <li><i class="color-green fa fa-star"></i></li>
+                            <li><i class="color-green fa fa-star"></i></li>
+                            <li><i class="color-green fa fa-star"></i></li>
+                            <li><i class="color-green fa fa-star"></i></li>
+                            <li><i class="color-green fa fa-star-half-o"></i></li>
+                        </ul>
+                    </div>
+                    <ul class="list-unstyled">
+                        <li><span class="color-green">Position:</span> Marketing / Advertising</li>
+                        <li><span class="color-green">Required:</span> 7 - years of experience</li>
+                    </ul>    
+                    <a class="btn-u btn-u-sm" href="#">View More</a>
+                </div>
+						
+						</div>				
 					</div><!-- /row -->
 				</div>			
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
