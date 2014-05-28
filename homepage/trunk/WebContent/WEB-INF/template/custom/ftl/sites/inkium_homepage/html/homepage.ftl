@@ -180,7 +180,7 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="view view-tenth">
-								<img class="img-responsive" src="${request.contextPath}/download/image/RfGo6CKryJR56ww6GREJ3W9Jt9uRB5UtlhhZChY4yyP76niwN2OQAqkhDUUgRnGu" alt="" />
+								<img class="img-responsive" src="${request.contextPath}/download/image/91/main_university.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">국내/국외 위탁교육</div>
 									<p class="text-left">국내 및 해외 교육과정에 대한 기획, 실행, 평가 및 사후관리에 이르는 기업교육 전 부문 위탁수행 서비스</p>
