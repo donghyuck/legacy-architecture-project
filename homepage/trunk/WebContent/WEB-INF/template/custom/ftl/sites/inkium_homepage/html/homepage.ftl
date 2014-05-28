@@ -159,7 +159,7 @@
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
 										<div class="img-hover">
 											<figcaption>
-											ASTD
+											ICPI
 											<a class="btn-u btn-u-red  btn-xs rounded">바로가기</a>
 											</figcaption>
 											
