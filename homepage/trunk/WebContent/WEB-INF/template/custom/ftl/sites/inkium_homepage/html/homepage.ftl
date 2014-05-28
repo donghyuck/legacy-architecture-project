@@ -177,11 +177,11 @@
 								</li>						
 							</ul>						
 						</div>
+						<div calss="col-sm-6">
+						news
+						</div>
 					</div>
-							
 
-			<!-- Our Clients -->
-			<!-- End Our Clients -->
 		</div><!-- /content -->	
 		<!-- END MAIN CONTENT -->	
 		</div><!-- /wrapper -->	
