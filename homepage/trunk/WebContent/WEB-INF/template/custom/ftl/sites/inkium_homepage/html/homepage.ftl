@@ -131,11 +131,11 @@
 				<div class="easy-block-v2">
                     <div class="easy-bg-v2 rgba-red">New</div>
                     <img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
-                    <h3>스터디마트</h3>
+                    <!--<h3>스터디마트</h3>
                     <ul class="list-unstyled">
                         <li><span class="color-green">콘텐츠:</span>3만개</li>
                         <li><span class="color-green">고객사:</span> 150 </li>
-                    </ul>    
+                    </ul>    -->
                     <a class="btn-u btn-u-sm" href="#">더 알아보기</a>
                 </div>
 						
