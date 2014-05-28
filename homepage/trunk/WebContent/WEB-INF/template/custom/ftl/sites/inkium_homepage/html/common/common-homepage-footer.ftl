@@ -1,24 +1,12 @@
 <!--=== Footer ===-->
 <div class="footer">
 	<div class="container layout">
-	<div class="row">
-		<div class="col-md-4 md-margin-bottom-40">
-			<!-- About -->
-			
-
-		
-		</div><!--/col-md-4-->  
-		<div class="col-md-4 md-margin-bottom-40">
-		</div><!--/col-md-4-->
-		<div class="col-md-4">
-			<div class="headline"><h4> 연락처 </h4></div> 
-			<address class="md-margin-bottom-40">
-			서울특별시 구로구 디티털로 30길 31<br />
-			코오롱빌란트2차 701호 ~ 704호<br />
-			Tel: 02 555 1965<br />
-			Fax: 02 2081 1090 <br />
-			<!--Email: <a href="mailto:info@anybiz.com" class="">info@anybiz.com</a>-->
-			</address>
+		<div class="row">
+			<div class="col-md-4 md-margin-bottom-40">				
+			</div><!--/col-md-4-->  
+			<div class="col-md-4 md-margin-bottom-40">
+			</div><!--/col-md-4-->
+			<div class="col-md-4">			
 			</div><!--/col-md-4-->
 		</div><!--/row-->   
 	</div><!--/container--> 
