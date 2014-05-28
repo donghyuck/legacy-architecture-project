@@ -173,7 +173,7 @@
 										<div class="img-hover">
 											<figcaption>
 											영수증
-											<a class="btn-u btn-u-red  btn-xs rounded">출력</a>
+											<a class="btn-u btn-u-red  btn-xs rounded"><i class="fa fa-print"></i> 출력</a>
 											</figcaption>
 											
 										</div>
