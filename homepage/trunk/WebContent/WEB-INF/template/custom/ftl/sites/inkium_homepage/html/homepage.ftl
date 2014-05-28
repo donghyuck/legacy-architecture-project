@@ -141,7 +141,7 @@
 			</div>
 					
 					<div class="row">
-						<div class="col-sm-6">
+						<div class="col-sm-4">
 							<ul class="list-inline our-clients" id="effect-2">
 								<li>
 									<figure>
