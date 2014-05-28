@@ -148,7 +148,7 @@
 								</div>                
 							</div>
 							<div class="view view-tenth">
-								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="" />
+								<img class="img-responsive" src="${request.contextPath}/download/image/97/main_icap.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">iCAP</div>
 									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
