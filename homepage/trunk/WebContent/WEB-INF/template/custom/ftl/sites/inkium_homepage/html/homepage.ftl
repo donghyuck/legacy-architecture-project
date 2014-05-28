@@ -265,7 +265,7 @@
 								</ul>		
 							</div><!-- /quick link -->	
 						</div>
-						<div class="col-sm-6">
+						<div class="col-md-8">
 							<div class="tag-box tag-box-v7">		
 								<div class="headline">
 									<h4>뉴스</h4>
