@@ -137,6 +137,9 @@
 						</div>																									                              
 					</div><!--/row-->				
 					<!-- end of product & service -->			
+				</div>
+			</div>
+					
 					<div class="row">
 						<div calss="col-sm-6">
 							<ul class="list-inline our-clients" id="effect-2">
@@ -174,20 +177,12 @@
 								</li>						
 							</ul>						
 						</div>
-					</div>		
-				</div>
-			</div>
+					</div>
+							
 
 			<!-- Our Clients -->
-			<div class="container content job-partners">
-        <div class="title-box-v2">
-            <h2>Our <span class="color-green">Featured</span> Partners</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </div>
-
-    </div>
-        <!-- End Our Clients -->
-    </div>
+			<!-- End Our Clients -->
+		</div><!-- /content -->	
 		<!-- END MAIN CONTENT -->	
 		</div><!-- /wrapper -->	
  		<!-- START FOOTER -->
