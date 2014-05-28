@@ -111,9 +111,7 @@
 						</div>												
 						<div class="col-lg-6">
 							<div class="tag-box tag-box-v7"  style="padding:5px;">				
-								<div class="headline">
-									<h4>뉴스</h4>
-								</div>					
+<p class="text-muted"><small><i class="fa fa-info"></i> 뉴스</small></p>										
 <table class="table">
                     <thead>
                         <tr>
