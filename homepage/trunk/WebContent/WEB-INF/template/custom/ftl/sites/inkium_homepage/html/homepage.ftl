@@ -57,8 +57,17 @@
 				fdasf
 				</div>			
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
-<!-- product & service -->				
-        <div class="row"> 
+					<!-- product & service -->				
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="view view-tenth">
+								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
+								<div class="mask">
+									<p class="text-left">다양한 업종과 규모의 기업에서 수행한 프로젝트 경험 및 HRD 전문지식을 보유한 전문 컨설턴트의 역량을 바탕으로 각 프로세스별 방법론을 보유하여 HRD 관련 분야의 토탈 솔루션을 제공하여 유기적으로 시스템 연계까지 구현하는 최적의 컨설팅 솔루션..</p>
+									<a href="portfolio_item.html" class="info">Read More</a>
+									</div>                
+								</div>
+							</div>   
             <div class="col-sm-6">
                 <div class="view view-tenth">
                     <img class="img-responsive" src="${request.contextPath}/download/image/RfGo6CKryJR56ww6GREJ3W9Jt9uRB5UtlhhZChY4yyP76niwN2OQAqkhDUUgRnGu" alt="" />
@@ -69,16 +78,6 @@
                     </div>                
                 </div>
             </div>
-            <div class="col-sm-6">
-                <div class="view view-tenth">
-                    <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
-                    <div class="mask">
-                        <div class="headline"><h3>인키움 HRD컨설팅</h3></div>
-                        <p>At vero eos et accusamus et iusto odio dignissimos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
-                        <a href="portfolio_item.html" class="info">Read More</a>
-                    </div>                
-                </div>
-            </div>  
             <div class="col-sm-6 ">
                 <div class="view view-tenth" >
                     <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt=""  style="min-height:400px;"/>
