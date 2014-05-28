@@ -195,7 +195,40 @@
 					<!-- end of product & service -->			
 				</div>
 			</div>
-					
+					<div class="row">
+						<div class="col-md-4">		
+							<div class="panel panel-default">
+                            <div class="panel-body">
+                            	<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 서비스 바로 가기</small></p>												
+								<ul class="list-inline">
+									<li><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" class="img-responsive" style="width:75px;"></li>
+									<li><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" class="img-responsive" style="width:75px;"></li>
+									<li><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" class="img-responsive" style="width:75px;"></li>
+								</ul>	
+                             </div>
+                        	</div>							
+						</div>
+						<div class="col-md-8">
+<div class="panel panel-default">
+                            <div class="panel-body">
+                            	<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 공지 | 뉴스 </small></p>												
+									<ul class="list-unstyled">
+                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+                                    </ul>
+                                    <hr/>
+									<ul class="list-unstyled">
+                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
+                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
+                                    </ul>
+                             </div>
+                        	</div>								
+						</div>
+					</div>					
 					<div class="row">
 						<div class="col-md-4">		
 							<div class="tag-box tag-box-v7">							
