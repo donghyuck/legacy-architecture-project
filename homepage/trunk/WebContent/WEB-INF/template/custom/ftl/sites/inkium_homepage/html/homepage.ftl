@@ -101,16 +101,6 @@
 						</div>
 						<div class="col-sm-6">
 							<div class="view view-tenth">
-								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
-								<div class="mask">
-									<div class="headline">스터디마트</div>
-									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
-								</div>                
-							</div>
-						</div>
-						<div class="col-sm-6">
-							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/RfGo6CKryJR56ww6GREJ3W9Jt9uRB5UtlhhZChY4yyP76niwN2OQAqkhDUUgRnGu" alt="" />
 								<div class="mask">
 									<div class="headline">스터디마트</div>
