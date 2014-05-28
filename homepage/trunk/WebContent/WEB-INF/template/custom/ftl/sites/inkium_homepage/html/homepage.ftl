@@ -160,10 +160,10 @@
 								</li> 	
 								<li>
 									<figure>
-										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
+										<img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="">
 										<div class="img-hover rounded">
 											<figcaption>
-											ICPI
+											ICP
 											<a class="btn-u btn-u-red  btn-xs rounded">바로가기</a>
 											</figcaption>
 											
