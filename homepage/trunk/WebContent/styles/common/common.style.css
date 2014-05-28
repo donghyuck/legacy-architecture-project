@@ -289,7 +289,7 @@
 }
 
 .header .navbar-default .navbar-nav > li.open > a.btn-account {
-	border-bottom: solid 2px #aaa;
+	border-bottom: solid 2px transparent;
 }
 
 .header li.account.open .account-content {
