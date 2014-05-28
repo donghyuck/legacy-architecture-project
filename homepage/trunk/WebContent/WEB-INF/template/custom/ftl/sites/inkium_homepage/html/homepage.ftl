@@ -148,7 +148,7 @@
 							<ul class="list-inline our-family" id="effect-2">
 								<li>
 									<figure>
-										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
+										<img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="">
 										<div class="img-hover rounded">
 											<figcaption>
 												ASTD
@@ -172,7 +172,7 @@
 								</li>
 								<li>
 									<figure>
-										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
+										<img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="">
 										<div class="img-hover rounded">
 											<figcaption>
 											영수증
