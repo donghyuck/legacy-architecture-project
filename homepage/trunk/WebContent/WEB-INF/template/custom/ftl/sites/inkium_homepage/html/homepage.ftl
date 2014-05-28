@@ -136,9 +136,9 @@
                         <li><span class="color-green">콘텐츠:</span>3만개</li>
                         <li><span class="color-green">고객사:</span> 150 </li>
                     </ul>    -->
-                    <div class="pull-right ">
+                    <p class="pull-right ">
                      <a class="btn-u btn-u-xs" href="#">더 알아보기</a>
-                    </div>
+                    </p>
                    
                 </div>
 						
