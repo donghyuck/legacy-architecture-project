@@ -34,12 +34,12 @@
 }
 .view p {
    /*font-family: Georgia, serif;*/
-   font-style: italic;
-   font-size: 12px;
+   /*font-style: italic;
+   font-size: 12px;*/
    position: relative;
    color: #fff;
    padding: 10px 20px 10px;
-   text-align: center;
+  /* text-align: center;*/
 }
 .view a.info {
    color: #fff;
