@@ -21,7 +21,7 @@
    display: block;
    position: relative;
 }
-.view h2 {
+.view h2, .view h3 {
    text-transform: uppercase;
    color: #fff;
    text-align: center;
