@@ -146,7 +146,9 @@
 					<div class="row">
 						<div class="col-sm-4">		
 							<div class="tag-box tag-box-v7">							
-								<h2>Expedita distinctio lorem ipsum dolor sit amet consectetur!</h2>
+								<div class="page-header color-green" style="margin: 0 0 15px 0;">
+									<h5><small><i class="fa fa-info"></i> 서비스 바로 가기</small></h5>									
+								</div>	
 								<ul class="list-inline our-family" id="effect-2">
 									<li>
 										<figure>
@@ -185,11 +187,7 @@
 										</figure>
 									</li>								
 								</ul>		
-							</div><!-- /quick link -->						
-							<div class="page-header color-green" style="margin: 0 0 15px 0;">
-								<h5><small><i class="fa fa-info"></i> 서비스 바로 가기</small></h5>									
-							</div>			
-				
+							</div><!-- /quick link -->	
 						</div>
 						<div class="col-sm-6">
 						<div class="headline">
