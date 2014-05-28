@@ -33,7 +33,7 @@
    text-shadow:none;
 }
 .view p {
-   font-family: Georgia, serif;
+   /*font-family: Georgia, serif;*/
    font-style: italic;
    font-size: 12px;
    position: relative;
