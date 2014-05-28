@@ -142,6 +142,9 @@
 					
 					<div class="row">
 						<div class="col-sm-4">
+							<div class="headline">
+								<h4>패밀리 사이트</h4>
+							</div>						
 							<ul class="list-inline our-family" id="effect-2">
 								<li>
 									<figure>
