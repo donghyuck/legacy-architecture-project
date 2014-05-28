@@ -63,7 +63,7 @@
 		<div class="container content">	
 			<div class="row margin-bottom-20">
 				<div class="visible-lg col-lg-6">
-				메이이미지위치
+					<img src="${request.contextPath}/download/image/81/main_visual1.jpg" class="img-responsive"  alt="">
 				</div>			
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<!-- product & service -->				
