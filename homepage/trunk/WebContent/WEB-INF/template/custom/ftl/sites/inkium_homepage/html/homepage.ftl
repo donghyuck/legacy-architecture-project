@@ -126,6 +126,16 @@
                         	</div>
 						</div>			
 						<div class="col-lg-6">
+						<div class="easy-block-v2">
+                            	<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 서비스 바로 가기</small></p>												
+								<ul class="list-inline">
+									<li><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" class="img-responsive" style="width:75px;"></li>
+									<li><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" class="img-responsive" style="width:75px;"></li>
+									<li><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" class="img-responsive" style="width:75px;"></li>
+								</ul>							
+						</div>
+						</div>
+						<div class="col-lg-6">
 				<div class="easy-block-v2">
                     <div class="easy-bg-v2 rgba-red">New</div>				
                             	<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 공지 | 뉴스 </small></p>												
