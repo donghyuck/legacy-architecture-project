@@ -5,6 +5,7 @@
 		<#compress>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.ui.portfolio-v1.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.img-hover.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -56,6 +57,7 @@
 		<!-- START MAIN CONTENT -->			
 		<!-- content
 		================================================== -->
+		
 		<div class="container content">	
 			<div class="row margin-bottom-20">
 				<div class="visible-lg col-lg-6">
