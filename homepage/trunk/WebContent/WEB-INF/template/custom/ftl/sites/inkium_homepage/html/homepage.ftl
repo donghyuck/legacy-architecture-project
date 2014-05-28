@@ -97,7 +97,17 @@
                         <a href="portfolio_item.html" class="info">Read More</a>
                     </div>                
                 </div>
-            </div>                        
+            </div>   
+            <div class="col-sm-6">
+                <div class="view view-tenth">
+                    <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
+                    <div class="mask">
+                        <h2>5</h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos dolores et quas molestias excepturi sint occaecati cupiditate non provident.</p>
+                        <a href="portfolio_item.html" class="info">Read More</a>
+                    </div>                
+                </div>
+            </div>                                    
         </div><!--/row-->
 
         <div class="row"> 
