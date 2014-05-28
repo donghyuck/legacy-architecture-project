@@ -48,6 +48,9 @@
 		-->
 		</script>		
 		<style scoped="scoped">
+		.copyright{
+			background: #fff;
+		}
 		</style>   
 		</#compress>			
 	</head>
