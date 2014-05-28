@@ -160,7 +160,7 @@
 										<div class="img-hover">
 											<figcaption>
 											ASTD
-											<a class="btn-u btn-u-red  btn-sm rounded">바로가기</a>
+											<a class="btn-u btn-u-red  btn-xs rounded">바로가기</a>
 											</figcaption>
 											
 										</div>
