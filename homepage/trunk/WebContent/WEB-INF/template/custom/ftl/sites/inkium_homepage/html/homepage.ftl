@@ -95,9 +95,9 @@
 							</div>
 						</div>	
 						<div class="col-lg-6">
-<div class="panel panel-default">
+							<div class="panel panel-default">
                             <div class="panel-body">
-                            	<p class="text-muted"><small><i class="fa fa-info"></i> 뉴스</small></p
+                            	<p class="text-muted"><small><i class="fa fa-info"></i> 뉴스</small></p>
 									<ul class="list-unstyled">
                                         <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
