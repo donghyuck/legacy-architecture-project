@@ -419,6 +419,11 @@
 	z-index: 2050;
 }
 
+.color-white {
+	color: #fff;
+}
+
+
 nav.personalized-navbar .dropdown > a {
 border-bottom: 0px;
 min-height: 52px;
