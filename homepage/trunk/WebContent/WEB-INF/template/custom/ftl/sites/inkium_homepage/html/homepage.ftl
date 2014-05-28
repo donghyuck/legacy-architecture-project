@@ -46,15 +46,20 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
-		<!-- START MAIN CONTENT -->	
-		
-
-    <!-- content
-    ================================================== -->
-<div class="container content">	
+		<!-- START MAIN CONTENT -->			
+		<!-- content
+		================================================== -->
+		<div class="container content">	
+			<div class="row margin-bottom-20">
+				<div class="visible-lg col-lg-6">
+				fdasf
+				</div>			
+				<div class="visible-lg col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				fdasf
+				<div>
+			</div>
     	
     	<!-- Recent Works -->
-        <div class="headline"><h2>Recent Works</h2></div>
         <div class="row margin-bottom-20">
             <div class="col-md-3 col-sm-6">
                 <div class="thumbnails thumbnail-style thumbnail-kenburn">
