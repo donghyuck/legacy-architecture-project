@@ -3,6 +3,7 @@
 <head>
 		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
 		<#compress>		
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.ui.portfolio-v1.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
