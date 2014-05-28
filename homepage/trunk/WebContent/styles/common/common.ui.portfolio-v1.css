@@ -21,7 +21,7 @@
    display: block;
    position: relative;
 }
-.view h2, .view h3 {
+.view h2 {
    text-transform: uppercase;
    color: #fff;
    text-align: center;
@@ -55,7 +55,7 @@
 	background:#72c02c;
 }
 
-.portfolio-responsive h2, .portfolio-responsive h3 {
+.portfolio-responsive h2 {
 	margin-top:0 !important;
 }
 
@@ -80,7 +80,7 @@
    filter: alpha(opacity=0);
    opacity: 0;
 }
-.view-tenth h2, .view-tenth h3 {
+.view-tenth h2 {
    color: #333;
    margin: 20px 40px 0;
    background: transparent;
