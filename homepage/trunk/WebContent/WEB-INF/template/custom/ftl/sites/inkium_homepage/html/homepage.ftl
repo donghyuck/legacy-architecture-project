@@ -156,7 +156,7 @@
 											<div class="img-hover rounded">
 												<figcaption>
 													ASTD
-													<a class="btn-u btn-u-red  btn-xs rounded" target="_blank" href="http://www.astd.co.kr/">바로가기</a>
+													<a class="btn-u btn-u-red   btn-u-xs rounded" target="_blank" href="http://www.astd.co.kr/">바로가기</a>
 												</figcaption>
 												
 											</div>
@@ -168,7 +168,7 @@
 											<div class="img-hover rounded">
 												<figcaption>
 												ICP
-												<a class="btn-u btn-u-red  btn-xs rounded" target="_blank" href="http://www.icpi.co.kr">바로가기</a>
+												<a class="btn-u btn-u-red   btn-u-xs rounded" target="_blank" href="http://www.icpi.co.kr">바로가기</a>
 												</figcaption>
 												
 											</div>
@@ -180,7 +180,7 @@
 											<div class="img-hover rounded">
 												<figcaption>
 												영수증
-												<a class="btn-u btn-u-red  btn-xs rounded"><i class="fa fa-print"></i> 출력</a>
+												<a class="btn-u btn-u-red  btn-u-xs rounded"><i class="fa fa-print"></i> 출력</a>
 												</figcaption>
 												
 											</div>
