@@ -145,47 +145,51 @@
 					
 					<div class="row">
 						<div class="col-sm-4">		
+							<div class="tag-box tag-box-v7">							
+								<h2>Expedita distinctio lorem ipsum dolor sit amet consectetur!</h2>
+								<ul class="list-inline our-family" id="effect-2">
+									<li>
+										<figure>
+											<img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="">
+											<div class="img-hover rounded">
+												<figcaption>
+													ASTD
+													<a class="btn-u btn-u-red  btn-xs rounded" target="_blank" href="http://www.astd.co.kr/">바로가기</a>
+												</figcaption>
+												
+											</div>
+										</figure>
+									</li> 	
+									<li>
+										<figure>
+											<img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="">
+											<div class="img-hover rounded">
+												<figcaption>
+												ICP
+												<a class="btn-u btn-u-red  btn-xs rounded" target="_blank" href="http://www.icpi.co.kr">바로가기</a>
+												</figcaption>
+												
+											</div>
+										</figure>
+									</li>
+									<li>
+										<figure>
+											<img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="">
+											<div class="img-hover rounded">
+												<figcaption>
+												영수증
+												<a class="btn-u btn-u-red  btn-xs rounded"><i class="fa fa-print"></i> 출력</a>
+												</figcaption>
+												
+											</div>
+										</figure>
+									</li>								
+								</ul>		
+							</div><!-- /quick link -->						
 							<div class="page-header color-green" style="margin: 0 0 15px 0;">
 								<h5><small><i class="fa fa-info"></i> 서비스 바로 가기</small></h5>									
 							</div>			
-							<ul class="list-inline our-family" id="effect-2">
-								<li>
-									<figure>
-										<img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="">
-										<div class="img-hover rounded">
-											<figcaption>
-												ASTD
-												<a class="btn-u btn-u-red  btn-xs rounded" target="_blank" href="http://www.astd.co.kr/">바로가기</a>
-											</figcaption>
-											
-										</div>
-									</figure>
-								</li> 	
-								<li>
-									<figure>
-										<img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="">
-										<div class="img-hover rounded">
-											<figcaption>
-											ICP
-											<a class="btn-u btn-u-red  btn-xs rounded" target="_blank" href="http://www.icpi.co.kr">바로가기</a>
-											</figcaption>
-											
-										</div>
-									</figure>
-								</li>
-								<li>
-									<figure>
-										<img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="">
-										<div class="img-hover rounded">
-											<figcaption>
-											영수증
-											<a class="btn-u btn-u-red  btn-xs rounded"><i class="fa fa-print"></i> 출력</a>
-											</figcaption>
-											
-										</div>
-									</figure>
-								</li>								
-							</ul>						
+				
 						</div>
 						<div class="col-sm-6">
 						<div class="headline">
