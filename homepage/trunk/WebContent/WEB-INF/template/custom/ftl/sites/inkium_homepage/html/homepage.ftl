@@ -142,7 +142,7 @@
 					
 					<div class="row">
 						<div class="col-sm-4">
-							<ul class="list-inline our-clients" id="effect-2">
+							<ul class="list-inline our-family" id="effect-2">
 								<li>
 									<figure>
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
