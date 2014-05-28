@@ -148,7 +148,7 @@
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
 										<div class="img-hover">
 											<figcaption>
-												<h5>ASTD 참가 문의</h5>
+												<h5 class="color-white">ASTD 참가 문의</h5>
 												<small> 02 2081 1092</small>
 											</figcaption>
 											
@@ -159,8 +159,9 @@
 									<figure>
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
 										<div class="img-hover">
-											<figcaption>ICPI 자격증
-											<p>문의 02 2081 1026</p>
+											<figcaption>
+											<h5 class="color-white">ICPI 자격증</h5>
+											<small>문의 02 2081 1026</small>
 											</figcaption>
 											
 										</div>
@@ -170,8 +171,9 @@
 									<figure>
 										<img src="http://htmlstream.com/preview/unify-v1.4/assets/img/clients2/ea-canada.png" alt="">
 										<div class="img-hover">
-											<figcaption>원천징수 영수증
-											<p>문의 02 2081 1016</p>
+											<figcaption>
+											<h5 class="color-white">원천징수 영수증</h5>
+											<small>문의 02 2081 1016</small>
 											</figcaption>
 											
 										</div>
