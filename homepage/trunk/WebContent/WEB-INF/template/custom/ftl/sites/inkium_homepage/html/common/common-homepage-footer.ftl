@@ -1,10 +1,11 @@
 <!--=== Footer ===-->
 <div class="footer">
-	<div class="container layout">
-	<div class="row">
-		<div class="col-md-4 md-margin-bottom-40">
-			<!-- About -->
-			
+<div class="container content job-partners">
+        <div class="title-box-v2">
+            <h2>Our <span class="color-green">Featured</span> Partners</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>
+
 <ul class="list-inline our-clients" id="effect-2">
             <li>
                 <figure>
@@ -199,6 +200,13 @@
                 </figure>
             </li>    
         </ul>
+    </div>
+	<div class="container layout">
+	<div class="row">
+		<div class="col-md-4 md-margin-bottom-40">
+			<!-- About -->
+			
+
 		
 		</div><!--/col-md-4-->  
 		<div class="col-md-4 md-margin-bottom-40">
