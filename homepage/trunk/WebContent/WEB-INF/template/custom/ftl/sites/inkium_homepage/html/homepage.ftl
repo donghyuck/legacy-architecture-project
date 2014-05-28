@@ -104,28 +104,9 @@
 								</ul>	
                              </div>
                         </div>               						
-						<div class="col-lg-6">
-							<div class="panel panel-default">
-                            	<div class="panel-body">
-                            		<p class="text-muted"><small><i class="fa fa-info"></i> 공지 | 뉴스</small></p>
-									<ul class="list-unstyled">
-                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
-                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
-                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-                                    </ul>
-                                    <hr/>
-									<ul class="list-unstyled">
-                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
-                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
-                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-                                    </ul>
-                             	</div>
-                        	</div>						
-						</div>										
+						
 					</div><!-- /row -->					
-				</div></div>
+				</div>
 				</div>			
 				<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
 					<!-- product & service -->				
