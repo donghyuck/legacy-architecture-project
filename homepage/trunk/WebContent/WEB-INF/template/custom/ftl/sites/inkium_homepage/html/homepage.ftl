@@ -132,7 +132,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="view view-tenth">
-								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="" />
+								<img class="img-responsive" src="${request.contextPath}/download/image/93/main_consulting.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">HRD 컨설팅</div>
 									<p class="text-left">기업의 인재육성전략 실현을 위한 HRD 통합 솔루션</p>
@@ -142,7 +142,7 @@
 							</div>
 						<div class="col-sm-6">
 							<div class="view view-tenth">
-								<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="" />
+								<img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
 								<div class="mask">
 									<div class="headline">스터디마트</div>
 									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
