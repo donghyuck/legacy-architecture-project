@@ -428,7 +428,7 @@
 }
 
 .paddingless {
-	margin : 0 0 0 0;
+	padding : 0 0 0 0;
 }
 
 nav.personalized-navbar .dropdown > a {
