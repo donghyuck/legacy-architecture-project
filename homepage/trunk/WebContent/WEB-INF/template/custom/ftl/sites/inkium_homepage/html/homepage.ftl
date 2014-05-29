@@ -103,8 +103,8 @@
 		10 , -10
 		*/
 		#services-view .col-sm-6 {
-			padding-right: 5px;
-			padding-left: 5px;
+			padding-right: 10px;
+			padding-left: 10px;
 		}
 		
 		#services-view .view {
@@ -112,8 +112,8 @@
 		}	
 		
 		#services-view .view-tenth img {
-			left: 10;
-			margin-left: -10px;
+			left: 5;
+			margin-left: -5px;
 		}	
 		
 		</style>   
