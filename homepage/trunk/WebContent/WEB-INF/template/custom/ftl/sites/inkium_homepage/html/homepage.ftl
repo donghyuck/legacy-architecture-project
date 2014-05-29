@@ -48,7 +48,7 @@
 				});
 				
 				var announcement = new common.api.Announcement(); 		
-				var forum = new common.api.Forum({forumId:1});
+				var forum = new common.api.Forum({forumId:1, pageSize: 3});
 				 				
 				var template = kendo.template('<li class="overflow-hidden"><i class="fa fa-check color-green"></i> #:subject#</li>');
 				
