@@ -45,7 +45,8 @@
 					}				
 				});				
 
-			/*	$('.bxslider').bxSlider({
+				/**
+				$('.bxslider').bxSlider({
 					maxSlides: 3,
 					minSlides: 3,
 					slideWidth: 100,
@@ -55,8 +56,9 @@
 						alert("000");
 						$('#family-list').removeClass('hidden');
 					}
-				});  
-            	*/							
+				}); 
+				*/ 
+            							
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
