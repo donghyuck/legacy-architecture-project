@@ -97,16 +97,25 @@
 			-o-transform: none;
 			transform: none;
 		}
-		
+		/** 
+		15 > 5 
+		30 > 
+		10 , -10
+		*/
 		#services-view .col-sm-6 {
-			padding-right: 6px;
-			padding-left: 6px;
+			padding-right: 5px;
+			padding-left: 5px;
 		}
 		
 		#services-view .view {
-			margin-bottom: 12px;
+			margin-bottom: 10px;
 		}	
-	
+		
+		#services-view .view .view-tenth img {
+			left: 5px;
+			margin-left: -5px;
+		}	
+		
 		</style>   
 		</#compress>			
 	</head>
