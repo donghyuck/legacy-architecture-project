@@ -43,7 +43,15 @@
 					authenticate : function( e ){
 						e.token.copy(currentUser);
 					}				
-				});								
+				});				
+
+				$('.bxslider').bxSlider({
+					maxSlides: 4,
+					minSlides: 4,
+					slideWidth: 360,
+					slideMargin: 10,
+				});  
+            								
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
