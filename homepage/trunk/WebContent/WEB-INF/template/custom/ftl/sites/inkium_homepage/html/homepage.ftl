@@ -32,7 +32,8 @@
 			complete: function() {
 												
 				var community = new Community({
-					contextPath: "${request.contextPath}"
+					contextPath: "${request.contextPath}",
+					loading : true
 				});
 						
 				// 1.  한글 지원을 위한 로케일 설정
