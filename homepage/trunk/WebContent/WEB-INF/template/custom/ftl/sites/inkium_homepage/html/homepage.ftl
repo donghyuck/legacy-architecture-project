@@ -177,8 +177,8 @@
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
                         <span>
-                            <strong>Award Winning Agency</strong>
-                            <i>Responsive Bootstrap Template</i>
+                            <strong>문의</strong>
+                            <i>02 2081 1092</i>
                         </span>
                     </a>
                 </li>
@@ -186,8 +186,8 @@
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
                         <span>
-                            <strong>Wolf Moon Officia</strong>
-                            <i>Pariatur prehe cliche reprehrit</i>
+                            <strong>문의</strong>
+                            <i>02 2081 1026</i>
                         </span>
                     </a>
                 </li>
@@ -195,8 +195,8 @@
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
                         <span>
-                            <strong>Food Truck Quinoa Nesciunt</strong>
-                            <i>Craft labore wes anderson cred</i>
+                            <strong>문의</strong>
+                            <i>02 2081 1016</i>
                         </span>
                     </a>
                 </li>
