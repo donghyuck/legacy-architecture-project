@@ -14,6 +14,8 @@
 			options = that.options;
 			
 			that.move();
+			alert(options.culture);
+			alert(options.contextPath);
 		},		
 		culture : function (culture){
 			kendo.culture(culture);				
