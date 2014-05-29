@@ -15,9 +15,123 @@
  */
 package architecture.ee.web.community.forum;
 
+import java.io.Serializable;
+import java.util.Date;
+
 import architecture.common.cache.Cacheable;
+import architecture.common.model.NoNamedEntityModelObject;
 
-public interface Forum extends Cacheable  {
+public interface Forum extends NoNamedEntityModelObject  {
+	
+	public int getDisplayOrder() ;
 
+	public void setDisplayOrder(int displayOrder) ;
+
+
+	public Long getObjectType() ;
+
+
+	public void setObjectType(Long objectType) ;
+	
+	
+	public Long getObjectId() ;
+	
+	
+	public void setObjectId(Long objectId) ;
+	
+	
+	public String getBoardName() ;
+	
+	
+	public void setBoardName(String boardName) ;
+	
+	
+	public String getBoardDesc() ;
+	
+	
+	public void setBoardDesc(String boardDesc) ;
+	
+	public boolean isCommentYn() ;
+	
+	
+	public void setCommentYn(boolean commentYn) ;
+	
+	
+	public boolean isFileYn() ;
+	
+	
+	public void setFileYn(boolean fileYn) ;
+	
+	
+	public boolean isAnonyYn() ;
+	
+	
+	public void setAnonyYn(boolean anonyYn) ;
+	
+	
+	public boolean isUseYn() ;
+	
+	
+	public void setUseYn(boolean useYn) ;
+	
+	
+	public Date getLastThreadDate() ;
+	
+	
+	public void setLastThreadDate(Date lastThreadDate) ;
+	
+	
+	public Long getTotalCnt() ;
+	
+	
+	public void setTotalCnt(Long totalCnt) ;
+	
+	
+	/**
+	 * @return forumId
+	 */
+	public Long getForumId() ;
+	
+	public void setForumId(Long forumId) ;
+	
+	
+	
+	/**
+	 * @return categoryId
+	 */
+	public Long getCategoryId() ;
+	
+	
+	/**
+	 * @param categoryId 설정할 categoryId
+	 */
+	public void setCategoryId(Long categoryId) ;
+	/**
+	 * @return category
+	 */
+	public Category getCategory() ;
+	
+	
+	/**
+	 * @param category 설정할 category
+	 */
+	public void setCategory(Category category) ;
+	
+	
+	public Serializable getPrimaryKeyObject() ;
+	
+	
+	public int getModelObjectType() ;
+	
+	
+	public int getCachedSize() ;
+
+	public Long getCreateId() ;
+
+	public void setCreateId(Long createId) ;
+
+	public Long getModifyId() ;
+
+	public void setModifyId(Long modifyId) ;
 
 }

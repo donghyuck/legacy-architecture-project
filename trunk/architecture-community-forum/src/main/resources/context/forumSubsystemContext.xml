@@ -16,4 +16,15 @@
 	]]>
 	</description>
 	
+	<bean id="topicCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="topicCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="topicDao" class="architecture.ee.web.community.forum.dao.jdbc.JdbcTopicDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />						
+	<bean id="topicManager" class="architecture.ee.web.community.forum.impl.TopicManagerImpl" depends-on="topicDao"  p:userManager-ref="userManager"  p:topicDao-ref="topicDao" p:topicCache-ref="topicCache" />
+	
+	<bean id="forumCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="forumCache"  p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="forumDao" class="architecture.ee.web.community.forum.dao.jdbc.JdbcForumDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />						
+	<bean id="forumManager" class="architecture.ee.web.community.forum.impl.ForumManagerImpl" depends-on="forumDao"  p:userManager-ref="userManager"  p:forumDao-ref="forumDao" p:forumCache-ref="forumCache" />
+	
+	<!-- <bean id="webSiteManager" class="architecture.ee.web.site.DefaultWebSiteManager" depends-on="webSiteDao" p:webSiteDao-ref="webSiteDao"  />
+	<bean id="webSiteDao" class="architecture.ee.web.site.dao.JdbcWebSiteDao" parent="jdbcDaoSupport" depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" /> -->
+			
 </beans>

@@ -12,8 +12,18 @@ public interface TopicManager {
 	
 	public abstract void addTopic(Topic topic);
 	
+	public abstract void updateTopic(Topic topic);
+	
+	public abstract void deleteTopic(Topic topic);
+	
 	public abstract Topic getTopic(long topicId) throws TopicNotFoundException;
 	
 	public abstract List<Topic> getTopics(long forumId);
+	
+	public abstract int getTopicCount(long forumId) ;
+
+	public abstract int getTopicViewCount(long topicId);
+	
+	public abstract void increaseTopicViewCount(long topicId);
 	
 }

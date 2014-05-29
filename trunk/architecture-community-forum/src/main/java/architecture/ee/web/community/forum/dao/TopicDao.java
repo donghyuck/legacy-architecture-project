@@ -12,16 +12,21 @@ public interface TopicDao {
 	
 	public abstract Long nextId(); // 
 	
-	//public abstract void update( Topic topic );
+	public abstract void update( Topic topic );
 	
 	public abstract void insert( Topic topic );
 	
-	//public abstract void delete( Topic topic );
+	public abstract void delete( Topic topic );
 	
 	// public abstract void move( Long fromId, Long toId);
 	
 	public abstract List<Topic> getTopics (Long forumId);
 	
+	public abstract List<Long> getTopicIds (Long forumId);
 	
-
+	public abstract int getTopicCount(long forumId);
+	
+	public abstract int getTopicViewCount(long topicId);
+	
+	public abstract void increaseTopicViewCount(long topicId);
 }
