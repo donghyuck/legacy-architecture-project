@@ -21,11 +21,14 @@
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/ace/ace.js',],        	   
+			'${request.contextPath}/js/ace/ace.js',],
 			complete: function() {			
 			
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();		
+				
 				
 				// 2.  MEUN 설정
 				var slide_effect = kendo.fx($("body div.overlay")).fadeIn();																																													
@@ -102,10 +105,14 @@
 				// 4. CONTENT 	
 				 var sitePlaceHolder = new common.models.WebSite( {webSiteId: ${ action.webSite.webSiteId}} );
 				 $("#site-info").data("sitePlaceHolder", sitePlaceHolder );
+				
+				// 4-1. Forum List
+				createForumListView();
 								
 				// 4-1. Announces 							
-				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
-				createNoticeGrid();									
+				//$("#announce-panel").data( "announcePlaceHolder", new Announce () );
+				//createNoticeGrid();									
+				
 				// 4-2. Right Tabs								
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
@@ -125,7 +132,6 @@
 				// END SCRIPT 
 			}
 		}]);	
-						
 		function createAttachmentListView(){			
 			if( !$('#attachment-list-view').data('kendoListView') ){														
 				var attachementTotalModle = kendo.observable({ 
@@ -245,6 +251,314 @@
 				);						
 			}		
 		}
+		
+		<!-- ============================== -->
+		<!-- create forum List Grid			-->
+		<!-- ============================== -->						
+		function createForumListView(){
+			$("#forum-list-view").kendoGrid({
+					dataSource: {
+						type: 'json',
+							transport: {
+								read: { url:'${request.contextPath}/community/list-forums.do?output=json', type: 'POST' },
+								parameterMap: function (options, operation){
+								}
+							},
+							pageSize: 10,
+							error:common.api.handleKendoAjaxError,
+							schema: {
+								model: common.models.Forum,
+								data : "targetForums",
+								total : "targetForumsCount"
+							},
+						serverPaging: true
+					},
+					sortable: true,
+					columns: [ 
+						{field:"creationDate", title: "생성일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field: "boardName", title: "게시판 이름"},
+						{field: "boardDesc", title: "게시판 설명"},
+						{field: "totalCnt", title: "총 게시글 수", width: "100px"} 
+					],
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
+					selectable: "row",								
+					change: function(e) {
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );
+							createTopicGrid(selectedCell);	
+						}
+						/*							
+						var current_index = this.select().index();
+						var total_index = this.dataSource.view().length -1 ;
+						var list_view_pager = $("#photo-list-pager").data("kendoPager");	
+						var item = data[current_index];			
+						item.manupulate();								
+						common.api.pager(item, current_index,total_index, list_view_pager.page(), list_view_pager.totalPages());
+						$("#photo-list-view").data( "photoPlaceHolder", item );														
+						displayPhotoPanel( ) ;
+						*/										
+					},
+					navigatable: false,
+					//template: kendo.template($("#photo-list-view-template").html()),								
+					dataBound: function(e) {;		
+					}
+				});	
+		}
+		
+		function createTopicGrid(forum){
+			
+			$('#forum-title').html(forum.boardName);
+			$('#forum-desc').html(forum.boardDesc);
+			$('#topic-grid').data('nowForumId',forum.forumId);
+								
+				$("#topic-grid").kendoGrid({
+					dataSource : new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-forum-topics.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}else{								
+									return {forumId: forum.forumId };								
+								}
+							} 
+						},
+						pageSize: 10,
+						error:common.api.handleKendoAjaxError,
+						schema: {
+							total : "targetTopicCount",
+							data : "targetTopics",
+							model : common.models.ForumTopic
+						}
+					}), 
+					sortable: true,
+					columns: [ 
+						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field: "subject", title: "제목", headerAttributes: { "class": "table-header-cell", style: "text-align: center"}, 
+																			template: '#: subject # <div class="btn-group">'
+																			+'<button type="button" class="btn btn-warning btn-xs" onclick="showTopicEditor();return false;">편집</a>'
+																			+'<button type="button" class="btn btn-warning btn-xs" onclick="showTopicViewer();return false;">보기</a></div>'
+																			+'<button type="button" class="btn btn-warning btn-xs" onclick="deleteTopic();return false;">삭제</a></div>'
+																			},
+						{field: "viewCnt", title: "조회수", sortable : false , width: "100px"}
+					],
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
+					selectable: "row",
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );	    							
+							setTopicEditorSource(selectedCell);	
+						}
+					},
+					dataBound: function(e) {					
+					},
+					schema: {
+							total : "targetTopicCount",
+							data : "targetTopics",
+							model : common.models.ForumTopic
+						}
+				});
+				
+				common.api.handlePanelHeaderActions($("#topic-list-panel")); // panel header event setting 
+				common.ui.handleButtonActionEvents($("#topic-list-panel button.btn-control-group"), 	{event: 'click', handlers: {
+						'new-topic' : function(e){
+							var topicPlaceHolder = new common.models.ForumTopic();
+							setTopicEditorSource(topicPlaceHolder);
+							showTopicEditor();			
+						}
+					}}				
+				);
+				
+				common.ui.handleActionEvents( $('input[name="topic-selected-target"]'), { event: 'change' , handler: function(e){				
+					var oldSelectedSource = $("#topic-grid").data('topicTargetPlaceHolder');
+					if( oldSelectedSource != this.value ){
+						$("#topic-grid").data('topicTargetPlaceHolder', this.value );
+						$("#topic-grid").data('kendoGrid').dataSource.read();
+					}					
+				}});
+				
+				
+				$("#topic-list-panel" ).show();
+				//kendo.fx($("#topic-list-panel" )).slideIn("up").play();
+				
+		}
+		
+		
+		<!-- ============================== -->
+		<!-- Topic viewer , editor 			-->
+		<!-- ============================== -->			
+		function deleteTopic(){
+			var topicPlaceHolder = getTopicEditorSource();
+			var renderTo = $('#topic-panel-body');
+			
+			common.api.callback({
+				url : '${request.contextPath}/community/delete-forum-topics.do?output=json',
+				data : { item: kendo.stringify( topicPlaceHolder ) },
+				success : function(response){
+								common.ui.notification({title:"게시글", message: "정상적으로 삭제되었습니다.", type: "success" });
+								$("#topic-grid").data('kendoGrid').dataSource.read();
+								$("#forum-list-view").data('kendoGrid').dataSource.read();
+				},
+			 	fail: function(){								
+						common.ui.notification({title:"게시글", message: "시스템 운영자에게 문의하여 주십시오." });
+				},
+				requestStart : function(){
+						kendo.ui.progress(renderTo, true);
+				},
+				requestEnd : function(){
+						kendo.ui.progress(renderTo, false);
+				},
+			});
+			
+		}
+		
+		function showTopicEditor(){	
+			
+			var topicPlaceHolder = getTopicEditorSource();
+			topicPlaceHolder.forumId = $('#topic-grid').data('nowForumId'); 
+			var renderTo = $("#topic-editor-panel");
+			
+			if( $('#topic-editor').text().trim().length == 0 ){
+				var template = kendo.template($('#topic-editor-template').html());		
+				$('#topic-editor').html( template );	
+				
+				var topicEditorModel =  kendo.observable({ 
+					topic : topicPlaceHolder,
+					value : function( value ){
+						if( typeof value === 'undefined' ){
+							return this.topic.content ;
+						}else{
+							this.topic.set('content' , value);
+						}
+					},					
+					profilePhotoUrl : function(){
+						return common.api.user.photoUrl (this.get("topic").user, 150,150);
+					},
+					isNew : false,
+					doSave : function (e) {
+						var btn = $(e.target);
+						btn.button('loading');
+						var template = kendo.template('<p class="text-danger">#:message#</p>');
+						
+						this.topic.user = null;
+						this.topic.properties = null;
+						
+						common.api.callback({  
+							url : '${request.contextPath}/community/update-forum-topics.do?output=json',
+							data : { item: kendo.stringify( this.topic ) },
+							success : function(response){
+								common.ui.notification({title:"게시글", message: "정상적으로 저장되었습니다.", type: "success" });
+								$("#topic-grid").data('kendoGrid').dataSource.read();
+								$("#forum-list-view").data('kendoGrid').dataSource.read();
+							},
+							fail: function(){								
+								common.ui.notification({title:"게시글", message: "시스템 운영자에게 문의하여 주십시오." });
+							},
+							requestStart : function(){
+								kendo.ui.progress(renderTo, true);
+							},
+							requestEnd : function(){
+								kendo.ui.progress(renderTo, false);
+							},
+							always : function(e){
+								btn.button('reset');
+								topicEditorModel.closeEditor(e);
+							}
+						});
+					},
+					updateRequired : false,
+					editable : function(){
+						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
+						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
+							return true;
+						}
+						return false;
+					},
+					openTopicProps : function(e){
+					
+					},
+					closeEditor : function(e){
+						kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
+						kendo.fx($('#topic-list-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
+					}
+				});
+				
+				topicEditorModel.bind("change", function(e){				
+					if( e.field.match('^topic.')){ 						
+						if( this.topic.subject.length > 0 && this.topic.content.length  > 0   )	{			
+							topicEditorModel.set("updateRequired", true);
+						}
+					}	
+				});	
+				
+				kendo.bind(renderTo, topicEditorModel ); <#-- Binding the View to the View-Model -->
+				renderTo.data("model", topicEditorModel );
+				
+				var bodyEditor =  $("#topic-editor-body" );
+				createEditor( "topic-editor" , bodyEditor, topicEditorModel );
+			}
+			
+			renderTo.data("model").set("updateRequired", false);			
+			renderTo.data("model").set("isNew", (topicPlaceHolder.topicId < 1 ));
+				
+			$('#topic-list-panel > .panel > .panel-body').hide();
+			kendo.fx(renderTo).expand("vertical").duration(200).play();			
+		}
+		
+		
+				
+		function showTopicViewer(){
+			var topicPlaceHolder = getTopicEditorSource();
+			if( topicPlaceHolder.topicId > 0 ){					
+				if( $('#topic-viewer').text().trim().length == 0 ){			
+					var template = kendo.template($('#topic-viewer-template').html());		
+					$('#topic-viewer').html( template );				
+					var topicViewerModel =  kendo.observable({ 
+						topic : topicPlaceHolder,
+						profilePhotoUrl : function(){
+							return common.api.user.photoUrl (this.get("topic").user, 150,150);
+						},
+						editable : function(){
+							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
+							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
+								return true;
+							}
+							return false;
+						},
+						openTopicEditor : showTopicEditor,
+						closeViewer : function(e){
+							kendo.fx($("#topic-viewer-panel")).expand("vertical").duration(200).reverse();								
+							kendo.fx($('#topic-list-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
+						}
+					});						
+					kendo.bind($("#topic-viewer-panel"), topicViewerModel );
+				}			
+				$('#topic-list-panel > .panel > .panel-body').first().hide();
+				kendo.fx($("#topic-viewer-panel")).expand("vertical").duration(200).play();			
+			}
+		}
+		
+		function getTopicEditorSource(){
+			if( !$("#topic-editor").data("topicPlaceHolder") ){
+				var topicPlaceHolder =new common.models.ForumTopic();
+				//topicPlaceHolder.set("objectType", 30);
+				$("#topic-editor").data("topicPlaceHolder", topicPlaceHolder );				
+			}
+			return $("#topic-editor").data("topicPlaceHolder");			
+		}
+		
+		function setTopicEditorSource(source){	
+			source.copy(getTopicEditorSource());		
+		}
+		
+		
+		
 		
 		<!-- ============================== -->
 		<!-- create website photo grid									-->
@@ -394,216 +708,8 @@
 				);
 			}
 		}
-		<!-- ============================== -->
-		<!-- Notice grid										       -->
-		<!-- ============================== -->								
-		function createNoticeGrid(){
-			if( !$("#announce-grid").data('kendoGrid') ){				
-				$("#announce-grid").data('announceTargetPlaceHolder', 30);				
-				$("#announce-grid").kendoGrid({
-					dataSource : new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-announce.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}else{								
-									return {objectType: $("#announce-grid").data('announceTargetPlaceHolder') };								
-								}
-							} 
-						},
-						pageSize: 10,
-						error:common.api.handleKendoAjaxError,
-						schema: {
-							data : "targetAnnounces",
-							model : Announce,
-							total : "totalAnnounceCount"
-						}
-					}),
-					sortable: true,
-					columns: [ 
-						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field: "subject", title: "제목", headerAttributes: { "class": "table-header-cell", style: "text-align: center"}, template: '#: subject # <div class="btn-group"><button type="button" class="btn btn-primary btn-xs" onclick="showNoticeEditor();return false;">편집</a><button type="button" class="btn btn-primary btn-xs" onclick="showNoticeViewer();return false;">보기</a></div>'}, 
-					],
-					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );								
-							setNoticeEditorSource(selectedCell);
-						}
-					},
-					dataBound: function(e) {
-					}
-				});		
-				
-				common.api.handlePanelHeaderActions($("#announce-panel"));
-				common.ui.handleButtonActionEvents($("#announce-panel button.btn-control-group"), 	{event: 'click', handlers: {
-						'new-notice' : function(e){
-							var announcePlaceHolder = new Announce();
-							announcePlaceHolder.set("objectType", 30);
-							setNoticeEditorSource(announcePlaceHolder);		
-							showNoticeEditor();			
-						}
-					}}				
-				);
-				
-				common.ui.handleActionEvents( $('input[name="announce-selected-target"]'), { event: 'change' , handler: function(e){				
-					var oldSelectedSource = $("#announce-grid").data('announceTargetPlaceHolder');
-					if( oldSelectedSource != this.value ){
-						$("#announce-grid").data('announceTargetPlaceHolder', this.value );
-						$("#announce-grid").data('kendoGrid').dataSource.read();
-					}					
-				}});					
-				$("#announce-panel" ).show();
-			}	
-		}	
 		
-		<!-- ============================== -->
-		<!-- Notice viewer , editor 						       -->
-		<!-- ============================== -->					
-		function showNoticeViewer(){
-			var announcePlaceHolder = getNoticeEditorSource();
-			if( announcePlaceHolder.announceId > 0 ){					
-				if( $('#notice-viewer').text().trim().length == 0 ){			
-					var template = kendo.template($('#announcement-viewer-template').html());		
-					$('#notice-viewer').html( template );				
-					var noticeViewerModel =  kendo.observable({ 
-						announce : announcePlaceHolder,
-						profilePhotoUrl : function(){
-							return common.api.user.photoUrl (this.get("announce").user, 150,150);
-						},
-						editable : function(){
-							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-								return true;
-							}
-							return false;
-						},
-						openNoticeEditor : showNoticeEditor,
-						closeViewer : function(e){
-							kendo.fx($("#notice-viewer-panel")).expand("vertical").duration(200).reverse();								
-							kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
-						}
-					});						
-					kendo.bind($("#notice-viewer-panel"), noticeViewerModel );
-				}			
-				$('#announce-panel > .panel > .panel-body').first().hide();
-				kendo.fx($("#notice-viewer-panel")).expand("vertical").duration(200).play();			
-			}
-		}
 		
-		function getNoticeEditorSource(){
-			if( !$("#notice-editor").data("announcePlaceHolder") ){
-				var announcePlaceHolder = new Announce();
-				announcePlaceHolder.set("objectType", 30);
-				$("#notice-editor").data("announcePlaceHolder", announcePlaceHolder );				
-			}
-			return $("#notice-editor").data("announcePlaceHolder");			
-		}
-		
-		function setNoticeEditorSource(source){	
-			source.copy(getNoticeEditorSource());		
-		}
-		
-		function showNoticeEditor(){			
-			var announcePlaceHolder = getNoticeEditorSource();
-			var renderTo = $("#notice-editor-panel");			
-			if( $('#notice-editor').text().trim().length == 0 ){			
-				var template = kendo.template($('#notice-editor-template').html());		
-				$('#notice-editor').html( template );	
-				var noticeEditorModel =  kendo.observable({ 
-					announce : announcePlaceHolder,
-					value : function( value ){
-						if( typeof value === 'undefined' ){
-							return this.announce.body ;
-						}else{
-							this.announce.set('body' , value);
-						}
-					},					
-					profilePhotoUrl : function(){
-						return common.api.user.photoUrl (this.get("announce").user, 150,150);
-					},
-					isNew : false,
-					doSave : function (e) {
-						var btn = $(e.target);
-						btn.button('loading');
-						var template = kendo.template('<p class="text-danger">#:message#</p>');
-						if( this.announce.startDate >= this.announce.endDate  ){
-							common.ui.notification({title:"공지 & 이베트", message: "시작일자가 종료일자보다 이후일 수 없습니다." });
-							return ;
-						}
-						
-						this.announce.user = null;
-						this.announce.properties = null;
-						
-						common.api.callback({  
-							url : '${request.contextPath}/community/update-announce.do?output=json',
-							data : { item: kendo.stringify( this.announce ) },
-							success : function(response){
-								common.ui.notification({title:"공지 & 이베트", message: "정상적으로 저장되었습니다.", type: "success" });
-								$("#announce-grid").data('kendoGrid').dataSource.read();
-							},
-							fail: function(){								
-								common.ui.notification({title:"공지 & 이베트", message: "시스템 운영자에게 문의하여 주십시오." });
-							},
-							requestStart : function(){
-								kendo.ui.progress(renderTo, true);
-							},
-							requestEnd : function(){
-								kendo.ui.progress(renderTo, false);
-							},
-							always : function(e){
-								btn.button('reset');
-								noticeEditorModel.closeEditor(e);
-							}
-						});
-					},
-					updateRequired : false,
-					editable : function(){
-						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-							return true;
-						}
-						return false;
-					},
-					openNoticeProps : function(e){
-					
-					},
-					closeEditor : function(e){
-						kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
-						kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
-					}
-				});
-				noticeEditorModel.bind("change", function(e){				
-					if( e.field.match('^announce.')){ 						
-						if( this.announce.subject.length > 0 && this.announce.body.length  > 0 && ( this.announce.startDate <  this.announce.endDate  )  )	{			
-							noticeEditorModel.set("updateRequired", true);
-						}
-					}	
-				});	
-				kendo.bind(renderTo, noticeEditorModel );
-				renderTo.data("model", noticeEditorModel );
-				var bodyEditor =  $("#notice-editor-body" );
-				createEditor( "notice-editor" , bodyEditor, noticeEditorModel );
-			}
-			
-			renderTo.data("model").set("updateRequired", false);			
-			renderTo.data("model").set("isNew", (announcePlaceHolder.announceId < 1 ));
-				
-			if(announcePlaceHolder.objectType == 30){				
-				renderTo.find('input[name="announce-type"]:first').click();
-			}else{			
-				renderTo.find('input[name="announce-type"]:last').click();
-			}
-			$('#announce-panel > .panel > .panel-body').hide();
-			kendo.fx(renderTo).expand("vertical").duration(200).play();			
-		}
 		
 		<!-- ============================== -->
 		<!-- Utils for editor									       -->
@@ -1033,12 +1139,12 @@
 				$("#photo-list-view").data( "photoPlaceHolder", item );
 				displayPhotoPanel( );
 			}
-		}					
+		}			
 		-->
-		</script>		
+		</script>	
 		<style scoped="scoped">
 		
-		#announce-grid .k-grid-content {
+		#topic-grid .k-grid-content {
 			min-height : 300px;
 		}
 		
@@ -1312,10 +1418,16 @@
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
 		<section class="container-fluid" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-10">				
-				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
+			<div id="personalized-area" class="row blank-top-10">
+				
+				<!-- forum list panel -->		
+				<div id="forum-list-panel" class="custom-panels-group col-sm-6">
+					<div id="forum-list-view"></div>	
+				</div>	
+				<!-- topic list panel -->	
+				<div id="topic-list-panel" class="custom-panels-group col-sm-6" style="display:none;">	
 					<div class="panel panel-default">
-						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp;공지 & 이벤트
+						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp; <span id="forum-title"></span>
 							<div class="k-window-actions panel-header-actions">										
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
@@ -1323,42 +1435,32 @@
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 							</div>
 							</div>
-							<div class="panel-body" style="padding:5px;">
-								<div class="page-header page-nounderline-header" style="height:100px;">
+							<div class="panel-body" style="padding:5px;" id="topic-panel-body"> 
+								<div class="page-header page-nounderline-header" style="height:50px;">
 									<h5>
-										<small><i class="fa fa-info"></i> 사이트(${webSite.displayName})/회사(${user.company.displayName}) 버튼을 클릭하면 해당하는 공지 & 이벤트 목록이 보여집니다.</small>
-										<p>
-											<div class="btn-group" data-toggle="buttons">
-												<label class="btn btn-info btn-sm active">
-													<input type="radio" name="announce-selected-target" value="30" >사이트
-												</label>
-												<label class="btn btn-info btn-sm ">
-													<input type="radio" name="announce-selected-target" value="1">회사
-												</label>
-											</div>											
-										</p>
-									</h5>
+										<small><i class="fa fa-info"></i> <span id="forum-desc"></span></small>
 									<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
 										<div class="pull-right">
-											<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new-notice"><i class="fa fa-plus"></i> 공지 및 이벤트 추가</button>
+											<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new-topic"><i class="fa fa-plus"></i> 게시글 추가</button>
 										</div>											
 									</#if>
+									</h5>
 								</div>								
-								<div  id="announce-grid"></div>	
+								<div  id="topic-grid"></div>	
 							</div>
-							<div  id="notice-viewer-panel" class="panel-body" style="display:none;">
+							<div  id="topic-viewer-panel" class="panel-body" style="display:none;">
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
 												<h5 >
 													<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
-												</h5>
-												<div class="pull-right">
+													<div class="pull-right">
 													<div class="btn-group">
-														<button type="button" class="btn btn-primary btn-sm" data-bind="click: openNoticeEditor, enabled: editable" >편집</button>													
+														<button type="button" class="btn btn-primary btn-sm" data-bind="click: openTopicEditor, enabled: editable" >편집</button>													
 													</div>						
 													<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeViewer">&times;  닫기</button>
-												</div>
+													</div>
+												</h5>
 											</div>																		
 										</div>
 									</div>		
@@ -1366,26 +1468,27 @@
 										<div class="col-lg-12">
 											<div class="panel panel-default" style="margin-bottom: 20px;">
 												<div class="panel-body">													
-													<div  id="notice-viewer"></div>																										
+													<div  id="topic-viewer"></div>																										
 												</div>
 											</div>												
 										</div>																		
 									</div>
 							</div>
-							<div  id="notice-editor-panel" class="panel-body" style="display:none;">
+							<div  id="topic-editor-panel" class="panel-body" style="display:none;">
 								<div class="page-header page-nounderline-header" style="min-height: 45px;">
 									<h5 >
 										<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
-									</h5>
-									<div class="pull-right">
+										<div class="pull-right">
 										<div class="btn-group">
 											<button type="button" class="btn btn-primary btn-sm" data-bind="click: doSave, enabled: updateRequired" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >저장</button>			
-											<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: openNoticeProps, enabled: editable, invisible:isNew">프로퍼티</button>
+											<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: openForumProps, enabled: editable, invisible:isNew">프로퍼티</button>
 											<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeEditor">&times;  닫기</button>
 										</div>
 									</div>
+									</h5>
+									
 								</div>				
-								<div  id="notice-editor"></div>	
+								<div  id="topic-editor"></div>	
 							</div>
 						</div>		
 					</div>
@@ -1548,41 +1651,52 @@
 					<p>#:size# 바이트</p>
 				</div>
 			</div>
-		</script>						
-		<script type="text/x-kendo-tmpl" id="notice-editor-template">
+		</script>
+		<!-- ============================== -->
+		<!-- topic editor template          -->
+		<!-- ============================== -->
+		<script type="text/x-kendo-tmpl" id="topic-editor-template">
 			<div class="panel panel-default">
 				<div class="panel-heading" data-bind="visible: isNew" style="padding:5px;">
-
-							<small><span class="label label-danger label-lightweight">NEW</span> 공지 및 이벤트 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
-							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-info btn-sm active" data-bind="enabled: isNew">
-								<input type="radio" name="announce-type" value="30" data-bind="checked: announce.objectType">사이트
-								</label>
-								<label class="btn btn-info btn-sm" data-bind="enabled: isNew">
-								<input type="radio" name="announce-type" value="1" data-bind="checked: announce.objectType">회사
-								</label>
-							</div>						
 			
 				</div>
 				<div class="panel-body"  style="padding:5px;">									
 					<div  class="form">
 						<div class="form-group">
 							<label class="control-label"><small>제목</small></label>							
-							<input type="text" placeholder="제목을 입력하세요." data-bind="value: announce.subject"  class="form-control" placeholder="제목" />
+							<input type="text" placeholder="제목을 입력하세요." data-bind="value: topic.subject"  class="form-control" placeholder="제목" />
 						</div>
 						<div class="form-group">
-							<label class="control-label"><small>공지 기간</small></label>
-							<div class="col-sm-12" >
-								<input data-role="datetimepicker" data-bind="value:announce.startDate"> ~ <input data-role="datetimepicker" data-bind="value:announce.endDate">
-								<span class="help-block"><small>지정된 기간 동안만 이벤트 및 공지가 보여집니다. </small></span>
-							</div>
 						</div>
 						<label class="control-label"><small>본문</small></label>
-						<textarea id="notice-editor-body" data-bind='value:announce.body'></textarea>
+						<textarea id="topic-editor-body" data-bind='value:topic.content'></textarea>
 					</div>									
 				</div>	
 			</div>								
 		</script>
+		
+		<!-- ============================== -->
+		<!-- topic viewer template          -->
+		<!-- ============================== -->
+		<script type="text/x-kendo-tmpl" id="topic-viewer-template">		
+			<div class="page-heading">
+				<h4 data-bind="html:topic.subject"></h4>		
+			</div>													
+			<div class="media">
+				<a class="pull-left" href="\\#">
+					<img data-bind="attr:{ src: profilePhotoUrl }" width="30" height="30" class="img-rounded">
+				</a>
+				<div class="media-body">
+					<h5 class="media-heading">																	
+						<p><span data-bind="visible:topic.user.nameVisible, text: topic.user.name"></span> <code data-bind="text: topic.user.username"></code></p>
+						<p data-bind="visible:topic.user.emailVisible, text: topic.user.email"></p>
+					</h5>		
+				</div>
+				<div data-bind="html: topic.content " />
+			</div>	
+		</script>
+
+		
 		<#include "/html/common/common-homepage-templates.ftl" >	
 		<#include "/html/common/common-editor-templates.ftl" >	
 		<!-- END TEMPLATE -->
