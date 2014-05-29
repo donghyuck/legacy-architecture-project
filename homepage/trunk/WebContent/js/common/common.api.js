@@ -472,7 +472,7 @@
 	common.api = common.api || {} ;
 	var kendo = window.kendo,
 	DataSource = kendo.data.DataSource,
-	handleKendoAjaxError = common.api.handleKendoAjaxError ;
+	handleKendoAjaxError = common.api.handleKendoAjaxError ,
 	stringify = kendo.stringify,
 	isFunction = kendo.isFunction,
 	UNDEFINED = 'undefined',
@@ -502,7 +502,7 @@
 				}
 			}
 			if( typeof options.error === UNDEFINED ){
-				options.error = common.api.handleKendoAjaxError;
+				options.error = handleKendoAjaxError;
 			}
 			if( typeof options.pageSize === UNDEFINED ){
 				options.pageSize = 15;
