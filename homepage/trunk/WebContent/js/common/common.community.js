@@ -22,13 +22,11 @@
 			if( typeof options.loading === UNDEFINED )
 				options.loading = true;			
 			
+			kendo.culture(that.options.culture);				
+			
 			if(options.loading){
 				 $('.page-loader').fadeOut('slow');
 			}
-		},		
-		culture : function (){
-			var that = this;
-			kendo.culture(that.options.culture);				
 		}		
 	});
 	
