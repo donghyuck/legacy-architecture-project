@@ -113,7 +113,7 @@
 		
 		#services-view .view-tenth img {
 			left: 5;
-			margin-left: -5px;;
+			margin-left: -5px;
 		}	
 		
 		</style>   
