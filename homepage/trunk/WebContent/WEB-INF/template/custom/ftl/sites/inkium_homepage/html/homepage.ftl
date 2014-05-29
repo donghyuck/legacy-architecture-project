@@ -47,6 +47,8 @@
 					}				
 				});				
 
+				common.api.community.announce.dataSource();
+
 				/**
 				$('.bxslider').bxSlider({
 					maxSlides: 3,
