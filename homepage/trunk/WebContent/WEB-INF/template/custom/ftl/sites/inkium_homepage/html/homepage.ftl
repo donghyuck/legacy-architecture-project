@@ -141,12 +141,96 @@
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
 								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
+
+<div class="margin-bottom-20 clearfix">
+
+            <ul id="list" class="bxslider recent-work">
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/2.jpg" alt="" /></em>
+                        <span>
+                            <strong>Happy New Year</strong>
+                            <i>Anim pariatur cliche reprehenderit</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/9.jpg" alt="" /></em>
+                        <span>
+                            <strong>Award Winning Agency</strong>
+                            <i>Responsive Bootstrap Template</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/4.jpg" alt="" /></em>
+                        <span>
+                            <strong>Wolf Moon Officia</strong>
+                            <i>Pariatur prehe cliche reprehrit</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/5.jpg" alt="" /></em>
+                        <span>
+                            <strong>Food Truck Quinoa Nesciunt</strong>
+                            <i>Craft labore wes anderson cred</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/6.jpg" alt="" /></em>
+                        <span>
+                            <strong>Happy New Year</strong>
+                            <i>Anim pariatur cliche reprehenderit</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/7.jpg" alt="" /></em>
+                        <span>
+                            <strong>Award Winning Agency</strong>
+                            <i>Responsive Bootstrap Template</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/8.jpg" alt="" /></em>
+                        <span>
+                            <strong>Wolf Moon Officia</strong>
+                            <i>Pariatur prehe cliche reprehrit</i>
+                        </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/9.jpg" alt="" /></em>
+                        <span>
+                            <strong>Food Truck Quinoa Nesciunt</strong>
+                            <i>Craft labore wes anderson cred</i>
+                        </span>
+                    </a>
+                </li>
+            </ul>    
+
+</div>			
+
+								
+								<!--
                             	<p style="padding:10px;">&nbsp;</p>												
 								<ul class="list-inline">
 									<li><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" class="img-responsive" style="width:75px;"></li>
 									<li><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" class="img-responsive" style="width:75px;"></li>
 									<li><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" class="img-responsive" style="width:75px;"></li>
-								</ul>							
+								</ul>
+								-->
+															
 					</div>				
 				</div>
 				
