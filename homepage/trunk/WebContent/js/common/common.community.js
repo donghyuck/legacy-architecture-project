@@ -10,9 +10,11 @@
 		// The `init` method will be called when a new instance is created
 		init : function (options){
 		    // Force options to be an object
-		    options = options || {};
+		   
 			var that = this;	
 			options = that.options;
+			options = options || {};
+			 
 			if( typeof options.culture === UNDEFINED )
 				options.culture = LOCALE;
 			
