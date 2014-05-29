@@ -192,7 +192,7 @@ a.read-more:hover {
 	background:#f37021;
 } 
 
-/*Thumbnail (Recent Work)
+/*Thumbnail (Recent Work, Family Site)
 ------------------------------------*/
 .thumbnail-style h3 a:hover {
 	color:#f37021;
@@ -205,10 +205,14 @@ a.read-more:hover {
 	box-shadow:0 0 0 2px #c0392B;
 }
 
-/*Carousel (Recent Work)*/
-.recent-work a:hover span {
+/*Carousel (Recent Work, Family Site)*/
+.family-site a:hover span {
 	border-bottom:solid 2px #f37021;
 }
+.family-site a:hover span {
+	border-bottom:solid 2px #f37021;
+}
+
 
 .bx-wrapper .bx-prev {
 	background-image: url(../../plugins/bxslider/images/controls-orange.png);
