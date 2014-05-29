@@ -10,12 +10,20 @@
 		init : function (options){
 		    // Force options to be an object
 		    options = options || {};
-			kendo.culture("ko-KR");	
+			var that = this;	
+			options = that.options;
+			
+			that.move();
 		}
 		
 		culture : function (culture){
 			kendo.culture(culture);				
 		} 		
+		
+		move : function () {
+			
+			alert ("fdaf");
+		}
 	});
 	
 	
