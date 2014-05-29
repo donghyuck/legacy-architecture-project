@@ -50,7 +50,10 @@
 					minSlides: 3,
 					slideWidth: 100,
 					slideMargin: 15,
-					pager : false
+					pager : false,
+					onSliderLoad : function(){
+						alert("000");
+					}
 				});  
             								
 				<#if !action.user.anonymous ></#if>	
