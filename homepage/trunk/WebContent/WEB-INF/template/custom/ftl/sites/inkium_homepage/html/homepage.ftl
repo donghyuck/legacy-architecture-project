@@ -52,10 +52,7 @@
 				announcement.dataSource().bind('change', function(){
 					$("#announce-view").html(kendo.render(template, this.view()))
 				}).read();
-				
-				
-				 
-				 
+								 
 				/**
 				$('.bxslider').bxSlider({
 					maxSlides: 3,
@@ -69,7 +66,6 @@
 					}
 				}); 
 				*/ 
-            							
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
