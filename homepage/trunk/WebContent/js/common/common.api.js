@@ -479,6 +479,47 @@
 	POST = 'POST',
 	OBJECT_TYPE = 30 ,
 	JSON = 'json';
+
+	common.api.Forum = kendo.Class.extend({		
+		init : function (options){
+			options = options || {};			
+			var that = this;
+			that.options = options;
+		},
+		dataSource : function (options){			
+			var that = this;
+			if( typeof that._dataSource ===  UNDEFINED){
+				options = options || {};
+				if( typeof options.transport === UNDEFINED){
+					options.transport = {
+						read: { type : POST, dataType:JSON, url : '/community/list-forum-topics.do?output=json' },
+						parameterMap : function(options, operation) {
+							if (operation != "read" && options.models) {
+								return {models: kendo.stringify(options.models)};
+							}else{
+								return {forumId: that.options.forumId }
+							}
+						}
+					}
+				}
+				if( typeof options.error === UNDEFINED ){
+					options.error = handleKendoAjaxError;
+				}
+				if( typeof options.pageSize === UNDEFINED ){
+					options.pageSize = 15;
+				}			
+				if( typeof options.schema === UNDEFINED ){
+					options.schema = {
+						total: "targetTopicCount",
+						data : "targetTopics",
+						model : common.models.ForumTopic						
+					}
+				}				
+				that._dataSource = new DataSource(options);
+			}		
+			return that._dataSource;
+		}	
+	});
 	
 	common.api.Announcement = kendo.Class.extend({		
 		init : function (options){
@@ -486,34 +527,37 @@
 			var that = this;
 			that.options = options;
 		},
-		dataSource : function (options){
+		dataSource : function (options){			
 			var that = this;
-			options = options || {};
-			if( typeof options.transport === UNDEFINED){
-				options.transport = {
-					read: { type : POST, dataType:JSON, url : '/community/list-announce.do?output=json' },
-					parameterMap : function(options, operation) {
-						if (operation != "read" && options.models) {
-							return {models: kendo.stringify(options.models)};
-						}else{
-							return {objectType: OBJECT_TYPE }
+			if( typeof that._dataSource ===  UNDEFINED){
+				options = options || {};
+				if( typeof options.transport === UNDEFINED){
+					options.transport = {
+						read: { type : POST, dataType:JSON, url : '/community/list-announce.do?output=json' },
+						parameterMap : function(options, operation) {
+							if (operation != "read" && options.models) {
+								return {models: kendo.stringify(options.models)};
+							}else{
+								return {objectType: OBJECT_TYPE }
+							}
 						}
 					}
 				}
-			}
-			if( typeof options.error === UNDEFINED ){
-				options.error = handleKendoAjaxError;
-			}
-			if( typeof options.pageSize === UNDEFINED ){
-				options.pageSize = 15;
-			}			
-			if( typeof options.schema === UNDEFINED ){
-				options.schema = {
-					data : "targetAnnounces",
-					model : Announce						
+				if( typeof options.error === UNDEFINED ){
+					options.error = handleKendoAjaxError;
 				}
-			}			
-			return new DataSource(options);
+				if( typeof options.pageSize === UNDEFINED ){
+					options.pageSize = 15;
+				}			
+				if( typeof options.schema === UNDEFINED ){
+					options.schema = {
+						data : "targetAnnounces",
+						model : Announce						
+					}
+				}				
+				that._dataSource = new DataSource(options);
+			}		
+			return that._dataSource;
 		}	
 	});
 	
