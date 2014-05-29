@@ -478,7 +478,7 @@
 	POST = 'POST',
 	JSON = 'json';
 	
-	common.api.community.announce = function (){				
+	common.api.community.Announce = function (){				
 		 return {
 			 dataSouce : function (options){
 				options = options || {};
