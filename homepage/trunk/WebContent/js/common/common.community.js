@@ -13,24 +13,26 @@
 			options = options || {};
 			
 			var that = this;
+			that.options = options;
 			
 			if( typeof options.culture === UNDEFINED )
 				options.culture = LOCALE;
+			if( typeof options.contextPath === UNDEFINED )
+				options.contextPath = '';
+				
 			that.culture();
 			that.move();
 			alert(options.culture);
 			alert(options.contextPath);
 			alert(that.options.culture);
 		},		
-		options: {
-			
-		},
-		culture : function (culture){
-			kendo.culture(culture);				
+		culture : function (){
+			var that = this;
+			kendo.culture(that.options.culture);				
 		},		
 		move : function () {
-			
-			alert ("fdaf");
+			var that = this;
+			alert ( that.options.contextPath );
 		}
 	});
 	
