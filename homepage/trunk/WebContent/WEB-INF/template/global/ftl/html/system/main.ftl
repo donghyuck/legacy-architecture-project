@@ -54,31 +54,7 @@
 						}
 					]
 				});
-				 
-				 
-				 
-					$("#splitter").height( $(window).height() - 150 );
-				
- 				var splitter = $("#splitter").kendoSplitter({
-					orientation: "horizontal",
-						panes: [
-							{ collapsible: false, size: "50%" },
-							{ collapsible: true, size: "50%" }
-						],
-					resize: function () {
-					        if(splitter) {
-					            //alert(splitter.wrapper.height());
-					$("#splitter").height( $(window).height() - 150 );            
-					$("#splitter").find(".k-splitbar").height( $(window).height() - 150 );
-					$("#splitter").find(".k-pane").height( $(window).height() - 150 );
-					        }
-					        //you can also get the panes each on it's own.
-					        //check: console.log(splitter); to see what options are available           
-					    }						
-				}).data("kendoSplitter");
-				
-				splitter.resize();
-				
+				 				
 				// END SCRIPT
 			}
 		}]);
@@ -93,33 +69,7 @@
 		<section id="navbar"></section>
 		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
-		<div class="container-fluid">		
-			<div class="row">			
-				<div class="col-sm-12">
-					<div class="page-header">
-						<h1><span data-bind="text: title"></span>     <small><i class="fa fa-quote-left"></i>&nbsp;<span data-bind="text: description"></span>&nbsp;<i class="fa fa-quote-right"></i></small></h1>
-					</div>	
-				</div>			
-			</div>	
-			<div class="row">		
-				<div class="col-sm-12">
-				
-			<div id="splitter">
-                <div id="list_pane" class="color1">
-                    <p>
-                        Left pane
-                    </p>
-                </div>
-                <div id="detail_pane" class="color2">
-                    <p>
-                        Right pane
-                    </p>
-                </div>
-			</div>
-					
-				</div>
-			</div>
-		</div>				
+
 		<div id="account-panel"></div>
 		<!-- END MAIN CONTENT -->					
 		<!-- START FOOTER -->
