@@ -32,7 +32,9 @@
 			complete: function() {
 						
 						
-				var community = new Community();
+				var community = new Community({
+					contextPath: "${request.contextPath}"
+				});
 						
 				// 1.  한글 지원을 위한 로케일 설정
 				kendo.culture("ko-KR");				
