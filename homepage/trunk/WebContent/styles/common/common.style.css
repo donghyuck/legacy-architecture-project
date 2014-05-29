@@ -396,6 +396,15 @@
 
 }
 */
+
+.blank-space-5{
+	padding: 5px;	
+}
+
+.blank-space-10{
+	padding: 10px;	
+}
+
 /** panel section  */
 .panel-header-actions {
 	float: right;
