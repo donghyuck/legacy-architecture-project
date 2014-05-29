@@ -158,7 +158,7 @@
             <ul id="list" class="bxslider recent-work">
                 <li>
                     <a href="#">
-                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/7.jpg" alt="" /></em>
+                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
                         <span>
                             <strong>Award Winning Agency</strong>
                             <i>Responsive Bootstrap Template</i>
@@ -167,7 +167,7 @@
                 </li>
                 <li>
                     <a href="#">
-                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/8.jpg" alt="" /></em>
+                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
                         <span>
                             <strong>Wolf Moon Officia</strong>
                             <i>Pariatur prehe cliche reprehrit</i>
@@ -176,7 +176,7 @@
                 </li>
                 <li>
                     <a href="#">
-                    	<em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets//img/main/9.jpg" alt="" /></em>
+                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
                         <span>
                             <strong>Food Truck Quinoa Nesciunt</strong>
                             <i>Craft labore wes anderson cred</i>
