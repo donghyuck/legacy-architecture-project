@@ -102,6 +102,10 @@
 			padding-right: 6px;
 			padding-left: 6px;
 		}
+		
+		#services-view .view {
+			margin-bottom: 12px;
+		}	
 	
 		</style>   
 		</#compress>			
