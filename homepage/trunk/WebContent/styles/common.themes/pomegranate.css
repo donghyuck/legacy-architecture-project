@@ -98,6 +98,19 @@ a.read-more:hover {
 	}
 }
 
+/*
+* Account nav ..
+**/
+
+.header .navbar-default .navbar-nav > li > a.btn-account {
+	border-bottom: solid 2px #c0392B;
+}
+
+.header .navbar-default .navbar-nav > li.open > a.btn-account {
+	border-bottom: solid 2px #c0392B;
+}
+
+
 /*Header v2
 ------------------------------------*/
 /*Topbar*/
