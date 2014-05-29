@@ -19,21 +19,17 @@
 				options.culture = LOCALE;
 			if( typeof options.contextPath === UNDEFINED )
 				options.contextPath = '';
-				
-			that.culture();
-			that.move();
-			alert(options.culture);
-			alert(options.contextPath);
-			alert(that.options.culture);
+			if( typeof options.loading === UNDEFINED )
+				options.loading = true;			
+			
+			if(options.loading){
+				 $('.page-loader').fadeOut('slow');
+			}
 		},		
 		culture : function (){
 			var that = this;
 			kendo.culture(that.options.culture);				
-		},		
-		move : function () {
-			var that = this;
-			alert ( that.options.loading );
-		}
+		}		
 	});
 	
 	
