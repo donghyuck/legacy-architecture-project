@@ -50,6 +50,7 @@
 					minSlides: 3,
 					slideWidth: 88,
 					slideMargin: 10,
+					pager : false
 				});  
             								
 				<#if !action.user.anonymous ></#if>	
