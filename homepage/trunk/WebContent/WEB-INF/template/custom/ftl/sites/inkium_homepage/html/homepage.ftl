@@ -178,7 +178,7 @@
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
                         <span>
                             <strong>문의</strong>
-                            <i>02 2081 1092</i>
+                            <small>02 2081 1092</small>
                         </span>
                     </a>
                 </li>
@@ -187,7 +187,7 @@
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
                         <span>
                             <strong>문의</strong>
-                            <i>02 2081 1026</i>
+                            <small>02 2081 1026</small>
                         </span>
                     </a>
                 </li>
