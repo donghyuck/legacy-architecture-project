@@ -128,7 +128,7 @@
 						<div class="col-lg-6">
 						<div class="easy-block-v1">
 								<div class="easy-block-v1-badge rgba-blue">서비스 바로 가기</div>
-                            	<p style="padding:20px;">&nbsp;</p>												
+                            	<p style="padding:10px;">&nbsp;</p>												
 								<ul class="list-inline">
 									<li><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" class="img-responsive" style="width:75px;"></li>
 									<li><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" class="img-responsive" style="width:75px;"></li>
@@ -139,7 +139,7 @@
 						<div class="col-lg-6">
 				<div class="easy-block-v1">		
                      <div class="easy-block-v1-badge rgba-blue">공지 | 뉴스</div>       			
-                     <p style="padding:20px;">&nbsp;</p>				
+                     <p style="padding:10px;">&nbsp;</p>				
 									<ul class="list-unstyled">
                                         <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
