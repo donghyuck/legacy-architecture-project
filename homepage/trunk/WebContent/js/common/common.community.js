@@ -32,7 +32,7 @@
 		},		
 		move : function () {
 			var that = this;
-			alert ( that.options.contextPath );
+			alert ( that.options.loading );
 		}
 	});
 	
