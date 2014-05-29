@@ -103,8 +103,8 @@
 		10 , -10
 		*/
 		#services-view .col-sm-6 {
-			padding-right: 10px;
-			padding-left: 5px;
+			padding-right: 0px;
+			padding-left: 10px;
 		}
 		
 		#services-view .view {
