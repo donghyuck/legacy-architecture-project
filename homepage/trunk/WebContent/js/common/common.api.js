@@ -478,16 +478,18 @@
 	POST = 'POST',
 	JSON = 'json';
 	
-	common.api.community.Announcement = function (){				
-		 return {
-			 dataSouce : function (options){
-				options = options || {};
-				alert( options.length );
-			 }			 
-		 }
-	}
-	
-	
+	common.api.community.Announcement = kendo.Class.extend({		
+		init : function (options){
+			options = options || {};			
+			var that = this;
+			that.options = options;
+		},
+		dataSouce : function (options){
+			options = options || {};
+			alert( options.length );
+		}			 		
+		
+	});
 	
 })(jQuery);
 
