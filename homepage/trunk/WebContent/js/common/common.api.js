@@ -485,6 +485,9 @@
 			options = options || {};			
 			var that = this;
 			that.options = options;
+			if( typeof that.options.pageSize === UNDEFINED ){
+				that.options.pageSize = 3;
+			}				
 		},
 		dataSource : function (options){			
 			var that = this;
@@ -506,7 +509,7 @@
 					options.error = handleKendoAjaxError;
 				}
 				if( typeof options.pageSize === UNDEFINED ){
-					options.pageSize = 15;
+					options.pageSize = that.options.pageSize;
 				}			
 				if( typeof options.schema === UNDEFINED ){
 					options.schema = {
@@ -526,6 +529,9 @@
 			options = options || {};			
 			var that = this;
 			that.options = options;
+			if( typeof that.options.pageSize === UNDEFINED ){
+				that.options.pageSize = 3;
+			}				
 		},
 		dataSource : function (options){			
 			var that = this;
@@ -547,7 +553,7 @@
 					options.error = handleKendoAjaxError;
 				}
 				if( typeof options.pageSize === UNDEFINED ){
-					options.pageSize = 15;
+					options.pageSize = that.options.pageSize;
 				}			
 				if( typeof options.schema === UNDEFINED ){
 					options.schema = {
