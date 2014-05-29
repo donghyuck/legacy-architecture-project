@@ -93,7 +93,7 @@
 		<!-- START MAIN CONTENT -->			
 		<!-- content
 		================================================== -->
-		<div style="background-color: #f5f5f5;"> 
+		<div style="background-color: #f5f5f5; min-height:300px;"> 
 		<div class="container content">	
 			<div class="row margin-bottom-20">
 				<div class="col-lg-6">					
