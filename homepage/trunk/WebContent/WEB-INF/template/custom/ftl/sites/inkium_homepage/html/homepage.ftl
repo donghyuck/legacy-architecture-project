@@ -67,6 +67,19 @@
 		.copyright{
 			background: #fff;
 		}
+		.bx-wrapper .bx-viewport {
+		-moz-box-shadow: none;
+		-webkit-box-shadow: none;
+		box-shadow: none;
+		border: none;
+		left: -5px;
+		background: transparent;
+		-webkit-transform:none;
+		-moz-transform: none;
+		-ms-transform: none;
+		-o-transform: none;
+		transform: none;
+		}
 		</style>   
 		</#compress>			
 	</head>
