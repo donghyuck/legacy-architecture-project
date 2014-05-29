@@ -484,7 +484,7 @@
 			var that = this;
 			that.options = options;
 		},
-		dataSouce : function (options){
+		dataSource : function (options){
 			options = options || {};
 			alert( options.length );
 		}			 		
