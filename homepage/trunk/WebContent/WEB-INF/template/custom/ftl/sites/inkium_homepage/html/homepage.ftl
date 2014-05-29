@@ -112,7 +112,7 @@
 		}	
 		
 		#services-view .view-tenth img {
-			left: none;
+			left: 0;
 			margin-left: none;
 		}	
 		
