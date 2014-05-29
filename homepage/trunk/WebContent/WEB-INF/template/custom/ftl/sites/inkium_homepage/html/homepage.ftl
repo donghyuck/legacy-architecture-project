@@ -170,7 +170,7 @@
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
 								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
-							<div class="blank-space-30"></div>
+							<div class="blank-space-20"></div>
 <div class="clearfix">
             <ul id="family-list" class="bxslider list-inline family-site">
                 <li>
