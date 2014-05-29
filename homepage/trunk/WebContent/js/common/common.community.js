@@ -23,7 +23,7 @@
 			alert(options.culture);
 			alert(options.contextPath);
 		},		
-		optiones: {
+		options: {
 			
 		},
 		culture : function (culture){
