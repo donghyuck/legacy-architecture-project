@@ -202,7 +202,8 @@
 				</div>
 			</div>
 			<div class="row">				
-				<div class="col-md-4">		
+				<div class="col-md-4">				
+					<!--
 					<div class="easy-block-v1">
 						<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
 						<div class="blank-space-25"></div>
@@ -237,10 +238,28 @@
 								</li>
 							</ul>
 						</div>
-					</div>				
+					</div>
+					-->			
+				<ul class="list-unstyled categories">
+					<h3 class="heading-md"><strong>Accounting &amp; Finance</strong></h3>
+					<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
+					<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
+					<li><a href="#">Banking &amp; Finance</a> <small class="hex">(66 jobs)</small></li>
+					<li><a href="#">Contract &amp; Freelance</a> <small class="hex">(12 jobs)</small></li>
+					<li><a href="#">Business Development</a> <small class="hex">(212 jobs)</small></li>
+				</ul>							
 				</div>
 				
 				<div class="col-md-4">
+					<h3 class="heading-md"><strong>공지</strong></h3>
+					<ul  id="announce-view" class="list-unstyled categories">						
+						<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
+						<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
+						<li><a href="#">Banking &amp; Finance</a> <small class="hex">(66 jobs)</small></li>
+						<li><a href="#">Contract &amp; Freelance</a> <small class="hex">(12 jobs)</small></li>
+						<li><a href="#">Business Development</a> <small class="hex">(212 jobs)</small></li>
+					</ul>					
+					<!--
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
 	                     <div class="blank-space-25"></div>			
@@ -251,7 +270,7 @@
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                    </ul>    
 						<a class="btn-u btn-u-xs pulse-shrink" href="${request.contextPath}/events.do">더보기</a>	
-					</div>				
+					</div>-->				
 				</div>
 				
 				<div class="col-md-4">
