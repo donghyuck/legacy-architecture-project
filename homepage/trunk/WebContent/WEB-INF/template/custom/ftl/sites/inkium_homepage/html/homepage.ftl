@@ -104,7 +104,7 @@
 		*/
 		#services-view .col-sm-6 {
 			padding-right: 10px;
-			padding-left: 0px;
+			padding-left: 5px;
 		}
 		
 		#services-view .view {
