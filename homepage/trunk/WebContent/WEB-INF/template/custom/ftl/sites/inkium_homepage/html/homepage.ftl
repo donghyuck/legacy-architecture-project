@@ -51,7 +51,7 @@
 				var template = kendo.template('<li class="overflow-hidden"><i class="fa fa-check color-green"></i> #:subject#</li>');
 				announcement.dataSource().bind('change', function(){
 					$("#announce-view").html(kendo.render(template, this.view()))
-				});
+				}).read();
 				
 				
 				 
