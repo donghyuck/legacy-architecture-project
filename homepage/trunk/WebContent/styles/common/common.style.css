@@ -280,7 +280,7 @@
 .header .navbar-default .navbar-nav > li > a.btn-account {
 	border: 0px;
 	padding: 2px 2px 2px 2px;
-	border-bottom: solid 2px transparent;
+	border-bottom: solid 2px #5fb611;
 }
 
 .header .navbar-default .navbar-nav > li > a.btn-account:hover, .header .navbar-default .navbar-nav > li > a.btn-account:focus, .header .navbar-default .navbar-nav > li >  a.btn-account:active {
@@ -289,7 +289,7 @@
 }
 
 .header .navbar-default .navbar-nav > li.open > a.btn-account {
-	border-bottom: solid 2px transparent;
+	border-bottom: solid 2px #5fb611;
 }
 
 .header li.account.open .account-content {
@@ -490,7 +490,7 @@ nav.personalized-navbar {
 
 .personalized-navbar > li > a:hover  {
 	color : red;
-	background-color : #5fb611;	
+	background-color : transparent;	
 }
 
 .personalized-navbar.up {
