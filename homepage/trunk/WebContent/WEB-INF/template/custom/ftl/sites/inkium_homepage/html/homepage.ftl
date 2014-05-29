@@ -68,17 +68,17 @@
 			background: #fff;
 		}
 		.bx-wrapper .bx-viewport {
-		-moz-box-shadow: none;
-		-webkit-box-shadow: none;
-		box-shadow: none;
-		border: none;
-		left: -5px;
-		background: transparent;
-		-webkit-transform:none;
-		-moz-transform: none;
-		-ms-transform: none;
-		-o-transform: none;
-		transform: none;
+			-moz-box-shadow: none;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+			border: none;
+			left: -5px;
+			background: transparent;
+			-webkit-transform:none;
+			-moz-transform: none;
+			-ms-transform: none;
+			-o-transform: none;
+			transform: none;
 		}
 		</style>   
 		</#compress>			
@@ -168,12 +168,11 @@
 			<div class="row">
 				
 				<div class="col-md-4">		
-					<div class="easy-block-v1">
+					<div id="family-list" class="easy-block-v1 hidden">
 								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
 							<div class="blank-space-30"></div>
 <div class="clearfix">
-
-            <ul id="family-list" class="bxslider recent-work">
+            <ul class="bxslider recent-work">
                 <li>
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
