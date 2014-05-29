@@ -30,8 +30,7 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
-						
-						
+												
 				var community = new Community({
 					contextPath: "${request.contextPath}"
 				});
