@@ -2,4 +2,5 @@
 <models>
 	<rank>1000</rank>
 	<model id="61" code="FORUM" />	
+	<model id="62" code="FORUM_TOPIC" />	
 </models>

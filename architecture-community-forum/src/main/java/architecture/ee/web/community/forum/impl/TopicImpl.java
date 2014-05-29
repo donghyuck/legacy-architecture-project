@@ -27,7 +27,7 @@ import architecture.ee.web.community.forum.Topic;
 
 public class TopicImpl extends BaseModelObjectSupport  implements Topic {
 	
-	private Long ForumId;	// BOARD_ID
+	private Long forumId;	// BOARD_ID
 	private Long topicId; // THREAD_ID
 	private Long userId ; // CREATE_ID
 	private int totalReplies = 0 ; // COMMENT_CNT
@@ -56,8 +56,9 @@ public class TopicImpl extends BaseModelObjectSupport  implements Topic {
 	}
 	
 	public TopicImpl(User user){
+		this.topicId = -1L;  // noNull values
 		this.user = user;
-		userId = user == null ? -1L : user.getUserId();
+		this.userId = user == null ? -1L : user.getUserId();
 	}
 
 	/* guess object type is not necessary
@@ -87,11 +88,11 @@ public class TopicImpl extends BaseModelObjectSupport  implements Topic {
 	}
 
 	public Long getForumId() {
-		return ForumId;
+		return forumId;
 	}
 
 	public void setForumId(Long forumId) {
-		ForumId = forumId;
+		this.forumId = forumId;
 	}
 
 	public Long getTopicId() {

@@ -12,9 +12,9 @@
 	 		(?, ?, ?, ?, ?, 
 	 		0, ?, ?, sysdate, ?, 
 	 		?, 0, 0, ?)
-	    	-- (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) 	
 	]]></sql-query>
 	 <sql-query name="SELECT_TOPIC_BY_ID" description="SELECT_TOPIC_BY_ID"><![CDATA[
+	 	-- SELECT_TOPIC_BY_ID
 		   SELECT T.THREAD_ID,
 			       T.BOARD_ID,
 			       T.THREAD_TITLE,
@@ -26,13 +26,14 @@
 			       T.CREATE_NAME,
 			       T.CREATION_DATE,
 			       T.MODIFY_ID,
-			       T.MODIFY_NAME,
+			       T.MODIFIED_DATE,
 			       T.PARENT_THREAD_ID,
 			       T.REPLY_DEPTH,
 			       T.DEL_YN,
 			       T.COMMENT_CNT
 			 FROM V2_THREAD T
 			WHERE T.THREAD_ID = ?
+			 AND T.DEL_YN = 0
 	]]></sql-query>
 	 <sql-query name="SELECT_TOPICS_BY_FORUM_ID" description="SELECT_TOPICS_BY_FORUM_ID"><![CDATA[
 		   SELECT T.THREAD_ID,
@@ -53,10 +54,13 @@
 			       T.COMMENT_CNT
 			 FROM V2_THREAD T
 			WHERE T.BOARD_ID = ?
+			AND T.DEL_YN = 0
 	]]></sql-query>
 	<sql-query name="DELETE_TOPIC" description="DELETE_TOPIC"><![CDATA[
 		   UPDATE V2_THREAD T
-		     SET DEL_YN = 1
+		     SET DEL_YN = 1,
+		     	 MODIFY_ID = ?,
+			     MODIFIED_DATE = sysdate
 			WHERE T.THREAD_ID = ?
 	]]></sql-query>
 	<sql-query name="UPDATE_TOPIC" description="UPDATE_TOPIC"><![CDATA[
@@ -65,8 +69,7 @@
 			      THREAD_CONTENT = ?,
 			      ATTACHMENT_ID = ?,
 			      MODIFY_ID = ?,
-			      MODIFY_NAME = ?,
-			      
+			      MODIFIED_DATE = sysdate
 			 WHERE THREAD_ID = ?
 	]]></sql-query>
 	<sql-query name="UPDATE_TOPIC_VIEW_CNT" description="UPDATE_TOPIC_VIEW_CNT"><![CDATA[
@@ -79,4 +82,62 @@
 			  SET COMMENT_CNT = ?
 			 WHERE THREAD_ID = ?
 	]]></sql-query>
+	<sql-query name="SELECT_TOPIC_IDS_BY_FORUM_ID" description="SELECT_TOPIC_IDS_BY_FORUM_ID"><![CDATA[
+		  	SELECT THREAD_ID
+		  	  FROM V2_THREAD
+		  	 WHERE BOARD_ID = ?
+		  	   AND DEL_YN = 0
+	]]></sql-query>
+	<sql-query name="COUNT_TOPIC_BY_FORUM_ID" description="COUNT_TOPIC_BY_FORUM_ID"><![CDATA[
+		  	SELECT COUNT(*)
+		  	  FROM V2_THREAD
+		  	 WHERE BOARD_ID = ?
+		  	  AND DEL_YN = 0
+	]]></sql-query>
+	<sql-query name="VIEW_COUNT_BY_TOPIC_ID" description="VIEW_COUNT_BY_TOPIC_ID"><![CDATA[
+		  	select view_cnt
+		  from v2_thread
+		 where thread_id = ?
+	]]></sql-query>
+	<sql-query name="INCREASE_VIEW_COUNT_BY_TOPIC_ID" description="INCREASE_VIEW_COUNT_BY_TOPIC_ID"><![CDATA[
+		 update v2_thread set view_cnt = view_cnt + 1 
+		 where thread_id = ?
+	]]></sql-query>
+	<sql-query name="UPDATE_FORUM_AFTER_TOPIC_ADD" description="UPDATE_FORUM_AFTER_TOPIC_ADD"><![CDATA[
+		 UPDATE V2_BOARD
+		  SET LAST_THREAD_DATE = sysdate,
+		      TOTAL_CNT = ?
+		 WHERE BOARD_ID = ?
+	]]></sql-query>
+	<sql-query name="SELECT_FORUM_LIST_BY_OBJECT_TYPE_AND_OBJECT_ID" description="SELECT_FORUM_LIST_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+			-- SELECT_FORUM_LIST_BY_OBJECT_TYPE_AND_OBJECT_ID
+				SELECT B.OBJECT_TYPE,
+				       B.OBJECT_ID,
+				       B.BOARD_ID,
+				       B.BOARD_NAME,
+				       B.BOARD_DESC,
+				       B.COMMENT_YN,
+				       B.FILE_YN,
+				       B.ANONY_YN,
+				       B.USE_YN,
+				       B.CREATION_DATE,
+				       B.CREATE_ID,
+				       B.MODIFIED_DATE,
+				       B.MODIFY_ID,
+				       B.LAST_THREAD_DATE,
+				       B.THREAD_SIZE,
+				       B.TOTAL_CNT
+				  FROM V2_BOARD B
+				WHERE B.OBJECT_TYPE = ?
+				  AND B.OBJECT_ID = ?
+	]]></sql-query>
+	<sql-query name="FORUM_COUNT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="FORUM_COUNT_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
+			-- FORUM_COUNT_BY_OBJECT_TYPE_AND_OBJECT_ID
+				SELECT count(*)
+				  FROM V2_BOARD B
+				WHERE B.OBJECT_TYPE = ?
+				  AND B.OBJECT_ID = ?
+	]]></sql-query>
+
+
 </sqlset>

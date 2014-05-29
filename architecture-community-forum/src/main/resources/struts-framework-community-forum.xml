@@ -4,7 +4,99 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 
-	<package name="framework-community-fourm-actions" namespace="/community" extends="framework-default">		
+	<package name="framework-community-fourm-actions" namespace="/community" extends="framework-default">
+		<action name="forum" class="architecture.ee.web.community.forum.ForumAction">
+			<!-- <result name="streams" type="freemarker">/html/community/my-streams.ftl</result>
+			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
+			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result> -->
+			<result name="success" type="freemarker">/html/forum/showTopics.ftl</result>	
+		</action>
+
+		<action name="update-topic-view-count" method="updateTopicViewCount" class="architecture.ee.web.community.forum.ForumAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"></param>
+				<param name="includeProperties">
+				targetTopic.viewCnt
+				</param>
+			</result>
+		</action>
+		
+		<action name="list-forum-topics" class="architecture.ee.web.community.forum.ForumAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				targetTopics.*\.cachedSize,				
+				targetTopics.*\.user.passwordHash,
+				targetTopics.*\.user.primaryKeyObject,
+				targetTopics.*\.user.modelObjectType,
+				targetTopics.*\.user.cachedSize							
+				</param>
+				<param name="includeProperties">
+				targetTopics.*,				
+				targetTopicCount
+				</param>
+			</result>
+		</action>
+		
+		<action name="update-forum-topics" method="saveTopic" class="architecture.ee.web.community.forum.ForumAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				targetTopics.*\.cachedSize,				
+				targetTopics.*\.user.passwordHash,
+				targetTopics.*\.user.primaryKeyObject,
+				targetTopics.*\.user.modelObjectType,
+				targetTopics.*\.user.cachedSize						
+				</param>
+				<param name="includeProperties">
+				targetTopics.*,				
+				targetTopicCount,
+				targetForums.*
+				</param> 
+			</result>
+		</action>
+		
+		<action name="delete-forum-topics" method="deleteTopic" class="architecture.ee.web.community.forum.ForumAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				targetTopics.*\.cachedSize,				
+				targetTopics.*\.user.passwordHash,
+				targetTopics.*\.user.primaryKeyObject,
+				targetTopics.*\.user.modelObjectType,
+				targetTopics.*\.user.cachedSize					
+				</param>
+				<param name="includeProperties">
+				targetTopics.*,				
+				targetTopicCount,
+				targetForums.*
+				</param> 
+			</result>
+		</action>
+		
+		<action name="list-forums" class="architecture.ee.web.community.forum.ForumAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				targetForums.*\.cachedSize,				
+				targetForums.*\.user.passwordHash,
+				targetForums.*\.user.primaryKeyObject,
+				targetForums.*\.user.modelObjectType,
+				targetForums.*\.user.cachedSize					
+				</param>
+				<param name="includeProperties">
+				targetForums.*,
+				targetForumsCount
+				</param> 
+			</result>
+		</action>
+				
 	</package>
 			
 </struts>
