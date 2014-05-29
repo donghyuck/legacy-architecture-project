@@ -20,8 +20,10 @@
 			complete: function() {
 				// START SCRIPT	
 
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();		
 				      
 				// START SCRIPT					
 				var currentUser = new User();			
