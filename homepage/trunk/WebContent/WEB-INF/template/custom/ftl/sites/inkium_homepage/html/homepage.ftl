@@ -171,7 +171,7 @@
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
 						<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
-						<div class="blank-space-20"></div>
+						<div class="blank-space-25"></div>
 						<div class="clearfix">
 							<ul id="family-list" class="bxslider list-inline family-site">
 								<li>
@@ -209,7 +209,7 @@
 				<div class="col-md-4">
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
-	                     <div class="blank-space-20"></div>			
+	                     <div class="blank-space-25"></div>			
 										<ul class="list-unstyled">
 	                                        <li class="overflow-hidden"><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
@@ -222,7 +222,7 @@
 				<div class="col-md-4">
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
-	                     <div class="blank-space-20"></div>		
+	                     <div class="blank-space-25"></div>		
 										<ul class="list-unstyled">
 	                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
