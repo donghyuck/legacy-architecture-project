@@ -486,7 +486,7 @@
 		},
 		dataSource : function (options){
 			options = options || {};
-			alert( options.length );
+			alert( options );
 		}			 		
 		
 	});
