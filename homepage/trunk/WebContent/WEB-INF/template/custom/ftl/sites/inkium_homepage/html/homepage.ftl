@@ -140,7 +140,7 @@
 				
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
-								<div class="easy-block-v1-badge rgba-blue">서비스 바로 가기</div>
+								<div class="easy-block-v1-badge rgba-orange">서비스 바로 가기</div>
                             	<p style="padding:10px;">&nbsp;</p>												
 								<ul class="list-inline">
 									<li><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" class="img-responsive" style="width:75px;"></li>
