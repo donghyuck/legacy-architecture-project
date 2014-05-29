@@ -1201,6 +1201,65 @@ header .personalized-controls-trigger {
 	font-size: 43px;
 }
 
+/* Family Site  */
+.family-site a {
+	text-align: center;
+	background: transparent;
+	display: inline-block;
+}
+
+.family-site a:hover {
+	text-decoration: none;
+}
+
+.family-site a:hover strong {
+	color: #555;
+}
+
+.family-site  em.overflow-hidden {
+	display: block;
+}
+
+.family-site a span {
+	display: block;
+	padding: 10px;
+	border-bottom: solid 2px #eee;
+}
+
+.family-site a strong {
+	color: #555;
+	display: block;
+}
+
+.family-site a i {
+	color: #777;
+}
+
+.family-site a img {
+   -webkit-transition: all 0.8s ease-in-out;
+   -moz-transition: all 0.8s ease-in-out;
+   -o-transition: all 0.8s ease-in-out;
+   -ms-transition: all 0.8s ease-in-out;
+   transition: all 0.8s ease-in-out;
+}
+
+.family-site a:hover img {
+	opacity: 0.8;
+   -webkit-transform: scale(1.2) rotate(3deg);
+   -moz-transform: scale(1.2) rotate(3deg);
+   -o-transform: scale(1.0) rotate(3deg);
+   -ms-transform: scale(1.2) rotate(3deg);
+   transform: scale(1.2) rotate(3deg);
+}
+
+.family-site a:hover span {
+	border-bottom: solid 2px #72c02c;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+}
+
 /* Recent Work  */
 .recent-work a {
 	text-align: center;
