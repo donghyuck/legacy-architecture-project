@@ -11,10 +11,13 @@
 		init : function (options){
 		    // Force options to be an object
 			options = options || {};
-			options = that.options;
+			var that = this;
+			Class.fn.init.call(that, options);
+			
 			
 			alert(options.contextPath);
-			var that = this;
+			
+			
 			
 			if( typeof options.culture === UNDEFINED )
 				options.culture = LOCALE;
