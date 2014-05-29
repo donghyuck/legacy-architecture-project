@@ -46,8 +46,8 @@
 				});				
 
 				$('.bxslider').bxSlider({
-					maxSlides: 4,
-					minSlides: 4,
+					maxSlides: 3,
+					minSlides: 3,
 					slideWidth: 360,
 					slideMargin: 10,
 				});  
