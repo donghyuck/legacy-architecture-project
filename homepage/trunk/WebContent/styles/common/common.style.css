@@ -490,7 +490,7 @@ nav.personalized-navbar {
 
 .personalized-navbar > li > a:hover  {
 	color : red;
-	background-color : transparent;	
+	background-color : #5fb611;	
 }
 
 .personalized-navbar.up {
