@@ -171,11 +171,11 @@
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
 						<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
-							<div class="blank-space-20"></div>
-								<div class="clearfix">
-						            <ul id="family-list" class="bxslider list-inline family-site">
-						                <li>
-						                    <a href="#">
+						<div class="blank-space-20"></div>
+						<div class="clearfix">
+							<ul id="family-list" class="bxslider list-inline family-site">
+								<li>
+						                    <a target="_blank" href="http://www.astd.co.kr/">
 						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
 						                        <span>
 						                            <strong>문의</strong>
@@ -184,7 +184,7 @@
 						                    </a>
 						                </li>
 						                <li>
-						                    <a href="#">
+						                    <a target="_blank" href="http://www.icpi.co.kr">
 						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
 						                        <span>
 						                           <strong>문의</strong>
@@ -200,27 +200,18 @@
 						                            <small>02 2081 1016</small>
 						                        </span>
 						                    </a>
-						                </li>
-						            </ul>
-								</div>
-								<!--
-                            	<p style="padding:10px;">&nbsp;</p>												
-								<ul class="list-inline">
-									<li><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" class="img-responsive" style="width:75px;"></li>
-									<li><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" class="img-responsive" style="width:75px;"></li>
-									<li><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" class="img-responsive" style="width:75px;"></li>
-								</ul>
-								-->
-															
+								</li>
+							</ul>
+						</div>
 					</div>				
 				</div>
 				
 				<div class="col-md-4">
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
-	                     <p style="padding:10px;">&nbsp;</p>				
+	                     <div class="blank-space-20"></div>			
 										<ul class="list-unstyled">
-	                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
+	                                        <li class="overflow-hidden"><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
@@ -231,7 +222,7 @@
 				<div class="col-md-4">
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
-	                     <p style="padding:10px;">&nbsp;</p>				
+	                     <div class="blank-space-20"></div>		
 										<ul class="list-unstyled">
 	                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
