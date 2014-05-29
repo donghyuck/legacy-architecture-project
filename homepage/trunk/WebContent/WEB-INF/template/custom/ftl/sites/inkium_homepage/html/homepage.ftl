@@ -153,7 +153,7 @@
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
 								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
-							<div class="blank-space-10"></div>
+							<div class="blank-space-50"></div>
 <div class="clearfix">
 
             <ul id="list" class="bxslider recent-work">
