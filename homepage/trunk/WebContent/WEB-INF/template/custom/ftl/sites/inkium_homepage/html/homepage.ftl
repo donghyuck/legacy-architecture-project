@@ -47,8 +47,9 @@
 					}				
 				});				
 
-				common.api.community.announce.dataSource();
-
+				var Announcement = new common.api.community.announce.Announcement();
+				Announcement.dateSource();
+				
 				/**
 				$('.bxslider').bxSlider({
 					maxSlides: 3,
