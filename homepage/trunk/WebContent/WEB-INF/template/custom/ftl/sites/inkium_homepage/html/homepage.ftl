@@ -137,9 +137,9 @@
 						</div>
 						</div>
 						<div class="col-lg-6">
-				<div class="easy-block-v2">
-                    <div class="easy-bg-v2 rgba-red">New</div>				
-                            	<p class="text-muted" style="padding:10px;"><small><i class="fa fa-info"></i> 공지 | 뉴스 </small></p>												
+				<div class="easy-block-v1">
+                    <div class="easy-bg-v1 rgba-red">공지 | 뉴스 </div>				
+                            							
 									<ul class="list-unstyled">
                                         <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
                                         <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
