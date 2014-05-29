@@ -38,6 +38,12 @@
 	common.ui = common.ui || {};
 	var kendo = window.kendo, Widget = kendo.ui.Widget, stringify = kendo.stringify, UNDEFINED = 'undefined', proxy = $.proxy, isFunction = kendo.isFunction;
 
+	common.ui.landing = function (element){		
+		if( typeof element === UNDEFINED )
+			element ='.page-loader' ;
+		 $(element).fadeOut('slow');
+	}
+	
 	common.ui.initializeOwlCarousel = function (){
 		// Owl Slider v1
 		jQuery(document).ready(function() {
