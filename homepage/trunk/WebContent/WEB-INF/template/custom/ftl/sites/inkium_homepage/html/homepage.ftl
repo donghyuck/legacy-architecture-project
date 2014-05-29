@@ -196,7 +196,7 @@
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
                         <span>
                             <strong>문의</strong>
-                            <i>02 2081 1016</i>
+                            <small>02 2081 1016</small>
                         </span>
                     </a>
                 </li>
