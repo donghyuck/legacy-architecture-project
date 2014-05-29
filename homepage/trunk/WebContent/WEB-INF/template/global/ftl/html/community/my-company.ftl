@@ -24,8 +24,10 @@
 			'${request.contextPath}/js/ace/ace.js',],        	   
 			complete: function() {			
 			
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();	
 				
 				// 2.  MEUN 설정
 				var slide_effect = kendo.fx($("body div.overlay")).fadeIn();																																													
