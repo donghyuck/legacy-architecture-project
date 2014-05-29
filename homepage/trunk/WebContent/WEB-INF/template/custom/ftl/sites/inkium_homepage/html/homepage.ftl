@@ -167,46 +167,42 @@
 					<!-- end of product & service -->			
 				</div>
 			</div>
-			<div class="row">
-				
+			<div class="row">				
 				<div class="col-md-4">		
 					<div class="easy-block-v1">
-								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
+						<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
 							<div class="blank-space-20"></div>
-<div class="clearfix">
-            <ul id="family-list" class="bxslider list-inline family-site">
-                <li>
-                    <a href="#">
-                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
-                        <span>
-                            <strong>문의</strong>
-                            <small>02 2081 1092</small>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
-                        <span>
-                           <strong>문의</strong>
-                            <small>02 2081 1026</small>
-                        </span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
-                        <span>
-                            <strong>문의</strong>
-                            <small>02 2081 1016</small>
-                        </span>
-                    </a>
-                </li>
-            </ul>    
-
-</div>			
-
-								
+								<div class="clearfix">
+						            <ul id="family-list" class="bxslider list-inline family-site">
+						                <li>
+						                    <a href="#">
+						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
+						                        <span>
+						                            <strong>문의</strong>
+						                            <small>02 2081 1092</small>
+						                        </span>
+						                    </a>
+						                </li>
+						                <li>
+						                    <a href="#">
+						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
+						                        <span>
+						                           <strong>문의</strong>
+						                            <small>02 2081 1026</small>
+						                        </span>
+						                    </a>
+						                </li>
+						                <li>
+						                    <a href="#">
+						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
+						                        <span>
+						                            <strong>문의</strong>
+						                            <small>02 2081 1016</small>
+						                        </span>
+						                    </a>
+						                </li>
+						            </ul>
+								</div>
 								<!--
                             	<p style="padding:10px;">&nbsp;</p>												
 								<ul class="list-inline">
