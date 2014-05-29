@@ -48,7 +48,7 @@
 				});				
 
 				var announcement = new common.api.Announcement(); 
-				announcement.dateSource();
+				announcement.dataSource();
 				
 				/**
 				$('.bxslider').bxSlider({
