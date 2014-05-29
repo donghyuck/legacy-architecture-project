@@ -12,7 +12,7 @@
 		    // Force options to be an object
 			options = options || {};
 			var that = this;
-			Class.fn.init.call(that, options);
+			kendo.Class.fn.init.call(that, options);
 			
 			
 			alert(options.contextPath);
