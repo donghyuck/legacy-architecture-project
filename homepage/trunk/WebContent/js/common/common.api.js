@@ -5,8 +5,14 @@
 	var kendo = window.kendo,
 	stringify = kendo.stringify,
 	UNDEFINED = 'undefined',
+	LOCALE = 'ko-KR',
 	isFunction = kendo.isFunction;
 		
+	common.api.culture = function ( culture ){
+		if( typeof culture === UNDEFINED )
+			culture = LOCALE;
+		kendo.culture(culture);				
+	}
 	
 	common.api.callback = function ( options){
 		options = options || {};	
