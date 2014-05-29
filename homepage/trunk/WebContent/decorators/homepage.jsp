@@ -72,8 +72,6 @@
 		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
 	}
 
-
-
 	.cloud h2{	
 		color: white;
 	}
@@ -107,7 +105,7 @@
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" default="color4" />">
-	
+	<div class="page-loader" style="display: none;"></div>
 	<decorator:body />
 	
 </body>
