@@ -25,7 +25,6 @@
 			'${request.contextPath}/js/common/common.classie.min.js',
 			'${request.contextPath}/js/common/common.img-hover.js',
 			*/
-			'${request.contextPath}/js/common/common.community.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
