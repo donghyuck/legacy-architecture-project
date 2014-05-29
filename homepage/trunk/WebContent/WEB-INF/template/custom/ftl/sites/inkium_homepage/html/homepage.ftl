@@ -111,8 +111,8 @@
 			margin-bottom: 10px;
 		}	
 		
-		#services-view .view .view-tenth img {
-			left: 10px;
+		#services-view .view-tenth img {
+			left: 5px;
 			margin-left: -5px;
 		}	
 		
