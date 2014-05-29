@@ -14,12 +14,10 @@
 			options = that.options;
 			
 			that.move();
-		}
-		
+		},		
 		culture : function (culture){
 			kendo.culture(culture);				
-		} 		
-		
+		},		
 		move : function () {
 			
 			alert ("fdaf");
