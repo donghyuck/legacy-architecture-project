@@ -215,7 +215,8 @@
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-	                                    </ul>                  		
+	                                    </ul>    
+						<a class="btn-u btn-u-sm" href="#">더보기</a>	
 					</div>				
 				</div>
 				
@@ -228,7 +229,8 @@
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-	                                    </ul>                    		
+	                                    </ul>        
+						<a class="btn-u btn-u-sm" href="#">더보기</a>	
 					</div>
 				</div>
 							
