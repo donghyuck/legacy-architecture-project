@@ -2,7 +2,7 @@
 <html decorator="secure">
 <head>
 		<title>관리자 메인</title>		
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.system.style.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.secure.style.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
