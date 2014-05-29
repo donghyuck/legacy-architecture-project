@@ -3,6 +3,7 @@
 	var kendo = window.kendo,	
 	stringify = kendo.stringify,
 	UNDEFINED = 'undefined',
+	LOCALE = 'ko-KR',
 	isFunction = kendo.isFunction;
 	
 	Community = kendo.Class.extend({		
@@ -12,7 +13,8 @@
 		    options = options || {};
 			var that = this;	
 			options = that.options;
-			options.culture = options.culture || "ko-KR";
+			if( typeof options.culture === UNDEFINED )
+				options.culture = LOCALE;
 			
 			that.move();
 			alert(options.culture);
