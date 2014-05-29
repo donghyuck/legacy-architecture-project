@@ -172,7 +172,7 @@
 								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
 							<div class="blank-space-30"></div>
 <div class="clearfix">
-            <ul class="bxslider recent-work">
+            <ul id="family-list" class="bxslider recent-work">
                 <li>
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
