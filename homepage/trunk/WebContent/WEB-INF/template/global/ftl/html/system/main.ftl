@@ -31,7 +31,7 @@
 
 		</style>
 	</head>
-	<body>
+	<body data-color="grey" class="flat">
 
 <div id="header">
 			<h1><a href="./index.html">Unicorn Admin</a></h1>		
