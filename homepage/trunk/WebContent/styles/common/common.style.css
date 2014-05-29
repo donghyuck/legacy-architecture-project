@@ -405,6 +405,10 @@
 	padding: 10px;	
 }
 
+.blank-space-20{
+	padding: 20px;	
+}
+
 /** panel section  */
 .panel-header-actions {
 	float: right;
