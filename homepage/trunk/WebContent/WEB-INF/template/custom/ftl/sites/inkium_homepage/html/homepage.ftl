@@ -31,13 +31,10 @@
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
 												
-				var community = new Community({
-					contextPath: "${request.contextPath}",
-					loading : true
-				});
+				var community = new Community();
 						
 				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");				
+				// kendo.culture("ko-KR");				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
