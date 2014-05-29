@@ -30,12 +30,13 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
-												
-				var community = new Community();
-						
-				// 1.  한글 지원을 위한 로케일 설정
-				// kendo.culture("ko-KR");				
-				// ACCOUNTS LOAD	
+
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();		
+				
+				// ACCOUNTS LOAD				
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
 					externalLoginHost: "${ServletUtils.getLocalHostAddr()}",	
