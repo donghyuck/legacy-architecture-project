@@ -478,11 +478,13 @@
 	POST = 'POST',
 	JSON = 'json';
 	
-	common.api.community.announce-datasource = function (options){
-		options = options || {};
-		alert(options.length);
-		
-		
+	common.api.community.announce = function (){				
+		 return {
+			 dataSouce : function (options){
+				options = options || {};
+				alert( options.length );
+			 }			 
+		 }
 	}
 	
 	
