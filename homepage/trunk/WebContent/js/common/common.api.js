@@ -469,7 +469,7 @@
  */
 ;(function($, undefined) {
 	var common = window.common = window.common || {} ;
-	common.api.community = common.api.community || {} ;
+	common.api = common.api || {} ;
 	var kendo = window.kendo,
 	handleKendoAjaxError = common.api.handleKendoAjaxError ;
 	stringify = kendo.stringify,
@@ -478,7 +478,7 @@
 	POST = 'POST',
 	JSON = 'json';
 	
-	common.api.community.Announcement = kendo.Class.extend({		
+	common.api.Announcement = kendo.Class.extend({		
 		init : function (options){
 			options = options || {};			
 			var that = this;
