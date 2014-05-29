@@ -53,6 +53,7 @@
 					pager : false,
 					onSliderLoad : function(){
 						alert("000");
+						$('#family-list').removeClass('hidden');
 					}
 				});  
             								
@@ -159,7 +160,7 @@
 							<div class="blank-space-30"></div>
 <div class="clearfix">
 
-            <ul id="list" class="bxslider recent-work hide">
+            <ul id="family-list" class="bxslider recent-work hidden">
                 <li>
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
