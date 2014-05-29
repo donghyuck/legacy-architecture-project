@@ -45,11 +45,17 @@
 					authenticate : function( e ){
 						e.token.copy(currentUser);
 					}				
-				});				
-
-				var announcement = new common.api.Announcement(); 
-				announcement.dataSource();
+				});
 				
+				var announcement = new common.api.Announcement(); 				
+				var template = kendo.template('<li class="overflow-hidden"><i class="fa fa-check color-green"></i> #:subject#</li>');
+				announcement.dataSource().bind('change', function(){
+					$("#announce-view").html(kendo.render(template, this.view()))
+				});
+				
+				
+				 
+				 
 				/**
 				$('.bxslider').bxSlider({
 					maxSlides: 3,
@@ -215,7 +221,7 @@
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
 	                     <div class="blank-space-25"></div>			
-										<ul class="list-unstyled">
+										<ul id="announce-view" class="list-unstyled">
 	                                        <li class="overflow-hidden"><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
