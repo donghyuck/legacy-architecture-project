@@ -491,7 +491,7 @@
 			options = options || {};
 			if( typeof options.transport === UNDEFINED){
 				options.transport = {
-					read: { type : POST, dataType:JSON, url : '/community/list-announce.do?output=json' }
+					read: { type : POST, dataType:JSON, url : '/community/list-announce.do?output=json' },
 					parameterMap : function(options, operation) {
 						if (operation != "read" && options.models) {
 							return {models: kendo.stringify(options.models)};
