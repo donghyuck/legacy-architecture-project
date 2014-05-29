@@ -138,7 +138,7 @@
 						</div>
 						<div class="col-lg-6">
 				<div class="easy-block-v1">
-                    <div class="easy-bg-v1 rgba-red">공지 | 뉴스 </div>				
+                    <div class="easy-block-v1-badge rgba-red">공지 | 뉴스 </div>				
                             							
 									<ul class="list-unstyled">
                                         <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
