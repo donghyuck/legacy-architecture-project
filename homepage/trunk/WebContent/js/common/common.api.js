@@ -465,6 +465,32 @@
 })(jQuery);	
 
 /**
+ * Community  
+ */
+;(function($, undefined) {
+	var common = window.common = window.common || {} ;
+	common.api.community = common.api.community || {} ;
+	var kendo = window.kendo,
+	handleKendoAjaxError = common.api.handleKendoAjaxError ;
+	stringify = kendo.stringify,
+	isFunction = kendo.isFunction,
+	UNDEFINED = 'undefined',
+	POST = 'POST',
+	JSON = 'json';
+	
+	common.api.community.announce-datasource = function (options){
+		options = options || {};
+		alert(options.length);
+		
+		
+	}
+	
+	
+	
+})(jQuery);
+
+
+/**
  * Streams  
  */
 ;(function($, undefined) {
