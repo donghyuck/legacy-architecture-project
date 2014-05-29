@@ -208,7 +208,7 @@
 						                    </a>
 						                </li>
 						                <li>
-						                    <a href="#">
+						                    <a href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')">
 						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
 						                        <span>
 						                            <strong>문의</strong>
