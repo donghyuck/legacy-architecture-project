@@ -225,7 +225,7 @@
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
 	                     <div class="blank-space-25"></div>			
-										<ul id="announce-view" class="list-unstyled">
+										<ul id="announce-view" class="list-unstyled" style="min-height:100px;">
 	                                        <li class="overflow-hidden"><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
@@ -239,7 +239,7 @@
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
 	                     <div class="blank-space-25"></div>		
-										<ul id="news-view" class="list-unstyled">
+										<ul id="news-view" class="list-unstyled" style="min-height:100px;">
 	                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
