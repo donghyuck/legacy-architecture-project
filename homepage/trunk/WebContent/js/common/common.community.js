@@ -20,6 +20,7 @@
 			that.move();
 			alert(options.culture);
 			alert(options.contextPath);
+			alert(that.options.culture);
 		},		
 		options: {
 			
