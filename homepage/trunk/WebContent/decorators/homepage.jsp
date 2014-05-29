@@ -105,7 +105,7 @@
 </style>
 </head>
 <body onload="<decorator:getProperty property="body.onload" />" class="<decorator:getProperty property="body.class" default="color4" />">
-	<div class="page-loader" style="display: none;"></div>
+	<div class="page-loader" ></div>
 	<decorator:body />
 	
 </body>
