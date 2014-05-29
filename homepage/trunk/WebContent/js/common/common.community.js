@@ -13,18 +13,18 @@
 			options = options || {};
 			
 			alert(options.contextPath);
-			var that = this;	
-			options = that.options;
-			
-			 
+			var that = this;
 			
 			if( typeof options.culture === UNDEFINED )
 				options.culture = LOCALE;
-			
+			that.culture();
 			that.move();
 			alert(options.culture);
 			alert(options.contextPath);
 		},		
+		optiones: {
+			
+		},
 		culture : function (culture){
 			kendo.culture(culture);				
 		},		
