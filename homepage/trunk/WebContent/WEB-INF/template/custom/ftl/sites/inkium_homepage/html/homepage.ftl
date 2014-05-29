@@ -168,7 +168,7 @@
 			<div class="row">
 				
 				<div class="col-md-4">		
-					<div id="family-list" class="easy-block-v1 hidden">
+					<div id="family-list" class="easy-block-v1">
 								<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
 							<div class="blank-space-30"></div>
 <div class="clearfix">
