@@ -186,7 +186,7 @@
                     <a href="#">
                     	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
                         <span>
-                            <strong>문의</strong>
+                            <strong class="text-info">문의</strong>
                             <small>02 2081 1026</small>
                         </span>
                     </a>
