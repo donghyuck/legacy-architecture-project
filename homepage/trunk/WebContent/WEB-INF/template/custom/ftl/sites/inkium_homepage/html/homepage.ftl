@@ -112,8 +112,8 @@
 		}	
 		
 		#services-view .view-tenth img {
-			left: 2px;
-			margin-left: -2px;
+			left: 10px;
+			margin-left: -10px;
 		}	
 		
 		</style>   
