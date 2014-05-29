@@ -12,6 +12,7 @@
 		    options = options || {};
 			var that = this;	
 			options = that.options;
+			options.culture = options.culture || "ko-KR";
 			
 			that.move();
 			alert(options.culture);
