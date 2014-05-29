@@ -11,13 +11,8 @@
 		init : function (options){
 		    // Force options to be an object
 			options = options || {};
+			
 			var that = this;
-			kendo.Class.fn.init.call(that, options);
-			
-			
-			alert(options.contextPath);
-			
-			
 			
 			if( typeof options.culture === UNDEFINED )
 				options.culture = LOCALE;
