@@ -7,7 +7,9 @@
 	
 	Community = kendo.Class.extend({		
 		// The `init` method will be called when a new instance is created
-		init : function (){
+		init : function (options){
+		    // Force options to be an object
+		    options = options || {};
 			kendo.culture("ko-KR");	
 		}
 		
