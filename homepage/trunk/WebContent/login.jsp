@@ -30,13 +30,19 @@
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.api.js',
 			'<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common/common.ui.js'],
 		complete: function() {			
+
+			// 1-1.  한글 지원을 위한 로케일 설정
+			common.api.culture();
+			// 1-2.  페이지 렌딩
+			common.ui.landing();	
+			
 			common.api.getUser( {
 				success : function ( token ) {
 					if( !token.anonymous )
 						alert( "이미 로그인되어 있습니다." );
 				}				
 			} );		
-			// <%= request.getContextPath() %>
+			
 			var slideshow = $('#slideshow').extFullscreenSlideshow();
 			
 			/* LOGIN */
@@ -76,9 +82,9 @@
 							btn.button('reset');
 						}
 					});
-				}else{        			      
+				}else{
 					btn.button('reset');
-				}			
+				}
 				return false ;
 			});			
 			
