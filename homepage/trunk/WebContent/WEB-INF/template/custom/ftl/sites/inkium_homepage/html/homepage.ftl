@@ -47,11 +47,19 @@
 					}				
 				});
 				
-				var announcement = new common.api.Announcement(); 				
+				var announcement = new common.api.Announcement(); 		
+				var forum = new common.api.Forum({forumId:1});
+				 				
 				var template = kendo.template('<li class="overflow-hidden"><i class="fa fa-check color-green"></i> #:subject#</li>');
+				
 				announcement.dataSource().bind('change', function(){
 					$("#announce-view").html(kendo.render(template, this.view()))
 				}).read();
+				
+				forum.dataSource().bind('change', function(){
+					$("#news-view").html(kendo.render(template, this.view()))
+				}).read();
+				
 								 
 				/**
 				$('.bxslider').bxSlider({
@@ -231,7 +239,7 @@
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
 	                     <div class="blank-space-25"></div>		
-										<ul class="list-unstyled">
+										<ul id="news-view" class="list-unstyled">
 	                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
 	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
 	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
