@@ -471,11 +471,13 @@
 	var common = window.common = window.common || {} ;
 	common.api = common.api || {} ;
 	var kendo = window.kendo,
+	DataSource = kendo.data.DataSource,
 	handleKendoAjaxError = common.api.handleKendoAjaxError ;
 	stringify = kendo.stringify,
 	isFunction = kendo.isFunction,
 	UNDEFINED = 'undefined',
 	POST = 'POST',
+	OBJECT_TYPE = 30 ,
 	JSON = 'json';
 	
 	common.api.Announcement = kendo.Class.extend({		
@@ -485,10 +487,34 @@
 			that.options = options;
 		},
 		dataSource : function (options){
+			var that = this;
 			options = options || {};
-			alert( options );
-		}			 		
-		
+			if( typeof options.transport === UNDEFINED){
+				options.transport = {
+					read: { type : POST, dataType:JSON, url : '/community/list-announce.do?output=json' }
+					parameterMap : function(options, operation) {
+						if (operation != "read" && options.models) {
+							return {models: kendo.stringify(options.models)};
+						}else{
+							return {objectType: OBJECT_TYPE }
+						}
+					}
+				}
+			}
+			if( typeof options.error === UNDEFINED ){
+				options.error = common.api.handleKendoAjaxError;
+			}
+			if( typeof options.pageSize === UNDEFINED ){
+				options.pageSize = 15;
+			}			
+			if( typeof options.schema === UNDEFINED ){
+				options.schema = {
+					data : "targetAnnounces",
+					model : Announce						
+				}
+			}			
+			return new DataSource(options);
+		}	
 	});
 	
 })(jQuery);
