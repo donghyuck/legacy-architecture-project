@@ -1364,7 +1364,26 @@
 					var tab_pane_id	= tab_pane.attr('id');
 					var my_selected = $(tab_pane_id + "-selected");
 					var my_list_view = $(tab_pane_id + "-list-view");
+					
+					switch (tab_pane.attr('id')) {
+						case that.options.guid[TAB_PANE_URL_ID]:
+							
+						break;
+						default:					
+							var list_view = my_list_view.data('kendoListView');						
+							var selected = list_view.select();
+							
+							$.each( selected, function(index, item){
+								alert(item.index());
+							} );
+							
+							
+							$.map(selected, function(item){
+								
+							});
 						
+					}
+					
 					alert(tab_pane_id);
 					
 						switch (tab_pane.attr('id')) {
