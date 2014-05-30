@@ -556,13 +556,13 @@
 			var rendorTo = that.element;
 			rendorTo.html(
 				'<form name="teleportation-form" method="POST" accept-charset="utf-8">' +
-				'<input type="hidden" id="output" name="output" value="html" />' +		
+				'<input type="hidden" name="output" value="html" />' +		
 				'</form>'						
 			);
 		},
 		teleport : function(params){			
 			var that = this;			
-			var template = kendo.template('<input type="hidden" id="output" name="#=name #" value="#=value #/>');
+			var template = kendo.template('<input type="hidden" name="#=name #" value="#=value #/>"');
 			if( typeof params === UNDEFINED ){
 				params = params || {};				
 			}						
