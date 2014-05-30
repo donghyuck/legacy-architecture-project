@@ -65,7 +65,7 @@
 				}).read();
 				
 				
-				$('page-navigator').extNavigator({});
+				$('#page-navigator').extNavigator({});
 								 
 				/**
 				$('.bxslider').bxSlider({
