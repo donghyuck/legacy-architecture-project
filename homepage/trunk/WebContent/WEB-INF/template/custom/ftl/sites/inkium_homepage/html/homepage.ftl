@@ -134,7 +134,11 @@
 		#services-view .view-tenth img {
 			left: 10;
 			margin-left: -10px;
-		}	
+		}
+			
+		#services-view .view p {
+			padding: 20px 10px 20px 10px;
+		}
 			
 		/*Summary-Content
 		------------------------------------*/
