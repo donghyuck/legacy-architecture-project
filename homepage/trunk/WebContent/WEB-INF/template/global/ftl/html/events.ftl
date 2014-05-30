@@ -28,6 +28,9 @@
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
 
+				var selectedId = ${ParamUtils.getLongParameter(request, "id", 0 )} ;
+				alert(selectedId);
+				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
