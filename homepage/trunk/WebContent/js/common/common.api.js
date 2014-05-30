@@ -553,8 +553,12 @@
 		},
 		refresh : function(){
 			var that = this;
-			alert(that.element);
-			
+			var rendorTo = $(that.element);
+			rendorTo.html(
+				'<form name="teleportation-form" method="POST" accept-charset="utf-8">' +
+				'<input type="hidden" id="output" name="output" value="html" />' +		
+				'</form>'						
+			);
 		}
 	});
 	
