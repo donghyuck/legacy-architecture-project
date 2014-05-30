@@ -116,10 +116,17 @@ public class ForumAction extends PageAction{
 	}
 	
 	public List<Topic> getTargetTopics(){
+		ParamUtils.printParameter(request, log);
+		log.debug( "startIndex= " + startIndex + ", pageSize=" + pageSize  );
+		
 		if( forumId < 1){
 			return Collections.EMPTY_LIST;
 		}
-		return topicManager.getTopics(forumId);
+		if (pageSize > 0){
+			return topicManager.getTopics(forumId, startIndex, pageSize);
+		}else{
+			return topicManager.getTopics(forumId);
+		}
 	}
 	
 	public int getTargetTopicCount(){

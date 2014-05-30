@@ -22,6 +22,8 @@ public interface TopicDao {
 	
 	public abstract List<Topic> getTopics (Long forumId);
 	
+	public abstract List<Long> getTopicIds (Long forumId, int startIndex, int pageSize);
+	
 	public abstract List<Long> getTopicIds (Long forumId);
 	
 	public abstract int getTopicCount(long forumId);
