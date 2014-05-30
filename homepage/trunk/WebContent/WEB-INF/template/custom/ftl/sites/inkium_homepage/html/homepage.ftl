@@ -302,10 +302,13 @@
 				</div>
 				
 				<div class="col-md-4">
-					<h5 class="heading-md"><strong>공지&이벤트</strong></h5>
-					<ul  id="announce-view" class="list-unstyled summaries">						
-						<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
-					</ul>					
+					<div class="easy-block-v2">		
+						<h5 class="heading-md"><strong>공지&이벤트</strong></h5>
+						<ul  id="announce-view" class="list-unstyled summaries">						
+							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
+						</ul>		
+						<a class="btn-u btn-u-xs pulse-shrink" href="${request.contextPath}/events.do">더보기</a>	
+					</div>			
 					<!--
 					<div class="easy-block-v1">		
 	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
@@ -321,13 +324,12 @@
 				</div>				
 				<div class="col-md-4">
 					<div class="easy-block-v2">		
-						<div class="easy-bg-v2 rgba-blue" style="z-index:1000"></div>
+						<!--<div class="easy-bg-v2 rgba-blue" style="z-index:1000"></div>-->
 						<h5 class="heading-md"><strong>뉴스</strong></h5>
 						<ul id="news-view" class="list-unstyled summaries" style="min-height:100px;">
 							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
 						</ul>        
-						<a class="btn-u btn-u-xs" href="${request.contextPath}/press.do">더보기</a>	
-						
+						<a class="btn-u btn-u-xs" href="${request.contextPath}/press.do">더보기</a>							
 					</div>	
 				</div>							
 			</div>					
