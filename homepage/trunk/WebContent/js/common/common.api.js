@@ -524,6 +524,26 @@
 		}	
 	});
 	
+	
+	common.api.Navigator = Widget.extend({		
+		init : function(element, options) {
+			var that = this;
+			Widget.fn.init.call(that, element, options);
+			options = that.options;
+			element = that.element;
+		},
+		options : {
+			name : "ExtNavigator"
+		}	
+	});
+	
+	$.fn.extend({
+		extNavigator : function(options) {
+			return new common.api.Navigator(this, options);
+		}
+	});
+	
+	
 	common.api.Announcement = kendo.Class.extend({		
 		init : function (options){
 			options = options || {};			
