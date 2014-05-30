@@ -270,8 +270,7 @@
 								model: common.models.Forum,
 								data : "targetForums",
 								total : "targetForumsCount"
-							},
-						serverPaging: true
+							}
 					},
 					sortable: true,
 					columns: [ 
@@ -324,7 +323,7 @@
 								if (operation != "read" && options.models) {
 									return {models: kendo.stringify(options.models)};
 								}else{								
-									return {forumId: forum.forumId };								
+									return {startIndex: options.skip, pageSize : options.pageSize, objectType: 30, objectId: forum.forumId, forumId : forum.forumId};								
 								}
 							} 
 						},
@@ -334,7 +333,8 @@
 							total : "targetTopicCount",
 							data : "targetTopics",
 							model : common.models.ForumTopic
-						}
+						},
+						serverPaging:true
 					}), 
 					sortable: true,
 					columns: [ 

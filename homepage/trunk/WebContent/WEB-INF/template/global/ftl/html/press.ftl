@@ -52,7 +52,7 @@
 								if (operation != "read" && options.models) {
 									return {models: kendo.stringify(options.models)};
 								}else{
-									return {forumId: forumId}
+									return {startIndex: options.skip, pageSize : options.pageSize, forumId: forumId}
 								}
 							},
 						},
@@ -62,7 +62,8 @@
 							total : "targetTopicCount",
 							data : "targetTopics",
 							model : common.models.ForumTopic
-						}
+						},
+						serverPaging: true
 					}),	
 					columns: [
 						/*{field: "topicId", title: "ID", sortable : false , width:80 , attributes: { "class": "table-cell", style: "text-align: center " }},*/
