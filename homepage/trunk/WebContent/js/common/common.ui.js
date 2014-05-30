@@ -1320,8 +1320,10 @@
 												selected_img.addClass('hide');
 											break;
 										}
-									});
-					that.element.find('.modal-body input[name="custom-selected-url"]').on(
+				}); //end of tabs
+				
+				// handle select image url 
+				that.element.find('.modal-body input[name="custom-selected-url"]').on(
 									'change',
 									function() {
 										var form_input = $(this);
@@ -1352,11 +1354,19 @@
 																that._changeState(false);
 															});
 										}
-									});
+				});
 
-					that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {
-						var tab_pane = that._activePane();
-						var selected_url;
+				// handle insert 		
+				that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {
+						
+					var tab_pane = that._activePane();
+					var selected_url;
+					var tab_pane_id	= tab_pane.attr('id');
+					var my_selected = $(tab_pane_id + "-selected");
+					var my_list_view = $(tab_pane_id + "-list-view");
+						
+					alert(tab_pane_id);
+					
 						switch (tab_pane.attr('id')) {
 							case that.options.guid[TAB_PANE_URL_ID]:
 								selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();
