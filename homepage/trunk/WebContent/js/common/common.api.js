@@ -529,7 +529,9 @@
 	
 	common.api.Navigator = Widget.extend({		
 		init : function(element, options) {
-			alert(element.length);
+			if( element.length == 0 ){
+				alert(element);				
+			}
 			
 			var that = this;
 			Widget.fn.init.call(that, element, options);
