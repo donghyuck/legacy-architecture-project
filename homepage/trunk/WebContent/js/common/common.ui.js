@@ -1362,7 +1362,7 @@
 						break;
 						default:					
 							var active_list_view = $( "#" + tab_pane_id + "-list-view").data('kendoListView');
-							var data = active_list_view.view();						
+							var data = active_list_view.dataSource.view();						
 							$.each( active_list_view.select(), function(index, item){
 								var image = data[$(item).index()];
 								// website (public) 
