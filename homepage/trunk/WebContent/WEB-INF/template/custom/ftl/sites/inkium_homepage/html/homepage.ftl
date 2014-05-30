@@ -324,7 +324,7 @@
 						<div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
 							<div class="blank-space-25"></div>		
 							<ul id="news-view" class="list-unstyled summaries" style="min-height:100px;">
-								<li><i class="fa fa-check color-green"></i> 등록된 뉴스가 없습니다.</li>
+								<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
 							</ul>        
 							<a class="btn-u btn-u-xs" href="${request.contextPath}/press.do">더보기</a>	
 						</div>
