@@ -302,8 +302,7 @@
 				</div>
 				
 				<div class="col-md-4">
-					<p class="bg-success">공지</p>
-					
+					<h5 class="heading-md"><strong>공지</strong></h5>
 					<ul  id="announce-view" class="list-unstyled summaries">						
 						<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
 						<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
