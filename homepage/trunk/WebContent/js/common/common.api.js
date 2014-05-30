@@ -471,6 +471,8 @@
 	var common = window.common = window.common || {} ;
 	common.api = common.api || {} ;
 	var kendo = window.kendo,
+	Widget = kendo.ui.Widget, 
+	isPlainObject = $.isPlainObject,
 	DataSource = kendo.data.DataSource,
 	handleKendoAjaxError = common.api.handleKendoAjaxError ,
 	stringify = kendo.stringify,
