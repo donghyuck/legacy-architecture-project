@@ -565,9 +565,9 @@
 				params = params || {};				
 			}			
 			
-			alert( params );
-			if(isPlainObject(params)){
 			
+			if(isPlainObject(params)){
+				alert( params );
 				for(var i = 0 ; i < params.length ; i ++ ){
 					alert(params[i].name);					
 				}
