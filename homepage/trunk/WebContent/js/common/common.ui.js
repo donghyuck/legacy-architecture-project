@@ -1362,7 +1362,7 @@
 					var tab_pane = that._activePane();
 					var tab_pane_id	= tab_pane.attr('id');
 					var my_selected = $( "#" + tab_pane_id + "-selected");
-					var my_list_view = $( "#" + tab_pane_id + "-list-view");
+					
 					alert(tab_pane_id + "-list-view");
 					
 					var selected_url;					
@@ -1372,14 +1372,13 @@
 							
 						break;
 						default:					
-							var list_view = my_list_view.data('kendoListView');
-							var selected = list_view.select();
+							var active_list_view = $( "#" + tab_pane_id + "-list-view").data('kendoListView');
+							var selected = active_list_view.select();
 							
 							$.each( selected, function(index, item){
 								alert(item.index());
 							} );
-							
-							
+														
 							$.map(selected, function(item){
 								
 							});
