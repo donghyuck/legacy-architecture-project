@@ -930,7 +930,8 @@
 				'</div>'					
 			),
 			image : template('<img src="#: url #" class="img-responsive"/>'),
-			url : template('/download/image/#= key #')
+			url : template('/download/image/#= linkId #'),
+			download : template('/download/image/#=imageId#/#=name#')
 		},
 		handleKendoAjaxError = common.api.handleKendoAjaxError;
 		common.ui.extImageBrowser = Widget.extend({
@@ -1051,14 +1052,8 @@
 												var item = data[current_index];
 												var imageId = item.imageId;
 												if (imageId > 0) {
-													that._getImageLink(item,
-														function(data) {
-															if (typeof data.imageLink === 'object') {
-																my_list_view.data("linkId",data.imageLink.linkId);
-															that._changeState(true);
-															tab_pane.find('.panel').prepend(templates.selected(item));
-														}
-													});
+													that._changeState(true);
+													tab_pane.find('.panel').prepend(templates.selected(item));													
 												}
 											}
 										},
@@ -1357,34 +1352,41 @@
 				});
 
 				// handle insert 		
-				that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {
-						
+				that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {						
 					var tab_pane = that._activePane();
 					var tab_pane_id	= tab_pane.attr('id');
-					var my_selected = $( "#" + tab_pane_id + "-selected");
-					
-					alert(tab_pane_id + "-list-view");
-					
-					var selected_url;					
-					
+					var selected_url = '';					
 					switch (tab_pane_id) {
 						case that.options.guid[TAB_PANE_URL_ID]:
-							
+							selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();							
 						break;
 						default:					
 							var active_list_view = $( "#" + tab_pane_id + "-list-view").data('kendoListView');
-							var selected = active_list_view.select();
+							var data = active_list_view.view(),							
+							$.each( active_list_view.select(), function(index, item){
+								var image = data[$(item).index()];
+								// website (public) 
+								if( image.objectType === 30 )
+								{
+									selected_url =  templates.download(image);									
+								}else{
+									that._getImageLink(image, function(data) {
+										if (typeof data.imageLink === 'object') {
+											selected_url = templates.url(data.imageLink);
+										}
+									});								
+								}
+							});	
 							
-							$.each( selected, function(index, item){
-								alert($(item).index());
-							} );
-														
-							$.map(selected, function(item){
-								
-							});
-						
 					}
-					
+					if( html.length > 0){
+						that.trigger(APPLY, {
+							html : templates.image({
+								url : selected_url
+							})
+						});
+					}
+					/*
 					alert(tab_pane_id);
 					
 						switch (tab_pane.attr('id')) {
@@ -1431,6 +1433,7 @@
 											})
 										});
 									});
+				*/					
 				},
 				_activePane : function() {
 					var that = this;
