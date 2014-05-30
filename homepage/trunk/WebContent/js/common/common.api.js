@@ -573,7 +573,7 @@
 						
 
 						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){
-							alert(that.element.find('form'));
+							alert(that.element.find('form').html());
 							that.element.find('form').append('<input type="hidden" name="' + propertyName + '" value="' + valueOfProperty + "' >" );
 						}else{							
 							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
