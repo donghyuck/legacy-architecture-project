@@ -83,6 +83,7 @@
 					},
 					dataBound : function(e){
 						if(selectedAnnounceId>0){
+							alert(selectedAnnounceId);
 							this.select('tr[data-id="' + selectedAnnounceId + '"]');							
 						}
 					}			
