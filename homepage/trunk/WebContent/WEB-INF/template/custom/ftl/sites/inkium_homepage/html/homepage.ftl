@@ -83,7 +83,6 @@
 		}]);	
 			
 		function teleportToNotice (announceId){
-		alert(announceId);
 			common.api.teleportation().teleport({
 				action : '${request.contextPath}/events.do',
 				announceId : announceId
