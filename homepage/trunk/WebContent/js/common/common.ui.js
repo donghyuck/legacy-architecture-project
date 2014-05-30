@@ -1378,7 +1378,7 @@
 								}
 							});								
 					}
-					if( html.length > 0){
+					if( selected_url.length > 0){
 						that.trigger(APPLY, {
 							html : templates.image({
 								url : selected_url
