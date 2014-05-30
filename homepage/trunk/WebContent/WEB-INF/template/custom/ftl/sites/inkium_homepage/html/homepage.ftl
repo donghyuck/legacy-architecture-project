@@ -51,14 +51,12 @@
 				});
 				
 				var announcement = new common.api.Announcement({pageSize: 3}); 		
-				var forum = new common.api.Forum({forumId:1, pageSize: 3});
-				 				
+				var forum = new common.api.Forum({forumId:1, pageSize: 3});				 				
 				var template = kendo.template(
 					'<li class="overflow-hidden"><i class="fa fa-check color-green"></i> ' +
 					'#if ( typeof announceId === "number" ) { # <a href="${request.contextPath}/events.do?announceId=#= announceId #"> # } else { # <a href="${request.contextPath}/press.do?topicId=#= topicId #"> # } #  #:subject#</a> ' +  
 					'#if( typeof viewCnt === "number") {#<small class="hex">(#: viewCnt #)</small>#}#</li>'
-				);
-				
+				);				
 				announcement.dataSource().bind('change', function(){
 					$("#announce-view").html(kendo.render(template, this.view()))
 				}).read();
