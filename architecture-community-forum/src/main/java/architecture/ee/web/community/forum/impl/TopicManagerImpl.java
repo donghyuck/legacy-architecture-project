@@ -125,23 +125,35 @@ public class TopicManagerImpl implements TopicManager {
 	}
 	
 	public List<Topic> getTopics(long forumId) {
-		System.out.println("getTopics ==============" + forumId);
 		
 		List <Long> topicIds = topicDao.getTopicIds(forumId);
-		
 		List <Topic> list = new ArrayList<Topic>();
 		
 		for( Long topicId : topicIds){
 			try{
 				Topic topic = getTopic(topicId);
 				list.add(topic);
-				log.debug("=========== list에 넣습니다. : " + topic.getSubject());
 			} catch (TopicNotFoundException e){
 				log.warn(e);
 			}
 		}
-		log.debug("============= 리스트 생성 완료 ==================");
-		//List<Topic> list = topicDao.getTopics(forumId);
+		return list;
+	}
+	
+	public List<Topic> getTopics(long forumId, int startIndex, int pageSize) {
+		
+		List <Long> topicIds = topicDao.getTopicIds(forumId, startIndex, pageSize);
+		log.debug("topicIds length : " + topicIds.size());
+		List <Topic> list = new ArrayList<Topic>();
+		
+		for( Long topicId : topicIds){
+			try{
+				Topic topic = getTopic(topicId);
+				list.add(topic);
+			} catch (TopicNotFoundException e){
+				log.warn(e);
+			}
+		}
 		return list;
 	}
 	

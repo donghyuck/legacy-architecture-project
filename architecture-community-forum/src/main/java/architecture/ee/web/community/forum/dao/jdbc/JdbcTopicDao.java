@@ -153,11 +153,21 @@ public class JdbcTopicDao extends ExtendedJdbcDaoSupport implements TopicDao {
 	}
 	
 	public List<Topic> getTopics (Long forumId){
-		log.debug("DAO ==== getTopics");
 		return getExtendedJdbcTemplate().query(
 				getBoundSql("ARCHITECTURE_COMMUNITY_FORUM.SELECT_TOPICS_BY_FORUM_ID").getSql(),
 				topicMapper,
 				new SqlParameterValue (Types.NUMERIC, forumId ));	
+	}
+	
+	public List<Long> getTopicIds(Long forumId, int startIndex, int pageSize) {
+		log.debug("DAO getTopicIds : " + ", startIndex : " + startIndex + ", pageSize : " + pageSize);
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY_FORUM.SELECT_TOPIC_IDS_BY_FORUM_ID").getSql(),
+				startIndex,
+				pageSize,
+				new Object[] {forumId},
+				new int[] {Types.NUMERIC},
+				Long.class);
 	}
 	
 	public List<Long> getTopicIds (Long forumId){

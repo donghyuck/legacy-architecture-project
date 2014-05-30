@@ -20,6 +20,8 @@ public interface TopicManager {
 	
 	public abstract List<Topic> getTopics(long forumId);
 	
+	public abstract List<Topic> getTopics(long forumId, int startIndex, int pageSize);
+	
 	public abstract int getTopicCount(long forumId) ;
 
 	public abstract int getTopicViewCount(long topicId);
