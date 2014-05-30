@@ -52,7 +52,7 @@
 				 				
 				var template = kendo.template(
 					'<li class="overflow-hidden"><i class="fa fa-check color-green"></i> ' +
-					'#if ( typeof announceId === "number" ) { # <a href="${request.contextPath}/event.do?announceId=#= announceId #"> # } else { # <a href="${request.contextPath}/event.do?topicId=#= topicId #"> # } #  #:subject#</a> ' +  
+					'#if ( typeof announceId === "number" ) { # <a href="${request.contextPath}/events.do?announceId=#= announceId #"> # } else { # <a href="${request.contextPath}/press.do?topicId=#= topicId #"> # } #  #:subject#</a> ' +  
 					'#if( typeof viewCnt === "number") {#<small class="hex">(#: viewCnt #)</small>#}#</li>'
 				);
 				
