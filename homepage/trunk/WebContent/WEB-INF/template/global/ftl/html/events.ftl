@@ -27,9 +27,6 @@
 				common.api.culture();
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
-
-				var selectedAnnounceId = ${ParamUtils.getLongParameter(request, "announceId", 0 )} ;
-				alert(selectedAnnounceId);
 				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
@@ -44,7 +41,8 @@
 				});		
 
 				// 1. Announces 				
-				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );					
+				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );			
+				var selectedAnnounceId = ${ParamUtils.getLongParameter(request, "announceId", 0 )} ;		
 				$("#announce-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -82,6 +80,11 @@
 						var selectedCell = this.dataItem( selectedCells );	
 						$("#announce-grid").data( "announcePlaceHolder", selectedCell );
 						displayAnnouncement();
+					},
+					dataBound : function(e){
+						if(selectedAnnounceId>0){
+							this.select('tr[data-id="' + selectedAnnounceId + '"]');							
+						}
 					}			
 				});							
 				<#if !action.user.anonymous >				
