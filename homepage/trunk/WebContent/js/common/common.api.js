@@ -570,10 +570,10 @@
 					if(propertyName === 'action'){
 						that.element.find('form').attr('action', valueOfProperty );
 					}else{
-						if( that.element.find('form').length === 0  ){
-							that.element.find('form').append('<input type="hidden" name="' + propertyName + "' value="" + valueOfProperty + "' >" );
+						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){
+							that.element.find('form').append('<input type="hidden" name="' + propertyName + '" value="' + valueOfProperty + "' >" );
 						}else{							
-							
+							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
 						}
 					}
 				});
