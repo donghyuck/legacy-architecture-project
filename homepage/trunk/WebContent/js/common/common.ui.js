@@ -929,46 +929,9 @@
 				'</div>' +
 				'</div>'					
 			),
-			/*
-			selected  : template('<div class="panel-body custom-selected-image">'
-					+ '<div class="media" style="max-height:120px;">'
-					+ '<a class="pull-left" href="\\#">'
-					+ '<img class="media-object img-responsive" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
-					+ '</a>'
-					+ '<div class="media-body">'
-					+ '<h5 class="media-heading"><span class="label label-warning label-lightweight">#= contentType #</span></h5>'
-					+ '<ul class="list-unstyled">'
-					+ '<li class="text-muted small"><i class="fa fa-picture-o color-green"></i> #: name #</li>'
-					+ '<li class="text-muted small"><i class="fa fa-calendar color-green"></i> 생성일: #: formattedCreationDate() #</li>'
-					+ '<li class="text-muted small"><i class="fa fa-calendar color-green"></i> 수정일: #: formattedModifiedDate() #</li>'
-					+ '<li class="text-muted small"><i class="fa fa-angle-right color-green"></i> 크기 : #: formattedSize() #</li>'
-					+ '<li class="text-muted small"><span class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</span></li>'
-					+ '</ul>'
-					+ '</div>' 
-					+ '</div>' 
-					+ '<div class="margin-bottom-10"><hr class="devider devider-dotted"></div>'					
-					+ '</div>'),
-*/
 			image : template('<img src="#: url #" class="img-responsive"/>'),
 			url : template('/download/image/#= key #')
 		},
-		/*templates.url
-		VALUE_TEMPLATE = kendo.template('<img src="#: url #" class="img-responsive"/>'), 
-		SELECTED_IMAGE_TEMPLAGE = kendo.template('<div class="panel-body custom-selected-image">'
-					+ '<div class="media">'
-					+ '<a class="pull-left" href="\\#">'
-					+ '<img class="media-object" src="/community/download-my-domain-image.do?imageId=#=imageId#&width=150&height=150" alt="#=name#">'
-					+ '</a>'
-					+ '<div class="media-body">'
-					+ '<h5 class="media-heading"><span class="label label-warning">#= contentType #</span> #=name#</h5>'
-					+ '<small><p class="text-muted">생성일: #= formattedCreationDate() #</p>'
-					+ '<p class="text-muted">수정일: #= formattedModifiedDate() #</p>'
-					+ '<p class="text-muted">크기: #= formattedSize() #</p>'
-					+ '<p class="text-danger"><i class="fa fa-info"></i> 이미지를 사용하시면 이미지 링크를 통하여 누구나 볼수 있게 됩니다.</p></small>'
-					+ '</div>' + '</div>' + '</div>'), 
-		URL_TEMPLATE = kendo.template('/download/image/#= key #'), 
-		*/
-		
 		handleKendoAjaxError = common.api.handleKendoAjaxError;
 		common.ui.extImageBrowser = Widget.extend({
 			init : function(element, options) {
@@ -1120,92 +1083,7 @@
 								my_list_view.data('kendoListView').dataSource.read({pageId: that._objectId() });								
 							}else{
 								
-							}
-						
-											/*
-											
-											var my_list_pager = tab_pane.find('.panel-footer div');
-											if (!my_list_view.data('kendoListView')) {
-												my_list_view.kendoListView({
-													dataSource : {
-														type : 'json',
-														transport : {
-															read : {
-																url : '/community/list-my-domain-image.do?output=json',
-																type : 'POST'
-															},
-															parameterMap : function(options, operation) {
-																if (operation != "read" && options) {
-																	return {};
-																} else {
-																	return {
-																		startIndex : options.skip,
-																		pageSize : options.pageSize
-																	}
-																}
-															}
-														},
-														pageSize : 12,
-														error : handleKendoAjaxError,
-														schema : {
-															model : Image,
-															data : "targetImages",
-															total : "totalTargetImageCount"
-														},
-														serverPaging : true
-													},
-														selectable : "single",
-														change : function(e) {
-															tab_pane.find(	'.panel-body.custom-selected-image').remove();
-															var data = this.dataSource.view();
-															var current_index = this.select().index();
-															if (current_index >= 0) {
-																var item = data[current_index];
-																var imageId = item.imageId;
-																if (imageId > 0) {
-																	that._getImageLink(item,
-																		function(data) {
-																			if (typeof data.imageLink === 'object') {
-																				my_list_view.data("linkId",data.imageLink.linkId);
-																				that._changeState(true);
-																				tab_pane.find('.panel').prepend(templates.selected(item));
-																			}
-																	});
-																}
-															}
-														},
-														navigatable : false,
-														template : kendo.template($("#photo-list-view-template").html()),
-														dataBound : function(e) {
-															tab_pane.find('.panel-body.custom-selected-image').remove();
-															that._changeState(false);
-														}
-													});
-											my_list_view.on(
-															"mouseenter",
-															".img-wrapper",
-															function(e) {
-																kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
-															})
-													.on(
-															"mouseleave",
-															".img-wrapper",
-															function(e) {
-																kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
-															});
-											my_list_pager
-													.kendoPager({
-														refresh : true,
-														buttonCount : 5,
-														dataSource : my_list_view
-																.data('kendoListView').dataSource
-													});
-										} else {
-											my_list_view.data(
-													'kendoListView')
-													.clearSelection();
-										}		
-										*/									
+							}							
 							break;
 						case "#" + that.options.guid[TAB_PANE_DOMAIN_ID]:
 							// domain images
@@ -1477,16 +1355,13 @@
 									});
 
 					that.element.find('.modal-footer .btn.custom-insert-img').on('click', function() {
-										var tab_pane = that._activePane();
-										var selected_url;
-										
-										alert(tab_pane.html());
-										
-										switch (tab_pane.attr('id')) {
-										case that.options.guid[TAB_PANE_URL_ID]:
-											selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();
-											break;
-										case that.options.guid[TAB_PANE_DOMAIN_ID]:
+						var tab_pane = that._activePane();
+						var selected_url;
+						switch (tab_pane.attr('id')) {
+							case that.options.guid[TAB_PANE_URL_ID]:
+								selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();
+								break;
+							case that.options.guid[TAB_PANE_DOMAIN_ID]:
 											var my_list_view = tab_pane
 													.find('.panel-body div');
 											var linkId = my_list_view
@@ -1496,17 +1371,19 @@
 											});
 											my_list_view.data("linkId", null);
 											break;
-										case that.options.guid[TAB_PANE_WEBSITE_ID]:
-											var my_list_view = tab_pane
-													.find('.panel-body div');
-											var linkId = my_list_view
-													.data("linkId");
-											selected_url = templates.url({
-												key : linkId
-											});
-											my_list_view.data("linkId", null);
-											break;
-										case that.options.guid[TAB_PANE_MY_ID]:
+							case that.options.guid[TAB_PANE_WEBSITE_ID]:
+								
+								var my_list_view = tab_pane.find('.panel-body div');
+								
+								var linkId = my_list_view.data("linkId");
+								selected_url = templates.url({
+									key : linkId
+								});
+								alert( linkId );
+								my_list_view.data("linkId", null);
+								
+								break;
+							case that.options.guid[TAB_PANE_MY_ID]:
 											var my_list_view = tab_pane
 													.find('.panel-body div');
 											var linkId = my_list_view
@@ -1544,21 +1421,21 @@
 				_dialogTemplate : function() {
 					var that = this;
 					if (typeof that.options.template === UNDEFINED) {
-						return kendo
-								.template("<div class='modal fade' tabindex='-1' role='dialog' aria-labelledby=#:id# aria-hidden='true'>"
-										+ "<div class='modal-dialog modal-lg'>"
-										+ "<div class='modal-content'>"
-										+ "<div class='modal-header'>"
-										+ "<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>"
-										+ "<h5 class='modal-title' id=#: id #>이미지 삽입</h5>"
-										+ "</div>"
-										+ "<div class='modal-body'>"
-										+ "</div>"
-										+ "<div class='modal-footer'>"
-										+ "</div>"
-										+ "</div><!-- /.modal-content -->"
-										+ "</div><!-- /.modal-dialog -->"
-										+ "</div><!-- /.modal -->");
+						return kendo.template(
+						"<div class='modal fade' tabindex='-1' role='dialog' aria-labelledby=#:id# aria-hidden='true'>"	+ 
+						"<div class='modal-dialog modal-lg'>" + 
+						"<div class='modal-content'>" + 
+						"<div class='modal-header'>" + 
+						"<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>&times;</button>" + 
+						"<h5 class='modal-title' id=#: id #>이미지 삽입</h5>" + 
+						"</div>" + 
+						"<div class='modal-body'>" + 
+						"</div>" + 
+						"<div class='modal-footer'>" + 
+						"</div>" + 
+						"</div><!-- /.modal-content -->" + 
+						"</div><!-- /.modal-dialog -->" + 
+						"</div><!-- /.modal -->");
 					} else if (typeof that.options.template === 'object') {
 						return that.options.template;
 					} else if (typeof that.options.template === 'string') {
