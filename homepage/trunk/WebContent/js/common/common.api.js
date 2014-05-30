@@ -530,8 +530,7 @@
 	common.api.Navigator = Widget.extend({		
 		init : function(element, options) {
 			if( element.length == 0 ){
-				alert(element.toString());			
-				$('body').append(element);
+				alert(element.id);			
 			}
 			
 			var that = this;
