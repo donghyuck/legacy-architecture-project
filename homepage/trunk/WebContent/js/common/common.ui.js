@@ -1376,8 +1376,7 @@
 										}
 									});								
 								}
-							});	
-							
+							});								
 					}
 					if( html.length > 0){
 						that.trigger(APPLY, {
