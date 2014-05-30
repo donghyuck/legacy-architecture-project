@@ -1387,75 +1387,28 @@
 							})
 						});
 					}
-					/*
-					alert(tab_pane_id);
-					
-						switch (tab_pane.attr('id')) {
-							case that.options.guid[TAB_PANE_URL_ID]:
-								selected_url = that.element.find('.modal-body input[name="custom-selected-url"]').val();
-								break;
-							case that.options.guid[TAB_PANE_DOMAIN_ID]:
-											var my_list_view = tab_pane
-													.find('.panel-body div');
-											var linkId = my_list_view
-													.data("linkId");
-											selected_url = templates.url({
-												key : linkId
-											});
-											my_list_view.data("linkId", null);
-											break;
-							case that.options.guid[TAB_PANE_WEBSITE_ID]:
-								
-								var my_list_view = tab_pane.find('.panel-body div');
-								
-								var linkId = my_list_view.data("linkId");
-								selected_url = templates.url({
-									key : linkId
-								});
-								alert( linkId );
-								my_list_view.data("linkId", null);
-								
-								break;
-							case that.options.guid[TAB_PANE_MY_ID]:
-											var my_list_view = tab_pane
-													.find('.panel-body div');
-											var linkId = my_list_view
-													.data("linkId");
-											selected_url = templates.url({
-												key : linkId
-											});
-											my_list_view.data("linkId", null);
-											break;
-										}
-										
-										that.trigger(APPLY, {
-											html : templates.image({
-												url : selected_url
-											})
-										});
-									});
-				*/					
-				},
-				_activePane : function() {
-					var that = this;
-					return that.element.find('.tab-content > .tab-pane.active');
-				},
-				_changeState : function(enabled) {
-					var that = this;
-					if (enabled) {
-						that.element.find(
-								'.modal-footer .btn.custom-insert-img')
-								.removeAttr('disabled');
-					} else {
-						that.element.find(
-								'.modal-footer .btn.custom-insert-img').attr(
-								'disabled', 'disabled');
-					}
-				},
-				_dialogTemplate : function() {
-					var that = this;
-					if (typeof that.options.template === UNDEFINED) {
-						return kendo.template(
+				}	
+			},
+			_activePane : function() {
+				var that = this;
+				return that.element.find('.tab-content > .tab-pane.active');
+			},
+			_changeState : function(enabled) {
+				var that = this;
+				if (enabled) {
+					that.element.find(
+							'.modal-footer .btn.custom-insert-img')
+							.removeAttr('disabled');
+				} else {
+					that.element.find(
+							'.modal-footer .btn.custom-insert-img').attr(
+							'disabled', 'disabled');
+				}
+			},
+			_dialogTemplate : function() {
+				var that = this;
+				if (typeof that.options.template === UNDEFINED) {
+					return kendo.template(
 						"<div class='modal fade' tabindex='-1' role='dialog' aria-labelledby=#:id# aria-hidden='true'>"	+ 
 						"<div class='modal-dialog modal-lg'>" + 
 						"<div class='modal-content'>" + 
@@ -1470,13 +1423,13 @@
 						"</div><!-- /.modal-content -->" + 
 						"</div><!-- /.modal-dialog -->" + 
 						"</div><!-- /.modal -->");
-					} else if (typeof that.options.template === 'object') {
-						return that.options.template;
-					} else if (typeof that.options.template === 'string') {
-						return kendo.template(that.options.template);
-					}
+				} else if (typeof that.options.template === 'object') {
+					return that.options.template;
+				} else if (typeof that.options.template === 'string') {
+					return kendo.template(that.options.template);
 				}
-			});
+			}
+	});
 
 	$.fn.extend({
 		extImageBrowser : function(options) {
