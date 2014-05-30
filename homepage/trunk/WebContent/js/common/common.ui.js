@@ -1376,7 +1376,7 @@
 							var selected = active_list_view.select();
 							
 							$.each( selected, function(index, item){
-								alert(item.index());
+								alert(item);
 							} );
 														
 							$.map(selected, function(item){
