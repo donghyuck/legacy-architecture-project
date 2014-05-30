@@ -322,6 +322,7 @@
 				<div class="col-md-4">
 					<div class="easy-block-v2">		
 						<div class="easy-bg-v2 rgba-blue" style="z-index:1000">New</div>
+						<h5 class="heading-md"><strong>뉴스</strong></h5>
 						<div class="blank-space-25"></div>		
 						<ul id="news-view" class="list-unstyled summaries" style="min-height:100px;">
 							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
