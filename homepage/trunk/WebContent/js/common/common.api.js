@@ -571,7 +571,12 @@
 					if(propertyName === 'action'){
 						that.element.find('form').attr('action', valueOfProperty );
 					}else{	
-						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){							
+						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){			
+							alert(
+									template({name:propertyName , value:valueOfProperty })	
+							) ;
+							that.element.find('form').append( "a");
+							
 							that.element.find('form').append(template({name:propertyName , value:valueOfProperty }));
 						}else{							
 							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
