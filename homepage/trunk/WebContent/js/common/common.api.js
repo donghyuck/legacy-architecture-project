@@ -572,16 +572,9 @@
 						that.element.find('form').attr('action', valueOfProperty );
 					}else{	
 						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){			
-							alert(
-									template({name:propertyName , value:valueOfProperty })	
-							) ;
-							
-							that.element.find('form').append( "a" );
-							
-							that.element.find('form').append(
-								template({name:propertyName , value:valueOfProperty })
-							);
-							
+							var html = template({name:propertyName , value:valueOfProperty });
+							alert(html) ;							
+							that.element.find('form').append(html);							
 						}else{							
 							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
 						}
