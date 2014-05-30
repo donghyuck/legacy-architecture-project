@@ -563,18 +563,21 @@
 		teleport : function(params){			
 			var that = this;			
 			var template = kendo.template('<input type="hidden" name="#=name #" value="#=value #"/>');
+			var form = that.element.find('form');
 			if( typeof params === UNDEFINED ){
 				params = params || {};				
-			}						
+			}									
+			
+			form.find('input[name!="output"]').remove();	
+			
 			if(isPlainObject(params)){
 				$.each( params , function(propertyName, valueOfProperty ){
 					if(propertyName === 'action'){
-						that.element.find('form').attr('action', valueOfProperty );
+						form.attr('action', valueOfProperty );
 					}else{	
 						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){			
-							var html = template({name:propertyName , value:valueOfProperty });
-							alert(html) ;							
-							that.element.find('form').append(html);							
+							var html = template({name:propertyName , value:valueOfProperty });											
+							form.append(html);							
 						}else{							
 							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
 						}
