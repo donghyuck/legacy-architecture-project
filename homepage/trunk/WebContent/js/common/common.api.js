@@ -569,7 +569,11 @@
 				$.each( params , function(propertyName, valueOfProperty ){
 					if(propertyName === 'action'){
 						that.element.find('form').attr('action', valueOfProperty );
-					}else{
+					}else{			
+						alert(propertyName);
+						alert(
+								 that.element.find('input[name="'+ propertyName + '"]').length
+						);
 						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){
 							that.element.find('form').append('<input type="hidden" name="' + propertyName + '" value="' + valueOfProperty + "' >" );
 						}else{							
@@ -577,9 +581,7 @@
 						}
 					}
 				});
-			}			
-			var that = this;
-			
+			}	
 		}
 	});
 	
