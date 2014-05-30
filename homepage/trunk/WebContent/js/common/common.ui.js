@@ -1366,6 +1366,7 @@
 							$.each( active_list_view.select(), function(index, item){
 								var image = data[$(item).index()];
 								// website (public) 
+								/*
 								if( image.objectType === 30 )
 								{
 									selected_url =  templates.download(image);									
@@ -1376,6 +1377,7 @@
 										}
 									});								
 								}
+								*/
 							});								
 					}
 					if( html.length > 0){
