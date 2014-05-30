@@ -64,10 +64,7 @@
 				forum.dataSource().bind('change', function(){
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
-				
-				
-				$('#page-navigator').extNavigator({});
-								 
+												 
 				/**
 				$('.bxslider').bxSlider({
 					maxSlides: 3,
