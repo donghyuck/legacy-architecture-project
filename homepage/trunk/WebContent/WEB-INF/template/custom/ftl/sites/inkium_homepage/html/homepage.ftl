@@ -54,7 +54,7 @@
 				var forum = new common.api.Forum({forumId:1, pageSize: 3});				 				
 				var template = kendo.template(
 					'<li class="overflow-hidden"><i class="fa fa-check color-green"></i> ' +
-					'#if ( typeof announceId === "number" ) { # <a href="${request.contextPath}/events.do?announceId=#= announceId #"> # } else { # <a href="${request.contextPath}/press.do?topicId=#= topicId #"> # } #  #:subject#</a> ' +  
+					'#if ( typeof announceId === "number" ) { # <a href="javascript:teleportToNotice( #= announceId # );"> # } else { # <a href="${request.contextPath}/press.do?topicId=#= topicId #"> # } #  #:subject#</a> ' +  
 					'#if( typeof viewCnt === "number") {#<small class="hex">(#: viewCnt #)</small>#}#</li>'
 				);				
 				announcement.dataSource().bind('change', function(){
@@ -82,7 +82,19 @@
 			}
 		}]);	
 			
+		function teleportToNotice (announceId){
+			common.api.teleportation().teleport({
+				action : '${request.contextPath}/events.do',
+				announceId : announceId
+			});
+		}
 		
+		function teleportToNews (topicId){
+			common.api.teleportation().teleport({
+				action : '${request.contextPath}/press.do',
+				topicId : topicId
+			});
+		}
 		
 			
 		-->
