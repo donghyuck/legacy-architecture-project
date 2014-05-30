@@ -526,21 +526,45 @@
 		}	
 	});
 	
+	common.api.culture = function ( culture ){
+		if( typeof culture === UNDEFINED )
+			culture = LOCALE;
+		kendo.culture(culture);				
+	}
+	
+	common.api.teleportation = function(options){
+		options = options || {};		
+		
+		if( typeof options.renderTo === UNDEFINED ){
+			options.renderTo = 'teleportation';			
+		}
+				
+		if ($("#" +options.renderTo ).length == 0) {
+			$('body').append(	'<div id="' + options.rendorTo + '" style="display:none;"></div>');
+		}
+		
+		if(! $("#" +options.renderTo ).data('kendoExtNavigator') ){
+			$("#" +options.renderTo ).extNavigator(options);
+		}		
+		return $("#" +options.renderTo ).data('kendoExtNavigator');
+	}
 	
 	common.api.Navigator = Widget.extend({		
-		init : function(element, options) {
-			if( element.length == 0 ){
-				alert(element.id);			
-			}
-			
+		init : function(element, options) {			
 			var that = this;
 			Widget.fn.init.call(that, element, options);
 			options = that.options;
 			element = that.element;
+			that.refresh();
 		},
 		options : {
 			name : "ExtNavigator"
-		}	
+		},
+		refresh : function(){
+			var that = this;
+			alert(that.element);
+			
+		}
 	});
 	
 	$.fn.extend({
