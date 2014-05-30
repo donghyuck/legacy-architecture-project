@@ -559,6 +559,18 @@
 				'<input type="hidden" id="output" name="output" value="html" />' +		
 				'</form>'						
 			);
+		},
+		teleport : function(params){			
+			if( typeof params === UNDEFINED ){
+				params = params || {};				
+			}			
+			if(isPlainObject(params)){
+				for(var i = 0 ; i < params.length ; i ++ ){
+					alert(params[i].name);					
+				}
+			}			
+			var that = this;
+			
 		}
 	});
 	
