@@ -139,6 +139,13 @@
 		#services-view .view p {
 			padding: 20px 10px 20px 10px;
 		}
+		
+		#services-view .view a.info {
+		color: #fff;
+		background: #000;
+		margin-top: -20px;
+		text-transform: none;
+		}
 			
 		/*Summary-Content
 		------------------------------------*/
