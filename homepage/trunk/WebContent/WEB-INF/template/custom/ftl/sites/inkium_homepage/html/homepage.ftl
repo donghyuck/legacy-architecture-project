@@ -326,14 +326,11 @@
 				
 				<div class="col-md-4">
 					<div class="easy-block-v1">		
-	                     <div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
-	                     <div class="blank-space-25"></div>		
-										<ul id="news-view" class="list-unstyled" style="min-height:100px;">
-	                                        <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
-	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
-	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-	                                    </ul>        
+						<div class="easy-block-v1-badge rgba-blue">뉴스</div>       			
+							<div class="blank-space-25"></div>		
+								<ul id="news-view" class="list-unstyled summaries" style="min-height:100px;">
+									<li><i class="fa fa-check color-green"></i> 등록된 뉴스가 없습니다.</li>
+								</ul>        
 						<a class="btn-u btn-u-xs" href="${request.contextPath}/press.do">더보기</a>	
 					</div>
 				</div>
