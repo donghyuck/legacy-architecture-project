@@ -157,7 +157,7 @@
 
 /*Job-Content
 ------------------------------------*/
-.job-content .categories li {
+.summary-content .categories li {
 	padding: 6px 0;
 	border-bottom: 1px dotted #eee;
 }
@@ -252,7 +252,7 @@
 				</div>
 			</div>
 			<hr/>
-			<div class="row job-content">				
+			<div class="row summary-content">				
 				<div class="col-md-4">				
 					<!--
 					<div class="easy-block-v1">
@@ -291,7 +291,7 @@
 						</div>
 					</div>
 					-->			
-				<ul class="list-unstyled categories">
+				<ul class="list-unstyled announcement">
 					<h3 class="heading-md"><strong>Accounting &amp; Finance</strong></h3>
 					<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
 					<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
