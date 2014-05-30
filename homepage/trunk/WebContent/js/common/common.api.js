@@ -570,11 +570,10 @@
 					if(propertyName === 'action'){
 						that.element.find('form').attr('action', valueOfProperty );
 					}else{			
-						alert(propertyName);
-						alert(
-								 that.element.find('input[name="'+ propertyName + '"]').length
-						);
+						
+
 						if( that.element.find('input[name="'+ propertyName + '"]').length === 0  ){
+							alert(that.element.find('form'));
 							that.element.find('form').append('<input type="hidden" name="' + propertyName + '" value="' + valueOfProperty + "' >" );
 						}else{							
 							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
