@@ -123,8 +123,8 @@
 		}
 
 		#services-view .col-sm-6 {
-			padding-right: 10px;
-			padding-left: 10px;
+			padding-right: 11px;
+			padding-left: 11px;
 		}
 		
 		#services-view .view {
