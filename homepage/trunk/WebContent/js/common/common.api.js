@@ -529,6 +529,8 @@
 	
 	common.api.Navigator = Widget.extend({		
 		init : function(element, options) {
+			alert(element.length);
+			
 			var that = this;
 			Widget.fn.init.call(that, element, options);
 			options = that.options;
