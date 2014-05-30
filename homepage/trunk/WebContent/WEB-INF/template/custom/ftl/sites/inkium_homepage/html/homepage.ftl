@@ -175,21 +175,21 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/93/main_consulting.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left">기업의 인재육성전략 실현을 위한 HRD 통합 솔루션</p>
+									<p>기업의 인재육성전략 실현을 위한 HRD 통합 솔루션</p>
 									<a href="portfolio_item.html" class="info">Read More</a>
 									</div>                
 								</div>
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/94/main-ehrd.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left">조직의 인재양성전략 실현을 위한 최적의 e-HRD 솔루션</p>
+									<p>조직의 인재양성전략 실현을 위한 최적의 e-HRD 솔루션</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/97/main_icap.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
+									<p>우리회사 인재양성 교육채널 온라인 통합 연수원</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>	
@@ -205,7 +205,7 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left">우리회사 인재양성 교육채널 온라인 통합 연수원</p>
+									<p>우리회사 인재양성 교육채널 온라인 통합 연수원</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>
@@ -220,7 +220,7 @@
 								<div class="easy-bg-v2 rgba-red" style="z-index:1000">New</div>
 								<img class="img-responsive" src="${request.contextPath}/download/image/92/main_vod.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left">비즈니스 메너 동영상 컨텐츠</p>
+									<p>비즈니스 메너 동영상 컨텐츠</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>								
