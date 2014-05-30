@@ -561,18 +561,21 @@
 			);
 		},
 		teleport : function(params){			
-			var that = this;
-			
+			var that = this;			
 			if( typeof params === UNDEFINED ){
 				params = params || {};				
-			}			
-			
-			
+			}					
 			if(isPlainObject(params)){
 				$.each( params , function(propertyName, valueOfProperty ){
-					
-					
-					
+					if(propertyName === 'action'){
+						that.element.find('form').attr('action', valueOfProperty );
+					}else{
+						if( that.element.find('form').length === 0  ){
+							that.element.find('form').append('<input type="hidden" name="' + propertyName + "' value="" + valueOfProperty + "' >" );
+						}else{							
+							
+						}
+					}
 				});
 			}			
 			var that = this;
