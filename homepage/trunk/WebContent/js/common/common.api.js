@@ -575,9 +575,13 @@
 							alert(
 									template({name:propertyName , value:valueOfProperty })	
 							) ;
-							that.element.find('form').append( "a");
 							
-							that.element.find('form').append(template({name:propertyName , value:valueOfProperty }));
+							that.element.find('form').append( "a" );
+							
+							that.element.find('form').append(
+								template({name:propertyName , value:valueOfProperty })
+							);
+							
 						}else{							
 							that.element.find('input[name="'+ propertyName + '"]').val(valueOfProperty);
 						}
