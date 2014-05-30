@@ -562,7 +562,7 @@
 		},
 		teleport : function(params){			
 			var that = this;			
-			var template = kendo.template('<input type="hidden" name="#=name #" value="#=value #/>"');
+			var template = kendo.template('<input type="hidden" name="#=name #" value="#=value #"/>');
 			if( typeof params === UNDEFINED ){
 				params = params || {};				
 			}						
