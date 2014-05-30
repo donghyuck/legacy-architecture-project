@@ -64,6 +64,8 @@
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
 				
+				
+				$('page-navigator').extNavigator({});
 								 
 				/**
 				$('.bxslider').bxSlider({
@@ -81,6 +83,9 @@
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
+			
+		
+		
 			
 		-->
 		</script>		
