@@ -564,7 +564,10 @@
 			if( typeof params === UNDEFINED ){
 				params = params || {};				
 			}			
+			
+			alert( params );
 			if(isPlainObject(params)){
+			
 				for(var i = 0 ; i < params.length ; i ++ ){
 					alert(params[i].name);					
 				}
