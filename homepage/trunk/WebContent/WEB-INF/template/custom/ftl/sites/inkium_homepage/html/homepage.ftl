@@ -182,7 +182,7 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/93/main_consulting.jpg" alt="" />
 								<div class="mask">
-									<p>기업의 인재육성전략 실현을 위한 HRD 통합 솔루션</p>
+									<p>기업의 인재육성전략 실현을 위한 HRD 토탈 솔루션 서비스</p>
 									<a href="portfolio_item.html" class="info">Read More</a>
 									</div>                
 								</div>
@@ -196,14 +196,14 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/97/main_icap.jpg" alt="" />
 								<div class="mask">
-									<p>우리회사 인재양성 교육채널 온라인 통합 연수원</p>
+									<p><small>우리회사 인재양성 교육채널 온라인 통합 연수원</small></p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>	
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/95/main-edu.jpg" alt="" />
 								<div class="mask">
-									<p class="text-left">위탁교육</p>
+									<p class="text-left">국내 및 해외 교육과정에 대한 기획, 실행, 평가 및 사후관리에 이르는 기업교육 전 부문 위탁 서비스</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>																
@@ -212,7 +212,7 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
 								<div class="mask">
-									<p>우리회사 인재양성 교육채널 온라인 통합 연수원</p>
+									<p>역량기반의 인재양성 역량진단 서비스</p>
 									<a href="portfolio_item.html" class="info">더 알아보기</a>
 								</div>                
 							</div>
