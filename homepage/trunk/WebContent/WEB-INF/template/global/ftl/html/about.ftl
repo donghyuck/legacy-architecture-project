@@ -26,6 +26,7 @@
 				common.ui.landing();		
 				      
 				// START SCRIPT	
+				var selectedId = ${ParamUtils.getLongParameter(request, "id", 0 )} ;
 
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
