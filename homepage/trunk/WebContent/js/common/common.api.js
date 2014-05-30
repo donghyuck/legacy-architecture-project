@@ -526,12 +526,6 @@
 		}	
 	});
 	
-	common.api.culture = function ( culture ){
-		if( typeof culture === UNDEFINED )
-			culture = LOCALE;
-		kendo.culture(culture);				
-	}
-	
 	common.api.teleportation = function(options){
 		options = options || {};		
 		
