@@ -39,6 +39,7 @@
 				});	
 						
 				var forumId = ${action.webSite.getLongProperty( "pages.press.forumId", 1)};		
+				var selectedtopicId = ${ParamUtils.getLongParameter(request, "topicId", 0 )} ;		
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -83,8 +84,13 @@
 						}
 					},
 					dataBound: function(e) {		
-						if( $('#topic-viewer').data("model") != null ) 
+						if( $('#topic-viewer').data("model") != null ) {
 							$('#topic-viewer').data("model").hide();
+						} else {
+							if( selectedtopicId > 0 ){
+								this.select('tr[data-id="' + selectedtopicId + '"]');						
+							}
+						}	
 					}			
 				});									
 				<#if !action.user.anonymous >				
