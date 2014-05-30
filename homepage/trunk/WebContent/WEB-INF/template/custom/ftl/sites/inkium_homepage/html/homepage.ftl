@@ -254,10 +254,8 @@
 			<hr/>
 			<div class="row summary-content">				
 				<div class="col-md-4">				
-					<!--
-					<div class="easy-block-v1">
-						<div class="easy-block-v1-badge rgba-purple">서비스 바로 가기</div>
-						<div class="blank-space-25"></div>
+					<div class="easy-block-v2">
+						<h5 class="heading-md"><strong>서비스 바로가가</strong></h5>
 						<div class="clearfix">
 							<ul id="family-list" class="bxslider list-inline family-site">
 								<li>
@@ -289,18 +287,8 @@
 								</li>
 							</ul>
 						</div>
-					</div>
-					-->			
-				<ul class="list-unstyled summaries">
-					<h3 class="heading-md"><strong>Accounting &amp; Finance</strong></h3>
-					<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
-					<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
-					<li><a href="#">Banking &amp; Finance</a> <small class="hex">(66 jobs)</small></li>
-					<li><a href="#">Contract &amp; Freelance</a> <small class="hex">(12 jobs)</small></li>
-					<li><a href="#">Business Development</a> <small class="hex">(212 jobs)</small></li>
-				</ul>							
-				</div>
-				
+					</div>				
+				</div>				
 				<div class="col-md-4">
 					<div class="easy-block-v2">		
 						<h5 class="heading-md"><strong>공지&이벤트</strong></h5>
@@ -308,19 +296,7 @@
 							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
 						</ul>		
 						<a class="btn-u btn-u-xs pulse-shrink" href="${request.contextPath}/events.do">더보기</a>	
-					</div>			
-					<!--
-					<div class="easy-block-v1">		
-	                     <div class="easy-block-v1-badge rgba-blue">공지</div>       			
-	                     <div class="blank-space-25"></div>			
-										<ul id="announce-view" class="list-unstyled" style="min-height:100px;">
-	                                        <li class="overflow-hidden"><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
-	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-	                                        <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
-	                                        <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-	                                    </ul>    
-						<a class="btn-u btn-u-xs pulse-shrink" href="${request.contextPath}/events.do">더보기</a>	
-					</div>-->				
+					</div>				
 				</div>				
 				<div class="col-md-4">
 					<div class="easy-block-v2">		
