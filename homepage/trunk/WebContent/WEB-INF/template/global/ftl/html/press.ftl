@@ -72,6 +72,7 @@
 					],
 					sortable: true,
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+					rowTemplate: kendo.template($("#topic-row-template").html()),
 					selectable: "single",
 					height: 430,
 					change: function(e) { 
