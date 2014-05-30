@@ -1363,7 +1363,7 @@
 					var tab_pane_id	= tab_pane.attr('id');
 					var my_selected = $(tab_pane_id + "-selected");
 					var my_list_view = $(tab_pane_id + "-list-view");
-					alert(my_list_view.html());
+					alert(tab_pane_id + "-list-view");
 					
 					var selected_url;					
 					
