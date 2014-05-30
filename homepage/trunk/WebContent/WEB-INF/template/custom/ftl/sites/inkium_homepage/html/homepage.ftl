@@ -119,56 +119,17 @@
 			left: 10;
 			margin-left: -10px;
 		}	
+			
+		/*Summary-Content
+		------------------------------------*/
+		.summary-content .summaries li {
+			padding: 6px 0;
+			border-bottom: 1px dotted #ccc;
+		}
 		
-/*Job
-------------------------------------*/
-.job-img {
-	overflow: hidden;
-	position: relative;
-	min-height: 300px;
-	background: url(../../img/job/1.jpg) 70% 40% no-repeat;
-}
-
-.job-img .job-description {
-	padding: 20px;
-	max-width: 450px;
-	margin: 60px auto 100px;	
-	background: rgba(255,255,255,0.8);
-}
-
-.job-img .job-description h2 {
-	font-size: 20px;
-	line-height: 27px;
-	text-align: center;
-	text-transform: uppercase;
-}
-
-@media (max-width: 768px) {
-	.job-img .job-description {
-		padding: 10px;
-		margin: 30px auto 100px;	
-	}
-}
-
-.job-img .job-img-inputs {
-	left: 0;
-	right: 0;
-	bottom: -7px;
-	padding: 20px 0;
-	position: absolute;
-	background: rgba(0,0,0,0.9);
-}
-
-/*Job-Content
-------------------------------------*/
-.summary-content .summaries li {
-	padding: 6px 0;
-	border-bottom: 1px dotted #ccc;
-}
-
-.summary-content .hex {
-	color: #999
-}
+		.summary-content .hex {
+			color: #999
+		}
 		
 		</style>   
 		</#compress>			
