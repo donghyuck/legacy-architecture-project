@@ -532,7 +532,7 @@
 			options.renderTo = 'teleportation';			
 		}				
 		if ($("#" +options.renderTo ).length == 0) {
-			$('body').append(	'<div id="' + options.rendorTo + '" style="display:none;"></div>');
+			$('body').append(	'<div id="' +options.renderTo + '" style="display:none;"></div>');
 		}		
 		if(! $("#" +options.renderTo ).data('kendoExtNavigator') ){
 			$("#" +options.renderTo ).extNavigator(options);
