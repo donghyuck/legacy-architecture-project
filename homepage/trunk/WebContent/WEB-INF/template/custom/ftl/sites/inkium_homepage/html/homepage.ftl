@@ -34,6 +34,9 @@
 				common.api.culture();
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
+				// 1-3. 페이지 이동 모듈
+				common.api.teleportation();
+				
 				
 				// ACCOUNTS LOAD				
 				var currentUser = new User();			
