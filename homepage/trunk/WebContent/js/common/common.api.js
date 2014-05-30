@@ -527,16 +527,13 @@
 	});
 	
 	common.api.teleportation = function(options){
-		options = options || {};		
-		
+		options = options || {};				
 		if( typeof options.renderTo === UNDEFINED ){
 			options.renderTo = 'teleportation';			
-		}
-				
+		}				
 		if ($("#" +options.renderTo ).length == 0) {
 			$('body').append(	'<div id="' + options.rendorTo + '" style="display:none;"></div>');
-		}
-		
+		}		
 		if(! $("#" +options.renderTo ).data('kendoExtNavigator') ){
 			$("#" +options.renderTo ).extNavigator(options);
 		}		
