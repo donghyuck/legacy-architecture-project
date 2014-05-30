@@ -553,7 +553,7 @@
 		},
 		refresh : function(){
 			var that = this;
-			var rendorTo = $(that.element);
+			var rendorTo = that.element;
 			rendorTo.html(
 				'<form name="teleportation-form" method="POST" accept-charset="utf-8">' +
 				'<input type="hidden" id="output" name="output" value="html" />' +		
@@ -561,16 +561,19 @@
 			);
 		},
 		teleport : function(params){			
+			var that = this;
+			
 			if( typeof params === UNDEFINED ){
 				params = params || {};				
 			}			
 			
 			
 			if(isPlainObject(params)){
-				alert( params );
-				for(var i = 0 ; i < params.length ; i ++ ){
-					alert(params[i].name);					
-				}
+				$.each( params , function(propertyName, valueOfProperty ){
+					
+					
+					
+				});
 			}			
 			var that = this;
 			
