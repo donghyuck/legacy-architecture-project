@@ -157,12 +157,12 @@
 
 /*Job-Content
 ------------------------------------*/
-.summary-content .categories li {
+.summary-content .summaries li {
 	padding: 6px 0;
-	border-bottom: 1px dotted #eee;
+	border-bottom: 1px dotted #ccc;
 }
 
-.job-content .hex {
+.summary-content .hex {
 	color: #999
 }
 		
@@ -291,7 +291,7 @@
 						</div>
 					</div>
 					-->			
-				<ul class="list-unstyled announcement">
+				<ul class="list-unstyled summaries">
 					<h3 class="heading-md"><strong>Accounting &amp; Finance</strong></h3>
 					<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
 					<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
@@ -303,7 +303,7 @@
 				
 				<div class="col-md-4">
 					<h3 class="heading-md"><strong>공지</strong></h3>
-					<ul  id="announce-view" class="list-unstyled categories">						
+					<ul  id="announce-view" class="list-unstyled summaries">						
 						<li><a href="#">Accounting</a> <small class="hex">(342 jobs)</small></li>
 						<li><a href="#">Admin &amp; Clerical</a> <small class="hex">(143 jobs)</small></li>
 						<li><a href="#">Banking &amp; Finance</a> <small class="hex">(66 jobs)</small></li>
