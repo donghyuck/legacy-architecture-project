@@ -26,8 +26,7 @@
 				common.ui.landing();		
 				      
 				// START SCRIPT	
-				var selectedId = ${ParamUtils.getLongParameter(request, "id", 0 )} ;
-				alert(selectedId);
+
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
