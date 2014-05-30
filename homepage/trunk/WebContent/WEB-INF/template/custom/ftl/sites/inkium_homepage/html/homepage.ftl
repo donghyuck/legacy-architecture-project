@@ -103,6 +103,7 @@
 		.copyright{
 			background: #fff;
 		}
+		
 		.bx-wrapper .bx-viewport {
 			-moz-box-shadow: none;
 			-webkit-box-shadow: none;
@@ -116,11 +117,11 @@
 			-o-transform: none;
 			transform: none;
 		}
-		/** 
-		15 > 5 
-		30 > 
-		10 , -10
-		*/
+		
+		.family-site a img {
+			width: 100px;
+		}
+
 		#services-view .col-sm-6 {
 			padding-right: 10px;
 			padding-left: 10px;
