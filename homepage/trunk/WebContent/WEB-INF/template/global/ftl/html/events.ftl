@@ -28,8 +28,8 @@
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
 
-				var selectedId = ${ParamUtils.getLongParameter(request, "eventId", 0 )} ;
-				alert(selectedId);
+				var selectedEventId = ${ParamUtils.getLongParameter(request, "eventId", 0 )} ;
+				alert(selectedEventId);
 				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
