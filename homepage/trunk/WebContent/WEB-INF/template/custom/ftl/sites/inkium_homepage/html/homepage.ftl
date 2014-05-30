@@ -255,7 +255,7 @@
 			<div class="row summary-content">				
 				<div class="col-md-4">				
 					<div class="easy-block-v2">
-						<h5 class="heading-md"><strong>서비스 바로가가</strong></h5>
+						<h5 class="heading-md"><strong>서비스 바로가기</strong></h5>
 						<div class="clearfix">
 							<ul id="family-list" class="bxslider list-inline family-site">
 								<li>
