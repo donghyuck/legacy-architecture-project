@@ -35,7 +35,7 @@
 								</ul>
 							</li>
 							<#else>								
-								<li><a href="${sub_item.page}"><span class="mm-text">${sub_item.title}</span></a></li>
+								<li><a tabindex="-1" href="${sub_item.page}"><span class="mm-text">${sub_item.title}</span></a></li>
 							</#if>								
 						</#list>
 					</ul>					
