@@ -36,7 +36,7 @@
 		<div id="wrapper">
 			<div id="header">
 				<h1><a href="./index.html">Unicorn Admin</a></h1>		
-				<a id="menu-trigger" href="#"><i class="fa fa-align-justify"></i></a>
+				<a id="menu-trigger" href="#"><i class="fa fa-bars"></i></a>	
 			</div>		
 			<div id="user-nav">
 	            <ul class="btn-group">
@@ -151,7 +151,7 @@
 				</div>
 				<div id="breadcrumb">
 					<a href="#" title="Go to Home" class="tip-bottom"><i class="fa fa-home"></i> Home</a>
-					<a href="#" class="current">Tables</a>
+					<a href="#" class="current">Tables</a>					
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
