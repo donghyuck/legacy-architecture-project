@@ -6,6 +6,13 @@
 		
 		<script type="text/javascript">
 		<!--
+		
+		window.addEventListener("load", function () {
+		alert('fdsa');
+		
+		});
+		
+		
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
