@@ -3,6 +3,7 @@
 <head>
 		<title>관리자 메인</title>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.admin.style.css" />
+		
 		<script type="text/javascript">
 		<!--
 		yepnope([{
@@ -23,10 +24,13 @@
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'
-			],        	  	   
+			],
 			complete: function() {      
 
-
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();		
 
 /*
 	init.push(function () {
