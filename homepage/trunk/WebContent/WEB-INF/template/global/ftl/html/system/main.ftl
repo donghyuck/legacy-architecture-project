@@ -160,6 +160,7 @@
 					</div>
 				</div>
 			</div>
+		</div>	
 			<div class="row">
 				<div id="footer" class="col-xs-12">
 					2012 - 2013 &copy; Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
