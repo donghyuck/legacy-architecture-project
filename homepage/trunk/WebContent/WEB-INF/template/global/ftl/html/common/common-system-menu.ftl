@@ -46,6 +46,42 @@
 				</li>
 				</#if>
 			</#list>
+<li class="mm-dropdown">
+					<a href="#"><i class="menu-icon fa fa-desktop"></i><span class="mm-text">UI elements</span></a>
+					<ul>
+						<li>
+							<a tabindex="-1" href="ui-buttons.html"><span class="mm-text">Buttons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-typography.html"><span class="mm-text">Typography</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-tabs.html"><span class="mm-text">Tabs &amp; Accordions</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-modals.html"><span class="mm-text">Modals</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-alerts.html"><span class="mm-text">Alerts &amp; Tooltips</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-components.html"><span class="mm-text">Components</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-panels.html"><span class="mm-text">Panels</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-jqueryui.html"><span class="mm-text">jQuery UI</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-icons.html"><span class="mm-text">Icons</span></a>
+						</li>
+						<li>
+							<a tabindex="-1" href="ui-utility-classes.html"><span class="mm-text">Utility classes</span></a>
+						</li>
+					</ul>
+				</li>
+			
 			</ul> <!-- / .navigation -->
 			<div class="menu-content">
 				<a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a>
