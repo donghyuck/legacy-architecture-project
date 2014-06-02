@@ -9,6 +9,7 @@
   outline: none !important;
   -moz-outline: none !important;
 }
+
 /* Main */
 html {
   overflow-x: hidden;
@@ -17,7 +18,7 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
   margin-top: -20px;
-  background: #000000 url('../img/pattern.png') repeat scroll top center;
+  background: #000000 url('/images/common/pattern.png') repeat scroll top center;
 }
 @media (nax-width: 767px) {
   body {
