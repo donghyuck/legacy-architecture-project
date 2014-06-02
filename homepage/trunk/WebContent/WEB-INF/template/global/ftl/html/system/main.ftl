@@ -134,9 +134,9 @@
 								
 								<!-- Javascript -->
 								<script>
-									init.push(function () {
-										$('#main-navbar-notifications').slimScroll({ height: 250 });
-									});
+								//	init.push(function () {
+								//		$('#main-navbar-notifications').slimScroll({ height: 250 });
+								//	});
 								</script>
 								<!-- / Javascript -->
 
