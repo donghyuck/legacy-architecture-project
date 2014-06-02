@@ -42,8 +42,7 @@
 			</div>		
 			<div id="user-nav">
 
-	        </div>
-            
+			</div>
 			<div id="sidebar">
 				<ul>
 					<li><a href="index.html"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
@@ -82,13 +81,12 @@
 						<a href="widgets.html"><i class="fa fa-inbox"></i> <span>Widgets</span></a>
 					</li>
 				</ul>			
-			</div>
-			
+			</div>			
 			<div id="content">
 				<div id="content-header">
 					<h1>Tables</h1>
 					<div class="btn-group">
-						<a class="btn btn-large" title="Manage Files"><i class="fa fa-file"></i></a>
+						<a class="btn btn-large" title="Manage Files"><i class="fa fa-file fa-xs"></i></a>
 						<a class="btn btn-large" title="Manage Users"><i class="fa fa-user"></i></a>
 						<a class="btn btn-large" title="Manage Comments"><i class="fa fa-comment"></i><span class="label label-danger">5</span></a>
 						<a class="btn btn-large" title="Manage Orders"><i class="fa fa-shopping-cart"></i></a>
