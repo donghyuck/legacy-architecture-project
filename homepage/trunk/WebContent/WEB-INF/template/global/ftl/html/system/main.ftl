@@ -780,7 +780,6 @@
 				<!-- Javascript -->
 				<script>
 
-					});
 				</script>
 				<!-- / Javascript -->
 
