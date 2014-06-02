@@ -728,23 +728,7 @@
 -->
 				<!-- Javascript -->
 				<script>
-					init.push(function () {
-						$("#stats-sparklines-3").pixelSparkline([275,490,397,487,339,403,402,312,300], {
-							type: 'line',
-							width: '100%',
-							height: '50px',
-							fillColor: '',
-							lineColor: '#fff',
-							lineWidth: 2,
-							spotColor: '#ffffff',
-							minSpotColor: '#ffffff',
-							maxSpotColor: '#ffffff',
-							highlightSpotColor: '#ffffff',
-							highlightLineColor: '#ffffff',
-							spotRadius: 4,
-							highlightLineColor: '#ffffff'
-						});
-					});
+
 				</script>
 				<!-- / Javascript -->
 
@@ -795,23 +779,7 @@
 -->
 				<!-- Javascript -->
 				<script>
-					init.push(function () {
-						$("#stats-sparklines-1").pixelSparkline(
-							[210,244,210,221,205,217,213,246,234,236,225,242,216,205,233,233,221,201,235,237,224,247,200,245,216,204,205,216,218,247], {
-							type: 'line',
-							width: '100%',
-							height: '80px',
-							lineColor: 'rgba(0,0,0,0)',
-							fillColor: 'rgba(0,0,0,.18)',
-							lineWidth: 0,
-							spotColor: '',
-							minSpotColor: '',
-							maxSpotColor: '',
-							highlightSpotColor: '',
-							highlightLineColor: '#ffffff',
-							spotRadius: 1.8,
-							chartRangeMin: 150
-						});
+
 					});
 				</script>
 				<!-- / Javascript -->
@@ -915,33 +883,7 @@
 -->
 				<!-- Javascript -->
 				<script>
-					init.push(function () {
-						var uploads_data = [
-							{ day: '2014-03-10', v: 20 },
-							{ day: '2014-03-11', v: 10 },
-							{ day: '2014-03-12', v: 15 },
-							{ day: '2014-03-13', v: 12 },
-							{ day: '2014-03-14', v: 5  },
-							{ day: '2014-03-15', v: 5  },
-							{ day: '2014-03-16', v: 20 }
-						];
-						Morris.Line({
-							element: 'hero-graph',
-							data: uploads_data,
-							xkey: 'day',
-							ykeys: ['v'],
-							labels: ['Value'],
-							lineColors: ['#fff'],
-							lineWidth: 2,
-							pointSize: 4,
-							gridLineColor: 'rgba(255,255,255,.5)',
-							resize: true,
-							gridTextColor: '#fff',
-							xLabels: "day",
-							xLabelFormat: function(d) {
-								return ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov', 'Dec'][d.getMonth()] + ' ' + d.getDate(); 
-							},
-						});
+
 					});
 				</script>
 				<!-- / Javascript -->
