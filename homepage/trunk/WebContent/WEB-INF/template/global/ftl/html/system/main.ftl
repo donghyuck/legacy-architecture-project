@@ -35,6 +35,18 @@
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
 
+  $('#menu-content-demo .close').click(function () {
+    var $p = $(this).parents('.menu-content');
+    $p.addClass('fadeOut');
+    setTimeout(function () {
+      $p.css({ height: $p.outerHeight(), overflow: 'hidden' }).animate({'padding-top': 0, height: $('#main-navbar').outerHeight()}, 500, function () {
+        $p.remove();
+      });
+    }, 300);
+    return false;
+  });
+  
+
 				var init = [];	
 	window.PixelAdmin.start(init);
 				
