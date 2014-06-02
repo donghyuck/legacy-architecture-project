@@ -19,14 +19,14 @@
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			/*
-			'${request.contextPath}/js/common/common.admin.init.js',*/
 			'${request.contextPath}/js/common/common.admin.js',			
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'
 			],        	  	   
 			complete: function() {      
+
+
 
 /*
 	init.push(function () {
@@ -69,7 +69,9 @@
 	</head>
 	<body class="theme-default main-menu-animated">
 <div id="main-wrapper">
-
+	
+	<#include "/html/common/common-homepage-menu.ftl" >	
+	
 	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
 		<!-- Main menu toggle -->
 		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
