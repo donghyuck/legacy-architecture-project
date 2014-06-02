@@ -52,8 +52,9 @@
 		});
 	});
 	*/
-
-	window.PixelAdmin.start();
+	var init = [];
+	
+	window.PixelAdmin.start(init);
 
 
 				
