@@ -17,8 +17,8 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/jqueryui/jquery-ui-1.9.2.custom.min.js',	
 			'${request.contextPath}/js/jquery.plugins/nicescroll/jquery.nicescroll.min.js',
-			'${request.contextPath}/js/common/common.admin.js',/**
-			'${request.contextPath}/js/common/common.admin.dashboard.js',*/
+			'${request.contextPath}/js/common/common.admin.js',
+			'${request.contextPath}/js/common/common.admin.dashboard.js',
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'
