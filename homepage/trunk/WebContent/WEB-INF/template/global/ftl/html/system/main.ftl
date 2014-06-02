@@ -28,7 +28,7 @@
 			],        	  	   
 			complete: function() {      
 
-
+/*
 	init.push(function () {
 		var setEqHeight = function () {
 			$('#content-wrapper .row').each(function () {
@@ -51,7 +51,8 @@
 			$(window).resize();
 		});
 	});
-	window.PixelAdmin.start(init);
+	*/
+	window.PixelAdmin.start();
 
 				
 				// END SCRIPT
