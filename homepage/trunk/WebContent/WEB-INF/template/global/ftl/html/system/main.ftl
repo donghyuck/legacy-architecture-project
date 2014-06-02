@@ -32,32 +32,8 @@
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
 
-/*
-	init.push(function () {
-		var setEqHeight = function () {
-			$('#content-wrapper .row').each(function () {
-				var $p = $(this).find('.stat-panel');
-				if (! $p.length) return;
-				$p.attr('style', '');
-				var h = $p.first().height(), max_h = h;
-				$p.each(function () {
-					h = $(this).height();
-					if (max_h < h) max_h = h;
-				});
-				$p.css('height', max_h);
-			});
-		};
-		$('#equal-height').click(function () {
-			if ($(this).hasClass('disabled')) return;
-			$(this).addClass('disabled');
-			setEqHeight();
-			$(window).on('pa.resize', setEqHeight);
-			$(window).resize();
-		});
-	});
-	*/
-	var init = [];	
-	window.PixelAdmin.start(init);
+				var init = [];	
+				window.PixelAdmin.start(init);
 				
 				// END SCRIPT
 			}
