@@ -52,7 +52,11 @@
 		});
 	});
 	*/
-	window.PixelAdmin.start();
+init.push(function () {
+		// Javascript code here
+	})
+	window.PixelAdmin.start(init);
+
 
 				
 				// END SCRIPT
