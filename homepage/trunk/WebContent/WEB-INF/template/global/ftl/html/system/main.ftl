@@ -70,7 +70,7 @@
 	<body class="theme-default main-menu-animated">
 <div id="main-wrapper">
 	
-	<#include "/html/common/common-homepage-menu.ftl" >	
+	<#include "/html/common/common-system-menu.ftl" >	
 	
 	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
 		<!-- Main menu toggle -->
