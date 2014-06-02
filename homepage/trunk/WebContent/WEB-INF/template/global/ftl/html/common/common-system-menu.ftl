@@ -23,14 +23,14 @@
 				<#if  item.components?has_content >
 				<li class="mm-dropdown">
 					<a href="javascript:void(0);"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">${item.title}</span></a>
-					<ul class="dropdown-menu">
+					<ul>
 						<#list item.components as sub_item >
 							<#if sub_item.components?has_content >
 							<li class="dropdown-submenu">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="mm-text">${sub_item.title}</span></a>
 								<ul class="dropdown-menu">
 								<#list sub_item.components as sub_sub_item >
-									<li><a href="${sub_item.page}">${ sub_sub_item.title }</a></li>
+									<li><a href="${sub_item.page}"> <span class="mm-text">${ sub_sub_item.title }</span></a></li>
 								</#list>
 								</ul>
 							</li>
