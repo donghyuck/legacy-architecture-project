@@ -16,6 +16,7 @@
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
+/*
 	body { 
 		padding: 0;
 		padding-top: 51px;
@@ -29,7 +30,7 @@
 	.k-grid table tr.k-state-selected{
 		background: #428bca;
 		color: #ffffff; 
-	}
+	}*/
 	
 </style>
 </head>
