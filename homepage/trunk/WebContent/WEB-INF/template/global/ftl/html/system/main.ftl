@@ -132,7 +132,7 @@
 								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
 									<div class="messages-list" id="main-navbar-messages">
 										<div class="message">
-											/*<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">*/
+											<!--/*<img src="assets/demo/avatars/2.jpg" alt="" class="message-avatar">*/-->
 											<a href="#" class="message-subject">Lorem ipsum dolor sit amet.</a>
 											<div class="message-description">
 												from <a href="#">Robert Jang</a>
