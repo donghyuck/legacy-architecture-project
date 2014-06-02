@@ -85,7 +85,7 @@
 			<div id="content">
 				<div id="content-header">
 					<h1>Tables</h1>
-					<div class="btn-group">
+					<div class="btn-group btn-group-xs">
 						<a class="btn btn-large" title="Manage Files"><i class="fa fa-file fa-xs"></i></a>
 						<a class="btn btn-large" title="Manage Users"><i class="fa fa-user"></i></a>
 						<a class="btn btn-large" title="Manage Comments"><i class="fa fa-comment"></i><span class="label label-danger">5</span></a>
