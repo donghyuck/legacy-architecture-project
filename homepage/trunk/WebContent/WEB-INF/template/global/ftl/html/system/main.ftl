@@ -9,7 +9,7 @@
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'css!${request.contextPath}/styles/common.extension/animate.css',
-			'css!${request.contextPath}/styles/common/common.admin.wigets.css',			
+			'css!${request.contextPath}/styles/common/common.admin.widgets.css',			
 			'css!${request.contextPath}/styles/common/common.admin.rtl.css',			
 			'css!${request.contextPath}/styles/common/common.admin.themes.css',			
 			
@@ -21,7 +21,9 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/jqueryui/jquery-ui-1.9.2.custom.min.js',	
 			'${request.contextPath}/js/jquery.plugins/nicescroll/jquery.nicescroll.min.js',
+			
 			'${request.contextPath}/js/common/common.admin.js',
+			
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'
