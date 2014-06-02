@@ -3,7 +3,7 @@
 			</#if>		
 			<#if action.webSite ?? >
 			<#assign webSite = webSite />				
-			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />
+			<#assign webSiteMenu = action.getWebSiteMenu("SYSTEM_MENU") />
 			<div class="header">
 				<div class="topbar">
 					<div class="container">
