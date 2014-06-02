@@ -20,8 +20,8 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			
-			'${request.contextPath}/js/common/common.admin.js',
-			
+			'${request.contextPath}/js/common/common.admin.init.js',
+			'${request.contextPath}/js/common/common.admin.js',			
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'
