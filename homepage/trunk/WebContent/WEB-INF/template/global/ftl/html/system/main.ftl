@@ -884,7 +884,7 @@
 				<!-- Javascript -->
 				<script>
 
-					});
+					
 				</script>
 				<!-- / Javascript -->
 
