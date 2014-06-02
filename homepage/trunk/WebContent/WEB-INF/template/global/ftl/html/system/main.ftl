@@ -82,8 +82,8 @@
 
 				<!-- Logo -->
 				<a href="index.html" class="navbar-brand">
-					<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>
-					PixelAdmin
+					<!--<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>-->
+					관리자 콘솔
 				</a>
 
 				<!-- Main navbar toggle -->
