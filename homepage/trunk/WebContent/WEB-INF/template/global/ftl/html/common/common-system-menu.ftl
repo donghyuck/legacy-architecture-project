@@ -7,7 +7,7 @@
 				<div class="menu-content top" id="menu-content-demo">
 				<div>
 				<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
-				<img src="assets/demo/avatars/1.jpg" alt="" class="">
+				<img src="/download/profile/${action.user.username}?width=100&height=150" alt="" class="">
 				<div class="btn-group">
 					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
 					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
