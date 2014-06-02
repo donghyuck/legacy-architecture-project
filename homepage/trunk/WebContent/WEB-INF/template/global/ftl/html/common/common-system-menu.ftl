@@ -1,25 +1,35 @@
-			<!-- START MENU -->	
-	<div id="main-menu" role="navigation">
-		<div id="main-menu-inner">
-			<div class="menu-content top" id="menu-content-demo">
-				<!-- Menu custom content demo
-					 CSS:        styles/pixel-admin-less/demo.less or styles/pixel-admin-scss/_demo.scss
-					 Javascript: html/assets/demo/demo.js
-				 -->
+		<!-- START MENU -->	
+		<#assign webSite = webSite />				
+		<#assign webSiteMenu = action.getWebSiteMenu("SYSTEM_MENU") />
+			
+		<div id="main-menu" role="navigation">
+			<div id="main-menu-inner">
+				<div class="menu-content top" id="menu-content-demo">
 				<div>
-					<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
-
-					<img src="assets/demo/avatars/1.jpg" alt="" class="">
-					<div class="btn-group">
-						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-						<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-						<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
-					</div>
-					<a href="#" class="close">&times;</a>
+				<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">John</span></div>
+				<img src="assets/demo/avatars/1.jpg" alt="" class="">
+				<div class="btn-group">
+					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+					<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
 				</div>
+				<a href="#" class="close">&times;</a>
 			</div>
-			<ul class="navigation">
+		</div>
+		
+			<ul class="navigation">		
+			<#list webSiteMenu.components as item >
+				<#if  item.components?has_content >
+				<li>
+					<a href="javascript:void(0);"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">${item.title}</span></a>
+				</li>
+				<#else>
+				<li>
+					<a href="${item.page}">${item.title}</a>
+				</li>
+				</#if>
+			</#list>
 				<li>
 					<a href="index.html"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">Dashboard</span></a>
 				</li>
