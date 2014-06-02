@@ -193,9 +193,9 @@
 								
 								<!-- Javascript -->
 								<script>
-									init.push(function () {
-										$('#main-navbar-messages').slimScroll({ height: 250 });
-									});
+									//init.push(function () {
+									//	$('#main-navbar-messages').slimScroll({ height: 250 });
+									//});
 								</script>
 								<!-- / Javascript -->
 
@@ -686,17 +686,17 @@
 -->
 				<!-- Javascript -->
 				<script>
-					init.push(function () {
-						$("#stats-sparklines-2").pixelSparkline(
-							[275,490,397,487,339,403,402,312,300,294,411,367,319,416,355,416,371,479,279,361,312,269,402,327,474,422,375,283,384,372], {
-							type: 'bar',
-							height: '50px',
-							width: '100%',
-							barSpacing: 2,
-							zeroAxis: false,
-							barColor: '#ffffff'
-						});
-					});
+					//init.push(function () {
+					//	$("#stats-sparklines-2").pixelSparkline(
+					//		[275,490,397,487,339,403,402,312,300,294,411,367,319,416,355,416,371,479,279,361,312,269,402,327,474,422,375,283,384,372], {
+					//		type: 'bar',
+					///		height: '50px',
+					//		width: '100%',
+					//		barSpacing: 2,
+					//		zeroAxis: false,
+					//		barColor: '#ffffff'
+					//	});
+				//	});
 				</script>
 				<!-- / Javascript -->
 
