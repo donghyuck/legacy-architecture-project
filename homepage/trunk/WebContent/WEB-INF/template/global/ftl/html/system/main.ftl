@@ -52,10 +52,8 @@
 		});
 	});
 	*/
-init.push(function () {
-		// Javascript code here
-	})
-	window.PixelAdmin.start(init);
+
+	window.PixelAdmin.start();
 
 
 				
