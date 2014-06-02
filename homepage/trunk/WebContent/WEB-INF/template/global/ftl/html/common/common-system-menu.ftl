@@ -21,12 +21,28 @@
 			<ul class="navigation">		
 			<#list webSiteMenu.components as item >
 				<#if  item.components?has_content >
-				<li>
+				<li class="mm-dropdown">
 					<a href="javascript:void(0);"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">${item.title}</span></a>
+					<ul class="dropdown-menu">
+						<#list item.components as sub_item >
+							<#if sub_item.components?has_content >
+							<li class="dropdown-submenu">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
+								<ul class="dropdown-menu">
+								<#list sub_item.components as sub_sub_item >
+									<li><a href="${sub_item.page}">${ sub_sub_item.title }</a></li>
+								</#list>
+								</ul>
+							</li>
+							<#else>								
+								<li><a href="${sub_item.page}"><span class="mm-text">${sub_item.title}</span></a></li>
+							</#if>								
+						</#list>
+					</ul>					
 				</li>
 				<#else>
 				<li>
-					<a href="${item.page}">${item.title}</a>
+					<a href="${item.page}"><span class="mm-text">${item.title}</span></a>
 				</li>
 				</#if>
 			</#list>
