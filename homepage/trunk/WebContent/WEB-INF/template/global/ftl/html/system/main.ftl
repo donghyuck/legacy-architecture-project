@@ -33,7 +33,7 @@
 				common.ui.landing();		
 
 				var init = [];	
-				window.PixelAdmin.start(init);
+	window.PixelAdmin.start(init);
 				
 				// END SCRIPT
 			}
@@ -155,7 +155,7 @@
 
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-									<img src="assets/demo/avatars/1.jpg">
+									<!--img src="assets/demo/avatars/1.jpg">-->
 									<span>John Doe</span>
 								</a>
 								<ul class="dropdown-menu">
