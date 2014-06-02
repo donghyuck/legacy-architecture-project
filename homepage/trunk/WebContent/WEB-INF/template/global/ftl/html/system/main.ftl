@@ -19,8 +19,6 @@
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			'${request.contextPath}/js/jqueryui/jquery-ui-1.9.2.custom.min.js',	
-			'${request.contextPath}/js/jquery.plugins/nicescroll/jquery.nicescroll.min.js',
 			
 			'${request.contextPath}/js/common/common.admin.js',
 			
@@ -29,6 +27,32 @@
 			'${request.contextPath}/js/common/common.ui.js'
 			],        	  	   
 			complete: function() {      
+
+
+	init.push(function () {
+		var setEqHeight = function () {
+			$('#content-wrapper .row').each(function () {
+				var $p = $(this).find('.stat-panel');
+				if (! $p.length) return;
+				$p.attr('style', '');
+				var h = $p.first().height(), max_h = h;
+				$p.each(function () {
+					h = $(this).height();
+					if (max_h < h) max_h = h;
+				});
+				$p.css('height', max_h);
+			});
+		};
+		$('#equal-height').click(function () {
+			if ($(this).hasClass('disabled')) return;
+			$(this).addClass('disabled');
+			setEqHeight();
+			$(window).on('pa.resize', setEqHeight);
+			$(window).resize();
+		});
+	});
+	window.PixelAdmin.start(init);
+
 				
 				// END SCRIPT
 			}
