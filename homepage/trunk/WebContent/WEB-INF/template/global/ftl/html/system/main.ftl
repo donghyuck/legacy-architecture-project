@@ -156,62 +156,15 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="fa fa-th"></i>
-								</span>
-								<h5>Static table</h5>
-							</div>
-							<div class="widget-content nopadding">
-														
-							</div>
-						</div>
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon with-checkbox">
-									<input type="checkbox" id="title-checkbox" name="title-checkbox" />
-								</span>
-								<h5>Static table with checkboxes</h5>
-							</div>
-							<div class="widget-content nopadding">
-													
-							</div>
-						</div>
-						
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="fa fa-th"></i>
-								</span>
-								<h5>Static table with checkboxes in box with padding</h5>
-								<span class="label label-info">Featured</span>
-							</div>
-							<div class="widget-content">
-													
-							</div>
-						</div>
-						
-						<div class="widget-box">
-							<div class="widget-title">
-								<span class="icon">
-									<i class="fa fa-th"></i>
-								</span>
-								<h5>Dynamic table</h5>
-							</div>
-							<div class="widget-content nopadding">
-								
-							</div>
-						</div>
 					</div>
 				</div>
-		</div>
-		<div class="row">
-			<div id="footer" class="col-xs-12">
-				2012 - 2013 &copy; Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
+			</div>
+			<div class="row">
+				<div id="footer" class="col-xs-12">
+					2012 - 2013 &copy; Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
+				</div>
 			</div>
 		</div>
-		</div>
-
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
 </html>
