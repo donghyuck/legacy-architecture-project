@@ -67,11 +67,6 @@
 	<body class="theme-default main-menu-animated">
 <div id="main-wrapper">
 
-
-<!-- 2. $MAIN_NAVIGATION ===========================================================================
-
-	Main navigation
--->
 	<div id="main-navbar" class="navbar navbar-inverse" role="navigation">
 		<!-- Main menu toggle -->
 		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
@@ -111,18 +106,6 @@
 					<div class="right clearfix">
 						<ul class="nav navbar-nav pull-right right-navbar-nav">
 
-<!-- 3. $NAVBAR_ICON_BUTTONS =======================================================================
-
-							Navbar Icon Buttons
-
-							NOTE: .nav-icon-btn triggers a dropdown menu on desktop screens only. On small screens .nav-icon-btn acts like a hyperlink.
-
-							Classes:
-							* 'nav-icon-btn-info'
-							* 'nav-icon-btn-success'
-							* 'nav-icon-btn-warning'
-							* 'nav-icon-btn-danger' 
--->
 							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
 								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
 									<span class="label">5</span>
@@ -131,14 +114,6 @@
 								</a>
 
 								<!-- NOTIFICATIONS -->
-								
-								<!-- Javascript -->
-								<script>
-								//	init.push(function () {
-								//		$('#main-navbar-notifications').slimScroll({ height: 250 });
-								//	});
-								</script>
-								<!-- / Javascript -->
 
 								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
 									<div class="notifications-list" id="main-navbar-notifications">
