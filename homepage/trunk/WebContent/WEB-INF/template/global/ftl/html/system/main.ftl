@@ -33,7 +33,7 @@
 		</style>
 	</head>
 	<body data-color="grey" class="flat">
-
+		<div id="wrapper">
 <div id="header">
 			<h1><a href="./index.html">Unicorn Admin</a></h1>		
 			<a id="menu-trigger" href="#"><i class="fa fa-align-justify"></i></a>
@@ -765,6 +765,7 @@
 			<div id="footer" class="col-xs-12">
 				2012 - 2013 &copy; Unicorn Admin. Brought to you by <a href="https://wrapbootstrap.com/user/diablo9983">diablo9983</a>
 			</div>
+		</div>
 		</div>
 
 		<#include "/html/common/common-system-templates.ftl" >			
