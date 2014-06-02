@@ -627,7 +627,7 @@ a:hover {
   width: 205px;
 }
 #sidebar > ul > li.active > a {
-  background: url("../img/menu-active.png") no-repeat scroll right center transparent !important;
+  background: url("/images/common/menu-active.png") no-repeat scroll right center transparent !important;
 }
 @media (max-width: 767px) {
   #sidebar {
@@ -965,7 +965,7 @@ a:hover {
 #breadcrumb a {
   padding: 8px 20px 8px 10px;
   display: inline-block;
-  background-image: url('../img/breadcrumb.png');
+  background-image: url('/images/common/breadcrumb.png');
   background-position: center right;
   background-repeat: no-repeat;
   font-size: 11px;
