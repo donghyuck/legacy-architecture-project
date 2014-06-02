@@ -156,7 +156,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="widget-box">
+						<div class="widget-box"></div>
 					</div>
 				</div>
 			</div>
