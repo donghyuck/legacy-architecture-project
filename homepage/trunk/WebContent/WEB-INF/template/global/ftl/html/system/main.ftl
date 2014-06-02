@@ -336,29 +336,6 @@
 <!-- /2. $END_MAIN_NAVIGATION -->
 
 
-<!-- 4. $MAIN_MENU =================================================================================
-
-		Main menu
-		
-		Notes:
-		* to make the menu item active, add a class 'active' to the <li>
-		  example: <li class="active">...</li>
-		* multilevel submenu example:
-			<li class="mm-dropdown">
-			  <a href="#"><span class="mm-text">Submenu item text 1</span></a>
-			  <ul>
-				<li>...</li>
-				<li class="mm-dropdown">
-				  <a href="#"><span class="mm-text">Submenu item text 2</span></a>
-				  <ul>
-					<li>...</li>
-					...
-				  </ul>
-				</li>
-				...
-			  </ul>
-			</li>
--->
 	<div id="main-menu" role="navigation">
 		<div id="main-menu-inner">
 			<div class="menu-content top" id="menu-content-demo">
