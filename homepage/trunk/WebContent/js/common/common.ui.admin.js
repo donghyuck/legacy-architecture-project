@@ -24,10 +24,7 @@
 		init : function (options){
 			options = options || {};			
 			var that = this;
-			that.options = options;
-			if( typeof that.options.pageSize === UNDEFINED ){
-				that.options.pageSize = 3;
-			}				
+			that.options = options;			
 		}
 	});		
 	
