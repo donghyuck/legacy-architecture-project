@@ -132,6 +132,78 @@
 					//clearInterval(timer);
 					}, 6000);		
 									
+				$.ajax({
+					type : 'POST',
+					url : '${request.contextPath}/secure/view-system-details.do?output=json',
+					success : function( response ){
+						var data = response ;	
+						kendo.bind($(".system-details"), data.systemInfo );			
+						kendo.bind($(".license-details"), data.licenseInfo );					
+					},
+					error:handleKendoAjaxError,
+					dataType : "json"
+				});	
+
+				$('#myTab a').click(function (e) {
+					e.preventDefault();
+					if(  $(this).attr('href') == '#setup-info' ){
+						if(!$("#setup-props-grid").data("kendoGrid")){
+							$('#setup-props-grid').kendoGrid({
+								     dataSource: {
+										transport: { 
+											read: { url:'${request.contextPath}/secure/view-system-setup-props.do?output=json', type:'post' }									
+										 },
+										 schema: {
+					                            data: "setupApplicationProperties",
+					                            model: Property
+					                     },
+					                     error:handleKendoAjaxError
+								     },
+								     columns: [
+								         { title: "속성", field: "name" },
+								         { title: "값",   field: "value" }
+								     ],
+									pageable: false,
+									resizable: true,
+									editable : false,
+									scrollable: true,
+									height: 200,	     
+									change: function(e) {}
+							});			
+							$("#setup-props-grid").attr('style','');	    				
+						}
+					}else if(  $(this).attr('href') == '#database-info' ){
+						if(! $("#database-info-grid").data("kendoGrid")){
+								$('#database-info-grid').kendoGrid({
+									dataSource: {
+										transport: { 
+											read: { url:'${request.contextPath}/secure/view-system-databases.do?output=json', type:'post' }
+										},						
+										batch: false, 
+										schema: {
+										data: "databaseInfos",
+											model: DatabaseInfo
+										},
+										error:handleKendoAjaxError
+									},
+									columns: [
+										{ title: "데이터베이스", field: "databaseVersion"},
+										{ title: "JDBC 드라이버", field: "driverName + ' ' + driverVersion" },
+										{ title: "ISOLATION", field: "isolationLevel", width:90 },
+									],
+									pageable: false,
+									resizable: true,
+									editable : false,
+									scrollable: true,
+									height: 200,
+									change: function(e) {
+									}
+								});									
+						}					
+					}
+					$(this).tab('show');
+				});													
+									
 				// END SCRIPT
 			}
 		}]);
