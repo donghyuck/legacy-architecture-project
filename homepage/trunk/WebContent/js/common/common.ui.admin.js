@@ -26,11 +26,9 @@
 			that._pixelAdmin = window.PixelAdmin;
 			that.refresh();
 		},		
-		_createCompanySelector : function(){
-			var item = {
-				selector: 'companyDropDownList',
-				name: 'companySelector',
-				dataTextField: 'displayName',
+		_createCompanySelector : function(){	
+			$('#targetCompany').kendoDropDownList(item
+				dataTextField: 'displayName',	
 				dataValueField: 'companyId',
 				dataSource: {
 					transport: {
@@ -44,9 +42,9 @@
 						data: "companies",
 						model : Company
 					}
-				}	
-			};			
-			$( item.selector ).extDropDownList(item);			
+				}					
+			);		
+			
 		},
 		refresh: function(){			
 			var that = this;
