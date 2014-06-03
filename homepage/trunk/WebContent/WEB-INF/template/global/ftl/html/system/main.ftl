@@ -36,7 +36,7 @@
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
 
-				common.ui.admin.setup();
+				//common.ui.admin.setup();
 
 				window.PixelAdmin.start([]);
 				
