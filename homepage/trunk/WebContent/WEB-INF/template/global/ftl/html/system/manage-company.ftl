@@ -65,6 +65,7 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading" style="padding:5px;">
+							<span class="panel-title">회사 목록</span>
 							<div class="panel-heading-controls">
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
