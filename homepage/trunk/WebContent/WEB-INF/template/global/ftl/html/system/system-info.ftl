@@ -288,18 +288,21 @@
 			<div class="row">			
 				<div class="col-lg-12">	
 				<div class="panel colourable">
-					<div class="panel-heading">
+					<div class="panel-heading" id="myTab">
 						<span class="panel-title">With tabs</span>
-						<ul class="nav nav-tabs nav-tabs-xs">
-							<li class="">
-								<a href="#" data-toggle="tab">Home</a>
-							</li>
-							<li class="">
-								<a href="#" data-toggle="tab">Profile</a>
-							</li>
+						<ul class="nav nav-tabs nav-tabs-xs" id="myTab">
 							<li class="active">
-								<a href="#" data-toggle="tab">More</a>
+								<a href="#license-info" data-toggle="tab"><i class="fa fa-certificate"></i> 라이센스 정보</a>
 							</li>
+							<li>
+								<a href="#setup-info" data-toggle="tab"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a>
+							</li>
+							<li>
+								<a href="#system-info" data-toggle="tab"><i class="fa fa-info"></i> 시스템 환경 정보</a>
+							</li>
+							<li>
+								<a href="#database-info" data-toggle="tab"><i class="fa fa-hdd-o"></i> 데이터베이스 정보</a>
+							</li>							
 						</ul> <!-- / .nav -->
 					</div> <!-- / .panel-heading -->
 					<div class="panel-body">
@@ -312,7 +315,7 @@
 			<!-- system info start -->
 			<div class="row">			
 				<div class="col-lg-12">				
-					<ul class="nav nav-tabs" id="myTab" style="min-width:700px;">
+					<ul class="nav nav-tabs" id="" style="min-width:700px;">
 						<li class="active"><a href="#license-info"><i class="fa fa-certificate"></i> 라이센스 정보</a></li>
 						<li><a href="#setup-info"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a></li>
 						<li><a href="#system-info"><i class="fa fa-info"></i> 시스템 환경 정보</a></li>
