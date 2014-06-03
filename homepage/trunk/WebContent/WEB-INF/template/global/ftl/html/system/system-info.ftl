@@ -271,7 +271,7 @@
 							</div> <!-- /.stat-row -->
 							<div class="stat-row">
 								<!-- Bordered, without top border, without horizontal padding -->
-								<div class="stat-cell bordered no-border-t no-padding-hr">								
+								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">								
 									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>
 								</div>
 							<table class="table table-striped memory-details" style="margin-bottom: 0;">
