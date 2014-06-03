@@ -21,7 +21,7 @@
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			'${request.contextPath}/js/common/common.admin.js'
+			'${request.contextPath}/js/common/common.admin.js',
 			/*'${request.contextPath}/js/common.plugins/fastclick.js',   */
 			
 			'${request.contextPath}/js/common/common.models.js',       	    
@@ -38,7 +38,7 @@
 
 				common.ui.admin.setup();
 
-				window.PixelAdmin.start();
+				window.PixelAdmin.start([]);
 				
 				// END SCRIPT
 			}
