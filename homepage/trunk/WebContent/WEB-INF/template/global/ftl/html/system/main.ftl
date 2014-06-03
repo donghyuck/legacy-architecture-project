@@ -62,11 +62,10 @@
 				<div class="note note-info padding-xs-vr">
 				사용자관리..
 				</div> <!-- / .note -->
+				
+				
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
-			
-			
-			
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<#include "/html/common/common-system-templates.ftl" >			
