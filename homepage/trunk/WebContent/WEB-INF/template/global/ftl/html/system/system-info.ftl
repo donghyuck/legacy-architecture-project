@@ -220,11 +220,7 @@
 				<div class="page-header">
 					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1") />
 					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i>${selectedMenu.description}<i class="fa fa-quote-right"></i></small></h1>
-				</div><!-- / .page-header -->
-				<div class="note note-info padding-xs-vr">
-				사용자관리..
-				</div> <!-- / .note -->
-				
+				</div><!-- / .page-header -->				
 				<div class="row">				
 					<div class="col-xs-3">
 						<div class="stat-panel text-center">
@@ -429,8 +425,6 @@
 					</div>
 				</div>	
 			</div> <!-- / #content-wrapper -->
-			<div id="main-menu-bg">
-			</div>
 		</div> <!-- / #main-wrapper -->
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
