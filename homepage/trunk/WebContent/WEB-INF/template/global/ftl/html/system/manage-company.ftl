@@ -301,8 +301,8 @@
 							</div>
 							</div>
 							<div class="panel-body" style="padding:5px;">
-								<div class="row marginless paddingless">
-									<div class="col-sm-12 body-group marginless paddingless">
+								<div class="row paddingless">
+									<div class="col-sm-12 body-group">
 										<div id="company-grid"></div>
 									</div>
 									<div id="company-details" class="col-sm-12 body-group" style="display:none; padding-top:5px;"></div>
