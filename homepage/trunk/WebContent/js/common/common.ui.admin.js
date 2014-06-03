@@ -27,7 +27,7 @@
 			that.refresh();
 		},		
 		_createCompanySelector : function(){	
-			$('#targetCompany').kendoDropDownList(item
+			$('#targetCompany').kendoDropDownList(
 				dataTextField: 'displayName',	
 				dataValueField: 'companyId',
 				dataSource: {
