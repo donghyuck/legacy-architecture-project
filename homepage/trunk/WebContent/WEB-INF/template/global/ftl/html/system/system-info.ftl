@@ -274,7 +274,7 @@
 								<div class="stat-cell bordered no-border-t no-padding-hr">								
 									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>
 								</div>
-							<table class="table table-striped memory-details">
+							<table class="table table-striped memory-details" style="margin-bottom: 0;">
 							 	<thead>
 							 		<tr>
             							<th>Total Memory</th>
