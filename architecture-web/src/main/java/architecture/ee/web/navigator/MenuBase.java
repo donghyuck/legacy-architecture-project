@@ -36,6 +36,8 @@ public abstract class MenuBase implements Component {
 
     /** Holds value of property height. */
     protected String height;
+    
+    protected String icon;
 
     /** Holds value of property image. */
     protected String image;
@@ -115,6 +117,8 @@ public abstract class MenuBase implements Component {
         return align;
     }
     
+    
+    
     /**
      * Sets the value for align.
      * @param align New value of property align.
@@ -123,7 +127,23 @@ public abstract class MenuBase implements Component {
         this.align = align;
     }
     
-    /** Setter for property altImage.
+    
+    
+    /**
+	 * @return icon
+	 */
+	public String getIcon() {
+		return icon;
+	}
+
+	/**
+	 * @param icon 설정할 icon
+	 */
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+
+	/** Setter for property altImage.
      * @param altImage New value of property altImage.
      */
     public void setAltImage(String altImage) {

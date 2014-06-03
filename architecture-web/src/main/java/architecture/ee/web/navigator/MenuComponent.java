@@ -139,6 +139,11 @@ public class MenuComponent extends MenuBase implements Serializable, Component {
         return depth;
     }
 
+    
+    public boolean isSetIcon(){
+    	return StringUtils.isNotBlank(icon);
+    }
+    
     /**
      * Returns the last.
      *
