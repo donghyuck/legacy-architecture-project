@@ -3,9 +3,6 @@
 <head>
 		<title>관리자 메인</title>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.admin.style.css" />
-		<script src="${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js"></script>
-		<script src="${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js"></script>
-		<script src="${request.contextPath}/js/common/common.admin.js"></script>
 		<script type="text/javascript">
 		<!--
 		
@@ -17,19 +14,18 @@
 			'css!${request.contextPath}/styles/common.extension/animate.css',
 			'css!${request.contextPath}/styles/common/common.admin.widgets.css',			
 			'css!${request.contextPath}/styles/common/common.admin.rtl.css',			
-			'css!${request.contextPath}/styles/common/common.admin.themes.css',			
-		/*
-	'${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js',*/
-					/*'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',*/
+			'css!${request.contextPath}/styles/common/common.admin.themes.css',
+			'${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js',*/
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
-	/*		'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			'${request.contextPath}/js/common/common.admin.js',		*/	
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
-			'${request.contextPath}/js/common/common.ui.js'
+			'${request.contextPath}/js/common/common.ui.js',
+			'${request.contextPath}/js/common/common.ui.admin.js'
 			],
 			complete: function() {      
 
@@ -38,7 +34,7 @@
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
 
-
+				common.ui.admin.setup();
 
   $('#menu-content-demo .close').click(function () {
     var $p = $(this).parents('.menu-content');
