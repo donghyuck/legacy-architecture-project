@@ -27,6 +27,12 @@ body,html {
 	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
 }
 
+/** kendoui ext
+-------------------------------------------------*/
+form.navbar-form .k-widget.k-dropdown {
+	margin-top: 8px;	
+}
+
 .ie8 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
 }
