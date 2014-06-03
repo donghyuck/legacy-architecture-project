@@ -294,7 +294,29 @@
 				</div>
 									
 			</div><!-- memory status end -->
-
+			<div class="row">			
+				<div class="col-lg-12">	
+				<div class="panel colourable">
+					<div class="panel-heading">
+						<span class="panel-title">With tabs</span>
+						<ul class="nav nav-tabs nav-tabs-xs">
+							<li class="">
+								<a href="#" data-toggle="tab">Home</a>
+							</li>
+							<li class="">
+								<a href="#" data-toggle="tab">Profile</a>
+							</li>
+							<li class="active">
+								<a href="#" data-toggle="tab">More</a>
+							</li>
+						</ul> <!-- / .nav -->
+					</div> <!-- / .panel-heading -->
+					<div class="panel-body">
+						Panel body content
+					</div>
+				</div>
+				</div>
+			</div>	
 
 			<!-- system info start -->
 			<div class="row">			
