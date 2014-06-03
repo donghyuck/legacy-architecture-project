@@ -37,11 +37,11 @@
 				var targetCompany = new Company();	
 				common.ui.admin.setup({
 					authenticate : function(e){
-						currentUser.copy(e.token);
+						e.token.copy(currentUser);
 						alert(kendo.stringify(currentUser));
 					},
 					companyChanged: function(item){
-						targetCompany.copy(item);
+						item.copy(targetCompany);
 						alert(kendo.stringify(targetCompany));
 					}
 				});		
