@@ -392,7 +392,7 @@
 
 	  PixelAdminApp.Constructor = PixelAdminApp;
 
-	  //window.PixelAdmin = new PixelAdminApp;
+	  window.PixelAdmin = new PixelAdminApp;
 
 	}).call(this);
 	;
@@ -16610,7 +16610,7 @@
 				return false;
 			});
 			
-			that._pixelAdmin = new PixelAdminApp;
+			that._pixelAdmin = window.PixelAdmin;
 			that._pixelAdmin.start();
 		}
 	});		
