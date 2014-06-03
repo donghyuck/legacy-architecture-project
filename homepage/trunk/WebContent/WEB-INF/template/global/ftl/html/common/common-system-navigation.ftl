@@ -93,9 +93,7 @@
 										<span>John Doe</span>
 									</a>
 									<ul class="dropdown-menu">
-										<li><a href="#"><span class="label label-warning pull-right">New</span>Profile</a></li>
-										<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
-										<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+										<li><a href="#"><span class="label label-warning pull-right">New</span> 프로파일</a></li>
 										<li class="divider"></li>
 										<li><a href="/logout"><i class="dropdown-icon fa fa-power-off"></i> 로그아웃</a></li>
 									</ul>
