@@ -50,7 +50,6 @@
 		</script> 		 
 		<style>
 		
-				
 		</style>
 	</head>
 	<body class="theme-default main-menu-animated">
@@ -64,7 +63,11 @@
 				사용자관리..
 				</div> <!-- / .note -->
 			</div> <!-- / #content-wrapper -->
-			<div id="main-menu-bg"></div>
+			<div id="main-menu-bg">
+			
+			
+			
+			</div>
 		</div> <!-- / #main-wrapper -->
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
