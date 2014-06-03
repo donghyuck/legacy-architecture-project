@@ -1,7 +1,5 @@
 		<!-- START MENU -->	
-		<#assign webSite = webSite />				
-		<#assign webSiteMenu = WebSiteUtils.getDefaultMenu("SYSTEM_MENU") />
-			
+		<#assign menu = WebSiteUtils.getMenuComponent("SYSTEM_MENU") />			
 		<div id="main-menu" role="navigation">
 			<div id="main-menu-inner">
 				<div class="menu-content menu-content-profile top">
@@ -19,7 +17,7 @@
 				</div>
 		
 			<ul class="navigation">		
-			<#list webSiteMenu.components as item >
+			<#list menu.components as item >
 				<#if  item.components?has_content >
 				<li class="mm-dropdown">
 					<a href="javascript:void(0);"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">${item.title}</span></a>
