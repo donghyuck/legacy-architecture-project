@@ -320,12 +320,15 @@
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">			
 			<div class="panel colourable" >
-					<div class="panel-body">
-					<ul id="myTab" class="nav nav-tabs">
+				<div class="panel-heading" >
+					<ul id="myTab" class="nav nav-tabs nav-tabs-xs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
 						<li><a href="\\#users" data-toggle="tab">사용자</a></li>
-					</ul>			
+					</ul>						
+				</div>
+					<div class="panel-body">
+		
 					<div class="tab-content">
 						<div class="tab-pane active" id="props">
 							<div class="blank-top-5"></div>
