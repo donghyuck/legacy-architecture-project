@@ -16593,7 +16593,7 @@
 			
 			options.localStorageSupported = typeof window.Storage !== "undefined" ? true : false;
 			
-			that._pixelAdmin = new PixelAdminApp;
+			that._pixelAdmin = window.PixelAdmin;
 			
 			that.refresh();
 		},		
@@ -16610,7 +16610,6 @@
 				return false;
 			});
 			
-			that._pixelAdmin = window.PixelAdmin;
 			that._pixelAdmin.start();
 		}
 	});		
