@@ -348,8 +348,7 @@
 							</div>		
 						</div>
 						<div class="tab-pane" id="system-info">
-									<div class="big-box">
-										<div class="panel">
+							<div class="panel-body">
 										<table class="table table-striped .table-hover system-details">
 											<tbody>
 												<tr>
@@ -418,8 +417,7 @@
 												</tr>											
 											</tbody>
 										</table>	
-										</div>
-									</div>	
+							</div>	
 						</div>
 						<div class="tab-pane" id="database-info">
 									<div class="big-box">
