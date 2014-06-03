@@ -38,11 +38,9 @@
 				common.ui.admin.setup({
 					authenticate : function(e){
 						e.token.copy(currentUser);
-						alert(kendo.stringify(currentUser));
 					},
 					companyChanged: function(item){
 						item.copy(targetCompany);
-						alert(kendo.stringify(targetCompany));
 					}
 				});		
 				// END SCRIPT
