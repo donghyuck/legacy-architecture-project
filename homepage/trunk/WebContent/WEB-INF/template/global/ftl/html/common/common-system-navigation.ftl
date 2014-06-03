@@ -89,7 +89,6 @@
 								</li>
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-										<i class="fa fa-user"></i>
 										<img src="/download/profile/system?width=100&height=150" alt/>
 										<span>${action.user.name}</span>
 									</a>
