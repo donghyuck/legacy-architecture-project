@@ -16611,7 +16611,7 @@
 			});
 			
 			$('html').addClass('pxajs');
-			that._pixelAdmin.init();
+			that._pixelAdmin.init;
 			$(window).trigger("pa.loaded");
 			$(window).resize();
 		
