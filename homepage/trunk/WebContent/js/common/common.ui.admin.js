@@ -34,7 +34,7 @@
 				visible : false,
 				authenticate : function( e ){
 					if( isFunction( that.options.authenticate ) )
-						authenticate(e);
+						that.options.authenticate(e);
 				}
 			});
 		},
