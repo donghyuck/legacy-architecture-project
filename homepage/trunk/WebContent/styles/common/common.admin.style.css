@@ -37,6 +37,9 @@ form.navbar-form .k-widget.k-dropdown {
 	padding : 0 0 0 0;	
 }
 
+.marginless{
+	margin : 0 0 0 0 ;	
+}
 .panel .tab-content {
 	padding : 0 0 0 0;		
 }
