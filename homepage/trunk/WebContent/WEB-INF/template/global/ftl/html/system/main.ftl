@@ -77,30 +77,23 @@
 							</ul>
 						</li>
 					</ul> <!-- / .navbar-nav -->
-
 					<div class="right clearfix">
 						<ul class="nav navbar-nav pull-right right-navbar-nav">
-
 							<li class="nav-icon-btn nav-icon-btn-danger dropdown">
 								<a href="#notifications" class="dropdown-toggle" data-toggle="dropdown">
 									<span class="label">5</span>
 									<i class="nav-icon fa fa-bullhorn"></i>
 									<span class="small-screen-text">Notifications</span>
 								</a>
-
 								<!-- NOTIFICATIONS -->
-
 								<div class="dropdown-menu widget-notifications no-padding" style="width: 300px">
 									<div class="notifications-list" id="main-navbar-notifications">
-
 										<div class="notification">
 											<div class="notification-title text-danger">SYSTEM</div>
 											<div class="notification-description"><strong>Error 500</strong>: Syntax error in index.php at line <strong>461</strong>.</div>
 											<div class="notification-ago">12h ago</div>
 											<div class="notification-icon fa fa-hdd-o bg-danger"></div>
 										</div> <!-- / .notification -->
-
-
 									</div> <!-- / .notifications-list -->
 									<a href="#" class="notifications-link">MORE NOTIFICATIONS</a>
 								</div> <!-- / .dropdown-menu -->
@@ -111,9 +104,7 @@
 									<i class="nav-icon fa fa-envelope"></i>
 									<span class="small-screen-text">Income messages</span>
 								</a>
-
-								<!-- MESSAGES -->
-								
+								<!-- MESSAGES -->								
 								<!-- Javascript -->
 								<script>
 									//init.push(function () {
@@ -121,7 +112,6 @@
 									//});
 								</script>
 								<!-- / Javascript -->
-
 								<div class="dropdown-menu widget-messages-alt no-padding" style="width: 300px;">
 									<div class="messages-list" id="main-navbar-messages">
 										<div class="message">
@@ -133,22 +123,19 @@
 												2h ago
 											</div>
 										</div> <!-- / .message -->
-
 									</div> <!-- / .messages-list -->
 									<a href="#" class="messages-link">MORE MESSAGES</a>
 								</div> <!-- / .dropdown-menu -->
 							</li>
-<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
-
+							<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
 							<li>
 								<form class="navbar-form pull-left">
 									<input type="text" class="form-control" placeholder="Search">
 								</form>
 							</li>
-
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
-									<!--img src="assets/demo/avatars/1.jpg">-->
+									<i class="fa fa-user"></i>
 									<span>John Doe</span>
 								</a>
 								<ul class="dropdown-menu">
