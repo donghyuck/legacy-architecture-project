@@ -37,6 +37,10 @@ form.navbar-form .k-widget.k-dropdown {
 	padding : 0 0 0 0;	
 }
 
+.panel .tab-content {
+	padding : 0 0 0 0;		
+}
+
 
 .ie8 body {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
