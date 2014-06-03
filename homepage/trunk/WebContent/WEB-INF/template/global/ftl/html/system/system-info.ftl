@@ -289,7 +289,7 @@
 				<div class="col-lg-12">	
 				<div class="panel colourable">
 					<div class="panel-heading" id="myTab">
-						<span class="panel-title">With tabs</span>
+						<span class="panel-title"><i class="fa fa-hdd-o"></i></span>
 						<ul class="nav nav-tabs nav-tabs-xs" id="myTab">
 							<li class="active">
 								<a href="#license-info" data-toggle="tab">라이센스 정보</a>
@@ -343,11 +343,9 @@
 								</div>			
 						</div>
 						<div class="tab-pane" id="setup-info">
-									<div class="big-box">
-										<div class="panel">
-											<div id="setup-props-grid" ></div>
-										</div>
-									</div>		
+							<div class="panel-body">
+								<div id="setup-props-grid" ></div>
+							</div>		
 						</div>
 						<div class="tab-pane" id="system-info">
 									<div class="big-box">
