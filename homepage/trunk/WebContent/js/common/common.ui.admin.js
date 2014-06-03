@@ -16610,7 +16610,11 @@
 				return false;
 			});
 			
-			that._pixelAdmin.start([]);
+			$('html').addClass('pxajs');
+			that._pixelAdmin.init();
+			$(window).trigger("pa.loaded");
+			$(window).resize();
+		
 		}
 	});		
 	
