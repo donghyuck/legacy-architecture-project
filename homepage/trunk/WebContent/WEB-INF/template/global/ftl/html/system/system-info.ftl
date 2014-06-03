@@ -305,7 +305,7 @@
 							</li>							
 						</ul> <!-- / .nav -->
 					</div> <!-- / .panel-heading -->
-					<div class="panel-body">
+					<div class="panel-body"></div>
 
 
 					<div class="tab-content">
@@ -437,9 +437,7 @@
 								</div>
 						</div>		
 					</div><!-- tab contents end -->
-					
 
-					</div>
 				</div>
 				</div>
 			</div>	
