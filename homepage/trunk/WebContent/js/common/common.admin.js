@@ -192,6 +192,8 @@
     if (settings == null) {
       settings = {};
     }
+    
+    /*
     window.onload = (function(_this) {
       return function() {
         var initilizer, _i, _len, _ref;
@@ -215,6 +217,28 @@
         return $(window).resize();
       };
     })(this);
+    
+    */
+				var initilizer, _i, _len, _ref;
+        $('html').addClass('pxajs');
+        if (init.length > 0) {
+          $.merge(_this.init, init);
+        }
+        _this.settings = $.extend(true, {}, SETTINGS_DEFAULTS, settings || {});
+        _this.settings.is_mobile = /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase());
+        if (_this.settings.is_mobile) {
+          if (FastClick) {
+            FastClick.attach(document.body);
+          }
+        }
+        _ref = _this.init;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          initilizer = _ref[_i];
+          $.proxy(initilizer, _this)();
+        }
+        $(window).trigger("pa.loaded");
+        $(window).resize();
+      
     return this;
   };
 
