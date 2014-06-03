@@ -16610,7 +16610,7 @@
 				return false;
 			});
 			
-			that._pixelAdmin.start();
+			that._pixelAdmin.start([]);
 		}
 	});		
 	
