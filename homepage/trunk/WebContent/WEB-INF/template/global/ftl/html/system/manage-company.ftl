@@ -65,6 +65,7 @@
 					<div class="col-sm-12">
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading" style="padding:5px;">
+							<div class="panel-heading-controls">
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
 									<button type="button" class="btn btn-info btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
@@ -74,6 +75,7 @@
 									<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
 								</div>
 								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>					
+							</div>
 							</div>
 							<div class="panel-body" style="padding:5px;">
 								<div class="row marginless paddingless">
