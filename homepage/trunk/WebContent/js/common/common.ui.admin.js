@@ -26,6 +26,18 @@
 			options = options || {};			
 			var that = this;
 			that.options = options;			
+		},
+		refresh: function(){			
+			$('.menu-content-profile .close').click(function () {
+				var $p = $(this).parents('.menu-content');
+				$p.addClass('fadeOut');
+				setTimeout(function () {
+					$p.css({ height: $p.outerHeight(), overflow: 'hidden' }).animate({'padding-top': 0, height: $('#main-navbar').outerHeight()}, 500, function () {
+						$p.remove();
+					});
+				}, 300);
+				return false;
+			});
 		}
 	});		
 	
@@ -34,6 +46,7 @@
 })(jQuery);
 
 
-common.ui.admin.setup = function (){
-	return new common.ui.admin.Setup();	
+common.ui.admin.setup = function (options){
+	options = options || {};			
+	return new common.ui.admin.Setup(options);	
 }
