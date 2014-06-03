@@ -90,7 +90,7 @@
 								<li class="dropdown">
 									<a href="#" class="dropdown-toggle user-menu" data-toggle="dropdown">
 										<i class="fa fa-user"></i>
-										<span>John Doe</span>
+										<span>${action.user.name}</span>
 									</a>
 									<ul class="dropdown-menu">
 										<li><a href="#"><span class="label label-warning pull-right">New</span> 프로파일</a></li>
