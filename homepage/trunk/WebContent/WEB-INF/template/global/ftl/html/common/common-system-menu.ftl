@@ -4,19 +4,19 @@
 			
 		<div id="main-menu" role="navigation">
 			<div id="main-menu-inner">
-				<div class="menu-content top" id="menu-content-demo">
-				<div>
-				<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">${action.user.name}</span></div>
-				<img src="/download/profile/${action.user.username}?width=100&height=150" alt="" class="">
-				<div class="btn-group">
-					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
-					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
-					<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
-					<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+				<div class="menu-content menu-content-profile top">
+					<div>
+						<div class="text-bg"><span class="text-slim">Welcome,</span> <span class="text-semibold">${action.user.name}</span></div>
+						<img src="/download/profile/${action.user.username}?width=100&height=150" alt="" class="">
+						<div class="btn-group">
+							<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-envelope"></i></a>
+							<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
+							<a href="#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
+							<a href="#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
+						</div>
+						<a href="#" class="close">&times;</a>
+					</div>
 				</div>
-				<a href="#" class="close">&times;</a>
-			</div>
-		</div>
 		
 			<ul class="navigation">		
 			<#list webSiteMenu.components as item >
