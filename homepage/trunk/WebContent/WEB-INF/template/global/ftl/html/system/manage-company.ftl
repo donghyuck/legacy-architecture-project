@@ -305,9 +305,7 @@
 									<div class="col-sm-12 body-group marginless paddingless">
 										<div id="company-grid"></div>
 									</div>
-									<div id="company-details" class="col-sm-12 body-group marginless paddingless" style="display:none; padding-top:5px;">
-									
-									</div>
+									<div id="company-details" class="col-sm-12 body-group" style="display:none; padding-top:5px;"></div>
 								</div>
 							</div>
 						</div>
