@@ -20,7 +20,7 @@
 			<#list menu.components as item >
 				<#if  item.components?has_content >
 				<li class="mm-dropdown">
-					<a href="javascript:void(0);"><i class="menu-icon fa fa-dashboard"></i><span class="mm-text">${item.title}</span></a>
+					<a href="javascript:void(0);"><#if item.isSetIcon()><i class="menu-icon fa ${item.icon}"></i> </#if><span class="mm-text">${item.title}</span></a>
 					<ul>
 						<#list item.components as sub_item >
 							<#if sub_item.components?has_content >
