@@ -84,7 +84,8 @@
 								<!-- /3. $END_NAVBAR_ICON_BUTTONS -->
 								<li>
 									<form class="navbar-form pull-left">
-										<input type="text" class="form-control" placeholder="Search">
+										<!--<input type="text" class="form-control" placeholder="Search">-->
+										<div id="companyDropDownList"></div>
 									</form>
 								</li>
 								<li class="dropdown">
