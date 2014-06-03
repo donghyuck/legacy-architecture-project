@@ -4,8 +4,7 @@
 		<title>관리자 메인</title>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.admin.style.css" />
 		<script type="text/javascript">
-		<!--
-		
+		<!--		
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
@@ -28,17 +27,13 @@
 			'${request.contextPath}/js/common/common.ui.js',
 			'${request.contextPath}/js/common/common.ui.admin.js'
 			],
-			complete: function() {      
-
+			complete: function() {
 				// 1-1.  한글 지원을 위한 로케일 설정
 				common.api.culture();
 				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-				
+				common.ui.landing();				
 				// 1-3.  관리자 메뉴 로딩
-				common.ui.admin.setup();
-
-				
+				common.ui.admin.setup();				
 				// END SCRIPT
 			}
 		}]);
@@ -49,34 +44,28 @@
 		</style>
 	</head>
 	<body class="theme-default main-menu-animated">
-<div id="main-wrapper">
-	
-
-	
-	<div id="main-navbar" class="navbar navbar-inverse theme-default" role="navigation">
-		<!-- Main menu toggle -->
-		<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
-		
-		<div class="navbar-inner">
-			<!-- Main navbar header -->
-			<div class="navbar-header">
-
-				<!-- Logo -->
-				<a href="index.html" class="navbar-brand">
-					<!--<div><img alt="Pixel Admin" src="assets/images/pixel-admin/main-navbar-logo.png"></div>-->
+		<div id="main-wrapper">
+			<div id="main-navbar" class="navbar navbar-inverse theme-default" role="navigation">
+			<!-- Main menu toggle -->
+			<button type="button" id="main-menu-toggle"><i class="navbar-icon fa fa-bars icon"></i><span class="hide-menu-text">HIDE MENU</span></button>
+			<div class="navbar-inner">
+				<!-- Main navbar header -->
+				<div class="navbar-header">
+					<!-- Logo -->
+					<a href="${request.contextPath}/secure/main.do" class="navbar-brand">
+					<!--<div><img alt="Pixel Admin" src="로고 이미지"></div>-->
 					관리자 콘솔
 				</a>
-
 				<!-- Main navbar toggle -->
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse"><i class="navbar-icon fa fa-bars"></i></button>
-
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar-collapse">
+					<i class="navbar-icon fa fa-bars"></i>
+				</button>
 			</div> <!-- / .navbar-header -->
-
 			<div id="main-navbar-collapse" class="collapse navbar-collapse main-navbar-collapse">
 				<div>
 					<ul class="nav navbar-nav">
 						<li>
-							<a href="#">Home</a>
+							<a href="#">사용자 홈</a>
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown</a>
