@@ -1,68 +1,3 @@
-/**
- * COMMON ADMIN UI DEFINE
- */
-/**
- *  extNavbar widget
- *  
- *  top navigation bar
- */
-(function($, undefined) {
-	var common = window.common = window.common || {};
-	common.ui =  common.ui || {},
-	common.ui.admin = common.ui.admin || {};
-	
-	var kendo = window.kendo,
-	Widget = kendo.ui.Widget,
-	Class = kendo.Class,
-	stringify = kendo.stringify,
-	isFunction = kendo.isFunction,
-	UNDEFINED = 'undefined',
-	POST = 'POST',
-	OBJECT_TYPE = 30 ,
-	JSON = 'json';
-		
-	common.ui.admin.Setup = kendo.Class.extend({		
-		init : function (options){
-			options = options || {};			
-			var that = this;
-			that.options = options;
-			
-			options.localStorageSupported = typeof window.Storage !== "undefined" ? true : false;
-			
-			that._pixelAdmin = new PixelAdminApp;
-			
-			that.refresh();
-		},		
-		refresh: function(){			
-			var that = this;
-			$('.menu-content-profile .close').click(function () {
-				var $p = $(this).parents('.menu-content');
-				$p.addClass('fadeOut');
-				setTimeout(function () {
-					$p.css({ height: $p.outerHeight(), overflow: 'hidden' }).animate({'padding-top': 0, height: $('#main-navbar').outerHeight()}, 500, function () {
-						$p.remove();
-					});
-				}, 300);
-				return false;
-			});
-			
-			that._pixelAdmin = new PixelAdminApp;
-			that._pixelAdmin.start();
-		}
-	});		
-	
-	
-	
-	
-})(jQuery);
-
-
-common.ui.admin.setup = function (options){
-	options = options || {};			
-	return new common.ui.admin.Setup(options);	
-}
-
-
 (function() {
 	  if (!String.prototype.endsWith) {
 
@@ -16630,4 +16565,64 @@ common.ui.admin.setup = function (options){
 	}(window.jQuery || window.$)); // jQuery or jQuery-like library, such as Zepto
 	;
 
+	
+	
+/**
+ * COMMON ADMIN UI DEFINE
+ */
+(function($, undefined) {
+	var common = window.common = window.common || {};
+	common.ui =  common.ui || {},
+	common.ui.admin = common.ui.admin || {};
+	
+	var kendo = window.kendo,
+	Widget = kendo.ui.Widget,
+	Class = kendo.Class,
+	stringify = kendo.stringify,
+	isFunction = kendo.isFunction,
+	UNDEFINED = 'undefined',
+	POST = 'POST',
+	OBJECT_TYPE = 30 ,
+	JSON = 'json';
+		
+	common.ui.admin.Setup = kendo.Class.extend({		
+		init : function (options){
+			options = options || {};			
+			var that = this;
+			that.options = options;
+			
+			options.localStorageSupported = typeof window.Storage !== "undefined" ? true : false;
+			
+			that._pixelAdmin = new PixelAdminApp;
+			
+			that.refresh();
+		},		
+		refresh: function(){			
+			var that = this;
+			$('.menu-content-profile .close').click(function () {
+				var $p = $(this).parents('.menu-content');
+				$p.addClass('fadeOut');
+				setTimeout(function () {
+					$p.css({ height: $p.outerHeight(), overflow: 'hidden' }).animate({'padding-top': 0, height: $('#main-navbar').outerHeight()}, 500, function () {
+						$p.remove();
+					});
+				}, 300);
+				return false;
+			});
+			
+			that._pixelAdmin = new PixelAdminApp;
+			that._pixelAdmin.start();
+		}
+	});		
+	
+	
+	
+	
+})(jQuery);
+
+
+common.ui.admin.setup = function (options){
+	options = options || {};			
+	return new common.ui.admin.Setup(options);	
+}
 	
