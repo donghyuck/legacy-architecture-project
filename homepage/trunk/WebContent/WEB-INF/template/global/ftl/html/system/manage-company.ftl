@@ -269,7 +269,9 @@
 		-->
 		</script> 		 
 		<style>
-		
+		.k-grid-content{
+			height:300px;
+		}			
 		</style>
 	</head>
 	<body class="theme-default main-menu-animated">
