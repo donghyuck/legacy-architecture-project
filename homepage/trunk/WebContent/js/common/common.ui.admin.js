@@ -26,7 +26,7 @@
 			options = options || {};			
 			var that = this;
 			that.options = options;			
-			refresh();
+			that.refresh();
 		},
 		refresh: function(){			
 			$('.menu-content-profile .close').click(function () {
