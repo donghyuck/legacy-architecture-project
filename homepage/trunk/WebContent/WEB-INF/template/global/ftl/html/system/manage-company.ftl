@@ -320,11 +320,6 @@
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">			
 			<div class="panel panel-primary marginless" >
-			<!--
-				<div class="panel-heading" >
-					<span data-bind="text: displayName"></span>
-					<button type="button" class="close" aria-hidden="true">&times;</button></div>
-			-->
 					<div class="panel-body" style="padding:5px;">
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
