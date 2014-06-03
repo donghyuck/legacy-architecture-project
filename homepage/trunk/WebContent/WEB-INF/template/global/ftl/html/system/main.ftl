@@ -46,7 +46,9 @@
     }, 300);
     return false;
   });
-  
+
+
+(function() {
   var tabdrop;
 
   if (!$.fn.tabdrop) {
@@ -81,6 +83,9 @@
   $.fn.tabdrop.defaults = {
     text: '<i class="fa fa-bars"></i>'
   };
+
+}).call(this);
+;
     
 
 				var init = [];	
