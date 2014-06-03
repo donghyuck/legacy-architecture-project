@@ -304,14 +304,9 @@
 								<a href="#database-info" data-toggle="tab">데이터베이스 정보</a>
 							</li>							
 						</ul> <!-- / .nav -->
-					</div> <!-- / .panel-heading -->
-					<div class="panel-body"></div>
-
-
+					</div> <!-- / .panel-heading -->					
 					<div class="tab-content">
 						<div class="tab-pane active" id="license-info">
-									<div class="big-box">
-										<div class="panel">
 											<table class="table table-striped .table-hover license-details">
 												<tbody>
 													<tr>
@@ -344,8 +339,6 @@
 													</tr>	
 											 	</tbody>
 											</table>
-										</div>  
-									</div>
 						</div>
 						<div class="tab-pane" id="setup-info">
 									<div class="big-box">
