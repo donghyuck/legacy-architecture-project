@@ -68,14 +68,14 @@
 							<span class="panel-title">회사 목록</span>
 							<div class="panel-heading-controls">
 								<div class="btn-group">
-									<button type="button" class="btn btn-info btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
-									<button type="button" class="btn btn-info btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
+									<button type="button" class="btn btn-info btn-sm btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
+									<button type="button" class="btn btn-info btn-sm btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
 								</div>
 								<div class="btn-group">
-									<button type="button" class="btn btn-success btn-control-group" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
-									<button type="button" class="btn btn-success btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
+									<button type="button" class="btn btn-success btn-sm btn-control-group" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
+									<button type="button" class="btn btn-success btn-sm btn-control-group" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
 								</div>
-								<button type="button" class="btn btn-default btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>					
+								<button type="button" class="btn btn-defaultbtn-sm  btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>					
 							</div>
 							</div>
 							<div class="panel-body" style="padding:5px;">
