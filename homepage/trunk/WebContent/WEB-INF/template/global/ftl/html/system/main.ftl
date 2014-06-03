@@ -34,7 +34,8 @@
 				common.api.culture();
 				// 1-2.  페이지 렌딩
 				common.ui.landing();		
-
+				
+				// 1-3.  관리자 메뉴 로딩
 				common.ui.admin.setup();
 
 				
