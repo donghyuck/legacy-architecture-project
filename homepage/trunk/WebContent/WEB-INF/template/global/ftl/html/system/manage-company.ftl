@@ -319,8 +319,8 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">			
-			<div class="panel panel-primary marginless" >
-					<div class="panel-body" style="padding:5px;">
+			<div class="panel colourable" >
+					<div class="panel-body">
 					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
