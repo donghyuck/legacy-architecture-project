@@ -58,7 +58,8 @@
 			<#include "/html/common/common-system-navigation.ftl" >	
 			<div id="content-wrapper">
 				<div class="page-header">
-					<h1><i class="fa fa-bar-chart-o page-header-icon"></i> 사용자 관리</h1>
+					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1") />
+					<h1><i class="fa fa-bar-chart-o page-header-icon"></i> ${selectedMenu.title}</h1>
 				</div><!-- / .page-header -->
 				<div class="note note-info padding-xs-vr">
 				사용자관리..
