@@ -420,12 +420,9 @@
 							</div>	
 						</div>
 						<div class="tab-pane" id="database-info">
-									<div class="big-box">
-										<div class="panel">
-										<div id="database-info-grid" ></div>
-										</div>
-									</div>
-								</div>
+							<div class="panel-body">
+								<div id="database-info-grid" ></div>
+							</div>
 						</div>		
 					</div><!-- tab contents end -->
 
