@@ -222,7 +222,7 @@
     var _this = this;
 				var initilizer, _i, _len, _ref;
         $('html').addClass('pxajs');
-        if (_init.length > 0) {
+        if (init.length > 0) {
           $.merge(_this.init, init);
         }
         _this.settings = $.extend(true, {}, SETTINGS_DEFAULTS, settings || {});
