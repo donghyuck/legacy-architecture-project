@@ -40,7 +40,7 @@
 				</li>
 				<#else>
 				<li>
-					<a href="${item.page}"><span class="mm-text">${item.title}</span></a>
+					<a href="${item.page}"><#if item.isSetIcon()><i class="menu-icon fa ${item.icon}"></i> </#if><span class="mm-text">${item.title}</span></a>
 				</li>
 				</#if>
 			</#list>
