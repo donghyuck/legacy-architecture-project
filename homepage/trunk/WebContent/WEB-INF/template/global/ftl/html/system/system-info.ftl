@@ -425,6 +425,8 @@
 					</div>
 				</div>	
 			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg">
+			</div>
 		</div> <!-- / #main-wrapper -->
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
