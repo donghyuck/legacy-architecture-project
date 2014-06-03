@@ -1,6 +1,6 @@
 		<!-- START MENU -->	
 		<#assign webSite = webSite />				
-		<#assign webSiteMenu = action.getWebSiteMenu("SYSTEM_MENU") />
+		<#assign webSiteMenu = WebSiteUtils.getDefaultMenu("SYSTEM_MENU") />
 			
 		<div id="main-menu" role="navigation">
 			<div id="main-menu-inner">
