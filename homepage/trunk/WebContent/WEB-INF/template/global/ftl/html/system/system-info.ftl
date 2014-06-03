@@ -44,6 +44,94 @@
 						item.copy(targetCompany);
 					}
 				});		
+				
+				
+				var dataSource = new kendo.data.DataSource({
+					transport: {
+						read: {
+							url: '${request.contextPath}/secure/view-system-memory.do?output=json', // the remove service url
+							type:'POST',
+							dataType : 'json'
+						}
+					},
+					error:handleKendoAjaxError,
+					schema: { 
+						data: function(response){
+							return [ response ] ; 
+						}
+                    },
+					change: function( e 	) { // subscribe to the CHANGE event of the data source
+						var data = this.data()[0];						
+						kendo.bind($(".memory-details"), data.memoryInfo );						
+						if( ! $("#mem-gen-gauge").data("kendoRadialGauge") ){
+							$("#mem-gen-gauge").kendoRadialGauge({
+								theme: "white",
+								pointer: {
+									value: data.memoryInfo.usedHeap.megabytes,
+									color: "#ea7001"									
+								},
+								scale: {
+									majorUnit: 100,
+									minorUnit: 10,
+									startAngle: -30,
+                            		endAngle: 210,
+									max: data.memoryInfo.maxHeap.megabytes,
+									ranges: [
+										{
+		                                    from:  ( data.memoryInfo.maxHeap.megabytes -  ( ( data.memoryInfo.maxHeap.megabytes / 10 ) * 2 ) ) ,
+		                                    to:  ( data.memoryInfo.maxHeap.megabytes -  data.memoryInfo.maxHeap.megabytes / 10 ) ,
+		                                    color: "#ff7a00"
+		                                }, {
+		                                    from: ( data.memoryInfo.maxHeap.megabytes -  data.memoryInfo.maxHeap.megabytes / 10 ) ,
+		                                    to: data.memoryInfo.maxHeap.megabytes,
+		                                    color: "#c20000"
+		                                }
+	                            	]			
+								}
+							});						
+						}else{
+							$("#mem-gen-gauge").data("kendoRadialGauge").value( data.memoryInfo.usedHeap.megabytes );
+						}	
+											
+						if( ! $("#perm-gen-gauge").data("kendoRadialGauge") ){	
+							$("#perm-gen-gauge").kendoRadialGauge({
+								theme: "white",
+								pointer: {
+									value: data.memoryInfo.usedPermGen.megabytes,
+									color: "#ea7001"		
+								},
+								scale: {
+									majorUnit: 50,
+									minorUnit: 10,
+									startAngle: -30,
+                            		endAngle: 210,
+									max: data.memoryInfo.maxPermGen.megabytes,
+									ranges: [
+										{
+		                                    from:  ( data.memoryInfo.maxPermGen.megabytes -  ( ( data.memoryInfo.maxPermGen.megabytes / 10 ) * 2 ) ) ,
+		                                    to:  ( data.memoryInfo.maxPermGen.megabytes -  data.memoryInfo.maxPermGen.megabytes / 10 ) ,
+		                                    color: "#ff7a00"
+		                                }, {
+		                                    from: ( data.memoryInfo.maxPermGen.megabytes -  data.memoryInfo.maxPermGen.megabytes / 10 ) ,
+		                                    to: data.memoryInfo.maxPermGen.megabytes,
+		                                    color: "#c20000"
+		                                }
+	                            	]								
+								}
+							});		
+						}else{
+							$("#perm-gen-gauge").data("kendoRadialGauge").value( data.memoryInfo.usedPermGen.megabytes );
+						}	
+					}
+				});
+				
+				dataSource.read();		
+								
+				var timer = setInterval(function () {
+					dataSource.read();
+					//clearInterval(timer);
+					}, 6000);		
+									
 				// END SCRIPT
 			}
 		}]);
