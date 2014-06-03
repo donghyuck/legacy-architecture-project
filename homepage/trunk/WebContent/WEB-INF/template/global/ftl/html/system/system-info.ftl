@@ -64,10 +64,59 @@
 				<div class="note note-info padding-xs-vr">
 				사용자관리..
 				</div> <!-- / .note -->
-				<div class="row">
 				
-				
+				<div class="row">	
+				<div class="col-sm-3">
+					<div class="panel panel-primary">
+						<div class="panel-heading">Heap 메모리</div>
+						<div class="panel-body">
+							<div id="mem-gen-gauge"></div>
+						</div>						
+						<div class="panel-footer">
+							<table class="table table-striped memory-details">
+							 	<thead>
+							 		<tr>
+            							<th>Total Memory</th>
+            							<th>Used Memory</th>
+            						</tr>	
+							 	</thead>
+							 	<tbody>
+							 		<tr>
+										<td><span data-bind="text: maxHeap.megabytes"></span>MB</td>
+										<td><span data-bind="text: usedHeap.megabytes"></span>MB</td>
+							 		</tr>
+							 	</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="panel panel-primary">
+						<div class="panel-heading">PermGen 메모리</div>
+						<div class="panel-body">
+							<div id="perm-gen-gauge"></div>						
+						</div>
+						<div class="panel-footer">
+							<table class="table table-striped memory-details">
+							 	<thead>
+							 		<tr>
+            							<th>Total Memory</th>
+            							<th>Used Memory</th>
+            						</tr>	
+							 	</thead>
+							 	<tbody>
+							 		<tr>
+										<td><span data-bind="text: maxPermGen.megabytes"></span>MB</td>	
+										<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
+							 		</tr>
+							 	</tbody>
+							</table>
+						</div>
+					</div>
 				</div>				
+			</div><!-- memory status end -->
+			
+						
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
 			</div>
