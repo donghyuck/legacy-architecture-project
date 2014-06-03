@@ -59,7 +59,7 @@
 			<div id="content-wrapper">
 				<div class="page-header">
 					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1") />
-					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}<small>${selectedMenu.description}</small></h1>
+					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small>${selectedMenu.description}</small></h1>
 				</div><!-- / .page-header -->
 				<div class="note note-info padding-xs-vr">
 				사용자관리..
