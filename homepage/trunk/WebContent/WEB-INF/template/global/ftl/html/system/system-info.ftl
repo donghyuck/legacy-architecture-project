@@ -273,7 +273,7 @@
 								<!-- Bordered, without top border, without horizontal padding -->
 								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">								
 									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>
-								</div>
+								
 							<table class="table table-striped memory-details" style="margin-bottom: 0;">
 							 	<thead>
 							 		<tr>
@@ -287,7 +287,8 @@
 										<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
 							 		</tr>
 							 	</tbody>
-							</table>								
+							</table>	
+							</div>							
 							</div> <!-- /.stat-row -->
 						</div> <!-- /.stat-panel -->
 				</div>
