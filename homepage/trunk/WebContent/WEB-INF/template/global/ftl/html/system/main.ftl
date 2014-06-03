@@ -3,9 +3,12 @@
 <head>
 		<title>관리자 메인</title>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.admin.style.css" />
-		
+		<script src="${request.contextPath}/js/jquery/1.10.2/jquery.min.js"></script>
+		<script src="${request.contextPath}/js/common/common.admin.js"></script>
 		<script type="text/javascript">
 		<!--
+		
+		window.PixelAdmin.start([]);
 		
 		yepnope([{
 			load: [
@@ -51,7 +54,7 @@
 
     
 
-			PixelAdminApp.prototype.start();
+
 				
 				// END SCRIPT
 			}
