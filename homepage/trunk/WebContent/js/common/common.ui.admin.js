@@ -16610,8 +16610,39 @@
 				return false;
 			});
 			
+			var initilizer, _i, _len, _ref;		
 			$('html').addClass('pxajs');
-			that._pixelAdmin.init;
+			that._pixelAdmin.setting = = {
+				    is_mobile: false,
+				    resize_delay: 400,
+				    stored_values_prefix: 'pa_',
+				    main_menu: {
+				      accordion: true,
+				      animation_speed: 250,
+				      store_state: true,
+				      store_state_key: 'mmstate',
+				      disable_animation_on: [],
+				      dropdown_close_delay: 300,
+				      detect_active: true,
+				      detect_active_predicate: function(href, url) {
+				        return href === url;
+				      }
+				    },
+				    consts: {
+				      COLORS: ['#71c73e', '#77b7c5', '#d54848', '#6c42e5', '#e8e64e', '#dd56e6', '#ecad3f', '#618b9d', '#b68b68', '#36a766', '#3156be', '#00b3ff', '#646464', '#a946e8', '#9d9d9d']
+				    }
+				  };
+			that._pixelAdmin.settings.is_mobile = /iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase());
+	        if (that._pixelAdmin.settings.is_mobile) {
+	        	if (FastClick) {
+	        		FastClick.attach(document.body);
+	        	}
+	        }	
+	        _ref = that._pixelAdmin.init;
+	        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+		          initilizer = _ref[_i];
+		          $.proxy(initilizer, _this)();
+		    }
 			$(window).trigger("pa.loaded");
 			$(window).resize();
 		
