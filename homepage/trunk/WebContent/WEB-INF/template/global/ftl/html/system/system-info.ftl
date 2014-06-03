@@ -274,6 +274,25 @@
 						</div>
 					</div>
 				</div>				
+				<div class="col-sm-3">
+						<div class="stat-panel text-center">
+							<div class="stat-row">
+								<!-- Dark gray background, small padding, extra small text, semibold text -->
+								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
+									<i class="fa fa-cloud"></i>&nbsp;&nbsp;USED RAM
+								</div>
+							</div> <!-- /.stat-row -->
+							<div class="stat-row">
+								<!-- Bordered, without top border, without horizontal padding -->
+								<div class="stat-cell bordered no-border-t no-padding-hr">
+									<div class="pie-chart" data-percent="75" id="easy-pie-chart-3">
+										<div class="pie-chart-label">12GB</div>
+									<canvas height="90" width="90"></canvas></div>
+								</div>
+							</div> <!-- /.stat-row -->
+						</div> <!-- /.stat-panel -->
+				</div>
+									
 			</div><!-- memory status end -->
 
 
