@@ -16612,7 +16612,7 @@
 			
 			var initilizer, _i, _len, _ref;		
 			$('html').addClass('pxajs');
-			that._pixelAdmin.setting = = {
+			that._pixelAdmin.setting = {
 				    is_mobile: false,
 				    resize_delay: 400,
 				    stored_values_prefix: 'pa_',
