@@ -226,7 +226,7 @@
 				</div> <!-- / .note -->
 				
 				<div class="row">				
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<div class="stat-panel text-center">
 							<div class="stat-row">						
 								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
@@ -254,7 +254,7 @@
 							</div> <!-- /.stat-row -->
 						</div> <!-- /.stat-panel -->
 					</div>					
-					<div class="col-sm-3">
+					<div class="col-xs-3">
 						<div class="stat-panel text-center">
 							<div class="stat-row">
 								<!-- Dark gray background, small padding, extra small text, semibold text -->
