@@ -26,6 +26,28 @@
 			that._pixelAdmin = window.PixelAdmin;
 			that.refresh();
 		},		
+		_createCompanySelector : function(){
+			var item = {
+				selector: 'companyDropDownList',
+				name: 'companySelector',
+				dataTextField: 'displayName',
+				dataValueField: 'companyId',
+				dataSource: {
+					transport: {
+						read: {
+							dataType: JSON,
+							url: '/secure/list-company.do?output=json',
+							type: POST
+						}
+					},
+					schema: { 
+						data: "companies",
+						model : Company
+					}
+				}	
+			};			
+			$( item.selector ).extDropDownList(item);			
+		},
 		refresh: function(){			
 			var that = this;
 			$('.menu-content-profile .close').click(function () {
@@ -39,16 +61,42 @@
 				return false;
 			});
 			
+			
+			if (item.name === 'companySelector' ){				
+				 if( typeof item.enabled === UNDEFINED){
+						item.enabled = false;								
+				}							
+				if( typeof item.dataTextField === UNDEFINED){
+					item.dataTextField = "displayName";
+				}							
+				if( typeof item.dataValueField === UNDEFINED){
+					item.dataValueField = "companyId";					
+				}							
+				if( typeof item.dataSource === UNDEFINED){
+						item.dataSource = {
+							transport: {
+								read: {
+									dataType: JSON,
+									url: '/secure/list-company.do?output=json',
+									type: POST
+								}
+							},
+							schema: { 
+								data: "companies",
+								model : Company
+							}
+						}
+				}
+				
+				var companySelector = $( item.selector ).extDropDownList(item);
+			 }						
+			
+			
 			that._pixelAdmin.start([]);
 		
 		}
-	});		
-	
-	
-	
-	
+	});	
 })(jQuery);
-
 
 common.ui.admin.setup = function (options){
 	options = options || {};			
