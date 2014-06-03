@@ -327,9 +327,7 @@
 						<li><a href="\\#users" data-toggle="tab">사용자</a></li>
 					</ul>						
 				</div>
-					<div class="panel-body">
-		
-					<div class="tab-content">
+				<div class="tab-content">
 						<div class="tab-pane active" id="props">
 							<div class="blank-top-5"></div>
 							<div class="alert alert-danger margin-buttom-5">
@@ -354,7 +352,7 @@
 							</div>							
 							<div id="company-user-grid"  class="users"></div>
 						</div>
-					</div>
+				
 				</div>
 			</div>
 		</script>				
