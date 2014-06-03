@@ -85,7 +85,7 @@
 								<li>
 									<form class="navbar-form pull-left">
 										<!--<input type="text" class="form-control" placeholder="Search">-->
-										<div id="companyDropDownList"></div>
+										<input type="hidden" id="targetCompany" name="targetCompany" value="${action.user.company.companyId}" />
 									</form>
 								</li>
 								<li class="dropdown">
