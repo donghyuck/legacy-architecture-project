@@ -257,20 +257,7 @@
 										
 						</div>
 						<div class="panel-footer">
-							<table class="table table-striped memory-details">
-							 	<thead>
-							 		<tr>
-            							<th>Total Memory</th>
-            							<th>Used Memory</th>
-            						</tr>	
-							 	</thead>
-							 	<tbody>
-							 		<tr>
-										<td><span data-bind="text: maxPermGen.megabytes"></span>MB</td>	
-										<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
-							 		</tr>
-							 	</tbody>
-							</table>
+							
 						</div>
 					</div>
 				</div>				
@@ -284,12 +271,23 @@
 							</div> <!-- /.stat-row -->
 							<div class="stat-row">
 								<!-- Bordered, without top border, without horizontal padding -->
-								<div class="stat-cell bordered no-border-t no-padding-hr">
-								
-									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>			
-									
-									
+								<div class="stat-cell bordered no-border-t no-padding-hr">								
+									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>
 								</div>
+							<table class="table table-striped memory-details">
+							 	<thead>
+							 		<tr>
+            							<th>Total Memory</th>
+            							<th>Used Memory</th>
+            						</tr>	
+							 	</thead>
+							 	<tbody>
+							 		<tr>
+										<td><span data-bind="text: maxPermGen.megabytes"></span>MB</td>	
+										<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
+							 		</tr>
+							 	</tbody>
+							</table>								
 							</div> <!-- /.stat-row -->
 						</div> <!-- /.stat-panel -->
 				</div>
