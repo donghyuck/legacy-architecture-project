@@ -62,6 +62,7 @@
 					<h1><i class="fa fa-bar-chart-o page-header-icon"></i> 사용자 관리</h1>
 				</div><!-- / .page-header -->
 				<div class="note note-info padding-xs-vr">
+				사용자관리..
 				</div> <!-- / .note -->
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg"></div>
