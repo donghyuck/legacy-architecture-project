@@ -6,8 +6,6 @@
 		<script type="text/javascript">
 		<!--
 		
-		window.PixelAdmin.start([]);
-		
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
