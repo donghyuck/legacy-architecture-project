@@ -21,12 +21,25 @@
 			options = options || {};			
 			var that = this;
 			that.options = options;
-			
-			options.localStorageSupported = typeof window.Storage !== "undefined" ? true : false;			
-			that._pixelAdmin = window.PixelAdmin;
+			that._pixelAdmin = window.PixelAdmin;			
 			that.refresh();
 		},		
+		_doAuthenticate : function(){		
+			var that = this;
+			var renderTo = "account-panel";				
+			if ($("#" +renderTo ).length == 0) {
+				$('body').append(	'<div id="' + renderTo + '" style="display:none;"></div>');
+			}
+			$("#" +renderTo ).kendoAccounts({
+				visible : false,
+				authenticate : function( e ){
+					if( isFunction( that.options.authenticate ) )
+						authenticate(e);
+				}
+			});
+		},
 		_createCompanySelector : function(){	
+			var that = this;
 			$('#targetCompany').kendoDropDownList({
 				dataTextField: 'displayName',	
 				dataValueField: 'companyId',
@@ -42,7 +55,11 @@
 						data: "companies",
 						model : Company
 					}
-				}					
+				},
+				change : function (e){			
+					if( isFunction( that.options.companyChanged ) )
+						that.options.companyChanged( this.dataSource.get(this.value) );
+				} 
 			});		
 			
 		},
@@ -59,8 +76,8 @@
 				return false;
 			});
 			that._createCompanySelector();			
-			that._pixelAdmin.start([]);
-		
+			that._doAuthenticate();
+			that._pixelAdmin.start([]);	
 		}
 	});	
 })(jQuery);
