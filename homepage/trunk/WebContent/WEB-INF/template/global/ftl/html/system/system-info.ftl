@@ -286,7 +286,7 @@
 								<!-- Bordered, without top border, without horizontal padding -->
 								<div class="stat-cell bordered no-border-t no-padding-hr">
 								
-									<div id="perm-gen-gauge"></div>			
+									<div id="perm-gen-gauge" class="stat-cell"></div>			
 									
 									
 								</div>
