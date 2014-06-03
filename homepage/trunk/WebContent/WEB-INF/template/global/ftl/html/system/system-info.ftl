@@ -225,39 +225,36 @@
 				사용자관리..
 				</div> <!-- / .note -->
 				
-				<div class="row">	
-			
-				<div class="col-sm-3">
+				<div class="row">				
+					<div class="col-sm-3">
 						<div class="stat-panel text-center">
-							<div class="stat-row">
-								<!-- Dark gray background, small padding, extra small text, semibold text -->
+							<div class="stat-row">						
 								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
 									<i class="fa fa-cloud"></i> Heap 메모리
 								</div>
-							</div> <!-- /.stat-row -->
-							<div class="stat-row">
-								<!-- Bordered, without top border, without horizontal padding -->
+							</div><!-- /.stat-row -->
+							<div class="stat-row">								
 								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">								
 									<div id="mem-gen-gauge" style="display: inline-block !important;"></div>
-							<table class="table table-striped memory-details" style="margin-bottom: 0;">
-							 	<thead>
-							 		<tr>
-            							<th>Total Memory</th>
-            							<th>Used Memory</th>
-            						</tr>	
-							 	</thead>
-							 	<tbody>
-							 		<tr>
-										<td><span data-bind="text: maxHeap.megabytes"></span>MB</td>
-										<td><span data-bind="text: usedHeap.megabytes"></span>MB</td>
-							 		</tr>
-							 	</tbody>
-							</table>
-							</div>							
+									<table class="table table-striped memory-details" style="margin-bottom: 0;">
+									 	<thead>
+									 		<tr>
+		            							<th>Total Memory</th>
+		            							<th>Used Memory</th>
+		            						</tr>	
+									 	</thead>
+									 	<tbody>
+									 		<tr>
+												<td><span data-bind="text: maxHeap.megabytes"></span>MB</td>
+												<td><span data-bind="text: usedHeap.megabytes"></span>MB</td>
+									 		</tr>
+									 	</tbody>
+									</table>
+								</div>							
 							</div> <!-- /.stat-row -->
 						</div> <!-- /.stat-panel -->
-										
-				<div class="col-sm-3">
+					</div>					
+					<div class="col-sm-3">
 						<div class="stat-panel text-center">
 							<div class="stat-row">
 								<!-- Dark gray background, small padding, extra small text, semibold text -->
@@ -267,29 +264,27 @@
 							</div> <!-- /.stat-row -->
 							<div class="stat-row">
 								<!-- Bordered, without top border, without horizontal padding -->
-								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">								
+								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">	
 									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>
-								
-							<table class="table table-striped memory-details" style="margin-bottom: 0;">
-							 	<thead>
-							 		<tr>
-            							<th>Total Memory</th>
-            							<th>Used Memory</th>
-            						</tr>	
-							 	</thead>
-							 	<tbody>
-							 		<tr>
-										<td><span data-bind="text: maxPermGen.megabytes"></span>MB</td>	
-										<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
-							 		</tr>
-							 	</tbody>
-							</table>	
-							</div>							
+									<table class="table table-striped memory-details" style="margin-bottom: 0;">
+									 	<thead>
+									 		<tr>
+		            							<th>Total Memory</th>
+		            							<th>Used Memory</th>
+		            						</tr>	
+									 	</thead>
+									 	<tbody>
+									 		<tr>
+												<td><span data-bind="text: maxPermGen.megabytes"></span>MB</td>	
+												<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
+									 		</tr>
+									 	</tbody>
+									</table>	
+								</div>							
 							</div> <!-- /.stat-row -->
 						</div> <!-- /.stat-panel -->
-				</div>
-									
-			</div><!-- memory status end -->
+					</div>									
+				</div><!-- memory status end -->
 			<div class="row">			
 				<div class="col-lg-12">	
 				<div class="panel colourable">
