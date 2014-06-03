@@ -292,16 +292,16 @@
 						<span class="panel-title">With tabs</span>
 						<ul class="nav nav-tabs nav-tabs-xs" id="myTab">
 							<li class="active">
-								<a href="#license-info" data-toggle="tab"><i class="fa fa-certificate"></i> 라이센스 정보</a>
+								<a href="#license-info" data-toggle="tab">라이센스 정보</a>
 							</li>
 							<li>
-								<a href="#setup-info" data-toggle="tab"><i class="fa fa-cog"></i> 셋업 프로퍼티 정보</a>
+								<a href="#setup-info" data-toggle="tab">셋업 프로퍼티 정보</a>
 							</li>
 							<li>
-								<a href="#system-info" data-toggle="tab"><i class="fa fa-info"></i> 시스템 환경 정보</a>
+								<a href="#system-info" data-toggle="tab">시스템 환경 정보</a>
 							</li>
 							<li>
-								<a href="#database-info" data-toggle="tab"><i class="fa fa-hdd-o"></i> 데이터베이스 정보</a>
+								<a href="#database-info" data-toggle="tab">데이터베이스 정보</a>
 							</li>							
 						</ul> <!-- / .nav -->
 					</div> <!-- / .panel-heading -->
