@@ -332,7 +332,7 @@
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
 						</div>						
-						<div id="company-prop-grid" class="props"></div>
+						<div id="company-prop-grid" class="props borderless"></div>
 					</div>
 					<div class="tab-pane" id="groups">					
 						<div class="alert alert-page alert-danger alert-dark margin-buttom-5">
