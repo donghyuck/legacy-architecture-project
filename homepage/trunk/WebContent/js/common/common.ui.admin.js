@@ -16641,7 +16641,7 @@
 	        _ref = that._pixelAdmin.init;
 	        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
 		          initilizer = _ref[_i];
-		          $.proxy(initilizer, that._pixelAdmin();
+		          $.proxy(initilizer, that._pixelAdmin());
 		    }
 			$(window).trigger("pa.loaded");
 			$(window).resize();
