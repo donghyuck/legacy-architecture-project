@@ -226,14 +226,20 @@
 				</div> <!-- / .note -->
 				
 				<div class="row">	
+			
 				<div class="col-sm-3">
-					<div class="panel panel-primary">
-						<div class="panel-heading">Heap 메모리</div>
-						<div class="panel-body">
-							<div id="mem-gen-gauge"></div>
-						</div>						
-						<div class="panel-footer">
-							<table class="table table-striped memory-details">
+						<div class="stat-panel text-center">
+							<div class="stat-row">
+								<!-- Dark gray background, small padding, extra small text, semibold text -->
+								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
+									<i class="fa fa-cloud"></i> Heap 메모리
+								</div>
+							</div> <!-- /.stat-row -->
+							<div class="stat-row">
+								<!-- Bordered, without top border, without horizontal padding -->
+								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">								
+									<div id="mem-gen-gauge" style="display: inline-block !important;"></div>
+							<table class="table table-striped memory-details" style="margin-bottom: 0;">
 							 	<thead>
 							 		<tr>
             							<th>Total Memory</th>
@@ -247,20 +253,10 @@
 							 		</tr>
 							 	</tbody>
 							</table>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3">
-					<div class="panel panel-primary">
-						<div class="panel-heading">PermGen 메모리</div>
-						<div class="panel-body">
+							</div>							
+							</div> <!-- /.stat-row -->
+						</div> <!-- /.stat-panel -->
 										
-						</div>
-						<div class="panel-footer">
-							
-						</div>
-					</div>
-				</div>				
 				<div class="col-sm-3">
 						<div class="stat-panel text-center">
 							<div class="stat-row">
