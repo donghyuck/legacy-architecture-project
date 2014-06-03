@@ -64,7 +64,7 @@
 				
 					<div class="col-sm-12">
 						<div class="panel panel-default" style="min-height:300px;">
-							<div class="panel-heading" style="padding:5px;">
+							<div class="panel-heading">
 							<span class="panel-title">회사 목록</span>
 							<div class="panel-heading-controls">
 								<div class="btn-group">
