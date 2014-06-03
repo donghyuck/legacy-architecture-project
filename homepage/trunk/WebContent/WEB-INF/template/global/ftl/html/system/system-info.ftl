@@ -289,7 +289,7 @@
 				<div class="col-lg-12">	
 				<div class="panel colourable">
 					<div class="panel-heading" id="myTab">
-						<span class="panel-title"><i class="fa fa-hdd-o"></i></span>
+						<span class="panel-title"><i class="fa fa-info"></i></span>
 						<ul class="nav nav-tabs nav-tabs-xs" id="myTab">
 							<li class="active">
 								<a href="#license-info" data-toggle="tab">라이센스 정보</a>
