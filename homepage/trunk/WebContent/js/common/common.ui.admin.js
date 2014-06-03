@@ -27,7 +27,7 @@
 			that.refresh();
 		},		
 		_createCompanySelector : function(){	
-			$('#targetCompany').kendoDropDownList(
+			$('#targetCompany').kendoDropDownList({
 				dataTextField: 'displayName',	
 				dataValueField: 'companyId',
 				dataSource: {
@@ -43,7 +43,7 @@
 						model : Company
 					}
 				}					
-			);		
+			});		
 			
 		},
 		refresh: function(){			
