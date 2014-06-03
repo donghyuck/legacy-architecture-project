@@ -97,7 +97,7 @@
 										<li><a href="#"><span class="badge badge-primary pull-right">New</span>Account</a></li>
 										<li><a href="#"><i class="dropdown-icon fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
 										<li class="divider"></li>
-										<li><a href="pages-signin.html"><i class="dropdown-icon fa fa-power-off"></i>&nbsp;&nbsp;Log Out</a></li>
+										<li><a href="/logout"><i class="dropdown-icon fa fa-power-off"></i> 로그아웃</a></li>
 									</ul>
 								</li>
 							</ul> <!-- / .navbar-nav -->
