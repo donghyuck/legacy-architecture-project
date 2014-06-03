@@ -32,8 +32,19 @@
 				common.api.culture();
 				// 1-2.  페이지 렌딩
 				common.ui.landing();				
-				// 1-3.  관리자 메뉴 로딩
-				common.ui.admin.setup();				
+				// 1-3.  관리자  로딩
+				var currentUser = new User();
+				var targetCompany = new Company();	
+				common.ui.admin.setup({
+					authenticate : function(e){
+						currentUser.copy(e.token);
+						alert(kendo.stringify(currentUser));
+					},
+					companyChanged: function(item){
+						targetCompany.copy(item);
+						alert(kendo.stringify(targetCompany));
+					}
+				});		
 				// END SCRIPT
 			}
 		}]);
