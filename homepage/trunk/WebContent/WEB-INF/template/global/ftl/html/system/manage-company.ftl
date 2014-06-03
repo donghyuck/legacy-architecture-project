@@ -321,6 +321,7 @@
 		<script type="text/x-kendo-template" id="company-details-template">			
 			<div class="panel colourable" >
 				<div class="panel-heading" >
+					<span class="panel-title">상세정보</span>
 					<ul id="myTab" class="nav nav-tabs nav-tabs-xs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
