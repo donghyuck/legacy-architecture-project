@@ -8,7 +8,8 @@
  */
 (function($, undefined) {
 	var common = window.common = window.common || {};
-	common.ui =  common.ui || {};
+	common.ui =  common.ui || {},
+	common.ui.admin = common.ui.admin || {};
 	
 	var kendo = window.kendo,
 	Widget = kendo.ui.Widget,
