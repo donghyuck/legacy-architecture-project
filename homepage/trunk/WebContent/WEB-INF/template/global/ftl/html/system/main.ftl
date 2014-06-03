@@ -51,7 +51,7 @@
 
     
 
-			 PixelAdmin.MainMenu.prototype.init();
+			PixelAdminApp.prototype.start();
 				
 				// END SCRIPT
 			}
