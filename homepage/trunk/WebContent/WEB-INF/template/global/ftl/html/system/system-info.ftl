@@ -95,7 +95,7 @@
 											
 						if( ! $("#perm-gen-gauge").data("kendoRadialGauge") ){	
 							$("#perm-gen-gauge").kendoRadialGauge({
-								theme: "black",
+								theme: "white",
 								pointer: {
 									value: data.memoryInfo.usedPermGen.megabytes,
 									color: "#ea7001"		
@@ -264,22 +264,24 @@
 								<!-- Bordered, without top border, without horizontal padding -->
 								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">	
 									<div id="perm-gen-gauge" style="display: inline-block !important;"></div>
-									<table class="table table-striped memory-details" style="margin-bottom: 0;">
-									 	<thead>
-									 		<tr>
-		            							<th>Total Memory</th>
-		            							<th>Used Memory</th>
-		            						</tr>	
-									 	</thead>
-									 	<tbody>
-									 		<tr>
-												<td><span data-bind="text: maxPermGen.megabytes"></span>MB</td>	
-												<td><span data-bind="text: usedPermGen.megabytes"></span>MB</td>
-									 		</tr>
-									 	</tbody>
-									</table>	
 								</div>							
 							</div> <!-- /.stat-row -->
+							<div class="stat-row memory-details">
+								<div class="stat-counters bg-warning bordered no-border-t text-center">
+									<div class="stat-cell col-xs-6 padding-sm no-padding-hr">
+										<!-- Big text -->
+										<span class="text-bg"><strong><span data-bind="text: maxPermGen.megabytes"></span>MB</strong></span><br>
+										<!-- Extra small text -->
+										<span class="text-xs">Total Memory</span>
+									</div>
+									<div class="stat-cell col-xs-6 padding-sm no-padding-hr">
+										<!-- Big text -->
+										<span class="text-bg"><strong><span data-bind="text: usedPermGen.megabytes"></span></span><br>
+										<!-- Extra small text -->
+										<span class="text-xs">Used Memory</span>
+									</div>
+								</div> <!-- /.stat-counters -->
+							</div>													
 						</div> <!-- /.stat-panel -->
 					</div>									
 				</div><!-- memory status end -->
