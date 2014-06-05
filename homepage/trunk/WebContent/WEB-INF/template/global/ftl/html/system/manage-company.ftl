@@ -311,7 +311,7 @@
 								<span class="panel-title">목록</span>
 								<div class="panel-heading-controls">
 									<span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
-									<button class="btn btn-xs">Button</button>
+									<button class="btn btn-danger btn-xs">회사 만들기 </button>
 								</div>
 							</div>
 							<div class="panel-body" style="padding:5px;">
