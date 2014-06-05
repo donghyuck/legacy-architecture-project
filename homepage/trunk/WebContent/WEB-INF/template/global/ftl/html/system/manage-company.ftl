@@ -173,9 +173,8 @@
 				
 				var detailsModel = kendo.observable({
 					company : new Company(),
-					logoUrl : function(){
-						return "/download/logo/company/" + this.company.name ;
-					}
+					logoUrl : ""
+					
 				});
 				
 				kendo.bind($('#company-details'), detailsModel );	
@@ -184,7 +183,7 @@
 			}
 			
 			companyPlaceHolder.copy( $('#company-details').data("model").company );
-			
+			$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
 			
 			/*
 				
