@@ -335,7 +335,7 @@
 					<li><a href="#">Home</a></li>
 					<li class="active"><a href="#">Dashboard</a></li>
 				</ul>
-				<div class="page-header">				
+				<div class="page-header bg-dark-gray">				
 					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_1") />
 					<div class="row">
 						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
