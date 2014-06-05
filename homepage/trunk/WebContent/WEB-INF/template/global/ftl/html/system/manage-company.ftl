@@ -339,70 +339,51 @@
 						<div id="company-details" style="display:none;"></div>					
 					</div>
 				</div>
-				<!-- details -->
+				<!-- company details -->
 				<div class="page-details">
 					<div class="details-full-name">
 						<span class="text-semibold">Denise Steiner</span> 상세정보
 					</div>
-
-<div class="details-row">
-			<div class="left-col">
-				<div class="details-block">
-					<div class="panel details-photo">
-						<img src="/download/logo/company/INKIUM" alt="">
-					</div><br>
-					<a href="#" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Following</a>&nbsp;&nbsp;
-					<a href="#" class="btn"><i class="fa fa-comment"></i></a>
-				</div>
-				
-				<div class="panel panel-transparent">
-					<div class="panel-heading">
-						<span class="panel-title">About me</span>
-					</div>
-					<div class="panel-body">
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="#">dolore magna</a> aliqua.
-					</div>
-				</div>
-
-				
-
-				
-
-				
-
-			</div>
-			<div class="right-col">
-
-				<hr class="details-content-hr no-grid-gutter-h">
-				
-				<div class="details-content">
-
-					<ul id="details-tabs" class="nav nav-tabs">
-						<li class="">
-							<a href="#details-tabs-board" data-toggle="tab">Board</a>
-						</li>
-						
-						
-						<li class="active">
-							<a href="#details-tabs-following" data-toggle="tab">Following</a>
-						</li>
-					</ul>
-
-					<div class="tab-content tab-content-bordered panel-padding">
-						 <!-- / .tab-pane -->
-						 <!-- / .tab-pane -->
-						 <!-- / .tab-pane -->
-						 <!-- / .tab-pane -->
-					</div> <!-- / .tab-content -->
-				</div>
-			</div>
-		</div>				
-				</div>
-				
-				
-
-								
-		
+					<div class="details-row">
+						<div class="left-col">
+							<div class="details-block">
+								<div class="panel details-photo">
+									<img src="/download/logo/company/INKIUM" alt="">
+								</div>
+								<br>
+								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
+								<a href="#" class="btn"><i class="fa fa-comment"></i></a>
+							</div>				
+							<div class="panel panel-transparent">
+								<div class="panel-heading">
+									<span class="panel-title">설명</span>
+								</div>
+								<div class="panel-body">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="#">dolore magna</a> aliqua.
+								</div>
+							</div>
+						</div>
+						<div class="right-col">
+							<hr class="details-content-hr no-grid-gutter-h">				
+							<div class="details-content">
+								<ul id="details-tabs" class="nav nav-tabs">
+									<li class="">
+										<a href="#details-tabs-board" data-toggle="tab">Board</a>
+									</li>						
+									<li class="active">
+										<a href="#details-tabs-following" data-toggle="tab">Following</a>
+									</li>
+								</ul>
+								<div class="tab-content tab-content-bordered panel-padding">
+									 <!-- / .tab-pane -->
+									 <!-- / .tab-pane -->
+									 <!-- / .tab-pane -->
+									 <!-- / .tab-pane -->
+								</div> <!-- / .tab-content -->
+							</div>
+						</div>
+					</div>				
+				</div><!-- /company details -->		
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
 			</div>
