@@ -178,7 +178,7 @@
 					}
 				});
 				
-				kendo.bind($('#company-details', detailsModel );	
+				kendo.bind($('#company-details'), detailsModel );	
 				$('#company-details').data("model", detailsModel );					
 				$('#company-details').show();			
 			}
