@@ -331,7 +331,7 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
-			<a href="#" class="header-2">상세정보</a>	
+			<a href="\\#" class="header-2">상세정보</a>	
 					<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-success">22</span></a></li>
