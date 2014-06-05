@@ -294,10 +294,10 @@
 								<div class="pull-right col-xs-12 col-sm-auto">
 									<a href="#" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-plus"></span>Create project</a>
 									<div class="btn-group">
-										<button type="button" class="btn btn-info btn-sm btn-flat btn-labeled btn-control-group" data-action="menu"><i class="fa fa-sitemap"></i> 메뉴</button>
-										<button type="button" class="btn btn-info btn-sm btn-flat btn-labeled btn-control-group" data-action="role"><i class="fa fa-lock"></i> 권한 & 롤</button>
+										<button type="button" class="btn btn-primary btn-sm btn-flat btn-labeled btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
+										<button type="button" class="btn btn-primary btn-sm btn-flat btn-labeled btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
 									</div>									
-									<button type="button" class="btn btn-primary btn-sm btn-flat btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>	
+									<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>	
 									
 								</div>
 							</div>
