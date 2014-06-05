@@ -374,7 +374,7 @@
 		
 		
 		<div class="row">
-			<a id="uidemo-tabs-default" href="#uidemo-tabs-default" class="header-2">Default tabs</a>
+			<a href="#uidemo-tabs-default" class="header-2">상세정보</a>
 			<div class="col-sm-12">
 				<ul id="uidemo-tabs-default-demo" class="nav nav-tabs">
 					<li class="">
