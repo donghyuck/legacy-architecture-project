@@ -276,7 +276,7 @@
 									</div>
 									<div class="stat-cell col-xs-6 padding-sm no-padding-hr">
 										<!-- Big text -->
-										<span class="text-bg"><strong><span data-bind="text: usedPermGen.megabytes"></span></span><br>
+										<span class="text-bg"><strong><span data-bind="text: usedPermGen.megabytes"></span>MB</strong></span><br>
 										<!-- Extra small text -->
 										<span class="text-xs">Used Memory</span>
 									</div>
