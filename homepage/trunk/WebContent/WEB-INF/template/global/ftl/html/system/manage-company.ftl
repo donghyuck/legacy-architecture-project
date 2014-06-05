@@ -174,10 +174,12 @@
 						return "/download/logo/company/" + this.company.name ;
 					}
 				});
-				$('#company-details').bind("model", detailsModel );	
+				$('#company-details').bind(detailsModel );	
+				$('#company-details').data("model", detailsModel );					
 				$('#company-details').show();			
 			}
 			
+			companyPlaceHolder.copy( $('#company-details').data("model").company );
 			
 			
 			/*
@@ -293,7 +295,7 @@
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
-									<span class="panel-title">설명</span>
+									<span class="panel-title"  data-bind="text:company.description"></span>
 								</div>
 								<div class="panel-body">
 								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="\\#">dolore magna</a> aliqua.
