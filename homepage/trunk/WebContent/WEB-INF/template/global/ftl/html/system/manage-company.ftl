@@ -168,7 +168,13 @@
 			var companyPlaceHolder = getSelectedCompany();
 			if( $('#company-details').text().length === 0 ){
 				$('#company-details').html(kendo.template($('#company-details-template').html()));	
+				var detailsModel = kendo.observable({
+					company : new Company()
+				});
+				$('#company-details').bind("model", detailsModel );	
+				$('#company-details').show();			
 			}
+			
 			
 			
 			/*
