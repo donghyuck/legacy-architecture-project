@@ -291,7 +291,7 @@
 						<div class="left-col">
 							<div class="details-block">
 								<div class="panel details-photo">
-									<img src="/download/logo/company/INKIUM" alt="">
+									<img data-bind="attr: { src: logoUrl }" alt="">
 								</div>
 								<br>
 								<a href="\\#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
