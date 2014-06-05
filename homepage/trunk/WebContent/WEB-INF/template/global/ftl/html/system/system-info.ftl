@@ -95,7 +95,7 @@
 											
 						if( ! $("#perm-gen-gauge").data("kendoRadialGauge") ){	
 							$("#perm-gen-gauge").kendoRadialGauge({
-								theme: "white",
+								theme: "black",
 								pointer: {
 									value: data.memoryInfo.usedPermGen.megabytes,
 									color: "#ea7001"		
