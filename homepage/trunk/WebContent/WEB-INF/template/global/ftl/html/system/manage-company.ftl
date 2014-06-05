@@ -349,7 +349,7 @@
 			<div class="left-col">
 				<div class="details-block">
 					<div class="panel details-photo">
-						<img src="/download/logo/inkium" alt="">
+						<img src="/download/logo/company/INKIUM" alt="">
 					</div><br>
 					<a href="#" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Following</a>&nbsp;&nbsp;
 					<a href="#" class="btn"><i class="fa fa-comment"></i></a>
