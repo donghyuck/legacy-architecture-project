@@ -3869,11 +3869,12 @@ label,optgroup {
 .panel-heading-controls>.btn,.panel-heading-controls>.btn-group {
 	margin-top: -4px
 }
-
+/*
 .panel-heading-controls>.btn-group.btn-group-sm,.panel-heading-controls>.btn.btn-sm
 	{
 	margin-top: -1px
 }
+*/
 
 .panel-heading-controls>.btn-group.btn-group-xs,.panel-heading-controls>.btn.btn-xs
 	{
