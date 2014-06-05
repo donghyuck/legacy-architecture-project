@@ -272,127 +272,22 @@
 		.k-grid-content{
 			height:300px;
 		}			
-		
-
-		.header-1,
-		.header-1:hover,
-		.header-2,
-		.header-2:hover {
-			text-align: none;
-			cursor: pointer;
-			text-decoration: none !important;
-			display: block;
-			z-index: 100000000;
-			border-top: 1px solid #eee;
-			margin: 0 -9px 0 -9px;
-		}
-
-		.header-1,
-		.header-1:hover {
-			color: #333 !important;
-			font-size: 18px;
-			font-weight: 300;
-			padding: 30px 18px 15px 18px;
-			background: #fafafa;
-			background: rgba(0,0,0,.02);
-			margin-bottom: -15px;
-		}
-
-		.header-2,
-		.header-2:hover {
-			text-transform: uppercase;
-			font-size: 11px;
-			font-weight: 600;
-			color: #888 !important;
-			padding: 10px 18px 0 18px;
-			margin-bottom: 15px;
-			margin-top: 0;
-		}
-
-		.header-1 + .header-2 {
-			margin-top: 10px;
-			margin-bottom: 0;
-		}
-
-		.header-1 + .col-sm-12 {
-			margin-top: 15px;
-			padding-top: 15px;
-			border-top: 1px solid #eee;
-			margin-left: -9px;
-			margin-right: -9px;
-			padding-left: 18px;
-			padding-right: 18px;
-			width: auto !important;
-			float: none;
-		}
-
-		.row {
-			margin-bottom: 15px;
-		}
-
-	
-			
+				
 		</style>
 	</head>
 	<body class="theme-default main-menu-animated">
 		<div id="main-wrapper">
 			<#include "/html/common/common-system-navigation.ftl" >	
 			<div id="content-wrapper">
+				<ul class="breadcrumb breadcrumb-page">
+					<div class="breadcrumb-label text-light-gray">You are here: </div>
+					<li><a href="#">Home</a></li>
+					<li class="active"><a href="#">Dashboard</a></li>
+				</ul>
 				<div class="page-header">
 					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_1") />
 					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i>${selectedMenu.description}<i class="fa fa-quote-right"></i></small></h1>
-				</div><!-- / .page-header -->
-				<div class="no-grid-gutter-h grid-gutter-padding-h" style="background: #444;">
-					<div class="row " style="margin-bottom: 0;">
-						<a id="uidemo-buttons-outline-dark" href="#uidemo-buttons-outline-dark" class="header-2" style="border-top: none;">Dark outline buttons</a>
-						<div class="col-sm-12">
-							<div class="row">
-								<div class="col-sm-12">
-									<button class="btn btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-danger btn-outline dark">Danger</button>
-								</div>
-							</div>
-		
-							<div class="row">
-								<div class="col-sm-12">
-									<button class="btn btn-lg btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-lg btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-lg btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-lg btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-lg btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-lg btn-danger btn-outline dark">Danger</button>
-								</div>
-							</div>
-		
-							<div class="row">
-								<div class="col-sm-12">
-									<button class="btn btn-sm btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-sm btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-sm btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-sm btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-sm btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-sm btn-danger btn-outline dark">Danger</button>
-								</div>
-							</div>
-		
-							<div class="row">
-								<div class="col-sm-12">
-									<button class="btn btn-xs btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-xs btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-xs btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-xs btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-xs btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
-									<button class="btn btn-xs btn-danger btn-outline dark">Danger</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-							
+				</div><!-- / .page-header -->							
 				<div class="row">				
 					<div class="col-sm-12">
 								<div class="btn-group">
@@ -405,13 +300,10 @@
 								</div>
 								<button type="button" class="btn btn-default btn-sm btn-outline btn-flat btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>												
 					</div>					
-					
-				</div>					
-				<div class="row">
-				
-					<div class="col-sm-12">
-					
-					
+				</div>	
+								
+				<div class="row">				
+					<div class="col-sm-12">					
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
 							<span class="panel-title">회사 목록</span>
