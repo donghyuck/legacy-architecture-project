@@ -281,7 +281,58 @@
 				<div class="page-header">
 					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_1") />
 					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i>${selectedMenu.description}<i class="fa fa-quote-right"></i></small></h1>
-				</div><!-- / .page-header -->	
+				</div><!-- / .page-header -->
+				<div class="no-grid-gutter-h grid-gutter-padding-h" style="background: #444;">
+					<div class="row " style="margin-bottom: 0;">
+						<a id="uidemo-buttons-outline-dark" href="#uidemo-buttons-outline-dark" class="header-2" style="border-top: none;">Dark outline buttons</a>
+						<div class="col-sm-12">
+							<div class="row">
+								<div class="col-sm-12">
+									<button class="btn btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-danger btn-outline dark">Danger</button>
+								</div>
+							</div>
+		
+							<div class="row">
+								<div class="col-sm-12">
+									<button class="btn btn-lg btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-lg btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-lg btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-lg btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-lg btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-lg btn-danger btn-outline dark">Danger</button>
+								</div>
+							</div>
+		
+							<div class="row">
+								<div class="col-sm-12">
+									<button class="btn btn-sm btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-sm btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-sm btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-sm btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-sm btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-sm btn-danger btn-outline dark">Danger</button>
+								</div>
+							</div>
+		
+							<div class="row">
+								<div class="col-sm-12">
+									<button class="btn btn-xs btn-outline dark">Default</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-xs btn-primary btn-outline dark">Primary</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-xs btn-info btn-outline dark">Info</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-xs btn-success btn-outline dark">Success</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-xs btn-warning btn-outline dark">Warning</button> &nbsp;&nbsp;&nbsp;
+									<button class="btn btn-xs btn-danger btn-outline dark">Danger</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+							
 				<div class="row">				
 					<div class="col-sm-12">
 								<div class="btn-group">
@@ -294,10 +345,7 @@
 								</div>
 								<button type="button" class="btn btn-default btn-sm btn-outline btn-flat btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>												
 					</div>					
-					<p class="header-2">회사 목록</p>	
-	
-	
-	
+					
 				</div>					
 				<div class="row">
 				
