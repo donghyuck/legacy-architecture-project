@@ -347,7 +347,6 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
-		
 					<div class="details-full-name">
 						<span class="text-semibold">Denise Steiner</span> 상세정보
 					</div>
@@ -366,7 +365,7 @@
 									<span class="panel-title">설명</span>
 								</div>
 								<div class="panel-body">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="#">dolore magna</a> aliqua.
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="\\#">dolore magna</a> aliqua.
 								</div>
 							</div>
 						</div>
