@@ -291,8 +291,7 @@
 						<div class="col-xs-12 col-sm-6">
 							<div class="row">
 								<hr class="visible-xs no-grid-gutter-h">							
-								<div class="pull-right col-xs-12 col-sm-auto">
-									<a href="#" class="btn btn-primary btn-labeled" style="width: 100%;"><span class="btn-label icon fa fa-plus"></span>Create project</a>
+								<div class="pull-right col-xs-12 col-sm-auto">									
 									<div class="btn-group btn-group-sm">
 										<button type="button" class="btn btn-primary btn-sm btn-flat btn-labeled btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
 										<button type="button" class="btn btn-primary btn-sm btn-flat btn-labeled btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
