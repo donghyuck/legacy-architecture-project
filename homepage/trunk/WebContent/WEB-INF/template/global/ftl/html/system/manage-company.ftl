@@ -170,13 +170,15 @@
 			
 			if( $('#company-details').text().length === 0 ){
 				$('#company-details').html(kendo.template($('#company-details-template').html()));	
+				
 				var detailsModel = kendo.observable({
 					company : new Company(),
-					logoUrl : function (){
+					logoUrl : function(){
 						return "/download/logo/company/" + this.company.name ;
 					}
 				});
-				$('#company-details').bind(detailsModel );	
+				
+				kendo.bind($('#company-details', detailsModel );	
 				$('#company-details').data("model", detailsModel );					
 				$('#company-details').show();			
 			}
