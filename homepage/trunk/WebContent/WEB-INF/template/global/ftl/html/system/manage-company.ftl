@@ -382,7 +382,7 @@
 								<!-- .tab-content -->	
 								<div class="tab-content tab-content-bordered no-padding">
 									<div class="tab-pane active" id="props">
-										<div class="alert alert-danger alert-dark no-border-radius no-margin-b">
+										<div class="alert alert-info alert-dark no-border-radius no-margin-b">
 											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 											프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
 										</div>						
