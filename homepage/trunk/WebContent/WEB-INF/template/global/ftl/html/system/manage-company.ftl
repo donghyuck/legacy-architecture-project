@@ -154,7 +154,7 @@
 		
 		
 		function creatCompanyGrid(){
-		
+			
 		} 
 		
 		function getSelectedCompany(){
@@ -165,11 +165,11 @@
 		}
 		
 		function showCompanyDetails(){
-			var companyPlaceHolder = getSelectedCompany();		
-			
-			if( $('#company-details').length === 0 ){
-			
+			var companyPlaceHolder = getSelectedCompany();
+			if( $('#company-details').text().length === 0 ){
+				$('#company-details').html(kendo.template($('#company-details-template').html()));	
 			}
+			
 			
 			/*
 				
