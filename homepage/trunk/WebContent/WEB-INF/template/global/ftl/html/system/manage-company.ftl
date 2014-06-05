@@ -101,8 +101,7 @@
 					editable: "inline",
 					selectable: 'row',
 					height: '100%',
-					batch: false,
-					toolbar: [ { name: "create", text: "회사 추가" } ],                    
+					batch: false,              
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
