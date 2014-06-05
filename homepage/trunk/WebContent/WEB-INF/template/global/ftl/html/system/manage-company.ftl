@@ -409,10 +409,10 @@
 						<div id="company-group-grid"  class="groups no-border"></div>					
 					</div>
 					<div class="tab-pane" id="users">
-						<div class="alert alert-page alert-danger alert-dark" data-animate="true">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
-						</div>							
+						<div class="note note-danger">
+							<button type="button" class="close" data-dismiss="note" aria-hidden="true">&times;</button>
+							사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
+						</div>			
 						<div id="company-user-grid"  class="users no-border"></div>
 					</div>				
 				</div>
