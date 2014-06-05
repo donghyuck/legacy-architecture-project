@@ -47,6 +47,9 @@
 				common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
+						'create-company' : function(e){
+							$("#company-grid").data('kendoGrid').addRow();			
+						}, 	
 						user : function(e){
 							topBar.go('main-user.do');								
 						}, 	
@@ -313,7 +316,7 @@
 								<span class="panel-title"><i class="panel-title-icon fa fa-building-o"></i></span>
 								<div class="panel-heading-controls">
 									<span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
-									<button class="btn btn-danger btn-xs">회사 만들기 </button>
+									<button class="btn btn-danger btn-xs btn-control-group" data-action="create-company">회사 만들기 </button>
 								</div>
 							</div>
 							<div id="company-grid" class="no-border"></div>	
