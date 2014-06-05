@@ -334,11 +334,13 @@
 						</div>
 					</div>	
 				</div>
+				<!--
 				<div class="row">					
 					<div class="col-sm-12">					
 						<div id="company-details" style="display:none;"></div>					
 					</div>
 				</div>
+				-->
 				<!-- company details -->
 				<div id="company-details" class="page-details" style="display:none;">
 				</div><!-- /company details -->		
