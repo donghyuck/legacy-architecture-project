@@ -308,10 +308,11 @@
 					<div class="col-sm-12">					
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
-							<span class="panel-title">회사 목록</span>
-							<div class="panel-heading-controls">
-			
-							</div>
+								<span class="panel-title">회사 목록</span>
+								<div class="panel-heading-controls">
+									<span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+									<button class="btn btn-xs">Button</button>
+								</div>
 							</div>
 							<div class="panel-body" style="padding:5px;">
 								<div class="row paddingless">
