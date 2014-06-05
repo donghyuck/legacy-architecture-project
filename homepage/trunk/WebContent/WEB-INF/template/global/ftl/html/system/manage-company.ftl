@@ -342,12 +342,9 @@
 				<!-- details -->
 				<div class="page-details">
 					<div class="details-full-name">
-						<span class="text-semibold">Denise Steiner</span>'s profile
+						<span class="text-semibold">Denise Steiner</span> 상세정보
 					</div>
-				
-				</div>
-				
-				
+
 <div class="details-row">
 			<div class="left-col">
 				<div class="details-block">
@@ -399,7 +396,11 @@
 					</div> <!-- / .tab-content -->
 				</div>
 			</div>
-		</div>
+		</div>				
+				</div>
+				
+				
+
 								
 		
 			</div> <!-- / #content-wrapper -->
