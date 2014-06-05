@@ -277,6 +277,17 @@
 		
 		} 
 		
+		function selectedCompany(){
+			var grid = $("#company-grid").data('kendoGrid');
+			var selectedCells = grid.select();
+			var selectedCell = grid.dataItem( selectedCells );   
+			return selectedCell;
+		}
+		
+		function showCompanyDetails(){
+		
+		}
+		
 		-->
 		</script> 		 
 		<style>
@@ -342,8 +353,7 @@
 				</div>
 				-->
 				<!-- company details -->
-				<div id="company-details" class="page-details" style="display:none;">
-				</div><!-- /company details -->		
+				<div id="company-details" class="page-details" style="display:none;"></div><!-- /company details -->		
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
 			</div>
