@@ -287,8 +287,8 @@
 				<div class="page-header">				
 					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_1") />
 					<div class="row">
-						<h1 class="col-xs-12 col-sm-4 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i>${selectedMenu.description}<i class="fa fa-quote-right"></i></small></h1>
-						<div class="col-xs-12 col-sm-8">
+						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <p><small><i class="fa fa-quote-left"></i>${selectedMenu.description}<i class="fa fa-quote-right"></i></small></p></h1>
+						<div class="col-xs-12 col-sm-6">
 							<div class="row">
 								<hr class="visible-xs no-grid-gutter-h">							
 								<div class="pull-right col-xs-12 col-sm-auto">
