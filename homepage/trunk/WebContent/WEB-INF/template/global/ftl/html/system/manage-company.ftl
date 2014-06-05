@@ -402,7 +402,7 @@
 						<div id="company-prop-grid" class="props no-border"></div>
 					</div>
 					<div class="tab-pane" id="groups">					
-						<div class="alert alert-info alert-dark no-border-radius no-border-hr">
+						<div class="alert alert-info alert-dark no-border-radius">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
 						</div>						
