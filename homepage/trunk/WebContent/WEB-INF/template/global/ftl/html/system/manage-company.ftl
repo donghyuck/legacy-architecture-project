@@ -293,10 +293,10 @@
 								<hr class="visible-xs no-grid-gutter-h">							
 								<div class="pull-right col-xs-12 col-sm-auto">									
 									<div class="btn-group">
-										<button type="button" class="btn btn-primary btn-sm btn-outline btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
-										<button type="button" class="btn btn-primary btn-sm btn-outline btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
 									</div>									
-									<button type="button" class="btn btn-info btn-sm btn-outline btn-control-group btn-columns-expend" data-action="layout"><i class="btn-label icon fa fa-columns"></i></button>	
+									<button type="button" class="btn btn-info btn-sm btn-control-group btn-columns-expend" data-action="layout"><i class="btn-label icon fa fa-columns"></i></button>	
 									
 								</div>
 							</div>
