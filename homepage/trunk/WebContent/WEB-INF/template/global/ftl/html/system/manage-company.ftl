@@ -367,9 +367,7 @@
 							</div>
 							<div id="company-grid" class="no-border"></div>	
 						</div>
-						<div id="company-details" style="display:none;"></div>
-					</div>				
-				
+					</div>	
 				</div>
 		
 		<!--<span class="label label-success">12</span>
