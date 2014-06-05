@@ -393,7 +393,7 @@
 						<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-success">1234</span></a></li>
 					</ul>						
 				</div>
-				<div class="tab-content tab-content-bordered no-padding-hr no-padding-b">
+				<div class="tab-content tab-content-bordered no-padding">
 					<div class="tab-pane active" id="props">
 						<div class="alert alert-danger" data-animate="true">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
