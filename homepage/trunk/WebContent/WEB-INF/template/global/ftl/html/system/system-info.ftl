@@ -286,7 +286,7 @@
 					</div>									
 				</div><!-- memory status end -->
 				<div class="row">			
-					<a href="#uidemo-tabs-default" class="header-2">시스템 정보</a>
+					<a href="#" class="header-2">시스템 정보</a>
 					<div class="col-lg-12">	
 						<div class="panel colourable">
 							<div class="panel-heading">
