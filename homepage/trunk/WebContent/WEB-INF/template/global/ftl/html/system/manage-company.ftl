@@ -170,6 +170,8 @@
 			if( $('#company-details').length === 0 ){
 			
 			}
+			
+			/*
 				
 			if( ! $("#image-grid").data("kendoGrid") ){	
 				$('#myTab').on( 'show.bs.tab', function (e) {		
@@ -192,7 +194,8 @@
 				});			
 				$('#myTab a:first').tab('show') ;		
 			}
-			$('#company-details').toggleClass('hide');									
+			$('#company-details').toggleClass('hide');			
+			*/						
 		}
 		
 		-->
