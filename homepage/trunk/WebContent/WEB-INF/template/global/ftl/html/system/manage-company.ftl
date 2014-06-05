@@ -370,7 +370,7 @@
 					</div>	
 				</div>
 		
-		<!--<span class="label label-success">12</span>
+		<!--
 		<div class="tab-content tab-content-bordered">
 		-->
 				<div class="row">
@@ -387,13 +387,10 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">			
-			<div class="panel colourable" >
-				<div class="panel-heading" >
-					<span class="panel-title">상세정보</span>											
-					<ul id="myTab" class="nav nav-tabs nav-tabs-xs">
+					<ul id="myTab" class="nav nav-tabs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
-						<li><a href="\\#users" data-toggle="tab">사용자</a></li>
+						<li><a href="\\#users" data-toggle="tab">사용자</a> <span class="label label-success">1234</span></li>
 					</ul>						
 				</div>
 				<div class="tab-content">
