@@ -284,6 +284,9 @@
 		}
 					
 
+
+
+
 				
 		</style>
 	</head>
@@ -336,13 +339,13 @@
 					</div>
 				</div>
 				
-				<div class="profile-full-name">
+				<div class="details-full-name">
 					<span class="text-semibold">Denise Steiner</span>'s profile
 				</div>
-<div class="profile-row">
+<div class="details-row">
 			<div class="left-col">
-				<div class="profile-block">
-					<div class="panel profile-photo">
+				<div class="details-block">
+					<div class="panel details-photo">
 						<img src="assets/demo/avatars/5.jpg" alt="">
 					</div><br>
 					<a href="#" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Following</a>&nbsp;&nbsp;
@@ -367,18 +370,18 @@
 			</div>
 			<div class="right-col">
 
-				<hr class="profile-content-hr no-grid-gutter-h">
+				<hr class="details-content-hr no-grid-gutter-h">
 				
-				<div class="profile-content">
+				<div class="details-content">
 
-					<ul id="profile-tabs" class="nav nav-tabs">
+					<ul id="details-tabs" class="nav nav-tabs">
 						<li class="">
-							<a href="#profile-tabs-board" data-toggle="tab">Board</a>
+							<a href="#details-tabs-board" data-toggle="tab">Board</a>
 						</li>
 						
 						
 						<li class="active">
-							<a href="#profile-tabs-following" data-toggle="tab">Following</a>
+							<a href="#details-tabs-following" data-toggle="tab">Following</a>
 						</li>
 					</ul>
 
