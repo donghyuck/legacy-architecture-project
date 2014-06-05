@@ -166,6 +166,8 @@
 		
 		function showCompanyDetails(){
 			var companyPlaceHolder = getSelectedCompany();
+			alert(companyPlaceHolder);
+			
 			if( $('#company-details').text().length === 0 ){
 				$('#company-details').html(kendo.template($('#company-details-template').html()));	
 				var detailsModel = kendo.observable({
