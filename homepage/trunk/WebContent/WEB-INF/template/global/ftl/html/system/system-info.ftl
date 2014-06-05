@@ -231,23 +231,25 @@
 							</div><!-- /.stat-row -->
 							<div class="stat-row">								
 								<div class="stat-cell bordered no-border-t no-padding-hr" style="padding: 0 0 0 0;">								
-									<div id="mem-gen-gauge" style="display: inline-block !important;"></div>
-									<table class="table table-striped memory-details" style="margin-bottom: 0;">
-									 	<thead>
-									 		<tr>
-		            							<th>Total Memory</th>
-		            							<th>Used Memory</th>
-		            						</tr>	
-									 	</thead>
-									 	<tbody>
-									 		<tr>
-												<td><span data-bind="text: maxHeap.megabytes"></span>MB</td>
-												<td><span data-bind="text: usedHeap.megabytes"></span>MB</td>
-									 		</tr>
-									 	</tbody>
-									</table>
+									<div id="mem-gen-gauge" style="display: inline-block !important;"></div>									
 								</div>							
-							</div> <!-- /.stat-row -->
+							</div> <!-- /.stat-row -->						
+							<div class="stat-row memory-details">
+								<div class="stat-counters bg-primary bordered no-border-t text-center">
+									<div class="stat-cell col-xs-6 padding-sm no-padding-hr">
+										<!-- Big text -->
+										<span class="text-bg"><strong><span data-bind="text: maxHeap.megabytes"></span>MB</strong></span><br>
+										<!-- Extra small text -->
+										<span class="text-xs">Total Memory</span>
+									</div>
+									<div class="stat-cell col-xs-6 padding-sm no-padding-hr">
+										<!-- Big text -->
+										<span class="text-bg"><strong><span data-bind="text: usedHeap.megabytes"></span>MB</strong></span><br>
+										<!-- Extra small text -->
+										<span class="text-xs">Used Memory</span>
+									</div>
+								</div> <!-- /.stat-counters -->
+							</div>						
 						</div> <!-- /.stat-panel -->
 					</div>					
 					<div class="col-xs-3">
