@@ -281,7 +281,7 @@
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
 					<div class="details-full-name">
-						<span class="text-semibold">Denise Steiner</span> 상세정보
+						<span class="text-semibold" data-bind="text:company.displayName"></span> 상세정보
 					</div>
 					<div class="details-row">					
 						<div class="left-col">
