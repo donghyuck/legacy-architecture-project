@@ -340,7 +340,7 @@
 					</div>
 				</div>
 				
-				<div calss="page-details">
+				<div calss="page-details"></div>
 						<div class="profile-full-name">
 			<span class="text-semibold">Denise Steiner</span>'s profile
 		</div>
@@ -397,7 +397,7 @@
 				</div>
 			</div>
 		</div>
-</div>								
+								
 		
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
