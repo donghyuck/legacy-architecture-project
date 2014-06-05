@@ -36,3 +36,54 @@
 	max-width: 100%;
 	border-radius: 999999px;
 }
+
+
+.page-details .left-col>.panel .panel-heading {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.page-details .left-col>.panel .panel-body {
+	padding: 10px;
+	padding-bottom: 0;
+}
+
+.page-details  .left-col .list-group-item {
+	background: none !important;
+	border: none;
+	padding-bottom: 0;
+	margin-top: 7px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.page-details .details-skills .label {
+	display: block;
+	float: left;
+	margin-right: 4px;
+	margin-bottom: 4px;
+}
+
+.page-details .details-list-icon {
+	width: 24px;
+	text-align: center;
+	font-size: 14px;
+}
+
+.page-details .tl-entry:before,.page-details .tl-header,.page-details .tl-icon
+	{
+	box-shadow: 0 0 0 4px #fff !important;
+}
+
+.page-details .widget-followers {
+	margin: -20px;
+}
+
+.page-details .widget-followers .follower {
+	padding: 13px 20px;
+}
+
+.page-details  .details-content-hr {
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
