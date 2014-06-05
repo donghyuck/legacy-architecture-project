@@ -339,10 +339,14 @@
 						<div id="company-details" style="display:none;"></div>					
 					</div>
 				</div>
+				<!-- details -->
+				<div class="page-details">
+					<div class="details-full-name">
+						<span class="text-semibold">Denise Steiner</span>'s profile
+					</div>
 				
-						<div class="details-full-name">
-			<span class="text-semibold">Denise Steiner</span>'s profile
-		</div>
+				</div>
+				
 				
 <div class="details-row">
 			<div class="left-col">
