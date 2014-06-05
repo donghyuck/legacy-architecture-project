@@ -334,12 +334,12 @@
 							<div class="btn-group btn-group-xs">
 								<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><span class="fa fa-cog"></span>&nbsp;<span class="fa fa-caret-down"></span></button>
 								<ul class="dropdown-menu dropdown-menu-right">
-									<li><a href="#">Action</a></li>
-									<li><a href="#">Another action</a></li>
-									<li><a href="#">Something else here</a></li>
+									<li><a href="\\#">Action</a></li>
+									<li><a href="\\#">Another action</a></li>
+									<li><a href="\\#">Something else here</a></li>
 									<li class="divider"></li>
 									<li class="dropdown-header">Some header</li>
-									<li><a href="#">Separated link</a></li>
+									<li><a href="\\#">Separated link</a></li>
 								</ul> <!-- / .dropdown-menu -->
 							</div> <!-- / .btn-group -->
 						</div>
