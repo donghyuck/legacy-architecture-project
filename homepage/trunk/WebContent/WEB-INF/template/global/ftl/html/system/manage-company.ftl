@@ -340,8 +340,7 @@
 					</div>
 				</div>
 				
-				<div calss="page-details"></div>
-						<div class="profile-full-name">
+						<div class="details-full-name">
 			<span class="text-semibold">Denise Steiner</span>'s profile
 		</div>
 				
