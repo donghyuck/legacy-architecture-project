@@ -340,19 +340,26 @@
 					</div>
 				</div>
 				<!-- company details -->
-				<div class="page-details">
+				<div id="company-details" class="page-details" style="display:none;">
+				</div><!-- /company details -->		
+			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg">
+			</div>
+		</div> <!-- / #main-wrapper -->
+		<script type="text/x-kendo-template" id="company-details-template">		
+		
 					<div class="details-full-name">
 						<span class="text-semibold">Denise Steiner</span> 상세정보
 					</div>
-					<div class="details-row">
+					<div class="details-row">					
 						<div class="left-col">
 							<div class="details-block">
 								<div class="panel details-photo">
 									<img src="/download/logo/company/INKIUM" alt="">
 								</div>
 								<br>
-								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
-								<a href="#" class="btn"><i class="fa fa-comment"></i></a>
+								<a href="\\#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
+								<a href="\\#" class="btn"><i class="fa fa-comment"></i></a>
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
@@ -364,62 +371,40 @@
 							</div>
 						</div>
 						<div class="right-col">
-							<hr class="details-content-hr no-grid-gutter-h">				
+							<hr class="details-content-hr no-grid-gutter-h">	
 							<div class="details-content">
-								<ul id="details-tabs" class="nav nav-tabs">
-									<li class="">
-										<a href="#details-tabs-board" data-toggle="tab">Board</a>
-									</li>						
-									<li class="active">
-										<a href="#details-tabs-following" data-toggle="tab">Following</a>
-									</li>
-								</ul>
+								<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
+									<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
+									<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-success">22</span></a></li>
+									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-success">1234</span></a></li>
+								</ul>	
+								<!-- .tab-content -->	
 								<div class="tab-content tab-content-bordered panel-padding">
-									 <!-- / .tab-pane -->
-									 <!-- / .tab-pane -->
-									 <!-- / .tab-pane -->
-									 <!-- / .tab-pane -->
-								</div> <!-- / .tab-content -->
-							</div>
-						</div>
-					</div>				
-				</div><!-- /company details -->		
-			</div> <!-- / #content-wrapper -->
-			<div id="main-menu-bg">
-			</div>
-		</div> <!-- / #main-wrapper -->
-		<script type="text/x-kendo-template" id="company-details-template">		
-			<a href="\\#" class="header-2">상세정보</a>	
-					<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
-						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-						<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-success">22</span></a></li>
-						<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-success">1234</span></a></li>
-					</ul>						
-				</div>
-				<div class="tab-content tab-content-bordered no-padding">
-					<div class="tab-pane active" id="props">
-						<div class="alert alert-danger alert-dark no-border-radius">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
-						</div>						
-						<div id="company-prop-grid" class="props no-border"></div>
-					</div>
-					<div class="tab-pane" id="groups">					
-						<div class="alert alert-info alert-dark no-border-radius">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
-						</div>						
-						<div id="company-group-grid"  class="groups no-border"></div>					
-					</div>
-					<div class="tab-pane" id="users">
-						<div class="alert alert-info alert-dark no-border-radius">
-							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
-						</div>			
-						<div id="company-user-grid"  class="users no-border"></div>
-					</div>				
-				</div>
-			</div>
+									<div class="tab-pane active" id="props">
+										<div class="alert alert-danger alert-dark no-border-radius">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+											프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
+										</div>						
+										<div id="company-prop-grid" class="props no-border"></div>
+									</div>
+									<div class="tab-pane" id="groups">					
+										<div class="alert alert-info alert-dark no-border-radius">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+											그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
+										</div>						
+										<div id="company-group-grid"  class="groups no-border"></div>					
+									</div>
+									<div class="tab-pane" id="users">
+										<div class="alert alert-info alert-dark no-border-radius">
+											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+											사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
+										</div>			
+										<div id="company-user-grid"  class="users no-border"></div>
+									</div>
+								</div><!-- / .tab-content -->
+							</div><!-- / .details-content -->
+						</div><!-- / .right-col -->
+					</div><!-- / .details-row -->	
 		</script>				
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
