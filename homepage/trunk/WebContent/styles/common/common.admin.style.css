@@ -2492,7 +2492,7 @@ h1 .label,h2 .label,h3 .label,h4 .label,h5 .label,h6 .label {
 .alert .close {
 	top: 0;
 	float: right;
-	font-size: 19.5px;
+	font-size: 18px;
 	font-weight: 700;
 	line-height: 1;
 	color: #000;
