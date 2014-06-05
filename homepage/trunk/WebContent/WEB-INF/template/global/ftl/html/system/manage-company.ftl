@@ -294,10 +294,16 @@
 								</div>
 								<button type="button" class="btn btn-default btn-sm btn-outline btn-flat btn-control-group btn-columns-expend" data-action="layout"><i class="fa fa-columns"></i></button>												
 					</div>					
+					<p class="header-2">회사 목록</p>	
+	
+	
+	
 				</div>					
 				<div class="row">
 				
 					<div class="col-sm-12">
+					
+					
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
 							<span class="panel-title">회사 목록</span>
