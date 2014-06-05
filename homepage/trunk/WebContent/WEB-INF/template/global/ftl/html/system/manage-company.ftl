@@ -371,7 +371,7 @@
 				</div>
 		
 		<!--
-		<div class="tab-content tab-content-bordered">
+		
 		-->
 				<div class="row">
 					<a href="#uidemo-tabs-default" class="header-2">상세정보</a>
@@ -393,7 +393,7 @@
 						<li><a href="\\#users" data-toggle="tab">사용자</a> <span class="label label-success">1234</span></li>
 					</ul>						
 				</div>
-				<div class="tab-content">
+				<div class="tab-content tab-content-bordered">
 					<div class="tab-pane active" id="props">
 						<div class="alert alert-page alert-danger alert-dark" data-animate="true">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
