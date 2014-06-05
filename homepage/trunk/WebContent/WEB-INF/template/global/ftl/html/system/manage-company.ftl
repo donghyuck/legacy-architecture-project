@@ -341,9 +341,10 @@
 				</div>
 				
 				<div calss="page-details"></div>
-				<div class="details-full-name">
-					<span class="text-semibold">Denise Steiner</span>'s profile
-				</div>
+						<div class="profile-full-name">
+			<span class="text-semibold">Denise Steiner</span>'s profile
+		</div>
+				
 <div class="details-row">
 			<div class="left-col">
 				<div class="details-block">
