@@ -314,17 +314,9 @@
 									<button class="btn btn-danger btn-xs">회사 만들기 </button>
 								</div>
 							</div>
-							<div id="company-grid" class="no-border"></div>
-							<div class="panel-body" style="padding:5px;">
-								<div class="row paddingless">
-									<div class="col-sm-12 body-group">
-										
-									</div>
-									
-								</div>
-							</div>							
-							<div id="company-details" style="display:none;"></div>
+							<div id="company-grid" class="no-border"></div>	
 						</div>
+						<div id="company-details" style="display:none;"></div>
 					</div>				
 				
 				</div>
