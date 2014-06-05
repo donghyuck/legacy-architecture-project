@@ -8,11 +8,11 @@
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common.extension/animate.css',
+			'css!${request.contextPath}/styles/common.extension/animate.css',/*
 			'css!${request.contextPath}/styles/common/common.admin.widgets.css',			
-			'css!${request.contextPath}/styles/common/common.admin.rtl.css',			
+			'css!${request.contextPath}/styles/common/common.admin.rtl.css',	*/		
 			'css!${request.contextPath}/styles/common/common.admin.themes.css',
-			'css!${request.contextPath}/styles/common/common.admin.page.css',	
+			'css!${request.contextPath}/styles/common/common.admin.pages.css',	
 			/*'${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js',*/
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
