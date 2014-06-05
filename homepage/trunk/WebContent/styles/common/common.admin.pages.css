@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+/**
+ admin pages css
+*/
+
+.page-details .details-full-name {
+	font-size: 20px;
+	font-weight: 300;
+	line-height: 40px;
+	padding-top: 15px;
+	padding-bottom: 20px;
+	position: relative;
+	border-bottom-width: 2px;
+	margin-bottom: 0;
+	text-align: center
+}
