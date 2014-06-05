@@ -328,6 +328,22 @@
 			<div class="panel colourable" >
 				<div class="panel-heading" >
 					<span class="panel-title">상세정보</span>
+<div class="panel-heading-controls">
+							<button class="btn btn-xs btn-warning btn-outline"><span class="fa fa-refresh"></span>&nbsp;&nbsp;Refresh</button>
+							<button class="btn btn-xs btn-danger btn-outline"><span class="fa fa-paperclip"></span></button>
+							<div class="btn-group btn-group-xs">
+								<button class="btn btn-info dropdown-toggle" type="button" data-toggle="dropdown"><span class="fa fa-cog"></span>&nbsp;<span class="fa fa-caret-down"></span></button>
+								<ul class="dropdown-menu dropdown-menu-right">
+									<li><a href="#">Action</a></li>
+									<li><a href="#">Another action</a></li>
+									<li><a href="#">Something else here</a></li>
+									<li class="divider"></li>
+									<li class="dropdown-header">Some header</li>
+									<li><a href="#">Separated link</a></li>
+								</ul> <!-- / .dropdown-menu -->
+							</div> <!-- / .btn-group -->
+						</div>
+											
 					<ul id="myTab" class="nav nav-tabs nav-tabs-xs">
 						<li class="active"><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 						<li><a href="\\#groups" data-toggle="tab">그룹</a></li>
