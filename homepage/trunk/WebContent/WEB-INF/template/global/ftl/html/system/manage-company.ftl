@@ -343,23 +343,18 @@
 						<div id="company-prop-grid" class="props no-border"></div>
 					</div>
 					<div class="tab-pane" id="groups">					
-						<div class="alert alert-page alert-danger alert-dark margin-buttom-5">
+						<div class="alert alert-page alert-danger alert-dark">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 							그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	     
 						</div>						
 						<div id="company-group-grid"  class="groups no-border"></div>					
 					</div>
 					<div class="tab-pane" id="users">
-						<div class="alert alert-page alert-danger alert-dark margin-buttom-5">
-  
+						<div class="alert alert-page alert-danger alert-dark">
+								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+								사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	     
 						</div>							
 						<div id="company-user-grid"  class="users no-border"></div>
-						<div class="panel-footer">
-							<div class="alert alert-page alert-danger alert-dark">
-								<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-								사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	 
-							</div>	  						
-						</div>
 					</div>				
 				</div>
 			</div>
