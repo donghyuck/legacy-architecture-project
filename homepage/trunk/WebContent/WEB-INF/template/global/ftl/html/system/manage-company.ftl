@@ -320,16 +320,10 @@
 						</div>
 					</div>	
 				</div>
-		
-		<!--
-		
-		-->
 				<div class="row">
-					<a href="#uidemo-tabs-default" class="header-2">상세정보</a>
-					<div class="col-sm-12">
-					
-					<div id="company-details" style="display:none;"></div>
-					
+					<a href="#" class="header-2">상세정보</a>
+					<div class="col-sm-12">					
+						<div id="company-details" style="display:none;"></div>					
 					</div>
 				</div>		
 		
