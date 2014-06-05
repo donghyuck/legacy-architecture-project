@@ -34,7 +34,9 @@
 				common.ui.landing();				
 				// 1-3.  관리자  로딩
 				var currentUser = new User();
+				
 				var targetCompany = new Company();	
+				
 				common.ui.admin.setup({
 					authenticate : function(e){
 						e.token.copy(currentUser);
@@ -268,6 +270,12 @@
 				// END SCRIPT
 			}
 		}]);
+		
+		
+		function creatCompanyGrid(){
+		
+		} 
+		
 		-->
 		</script> 		 
 		<style>
@@ -326,7 +334,64 @@
 					<div class="col-sm-12">					
 						<div id="company-details" style="display:none;"></div>					
 					</div>
-				</div>		
+				</div>
+				
+				<div class="profile-full-name">
+					<span class="text-semibold">Denise Steiner</span>'s profile
+				</div>
+<div class="profile-row">
+			<div class="left-col">
+				<div class="profile-block">
+					<div class="panel profile-photo">
+						<img src="assets/demo/avatars/5.jpg" alt="">
+					</div><br>
+					<a href="#" class="btn btn-success"><i class="fa fa-check"></i>&nbsp;&nbsp;Following</a>&nbsp;&nbsp;
+					<a href="#" class="btn"><i class="fa fa-comment"></i></a>
+				</div>
+				
+				<div class="panel panel-transparent">
+					<div class="panel-heading">
+						<span class="panel-title">About me</span>
+					</div>
+					<div class="panel-body">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="#">dolore magna</a> aliqua.
+					</div>
+				</div>
+
+				
+
+				
+
+				
+
+			</div>
+			<div class="right-col">
+
+				<hr class="profile-content-hr no-grid-gutter-h">
+				
+				<div class="profile-content">
+
+					<ul id="profile-tabs" class="nav nav-tabs">
+						<li class="">
+							<a href="#profile-tabs-board" data-toggle="tab">Board</a>
+						</li>
+						
+						
+						<li class="active">
+							<a href="#profile-tabs-following" data-toggle="tab">Following</a>
+						</li>
+					</ul>
+
+					<div class="tab-content tab-content-bordered panel-padding">
+						 <!-- / .tab-pane -->
+						 <!-- / .tab-pane -->
+						 <!-- / .tab-pane -->
+						 <!-- / .tab-pane -->
+					</div> <!-- / .tab-content -->
+				</div>
+			</div>
+		</div>
+								
 		
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
