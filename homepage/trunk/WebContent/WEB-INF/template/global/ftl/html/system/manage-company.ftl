@@ -110,8 +110,11 @@
 						// 1-1 SELECTED EVENT  
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
-							// 1-1-1 선택된 로의 Company 정보로 selectedCompany 객체를 설정한다.
 							var selectedCell = this.dataItem( selectedCells );	     
+							if( selectedCell.companyId > 0 )
+								showCompanyDetails();
+							
+							/*
 							if( selectedCell.companyId > 0 && selectedCell.companyId != selectedCompany.companyId ){
 								selectedCompany.companyId = selectedCell.companyId;
 								selectedCompany.name = selectedCell.name;
@@ -123,133 +126,10 @@
 								selectedCompany.formattedCreationDate  =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.creationDate );      
 								selectedCompany.formattedModifiedDate =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.modifiedDate );    
 								
-								// 1-1-2 템플릿을 이용한 상세 정보 출력	
+								
 								$('#company-details').show().html(kendo.template($('#company-details-template').html()));	
-								kendo.bind( $('#company-details'), selectedCompany );						
-
-								if( ! $('#company-prop-grid').data("kendoGrid") ){													
-												$('#company-prop-grid').kendoGrid({
-													dataSource: {
-														transport: { 
-															read: { url:'${request.contextPath}/secure/get-company-property.do?output=json', type:'post' },
-															create: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post' },
-															update: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post'  },
-															destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
-													 		parameterMap: function (options, operation){			
-														 		if (operation !== "read" && options.models) {
-														 			return { companyId: selectedCompany.companyId, items: kendo.stringify(options.models)};
-																} 
-																return { companyId: selectedCompany.companyId }
-															}
-														},						
-														batch: true, 
-														schema: {
-															data: "targetCompanyProperty",
-															model: Property
-														},
-														error:common.api.handleKendoAjaxError
-													},
-													columns: [
-														{ title: "속성", field: "name" },
-														{ title: "값",   field: "value" },
-														{ command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
-													],
-													pageable: false,
-													resizable: true,
-													editable : true,
-													scrollable: true,
-													//height: 350,
-													toolbar: [
-														{ name: "create", text: "추가" },
-														{ name: "save", text: "저장" },
-														{ name: "cancel", text: "취소" }
-													],				     
-													change: function(e) {
-													}
-												});		
-								}
-																		
-								$('#myTab a').click(function (e) {
-									e.preventDefault(); 
-									 if( $(this).attr('href') == '#props' ){	 									 
-									 }else if( $(this).attr('href') == '#groups' ){		
-										if( ! $('#company-group-grid').data("kendoGrid") ){	
-											$('#company-group-grid').kendoGrid({
-						   							dataSource: {
-														type: "json",
-														transport: {
-															read: { url:'${request.contextPath}/secure/list-company-group.do?output=json', type:'post' },
-															destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
-															parameterMap: function (options, operation){
-																if (operation !== "read" && options.models) {
-												 	    			return { companyId: selectedCompany.companyId, items: kendo.stringify(options.models)};
-										            			}
-											            		return { companyId: selectedCompany.companyId }
-												   			}
-														},
-														schema: {
-															data: "companyGroups",
-															model: Group
-														},
-														error:common.api.handleKendoAjaxError
-													},
-													//height: 350,
-													scrollable: true,
-													editable: false,
-													columns: [
-														{ field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
-														{ field: "name",    title: "KEY",  filterable: true, sortable: true,  width: 100 },
-														{ field: "displayName",    title: "그룹",  filterable: true, sortable: true,  width: 100 },
-														{ field: "description",    title: "설명",  filterable: false,  sortable: false },
-														{ field:"memberCount", title: "멤버", filterable: false,  sortable: false, width:50 }
-													],
-													dataBound:function(e){},
-													toolbar: [{ name: "create-groups", text: "디폴트 그룹 생성하기", imageClass:"k-icon k-i-folder-add" , className: "createGroupsCustomClass" }]
-											});		
-										}								 
-									 }else if( $(this).attr('href') == '#users' ){						
-										if( ! $('#company-user-grid').data("kendoGrid") ){	
-											$('#company-user-grid').kendoGrid({
-								   				dataSource: {
-													type: "json",
-													transport: { 
-														read: { url:'${request.contextPath}/secure/list-user.do?output=json', type: 'POST' },
-														parameterMap: function (options, type){
-															return { startIndex: options.skip, pageSize: options.pageSize,  companyId: selectedCompany.companyId }
-														}
-													},
-													schema: {
-														total: "totalUserCount",
-														data: "users",
-														model: User
-													},
-													error:common.api.handleKendoAjaxError,
-													batch: false,
-													pageSize: 10,
-													serverPaging: true,
-													serverFiltering: false,
-													serverSorting: false 
-												},
-												//height: 350,
-												filterable: true,
-												sortable: true,
-												scrollable: true,
-												pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
-												selectable: "multiple, row",
-												columns: [
-													{ field: "userId", title: "ID", width:50,  filterable: false, sortable: false }, 
-													{ field: "username", title: "아이디", width: 100 }, 
-													{ field: "name", title: "이름", width: 100 }, 
-													{ field: "email", title: "메일" },
-													{ field: "creationDate", title: "생성일", filterable: false,  width: 100, format: "{0:yyyy/MM/dd}" } ],         
-												dataBound:function(e){  },
-												toolbar: [{ name: "create-groups", text: "선택 사용자 소속 변경하기", imageClass:"k-icon k-i-folder-up" , className: "changeUserCompanyCustomClass" }]
-											});												
-										}
-									 }
-									$(this).tab('show')
-								});
-							}	
+								kendo.bind( $('#company-details'), selectedCompany );								}	
+								*/
 						}
 					},
 					dataBound: function(e){   
@@ -257,9 +137,9 @@
 						var selectedCells = this.select();				
 						if(selectedCells.length == 0 )
 						{
-							selectedCompany = new Company({});		    
-							kendo.bind($(".tabular"), selectedCompany );
-							$("#menu").hide(); 	
+							//selectedCompany = new Company({});		    
+							//kendo.bind($(".tabular"), selectedCompany );
+							//$("#menu").hide(); 	
 							$("#company-details").hide(); 	 		
 						}   
 					}	                    
@@ -277,7 +157,7 @@
 		
 		} 
 		
-		function selectedCompany(){
+		function getSelectedCompany(){
 			var grid = $("#company-grid").data('kendoGrid');
 			var selectedCells = grid.select();
 			var selectedCell = grid.dataItem( selectedCells );   
@@ -285,7 +165,34 @@
 		}
 		
 		function showCompanyDetails(){
-		
+			var companyPlaceHolder = getSelectedCompany();		
+			
+			if( $('#company-details').length === 0 ){
+			
+			}
+				
+			if( ! $("#image-grid").data("kendoGrid") ){	
+				$('#myTab').on( 'show.bs.tab', function (e) {		
+					//e.preventDefault();			
+					var show_bs_tab = $(e.target);
+					switch( show_bs_tab.attr('href') ){
+						case "#template-mgmt" :
+							createTemplatePane();
+							break;
+						case  '#image-mgmt' :
+							createImagePane();
+							break;
+						case  '#attachment-mgmt' :	
+							createAttachPane();
+							break;	
+						case  '#social-mgmt' :	
+							createSocialPane();
+							break;								
+					}	
+				});			
+				$('#myTab a:first').tab('show') ;		
+			}
+			$('#company-details').toggleClass('hide');									
 		}
 		
 		-->
