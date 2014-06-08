@@ -165,23 +165,20 @@
 		}
 		
 		function showCompanyDetails(){
+			var rendorTo = $("#company-details");
 			var companyPlaceHolder = getSelectedCompany();
-			alert(companyPlaceHolder);
+			var slide = kendo.fx(rendorTo).slideIn("down"),
 			
-			if( $('#company-details').text().length === 0 ){
-				$('#company-details').html(kendo.template($('#company-details-template').html()));	
-				
+			if( rendorTo.text().length === 0 ){
+				rendorTo.html(kendo.template($('#company-details-template').html()));					
 				var detailsModel = kendo.observable({
 					company : new Company(),
-					logoUrl : ""
-					
-				});
-				
-				kendo.bind($('#company-details'), detailsModel );	
-				$('#company-details').data("model", detailsModel );					
-				$('#company-details').show();			
-			}
-			
+					logoUrl : ""					
+				});				
+				kendo.bind(rendorTo, detailsModel );	
+				rendorTo.data("model", detailsModel );					
+				slide.play();	
+			}			
 			companyPlaceHolder.copy( $('#company-details').data("model").company );
 			$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
 			
