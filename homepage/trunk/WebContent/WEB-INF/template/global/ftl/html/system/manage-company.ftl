@@ -560,6 +560,21 @@
 <div id="menu-editor" style="display:none;">
 
 								<form class="form-horizontal">
+<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group no-margin-hr">
+									<label class="control-label">Firstname</label>
+									<input type="text" name="firstname" class="form-control">
+								</div>
+							</div><!-- col-sm-6 -->
+							<div class="col-sm-6">
+								<div class="form-group no-margin-hr">
+									<label class="control-label">Lastname</label>
+									<input type="text" name="lastname" class="form-control">
+								</div>
+							</div><!-- col-sm-6 -->
+						</div>
+														
 									<div class="form-group">
 										<label class="col-lg-2 control-label" for="input-menu-name">이름</label>
 										<div class="col-lg-10">
