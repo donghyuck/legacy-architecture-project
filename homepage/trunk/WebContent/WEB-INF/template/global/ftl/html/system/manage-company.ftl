@@ -140,7 +140,7 @@
 							//selectedCompany = new Company({});		    
 							//kendo.bind($(".tabular"), selectedCompany );
 							//$("#menu").hide(); 	
-							if( $("#company-details").text().length > 0 ){								
+							if( $("#company-details").text().length > 0 ){	
 								$("#company-details").slideUp();
 							}	
 						}   
@@ -180,11 +180,18 @@
 				kendo.bind(renderTo, detailsModel );	
 				renderTo.data("model", detailsModel );					
 				//renderTo.show();			
-				renderTo.slideDown();
+				//renderTo.slideDown();
 			}
+			
 			
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+			
+			if(!$('#company-details').is(":visible")){
+				renderTo.slideDown();
+			}
+			
+			
 			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);
 			
 			/*
