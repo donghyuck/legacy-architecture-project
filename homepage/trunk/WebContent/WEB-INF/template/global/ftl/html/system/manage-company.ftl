@@ -183,7 +183,7 @@
 							resizable: true,
 							editable : false,
 							scrollable: true,
-							height: 300,
+							/*height: 300,*/
 							change: function(e) {
 							}
 						});		
