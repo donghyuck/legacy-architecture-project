@@ -178,7 +178,7 @@
 					
 				});				
 				detailsModel.bind("change", function(e){		
-					if( e.field.match('^company.companyId')){ 						
+					if( e.field.match('^company.name')){ 						
 						if( this.company.companyId > 0 )					
 							alert("sss");
 					}	
