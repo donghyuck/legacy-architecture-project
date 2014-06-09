@@ -179,9 +179,11 @@
 				});				
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
-						var sender = e.sender ;						
+						var sender = e.sender ;
+						alert( (sender.company.companyId > 0 &&  this.company.companyId != sender.company.companyId ) );
 						if( sender.company.companyId > 0 &&  this.company.companyId != sender.company.companyId ){
 							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
+							
 						}
 					}	
 				});									
