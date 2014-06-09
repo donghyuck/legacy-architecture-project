@@ -449,14 +449,6 @@
 										</tr>														
 									</tbody>
 								</table>
-																	
-								<div class="panel-body">
-									<ul class="list-unstyled">
-										<li>도메인:<span data-bind="text:company.domainName"></span></li>
-										<li>생성일:<span data-bind="text:formattedCreationDate"></span></li>
-										<li>수정일:<span data-bind="text:formattedModifiedDate"></span></li>
-									</ul>
-								</div>
 							</div>
 						</div>
 						<div class="right-col">
@@ -464,8 +456,8 @@
 							<div class="details-content">
 								<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
 									<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-									<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-primary" data-bind="text:groupCount, visible:groupCount ">0</span></a></li>
-									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-primary" data-bind="text:memberCount, visible:memberCount">0</span></a></li>
+									<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-success" data-bind="text:groupCount, visible:groupCount ">0</span></a></li>
+									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-success" data-bind="text:memberCount, visible:memberCount">0</span></a></li>
 								</ul>	
 								<!-- .tab-content -->	
 								<div class="tab-content tab-content-bordered no-padding">								
