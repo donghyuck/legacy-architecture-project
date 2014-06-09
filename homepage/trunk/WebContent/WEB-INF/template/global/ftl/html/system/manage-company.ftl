@@ -158,29 +158,30 @@
 		} 
 		
 		function getSelectedCompany(){
-			var grid = $("#company-grid").data('kendoGrid');
+			var renderTo = $("#company-details");
+			var grid = renderTo.data('kendoGrid');
 			var selectedCells = grid.select();
 			var selectedCell = grid.dataItem( selectedCells );   
 			return selectedCell;
 		}
 		
 		function showCompanyDetails(){
-			var rendorTo = $("#company-details");
+			var renderTo = $("#company-details");
 			var companyPlaceHolder = getSelectedCompany();
-			var slide = kendo.fx(rendorTo).slideIn("down"),
+			var slide = kendo.fx(renderTo).slideIn("down"),
 			
-			if( rendorTo.text().length === 0 ){
-				rendorTo.html(kendo.template($('#company-details-template').html()));					
+			if( renderTo.text().length === 0 ){
+				renderTo.html(kendo.template($('#company-details-template').html()));					
 				var detailsModel = kendo.observable({
 					company : new Company(),
 					logoUrl : ""					
 				});				
-				kendo.bind(rendorTo, detailsModel );	
-				rendorTo.data("model", detailsModel );					
+				renderTo.bind(rendorTo, detailsModel );	
+				renderTo.data("model", detailsModel );					
 				slide.play();	
 			}			
-			companyPlaceHolder.copy( $('#company-details').data("model").company );
-			rendorTo.data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+			companyPlaceHolder.copy( renderTo.data("model").company );
+			renderTo.data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
 			
 			/*				
 			if( ! $("#image-grid").data("kendoGrid") ){	
