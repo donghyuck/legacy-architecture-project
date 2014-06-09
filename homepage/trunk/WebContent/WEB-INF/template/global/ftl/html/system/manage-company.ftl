@@ -123,7 +123,10 @@
 					},
 					edit: function(e){
 						if( $("#company-details").text().length > 0 ){	
-							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  $("#company-details").hide() });
+							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
+								$("#company-details").hide() 
+								$("#company-details").removeClass('fadeOutUp');
+							});
 						}						
 					},
 					dataBound: function(e){   
