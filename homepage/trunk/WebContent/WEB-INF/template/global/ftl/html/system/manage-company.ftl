@@ -422,7 +422,7 @@
 					<div class="details-row no-margin-t">					
 						<div class="left-col">
 							<div class="details-block">
-								<div class="details-photo">
+								<div class="details-photo no-margin-t">
 									<img data-bind="attr: { src: logoUrl }" alt="">
 								</div>
 								<br>
