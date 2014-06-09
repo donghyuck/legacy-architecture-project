@@ -538,7 +538,7 @@
 							<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button></div>
 							</div>
 						</div>
-						<div id="menu-grid" class="no-border-hr"></div>
+						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>
 					<div class="modal-footer">
 					
