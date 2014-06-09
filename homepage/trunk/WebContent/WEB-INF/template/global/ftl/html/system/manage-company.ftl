@@ -110,7 +110,7 @@
 						// 1-1 SELECTED EVENT  
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	     
+							var selectedCell = this.dataItem( selectedCells );	
 							if( selectedCell.companyId > 0 )
 								showCompanyDetails();
 							
