@@ -182,7 +182,7 @@
 							editable : false,
 							selectable : "row",
 							scrollable: true,
-							height: 400,
+							//height: 400,
 							autoBind: false,
 							//toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
 							change: function(e) {
@@ -489,13 +489,18 @@
 			.k-grid-content {
 				min-height:150px;
 			}
+			
+			#menu-grid .k-grid-content {
+				min-height:250px;
+			}
+			
 			#xml-editor{
-position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        min-height:400px;
+			position: absolute;
+	        top: 0;
+	        right: 0;
+	        bottom: 0;
+	        left: 0;
+	        min-height:400px;
 			}
 		</style>
 	</head>
@@ -563,7 +568,7 @@ position: absolute;
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">메뉴</h4>
 					</div>
-					<div class="modal-body">
+					<div class="modal-body no-border">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
 								<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button>
@@ -594,7 +599,7 @@ position: absolute;
 							</form>				
 						</div>
 					</div>					
-					<div class="modal-body" style="height:400px;">
+					<div class="modal-body no-border" style="height:400px;">
 							<div id="xml-editor">
 							hello						
 							</div>							
