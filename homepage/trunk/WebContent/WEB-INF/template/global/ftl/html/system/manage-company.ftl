@@ -180,10 +180,9 @@
 				slide.play();	
 			}			
 			companyPlaceHolder.copy( $('#company-details').data("model").company );
-			$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+			rendorTo.data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
 			
-			/*
-				
+			/*				
 			if( ! $("#image-grid").data("kendoGrid") ){	
 				$('#myTab').on( 'show.bs.tab', function (e) {		
 					//e.preventDefault();			
