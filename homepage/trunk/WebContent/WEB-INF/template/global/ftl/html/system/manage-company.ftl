@@ -110,7 +110,7 @@
 						// 1-1 SELECTED EVENT  
 						//alert( stringify(e));
 						alert(
-						e.container.html()
+						e.container
 						);
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
