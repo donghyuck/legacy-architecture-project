@@ -569,7 +569,8 @@ position: absolute;
 							</div>
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
-
+					</div>
+					<div class="modal-body no-padding">
 						<div id="menu-editor" style="display:none; padding:5px;">
 							<form class="form-horizontal">
 								<div class="row no-margin">
