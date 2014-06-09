@@ -276,9 +276,9 @@
 								destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
 								parameterMap: function (options, operation){
 									if (operation !== "read" && options.models) {
-										return { companyId: selectedCompany.companyId, items: kendo.stringify(options.models)};
+										return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
 									}
-									return { companyId: selectedCompany.companyId }
+									return { companyId: companyPlaceHolder.companyId }
 								}
 							},
 							schema: {
