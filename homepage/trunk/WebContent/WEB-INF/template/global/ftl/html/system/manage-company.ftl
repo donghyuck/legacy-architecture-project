@@ -255,6 +255,8 @@
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
+			renderTo.removeClass('fadeOutUp');
+			
 			if(!renderTo.is(":visible")){
 				common.ui.animate(renderTo, 'fadeInDown').show();
 			}else{
