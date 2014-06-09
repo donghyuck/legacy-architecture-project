@@ -205,7 +205,8 @@
 							createCompanyGroupsPane();
 							break;
 					}	
-				});		
+				});	
+				
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			if(!$('#company-details').is(":visible")){
