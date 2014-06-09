@@ -112,6 +112,7 @@
 						if( selectedCells.length > 0){							
 							var selectedCell = this.dataItem( selectedCells );		
 							if( selectedCell.companyId > 0 && this.tbody.find('>tr[data-role="editable"]').length == 0 )
+							alert('fdssss');
 								showCompanyDetails();
 							
 							/*
@@ -131,6 +132,9 @@
 								kendo.bind( $('#company-details'), selectedCompany );								}	
 								*/
 						}
+					},
+					edit: function(e){
+						alert('fdsaf');
 					},
 					dataBound: function(e){   
 						// 1-2 Company 데이터를 새로 읽어드리면 기존 선택된 정보들과 상세 화면을 클리어 한다. 
