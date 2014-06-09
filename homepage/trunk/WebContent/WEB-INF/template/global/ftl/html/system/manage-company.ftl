@@ -424,7 +424,7 @@
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
 					<div class="details-full-name">
-						<span class="text-semibold" data-bind="text:company.displayName"></span> 상세정보
+						<span class="text-semibold" data-bind="text:company.displayName"></span> <span class="label label-primary"><span data-bind="text: company.name"></span></span>
 					</div>
 					<div class="details-row">					
 						<div class="left-col">
@@ -433,8 +433,6 @@
 									<img data-bind="attr: { src: logoUrl }" alt="">
 								</div>
 								<br>
-								<span class="label label-primary"><span data-bind="text: company.name"></span></span>
-								<code><span data-bind="text: company.companyId"></span></code>
 								<!--
 								<a href="\\#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
 								<a href="\\#" class="btn"><i class="fa fa-comment"></i></a>-->
