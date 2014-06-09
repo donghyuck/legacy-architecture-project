@@ -557,29 +557,27 @@
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 
-<div id="menu-editor" style="display:none; padding:5px;">
-
-								<form class="form-horizontal">
-<div class="row no-margin">
-							<div class="col-sm-4">
-								<div class="form-group no-margin-hr">
-									<label class="control-label">이름</label>
-									<input type="text" name="firstname" class="form-control">
+						<div id="menu-editor" style="display:none; padding:5px;">
+							<form class="form-horizontal">
+								<div class="row no-margin">
+									<div class="col-sm-6">
+										<div class="form-group no-margin-hr">
+											<label class="control-label">이름</label>
+											<input type="text" name="firstname" class="form-control" placeholder="이름" >
+										</div>
+									</div><!-- col-sm-6 -->
+									<div class="col-sm-6">
+										<div class="form-group no-margin-hr">
+											<label class="control-label">타이틀</label>
+											<input type="text" name="lastname" class="form-control" placeholder="타이틀" >
+										</div>
+									</div><!-- col-sm-6 -->
 								</div>
-							</div><!-- col-sm-4 -->
-							<div class="col-sm-4">
-								<div class="form-group no-margin-hr">
-									<label class="control-label">타이틀</label>
-									<input type="text" name="lastname" class="form-control">
+								<div class="row no-margin">
+									<div class="col-sm-12">
+										<input type="text" class="form-control" data-bind="value:description" placeholder="설명" />
+									</div>
 								</div>
-							</div><!-- col-sm-4 -->
-							<div class="col-sm-4">
-								<div class="form-group no-margin-hr">
-									<label class="control-label">사용여부</label>
-									<input type="checkbox"  name="enabled"  data-bind="checked: enabled" class="form-control" />
-								</div>
-							</div><!-- col-sm-4 -->							
-						</div>
 														
 									<div class="form-group">
 										<label class="col-lg-2 control-label" for="input-menu-name">이름</label>
