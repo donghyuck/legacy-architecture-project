@@ -167,6 +167,12 @@
 			return selectedCell;
 		}
 		
+		function getCompanyDetailsModel () {
+			var renderTo = $('#company-details');
+			var model = renderTo.data("model");
+			return model;
+		}
+		
 		function showCompanyDetails(){
 			var renderTo = $('#company-details');
 			var companyPlaceHolder = getSelectedCompany();
@@ -298,7 +304,7 @@
 						{ field: "email", title: "메일" },
 						{ field: "creationDate", title: "생성일", filterable: false,  width: 100, format: "{0:yyyy/MM/dd}" } ],
 					dataBound:function(e){
-						alert( this.dataSource.total() );
+						getCompanyDetailsModel().set("memberCount", this.dataSource.total() );
 					},
 					toolbar: [{ name: "create-groups", text: "선택 사용자 소속 변경하기", imageClass:"k-icon k-i-folder-up" , className: "changeUserCompanyCustomClass" }]
 				});												
@@ -338,7 +344,7 @@
 							{ field:"memberCount", title: "멤버", filterable: false,  sortable: false, width:50 }
 						],
 						dataBound:function(e){
-							alert( this.dataSource.total() );
+							getCompanyDetailsModel().set("groupCount", this.dataSource.total() );
 						},
 						toolbar: [{ name: "create-groups", text: "디폴트 그룹 생성하기", imageClass:"k-icon k-i-folder-add" , className: "createGroupsCustomClass" }]
 				});		
