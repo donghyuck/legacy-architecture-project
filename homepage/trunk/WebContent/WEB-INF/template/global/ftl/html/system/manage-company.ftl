@@ -154,8 +154,63 @@
 					backdrop: 'static'
 				});
 				renderTo.on('show.bs.modal', function(e){
-				
-				
+					if(! $("#menu-grid").data("kendoGrid")){				
+						$('#menu-grid').kendoGrid({
+							dataSource: {
+								transport: { 
+									read: { url:'${request.contextPath}/secure/list-menu.do?output=json', type:'post' }
+								},
+								batch: false, 
+								schema: {
+									total: "totalMenuCount",
+									data: "targetMenus",
+									model: Menu
+								},
+								pageSize: 15,
+								serverPaging: true,
+								serverFiltering: false,
+								serverSorting: false,  
+								error:common.api.handleKendoAjaxError
+							},
+							columns: [
+								{ title: "ID", field: "menuId",  width:40 },
+								{ title: "이름", field: "name", width:100 }
+							],
+							pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
+							resizable: true,
+							editable : false,
+							selectable : "row",
+							scrollable: true,
+							height: 400,
+							width : 600,
+							//toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
+							change: function(e) {
+								var selectedCells = this.select();
+								if( selectedCells.length == 1){ 
+									var selectedCell = this.dataItem( selectedCells );     	
+									/*						
+									var selectedMenu = $('#menu-grid').data("menuPlaceHolder");                 
+									selectedMenu.menuId = selectedCell.menuId;
+									selectedMenu.name = selectedCell.name;
+									selectedMenu.title = selectedCell.title;
+									selectedMenu.enabled = selectedCell.enabled;
+									selectedMenu.description = selectedCell.description;
+									selectedMenu.properties = selectedCell.properties;
+									selectedMenu.menuData = selectedCell.menuData;
+									selectedMenu.modifiedDate = selectedCell.modifiedDate;
+									selectedMenu.creationDate = selectedCell.creationDate;	     
+									   
+									kendo.bind($(".menu-details"), selectedMenu );
+									$(".menu-details").show();
+									*/								 							 	
+								}
+							},
+							dataBound: function(e){
+								//kendo.bind($(".menu-details"), {} );      	
+								//$(".menu-details").hide();
+							}
+						});	 	
+					}
 				});
 			}
 			renderTo.modal('show');	
