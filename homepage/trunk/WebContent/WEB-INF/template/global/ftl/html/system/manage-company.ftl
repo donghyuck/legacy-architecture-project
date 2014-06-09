@@ -460,7 +460,7 @@
 											프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
 										</div>		
 										-->				
-										<div id="company-prop-grid" class="props no-border"></div>
+										<div id="company-prop-grid" class="props"></div>
 									</div>
 									<div class="tab-pane fade" id="groups">					
 										<div class="alert alert-info alert-dark no-border-radius no-margin-b">
