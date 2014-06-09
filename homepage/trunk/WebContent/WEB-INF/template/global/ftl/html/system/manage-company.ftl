@@ -433,8 +433,11 @@
 									<img data-bind="attr: { src: logoUrl }" alt="">
 								</div>
 								<br>
+								<span class="label label-primary"><span data-bind="text: company.name"></span></span>
+								<code><span data-bind="text: company.companyId"></span></code>
+								<!--
 								<a href="\\#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
-								<a href="\\#" class="btn"><i class="fa fa-comment"></i></a>
+								<a href="\\#" class="btn"><i class="fa fa-comment"></i></a>-->
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
