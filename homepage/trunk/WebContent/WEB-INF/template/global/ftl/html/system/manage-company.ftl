@@ -182,6 +182,7 @@
 							selectable : "row",
 							scrollable: true,
 							height: 400,
+							autoBind: false,
 							//toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
 							change: function(e) {
 								var selectedCells = this.select();
@@ -205,10 +206,12 @@
 								}
 							},
 							dataBound: function(e){
-								//kendo.bind($(".menu-details"), {} );      	
+								
+								//kendo.bind($(".menu-details"), {} );
 								//$(".menu-details").hide();
 							}
 						});
+						$("#menu-grid").data("kendoGrid").dataSource.read();
 					}
 				});
 			}
