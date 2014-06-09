@@ -151,19 +151,19 @@
 		} 
 		
 		function showRoleWindow(){
-			var renderTo = $('#role-modal');
+			var renderToString = "role-modal'";
+			var renderTo = $('#' + renderToString );
 			if( renderTo.length === 0 ){		
 				$("#main-wrapper").append( kendo.template($('#role-modal-template').html()) );				
-				
+				renderTo = $('#' + renderToString );
 				renderTo.modal({
 					backdrop: 'static'
 				});
 				renderTo.on('show.bs.modal', function(e){
 					alert("fdasf");				
 				});
-			}else{
-				renderTo.modal('show');
 			}
+			renderTo.modal('show');
 		}
 		
 		function getSelectedCompany(){
