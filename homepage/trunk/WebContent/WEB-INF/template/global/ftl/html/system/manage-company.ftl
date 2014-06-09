@@ -165,6 +165,7 @@
 			return selectedCell;
 		}
 		
+		
 		function showCompanyDetails(){
 			var renderTo = $("#company-details");
 			var companyPlaceHolder = getSelectedCompany();
