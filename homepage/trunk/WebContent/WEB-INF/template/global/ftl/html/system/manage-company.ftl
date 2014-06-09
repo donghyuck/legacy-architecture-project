@@ -557,19 +557,19 @@
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 
-<div id="menu-editor" style="display:none;">
+<div id="menu-editor" style="display:none; padding:5px;">
 
 								<form class="form-horizontal">
-<div class="row">
+<div class="row no-margin">
 							<div class="col-sm-6">
-								<div class="form-group">
-									<label class="control-label">Firstname</label>
+								<div class="form-group no-margin-hr">
+									<label class="control-label">이름</label>
 									<input type="text" name="firstname" class="form-control">
 								</div>
 							</div><!-- col-sm-6 -->
 							<div class="col-sm-6">
 								<div class="form-group no-margin-hr">
-									<label class="control-label">Lastname</label>
+									<label class="control-label">타이틀</label>
 									<input type="text" name="lastname" class="form-control">
 								</div>
 							</div><!-- col-sm-6 -->
