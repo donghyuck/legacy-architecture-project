@@ -17,14 +17,8 @@
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			
 			'${request.contextPath}/js/bxslider/jquery.bxslider.min.js',
 			'${request.contextPath}/js/common/common.modernizr.custom.min.js',
-			
-			/*
-			'${request.contextPath}/js/common/common.classie.min.js',
-			'${request.contextPath}/js/common/common.img-hover.js',
-			*/
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
@@ -65,19 +59,6 @@
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
 												 
-				/**
-				$('.bxslider').bxSlider({
-					maxSlides: 3,
-					minSlides: 3,
-					slideWidth: 100,
-					slideMargin: 15,
-					pager : false,
-					onSliderLoad : function(){
-						alert("000");
-						$('#family-list').removeClass('hidden');
-					}
-				}); 
-				*/ 
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
@@ -183,28 +164,28 @@
 								<img class="img-responsive" src="${request.contextPath}/download/image/93/main_consulting.jpg" alt="" />
 								<div class="mask">
 									<p>기업의 인재육성전략 실현을 위한 HRD 토탈 솔루션 서비스</p>
-									<a href="portfolio_item.html" class="info">Read More</a>
+									<a href="${request.contextPath}/page.do?name=PAGE-32" class="info">R더 알아보기</a>
 									</div>                
 								</div>
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/94/main-ehrd.jpg" alt="" />
 								<div class="mask">
 									<p>조직의 인재양성전략 실현을 위한 최적의 e-HRD 솔루션</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
+									<a href="${request.contextPath}/page.do?name=PAGE-21" class="info">더 알아보기</a>
 								</div>                
 							</div>
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/97/main_icap.jpg" alt="" />
 								<div class="mask">
-									<p><small>우리회사 인재양성 교육채널 온라인 통합 연수원</small></p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
+									<p>역량기반의 인재양성 역량진단 서비스</p>									
+									<a href="${request.contextPath}/page.do?name=PAGE-31" class="info">더 알아보기</a>
 								</div>                
 							</div>	
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/95/main-edu.jpg" alt="" />
 								<div class="mask">
 									<p class="text-left">국내 및 해외 교육과정에 대한 기획, 실행, 평가 및 사후관리에 이르는 기업교육 전 부문 위탁 서비스</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
+									<a href="${request.contextPath}/page.do?name=PAGE-35" class="info">더 알아보기</a>
 								</div>                
 							</div>																
 						</div>
@@ -212,15 +193,15 @@
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/96/main-studymart.jpg" alt="" />
 								<div class="mask">
-									<p>역량기반의 인재양성 역량진단 서비스</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
+									<p>우리회사 인재양성 교육채널 온라인 통합 연수원</p>
+									<a href="${request.contextPath}/page.do?name=PAGE-34" class="info">더 알아보기</a>
 								</div>                
 							</div>
 							<div class="view view-tenth">
 								<img class="img-responsive" src="${request.contextPath}/download/image/91/main_university.jpg" alt="" />
 								<div class="mask">
 									<p class="text-left">대학경쟁력 확보를 위한 토탈 서비스</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
+									<a href="${request.contextPath}/page.do?name=PAGE-36" class="info">더 알아보기</a>
 								</div>                
 							</div>								
 							<div class="view view-tenth">
@@ -228,7 +209,7 @@
 								<img class="img-responsive" src="${request.contextPath}/download/image/92/main_vod.jpg" alt="" />
 								<div class="mask">
 									<p>비즈니스 메너 동영상 컨텐츠</p>
-									<a href="portfolio_item.html" class="info">더 알아보기</a>
+									<a href="${request.contextPath}/page.do?name=PAGE-51" class="info">더 알아보기</a>
 								</div>                
 							</div>								
 						</div>
