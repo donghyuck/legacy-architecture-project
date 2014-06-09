@@ -191,7 +191,8 @@
 						var sender = e.sender ;
 						if( sender.company.companyId > 0 ){
 							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
-							
+							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
+							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));    							
 						}
 					}	
 				});									
@@ -444,8 +445,8 @@
 								<div class="panel-body">
 									<ul class="list-unstyled">
 										<li><span data-bind="text:company.domainName"></span></li>
-										<li><span data-bind="text:company.creationDate"></span></li>
-										<li><span data-bind="text:company.modifiedDate"></span></li>
+										<li><span data-bind="text:company.formattedCreationDate"></span></li>
+										<li><span data-bind="text:company.formattedModifiedDate"></span></li>
 									</ul>
 								</div>
 							</div>
