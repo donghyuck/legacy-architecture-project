@@ -233,6 +233,11 @@
 			);
 			
 			$('#menu-editor').show();
+			
+			var editor = ace.edit("xml-editor");
+			editor.setTheme("ace/theme/monokai");
+			editor.getSession().setMode("ace/mode/xml");
+			
 		}
 		
 		
@@ -577,7 +582,8 @@
 										<input type="text" class="form-control" data-bind="value:description" placeholder="설명" />
 									</div>
 								</div>				
-							</form>								
+							</form>	
+							<div id="xml-editor"></div>
 						</div>						
 					</div>
 					<div class="modal-footer">
