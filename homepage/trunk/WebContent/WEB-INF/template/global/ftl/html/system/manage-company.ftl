@@ -179,20 +179,18 @@
 				});				
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
-						if( this.company.companyId > 0 )					
-							alert("sss");
+						if( companyPlaceHolder.companyId > 0 &&  this.company.companyId != companyPlaceHolder.companyId ){
+							this.company.set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+						}
 					}	
-				});		
-								
+				});									
 				kendo.bind(renderTo, detailsModel );	
 				renderTo.data("model", detailsModel );					
 				//renderTo.show();			
 				//renderTo.slideDown();
 			}
-			
-			
 			companyPlaceHolder.copy( renderTo.data("model").company );
-			$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+			//$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
 			
 			if(!$('#company-details').is(":visible")){
 				renderTo.slideDown();
