@@ -108,9 +108,10 @@
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
+						alert( stringify(e));
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	
+							var selectedCell = this.dataItem( selectedCells );								
 							if( selectedCell.companyId > 0 )
 								showCompanyDetails();
 							
@@ -137,9 +138,6 @@
 						var selectedCells = this.select();				
 						if(selectedCells.length == 0 )
 						{
-							//selectedCompany = new Company({});		    
-							//kendo.bind($(".tabular"), selectedCompany );
-							//$("#menu").hide(); 	
 							if( $("#company-details").text().length > 0 ){	
 								$("#company-details").slideUp();
 							}	
