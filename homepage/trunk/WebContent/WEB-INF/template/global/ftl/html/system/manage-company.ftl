@@ -436,7 +436,7 @@
 								<table class="table">
 									<tbody>						
 										<tr>
-											<th><small>도메인</small></th>								
+											<th><small><span class="badge">도메인</span></small></th>								
 											<td><span data-bind="text:company.domainName"></span></td>
 										</tr>	
 										<tr>
