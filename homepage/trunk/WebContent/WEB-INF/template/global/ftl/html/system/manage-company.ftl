@@ -147,7 +147,7 @@
 					}	                    
 				}); //.css("border", 0);
 				
-				var slide = kendo.fx($("company-details")).slideIn("down");
+				var slide = kendo.fx($("#company-details")).slideIn("down");
 				
 				// MENU WINDOW
 				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
