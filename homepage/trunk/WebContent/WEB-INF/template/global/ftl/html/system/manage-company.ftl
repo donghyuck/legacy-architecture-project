@@ -563,7 +563,7 @@ position: absolute;
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">메뉴</h4>
 					</div>
-					<div class="modal-body no-padding hidden">
+					<div class="modal-body no-padding">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
 								<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button>
@@ -593,10 +593,10 @@ position: absolute;
 								</div>				
 							</form>	
 							<div id="xml-editor">
-hello						
+							hello						
 							</div>					
 						</div>
-					</div>					
+					</div>										
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
 						<!--<button type="button" class="btn btn-primary">Save changes</button>-->
