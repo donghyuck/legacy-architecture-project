@@ -123,8 +123,7 @@
 					},
 					edit: function(e){
 						if( $("#company-details").text().length > 0 ){	
-							//$("#company-details").slideUp();
-							$("#company-details").toggleClass('bounceOut');
+							common.ui.animate($("#company-details"), 'fadeOutUp').hide();
 						}						
 					},
 					dataBound: function(e){   
@@ -133,8 +132,7 @@
 						if(selectedCells.length == 0 )
 						{
 							if( $("#company-details").text().length > 0 ){	
-								//$("#company-details").slideUp();
-								$("#company-details").toggleClass('bounceOut');
+								common.ui.animate($("#company-details"), 'fadeOutUp').hide();
 							}	
 						}   
 					}	                    
@@ -254,17 +252,9 @@
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
 			if(!renderTo.is(":visible")){
-			/*
-				renderTo.removeClass('bounceIn').addClass('bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-					//this.removeClass('bounceIn');
-					$(this).removeClass('bounceIn');
-				});
-			*/
-				common.ui.animate(renderTo, 'bounceIn');
-				
-				renderTo.show();
+				common.ui.animate(renderTo, 'fadeInDown').show();
 			}else{
-				common.ui.animate(renderTo, 'bounceIn');
+				common.ui.animate(renderTo, 'fadeInDown');
 			}
 			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);			
 			$('#myTab a:first').tab('show');
