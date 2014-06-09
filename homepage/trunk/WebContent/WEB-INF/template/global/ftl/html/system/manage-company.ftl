@@ -151,12 +151,9 @@
 		} 
 		
 		function showRoleWindow(){
-			var renderTo = $('#menu-modal');			
-			
-			
-			if( renderTo.length === 0 ){
-		
-				$("#main-wrapper").append( kendo.template($('#role-modal-template').html()) );
+			if( $('#role-modal').length === 0 ){		
+				$("#main-wrapper").append( kendo.template($('#role-modal-template').html()) );				
+				var renderTo = $('#role-modal');
 				renderTo.modal({
 					backdrop: 'static',
 					show:false
@@ -165,7 +162,7 @@
 					alert("fdasf");				
 				});
 			}
-			renderTo.modal('show');
+			$('#role-modal').modal('show');
 		}
 		
 		function getSelectedCompany(){
