@@ -179,11 +179,9 @@
 				});				
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
-					
-						alert( kendo.stringify( e ) );
-						
-						if( companyPlaceHolder.companyId > 0 &&  this.company.companyId != companyPlaceHolder.companyId ){
-							this.set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+						var sender = e.sender ;						
+						if( sender.company.companyId > 0 &&  this.company.companyId != sender.company.companyId ){
+							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
 						}
 					}	
 				});									
