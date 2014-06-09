@@ -123,7 +123,8 @@
 					},
 					edit: function(e){
 						if( $("#company-details").text().length > 0 ){	
-							$("#company-details").slideUp();
+							//$("#company-details").slideUp();
+							$("#company-details").toggleClass('bounceOut');
 						}						
 					},
 					dataBound: function(e){   
@@ -132,7 +133,8 @@
 						if(selectedCells.length == 0 )
 						{
 							if( $("#company-details").text().length > 0 ){	
-								$("#company-details").slideUp();
+								//$("#company-details").slideUp();
+								$("#company-details").toggleClass('bounceOut');
 							}	
 						}   
 					}	                    
