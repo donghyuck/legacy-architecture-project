@@ -452,15 +452,15 @@
 									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-info" data-bind="text:memberCount, visible:memberCount">0</span></a></li>
 								</ul>	
 								<!-- .tab-content -->	
-								<div class="tab-content tab-content-bordered">								
+								<div class="tab-content tab-content-bordered no-padding">								
 									<div class="tab-pane fade" id="props">
-										
+										<!--
 										<div class="alert alert-info no-border-radius alert-dark">
 											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 											프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
 										</div>		
-												
-										<div id="company-prop-grid" class="props"></div>
+										-->				
+										<div id="company-prop-grid" class="props no-border"></div>
 									</div>
 									<div class="tab-pane fade" id="groups">					
 										<div class="alert alert-info alert-dark no-border-radius no-margin-b">
