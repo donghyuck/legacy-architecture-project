@@ -181,8 +181,9 @@
 
 				var detailsModel = kendo.observable({
 					company : new Company(),
-					logoUrl : ""
-					
+					logoUrl : "",
+					memberCount : 0 ,
+					groupCount : 0 
 				});				
 				
 				detailsModel.bind("change", function(e){		
@@ -449,8 +450,8 @@
 							<div class="details-content">
 								<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
 									<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-									<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-success">22</span></a></li>
-									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-success">1234</span></a></li>
+									<li><a href="\\#groups" data-toggle="tab">그룹 <span class="label label-success" data-bind="text:groupCount">0</span></a></li>
+									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-success" data-bind="text:memberCount">0</span></a></li>
 								</ul>	
 								<!-- .tab-content -->	
 								<div class="tab-content tab-content-bordered no-padding">
