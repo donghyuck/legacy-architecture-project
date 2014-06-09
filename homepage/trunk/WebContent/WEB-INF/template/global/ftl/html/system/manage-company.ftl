@@ -254,7 +254,7 @@
 			if(!renderTo.is(":visible")){
 				common.ui.animate(renderTo, 'fadeInDown').show();
 			}else{
-				common.ui.animate(renderTo, 'fadeInDown');
+				//common.ui.animate(renderTo, 'fadeInDown');
 			}
 			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);			
 			$('#myTab a:first').tab('show');
