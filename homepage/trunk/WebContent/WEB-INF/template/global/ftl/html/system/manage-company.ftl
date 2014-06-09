@@ -109,6 +109,9 @@
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
 						//alert( stringify(e));
+						alert(
+						e.container.html()
+						);
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );								
