@@ -452,8 +452,7 @@
 									<li><a href="\\#users" data-toggle="tab">사용자 <span class="label label-info" data-bind="text:memberCount, visible:memberCount">0</span></a></li>
 								</ul>	
 								<!-- .tab-content -->	
-								<div class="tab-content tab-content-bordered no-padding">
-								
+								<div class="tab-content tab-content-bordered">								
 									<div class="tab-pane fade" id="props">
 										<!--
 										<div class="alert alert-info no-border-radius alert-dark">
