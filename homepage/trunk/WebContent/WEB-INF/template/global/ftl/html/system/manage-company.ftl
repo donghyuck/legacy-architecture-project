@@ -140,10 +140,14 @@
 							//selectedCompany = new Company({});		    
 							//kendo.bind($(".tabular"), selectedCompany );
 							//$("#menu").hide(); 	
-							$("#company-details").hide(); 	 		
+							if( $("company-details").text().length > 0 ){								
+								slide.reverse();
+							}	
 						}   
 					}	                    
 				}); //.css("border", 0);
+				
+				var slide = kendo.fx($("company-details")).slideIn("down");
 				
 				// MENU WINDOW
 				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
