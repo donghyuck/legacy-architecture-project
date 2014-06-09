@@ -416,7 +416,7 @@
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="role-modal-template">
 		<div class="modal fade" id="menu-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog animated swing">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
