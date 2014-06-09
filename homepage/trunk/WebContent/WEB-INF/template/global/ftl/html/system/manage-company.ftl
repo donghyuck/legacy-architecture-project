@@ -95,7 +95,7 @@
 					},
 					columns: [
 						{ field: "companyId", title: "ID", width:40,  filterable: false, sortable: false }, 
-						{ field: "name",    title: "KEY",  filterable: true, sortable: true,  width: 80 }, 
+						{ field: "name",    title: "KEY",  filterable: true, sortable: true,  width: 80, template: '<button type="button" class="btn btn-warning btn-xs btn-block" onclick="showCompanyDetails(); return false;">#: name #</a>' }, 
 						{ field: "displayName",   title: "이름",  filterable: true, sortable: true,  width: 100 }, 
 						{ field: "domainName",   title: "도메인",  filterable: true, sortable: false,  width: 100 }, 
 						{ field: "description", title: "설명", width: 200, filterable: false, sortable: false },
