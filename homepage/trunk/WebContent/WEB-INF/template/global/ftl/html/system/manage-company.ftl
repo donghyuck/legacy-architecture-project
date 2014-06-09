@@ -177,6 +177,13 @@
 					logoUrl : ""
 					
 				});				
+				detailsModel.bind("change", function(e){		
+					if( e.field.match('^company.')){ 						
+						if( this.company.companyId > 0 )					
+							alert("sss");
+					}	
+				});		
+								
 				kendo.bind(renderTo, detailsModel );	
 				renderTo.data("model", detailsModel );					
 				//renderTo.show();			
