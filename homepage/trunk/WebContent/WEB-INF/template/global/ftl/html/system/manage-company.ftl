@@ -458,7 +458,7 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">권한 & 롤</h4>
 					</div>
-					<div class="modal-body" style="min-height:350px;">
+					<div class="modal-body">
 						<div id="role-grid"></div>
 					</div>
 					<div class="modal-footer">
