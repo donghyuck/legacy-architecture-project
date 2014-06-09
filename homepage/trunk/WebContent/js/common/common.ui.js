@@ -45,12 +45,12 @@
 	}
 	
 	common.ui.animate = function (renderTo, animate){	
-		/*
+		
 		renderTo.removeClass(animate).addClass(animate).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 			renderTo.removeClass(animate);
 		});
 		return renderTo;
-		*/
+		
 	}	
 	
 	common.ui.initializeOwlCarousel = function (){
