@@ -207,10 +207,10 @@
 				
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
-			if(!$('#company-details').is(":visible")){
+			if(!renderTo.is(":visible")){
 				renderTo.slideDown();
 			}
-			$('html,body').animate({scrollTop: renderTo.offset().top }, 10);
+			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);
 			$('#myTab a:first').tab('show') ;
 		}
 		
