@@ -414,7 +414,8 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
-		<hr/>
+		<div class="panel">
+		<div class="panel-body>">
 					<div class="details-full-name">
 						<span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span>
 					</div>
@@ -477,6 +478,8 @@
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
+		</div>
+		</div>			
 		</script>				
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
