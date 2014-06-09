@@ -166,7 +166,7 @@
 		
 		function showCompanyDetails(){
 			var companyPlaceHolder = getSelectedCompany();
-			var slide = kendo.fx($("#company-details")).slideIn("left"),
+			var slide = kendo.fx($("#company-details")).slideIn("down");
 			
 			if( $('#company-details').text().length === 0 ){
 				$('#company-details').html(kendo.template($('#company-details-template').html()));	
