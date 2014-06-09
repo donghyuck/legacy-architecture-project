@@ -208,7 +208,7 @@
 								//kendo.bind($(".menu-details"), {} );      	
 								//$(".menu-details").hide();
 							}
-						}).css("height:400px;");	 	
+						});
 					}
 				});
 			}
