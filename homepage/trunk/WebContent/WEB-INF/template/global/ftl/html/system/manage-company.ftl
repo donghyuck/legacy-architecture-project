@@ -563,7 +563,7 @@ position: absolute;
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">메뉴</h4>
 					</div>
-					<div class="modal-body no-padding">
+					<div class="modal-body">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
 								<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button>
@@ -571,8 +571,8 @@ position: absolute;
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
-					<div class="modal-body no-padding">
-						<div id="menu-editor" style="display:none; padding:5px;">
+					<div class="modal-body">
+						<div id="menu-editor">
 							<form class="form-horizontal">
 								<div class="row no-margin">
 									<div class="col-sm-6">
@@ -591,11 +591,10 @@ position: absolute;
 										<input type="text" class="form-control" data-bind="value:description" placeholder="설명" />
 									</div>
 								</div>				
-							</form>	
-			
+							</form>				
 						</div>
 					</div>					
-					<div class="modal-body">
+					<div class="modal-body" style="height:400px;">
 							<div id="xml-editor">
 							hello						
 							</div>							
