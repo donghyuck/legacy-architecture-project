@@ -576,7 +576,7 @@
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
-					<div class="modal-body">
+					<div class="modal-body border-t">
 						<div id="menu-editor">
 							<form class="form-horizontal">
 								<div class="row no-margin">
