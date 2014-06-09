@@ -182,7 +182,6 @@
 							selectable : "row",
 							scrollable: true,
 							height: 400,
-							width : 600,
 							//toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
 							change: function(e) {
 								var selectedCells = this.select();
