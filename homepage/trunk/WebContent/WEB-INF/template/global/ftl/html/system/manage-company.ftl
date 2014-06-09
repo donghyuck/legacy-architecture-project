@@ -390,7 +390,7 @@
 		</script> 		 
 		<style>
 		.k-grid{
-			height:300px;
+			min-height:300px;
 		}
 				
 		</style>
