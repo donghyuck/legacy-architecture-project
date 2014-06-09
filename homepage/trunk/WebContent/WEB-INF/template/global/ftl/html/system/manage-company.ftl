@@ -254,16 +254,19 @@
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
 			if(!renderTo.is(":visible")){
+			/*
 				renderTo.removeClass('bounceIn').addClass('bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 					//this.removeClass('bounceIn');
 					$(this).removeClass('bounceIn');
 				});
-				
-				renderTo.show();
+			*/
+				common.ui.animate(renderTo, 'bounceIn').show();
+			//	renderTo.show();
+			}else{
+				common.ui.animate(renderTo, 'bounceIn');
 			}
-			
-			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);
-			$('#myTab a:first').tab('show') ;
+			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);			
+			$('#myTab a:first').tab('show');
 		}
 		
 		function createCompanyPropsPane(renderTo){
