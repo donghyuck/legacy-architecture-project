@@ -103,7 +103,7 @@
 					filterable: true,
 					editable: "inline",
 					selectable: 'row',
-					height: '100%',
+					height: '350',
 					batch: false,              
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 					change: function(e) {
@@ -290,7 +290,7 @@
 					resizable: true,
 					editable : true,
 					scrollable: true,
-					//height: 350,
+					height: 300,
 					toolbar: [
 						{ name: "create", text: "추가" },
 						{ name: "save", text: "저장" },
@@ -326,7 +326,7 @@
 						serverFiltering: false,
 						serverSorting: false 
 					},
-					//height: 350,
+					height: 300,
 					filterable: true,
 					sortable: true,
 					scrollable: true,
@@ -368,7 +368,7 @@
 							},
 							error:common.api.handleKendoAjaxError
 						},
-						//height: 350,
+						height: 300,
 						scrollable: true,
 						editable: false,
 						columns: [
