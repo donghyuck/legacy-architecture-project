@@ -154,7 +154,15 @@
 			var renderTo = $('#menu-modal');
 			if( renderTo.length === 0 ){
 				$("#main-wrapper").append( kendo.template($('#menu-modal-template').html()) );
-			}		
+				renderTo.modal({
+					backdrop: 'static',
+					show:false
+				});
+				renderTo.on('show.bs.modal', function(e){
+					alert("fdasf");				
+				});
+			}
+			renderTo.model('show');
 		}
 		
 		function getSelectedCompany(){
