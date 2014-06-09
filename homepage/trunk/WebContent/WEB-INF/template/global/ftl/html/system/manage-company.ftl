@@ -230,6 +230,8 @@
 			alert(
 			getSelectedMenu().menuId
 			);
+			
+			$('#menu-editor').show();
 		}
 		
 		
