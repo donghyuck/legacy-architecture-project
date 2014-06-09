@@ -26,7 +26,8 @@
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/common/common.ui.admin.js'
+			'${request.contextPath}/js/common/common.ui.admin.js',
+			'${request.contextPath}/js/ace/ace.js'
 			],
 			complete: function() {
 				// 1-1.  한글 지원을 위한 로케일 설정
