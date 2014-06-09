@@ -414,16 +414,12 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
-		<div class="panel">
+		<div class="panel panel-transparent">
 			<div class="panel-heading">
-				<span class="panel-title"><span class="label label-primary" data-bind="text: company.name"></span></span>
-			</div>
-			
+				<span class="panel-title"><span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span></span>
+			</div>			
 		<div class="panel-body">
-					<div class="details-full-name">
-						<span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span>
-					</div>
-					<div class="details-row">					
+					<div class="details-row no-margin-t">					
 						<div class="left-col">
 							<div class="details-block">
 								<div class="panel details-photo">
