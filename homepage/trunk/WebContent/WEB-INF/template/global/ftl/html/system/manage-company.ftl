@@ -196,7 +196,7 @@
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
 						case "#props" :
-							createCompanyPropsPane($("company-prop-grid"));
+							createCompanyPropsPane($("#company-prop-grid"));
 							break;
 						case  '#users' :
 							createCompanyMembersPane();
@@ -211,7 +211,8 @@
 			if(!$('#company-details').is(":visible")){
 				renderTo.slideDown();
 			}
-			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);					
+			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);
+			$('#myTab a:first').tab('show') ;
 		}
 		
 		function createCompanyPropsPane(renderTo){
