@@ -589,7 +589,7 @@
 <MenuConfig>
   <Menus>
     <Menu  name="USER_MENU"  title="사용자 메뉴">
-        <Item  name="MENU_1"  title="회사소개" page="#">
+        <Item  name="MENU_1"  title="회사소개" page="\\#">
             <Item  name="MENU_1_1"  title="기업소개" page="/about.do" description="{displayName}을 소개합니다." />
             <Item  name="MENU_1_2"  title="CEO 인사말" page="/welcome.do" description="안녕하세요." />
             <Item  name="MENU_1_3"  title="공지 &amp; 이벤트" description="이벤트와 공지사항을 한눈에 !!" page="/events.do" />
@@ -597,17 +597,17 @@
             <Item  name="MENU_1_5"  title="뉴스" page="/press.do" description="{displayName} 관련 보도자료 및 뉴스를 접하실 수 있습니다." />
             <Item  name="MENU_1_6"  title="오시는길" page="/contact.do" description="{displayName}을 찾아오시는 길입니다." />
         </Item>
-        <Item  name="MENU_2"  title="제품" page="#">
+        <Item  name="MENU_2"  title="제품" page="\\#">
             <Item  name="MENU_2_1"  title="eHRD" page="/page.do?name=PAGE-21" description="제품설명" />
             <Item  name="MENU_2_2"  title="iCAP" page="/page.do?name=PAGE-31" description="역량기반 진단 솔루션" />
         </Item>
-        <Item  name="MENU_3"  title="서비스" page="#">
+        <Item  name="MENU_3"  title="서비스" page="\\#">
             <Item  name="MENU_3_1"  title="HRD 컨설팅" page="/page.do?name=PAGE-32" description="설명" />
             <Item  name="MENU_3_2"  title="ICPI 자격증" page="/page.do?name=PAGE-33" description="설명" />
             <Item  name="MENU_3_3"  title="온라인 콘텐츠" page="/page.do?name=PAGE-34" description="설명" />
             <Item  name="MENU_3_4"  title="교육 아웃소싱" page="/page.do?name=PAGE-35" description="설명" />
         </Item>
-        <Item  name="MENU_4"  title="대학사업" page="#">
+        <Item  name="MENU_4"  title="대학사업" page="\\#">
             <Item  name="MENU_4_1"  title="대학 경쟁력 강화 컨설팅" page="/page.do?name=PAGE-36" description="설명" />
             <Item  name="MENU_4_2"  title="OLYGO 프로그램" page="/page.do?name=PAGE-37" description="설명" />
             <Item  name="MENU_4_3"  title="JobCAP 프로그램" page="/page.do?name=PAGE-38" description="설명" />
