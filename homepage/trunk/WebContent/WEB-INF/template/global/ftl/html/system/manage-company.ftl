@@ -260,8 +260,9 @@
 					$(this).removeClass('bounceIn');
 				});
 			*/
-				common.ui.animate(renderTo, 'bounceIn').show();
-			//	renderTo.show();
+				common.ui.animate(renderTo, 'bounceIn');
+				
+				renderTo.show();
 			}else{
 				common.ui.animate(renderTo, 'bounceIn');
 			}
