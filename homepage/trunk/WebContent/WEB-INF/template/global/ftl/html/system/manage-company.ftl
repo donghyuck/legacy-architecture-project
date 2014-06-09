@@ -156,14 +156,14 @@
 				$("#main-wrapper").append( kendo.template($('#role-modal-template').html()) );				
 				
 				renderTo.modal({
-					backdrop: 'static',
-					show:false
+					backdrop: 'static'
 				});
 				renderTo.on('show.bs.modal', function(e){
 					alert("fdasf");				
 				});
+			}else{
+				renderTo.modal('show');
 			}
-			renderTo.modal('show');
 		}
 		
 		function getSelectedCompany(){
