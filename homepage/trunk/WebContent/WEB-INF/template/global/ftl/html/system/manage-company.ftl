@@ -169,14 +169,16 @@
 		
 		function showCompanyDetails(){
 			var renderTo = $('#company-details');
-			var companyPlaceHolder = getSelectedCompany();			
+			var companyPlaceHolder = getSelectedCompany();
 			if( renderTo.text().length === 0 ){
-				renderTo.html(kendo.template($('#company-details-template').html()));					
+				renderTo.html(kendo.template($('#company-details-template').html()));
+
 				var detailsModel = kendo.observable({
 					company : new Company(),
 					logoUrl : ""
 					
 				});				
+				
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
 						var sender = e.sender ;
@@ -187,46 +189,83 @@
 					}	
 				});									
 				kendo.bind(renderTo, detailsModel );	
-				renderTo.data("model", detailsModel );					
-				//renderTo.show();			
-				//renderTo.slideDown();
-			}
-			companyPlaceHolder.copy( renderTo.data("model").company );
-			//$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
-			
-			if(!$('#company-details').is(":visible")){
-				renderTo.slideDown();
-			}
-			
-			
-			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);
-			
-			/*
-				
-			if( ! $("#image-grid").data("kendoGrid") ){	
+				renderTo.data("model", detailsModel );							
+
 				$('#myTab').on( 'show.bs.tab', function (e) {		
 					//e.preventDefault();			
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
-						case "#template-mgmt" :
-							createTemplatePane();
+						case "#props" :
+							createCompanyPropsPane($("company-prop-grid"));
 							break;
-						case  '#image-mgmt' :
-							createImagePane();
+						case  '#users' :
+							createCompanyMembersPane();
 							break;
-						case  '#attachment-mgmt' :	
-							createAttachPane();
-							break;	
-						case  '#social-mgmt' :	
-							createSocialPane();
-							break;								
+						case  '#groups' :	
+							createCompanyGroupsPane();
+							break;
 					}	
-				});			
-				$('#myTab a:first').tab('show') ;		
+				});		
 			}
-			$('#company-details').toggleClass('hide');			
-			*/						
+			companyPlaceHolder.copy( renderTo.data("model").company );
+			if(!$('#company-details').is(":visible")){
+				renderTo.slideDown();
+			}
+			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);					
 		}
+		
+		function createCompanyPropsPane(renderTo){
+			var companyPlaceHolder = getSelectedCompany();
+			if( ! renderTo.data("kendoGrid") ){													
+				renderTo.kendoGrid({
+					dataSource: {
+						transport: { 
+							read: { url:'${request.contextPath}/secure/get-company-property.do?output=json', type:'post' },
+							create: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post' },
+							update: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post'  },
+							destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
+							parameterMap: function (options, operation){			
+								if (operation !== "read" && options.models) {
+									return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
+								} 
+								return { companyId: companyPlaceHolder.companyId }
+							}
+						},						
+						batch: true, 
+						schema: {
+							data: "targetCompanyProperty",
+							model: Property
+						},
+						error:common.api.handleKendoAjaxError
+					},
+					columns: [
+						{ title: "속성", field: "name" },
+						{ title: "값",   field: "value" },
+						{ command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
+					],
+					pageable: false,
+					resizable: true,
+					editable : true,
+					scrollable: true,
+					//height: 350,
+					toolbar: [
+						{ name: "create", text: "추가" },
+						{ name: "save", text: "저장" },
+						{ name: "cancel", text: "취소" }
+					],				     
+					change: function(e) {
+					}
+				});		
+			}										
+		}
+		
+		function createCompanyMembersPane(){
+		
+		}	
+		
+		function createCompanyGroupsPane(){
+		
+		}				
 		
 		-->
 		</script> 		 
