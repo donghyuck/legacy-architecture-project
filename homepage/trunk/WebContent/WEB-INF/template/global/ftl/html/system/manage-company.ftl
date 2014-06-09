@@ -576,7 +576,7 @@
 							<div class="col-sm-4">
 								<div class="form-group no-margin-hr">
 									<label class="control-label">사용여부</label>
-									<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />
+									<input type="checkbox"  name="enabled"  data-bind="checked: enabled" class="form-control" />
 								</div>
 							</div><!-- col-sm-4 -->							
 						</div>
