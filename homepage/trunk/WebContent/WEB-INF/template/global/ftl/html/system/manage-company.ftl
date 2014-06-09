@@ -421,8 +421,8 @@
 		<div class="panel-body">
 					<div class="details-row no-margin-t">					
 						<div class="left-col">
-							<div class="details-block">
-								<div class="details-photo no-margin-t">
+							<div class="details-block no-margin-t">
+								<div class="details-photo">
 									<img data-bind="attr: { src: logoUrl }" alt="">
 								</div>
 								<br>
