@@ -407,12 +407,31 @@
 			<div id="main-menu-bg">
 			</div>
 		</div> <!-- / #main-wrapper -->
+		<script type="text/x-kendo-template" id="role-modal-template">
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+					</div>
+					<div class="modal-body">
+			        ...
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-primary">Save changes</button>
+					</div>
+				</div>
+			</div>
+		</div>				
+		</script>		
 		<script type="text/x-kendo-template" id="company-details-template">		
 		<div class="panel">
 			<div class="panel-heading">
 				<span class="panel-title"><span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span></span>
 			</div>			
-		<div class="panel-body">
+			<div class="panel-body">
 					<div class="details-row no-margin-t">					
 						<div class="left-col">
 							<div class="details-block no-margin-t">
@@ -481,7 +500,7 @@
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
-		</div>
+			</div>
 		</div>			
 		</script>				
 		<#include "/html/common/common-system-templates.ftl" >			
