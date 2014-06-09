@@ -49,8 +49,7 @@
 			renderTo.removeClass(animate);
 		});
 		return renderTo;
-	}
-	
+	}	
 	
 	common.ui.initializeOwlCarousel = function (){
 		// Owl Slider v1
