@@ -174,7 +174,7 @@
 							},
 							columns: [
 								{ title: "ID", field: "menuId",  width:50 },
-								{ title: "이름", field: "name", template:'#:name#  <a href="\\#" onclick="openMenuEditor(); return false;" class="btn btn-info btn-sm">편집</a>' }
+								{ title: "이름", field: "name", template:'#:name#  <a href="\\#" onclick="openMenuEditor(); return false;" class="btn btn-info btn-xs">메뉴 편집</a>'  }
 							],
 							pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 							resizable: true,
