@@ -211,7 +211,7 @@
 								//$(".menu-details").hide();
 							}
 						});
-						$("#menu-grid").data("kendoGrid").dataSource.read();
+						$("#menu-grid").data("kendoGrid").refresh();
 					}
 				});
 			}
