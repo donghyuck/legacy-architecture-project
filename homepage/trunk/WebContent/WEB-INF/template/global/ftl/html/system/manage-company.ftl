@@ -108,7 +108,7 @@
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
-						alert( stringify(e));
+						//alert( stringify(e));
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );								
