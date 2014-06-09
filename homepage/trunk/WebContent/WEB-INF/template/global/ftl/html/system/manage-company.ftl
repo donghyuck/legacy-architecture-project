@@ -606,7 +606,7 @@
 					</div>					
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary btn-flat disabled">Save changes</button>
+						<button type="button" class="btn btn-primary btn-flat disabled">저장</button>
 					</div>
 				</div>
 			</div>
