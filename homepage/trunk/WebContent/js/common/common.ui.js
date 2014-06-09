@@ -43,6 +43,7 @@
 			element ='.page-loader' ;
 		 $(element).fadeOut('slow');
 	}
+		
 	
 	common.ui.initializeOwlCarousel = function (){
 		// Owl Slider v1
