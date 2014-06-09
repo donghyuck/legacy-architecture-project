@@ -210,7 +210,7 @@
 			if(!$('#company-details').is(":visible")){
 				renderTo.slideDown();
 			}
-			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);
+			$('html,body').animate({scrollTop: renderTo.offset().top - 10 }, 300);
 			$('#myTab a:first').tab('show') ;
 		}
 		
