@@ -419,7 +419,7 @@
 				<span class="panel-title"><span class="label label-primary" data-bind="text: company.name"></span></span>
 			</div>
 			
-		<div class="panel-body>">
+		<div class="panel-body">
 					<div class="details-full-name">
 						<span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span>
 					</div>
