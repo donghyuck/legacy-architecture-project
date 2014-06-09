@@ -562,7 +562,7 @@
 								<form class="form-horizontal">
 <div class="row">
 							<div class="col-sm-6">
-								<div class="form-group no-margin-hr">
+								<div class="form-group">
 									<label class="control-label">Firstname</label>
 									<input type="text" name="firstname" class="form-control">
 								</div>
