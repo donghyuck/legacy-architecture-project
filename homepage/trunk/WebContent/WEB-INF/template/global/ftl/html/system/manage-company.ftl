@@ -179,6 +179,9 @@
 				});				
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
+					
+						alert( kendo.stringify( e ) );
+						
 						if( companyPlaceHolder.companyId > 0 &&  this.company.companyId != companyPlaceHolder.companyId ){
 							this.set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
 						}
