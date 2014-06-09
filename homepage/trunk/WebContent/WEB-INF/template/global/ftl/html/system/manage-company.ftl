@@ -650,7 +650,7 @@ roles="ROLE_SYSTEM" page="/secure/system-info.do" />
     </Menu>
   </Menus>
 </MenuConfig>							
-												
+							</div>					
 						</div>
 					</div>
 					
