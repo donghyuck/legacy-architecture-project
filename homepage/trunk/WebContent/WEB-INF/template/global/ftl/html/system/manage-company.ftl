@@ -160,7 +160,34 @@
 					backdrop: 'static'
 				});
 				renderTo.on('show.bs.modal', function(e){
-					alert("fdasf");				
+					if( ! $('#role-grid').data("kendoGrid")){
+						// ROLE GRID 생성
+						$('#role-grid').kendoGrid({
+							dataSource: {
+								transport: { 
+									read: { url:'${request.contextPath}/secure/list-role.do?output=json', type:'post' }
+								},						
+								batch: false, 
+								schema: {
+									data: "roles",
+									model: Role
+								},
+								error:common.api.handleKendoAjaxError
+							},
+							columns: [
+								{ title: "ID", field: "roleId",  width:40 },
+								{ title: "롤", field: "name" },
+								{ title: "설명",   field: "description" }
+							],
+							pageable: false,
+							resizable: true,
+							editable : false,
+							scrollable: true,
+							height: 300,
+							change: function(e) {
+							}
+						});		
+					}
 				});
 			}
 			renderTo.modal('show');
@@ -432,7 +459,7 @@
 						<h4 class="modal-title">권한 & 롤</h4>
 					</div>
 					<div class="modal-body">
-			        ...
+						<div id="role-grid"></div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
