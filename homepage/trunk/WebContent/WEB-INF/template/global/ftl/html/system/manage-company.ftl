@@ -173,8 +173,8 @@
 								error:common.api.handleKendoAjaxError
 							},
 							columns: [
-								{ title: "ID", field: "menuId",  width:40 },
-								{ title: "이름", field: "name", width:100 }
+								{ title: "ID", field: "menuId",  width:50 },
+								{ title: "이름", field: "name" }
 							],
 							pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 							resizable: true,
@@ -291,7 +291,7 @@
 						if( sender.company.companyId > 0 ){
 							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
 							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
-							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));    							
+							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
 						}
 					}	
 				});									
