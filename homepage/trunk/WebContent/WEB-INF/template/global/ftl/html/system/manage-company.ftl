@@ -210,9 +210,9 @@
 								//kendo.bind($(".menu-details"), {} );
 								//$(".menu-details").hide();
 							}
-						});
-						$("#menu-grid").data("kendoGrid").refresh();
-					}
+						});						
+					}					
+					$("#menu-grid").data("kendoGrid").dataSource.read();
 				});
 			}
 			renderTo.modal('show');	
