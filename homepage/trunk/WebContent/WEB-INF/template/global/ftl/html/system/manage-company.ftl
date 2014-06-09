@@ -185,6 +185,7 @@
 			
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			$('#company-details').data("model").set("logoUrl", "/download/logo/company/" + companyPlaceHolder.name );
+			$('html,body').animate({scrollTop: renderTo.offset().top - 55 }, 300);
 			
 			/*
 				
