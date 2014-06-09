@@ -158,7 +158,7 @@
 		} 
 		
 		function getSelectedCompany(){
-			var renderTo = $('#company-details');
+			var renderTo = $("#company-details");
 			var grid = renderTo.data('kendoGrid');
 			var selectedCells = grid.select();
 			var selectedCell = grid.dataItem( selectedCells );   
