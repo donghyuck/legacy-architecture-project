@@ -533,7 +533,7 @@
 						<h4 class="modal-title">메뉴</h4>
 					</div>
 					<div class="modal-body no-padding">
-						<div class="panel panel-transparent">
+						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
 							<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button></div>
 							</div>
