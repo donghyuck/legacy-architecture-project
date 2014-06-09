@@ -152,8 +152,11 @@
 		
 		function showRoleWindow(){
 			var renderTo = $('#menu-modal');			
+			
+			
 			if( renderTo.length === 0 ){
-				$("#main-wrapper").append( kendo.template($('#menu-modal-template').html()) );
+		
+				$("#main-wrapper").append( kendo.template($('#role-modal-template').html()) );
 				renderTo.modal({
 					backdrop: 'static',
 					show:false
