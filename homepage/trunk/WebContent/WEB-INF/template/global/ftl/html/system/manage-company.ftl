@@ -125,7 +125,6 @@
 						if( $("#company-details").text().length > 0 ){	
 							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
 								$("#company-details").hide() 
-								$("#company-details").removeClass('fadeOutUp');
 							});
 						}						
 					},
@@ -135,7 +134,9 @@
 						if(selectedCells.length == 0 )
 						{
 							if( $("#company-details").text().length > 0 ){	
-								common.ui.animate($("#company-details"), 'fadeOutUp', function(){  $("#company-details").hide() });
+								common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
+									$("#company-details").hide() 
+								});
 							}	
 						}   
 					}	                    
@@ -254,6 +255,9 @@
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
+			if(renderTo.hasClass("fadeOutUp")){
+				renderTo.removeClass('fadeOutUp');
+			}
 			if(!renderTo.is(":visible")){
 				common.ui.animate(renderTo, 'fadeInDown').show();
 			}else{
