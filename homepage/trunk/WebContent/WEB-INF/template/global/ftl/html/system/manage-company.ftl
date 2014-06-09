@@ -262,7 +262,45 @@
 		}
 		
 		function createCompanyMembersPane(renderTo){
-			
+			var companyPlaceHolder = getSelectedCompany();
+			if( ! renderTo.data("kendoGrid") ){	
+				renderTo.kendoGrid({
+					dataSource: {
+						type: "json",
+						transport: { 
+							read: { url:'${request.contextPath}/secure/list-user.do?output=json', type: 'POST' },
+							parameterMap: function (options, type){
+								return { startIndex: options.skip, pageSize: options.pageSize,  companyId: companyPlaceHolder.companyId }
+							}
+						},
+						schema: {
+							total: "totalUserCount",
+							data: "users",
+							model: User
+						},
+						error:common.api.handleKendoAjaxError,
+						batch: false,
+						pageSize: 10,
+						serverPaging: true,
+						serverFiltering: false,
+						serverSorting: false 
+					},
+					//height: 350,
+					filterable: true,
+					sortable: true,
+					scrollable: true,
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
+					selectable: "multiple, row",
+					columns: [
+						{ field: "userId", title: "ID", width:50,  filterable: false, sortable: false }, 
+						{ field: "username", title: "아이디", width: 100 }, 
+						{ field: "name", title: "이름", width: 100 }, 
+						{ field: "email", title: "메일" },
+						{ field: "creationDate", title: "생성일", filterable: false,  width: 100, format: "{0:yyyy/MM/dd}" } ],
+					dataBound:function(e){  },
+						toolbar: [{ name: "create-groups", text: "선택 사용자 소속 변경하기", imageClass:"k-icon k-i-folder-up" , className: "changeUserCompanyCustomClass" }]
+				});												
+			}			
 		}	
 		
 		function createCompanyGroupsPane(renderTo){
