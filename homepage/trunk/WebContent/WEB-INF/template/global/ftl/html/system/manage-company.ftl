@@ -461,8 +461,8 @@
 						<div id="role-grid"></div>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
+						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+						<!--<button type="button" class="btn btn-primary">Save changes</button>-->
 					</div>
 				</div>
 			</div>
