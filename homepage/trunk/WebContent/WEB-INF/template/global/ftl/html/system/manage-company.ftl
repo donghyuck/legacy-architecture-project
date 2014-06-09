@@ -151,9 +151,10 @@
 		} 
 		
 		function showRoleWindow(){
-			if( $('#role-modal').length === 0 ){		
+			var renderTo = $('#role-modal');
+			if( renderTo.length === 0 ){		
 				$("#main-wrapper").append( kendo.template($('#role-modal-template').html()) );				
-				var renderTo = $('#role-modal');
+				
 				renderTo.modal({
 					backdrop: 'static',
 					show:false
@@ -162,7 +163,7 @@
 					alert("fdasf");				
 				});
 			}
-			$('#role-modal').modal('show');
+			renderTo.modal('show');
 		}
 		
 		function getSelectedCompany(){
@@ -423,7 +424,7 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="role-modal-template">
-		<div class="modal fade" id="menu-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="role-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog animated swing">
 				<div class="modal-content">
 					<div class="modal-header">
