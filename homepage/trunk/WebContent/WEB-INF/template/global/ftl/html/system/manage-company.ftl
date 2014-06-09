@@ -392,7 +392,7 @@
 							<div class="panel-heading">
 								<span class="panel-title"><i class="panel-title-icon fa fa-building-o"></i></span>
 								<div class="panel-heading-controls">
-									<span class="panel-heading-text"><em>Just some text with <a href="#">link</a></em>&nbsp;&nbsp;<span style="color: #ccc">|</span>&nbsp;&nbsp;</span>
+									|</span>&nbsp;&nbsp;</span>
 									<button class="btn btn-danger btn-sm btn-labeled btn-control-group" data-action="create-company"><span class="btn-label icon fa fa-plus"></span> 회사 만들기 </button>
 								</div>
 							</div>
