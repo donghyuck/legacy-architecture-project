@@ -459,6 +459,27 @@
 			<div id="main-menu-bg">
 			</div>
 		</div> <!-- / #main-wrapper -->
+		
+		<script type="text/x-kendo-template" id="menu-modal-template">
+		<div class="modal fade" id="menu-modal" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
+			<div class="modal-dialog modal-lg animated swing">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">메뉴</h4>
+					</div>
+					<div class="modal-body">
+						<div id="role-grid"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+						<!--<button type="button" class="btn btn-primary">Save changes</button>-->
+					</div>
+				</div>
+			</div>
+		</div>				
+		</script>
+		
 		<script type="text/x-kendo-template" id="role-modal-template">
 		<div class="modal fade" id="role-modal" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
 			<div class="modal-dialog animated swing">
