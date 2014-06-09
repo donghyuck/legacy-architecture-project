@@ -151,7 +151,20 @@
 		
 		
 		function creatCompanyGrid(){
-			
+			var renderToString = "menu-modal";
+			var renderTo = $( '#' + renderToString );
+			if( renderTo.length === 0 ){		
+				$("#main-wrapper").append( kendo.template($('#menu-modal-template').html()) );				
+				renderTo = $('#' + renderToString );
+				renderTo.modal({
+					backdrop: 'static'
+				});
+				renderTo.on('show.bs.modal', function(e){
+				
+				
+				});
+			}
+			renderTo.modal('show');	
 		} 
 		
 		function showRoleWindow(){
