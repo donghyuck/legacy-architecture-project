@@ -562,13 +562,11 @@
 								<div class="row no-margin">
 									<div class="col-sm-6">
 										<div class="form-group no-margin-hr">
-											<label class="control-label">이름</label>
 											<input type="text" name="firstname" class="form-control" placeholder="이름" >
 										</div>
 									</div><!-- col-sm-6 -->
 									<div class="col-sm-6">
 										<div class="form-group no-margin-hr">
-											<label class="control-label">타이틀</label>
 											<input type="text" name="lastname" class="form-control" placeholder="타이틀" >
 										</div>
 									</div><!-- col-sm-6 -->
@@ -577,46 +575,9 @@
 									<div class="col-sm-12">
 										<input type="text" class="form-control" data-bind="value:description" placeholder="설명" />
 									</div>
-								</div>
-														
-									<div class="form-group">
-										<label class="col-lg-2 control-label" for="input-menu-name">이름</label>
-										<div class="col-lg-10">
-											<input type="text" class="form-control" placeholder="이름" data-bind="value:name" id="input-menu-name"/>
-										</div>
-									</div>					
-									<div class="form-group">
-										<label class="col-lg-2 control-label" for="input-menu-title">타이틀</label>
-										<div class="col-lg-10">
-											<input type="text" class="form-control" placeholder="타이틀" data-bind="value:title" id="input-menu-title"/>
-										</div>
-									</div>				
-									<div class="form-group">
-										<label class="col-lg-2 control-label" >옵션</label>
-										<div class="col-lg-10">
-											<div class="checkbox">
-												<label>
-													<input type="checkbox"  name="enabled"  data-bind="checked: enabled" /> 사용여부
-												</label>
-											</div>
-										</div>							
-									</div>				
-									<div class="form-group">
-										<label class="col-lg-2 control-label" for="input-menu-description">설명</label>
-										<div class="col-lg-10">
-											<input type="text" class="form-control" placeholder="설명" data-bind="value:description" id="input-menu-description"/>
-										</div>
-									</div>			
-									<div class="form-group">
-										<label class="col-lg-2 control-label" for="input-menu-xmldata">XML &nbsp<br/><span class="label label-danger">Important</span></label>
-										<div class="col-lg-10">
-											<textarea  data-bind="value: menuData" rows="10" id="input-menu-xmldata" class="form-control"></textarea>
-										</div>
-									</div>									
-								</form>
-								
-</div>
-						
+								</div>				
+							</form>								
+						</div>						
 					</div>
 					<div class="modal-footer">
 					
