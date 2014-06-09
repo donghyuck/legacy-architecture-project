@@ -140,7 +140,7 @@
 							//selectedCompany = new Company({});		    
 							//kendo.bind($(".tabular"), selectedCompany );
 							//$("#menu").hide(); 	
-							if( $("company-details").text().length > 0 ){								
+							if( $("#company-details").text().length > 0 ){								
 								slide.reverse();
 							}	
 						}   
