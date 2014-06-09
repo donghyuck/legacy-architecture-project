@@ -572,8 +572,6 @@ position: absolute;
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
 					<div class="modal-body no-padding">
-					<div class="row no-margin">
-					<div class="col-sm-12">
 						<div id="menu-editor" style="display:none; padding:5px;">
 							<form class="form-horizontal">
 								<div class="row no-margin">
@@ -594,18 +592,14 @@ position: absolute;
 									</div>
 								</div>				
 							</form>	
-							</div>
-					</div>
-					<div class="row no-margin">
-							<div class="col-sm-12">
+			
+						</div>
+					</div>					
+					<div class="modal-body">
 							<div id="xml-editor">
 							hello						
-							</div>					
-							</div>
-					</div>
-						</div>
-						
-					</div>										
+							</div>							
+					</div>					
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
 						<!--<button type="button" class="btn btn-primary">Save changes</button>-->
