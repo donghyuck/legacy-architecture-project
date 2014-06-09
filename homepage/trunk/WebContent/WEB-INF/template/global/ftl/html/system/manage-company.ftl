@@ -121,15 +121,12 @@
 							}
 						}*/
 					},
-					edit: function(e){
-	//					$("#company-details").hide(); 
-	
+					edit: function(e){	
 						if( $("#company-details").text().length > 0 ){	
 							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
 								$("#company-details").hide() ;
 							});
-						}				
-						
+						}			
 					},
 					dataBound: function(e){   
 						// 1-2 Company 데이터를 새로 읽어드리면 기존 선택된 정보들과 상세 화면을 클리어 한다. 
@@ -141,16 +138,13 @@
 						} 
 					}	                    
 				}); //.css("border", 0);
-							
-				// MENU WINDOW
-				$('#menu-grid').data("menuPlaceHolder", new Menu() )	;
-												
+																			
 				// END SCRIPT
 			}
 		}]);
 		
 		
-		function creatCompanyGrid(){
+		function showMenuWindow(){
 			var renderToString = "menu-modal";
 			var renderTo = $( '#' + renderToString );
 			if( renderTo.length === 0 ){		
