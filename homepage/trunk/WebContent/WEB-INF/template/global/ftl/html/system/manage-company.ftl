@@ -256,6 +256,7 @@
 			if(!renderTo.is(":visible")){
 				renderTo.removeClass('bounceIn').addClass('bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 					//this.removeClass('bounceIn');
+					alert(this.html());
 				});
 				
 				renderTo.show();
