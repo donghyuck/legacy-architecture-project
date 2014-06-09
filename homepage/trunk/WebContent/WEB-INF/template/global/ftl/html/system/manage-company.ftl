@@ -111,30 +111,14 @@
 						var selectedCells = this.select();
 						if( selectedCells.length > 0){							
 							var selectedCell = this.dataItem( selectedCells );		
+							this.editRow(selectedCells);
 							if( selectedCell.companyId > 0 && this.tbody.find('>tr[data-role="editable"]').length == 0 )
-							alert('fdssss');
-								showCompanyDetails();
+							{	
 							
-							/*
-							if( selectedCell.companyId > 0 && selectedCell.companyId != selectedCompany.companyId ){
-								selectedCompany.companyId = selectedCell.companyId;
-								selectedCompany.name = selectedCell.name;
-								selectedCompany.displayName = selectedCell.displayName;
-								selectedCompany.domainName = selectedCell.domainName;
-								selectedCompany.description = selectedCell.description;
-								selectedCompany.modifiedDate = selectedCell.modifiedDate;
-								selectedCompany.creationDate = selectedCell.creationDate;	                                 
-								selectedCompany.formattedCreationDate  =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.creationDate );      
-								selectedCompany.formattedModifiedDate =  kendo.format("{0:yyyy.MM.dd}",  selectedCell.modifiedDate );    
-								
-								
-								$('#company-details').show().html(kendo.template($('#company-details-template').html()));	
-								kendo.bind( $('#company-details'), selectedCompany );								}	
-								*/
+								//showCompanyDetails();
+							
+							}
 						}
-					},
-					edit: function(e){
-						alert('fdsaf');
 					},
 					dataBound: function(e){   
 						// 1-2 Company 데이터를 새로 읽어드리면 기존 선택된 정보들과 상세 화면을 클리어 한다. 
