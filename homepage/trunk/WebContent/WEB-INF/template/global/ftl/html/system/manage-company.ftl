@@ -255,6 +255,7 @@
 			
 			if(!renderTo.is(":visible")){
 				renderTo.toggleClass('bounceIn');
+				renderTo.show();
 			}
 			
 			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);
