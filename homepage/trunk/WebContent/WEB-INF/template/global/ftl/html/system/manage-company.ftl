@@ -531,7 +531,7 @@
 						<h4 class="modal-title">메뉴</h4>
 					</div>
 					<div class="modal-body">
-						<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 회사 만들기 </button>
+						<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button>
 						<div id="menu-grid"></div>
 					</div>
 					<div class="modal-footer">
