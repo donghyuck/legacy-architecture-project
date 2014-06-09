@@ -445,8 +445,8 @@
 								<div class="panel-body">
 									<ul class="list-unstyled">
 										<li><span data-bind="text:company.domainName"></span></li>
-										<li><span data-bind="text:company.formattedCreationDate"></span></li>
-										<li><span data-bind="text:company.formattedModifiedDate"></span></li>
+										<li><span data-bind="text:formattedCreationDate"></span></li>
+										<li><span data-bind="text:formattedModifiedDate"></span></li>
 									</ul>
 								</div>
 							</div>
