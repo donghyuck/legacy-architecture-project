@@ -229,13 +229,13 @@
 				
 		function openMenuEditor(){
 			alert(
-			getSelectedMenu().menuId
+				getSelectedMenu().menuId
 			);
 			
 			$('#menu-editor').show();
 			
 			var editor = ace.edit("xml-editor");
-			//editor.setTheme("ace/theme/monokai");
+			editor.setTheme("ace/theme/monokai");
 			editor.getSession().setMode("ace/mode/xml");
 			
 		}
