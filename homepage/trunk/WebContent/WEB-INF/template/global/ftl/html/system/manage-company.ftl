@@ -594,14 +594,7 @@ position: absolute;
 								</div>				
 							</form>	
 							<div id="xml-editor">
-
-<?xml version="1.0" encoding="UTF-8" ?>
-<MenuConfig>
-  <Menus>
-    <Menu  name="USER_MENU"  title="사용자 메뉴">
-    </Menu>
-  </Menus>
-</MenuConfig>							
+hello						
 							</div>					
 						</div>
 					</div>
