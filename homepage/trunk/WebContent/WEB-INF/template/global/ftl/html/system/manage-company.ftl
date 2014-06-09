@@ -466,6 +466,10 @@
 			.k-grid-content {
 				min-height:100px;
 			}
+			
+			#menu-grid {
+				height :400px;
+			}
 		</style>
 	</head>
 	<body class="theme-default main-menu-animated">
