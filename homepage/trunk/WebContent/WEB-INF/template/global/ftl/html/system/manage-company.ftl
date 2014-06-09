@@ -573,6 +573,7 @@ position: absolute;
 					</div>					
 					<div class="modal-body no-padding">
 					<div class="row no-margin">
+					<div class="col-sm-12">
 						<div id="menu-editor" style="display:none; padding:5px;">
 							<form class="form-horizontal">
 								<div class="row no-margin">
@@ -593,11 +594,14 @@ position: absolute;
 									</div>
 								</div>				
 							</form>	
+							</div>
 					</div>
 					<div class="row no-margin">
+							<div class="col-sm-12">
 							<div id="xml-editor">
 							hello						
 							</div>					
+							</div>
 					</div>
 						</div>
 						
