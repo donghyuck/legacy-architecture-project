@@ -349,11 +349,6 @@
 		.k-grid-content{
 			height:300px;
 		}
-					
-
-
-
-
 				
 		</style>
 	</head>
