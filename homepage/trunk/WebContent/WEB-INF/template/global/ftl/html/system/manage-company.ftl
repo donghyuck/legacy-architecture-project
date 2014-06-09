@@ -464,11 +464,7 @@
 		</script> 		 
 		<style>
 			.k-grid-content {
-				min-height:100px;
-			}
-			
-			#menu-grid {
-				height :400px;
+				min-height:150px;
 			}
 		</style>
 	</head>
