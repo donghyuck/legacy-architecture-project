@@ -531,7 +531,7 @@
 						<h4 class="modal-title">메뉴</h4>
 					</div>
 					<div class="modal-body">
-						<div id="role-grid"></div>
+						<div id="menu-grid"></div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
