@@ -424,7 +424,7 @@
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="company-details-template">		
 					<div class="details-full-name">
-						<span class="text-semibold" data-bind="text:company.displayName"></span> <span class="label label-primary"><span data-bind="text: company.name"></span></span>
+						<span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span>
 					</div>
 					<div class="details-row">					
 						<div class="left-col">
