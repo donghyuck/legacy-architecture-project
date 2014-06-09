@@ -165,7 +165,7 @@
 					alert("fdasf");				
 				});
 			}
-			renderTo.model('show');
+			renderTo.modal('show');
 		}
 		
 		function getSelectedCompany(){
