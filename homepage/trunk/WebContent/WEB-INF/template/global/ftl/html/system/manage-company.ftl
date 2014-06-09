@@ -122,6 +122,7 @@
 						}*/
 					},
 					edit: function(e){
+						$("#company-details").hide(); 
 					/*
 						if( $("#company-details").text().length > 0 ){	
 							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
