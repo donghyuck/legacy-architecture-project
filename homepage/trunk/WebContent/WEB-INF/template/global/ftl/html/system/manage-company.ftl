@@ -440,11 +440,11 @@
 											<td><span data-bind="text:company.domainName"></span></td>
 										</tr>	
 										<tr>
-											<th><small>생성일</small></th>								
+											<th><small><span class="badge">생성일</span></small></th>								
 											<td><span data-bind="text:formattedCreationDate"></span></td>
 										</tr>	
 										<tr>
-											<th><small>수정일</small></th>								
+											<th><small><span class="badge">수정일</span></small></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>														
 									</tbody>
