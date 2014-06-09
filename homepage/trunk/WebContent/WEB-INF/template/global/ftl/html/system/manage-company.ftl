@@ -254,7 +254,9 @@
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
 			if(!renderTo.is(":visible")){
-				renderTo.toggleClass('bounceIn');
+				renderTo.removeClass('bounceIn').addClass('bounceIn').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+					this.removeClass('bounceIn');
+				});
 				renderTo.show();
 			}
 			
