@@ -389,9 +389,6 @@
 		-->
 		</script> 		 
 		<style>
-		.k-grid{
-			min-height:100px;
-		}
 				
 		</style>
 	</head>
