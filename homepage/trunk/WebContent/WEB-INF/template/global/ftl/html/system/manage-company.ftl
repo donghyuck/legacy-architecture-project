@@ -150,6 +150,13 @@
 			
 		} 
 		
+		function showRoleWindow(){
+			var renderTo = $('#menu-modal');
+			if( renderTo.length === 0 ){
+				$("#main-wrapper").append( kendo.template($('#menu-modal-template').html()) );
+			}		
+		}
+		
 		function getSelectedCompany(){
 			var renderTo = $("#company-grid");
 			var grid = renderTo.data('kendoGrid');
@@ -408,7 +415,7 @@
 			</div>
 		</div> <!-- / #main-wrapper -->
 		<script type="text/x-kendo-template" id="role-modal-template">
-		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="menu-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
