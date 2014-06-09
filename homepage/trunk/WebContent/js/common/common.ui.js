@@ -44,10 +44,12 @@
 		 $(element).fadeOut('slow');
 	}
 	
-	common.ui.animate = function (renderTo, animate){	
+	common.ui.animate = function (renderTo, animate, always){	
 		
 		renderTo.removeClass(animate).addClass(animate).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 			renderTo.removeClass(animate);
+			if(isFunction(always))
+				always();
 		});
 		return renderTo;
 		
