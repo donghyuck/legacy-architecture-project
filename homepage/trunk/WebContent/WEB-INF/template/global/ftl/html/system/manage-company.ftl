@@ -429,9 +429,9 @@
 								</div>
 								<div class="panel-body">
 									<ul class="list-unstyled">
-										<li><span data-bind="text:company.domainName"></span></li>
-										<li><span data-bind="text:formattedCreationDate"></span></li>
-										<li><span data-bind="text:formattedModifiedDate"></span></li>
+										<li>도메인:<span data-bind="text:company.domainName"></span></li>
+										<li>생성일:<span data-bind="text:formattedCreationDate"></span></li>
+										<li>수정일:<span data-bind="text:formattedModifiedDate"></span></li>
 									</ul>
 								</div>
 							</div>
