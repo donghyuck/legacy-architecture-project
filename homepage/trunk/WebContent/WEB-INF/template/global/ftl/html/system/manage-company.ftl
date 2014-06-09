@@ -561,18 +561,24 @@
 
 								<form class="form-horizontal">
 <div class="row no-margin">
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="form-group no-margin-hr">
 									<label class="control-label">이름</label>
 									<input type="text" name="firstname" class="form-control">
 								</div>
-							</div><!-- col-sm-6 -->
-							<div class="col-sm-6">
+							</div><!-- col-sm-4 -->
+							<div class="col-sm-4">
 								<div class="form-group no-margin-hr">
 									<label class="control-label">타이틀</label>
 									<input type="text" name="lastname" class="form-control">
 								</div>
-							</div><!-- col-sm-6 -->
+							</div><!-- col-sm-4 -->
+							<div class="col-sm-4">
+								<div class="form-group no-margin-hr">
+									<label class="control-label">사용여부</label>
+									<input type="checkbox"  name="enabled"  data-bind="checked: enabled" />
+								</div>
+							</div><!-- col-sm-4 -->							
 						</div>
 														
 									<div class="form-group">
