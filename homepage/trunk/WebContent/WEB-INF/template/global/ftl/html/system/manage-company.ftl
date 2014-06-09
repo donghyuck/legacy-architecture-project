@@ -434,17 +434,21 @@
 									<span class="panel-title"  data-bind="text:company.description"></span>
 								</div>
 								<table class="table">
-											<tbody>						
-												<tr>
-													<th><small>회사</small></th>								
-													<td><span data-bind="text: displayName">인키움</span> <span class="label label-primary"><span data-bind="text: name">INKIUM</span></span> <code><span data-bind="text: companyId">1</span></code></td>
-												</tr>	
-												<tr>
-													<th><small>도메인</small></th>								
-													<td><span data-bind="text: domainName">www.inkium.com</span></td>
-												</tr>				
-										 	</tbody>
-									</table>
+									<tbody>						
+										<tr>
+											<th><small>도메인</small></th>								
+											<td><span data-bind="text:company.domainName"></span></td>
+										</tr>	
+										<tr>
+											<th><small>생성일</small></th>								
+											<td><span data-bind="text:formattedCreationDate"></span></td>
+										</tr>	
+										<tr>
+											<th><small>수정일</small></th>								
+											<td><span data-bind="text:formattedModifiedDate"></span></td>
+										</tr>														
+									</tbody>
+								</table>
 																	
 								<div class="panel-body">
 									<ul class="list-unstyled">
