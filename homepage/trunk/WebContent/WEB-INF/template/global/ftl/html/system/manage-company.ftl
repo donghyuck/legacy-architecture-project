@@ -108,12 +108,14 @@
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },					
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
-						//alert( stringify(e));
-						alert(
-						e.container
-						);
+
 						var selectedCells = this.select();
+						alert( 
+						this.tbody.find('>tr[data-role="editable"]').length
+						);
+						
 						if( selectedCells.length > 0){
+							
 							var selectedCell = this.dataItem( selectedCells );								
 							if( selectedCell.companyId > 0 )
 								showCompanyDetails();
