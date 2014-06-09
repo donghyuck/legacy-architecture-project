@@ -495,6 +495,7 @@ position: absolute;
         right: 0;
         bottom: 0;
         left: 0;
+        min-height:400px;
 			}
 		</style>
 	</head>
