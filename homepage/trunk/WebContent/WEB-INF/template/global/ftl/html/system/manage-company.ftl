@@ -442,7 +442,9 @@
 									<span class="panel-title"  data-bind="text:company.description"></span>
 								</div>
 								<div class="panel-body">
-								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et <a href="\\#">dolore magna</a> aliqua.
+									<ul class="list-unstyled">
+										<li><span data-bind="text:company.domainName"></span></li>
+									</ul>
 								</div>
 							</div>
 						</div>
