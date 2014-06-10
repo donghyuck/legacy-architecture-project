@@ -123,6 +123,7 @@
 				common.ui.animate(listPanel, 'animated fadeInDown');
 				common.ui.animate(viewPanel, 'animated bounceOut');
 				setTimeout(function() {
+					viewPanel.removeClass();
 					viewPanel.addClass('hidden');
 					listPanel.removeClass('hidden');
 				}, 800);
