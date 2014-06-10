@@ -111,11 +111,15 @@
 			
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');					
+			var slide = kendo.fx(listPanel).slideIn("up")
+			
 			common.ui.animate(viewPanel, 'animated bounceIn');
-			common.ui.animate(listPanel, 'animated faceOutUp');
+			//common.ui.animate(listPanel, 'animated faceOutUp');
+			slide.play();
 			setTimeout(function() {
-				listPanel.removeClass();
-				listPanel.addClass('hidden');
+				//listPanel.removeClass();
+				//listPanel.addClass('hidden');
+				slide.stop();
 				viewPanel.removeClass("hidden");
 			}, 800);			
 			
