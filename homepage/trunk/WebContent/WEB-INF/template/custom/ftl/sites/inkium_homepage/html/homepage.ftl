@@ -63,7 +63,8 @@
 												 
 				if( 	kendo.support.touch && kendo.support.mobileOS ){
 					$('.view.view-tenth').click(function(e){ 
-						$(this).find('a').trigger("click");
+						alert('click');
+						//$(this).find('a').trigger("click");
 					});				
 				}
 											 							 
