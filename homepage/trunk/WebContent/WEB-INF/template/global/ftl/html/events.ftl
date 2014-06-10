@@ -41,7 +41,8 @@
 					}				
 				});		
 
-				var isMobile = (kendo.support.mobileOS.device === 'iphone'  ? true : false );		
+				var isMobile = ( kendo.support.mobileOS.device === 'iphone'  ? true : false );		
+				alert ( isMobile );
 				
 				// 1. Announces 				
 				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );			
