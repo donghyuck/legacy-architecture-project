@@ -161,7 +161,7 @@
 								     },
 								     columns: [
 								         { title: "속성", field: "name", locked: true, width:400 },
-								         { title: "값",   field: "value",  width:400 }
+								         { title: "값",   field: "value",  width:500 }
 								     ],
 									pageable: false,
 									resizable: true,
