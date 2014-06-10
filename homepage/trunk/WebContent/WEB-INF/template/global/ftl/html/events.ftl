@@ -115,7 +115,7 @@
 			var zoom = kendo.fx(listPanel).zoom("out").endValue(0).startValue(1)
 						
 			common.ui.animate(viewPanel, 'animated bounceIn');
-			common.ui.animate(listPanel, 'animated fadeOutDown');
+			common.ui.animate(listPanel, 'animated bounceOut');
 			//zoom.play();			
 			
 			setTimeout(function() {
