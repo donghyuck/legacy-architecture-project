@@ -8,7 +8,8 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/jquery.extension/component.min.css',
+		/*	'css!${request.contextPath}/styles/jquery.extension/component.min.css',*/
+			'css!${request.contextPath}/styles/common.extension/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -179,7 +180,7 @@
 							<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
 						</div>	
 														
-						<section id="announce-list-section" style="position: absolute;	">
+						<section id="announce-list-section" style="">
 							<div id="announce-grid"></div>
 						</section>
 						<section id="announce-view-content-section" style="display:none;">						
