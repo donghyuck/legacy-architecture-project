@@ -261,7 +261,7 @@
                                 <em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
                                 <span>
 						                            <strong>문의</strong>
-						                            <small><a href="tel:+0220811016">02-2081-1016</a></small>
+						                            <a href="tel:+0220811016">02-2081-1016</a>
                                 </span>
                             </a>
                         </li>
