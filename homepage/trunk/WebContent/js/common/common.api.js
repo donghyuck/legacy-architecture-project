@@ -7,7 +7,11 @@
 	UNDEFINED = 'undefined',
 	LOCALE = 'ko-KR',
 	isFunction = kendo.isFunction;
-		
+	
+	common.api.culture = function ( ){
+		kendo.culture(culture);				
+	}	
+	
 	common.api.culture = function ( culture ){
 		if( typeof culture === UNDEFINED )
 			culture = LOCALE;
