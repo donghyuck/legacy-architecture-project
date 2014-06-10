@@ -61,10 +61,12 @@
 				}).read();
 												 
 												 
-				if( kendo.support.mobileOS.device === 'iphone' ){					
-					alert("");		 
-					$('.view.view-tenth').click(function(e){  $(this).trigger("mouseover");  });
-				}								 
+				if( 	kendo.support.touch && kendo.support.mobileOS ){
+					$('.view.view-tenth').click(function(e){ 
+						$(this).find('a').trigger("click");
+					});				
+				}
+											 							 
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
