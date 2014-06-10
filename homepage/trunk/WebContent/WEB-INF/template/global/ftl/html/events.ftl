@@ -111,13 +111,13 @@
 			
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');
-			
+			viewPanel.show();
 			common.ui.animate(listPanel, 'animated fadeOutDown', function(){ 
 				listPanel.hide();
 			});
 			
 			common.ui.animate(viewPanel, 'animated fadeInUp');
-			viewPanel.show();
+			
 
 
 
