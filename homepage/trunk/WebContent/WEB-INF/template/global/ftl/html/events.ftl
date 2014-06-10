@@ -41,6 +41,8 @@
 					}				
 				});		
 
+				var isMobile = (kendo.support.mobileOS.device === 'iphone'  ? true : false );		
+				
 				// 1. Announces 				
 				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );			
 				var selectedAnnounceId = ${ParamUtils.getLongParameter(request, "announceId", 0 )} ;		
@@ -69,7 +71,7 @@
 					}),	
 					columns: [
 						{field: "subject", title: "제목", sortable : false },
-						{field: "creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}"}
+						{field: "creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", hidden: isMobile}
 					],
 					sortable: true,
 					pageable: false,
@@ -88,9 +90,8 @@
 						}
 					}			
 				});							
-				if( 	kendo.support.touch && kendo.support.mobileOS ){
-					$("#announce-grid").data("kendoGrid").hideColumn(1);
-				}				
+				
+		
 				<#if !action.user.anonymous >				
 				
 				</#if>	
