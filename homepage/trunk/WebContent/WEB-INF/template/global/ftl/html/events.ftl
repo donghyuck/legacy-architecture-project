@@ -111,21 +111,14 @@
 			
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');			
-			var fade = kendo.fx(listPanel).fade("out");
-			
-					
-			var slide = kendo.fx(listPanel).slideIn("down")
-			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0.3).startValue(1);
-			
-			common.ui.animate(viewPanel, 'animated bounceIn');
-			//common.ui.animate(listPanel, 'animated faceOutUp');
+			var fade = kendo.fx(listPanel).fade("out");			
 			fade.play();
+			common.ui.animate(viewPanel, 'animated bounceIn');
 			setTimeout(function() {
 				listPanel.addClass('hidden');
 				fade.stop();
 				viewPanel.removeClass("hidden");
 			}, 300);			
-			
 			$("#announce-view-panel").find(".close").click(function (e) {				
 				common.ui.animate(viewPanel, 'animated bounceOut');				
 				setTimeout(function() {
@@ -134,32 +127,7 @@
 					fade.reverse();					
 					listPanel.removeClass('hidden');
 				}, 800);
-			});					
-
-
-			
-/*			$("#announce-view-panel").removeClass('hide');				
-
-
-
-			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1), slide = kendo.fx($("#announce-view-content-section")).slideIn("up") ;
-			zoom.play();			
-			setTimeout(function() {
-				zoom.stop();
-				slide.play();
-			}, 100);			
-			
-			$("#announce-view-panel").find(".close").click(function (e) {
-				slide.reverse();
-				setTimeout(function() {
-					slide.stop();
-					zoom.reverse();
-					$("#announce-view-panel").addClass('hide');
-				}, 100);
-			});						
-			
-	*/				
-		
+			});			
 		}				
 		-->
 		</script>		
