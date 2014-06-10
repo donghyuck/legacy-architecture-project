@@ -237,7 +237,7 @@
                 <!-- Recent Works -->
                 <div class="headline"><h5><strong>서비스 바로가기</strong></h5></div>
                 <div class="margin-bottom-40">
-                    <ul id="list" class="bxslider2 recent-work margin-bottom-40">
+                    <ul id="list" class="bxslider2 family-site margin-bottom-40">
                         <li>
                             <a target="_blank" href="http://www.astd.co.kr/">
                                 <em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
