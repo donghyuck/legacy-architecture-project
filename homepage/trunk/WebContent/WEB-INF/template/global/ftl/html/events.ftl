@@ -119,7 +119,7 @@
 			zoom.play();
 			setTimeout(function() {
 				//listPanel.removeClass();
-				//listPanel.addClass('hidden');
+				listPanel.addClass('hidden');
 				zoom.stop();
 				viewPanel.removeClass("hidden");
 			}, 800);			
