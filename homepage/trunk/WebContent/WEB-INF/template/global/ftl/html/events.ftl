@@ -196,7 +196,7 @@
 		<script id="announce-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:announceId#">
 				<td><span class="label label-danger label-lightweight">공지</span>&nbsp;#: subject #	 </td>
-				#if( !isMobile ){ #	
+				#if( !hidden ){ #	
 				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
 				# } #
 			</tr>
