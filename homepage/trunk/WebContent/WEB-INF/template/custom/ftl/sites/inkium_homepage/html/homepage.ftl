@@ -235,7 +235,7 @@
 			<div class="row summary-content">				
 				<div class="col-md-4">		
                 <!-- Recent Works -->
-                <div class="headline"><h2>서비스 바로가기</h2></div>
+                <div class="headline"><h5><strong>서비스 바로가기</strong></h5></div>
                 <div class="margin-bottom-40">
                     <ul id="list" class="bxslider2 recent-work margin-bottom-40">
                         <li>
