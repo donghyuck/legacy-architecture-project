@@ -61,7 +61,7 @@
 				}).read();
 												 
 												 
-				if( kendo.support.mobileOS.iphone ){					
+				if( kendo.support.mobileOS.device === 'iphone' ){					
 					alert("");		 
 					$('.view.view-tenth').click(function(e){  $(this).trigger("mouseover");  });
 				}								 
