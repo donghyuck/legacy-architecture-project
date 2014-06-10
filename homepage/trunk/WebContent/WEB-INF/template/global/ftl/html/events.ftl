@@ -112,11 +112,13 @@
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');
 			
+			common.ui.animate(viewPanel, 'animated bounceIn');
 			common.ui.animate(listPanel, 'animated fadeOutDown', function(){ 
 				listPanel.hide();
+				viewPanel.removeClass("hidden");
 			});			
 			
-			common.ui.animate(viewPanel, 'animated bounceIn');	
+			
 			viewPanel.show();
 
 
