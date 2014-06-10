@@ -56,12 +56,13 @@
 					$("#announce-view").html(kendo.render(template, this.view()))
 				}).read();
 				
-				forum.dataSource().bind('change', function(){
+				forum.dataSource().bind('change', function(){					
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
 												 
 												 
-				if( kendo.support.mobileOS.iphone ){								 
+				if( kendo.support.mobileOS.iphone ){					
+					alert("");		 
 					$('.view.view-tenth').click(function(e){  $(this).trigger("mouseover");  });
 				}								 
 				<#if !action.user.anonymous ></#if>	
