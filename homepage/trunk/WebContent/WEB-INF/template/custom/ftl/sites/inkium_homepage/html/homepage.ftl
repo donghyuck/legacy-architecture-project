@@ -235,7 +235,7 @@
 			<div class="row summary-content">				
 				<div class="col-md-4">		              
 					<div class="headline"><h4><small><strong>서비스 바로가기</strong></small></h4></div>
-					<div class="margin-bottom-40">
+					<div class="margin-bottom-20">
 					
 					<div class="easy-block-v2">					
 						<div class="clearfix">
@@ -275,7 +275,7 @@
 				</div>				
 				<div class="col-md-4">
 					<div class="headline"><h4><small><strong>공지 & 이벤트</strong></small></h4></div>
-					<div class="margin-bottom-40">
+					<div class="margin-bottom-20">
 					<div class="easy-block-v2">		
 						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
 							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
@@ -286,7 +286,7 @@
 				</div>			
 				<div class="col-md-4">
 				<div class="headline"><h4><small><strong>뉴스</strong></small></h4></div>
-				<div class="margin-bottom-40">
+				<div class="margin-bottom-20">
 					<div class="easy-block-v2">		
 						<ul id="news-view" class="list-unstyled summaries" style="min-height:100px;">
 							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
