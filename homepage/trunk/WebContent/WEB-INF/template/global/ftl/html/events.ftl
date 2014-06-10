@@ -112,7 +112,7 @@
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');					
 			common.ui.animate(viewPanel, 'animated bounceIn');
-			common.ui.animate(listPanel, 'animated bounceOut');
+			common.ui.animate(listPanel, 'animated slideOutUp');
 			setTimeout(function() {
 				listPanel.removeClass();
 				listPanel.addClass('hidden');
@@ -120,7 +120,7 @@
 			}, 300);			
 			
 			$("#announce-view-panel").find(".close").click(function (e) {
-				common.ui.animate(listPanel, 'animated bounceIn');
+				common.ui.animate(listPanel, 'animated slideInDown');
 				common.ui.animate(viewPanel, 'animated bounceOut');
 				setTimeout(function() {
 					viewPanel.removeClass();
