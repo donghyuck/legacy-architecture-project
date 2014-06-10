@@ -240,16 +240,16 @@
                     <ul id="list" class="bxslider2 recent-work margin-bottom-40">
                         <li>
                             <a href="#">
-                                <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="" /></em>
+                                <em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
                                 <span>
-                                    <i>문의</i>
-                                    <small>02 2081 1092</small>
+						                            <strong>문의</strong>
+						                            <small>02 2081 1092</small>
                                 </span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/9.jpg" alt="" /></em>
+                                <em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
                                 <span>
                                     <i>Responsive Bootstrap Template</i>
                                 </span>
@@ -257,7 +257,7 @@
                         </li>
                         <li>
                             <a href="#">
-                                <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="" /></em>
+                                <em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
                                 <span>
                                     <i>Pariatur prehe cliche reprehrit</i>
                                 </span>
