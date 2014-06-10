@@ -118,10 +118,6 @@
 				listPanel.addClass("hidden");				
 			});			
 			
-			
-			viewPanel.show();
-
-
 
 /*			$("#announce-view-panel").removeClass('hide');				
 
