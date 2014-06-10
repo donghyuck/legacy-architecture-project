@@ -121,20 +121,19 @@
 			//common.ui.animate(listPanel, 'animated faceOutUp');
 			fade.play();
 			setTimeout(function() {
-				//listPanel.removeClass();
 				listPanel.addClass('hidden');
 				fade.stop();
 				viewPanel.removeClass("hidden");
 			}, 300);			
 			
-			$("#announce-view-panel").find(".close").click(function (e) {
-				common.ui.animate(listPanel, 'animated faceInDown');
-				common.ui.animate(viewPanel, 'animated bounceOut');
+			$("#announce-view-panel").find(".close").click(function (e) {				
+				common.ui.animate(viewPanel, 'animated bounceOut');				
 				setTimeout(function() {
 					viewPanel.removeClass();
-					viewPanel.addClass('hidden');
+					viewPanel.addClass('hidden');					
+					fade.reverse();					
 					listPanel.removeClass('hidden');
-				}, 800);
+				}, 500);
 			});					
 
 
