@@ -91,7 +91,7 @@
 				
 				if( $.browser.mobile ){
 					alert(1);
-					$("#announce-grid").data("kendoGrid").hideColumn("creationDate");
+					$("#announce-grid").data("kendoGrid").hideColumn(1);
 				}
 				
 				<#if !action.user.anonymous >				
