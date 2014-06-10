@@ -40,9 +40,6 @@
 						e.token.copy(currentUser);
 					}				
 				});		
-
-				var isMobile = true ;//  ( kendo.support.mobileOS.device === 'iphone'  ? true : false );		
-				//alert ( isMobile );
 				
 				// 1. Announces 				
 				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );			
@@ -72,7 +69,7 @@
 					}),	
 					columns: [
 						{field: "subject", title: "제목", sortable : false },
-						{hidden: isMobile, field: "creationDate", title: "게시일", width: 120, format: "{0:yyyy.MM.dd}"}
+						{hidden: isMobile(), field: "creationDate", title: "게시일", width: 120, format: "{0:yyyy.MM.dd}"}
 					],
 					sortable: true,
 					pageable: false,
@@ -99,6 +96,10 @@
 				// END SCRIPT            
 			}
 		}]);	
+		
+		function isMobile(){
+			return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
+		}
 		
 		function displayAnnouncement () {			
 		
@@ -196,7 +197,7 @@
 		<script id="announce-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:announceId#">
 				<td><span class="label label-danger label-lightweight">공지</span>&nbsp;#: subject #	 </td>
-				#if( !hidden ){ #	
+				#if( !isMobile() ){ #	
 				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
 				# } #
 			</tr>
