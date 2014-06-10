@@ -61,8 +61,8 @@
 				}).read();
 												 
 				if( 	kendo.support.touch && kendo.support.mobileOS ){
-					$('.view.view-tenth').click(function(e){ 
-						$(this).find('a').trigger("click");
+					$('.view.view-tenth').bind("click", (function(e){ 
+						$(this).find('a').click();
 					});				
 				}
 											 							 
