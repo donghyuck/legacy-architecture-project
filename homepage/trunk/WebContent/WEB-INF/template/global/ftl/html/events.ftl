@@ -98,7 +98,8 @@
 		}]);	
 		
 		function isMobile(){
-			return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
+		return true;
+		//	return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
 		}
 		
 		function displayAnnouncement () {			
