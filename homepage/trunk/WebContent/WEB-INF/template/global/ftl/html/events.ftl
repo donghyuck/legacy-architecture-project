@@ -115,7 +115,7 @@
 			common.ui.animate(viewPanel, 'animated bounceIn');
 			common.ui.animate(listPanel, 'animated fadeOutDown', function(){ 
 				viewPanel.removeClass("hidden");
-				//listPanel.addClass("hidden");				
+				listPanel.addClass("hidden");				
 			});			
 			
 			
