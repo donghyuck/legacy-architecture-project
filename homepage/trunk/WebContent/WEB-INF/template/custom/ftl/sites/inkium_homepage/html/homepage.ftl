@@ -59,14 +59,6 @@
 				forum.dataSource().bind('change', function(){					
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
-												 
-												 
-				if( 	kendo.support.touch && kendo.support.mobileOS ){
-					$('.view.view-tenth').click(function(e){ 
-						alert('click');
-						//$(this).find('a').trigger("click");
-					});				
-				}
 											 							 
 				<#if !action.user.anonymous ></#if>	
 			}
