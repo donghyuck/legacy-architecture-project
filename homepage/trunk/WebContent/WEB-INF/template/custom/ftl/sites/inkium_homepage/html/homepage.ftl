@@ -239,7 +239,7 @@
                 <div class="margin-bottom-40">
                     <ul id="list" class="bxslider2 recent-work margin-bottom-40">
                         <li>
-                            <a href="#">
+                            <a target="_blank" href="http://www.astd.co.kr/">
                                 <em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
                                 <span>
 						                            <strong>문의</strong>
@@ -248,18 +248,20 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a target="_blank" href="http://www.icpi.co.kr">
                                 <em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
                                 <span>
-                                    <i>Responsive Bootstrap Template</i>
+						                           <strong>문의</strong>
+						                            <small>02 2081 1026</small>
                                 </span>
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')">
                                 <em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
                                 <span>
-                                    <i>Pariatur prehe cliche reprehrit</i>
+						                            <strong>문의</strong>
+						                            <small><a href="tel:+0220811016">02-2081-1016</a></small>
                                 </span>
                             </a>
                         </li>
