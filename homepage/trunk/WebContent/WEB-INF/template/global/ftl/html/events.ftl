@@ -118,6 +118,7 @@
 			zoom.play();			
 			setTimeout(function() {
 				zoom.stop();
+				listPanel.addClass('hidden');
 				viewPanel.removeClass("hidden");
 			}, 100);			
 			
