@@ -242,7 +242,8 @@
                             <a href="#">
                                 <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="" /></em>
                                 <span>
-                                    <i>Anim pariatur cliche reprehenderit</i>
+                                    <i>문의</i>
+                                    <small>02 2081 1092</small>
                                 </span>
                             </a>
                         </li>
