@@ -71,7 +71,7 @@
 						}
 					}),	
 					columns: [
-						{field: "subject", title: "제목", width: 500, sortable : false },
+						{field: "subject", title: "제목", sortable : false },
 						{hidden: isMobile, field: "creationDate", title: "게시일", width: 120, format: "{0:yyyy.MM.dd}"}
 					],
 					sortable: true,
@@ -196,7 +196,9 @@
 		<script id="announce-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:announceId#">
 				<td><span class="label label-danger label-lightweight">공지</span>&nbsp;#: subject #	 </td>
+				#if( !isMobile ){ #	
 				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
+				# } #
 			</tr>
 		</script>
 						
