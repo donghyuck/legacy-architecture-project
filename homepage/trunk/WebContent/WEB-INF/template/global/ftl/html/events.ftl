@@ -133,7 +133,7 @@
 					viewPanel.addClass('hidden');					
 					fade.reverse();					
 					listPanel.removeClass('hidden');
-				}, 500);
+				}, 800);
 			});					
 
 
