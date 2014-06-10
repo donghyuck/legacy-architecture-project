@@ -110,17 +110,20 @@
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );					
 			
 			var listPanel = $('#announce-list-section');
-			var viewPanel = $('#announce-view-content-section');					
+			var viewPanel = $('#announce-view-content-section');			
+			var fade = kendo.fx(listPanel).fade("out");
+			
+					
 			var slide = kendo.fx(listPanel).slideIn("down")
 			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0.3).startValue(1);
 			
 			common.ui.animate(viewPanel, 'animated bounceIn');
 			//common.ui.animate(listPanel, 'animated faceOutUp');
-			zoom.play();
+			fade.play();
 			setTimeout(function() {
 				//listPanel.removeClass();
 				listPanel.addClass('hidden');
-				zoom.stop();
+				fade.stop();
 				viewPanel.removeClass("hidden");
 			}, 300);			
 			
