@@ -12,6 +12,7 @@
 		yepnope([{
 			load: [
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+			'${request.contextPath}/js/bxslider/jquery.bxslider.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',						
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 	
