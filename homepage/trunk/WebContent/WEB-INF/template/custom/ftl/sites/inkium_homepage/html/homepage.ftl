@@ -32,14 +32,14 @@
 				common.ui.landing();		
 				// 1-3. 페이지 이동 모듈
 				common.api.teleportation();
-
+/*
             jQuery('.bxslider2').bxSlider({
                 minSlides: 3,
                 maxSlides: 3,
                 slideWidth: 150,
                 slideMargin: 5
             });				
-				
+				*/
 				// ACCOUNTS LOAD				
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
@@ -233,45 +233,11 @@
 			</div>
 			<hr/>
 			<div class="row summary-content">				
-				<div class="col-md-4">		
-                <!-- Recent Works -->
-                <div class="headline"><h5><strong>서비스 바로가기</strong></h5></div>
-                <div class="margin-bottom-40">
-                    <ul id="list" class="bxslider2 recent-work margin-bottom-40">
-                        <li>
-                            <a target="_blank" href="http://www.astd.co.kr/">
-                                <em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
-                                <span>
-						                            <strong>문의</strong>
-						                            <small>02 2081 1092</small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a target="_blank" href="http://www.icpi.co.kr">
-                                <em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
-                                <span>
-						                           <strong>문의</strong>
-						                            <small>02 2081 1026</small>
-                                </span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')">
-                                <em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
-                                <span>
-						                            <strong>문의</strong>
-						                            <small>02 2081 1016</small>
-                                </span>
-                            </a>
-                        </li>
-                    </ul>        
-                </div><!--/row-->
-                <!-- End Recent Works -->
-                				
-						
-					<div class="easy-block-v2">
-						<h5 class="heading-md"><strong>서비스 바로가기</strong></h5>
+				<div class="col-md-4">		              
+					<div class="headline"><h5><strong>서비스 바로가기</strong></h5></div>
+					<div class="margin-bottom-40">
+					
+					<div class="easy-block-v2">					
 						<div class="clearfix">
 							<ul id="family-list" class="bxslider list-inline family-site">
 								<li>
@@ -303,7 +269,9 @@
 								</li>
 							</ul>
 						</div>
-					</div>				
+					</div>									
+					
+					</div>
 				</div>				
 				<div class="col-md-4">
 					<div class="easy-block-v2">		
