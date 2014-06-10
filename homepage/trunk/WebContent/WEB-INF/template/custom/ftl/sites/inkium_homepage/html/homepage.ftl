@@ -164,7 +164,7 @@
 								<img class="img-responsive" src="${request.contextPath}/download/image/93/main_consulting.jpg" alt="" />
 								<div class="mask">
 									<p>기업의 인재육성전략 실현을 위한 HRD 토탈 솔루션 서비스</p>
-									<a href="${request.contextPath}/page.do?name=PAGE-32" class="info">R더 알아보기</a>
+									<a href="${request.contextPath}/page.do?name=PAGE-32" class="info">더 알아보기</a>
 									</div>                
 								</div>
 							<div class="view view-tenth">
