@@ -98,8 +98,7 @@
 		}]);	
 		
 		function isMobile(){
-		return true;
-		//	return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
+			return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
 		}
 		
 		function displayAnnouncement () {			
