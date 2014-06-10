@@ -117,7 +117,7 @@
 				listPanel.removeClass();
 				listPanel.addClass('hidden');
 				viewPanel.removeClass("hidden");
-			}, 300);			
+			}, 800);			
 			
 			$("#announce-view-panel").find(".close").click(function (e) {
 				common.ui.animate(listPanel, 'animated faceInDown');
