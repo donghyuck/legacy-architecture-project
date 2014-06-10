@@ -114,6 +114,7 @@
 			common.ui.animate(viewPanel, 'animated bounceIn');
 			common.ui.animate(listPanel, 'animated fadeOutUp');
 			setTimeout(function() {
+				listPanel.removeClass();
 				listPanel.addClass('hidden');
 				viewPanel.removeClass("hidden");
 			}, 300);			
