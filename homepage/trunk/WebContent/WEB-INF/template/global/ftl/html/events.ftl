@@ -71,7 +71,7 @@
 						}
 					}),	
 					columns: [
-						{field: "subject", title: "제목", sortable : false },
+						{field: "subject", title: "제목", width: 500, sortable : false },
 						{hidden: isMobile, field: "creationDate", title: "게시일", width: 120, format: "{0:yyyy.MM.dd}"}
 					],
 					sortable: true,
