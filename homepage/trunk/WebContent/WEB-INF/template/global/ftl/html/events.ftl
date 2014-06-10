@@ -90,6 +90,7 @@
 				});							
 				
 				if( $.browser.mobile ){
+					alert(1);
 					$("#announce-grid").data("kendoGrid").hideColumn("creationDate");
 				}
 				
