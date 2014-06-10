@@ -116,10 +116,8 @@
 				listPanel.hide();
 			});			
 			
-			common.ui.animate(viewPanel, 'animated bounceIn', function(){ 
-				viewPanel.show();
-			});			
-			
+			common.ui.animate(viewPanel, 'animated bounceIn');	
+			viewPanel.show();
 
 
 
