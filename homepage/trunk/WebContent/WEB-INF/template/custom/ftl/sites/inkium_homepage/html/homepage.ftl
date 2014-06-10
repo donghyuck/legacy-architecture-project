@@ -37,7 +37,7 @@
                 minSlides: 3,
                 maxSlides: 3,
                 slideWidth: 150,
-                slideMargin: 10
+                slideMargin: 5
             });				
 				
 				// ACCOUNTS LOAD				
