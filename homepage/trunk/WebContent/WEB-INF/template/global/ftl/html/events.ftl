@@ -124,7 +124,7 @@
 				setTimeout(function() {
 					viewPanel.addClass('hidden');
 					listPanel.removeClass('hidden');
-				}, 500);
+				}, 700);
 			});					
 
 
