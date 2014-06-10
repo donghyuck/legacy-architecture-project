@@ -34,9 +34,9 @@
 				common.api.teleportation();
 
             jQuery('.bxslider2').bxSlider({
-                minSlides: 2,
-                maxSlides: 2,
-                slideWidth: 360,
+                minSlides: 3,
+                maxSlides: 3,
+                slideWidth: 150,
                 slideMargin: 10
             });				
 				
