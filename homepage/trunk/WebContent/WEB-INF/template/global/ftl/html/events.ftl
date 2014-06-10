@@ -109,30 +109,24 @@
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );					
 			
-			
 			var listPanel = $('#announce-list-section');
-			var viewPanel = $('#announce-view-content-section');
-			var zoom = kendo.fx(listPanel).zoom("out").endValue(0).startValue(1)
-						
+			var viewPanel = $('#announce-view-content-section');					
 			common.ui.animate(viewPanel, 'animated bounceIn');
 			common.ui.animate(listPanel, 'animated fadeOutUp');
-			//zoom.play();			
-			
 			setTimeout(function() {
 				listPanel.addClass('hidden');
 				viewPanel.removeClass("hidden");
-			}, 400);			
+			}, 300);			
 			
+			$("#announce-view-panel").find(".close").click(function (e) {
+				common.ui.animate(listPanel, 'animated fadeInDown');
+				common.ui.animate(viewPanel, 'animated bounceOut');
+				setTimeout(function() {
+					viewPanel.addClass('hidden');
+					listPanel.removeClass('hidden');
+				}, 300);
+			});					
 			
-			
-			
-			/*
-			common.ui.animate(listPanel, 'animated fadeOutDown', function(){ 
-				viewPanel.removeClass("hidden");
-				listPanel.addClass("hidden");				
-			});			
-			*/
-
 /*			$("#announce-view-panel").removeClass('hide');				
 
 
