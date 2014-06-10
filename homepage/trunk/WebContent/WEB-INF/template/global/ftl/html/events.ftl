@@ -90,6 +90,7 @@
 				});							
 				
 				if( $.browser.mobile ){
+				alert( kendo.support.mobileOS ) ;
 					$("#announce-grid").data("kendoGrid").hideColumn(1);
 				}
 				
