@@ -47,13 +47,14 @@
 	common.ui.animate = function (renderTo, animate, always){	
 		
 		renderTo.removeClass(animate).addClass(animate).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-			renderTo.removeClass(animate);
+			$(this).removeClass(animate);
 			if(isFunction(always))
 				always();
 		});
 		return renderTo;
 		
 	}	
+	
 	
 	common.ui.initializeOwlCarousel = function (){
 		// Owl Slider v1
