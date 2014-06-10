@@ -42,7 +42,7 @@
 				});		
 
 				var isMobile = true ;//  ( kendo.support.mobileOS.device === 'iphone'  ? true : false );		
-				alert ( isMobile );
+				//alert ( isMobile );
 				
 				// 1. Announces 				
 				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );			
@@ -72,7 +72,7 @@
 					}),	
 					columns: [
 						{field: "subject", title: "제목", sortable : false },
-						{hidden: isMobile, field: "creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}"}
+						{hidden: isMobile, field: "creationDate", title: "게시일", width: 120, format: "{0:yyyy.MM.dd}"}
 					],
 					sortable: true,
 					pageable: false,
