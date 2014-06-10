@@ -88,6 +88,11 @@
 						}
 					}			
 				});							
+				
+				if( $.browser.mobile ){
+					$("#announce-grid").data("kendoGrid").hideColumn("creationDate");
+				}
+				
 				<#if !action.user.anonymous >				
 				
 				</#if>	
