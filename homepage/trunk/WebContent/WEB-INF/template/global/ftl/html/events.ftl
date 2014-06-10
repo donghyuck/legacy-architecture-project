@@ -109,15 +109,27 @@
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );					
 			
+			
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');
-			
+			var zoom = kendo.fx(listPanel).zoom("out").endValue(0).startValue(1)
+						
 			common.ui.animate(viewPanel, 'animated bounceIn');
+			zoom.play();			
+			setTimeout(function() {
+				zoom.stop();
+				viewPanel.removeClass("hidden");
+			}, 100);			
+			
+			
+			
+			
+			/*
 			common.ui.animate(listPanel, 'animated fadeOutDown', function(){ 
 				viewPanel.removeClass("hidden");
 				listPanel.addClass("hidden");				
 			});			
-			
+			*/
 
 /*			$("#announce-view-panel").removeClass('hide');				
 
