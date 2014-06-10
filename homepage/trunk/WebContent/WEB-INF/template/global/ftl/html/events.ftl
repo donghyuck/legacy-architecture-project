@@ -115,8 +115,10 @@
 			common.ui.animate(listPanel, 'animated fadeOutDown', function(){ 
 				listPanel.hide();
 			});			
-			common.ui.animate(viewPanel, 'animated bounceId');
-			viewPanel.show();
+			common.ui.animate(viewPanel, 'animated bounceId', function(){ 
+				viewPanel.show();
+			});
+			
 
 
 
