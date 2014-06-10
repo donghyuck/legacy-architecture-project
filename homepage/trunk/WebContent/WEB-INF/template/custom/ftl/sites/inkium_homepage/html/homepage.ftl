@@ -32,7 +32,13 @@
 				common.ui.landing();		
 				// 1-3. 페이지 이동 모듈
 				common.api.teleportation();
-				
+
+            jQuery('.bxslider2').bxSlider({
+                minSlides: 2,
+                maxSlides: 2,
+                slideWidth: 360,
+                slideMargin: 10
+            });				
 				
 				// ACCOUNTS LOAD				
 				var currentUser = new User();			
