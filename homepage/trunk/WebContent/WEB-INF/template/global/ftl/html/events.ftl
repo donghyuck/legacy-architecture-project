@@ -112,14 +112,15 @@
 			var listPanel = $('#announce-list-section');
 			var viewPanel = $('#announce-view-content-section');					
 			var slide = kendo.fx(listPanel).slideIn("down")
+			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1);
 			
 			common.ui.animate(viewPanel, 'animated bounceIn');
 			//common.ui.animate(listPanel, 'animated faceOutUp');
-			slide.reverse();
+			zoom.play();
 			setTimeout(function() {
 				//listPanel.removeClass();
 				//listPanel.addClass('hidden');
-				slide.stop();
+				zoom.stop();
 				viewPanel.removeClass("hidden");
 			}, 800);			
 			
