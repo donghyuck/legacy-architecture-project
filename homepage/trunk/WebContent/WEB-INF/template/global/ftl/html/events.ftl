@@ -202,7 +202,7 @@
 						<section id="announce-list-section" style="">
 							<div id="announce-grid"></div>
 						</section>
-						<section id="announce-view-content-section" style="display:none;">						
+						<section id="announce-view-content-section" class="hidden">						
 							<div id="announce-view-panel"></div>
 						</section>						
 					</div>
