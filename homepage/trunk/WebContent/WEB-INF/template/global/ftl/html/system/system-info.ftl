@@ -167,10 +167,10 @@
 									resizable: true,
 									editable : false,
 									scrollable: true,
-									height: 200,	     
+									height: 200,
 									change: function(e) {}
 							});			
-							$("#setup-props-grid").attr('style','');	    				
+							//$("#setup-props-grid").attr('style','');	    				
 						}
 					}else if(  $(this).attr('href') == '#database-info' ){
 						if(! $("#database-info-grid").data("kendoGrid")){
