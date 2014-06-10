@@ -19,7 +19,6 @@
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',			
 			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/common.plugins/jquery.mobile.js',
 			'${request.contextPath}/js/jquery.extension/modernizr.custom.js',
 			'${request.contextPath}/js/jquery.extension/classie.js',
 			],
@@ -89,12 +88,9 @@
 						}
 					}			
 				});							
-				
-				if( $.browser.mobile ){
-				//alert( kendo.support.mobileOS.device ) ;
+				if( 	kendo.support.touch && kendo.support.mobileOS ){
 					$("#announce-grid").data("kendoGrid").hideColumn(1);
-				}
-				
+				}				
 				<#if !action.user.anonymous >				
 				
 				</#if>	
