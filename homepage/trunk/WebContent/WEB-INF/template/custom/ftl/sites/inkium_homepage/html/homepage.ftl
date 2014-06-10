@@ -60,6 +60,10 @@
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
 												 
+												 
+				if( kendo.support.mobileOS.iphone ){								 
+					$('.view.view-tenth').click(function(e){  $(this).trigger("mouseover");  });
+				}								 
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
