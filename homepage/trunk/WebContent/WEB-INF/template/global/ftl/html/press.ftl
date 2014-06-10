@@ -68,8 +68,8 @@
 					columns: [
 						/*{field: "topicId", title: "ID", sortable : false , width:80 , attributes: { "class": "table-cell", style: "text-align: center " }},*/
 						{field: "subject", title: "제목", sortable : false, template: '#: subject # <span class="label label-primary label-lightweight rounded">#= $.timeago(creationDate) #</span>' },						
-						{field: "viewCnt", title: "조회수", width: "100px", sortable : false, attributes: { "class": "table-cell", style: "text-align: center " } },
-						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " } }
+						{field: "viewCnt", title: "조회수", width: "100px", sortable : false, attributes: { "class": "table-cell", style: "text-align: center " }, hidden: isMobile() },
+						{field:"creationDate", title: "게시일", width: "100px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }, hidden: isMobile()  }
 					],
 					sortable: true,
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
@@ -101,7 +101,11 @@
 				// END SCRIPT            
 			}
 		}]);	
-		
+
+		function isMobile(){
+			return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
+		}
+				
 		function setTopicViewerSource(source){
 			var renderToString = "topic-viewer";				
 			var renderTo = $("#"+ renderToString );						
@@ -229,8 +233,10 @@
 		<script id="topic-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:topicId#">
 				<td>#: subject # <span class="label label-primary label-lightweight rounded">#= $.timeago(creationDate) #</span></td>
+				#if(!isMobile()){#
 				<td class="text-center">#: viewCnt #</td>
 				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
+				#}#
 			</tr>
 		</script>
 		<script type="text/x-kendo-tmpl" id="topic-viewer-template">		
