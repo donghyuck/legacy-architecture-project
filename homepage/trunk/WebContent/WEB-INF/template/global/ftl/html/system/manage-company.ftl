@@ -265,14 +265,16 @@
 			menuPlaceHolder.copy( renderTo.data("model").menu );			
 			editor.setValue(renderTo.data("model").menu.menuData);
 			common.ui.animate($('#menu-modal .modal-body:first'), 'fadeOutUp', function(){
-				$('#menu-modal .modal-body:first').addClass("hidden");
+				$('#menu-modal .modal-body:first').addClass("hidden");				
 				$('.menu-editor-group[class~="hidden"]').removeClass('hidden');
 			});
 		}
 		
 		function closeMenuEditor(){
-			$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
-			$('#menu-editor .modal-body.menu-editor-group').addClass('hidden');
+			common.ui.animate($("#menu-editor"), "fadeOutUp", function(){				
+				$('#menu-editor .modal-body.menu-editor-group').addClass('hidden');
+				$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
+			});
 		}
 		
 		
