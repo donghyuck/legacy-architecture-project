@@ -202,13 +202,12 @@
 									var selectedCell = this.dataItem( selectedCells );											 	
 								}
 							},
-							dataBound: function(e){								
-								//kendo.bind($(".menu-details"), {} );
-								//$(".menu-details").hide();
+							dataBound: function(e){
 							}
 						});	
 						renderTo.find('button[data-action="create-menu"]').click(function(e){				
 							$("#menu-grid").data("kendoGrid").addRow();
+							openMenuEditor();
 						});	
 					}				
 					$("#menu-grid").data("kendoGrid").dataSource.read();
