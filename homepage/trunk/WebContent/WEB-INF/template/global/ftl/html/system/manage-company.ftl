@@ -233,7 +233,7 @@
 				getSelectedMenu().menuId
 			);
 			
-			$('#menu-editor').show();
+			$('.menu-editor-group').removeClass('hidden');
 			
 			var editor = ace.edit("xml-editor");
 			editor.setTheme("ace/theme/monokai");
@@ -553,7 +553,7 @@
 				<!--
 				<div class="row">					
 					<div class="col-sm-12">					
-						<div id="company-details" class="animated"  style="display:none;"></div>					
+						<div id="company-details" class="animated"  style="display:none;"></div>
 					</div>
 				</div>
 				-->
