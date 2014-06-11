@@ -600,7 +600,7 @@
 						<form class="form-horizontal">
 							<div class="row no-margin">
 								<div class="pull-right col-xs-12 col-sm-auto form-group no-margin-hr">															
-									<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa-angle-double-up"></i></button>	
+									<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="fa fa-angle-double-up"></i></button>	
 								</div>
 								
 							</div>					
