@@ -155,6 +155,7 @@
 					backdrop: 'static'
 				});
 				renderTo.on('show.bs.modal', function(e){
+				
 					if(! $("#menu-grid").data("kendoGrid")){				
 						$('#menu-grid').kendoGrid({
 							dataSource: {
@@ -342,6 +343,8 @@
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
+			
+			
 			renderTo.removeClass('fadeOutUp');
 			
 			if(!renderTo.is(":visible")){
@@ -350,8 +353,9 @@
 				//common.ui.animate(renderTo, 'fadeInDown');
 			}
 			
-			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);			
+			
 			$('#myTab a:first').tab('show');
+			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);			
 		}
 		
 		function createCompanyPropsPane(renderTo){
@@ -495,12 +499,12 @@
 			}
 			
 			#xml-editor{
-			position: absolute;
-	        top: 0;
-	        right: 0;
-	        bottom: 0;
-	        left: 0;
-	        min-height:400px;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				min-height:400px;
 			}
 		</style>
 	</head>
@@ -576,7 +580,8 @@
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
-					<div class="modal-body border-t">
+					
+					<div class="modal-body border-t menu-editor-group hidden">
 						<div id="menu-editor">
 							<form class="form-horizontal">
 								<div class="row no-margin">
@@ -599,11 +604,12 @@
 							</form>				
 						</div>
 					</div>					
-					<div class="modal-body no-padding" style="height:400px;">
-							<div id="xml-editor">
-							hello						
-							</div>							
+					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
+						<div id="xml-editor">
+						hello						
+						</div>							
 					</div>					
+					
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
 						<button type="button" class="btn btn-primary btn-flat disabled">저장</button>
