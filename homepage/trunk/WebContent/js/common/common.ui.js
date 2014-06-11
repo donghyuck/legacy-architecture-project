@@ -47,10 +47,10 @@
 	common.ui.animate = function (renderTo, animate, always){	
 		var oldCss = renderTo.attr('class');	
 		renderTo.removeClass().addClass(animate).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-			$(this).removeClass();
-			$(this).addClass(oldCss);
 			if(isFunction(always))
-				always();			
+				always();		
+			$(this).removeClass(animate);
+			$(this).addClass(oldCss);	
 		});
 		return renderTo;
 		
