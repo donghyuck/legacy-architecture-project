@@ -43,6 +43,12 @@
 				// END SCRIPT            
 			}
 		}]);	
+		
+		
+		function sayHello (){
+			common.ui.animate($("img.sayHello"), 'wobble');			
+		}
+		
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -59,6 +65,8 @@
 			position : relative;
 			max-width : 500px;
 		}						
+		
+		
 		</style>
 		</#compress>	   	
 	</head>
