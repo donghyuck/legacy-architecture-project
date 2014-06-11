@@ -260,7 +260,7 @@
 			
 			alert( $('#menu-modal .modal-body:first').attr("class") );
 			common.ui.animate($('#menu-modal .modal-body:first'), 'animated fadeOutUp', function(){
-				$('#menu-modal .modal-body:first').toogleClass("hidden");
+				$('#menu-modal .modal-body:first').toggleClass("hidden");
 			});
 							
 			$('.menu-editor-group').removeClass('hidden');			
