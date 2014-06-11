@@ -46,7 +46,7 @@
 		
 		
 		function sayHello (){
-			common.ui.animate-v2($("img.sayHello"), 'wobble');			
+			common.ui.animate_v2($("img.sayHello"), 'wobble');			
 		}
 		
 		-->
