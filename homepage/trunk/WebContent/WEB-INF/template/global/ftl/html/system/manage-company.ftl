@@ -13,6 +13,7 @@
 			'css!${request.contextPath}/styles/common/common.admin.rtl.css',	*/		
 			'css!${request.contextPath}/styles/common/common.admin.themes.css',
 			'css!${request.contextPath}/styles/common/common.admin.pages.css',	
+			'css!${request.contextPath}/styles/common.plugins/bootstrap-editable.min.css',	
 			/*'${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js',*/
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -22,6 +23,7 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',			
 			'${request.contextPath}/js/common.plugins/fastclick.js', 
 			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 
+			'${request.contextPath}/js/common.plugins/bootstrap-editable.min.js',
 			'${request.contextPath}/js/common/common.admin.js',
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
@@ -110,6 +112,11 @@
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
 						var selectedCells = this.select();
+						if( selectedCells.length === 0){					
+							alert(0);
+						
+						}
+						
 						/*
 						if( selectedCells.length > 0){							
 							var selectedCell = this.dataItem( selectedCells );		
@@ -658,6 +665,7 @@
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
 									<span class="panel-title"  data-bind="text:company.description"></span>
+									
 								</div>
 								<table class="table">
 									<tbody>						
