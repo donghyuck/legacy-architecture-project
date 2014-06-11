@@ -48,7 +48,7 @@
 		var oldCss = renderTo.attr('class');	
 		renderTo.removeClass().addClass(animate).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
 			if(isFunction(always))
-				always();		
+				always();
 			$(this).removeClass(animate);
 			$(this).addClass(oldCss);	
 		});
