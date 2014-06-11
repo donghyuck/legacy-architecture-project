@@ -173,6 +173,10 @@
 			height: 100%;
 			min-height:500px;
 		}
+		
+		p, li, li a {
+			color: #555;
+		}
 						
 		</style>   	
 </#compress>
