@@ -52,10 +52,20 @@
 			if(isFunction(always))
 				always();
 		});
+		return renderTo;		
+	}	
+	
+	common.ui.animate-v2 = function (renderTo, animate, always){	
+		var oldCss = renderTo.attr('class');	
+		renderTo.addClass(animate + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+			$(this).removeClass();
+			$(this).addClass(oldCss);	
+			if(isFunction(always))
+				always();
+		});
 		return renderTo;
 		
 	}	
-	
 	
 	common.ui.initializeOwlCarousel = function (){
 		// Owl Slider v1
