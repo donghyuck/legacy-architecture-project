@@ -169,7 +169,7 @@
 				});
 				renderTo.on('show.bs.modal', function(e){				
 					if(! $("#menu-grid").data("kendoGrid")){				
-						var grid = $('#menu-grid').kendoGrid({
+						$('#menu-grid').kendoGrid({
 							dataSource: {
 								transport: { 
 									read: { url:'${request.contextPath}/secure/list-menu.do?output=json', type:'post' }
@@ -206,8 +206,8 @@
 							}
 						});	
 						renderTo.find('button[data-action="create-menu"]').click(function(e){				
-							grid.addRow();
-							grid.select("tr.k-grid-edit-row:first")
+							$("#menu-grid").data("kendoGrid").addRow();
+							$("#menu-grid").data("kendoGrid").select("tr.k-grid-edit-row:first")
 							openMenuEditor();
 						});	
 					}				
