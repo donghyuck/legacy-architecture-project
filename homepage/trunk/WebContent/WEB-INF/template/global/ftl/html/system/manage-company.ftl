@@ -596,7 +596,7 @@
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
 					<div id="menu-editor">
-					<div class="modal-body border-t menu-editor-group hidden">
+					<div class="modal-body border-t no-margin-t menu-editor-group hidden">
 						<form class="form-horizontal">
 							<div class="row no-margin">
 								<div class="pull-right col-xs-12 col-sm-auto form-group no-margin-hr">															
