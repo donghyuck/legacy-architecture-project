@@ -599,7 +599,7 @@
 					<div class="modal-body border-t menu-editor-group hidden">
 						<form class="form-horizontal">
 							<div class="row no-margin">
-								<div class="col-sm-12 pull-right">
+								<div class="col-sm-12 pull-right margin-bottom-20">
 									<button class="btn btn-xs btn-info">목록보기</button>	
 								</div>
 							</div>						
