@@ -245,6 +245,7 @@
 			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );			
 			editor.setValue(renderTo.data("model").menu.menuData);
+			$('#menu-modal button[data-action="saveOrUpdate"]').removeClass("hidden");
 			common.ui.animate($('#menu-modal .modal-body:first'), 'fadeOutUp', function(){
 				$('#menu-modal .modal-body:first').addClass("hidden");				
 				$('.menu-editor-group[class~="hidden"]').removeClass('hidden');
@@ -255,6 +256,7 @@
 			if(getSelectedMenu().menuId < 0 ){
 				$("#menu-grid").data("kendoGrid").removeRow("tr.k-grid-edit-row");
 			}
+			$('#menu-modal button[data-action="saveOrUpdate"]').addClass("hidden");
 			common.ui.animate($("#menu-editor"), "fadeOutUp", function(){				
 				$('#menu-editor .modal-body.menu-editor-group').addClass('hidden');
 				$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
@@ -624,7 +626,7 @@
 					</div>	
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary btn-flat disabled">저장</button>
+						<button type="button" class="btn btn-primary btn-flat disable hidden" data-action="saveOrUpdate">저장</button>
 					</div>
 				</div>
 			</div>
