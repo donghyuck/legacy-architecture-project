@@ -254,8 +254,7 @@
 				editor.getSession().setMode("ace/mode/xml");			
 			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );			
-			editor.setValue(editorModel.menu.menuData);
-				
+			editor.setValue(editorModel.menu.menuData);				
 			$('.menu-editor-group').removeClass('hidden');			
 		}
 		
