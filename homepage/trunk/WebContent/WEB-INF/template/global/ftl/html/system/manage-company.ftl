@@ -259,7 +259,7 @@
 			editor.setValue(renderTo.data("model").menu.menuData);
 			
 			alert( $('#menu-modal .modal-body:first').attr("class") );
-			common.ui.animate($('#menu-modal .modal-body:first'), 'animated fadeOutUp', function(){
+			common.ui.animate($('#menu-modal .modal-body:first'), 'fadeOutUp', function(){
 				$('#menu-modal .modal-body:first').addClass("hidden");
 				$('.menu-editor-group').removeClass('hidden');
 			});
