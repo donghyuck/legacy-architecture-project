@@ -174,7 +174,7 @@
 			min-height:500px;
 		}
 		
-		p, li, li a {
+		p, li, li a, td a {
 			color: #555;
 		}
 						
