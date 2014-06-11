@@ -600,17 +600,17 @@
 					<div class="modal-body no-padding">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
-								<button class="btn btn-danger btn-sm btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> 새로운 메뉴 만들기 </button>
+								<button class="btn btn-danger btn-flat btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> <small>새로운 메뉴 만들기</small></button>
 							</div>
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
 					<div id="menu-editor">
 					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
-						<div class="row no-margin" style="padding: 5px;">								
-							<button type="button" class="btn btn-outline btn-primary no-border no-border-radius btn-editor-close" data-action="role">
-								<i class="fa fa-arrow-left fa-2x"></i>
-							</button>
+						<div class="panel panel-transparent no-margin-b">
+							<div class="panel-body">
+							<button class="btn btn-primary btn-flat btn-labeled btn-editor-close" data-action="create-menu"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
+							</div>						
 						</div>
 						<hr class="no-margin-t no-border">						
 						<form class="form-horizontal">				
