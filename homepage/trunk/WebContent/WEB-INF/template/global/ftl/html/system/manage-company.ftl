@@ -252,6 +252,9 @@
 		}
 		
 		function closeMenuEditor(){
+			if(getSelectedMenu().menuId < 0 ){
+				$("#menu-grid").data("kendoGrid").removeRow("tr.k-grid-edit-row");
+			}
 			common.ui.animate($("#menu-editor"), "fadeOutUp", function(){				
 				$('#menu-editor .modal-body.menu-editor-group').addClass('hidden');
 				$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
