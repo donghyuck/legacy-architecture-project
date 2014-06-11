@@ -176,3 +176,14 @@
       display: none;
    }
 }
+
+@media (max-width: 767px) {
+	.view .mask p {
+		font-size: 15pt;
+		font-weight: bolder;
+	}	
+	.view .mask a.info {
+		font-size: 15pt;
+	}
+	
+}
