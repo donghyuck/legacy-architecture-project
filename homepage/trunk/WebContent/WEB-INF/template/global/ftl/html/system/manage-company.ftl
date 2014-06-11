@@ -239,21 +239,21 @@
 		}
 				
 		function openMenuEditor(){
-						
+			var menuPlaceHolder = getSelectedMenu();		
 			var renderTo = $("#menu-editor");
 			var editor = ace.edit("xml-editor");			
+			
 			if( !renderTo.data("model"))
 			{
 				var  editorModel = kendo.observable({
 					menu : new Menu()
-				});				
-				
+				});					
 				kendo.bind(renderTo, editorModel);
 				renderTo.data("model", editorModel );					
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/xml");			
 			}			
-			getSelectedMenu().copy(renderTo.data("model").menu);				
+			menuPlaceHolder.copy( renderTo.data("model").menu );				
 			$('.menu-editor-group').removeClass('hidden');			
 		}
 		
