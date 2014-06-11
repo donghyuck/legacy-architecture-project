@@ -256,7 +256,13 @@
 				editor.getSession().setMode("ace/mode/xml");			
 			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );			
-			editor.setValue(renderTo.data("model").menu.menuData);				
+			editor.setValue(renderTo.data("model").menu.menuData);
+			
+			
+			common.ui.animate($('#menu-modal .modal-body:first'), 'animated fadeOutUp', function(){
+				$('#menu-modal .modal-body:first').toogleClass("hidden");
+			});
+							
 			$('.menu-editor-group').removeClass('hidden');			
 		}
 		
@@ -363,8 +369,7 @@
 					$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);
 				}).show();
 			}
-			$('#myTab a:first').tab('show');
-			
+			$('#myTab a:first').tab('show');			
 		}
 		
 		function createCompanyPropsPane(renderTo){
