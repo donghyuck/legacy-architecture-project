@@ -252,12 +252,7 @@
 				renderTo.data("model", editorModel );					
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/xml");			
-			}			
-			
-			
-			alert(stringify(menuPlaceHolder));
-			alert(stringify(renderTo.data("model")));
-			
+			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );				
 			$('.menu-editor-group').removeClass('hidden');			
 		}
