@@ -338,7 +338,7 @@
 							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
 						}
 					}	
-				});									
+				});
 				kendo.bind(renderTo, detailsModel );	
 				renderTo.data("model", detailsModel );		
 				$('#myTab').on( 'show.bs.tab', function (e) {		
@@ -354,28 +354,22 @@
 							createCompanyGroupsPane($('#company-group-grid'));
 							break;
 					}	
-				});					
+				});
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
-			
-			
-			
 			renderTo.removeClass('fadeOutUp');
-			
 			if(!renderTo.is(":visible")){
-				common.ui.animate(renderTo, 'fadeInDown').show();
-			}else{
-				//common.ui.animate(renderTo, 'fadeInDown');
+				common.ui.animate(renderTo, 'fadeInDown', function(){
+					$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);
+				}).show();
 			}
-			
-			
 			$('#myTab a:first').tab('show');
-			$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);			
+			
 		}
 		
 		function createCompanyPropsPane(renderTo){
 			var companyPlaceHolder = getSelectedCompany();
-			if( ! renderTo.data("kendoGrid") ){													
+			if( ! renderTo.data("kendoGrid") ){
 				renderTo.kendoGrid({
 					dataSource: {
 						transport: { 
