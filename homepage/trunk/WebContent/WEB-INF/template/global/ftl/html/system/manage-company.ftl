@@ -599,6 +599,11 @@
 					<div class="modal-body border-t menu-editor-group hidden">
 						<form class="form-horizontal">
 							<div class="row no-margin">
+								<div class="col-sm-12 pull-right">
+									<button class="btn btn-xs btn-info">목록보기</button>	
+								</div>
+							</div>						
+							<div class="row no-margin">
 								<div class="col-sm-6">
 									<div class="form-group no-margin-hr">
 										<input type="text" name="name" class="form-control input-sm" placeholder="이름" data-bind="value: menu.name">
@@ -616,7 +621,7 @@
 								</div>
 							</div>				
 						</form>			
-						<button class="btn btn-xs btn-info">목록보기</button>	
+						
 					</div>					
 					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
 						<div id="xml-editor">												
