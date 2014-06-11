@@ -328,8 +328,7 @@
 					logoUrl : "",
 					memberCount : 0 ,
 					groupCount : 0 
-				});				
-				
+				});					
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
 						var sender = e.sender ;
@@ -341,10 +340,8 @@
 					}	
 				});									
 				kendo.bind(renderTo, detailsModel );	
-				renderTo.data("model", detailsModel );							
-
+				renderTo.data("model", detailsModel );		
 				$('#myTab').on( 'show.bs.tab', function (e) {		
-					//e.preventDefault();			
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
 						case "#props" :
@@ -357,8 +354,7 @@
 							createCompanyGroupsPane($('#company-group-grid'));
 							break;
 					}	
-				});	
-				
+				});					
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
