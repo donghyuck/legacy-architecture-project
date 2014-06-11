@@ -590,36 +590,34 @@
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
-					
+					<div id="menu-editor">
 					<div class="modal-body border-t menu-editor-group hidden">
-						<div id="menu-editor">
-							<form class="form-horizontal">
-								<div class="row no-margin">
-									<div class="col-sm-6">
-										<div class="form-group no-margin-hr">
-											<input type="text" name="firstname" class="form-control input-sm" placeholder="이름" >
-										</div>
-									</div><!-- col-sm-6 -->
-									<div class="col-sm-6">
-										<div class="form-group no-margin-hr">
-											<input type="text" name="lastname" class="form-control input-sm" placeholder="타이틀" >
-										</div>
-									</div><!-- col-sm-6 -->
-								</div>
-								<div class="row no-margin">
-									<div class="col-sm-12">
-										<input type="text" class="form-control input-sm" data-bind="value:description" placeholder="설명" />
+						<form class="form-horizontal">
+							<div class="row no-margin">
+								<div class="col-sm-6">
+									<div class="form-group no-margin-hr">
+										<input type="text" name="firstname" class="form-control input-sm" placeholder="이름" data-bind="value: inputValue">
 									</div>
-								</div>				
-							</form>				
-						</div>
+								</div><!-- col-sm-6 -->
+								<div class="col-sm-6">
+									<div class="form-group no-margin-hr">
+										<input type="text" name="lastname" class="form-control input-sm" placeholder="타이틀" >
+									</div>
+								</div><!-- col-sm-6 -->
+							</div>
+							<div class="row no-margin">
+								<div class="col-sm-12">
+									<input type="text" class="form-control input-sm" data-bind="value:description" placeholder="설명" />
+								</div>
+							</div>				
+						</form>				
 					</div>					
 					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
 						<div id="xml-editor">
 						hello						
 						</div>							
 					</div>					
-					
+					</div>	
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
 						<button type="button" class="btn btn-primary btn-flat disabled">저장</button>
