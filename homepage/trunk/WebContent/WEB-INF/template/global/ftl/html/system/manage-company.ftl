@@ -597,13 +597,15 @@
 					</div>					
 					<div id="menu-editor">
 					<div class="modal-body border-t no-margin-t menu-editor-group hidden">
-						<form class="form-horizontal">
-							<div class="row no-margin">
-								<div class="pull-right col-xs-12 col-sm-auto form-group no-margin-hr">															
-									<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="fa fa-angle-left fa-lg"></i></button>	
-								</div>
-								
-							</div>					
+
+						<div class="row no-margin" style="padding: 5px;">								
+							<button type="button" class="btn btn-outline btn-primary no-border no-border-radius" data-action="role">
+								<i class="fa fa-arrow-left fa-2x"></i>
+							</button>
+						</div>
+						<hr class="no-margin-t no-border">
+						
+						<form class="form-horizontal">				
 							<div class="row no-margin">
 								<div class="col-sm-6">
 									<div class="form-group no-margin-hr">
