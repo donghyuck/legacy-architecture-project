@@ -272,7 +272,7 @@
 		
 		function closeMenuEditor(){
 			$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
-			$('#menu-editor .modal-body.menu-editor-group[class|="hidden"]').addClass('hidden');
+			$('#menu-editor .modal-body.menu-editor-group').addClass('hidden');
 		}
 		
 		
