@@ -112,12 +112,13 @@
 			var viewPanel = $('#announce-view-content-section');			
 			var fade = kendo.fx(listPanel).fade("out");			
 			fade.play();
-			common.ui.animate(viewPanel, 'animated bounceIn');
+			common.ui.animate(viewPanel, 'bounceIn');
 			setTimeout(function() {
 				listPanel.addClass('hidden');
 				fade.stop();
 				viewPanel.removeClass("hidden");
 			}, 300);			
+			
 			$("#announce-view-panel").find(".close").click(function (e) {				
 				common.ui.animate(viewPanel, 'animated bounceOut');				
 				setTimeout(function() {
