@@ -596,15 +596,13 @@
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
 					<div id="menu-editor">
-					<div class="modal-body border-t no-margin-t menu-editor-group hidden">
-
+					<div class="modal-body border-t no-padding no-margin-t menu-editor-group hidden">
 						<div class="row no-margin" style="padding: 5px;">								
 							<button type="button" class="btn btn-outline btn-primary no-border no-border-radius" data-action="role">
 								<i class="fa fa-arrow-left fa-2x"></i>
 							</button>
 						</div>
-						<hr class="no-margin-t no-border">
-						
+						<hr class="no-margin-t no-border">						
 						<form class="form-horizontal">				
 							<div class="row no-margin">
 								<div class="col-sm-6">
