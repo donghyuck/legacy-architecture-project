@@ -239,16 +239,22 @@
 		}
 				
 		function openMenuEditor(){
-			alert(
-				getSelectedMenu().menuId
-			);
-			
-			$('.menu-editor-group').removeClass('hidden');
-			
-			var editor = ace.edit("xml-editor");
-			editor.setTheme("ace/theme/monokai");
-			editor.getSession().setMode("ace/mode/xml");
-			
+						
+			var renderTo = $("#menu-editor");
+			var editor = ace.edit("xml-editor");			
+			if( !renderTo.data("model"))
+			{
+				var  editorModel = kendo.observable({
+					menu : new Menu()
+				});				
+				
+				kendo.bind(renderTo, editorModel);
+				renderTo.data("model", editorModel );					
+				editor.setTheme("ace/theme/monokai");
+				editor.getSession().setMode("ace/mode/xml");			
+			}			
+			getSelectedMenu().copy(renderTo.data("model").menu);				
+			$('.menu-editor-group').removeClass('hidden');			
 		}
 		
 		
