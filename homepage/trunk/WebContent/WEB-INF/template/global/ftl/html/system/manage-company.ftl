@@ -599,7 +599,7 @@
 					<div id="menu-editor">
 					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
 						<div class="row no-margin" style="padding: 5px;">								
-							<button type="button" class="btn btn-outline btn-primary no-border no-border-radius" data-action="role">
+							<button type="button" class="btn btn-outline btn-primary no-border no-border-radius btn-editor-close" data-action="role">
 								<i class="fa fa-arrow-left fa-2x"></i>
 							</button>
 						</div>
