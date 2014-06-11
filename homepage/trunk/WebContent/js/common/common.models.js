@@ -27,7 +27,7 @@
 	    formattedModifiedDate : function(){
 	    	return kendo.toString(this.get("modifiedDate"), "g");
 	    }
-	    /*,
+	    ,
 	    copy: function ( target ){
 	    	target.topicId = this.get("topicId");
 	    	target.set("subject",this.get("subject") );
@@ -41,7 +41,7 @@
 	    		target.set("user", this.get("user") );
 	    	if( typeof this.get("properties") === 'object' )
 	    		target.set("properties", this.get("properties") );
-	    }*/
+	    }
 	});
 	
 	
@@ -709,11 +709,22 @@ var Menu = kendo.data.Model.define( {
 	    	name: { type: "string", editable: true , defaultValue : ""  },
 	        title: { type: "string", editable: true , defaultValue : "" },
 	        enabled : {type: "boolean", defaultValue : true},
-/*	        description: { type: "string", editable: true ,defaultValue : ""  },*/
-	        properties : {},
+	        location: { type: "string", editable: true ,defaultValue : ""  },
+	        properties :{ type: "object", editable: true ,defaultValue : {}  },
 	        menuData : { type: "string", editable: true, defaultValue : "" },
 	        modifiedDate: { type: "date"},
-	        creationDate: { type: "date" }	        
-	    }	
+	        creationDate: { type: "date" }
+	    },
+		copy : function ( target ){
+			target.menuId = this.get("menuId");
+			target.set("name", this.get("name"));
+			target.set("title", this.get("title"));
+			target.set("enabled", this.get("enabled"));
+			target.set("location", this.get("location"));
+			target.set("properties", this.get("properties"));
+			target.set("menuData", this.get("menuData"));
+			target.set("modifiedDate", this.get("modifiedDate"));
+			target.set("creationDate", this.get("creationDate"));
+		}
 });
 
