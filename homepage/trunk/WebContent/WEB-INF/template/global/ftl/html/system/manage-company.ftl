@@ -210,6 +210,9 @@
 							$("#menu-grid").data("kendoGrid").select("tr.k-grid-edit-row:first")
 							openMenuEditor();
 						});	
+						renderTo.find('button[data-action="saveOrUpdate"]').click(function(e){
+							alert("save");
+						});
 					}				
 					$("#menu-grid").data("kendoGrid").dataSource.read();
 				});
