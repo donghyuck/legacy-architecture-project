@@ -164,8 +164,11 @@
 				renderTo.modal({
 					backdrop: 'static'
 				});
-				renderTo.on('show.bs.modal', function(e){
 				
+				renderTo.on('hidden.bs.modal', function(e){
+					closeMenuEditor();
+				});
+				renderTo.on('show.bs.modal', function(e){				
 					if(! $("#menu-grid").data("kendoGrid")){				
 						$('#menu-grid').kendoGrid({
 							dataSource: {
@@ -253,19 +256,23 @@
 				kendo.bind(renderTo, editorModel);
 				renderTo.data("model", editorModel );					
 				editor.setTheme("ace/theme/monokai");
-				editor.getSession().setMode("ace/mode/xml");			
+				editor.getSession().setMode("ace/mode/xml");
+				
+				$("#menu-editor button.btn-editor-close").click(function(e){
+					closeMenuEditor();
+				});
 			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );			
 			editor.setValue(renderTo.data("model").menu.menuData);
 			common.ui.animate($('#menu-modal .modal-body:first'), 'fadeOutUp', function(){
 				$('#menu-modal .modal-body:first').addClass("hidden");
-				$('.menu-editor-group').removeClass('hidden');
+				$('.menu-editor-group[class~="hidden"]').removeClass('hidden');
 			});
 		}
 		
 		function closeMenuEditor(){
-			$('#menu-modal .modal-body:first').removeClass("hidden");
-			$('.menu-editor-group').addClass('hidden');
+			$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
+			$('#menu-editor .modal-body.menu-editor-group[class|="hidden"]').addClass('hidden');
 		}
 		
 		
