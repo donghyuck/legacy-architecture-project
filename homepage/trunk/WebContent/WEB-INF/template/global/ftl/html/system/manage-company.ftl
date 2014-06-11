@@ -129,6 +129,9 @@
 							}
 						}*/
 					},
+					cancel: function(e){	
+					
+					},
 					edit: function(e){	
 						if( $("#company-details").text().length > 0 ){	
 							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
@@ -594,18 +597,18 @@
 								<div class="row no-margin">
 									<div class="col-sm-6">
 										<div class="form-group no-margin-hr">
-											<input type="text" name="firstname" class="form-control" placeholder="이름" >
+											<input type="text" name="firstname" class="form-control input-sm" placeholder="이름" >
 										</div>
 									</div><!-- col-sm-6 -->
 									<div class="col-sm-6">
 										<div class="form-group no-margin-hr">
-											<input type="text" name="lastname" class="form-control" placeholder="타이틀" >
+											<input type="text" name="lastname" class="form-control input-sm" placeholder="타이틀" >
 										</div>
 									</div><!-- col-sm-6 -->
 								</div>
 								<div class="row no-margin">
 									<div class="col-sm-12">
-										<input type="text" class="form-control" data-bind="value:description" placeholder="설명" />
+										<input type="text" class="form-control input-sm" data-bind="value:description" placeholder="설명" />
 									</div>
 								</div>				
 							</form>				
