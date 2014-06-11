@@ -599,10 +599,14 @@
 					<div class="modal-body border-t menu-editor-group hidden">
 						<form class="form-horizontal">
 							<div class="row no-margin">
-								<div class="col-sm-12 pull-right margin-bottom-20">
-									<button class="btn btn-xs btn-info">목록보기</button>	
+								<div class="pull-right col-xs-12 col-sm-auto form-group no-margin-hr">									
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 &amp; 롤</button>
+									</div>									
 								</div>
-							</div>						
+								
+							</div>					
 							<div class="row no-margin">
 								<div class="col-sm-6">
 									<div class="form-group no-margin-hr">
