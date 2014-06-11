@@ -615,7 +615,8 @@
 									<input type="text" name="description" class="form-control input-sm" placeholder="설명"  data-bind="value:menu.description" />
 								</div>
 							</div>				
-						</form>				
+						</form>			
+						<button class="btn btn-xs btn-info">목록보기</button>	
 					</div>					
 					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
 						<div id="xml-editor">												
