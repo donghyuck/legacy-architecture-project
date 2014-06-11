@@ -237,6 +237,8 @@
 			var selectedCell = grid.dataItem( selectedCells );   
 			return selectedCell;
 		}
+		
+				
 				
 		function openMenuEditor(){
 			var menuPlaceHolder = getSelectedMenu();		
@@ -254,7 +256,7 @@
 				editor.getSession().setMode("ace/mode/xml");			
 			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );			
-			editor.setValue(editorModel.menu.menuData);				
+			editor.setValue(renderTo.data("model").menu.menuData);				
 			$('.menu-editor-group').removeClass('hidden');			
 		}
 		
