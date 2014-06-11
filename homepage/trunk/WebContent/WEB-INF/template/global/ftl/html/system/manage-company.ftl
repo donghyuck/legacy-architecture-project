@@ -163,8 +163,7 @@
 				renderTo = $('#' + renderToString );
 				renderTo.modal({
 					backdrop: 'static'
-				});
-				
+				});				
 				renderTo.on('hidden.bs.modal', function(e){
 					closeMenuEditor();
 				});
@@ -196,37 +195,22 @@
 							editable : false,
 							selectable : "row",
 							scrollable: true,
-							//height: 400,
 							autoBind: false,
-							//toolbar : [{ text: "메뉴 추가", className: "newMenuCustomClass"}] ,
 							change: function(e) {
 								var selectedCells = this.select();
 								if( selectedCells.length == 1){ 
-									var selectedCell = this.dataItem( selectedCells );     	
-									/*						
-									var selectedMenu = $('#menu-grid').data("menuPlaceHolder");                 
-									selectedMenu.menuId = selectedCell.menuId;
-									selectedMenu.name = selectedCell.name;
-									selectedMenu.title = selectedCell.title;
-									selectedMenu.enabled = selectedCell.enabled;
-									selectedMenu.description = selectedCell.description;
-									selectedMenu.properties = selectedCell.properties;
-									selectedMenu.menuData = selectedCell.menuData;
-									selectedMenu.modifiedDate = selectedCell.modifiedDate;
-									selectedMenu.creationDate = selectedCell.creationDate;	     
-									   
-									kendo.bind($(".menu-details"), selectedMenu );
-									$(".menu-details").show();
-									*/								 							 	
+									var selectedCell = this.dataItem( selectedCells );											 	
 								}
 							},
-							dataBound: function(e){
-								
+							dataBound: function(e){								
 								//kendo.bind($(".menu-details"), {} );
 								//$(".menu-details").hide();
 							}
-						});						
-					}					
+						});	
+						renderTo.find('button[data-action="create-menu"]').click(function(e){				
+							$("#menu-grid").data("kendoGrid").addRow();
+						});	
+					}				
 					$("#menu-grid").data("kendoGrid").dataSource.read();
 				});
 			}
@@ -239,9 +223,7 @@
 			var selectedCells = grid.select();
 			var selectedCell = grid.dataItem( selectedCells );   
 			return selectedCell;
-		}
-		
-				
+		}	
 				
 		function openMenuEditor(){
 			var menuPlaceHolder = getSelectedMenu();		
@@ -256,9 +238,8 @@
 				kendo.bind(renderTo, editorModel);
 				renderTo.data("model", editorModel );					
 				editor.setTheme("ace/theme/monokai");
-				editor.getSession().setMode("ace/mode/xml");
-				
-				$("#menu-editor button.btn-editor-close").click(function(e){
+				editor.getSession().setMode("ace/mode/xml");				
+				$('#menu-editor button[data-action="editor-close"]').click(function(e){
 					closeMenuEditor();
 				});
 			}						
@@ -609,7 +590,7 @@
 					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
-							<button class="btn btn-primary btn-flat btn-labeled btn-editor-close" data-action="create-menu"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
+							<button class="btn btn-primary btn-flat btn-labeled" data-action="editor-close"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
 							</div>						
 						</div>					
 						<form class="form-horizontal">				
