@@ -611,8 +611,7 @@
 							<div class="panel-body">
 							<button class="btn btn-primary btn-flat btn-labeled btn-editor-close" data-action="create-menu"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
 							</div>						
-						</div>
-						<hr class="no-margin-t no-border">						
+						</div>					
 						<form class="form-horizontal">				
 							<div class="row no-margin">
 								<div class="col-sm-6">
