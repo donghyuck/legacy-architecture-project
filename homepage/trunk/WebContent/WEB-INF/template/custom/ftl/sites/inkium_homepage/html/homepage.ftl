@@ -208,74 +208,84 @@
 
 					<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
                     <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
-                        Fully Responsive and Easy to Customize
+                      센스있는 신입사원이 되는 첫 걸음.
                     </span>
-                    
-                    <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
-                       <small>센스있는 신입사원이 되는 첫 걸음</small><br>직립보행
+                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
+                    예절, 규범 그리고 약속의 기본인성을 바탕으로 제작
+                    </span>
+                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i> 
+
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
+                      직장의 비즈니스 매너, 영상으로 기본을 익히다.
+                    </span>
+                                                           
+                    <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:30px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
+                  	취업역량강화 동영상 <br/>
+					<p class="" style="font-size:50px; font-weight:bold; color:#fff;">직립보행</p>
                     </span>
 
-                    <a class="btn-u btn-u-orange ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
-                        Download Now
+                    <a class="btn-u btn-u-blue ls-s1" href="${request.contextPath}/page.do?name=PAGE-51" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
+                        더 알아보기
                     </a>
                 </div>
                 <!--End First Slide-->
 
                 <!--Second Slide-->
                 <div class="ls-layer" style="slidedirection: top; ">
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/bg/5.jpg" class="ls-bg" alt="Slide background">
+                    <img src="http://fc01.deviantart.net/fs70/f/2014/167/c/8/c8f52fa7ddf1db4654ea37a7a6fdc9af-d7moekm.jpg" class="ls-bg" alt="Slide background">
 
                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
 
                     <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
-                        Fully Responsive and Easy to Customize
+                        임직원의 역량개발과 경쟁력 향상 및 업무성과 달성을 위해
                     </span>
 
                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 
 
                     <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
-                        Revolution and Layer Slider Included 
+                        지신이 수행하는 업무에서 요구하는 역량에 대한 수준 및 적합도,
                     </span>
 
                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i> 
 
                     <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
-                        1000+ Glyphicons Pro and Font Awesome Icons 
+                        희망 부서에서 요구하는 역량에 대한 수준을 진단하여
                     </span>
 
                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:220px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 4500; durationout : 3500; "></i> 
 
                     <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:220px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 3500; ">
-                        Revolution and Layer Slider Included 
+                        개개인의 수준을 파악하고 수준별로 맞춤 교육을 제공하는
                     </span>
 
                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:270px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 5500; durationout : 4500; "></i> 
 
                     <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:270px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 5500; durationout : 4500; ">
-                        60+ Template Pages and 20+ Plugins Included
+                       역량진단 서비스
                     </span>
 
                     <a class="btn-u btn-u-blue ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 40px; slidedirection : bottom; slideoutdirection : bottom; durationin : 6500; durationout : 3500; ">
-                        Twitter Bootstrap 3
+                      iCAP
                     </a>
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 650px; slidedirection : right; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+                    <img src="http://fc04.deviantart.net/fs37/f/2008/261/b/1/Smile_by_Yingz.jpg" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 650px; slidedirection : right; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
                 </div>
                 <!--End Second Slide-->
 
                 <!--Third Slide-->
                 <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105; ">
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg2.jpg" class="ls-bg" alt="Slide background">
+                    <img src="http://fc08.deviantart.net/fs70/i/2014/049/0/4/kiki_s_delivery_service_by_jauni-d7702kw.png" class="ls-bg" alt="Slide background">
 
-                    <span class="ls-s-1" style=" color: #777; line-height:45px; font-weight: 200; font-size: 35px; top:100px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
-                        Unify is Fully Responsive <br> Twitter Bootstrap 3 Template
+                    <span class="ls-s-1" style=" color: #fff; line-height:45px; font-weight: 200; font-size: 35px; top:100px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
+                       <span style="font-size:50px; font-weight:bold; "> 국내 위탁 교육 </span><br> 기업 교육 전 부문 위탁 서비스
                     </span>
 
                     <a class="btn-u btn-u-green ls-s-1" href="#" style=" padding: 9px 20px; font-size:25px; top:220px; left: 50px; slidedirection : bottom; slideoutdirection : bottom; durationin : 2000; durationout : 2000; ">
-                        Find Out More
+                        더 알아보기
                     </a>
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 670px; slidedirection : right; slideoutdirection : bottom; durationin : 3000; durationout : 3000; ">
+                    <img src="http://fc08.deviantart.net/fs71/i/2011/021/3/7/athenastock__business_people_by_athenastock-d37pinu.jpg" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 670px; slidedirection : right; slideoutdirection : bottom; durationin : 3000; durationout : 3000; ">
                 </div>
                 <!--End Third Slide-->
             </div>         

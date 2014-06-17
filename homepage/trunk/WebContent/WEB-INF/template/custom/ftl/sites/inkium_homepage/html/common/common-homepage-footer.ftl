@@ -1,4 +1,5 @@
 <!--=== Footer ===-->
+
 <!--=== End Footer ===-->
 <!--=== Copyright ===-->
 <div class="copyright">
@@ -13,7 +14,7 @@
                     <#if action.webSite ?? >${.now?string("yyyy")} &copy; ${action.webSite.company.displayName }. 모든 권리 보유.<#else></#if>
                 </p>
             </div>
-            <div class="col-md-3">  
+            <div class="col-md-3 hidden">  
                 <a href="javascript:return void(0);">
                     <img src="${request.contextPath}/download/image/LQwoV8Jx4vXnEPGzIlAiYWuC19cqNKPlh60LDbLzvTja9m0UjX1ok2ap79apr5V1?width=80&height=80" class="pull-right" alt="2012 Best HRD 인증" />
                 </a>
