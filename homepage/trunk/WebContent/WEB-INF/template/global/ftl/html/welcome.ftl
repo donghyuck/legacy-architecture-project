@@ -3,6 +3,7 @@
 <head>
 		<title>기업소개</title>
 		<#compress>				
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/fonts/nanumpenscript.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />		
 		<script type="text/javascript">
 		<!--
@@ -53,7 +54,12 @@
 		</script>		
 		<style scoped="scoped">
 		blockquote p {
-			font-size: 15px;
+			font-size: 18px;
+		}
+		
+		blockquote cite {
+			font-family: "나눔 손글씨", "Nanum Pen Script";
+			font-size: 18px;
 		}
 
 		.k-grid table tr.k-state-selected{
