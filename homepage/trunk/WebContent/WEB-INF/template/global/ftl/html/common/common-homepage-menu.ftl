@@ -13,7 +13,7 @@
 			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />
 			<div class="header">
 				<div class="topbar">
-					<div class="container">
+					<div class="container hidden">
 						<!-- Topbar Navigation -->
 						<ul class="loginbar pull-right">
 							<li>
