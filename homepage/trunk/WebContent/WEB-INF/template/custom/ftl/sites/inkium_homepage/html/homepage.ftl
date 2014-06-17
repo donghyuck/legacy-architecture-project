@@ -409,7 +409,7 @@
 					<div class="col-md-4">
 						<div class="headline">
 							<h5>공지 & 이벤트</h5>
-							<div class="headline-controls"><a class="btn-u btn-u-orange btn-u-xs" href="${request.contextPath}/press.do">더보기</a></div>
+							<div class="headline-controls"><a class="btn-u btn-u-blue btn-u-xs" href="${request.contextPath}/press.do">더보기</a></div>
 						</div>						
 						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
 							<li><small class="hex">진행중인 공지 또는 이벤트가 없습니다.</small></li>
@@ -421,7 +421,7 @@
 							<h5>뉴스</h5>
 							<div class="headline-controls"><a class="btn-u btn-u-blue btn-u-xs" href="${request.contextPath}/press.do">더보기</a></div>
 						</div>
-						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
+						<ul  id="news-view" class="list-unstyled summaries" style="min-height:100px;">						
 							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
 						</ul>	
 					</div>
