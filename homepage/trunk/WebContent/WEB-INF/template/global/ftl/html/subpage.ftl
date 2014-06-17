@@ -50,8 +50,15 @@
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2 class="color-green">${action.targetPage.title}</h2>
-					<h5><i class="fa fa-quote-left"></i>&nbsp;${action.targetPage.summary!} <i class="fa fa-quote-right"></i>&nbsp;</h5>
+					<#if action.isSetNavigator()  >
+					<#assign current_menu = action.getNavigator() />					
+							<ul class="pull-left breadcrumb">
+				                <li><a href="main.do">홈</a></li>
+				                <li><a href="">${current_menu.parent.title}</a></li>
+				                <li class="active">${current_menu.title}</li>
+				            </ul>
+					</#if>					
+					<h2 class="color-green">${action.targetPage.title}  <br/><small><i class="fa fa-quote-left"></i> ${action.targetPage.summary!} <i class="fa fa-quote-right"></i></small></h2>			
 				</div>
 			</div>
 		</header>	
