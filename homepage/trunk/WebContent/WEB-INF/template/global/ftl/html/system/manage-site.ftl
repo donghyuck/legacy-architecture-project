@@ -3,56 +3,79 @@
 	<head>
 		<title>웹사이트관리</title>
 <#compress>		
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [ 
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.widgets.css',			
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.rtl.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.themes.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.pages.css',	
+			'css!${request.contextPath}/styles/perfect-scrollbar/perfect-scrollbar-0.4.9.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
-			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			 
-			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
-			'${request.contextPath}/js/common/common.models.js',
+			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
+			
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',			
+			
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',			
+			
+			'${request.contextPath}/js/common.plugins/fastclick.js', 
+			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 
+			'${request.contextPath}/js/perfect-scrollbar/perfect-scrollbar-0.4.9.min.js', 
+			
+			'${request.contextPath}/js/common.admin/pixel.admin.min.js',
+			
+			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/common/common.ui.system.js'],        	   
+			'${request.contextPath}/js/common/common.ui.admin.js',
+			
+			'${request.contextPath}/js/ace/ace.js'
+			],        	   
 			complete: function() {               
-				
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
-										
-				// 2. ACCOUNTS LOAD		
-				var currentUser = new User();
-				var accounts = $("#account-panel").kendoAccounts({
-					visible : false,
-					authenticate : function( e ){
-						currentUser = e.token.copy(currentUser);							
-					}
-				});				
-																		
-				// 3.MENU LOAD 
-				var companyPlaceHolder = new Company({ companyId: ${action.user.companyId} });				
-				$("#navbar").data("companyPlaceHolder", companyPlaceHolder);		
-				var topBar = $("#navbar").extNavbar({
-					template : $("#top-navbar-template").html(),
-					items : [{ 
-						name:"companySelector", 
-						selector: "#companyDropDownList", 
-						value: ${action.user.companyId}, 
-						change : function(data){
-							data.copy(companyPlaceHolder);
-							kendo.bind($("#company-info"), companyPlaceHolder );
-							$('button.btn-control-group').removeAttr("disabled");				
-						}	
-					}]
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();				
+				// 1-3.  관리자  로딩
+				var currentUser = new User();	
+				var detailsModel = kendo.observable({
+					company : new Company()
+				});	
+				detailsModel.bind("change", function(e){		
+					if( e.field.match('^company.name')){ 						
+						var sender = e.sender ;
+						if( sender.company.companyId > 0 ){
+							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
+							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
+							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
+						}
+					}	
 				});
+												
+				common.ui.admin.setup({
+					authenticate: function(e){
+						e.token.copy(currentUser);
+					},
+					companyChanged: function(item){
+						item.copy(detailsModel.company);
+						kendo.bind($("#company-info"), detailsModel.company );						
+						kendo.bind($("#company-details"), detailsModel.company );
+						displayCompanyDetails();						
+						//$('button.btn-control-group').removeAttr("disabled");									
+					}
+				});
+				
 												 
 				 // 4. PAGE MAIN		
 				 var selectedSocial = {};		
 				 	
 				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );				 
-				 createSiteGrid();				 
 				 common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
@@ -90,6 +113,13 @@
 					}}
 				);
 								
+
+			}	
+		}]);
+		
+		
+		function displayCompanyDetails (){
+				createSiteGrid();	
 				$('#myTab').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
@@ -108,11 +138,17 @@
 					}	
 				});				
 				$('#myTab a:first').tab('show') ;
-			}	
-		}]);
+						
+		
+		}
+		
+		function getSelectedCompany(){
+			var setup = common.ui.admin.setup();
+			return setup.companySelector.dataItem(setup.companySelector.select());
+		}
 		
 		function createLogoPanel(){
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");
+			var selectedCompany = getSelectedCompany();
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
@@ -190,7 +226,7 @@
 		}
 
 		function createSocialPane(){
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");
+			var selectedCompany = getSelectedCompany();
 			if( ! $("#social-grid").data("kendoGrid") ){
 				$("#social-grid").kendoGrid({
 					dataSource: {
@@ -293,7 +329,7 @@
 		}
 
 		function createAttachPane(){		
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");
+			var selectedCompany = getSelectedCompany();
 			
 			if( ! $("#attach-upload").data("kendoUpload") ){	
 				$("#attach-upload").kendoUpload({
@@ -373,7 +409,7 @@
 		
 		function createImagePane(){		
 		
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");
+			var selectedCompany = getSelectedCompany();
 		
 						if( ! $("#image-upload").data("kendoUpload") ){	
 							$("#image-upload").kendoUpload({
@@ -573,7 +609,7 @@
 			
 		
 		function createSiteGrid(){			
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");
+			var selectedCompany = getSelectedCompany();
 			if( ! $("#website-grid").data("kendoGrid") ){	
 				$('#website-grid').kendoGrid({
 								dataSource: {
@@ -709,20 +745,86 @@
 </#compress>		
 	</head>
 	<body>
-		<!-- START HEADER -->
-		<section id="navbar"></section>
-		<!-- END HEADER -->
-		<!-- START MAIN CONTNET -->
-		
-		<div class="container-fluid">		
-			<div class="row">			
-				<div class="page-header">
-					<#assign selectedMenuItem = action.getWebSiteMenu("SYSTEM_MENU", "MENU_1_2") />
-					<h1>${selectedMenuItem.title}     <small><i class="fa fa-quote-left"></i>&nbsp;${selectedMenuItem.description}&nbsp;<i class="fa fa-quote-right"></i></small></h1>
-				</div>			
-			</div>	
-			<div class="row">	
-				<div class="col-lg-12">
+	<body class="theme-default main-menu-animated">
+		<div id="main-wrapper">
+			<#include "/html/common/common-system-navigation.ftl" >	
+			<div id="content-wrapper">
+				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_2") />
+				<ul class="breadcrumb breadcrumb-page">
+					<!--<div class="breadcrumb-label text-light-gray">You are here: </div>-->
+					<li><a href="#">Home</a></li>
+					<li><a href="${ selectedMenu.parent.page!"#" }">${selectedMenu.parent.title}</a></li>
+					<li class="active"><a href="#">${selectedMenu.title}</a></li>
+				</ul>
+				<div class="page-header bg-dark-gray">		
+					<div class="row">
+						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
+							<p><small><i class="fa fa-quote-left"></i> ${selectedMenu.description} <i class="fa fa-quote-right"></i></small></p>
+						</h1>
+						<div class="col-xs-12 col-sm-6">
+							<div class="row">
+								<hr class="visible-xs no-grid-gutter-h">							
+								<div class="pull-right col-xs-12 col-sm-auto">
+									<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">옵션</h6>
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
+									</div>									
+								</div>
+							</div>
+						</div>
+					</div>				
+				</div><!-- / .page-header -->
+				<!-- details-row -->
+				<div id="company-details" class="page-details" style="">
+					<div class="details-row no-margin-t">					
+						<div class="left-col">
+							<div class="details-block no-margin-t">
+								<div class="details-photo">
+									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/podosoftware">
+								</div>
+								<br>
+								<!--
+								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
+								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
+							</div>				
+							<div class="panel panel-transparent">
+								<div class="panel-heading">
+									<span class="panel-title" data-bind="text:company.description"></span>									
+								</div>
+								<table class="table">
+									<tbody>						
+										<tr>
+											<td><small><span class="badge">회사</span></small></td>								
+											<td><span data-bind="text: company.displayName"></span> <span class="label label-primary"><span data-bind="text: company.name"></span></span> <code><span data-bind="text: company.companyId"></span></code></td>
+										</tr>	
+										<tr>
+											<th><small><span class="badge">도메인</span></small></th>								
+											<td><span data-bind="text: company.domainName"></span></td>
+										</tr>	
+										<tr>
+											<th><small><span class="badge">생성일</span></small></th>								
+											<td><span data-bind="text:formattedModifiedDate"></span></td>
+										</tr>	
+										<tr>
+											<th><small><span class="badge">수정일</span></small></th>								
+											<td><span data-bind="text:formattedModifiedDate"></span></td>
+										</tr>																								
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="right-col">
+							<hr class="details-content-hr no-grid-gutter-h">	
+
+							</div><!-- / .details-content -->
+						</div><!-- / .right-col -->
+					</div><!-- / .details-row -->	
+	
+				<div class="row">				
+					<div class="col-sm-12 ">				
+					
+	
 					<div class="panel panel-default" style="min-height:300px;">
 						<div class="panel-heading" style="padding:5px;">						
 							<div class="btn-group">
@@ -850,10 +952,15 @@
 						</div>
 						<div class="panel-body" style="padding:5px;"></div>
 					</div>	
+										
+					</div>
 				</div>
+			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg">
 			</div>
-		</div>				
-		<div id="account-panel" ></div>
+		</div> <!-- / #main-wrapper -->
+				
+
   
 		<!-- Modal -->
 		<div id="social-detail-window" style="display:none;"></div>
@@ -982,6 +1089,6 @@
 					# } #	
 				# } #					
 		</script>
-		<#include "/html/common/common-system-templates.ftl" >
+		<#include "/html/common/common-system-templates.ftl" >		
 	</body>
 </html>

@@ -382,8 +382,7 @@
 					refresh : function(e){
 						var editor = ace.edit("htmleditor");
 						editor.getSession().setMode("ace/mode/xml");
-						editor.getSession().setUseWrapMode(true);
-						
+						editor.getSession().setUseWrapMode(true);						
 					},
 					open: function (e){
 						//ace.edit("htmleditor").setValue(editor.data('kendoEditor').value());

@@ -2,17 +2,18 @@
 <html decorator="secure">
 <head>
 		<title>관리자 메인</title>		
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.admin.style.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
 		<script type="text/javascript">
 		<!--		
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common.extension/animate.css',
-			'css!${request.contextPath}/styles/common/common.admin.widgets.css',			
-			/*		'css!${request.contextPath}/styles/common/common.admin.rtl.css',			*/
-			'css!${request.contextPath}/styles/common/common.admin.themes.css',
-			/*'${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js',*/
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.widgets.css',			
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.rtl.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.themes.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.pages.css',	
+			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo/kendo.dataviz.min.js',
@@ -22,7 +23,8 @@
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',			
 			'${request.contextPath}/js/common.plugins/fastclick.js', 
 			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 
-			'${request.contextPath}/js/common/common.admin.js',
+			'${request.contextPath}/js/common.admin/pixel.admin.min.js',
+			
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js',
@@ -202,6 +204,9 @@
 						}					
 					}
 					$(this).tab('show');
+					
+					$('#system-info .panel-body').perfectScrollbar();
+					
 				});													
 									
 				// END SCRIPT
@@ -217,9 +222,14 @@
 		<div id="main-wrapper">
 			<#include "/html/common/common-system-navigation.ftl" >	
 			<div id="content-wrapper">
-				<div class="page-header">
-					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1") />
-					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i>${selectedMenu.description}<i class="fa fa-quote-right"></i></small></h1>
+				<ul class="breadcrumb breadcrumb-page">
+					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_5") />
+					<li><a href="#">Home</a></li>
+					<li><a href="${ selectedMenu.parent.page!"#" }">${selectedMenu.parent.title}</a></li>
+					<li class="active"><a href="#">${selectedMenu.title}</a></li>
+				</ul>			
+				<div class="page-header bg-dark-gray">					
+					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i> ${selectedMenu.description!""} <i class="fa fa-quote-right"></i></small></h1>
 				</div><!-- / .page-header -->				
 				<div class="row">				
 					<div class="col-xs-3">
@@ -349,7 +359,7 @@
 									</div>		
 								</div>
 								<div class="tab-pane" id="system-info">
-									<div class="panel-body">
+									<div class="panel-body" >
 												<table class="table table-striped .table-hover system-details">
 													<tbody>
 														<tr>

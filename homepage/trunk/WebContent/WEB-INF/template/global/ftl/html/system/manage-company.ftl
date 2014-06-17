@@ -2,33 +2,39 @@
 <html decorator="secure">
 <head>
 		<title>관리자 메인</title>		
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.admin.style.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
 		<script type="text/javascript">
 		<!--		
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common.extension/animate.css',/*
-			'css!${request.contextPath}/styles/common/common.admin.widgets.css',			
-			'css!${request.contextPath}/styles/common/common.admin.rtl.css',	*/		
-			'css!${request.contextPath}/styles/common/common.admin.themes.css',
-			'css!${request.contextPath}/styles/common/common.admin.pages.css',	
-			'css!${request.contextPath}/styles/common.plugins/bootstrap-editable.min.css',	
-			/*'${request.contextPath}/js/jquery/2.1.1/jquery-2.1.1.min.js',*/
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.widgets.css',			
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.rtl.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.themes.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.pages.css',	
+			'css!${request.contextPath}/styles/perfect-scrollbar/perfect-scrollbar-0.4.9.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
+			
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',			
+			
 			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',			
+			
 			'${request.contextPath}/js/common.plugins/fastclick.js', 
 			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 
-			'${request.contextPath}/js/common.plugins/bootstrap-editable.min.js',
-			'${request.contextPath}/js/common/common.admin.js',
+			'${request.contextPath}/js/perfect-scrollbar/perfect-scrollbar-0.4.9.min.js', 
+			
+			'${request.contextPath}/js/common.admin/pixel.admin.min.js',
+			
 			'${request.contextPath}/js/common/common.models.js',       	    
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js',
 			'${request.contextPath}/js/common/common.ui.admin.js',
+			
 			'${request.contextPath}/js/ace/ace.js'
 			],
 			complete: function() {
@@ -42,14 +48,20 @@
 				var targetCompany = new Company();	
 				
 				common.ui.admin.setup({
-					authenticate : function(e){
+					authenticate: function(e){
 						e.token.copy(currentUser);
 					},
 					companyChanged: function(item){
 						item.copy(targetCompany);
+					},
+					switcherChanged: function( name , value ){						
+						if( value && !$('#company-list').is(":visible") ){
+							$('#company-list').show();
+						}else if ( !value && $('#company-list').is(":visible") && $('#company-details').is(":visible") ){
+							hideCompanyDetails();
+						}
 					}
-				});		
-
+				});
 				common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
@@ -112,41 +124,17 @@
 					change: function(e) {
 						// 1-1 SELECTED EVENT  
 						var selectedCells = this.select();
-						if( selectedCells.length === 0){					
-							alert(0);
-						
+						if( selectedCells.length === 0){								
 						}
-						
-						/*
-						if( selectedCells.length > 0){							
-							var selectedCell = this.dataItem( selectedCells );		
-							this.editRow(selectedCells);
-							if( selectedCell.companyId > 0 && this.tbody.find('>tr[data-role="editable"]').length == 0 )
-							{	
-							
-								//showCompanyDetails();
-							
-							}
-						}*/
 					},
 					cancel: function(e){	
 					
 					},
 					edit: function(e){	
-						if( $("#company-details").text().length > 0 ){	
-							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
-								$("#company-details").hide() ;
-							});
-						}			
+						hideCompanyDetails()		
 					},
 					dataBound: function(e){   
-						// 1-2 Company 데이터를 새로 읽어드리면 기존 선택된 정보들과 상세 화면을 클리어 한다. 
-						//var selectedCells = this.select();				
-						if( $("#company-details").text().length > 0 ){	
-							common.ui.animate($("#company-details"), 'fadeOutUp', function(){  
-								$("#company-details").hide() 
-							});
-						} 
+						hideCompanyDetails(); 
 					}	                    
 				}); //.css("border", 0);
 																			
@@ -221,11 +209,17 @@
 		} 
 
 		function getSelectedMenu(){
+			
 			var renderTo = $("#menu-grid");
 			var grid = renderTo.data('kendoGrid');			
 			var selectedCells = grid.select();
-			var selectedCell = grid.dataItem( selectedCells );   
-			return selectedCell;
+			
+			if( selectedCells.length == 0){
+				return new Menu();
+			}else{			
+				var selectedCell = grid.dataItem( selectedCells );   
+				return selectedCell;
+			}
 		}	
 				
 		function openMenuEditor(){
@@ -245,8 +239,17 @@
 				$('#menu-editor button[data-action="editor-close"]').click(function(e){
 					closeMenuEditor();
 				});
+				
+				var switcher = $('#menu-editor input[role="switcher"][name="warp-switcher"]');
+				
+				if( switcher.length > 0 ){
+					$(switcher).switcher();
+					$(switcher).change(function(){
+						editor.getSession().setUseWrapMode($(this).is(":checked"));
+					});		
+				}				
 			}						
-			menuPlaceHolder.copy( renderTo.data("model").menu );			
+			menuPlaceHolder.copy( renderTo.data("model").menu );	
 			editor.setValue(renderTo.data("model").menu.menuData);
 			$('#menu-modal button[data-action="saveOrUpdate"]').removeClass("hidden");
 			common.ui.animate($('#menu-modal .modal-body:first'), 'fadeOutUp', function(){
@@ -324,9 +327,28 @@
 			return model;
 		}
 		
+		function hideCompanyDetails(){			
+			if( $("#company-details").text().length > 0 && $("#company-details").is(":visible") ){
+				var alwaysShowList = common.ui.admin.setup().isSwitcherEnabled("list-switcher");
+				var animate = "slideOutLeft" ;
+				if( alwaysShowList ){
+					animate = "fadeOutUp" ;
+				}
+				common.ui.animate_v3($("#company-details"), animate, function(){  
+					if( !$("#company-list").is(":visible") ){
+						$("#company-list").show();
+						//common.ui.animate_v3($("#company-list"), "slideInRight").show();
+						common.ui.animateFadeIn($("#company-list"));
+					} 
+				});	
+			}	
+		}
+		
 		function showCompanyDetails(){
 			var renderTo = $('#company-details');
 			var companyPlaceHolder = getSelectedCompany();
+			var alwaysShowList = common.ui.admin.setup().isSwitcherEnabled("list-switcher");			
+			
 			if( renderTo.text().length === 0 ){
 				renderTo.html(kendo.template($('#company-details-template').html()));
 				var detailsModel = kendo.observable({
@@ -361,15 +383,30 @@
 							break;
 					}	
 				});
+				renderTo.find(".panel-heading > button.close").click(function(e){
+					hideCompanyDetails();
+				});
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
-			renderTo.removeClass('fadeOutUp');
-			if(!renderTo.is(":visible")){
-				common.ui.animate(renderTo, 'fadeInDown', function(){
-					$('html,body').animate({scrollTop: renderTo.offset().top -10 }, 300);
-				}).show();
-			}
+			
 			$('#myTab a:first').tab('show');			
+			if(alwaysShowList){				
+				if(!renderTo.is(':visible'))
+					common.ui.animate_v3(renderTo, 'fadeInDown').show() ;
+				$('html,body').animate({scrollTop: renderTo.offset().top - 20 }, 500);	
+			}else{			
+			
+				common.ui.animateFadeOut($("#company-list"), function(){
+					common.ui.animate_v3(renderTo, 'slideInLeft').show() ;
+				});
+				
+				
+				//common.ui.animate_v3($("#company-list"), 'slideOutLeft', function(){
+					//common.ui.animate_v3(renderTo, 'slideInLeft').show() ;
+					//renderTo.show();
+				//}) ;
+			}			
+			return false;
 		}
 		
 		function createCompanyPropsPane(renderTo){
@@ -384,9 +421,9 @@
 							destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
 							parameterMap: function (options, operation){			
 								if (operation !== "read" && options.models) {
-									return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
+									return { companyId: getSelectedCompany().companyId, items: kendo.stringify(options.models)};
 								} 
-								return { companyId: companyPlaceHolder.companyId }
+								return { companyId: getSelectedCompany().companyId }
 							}
 						},						
 						batch: true, 
@@ -405,6 +442,7 @@
 					resizable: true,
 					editable : true,
 					scrollable: true,
+					autoBind: false,
 					height: 300,
 					toolbar: [
 						{ name: "create", text: "추가" },
@@ -414,7 +452,8 @@
 					change: function(e) {
 					}
 				});		
-			}										
+			}
+			renderTo.data("kendoGrid").dataSource.read();
 		}
 		
 		function createCompanyMembersPane(renderTo){
@@ -426,7 +465,7 @@
 						transport: { 
 							read: { url:'${request.contextPath}/secure/list-user.do?output=json', type: 'POST' },
 							parameterMap: function (options, type){
-								return { startIndex: options.skip, pageSize: options.pageSize,  companyId: companyPlaceHolder.companyId }
+								return { startIndex: options.skip, pageSize: options.pageSize,  companyId: getSelectedCompany().companyId }
 							}
 						},
 						schema: {
@@ -445,6 +484,7 @@
 					filterable: true,
 					sortable: true,
 					scrollable: true,
+					autoBind: false,
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
 					selectable: "multiple, row",
 					columns: [
@@ -458,7 +498,8 @@
 					},
 					toolbar: [{ name: "create-groups", text: "선택 사용자 소속 변경하기", imageClass:"k-icon k-i-folder-up" , className: "changeUserCompanyCustomClass" }]
 				});												
-			}			
+			}	
+			renderTo.data("kendoGrid").dataSource.read();
 		}	
 		
 		function createCompanyGroupsPane(renderTo){
@@ -472,9 +513,9 @@
 								destroy: { url:'${request.contextPath}/secure/remove-group-members.do?output=json', type:'post' },
 								parameterMap: function (options, operation){
 									if (operation !== "read" && options.models) {
-										return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
+										return { companyId: getSelectedCompany().companyId, items: kendo.stringify(options.models)};
 									}
-									return { companyId: companyPlaceHolder.companyId }
+									return { companyId: getSelectedCompany().companyId }
 								}
 							},
 							schema: {
@@ -486,6 +527,7 @@
 						height: 300,
 						scrollable: true,
 						editable: false,
+						autoBind: false,
 						columns: [
 							{ field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
 							{ field: "name",    title: "KEY",  filterable: true, sortable: true,  width: 100 },
@@ -498,7 +540,8 @@
 						},
 						toolbar: [{ name: "create-groups", text: "디폴트 그룹 생성하기", imageClass:"k-icon k-i-folder-add" , className: "createGroupsCustomClass" }]
 				});		
-			}			
+			}
+			renderTo.data("kendoGrid").dataSource.read();
 		}				
 		
 		-->
@@ -526,13 +569,14 @@
 		<div id="main-wrapper">
 			<#include "/html/common/common-system-navigation.ftl" >	
 			<div id="content-wrapper">
+				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_1") />
 				<ul class="breadcrumb breadcrumb-page">
-					<div class="breadcrumb-label text-light-gray">You are here: </div>
+					<!--<div class="breadcrumb-label text-light-gray">You are here: </div>-->
 					<li><a href="#">Home</a></li>
-					<li class="active"><a href="#">Dashboard</a></li>
+					<li><a href="${ selectedMenu.parent.page!"#" }">${selectedMenu.parent.title}</a></li>
+					<li class="active"><a href="#">${selectedMenu.title}</a></li>
 				</ul>
-				<div class="page-header bg-dark-gray">				
-					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_1") />
+				<div class="page-header bg-dark-gray">		
 					<div class="row">
 						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
 							<p><small><i class="fa fa-quote-left"></i> ${selectedMenu.description} <i class="fa fa-quote-right"></i></small></p>
@@ -553,26 +597,22 @@
 				</div><!-- / .page-header -->
 				<div class="row">				
 					<div class="col-sm-12">					
-						<div class="panel panel-default" style="min-height:300px;">
+						<!-- details -->
+						<div id="company-list" class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
-								<span class="panel-title"><i class="panel-title-icon fa fa-building-o"></i> 목록</span>
-								<div class="panel-heading-controls">
-								<span style="color: #ccc">|</span><button class="btn btn-danger btn-sm btn-labeled btn-control-group" data-action="create-company"><span class="btn-label icon fa fa-plus"></span> 회사 만들기 </button>
+								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록</span>
+								<div class="panel-heading-controls">								
+								<button class="btn btn-danger btn-sm btn-labeled btn-control-group" data-action="create-company"><span class="btn-label icon fa fa-plus"></span> 회사 만들기 </button>
 								</div>
 							</div>
 							<div id="company-grid" class="no-border"></div>	
 						</div>
+						<!-- /details -->
+						<!-- list -->
+						<div id="company-details" class="page-details" style="display:none;"></div><!-- /company details -->		
+						<!-- /list -->
 					</div>	
-				</div>
-				<!--
-				<div class="row">					
-					<div class="col-sm-12">					
-						<div id="company-details" class="animated"  style="display:none;"></div>
-					</div>
-				</div>
-				-->
-				<!-- company details -->
-				<div id="company-details" class="page-details animated" style="display:none;"></div><!-- /company details -->		
+				</div>				
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
 			</div>
@@ -598,7 +638,15 @@
 					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
-							<button class="btn btn-primary btn-flat btn-labeled" data-action="editor-close"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
+								<div class="row">
+									<div class="col-xs-6">
+										<button class="btn btn-primary btn-flat btn-labeled" data-action="editor-close"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
+									</div>
+									<div class="col-xs-6">
+										<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">줄 바꿈 설정</h6>
+										<input type="checkbox" name="warp-switcher" data-class="switcher-primary" role="switcher" >	
+									</div>
+								</div>	
 							</div>						
 						</div>					
 						<form class="form-horizontal">				
@@ -659,6 +707,7 @@
 		<div class="panel">
 			<div class="panel-heading">
 				<span class="panel-title"><span class="label label-primary" data-bind="text: company.name"></span> <span class="text-semibold" data-bind="text:company.displayName"></span></span>
+				<button type="button" class="close" aria-hidden="true">&times;</button>
 			</div>			
 			<div class="panel-body">
 					<div class="details-row no-margin-t">					
@@ -706,7 +755,7 @@
 								<!-- .tab-content -->	
 								<div class="tab-content tab-content-bordered no-padding">								
 									<div class="tab-pane fade" id="props">
-										<div class="alert alert-danger alert-dark no-border-radius no-border-vr no-margin-b">
+										<div class="alert alert-info alert-dark no-border-radius no-border-vr no-margin-b">
 											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 											프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
 										</div>						
