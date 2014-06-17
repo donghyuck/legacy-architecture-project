@@ -246,7 +246,7 @@
 		</script>
 		<script type="text/x-kendo-tmpl" id="topic-viewer-template">		
 			<div class="page-heading">
-				<h4 data-bind="html:topic.subject"></h4>		
+				<h4 data-bind="html:topic.subject" style="font-weight:bold;"></h4>		
 				<hr class="devider">
 				<ul class="list-unstyled">
 					<li><span class="label label-info label-lightweight">게시일</span> <span class="text-muted" data-bind="text: topic.formattedCreationDate"></span></li>
