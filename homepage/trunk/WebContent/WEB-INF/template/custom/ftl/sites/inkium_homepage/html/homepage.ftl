@@ -402,7 +402,7 @@
         	
         		
 			<!-- END MAIN CONTENT -->	
-			<div class="one-page">
+			<div class="one-page fade in">
 				<div class="one-page-inner one-dark">
 				
 				
