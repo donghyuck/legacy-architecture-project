@@ -22,6 +22,7 @@
 
 <!--  bootstrap & awesome fonts -->
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.1.0/bootstrap.min.css" />
+<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/fonts/nanumgothic.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/font-awesome/4.0.3/font-awesome.min.css" />
 
 <!--  customize  -->
@@ -31,6 +32,11 @@
 <decorator:head />
 
 <style>
+
+	.copyright {
+		background: #282a2b !important;
+		border-top: 1px solid #4b4c4d;
+	}
 	
 	.k-grid table tr.k-state-selected{
 		background: #5bc0de;
@@ -59,31 +65,18 @@
 		color: #999;
 	}	
 	
-	/*	
-	header {
-		background: #0070b8;
-		background-size: cover;
-		padding: 12px 0;
-		margin-bottom: 10px;
+	/** menu */
+	.header .navbar-default .navbar-nav > li > a {
+		font-size : 18px;
 	}
 	
-	header.cloud {
-		color: white;
-		background: #3ba5db url(/images/common/header/cloud-hero.png) bottom right no-repeat;
+	.header .dropdown-menu li a {
+		font-size : 15px;
 	}
-
-	.cloud h2{	
-		color: white;
+	
+	.navbar-collapse {
+		max-height: 100%;
 	}
-
-	.cloud h4 {
-		color: white;
-	}
-		
-	.cloud h4 small {
-		color: white;
-	}	
-	*/
 	
 	.k-editor-toolbar .k-tool {
 		border : 0px;

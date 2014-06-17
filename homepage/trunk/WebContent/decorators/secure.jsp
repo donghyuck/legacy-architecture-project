@@ -10,27 +10,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="-1">
+<link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/fonts/nanumgothic.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.common.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/kendo/kendo.bootstrap.min.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/bootstrap/3.1.0/bootstrap.css" />
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 <style>
-/*
-	body { 
-		padding: 0;
-		padding-top: 51px;
-		background-color : #FFFFFF;	
-		margin: 0;
-		
-		height: 100%;
-		background : url (<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/images/bg.png ) #FFF ;
-	}
-	
-	.k-grid table tr.k-state-selected{
-		background: #428bca;
-		color: #ffffff; 
-	}*/
 	
 		.header-1,
 		.header-1:hover,
