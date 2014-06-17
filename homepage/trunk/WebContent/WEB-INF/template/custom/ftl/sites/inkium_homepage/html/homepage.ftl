@@ -90,6 +90,7 @@
 					'#if( typeof viewCnt === "number") {#<small class="hex">(#: viewCnt #)</small>#}#</li>'
 				);				
 				announcement.dataSource().bind('change', function(){
+					alert(this.view().length);
 					$("#announce-view").html(kendo.render(template, this.view()))
 				}).read();
 				
