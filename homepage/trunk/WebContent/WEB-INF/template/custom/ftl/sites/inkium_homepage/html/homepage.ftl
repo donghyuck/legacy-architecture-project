@@ -96,12 +96,6 @@
 				forum.dataSource().bind('change', function(){					
 					$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
-												 
-				if( 	kendo.support.touch && kendo.support.mobileOS ){
-					$('.view.view-tenth').bind("click", function(e){ 
-						$(this).find('a').click();
-					});				
-				}
 											 							 
 				<#if !action.user.anonymous ></#if>	
 			}
