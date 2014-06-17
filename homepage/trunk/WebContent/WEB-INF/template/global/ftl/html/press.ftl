@@ -214,14 +214,15 @@
 					<div class="content-main-section">
 						<div class="page-header padding-left-10">
 							<h5><small>게시일 순서로 뉴스가 보여집니다.</small></h5>
-						</div>						
-						<div id="topic-grid"></div>		
-						<div class="margin-bottom-20"></div>
+						</div>			
 						<div id="topic-viewer-panel" class="panel panel-default" style="margin-bottom: 20px; display:none;">
 							<div class="panel-body">													
 								<div id="topic-viewer"></div>
 							</div>
-						</div>
+						</div>									
+						<div id="topic-grid"></div>		
+						<div class="margin-bottom-20"></div>
+
 					</div>				
 				</div>				
 			</div>					
