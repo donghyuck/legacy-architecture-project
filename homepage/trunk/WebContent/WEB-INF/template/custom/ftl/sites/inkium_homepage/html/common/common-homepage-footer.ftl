@@ -1,6 +1,60 @@
-<!--=== Footer ===-->
-
-<!--=== End Footer ===-->
+		<!--=== Footer ===-->
+		<div class="footer bg-dark">
+			<div class="container layout">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-sm-4">
+								<ul class="list-unstyled">
+                                <li><strong>교육 서비스</strong></li>
+                                <li><i class="fa fa-angle-right"></i> 위탁 교육</li>
+                                <li><i class="fa fa-angle-right"></i> 스터디마트</li>
+                                <li><i class="fa fa-angle-right"></i> INTV</li>
+                            </ul>
+							</div>
+							<div class="col-sm-4">
+							<ul class="list-unstyled">
+                                <li><strong>솔루션</strong></li>
+                                <li><i class="fa fa-angle-right"></i> 인키움 HRD 컨설팅</li>
+                                <li><i class="fa fa-angle-right"></i> 인키움 HRD</li>
+                                <li><i class="fa fa-angle-right"></i> iCAP</li>
+                            </ul>					
+							<ul class="list-unstyled">
+                                <li><strong>자격시험</strong></li>
+                                <li><i class="fa fa-angle-right"></i> ICP</li>
+                            </ul>			                            		
+							</div>
+							<div class="col-sm-4">
+								<ul class="list-unstyled">
+                                <li><strong>대학사업</strong></li>
+                                <li><i class="fa fa-angle-right"></i> 대학경쟁력강화 컨설팅</li>
+                                <li><i class="fa fa-angle-right"></i> OLYGO 프로그램</li>
+                                <li><i class="fa fa-angle-right"></i> JobCAP 프로그램</li>
+                                <li><i class="fa fa-angle-right"></i> 취업역량강화 프로그램</li>
+                                <li><i class="fa fa-angle-right"></i> 온라인 콘텐츠</li>
+                                <li><i class="fa fa-angle-right"></i> 직립보행</li>
+                            </ul>	
+                            </div>
+						</div>
+					</div><!--/col-md-8-->
+					<div class="col-md-4">
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">원천징수 영수증 출력 (02 2081 1016)</a>
+                            					
+					<!--
+						<div class="footer-links">					
+							<div class="footer-links-body">
+							<p>&nbsp;</p>
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">원천징수 영수증 출력 (02 2081 1016)</a>			
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">ASTD 벤치마킹연수 (02 2081 1092)</a>		
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">ICP 프레젠티이션 자격시험 (02 2081 1026)</a>		
+							</div>						
+						</div>
+						-->
+					</div><!--/col-md-4-->
+				</div><!--/row-->   
+			</div><!--/container--> 
+		</div><!--/footer-->    
+		<!--=== End Footer ===-->		
 <!--=== Copyright ===-->
 <div class="copyright">
     <div class="container layout">
