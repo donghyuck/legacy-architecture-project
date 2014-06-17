@@ -7,25 +7,29 @@
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.img-hover.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.ui.portfolio-v2.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.pages/onepage.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'${request.contextPath}/js/bxslider/jquery.bxslider.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',						
-			'${request.contextPath}/js/kendo/kendo.web.min.js',
-	
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',								
+			'${request.contextPath}/js/kendo/kendo.web.min.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
-			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',					
+			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',		
+						
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			
-			'${request.contextPath}/js/bxslider/jquery.bxslider.min.js',
+			'${request.contextPath}/js/bxslider/jquery.bxslider.min.js',			
+			'${request.contextPath}/js/common.plugins/jquery.mixitup.js',		
+						
 			'${request.contextPath}/js/jquery.plugins/easing/jquery.easing.1.3.js',
 			'${request.contextPath}/js/layer-slider/jquery.transit.modified.js',
 			'${request.contextPath}/js/layer-slider/layerslider.transitions.js',
 			'${request.contextPath}/js/layer-slider/layerslider.kreaturamedia.jquery.js',		
+
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',	
 						
 			'${request.contextPath}/js/common/common.modernizr.custom.min.js',
 			'${request.contextPath}/js/common/common.models.js',
@@ -46,7 +50,14 @@
 					slideWidth: 360,
 					slideMargin: 10,
 				}); 
-								
+
+            $('.bxslider1').bxSlider({
+                minSlides: 3,
+                maxSlides: 3,
+                slideWidth: 360,
+                slideMargin: 10
+            });  
+            								
 				$('#layerslider').layerSlider({
 					skinsPath : '/styles/layer-slider/skins/',
 					skin : 'fullwidth',
@@ -57,6 +68,8 @@
 					sublayerContainer : 960
 		        });
 		        				
+		        				$('.sorting-grid').mixItUp();
+		        								
 				// ACCOUNTS LOAD				
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
@@ -187,14 +200,19 @@
                 <!--First Slide-->
                 <div class="ls-layer" style="slidedirection: right; transition2d: 24,25,27,28; ">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg1.jpg" class="ls-bg" alt="Slide background">
+                    <img src="http://fc01.deviantart.net/fs70/f/2012/036/d/9/d9fa639fc4b7eb93f4f28c891eef35d9-d4othd2.jpg" class="ls-bg" alt="Slide background">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+                    <img src="http://th05.deviantart.net/fs70/PRE/i/2013/153/1/b/disney_university___taran_by_hyung86-d67k5q2.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
 
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
+                    <img src="http://th05.deviantart.net/fs71/PRE/i/2013/272/9/a/disney_university___jane_by_hyung86-d6oh4zo.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
 
+					<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
+                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
+                        Fully Responsive and Easy to Customize
+                    </span>
+                    
                     <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
-                        Fully Responsive <br> Bootstrap 3 Template
+                       <small>센스있는 신입사원이 되는 첫 걸음</small><br>직립보행
                     </span>
 
                     <a class="btn-u btn-u-orange ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
@@ -265,285 +283,243 @@
     </div><!--/layer_slider-->
     <!--=== End Slider ===-->
 		<div class="container content">	
-<!-- Service Links -->
-        <div class="row margin-bottom-40">
-            <div class="col-lg-12">
-                <div class="headline"><h3>서비스 바로가기</h3></div>
-                <ul class="bxslider recent-work">
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="${request.contextPath}/download/image/151/family_astd_2014.PNG" alt="" /></em>
-                            <span>
-                                <strong>ASTD</strong>
-                                <i>문의 : 02 2081 1092</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
-                            <span>
-                                <strong>ICP</strong>
-                                <i>문의 : 02 2081 1026</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
-                            <span>
-                                <strong>원천징수 영수증 발급</strong>
-                                <i>문의 : 02 2081 1016</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="" /></em>
-                            <span>
-                                <strong>Food Truck Quinoa Nesciunt</strong>
-                                <i>Craft labore wes anderson cred</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/5.jpg" alt="" /></em>
-                            <span>
-                                <strong>Happy New Year</strong>
-                                <i>Anim pariatur cliche reprehenderit</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="" /></em>
-                            <span>
-                                <strong>Award Winning Agency</strong>
-                                <i>Responsive Bootstrap Template</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/7.jpg" alt="" /></em>
-                            <span>
-                                <strong>Wolf Moon Officia</strong>
-                                <i>Pariatur prehe cliche reprehrit</i>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <em class="overflow-hidden"><img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="" /></em>
-                            <span>
-                                <strong>Food Truck Quinoa Nesciunt</strong>
-                                <i>Craft labore wes anderson cred</i>
-                            </span>
-                        </a>
-                    </li>
-                </ul>                    
-            </div>
-        </div><!--/row-->
-        <!-- End Service Links  -->
-<div class="row margin-bottom-30">
-            <!-- Accordion-->
-        	<div class="col-md-7">
-    			<div class="headline"><h2>서비스 바로가기</h2></div>
-                <div class="panel-group acc-v1" id="accordion">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-                                    ASTD ICE 인키움 벤치마킹연수 
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse" style="height: 0px;">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <img class="img-responsive" src="${request.contextPath}/download/image/72/banner_astd.gif" alt="">
-                                    </div>
-                                    <div class="col-md-8">
-                                        세계 최대 규모의 인적자원개발 협회 ASTD 벤치마킹연수를 통해  여러분과, 또 여러분의 조직을 한 단계 발전시킬 기회를 얻을 수 있습니다.
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
-                                    ICP 프레젠테이션 자격시험 
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse" style="height: 0px;">
-                            <div class="panel-body">
-                            	 <a href="#" class="btn-u btn-u-blue pull-right">서비스 바로가기</a>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                   
-                                        <p>개인의 발표 능력을 검증하는 전통의 프레젠테이션 자격시험</p>
-                                        
-                                        <ul class="list-unstyled who">
-                                            <li><i class="fa fa-check color-green"></i>한국 직업능력개발원으로 부터 공인된 등록된 민간자격</li>
-                                            <li><i class="fa fa-check color-green"></i>자격등록번호 : 제 2009-0247호</li>
-                                            <li><a href="tel:+0220811026"><i class="fa fa-phone"></i>02-2081-1026</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <img class="img-responsive" src="${request.contextPath}/download/image/74/banner_icp.gif" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <!-- content
+    ================================================== -->
+       <!-- Portfolio Sorting Blocks -->
+        <div class="sorting-block">
+            <ul class="sorting-nav sorting-nav-v1 text-center">
+                <li class="filter" data-filter="all">전체</li>
+                <li class="filter" data-filter=".category-1">기업서비스</li>
+                <li class="filter" data-filter=".category-2">대학서비스</li>
+                <li class="filter" data-filter=".category-3">서비스</li>
+                <li class="filter" data-filter=".category-4">제품</li>
+            </ul>
 
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
-                                   원천징수 영수증 출력
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="collapseThree" class="panel-collapse collapse" style="height: 0px;">
-                            <div class="panel-body">                             
-								<a href="#" class="btn-u btn-u-blue pull-right">서비스 바로가기</a>
-	                              <ul class="list-unstyled who margin-bottom-30">
-	                              	<li>위탁 강의를 진행하신 강사분들을 위한 원천징수 영수증 출력을 위한 서비스입니다.</li>
-	                                <li><a href="tel:+0220811004"><i class="fa fa-phone"></i>02-2081-1004</a></li>
-				                 </ul>
-                             </div>
-                        </div>
-                    </div>
-                </div><!--/acc-v1-->
-            </div><!--/col-md-7-->
-            <!-- End Accordion-->
-
-            <!-- Latest Shots -->
-            <div class="col-md-5">
-<div class="headline"><h2>Latest Shots</h2></div>
-    			<div id="myCarousel" class="carousel slide carousel-v1">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/5.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
-                            </div>
-                            </div>
-                        <div class="item">
-                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p>Justo cras odio apibus ac afilisis lingestas de.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-arrow">
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-    			</div>
-            </div><!--/col-md-5-->
-            <!-- End Latest Shots -->
-        </div>
+            <ul class="row sorting-grid">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 category-3" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 category-1" data-cat="3">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-1" data-cat="2">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/13.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 category-4" data-cat="3">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-1 category-4" data-cat="2">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-4" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-3  category-4" data-cat="2">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 category-2 category-3" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-4 category-2" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 category-2" data-cat="3">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>제품/서비스 명</span>
+                            <p>제품 / 서비스 한줄 요약</p>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        
+            <div class="clearfix"></div>
+			</div>
+			<!-- End Portfolio Sorting Blocks -->
+        	</div><!-- /content -->
+        	
         		
-		</div><!-- /content -->	
-		<!-- END MAIN CONTENT -->	
-		</div><!-- /wrapper -->	
-<!--=== Footer ===-->
-<div class="footer bg-pomegranate">
-	<div class="container layout">
-		<div class="row">
-			<div class="col-md-4">
-				<div class="footer-links">				
-					<div class="footer-links-body">
-						<h4 class="text-center">공지 & 이벤트</h4>
-
-
-<div class="clearfix">
-							<ul id="family-list" class="bxslider list-inline family-site">
-								<li>
-						                    <a target="_blank" href="http://www.astd.co.kr/">
-						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/72/banner_astd.gif" alt="" /></em>
-						                        <span>
-						                            <strong>문의</strong>
-						                            <small>02 2081 1092</small>
-						                        </span>
-						                    </a>
-						                </li>
-						                <li>
-						                    <a target="_blank" href="http://www.icpi.co.kr">
-						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/74/banner_icp.gif" alt="" /></em>
-						                        <span>
-						                           <strong>문의</strong>
-						                            <small>02 2081 1026</small>
-						                        </span>
-						                    </a>
-						                </li>
-						                <li>
-						                    <a href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')">
-						                    	<em class="overflow-hidden"><img src="${request.contextPath}/download/image/73/banner_receipt.gif" alt="" /></em>
-						                        <span>
-						                            <strong>문의</strong>
-						                            <small>02 2081 1016</small>
-						                        </span>
-						                    </a>
-								</li>
-							</ul>
-						</div>
-
-						
-					</div>					
-				</div>
-			</div><!--/col-md-4-->  
-			<div class="col-md-4">
-				<div class="footer-notice">					
-					<div class="footer-notice-body">
-						<h4 class="text-center">공지 & 이벤트</h4>
+			<!-- END MAIN CONTENT -->	
+			<div class="one-page">
+				<div class="one-page-inner one-dark">
+				
+				
+			<div class="container">			
+				<div class="row">
+					<div class="col-md-4">
+						<div class="headline">
+							<h5>공지 & 이벤트</h5>
+							<div class="headline-controls"><a class="btn-u btn-u-orange btn-u-xs" href="${request.contextPath}/press.do">더보기</a></div>
+						</div>						
 						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
-							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
-						</ul>				
-						<a class="btn-u btn-u-red btn-u-xs" href="${request.contextPath}/events.do">더보기</a>	
-					</div>		
-						
-				</div>
-			</div><!--/col-md-4-->
-			<div class="col-md-4">
-				<div class="footer-news">					
-					<div class="footer-news-body">
-						<h4 class="text-center">뉴스</h4>
-						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
-							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
+							<li><small class="hex">진행중인 공지 또는 이벤트가 없습니다.</small></li>
 						</ul>		
-						<a class="btn-u btn-u-red btn-u-xs" href="${request.contextPath}/press.do">더보기</a>	
-					</div>						
-				</div>
-			</div><!--/col-md-4-->
-		</div><!--/row-->   
-	</div><!--/container--> 
-</div><!--/footer-->    
-<!--=== End Footer ===-->
-		
+								
+					</div>
+					<div class="col-md-4">
+						<div class="headline">
+							<h5>뉴스</h5>
+							<div class="headline-controls"><a class="btn-u btn-u-blue btn-u-xs" href="${request.contextPath}/press.do">더보기</a></div>
+						</div>
+						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
+							<li><small class="hex">등록된 뉴스가 없습니다.</small></li>
+						</ul>	
+					</div>
+					<div class="col-md-4">
+						<div class="headline"><h5>최근 활동</h5></div>
+						<div id="myCarousel" class="carousel slide carousel-v1">
+			                    <div class="carousel-inner">
+			                        <div class="item active">
+			                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/5.jpg" alt="">
+			                            <div class="carousel-caption">
+			                                <p>XX 고객사 위탁교육실시</p>
+			                            </div>
+			                        </div>
+			                        <div class="item">
+			                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="">
+			                            <div class="carousel-caption">
+			                                <p>무신무신...</p>
+			                            </div>
+			                            </div>
+			                        <div class="item">
+			                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
+			                            <div class="carousel-caption">
+			                                <p>여름 수련회....</p>
+			                            </div>
+			                        </div>
+			                    </div>
+			                    
+			                    <div class="carousel-arrow">
+			                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			                            <i class="fa fa-angle-left"></i>
+			                        </a>
+			                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+			                            <i class="fa fa-angle-right"></i>
+			                        </a>
+			                    </div>
+							</div>
+						</div>
+					</div>
+				</div>	
+			</div></div>	
+				
+		</div><!-- /wrapper -->	
+		<!--=== Footer ===-->
+		<div class="footer bg-dark">
+			<div class="container layout">
+				<div class="row">
+					<div class="col-md-8">
+						<div class="row">
+							<div class="col-sm-4">
+								<ul class="list-unstyled">
+                                <li><strong>교육 서비스</strong></li>
+                                <li><i class="fa fa-angle-right"></i> 위탁 교육</li>
+                                <li><i class="fa fa-angle-right"></i> 스터디마트</li>
+                                <li><i class="fa fa-angle-right"></i> INTV</li>
+                            </ul>
+							</div>
+							<div class="col-sm-4">
+							<ul class="list-unstyled">
+                                <li><strong>솔루션</strong></li>
+                                <li><i class="fa fa-angle-right"></i> 인키움 HRD 컨설팅</li>
+                                <li><i class="fa fa-angle-right"></i> 인키움 HRD</li>
+                                <li><i class="fa fa-angle-right"></i> iCAP</li>
+                            </ul>					
+							<ul class="list-unstyled">
+                                <li><strong>자격시험</strong></li>
+                                <li><i class="fa fa-angle-right"></i> ICP</li>
+                            </ul>			                            		
+							</div>
+							<div class="col-sm-4">
+								<ul class="list-unstyled">
+                                <li><strong>대학사업</strong></li>
+                                <li><i class="fa fa-angle-right"></i> 대학경쟁력강화 컨설팅</li>
+                                <li><i class="fa fa-angle-right"></i> OLYGO 프로그램</li>
+                                <li><i class="fa fa-angle-right"></i> JobCAP 프로그램</li>
+                                <li><i class="fa fa-angle-right"></i> 취업역량강화 프로그램</li>
+                                <li><i class="fa fa-angle-right"></i> 온라인 콘텐츠</li>
+                                <li><i class="fa fa-angle-right"></i> 직립보행</li>
+                            </ul>	
+                            </div>
+						</div>
+					</div><!--/col-md-8-->
+					<div class="col-md-4">
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">원천징수 영수증 출력 (02 2081 1016)</a>
+                            					
+					<!--
+						<div class="footer-links">					
+							<div class="footer-links-body">
+							<p>&nbsp;</p>
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">원천징수 영수증 출력 (02 2081 1016)</a>			
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">ASTD 벤치마킹연수 (02 2081 1092)</a>		
+							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">ICP 프레젠티이션 자격시험 (02 2081 1026)</a>		
+							</div>						
+						</div>
+						-->
+					</div><!--/col-md-4-->
+				</div><!--/row-->   
+			</div><!--/container--> 
+		</div><!--/footer-->    
+		<!--=== End Footer ===-->		
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
-		<!-- END FOOTER -->	
-		
+		<!-- END FOOTER -->		
 		<!-- START TEMPLATE -->
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
