@@ -226,12 +226,16 @@ a.read-more:hover {
 	border-bottom:solid 2px #f37021;
 }
 
+.recent-work a:hover span {
+	border-bottom:solid 2px #f37021;
+}
+
 
 .bx-wrapper .bx-prev {
-	background-image: url(../../plugins/bxslider/images/controls-orange.png);
+	background-image: url(../common.plugins/images/controls-orange.png);
 }
 .bx-wrapper .bx-next {
-	background-image: url(../../plugins/bxslider/images/controls-orange.png);
+	background-image: url(../common.plugins/images/controls-orange.png);
 }
 
 /*Typography

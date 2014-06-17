@@ -479,6 +479,10 @@
 	padding : 0 0 0 0;
 }
 
+.top-paddingless {
+	padding-top : 0 ;
+}
+
 nav.personalized-navbar .dropdown > a {
 border-bottom: 0px;
 min-height: 52px;
@@ -1131,7 +1135,7 @@ header .personalized-controls-trigger {
 .purchase {
 	padding: 25px 0 30px;
 	border-bottom: solid 1px #eee;
-	background: url(../img/breadcrumbs.png) repeat;
+	background: url(/images/common/bg/breadcrumbs.png) repeat;
 }
 .purchase p {
 	margin-bottom: 0;
@@ -1357,11 +1361,105 @@ header .personalized-controls-trigger {
 	text-decoration: underline;
 }
 
+.carousel-caption p {
+	
+	
+}
+
 /*Footer*/
 .footer {
 	color: #777;
 	background: #fff;
 	padding: 20px 0 30px;
+}
+
+.footer.bg-dark {
+	background: #363839  ;	
+	color : #fff;
+}
+
+.footer.bg-dark a{
+	color : #fff;
+}
+
+.footer.bg-dark a:hover{
+	color : #fff;
+}
+
+.footer.bg-dark li {
+	color : #fff;
+}
+
+
+.footer.bg-pomegranate {
+	background: #f37021;	
+}
+
+.footer.bg-orange {
+	background: #e67e22;	
+	color: #fff;
+}
+
+.footer .footer-news , .footer .footer-notice, .footer .footer-links {
+	padding: 50px 0 0 0;
+	border-left: 1px solid rgba(255,255,255,0.2);
+	background: url(/images/common/icons/footer-top-icons.png) no-repeat center 0;
+	height: 220px;
+	margin-bottom: 10px;	
+}
+
+.footer .footer-links { 
+	border-left: 0px;	
+}
+
+.footer .footer-notice, .footer .footer-news {
+	background-position: center -635px;
+}
+
+.footer-news .footer-news-body , .footer-notice .footer-notice-body,  .footer-links .footer-links-body {
+	padding: 0 10px 0 10px;	
+}
+
+.footer-news .footer-news-body h4, .footer-notice .footer-notice-body  h4 ,  .footer-links .footer-links-body h4{
+	font-size: 1.25em;
+	font-weight: 200;
+	color: white;
+	margin-bottom: 0;
+}
+
+
+.footer.bg-pomegranate a {
+	color : #fff;	
+	font-size : 13px;
+	line-height:21px
+}
+.footer.bg-pomegranate a:hover {
+	color : #fff;	
+	opacity:0.8
+}
+
+.footer.bg-pomegranate i.fa {
+	color : #fff;	
+}
+
+.footer.bg-pomegranate li {
+	color : #fff;	
+	font-size : 13px;
+}
+
+
+@media (max-width: 768px) {
+	.footer .footer-news , .footer .footer-notice , .footer .footer-links {
+		padding: 40px 20px 0;
+		border: none;
+		height: auto;
+		margin: 4px 0 0 0;
+		border-top: 1px dotted rgba(255,255,255,0.2);
+	}
+	
+	.footer .footer-notice , .footer .footer-news {
+		background-position: center -618px;
+	}	
 }
 
 .footer.margin-top-0 {
@@ -1435,25 +1533,34 @@ header .personalized-controls-trigger {
 .copyright {
 	font-size: 12px;
 	padding: 11px 0 7px;
-	background: #f3f3f3;
+	background: #333333;
+	/*background: #f3f3f3;
 	border-top: solid 1px #ecf0f1;
+	/*/
+	
 }
 
 .copyright p {
-	color: #777;
+	/*color: #777;*/
+	color : #666666;	
 	margin-top: 12px;
 }
 
 .copyright a {
 	margin: 0 5px;
-	color: #72c02c;
+	color : #666666;	
+	/*color: #72c02c;*/
 }
 .copyright a:hover {
-	color: #a8f85f;
+	color : #777777;	
+	/*color: #a8f85f;*/
 }
 
 .copyright a img {
 	margin-top: 5px;
+}
+.copyright li a , .copyright li {
+	color: #666666;	
 }
 
 /*Breadcrumbs
@@ -1463,7 +1570,7 @@ header .personalized-controls-trigger {
 	overflow: hidden;
 	padding: 10px 0 6px;
 	border-bottom: solid 1px #eee;
-	background: url(../img/breadcrumbs.png) repeat;
+	background: url(/images/common/bg/breadcrumbs.png) repeat;
 }
 .breadcrumbs h1 {
 	color: #666;

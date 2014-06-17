@@ -1,8 +1,8 @@
 /**
- * BxSlider v4.0 - Fully loaded, responsive content slider
+ * BxSlider v4.1.2 - Fully loaded, responsive content slider
  * http://bxslider.com
  *
- * Written by: Steven Wanderski, 2012
+ * Written by: Steven Wanderski, 2014
  * http://stevenwanderski.com
  * (while drinking Belgian ales and listening to jazz)
  *
@@ -13,23 +13,36 @@
 
 /** RESET AND LAYOUT
 ===================================*/
+
 .bx-wrapper {
 	position: relative;
+	margin: 0 auto 60px;
 	padding: 0;
 	*zoom: 1;
 }
 
 .bx-wrapper img {
-	width: 100%;
+	max-width: 100%;
 	display: block;
 }
 
 /** THEME
 ===================================*/
-.bxslider {
-	left:1px;
-	margin-left:-1px;
-	position:relative;
+
+.bx-wrapper .bx-viewport {
+	-moz-box-shadow: 0 0 5px #ccc;
+	-webkit-box-shadow: 0 0 5px #ccc;
+	box-shadow: 0 0 5px #ccc;
+	border:  5px solid #fff;
+	left: -5px;
+	background: #fff;
+	
+	/*fix other elements on the page moving (on Chrome)*/
+	-webkit-transform: translatez(0);
+	-moz-transform: translatez(0);
+    	-ms-transform: translatez(0);
+    	-o-transform: translatez(0);
+    	transform: translatez(0);
 }
 
 .bx-wrapper .bx-pager,
@@ -37,7 +50,6 @@
 	position: absolute;
 	bottom: -30px;
 	width: 100%;
-	display:none;
 }
 
 /* LOADER */
@@ -91,41 +103,17 @@
 
 /* DIRECTION CONTROLS (NEXT / PREV) */
 
-.bx-wrapper .bx-prev {
-	right: 24px;
-	background: url(images/controls.png) no-repeat 0 -25px;
-}
-.bx-wrapper .bx-next {
-	right: 0;
-	background: url(images/controls.png) no-repeat -24px -25px;
-}
 
-.bx-wrapper .bx-prev:hover {
-	background-position: 0 0px;
-}
-
-.bx-wrapper .bx-next:hover {
-	background-position: -24px 0;
-}
-
-.bx-wrapper .bx-controls-direction a {
-	position: absolute;
-	top: -55px;
-	outline: 0;
-	width: 21px;
-	height: 22px;
-	text-indent: -9999px;
-	z-index: 9999;
-}
-/*
 .bx-wrapper .bx-prev {
 	left: 10px;
 	background: url(images/controls.png) no-repeat 0 -32px;
 }
+
 .bx-wrapper .bx-next {
 	right: 10px;
 	background: url(images/controls.png) no-repeat -43px -32px;
 }
+
 .bx-wrapper .bx-prev:hover {
 	background-position: 0 0;
 }
@@ -144,7 +132,6 @@
 	text-indent: -9999px;
 	z-index: 9999;
 }
-*/
 
 .bx-wrapper .bx-controls-direction a.disabled {
 	display: none;
