@@ -13,7 +13,7 @@
 			<#assign webSiteMenu = action.getWebSiteMenu("USER_MENU") />
 			<div class="header">
 				<div class="topbar">
-					<div class="container hidden">
+					<div class="container">
 						<!-- Topbar Navigation -->
 						<ul class="loginbar pull-right">
 							<li>
@@ -24,9 +24,9 @@
 										<a href="#">한국어 <i class="fa fa-check"></i></a> 
 									</li>
 								</ul>
-							</li>
+							</li><!--
 							<li class="topbar-devider"></li>   
-							<li><a href="##\">도움말</a></li>  
+							<li><a href="##\">도움말</a></li>  -->
 						</ul>
 						<!-- End Topbar Navigation -->
 					</div>
