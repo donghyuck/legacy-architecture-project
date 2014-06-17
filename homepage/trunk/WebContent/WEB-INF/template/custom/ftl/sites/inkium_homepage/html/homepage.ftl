@@ -428,7 +428,7 @@
 						</ul>	
 					</div>
 					<div class="col-md-4">
-						<div class="headline"><h5>최근 활동</h5></div>
+						<div class="headline hidden"><h5>최근 활동</h5></div>
 						<div id="myCarousel" class="carousel slide carousel-v1">
 			                    <div class="carousel-inner">
 			                        <div class="item active">
