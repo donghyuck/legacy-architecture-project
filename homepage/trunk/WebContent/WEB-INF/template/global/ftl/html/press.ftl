@@ -137,7 +137,7 @@
 						this.shown = false;
 					},
 					scrollup:function(e){
-						$('html,body').animate({ scrollTop:  0 }, 300);
+						$('html,body').animate({ scrollTop:  $('#topic-grid').offset().top }, 300);
 					},
 					scrolldown :function(e){
 						$('html,body').animate({scrollTop: renderTo.offset().top - 80 }, 300);
