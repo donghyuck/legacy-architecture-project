@@ -90,12 +90,13 @@
 					'#if( typeof viewCnt === "number") {#<small class="hex">(#: viewCnt #)</small>#}#</li>'
 				);				
 				announcement.dataSource().bind('change', function(){
-					alert(this.view().length);
-					$("#announce-view").html(kendo.render(template, this.view()))
+					if(this.view().length>0)
+						$("#announce-view").html(kendo.render(template, this.view()))
 				}).read();
 				
-				forum.dataSource().bind('change', function(){					
-					$("#news-view").html(kendo.render(template, this.view()))
+				forum.dataSource().bind('change', function(){		
+					if(this.view().length>0)			
+						$("#news-view").html(kendo.render(template, this.view()))
 				}).read();
 											 							 
 				<#if !action.user.anonymous ></#if>	
