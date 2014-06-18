@@ -25,8 +25,8 @@
                             </ul>			                            		
 							</div>
 							<div class="col-sm-4">
+							<h3 class="heading-sm no-top-space"><strong>Family site</strong></h3>
 								<ul class="list-unstyled">
-                                <li><strong>Family Site</strong></li>
                                 <li><a href="http://www.studymart.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> 스터디마트</a></li>
                                 <li><a href="http://www.icpi.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ICP</a></li>
                                 <li><a href="http://www.astd.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ASTD</a></li>
