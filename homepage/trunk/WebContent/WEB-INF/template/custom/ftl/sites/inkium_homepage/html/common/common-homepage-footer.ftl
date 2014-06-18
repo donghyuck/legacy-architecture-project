@@ -5,11 +5,14 @@
 					<div class="col-md-8">
 						<div class="row">
 							<div class="col-sm-4">
+								<h3 class="heading-sm no-top-space"><strong>회사 소개</strong></h3>
 								<ul class="list-unstyled">
-                                <li><strong>교육 서비스</strong></li>
-                                <li><i class="fa fa-angle-right"></i> 위탁 교육</li>
-                                <li><i class="fa fa-angle-right"></i> 스터디마트</li>
-                                <li><i class="fa fa-angle-right"></i> INTV</li>
+                                <li><i class="fa fa-angle-right"></i> 기업소개</li>
+                                <li><i class="fa fa-angle-right"></i> CEO 인사말</li>
+                                <li><i class="fa fa-angle-right"></i> 공지 & 이벤트</li>
+                                <li><i class="fa fa-angle-right"></i> 뉴스</li>
+                                <li><i class="fa fa-angle-right"></i> 고객사</li>
+                                <li><i class="fa fa-angle-right"></i> 오시는길</li>
                             </ul>
 							</div>
 							<div class="col-sm-4">
