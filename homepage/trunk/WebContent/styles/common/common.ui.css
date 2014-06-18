@@ -23,13 +23,6 @@ height:50px;
 }
 
 /* body */
-/* Naver nanumgothic font ---------------------- */
-@font-face {
-	font-family: "BM_NANUMGOTHIC";
-	src: url('../fonts/nanumgothic.eot');
-	src: local('☺'), url('../fonts/nanumgothic.woff') format('woff'), url('../fonts/nanumgothic.woff') format('truetype');
-}
-
 
 figure.img-full-width {
 	width: 100%;
@@ -149,7 +142,7 @@ img.img-full-height {
 }
 
 .fa>span {
-	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+	font-family: "나눔 고딕", "Nanum Gothic";
 } 
 
 .btn-img {
@@ -280,7 +273,7 @@ color: #FFF;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+	font-family: "나눔 고딕", "Nanum Gothic";
 }
 
 .modal-footer {
@@ -320,13 +313,6 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 /** personalized section  */
 
 nav.personalized-navbar {
-	/* height: 120px; */
-	/*margin-top: 0;
-	position : relative
-	height: 43px;
-	padding : 5px;
-	margin-bottom : 10px;
-	*/
 	background-color: rgba(19,167,199, 0.7) ; /*#13A7C7; */
 	border-radius : 0px;
 	top: 0;
@@ -637,7 +623,7 @@ section.hide-effect {
 body {
 	padding: 0;
 	margin: 0;
-	font-family: "나눔 고딕", "BM_NANUMGOTHIC";
+	font-family: "나눔 고딕", "Nanum Gothic";
 	font-weight: normal;
 	font-style: normal;
 	position: relative;
@@ -692,11 +678,11 @@ border-radius: 4px;
 
 /** forms */
 textarea {
-	font-family: "나눔 고딕", "BM_NANUMGOTHIC";	
+	font-family: "나눔 고딕", "Nanum Gothic";
 }
 
 input {
-	font-family: "나눔 고딕", "BM_NANUMGOTHIC";	
+	font-family: "나눔 고딕", "Nanum Gothic";
 }
 
 a.k-button:hover {	
@@ -1286,7 +1272,7 @@ div.jGrowl div.jGrowl-notification,div.jGrowl div.jGrowl-closer {
 	padding: 10px;
 	margin-top: 5px;
 	margin-bottom: 5px;
-	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-family: "나눔 고딕", "Nanum Gothic";
 	font-size: 1em;
 	text-align: left;
 	display: none;
