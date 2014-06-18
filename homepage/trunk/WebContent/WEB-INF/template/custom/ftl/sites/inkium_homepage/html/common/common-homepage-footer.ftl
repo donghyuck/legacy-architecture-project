@@ -26,8 +26,8 @@
 							</div>
 							<div class="col-sm-4">
 								<ul class="list-unstyled">
-                                <li><strong>대학사업</strong></li>
-                                <li><i class="fa fa-angle-right"></i> 대학경쟁력강화 컨설팅</li>
+                                <li><strong>Family Site</strong></li>
+                                <li><a href="http://www.studymart.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> 스터디마트</li></a>
                                 <li><i class="fa fa-angle-right"></i> OLYGO 프로그램</li>
                                 <li><i class="fa fa-angle-right"></i> JobCAP 프로그램</li>
                                 <li><i class="fa fa-angle-right"></i> 취업역량강화 프로그램</li>
@@ -38,7 +38,7 @@
 						</div>
 					</div><!--/col-md-8-->
 					<div class="col-md-4">
-							<a class="btn-u btn-u-blue btn-block" href="${request.contextPath}/press.do">원천징수 영수증 출력 (02 2081 1016)</a>
+							<a class="btn-u btn-u-blue btn-block" href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')" >원천징수 영수증 출력 (02 2081 1016)</a>
                             					
 					<!--
 						<div class="footer-links">					
