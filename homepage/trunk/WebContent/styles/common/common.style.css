@@ -1856,7 +1856,7 @@ a.thumbnail {
 	padding: 40px 0; 	
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
-	background: url(../img/breadcrumbs.png) repeat;
+	background: url(/images/common/bg/breadcrumbs.png) repeat;
 }
 
 /*Gallery Page
