@@ -842,7 +842,7 @@
 					</div><!-- / .details-row -->	
 					<div class="row">				
 						<div class="col-sm-12 ">				
-							<div id="site-grid" ></div>
+							<div id="website-grid" ></div>
 						</div>
 					</div>		
 				<div class="row">				
