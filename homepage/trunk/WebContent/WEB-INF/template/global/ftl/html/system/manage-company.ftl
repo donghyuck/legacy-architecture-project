@@ -329,7 +329,7 @@
 		
 		function hideCompanyDetails(){			
 			if( $("#company-details").text().length > 0 && $("#company-details").is(":visible") ){
-				var alwaysShowList = common.ui.admin.setup().isSwitcherEnabled("list-switcher");
+				var alwaysShowList = common.ui.admin.switcherEnabled("list-switcher");
 				var animate = "slideOutLeft" ;
 				if( alwaysShowList ){
 					animate = "fadeOutUp" ;
