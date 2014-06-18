@@ -2335,6 +2335,10 @@ h1 .label,h2 .label,h3 .label,h4 .label,h5 .label,h6 .label {
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, .2)
 }
 
+.badge.light-weight {
+	font-weight: 300;	
+}
+
 .badge.pull-right {
 	margin: 0
 }
