@@ -73,9 +73,16 @@
 	.header .dropdown-menu li a {
 		font-size : 15px;
 	}
-	
+
 	.navbar-collapse {
 		max-height: 100%;
+	}
+
+	/** .breadcrumb 
+	*/	
+	.header .breadcrumb {
+		padding: 8px 15px;
+		background: rgba( 130,157,182, .2);
 	}
 	
 	.k-editor-toolbar .k-tool {
