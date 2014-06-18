@@ -815,12 +815,16 @@
 							</div>
 						</div>
 						<div class="right-col">
-							<hr class="details-content-hr no-grid-gutter-h">	
+							<hr class="details-content-hr no-grid-gutter-h"/>	
 
 							<div class="row">
 							
 								<div calss="col-sm-12">
 
+								</div>
+							
+							</div>							
+							<div class="details-content">							
 									<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
 										<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
 										<li><a href="\\#groups" data-toggle="tab">그룹 <span class="badge badge-primary" data-bind="text:groupCount, visible:groupCount ">0</span></a></li>
@@ -830,10 +834,7 @@
 										<div class="tab-pane fade" id="props">
 											
 										</div>
-									</div>
-							
-							</div>							
-
+									</div>							
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
