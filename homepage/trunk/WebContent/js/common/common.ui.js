@@ -63,8 +63,63 @@
 			if(isFunction(always))
 				always();
 		});
-		return renderTo;
-		
+		return renderTo;		
+	}	
+
+	common.ui.animate_v3 = function (renderTo, animate, always){	
+		var oldCss = renderTo.attr('class');	
+		renderTo.addClass(animate + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){			
+			if( animate.indexOf("Out") > -1){
+				$(this).hide().removeClass(animate + ' animated');
+			}else{
+				$(this).show().removeClass(animate + ' animated');
+			}
+			if(isFunction(always))
+				always();			
+		});
+		return renderTo;		
+	}	
+	
+	common.ui.animateFade= function (renderTo, mode, always){		
+		var oldCls = renderTo.attr("class");
+		if( $.support.transition ){
+			if( oldCls.indexOf("fade") > -1 ){
+				renderTo.addClass( mode );
+			}else{
+				renderTo.addClass('fade ' + mode );
+			}			
+			 renderTo.one($.support.transition.end, function(){
+				if( mode === 'out')
+					renderTo.hide();
+				else
+					renderTo.show();
+					
+				if( oldCls.indexOf("fade") > -1 ){
+					renderTo.removeClass( mode );
+				}else{
+					renderTo.removeClass('fade ' + mode );
+				}					
+				if(isFunction(always))
+					always();			
+			 }).emulateTransitionEnd(150) ;
+		}else{
+			if( mode === 'out')
+				renderTo.hide();
+			else
+				renderTo.show();
+			
+			if(isFunction(always))
+				always();			
+		}
+		return renderTo;		
+	}
+	
+	common.ui.animateFadeOut = function (renderTo, always){		  
+		common.ui.animateFade(renderTo, 'out', always);
+	}
+	
+	common.ui.animateFadeIn = function (renderTo, always){		  
+		common.ui.animateFade(renderTo, 'in', always);
 	}	
 	
 	common.ui.initializeOwlCarousel = function (){
