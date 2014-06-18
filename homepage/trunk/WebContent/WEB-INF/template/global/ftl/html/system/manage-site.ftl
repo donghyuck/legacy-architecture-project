@@ -841,7 +841,10 @@
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
 					<div class="row">				
-						<div class="col-sm-12 ">				
+						<div class="col-sm-12 ">		
+							<h4>
+								<small><i class="fa fa-info"></i> 키 컬럼의 버튼을 클릭하면 해당하는 사이트를 관리할 수 있습니다.</small>
+							</h4>		
 							<div id="website-grid" ></div>
 						</div>
 					</div>		
