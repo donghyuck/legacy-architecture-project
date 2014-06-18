@@ -83,6 +83,7 @@
 	.header .breadcrumb {
 		padding: 8px 15px;
 		background: rgba( 130,157,182, .2);
+		border-radius: 4px !important;
 	}
 	
 	.k-editor-toolbar .k-tool {
