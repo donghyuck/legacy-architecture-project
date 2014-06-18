@@ -729,15 +729,15 @@
 								<table class="table">
 									<tbody>						
 										<tr>
-											<td><small><span class="badge">도메인</span></small></td>								
+											<td><small><span class="badge light-weight">도메인</span></small></td>								
 											<td><span data-bind="text:company.domainName"></span></td>
 										</tr>	
 										<tr>
-											<th><small><span class="badge">생성일</span></small></th>								
+											<th><small><span class="badge light-weight">생성일</span></small></th>								
 											<td><span data-bind="text:formattedCreationDate"></span></td>
 										</tr>	
 										<tr>
-											<th><small><span class="badge">수정일</span></small></th>								
+											<th><small><span class="badge light-weight">수정일</span></small></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>														
 									</tbody>
