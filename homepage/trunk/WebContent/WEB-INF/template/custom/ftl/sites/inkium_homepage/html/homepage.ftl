@@ -410,7 +410,7 @@
 				<div class="row">
 					<div class="col-md-4">
 						<div class="headline">
-							<h5>공지 & 이벤트</h5>
+							<h3 class="heading-sm no-top-space"><strong>공지 & 이벤트</strong></h3>
 							<div class="headline-controls"><a class="btn-u btn-u-blue btn-u-xs" href="${request.contextPath}/press.do">더보기</a></div>
 						</div>						
 						<ul  id="announce-view" class="list-unstyled summaries" style="min-height:100px;">						
