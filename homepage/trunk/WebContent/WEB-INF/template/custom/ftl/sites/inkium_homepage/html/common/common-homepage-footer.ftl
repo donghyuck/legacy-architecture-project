@@ -25,13 +25,24 @@
                             </ul>			                            		
 							</div>
 							<div class="col-sm-4">
-							<h3 class="heading-sm no-top-space"><strong>Family site</strong></h3>
+								<h3 class="heading-sm no-top-space"><strong>Family site</strong></h3>
 								<ul class="list-unstyled">
-                                <li><a href="http://www.studymart.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> 스터디마트</a></li>
-                                <li><a href="http://www.icpi.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ICP</a></li>
-                                <li><a href="http://www.astd.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ASTD</a></li>
-                            </ul>	
-                            </div>
+									<li><a href="http://www.studymart.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> 스터디마트</a></li>
+									<li><a href="http://www.icpi.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ICP</a></li>
+									<li><a href="http://www.astd.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ASTD</a></li>
+								</ul>	
+								<h3 class="heading-sm no-top-space"><strong>쇼셜 미디어</strong></h3>
+								<ul class="social-icons">
+                        <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
+                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+                        <li><a href="#" data-original-title="Goole Plus" class="social_googleplus"></a></li>
+                        <li><a href="#" data-original-title="Pinterest" class="social_pintrest"></a></li>
+                        <li><a href="#" data-original-title="Linkedin" class="social_linkedin"></a></li>
+                        <li><a href="#" data-original-title="Vimeo" class="social_vimeo"></a></li>
+                    </ul>
+                    
+							</div>
 						</div>
 					</div><!--/col-md-8-->
 					<div class="col-md-4">
