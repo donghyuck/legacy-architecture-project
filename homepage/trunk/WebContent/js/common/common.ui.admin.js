@@ -14,19 +14,21 @@
 	UNDEFINED = 'undefined',
 	POST = 'POST',
 	OBJECT_TYPE = 30 ,
+	ACCOUNT_RENDER_ID = "account-panel",
+	COMPANY_SELECTOR_RENDER_ID = "targetCompany",
 	JSON = 'json';
 		
 	common.ui.admin.Setup = kendo.Class.extend({		
-		init : function (options){
-			options = options || {};			
+		init : function (options){			
 			var that = this;
+			options = options || {};				
 			that.options = options;
 			that._pixelAdmin = window.PixelAdmin;			
 			that.refresh();
 		},		
 		_doAuthenticate : function(){		
 			var that = this;
-			var renderTo = "account-panel";				
+			var renderTo = ACCOUNT_RENDER_ID;				
 			if ($("#" +renderTo ).length == 0) {
 				$('body').append(	'<div id="' + renderTo + '" style="display:none;"></div>');
 			}
@@ -40,7 +42,8 @@
 		},
 		_createCompanySelector : function(){	
 			var that = this;
-			$('#targetCompany').kendoDropDownList({
+			var renderTo = COMPANY_SELECTOR_RENDER_ID;				
+			that.companySelector = $('#' + renderTo).kendoDropDownList({
 				dataTextField: 'displayName',	
 				dataValueField: 'companyId',
 				dataSource: {
@@ -56,13 +59,30 @@
 						model : Company
 					}
 				},
-				change : function (e){			
+				change : function (e){				
 					if( isFunction( that.options.companyChanged ) )
-						that.options.companyChanged( this.dataSource.get(this.value) );
-				} 
-			});		
-			
+						that.options.companyChanged( this.dataSource.get(this.value()) );
+				},
+				dataBound : function(e){
+					if( isFunction( that.options.companyChanged ) )
+						that.options.companyChanged( this.dataSource.get(this.value()) );
+				}
+			}).data('kendoDropDownList');			
 		},
+		_createMenuContent : function (){		
+			var that = this;
+			$.each( $('input[role="switcher"]'), function( index, element ){
+				$(element).switcher();						
+				$(element).change(function(){
+					if( isFunction( that.options.switcherChanged ) ){
+						that.options.switcherChanged( $(this).attr("name"), $(this).is(":checked") );						
+					}
+				});
+			} );
+		},
+		isSwitcherEnabled:function(name){
+			return $('input[role="switcher"][name="' + name + '"]').is(":checked") ;			
+		}, 
 		refresh: function(){			
 			var that = this;
 			$('.menu-content-profile .close').click(function () {
@@ -76,14 +96,27 @@
 				return false;
 			});
 			that._createCompanySelector();			
+			that._createMenuContent();
 			that._doAuthenticate();
 			that._pixelAdmin.start([]);	
 		}
 	});	
+	
 })(jQuery);
 
-common.ui.admin.setup = function (options){
-	options = options || {};			
-	return new common.ui.admin.Setup(options);	
+
+common.ui.admin.setup = function (options){	
+	options = options || {};
+	if( $("#main-wrapper").text().length > 0 ){	
+		if( $("#main-wrapper").data("admin-setup") ){
+			return $("#main-wrapper").data("admin-setup");		
+		}else{			
+			var setup = new common.ui.admin.Setup(options);	
+			 $("#main-wrapper").data("admin-setup", setup );
+			 return setup;
+		}
+	}else{
+		return new common.ui.admin.Setup(options);	
+	}		
 }
 	
