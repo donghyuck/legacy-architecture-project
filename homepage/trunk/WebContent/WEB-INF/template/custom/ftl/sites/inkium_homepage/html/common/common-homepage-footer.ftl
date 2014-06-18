@@ -27,12 +27,9 @@
 							<div class="col-sm-4">
 								<ul class="list-unstyled">
                                 <li><strong>Family Site</strong></li>
-                                <li><a href="http://www.studymart.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> 스터디마트</li></a>
-                                <li><i class="fa fa-angle-right"></i> OLYGO 프로그램</li>
-                                <li><i class="fa fa-angle-right"></i> JobCAP 프로그램</li>
-                                <li><i class="fa fa-angle-right"></i> 취업역량강화 프로그램</li>
-                                <li><i class="fa fa-angle-right"></i> 온라인 콘텐츠</li>
-                                <li><i class="fa fa-angle-right"></i> 직립보행</li>
+                                <li><a href="http://www.studymart.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> 스터디마트</a></li>
+                                <li><a href="http://www.icpi.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ICP</a></li>
+                                <li><a href="http://www.astd.co.kr/" target="_blank"><i class="fa fa-angle-right"></i> ASTD</a></li>
                             </ul>	
                             </div>
 						</div>
