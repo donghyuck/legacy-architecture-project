@@ -825,17 +825,29 @@
 							
 							</div>							
 							<div class="details-content">							
-									<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
-										<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-										<li><a href="\\#groups" data-toggle="tab">이미지</a></li>
-										<li><a href="\\#groups" data-toggle="tab">파일</a></li>
-										<li><a href="\\#users" data-toggle="tab">타임라인</a></li>
-										<li><a href="\\#users" data-toggle="tab">로고</a></li>
+									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
+										<li><a href="\\#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
+										<li><a href="\\#website-tabs-images" data-toggle="tab">이미지</a></li>
+										<li><a href="\\#website-tabs-files" data-toggle="tab">파일</a></li>
+										<li><a href="\\#website-tabs-timeline" data-toggle="tab">타임라인</a></li>
+										<li><a href="\\#website-tabs-logo" data-toggle="tab">로고</a></li>
 									</ul>	
-									<div class="tab-content tab-content-bordered no-padding">								
-										<div class="tab-pane fade" id="props">
+									<div class="tab-content tab-content-bordered panel-padding">								
+										<div class="tab-pane fade" id="website-tabs-props">
 											
 										</div>
+										<div class="tab-pane fade" id="website-tabs-props">
+											
+										</div>
+										<div class="tab-pane fade" id="website-tabs-images">
+											
+										</div>
+										<div class="tab-pane fade" id="website-tabs-files">
+											
+										</div>
+										<div class="tab-pane fade" id="website-tabs-timeline">
+											
+										</div>																																								
 									</div>							
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
