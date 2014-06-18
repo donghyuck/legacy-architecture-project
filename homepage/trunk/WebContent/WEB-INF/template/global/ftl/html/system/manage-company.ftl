@@ -347,7 +347,7 @@
 		function showCompanyDetails(){
 			var renderTo = $('#company-details');
 			var companyPlaceHolder = getSelectedCompany();
-			var alwaysShowList = common.ui.admin.setup().isSwitcherEnabled("list-switcher");			
+			var alwaysShowList = common.ui.admin.switcherEnabled("list-switcher");			
 			
 			if( renderTo.text().length === 0 ){
 				renderTo.html(kendo.template($('#company-details-template').html()));
