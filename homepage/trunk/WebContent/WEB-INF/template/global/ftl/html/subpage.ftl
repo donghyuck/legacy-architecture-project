@@ -53,7 +53,7 @@
 					<#if action.isSetNavigator()  >
 					<#assign current_menu = action.getNavigator() />					
 							<ul class="pull-left breadcrumb">
-				                <li><a href="main.do">홈</a></li>
+				                <li><a href="main.do"><i class="fa fa-home"></i></a></li>
 				                <li><a href="">${current_menu.parent.title}</a></li>
 				                <li class="active">${current_menu.title}</li>
 				            </ul>
