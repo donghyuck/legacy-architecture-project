@@ -152,7 +152,8 @@
 				</#list>						
 				</ul> <!-- / .navigation -->
 				<div class="menu-content">
-					<!-- <a href="pages-invoice.html" class="btn btn-primary btn-block btn-outline dark">Create Invoice</a> -->
+					<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">목록 항상 보여주기</h6>
+					<input type="checkbox" name="list-switcher" data-class="switcher-primary" role="switcher" >	
 				</div>
 			</div> <!-- / #main-menu-inner -->
 		</div> <!-- / #main-menu -->
