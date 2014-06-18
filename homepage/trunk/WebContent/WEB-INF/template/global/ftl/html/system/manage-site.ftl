@@ -840,7 +840,11 @@
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
-	
+					<div class="row">				
+						<div class="col-sm-12 ">				
+							<div id="site-grid" ></div>
+						</div>
+					</div>		
 				<div class="row">				
 					<div class="col-sm-12 ">				
 					
@@ -968,12 +972,13 @@
 										<small><i class="fa fa-info"></i> 키 컬럼의 버튼을 클릭하면 해당하는 사이트를 관리할 수 있습니다.</small>
 								</h5>
 							</div>								
-							<div id="website-grid"></div>						
+											
 						</div>
 						<div class="panel-body" style="padding:5px;"></div>
 					</div>	
 										
 					</div>
+				
 				</div>
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
