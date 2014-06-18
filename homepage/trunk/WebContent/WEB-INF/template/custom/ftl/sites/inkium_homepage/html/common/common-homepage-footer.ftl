@@ -33,7 +33,6 @@
 								</ul>	
 								<h3 class="heading-sm no-top-space"><strong>쇼셜 미디어</strong></h3>
 								<ul class="social-icons">
-                        <li><a href="#" data-original-title="Feed" class="social_rss"></a></li>
                         <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
                         <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
                     </ul>
