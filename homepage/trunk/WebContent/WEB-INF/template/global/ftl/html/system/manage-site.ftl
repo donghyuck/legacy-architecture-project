@@ -203,6 +203,80 @@
 			}							
 		}
 
+
+
+		function showCompanySetting(){
+			var renderTo = $('.panel[data-action="update-company"]');
+			if( !renderTo.is(":visible") ){
+				common.ui.animate_v3(renderTo, "fadeInDown").show();
+			}else{
+				common.ui.animate_v3(renderTo, "fadeOutUp").show();
+			}	
+		
+		/*
+			var renderToString = "company-setting-modal";
+			if( $("#"+ renderToString).length == 0 ){
+				$('body').append('<div id="'+ renderToString +'"/>');
+			}
+			var companySetting = $("#"+ renderToString);
+			if( !companySetting.data('kendoExtModalWindow') ){			
+				
+				var companyPlaceHolder = new Company();
+				$("#navbar").data("companyPlaceHolder").copy(companyPlaceHolder);
+
+				var companySettingViewModel =  kendo.observable({ 
+					onSave : function(e){
+					alert(this.get('company').companyId);
+						$.ajax({
+							type : 'POST',
+							url : '${request.contextPath}/secure/update-company.do?output=json',
+							data: { companyId : this.get('company').companyId, item : kendo.stringify( this.get('company') ) },
+							success : function(response){
+								window.location.reload( true );
+							},
+							error:common.api.handleKendoAjaxError,
+							dataType : "json"
+						});
+					},
+					isVisible: true,
+					company: companyPlaceHolder,
+					properties : new kendo.data.DataSource({
+						transport: { 
+							read: { url:'${request.contextPath}/secure/get-company-property.do?output=json', type:'post' },
+							create: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post' },
+							update: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post'  },
+							destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
+					 		parameterMap: function (options, operation){			
+						 		if (operation !== "read" && options.models) {
+						 			return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
+								} 
+								return { companyId: companyPlaceHolder.companyId }
+							}
+						},	
+						batch: true, 
+						schema: {
+							data: "targetCompanyProperty",
+							model: Property
+						},
+						error : common.api.handleKendoAjaxError
+					})
+				} );						
+				companySetting.extModalWindow({
+					title : "회사 정보 변경",
+					template : $("#company-setting-modal-template").html(),
+					data :  companySettingViewModel,
+					change : function (e) {
+						if( e.field.match('^company.')){							
+							$(e.element).find('.modal-footer .btn.custom-update').removeAttr('disabled');
+						}
+					}
+				});			
+			}				
+			companySetting.data('kendoExtModalWindow')._modal().find('.modal-footer .btn.custom-update').attr('disabled', 'disabled');	
+			companySetting.data('kendoExtModalWindow').open();		
+			*/
+		}
+
 		function createSocialPane(){
 			var selectedCompany = getSelectedCompany();
 			if( ! $("#social-grid").data("kendoGrid") ){
@@ -650,68 +724,8 @@
 			$("#navbar").data("kendoExtNavbar").go("view-site.do");							
 		}
 		
-		function showCompanySetting(){
-			var renderToString = "company-setting-modal";
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"/>');
-			}
-			var companySetting = $("#"+ renderToString);
-			if( !companySetting.data('kendoExtModalWindow') ){			
-				
-				var companyPlaceHolder = new Company();
-				$("#navbar").data("companyPlaceHolder").copy(companyPlaceHolder);
 
-				var companySettingViewModel =  kendo.observable({ 
-					onSave : function(e){
-					alert(this.get('company').companyId);
-						$.ajax({
-							type : 'POST',
-							url : '${request.contextPath}/secure/update-company.do?output=json',
-							data: { companyId : this.get('company').companyId, item : kendo.stringify( this.get('company') ) },
-							success : function(response){
-								window.location.reload( true );
-							},
-							error:common.api.handleKendoAjaxError,
-							dataType : "json"
-						});
-					},
-					isVisible: true,
-					company: companyPlaceHolder,
-					properties : new kendo.data.DataSource({
-						transport: { 
-							read: { url:'${request.contextPath}/secure/get-company-property.do?output=json', type:'post' },
-							create: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post' },
-							update: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post'  },
-							destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
-					 		parameterMap: function (options, operation){			
-						 		if (operation !== "read" && options.models) {
-						 			return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
-								} 
-								return { companyId: companyPlaceHolder.companyId }
-							}
-						},	
-						batch: true, 
-						schema: {
-							data: "targetCompanyProperty",
-							model: Property
-						},
-						error : common.api.handleKendoAjaxError
-					})
-				} );						
-				companySetting.extModalWindow({
-					title : "회사 정보 변경",
-					template : $("#company-setting-modal-template").html(),
-					data :  companySettingViewModel,
-					change : function (e) {
-						if( e.field.match('^company.')){							
-							$(e.element).find('.modal-footer .btn.custom-update').removeAttr('disabled');
-						}
-					}
-				});			
-			}				
-			companySetting.data('kendoExtModalWindow')._modal().find('.modal-footer .btn.custom-update').attr('disabled', 'disabled');	
-			companySetting.data('kendoExtModalWindow').open();		
-		}
+		
 		
 		</script>
 		<style>					
@@ -811,7 +825,8 @@
 									</div>
 									<div class="panel-body no-padding-hr">
 										<div class="row">
-											<div class="col-lg-6">											
+											<div class="col-lg-6">		
+												<!-- logo upload panel -->									
 												<div class="panel panel-info" data-action="upload-logo" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close btn-control-group" data-action="close-upload-logo">×</button>
@@ -822,8 +837,15 @@
 													</div>
 													<div class="panel-body scrollable" style="max-height:450px;">
 														<div id="logo-grid"></div>
-													</div>										
-												</div>											
+													</div>																						
+												</div>
+												<!-- ./logo upload panel -->			
+												<!-- company setting panel -->				
+												<div panel panel-info" data-action="update-company" style="display:none;">
+												
+												
+												</div>
+												<!-- ./company setting panel -->								
 											</div>
 										</div>
 									</div>
