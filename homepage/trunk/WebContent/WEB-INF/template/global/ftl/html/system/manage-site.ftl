@@ -775,7 +775,7 @@
 				<!-- details-row -->
 				<div class="page-details" style="">
 					<div class="details-row no-margin-t">					
-						<div class="left-col">
+						<div  id="company-details"  class="left-col">
 							<div class="details-block no-margin-t">
 								<div class="details-photo">
 									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
@@ -785,7 +785,7 @@
 								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
 								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
 							</div>				
-							<div id="company-details" class="panel panel-transparent">
+							<div class="panel panel-transparent">
 								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:company.description"></span>									
 								</div>
