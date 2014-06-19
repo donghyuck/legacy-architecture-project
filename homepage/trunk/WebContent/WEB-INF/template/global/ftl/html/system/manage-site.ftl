@@ -853,12 +853,12 @@
 										&nbsp;
 										<div class="panel-heading-controls">
 											<div class="btn-group">
-												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:transport"" ><i class="fa fa-users"></i> 그룹관리</button>
-												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:transport""><i class="fa fa-user"></i> 사용자 관리</button>
+												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:transport"" ><i class="fa fa-users"></i> 그룹관리</button>
+												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:transport""><i class="fa fa-user"></i> 사용자 관리</button>
 											</div>																						
 											<div class="btn-group">
-												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel"><i class="fa fa-upload" ></i> 로고 업로드</button>
-												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
+												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel"><i class="fa fa-upload" ></i> 로고 업로드</button>
+												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
 											</div>											
 										</div>
 									</div>
