@@ -206,7 +206,12 @@
 
 
 		function showCompanySetting(){
+		
 			var renderTo = $('.panel[data-action="update-company"]');
+			
+			
+			
+			
 			if( !renderTo.is(":visible") ){
 				common.ui.animate_v3(renderTo, "fadeInDown").show();
 			}else{
@@ -842,8 +847,12 @@
 												<!-- ./logo upload panel -->			
 												<!-- company setting panel -->				
 												<div panel panel-info" data-action="update-company" style="display:none;">
-												
-												
+													<div class="panel-heading">
+														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
+													</div>
+													<div class="panel-body">		
+													
+													</div>
 												</div>
 												<!-- ./company setting panel -->								
 											</div>
@@ -1042,6 +1051,17 @@
 		</footer>
 		<!-- END FOOTER -->
 		
+		<script id="company-setting-template" type="text/x-kendo-template">			
+			<div class="panel panel-default">
+				<div class="panel-body paddingless pull-right">
+					<button type="button" class="btn btn-link btn-control-group" data-action="top"><i class="fa fa-angle-double-up fa-lg"></i></button>
+				</div>
+				<div class="panel-body">
+				
+				
+				</div>			
+			</div>
+		</script>
 		<script id="image-details-template" type="text/x-kendo-template">				
 			<div class="panel panel-default">
 				<div class="panel-body paddingless pull-right">
