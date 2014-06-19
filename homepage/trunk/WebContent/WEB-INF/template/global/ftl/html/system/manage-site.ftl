@@ -46,8 +46,21 @@
 				// 1-3.  관리자  로딩
 				var currentUser = new User();	
 				var detailsModel = kendo.observable({
-					company : new Company()
+					company : new Company(),
+					onSave : function(e){					
+						$.ajax({
+							type : 'POST',
+							url : '${request.contextPath}/secure/update-company.do?output=json',
+							data: { companyId : this.get('company').companyId, item : kendo.stringify( this.get('company') ) },
+							success : function(response){
+								window.location.reload( true );
+							},
+							error:common.api.handleKendoAjaxError,
+							dataType : "json"
+						});
+					}										
 				});	
+				
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
 						var sender = e.sender ;
@@ -66,7 +79,7 @@
 					companyChanged: function(item){
 						item.copy(detailsModel.company);
 						kendo.bind($("#company-info"), detailsModel.company );						
-						kendo.bind($("#company-details"), detailsModel.company );
+						kendo.bind($("#company-details"), detailsModel );
 						displayCompanyDetails();						
 						//$('button.btn-control-group').removeAttr("disabled");									
 					}
@@ -206,28 +219,20 @@
 
 
 		function showCompanySetting(){		
-			var renderTo = $('.panel[data-action="update-company"]');			
+			var renderTo = $('.panel[data-action="update-company"]');	
+			/*
 			if(!renderTo.data('model') ){
 				var model =  kendo.observable({
 					company: new Company(),
-					onSave : function(e){					
-						$.ajax({
-							type : 'POST',
-							url : '${request.contextPath}/secure/update-company.do?output=json',
-							data: { companyId : this.get('company').companyId, item : kendo.stringify( this.get('company') ) },
-							success : function(response){
-								window.location.reload( true );
-							},
-							error:common.api.handleKendoAjaxError,
-							dataType : "json"
-						});
-					}										
+										
 				});
 				renderTo.data('model', model) 	
 				kendo.bind( renderTo, model );		
 			}
 						
 			getSelectedCompany.copy( renderTo.data('model') );			
+			*/
+			
 			if( !renderTo.is(":visible") ){
 				common.ui.animate_v3(renderTo, "fadeInDown").show();
 			}else{
@@ -789,9 +794,9 @@
 					</div>				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
-				<div class="page-details" style="">
+				<div id="company-details" class="page-details" style="">
 					<div class="details-row no-margin-t">					
-						<div  id="company-details"  class="left-col">
+						<div class="left-col">
 							<div class="details-block no-margin-t">
 								<div class="details-photo">
 									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
