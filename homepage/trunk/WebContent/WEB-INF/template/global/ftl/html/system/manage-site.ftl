@@ -856,19 +856,19 @@
 													</div>
 													<div class="panel-body no-padding-hr">
 														<div class="form-group no-margin-hr panel-padding-h no-padding-t no-border-t">
-															<div class="row">
+															<div class="row form-group">
 																<label class="col-sm-4 control-label">이름:</label>
 																<div class="col-sm-8">
 																	<input type="text" name="name" class="form-control">
 																</div>
 															</div>
-															<div class="row">
+															<div class="row form-group">
 																<label class="col-sm-4 control-label">설명:</label>
 																<div class="col-sm-8">
 																	<input type="text" name="name" class="form-control">
 																</div>
 															</div>																
-															<div class="row">
+															<div class="row form-group">
 																<label class="col-sm-4 control-label">도메인:</label>
 																<div class="col-sm-8">
 																	<input type="text" name="name" class="form-control">
@@ -877,7 +877,7 @@
 														</div>
 													</div>
 													<div class="panel-footer text-right">
-														<button class="btn btn-primary">Submit</button>
+														<button class="btn btn-primary btn-flat">확인</button>
 													</div>
 												</div>
 												<!-- ./company setting panel -->								
