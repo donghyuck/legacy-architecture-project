@@ -966,7 +966,7 @@
 												
 										</div>
 										<div class="tab-pane fade" id="company-tabs-images">
-											<div class="panel panel-dark">
+											<div class="panel panel-transparent">
 												<div class="panel-body">
 													<input name="image-upload" id="image-upload" type="file" />
 												</div>		
