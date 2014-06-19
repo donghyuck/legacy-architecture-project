@@ -854,7 +854,7 @@
 														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
 														<span class="panel-title">회사 정보 변경</span>
 													</div>
-													<div class="panel-body no-padding-hr">
+													<div class="panel-body">
 															<div class="row form-group">
 																<label class="col-sm-4 control-label">이름:</label>
 																<div class="col-sm-8">
