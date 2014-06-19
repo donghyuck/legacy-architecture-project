@@ -48,14 +48,13 @@
 				var detailsModel = kendo.observable({
 					company : new Company(),
 					isEnabled : false,
-					toggleLogoUploadPanel : function(e){
-					alert( kendo.stringify(e) );
-						createLogoUploadPanel();
-					},
-					togglePanel:function(e){
-					
-					alert( $(e.target).attr('data-action') );
-					
+					toggleOptionPanel:function(e){					
+						var action = $(e.target).attr('data-action') );
+						if( action === 'upload-logo' ){						
+							toggleLogoUploadPanel();
+						}else if( action === 'update-company' ){
+							toggleCompanyUpdatePanel();
+						}					
 					},
 					onSave : function(e){					
 						$.ajax({
@@ -169,7 +168,7 @@
 			return setup.companySelector.dataItem(setup.companySelector.select());
 		}
 		
-		function createLogoUploadPanel(){
+		function toggleLogoUploadPanel(){
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
@@ -231,7 +230,7 @@
 
 
 
-		function showCompanySetting(){		
+		function toggleCompanyUpdatePanel(){		
 			var renderTo = $('.panel[data-action="update-company"]');	
 			/*
 			if(!renderTo.data('model') ){
