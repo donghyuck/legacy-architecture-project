@@ -1035,7 +1035,7 @@
 		<!-- END FOOTER -->
 
 		<script id="image-details-template" type="text/x-kendo-template">				
-			<div class="panel panel-default">
+			<div class="panel panel-default no-margin-b">
 				<div class="panel-body paddingless pull-right">
 					<button type="button" class="btn btn-link btn-control-group" data-action="top"><i class="fa fa-angle-double-up fa-lg"></i></button>
 				</div>
