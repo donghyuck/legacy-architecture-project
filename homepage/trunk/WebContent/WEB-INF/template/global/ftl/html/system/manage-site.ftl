@@ -103,7 +103,7 @@
 						'upload-logo': function(e){
 							displayLogoUpload();				
 						},
-						'close.upload-logo': function(e){
+						'close-upload-logo': function(e){
 							$("button.btn-control-group[data-action='upload-logo']").click();
 						},						
 						connect : function(e){
