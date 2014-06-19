@@ -100,7 +100,7 @@
 						'close-timeline': function(e){
 							$("button.btn-control-group[data-action='timeline']").click();
 						},
-						logo: function(e){
+						'upload-logo': function(e){
 							createLogoPanel();
 							$('#company-details .panel[role="logo"]').toggleClass('hide');							
 						},
