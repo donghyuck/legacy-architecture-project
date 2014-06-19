@@ -848,12 +848,22 @@
 											</div>
 											<div class="col-lg-6">		
 												<!-- company setting panel -->				
-												<div class="panel panel-info" data-action="update-company" style="display:none;">
+												<div class="panel form-horizontal form-bordered" data-action="update-company" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
 													</div>
-													<div class="panel-body">
-													
+													<div class="panel-body no-padding-hr">
+														<div class="form-group no-margin-hr panel-padding-h no-padding-t no-border-t">
+															<div class="row">
+																<label class="col-sm-4 control-label">Name:</label>
+																<div class="col-sm-8">
+																	<input type="text" name="name" class="form-control">
+																</div>
+															</div>
+														</div>
+													</div>
+													<div class="panel-footer text-right">
+														<button class="btn btn-primary">Submit</button>
 													</div>
 												</div>
 												<!-- ./company setting panel -->								
