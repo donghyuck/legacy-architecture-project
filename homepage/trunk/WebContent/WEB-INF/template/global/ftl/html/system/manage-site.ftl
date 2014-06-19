@@ -973,8 +973,7 @@
 												<div class="panel-body">
 													<div id="image-grid"></div>												
 												</div>	
-												<div id="image-details" class="panel-body hide">
-												
+												<div id="image-details" class="panel-body no-padding-t  hide">												
 												</div>																					
 											</div>
 																				
