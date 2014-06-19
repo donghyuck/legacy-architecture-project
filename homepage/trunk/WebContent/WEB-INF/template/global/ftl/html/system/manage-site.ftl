@@ -930,9 +930,6 @@
 										<div class="tab-pane fade" id="website-tabs-props">
 											
 										</div>
-										<div class="tab-pane fade" id="website-tabs-props">
-											
-										</div>
 										<div class="tab-pane fade" id="website-tabs-images">
 											
 										</div>
