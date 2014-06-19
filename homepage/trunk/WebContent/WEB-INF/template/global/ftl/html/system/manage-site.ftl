@@ -866,7 +866,7 @@
 										<div class="row">
 											<div class="col-lg-6">		
 												<!-- logo upload panel -->									
-												<div class="panel panel-info" data-action="upload-logo" style="display:none;">
+												<div class="panel panel-default" data-action="upload-logo" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close btn-control-group"  data-action="upload-logo" data-bind="click:toggleOptionPanel">×</button>
 														<span class="panel-title">로고 업로드</span>
