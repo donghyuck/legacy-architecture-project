@@ -824,7 +824,7 @@
 											</div>																						
 											<div class="btn-group">
 												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo" data-toggle="button"><i class="fa fa-upload"></i> 로고 업로드</button>
-												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="modify-company" data-toggle="button"><i class="fa fa-pencil"></i> 정보변경</button>
+												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="update-company" data-toggle="button"><i class="fa fa-pencil"></i> 정보변경</button>
 											</div>											
 										</div>
 									</div>
