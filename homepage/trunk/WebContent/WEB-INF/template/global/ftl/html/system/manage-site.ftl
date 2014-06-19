@@ -869,7 +869,7 @@
 											</div>
 											<div class="col-lg-6">		
 												<!-- company setting panel -->				
-												<div class="panel form-horizontal form-bordered" data-action="update-company" style="display:none;">
+												<div class="panel form-horizontal" data-action="update-company" style="display:none;">
 													<div class="panel-heading">
 														
 														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
