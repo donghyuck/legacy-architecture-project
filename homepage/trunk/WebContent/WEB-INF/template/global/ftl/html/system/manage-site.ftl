@@ -52,7 +52,7 @@
 						createLogoUploadPanel();
 					},
 					togglePanel:function(e){
-					alert( kendo.stringify(e) );
+					alert( $(this).html() );
 					},
 					onSave : function(e){					
 						$.ajax({
