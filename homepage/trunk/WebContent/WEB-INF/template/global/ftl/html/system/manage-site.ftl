@@ -49,6 +49,26 @@
 				var detailsModel = kendo.observable({
 					company : new Company(),
 					isEnabled : false,
+					properties : new kendo.data.DataSource({
+						transport: { 
+							read: { url:'${request.contextPath}/secure/get-company-property.do?output=json', type:'post' },
+							create: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post' },
+							update: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post'  },
+							destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
+					 		parameterMap: function (options, operation){			
+						 		if (operation !== "read" && options.models) {
+						 			return { companyId: this.company.companyId, items: kendo.stringify(options.models)};
+								} 
+								return { companyId: this.company.companyId }
+							}
+						},	
+						batch: true, 
+						schema: {
+							data: "targetCompanyProperty",
+							model: Property
+						},
+						error : common.api.handleKendoAjaxError
+					}),
 					toggleOptionPanel:function(e){					
 						var action = $(e.target).attr('data-action');
 						if( action === 'upload-logo' ){						
@@ -144,22 +164,22 @@
 		function displayCompanyDetails (){				
 				
 				
-				$('#website-tabs').on( 'show.bs.tab', function (e) {		
+				$('#company-tabs').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
-						case "#website-tabs-props" :
+						case "#company-tabs-props" :
 							createPropsPane();
 							break;
-						case  '#website-tabs-images' :
+						case  '#company-tabs-images' :
 							createImagePane();
 							break;
-						case  '#website-tabs-files' :	
+						case  '#company-tabs-files' :	
 							createFilePane();
 							break;	
-						case  '#website-tabs-timeline' :	
+						case  '#company-tabs-timeline' :	
 							createTimelinePane();
 							break;	
-						case  '#website-tabs-networks' :	
+						case  '#company-tabs-networks' :	
 							createSocialPane();
 							break;															
 					}	
@@ -318,6 +338,12 @@
 			companySetting.data('kendoExtModalWindow').open();		
 			*/
 		}
+
+
+		function createPropsPane(){
+		
+		}
+
 
 		function createSocialPane(){
 			var selectedCompany = getSelectedCompany();
@@ -922,24 +948,34 @@
 										</div>
 									</div>
 								</div>	
-								<!-- website-tabs -->	
+								<!-- company-tabs -->	
 									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
-										<li><a href="\\#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
-										<li><a href="\\#website-tabs-images" data-toggle="tab">이미지</a></li>
-										<li><a href="\\#website-tabs-files" data-toggle="tab">파일</a></li>
-										<li><a href="\\#website-tabs-timeline" data-toggle="tab">타임라인</a></li>
+										<li><a href="\\#company-tabs-props" data-toggle="tab">프로퍼티</a></li>
+										<li><a href="\\#company-tabs-images" data-toggle="tab">이미지</a></li>
+										<li><a href="\\#company-tabs-files" data-toggle="tab">파일</a></li>
+										<li><a href="\\#company-tabs-timeline" data-toggle="tab">타임라인</a></li>
 									</ul>	
 									<div class="tab-content tab-content-bordered panel-padding">								
-										<div class="tab-pane fade" id="website-tabs-props">
+										<div class="tab-pane fade" id="company-tabs-props">
+											<div data-role="grid"
+												date-scrollable="false"
+												data-editable="true"
+												data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
+												data-columns="[
+													{ 'title': '이름',  'field': 'name', 'width': 200 },
+													{ 'title': '값', 'field': 'value' },
+													{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
+												]"
+												data-bind="source: properties, visible: isEnabled"
+												style="height: 300px">																				
+										</div>
+										<div class="tab-pane fade" id="company-tabs-images">
 											
 										</div>
-										<div class="tab-pane fade" id="website-tabs-images">
+										<div class="tab-pane fade" id="company-tabs-files">
 											
 										</div>
-										<div class="tab-pane fade" id="website-tabs-files">
-											
-										</div>
-										<div class="tab-pane fade" id="website-tabs-timeline">
+										<div class="tab-pane fade" id="company-tabs-timeline">
 											
 										</div>																																								
 									</div>	
@@ -1110,18 +1146,7 @@
 		<footer>  		
 		</footer>
 		<!-- END FOOTER -->
-		
-		<script id="company-setting-template" type="text/x-kendo-template">			
-			<div class="panel panel-default">
-				<div class="panel-body paddingless pull-right">
-					<button type="button" class="btn btn-link btn-control-group" data-action="top"><i class="fa fa-angle-double-up fa-lg"></i></button>
-				</div>
-				<div class="panel-body">
-				
-				
-				</div>			
-			</div>
-		</script>
+
 		<script id="image-details-template" type="text/x-kendo-template">				
 			<div class="panel panel-default">
 				<div class="panel-body paddingless pull-right">
