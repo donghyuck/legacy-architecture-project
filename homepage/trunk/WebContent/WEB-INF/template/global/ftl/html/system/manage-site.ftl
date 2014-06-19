@@ -54,7 +54,7 @@
 					},
 					togglePanel:function(e){
 					
-					alert( kendo.stringify(e) );
+					alert( e.relatedTarget );
 					
 					},
 					onSave : function(e){					
