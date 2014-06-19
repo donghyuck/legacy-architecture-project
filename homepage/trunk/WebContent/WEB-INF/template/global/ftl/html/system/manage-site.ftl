@@ -54,7 +54,7 @@
 					},
 					togglePanel:function(e){
 					
-					alert( e.target );
+					alert( $(e.target).html() );
 					
 					},
 					onSave : function(e){					
