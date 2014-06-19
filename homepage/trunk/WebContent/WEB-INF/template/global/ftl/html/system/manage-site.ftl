@@ -827,7 +827,7 @@
 										<div class="panel-body">
 												
 									<div class="btn-group">
-										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
+										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="upload-logo">로고 변경</button>
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 &amp; 롤</button>
 									</div>
 									</div>
