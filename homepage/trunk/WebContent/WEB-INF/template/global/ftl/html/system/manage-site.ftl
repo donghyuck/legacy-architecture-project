@@ -850,16 +850,30 @@
 												<!-- company setting panel -->				
 												<div class="panel form-horizontal form-bordered" data-action="update-company" style="display:none;">
 													<div class="panel-heading">
+														
 														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
+														<span class="panel-title">회사 정보 변경</span>
 													</div>
 													<div class="panel-body no-padding-hr">
 														<div class="form-group no-margin-hr panel-padding-h no-padding-t no-border-t">
 															<div class="row">
-																<label class="col-sm-4 control-label">Name:</label>
+																<label class="col-sm-4 control-label">이름:</label>
 																<div class="col-sm-8">
 																	<input type="text" name="name" class="form-control">
 																</div>
 															</div>
+															<div class="row">
+																<label class="col-sm-4 control-label">설명:</label>
+																<div class="col-sm-8">
+																	<input type="text" name="name" class="form-control">
+																</div>
+															</div>																
+															<div class="row">
+																<label class="col-sm-4 control-label">도메인:</label>
+																<div class="col-sm-8">
+																	<input type="text" name="name" class="form-control">
+																</div>
+															</div>															
 														</div>
 													</div>
 													<div class="panel-footer text-right">
