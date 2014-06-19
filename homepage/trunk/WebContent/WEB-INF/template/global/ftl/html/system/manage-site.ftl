@@ -81,16 +81,17 @@
 						}						
 					}	
 				});
-
+				
+				kendo.bind($("#company-details"), detailsModel );
+				
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
 					},
 					companyChanged: function(item){
 						item.copy(detailsModel.company);
-						detailsModel.isEnabled = true;
+						detailsModel.isEnabled = true;						
 						//kendo.bind($("#company-info"), detailsModel.company );						
-						kendo.bind($("#company-details"), detailsModel );
 						displayCompanyDetails();	
 					}
 				});
@@ -142,7 +143,9 @@
 		
 		
 		function displayCompanyDetails (){
+				
 				createSiteGrid();	
+				
 				$('#website-tabs').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
@@ -227,8 +230,6 @@
 				common.ui.animate_v3(renderTo, "fadeOutUp").show();
 			}							
 		}
-
-
 
 		function toggleCompanyUpdatePanel(){		
 			var renderTo = $('.panel[data-action="update-company"]');	
