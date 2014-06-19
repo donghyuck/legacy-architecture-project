@@ -166,7 +166,7 @@
 							//e.response.targetAttachment.attachmentId;
 							// LIST VIEW REFRESH...
 							$('#logo-grid').data('kendoGrid').dataSource.read(); 
-						}				
+						}
 					}
 				});						
 			}			
@@ -198,7 +198,7 @@
 			
 			var renderTo = $('.panel[data-action="upload-logo"]');
 			if( !renderTo.is(":visible") ){
-				common.ui.animate_v3(renderTo, "faidInDown");
+				common.ui.animate_v3(renderTo, "faidInDown").removeClass('hidden');
 			}else{
 			
 			}								
@@ -812,21 +812,19 @@
 									</div>
 									<div class="panel-body">
 										<div class="row">
-											<div class="col-md-6">
-											
-										<div class="panel panel-default hide" data-action="upload-logo">
-											<div class="panel-heading">
-												<button type="button" class="btn-control-group close" data-action="close-logo">&times;</button>
-												<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</small>
-											</div>
-											<div class="panel-body">											
-												<input name="logo-file" id="logo-file" type="file" />											
-											</div>
-											<div class="panel-body scrollable" style="max-height:450px;">
-												<div id="logo-grid"></div>
-											</div>										
-										</div>												
-											
+											<div class="col-lg-6">											
+												<div class="panel panel-default hidden" data-action="upload-logo">
+													<div class="panel-heading">
+														<button type="button" class="btn-control-group close" data-action="close-logo">&times;</button>
+														<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</small>
+													</div>
+													<div class="panel-body">											
+														<input name="logo-file" id="logo-file" type="file" />											
+													</div>
+													<div class="panel-body scrollable" style="max-height:450px;">
+														<div id="logo-grid"></div>
+													</div>										
+												</div>											
 											</div>
 										</div>
 									</div>
