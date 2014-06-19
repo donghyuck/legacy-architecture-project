@@ -164,11 +164,8 @@
 		function displayCompanyDetails (){				
 				$('#company-tabs').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
-					
-					alert( show_bs_tab.attr('href') );
 					switch( show_bs_tab.attr('href') ){
-						case "#company-tabs-props" :
-						
+						case "#company-tabs-props" :						
 							break;
 						case  '#company-tabs-images' :
 							createImagePane();
@@ -442,7 +439,7 @@
 			}
 		}
 
-		function createAttachPane(){		
+		function createFilePane(){		
 			var selectedCompany = getSelectedCompany();
 			
 			if( ! $("#attach-upload").data("kendoUpload") ){	
@@ -979,7 +976,14 @@
 																				
 										</div>
 										<div class="tab-pane fade" id="company-tabs-files">
-											
+											<div class="panel panel-transparent">
+												<div class="panel-body">
+													<input name="attach-upload" id="attach-upload" type="file" />
+												</div>		
+												<div class="panel-body">
+													<div id="attach-grid"></div>										
+												</div>	
+											</div>
 										</div>
 										<div class="tab-pane fade" id="company-tabs-timeline">
 											
@@ -1082,11 +1086,7 @@
 
 												</div>								
 												<div class="tab-pane fade" id="attachment-mgmt">
-													<div class="col-sm-12 body-group marginless paddingless">
-														<input name="attach-upload" id="attach-upload" type="file" />
-														<div class="blank-top-15"></div>
-														<div id="attach-grid"></div>
-													</div>
+													
 												</div>
 												<div class="tab-pane fade" id="social-mgmt">
 													<span class="help-block">
