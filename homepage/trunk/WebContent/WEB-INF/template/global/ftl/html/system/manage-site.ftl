@@ -120,7 +120,7 @@
 		
 		function displayCompanyDetails (){
 				createSiteGrid();	
-				$('#myTab').on( 'show.bs.tab', function (e) {		
+				$('#website-tabs').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
 						case "#template-mgmt" :
@@ -137,9 +137,7 @@
 							break;								
 					}	
 				});				
-				$('#myTab a:first').tab('show') ;
-						
-		
+				$('#website-tabs a:first').tab('show') ;
 		}
 		
 		function getSelectedCompany(){
