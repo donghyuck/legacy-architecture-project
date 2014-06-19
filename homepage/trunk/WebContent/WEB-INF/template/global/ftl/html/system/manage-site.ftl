@@ -49,10 +49,7 @@
 					company : new Company(),
 					isEnabled : false,
 					showUploadPanel : function(e){
-						displayLogoUpload();		
-					},
-					closeUploadPanel : function(e){
-						hideUploadPanel();		
+						
 					},
 					onSave : function(e){					
 						$.ajax({
@@ -97,8 +94,7 @@
 				 // 4. PAGE MAIN		
 				 var selectedSocial = {};		
 				 	
-				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );			
-				 /*	 
+				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );				 
 				 common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
@@ -134,7 +130,6 @@
 						}			  						 
 					}}
 				);
-				*/
 			}	
 		}]);
 		
@@ -164,11 +159,6 @@
 		function getSelectedCompany(){
 			var setup = common.ui.admin.setup();
 			return setup.companySelector.dataItem(setup.companySelector.select());
-		}
-		
-		function hideUploadPanel(){
-			if( renderTo.is(":visible") ){
-				common.ui.animate_v3(renderTo, "fadeInDown").show();
 		}
 		
 		function displayLogoUpload(){
