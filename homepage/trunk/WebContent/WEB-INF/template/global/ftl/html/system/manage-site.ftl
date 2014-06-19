@@ -955,9 +955,10 @@
 										<li><a href="\\#company-tabs-files" data-toggle="tab">파일</a></li>
 										<li><a href="\\#company-tabs-timeline" data-toggle="tab">타임라인</a></li>
 									</ul>	
-									<div class="tab-content tab-content-bordered panel-padding">								
+									<div class="tab-content tab-content-bordered no-padding">								
 										<div class="tab-pane fade" id="company-tabs-props">
 											<div data-role="grid"
+												class="no-border"
 												date-scrollable="false"
 												data-editable="true"
 												data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
