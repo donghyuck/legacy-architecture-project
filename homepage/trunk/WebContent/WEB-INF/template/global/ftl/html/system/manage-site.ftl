@@ -45,6 +45,7 @@
 				common.ui.landing();				
 				// 1-3.  관리자  로딩
 				var currentUser = new User();	
+				
 				var detailsModel = kendo.observable({
 					company : new Company(),
 					isEnabled : false,
