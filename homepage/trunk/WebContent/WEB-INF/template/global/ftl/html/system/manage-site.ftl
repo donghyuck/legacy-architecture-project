@@ -82,7 +82,7 @@
 					}	
 				});
 				
-				kendo.bind($("#company-details"), detailsModel );
+				
 				
 				common.ui.admin.setup({
 					authenticate: function(e){
@@ -91,7 +91,7 @@
 					companyChanged: function(item){
 						item.copy(detailsModel.company);
 						detailsModel.isEnabled = true;						
-						//kendo.bind($("#company-info"), detailsModel.company );						
+						kendo.bind($("#company-info"), detailsModel.company );						
 						displayCompanyDetails();	
 					}
 				});
