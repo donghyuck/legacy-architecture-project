@@ -54,7 +54,7 @@
 					},
 					togglePanel:function(e){
 					
-					alert( e.relatedTarget );
+					alert( e.target );
 					
 					},
 					onSave : function(e){					
