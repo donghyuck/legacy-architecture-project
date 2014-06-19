@@ -813,7 +813,7 @@
 									<div class="panel-body">
 										<div class="row">
 											<div class="col-lg-6">											
-												<div class="panel panel-default hidden" data-action="upload-logo">
+												<div class="panel panel-default" data-action="upload-logo" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close" data-dismiss="panel">×</button>
 														<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</small>
