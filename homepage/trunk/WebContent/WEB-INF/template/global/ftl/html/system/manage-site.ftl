@@ -218,7 +218,7 @@
 				common.ui.animate_v3(renderTo, "fadeOutUp").show();
 			}	
 		
-		/*
+		/**
 			var renderToString = "company-setting-modal";
 			if( $("#"+ renderToString).length == 0 ){
 				$('body').append('<div id="'+ renderToString +'"/>');
