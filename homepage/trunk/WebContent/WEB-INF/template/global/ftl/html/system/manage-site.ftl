@@ -773,7 +773,7 @@
 					</div>				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
-				<div id="company-details" class="page-details" style="">
+				<div class="page-details" style="">
 					<div class="details-row no-margin-t">					
 						<div class="left-col">
 							<div class="details-block no-margin-t">
@@ -785,7 +785,7 @@
 								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
 								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
 							</div>				
-							<div class="panel panel-transparent">
+							<div id="company-details" class="panel panel-transparent">
 								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:company.description"></span>									
 								</div>
