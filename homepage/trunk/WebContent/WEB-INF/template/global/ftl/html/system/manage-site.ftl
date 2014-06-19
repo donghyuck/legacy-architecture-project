@@ -845,12 +845,14 @@
 													</div>																						
 												</div>
 												<!-- ./logo upload panel -->			
+											</div>
+											<div class="col-lg-6">		
 												<!-- company setting panel -->				
 												<div class="panel panel-info" data-action="update-company" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
 													</div>
-													<div class="panel-body">		
+													<div class="panel-body">
 													
 													</div>
 												</div>
