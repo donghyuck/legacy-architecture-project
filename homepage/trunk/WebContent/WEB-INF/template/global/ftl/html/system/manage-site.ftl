@@ -205,13 +205,29 @@
 
 
 
-		function showCompanySetting(){
-		
-			var renderTo = $('.panel[data-action="update-company"]');
-			
-			
-			
-			
+		function showCompanySetting(){		
+			var renderTo = $('.panel[data-action="update-company"]');			
+			if(!renderTo.data('model') ){
+				var model =  kendo.observable({
+					company: new Company(),
+					onSave : function(e){					
+						$.ajax({
+							type : 'POST',
+							url : '${request.contextPath}/secure/update-company.do?output=json',
+							data: { companyId : this.get('company').companyId, item : kendo.stringify( this.get('company') ) },
+							success : function(response){
+								window.location.reload( true );
+							},
+							error:common.api.handleKendoAjaxError,
+							dataType : "json"
+						});
+					}										
+				});
+				renderTo.data('model', model) 	
+				kendo.bind( renderTo, model );		
+			}
+						
+			getSelectedCompany.copy( renderTo.data('model') );			
 			if( !renderTo.is(":visible") ){
 				common.ui.animate_v3(renderTo, "fadeInDown").show();
 			}else{
