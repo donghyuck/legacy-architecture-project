@@ -778,7 +778,7 @@
 						<div class="left-col">
 							<div class="details-block no-margin-t">
 								<div class="details-photo">
-									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/podosoftware">
+									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
 								</div>
 								<br>
 								<!--
