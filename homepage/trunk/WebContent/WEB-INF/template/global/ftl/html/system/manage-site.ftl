@@ -51,7 +51,6 @@
 					isEnabled : false,
 					toggleOptionPanel:function(e){					
 						var action = $(e.target).attr('data-action');
-						alert( action ) ;
 						if( action === 'upload-logo' ){						
 							toggleLogoUploadPanel();
 						} else if( action === 'update-company' ){
@@ -79,10 +78,10 @@
 							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
 							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
 							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
-						}
+						}						
 					}	
 				});
-												
+
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
@@ -870,12 +869,13 @@
 												<div class="panel panel-info" data-action="upload-logo" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close btn-control-group"  data-action="upload-logo" data-bind="click:toggleOptionPanel">×</button>
-														<span class="panel-title">아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</span>
+														<span class="panel-title">로고 업로드</span>
 													</div>
 													<div class="panel-body">											
 														<input name="logo-file" id="logo-file" type="file" />											
 													</div>
 													<div class="panel-body scrollable" style="max-height:450px;">
+														<p> <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</p>
 														<div id="logo-grid"></div>
 													</div>																						
 												</div>
