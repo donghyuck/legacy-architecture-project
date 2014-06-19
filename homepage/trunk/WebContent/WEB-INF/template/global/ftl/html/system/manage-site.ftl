@@ -970,8 +970,8 @@
 												<div class="panel-body">
 													<input name="image-upload" id="image-upload" type="file" />
 												</div>		
-												<div id="image-grid" class="panel-body">
-												
+												<div class="panel-body">
+													<div id="image-grid"></div>												
 												</div>	
 												<div id="image-details" class="panel-body hide">
 												
