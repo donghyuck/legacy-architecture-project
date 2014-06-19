@@ -166,6 +166,7 @@
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
 						case "#company-tabs-props" :
+						
 							break;
 						case  '#company-tabs-images' :
 							createImagePane();
