@@ -48,8 +48,8 @@
 				var detailsModel = kendo.observable({
 					company : new Company(),
 					isEnabled : false,
-					showUploadPanel : function(e){
-						
+					toggleLogoUploadPanel : function(e){
+						createLogoUploadPanel();
 					},
 					onSave : function(e){					
 						$.ajax({
@@ -94,7 +94,8 @@
 				 // 4. PAGE MAIN		
 				 var selectedSocial = {};		
 				 	
-				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );				 
+				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );			
+				 /**	 
 				 common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
@@ -130,6 +131,7 @@
 						}			  						 
 					}}
 				);
+				*/
 			}	
 		}]);
 		
@@ -161,7 +163,7 @@
 			return setup.companySelector.dataItem(setup.companySelector.select());
 		}
 		
-		function displayLogoUpload(){
+		function createLogoUploadPanel(){
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
@@ -849,7 +851,7 @@
 												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled"><i class="fa fa-user"></i> 사용자 관리</button>
 											</div>																						
 											<div class="btn-group">
-												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled"><i class="fa fa-upload"></i> 로고 업로드</button>
+												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled, click:click:toggleLogoUploadPanel"><i class="fa fa-upload"></i> 로고 업로드</button>
 												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="update-company" data-toggle="button"><i class="fa fa-pencil" data-bind="enabled: isEnabled"></i> 정보변경</button>
 											</div>											
 										</div>
@@ -860,7 +862,7 @@
 												<!-- logo upload panel -->									
 												<div class="panel panel-info" data-action="upload-logo" style="display:none;">
 													<div class="panel-heading">
-														<button type="button" class="close btn-control-group" data-action="close-upload-logo">×</button>
+														<button type="button" class="close btn-control-group" data-bind="click:toggleLogoUploadPanel">×</button>
 														<span class="panel-title">아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</span>
 													</div>
 													<div class="panel-body">											
