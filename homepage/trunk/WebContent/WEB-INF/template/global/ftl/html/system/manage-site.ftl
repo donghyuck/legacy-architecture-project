@@ -50,12 +50,12 @@
 					company : new Company(),
 					isEnabled : false,
 					toggleOptionPanel:function(e){					
-						var action = $(e.target).attr('data-action') );
+						var action = $(e.target).attr('data-action');
 						if( action === 'upload-logo' ){						
 							toggleLogoUploadPanel();
-						}else if( action === 'update-company' ){
+						} else if( action === 'update-company' ){
 							toggleCompanyUpdatePanel();
-						}					
+						}
 					},
 					onSave : function(e){					
 						$.ajax({
