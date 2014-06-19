@@ -4,6 +4,7 @@
 		<title>웹사이트관리</title>
 <#compress>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.themes.css" />
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [ 
