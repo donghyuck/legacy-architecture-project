@@ -168,7 +168,6 @@
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
 						case "#company-tabs-props" :
-							createPropsPane();
 							break;
 						case  '#company-tabs-images' :
 							createImagePane();
@@ -338,12 +337,6 @@
 			companySetting.data('kendoExtModalWindow').open();		
 			*/
 		}
-
-
-		function createPropsPane(){
-		
-		}
-
 
 		function createSocialPane(){
 			var selectedCompany = getSelectedCompany();
@@ -972,7 +965,12 @@
 												
 										</div>
 										<div class="tab-pane fade" id="company-tabs-images">
-											
+											<div class="col-sm-12 body-group marginless paddingless">
+												<input name="image-upload" id="image-upload" type="file" />
+												<div class="blank-top-15"></div>	
+												<div id="image-grid"></div>	
+											</div>
+											<div id="image-details" class="col-sm-12 body-group marginless paddingless hide" style="padding-top:5px;"></div>											
 										</div>
 										<div class="tab-pane fade" id="company-tabs-files">
 											
@@ -1075,13 +1073,7 @@
 											</ul>
 											<div class="tab-content">
 												<div class="tab-pane fade " id="image-mgmt">
-													<div class="col-sm-12 body-group marginless paddingless">
-														<input name="image-upload" id="image-upload" type="file" />
-														<div class="blank-top-15"></div>	
-														<div id="image-grid"></div>	
-													</div>
-													<div id="image-details" class="col-sm-12 body-group marginless paddingless hide" style="padding-top:5px;">									
-													</div>
+
 												</div>								
 												<div class="tab-pane fade" id="attachment-mgmt">
 													<div class="col-sm-12 body-group marginless paddingless">
