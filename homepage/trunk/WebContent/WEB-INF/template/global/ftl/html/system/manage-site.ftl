@@ -818,7 +818,7 @@
 									<div class="panel">
 										<div class="panel-heading">
 											<div class="panel-heading-controls">
-											
+											&nbsp;
 									<div class="btn-group">
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="upload-logo"><i class="fa fa-upload"></i> 로고 변경</button>
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="fa fa-pencil"></i> 정보변경</button>
