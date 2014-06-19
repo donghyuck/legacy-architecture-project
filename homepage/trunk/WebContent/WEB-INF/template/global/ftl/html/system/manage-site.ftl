@@ -47,7 +47,13 @@
 				var currentUser = new User();	
 				var detailsModel = kendo.observable({
 					company : new Company(),
-					isSaveReady : false,
+					isEnabled : false,
+					showUploadPanel : function(e){
+						showLogoUploadPanel();		
+					},
+					closeUploadPanel : function(e){
+						hideLogoUploadPanel();		
+					},
 					onSave : function(e){					
 						$.ajax({
 							type : 'POST',
@@ -79,6 +85,7 @@
 					},
 					companyChanged: function(item){
 						item.copy(detailsModel.company);
+						detailsModel.isEnabled = true;
 						kendo.bind($("#company-info"), detailsModel.company );						
 						kendo.bind($("#company-details"), detailsModel );
 						displayCompanyDetails();						
@@ -90,7 +97,8 @@
 				 // 4. PAGE MAIN		
 				 var selectedSocial = {};		
 				 	
-				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );				 
+				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );			
+				 /*	 
 				 common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
@@ -116,7 +124,7 @@
 							$("button.btn-control-group[data-action='timeline']").click();
 						},
 						'upload-logo': function(e){
-							displayLogoUpload();				
+							showLogoUploadPanel();				
 						},
 						'close-upload-logo': function(e){
 							$("button.btn-control-group[data-action='upload-logo']").click();
@@ -126,6 +134,7 @@
 						}			  						 
 					}}
 				);
+				*/
 			}	
 		}]);
 		
@@ -157,7 +166,13 @@
 			return setup.companySelector.dataItem(setup.companySelector.select());
 		}
 		
-		function displayLogoUpload(){
+		function hideLogoUploadPanel(){
+			var renderTo = $('.panel[data-action="upload-logo"]');
+			if( renderTo.is(":visible") ){
+				common.ui.animate_v3(renderTo, "fadeInDown").show();
+		}
+		
+		function showLogoUploadPanel(){
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
@@ -841,12 +856,12 @@
 										&nbsp;
 										<div class="panel-heading-controls">
 											<div class="btn-group">
-												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-group"><i class="fa fa-users"></i> 그룹관리</button>
-												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-user"><i class="fa fa-user"></i> 사용자 관리</button>
+												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled" ><i class="fa fa-users"></i> 그룹관리</button>
+												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled"><i class="fa fa-user"></i> 사용자 관리</button>
 											</div>																						
 											<div class="btn-group">
-												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo" data-toggle="button"><i class="fa fa-upload"></i> 로고 업로드</button>
-												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="update-company" data-toggle="button"><i class="fa fa-pencil"></i> 정보변경</button>
+												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled"><i class="fa fa-upload"></i> 로고 업로드</button>
+												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="update-company" data-toggle="button"><i class="fa fa-pencil" data-bind="enabled: isEnabled"></i> 정보변경</button>
 											</div>											
 										</div>
 									</div>
@@ -898,7 +913,7 @@
 
 													</div>
 													<div class="panel-footer text-right">
-														<button class="btn btn-primary btn-flat" data-bind="click: onSave, enabled: isSaveReady" >확인</button>
+														<button class="btn btn-primary btn-flat" data-bind="click: onSave, enabled: isEnabled" >확인</button>
 													</div>
 												</div>
 												<!-- ./company setting panel -->								
