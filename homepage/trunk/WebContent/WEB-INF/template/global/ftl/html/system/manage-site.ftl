@@ -47,6 +47,7 @@
 				var currentUser = new User();	
 				var detailsModel = kendo.observable({
 					company : new Company(),
+					isSaveReady : false,
 					onSave : function(e){					
 						$.ajax({
 							type : 'POST',
@@ -897,7 +898,7 @@
 
 													</div>
 													<div class="panel-footer text-right">
-														<button class="btn btn-primary btn-flat">확인</button>
+														<button class="btn btn-primary btn-flat" data-bind="click: onSave, enabled: isSaveReady" >확인</button>
 													</div>
 												</div>
 												<!-- ./company setting panel -->								
