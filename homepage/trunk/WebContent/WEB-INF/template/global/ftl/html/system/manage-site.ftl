@@ -101,8 +101,7 @@
 							$("button.btn-control-group[data-action='timeline']").click();
 						},
 						'upload-logo': function(e){
-							createLogoPanel();
-							$('#company-details .panel[role="logo"]').toggleClass('hide');							
+							displayLogoUpload();				
 						},
 						'close-logo': function(e){
 							$("button.btn-control-group[data-action='logo']").click();
@@ -145,8 +144,7 @@
 			return setup.companySelector.dataItem(setup.companySelector.select());
 		}
 		
-		function createLogoPanel(){
-			var selectedCompany = getSelectedCompany();
+		function displayLogoUpload(){
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
@@ -160,7 +158,7 @@
 					upload: function (e) {								         
 						e.data = {
 							objectType : 1,
-							objectId: selectedCompany.companyId
+							objectId: getSelectedCompany().companyId
 						};														    								    	 		    	 
 					},
 					success : function(e) {								    
@@ -171,31 +169,7 @@
 						}				
 					}
 				});						
-			}
-			/*
-			if(!$('#logo-list-view').data('kendoListView')){
-				$("#logo-list-view").kendoListView({
-					dataSource: {
-						dataType: 'json',
-						transport: {
-							read: { url:'${request.contextPath}/secure/list-logo-image.do?output=json', type: 'POST' },
-							parameterMap: function (options, operation){
-								return { objectType: 1, objectId: selectedCompany.companyId }
-							} 
-						},
-						schema: {
-							data: "targetLogoImages",
-							total: "targetLogoImageCount",
-							model : common.models.Logo
-						},
-						error: common.api.handleKendoAjaxError
-					},
-					//selectable: "single",
-					template: kendo.template($('#logo-list-view-template').html())
-				});				
-			}
-			*/
-			
+			}			
 			if(!$('#logo-grid').data('kendoGrid')){				
 				$("#logo-grid").kendoGrid({
 					dataSource: {
@@ -203,7 +177,7 @@
 						transport: {
 							read: { url:'${request.contextPath}/secure/list-logo-image.do?output=json', type: 'POST' },
 							parameterMap: function (options, operation){
-								return { objectType: 1, objectId: selectedCompany.companyId }
+								return { objectType: 1, objectId: getSelectedCompany().companyId }
 							} 
 						},
 						schema: {
@@ -219,7 +193,7 @@
 						{ field: "filename", title: "파일", width: 250, template:"#:filename# <small><span class='label label-info'>#: imageContentType #</span></small>" },
 						{ field: "imageSize", title: "파일크기",  width: 100 , format: "{0:##,### bytes}" }
 					]				
-				});			
+				});
 			}								
 		}
 
@@ -830,8 +804,21 @@
 										</div>
 									</div>
 									<div class="panel-body">
-												
 
+
+										<div class="panel panel-default hide" role="logo">
+											<div class="panel-heading">
+												<button type="button" class="btn-control-group close" data-action="close-logo">&times;</button>
+												<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</small>
+											</div>
+											<div class="panel-body">											
+												<input name="logo-file" id="logo-file" type="file" />											
+											</div>
+											<div class="panel-body scrollable" style="max-height:450px;">
+												<div id="logo-grid"></div>
+											</div>										
+										</div>		
+									
 									</div>
 								</div>	
 								<!-- website-tabs -->	
@@ -929,18 +916,7 @@
 									</table>
 								</div>
 								<div class="col-lg-7 col-xs-12" id="company-details">			
-									<div class="panel panel-default hide" role="logo">
-										<div class="panel-heading">
-											<button type="button" class="btn-control-group close" data-action="close-logo">&times;</button>
-											<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 로고 이미지를 직접 선택하거나, 아래의 영역에 이미지파일을 끌어서 놓기(Drag & Drop)를 하세요.</small>
-										</div>
-										<div class="panel-body">											
-											<input name="logo-file" id="logo-file" type="file" />											
-										</div>
-										<div class="panel-body scrollable" style="max-height:450px;">
-											<div id="logo-grid"></div>
-										</div>										
-									</div>		
+
 									<div class="panel panel-default hide" role="timeline">
 										<div class="panel-heading">
 											<button type="button" class="btn-control-group close" data-action="close-timeline">&times;</button>
