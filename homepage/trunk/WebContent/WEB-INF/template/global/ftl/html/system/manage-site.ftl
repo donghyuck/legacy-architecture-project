@@ -196,7 +196,7 @@
 			
 			var renderTo = $('.panel[data-action="upload-logo"]');
 			if( !renderTo.is(":visible") ){
-				common.ui.animate_v3(renderTo, "faidInDown");
+				common.ui.animate_v3(renderTo, "faidInDown").show();
 			}else{
 			
 			}								
