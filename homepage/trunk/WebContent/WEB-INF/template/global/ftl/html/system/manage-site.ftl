@@ -944,10 +944,10 @@
 								</div>	
 								<!-- company-tabs -->	
 									<ul id="company-tabs" class="nav nav-tabs nav-tabs-sm">
-										<li><a href="\\#company-tabs-props" data-toggle="tab">프로퍼티</a></li>
-										<li><a href="\\#company-tabs-images" data-toggle="tab">이미지</a></li>
-										<li><a href="\\#company-tabs-files" data-toggle="tab">파일</a></li>
-										<li><a href="\\#company-tabs-timeline" data-toggle="tab">타임라인</a></li>
+										<li><a href="#company-tabs-props" data-toggle="tab">프로퍼티</a></li>
+										<li><a href="#company-tabs-images" data-toggle="tab">이미지</a></li>
+										<li><a href="#company-tabs-files" data-toggle="tab">파일</a></li>
+										<li><a href="#company-tabs-timeline" data-toggle="tab">타임라인</a></li>
 									</ul>	
 									<div class="tab-content tab-content-bordered no-padding">								
 										<div class="tab-pane fade" id="company-tabs-props">
