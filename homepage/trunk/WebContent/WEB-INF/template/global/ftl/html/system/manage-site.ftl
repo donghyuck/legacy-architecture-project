@@ -966,12 +966,18 @@
 												
 										</div>
 										<div class="tab-pane fade" id="company-tabs-images">
-											<div class="col-sm-12 body-group marginless paddingless">
-												<input name="image-upload" id="image-upload" type="file" />
-												<div class="blank-top-15"></div>	
-												<div id="image-grid"></div>	
+											<div class="panel panel-dark">
+												<div class="panel-body">
+													<input name="image-upload" id="image-upload" type="file" />
+												</div>		
+												<div id="image-grid" class="panel-body">
+												
+												</div>	
+												<div id="image-details" class="panel-body hide">
+												
+												</div>																					
 											</div>
-											<div id="image-details" class="col-sm-12 body-group marginless paddingless hide" style="padding-top:5px;"></div>											
+																				
 										</div>
 										<div class="tab-pane fade" id="company-tabs-files">
 											
