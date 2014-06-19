@@ -82,8 +82,6 @@
 					}	
 				});
 				
-				
-				
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
@@ -143,28 +141,32 @@
 		}]);
 		
 		
-		function displayCompanyDetails (){
+		function displayCompanyDetails (){				
 				
-				createSiteGrid();	
 				
 				$('#website-tabs').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
 					switch( show_bs_tab.attr('href') ){
-						case "#template-mgmt" :
-							createTemplatePane();
+						case "#website-tabs-props" :
+							createPropsPane();
 							break;
-						case  '#image-mgmt' :
+						case  '#website-tabs-images' :
 							createImagePane();
 							break;
-						case  '#attachment-mgmt' :	
-							createAttachPane();
+						case  '#website-tabs-files' :	
+							createFilePane();
 							break;	
-						case  '#social-mgmt' :	
+						case  '#website-tabs-timeline' :	
+							createTimelinePane();
+							break;	
+						case  '#website-tabs-networks' :	
 							createSocialPane();
-							break;								
+							break;															
 					}	
 				});				
 				$('#website-tabs a:first').tab('show') ;
+				
+				createSiteGrid();	
 		}
 		
 		function getSelectedCompany(){
