@@ -821,13 +821,13 @@
 											<div class="panel-heading-controls">
 											
 											<div class="btn-group">
-												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="upload-logo"><i class="fa fa-users"></i> 그룹관리</button>
-												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="role"><i class="fa fa-user"></i> 사용자 관리</button>
+												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-group"><i class="fa fa-users"></i> 그룹관리</button>
+												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-user"><i class="fa fa-user"></i> 사용자 관리</button>
 											</div>	
 																						
 											<div class="btn-group">
 												<button type="button" class="btn btn-primary btn-sm btn-flat btn-control-group" data-action="upload-logo"><i class="fa fa-upload"></i> 로고 업로드</button>
-												<button type="button" class="btn btn-primary btn-sm btn-flat btn-control-group" data-action="role"><i class="fa fa-pencil"></i> 정보변경</button>
+												<button type="button" class="btn btn-primary btn-sm btn-flat btn-control-group" data-action="modify-company"><i class="fa fa-pencil"></i> 정보변경</button>
 											</div>											
 											
 											</div>
