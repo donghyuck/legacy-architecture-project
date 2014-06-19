@@ -80,7 +80,7 @@
 				 common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
 					{event: 'click', handlers: {
-						setting : function(e){
+						modify-company : function(e){
 							showCompanySetting();					
 						},
 						group : function(e){
