@@ -49,6 +49,7 @@
 					company : new Company(),
 					isEnabled : false,
 					toggleLogoUploadPanel : function(e){
+					alert( kendo.stringify(e) );
 						createLogoUploadPanel();
 					},
 					togglePanel:function(e){
