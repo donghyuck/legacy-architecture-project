@@ -91,8 +91,7 @@
 						detailsModel.isEnabled = true;
 						kendo.bind($("#company-info"), detailsModel.company );						
 						kendo.bind($("#company-details"), detailsModel );
-						displayCompanyDetails();						
-						//$('button.btn-control-group').removeAttr("disabled");									
+						displayCompanyDetails();	
 					}
 				});
 				
