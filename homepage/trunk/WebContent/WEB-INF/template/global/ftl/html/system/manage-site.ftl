@@ -51,6 +51,7 @@
 					isEnabled : false,
 					toggleOptionPanel:function(e){					
 						var action = $(e.target).attr('data-action');
+						alert( action ) ;
 						if( action === 'upload-logo' ){						
 							toggleLogoUploadPanel();
 						} else if( action === 'update-company' ){
