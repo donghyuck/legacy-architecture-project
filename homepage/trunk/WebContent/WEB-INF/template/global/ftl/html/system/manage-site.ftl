@@ -822,11 +822,17 @@
 								</div>
 							
 							</div>							
-							<div class="details-content">							
+							<div class="details-content">				
+									<div class="panel">
+										<div class="panel-body">
+												
 									<div class="btn-group">
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 &amp; 롤</button>
 									</div>
+									</div>
+								</div>	
+									
 									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
 										<li><a href="\\#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
 										<li><a href="\\#website-tabs-images" data-toggle="tab">이미지</a></li>
