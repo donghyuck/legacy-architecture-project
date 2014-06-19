@@ -815,35 +815,31 @@
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h"/>						
 							<div class="details-content">				
-									<div class="panel panel-transparent">
-										<div class="panel-heading">
-											&nbsp;
-											<div class="panel-heading-controls">
-											
+								<div class="panel panel-transparent">
+									<div class="panel-heading">
+										&nbsp;
+										<div class="panel-heading-controls">
 											<div class="btn-group">
 												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-group"><i class="fa fa-users"></i> 그룹관리</button>
 												<button type="button" class="btn btn-info btn-sm btn-flat btn-control-group" data-action="go-user"><i class="fa fa-user"></i> 사용자 관리</button>
-											</div>	
-																						
+											</div>																						
 											<div class="btn-group">
 												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="upload-logo"><i class="fa fa-upload"></i> 로고 업로드</button>
 												<button type="button" class="btn btn-success btn-sm btn-flat btn-control-group" data-action="modify-company"><i class="fa fa-pencil"></i> 정보변경</button>
 											</div>											
-											
-											</div>
 										</div>
-										<div class="panel-body">
+									</div>
+									<div class="panel-body">
 												
 
 									</div>
 								</div>	
-									
+								<!-- website-tabs -->	
 									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
 										<li><a href="\\#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
 										<li><a href="\\#website-tabs-images" data-toggle="tab">이미지</a></li>
 										<li><a href="\\#website-tabs-files" data-toggle="tab">파일</a></li>
 										<li><a href="\\#website-tabs-timeline" data-toggle="tab">타임라인</a></li>
-										<li><a href="\\#website-tabs-logo" data-toggle="tab">로고</a></li>
 									</ul>	
 									<div class="tab-content tab-content-bordered panel-padding">								
 										<div class="tab-pane fade" id="website-tabs-props">
@@ -861,7 +857,8 @@
 										<div class="tab-pane fade" id="website-tabs-timeline">
 											
 										</div>																																								
-									</div>							
+									</div>	
+								<!-- / .website-tabs -->								
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
