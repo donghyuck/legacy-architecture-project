@@ -846,7 +846,7 @@
 												</div>
 												<!-- ./logo upload panel -->			
 												<!-- company setting panel -->				
-												<div panel panel-info" data-action="update-company" style="display:none;">
+												<div class="panel panel-info" data-action="update-company" style="display:none;">
 													<div class="panel-heading">
 														<button type="button" class="close btn-control-group" data-action="close-update-company">×</button>
 													</div>
