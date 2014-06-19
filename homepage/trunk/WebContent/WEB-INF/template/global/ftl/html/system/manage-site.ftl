@@ -53,7 +53,9 @@
 						createLogoUploadPanel();
 					},
 					togglePanel:function(e){
+					
 					alert( kendo.stringify(e) );
+					
 					},
 					onSave : function(e){					
 						$.ajax({
