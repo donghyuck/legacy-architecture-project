@@ -164,6 +164,8 @@
 		function displayCompanyDetails (){				
 				$('#company-tabs').on( 'show.bs.tab', function (e) {		
 					var show_bs_tab = $(e.target);
+					
+					alert( show_bs_tab.attr('href') );
 					switch( show_bs_tab.attr('href') ){
 						case "#company-tabs-props" :
 						
