@@ -3,7 +3,8 @@
 	<head>
 		<title>웹사이트관리</title>
 <#compress>		
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />		
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
+		
 		<script type="text/javascript"> 
 		yepnope([{
 			load: [ 
@@ -48,10 +49,10 @@
 					company : new Company(),
 					isEnabled : false,
 					showUploadPanel : function(e){
-						showLogoUploadPanel();		
+						displayLogoUpload();		
 					},
 					closeUploadPanel : function(e){
-						hideLogoUploadPanel();		
+						hideUploadPanel();		
 					},
 					onSave : function(e){					
 						$.ajax({
@@ -123,7 +124,7 @@
 							$("button.btn-control-group[data-action='timeline']").click();
 						},
 						'upload-logo': function(e){
-							showLogoUploadPanel();				
+							displayLogoUpload();				
 						},
 						'close-upload-logo': function(e){
 							$("button.btn-control-group[data-action='upload-logo']").click();
@@ -165,13 +166,12 @@
 			return setup.companySelector.dataItem(setup.companySelector.select());
 		}
 		
-		function hideLogoUploadPanel(){
-			var renderTo = $('.panel[data-action="upload-logo"]');
+		function hideUploadPanel(){
 			if( renderTo.is(":visible") ){
 				common.ui.animate_v3(renderTo, "fadeInDown").show();
 		}
 		
-		function showLogoUploadPanel(){
+		function displayLogoUpload(){
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
