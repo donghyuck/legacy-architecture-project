@@ -184,7 +184,7 @@
 							break;															
 					}	
 				});				
-				$('#website-tabs a:first').tab('show') ;
+				$('#company-tabs a:first').tab('show') ;
 				
 				createSiteGrid();	
 		}
@@ -943,7 +943,7 @@
 									</div>
 								</div>	
 								<!-- company-tabs -->	
-									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
+									<ul id="company-tabs" class="nav nav-tabs nav-tabs-sm">
 										<li><a href="\\#company-tabs-props" data-toggle="tab">프로퍼티</a></li>
 										<li><a href="\\#company-tabs-images" data-toggle="tab">이미지</a></li>
 										<li><a href="\\#company-tabs-files" data-toggle="tab">파일</a></li>
