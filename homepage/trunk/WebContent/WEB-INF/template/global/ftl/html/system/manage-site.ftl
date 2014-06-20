@@ -768,9 +768,8 @@
 		function goSite (){					
 			common.api.teleportation().teleport({
 				action : '${request.contextPath}/view-site.do',
-				targetSiteId : getSelectedSite.webSiteId
-			});
-						
+				targetSiteId : getSelectedSite().webSiteId
+			});						
 		}
 		
 
