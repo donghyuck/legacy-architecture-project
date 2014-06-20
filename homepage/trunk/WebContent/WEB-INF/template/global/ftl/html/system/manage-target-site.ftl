@@ -47,14 +47,14 @@
 				});
 					
 				detailsModel.bind("change", function(e){		
-					if( e.field.match('^company.name')){ 						
-						var sender = e.sender ;
-						if( sender.company.companyId > 0 ){
-							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
-							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
-							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
-						}						
-					}	
+					var sender = e.sender ;
+					if( e.field.match('^website.name')){ 
+						if( sender.website.webSiteId > 0 ){
+							this.set("logoUrl", "/download/logo/site/" + sender.website.name );
+							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.creationDate ));      
+							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));						
+						}
+					}					
 				});				
 				
 				common.ui.admin.setup({
