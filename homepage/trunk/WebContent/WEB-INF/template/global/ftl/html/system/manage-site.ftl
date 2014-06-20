@@ -93,12 +93,12 @@
 						var action = $(e.target).attr('data-action');
 						if(action === 'go-group'){
 							common.api.teleportation().teleport({
-								action : '${request.contextPath}/main-group.do',
+								action : '${request.contextPath}/secure/main-group.do',
 								companyId : this.get('company').companyId
 							});							
 						}else if (action === 'go-user'){
 							common.api.teleportation().teleport({
-								action : '${request.contextPath}/main-user.do',
+								action : '${request.contextPath}/secure/main-user.do',
 								companyId : this.get('company').companyId
 							});								
 						}
@@ -767,7 +767,7 @@
 		
 		function goSite (){					
 			common.api.teleportation().teleport({
-				action : '${request.contextPath}/view-site.do',
+				action : '${request.contextPath}/secure/view-site.do',
 				targetSiteId : getSelectedSite().webSiteId
 			});						
 		}
