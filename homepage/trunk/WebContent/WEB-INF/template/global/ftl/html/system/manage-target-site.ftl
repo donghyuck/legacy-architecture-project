@@ -867,15 +867,6 @@
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">메뉴</h4>
 					</div>
-					<div class="modal-body no-padding">
-						<div class="panel panel-transparent no-margin-b">
-							<div class="panel-body">
-								<button class="btn btn-danger btn-flat btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> <small>새로운 메뉴 만들기</small></button>
-							</div>
-						</div>
-						<div id="menu-grid" class="no-border-hr no-border-b"></div>
-					</div>					
-					<div id="menu-editor">
 					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
 						<div class="panel panel-transparent no-margin-b">
 							<div class="panel-body">
@@ -908,14 +899,12 @@
 									<input type="text" name="description" class="form-control input-sm" placeholder="설명"  data-bind="value:menu.description" />
 								</div>
 							</div>				
-						</form>			
-						
+						</form>							
 					</div>					
 					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
 						<div id="xml-editor">												
 						</div>							
-					</div>					
-					</div>	
+					</div>
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
 						<button type="button" class="btn btn-primary btn-flat disable hidden" data-action="saveOrUpdate">저장</button>
