@@ -50,6 +50,7 @@
 					if( e.field.match('^website.name')){ 
 						if( sender.website.webSiteId > 0 ){
 							this.set("logoUrl", "/download/logo/site/" + sender.website.name );
+							this.set("profileUrl", "/download/profile/" + sender.website.user.username  + "?width=100&height=150");
 							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.creationDate ));      
 							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));						
 						}
@@ -722,7 +723,20 @@
 												<i class="fa fa-lock fa-lg" data-bind="invisible: website.allowAnonymousAccess" style="display: none;"></i>
 												<i class="fa fa-unlock fa-lg" data-bind="visible: website.allowAnonymousAccess"></i>														
 											</td>
-										</tr>																	
+										</tr>							
+										<tr>
+											<th><small>담당자</small></th>								
+												<td>
+													<div class="media">
+														<a class="pull-left" href="#">
+															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
+														</a>
+														<div class="media-body">
+															<h6 class="media-heading"><span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)</h6>
+														</div>
+													</div>													
+												</td>
+											</tr>																															
 										<tr>
 											<th><span class="badge">생성일</span></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
