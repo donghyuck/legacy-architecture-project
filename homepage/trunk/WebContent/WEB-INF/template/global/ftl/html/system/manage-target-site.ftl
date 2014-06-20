@@ -62,6 +62,7 @@
 						e.token.copy(currentUser);
 					}
 				});
+				
 				common.api.callback({
 					url :"${request.contextPath}/secure/get-site.do?output=json", 
 					data : { targetSiteId:  detailsModel.website.webSiteId },
