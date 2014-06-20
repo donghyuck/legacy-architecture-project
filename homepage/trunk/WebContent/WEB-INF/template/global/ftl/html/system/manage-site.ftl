@@ -166,6 +166,7 @@
 		}
 		
 		function toggleLogoUploadPanel(){
+			
 			if( !$('#logo-file').data('kendoUpload') ){
 				$("#logo-file").kendoUpload({
 					multiple : false,
@@ -190,7 +191,8 @@
 						}
 					}
 				});						
-			}			
+			}		
+				
 			if(!$('#logo-grid').data('kendoGrid')){				
 				$("#logo-grid").kendoGrid({
 					dataSource: {
@@ -208,6 +210,7 @@
 						},
 						error: common.api.handleKendoAjaxError
 					},
+					autoBind: false,
 					height: 200,
 					columns:[
 						{ field: "logoId", title: "ID",  width: 30, filterable: false, sortable: false },
@@ -218,7 +221,9 @@
 			}
 			
 			var renderTo = $('.panel[data-action="upload-logo"]');
+			
 			if( !renderTo.is(":visible") ){
+				$('#logo-grid').data('kendoGrid').dataSource.read();
 				common.ui.animate_v3(renderTo, "fadeInDown").show();
 			}else{
 				common.ui.animate_v3(renderTo, "fadeOutUp").show();
@@ -614,7 +619,7 @@
 			
 		
 		function createSiteGrid(){			
-			var selectedCompany = getSelectedCompany();
+			
 			if( ! $("#website-grid").data("kendoGrid") ){	
 				$('#website-grid').kendoGrid({
 								dataSource: {
@@ -623,9 +628,9 @@
 										read: { url:'${request.contextPath}/secure/list-site.do?output=json', type: 'POST' },
 										parameterMap: function (options, operation){
 											if (operation != "read" && options) {										                        								                       	 	
-												return { targetCompanyId: selectedCompany.companyId , item: kendo.stringify(options)};									                            	
+												return { targetCompanyId: getSelectedCompany().companyId , item: kendo.stringify(options)};									                            	
 											}else{
-												return { targetCompanyId: selectedCompany.companyId }
+												return { targetCompanyId: getSelectedCompany().companyId }
 											}
 										} 
 									},
@@ -663,12 +668,12 @@
 								change: function(e) {          
 									var selectedCells = this.select();
 									if( selectedCells.length > 0 ){
-										var selectedCell = this.dataItem( selectedCells );			
-										selectedCell.copy( $("#website-grid").data("sitePlaceHolder"));										
+										var selectedCell = this.dataItem( selectedCells );	
 									}
 								}				
 				});
 			}
+			
 			$("#website-grid").data("kendoGrid").dataSource.read(); 
 		}
 		
