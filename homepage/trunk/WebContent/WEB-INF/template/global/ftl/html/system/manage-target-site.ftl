@@ -155,13 +155,15 @@
 		function openMenuSettingWindow (site){
 			var renderToString = "menu-setting-modal";
 			var renderTo = $( '#' + renderToString );			
-			var editor = ace.edit("xml-editor");
+			
 			
 			if( renderTo.length === 0 ){		
 				var template = kendo.template($('#menu-setting-modal-template').html());
 				$("#main-wrapper").append( template({uid:renderToString}) );				
 				renderTo = $('#' + renderToString );
 			}
+			
+			var editor = ace.edit("xml-editor");
 			
 			{	
 				renderTo.modal({
