@@ -758,7 +758,7 @@
 			var grid = renderTo.data('kendoGrid');			
 			var selectedCells = grid.select();			
 			if( selectedCells.length == 0){
-				return new Company();
+				return new common.models.WebSite();
 			}else{			
 				var selectedCell = grid.dataItem( selectedCells );   
 				return selectedCell;
