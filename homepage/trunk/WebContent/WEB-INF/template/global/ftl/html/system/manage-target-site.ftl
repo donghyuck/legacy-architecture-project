@@ -47,7 +47,6 @@
 					
 				detailsModel.bind("change", function(e){		
 					var sender = e.sender ;
-					alert(e.field);
 					if( e.field.match('^website.name')){ 
 						if( sender.website.webSiteId > 0 ){
 							this.set("logoUrl", "/download/logo/site/" + sender.website.name );			
