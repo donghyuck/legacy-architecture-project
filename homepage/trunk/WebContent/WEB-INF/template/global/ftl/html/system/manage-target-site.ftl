@@ -54,7 +54,7 @@
 						}
 					}else if( e.field.match('^website.user')){ 
 						this.set("profileUrl", "/download/profile/" + sender.website.user.username  + "?width=100&height=150");
-						this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.creationDate ));      
+						this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));      
 						this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));									
 					}					
 				});				
@@ -732,14 +732,16 @@
 											</td>
 										</tr>							
 										<tr>
-											<th><small>담당자</small></th>								
+											<th><span class="badge">담당자</span></th>								
 												<td>
 													<div class="media">
 														<a class="pull-left" href="#">
 															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
 														</a>
 														<div class="media-body">
-															<h6 class="media-heading"><span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)</h6>
+															<h5 class="media-heading">
+															<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
+															</h5>
 														</div>
 													</div>													
 												</td>
