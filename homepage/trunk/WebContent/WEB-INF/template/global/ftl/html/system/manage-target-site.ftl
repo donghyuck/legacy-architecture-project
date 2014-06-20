@@ -154,7 +154,9 @@
 
 		function openMenuSettingWindow (site){
 			var renderToString = "menu-setting-modal";
-			var renderTo = $( '#' + renderToString );
+			var renderTo = $( '#' + renderToString );			
+			var editor = ace.edit("xml-editor");
+			
 			if( renderTo.length === 0 ){		
 				var template = kendo.template($('#menu-setting-modal-template').html());
 				$("#main-wrapper").append( template({uid:renderToString}) );				
@@ -170,8 +172,20 @@
 					
 					}
 				});
-				kendo.bind(renderTo, editorModel);								
+				
+				kendo.bind(renderTo, editorModel);						
+				editor.setTheme("ace/theme/monokai");
+				editor.getSession().setMode("ace/mode/xml");
+				var switcher = renderTo.find('input[role="switcher"][name="warp-switcher"]');
+				if( switcher.length > 0 ){
+					$(switcher).switcher();
+					$(switcher).change(function(){
+						editor.getSession().setUseWrapMode($(this).is(":checked"));
+					});		
+				}
+				
 				renderTo.on('hidden.bs.modal', function(e){
+				
 				});
 				renderTo.on('show.bs.modal', function(e){				
 					site.menu.copy( editorModel.menu );
@@ -179,7 +193,7 @@
 				});
 				
 			}
-			
+			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
 		} 
 
