@@ -669,11 +669,32 @@
 		</style>		
 </#compress>		
 	</head>
-	<body>
-		<!-- START HEADER -->
-		<section id="navbar"></section>
-		<!-- END HEADER -->
-		<!-- START MAIN CONTNET -->
+	<body class="theme-default main-menu-animated">
+		<div id="main-wrapper">
+			<#include "/html/common/common-system-navigation.ftl" >	
+			<div id="content-wrapper">
+				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_2") />
+				<ul class="breadcrumb breadcrumb-page">
+					<!--<div class="breadcrumb-label text-light-gray">You are here: </div>-->
+					<li><a href="#">Home</a></li>
+					<li><a href="${ selectedMenu.parent.page!"#" }">${selectedMenu.parent.title}</a></li>
+					<li class="active"><a href="#">${selectedMenu.title}</a></li>
+				</ul>
+				<div class="page-header bg-dark-gray">		
+					<div class="row">
+						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
+							<p><small><i class="fa fa-quote-left"></i> ${selectedMenu.description} <i class="fa fa-quote-right"></i></small></p>
+						</h1>						
+					</div>				
+				</div><!-- / .page-header -->
+				<!-- details-row -->
+				<div id="company-details" class="page-details" style="">
+				
+				</div>
+			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg"></div>
+		</div> <!-- / #main-wrapper -->	
+				
 		
 		<div class="container-fluid">		
 			<div class="row">			
