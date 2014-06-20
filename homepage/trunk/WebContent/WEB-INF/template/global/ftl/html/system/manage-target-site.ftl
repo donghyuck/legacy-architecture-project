@@ -42,9 +42,9 @@
 				// 3.MENU LOAD 
 				var detailsModel = kendo.observable({
 					company : new Company(),
-					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} );
+					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} ),
 					isEnabled : false
-					});
+				});
 					
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
@@ -55,8 +55,7 @@
 							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
 						}						
 					}	
-				});
-				
+				});				
 				
 				common.ui.admin.setup({
 					authenticate: function(e){
