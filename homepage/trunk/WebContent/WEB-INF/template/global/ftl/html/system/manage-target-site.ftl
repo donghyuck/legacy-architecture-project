@@ -175,6 +175,7 @@
 				});
 				renderTo.on('show.bs.modal', function(e){				
 					site.menu.copy( editorModel.menu );
+					alert(kendo.stringify(editorModel.menu));
 				});
 				
 			}
