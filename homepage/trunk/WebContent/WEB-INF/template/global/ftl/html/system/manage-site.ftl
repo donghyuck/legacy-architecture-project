@@ -88,6 +88,20 @@
 							error:common.api.handleKendoAjaxError,
 							dataType : "json"
 						});
+					}
+					teleport : function(e){
+						var action = $(e.target).attr('data-action');
+						if(action === 'go-group'){
+							common.api.teleportation().teleport({
+								action : '${request.contextPath}/main-group.do',
+								companyId : this.get('company').companyId
+							});							
+						}else if (action === 'go-user'){
+							common.api.teleportation().teleport({
+								action : '${request.contextPath}/main-user.do',
+								companyId : this.get('company').companyId
+							});								
+						}
 					}										
 				});	
 				
@@ -117,46 +131,8 @@
 				
 												 
 				 // 4. PAGE MAIN		
-				 var selectedSocial = {};		
-				 	
+				 var selectedSocial = {};					 	
 				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );			
-				 /**	 
-				 common.ui.handleButtonActionEvents(
-					$("button.btn-control-group"), 
-					{event: 'click', handlers: {
-						'update-company' : function(e){
-							showCompanySetting();					
-						},
-						group : function(e){
-							topBar.go('main-group.do');				
-						}, 	
-						user : function(e){
-							topBar.go('main-user.do');			
-						}, 							
-						media : function(e){
-							$('#company-details .panel[role="media"]').toggleClass('hide');
-						},
-						'close-media' : function(e){
-							$("button.btn-control-group[data-action='media']").click();
-						},
-						timeline: function(e){
-							$('#company-details .panel[role="timeline"]').toggleClass('hide');
-						},
-						'close-timeline': function(e){
-							$("button.btn-control-group[data-action='timeline']").click();
-						},
-						'upload-logo': function(e){
-							displayLogoUpload();				
-						},
-						'close-upload-logo': function(e){
-							$("button.btn-control-group[data-action='upload-logo']").click();
-						},						
-						connect : function(e){
-							alert("social modal");	 					
-						}			  						 
-					}}
-				);
-				*/
 			}	
 		}]);
 		
@@ -181,8 +157,7 @@
 							break;															
 					}	
 				});				
-				$('#company-tabs a:first').tab('show') ;
-				
+				$('#company-tabs a:first').tab('show') ;				
 				createSiteGrid();	
 		}
 		
@@ -778,9 +753,24 @@
 			}
 		}
 		
+		function getSelectedSite(){			
+			var renderTo = $("#website-grid");
+			var grid = renderTo.data('kendoGrid');			
+			var selectedCells = grid.select();			
+			if( selectedCells.length == 0){
+				return new Company();
+			}else{			
+				var selectedCell = grid.dataItem( selectedCells );   
+				return selectedCell;
+			}
+		}		
+		
 		function goSite (){					
-			$("form[name='navbar-form'] input[name='targetSiteId']").val( $("#website-grid").data("sitePlaceHolder").webSiteId );
-			$("#navbar").data("kendoExtNavbar").go("view-site.do");							
+			common.api.teleportation().teleport({
+				action : '${request.contextPath}/view-site.do',
+				targetSiteId : getSelectedSite.webSiteId
+			});
+						
 		}
 		
 
