@@ -42,8 +42,10 @@
 				// 3.MENU LOAD 
 				var detailsModel = kendo.observable({
 					company : new Company(),
+					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} );
 					isEnabled : false
 					});
+					
 				detailsModel.bind("change", function(e){		
 					if( e.field.match('^company.name')){ 						
 						var sender = e.sender ;
@@ -54,39 +56,40 @@
 						}						
 					}	
 				});
-									
+				
+				
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
 					},
 					companyChanged: function(item){
 						item.copy(detailsModel.company);
-						detailsModel.isEnabled = true;		
-						kendo.bind($("#company-details"), detailsModel );		
-						//displayCompanyDetails();	
+						detailsModel.isEnabled = true;
+						common.api.callback({
+							url :"${request.contextPath}/secure/get-site.do?output=json", 
+							data : { targetSiteId:  detailsModel.website.webSiteId },
+							success : function(response){
+								var site = new common.models.WebSite(response.targetWebSite);
+								site.copy( detailsModel.website );
+								kendo.bind($("#site-info"), sitePlaceHolder );
+								//$('button.btn-control-group').removeAttr("disabled");						
+							},
+							requestStart : function(){
+								kendo.ui.progress($("#site-info"), true);
+							},
+							requestEnd : function(){
+								kendo.ui.progress($("#site-info"), false);
+							}
+						}); 						
+						kendo.bind($("#website-details"), detailsModel );
+						displayWebsiteDetails();
 					}
 				});
 												 
 				 // 4. PAGE MAIN		
 				 var sitePlaceHolder = new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} );
 				 $("#site-info").data("sitePlaceHolder", sitePlaceHolder );
-				common.api.callback(  
-				{
-					url :"${request.contextPath}/secure/get-site.do?output=json", 
-					data : { targetSiteId:  sitePlaceHolder.webSiteId },
-					success : function(response){
-						var site = new common.models.WebSite(response.targetWebSite);
-						site.copy( sitePlaceHolder );
-						kendo.bind($("#site-info"), sitePlaceHolder );
-						$('button.btn-control-group').removeAttr("disabled");						
-					},
-					requestStart : function(){
-						kendo.ui.progress($("#site-info"), true);
-					},
-					requestEnd : function(){
-						kendo.ui.progress($("#site-info"), false);
-					}
-				}); 
+
 			}	
 		}]);
 				
@@ -94,6 +97,10 @@
 			var setup = common.ui.admin.setup();
 			return setup.companySelector.dataItem(setup.companySelector.select());
 		}	
+			
+		function displayWebsiteDetails(){
+		
+		}
 			
 		function showWebsiteDetails(){			
 
