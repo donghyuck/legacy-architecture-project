@@ -88,7 +88,7 @@
 							error:common.api.handleKendoAjaxError,
 							dataType : "json"
 						});
-					}
+					},
 					teleport : function(e){
 						var action = $(e.target).attr('data-action');
 						if(action === 'go-group'){
