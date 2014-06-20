@@ -159,16 +159,26 @@
 				var template = kendo.template($('#menu-setting-modal-template').html());
 				$("#main-wrapper").append( template({uid:renderToString}) );				
 				renderTo = $('#' + renderToString );
+				
 				renderTo.modal({
 					backdrop: 'static'
 				});				
+				
+				var editorModel  =  kendo.observable({ 
+					menu : new Menu(),
+					onSave : function (e) {
+					
+					}
+				});
+				kendo.bind(renderTo, editorModel);								
 				renderTo.on('hidden.bs.modal', function(e){
-
 				});
 				renderTo.on('show.bs.modal', function(e){				
-
+					site.menu.copy( editorModel.menu );
 				});
+				
 			}
+			
 			renderTo.modal('show');	
 		} 
 
@@ -900,7 +910,7 @@
 							</div>				
 						</form>							
 					</div>					
-					<div class="modal-body no-padding menu-editor-group" style="height:400px;">
+					<div class="modal-body no-padding" style="height:400px;">
 						<div id="xml-editor">												
 						</div>							
 					</div>
