@@ -43,6 +43,9 @@
 				var detailsModel = kendo.observable({
 					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} ),
 					isEnabled : false,
+					openMenuModal : function(e){
+						showWebsiteMenuSetting()
+					},
 					teleport : function(e){
 						var action = $(e.target).attr('data-action');
 						if(action === 'go-group'){
@@ -81,8 +84,7 @@
 					authenticate: function(e){
 						e.token.copy(currentUser);
 					}
-				});
-				
+				});				
 				common.api.callback({
 					url :"${request.contextPath}/secure/get-site.do?output=json", 
 					data : { targetSiteId:  detailsModel.website.webSiteId },
@@ -103,12 +105,7 @@
 						kendo.ui.progress($("#website-details"), false);
 					}
 				}); 						
-						
-																		 
-				 // 4. PAGE MAIN		
-				 var sitePlaceHolder = new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} );
-				 $("#site-info").data("sitePlaceHolder", sitePlaceHolder );
-
+				
 			}	
 		}]);
 				
