@@ -720,15 +720,15 @@
 								},
 								/* toolbar: [ { name: "create", text: "웹 사이트 추가" } ],      */
 								columns:[
-									{ field: "webSiteId", title: "ID",  width: 50, filterable: false, sortable: false, locked: true, lockable: false },
-									{ field: "name", title: "키", width: 150, locked: true, template: '<button type="button" class="btn btn-warning btn-xs btn-block" onclick="goSite(this); return false;">#: name #</a>'},									
+									{ field: "webSiteId", title: "ID",  width: 50, filterable: false, sortable: false},
+									{ field: "name", title: "키", width: 200, template: '<button type="button" class="btn btn-warning btn-xs btn-block" onclick="goSite(this); return false;">#: name #</a>'},									
 									{ field: "displayName", title: "이름",  width: 100 },
 									{ field: "description", title: "설명",  width: 200 },
-									{ field: "url", title: "URL",  width: 150, locked: true },
+									{ field: "url", title: "URL",  width: 150 },
 									{ field: "enabled", title: "사용여부",  width: 100 },
 									{ field: "allowAnonymousAccess", title: "공개여부",  width: 100 },
-									{ field: "creationDate", title: "생성일", width: 90, format: "{0:yyyy/MM/dd}" },
-									{ field: "modifiedDate", title: "수정일", width: 90, format: "{0:yyyy/MM/dd}" },
+									{ field: "creationDate", title: "생성일", width: 120, format: "{0:yyyy/MM/dd}" },
+									{ field: "modifiedDate", title: "수정일", width: 120, format: "{0:yyyy/MM/dd}" },
 								/*	{ command: [ {name: "destroy", text: "삭제" }, {name:"edit",  text: { edit: "수정", update: "저장", cancel: "취소"}  }  ], title: "&nbsp;", width: 180  }	*/
 								], 
 								editable: "inline",
