@@ -906,10 +906,7 @@
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
 			</div>
-		</div> <!-- / #main-wrapper -->
-				
-
-  
+		</div> <!-- / #main-wrapper -->  
 		<!-- Modal -->
 		<div id="social-detail-window" style="display:none;"></div>
 		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
