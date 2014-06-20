@@ -189,8 +189,8 @@
 			url : { type: "string", editable: true},
 			enabled: { type: "boolean", editable: true , defaultValue: false},
 			allowAnonymousAccess: { type: "boolean", editable: true, defaultValue: false },
-	        modifiedDate: { type: "date", editable: false },
-	        creationDate: { type: "date", editable: false } 			
+	        modifiedDate: { type: "date", editable: true },
+	        creationDate: { type: "date", editable: true } 			
 		},
 	    copy: function ( target ){
 	    	target.webSiteId = this.get("webSiteId");
