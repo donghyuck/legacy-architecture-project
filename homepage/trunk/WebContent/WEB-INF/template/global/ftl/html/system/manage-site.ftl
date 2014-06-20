@@ -721,7 +721,7 @@
 								/* toolbar: [ { name: "create", text: "웹 사이트 추가" } ],      */
 								columns:[
 									{ field: "webSiteId", title: "ID",  width: 50, filterable: false, sortable: false},
-									{ field: "name", title: "키", width: 200, template: '<button type="button" class="btn btn-warning btn-xs btn-block" onclick="goSite(this); return false;">#: name #</a>'},									
+									{ field: "name", title: "키", width: 200, template: '<button type="button" class="btn btn-warning btn-xs" onclick="goSite(this); return false;">#: name #</a>'},									
 									{ field: "displayName", title: "이름",  width: 100 },
 									{ field: "description", title: "설명",  width: 200 },
 									{ field: "url", title: "URL",  width: 150 },
