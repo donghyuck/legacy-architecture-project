@@ -155,8 +155,7 @@
 		function openMenuSettingWindow (site){
 			var renderToString = "menu-setting-modal";
 			var renderTo = $( '#' + renderToString );			
-			
-			
+						
 			if( renderTo.length === 0 ){		
 				var template = kendo.template($('#menu-setting-modal-template').html());
 				$("#main-wrapper").append( template({uid:renderToString}) );				
@@ -164,18 +163,39 @@
 			}
 			
 			var editor = ace.edit("xml-editor");
-			
-			{	
-				renderTo.modal({
-					backdrop: 'static'
-				});				
-				
+			if( !renderTo.data('model') ){				
 				var editorModel  =  kendo.observable({ 
 					menu : new Menu(),
 					onSave : function (e) {
 					
 					}
 				});
+				kendo.bind(renderTo, editorModel);	
+				
+				editor.setTheme("ace/theme/monokai");
+				editor.getSession().setMode("ace/mode/xml");
+				var switcher = renderTo.find('input[role="switcher"][name="warp-switcher"]');
+				if( switcher.length > 0 ){
+					$(switcher).switcher();
+					$(switcher).change(function(){
+						editor.getSession().setUseWrapMode($(this).is(":checked"));
+					});		
+				}					
+				renderTo.modal({
+					backdrop: 'static'
+				});								
+			}
+			site.memu.copy( renderTo.data('model').menu );
+			editor.setValue(renderTo.data("model").menu.menuData);
+			renderTo.modal('show');	
+			
+			/*
+			{	
+				renderTo.modal({
+					backdrop: 'static'
+				});				
+				
+
 				
 				kendo.bind(renderTo, editorModel);						
 				editor.setTheme("ace/theme/monokai");
@@ -198,7 +218,8 @@
 				
 			}
 			editor.setValue(renderTo.data("model").menu.menuData);
-			renderTo.modal('show');	
+			*/
+			
 		} 
 
 		/**
