@@ -71,8 +71,6 @@
 						var site = new common.models.WebSite(response.targetWebSite);
 						site.copy( detailsModel.website );
 						
-					alert( detailsModel.website );
-												
 												
 						detailsModel.isEnabled = true;
 						displayWebsiteDetails();
@@ -80,10 +78,10 @@
 						//$('button.btn-control-group').removeAttr("disabled");						
 					},
 					requestStart : function(){
-						kendo.ui.progress($("#site-info"), true);
+						kendo.ui.progress($("#website-details"), true);
 					},
 					requestEnd : function(){
-						kendo.ui.progress($("#site-info"), false);
+						kendo.ui.progress($("#website-details"), false);
 					}
 				}); 						
 						
