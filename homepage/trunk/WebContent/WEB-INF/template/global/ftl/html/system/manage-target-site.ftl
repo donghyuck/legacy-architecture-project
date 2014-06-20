@@ -663,6 +663,10 @@
 			bottom: 0;
 			left: 0;
 		}
+		.page-details .left-col {
+			float: left;
+			width: 280px;
+		}		
 		</style>		
 </#compress>		
 	</head>
