@@ -42,7 +42,21 @@
 				// 3.MENU LOAD 
 				var detailsModel = kendo.observable({
 					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} ),
-					isEnabled : false
+					isEnabled : false,
+					teleport : function(e){
+						var action = $(e.target).attr('data-action');
+						if(action === 'go-group'){
+							common.api.teleportation().teleport({
+								action : '${request.contextPath}/secure/main-group.do',
+								companyId : this.get('website').company.companyId
+							});							
+						}else if (action === 'go-user'){
+							common.api.teleportation().teleport({
+								action : '${request.contextPath}/secure/main-user.do',
+								companyId: this.get('website').company.companyId
+							});								
+						}
+					}						
 				});
 					
 				detailsModel.bind("change", function(e){		
