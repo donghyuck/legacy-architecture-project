@@ -717,11 +717,10 @@
 												<span data-bind="text: website.displayName"></span> 
 												<span class="label label-warning"><span data-bind="text: website.name"></span></span> 
 												<code><span data-bind="text: website.webSiteId">1</span></code>
-												<span class="label label-danger" data-bind="invisible: enabled" style="display: none;"><i class="fa fa-times"></i></span>
 											</td>
 										</tr>				
 										<tr>
-											<th><small>보안</small></th>	
+											<th><span class="badge">보안</span></th>	
 											<td>
 												<i class="fa fa-lock fa-lg" data-bind="invisible: website.allowAnonymousAccess" style="display: none;"></i>
 												<i class="fa fa-unlock fa-lg" data-bind="visible: website.allowAnonymousAccess"></i>														
