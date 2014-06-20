@@ -699,7 +699,7 @@
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
-									<span class="panel-title" data-bind="text:company.description"></span>									
+									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
 								<table class="table">
 									<tbody>						
@@ -711,6 +711,22 @@
 											<th><span class="badge">도메인</span></th>								
 											<td><span data-bind="text: company.domainName"></span></td>
 										</tr>	
+										<tr>
+											<td><span class="badge">사이트</span></td>								
+											<td>
+												<span data-bind="text: website.displayName"></span> 
+												<span class="label label-warning"><span data-bind="text: website.name"></span></span> 
+												<code><span data-bind="text: website.webSiteId">1</span></code>
+												<span class="label label-danger" data-bind="invisible: enabled" style="display: none;"><i class="fa fa-times"></i></span>
+											</td>
+										</tr>				
+										<tr>
+											<th><small>보안</small></th>	
+											<td>
+												<i class="fa fa-lock fa-lg" data-bind="invisible: website.allowAnonymousAccess" style="display: none;"></i>
+												<i class="fa fa-unlock fa-lg" data-bind="visible: website.allowAnonymousAccess"></i>														
+											</td>
+										</tr>																	
 										<tr>
 											<th><span class="badge">생성일</span></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
