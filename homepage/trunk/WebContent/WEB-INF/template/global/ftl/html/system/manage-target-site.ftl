@@ -41,7 +41,6 @@
 														
 				// 3.MENU LOAD 
 				var detailsModel = kendo.observable({
-					company : new Company(),
 					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} ),
 					isEnabled : false
 				});
@@ -60,34 +59,28 @@
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
-					},
-					companyChanged: function(item){
-						item.copy(detailsModel.company);						
-						common.api.callback({
-							url :"${request.contextPath}/secure/get-site.do?output=json", 
-							data : { targetSiteId:  detailsModel.website.webSiteId },
-							success : function(response){
-								var site = new common.models.WebSite(response.targetWebSite);
-								site.copy( detailsModel.website );
-								detailsModel.isEnabled = true;
-								displayWebsiteDetails();
-								//kendo.bind($("#site-info"), sitePlaceHolder );
-								//$('button.btn-control-group').removeAttr("disabled");						
-							},
-							requestStart : function(){
-								kendo.ui.progress($("#site-info"), true);
-							},
-							requestEnd : function(){
-								kendo.ui.progress($("#site-info"), false);
-							}
-						}); 						
-						
-						kendo.bind($("#website-details"), detailsModel );
-						
-						
 					}
 				});
-												 
+				common.api.callback({
+					url :"${request.contextPath}/secure/get-site.do?output=json", 
+					data : { targetSiteId:  detailsModel.website.webSiteId },
+					success : function(response){
+						var site = new common.models.WebSite(response.targetWebSite);
+						site.copy( detailsModel.website );
+						detailsModel.isEnabled = true;
+						displayWebsiteDetails();
+						kendo.bind($("#website-details"), detailsModel );
+						//$('button.btn-control-group').removeAttr("disabled");						
+					},
+					requestStart : function(){
+						kendo.ui.progress($("#site-info"), true);
+					},
+					requestEnd : function(){
+						kendo.ui.progress($("#site-info"), false);
+					}
+				}); 						
+						
+																		 
 				 // 4. PAGE MAIN		
 				 var sitePlaceHolder = new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} );
 				 $("#site-info").data("sitePlaceHolder", sitePlaceHolder );
@@ -709,11 +702,11 @@
 									<tbody>						
 										<tr>
 											<td><span class="badge">회사</span></td>								
-											<td><span data-bind="text: company.displayName"></span> <span class="label label-primary"><span data-bind="text: company.name"></span></span> <code><span data-bind="text: company.companyId"></span></code></td>
+											<td><span data-bind="text: website.company.displayName"></span> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> <code><span data-bind="text: website.company.companyId"></span></code></td>
 										</tr>	
 										<tr>
 											<th><span class="badge">도메인</span></th>								
-											<td><span data-bind="text: company.domainName"></span></td>
+											<td><span data-bind="text: website.company.domainName"></span></td>
 										</tr>	
 										<tr>
 											<td><span class="badge">사이트</span></td>								
