@@ -665,8 +665,49 @@
 					</div>				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
-				<div id="company-details" class="page-details" style="">
-				
+				<div id="company-details" class="page-details" style="">				
+					<div class="details-row no-margin-t">					
+						<div class="left-col">
+							<div class="details-block no-margin-t">
+								<div class="details-photo">
+									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
+								</div>
+								<br>
+								<!--
+								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
+								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
+							</div>				
+							<div class="panel panel-transparent">
+								<div class="panel-heading">
+									<span class="panel-title" data-bind="text:company.description"></span>									
+								</div>
+								<table class="table">
+									<tbody>						
+										<tr>
+											<td><span class="badge">회사</span></td>								
+											<td><span data-bind="text: company.displayName"></span> <span class="label label-primary"><span data-bind="text: company.name"></span></span> <code><span data-bind="text: company.companyId"></span></code></td>
+										</tr>	
+										<tr>
+											<th><span class="badge">도메인</span></th>								
+											<td><span data-bind="text: company.domainName"></span></td>
+										</tr>	
+										<tr>
+											<th><span class="badge">생성일</span></th>								
+											<td><span data-bind="text:formattedModifiedDate"></span></td>
+										</tr>	
+										<tr>
+											<th><span class="badge">수정일</span></th>								
+											<td><span data-bind="text:formattedModifiedDate"></span></td>
+										</tr>																								
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="right-col">
+							<hr class="details-content-hr no-grid-gutter-h"/>						
+							<div class="details-content">	</div>
+						</div>				
+					</div>							
 				</div>
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg"></div>
