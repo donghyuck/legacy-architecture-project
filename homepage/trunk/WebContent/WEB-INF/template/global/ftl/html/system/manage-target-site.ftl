@@ -44,7 +44,7 @@
 					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} ),
 					isEnabled : false,
 					openMenuModal : function(e){
-						showWebsiteMenuSetting()
+						openMenuSettingWindow( this.website );
 					},
 					teleport : function(e){
 						var action = $(e.target).attr('data-action');
@@ -151,6 +151,95 @@
 			$("#navbar").data("kendoExtNavbar").go("view-website-pages.do");							
 		}
 
+
+		function openMenuSettingWindow (site){
+			var renderToString = "menu-setting-modal";
+			var renderTo = $( '#' + renderToString );
+			if( renderTo.length === 0 ){		
+				$("#main-wrapper").append( kendo.template($('#menu-modal-template').html()) );				
+				renderTo = $('#' + renderToString );
+				renderTo.modal({
+					backdrop: 'static'
+				});				
+				renderTo.on('hidden.bs.modal', function(e){
+
+				});
+				renderTo.on('show.bs.modal', function(e){				
+
+				});
+			}
+			renderTo.modal('show');	
+		} 
+
+		/**
+		*  WebSite Menu Setting Modal 
+		*
+		**/		
+		function showWebsiteMenuSetting(){
+			var renderToString = "website-menu-setting-modal";
+			
+			if( $("#"+ renderToString).length == 0 ){
+				$('body').append('<div id="'+ renderToString +'"/>');
+				$("#"+ renderToString).data("sitePlaceHolder", new common.models.WebSite() );
+			}
+			
+			var sitePlaceHolder =$("#"+ renderToString).data("sitePlaceHolder");			
+			$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);			
+			
+			
+			if( !$("#"+ renderToString ).data('kendoExtModalWindow') ){				
+				if( sitePlaceHolder.menu.menuId === ${ WebSiteUtils.getDefaultMenuId() } ) {			
+					sitePlaceHolder.menu.set("name", sitePlaceHolder.name + "_MENU");
+					sitePlaceHolder.menu.set("title", sitePlaceHolder.displayName + " 메뉴");
+					sitePlaceHolder.menu.menuId = 0;
+				}								
+				var websiteMenuSettingViewModel  =  kendo.observable({ 
+					website :sitePlaceHolder,
+					onSave : function (e) {
+						var menuToUse = this.website.menu;
+						menuToUse.menuData = ace.edit("xmleditor").getValue();
+						common.api.callback(  
+						{
+							url :"${request.contextPath}/secure/update-site-menu.do?output=json", 
+							data : { targetSiteId:  sitePlaceHolder.webSiteId, item: kendo.stringify(menuToUse) },
+							success : function(response){
+								common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
+								var websiteToUse = new common.models.WebSite(response.targetWebSite);																
+								websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );								
+								$("#"+ renderToString ).data('kendoExtModalWindow').close();								
+								if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
+									window.location.reload( true );								
+							},
+							fail: function(){								
+								common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
+								$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);
+							},
+							requestStart : function(){
+								kendo.ui.progress($("#"+ renderToString ), true);
+							},
+							requestEnd : function(){
+								kendo.ui.progress($( "#"+ renderToString ), false);
+							}
+						}); 								
+					}
+				});
+				
+				$("#"+ renderToString ).extModalWindow({
+					title : "사이트 메뉴",
+					backdrop : 'static',
+					template : $("#website-menu-setting-modal-template").html(),
+					data :  websiteMenuSettingViewModel,
+					refresh : function(e){
+						var editor = ace.edit("xmleditor");
+						editor.getSession().setMode("ace/mode/xml");
+						editor.getSession().setUseWrapMode(true);
+					}  
+				});	
+			}			
+			ace.edit("xmleditor").setValue(sitePlaceHolder.menu.menuData);
+			$("#"+ renderToString ).data('kendoExtModalWindow').open();	
+		}		
+		
 
 		function createSocialPane(){
 			var selectedCompany = $("#navbar").data("companyPlaceHolder");
@@ -530,73 +619,6 @@
 		}
 				
 				
-		/**
-		*  WebSite Menu Setting Modal 
-		*
-		**/		
-		function showWebsiteMenuSetting(){
-			var renderToString = "website-menu-setting-modal";
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"/>');
-				$("#"+ renderToString).data("sitePlaceHolder", new common.models.WebSite() );
-			}
-			
-			var sitePlaceHolder =$("#"+ renderToString).data("sitePlaceHolder");			
-			$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);			
-			
-			if( !$("#"+ renderToString ).data('kendoExtModalWindow') ){				
-				if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) {			
-					sitePlaceHolder.menu.set("name", sitePlaceHolder.name + "_MENU");
-					sitePlaceHolder.menu.set("title", sitePlaceHolder.displayName + " 메뉴");
-					sitePlaceHolder.menu.menuId = 0;
-				}								
-				var websiteMenuSettingViewModel  =  kendo.observable({ 
-					website :sitePlaceHolder,
-					onSave : function (e) {
-						var menuToUse = this.website.menu;
-						menuToUse.menuData = ace.edit("xmleditor").getValue();
-						common.api.callback(  
-						{
-							url :"${request.contextPath}/secure/update-site-menu.do?output=json", 
-							data : { targetSiteId:  sitePlaceHolder.webSiteId, item: kendo.stringify(menuToUse) },
-							success : function(response){
-								common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
-								var websiteToUse = new common.models.WebSite(response.targetWebSite);																
-								websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );								
-								$("#"+ renderToString ).data('kendoExtModalWindow').close();								
-								if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
-									window.location.reload( true );								
-							},
-							fail: function(){								
-								common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
-								$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);
-							},
-							requestStart : function(){
-								kendo.ui.progress($("#"+ renderToString ), true);
-							},
-							requestEnd : function(){
-								kendo.ui.progress($( "#"+ renderToString ), false);
-							}
-						}); 								
-					}
-				});
-				
-				$("#"+ renderToString ).extModalWindow({
-					title : "사이트 메뉴",
-					backdrop : 'static',
-					template : $("#website-menu-setting-modal-template").html(),
-					data :  websiteMenuSettingViewModel,
-					refresh : function(e){
-						var editor = ace.edit("xmleditor");
-						editor.getSession().setMode("ace/mode/xml");
-						editor.getSession().setUseWrapMode(true);
-					}  
-				});	
-			}			
-			ace.edit("xmleditor").setValue(sitePlaceHolder.menu.menuData);
-			$("#"+ renderToString ).data('kendoExtModalWindow').open();	
-		}		
-		
 		function showWebsiteSetting(){
 		
 			var renderToString = "website-setting-modal";
@@ -834,6 +856,73 @@
 		<footer>  		
 		</footer>
 		<!-- END FOOTER -->
+		
+		<script id="#menu-modal-template" type="text/x-kendo-template">				
+		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
+			<div class="modal-dialog modal-lg animated swing">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">메뉴</h4>
+					</div>
+					<div class="modal-body no-padding">
+						<div class="panel panel-transparent no-margin-b">
+							<div class="panel-body">
+								<button class="btn btn-danger btn-flat btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> <small>새로운 메뉴 만들기</small></button>
+							</div>
+						</div>
+						<div id="menu-grid" class="no-border-hr no-border-b"></div>
+					</div>					
+					<div id="menu-editor">
+					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
+						<div class="panel panel-transparent no-margin-b">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-xs-6">
+										<button class="btn btn-primary btn-flat btn-labeled" data-action="editor-close"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
+									</div>
+									<div class="col-xs-6">
+										<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">줄 바꿈 설정</h6>
+										<input type="checkbox" name="warp-switcher" data-class="switcher-primary" role="switcher" >	
+									</div>
+								</div>	
+							</div>						
+						</div>					
+						<form class="form-horizontal">				
+							<div class="row no-margin">
+								<div class="col-sm-6">
+									<div class="form-group no-margin-hr">
+										<input type="text" name="name" class="form-control input-sm" placeholder="이름" data-bind="value: menu.name">
+									</div>
+								</div><!-- col-sm-6 -->
+								<div class="col-sm-6">
+									<div class="form-group no-margin-hr">
+										<input type="text" name="title" class="form-control input-sm" placeholder="타이틀" data-bind="value: menu.title">
+									</div>
+								</div><!-- col-sm-6 -->
+							</div>
+							<div class="row no-margin">
+								<div class="col-sm-12">
+									<input type="text" name="description" class="form-control input-sm" placeholder="설명"  data-bind="value:menu.description" />
+								</div>
+							</div>				
+						</form>			
+						
+					</div>					
+					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
+						<div id="xml-editor">												
+						</div>							
+					</div>					
+					</div>	
+					<div class="modal-footer">					
+						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
+						<button type="button" class="btn btn-primary btn-flat disable hidden" data-action="saveOrUpdate">저장</button>
+					</div>
+				</div>
+			</div>
+		</div>	
+				
+		</script> 
 		
 		<script id="image-details-template" type="text/x-kendo-template">				
 			<div class="panel panel-default">
