@@ -71,7 +71,7 @@
 							success : function(response){
 								var site = new common.models.WebSite(response.targetWebSite);
 								site.copy( detailsModel.website );
-								kendo.bind($("#site-info"), sitePlaceHolder );
+								//kendo.bind($("#site-info"), sitePlaceHolder );
 								//$('button.btn-control-group').removeAttr("disabled");						
 							},
 							requestStart : function(){
