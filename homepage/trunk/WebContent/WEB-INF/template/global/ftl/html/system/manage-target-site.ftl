@@ -857,7 +857,8 @@
 		</footer>
 		<!-- END FOOTER -->
 		
-		<script id="#menu-modal-template" type="text/x-kendo-template">				
+		<script id="#menu-setting-modal-template" type="text/x-kendo-template">				
+		
 		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
 			<div class="modal-dialog modal-lg animated swing">
 				<div class="modal-content">
