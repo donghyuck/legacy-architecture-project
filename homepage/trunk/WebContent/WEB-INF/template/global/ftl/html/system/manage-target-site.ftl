@@ -745,7 +745,14 @@
 														</div>
 													</div>													
 												</td>
-											</tr>																															
+											</tr>			
+												<tr>
+													<th><span class="badge">메뉴</span></th>	
+													<td><span data-bind="text: website.menu.title"></span> 
+														<span class="label label-warning"><span data-bind="text: webiste.menu.name"></span></span> 
+														<code><span data-bind="text: website.menu.menuId"></span></code>
+													</td>
+												</tr>																																									
 										<tr>
 											<th><span class="badge">생성일</span></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
