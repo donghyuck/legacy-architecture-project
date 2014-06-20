@@ -685,7 +685,7 @@
 					</div>				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
-				<div id="company-details" class="page-details" style="">				
+				<div id="website-details" class="page-details" style="">				
 					<div class="details-row no-margin-t">					
 						<div class="left-col">
 							<div class="details-block no-margin-t">
