@@ -737,6 +737,7 @@
 								sortable: true,
 								pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
 								selectable: 'row',
+								autoBind: false,
 								dataBound: function(e) {
 								
 								},
@@ -748,9 +749,8 @@
 									}
 								}				
 				});
-				
-			
 			}
+			$("#website-grid").data("kendoGrid").dataSource.read(); 
 		}
 		
 		function getSelectedSite(){			
