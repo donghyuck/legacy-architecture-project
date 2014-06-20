@@ -156,7 +156,7 @@
 			var renderToString = "menu-setting-modal";
 			var renderTo = $( '#' + renderToString );
 			if( renderTo.length === 0 ){		
-				$("#main-wrapper").append( kendo.template($('#menu-modal-template').html()) );				
+				$("#main-wrapper").append( kendo.template($('#menu-setting-modal-template').html()) );				
 				renderTo = $('#' + renderToString );
 				renderTo.modal({
 					backdrop: 'static'
@@ -857,7 +857,7 @@
 		</footer>
 		<!-- END FOOTER -->
 		
-		<script id="#menu-setting-modal-template" type="text/x-kendo-template">				
+		<script id="menu-setting-modal-template" type="text/x-kendo-template">				
 		
 		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
 			<div class="modal-dialog modal-lg animated swing">
