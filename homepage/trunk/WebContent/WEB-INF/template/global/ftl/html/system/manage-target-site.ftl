@@ -156,7 +156,8 @@
 			var renderToString = "menu-setting-modal";
 			var renderTo = $( '#' + renderToString );
 			if( renderTo.length === 0 ){		
-				$("#main-wrapper").append( kendo.template($('#menu-setting-modal-template').html({uid:renderToString})) );				
+				var template = kendo.template($('#menu-setting-modal-template').html());
+				$("#main-wrapper").append( template({uid:renderToString}) );				
 				renderTo = $('#' + renderToString );
 				renderTo.modal({
 					backdrop: 'static'
