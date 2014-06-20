@@ -62,14 +62,15 @@
 						e.token.copy(currentUser);
 					},
 					companyChanged: function(item){
-						item.copy(detailsModel.company);
-						detailsModel.isEnabled = true;
+						item.copy(detailsModel.company);						
 						common.api.callback({
 							url :"${request.contextPath}/secure/get-site.do?output=json", 
 							data : { targetSiteId:  detailsModel.website.webSiteId },
 							success : function(response){
 								var site = new common.models.WebSite(response.targetWebSite);
 								site.copy( detailsModel.website );
+								detailsModel.isEnabled = true;
+								displayWebsiteDetails();
 								//kendo.bind($("#site-info"), sitePlaceHolder );
 								//$('button.btn-control-group').removeAttr("disabled");						
 							},
@@ -80,8 +81,10 @@
 								kendo.ui.progress($("#site-info"), false);
 							}
 						}); 						
+						
 						kendo.bind($("#website-details"), detailsModel );
-						displayWebsiteDetails();
+						
+						
 					}
 				});
 												 
