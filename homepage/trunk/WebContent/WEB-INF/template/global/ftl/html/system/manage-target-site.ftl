@@ -69,8 +69,11 @@
 					data : { targetSiteId:  detailsModel.website.webSiteId },
 					success : function(response){
 						var site = new common.models.WebSite(response.targetWebSite);
-						alert( kendo.stringify(site) );
 						site.copy( detailsModel.website );
+						
+					alert( detailsModel.website );
+												
+												
 						detailsModel.isEnabled = true;
 						displayWebsiteDetails();
 						kendo.bind($("#website-details"), detailsModel );
