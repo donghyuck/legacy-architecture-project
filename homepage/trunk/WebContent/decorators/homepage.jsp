@@ -22,7 +22,14 @@
 <!--  customize  -->
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common/common.style.css" />
 <link  rel="stylesheet" type="text/css"  href="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/styles/common.themes/default.css" />
-
+<%
+	architecture.ee.web.util.UAgentInfo userAgentInfo = architecture.ee.web.util.ServletUtils.getUserAgentInfo(request);
+	if( userAgentInfo.detectMSIE8() || userAgentInfo.detectMSIE9() ){
+%>
+<script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/common.plugins/respond.min.js"></script>
+<%		
+	}
+%>
 <script src="<%= architecture.ee.web.util.ServletUtils.getContextPath(request) %>/js/yepnope/1.5.4/yepnope.min.js"></script>
 <decorator:head />
 
