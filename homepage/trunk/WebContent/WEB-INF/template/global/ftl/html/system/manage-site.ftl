@@ -131,8 +131,7 @@
 				
 												 
 				 // 4. PAGE MAIN		
-				 var selectedSocial = {};					 	
-				 $("#website-grid").data("sitePlaceHolder", new common.models.WebSite() );			
+
 			}	
 		}]);
 		
@@ -227,88 +226,12 @@
 		}
 
 		function toggleCompanyUpdatePanel(){		
-			var renderTo = $('.panel[data-action="update-company"]');	
-			/*
-			if(!renderTo.data('model') ){
-				var model =  kendo.observable({
-					company: new Company(),
-										
-				});
-				renderTo.data('model', model) 	
-				kendo.bind( renderTo, model );		
-			}
-						
-			getSelectedCompany.copy( renderTo.data('model') );			
-			*/
-			
+			var renderTo = $('.panel[data-action="update-company"]');				
 			if( !renderTo.is(":visible") ){
 				common.ui.animate_v3(renderTo, "fadeInDown").show();
 			}else{
 				common.ui.animate_v3(renderTo, "fadeOutUp").show();
 			}	
-		
-		/**
-			var renderToString = "company-setting-modal";
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"/>');
-			}
-			var companySetting = $("#"+ renderToString);
-			if( !companySetting.data('kendoExtModalWindow') ){			
-				
-				var companyPlaceHolder = new Company();
-				$("#navbar").data("companyPlaceHolder").copy(companyPlaceHolder);
-
-				var companySettingViewModel =  kendo.observable({ 
-					onSave : function(e){
-					alert(this.get('company').companyId);
-						$.ajax({
-							type : 'POST',
-							url : '${request.contextPath}/secure/update-company.do?output=json',
-							data: { companyId : this.get('company').companyId, item : kendo.stringify( this.get('company') ) },
-							success : function(response){
-								window.location.reload( true );
-							},
-							error:common.api.handleKendoAjaxError,
-							dataType : "json"
-						});
-					},
-					isVisible: true,
-					company: companyPlaceHolder,
-					properties : new kendo.data.DataSource({
-						transport: { 
-							read: { url:'${request.contextPath}/secure/get-company-property.do?output=json', type:'post' },
-							create: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post' },
-							update: { url:'${request.contextPath}/secure/update-company-property.do?output=json', type:'post'  },
-							destroy: { url:'${request.contextPath}/secure/delete-company-property.do?output=json', type:'post' },
-					 		parameterMap: function (options, operation){			
-						 		if (operation !== "read" && options.models) {
-						 			return { companyId: companyPlaceHolder.companyId, items: kendo.stringify(options.models)};
-								} 
-								return { companyId: companyPlaceHolder.companyId }
-							}
-						},	
-						batch: true, 
-						schema: {
-							data: "targetCompanyProperty",
-							model: Property
-						},
-						error : common.api.handleKendoAjaxError
-					})
-				} );						
-				companySetting.extModalWindow({
-					title : "회사 정보 변경",
-					template : $("#company-setting-modal-template").html(),
-					data :  companySettingViewModel,
-					change : function (e) {
-						if( e.field.match('^company.')){							
-							$(e.element).find('.modal-footer .btn.custom-update').removeAttr('disabled');
-						}
-					}
-				});			
-			}				
-			companySetting.data('kendoExtModalWindow')._modal().find('.modal-footer .btn.custom-update').attr('disabled', 'disabled');	
-			companySetting.data('kendoExtModalWindow').open();		
-			*/
 		}
 
 		function createSocialPane(){
@@ -415,8 +338,7 @@
 		}
 
 		function createFilePane(){		
-			var selectedCompany = getSelectedCompany();
-			
+			var selectedCompany = getSelectedCompany();			
 			if( ! $("#attach-upload").data("kendoUpload") ){	
 				$("#attach-upload").kendoUpload({
 					multiple : false,
@@ -437,8 +359,7 @@
 						$('#attach-grid').data('kendoGrid').dataSource.read(); 
 					}
 				}).css('min-width','300');
-			}				
-						
+			}			
 			if( ! $("#attach-grid").data("kendoGrid") ){	
 							$("#attach-grid").kendoGrid({
 								dataSource: {
@@ -494,9 +415,7 @@
 		}
 		
 		function createImagePane(){		
-		
-			var selectedCompany = getSelectedCompany();
-		
+			var selectedCompany = getSelectedCompany();		
 						if( ! $("#image-upload").data("kendoUpload") ){	
 							$("#image-upload").kendoUpload({
 								multiple : false,
@@ -800,19 +719,7 @@
 					<div class="row">
 						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
 							<p><small><i class="fa fa-quote-left"></i> ${selectedMenu.description} <i class="fa fa-quote-right"></i></small></p>
-						</h1>
-						<div class="col-xs-12 col-sm-6">
-							<div class="row">
-								<hr class="visible-xs no-grid-gutter-h">							
-								<div class="pull-right col-xs-12 col-sm-auto">
-									<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">옵션</h6>
-									<div class="btn-group">
-										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
-										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
-									</div>									
-								</div>
-							</div>
-						</div>
+						</h1>						
 					</div>				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
@@ -862,8 +769,8 @@
 										&nbsp;
 										<div class="panel-heading-controls">
 											<div class="btn-group">
-												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:transport"" ><i class="fa fa-users"></i> 그룹관리</button>
-												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:transport""><i class="fa fa-user"></i> 사용자 관리</button>
+												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport"" ><i class="fa fa-users"></i> 그룹관리</button>
+												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport""><i class="fa fa-user"></i> 사용자 관리</button>
 											</div>																						
 											<div class="btn-group">
 												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel"><i class="fa fa-upload" ></i> 로고 업로드</button>
