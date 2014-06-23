@@ -167,7 +167,11 @@
 					onSave : function (e) {
 						var btn = $(e.target);
 						btn.button('loading');	
+						if( this.menu.menuData.length != editor.getValue().length ){
 						
+						alert( "save" ) ;
+						
+						}
 						
 						
 						
