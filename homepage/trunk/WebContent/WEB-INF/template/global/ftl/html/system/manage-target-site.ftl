@@ -160,36 +160,7 @@
 				});				
 			$('#website-tabs a:first').tab('show') ;						
 		}
-			
-		function showWebsiteDetails(){			
-
-
-/*
-			if( ! $("#image-grid").data("kendoGrid") ){	
-				$('#myTab').on( 'show.bs.tab', function (e) {		
-					//e.preventDefault();			
-					var show_bs_tab = $(e.target);
-					switch( show_bs_tab.attr('href') ){
-						case "#template-mgmt" :
-							createTemplatePane();
-							break;
-						case  '#image-mgmt' :
-							createImagePane();
-							break;
-						case  '#attachment-mgmt' :	
-							createAttachPane();
-							break;	
-						case  '#social-mgmt' :	
-							createSocialPane();
-							break;								
-					}	
-				});			
-				$('#myTab a:first').tab('show') ;		
-			}
-			$('#company-details').toggleClass('hide');		
-*/			
-		}		
-			
+						
 		function goPages (){					
 			$("form[name='navbar-form'] input[name='targetSiteId']").val( $("#site-info").data("sitePlaceHolder").webSiteId );
 			$("#navbar").data("kendoExtNavbar").go("view-website-pages.do");							
@@ -271,8 +242,7 @@
 		*
 		**/		
 		function showWebsiteMenuSetting(){
-			var renderToString = "website-menu-setting-modal";
-			
+			var renderToString = "website-menu-setting-modal";			
 			if( $("#"+ renderToString).length == 0 ){
 				$('body').append('<div id="'+ renderToString +'"/>');
 				$("#"+ renderToString).data("sitePlaceHolder", new common.models.WebSite() );
@@ -440,8 +410,7 @@
 						}			
 		}
 
-		function createAttachPane(){		
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");			
+		function createFilePane(){				
 			if( ! $("#attach-upload").data("kendoUpload") ){	
 				$("#attach-upload").kendoUpload({
 					multiple : false,
@@ -456,7 +425,7 @@
 						autoUpload: true
 					},
 					upload:  function (e) {		
-						e.data = { objectType: 30, objectId : $("#site-info").data("sitePlaceHolder").webSiteId, attachmentId:'-1' };		
+						e.data = { objectType: 30, objectId : getSelectedWebSite().webSiteId, attachmentId:'-1' };		
 					},
 					success : function(e) {	
 						$('#attach-grid').data('kendoGrid').dataSource.read(); 
@@ -472,9 +441,9 @@
 										read: { url:'${request.contextPath}/secure/get-attachements.do?output=json', type: 'POST' },
 										parameterMap: function (options, operation){
 											if (operation != "read" && options) {										                        								                       	 	
-												return { objectType: 30, objectId : $("#site-info").data("sitePlaceHolder").webSiteId , item: kendo.stringify(options)};									                            	
+												return { objectType: 30, objectId :  getSelectedWebSite().webSiteId , item: kendo.stringify(options)};									                            	
 											}else{
-												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 30, objectId: $("#site-info").data("sitePlaceHolder").webSiteId }
+												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 30, objectId:  getSelectedWebSite().webSiteId }
 											}
 										} 
 									},
@@ -493,7 +462,7 @@
 									{ field: "attachmentId", title: "ID",  width: 50, filterable: false, sortable: false },
 									{ field: "name", title: "파일", width: 250 },
 								/*	{ field: "contentType", title: "파일 유형",  width: 100 },*/
-									{ field: "size", title: "파일크기",  width: 100 , format: "{0:##,### bytes}" },
+									{ field: "size", title: "파일크기",  width: 100 , format: "{0:##,###}" },
 									{ field: "creationDate", title: "생성일", width: 80, format: "{0:yyyy.MM.dd}" },
 									{ field: "modifiedDate", title: "수정일", width: 80, format: "{0:yyyy.MM.dd}" },
 									{ command: [ { name: "destroy", text: "삭제" } ], title: " ", width: "160px"  }
@@ -518,9 +487,7 @@
 			}			
 		}
 		
-		function createImagePane(){				
-			var selectedCompany = $("#navbar").data("companyPlaceHolder");		
-			
+		function createImagePane(){							
 						if( ! $("#image-upload").data("kendoUpload") ){	
 							$("#image-upload").kendoUpload({
 								multiple : false,
@@ -598,14 +565,11 @@
 		}	
 		
 		function displayImageDetails(){			
-			var template = kendo.template("${request.contextPath}/secure/view-image.do?width=150&height=150&imageId=#=imageId#");			
-			
-			var imagePlaceHolder = $("#image-details").data( "imagePlaceHolder");	
-					
+			var template = kendo.template("${request.contextPath}/secure/view-image.do?width=150&height=150&imageId=#=imageId#");						
+			var imagePlaceHolder = $("#image-details").data( "imagePlaceHolder");						
 			if( typeof imagePlaceHolder.imgUrl == 'undefined' ){				
 				imagePlaceHolder.imgUrl = template(imagePlaceHolder);
-			}		
-			
+			}					
 			common.api.streams.details({
 				imageId :imagePlaceHolder.imageId ,
 				success : function( data ) {
@@ -617,8 +581,7 @@
 						$('#image-details').find("input[name='image-public-shared']").last().click();
 					}
 				}
-			});		
-														
+			});																
 			if( $('#image-details').find('.panel-body').length == 0 ){			
 				$('#image-details').html( $("#image-details-template").html() );			
 				$('#image-details').find("input[name='image-public-shared']").on("change", function () {
@@ -666,8 +629,7 @@
 							displayImageDetails();
 						}
 					} 
-				});		
-				
+				});						
 				if( ! $('#image-prop-grid').data("kendoGrid") ){
 					$('#image-prop-grid').kendoGrid({
 						dataSource : {		
@@ -718,8 +680,7 @@
 		}
 				
 				
-		function showWebsiteSetting(){
-		
+		function showWebsiteSetting(){		
 			var renderToString = "website-setting-modal";
 			if( $("#"+ renderToString).length == 0 ){
 				$('body').append('<div id="'+ renderToString +'"/>');
