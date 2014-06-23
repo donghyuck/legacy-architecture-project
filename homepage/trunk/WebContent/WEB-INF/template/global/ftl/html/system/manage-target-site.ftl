@@ -169,7 +169,7 @@
 						
 						if( this.menu.menuData.length != editor.getValue().length ){
 						
-						alert( "save" +kendo.stringify( this.menu )) ;
+						alert( "save" +kendo.stringify( site )) ;
 						
 						}
 						/*
