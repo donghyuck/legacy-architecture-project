@@ -185,7 +185,6 @@
 					backdrop: 'static'
 				});								
 			}
-			alert( kendo.stringify(site) );
 			site.menu.copy( renderTo.data('model').menu );
 			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
