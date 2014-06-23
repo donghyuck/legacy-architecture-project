@@ -959,6 +959,13 @@
 											<div id="image-grid" class="no-border-hr no-border-b"></div>			
 										</div>			
 										<div class="tab-pane fade" id="website-tabs-files">
+											<div class="panel panel-transparent no-margin-b">
+												<div class="panel-body">
+													<input name="attach-upload" id="image-upload" type="file" />
+												</div>																																		
+											</div>
+											<div id="attach-details" class="no-padding-t  hide"></div>										
+											<div id="attach-grid" class="no-border-hr no-border-b"></div>												
 										</div>			
 										<div class="tab-pane fade" id="website-tabs-timeline">
 										</div>																																							
