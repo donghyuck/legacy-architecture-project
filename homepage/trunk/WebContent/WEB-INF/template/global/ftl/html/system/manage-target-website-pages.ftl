@@ -580,10 +580,6 @@
 			<div id="main-menu-bg"></div>
 		</div> <!-- / #main-wrapper -->				
 			
-			
-		<!-- START HEADER -->
-		<section id="navbar"></section>
-		<!-- END HEADER -->
 		<!-- START MAIN CONTNET -->
 		
 
