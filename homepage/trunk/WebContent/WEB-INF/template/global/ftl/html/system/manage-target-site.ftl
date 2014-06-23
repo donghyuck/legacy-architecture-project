@@ -75,7 +75,7 @@
 						}
 					}else if( e.field.match('^website.user')){ 
 						this.set("profileUrl", "/download/profile/" + sender.website.user.username  + "?width=100&height=150");
-						this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));      
+						this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.createionDate ));      
 						this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));									
 					}					
 				});				
