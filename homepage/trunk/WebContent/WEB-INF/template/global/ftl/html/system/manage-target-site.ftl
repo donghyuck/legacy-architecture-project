@@ -170,11 +170,9 @@
 					onSave : function (e) {
 					
 					}
-				});
-				
+				});				
 				kendo.bind(renderTo, editorModel);	
-				renderTo.data('model', editorModel) ;
-				
+				renderTo.data('model', editorModel) ;				
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/xml");
 				var switcher = renderTo.find('input[role="switcher"][name="warp-switcher"]');
@@ -188,7 +186,7 @@
 					backdrop: 'static'
 				});								
 			}
-			site.menu.copy();
+			alert( kendo.stringify( site ) );
 			site.menu.copy( renderTo.data('model').menu );
 			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
