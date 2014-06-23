@@ -40,6 +40,7 @@
 				var currentUser = new User();		
 					
 				common.ui.admin.setup({
+					menu : {toggleClass : "mmc"},
 					authenticate: function(e){
 						e.token.copy(currentUser);
 					}
@@ -487,11 +488,7 @@
 							</div>			
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="back" disabled="disabled"  title="사이트 상세로 이동" ><i class="fa fa-level-up"></i></button>			
-							</div>		
-							<div class="panel-heading-controls">					
-							
-							
-							</div>												
+							</div>											
 						</div>
 						<div id="page-list-panel" class="panel-body">
 							<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
