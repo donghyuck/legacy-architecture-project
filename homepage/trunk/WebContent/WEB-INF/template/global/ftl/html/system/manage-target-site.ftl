@@ -572,7 +572,7 @@
 									{ field: "imageId", title: "ID",  width: 50, filterable: false, sortable: false  },
 									{ field: "name", title: "파일", width: 350 },
 									/*{ field: "contentType", title: "이미지 유형",  width: 100 },*/
-									{ field: "size", title: "파일크기",  width: 100, format: "{0:##,### bytes}" },
+									{ field: "size", title: "파일크기",  width: 100, format: "{0:##,###}" },
 									{ field: "creationDate", title: "생성일", width: 90, format: "{0:yyyy.MM.dd}" },
 									{ field: "modifiedDate", title: "수정일", width: 90, format: "{0:yyyy.MM.dd}" }/**,
 									{ command: [ { name: "destroy", text: "삭제" } ], title: " ", width: "160px"  }**/
@@ -789,7 +789,7 @@
 		<style type="text/css" media="screen">
 
 		.k-grid-content{
-			height:200px;
+			height:300px;
 		}		
 		
 		#image-grid .k-grid-content{
