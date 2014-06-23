@@ -938,6 +938,7 @@
 				<div class="panel-body">					
 					<div class="row">
 						<div class="col-sm-4">
+							<p><span class="label label-info" data-bind="text: contentType"></span></p>
 							<img data-bind="attr:{src: imgUrl}" class="img-responsive img-thumbnail " />						
 						</div>
 						<div class="col-sm-8">	
