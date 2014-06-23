@@ -165,7 +165,13 @@
 				var editorModel  =  kendo.observable({ 
 					menu : new Menu(),
 					onSave : function (e) {
-					
+						var btn = $(e.target);
+						btn.button('loading');	
+						
+						
+						
+						
+						//btn.button('reset');
 					}
 				});				
 				kendo.bind(renderTo, editorModel);	
@@ -938,7 +944,7 @@
 					</div>
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary btn-flat" data-bind="click:onSave">저장</button>
+						<button type="button" class="btn btn-primary btn-flat" data-bind="click:onSave" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >저장</button>
 					</div>
 				</div>
 			</div>
