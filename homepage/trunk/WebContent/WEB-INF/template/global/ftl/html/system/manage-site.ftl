@@ -875,7 +875,7 @@
 																				
 										</div>
 										<div class="tab-pane fade" id="company-tabs-files">
-											<div class="panel panel-transparent">
+											<div class="panel panel-transparent no-margin-b">
 												<div class="panel-body">
 													<input name="attach-upload" id="attach-upload" type="file" />
 												</div>		
