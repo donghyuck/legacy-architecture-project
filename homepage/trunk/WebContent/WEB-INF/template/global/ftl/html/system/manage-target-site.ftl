@@ -818,12 +818,6 @@
 												<i class="fa fa-unlock fa-lg" data-bind="visible: website.allowAnonymousAccess"></i>														
 											</td>
 										</tr>							
-										<tr>
-											<th><span class="badge">담당자</span></th>								
-												<td>
-																								
-												</td>
-											</tr>			
 												<tr>
 													<th><span class="badge">메뉴</span></th>	
 													<td><span data-bind="text: website.menu.title"></span> 
