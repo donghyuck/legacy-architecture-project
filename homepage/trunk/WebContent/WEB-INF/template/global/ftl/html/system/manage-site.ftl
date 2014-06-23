@@ -862,7 +862,7 @@
 												
 										</div>
 										<div class="tab-pane fade" id="company-tabs-images">
-											<div class="panel">
+											<div class="panel panel-transparent no-margin-b">
 												<div class="panel-body">
 													<input name="image-upload" id="image-upload" type="file" />
 												</div>																																		
