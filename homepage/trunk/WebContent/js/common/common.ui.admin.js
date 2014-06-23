@@ -24,6 +24,7 @@
 			options = options || {};				
 			that.options = options;
 			that._pixelAdmin = window.PixelAdmin;			
+			
 			that.refresh();
 		},		
 		_doAuthenticate : function(){		
@@ -82,6 +83,13 @@
 		},
 		refresh: function(){			
 			var that = this;
+			if( typeof that.options.menu != UNDEFINED  )
+			{
+				if( typeof that.options.menu.toggleClass === 'string' ){
+					$('body').addClass(toogleClass);					
+				}
+			}			
+			
 			$('.menu-content-profile .close').click(function () {
 				var $p = $(this).parents('.menu-content');
 				$p.addClass('fadeOut');
@@ -104,6 +112,7 @@
 common.ui.admin.switcherEnabled = function(name) {
 	return $('input[role="switcher"][name="' + name + '"]').is(":checked") ;	
 }
+
 
 common.ui.admin.setup = function (options){	
 	options = options || {};
