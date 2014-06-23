@@ -1054,7 +1054,7 @@
 		</script> 
 		
 		<script id="image-details-template" type="text/x-kendo-template">				
-			<div class="panel panel-default">
+			<div class="panel panel-default no-border-hr no-border-b no-margin-b">
 				<div class="panel-body paddingless pull-right">
 					<button type="button" class="btn btn-link btn-control-group" data-action="top"><i class="fa fa-angle-double-up fa-lg"></i></button>
 				</div>
@@ -1103,25 +1103,23 @@
 											
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
-								</div> <!-- / .panel -->							
-							</div>
-											
+								</div> <!-- / .panel -->		
+								<div class="panel">
+									<div class="panel-heading">
+										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#website-tabs-image-accordion" href="\\#website-tabs-image-accordion-collapse3">
+											<i class="fa fa-upload"></i> 이미지 업로드
+										</a>
+									</div> <!-- / .panel-heading -->
+									<div id="website-tabs-image-accordion-collapse3" class="panel-collapse collapse" style="height: 0px;">
+										<div class="panel-body">
+											<h5><small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></h5>
+											<input name="update-image-file" type="file" id="update-image-file" class="pull-right" />
+										</div> <!-- / .panel-body -->
+									</div> <!-- / .collapse -->
+								</div> <!-- / .panel -->													
+							</div>											
 						</div>						
-					</div>	
-					<div class="row">
-						<div class="col-lg-6 col-xs-12">
-							<div class="panel-header text-primary">
-								<h5 ><i class="fa fa-info"></i>&nbsp;<strong>이미지 속성</strong> <small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
-							</div>		
-							<div id="image-prop-grid"></div>									
-						</div>
-						<div class="col-lg-6 col-xs-12">
-							<div class="panel-header text-primary">
-								<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 변경</strong>&nbsp;<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></h5>
-							</div>
-							<input name="update-image-file" type="file" id="update-image-file" class="pull-right" />								
-						</div>						
-					</div>							
+					</div>								
 				</div>
 			</div>					
 		</script>
