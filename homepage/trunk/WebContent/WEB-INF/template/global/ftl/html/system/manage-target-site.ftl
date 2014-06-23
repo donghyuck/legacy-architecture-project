@@ -112,10 +112,30 @@
 		}	
 			
 		function displayWebsiteDetails(){
-		
+			$('#website-tabs').on( 'show.bs.tab', function (e) {		
+				var show_bs_tab = $(e.target);
+				switch( show_bs_tab.attr('href') ){
+					case "#website-tabs-props" :						
+						break;
+					case  '#website-tabs-images' :
+						createImagePane();
+						break;
+					case  '#website-tabs-files' :	
+						createFilePane();
+						break;	
+					case  '#website-tabs-timeline' :	
+						createTimelinePane();
+						break;	
+					case  '#website-tabs-networks' :	
+						createSocialPane();
+						break;															
+					}	
+				});				
+			$('#company-tabs a:first').tab('show') ;						
 		}
 			
 		function showWebsiteDetails(){			
+
 
 /*
 			if( ! $("#image-grid").data("kendoGrid") ){	
@@ -186,19 +206,16 @@
 								},
 								requestStart : function(){
 									kendo.ui.progress($("#"+ renderToString ), true);
+									btn.button('loading');	
 								},
 								requestEnd : function(){
 									kendo.ui.progress($( "#"+ renderToString ), false);
+									btn.button('reset');
 								}
 							});												
 						}else{
 							alert( "do nothing" ) ;
 						}
-						/*
-						
-						*/
-						
-						//btn.button('reset');
 					}
 				});				
 				kendo.bind(renderTo, editorModel);	
