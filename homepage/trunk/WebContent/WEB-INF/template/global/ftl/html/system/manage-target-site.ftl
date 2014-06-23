@@ -1080,21 +1080,32 @@
 											<div id="image-prop-grid" class="no-border-hr no-border-b"></div>						
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
-								</div> <!-- / .panel -->								
-							
+								</div> <!-- / .panel -->	
+															
+								<div class="panel">
+									<div class="panel-heading">
+										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#website-tabs-image-accordion" href="\\#website-tabs-image-accordion-collapse2">
+											<i class="fa fa-share"></i>  공유
+										</a>
+									</div> <!-- / .panel-heading -->
+									<div id="website-tabs-image-accordion-collapse2" class="panel-collapse collapse" style="height: 0px;">
+										<div class="panel-body">
+											<h5><small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>	
+
+											<div class="btn-group" data-toggle="buttons">
+												<label class="btn btn-primary">
+												<input type="radio" name="image-public-shared" value="1">모두에게 공개
+												</label>
+												<label class="btn btn-primary active">
+												<input type="radio" name="image-public-shared" value="0"> 비공개
+												</label>
+											</div>
+											
+										</div> <!-- / .panel-body -->
+									</div> <!-- / .collapse -->
+								</div> <!-- / .panel -->							
 							</div>
-							
-							<div class="panel-header text-primary">
-								<h5 ><i class="fa fa-share"></i>&nbsp;<strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>
-							</div>	
-							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-primary btn-sm">
-								<input type="radio" name="image-public-shared" value="1">모두에게 공개
-								</label>
-								<label class="btn btn-primary btn-sm active">
-								<input type="radio" name="image-public-shared" value="0"> 비공개
-								</label>
-							</div>						
+											
 						</div>						
 					</div>	
 					<div class="row">
