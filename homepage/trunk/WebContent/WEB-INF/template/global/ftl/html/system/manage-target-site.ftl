@@ -148,7 +148,7 @@
 						break;															
 					}	
 				});				
-			$('#company-tabs a:first').tab('show') ;						
+			$('#website-tabs a:first').tab('show') ;						
 		}
 			
 		function showWebsiteDetails(){			
