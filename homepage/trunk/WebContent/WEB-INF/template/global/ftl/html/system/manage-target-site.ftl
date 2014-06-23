@@ -868,26 +868,32 @@
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h"/>						
 							<div class="details-content">							
-								<div class="panel panel-transparent">
-										<div class="panel-heading">
-											&nbsp;
-											<div class="panel-heading-controls">
+								<div class="row" >
+									<div class="col-sm-12">
+										<div class="pull-right">
 												<div class="btn-group">
 													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport" ><i class="fa fa-users"></i> 그룹관리</button>
 													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-user"></i> 사용자 관리</button>
-												</div>		
-												<!--																				
-												<div class="btn-group">
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="back" title="사이트 관리로 이동"  data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-level-up"></i></button>    
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-menu" data-bind="enabled: isEnabled, click:openMenuModal"><i class="fa fa-sitemap"></i> 매뉴변경</button>
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
-												</div>
-												-->											
-											</div>
+												</div>											
 										</div>
-										<div class="panel-body no-padding-hr">
-										</div>
+									</div>
 								</div>
+
+									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
+										<li><a href="#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
+										<li><a href="#website-tabs-images" data-toggle="tab">이미지</a></li>
+										<li><a href="#website-tabs-files" data-toggle="tab">파일</a></li>
+										<li><a href="#website-tabs-timeline" data-toggle="tab">타임라인</a></li>
+									</ul>	
+									<div class="tab-content tab-content-bordered no-padding">								
+										<div class="tab-pane fade" id="website-tabs-props">
+										</div>									
+										<div class="tab-pane fade" id="website-tabs-images">
+										</div>			
+										<div class="tab-pane fade" id="website-tabs-files">
+										</div>			
+										<div class="tab-pane fade" id="website-tabs-timeline">
+										</div>																																							
 							</div>
 						</div>				
 					</div>							
