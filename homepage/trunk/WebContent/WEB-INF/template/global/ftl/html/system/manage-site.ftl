@@ -938,7 +938,7 @@
 							<img data-bind="attr:{src: imgUrl}" class="img-responsive img-thumbnail " />						
 						</div>
 						<div class="col-sm-8">	
-							<div class="panel-group panel-group-info" id="company-tabs-image-accordion">
+							<div class="panel-group" id="company-tabs-image-accordion">
 								<div class="panel">
 									<div class="panel-heading ">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse1">
