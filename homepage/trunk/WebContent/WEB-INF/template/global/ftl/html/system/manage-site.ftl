@@ -862,17 +862,13 @@
 												
 										</div>
 										<div class="tab-pane fade" id="company-tabs-images">
-											<div class="panel panel-transparent no-margin-b">
+											<div class="panel">
 												<div class="panel-body">
 													<input name="image-upload" id="image-upload" type="file" />
-												</div>		
-												<div class="panel-body">
-													<div id="image-grid"></div>												
-												</div>	
-												<div id="image-details" class="panel-body no-padding-t  hide">												
-												</div>																					
+												</div>																																		
 											</div>
-																				
+											<div id="image-grid" class="no-border-hr no-border-b"></div>			
+											<div id="image-details" class="no-padding-t  hide">																						
 										</div>
 										<div class="tab-pane fade" id="company-tabs-files">
 											<div class="panel panel-transparent no-margin-b">
