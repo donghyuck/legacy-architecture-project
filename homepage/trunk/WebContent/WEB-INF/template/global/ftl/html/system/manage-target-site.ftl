@@ -108,6 +108,7 @@
 				$("#website-details").data("model", detailsModel );			
 				
 				common.ui.admin.setup({
+					menu : {toggleClass : "mmc"},
 					authenticate: function(e){
 						e.token.copy(currentUser);
 					}
