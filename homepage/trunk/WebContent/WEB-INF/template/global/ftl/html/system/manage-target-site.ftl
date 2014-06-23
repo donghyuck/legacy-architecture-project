@@ -170,7 +170,9 @@
 					
 					}
 				});
+				
 				kendo.bind(renderTo, editorModel);	
+				renderTo.data('model', editorModel) ;
 				
 				editor.setTheme("ace/theme/monokai");
 				editor.getSession().setMode("ace/mode/xml");
