@@ -1060,11 +1060,30 @@
 				</div>
 				<div class="panel-body">											
 					<div class="row">
-						<div class="col-lg-6 col-xs-6">
+						<div class="col-lg-4 col-xs-4">
 							<p><span class="label label-info" data-bind="text: contentType"></span></p>
 							<img data-bind="attr:{src: imgUrl}" class="img-rounded" />							
 						</div>
-						<div class="col-lg-6 col-xs-6">
+						<div class="col-lg-8 col-xs-8">
+							<div class="panel-group" id="website-tabs-image-accordion">
+								<div class="panel">
+									<div class="panel-heading ">
+										<a class="accordion-toggle" data-toggle="collapse" data-parent="#website-tabs-image-accordion" href="\\#website-tabs-image-accordion-collapse1">
+											<i class="fa fa-info"></i> 속성
+										</a>
+									</div> <!-- / .panel-heading -->
+									<div id="website-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
+										<div class="panel-body no-padding">
+											<div class="note note-default no-border no-margin-b">
+												<h5><small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
+											</div>											
+											<div id="image-prop-grid" class="no-border-hr no-border-b"></div>						
+										</div> <!-- / .panel-body -->
+									</div> <!-- / .collapse -->
+								</div> <!-- / .panel -->								
+							
+							</div>
+							
 							<div class="panel-header text-primary">
 								<h5 ><i class="fa fa-share"></i>&nbsp;<strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>
 							</div>	
@@ -1095,6 +1114,7 @@
 				</div>
 			</div>					
 		</script>
+		
 		<script id="social-details-template" type="text/x-kendo-template">				
 				#if ( typeof (twitterProfile)  == "object" ){ #
 				<div class="media">
