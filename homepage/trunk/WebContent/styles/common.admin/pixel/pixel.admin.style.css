@@ -27,7 +27,7 @@ form.navbar-form .k-widget.k-dropdown {
 	margin-top: 8px;	
 }
 
-.panel .k-dropzone {
+.panel .k-dropzone, .tab-pane .k-dropzone {
 	border: 2px dashed #d4d4d4;
 	background-color: #f7f7f7;
 	position: relative;
