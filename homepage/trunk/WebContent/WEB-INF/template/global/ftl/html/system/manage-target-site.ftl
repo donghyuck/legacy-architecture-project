@@ -186,7 +186,7 @@
 					backdrop: 'static'
 				});								
 			}
-			var m = mew Menu (site.menu);
+			var m = new Menu (site.menu);
 			m.copy( renderTo.data('model').menu );
 			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
