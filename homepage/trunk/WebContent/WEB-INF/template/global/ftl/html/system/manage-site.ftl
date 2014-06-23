@@ -942,7 +942,7 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse1">
-											<i class="fa fa-info"></i> <strong>이미지 속성</strong> <small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
+											<i class="fa fa-info"></i> <strong>이미지 속성</strong>  <small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
@@ -955,7 +955,7 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse2">
-											Collapsible Group Item 2
+											<i class="fa fa-share"></i>  <strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small>
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse2" class="panel-collapse collapse" style="height: 0px;">
