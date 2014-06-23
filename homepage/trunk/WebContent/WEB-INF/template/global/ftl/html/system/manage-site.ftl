@@ -768,11 +768,10 @@
 						</div>
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h"/>						
-							<div class="details-content">				
-								<div class="panel panel-transparent">
-									<div class="panel-heading">
-										&nbsp;
-										<div class="panel-heading-controls">
+							<div class="details-content">			
+								<div class="row" >
+									<div class="col-sm-12">
+										<div class="pull-rihgt">
 											<div class="btn-group">
 												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport"" ><i class="fa fa-users"></i> 그룹관리</button>
 												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport""><i class="fa fa-user"></i> 사용자 관리</button>
@@ -782,6 +781,23 @@
 												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
 											</div>											
 										</div>
+									</div>
+								</div>	
+								<div class="row" >
+									<div class="col-sm-12">
+										<div class="panel">
+											<div class="panel-body">
+											
+											aa
+											</div>
+										</div>
+									</div>
+								</div>
+									
+								<div class="panel panel-transparent">
+									<div class="panel-heading">
+										&nbsp;
+										
 									</div>
 									<div class="panel-body no-padding-hr">
 										<div class="row">
@@ -837,7 +853,7 @@
 												</div>
 												<!-- ./company setting panel -->								
 											</div>
-										</div>
+										</div><!-- ./row -->								
 									</div>
 								</div>	
 								<!-- company-tabs -->	
@@ -886,8 +902,7 @@
 												</div>	
 											</div>
 										</div>
-										<div class="tab-pane fade" id="company-tabs-timeline">
-											
+										<div class="tab-pane fade" id="company-tabs-timeline">											
 										</div>																																								
 									</div>	
 								<!-- / .website-tabs -->								
