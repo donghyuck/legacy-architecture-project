@@ -457,20 +457,27 @@
 		</style>		
 		</#compress>		
 	</head>
-	<body>
-		<!-- START HEADER -->
-		<section id="navbar"></section>
-		<!-- END HEADER -->
-		<!-- START MAIN CONTNET -->
-		
-		<div class="container-fluid">		
-			<div class="row">			
-				<div class="page-header">
-					<#assign selectedMenuItem = action.getWebSiteMenu("SYSTEM_MENU", "MENU_1_2") />
-					<h1>${selectedMenuItem.title}     <small><i class="fa fa-quote-left"></i>&nbsp;${selectedMenuItem.description}&nbsp;<i class="fa fa-quote-right"></i></small></h1>
-				</div>				
-			</div>	
-			<div class="row">	
+	<body class="theme-default main-menu-animated">
+		<div id="main-wrapper">
+			<#include "/html/common/common-system-navigation.ftl" >	
+			<div id="content-wrapper">
+				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_2") />
+				<ul class="breadcrumb breadcrumb-page">
+					<!--<div class="breadcrumb-label text-light-gray">You are here: </div>-->
+					<li><a href="#">Home</a></li>
+					<li><a href="${ selectedMenu.parent.page!"#" }">${selectedMenu.parent.title}</a></li>
+					<li class="active"><a href="#">${selectedMenu.title}</a></li>
+				</ul>
+				<div class="page-header bg-dark-gray">		
+					<div class="row">
+						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
+							<p><small><i class="fa fa-quote-left"></i> ${selectedMenu.description} <i class="fa fa-quote-right"></i></small></p>
+						</h1>						
+					</div>				
+				</div><!-- / .page-header -->
+				<!-- details-row -->
+
+<div class="row">	
 				<div class="col-lg-12">
 					<div class="panel panel-default" style="min-height:300px;">
 						<div class="panel-heading" style="padding:5px;">
@@ -566,7 +573,20 @@
 					</div>	
 				</div>
 			</div>
-		</div>				
+							
+				
+				<!-- ./details-row -->			
+			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg"></div>
+		</div> <!-- / #main-wrapper -->				
+			
+			
+		<!-- START HEADER -->
+		<section id="navbar"></section>
+		<!-- END HEADER -->
+		<!-- START MAIN CONTNET -->
+		
+
 		<div id="website-info" ></div>  
 		<div id="account-panel" ></div>    		
 		<!-- END MAIN CONTNET -->
