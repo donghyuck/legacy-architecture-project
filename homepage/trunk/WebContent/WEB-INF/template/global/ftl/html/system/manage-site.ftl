@@ -942,7 +942,7 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse1">
-											Collapsible Group Item 1
+											<i class="fa fa-info"></i> <strong>이미지 속성</strong> <small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
