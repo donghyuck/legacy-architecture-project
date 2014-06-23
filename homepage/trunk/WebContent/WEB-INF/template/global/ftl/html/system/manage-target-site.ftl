@@ -92,13 +92,6 @@
 					}						
 				});					
 				
-							
-		function goPages (){					
-			$("form[name='navbar-form'] input[name='targetSiteId']").val( $("#site-info").data("sitePlaceHolder").webSiteId );
-			$("#navbar").data("kendoExtNavbar").go("view-website-pages.do");							
-		}
-	
-				
 				detailsModel.bind("change", function(e){		
 					var sender = e.sender ;
 					if( e.field.match('^website.name')){ 
