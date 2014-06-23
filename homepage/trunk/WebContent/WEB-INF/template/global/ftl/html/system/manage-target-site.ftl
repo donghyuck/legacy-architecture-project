@@ -166,14 +166,36 @@
 					menu : new Menu(),
 					onSave : function (e) {
 						var btn = $(e.target);
-						btn.button('loading');	
+						
 						if( this.menu.menuData.length != editor.getValue().length ){
 						
-						alert( "save" ) ;
+						alert( "save" +kendo.stringify( this.menu )) ;
 						
 						}
-						
-						
+						/*
+						common.api.callback(  
+						{
+							url :"${request.contextPath}/secure/update-site-menu.do?output=json", 
+							data : { targetSiteId:  this.menu.webSiteId, item: kendo.stringify(menuToUse) },
+							success : function(response){
+								common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
+								var websiteToUse = new common.models.WebSite(response.targetWebSite);																
+								websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );								
+								$("#"+ renderToString ).data('kendoExtModalWindow').close();								
+								if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
+									window.location.reload( true );								
+							},
+							fail: function(){								
+								common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
+							},
+							requestStart : function(){
+								btn.button('loading');	
+							},
+							requestEnd : function(){
+								btn.button('reset');
+							}
+						}							
+						*/
 						
 						//btn.button('reset');
 					}
