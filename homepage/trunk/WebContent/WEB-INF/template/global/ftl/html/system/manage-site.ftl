@@ -946,9 +946,11 @@
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
-										<div class="panel-body">
-											<h5><small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
-											<div id="image-prop-grid"></div>						
+										<div class="panel-body no-padding">
+											<div class="note note-info">
+												<small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
+											</div>											
+											<div id="image-prop-grid" class="no-border"></div>						
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
 								</div> <!-- / .panel -->
