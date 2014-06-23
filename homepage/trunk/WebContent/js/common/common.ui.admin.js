@@ -82,13 +82,7 @@
 			} );
 		},
 		refresh: function(){			
-			var that = this;
-			if( typeof that.options.menu != UNDEFINED  )
-			{
-				if( typeof that.options.menu.toggleClass === 'string' ){
-					$('body').addClass(that.options.menu.toggleClass);		
-				}
-			}			
+			var that = this;	
 			
 			$('.menu-content-profile .close').click(function () {
 				var $p = $(this).parents('.menu-content');
@@ -103,7 +97,14 @@
 			that._createCompanySelector();			
 			that._createSwitcher();
 			that._doAuthenticate();
-			that._pixelAdmin.start([]);	
+			that._pixelAdmin.start([]);
+			
+			if( typeof that.options.menu != UNDEFINED  )
+			{
+				if( typeof that.options.menu.toggleClass === 'string' ){
+					$('body').addClass(that.options.menu.toggleClass);		
+				}
+			}				
 		}
 	});	
 	
