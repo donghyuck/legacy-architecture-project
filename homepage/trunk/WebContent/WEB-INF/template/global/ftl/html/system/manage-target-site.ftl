@@ -963,7 +963,7 @@
 							</div>				
 						</form>							
 					</div>					
-					<div class="modal-body no-padding" style="height:400px;">
+					<div class="modal-body no-padding" style="height:450px;">
 						<div id="xml-editor">												
 						</div>							
 					</div>
