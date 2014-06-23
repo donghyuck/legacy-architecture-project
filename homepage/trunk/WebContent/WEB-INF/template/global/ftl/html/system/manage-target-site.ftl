@@ -163,6 +163,7 @@
 			}
 			
 			var editor = ace.edit("xml-editor");
+			
 			if( !renderTo.data('model') ){				
 				var editorModel  =  kendo.observable({ 
 					menu : new Menu(),
@@ -187,6 +188,7 @@
 					backdrop: 'static'
 				});								
 			}
+			site.menu.copy();
 			site.menu.copy( renderTo.data('model').menu );
 			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
