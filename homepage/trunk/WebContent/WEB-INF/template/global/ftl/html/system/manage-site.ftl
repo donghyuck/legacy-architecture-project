@@ -937,7 +937,7 @@
 						<div class="col-sm-4">
 							<img data-bind="attr:{src: imgUrl}" class="img-rounded" />						
 						</div>
-						<div class="col-sm-6"	
+						<div class="col-sm-6">	
 							<div class="panel-group" id="company-tabs-image-accordion">
 								<div class="panel">
 									<div class="panel-heading">
