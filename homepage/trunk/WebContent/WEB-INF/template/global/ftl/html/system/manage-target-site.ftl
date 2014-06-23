@@ -54,9 +54,9 @@
 							destroy: { url:'${request.contextPath}/secure/delete-website-property.do?output=json', type:'post' },
 					 		parameterMap: function (options, operation){			
 						 		if (operation !== "read" && options.models) {
-						 			return { targetSiteId: this.website.webSiteId, items: kendo.stringify(options.models)};
+						 			return { targetSiteId: detailsModel.website.webSiteId, items: kendo.stringify(options.models)};
 								} 
-								return { targetSiteId: this.website.webSiteId }
+								return { targetSiteId: detailsModel.website.webSiteId }
 							}
 						},	
 						batch: true, 
