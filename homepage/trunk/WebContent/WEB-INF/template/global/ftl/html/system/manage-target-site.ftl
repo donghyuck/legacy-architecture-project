@@ -85,8 +85,7 @@
 							});												
 						}
 					}						
-				});
-					
+				});					
 				detailsModel.bind("change", function(e){		
 					var sender = e.sender ;
 					if( e.field.match('^website.name')){ 
@@ -98,8 +97,7 @@
 						this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.createionDate ));      
 						this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));									
 					}					
-				});				
-				
+				});								
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
@@ -121,8 +119,7 @@
 					requestEnd : function(){
 						kendo.ui.progress($("#website-details"), false);
 					}
-				}); 						
-				
+				}); 										
 			}	
 		}]);
 				
@@ -924,6 +921,19 @@
 									</ul>	
 									<div class="tab-content tab-content-bordered no-padding">								
 										<div class="tab-pane fade" id="website-tabs-props">
+											<div data-role="grid"
+												class="no-border"
+												date-scrollable="false"
+												data-editable="true"
+												data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
+												data-columns="[
+													{ 'title': '이름',  'field': 'name', 'width': 200 },
+													{ 'title': '값', 'field': 'value' },
+													{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
+												]"
+												data-bind="source: properties, visible: isEnabled"
+												style="height: 300px"></div>
+																						
 										</div>									
 										<div class="tab-pane fade" id="website-tabs-images">
 										</div>			
