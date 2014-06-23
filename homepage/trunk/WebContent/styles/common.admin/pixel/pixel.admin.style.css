@@ -1,7 +1,5 @@
 @charset "UTF-8";
 
-
-
 /** Page Loader 
 ------------------------------------*/
 .page-loader {
@@ -27,6 +25,18 @@ body,html {
 -------------------------------------------------*/
 form.navbar-form .k-widget.k-dropdown {
 	margin-top: 8px;	
+}
+
+.panel .k-dropzone {
+	border: 2px dashed #d4d4d4;
+	background-color: #f7f7f7;
+	position: relative;
+	text-align: center;
+	padding: 34px 34px 40px 10px;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+	margin: 20px 0 0 0;
 }
 
 .paddingless {
