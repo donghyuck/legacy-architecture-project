@@ -46,6 +46,26 @@
 					openMenuModal : function(e){
 						openMenuSettingWindow( this.website );
 					},
+					properties : new kendo.data.DataSource({
+						transport: { 
+							read: { url:'${request.contextPath}/secure/list-website-property.do?output=json', type:'post' },
+							create: { url:'${request.contextPath}/secure/update-website-property.do?output=json', type:'post' },
+							update: { url:'${request.contextPath}/secure/update-website-property.do?output=json', type:'post'  },
+							destroy: { url:'${request.contextPath}/secure/delete-website-property.do?output=json', type:'post' },
+					 		parameterMap: function (options, operation){			
+						 		if (operation !== "read" && options.models) {
+						 			return { targetSiteId: this.website.webSiteId, items: kendo.stringify(options.models)};
+								} 
+								return { targetSiteId: this.website.webSiteId }
+							}
+						},	
+						batch: true, 
+						schema: {
+							data: "targetWebSiteProperty",
+							model: Property
+						},
+						error : common.api.handleKendoAjaxError
+					}),
 					teleport : function(e){
 						var action = $(e.target).attr('data-action');
 						if(action === 'go-group'){
