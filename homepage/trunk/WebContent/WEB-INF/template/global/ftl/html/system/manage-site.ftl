@@ -929,7 +929,7 @@
 
 		<script id="image-details-template" type="text/x-kendo-template">				
 			<div class="panel panel-default no-margin-b no-border">
-				<div class="panel-body paddingless pull-right">
+				<div class="panel-body paddingless pull-right hidden">
 					<button type="button" class="btn btn-link btn-control-group" data-action="top"><i class="fa fa-angle-double-up fa-lg"></i></button>
 				</div>
 				<div class="panel-body">					
@@ -940,7 +940,7 @@
 						<div class="col-sm-8">	
 							<div class="panel-group panel-group-info" id="company-tabs-image-accordion">
 								<div class="panel">
-									<div class="panel-heading">
+									<div class="panel-heading ">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse1">
 											<i class="fa fa-info"></i> 속성
 										</a>
