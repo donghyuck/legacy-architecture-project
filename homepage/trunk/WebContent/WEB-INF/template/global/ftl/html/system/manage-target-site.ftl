@@ -171,6 +171,8 @@
 						
 						alert( "save" +kendo.stringify( site )) ;
 						
+						}else{
+						alert( "do nothing" ) ;
 						}
 						/*
 						common.api.callback(  
