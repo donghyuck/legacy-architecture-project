@@ -836,7 +836,7 @@
 												</div>
 											<!-- ./company setting panel -->				
 									</div>
-								</div>
+								</div><!-- ./row -->
 									
 									<!-- company-tabs -->	
 									<ul id="company-tabs" class="nav nav-tabs nav-tabs-sm">
