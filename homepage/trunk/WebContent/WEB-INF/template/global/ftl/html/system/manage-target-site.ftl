@@ -190,7 +190,7 @@
 								requestEnd : function(){
 									kendo.ui.progress($( "#"+ renderToString ), false);
 								}
-							}					
+							});												
 						}else{
 							alert( "do nothing" ) ;
 						}
