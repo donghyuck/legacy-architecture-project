@@ -82,10 +82,22 @@
 							common.api.teleportation().teleport({
 								action : '${request.contextPath}/secure/main-site.do',
 								companyId: this.get('website').company.companyId
-							});												
+							});			
+						}else if (action === 'go-pages'){			
+							common.api.teleportation().teleport({
+								action : '${request.contextPath}/secure/view-website-pages.do',
+								targetSiteId: this.get('website').webSiteId
+							});																	
 						}
 					}						
 				});					
+				
+							
+		function goPages (){					
+			$("form[name='navbar-form'] input[name='targetSiteId']").val( $("#site-info").data("sitePlaceHolder").webSiteId );
+			$("#navbar").data("kendoExtNavbar").go("view-website-pages.do");							
+		}
+	
 				
 				detailsModel.bind("change", function(e){		
 					var sender = e.sender ;
@@ -160,12 +172,6 @@
 				});				
 			$('#website-tabs a:first').tab('show') ;						
 		}
-						
-		function goPages (){					
-			$("form[name='navbar-form'] input[name='targetSiteId']").val( $("#site-info").data("sitePlaceHolder").webSiteId );
-			$("#navbar").data("kendoExtNavbar").go("view-website-pages.do");							
-		}
-
 
 		function openMenuSettingWindow (site){
 			var renderToString = "menu-setting-modal";
@@ -236,75 +242,6 @@
 			m.copy( renderTo.data('model').menu );
 			renderTo.modal('show');	
 		} 
-
-		/**
-		*  WebSite Menu Setting Modal 
-		*
-		**/		
-		function showWebsiteMenuSetting(){
-			var renderToString = "website-menu-setting-modal";			
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"/>');
-				$("#"+ renderToString).data("sitePlaceHolder", new common.models.WebSite() );
-			}
-			
-			var sitePlaceHolder =$("#"+ renderToString).data("sitePlaceHolder");			
-			$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);			
-			
-			
-			if( !$("#"+ renderToString ).data('kendoExtModalWindow') ){				
-				if( sitePlaceHolder.menu.menuId === ${ WebSiteUtils.getDefaultMenuId() } ) {			
-					sitePlaceHolder.menu.set("name", sitePlaceHolder.name + "_MENU");
-					sitePlaceHolder.menu.set("title", sitePlaceHolder.displayName + " 메뉴");
-					sitePlaceHolder.menu.menuId = 0;
-				}								
-				var websiteMenuSettingViewModel  =  kendo.observable({ 
-					website :sitePlaceHolder,
-					onSave : function (e) {
-						var menuToUse = this.website.menu;
-						menuToUse.menuData = ace.edit("xmleditor").getValue();
-						common.api.callback(  
-						{
-							url :"${request.contextPath}/secure/update-site-menu.do?output=json", 
-							data : { targetSiteId:  sitePlaceHolder.webSiteId, item: kendo.stringify(menuToUse) },
-							success : function(response){
-								common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
-								var websiteToUse = new common.models.WebSite(response.targetWebSite);																
-								websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );								
-								$("#"+ renderToString ).data('kendoExtModalWindow').close();								
-								if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
-									window.location.reload( true );								
-							},
-							fail: function(){								
-								common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
-								$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);
-							},
-							requestStart : function(){
-								kendo.ui.progress($("#"+ renderToString ), true);
-							},
-							requestEnd : function(){
-								kendo.ui.progress($( "#"+ renderToString ), false);
-							}
-						}); 								
-					}
-				});
-				
-				$("#"+ renderToString ).extModalWindow({
-					title : "사이트 메뉴",
-					backdrop : 'static',
-					template : $("#website-menu-setting-modal-template").html(),
-					data :  websiteMenuSettingViewModel,
-					refresh : function(e){
-						var editor = ace.edit("xmleditor");
-						editor.getSession().setMode("ace/mode/xml");
-						editor.getSession().setUseWrapMode(true);
-					}  
-				});	
-			}			
-			ace.edit("xmleditor").setValue(sitePlaceHolder.menu.menuData);
-			$("#"+ renderToString ).data('kendoExtModalWindow').open();	
-		}		
-		
 
 		function createSocialPane(){
 			var selectedCompany = $("#navbar").data("companyPlaceHolder");
@@ -883,6 +820,7 @@
 												<div class="btn-group">
 													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport" ><i class="fa fa-users"></i> 그룹관리</button>
 													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-user"></i> 사용자 관리</button>
+													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="go-pages" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-file"></i> 웹 페이지 관리</button>
 												</div>											
 										</div>
 									</div>
