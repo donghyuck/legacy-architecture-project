@@ -1062,7 +1062,7 @@
 					<div class="row">
 						<div class="col-lg-4 col-xs-4">
 							<p><span class="label label-info" data-bind="text: contentType"></span></p>
-							<img data-bind="attr:{src: imgUrl}" class="img-rounded" />							
+							<img data-bind="attr:{src: imgUrl}" class="img-rounded img-responsive" />							
 						</div>
 						<div class="col-lg-8 col-xs-8">
 							<div class="panel-group" id="website-tabs-image-accordion">
