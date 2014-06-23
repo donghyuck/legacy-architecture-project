@@ -739,6 +739,11 @@
 								<!--
 								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
 								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
+											<div class="btn-group">
+												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel"><i class="fa fa-upload" ></i> 로고 변경</button>
+												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
+											</div>			
+																			
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
@@ -775,11 +780,12 @@
 											<div class="btn-group">
 												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport"" ><i class="fa fa-users"></i> 그룹관리</button>
 												<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport""><i class="fa fa-user"></i> 사용자 관리</button>
-											</div>																						
+											</div>					
+											<!--																	
 											<div class="btn-group">
 												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="upload-logo" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel"><i class="fa fa-upload" ></i> 로고 업로드</button>
 												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
-											</div>											
+											</div>-->											
 										</div>
 									</div>
 								</div>	
