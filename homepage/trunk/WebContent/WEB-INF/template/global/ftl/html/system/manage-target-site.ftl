@@ -751,7 +751,7 @@
 			right: 0;
 			bottom: 0;
 			left: 0;
-			min-height: 400px;
+			min-height: 450px;
 		}
 		.page-details .left-col {
 			float: left;
