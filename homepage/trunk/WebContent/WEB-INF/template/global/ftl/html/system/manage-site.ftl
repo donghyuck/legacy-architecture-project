@@ -942,12 +942,13 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse1">
-											<i class="fa fa-info"></i> <strong>이미지 속성</strong>  <small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
+											<i class="fa fa-info"></i> <strong>이미지 속성</strong>  
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
 										<div class="panel-body">
-											Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											<h5><small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
+											<div id="image-prop-grid"></div>						
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
 								</div> <!-- / .panel -->
@@ -955,12 +956,22 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse2">
-											<i class="fa fa-share"></i>  <strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small>
+											<i class="fa fa-share"></i>  <strong>이미지 공유</strong>
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse2" class="panel-collapse collapse" style="height: 0px;">
 										<div class="panel-body">
-											Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											<h5><small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>	
+
+											<div class="btn-group" data-toggle="buttons">
+												<label class="btn btn-primary">
+												<input type="radio" name="image-public-shared" value="1">모두에게 공개
+												</label>
+												<label class="btn btn-primary active">
+												<input type="radio" name="image-public-shared" value="0"> 비공개
+												</label>
+											</div>
+											
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
 								</div> <!-- / .panel -->
@@ -968,12 +979,13 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse3">
-											<i class="fa fa-upload"></i>&nbsp;<strong>이미지 변경</strong>&nbsp;<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small>
+											<i class="fa fa-upload"></i>&nbsp;<strong>이미지 변경</strong>
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse3" class="panel-collapse collapse" style="height: 0px;">
 										<div class="panel-body">
-											Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+											<h5><small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></h5>
+											<input name="update-image-file" type="file" id="update-image-file" class="pull-right" />
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
 								</div> <!-- / .panel -->
@@ -991,14 +1003,7 @@
 								<h5 ><i class="fa fa-share"></i>&nbsp;<strong>이미지 공유</strong>&nbsp;<small>모두에게 공개를 선택하면 누구나 웹을 통하여 볼 수 있도록 공개됩니다.</small></h5>
 							</div>	
 							
-							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-primary">
-								<input type="radio" name="image-public-shared" value="1">모두에게 공개
-								</label>
-								<label class="btn btn-primary active">
-								<input type="radio" name="image-public-shared" value="0"> 비공개
-								</label>
-							</div>						
+						
 						</div>						
 					</div>	
 					<div class="row">
@@ -1006,13 +1011,13 @@
 							<div class="panel-header text-primary">
 								<h5 ><i class="fa fa-info"></i>&nbsp;<strong>이미지 속성</strong> <small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
 							</div>		
-							<div id="image-prop-grid"></div>									
+										
 						</div>
 						<div class="col-lg-6 col-xs-12">
 							<div class="panel-header text-primary">
 								<h5 ><i class="fa fa-upload"></i>&nbsp;<strong>이미지 변경</strong>&nbsp;<small>사진을 변경하려면 마우스로 사진을 끌어 놓거나 사진 선택을 클릭하세요.</small></h5>
 							</div>
-							<input name="update-image-file" type="file" id="update-image-file" class="pull-right" />								
+															
 						</div>						
 					</div>							
 				</div>
