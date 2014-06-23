@@ -887,18 +887,19 @@
 										<div class="tab-pane fade" id="company-tabs-timeline">											
 										</div>																																								
 									</div>	
-								<!-- / .website-tabs -->								
+								<!-- / .website-tabs -->				
+								<div class="row">				
+									<div class="col-sm-12 ">		
+										<h4>
+											<small><i class="fa fa-info"></i> 키 컬럼의 버튼을 클릭하면 해당하는 사이트를 관리할 수 있습니다.</small>
+										</h4>		
+										<div id="website-grid" ></div>
+									</div>
+								</div>		
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
-					<div class="row">				
-						<div class="col-sm-12 ">		
-							<h4>
-								<small><i class="fa fa-info"></i> 키 컬럼의 버튼을 클릭하면 해당하는 사이트를 관리할 수 있습니다.</small>
-							</h4>		
-							<div id="website-grid" ></div>
-						</div>
-					</div>		
+	
 				</div>
 			</div> <!-- / #content-wrapper -->
 			<div id="main-menu-bg">
