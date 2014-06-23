@@ -87,6 +87,7 @@
 			{
 				if( typeof that.options.menu.toggleClass === 'string' ){
 					$('body').addClass(that.options.menu.toggleClass);					
+					alert( $('body').css() )
 				}
 			}			
 			
