@@ -487,14 +487,18 @@
 							</div>			
 							<div class="btn-group">
 								<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="back" disabled="disabled"  title="사이트 상세로 이동" ><i class="fa fa-level-up"></i></button>			
-							</div>														
+							</div>		
+							<div class="panel-heading-controls">					
+							
+							
+							</div>												
 						</div>
 						<div id="page-list-panel" class="panel-body">
 							<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
 									<h5 >
 										<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small>
 									</h5>
-									<div class="pull-right">
+									<div class="panel-heading-controls">	
 										<div class="btn-group">
 										<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="page-create" disabled="disabled"><i class="fa fa-file"></i> 새 페이지</button>
 										<button type="button" class="btn btn-primary btn-page-control-group btn-sm" data-action="page-publish" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-external-link"></i> 게시</button>
