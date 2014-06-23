@@ -947,7 +947,7 @@
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
 										<div class="panel-body no-padding">
-											<div class="note note-info">
+											<div class="note note-danger no-margin-b">
 												<small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
 											</div>											
 											<div id="image-prop-grid" class="no-border"></div>						
