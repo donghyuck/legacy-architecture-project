@@ -821,16 +821,7 @@
 										<tr>
 											<th><span class="badge">담당자</span></th>								
 												<td>
-													<div class="media">
-														<a class="pull-left" href="#">
-															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
-														</a>
-														<div class="media-body">
-															<h5 class="media-heading">
-															<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
-															</h5>
-														</div>
-													</div>													
+																								
 												</td>
 											</tr>			
 												<tr>
@@ -851,6 +842,23 @@
 									</tbody>
 								</table>
 							</div>
+							<div class="panel panel-transparent">
+								<div class="panel-heading">
+									<span class="panel-title">담당자</span>									
+								</div>
+								<div class="panel-body">
+													<div class="media">
+														<a class="pull-left" href="#">
+															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
+														</a>
+														<div class="media-body">
+															<h5 class="media-heading">
+															<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
+															</h5>
+														</div>
+													</div>										
+								</div>
+							</div>								
 						</div>
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h"/>						
