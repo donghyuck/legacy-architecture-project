@@ -186,7 +186,8 @@
 					backdrop: 'static'
 				});								
 			}
-			site.menu.copy( renderTo.data('model').menu );
+			var m = mew Menu (site.menu);
+			m.copy( renderTo.data('model').menu );
 			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
 			
