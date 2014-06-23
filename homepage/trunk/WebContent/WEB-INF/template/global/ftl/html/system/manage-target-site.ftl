@@ -86,6 +86,7 @@
 						}
 					}						
 				});					
+				
 				detailsModel.bind("change", function(e){		
 					var sender = e.sender ;
 					if( e.field.match('^website.name')){ 
@@ -98,20 +99,25 @@
 						this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.website.modifiedDate ));									
 					}					
 				});								
+				
+				$("#website-details").data("model", detailsModel );			
+				
 				common.ui.admin.setup({
 					authenticate: function(e){
 						e.token.copy(currentUser);
 					}
 				});				
+				
 				common.api.callback({
 					url :"${request.contextPath}/secure/get-site.do?output=json", 
 					data : { targetSiteId:  detailsModel.website.webSiteId },
 					success : function(response){
 						var site = new common.models.WebSite(response.targetWebSite);
 						site.copy( detailsModel.website );
-						detailsModel.isEnabled = true;
-						displayWebsiteDetails();
-						kendo.bind($("#website-details"), detailsModel );				
+						detailsModel.isEnabled = true;						
+						kendo.bind($("#website-details"), detailsModel );
+						
+						displayWebsiteDetails();	
 					},
 					requestStart : function(){
 						kendo.ui.progress($("#website-details"), true);
@@ -122,7 +128,11 @@
 				}); 										
 			}	
 		}]);
-				
+
+		function getSelectedWebSite(){
+			return $("#website-details").data("model").website;
+		}	
+						
 		function getSelectedCompany(){
 			var setup = common.ui.admin.setup();
 			return setup.companySelector.dataItem(setup.companySelector.select());
@@ -210,16 +220,11 @@
 								success : function(response){
 									common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
 									var updateWebsite = new common.models.WebSite(response.targetWebSite);	
-									
-									//websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );
-									
-									//$("#"+ renderToString ).data('kendoExtModalWindow').close();								
-									//if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
-										window.location.reload( true );								
+									websiteToUse.copy( getSelectedWebSite() );									
+									window.location.reload( true );								
 								},
 								fail: function(){								
 									common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
-									//$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);
 								},
 								requestStart : function(){
 									kendo.ui.progress($("#"+ renderToString ), true);
@@ -515,6 +520,7 @@
 		
 		function createImagePane(){				
 			var selectedCompany = $("#navbar").data("companyPlaceHolder");		
+			
 						if( ! $("#image-upload").data("kendoUpload") ){	
 							$("#image-upload").kendoUpload({
 								multiple : false,
@@ -529,7 +535,7 @@
 									autoUpload: true
 								},
 								upload:  function (e) {		
-									e.data = { objectType: 30, objectId : $("#site-info").data("sitePlaceHolder").webSiteId, imageId:'-1' };		
+									e.data = { objectType: 30, objectId : getSelectedWebSite().webSiteId, imageId:'-1' };		
 								},
 								success : function(e) {	
 									$('#image-grid').data('kendoGrid').dataSource.read(); 
@@ -545,9 +551,9 @@
 										read: { url:'${request.contextPath}/secure/list-image.do?output=json', type: 'POST' },
 										parameterMap: function (options, operation){
 											if (operation != "read" && options) {
-												return { objectType: 30, objectId : $("#site-info").data("sitePlaceHolder").webSiteId , item: kendo.stringify(options)};	
+												return { objectType: 30, objectId : getSelectedWebSite().webSiteId , item: kendo.stringify(options)};	
 											}else{
-												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 30, objectId: $("#site-info").data("sitePlaceHolder").webSiteId }
+												return { startIndex: options.skip, pageSize: options.pageSize, objectType: 30, objectId: getSelectedWebSite().webSiteId }
 											}
 										} 
 									},
@@ -593,10 +599,13 @@
 		
 		function displayImageDetails(){			
 			var template = kendo.template("${request.contextPath}/secure/view-image.do?width=150&height=150&imageId=#=imageId#");			
-			var imagePlaceHolder = $("#image-details").data( "imagePlaceHolder");			
+			
+			var imagePlaceHolder = $("#image-details").data( "imagePlaceHolder");	
+					
 			if( typeof imagePlaceHolder.imgUrl == 'undefined' ){				
 				imagePlaceHolder.imgUrl = template(imagePlaceHolder);
 			}		
+			
 			common.api.streams.details({
 				imageId :imagePlaceHolder.imageId ,
 				success : function( data ) {
@@ -936,6 +945,13 @@
 																						
 										</div>									
 										<div class="tab-pane fade" id="website-tabs-images">
+											<div class="panel panel-transparent no-margin-b">
+												<div class="panel-body">
+													<input name="image-upload" id="image-upload" type="file" />
+												</div>																																		
+											</div>
+											<div id="image-details" class="no-padding-t  hide"></div>										
+											<div id="image-grid" class="no-border-hr no-border-b"></div>			
 										</div>			
 										<div class="tab-pane fade" id="website-tabs-files">
 										</div>			
