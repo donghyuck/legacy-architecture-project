@@ -76,8 +76,7 @@ PC9saWNlbnNlPg==</file>
 			<default>
 				<companyId>1</companyId>
 			</default>				
-		</company>
-		
+		</company>		
 		<menu>
 			<default>
 				<menuId>1</menuId>	
@@ -95,6 +94,16 @@ PC9saWNlbnNlPg==</file>
 			<disallowedTypes></disallowedTypes>
 			<forceThumbnailsEnabled></forceThumbnailsEnabled>
 		</image>
+		<download>
+			<images>
+				<no-image-url>/images/common/no-image2.jpg</no-image-url>
+				<no-logo-url>/images/common/no-image.jpg</no-logo-url>
+				<no-avatar-url>/images/common/no-avatar.png</no-avatar-url>
+			</images>
+			
+			
+						
+		</download>
 	</components>
 		
 	<security>
