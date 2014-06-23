@@ -942,7 +942,7 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse1">
-											<i class="fa fa-info"></i> <strong>이미지 속성</strong>  
+											<i class="fa fa-info"></i> 속성
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
@@ -950,7 +950,7 @@
 											<div class="note note-danger no-margin-b">
 												<small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
 											</div>											
-											<div id="image-prop-grid" class="no-border"></div>						
+											<div id="image-prop-grid" class="no-border-hr no-border-b"></div>						
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
 								</div> <!-- / .panel -->
@@ -958,7 +958,7 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse2">
-											<i class="fa fa-share"></i>  <strong>이미지 공유</strong>
+											<i class="fa fa-share"></i>  공유
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse2" class="panel-collapse collapse" style="height: 0px;">
@@ -981,7 +981,7 @@
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#company-tabs-image-accordion" href="\\#company-tabs-image-accordion-collapse3">
-											<i class="fa fa-upload"></i>&nbsp;<strong>이미지 변경</strong>
+											<i class="fa fa-upload"></i> 이미지 업로드
 										</a>
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse3" class="panel-collapse collapse" style="height: 0px;">
