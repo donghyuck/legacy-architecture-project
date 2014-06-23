@@ -91,12 +91,9 @@
 					success : function(response){
 						var site = new common.models.WebSite(response.targetWebSite);
 						site.copy( detailsModel.website );
-						
-												
 						detailsModel.isEnabled = true;
 						displayWebsiteDetails();
-						kendo.bind($("#website-details"), detailsModel );
-						//$('button.btn-control-group').removeAttr("disabled");						
+						kendo.bind($("#website-details"), detailsModel );				
 					},
 					requestStart : function(){
 						kendo.ui.progress($("#website-details"), true);
@@ -165,38 +162,40 @@
 				var editorModel  =  kendo.observable({ 
 					menu : new Menu(),
 					onSave : function (e) {
-						var btn = $(e.target);
-						
-						if( this.menu.menuData.length != editor.getValue().length ){
-						
-						alert( "save" +kendo.stringify( site )) ;
-						
+						var btn = $(e.target);			
+						var menuToUse = this.menu;			
+						if( menuToUse.menuData.length != editor.getValue().length ){
+							menuToUse.set('menuData',  editor.getValue() );
+							common.api.callback(  
+							{
+								url :"${request.contextPath}/secure/update-site-menu.do?output=json", 
+								data : { targetSiteId:  site.webSiteId, item: kendo.stringify(menuToUse) },
+								success : function(response){
+									common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
+									var updateWebsite = new common.models.WebSite(response.targetWebSite);	
+									
+									//websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );
+									
+									//$("#"+ renderToString ).data('kendoExtModalWindow').close();								
+									//if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
+										window.location.reload( true );								
+								},
+								fail: function(){								
+									common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
+									//$("#site-info").data("sitePlaceHolder").copy(sitePlaceHolder);
+								},
+								requestStart : function(){
+									kendo.ui.progress($("#"+ renderToString ), true);
+								},
+								requestEnd : function(){
+									kendo.ui.progress($( "#"+ renderToString ), false);
+								}
+							}					
 						}else{
-						alert( "do nothing" ) ;
+							alert( "do nothing" ) ;
 						}
 						/*
-						common.api.callback(  
-						{
-							url :"${request.contextPath}/secure/update-site-menu.do?output=json", 
-							data : { targetSiteId:  this.menu.webSiteId, item: kendo.stringify(menuToUse) },
-							success : function(response){
-								common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
-								var websiteToUse = new common.models.WebSite(response.targetWebSite);																
-								websiteToUse.copy( $("#site-info").data("sitePlaceHolder") );								
-								$("#"+ renderToString ).data('kendoExtModalWindow').close();								
-								if( sitePlaceHolder.menu.menuId == ${ WebSiteUtils.getDefaultMenuId() } ) 
-									window.location.reload( true );								
-							},
-							fail: function(){								
-								common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
-							},
-							requestStart : function(){
-								btn.button('loading');	
-							},
-							requestEnd : function(){
-								btn.button('reset');
-							}
-						}							
+						
 						*/
 						
 						//btn.button('reset');
