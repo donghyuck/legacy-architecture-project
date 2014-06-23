@@ -790,7 +790,12 @@
 
 		.k-grid-content{
 			height:200px;
-		}			
+		}		
+		
+		#image-grid .k-grid-content{
+			height:400px;
+		}				
+		 	
 		#xml-editor {
 			position: absolute;
 			top: 0;
