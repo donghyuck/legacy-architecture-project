@@ -867,8 +867,9 @@
 													<input name="image-upload" id="image-upload" type="file" />
 												</div>																																		
 											</div>
+											<div id="image-details" class="no-padding-t  hide"></div>
 											<div id="image-grid" class="no-border-hr no-border-b"></div>			
-											<div id="image-details" class="no-padding-t  hide"></div>																						
+																									
 										</div>
 										<div class="tab-pane fade" id="company-tabs-files">
 											<div class="panel panel-transparent no-margin-b">
