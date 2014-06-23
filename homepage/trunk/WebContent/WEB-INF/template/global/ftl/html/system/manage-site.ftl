@@ -935,7 +935,7 @@
 				<div class="panel-body">					
 					<div class="row">
 						<div class="col-sm-4">
-							<img data-bind="attr:{src: imgUrl}" class="img-rounded" />						
+							<img data-bind="attr:{src: imgUrl}" class="img-responsive img-thumbnail " />						
 						</div>
 						<div class="col-sm-8">	
 							<div class="panel-group panel-group-info" id="company-tabs-image-accordion">
@@ -947,8 +947,8 @@
 									</div> <!-- / .panel-heading -->
 									<div id="company-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
 										<div class="panel-body no-padding">
-											<div class="note note-info no-border no-margin-b">
-												<small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small>
+											<div class="note note-default no-border no-margin-b">
+												<h5><small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
 											</div>											
 											<div id="image-prop-grid" class="no-border-hr no-border-b"></div>						
 										</div> <!-- / .panel-body -->
