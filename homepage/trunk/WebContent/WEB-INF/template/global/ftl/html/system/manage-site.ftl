@@ -785,24 +785,7 @@
 								</div>	
 								<hr/>
 								<div class="row" >
-									<div class="col-sm-12">
-										<div class="panel">
-											<div class="panel-body">
-											
-											aa
-											</div>
-										</div>
-									</div>
-								</div>
-									
-								<div class="panel panel-transparent">
-									<div class="panel-heading">
-										&nbsp;
-										
-									</div>
-									<div class="panel-body no-padding-hr">
-										<div class="row">
-											<div class="col-lg-6">		
+									<div class="col-lg-6">		
 												<!-- logo upload panel -->									
 												<div class="panel panel-default" data-action="upload-logo" style="display:none;">
 													<div class="panel-heading">
@@ -819,11 +802,10 @@
 												</div>
 												<!-- ./logo upload panel -->			
 											</div>
-											<div class="col-lg-6">		
+									<div class="col-lg-6">		
 												<!-- company setting panel -->				
 												<div class="panel form-horizontal" data-action="update-company" style="display:none;">
-													<div class="panel-heading">
-														
+													<div class="panel-heading">														
 														<button type="button" class="close btn-control-group" data-action="update-company"  data-bind="click:toggleOptionPanel">×</button>
 														<span class="panel-title">회사 정보 변경</span>
 													</div>
@@ -852,12 +834,11 @@
 														<button class="btn btn-primary btn-flat" data-bind="click: onSave, enabled: isEnabled" >확인</button>
 													</div>
 												</div>
-												<!-- ./company setting panel -->								
-											</div>
-										</div><!-- ./row -->								
+											<!-- ./company setting panel -->				
 									</div>
-								</div>	
-								<!-- company-tabs -->	
+								</div>
+									
+									<!-- company-tabs -->	
 									<ul id="company-tabs" class="nav nav-tabs nav-tabs-sm">
 										<li><a href="#company-tabs-props" data-toggle="tab">프로퍼티</a></li>
 										<li><a href="#company-tabs-images" data-toggle="tab">이미지</a></li>
