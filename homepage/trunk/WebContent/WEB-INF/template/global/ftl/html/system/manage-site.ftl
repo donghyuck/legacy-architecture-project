@@ -875,11 +875,9 @@
 											<div class="panel panel-transparent no-margin-b">
 												<div class="panel-body">
 													<input name="attach-upload" id="attach-upload" type="file" />
-												</div>		
-												<div class="panel-body">
-													<div id="attach-grid"></div>										
-												</div>	
+												</div>												
 											</div>
+											<div id="attach-grid" class="no-border-hr no-border-b"></div>
 										</div>
 										<div class="tab-pane fade" id="company-tabs-timeline">											
 										</div>																																								
