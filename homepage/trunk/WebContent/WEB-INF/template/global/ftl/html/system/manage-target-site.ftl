@@ -154,16 +154,13 @@
 
 		function openMenuSettingWindow (site){
 			var renderToString = "menu-setting-modal";
-			var renderTo = $( '#' + renderToString );			
-						
+			var renderTo = $( '#' + renderToString );							
 			if( renderTo.length === 0 ){		
 				var template = kendo.template($('#menu-setting-modal-template').html());
 				$("#main-wrapper").append( template({uid:renderToString}) );				
 				renderTo = $('#' + renderToString );
-			}
-			
-			var editor = ace.edit("xml-editor");
-			
+			}			
+			var editor = ace.edit("xml-editor");			
 			if( !renderTo.data('model') ){				
 				var editorModel  =  kendo.observable({ 
 					menu : new Menu(),
@@ -184,44 +181,17 @@
 				}					
 				renderTo.modal({
 					backdrop: 'static'
-				});								
+				});		
+				renderTo.on('show.bs.modal', function(e){				
+					editor.setValue(renderTo.data("model").menu.menuData);
+				});			
+				renderTo.on('hidden.bs.modal', function(e){
+				
+				});											
 			}
 			var m = new Menu (site.menu);
 			m.copy( renderTo.data('model').menu );
-			editor.setValue(renderTo.data("model").menu.menuData);
 			renderTo.modal('show');	
-			
-			/*
-			{	
-				renderTo.modal({
-					backdrop: 'static'
-				});				
-				
-
-				
-				kendo.bind(renderTo, editorModel);						
-				editor.setTheme("ace/theme/monokai");
-				editor.getSession().setMode("ace/mode/xml");
-				var switcher = renderTo.find('input[role="switcher"][name="warp-switcher"]');
-				if( switcher.length > 0 ){
-					$(switcher).switcher();
-					$(switcher).change(function(){
-						editor.getSession().setUseWrapMode($(this).is(":checked"));
-					});		
-				}
-				
-				renderTo.on('hidden.bs.modal', function(e){
-				
-				});
-				renderTo.on('show.bs.modal', function(e){				
-					site.menu.copy( editorModel.menu );
-					alert(kendo.stringify(editorModel.menu));
-				});
-				
-			}
-			editor.setValue(renderTo.data("model").menu.menuData);
-			*/
-			
 		} 
 
 		/**
@@ -921,8 +891,7 @@
 		</footer>
 		<!-- END FOOTER -->
 		
-		<script id="menu-setting-modal-template" type="text/x-kendo-template">				
-		
+		<script id="menu-setting-modal-template" type="text/x-kendo-template">		
 		<div id="#=uid#"class="modal fade" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
 			<div class="modal-dialog modal-lg animated swing">
 				<div class="modal-content">
@@ -969,7 +938,7 @@
 					</div>
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary btn-flat disable hidden" data-action="saveOrUpdate">저장</button>
+						<button type="button" class="btn btn-primary btn-flat" data-bind="click:onSave">저장</button>
 					</div>
 				</div>
 			</div>
