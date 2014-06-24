@@ -556,9 +556,9 @@
 										</div>	
 									</div>
 									<div class="col-md-6 custom-props hide">
-															<h5>									 
-													<small><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
-													</h5>
+										<h5>									 
+											<small class="text-primary"><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
+										</h5>
 																	
 												<div data-role="grid"
 													date-scrollable="false"
