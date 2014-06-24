@@ -751,19 +751,19 @@
 								<table class="table">
 									<tbody>						
 										<tr>
-											<td><span class="badge">회사</span></td>								
+											<td class="text-center"><span class="badge">회사</span></td>								
 											<td><span data-bind="text: company.displayName"></span> <span class="label label-primary"><span data-bind="text: company.name"></span></span> <code><span data-bind="text: company.companyId"></span></code></td>
 										</tr>	
 										<tr>
-											<th><span class="badge">도메인</span></th>								
+											<th class="text-center"><span class="badge">도메인</span></th>								
 											<td><span data-bind="text: company.domainName"></span></td>
 										</tr>	
 										<tr>
-											<th><span class="badge">생성일</span></th>								
+											<th class="text-center"><span class="badge">생성일</span></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>	
 										<tr>
-											<th><span class="badge">수정일</span></th>								
+											<th class="text-center"><span class="badge">수정일</span></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>																								
 									</tbody>
