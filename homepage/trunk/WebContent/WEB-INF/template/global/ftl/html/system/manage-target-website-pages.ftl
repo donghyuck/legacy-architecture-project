@@ -517,7 +517,7 @@
 						</div>
 						<div  class="panel-body padding-sm form-horizontal">	
 							<div  id="webpage-editor" class="container">
-								<div class="row padding-sm">
+								<div class="row">
 									<div class="col-lg-12">
 											<div class="pull-right">
 												<div class="btn-group">
@@ -552,7 +552,7 @@
 											</div>
 										</div>	
 									</div>
-									<div class="col-md-6 custom-props hide">
+									<div class="col-md-6 custom-props hide" style="margin-bottom: 10px;">
 										<h4>									 
 											<small class="text-primary"><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
 										</h4>
