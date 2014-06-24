@@ -726,6 +726,7 @@
 					<div class="details-row no-margin-t">					
 						<div class="left-col left-col-nav">
 							<div class="details-block no-margin-t">
+								<span class="label label-warning"><span data-bind="text: website.name"></span></span> 
 								<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description"></h6>
 								<div class="details-photo">
 									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
@@ -764,8 +765,7 @@
 										<tr>
 											<th class="text-center">사이트</th>								
 											<td>
-												<span data-bind="text: website.displayName"></span> 
-												<span class="label label-warning"><span data-bind="text: website.name"></span></span> 
+												<span data-bind="text: website.displayName"></span> 												
 												<code><span data-bind="text: website.webSiteId">1</span></code>
 											</td>
 										</tr>				
