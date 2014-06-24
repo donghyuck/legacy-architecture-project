@@ -753,7 +753,7 @@
 								<table class="table table-bordered">
 									<thead>
 										<tr class="no-border">
-											<th colspan="2">
+											<th colspan="2" class="pull-right">
 												<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
 											</th>
 										</tr>
