@@ -482,19 +482,20 @@
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
 								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록</span>
-							
+								<!--
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
 									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
 								</div>			
 								<div class="btn-group">
 									<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="back" disabled="disabled"  title="사이트 상세로 이동" ><i class="fa fa-level-up"></i></button>			
-								</div>							
+								</div>
+								-->							
 								<div class="panel-heading-controls">
 									<div class="btn-group">
-										<button type="button" class="btn btn-primary btn-control-group" data-action="page-create" disabled="disabled"><i class="fa fa-file"></i> 새 페이지</button>
+										<button type="button" class="btn btn-danger btn-control-group" data-action="page-create" disabled="disabled"><i class="fa fa-file"></i> 새 페이지</button>
 										<button type="button" class="btn btn-primary btn-page-control-group" data-action="page-publish" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-external-link"></i> 게시</button>
-										<button type="button" class="btn btn-primary btn-page-control-group" data-action="page-delete" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"' ><i class="fa fa-trash-o"></i> 삭제</button>
+										<button type="button" class="btn btn-danger btn-page-control-group" data-action="page-delete" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"' ><i class="fa fa-trash-o"></i> 삭제</button>
 									</div>
 								</div>																
 						</div>
