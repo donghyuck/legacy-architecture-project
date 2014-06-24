@@ -126,7 +126,7 @@
 				<#list menu.components as item >
 					<#if  item.components?has_content >
 					<li class="mm-dropdown">
-						-- ${item.getIcon()}
+						-- ${item.getClass().getName()}
 						<a href="javascript:void(0);" data-menu-item="${item.name}"> <#if item.isSetIcon()><i class="menu-icon fa ${item.icon}"></i> </#if><span class="mm-text">${item.title}</span></a>
 						<ul>
 							<#list item.components as sub_item >
