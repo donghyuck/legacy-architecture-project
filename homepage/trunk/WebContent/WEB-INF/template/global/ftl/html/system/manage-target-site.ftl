@@ -733,19 +733,14 @@
 								<!--
 								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
 								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
-												<div class="btn-group">
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="back" title="사이트 관리로 이동"  data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-level-up"></i></button>    
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-menu" data-bind="enabled: isEnabled, click:openMenuModal"><i class="fa fa-sitemap"></i> 매뉴변경</button>
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
-												</div>	
+								<div class="btn-group">
+									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="back" title="사이트 관리로 이동"  data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-level-up"></i></button>    
+									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-menu" data-bind="enabled: isEnabled, click:openMenuModal"><i class="fa fa-sitemap"></i> 매뉴변경</button>
+									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="go-pages" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-file"></i> 웹 페이지 관리</button>
+								</div>	
 																				
 							</div>				
-							<div class="panel panel-transparent">
-								<div class="panel-heading">
-									<span class="panel-title" data-bind="text:website.description"></span>										
-								</div>
-							</div>
-							<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description"></h6>
+							<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description" style="padding-left:15px;"></h6>
 							<div class="table-info">
 								<div class="table-header no-border-hr no-border-radius">
 									<div class="table-caption">
@@ -798,6 +793,7 @@
 									</tbody>
 								</table>
 								<div class="table-footer">
+									<h6 class="text-light-gray text-semibold text-xs">담당자</h6>
 													<div class="media">
 														<a class="pull-left" href="#">
 															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
@@ -809,26 +805,7 @@
 														</div>
 													</div>				
 								</div>								
-							</div>
-							<h6 class="text-light-gray text-semibold text-xs">담당자</h6>
-							<div class="panel panel-transparent">
-								<div class="panel-heading">
-									<span class="panel-title">담당자</span>		
-																
-								</div>
-								<div class="panel-body">
-													<div class="media">
-														<a class="pull-left" href="#">
-															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
-														</a>
-														<div class="media-body">
-															<h5 class="media-heading">
-															<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
-															</h5>
-														</div>
-													</div>										
-								</div>
-							</div>								
+							</div>														
 						</div>
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h"/>						
