@@ -540,7 +540,7 @@
 									<div class="col-md-6">
 										<div class="row">
 											<div class="form-group no-margin-hr">
-												<p><span class="label label-danger">버전</span> <code><span data-bind="text: page.versionId">0</span></code></p>												
+												<p><span class="label label-danger">버전</span> <code><span data-bind="text: page.versionId">0</span></code> <small class="text-muted">버전 값을 자동생성됩니다.</small></p>												
 												<p class="help-block"><small>버전 값을 자동 생성됩니다.</small></p>
 											</div>										
 											<div class="form-group no-margin-hr">
@@ -582,7 +582,7 @@
 										<div class="row">
 											<div class="col-sm-6">
 												
-												<p class="text-muted"><span class="label label-info">템플릿</span>  <small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
+												<p class="text-muted"><span class="label label-info">템플릿</span>  <small class="text-muted">페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
 												
 													
 											</div>
