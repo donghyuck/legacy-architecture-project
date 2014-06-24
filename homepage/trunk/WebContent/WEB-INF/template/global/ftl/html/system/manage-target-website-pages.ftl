@@ -481,7 +481,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
-								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small></span>
+								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록 <small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small></span>
 								<!--
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
@@ -499,11 +499,8 @@
 									</div>
 								</div>																
 						</div>
-						<div id="page-list-panel" class="panel-body">
-							<h5 >
-								
-							</h5>	
-							<div id="website-page-grid"></div>																		
+						<div id="page-list-panel" class="table">
+							<div id="website-page-grid" class="no-border"></div>																		
 						</div>					
 						<div  id="page-editor-panel" class="panel-body" style="padding:5px; display:none;">	
 							<div  id="webpage-editor" class="container">
