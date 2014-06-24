@@ -532,7 +532,7 @@
 								</div>
 								<div class="row">
 									<div class="form-group no-margin-hr">
-										<label class="control-label">페이지 제목 <span class="text-danger"><small class="text-muted">필수 입력항목입니다.</small></span></label>
+										<label class="control-label">페이지 제목 <span class="text-danger"><small class="text-danger">필수 입력항목입니다.</small></span></label>
 										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
 									</div>						
 								</div>
