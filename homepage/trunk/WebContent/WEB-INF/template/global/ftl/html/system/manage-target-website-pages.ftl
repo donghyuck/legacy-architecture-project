@@ -518,7 +518,7 @@
 						</div>
 						<div  class="panel-body padding-sm form-horizontal">	
 							<div  id="webpage-editor" class="container">
-								<div class="row padding-sm">
+								<div class="row">
 									<div class="col-lg-12">
 											<div class="pull-right">
 												<div class="btn-group">
