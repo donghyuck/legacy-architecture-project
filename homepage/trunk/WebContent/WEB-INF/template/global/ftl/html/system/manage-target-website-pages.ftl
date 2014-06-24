@@ -513,6 +513,7 @@
 					</div>
 					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
 						<div class="panel-heading">
+							<span class="panel-title"><small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small></span>
 							<button type="button" class="close btn-control-group" data-action="page-editor-close">&times;  <small>닫기</small></button>
 						</div>
 						<div  class="panel-body">	
@@ -524,7 +525,7 @@
 									<div class="col-lg-12">
 										<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
 											<h5 >
-												<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small>
+												
 											</h5>
 											<div class="pull-right">
 												<div class="btn-group">
