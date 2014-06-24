@@ -548,9 +548,8 @@
 												<p class="help-block"></p>
 											</div>
 											<div class="form-group no-margin-hr">
-												<label class="control-label">페이지 요약</label>
+												<label class="control-label">페이지 요약 <small class="text-muted">페이지를 간략하게 설명하세요.</small></label>
 												<textarea class="form-control" rows="3" data-bind="value: page.summary" placeholder="페이지 요약"></textarea>
-												<p class="help-block"><small>페이지를 간략하게 설명하세요.</small> </p>
 											</div>
 										</div>	
 									</div>
@@ -558,8 +557,7 @@
 										<h5>									 
 											<small class="text-primary"><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
 										</h5>
-																	
-												<div data-role="grid"
+										<div data-role="grid"
 													date-scrollable="false"
 													data-editable="true"
 													data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
@@ -569,10 +567,9 @@
 														{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
 													]"
 													data-bind="source: properties, visible: isVisible"
-													style="height: 300px"></div>							
+										style="height: 300px"></div>							
 									</div>									
-								</div>
-								
+								</div>								
 								<div class="panel panel-default">
 									<div class="panel-heading" style="padding:5px;">
 										
