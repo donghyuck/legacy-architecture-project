@@ -481,6 +481,8 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
+								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록</span>
+							
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
 									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
