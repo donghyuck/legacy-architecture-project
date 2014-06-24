@@ -191,7 +191,7 @@
 								success : function(response){
 									common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
 									var updateWebsite = new common.models.WebSite(response.targetWebSite);	
-									websiteToUse.copy( getSelectedWebSite() );									
+									updateWebsite.copy( getSelectedWebSite() );									
 									window.location.reload( true );								
 								},
 								fail: function(){								
