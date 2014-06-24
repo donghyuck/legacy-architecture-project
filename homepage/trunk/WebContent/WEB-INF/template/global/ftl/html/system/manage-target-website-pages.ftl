@@ -542,7 +542,7 @@
 											<div class="form-group no-margin-hr">
 												<p><span class="label label-danger">버전</span></p>
 												<code><span data-bind="text: page.versionId">0</span></code>
-												<p class="help-block"><small>버전 값을 시스템에 의하여 부여됩니다.</small></p>
+												<p class="help-block"><small>버전 값을 자동 생성됩니다.</small></p>
 											</div>										
 											<div class="form-group no-margin-hr">
 												<label class="control-label">템플릿</label>
