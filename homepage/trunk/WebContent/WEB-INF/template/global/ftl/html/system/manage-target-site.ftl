@@ -726,6 +726,7 @@
 					<div class="details-row no-margin-t">					
 						<div class="left-col left-col-nav">
 							<div class="details-block no-margin-t">
+								<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description"></h6>
 								<div class="details-photo">
 									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
 								</div>
@@ -740,7 +741,7 @@
 								</div>	
 																				
 							</div>				
-							<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description" style="padding-left:15px;"></h6>
+							
 							<div class="table-info">
 								<div class="table-header no-border-hr no-border-radius">
 									<div class="table-caption">
