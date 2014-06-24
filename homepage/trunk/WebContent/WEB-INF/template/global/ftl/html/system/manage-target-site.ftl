@@ -817,7 +817,6 @@
 												<div class="btn-group">
 													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport" ><i class="fa fa-users"></i> 그룹관리</button>
 													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-user"></i> 사용자 관리</button>
-													<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="go-pages" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-file"></i> 웹 페이지 관리</button>
 												</div>											
 										</div>
 									</div>
@@ -842,7 +841,7 @@
 													{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
 												]"
 												data-bind="source: properties, visible: isEnabled"
-												style="height: 300px"></div>
+												style="height: 500px"></div>
 																						
 										</div>									
 										<div class="tab-pane fade" id="website-tabs-images">
