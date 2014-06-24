@@ -741,11 +741,11 @@
 																				
 							</div>				
 							<div class="panel panel-transparent">
-								<div class="panel-heading no-border-hr no-border-radius">
+								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
 								<div class="table-info">
-									<div class="table-header">
+									<div class="table-header no-border-hr no-border-radius">
 										<div class="table-caption">
 											기본정보
 										</div>
