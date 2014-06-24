@@ -741,7 +741,7 @@
 																				
 							</div>				
 							<div class="panel panel-transparent">
-								<div class="panel-heading">
+								<div class="panel-heading no-border-hr no-border-radius">
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
 								<div class="table-info">
