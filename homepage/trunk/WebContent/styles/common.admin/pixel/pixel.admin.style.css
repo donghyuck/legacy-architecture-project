@@ -2659,6 +2659,13 @@ h1 .label,h2 .label,h3 .label,h4 .label,h5 .label,h6 .label {
 	padding: 0
 }
 
+
+.table-header .table-heading-controls
+{
+	margin-top: -28px;
+	float: right !important;
+}
+
 .table-footer {
 	min-height: 40px;
 	margin-top: -19px;
