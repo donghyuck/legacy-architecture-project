@@ -744,6 +744,11 @@
 								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
+<div class="list-group">
+						<a href="#" class="list-group-item"><strong>126</strong> Likes</a>
+						<a href="#" class="list-group-item"><strong>579</strong> Followers</a>
+						<a href="#" class="list-group-item"><strong>100</strong> Following</a>
+					</div>
 								<table class="table">
 									<tbody>						
 										<tr>
