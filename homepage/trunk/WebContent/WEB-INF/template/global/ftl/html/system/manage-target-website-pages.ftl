@@ -532,10 +532,27 @@
 								</div>
 								<div class="row">
 									<div class="form-group no-margin-hr">
-										<label class="control-label"><span class="label label-danger">제목</span></label>
+										<label class="control-label">페이지 제목<span class="text-danger">(필수)</span></label>
 										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
 									</div>								
 								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group no-margin-hr">
+											<label class="control-label">템플릿<span class="text-default">(옵션)</span></label>
+											<input type="text" class="form-control" placeholder="템플릿 파일" value="/html/community/page.ftl">	
+											<p class="help-block">페이지에 적용할 템플릿 파일 경로를 입력하세요</p>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group no-margin-hr">
+											<label class="control-label">페이지 요약<span class="text-default">(옵션)</span></label>
+											<textarea class="form-control" rows="3" data-bind="value: page.summary" placeholder="페이지 요약"></textarea>
+											<p class="help-block">페이지를 간략하게 설명하세요. </p>
+										</div>									
+									</div>									
+								</div>
+								
 								<div class="panel panel-default">
 									<div class="panel-heading" style="padding:5px;">
 										
@@ -545,12 +562,12 @@
 											<div class="col-sm-6">
 												<p><span class="label label-danger">버전</span><code><span data-bind="text: page.versionId">0</span></code></p>
 												<p class="text-muted"><span class="label label-info">템플릿</span>  <small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
-												<input type="text" class="form-control" placeholder="템플릿 파일" value="/html/community/page.ftl">	
+												
 													
 											</div>
 											<div class="col-sm-6">												
 												<p class="text-muted"><span class="label label-info">요약</span>  <small>페이지를 간략하게 설명하세요. </small></p>
-												<textarea class="form-control" rows="3" data-bind="value: page.summary" placeholder="페이지 요약"></textarea>
+												
 											</div>
 											<div class="custom-props col-sm-6 hide">
 												<div class="panel-header text-primary">
