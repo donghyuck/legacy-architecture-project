@@ -531,27 +531,42 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-sm-12">
-										<div class="form-group no-margin-hr">
-											<label class="control-label">페이지 제목 <span class="text-danger">(필수)</span></label>
-											<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
-										</div>
-									</div>								
+									<div class="form-group no-margin-hr">
+										<label class="control-label">페이지 제목 <span class="text-danger">(필수)</span></label>
+										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
+									</div>						
 								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="row">
-												<div class="form-group no-margin-hr">
-													<label class="control-label">템플릿</label>
-													<input type="text" class="form-control" placeholder="템플릿 파일" value="/html/community/page.ftl">	
-													<p class="help-block"><small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
-												</div>
-												<div class="form-group no-margin-hr">
-													<label class="control-label">페이지 요약</label>
-													<textarea class="form-control" rows="3" data-bind="value: page.summary" placeholder="페이지 요약"></textarea>
-													<p class="help-block"><small>페이지를 간략하게 설명하세요.</small> </p>
-												</div>
+											<div class="form-group no-margin-hr">
+												<label class="control-label">템플릿</label>
+												<input type="text" class="form-control" placeholder="템플릿 파일" value="/html/community/page.ftl">	
+												<p class="help-block"><small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
+											</div>
+											<div class="form-group no-margin-hr">
+												<label class="control-label">페이지 요약</label>
+												<textarea class="form-control" rows="3" data-bind="value: page.summary" placeholder="페이지 요약"></textarea>
+												<p class="help-block"><small>페이지를 간략하게 설명하세요.</small> </p>
+											</div>
 										</div>	
+									</div>
+									<div class="col-md-6 custom-props hide">
+															<h5>									 
+													<small><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
+													</h5>
+																	
+												<div data-role="grid"
+													date-scrollable="false"
+													data-editable="true"
+													data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
+													data-columns="[
+														{ 'title': '이름',  'field': 'name', 'width': 200 },
+														{ 'title': '값', 'field': 'value' },
+														{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
+													]"
+													data-bind="source: properties, visible: isVisible"
+													style="height: 300px"></div>							
 									</div>									
 								</div>
 								
@@ -571,24 +586,7 @@
 												<p class="text-muted"><span class="label label-info">요약</span>  <small>페이지를 간략하게 설명하세요. </small></p>
 												
 											</div>
-											<div class="custom-props col-sm-6 hide">
-												<div class="panel-header text-primary">
-													<h5>									 
-													<small><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
-													</h5>
-												</div>								
-												<div data-role="grid"
-													date-scrollable="false"
-													data-editable="true"
-													data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
-													data-columns="[
-														{ 'title': '이름',  'field': 'name', 'width': 200 },
-														{ 'title': '값', 'field': 'value' },
-														{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
-													]"
-													data-bind="source: properties, visible: isVisible"
-													style="height: 300px"></div>
-											</div>
+
 										</div>
 										<div class="row">
 											<div class="col-sm-12">
