@@ -751,7 +751,7 @@
 									<button type="button" class="btn btn-primary btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
 									</div>
 								</div>								
-								<table class="table table-bordered">
+								<table class="table">
 									<tbody>						
 										<tr>
 											<th class="text-center">회사</th>								
