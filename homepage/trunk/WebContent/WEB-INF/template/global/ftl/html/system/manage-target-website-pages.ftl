@@ -500,14 +500,9 @@
 								</div>																
 						</div>
 						<div id="page-list-panel" class="panel-body">
-							<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
-									<h5 >
-										<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small>
-									</h5>
-									<div class="panel-heading-controls">	
-										
-									</div>
-							</div>		
+							<h5 >
+								<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small>
+							</h5>	
 							<div id="website-page-grid"></div>																		
 						</div>					
 						<div  id="page-editor-panel" class="panel-body" style="padding:5px; display:none;">	
