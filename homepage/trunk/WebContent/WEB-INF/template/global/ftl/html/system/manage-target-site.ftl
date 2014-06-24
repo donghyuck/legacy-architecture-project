@@ -745,9 +745,8 @@
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
 <div class="list-group">
-						<a href="#" class="list-group-item"><strong>126</strong> Likes</a>
-						<a href="#" class="list-group-item"><strong>579</strong> Followers</a>
-						<a href="#" class="list-group-item"><strong>100</strong> Following</a>
+						<div class="list-group-item"><span class="label label-primary">회사</span> <span data-bind="text: website.company.displayName"></span> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> <code><span data-bind="text: website.company.companyId"></span></code></div>
+						<div class="list-group-item"><span class="label label-primary">도메인</span><span data-bind="text: website.company.domainName"></span></div>
 					</div>
 								<table class="table">
 									<tbody>						
