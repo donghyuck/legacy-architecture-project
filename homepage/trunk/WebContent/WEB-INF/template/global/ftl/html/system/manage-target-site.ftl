@@ -744,18 +744,18 @@
 								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
-								<table class="table">
+								<table class="table table-condensed table-bordered">
 									<tbody>						
 										<tr>
-											<td><span class="badge">회사</span></td>								
+											<th class="text-center">회사</th>								
 											<td><span data-bind="text: website.company.displayName"></span> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> <code><span data-bind="text: website.company.companyId"></span></code></td>
 										</tr>	
-										<tr>
-											<th><span class="badge">도메인</span></th>								
+										<tr>											
+											<th class="text-center">도메인</th>												
 											<td><span data-bind="text: website.company.domainName"></span></td>
 										</tr>	
 										<tr>
-											<td><span class="badge">사이트</span></td>								
+											<th class="text-center">사이트</th>								
 											<td>
 												<span data-bind="text: website.displayName"></span> 
 												<span class="label label-warning"><span data-bind="text: website.name"></span></span> 
@@ -763,25 +763,25 @@
 											</td>
 										</tr>				
 										<tr>
-											<th><span class="badge">보안</span></th>	
+											<th class="text-center">보안</th>	
 											<td>
 												<i class="fa fa-lock fa-lg" data-bind="invisible: website.allowAnonymousAccess" style="display: none;"></i>
 												<i class="fa fa-unlock fa-lg" data-bind="visible: website.allowAnonymousAccess"></i>														
 											</td>
 										</tr>							
 												<tr>
-													<th><span class="badge">메뉴</span></th>	
+													<th  class="text-center">메뉴</th>	
 													<td><span data-bind="text: website.menu.title"></span> 
 														<span class="label label-warning"><span data-bind="text: webiste.menu.name"></span></span> 
 														<code><span data-bind="text: website.menu.menuId"></span></code>
 													</td>
 												</tr>																																									
 										<tr>
-											<th><span class="badge">생성일</span></th>								
+											<th  class="text-center">생성일</th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>	
 										<tr>
-											<th><span class="badge">수정일</span></th>								
+											<th  class="text-center">수정일</th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>																								
 									</tbody>
