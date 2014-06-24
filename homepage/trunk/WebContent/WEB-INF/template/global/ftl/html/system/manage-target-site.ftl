@@ -749,6 +749,9 @@
 										<div class="table-caption">
 											기본정보
 										</div>
+										<div class="pull-right">
+											<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>										
+										</div>
 									</div>								
 								<table class="table table-bordered">
 									<tbody>						
