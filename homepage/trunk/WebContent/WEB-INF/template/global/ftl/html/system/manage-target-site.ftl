@@ -744,10 +744,7 @@
 								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
-<div class="list-group">
-						<div class="list-group-item"><span class="label label-primary">회사</span> <span data-bind="text: website.company.displayName"></span> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> <code><span data-bind="text: website.company.companyId"></span></code></div>
-						<div class="list-group-item"><span class="label label-primary">도메인</span><span data-bind="text: website.company.domainName"></span></div>
-					</div>
+								<div class="panel-body">
 								<table class="table">
 									<tbody>						
 										<tr>
@@ -790,6 +787,7 @@
 										</tr>																								
 									</tbody>
 								</table>
+								</div>
 							</div>
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
