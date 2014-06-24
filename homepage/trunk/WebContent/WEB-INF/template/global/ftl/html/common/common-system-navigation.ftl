@@ -126,7 +126,7 @@
 				<#list menu.components as item >
 					<#if  item.components?has_content >
 					<li class="mm-dropdown">
-						-- ${item.icon!"no icon"}
+						-- ${item.icon!"no icon"} / ${item.image!"no image"}
 						<a href="javascript:void(0);" data-menu-item="${item.name}"> <#if item.isSetIcon()><i class="menu-icon fa ${item.icon}"></i> </#if><span class="mm-text">${item.title}</span></a>
 						<ul>
 							<#list item.components as sub_item >
