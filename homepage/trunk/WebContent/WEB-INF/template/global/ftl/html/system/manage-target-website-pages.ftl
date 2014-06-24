@@ -479,7 +479,7 @@
 				<!-- details-row -->
 				<div class="row">	
 					<div class="col-lg-12">
-						<div class="panel panel-default" style="min-height:300px;">
+						<div  id="page-list-panel" class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
 								<span class="panel-title"><i class="fa fa-align-justify"></i> 웹 페이지 <small class="text-danger">( 웹 페이지는 게시 상태에서 보여집니다.)</small></span>
 								<!--
@@ -501,7 +501,7 @@
 									</div>
 								</div>																
 						</div>
-						<div id="page-list-panel" class="table">
+						<div class="table">
 							<div id="website-page-grid" class="no-border"></div>																		
 						</div>					
 						<div  id="page-editor-panel" class="panel-body" style="padding:5px; display:none;">	
