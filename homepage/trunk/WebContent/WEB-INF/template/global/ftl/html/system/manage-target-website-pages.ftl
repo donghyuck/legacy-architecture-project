@@ -532,7 +532,7 @@
 								</div>
 								<div class="row">
 									<div class="form-group no-margin-hr">
-										<label class="control-label">페이지 제목 <span class="text-danger"><small class="text-danger">필수 입력항목입니다.</small></span></label>
+										<label class="control-label">페이지 제목 <small class="text-danger">필수 입력항목입니다.</small></label>
 										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
 									</div>						
 								</div>
@@ -540,13 +540,12 @@
 									<div class="col-md-6">
 										<div class="row">
 											<div class="form-group no-margin-hr">
-												<p><span class="label label-danger">버전</span> <code><span data-bind="text: page.versionId">0</span></code> <small class="text-muted">버전 값을 자동생성됩니다.</small></p>												
-												<p class="help-block"><small>버전 값을 자동 생성됩니다.</small></p>
+												<p><span class="label label-danger">버전</span> <code data-bind="text: page.versionId">0</code> <small class="text-muted">버전 값을 자동생성됩니다.</small></p>
 											</div>										
 											<div class="form-group no-margin-hr">
-												<label class="control-label">템플릿</label>
+												<label class="control-label">템플릿 <small class="text-muted">페이지에 적용할 템플릿 파일 경로를 입력하세요</small></label>
 												<input type="text" class="form-control" placeholder="템플릿 파일" value="/html/community/page.ftl">	
-												<p class="help-block"><small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
+												<p class="help-block"></p>
 											</div>
 											<div class="form-group no-margin-hr">
 												<label class="control-label">페이지 요약</label>
