@@ -841,7 +841,7 @@
 													{ 'command' :  { 'name' : 'destroy' , 'text' : '삭제' },  'title' : '&nbsp;', 'width' : 100 }
 												]"
 												data-bind="source: properties, visible: isEnabled"
-												style="height: 500px"></div>
+												style="min-height: 300px"></div>
 																						
 										</div>									
 										<div class="tab-pane fade" id="website-tabs-images">
