@@ -540,9 +540,9 @@
 									<div class="col-md-6">
 										<div class="row">
 											<div class="form-group no-margin-hr">
-												<label class="control-label">버전</label>
+												<p><span class="label label-danger">버전</span></p>
 												<code><span data-bind="text: page.versionId">0</span></code>
-												<p class="help-block"><small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
+												<p class="help-block"><small>버전 값을 시스템에 의하여 부여됩니다.</small></p>
 											</div>										
 											<div class="form-group no-margin-hr">
 												<label class="control-label">템플릿</label>
@@ -582,7 +582,7 @@
 									<div class="panel-body" style="padding:5px;">
 										<div class="row">
 											<div class="col-sm-6">
-												<p><span class="label label-danger">버전</span></p>
+												
 												<p class="text-muted"><span class="label label-info">템플릿</span>  <small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
 												
 													
