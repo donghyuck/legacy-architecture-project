@@ -518,15 +518,13 @@
 						</div>
 						<div  class="panel-body">	
 							<div  id="webpage-editor" class="container">
+								<!--
 								<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
 									<input type="hidden" name="name"/>
 								</form>-->
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
-											<h5 >
-												
-											</h5>
 											<div class="pull-right">
 												<div class="btn-group">
 													<button type="button" class="btn btn-primary btn-sm" data-bind="click: onPublish, disabled: isPublished"  data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >게시</button>
