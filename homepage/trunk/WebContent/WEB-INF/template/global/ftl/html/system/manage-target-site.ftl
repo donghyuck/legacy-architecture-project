@@ -742,20 +742,19 @@
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
-									<span class="panel-title">사이트 소개</span>										
+									<span class="panel-title" data-bind="text:website.description"></span>										
 								</div>
-								<div class="panel-body">
-									<span data-bind="text:website.description"></span>				
-								</div>
-								<div class="table-info">
-									<div class="table-header no-border-hr no-border-radius">
-										<div class="table-caption">
-											기본정보											
-										</div>
-										<div class="table-heading-controls"	>				
-										<button type="button" class="btn btn-primary btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
-										</div>
-									</div>								
+							</div>
+							
+							<div class="table-info">
+								<div class="table-header no-border-hr no-border-radius">
+									<div class="table-caption">
+										기본정보											
+									</div>
+									<div class="table-heading-controls"	>				
+									<button type="button" class="btn btn-primary btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
+									</div>
+								</div>								
 								<table class="table table-bordered">
 									<tbody>						
 										<tr>
@@ -798,7 +797,6 @@
 										</tr>																								
 									</tbody>
 								</table>
-								</div>
 							</div>
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
