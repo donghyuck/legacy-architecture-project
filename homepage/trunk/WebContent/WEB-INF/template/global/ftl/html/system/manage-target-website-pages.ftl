@@ -554,9 +554,9 @@
 										</div>	
 									</div>
 									<div class="col-md-6 custom-props hide">
-										<h5>									 
+										<h4>									 
 											<small class="text-primary"><i class="fa fa-info"></i> 프로퍼티는 변경 후 저장버튼을 클릭하면 반영됩니다.</small>
-										</h5>
+										</h4>
 										<div data-role="grid"
 													date-scrollable="false"
 													data-editable="true"
@@ -569,29 +569,10 @@
 													data-bind="source: properties, visible: isVisible"
 										style="height: 300px"></div>							
 									</div>									
-								</div>								
-								<div class="panel panel-default">
-									<div class="panel-heading" style="padding:5px;">
-										
-									</div>
-									<div class="panel-body" style="padding:5px;">
-										<div class="row">
-											<div class="col-sm-6">
-												
-												<p class="text-muted"><span class="label label-info">템플릿</span>  <small class="text-muted">페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
-												
-													
-											</div>
-											<div class="col-sm-6">												
-												<p class="text-muted"><span class="label label-info">요약</span>  <small>페이지를 간략하게 설명하세요. </small></p>
-												
-											</div>
-
-										</div>
-										<div class="row">
-											<div class="col-sm-12">
-											<textarea id="webpage-editor-body" rows="5" cols="30" data-bind="value: page.bodyText" placeholder="페이지 본문"></textarea>
-										</div>
+								</div>		
+								<div class="row">
+									<div class="col-sm-12">
+									<textarea id="webpage-editor-body" rows="5" cols="30" data-bind="value: page.bodyText" placeholder="페이지 본문"></textarea>
 									</div>
 								</div>	
 							</div>			
