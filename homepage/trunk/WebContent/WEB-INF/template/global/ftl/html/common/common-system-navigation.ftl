@@ -124,7 +124,7 @@
 				</div>		
 				<ul class="navigation">		
 				<#list menu.components as item >
-					-- ${item.icon!"no icon"} / ${item.image!"no image"} / ${item.page!"no page"}
+					-- ${item.icon!"no icon"} / ${item.image!"no image"} / ${item.page!"no page"} / / ${item.name!"no name"}
 					<#if  item.components?has_content >
 					<li class="mm-dropdown">
 						<a href="javascript:void(0);" data-menu-item="${item.name}"> <#if item.isSetIcon()><i class="menu-icon fa ${item.icon}"></i> </#if><span class="mm-text">${item.title}</span></a>
