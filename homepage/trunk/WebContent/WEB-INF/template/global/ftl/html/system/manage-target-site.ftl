@@ -792,7 +792,7 @@
 										</tr>																								
 									</tbody>
 								</table>
-								<div class="table-footer">
+								<div class="table-footer no-border">
 									<h6 class="text-light-gray text-semibold text-xs">담당자</h6>
 													<div class="media">
 														<a class="pull-left" href="#">
