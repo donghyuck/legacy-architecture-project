@@ -531,24 +531,26 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="form-group no-margin-hr">
-										<label class="control-label">페이지 제목<span class="text-danger">(필수)</span></label>
-										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
+									<div class="col-sm-12">
+										<div class="form-group no-margin-hr">
+											<label class="control-label">페이지 제목 <span class="text-danger">(필수)</span></label>
+											<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
+										</div>
 									</div>								
 								</div>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group no-margin-hr">
-											<label class="control-label">템플릿<span class="text-default">(옵션)</span></label>
+											<label class="control-label">템플릿</label>
 											<input type="text" class="form-control" placeholder="템플릿 파일" value="/html/community/page.ftl">	
-											<p class="help-block">페이지에 적용할 템플릿 파일 경로를 입력하세요</p>
+											<p class="help-block"><small>페이지에 적용할 템플릿 파일 경로를 입력하세요</small></p>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group no-margin-hr">
-											<label class="control-label">페이지 요약<span class="text-default">(옵션)</span></label>
+											<label class="control-label">페이지 요약</label>
 											<textarea class="form-control" rows="3" data-bind="value: page.summary" placeholder="페이지 요약"></textarea>
-											<p class="help-block">페이지를 간략하게 설명하세요. </p>
+											<p class="help-block"><small>페이지를 간략하게 설명하세요.</small> </p>
 										</div>									
 									</div>									
 								</div>
