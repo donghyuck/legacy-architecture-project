@@ -698,7 +698,7 @@
 		}
 		.page-details .left-col {
 			float: left;
-			width: 280px;
+			width: 290px;
 		}		
 		</style>		
 </#compress>		
