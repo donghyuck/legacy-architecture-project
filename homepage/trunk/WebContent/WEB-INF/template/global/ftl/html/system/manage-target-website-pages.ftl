@@ -477,17 +477,24 @@
 					</div>				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
-			<div class="row">	
-				<div class="col-lg-12">
-					<div class="panel panel-default" style="min-height:300px;">
-						<div class="panel-heading">
-							<div class="btn-group">
-								<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
-								<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
-							</div>			
-							<div class="btn-group">
-								<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="back" disabled="disabled"  title="사이트 상세로 이동" ><i class="fa fa-level-up"></i></button>			
-							</div>											
+				<div class="row">	
+					<div class="col-lg-12">
+						<div class="panel panel-default" style="min-height:300px;">
+							<div class="panel-heading">
+								<div class="btn-group">
+									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
+									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
+								</div>			
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="back" disabled="disabled"  title="사이트 상세로 이동" ><i class="fa fa-level-up"></i></button>			
+								</div>							
+								<div class="panel-heading-controls">
+									<div class="btn-group">
+										<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="page-create" disabled="disabled"><i class="fa fa-file"></i> 새 페이지</button>
+										<button type="button" class="btn btn-primary btn-page-control-group btn-sm" data-action="page-publish" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-external-link"></i> 게시</button>
+										<button type="button" class="btn btn-primary btn-page-control-group btn-sm" data-action="page-delete" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"' ><i class="fa fa-trash-o"></i> 삭제</button>
+									</div>
+								</div>																
 						</div>
 						<div id="page-list-panel" class="panel-body">
 							<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
@@ -495,11 +502,7 @@
 										<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small>
 									</h5>
 									<div class="panel-heading-controls">	
-										<div class="btn-group">
-										<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="page-create" disabled="disabled"><i class="fa fa-file"></i> 새 페이지</button>
-										<button type="button" class="btn btn-primary btn-page-control-group btn-sm" data-action="page-publish" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-external-link"></i> 게시</button>
-										<button type="button" class="btn btn-primary btn-page-control-group btn-sm" data-action="page-delete" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"' ><i class="fa fa-trash-o"></i> 삭제</button>
-										</div>										
+										
 									</div>
 							</div>		
 							<div id="website-page-grid"></div>																		
