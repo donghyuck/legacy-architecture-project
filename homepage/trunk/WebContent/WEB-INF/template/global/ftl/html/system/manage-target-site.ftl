@@ -724,7 +724,7 @@
 				<!-- details-row -->
 				<div id="website-details" class="page-details" style="">				
 					<div class="details-row no-margin-t">					
-						<div class="left-col">
+						<div class="left-col left-col-nav">
 							<div class="details-block no-margin-t">
 								<div class="details-photo">
 									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
