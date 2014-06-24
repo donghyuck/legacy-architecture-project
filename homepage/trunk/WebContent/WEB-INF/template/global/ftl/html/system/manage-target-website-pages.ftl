@@ -514,9 +514,9 @@
 					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
 						<div  class="panel-body">	
 							<div  id="webpage-editor" class="container">
-								<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
+								<!--<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
 									<input type="hidden" name="name"/>
-								</form>
+								</form>-->
 								<div class="row">
 									<div class="col-lg-12">
 										<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
