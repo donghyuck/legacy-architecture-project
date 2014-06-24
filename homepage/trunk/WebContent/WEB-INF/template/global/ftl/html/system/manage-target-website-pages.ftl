@@ -512,6 +512,9 @@
 						</div>					
 					</div>
 					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
+						<div class="panel-heading">
+							<button type="button" class="close btn-control-group" data-action="page-editor-close">&times;  닫기</button>
+						</div>
 						<div  class="panel-body">	
 							<div  id="webpage-editor" class="container">
 								<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
@@ -530,7 +533,7 @@
 													<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: showProps, disabled: isNew, invisible:isNew ">프로퍼티</button>
 													<button type="button" class="btn btn-primary btn-sm" data-bind="click: openPage, disabled: isNew" >미리보기</button>
 												</div>
-												<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="page-editor-close">&times;  닫기</button>
+												
 											</div>
 										</div>														
 									</div>
