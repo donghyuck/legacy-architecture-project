@@ -742,7 +742,10 @@
 							</div>				
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
-									<span class="panel-title" data-bind="text:website.description"></span>										
+									<span class="panel-title">사이트 소개</span>										
+								</div>
+								<div class="panel-body">
+									<span data-bind="text:website.description"></span>				
 								</div>
 								<div class="table-info">
 									<div class="table-header no-border-hr no-border-radius">
