@@ -516,13 +516,13 @@
 							<span class="panel-title"><small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small></span>
 							<button type="button" class="close btn-control-group" data-action="page-editor-close">&times;  <small style="font-size: 15px;vertical-align: top;line-height:  1.5;">닫기</small></button>
 						</div>
-						<div  class="panel-body">	
+						<div  class="panel-body no-padding">	
 							<div  id="webpage-editor" class="container">
 								<!--
 								<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
 									<input type="hidden" name="name"/>
 								</form>-->
-								<div class="row">
+								<div class="row padding-sm">
 									<div class="col-lg-12">
 											<div class="pull-right">
 												<div class="btn-group">
