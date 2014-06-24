@@ -513,7 +513,7 @@
 					</div>
 					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
 						<div class="panel-heading">
-							<button type="button" class="close btn-control-group" data-action="page-editor-close">&times;  닫기</button>
+							<button type="button" class="close btn-control-group" data-action="page-editor-close">&times;  <small>닫기</small></button>
 						</div>
 						<div  class="panel-body">	
 							<div  id="webpage-editor" class="container">
