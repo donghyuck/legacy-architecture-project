@@ -518,7 +518,7 @@
 						</div>
 						<div  class="panel-body padding-sm form-horizontal">	
 							<div  id="webpage-editor" class="container">
-								<div class="row">
+								<div class="row padding-sm">
 									<div class="col-lg-12">
 											<div class="pull-right">
 												<div class="btn-group">
@@ -530,9 +530,15 @@
 											</div>												
 									</div>
 								</div>
+								<div class="row">
+									<div class="form-group no-margin-hr">
+										<label class="control-label"><span class="label label-danger">제목</span></label>
+										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
+									</div>								
+								</div>
 								<div class="panel panel-default">
 									<div class="panel-heading" style="padding:5px;">
-										<input type="text" class="form-control" placeholder="페이지 제목" data-bind="value: page.title">
+										
 									</div>
 									<div class="panel-body" style="padding:5px;">
 										<div class="row">
