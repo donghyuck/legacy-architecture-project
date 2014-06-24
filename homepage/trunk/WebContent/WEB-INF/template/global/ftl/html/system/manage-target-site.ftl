@@ -832,7 +832,7 @@
 										<div class="tab-pane fade" id="website-tabs-props">
 											<div data-role="grid"
 												class="no-border"
-												date-scrollable="false"
+												data-scrollable="false"
 												data-editable="true"
 												data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
 												data-columns="[
