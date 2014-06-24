@@ -745,7 +745,7 @@
 									<span class="panel-title" data-bind="text:website.description"></span>										
 								</div>
 							</div>
-							
+							<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description"></h6>
 							<div class="table-info">
 								<div class="table-header no-border-hr no-border-radius">
 									<div class="table-caption">
@@ -810,9 +810,11 @@
 													</div>				
 								</div>								
 							</div>
+							<h6 class="text-light-gray text-semibold text-xs">담당자</h6>
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
-									<span class="panel-title">담당자</span>									
+									<span class="panel-title">담당자</span>		
+																
 								</div>
 								<div class="panel-body">
 													<div class="media">
