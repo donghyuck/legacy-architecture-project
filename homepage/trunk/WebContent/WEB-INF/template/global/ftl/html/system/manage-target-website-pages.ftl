@@ -481,7 +481,7 @@
 					<div class="col-lg-12">
 						<div class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
-								<span class="panel-title"><i class="fa fa-align-justify"></i> 웹페이지 <small>(<i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.)</small></span>
+								<span class="panel-title"><i class="fa fa-align-justify"></i> 웹페이지 <small class="text-danger">(<i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.)</small></span>
 								<!--
 								<div class="btn-group">
 									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
