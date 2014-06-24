@@ -192,7 +192,7 @@
 									common.ui.notification({title:"메뉴 저장", message: "메뉴 데이터가 정상적으로 입력되었습니다.", type: "success" });
 									var updateWebsite = new common.models.WebSite(response.targetWebSite);	
 									updateWebsite.copy( getSelectedWebSite() );									
-									window.location.reload( true );								
+									//window.location.reload( true );								
 								},
 								fail: function(){								
 									common.ui.notification({title:"메뉴 생성 오류", message: "시스템 운영자에게 문의하여 주십시오." });
