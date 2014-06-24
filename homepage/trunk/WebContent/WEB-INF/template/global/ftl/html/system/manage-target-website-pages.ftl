@@ -53,6 +53,7 @@
 				 // 4. PAGE MAIN		
 				 var sitePlaceHolder = new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} );
 				 $("#website-info").data("sitePlaceHolder", sitePlaceHolder );
+				 
 				common.api.callback(  
 				{
 					url :"${request.contextPath}/secure/get-site.do?output=json", 
@@ -79,13 +80,16 @@
 						'page-editor-close' : function(e){
 							kendo.fx($("#page-editor-panel")).expand("vertical").duration(200).reverse();								
 							kendo.fx($("#page-list-panel")).expand("vertical").duration(200).play();				
-						},								
+						},
+						/*								
 						group : function(e){
 							topBar.go('main-group.do');				
-						}, 	
+						}, 
+							
 						user : function(e){
 							topBar.go('main-user.do');			
 						}, 	
+						*/
 						back : function(e){
 							goWebsite();					
 						}																  						 
@@ -147,7 +151,9 @@
 				
 		function createPageGrid(){
 			if(!$("#website-page-grid").data('kendoGrid') ){
+			
 				var sitePlaceHolder = $("#website-info").data("sitePlaceHolder");
+				
 				$("#website-page-grid").kendoGrid({
                     dataSource: {
                     	serverFiltering: false,
@@ -504,7 +510,9 @@
 						<div class="table">
 							<div id="website-page-grid" class="no-border"></div>																		
 						</div>					
-						<div  id="page-editor-panel" class="panel-body" style="padding:5px; display:none;">	
+					</div>
+					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
+						<div  class="panel-body">	
 							<div  id="webpage-editor" class="container">
 								<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
 									<input type="hidden" name="name"/>
