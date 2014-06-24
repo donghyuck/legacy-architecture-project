@@ -512,21 +512,9 @@
 						</div>					
 					</div>
 					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
-						<div class="panel-heading">
-							<span class="panel-title"<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small></span>	
-							<div class="panel-heading-controls">
-									<div class="btn-group">
-										<button type="button" class="btn btn-primary" data-bind="click: onPublish, disabled: isPublished"  data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >게시</button>
-										<button type="button" class="btn btn-primary" data-action="page-editor-save" data-bind="click: doSave, enabled: updateRequired" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'>저장</button>
-										<button type="button" class="btn btn-primary" data-toggle="button"  data-bind="click: showProps, disabled: isNew, invisible:isNew ">프로퍼티</button>
-										<button type="button" class="btn btn-primary" data-bind="click: openPage, disabled: isNew" >미리보기</button>
-									</div>
-									<button type="button" class="close" data-action="page-editor-close">&times;</button>							
-							</div>					
-						</div>
 						<div  class="panel-body">	
 							<div  id="webpage-editor" class="container">
-								<!--<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
+								<form name="openpage-form" action="${request.contextPath}/community/page.do" target="_blank">
 									<input type="hidden" name="name"/>
 								</form>-->
 								<div class="row">
@@ -536,7 +524,13 @@
 												<small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small>
 											</h5>
 											<div class="pull-right">
-
+												<div class="btn-group">
+													<button type="button" class="btn btn-primary btn-sm" data-bind="click: onPublish, disabled: isPublished"  data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >게시</button>
+													<button type="button" class="btn btn-primary btn-sm" data-action="page-editor-save" data-bind="click: doSave, enabled: updateRequired" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'>저장</button>
+													<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: showProps, disabled: isNew, invisible:isNew ">프로퍼티</button>
+													<button type="button" class="btn btn-primary btn-sm" data-bind="click: openPage, disabled: isNew" >미리보기</button>
+												</div>
+												<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="page-editor-close">&times;  닫기</button>
 											</div>
 										</div>														
 									</div>
