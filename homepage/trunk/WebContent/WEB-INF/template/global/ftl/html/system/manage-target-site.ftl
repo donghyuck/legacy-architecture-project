@@ -742,12 +742,12 @@
 																				
 							</div>				
 							
-							<div class="table-info">
-								<div class="table-header no-border-hr no-border-radius">
-									<div class="table-caption">
+							<div class="panel panel-transparent">
+								<div class="panel-heading">
+									<div class="panel-title">
 										기본정보											
 									</div>
-									<div class="table-heading-controls"	>				
+									<div class="panel-heading-controls"	>				
 									<button type="button" class="btn btn-primary btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
 									</div>
 								</div>								
@@ -793,7 +793,7 @@
 										</tr>																								
 									</tbody>
 								</table>
-								<div class="table-footer no-border">
+								<div class="panel-footer no-border">
 									<h6 class="text-light-gray text-semibold text-xs">담당자</h6>
 													<div class="media">
 														<a class="pull-left" href="#">
