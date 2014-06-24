@@ -797,6 +797,18 @@
 										</tr>																								
 									</tbody>
 								</table>
+								<div class="table-footer">
+													<div class="media">
+														<a class="pull-left" href="#">
+															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
+														</a>
+														<div class="media-body">
+															<h5 class="media-heading">
+															<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
+															</h5>
+														</div>
+													</div>				
+								</div>								
 							</div>
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
