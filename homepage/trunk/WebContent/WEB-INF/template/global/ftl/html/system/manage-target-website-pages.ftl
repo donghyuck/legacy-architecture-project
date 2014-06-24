@@ -456,7 +456,6 @@
 		}			
 		
 		table.k-editor{
-			border : 0px;
 			height : 400px;
 		}
 		
@@ -571,9 +570,7 @@
 									</div>									
 								</div>		
 								<div class="row">
-									<div class="col-sm-12">
 									<textarea id="webpage-editor-body" rows="5" cols="30" data-bind="value: page.bodyText" placeholder="페이지 본문"></textarea>
-									</div>
 								</div>	
 							</div>			
 						</div>
