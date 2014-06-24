@@ -754,7 +754,7 @@
 								<table class="table">
 									<tbody>						
 										<tr>
-											<th class="text-center">회사</th>								
+											<th class="text-center" width="75">회사</th>								
 											<td><span data-bind="text: website.company.displayName"></span> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> <code><span data-bind="text: website.company.companyId"></span></code></td>
 										</tr>	
 										<tr>											
