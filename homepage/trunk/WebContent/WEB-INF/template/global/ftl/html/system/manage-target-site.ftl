@@ -744,7 +744,13 @@
 								<div class="panel-heading">
 									<span class="panel-title" data-bind="text:website.description"></span>									
 								</div>
-								<table class="table table-condensed table-bordered">
+								<div class="table-info">
+									<div class="table-header">
+										<div class="table-caption">
+											기본정보
+										</div>
+									</div>								
+								<table class="table table-bordered">
 									<tbody>						
 										<tr>
 											<th class="text-center">회사</th>								
@@ -786,6 +792,7 @@
 										</tr>																								
 									</tbody>
 								</table>
+								</div>
 							</div>
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
