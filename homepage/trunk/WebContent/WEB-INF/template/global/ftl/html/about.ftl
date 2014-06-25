@@ -151,7 +151,7 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.about.pageId") />
-		<#assign menuName = action.targetPage.getProperty("MENU_NAME", "USER_MENU") />
+		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
 		<#assign current_menu = action.getWebSiteMenu(menuName, "MENU_1_1") />
 				
 		<header class="cloud">
