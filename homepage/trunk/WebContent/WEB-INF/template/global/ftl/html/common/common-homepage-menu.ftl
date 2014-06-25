@@ -26,7 +26,7 @@
 								</ul>
 							</li>
 							<li class="topbar-devider"></li>   
-							<li><a href="about.do">회사소개 <i class="fa fa-building"></i></a></li>
+							<li><i class="fa fa-building"></i> <a href="about.do">회사소개</a></li>
 						</ul>
 						<!-- End Topbar Navigation -->
 					</div>
