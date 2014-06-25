@@ -157,7 +157,7 @@
 		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
 		<#assign menuItemName = action.targetPage.getProperty("navigator.selected.name", "MENU_1_3") />
 		${ menuName } , ${ menuItemName }
-		<#assign current_menu = action.getWebSiteMenu(menuName, menuItemName) />
+		
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
