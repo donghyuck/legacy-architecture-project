@@ -243,6 +243,12 @@
 			source.copy(renderTo.data("pagePlaceHolder"));
 		}
 		
+		function getPageEditorSource () {
+			var renderToString = "webpage-editor";	
+			var renderTo = $("#"+ renderToString );	
+			return renderTo.data("pagePlaceHolder");
+		}
+		
 		function createEditor( renderToString ){				
 			var renderTo = $("#"+ renderToString);		
 			var pagePlaceHolder = renderTo.data("pagePlaceHolder");									
@@ -258,9 +264,9 @@
 							destroy: { url:'${request.contextPath}/secure/delete-website-page-property.do?output=json', type:'post' },
 					 		parameterMap: function (options, operation){			
 						 		if (operation !== "read" && options.models) {
-						 			return { targetPageId: renderTo.data("model").page.pageId, items: kendo.stringify(options.models)};
+						 			return { targetPageId: getPageEditorSource().pageId, items: kendo.stringify(options.models)};
 								} 
-								return { targetPageId: renderTo.data("model").page.pageId }
+								return { targetPageId: getPageEditorSource().pageId }
 							}
 						},	
 						batch: true, 
