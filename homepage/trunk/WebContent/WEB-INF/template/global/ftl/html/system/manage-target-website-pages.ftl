@@ -81,9 +81,8 @@
 						'page-editor-close' : function(e){
 							//kendo.fx($("#page-editor-panel")).expand("vertical").duration(200).reverse();								
 							//kendo.fx($("#page-list-panel")).expand("vertical").duration(200).play();				
-							common.ui.animate_v3($('#page-editor-panel'), 'fadeOutUp', function(){
-								common.ui.animate_v3($('#page-list-panel'), 'fadeInDown').show() ;
-							}) ;							
+							$('#page-editor-panel').hide();	
+							common.ui.animate_v3($('#page-list-panel'), 'fadeInDown').show() ;					
 						},
 						/*								
 						group : function(e){
