@@ -150,7 +150,10 @@
 	<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_1") />
+		<#assign hasWebSitePage = action.hasWebSitePage("pages.about.pageId") />
+		<#assign menuName = action.targetPage.getProperty("MENU_NAME", "USER_MENU") />
+		<#assign current_menu = action.getWebSiteMenu(menuName, "MENU_1_1") />
+				
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
@@ -179,7 +182,7 @@
 				<div class="col-lg-9">
 					<div class="row">
 						<div class="col-sm-12">		
-							<#if action.hasWebSitePage("pages.about.pageId") >							
+							<#if hasWebSitePage >							
 							${ processedBodyText }
 							</#if> 
 							<!-- start of tabs -->					
