@@ -157,50 +157,7 @@
 		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
 		<#assign menuItemName = action.targetPage.getProperty("navigator.selected.name", "MENU_1_3") />
 		${ menuName } , ${ menuItemName }
-		
-		<header class="cloud">
-			<div class="container">
-				<div class="col-lg-12">	
-					<h2 class="color-green">${ current_menu.title }</h2>
-					<h5><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h5>
-				</div>
-			</div>
-		</header>		
-		<!-- END HEADER -->			
-		<!-- START MAIN CONTENT -->	
-		<div class="container layout">			
-			<div class="row">
-				<div class="col-lg-3 visible-lg">
-					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
-                	<p class="margin-bottom-25"><small>${current_menu.parent.description!" " }</small></p>	              						
-					<!-- start side menu -->		
-					<div class="list-group">
-					<#list current_menu.parent.components as item >
-						<#if item.name ==  current_menu.name >
-						<a href="${item.page}" class="list-group-item active">${ item.title } </a>
-						<#else>
-						<a href="${item.page}" class="list-group-item">${ item.title } </a>
-						</#if>						
-					</#list>										
-					</div>	
-					<!-- end side menu -->				
-				</div>
-				<div class="col-lg-9">		
-					<div class="content-main-section">
-						<div class="page-header padding-left-10">
-							<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
-						</div>	
-														
-						<section id="announce-list-section" style="">
-							<div id="announce-grid"></div>
-						</section>
-						<section id="announce-view-content-section" class="hidden">						
-							<div id="announce-view-panel"></div>
-						</section>						
-					</div>
-				</div>				
-			</div>
-		</div>									 			
+							 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:announceId#">
