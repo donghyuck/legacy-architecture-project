@@ -182,7 +182,7 @@
                     columns: [
                         { field: "pageId", title: "ID", width:50,  filterable: false, sortable: false , headerAttributes: { "class": "table-header-cell", style: "text-align: center" }}, 
                         { field: "name", title: "이름", width: 200, headerAttributes: { "class": "table-header-cell", style: "text-align: center"}}, 
-                        { field: "title", title: "제목", width: 300 , headerAttributes: { "class": "table-header-cell", style: "text-align: center" }},template: $('#webpage-title-template').html() }, 
+                        { field: "title", title: "제목", width: 300 , headerAttributes: { "class": "table-header-cell", style: "text-align: center" }, template: $('#webpage-title-template').html() }, 
                         { field: "versionId", title: "버전", width: 80, headerAttributes: { "class": "table-header-cell", style: "text-align: center" } },
                         { field: "pageState", title: "상태", width: 120, headerAttributes: { "class": "table-header-cell", style: "text-align: center" }, template: '#if ( pageState === "PUBLISHED" ) { #<span class="label label-success">#: pageState #</span>#}else{# <span class="label label-danger">#: pageState #</span> #}#'},
                         { field: "user.username", title: "작성자", width: 100, headerAttributes: { "class": "table-header-cell", style: "text-align: center" } },
