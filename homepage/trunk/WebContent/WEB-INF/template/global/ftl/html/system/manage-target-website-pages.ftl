@@ -258,9 +258,9 @@
 							destroy: { url:'${request.contextPath}/secure/delete-website-page-property.do?output=json', type:'post' },
 					 		parameterMap: function (options, operation){			
 						 		if (operation !== "read" && options.models) {
-						 			return { targetPageId: pagePlaceHolder.pageId, items: kendo.stringify(options.models)};
+						 			return { targetPageId: renderTo.data("model").page.pageId, items: kendo.stringify(options.models)};
 								} 
-								return { targetPageId: pagePlaceHolder.pageId }
+								return { targetPageId: renderTo.data("model").page.pageId }
 							}
 						},	
 						batch: true, 
