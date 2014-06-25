@@ -17,7 +17,7 @@
 							</div>
 							</#if>
 							</#list>
-							
+							<!--
 							<div class="col-sm-4">
 							<h3 class="heading-sm no-top-space"><strong>인재 육성 솔루션</strong></h3>
 							<ul class="list-unstyled">
@@ -35,16 +35,15 @@
 								</ul>	
 								<h3 class="heading-sm no-top-space"><strong>쇼셜 미디어</strong></h3>
 								<ul class="social-icons">
-                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
-                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
-                    </ul>
-                    
+			                        <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
+			                        <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
+			                   	</ul>                    
 							</div>
+							-->
 						</div>
 					</div><!--/col-md-8-->
 					<div class="col-md-4">
-							<a class="btn-u btn-u-blue btn-block" href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')" >원천징수 영수증 출력 (02 2081 1016)</a>
-                            					
+							<a class="btn-u btn-u-blue btn-block" href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')" >원천징수 영수증 출력 (02 2081 1016)</a>		
 					<!--
 						<div class="footer-links">					
 							<div class="footer-links-body">
