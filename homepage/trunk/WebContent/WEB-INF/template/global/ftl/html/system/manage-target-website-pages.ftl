@@ -129,7 +129,8 @@
 		}
 		
 		function doPageEdit(){
-			kendo.fx($("#page-list-panel")).expand("vertical").duration(200).reverse();
+			//kendo.fx($("#page-list-panel")).expand("vertical").duration(200).reverse();
+			$("#page-list-panel").hide();
 			showPageEditor();							
 		}		
 		
