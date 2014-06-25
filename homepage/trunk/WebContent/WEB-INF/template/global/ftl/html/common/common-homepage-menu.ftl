@@ -21,12 +21,12 @@
 								<a>언어</a>
 								<ul class="lenguages">
 									<li class="active">
-										<a href="#">한국어 <i class="fa fa-check"></i></a> 
+										<a href="\\#">한국어 <i class="fa fa-check"></i></a> 
 									</li>
 								</ul>
-							</li><!--
+							</li>
 							<li class="topbar-devider"></li>   
-							<li><a href="##\">도움말</a></li>  -->
+							<li><a href="about.do">회사소개 <i class="fa fa-building"></i></a></li>
 						</ul>
 						<!-- End Topbar Navigation -->
 					</div>
