@@ -101,7 +101,7 @@
 					<!-- end side menu -->
 				</div>
 				<div class="col-lg-9">
-				<#if action.hasWebSitePage("pages.customers.pageId") >		
+				<#if hasWebSitePage >		
 				${ processedBodyText }		
 				<#else> 
 					<div class="page-header padding-left-10">

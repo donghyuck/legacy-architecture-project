@@ -67,7 +67,10 @@
 	<body class="color0">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_6") />
+		<#assign hasWebSitePage = action.hasWebSitePage("pages.about.pageId") />
+		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
+		<#assign menuItemName = action.targetPage.getProperty("page.menu.item.name", "MENU_1_6") />
+		<#assign current_menu = action.getWebSiteMenu(menuName, menuItemName) />
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
@@ -81,6 +84,8 @@
 		<div class="container layout">	
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
+					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
+                	<p class="margin-bottom-25"><small>${current_menu.parent.description!" " }</small></p>	   					
 					<!-- start side menu -->		
 					<div class="list-group">
 					<#list current_menu.parent.components as item >
@@ -94,7 +99,7 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
-					<#if action.hasWebSitePage("pages.contact.pageId") >							
+					<#if hasWebSitePage >							
 					${ processedBodyText }
 					</#if> 				
 				</div>				

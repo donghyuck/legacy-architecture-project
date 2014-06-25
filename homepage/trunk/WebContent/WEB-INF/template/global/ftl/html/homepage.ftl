@@ -5,13 +5,15 @@
 		<#compress>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.ui.portfolio-v2.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',						
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',				
+			'${request.contextPath}/js/common.plugins/jquery.mixitup.js',		
 			'${request.contextPath}/js/jquery.plugins/easing/jquery.easing.1.3.js',
 			'${request.contextPath}/js/layer-slider/jquery.transit.modified.js',
 			'${request.contextPath}/js/layer-slider/layerslider.transitions.js',
@@ -51,6 +53,8 @@
 					responsiveUnder : 960,
 					sublayerContainer : 960
 		        });
+				
+				$('.sorting-grid').mixitup();
 				
 				<#if !action.user.anonymous ></#if>	
 			}
@@ -160,7 +164,112 @@
     <!-- content
     ================================================== -->
 <div class="container content">	
-    	
+       <!-- Portfolio Sorting Blocks -->
+        <div class="sorting-block">
+            <ul class="sorting-nav sorting-nav-v1 text-center">
+                <li class="filter" data-filter="all">All</li>
+                <li class="filter" data-filter="category_1">UI Design</li>
+                <li class="filter" data-filter="category_2">Wordpress</li>
+                <li class="filter" data-filter="category_3">HTML5/CSS3</li>
+                <li class="filter" data-filter="category_4">Bootstrap 3</li>
+            </ul>
+
+            <ul class="row sorting-grid">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_1 category_3" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_3 category_1" data-cat="3">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_2 category_1" data-cat="2">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/13.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_3 category_4" data-cat="3">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_2 category_1 category_4" data-cat="2">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_4" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_2 category_3  category_4" data-cat="2">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_1 category_2 category_3" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_4 category_2" data-cat="1">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category_3 category_2" data-cat="3">
+                    <a href="#">
+                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
+                        <span class="sorting-cover">
+                            <span>Happy New Year</span>
+                            <p>Anim pariatur cliche reprehenderit</p>
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        
+            <div class="clearfix"></div>
+        </div>
+        <!-- End Portfolio Sorting Blocks -->    	
     	<!-- Recent Works -->
         <div class="headline"><h2>Recent Works</h2></div>
         <div class="row margin-bottom-20">
