@@ -452,11 +452,11 @@
 		<style type="text/css" media="screen">
 
 		.k-grid-content{
-			height:400px;
+			height:540px;
 		}			
 		
 		table.k-editor{
-			height : 400px;
+			height : 500px;
 		}
 		
 						
