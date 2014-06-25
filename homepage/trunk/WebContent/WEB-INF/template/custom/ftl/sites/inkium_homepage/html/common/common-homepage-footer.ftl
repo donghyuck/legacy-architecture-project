@@ -1,20 +1,23 @@
 		<!--=== Footer ===-->
+		<#assign websiteFooterMenu = action.getWebSiteMenu("FOOTER_MENU") />
 		<div class="footer bg-dark">
 			<div class="container layout">
 				<div class="row">
 					<div class="col-md-8">
 						<div class="row">
+							<#list websiteFooterMenu.components as item >
+							<#if  item.components?has_content >
 							<div class="col-sm-4">
-								<h3 class="heading-sm no-top-space"><strong>회사 소개</strong></h3>
+								<h2 class="heading-sm no-top-space"><strong>${item.title}</strong></h2>
 								<ul class="list-unstyled">
-                                <li><i class="fa fa-angle-right"></i> 기업소개</li>
-                                <li><i class="fa fa-angle-right"></i> CEO 인사말</li>
-                                <li><i class="fa fa-angle-right"></i> 공지 & 이벤트</li>
-                                <li><i class="fa fa-angle-right"></i> 뉴스</li>
-                                <li><i class="fa fa-angle-right"></i> 고객사</li>
-                                <li><i class="fa fa-angle-right"></i> 오시는길</li>
-                            </ul>
+									<#list item.components as sub_item >
+									<li><a href="${sub_item.page}"><i class="fa fa-angle-right"></i> ${sub_item.title}</a></li>
+									</#list>
+								</ul>
 							</div>
+							</#if>
+							</#list>
+							
 							<div class="col-sm-4">
 							<h3 class="heading-sm no-top-space"><strong>인재 육성 솔루션</strong></h3>
 							<ul class="list-unstyled">
