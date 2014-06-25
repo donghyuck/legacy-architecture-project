@@ -69,7 +69,7 @@
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.contact.pageId") />
 		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
-		<#assign menuItemName = action.targetPage.getProperty("page.menu.item.name", "MENU_1_6") />
+		<#assign menuItemName = action.targetPage.getProperty("navigator.selected.name", "MENU_1_6") />
 		<#assign current_menu = action.getWebSiteMenu(menuName, menuItemName) />
 		<header class="cloud">
 			<div class="container">
