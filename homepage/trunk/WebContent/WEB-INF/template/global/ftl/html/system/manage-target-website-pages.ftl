@@ -213,7 +213,8 @@
 		function showPageEditor(){		
 			preparePageEditor();
 			$("button.btn-editor-control-group[data-action='page-editor-save']").attr('disabled', 'disabled');
-			kendo.fx($("#page-editor-panel")).expand("vertical").duration(200).play();
+			//kendo.fx($("#page-editor-panel")).expand("vertical").duration(200).play();
+			common.ui.animate_v3($('#page-editor-panel'), 'slideInLeft').show() ;
 		}
 		
 		function preparePageEditor(){
