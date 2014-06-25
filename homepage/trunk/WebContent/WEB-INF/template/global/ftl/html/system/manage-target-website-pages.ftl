@@ -118,11 +118,14 @@
 			}
 		}]);
 			
+
 		function goWebsite (){					
-			$("form[name='navbar-form'] input[name='targetSiteId']").val( $("#website-info").data("sitePlaceHolder").webSiteId );
-			$("#navbar").data("kendoExtNavbar").go("view-site.do");							
+			common.api.teleportation().teleport({
+				action : '${request.contextPath}/secure/view-site.do',
+				targetSiteId : $("#website-info").data("sitePlaceHolder").webSiteId
+			});						
 		}
-		
+				
 		function goPage (page){		
 			$("form[name='openpage-form'] input[name='name']").val( page.name );
 			$("form[name='openpage-form']").submit();			
