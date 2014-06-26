@@ -302,6 +302,8 @@
 			var renderTo = $(that.element);
 			if( that.options.template){
 				renderTo.html(that.options.template(that.token));
+				
+				// if anonymous 
 				if (that.token.anonymous) {	
 					renderTo.find(	"button.btn-external-login-control-group").click( function (e){
 						var target_media = $(this)	.attr("data-target");
@@ -357,6 +359,19 @@
 							}	
 						});
 					}
+				}else{
+					renderTo.find('.navbar-toggle-aside-menu').click(function(e){
+						var target = $(this).attr("href");
+						if($(target).is(":visible")){
+							$(target).hide();
+							$("body").removeClass("aside-menu-in");
+						}
+						else{
+							$("body").addClass("aside-menu-in");
+							$(target).show();
+						}
+						return false;							
+					});					
 				}
 				that.trigger(SHOWN);
 			}	
