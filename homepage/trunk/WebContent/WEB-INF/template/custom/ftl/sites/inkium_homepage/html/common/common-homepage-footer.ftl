@@ -12,7 +12,7 @@
 								<ul class="list-unstyled">
 									<#list item.components as sub_item >
 									<li><a href="${sub_item.page}" target="${sub_item.target!"_self"} ">
-										<#if sub_item.image >
+										<#if sub_item.image??  >
 											<img src="${sub_item.image}" class="img-circle" /> ${sub_item.title}
 										<#else>
 											<i class="fa ${sub_item.icon!"fa-angle-right"}"></i> ${sub_item.title}
