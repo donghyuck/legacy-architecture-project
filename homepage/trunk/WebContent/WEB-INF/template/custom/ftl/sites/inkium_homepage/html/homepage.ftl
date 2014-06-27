@@ -68,7 +68,7 @@
 					sublayerContainer : 960
 		        });
 		        				
-		        				$('.sorting-grid').mixItUp();
+		        $('.sorting-grid').mixItUp();
 		        								
 				// ACCOUNTS LOAD				
 				var currentUser = new User();			
