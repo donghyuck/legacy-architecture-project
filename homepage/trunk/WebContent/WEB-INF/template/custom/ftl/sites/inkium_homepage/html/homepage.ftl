@@ -298,8 +298,7 @@
                 <li class="filter" data-filter="all">전체</li>
                 <li class="filter" data-filter=".category-1">기업서비스</li>
                 <li class="filter" data-filter=".category-2">대학서비스</li>
-                <li class="filter" data-filter=".category-3">서비스</li>
-                <li class="filter" data-filter=".category-4">제품</li>
+                <li class="filter" data-filter=".category-3">자격사업</li>
             </ul>
 
             <ul class="row sorting-grid">
@@ -330,7 +329,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 category-4" data-cat="3">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 " data-cat="3">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
                         <span class="sorting-cover">
@@ -339,7 +338,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-1 category-4" data-cat="2">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-1 " data-cat="2">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
                         <span class="sorting-cover">
@@ -348,7 +347,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-4" data-cat="1">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix " data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
                         <span class="sorting-cover">
@@ -357,7 +356,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-3  category-4" data-cat="2">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-3  " data-cat="2">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
                         <span class="sorting-cover">
@@ -375,7 +374,7 @@
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-4 category-2" data-cat="1">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix  category-2" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
                         <span class="sorting-cover">
