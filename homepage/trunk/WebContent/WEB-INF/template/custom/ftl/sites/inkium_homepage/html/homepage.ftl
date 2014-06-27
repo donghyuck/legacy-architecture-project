@@ -299,7 +299,7 @@
        <!-- Portfolio Sorting Blocks -->
         <div class="sorting-block">
             <ul class="sorting-nav sorting-nav-v1 text-center">
-                <li class="filter" data-filter="all">전체</li>
+                <li class="filter hidden-xs" data-filter="all">전체</li>
                 <li class="filter" data-filter=".category-1">기업서비스</li>
                 <li class="filter" data-filter=".category-2">대학서비스</li>
                 <li class="filter" data-filter=".category-3">자격사업</li>
