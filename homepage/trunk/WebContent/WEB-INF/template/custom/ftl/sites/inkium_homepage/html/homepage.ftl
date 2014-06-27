@@ -307,7 +307,7 @@
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
                         <span class="sorting-cover">
                             <span>국내위탁교육</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <p></p>
                         </span>
                     </a>
                 </li>
