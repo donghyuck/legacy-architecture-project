@@ -302,7 +302,7 @@
             </ul>
 
             <ul class="row sorting-grid">
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 category-3" >
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1" >
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
                         <span class="sorting-cover">
