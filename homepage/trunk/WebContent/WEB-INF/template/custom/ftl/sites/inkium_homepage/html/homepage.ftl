@@ -194,7 +194,7 @@
 		================================================== -->
 
 <!--=== Slider ===-->
-    <div class="layer_slider">
+    <div class="layer_slider hidden-xs">
         <div id="layerslider-container-fw">        
             <div id="layerslider" style="width: 100%; height: 500px; margin: 0px auto; ">
                 <!--First Slide-->
