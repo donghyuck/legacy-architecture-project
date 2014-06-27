@@ -311,66 +311,66 @@
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 category-1" data-cat="3">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>해외연수</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-1" data-cat="2">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/13.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>HRD 컨설팅</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3 " data-cat="3">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 " data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>HRD 자문 서비스</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-1 " data-cat="2">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>INKIUM e-HRD</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix " data-cat="1">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>iCAP</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2 category-3  " data-cat="2">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>Studymart</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 category-2 category-3" data-cat="1">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
-                            <p>제품 / 서비스 한줄 요약</p>
+                            <span>iNTV</span>
+                            <p></p>
                         </span>
                     </a>
                 </li>
