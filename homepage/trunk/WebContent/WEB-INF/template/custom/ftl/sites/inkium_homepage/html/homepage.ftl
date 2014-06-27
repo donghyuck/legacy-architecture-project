@@ -302,11 +302,11 @@
             </ul>
 
             <ul class="row sorting-grid">
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 category-3" data-cat="1">
+                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 category-3" >
                     <a href="#">
                         <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
                         <span class="sorting-cover">
-                            <span>제품/서비스 명</span>
+                            <span>국내위탁교육</span>
                             <p>제품 / 서비스 한줄 요약</p>
                         </span>
                     </a>
