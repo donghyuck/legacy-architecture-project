@@ -13,7 +13,7 @@
 									<#list item.components as sub_item >
 									<li><a href="${sub_item.page}" target="${sub_item.target!"_self"} ">
 										<#if sub_item.image??  >
-											<img src="${sub_item.image}" class="img-circle" ${sub_item.width!"100"}/> ${sub_item.title}
+											<img src="${sub_item.image}" class="img-circle" width="${sub_item.width!"100"}"/> ${sub_item.title}
 										<#else>
 											<i class="fa ${sub_item.icon!"fa-angle-right"}"></i> ${sub_item.title}
 										 </#if >	</a></li>
