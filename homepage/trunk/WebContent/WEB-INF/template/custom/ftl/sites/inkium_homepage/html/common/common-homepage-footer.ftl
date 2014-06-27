@@ -8,7 +8,7 @@
 							<#list websiteFooterMenu.components as item >
 							<#if  item.components?has_content >
 							<div class="col-sm-4">
-								<h2 class="heading-sm no-top-space"><strong>${item.title}  ${item.module!"1"} ${item.target!"2"} ${item.icon!"3"}</strong></h2>
+								<h2 class="heading-sm no-top-space"><strong>${item.title}</strong></h2>
 								<ul class="list-unstyled">
 									<#list item.components as sub_item >
 									<li><a href="${sub_item.page}" target="${sub_item.target!"_self"} "><i class="fa ${sub_item.icon!"fa-angle-right"}"></i> ${sub_item.title}</a></li>
