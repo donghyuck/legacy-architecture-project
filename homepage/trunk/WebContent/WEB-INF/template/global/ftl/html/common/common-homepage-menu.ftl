@@ -39,7 +39,7 @@
 								<span class="fa fa-user pull-left"></span>
 								<span class="sr-only">${webSite.description} toggle navigation</span>
 								<span class="fa fa-bars"></span>
-							</button>					
+							</button>	
 							<a class="navbar-brand" href="/main.do">
 								<img id="logo-header" src="/download/logo/company/INKIUM" width="175" alt="Logo">
 							</a>
