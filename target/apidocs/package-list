@@ -1,0 +1,5 @@
+architecture.ee.web.contact
+architecture.ee.web.contact.dao
+architecture.ee.web.contact.dao.jdbc
+architecture.ee.web.contact.impl
+contact

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+	<rank>1000</rank>
+	<model id="63" code="CONTACT" />	
+	<model id="64" code="CONTACT_GROUP" />	
+</models>
