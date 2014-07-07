@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+	<description>
+	<![CDATA[
+        Define Contact Component & Service
+	]]>
+	</description>
+	
+	<!-- DAO -->
+	<bean id="contactGroupDao" class="architecture.ee.web.contact.dao.jdbc.JdbcContactGroupDao" parent="jdbcDaoSupport"  
+		depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />						
+	<bean id="contactDao" class="architecture.ee.web.contact.dao.jdbc.JdbcContactDao" parent="jdbcDaoSupport"  
+		depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+	<bean id="tagDao" class="architecture.ee.web.contact.dao.jdbc.JdbcTagDao" parent="jdbcDaoSupport"  
+		depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />												
+	
+	<!-- Cache -->
+	<bean id="contactGroupCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="contactGroupCache"  p:maxElementsInMemory="5000"  
+		p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="contactCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="contactCache"  p:maxElementsInMemory="5000"  
+		p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	<bean id="contactGroupMapCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="contactGroupMapCache"  p:maxElementsInMemory="5000"  
+		p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="600"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<!-- Manager -->
+	<bean id="contactManager" class="architecture.ee.web.contact.impl.ContactManagerImpl" depends-on="contactDao, tagDao, contactGroupDao"
+		  p:contactCache-ref="contactCache"  p:contactGroupCache-ref="contactGroupCache" p:contactGroupMapCache-ref="contactGroupMapCache"
+		  p:contactDao-ref="contactDao"   p:tagDao-ref="tagDao"  p:contactGroupDao-ref="contactGroupDao" 
+		  />
+	<!-- <bean id="contactGroupManager" class="architecture.ee.web.contact.impl.ContactGroupManagerImpl" depends-on="contactGroupDao"  
+		  p:contactGroupDao-ref="contactGroupDao" p:contactGroupCache-ref="contactGroupCache" />
+		 -->	
+</beans>

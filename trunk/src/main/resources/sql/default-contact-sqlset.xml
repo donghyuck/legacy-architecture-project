@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_CONTACT</name>
+    <version>1.0</version>
+    <description>Queries for COMMUNITY CONTACT COMPONENTS</description>
+    <sql-query name="GET_CONTACT" description="GET_CONTACT">
+	<![CDATA[
+		-- GET_CONTACT
+		SELECT C.CONTACT_ID,
+		       C.NAME,
+		       C.EMAIL,
+		       C.PHONE,
+		       C.CELL_PHONE,
+		       C.COMPANY_ID,
+		       C.TAG,
+		       C.CONTACT_DESC,
+		       C.CREATION_DATE,
+		       C.CREATE_ID,
+		       C.MODIFIED_DATE,
+		       C.MODIFY_ID,
+		       C.DEL_YN,
+		       C.TYPE_CODE,
+		       DECODE(C.TYPE_CODE,1,'우리 회사 연락처',2,'우리 회사 담당자 연락처',3,'고객사 연락처',4,'고객사 담당자 연락처') AS TYPE_NAME,
+		       C.COMPANY_ID
+		  FROM 
+		       V2_CONTACT C
+		 WHERE C.CONTACT_ID = ?
+	]]></sql-query>
+	<sql-query name="GET_CONTACT_GROUP" description="GET_CONTACT_GROUP">
+	<![CDATA[
+		-- GET_CONTACT_GROUP
+		SELECT G.GROUP_ID,
+		       G.PARENT_GROUP_ID,
+		       (SELECT GROUP_NAME FROM V2_CONTACT_GROUP WHERE GROUP_ID = G.PARENT_GROUP_ID) AS PARENT_GROUP_NAME,
+		       G.GROUP_NAME,
+		       G.COMPANY_ID,
+		       G.TYPE_CODE,
+		       DECODE(G.TYPE_CODE,1,'우리 회사 연락처',2,'우리 회사 담당자 연락처',3,'고객사 연락처',4,'고객사 담당자 연락처') AS TYPE_NAME,
+		       G.CREATION_DATE,
+		       G.CREATE_ID,
+		       G.MODIFIED_DATE,
+		       G.MODIFY_ID,
+		       G.DEL_YN
+		  FROM V2_CONTACT_GROUP G
+		WHERE G.GROUP_ID = ?
+	]]></sql-query>
+	<sql-query name="GET_CONTACT_GROUP_IDS_BY_COMPANY_ID_AND_TYPE_CODE" description="GET_CONTACT_GROUP_IDS_BY_COMPANY_ID_AND_TYPE_CODE">
+	<![CDATA[
+		-- GET_CONTACT_GROUP_IDS_BY_COMPANY_ID_AND_TYPE_CODE
+		SELECT G.GROUP_ID
+		  FROM V2_CONTACT_GROUP G
+		 WHERE G.COMPANY_ID = ?
+		  AND G.DEL_YN = 0
+		 ]]>
+		<dynamic><![CDATA[
+		<#if (typeCode > 0) >
+		  AND G.TYPE_CODE = ${typeCode}
+		</#if>
+		  ]]></dynamic> 
+	</sql-query>
+    <sql-query name="SELECT_CONTACT_IDS_BY_COMPANY_ID" description="SELECT_CONTACT_IDS_BY_COMPANY_ID">
+	<![CDATA[
+		-- SELECT_CONTACT_IDS_BY_COMPANY_ID
+		SELECT C.CONTACT_ID
+		  FROM 
+		       V2_CONTACT C
+		 WHERE C.DEL_YN = 0
+		   AND C.COMPANY_ID = ?
+	]]></sql-query>
+	<sql-query name="SELECT_CONTACT_IDS_BY_COMPANY_ID_AND_TYPE_CODE" description="SELECT_CONTACT_IDS_BY_COMPANY_ID_AND_TYPE_CODE">
+	<![CDATA[
+		-- SELECT_CONTACT_IDS_BY_COMPANY_ID_AND_TYPE_CODE
+		SELECT C.CONTACT_ID
+		  FROM 
+		       V2_CONTACT C
+		 WHERE C.DEL_YN = 0
+		   AND C.COMPANY_ID = ?
+		   AND C.TYPE_CODE = ? 
+	]]></sql-query>
+	<sql-query name="GET_CONTACTS_COUNT_BY_COMPANY_ID" description="GET_CONTACTS_COUNT_BY_COMPANY_ID">
+	<![CDATA[
+			-- GET_CONTACTS_COUNT_BY_COMPANY_ID
+		SELECT COUNT(*)
+		  FROM V2_CONTACT
+		  WHERE COMPANY_ID = ?
+	]]></sql-query>
+	
+	
+	<sql-query name="INSERT_CONTACT" description="INSERT_CONTACT">
+	<![CDATA[
+		 -- INSERT_CONTACT : 연락처 데이터 삽입
+			   INSERT INTO V2_CONTACT
+			    (CONTACT_ID, NAME, EMAIL, PHONE, CELL_PHONE, TAG, CONTACT_DESC , CREATION_DATE, CREATE_ID, DEL_YN, COMPANY_ID, TYPE_CODE)
+			 VALUES
+			     (?, ?, ?, ?, ?, ? , ?, SYSDATE, ?, 0, ?, ?)
+	]]></sql-query>
+	<sql-query name="UPDATE_CONTACT" description="UPDATE_CONTACT">
+	<![CDATA[
+			-- UPDATE_CONTACT
+		    UPDATE V2_CONTACT
+		      SET NAME = ?,
+		          EMAIL = ?,
+		          PHONE = ?,
+		          CELL_PHONE = ?,
+		          TAG = ?,
+		          CONTACT_DESC = ?, 
+		          MODIFIED_DATE= SYSDATE,
+		          MODIFY_ID = ?,
+		          TYPE_CODE = ?
+		   WHERE CONTACT_ID = ?
+	]]></sql-query>
+	<sql-query name="DELETE_CONTACT" description="DELETE_CONTACT">
+	<![CDATA[
+			-- DELETE_CONTACT
+			 UPDATE V2_CONTACT
+		      SET DEL_YN = 1,
+		          MODIFIED_DATE= SYSDATE,
+		          MODIFY_ID = ?
+		    WHERE CONTACT_ID = ?
+	]]></sql-query>
+	<sql-query name="INSERT_TAG" description="INSERT_TAG">
+	<![CDATA[
+			-- INSERT_TAG
+			INSERT INTO V2_TAG
+		     (TAG_ID, TAG_NAME, CREATION_DATE, CREATE_ID, COMPANY_ID)
+		    VALUES
+		      (? , ?, SYSDATE, ? , ?)
+	]]></sql-query>
+	<sql-query name="INSERT_CONTACT_TAG_MAP" description="INSERT_CONTACT_TAG_MAP">
+	<![CDATA[
+			INSERT INTO V2_CONTACT_TAG_MAP
+		    (CONTACT_ID, TAG_ID, CREATION_DATE, CREATE_ID)
+		    VALUES
+		    (? , ?, SYSDATE, ?)
+	]]></sql-query>
+	<sql-query name="GET_TAG_ID_BY_TAG_NAME" description="GET_TAG_ID_BY_TAG_NAME">
+	<![CDATA[
+			SELECT TAG_ID
+		    FROM V2_TAG
+		   WHERE TAG_NAME = ?
+	]]></sql-query>
+	<sql-query name="GET_TAG_CNT_BY_TAG_NAME" description="GET_TAG_CNT_BY_TAG_NAME">
+	<![CDATA[
+			SELECT COUNT(TAG_ID) 
+		    FROM V2_TAG
+		   WHERE TAG_NAME = ?
+	]]></sql-query>
+	
+	<sql-query name="INSERT_CONTACT_GROUP_MAP" description="INSERT_CONTACT_GROUP_MAP">
+	<![CDATA[
+		INSERT INTO V2_CONTACT_GROUP_MAP
+	   (GROUP_ID, CONTACT_ID, CREATION_DATE, CREATE_ID)
+	   VALUES
+	   (? , ?, SYSDATE, ? )
+	]]></sql-query>
+	<sql-query name="DELETE_CONTACT_TAG_MAP_BY_CONTACT_ID" description="DELETE_CONTACT_TAG_MAP_BY_CONTACT_ID">
+	<![CDATA[
+		-- DELETE_CONTACT_TAG_MAP_BY_CONTACT_ID
+		 DELETE FROM V2_CONTACT_TAG_MAP
+		  WHERE CONTACT_ID = ?
+	]]></sql-query>
+	<sql-query name="DELETE_CONTACT_GROUP_MAP_BY_CONTACT_ID" description="DELETE_CONTACT_GROUP_MAP_BY_CONTACT_ID">
+	<![CDATA[
+		-- DELETE_CONTACT_GROUP_MAP_BY_CONTACT_ID
+		 DELETE FROM V2_CONTACT_GROUP_MAP
+		  WHERE CONTACT_ID = ?
+	]]></sql-query>
+   	<sql-query name="SELECT_MAPPING_GROUP_IDS_BY_CONTACT_ID" description="SELECT_MAPPING_GROUP_IDS_BY_CONTACT_ID">
+	<![CDATA[
+		   SELECT M.GROUP_ID
+		  FROM V2_CONTACT_GROUP_MAP M
+		 WHERE M.CONTACT_ID = ? 
+	]]></sql-query>
+    <sql-query name="GET_TAG_IDS_BY_TAG_NAMES" description="GET_TAG_IDS_BY_TAG_NAMES">
+	<![CDATA[
+		select tag_id 
+		from v2_tag
+	]]><dynamic><![CDATA[
+		<#assign cnt = 0 
+		         max_cnt = tags?size >
+		where tag_name in (
+		<#list tags as tag>		
+			<#assign cnt = cnt + 1 >
+			'${tag}'<#if cnt < max_cnt >,</#if>
+				
+		</#list>
+		)
+	]]></dynamic>
+	</sql-query>
+  	<sql-query name="GET_CONTACT_IDS_BY_TAG_IDS" description="GET_CONTACT_IDS_BY_TAG_IDS">
+	<![CDATA[
+		   --GET_CONTACT_IDS_BY_TAG_IDS
+		   SELECT CONTACT_ID
+		     FROM V2_CONTACT_TAG_MAP
+	]]><dynamic><![CDATA[
+		<#assign cnt = 0 
+		         max_cnt = tagIds?size >
+		WHERE TAG_ID IN (
+		<#list tagIds as id>		
+			<#assign cnt = cnt + 1 >
+			'${id}'<#if cnt < max_cnt >,</#if>
+		</#list>
+		)
+	]]></dynamic>
+	</sql-query>
+	
+	<sql-query name="GET_GROUP_IDS_BY_CONTACT_IDS" description="GET_GROUP_IDS_BY_CONTACT_IDS">
+	<![CDATA[
+		   select group_id,
+		          contact_id
+		 from v2_contact_group_map
+	 ]]><dynamic><![CDATA[
+		<#assign cnt = 0 
+		         max_cnt = contactIds?size >
+		WHERE CONTACT_ID IN (
+		<#list contactIds as id>		
+			<#assign cnt = cnt + 1 >
+			'${id}'<#if cnt < max_cnt >,</#if>
+		</#list>
+		)
+	]]></dynamic>
+	</sql-query>
+	<sql-query name="GET_PIVOT_LIST_BY_CONTACT_IDS" description="GET_PIVOT_LIST_BY_CONTACT_IDS">
+	<![CDATA[
+		   select contact_id,
+		   	      group_id
+		 from v2_contact_group_map
+	 ]]><dynamic><![CDATA[
+		<#assign cnt = 0 
+		         max_cnt = contactIds?size >
+		WHERE CONTACT_ID IN (
+		<#list contactIds as id>		
+			<#assign cnt = cnt + 1 >
+			'${id}'<#if cnt < max_cnt >,</#if>
+		</#list>
+		)
+	]]></dynamic>
+	</sql-query>
+	
+	
+</sqlset>
