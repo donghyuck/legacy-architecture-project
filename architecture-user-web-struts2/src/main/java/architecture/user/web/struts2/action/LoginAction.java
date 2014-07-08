@@ -15,11 +15,39 @@
  */
 package architecture.user.web.struts2.action;
 
+import org.apache.commons.lang.StringUtils;
+
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 public class LoginAction  extends FrameworkActionSupport  {
-    @Override
+	
+	String ver = null ;
+	
+	
+    /**
+	 * @return var
+	 */
+	public String getVer() {
+		return ver;
+	}
+
+
+
+	/**
+	 * @param var 설정할 var
+	 */
+	public void setVer(String ver) {
+		this.ver = ver;
+	}
+
+
+
+	@Override
     public String execute() throws Exception {
-        return input();
+
+    	if(StringUtils.isNotEmpty(ver) && StringUtils.equals(ver, "1")){
+    		return success();	
+    	}    	
+    	return input();
     }
 }
