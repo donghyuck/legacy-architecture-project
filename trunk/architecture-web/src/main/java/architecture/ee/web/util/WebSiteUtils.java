@@ -17,10 +17,10 @@ package architecture.ee.web.util;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.util.StringUtils;
 import architecture.common.util.TextUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.logo.LogoManager;
@@ -47,8 +47,7 @@ public class WebSiteUtils {
 	public static WebSiteManager getWebSiteManager(){
 		return ApplicationHelper.getComponent(WebSiteManager.class);
 	}
-	
-	
+		
 	
 	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
 		String localName = request.getLocalName();		
@@ -63,7 +62,6 @@ public class WebSiteUtils {
 	public static Long getDefaultWebSiteId(){
 		return  ApplicationHelper.getApplicationLongProperty("components.website.default.websiteId", 1L);
 	}
-
 	
 	public static WebSite getDefaultWebSite() throws WebSiteNotFoundException {
 		return getWebSiteManager().getWebSiteById(getDefaultWebSiteId());
@@ -72,6 +70,8 @@ public class WebSiteUtils {
 	public static MenuRepository getMenuRepository(){
 		return ApplicationHelper.getComponent(MenuRepository.class);
 	}
+	
+
 	
 	public static Long getDefaultMenuId(){
 		return ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
@@ -85,7 +85,60 @@ public class WebSiteUtils {
 		return getMenuRepository().getMenu(menuId);
 	}
 
+	public static MenuComponent getMenuComponent(String name) throws MenuNotFoundException { 
+		return getMenuComponent(getDefaultMenu(), name);
+	}
 	
+	public static MenuComponent getMenuComponent(String name, String child) throws MenuNotFoundException { 
+		return getMenuComponent(getDefaultMenu(), name, child);
+	}
+	
+	
+	public static MenuComponent getMenuComponent(Menu menu, String name) throws MenuNotFoundException { 
+		if( menu != null ){
+			return getMenuRepository().getMenuComponent(menu, name);
+		}else{
+			throw new MenuNotFoundException();
+		}
+	}
+
+	public static MenuComponent getMenuComponent(Menu menu, String name, String child) throws MenuNotFoundException { 
+		if( menu != null ){
+			MenuComponent parentMenu = getMenuComponent(menu, name);
+			MenuComponent selectedMenu = null;
+			for( MenuComponent childMenu : parentMenu.getComponents() )
+			{
+				if( child.equals( childMenu.getName() ) ){
+					selectedMenu = childMenu;		
+					break;
+				}
+				if( childMenu.getComponents().size() > 0 ){
+					for( MenuComponent childMenu2 : childMenu.getComponents() ){
+						if( child.equals( childMenu2.getName() ) ){
+							selectedMenu = childMenu2;		
+							break;
+						}
+					}
+				}
+			}
+			return selectedMenu;		
+		}else{
+			throw new MenuNotFoundException();
+		}
+	}	
+	
+	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
+		if(StringUtils.isNotEmpty(menu.getRoles())){			
+			for( String role : StringUtils.split(menu.getRoles(), ",")){
+				if( request.isUserInRole( role ) )
+					return true;
+			}			
+		}else{
+			return true;
+		}
+		return false;
+	}	
+					
 	public static Menu getWebSiteMenu(WebSite webSite) throws MenuNotFoundException{
 		if( webSite.getMenu().getMenuId() < 1 )
 			return getDefaultMenu();
@@ -127,15 +180,5 @@ public class WebSiteUtils {
 			website.getProperties().put(MAIN_PAGE_VIEW_PREFIX, templage);
 	}
 		
-	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
-		if(StringUtils.isNotEmpty(menu.getRoles())){			
-			for( String role : StringUtils.split(menu.getRoles(), ",")){
-				if( request.isUserInRole( role ) )
-					return true;
-			}			
-		}else{
-			return true;
-		}
-		return false;
-	}
+
 }
