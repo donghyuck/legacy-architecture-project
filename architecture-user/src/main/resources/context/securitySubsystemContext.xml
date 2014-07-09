@@ -39,6 +39,7 @@
         <security:intercept-url pattern="/content/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />
   
   		<security:intercept-url pattern="/download/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />
+  		
         <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
         <security:intercept-url pattern="/page.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/about.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
@@ -46,7 +47,7 @@
         <security:intercept-url pattern="/press.do*"				access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/contact.do*"			access="IS_AUTHENTICATED_ANONYMOUSLY"/>  
         <security:intercept-url pattern="/customers.do*"		access="IS_AUTHENTICATED_ANONYMOUSLY"/>
-        
+        <security:intercept-url pattern="/welcome.do*"		access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         
         <security:intercept-url pattern="/secure/**"				access="ROLE_SYSTEM, ROLE_ADMIN" />
         <security:intercept-url pattern="/**"						access="ROLE_USER" />
@@ -54,7 +55,7 @@
         <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
     	<security:form-login 
-    	    login-page="/accounts/login.do" 
+    	    login-page="/accounts/login.do?ver=1" 
     	    login-processing-url="/login" 
     	    username-parameter="username" 
     	    password-parameter="password" 
