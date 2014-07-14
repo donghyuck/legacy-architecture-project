@@ -2,13 +2,13 @@
 <html decorator="homepage">
 <head>
 		<title>기업소개</title>
-<#compress>			
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.pages/common.timeline-v2.min.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.pages/common.timeline-v2.min',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -19,14 +19,14 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
-			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-				      
+							      
 				// START SCRIPT	
-
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});	
+				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
@@ -39,87 +39,11 @@
 					}				
 				});	
 				
-				
-				// Start : Company Social Content 
-				<#list action.connectedCompanySocialNetworks  as item >				
-				<#assign stream_name = item.serviceProviderName + "_streams_" + item.socialAccountId  />	
-				<#assign panel_element_id = "#" + item.serviceProviderName + "-panel-" + item.socialAccountId  />												
-				var ${stream_name} = new MediaStreams(${ item.socialAccountId}, "${item.serviceProviderName}" );
-				<#if  item.serviceProviderName == "twitter" >
-				${stream_name}.setTemplate ( kendo.template($("#twitter-timeline-template").html()) );				
-				<#elseif  item.serviceProviderName == "facebook" >
-				${stream_name}.setTemplate( kendo.template($("#facebook-homefeed-template").html()) );
-				</#if>
-				${stream_name}.createDataSource({ 
-					transport : {
-						parameterMap : function ( options,  operation) {
-							return { objectType : 1 };
-						} 
-					}
-				});							
-				${stream_name}.dataSource.read();				
-				$( "${panel_element_id} .panel-header-actions a").each(function( index ) {
-					var header_action = $(this);
-					header_action.click(function (e){
-						e.preventDefault();		
-						var header_action_icon = header_action.find('span');
-						if (header_action.text() == "Minimize" || header_action.text() == "Maximize"){
-							$("${panel_element_id} .panel-body").toggleClass("hide");				
-							if( header_action_icon.hasClass("k-i-maximize") ){
-								header_action_icon.removeClass("k-i-maximize");
-								header_action_icon.addClass("k-i-minimize");
-							}else{
-								header_action_icon.removeClass("k-i-minimize");
-								header_action_icon.addClass("k-i-maximize");
-							}
-						} else if (header_action.text() == "Refresh"){								
-							${stream_name}.dataSource.read();							
-						} 
-					});								
-				});				
-				</#list>	
 				<#if !action.user.anonymous >							
 				</#if>	
-				
-				$('#aboutTab').on( 'show.bs.tab', function (e) {
-					//e.preventDefault();		
-					var show_bs_tab = $(e.target);
-					if( show_bs_tab.attr('href') == '#company-history' ){
-									
-						if( $("#company-history .timeline-v2").text().trim().length == 0 ){
-							var template = kendo.template($("#timeline-template").html());
-							var dataSource = new kendo.data.DataSource({
-				                transport: {
-				                    read: {
-				                        url: "/community/website-company-timeline.do?output=json",
-				                        dataType: "json"
-				                    }
-				                },
-				                schema : {
-				                	data : "timelines",
-				                	model : common.models.Timeline
-				                },			                
-				                requestStart: function() {
-				                    kendo.ui.progress($("#company-history"), true);
-				                },
-				                requestEnd: function() {
-				                    kendo.ui.progress($("#company-history"), false);
-				                },
-				                change: function() {
-									$("#company-history .timeline-v2").html(kendo.render(template, this.view()));
-				                }
-				            });		
-				            dataSource.read();
-						}
-						 
-					} 				
-				});				
-				$('#aboutTab a:first').tab('show');
 				// END SCRIPT            
 			}
 		}]);	
-
-		
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -138,29 +62,25 @@
 		}
 		.cbp_tmtimeline > li .cbp_tmicon { 
 			position : relative;
-		}				
-		.timeline-v2 > li .cbp_tmlabel{ 
-			color: #555;
 		}
-		
+					
+						
 		</style>   	
-</#compress>				
 	</head>
-	<body>		
-	<div class="wrapper">
+	<body>
+		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
-		
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.about.pageId") />
 		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
 		<#assign menuItemName = action.targetPage.getProperty("navigator.selected.name", "MENU_1_1") />
 		<#assign current_menu = action.getWebSiteMenu(menuName, menuItemName) />
-				
+		
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2 class="color-green">${ current_menu.title }</h2>
-					<h5><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h5>
+					<h2>${ current_menu.title }</h2>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>			
@@ -182,10 +102,11 @@
 					</#list>										
 					</div>	
 					<!-- end side menu -->					
-				</div>
+				</div><!-- ./col-lg-3 -->
 				<div class="col-lg-9">
 					<div class="row">
-						<div class="col-sm-12">		
+						<div class="col-sm-12">					
+
 							<#if hasWebSitePage >							
 							${ processedBodyText }
 							</#if> 
@@ -199,15 +120,8 @@
 							<!-- Tab panes -->
 							<div class="tab-content" style="min-height:300px;">
 								<div class="tab-pane fade" id="company-history" style="min-height:300px;">
-									<div class="margin-bottom-20"></div>								
-									<!--
-									<div class="panel panel-default">
-										<div class="panel-body">
-									-->		
-									<ul class="timeline-v2"></ul>
-									<!--				
-										</div>
-									</div> -->								
+									<div class="margin-bottom-20"></div>
+									<ul class="timeline-v2"></ul>						
 								</div>
 								<div class="tab-pane fade" id="company-logo" style="min-height:300px;">
 									<div class="page-header page-nounderline-header padding-left-10 ">
@@ -251,41 +165,17 @@
 								</div>
 							</div>
 							</div><!-- end of tabs -->
-						</div>
-					</div>					
-				</div>				
-			</div>
-		</div>		
-	</div>
-	<!-- /wrapper -->	
-		<script type="text/x-kendo-tmpl" id="timeline-template">
- 			<li>
- 				<time class="cbp_tmtime" datetime="">
- 					<span>
-	 				#if(isPeriod()){#
-	 					<small>#: getFormattedStartDate() # ~ #: getFormattedEndDate() #</small>
-	 				#}else{#
-	 					<small>#: getFormattedStartDate() #</small>
-	 				#}#				
-					</span> 
-					<span style='color:\\#e67e22;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;'><strong>#: getEndDateYear() #</strong></span>
-				</time>
-				<i class="cbp_tmicon rounded-x hidden-xs"></i>
-				<div class="cbp_tmlabel">
-					#if(headline !== null && headline !== 'null'){#
-					<h4>#:headline#</h4>
-					#}#
-					#if(body !== null && body !== 'null'){#					
-					<p>#= body #</p>
-					#}#
-				</div>
-			</li>
-		</script>			
-				
+
+						</div><!-- ./col-sm-12 -->		
+					</div><!-- ./row -->					
+				</div><!-- ./col-lg-9 -->				
+			</div><!-- ./row -->
+		</div><!-- ./container -->										 
 		<!-- END MAIN CONTENT -->	
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		</div><!-- /wrapper -->	
 		<!-- START TEMPLATE -->
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
