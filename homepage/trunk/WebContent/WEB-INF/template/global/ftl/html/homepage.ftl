@@ -1,61 +1,42 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
-		<#compress>		
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.ui.portfolio-v2.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
+		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>		
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',				
-			'${request.contextPath}/js/common.plugins/jquery.mixitup.js',		
-			'${request.contextPath}/js/jquery.plugins/easing/jquery.easing.1.3.js',
-			'${request.contextPath}/js/layer-slider/jquery.transit.modified.js',
-			'${request.contextPath}/js/layer-slider/layerslider.transitions.js',
-			'${request.contextPath}/js/layer-slider/layerslider.kreaturamedia.jquery.js',			
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',			
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
-			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',			
+			'${request.contextPath}/js/common.plugins/query.backstretch.min.js', 			
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
 						
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-						
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});	
+				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
 					externalLoginHost: "${ServletUtils.getLocalHostAddr()}",	
-					<#if WebSiteUtils.isAllowedSignIn(action.webSite) ||  !action.user.anonymous  >
+					<#if action.isAllowedSignIn() ||  !action.user.anonymous  >
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					authenticate : function( e ){
 						e.token.copy(currentUser);
 					}				
-				});					
-			
-				$('#layerslider').layerSlider({
-					skinsPath : '/styles/layer-slider/skins/',
-					skin : 'fullwidth',
-					thumbnailNavigation : 'hover',
-					hoverPrevNext : true,
-					responsive : true,
-					responsiveUnder : 960,
-					sublayerContainer : 960
-		        });
-				
-				$('.sorting-grid').mixitup();
-				
+				});			
 				<#if !action.user.anonymous ></#if>	
 			}
 		}]);	
@@ -63,348 +44,101 @@
 		-->
 		</script>		
 		<style scoped="scoped">
-
-		</style>   
-		</#compress>			
+	
+			
+		</style>   	
 	</head>
-	<body>
-		<div class="wrapper">	
+	<body class="bg-dark">
+		<div class="page-loader"></div>
+		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->	
 		
-
-<!--=== Slider ===-->
-    <div class="layer_slider">
-        <div id="layerslider-container-fw">        
-            <div id="layerslider" style="width: 100%; height: 500px; margin: 0px auto; ">
-                <!--First Slide-->
-                <div class="ls-layer" style="slidedirection: right; transition2d: 24,25,27,28; ">
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg1.jpg" class="ls-bg" alt="Slide background">
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
-
-                    <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:35px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
-                        Fully Responsive <br> Bootstrap 3 Template
-                    </span>
-
-                    <a class="btn-u btn-u-orange ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
-                        Download Now
-                    </a>
-                </div>
-                <!--End First Slide-->
-
-                <!--Second Slide-->
-                <div class="ls-layer" style="slidedirection: top; ">
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/bg/5.jpg" class="ls-bg" alt="Slide background">
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
-                        Fully Responsive and Easy to Customize
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
-                        Revolution and Layer Slider Included 
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
-                        1000+ Glyphicons Pro and Font Awesome Icons 
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:220px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 4500; durationout : 3500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:220px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 3500; ">
-                        Revolution and Layer Slider Included 
-                    </span>
-
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:270px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 5500; durationout : 4500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:270px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 5500; durationout : 4500; ">
-                        60+ Template Pages and 20+ Plugins Included
-                    </span>
-
-                    <a class="btn-u btn-u-blue ls-s1" href="#" style=" padding: 9px 20px; font-size:25px; top:340px; left: 40px; slidedirection : bottom; slideoutdirection : bottom; durationin : 6500; durationout : 3500; ">
-                        Twitter Bootstrap 3
-                    </a>
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone1.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 650px; slidedirection : right; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-                </div>
-                <!--End Second Slide-->
-
-                <!--Third Slide-->
-                <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105; ">
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/sliders/layer/bg2.jpg" class="ls-bg" alt="Slide background">
-
-                    <span class="ls-s-1" style=" color: #777; line-height:45px; font-weight: 200; font-size: 35px; top:100px; left: 50px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
-                        Unify is Fully Responsive <br> Twitter Bootstrap 3 Template
-                    </span>
-
-                    <a class="btn-u btn-u-green ls-s-1" href="#" style=" padding: 9px 20px; font-size:25px; top:220px; left: 50px; slidedirection : bottom; slideoutdirection : bottom; durationin : 2000; durationout : 2000; ">
-                        Find Out More
-                    </a>
-
-                    <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/mockup/iphone.png" alt="Slider Image" class="ls-s-1" style=" top:30px; left: 670px; slidedirection : right; slideoutdirection : bottom; durationin : 3000; durationout : 3000; ">
-                </div>
-                <!--End Third Slide-->
-            </div>         
-        </div>
-    </div><!--/layer_slider-->
-    <!--=== End Slider ===-->
-
-
-    <!-- content
+	<!-- Carousel
     ================================================== -->
-<div class="container content">	
-       <!-- Portfolio Sorting Blocks -->
-        <div class="sorting-block">
-            <ul class="sorting-nav sorting-nav-v1 text-center">
-                <li class="filter" data-filter="all">All</li>
-                <li class="filter" data-filter="category_1">UI Design</li>
-                <li class="filter" data-filter="category_2">Wordpress</li>
-                <li class="filter" data-filter="category_3">HTML5/CSS3</li>
-                <li class="filter" data-filter="category_4">Bootstrap 3</li>
-            </ul>
+    
+    
+    
+    
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
 
-            <ul class="row sorting-grid">
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_1 category_3" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_3 category_1" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_2 category_1" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/13.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_3 category_4" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_2 category_1 category_4" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_4" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_2 category_3  category_4" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_1 category_2 category_3" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_4 category_2" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category_3 category_2" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Happy New Year</span>
-                            <p>Anim pariatur cliche reprehenderit</p>
-                        </span>
-                    </a>
-                </li>
-            </ul>
-        
-            <div class="clearfix"></div>
+	<div class="container marketing">
+      <!-- Three columns of text below the carousel -->
+      
+      <div class="row">
+        <div class="col-lg-4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <h2>Heading</h2>
+          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img class="img-circle" data-src="holder.js/140x140" alt="Generic placeholder image">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+      
+		<!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
-        <!-- End Portfolio Sorting Blocks -->    	
-    	<!-- Recent Works -->
-        <div class="headline"><h2>Recent Works</h2></div>
-        <div class="row margin-bottom-20">
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                	<div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>					
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project One</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>                   
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project Two</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/9.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>                   
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project Three</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="thumbnails thumbnail-style thumbnail-kenburn">
-                    <div class="thumbnail-img">
-                        <div class="overflow-hidden">
-                            <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/10.jpg" alt="">
-                        </div>
-                        <a class="btn-more hover-effect" href="#">read more +</a>                   
-                    </div>
-                    <div class="caption">
-                        <h3><a class="hover-effect" href="#">Project Four</a></h3>
-                        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, justo sit amet risus etiam porta sem.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
         </div>
-    	<!-- End Recent Works -->
+      </div>
 
-    	<!-- Info Blokcs -->
-    	<div class="row margin-bottom-30">
-        	<!-- Welcome Block -->
-    		<div class="col-md-8 md-margin-bottom-40">
-    			<div class="headline"><h2>Welcome To Unify</h2></div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <img class="img-responsive margin-bottom-20" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
-                    </div>
-                    <div class="col-sm-8">
-                        <p>Unify is an incredibly beautiful responsive Bootstrap Template for corporate and creative professionals. It works on all major web browsers, tablets and phone.</p>
-                        <ul class="list-unstyled margin-bottom-20">
-                            <li><i class="fa fa-check color-green"></i> Donec id elit non mi porta gravida</li>
-                            <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-                            <li><i class="fa fa-check color-green"></i> Responsive Bootstrap Template</li>
-                            <li><i class="fa fa-check color-green"></i> Corporate and Creative</li>
-                        </ul>                    
-                    </div>
-                </div>
+      <hr class="featurette-divider">
 
-                <blockquote class="hero-unify">
-                    <p>Award winning digital agency. We bring a personal and effective approach to every project we work on, which is why. Unify is an incredibly beautiful responsive Bootstrap Template for corporate professionals.</p>
-                    <small>홍</small>
-                </blockquote>
-            </div><!--/col-md-8-->        
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+      </div>
 
-            <!-- Latest Shots -->
-            <div class="col-md-4">
-    			<div class="headline"><h2>Latest Shots</h2></div>
-    			<div id="myCarousel" class="carousel slide carousel-v1">
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/5.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p>Facilisis odio, dapibus ac justo acilisis gestinas.</p>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p>Cras justo odio, dapibus ac facilisis into egestas.</p>
-                            </div>
-                            </div>
-                        <div class="item">
-                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
-                            <div class="carousel-caption">
-                                <p>Justo cras odio apibus ac afilisis lingestas de.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="carousel-arrow">
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <i class="fa fa-angle-left"></i>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <i class="fa fa-angle-right"></i>
-                        </a>
-                    </div>
-    			</div>
-            </div><!--/col-md-4-->
-    	</div>	
-    	<!-- End Info Blokcs -->
+      <hr class="featurette-divider">
 
-        <!-- Our Clients -->
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+        </div>
+      </div>
 
-        <!-- End Our Clients -->
-    </div>
+      <!-- /END THE FEATURETTES -->
+       
+	</div><!-- /.container -->
+
+		
 		<!-- END MAIN CONTENT -->	
-		</div><!-- /wrapper -->	
+
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		</div><!-- /.wrapper -->
 		
 		<!-- START TEMPLATE -->
 		<#include "/html/common/common-homepage-templates.ftl" >		
