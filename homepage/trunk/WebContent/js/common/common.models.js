@@ -2,100 +2,6 @@
 	var common = window.common = window.common || {};
 	common.models = {};
 	
-	common.models.Contact =  kendo.data.Model.define({
-		id : "contactId",
-		fields: { 
-			contactId: { type: "number", editable: false, defaultValue: 0 },
-			name: { type: "string", editable: true },
-			phone: { type: "string", editable: true, defaultValue:"" },
-			cellPhone: { type: "string", editable: true, defaultValue: "" },
-			tag: { type: "string", editable: true, defaultValue: "" },
-			contactDesc: { type: "string", editable: true, defaultValue: "" },
-			groupId: { type: "number", editable: true, defaultValue: 0 },
-			delYn: { type: "boolean", editable: true, defaultValue: 0 },
-			userId: { type: "number", editable: true, defaultValue: 0 },
-			modifyId: { type: "number", editable: true, defaultValue: 0 },
-			companyId: { type: "number", editable: true, defaultValue: 0 },
-			typeCode: { type: "number", editable: true, defaultValue: 1 },
-			typeName: { type: "string", editable: true, defaultValue: "" },
-			groupIds: { type: "string", editable: true, defaultValue: "" },
-	        modifiedDate: { type: "date"},
-	        creationDate: { type: "date" } ,
-	        srchType: { type: "string", editable: true, defaultValue: "" }
-	        //,showType: { type: "string", editable: true, defaultValue: "" }
-		},
-		formattedCreationDate : function(){
-	    	return kendo.toString(this.get("creationDate"), "g");
-	    },
-	    formattedModifiedDate : function(){
-	    	return kendo.toString(this.get("modifiedDate"), "g");
-	    },
-	    copy: function ( target ){
-	    	
-	    	target.contactId = this.get("contactId");
-	    	target.set("name",this.get("name") );
-	    	target.set("email", this.get("email"));
-	    	target.set("phone",this.get("phone") );
-	    	target.set("cellPhone", this.get("cellPhone"));
-	    	target.set("tag",this.get("tag") );
-	    	target.set("contactDesc", this.get("contactDesc") );
-	    	target.set("groupId", this.get("groupId") );
-	    	target.set("creationDate", this.get("creationDate") );
-	    	target.set("userId", this.get("userId") );
-	    	target.set("modifiedDate", this.get("modifiedDate") );
-	    	target.set("modifyId", this.get("modifyId") );
-	    	target.set("delYn", this.get("delYn") );
-	    	target.set("companyId", this.get("companyId") );
-	    	target.set("typeCode", this.get("typeCode") );
-	    	target.set("typeName", this.get("typeName") );
-	    	target.set("groupIds", this.get("groupIds") );
-	    	/*if( typeof this.get("user") === 'object' )
-	    		target.set("user", this.get("user") );
-	    	if( typeof this.get("properties") === 'object' )
-	    		target.set("properties", this.get("properties") );
-	    	*/
-	    }
-	});
-	
-	common.models.ContactGroup =  kendo.data.Model.define({
-		id : "groupId",
-		fields: { 
-			groupId: { type: "number", editable: false, defaultValue: 0 },
-			parentGroupId: { type: "number", editable: false, defaultValue: 0 },
-			groupName: { type: "string", editable: true },
-			companyId: { type: "number", editable: true },
-			typeCode: { type: "number", editable: true, defaultValue: 1 },
-			delYn: { type: "boolean", editable: true, defaultValue: 0 },
-			userId: { type: "number", editable: true, defaultValue: 0 },
-			modifyId: { type: "number", editable: true, defaultValue: 0 },
-	        modifiedDate: { type: "date"},
-	        creationDate: { type: "date" } 			
-		},
-		formattedCreationDate : function(){
-	    	return kendo.toString(this.get("creationDate"), "g");
-	    },
-	    formattedModifiedDate : function(){
-	    	return kendo.toString(this.get("modifiedDate"), "g");
-	    }
-	    /*,
-	    copy: function ( target ){
-	    	target.topicId = this.get("topicId");
-	    	target.set("subject",this.get("subject") );
-	    	target.set("content", this.get("content"));
-	    	target.set("viewCnt",this.get("viewCnt") );
-	    	target.set("totalReplies", this.get("totalReplies"));
-	    	target.set("modifiedDate",this.get("modifiedDate") );
-	    	target.set("creationDate", this.get("creationDate") );
-	    	target.forumId = this.get("forumId");
-	    	if( typeof this.get("user") === 'object' )
-	    		target.set("user", this.get("user") );
-	    	if( typeof this.get("properties") === 'object' )
-	    		target.set("properties", this.get("properties") );
-	    }*/
-	});
-	
-	
-	
 	common.models.Forum =  kendo.data.Model.define({
 		id : "forumId",
 		fields: { 
@@ -146,7 +52,7 @@
 			subject: { type: "string", editable: true },
 			content: { type: "string", editable: true },
 			viewCnt: { type: "number", editable: true, defaultValue: 0 },
-			forumId: { type: "number", editable: false, defaultValue: -1 },
+			forumId: { type: "number", editable: false, defaultValue: 1 },
 			totalReplies: { type: "number", editable: true, defaultValue: 0 },
 			attachmentId: { type: "number", editable: true, defaultValue: 0 },
 	        modifiedDate: { type: "date"},
@@ -283,8 +189,8 @@
 			url : { type: "string", editable: true},
 			enabled: { type: "boolean", editable: true , defaultValue: false},
 			allowAnonymousAccess: { type: "boolean", editable: true, defaultValue: false },
-	        modifiedDate: { type: "date", editable: true },
-	        creationDate: { type: "date", editable: true } 			
+	        modifiedDate: { type: "date", editable: false },
+	        creationDate: { type: "date", editable: false } 			
 		},
 	    copy: function ( target ){
 	    	target.webSiteId = this.get("webSiteId");
@@ -574,17 +480,34 @@ var SocialNetwork = kendo.data.Model.define( {
     id: "socialAccountId", // the identifier of the model
     fields: {
     	socialAccountId: { type: "number", editable: false, defaultValue: -1  },    	
-    	objectType: { type: "number", editable: false, defaultValue: -1  },    	
-    	objectId: { type: "number", editable: false, defaultValue: -1  },    	
+    	objectType: { type: "number", editable: true, defaultValue: -1  },    	
+    	objectId: { type: "number", editable: true, defaultValue: -1  },    	
     	serviceProviderName: { type: "string", editable: true , validation: { required: true }},
-    	authorizationUrl : { type: "string", editable: false  },    	
+    	authorizationUrl : { type: "string", editable: true  },    	
     	accessSecret: { type: "string", editable: true },
     	accessToken : { type: "string", editable: true },
-    	signedIn: { type:"boolean", defaultVlaue: false },
-    	connected: { type:"boolean", defaultVlaue: false },
+    	signedIn: { type:"boolean", defaultVlaue: true },
+    	connected: { type:"boolean", defaultVlaue: true },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" } 
-    }
+    },
+    copy: function ( target ){
+    	target.socialAccountId = this.get("socialAccountId");
+    	target.set("objectType",this.get("objectType") );
+    	target.set("objectId",this.get("objectId") );
+    	target.set("serviceProviderName", this.get("serviceProviderName"));
+    	target.set("authorizationUrl",this.get("authorizationUrl") );
+    	target.set("accessSecret", this.get("accessSecret"));
+    	target.set("accessToken", this.get("accessToken"));
+    	target.set("signedIn", this.get("signedIn"));
+    	target.set("connected", this.get("connected"));
+    	target.modifiedDate = this.get("modifiedDate");
+    	target.creationDate = this.get("creationDate") ;  	
+    	if( typeof this.get("user") === 'object' )
+    		target.set("user", this.get("user") );    	
+    	if( typeof this.get("properties") === 'object' )
+    		target.set("properties", this.get("properties") );
+    }    
 });
 
 var SocialAccount = kendo.data.Model.define( {
@@ -625,8 +548,8 @@ var Image = kendo.data.Model.define( {
     	objectType: { type: "number", editable: false, defaultValue: -1  },    	
     	objectId: { type: "number", editable: false, defaultValue: -1  },    	
     	name: { type: "string", editable: true , validation: { required: true }},
-        contentType: { type: "string", editable: false },
-        size: { type: "number", defaultValue : 0,  editable: false },
+        contentType: { type: "string", editable: true },
+        size: { type: "number", defaultValue : 0,  editable: true },
         shared : { type: "boolean", defaultValue : false,  editable: true },
         modifiedDate: { type: "date"},
         creationDate: { type: "date" },
@@ -641,6 +564,19 @@ var Image = kendo.data.Model.define( {
     formattedModifiedDate : function(){
     	return kendo.toString(this.get("modifiedDate"), "g");
     },
+    copy : function ( target ){
+    	target.imageId = this.get("imageId");
+    	target.objectType = this.get("objectType");
+    	target.objectId = this.get("objectId");
+    	target.set("name", this.get("name"));
+    	target.set("contentType", this.get("contentType"));
+    	target.set("size", this.get("size"));
+    	target.set("shared", this.get("shared"));
+    	if( typeof this.get("properties") === 'object' )
+    		target.set("properties", this.get("properties") );    	
+    	target.set("creationDate", this.get("creationDate"));
+    	target.set("modifiedDate", this.get("modifiedDate"));
+    },        
     manupulate : function () {
     	this.set( "photoUrl" , '/community/download-my-image.do?imageId=' + this.get('imageId') );
     	this.set( "formattedCreationDate" , kendo.toString(this.get('creationDate'),  'F') );

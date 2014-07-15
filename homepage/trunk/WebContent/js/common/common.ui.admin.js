@@ -24,7 +24,6 @@
 			options = options || {};				
 			that.options = options;
 			that._pixelAdmin = window.PixelAdmin;			
-			
 			that.refresh();
 		},		
 		_doAuthenticate : function(){		
@@ -82,8 +81,7 @@
 			} );
 		},
 		refresh: function(){			
-			var that = this;	
-			
+			var that = this;
 			$('.menu-content-profile .close').click(function () {
 				var $p = $(this).parents('.menu-content');
 				$p.addClass('fadeOut');
@@ -97,14 +95,7 @@
 			that._createCompanySelector();			
 			that._createSwitcher();
 			that._doAuthenticate();
-			that._pixelAdmin.start([]);
-			
-			if( typeof that.options.menu != UNDEFINED  )
-			{
-				if( typeof that.options.menu.toggleClass === 'string' ){
-					$('body').addClass(that.options.menu.toggleClass);		
-				}
-			}				
+			that._pixelAdmin.start([]);	
 		}
 	});	
 	
@@ -113,7 +104,6 @@
 common.ui.admin.switcherEnabled = function(name) {
 	return $('input[role="switcher"][name="' + name + '"]').is(":checked") ;	
 }
-
 
 common.ui.admin.setup = function (options){	
 	options = options || {};

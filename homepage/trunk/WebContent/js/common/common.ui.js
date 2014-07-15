@@ -2,6 +2,7 @@
  * COMMON UI
  */
 (function($, undefined) {
+	
 	var Widget = kendo.ui.Widget;
 	var ui = window.ui = window.ui || {};
 	var UNDEFINED = 'undefined', STRING = 'string';
@@ -36,21 +37,172 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.ui = common.ui || {};
-	var kendo = window.kendo, Widget = kendo.ui.Widget, stringify = kendo.stringify, UNDEFINED = 'undefined', proxy = $.proxy, isFunction = kendo.isFunction;
+	var kendo = window.kendo, 
+	Widget = kendo.ui.Widget, 
+	each = $.each,
+	support = kendo.support,
+	browser = support.browser,
+	transitions = support.transitions,
+	stringify = kendo.stringify, 
+	UNDEFINED = 'undefined', 
+	proxy = $.proxy, 
+	extend = $.extend,
+	isFunction = kendo.isFunction;
 
+	function defined(x) {
+		return (typeof x != UNDEFINED);
+	}
+		
 	common.ui.landing = function (element){		
 		if( typeof element === UNDEFINED )
 			element ='.page-loader' ;
+		
+		if( $(element).length == 0 ){
+			$('body').prepend("<div class='page-loader' ></div>");
+		}		
 		 $(element).fadeOut('slow');
+	}
+	
+	common.ui.backstretch = function (){		
+		var dataSource = common.api.streams.dataSource;
+		var template = kendo.template("/community/view-streams-photo.do?key=#= externalId#");
+		dataSource.fetch(function(){
+			var photos = this.data();
+			var urls = [];
+			each(photos, function(idx, photo){
+				urls.push(template(photo));
+			});					
+			$.backstretch(
+				urls,	
+				{duration: 6000, fade: 750}	
+			);
+		});
+	}
+	
+	common.ui.PageSetup = kendo.Class.extend({		
+		options : {			
+			features : {
+				culture : true,
+				landing : true,
+				backstretch : false,
+				lightbox: false,
+				spmenu: false,
+				morphing: false
+			},
+			worklist: []
+		},
+		init: function( options) {
+			var that = this;
+			options = that.options = extend(true, {}, that.options, options);			
+			that._initFeatures();
+			that._initWorklist();
+		}, 
+		_initWorklist: function(){
+			var that = this;
+			var worklist = that.options.worklist;
+			
+			if (worklist == null) {
+				worklist = [];
+			}			
+			var initilizer, _i, _len, _ref;
+			 _ref = worklist;			 
+			 for (_i = 0, _len = worklist.length; _i < _len; _i++) {
+				 initilizer = _ref[_i];
+				 $.proxy(initilizer, that)();
+			}				
+		},
+		_initFeatures: function(){
+			var that = this;
+			var features = that.options.features;
+			var worklist = that.options.worklist;
+			
+			if( features.culture ){
+				common.api.culture();				
+			}
+			
+			if(features.backstretch){
+				common.ui.backstretch();
+			}
+			
+			if( features.morphing ){
+				$.each( $(".morph-button"), function( index,  item){
+					var $this = $(item);
+					var btn = new codrops.ui.MorphingButton($this);					
+				});
+			}
+			
+			if(features.landing){				
+				common.ui.landing();
+			}
+			
+			if(features.spmenu){				
+				$(document).on("click","[data-toggle='spmenu']", function(e){
+					var $this = $(this);
+					var target  = $this.attr("href");						
+					$("body").toggleClass("modal-open");
+					$(target).toggleClass("cbp-spmenu-open");
+				});
+				$(document).on("click","[data-dismiss='spmenu']", function(e){
+					var $this = $(this);
+					var target  = $this.parent();		
+					$("body").toggleClass("modal-open");
+					target.toggleClass("cbp-spmenu-open");
+				});
+			}
+			
+			if(features.lightbox){				
+				$(document).on("click","[data-ride='lightbox']", function(e){
+					var $this = $(this);
+					if( $this.children("img").length > 0  ){
+						var data = [];
+						$.each( $this.children("img"), function( index,  item){
+							data.push({
+								src : $(item).attr("src")
+							});
+						});
+						$.magnificPopup.open({
+							  items: data,
+							  type : "image"
+							});				
+					}
+				} );	
+			}	
+		} 
+	})
+	
+	
+	
+	common.ui.setup = function (options){
+		options = options || {};
+		var setup = new common.ui.PageSetup(options);
+	}
+	
+	common.ui.effect = function( renderTo , classes ) {		
+		 if (classes) {
+			classes = classes.split(" "); 
+			if (transitions) { 								
+				each(classes, function(idx, value) {
+					renderTo.toggleClass(value);
+				});
+				renderTo.one("webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend", function(){
+					each(classes, function(idx, value) {
+						renderTo.toggleClass(value);
+					});										
+				});
+			}
+		 }
 	}
 	
 	common.ui.animate = function (renderTo, animate, always){	
 		var oldCss = renderTo.attr('class');	
-		renderTo.removeClass().addClass(animate + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
-			$(this).removeClass();
-			$(this).addClass(oldCss);	
+		renderTo.addClass(animate + ' animated' ).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){			
+			if( animate.indexOf("Out") > -1){
+				$(this).hide().removeClass(animate + ' animated');
+			}else{
+				$(this).removeClass(animate + ' animated');
+			}
 			if(isFunction(always))
-				always();
+				always();			
 		});
 		return renderTo;		
 	}	
@@ -225,37 +377,60 @@
 		});
 	};
 
+	/*
+	common.ui.on(selector, handlers ){
+		if (typeof selector === 'string')
+			selector = $(selector);				
+		if( defined(handlers)){
+			if (options.handlers instanceof Array){
+				
+				
+			}else{
+								
+			}
+		}		
+	}
+	*/
+
 	common.ui.notification = function(options) {
 		var renderToString = "my-notifications";
 		if ($("#" + renderToString).length == 0) {
 			$('body').append(	'<span id="' + renderToString + '" style="display:none;"></span>');
 		}
+		
 		if (!$("#" + renderToString).data("kendoNotification")) {
 			$("#" + renderToString)	.kendoNotification({
 				position : {	pinned : true, top : 10, right : 10 },
 				autoHideAfter : 2000,
 				stacking : "down",
-				templates : [
-									{
-										type : "info",
-										template : '<div class="notification-info"><img src="/images/common/notification/error-info.png" /><h3>#= title #</h3><p><small>#= message #</small></p></div>'
-									},
-									{
-										type : "error",
-										template : '<div class="notification-error"><img src="/images/common/notification/error-icon.png" /><h3>#= title #</h3><p><small>#= message #</small></p></div>'
-									},
-									{
-										type : "success",
-										template : '<div class="notification-success"><img src="/images/common/notification/success-icon.png" /><h3>#= title #</h3><p><small>#= message #</small></p></div>'
-								} ]
+				templates : [{
+					type : "mail",
+					template : '<div class="notification-mail"><img src="/images/common/notification/error-info.png" /><h3>#= title #</h3><p><small>#= message #</small></p></div>'
+				},
+				{
+					type : "error",
+					template : '<div class="notification-error rounded"><img src="/images/common/notification/error-icon.png" /><h3>#= title #</h3><p>#= message #</p></div>'
+				},
+				{
+					type : "success",
+					template : '<div class="notification-success"><img src="/images/common/notification/success-icon.png" /><h3>#= title #</h3><p><small>#= message #</small></p></div>'
+				} ]
 			});
 		}
+		
+		if( isFunction(options.hide) ){
+			$("#" + renderToString).data("kendoNotification").bind("hide", options.hide );			
+		}
+		
 		$("#" + renderToString).data("kendoNotification").show({
 			title : options.title,
-			message : options.message
+			autoHideAfter: options.autoHideAfter || 5000,
+			message : options.message,
 		}, options.type || "error");
 	};
 })(jQuery);
+
+
 
 /**
  * extAccounts widget
@@ -280,7 +455,7 @@
 	CALLBACK_URL_TEMPLATE = kendo.template("#if ( typeof( externalLoginHost ) == 'string'  ) { #http://#= externalLoginHost ## } #/community/connect-socialnetwork.do?media=#= media #&domainName=#= domain #"), 
 	AUTHENTICATE_URL = "/accounts/get-user.do?output=json",	
 	handleKendoAjaxError = common.api.handleKendoAjaxError;	
-	common.ui.extAccounts = Widget.extend({
+	common.ui.ExtAccounts = Widget.extend({
 		init : function(element, options) {
 			var that = this;
 			Widget.fn.init.call(that, element, options);
@@ -299,11 +474,11 @@
 		events : [ AUTHENTICATE, SHOWN ],
 		refresh : function( ){
 			var that = this;	
-			var renderTo = $(that.element);
+			var renderTo = $(that.element);			
 			if( that.options.template){
-				renderTo.html(that.options.template(that.token));
 				
-				// if anonymous 
+				renderTo.html(that.options.template(that.token));
+								
 				if (that.token.anonymous) {	
 					renderTo.find(	"button.btn-external-login-control-group").click( function (e){
 						var target_media = $(this)	.attr("data-target");
@@ -359,19 +534,33 @@
 							}	
 						});
 					}
-				}else{
-					renderTo.find('.navbar-toggle-aside-menu').click(function(e){
-						var target = $(this).attr("href");
-						if($(target).is(":visible")){
-							$(target).hide();
-							$("body").removeClass("aside-menu-in");
-						}
-						else{
-							$("body").addClass("aside-menu-in");
-							$(target).show();
-						}
-						return false;							
-					});					
+				
+				}else{					
+					// aside menu event...
+					var aside= renderTo.find('.navbar-toggle-aside-menu');					
+					if( aside.length > 0 ){						
+						var target = aside.attr("href");						
+						if($(target).length == 0 )
+						{
+							var template = kendo.template($("#account-sidebar-template").html());
+							$("body").append(  template(that.token) );
+							/*$(".header > .navbar:first").append( template(that.token) );*/
+							
+						}						
+						$( target + ' button.btn-close:first').click(function(e){
+							$("body").toggleClass("aside-menu-in");
+						});						
+						aside.click(function(e){
+							$("body").toggleClass("aside-menu-in");
+							return false;							
+						});					
+					}					
+					if( $('.navbar-header .navbar-toggle-account').length > 0 ){
+						$('.navbar-header .navbar-toggle-account').click(function(e){
+							$("body").toggleClass("aside-menu-in");
+							return false;							
+						});
+					}					
 				}
 				that.trigger(SHOWN);
 			}	
@@ -421,7 +610,7 @@
 	
 	$.fn.extend({
 		extAccounts : function(options) {
-			return new common.ui.extAccounts(this, options);
+			return new common.ui.ExtAccounts(this, options);
 		}
 	});
 })(jQuery);
@@ -470,17 +659,14 @@
 				events : [ AUTHENTICATE, ERROR, UPDATE, SHOWN ],
 				authenticate : function() {
 					var that = this;
-					$
-							.ajax({
-								type : 'POST',
-								url : that.options.ajax.url,
-								success : function(response) {
-									user = new User($.extend(
-											response.currentUser, {
-												roles : response.roles
-											}));
-									user.set('isSystem', false);
-
+					$.ajax({
+						type : 'POST',
+						url : that.options.ajax.url,
+						success : function(response) {
+							user = new User($.extend(response.currentUser, {
+								roles : response.roles
+							}));
+							user.set('isSystem', false);
 									if (user.hasRole(ROLE_SYSTEM))
 										user.set('isSystem', true);
 									if (user.hasRole(ROLE_ADMIN))
@@ -495,29 +681,22 @@
 										that.render();
 									}
 									if (that.token.anonymous) {
-										$(that.element)
-												.find(
-														".custom-external-login-groups button")
-												.each(
-														function(index) {
-															var external_login_button = $(this);
-															external_login_button
-																	.click(function(
-																			e) {
-																		var target_media = external_login_button
-																				.attr("data-target");
-																		var target_url = CALLBACK_URL_TEMPLATE({
-																			connectorHostname : that.options.connectorHostname,
-																			media : target_media,
-																			domain : document.domain
-																		});
-																		window
-																				.open(
+										$(that.element).find(".custom-external-login-groups button").each(
+											function(index) {
+												var external_login_button = $(this);
+												external_login_button.click(function(e) {
+													var target_media = external_login_button.attr("data-target");
+													var target_url = CALLBACK_URL_TEMPLATE({
+														connectorHostname : that.options.connectorHostname,
+														media : target_media,
+														domain : document.domain
+													});
+													window.open(
 																						target_url,
 																						'popUpWindow',
 																						'height=500, width=600, left=10, top=10, resizable=yes, scrollbars=yes, toolbar=yes, menubar=no, location=no, directories=no, status=yes');
-																	});
-														});
+													});
+											});
 									}
 									if (isFunction(that.options.afterAuthenticate)) {
 										that.options.afterAuthenticate();
@@ -727,10 +906,14 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.ui = common.ui || {};
-	var kendo = window.kendo, Widget = kendo.ui.Widget, isPlainObject = $.isPlainObject, proxy = $.proxy, extend = $.extend, placeholderSupported = kendo.support.placeholder, browser = kendo.support.browser, isFunction = kendo.isFunction, trimSlashesRegExp = /(^\/|\/$)/g, CHANGE = "change", ERROR = "error", REFRESH = "refresh", OPEN = "open", CLOSE = "close", CLICK = "click", UNDEFINED = 'undefined', POST = 'POST', JSON = 'json', handleKendoAjaxError = common.api.handleKendoAjaxError;
+	var kendo = window.kendo, Widget = kendo.ui.Widget, 
+	isPlainObject = $.isPlainObject, proxy = $.proxy, extend = $.extend, placeholderSupported = kendo.support.placeholder, browser = kendo.support.browser, isFunction = kendo.isFunction, 
+	trimSlashesRegExp = /(^\/|\/$)/g, CHANGE = "change", ERROR = "error", REFRESH = "refresh", OPEN = "open", CLOSE = "close", CLICK = "click", 
+	UNDEFINED = 'undefined', POST = 'POST', 
+	JSON = 'json', 
+	handleKendoAjaxError = common.api.handleKendoAjaxError;
 
-	common.ui.extModalWindow = Widget
-			.extend({
+	common.ui.extModalWindow = Widget.extend({
 				init : function(element, options) {
 					var that = this;
 					Widget.fn.init.call(that, element, options);
@@ -765,6 +948,14 @@
 					Widget.fn.destroy.call(that);
 					$(that.element).remove();
 				},
+				data : function( data ){
+					var that = this;
+					if( typeof data === UNDEFINED ){
+						return that.options.data;
+					}else{						
+						that.options.data = data;
+					}
+				},				
 				_modal : function() {
 					var that = this;
 					return that.element.children('.modal');
@@ -772,11 +963,9 @@
 				_changeState : function(enabled) {
 					var that = this;
 					if (enabled) {
-						that.element.find('.modal-footer .btn.custom-update')
-								.removeAttr('disabled');
+						that.element.find('.modal-footer .btn.custom-update').removeAttr('disabled');
 					} else {
-						that.element.find('.modal-footer .btn.custom-update')
-								.attr('disabled', 'disabled');
+						that.element.find('.modal-footer .btn.custom-update').attr('disabled', 'disabled');
 					}
 				},
 				_createDialog : function() {
@@ -798,18 +987,17 @@
 						}
 					}
 					that._modal().css('z-index', '2000');
-					that.element.find('.modal').on('show.bs.modal',
-							function(e) {
-								that.trigger(OPEN, {
-									element : that._modal()[0]
-								});
-							});
-					that.element.find('.modal').on('hide.bs.modal',
-							function(e) {
-								that.trigger(CLOSE, {
-									element : that._modal()[0]
-								});
-							});
+					that.element.find('.modal').on('show.bs.modal', function(e) {
+						that.trigger(OPEN, {
+							element : that._modal()[0],
+							target: that
+						});
+					});
+					that.element.find('.modal').on('hide.bs.modal', function(e) {
+						that.trigger(CLOSE, {
+							element : that._modal()[0]
+						});
+					});
 
 					that.trigger(REFRESH, {
 						element : that._modal()[0]
@@ -817,6 +1005,7 @@
 				},
 				_dialogTemplate : function() {
 					var that = this;
+					
 					if (typeof that.options.template === UNDEFINED) {
 						return kendo
 								.template("<div class='modal editor-popup fade' tabindex='-1' role='dialog' aria-hidden='true'>"
@@ -833,7 +1022,7 @@
 										+ "</div><!-- /.modal-content -->"
 										+ "</div><!-- /.modal-dialog -->"
 										+ "</div><!-- /.modal -->");
-					} else if (typeof that.options.template === 'object') {
+					} else if (isFunction( that.options.template )) {
 						return that.options.template;
 					} else if (typeof that.options.template === 'string') {
 						return kendo.template(that.options.template);
@@ -841,6 +1030,20 @@
 				}
 			});
 
+	common.ui.modal = function (options){
+		options = options || {};	
+		if( typeof options.renderTo === "string" ){
+			if( $("#"+options.renderTo).length === 0 ){
+				$('body').append("<section id='"+ options.renderTo  +"'></section>");
+			}
+			if( !$("#"+options.renderTo).data("kendoExtModalWindow") ){
+				return new common.ui.extModalWindow($("#"+options.renderTo), options);
+			}else{
+				return $("#"+options.renderTo).data("kendoExtModalWindow");
+			}
+		}
+	} 
+	
 	$.fn.extend({
 		extModalWindow : function(options) {
 			return new common.ui.extModalWindow(this, options);
@@ -900,11 +1103,9 @@
 				_changeState : function(enabled) {
 					var that = this;
 					if (enabled) {
-						that.element.find('.modal-footer .btn.custom-update')
-								.removeAttr('disabled');
+						that.element.find('.modal-footer .btn.custom-update').removeAttr('disabled');
 					} else {
-						that.element.find('.modal-footer .btn.custom-update')
-								.attr('disabled', 'disabled');
+						that.element.find('.modal-footer .btn.custom-update').attr('disabled', 'disabled');
 					}
 				},
 				_createDialog : function() {
@@ -944,8 +1145,7 @@
 								that._changeState(false);
 							});
 
-					that.element.find('.modal-footer .btn.custom-update')
-							.click(function() {
+					that.element.find('.modal-footer .btn.custom-update').click(function() {
 								that.trigger(APPLY, {
 									html : LINK_VALUE_TEMPLATE(that._data)
 								});
@@ -954,8 +1154,7 @@
 				_dialogTemplate : function() {
 					var that = this;
 					if (typeof that.options.template === UNDEFINED) {
-						return kendo
-								.template("<div class='modal editor-popup fade' tabindex='-1' role='dialog' aria-hidden='true'>"
+						return kendo.template("<div class='modal editor-popup fade' tabindex='-1' role='dialog' aria-hidden='true'>"
 										+ "<div class='modal-dialog modal-sm'>"
 										+ "<div class='modal-content'>"
 										+ "<div class='modal-header'>"
@@ -1797,70 +1996,528 @@
 (function($, undefined) {
 	var common = window.common = window.common || {};
 	common.ui = common.ui || {};
-	var kendo = window.kendo, Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, isPlainObject = $.isPlainObject, proxy = $.proxy, extend = $.extend, placeholderSupported = kendo.support.placeholder, browser = kendo.support.browser, isFunction = kendo.isFunction, POST = 'POST', JSON = 'json', CHANGE = "change", STRING = "string", UNDEFINED = 'undefined';
+	var kendo = window.kendo, 
+	Widget = kendo.ui.Widget, 
+	DataSource = kendo.data.DataSource, 
+	template = kendo.template,
+	isPlainObject = $.isPlainObject, 
+	proxy = $.proxy, 
+	extend = $.extend, 
+	placeholderSupported = kendo.support.placeholder, 
+	browser = kendo.support.browser, 
+	isFunction = kendo.isFunction, 
+	POST = 'POST', 
+	JSON = 'json', 
+	CHANGE = "change", 
+	STRING = "string", 
+	UNDEFINED = 'undefined';
+	TEMPLATE = template('<div data-alert class="alert alert-danger animated fadeInDown">#=message#<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button></div>'),
 	handleKendoAjaxError = common.api.handleKendoAjaxError;
-
-	common.ui.extAlert = Widget.extend({
+	
+	common.ui.alert = function ( options ){		
+		options = options || {};	
+		if( defined(options.renderTo)){
+			 return new common.ui.ExtAlert( $(options.renderTo), options); 
+		}else 	if( defined( options.appendTo) ){		
+			var guid = common.api.guid().toLowerCase() ;
+			$(options.appendTo).append( "<div id='" + guid+ "'></div>");		
+			return new common.ui.ExtAlert( $("#" + guid ), options); 
+		}		
+	}
+	
+	function defined(x) {
+		return (typeof x != UNDEFINED);
+	}
+	
+	common.ui.ExtAlert = Widget.extend({
 				init : function(element, options) {
-
 					var that = this;
 					Widget.fn.init.call(that, element, options);
-
-					this.options = that.options;
+					this.options = that.options;					
+					that.refresh();	
+					kendo.notify(that);
+				},
+				options : {
+					name : "ExtAlert",
+					data : {}
+				},
+				refresh: function(){
+					var that = this, options = that.options;
 					if (typeof options.template === UNDEFINED)
-						that.template = kendo
-								.template('<div data-alert class="alert alert-danger">#=message#<a href="\\#" class="close">&times;</a></div>');
+						that.template = TEMPLATE ;
 					else if (typeof options.template === STRING)
-						that.template = kendo.template(options.template);
+						that.template = template(options.template);
 					else if (isFunction(options.template))
 						that.template = options.template;
 
 					if (typeof options.data === UNDEFINED)
 						options.data = {};
-
 					that.element.html(that.template(options.data));
-
-					if (typeof options.data.id === STRING) {
-						var _alert = $('#' + options.data.id).find('.alert');
-						_alert.bind('closed.bs.alert', function(e) {
-							e.preventDefault();
-							if (isFunction(options.close))
-								options.close();
-						});
-					}
-
-					that.element.find("[data-alert] a.close").click(
-							function(e) {
-								e.preventDefault();
-								that.element.find("[data-alert]").fadeOut(
-										300,
-										function() {
-											that.element.find("[data-alert]")
-													.remove();
-											if (isFunction(options.close))
-												options.close();
-										});
-							});
-					kendo.notify(that);
-				},
-				options : {
-					name : "ExtAlert"
+					
 				}
 			});
-
 	$.fn.extend({
 		extAlert : function(options) {
-			return new common.ui.extAlert(this, options);
+			return new common.ui.ExtAlert(this, options);
 		}
 	});
 })(jQuery);
 
 
 
+/**
+ * ExtButton Widget
+ */
+(function ($, undefined) {
+	var common = window.common = window.common || {};
+	common.ui = common.ui || {};
+	var kendo = window.kendo, 
+	Widget = kendo.ui.Widget, 
+	isFunction = kendo.isFunction,
+	proxy = $.proxy,
+	keys = kendo.keys,
+	UNDEFINED = 'undefined',	
+	CLICK = "click",
+	CHANGE = "change",
+	RADIO = "radio",
+	DISABLED = "disabled";
 
+	
+	function defined(x) {
+		return (typeof x != UNDEFINED);
+	}
+
+	common.ui.buttonEnabled = function(element){
+		if( element.is(":disabled") ){
+			element.prop("disabled", false);
+			if( element.is("[data-toggle='button']") ){
+				element.toggleClass("active");
+			}
+		}	
+	}
+	
+	common.ui.buttonDisabled = function(element){
+		if( !element.is(":disabled") ){
+			element.prop("disabled", true);
+			if( element.is("[data-toggle='button']") ){
+				element.toggleClass("active");
+			}
+		}	
+	}
+	
+	common.ui.button = function (options){
+		if( defined(options.renderTo) ){
+			var renderTo = options.renderTo ;
+			if( typeof renderTo === "string" ){	
+				renderTo = $(options.renderTo);
+			}
+			
+			if( renderTo.attr("data-dismiss") && renderTo.attr("data-target")  )
+			{
+				renderTo.click(function(e){
+					var target = $(this).attr("data-target");
+					if( $(target).length > 0 ){
+						$(target).hide();
+					}		
+					var switch_target = $(this).attr("data-switch-target");
+					if( $(switch_target).length > 0 && $(switch_target).is("button" )){		
+						common.ui.buttonEnabled($(switch_target));
+					}
+				});				
+			}
+			if( isFunction(options.click)){
+				renderTo.click( options.click );
+			}
+			return renderTo;
+		}
+	}
+	
+	common.ui.buttons = function ( options ){		
+		options = options || {};	
+		if( defined(options.renderTo) ){
+			if($(options.renderTo).data("kendoExtRadioButtons")){
+				return	$(options.renderTo).data("kendoExtRadioButtons");
+			}else{
+				if( options.type === RADIO){
+					return new common.ui.ExtRadioButtons( $(options.renderTo), options ); 				
+				}	 
+			}
+		}
+	}
+	
+	common.ui.ExtRadioButtons = Widget.extend({
+		init: function(element, options) {
+			var that = this;
+			Widget.fn.init.call(that, element, options);
+			element = that.wrapper = that.element;
+			options = that.options;
+			that._radio();
+			kendo.notify(that);
+		},
+        events: [
+            CLICK,
+            CHANGE
+        ],
+        options: {
+        	name:"ExtRadioButtons",
+        	enable:true
+        },
+        _value: function(){
+        	var that = this;
+        	if(that.radio){
+        		return that.element.find(".active input[type='radio']").val();
+        	}
+        },
+        _radio: function(){
+        	var that = this;
+        	var input = that.element.find("input[type='radio']");
+        	if(input.length > 0){
+        		that.radio = true ;
+        	}else{
+        		that.radio = false ;
+        	}
+        	
+        	if(that.radio){
+        		that.value = that._value();
+        		input.on(CHANGE, function(e){
+        			if( that.value != this.value ){
+        				that.value = this.value ;
+        				that.trigger( CHANGE, { value: that.value } )
+        			}
+        		} );        		
+        	}
+        }        
+	});
+	
+})(jQuery);
 /**
  * extPanel widget
  */
+(function($, undefined) {
+	var common = window.common = window.common || {};
+	common.ui = common.ui || {};
+	var kendo = window.kendo, 
+		Widget = kendo.ui.Widget, 
+		DataSource = kendo.data.DataSource, 
+		isPlainObject = $.isPlainObject, 
+		proxy = $.proxy, 
+		extend = $.extend, 
+		each = $.each,
+		template = kendo.template,
+		templates,
+		placeholderSupported = kendo.support.placeholder, 
+		browser = kendo.support.browser, 
+		isFunction = kendo.isFunction, 
+		BODY = "body",
+		// classNames
+		EXT_PANEL = ".panel",
+		EXT_PANEL_HEADING = ".panel-heading",
+		EXT_PANEL_TITLE = ".panel-title",
+		EXT_PANEL_BODY = ".panel-body",
+		EXT_PANEL_HEADING_BUTTONS = ".panel-heading .k-window-action",
+		// constants
+		POST = 'POST', 
+		JSON = 'json', 
+		VISIBLE = ":visible",
+		HIDDEN = "hidden",
+		CURSOR = "cursor",
+		// events
+		CHANGE = "change", 
+		UNDEFINED = 'undefined',	
+		OPEN = "open",
+		DEACTIVATE = "deactivate",
+		ACTIVATE = "activate",
+		CLOSE = "close",
+		REFRESH = "refresh",
+		CUSTOM = "custom",
+		ERROR = "error",
+		DRAGSTART = "dragstart",
+        DRAGEND = "dragend",		
+		REFRESHICON = ".k-window-titlebar .k-i-refresh",
+		MINIMIZE_MAXIMIZE = ".k-window-actions .k-i-minimize,.k-window-actions .k-i-maximize",
+		// error handler
+		handleKendoAjaxError = common.api.handleKendoAjaxError;	
+	
+	function defined(x) {
+		return (typeof x != UNDEFINED);
+	}
+	
+	function sizingAction(actionId, callback) {
+		return function() {
+            var that = this,
+                wrapper = that.wrapper,
+                style = wrapper[0].style,
+                options = that.options;
+
+            if (options.isMaximized || options.isMinimized) {
+                return;
+            }
+            wrapper.children(EXT_PANEL_HEADING).find(MINIMIZE_MAXIMIZE).parent().hide().eq(0).before(templates.action({ name: "Restore" }));
+            callback.call(that);
+            return that;
+        };		
+	}
+	
+	common.ui.panel = function ( options ){		
+		options = options || {};	
+		if( defined(options.renderTo)){
+			 return new common.ui.ExtPanel( $(options.renderTo), options); 
+		}else 	if( defined(options.appendTo) ){		
+			var guid = common.api.guid().toLowerCase() ;
+			$(options.appendTo).append( "<div id='" + guid+ "'  class='panel panel-default no-padding-hr'></div>");		
+			return new common.ui.ExtPanel( $("#" + guid ), options); 
+		}		
+	}
+	
+	common.ui.ExtPanel = Widget.extend({
+		init : function(element, options) {
+			var that = this,
+			wrapper,
+			content,
+			visibility, display,
+			isVisible = false,
+			suppressActions = options && options.actions && !options.actions.length,
+			id;			
+			Widget.fn.init.call(that, element, options);
+			options = that.options;			
+			element = that.element;
+			content = options.content;			
+			if (suppressActions) {
+				options.actions = [];
+			}
+			
+			that.appendTo = $(options.appendTo);
+			
+			if (!defined(options.visible) || options.visible === null) {
+				options.visible = element.is(VISIBLE);
+			}
+			if (element.is(VISIBLE)) {
+				isVisible = true;				
+			} else {
+				visibility = element.css("visibility");
+				display = element.css("display");
+				element.css({ visibility: HIDDEN, display: "" });
+				element.css({ visibility: visibility, display: display });
+			}			
+			if (!defined(options.visible) || options.visible === null) {
+				options.visible = element.is(VISIBLE);				
+			}
+			
+			wrapper = that.wrapper = element.closest(EXT_PANEL);
+			wrapper.append(templates.heading( extend( templates, options )));
+			wrapper.append(templates.body( {} ) );
+			
+			if (content) {
+				that.render();			
+			}
+			
+			if( defined(options.template)){
+				if (!defined(options.data) ){
+					options.data = {};
+				}
+				options.content = options.template(options.data); 
+				that.render();			
+			}
+
+			 if( options.autoBind )
+				kendo.bind(element, options.data );
+			 
+			id = element.attr("id");			
+			wrapper.on("click", "> " + EXT_PANEL_HEADING_BUTTONS, proxy(that._panelActionHandler, that));
+			 if (options.visible) {
+				 that.trigger(OPEN, {target: that});
+				 that.trigger(ACTIVATE);
+			 }
+			kendo.notify(that);
+		},
+		events:[
+			OPEN,
+			CLOSE,
+			REFRESH,
+			DRAGSTART,
+			DRAGEND,
+			CUSTOM,
+			ERROR
+		],		
+		options : {
+			name : "ExtPanel",
+			title: "",
+			actions: ["Close"],
+			content : null,
+			visible: null,
+			appendTo: BODY,
+			autoBind: false,
+			animation : {
+				open: {},
+				close: {}
+			},
+			refreshContent : true,
+			handlers : {}
+		},
+		data : function( data ){
+			var that = this;
+			if( defined(data)){
+				that.options.data = data;
+			}else{
+				return that.options.data;
+			}
+		},
+		_animations: function() {
+			var options = this.options;
+			if (options.animation === false) {
+				 options.animation = { open: { effects: {} }, close: { hide: true, effects: {} } };				
+			}
+		},
+		_closable: function() {
+			return $.inArray("close", $.map(this.options.actions, function(x) { return x.toLowerCase(); })) > -1;
+		},
+		_panelActionHandler: function(e){
+			if (this._closing) {
+                return;
+            }
+			 var icon = $(e.target).closest(".k-window-action").find(".k-icon");
+			 var action = this._actionForIcon(icon);
+			 if (action) {
+				 e.preventDefault();
+				 this[action]();
+				 return false;
+			 }			 
+		},
+		_actionForIcon: function(icon) {
+			var iconClass = /\bk-i-\w+\b/.exec(icon[0].className)[0];
+			return {
+	                "k-i-close": "_close",
+	                "k-i-maximize": "maximize",
+	                "k-i-minimize": "minimize",
+	                "k-i-restore": "restore",
+	                "k-i-refresh": "refresh",
+	                "k-i-custom": "_custom"
+			}[iconClass];
+		},				
+		
+		_custom: function(systemTriggered){
+			var that = this;
+			that.trigger(CUSTOM, {target: that});
+		},
+		_close: function(systemTriggered) {
+			var that = this,
+				wrapper = that.wrapper,
+				options = that.options,
+				showOptions = options.animation.open,
+				hideOptions = options.animation.close;
+			
+			if (wrapper.is(VISIBLE) && !that.trigger(CLOSE, { userTriggered: !systemTriggered, target: that })) {
+				that._closing = true;
+				 options.visible = false;
+				 wrapper.kendoStop().kendoAnimate({
+					effects: hideOptions.effects || showOptions.effects,
+					reverse: hideOptions.reverse === true,
+					duration: hideOptions.duration,
+					complete: proxy(this._deactivate, this)
+				 });
+			}			
+		},
+		toggleMaximization: function () {
+            if (this._closing) {
+                return this;
+            }
+            return this[this.options.isMaximized ? "restore" : "maximize"]();
+        },		
+		_deactivate: function() {
+			this.wrapper.hide().css("opacity","");
+			this.trigger(DEACTIVATE);			
+			this.destroy();
+        },
+		title : function (text){
+			var that = this,
+				wrapper = that.wrapper,
+				options = that.options;
+		},
+		maximize: sizingAction("maximize", function() {
+			var that = this,
+            wrapper = that.wrapper;
+			if( !wrapper.children(EXT_PANEL_BODY).is(VISIBLE) ){
+				wrapper.children(EXT_PANEL_BODY).show();				
+			}			
+			that.options.isMaximized = true;
+			
+		}),
+		minimize: sizingAction("minimize", function() {
+			var that = this,
+				wrapper = that.wrapper;			//that.element.hide();
+			that.options.isMinimized = true;
+			if( wrapper.children(EXT_PANEL_BODY).is(VISIBLE) ){
+				wrapper.children(EXT_PANEL_BODY).hide();				
+			}
+		}),
+		restore: function () {
+			var that = this;
+			var options = that.options;
+			that.wrapper.find(".panel-heading .k-i-restore").parent().remove().end().end()
+			.find(MINIMIZE_MAXIMIZE).parent().show().end().end();
+			that.wrapper.children(EXT_PANEL_BODY).show();			
+			options.isMaximized = options.isMinimized = false;			
+			return that;
+		},
+		render: function(){
+			var that = this,
+			wrapper = that.wrapper,
+			options = that.options;
+			wrapper.children(EXT_PANEL_BODY).html(options.content);		
+		},	
+		refresh: function(){
+			var that = this,
+			wrapper = that.wrapper,
+			options = that.options;
+			wrapper.children(EXT_PANEL_BODY).html(options.content);
+			
+			if( isFunction(options.handlers.refresh) ){
+				options.handlers.refresh();				
+			}			
+			that.trigger(REFRESH, {target: that});			
+		},		
+		content:function(html, data){
+		 	var content = this.wrapper.children(EXT_PANEL_BODY);
+		 	if (!defined(html)) {
+		 		return content.html();		 		
+		 	}
+		 	content.empty().html(html);
+		 	kendo.bind(content, data);
+		},
+		destroy: function () {
+			//this.wrapper.find(".k-resize-handle,.k-window-titlebar").off(NS);
+			 Widget.fn.destroy.call(this);
+			 this.unbind(undefined);
+			 kendo.destroy(this.wrapper);
+			 this.wrapper.empty().remove();
+			 this.wrapper = this.appendTo = this.element = $();
+		}
+	});
+	
+	templates = {
+		wrapper: template("<div class='panel panel-default' />"),	
+		action: template(
+	            "<a role='button' href='\\#' class='k-window-action k-link'>" +
+	                "<span role='presentation' class='k-icon k-i-#= name.toLowerCase() #'>#= name #</span>" +
+	            "</a>"
+	        ),
+		heading: template(
+			"<div class='panel-heading'>" +
+			"<h3 class='panel-title'>#= title #</h3>" +
+			"<div class='k-window-actions panel-header-controls'>" +
+			"<div class='k-window-actions'>" +
+            "# for (var i = 0; i < actions.length; i++) { #" +
+                "#= action({ name: actions[i] }) #" +
+            "# } #" +
+            "</div>" +			
+			"</div>"	 +
+			"</div>"	
+		) ,
+		body: template("<div class='panel-body'></div>")
+	};
+	
+})(jQuery);
+
 (function($, undefined) {
 	var Widget = kendo.ui.Widget, DataSource = kendo.data.DataSource, ui = window.ui = window.ui
 			|| {};
@@ -1924,7 +2581,7 @@
 						// kendo.bind($(that.element), observable );
 					}
 					$(that.element)
-							.find(".panel-header-actions a.k-link")
+							.find(".panel-header-controls a.k-link")
 							.each(
 									function(index) {
 										$(this)
