@@ -1,28 +1,32 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title>기업소개</title>
-<#compress>			
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
+		<title>오시는길</title>
+		<#compress>		
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			'${request.contextPath}/js/common/common.models.js',			
+			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
 			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-				
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});	
+				      
 				// START SCRIPT	
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
@@ -39,32 +43,19 @@
 				<#if !action.user.anonymous >				
 				
 				</#if>	
-			
-			
 				// END SCRIPT            
 			}
 		}]);	
 		-->
 		</script>		
 		<style scoped="scoped">
-		blockquote p {
-			font-size: 15px;
-		}
-
-		.k-grid table tr.k-state-selected{
-			background: #428bca;
-			color: #ffffff; 
-		}
-		
-		#announce-view .popover {
-			position : relative;
-			max-width : 500px;
-		}
-						
+				
 		</style>   	
-</#compress>			
+		</#compress>			
 	</head>
-	<body class="color0">
+	<body>
+		<div class="page-loader"></div>
+		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.contact.pageId") />
@@ -74,14 +65,14 @@
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2 class="color-green">${ current_menu.title }</h2>
-					<h5><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h5>
+					<h2>${ current_menu.title }</h2>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">	
+		<div class="container  content no-padding-t">	
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
@@ -101,19 +92,16 @@
 				<div class="col-lg-9">
 					<#if hasWebSitePage >							
 					${ processedBodyText }
-					</#if> 				
+					</#if> 						
 				</div>				
 			</div>
 		</div>									 
-		<div class="container layout">						
-				<div class="row">
-				</div>		
-			</div>				
+		
 		<!-- END MAIN CONTENT -->	
-
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		</div><!-- /wrapper -->	
 		<!-- START TEMPLATE -->
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->

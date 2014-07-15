@@ -3,11 +3,13 @@
 	<head>
 		<title> ${action.targetPage.title}</title>
 		<#compress>				
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -20,10 +22,11 @@
 			complete: function() {
 				// START SCRIPT	
 
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});	
 				      
 				// START SCRIPT					
 				var currentUser = new User();			
@@ -36,6 +39,8 @@
 						e.token.copy(currentUser);
 					}				
 				});
+				
+				<#if !action.user.anonymous ></#if>	
 				// END SCRIPT            
 			}
 		}]);	
@@ -43,7 +48,9 @@
 		</script>
 		</#compress>	
 	</head>
-	<body class="color0">
+	<body>
+		<div class="page-loader"></div>
+		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->
@@ -64,7 +71,7 @@
 		</header>	
 				
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">
+		<div class="container content no-padding-t">
 			<#if action.isSetNavigator()  >
 			<#assign current_menu = action.getNavigator() />
 			<div class="row">
@@ -99,14 +106,14 @@
 				</div>
 			</div>	
 			</#if>
-		</div>
-		
+		</div><!-- /.container -->		
 		<!-- END MAIN CONTENT -->	
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
-		<!-- START TEMPLATE -->
-		<#include "/html/common/common-homepage-templates.ftl" >		
-		<!-- END TEMPLATE -->	
+	</div><!-- /.wrapper -->	
+	<!-- START TEMPLATE -->
+	<#include "/html/common/common-homepage-templates.ftl" >		
+	<!-- END TEMPLATE -->	
 	</body>
 </html>

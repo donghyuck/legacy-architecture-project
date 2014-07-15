@@ -6,103 +6,45 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/codedrop/cbpSlidePushMenus.css',
-			'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/blue.css',
+			'css!${request.contextPath}/styles/common.pages/common.personalized.css',
+						
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
-			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			'${request.contextPath}/js/pdfobject/pdfobject.js',
-			'${request.contextPath}/js/common/common.modernizr.custom.js',
+			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 		
+			'${request.contextPath}/js/common.plugins/query.backstretch.min.js', 		
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
-			'${request.contextPath}/js/common/common.ui.js'],
+			'${request.contextPath}/js/common/common.ui.js',
+			'${request.contextPath}/js/common.pages/common.personalized.js'
+			],
 			complete: function() {			
 			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();	
-				
-				// 2.  MEUN LOADING ...
-				var slide_effect = kendo.fx($("body div.overlay")).fadeIn();
-				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
-				
-				common.ui.handleActionEvents( $('.personalized-navbar'), {
-					handlers : [
-						{ selector: "input[name='personalized-area-col-size']",
-						  event : 'change',
-						  handler : function(){
-							var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
-							grid_col_size.oldValue = grid_col_size.newValue;
-							grid_col_size.newValue = this.value;			
-							$(".custom-panels-group").each(function( index ) {
-								var custom_panels_group = $(this);				
-								custom_panels_group.removeClass("col-sm-" + grid_col_size.oldValue );		
-								custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
-							});
-						  }	
-						}
-					]
-				});	
-				
- 				common.ui.handleButtonActionEvents(
-					$(".personalized-navbar .nav a.btn-control-group"), 
-					{event: 'click', handlers: {
-						hide : function(e){
-							$('body nav').first().removeClass('hide');
-						},
-						'open-spmenu' : function(e){
-							$('body').toggleClass('modal-open');						
-							if( $('#personalized-controls-section').hasClass("hide") )
-								$('#personalized-controls-section').removeClass("hide");							
-							$('body div.overlay').toggleClass('hide');										
-							slide_effect.play().then(function(){							
-								$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-							});									
-						}					 
-					}}
-				);	
-				
-				$("#personalized-controls-menu-close").on( "click" , function(e){						
-					$('body').toggleClass('modal-open');		
-					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');					
-					setTimeout(function() {
-						slide_effect.reverse().then(function(){
-							$('body div.overlay').toggleClass('hide');
-						});
-					}, 100);					
+				common.ui.setup({
+					features:{
+						backstretch : true
+					}
 				});
-
-				// 3. ACCOUNTS STATUS LOAD	.. 
-				var currentUser = new User();			
+				var currentUser = new User();		
 				$("#account-navbar").extAccounts({
 					externalLoginHost: "${ServletUtils.getLocalHostAddr()}",	
-					<#if WebSiteUtils.isAllowedSignIn(action.webSite) ||  !action.user.anonymous>
+					<#if action.isAllowedSignIn() ||  !action.user.anonymous  >
 					template : kendo.template($("#account-template").html()),
 					</#if>
-					shown : function(e){
-						$('#account-navbar').append('<li><a href="#" class="btn btn-link custom-nabvar-hide"><i class="fa fa-angle-double-down fa-lg"></i></a></li>');
-						$('#account-navbar').append('<p class="navbar-text hidden-xs">&nbsp;</p>');		
-						$('#account-navbar li a.custom-nabvar-hide').on('click', function(){
-							$('body nav').first().addClass('hide');
-						});	
-					},					
 					authenticate : function( e ){
 						e.token.copy(currentUser);
-						if(!currentUser.anonymous){							
-							$('body nav').first().addClass('hide');
-							createConnectedSocialNav();
-						}						
-					}				
-				});
-
-				// 4. CONTENT LOADING
+					},				
+					shown : function(e){							
+						createConnectedSocialNav();	
+					}
+				});										
+				preparePersonalizedArea($("#personalized-area"), 3, 6 );				
 				createInfoPanel();
-				// END SCRIPT 
 			}
 		}]);	
 
@@ -120,7 +62,7 @@
 							myStreams.find('button[data-action="media-list"]').button('reset');
 						},
 						change : function ( e ) {
-							var template = kendo.template('<label class="btn btn-info"><input type="checkbox" value="#:socialAccountId#"><i class="fa fa-#= serviceProviderName #"></i></label>');
+							var template = kendo.template('<label class="btn btn-primary"><input type="checkbox" value="#:socialAccountId#"><i class="fa fa-#= serviceProviderName #"></i></label>');
 							var html = kendo.render(template, this.data());
 							myStreams.html(html);						
 							common.ui.handleActionEvents( myStreams, {
@@ -130,7 +72,7 @@
 									handler : function(){
 										var myStream = myStreams.data( 'dataSource' ).get(this.value);
 										if(this.checked){
-											displayMediaStream( myStream );
+											displayMediaPanel( myStream );
 										}else{
 											closeMediaStream( myStream );
 										}
@@ -145,6 +87,147 @@
 		<!-- ============================== -->
 		<!-- display media stream panel                        -->
 		<!-- ============================== -->		
+		function mediaEditorSource (media){			
+			var modal = $('#media-editor-modal').data("kendoExtModalWindow");			
+			if(  typeof media === 'undefined' ){
+				if( modal ){
+					return modal.data().media
+				}else{
+					return new SocialNetwork();
+				}
+			}else{
+				if( modal ){
+					media.copy( modal.data().media);
+				}
+			}
+		}
+				
+		function displayMediaPanel(media){				
+			var appendTo = getNextPersonalizedColumn($("#personalized-area"));
+			var panel = common.ui.panel({ 
+				appendTo: appendTo,
+				title: "<i class='fa fa-" + media.serviceProviderName + " fa-fw'></i>" + media.serviceProviderName , 
+				actions:["Custom", "Minimize", "Refresh", "Close"],
+				data: media,
+				template: kendo.template("<ul class='media-list'></ul>"),
+				close: function(e) {
+					$('#navbar-btn-my-streams').find('input[value="' + e.target.data().socialAccountId + '"]').parent().toggleClass("disabled");	
+					$('#navbar-btn-my-streams').find('input[value="' + e.target.data().socialAccountId + '"]').parent().toggleClass("active");	
+				},
+				refresh: function(e){
+					var streams = e.target.element.find(".panel-body ul.media-list");
+					if( streams.length > 0 && streams.data('kendoExtMediaStreamView') ){
+						streams.data('kendoExtMediaStreamView').dataSource.read();
+					}
+				},
+				custom: function(e){
+					var modal = common.ui.modal({
+						renderTo : "media-editor-modal",
+						data: new kendo.data.ObservableObject({
+							media : mediaEditorSource(),
+							scrollable:false
+						}),
+						open: function(e){			
+							var renderTo = e.target.element;
+							var grid = renderTo.find(".modal-body .media-props-grid");		
+							var scrollable =  renderTo.find(".modal-body input[name='options-scrollable']");
+							if( grid.length > 0 && !grid.data('kendoGrid') ){	
+								
+								scrollable.on("change", function(e){
+									var isSlimscroll = panel.element.find(".panel-body").parent().hasClass("slimScrollDiv");									
+									if( this.value == 1 && !isSlimscroll ){									
+										panel.element.find(".panel-body").slimscroll({ height: "500px"});
+									}else if ( this.value == 0 && isSlimscroll ){
+										panel.element.find(".panel-body").slimscroll({ destroy:"destroy" });										
+									}
+								});							
+																	
+								grid.kendoGrid({
+									dataSource : {		
+										transport: { 
+											read: { url:'/community/get-my-socialnetwork-property.do?output=json', type:'post' },
+											create: { url:'/community/update-my-socialnetwork-property.do?output=json', type:'post' },
+											update: { url:'/community/update-my-socialnetwork-property.do?output=json', type:'post'  },
+											destroy: { url:'/community/delete-my-socialnetwork-property.do?output=json', type:'post' },
+											parameterMap: function (options, operation){			
+										 		if (operation !== "read" && options.models) {
+										 			return { socialNetworkId: mediaEditorSource().socialAccountId, items: kendo.stringify(options.models)};
+												} 
+												return { socialNetworkId: mediaEditorSource().socialAccountId }				
+											}									
+										},						
+										batch: true, 
+										schema: {
+											data: "socialNetworkProperties",
+											model: Property
+										},
+										error:common.api.handleKendoAjaxError
+									},
+									columns: [
+										{ title: "속성", field: "name" },
+										{ title: "값",   field: "value" },
+										{ command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
+									],
+									pageable: false,
+									resizable: true,
+									editable : true,
+									scrollable: true,
+									height: 180,
+									autoBind: false,
+									toolbar: [
+										{ name: "create", text: "추가" },
+										{ name: "save", text: "저장" },
+										{ name: "cancel", text: "취소" }
+									],				     
+									change: function(e) {
+									}
+								});		
+							}
+							grid.data('kendoGrid').dataSource.read();
+						},
+						template: kendo.template($("#media-editor-modal-template").html())
+					});
+					
+					if( common.api.property( e.target.data().properties, "options.scrollable", false ) ){
+						modal.data().set("scrollable", 1);
+					}else{
+						modal.data().set("scrollable", 0);
+					}
+					mediaEditorSource( e.target.data() );					
+					modal.open();							
+				},
+				open: function(e){					
+					$('#navbar-btn-my-streams').find('input[value="' + e.target.data().socialAccountId + '"]').parent().toggleClass("disabled");					
+					var streams = e.target.element.find(".panel-body ul.media-list");
+					if( streams.length > 0 && !streams.data('kendoExtMediaStreamView') ){
+						streams.extMediaStreamView({
+							id:  e.target.data().socialAccountId,
+							media: e.target.data().serviceProviderName,
+							change : function(e){		
+								streams.find('button.custom-upload-by-url').click(function(e){
+									var btn = $(this) ;
+									btn.parent().toggleClass('active');
+									btn.button('loading');
+									common.api.uploadMyImageByUrl({
+										data : {sourceUrl: btn.attr('data-source'), imageUrl: btn.attr('data-url')} ,
+										success : function(response){
+											btn.attr("disabled", "disabled");
+											btn.addClass('hide');
+										},
+										always : function(){
+											btn.parent().toggleClass('active');
+											btn.button('reset');
+										}
+									});
+								});								
+							}
+						});
+					}
+				}
+			});			
+		}
+		
+		
 		function displayMediaStream(streamsPlaceHolder){					
 			var renderToString =  streamsPlaceHolder.serviceProviderName + "-panel-" + streamsPlaceHolder.socialAccountId ;
 			var renderToString2 =  streamsPlaceHolder.serviceProviderName + "-streams-" + streamsPlaceHolder.socialAccountId ;				
@@ -169,21 +252,21 @@
 					id: streamsPlaceHolder.socialAccountId, 
 					media: streamsPlaceHolder.serviceProviderName,
 					change : function(e){			
-						$( '#'+ renderToString2 ).find('button.custom-upload-by-url').click(function(e){
-							var btn = $(this) ;
-							btn.parent().toggleClass('active');
-							btn.button('loading');
-							common.api.uploadMyImageByUrl({
-								data : {sourceUrl: btn.attr('data-source'), imageUrl: btn.attr('data-url')} ,
-								success : function(response){
-									btn.attr("disabled", "disabled");
-									btn.addClass('hide');
-								},
-								always : function(){
-									btn.parent().toggleClass('active');
-									btn.button('reset');
-								}
-							});
+									$( '#'+ renderToString2 ).find('button.custom-upload-by-url').click(function(e){
+										var btn = $(this) ;
+										btn.parent().toggleClass('active');
+										btn.button('loading');
+										common.api.uploadMyImageByUrl({
+											data : {sourceUrl: btn.attr('data-source'), imageUrl: btn.attr('data-url')} ,
+											success : function(response){
+												btn.attr("disabled", "disabled");
+												btn.addClass('hide');
+											},
+											always : function(){
+												btn.parent().toggleClass('active');
+												btn.button('reset');
+											}
+										});
 							
 						});
 					}
@@ -243,184 +326,77 @@
 		<!-- ============================== -->
 		<!-- create info alert 										-->
 		<!-- ============================== -->							
-		function createInfoPanel(){					
+		function createInfoPanel(){		
+			var appendTo = getNextPersonalizedColumn($("#personalized-area"));
 			var renderTo = common.api.guid();
-			var grid_col_size = $("#personalized-area").data("sizePlaceHolder");			
-			$("#personalized-area").extAlert({
+			appendTo.extAlert({
 				template :  kendo.template($("#alert-panel-template").html()),
-				data : { id: renderTo, colSize: grid_col_size.newValue },
+				data : { id: renderTo },
 				close : function () {
 					$( '#'+ renderTo ).remove();
 				}
 			});
 			kendo.fx($( '#'+ renderTo )).zoom("in").startValue(0).endValue(1).play();		
-		}
-	
+		}	
 				
 		-->
 		</script>		
 		<style scoped="scoped">
 
-		.k-tiles-arrange label {
-			font-weight : normal;		
-		}
-		.k-tiles li.k-state-selected {
-			border-color: #428bca;
-		}
-		
-		.media, .media .media {
-			margin-top: 5px;
-		}	
-	
-		.k-callout-n {
-		border-bottom-color: #787878;
-		}	
-				
-		.k-callout-w {
-			border-right-color: #787878;
-		}
-		
-		.k-callout-e {
-		border-left-color: #787878;
-		}	
-		
-		#photo-gallery-view {
-			min-height: 320px;
-			min-width: 320px;
-			width: 100%;
-			padding: 0px;
-			border: 0px;
-		}	
-		
-		#personalized-controls {
-			position: absolute;
-			top: 50px;
-			left:0;
-			min-height: 300px;
-			padding: 10px;
-			width: 100%;
-			z-index: 1000;
-			overflow: hidden;
-			background-color: rgba(91,192,222,0.8)		
-		}		
-		
-		#personalized-controls-section{
-			margin-top: 0px;
-			padding : 0px;
-		}
-		
-		#personalized-controls-section.cbp-spmenu-vertical {
-			width: 565px;
-		}
-		
-		#personalized-controls-section.cbp-spmenu-right {
-			right: -565px;
-			z-index: 2000;
-		}
-		
-		#personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
-			right : 0px;
-			overflow-x:hidden;
-			overflow-y:auto;			
-		}
-
-		@media (max-width: 768px ) {
-			#personalized-controls-section.cbp-spmenu-vertical {
-				width: 100%;
-			}			
-			#personalized-controls-section.cbp-spmenu-right {
-				right: -100%;
-			}		
-		} 
-		
-		.cbp-spmenu {
-			background : #ffffff;
-		}
-		
-		.cbp-spmenu-vertical header {
-			1px solid #258ecd;
-			margin : 0px;
-			padding : 5px;
-			color : #000000;
-			background : #5bc0de; /* transparent;        	*/
-			height: 90px;        	
-		}
-				
-		.cbp-hsmenu-wrapper .cbp-hsmenu {
-			width:100%;
-		}
-		
-		.cbp-hsmenu > li > a {
-			color: #fff;
-			font-size: 1em;
-			line-height: 3em;
-			display: inline-block;
-			position: relative;
-			z-index: 10000;
-			outline: none;
-			text-decoration: none;
-		}
-		
-		blockquote {
-			font-size: 11pt;
-		}
-		
-		.panel .comments-heading {
-		
-		}
-		
-		.panel .comments-heading a {
-			color: #555;
-		}
-		
-		#photo_overlay nav.navbar {
-			margin-bottom: 0px; 
-		}
 		
 		</style>   	
 	</head>
-	<body id="doc" class="bg-gray">
+	<body id="doc" class="bg-dark">
+		<div class="page-loader"></div>
+		<div class="wrapper">
 		<!-- START HEADER -->		
 		<#include "/html/common/common-homepage-menu.ftl" >		
-		<#include "/html/common/common-personalized-menu.ftl" >
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->
-		<section class="container-fluid" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-10"></div>				
-		</section>		
-		<div class="overlay hide"></div>		
-		<!-- start side menu -->
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
-			<header>		
-				<!--					
-				<div class="btn-group">
-					<button type="button" class="btn btn-info"><i class="fa fa-cog"></i></button>
-					<button type="button" class="btn btn-info"><i class="fa fa-comment"></i></button>
-					<button type="button" class="btn btn-info"><i class="fa fa-envelope"></i></button>
-				</div>		
-				-->
-				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
-			</header>					
-			<div class="blank-top-5" ></div>				
-		</section>		
-		<section id="image-broswer" class="image-broswer"></section>	
-		<section id="external-content-widow"></section>
+			<div class="container-fluid padding-sm" style="min-height:600px;">		
+				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
+								<ul class="nav navbar-nav pull-right">
+									<li class="hidden-xs">
+										<p class="navbar-text">레이아웃</p>
+										<div class="btn-group navbar-btn" data-toggle="buttons">
+											<label class="btn btn-info">
+												<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
+											</label>
+											<label class="btn btn-info active">
+										 		<input type="radio" name="personalized-area-col-size" value="6"> <i class="fa fa-th-large"></i>
+											</label>
+											<label class="btn btn-info">
+												<input type="radio" name="personalized-area-col-size" value="4"> <i class="fa fa-th"></i>
+											</label>
+										</div>
+									</li> 
+									<li>
+										<p class="navbar-text">미디어</p>
+										<div id="navbar-btn-my-streams" class="navbar-btn btn-group" data-toggle="buttons">
+											<button type="button" class="btn btn-primary" data-action="media-list" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'>미디어</button>
+										</div>
+									</li>		
+								</ul>
+					</div><!-- ./navbar-personalized -->			
+						
+				<div id="personalized-area" class="row"></div>				
+			</div>			
 		<!-- END MAIN CONTENT -->		
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->
+		</div>						
 		<!-- START TEMPLATE -->	
 		<script type="text/x-kendo-template" id="alert-panel-template">
-			<div id="#: id #" class="custom-panels-group col-sm-#: colSize#" style="min-height:200px; display:none;" data-role="panel">
-				<div data-alert class="alert alert-info">
+				<div  id="#: id #" data-alert class="alert alert-info" style="min-height:50px; display:none;">
 					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-					<p><i class="fa fa-info"></i> 상단 미디어 버튼을 클릭하면 해당 미디어 소식을 볼 수 있습니다.</p>					
+					<p> 상단 메뉴에서 <i class="fa fa-briefcase fa-lg"></i> 버튼을 클릭하면 연결된 미디어 목록을 확인할 수 있습니다.</p>				
 					<p><small>새로운 쇼셜 미디어 연결은 프로필 보기의 쇼셜네트워크 탭에서 지원합니다.</small></p>
 					<p><a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-info btn-sm" data-toggle="modal" data-target="\\#myProfileModal">프로필 보기</a></p>
 				</div>
-			</div>
 		</script>								
 		<#include "/html/common/common-homepage-templates.ftl" >		
+		<#include "/html/common/common-social-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    
 </html>

@@ -1,13 +1,14 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
-<head>
+	<head>
+	<#compress>		
 		<title>기업소개</title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
 			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common.pages/common.timeline-v2.min',
+			'css!${request.contextPath}/styles/common.pages/common.timeline-v2.min.css',
 			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
@@ -38,7 +39,41 @@
 						e.token.copy(currentUser);
 					}				
 				});	
-				
+
+				$('#aboutTab').on( 'show.bs.tab', function (e) {
+					//e.preventDefault();		
+					var show_bs_tab = $(e.target);
+					if( show_bs_tab.attr('href') == '#company-history' ){									
+						if( $("#company-history .timeline-v2").text().trim().length == 0 ){
+							var template = kendo.template($("#timeline-template").html());
+							var dataSource = new kendo.data.DataSource({
+				                transport: {
+				                    read: {
+				                        url: "/community/website-company-timeline.do?output=json",
+				                        dataType: "json"
+				                    }
+				                },
+				                schema : {
+				                	data : "timelines",
+				                	model : common.models.Timeline
+				                },			                
+				                requestStart: function() {
+				                    kendo.ui.progress($("#company-history"), true);
+				                },
+				                requestEnd: function() {
+				                    kendo.ui.progress($("#company-history"), false);
+				                },
+				                change: function() {
+									$("#company-history .timeline-v2").html(kendo.render(template, this.view()));
+				                }
+				            });		
+				            dataSource.read();
+						}
+						 
+					} 				
+				});				
+				$('#aboutTab a:first').tab('show');
+								
 				<#if !action.user.anonymous >							
 				</#if>	
 				// END SCRIPT            
@@ -66,8 +101,10 @@
 					
 						
 		</style>   	
+	</#compress>		
 	</head>
 	<body>
+		<div class="page-loader"></div>
 		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
@@ -86,7 +123,7 @@
 		</header>			
 		<!-- END HEADER -->					
 		<!-- START MAIN CONTENT -->	
-		<div class="container">	
+		<div class="container content no-padding-t">	
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
@@ -114,8 +151,7 @@
 							<div class="tab-v1">									
 							<ul class="nav nav-tabs" id="aboutTab">
 								<li><a href="#company-history" data-toggle="tab">회사연혁</a></li>
-								<li><a href="#company-logo" data-toggle="tab">로고</a></li>
-								<li><a href="#company-media" data-toggle="tab">쇼셜미디어</a></li>								
+								<li><a href="#company-logo" data-toggle="tab">로고</a></li>					
 							</ul>
 							<!-- Tab panes -->
 							<div class="tab-content" style="min-height:300px;">
@@ -138,31 +174,6 @@
 										</div>
 									</div>	
 								</div>
-								<div class="tab-pane fade" id="company-media" style="min-height:300px;">
-									<div id="social-media-area" class="row">
-										<#list action.connectedCompanySocialNetworks  as item >	
-										<div class="col-sm-6">						
-											<div class="blank-top-5"></div>
-											<div id="${item.serviceProviderName}-panel-${item.socialAccountId}" class="panel panel-default panel-flat">
-												<div class="panel-heading">
-													<i class="fa fa-${item.serviceProviderName}"></i>&nbsp;${item.serviceProviderName}
-													<div class="k-window-actions panel-header-actions">
-														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-														<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>
-														<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-													</div>
-												</div>		
-												<div class="panel-body scrollable" style="min-height:200px; max-height:500px;">
-													<ul class="media-list">
-														<div id="${item.serviceProviderName}-streams-${item.socialAccountId}">&nbsp;</div>
-													</ul>
-												</div>							
-											</div>										
-										</div>
-										</#list>												
-									</div>
-								</div>
 							</div>
 							</div><!-- end of tabs -->
 
@@ -177,6 +188,29 @@
 		<!-- END FOOTER -->	
 		</div><!-- /wrapper -->	
 		<!-- START TEMPLATE -->
+		<script type="text/x-kendo-tmpl" id="timeline-template">
+ 			<li>
+ 				<time class="cbp_tmtime" datetime="">
+ 					<span>
+	 				#if(isPeriod()){#
+	 					<small>#: getFormattedStartDate() # ~ #: getFormattedEndDate() #</small>
+	 				#}else{#
+	 					<small>#: getFormattedStartDate() #</small>
+	 				#}#				
+					</span> 
+					<span style='color:\\#e67e22;font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;'><strong>#: getEndDateYear() #</strong></span>
+				</time>
+				<i class="cbp_tmicon rounded-x hidden-xs"></i>
+				<div class="cbp_tmlabel">
+					#if(headline !== null && headline !== 'null'){#
+					<h4>#:headline#</h4>
+					#}#
+					#if(body !== null && body !== 'null'){#					
+					<p>#= body #</p>
+					#}#
+				</div>
+			</li>
+		</script>					
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
 	</body>    

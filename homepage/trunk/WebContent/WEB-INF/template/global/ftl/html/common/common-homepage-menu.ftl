@@ -21,12 +21,12 @@
 								<a>언어</a>
 								<ul class="lenguages">
 									<li class="active">
-										<a href="\\#">한국어 <i class="fa fa-check"></i></a> 
+										<a href="#">한국어 <i class="fa fa-check"></i></a> 
 									</li>
 								</ul>
 							</li>
 							<li class="topbar-devider"></li>   
-							<li><i class="fa fa-building"></i> <a href="about.do">회사소개</a></li>
+							<li><a href="##\">도움말</a></li>  
 						</ul>
 						<!-- End Topbar Navigation -->
 					</div>
@@ -34,30 +34,33 @@
 				<nav class="navbar navbar-default" role="navigation">
 					<div class="container">
 						<!-- Brand and toggle get grouped for better mobile display -->
-						<div class="navbar-header">					
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
-								
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">								
 								<span class="sr-only">${webSite.description} toggle navigation</span>
 								<span class="fa fa-bars"></span>
-							</button>	
+							</button>
+							<a href="#" class="navbar-toggle-account visible-xs no-padding no-border">
+							<img src="/download/profile/andang?width=100&amp;height=150">			
+							</a>							
 							<a class="navbar-brand" href="/main.do">
-								<img id="logo-header" src="/download/logo/company/INKIUM" width="175" alt="Logo">
+								<img id="logo-header" src="/download/logo/company/${action.webSite.company.name}" height="42" alt="Logo">
 							</a>
 						</div>												
 						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse navbar-responsive-collapse">
-							<ul id="account-navbar" class="nav navbar-nav navbar-right"></ul>
+						<div class="collapse navbar-collapse navbar-responsive-collapse ">
+							<ul id="account-navbar" class="nav navbar-nav navbar-right hidden-xs"></ul>
 							<!-- /account -->
 							<ul class="nav navbar-nav">
 								<#list webSiteMenu.components as item >
+								<#if WebSiteUtils.isUserAccessAllowed(request, item) >
 								<#if  item.components?has_content >
 									<li class="dropdown">
-										<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">${item.title}</a>
+										<a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><#if item.icon?? ><i class="fa ${item.icon} fa-lg"></i></#if> ${item.title}</a>
 										<ul class="dropdown-menu">
 										<#list item.components as sub_item >
 											<#if sub_item.components?has_content >
 												<li class="dropdown-submenu">
-													<a href="#" class="dropdown-toggle" data-toggle="dropdown">${sub_item.title}</a>
+													<a href="#" class="dropdown-toggle" data-toggle="dropdown"><#if sub_item.icon?? ><i class="fa ${sub_item.icon}"></i></#if> ${sub_item.title}</a>
 													<ul class="dropdown-menu">
 														<#list sub_item.components as sub_sub_item >
 														<li><a href="${sub_item.page}">${ sub_sub_item.title }</a></li>
@@ -65,16 +68,17 @@
 													</ul>
 												</li>
 											<#else>								
-												<li><a href="${sub_item.page}">${sub_item.title}</a></li>
+												<li><a href="${sub_item.page}"><#if sub_item.icon?? ><i class="fa fa-${sub_item.icon}"></i></#if> ${sub_item.title}</a></li>
 											</#if>								
 										</#list>
 										</ul>
 									</li>
 								<#else>
 									<li>
-										<a href="${item.page}">${item.title}</a>
+										<a href="${item.page}"><#if item.icon?? ><i class="fa fa-${item.icon}"></i></#if> ${item.title}</a>
 									</li>
 								</#if>
+								</#if>		
 								</#list>
 							</ul>				
 						</div>						

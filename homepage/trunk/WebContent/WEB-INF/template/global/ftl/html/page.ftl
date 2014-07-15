@@ -2,12 +2,11 @@
 <html decorator="homepage">
 	<head>
 		<title> ${action.targetContent.subject}</title>
-		<#compress>				
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -17,10 +16,8 @@
 			'${request.contextPath}/js/common/common.ui.min.js'],
 			complete: function() {
 			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
+				// 1.  한글 지원을 위한 로케일 설정
+				kendo.culture("ko-KR");
 				      
 				// START SCRIPT	
 
@@ -102,8 +99,8 @@
 
 		<div class="jumbotron jumbotron-ad hidden-print jumbotron-page-header">
 		  <div class="container">
-		    <h2 class="color-green">${action.targetContent.subject}</h2>
-		    <h5><small class="text-muted"><i class="fa fa-quote-left fa-2x pull-left"></i>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }<i class="fa fa-quote-right"></i></small></h5>
+		    <h2>${action.targetContent.subject}</h2>
+		    <small class="text-muted"><i class="fa fa-quote-left fa-2x pull-left"></i>${action.targetContent.summary?replace("#company#", action.user.company.displayName ) }<i class="fa fa-quote-right"></i></small>
 		  </div>
 		</div>			
 		<div class="container layout">

@@ -7,77 +7,43 @@
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',
-			'css!${request.contextPath}/styles/codedrop/cbpSlidePushMenus.css',
-			'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/blue.css',
+			'css!${request.contextPath}/styles/common.pages/common.personalized.css',
+			'css!${request.contextPath}/styles/common.pages/common.onepage.css',
+			'css!${request.contextPath}/styles/jquery.magnific-popup/magnific-popup.css',			
+			'css!${request.contextPath}/styles/codrops/codrops.cbp-spmenu.css',
+			
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
+			'${request.contextPath}/js/headroom/headroom.min.js',
+			'${request.contextPath}/js/headroom/jquery.headroom.min.js',
+			'${request.contextPath}/js/jquery.magnific-popup/jquery.magnific-popup.min.js',	
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
-			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',	
-			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
-			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			'${request.contextPath}/js/pdfobject/pdfobject.js',
-			'${request.contextPath}/js/common/common.modernizr.custom.js',
+			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',	
+			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 		
+			'${request.contextPath}/js/common.plugins/query.backstretch.min.js', 		
+				
+			'${request.contextPath}/js/pdfobject/pdfobject.js',			
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/ace/ace.js',],        	   
+			'${request.contextPath}/js/common.pages/common.personalized.js',			
+			'${request.contextPath}/js/ace/ace.js',
+			'${request.contextPath}/js/common.pages/common.code-editor.js',
+			],        	   
 			complete: function() {			
-			
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
 				
-				// 2.  MEUN 설정
-				var slide_effect = kendo.fx($("body div.overlay")).fadeIn();																																													
-				$("#personalized-area").data("sizePlaceHolder", { oldValue: 6 , newValue : 6} );	
-				
-				common.ui.handleActionEvents( $('.personalized-navbar'), {
-					handlers : [
-						{ selector: "input[name='personalized-area-col-size']",
-						  event : 'change',
-						  handler : function(){
-							var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
-							grid_col_size.oldValue = grid_col_size.newValue;
-							grid_col_size.newValue = this.value;			
-							$(".custom-panels-group").each(function( index ) {
-								var custom_panels_group = $(this);				
-								custom_panels_group.removeClass("col-sm-" + grid_col_size.oldValue );		
-								custom_panels_group.addClass("col-sm-" + grid_col_size.newValue );		
-							});
-						  }	
-						}
-					]
+				// 1. SETUP COMMON
+				common.ui.setup({
+					features:{
+						backstretch : true,
+						lightbox : true,
+						spmenu : true
+					}
 				});	
-				
- 				common.ui.handleButtonActionEvents(
-					$(".personalized-navbar .nav a.btn-control-group"), 
-					{event: 'click', handlers: {
-						hide : function(e){
-							$('body nav').first().removeClass('hide');
-						},
-						'open-spmenu' : function(e){						
-							$('body').toggleClass('modal-open');						
-							if( $('#personalized-controls-section').hasClass("hide") )
-								$('#personalized-controls-section').removeClass("hide");							
-							$('body div.overlay').toggleClass('hide');										
-							slide_effect.play().then(function(){							
-								$('#personalized-controls-section').toggleClass('cbp-spmenu-open');
-							});							
-						}					 
-					}}
-				);			
-				
-				$("#personalized-controls-menu-close").on( "click" , function(e){						
-					$('body').toggleClass('modal-open');		
-					$('#personalized-controls-section').toggleClass('cbp-spmenu-open');					
-					setTimeout(function() {
-						slide_effect.reverse().then(function(){
-							$('body div.overlay').toggleClass('hide');
-						});
-					}, 100);					
-				});
-			
-				// 3. ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
 					externalLoginHost: "${ServletUtils.getLocalHostAddr()}",	
@@ -85,33 +51,16 @@
 					template : kendo.template($("#account-template").html()),
 					</#if>
 					authenticate : function( e ){
-						e.token.copy(currentUser);
-						if(!currentUser.anonymous){							
-							$('body nav').first().addClass('hide');
-						}						
+						e.token.copy(currentUser);					
 					},
-					shown : function(e){						
-						$('#account-navbar').append('<li><a href="#" class="btn btn-link custom-nabvar-hide"><i class="fa fa-angle-double-down fa-lg"></i></a></li>');
-						$('#account-navbar').append('<p class="navbar-text hidden-xs">&nbsp;</p>');	
-						$('#account-navbar li a.custom-nabvar-hide').on('click', function(){
-							$('body nav').first().addClass('hide');
-						});	
-						
+					shown : function(e){				
+						$("#account-navbar").append("<li><a href='#personalized-controls-section' class='btn-control-group navbar-btn-options' data-toggle='spmenu'><i class='fa fa-cloud-upload fa-2x'></i></a></li>");
+						$(".navbar .navbar-header").append("<a href='#personalized-controls-section'  data-toggle='spmenu' class='navbar-toggle-inverse visible-xs'><i class='fa fa-cloud-upload fa-2x'></i></a>");															
 					},									
-				});				
-				// 4. CONTENT 	
-				 var sitePlaceHolder = new common.models.WebSite( {webSiteId: ${ action.webSite.webSiteId}} );
-				 $("#site-info").data("sitePlaceHolder", sitePlaceHolder );
-								
-				// 4-1. Announces 							
-				$("#announce-panel").data( "announcePlaceHolder", new Announce () );
-				createNoticeGrid();	
+				});	
+				preparePersonalizedArea($("#personalized-area"), 3, 4 );
 				
-				 // 4-2. News
-             	 createNewsGrid();
-             	$('#announce-panel').data("newsPlaceHolder", new common.models.ForumTopic());
-												
-				// 4-3. Right Tabs								
+				// 2. SPMenu Right Tabs								
 				$('#myTab').on( 'show.bs.tab', function (e) {
 					//e.preventDefault();		
 					var show_bs_tab = $(e.target);
@@ -121,16 +70,310 @@
 						createPhotoListView();
 					}					
 				});
+				
+				// 3. Notice	 Section
+				common.ui.button({
+					renderTo: "button[data-action='show-notice-section']",
+					click:function(e){
+						createNoticeSection();
+						common.ui.buttonDisabled($(this));
+					}
+				}).click();
+					
 				$('#myTab a:first').tab('show') ;
-				
-				<#if request.isUserInRole("ROLE_COMPANY_ADMIN") >
-				
-				</#if> 
-				
 				// END SCRIPT 
 			}
 		}]);	
+		
+		<!-- ============================== -->
+		<!-- Notice 											       -->
+		<!-- ============================== -->				
+		function createNoticeSection(){	
+		
+			if( !$("#notice-grid").data('kendoGrid') ){
+				var buttons = common.ui.buttons({
+					renderTo: "#notice-target-button",
+					type: "radio",
+					change: function(e){
+						$("#notice-grid").data('kendoGrid').dataSource.read();
+					}
+				});	
+				common.ui.button({
+					renderTo: "button[data-action='new-notice']",
+					click: function(e){				
+						setNoticeEditorSource(new Announce());
+						getNoticeEditorSource().objectType = getNoticeTarget();
+						$(this).prop("disabled", true);
+						openNoticeEditorPanel();
+					}
+				});
+				common.ui.button({
+					renderTo : "button[data-dismiss='section'][data-target]"
+				});
+				createNoticeGrid();
+			}	
+			if(	!$("#notice-section").is(":visible") ){
+				$("#notice-section").show();
+			}	
+		}
+		
+		function getNoticeTarget (){
+			var renderTo = "#notice-target-button";
+			return $(renderTo).data("kendoExtRadioButtons").value;
+		}
+		
+		function createNoticeGrid(){
+			if( !$("#notice-grid").data('kendoGrid') ){				
+				$("#notice-grid").data('announceTargetPlaceHolder', 30);				
+				$("#notice-grid").kendoGrid({
+					dataSource : new kendo.data.DataSource({
+						transport: {
+							read: {
+								type : 'POST',
+								dataType : "json", 
+								url : '${request.contextPath}/community/list-announce.do?output=json'
+							},
+							parameterMap: function(options, operation) {
+								if (operation != "read" && options.models) {
+									return {models: kendo.stringify(options.models)};
+								}else{								
+									return {objectType: getNoticeTarget() };								
+								}
+							} 
+						},
+						pageSize: 10,
+						error:common.api.handleKendoAjaxError,
+						schema: {
+							data : "targetAnnounces",
+							model : Announce,
+							total : "totalAnnounceCount"
+						}
+					}),
+					sortable: true,
+					columns: [ 
+						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
+						{field: "subject", title: "제목", headerAttributes: { "class": "table-header-cell", style: "text-align: center"}}, 
+					],
+					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
+					selectable: "row",
+					change: function(e) { 
+						var selectedCells = this.select();
+						if( selectedCells.length > 0){
+							var selectedCell = this.dataItem( selectedCells );								
+							showNoticePanel();
+						}
+					},
+					dataBound: function(e) {
+						if( $("#notice-view").data("model") ){	
+							$("#notice-view").data("model").set("visible", false);
+						}
+					}
+				});		
+			}	
+		}	
+		
+		function selectedNotice(){
+			var grid = $("#notice-grid").data('kendoGrid');
+			var selectedCells = grid.select();
+			if( selectedCells.length > 0){
+				return grid.dataItem( selectedCells );						
+			}else{
+				return new Announce ();
+			}
+		}
+		
+		function showNoticePanel(){
+			var renderTo = "#notice-view";
+			var noticeToUse = selectedNotice();
+			if( !$(renderTo).data("model") ){	
+				$(renderTo).html($("#notice-view-template").html());
+				var model =  kendo.observable({ 
+					announce : new Announce (),
+					profilePhotoUrl : "",
+					visible : false,
+					editable:false,
+					edit: function(e){
+						if(this.editable){
+							setNoticeEditorSource(this.announce);
+							openNoticeEditorPanel();
+						}
+					},
+					close: function(e){
+						this.set("visible", false );
+					},
+					delete: function(e){
 						
+					}
+				});	
+				model.bind("change", function(e){
+					if( e.field == "visible" ){ 				
+						if(this.visible && $("#notice-editor").data("model")){
+							$("#notice-editor").data("model").set("visible", false);
+						}					
+					}
+				});
+				$(renderTo).data("model", model);
+				kendo.bind($(renderTo), model );
+			}			
+			noticeToUse.copy( $(renderTo).data("model").announce  );
+			$(renderTo).data("model").set("visible", true);
+			$(renderTo).data("model").set("editable", hasPermissions(noticeToUse.user));
+			$(renderTo).data("model").set("profilePhotoUrl", common.api.user.photoUrl (noticeToUse.user, 150,150) );			
+		}
+						
+		function hasPermissions(user){
+			var hasPermission = false;
+			var userToUse =  $("#account-navbar").data("kendoExtAccounts").token;
+			if( userToUse.company.companyId == ${ webSite.company.companyId } ){
+				if( userToUse.hasRole("ROLE_ADMIN") || userToUse.hasRole("ROLE_ADMIN_SITE") ){
+					hasPermission = true;
+				}				
+			}			
+			if( typeof user == "object" && userToUse.userId == user.userId ){
+				hasPermission = true;
+			}			
+			return hasPermission;
+		}			
+
+		function getNoticeEditorSource(){
+			var renderTo = "#notice-editor"; 
+			if( !$(renderTo).data("noticePlaceHolder") ){
+				var noticePlaceHolder = new Announce();
+				noticePlaceHolder.set("objectType", getNoticeTarget());
+				$(renderTo).data("noticePlaceHolder", noticePlaceHolder );				
+			}
+			return $(renderTo).data("noticePlaceHolder");			
+		}
+		
+		function setNoticeEditorSource(source){	
+			source.copy(getNoticeEditorSource());		
+		}
+
+		function openNoticeEditorPanel(){			
+			var noticeToUse = getNoticeEditorSource();
+			var renderTo = "#notice-editor";			
+			if($("#notice-view").data("model")){
+				$("#notice-view").data("model").set("visible", false);	
+			}
+			if(!$(renderTo).data("model")){
+				$(renderTo).html($("#notice-edit-template").html());
+				var model =  kendo.observable({ 
+					announce : new Announce (),
+					profilePhotoUrl : "",
+					isNew : false,
+					update : function (e) {
+						var btn = $(e.target);
+						btn.button('loading');
+						if( this.announce.subject.length ==0 || this.announce.body.length  ){
+							common.ui.notification({
+								title:"공지 입력 오류", 
+								message: "제목 또는 본문을 입력하세요." ,
+								hide:function(e){
+									btn.button('reset');
+								}
+							});
+							return ;
+						}
+						if( this.announce.startDate >= this.announce.endDate  ){
+							common.ui.notification({
+								title:"공지 기간 입력 오류", 
+								message: "시작일자가 종료일자보다 이후일 수 없습니다." ,
+								hide:function(e){
+									btn.button('reset');
+								}
+							});
+							return ;
+						}
+						common.api.callback({  
+							url : '${request.contextPath}/community/update-announce.do?output=json',
+							data : { item: kendo.stringify( this.announce.clone() ) },
+							success : function(response){
+								$("#notice-grid").data('kendoGrid').dataSource.read();
+							},
+							fail: function(){								
+								common.ui.notification({
+									title:"저장 오류", 
+									message: "시스템 운영자에게 문의하여 주십시오." ,
+									hide:function(e){
+										btn.button('reset');
+									}
+								});								
+							},
+							requestStart : function(){
+								kendo.ui.progress($(renderTo), true);
+							},
+							requestEnd : function(){
+								kendo.ui.progress($(renderTo), false);
+							},
+							always : function(e){
+								btn.button('reset');
+							}
+						});
+					},
+					visible: false,
+					changed : false,
+					close : function(e){
+						this.set("visible", false);	
+						if( $("#notice-view").data("model") && $("#notice-view").data("model").announce.announceId == this.announce.announceId	){
+							$("#notice-view").data("model").set("visible", true);	
+						}		
+					}
+				});
+				model.bind("change", function(e){
+					if( e.field == "visible" ){ 				
+						if(!this.visible ){
+							$("button[data-action='new-notice'][disabled]").prop("disabled", false);
+						}					
+					}
+				});				
+				kendo.bind($(renderTo), model );
+				$(renderTo).data("model", model );
+				var bodyEditor =  $("#notice-editor-body" );
+				createEditor( "notice-editor" , bodyEditor );				
+			}	
+			noticeToUse.copy( $(renderTo).data("model").announce  );	
+			$(renderTo).data("model").set("changed", false);			
+			$(renderTo).data("model").set("visible", true);			
+			$(renderTo).data("model").set("isNew", (noticeToUse.announceId < 1 ));			
+		}
+		
+		<!-- ============================== -->
+		<!-- Notice viewer , editor 						       -->
+		<!-- ============================== -->					
+		function showNoticeViewer(){
+			var announcePlaceHolder = getNoticeEditorSource();
+			if( announcePlaceHolder.announceId > 0 ){					
+				if( $('#notice-viewer').text().trim().length == 0 ){			
+					var template = kendo.template($('#announcement-viewer-template').html());		
+					$('#notice-viewer').html( template );				
+					var noticeViewerModel =  kendo.observable({ 
+						announce : announcePlaceHolder,
+						profilePhotoUrl : function(){
+							return common.api.user.photoUrl (this.get("announce").user, 150,150);
+						},
+						editable : function(){
+							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
+							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_ADMIN_SITE") ){
+								return true;
+							}
+							return false;
+						},
+						openNoticeEditor : showNoticeEditor,
+						closeViewer : function(e){
+							kendo.fx($("#notice-viewer-panel")).expand("vertical").duration(200).reverse();								
+							kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
+						}
+					});						
+					kendo.bind($("#notice-viewer-panel"), noticeViewerModel );
+				}			
+				$('#announce-panel > .panel > .panel-body').first().hide();
+				kendo.fx($("#notice-viewer-panel")).expand("vertical").duration(200).play();			
+			}
+		}
+
+		<!-- ============================== -->
+		<!-- create website file grid								-->
+		<!-- ============================== -->														
 		function createAttachmentListView(){			
 			if( !$('#attachment-list-view').data('kendoListView') ){														
 				var attachementTotalModle = kendo.observable({ 
@@ -187,10 +430,10 @@
 						}
 					});																	
 				
-					$("#attachment-list-view").on("mouseenter",  ".img-wrapper", function(e) {
-						kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().play();
-					}).on("mouseleave", ".img-wrapper", function(e) {
-						kendo.fx($(e.currentTarget).find(".img-description")).expand("vertical").stop().reverse();
+					$("#attachment-list-view").on("mouseenter",  ".file-wrapper", function(e) {
+						kendo.fx($(e.currentTarget).find(".file-description")).expand("vertical").stop().play();
+					}).on("mouseleave", ".file-wrapper", function(e) {
+						kendo.fx($(e.currentTarget).find(".file-description")).expand("vertical").stop().reverse();
 					});															
 														
 					$("input[name='attachment-list-view-filters']").on("change", function () {
@@ -252,7 +495,7 @@
 		}
 		
 		<!-- ============================== -->
-		<!-- create website photo grid									-->
+		<!-- create website photo grid							-->
 		<!-- ============================== -->						
 		function createPhotoListView(){
 			if( !$('#photo-list-view').data('kendoListView') ){			
@@ -285,10 +528,10 @@
 						var total_index = this.dataSource.view().length -1 ;
 						var list_view_pager = $("#photo-list-pager").data("kendoPager");	
 						var item = data[current_index];			
-						item.manupulate();								
-						common.api.pager(item, current_index,total_index, list_view_pager.page(), list_view_pager.totalPages());
+						//item.manupulate();								
+						//common.api.pager(item, current_index,total_index, list_view_pager.page(), list_view_pager.totalPages());
 						$("#photo-list-view").data( "photoPlaceHolder", item );														
-						displayPhotoPanel( ) ;										
+						displayPhotoPanel( ) ;						
 					},
 					navigatable: false,
 					template: kendo.template($("#photo-list-view-template").html()),								
@@ -399,582 +642,6 @@
 				);
 			}
 		}
-		<!-- ============================== -->
-		<!-- Notice grid										       -->
-		<!-- ============================== -->								
-		function createNoticeGrid(){
-			if( !$("#announce-grid").data('kendoGrid') ){				
-				$("#announce-grid").data('announceTargetPlaceHolder', 30);				
-				$("#announce-grid").kendoGrid({
-					dataSource : new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-announce.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}else{								
-									return {objectType: $("#announce-grid").data('announceTargetPlaceHolder') };								
-								}
-							} 
-						},
-						pageSize: 10,
-						error:common.api.handleKendoAjaxError,
-						schema: {
-							data : "targetAnnounces",
-							model : Announce,
-							total : "totalAnnounceCount"
-						}
-					}),
-					sortable: true,
-					columns: [ 
-						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field: "subject", title: "제목", headerAttributes: { "class": "table-header-cell", style: "text-align: center"}, template: '#: subject # <div class="btn-group"><button type="button" class="btn btn-primary btn-xs" onclick="showNoticeEditor();return false;">편집</a><button type="button" class="btn btn-primary btn-xs" onclick="showNoticeViewer();return false;">보기</a></div>'}, 
-					],
-					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );								
-							setNoticeEditorSource(selectedCell);
-						}
-					},
-					dataBound: function(e) {
-					}
-				});		
-				
-				common.api.handlePanelHeaderActions($("#announce-panel"));
-				common.ui.handleButtonActionEvents($("#announce-panel button.btn-control-group"), 	{event: 'click', handlers: {
-						'new-notice' : function(e){
-							var announcePlaceHolder = new Announce();
-							announcePlaceHolder.set("objectType", 30);
-							setNoticeEditorSource(announcePlaceHolder);		
-							showNoticeEditor();			
-						}
-					}}				
-				);
-				
-				common.ui.handleActionEvents( $('input[name="announce-selected-target"]'), { event: 'change' , handler: function(e){				
-					var oldSelectedSource = $("#announce-grid").data('announceTargetPlaceHolder');
-					if( oldSelectedSource != this.value ){
-						$("#announce-grid").data('announceTargetPlaceHolder', this.value );
-						$("#announce-grid").data('kendoGrid').dataSource.read();
-					}					
-				}});					
-				$("#announce-panel" ).show();
-			}	
-		}	
-		
-		<!-- ============================== -->
-		<!-- Notice viewer , editor 						       -->
-		<!-- ============================== -->					
-		function showNoticeViewer(){
-			var announcePlaceHolder = getNoticeEditorSource();
-			if( announcePlaceHolder.announceId > 0 ){					
-				if( $('#notice-viewer').text().trim().length == 0 ){			
-					var template = kendo.template($('#announcement-viewer-template').html());		
-					$('#notice-viewer').html( template );				
-					var noticeViewerModel =  kendo.observable({ 
-						announce : announcePlaceHolder,
-						profilePhotoUrl : function(){
-							return common.api.user.photoUrl (this.get("announce").user, 150,150);
-						},
-						editable : function(){
-							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-								return true;
-							}
-							return false;
-						},
-						openNoticeEditor : showNoticeEditor,
-						closeViewer : function(e){
-							kendo.fx($("#notice-viewer-panel")).expand("vertical").duration(200).reverse();								
-							kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
-						}
-					});						
-					kendo.bind($("#notice-viewer-panel"), noticeViewerModel );
-				}			
-				$('#announce-panel > .panel > .panel-body').first().hide();
-				kendo.fx($("#notice-viewer-panel")).expand("vertical").duration(200).play();			
-			}
-		}
-		
-		function getNoticeEditorSource(){
-			if( !$("#notice-editor").data("announcePlaceHolder") ){
-				var announcePlaceHolder = new Announce();
-				announcePlaceHolder.set("objectType", 30);
-				$("#notice-editor").data("announcePlaceHolder", announcePlaceHolder );				
-			}
-			return $("#notice-editor").data("announcePlaceHolder");			
-		}
-		
-		function setNoticeEditorSource(source){	
-			source.copy(getNoticeEditorSource());		
-		}
-		
-		function showNoticeEditor(){			
-			var announcePlaceHolder = getNoticeEditorSource();
-			var renderTo = $("#notice-editor-panel");			
-			if( $('#notice-editor').text().trim().length == 0 ){			
-				var template = kendo.template($('#notice-editor-template').html());		
-				$('#notice-editor').html( template );	
-				var noticeEditorModel =  kendo.observable({ 
-					announce : announcePlaceHolder,
-					value : function( value ){
-						if( typeof value === 'undefined' ){
-							return this.announce.body ;
-						}else{
-							this.announce.set('body' , value);
-						}
-					},					
-					profilePhotoUrl : function(){
-						return common.api.user.photoUrl (this.get("announce").user, 150,150);
-					},
-					isNew : false,
-					doSave : function (e) {
-						var btn = $(e.target);
-						btn.button('loading');
-						var template = kendo.template('<p class="text-danger">#:message#</p>');
-						if( this.announce.startDate >= this.announce.endDate  ){
-							common.ui.notification({title:"공지 & 이베트", message: "시작일자가 종료일자보다 이후일 수 없습니다." });
-							return ;
-						}
-						
-						this.announce.user = null;
-						this.announce.properties = null;
-						
-						common.api.callback({  
-							url : '${request.contextPath}/community/update-announce.do?output=json',
-							data : { item: kendo.stringify( this.announce ) },
-							success : function(response){
-								common.ui.notification({title:"공지 & 이베트", message: "정상적으로 저장되었습니다.", type: "success" });
-								$("#announce-grid").data('kendoGrid').dataSource.read();
-							},
-							fail: function(){								
-								common.ui.notification({title:"공지 & 이베트", message: "시스템 운영자에게 문의하여 주십시오." });
-							},
-							requestStart : function(){
-								kendo.ui.progress(renderTo, true);
-							},
-							requestEnd : function(){
-								kendo.ui.progress(renderTo, false);
-							},
-							always : function(e){
-								btn.button('reset');
-								noticeEditorModel.closeEditor(e);
-							}
-						});
-					},
-					updateRequired : false,
-					editable : function(){
-						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-							return true;
-						}
-						return false;
-					},
-					openNoticeProps : function(e){
-					
-					},
-					closeEditor : function(e){
-						kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
-						kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
-					}
-				});
-				noticeEditorModel.bind("change", function(e){				
-					if( e.field.match('^announce.')){ 						
-						if( this.announce.subject.length > 0 && this.announce.body.length  > 0 && ( this.announce.startDate <  this.announce.endDate  )  )	{			
-							noticeEditorModel.set("updateRequired", true);
-						}
-					}	
-				});	
-				kendo.bind(renderTo, noticeEditorModel );
-				renderTo.data("model", noticeEditorModel );
-				var bodyEditor =  $("#notice-editor-body" );
-				createEditor( "notice-editor" , bodyEditor, noticeEditorModel );
-			}
-			
-			renderTo.data("model").set("updateRequired", false);			
-			renderTo.data("model").set("isNew", (announcePlaceHolder.announceId < 1 ));
-				
-			if(announcePlaceHolder.objectType == 30){				
-				renderTo.find('input[name="announce-type"]:first').click();
-			}else{			
-				renderTo.find('input[name="announce-type"]:last').click();
-			}
-			$('#announce-panel > .panel > .panel-body').hide();
-			kendo.fx(renderTo).expand("vertical").duration(200).play();			
-		}
-		
-		
-		<!-- ============================== -->
-		<!-- create news grid		2014.05.21 jwmoon 								-->
-		<!-- ============================== -->								
-		function createNewsGrid(){
-			if( !$("#news-grid").data('kendoGrid') ){				
-				$("#news-grid").data('newsTargetPlaceHolder', 1);				
-				$("#news-grid").kendoGrid({
-					dataSource : new kendo.data.DataSource({
-						transport: {
-							read: {
-								type : 'POST',
-								dataType : "json", 
-								url : '${request.contextPath}/community/list-forum-topics.do?output=json'
-							},
-							parameterMap: function(options, operation) {
-								if (operation != "read" && options.models) {
-									return {models: kendo.stringify(options.models)};
-								}else{								
-									return {forumId: 1 };								
-								}
-							} 
-						},
-						pageSize: 10,
-						error:common.api.handleKendoAjaxError,
-						schema: {
-							total : "targetTopicCount",
-							data : "targetTopics",
-							model : common.models.ForumTopic
-						}
-					}),
-					sortable: true,
-					columns: [ 
-						{field:"creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}", attributes: { "class": "table-cell", style: "text-align: center " }} ,
-						{field: "subject", title: "제목", headerAttributes: { "class": "table-header-cell", style: "text-align: center"}, 
-																			template: '#: subject # <div class="btn-group">'
-																			+'<button type="button" class="btn btn-warning btn-xs" onclick="showNewsEditor();return false;">편집</a>'
-																			+'<button type="button" class="btn btn-warning btn-xs" onclick="showNewsViewer();return false;">보기</a></div>'
-																			+'<button type="button" class="btn btn-warning btn-xs" onclick="deleteNews();return false;">삭제</a></div>'
-																			},
-						{field: "viewCnt", title: "조회수", sortable : false , width: "100px"}
-					],
-					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },									
-					selectable: "row",
-					change: function(e) { 
-						var selectedCells = this.select();
-						if( selectedCells.length > 0){
-							var selectedCell = this.dataItem( selectedCells );	    							
-							setNewsEditorSource(selectedCell);	
-						}
-					},
-					dataBound: function(e) {					
-					},
-					schema: {
-							total : "targetTopicCount",
-							data : "targetTopics",
-							model : common.models.ForumTopic
-						}
-				});
-				
-				//common.api.handlePanelHeaderActions($("#news-panel")); // panel header event setting 
-				common.ui.handleButtonActionEvents($("#announce-panel button.btn-control-group"), 	{event: 'click', handlers: {
-						'new-news' : function(e){
-							var newsPlaceHolder = new common.models.ForumTopic();
-							newsPlaceHolder.set("objectType", 30); //default site(30)
-							setNewsEditorSource(newsPlaceHolder);
-							showNewsEditor();			
-						}
-					}}				
-				);
-				
-				common.ui.handleActionEvents( $('input[name="news-selected-target"]'), { event: 'change' , handler: function(e){				
-					var oldSelectedSource = $("#news-grid").data('newsTargetPlaceHolder');
-					if( oldSelectedSource != this.value ){
-						$("#news-grid").data('newsTargetPlaceHolder', this.value );
-						$("#news-grid").data('kendoGrid').dataSource.read();
-					}					
-				}});
-				
-				$("#announce-panel" ).show();
-				
-				
-				
-			}
-		}
-		<!-- ============================== -->
-		<!-- news viewer , editor 						       -->
-		<!-- ============================== -->		
-		function deleteNews(){
-			var newsPlaceHolder = getNewsPlaceHolder();
-			var renderTo = $('#news-panel-body');
-			
-			common.api.callback({
-				url : '${request.contextPath}/community/delete-forum-topics.do?output=json',
-				data : { item: kendo.stringify( newsPlaceHolder ) },
-				success : function(response){
-								common.ui.notification({title:"뉴스", message: "정상적으로 삭제되었습니다.", type: "success" });
-								$("#news-grid").data('kendoGrid').dataSource.read();
-				},
-			 	fail: function(){								
-						common.ui.notification({title:"뉴스", message: "시스템 운영자에게 문의하여 주십시오." });
-				},
-				requestStart : function(){
-						kendo.ui.progress(renderTo, true);
-				},
-				requestEnd : function(){
-						kendo.ui.progress(renderTo, false);
-				},
-			});
-			
-		}
-					
-		function showNewsViewer(){
-			var newsPlaceHolder = getNewsPlaceHolder();
-			if( newsPlaceHolder.topicId > 0 ){					
-				if( $('#news-viewer').text().trim().length == 0 ){			
-					var template = kendo.template($('#news-viewer-template').html());
-					$('#news-viewer').html( template );				
-					var newsViewerModel =  kendo.observable({ 
-						news : newsPlaceHolder,
-						profilePhotoUrl : function(){
-							return common.api.user.photoUrl (this.get("news").user, 150,150);
-						},
-						editable : function(){
-							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-								return true;
-							}
-							return false;
-						},
-						openNewsEditor : showNewsEditor,
-						closeViewer : function(e){
-							kendo.fx($("#news-viewer-panel")).expand("vertical").duration(200).reverse();								
-							kendo.fx($('#news-panel-body')).expand("vertical").duration(200).play();							
-						}
-					});						
-					kendo.bind($("#news-viewer-panel"), newsViewerModel );
-				}
-				//$('#notice-panel-body').hide();
-				$('#news-panel-body').hide();
-				//kendo.fx($('#announce-panel')).expand("vertical").duration(200).reverse();	
-				kendo.fx($("#news-viewer-panel")).expand("vertical").duration(200).play();			
-			}
-		}
-		
-		function getNewsPlaceHolder(){
-			if( !$("#news-editor").data("newsPlaceHolder") ){
-				//alert('make');
-				var newsPlaceHolder = new common.models.ForumTopic();
-				newsPlaceHolder.set("objectType", 30); //default site(30)
-				//newsPlaceHolder.set("forumId", 1);
-				$("#news-editor").data("newsPlaceHolder", newsPlaceHolder );				
-			}
-			return $("#news-editor").data("newsPlaceHolder");			
-		}
-		
-		function setNewsEditorSource(source){	
-			source.copy(getNewsPlaceHolder());		
-		}
-		
-		function showNewsEditor(){			
-			var newsPlaceHolder = getNewsPlaceHolder();
-			var renderTo = $("#news-editor-panel");			
-			if( $('#news-editor').text().trim().length == 0 ){			
-				var template = kendo.template($('#news-editor-template').html());		
-				$('#news-editor').html( template );	
-				var newsEditorModel =  kendo.observable({ 
-					news : newsPlaceHolder,
-					profilePhotoUrl : function(){
-						return common.api.user.photoUrl (this.get("news").user, 150,150);
-					},
-					isNew : false,
-					doSave : function (e) {
-						//alert(kendo.stringify(newsPlaceHolder));
-					
-						
-						var btn = $(e.target);
-						btn.button('loading');
-						var template = kendo.template('<p class="text-danger">#:message#</p>');	
-
-						common.api.callback({  
-							url : '${request.contextPath}/community/update-forum-topics.do?output=json',
-							data : { item: kendo.stringify( this.news ) },
-							success : function(response){
-								common.ui.notification({title:"뉴스", message: "정상적으로 저장되었습니다.", type: "success" });
-								$("#news-grid").data('kendoGrid').dataSource.read();
-							},
-							fail: function(){								
-								common.ui.notification({title:"뉴스", message: "시스템 운영자에게 문의하여 주십시오." });
-							},
-							requestStart : function(){
-								kendo.ui.progress(renderTo, true);
-							},
-							requestEnd : function(){
-								kendo.ui.progress(renderTo, false);
-							},
-							always : function(e){
-								btn.button('reset');
-								//this.closeNewsEditor(e);
-								closeEditor(renderTo);
-							}
-						});
-						
-						
-					},
-					updateRequired : false,
-					editable : function(){
-						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-							return true;
-						}
-						return false;
-					},
-					openNewsProps : function(e){
-					
-					},
-					closeNewsEditor : function(e){
-						kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
-						//kendo.fx($('#announce-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
-						//kendo.fx($('.panel-default > .panel-body')).expand("vertical").duration(200).play();
-						kendo.fx($('#notice-panel-body')).expand("vertical").duration(200).play();
-						kendo.fx($('#news-panel-body')).expand("vertical").duration(200).play();							
-					}
-				});
-				newsEditorModel.bind("change", function(e){				
-					if( e.field.match('^news.')){ 						
-						if( this.news.subject.length > 0 && this.news.content.length  > 0 )	{			
-							newsEditorModel.set("updateRequired", true);
-						}
-					}	
-				});	
-				kendo.bind(renderTo, newsEditorModel );
-				renderTo.data("model", newsEditorModel );
-				var bodyEditor =  $("#news-editor-body" );
-				createEditor( "news-editor" , bodyEditor );
-			}
-			
-			renderTo.data("model").set("updateRequired", false);			
-			renderTo.data("model").set("isNew", (newsPlaceHolder.topicId < 1 ));
-				
-			if(newsPlaceHolder.objectType == 30){				
-				renderTo.find('input[name="news-type"]:first').click();
-			}else{			
-				renderTo.find('input[name="news-type"]:last').click();
-			}
-
-			$('#announce-panel > .panel > .panel-body').hide();
-			kendo.fx(renderTo).expand("vertical").duration(200).play();			
-		}
-		
-		
-		
-		<!-- ============================== -->
-		<!-- Utils for editor									       -->
-		<!-- ============================== -->				
-		function closeEditor(renderTo){
-			kendo.fx(renderTo).expand("vertical").duration(200).reverse();								
-			kendo.fx($('#notice-panel-body')).expand("vertical").duration(200).play();
-			kendo.fx($('#news-panel-body')).expand("vertical").duration(200).play();	
-		}
-				
-		function createEditor( renderToString, bodyEditor, model ){
-			if(!bodyEditor.data("kendoEditor") ){			
-				var imageBroswer = createEditorImageBroswer( renderToString + "-imagebroswer", bodyEditor);				
-				var linkPopup = createEditorLinkPopup(renderToString + "-linkpopup", bodyEditor);	
-				var htmlEditor = createCodeEditor(renderToString + "-html-editor", bodyEditor, model );									
-				bodyEditor.kendoEditor({
-						tools : [ 'bold', 'italic', 'insertUnorderedList', 'insertOrderedList',
-							{	
-								name: "createLink",
-								exec: function(e){
-									linkPopup.show();
-									return false;
-								}},
-							'unlink', 
-							{	
-								name: "insertImage",
-								exec: function(e){
-									imageBroswer.show();
-									return false;
-								}},
-							{
-								name: 'viewHtml',
-								exec: function(e){
-									htmlEditor.open();
-									return false;
-								}}							
-						],
-						stylesheets: [
-							"${request.contextPath}/styles/bootstrap/3.1.0/bootstrap.min.css",
-							"${request.contextPath}/styles/common/common.ui.css"
-						]
-				});
-			}			
-		}
-
-		function createCodeEditor( renderToString, editor, model ) {		
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"></div>');
-			}							
-			var renderTo = $("#"+ renderToString);		
-			if( !renderTo.data('kendoExtModalWindow') ){						
-				renderTo.extModalWindow({
-					title : "HTML",
-					backdrop : 'static',
-					template : $("#code-editor-modal-template").html(),
-					refresh : function(e){
-						var editor = ace.edit("htmleditor");
-						editor.getSession().setMode("ace/mode/xml");
-						editor.getSession().setUseWrapMode(true);
-						
-					},
-					open: function (e){
-						ace.edit("htmleditor").setValue(model.value());
-					}					
-				});					
-				renderTo.find('button.custom-update').click(function () {
-					var btn = $(this)			
-					var newValue = ace.edit("htmleditor").getValue();
-					var oldValue = model.value();
-					if( newValue.length != oldValue.length ){
-						model.value(newValue);
-					}		
-					ace.edit("htmleditor").setValue("");			
-					renderTo.data('kendoExtModalWindow').close();
-				});
-			}
-			return renderTo.data('kendoExtModalWindow');			
-		}
-				
-		function createEditorImageBroswer(renderToString, editor ){			
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"></div>');
-			}					
-			var renderTo = $("#"+ renderToString);	
-			if(!renderTo.data("kendoExtImageBrowser")){
-				var imageBrowser = renderTo.extImageBrowser({
-					template : $("#image-broswer-template").html(),
-					apply : function(e){						
-						editor.data("kendoEditor").exec("inserthtml", { value : e.html } );
-						imageBrowser.close();
-					}				
-				});
-			}
-			return renderTo.data("kendoExtImageBrowser");
-		}
-		
-		function createEditorLinkPopup(renderToString, editor){		
-			if( $("#"+ renderToString).length == 0 ){
-				$('body').append('<div id="'+ renderToString +'"></div>');
-			}				
-			var renderTo = $("#"+ renderToString);		
-			if(!renderTo.data("kendoExtEditorPopup") ){		
-				var hyperLinkPopup = renderTo.extEditorPopup({
-					type : 'createLink',
-					title : "하이퍼링크 삽입",
-					template : $("#link-popup-template").html(),
-					apply : function(e){						
-						editor.data("kendoEditor").exec("inserthtml", { value : e.html } );
-						hyperLinkPopup.close();
-					}
-				});
-			}
-			return renderTo.data("kendoExtEditorPopup");
-		}		
 
 		<!-- ============================== -->
 		<!-- display attachement panel                          -->
@@ -1049,565 +716,261 @@
 						
 		<!-- ============================== -->
 		<!-- display photo  panel                                  -->
-		<!-- ============================== -->
-				
-		function displayPhotoPanel(){					
-			var renderToString =  "photo-panel-0";	
-			var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");		
-			if( $("#" + renderToString ).length == 0  ){			
-				var grid_col_size = $("#personalized-area").data("sizePlaceHolder");
-				var template = kendo.template('<div id="#: panelId #" class="custom-panels-group col-sm-#: colSize#" style="display:none;"></div>');				
-				$("#personalized-area").append( template( {panelId:renderToString, colSize: grid_col_size.newValue } ) );	
-			}				
-			
-			if( !$("#" + renderToString ).data("extPanel") ){					
-				$("#" + renderToString ).data("extPanel", 
-					$("#" + renderToString ).extPanel({
-						template : kendo.template($("#photo-panel-template").html()),
-						data : photoPlaceHolder,
-						commands:[
-							{ selector :   "#" + renderToString + " .panel-body:first .btn", 
-							  handler : function(e){
-								e.preventDefault();
-								var _ele = $(this);
-								if( _ele.hasClass( 'custom-delete') ){
-									//alert( $("#photo-list-view").data( "photoPlaceHolder").imageId );
-									/**
-									$.ajax({
-										dataType : "json",
-										type : 'POST',
-										url : '${request.contextPath}/community/delete-my-image.do?output=json',
-										data : { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId },
-										success : function( response ){
-											$("#" + renderToString ).remove();
-										},
-										error:common.api.handleKendoAjaxError
-									});
-									*/								
-								}
-							}}
-						],						
-					}).bind('open', function( e ) {
-						// start open event handler  	
-						common.api.streams.details({
-							imageId : $("#photo-list-view").data( "photoPlaceHolder").imageId ,
-							success : function( data ) {
-								if( data.photos.length > 0 ){
-									$("#photo-list-view").data( "photoPlaceHolder").shared = true ;
-									$("input[name='photo-public-shared']").first().click();
-								}else{
-									$("#photo-list-view").data( "photoPlaceHolder").shared = false ;
-									$("input[name='photo-public-shared']").last().click();
-								}
-							}
-						});	
-						if( ! $('#photo-prop-grid').data("kendoGrid") ){
-							$('#photo-prop-grid').kendoGrid({
-								dataSource : {	
-									transport: { 
-										read: { url:'/community/get-my-image-property.do?output=json', type:'post' },
-										create: { url:'/community/update-my-image-property.do?output=json', type:'post' },
-										update: { url:'/community/update-my-image-property.do?output=json', type:'post'  },
-										destroy: { url:'/community/delete-my-image-property.do?output=json', type:'post' },
-								 		parameterMap: function (options, operation){			
-									 		if (operation !== "read" && options.models) {
-									 			return { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId, items: kendo.stringify(options.models)};
-											} 
-											return { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId }
-										}
-									},
-									batch: true, 
-									schema: {
-										data: "targetImageProperty",
-										model: Property
-									},
-									error:common.api.handleKendoAjaxError
-								},
-								columns: [
-									{ title: "속성", field: "name" },
-									{ title: "값",   field: "value" },
-									{ command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
-								],
-								pageable: false,
-								resizable: true,
-								editable : true,
-								scrollable: true,
-								height: 180,
-								toolbar: [
-									{ name: "create", text: "추가" },
-									{ name: "save", text: "저장" },
-									{ name: "cancel", text: "취소" }
-								],				     
-								change: function(e) {
-								}
-							});		
-						}
-						// start open event handler 
-					})
-				);	
-
-				$("input[name='photo-public-shared']").on("change", function () {
-					var newValue = ( this.value == 1 ) ;
-					var oldValue =  $("#photo-list-view").data( "photoPlaceHolder").shared ;					
-					if( oldValue != newValue){
-						if(newValue){
-							common.api.streams.add({
-								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
-								success : function( data ) {
-									kendo.stringify(data);
-								}
-							});							
-						}else{
-							common.api.streams.remove({
-								imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId,
-								success : function( data ) {
-									kendo.stringify(data);
-								}
-							});					
-						}
-					}					
-				});												
-				$("#update-photo-file").kendoUpload({
-					showFileList: false,
-					multiple: false,
-					async: {
-						saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
-						autoUpload: true
-					},
-					localization:{ select : '사진 선택' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
-					upload: function (e) {				
-						e.data = { imageId: $("#photo-list-view").data( "photoPlaceHolder").imageId };
-					},
-					success: function (e) {				
-						if( e.response.targetImage ){
-							$('#photo-list-view').data('kendoListView').dataSource.read();								
-							var item = e.response.targetImage;
-							item.index = $("#photo-list-view").data( "photoPlaceHolder" ).index;			
-							item.page = $("#photo-list-view").data( "photoPlaceHolder" ).page;		
-							// need fix!!
-							$("#photo-list-view").data( "photoPlaceHolder",  item );
-							displayPhotoPanel();
-						}
-					} 
-				});																
-				var overlay  = $("#" + renderToString ).find('.overlay').extOverlay();					
-				// start define over nav events				
-				common.ui.handleActionEvents( $("#" + renderToString ), {
-					handlers : [
-						{selector: ".panel-body:last >figure", event : 'click', handler : function(e){
-							e.preventDefault();
-							overlay.toggleOverlay();
-						}},						
-						{selector: ".overlay  a.btn", event : 'click', handler : function(e){
-							e.preventDefault();
-							var _command = $(this);
-							if( _command.hasClass('custom-previous') ){
-								previousPhoto();
-							}else if ( _command.hasClass('custom-next') ) {
-								nextPhoto();
-							}
-						}},
-						{selector: ".overlay  input[name='lightning-box-photo-scale']", event : 'change', handler : function(e){
-							e.preventDefault();		
-							var newValue = this.value ;
-							var _img = $("#" + renderToString ).find(".panel-body:last figure.img-full-width img");
-							if( newValue == 0 ){
-								if( _img.hasClass('img-full-height') )
-									_img.removeClass('img-full-height'); 		
-								if( _img.hasClass('img-full-width') )
-									_img.removeClass('img-full-width'); 			
-								_img.addClass('img-fit-screen-width'); 										
-							}else if ( newValue == 1 ) {
-								if( _img.hasClass('img-full-height') )
-									_img.removeClass('img-full-height'); 			
-								if( _img.hasClass('img-fit-screen-width') )
-									_img.removeClass('img-fit-screen-width'); 															
-								_img.addClass('img-full-width');								
-							}else if ( newValue == 2 ){
-								if( _img.hasClass('img-full-width') )
-									_img.removeClass('img-full-width'); 			
-								if( _img.hasClass('img-fit-screen-width') )
-									_img.removeClass('img-fit-screen-width'); 																
-								_img.addClass('img-full-height');
-							}
-						}}						
-					]
-				});				
-			}else{
-				$("#" + renderToString ).data("extPanel").data(photoPlaceHolder);
-				kendo.bind($("#" + renderToString ).data("extPanel").body(), $("#" + renderToString ).data("extPanel").data());
-			}			
-			var panel = $("#" + renderToString ).data("extPanel");
-			panel.show();			
-		}	
-												
-		function previousPhoto (){
-			var listView =  $('#photo-list-view').data('kendoListView');
-			var list_view_pager = $("#photo-list-pager").data("kendoPager");			
-			var current_index = $("#photo-list-view").data("photoPlaceHolder").index;
-			var total_index = listView.dataSource.view().length -1 ;
-			var current_page = list_view_pager.page();		
-			var total_page = list_view_pager.totalPages();	
-			if( current_index == 0 && current_page > 1 ){
-				listView.one('dataBound', function(){
-					if( $("#photo_overlay.open").length  > 0 ){
-						var previous_index = this.dataSource.view().length -1;
-						var item = this.dataSource.view()[previous_index];
-						item.manupulate();
-						common.api.pager( item, previous_index, previous_index, current_page - 1, total_page );	
-						$("#photo-list-view").data( "photoPlaceHolder", item );
-						displayPhotoPanel( );
-					}
-				});
-				list_view_pager.page(current_page - 1);
-			}else{
-				var previous_index = current_index - 1;
-				var item = listView.dataSource.view()[previous_index];		
-				item.manupulate();
-				common.api.pager( item, previous_index, total_index, current_page, total_page );
-				$("#photo-list-view").data( "photoPlaceHolder", item );
-				displayPhotoPanel( );
+		<!-- ============================== -->		
+		function displayPhotoSource(photo){
+			if(  typeof photo === 'undefined' ){
+				var photoPlaceHolder = $("#photo-list-view").data( "photoPlaceHolder");
+				if( !photoPlaceHolder ){
+					photoPlaceHolder = new Image();
+				}
+				return photoPlaceHolder;
 			}
 		}
 		
-		function nextPhoto (){
-			var listView =  $('#photo-list-view').data('kendoListView');
-			var list_view_pager = $("#photo-list-pager").data("kendoPager");			
-			var current_index = $("#photo-list-view").data( "photoPlaceHolder").index;
-			var total_index = listView.dataSource.view().length -1 ;
-			var current_page = list_view_pager.page();		
-			var total_page = list_view_pager.totalPages();						
-			if( current_index == total_index && ( total_page - current_page ) > 0 )	{		
-				listView.one('dataBound', function(){
-					if( $("#photo_overlay.open").length  > 0 ){
-						var item = this.dataSource.view()[0];
-						item.manupulate();
-						common.api.pager( item, 0, this.dataSource.view().length -1, current_page + 1, total_page );	
-						$("#photo-list-view").data( "photoPlaceHolder", item );
-						displayPhotoPanel( );
-					}
-				});
-				list_view_pager.page(current_page + 1);			
+		function photoEditorSource (photo){			
+			var modal = $('#photo-editor-modal').data("kendoExtModalWindow");			
+			if(  typeof photo === 'undefined' ){
+				if( modal ){
+					return modal.data().image
+				}else{
+					return new Image();
+				}
 			}else{
-				var next_index = current_index + 1;				
-				var item = listView.dataSource.view()[next_index];
-				item.manupulate();
-				common.api.pager( item, next_index, total_index, current_page, total_page );
-				$("#photo-list-view").data( "photoPlaceHolder", item );
-				displayPhotoPanel( );
+				if( modal ){
+					photo.copy( modal.data().image);
+				}
 			}
+		}
+		
+		function displayPhotoPanel(){			
+			var appendTo = getNextPersonalizedColumn($("#personalized-area"));			
+			var photoPlaceHolder = displayPhotoSource();
+			common.ui.panel({
+				appendTo: appendTo,
+				title: photoPlaceHolder.name, 
+				actions:["Custom", "Minimize", "Refresh", "Close"],
+				template: kendo.template($("#photo-view-template").html()),   
+				data: photoPlaceHolder, 
+				close: function(e) {
+
+				},
+				custom: function(e){					
+					var modal = common.ui.modal({
+						renderTo : "photo-editor-modal",
+						data: new kendo.data.ObservableObject({
+							image : new Image(e.target.data())
+						}),
+						open: function(e){											
+							var grid = e.target.element.find(".modal-body .photo-props-grid");							
+							var shared = e.target.element.find(".modal-body input[name='photo-public-shared']");
+							var upload = e.target.element.find(".modal-body input[name='update-photo-file']");
+							
+							if( grid.length > 0 && !grid.data('kendoGrid') ){
+							
+								grid.kendoGrid({
+									dataSource : {		
+										transport: { 
+											read: { url:'/community/get-my-image-property.do?output=json', type:'post' },
+											create: { url:'/community/update-my-image-property.do?output=json', type:'post' },
+											update: { url:'/community/update-my-image-property.do?output=json', type:'post'  },
+											destroy: { url:'/community/delete-my-image-property.do?output=json', type:'post' },
+									 		parameterMap: function (options, operation){			
+										 		if (operation !== "read" && options.models) {
+										 			return { imageId: photoEditorSource().imageId, items: kendo.stringify(options.models)};
+												} 
+												return { imageId: photoEditorSource().imageId }
+											}
+										},						
+										batch: true, 
+										schema: {
+											data: "targetImageProperty",
+											model: Property
+										},
+										error:common.api.handleKendoAjaxError
+									},
+									columns: [
+										{ title: "속성", field: "name" },
+										{ title: "값",   field: "value" },
+										{ command:  { name: "destroy", text:"삭제" },  title: "&nbsp;", width: 100 }
+									],
+									pageable: false,
+									resizable: true,
+									editable : true,
+									scrollable: true,
+									autoBind: false,
+									height: 180,
+									toolbar: [
+										{ name: "create", text: "추가" },
+										{ name: "save", text: "저장" },
+										{ name: "cancel", text: "취소" }
+									],				     
+									change: function(e) {
+									}
+								});										
+								if(shared.length > 0){
+									shared.on("change", function () {
+										var newValue = ( this.value == 1 ) ;
+										var oldValue =  photoEditorSource().shared ;					
+										if( oldValue != newValue){
+											if(newValue){
+												common.api.streams.add({
+													imageId: photoEditorSource().imageId,
+													success : function( data ) {
+														photoEditorSource().shared = true ;
+													}
+												});							
+											}else{
+												common.api.streams.remove({
+													imageId: photoEditorSource().imageId,
+													success : function( data ) {
+														photoEditorSource().shared = false ;
+													}
+												});					
+											}
+										}					
+									});					
+								}
+								if( upload.length > 0 ){								
+									upload.kendoUpload({
+										showFileList: false,
+										multiple: false,
+										async: {
+											saveUrl:  '${request.contextPath}/community/update-my-image.do?output=json',
+											autoUpload: true
+										},
+										localization:{ select : '사진 선택' , dropFilesHere : '새로운 사진파일을 이곳에 끌어 놓으세요.' },	
+										upload: function (e) {				
+											e.data = { imageId: photoEditorSource().imageId };
+										},
+										success: function (e) {				
+											if( e.response.targetImage ){
+												$('#photo-list-view').data('kendoListView').dataSource.read();
+											}
+										} 
+									});														
+								}									
+							}									
+							grid.data('kendoGrid').dataSource.read();							
+							common.api.streams.details({
+								imageId : photoEditorSource().imageId ,
+								success : function( data ) {
+									if( data.photos.length > 0 ){
+										photoEditorSource().shared = true ;
+										shared.first().click();
+									}else{
+										photoEditorSource().shared = false ;
+										shared.last().click();
+									}
+								}
+							});												
+						},
+						template: kendo.template($("#photo-editor-modal-template").html())
+					});
+					photoEditorSource(  e.target.data() );
+					modal.open();
+				}
+			});			
 		}					
 		-->
 		</script>		
 		<style scoped="scoped">
 		
-		#announce-grid .k-grid-content {
-			min-height : 300px;
-		}
 		
-		#pdf-view {
-			height: 500px;
-			margin: 0 auto;
-			border: 0px solid #787878;
-		}
-		
-		#pdf-view p {
-		   padding: 1em;
-		}
-		
-		#pdf-view object {
-		   display: block;
-		   border: solid 1px #787878;
-		}		
-		
-		.attach
-		{
-			float: left;
-			position: relative;
-			width: 160px;
-			height: 160px;
-			padding: 0;
-			cursor: pointer;
-			overflow: hidden;
-		}
-		
-		.attach img
-		{
-			width: 160px;
-			height: 160px;
-		}
-				
-		.attach-description {
-			position: absolute;
-			top: 0;
-			width: 160px	;
-			height: 0;
-			overflow: hidden;
-			background-color: rgba(0,0,0,0.8)
-		}
-	
-		.attach h3
-		{
-			margin: 0;
-			padding: 10px 10px 0 10px;
-			line-height: 1.1em;
-			font-size : 12px;
-			font-weight: normal;
-			color: #ffffff;
-			word-wrap: break-word;
-		}
-
-		.attach p {
-			color: #ffffff;
-			font-weight: normal;
-			padding: 0 10px;
-			font-size: 12px;
-        }
-		
-		/** image grid  */		
-		#photo-list-view.k-listview ,#attachment-list-view.k-listview {
-			width: 100%;
-			padding: 0px;
-			border: 0px;		
-			min-height: 200px;
-		}
-
-		.img-wrapper {
-			float: left;
-			position: relative;
-			width: 32.99%;
-			height: 170px;
-			padding: 0;
-			cursor: pointer;
-			overflow: hidden;		
-		}
-		
-		.img-wrapper img{
-			width: 100%;
-			height: 100%;
-		}
-
-		
-		.image-broswer .img-wrapper.k-state-selected img {
-			border-bottom: 5px solid #FF2A68;
-			-webkit-transition: all .2s ease-in-out;
-			transition: all .2s ease-in-out;
-			position: relative;
-			margin-top: -5px;
-		}
-				
-		.img-description {
-			position: absolute;
-			top: 0;
-			width: 100%	;
-			height: 0;
-			overflow: hidden;
-			background-color: rgba(0,0,0,0.8)
-		}
-	
-		.img-wrapper h3
-		{
-			margin: 0;
-            padding: 10px 10px 0 10px;
-            line-height: 1.1em;
-            font-size : 12px;
-            font-weight: normal;
-            color: #ffffff;
-            word-wrap: break-word;
-		}
-
-		.img-wrapper p {
-			color: #ffffff;
-			font-weight: normal;
-			padding: 0 10px;
-			font-size: 12px;
-		}		
-		
-		
-		.k-listview:after, .attach dl:after {
-			content: ".";
-			display: block;
-			height: 0;
-			clear: both;
-			visibility: hidden;
-		}
-		
-		.k-pager-wrap {
-			border : 0px;
-			border-width: 0px;
-			background : transparent;
-		}
-
-				
-
-		table.k-editor {
-			height: 400px;
-		}
-		
-		.k-editor-inline {
-			margin: 0;
-			#padding: 21px 21px 11px;
-			border-width: 0;
-			box-shadow: none;
-			background: none;
-		}
-
-		.k-editor-inline.k-state-active {
-			border-width: 1px;
-			#padding: 20px 20px 10px;
-			#background: none;
-			#border-color : red;
-  			border-color: #66afe9;
-			#  outline: 0;
-			-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-			box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-		}
-
-		.inline-column-editor {
-			display: inline-block;
-			vertical-align: top;
-			max-width: 600px;
-			width: 100%;
-		}
-				
-		#personalized-controls {
-			position: absolute;
-			top: 50px;
-			left:0;
-			min-height: 300px;
-			padding: 10px;
-			width: 100%;
-			z-index: 1000;
-			overflow: hidden;
-			background-color: rgba(91,192,222,0.8)		
-		}		
-		
-		
-		#personalized-controls-section{
-			margin-top: 0px;
-			padding : 0px;
-		}
-		
-		#personalized-controls-section.cbp-spmenu-vertical {
-			width: 565px;
-		}
-		
-		#personalized-controls-section.cbp-spmenu-right {
-			right: -565px;
-			z-index: 2000;
-		}
-		
-		#personalized-controls-section.cbp-spmenu-right.cbp-spmenu-open {
-			right : 0px;
-			overflow-x:hidden;
-			overflow-y:auto;			
-		}
-
-		@media (max-width: 768px ) {
-			#personalized-controls-section.cbp-spmenu-vertical {
-				width: 100%;
-			}			
-			#personalized-controls-section.cbp-spmenu-right {
-				right: -100%;
-			}		
-		} 
-		
-		.cbp-spmenu {
-			background : #ffffff;
-		}
-		
-		.cbp-spmenu-vertical header {
-			1px solid #258ecd;
-			margin : 0px;
-			padding : 5px;
-			color : #000000;
-			background : #5bc0de; /* transparent;        	*/
-			height: 90px;        	
-		}
-		
-		.image-grid {
-			padding-top:2px;
-			padding-buttom:0px;
-			padding-right:2px;
-			padding-left:0px;
-		}
-		
-		.image-grid img {
-			display: block;
-			max-width: 100%;
-			height: 350px;
-		}
-				
-				
-		.cbp-hsmenu-wrapper .cbp-hsmenu {
-			width:100%;
-		}
-		
-		.cbp-hsmenu > li > a {
-			color: #fff;
-			font-size: 1em;
-			line-height: 3em;
-			display: inline-block;
-			position: relative;
-			z-index: 10000;
-			outline: none;
-			text-decoration: none;
-		}
-		
-		blockquote {
-			font-size: 11pt;
-		}
-		
-		.panel .comments-heading a {
-			color: #555;
-		}
-		
-		#photo_overlay nav.navbar {
-			margin-bottom: 0px; 
-		}		
 		</style>   	
 		</#compress>
 	</head>
 	<body id="doc" class="bg-gray">
-		<!-- START HEADER -->		
-		<#include "/html/common/common-homepage-menu.ftl" >	
-		<#include "/html/common/common-personalized-menu.ftl" >
-		<!-- END HEADER -->	
-		<!-- START MAIN CONTENT -->
-		<section class="container-fluid" style="min-height:600px;">		
-			<div id="personalized-area" class="row blank-top-10">				
+		<div class="page-loader"></div>
+		<div class="wrapper">
+			<!-- START HEADER -->		
+			<#include "/html/common/common-homepage-menu.ftl" >		
+			<!-- END HEADER -->	
+			<!-- START MAIN CONTENT -->
+			<div class="container-fluid">		
+				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
+							<ul class="nav navbar-nav pull-right">
+								<li><button type="button" class="btn btn-primary navbar-btn" data-toggle="button" data-action="show-notice-section" >공지 & 이벤트 </button></li>
+								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
+								<li class="hidden-xs">
+									<div class="btn-group navbar-btn" data-toggle="buttons">
+										<label class="btn btn-info">
+											<input type="radio" name="personalized-area-col-size" value="12"><i class="fa fa-square"></i>
+										</label>
+										<label class="btn btn-info active">
+									 		<input type="radio" name="personalized-area-col-size" value="6"> <i class="fa fa-th-large"></i>
+										</label>
+										<label class="btn btn-info">
+											<input type="radio" name="personalized-area-col-size" value="4"> <i class="fa fa-th"></i>
+										</label>
+									</div>
+								</li> 
+							</ul>
+				</div><!-- ./navbar-personalized -->		
+				<div id="personalized-area" class="row" style="min-height:10px;"></div>				
+			</div><!-- ./container-fluid -->	
+			
+			<div id="notice-section" class="one-page animated bounceInUp">
+				<div class="one-page-inner one-default">
+					<div class="container">	
+						<button type="button" class="close fa-3x" data-dismiss="section" data-target="#notice-section" data-switch-target="button[data-action='show-notice-section']" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h1>공지 & 이벤트 
+							<small>		
+								소스를 선택하세요.
+							</small>
+						</h1>		
+						<div class="row ">
+							<div class="col-sm-4">
+								<div class="one-page-btn">
+									<div id="notice-target-button" class="btn-group" data-toggle="buttons">
+										<label class="btn btn-info btn-sm active">
+											<input type="radio" name="notice-target" value="30" >사이트
+										</label>
+										<label class="btn btn-info btn-sm ">
+											<input type="radio" name="notice-target" value="1">회사
+										</label>
+									</div>
+									<button type="button"	class="btn-u btn-u-red pull-right" data-action="new-notice"><i class="fa fa-plus"></i> 공지 추가</button>
+								</div>		
+								<div  id="notice-grid"></div>
+							</div>
+							<div class="col-sm-8">
+								<div  id="notice-view"></div>
+								<div  id="notice-editor"></div>	
+							</div>
+						</div>				
+					</div>
+				</div>	
+			</div><!-- ./ong-page -->		
+			
+			
+							
+		<div class="container padding-sm" style="min-height:600px;">			
+			<div class="row blank-top-10">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
-					<div class="panel panel-default" id="notice-panel">
+					<div class="panel panel-default">
 						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp;공지 & 이벤트
-							<div class="k-window-actions panel-header-actions">										
+							<div class="k-window-actions panel-header-controls">										
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
 								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 							</div>
 							</div>
-							<div class="panel-body" style="padding:5px;" id="notice-panel-body">
-								<div class="page-header page-nounderline-header" style="height:100px;">
+							<div class="panel-body" style="padding:5px;">
+								<div class="page-header text-primary" style="height:100px;">
 									<h5>
 										<small><i class="fa fa-info"></i> 사이트(${webSite.displayName})/회사(${user.company.displayName}) 버튼을 클릭하면 해당하는 공지 & 이벤트 목록이 보여집니다.</small>
 										<p>
-											<div class="btn-group" data-toggle="buttons">
-												<label class="btn btn-info btn-sm active">
-													<input type="radio" name="announce-selected-target" value="30" >사이트
-												</label>
-												<label class="btn btn-info btn-sm ">
-													<input type="radio" name="announce-selected-target" value="1">회사
-												</label>
-											</div>											
+											<div  id="announce-grid"></div>		
 										</p>
 									</h5>
-									<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
+									<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_ADMIN_SITE") >
 										<div class="pull-right">
-											<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new-notice"><i class="fa fa-plus"></i> 공지 및 이벤트 추가</button>
+											<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new"><i class="fa fa-plus"></i> 공지 및 이벤트 추가</button>
 										</div>											
 									</#if>
 								</div>								
-								<div  id="announce-grid"></div>	
+								
 							</div>
 							<div  id="notice-viewer-panel" class="panel-body" style="display:none;">
 									<div class="row">
@@ -1629,14 +992,14 @@
 										<div class="col-lg-12">
 											<div class="panel panel-default" style="margin-bottom: 20px;">
 												<div class="panel-body">													
-													<div  id="notice-viewer"></div>																										
+															<div  id="notice-viewer"></div>																						
 												</div>
 											</div>												
 										</div>																		
 									</div>
 							</div>
 							<div  id="notice-editor-panel" class="panel-body" style="display:none;">
-								<div class="page-header page-nounderline-header" style="min-height: 45px;">
+								<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
 									<h5 >
 										<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
 									</h5>
@@ -1644,219 +1007,135 @@
 										<div class="btn-group">
 											<button type="button" class="btn btn-primary btn-sm" data-bind="click: doSave, enabled: updateRequired" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >저장</button>			
 											<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: openNoticeProps, enabled: editable, invisible:isNew">프로퍼티</button>
-											<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeEditor">&times;  닫기</button>
-										</div>
+										</div>						
+										<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeEditor">&times;  닫기</button>
 									</div>
-								</div>				
+								</div>								
 								<div  id="notice-editor"></div>	
 							</div>
-						</div>
-						
-					<!-- 뉴스 -->	
-					<div class="panel panel-default" id="news-panel">
-						<!--panel-heading-->
-						<div class="panel-heading"><i class="fa fa-bell-o"></i>&nbsp; 뉴스
-							<div class="k-window-actions panel-header-actions">			
-								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-refresh">Refresh</span></a>
-								<a role="button" href="#" class="k-window-action k-link"><span role="presentation" class="k-icon k-i-minimize">Minimize</span></a>
-								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-maximize">Maximize</span></a>										
-								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
-							</div>
-						</div>
-						<!--panel-body-->
-						<div class="panel-body" style="padding:5px;" id="news-panel-body">
-							<div class="page-header text-primary" style="height:100px;">
-								<h5>
-									<small><i class="fa fa-info"></i> 사이트(${webSite.displayName})/회사(${user.company.displayName}) 버튼을 클릭하면 해당하는 뉴스 목록이 보여집니다.</small>
-									<p>
-										<div class="btn-group" data-toggle="buttons">
-											<label class="btn btn-info btn-sm active">
-												<input type="radio" name="news-selected-target" value="30" >사이트
-											</label>
-											<label class="btn btn-info btn-sm ">
-												<input type="radio" name="news-selected-target" value="1">회사
-											</label>
-										</div>
-									</p>
-								</h5>
-								<#if request.isUserInRole("ROLE_ADMIN") || request.isUserInRole("ROLE_SITE_ADMIN") >
-									<div class="pull-right">
-										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="new-news"><i class="fa fa-plus"></i> 뉴스 추가</button>
-									</div>											
-								</#if>
-							</div>
-							<div  id="news-grid"></div>
-						</div>
-						<!--news-viewer-panel -->
-						<div  id="news-viewer-panel" class="panel-body"  style="display:none;">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
-										<h5 >
-											<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
-										</h5>
-										<div class="pull-right">
-											<div class="btn-group">
-												<button type="button" class="btn btn-primary btn-sm" data-bind="click: openNewsEditor, enabled: editable" >편집</button>													
-											</div>						
-											<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeViewer">&times;  닫기</button>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="panel panel-default" style="margin-bottom: 20px;">
-										<div class="panel-body">													
-											<div  id="news-viewer"></div>																										
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<!--news-editor-panel -->
-						<div  id="news-editor-panel" class="panel-body" style="display:none;">
-							<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
-								<h5 >
-									<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>
-								</h5>
-								<div class="pull-right">
-									<div class="btn-group">
-										<button type="button" class="btn btn-primary btn-sm" data-bind="click: doSave, enabled: updateRequired" data-loading-text='<i class="fa fa-spinner fa-spin"></i>' >저장</button>			
-										<button type="button" class="btn btn-primary btn-sm" data-toggle="button"  data-bind="click: openNoticeProps, enabled: editable, invisible:isNew">프로퍼티</button>
-									</div>						
-									<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click: closeNewsEditor">&times;  닫기</button>
-								</div>
-							</div>								
-							<div  id="news-editor"></div>	
-						</div>
-						
-						
-								
+						</div>		
 					</div>
 				</div>		
 			</div>				
 		</section>		
-		<div class="overlay hide"></div>		
+
 		<!-- start side menu -->
-		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right hide"  id="personalized-controls-section">			
-			<header>	
-				<span class="label label-primary label-lightweight"><i class="fa fa-briefcase fa-lg"></i> ${webSite.name}</span>
-				<p class="text-muted"><small>${webSite.description}</small></p>											
-				<button id="personalized-controls-menu-close" type="button" class="btn-close">Close</button>
-			</header>	
-			<div class="blank-top-5" ></div>
-			<ul class="nav nav-tabs" id="myTab" style="padding-left:5px;">
+		<section class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right"  id="personalized-controls-section">			
+			<button type="button" class="btn-close" data-dismiss='spmenu' >Close</button>
+			<!-- tab-v1 -->
+			<div class="tab-v1" >			
+				<h5 class="side-section-title white">${webSite.description} 클라우드 저장소</h5>	
+				<ul class="nav nav-tabs" id="myTab" style="padding-left:5px;">
 				<#if !action.user.anonymous >	
-				<li><a href="#website-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
-				<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
+					<li><a href="#website-photo-stream" tabindex="-1" data-toggle="tab">포토</a></li>
+					<li><a href="#my-files" tabindex="-1" data-toggle="tab">파일</a></li>							
 				</#if>						
-			</ul>	
-			<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">
-				<!-- start attachement tab-pane -->
-				<div class="tab-pane" id="my-files">
-					<section class="custom-upload hide">
-						<div class="panel panel-default">
-							<div class="panel-body">		
-							<button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>															
-							<#if !action.user.anonymous >			
+				</ul>	<!-- ./nav-tabs -->
+				<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">
+					<div class="tab-pane" id="my-files">
+						<section class="custom-upload hide">
+							<div class="panel panel-default">
+								<div class="panel-body">		
+								<button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>															
+								<#if !action.user.anonymous >			
 								<div class="page-header text-primary">
 									<h5><i class="fa fa-upload"></i>&nbsp;<strong>파일 업로드</strong>&nbsp;<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 파일을 직접 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</small></h5>
 								</div>								
 								<input name="uploadAttachment" id="attachment-files" type="file" />												
-							</#if>								
+								</#if>								
+								</div>
 							</div>
-						</div>
-					</section>											
-										<div class="panel panel-default">
-											<div class="panel-body">
-												<p class="text-muted"><small><i class="fa fa-info"></i> 파일을 선택하면 아래의 페이지 영역에 선택한 파일이 보여집니다.</small></p>
-												<#if !action.user.anonymous >		
-												<p class="pull-right">				
-													<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> 파일업로드</button>	
-												</p>	
-												</#if>																										
-												<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
-													<label class="btn btn-sm btn-warning active">
-														<input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
-													</label>
-													<label class="btn btn-sm btn-warning">
-														<input type="radio" name="attachment-list-view-filters"  value="image"><i class="fa fa-filter"></i> 이미지
-													</label>
-													<label class="btn btn-sm btn-warning">
-														<input type="radio" name="attachment-list-view-filters"  value="file"><i class="fa fa-filter"></i> 파일
-													</label>	
-												</div>												
-											</div>
-											<div class="panel-body scrollable color4" style="max-height:450px;">
-												<div id="attachment-list-view" class="color4"></div>
-											</div>	
-											<div class="panel-footer" style="padding:0px;">
-												<div id="pager" class="k-pager-wrap"></div>
-											</div>
-										</div>																				
-						</div><!-- end attachements  tab-pane -->		
-						<!-- start photos  tab-pane -->
-						<div class="tab-pane" id="website-photo-stream">									
-										<section class="custom-upload hide">
-											<div class="panel panel-default">
-												<div class="panel-body">
-													<button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>
-													<#if !action.user.anonymous >			
-													<div class="page-header text-primary">
-														<h5><i class="fa fa-upload"></i>&nbsp;<strong>사진 업로드</strong>&nbsp;<small>아래의 <strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)를 하세요.</small></h5>
-													</div>
-													<div id="my-photo-upload">	
-														<input name="uploadPhotos" id="photo-files" type="file" />					
-													</div>
-													<div class="blank-top-5" ></div>
-													<div class="page-header text-primary">
-														<h5><i class="fa fa-upload"></i>&nbsp;<strong>URL 사진 업로드</strong>&nbsp;<small>사진이 존재하는 URL 을 직접 입력하여 주세요.</small></h5>
-													</div>						
-													<form name="photo-url-upload-form" class="form-horizontal" role="form">
-														<div class="form-group">
-															<label class="col-sm-2 control-label"><small>출처</small></label>
-															<div class="col-sm-10">
-																<input type="url" class="form-control" placeholder="URL"  data-bind="value: data.sourceUrl">
-																<span class="help-block"><small>사진 이미지 출처 URL 을 입력하세요.</small></span>
-															</div>
-														</div>
-														<div class="form-group">
-															<label class="col-sm-2 control-label"><small>사진</small></label>
-															<div class="col-sm-10">
-																<input type="url" class="form-control" placeholder="URL"  data-bind="value: data.imageUrl">
-																<span class="help-block"><small>사진 이미지 경로가 있는 URL 을 입력하세요.</small></span>
-															</div>
-														</div>														
-														<div class="form-group">
-															<div class="col-sm-offset-2 col-sm-10">
-																<button type="submit" class="btn btn-primary btn-sm btn-control-group" data-bind="events: { click: upload }" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-cloud-upload"></i> &nbsp; URL 사진 업로드</button>
-															</div>
-														</div>
-													</form>
-													</#if>
-												</div>
-											</div>	
-										</section>	
-							<div class="panel panel-default">			
-								<div class="panel-body">
-									<p class="text-muted"><small><i class="fa fa-info"></i> 사진을 선택하면 아래의 페이지 영역에 선택한 사진이 보여집니다.</small></p>
-									<#if !action.user.anonymous >		
-									<p class="pull-right">				
-										<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 사진업로드</button>																		
-									</p>	
-									</#if>											
-								</div>
-								<div class="panel-body scrollable color4" style="max-height:450px;">
-									<div id="photo-list-view" class="color4" ></div>
-								</div>	
-								<div class="panel-footer" style="padding:0px;">
-									<div id="photo-list-pager" class="k-pager-wrap"></div>
-								</div>
+						</section><!-- ./custom-upload -->											
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<p class="text-muted"><small><i class="fa fa-info"></i> 파일을 선택하면 아래의 페이지 영역에 선택한 파일이 보여집니다.</small></p>
+								<#if !action.user.anonymous >		
+								<p class="pull-right">				
+									<button type="button" class="btn btn-info btn-lg btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> 파일업로드</button>	
+								</p>	
+								</#if>																										
+								<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
+									<label class="btn btn-sm btn-warning active">
+										<input type="radio" name="attachment-list-view-filters"  value="all"> 전체 (<span data-bind="text: totalAttachCount"></span>)
+									</label>
+									<label class="btn btn-sm btn-warning">
+										<input type="radio" name="attachment-list-view-filters"  value="image"><i class="fa fa-filter"></i> 이미지
+									</label>
+									<label class="btn btn-sm btn-warning">
+										<input type="radio" name="attachment-list-view-filters"  value="file"><i class="fa fa-filter"></i> 파일
+									</label>	
+								</div>												
+							</div>
+							<div class="panel-body" style="min-height:450px;">
+								<div id="attachment-list-view" class="file-listview"></div>
 							</div>	
-						</div><!-- end photos  tab-pane -->
-			</div><!-- end of tab content -->	
+							<div class="panel-footer no-padding">
+								<div id="pager" class="image-listview-pager k-pager-wrap"></div>
+							</div>
+						</div>																				
+					</div><!-- ./tab-pane -->	
+					<div class="tab-pane" id="website-photo-stream">									
+						<section class="custom-upload hide">
+												<div class="panel panel-default">
+													<div class="panel-body">
+														<button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>
+														<#if !action.user.anonymous >			
+														<div class="page-header text-primary">
+															<h5><i class="fa fa-upload"></i>&nbsp;<strong>사진 업로드</strong>&nbsp;<small>아래의 <strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)를 하세요.</small></h5>
+														</div>
+														<div id="my-photo-upload">	
+															<input name="uploadPhotos" id="photo-files" type="file" />					
+														</div>
+														<div class="blank-top-5" ></div>
+														<div class="page-header text-primary">
+															<h5><i class="fa fa-upload"></i>&nbsp;<strong>URL 사진 업로드</strong>&nbsp;<small>사진이 존재하는 URL 을 직접 입력하여 주세요.</small></h5>
+														</div>						
+														<form name="photo-url-upload-form" class="form-horizontal" role="form">
+															<div class="form-group">
+																<label class="col-sm-2 control-label"><small>출처</small></label>
+																<div class="col-sm-10">
+																	<input type="url" class="form-control" placeholder="URL"  data-bind="value: data.sourceUrl">
+																	<span class="help-block"><small>사진 이미지 출처 URL 을 입력하세요.</small></span>
+																</div>
+															</div>
+															<div class="form-group">
+																<label class="col-sm-2 control-label"><small>사진</small></label>
+																<div class="col-sm-10">
+																	<input type="url" class="form-control" placeholder="URL"  data-bind="value: data.imageUrl">
+																	<span class="help-block"><small>사진 이미지 경로가 있는 URL 을 입력하세요.</small></span>
+																</div>
+															</div>														
+															<div class="form-group">
+																<div class="col-sm-offset-2 col-sm-10">
+																	<button type="submit" class="btn btn-primary btn-sm btn-control-group" data-bind="events: { click: upload }" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-cloud-upload"></i> &nbsp; URL 사진 업로드</button>
+																</div>
+															</div>
+														</form>
+														</#if>
+													</div>
+												</div>	
+						</section><!-- ./custom-upload -->	
+						<div class="panel panel-default">			
+							<div class="panel-body">
+								<p class="text-muted"><small><i class="fa fa-info"></i> 사진을 선택하면 아래의 페이지 영역에 선택한 사진이 보여집니다.</small></p>
+								<#if !action.user.anonymous >		
+								<p class="pull-right">				
+									<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 사진업로드</button>																		
+								</p>	
+								</#if>											
+							</div>
+							<div class="panel-body color4" style="min-height:450px;">
+								<div id="photo-list-view" class="image-listview" ></div>
+							</div>	
+							<div class="panel-footer no-padding">
+								<div id="photo-list-pager" class="image-listview-pager k-pager-wrap"></div>
+							</div>
+						</div>	
+					</div><!-- ./tab-pane -->
+				</div><!-- ./tab-content-->	
+			</div><!-- ./tab-v1 -->		
 		</section>		
+		<div class="cbp-spmenu-overlay"></div>		
 		
 		<section id="image-broswer" class="image-broswer"></section>
 		<section id="editor-popup"></section>
@@ -1866,98 +1145,37 @@
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->			
-		<!-- START TEMPLATE -->				
-
-		<script type="text/x-kendo-tmpl" id="attachment-list-view-template">
-			<div class="img-wrapper">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/community/view-my-attachment.do?width=150&height=150&attachmentId=#:attachmentId#" alt="#:name# 이미지" />
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="img-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>	
-		<script type="text/x-kendo-tmpl" id="photo-list-view-template">
-			<div class="img-wrapper">			
-			#if (contentType.match("^image") ) {#
-				<img src="${request.contextPath}/community/download-my-image.do?width=150&height=150&imageId=#:imageId#" alt="#:name# 이미지" />
-			# } else { #			
-				<img src="http://placehold.it/146x146&amp;text=[file]"></a>
-			# } #	
-				<div class="img-description">
-					<h3>#:name#</h3>
-					<p>#:size# 바이트</p>
-				</div>
-			</div>
-		</script>						
-		<script type="text/x-kendo-tmpl" id="notice-editor-template">
+		<!-- START TEMPLATE -->					
+		<script type="text/x-kendo-tmpl" id="notice-edit-template">		
+		<div class="animated fadeInLeft" data-bind="visible:visible">
+			<button type="button" class="btn-u btn-u-blue btn-u-small" data-bind="events:{click:update}"  data-loading-text="<i class='fa fa-spinner fa-spin'></i>">저장</button> <button type="button" class="btn-u btn-u-default btn-u-small" data-bind="events{click:close}">취소</button>
+			<h5 data-bind="visible: isNew">
+				<small><span class="label label-danger">NEW</span> 모든 항목을 입력하여 주세요.</small>
+			</h5>		
 			<div class="panel panel-default">
-				<div class="panel-heading" data-bind="visible: isNew" style="padding:5px;">
-
-							<small><span class="label label-danger label-lightweight">NEW</span> 공지 및 이벤트 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
-							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-info btn-sm active" data-bind="enabled: isNew">
-								<input type="radio" name="announce-type" value="30" data-bind="checked: announce.objectType">사이트
-								</label>
-								<label class="btn btn-info btn-sm" data-bind="enabled: isNew">
-								<input type="radio" name="announce-type" value="1" data-bind="checked: announce.objectType">회사
-								</label>
-							</div>						
-			
-				</div>
-				<div class="panel-body"  style="padding:5px;">									
-					<div  class="form">
-						<div class="form-group">
-							<label class="control-label"><small>제목</small></label>							
-							<input type="text" placeholder="제목을 입력하세요." data-bind="value: announce.subject"  class="form-control" placeholder="제목" />
-						</div>
-						<div class="form-group">
-							<label class="control-label"><small>공지 기간</small></label>
-							<div class="col-sm-12" >
-								<input data-role="datetimepicker" data-bind="value:announce.startDate"> ~ <input data-role="datetimepicker" data-bind="value:announce.endDate">
-								<span class="help-block"><small>지정된 기간 동안만 이벤트 및 공지가 보여집니다. </small></span>
+					<div class="panel-heading padding-xxs-hr rounded-top" style="background-color: \\#fff; ">
+						<h4 class="panel-title"><input type="text" placeholder="제목을 입력하세요." data-bind="value: announce.subject"  class="form-control" placeholder="제목" /></h4>		
+					</div>			
+					<div class="panel-body"  style="padding:5px;">									
+						<div  class="form">
+							<div class="form-group">
+								<label class="control-label">공지 기간</label>
+								<div class="col-sm-12" >
+									<input data-role="datetimepicker" data-bind="value:announce.startDate"> ~ <input data-role="datetimepicker" data-bind="value:announce.endDate">
+									<span class="help-block">지정된 기간 동안만 이벤트 및 공지가 보여집니다.</span>
+								</div>
 							</div>
-						</div>
-						<label class="control-label"><small>본문</small></label>
-						<textarea id="notice-editor-body" data-bind='value:announce.body'></textarea>
-					</div>									
-				</div>	
-			</div>								
+							<label class="control-label">본문</label>
+							<textarea id="notice-editor-body" class="no-border" data-bind='value:announce.body'></textarea>
+						</div>						
+					</div>					
+			</div>					
+			<button type="button" class="btn-u btn-u-blue btn-u-small" data-bind="events:{click:update}" data-loading-text="<i class='fa fa-spinner fa-spin'></i>">저장</button> <button type="button" class="btn-u btn-u-default btn-u-small" data-bind="events{click:close}">취소</button>
+		</div>		
 		</script>
-		<script type="text/x-kendo-tmpl" id="news-editor-template">
-			<div class="panel panel-default">
-				<div class="panel-body"  style="padding:5px;">		
-					<div class="page-header text-primary" data-bind="visible: isNew">
-						<h5>
-							<small><span class="label label-danger">NEW</span> 뉴스 생성 대상을 지정하세요. (디폴트는 값은 사이트)</small>
-							<div class="btn-group" data-toggle="buttons">
-								<label class="btn btn-info btn-sm active"  data-bind="enabled: isNew">
-								<input type="radio" name="news-type" value="30" data-bind="checked: news.objectType">사이트
-								</label>
-								<label class="btn btn-info btn-sm" data-bind="enabled: isNew">
-								<input type="radio" name="news-type" value="1" data-bind="checked: news.objectType">회사
-								</label>
-							</div>						
-						</h5>
-					</div>								
-					<div  class="form">
-						<div class="form-group">
-							<label class="control-label"><small>제목</small></label>							
-							<input type="text" placeholder="제목을 입력하세요." data-bind="value: news.subject"  class="form-control" placeholder="제목" />
-						</div>
-						<label class="control-label"><small>본문</small></label>
-						<textarea id="news-editor-body" data-bind='value:news.content'></textarea>
-					</div>									
-				</div>	
-			</div>								
-		</script>
-		
 		<#include "/html/common/common-homepage-templates.ftl" >	
 		<#include "/html/common/common-editor-templates.ftl" >	
+		<#include "/html/common/common-personalized-templates.ftl" >	
 		<!-- END TEMPLATE -->
 	</body>    
 </html>

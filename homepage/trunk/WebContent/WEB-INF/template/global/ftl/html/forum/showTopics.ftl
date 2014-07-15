@@ -75,22 +75,15 @@
 					change: function(e) { 
 						var selectedCells = this.select();
 						var selectedCell = this.dataItem( selectedCells );	
-						//alert( kendo.stringify(selectedCell) );
-						//alert(selectedCell.topicId);
-						
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	    							
 							var newsPlaceHolder = $("#news-panel").data( "newsPlaceHolder" ); 
 							selectedCell.copy(newsPlaceHolder);					
 							$("#news-panel").data( "newsPlaceHolder", newsPlaceHolder ); // 로우 데이터 저장							 
 							updateViewCount(selectedCell.topicId);
-						}
-								
-											
+						}			
 					}			
-				});		
-				
-				
+				});
 				
 				<#if !action.user.anonymous >				
 				

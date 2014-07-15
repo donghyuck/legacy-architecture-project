@@ -1,34 +1,33 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title>기업소개</title>
-<#compress>		
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
+		<title>공지 & 이벤트</title>
+		<#compress>	
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-		/*	'css!${request.contextPath}/styles/jquery.extension/component.min.css',*/
-			'css!${request.contextPath}/styles/common.extension/animate.css',
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',						
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
-			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',			
+			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',			
-			'${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/jquery.extension/modernizr.custom.js',
-			'${request.contextPath}/js/jquery.extension/classie.js',
+			'${request.contextPath}/js/common/common.ui.js'
 			],
 			complete: function() {
 			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-				
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});	
+
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
@@ -40,10 +39,9 @@
 						e.token.copy(currentUser);
 					}				
 				});		
-				
+
 				// 1. Announces 				
-				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );			
-				var selectedAnnounceId = ${ParamUtils.getLongParameter(request, "announceId", 0 )} ;		
+				//$("#announce-grid").data( "announcePlaceHolder", new Announce () );					
 				$("#announce-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -69,7 +67,7 @@
 					}),	
 					columns: [
 						{field: "subject", title: "제목", sortable : false },
-						{hidden: isMobile(), field: "creationDate", title: "게시일", width: 120, format: "{0:yyyy.MM.dd}"}
+						{field: "creationDate", title: "게시일", width: "120px", format: "{0:yyyy.MM.dd}"}
 					],
 					sortable: true,
 					pageable: false,
@@ -81,15 +79,8 @@
 						var selectedCell = this.dataItem( selectedCells );	
 						$("#announce-grid").data( "announcePlaceHolder", selectedCell );
 						displayAnnouncement();
-					},
-					dataBound : function(e){
-						if(selectedAnnounceId>0){
-							this.select('tr[data-id="' + selectedAnnounceId + '"]');							
-						}
 					}			
 				});							
-				
-		
 				<#if !action.user.anonymous >				
 				
 				</#if>	
@@ -97,60 +88,49 @@
 			}
 		}]);	
 		
-		function isMobile(){
-			return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
-		}
-		
 		function displayAnnouncement () {			
-		
 			var announcePlaceHolder = $("#announce-grid").data( "announcePlaceHolder" );			
 			var template = kendo.template($('#announcement-detail-panel-template').html());			
+			
 			$("#announce-view-panel").html( template(announcePlaceHolder) );
 			kendo.bind($("#announce-view-panel"), announcePlaceHolder );					
-			
-			var listPanel = $('#announce-list-section');
-			var viewPanel = $('#announce-view-content-section');			
-			var fade = kendo.fx(listPanel).fade("out");			
-			fade.play();
-			
+			$("#announce-view-panel").removeClass('hide');				
+			var zoom = kendo.fx($("#announce-list-section")).zoom("out").endValue(0).startValue(1), slide = kendo.fx($("#announce-view-content-section")).slideIn("up") ;
+			zoom.play();			
 			setTimeout(function() {
-				listPanel.addClass('hidden');
-				fade.stop();
-				viewPanel.removeClass("hidden");
-				common.ui.animate(viewPanel, 'bounceIn');
-			}, 300);			
+				zoom.stop();
+				slide.play();
+			}, 100);					
 			
-			$("#announce-view-panel").find(".close").click(function (e) {				
-				common.ui.animate(viewPanel, 'animated bounceOut');				
+			$("#announce-view-panel").find(".close").click(function (e) {
+				slide.reverse();
 				setTimeout(function() {
-					viewPanel.removeClass();
-					viewPanel.addClass('hidden');					
-					fade.reverse();					
-					listPanel.removeClass('hidden');
-				}, 800);
+					slide.stop();
+					zoom.reverse();
+					$("#announce-view-panel").addClass('hide');
+				}, 100);
 			});			
 		}				
 		-->
 		</script>		
 		<style scoped="scoped">
-		blockquote p {
-			font-size: 15px;
-		}
 
 		#announce-list-section .k-grid-header .k-header {
 			text-align: center;
 		}
 
 		.content-main-section {
-			/** background: #F98262;	 */	
 			width: 100%;
 			height: 100%;
 			min-height:500px;
-		}							
-		</style>
-</#compress>		   	
+		}
+							
+		</style>   
+		</#compress>			
 	</head>
-	<body class="color0">
+	<body>
+		<div class="page-loader"></div>
+		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.events.pageId") />
@@ -160,14 +140,14 @@
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2 class="color-green">${ current_menu.title }</h2>
-					<h5><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h5>
+					<h2>${ current_menu.title }</h2>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>		
 		<!-- END HEADER -->			
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">			
+		<div class="container content no-padding-t">			
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
@@ -185,28 +165,26 @@
 					<!-- end side menu -->				
 				</div>
 				<div class="col-lg-9">		
-					<div class="content-main-section">
-						<div class="page-header padding-left-10">
-							<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
-						</div>	
-														
-						<section id="announce-list-section" style="">
-							<div id="announce-grid"></div>
-						</section>
-						<section id="announce-view-content-section" class="hidden">						
-							<div id="announce-view-panel"></div>
-						</section>						
-					</div>
+				<div class="content-main-section">
+					<div class="page-header text-primary">
+						<h5><small>게시 기간이 지난 내용들은 목록에서 보여지지 않습니다.</small></h5>
+					</div>	
+													
+					<section id="announce-list-section" style="position: absolute;	">
+						<div id="announce-grid"></div>
+					</section>
+					<section id="announce-view-content-section" style="display:none;">						
+						<div id="announce-view-panel"></div>
+					</section>						
+				</div>
 				</div>				
 			</div>
 		</div>									 			
 		<!-- END MAIN CONTENT -->	
 		<script id="announce-row-template" type="text/x-kendo-tmpl">
-			<tr data-uid="#: uid #" data-id="#:announceId#">
-				<td><span class="label label-danger label-lightweight">공지</span>&nbsp;#: subject #	 </td>
-				#if( !isMobile() ){ #	
+			<tr data-uid="#: uid #">
+				<td><span class="label label-info">공지</span>&nbsp;#: subject #	 </td>
 				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
-				# } #
 			</tr>
 		</script>
 						
@@ -217,6 +195,7 @@
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		</div><!-- /wrapper -->	
 		<!-- START TEMPLATE -->
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->

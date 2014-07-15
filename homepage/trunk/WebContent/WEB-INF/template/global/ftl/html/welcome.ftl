@@ -3,13 +3,13 @@
 <head>
 		<title>기업소개</title>
 		<#compress>				
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/fonts/nanumpenscript.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />		
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/common.extension/animate.css',
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',						
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
@@ -19,13 +19,13 @@
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
-			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-				      
 				// START SCRIPT	
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});	
+				
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
@@ -61,22 +61,12 @@
 			font-family: "나눔 손글씨", "Nanum Pen Script";
 			font-size: 18px;
 		}
-
-		.k-grid table tr.k-state-selected{
-			background: #428bca;
-			color: #ffffff; 
-		}
-		
-		#announce-view .popover {
-			position : relative;
-			max-width : 500px;
-		}						
-		
-		
 		</style>
 		</#compress>	   	
 	</head>
-	<body class="color0">
+	<body>
+		<div class="page-loader"></div>
+		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.welcome.pageId") />
@@ -93,7 +83,7 @@
 		</header>	
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">	
+		<div class="container content no-padding-t">	
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
@@ -116,16 +106,12 @@
 				</#if> 						
 				</div>				
 			</div>
-		</div>									 
-		<div class="container layout">						
-				<div class="row">
-				</div>		
-			</div>				
+		</div>									 	
 		<!-- END MAIN CONTENT -->	
-
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
+		</div><!-- /wrapper -->	
 		<!-- START TEMPLATE -->
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->

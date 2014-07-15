@@ -1,31 +1,32 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title>기업소개</title>
-		<#compress>				
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/pomegranate.css" />
+		<title>뉴스</title>
+		<#compress>		
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-			'${request.contextPath}/js/jquery.extension/jquery.timeago.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 			'${request.contextPath}/js/kendo/kendo.web.min.js',
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
 			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',		
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-			'${request.contextPath}/js/common/common.models.js',			
+			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
 			'${request.contextPath}/js/common/common.ui.js'],
 			complete: function() {
-			
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();		
-				      
+
 				// START SCRIPT	
+				common.ui.setup({
+					features:{
+						backstretch : false
+					}
+				});					
 				// ACCOUNTS LOAD	
 				var currentUser = new User();			
 				$("#account-navbar").extAccounts({
@@ -36,8 +37,8 @@
 					authenticate : function( e ){
 						e.token.copy(currentUser);
 					}				
-				});	
-						
+				});			
+
 				var forumId = ${action.webSite.getLongProperty( "pages.press.forumId", 1)};		
 				var selectedtopicId = ${ParamUtils.getLongParameter(request, "topicId", 0 )} ;		
 				$("#topic-grid").kendoGrid({
@@ -94,13 +95,15 @@
 							}
 						}	
 					}			
-				});									
+				});			
+								
 				<#if !action.user.anonymous >				
 				
 				</#if>	
 				// END SCRIPT            
 			}
 		}]);	
+
 
 		function isMobile(){
 			return kendo.support.mobileOS.device === 'iphone'  ? true : false ;
@@ -154,7 +157,7 @@
 			renderTo.data("model").set("authorPhotoUrl", "${request.contextPath}/download/profile/" + topicPlaceHolder.user.username + "?width=150&height=150" );
 			renderTo.data("model").scrolldown();
 		}
-						
+				
 		-->
 		</script>		
 		<style scoped="scoped">
@@ -176,12 +179,13 @@
 		
 		p, li, li a, td a {
 			color: #555;
-		}
-						
-		</style>   	
-</#compress>
+		}								
+		</style>   
+		</#compress>			
 	</head>
-	<body class="color0">
+	<body>
+		<div class="page-loader"></div>
+		<div class="wrapper">	
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<#assign hasWebSitePage = action.hasWebSitePage("pages.press.pageId") />
@@ -191,14 +195,14 @@
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2 class="color-green">${ current_menu.title }</h2>
-					<h5><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h5>
+					<h2>${ current_menu.title }</h2>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
 				</div>
 			</div>
 		</header>			
 		<!-- END HEADER -->					
 		<!-- START MAIN CONTENT -->	
-		<div class="container layout">	
+		<div class="container content no-padding-t">	
 			<div class="row">
 				<div class="col-lg-3 visible-lg">
 					<div class="headline"><h4> ${current_menu.parent.title} </h4></div>  
@@ -225,21 +229,17 @@
 								<div id="topic-viewer"></div>
 							</div>
 						</div>									
-						<div id="topic-grid"></div>		
-						<div class="margin-bottom-20"></div>
-
+						<div id="topic-grid"></div>	
 					</div>				
-				</div>				
-			</div>					
-		</div>	
-				
+				</div>			
+			</div>
+		</div>									 		
 		<!-- END MAIN CONTENT -->	
-
  		<!-- START FOOTER -->
 		<#include "/html/common/common-homepage-footer.ftl" >		
 		<!-- END FOOTER -->	
-		
-		<!-- START TEMPLATE -->		
+		</div><!-- /wrapper -->	
+		<!-- START TEMPLATE -->
 		<script id="topic-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:topicId#">
 				<td><a href="\\#">#: subject #</a> <!--<span class="label label-primary label-lightweight rounded">#= $.timeago(creationDate) #</span>--></td>
@@ -274,9 +274,8 @@
 			<div class="pull-right">
 				<button  type="button" class="btn btn-info btn-sm custom-btn-list"><i class="fa fa-angle-double-down"></i> 목록</button>		
 			</div>			
-		</script>
+		</script>		
 		<#include "/html/common/common-homepage-templates.ftl" >		
 		<!-- END TEMPLATE -->
-		
 	</body>    
 </html>
