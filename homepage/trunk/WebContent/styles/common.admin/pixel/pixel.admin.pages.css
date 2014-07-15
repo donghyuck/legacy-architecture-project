@@ -37,14 +37,6 @@
 	border-radius: 999999px;
 }
 
-.page-details .left-col.left-col-nav{
-	margin: -19px 0px -18px -18px;
-	border-top: 0px;
-	border-bottom: 0px;
-	border-left: 0px;
-	border-right: 1px solid #b4b4b4;
-	padding: 15px;
-}
 
 .page-details .left-col>.panel .panel-heading {
 	padding-left: 10px;

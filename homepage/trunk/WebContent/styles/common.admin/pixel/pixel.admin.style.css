@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+
 /** Page Loader 
 ------------------------------------*/
 .page-loader {
@@ -18,25 +20,12 @@ body,html {
 	padding: 0;
 	margin: 0;
 	font-family: "나눔 고딕", "Nanum Gothic";
-	font-size: 15px;
 }
 
 /** kendoui ext
 -------------------------------------------------*/
 form.navbar-form .k-widget.k-dropdown {
 	margin-top: 8px;	
-}
-
-.panel .k-dropzone, .tab-pane .k-dropzone {
-	border: 2px dashed #d4d4d4;
-	background-color: #f7f7f7;
-	position: relative;
-	text-align: center;
-	padding: 34px 34px 40px 10px;
-	-webkit-border-radius: 18px;
-	-moz-border-radius: 18px;
-	border-radius: 18px;
-	margin: 20px 0 0 0;
 }
 
 .paddingless {
@@ -701,7 +690,7 @@ a,a:hover {
 
 #main-menu .mmc-dropdown-open-ul a,#main-menu .navigation a {
 	display: block;
-	font-size: 15px;
+	font-size: 13px;
 	line-height: 20px;
 	padding: 11px 14px;
 	text-decoration: none
@@ -720,7 +709,7 @@ a,a:hover {
 	height: 20px;
 	width: 20px;
 	text-align: center;
-	font-size: 15px
+	font-size: 14px
 }
 
 #main-menu .mmc-dropdown-open-ul .badge,#main-menu .mmc-dropdown-open-ul .label,#main-menu .navigation .badge,#main-menu .navigation .label
@@ -2657,13 +2646,6 @@ h1 .label,h2 .label,h3 .label,h4 .label,h5 .label,h6 .label {
 	font-weight: 600;
 	margin: 0;
 	padding: 0
-}
-
-
-.table-header .table-heading-controls
-{
-	margin-top: -28px;
-	float: right !important;
 }
 
 .table-footer {
