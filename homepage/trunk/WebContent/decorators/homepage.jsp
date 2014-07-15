@@ -37,7 +37,6 @@
 
 	/** Header css */
 	.header {
-		border-bottom: 0px;
 	}	
 	
 	/** cloud header */	
