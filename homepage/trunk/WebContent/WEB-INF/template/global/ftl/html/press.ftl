@@ -83,7 +83,7 @@
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	  
 							setTopicViewerSource(selectedCell); 
-							displayTopic();
+						//	displayTopic();
 						}
 					},
 					dataBound: function(e) {		
@@ -179,7 +179,8 @@
 		
 		p, li, li a, td a {
 			color: #555;
-		}								
+		}		
+								
 		</style>   
 		</#compress>			
 	</head>
