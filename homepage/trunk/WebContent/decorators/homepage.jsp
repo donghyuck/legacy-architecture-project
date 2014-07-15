@@ -40,6 +40,67 @@
 	}	
 	
 	/** cloud header */	
+	header.inkium {
+		background: #fff url('http://img.inkium.com/homepage/sub/sub_consulting.jpg') bottom right repeat-x;
+		height : 110px;
+		margin-bottom: 20px;
+	}
+	
+	header.inkium .header-sub-logo {
+		background: transparent url('http://img.inkium.com/homepage/sub/sub_consulting_01.png') top  20px left;
+		background-repeat: no-repeat;
+	}	
+		
+	header.inkium .header-sub-logo  img {
+		position: relative;
+		left: 180px;
+	}
+		
+	header.inkium .header-sub-title {
+		background: transparent url('http://img.inkium.com/homepage/sub/sub_O.png') top 8px right;
+		background-repeat: no-repeat;
+		height: 130px;
+	}	
+	
+	header.inkium .header-sub-title h2{
+		font-size: 30px;
+		text-align: right;
+		font-weight: bold;
+		margin: 0px;
+		line-height: 1;
+		padding: 32px 100px 0 12px;
+	}
+	
+	header.inkium .header-sub-title h2 small{
+		font-size: 50%;		
+	}
+		
+	header.inkium .breadcrumb {
+		float: right;
+		top: 130px;
+		right: 0;
+		position: absolute;
+	}
+	
+	
+	.page-content {
+		margin-top: 66px;
+		font-size : 15px;
+		color : #333333;
+	}
+	
+	.page-content .page-content-title h2 {
+		font-size : 30px;
+		font-weight: bold;
+		color : #333333;
+	}
+	
+	.page-content .page-content-title h3 {
+		font-size : 22px;
+		font-weight: bold;
+		color : #333333;
+	}
+		
 	header.cloud {
 		background: #fff url('/download/image/e6dL6VHTyT03R9e3m9QwK9o2vHTrFbI7bei7RT6mB9PYFQzK2fkhUE6czUSe8TLd') bottom right repeat-x;
 		height : 110px;
