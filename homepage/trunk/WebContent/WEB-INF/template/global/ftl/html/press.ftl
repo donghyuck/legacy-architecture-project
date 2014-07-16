@@ -83,8 +83,8 @@
 						var selectedCell = this.dataItem( selectedCells );	
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	  
-						//	setTopicViewerSource(selectedCell); 
-						//	displayTopic();
+							setTopicViewerSource(selectedCell); 
+							displayTopic();
 						}
 					},
 					dataBound: function(e) {		
