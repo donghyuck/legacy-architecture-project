@@ -41,6 +41,7 @@
 
 				var forumId = ${action.webSite.getLongProperty( "pages.press.forumId", 1)};		
 				var selectedtopicId = ${ParamUtils.getLongParameter(request, "topicId", 0 )} ;		
+								
 				$("#topic-grid").kendoGrid({
 					dataSource: new kendo.data.DataSource({
 						transport: {
@@ -74,7 +75,7 @@
 					],
 					sortable: true,
 					pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },
-					rowTemplate: kendo.template($("#topic-row-template").html()),
+					/*rowTemplate: kendo.template($("#topic-row-template").html()),*/
 					selectable: "single",
 					height: 430,
 					change: function(e) { 
@@ -82,12 +83,12 @@
 						var selectedCell = this.dataItem( selectedCells );	
 						if( selectedCells.length > 0){
 							var selectedCell = this.dataItem( selectedCells );	  
-							setTopicViewerSource(selectedCell); 
+						//	setTopicViewerSource(selectedCell); 
 						//	displayTopic();
 						}
 					},
 					dataBound: function(e) {		
-						if( $('#topic-viewer').data("model") != null ) {
+						if( $('#topic-viewer').data("model") ) {
 							$('#topic-viewer').data("model").hide();
 						} else {
 							if( selectedtopicId > 0 ){
