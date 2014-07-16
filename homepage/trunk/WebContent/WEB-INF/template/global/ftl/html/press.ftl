@@ -244,7 +244,7 @@
 		<!-- START TEMPLATE -->
 		<script id="topic-row-template" type="text/x-kendo-tmpl">
 			<tr data-uid="#: uid #" data-id="#:topicId#">
-				<td><a href="\\#">#: subject #</a> <!--<span class="label label-primary label-lightweight rounded">#= $.timeago(creationDate) #</span>--></td>
+				<td><a href="\\#">#: subject #</a></td>
 				#if(!isMobile()){#
 				<td class="text-center">#: viewCnt #</td>
 				<td class="text-center">#: kendo.toString(creationDate, "yyyy.MM.dd") #</td>
