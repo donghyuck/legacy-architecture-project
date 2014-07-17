@@ -83,24 +83,19 @@
 		if(typeof(jQuery.magnificPopup) == "undefined") {
 			return false;
 		}
-		jQuery.extend(true, jQuery.magnificPopup.defaults, {
-			tClose: 		'닫기',
-			tLoading: 		'불러오는 중입니다...',
-			gallery: {
-				tPrev: 		'이전',
-				tNext: 		'다음t',
-				tCounter: 	'%curr% / %total%'
-			},
-			image: 	{ 
-				tError: 	'Image not loaded!' 
-			},
-			ajax: 	{ 
-				tError: 	'Content not loaded!' 
-			}
-		});		
 		$(document).on("click","[data-ride='lightbox']", function(e){					
-			var $this = $(this), 
-				config = {}, 
+			var $this = $(this);			
+				defaults = {
+					items:[] 	
+					type:'image',	
+					gallery: {
+						enabled: false,
+						navigateByImgClick: true
+					}	
+				},
+				config = {};
+				
+				/*
 				opts 	= $this.attr('data-plugin-options'),
 				defaults 	= {
 					type: 				'image',
@@ -124,12 +119,13 @@
 						tCounter: 			'<span class="mfp-counter">%curr% / %total%</span>'
 					},
 				};
-			
+				*/
+				
 			if($this.data("plugin-options")) {
 				config = jQuery.extend({}, defaults, opts, $this.data("plugin-options"));	
+			}else{
+				config = defaults;
 			}
-			
-			var opts = $this.attr("data-plugin-options") || {}; 
 			if( $this.prop("tagName") == "img" ){				
 				config.items = {
 					src : $this.attr("src")
@@ -138,11 +134,12 @@
 				if( $this.children("img").length > 0  ){
 					var data = [];
 					$.each( $this.children("img"), function( index,  item){
-						data.push({
+						config.items.push({
 							src : $(item).attr("src")
 						});
 					});					
-					config.items = data ;					
+					
+					//config.items = data ;					
 					/*
 					$.magnificPopup.open({
 						  items: data,
