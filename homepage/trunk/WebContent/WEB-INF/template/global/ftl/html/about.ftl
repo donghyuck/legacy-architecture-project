@@ -192,8 +192,7 @@
 							</div><!-- end of tabs -->
 						</div><!-- ./col-sm-12 -->		
 					</div><!-- ./row -->								
-							</#if> 					
-							<a href="${action.webSite.getProperty("logo.downloadUrl", null )}" class="btn btn-info btn-sm"><i class="fa fa-download"></i> 다운로드</a>	
+							</#if> 
 				</div><!-- ./col-lg-9 -->				
 			</div><!-- ./row -->
 		</div><!-- ./container -->										 
