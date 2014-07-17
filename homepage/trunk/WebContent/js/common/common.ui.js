@@ -101,7 +101,7 @@
 		$(document).on("click","[data-ride='lightbox']", function(e){					
 			var $this = $(this), 
 				config = {}, 
-				opts 	= _t.attr('data-plugin-options'),
+				opts 	= $this.attr('data-plugin-options'),
 				defaults 	= {
 					type: 				'image',
 					fixedContentPos: 	false,
