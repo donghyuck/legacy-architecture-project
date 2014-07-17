@@ -80,7 +80,7 @@
 	}
 	
 	common.ui.lightbox = function(){
-		if(typeof(jQuery.magnificPopup) == "undefined") {
+		if(typeof($.magnificPopup) == "undefined") {
 			return false;
 		}
 		$(document).on("click","[data-ride='lightbox']", function(e){					
