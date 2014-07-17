@@ -102,9 +102,8 @@
 		color : #333333;
 	}
 	
-	.page-content .page-content-title:before {
-		background: transparent url( 'http://img.inkium.com/homepage/sub/line_black.gif')  left;
-		background-repeat: no-repeat;
+	.page-content .page-content-title> h3:before {
+		content: url('http://img.inkium.com/homepage/sub/line_black.gif');
 	}
 		
 	header.cloud {
