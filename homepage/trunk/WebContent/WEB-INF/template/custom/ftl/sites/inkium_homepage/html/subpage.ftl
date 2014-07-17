@@ -57,6 +57,8 @@
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
 		<!-- END HEADER -->
+		<#if action.isSetNavigator()  >
+		<#assign current_menu = action.getNavigator() />		
 		<header class="inkium">
 			<div class="container">
 				<div class="col-lg-3 visible-lg">	
@@ -68,18 +70,16 @@
 					<div class="header-sub-title">
 						<h2 class="color-green">${action.targetPage.title}<br/>
 						<small> ${action.targetPage.summary!}</small><h2>
-					</div>
-					<#if action.isSetNavigator()  >
-					<#assign current_menu = action.getNavigator() />					
-							<ul class="breadcrumb">
-				                <li><a href="main.do"><i class="fa fa-home fa-lg"></i></a></li>
-				                <li><a href="">${current_menu.parent.title}</a></li>
-				                <li class="active">${current_menu.title}</li>
-				            </ul>
-					</#if>
+					</div>								
+					<ul class="breadcrumb">
+				        <li><a href="main.do"><i class="fa fa-home fa-lg"></i></a></li>
+				        <li><a href="">${current_menu.parent.title}</a></li>
+				    	<li class="active">${current_menu.title}</li>
+				    </ul>					
 				</div>
 			</div>
-		</header>					
+		</header>		
+		</#if>			
 		<!-- START MAIN CONTENT -->	
 		<div class="container content no-padding-t">
 			<#if action.isSetNavigator()  >
