@@ -449,6 +449,13 @@ h3.heading-xs {
 	border-right: #ddd solid 1px;
 }
 
+.tab-v4  li a:hover,
+.tab-v4  li.active a {
+  color: #fff;
+  background: #72c02c;
+  border: solid 1px #68af28;
+}
+
 .tab-v4 .nav-pills li a {
   color: #777;
   font-size: 17px;
@@ -473,8 +480,7 @@ h3.heading-xs {
 }
 
 .tab-v4 .tab-content {
-  padding: 15px;
-  
+  padding: 15px;  
   border: none;
 }
 
