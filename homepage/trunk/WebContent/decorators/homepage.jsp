@@ -96,7 +96,7 @@
 	}
 	
 	.page-content .page-content-title h3 {
-		padding-top: 20px;
+		padding-top: 15px;
 		font-size : 22px;
 		font-weight: bold;
 		color : #333333;
