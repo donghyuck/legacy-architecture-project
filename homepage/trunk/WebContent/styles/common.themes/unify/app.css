@@ -465,7 +465,7 @@ h3.heading-xs {
 .tab-v4 .tab-content {
   padding: 15px;
   background: #fafafa;
-  border: solid 1px #eee;
+  border: none;
 }
 
 /*Accordions
