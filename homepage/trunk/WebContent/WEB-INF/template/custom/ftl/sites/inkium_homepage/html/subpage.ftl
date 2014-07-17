@@ -24,7 +24,8 @@
 
 				common.ui.setup({
 					features:{
-						backstretch : false
+						backstretch : false,
+						lightbox: true
 					}
 				});	
 				      
