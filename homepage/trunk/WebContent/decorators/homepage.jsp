@@ -45,7 +45,7 @@
 		height : 110px;
 		margin-bottom: 20px;
 	}
-	
+		
 	header.inkium .header-sub-logo {
 		background: transparent url('http://img.inkium.com/homepage/sub/sub_company_01.png') top  20px left;
 		background-repeat: no-repeat;
@@ -55,22 +55,44 @@
 		position: relative;
 		left: 180px;
 	}
+
+	header.inkium.inkium-contents {
+		background: #fff url('http://img.inkium.com/homepage/sub/sub_contents.jpg') bottom right repeat-x;
+	} 
+
+	header.inkium.inkium-edu {
+		background: #fff url('http://img.inkium.com/homepage/sub/sub_edu.jpg') bottom right repeat-x;
+	} 
+	
+	header.inkium.inkium-solution  {
+		background: #fff url('http://img.inkium.com/homepage/sub/sub_solution.jpg') bottom right repeat-x;
+	} 	
+	
+	header.inkium.inkium-consulting{
+		background: #fff url('http://img.inkium.com/homepage/sub/sub_consulting.jpg') bottom right repeat-x;
+	} 	
+	
 	
 	header.inkium.inkium-contents .header-sub-logo {
 		background: transparent url('http://img.inkium.com/homepage/sub/sub_contents_01.png') top  20px left;
+		background-repeat: no-repeat;
 	} 
 
 	header.inkium.inkium-edu .header-sub-logo {
 		background: transparent url('http://img.inkium.com/homepage/sub/sub_edu_01.png') top  20px left;
+		background-repeat: no-repeat;
 	} 
 	
 	header.inkium.inkium-solution .header-sub-logo {
 		background: transparent url('http://img.inkium.com/homepage/sub/sub_solution_01.png') top  20px left;
+		background-repeat: no-repeat;
 	} 	
 	
 	header.inkium.inkium-consulting .header-sub-logo {
 		background: transparent url('http://img.inkium.com/homepage/sub/sub_consulting_01.png') top  20px left;
-	} 		
+		background-repeat: no-repeat;
+	} 	
+		
 			
 	header.inkium .header-sub-title {
 		background: transparent url('http://img.inkium.com/homepage/sub/sub_O.png') top 8px right;
