@@ -77,6 +77,11 @@
 	}
 	
 	common.ui.backstretch = function (){		
+		
+		if(!defined($.backstretch)) {
+			return false;
+		}
+		
 		var dataSource = common.api.streams.dataSource;
 		var template = kendo.template("/community/view-streams-photo.do?key=#= externalId#");
 		dataSource.fetch(function(){
@@ -93,7 +98,7 @@
 	}
 	
 	common.ui.lightbox = function(){
-		if(typeof($.magnificPopup) == "undefined") {
+		if(!defined($.magnificPopup)) {
 			return false;
 		}
 		$(document).on("click","[data-ride='lightbox']", function(e){					
