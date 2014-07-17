@@ -80,8 +80,7 @@
 		
 		if(!defined($.backstretch)) {
 			return false;
-		}
-		
+		}		
 		var dataSource = common.api.streams.dataSource;
 		var template = kendo.template("/community/view-streams-photo.do?key=#= externalId#");
 		dataSource.fetch(function(){
