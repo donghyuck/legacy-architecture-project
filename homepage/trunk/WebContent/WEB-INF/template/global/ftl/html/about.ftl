@@ -153,13 +153,14 @@
 					</div>	
 					<!-- end side menu -->					
 				</div><!-- ./col-lg-3 -->
-				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-sm-12">				
-
-							<#if hasWebSitePage >							
+				<div class="col-lg-9">					
+							<#if hasWebSitePage >				
+							<div class="page-content" style="min-height:300px;">				
 							${ processedBodyText }
+							</div>
 							<#else>
+					<div class="row">
+						<div class="col-sm-12">							
 							<!-- start of tabs -->					
 							<div class="tab-v3">									
 							<ul class="nav nav-tabs" id="aboutTab">
@@ -189,9 +190,9 @@
 								</div>
 							</div>
 							</div><!-- end of tabs -->
-							</#if> 
 						</div><!-- ./col-sm-12 -->		
-					</div><!-- ./row -->					
+					</div><!-- ./row -->								
+							</#if> 					
 				</div><!-- ./col-lg-9 -->				
 			</div><!-- ./row -->
 		</div><!-- ./container -->										 
