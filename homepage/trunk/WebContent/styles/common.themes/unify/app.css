@@ -449,11 +449,11 @@ h3.heading-xs {
 	border-right: #ddd solid 1px;
 }
 
-.tab-v4  li a:hover,
-.tab-v4  li.active a {
-  color: #fff;
-  background: #72c02c;
-  border: solid 1px #68af28;
+.tab-v4  .nav-tabs>li a:hover,
+.tab-v4  .nav-tabs>li.active a {
+  color: #333333;
+  background: #FFF;
+  border: solid 1px #333333;
 }
 
 .tab-v4 .nav-pills li a {
