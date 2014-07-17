@@ -103,7 +103,7 @@
 	}
 	
 	.page-content .page-content-title:before {
-		background: transparent url( 'http://img.inkium.com/homepage/sub/line_black.gif'' ) top 0px left;
+		background-image: url( 'http://img.inkium.com/homepage/sub/line_black.gif'' )  left;
 		background-repeat: no-repeat;
 	}
 		
