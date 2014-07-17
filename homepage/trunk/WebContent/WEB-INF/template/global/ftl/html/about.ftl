@@ -161,7 +161,7 @@
 							${ processedBodyText }
 							</#if> 
 							<!-- start of tabs -->					
-							<div class="tab-v4">									
+							<div class="tab-v3">									
 							<ul class="nav nav-tabs" id="aboutTab">
 								<li><a href="#company-history" data-toggle="tab">회사연혁</a></li>
 								<li><a href="#company-logo" data-toggle="tab">로고</a></li>					
