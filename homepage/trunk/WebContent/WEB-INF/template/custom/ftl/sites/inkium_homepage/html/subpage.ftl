@@ -59,7 +59,7 @@
 		<!-- END HEADER -->
 		<#if action.isSetNavigator()  >
 		<#assign current_menu = action.getNavigator() />		
-		<header class="inkium">
+		<header class="inkium <#if current_menu.parent.css??>${current_menu.parent.css}</#if>">
 			<div class="container">
 				<div class="col-lg-3 visible-lg">	
 					<div class="header-sub-logo">
