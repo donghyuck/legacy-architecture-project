@@ -86,7 +86,7 @@
 		$(document).on("click","[data-ride='lightbox']", function(e){					
 			var $this = $(this);			
 				defaults = {
-					items:[] 	
+					items:[] ,	
 					type:'image',	
 					gallery: {
 						enabled: false,
