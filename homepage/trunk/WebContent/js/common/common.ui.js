@@ -148,6 +148,8 @@
 						*/			
 				}
 			}
+			
+			alert( kendo.stringify(config));
 			$.magnificPopup.open(config);
 		} );	
 	}
