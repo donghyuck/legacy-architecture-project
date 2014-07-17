@@ -62,14 +62,26 @@
 		<#assign menuName = action.targetPage.getProperty("page.menu.name", "USER_MENU") />
 		<#assign menuItemName = action.targetPage.getProperty("navigator.selected.name", "MENU_1_6") />
 		<#assign current_menu = action.getWebSiteMenu(menuName, menuItemName) />
-		<header class="cloud">
+		<header class="inkium <#if current_menu.parent.css??>${current_menu.parent.css}</#if>">
 			<div class="container">
-				<div class="col-lg-12">	
-					<h2>${ current_menu.title }</h2>
-					<h4><i class="fa fa-quote-left"></i>&nbsp;${ current_menu.description ? replace ("{displayName}" , action.webSite.company.displayName ) }&nbsp;<i class="fa fa-quote-right"></i></h4>
+				<div class="col-lg-3 visible-lg">	
+					<div class="header-sub-logo">
+					<img src="${current_menu.parent.image!"http://img.inkium.com/homepage/sub/sub_company_02.png"}"/>					
+					</div>
+				</div>
+				<div class="col-lg-9">				
+					<div class="header-sub-title">
+						<h2 class="color-green">${action.targetPage.title}<br/>
+						<small> ${action.targetPage.summary!}</small><h2>
+					</div>								
+					<ul class="breadcrumb">
+				        <li><a href="main.do"><i class="fa fa-home fa-lg"></i></a></li>
+				        <li><a href="">${current_menu.parent.title}</a></li>
+				    	<li class="active">${current_menu.title}</li>
+				    </ul>					
 				</div>
 			</div>
-		</header>	
+		</header>		
 		<!-- END HEADER -->	
 		<!-- START MAIN CONTENT -->	
 		<div class="container  content no-padding-t">	
