@@ -63,7 +63,7 @@
 			<div class="container">
 				<div class="col-lg-3 visible-lg">	
 					<div class="header-sub-logo">
-					<img src="${current_menu.parent.image!"http://img.inkium.com/homepage/sub/sub_consulting_02.png"}"/>					
+					<img src="${current_menu.parent.image!"http://img.inkium.com/homepage/sub/sub_company_02.png"}"/>					
 					</div>
 				</div>
 				<div class="col-lg-9">				
