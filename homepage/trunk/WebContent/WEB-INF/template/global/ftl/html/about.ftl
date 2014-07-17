@@ -155,11 +155,11 @@
 				</div><!-- ./col-lg-3 -->
 				<div class="col-lg-9">
 					<div class="row">
-						<div class="col-sm-12">					
+						<div class="col-sm-12">				
 
 							<#if hasWebSitePage >							
 							${ processedBodyText }
-							</#if> 
+							<#else>
 							<!-- start of tabs -->					
 							<div class="tab-v3">									
 							<ul class="nav nav-tabs" id="aboutTab">
@@ -189,7 +189,7 @@
 								</div>
 							</div>
 							</div><!-- end of tabs -->
-
+							</#if> 
 						</div><!-- ./col-sm-12 -->		
 					</div><!-- ./row -->					
 				</div><!-- ./col-lg-9 -->				
