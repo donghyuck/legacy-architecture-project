@@ -47,7 +47,20 @@
 	UNDEFINED = 'undefined', 
 	proxy = $.proxy, 
 	extend = $.extend,
-	isFunction = kendo.isFunction;
+	isFunction = kendo.isFunction,
+	DEFAULT_LIGHTBOX_OPTIONS = {
+		items:[] ,	
+		type:'image',	
+		mainClass: 	'mfp-no-margins mfp-with-zoom',
+		image: {
+			verticalFit: 	true
+		},
+		gallery: {
+			enabled: false,
+			navigateByImgClick: true
+		}	
+	}
+	;
 
 	function defined(x) {
 		return (typeof x != UNDEFINED);
@@ -84,51 +97,12 @@
 			return false;
 		}
 		$(document).on("click","[data-ride='lightbox']", function(e){					
-			var $this = $(this);			
-				defaults = {
-					items:[] ,	
-					type:'image',	
-					gallery: {
-						enabled: false,
-						navigateByImgClick: true
-					}	
-				},
-				config = {};
-				
-				/*
-				opts 	= $this.attr('data-plugin-options'),
-				defaults 	= {
-					type: 				'image',
-					fixedContentPos: 	false,
-					fixedBgPos: 		false,
-					mainClass: 			'mfp-no-margins mfp-with-zoom',
-					image: {
-						verticalFit: 	true
-					},
-					zoom: {
-						enabled: 		false,
-						duration: 		300
-					},
-					gallery: {
-						enabled: false,
-						navigateByImgClick: true,
-						preload: 			[0,1],
-						arrowMarkup: 		'<button title="%title%" type="button" class="mfp-arrow mfp-arrow-%dir%"></button>',
-						tPrev: 				'이전',
-						tNext: 				'다음',
-						tCounter: 			'<span class="mfp-counter">%curr% / %total%</span>'
-					},
-				};
-				*/
-				
+			var $this = $(this), config = {};				
 			if($this.data("plugin-options")) {
-				config = jQuery.extend({}, defaults, opts, $this.data("plugin-options"));	
+				config = jQuery.extend({}, DEFAULT_LIGHTBOX_OPTIONS, opts, $this.data("plugin-options"));	
 			}else{
-				config = defaults;
-			}
-			
-			alert( $this.prop("tagName") );
-			
+				config = DEFAULT_LIGHTBOX_OPTIONS;
+			}						
 			if( $this.prop("tagName").toLowerCase() == "img" ){				
 				config.items = {
 					src : $this.attr("src")
@@ -140,19 +114,9 @@
 						config.items.push({
 							src : $(item).attr("src")
 						});
-					});					
-					
-					//config.items = data ;					
-					/*
-					$.magnificPopup.open({
-						  items: data,
-						  type : "image"
-						});	
-						*/			
+					});	
 				}
 			}
-			
-			alert( kendo.stringify(config));
 			$.magnificPopup.open(config);
 		} );	
 	}
