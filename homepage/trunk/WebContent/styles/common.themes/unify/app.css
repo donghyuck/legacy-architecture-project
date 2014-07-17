@@ -438,6 +438,36 @@ h3.heading-xs {
   border: solid 1px #eee;
 }
 
+/*Tabs v4*/
+.tab-v4 .nav-pills li a {
+  color: #777;
+  font-size: 17px;
+  padding: 4px 8px;
+  margin-bottom: 3px;
+  background: #fafafa;
+  border: solid 1px #eee;
+}
+
+.tab-v4 .nav-pills li a:hover,
+.tab-v4 .nav-pills li.active a {
+  color: #fff;
+  background: #72c02c;
+  border: solid 1px #68af28;
+}
+
+.tab-v4 .nav-pills li i {
+  width: 1.25em;
+  margin-right: 5px;
+  text-align: center;
+  display: inline-block;
+}
+
+.tab-v4 .tab-content {
+  padding: 15px;
+  background: #fafafa;
+  border: solid 1px #eee;
+}
+
 /*Accordions
 ------------------------------------*/
 /*Accordion v1*/
