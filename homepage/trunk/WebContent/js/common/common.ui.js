@@ -129,7 +129,7 @@
 			
 			alert( $this.prop("tagName") );
 			
-			if( $this.prop("tagName") == "img" ){				
+			if( $this.prop("tagName").toLowerCase() == "img" ){				
 				config.items = {
 					src : $this.attr("src")
 				}				
