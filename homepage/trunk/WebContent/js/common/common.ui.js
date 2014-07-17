@@ -227,7 +227,7 @@
 			}
 			
 			if(features.lightbox){				
-
+				common.ui.lightbox();	
 			}	
 		} 
 	})
