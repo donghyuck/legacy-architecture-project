@@ -126,6 +126,9 @@
 			}else{
 				config = defaults;
 			}
+			
+			alert( $this.prop("tagName") );
+			
 			if( $this.prop("tagName") == "img" ){				
 				config.items = {
 					src : $this.attr("src")
