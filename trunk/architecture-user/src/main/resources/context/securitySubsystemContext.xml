@@ -55,7 +55,7 @@
         <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
     	<security:form-login 
-    	    login-page="/accounts/login.do?ver=1" 
+    	    login-page="/accounts/login.do" 
     	    login-processing-url="/login" 
     	    username-parameter="username" 
     	    password-parameter="password" 
@@ -72,7 +72,7 @@
 	</security:authentication-manager>
 
 	<bean id="loginUrlAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
-		<constructor-arg value="/accounts/login.do" />
+		<constructor-arg value="/accounts/login.do?ver=1" />
 	</bean>	
 	
 	<bean id="ajaxAuthenticationEntryPoint" class="org.springframework.security.web.authentication.Http403ForbiddenEntryPoint" />
