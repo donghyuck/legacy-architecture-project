@@ -179,7 +179,7 @@
 	}	
 	
 	.counters  .tag-box-v1  {
-		order-top: solid 2px #eee;
+		border-top: solid 2px #eee;
 	}
 
 	
