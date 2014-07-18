@@ -102,9 +102,11 @@
 					<!-- end side menu -->						
 				</div>
 				<div class="col-lg-9">
+					<div class="page-content" style="min-height:300px;">
 					<#if hasWebSitePage >							
 					${ processedBodyText }
-					</#if> 						
+					</#if> 		
+					</div>				
 				</div>				
 			</div>
 		</div>									 
