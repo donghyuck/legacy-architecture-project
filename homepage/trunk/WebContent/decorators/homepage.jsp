@@ -178,6 +178,11 @@
 		font-weight: bold;
 	}	
 	
+	.counters  .tag-box-v1  {
+		order-top: solid 2px #eee;
+	}
+
+	
 	/** menu */
 	.header .navbar-default .navbar-nav > li > a {
 		font-size : 18px;
