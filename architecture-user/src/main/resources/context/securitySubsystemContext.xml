@@ -55,7 +55,7 @@
         <security:request-cache ref="authenticationRequestCache" />        
     	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
     	<security:form-login 
-    	    login-page="/accounts/login.do" 
+    	    login-page="/accounts/login.do?ver=1" 
     	    login-processing-url="/login" 
     	    username-parameter="username" 
     	    password-parameter="password" 
