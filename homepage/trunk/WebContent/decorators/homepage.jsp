@@ -173,6 +173,11 @@
 		color : #333333;	
 	}
 	
+	h2.inkium-subtitle {
+		font-size : 30px;
+		font-weight: bold;
+	}	
+	
 	/** menu */
 	.header .navbar-default .navbar-nav > li > a {
 		font-size : 18px;
