@@ -47,6 +47,8 @@ public interface Contact extends NoNamedEntityModelObject{
 	public String getGroupIds();
 	public void setGroupIds(String groupIds);
 	
-	public ContactGroup getContactGroup();
-	public void setContactGroup(ContactGroup contactGroup);
+	//public ContactGroup getContactGroup();
+	//public void setContactGroup(ContactGroup contactGroup);
+	public String[] getGroupNames();
+	public void setGroupNames(String[] groupNames);
 }

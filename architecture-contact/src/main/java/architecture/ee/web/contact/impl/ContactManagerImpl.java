@@ -275,34 +275,77 @@ public class ContactManagerImpl implements ContactManager{
 		return result;
 	}
 	
-	// STEP 1. 태그이름을 통해 연락처 목록을 얻는다. (By  getContactsByTagNames method)
-	// STEP 2.(PIVOT) 연락처-그룹 매핑 테이블에서 매핑된 연락처 ID / 그룹ID 목록을 가져온다. (1의 결과를 통해)
-	// STEP 3. 그룹 ID 목록을 통해 그룹리스트를 가져온다. (2의 결과를 통해)
-	// STEP 4. 결과 리스트를 생성한다. (2의 결과리스트를 피벗으로, 1과 3의 데이터 리스트에서 데이터를 세팅한다)  
 	public List<Contact> getContactsWithGroupsByTagNames(Contact contact){
+		log.debug("=======================   getContactsWithGroupsByTagNames START ====================================");
+		List<Contact> result = new ArrayList<Contact>(); // RESULT
 		
-		List<Contact> result = new ArrayList<Contact>(); 
-		
-		log.debug("getContactsWithGroupsByTagNames ==============  STEP 1");
+		log.debug("STEP 1. 태그이름을 통해 연락처 목록을 얻는다.");
 		List<Contact> contacts = getContactsByTagNames(contact); 
 		
 		if(ContactUtil.notEmpty(contacts)){
-			log.debug("getContactsWithGroupsByTagNames ==============  STEP 2");
+			log.debug("STEP 2. 1의 결과를 통해 연락처-그룹 매핑 테이블에서 매핑된 연락처 ID / 그룹ID 목록을 얻는다.");
 			Map <Long, Contact> contactsMap = ContactUtil.getContactMapFromList(contacts);
 			List<Long> contactIds = new ArrayList<Long>(contactsMap.keySet());
+			// 연락처에 매핑된 그룹수에 따라 전체 row수가 변하기 때문에 pivot 을 새롭게 구한다. 
 			List<Map<String,Long>> pivot = contactDao.getContactGroupIdsByContactIds(contactIds);
 			
+			
 			if(ContactUtil.notEmpty(pivot)){
-				log.debug("getContactsWithGroupsByTagNames ==============  STEP 3");
+				log.debug("STEP 3. 그룹 데이터 리스트를 얻는다.");
+				ContactGroup where = new ContactGroupImpl();
+				where.setCompanyId(contact.getCompanyId());
+				where.setTypeCode(contact.getTypeCode());
+				List<Long> groupIds = contactGroupDao.getContactGroupIds(where);
+				List<ContactGroup> groups = getContactGroups(groupIds);
+				Map<Long, ContactGroup> groupsMap = ContactUtil.getContactGroupMapFromList(groups);
+				// 그룹 레벨(Depth) 세팅
+				for(ContactGroup g : groups){
+					g.setLev(ContactUtil.getContactGroupDepth(g, 1, groupsMap)); 
+				}
+				
+				int maxDepth = ContactUtil.getMaxContactGroupDepth(groups);
+				
+				log.debug("STEP 4. 2의 결과리스트를 피벗으로, 1과 3의 데이터 리스트에서 데이터를 GET하여 결과 리스트를 얻는다.");
+				for(Map<String,Long> m : pivot){
+					Contact src1 = contactsMap.get(m.get("CONTACT_ID"));
+					//ContactGroup src2 = groupsMap.get(m.get("GROUP_ID"));
+					
+					Contact c = new ContactImpl();
+					c.setCompanyId(src1.getCompanyId());
+					c.setContactDesc(src1.getContactDesc());
+					c.setCellPhone(src1.getCellPhone());
+					c.setPhone(src1.getPhone());
+					c.setContactId(src1.getContactId());
+					c.setEmail(src1.getEmail());
+					c.setName(src1.getName());
+					c.setTag(src1.getTag());
+					c.setTypeCode(src1.getTypeCode());
+					c.setTypeName(src1.getTypeName()); 
+					//c.setContactGroup(src2);
+					c.setGroupNames(ContactUtil.getContactGroupNames(groups, m.get("GROUP_ID"), maxDepth));  
+					result.add(c);
+				}
+			}
+			
+			
+			/*
+			if(ContactUtil.notEmpty(pivot)){
+				log.debug("STEP 3. 2에서 구한 그룹 ID 목록을 통해 그룹 데이터 리스트를 얻는다.");
 				Set<Long> groupIds = new HashSet<Long>();
 				for(Map<String,Long> m : pivot){
 					Long groupId = m.get("GROUP_ID");
 					groupIds.add(groupId);
 				}
+				
 				List<ContactGroup> groups = getContactGroups(new ArrayList<Long>(groupIds));
 				Map<Long, ContactGroup> groupsMap = ContactUtil.getContactGroupMapFromList(groups);
+				// 그룹 레벨(Depth) 세팅
+				for(ContactGroup g : groups){
+					g.setLev(ContactUtil.getDepth(g, 1, groupsMap));
+				}
 				
-				log.debug("getContactsWithGroupsByTagNames ==============  STEP 4");
+				
+				log.debug("STEP 4. 2의 결과리스트를 피벗으로, 1과 3의 데이터 리스트에서 데이터를 GET하여 결과 리스트를 얻는다.");
 				for(Map<String,Long> m : pivot){
 					Contact src1 = contactsMap.get(m.get("CONTACT_ID"));
 					ContactGroup src2 = groupsMap.get(m.get("GROUP_ID"));
@@ -323,8 +366,9 @@ public class ContactManagerImpl implements ContactManager{
 					result.add(c);
 				}
 			}
+			*/
 		}
-
+		log.debug("=======================   getContactsWithGroupsByTagNames DONE ====================================");
 		return result;
 	}
 	
@@ -472,4 +516,5 @@ public class ContactManagerImpl implements ContactManager{
 		return list;
 	}
 	
+
 }

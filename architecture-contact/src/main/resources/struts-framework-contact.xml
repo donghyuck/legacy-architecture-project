@@ -78,11 +78,31 @@
 				</param> 	
 			</result>
 		</action>
-	
+		
+		
+		
+		<!-- 
 		<action name="list-contacts-tags-main" class="architecture.ee.web.contact.ContactAction">
 			<result name="success" type="freemarker">/html/contact/searchContactsByTags.ftl</result>
 		</action>
-	
+	 	-->
 	</package>
-			
+	<package name="framework-contact-anonymous-actions" namespace="/community" extends="framework-default">
+		<action name="html-contacts-tags" class="architecture.ee.web.contact.ContactAction">
+			<result name="json-success" type="json">
+				<param name="enableGZIP">true</param>
+				<param name="excludeNullProperties">true</param>     
+				<param name="excludeProperties"> 	
+				htmlCodeContactsByTagNames.*\.cachedSize,				
+				htmlCodeContactsByTagNames.*\.user.passwordHash,
+				htmlCodeContactsByTagNames.*\.user.primaryKeyObject,
+				htmlCodeContactsByTagNames.*\.user.modelObjectType,
+				htmlCodeContactsByTagNames.*\.user.cachedSize										
+				</param>
+				<param name="includeProperties">
+				htmlCodeContactsByTagNames.*
+				</param> 	
+			</result>
+		</action>
+	</package>	
 </struts>
