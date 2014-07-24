@@ -29,10 +29,11 @@ public class ContactImpl extends BaseModelObjectSupport implements Contact {
 	private int typeCode;
 	private Long companyId;
 	private String typeName;
+	private String[] groupNames;
 	//private List<String> groupNames;
 	//private List<Tag> tagList;
 	//private List<ContactGroup> groupList;
-	private ContactGroup contactGroup;
+	//private ContactGroup contactGroup;
 	private String groupIds;
 	private User user;
 	
@@ -57,6 +58,15 @@ public class ContactImpl extends BaseModelObjectSupport implements Contact {
 	
 	
 	
+	public String[] getGroupNames() {
+		return groupNames;
+	}
+
+	public void setGroupNames(String[] groupNames) {
+		this.groupNames = groupNames;
+	}
+
+	/*
 	public ContactGroup getContactGroup() {
 		return contactGroup;
 	}
@@ -64,6 +74,7 @@ public class ContactImpl extends BaseModelObjectSupport implements Contact {
 	public void setContactGroup(ContactGroup contactGroup) {
 		this.contactGroup = contactGroup;
 	}
+	*/
 
 	public String getGroupIds() {
 		return groupIds;

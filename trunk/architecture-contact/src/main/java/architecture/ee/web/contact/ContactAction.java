@@ -164,7 +164,7 @@ public class ContactAction extends PageAction {
 		String name = (String)map.get("name");
 		String phone = (String)map.get("phone");
 		String cellPhone = (String)map.get("cellPhone");
-		String email = (String)map.get("cellPhone");
+		String email = (String)map.get("email");
 		String contactDesc = (String)map.get("contactDesc");
 		String tag = (String)map.get("tag");
 		Integer typeCode= (Integer)map.get("typeCode");
@@ -231,7 +231,7 @@ public class ContactAction extends PageAction {
 		String srchType = (String)map.get("srchType");
 		
 		User user = getUser();
-		contact.setCompanyId(user.getCompanyId());
+		contact.setCompanyId(user.getCompanyId() > 0 ? user.getCompanyId() : 1);
 		
 		if(srchType.equals("1")){
 			return contactManager.getContactsByTagNames(contact);
@@ -239,6 +239,28 @@ public class ContactAction extends PageAction {
 			return contactManager.getContactsWithGroupsByTagNames(contact); 
 		}
 		
+	}
+	
+	public String getHtmlCodeContactsByTagNames(){
+		log.debug("================ getHtmlCodeContactsByTagNames ==================");
+		ParamUtils.printParameter(request, log);
+		Contact contact = new ContactImpl();
+		Map map = ParamUtils.getJsonParameter(request, "item", Map.class);
+		
+		String tag = (String)map.get("tag");
+		contact.setTag(tag);
+		
+		String srchType = (String)map.get("srchType");
+		
+		User user = getUser();
+		contact.setCompanyId(user.getCompanyId() > 0 ? user.getCompanyId() : 1);
+		
+		List<Contact> list = contactManager.getContactsWithGroupsByTagNames(contact); 
+		List<List<TableCell>> trans = ContactUtil.getTableCellListFromContactList(list);
+		trans = ContactUtil.getSpanedList(trans);
+		String htmlCode = ContactUtil.getHtmlTableFromTableCellList(trans);
+		log.debug(htmlCode);
+		return htmlCode;
 	}
 	
 }

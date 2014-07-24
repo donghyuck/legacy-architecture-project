@@ -114,22 +114,10 @@ public class JdbcTagDao extends ExtendedJdbcDaoSupport implements TagDao{
 	public List<Long> getTagIdsByTagNames(String tagStrings) {
 		
 		//String[] tags = StringUtils.commaDelimitedListToStringArray(tagStrings); //tagStrings.split(",");
-		String[] tags = StringUtils.trimAllWhitespace(tagStrings).split(",");
-		/* => FreeMarker do this processes
-		String[] tagsToUse = new String[tags.length];
-		for(int i=0; i < tags.length; i++ ){
-			tagsToUse[i] = "'" + tags[i] + "'";
-		}
+		tagStrings = StringUtils.trimLeadingWhitespace(tagStrings);
+		tagStrings = StringUtils.trimTrailingWhitespace(tagStrings);
+		String[] tags = tagStrings.split(",");
 		
-		String queryString = "";
-		for(int i=0; i < tags.length; i++ ){
-			queryString += "\\\"" + tags[i] + "\\\"";
-			if(i != tags.length -1){
-				queryString += ",";
-			}
-			// How about using StringBuilder instance? 
-		}*/
-		//log.debug("Query String ============ " + queryString);
 		Map options = new HashMap();
 		options.put("tags", tags);
 

@@ -16,7 +16,7 @@ public class ContactGroupImpl extends BaseModelObjectSupport implements ContactG
 	private Long companyId;
 	private int typeCode;
 	private Long parentGroupId;
-	private String parentGroupName;
+	//private String parentGroupName;
 	private Long userId;
 	private Long modifyId;
 	private boolean delYn;
@@ -55,13 +55,13 @@ public class ContactGroupImpl extends BaseModelObjectSupport implements ContactG
 
 	
 	
-	public String getParentGroupName() {
+	/*public String getParentGroupName() {
 		return parentGroupName;
 	}
 
 	public void setParentGroupName(String parentGroupName) {
 		this.parentGroupName = parentGroupName;
-	}
+	}*/
 
 	public boolean isHasChildren() {
 		return hasChildren;

@@ -28,8 +28,8 @@ public interface ContactGroup extends NoNamedEntityModelObject {
 	public void setHasChildren(boolean hasChildren);
 	public int getLev();
 	public void setLev(int lev);
-	public String getParentGroupName();
-	public void setParentGroupName(String parentGroupName);
+	//public String getParentGroupName();
+	//public void setParentGroupName(String parentGroupName);
 	public Set<Long> getChildGroupIds();
 	public void setChildGroupIds(Set<Long> childGroupIds);
 	public String getGroupIds();

@@ -74,7 +74,7 @@ public class JdbcContactGroupDao extends ExtendedJdbcDaoSupport implements Conta
 			row.setModifiedDate(rs.getDate("MODIFIED_DATE"));
 			row.setModifyId(rs.getLong("MODIFY_ID"));
 			row.setDelYn(rs.getInt("DEL_YN") == 0 ? true:false);
-			row.setParentGroupName(rs.getString("PARENT_GROUP_NAME"));
+			//row.setParentGroupName(rs.getString("PARENT_GROUP_NAME"));
 			//row.setLev(rs.getInt("LEV"));
 			return row;
 		}
