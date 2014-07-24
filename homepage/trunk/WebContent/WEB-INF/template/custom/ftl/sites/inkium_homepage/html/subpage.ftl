@@ -20,7 +20,9 @@
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
 			'${request.contextPath}/js/common/common.models.js',
 			'${request.contextPath}/js/common/common.api.js',
-			'${request.contextPath}/js/common/common.ui.js'],
+			'${request.contextPath}/js/common/common.ui.js',
+			'${request.contextPath}/js/common.pages/common.contact.js'
+			],
 			complete: function() {
 				// START SCRIPT	
 
@@ -44,10 +46,13 @@
 				});
 				
 				<#if !action.user.anonymous ></#if>	
-				// END SCRIPT            
+				// END SCRIPT
+				checkContactTag();
 			}
 		}]);	
 		-->
+		
+		
 		</script>
 		</#compress>	
 	</head>

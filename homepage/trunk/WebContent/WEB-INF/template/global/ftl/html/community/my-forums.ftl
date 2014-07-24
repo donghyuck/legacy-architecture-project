@@ -393,30 +393,53 @@
 		<!-- ============================== -->
 		<!-- Topic viewer , editor 			-->
 		<!-- ============================== -->			
-		function deleteTopic(){
-			var topicPlaceHolder = getTopicEditorSource();
-			var renderTo = $('#topic-panel-body');
-			
-			common.api.callback({
-				url : '${request.contextPath}/community/delete-forum-topics.do?output=json',
-				data : { item: kendo.stringify( topicPlaceHolder ) },
-				success : function(response){
-								common.ui.notification({title:"게시글", message: "정상적으로 삭제되었습니다.", type: "success" });
-								$("#topic-grid").data('kendoGrid').dataSource.read();
-								$("#forum-list-view").data('kendoGrid').dataSource.read();
-				},
-			 	fail: function(){								
-						common.ui.notification({title:"게시글", message: "시스템 운영자에게 문의하여 주십시오." });
-				},
-				requestStart : function(){
-						kendo.ui.progress(renderTo, true);
-				},
-				requestEnd : function(){
-						kendo.ui.progress(renderTo, false);
-				},
-			});
-			
+		
+		
+		function getTopicEditorSource(){
+			if( !$("#topic-editor").data("topicPlaceHolder") ){
+				var topicPlaceHolder =new common.models.ForumTopic();
+				//topicPlaceHolder.set("objectType", 30);
+				$("#topic-editor").data("topicPlaceHolder", topicPlaceHolder );				
+			}
+			return $("#topic-editor").data("topicPlaceHolder");			
 		}
+		
+		function setTopicEditorSource(source){	
+			source.copy(getTopicEditorSource());		
+		}
+		
+		
+		function showTopicViewer(){
+			var topicPlaceHolder = getTopicEditorSource();
+			if( topicPlaceHolder.topicId > 0 ){					
+				if( $('#topic-viewer').text().trim().length == 0 ){			
+					var template = kendo.template($('#topic-viewer-template').html());		
+					$('#topic-viewer').html( template );				
+					var topicViewerModel =  kendo.observable({ 
+						topic : topicPlaceHolder,
+						profilePhotoUrl : function(){
+							return common.api.user.photoUrl (this.get("topic").user, 150,150);
+						},
+						editable : function(){
+							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
+							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
+								return true;
+							}
+							return false;
+						},
+						openTopicEditor : showTopicEditor,
+						closeViewer : function(e){
+							kendo.fx($("#topic-viewer-panel")).expand("vertical").duration(200).reverse();								
+							kendo.fx($('#topic-list-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
+						}
+					});						
+					kendo.bind($("#topic-viewer-panel"), topicViewerModel );
+				}			
+				$('#topic-list-panel > .panel > .panel-body').first().hide();
+				kendo.fx($("#topic-viewer-panel")).expand("vertical").duration(200).play();			
+			}
+		}
+		
 		
 		function showTopicEditor(){	
 			
@@ -512,51 +535,32 @@
 		}
 		
 		
-				
-		function showTopicViewer(){
+		function deleteTopic(){
 			var topicPlaceHolder = getTopicEditorSource();
-			if( topicPlaceHolder.topicId > 0 ){					
-				if( $('#topic-viewer').text().trim().length == 0 ){			
-					var template = kendo.template($('#topic-viewer-template').html());		
-					$('#topic-viewer').html( template );				
-					var topicViewerModel =  kendo.observable({ 
-						topic : topicPlaceHolder,
-						profilePhotoUrl : function(){
-							return common.api.user.photoUrl (this.get("topic").user, 150,150);
-						},
-						editable : function(){
-							var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
-							if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
-								return true;
-							}
-							return false;
-						},
-						openTopicEditor : showTopicEditor,
-						closeViewer : function(e){
-							kendo.fx($("#topic-viewer-panel")).expand("vertical").duration(200).reverse();								
-							kendo.fx($('#topic-list-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();							
-						}
-					});						
-					kendo.bind($("#topic-viewer-panel"), topicViewerModel );
-				}			
-				$('#topic-list-panel > .panel > .panel-body').first().hide();
-				kendo.fx($("#topic-viewer-panel")).expand("vertical").duration(200).play();			
-			}
+			var renderTo = $('#topic-panel-body');
+			
+			common.api.callback({
+				url : '${request.contextPath}/community/delete-forum-topics.do?output=json',
+				data : { item: kendo.stringify( topicPlaceHolder ) },
+				success : function(response){
+								common.ui.notification({title:"게시글", message: "정상적으로 삭제되었습니다.", type: "success" });
+								$("#topic-grid").data('kendoGrid').dataSource.read();
+								$("#forum-list-view").data('kendoGrid').dataSource.read();
+				},
+			 	fail: function(){								
+						common.ui.notification({title:"게시글", message: "시스템 운영자에게 문의하여 주십시오." });
+				},
+				requestStart : function(){
+						kendo.ui.progress(renderTo, true);
+				},
+				requestEnd : function(){
+						kendo.ui.progress(renderTo, false);
+				},
+			});
+			
 		}
 		
-		function getTopicEditorSource(){
-			if( !$("#topic-editor").data("topicPlaceHolder") ){
-				var topicPlaceHolder =new common.models.ForumTopic();
-				//topicPlaceHolder.set("objectType", 30);
-				$("#topic-editor").data("topicPlaceHolder", topicPlaceHolder );				
-			}
-			return $("#topic-editor").data("topicPlaceHolder");			
-		}
-		
-		function setTopicEditorSource(source){	
-			source.copy(getTopicEditorSource());		
-		}
-		
+	
 		
 		
 		
@@ -1435,7 +1439,7 @@
 								<a role="button" href="#" class="k-window-action k-link hide"><span role="presentation" class="k-icon k-i-close">Close</span></a>
 							</div>
 							</div>
-							<div class="panel-body" style="padding:5px;" id="topic-panel-body"> 
+							<div id="topic-panel-body" class="panel-body"   style="padding:5px;" > 
 								<div class="page-header page-nounderline-header" style="height:50px;">
 									<h5>
 										<small><i class="fa fa-info"></i> <span id="forum-desc"></span></small>
@@ -1448,7 +1452,7 @@
 								</div>								
 								<div  id="topic-grid"></div>	
 							</div>
-							<div  id="topic-viewer-panel" class="panel-body" style="display:none;">
+							<div id="topic-viewer-panel" class="panel-body"   style="display:none;">
 									<div class="row">
 										<div class="col-lg-12">
 											<div class="page-header page-nounderline-header text-primary" style="min-height: 45px;">
@@ -1474,7 +1478,7 @@
 										</div>																		
 									</div>
 							</div>
-							<div  id="topic-editor-panel" class="panel-body" style="display:none;">
+							<div id="topic-editor-panel" class="panel-body"  style="display:none;">
 								<div class="page-header page-nounderline-header" style="min-height: 45px;">
 									<h5 >
 										<small><i class="fa fa-info"></i> 닫기 버튼을 클릭하면 목록이 보여집니다.</small>

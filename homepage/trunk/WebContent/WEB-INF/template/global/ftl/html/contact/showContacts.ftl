@@ -142,6 +142,7 @@
 				columns: [
 					{field: "contactId", title: "ID", sortable : false , width:100 },
 					{field: "name", title: "이름", sortable : false},
+					{field: "typeCode", title: "타입코드", sortable : false},
 					{field:"typeName", title: "타입명", sortable : false},
 					{field: "tag", title: "태그", sortable : false},
 					{field: "groupIds", title: "매핑그룹", sortable : false},
@@ -225,6 +226,9 @@
 		
 		function showContactEditor(){	
 			var contactPlaceHolder = getContactEditorSource();
+			
+			console.log('contactPlaceHolder.typeCode : '+ contactPlaceHolder.typeCode);
+			
 			var renderTo = $("#contact-editor-panel");
 			
 			if( $('#contact-editor').text().trim().length == 0 ){
@@ -250,8 +254,7 @@
 						this.contact.properties = null;
 						
 						getCheckedNodes();
-						
-						
+
 						common.api.callback({  
 							url : '${request.contextPath}/contact/update-contacts.do?output=json',
 							data : { item: kendo.stringify( this.contact ) },
@@ -305,11 +308,13 @@
 										}
 					            	}
 					            });
-								contactPlaceHolder.set("typeCode", e.target.value); 
+								
+								//console.log('e.target.value : ' + e.target.value);
+								//contactPlaceHolder.set("typeCode", e.target.value); 
 							}
 					},
 					selectedCategory :"0",
-					updateRequired : false,
+					updateRequired : true,
 					editable : function(){
 						var currentUser = $("#account-navbar").data("kendoExtAccounts").token;
 						if( currentUser.hasRole("ROLE_ADMIN") || currentUser.hasRole("ROLE_SITE_ADMIN") ){
@@ -321,47 +326,19 @@
 						kendo.fx(renderTo).expand("vertical").duration(200).reverse();
 						kendo.fx($('#contact-viewer-panel')).expand("vertical").play();
 						//kendo.fx($('#contact-list-panel > .panel > .panel-body').first()).expand("vertical").duration(200).play();
-					},
-					searchContacts: function(e){
-						var contact = new common.models.Contact();
-						contact.set("tag",$('#searchTag').val());
-						common.api.callback({  
-							url : '${request.contextPath}/contact/list-contacts-tags.do?output=json',
-							data : { item: kendo.stringify(contact) },
-							success : function(response){
-								//console.log(response);
-								var list = response.contactsByTagNames;
-								makeContactTable(list, $('#tagResult'));
-								//console.log(response.contactsByTagNames);
-								//console.log(response.contactsByTagNames.length);
-								//console.log(response.contactsByTagNames[0].name);
-								
-							},
-							fail: function(){								
-								common.ui.notification({title:"연락처", message: "시스템 운영자에게 문의하여 주십시오." });
-							},
-							always : function(e){
-								//btn.button('reset');
-								//contactEditorModel.closeEditor(e);
-							}
-						});
-						
 					}
 				});
 				
-				
-				
+				/*
 				contactEditorModel.bind("change", function(e){				
 					if( e.field.match('^contact.')){ 
-						//console.log(contactPlaceHolder.typeCode);
-						console.log('valid check name.len: ' + this.contact.name.length);
-						//console.log('valid check contact.groupIds: ' + this.contact.groupIds);
+						//console.log('valid check name.len: ' + this.contact.name.length);
 						if( this.contact.name.length > 0 )	{			//required field
-							contactEditorModel.set("updateRequired", true);
+							contactEditorModel.set("`", true);
 						}
 					}	
 				});	
-				
+				*/
 				
 				kendo.bind(renderTo, contactEditorModel ); <#-- Binding the View to the View-Model -->
 				renderTo.data("model", contactEditorModel );
@@ -370,16 +347,15 @@
 			
 			
 			// 그룹 선택 세팅 .
-			console.log('contactPlaceHolder.contactId : ' + contactPlaceHolder.contactId);
-			console.log('contactPlaceHolder.typeCode : ' + contactPlaceHolder.typeCode);
+			//console.log('contactPlaceHolder.contactId : ' + contactPlaceHolder.contactId);
+			//console.log('contactPlaceHolder.typeCode : ' + contactPlaceHolder.typeCode);
 			if(contactPlaceHolder.contactId > 0){
 				$("#contact-editor-panel").data("model").selectedCategory = contactPlaceHolder.typeCode;
 				console.log('clicked category : ' + $("#contact-editor-panel").data("model").selectedCategory);
 				$('#contact-editor select').click();
 			}
 			
-			
-			renderTo.data("model").set("updateRequired", false);			
+			//renderTo.data("model").set("updateRequired", false);			
 			renderTo.data("model").set("isNew", (contactPlaceHolder.contactId < 1 ));
 				
 			$('#contact-viewer-panel').hide();
@@ -391,7 +367,6 @@
 				if(nodes[i].checked){
 					checkedNodes.push(nodes[i].id);
 				}
-				
 				if(nodes[i].hasChildren){
 					checkedNodesIds (nodes[i].children.view(), checkedNodes);
 				}
@@ -552,7 +527,7 @@
 	<body class="color0">
 	<!-- START HEADER -->
 	<#include "/html/common/common-homepage-menu.ftl" >	
-	<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_1_5") />
+	<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_PERSONALIZED_3") />
 	<header class="cloud">
 		<div class="container">
 			<div class="col-lg-12">	
@@ -587,7 +562,7 @@
 						<div id="contact-grid"></div>		
 					</div>
 					
-					<div data-address-tag='인키움' data-search-type='2'  data-show-type='table'></div>
+					<div data-contact-tag='인키움' data-search-type='2'  data-show-type='table'></div>
 				</div>
 				<!-- 연락처-우측-패널 -->
 				<div id="contact-detail-panel" class="custom-panels-group col-sm-6" >
@@ -744,10 +719,6 @@
 						<input type="text" data-bind="value: contact.contactDesc" class="form-control" placeholder="설명을 입력하세요." />
 						<label class="control-label"><small>태그</small></label>
 						<input type="text"  data-bind="value: contact.tag" class="form-control" placeholder="태그를 입력하세요. 콤마로 구분해서 넣을 수 있습니다." />
-						<label class="control-label"><small>태그로 검색을 수행해 보세요. </small></label>
-						<input type="text" class="form-control" placeholder="여기에 검색할 태그를 입력해보세요." id="searchTag" />
-						<button type="button" class="btn btn-primary btn-notice-control-group btn-sm" data-bind="click:searchContacts">검색</button>
-						<div id="tagResult" style="padding-top:10px;"></div>
 				</div>
 				</div>									
 			</div>	
