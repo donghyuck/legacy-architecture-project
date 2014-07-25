@@ -162,7 +162,15 @@
 		color: #f37021;
 		position: relative;
 	}
-	
+
+	.page-content .page-content-title-v2 h4 {
+		padding-top: 10px;
+		line-height: 25px;
+		font-size : 20px;
+		font-weight: bold;
+		color: #f37021;
+	}
+		
 	.page-content .page-content-title-desc {
 		padding-top: 20px;
 		padding-bottom:20px;
