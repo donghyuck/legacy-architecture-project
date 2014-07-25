@@ -112,6 +112,19 @@
 	header.inkium .header-sub-title h2 small{
 		font-size: 50%;		
 	}
+
+	header.inkium .header-sub-sub-title h3:before {
+	
+	}
+	header.inkium .header-sub-sub-title h3{
+		font-size: 24px;
+		text-align: right;
+		font-weight: bold;
+		margin: 0px;
+		line-height: 1;
+		padding: 32px 100px 0 12px;
+	}
+	
 		
 	header.inkium .breadcrumb {
 		float: right;
