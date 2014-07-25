@@ -151,13 +151,16 @@
 	}
 	
 	.page-content .page-content-title> h4:before { 
+		top: 8px;
+		left: 0px;
+		padding-right: 5px;
 		content: "\f068";
 		font-size: 15px;
-		position: absolute;
-		font-weight: normal;
+		font-weight: lighter;
 		display: inline-block;
 		font-family: FontAwesome;
 		color: #f37021;
+		position: relative;
 	}
 		
 	.page-content .page-content-title> h3:before {
