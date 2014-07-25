@@ -121,6 +121,7 @@
 		text-align: right;
 		font-weight: bold;
 		margin: 0px;
+		color: #f37021;
 		line-height: 1;
 		padding: 32px 100px 0 12px;
 	}
