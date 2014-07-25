@@ -143,16 +143,14 @@
 	}
 	
 	.page-content .page-content-title h4 {
-		padding-top: 15px;
-		line-height: 40px;
+		padding-top: 10px;
+		line-height: 25px;
 		font-size : 20px;
 		font-weight: bold;
 		color: #f37021;
 	}
 	
 	.page-content .page-content-title> h4:before { 
-		top: 10px;
-		right: 15px;
 		content: "\f068";
 		font-size: 15px;
 		position: absolute;
