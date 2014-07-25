@@ -162,6 +162,25 @@
 		color: #f37021;
 		position: relative;
 	}
+	
+	.page-content .page-content-title-desc {
+		padding-top: 20px;
+		padding-bottom:20px;
+		font-size : 15px;
+		font-weight : bold;
+		
+	}
+	
+	.absolute-right {
+		position: absolute;
+		top: 380px;
+		right : 0; 
+	}
+	.page-content-highlight{
+		font-weight : bold;
+		color : #f37031;
+	}
+	
 		
 	.page-content .page-content-title> h3:before {
 		content: url('http://img.inkium.com/homepage/sub/line_black.gif');
