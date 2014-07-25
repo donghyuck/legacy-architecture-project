@@ -113,19 +113,6 @@
 		font-size: 50%;		
 	}
 
-	header.inkium .header-sub-sub-title h3:before {
-	
-	}
-	header.inkium .header-sub-sub-title h3{
-		font-size: 24px;
-		text-align: right;
-		font-weight: bold;
-		margin: 0px;
-		color: #f37021;
-		line-height: 1;
-		padding: 32px 100px 0 12px;
-	}
-	
 		
 	header.inkium .breadcrumb {
 		float: right;
@@ -155,6 +142,18 @@
 		color : #333333;
 	}
 	
+	.page-content .page-content-title h4 {
+		padding-top: 15px;
+		line-height: 40px;
+		font-size : 20px;
+		font-weight: bold;
+		color: #f37021;
+	}
+	
+	.page-content .page-content-title> h4:before { 
+	
+	}
+		
 	.page-content .page-content-title> h3:before {
 		content: url('http://img.inkium.com/homepage/sub/line_black.gif');
 		top: 0;
