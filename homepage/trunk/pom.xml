@@ -142,6 +142,11 @@
 			<artifactId>architecture-community-forum</artifactId>
 			<version>1.0.0</version>
 		</dependency>
+		<dependency>
+			<groupId>architecture.contact</groupId>
+			<artifactId>architecture-contact</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 	</dependencies>
 		
 </project>
