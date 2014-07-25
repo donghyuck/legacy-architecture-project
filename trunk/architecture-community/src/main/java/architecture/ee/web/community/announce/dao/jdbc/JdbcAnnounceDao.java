@@ -42,10 +42,15 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 	private String announcePropertyTableName = "V2_ANNOUNCE_PROPERTY";
 	private String announcePropertyPrimaryColumnName = "ANNOUNCE_ID";
 	
+	/**
+	 * 
+	 *  2014.07.25 - fixed setStartDate error in RowMapper
+	 */
 	private final RowMapper<Announce> announceMapper = new RowMapper<Announce>(){
 		public Announce mapRow(ResultSet rs, int rowNum) throws SQLException {
-			DefaultAnnounce announce = new DefaultAnnounce();
-			announce.setAnnounceId(rs.getLong("ANNOUNCE_ID"));
+			long announceId = rs.getLong("ANNOUNCE_ID");
+			DefaultAnnounce announce = new DefaultAnnounce(announceId);
+			//announce.setAnnounceId(rs.getLong("ANNOUNCE_ID"));
 			announce.setObjectType(rs.getInt("OBJECT_TYPE"));
 			announce.setObjectId(rs.getLong("OBJECT_ID"));
 			announce.setUserId(rs.getLong("USER_ID"));
