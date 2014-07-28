@@ -219,7 +219,7 @@
                 <div class="ls-layer" style="slidedirection: top; ">
                     <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
 					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; ">
-                      전문강사 및 프레젠터를 위한 전문자격시험<br> 
+                      전문자격시험<br> 
                        <span style="font-size:65px; font-weight:bold; "> ICP </span>
                     </span>
 					
