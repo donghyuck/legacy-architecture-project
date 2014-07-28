@@ -150,11 +150,13 @@
 			if (worklist == null) {
 				worklist = [];
 			}			
+			
+			alert( worklist.length );
 			var initilizer, _i, _len, _ref;
 			 _ref = worklist;			 
 			 for (_i = 0, _len = worklist.length; _i < _len; _i++) {
 				 initilizer = _ref[_i];
-				 $.proxy(initilizer, that)();
+				$.proxy(initilizer, that)();
 			}				
 		},
 		_initFeatures: function(){
