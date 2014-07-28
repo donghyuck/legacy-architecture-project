@@ -300,8 +300,8 @@
 			<#list potopolioMenu.components as item >
 			<#if  item.components?has_content >    
 				<li class="col-md-3 col-sm-6 col-xs-12 mix ${item.category}" data-cat="${item.data}" >
-					<a href="#">
-					<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
+					<a href="<#if sub_item.page?? >${item.page}<#else>#</#if >">
+					<img class="img-responsive" src="${item.image}" alt="">
 					<span class="sorting-cover">
 						<span>${item.title}</span>
 						<p></p>
