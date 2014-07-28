@@ -32,7 +32,8 @@
 				common.ui.setup({
 					features:{
 						backstretch : false,
-						lightbox: true
+						lightbox: true,
+						worklist : jobs
 					}
 				});	
 				      
