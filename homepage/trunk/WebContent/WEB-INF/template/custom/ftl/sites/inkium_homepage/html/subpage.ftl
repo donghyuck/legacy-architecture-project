@@ -33,7 +33,7 @@
 						backstretch : false,
 						lightbox: true
 					},					
-					worklist : jobs
+					worklist:jobs
 				});	
 				      
 				// START SCRIPT					
