@@ -15,11 +15,16 @@
  */
 package architecture.ee.web.navigator;
 
+import java.io.Serializable;
 
-public abstract class MenuBase implements Component {
+
+public abstract class MenuBase implements Serializable, Component {
     //~ Instance fields ========================================================
 
     /** Holds value of property action, that is, Struts Logical Action Name. */
+	
+	protected String css ;
+	
     protected String action;
 
     /** Align menu 'left','right','top','bottom' ...and other alignment of particular menu system */
@@ -83,6 +88,11 @@ public abstract class MenuBase implements Component {
     
     /** Holds value of property onContextMenu */
     protected String onContextMenu;
+    
+    protected String data;
+    
+    protected String category ;
+    
 
     /**
      * Holds value of property module; a Struts module prefix that overrides the current module.
@@ -93,6 +103,8 @@ public abstract class MenuBase implements Component {
 
     //~ Methods ================================================================
 
+    
+    
     /**
      * Sets the value for action.
      * @param action New value of property action.
@@ -101,15 +113,61 @@ public abstract class MenuBase implements Component {
         this.action = action;
     }
 
-    /**
+
+	/**
+	 * @return data
+	 */
+	public String getData() {
+		return data;
+	}
+
+
+	/**
+	 * @param data 설정할 data
+	 */
+	public void setData(String data) {
+		this.data = data;
+	}
+
+
+	/**
+	 * @return category
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category 설정할 category
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	/**
      * Returns the value for action.
      * @return Value of property action.
      */
     public String getAction() {
         return this.action;
     }
+    
 
     /**
+	 * @return css
+	 */
+	public String getCss() {
+		return css;
+	}
+
+	/**
+	 * @param css 설정할 css
+	 */
+	public void setCss(String css) {
+		this.css = css;
+	}
+
+	/**
      * Returns the value for align.
      * @return Value of property align.
      */
@@ -128,8 +186,8 @@ public abstract class MenuBase implements Component {
     }
     
     
-    
-    /**
+
+	/**
 	 * @return icon
 	 */
 	public String getIcon() {

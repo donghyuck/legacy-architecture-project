@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import architecture.common.model.factory.ModelTypeFactory;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
@@ -117,6 +118,47 @@ public class DownloadController {
 		}
 	}
 
+	@RequestMapping(value = "/image/{imageId}/{filename:.+}", method = RequestMethod.GET)
+	@ResponseBody
+	public void handleWebSiteImage(@PathVariable("imageId") Long imageId, @PathVariable("filename") String filename , @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
+				
+		log.debug(" ------------------------------------------");
+		log.debug("imageId:" + imageId);
+		log.debug("width:"+ width);
+		log.debug("height:" + height);
+		log.debug("------------------------------------------");			
+		try {
+			if( imageId > 0 && StringUtils.isNotEmpty(filename)){
+				Image image =imageManager.getImage(imageId);
+				int objectType = ModelTypeFactory.getTypeIdFromCode("WEBSITE");				
+				if( StringUtils.equals(filename, image.getName() )  && image.getObjectType() == objectType ){					
+					InputStream input ;
+					String contentType ;
+					int contentLength ;			
+					if( width > 0 && width > 0 )			{
+						input = imageManager.getImageThumbnailInputStream(image, width, height);
+						contentType = image.getThumbnailContentType();
+						contentLength = image.getThumbnailSize();
+					}else{
+						input = imageManager.getImageInputStream(image);
+						contentType = image.getContentType();
+						contentLength = image.getSize();				
+					}								
+					response.setContentType(contentType);
+					response.setContentLength(contentLength);			
+					IOUtils.copy(input, response.getOutputStream());
+					response.flushBuffer();					
+				}else{
+					throw new NotFoundException();
+				}				
+			}else{
+				throw new NotFoundException();
+			}		
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}		
+	}
+	
 	@RequestMapping(value = "/image/{fileName}", method = RequestMethod.GET)
 	@ResponseBody
 	public void handleImage(@PathVariable("fileName") String fileName, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {

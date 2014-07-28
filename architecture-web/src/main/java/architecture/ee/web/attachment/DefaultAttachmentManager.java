@@ -32,6 +32,7 @@ import net.sf.ehcache.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -88,7 +89,11 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 		
 		Attachment attachment = getAttachmentInCache(attachmentId);
 		if( attachment == null){
-			attachment = attachmentDao.getByAttachmentId(attachmentId);
+			try {
+				attachment = attachmentDao.getByAttachmentId(attachmentId);
+			} catch (DataAccessException e) {
+				throw new NotFoundException(e);
+			}
 			attachmentCache.put(new Element(attachmentId, attachment ));
 		}
 		return attachment;

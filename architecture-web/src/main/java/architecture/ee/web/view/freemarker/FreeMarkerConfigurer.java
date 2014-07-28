@@ -35,6 +35,7 @@ import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
+import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.template.Configuration;
@@ -94,7 +95,8 @@ public class FreeMarkerConfigurer extends FreeMarkerConfigurationFactory
 					DatabaseTemplateLoader templateLoader = new DatabaseTemplateLoader(home);
 					templateLoader.initialize();
 					//this.setPreTemplateLoaders(new TemplateLoader[]{ templateLoader });
-					this.setPostTemplateLoaders(templateLoader);
+					setPreTemplateLoaders(templateLoader);
+					//setPostTemplateLoaders(templateLoader);
 				}
 			}			
 			this.configuration = createConfiguration();

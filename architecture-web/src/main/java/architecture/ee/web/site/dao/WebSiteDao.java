@@ -18,6 +18,7 @@ package architecture.ee.web.site.dao;
 import java.util.List;
 
 import architecture.ee.web.site.WebSite;
+import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteNotFoundException;
 
 public interface WebSiteDao {
@@ -39,5 +40,7 @@ public interface WebSiteDao {
 	public int getWebSiteCount(long companyId );
 	
 	public List<Long> getWebSiteIds(long companyId);	
+	
+	public List<WebSiteDomainMapper> getWebSiteDomainMappers();
 	
 }

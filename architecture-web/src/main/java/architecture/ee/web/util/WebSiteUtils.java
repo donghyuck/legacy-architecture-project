@@ -46,8 +46,7 @@ public class WebSiteUtils {
 
 	public static WebSiteManager getWebSiteManager(){
 		return ApplicationHelper.getComponent(WebSiteManager.class);
-	}
-		
+	}	
 	
 	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
 		String localName = request.getLocalName();		
@@ -178,7 +177,6 @@ public class WebSiteUtils {
 	public static void setMainTemplate(WebSite website, String templage){
 		if(StringUtils.isNotBlank(templage))
 			website.getProperties().put(MAIN_PAGE_VIEW_PREFIX, templage);
-	}
-		
+	}		
 
 }
