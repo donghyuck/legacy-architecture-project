@@ -28,7 +28,6 @@
 			],
 			complete: function() {
 				// START SCRIPT	
-				alert( jobs.length );
 				common.ui.setup({
 					features:{
 						backstretch : false,
