@@ -285,227 +285,32 @@
     </div><!--/layer_slider-->
     <!--=== End Slider ===-->
 		<div class="container content">	
-
-    <!-- content
-    ================================================== -->
-       <!-- Portfolio Sorting Blocks -->
-        <div class="sorting-block">
-            <ul class="sorting-nav sorting-nav-v1 text-center">
-                <li class="filter hidden-xs" data-filter="all">전체</li>
-                <li class="filter" data-filter=".category-1">기업서비스</li>
-                <li class="filter" data-filter=".category-2">대학서비스</li>
-                <li class="filter" data-filter=".category-3">자격사업</li>
-            </ul>
-
-            <ul class="row sorting-grid">
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1" >
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>국내위탁교육</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>해외연수</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/13.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>HRD 컨설팅</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 " data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>HRD 자문 서비스</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>INKIUM e-HRD</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>iCAP</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Studymart</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>iNTV</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix  category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>취업 교육프로그램</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>진로 및 취업 지도 워크숍</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>박람회</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>경진대회</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>인턴쉽</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>        
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>NCS 직업기초능력 교육과정 개발</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                        
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>NCS 기반 학과별 교육체계 수립</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>NCS 기반 학과별 교육과정 개발</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>학생경력개발시스템</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Olygo 서비스</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>JobCAP 서비스</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li> 
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>나취취</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>   
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>직립보행</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li> 
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>ICPI</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>   
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>ICPP</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                                                                                           
-            </ul>
+		<!-- content
+		================================================== -->
+		<!-- Portfolio Sorting Blocks -->
+		<div class="sorting-block">
+			<ul class="sorting-nav sorting-nav-v1 text-center">
+				<li class="filter hidden-xs" data-filter="all">전체</li>
+				<li class="filter" data-filter=".category-1">기업서비스</li>
+				<li class="filter" data-filter=".category-2">대학서비스</li>
+				<li class="filter" data-filter=".category-3">자격사업</li>
+			</ul>
+			<ul class="row sorting-grid">
+		    <#assign potopolioMenu = action.getWebSiteMenu("PHOTOPOLIO_MENU") />
+			<#list potopolioMenu.components as item >
+			<#if  item.components?has_content >    
+				<li class="col-md-3 col-sm-6 col-xs-12 mix ${item.category}" data-cat="${item.data}" >
+					<a href="#">
+					<img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
+					<span class="sorting-cover">
+						<span>${item.title}</span>
+						<p></p>
+					</span>
+					</a>
+				</li>
+			</#if>
+			</#list>		
+			</ul>
         
             <div class="clearfix"></div>
 			</div>
