@@ -300,7 +300,7 @@
 			<#list potopolioMenu.components as item >
 			    
 				<li class="col-md-3 col-sm-6 col-xs-12 mix ${item.category}" data-cat="${item.data}" >
-					<a href="<#if sub_item.page?? >${item.page}<#else>#</#if >">
+					<a href="<#if item.page?? >${item.page}<#else>#</#if >">
 					<img class="img-responsive" src="${item.image}" alt="">
 					<span class="sorting-cover">
 						<span>${item.title}</span>
