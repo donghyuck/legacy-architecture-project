@@ -13,7 +13,7 @@
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
-		var jobs = [];		
+
 		
 		yepnope([{
 			load: [
