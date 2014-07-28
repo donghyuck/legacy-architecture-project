@@ -109,4 +109,10 @@ public class ServletUtils {
     	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);  
     	return format;
 	}
+	
+	public static UAgentInfo getUserAgentInfo(HttpServletRequest httpservletrequest){		
+		return new UAgentInfo(httpservletrequest);
+		
+	}
+
 }
