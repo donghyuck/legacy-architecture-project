@@ -230,7 +230,7 @@
 						style=" top:0px; left: 300px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_contents_02.png" alt="Slider Image" 
                		 	class="ls-s-2" 
-               		 	style=" top:200px; left: 650px; slidedirection : down; slideoutdirection : up; durationin : 2500; durationout : 1500; ">
+               		 	style=" top:200px; left: 650px; slidedirection : right; slideoutdirection : up; durationin : 2500; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
                		                		 
                 </div>
