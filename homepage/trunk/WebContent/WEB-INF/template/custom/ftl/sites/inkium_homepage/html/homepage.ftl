@@ -298,7 +298,7 @@
 			<ul class="row sorting-grid">
 		    <#assign potopolioMenu = action.getWebSiteMenu("PHOTOPOLIO_MENU") />
 			<#list potopolioMenu.components as item >
-			<#if  item.components?has_content >    
+			    
 				<li class="col-md-3 col-sm-6 col-xs-12 mix ${item.category}" data-cat="${item.data}" >
 					<a href="<#if sub_item.page?? >${item.page}<#else>#</#if >">
 					<img class="img-responsive" src="${item.image}" alt="">
@@ -308,7 +308,7 @@
 					</span>
 					</a>
 				</li>
-			</#if>
+			
 			</#list>		
 			</ul>
         
