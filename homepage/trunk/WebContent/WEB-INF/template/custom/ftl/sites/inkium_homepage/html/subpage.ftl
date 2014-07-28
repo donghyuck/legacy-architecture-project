@@ -28,13 +28,12 @@
 			],
 			complete: function() {
 				// START SCRIPT	
-
 				common.ui.setup({
 					features:{
 						backstretch : false,
-						lightbox: true,
-						worklist : jobs
-					}
+						lightbox: true
+					},					
+					worklist : jobs
 				});	
 				      
 				// START SCRIPT					
