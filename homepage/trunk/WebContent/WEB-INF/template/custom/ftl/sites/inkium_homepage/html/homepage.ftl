@@ -234,39 +234,7 @@
 					 <img src="http://img.inkium.com/homepage/slider/main_contents_01.png" alt="Slider Image" class="ls-s-1" style=" top:0px; left: 450px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
                 </div>
-                /**
-                <div class="ls-layer" style="slidedirection: right; transition2d: 24,25,27,28; ">
 
-                    <img src="http://img.inkium.com/homepage/slider/main_icap_bg.jpg" class="ls-bg" alt="Slide background">
-
-                    <img src="http://th05.deviantart.net/fs70/PRE/i/2013/153/1/b/disney_university___taran_by_hyung86-d67k5q2.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-
-                    <img src="http://th05.deviantart.net/fs71/PRE/i/2013/272/9/a/disney_university___jane_by_hyung86-d6oh4zo.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
-
-					<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
-                      센스있는 신입사원이 되는 첫 걸음.
-                    </span>
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
-                    예절, 규범 그리고 약속의 기본인성을 바탕으로 제작
-                    </span>
-                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
-                      직장의 비즈니스 매너, 영상으로 기본을 익히다.
-                    </span>
-                                                           
-                    <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:30px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
-                  	취업역량강화 동영상 <br/>
-					<p class="" style="font-size:50px; font-weight:bold; color:#fff;">직립보행</p>
-                    </span>
-
-                    <a class="btn-u btn-u-blue ls-s1" href="${request.contextPath}/page.do?name=PAGE-51" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
-                        더 알아보기
-                    </a>
-                </div>
-                **/
                 <!--End First Slide-->
 
                 <!--Second Slide -->
