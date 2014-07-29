@@ -218,29 +218,30 @@
         <div id="layerslider-container-fw">        
             <div id="layerslider" style="width: 100%; height: 450px; margin: 0px auto; ">
                 <!--First Slide-->
-                <div class="ls-layer" style="slidedirection: top; ">
-                    <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
+                <div class="ls-layer" data-ls="slidedelay:4500;transition2d:25;">
+                    <img src="http://img.inkium.com/homepage/slider/main_icap_bg.jpg" class="ls-bg" alt="Slide background">
 					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; ">
-                      전문자격시험<br> 
-                       <span style="font-size:65px; font-weight:bold; "> ICP </span>
+                       성과지향형 역량진단 서비스<br> 
+                       <span style="font-size:65px; font-weight:bold; "> iCAP </span>
                     </span>
-					<img src="http://img.inkium.com/homepage/slider/main_contents_03.png" alt="Slider Image" 
+					 
+					<span class="ls-s-2" style=" color: #fff; padding: 9px 0px; font-size:14px;font-weight:bold; line-height:24px; top:190px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 2000; ">
+					전략적 교육체계 수립! 성과 중심의 인재육성 가이드 제공! <br> 
+					체계적인 인적자원의 개발 및 관리 지원! <br> 
+					조직 및 개인의 경쟁력 강화! 성장비전 가시화! <br> 
+					</span>
+					<img src="http://img.inkium.com/homepage/slider/main_icap_02.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">					
-					<img src="http://img.inkium.com/homepage/slider/main_contents_01.png" alt="Slider Image" 
-						class="ls-s-1" 
-						style=" top:0px; left: 300px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
-               		 <img src="http://img.inkium.com/homepage/slider/main_contents_02.png" alt="Slider Image" 
-               		 	class="ls-s-2" 
-               		 	style=" top:200px; left: 650px; slidedirection : left; slideoutdirection : up; durationin : 2500; durationout : 1500; ">
+						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+					 <img src="http://img.inkium.com/homepage/slider/main_icap_01.png" alt="Slider Image" class="ls-s-1" style=" top:0px; left: 450px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
-               		                		 
                 </div>
+                
 
                 <!--End First Slide-->
 
                 <!--Second Slide -->
-                <div class="ls-layer" style="slidedirection: top; ">
+                <div class="ls-layer" data-ls="transition2d:93;">
                     <img src="http://img.inkium.com/homepage/slider/main_consulting_bg.jpg" class="ls-bg" alt="Slide background">
 					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; ">
                        <span style="font-size:65px; font-weight:bold; "> HRD 컨설팅 </span>
@@ -263,23 +264,24 @@
                 </div>
                 <!--End Second Slide-->
                 <!--Third Slide-->
-                <div class="ls-layer" style="slidedirection: top; ">
-                    <img src="http://img.inkium.com/homepage/slider/main_icap_bg.jpg" class="ls-bg" alt="Slide background">
+                
+                <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105; ">
+                    <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
 					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; ">
-                       성과지향형 역량진단 서비스<br> 
-                       <span style="font-size:65px; font-weight:bold; "> iCAP </span>
+                      전문자격시험<br> 
+                       <span style="font-size:65px; font-weight:bold; "> ICP </span>
                     </span>
-					 
-					<span class="ls-s-2" style=" color: #fff; padding: 9px 0px; font-size:14px;font-weight:bold; line-height:24px; top:190px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 2000; ">
-					전략적 교육체계 수립! 성과 중심의 인재육성 가이드 제공! <br> 
-					체계적인 인적자원의 개발 및 관리 지원! <br> 
-					조직 및 개인의 경쟁력 강화! 성장비전 가시화! <br> 
-					</span>
-					<img src="http://img.inkium.com/homepage/slider/main_icap_02.png" alt="Slider Image" 
+					<img src="http://img.inkium.com/homepage/slider/main_contents_03.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-					 <img src="http://img.inkium.com/homepage/slider/main_icap_01.png" alt="Slider Image" class="ls-s-1" style=" top:0px; left: 450px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">					
+					<img src="http://img.inkium.com/homepage/slider/main_contents_01.png" alt="Slider Image" 
+						class="ls-s-1" 
+						style=" top:0px; left: 300px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+               		 <img src="http://img.inkium.com/homepage/slider/main_contents_02.png" alt="Slider Image" 
+               		 	class="ls-s-2" 
+               		 	style=" top:200px; left: 650px; slidedirection : left; slideoutdirection : up; durationin : 2500; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+               		                		 
                 </div>
                 <!--End Third Slide-->
             </div>         
