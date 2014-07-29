@@ -211,16 +211,16 @@
                 <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105">
                     <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
 					
-		           <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i>
-		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
+		           <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i>
+		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
 		                직업능력개발원 공식 민간 PT전문자격증!
 		            </span>		
-		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 		
-		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
+		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 		
+		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
 		               대학생의 취업을 위한 발표 능력 UP!
 		            </span>		
-		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i>		
-		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
+		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i>		
+		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
 		               직장인의 보고능력, 수주를 위한 프레젠테이션 능력 UP!
 		            </span>					
 					
@@ -233,7 +233,7 @@
 						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">					
 					<img src="http://img.inkium.com/homepage/slider/main_contents_01.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:0px; left: 500px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">
+						style=" top:0px; left: 470px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_contents_02.png" alt="Slider Image" 
                		 	class="ls-s-2" 
                		 	style=" top:200px; left: 750px; slidedirection : left; slideoutdirection : up; durationin : 1500; durationout : 1500; ">
