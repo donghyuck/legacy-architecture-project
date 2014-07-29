@@ -196,7 +196,7 @@
 					</span>
 					<img src="http://img.inkium.com/homepage/slider/main_consulting_03.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:420px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
 					<img src="http://img.inkium.com/homepage/slider/main_consulting_01" alt="Slider Image" 
 						class="ls-s-1" 
 						style=" top:0px; left: 420px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
