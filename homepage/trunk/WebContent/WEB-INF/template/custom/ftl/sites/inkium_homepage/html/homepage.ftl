@@ -175,9 +175,9 @@
 					</span>
 					<img src="http://img.inkium.com/homepage/slider/main_icap_02.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-					 <img src="http://img.inkium.com/homepage/slider/main_icap_01.png" alt="Slider Image" class="ls-s-1" style=" top:0px; left: 450px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+						style=" top:420px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+					 <img src="http://img.inkium.com/homepage/slider/main_icap_01.png" alt="Slider Image" class="ls-s-1" style=" top:0px; left: 550px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 990px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
                 </div>
                 
 
