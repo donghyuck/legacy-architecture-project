@@ -265,7 +265,7 @@
                 <!--End Second Slide-->
                 <!--Third Slide-->
                 
-                <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105; ">
+                <div class="ls-layer" style="slidedirection: right; transition2d: 92,93; ">
                     <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
 					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 500; durationout : 1000; ">
                       전문자격시험<br> 
