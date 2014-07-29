@@ -211,20 +211,20 @@
                 <div class="ls-layer" style="slidedirection: right; transition2d: 92,93,105">
                     <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
 					
-		           <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i>
-		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
+		           <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:50px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i>
+		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:50px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
 		                직업능력개발원 공식 민간 PT전문자격증!
 		            </span>		
-		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 		
-		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
+		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:100px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 		
+		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:100px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
 		               대학생의 취업을 위한 발표 능력 UP!
 		            </span>		
-		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i>		
-		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
+		            <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 22px; top:150px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i>		
+		            <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 20px; top:150px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
 		               직장인의 보고능력, 수주를 위한 프레젠테이션 능력 UP!
 		            </span>					
 					
-					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 28px; top:200px; left: 40px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 1000; ">
+					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 28px; top:170px; left: 40px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 1000; ">
                       전문자격시험<br> 
                        <span style="font-size:65px; font-weight:bold; "> ICPP </span>
                     </span>
