@@ -13,6 +13,8 @@
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css" />
 		<script type="text/javascript">
 		<!--
+
+		
 		yepnope([{
 			load: [
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',								
@@ -21,7 +23,9 @@
 			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',								
 			'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',			
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',		
+			
 			'${request.contextPath}/js/jquery.bxslider/jquery.bxslider.min.js',		
+				
 			'${request.contextPath}/js/jquery.mixitup/jquery.mixitup.js',								
 			'${request.contextPath}/js/jquery.easing/jquery.easing.1.3.js',
 			'${request.contextPath}/js/layer-slider/jquery.transit.modified.js',
@@ -214,37 +218,25 @@
         <div id="layerslider-container-fw">        
             <div id="layerslider" style="width: 100%; height: 450px; margin: 0px auto; ">
                 <!--First Slide-->
-                <div class="ls-layer" style="slidedirection: right; transition2d: 24,25,27,28; ">
-
-                    <img src="http://img.inkium.com/homepage/slider/main_icap_bg.jpg" class="ls-bg" alt="Slide background">
-
-                    <img src="http://th05.deviantart.net/fs70/PRE/i/2013/153/1/b/disney_university___taran_by_hyung86-d67k5q2.png" alt="Slider Image" class="ls-s-1" style=" top:110px; left: 240px; slidedirection : left; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
-
-                    <img src="http://th05.deviantart.net/fs71/PRE/i/2013/272/9/a/disney_university___jane_by_hyung86-d6oh4zo.png" alt="Slider image" class="ls-s-1" style=" top:60px; left: 40px; slidedirection : left; slideoutdirection : bottom; durationin : 2500; durationout : 2500; ">
-
-					<i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:70px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 1500; durationout : 500; "></i> 
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:70px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 500; ">
-                      센스있는 신입사원이 되는 첫 걸음.
+                <div class="ls-layer" style="slidedirection: top; ">
+                    <img src="http://img.inkium.com/homepage/slider/main_contents_bg.jpg" class="ls-bg" alt="Slide background">
+					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; ">
+                      전문자격시험<br> 
+                       <span style="font-size:65px; font-weight:bold; "> ICP </span>
                     </span>
-                    <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:120px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 2500; durationout : 1500; "></i> 
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:120px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 2500; durationout : 1500; ">
-                    예절, 규범 그리고 약속의 기본인성을 바탕으로 제작
-                    </span>
-                     <i class="fa fa-chevron-circle-right ls-s-1" style=" color: #fff; font-size: 24px; top:170px; left: 40px; slidedirection : left; slideoutdirection : top; durationin : 3500; durationout : 3500; "></i> 
-
-                    <span class="ls-s-2" style=" color: #fff; font-weight: 200; font-size: 22px; top:170px; left: 70px; slidedirection : top; slideoutdirection : bottom; durationin : 3500; durationout : 2500; ">
-                      직장의 비즈니스 매너, 영상으로 기본을 익히다.
-                    </span>
-                                                           
-                    <span class="ls-s-1" style=" text-transform: uppercase; line-height: 45px; font-size:30px; color:#fff; top:200px; left: 590px; slidedirection : top; slideoutdirection : bototm; durationin : 3500; durationout : 3500; ">
-                  	취업역량강화 동영상 <br/>
-					<p class="" style="font-size:50px; font-weight:bold; color:#fff;">직립보행</p>
-                    </span>
-
-                    <a class="btn-u btn-u-blue ls-s1" href="${request.contextPath}/page.do?name=PAGE-51" style=" padding: 9px 20px; font-size:25px; top:340px; left: 590px; slidedirection : bottom; slideoutdirection : top; durationin : 3500; durationout : 3500; ">
-                        더 알아보기
-                    </a>
+					<img src="http://img.inkium.com/homepage/slider/main_contents_03.png" alt="Slider Image" 
+						class="ls-s-1" 
+						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">					
+					<img src="http://img.inkium.com/homepage/slider/main_contents_01.png" alt="Slider Image" 
+						class="ls-s-1" 
+						style=" top:0px; left: 300px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+               		 <img src="http://img.inkium.com/homepage/slider/main_contents_02.png" alt="Slider Image" 
+               		 	class="ls-s-2" 
+               		 	style=" top:200px; left: 650px; slidedirection : left; slideoutdirection : up; durationin : 2500; durationout : 1500; ">
+               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+               		                		 
                 </div>
+
                 <!--End First Slide-->
 
                 <!--Second Slide -->
@@ -295,227 +287,32 @@
     </div><!--/layer_slider-->
     <!--=== End Slider ===-->
 		<div class="container content">	
-
-    <!-- content
-    ================================================== -->
-       <!-- Portfolio Sorting Blocks -->
-        <div class="sorting-block">
-            <ul class="sorting-nav sorting-nav-v1 text-center">
-                <li class="filter hidden-xs" data-filter="all">전체</li>
-                <li class="filter" data-filter=".category-1">기업서비스</li>
-                <li class="filter" data-filter=".category-2">대학서비스</li>
-                <li class="filter" data-filter=".category-3">자격사업</li>
-            </ul>
-
-            <ul class="row sorting-grid">
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1" >
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>국내위탁교육</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>해외연수</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/13.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>HRD 컨설팅</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1 " data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>HRD 자문 서비스</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/2.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>INKIUM e-HRD</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/6.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>iCAP</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/8.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Studymart</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-1" data-cat="1">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/1.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>iNTV</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix  category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/11.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>취업 교육프로그램</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>진로 및 취업 지도 워크숍</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>박람회</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>경진대회</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>인턴쉽</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>        
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>NCS 직업기초능력 교육과정 개발</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                        
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>NCS 기반 학과별 교육체계 수립</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>NCS 기반 학과별 교육과정 개발</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>학생경력개발시스템</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>Olygo 서비스</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>JobCAP 서비스</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li> 
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>나취취</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>   
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-2" data-cat="2">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>직립보행</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li> 
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>ICPI</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>   
-                <li class="col-md-3 col-sm-6 col-xs-12 mix category-3" data-cat="3">
-                    <a href="#">
-                        <img class="img-responsive" src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/12.jpg" alt="">
-                        <span class="sorting-cover">
-                            <span>ICPP</span>
-                            <p></p>
-                        </span>
-                    </a>
-                </li>                                                                                           
-            </ul>
+		<!-- content
+		================================================== -->
+		<!-- Portfolio Sorting Blocks -->
+		<div class="sorting-block">
+			<ul class="sorting-nav sorting-nav-v1 text-center">
+				<li class="filter hidden-xs" data-filter="all">전체</li>
+				<li class="filter" data-filter=".category-1">기업서비스</li>
+				<li class="filter" data-filter=".category-2">대학서비스</li>
+				<li class="filter" data-filter=".category-3">자격사업</li>
+			</ul>
+			<ul class="row sorting-grid">
+		    <#assign potopolioMenu = action.getWebSiteMenu("PHOTOPOLIO_MENU") />
+			<#list potopolioMenu.components as item >
+			    
+				<li class="col-md-3 col-sm-6 col-xs-12 mix ${item.category}" data-cat="${item.data}" >
+					<a href="<#if item.page?? >${item.page}<#else>#</#if >">
+					<img class="img-responsive" src="${item.image}" alt="">
+					<span class="sorting-cover">
+						<span>${item.title}</span>
+						<p></p>
+					</span>
+					</a>
+				</li>
+			
+			</#list>		
+			</ul>
         
             <div class="clearfix"></div>
 			</div>
