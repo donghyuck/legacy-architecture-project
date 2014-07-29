@@ -67,8 +67,8 @@
 					thumbnailNavigation : 'hover',
 					hoverPrevNext : true,
 					responsive : true,
-					responsiveUnder : 960,
-					sublayerContainer : 960
+					responsiveUnder : 990,
+					sublayerContainer : 990
 		        });
 		        				
 		        $('.sorting-grid').mixItUp({
