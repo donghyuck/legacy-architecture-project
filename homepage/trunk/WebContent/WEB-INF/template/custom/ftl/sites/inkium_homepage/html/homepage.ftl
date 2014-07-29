@@ -281,7 +281,7 @@
 		               직장인의 보고능력, 수주를 위한 프레젠테이션 능력 UP!
 		            </span>					
 					
-					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 28px; top:200px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1000; ">
+					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 28px; top:200px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 1000; ">
                       전문자격시험<br> 
                        <span style="font-size:65px; font-weight:bold; "> ICPP </span>
                     </span>
