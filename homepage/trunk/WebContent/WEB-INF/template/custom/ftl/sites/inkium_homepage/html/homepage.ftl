@@ -218,7 +218,7 @@
         <div id="layerslider-container-fw">        
             <div id="layerslider" style="width: 100%; height: 450px; margin: 0px auto; ">
                 <!--First Slide-->
-                <div class="ls-layer" data-ls="slidedelay:4500;transition2d:25;">
+                <div class="ls-layer" data-ls="slidedelay:500;transition2d:25;">
                     <img src="http://img.inkium.com/homepage/slider/main_icap_bg.jpg" class="ls-bg" alt="Slide background">
 					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 40px; top:80px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 1500; durationout : 1000; ">
                        성과지향형 역량진단 서비스<br> 
