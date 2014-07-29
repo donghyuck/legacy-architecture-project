@@ -196,14 +196,14 @@
 					</span>
 					<img src="http://img.inkium.com/homepage/slider/main_consulting_03.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
+						style=" top:420px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1500; durationout : 1500; ">
 					<img src="http://img.inkium.com/homepage/slider/main_consulting_01" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:0px; left: 320px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+						style=" top:0px; left: 420px; slidedirection : top; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_consulting_02" alt="Slider Image" 
                		 	class="ls-s-2" 
-               		 	style=" top:0px; left: 640px; slidedirection : left; slideoutdirection : right; durationin : 2500; durationout : 1500; ">
-               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
+               		 	style=" top:0px; left: 740px; slidedirection : left; slideoutdirection : right; durationin : 2500; durationout : 1500; ">
+               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 990px; slidedirection : right; slideoutdirection : bottom; durationin : 2000; durationout : 1500; ">
                 </div>
                 <!--End Second Slide-->
                 <!--Third Slide-->
@@ -233,11 +233,11 @@
 						style=" top:320px; left: 10px; slidedirection : bottom; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">					
 					<img src="http://img.inkium.com/homepage/slider/main_contents_01.png" alt="Slider Image" 
 						class="ls-s-1" 
-						style=" top:0px; left: 480px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">
+						style=" top:0px; left: 580px; slidedirection : top; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">
                		 <img src="http://img.inkium.com/homepage/slider/main_contents_02.png" alt="Slider Image" 
                		 	class="ls-s-2" 
-               		 	style=" top:200px; left: 750px; slidedirection : left; slideoutdirection : up; durationin : 1500; durationout : 1500; ">
-               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 890px; slidedirection : right; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">
+               		 	style=" top:200px; left: 850px; slidedirection : left; slideoutdirection : up; durationin : 1500; durationout : 1500; ">
+               		 <img src="http://img.inkium.com/homepage/slider/main_O.png" alt="Slider Image" class="ls-s-1" style=" top:10px; left: 990px; slidedirection : right; slideoutdirection : bottom; durationin : 1000; durationout : 1500; ">
                		                		 
                 </div>
                 <!--End Third Slide-->
