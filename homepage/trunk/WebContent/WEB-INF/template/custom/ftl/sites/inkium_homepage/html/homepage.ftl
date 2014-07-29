@@ -143,63 +143,6 @@
 			font-style: normal;
 		}
 		
-		/*
-		.bx-wrapper .bx-viewport {
-			-moz-box-shadow: none;
-			-webkit-box-shadow: none;
-			box-shadow: none;
-			border: none;
-			left: -5px;
-			background: transparent;
-			-webkit-transform:none;
-			-moz-transform: none;
-			-ms-transform: none;
-			-o-transform: none;
-			transform: none;
-		}
-		
-		.family-site a img {
-			width: 100px;
-		}
-
-		#services-view .col-sm-6 {
-			padding-right: 11px;
-			padding-left: 11px;
-		}
-		
-		#services-view .view {
-			margin-bottom: 10px;
-		}	
-		
-		#services-view .view-tenth img {
-			left: 10;
-			margin-left: -10px;
-		}
-			
-		#services-view .view p {
-			padding: 20px 10px 20px 10px;
-		}
-		
-		#services-view .view a.info {
-		color: #fff;
-		background: #000;
-		margin-top: -20px;
-		text-transform: none;
-		}
-	   */		
-		/*Summary-Content
-		------------------------------------*/
-		/*
-		.summary-content .summaries li {
-			padding: 6px 0;
-			border-bottom: 1px dotted #ccc;
-		}
-		
-		.summary-content .hex {
-			color: #999
-		}
-			
-		*/
 		</style>   
 		</#compress>			
 	</head>
@@ -281,7 +224,7 @@
 		               직장인의 보고능력, 수주를 위한 프레젠테이션 능력 UP!
 		            </span>					
 					
-					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 28px; top:200px; left: 10px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 1000; ">
+					<span class="ls-s-1" style=" color: #fff; line-height:55px; font-weight: bold; font-size: 28px; top:200px; left: 40px; slidedirection : top; slideoutdirection : bottom; durationin : 4500; durationout : 1000; ">
                       전문자격시험<br> 
                        <span style="font-size:65px; font-weight:bold; "> ICPP </span>
                     </span>
