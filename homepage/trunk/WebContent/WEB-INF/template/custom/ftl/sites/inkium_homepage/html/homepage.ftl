@@ -68,7 +68,7 @@
 					hoverPrevNext : true,
 					responsive : true,
 					responsiveUnder : 990,
-					sublayerContainer : 990
+					sublayerContainer : 1170
 		        });
 		        				
 		        $('.sorting-grid').mixItUp({
