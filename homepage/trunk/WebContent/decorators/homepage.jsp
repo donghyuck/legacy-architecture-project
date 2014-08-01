@@ -190,6 +190,7 @@
 	}
 	.floatybox{
 		display: inline-block;
+		float: left;
 	}
 	
 	
