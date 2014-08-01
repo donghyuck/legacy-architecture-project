@@ -188,10 +188,15 @@
 		font-weight : bold;
 		color : #f37031;
 	}
-	.floatybox{
-		display: inline-block;
-		float: left;
+	.row {
+	  width: 100%;
+	  text-align: center; 
 	}
+	
+	.row-item {
+	  width: 100px;
+	  display: inline-block; 
+	}​
 	
 	
 		
