@@ -188,6 +188,10 @@
 		font-weight : bold;
 		color : #f37031;
 	}
+	.floatybox{
+		display: inline-block;
+	}
+	
 	
 		
 	.page-content .page-content-title> h3:before {
