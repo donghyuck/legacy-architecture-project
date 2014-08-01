@@ -188,10 +188,10 @@
 		font-weight : bold;
 		color : #f37031;
 	}
-	.row {
+	/*.row {
 	  width: 100%;
 	  text-align: center; 
-	}
+	}*/
 	
 	.row-item {
 	  width: 100px;
