@@ -188,16 +188,6 @@
 		font-weight : bold;
 		color : #f37031;
 	}
-	/*.row {
-	  width: 100%;
-	  text-align: center; 
-	}*/
-	
-	.row-item {
-	  width: 100px;
-	  display: inline-block; 
-	}​
-	
 	
 		
 	.page-content .page-content-title> h3:before {
