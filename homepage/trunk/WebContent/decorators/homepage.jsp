@@ -189,6 +189,47 @@
 		color : #f37031;
 	}
 	
+	.row-tr{
+		padding-bottom:10px; 
+		margin-left:20px;
+	}
+	.row-td-v1{
+		background-image:url(http://img.inkium.com/homepage/sub/bar_grey01.jpg); 
+		height:36px; 
+		width:398px; 
+		display: inline-block; 
+		text-align:center; 
+		margin-right:10px; 
+		padding-top:6px;
+	}
+	.row-td-v2{
+		background-image:url(http://img.inkium.com/homepage/sub/bar_grey02.jpg); 
+		height:36px; 
+		width:398px; 
+		display: inline-block; 
+		text-align:center; 
+		margin-right:10px; 
+		padding-top:6px;
+	}
+	.row-td-v3{
+		background-image:url(http://img.inkium.com/homepage/sub/bar_grey03.jpg); 
+		height:36px; 
+		width:398px; 
+		display: inline-block; 
+		text-align:center; 
+		margin-right:10px; 
+		padding-top:6px;
+	}
+	.row-td-v4{
+		background-image:url(http://img.inkium.com/homepage/sub/bar_grey04.jpg); 
+		height:36px; 
+		width:398px; 
+		display: inline-block; 
+		text-align:center; 
+		margin-right:10px; 
+		padding-top:6px;
+	}
+	
 		
 	.page-content .page-content-title> h3:before {
 		content: url('http://img.inkium.com/homepage/sub/line_black.gif');
