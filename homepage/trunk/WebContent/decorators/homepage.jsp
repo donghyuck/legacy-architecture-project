@@ -145,7 +145,7 @@
 	.page-content .page-content-title h4 {
 		padding-top: 10px;
 		line-height: 25px;
-		font-size : 20px;
+		font-size : 18px;
 		font-weight: bold;
 		color: #f37021;
 	}
@@ -166,7 +166,7 @@
 	.page-content .page-content-title-v2 h4 {
 		padding-top: 10px;
 		line-height: 25px;
-		font-size : 20px;
+		font-size : 18px;
 		font-weight: bold;
 		color: #f37021;
 	}
