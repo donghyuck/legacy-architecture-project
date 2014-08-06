@@ -77,7 +77,7 @@
 				<div class="col-lg-9">				
 					<div class="header-sub-title">
 						<h2 class="color-green">${action.targetPage.title}<br/>
-						<small> ${action.targetPage.summary!}</small><h2>
+						<small class="visible-lg"> ${action.targetPage.summary!}</small><h2>
 					</div>								
 					<ul class="breadcrumb">
 				        <li><a href="main.do"><i class="fa fa-home fa-lg"></i></a></li>
