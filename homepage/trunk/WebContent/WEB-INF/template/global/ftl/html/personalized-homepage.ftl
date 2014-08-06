@@ -689,7 +689,7 @@
 				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
 					<ul class="nav navbar-nav pull-right">								
 								<li>
-									<button type="button" class="btn btn-primary navbar-btn" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i></button>
+									<button type="button" class="btn btn-primary navbar-btn rounded-2x" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i></button>
 								</li>
 								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
 								<li class="hidden-xs">
