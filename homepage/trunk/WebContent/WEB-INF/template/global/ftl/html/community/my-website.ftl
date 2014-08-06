@@ -264,7 +264,8 @@
 					update : function (e) {
 						var btn = $(e.target);
 						btn.button('loading');
-						if( this.announce.subject.length ==0 || this.announce.body.length  ){
+						alert(kendo.stringify( this.announce ) );
+						if( this.announce.subject.length == 0 || this.announce.body.length == 0 ){
 							common.ui.notification({
 								title:"공지 입력 오류", 
 								message: "제목 또는 본문을 입력하세요." ,
@@ -484,10 +485,10 @@
 											}
 										});						
 							}
-							$("#my-files .custom-upload").toggleClass("hide");				
+							$("#my-files .panel-upload").slideToggle(200);				
 						},
 						'upload-close' : function(e){
-							$("#my-files .custom-upload").toggleClass("hide");		
+							$("#my-files .panel-upload").slideToggle(200);	
 						}													 
 					}}
 				);						
@@ -633,10 +634,10 @@
 								kendo.bind($("#website-photo-stream form"), uploadModel);
 							}							
 							$('#website-photo-stream form div.form-group.has-error').removeClass("has-error");
-							$("#website-photo-stream .custom-upload").toggleClass("hide");				
+							$("#website-photo-stream .panel-upload").slideToggle(200);						
 						},	  
 						'upload-close' : function(e){
-							$("#website-photo-stream .custom-upload").toggleClass("hide");		
+							$("#website-photo-stream .panel-upload").slideToggle(200);				
 						}													 
 					}}
 				);
@@ -880,14 +881,46 @@
 		</#compress>
 	</head>
 	<body id="doc" class="bg-gray">
-
+		<div class="page-loader"></div>
 		<div class="wrapper">
 			<!-- START HEADER -->		
 			<#include "/html/common/common-homepage-menu.ftl" >		
 			<!-- END HEADER -->	
 			<!-- START MAIN CONTENT -->
+				<div id="notice-section" class="one-page animated bounceInUp no-border no-padding-t" >
+					<div class="one-page-inner one-grey">
+						<div class="container">	
+							<button type="button" class="close fa-3x" data-dismiss="section" data-target="#notice-section" data-switch-target="button[data-action='show-notice-section']" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+							<h1>공지 & 이벤트 
+								<small>		
+									소스를 선택하세요.
+								</small>
+							</h1>		
+							<div class="row ">
+								<div class="col-sm-4">
+									<div class="one-page-btn">
+										<div id="notice-target-button" class="btn-group" data-toggle="buttons">
+											<label class="btn btn-info btn-sm active">
+												<input type="radio" name="notice-target" value="30" >사이트
+											</label>
+											<label class="btn btn-info btn-sm ">
+												<input type="radio" name="notice-target" value="1">회사
+											</label>
+										</div>
+										<button type="button"	class="btn-u btn-u-red pull-right" data-action="new-notice"><i class="fa fa-plus"></i> 공지 추가</button>
+									</div>		
+									<div  id="notice-grid"></div>
+								</div>
+								<div class="col-sm-8">
+									<div  id="notice-view"></div>
+									<div  id="notice-editor"></div>	
+								</div>
+							</div>				
+						</div>
+					</div>	
+				</div><!-- ./ong-page -->							
 			<div class="container-fluid">		
-				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
+				<div class="navbar navbar-personalized navbar-inverse padding-sm" role="navigation">
 							<ul class="nav navbar-nav pull-right">
 								<li><button type="button" class="btn btn-primary navbar-btn" data-toggle="button" data-action="show-notice-section" >공지 & 이벤트 </button></li>
 								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
@@ -905,45 +938,11 @@
 									</div>
 								</li> 
 							</ul>
-				</div><!-- ./navbar-personalized -->		
+				</div><!-- ./navbar-personalized -->
 				<div id="personalized-area" class="row" style="min-height:10px;"></div>				
 			</div><!-- ./container-fluid -->	
 			
-			<div id="notice-section" class="one-page animated bounceInUp">
-				<div class="one-page-inner one-grey">
-					<div class="container">	
-						<button type="button" class="close fa-3x" data-dismiss="section" data-target="#notice-section" data-switch-target="button[data-action='show-notice-section']" ><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-						<h1>공지 & 이벤트 
-							<small>		
-								소스를 선택하세요.
-							</small>
-						</h1>		
-						<div class="row ">
-							<div class="col-sm-4">
-								<div class="one-page-btn">
-									<div id="notice-target-button" class="btn-group" data-toggle="buttons">
-										<label class="btn btn-info btn-sm active">
-											<input type="radio" name="notice-target" value="30" >사이트
-										</label>
-										<label class="btn btn-info btn-sm ">
-											<input type="radio" name="notice-target" value="1">회사
-										</label>
-									</div>
-									<button type="button"	class="btn-u btn-u-red pull-right" data-action="new-notice"><i class="fa fa-plus"></i> 공지 추가</button>
-								</div>		
-								<div  id="notice-grid"></div>
-							</div>
-							<div class="col-sm-8">
-								<div  id="notice-view"></div>
-								<div  id="notice-editor"></div>	
-							</div>
-						</div>				
-					</div>
-				</div>	
-			</div><!-- ./ong-page -->		
-			
-			
-							
+	
 		<div class="container padding-sm" style="min-height:600px;">			
 			<div class="row blank-top-10">				
 				<div id="announce-panel" class="custom-panels-group col-sm-6" style="display:none;">	
@@ -1033,25 +1032,25 @@
 				</ul>	<!-- ./nav-tabs -->
 				<div class="tab-content" style="background-color : #FFFFFF; padding:5px;">
 					<div class="tab-pane" id="my-files">
-						<section class="custom-upload hide">
-							<div class="panel panel-default">
-								<div class="panel-body">		
-								<button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>															
-								<#if !action.user.anonymous >			
-								<div class="page-header text-primary">
-									<h5><i class="fa fa-upload"></i>&nbsp;<strong>파일 업로드</strong>&nbsp;<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 파일을 직접 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</small></h5>
-								</div>								
-								<input name="uploadAttachment" id="attachment-files" type="file" />												
-								</#if>								
-								</div>
+						<div class="panel panel-default panel-upload  no-margin-b no-border-b" style="display:none;">
+							<div class="panel-heading">
+								<strong><i class="fa fa-cloud-upload  fa-lg"></i> 파일 업로드</strong> <button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>
 							</div>
-						</section><!-- ./custom-upload -->											
+							<div class="panel-body">							
+							<#if !action.user.anonymous >			
+							<div class="page-header text-primary">
+								<h5><i class="fa fa-upload"></i> <strong>파일 업로드</strong>&nbsp;<small>아래의 <strong>파일 선택</strong> 버튼을 클릭하여 파일을 직접 선택하거나, 아래의 영역에 파일을 끌어서 놓기(Drag & Drop)를 하세요.</small></h5>
+							</div>								
+							<input name="uploadAttachment" id="attachment-files" type="file" />												
+							</#if>								
+							</div>
+						</div><!-- ./panel-upload -->											
 						<div class="panel panel-default">
 							<div class="panel-body">
 								<p class="text-muted"><small><i class="fa fa-info"></i> 파일을 선택하면 아래의 페이지 영역에 선택한 파일이 보여집니다.</small></p>
 								<#if !action.user.anonymous >		
 								<p class="pull-right">				
-									<button type="button" class="btn btn-info btn-lg btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> 파일업로드</button>	
+									<button type="button" class="btn btn-info btn-lg btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-upload"></i> 파일업로드</button>	
 								</p>	
 								</#if>																										
 								<div class="btn-group" data-toggle="buttons" id="attachment-list-filter">
@@ -1075,10 +1074,12 @@
 						</div>																				
 					</div><!-- ./tab-pane -->	
 					<div class="tab-pane" id="website-photo-stream">									
-						<section class="custom-upload hide">
-												<div class="panel panel-default">
+						
+						<div class="panel panel-default panel-upload no-margin-b no-border-b" style="display:none;">
+							<div class="panel-heading">
+								<strong><i class="fa fa-cloud-upload  fa-lg"></i> 사진 업로드</strong> <button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>
+							</div>
 													<div class="panel-body">
-														<button type="button" class="close btn-control-group" data-action="upload-close">&times;</button>
 														<#if !action.user.anonymous >			
 														<div class="page-header text-primary">
 															<h5><i class="fa fa-upload"></i>&nbsp;<strong>사진 업로드</strong>&nbsp;<small>아래의 <strong>사진 선택</strong> 버튼을 클릭하여 사진을 직접 선택하거나, 아래의 영역에 사진를 끌어서 놓기(Drag & Drop)를 하세요.</small></h5>
@@ -1114,17 +1115,17 @@
 														</#if>
 													</div>
 												</div>	
-						</section><!-- ./custom-upload -->	
+						<!-- ./custom-upload -->	
 						<div class="panel panel-default">			
 							<div class="panel-body">
 								<p class="text-muted"><small><i class="fa fa-info"></i> 사진을 선택하면 아래의 페이지 영역에 선택한 사진이 보여집니다.</small></p>
 								<#if !action.user.anonymous >		
 								<p class="pull-right">				
-									<button type="button" class="btn btn-info btn-sm btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 사진업로드</button>																		
+									<button type="button" class="btn btn-info btn-lg btn-control-group" data-toggle="button" data-action="upload"><i class="fa fa-cloud-upload"></i> &nbsp; 사진업로드</button>																		
 								</p>	
 								</#if>											
 							</div>
-							<div class="panel-body color4" style="min-height:450px;">
+							<div class="panel-body color4" style="max-height:450px;">
 								<div id="photo-list-view" class="image-listview" ></div>
 							</div>	
 							<div class="panel-footer no-padding">
