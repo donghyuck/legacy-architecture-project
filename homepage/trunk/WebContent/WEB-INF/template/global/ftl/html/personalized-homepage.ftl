@@ -688,10 +688,11 @@
 			<div class="container-fluid padding-sm" style="min-height:600px;">		
 				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
 					<ul class="nav navbar-nav pull-right">
-								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
+								
 								<li>
-									<button type="button" class="btn btn-primary navbar-btn" data-toggle="button" data-action="spmenu"><i class="fa fa-cloud-upload fa-2x"></i></button>
+									<button type="button" class="btn btn-primary navbar-btn" data-toggle="button" data-action="spmenu"><i class="fa fa-cloud-upload fa-lg"></i></button>
 								</li>
+								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
 								<li class="hidden-xs">
 									<div class="btn-group navbar-btn" data-toggle="buttons">
 										<label class="btn btn-info">
