@@ -31,7 +31,8 @@
 				common.ui.setup({
 					features:{
 						backstretch : false,
-						lightbox: true
+						lightbox: true,
+						landing:false
 					},					
 					worklist:jobs
 				});	
@@ -60,7 +61,7 @@
 		</#compress>	
 	</head>
 	<body>
-		<div class="page-loader"></div>
+		
 		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
