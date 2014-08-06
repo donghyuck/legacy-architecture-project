@@ -116,7 +116,7 @@
 </#compress>		
 	</head>
 	<body>
-		<div class="page-loader"></div>
+
 		<div class="container" style="min-height:450px;">
 			<div id="signin-block" class="reg-block reg-block-transparent  pull-right">
 		        <div class="reg-block-header">		        
