@@ -689,6 +689,9 @@
 				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
 					<ul class="nav navbar-nav pull-right">
 								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
+								<li>
+									<button type="button" class="btn btn-primary navbar-btn" data-toggle="button" data-action="spmenu">공지 &amp; 이벤트 </button>
+								</li>
 								<li class="hidden-xs">
 									<div class="btn-group navbar-btn" data-toggle="buttons">
 										<label class="btn btn-info">
