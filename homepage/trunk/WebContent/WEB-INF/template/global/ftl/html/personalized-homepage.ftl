@@ -687,8 +687,7 @@
 			<!-- START MAIN CONTENT -->
 			<div class="container-fluid padding-sm" style="min-height:600px;">		
 				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
-					<ul class="nav navbar-nav pull-right">
-								
+					<ul class="nav navbar-nav pull-right">								
 								<li>
 									<button type="button" class="btn btn-primary navbar-btn" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i></button>
 								</li>
