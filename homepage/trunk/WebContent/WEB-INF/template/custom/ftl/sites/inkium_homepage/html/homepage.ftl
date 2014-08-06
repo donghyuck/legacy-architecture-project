@@ -6,7 +6,6 @@
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/jquery.bxslider/jquery.bxslider.css">
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/layerslider.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/layer-slider/skins/fullwidth/skin.css" />
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common/common.img-hover.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.pages/common.portfolio-v2.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.pages/common.onepage.css" />
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css" />
