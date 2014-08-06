@@ -3,7 +3,8 @@
 	<head>
 		<title> ${action.targetPage.title}</title>
 		<#compress>	
-		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css" /> 			
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css" /> 			
 		<script type="text/javascript">
 		<!--
 		
@@ -11,7 +12,6 @@
 		
 		yepnope([{
 			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
 			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'css!${request.contextPath}/styles/jquery.magnific-popup/magnific-popup.css',	
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
