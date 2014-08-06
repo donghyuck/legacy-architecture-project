@@ -679,7 +679,7 @@
 		</#compress>
 	</head>
 	<body id="doc" class="bg-dark">
-		<div class="page-loader"></div>
+
 		<div class="wrapper">
 			<!-- START HEADER -->		
 			<#include "/html/common/common-homepage-menu.ftl" >		
@@ -702,7 +702,6 @@
 										</label>
 									</div>
 								</li> 
-								<!--<li><a href="#personalized-controls-section" class="btn-control-group no-padding-b" data-toggle="menu"><i class="fa fa-cloud-upload fa-2x"></i></a></li>-->
 					</ul>
 				</div><!-- ./navbar-personalized -->
 				<div id="personalized-area" class="row"></div>				
