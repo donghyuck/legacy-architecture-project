@@ -3,12 +3,12 @@
 <head>
 		<title>기업소개</title>
 		<#compress>				
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css" />
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css" /> 			
 		<script type="text/javascript">
 		<!--
 		yepnope([{
-			load: [
-			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
-			'css!${request.contextPath}/styles/common.themes/unify/themes/pomegranate.css',						
+			load: [				
 			'css!${request.contextPath}/styles/common.plugins/animate.css',
 			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
@@ -65,7 +65,6 @@
 		</#compress>	   	
 	</head>
 	<body>
-		<div class="page-loader"></div>
 		<div class="wrapper">
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
