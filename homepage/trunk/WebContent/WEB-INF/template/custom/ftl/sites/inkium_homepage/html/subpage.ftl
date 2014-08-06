@@ -74,7 +74,7 @@
 					<img src="${current_menu.parent.image!"http://img.inkium.com/homepage/sub/sub_company_02.png"}"/>					
 					</div>
 				</div>
-				<div class="col-lg-9">				
+				<div class="col-lg-9 col-md-12">				
 					<div class="header-sub-title">
 						<h2 class="color-green">${action.targetPage.title}<br/>
 						<small class="visible-lg"> ${action.targetPage.summary!}</small><h2>
