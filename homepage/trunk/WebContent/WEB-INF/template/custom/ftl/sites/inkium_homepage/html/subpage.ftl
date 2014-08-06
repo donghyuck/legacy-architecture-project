@@ -32,7 +32,7 @@
 					features:{
 						backstretch : false,
 						lightbox: true,
-						landing:true
+						landing:false
 					},					
 					worklist:jobs
 				});	
