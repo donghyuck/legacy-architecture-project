@@ -60,8 +60,8 @@
 				html += "<div class='col-lg-3 col-md-6 col-xs-12'><ul class='list-unstyled who margin-bottom-30'>";
 				html += "<li><i class='fa fa-user'></i>" + list[i].name + "&nbsp;<span class='label label-orange rounded'>" + list[i].duty +"</span></li>"; 
 				html += "<li><a href='mailto:" + list[i].email+ "'><i class='fa fa-envelope'></i>" + list[i].email + "</a></li>";
-				html += "<li><a href='tel:+"+callForm(list[i].phone) + "'><i class='fa fa-phone'></i>"+ list[i].phone + "</a></li>";
-				html += "<li><a href='tel:+"+callForm(list[i].cellPhone)+"'><i class='fa fa-mobile'></i>" + list[i].cellPhone + "</a></li>";
+				html += "<li><a href='tel:"+callForm(list[i].phone) + "'><i class='fa fa-phone'></i>"+ list[i].phone + "</a></li>";
+				html += "<li><a href='tel:"+callForm(list[i].cellPhone)+"'><i class='fa fa-mobile'></i>" + list[i].cellPhone + "</a></li>";
 				html += "</ul></div>";
 			}
 		}
