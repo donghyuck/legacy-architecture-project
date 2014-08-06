@@ -25,8 +25,10 @@
 									</li>
 								</ul>
 							</li>
+							<!--
 							<li class="topbar-devider"></li>   
 							<li><a href="##\">도움말</a></li>  
+							-->
 						</ul>
 						<!-- End Topbar Navigation -->
 					</div>
