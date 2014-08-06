@@ -46,7 +46,7 @@
 						
 				// 1-3. 페이지 이동 모듈
 				common.api.teleportation();
-
+/*
 				$('.bxslider').bxSlider({
 					maxSlides: 4,
 					minSlides: 4,
@@ -60,7 +60,7 @@
                 slideWidth: 360,
                 slideMargin: 10
             });  
-            								
+            */								
 				$('#layerslider').layerSlider({
 					skinsPath : '/styles/layer-slider/skins/',
 					skin : 'fullwidth',
