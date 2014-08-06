@@ -2,6 +2,10 @@
 	var common = window.common = window.common || {};
 	common.models = {};
 	
+	common.models.TableCell = kendo.data.Model.define({
+		id : "",
+	});
+	
 	common.models.Contact =  kendo.data.Model.define({
 		id : "contactId",
 		fields: { 
@@ -21,7 +25,8 @@
 			groupIds: { type: "string", editable: true, defaultValue: "" },
 	        modifiedDate: { type: "date"},
 	        creationDate: { type: "date" } ,
-	        srchType: { type: "string", editable: true, defaultValue: "" }
+	        srchType: { type: "string", editable: true, defaultValue: "" },
+	        duty: { type: "string", editable: true, defaultValue: "" }
 	        //,showType: { type: "string", editable: true, defaultValue: "" }
 		},
 		formattedCreationDate : function(){
@@ -49,6 +54,7 @@
 	    	target.set("typeCode", this.get("typeCode") );
 	    	target.set("typeName", this.get("typeName") );
 	    	target.set("groupIds", this.get("groupIds") );
+	    	target.set("duty", this.get("duty") );
 	    	/*if( typeof this.get("user") === 'object' )
 	    		target.set("user", this.get("user") );
 	    	if( typeof this.get("properties") === 'object' )
