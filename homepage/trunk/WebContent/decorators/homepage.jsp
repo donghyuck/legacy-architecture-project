@@ -36,7 +36,11 @@
 	.header {
 	}	
 	
-	/** cloud header */	
+	/** Loader	*/
+	.page-loader{
+		background: transparent url('/images/common/loader/loading.gif') no-repeat center center;
+	}
+	/** header */	
 	header.inkium {
 		background: #fff url('http://img.inkium.com/homepage/sub/sub_company.jpg') bottom right repeat-x;
 		height : 110px;
