@@ -74,7 +74,7 @@
 		if( $(element).length == 0 ){
 			$('body').prepend("<div class='page-loader' ></div>");
 		}		
-		 $(element).fadeOut(`');
+		 $(element).fadeOut();
 	}
 	
 	common.ui.backstretch = function (){		
