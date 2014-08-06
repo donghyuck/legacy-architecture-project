@@ -41,7 +41,8 @@
 					features:{
 						backstretch : true,
 						lightbox : true,
-						spmenu : true
+						spmenu : true,
+						landing:true
 					}
 				});	
 				var currentUser = new User();			
@@ -881,7 +882,7 @@
 		</#compress>
 	</head>
 	<body id="doc" class="bg-gray">
-
+		<div class="page-loader"></div>
 		<div class="wrapper">
 			<!-- START HEADER -->		
 			<#include "/html/common/common-homepage-menu.ftl" >		
@@ -923,6 +924,9 @@
 				<div class="navbar navbar-personalized navbar-inverse padding-sm" role="navigation">
 							<ul class="nav navbar-nav pull-right">
 								<li><button type="button" class="btn btn-primary navbar-btn" data-toggle="button" data-action="show-notice-section" >공지 & 이벤트 </button></li>
+								<li>
+									<button type="button" class="btn-u btn-u-blue navbar-btn rounded" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i> <span class="hidden-xs">클라우드 저장소</span></button>
+								</li>								
 								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
 								<li class="hidden-xs">
 									<div class="btn-group navbar-btn" data-toggle="buttons">
