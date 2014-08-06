@@ -138,9 +138,7 @@
 <script id="account-template" type="text/x-kendo-template">
 	<li class="account">
 		<a href="\\#my-aside-menu" class="btn btn-link btn-account dropdown-toggle navbar-toggle-aside-menu">
-		# if ( anonymous ) { # 
-			<img src="${request.contextPath}/images/common/anonymous.png" height="34"/>	
-		# }else{ # 
+		# if ( !anonymous ) { # 
 			<img src="${request.contextPath}/download/profile/#: username #?width=100&height=150" class="rounded-top" height="34">
 		# } #
 		</a>
@@ -159,10 +157,6 @@
 				<li><a href="\\#"><i class="fa fa-user"></i>#:name#</a></li>
 				<li><a href="\\#"><i class="fa fa-envelope"></i>#:email #</a></li>
 				<li><a href="\\#"><i class="fa fa-building"></i>#:company.displayName #</a></li>
-				<!--
-				<li><a href="\\#"><i class="fa fa-phone"></i></a></li>
-				<li><a href="\\#"><i class="fa fa-globe"></i></a></li>			
-				-->
 			</ul>		
 			<div class="btn-group btn-group-sm">
 				<a href="/community/view-myprofile.do?view=modal-dialog" class="btn btn-primary" data-toggle="modal" data-target="\\#myProfileModal" ><i class="fa fa-user"></i> 프로필 보기</a>
@@ -177,20 +171,8 @@
 		<div class="account-content" >	
 			<div class="row">
 				<div class="col-xs-6">
-			<div class="side-section-nav">	
-			<nav class="navbar navbar-default  navbar-inverse no-margin-b navbar-static-top">
-				<ul class="nav navbar-nav">		
-					<li class="dropdown">
-						<a href="\\#" class="dropdown-toggle" data-toggle="dropdown">My <i class="fa fa-cloud fa-lg"></i></a>
-						<ul class="dropdown-menu">
-							<li><a href="/main.do?view=personalized">My 페이지</a></li>
-							<li><a href="/main.do?view=streams">My 스트림</a></li>
-							<li><a href="/main.do?view=manage">My 웹사이트</a></li>					
-						</ul>
-					</li>
-				</ul>		 
-			</nav>
-			</div>				 
+					<div class="side-section-nav">	
+					</div>				 
 				 </div>
 				<div class="col-xs-6">
 					<h3 class="heading-xs">전체 사용량 <span class="pull-right">88%</span></h3>
