@@ -188,7 +188,17 @@
 			if(features.spmenu){				
 				$(document).on("click","[data-toggle='spmenu']", function(e){
 					var $this = $(this);
-					var target  = $this.attr("href");						
+					
+					
+					
+					var target ;
+					if( $this.prop("tagName").toLowerCase() == "a" ){			
+						target  = $this.attr("href");	
+					}else{
+						if($this.data("target")){
+							target = $this.data("target")
+						}
+					}
 					$("body").toggleClass("modal-open");
 					$(target).toggleClass("cbp-spmenu-open");
 				});
