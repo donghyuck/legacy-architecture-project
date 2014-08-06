@@ -39,7 +39,8 @@
 					features:{
 						backstretch : false,
 						lightbox : false,
-						spmenu : false
+						spmenu : false,
+						landing:false
 					}
 				});
 						
@@ -146,7 +147,7 @@
 		</#compress>			
 	</head>
 	<body>
-		<div class="page-loader"></div>
+		<!--<div class="page-loader"></div>-->
 		<div class="wrapper">	
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
