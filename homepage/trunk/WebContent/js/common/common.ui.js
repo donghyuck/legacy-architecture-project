@@ -130,7 +130,7 @@
 		options : {			
 			features : {
 				culture : true,
-				landing : true,
+				landing : false,
 				backstretch : false,
 				lightbox: false,
 				spmenu: false,
@@ -164,6 +164,10 @@
 			var features = that.options.features;
 			var worklist = that.options.worklist;
 			
+			if(features.landing){				
+				common.ui.landing();
+			}
+			
 			if( features.culture ){
 				common.api.culture();				
 			}
@@ -179,9 +183,7 @@
 				});
 			}
 			
-			if(features.landing){				
-				common.ui.landing();
-			}
+
 			
 			if(features.spmenu){				
 				$(document).on("click","[data-toggle='spmenu']", function(e){
