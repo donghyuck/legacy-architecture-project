@@ -1,31 +1,34 @@
 <#ftl encoding="UTF-8"/>
 <html decorator="homepage">
 <head>
-		<title>기업소개</title>
+		<title><#if action.webSite ?? >${action.webSite.displayName }<#else>::</#if></title>
 		<script type="text/javascript">
 		<!--
 		yepnope([{
 			load: [
-				'css!${request.contextPath}/styles/codedrop/cbpSlidePushMenus.css',
-				'css!${request.contextPath}/styles/codedrop/codedrop.overlay.css',
-				'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
+				'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+				'css!${request.contextPath}/styles/common.themes/unify/themes/blue.css',
+				'css!${request.contextPath}/styles/common.pages/common.personalized.css',
+				'css!${request.contextPath}/styles/jquery.magnific-popup/magnific-popup.css',			
+				'css!${request.contextPath}/styles/codrops/codrops.cbp-spmenu.css',
 				
+				'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
 				'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',
 				'${request.contextPath}/js/headroom/headroom.min.js',
 				'${request.contextPath}/js/headroom/jquery.headroom.min.js',
-				
+				'${request.contextPath}/js/jquery.magnific-popup/jquery.magnific-popup.min.js',	
 				'${request.contextPath}/js/kendo/kendo.web.min.js',
-				'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',	
-				'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',
-				
+				'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			
+				'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
 				'${request.contextPath}/js/bootstrap/3.1.0/bootstrap.min.js',
-				
-				'${request.contextPath}/js/pdfobject/pdfobject.js',
-				'${request.contextPath}/js/common/common.modernizr.custom.js',
-				
+				'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 		
+				'${request.contextPath}/js/common.plugins/query.backstretch.min.js', 		
+					
+				'${request.contextPath}/js/pdfobject/pdfobject.js',			
 				'${request.contextPath}/js/common/common.models.js',
 				'${request.contextPath}/js/common/common.api.js',
-				'${request.contextPath}/js/common/common.ui.js'],
+				'${request.contextPath}/js/common/common.ui.js'
+					],
 				complete: function() {
 			
 				// 1.  한글 지원을 위한 로케일 설정
@@ -52,66 +55,9 @@
 				
 				</#if>	
 				// END SCRIPT    
-				checkContactTag();
 			}
 		}]);	
 		-->
-		function checkContactTag(){
-			$('div[data-address-tag]').each(function(){
-				var that = $(this);				
-				//data-address-tag='인키움' data-search-type='1'  data-show-type='table'
-				var srchName = that.attr('data-address-tag');
-				var srchType = that.attr('data-search-type');
-				var showType = that.attr('data-show-type'); 
-				var contact = new common.models.Contact();
-				contact.set("tag", srchName);
-				contact.set("srchType", srchType);
-				//contact.set("showType", showType);
-				
-				common.api.callback({  
-					url : '${request.contextPath}/contact/list-contacts-tags.do?output=json',
-					data : { item: kendo.stringify(contact) },
-					success : function(response){
-						//console.log(response);
-						var list = response.contactsByTagNames;
-						if(showType == 'table'){
-							makeContactTable(list, that);
-						}else{
-							console.log('showType 에 맞는 출력 컨트롤이 없습니다...');
-						}
-						
-					}
-				});
-			});
-			
-		}
-		
-		function makeContactTable(list, dom){
-			var renderTo = dom;
-			var str = '';
-			if(list.length == 0){
-				str = '검색된 연락처가 없습니다.';
-			}else{
-				str = "<table border='1'><colgroup></colgroup><tr><th>분류</th><th>부문</th><th>이름</th><th>설명</th><th>핸드폰</th><th>전화번호</th><th>이메일</th><th>관련태그</th></tr>";
-				for(var i=0; i< list.length; i++){
-					str += '<tr>';
-					str += '<td>' + list[i].contactGroup.parentGroupName + '</td>';
-					str += '<td>' + list[i].contactGroup.groupName + '</td>';
-					str += '<td>' + list[i].name + '</td>';
-					str += '<td>' + list[i].contactDesc + '</td>';
-					str += '<td>' + list[i].cellPhone + '</td>';
-					str += '<td>' + list[i].phone + '</td>';
-					str += '<td>' + list[i].email + '</td>';
-					str += '<td>' + list[i].tag + '</td>';
-					str += '</tr>';
-				}
-				str += '</table>';
-			}
-			//console.log(str);
-			renderTo.html(str);
-			console.log('renderTo.html() : ' + renderTo.html());
-			//renderTo.text(str);
-		}
 		
 		function createContactGrid(){
 			$("#contact-grid").kendoGrid({
@@ -142,7 +88,8 @@
 				columns: [
 					{field: "contactId", title: "ID", sortable : false , width:100 },
 					{field: "name", title: "이름", sortable : false},
-					{field: "typeCode", title: "타입코드", sortable : false},
+					//{field: "typeCode", title: "타입코드", sortable : false},
+					{field: "duty", title: "직책", sortable : false},
 					{field:"typeName", title: "타입명", sortable : false},
 					{field: "tag", title: "태그", sortable : false},
 					{field: "groupIds", title: "매핑그룹", sortable : false},
@@ -527,7 +474,7 @@
 	<body class="color0">
 	<!-- START HEADER -->
 	<#include "/html/common/common-homepage-menu.ftl" >	
-	<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_PERSONALIZED_3") />
+	<#assign current_menu = action.getWebSiteMenu("USER_MENU", "MENU_PERSONALIZED_4") />
 	<header class="cloud">
 		<div class="container">
 			<div class="col-lg-12">	
@@ -615,42 +562,8 @@
 		</div>									 
 	</section>	
 	<!-- END MAIN CONTENT -->	
-	
 
-	<script type="text/x-kendo-tmpl" id="news-view-template">		
-		
-		<div class="page-heading">
-			<h4 data-bind="html:subject"></h4>				
-		</div>
-		
-		<div class="media">
-			<a class="pull-left" href="\\#">
-			<img src="${request.contextPath}/download/profile/#: user.photoUrl #?width=150&height=150" width="30" height="30" class="img-rounded">
-			</a>
-			<div class="media-body">
-				<h5 class="media-heading">
-					# if( user.nameVisible ){#
-					#: user.name # (#: user.username #)
-					# } else { #
-					#: user.username #
-					# } # 		
-					# if( user.emailVisible ){#
-					<br>(#: user.email #)
-					# } #	
-				</h5>		
-			</div>
-		</div>	
-		
-		<div class="blank-top-5" ></div>
-		<div data-bind="html:content"></div>	
-		<div class="blank-top-5" ></div>
-		<div class="btn-group pull-right">
-			<button  type="button" class="btn btn-info btn-sm custom-list "><i class="fa fa-angle-double-up"></i> 목록</button>		
-		</div>
-	</script>
-
-
-		<!-- START FOOTER -->
+	<!-- START FOOTER -->
 	<#include "/html/common/common-homepage-footer.ftl" >		
 	<!-- END FOOTER -->	
 	<!-- START TEMPLATE -->
@@ -672,6 +585,7 @@
 				</h5>		
 			</div>-->
 			<div> 성명 : <span data-bind="html: contact.name" /></div> <br/>
+			<div> 직책 : <span data-bind="html: contact.duty" /></div> <br/>
 			<div>이메일 : <span data-bind="html: contact.email" /></div>  <br/>
 			<div>연락처 : <span data-bind="html: contact.phone" /></div> <br/>
 			<div>핸드폰 : <span data-bind="html: contact.cellPhone" /></div> <br/>
@@ -709,6 +623,8 @@
 					<div class="form-group">
 						<label class="control-label"><small>이름</small></label>							
 						<input type="text" data-bind="value: contact.name"  class="form-control" placeholder="이름을 입력하세요." />
+						<label class="control-label"><small>직책</small></label>							
+						<input type="text" data-bind="value: contact.duty"  class="form-control" placeholder="직책을 입력하세요." />
 						<label class="control-label"><small>이메일</small></label>
 						<input type="text" data-bind="value: contact.email" class="form-control" placeholder="이메일을 입력하세요." />
 						<label class="control-label"><small>연락처</small></label>
