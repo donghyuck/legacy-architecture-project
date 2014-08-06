@@ -690,7 +690,7 @@
 					<ul class="nav navbar-nav pull-right">
 								
 								<li>
-									<a href="#personalized-controls-section" class="btn btn-primary navbar-btn" data-toggle="spmenu"><i class="fa fa-cloud-upload fa-lg"></i></a>
+									<button type="button" class="btn btn-primary navbar-btn" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i></button>
 								</li>
 								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
 								<li class="hidden-xs">
