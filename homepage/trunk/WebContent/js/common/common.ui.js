@@ -2161,9 +2161,14 @@
 			if( renderTo.attr("data-dismiss") && renderTo.attr("data-target")  )
 			{
 				renderTo.click(function(e){
-					var target = $(this).attr("data-target");
+					$this =  $(this);
+					var target = $this.attr("data-target");
 					if( $(target).length > 0 ){
-						$(target).hide();
+						if($this.data("animate")){
+							$(target).slideUp();
+						}else{
+							$(target).hide();
+						}						
 					}		
 					var switch_target = $(this).attr("data-switch-target");
 					if( $(switch_target).length > 0 && $(switch_target).is("button" )){		
