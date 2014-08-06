@@ -39,28 +39,13 @@
 					features:{
 						backstretch : false,
 						lightbox : false,
-						spmenu : false,
-						landing:false
+						spmenu : false
 					}
 				});
 						
 				// 1-3. 페이지 이동 모듈
 				common.api.teleportation();
-/*
-				$('.bxslider').bxSlider({
-					maxSlides: 4,
-					minSlides: 4,
-					slideWidth: 360,
-					slideMargin: 10,
-				}); 
-
-            $('.bxslider1').bxSlider({
-                minSlides: 3,
-                maxSlides: 3,
-                slideWidth: 360,
-                slideMargin: 10
-            });  
-            */								
+					
 				$('#layerslider').layerSlider({
 					skinsPath : '/styles/layer-slider/skins/',
 					skin : 'fullwidth',
@@ -147,7 +132,6 @@
 		</#compress>			
 	</head>
 	<body>
-		<!--<div class="page-loader"></div>-->
 		<div class="wrapper">	
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
