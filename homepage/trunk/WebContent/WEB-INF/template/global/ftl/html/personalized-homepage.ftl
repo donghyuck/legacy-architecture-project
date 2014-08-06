@@ -50,8 +50,8 @@
 						e.token.copy(currentUser);
 					},				
 					shown : function(e){
-						$("#account-navbar").append("<li><a href='#personalized-controls-section' class='btn-control-group navbar-btn-options' data-toggle='spmenu'><i class='fa fa-cloud-upload fa-2x'></i></a></li>");
-						$(".navbar .navbar-header").append("<a href='#personalized-controls-section'  data-toggle='spmenu' class='navbar-toggle-inverse visible-xs'><i class='fa fa-cloud-upload fa-2x'></i></a>");			
+						//$("#account-navbar").append("<li><a href='#personalized-controls-section' class='btn-control-group navbar-btn-options' data-toggle='spmenu'><i class='fa fa-cloud-upload fa-2x'></i></a></li>");
+						//$(".navbar .navbar-header").append("<a href='#personalized-controls-section'  data-toggle='spmenu' class='navbar-toggle-inverse visible-xs'><i class='fa fa-cloud-upload fa-2x'></i></a>");			
 					}
 				});	
 				
@@ -689,7 +689,7 @@
 				<div class="navbar navbar-personalized navbar-inverse" role="navigation">
 					<ul class="nav navbar-nav pull-right">								
 								<li>
-									<button type="button" class="btn btn-primary navbar-btn rounded-2x" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i></button>
+									<button type="button" class="btn btn-primary navbar-btn rounded-2x" data-toggle="spmenu" data-target="#personalized-controls-section"><i class="fa fa-cloud-upload fa-lg"></i> 클라우드 저장소</button>
 								</li>
 								<li class="hidden-xs"><p class="navbar-text">레이아웃</p> </li>
 								<li class="hidden-xs">
