@@ -123,6 +123,7 @@
 	
 	.tag-box-v4 {
 		margin-top : 30px;
+		margin-bottom : 0px;
 	}
 	.page-content {
 		margin-top: 66px;
