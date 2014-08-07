@@ -244,8 +244,8 @@
 		height:35px; 
 		width:272px;  
 		text-align:center; 
-		padding-top:1px;
-		font-size : 20pt;
+		padding-top:0px;
+		font-size : 17pt;
 		font-weight: bold;
 		color: #000000;
 	}
