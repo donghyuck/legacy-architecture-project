@@ -244,8 +244,10 @@
 		height:35px; 
 		width:272px;  
 		text-align:center; 
-		margin-right:10px; 
-		padding-top:6px;
+		padding-top:1px;
+		font-size : 20pt;
+		font-weight: bold;
+		color: #000000;
 	}
 	
 		
