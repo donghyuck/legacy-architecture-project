@@ -244,10 +244,11 @@
 		height:35px; 
 		width:272px;  
 		text-align:center; 
-		padding-top:0px;
-		font-size : 17pt;
+		padding-top:2px;
+		font-size : 15pt;
 		font-weight: bold;
 		color: #000000;
+		margin : 20px 0;
 	}
 	
 		
