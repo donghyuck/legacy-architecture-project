@@ -57,7 +57,7 @@
 			html = '담당자가 없습니다.';
 		}else{
 			for(var i=0; i< list.length; i++){
-				html += "<div class='col-lg-3 col-md-6 col-xs-12'><ul class='list-unstyled who margin-bottom-30'>";
+				html += "<div class='col-lg-4 col-md-6 col-xs-12'><ul class='list-unstyled who margin-bottom-30'>";
 				html += "<li><i class='fa fa-user'></i>" + list[i].name + "&nbsp;<span class='label label-orange rounded'>" + list[i].duty +"</span></li>"; 
 				html += "<li><a href='mailto:" + list[i].email+ "'><i class='fa fa-envelope'></i>" + list[i].email + "</a></li>";
 				html += "<li><a href='tel:"+callForm(list[i].phone) + "'><i class='fa fa-phone'></i>"+ list[i].phone + "</a></li>";
