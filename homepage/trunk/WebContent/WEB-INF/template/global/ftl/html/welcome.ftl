@@ -7,6 +7,7 @@
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css" /> 			
 		<script type="text/javascript">
 		<!--
+		var jobs = [];		
 		yepnope([{
 			load: [				
 			'css!${request.contextPath}/styles/common.plugins/animate.css',
@@ -22,7 +23,8 @@
 				// START SCRIPT	
 				common.ui.setup({
 					features:{
-						backstretch : false
+						backstretch : false,
+						worklist : jobs
 					}
 				});	
 				
@@ -44,12 +46,7 @@
 				// END SCRIPT            
 			}
 		}]);	
-		
-		
-		function sayHello (){
-			common.ui.animate_v2($("img.sayHello"), 'wobble');			
-		}
-		
+				
 		-->
 		</script>		
 		<style scoped="scoped">
