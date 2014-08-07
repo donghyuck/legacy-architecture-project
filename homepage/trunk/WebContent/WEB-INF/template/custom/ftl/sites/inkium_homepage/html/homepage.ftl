@@ -240,7 +240,7 @@
 				<li class="filter" data-filter=".category-2">대학서비스</li>
 				<li class="filter" data-filter=".category-3">자격사업</li>
 			</ul>
-			<ul class="row sorting-grid">
+			<ul class="row sorting-grid animated fadeIn">
 		    <#assign potopolioMenu = action.getWebSiteMenu("PHOTOPOLIO_MENU") />
 			<#list potopolioMenu.components as item >
 			    
