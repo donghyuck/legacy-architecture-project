@@ -23,9 +23,9 @@
 				// START SCRIPT	
 				common.ui.setup({
 					features:{
-						backstretch : false,
-						worklist : jobs
-					}
+						backstretch : false						
+					},
+					worklist : jobs
 				});	
 				
 				// ACCOUNTS LOAD	
