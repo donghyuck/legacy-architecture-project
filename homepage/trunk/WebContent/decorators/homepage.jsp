@@ -121,7 +121,9 @@
 		position: absolute;
 	}
 	
-	
+	.tag-box-v4 {
+		margin-top : 30px;
+	}
 	.page-content {
 		margin-top: 66px;
 		font-size : 15px;
