@@ -239,6 +239,15 @@
 		padding-top:6px;
 	}
 	
+	.title-bar{
+		background-image:url(http://img.inkium.com/homepage/sub/edu_titlebar.jpg); 
+		height:35px; 
+		width:272px;  
+		text-align:center; 
+		margin-right:10px; 
+		padding-top:6px;
+	}
+	
 		
 	.page-content .page-content-title> h3:before {
 		content: url('http://img.inkium.com/homepage/sub/line_black.gif');
