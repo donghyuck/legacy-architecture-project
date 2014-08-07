@@ -54,11 +54,13 @@
 									<div class="footer-content">				
 									<p>문의전화 : 02 2081 1016</p>					
 									<a class="btn-u btn-u-blue btn-block" href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')" >원천징수 영수증 출력</a>
-									<hr/>			
+									<hr/>	
+									<!--		
 									<ul class="social-icons">
 						               <li><a href="#" data-original-title="Facebook" class="social_facebook"></a></li>
 						                <li><a href="#" data-original-title="Twitter" class="social_twitter"></a></li>
-						            </ul> 									
+						            </ul> 		
+						            -->							
 									</div>
 								</div>
 								<!-- //Footer Col.// -->								
