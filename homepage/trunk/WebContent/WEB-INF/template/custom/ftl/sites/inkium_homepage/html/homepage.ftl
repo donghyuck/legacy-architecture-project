@@ -290,25 +290,31 @@
 					<div class="col-md-4">
 						<div class="headline hidden"><h5>최근 활동</h5></div>
 						<div id="myCarousel" class="carousel slide carousel-v1">
-			                    <div class="carousel-inner">
+								<div class="carousel-inner">
 			                        <div class="item active">
-			                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/5.jpg" alt="">
+			                            <img src="http://img.inkium.com/homepage/sub-slider/pic_01.jpg" alt="">
 			                            <div class="carousel-caption">
-			                                <p>XX 고객사 위탁교육실시</p>
+			                                <p>회사 로고</p>
 			                            </div>
 			                        </div>
 			                        <div class="item">
-			                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/4.jpg" alt="">
+			                            <img src="http://img.inkium.com/homepage/sub-slider/pic_02.jpg" alt="">
 			                            <div class="carousel-caption">
-			                                <p>무신무신...</p>
+			                                <p>강의장 전경</p>
 			                            </div>
 			                            </div>
 			                        <div class="item">
-			                            <img src="http://htmlstream.com/preview/unify-v1.4/assets/img/main/3.jpg" alt="">
+			                            <img src="http://img.inkium.com/homepage/sub-slider/pic_03.jpg" alt="">
 			                            <div class="carousel-caption">
-			                                <p>여름 수련회....</p>
+			                                <p>강의장 전경</p>
 			                            </div>
 			                        </div>
+			                        <div class="item">
+			                            <img src="http://img.inkium.com/homepage/sub-slider/pic_04.jpg" alt="">
+			                            <div class="carousel-caption">
+			                                <p>강의장 전경</p>
+			                            </div>
+			                        </div>                      
 			                    </div>
 			                    
 			                    <div class="carousel-arrow">
