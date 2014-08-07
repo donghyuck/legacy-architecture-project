@@ -163,6 +163,15 @@
 		position: relative;
 	}
 
+
+	.page-content .page-content-title-v2 h3 {
+		padding-top: 10px;
+		line-height: 25px;
+		font-size : 18px;
+		font-weight: bold;
+		color: #000000;
+	}
+
 	.page-content .page-content-title-v2 h4 {
 		padding-top: 10px;
 		line-height: 25px;
