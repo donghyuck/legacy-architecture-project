@@ -131,7 +131,7 @@
 		</style>   
 		</#compress>			
 	</head>
-	<body>
+	<body class="bg-dark">
 		<div class="wrapper">	
 		<!-- START HEADER -->
 		<#include "/html/common/common-homepage-menu.ftl" >	
