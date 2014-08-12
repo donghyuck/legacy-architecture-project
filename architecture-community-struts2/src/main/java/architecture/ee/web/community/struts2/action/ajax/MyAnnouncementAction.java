@@ -35,6 +35,8 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	
 	private Integer objectType = 0;
 	
+	private int pageSize = 0 ;
+	
 	private AnnounceManager announceManager ;
 	
 	private Long announceId ;
@@ -44,6 +46,23 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	 */
 	public MyAnnouncementAction() {
 	}
+
+	
+	/**
+	 * @return pageSize
+	 */
+	public int getPageSize() {
+		return pageSize;
+	}
+
+
+	/**
+	 * @param pageSize 설정할 pageSize
+	 */
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
 
 	/**
 	 * @return announceId
@@ -149,7 +168,8 @@ public class MyAnnouncementAction extends FrameworkActionSupport {
 	public String update() throws Exception{
 		
 		if( isGuest() )
-			throw new UnAuthorizedException("no permission.");								
+			throw new UnAuthorizedException("no permission.");			
+		
 		AnnounceForm form = ParamUtils.getJsonParameter(request, "item", AnnounceForm.class);
 		this.announceId = form.getAnnounceId();		
 		this.objectType = form.getObjectType();		
