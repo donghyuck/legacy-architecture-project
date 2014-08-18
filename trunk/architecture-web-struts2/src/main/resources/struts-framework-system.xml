@@ -123,7 +123,7 @@
 		<action name="view-system-details" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">systemInformationService,databaseInfos, setupApplicationProperties, applicationProperties</param>
+			    <param name="excludeProperties">systemInformationService, databaseInfos, setupApplicationProperties, applicationProperties</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">systemInfo.*, memoryInfo.*, licenseInfo.*, diskUsages.*</param>
 			</result>
