@@ -28,5 +28,7 @@ public interface SystemInformationService extends Component {
 		public abstract License getLicenseInfo();
 		
 		public abstract List<DatabaseInfo> getDatabaseInfos();
+		
+		public abstract List<DiskUsage> getDiskUsages();
 	
 }
