@@ -50,7 +50,10 @@ public class WebSiteInterceptor implements Interceptor {
 			try {
 				( (WebSiteAware) action ).setWebSite(WebSiteUtils.getWebSite(request));
 			} catch (WebSiteNotFoundException e) {
-				
+				try {
+					( (WebSiteAware) action ).setWebSite(WebSiteUtils.getDefaultWebSite());
+				} catch (WebSiteNotFoundException ignore) {
+				}
 			}
 		 }		 
 	}
