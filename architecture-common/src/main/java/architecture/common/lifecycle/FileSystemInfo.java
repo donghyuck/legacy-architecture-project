@@ -19,10 +19,84 @@ import java.io.File;
 
 public class FileSystemInfo {
 
-	String absolutePath;
-	long totalSpace;
-	long freeSpace;
-	long usableSpace;
+	public static class DiskUsage {
+		
+		String absolutePath;
+		long totalSpace;
+		long freeSpace;
+		long usableSpace;		
+		
+		public DiskUsage() {
+			super();
+		}
+
+		private DiskUsage(File root) {
+			super();
+			this.absolutePath = root.getAbsolutePath();
+			this.totalSpace = root.getTotalSpace();
+			this.freeSpace = root.getFreeSpace();
+			this.usableSpace = root.getUsableSpace();
+		}
+		
+		/**
+		 * @return absolutePath
+		 */
+		public String getAbsolutePath() {
+			return absolutePath;
+		}
+
+		/**
+		 * @param absolutePath 설정할 absolutePath
+		 */
+		public void setAbsolutePath(String absolutePath) {
+			this.absolutePath = absolutePath;
+		}
+
+		/**
+		 * @return totalSpace
+		 */
+		public long getTotalSpace() {
+			return totalSpace;
+		}
+
+		/**
+		 * @param totalSpace 설정할 totalSpace
+		 */
+		public void setTotalSpace(long totalSpace) {
+			this.totalSpace = totalSpace;
+		}
+
+		/**
+		 * @return freeSpace
+		 */
+		public long getFreeSpace() {
+			return freeSpace;
+		}
+
+		/**
+		 * @param freeSpace 설정할 freeSpace
+		 */
+		public void setFreeSpace(long freeSpace) {
+			this.freeSpace = freeSpace;
+		}
+
+		/**
+		 * @return usableSpace
+		 */
+		public long getUsableSpace() {
+			return usableSpace;
+		}
+
+		/**
+		 * @param usableSpace 설정할 usableSpace
+		 */
+		public void setUsableSpace(long usableSpace) {
+			this.usableSpace = usableSpace;
+		}
+	}
+	
+
+	private 
 
 	public FileSystemInfo() {
 	}
@@ -41,61 +115,6 @@ public class FileSystemInfo {
 		this.usableSpace = root.getUsableSpace();
 	}
 
-	/**
-	 * @return absolutePath
-	 */
-	public String getAbsolutePath() {
-		return absolutePath;
-	}
-
-	/**
-	 * @param absolutePath 설정할 absolutePath
-	 */
-	public void setAbsolutePath(String absolutePath) {
-		this.absolutePath = absolutePath;
-	}
-
-	/**
-	 * @return totalSpace
-	 */
-	public long getTotalSpace() {
-		return totalSpace;
-	}
-
-	/**
-	 * @param totalSpace 설정할 totalSpace
-	 */
-	public void setTotalSpace(long totalSpace) {
-		this.totalSpace = totalSpace;
-	}
-
-	/**
-	 * @return freeSpace
-	 */
-	public long getFreeSpace() {
-		return freeSpace;
-	}
-
-	/**
-	 * @param freeSpace 설정할 freeSpace
-	 */
-	public void setFreeSpace(long freeSpace) {
-		this.freeSpace = freeSpace;
-	}
-
-	/**
-	 * @return usableSpace
-	 */
-	public long getUsableSpace() {
-		return usableSpace;
-	}
-
-	/**
-	 * @param usableSpace 설정할 usableSpace
-	 */
-	public void setUsableSpace(long usableSpace) {
-		this.usableSpace = usableSpace;
-	}
 
 	
 	
