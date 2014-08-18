@@ -125,7 +125,7 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeProperties">systemInformationService,databaseInfos, setupApplicationProperties, applicationProperties</param>
 			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">systemInfo.*, memoryInfo.*, licenseInfo.*, diskUsage</param>
+				<param name="includeProperties">systemInfo.*, memoryInfo.*, licenseInfo.*, diskUsages.*</param>
 			</result>
 		</action>
 
