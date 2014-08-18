@@ -15,6 +15,7 @@
  */
 package architecture.ee.component.core.lifecycle;
 
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +32,7 @@ import architecture.common.license.LicenseManager;
 import architecture.common.lifecycle.ComponentImpl;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.DatabaseInfo;
+import architecture.common.lifecycle.DiskUsage;
 import architecture.common.lifecycle.MemoryInfo;
 import architecture.common.lifecycle.SystemInfo;
 import architecture.common.lifecycle.SystemInformationService;
@@ -74,6 +76,17 @@ public class DefaultSystemInformationService extends ComponentImpl  implements
 		this.licenseManager = licenseManager;
 	}
 	
+	public List<DiskUsage> getDiskUsages(){
+		
+		File[] list = File.listRoots();
+		List<DiskUsage> usages = new ArrayList<DiskUsage>(list.length);
+		
+		for(File file : list){
+			usages.add(DiskUsage.Builder.build(file));
+		}
+		return usages;
+	}
+	
 	public SystemInfo getSystemInfo() {
 		
 		RuntimeHelper helper = RuntimeHelperFactory.getRuntimeHelper();
@@ -82,7 +95,10 @@ public class DefaultSystemInformationService extends ComponentImpl  implements
 		Date now = new Date();
 		info.setDate( new SimpleDateFormat("EEEEEE, yyyy MMM dd", Locale.KOREA).format( now ) );
 		info.setTime( new SimpleDateFormat("HH:mm:ss", Locale.KOREA).format( now ) );
-		 
+		info.setAvailableProcessors(Runtime.getRuntime().availableProcessors());
+		
+		
+		
 		Properties sysProps = System.getProperties();
 		info.setJavaVersion(sysProps.getProperty("java.version"));
 	    info.setJavaVendor(sysProps.getProperty("java.vendor"));
