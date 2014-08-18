@@ -32,8 +32,7 @@ public class VFSUtils {
 	
 	public static FileObject resolveFile(File file, String filename) {
 		try {
-			FileSystemManager fsManager = VFS.getManager();
-			FileObject fo = fsManager.resolveFile(file, filename);		
+			FileObject fo = VFS.getManager().resolveFile(file, filename);		
 			return fo; 
 		} catch (FileSystemException e) {
 		}
@@ -42,8 +41,7 @@ public class VFSUtils {
 
 	public static FileObject resolveFile(FileObject file, String filename) {
 		try {
-			FileSystemManager fsManager = VFS.getManager();
-			FileObject fo = fsManager.resolveFile(file, filename);		
+			FileObject fo = VFS.getManager().resolveFile(file, filename);		
 			return fo; 
 		} catch (FileSystemException e) {
 		}
@@ -53,9 +51,7 @@ public class VFSUtils {
 	
 	public static FileObject resolveFile(String uri) {
 		try {
-			FileSystemManager fsManager = VFS.getManager();
-			FileObject fo = fsManager.resolveFile(uri);		
-			return fo; 
+			return  VFS.getManager().resolveFile(uri);
 		} catch (FileSystemException e) {
 			log.warn(e);
 		}
@@ -69,8 +65,7 @@ public class VFSUtils {
 	 */
 	public static FileName resolveUri(String uri){
 		try {
-			FileSystemManager fsManager = VFS.getManager();
-			return fsManager.resolveURI(uri);
+			return VFS.getManager().resolveURI(uri);
 		} catch (FileSystemException e) {
 		}
 		return null;
@@ -78,8 +73,7 @@ public class VFSUtils {
 	
 	public static FileObject toFileObject(File file){
 		try {
-			FileSystemManager fsManager = VFS.getManager();
-			return fsManager.toFileObject(file);
+			return VFS.getManager().toFileObject(file);
 		} catch (FileSystemException e) {
 		}
 		return null;

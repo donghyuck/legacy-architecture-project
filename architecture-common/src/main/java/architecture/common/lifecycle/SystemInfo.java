@@ -19,8 +19,6 @@ public class SystemInfo {
 
 	private String date;
     private String time;
-    //private String favouriteColour;
-   // private String favouriteCharacter;
     private String javaVersion;
     private String javaVendor;
     private String jvmVersion;
@@ -37,11 +35,25 @@ public class SystemInfo {
     private String jvmInputArguments;
     private String workingDirectory;
     private String tempDirectory;
-    
+    private int availableProcessors;
     
 	public SystemInfo() {
 	}
 	
+	/**
+	 * @return availableProcessors
+	 */
+	public int getAvailableProcessors() {
+		return availableProcessors;
+	}
+
+	/**
+	 * @param availableProcessors 설정할 availableProcessors
+	 */
+	public void setAvailableProcessors(int availableProcessors) {
+		this.availableProcessors = availableProcessors;
+	}
+
 	public String getDate() {
 		return date;
 	}
@@ -54,19 +66,7 @@ public class SystemInfo {
 	public void setTime(String time) {
 		this.time = time;
 	}
-	/*
-	PUBLIC STRING GETFAVOURITECOLOUR() {
-		RETURN FAVOURITECOLOUR;
-	}
-	PUBLIC VOID SETFAVOURITECOLOUR(STRING FAVOURITECOLOUR) {
-		THIS.FAVOURITECOLOUR = FAVOURITECOLOUR;
-	}
-	PUBLIC STRING GETFAVOURITECHARACTER() {
-		RETURN FAVOURITECHARACTER;
-	}
-	PUBLIC VOID SETFAVOURITECHARACTER(STRING FAVOURITECHARACTER) {
-		THIS.FAVOURITECHARACTER = FAVOURITECHARACTER;
-	}*/
+
 	public String getJavaVersion() {
 		return javaVersion;
 	}
