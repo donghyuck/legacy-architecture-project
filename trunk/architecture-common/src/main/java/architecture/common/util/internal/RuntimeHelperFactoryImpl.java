@@ -32,9 +32,7 @@ public class RuntimeHelperFactoryImpl implements  RuntimeHelperFactory.Implement
 			if( PlatformHelper.isJvmVersion(1.5F) ){
 				helper = new RuntimeHelperImpl();
 			}else{
-				
 				helper = new RuntimeHelper(){
-
 					public long getTotalHeapMemory() {
 						return 0;
 					}
@@ -46,7 +44,6 @@ public class RuntimeHelperFactoryImpl implements  RuntimeHelperFactory.Implement
 					public String getJvmInputArguments() {
 						return "Unknown";
 					}
-
 					public List<MemoryInformation> getMemoryPoolInformation() {
 						return Collections.EMPTY_LIST;
 					}
