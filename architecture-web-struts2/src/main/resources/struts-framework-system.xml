@@ -129,10 +129,19 @@
 			</result>
 		</action>
 
-		<action name="view-system-memory" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
+		<action name="view-system-diskusage" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeProperties">systemInformationService, licenseInfo, systemInfo,databaseInfos, setupApplicationProperties, applicationProperties</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">diskUsages.*</param>
+			</result>
+		</action>
+		
+		<action name="view-system-memory" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">systemInformationService, licenseInfo, systemInfo,databaseInfos, setupApplicationProperties, applicationProperties, diskUsages</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">memoryInfo.*</param>
 			</result>
@@ -141,7 +150,7 @@
 		<action name="view-system-props" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">systemInformationService, licenseInfo, memoryInfo,databaseInfos, setupApplicationProperties, applicationProperties</param>
+			    <param name="excludeProperties">systemInformationService, licenseInfo, memoryInfo,databaseInfos, setupApplicationProperties, applicationProperties, diskUsages</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">systemInfo.*</param>
 			</result>
@@ -150,7 +159,7 @@
 		<action name="view-system-license" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo,databaseInfos, setupApplicationProperties, applicationProperties</param>
+			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo,databaseInfos, setupApplicationProperties, applicationProperties, diskUsages</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">licenseInfo.*</param>
 			</result>
@@ -159,7 +168,7 @@
 		<action name="view-system-databases" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo, licenseInfo, setupApplicationProperties, applicationProperties</param>
+			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo, licenseInfo, setupApplicationProperties, applicationProperties, diskUsages</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">databaseInfos.*</param>
 			</result>
@@ -168,7 +177,7 @@
 		<action name="view-system-setup-props" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo, licenseInfo, databaseInfos, applicationProperties</param>
+			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo, licenseInfo, databaseInfos, applicationProperties, diskUsages</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">setupApplicationProperties.*</param>
 			</result>
@@ -177,7 +186,7 @@
 		<action name="view-system-application-props" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>
-			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo, licenseInfo, databaseInfos, setupApplicationProperties</param>
+			    <param name="excludeProperties">systemInformationService, systemInfo, memoryInfo, licenseInfo, databaseInfos, setupApplicationProperties, diskUsages</param>
 			    <param name="excludeNullProperties">true</param> 
 				<param name="includeProperties">applicationProperties.*</param>
 			</result>
