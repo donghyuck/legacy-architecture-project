@@ -75,29 +75,33 @@ public class DefaultSystemInformationService extends ComponentImpl  implements
 	}
 	
 	public SystemInfo getSystemInfo() {
+		
 		RuntimeHelper helper = RuntimeHelperFactory.getRuntimeHelper();
+		
 		SystemInfo info = new SystemInfo();
 		Date now = new Date();
-		 info.setDate( new SimpleDateFormat("EEEEEE, yyyy MMM dd", Locale.KOREA).format( now ) );
-		 info.setTime( new SimpleDateFormat("HH:mm:ss", Locale.KOREA).format( now ) );
-		 Properties sysProps = System.getProperties();
-		 info.setJavaVersion(sysProps.getProperty("java.version"));
-	     info.setJavaVendor(sysProps.getProperty("java.vendor"));
-	     info.setJvmVersion(sysProps.getProperty("java.vm.specification.version"));
-	     info.setJvmVendor(sysProps.getProperty("java.vm.specification.vendor"));
-	     info.setJvmImplementationVersion(sysProps.getProperty("java.vm.version"));
-	     info.setJavaRuntime(sysProps.getProperty("java.runtime.name"));
-	     info.setJavaVm(sysProps.getProperty("java.vm.name"));
-	     info.setUserName(sysProps.getProperty("user.name"));
-	     info.setSystemLanguage(sysProps.getProperty("user.language"));
-	     info.setSystemTimezone(sysProps.getProperty("user.timezone"));
-	     info.setOperatingSystem((new StringBuilder()).append(sysProps.getProperty("os.name")).append(" ").append(sysProps.getProperty("os.version")).toString());
-	     info.setOperatingSystemArchitecture(sysProps.getProperty("os.arch"));
-	     info.setFileSystemEncoding(sysProps.getProperty("file.encoding"));
-	     info.setJvmInputArguments(helper.getJvmInputArguments());
-	     info.setWorkingDirectory(sysProps.getProperty("user.dir"));
-	     info.setTempDirectory(sysProps.getProperty("java.io.tmpdir"));
-		return info;
+		info.setDate( new SimpleDateFormat("EEEEEE, yyyy MMM dd", Locale.KOREA).format( now ) );
+		info.setTime( new SimpleDateFormat("HH:mm:ss", Locale.KOREA).format( now ) );
+		 
+		Properties sysProps = System.getProperties();
+		info.setJavaVersion(sysProps.getProperty("java.version"));
+	    info.setJavaVendor(sysProps.getProperty("java.vendor"));
+	    info.setJvmVersion(sysProps.getProperty("java.vm.specification.version"));
+	    info.setJvmVendor(sysProps.getProperty("java.vm.specification.vendor"));
+	    info.setJvmImplementationVersion(sysProps.getProperty("java.vm.version"));
+	    info.setJavaRuntime(sysProps.getProperty("java.runtime.name"));
+	    info.setJavaVm(sysProps.getProperty("java.vm.name"));
+	    info.setUserName(sysProps.getProperty("user.name"));
+	    info.setSystemLanguage(sysProps.getProperty("user.language"));
+	    info.setSystemTimezone(sysProps.getProperty("user.timezone"));
+	    info.setOperatingSystem((new StringBuilder()).append(sysProps.getProperty("os.name")).append(" ").append(sysProps.getProperty("os.version")).toString());
+	    info.setOperatingSystemArchitecture(sysProps.getProperty("os.arch"));
+	    info.setFileSystemEncoding(sysProps.getProperty("file.encoding"));
+	    info.setJvmInputArguments(helper.getJvmInputArguments());
+	    info.setWorkingDirectory(sysProps.getProperty("user.dir"));
+	    info.setTempDirectory(sysProps.getProperty("java.io.tmpdir"));
+		
+	    return info;
 	}
 
 	public MemoryInfo getMemoryInfo() {
