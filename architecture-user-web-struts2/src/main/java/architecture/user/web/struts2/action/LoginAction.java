@@ -25,13 +25,19 @@ public class LoginAction  extends FrameworkActionSupport  {
 	
 	
     /**
+	 * @param ver
+	 */
+	public LoginAction() {
+		super();
+		this.ver =getApplicationProperty("security.authentication.loginVer", null);
+	}
+
+	/**
 	 * @return var
 	 */
 	public String getVer() {
 		return ver;
 	}
-
-
 
 	/**
 	 * @param var 설정할 var
@@ -44,7 +50,6 @@ public class LoginAction  extends FrameworkActionSupport  {
 
 	@Override
     public String execute() throws Exception {
-
     	if(StringUtils.isNotEmpty(ver) && StringUtils.equals(ver, "1")){
     		return success();	
     	}    	
