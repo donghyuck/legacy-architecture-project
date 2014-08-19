@@ -246,7 +246,7 @@
 			</result>
 		</action>		
 
-		<action name="main-target-company"  class="architecture.user.web.struts2.action.admin.MainAction">
+		<action name="view-target-company"  class="architecture.user.web.struts2.action.admin.MainAction">
 			<result name="success"         type="freemarker">/html/system/manage-target-company.ftl</result>
 		</action>
 				
