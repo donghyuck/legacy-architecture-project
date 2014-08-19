@@ -245,7 +245,11 @@
 				</param>
 			</result>
 		</action>		
-		
+
+		<action name="main-target-company"  class="architecture.user.web.struts2.action.admin.MainAction">
+			<result name="success"         type="freemarker">/html/system/manage-target-company.ftl</result>
+		</action>
+				
         <!--  Group  -->
 		<action name="main-group"  class="architecture.user.web.struts2.action.admin.MainAction">
 			<result name="success"         type="freemarker">/html/system/manage-groups.ftl</result>
