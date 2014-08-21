@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -27,10 +28,12 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import architecture.common.user.Company;
+import architecture.common.user.CompanyTemplate;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
 import architecture.common.util.TextUtils;
+
 import architecture.user.security.authentication.AuthenticationProvider;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;
@@ -82,20 +85,28 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 		}
 		
 		protected AnonymousUser createAnonymousUser(){
-			boolean getByDomainName = CompanyUtils.isAllowedGetByDomainName();	
-			if( getByDomainName )
-			try {
-				String localName = getLocalName();
-				log.debug("isValidIpAddress:" + TextUtils.isValidIpAddress(localName) );			
-				log.debug("isValidHostname:" + TextUtils.isValidHostname(localName) );			
-				if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){
-					Company company =CompanyUtils.getCompanyByDomainName(localName);	
-					return new AnonymousUser( company );
-				}
-			} catch (Exception ignore) {
-				log.warn(ignore);
-			}	
 			
+			if(!CompanyUtils.isAllowedCompanyForAnonymous()){
+				return new AnonymousUser( new CompanyTemplate() );				
+			}
+			
+			if( CompanyUtils.isAllowedGetByDomainName() ){
+				try {
+					String localName = getLocalName();					
+					if(log.isDebugEnabled()){
+						log.debug("isValidIpAddress:" + TextUtils.isValidIpAddress(localName) );			
+						log.debug("isValidHostname:" + TextUtils.isValidHostname(localName) );		
+					}	
+					if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){
+						Company company =CompanyUtils.getCompanyByDomainName(localName);	
+						return new AnonymousUser( company );
+					}
+				} catch (Exception ignore) {
+					log.warn(ignore);
+				}	
+			}
+			
+						
 			try {
 				return new AnonymousUser( CompanyUtils.getDefaultCompany() );
 			} catch (Exception e) {

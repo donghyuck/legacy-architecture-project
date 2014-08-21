@@ -95,6 +95,7 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 	protected List<GrantedAuthority> getFinalUserAuthority(User user){		
 		
 		ApplicationProperties setupProperties = AdminHelper.getRepository().getSetupApplicationProperties();		
+		
 		String authority = setupProperties.get(architecture.ee.util.ApplicationConstants.SECURITY_AUTHENTICATION_AUTHORITY_PROP_NAME);
 		
 		long userId = user.getUserId();		
@@ -111,8 +112,7 @@ public class ExtendedUserDetailsService implements UserDetailsService, EventSour
 			if (!roles.contains(authority)){
 				roles.add(authority);
 			}
-		}
-				
+		}				
 		return AuthorityUtils.createAuthorityList(StringUtils.toStringArray(roles));
 	}
 	
