@@ -23,6 +23,7 @@ import architecture.common.license.License;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.DatabaseInfo;
+import architecture.common.lifecycle.DiskUsage;
 import architecture.common.lifecycle.MemoryInfo;
 import architecture.common.lifecycle.SystemInfo;
 import architecture.common.lifecycle.SystemInformationService;
@@ -43,6 +44,9 @@ public class ViewSystemInfoAction extends FrameworkActionSupport {
 		this.systemInformationService = systemInformationService;
 	}
 	
+	public List<DiskUsage> getDiskUsages(){
+		return systemInformationService.getDiskUsages();
+	}
 	
 	public SystemInfo getSystemInfo(){
 		return systemInformationService.getSystemInfo();
