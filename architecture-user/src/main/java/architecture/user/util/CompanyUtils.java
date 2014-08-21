@@ -52,7 +52,19 @@ public class CompanyUtils {
 		long defaultMenuId = ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
 		return defaultMenuId;
 	}
+
+	/**
+	 * 익명 사용자 객체를 생성시 디폴트 회사 사용 여부를 리턴.
+	 * @return
+	 */
+	public static boolean isAllowedCompanyForAnonymous(){
+		return ! ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.none", false);
+	}
 	
+	/**
+	 * 접속 URL 값에서 도메인 값 추출 여부를 리턴. 이 값을 사용하여 접속 사이트를 알아낸다.
+	 * @return
+	 */
 	public static boolean isAllowedGetByDomainName(){
 		boolean getByDomainName = ApplicationHelper.getApplicationBooleanProperty("components.user.anonymous.company.getByDomainName", false);
 		return getByDomainName;
