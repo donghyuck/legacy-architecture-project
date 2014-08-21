@@ -112,6 +112,7 @@ public class FrameworkActionSupport extends ActionSupport implements SessionAwar
 		this.outputFormat = outputFormat;
 	}
 	
+	/** --------------------------------------- **/	
 	/**
 	 * @return webSite
 	 */
