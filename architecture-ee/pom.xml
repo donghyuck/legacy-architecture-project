@@ -53,8 +53,15 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.2.1.RELEASE</version>			
+			<version>${project.dependency.spring.version}</version>			
 		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${project.dependency.spring.version}</version>
+		</dependency>
+				
 		<dependency>
 			<groupId>commons-primitives</groupId>
 			<artifactId>commons-primitives</artifactId>
@@ -269,6 +276,13 @@
 			<artifactId>jtds</artifactId>
 			<version>1.2.4</version>
 			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.5.0-b01</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
