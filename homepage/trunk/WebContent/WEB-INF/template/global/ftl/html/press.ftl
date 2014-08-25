@@ -271,7 +271,7 @@
 					<li><span class="label label-info label-lightweight">조회수</span> <code data-bind="text: topic.viewCnt"></code></li>					
 				</ul>
 				<div class="media">
-					<a class="pull-left" href="\\#">
+					<a class="pull-left" href="javascript:void(0);">
 						<img data-bind="attr:{ src:authorPhotoUrl }" width="30" height="30" class="img-rounded">
 					</a>
 					<div class="media-body">
