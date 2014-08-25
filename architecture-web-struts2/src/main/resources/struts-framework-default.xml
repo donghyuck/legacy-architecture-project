@@ -50,6 +50,7 @@
 				<interceptor-ref name="locale" />
 				<interceptor-ref name="validation" />	
 			</interceptor-stack>		
+			
 			<interceptor-stack name="baseStack">
 				<interceptor-ref name="exception">
 					<param name="logEnabled">true</param>
