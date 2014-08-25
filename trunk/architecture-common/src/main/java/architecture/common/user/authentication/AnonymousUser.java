@@ -216,7 +216,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 
 
 	public long getCompanyId() {
-		return 0;
+		return -1L;
 	}
 
 
@@ -226,13 +226,11 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 
 
 	public boolean isProfileSupported() {
-		// TODO 자동 생성된 메소드 스텁
 		return false;
 	}
 
 
 	public boolean isProfileEditSupported() {
-		// TODO 자동 생성된 메소드 스텁
 		return false;
 	}
 
@@ -244,13 +242,11 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 
 
 	public <T> T getProfileFieldValue(String fieldName, Class<T> elementType) {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 
 
 	public String getProfileFieldValueString(String fieldName) {
-		// TODO 자동 생성된 메소드 스텁
 		return null;
 	}
 }

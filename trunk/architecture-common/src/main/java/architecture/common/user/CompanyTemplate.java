@@ -32,6 +32,7 @@ public class CompanyTemplate  extends BaseModelObjectSupport implements Company 
 	
 	public CompanyTemplate() {
 		this.companyId = -1L;
+		this.displayName = "unknown";
 		Date now = Calendar.getInstance().getTime();
 		this.setCreationDate(now);
 		this.setModifiedDate(now);
