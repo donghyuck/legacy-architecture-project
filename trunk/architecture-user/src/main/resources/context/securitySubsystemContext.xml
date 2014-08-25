@@ -36,11 +36,12 @@
         <security:intercept-url pattern="/main.do*"            access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/accounts/*"          access="IS_AUTHENTICATED_ANONYMOUSLY" />    
         <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <security:intercept-url pattern="/content/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />
-  
+        
+        <security:intercept-url pattern="/remoting/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />  
   		<security:intercept-url pattern="/download/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />
   		
         <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
+        
         <security:intercept-url pattern="/page.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/about.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/events.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
