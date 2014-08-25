@@ -15,8 +15,8 @@
 												<ul class="list-unstyled">
 												<li class="text-muted">사업자 등록번호 : 220-81-71637</li>
 												<li class="text-muted">대표이사 : 조재천</li>
-												<li class="text-muted">주소 : 서울특별시 구로구 디티털로 30길 31 (구로동) 코오롱빌란트2차 701호 ~ 704호</li>
-												<li class="text-muted"> TEL: 02 555 1965 | FAX: 02 2081 1090</li>
+												<li class="text-muted">주소 : 서울특별시 구로구 디지털로 30길 31 (구로동) 코오롱빌란트2차 701호 ~ 704호</li>
+												<li class="text-muted"> TEL: 02 555 1945 | FAX: 02 2081 1090</li>
 											</ul>	
 										</div>
 									</div>
