@@ -32,8 +32,11 @@ import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.site.DefaultWebSite;
 import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.site.WebSite;
+import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
+
+import com.thoughtworks.xstream.mapper.Mapper;
 
 public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao  {
 
@@ -237,6 +240,17 @@ public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao
 		return getExtendedJdbcTemplate().queryForList(
 			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_COMPANY_WEBSITE_IDS_BY_NAME").getSql(), 
 			Long.class, new SqlParameterValue(Types.VARCHAR, '%' + name + '%' ));
+	}
+
+	public List<WebSiteDomainMapper> getWebSiteDomainMappers() {
+		return getExtendedJdbcTemplate().query(
+			getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_ALL_WEBSITE_AND_DOMAIN").getSql(),
+			new RowMapper<WebSiteDomainMapper>(){
+				public WebSiteDomainMapper mapRow(ResultSet rs, int rowNum)
+						throws SQLException {
+					return new WebSiteDomainMapper(rs.getLong("WEBSITE_ID"), rs.getString("URL")) ;
+				}}
+		);
 	}	
 	
 }

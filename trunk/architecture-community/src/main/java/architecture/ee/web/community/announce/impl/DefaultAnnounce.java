@@ -45,12 +45,12 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	 * 
 	 */
 	public DefaultAnnounce() {
-		announceId = -1L;
-		subject = "";
-		attachments = new ArrayList<Attachment>();
+		this.announceId = -1L;
+		this.subject = "";
+		this.attachments = new ArrayList<Attachment>();
 		Date now = new Date();
-		startDate = now;
-		endDate = now;
+		this.startDate = now;
+		this.endDate = now;
 		super.setCreationDate(now);
 		super.setModifiedDate(now);
 	}
@@ -84,12 +84,12 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 		this.objectType = objectType;
 		this.objectId = objectId;
 		this.user = user;
-		subject = "";
-		attachments = new ArrayList<Attachment>();
+		this.subject = "";
+		this.attachments = new ArrayList<Attachment>();
 		Date now = new Date();
-		startDate = null;
-		endDate = null;
-		userId = user == null ? -1L : user.getUserId();				
+		this.startDate = null;
+		this.endDate = null;
+		this.userId = user == null ? -1L : user.getUserId();				
 		super.setCreationDate(now);
 		super.setModifiedDate(now);
 	}
@@ -233,10 +233,13 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	 * @param endDate 설정할 endDate
 	 */
 	public void setEndDate(Date endDate) {
+		
 		if( this.endDate != null && endDate != null && this.endDate.getTime() == endDate.getTime())
 			return ;
+		
 		if( endDate != null && endDate.getTime() < this.startDate.getTime())
 			throw new IllegalArgumentException();
+		
 		if(endDate != null)
 			this.endDate = endDate;
 	}

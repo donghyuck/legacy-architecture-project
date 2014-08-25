@@ -35,6 +35,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.profile.ProfileImage;
 import architecture.ee.web.community.profile.ProfileManager;
 import architecture.ee.web.logo.LogoImage;
@@ -58,9 +59,6 @@ public class DownloadController {
 			
 	@Autowired private ServletContext servletContext;
 		
-	
-	
-	
 	/**
 	 * @return companyManager
 	 */
@@ -119,7 +117,7 @@ public class DownloadController {
 	
 	@RequestMapping(value = "/logo/{type}/{name}", method = RequestMethod.GET)
 	@ResponseBody
-	public void handleLogo( @PathVariable("type") String type, @PathVariable("name") String name , HttpServletResponse response )throws IOException {
+	public void handleLogo( @PathVariable("type") String type, @PathVariable("name") String name , @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
 		
 		try {
 			LogoImage image = null;
@@ -131,9 +129,22 @@ public class DownloadController {
 				image = logoManager.getPrimaryLogoImage(site);			
 			}			
 			if( image != null ){
-				InputStream input = logoManager.getImageInputStream(image);
-				String contentType = image.getImageContentType();
-				int contentLength = image.getImageSize();
+				
+				
+				InputStream input ;
+				String contentType ;
+				int contentLength ;
+				
+				if( width > 0 && width > 0 )			{
+					input = logoManager.getImageThumbnailInputStream(image, width, height);
+					contentType = image.getThumbnailContentType();
+					contentLength = image.getThumbnailSize();
+				}else{
+					input = logoManager.getImageInputStream(image);
+					contentType = image.getImageContentType();
+					contentLength = image.getImageSize();
+				}
+				
 				response.setContentType(contentType);
 				response.setContentLength(contentLength);			
 				IOUtils.copy(input, response.getOutputStream());
@@ -143,7 +154,8 @@ public class DownloadController {
 		} catch (Exception e) {
 			log.warn(e);
 			response.setStatus(301);
-			response.addHeader("Location", "/images/common/what-to-know-before-getting-logo-design.png");
+			String url = ApplicationHelper.getApplicationProperty("components.download.images.no-logo-url", "/images/common/what-to-know-before-getting-logo-design.png");
+			response.addHeader("Location", url );
 		}		
 	}
 	
@@ -183,7 +195,8 @@ public class DownloadController {
 			response.flushBuffer();		
 		} catch (Exception e) {
 			response.setStatus(301);
-			response.addHeader("Location", "/images/common/anonymous.png");
+			String url = ApplicationHelper.getApplicationProperty("components.download.images.no-avatar-url", "/images/common/anonymous.png");
+			response.addHeader("Location", url );
 		}	
 	}
 
