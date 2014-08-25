@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
@@ -155,12 +156,15 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		
 		Map<String, String> oldProps = loadProperties(page);
 		
+		log.debug("old:" + oldProps );
+		log.debug("new:" + page.getProperties() );
+		
 		final List<String> deleteKeys = getDeletedPropertyKeys(oldProps, page.getProperties());
 		final List<String> modifiedKeys = getModifiedPropertyKeys(oldProps, page.getProperties());
 		final List<String> addedKeys = getAddedPropertyKeys(oldProps, page.getProperties());
 		
-		log.debug("old:" + oldProps );
-		log.debug("new:" + page.getProperties() );
+
+		log.debug("deleteKeys:" + deleteKeys.size());
 		
 		if( !deleteKeys.isEmpty() ){
 			getExtendedJdbcTemplate().batchUpdate(
@@ -178,6 +182,8 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				}
 			);	
 		}
+		log.debug("modifiedKeys:" + deleteKeys.size());
+		
 		if( !modifiedKeys.isEmpty() ){
 			getExtendedJdbcTemplate().batchUpdate(
 				getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_PAGE_PROPERTY_BY_NAME").getSql(), 
@@ -199,6 +205,7 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				}
 			);	
 		}
+		log.debug("addedKeys:" + addedKeys.size());
 		if( !addedKeys.isEmpty() ){
 			getExtendedJdbcTemplate().batchUpdate(
 				getBoundSql("ARCHITECTURE_COMMUNITY.INSERT_PAGE_PROPERTY").getSql(), 
@@ -224,13 +231,17 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 	}
 	
 	private List<String> getDeletedPropertyKeys(Map<String, String> oldProps, Map<String, String> newProps){
-		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
+		HashMap<String, String> temp = new HashMap<String, String>(oldProps);		
 		Set<String> oldKeys = temp.keySet();
 		Set<String> newKeys = newProps.keySet();
-		oldKeys.removeAll(newKeys);
+		for( String key : newKeys)
+			oldKeys.remove(key);
+		
+		//oldKeys.removeAll(newKeys);		
 		return Arrays.asList( 
 			oldKeys.toArray( new String[oldKeys.size()] )
-		); 
+		);
+		
 	}
 
 	private List<String> getModifiedPropertyKeys(Map<String, String> oldProps, Map<String, String> newProps){
@@ -238,11 +249,12 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		Set<String> oldKeys = temp.keySet();
 		Set<String> newKeys = newProps.keySet();
 		oldKeys.retainAll(newKeys);
+		
 		List<String> modified = new ArrayList<String>();
-		for( String key : oldKeys){
-			if( newProps.get(key).equals(oldProps.get(key)))
+		for( String key : oldKeys){			
+			if( !StringUtils.equals(newProps.get(key), oldProps.get(key)))
 				modified.add(key);
-		}		
+		}
 		return modified;
 	}
 	
@@ -250,7 +262,10 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 		HashMap<String, String> temp = new HashMap<String, String>(oldProps);
 		Set<String> oldKeys = temp.keySet();
 		Set<String> newKeys = newProps.keySet();
-		newKeys.removeAll(oldKeys);
+		
+		for( String key : oldKeys)
+			newKeys.remove(key);
+				
 		return Arrays.asList( 
 			newKeys.toArray( new String[newKeys.size()] )
 		); 

@@ -34,6 +34,7 @@ import architecture.common.user.UserNotFoundException;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteAlreadyExistsExcaption;
+import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
@@ -257,14 +258,22 @@ public class DefaultWebSiteManager implements WebSiteManager {
 	}
 
 	public WebSite getWebSiteByUrl(String url) throws WebSiteNotFoundException {
+		
 		Long webSiteId = -1L;
-		if(webSiteUrlCache.get(url) != null ) {
+		if(webSiteIdCache.get(url) != null ) {
 			webSiteId = (Long)webSiteUrlCache.get(url).getValue();
 		}			
-		if( webSiteId < 0 ){
-			webSiteId = webSiteDao.getWebSiteByUrl(url).getWebSiteId();
-			webSiteUrlCache.put(new Element(url, webSiteId ));
+				
+		if( webSiteId < 0 ){			
+			for( WebSiteDomainMapper mapper : webSiteDao.getWebSiteDomainMappers() ){
+				if( mapper.isMatch(url)){
+					webSiteId = mapper.getWebSiteId();
+					webSiteUrlCache.put(new Element(url, webSiteId ));
+					break;
+				}				
+			}
 		}		
+		
 		return getWebSiteById(webSiteId);
 	}
 

@@ -16,27 +16,31 @@
 package architecture.ee.web.community.logo;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import net.coobird.thumbnailator.Thumbnails;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.filefilter.FileFilterUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import architecture.common.user.Company;
-import architecture.ee.exception.NotFoundException;
+import architecture.common.util.PlatformHelper.Platform;
 import architecture.ee.exception.SystemException;
 import architecture.ee.util.ApplicationHelper;
-import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.logo.dao.LogoImageDao;
 import architecture.ee.web.logo.LogoImage;
 import architecture.ee.web.logo.LogoImageNotFoundException;
@@ -107,7 +111,24 @@ public class DefaultLogoManager implements LogoManager{
 			}
 			this.logoImageIdsCache.remove(getLogoImageIdListCacheKey(logoImage.getObjectType(), logoImage.getObjectId()));			
 			logoImageDao.removeLogoImage(logoImage);
+			deleteImageFileCache(logoImage);
 		}
+	}
+	private void deleteImageFileCache(LogoImage image ){		
+		Collection<File> files = FileUtils.listFiles(
+			getImageCacheDir(), 
+			FileFilterUtils.prefixFileFilter(image.getLogoId().toString()),
+			FileFilterUtils.suffixFileFilter(".logo")
+		);
+		for(File file : files){
+			log.debug( file.getPath() + ":" + file.isFile() );
+			try {
+				FileUtils.forceDelete(file);
+			} catch (IOException e) {
+				log.error(e);
+			}
+		}
+			
 	}
 
 	public LogoImage getLogoImageById(Long logoId) throws LogoImageNotFoundException {
@@ -160,31 +181,18 @@ public class DefaultLogoManager implements LogoManager{
 		}		
 	}
 	
+	public InputStream getImageThumbnailInputStream(LogoImage image, int width, int height ) {		
+		try {			
+			File file = getThumbnailFromCacheIfExist(image, width, height);
+			return FileUtils.openInputStream(file);
+		} catch (IOException e) {
+			throw new SystemException(e);
+		}finally {
+			
+		}
+	}
+	
 
-	/**
-	 * 
-	 * @param image
-	 * @return
-	 * @throws IOException
-	 */
-	protected File getImageFromCacheIfExist(LogoImage image) throws IOException{
-		File dir = getImageCacheDir();		
-		StringBuilder sb = new StringBuilder();
-		sb.append( image.getLogoId() ).append(".logo");		
-		File file = new File(dir, sb.toString() );			
-		if( file.exists() ){
-			long size = FileUtils.sizeOf(file);
-			if( size != image.getImageSize() ){
-				InputStream inputStream = logoImageDao.getInputStream(image);
-				FileUtils.copyInputStreamToFile(inputStream, file);
-			}
-		}else{
-			// doesn't exist, make new one ..
-			InputStream inputStream = logoImageDao.getInputStream(image);
-			FileUtils.copyInputStreamToFile(inputStream, file);
-		}		
-		return file;
-	}	
 	
 
 	public LogoImage getPrimaryLogoImage(Company company) throws LogoImageNotFoundException {
@@ -270,4 +278,85 @@ public class DefaultLogoManager implements LogoManager{
 	protected String getLogoImageIdListCacheKey (int objectType, long objectId) {
 		return (new StringBuilder()).append("objectType-").append(objectType).append("-objectId-").append(objectId).toString(); 
 	}
+
+	protected String toThumbnailFilename(LogoImage image,  int width, int height){
+		StringBuilder sb = new StringBuilder();
+		sb.append( image.getLogoId() ).append("_").append(width).append("_").append(height).append(".logo");	
+		return sb.toString();
+	}
+	
+	protected File getThumbnailFromCacheIfExist(LogoImage image,  int width, int height ) throws IOException{			
+		try {
+			lock.lock();			
+			log.debug( "thumbnail : " + width + " x " + height );
+			File dir = getImageCacheDir();
+			File file = new File(dir, toThumbnailFilename(image, width, height) );		
+			File originalFile = getImageFromCacheIfExist( image );			
+			log.debug( "orignal image source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() + " thumbnail:" + file.getAbsoluteFile() + " - " + file.exists() );			
+			if( file.exists() ){
+				log.debug(file.length());
+				if( file.length() > 0 ){
+					image.setThumbnailSize((int)file.length());
+					return file;
+				}else{
+				}
+			}
+			
+			/**
+			 * TIP : 윈동우 경우 Thumbnail 파일 생성후에도 해당 파일을 참조하는 문제가 있음. 
+			 */
+			log.debug( "create thumbnail : " + file.getAbsolutePath()  );
+			if( Platform.current() == Platform.WINDOWS ){
+				File tmp = getTemeFile();
+				Thumbnails.of(originalFile).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(tmp)); 		
+				image.setThumbnailSize((int)tmp.length());
+				FileUtils.copyFile(tmp, file);			
+			}else{				
+				try {
+					Thumbnails.of(originalFile).allowOverwrite(true).size(width, height).outputFormat("png").toOutputStream(new FileOutputStream(file));
+				} catch (Throwable e) {
+					log.error(e);
+				} 		
+				image.setThumbnailSize((int)file.length());
+			}
+			
+			return file;
+		
+		} finally  {
+			lock.unlock();
+		}		
+		
+	}	
+	
+	protected File getTemeFile(){
+		UUID uuid = UUID.randomUUID();		
+		File tmp = new File(getImageTempDir(), uuid.toString());		
+		return  tmp;
+	}
+	
+	/**
+	 * 
+	 * @param image
+	 * @return
+	 * @throws IOException
+	 */
+	protected File getImageFromCacheIfExist(LogoImage image) throws IOException{
+		File dir = getImageCacheDir();		
+		StringBuilder sb = new StringBuilder();
+		sb.append( image.getLogoId() ).append(".logo");		
+		File file = new File(dir, sb.toString() );			
+		if( file.exists() ){
+			long size = FileUtils.sizeOf(file);
+			if( size != image.getImageSize() ){
+				InputStream inputStream = logoImageDao.getInputStream(image);
+				FileUtils.copyInputStreamToFile(inputStream, file);
+			}
+		}else{
+			// doesn't exist, make new one ..
+			InputStream inputStream = logoImageDao.getInputStream(image);
+			FileUtils.copyInputStreamToFile(inputStream, file);
+		}		
+		return file;
+	}	
+	
 }
