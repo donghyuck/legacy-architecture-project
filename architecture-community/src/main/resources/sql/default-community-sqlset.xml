@@ -860,6 +860,12 @@
 	]]></sql-query>					
 	
 	
+	<sql-query name="SELECT_ALL_WEBSITE_AND_DOMAIN" description=""><![CDATA[
+	SELECT 
+		WEBSITE_ID, URL
+	FROM V2_WEBSITE	
+	]]></sql-query>	
+	
 	<!-- ANNOUNCE -->			
 	<sql-query name="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID"><![CDATA[
 	SELECT COUNT(ANNOUNCE_ID) FROM V2_ANNOUNCE WHERE OBJECT_TYPE = ? AND OBJECT_ID = ?
