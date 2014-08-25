@@ -99,8 +99,7 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				Object action = invoker.invoke();			
 				if( action instanceof WebSiteAware ){				
 					WebSite site = ((WebSiteAware)action).getWebSite();
-					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;
-					
+					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;					
 					if(nameToUse.charAt(0) == File.separatorChar ){
 						nameToUse = File.separatorChar + "sites"+ File.separatorChar  + site.getName().toLowerCase() + nameToUse ;
 					}else{
@@ -108,11 +107,8 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 					}
 					log.debug(
 						(new StringBuilder()).append("website:").append(site.getName().toLowerCase() ).append(", template: ").append(nameToUse ).toString()
-					);
-					
-					
-                    File source = new File(baseDir, SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar));
-					
+					);					
+                    File source = new File(baseDir, SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar));					
 					return super.findTemplateSource(nameToUse);
 				}			
 			} catch (Exception e) {
@@ -147,8 +143,6 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 				}
 			}			
 		}	*/	
-
-	
 	}
 	
 	protected final User getUser(){
