@@ -17,8 +17,17 @@ package architecture.ee.web.community.struts2.action.support;
 
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.struts2.ServletActionContext;
+import org.apache.struts2.views.freemarker.ScopesHashModel;
+import org.apache.struts2.views.util.ContextUtil;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import architecture.ee.web.community.ContentNotFoundException;
@@ -33,6 +42,13 @@ import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 import architecture.ee.web.util.WebSiteUtils;
+
+import com.opensymphony.xwork2.util.ValueStack;
+
+import freemarker.ext.beans.BeansWrapper;
+import freemarker.template.ObjectWrapper;
+import freemarker.template.TemplateHashModel;
+import freemarker.template.TemplateModelException;
 
 
 public class PageActionSupport extends FrameworkActionSupport {
@@ -127,8 +143,9 @@ public class PageActionSupport extends FrameworkActionSupport {
 	public MenuComponent getNavigator() throws MenuNotFoundException{
 		if(isSetNavigator()){
 			Page pageToUse = getTargetPage();
+			String menuName = pageToUse.getProperty("page.menu.name", "USER_MENU");
 			String current = pageToUse.getProperty(NAVIGATOR_SELECTED_NAME_KEY, null);			
-			return getWebSiteMenu("USER_MENU", current );			
+			return getWebSiteMenu(menuName, current );			
 		}
 		throw new MenuNotFoundException();
 	}
@@ -158,12 +175,60 @@ public class PageActionSupport extends FrameworkActionSupport {
 	protected String processedContentBodyText(BodyContent content) throws Exception {		
 		if(getFreeMarkerConfig() == null)
 			this.freeMarkerConfig = getComponent(FreeMarkerConfig.class);		
+		
 		freemarker.template.Template  template = new freemarker.template.Template ("page-body-"+ content.getBodyId(), new StringReader(content.getBodyText()), getFreeMarkerConfig().getConfiguration());		
-		models.put("action", this);	
-		 StringWriter stringWriter = new StringWriter();
-		 template.process(models, stringWriter) ;				 
-		 return stringWriter.toString();
+		
+		ObjectWrapper objectWrapper = freeMarkerConfig.getConfiguration().getObjectWrapper();
+		ValueStack stack = ServletActionContext.getValueStack(request);		
+		ScopesHashModel model = new ScopesHashModel(objectWrapper, ServletActionContext.getServletContext(), request, stack);		
+		buildTemplateModel(model, stack, this, request, response);		
+		HashMap<String, Object> map = new HashMap<String, Object>();		
+		populateStatics(objectWrapper, map);
+		model.putAll(map);
+		
+		StringWriter stringWriter = new StringWriter();
+		template.process(model, stringWriter) ;				 
+		
+		return stringWriter.toString();
 	}
+	
+	protected void buildTemplateModel(ScopesHashModel model, ValueStack stack, Object action, HttpServletRequest request, HttpServletResponse response) {
+		 Map standard = ContextUtil.getStandardContext(stack, request, response);
+		 model.putAll(standard);
+    }
+	protected void populateStatics(ObjectWrapper wrapper, Map<String, Object> model){
+		BeansWrapper b = (BeansWrapper) wrapper;
+		try {
+			TemplateHashModel enumModels = b.getEnumModels();
+			try {
+
+			} catch (Exception e) {
+				log.error(e);
+			}
+			model.put("enums", b.getEnumModels());
+		} catch (UnsupportedOperationException e) {
+		}
+
+		TemplateHashModel staticModels = b.getStaticModels();
+		try {
+			model.put("TextUtils",              staticModels.get("architecture.common.util.TextUtils"));
+			model.put("StringUtils",              staticModels.get("architecture.common.util.StringUtils"));
+			model.put("L10NUtils",              staticModels.get("architecture.common.util.L10NUtils"));
+			model.put("LocaleUtils",             staticModels.get("architecture.ee.web.util.LocaleUtils"));
+			model.put("HtmlUtils",               staticModels.get("architecture.ee.web.util.HtmlUtils"));
+			model.put("ServletUtils",             staticModels.get("architecture.ee.web.util.ServletUtils"));
+			model.put("ParamUtils",              staticModels.get("architecture.ee.web.util.ParamUtils"));
+			model.put("WebSiteUtils",              staticModels.get("architecture.ee.web.util.WebSiteUtils"));
+			model.put("CompanyUtils",         staticModels.get("architecture.user.util.CompanyUtils"));
+			model.put("SecurityHelper",         staticModels.get("architecture.common.user.SecurityHelper"));
+			model.put("ApplicationHelper",     staticModels.get("architecture.ee.util.ApplicationHelper"));							
+			model.put("WebApplicationHelper",     staticModels.get("architecture.ee.web.util.WebApplicationHelper"));
+		} catch (TemplateModelException e) {
+			log.error(e);
+		}		
+		model.put("statics", BeansWrapper.getDefaultInstance().getStaticModels());
+	}
+	
 	
 	protected void setTargetPageToNull(){
 		this.targetPage = null;

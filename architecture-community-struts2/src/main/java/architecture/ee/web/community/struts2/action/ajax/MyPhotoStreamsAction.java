@@ -26,6 +26,7 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
+import architecture.ee.web.community.streams.remote.RemoteServiceLocator;
 import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
@@ -212,25 +213,48 @@ public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Pre
     }
 	
 	public int getPhotoCount(){
-		if(objectType > 0 && objectId == 0)
-			return getPhotoStreamsManager().getPhotoCount(objectType);
-		else if (objectType > 0 && objectId > 0)
-			return getPhotoStreamsManager().getPhotoCount(objectType, objectId);
+		PhotoStreamsManager photoStreamsManagerToUse = getPhotoStreamsManager();
+		if(RemoteServiceLocator.enabled()){
+			log.debug("remoting enabled.");
+			try {
+				photoStreamsManagerToUse = RemoteServiceLocator.locate();
+			} catch (Exception e) {
+				log.error(e);
+			}
+		}		
 		
-		return getPhotoStreamsManager().getTotalPhotoCount();
+		if(objectType > 0 && objectId == 0)
+			return photoStreamsManagerToUse.getPhotoCount(objectType);
+		else if (objectType > 0 && objectId > 0)
+			return photoStreamsManagerToUse.getPhotoCount(objectType, objectId);		
+		
+		return photoStreamsManagerToUse.getTotalPhotoCount();
+	
 	}
 	
 	public List<Photo> getPhotos(){		
+		PhotoStreamsManager photoStreamsManagerToUse = getPhotoStreamsManager();
+		if(RemoteServiceLocator.enabled()){
+			log.debug("remoting enabled.");
+			try {
+				photoStreamsManagerToUse = RemoteServiceLocator.locate();
+			} catch (Exception e) {
+				log.error(e);
+			}
+		}
+		
 		if( imageId > 0 ){
 			if( getTargetImage() != null )
-				return getPhotoStreamsManager().getPhotosByImage(getTargetImage());
+				return photoStreamsManagerToUse.getPhotosByImage(getTargetImage());
 			return Collections.EMPTY_LIST;
 		}		
+		
 		if(objectType > 0 && objectId == 0)
-			return getPhotoStreamsManager().getPhotos(objectType, this.startIndex, this.pageSize);
+			return photoStreamsManagerToUse.getPhotos(objectType, this.startIndex, this.pageSize);
 		else if (objectType > 0 && objectId > 0)
-			return getPhotoStreamsManager().getPhotos(objectType, objectId, this.startIndex, this.pageSize);			
-		return getPhotoStreamsManager().getPhotos(this.startIndex, this.pageSize);
+			return photoStreamsManagerToUse.getPhotos(objectType, objectId, this.startIndex, this.pageSize);	
+		
+		return photoStreamsManagerToUse.getPhotos(this.startIndex, this.pageSize);
 	}
 		
 	
@@ -238,7 +262,7 @@ public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Pre
 	 * @return targetImage
 	 */
 	public Image getTargetImage() {
-		if(targetImage == null && imageId > 0){
+		if(targetImage == null && imageId > 0 && imageManager != null){
 			try {
 				this.targetImage = this.imageManager.getImage(imageId);
 			} catch (NotFoundException e) {
@@ -280,7 +304,7 @@ public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Pre
 						
 		Image imageToUse = this.getTargetImage();
 		getPhotoStreamsManager().deletePhotos(imageToUse, getUser());
-		
+
 		return success();
     }
 }
