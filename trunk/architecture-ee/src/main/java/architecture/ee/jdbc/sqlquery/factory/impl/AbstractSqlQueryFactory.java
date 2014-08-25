@@ -35,6 +35,8 @@ import org.apache.commons.vfs2.FileSelectInfo;
 import org.apache.commons.vfs2.FileSelector;
 import org.apache.commons.vfs2.FileSystemException;
 
+import architecture.common.lifecycle.Repository;
+import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.scanner.DirectoryListener;
 import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
@@ -113,17 +115,35 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 	
 	protected void loadResourceLocations() {
 		
-		List<FileObject> list = new ArrayList<FileObject>();		
-		for (String path : resourceLocations) {
-			try {
-				FileObject f = VFSUtils.resolveFile(path);
-				if (f.exists()) {
-					list.add(f);
+		List<FileObject> list = new ArrayList<FileObject>();				
+		Repository repository = Bootstrap.getBootstrapComponent(Repository.class);
+		
+		String value = repository.getSetupApplicationProperties().getStringProperty("resources.sql", "");
+		String[] resources = StringUtils.split(value);
+		if( resources.length > 0 ){
+			log.debug("using custom sql resources instade of " + resourceLocations );
+			for( String path : resources ){
+				try {
+					FileObject f = VFSUtils.resolveFile(path);
+					if (f.exists()) {
+						list.add(f);
+					}
+				} catch (Throwable e) {
+					log.warn(path + " not found.", e);
 				}
-			} catch (Throwable e) {
-				log.warn(path + " not found.", e);
 			}
-		}	
+		}else{			
+			for (String path : resourceLocations) {
+				try {
+					FileObject f = VFSUtils.resolveFile(path);
+					if (f.exists()) {
+						list.add(f);
+					}
+				} catch (Throwable e) {
+					log.warn(path + " not found.", e);
+				}
+			}				
+		}
 		
 		try {
 			log.debug("searching sql ...");
@@ -146,6 +166,8 @@ public abstract class AbstractSqlQueryFactory implements SqlQueryFactory, Direct
 		} catch (Throwable e) {
 			log.warn(e);
 		}					
+		
+		
 		for( FileObject fo : list){
 			try {
 				log.debug("sql : " + fo.getName() );

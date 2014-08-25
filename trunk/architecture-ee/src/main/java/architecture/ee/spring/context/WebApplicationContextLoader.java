@@ -61,6 +61,7 @@ public class WebApplicationContextLoader extends ContextLoader {
                 return name.endsWith(".xml");
             }        
         };        
+        
         File paths[] = path.listFiles(filter);
         int size = paths.length;
         for(int i = 0; i < size; i++)
