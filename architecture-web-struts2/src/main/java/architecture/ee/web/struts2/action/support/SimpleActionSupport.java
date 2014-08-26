@@ -51,7 +51,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.interceptor.ParameterNameAware;
 import com.opensymphony.xwork2.util.ValueStack;
 
-public class DefaultActionSupport extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware, ParameterNameAware, OutputFormatAware {
+public class SimpleActionSupport extends ActionSupport implements SessionAware, ServletRequestAware, ServletResponseAware, ParameterNameAware, OutputFormatAware {
 
 	public static final String CANCEL = "cancel";
 	public static final String NOTFOUND = "notfound";
