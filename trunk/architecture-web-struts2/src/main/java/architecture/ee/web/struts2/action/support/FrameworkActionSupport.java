@@ -8,7 +8,7 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.support.WebSiteAware;
 import architecture.ee.web.util.WebSiteUtils;
 
-public class FrameworkActionSupport extends DefaultActionSupport implements WebSiteAware {
+public class FrameworkActionSupport extends SimpleActionSupport implements WebSiteAware {
    	
 	private WebSite webSite;
 	
