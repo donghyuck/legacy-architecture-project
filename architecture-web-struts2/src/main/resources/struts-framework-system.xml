@@ -119,7 +119,21 @@
 				</param>
 			</result>		
 		</action>		
-
+		<!--  Cache  -->	
+		<action name="main-cache-stats" class="architecture.ee.web.struts2.action.admin.MainAction">
+			<result name="success" type="freemarker">/html/system/cache-stats.ftl</result>
+		</action>
+				
+		<action name="list-cache-stats" class="architecture.ee.web.struts2.action.admin.ajax.ViewCacheAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetCacheStats</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">allCacheStats.*</param>
+			</result>
+		</action>
+		
+		<!--  System Info  -->	
 		<action name="view-system-details" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
 			<result name="json-success" type="json">
 			    <param name="enableGZIP">true</param>

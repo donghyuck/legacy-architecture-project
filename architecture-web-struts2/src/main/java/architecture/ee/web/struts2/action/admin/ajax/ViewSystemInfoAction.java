@@ -95,5 +95,6 @@ public class ViewSystemInfoAction extends FrameworkActionSupport {
     public String execute() throws Exception {  
         return success();
     }    
-        
+
+    
 }
