@@ -52,7 +52,7 @@
 								<div class="col-md-3 col-sm-3 footer-col">
 									<div class="footer-title no-margin-b">상품 문의</div>
 									<div class="footer-content">				
-									<p>문의전화 : 02 555 1945</p>					
+									<p>문의전화 : 02 2081 1023</p>					
 									<a class="btn-u btn-u-blue btn-block" href="#" onclick="window.open('http://www.wiznel.com/outer.do?method=getWithholdReceiptFrom','test','width=920 height=500 scrollbars=yes')" >원천징수 영수증 출력</a>
 									
 									<!--		
