@@ -105,7 +105,15 @@ PC9saWNlbnNlPg==</file>
 						
 		</download>
 	</components>
-		
+
+	<performance-monitoring>
+		<database>			
+			<schema>U_INKIUM</schema>
+			<!-- <catalog>U_PORTAL</catalog>		-->
+		</database>
+	</performance-monitoring>
+	
+			
 	<security>
 		<authentication>
 			<loginVer>1</loginVer>
