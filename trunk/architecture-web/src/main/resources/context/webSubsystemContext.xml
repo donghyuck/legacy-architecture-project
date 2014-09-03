@@ -22,7 +22,7 @@
 	p:timeToLive : 60 초 	
 	 -->	 
 	 
-	<bean id="monitoringCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageCache" p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
+	<bean id="monitoringCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="monitoringCache" p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
 	
 	
 	<bean id="imageCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="imageCache" p:maxElementsInMemory="5000"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="60" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
