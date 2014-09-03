@@ -119,6 +119,62 @@
 				</param>
 			</result>		
 		</action>		
+		<!--  DB  -->	
+		<action name="main-db-mgmt" class="architecture.ee.web.struts2.action.admin.MainAction">
+			<result name="success" type="freemarker">/html/system/manage-database.ftl</result>
+		</action>
+
+		<action name="get-database-browser-status" class="architecture.ee.web.struts2.action.admin.ajax.DatabaseBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties"></param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">taskStatusCode, schemaFilter, catalogFilter</param>
+			</result>
+		</action>
+		
+		<action name="list-database-browser-tables" class="architecture.ee.web.struts2.action.admin.ajax.DatabaseBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties"></param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">taskStatusCode, schemaFilter, catalogFilter, tableNames, schema, catalog</param>
+			</result>
+		</action>
+		
+		<action name="get-database-browser-table" class="architecture.ee.web.struts2.action.admin.ajax.DatabaseBrowserAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">catalogFilter, schemaFilter</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">taskStatusCode, targetTable</param>
+			</result>
+		</action>
+								
+		<!--  Template  -->	
+		<action name="main-template-mgmt" class="architecture.ee.web.struts2.action.admin.MainAction">
+			<result name="success" type="freemarker">/html/system/manage-template.ftl</result>
+		</action>
+
+		<action name="list-template-files" class="architecture.ee.web.struts2.action.admin.ajax.TemplateFinderAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetFile</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">targetFiles.*</param>
+			</result>
+		</action>
+
+		<action name="view-template-content" class="architecture.ee.web.struts2.action.admin.ajax.TemplateFinderAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetFile</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">path, targetFileContent</param>
+			</result>
+		</action>
+						
+		
 		<!--  Cache  -->	
 		<action name="main-cache-stats" class="architecture.ee.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/system/cache-stats.ftl</result>
@@ -132,6 +188,15 @@
 				<param name="includeProperties">allCacheStats.*</param>
 			</result>
 		</action>
+
+		<action name="remove-cache-stats" class="architecture.ee.web.struts2.action.admin.ajax.RemoveCacheAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties"></param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">targetCacheStats</param>
+			</result>
+		</action>		
 		
 		<!--  System Info  -->	
 		<action name="view-system-details" class="architecture.ee.web.struts2.action.admin.ajax.ViewSystemInfoAction">
