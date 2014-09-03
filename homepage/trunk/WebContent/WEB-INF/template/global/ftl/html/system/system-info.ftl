@@ -48,6 +48,8 @@
 				});		
 				
 				
+				
+				// memory dataSource
 				var dataSource = new kendo.data.DataSource({
 					transport: {
 						read: {
@@ -56,7 +58,7 @@
 							dataType : 'json'
 						}
 					},
-					error:handleKendoAjaxError,
+					error:common.api.handleKendoAjaxError,
 					schema: { 
 						data: function(response){
 							return [ response ] ; 
@@ -93,8 +95,7 @@
 							});						
 						}else{
 							$("#mem-gen-gauge").data("kendoRadialGauge").value( data.memoryInfo.usedHeap.megabytes );
-						}	
-											
+						}					
 						if( ! $("#perm-gen-gauge").data("kendoRadialGauge") ){	
 							$("#perm-gen-gauge").kendoRadialGauge({
 								theme: "white",
@@ -125,15 +126,42 @@
 							$("#perm-gen-gauge").data("kendoRadialGauge").value( data.memoryInfo.usedPermGen.megabytes );
 						}	
 					}
-				});
-				
+				});				
 				dataSource.read();		
 								
 				var timer = setInterval(function () {
 					dataSource.read();
 					//clearInterval(timer);
-					}, 6000);		
-									
+				}, 6000);		
+
+				displayDiskUsage();
+				displaySystemDetails();					
+				// END SCRIPT
+			}
+		}]);
+		
+		function displayDiskUsage () {
+			var template = kendo.template( $("#disk-usage-row-template").html() );
+			var dataSource = new kendo.data.DataSource({
+					transport: {
+						read: {
+							url: '${request.contextPath}/secure/view-system-diskusage.do?output=json', // the remove service url
+							type:'POST',
+							dataType : 'json'
+						}
+					},
+					error:common.api.handleKendoAjaxError,
+					schema: { 
+						data: "diskUsages"
+                    },
+                    change:function(e){
+                    	if(this.view().length>0)			
+							$("table .disk-usage-table-row").html(kendo.render(template, this.view()))
+                    }		
+			}).read();
+		}		
+				
+		function displaySystemDetails (){		
 				$.ajax({
 					type : 'POST',
 					url : '${request.contextPath}/secure/view-system-details.do?output=json',
@@ -142,12 +170,12 @@
 						kendo.bind($(".system-details"), data.systemInfo );			
 						kendo.bind($(".license-details"), data.licenseInfo );					
 					},
-					error:handleKendoAjaxError,
+					error:common.api.handleKendoAjaxError,
 					dataType : "json"
 				});	
-
+						
 				$('#myTab a').click(function (e) {
-					e.preventDefault();
+					e.preventDefault();					
 					if(  $(this).attr('href') == '#setup-info' ){
 						if(!$("#setup-props-grid").data("kendoGrid")){
 							$('#setup-props-grid').kendoGrid({
@@ -186,7 +214,7 @@
 										data: "databaseInfos",
 											model: DatabaseInfo
 										},
-										error:handleKendoAjaxError
+										error:common.api.handleKendoAjaxError
 									},
 									columns: [
 										{ title: "데이터베이스", field: "databaseVersion"},
@@ -203,15 +231,9 @@
 								});									
 						}					
 					}
-					$(this).tab('show');
-					
-					$('#system-info .panel-body').perfectScrollbar();
-					
-				});													
-									
-				// END SCRIPT
-			}
-		}]);
+					$(this).tab('show');		
+			});				
+		}
 		-->
 		</script> 		 
 		<style>
@@ -231,12 +253,52 @@
 				<div class="page-header bg-dark-gray">					
 					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i> ${selectedMenu.description!""} <i class="fa fa-quote-right"></i></small></h1>
 				</div><!-- / .page-header -->				
-				<div class="row">				
-					<div class="col-xs-3">
+				<div class="row">	
+				
+						
+					<div class="col-xs-12 col-lg-6">
+						<div class="stat-panel system-details">
+							<div class="stat-row">
+								<!-- Bordered, without right border, top aligned text -->
+								<div class="stat-cell col-sm-5 bordered no-border-r padding-sm-hr valign-top">									
+									<h4 class="padding-sm no-padding-t padding-xs-hr"><i class="fa fa-desktop text-primary"></i></h4>
+									<!-- Without margin -->
+									<i class="fa fa-desktop bg-icon" style="font-size:60px;line-height:80px;height:80px;top: 0;"></i>
+									<ul class="list-group no-margin">
+										<li class="list-group-item no-border-hr padding-xs-hr">
+											CPU <span class="label label-danger pull-right" data-bind="text: availableProcessors">0</span>
+										</li> <!-- / .list-group-item -->
+										<li class="list-group-item no-border-hr padding-xs-hr">
+											OS <span class="pull-right" data-bind="text: operatingSystem">Unknown</span>
+										</li> <!-- / .list-group-item -->
+									</ul>
+								</div> <!-- /.stat-cell -->
+								<!-- Primary background, small padding, vertically centered text -->
+								<div class="stat-cell col-sm-7 bg-primary bordered  padding-sm valign-middle">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>위치</th>
+												<th>사용 중인 공간</th>
+												<th>사용 가능한 공간</th>
+												<th>전체 용량</th>
+											</tr>
+										</thead>
+										<tbody class="valign-middle disk-usage-table-row">
+										</tbody>
+									</table>		
+									<span class="text-danger">
+										<small><i class="fa fa-danger"></i>  사용가능 공간은 자바 가상 머신상에서 사용 가능한 공간을 의미합니다. </small>
+									</span>							
+								</div>
+							</div>
+						</div><!-- ./stat-panel -->					
+					</div>	
+					<div class="col-xs-6 col-lg-3">
 						<div class="stat-panel text-center">
 							<div class="stat-row">						
 								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
-									<i class="fa fa-cloud"></i> Heap 메모리
+									<i class="fa fa-flash"></i> Heap 메모리
 								</div>
 							</div><!-- /.stat-row -->
 							<div class="stat-row">								
@@ -262,12 +324,12 @@
 							</div>						
 						</div> <!-- /.stat-panel -->
 					</div>					
-					<div class="col-xs-3">
+					<div class="col-xs-6 col-lg-3">
 						<div class="stat-panel text-center">
 							<div class="stat-row">
 								<!-- Dark gray background, small padding, extra small text, semibold text -->
 								<div class="stat-cell bg-dark-gray padding-sm text-xs text-semibold">
-									<i class="fa fa-cloud"></i> PermGen 메모리
+									<i class="fa fa-flash"></i> PermGen 메모리
 								</div>
 							</div> <!-- /.stat-row -->
 							<div class="stat-row">
@@ -277,7 +339,7 @@
 								</div>							
 							</div> <!-- /.stat-row -->
 							<div class="stat-row memory-details">
-								<div class="stat-counters bg-warning bordered no-border-t text-center">
+								<div class="stat-counters bg-danger bordered no-border-t text-center">
 									<div class="stat-cell col-xs-6 padding-sm no-padding-hr">
 										<!-- Big text -->
 										<span class="text-bg"><strong><span data-bind="text: maxPermGen.megabytes"></span>MB</strong></span><br>
@@ -295,8 +357,8 @@
 						</div> <!-- /.stat-panel -->
 					</div>									
 				</div><!-- memory status end -->
+				<hr class="no-grid-gutter-h grid-gutter-margin-b no-margin-t">				
 				<div class="row">			
-					<a href="#" class="header-2">시스템 정보</a>
 					<div class="col-lg-12">	
 						<div class="panel colourable">
 							<div class="panel-heading">
@@ -318,8 +380,8 @@
 							</div> <!-- / .panel-heading -->					
 							<div class="tab-content">
 								<div class="tab-pane active" id="license-info">
-									<div class="panel-body">
-													<table class="table table-striped .table-hover license-details">
+
+													<table class="table table-hover license-details">
 														<tbody>
 															<tr>
 																<th>발급 ID</th>
@@ -350,17 +412,31 @@
 																<td><span data-bind="text: client.company"></span>(<span data-bind="text: client.name"></span>)</td>
 															</tr>	
 													 	</tbody>
-													</table>
-										</div>			
+													</table>		
 								</div>
 								<div class="tab-pane" id="setup-info">
-									<div class="panel-body">
-										<div id="setup-props-grid" ></div>
-									</div>		
+									<div class="note note-default no-margin-b no-border-vr">
+										<h4 class="note-title">프로퍼티 요약</h4> 아래의 표를 참조하세요.
+										<table class="table table-striped">
+											<thead>
+														<tr>
+															<th>#</th>
+															<th>이름(키)</th>
+															<th>설명</th>														
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td>1</td>
+															<td>##</td>
+															<td><code>true</code> ##</td>														
+														</tr>											
+													</tbody>
+									</table></div>								
+									<div id="setup-props-grid" class="no-border" ></div>		
 								</div>
 								<div class="tab-pane" id="system-info">
-									<div class="panel-body" >
-												<table class="table table-striped .table-hover system-details">
+									<table class="table table-hover system-details">
 													<tbody>
 														<tr>
 															<th>운영시스템</th>
@@ -427,12 +503,11 @@
 															<td><span data-bind="text: jvmInputArguments"></span></td>
 														</tr>											
 													</tbody>
-												</table>	
-									</div>	
+									</table>	
 								</div>
 								<div class="tab-pane" id="database-info">
-									<div class="panel-body">
-										<div id="database-info-grid" ></div>
+									<div class="panel-body no-padding">
+										<div id="database-info-grid" class="no-border"></div>
 									</div>
 								</div>		
 							</div><!-- tab contents end -->
@@ -443,6 +518,23 @@
 			<div id="main-menu-bg">
 			</div>
 		</div> <!-- / #main-wrapper -->
+		<script id="disk-usage-row-template" type="text/x-kendo-template">			
+			<tr>
+				<td>
+					#: absolutePath #
+				</td>
+				<td>#: common.api.bytesToSize(totalSpace - freeSpace) #
+					<small class="text-light-gray">#= kendo.toString(( totalSpace - freeSpace), '\\#\\#,\\#') #</small>
+				</td>
+				<td>#: common.api.bytesToSize(usableSpace) #
+					<small class="text-light-gray">#= kendo.toString(usableSpace, '\\#\\#,\\#') #</small>
+				</td>
+				<td>#: common.api.bytesToSize(totalSpace) #
+					<small class="text-light-gray">#= kendo.toString(totalSpace, '\\#\\#,\\#') #</small>
+				</td>
+			</tr>
+		</script>								
+												
 		<#include "/html/common/common-system-templates.ftl" >			
 	</body>    
 </html>

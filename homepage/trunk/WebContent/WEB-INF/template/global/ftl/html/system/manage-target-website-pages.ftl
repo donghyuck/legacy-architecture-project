@@ -73,8 +73,6 @@
 					{event: 'click', handlers: {
 						'page-create' : function(e){
 							$("#page-list-panel").hide();
-							//kendo.fx($("#page-list-panel")).expand("vertical").duration(200).reverse();
-							//common.ui.animate_v3($('#page-list-panel'), 'fadeOutUp') ;
 							emptyPageEditorSource();
 							showPageEditor();							
 						},			
@@ -84,15 +82,6 @@
 							$('#page-editor-panel').hide();	
 							common.ui.animate_v3($('#page-list-panel'), 'fadeInDown').show() ;					
 						},
-						/*								
-						group : function(e){
-							topBar.go('main-group.do');				
-						}, 
-							
-						user : function(e){
-							topBar.go('main-user.do');			
-						}, 	
-						*/
 						back : function(e){
 							goWebsite();					
 						}																  						 
@@ -219,10 +208,8 @@
 		
 		function showPageEditor(){		
 			preparePageEditor();
-			$("button.btn-editor-control-group[data-action='page-editor-save']").attr('disabled', 'disabled');
-			//kendo.fx($("#page-editor-panel")).expand("vertical").duration(200).play();
-			
-			common.ui.animate_v3($('#page-editor-panel'), 'fadeInDown').show() ;
+			$("button.btn-editor-control-group[data-action='page-editor-save']").attr('disabled', 'disabled');			
+			common.ui.animate_v3($('#page-editor-panel'), 'slideInRight').show() ;
 		}
 		
 		function preparePageEditor(){
@@ -467,7 +454,7 @@
 		<style type="text/css" media="screen">
 
 		.k-grid-content{
-			height:540px;
+			min-height:540px;
 		}			
 		
 		table.k-editor{
@@ -482,7 +469,7 @@
 		<div id="main-wrapper">
 			<#include "/html/common/common-system-navigation.ftl" >	
 			<div id="content-wrapper">
-				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_2") />
+				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_4") />
 				<ul class="breadcrumb breadcrumb-page">
 					<!--<div class="breadcrumb-label text-light-gray">You are here: </div>-->
 					<li><a href="#">Home</a></li>
@@ -501,37 +488,31 @@
 					<div class="col-lg-12">
 						<div  id="page-list-panel" class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
-								<span class="panel-title"><button type="button" class="btn-link btn-control-group" data-action="back"><i class="fa fa fa-level-up fa-lg"></i></button><small class="text-danger">( 웹 페이지는 게시 상태에서 보여집니다.)</small></span>
-								<!--
-								<div class="btn-group">
-									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="group"><i class="fa fa-users"></i> 그룹관리</button>
-									<button type="button" class="btn btn-info btn-control-group btn-sm" data-action="user"><i class="fa fa-user"></i> 사용자관리</button>
-								</div>			
-								<div class="btn-group">
-									<button type="button" class="btn btn-primary btn-control-group btn-sm" data-action="back" disabled="disabled"  title="사이트 상세로 이동" ><i class="fa fa-level-up"></i></button>			
-								</div>
-								-->							
+								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록</span>
 								<div class="panel-heading-controls">
-									
-									<button class="btn btn-danger btn-labeled btn-control-group" data-action="page-create" disabled="disabled"><span class="btn-label icon fa fa-plus"></span> 새 페이지 만들기 </button>
+									<button type="button" class="btn btn-success btn-control-group" data-action="back"><i class="fa fa fa-level-up fa-lg"></i></button>
 									<div class="btn-group">
-										<!--<button type="button" class="btn btn-danger btn-control-group" data-action="page-create" disabled="disabled"><i class="fa fa-file"></i> 새 페이지</button>-->
 										<button type="button" class="btn btn-info btn-page-control-group" data-action="page-publish" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'><i class="fa fa-external-link"></i> 게시</button>
 										<button type="button" class="btn btn-info btn-page-control-group" data-action="page-delete" disabled="disabled" data-loading-text='<i class="fa fa-spinner fa-spin"' ><i class="fa fa-trash-o"></i> 삭제</button>
 									</div>
 								</div>																
 						</div>
-						<div class="table">
-							<div id="website-page-grid" class="no-border"></div>																		
-						</div>					
+						<div class="panel-body padding-sm">
+							<div class="note note-info no-margin-b">
+								<h4 class="note-title"><small><i class="fa fa-info"></i> 페이지는 게시 상태에서 보여집니다.</small></h4>
+								<button class="btn btn-danger btn-labeled btn-control-group" data-action="page-create" disabled="disabled"><span class="btn-label icon fa fa-plus"></span> 새 페이지 만들기 </button>
+							</div>	
+						</div>
+						<div id="website-page-grid" class="no-border-hr"></div>			
+						<div class="panel-footer no-padding-vr"></div>	
 					</div>
 					<div  id="page-editor-panel" class="panel panel-default" style="min-height:300px; display:none;">	
 						<div class="panel-heading">
 							<span class="panel-title"><small><i class="fa fa-info"></i> 웹 페이지는 게시 상태에서 보여집니다.</small></span>
 							<button type="button" class="close btn-control-group" data-action="page-editor-close">&times;  <small style="font-size: 15px;vertical-align: top;line-height:  1.5;">닫기</small></button>
 						</div>
-						<div  class="panel-body padding-sm form-horizontal">	
-							<div  id="webpage-editor" class="container">
+						<div  class="panel-body form-horizontal">	
+							<div  id="webpage-editor" class="padding-sm">
 								<div class="row">
 									<div class="col-lg-12">
 											<div class="pull-right">

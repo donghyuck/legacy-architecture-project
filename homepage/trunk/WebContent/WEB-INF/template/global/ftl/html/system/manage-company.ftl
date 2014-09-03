@@ -2,6 +2,7 @@
 <html decorator="secure">
 <head>
 		<title>관리자 메인</title>		
+<#compress>		
 		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
 		<script type="text/javascript">
 		<!--		
@@ -194,12 +195,39 @@
 							}
 						});	
 						renderTo.find('button[data-action="create-menu"]').click(function(e){				
+							
 							$("#menu-grid").data("kendoGrid").addRow();
-							$("#menu-grid").data("kendoGrid").select("tr.k-grid-edit-row:first")
-							openMenuEditor();
+							$("#menu-grid").data("kendoGrid").select("tr.k-grid-edit-row:first");			
+							openMenuEditor();				
 						});	
 						renderTo.find('button[data-action="saveOrUpdate"]').click(function(e){
-							alert("save");
+							if( $("#menu-editor").data("model") ){
+								var btn = $(this);								
+								btn.button('loading');
+								var saveTarget = $("#menu-editor").data("model").menu ;
+								var editor = ace.edit("xml-editor");
+								saveTarget.set("menuData", editor.session.getValue() );
+								
+								alert(saveTarget.menuData);								
+								
+								var updateUrl = "${request.contextPath}/secure/create-menu.do?output=json";
+								if( saveTarget.menuId > 0){
+									updateUrl = "${request.contextPath}/secure/update-menu.do?output=json";
+								}
+								$.ajax({
+									type : 'POST',
+									url : updateUrl,
+									data : { menuId:saveTarget.menuId, item: kendo.stringify( saveTarget ) },
+									success : function( response ){									
+										$('#menu-grid').data('kendoGrid').dataSource.read();	
+									},
+									error: common.api.handleKendoAjaxError,
+									dataType : "json",
+									complete: function(jqXHR, textStatus ){					
+										btn.button('reset');
+									}
+								});
+							}
 						});
 					}				
 					$("#menu-grid").data("kendoGrid").dataSource.read();
@@ -235,9 +263,11 @@
 				kendo.bind(renderTo, editorModel);
 				renderTo.data("model", editorModel );					
 				editor.setTheme("ace/theme/monokai");
-				editor.getSession().setMode("ace/mode/xml");				
+				editor.getSession().setMode("ace/mode/xml");		
+						
 				$('#menu-editor button[data-action="editor-close"]').click(function(e){
 					closeMenuEditor();
+					return false;
 				});
 				
 				var switcher = $('#menu-editor input[role="switcher"][name="warp-switcher"]');
@@ -251,22 +281,27 @@
 			}						
 			menuPlaceHolder.copy( renderTo.data("model").menu );	
 			editor.setValue(renderTo.data("model").menu.menuData);
-			$('#menu-modal button[data-action="saveOrUpdate"]').removeClass("hidden");
-			common.ui.animate($('#menu-modal .modal-body:first'), 'fadeOutUp', function(){
-				$('#menu-modal .modal-body:first').addClass("hidden");				
-				$('.menu-editor-group[class~="hidden"]').removeClass('hidden');
+			
+			$('#menu-modal .modal-body:first').fadeOut("slow", function(){
+				$('#menu-modal button[data-action="saveOrUpdate"]').removeClass("hidden");
+				$("#menu-editor").fadeIn();
 			});
 		}
 		
-		function closeMenuEditor(){
+		function closeMenuEditor(){		
 			if(getSelectedMenu().menuId < 0 ){
 				$("#menu-grid").data("kendoGrid").removeRow("tr.k-grid-edit-row");
 			}
-			$('#menu-modal button[data-action="saveOrUpdate"]').addClass("hidden");
-			common.ui.animate($("#menu-editor"), "fadeOutUp", function(){				
-				$('#menu-editor .modal-body.menu-editor-group').addClass('hidden');
-				$('#menu-modal .modal-body:first.hidden').removeClass("hidden");
-			});
+			$('#menu-modal button[data-action="saveOrUpdate"]').addClass("hidden");						
+			
+			if($("#menu-editor").is(":visible")){
+				$("#menu-editor").fadeOut("slow", function(){
+					if($('#menu-modal .modal-body:first').is(":hidden")){
+						$('#menu-modal .modal-body:first').fadeIn();
+					}
+				});
+			}
+			
 		}
 		
 		
@@ -330,17 +365,12 @@
 		function hideCompanyDetails(){			
 			if( $("#company-details").text().length > 0 && $("#company-details").is(":visible") ){
 				var alwaysShowList = common.ui.admin.switcherEnabled("list-switcher");
-				var animate = "slideOutLeft" ;
-				if( alwaysShowList ){
-					animate = "fadeOutUp" ;
-				}
-				common.ui.animate_v3($("#company-details"), animate, function(){  
-					if( !$("#company-list").is(":visible") ){
-						$("#company-list").show();
-						//common.ui.animate_v3($("#company-list"), "slideInRight").show();
-						common.ui.animateFadeIn($("#company-list"));
-					} 
-				});	
+				
+				$("#company-details").fadeOut("slow", function(){
+					if( !alwaysShowList && $("#company-list").is(":hidden") ){
+						$("#company-list").fadeIn();
+					}
+				});
 			}	
 		}
 		
@@ -361,7 +391,8 @@
 					if( e.field.match('^company.name')){ 						
 						var sender = e.sender ;
 						if( sender.company.companyId > 0 ){
-							this.set("logoUrl", "/download/logo/company/" + sender.company.name );
+							var dt = new Date();
+							this.set("logoUrl", "/download/logo/company/" + sender.company.name + "?" + dt.getTime() );
 							this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
 							this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
 						}
@@ -389,23 +420,20 @@
 			}
 			companyPlaceHolder.copy( renderTo.data("model").company );
 			
-			$('#myTab a:first').tab('show');			
-			if(alwaysShowList){				
-				if(!renderTo.is(':visible'))
-					common.ui.animate_v3(renderTo, 'fadeInDown').show() ;
-				$('html,body').animate({scrollTop: renderTo.offset().top - 20 }, 500);	
-			}else{			
+			$('#myTab a:first').tab('show');		
 			
-				common.ui.animateFadeOut($("#company-list"), function(){
-					common.ui.animate_v3(renderTo, 'slideInLeft').show() ;
-				});
-				
-				
-				//common.ui.animate_v3($("#company-list"), 'slideOutLeft', function(){
-					//common.ui.animate_v3(renderTo, 'slideInLeft').show() ;
-					//renderTo.show();
-				//}) ;
-			}			
+			if(renderTo.is(':hidden')){
+				if(alwaysShowList){		
+					renderTo.fadeIn("slow", function(){
+						$('html,body').animate({scrollTop: renderTo.offset().top - 20 }, 500);	
+					});
+				}else{
+					$("#company-list").fadeOut("slow", function(){
+						renderTo.fadeIn("slow");
+					});
+				}
+			}
+						
 			return false;
 		}
 		
@@ -552,7 +580,7 @@
 			}
 			
 			#menu-grid .k-grid-content {
-				min-height:250px;
+				min-height:350px;
 			}
 			
 			#xml-editor{
@@ -564,6 +592,7 @@
 				min-height:400px;
 			}
 		</style>
+</#compress>		
 	</head>
 	<body class="theme-default main-menu-animated">
 		<div id="main-wrapper">
@@ -585,8 +614,8 @@
 							<div class="row">
 								<hr class="visible-xs no-grid-gutter-h">							
 								<div class="pull-right col-xs-12 col-sm-auto">
-									<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">옵션</h6>
-									<div class="btn-group">
+									<h6 class="text-light-gray text-semibold text-xs hidded-xs" style="margin:20px 0 10px 0;">옵션</h6>
+									<div class="btn-group pull-right">
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="menu"><i class="btn-label icon fa fa-sitemap"></i> 메뉴</button>
 										<button type="button" class="btn btn-primary btn-sm btn-control-group" data-action="role"><i class="btn-label icon fa fa-lock"></i> 권한 & 롤</button>
 									</div>									
@@ -601,11 +630,15 @@
 						<div id="company-list" class="panel panel-default" style="min-height:300px;">
 							<div class="panel-heading">
 								<span class="panel-title"><i class="fa fa-align-justify"></i> 목록</span>
-								<div class="panel-heading-controls">								
-								<button class="btn btn-danger btn-labeled btn-control-group" data-action="create-company"><span class="btn-label icon fa fa-plus"></span> 회사 만들기 </button>
-								</div>
 							</div>
-							<div id="company-grid" class="no-border"></div>	
+							<div class="panel-body padding-sm">
+								<div class="note note-info no-margin-b">
+									<h4 class="note-title"><small><i class="fa fa-info"></i> 회사 단위의 독립적인 회원, 그룹, 웹 사이트 운영을 지원합니다.</small></h4>
+									<button class="btn btn-danger btn-labeled btn-control-group" data-action="create-company"><span class="btn-label icon fa fa-plus"></span> 회사 만들기 </button>
+								</div>	
+							</div>									
+							<div id="company-grid" class="no-border-hr"></div>	
+							<div class="panel-footer no-padding-vr"></div>
 						</div>
 						<!-- /details -->
 						<!-- list -->
@@ -620,64 +653,53 @@
 		
 		<script type="text/x-kendo-template" id="menu-modal-template">
 		<div class="modal fade" id="menu-modal" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
-			<div class="modal-dialog modal-lg animated swing">
+			<div class="modal-dialog modal-lg animated slideDown">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 						<h4 class="modal-title">메뉴</h4>
 					</div>
 					<div class="modal-body no-padding">
-						<div class="panel panel-transparent no-margin-b">
-							<div class="panel-body">
-								<button class="btn btn-danger btn-flat btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> <small>새로운 메뉴 만들기</small></button>
-							</div>
+						<div class="padding-sm">
+							<button class="btn btn-danger btn-flat btn-labeled" data-action="create-menu"><span class="btn-label icon fa fa-plus"></span> <small>새로운 메뉴 만들기</small></button>
 						</div>
 						<div id="menu-grid" class="no-border-hr no-border-b"></div>
 					</div>					
-					<div id="menu-editor">
-					<div class="modal-body border-t no-padding-hr no-padding-t no-margin-t menu-editor-group hidden">
-						<div class="panel panel-transparent no-margin-b">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-xs-6">
-										<button class="btn btn-primary btn-flat btn-labeled" data-action="editor-close"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록으로</small></button>	
+					<div id="menu-editor" style="display:none;" class="modal-body no-padding">
+						<div class="padding-sm-vr">
+							<form class="form-horizontal">	
+									<div class="row no-margin">
+										<div class="col-sm-6"><button class="btn btn-primary btn-flat btn-labeled" data-action="editor-close"><span class="btn-label icon fa fa-arrow-left"></span> <small>목록 보기</small></button>	</div>
+										<div class="col-sm-3"></div>
+										<div class="col-sm-3">
+											<h6 class="text-light-gray text-semibold text-xs">줄바꿈 설정/해지</h6>
+											<input type="checkbox" name="warp-switcher" data-class="switcher-primary" role="switcher" >	
+										</div>
+									</div>			
+									<div class="row no-margin">
+										<div class="col-sm-6">
+											<div class="form-group no-margin-hr">
+												<input type="text" name="name" class="form-control input-sm" placeholder="이름" data-bind="value: menu.name">
+											</div>
+										</div><!-- col-sm-6 -->
+										<div class="col-sm-6">
+											<div class="form-group no-margin-hr">
+												<input type="text" name="title" class="form-control input-sm" placeholder="타이틀" data-bind="value: menu.title">
+											</div>
+										</div><!-- col-sm-6 -->
 									</div>
-									<div class="col-xs-6">
-										<h6 class="text-light-gray text-semibold text-xs" style="margin:20px 0 10px 0;">줄 바꿈 설정</h6>
-										<input type="checkbox" name="warp-switcher" data-class="switcher-primary" role="switcher" >	
-									</div>
-								</div>	
-							</div>						
-						</div>					
-						<form class="form-horizontal">				
-							<div class="row no-margin">
-								<div class="col-sm-6">
-									<div class="form-group no-margin-hr">
-										<input type="text" name="name" class="form-control input-sm" placeholder="이름" data-bind="value: menu.name">
-									</div>
-								</div><!-- col-sm-6 -->
-								<div class="col-sm-6">
-									<div class="form-group no-margin-hr">
-										<input type="text" name="title" class="form-control input-sm" placeholder="타이틀" data-bind="value: menu.title">
-									</div>
-								</div><!-- col-sm-6 -->
-							</div>
-							<div class="row no-margin">
-								<div class="col-sm-12">
-									<input type="text" name="description" class="form-control input-sm" placeholder="설명"  data-bind="value:menu.description" />
-								</div>
-							</div>				
-						</form>			
-						
-					</div>					
-					<div class="modal-body no-padding menu-editor-group hidden" style="height:400px;">
-						<div id="xml-editor">												
-						</div>							
-					</div>					
-					</div>	
+									<div class="row no-margin">
+										<div class="col-sm-12">
+											<input type="text" name="description" class="form-control input-sm" placeholder="설명"  data-bind="value:menu.description" />
+										</div>
+									</div>				
+							</form>																									
+						</div>
+						<div id="xml-editor" style="height:400px; position:relative;"></div>	
+					</div>
 					<div class="modal-footer">					
 						<button type="button" class="btn btn-default btn-flat" data-dismiss="modal">닫기</button>
-						<button type="button" class="btn btn-primary btn-flat disable hidden" data-action="saveOrUpdate">저장</button>
+						<button type="button" class="btn btn-primary btn-flat disable hidden" data-action="saveOrUpdate" data-loading-text='<i class="fa fa-spinner fa-spin"></i>'>저장</button>
 					</div>
 				</div>
 			</div>
@@ -686,7 +708,7 @@
 		
 		<script type="text/x-kendo-template" id="role-modal-template">
 		<div class="modal fade" id="role-modal" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
-			<div class="modal-dialog animated swing">
+			<div class="modal-dialog animated slideDown">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -714,7 +736,7 @@
 						<div class="left-col">
 							<div class="details-block no-margin-t">
 								<div class="details-photo">
-									<img data-bind="attr: { src: logoUrl }" alt="">
+									<img data-bind="attr: { src: logoUrl }" alt="" src="${request.contextPath}/images/common/loader/loading-transparent-bg.gif">
 								</div>
 								<br>
 								<!--
@@ -729,15 +751,15 @@
 								<table class="table">
 									<tbody>						
 										<tr>
-											<td><small><span class="badge light-weight">도메인</span></small></td>								
+											<th><small>도메인</small></th>								
 											<td><span data-bind="text:company.domainName"></span></td>
 										</tr>	
 										<tr>
-											<th><small><span class="badge light-weight">생성일</span></small></th>								
+											<th><small>생성일</small></th>								
 											<td><span data-bind="text:formattedCreationDate"></span></td>
 										</tr>	
 										<tr>
-											<th><small><span class="badge light-weight">수정일</span></small></th>								
+											<th><small>수정일</small></th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>														
 									</tbody>
@@ -747,39 +769,34 @@
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h">	
 							<div class="details-content">
-								<ul id="myTab" class="nav nav-tabs nav-tabs-sm">
-									<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
-									<li><a href="\\#groups" data-toggle="tab">그룹 <span class="badge badge-success" data-bind="text:groupCount, visible:groupCount ">0</span></a></li>
-									<li><a href="\\#users" data-toggle="tab">사용자 <span class="badge badge-success" data-bind="text:memberCount, visible:memberCount">0</span></a></li>
-								</ul>	
-								<!-- .tab-content -->	
-								<div class="tab-content tab-content-bordered no-padding">								
-									<div class="tab-pane fade" id="props">
-										<div class="alert alert-info alert-dark no-border-radius no-border-vr no-margin-b">
-											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-											프로퍼티는 수정 후 저장 버튼을 클릭하여야 최종 반영됩니다.
-										</div>						
-										<div id="company-prop-grid" class="props no-border"></div>
-									</div>
-									<div class="tab-pane fade" id="groups">					
-										<div class="alert alert-info alert-dark no-border-radius no-border no-margin-b">
-											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-											<small>그룹관리는  그룹관리를 사용하여 관리 하실수 있습니다.	</small>     
-										</div>						
-										<div id="company-group-grid"  class="groups no-border"></div>					
-									</div>
-									<div class="tab-pane fade" id="users">
-										<div class="alert alert-info alert-dark no-border-radius no-border no-margin-b">
-											<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-											<small>사용자관리는 사용자관리를 사용하여 관리 하실수 있습니다.	    </small> 
-										</div>			
-										<div id="company-user-grid"  class="users no-border"></div>
-									</div>
-								</div><!-- / .tab-content -->
+								<div class="panel colourable">
+									<div class="panel-heading">
+										<span class="panel-title"><i class="fa fa-info"></i></span>							
+										<ul id="myTab" class="nav nav-tabs nav-tabs-xs">
+											<li><a href="\\#props" data-toggle="tab">프로퍼티</a></li>
+											<li><a href="\\#groups" data-toggle="tab">그룹 <span class="badge badge-success" data-bind="text:groupCount, visible:groupCount ">0</span></a></li>
+											<li><a href="\\#users" data-toggle="tab">사용자 <span class="badge badge-success" data-bind="text:memberCount, visible:memberCount">0</span></a></li>
+										</ul>	
+									</div></!-- /.panel-heading -->								
+									<!-- .tab-content -->	
+									<div class="tab-content  no-padding">								
+										<div class="tab-pane fade" id="props">				
+											<div id="company-prop-grid" class="props no-border-hr no-border-t"></div>
+										</div>
+										<div class="tab-pane fade" id="groups">										
+											<div id="company-group-grid"  class="groups no-border-hr no-border-t"></div>					
+										</div>
+										<div class="tab-pane fade" id="users">	
+											<div id="company-user-grid"  class="users no-border-hr no-border-t"></div>
+										</div>
+									</div><!-- / .tab-content -->
+									<div class="panel-footer no-padding-vr"></div>
+								</div><!-- / .panel -->
 							</div><!-- / .details-content -->
 						</div><!-- / .right-col -->
 					</div><!-- / .details-row -->	
 			</div>
+			<div class="panel-footer no-padding-vr"></div>
 		</div>			
 		</script>				
 		<#include "/html/common/common-system-templates.ftl" >			

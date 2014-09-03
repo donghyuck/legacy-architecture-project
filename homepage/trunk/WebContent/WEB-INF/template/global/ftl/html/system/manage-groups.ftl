@@ -3,72 +3,73 @@
     <head>
         <title>그룹 관리</title>
 <#compress>        
+		<link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />	
         <script type="text/javascript">
         <!--
         yepnope([{
             load: [ 	       
-			'css!${request.contextPath}/styles/font-awesome/4.0.3/font-awesome.min.css',			
-			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',
-       	    '${request.contextPath}/js/kendo/kendo.web.min.js',
-			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',      	    
-			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',			 
-			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js', 
-			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',       	    
-       	    '${request.contextPath}/js/common/common.models.js',
-       	    '${request.contextPath}/js/common/common.api.js',       	    
-       	    '${request.contextPath}/js/common/common.ui.js',
-			'${request.contextPath}/js/common/common.ui.system.js'],        	   
+			'css!${request.contextPath}/styles/font-awesome/4.1.0/font-awesome.min.css',
+			'css!${request.contextPath}/styles/common.plugins/animate.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.widgets.css',			
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.rtl.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.themes.css',
+			'css!${request.contextPath}/styles/common.admin/pixel/pixel.admin.pages.css',	
+			'css!${request.contextPath}/styles/perfect-scrollbar/perfect-scrollbar-0.4.9.min.css',
+			'${request.contextPath}/js/jquery/1.10.2/jquery.min.js',			
+			'${request.contextPath}/js/kendo/kendo.web.min.js',
+			'${request.contextPath}/js/kendo.extension/kendo.ko_KR.js',
+			'${request.contextPath}/js/kendo/cultures/kendo.culture.ko-KR.min.js',			
+			'${request.contextPath}/js/jgrowl/jquery.jgrowl.min.js',						
+			'${request.contextPath}/js/bootstrap/3.0.3/bootstrap.min.js',		
+			'${request.contextPath}/js/common.plugins/fastclick.js', 
+			'${request.contextPath}/js/common.plugins/jquery.slimscroll.min.js', 
+			'${request.contextPath}/js/perfect-scrollbar/perfect-scrollbar-0.4.9.min.js', 			
+			'${request.contextPath}/js/common.admin/pixel.admin.min.js',			
+			'${request.contextPath}/js/common/common.models.js',       	    
+			'${request.contextPath}/js/common/common.api.js',
+			'${request.contextPath}/js/common/common.ui.js',
+			'${request.contextPath}/js/common/common.ui.admin.js',			
+			'${request.contextPath}/js/ace/ace.js'			
+			],        	   
             complete: function() { 
 
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
-										
-				// 2. ACCOUNTS LOAD		
-				var currentUser = new User();
-				var accounts = $("#account-panel").kendoAccounts({
-					visible : false,
-					authenticate : function( e ){
-						currentUser = e.token.copy(currentUser);							
+				// 1-1.  셋업
+				var currentUser = new User();	
+				var detailsModel = kendo.observable({
+					company : new Company(),
+					isEnabled : false,
+					addGroup : function(e){
+						$("#group-grid").data('kendoGrid').addRow();		
 					}
-				});		
-												
-				// 3.MENU LOAD
-				var companyPlaceHolder = new Company({ companyId: ${action.targetCompany.companyId} });
-				
-				var topBar = $("#navbar").extNavbar({
-					template : $("#top-navbar-template").html(),
-					items : [{ 
-						name:"companySelector", 
-						selector: "#companyDropDownList", 
-						value: ${action.user.companyId}, 
-						change : function(data){
-							data.copy(companyPlaceHolder);
-						}	
-					}]
-				});
-	
-				// 4. CONTENT MAIN		
-				common.ui.handleButtonActionEvents(
-					$("button.btn-control-group"), 
-					{event: 'click', handlers: {
-						company : function(e){
-							$("form[name='fm1'] input").val(companyPlaceHolder.companyId);
-							$("form[name='fm1']").attr("action", "main-company.do" ).submit(); 						
-						},
-						user : function(e){
-							$("form[name='fm1'] input").val(companyPlaceHolder.companyId);
-							$("form[name='fm1']").attr("action", "main-user.do" ).submit(); 						
-						}, 	
-						site : function(e){
-							$("form[name='fm1'] input").val(companyPlaceHolder.companyId);
-							$("form[name='fm1']").attr("action", "main-site.do" ).submit(); 						
-						}, 
-						top : function(e){					
-							$('html,body').animate({ scrollTop:  0 }, 300);
-						}  						 
-					}}
+				});	
+				detailsModel.bind(
+					"change",  function(e){
+						if( e.field.match('^company.name')){ 						
+							var sender = e.sender ;
+							if( sender.company.companyId > 0 ){
+								var dt = new Date();
+								this.set("logoUrl", "/download/logo/company/" + sender.company.name + "?" + dt.getTime() );
+								this.set("formattedCreationDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.creationDate ));      
+								this.set("formattedModifiedDate", kendo.format("{0:yyyy.MM.dd}",  sender.company.modifiedDate ));
+							}
+						}
+					}
 				);
-						
+				common.ui.admin.setup({	
+					authenticate: function(e){
+						e.token.copy(currentUser);
+					},
+					companyChanged: function(item){
+						item.copy(detailsModel.company);
+						detailsModel.isEnabled = true;
+						kendo.bind($("#company-details"), detailsModel );				
+						$("#group-grid").data("kendoGrid").dataSource.read();
+					},
+					switcherChanged: function( name , value ){						
+					}					
+				});								
+																			
+				
 				// 1. GROUP GRID			        
 			        var selectedGroup = new Group();		      
 			        var group_grid = $("#group-grid").kendoGrid({
@@ -79,9 +80,9 @@
 	                            update: { url:'${request.contextPath}/secure/update-group.do?output=json', type:'POST' },
 		                        parameterMap: function (options, operation){	          
 		                            if (operation != "read" && options) {
-		                                return { companyId: companyPlaceHolder.companyId, item: kendo.stringify(options)};
+		                                return { companyId: detailsModel.company.companyId, item: kendo.stringify(options)};
 		                            }else{
-		                                return { startIndex: options.skip, pageSize: options.pageSize , companyId: companyPlaceHolder.companyId }
+		                                return { startIndex: options.skip, pageSize: options.pageSize , companyId: detailsModel.company.companyId }
 		                            }
 		                        }                  
 	                        },
@@ -98,7 +99,7 @@
 	                    },
 	                    columns: [
 	                        { field: "groupId", title: "ID", width:40,  filterable: false, sortable: false }, 
-	                        { field: "name",    title: "KEY",  filterable: true, sortable: true,  width: 100 }, 
+	                        { field: "name",    title: "영문 이름",  filterable: true, sortable: true,  width: 100 }, 
 	                        { field: "displayName",    title: "이름",  filterable: true, sortable: true,  width: 100 }, 
 	                        { field: "description", title: "설명", width: 200, filterable: false, sortable: false },
 	                        { command:  [ {name:"edit",  text: { edit: "수정", update: "저장", cancel: "취소"}  }  ], title: "&nbsp;" }], 
@@ -106,8 +107,7 @@
 	                    editable: "inline",
 	                    selectable: 'row',
 	                    height: '100%',
-	                    batch: false,
-	                    toolbar: [ { name: "create", text: "그룹추가" } ],                    
+	                    batch: false,            
 	                    pageable: { refresh:true, pageSizes:false,  messages: { display: ' {1} / {2}' }  },                    
 	                    change: function(e) {	                       
 	                        var selectedCells = this.select();	                       
@@ -460,45 +460,48 @@
 
 		</style>
 </#compress>		
-    </head>
-	<body class="color0">
-		<!-- START HEADER -->
-		<section id="navbar"></section>
-		<!-- END HEADER -->
-		<!-- START MAIN CONTNET -->
-		<div class="container-fluid">	
-			<div class="row">			
-				<div class="col-12 col-lg-12">					
-				<div class="page-header">
-					<#assign selectedMenuItem = action.getWebSiteMenu("SYSTEM_MENU", "MENU_1_3") />
-					<h1>${selectedMenuItem.title}     <small><i class="fa fa-quote-left"></i>&nbsp;${selectedMenuItem.description}&nbsp;<i class="fa fa-quote-right"></i></small></h1>
-				</div>			
-				</div>		
+	</head>
+	<body class="theme-default main-menu-animated">
+		<div id="main-wrapper">
+			<#include "/html/common/common-system-navigation.ftl" >	
+			<div id="content-wrapper">
+				<ul class="breadcrumb breadcrumb-page">
+					<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_3") />
+					<li><a href="#">Home</a></li>
+					<li><a href="${ selectedMenu.parent.page!"#" }">${selectedMenu.parent.title}</a></li>
+					<li class="active"><a href="#">${selectedMenu.title}</a></li>
+				</ul>			
+				<div class="page-header bg-dark-gray">					
+					<h1><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}  <small><i class="fa fa-quote-left"></i> ${selectedMenu.description!""} <i class="fa fa-quote-right"></i></small></h1>
+				</div><!-- / .page-header -->	
+				<div id="company-details" class="page-details">
+					<div class="row">		
+							<div class="col-sm-12">
+								<div class="panel panel-default" style="min-height:300px;" >
+									<div class="panel-heading">
+										<span class="panel-title"><i class="fa fa-align-justify"></i> <span data-bind="text:company.displayName"></span><code data-bind="text: company.companyId"></code> 그룹 목록</span>
+									</div>
+									<div class="panel-body padding-sm">
+										<div class="note note-info no-margin-b">
+											<h4 class="note-title"><small><i class="fa fa-info"></i> 그룹을 사용하면 더욱 쉽게 권한을 관리할 수 있습니다.</small></h4>
+											<button class="btn btn-danger btn-labeled btn-control-group" data-bind="click:addGroup"><span class="btn-label icon fa fa-plus"></span> 그룹 만들기 </button>	
+										</div>	
+									</div>
+									<div id="group-grid" class="no-border-hr"></div>
+									<div class="panel-footer no-padding-vr">								
+									</div>
+								</div>
+								
+								<div id="group-details" class="col-sm-12 body-group marginless paddingless" style="display:none; padding-top:5px;"></div>					
+							</div>				
+						</div><!-- / .col-sm-12 -->						
+					</div><!-- / .row -->
+				</div>							
+			</div> <!-- / #content-wrapper -->
+			<div id="main-menu-bg">
 			</div>
-			<div class="row">		
-				<div class="col-sm-12">
-					<div class="panel panel-default" style="min-height:300px;" >
-						<div class="panel-heading selected-company-info" style="padding:5px;">						
-							<div class="btn-group">
-							<#if request.isUserInRole('ROLE_SYSTEM' )>
-								<button type="button" class="btn btn-info btn-sm  btn-control-group" data-action="company"><i class="fa fa-building-o"></i>  회사관리</button>				
-							</#if>				
-								<button type="button" class="btn btn-info btn-sm  btn-control-group" data-action="site"><i class="fa fa-sitemap"></i>  웹사이트 관리</button>
-								<button type="button" class="btn btn-info btn-sm  btn-control-group" data-action="user"><i class="fa fa-user"></i>  사용자 관리</button>
-							</div>						
-						</div>
-						<div class="panel-body" style="padding:5px;">
-							<div class="row marginless paddingless">
-								<div class="col-sm-12 body-group marginless paddingless"><div id="group-grid"></div></div>
-								<div id="group-details" class="col-sm-12 body-group marginless paddingless" style="display:none; padding-top:5px;"></div>
-							</div>
-						</div>
-					
-					</div>				
-				</div>			
-			</div>				
-		</div>		
-
+		</div> <!-- / #main-wrapper -->
+		
 		<div id="search-window" style="display:none;" class="clearfix gray">		
 			<div class="container layout">					
 				<div class="row">
@@ -526,12 +529,12 @@
 					</div>
 				</div>				
 			</div>
-		</div>			
+		</div>		
+			
 		<form name="fm1" method="POST" accept-charset="utf-8" class="details">
 			<input type="hidden" name="companyId" value="0" />
 		</form>		
-		<!-- END MAIN CONTNET -->
-		<div id="account-panel"></div>			
+
 		<script type="text/x-kendo-template" id="group-details-template">					
 			<div class="panel panel-primary marginless details" >
 				<div class="panel-heading" >

@@ -3,6 +3,7 @@
     <head>
 	<#compress>
         <title>사용자 관리</title>
+        <link  rel="stylesheet" type="text/css"  href="${request.contextPath}/styles/common.admin/pixel/pixel.admin.style.css" />
         <script type="text/javascript">                
         yepnope([{
             load: [ 
@@ -16,37 +17,34 @@
        	    '${request.contextPath}/js/common/common.models.js',
        	    '${request.contextPath}/js/common/common.api.js',       	    
        	    '${request.contextPath}/js/common/common.ui.js',
-      		'${request.contextPath}/js/common/common.ui.system.js'],        	   
+      		'${request.contextPath}/js/common/common.ui.admin.js'],        	   
             complete: function() {       
 
-				// 1.  한글 지원을 위한 로케일 설정
-				kendo.culture("ko-KR");
-										
-				// 2. ACCOUNTS LOAD						
+				// 1-1.  한글 지원을 위한 로케일 설정
+				common.api.culture();
+				// 1-2.  페이지 렌딩
+				common.ui.landing();				
+				// 1-3.  관리자  로딩
 				var currentUser = new User();
-				var accounts = $("#account-panel").kendoAccounts({
-					visible : false,
-					authenticate : function( e ){
-						currentUser = e.token.copy(currentUser);							
+				
+				var targetCompany = new Company();	
+				
+				common.ui.admin.setup({
+					authenticate: function(e){
+						e.token.copy(currentUser);
+					},
+					companyChanged: function(item){
+						item.copy(targetCompany);
+					},
+					switcherChanged: function( name , value ){						
+						if( value && !$('#company-list').is(":visible") ){
+							$('#company-list').show();
+						}else if ( !value && $('#company-list').is(":visible") && $('#company-details').is(":visible") ){
+							hideCompanyDetails();
+						}
 					}
-				});					
-								
-				// 3.MENU LOAD			
-				var companyPlaceHolder = new Company({ companyId: ${action.targetCompany.companyId} });
-				$("#navbar").data("companyPlaceHolder", companyPlaceHolder);				
-				var topBar = $("#navbar").extNavbar({
-					template : $("#top-navbar-template").html(),
-					items : [{ 
-						name:"companySelector", 
-						selector: "#companyDropDownList", 
-						value: ${action.user.companyId}, 
-						change : function(data){
-							data.copy(companyPlaceHolder);
-							// kendo.bind($("#company-info"), companyPlaceHolder );
-						}	
-					}]
 				});
-		
+				
 				// 4. CONTENT
 				common.ui.handleButtonActionEvents(
 					$("button.btn-control-group"), 
@@ -540,7 +538,7 @@
 			<div class="row">			
 				<div class="col-12 col-lg-12">					
 				<div class="page-header">
-					<#assign selectedMenuItem = action.getWebSiteMenu("SYSTEM_MENU", "MENU_1_4") />
+					<#assign selectedMenuItem = action.getWebSiteMenu("SYSTEM_MENU", "MENU_2_2") />
 					<h1>${selectedMenuItem.title}     <small><i class="fa fa-quote-left"></i>&nbsp;${selectedMenuItem.description}&nbsp;<i class="fa fa-quote-right"></i></small></h1>
 				</div>			
 				</div>		

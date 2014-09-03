@@ -32,13 +32,15 @@
 			],    	   
 			complete: function() {               
 				
-				// 1-1.  한글 지원을 위한 로케일 설정
-				common.api.culture();
-				// 1-2.  페이지 렌딩
-				common.ui.landing();				
-				// 1-3.  관리자  로딩
+				// 1-1.  셋업
 				var currentUser = new User();			
-														
+				common.ui.admin.setup({	
+					menu : {toggleClass : "mmc"},
+					authenticate: function(e){
+						e.token.copy(currentUser);
+					}
+				});		
+																		
 				// 3.MENU LOAD 
 				var detailsModel = kendo.observable({
 					website: new common.models.WebSite( {webSiteId: ${ action.targetWebSite.webSiteId}} ),
@@ -68,17 +70,7 @@
 					}),
 					teleport : function(e){
 						var action = $(e.target).attr('data-action');
-						if(action === 'go-group'){
-							common.api.teleportation().teleport({
-								action : '${request.contextPath}/secure/main-group.do',
-								companyId : this.get('website').company.companyId
-							});							
-						}else if (action === 'go-user'){
-							common.api.teleportation().teleport({
-								action : '${request.contextPath}/secure/main-user.do',
-								companyId: this.get('website').company.companyId
-							});		
-						}else if (action === 'back'){			
+						if (action === 'back'){			
 							common.api.teleportation().teleport({
 								action : '${request.contextPath}/secure/main-site.do',
 								companyId: this.get('website').company.companyId
@@ -106,14 +98,7 @@
 				});								
 				
 				$("#website-details").data("model", detailsModel );			
-				
-				common.ui.admin.setup({
-					menu : {toggleClass : "mmc"},
-					authenticate: function(e){
-						e.token.copy(currentUser);
-					}
-				});				
-				
+								
 				common.api.callback({
 					url :"${request.contextPath}/secure/get-site.do?output=json", 
 					data : { targetSiteId:  detailsModel.website.webSiteId },
@@ -121,8 +106,7 @@
 						var site = new common.models.WebSite(response.targetWebSite);
 						site.copy( detailsModel.website );
 						detailsModel.isEnabled = true;						
-						kendo.bind($("#website-details"), detailsModel );
-						
+						kendo.bind($("#website-details"), detailsModel );						
 						displayWebsiteDetails();	
 					},
 					requestStart : function(){
@@ -707,7 +691,7 @@
 		<div id="main-wrapper">
 			<#include "/html/common/common-system-navigation.ftl" >	
 			<div id="content-wrapper">
-				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_1_2") />
+				<#assign selectedMenu = WebSiteUtils.getMenuComponent("SYSTEM_MENU", "MENU_2_4") />
 				<ul class="breadcrumb breadcrumb-page">
 					<!--<div class="breadcrumb-label text-light-gray">You are here: </div>-->
 					<li><a href="#">Home</a></li>
@@ -718,76 +702,64 @@
 					<div class="row">
 						<h1 class="col-xs-12 col-sm-6 text-center text-left-sm"><#if selectedMenu.isSetIcon() ><i class="fa ${selectedMenu.icon} page-header-icon"></i></#if> ${selectedMenu.title}
 							<p><small><i class="fa fa-quote-left"></i> ${selectedMenu.description} <i class="fa fa-quote-right"></i></small></p>
-						</h1>						
-					</div>				
+						</h1>
+					</div><!-- ./row -->				
 				</div><!-- / .page-header -->
 				<!-- details-row -->
 				<div id="website-details" class="page-details" style="">				
 					<div class="details-row no-margin-t">					
 						<div class="left-col left-col-nav">
-							<div class="details-block no-margin-t">
-								<span class="label label-warning"><span data-bind="text: website.name"></span></span> 
-								<h6 class="text-light-gray text-semibold text-xs" data-bind="text:website.description"></h6>
+							<div class="details-block no-margin-t">								
 								<div class="details-photo">
-									<img data-bind="attr: { src: logoUrl }" alt="" src="/download/logo/company/inkium">
+									<img data-bind="attr: { src: logoUrl }" alt="" src="/images/common/loader/loading-transparent-bg.gif">
 								</div>
 								<br>
-								<!--
-								<a href="#" class="btn btn-success"><i class="fa fa-check"></i> Following</a> 
-								<a href="#" class="btn"><i class="fa fa-comment"></i></a>-->
 								<div class="btn-group">
-									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="back" title="사이트 관리로 이동"  data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-level-up"></i></button>    
-									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-menu" data-bind="enabled: isEnabled, click:openMenuModal"><i class="fa fa-sitemap"></i> 매뉴변경</button>
-									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="go-pages" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-file"></i> 웹 페이지 관리</button>
-								</div>	
-																				
+									<button type="button" class="btn btn-success btn-flat btn-control-group pull-left" data-action="back" title="웹사이트 목록으로 이동"  data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-level-up"></i></button>    
+									<button type="button" class="btn btn-success btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 웹 사이트 정보변경</button>
+								</div>												
 							</div>				
-							
 							<div class="panel panel-transparent">
 								<div class="panel-heading">
-									<span class="panel-title">
-										기본정보											
+									<span class="panel-title" data-bind="text:website.description">
 									</span>
-									<div class="panel-heading-controls">				
-									<button type="button" class="btn btn-primary btn-flat btn-control-group" data-action="update-company" data-toggle="button" data-bind="enabled: isEnabled, click:toggleOptionPanel" ><i class="fa fa-pencil"></i> 정보변경</button>
-									</div>
 								</div>								
 								<table class="table">
 									<tbody>						
 										<tr>
 											<th class="text-center" width="75">회사</th>								
-											<td><span data-bind="text: website.company.displayName"></span> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> <code><span data-bind="text: website.company.companyId"></span></code></td>
+											<td><span data-bind="text: website.company.displayName"></span> <code><span data-bind="text: website.company.companyId"></span></code> <span class="label label-primary"><span data-bind="text: website.company.name"></span></span> </td>
 										</tr>	
-										<tr>											
+										<tr>										
 											<th class="text-center">도메인</th>												
 											<td><span data-bind="text: website.company.domainName"></span></td>
 										</tr>	
-										<tr>
+										<tr class="info">
 											<th class="text-center">사이트</th>								
 											<td>
 												<span data-bind="text: website.displayName"></span> 												
-												<code><span data-bind="text: website.webSiteId">1</span></code>
+												<code><span data-bind="text: website.webSiteId">1</span></code> <span class="label label-warning" data-bind="text: website.name"></span>
 											</td>
 										</tr>				
-										<tr>
+										<tr class="info">
 											<th class="text-center">보안</th>	
 											<td>
 												<i class="fa fa-lock fa-lg" data-bind="invisible: website.allowAnonymousAccess" style="display: none;"></i>
 												<i class="fa fa-unlock fa-lg" data-bind="visible: website.allowAnonymousAccess"></i>														
 											</td>
 										</tr>							
-												<tr>
-													<th  class="text-center">메뉴</th>	
-													<td><span data-bind="text: website.menu.title"></span> 
-														<span class="label label-warning"><span data-bind="text: webiste.menu.name"></span></span> 
-														<code><span data-bind="text: website.menu.menuId"></span></code>
-													</td>
-												</tr>																																									
-										<tr>
+										<tr class="info">
+											<th  class="text-center">메뉴</th>	
+											<td><span data-bind="text: website.menu.title"></span> 
+												<span class="label label-warning"><span data-bind="text: webiste.menu.name"></span></span> 
+												<code><span data-bind="text: website.menu.menuId"></span></code>
+											</td>
+										</tr>																																									
+										<tr class="info">
 											<th  class="text-center">생성일</th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>	
-										<tr>
+										<tr class="info">
 											<th  class="text-center">수정일</th>								
 											<td><span data-bind="text:formattedModifiedDate"></span></td>
 										</tr>																								
@@ -795,43 +767,67 @@
 								</table>
 								<div class="panel-footer no-border">
 									<h6 class="text-light-gray text-semibold text-xs">담당자</h6>
-													<div class="media">
-														<a class="pull-left" href="#">
-															<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
-														</a>
-														<div class="media-body">
-															<h5 class="media-heading">
-															<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
-															</h5>
-														</div>
-													</div>				
+									<div class="media">
+										<a class="pull-left" href="#">
+											<img class="media-object" data-bind="attr: { src: profileUrl }" alt="...">
+										</a>
+										<div class="media-body">
+											<h5 class="media-heading">
+												<span data-bind="text: website.user.name"></span>(<span data-bind="text: website.user.username"></span>)
+											</h5>
+										</div>
+									</div>				
 								</div>								
 							</div>														
 						</div>
 						<div class="right-col">
 							<hr class="details-content-hr no-grid-gutter-h"/>						
 							<div class="details-content">							
-								<div class="row" >
-									<div class="col-sm-12">
-										<div class="pull-right">
-												<div class="btn-group">
-													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-group" data-bind="enabled: isEnabled, click:teleport" ><i class="fa fa-users"></i> 그룹관리</button>
-													<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-user" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-user"></i> 사용자 관리</button>
-												</div>											
-										</div>
-									</div>
-								</div>
-								<hr/>
-									<ul id="website-tabs" class="nav nav-tabs nav-tabs-sm">
-										<li><a href="#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
-										<li><a href="#website-tabs-images" data-toggle="tab">이미지</a></li>
-										<li><a href="#website-tabs-files" data-toggle="tab">파일</a></li>
-										<li><a href="#website-tabs-timeline" data-toggle="tab">타임라인</a></li>
-									</ul>	
-									<div class="tab-content tab-content-bordered no-padding">								
+								<div class="note note-danger">
+									<h4 class="note-title">"웹 페이지 관리" 버튼을 클릭하면 웹사이트 페이지들을 생성/수정할 수 있습니다.</h4>				
+									<div class="btn-group">									
+										<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="update-menu" data-bind="enabled: isEnabled, click:openMenuModal"><i class="fa fa-sitemap"></i> 매뉴변경</button>
+										<button type="button" class="btn btn-info btn-flat btn-control-group" data-action="go-pages" data-bind="enabled: isEnabled, click:teleport"><i class="fa fa-file"></i> 웹 페이지 관리</button>
+									</div>												
+								</div>								
+								<div class="panel colourable">
+										<div class="panel-heading">	
+										<span class="panel-title"><i class="fa fa-info"></i></span>
+											<ul id="website-tabs" class="nav nav-tabs nav-tabs-xs">
+												<li><a href="#website-tabs-props" data-toggle="tab">프로퍼티</a></li>
+												<li><a href="#website-tabs-images" data-toggle="tab">이미지</a></li>
+												<li><a href="#website-tabs-files" data-toggle="tab">파일</a></li>
+												<li><a href="#website-tabs-timeline" data-toggle="tab">타임라인</a></li>
+											</ul>	
+										</div> <!-- / .panel-heading -->
+									<div class="tab-content">								
 										<div class="tab-pane fade" id="website-tabs-props">
+											<div class="note note-default no-margin-b no-border-vr">
+														<h4 class="note-title">프로퍼티 요약</h4> 아래의 표를 참조하여 프로퍼티 값을 설정하세요.				
+																										
+													<table class="table table-striped">
+												<thead>
+													<tr>
+														<th>#</th>
+														<th>이름(키)</th>
+														<th>설명</th>														
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>1</td>
+														<td>allowedSignIn</td>
+														<td><code>true</code> 이면 로그인 버튼이 화면에 보여짐.</td>														
+													</tr>
+													<tr>
+														<td>2</td>
+														<td>allowedSignup</td>
+														<td><code>true</code> 이면 회원가입 버튼이 화면에 보여짐.</td>														
+													</tr>													
+												</tbody>
+											</table></div>										
 											<div data-role="grid"
-												class="no-border"
+												class="no-border-hr"
 												data-scrollable="false"
 												data-editable="true"
 												data-toolbar="[ { 'name': 'create', 'text': '추가' }, { 'name': 'save', 'text': '저장' }, { 'name': 'cancel', 'text': '취소' } ]"
@@ -846,12 +842,12 @@
 										</div>									
 										<div class="tab-pane fade" id="website-tabs-images">
 											<div class="panel panel-transparent no-margin-b">
-												<div class="panel-body">
-													<input name="image-upload" id="image-upload" type="file" />
-												</div>																																		
-											</div>
-											<div id="image-details" class="no-padding-t  hide"></div>										
-											<div id="image-grid" class="no-border-hr no-border-b"></div>			
+												<div class="row no-margin-hr" style="background:#f5f5f5;" >
+													<div class="col-md-4"><input name="image-upload" id="image-upload" type="file" /></div>
+													<div class="col-md-8 no-padding-hr" style="border-left : solid 1px #ccc;" ><div id="image-details" class="hide animated padding-sm fadeInRight"></div></div>
+												</div>
+												<div id="image-grid" class="no-border-hr"></div>							
+											</div>	
 										</div>			
 										<div class="tab-pane fade" id="website-tabs-files">
 											<div class="panel panel-transparent no-margin-b">
@@ -860,12 +856,13 @@
 												</div>																																		
 											</div>
 											<div id="attach-details" class="no-padding-t  hide"></div>										
-											<div id="attach-grid" class="no-border-hr no-border-b"></div>												
+											<div id="attach-grid" class="no-border-hr"></div>												
 										</div>			
 										<div class="tab-pane fade" id="website-tabs-timeline">
 										</div>																																							
-							</div>
-						</div>				
+							</div><!-- /.tab-content -->
+							<div class="panel-footer no-padding-vr"></div>
+						</div><!-- /.panel -->				
 					</div>							
 				</div>
 			</div> <!-- / #content-wrapper -->
@@ -902,7 +899,7 @@
 		
 		<script id="menu-setting-modal-template" type="text/x-kendo-template">		
 		<div id="#=uid#"class="modal fade" tabindex="-1" role="dialog" aria-labelledby=".modal-title" aria-hidden="true">
-			<div class="modal-dialog modal-lg animated swing">
+			<div class="modal-dialog modal-lg animated slideDown">
 				<div class="modal-content">
 					<div class="modal-header">
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -956,10 +953,7 @@
 		</script> 
 		
 		<script id="image-details-template" type="text/x-kendo-template">				
-			<div class="panel panel-default no-border-hr no-border-b no-margin-b">
-				<div class="panel-body paddingless pull-right">
-					<button type="button" class="btn btn-link btn-control-group" data-action="top"><i class="fa fa-angle-double-up fa-lg"></i></button>
-				</div>
+			<div class="panel panel-transparent">
 				<div class="panel-body">											
 					<div class="row">
 						<div class="col-lg-4 col-xs-4">
@@ -976,14 +970,13 @@
 									</div> <!-- / .panel-heading -->
 									<div id="website-tabs-image-accordion-collapse1" class="panel-collapse collapse in" style="height: auto;">
 										<div class="panel-body no-padding">
-											<div class="note note-default no-border no-margin-b">
+											<div class="note note-default no-border no-padding-b">
 												<h5><small>수정한 다음에는 저장 버튼을 클릭하여야 반영됩니다.</small></h5>
 											</div>											
 											<div id="image-prop-grid" class="no-border-hr no-border-b"></div>						
 										</div> <!-- / .panel-body -->
 									</div> <!-- / .collapse -->
 								</div> <!-- / .panel -->	
-															
 								<div class="panel">
 									<div class="panel-heading">
 										<a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#website-tabs-image-accordion" href="\\#website-tabs-image-accordion-collapse2">
