@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<models>
-	<rank>1000</rank>
-	<model id="16" code="IMAGE" />
-	<model id="17" code="ATTACHMENT" />
-	<model id="18" code="MENU" />		
-</models>
