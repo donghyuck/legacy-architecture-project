@@ -31,7 +31,6 @@ public abstract class AbstractSocialServiceProvider implements SocialServiceProv
 	private String accessToken ;
 	private String accessSecret;
 	protected boolean isAuthorized = false;
-
 	private ObjectMapper objectMapper = null ;
 	
 	
