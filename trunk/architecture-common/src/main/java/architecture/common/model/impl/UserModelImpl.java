@@ -1054,6 +1054,13 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	public void setCompany(Company company) {
 		this.company = company;
 	}
+
+	@Override
+	public boolean hasCompany() {
+		if( this.companyId > 0 )
+			return true;
+		return false;
+	}
 	
 
 }
