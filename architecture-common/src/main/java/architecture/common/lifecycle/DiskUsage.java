@@ -28,12 +28,14 @@ public class DiskUsage {
 		super();
 	}
 
-	private DiskUsage(File root) {
-		super();
+	private DiskUsage(File root) {	
 		this.absolutePath = root.getAbsolutePath();
 		this.totalSpace = root.getTotalSpace();
 		this.freeSpace = root.getFreeSpace();
 		this.usableSpace = root.getUsableSpace();
+		
+		
+		
 	}
 	
 	public static class Builder {		

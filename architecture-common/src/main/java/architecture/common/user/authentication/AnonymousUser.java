@@ -16,6 +16,7 @@
 package architecture.common.user.authentication;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,8 +39,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 	public static final String ANONYMOUS_USERNAME = "ANONYMOUS";
 	
 	private Company company  = null;
-	/**
-	 */
+
 	private String username ;
 	
 	public AnonymousUser() {
@@ -110,7 +110,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 	}
 
 	public Map<String, String> getProperties() {
-		return new HashMap<String, String>(0);
+		return Collections.EMPTY_MAP;
 	}
 
 	public Date getLastLoggedIn() {
@@ -203,7 +203,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 
 
 	public Status getStatus() {
-		return null;
+		return Status.none;
 	}
 
 
@@ -236,8 +236,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 
 
 	public Map<String, Object> getProfile() {
-		// TODO 자동 생성된 메소드 스텁
-		return null;
+		return Collections.EMPTY_MAP;
 	}
 
 
@@ -248,5 +247,11 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 
 	public String getProfileFieldValueString(String fieldName) {
 		return null;
+	}
+
+
+	@Override
+	public boolean hasCompany() {
+		return false;
 	}
 }

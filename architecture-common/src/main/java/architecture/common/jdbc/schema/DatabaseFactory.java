@@ -42,8 +42,7 @@ public class DatabaseFactory {
 
 			DatabaseMetaData dbmd = conn.getMetaData();
 			try {
-				rs = dbmd.getColumns(catalogFilter, schemaFilter,
-						tableNameFilter, null);
+				rs = dbmd.getColumns(catalogFilter, schemaFilter, tableNameFilter, null);
 				while (rs.next()) {
 
 					String catalogName = rs.getString("TABLE_CAT");
