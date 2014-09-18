@@ -15,10 +15,10 @@
  */
 package architecture.ee.jdbc.sqlquery.builder;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sqlquery.factory.Configuration;
 import architecture.ee.jdbc.sqlquery.mapping.MappedStatement;
 import architecture.ee.jdbc.sqlquery.mapping.StatementType;

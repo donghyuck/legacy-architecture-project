@@ -18,12 +18,11 @@ package architecture.ee.jdbc.sqlquery.builder.xml;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+import architecture.common.util.StringUtils;
 import architecture.common.jdbc.ParameterMapping;
 import architecture.common.jdbc.ResultMapping;
 import architecture.ee.jdbc.sqlquery.builder.AbstractBuilder;
