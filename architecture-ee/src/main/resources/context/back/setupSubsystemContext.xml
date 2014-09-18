@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:security="http://www.springframework.org/schema/security"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+	<description>
+		<![CDATA[
+        Default Setup Application Context
+	]]>
+	</description>
+
+	<bean id="adminServiceSupport" abstract="true" depends-on="adminService">
+	    <constructor-arg ref="adminService"/>
+	</bean>
+	
+	<bean id="admin" class="architecture.ee.spring.lifecycle.internal.ApplicationServiceImpl" 
+	    init-method="initialize" 
+	    parent="adminServiceSupport"
+	    p:eventPublisher-ref="eventPublisher" />
+	    			
+	<security:http auto-config="true">
+	
+		<security:intercept-url pattern="/includes/**"             filters="none" />		
+		<security:intercept-url pattern="/images/**"               filters="none" />
+		<security:intercept-url pattern="/error.do*"               filters="none" />
+	
+	    <security:intercept-url pattern="/accounts/authenticate*" access="IS_AUTHENTICATED_ANONYMOUSLY" />	  
+	    <security:intercept-url pattern="/index**"                access="IS_AUTHENTICATED_ANONYMOUSLY" />	 
+	    <security:intercept-url pattern="/error*"                 access="IS_AUTHENTICATED_ANONYMOUSLY" />	 
+	    <security:intercept-url pattern="/login*"                 access="IS_AUTHENTICATED_ANONYMOUSLY" />	 
+	    <security:intercept-url pattern="/setup/**"               access="ROLE_ADMIN" />	    
+	    <security:intercept-url pattern="/**"                     access="ROLE_ADMIN" />
+	    
+	    <security:form-login login-page="/login.do"
+	    	authentication-failure-url="/login.do?format=json&amp;authnFailed=true"
+	    	default-target-url="/accounts/authenticate.do"
+	    	login-processing-url="/accounts/authenticate" />
+	    	
+	    <security:logout
+	    	logout-success-url="/setup/main.do" 
+	    	logout-url="/accounts/logout" />
+
+	</security:http>    
+	
+    <!--
+    Usernames/Passwords are
+        admin/koala
+    -->
+ 	<security:authentication-manager>
+        <security:authentication-provider>
+            <security:password-encoder hash="md5"/>
+            <security:user-service>
+                <security:user name="admin" password="a564de63c2d0da68cf47586ee05984d7" authorities="ROLE_ADMIN" />
+            </security:user-service>
+        </security:authentication-provider>
+    </security:authentication-manager>
+
+	<bean id="freemarkerManager" 
+	    class="architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager" 
+	    p:templateUpdateDelay="1" />
+
+</beans>

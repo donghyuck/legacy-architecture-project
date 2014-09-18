@@ -1,0 +1,63 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:lang="http://www.springframework.org/schema/lang" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+       
+	<description>
+	<![CDATA[
+        Define Cache Context
+	]]>
+	</description>
+	<!-- ================================================ -->
+	<!-- Cache for User & Group                           -->
+	<!-- ================================================ -->
+	<bean id="userProviderCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userProviderCache" p:maxElementsInMemory="5000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="userIDCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userIDCache" p:maxElementsInMemory="5000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="userCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userCache" p:maxElementsInMemory="5000" p:diskPersistent="false"
+		p:overflowToDisk="false" p:timeToIdle="30" p:timeToLive="60"
+		p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="groupMemberCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="groupMemberCache" p:maxElementsInMemory="10000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="groupIdCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="groupIDCache" p:maxElementsInMemory="5000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="groupCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="groupCache" p:maxElementsInMemory="5000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+	
+	<bean id="roleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="roleCache" p:maxElementsInMemory="5000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />
+
+	<bean id="userRoleCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean"
+		p:cacheName="userRoleCache" p:maxElementsInMemory="5000"
+		p:diskPersistent="false" p:overflowToDisk="false" p:timeToIdle="30"
+		p:timeToLive="60" p:eternal="false" p:diskExpiryThreadIntervalSeconds="0" />	
+		
+		
+</beans>
+	
