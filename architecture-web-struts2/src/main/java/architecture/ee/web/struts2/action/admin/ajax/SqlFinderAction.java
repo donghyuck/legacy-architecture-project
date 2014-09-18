@@ -22,42 +22,20 @@ import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
-import org.springframework.core.io.ResourceLoader;
 
+import architecture.ee.component.admin.AdminHelper;
+import architecture.ee.util.ApplicationConstants;
 import architecture.ee.web.struts2.action.support.FinderActionSupport;
-import architecture.ee.web.struts2.action.support.FinderActionSupport.FileInfo;
-import architecture.ee.web.util.WebApplicatioinConstants;
 
-public class TemplateFinderAction extends FinderActionSupport{
-
-	private boolean customized	= false;
+public class SqlFinderAction extends FinderActionSupport{
 	
 	private String path = null ;	
 	
-	private ResourceLoader resourceLoader = new DefaultResourceLoader();
-
-	public TemplateFinderAction()  {
+	public SqlFinderAction()  {
 		
 	}
-	
-	
-	/**
-	 * @return customized
-	 */
-	public boolean isCustomized() {
-		return customized;
-	}
-
-
-	/**
-	 * @param customized 설정할 customized
-	 */
-	public void setCustomized(boolean customized) {
-		this.customized = customized;
-	}
-
 	
 	/**
 	 * @return path
@@ -80,26 +58,25 @@ public class TemplateFinderAction extends FinderActionSupport{
 			if( !targetFile.isDirectory() ){
 				return FileUtils.readFileToString(targetFile);				
 			}
-		} catch (IOException e) {			
+		} catch (IOException e) {		
+			log.error(e);
 		}
 		return "";
 	}
 
 	public List<FileInfo> getTargetFiles(){
-		
 		Resource root = getTargetRootResource();	
 		List<FileInfo> list = new ArrayList<FileInfo>();
-		boolean opt = useCustomizedTemplateSource();
 		try {
 			File file = root.getFile();			
 			if( StringUtils.isEmpty(path) ){
 				for( File f : file.listFiles()){
-					list.add(new FileInfo( file , f, opt));
+					list.add(new FileInfo( file , f));
 				}			
 			}else{
 				File targetFile = getTargetResource().getFile();
 				for( File f : targetFile.listFiles()){
-					list.add(new FileInfo( file , f, opt));
+					list.add(new FileInfo( file , f));
 				}				
 			}
 		} catch (IOException e) {
@@ -108,41 +85,26 @@ public class TemplateFinderAction extends FinderActionSupport{
 		return list;
 	}
 	
-	
 	public Resource getTargetResource(){
-		return getResourceLoader().getResource( getTemplateSrouceLocation() +  this.path);
+		log.debug(path);
+		log.debug( getSqlFileLocation().getAbsolutePath()  );
+		
+		return new FileSystemResource( getSqlFileLocation().getAbsolutePath() +  this.path);
 	}
 	
 	public Resource getTargetRootResource(){
-		return getResourceLoader().getResource(getTemplateSrouceLocation());
+		return new FileSystemResource(getSqlFileLocation());
 	}
-
+	
+    public File getSqlFileLocation(){
+    	return AdminHelper.getRepository().getFile("sql");
+    }
     
-    public String getCustomizedTemplateSrouceLocation(){
-    	return getApplicationProperty("view.html.customize.source.location",  null );	
-    }
-        
-    public String getTemplateSrouceLocation(){
-    	if(useCustomizedTemplateSource()){
-    		return getCustomizedTemplateSrouceLocation();
-    	}else{    	
-    		return getApplicationProperty(WebApplicatioinConstants.VIEW_FREEMARKER_SOURCE_LOCATION, null);
-    	}
-    }
- 
     public boolean isCustomizedEnabled(){		
-		return getApplicationBooleanProperty("view.html.customize.enabled", false);
-	}
-    
-    protected boolean useCustomizedTemplateSource(){
-    	if(customized && isCustomizedEnabled() ){
-    		String path = getCustomizedTemplateSrouceLocation();
-    		if(StringUtils.isNotBlank(path))
-    			return true;
+    	if( StringUtils.isNotEmpty( getApplicationProperty(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME, null ))){
+    		return true;
     	}
     	return false;
-    }
-    
-    
-    
+	}
+         
 }

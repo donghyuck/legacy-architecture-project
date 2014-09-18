@@ -37,7 +37,6 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 
 	private TaskExecutor taskExecutor;
 	private static final DatabaseBrowserTask task = new DatabaseBrowserTask();
-	private Database database;
 	private String targetTableName;
 	
 	public DatabaseBrowserAction() {
@@ -62,21 +61,10 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 		return this.task.getStatusCode();
 	}
 	
-	/**
-	 * @return database
-	 */
-	public Database getDatabase() {
-		return database;
-	}
-	
 	public String[] getTableNames(){
 		
 		if( this.getTaskStatusCode()== 2 ){
-			
-			for(String t : database.getTableNames())
-				log.debug(t);
-			
-			return this.database.getTableNames();
+			return task.database.getTableNames();
 		}else{
 			return new String[]{};		
 		}
@@ -84,14 +72,14 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 
 	public String getCatalog(){
 		if(this.getTaskStatusCode()== 2 )
-			return this.database.getCatalog();		
+			return task.database.getCatalog();		
 		else
 			return null;		
 	} 
 	
 	public String getSchema(){
 		if(this.getTaskStatusCode()==2  )
-			return this.database.getSchema();
+			return task.database.getSchema();
 		else
 			return null;		
 	} 	
@@ -112,16 +100,11 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 
 	public architecture.common.jdbc.schema.Table getTargetTable(){
 		if(this.getTaskStatusCode() == 2 && StringUtils.isNotEmpty(targetTableName)) 
-			return this.database.getTable(targetTableName);		
+			return task.database.getTable(targetTableName);		
+		
 		return null;		
 	}
 		
-	/**
-	 * @param database 설정할 database
-	 */
-	public void setDatabase(Database database) {
-		this.database = database;
-	}
 
 	/**
 	 * @return catalogFilter
@@ -165,6 +148,8 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 		
 		private DatabaseBrowserAction action ;
 		
+		private Database database;
+		
 		public DatabaseBrowserTask() {
 		}
 
@@ -173,65 +158,65 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 		}
 
 		/**
- *  <OL>
-     *	<LI><B>TABLE_CAT</B> String => table catalog (may be <code>null</code>)
-     *	<LI><B>TABLE_SCHEM</B> String => table schema (may be <code>null</code>)
-     *	<LI><B>TABLE_NAME</B> String => table name
-     *	<LI><B>COLUMN_NAME</B> String => column name
-     *	<LI><B>DATA_TYPE</B> int => SQL type from java.sql.Types
-     *	<LI><B>TYPE_NAME</B> String => Data source dependent type name,
-     *  for a UDT the type name is fully qualified
-     *	<LI><B>COLUMN_SIZE</B> int => column size.  
-     *	<LI><B>BUFFER_LENGTH</B> is not used.
-     *	<LI><B>DECIMAL_DIGITS</B> int => the number of fractional digits. Null is returned for data types where  
-     * DECIMAL_DIGITS is not applicable.
-     *	<LI><B>NUM_PREC_RADIX</B> int => Radix (typically either 10 or 2)
-     *	<LI><B>NULLABLE</B> int => is NULL allowed.
-     *      <UL>
-     *      <LI> columnNoNulls - might not allow <code>NULL</code> values
-     *      <LI> columnNullable - definitely allows <code>NULL</code> values
-     *      <LI> columnNullableUnknown - nullability unknown
-     *      </UL>
-     *	<LI><B>REMARKS</B> String => comment describing column (may be <code>null</code>)
-     * 	<LI><B>COLUMN_DEF</B> String => default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be <code>null</code>)
-     *	<LI><B>SQL_DATA_TYPE</B> int => unused
-     *	<LI><B>SQL_DATETIME_SUB</B> int => unused
-     *	<LI><B>CHAR_OCTET_LENGTH</B> int => for char types the 
-     *       maximum number of bytes in the column
-     *	<LI><B>ORDINAL_POSITION</B> int	=> index of column in table 
-     *      (starting at 1)
-     *	<LI><B>IS_NULLABLE</B> String  => ISO rules are used to determine the nullability for a column.
-     *       <UL>
-     *       <LI> YES           --- if the parameter can include NULLs
-     *       <LI> NO            --- if the parameter cannot include NULLs
-     *       <LI> empty string  --- if the nullability for the 
-     * parameter is unknown
-     *       </UL>
-     *  <LI><B>SCOPE_CATLOG</B> String => catalog of table that is the scope
-     *      of a reference attribute (<code>null</code> if DATA_TYPE isn't REF)
-     *  <LI><B>SCOPE_SCHEMA</B> String => schema of table that is the scope
-     *      of a reference attribute (<code>null</code> if the DATA_TYPE isn't REF)
-     *  <LI><B>SCOPE_TABLE</B> String => table name that this the scope
-     *      of a reference attribure (<code>null</code> if the DATA_TYPE isn't REF)
-     *  <LI><B>SOURCE_DATA_TYPE</B> short => source type of a distinct type or user-generated
-     *      Ref type, SQL type from java.sql.Types (<code>null</code> if DATA_TYPE 
-     *      isn't DISTINCT or user-generated REF)
-     *   <LI><B>IS_AUTOINCREMENT</B> String  => Indicates whether this column is auto incremented
-     *       <UL>
-     *       <LI> YES           --- if the column is auto incremented
-     *       <LI> NO            --- if the column is not auto incremented
-     *       <LI> empty string  --- if it cannot be determined whether the column is auto incremented
-     * parameter is unknown
-     *       </UL>
-     *  </OL>
-     *  
+		 *  <OL>
+	     *	<LI><B>TABLE_CAT</B> String => table catalog (may be <code>null</code>)
+	     *	<LI><B>TABLE_SCHEM</B> String => table schema (may be <code>null</code>)
+	     *	<LI><B>TABLE_NAME</B> String => table name
+	     *	<LI><B>COLUMN_NAME</B> String => column name
+	     *	<LI><B>DATA_TYPE</B> int => SQL type from java.sql.Types
+	     *	<LI><B>TYPE_NAME</B> String => Data source dependent type name,
+	     *  for a UDT the type name is fully qualified
+	     *	<LI><B>COLUMN_SIZE</B> int => column size.  
+	     *	<LI><B>BUFFER_LENGTH</B> is not used.
+	     *	<LI><B>DECIMAL_DIGITS</B> int => the number of fractional digits. Null is returned for data types where  
+	     * DECIMAL_DIGITS is not applicable.
+	     *	<LI><B>NUM_PREC_RADIX</B> int => Radix (typically either 10 or 2)
+	     *	<LI><B>NULLABLE</B> int => is NULL allowed.
+	     *      <UL>
+	     *      <LI> columnNoNulls - might not allow <code>NULL</code> values
+	     *      <LI> columnNullable - definitely allows <code>NULL</code> values
+	     *      <LI> columnNullableUnknown - nullability unknown
+	     *      </UL>
+	     *	<LI><B>REMARKS</B> String => comment describing column (may be <code>null</code>)
+	     * 	<LI><B>COLUMN_DEF</B> String => default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be <code>null</code>)
+	     *	<LI><B>SQL_DATA_TYPE</B> int => unused
+	     *	<LI><B>SQL_DATETIME_SUB</B> int => unused
+	     *	<LI><B>CHAR_OCTET_LENGTH</B> int => for char types the 
+	     *       maximum number of bytes in the column
+	     *	<LI><B>ORDINAL_POSITION</B> int	=> index of column in table 
+	     *      (starting at 1)
+	     *	<LI><B>IS_NULLABLE</B> String  => ISO rules are used to determine the nullability for a column.
+	     *       <UL>
+	     *       <LI> YES           --- if the parameter can include NULLs
+	     *       <LI> NO            --- if the parameter cannot include NULLs
+	     *       <LI> empty string  --- if the nullability for the 
+	     * parameter is unknown
+	     *       </UL>
+	     *  <LI><B>SCOPE_CATLOG</B> String => catalog of table that is the scope
+	     *      of a reference attribute (<code>null</code> if DATA_TYPE isn't REF)
+	     *  <LI><B>SCOPE_SCHEMA</B> String => schema of table that is the scope
+	     *      of a reference attribute (<code>null</code> if the DATA_TYPE isn't REF)
+	     *  <LI><B>SCOPE_TABLE</B> String => table name that this the scope
+	     *      of a reference attribure (<code>null</code> if the DATA_TYPE isn't REF)
+	     *  <LI><B>SOURCE_DATA_TYPE</B> short => source type of a distinct type or user-generated
+	     *      Ref type, SQL type from java.sql.Types (<code>null</code> if DATA_TYPE 
+	     *      isn't DISTINCT or user-generated REF)
+	     *   <LI><B>IS_AUTOINCREMENT</B> String  => Indicates whether this column is auto incremented
+	     *       <UL>
+	     *       <LI> YES           --- if the column is auto incremented
+	     *       <LI> NO            --- if the column is not auto incremented
+	     *       <LI> empty string  --- if it cannot be determined whether the column is auto incremented
+	     * parameter is unknown
+	     *       </UL>
+	     *  </OL>
+	     *  
 		 */
 		public void run() {
 			if( status.get() == 0){	
 				status.set(1);
 				Connection conn = null;
 				ResultSet rs = null;
-				Database databaseToUse = new Database(action.getCatalogFilter(), action.getSchemaFilter());		
+				this.database = new Database(action.getCatalogFilter(), action.getSchemaFilter());		
 				try {	
 					conn = action.getDataSource("dataSource").getConnection();
 					DatabaseMetaData dbmd = conn.getMetaData();
@@ -242,12 +227,12 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 							String catalogName = rs.getString("TABLE_CAT");
 							String schemaName = rs.getString("TABLE_SCHEM");
 							String tableName = rs.getString("TABLE_NAME");							
-							Table table = databaseToUse.getTable(tableName);
+							Table table = database.getTable(tableName);
 							if (table == null) {
 								table = new Table(tableName);
 								table.setCatalog(catalogName);
 								table.setSchema(schemaName);
-								databaseToUse.addTable(table);
+								database.addTable(table);
 							}
 							//action.log.debug(table);
 						}
@@ -255,34 +240,48 @@ public class DatabaseBrowserAction extends FrameworkActionSupport {
 						JdbcUtils.closeResultSet(rs);
 					}
 					
-					for( String tableName : databaseToUse.getTableNames()){
+					for( String tableName : database.getTableNames()){
 						try{
-							Table table = databaseToUse.getTable(tableName);						
+							Table table = database.getTable(tableName);						
 							rs = dbmd.getColumns(action.getCatalogFilter(), action.getSchemaFilter(), table.getName(), null);
 							while (rs.next()) {
+								
 								String columnName = rs.getString("COLUMN_NAME");
+								String dataTypeName = rs.getString("TYPE_NAME");
+							//	action.log.debug("1");
 								int dataType = Integer.parseInt(rs.getString("DATA_TYPE"));
-								table.addColumn(new Column(columnName, dataType));							
+							//	action.log.debug("2");
+								int columnSize = Integer.parseInt(rs.getString("COLUMN_SIZE"));
+
+							//	action.log.debug("4");
+								String comment = rs.getString("COLUMN_DEF");			
+							//	action.log.debug("5");
+								int ordinalPosition = Integer.parseInt(rs.getString("ORDINAL_POSITION"));		
+							//	action.log.debug("6");
+							//	action.log.debug("3");
+								String nullable = rs.getString("IS_NULLABLE");								
+								table.addColumn(new Column(columnName, dataType, dataTypeName, columnSize, nullable, comment, ordinalPosition));							
 							}							
 						} finally {
 							JdbcUtils.closeResultSet(rs);
 						}
 					}
 					
-					for( String tableName : databaseToUse.getTableNames()){
+					for( String tableName : database.getTableNames()){
 						try{
-							Table table = databaseToUse.getTable(tableName);						
+							Table table = database.getTable(tableName);						
 							rs = dbmd.getPrimaryKeys(action.getCatalogFilter(), action.getSchemaFilter(), table.getName());
 							while (rs.next()) {
 								String columnName = rs.getString("COLUMN_NAME");
 								//KEY_SEQ
-								table.setPrimaryKey(table.getColumn(columnName));					
+								table.setPrimaryKey(table.getColumn(columnName));
+								table.getColumn(columnName).setPrimaryKey(true);
 							}
 						} finally {
 							JdbcUtils.closeResultSet(rs);
 						}
 					}					
-					action.setDatabase(databaseToUse);					
+					//action.setDatabase(databaseToUse);
 					status.set(2);
 				} catch (SQLException e) {
 					// ignore...

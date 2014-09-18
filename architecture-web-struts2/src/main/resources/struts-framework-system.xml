@@ -138,7 +138,7 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeProperties"></param>
 			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">taskStatusCode, schemaFilter, catalogFilter, tableNames, schema, catalog</param>
+				<param name="includeProperties">taskStatusCode, schemaFilter, catalogFilter, tableNames.*, schema, catalog</param>
 			</result>
 		</action>
 		
@@ -147,10 +147,28 @@
 			    <param name="enableGZIP">true</param>
 			    <param name="excludeProperties">catalogFilter, schemaFilter</param>
 			    <param name="excludeNullProperties">true</param> 
-				<param name="includeProperties">taskStatusCode, targetTable</param>
+				<param name="includeProperties">taskStatusCode, targetTable.*</param>
 			</result>
 		</action>
-								
+
+		<action name="list-sql-files" class="architecture.ee.web.struts2.action.admin.ajax.SqlFinderAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetFile</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">targetFiles.*</param>
+			</result>
+		</action>
+
+		<action name="view-sql-file-content" class="architecture.ee.web.struts2.action.admin.ajax.SqlFinderAction">
+			<result name="json-success" type="json">
+			    <param name="enableGZIP">true</param>
+			    <param name="excludeProperties">targetFile</param>
+			    <param name="excludeNullProperties">true</param> 
+				<param name="includeProperties">path, targetFileContent</param>
+			</result>
+		</action>
+										
 		<!--  Template  -->	
 		<action name="main-template-mgmt" class="architecture.ee.web.struts2.action.admin.MainAction">
 			<result name="success" type="freemarker">/html/system/manage-template.ftl</result>
