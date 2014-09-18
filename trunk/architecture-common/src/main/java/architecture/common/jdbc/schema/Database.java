@@ -15,13 +15,14 @@
  */
 package architecture.common.jdbc.schema;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author  donghyuck
  */
-public class Database {
+public class Database implements Serializable {
 
 	/**
 	 * @uml.property  name="catalog"

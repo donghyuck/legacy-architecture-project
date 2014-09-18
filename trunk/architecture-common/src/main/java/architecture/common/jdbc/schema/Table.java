@@ -15,13 +15,16 @@
  */
 package architecture.common.jdbc.schema;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * @author   donghyuck
  */
-public class Table {
+public class Table implements Serializable {
 
 	private String name;
 
@@ -84,6 +87,12 @@ public class Table {
 		return columns.keySet().toArray(new String[columns.size()]);
 	}
 
+	
+	public List<Column> getColumns(){
+		List<Column> list = new ArrayList(columns.values());		
+		return list;
+	}
+	
 	/**
 	 * @param  column
 	 */

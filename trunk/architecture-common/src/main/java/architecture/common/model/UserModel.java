@@ -34,6 +34,8 @@ public interface UserModel extends EntityModelObject {
     
     public abstract Company getCompany();
     
+    public abstract boolean hasCompany();
+    
     public abstract long getUserId();
 
     public abstract String getUsername();

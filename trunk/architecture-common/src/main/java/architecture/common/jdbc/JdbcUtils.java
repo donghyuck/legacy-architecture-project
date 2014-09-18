@@ -205,7 +205,6 @@ public abstract class JdbcUtils extends org.springframework.jdbc.support.JdbcUti
 		}
 	}
 	
-	
 	public static String lookupColumnName(ResultSetMetaData resultSetMetaData, int columnIndex) throws SQLException {
 		String name = resultSetMetaData.getColumnLabel(columnIndex);
 		if (name == null || name.length() < 1) {

@@ -15,10 +15,12 @@
  */
 package architecture.common.jdbc.schema;
 
+import java.io.Serializable;
+
 /**
  * @author  donghyuck
  */
-public class Column {
+public class Column implements Serializable {
 
 	/**
 	 * @uml.property  name="name"
@@ -29,10 +31,141 @@ public class Column {
 	 */
 	private int type;
 
+	private String typeName;
+	
+	private int size;
+	
+	private String nullable ;
+	
+	private String comment ;
+	
+	private boolean primaryKey;
+	
+	private int ordinalPosition ;
+	
+	
 	public Column(String name, int type) {
 		this.name = name;
 		this.type = type;
+		this.typeName = null;
+		this.nullable = null;
+		this.primaryKey = false;
+		this.comment = null;
+		this.size = 0;
+		this.ordinalPosition = 0;
 	}
+
+	
+	
+	/**
+	 * @param name
+	 * @param type
+	 * @param typeName
+	 * @param size
+	 * @param nullable
+	 * @param comment
+	 */
+	public Column(String name, int type, String typeName, int size, String nullable, String comment) {
+		this.name = name;
+		this.type = type;
+		this.typeName = typeName;
+		this.size = size;
+		this.nullable = nullable;
+		this.comment = comment;
+		this.ordinalPosition = 0;
+	}
+	
+	/**
+	 * @return ordinalPosition
+	 */
+	public int getOrdinalPosition() {
+		return ordinalPosition;
+	}
+
+
+
+	/**
+	 * @param name
+	 * @param type
+	 * @param typeName
+	 * @param size
+	 * @param nullable
+	 * @param comment
+	 */
+	public Column(String name, int type, String typeName, int size, String nullable, String comment, int ordinalPosition) {
+		this.name = name;
+		this.type = type;
+		this.typeName = typeName;
+		this.size = size;
+		this.nullable = nullable;
+		this.comment = comment;
+		this.ordinalPosition = ordinalPosition;
+	}
+
+
+
+	/**
+	 * @return primaryKey
+	 */
+	public boolean isPrimaryKey() {
+		return primaryKey;
+	}
+
+
+
+	/**
+	 * @param primaryKey 설정할 primaryKey
+	 */
+	public void setPrimaryKey(boolean primaryKey) {
+		this.primaryKey = primaryKey;
+	}
+
+
+
+	/**
+	 * @return typeName
+	 */
+	public String getTypeName() {
+		return typeName;
+	}
+
+
+
+	/**
+	 * @return size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+
+
+	/**
+	 * @return nullable
+	 */
+	public String getNullable() {
+		return nullable;
+	}
+
+
+
+	/**
+	 * @return comment
+	 */
+	public String getComment() {
+		return comment;
+	}
+
+
+
+	/**
+	 * @param type 설정할 type
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+
 
 	/**
 	 * @return

@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Locale;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import architecture.common.exception.RuntimeError;
 
 public class PlatformHelper {
@@ -47,6 +49,7 @@ public class PlatformHelper {
 	}	
 	
 	public static boolean isDarwin() {
+	
         // according to http://developer.apple.com/technotes/tn2002/tn2110.html
         return System.getProperty("os.name").toLowerCase(Locale.ENGLISH).startsWith("mac");
     }
