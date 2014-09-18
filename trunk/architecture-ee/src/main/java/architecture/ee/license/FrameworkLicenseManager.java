@@ -25,13 +25,13 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.apache.commons.lang.StringUtils;
 
 import architecture.common.exception.LicenseException;
 import architecture.common.license.License;
 import architecture.common.license.LicenseManager;
 import architecture.common.license.LicenseProvider;
 import architecture.common.util.L10NUtils;
+import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 
 public class FrameworkLicenseManager extends LicenseManager {

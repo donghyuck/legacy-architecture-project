@@ -52,6 +52,17 @@ public class DataSourceProxy implements DataSource {
 
 	public int getLoginTimeout() throws SQLException {
 		return dataSource.getLoginTimeout();
+	}
+
+	@Override
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		// TODO 자동 생성된 메소드 스텁
+		return dataSource.unwrap(iface);
+	}
+
+	@Override
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		return dataSource.isWrapperFor(iface);
 	}	
 	
 }

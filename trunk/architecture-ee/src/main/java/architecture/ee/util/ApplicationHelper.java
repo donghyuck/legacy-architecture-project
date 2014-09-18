@@ -24,7 +24,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.io.Resource;
@@ -38,6 +37,7 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.Repository;
 import architecture.common.lifecycle.State;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
+import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.spring.lifecycle.SpringAdminService;
 
