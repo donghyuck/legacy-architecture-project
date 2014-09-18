@@ -234,4 +234,9 @@ public class SimpleUserToken extends BaseModelObjectSupport  implements AuthToke
 	public String getProfileFieldValueString(String fieldName) {
 		return null;
 	}
+
+	@Override
+	public boolean hasCompany() {
+		return getCompanyId() > 0;
+	}
 }
