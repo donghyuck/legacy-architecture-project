@@ -20,6 +20,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.select.Elements;
+
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.NoNamedEntityModelObjectSupport;
 import architecture.common.user.User;
@@ -34,13 +38,14 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	private Long userId ;
 	private String subject ;
 	private String body;
-	//private Status 
 	private Date startDate;
 	private Date endDate;
-	//private LongList attachmentsList ;
 	private User user;
 	private List<Attachment> attachments;
-			
+	
+	private String firstImageSrc ;
+	private int imageCount = 0;
+	
 	/**
 	 * 
 	 */
@@ -51,6 +56,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 		Date now = new Date();
 		this.startDate = now;
 		this.endDate = now;
+		this.firstImageSrc =null;
 		super.setCreationDate(now);
 		super.setModifiedDate(now);
 	}
@@ -67,6 +73,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 		Date now = new Date();
 		startDate = null;
 		endDate = null;
+		this.firstImageSrc = null;
 		super.setCreationDate(now);
 		super.setModifiedDate(now);
 	}
@@ -90,6 +97,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 		this.startDate = null;
 		this.endDate = null;
 		this.userId = user == null ? -1L : user.getUserId();				
+		this.firstImageSrc = null;
 		super.setCreationDate(now);
 		super.setModifiedDate(now);
 	}
@@ -173,7 +181,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 		this.attachments = attachments;
 	}
 
-
+	
 
 	/**
 	 * @param subject 설정할 subject
@@ -193,8 +201,28 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	 * @param body 설정할 body
 	 */
 	public void setBody(String body) {
-		this.body = body;
+		this.body = body;		
+		
+		Document doc = Jsoup.parse(this.body);		
+		Elements  links = doc.select("img");
+		this.imageCount = links.size();
+		if( imageCount > 0 )
+			firstImageSrc = links.first().attr("src");	
+		
 	}
+
+	public String getFirstImageSrc(){
+		return this.firstImageSrc;
+	}
+	
+	/**
+	 * @return imageCount
+	 */
+	public int getImageCount() {
+		return imageCount;
+	}
+
+
 
 	/**
 	 * @return startDate
@@ -278,9 +306,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	public int getCachedSize() {
 		return 0;
 	}
-
-
-
+	
 	/* (비Javadoc)
 	 * @see java.lang.Object#toString()
 	 */

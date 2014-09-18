@@ -30,6 +30,7 @@ public class RemoteServiceLocator {
 	}
 	
 	public static final boolean enabled() {
+		
 		boolean enabeld = ApplicationHelper.getApplicationBooleanProperty("components.streams.remoting.enabled", false);
 		return enabeld;
 	}
@@ -38,6 +39,9 @@ public class RemoteServiceLocator {
 		String urlName = ApplicationHelper.getApplicationProperty("components.streams.remoting.url", null);
 		if( enabled() && StringUtils.isNotEmpty(urlName)){
 			HessianProxyFactory factory = new HessianProxyFactory();
+			factory.setDebug(true);
+			factory.setHessian2Reply(true);
+			factory.setHessian2Request(true);
 			return (PhotoStreamsManager) factory.create(PhotoStreamsManager.class, urlName);
 		}else{
 			throw new ComponentDisabledException();
@@ -46,6 +50,9 @@ public class RemoteServiceLocator {
 	
 	public static final PhotoStreamsManager locate(String urlName) throws Exception {
 		HessianProxyFactory factory = new HessianProxyFactory();
+		factory.setDebug(true);
+		factory.setHessian2Reply(true);
+		factory.setHessian2Request(true);
 		return (PhotoStreamsManager) factory.create(PhotoStreamsManager.class, urlName);
 	}
 }
