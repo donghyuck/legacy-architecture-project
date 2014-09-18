@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sqlset>
+    <name>ARCHITECTURE_WEB</name>
+    <version>2.0</version>
+    <description>Queries for WEB COMPONENTS</description>
+    
+
+    <!--  CONTENT -->
+    <!-- 
+	<sql-query name="SELECT_CONTENT_IDS_BY_USER_ID" description="SELECT_CONTENT_IDS_BY_USER_ID"><![CDATA[
+	SELECT 
+		CONTENT_ID
+	FROM V2_CONTENT 
+	WHERE CREATOR = ? 	
+	]]></sql-query>
+	<sql-query name="SELECT_CONTENT_BY_ID" description="SELECT_CONTENT_BY_ID"><![CDATA[
+	SELECT
+		CONTENT_ID,
+		CONTENT_TYPE,		
+		SUBJECT,
+		SUMMARY,
+		BODY,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+	FROM V2_CONTENT 
+	WHERE CONTENT_ID = ?	
+	]]></sql-query>
+	<sql-query name="INSERT_CONTENT" description="INSERT_CONTENT"><![CDATA[
+	INSERT INTO V2_CONTENT (
+		CONTENT_ID,
+		CONTENT_TYPE,		
+		SUBJECT,
+		SUMMARY,
+		BODY,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES (
+		?,?,?,?,?,?,?,?,?
+	)	
+	]]></sql-query>
+	<sql-query name="UPDATE_CONTENT" description="UPDATE_CONTENT"><![CDATA[
+	UPDATE V2_CONTENT SET
+		CONTENT_TYPE = ?,		
+		SUBJECT = ?,
+		SUMMARY = ?,
+		BODY = ?,
+		LASTMODIFIER = ?,
+		MODIFIED_DATE = ?
+	WHERE CONTENT_ID = ?	
+	]]></sql-query>
+	 -->
+		
+    <!--  MENU -->	 
+    <sql-query name="SELECT_MENU_BY_NAME" description="이름으로 메뉴 조회"><![CDATA[    
+	SELECT
+	  MENU_ID,
+	  NAME,
+	  TITLE,
+	  LOCATION,
+	  MENU_ENABLED,
+	  CREATION_DATE,
+	  MODIFIED_DATE
+	FROM V2_MENU
+	WHERE NAME LIKE  ?
+    ]]></sql-query>
+    <sql-query name="SELECT_MENU_BY_ID" description="아이디로 메뉴 조회"><![CDATA[    
+	SELECT
+	  MENU_ID,
+	  NAME,
+	  TITLE,
+	  LOCATION,
+	  MENU_ENABLED,
+	  CREATION_DATE,
+	  MODIFIED_DATE
+	FROM V2_MENU
+	WHERE MENU_ID = ?  
+    ]]></sql-query>    
+    <sql-query name="SELECT_ALL_MENU_ID" description="전체 메뉴 아이디 조회"><![CDATA[    
+	SELECT
+	  MENU_ID
+	FROM V2_MENU    
+    ]]></sql-query>
+    <sql-query name="UPDATE_MENU" description="메뉴 업데이트"><![CDATA[    
+ 	UPDATE V2_MENU SET 		
+		NAME = ?,
+		TITLE = ?,
+	  	LOCATION = ?,
+	  	MENU_ENABLED = ?,
+		MODIFIED_DATE = ?
+	WHERE MENU_ID = ?	    
+    ]]></sql-query>        
+    <sql-query name="CREATE_MENU" description="메뉴 생성"><![CDATA[    
+    INSERT INTO V2_MENU (
+	  MENU_ID,
+	  NAME,
+	  TITLE,
+	  LOCATION,
+	  MENU_ENABLED,
+	  CREATION_DATE,
+	  MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,? )    
+    ]]></sql-query>          
+    <sql-query name="REMOVE_MENU" description="메뉴 삭제"><![CDATA[    
+    DELETE FROM V2_MENU WHERE MENU_ID = ?
+    ]]></sql-query>           
+    <sql-query name="REMOVE_MENU_XML" description="메뉴 XML 데이터 삭제"><![CDATA[    
+    DELETE FROM V2_MENU_XML WHERE MENU_ID = ?
+    ]]></sql-query>    
+    <sql-query name="CREATE_MENU_XML" description="메뉴 XML 생성"><![CDATA[    
+    INSERT INTO V2_MENU_XML (
+    	MENU_ID,
+    	MENU_DATA
+    )VALUES(?, ?)
+    ]]></sql-query>        
+    <sql-query name="SELECT_MENU_XML_BY_ID" description="아이디로 XML 메뉴 조회"><![CDATA[    
+	SELECT
+	  MENU_DATA
+	FROM V2_MENU_XML WHERE MENU_ID = ?
+    ]]></sql-query>            
+    <sql-query name="COUNT_ALL_MENUS" description="메뉴 수 조회"><![CDATA[    
+	SELECT COUNT(MENU_ID)
+	FROM V2_MENU        
+    ]]></sql-query>     
+    
+    <!--  ATTACHMENT -->	 
+    <sql-query name="SELECT_ALL_ATTACHMENTS" description="전체 첨부파일 조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_ATTACHMENT
+    ]]></sql-query>
+    <sql-query name="SELECT_ATTACHMENT_BY_ID" description="ID로 첨부파일  조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_ATTACHMENT
+    WHERE 
+    	ATTACHMENT_ID = ?	    
+    ]]></sql-query>
+    <sql-query name="SELECT_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 첨부파일  조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_ATTACHMENT
+    WHERE 
+    	OBJECT_TYPE = ?	AND
+    	OBJECT_ID = ?
+    ]]></sql-query>    
+    <sql-query name="SELECT_ATTACHMENT_DATA_BY_ID" description="ID 값으로 첨부파일 데이터 조회"><![CDATA[    
+    SELECT 
+		ATTACHMENT_ID,
+		ATTACHMENT_DATA
+    FROM 
+    	V2_ATTACHMENT_DATA
+    WHERE 
+    	ATTACHMENT_ID = ?
+    ]]></sql-query>    
+    <sql-query name="INSERT_ATTACHMENT" description="첨부파일  생성"><![CDATA[    
+    INSERT INTO V2_ATTACHMENT (
+		ATTACHMENT_ID,
+		OBJECT_TYPE,
+		OBJECT_ID,
+		CONTENT_TYPE,
+		FILE_NAME,
+		FILE_SIZE,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,?,? )
+    ]]></sql-query>
+
+    <sql-query name="UPDATE_ATTACHMENT" description="첨부파일  생성"><![CDATA[    
+    UPDATE V2_ATTACHMENT SET 		
+		OBJECT_TYPE = ?,
+		OBJECT_ID = ?,
+		CONTENT_TYPE = ?,
+		FILE_NAME = ?,
+		FILE_SIZE = ?,
+		CREATION_DATE = ?,
+		MODIFIED_DATE = ?
+	WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ATTACHMENT" description="첨부파일  삭제"><![CDATA[    
+ 		DELETE FROM V2_ATTACHMENT WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+        
+	<sql-query name="SELECT_ATTACHMENT_IDS" description="첨부파일 아이디 조회"><![CDATA[    
+ 		SELECT ATTACHMENT_ID FROM  V2_ATTACHMENT_DATA
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_EMPTY_ATTACHMENT_DATA" description="첨부파일 데이터 생성"><![CDATA[    
+ 		INSERT INTO V2_ATTACHMENT_DATA (ATTACHMENT_ID, ATTACHMENT_DATA) VALUES (?, EMPTY_BLOB())
+    ]]></sql-query>
+    
+	<sql-query name="UPDATE_ATTACHMENT_DATA" description="첨부파일 데이터 업데이트"><![CDATA[    
+ 		UPDATE V2_ATTACHMENT_DATA  SET ATTACHMENT_DATA = ? WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_ATTACHMENT_DATA" description="첨부파일 데이터 생성"><![CDATA[    
+ 		INSERT V2_ATTACHMENT_DATA  (ATTACHMENT_ID, ATTACHMENT_DATA) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_ATTACHMENT_DATA_BY_ID" description="첨부파일 데이터 조회"><![CDATA[    
+ 		SELECT ATTACHMENT_DATA FROM V2_ATTACHMENT_DATA WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ATTACHMENT_DATA_BY_ID" description="첨부파일 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_ATTACHMENT_DATA WHERE ATTACHMENT_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_ALL_ATTACHMENT_DATAS" description="전체 첨부파일 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_ATTACHMENT_DATA
+    ]]></sql-query>            
+    
+	<sql-query name="COUNT_ATTACHMENT_BY_OBJECT_TYPE_AND_OBJECT_ID" description="전체 첨부파일 수 조회"><![CDATA[    
+	SELECT COUNT(ATTACHMENT_ID)
+	FROM V2_ATTACHMENT        
+	WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>            
+    
+        
+    <!--  IMAGE -->	 
+	<sql-query name="SELECT_IMAGE_LINK_BY_LINK_ID" description="SELECT_IMAGE_LINK_BY_LINK_ID"><![CDATA[    
+	SELECT 
+		LINK_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED
+	FROM V2_IMAGE_LINK 
+	WHERE LINK_ID = ? 
+    ]]></sql-query>	
+	
+	<sql-query name="SELECT_IMAGE_LINK_BY_IMAGE_ID" description="SELECT_IMAGE_LINK_BY_IMAGE_ID"><![CDATA[    
+	SELECT 
+		LINK_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED
+	FROM V2_IMAGE_LINK 
+	WHERE IMAGE_ID = ? 	
+    ]]></sql-query>
+	
+	<sql-query name="INSERT_IMAGE_LINK" description="INSERT_IMAGE_LINK"><![CDATA[    
+	INSERT INTO V2_IMAGE_LINK (
+		LINK_ID,
+		IMAGE_ID,
+		PUBLIC_SHARED
+	) VALUES ( ?, ? ,? )	
+    ]]></sql-query>
+	
+	<sql-query name="DELETE_IMAGE_LINK_BY_LINK_ID" description="DELETE_IMAGE_LINK_BY_LINK_ID"><![CDATA[    
+	DELETE FROM V2_IMAGE_LINK WHERE LINK_ID = ?
+    ]]></sql-query>
+	
+	<sql-query name="DELETE_IMAGE_LINK_BY_IMAGE_ID" description="DELETE_IMAGE_LINK_BY_IMAGE_ID"><![CDATA[    
+	DELETE FROM V2_IMAGE_LINK WHERE IMAGE_ID = ?
+    ]]></sql-query>
+		
+	<sql-query name="CREATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
+  		INSERT INTO V2_IMAGE (
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		) VALUES ( ?, ? ,?, ?, ?, ?, ?, ? )
+    ]]></sql-query>
+	
+	<sql-query name="UPDATE_IMAGE" description="ID로 IMAGE 조회"><![CDATA[    
+  		UPDATE V2_IMAGE SET
+	  		IMAGE_ID = ?,
+			OBJECT_TYPE = ?,
+			OBJECT_ID = ?,
+			FILE_NAME = ?,
+			FILE_SIZE = ?,
+			CONTENT_TYPE = ?,
+			MODIFIED_DATE = ?
+		WHERE IMAGE_ID = ?
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_IMAGE_BY_ID" description="ID로 IMAGE 조회"><![CDATA[    
+  		SELECT
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+		FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_IMAGE_BY_ID" description="IMAGE  삭제"><![CDATA[    
+ 		DELETE FROM V2_IMAGE WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_EMPTY_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		INSERT INTO V2_IMAGE_DATA (IMAGE_ID, IMAGE_DATA) VALUES (?, EMPTY_BLOB())
+    ]]></sql-query>
+    
+	<sql-query name="UPDATE_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		UPDATE V2_IMAGE_DATA  SET IMAGE_DATA = ? WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_IMAGE_DATA" description="IMAGE 데이터 생성"><![CDATA[    
+ 		INSERT V2_IMAGE_DATA  (IMAGE_ID, IMAGE_DATA) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_IMAGE_DATA_BY_ID" description="IMAGE 데이터 조회"><![CDATA[    
+ 		SELECT IMAGE_DATA FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_IMAGE_DATA_BY_ID" description="IMAGE 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_IMAGE_DATA WHERE IMAGE_ID = ?
+    ]]></sql-query>
+    
+     <sql-query name="SELECT_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 이미지  조회"><![CDATA[    
+    SELECT 
+	  		IMAGE_ID,
+			OBJECT_TYPE,
+			OBJECT_ID,
+			FILE_NAME,
+			FILE_SIZE,
+			CONTENT_TYPE,
+			CREATION_DATE,
+			MODIFIED_DATE
+    FROM 
+    	V2_IMAGE
+    WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>                      
+    
+     <sql-query name="SELECT_IMAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 이미지  아이디 조회"><![CDATA[    
+    SELECT 
+	  		IMAGE_ID
+    FROM 
+    	V2_IMAGE
+    WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    order by MODIFIED_DATE desc	
+    ]]></sql-query>      
+    
+    <sql-query name="COUNT_IMAGE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 해당 이미지 수 조회"><![CDATA[    
+	SELECT COUNT(IMAGE_ID)
+	FROM V2_IMAGE        
+	WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>    
+    
+
+<!--  TEMPLATE -->
+    <sql-query name="SELECT_TEMPLATE_BY_ID" description="ID로 TEMPLATE 조회"><![CDATA[    
+    SELECT 
+		OBJECT_TYPE,
+		OBJECT_ID,
+		TEMPLATE_ID,
+		TEMPLATE_TYPE,
+		TITLE,
+		LOCATION,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+    FROM 
+    	V2_TEMPLATE
+    WHERE 
+    	TEMPLATE_ID = ?    
+    ]]></sql-query>
+    <sql-query name="SELECT_TEMPLATE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID" description="OBJECT_TYPE 와 OBJECT_ID 값으로 TEMPLATE  조회"><![CDATA[    
+    SELECT 
+		TEMPLATE_ID
+    FROM 
+    	V2_TEMPLATE
+    WHERE 
+    	OBJECT_TYPE = ?	AND
+    	OBJECT_ID = ?
+    ]]></sql-query>    
+
+    <sql-query name="CREATE_TEMPLATE" description="TEMPLATE  생성"><![CDATA[    
+    INSERT INTO V2_TEMPLATE (
+		OBJECT_TYPE,
+		OBJECT_ID,
+		TEMPLATE_ID,
+		TEMPLATE_TYPE,
+		TITLE,
+		LOCATION,
+		CREATOR,
+		LASTMODIFIER,
+		CREATION_DATE,
+		MODIFIED_DATE
+	) VALUES ( 	?,?,?,?,?,?,?,?,? )
+    ]]></sql-query>
+
+    <sql-query name="UPDATE_TEMPLATE" description="콘텐츠 수정"><![CDATA[    
+    UPDATE V2_TEMPLATE SET 		
+		OBJECT_TYPE = ?,
+		OBJECT_ID = ?,
+		TEMPLATE_TYPE = ?,
+		TITLE = ?,
+		LOCATION = ?,
+		LASTMODIFIER,
+		MODIFIED_DATE
+	WHERE TEMPLATE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="DELETE_TEMPLATE" description="삭제"><![CDATA[    
+ 		DELETE FROM V2_TEMPLATE WHERE TEMPLATE_ID = ?
+    ]]></sql-query>
+    
+	<sql-query name="CREATE_TEMPLATE_BODY" description="TEMPLATE 데이터 생성"><![CDATA[    
+ 		INSERT V2_TEMPLATE_BODY  (BODY_TEMPLATE_ID, BODY) VALUES (?, ?)
+    ]]></sql-query>
+            
+	<sql-query name="SELECT_TEMPLATE_BODY_BY_ID" description="TEMPLATE 데이터 조회"><![CDATA[    
+ 		SELECT BODY FROM V2_TEMPLATE_BODY WHERE BODY_TEMPLATE_ID = ?
+    ]]></sql-query>
+
+	<sql-query name="REMOVE_TEMPLATE_BODY" description="TEMPLATE 데이터 삭제"><![CDATA[    
+ 		DELETE FROM V2_TEMPLATE_BODY WHERE BODY_TEMPLATE_ID = ?
+    ]]></sql-query>         
+    
+	<sql-query name="COUNT_TEMPLATE_BY_OBJECT_TYPE_AND_OBJECT_ID" description="전체  TEMPLATE 수 조회"><![CDATA[    
+	SELECT COUNT(OBJECT_ID)
+	FROM V2_TEMPLATE    
+	WHERE 
+    	OBJECT_TYPE = ?	AND OBJECT_ID = ?
+    ]]></sql-query>                 
+</sqlset>
