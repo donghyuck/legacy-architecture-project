@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="framework-architecture.ee.web.community.content-actions" namespace="/architecture.ee.web.community.content" extends="framework-default">
+		<action name="html"
+			class="architecture.ee.web.struts2.action.HtmlPageAction">
+			<result name="success" type="freemarker">${page}</result>						
+		</action>	
+		<action name="page"
+			class="architecture.ee.web.struts2.action.ContentPageAction">
+			<result name="success" type="freemarker">${page}</result>	
+		</action>			
+		<action name="image" class="architecture.ee.web.struts2.action.DownloadImageActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetImageContentType}</param>
+			  <param name="contentLength">${targetImageContentLength}</param>
+			  <param name="inputName">targetImageInputStream</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>		
+		
+		<action name="download" class="architecture.ee.web.struts2.action.DownloadAttachmentActioin">
+			<result name="success" type="stream">
+			  <param name="contentType">${targetAttachmentContentType}</param>
+			  <param name="contentLength">${targetAttachmentContentLength}</param>
+			  <param name="inputName">targetAttachmentInputStream</param>
+			  <param name="contentDisposition">attachment;filename="${encodedTargetAttachmentFileName}"</param>
+			  <param name="bufferSize">1024</param>
+			</result>			
+		</action>				
+	</package>
+
+</struts>
