@@ -25,10 +25,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import org.apache.commons.lang.StringUtils;
-
 import architecture.common.jdbc.TypeAliasRegistry;
 import architecture.common.util.L10NUtils;
+import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sqlquery.SqlNotFoundException;
 import architecture.ee.jdbc.sqlquery.builder.SqlBuilderAssistant;
 import architecture.ee.jdbc.sqlquery.builder.xml.XmlStatementBuilder;

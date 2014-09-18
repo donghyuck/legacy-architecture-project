@@ -21,11 +21,11 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.StringUtils;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
+import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sequencer.SequencerFactory;
 import architecture.ee.jdbc.sequencer.incrementer.JdbcMaxValueIncrementer;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
