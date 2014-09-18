@@ -10,7 +10,7 @@
 	<artifactId>architecture-ee</artifactId>
 	<name>APPLICATION EE ARCHITECTURE</name>
 	<description>자바기반의 엔터프라이즈 어플리케이션 개발 아키텍처.</description>
-	<version>1.0.5.RELEASE</version>
+	<version>2.0.0.RELEASE</version>
 	<packaging>jar</packaging>
 	<contributors>
 		<contributor>
@@ -22,10 +22,12 @@
 	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.test.testFailureIgnore>true</project.test.testFailureIgnore>
-		<project.test.skip>true</project.test.skip>
-		<javac.src.version>1.5</javac.src.version>
-		<javac.target.version>1.5</javac.target.version>				
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
+		<project.build.version>2.0.0.RELEASE</project.build.version>
+		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
+		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>				
 	</properties>
 
 	<repositories>
@@ -43,7 +45,7 @@
 		<dependency>
 			<groupId>architecture.common</groupId>
 			<artifactId>architecture-common</artifactId>
-			<version>1.0.5.RELEASE</version>			
+			<version>${project.build.version}</version>			
 		</dependency>
 		<dependency>
 			<groupId>commons-collections</groupId>
