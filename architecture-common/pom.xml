@@ -35,10 +35,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<javac.src.version>1.5</javac.src.version>
-		<javac.target.version>1.5</javac.target.version>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
 		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
-		<project.build.version>1.0.1.RELEASE</project.build.version>
+		<project.build.version>1.0.5.RELEASE</project.build.version>
 	</properties>
 
 	<dependencies>
