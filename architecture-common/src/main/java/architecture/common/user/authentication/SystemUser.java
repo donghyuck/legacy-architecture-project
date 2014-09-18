@@ -206,4 +206,9 @@ public class SystemUser extends BaseModelObjectSupport implements AuthToken, Use
 		return null;
 	}
 
+	@Override
+	public boolean hasCompany() {
+		return false;
+	}
+
 }

@@ -28,7 +28,7 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateFormatUtils;
@@ -40,8 +40,6 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.jdbc.support.JdbcUtils;
-
-import sun.misc.BASE64Decoder;
 
 import architecture.common.adaptor.Connector;
 import architecture.common.jdbc.JdbcType;
@@ -110,8 +108,9 @@ public abstract class AbstractJdbcConnector extends JdbcDaoSupport implements Co
 									if(!StringUtils.isEmpty( mapping.getEncoding())){
 										String enc = mapping.getEncoding();
 										if(enc.toUpperCase().equals("BASE64")){
-											BASE64Decoder decoder = new BASE64Decoder();									
-									        raw = decoder.decodeBuffer(value);	
+											raw = Base64.decodeBase64(value);
+											//BASE64Decoder decoder = new BASE64Decoder();	
+									        //raw = decoder.decodeBuffer(value);	
 										}else{
 											raw = value.getBytes();
 										}
