@@ -19,7 +19,6 @@ import groovy.util.GroovyScriptEngine;
 
 import java.net.URL;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.commons.vfs2.FileObject;
@@ -31,6 +30,7 @@ import org.springframework.core.io.ResourceLoader;
 
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.util.L10NUtils;
+import architecture.common.util.StringUtils;
 import architecture.common.util.vfs.VFSUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;

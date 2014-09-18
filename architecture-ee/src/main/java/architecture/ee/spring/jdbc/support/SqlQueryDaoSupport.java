@@ -20,7 +20,6 @@ import groovy.lang.GroovyObject;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
@@ -29,6 +28,7 @@ import org.springframework.jdbc.support.lob.LobHandler;
 import architecture.common.jdbc.incrementer.MaxValueIncrementer;
 import architecture.common.spring.jdbc.core.ExtendedJdbcTemplate;
 import architecture.common.util.L10NUtils;
+import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.sqlquery.SqlQuery;
 import architecture.ee.jdbc.sqlquery.factory.SqlQueryFactory;
 import architecture.ee.services.SqlQueryCallback;

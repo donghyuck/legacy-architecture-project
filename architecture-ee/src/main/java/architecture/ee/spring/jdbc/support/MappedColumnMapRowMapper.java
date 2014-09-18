@@ -12,7 +12,6 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.jdbc.core.RowMapper;
@@ -22,6 +21,7 @@ import org.springframework.security.crypto.codec.Utf8;
 import org.springframework.util.LinkedCaseInsensitiveMap;
 
 import architecture.common.jdbc.ResultMapping;
+import architecture.common.util.StringUtils;
 
 public class MappedColumnMapRowMapper implements RowMapper<Map<String, Object>> {
 

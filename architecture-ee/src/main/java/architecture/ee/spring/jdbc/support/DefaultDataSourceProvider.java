@@ -2,12 +2,13 @@ package architecture.ee.spring.jdbc.support;
 
 import javax.sql.DataSource;
 
-import org.apache.commons.lang.StringUtils;
+
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import architecture.common.jdbc.datasource.DataSourceFactory;
 import architecture.common.jdbc.datasource.DataSourceProvider;
+import architecture.common.util.StringUtils;
 
 public class DefaultDataSourceProvider implements DataSourceProvider, InitializingBean, FactoryBean<DataSource> {
 
