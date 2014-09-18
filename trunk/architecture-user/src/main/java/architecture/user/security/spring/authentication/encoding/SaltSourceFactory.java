@@ -15,7 +15,7 @@
  */
 package architecture.user.security.spring.authentication.encoding;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.dao.SaltSource;
