@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localizers>
+    <!--  COMMON  -->
+	<localizer bundleName="architecture.common.i18n.CommonLogLocalizer" codes="002001-003000" />
+</localizers>
