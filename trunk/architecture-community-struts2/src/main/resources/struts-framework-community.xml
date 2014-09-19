@@ -11,14 +11,18 @@
 			<param name="template">/html/community/homepage.ftl</param> 	
 			<result name="customized-success" type="freemarker">${template}</result>
 			<result name="homepage" type="freemarker">/html/homepage.ftl</result>
-			<result name="streams" type="freemarker">/html/community/my-streams.ftl</result>
-			
+			<result name="streams" type="freemarker">/html/community/my-streams.ftl</result>			
 			<result name="manage" type="freemarker">/html/community/my-website.ftl</result>
 			<result name="manage-company" type="freemarker">/html/community/my-company.ftl</result>
 			<result name="manage-website" type="freemarker">/html/community/my-website.ftl</result>
-			<result name="manage-forum" type="freemarker">/html/community/my-forums.ftl</result>
-			
+			<result name="manage-forum" type="freemarker">/html/community/my-forums.ftl</result>			
 			<result name="personalized" type="freemarker">/html/personalized-homepage.ftl</result>
+			
+			
+			
+			<result name="my-cloud-drive" type="freemarker">/html/community/my-cloud-drive.ftl</result>
+			<result name="my-streams" type="freemarker">/html/community/my-streams.ftl</result>
+			
 		</action>
 
 		<action name="about" class="architecture.ee.web.community.struts2.action.SocialPageAction">
