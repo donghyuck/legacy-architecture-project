@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts2.StrutsStatics;
 
 import architecture.common.user.User;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.LocaleUtils;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -46,9 +46,9 @@ public class LocaleInterceptor implements Interceptor {
         } else
         {
             User user = null;
-            if(invocation.getAction() instanceof FrameworkActionSupport)
+            if(invocation.getAction() instanceof WebSiteActionSupport)
             {
-            	FrameworkActionSupport jas = (FrameworkActionSupport)invocation.getAction();
+            	WebSiteActionSupport jas = (WebSiteActionSupport)invocation.getAction();
                 user = jas.getUser();
             }            
             

@@ -22,12 +22,12 @@ import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Statistics;
 import net.sf.ehcache.Status;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.ee.component.admin.AdminHelper;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class ViewCacheAction extends FrameworkActionSupport {
+public class ViewCacheAction extends WebSiteActionSupport {
 
 	private String targetName;
 	

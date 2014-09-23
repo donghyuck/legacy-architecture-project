@@ -1,10 +1,10 @@
 package architecture.ee.web.struts2.action;
 
 import architecture.common.util.StringUtils;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class ErrorAction extends FrameworkActionSupport {
+public class ErrorAction extends WebSiteActionSupport {
 	
 	private String status ;
 

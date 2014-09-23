@@ -28,7 +28,7 @@ import architecture.ee.web.attachment.FileInfo;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class UploadFileAction extends FrameworkActionSupport  implements Preparable {
+public class UploadFileAction extends WebSiteActionSupport  implements Preparable {
 
 	private List<FileInfo> uploadedFiles = new ArrayList<FileInfo>(); 
 	

@@ -19,17 +19,17 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class DownloadAttachmentActioin extends FrameworkActionSupport  implements Preparable {
+public class DownloadAttachmentActioin extends WebSiteActionSupport  implements Preparable {
 
 	private Long attachmentId;
 	

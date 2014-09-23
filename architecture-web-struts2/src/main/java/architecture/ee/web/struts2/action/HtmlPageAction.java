@@ -15,9 +15,9 @@
  */
 package architecture.ee.web.struts2.action;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class HtmlPageAction extends FrameworkActionSupport {
+public class HtmlPageAction extends WebSiteActionSupport {
 
 	private String page ;
 	

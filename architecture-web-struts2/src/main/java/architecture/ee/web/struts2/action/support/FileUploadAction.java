@@ -25,7 +25,7 @@ import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class FileUploadAction extends FrameworkActionSupport implements Preparable {
+public class FileUploadAction extends WebSiteActionSupport implements Preparable {
 	
 	private List<File> uploads = new ArrayList<File>();
 	private List<String> uploadFileNames = new ArrayList<String>();

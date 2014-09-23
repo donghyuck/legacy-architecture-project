@@ -26,11 +26,11 @@ import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteNotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.util.WebSiteUtils;
 
-public class MenuManagementAction  extends FrameworkActionSupport {
+public class MenuManagementAction  extends WebSiteActionSupport {
 
 	private int pageSize = 0 ;
 	private int startIndex = 0 ;    

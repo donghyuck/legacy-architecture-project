@@ -19,12 +19,12 @@ import java.io.File;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 import org.springframework.context.ResourceLoaderAware;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.ResourceLoader;
 
-public class FinderActionSupport extends FrameworkActionSupport  implements ResourceLoaderAware {
+public class FinderActionSupport extends WebSiteActionSupport  implements ResourceLoaderAware {
 
 	private ResourceLoader resourceLoader = new DefaultResourceLoader();
 

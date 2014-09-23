@@ -23,9 +23,9 @@ import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class AttachmentManagementAction extends FrameworkActionSupport {
+public class AttachmentManagementAction extends WebSiteActionSupport {
 
 
     private int pageSize = 0 ;

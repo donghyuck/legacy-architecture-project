@@ -31,9 +31,9 @@ import architecture.common.jdbc.schema.Column;
 import architecture.common.jdbc.schema.Database;
 import architecture.common.jdbc.schema.DatabaseFactory;
 import architecture.common.jdbc.schema.Table;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class DatabaseBrowserAction extends FrameworkActionSupport {
+public class DatabaseBrowserAction extends WebSiteActionSupport {
 
 	private TaskExecutor taskExecutor;
 	private static final DatabaseBrowserTask task = new DatabaseBrowserTask();

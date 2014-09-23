@@ -27,7 +27,7 @@ import org.apache.struts2.dispatcher.StrutsResultSupport;
 import org.apache.struts2.views.freemarker.FreemarkerManager;
 
 import architecture.ee.util.OutputFormat;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.struts2.view.freemarker.ExtendedFreemarkerManager;
 
 import com.opensymphony.xwork2.Action;
@@ -71,11 +71,11 @@ public class ServletDispatcherResult extends StrutsResultSupport  {
                         java.util.Locale locale = ServletActionContext.getActionContext(req).getLocale();
                         template.setLocale(locale);
                         Action action = (Action)ac.getActionInvocation().getAction();
-                        if( action instanceof FrameworkActionSupport)
+                        if( action instanceof WebSiteActionSupport)
                         {
-                        	architecture.common.user.User user = ((FrameworkActionSupport)action).getUser();
+                        	architecture.common.user.User user = ((WebSiteActionSupport)action).getUser();
                             //template.setTimeZone(LocaleUtils.getTimeZone(req, user));                        	
-                        	OutputFormat dataType = ((FrameworkActionSupport)action).getOutputFormat();
+                        	OutputFormat dataType = ((WebSiteActionSupport)action).getOutputFormat();
                         	
                         	if( dataType == OutputFormat.XML)
                         		res.setContentType("text/xml");                        	
