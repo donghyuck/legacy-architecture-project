@@ -40,7 +40,7 @@
 	<bean id="maxValueIncrementer" factory-bean="sqlQueryFactory" factory-method="getMaxValueIncrementer" />	
 	    <bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true">
         <property name="nativeJdbcExtractor">
-            <ref local="automaticJdbcExtractor"/>
+            <ref bean="automaticJdbcExtractor"/>
         </property>
     </bean>
 	
