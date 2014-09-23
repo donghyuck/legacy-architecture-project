@@ -20,9 +20,9 @@ import java.util.List;
 import architecture.common.user.Company;
 import architecture.ee.web.community.timeline.Timeline;
 import architecture.ee.web.community.timeline.TimelineManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class CompanyTimelineAction extends FrameworkActionSupport {
+public class CompanyTimelineAction extends WebSiteActionSupport {
 		
 	private TimelineManager timelineManager ;
 

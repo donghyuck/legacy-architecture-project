@@ -27,12 +27,12 @@ import architecture.ee.web.navigator.DefaultMenu;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 
-public class SiteManagementAction extends FrameworkActionSupport {
+public class SiteManagementAction extends WebSiteActionSupport {
 
 	private Long targetCompanyId;
 	

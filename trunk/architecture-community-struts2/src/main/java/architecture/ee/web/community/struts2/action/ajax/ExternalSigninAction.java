@@ -15,7 +15,7 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;

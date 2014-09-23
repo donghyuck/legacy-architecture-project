@@ -23,8 +23,8 @@ import javax.servlet.http.HttpSession;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
-import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
@@ -35,16 +35,17 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
+import architecture.common.util.StringUtils;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.social.SocialServiceProvider;
 import architecture.ee.web.community.social.UserProfile;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.user.security.spring.userdetails.ExtendedUserDetailsService;
 
-public abstract class SocialCallbackSupport extends FrameworkActionSupport implements SocialNetworkAware  {
+public abstract class SocialCallbackSupport extends WebSiteActionSupport implements SocialNetworkAware  {
 
 	private SocialNetworkManager socialNetworkManager;
 	private SocialNetwork socialNetwork;

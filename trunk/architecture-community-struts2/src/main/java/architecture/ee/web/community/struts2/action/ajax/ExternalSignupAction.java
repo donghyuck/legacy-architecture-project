@@ -18,7 +18,7 @@ package architecture.ee.web.community.struts2.action.ajax;
 import java.math.BigInteger;
 import java.security.SecureRandom;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.common.user.EmailAlreadyExistsException;
 import architecture.common.user.User;

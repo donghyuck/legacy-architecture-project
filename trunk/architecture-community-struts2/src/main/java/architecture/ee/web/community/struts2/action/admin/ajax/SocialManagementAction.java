@@ -24,10 +24,10 @@ import architecture.common.user.Group;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetworkManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class SocialManagementAction extends FrameworkActionSupport  {
+public class SocialManagementAction extends WebSiteActionSupport  {
 
     private int pageSize = 0 ;
     

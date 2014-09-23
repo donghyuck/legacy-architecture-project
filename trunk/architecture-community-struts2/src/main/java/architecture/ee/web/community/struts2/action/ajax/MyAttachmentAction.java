@@ -33,12 +33,12 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.FileInfo;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class MyAttachmentAction extends FrameworkActionSupport implements Preparable {
+public class MyAttachmentAction extends WebSiteActionSupport implements Preparable {
 
 	private int DEFAULT_OBJEDT_TYPE = 2 ;
 

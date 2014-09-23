@@ -19,15 +19,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 
 import architecture.common.user.Group;
 import architecture.common.user.authentication.AuthToken;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.user.GroupManager;
 
-public class UserProfileAction extends FrameworkActionSupport {
+public class UserProfileAction extends WebSiteActionSupport {
 
 	public static final String VIEW_MODAL_DIALOG = "modal-dialog";
 	

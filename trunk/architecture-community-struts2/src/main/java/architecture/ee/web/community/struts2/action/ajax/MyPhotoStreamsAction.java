@@ -27,11 +27,11 @@ import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.community.streams.remote.RemoteServiceLocator;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class MyPhotoStreamsAction extends FrameworkActionSupport  implements Preparable  {
+public class MyPhotoStreamsAction extends WebSiteActionSupport  implements Preparable  {
 
 	private PhotoStreamsManager photoStreamsManager ;
 

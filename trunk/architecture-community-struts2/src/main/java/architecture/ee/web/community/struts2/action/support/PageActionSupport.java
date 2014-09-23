@@ -40,7 +40,7 @@ import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.page.PageNotFoundException;
 import architecture.ee.web.navigator.MenuComponent;
 import architecture.ee.web.navigator.MenuNotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.WebSiteUtils;
 
 import com.opensymphony.xwork2.util.ValueStack;
@@ -51,7 +51,7 @@ import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
 
-public class PageActionSupport extends FrameworkActionSupport {
+public class PageActionSupport extends WebSiteActionSupport {
 
 	public static final String NOT_FOUND = "page-not-found";
 	

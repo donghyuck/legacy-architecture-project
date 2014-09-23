@@ -26,11 +26,11 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class SocialConnectAction extends FrameworkActionSupport implements  Preparable {
+public class SocialConnectAction extends WebSiteActionSupport implements  Preparable {
 	
 	private static final String DOMAIN_NAME_KEY = "domainName";
 	

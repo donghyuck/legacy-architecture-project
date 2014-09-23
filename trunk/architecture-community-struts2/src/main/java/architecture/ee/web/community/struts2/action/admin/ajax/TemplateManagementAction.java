@@ -19,11 +19,11 @@ import java.util.Collections;
 import java.util.List;
 
 import architecture.ee.exception.NotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.template.Template;
 import architecture.ee.web.template.TemplateManager;
 
-public class TemplateManagementAction extends FrameworkActionSupport {
+public class TemplateManagementAction extends WebSiteActionSupport {
 
 
     private int pageSize = 0 ;
