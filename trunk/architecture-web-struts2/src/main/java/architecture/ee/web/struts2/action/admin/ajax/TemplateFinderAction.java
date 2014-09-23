@@ -21,13 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 
+import architecture.common.util.StringUtils;
 import architecture.ee.web.struts2.action.support.FinderActionSupport;
-import architecture.ee.web.struts2.action.support.FinderActionSupport.FileInfo;
 import architecture.ee.web.util.WebApplicatioinConstants;
 
 public class TemplateFinderAction extends FinderActionSupport{

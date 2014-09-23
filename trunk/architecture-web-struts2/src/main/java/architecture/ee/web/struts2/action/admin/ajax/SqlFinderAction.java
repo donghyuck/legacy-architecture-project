@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 

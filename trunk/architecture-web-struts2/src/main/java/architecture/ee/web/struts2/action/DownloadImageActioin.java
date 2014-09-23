@@ -21,11 +21,11 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.exception.SystemException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class DownloadImageActioin extends FrameworkActionSupport  implements Preparable {
+public class DownloadImageActioin extends WebSiteActionSupport  implements Preparable {
 
 	private Long imageId;
 	

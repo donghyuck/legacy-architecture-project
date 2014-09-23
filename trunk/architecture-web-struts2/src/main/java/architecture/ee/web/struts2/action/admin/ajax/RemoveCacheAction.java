@@ -15,13 +15,13 @@
  */
 package architecture.ee.web.struts2.action.admin.ajax;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.web.struts2.action.admin.ajax.ViewCacheAction.CacheStats;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class RemoveCacheAction extends FrameworkActionSupport  {
+public class RemoveCacheAction extends WebSiteActionSupport  {
 
 	private String targetName;
 	

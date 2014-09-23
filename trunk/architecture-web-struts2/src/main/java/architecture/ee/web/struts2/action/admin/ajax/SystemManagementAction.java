@@ -16,9 +16,9 @@
 package architecture.ee.web.struts2.action.admin.ajax;
 
 import architecture.common.lifecycle.SystemInformationService;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class SystemManagementAction extends FrameworkActionSupport {
+public class SystemManagementAction extends WebSiteActionSupport {
 	
 	private SystemInformationService systemInformationService ;
 

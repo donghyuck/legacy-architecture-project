@@ -27,11 +27,11 @@ import org.apache.struts2.dispatcher.multipart.MultiPartRequestWrapper;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.FileInfo;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class UploadAttachmentAction extends FrameworkActionSupport  implements Preparable {
+public class UploadAttachmentAction extends WebSiteActionSupport  implements Preparable {
 	 
 	private Integer objectType = 0;
 	 
