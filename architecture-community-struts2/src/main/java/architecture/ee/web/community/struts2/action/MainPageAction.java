@@ -3,7 +3,7 @@ package architecture.ee.web.community.struts2.action;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.common.user.Company;
 import architecture.ee.util.OutputFormat;
@@ -24,6 +24,12 @@ public class MainPageAction extends PageAction implements Preparable {
 	
 	public static final String VIEW_MANAGE = "manage";
 	
+	public static final String VIEW_MY_CLOUD_DRIVER = "my-cloud-drive";
+	
+	public static final String VIEW_MY_SOCIALS = "my-socials";
+	
+	public static final String VIEW_MY_STREAMSS = "my-streams";	
+	
 	public static final String VIEW_MANAGE_COMPANY = "manage-company";
 	
 	public static final String VIEW_MANAGE_WEBSITE = "manage-website";
@@ -37,7 +43,10 @@ public class MainPageAction extends PageAction implements Preparable {
 		VIEW_MANAGE,
 		VIEW_MANAGE_COMPANY,
 		VIEW_MANAGE_WEBSITE,
-		VIEW_MANAGE_FORUM		
+		VIEW_MANAGE_FORUM,
+		VIEW_MY_CLOUD_DRIVER,
+		VIEW_MY_SOCIALS,
+		VIEW_MY_STREAMSS
 	};
 	
 	private String view;

@@ -34,11 +34,11 @@ import architecture.ee.web.community.social.SocialNetwork;
 import architecture.ee.web.community.social.SocialNetwork.Media;
 import architecture.ee.web.community.social.SocialNetworkManager;
 import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
 
-public class MySocialNetworkAction extends FrameworkActionSupport implements SocialNetworkAware   {
+public class MySocialNetworkAction extends WebSiteActionSupport implements SocialNetworkAware   {
     
 	private Long socialNetworkId = -1L; 
 	

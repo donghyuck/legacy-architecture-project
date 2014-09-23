@@ -15,7 +15,7 @@
  */
 package architecture.ee.web.community.struts2.action;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 import org.scribe.model.Token;
 
 import architecture.common.user.User;

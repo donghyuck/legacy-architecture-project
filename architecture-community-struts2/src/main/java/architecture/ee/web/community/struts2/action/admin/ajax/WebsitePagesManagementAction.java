@@ -21,9 +21,9 @@ import architecture.common.user.CompanyNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class WebsitePagesManagementAction extends FrameworkActionSupport {
+public class WebsitePagesManagementAction extends WebSiteActionSupport {
 
 	private Long targetCompanyId;
 	

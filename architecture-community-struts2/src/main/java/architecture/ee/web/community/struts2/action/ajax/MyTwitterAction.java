@@ -33,7 +33,7 @@ import architecture.ee.web.community.social.twitter.TwitterProfile;
 import architecture.ee.web.community.social.twitter.TwitterServiceProvider;
 import architecture.ee.web.community.struts2.action.support.SocialNetworkActionSupport;
 import architecture.ee.web.community.struts2.action.support.SocialNetworkAware;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
 public class MyTwitterAction extends SocialNetworkActionSupport {

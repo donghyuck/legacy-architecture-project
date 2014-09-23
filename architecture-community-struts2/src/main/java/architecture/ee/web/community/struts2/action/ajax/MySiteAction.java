@@ -15,9 +15,9 @@
  */
 package architecture.ee.web.community.struts2.action.ajax;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class MySiteAction extends FrameworkActionSupport  {
+public class MySiteAction extends WebSiteActionSupport  {
 	
 	public String execute() throws Exception {
 		return success();

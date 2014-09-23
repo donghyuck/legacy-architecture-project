@@ -18,9 +18,9 @@ package architecture.ee.web.community.struts2.action.admin.ajax;
 import architecture.ee.web.community.ContentManager;
 import architecture.ee.web.community.ContentNotFoundException;
 import architecture.ee.web.community.page.Content;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class DocumentManagementAction extends FrameworkActionSupport {
+public class DocumentManagementAction extends WebSiteActionSupport {
 
 	private static final String DEFAULT_TEMPLATE = "/html/page.ftl" ;
 	private ContentManager contentManager;

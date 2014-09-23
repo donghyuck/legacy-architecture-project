@@ -17,9 +17,9 @@ package architecture.ee.web.community.struts2.action.support;
 
 import net.sf.ehcache.Cache;
 import architecture.ee.web.community.social.SocialNetworkManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class SocialNetworkActionSupport extends FrameworkActionSupport implements SocialNetworkAware  {
+public class SocialNetworkActionSupport extends WebSiteActionSupport implements SocialNetworkAware  {
 
 	private Cache socialStreamsCache;
 	private SocialNetworkManager socialNetworkManager;	

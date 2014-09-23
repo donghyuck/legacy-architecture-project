@@ -25,10 +25,10 @@ import architecture.common.util.DateUtils;
 import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class AnnouncementManagementAction extends FrameworkActionSupport {
+public class AnnouncementManagementAction extends WebSiteActionSupport {
 
 	private Long objectId = -1L; 
 	

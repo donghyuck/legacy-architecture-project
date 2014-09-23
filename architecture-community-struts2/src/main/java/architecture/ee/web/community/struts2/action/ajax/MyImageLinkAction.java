@@ -20,9 +20,9 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageLink;
 import architecture.ee.web.attachment.ImageManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class MyImageLinkAction extends FrameworkActionSupport {
+public class MyImageLinkAction extends WebSiteActionSupport {
 	
 	private Boolean createIfNotExist = true;
 	

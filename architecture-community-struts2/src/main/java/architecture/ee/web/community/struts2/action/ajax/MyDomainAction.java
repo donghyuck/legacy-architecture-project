@@ -19,13 +19,13 @@ import java.util.Enumeration;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
 import com.opensymphony.xwork2.Preparable;
 
-public class MyDomainAction extends FrameworkActionSupport implements  Preparable {
+public class MyDomainAction extends WebSiteActionSupport implements  Preparable {
 
 	private static final String DOMAIN_NAME_KEY = "domainName";
 	
