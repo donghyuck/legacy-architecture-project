@@ -23,7 +23,7 @@ import java.util.List;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
-import org.apache.commons.lang.RandomStringUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 

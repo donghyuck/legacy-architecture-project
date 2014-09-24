@@ -21,7 +21,6 @@ import java.util.List;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +30,7 @@ import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
+import architecture.common.util.StringUtils;
 import architecture.ee.web.navigator.MenuNotFoundException;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteAlreadyExistsExcaption;
