@@ -15,7 +15,7 @@
  */
 package architecture.ee.web.community.streams.remote;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
 import architecture.common.exception.ComponentDisabledException;
 import architecture.ee.util.ApplicationHelper;

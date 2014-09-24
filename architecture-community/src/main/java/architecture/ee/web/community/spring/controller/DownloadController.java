@@ -22,7 +22,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import architecture.common.util.StringUtils;
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.ee.util.ApplicationHelper;
