@@ -59,9 +59,13 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 			account.setCreationDate(rs.getDate("CREATION_DATE"));
 			account.setModifiedDate(rs.getDate("MODIFIED_DATE"));						
 			account.setConnected(true);
+			
 			if( !StringUtils.isEmpty( account.getServiceProviderName())){			
+				
 				Media media = Media.valueOf(account.getServiceProviderName().toUpperCase());				
-				SocialServiceProvider provider = ServiceProviderFactory.getServiceProvider(media);			
+				SocialServiceProvider provider = ServiceProviderFactory.getServiceProvider(media);
+				
+				
 				if(StringUtils.isNotEmpty( account.getAccessToken() )){
 					provider.setAccessToken(account.getAccessToken());
 				}
@@ -69,7 +73,8 @@ public class JdbcSocialNetworkDao extends ExtendedJdbcDaoSupport implements Soci
 					provider.setAccessSecret(account.getAccessSecret());
 				}
 				account.setSocialServiceProvider(provider);
-			}			
+			}
+			
 			return account;
 		}		
 	};
