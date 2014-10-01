@@ -164,19 +164,14 @@ public class DownloadController {
 	@ResponseBody
 	public void handleProfile(@PathVariable("userName") String userName, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
 		
-		
 		log.debug(" ------------------------------------------");
 		log.debug("userName:" + userName);
 		log.debug("width:"+ width);
 		log.debug("height:" + height);
-		log.debug("------------------------------------------");			
-		
-		try {
-			
+		log.debug("------------------------------------------");					
+		try {			
 			ProfileImage image = profileManager.getProfileImageByUsername(userName);			
-			
-			log.debug( "using profile image : " + image.getFilename()  );
-			
+			log.debug( "using profile image : " + image.getFilename()  );			
 			InputStream input ;
 			String contentType ;
 			int contentLength ;			

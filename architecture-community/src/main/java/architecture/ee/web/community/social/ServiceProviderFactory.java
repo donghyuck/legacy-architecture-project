@@ -17,6 +17,7 @@ package architecture.ee.web.community.social;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.social.facebook.connect.FacebookConnectionFactory;
 
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.social.SocialNetwork.Media;
@@ -58,10 +59,11 @@ public class ServiceProviderFactory {
 	}
 	
 	
+	
+	
 	private static String getCallbackUrl(Media media){
 		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".callbackUrl", null);
-	}
-	
+	}	
 	
 	
 }
