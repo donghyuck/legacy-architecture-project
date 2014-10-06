@@ -46,7 +46,7 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 				rs.getLong("CONNECT_ID"),
 				rs.getInt("OBJECT_TYPE"),
 				rs.getLong("OBJECT_ID"),	
-				Media.valueOf(rs.getString("MEDIA_TYPE").toUpperCase()),
+				//Media.valueOf(rs.getString("MEDIA_TYPE").toUpperCase()),
 				rs.getString("PROVIDER_ID"), 
 				rs.getString("PROVIDER_USER_ID"), 
 				rs.getString("DISPLAY_NAME"), 

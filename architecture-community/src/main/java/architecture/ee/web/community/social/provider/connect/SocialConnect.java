@@ -21,6 +21,8 @@ import org.springframework.social.connect.ConnectionData;
 
 import architecture.common.cache.Cacheable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public interface SocialConnect extends Cacheable {
 	
 	public enum Media {
@@ -87,6 +89,7 @@ public interface SocialConnect extends Cacheable {
 	/**
 	 * @return accessToken
 	 */
+	 @JsonIgnore
 	public String getAccessToken();
 
 
@@ -94,6 +97,7 @@ public interface SocialConnect extends Cacheable {
 	/**
 	 * @return secret
 	 */
+	 @JsonIgnore
 	public String getSecret() ;
 
 
@@ -124,7 +128,7 @@ public interface SocialConnect extends Cacheable {
 	 */
 	public Date getModifiedDate();
 	
-	
+	 @JsonIgnore
 	public ConnectionData getConnectionData();
 
 	

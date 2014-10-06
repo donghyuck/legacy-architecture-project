@@ -26,6 +26,7 @@ import org.springframework.social.connect.web.SessionStrategy;
 
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLocator;
+import architecture.ee.web.community.social.provider.connect.MediaInfo;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 
 public class ServiceProviderHelper {
@@ -33,13 +34,37 @@ public class ServiceProviderHelper {
 	public static final String DEFAULT_FACEBOOK_SCOPE = "export_stream, read_stream, user_about_me, user_activities, user_education_history, user_friends, user_photos, user_work_history";
 	
 	private static final Log log = LogFactory.getLog(ConnectionFactoryLocator.class);
-				
-	public static List<Media> getEnabledMedia(){
+
+	public static List<MediaInfo> getAllMediaInfo(){
+		Collection<String> providers = ApplicationHelper.getRepository().getSetupApplicationProperties().getChildrenNames("components.social.providers");
+		List<MediaInfo> infos = new ArrayList<MediaInfo>(providers.size());
+		for( String name : providers){			
+			Media media = Media.valueOf(name.toUpperCase());		
+			infos.add(
+				new MediaInfo(name, getClientId(media), getClientSecret(media), getCallbackUrl(media), getScope(media), allowSignin(media), allowSignup(media))
+			);
+		}	
+		return infos;
+	}
+	
+	public static List<Media> getAllMedia(){
 		Collection<String> providers = ApplicationHelper.getRepository().getSetupApplicationProperties().getChildrenNames("components.social.providers"); //ApplicationHelper.getConfigService().getLocalProperties(parent).getApplicationPropertyNames("components.social.providers");
 		List<Media> media = new ArrayList<Media>(providers.size());
 		for( String name : providers)
 			media.add(Media.valueOf(name.toUpperCase()));
 		return media;
+	}
+	
+	public static Media toMedia(String name){
+		return Media.valueOf(name.toUpperCase());
+	}
+	
+	public static boolean allowSignin(Media media){
+		return ApplicationHelper.getApplicationBooleanProperty("components.social.providers." + media.name().toLowerCase() +  ".allowSignin", false);		
+	}
+	
+	public static boolean allowSignup(Media media){
+		return ApplicationHelper.getApplicationBooleanProperty("components.social.providers." + media.name().toLowerCase() +  ".allowSignup", false);		
 	}
 	
 	public static String getCallbackUrl(Media media){
