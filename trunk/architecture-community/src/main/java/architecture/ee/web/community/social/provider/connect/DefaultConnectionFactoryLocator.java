@@ -15,8 +15,6 @@
  */
 package architecture.ee.web.community.social.provider.connect;
 
-import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.social.connect.ConnectionFactory;
@@ -37,26 +35,24 @@ public class DefaultConnectionFactoryLocator implements Implementation {
 	public DefaultConnectionFactoryLocator() {
 		
 		this.registry = new ConnectionFactoryRegistry();			 
-		List<Media> media = ServiceProviderHelper.getEnabledMedia();
-		for(Media mediaType : media){
-			String callbackUrl = ServiceProviderHelper.getCallbackUrl(mediaType);
-			String clientId = ServiceProviderHelper.getClientId(mediaType);
-			String clientSecret = ServiceProviderHelper.getClientSecret(mediaType);
+		for(MediaInfo m : ServiceProviderHelper.getAllMediaInfo()){
+			Media media = Media.valueOf(m.getProvider().toUpperCase());
 			if( log.isDebugEnabled())
 			{
-				log.debug("clientId:" +clientId );
-				log.debug("clientSecret:" + clientSecret);
-				log.debug("callbackUrl"+callbackUrl);				
-			}			
-			if( mediaType == Media.FACEBOOK ){
-				FacebookConnectionFactory factory = new FacebookConnectionFactory(clientId, clientSecret);
-				factory.setScope(ServiceProviderHelper.getScope(mediaType));				
+				log.debug("clientId:" +m.getProvider() );
+				log.debug("clientSecret:" + m.getScope());
+				log.debug("callbackUrl"+m.getCallbackUrl());				
+			}
+			
+			if( media == Media.FACEBOOK ){
+				FacebookConnectionFactory factory = new FacebookConnectionFactory(m.getClientId(), m.getClientSecret());				
+				factory.setScope(m.getScope());				
 				registry.addConnectionFactory(factory);				
-			}else if (mediaType == Media.TWITTER){
-				TwitterConnectionFactory factory = new TwitterConnectionFactory(clientId, clientSecret);
+			}else if (media == Media.TWITTER){
+				TwitterConnectionFactory factory = new TwitterConnectionFactory(m.getClientId(), m.getClientSecret());
 				registry.addConnectionFactory(factory);
-			}			
-		}		
+			}	
+		}
 	}
 	
 	public void refresh(){

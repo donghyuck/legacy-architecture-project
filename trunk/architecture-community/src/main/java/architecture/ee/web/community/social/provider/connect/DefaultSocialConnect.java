@@ -29,7 +29,7 @@ public class DefaultSocialConnect implements SocialConnect {
 	
 	private Long objectId = 0L;
 		
-	private Media media ;
+	//private Media media ;
 	
 	private String providerId;
 	
@@ -52,55 +52,7 @@ public class DefaultSocialConnect implements SocialConnect {
 	private Date creationDate;
 	
 	private Date modifiedDate;
-				
-	/**
-	 * @param socialConnectId
-	 * @param objectType
-	 * @param objectId
-	 * @param providerId
-	 * @param providerUserId
-	 * @param displayName
-	 * @param profileUrl
-	 * @param imageUrl
-	 * @param accessToken
-	 * @param secret
-	 * @param refreshToken
-	 * @param expireTime
-	 * @param creationDate
-	 * @param modifiedDate
-	 */
-	public DefaultSocialConnect(
-			Long socialConnectId, 
-			Integer objectType,
-			Long objectId, 
-			String providerId, 
-			String providerUserId,
-			String displayName, 
-			String profileUrl, 
-			String imageUrl,
-			String accessToken, 
-			String secret, 
-			String refreshToken,
-			Long expireTime, 
-			Date creationDate, 
-			Date modifiedDate) {
 
-		this.socialConnectId = socialConnectId;
-		this.objectType = objectType;
-		this.objectId = objectId;
-		this.media = Media.UNKNOWN;
-		this.providerId = providerId;
-		this.providerUserId = providerUserId;
-		this.displayName = displayName;
-		this.profileUrl = profileUrl;
-		this.imageUrl = imageUrl;
-		this.accessToken = accessToken;
-		this.secret = secret;
-		this.refreshToken = refreshToken;
-		this.expireTime = expireTime;				
-		this.creationDate = creationDate;
-		this.modifiedDate = modifiedDate;
-	}
 
 	/**
 	 * 
@@ -124,7 +76,7 @@ public class DefaultSocialConnect implements SocialConnect {
 			Long socialConnectId, 
 			Integer objectType,
 			Long objectId, 
-			Media media,
+		//	Media media,
 			String providerId, 
 			String providerUserId,
 			String displayName, 
@@ -140,7 +92,7 @@ public class DefaultSocialConnect implements SocialConnect {
 		this.socialConnectId = socialConnectId;
 		this.objectType = objectType;
 		this.objectId = objectId;
-		this.media = media;
+	//	this.media = media;
 		this.providerId = providerId;
 		this.providerUserId = providerUserId;
 		this.displayName = displayName;
@@ -198,14 +150,7 @@ public class DefaultSocialConnect implements SocialConnect {
 	 * @return media
 	 */
 	public Media getMedia() {
-		return media;
-	}
-
-	/**
-	 * @param media 설정할 media
-	 */
-	public void setMedia(Media media) {
-		this.media = media;
+		return Media.valueOf(this.providerId.toUpperCase());
 	}
 
 	/**
