@@ -17,13 +17,14 @@ package architecture.ee.web.community.social.provider.connect;
 
 import java.util.Date;
 
+import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 
-import architecture.common.cache.Cacheable;
+import architecture.common.model.PropertyAwareModelObject;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public interface SocialConnect extends Cacheable {
+public interface SocialConnect extends PropertyAwareModelObject {
 	
 	public enum Media {
 		TWITTER, 
@@ -127,6 +128,8 @@ public interface SocialConnect extends Cacheable {
 	 * @return modifiedDate
 	 */
 	public Date getModifiedDate();
+	
+	public Connection<?> getConnection();
 	
 	 @JsonIgnore
 	public ConnectionData getConnectionData();

@@ -16,37 +16,20 @@
 package architecture.ee.web.community.social.provider.connect.dao;
 
 import java.util.List;
-import java.util.Set;
 
 import architecture.ee.web.community.social.provider.connect.SocialConnect;
 
 
 public interface SocialConnectDao {
-	
-	public List<Long> getObjectIds( int objectType, String providerId, String providerUserId );
-	
-	public List<Long> getObjectIds( int objectType, String providerId, Set<String> providerUserIds );	
-	
+		
 	public List<Long> getSocialConnectIds( int objectType, long objectId);
-	
-	public List<Long> getSocialConnectIds( int objectType, long objectId, String providerId);
-	
-	public Long getSocialConnectId( int objectType, long objectId, String providerId, String providerUserId );
-	
+		
 	public Long findPrimaryConnect(int objectType, long objectId, String providerId);
 		
 	public SocialConnect getSocialConnectById(long socialConnectId);
 	
 	public void updateSocialConnect(SocialConnect socialConnect);
-	
-	public SocialConnect addSocialConnect(SocialConnect socialConnect);
-	
+		
 	public void removeSocialConnect(SocialConnect socialNetwork);
-
-	public void removeSocialConnect(int objectType, long objectId, String providerId, String providerUserId );	
-	
-	public void removeSocialConnects(int objectType, long objectId );
-	
-	public void removeSocialConnects(int objectType, long objectId, String providerId );
 	
 }

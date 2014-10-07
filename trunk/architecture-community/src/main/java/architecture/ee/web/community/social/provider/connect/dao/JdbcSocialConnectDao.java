@@ -99,7 +99,6 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 			new SqlParameterValue (Types.NUMERIC, socialConnect.getSocialConnectId()));				
 	}
 
-	@Override
 	public SocialConnect addSocialConnect(SocialConnect socialConnect) {
 		SocialConnect toUse = socialConnect;		
 		if( toUse.getSocialConnectId() <1L){
@@ -137,78 +136,19 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 		return toUse;
 	}
 
-	@Override
 	public void removeSocialConnect(SocialConnect socialConnect) {
 		getExtendedJdbcTemplate().update(
 			getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_SOCIAL_CONNECT_BY_ID").getSql(), 	
 			new SqlParameterValue (Types.NUMERIC, socialConnect.getSocialConnectId() ));			
 	}
 
-	@Override
-	public void removeSocialConnects(int objectType, long objectId) {
-		getExtendedJdbcTemplate().update(
-				getBoundSql("ARCHITECTURE_COMMUNITY.DELETE_SOCIAL_CONNECT_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 	
-				new SqlParameterValue (Types.NUMERIC, objectType ),
-				new SqlParameterValue (Types.NUMERIC, objectId ));				
-	}
-
 	private String encrypt(String text) {
 		return text != null ? textEncryptor.encrypt(text) : text;
 	}
 
-	public List<Long> getObjectIds(int objectType, String providerId, String providerUserId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_OBJECT_IDS_BY_OBJECT_TYPE").getSql(), 				
-			Long.class, 
-			new SqlParameterValue (Types.NUMERIC, objectType ), 
-			new SqlParameterValue (Types.VARCHAR, providerId ), 
-			new SqlParameterValue (Types.VARCHAR, providerUserId ));	
-	}
-
-	@Override
-	public List<Long> getObjectIds(int objectType, String providerId, Set<String> providerUserIds) {
-		MapSqlParameterSource parameters = new MapSqlParameterSource();
-		parameters.addValue("objectType", objectType);
-		parameters.addValue("providerId", providerId);
-		
-		return null;
-	}
-
-
-	@Override
+	
 	public List<Long> getSocialConnectIds(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
 				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
-	}
-	
-	@Override
-	public List<Long> getSocialConnectIds(int objectType, long objectId, String providerId) {
-		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_PROVIDER").getSql(), 				
-				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ), new SqlParameterValue (Types.VARCHAR, providerId ));	
-	}
-
-	@Override
-	public Long getSocialConnectId(int objectType, long objectId, String providerId, String providerUserId) {
-		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_ID_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_PROVIDER").getSql(), 				
-				Long.class, 
-				new SqlParameterValue (Types.NUMERIC, objectType ), 
-				new SqlParameterValue (Types.NUMERIC, objectId ), 
-				new SqlParameterValue (Types.VARCHAR, providerId ), 
-				new SqlParameterValue (Types.VARCHAR, providerUserId ));	
-	}
-
-	@Override
-	public Long findPrimaryConnect(int objectType, long objectId, String providerId) {
-		return null;
-	}
-
-	@Override
-	public void removeSocialConnect(int objectType, long objectId,String providerId, String providerUserId) {
-	
-	}
-
-	@Override
-	public void removeSocialConnects(int objectType, long objectId, String providerId) {
-		
-	}
-	
+	}	
 }

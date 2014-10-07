@@ -20,8 +20,10 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.social.connect.ConnectionFactory;
 import org.springframework.social.connect.support.ConnectionFactoryRegistry;
 import org.springframework.social.facebook.connect.FacebookConnectionFactory;
+import org.springframework.social.tumblr.connect.TumblrConnectionFactory;
 import org.springframework.social.twitter.connect.TwitterConnectionFactory;
 
+import architecture.ee.web.community.social.provider.ServiceProviderConfig;
 import architecture.ee.web.community.social.provider.ServiceProviderHelper;
 import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLocator.Implementation;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
@@ -35,23 +37,26 @@ public class DefaultConnectionFactoryLocator implements Implementation {
 	public DefaultConnectionFactoryLocator() {
 		
 		this.registry = new ConnectionFactoryRegistry();			 
-		for(MediaInfo m : ServiceProviderHelper.getAllMediaInfo()){
-			Media media = Media.valueOf(m.getProvider().toUpperCase());
+		for(ServiceProviderConfig provider : ServiceProviderHelper.getAllServiceProviderConfig()){
+			Media media = Media.valueOf(provider.getProvider().toUpperCase());
 			if( log.isDebugEnabled())
 			{
-				log.debug("clientId:" +m.getProvider() );
-				log.debug("clientSecret:" + m.getScope());
-				log.debug("callbackUrl"+m.getCallbackUrl());				
+				log.debug("clientId:" +provider.getProvider() );
+				log.debug("clientSecret:" + provider.getScope());
+				log.debug("callbackUrl"+provider.getCallbackUrl());				
 			}
 			
 			if( media == Media.FACEBOOK ){
-				FacebookConnectionFactory factory = new FacebookConnectionFactory(m.getClientId(), m.getClientSecret());				
-				factory.setScope(m.getScope());				
-				registry.addConnectionFactory(factory);				
-			}else if (media == Media.TWITTER){
-				TwitterConnectionFactory factory = new TwitterConnectionFactory(m.getClientId(), m.getClientSecret());
+				FacebookConnectionFactory factory = new FacebookConnectionFactory(provider.getClientId(), provider.getClientSecret());				
+				factory.setScope(provider.getScope());					
 				registry.addConnectionFactory(factory);
-			}	
+			}else if (media == Media.TWITTER){
+				TwitterConnectionFactory factory = new TwitterConnectionFactory(provider.getClientId(), provider.getClientSecret());
+				registry.addConnectionFactory(factory);
+			} else if (media == Media.TUMBLR){
+				TumblrConnectionFactory factory = new TumblrConnectionFactory(provider.getClientId(), provider.getClientSecret());
+				registry.addConnectionFactory(factory);
+			}
 		}
 	}
 	
