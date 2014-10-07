@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee.web.community.social.provider.connect;
+package architecture.ee.web.community.social.provider;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class MediaInfo implements Serializable {
+public class ServiceProviderConfig implements Serializable {
 
 	private String provider;
 	private String clientId;
@@ -39,7 +39,7 @@ public class MediaInfo implements Serializable {
 	 * @param allowSignin
 	 * @param allowSignup
 	 */
-	public MediaInfo(String provider, String clientId, String clientSecret, String callbackUrl, String scope, boolean allowSignin, boolean allowSignup) {
+	public ServiceProviderConfig(String provider, String clientId, String clientSecret, String callbackUrl, String scope, boolean allowSignin, boolean allowSignup) {
 		this.provider = provider;
 		this.clientId = clientId;
 		this.clientSecret = clientSecret;
@@ -51,32 +51,19 @@ public class MediaInfo implements Serializable {
 
 	
 	/**
-	 * @return provider
+	 * @return callbackUrl
 	 */
-	public String getProvider() {
-		return provider;
+	@JsonIgnore
+	public String getCallbackUrl() {
+		return callbackUrl;
 	}
 
-
-	/**
-	 * @return allowSignin
-	 */
-	public boolean isAllowSignin() {
-		return allowSignin;
-	}
-
-	/**
-	 * @return allowSignup
-	 */
-	public boolean isAllowSignup() {
-		return allowSignup;
-	}
 
 	/**
 	 * @return clientId
 	 */
 	@JsonIgnore
-	protected String getClientId() {
+	public String getClientId() {
 		return clientId;
 	}
 
@@ -84,23 +71,36 @@ public class MediaInfo implements Serializable {
 	 * @return clientSecret
 	 */
 	@JsonIgnore
-	protected String getClientSecret() {
+	public String getClientSecret() {
 		return clientSecret;
 	}
-	
+
 	/**
-	 * @return callbackUrl
+	 * @return provider
 	 */
-	@JsonIgnore
-	protected String getCallbackUrl() {
-		return callbackUrl;
+	public String getProvider() {
+		return provider;
 	}
-	
+
 	/**
 	 * @return scope
 	 */
 	@JsonIgnore
-	protected String getScope() {
+	public String getScope() {
 		return scope;
+	}
+	
+	/**
+	 * @return allowSignin
+	 */
+	public boolean isAllowSignin() {
+		return allowSignin;
+	}
+	
+	/**
+	 * @return allowSignup
+	 */
+	public boolean isAllowSignup() {
+		return allowSignup;
 	}		
 }

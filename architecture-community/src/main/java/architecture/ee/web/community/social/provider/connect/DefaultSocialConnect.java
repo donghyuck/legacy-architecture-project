@@ -15,13 +15,19 @@
  */
 package architecture.ee.web.community.social.provider.connect;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 
+import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.model.support.PropertyAwareModelObjectSupport;
 
-public class DefaultSocialConnect implements SocialConnect {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
+public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  implements SocialConnect {
 	
 	private Long socialConnectId = 0L;
 	
@@ -49,11 +55,10 @@ public class DefaultSocialConnect implements SocialConnect {
 	
 	private Long expireTime;
 	
+	private Date modifiedDate;
+	
 	private Date creationDate;
 	
-	private Date modifiedDate;
-
-
 	/**
 	 * 
 	 * @param socialConnectId
@@ -76,7 +81,6 @@ public class DefaultSocialConnect implements SocialConnect {
 			Long socialConnectId, 
 			Integer objectType,
 			Long objectId, 
-		//	Media media,
 			String providerId, 
 			String providerUserId,
 			String displayName, 
@@ -92,7 +96,6 @@ public class DefaultSocialConnect implements SocialConnect {
 		this.socialConnectId = socialConnectId;
 		this.objectType = objectType;
 		this.objectId = objectId;
-	//	this.media = media;
 		this.providerId = providerId;
 		this.providerUserId = providerUserId;
 		this.displayName = displayName;
@@ -105,6 +108,24 @@ public class DefaultSocialConnect implements SocialConnect {
 		this.creationDate = creationDate;
 		this.modifiedDate = modifiedDate;
 	}
+
+	
+	
+	/**
+	 * @param objectType
+	 * @param objectId
+	 * @param providerId
+	 */
+	public DefaultSocialConnect(Integer objectType, Long objectId, Media media) {
+		this.objectType = objectType;
+		this.objectId = objectId;
+		this.providerId = media.name().toLowerCase();
+		Date now = new Date();		
+		this.creationDate = now;
+		this.modifiedDate = now;		
+	}
+
+
 
 	/**
 	 * @return socialConnectId
@@ -276,6 +297,7 @@ public class DefaultSocialConnect implements SocialConnect {
 	/**
 	 * @return accessToken
 	 */
+	@JsonIgnore
 	public String getAccessToken() {
 		return accessToken;
 	}
@@ -286,6 +308,7 @@ public class DefaultSocialConnect implements SocialConnect {
 	/**
 	 * @param accessToken 설정할 accessToken
 	 */
+	@JsonIgnore
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
@@ -296,6 +319,7 @@ public class DefaultSocialConnect implements SocialConnect {
 	/**
 	 * @return secret
 	 */
+	@JsonIgnore
 	public String getSecret() {
 		return secret;
 	}
@@ -306,26 +330,23 @@ public class DefaultSocialConnect implements SocialConnect {
 	/**
 	 * @param secret 설정할 secret
 	 */
+	@JsonIgnore
 	public void setSecret(String secret) {
 		this.secret = secret;
 	}
 
-
-
-
 	/**
 	 * @return refreshToken
 	 */
+	@JsonIgnore
 	public String getRefreshToken() {
 		return refreshToken;
 	}
 
-
-
-
 	/**
 	 * @param refreshToken 설정할 refreshToken
 	 */
+	@JsonIgnore
 	public void setRefreshToken(String refreshToken) {
 		this.refreshToken = refreshToken;
 	}
@@ -339,10 +360,6 @@ public class DefaultSocialConnect implements SocialConnect {
 	public Long getExpireTime() {
 		return expireTime;
 	}
-
-
-
-
 	/**
 	 * @param expireTime 설정할 expireTime
 	 */
@@ -350,6 +367,22 @@ public class DefaultSocialConnect implements SocialConnect {
 		this.expireTime = expireTime;
 	}
 
+
+	/**
+	 * @return modifiedDate
+	 */
+	public Date getModifiedDate() {
+		return modifiedDate;
+	}
+
+
+
+	/**
+	 * @param modifiedDate 설정할 modifiedDate
+	 */
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
+	}
 
 
 
@@ -362,7 +395,6 @@ public class DefaultSocialConnect implements SocialConnect {
 
 
 
-
 	/**
 	 * @param creationDate 설정할 creationDate
 	 */
@@ -372,36 +404,17 @@ public class DefaultSocialConnect implements SocialConnect {
 
 
 
-
-	/**
-	 * @return modifiedDate
-	 */
-	public Date getModifiedDate() {
-		return modifiedDate;
-	}
-
-
-
-
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	public void setModifiedDate(Date modifiedDate) {
-		this.modifiedDate = modifiedDate;
-	}
-
-
-	
-	public Connection<?> getConnection(){
-		return ConnectionFactoryLocator.getConnectionFactory(providerId).createConnection(getConnectionData());
-	}
-
-	@Override
+	@JsonIgnore
 	public int getCachedSize() {
 		return 0;
 	}
-
-	@Override
+	
+	@JsonIgnore
+	public Connection<?> getConnection(){
+		return ConnectionFactoryLocator.getConnectionFactory(providerId).createConnection(getConnectionData());
+	}
+	
+	@JsonIgnore
 	public ConnectionData getConnectionData() {
 		return new ConnectionData(
 				this.providerId ,
@@ -414,5 +427,17 @@ public class DefaultSocialConnect implements SocialConnect {
 				this.refreshToken,
 				this.expireTime 
 		);
+	}
+
+
+
+	@JsonIgnore
+	public Serializable getPrimaryKeyObject() {
+		return this.getSocialConnectId();
+	}
+
+	@JsonIgnore
+	public int getModelObjectType() {
+		return ModelTypeFactory.getTypeIdFromCode("SOCIAL_CONNECT");
 	}
 }

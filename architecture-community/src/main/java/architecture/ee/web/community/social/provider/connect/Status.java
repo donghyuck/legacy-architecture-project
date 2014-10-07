@@ -15,12 +15,15 @@
  */
 package architecture.ee.web.community.social.provider.connect;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import architecture.ee.web.community.social.provider.ServiceProviderConfig;
+
 public class Status {
 
-	private List<MediaInfo> media ; 
+	private List<ServiceProviderConfig> media ; 
 	
 	private List<SocialConnect> connections ; 
 	
@@ -32,14 +35,14 @@ public class Status {
 	/**
 	 * @return media
 	 */
-	public List<MediaInfo> getMedia() {
+	public List<ServiceProviderConfig> getMedia() {
 		return media;
 	}
 
 	/**
 	 * @param media 설정할 media
 	 */
-	public void setMedia(List<MediaInfo> media) {
+	public void setMedia(List<ServiceProviderConfig> media) {
 		this.media = media;
 	}
 
@@ -56,6 +59,13 @@ public class Status {
 	public void setConnections(List<SocialConnect> connections) {
 		this.connections = connections;
 	}
-
+	
+	public void setConnection(SocialConnect connection){
+		if(connections == null)
+			connections = new ArrayList<SocialConnect>();
+		
+		connections.add(connection);
+		
+	}
 	
 }
