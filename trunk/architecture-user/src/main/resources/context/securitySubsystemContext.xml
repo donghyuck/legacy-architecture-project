@@ -18,6 +18,8 @@
 	]]>
 	</description>
     
+     <security:global-method-security secured-annotations="enabled" />
+     
     <security:http pattern="/favicon.ico"             security="none" />
     <security:http pattern="/decorators/**"          security="none" /> 
     <security:http pattern="/images/**"              security="none" />
@@ -35,13 +37,11 @@
     <security:http entry-point-ref="authenticationEntryPoint">    	
         <security:intercept-url pattern="/main.do*"            access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/accounts/*"          access="IS_AUTHENTICATED_ANONYMOUSLY" />    
-        <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        
+        <security:intercept-url pattern="/accounts/sso/**"   access="IS_AUTHENTICATED_ANONYMOUSLY" />        
         <security:intercept-url pattern="/remoting/**"          access="IS_AUTHENTICATED_ANONYMOUSLY" />  
-  		<security:intercept-url pattern="/download/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />
-  		
-        <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
-        
+  		<security:intercept-url pattern="/download/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
+  		<security:intercept-url pattern="/connect/**"       access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
+        <security:intercept-url pattern="/community/**"     access="IS_AUTHENTICATED_ANONYMOUSLY" />         
         <security:intercept-url pattern="/page.do*"         access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/about.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
         <security:intercept-url pattern="/events.do*"           access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
