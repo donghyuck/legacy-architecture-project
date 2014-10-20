@@ -21,11 +21,14 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.social.connect.ConnectionData;
 import org.springframework.social.connect.web.ConnectSupport;
 import org.springframework.social.connect.web.SessionStrategy;
 
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLocator;
+import architecture.ee.web.community.social.provider.connect.DefaultSocialConnect;
+import architecture.ee.web.community.social.provider.connect.SocialConnect;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 
 public class ServiceProviderHelper {
@@ -65,6 +68,10 @@ public class ServiceProviderHelper {
 	public static String getCallbackUrl(Media media){
 		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".callbackUrl", null);
 	}
+
+	public static String getCallbackUrl(String providerId){
+		return ApplicationHelper.getApplicationProperty("components.social.providers." + providerId +  ".callbackUrl", null);
+	}
 	
 	public static String getClientId(Media media){
 		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".clientId", null);
@@ -85,7 +92,7 @@ public class ServiceProviderHelper {
 	public static String getScope(Media media){
 		return ApplicationHelper.getApplicationProperty("components.social.providers." + media.name().toLowerCase() +  ".scope", DEFAULT_FACEBOOK_SCOPE);
 	}
-
+	
 	public static Media toMedia(String name){
 		return Media.valueOf(name.toUpperCase());
 	}

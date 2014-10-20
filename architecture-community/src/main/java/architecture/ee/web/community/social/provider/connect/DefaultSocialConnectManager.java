@@ -16,10 +16,15 @@
 package architecture.ee.web.community.social.provider.connect;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import net.sf.ehcache.Cache;
+import net.sf.ehcache.Element;
 
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.social.connect.Connection;
+import org.springframework.social.connect.ConnectionData;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -38,7 +43,6 @@ public class DefaultSocialConnectManager implements SocialConnectManager {
 	public DefaultSocialConnectManager() {
 	
 	}
-
 		
 	/**
 	 * @return socialConnectDao
@@ -47,14 +51,12 @@ public class DefaultSocialConnectManager implements SocialConnectManager {
 		return socialConnectDao;
 	}
 
-
 	/**
 	 * @param socialConnectDao 설정할 socialConnectDao
 	 */
 	public void setSocialConnectDao(SocialConnectDao socialConnectDao) {
 		this.socialConnectDao = socialConnectDao;
 	}
-
 
 	/**
 	 * @return socialConnectCache
@@ -63,14 +65,12 @@ public class DefaultSocialConnectManager implements SocialConnectManager {
 		return socialConnectCache;
 	}
 
-
 	/**
 	 * @param socialConnectCache 설정할 socialConnectCache
 	 */
 	public void setSocialConnectCache(Cache socialConnectCache) {
 		this.socialConnectCache = socialConnectCache;
 	}
-
 
 	@Override
 	public SocialConnect createSocialConnect(Company company, Media media) {
@@ -109,7 +109,20 @@ public class DefaultSocialConnectManager implements SocialConnectManager {
 
 	@Override
 	public SocialConnect getSocialConnectById(long socialConnectId) throws ConnectNotFoundException {
-		SocialConnect conn = socialConnectDao.getSocialConnectById(socialConnectId);
+		SocialConnect conn = null;
+		try {
+			
+			if(socialConnectCache.get(socialConnectId) != null){
+				conn = (SocialConnect) socialConnectCache.get(socialConnectId).getValue();				
+			}			
+			if( conn == null ){
+				conn = socialConnectDao.getSocialConnectById(socialConnectId);
+				socialConnectCache.put(new Element(conn.getSocialConnectId(), conn));
+			}
+		
+		} catch (EmptyResultDataAccessException e) {
+			throw new ConnectNotFoundException(e);
+		}
 		return conn;
 	}
 
@@ -125,7 +138,75 @@ public class DefaultSocialConnectManager implements SocialConnectManager {
 
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void updateSocialConnectProperties(SocialConnect socialConnect) {
-
+		socialConnectDao.updateSocialConnect(socialConnect);
+		clearCache(socialConnect);		
+	}
+	
+	private void clearCache(SocialConnect socialConnect){		
+		socialConnectCache.remove(socialConnect.getSocialConnectId());	
 	}
 
+	public SocialConnect getSocialConnect(int objectType, long objectId, String providerId) throws ConnectNotFoundException {
+		Long id;
+		try {
+			id = socialConnectDao.getSocialConnectId(objectType, objectId, providerId);
+		} catch (EmptyResultDataAccessException e) {
+			throw new ConnectNotFoundException(e);	
+		}
+		return getSocialConnectById(id);
+	}
+
+
+	public SocialConnect getSocialConnect(Company company, String providerId) throws ConnectNotFoundException {
+		return getSocialConnect(company.getModelObjectType(), company.getCompanyId(), providerId);
+	}
+
+	@Override
+	public SocialConnect getSocialConnect(User user, String providerId) throws ConnectNotFoundException {
+		return getSocialConnect(user.getModelObjectType(), user.getUserId(), providerId);
+	}
+
+	@Override
+	public SocialConnect createSocialConnect(SocialConnect socialConnect) {
+		socialConnectDao.addSocialConnect(socialConnect);
+		return socialConnect;
+	}
+
+
+	@Override
+	public SocialConnect createSocialConnect(User user, Connection<?> connection) {
+		ConnectionData data = connection.createData();
+		Date now = new Date();		
+		DefaultSocialConnect socialConnect = new DefaultSocialConnect(
+			-1L, 
+			user.getModelObjectType(), 
+			user.getUserId(),
+			data.getProviderId(),
+			data.getProviderUserId(),
+			data.getDisplayName(),
+			data.getProfileUrl(), 
+			data.getImageUrl(), 
+			data.getAccessToken(),
+			data.getSecret(), 
+			data.getRefreshToken(), 
+			data.getExpireTime(),
+			now, 
+			now
+		);
+		socialConnectDao.addSocialConnect(socialConnect);
+		return socialConnect;
+	}
+	
+	@Override
+	public List<SocialConnect> findSocialConnects(int objectType, String providerId, String providerUserId) {
+		List<Long> ids = socialConnectDao.getSocialConnectIds(objectType, providerId, providerUserId);
+		List<SocialConnect> connects = new ArrayList<SocialConnect>(ids.size());
+		for(Long id : ids){
+			try {
+				connects.add( getSocialConnectById(id) );
+			} catch (NotFoundException e) {
+			}
+		}
+		return connects;
+	}
 }

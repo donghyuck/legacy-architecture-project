@@ -56,8 +56,6 @@ public interface SocialConnect extends PropertyAwareModelObject {
 	 */
 	public Long getObjectId();
 
-	public Media getMedia();
-	
 	/**
 	 * @return providerId
 	 */
@@ -102,14 +100,11 @@ public interface SocialConnect extends PropertyAwareModelObject {
 	public String getSecret() ;
 
 
-
-
 	/**
 	 * @return refreshToken
 	 */
+	 @JsonIgnore
 	public String getRefreshToken() ;
-
-
 
 
 	/**
@@ -129,10 +124,10 @@ public interface SocialConnect extends PropertyAwareModelObject {
 	 */
 	public Date getModifiedDate();
 	
+	@JsonIgnore
 	public Connection<?> getConnection();
 	
 	 @JsonIgnore
 	public ConnectionData getConnectionData();
-
 	
 }

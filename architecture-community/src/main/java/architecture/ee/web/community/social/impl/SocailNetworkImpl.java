@@ -17,6 +17,8 @@ package architecture.ee.web.community.social.impl;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
@@ -123,6 +125,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	/**
 	 * @return accessToken
 	 */
+	@JsonIgnore
 	public String getAccessToken() {
 		return accessToken;
 	}
@@ -130,6 +133,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	/**
 	 * @param accessToken 설정할 accessToken
 	 */
+	@JsonIgnore
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
@@ -137,6 +141,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	/**
 	 * @return accessSecret
 	 */
+	@JsonIgnore
 	public String getAccessSecret() {
 		return accessSecret;
 	}
@@ -144,6 +149,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	/**
 	 * @param accessSecret 설정할 accessSecret
 	 */
+	@JsonIgnore
 	public void setAccessSecret(String accessSecret) {
 		this.accessSecret = accessSecret;
 	}
@@ -165,6 +171,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	/**
 	 * @return serviceProvider
 	 */
+	@JsonIgnore
 	public SocialServiceProvider getSocialServiceProvider() {
 		return serviceProvider;
 	}
@@ -172,6 +179,7 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 	/**
 	 * @param serviceProvider 설정할 serviceProvider
 	 */
+	@JsonIgnore
 	public void setSocialServiceProvider(SocialServiceProvider serviceProvider) {
 		this.serviceProvider = serviceProvider;
 	}
@@ -253,7 +261,8 @@ public class SocailNetworkImpl extends EntityModelObjectSupport implements Socia
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
+	@JsonIgnore
 	public String getAuthorizationUrl() {
 		if(serviceProvider!=null)
 			try {
