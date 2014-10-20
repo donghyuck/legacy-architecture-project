@@ -23,10 +23,14 @@ import architecture.ee.web.community.social.provider.connect.SocialConnect;
 public interface SocialConnectDao {
 		
 	public List<Long> getSocialConnectIds( int objectType, long objectId);
-		
-	public Long findPrimaryConnect(int objectType, long objectId, String providerId);
+	
+	public List<Long> getSocialConnectIds(int objectType, String providerId, String providerUserId);
+
+	public Long getSocialConnectId(int objectType, long objectId, String providerId);
 		
 	public SocialConnect getSocialConnectById(long socialConnectId);
+	
+	public void addSocialConnect(SocialConnect socialConnect);
 	
 	public void updateSocialConnect(SocialConnect socialConnect);
 		

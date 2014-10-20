@@ -23,6 +23,8 @@ import org.springframework.social.connect.ConnectionData;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.PropertyAwareModelObjectSupport;
+import architecture.common.user.Company;
+import architecture.common.user.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -58,6 +60,8 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 	private Date modifiedDate;
 	
 	private Date creationDate;
+	
+	private  Connection<?> connection;
 	
 	/**
 	 * 
@@ -107,9 +111,9 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 		this.expireTime = expireTime;				
 		this.creationDate = creationDate;
 		this.modifiedDate = modifiedDate;
+		this.connection = null;
 	}
 
-	
 	
 	/**
 	 * @param objectType
@@ -123,9 +127,28 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 		Date now = new Date();		
 		this.creationDate = now;
 		this.modifiedDate = now;		
+		this.connection = null;
 	}
 
+	public DefaultSocialConnect(User user, Media media) {
+		this.objectType = user.getModelObjectType();
+		this.objectId = user.getUserId();
+		this.providerId = media.name().toLowerCase();
+		Date now = new Date();		
+		this.creationDate = now;
+		this.modifiedDate = now;		
+		this.connection = null;
+	}
 
+	public DefaultSocialConnect(Company company, Media media) {
+		this.objectType = company.getModelObjectType();
+		this.objectId = company.getCompanyId();
+		this.providerId = media.name().toLowerCase();
+		Date now = new Date();		
+		this.creationDate = now;
+		this.modifiedDate = now;		
+		this.connection = null;
+	}
 
 	/**
 	 * @return socialConnectId
@@ -133,9 +156,6 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 	public Long getSocialConnectId() {
 		return socialConnectId;
 	}
-
-
-
 
 	/**
 	 * @param socialConnectId 설정할 socialConnectId
@@ -145,16 +165,12 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 	}
 
 
-
-
 	/**
 	 * @return objectType
 	 */
 	public Integer getObjectType() {
 		return objectType;
 	}
-
-
 
 
 	/**
@@ -170,10 +186,7 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 	/**
 	 * @return media
 	 */
-	public Media getMedia() {
-		return Media.valueOf(this.providerId.toUpperCase());
-	}
-
+	
 	/**
 	 * @return objectId
 	 */
@@ -411,7 +424,9 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 	
 	@JsonIgnore
 	public Connection<?> getConnection(){
-		return ConnectionFactoryLocator.getConnectionFactory(providerId).createConnection(getConnectionData());
+		if( this.connection == null )	
+			this.connection = ConnectionFactoryLocator.getConnectionFactory(providerId).createConnection(getConnectionData());
+		return this.connection;
 	}
 	
 	@JsonIgnore
@@ -429,8 +444,6 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 		);
 	}
 
-
-
 	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return this.getSocialConnectId();
@@ -440,4 +453,42 @@ public class DefaultSocialConnect extends PropertyAwareModelObjectSupport  imple
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("SOCIAL_CONNECT");
 	}
+
+
+	/* (비Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("DefaultSocialConnect [");
+		if (socialConnectId != null)
+			builder.append("socialConnectId=").append(socialConnectId)
+					.append(", ");
+		if (objectType != null)
+			builder.append("objectType=").append(objectType).append(", ");
+		if (objectId != null)
+			builder.append("objectId=").append(objectId).append(", ");
+		if (providerId != null)
+			builder.append("providerId=").append(providerId).append(", ");
+		if (providerUserId != null)
+			builder.append("providerUserId=").append(providerUserId)
+					.append(", ");
+		if (displayName != null)
+			builder.append("displayName=").append(displayName).append(", ");
+		if (profileUrl != null)
+			builder.append("profileUrl=").append(profileUrl).append(", ");
+		if (imageUrl != null)
+			builder.append("imageUrl=").append(imageUrl).append(", ");
+		if (expireTime != null)
+			builder.append("expireTime=").append(expireTime).append(", ");
+		if (modifiedDate != null)
+			builder.append("modifiedDate=").append(modifiedDate).append(", ");
+		if (creationDate != null)
+			builder.append("creationDate=").append(creationDate);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
 }

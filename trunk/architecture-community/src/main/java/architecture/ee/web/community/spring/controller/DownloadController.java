@@ -18,14 +18,15 @@ package architecture.ee.web.community.spring.controller;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import architecture.common.util.StringUtils;
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
+import architecture.common.util.StringUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.profile.ProfileImage;
 import architecture.ee.web.community.profile.ProfileManager;
@@ -45,16 +46,27 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 
 @Controller 
+@RequestMapping("/download")
 public class DownloadController {
 
 	private static final Log log = LogFactory.getLog(DownloadController.class);
 	
+	@Inject
+	@Qualifier("profileManager")
 	ProfileManager profileManager ;
 	
+	@Inject
+	@Qualifier("logoManager")
 	LogoManager logoManager;
 	
+	@Inject
+	@Qualifier("companyManager")
 	CompanyManager companyManager;
 	
+	
+	
+	@Inject 
+	@Qualifier("webSiteManager")
 	WebSiteManager webSiteManager;
 	
 			

@@ -19,21 +19,28 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.security.crypto.encrypt.Encryptors;
 import org.springframework.security.crypto.encrypt.TextEncryptor;
 
+import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.social.provider.connect.DefaultSocialConnect;
 import architecture.ee.web.community.social.provider.connect.SocialConnect;
-import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
 
 public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements SocialConnectDao {
 
+	private ExtendedPropertyDao extendedPropertyDao;	
+	
+	private String sequencerName = "SOCIAL_CONNECT";
+	
+	private String propertyTableName = "V2_SOCIAL_CONNECT_PROPERTY";
+	
+	private String propertyPrimaryColumnName = "SOCIAL_CONNECT_ID";
+	
 	private final TextEncryptor textEncryptor;
 	
 	private final SocialConnectMapper socialConnectMapper = new SocialConnectMapper();
@@ -43,10 +50,9 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 		@Override
 		public SocialConnect mapRow(ResultSet rs, int rowNum) throws SQLException {
 			return new DefaultSocialConnect(
-				rs.getLong("CONNECT_ID"),
+				rs.getLong("SOCIAL_CONNECT_ID"),
 				rs.getInt("OBJECT_TYPE"),
-				rs.getLong("OBJECT_ID"),	
-				//Media.valueOf(rs.getString("MEDIA_TYPE").toUpperCase()),
+				rs.getLong("OBJECT_ID"),					
 				rs.getString("PROVIDER_ID"), 
 				rs.getString("PROVIDER_USER_ID"), 
 				rs.getString("DISPLAY_NAME"), 
@@ -76,18 +82,31 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 		super();
 		this.textEncryptor = textEncryptor;
 	}
+
+	public void setExtendedPropertyDao(ExtendedPropertyDao extendedPropertyDao) {
+		this.extendedPropertyDao = extendedPropertyDao;
+	}
+
+	public Map<String, String> getSocialConnectProperties(long socialConnectId) {
+		return extendedPropertyDao.getProperties(propertyTableName, propertyPrimaryColumnName, socialConnectId);
+	}
+
+	public void deleteSocialConnectProperties(long socialConnectId) {
+		extendedPropertyDao.deleteProperties(propertyTableName, propertyPrimaryColumnName, socialConnectId);
+	}
 	
-
-
-	@Override
+	public void setSocialConnectProperties(long socialConnectId, Map<String, String> props) {		
+		extendedPropertyDao.updateProperties(propertyTableName, propertyPrimaryColumnName, socialConnectId, props);
+	}
+	
 	public SocialConnect getSocialConnectById(long socialConnectId) {
 		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_BY_ID").getSql(), socialConnectMapper, new SqlParameterValue (Types.NUMERIC, socialConnectId ));
 	}
 
-	@Override
 	public void updateSocialConnect(SocialConnect socialConnect) {
 		getExtendedJdbcTemplate().update(
 			getBoundSql("ARCHITECTURE_COMMUNITY.UPDATE_SOCIAL_CONNECT").getSql(), 	
+			new SqlParameterValue (Types.VARCHAR, socialConnect.getProviderUserId()), 
 			new SqlParameterValue (Types.VARCHAR, socialConnect.getDisplayName()), 
 			new SqlParameterValue (Types.VARCHAR, socialConnect.getProfileUrl()), 
 			new SqlParameterValue (Types.VARCHAR, socialConnect.getImageUrl()), 
@@ -99,29 +118,21 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 			new SqlParameterValue (Types.NUMERIC, socialConnect.getSocialConnectId()));				
 	}
 
-	public SocialConnect addSocialConnect(SocialConnect socialConnect) {
+	public void addSocialConnect(SocialConnect socialConnect) {
 		SocialConnect toUse = socialConnect;		
 		if( toUse.getSocialConnectId() <1L){
 			long socialConnectId = getNextId("SOCIAL_CONNECT");		
 			if( toUse instanceof DefaultSocialConnect){
 				DefaultSocialConnect impl = (DefaultSocialConnect)toUse;
 				impl.setSocialConnectId(socialConnectId);
-				//		"select coalesce(max(rank) + 1, 1) as rank from " + tablePrefix + "UserConnection where userId = ? and providerId = ?", new Object[]{ userId, data.getProviderId() }, Integer.class);				
 			}			
-			/*
-			int rank = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_MAX_RANK_FROM_SOCIAL_CONNECT").getSql(),
-					Integer.class,
-					new SqlParameterValue (Types.NUMERIC, toUse.getObjectType() ), 
-					new SqlParameterValue (Types.NUMERIC, toUse.getObjectId()), 
-					new SqlParameterValue (Types.VARCHAR, toUse.getProviderId() )	
-			);		
-			*/
+			
 			getExtendedJdbcTemplate().update(getBoundSql("ARCHITECTURE_COMMUNITY.CREATE_SOCIAL_CONNECT").getSql(), 	
 					new SqlParameterValue (Types.NUMERIC, toUse.getSocialConnectId()), 
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectType() ), 
 					new SqlParameterValue (Types.INTEGER, toUse.getObjectId() ), 
-					new SqlParameterValue (Types.VARCHAR, toUse.getMedia().name().toLowerCase()), 
-					//new SqlParameterValue (Types.INTEGER, rank ), 
+					new SqlParameterValue (Types.VARCHAR, toUse.getProviderId()), 
+					new SqlParameterValue (Types.VARCHAR, toUse.getProviderUserId()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getDisplayName()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getProfileUrl()), 
 					new SqlParameterValue (Types.VARCHAR, toUse.getImageUrl()), 
@@ -132,8 +143,7 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 					new SqlParameterValue(Types.DATE, toUse.getCreationDate()),
 					new SqlParameterValue(Types.DATE, toUse.getModifiedDate())
 			);	
-		}	
-		return toUse;
+		}
 	}
 
 	public void removeSocialConnect(SocialConnect socialConnect) {
@@ -150,5 +160,17 @@ public class JdbcSocialConnectDao extends ExtendedJdbcDaoSupport implements Soci
 	public List<Long> getSocialConnectIds(int objectType, long objectId) {
 		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 				
 				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
+	}
+
+	@Override
+	public Long getSocialConnectId(int objectType, long objectId, String providerId) {
+		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_PROVIDER").getSql(), 
+			Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ), new SqlParameterValue (Types.VARCHAR, providerId ));	
 	}	
+	
+	public List<Long> getSocialConnectIds(int objectType, String providerId, String providerUserId) {
+		return getExtendedJdbcTemplate().queryForList(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_SOCIAL_CONNECT_OBJECT_IDS_BY_OBJECT_TYPE_AND_PROVIDER_USER_ID").getSql(), 				
+				Long.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.VARCHAR, providerId ), new SqlParameterValue (Types.VARCHAR, providerUserId ));	
+	}
+	
 }
