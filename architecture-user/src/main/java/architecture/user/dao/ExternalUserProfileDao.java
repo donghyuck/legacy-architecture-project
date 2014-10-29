@@ -21,7 +21,7 @@ import architecture.common.user.User;
 
 public interface ExternalUserProfileDao {
 
-	public abstract Map<Long, Object> getProfile(User user);
+	public abstract Map<String, Object> getProfile(User user);
 	
 	public abstract Map<String, Object> getProfile(long userId);
 	
