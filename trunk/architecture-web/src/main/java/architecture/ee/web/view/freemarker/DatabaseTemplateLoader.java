@@ -89,14 +89,16 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 
 	@Override
 	public Object findTemplateSource(String name) throws IOException {
-		log.debug( name + ", customized : " + isCustomizedEnabled() );	
+		
+		log.debug( "searching... " + name + ", customized : " + isCustomizedEnabled() );	
+		
 		if(isCustomizedEnabled() )
 		{
 			try {
 				MethodInvoker invoker = new MethodInvoker();		
 				invoker.setStaticMethod("architecture.ee.web.struts2.util.ActionUtils.getAction");
 				invoker.prepare();
-				Object action = invoker.invoke();			
+				Object action = invoker.invoke();
 				if( action instanceof WebSiteAware ){				
 					WebSite site = ((WebSiteAware)action).getWebSite();
 					String nameToUse = SEP_IS_SLASH ? name :  name.replace('/', File.separatorChar) ;					
@@ -183,33 +185,8 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 		}		
 	}
 
-/*	
-	protected List<Template> getCurrentCompanyTemplates(){
-		List<Template> list = null;
-		Company targetCompany = getCurrentCompany();
-		
-		if(isCacheSet()){
-			net.sf.ehcache.Element item =  templateListCache.get(targetCompany.getCompanyId());
-			if( item != null ){
-				list = (List<Template>)item.getValue();
-			}		
-		}
-		
-		if( list == null ){
-			TemplateManager templateManager = ApplicationHelper.getComponent(TemplateManager.class);						
-			list = templateManager.getTemplate(targetCompany);			
-			if(isCacheSet()){
-				templateListCache.put(new net.sf.ehcache.Element( targetCompany.getCompanyId(), list ));
-			}
-		}
-		
-		return list ;
-	}*/
-	
-
-
-	protected final boolean usingDatabase(){		
-		return ApplicationHelper.getApplicationBooleanProperty("view.render.freemarker.usingDatabase", false);
+	protected final boolean isDatabasePersistence(){		
+		return ApplicationHelper.getApplicationBooleanProperty("view.render.freemarker.persistence.database", false);
 	}
 	
 	protected final boolean isCustomizedEnabled(){		

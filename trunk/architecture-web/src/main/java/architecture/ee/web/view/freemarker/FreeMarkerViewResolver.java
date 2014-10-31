@@ -16,7 +16,15 @@
 
 package architecture.ee.web.view.freemarker;
 
+import org.springframework.web.servlet.view.AbstractUrlBasedView;
+
 public class FreeMarkerViewResolver extends
 		org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver {
+
+	@Override
+	protected AbstractUrlBasedView buildView(String viewName) throws Exception {
+		// TODO 자동 생성된 메소드 스텁
+		return super.buildView(viewName);
+	}
 
 }
