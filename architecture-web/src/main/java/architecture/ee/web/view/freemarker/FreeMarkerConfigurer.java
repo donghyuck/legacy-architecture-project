@@ -35,7 +35,6 @@ import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.cache.FileTemplateLoader;
-import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
 import freemarker.ext.jsp.TaglibFactory;
 import freemarker.template.Configuration;

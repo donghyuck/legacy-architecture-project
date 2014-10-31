@@ -20,12 +20,13 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,19 +35,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.util.StringUtils;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 
-@Controller 
+@Controller ("webDownloadController")
+@RequestMapping("/download")
 public class DownloadController {
 
 	private static final Log log = LogFactory.getLog(DownloadController.class);
 	
+	@Inject
+	@Qualifier("imageManager")
 	private ImageManager imageManager ;
 	
+	@Inject
+	@Qualifier("attachmentManager")
 	private AttachmentManager attachmentManager;
 	
 	

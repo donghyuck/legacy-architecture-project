@@ -101,7 +101,7 @@ public class ViewRendererServlet extends HttpServlet {
         throws Exception
     {
         
-    	View view = resolvingView(httpservletrequest, httpservletresponse);        
+    	View view = resolvingView(httpservletrequest, httpservletresponse);
         if(view == null)
         {
             throw new ServletException("Could not complete render request: View is null");
@@ -127,7 +127,7 @@ public class ViewRendererServlet extends HttpServlet {
     	/**
     	 * 어트리뷰트에서 VIEW 를 꺼내온 경우 ContentType 값을 출력 포맷에 따라 설정하지 않는다.
     	 */
-        View view = (View)httpservletrequest.getAttribute(WebApplicatioinConstants.VIEW_ATTRIBUTE);
+        View view = (View) httpservletrequest.getAttribute(WebApplicatioinConstants.VIEW_ATTRIBUTE);
         if( view == null ){        	
             try
             {
