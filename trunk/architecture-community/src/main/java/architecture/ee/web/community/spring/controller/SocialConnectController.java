@@ -219,8 +219,7 @@ public class SocialConnectController implements InitializingBean  {
 	public Object connect(@PathVariable String providerId, NativeWebRequest request, Model model) {		
 		setNoCache(request);
 		User user = SecurityHelper.getUser();
-		SocialConnect account = null;
-		
+		SocialConnect account = null;		
 		if( ! user.isAnonymous() ){
 			try {
 				account = socialConnectManager.getSocialConnect(user, providerId);
@@ -233,16 +232,21 @@ public class SocialConnectController implements InitializingBean  {
 			if( !StringUtils.isEmpty(onetime)){
 				account = (SocialConnect)getOnetimeObject(onetime);
 				if( account != null ){
+					if(architecture.common.util.StringUtils.equals(account.getProviderId(), providerId)){
+						try {
+							model.addAttribute("profile", account.getConnection().fetchUserProfile());
+						} catch (Exception e) {
+							model.addAttribute("error", e.getMessage());
+						}						
+					}else{
+						account =socialConnectManager.createSocialConnect(user, ServiceProviderHelper.toMedia(providerId));
+					}	
 					//try {
 					//	User foundUser = findUser(2, account.getProviderId(), account.getProviderUserId());
 					//	model.addAttribute("foundUser", foundUser );
 					//} catch (UserNotFoundException e) {
 					//}
-					try {
-						model.addAttribute("profile", account.getConnection().fetchUserProfile());
-					} catch (Exception e) {
-						model.addAttribute("error", e.getMessage());
-					}
+
 				}
 			}
 		}
@@ -423,7 +427,9 @@ public class SocialConnectController implements InitializingBean  {
 		ConnectionFactory<?> connectionFactory = ConnectionFactoryLocator.getConnectionFactory(providerId);		
 		MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();	
 		try {
+			
 			connectSupport.setCallbackUrl(ServiceProviderHelper.getCallbackUrl(providerId));
+			
 			return new RedirectView(connectSupport.buildOAuthUrl(connectionFactory, request, parameters));
 		} catch (Exception e) {
 			sessionStrategy.setAttribute(request, PROVIDER_ERROR_ATTRIBUTE, e);

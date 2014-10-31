@@ -23,7 +23,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"architecture.ee.web.community.spring.controller"})
+@ComponentScan(basePackages = {"architecture.ee.web.spring.controller", "architecture.ee.web.community.spring.controller"})
 @Configuration
 public class Config extends WebMvcConfigurerAdapter  {
 
