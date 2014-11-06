@@ -19,6 +19,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
@@ -36,15 +38,17 @@ public class ImageImpl extends EntityModelObjectSupport  implements Image {
 	private Integer thumbnailSize = 0;
 	private String thumbnailContentType = "png";
 	
-	
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return imageId;
 	}
-
+	
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("IMAGE");
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())
 				+ CacheSizes.sizeOfString(contentType)
@@ -77,6 +81,7 @@ public class ImageImpl extends EntityModelObjectSupport  implements Image {
 		return size ;
 	}
 
+	@JsonIgnore
 	public InputStream getInputStream() throws IOException {
 		return inputStream;
 	}
