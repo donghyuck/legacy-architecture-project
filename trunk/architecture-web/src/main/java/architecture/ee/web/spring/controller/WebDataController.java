@@ -108,15 +108,16 @@ public class WebDataController {
 		User user = SecurityHelper.getUser();
 		
 		Image image = imageManager.getImage(imageId);
-		Map<String, String> properties = image.getProperties();
-		
+		Map<String, String> properties = image.getProperties();		
+		// update or create
 		List<Map> list = ParamUtils.getJsonParameter(request.getNativeRequest(HttpServletRequest.class), "items", List.class);		
 		for (Map row : list) {
-			String n = (String) row.get("name");
-			String v = (String) row.get("value");
-			properties.put(n, v);
-		}	
-
+			String name = (String) row.get("name");
+			String value = (String) row.get("value");
+			properties.put(name, value);
+		}		
+		if( list.size() > 0 )
+			imageManager.updateImageProperties(image);		
 		return toList(properties);
 	}
 
@@ -126,14 +127,14 @@ public class WebDataController {
 		User user = SecurityHelper.getUser();
 		
 		Image image = imageManager.getImage(imageId);
-		Map<String, String> properties = image.getProperties();
-		
+		Map<String, String> properties = image.getProperties();		
 		List<Map> list = ParamUtils.getJsonParameter(request.getNativeRequest(HttpServletRequest.class), "items", List.class);		
 		for (Map row : list) {
-			String n = (String) row.get("name");
-			String v = (String) row.get("value");
-			properties.put(n, v);
-		}	
+			String name = (String) row.get("name");
+			properties.remove(name);
+		}
+		if( list.size() > 0 )
+			imageManager.updateImageProperties(image);
 
 		return toList(properties);
 	}
@@ -175,4 +176,39 @@ public class WebDataController {
 		return toList(properties);
 	}
 	
+	@RequestMapping(value="/file/{fileId}/property", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Property>  updateFileProperty(@PathVariable Long fileId, NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();
+		
+		Attachment attachment = attachmentManager.getAttachment(fileId);
+		Map<String, String> properties = attachment.getProperties();		
+		// update or create
+		List<Map> list = ParamUtils.getJsonParameter(request.getNativeRequest(HttpServletRequest.class), "items", List.class);		
+		for (Map row : list) {
+			String name = (String) row.get("name");
+			String value = (String) row.get("value");
+			properties.put(name, value);
+		}		
+		if( list.size() > 0 )
+			attachmentManager.saveAttachment(attachment);
+		return toList(properties);
+	}
+
+	@RequestMapping(value="/file/{fileId}/property", method=RequestMethod.DELETE)
+	@ResponseBody
+	public List<Property>  deleteFileProperty(@PathVariable Long fileId, NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();
+		
+		Attachment attachment = attachmentManager.getAttachment(fileId);
+		Map<String, String> properties = attachment.getProperties();		
+		List<Map> list = ParamUtils.getJsonParameter(request.getNativeRequest(HttpServletRequest.class), "items", List.class);		
+		for (Map row : list) {
+			String name = (String) row.get("name");
+			properties.remove(name);
+		}
+		if( list.size() > 0 )
+			attachmentManager.saveAttachment(attachment);
+		return toList(properties);
+	}	
 }
