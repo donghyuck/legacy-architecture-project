@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
@@ -31,6 +33,7 @@ public class AttachmentImpl extends EntityModelObjectSupport implements Attachme
 	
 	private String thumbnailContentType = "png";
 	
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return attachmentId;
 	}
@@ -83,6 +86,7 @@ public class AttachmentImpl extends EntityModelObjectSupport implements Attachme
 		this.downloadCount = downloadCount;
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())
 				+ CacheSizes.sizeOfString(contentType)
@@ -96,12 +100,15 @@ public class AttachmentImpl extends EntityModelObjectSupport implements Attachme
 		return 0;
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("ATTACHMENT");
 	}
 	public void setInputStream(InputStream inputStream) {
 		this.inputStream = inputStream;
 	}
+	
+	@JsonIgnore
 	public InputStream getInputStream() throws IOException {
 		return inputStream;
 	}
