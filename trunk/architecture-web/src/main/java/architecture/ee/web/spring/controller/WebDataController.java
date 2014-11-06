@@ -119,6 +119,25 @@ public class WebDataController {
 
 		return toList(properties);
 	}
+
+	@RequestMapping(value="/image/{imageId}/property", method=RequestMethod.DELETE)
+	@ResponseBody
+	public List<Property>  deleteImageProperty(@PathVariable Long imageId, NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();
+		
+		Image image = imageManager.getImage(imageId);
+		Map<String, String> properties = image.getProperties();
+		
+		List<Map> list = ParamUtils.getJsonParameter(request.getNativeRequest(HttpServletRequest.class), "items", List.class);		
+		for (Map row : list) {
+			String n = (String) row.get("name");
+			String v = (String) row.get("value");
+			properties.put(n, v);
+		}	
+
+		return toList(properties);
+	}
+	
 	
 	protected List<Property> toList (Map<String, String> properties){
 		List<Property> list = new ArrayList<Property>();
