@@ -28,9 +28,7 @@ import java.util.MissingResourceException;
 
 import javax.xml.parsers.SAXParserFactory;
 
-
 import org.apache.commons.io.IOUtils;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.xml.sax.Attributes;
