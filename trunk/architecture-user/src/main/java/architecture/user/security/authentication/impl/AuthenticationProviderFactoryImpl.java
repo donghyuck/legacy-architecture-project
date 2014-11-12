@@ -17,10 +17,8 @@ package architecture.user.security.authentication.impl;
 
 import javax.servlet.http.HttpServletRequest;
 
-import architecture.common.util.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -32,8 +30,8 @@ import architecture.common.user.CompanyTemplate;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AnonymousUser;
 import architecture.common.user.authentication.AuthToken;
+import architecture.common.util.StringUtils;
 import architecture.common.util.TextUtils;
-
 import architecture.user.security.authentication.AuthenticationProvider;
 import architecture.user.security.authentication.AuthenticationProviderFactory;
 import architecture.user.security.spring.userdetails.ExtendedUserDetails;

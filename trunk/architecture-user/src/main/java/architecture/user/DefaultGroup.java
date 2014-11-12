@@ -7,12 +7,16 @@ import java.util.Set;
 
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.Group;
 import architecture.common.user.User;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.UnAuthorizedException;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 
 public class DefaultGroup extends BaseModelObjectSupport implements Group {
@@ -156,6 +160,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	/**
 	 * @return
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -164,6 +169,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	 * @param date
 	 * @throws UnAuthorizedException
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setCreationDate(Date date) throws UnAuthorizedException {
 		this.creationDate = date;
 	}
@@ -171,6 +177,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	/**
 	 * @return
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public Date getModifiedDate() {
 
 		return modifiedDate;
@@ -180,6 +187,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	 * @param date
 	 * @throws UnAuthorizedException
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setModifiedDate(Date date) throws UnAuthorizedException {
 		this.modifiedDate = date;
 	}
@@ -241,6 +249,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 		}
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
         int size = CacheSizes.sizeOfObject();
         size += CacheSizes.sizeOfLong();

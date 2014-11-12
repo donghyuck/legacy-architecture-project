@@ -15,8 +15,6 @@
  */
 package architecture.user;
 
-import java.util.List;
-
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
