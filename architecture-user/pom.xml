@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>architecture.user</groupId>
 	<artifactId>architecture-user</artifactId>
-	<version>1.0.5.RELEASE</version>
+	<version>2.0.0.RELEASE</version>
 	<name>APPLICATION USER ARCHITECTURE</name>
 	<parent>
 		<artifactId>architecture-parent</artifactId>
@@ -19,7 +19,15 @@
 	<scm>
 		<url>https://power-j.googlecode.com/svn/trunk/architecture-user</url>
 	</scm>
-
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
+		<project.build.version>2.0.0.RELEASE</project.build.version>
+		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
+		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>				
+	</properties>
 
 	<build>
 		<plugins>
@@ -148,7 +156,7 @@
 		<dependency>
 			<groupId>architecture.ee</groupId>
 			<artifactId>architecture-ee</artifactId>
-			<version>1.0.5.RELEASE</version>
+			<version>${project.build.version}</version>
 		</dependency>
 	</dependencies>
 </project>
