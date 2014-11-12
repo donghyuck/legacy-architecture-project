@@ -18,7 +18,6 @@ package architecture.common.user.authentication;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import architecture.common.model.factory.ModelTypeFactory;

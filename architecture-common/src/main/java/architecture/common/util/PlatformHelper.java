@@ -7,8 +7,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Locale;
 
-import org.apache.commons.lang3.SystemUtils;
-
 import architecture.common.exception.RuntimeError;
 
 public class PlatformHelper {
