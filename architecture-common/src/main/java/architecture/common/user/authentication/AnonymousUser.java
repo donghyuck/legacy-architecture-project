@@ -43,7 +43,7 @@ public class AnonymousUser extends BaseModelObjectSupport implements AuthToken, 
 	private String username ;
 	
 	public AnonymousUser() {
-		username = ANONYMOUS_USERNAME ;
+		this.username = ANONYMOUS_USERNAME ;
 	}
 		
 

@@ -26,7 +26,7 @@ public interface Sequencer
 	public abstract long getNext() ;
 
     /**
-	 * @return
+	 * @return blockSize
 	 */
     public abstract int getBlockSize();
     

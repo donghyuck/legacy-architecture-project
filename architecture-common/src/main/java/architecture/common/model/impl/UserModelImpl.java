@@ -36,6 +36,8 @@ import architecture.common.user.User;
 import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.StringUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * @author  donghyuck
  */
@@ -493,6 +495,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	 * @return
 	 * @throws UnAuthorizedException
 	 */
+    @JsonIgnore
 	public String getPassword() throws UnAuthorizedException {
 		return password;
 	}
@@ -672,6 +675,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @return
 	 */
+	@JsonIgnore
 	public String getPasswordHash() {
 		return passwordHash;
 	}
@@ -900,7 +904,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 		}
 	}
 
-
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return getUserId();
 	}
@@ -909,6 +913,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 		setUserId(((Long)primaryKeyObj).longValue());		
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("USER");
 	}
@@ -951,6 +956,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
         return username != null && StringUtils.indexOfAny(username, USERNAME_DISALLOWED_CHARS) == -1 && username.length() <= 100;
     }
 
+    @JsonIgnore
 	public int getCachedSize() {
 		int size = 0 ;
 		size += CacheSizes.sizeOfLong();
