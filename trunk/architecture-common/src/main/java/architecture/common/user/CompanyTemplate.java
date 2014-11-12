@@ -23,6 +23,8 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class CompanyTemplate  extends BaseModelObjectSupport implements Company {
 
 	private Long companyId;
@@ -73,10 +75,12 @@ public class CompanyTemplate  extends BaseModelObjectSupport implements Company 
 		this.domainName = domainName;
 	}
 
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return companyId;
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("COMPANY");
 	}
@@ -86,6 +90,7 @@ public class CompanyTemplate  extends BaseModelObjectSupport implements Company 
 		this.companyId = companyId;
 	}
 	
+	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName())  +  CacheSizes.sizeOfString(getDisplayName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
 	}
