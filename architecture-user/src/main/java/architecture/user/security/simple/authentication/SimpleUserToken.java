@@ -7,7 +7,6 @@ import java.util.Map;
 
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
-import architecture.common.model.v2.ModelObjectType;
 import architecture.common.user.Company;
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;

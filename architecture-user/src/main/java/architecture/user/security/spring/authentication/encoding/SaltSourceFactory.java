@@ -15,12 +15,12 @@
  */
 package architecture.user.security.spring.authentication.encoding;
 
-import architecture.common.util.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.authentication.dao.ReflectionSaltSource;
 import org.springframework.security.authentication.dao.SaltSource;
 
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.util.ApplicationConstants;
 

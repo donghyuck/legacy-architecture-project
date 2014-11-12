@@ -21,6 +21,8 @@ import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.BaseModelObjectSupport;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 public class DefaultRole extends BaseModelObjectSupport  implements Role  {
 
@@ -34,10 +36,12 @@ public class DefaultRole extends BaseModelObjectSupport  implements Role  {
 		return getRoleId();
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("ROLE");
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + CacheSizes.sizeOfString(getName()) + CacheSizes.sizeOfString( getDescription() ) + CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
 	}

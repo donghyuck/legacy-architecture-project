@@ -15,12 +15,12 @@
  */
 package architecture.user.security.spring.authentication.encoding;
 
-import architecture.common.util.StringUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 import org.springframework.security.authentication.encoding.PasswordEncoder;
 
 import architecture.common.lifecycle.ApplicationProperties;
+import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 
 /**
