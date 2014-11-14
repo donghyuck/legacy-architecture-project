@@ -26,8 +26,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,14 +39,18 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
+import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
+import architecture.ee.web.community.announce.AnnounceNotFoundException;
+import architecture.ee.web.community.announce.impl.DefaultAnnounce;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
+import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.util.WebSiteUtils;
 
 @Controller ("communityDataController")
@@ -125,25 +132,65 @@ public class CommunityDataController {
 	}
 	
 	
-	
-	
+
 	@RequestMapping(value="/image/{imageId}/stream", method=RequestMethod.GET)
 	@ResponseBody
-	public List<Photo>  getImageProperty(@PathVariable Long imageId, NativeWebRequest request ) throws NotFoundException {		
+	public List<Photo>  getImageProperty(
+			@PathVariable Long imageId, 
+			NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();		
 		Image image = imageManager.getImage(imageId);
 		return photoStreamsManager.getPhotosByImage(image);
 	}
 	
-	@RequestMapping(value="/announce", params={"item"}, method=RequestMethod.POST)
+	@Secured({"ROLE_USER"})
+	@RequestMapping(value="/announce/save.json", method=RequestMethod.POST)
 	@ResponseBody
-	public Announce saveOrUpdate(@RequestParam AnnounceForm item, NativeWebRequest request){
+	public Announce saveAnnounce(
+			@RequestBody DefaultAnnounce announce, 
+			NativeWebRequest request) throws AnnounceNotFoundException, WebSiteNotFoundException{		
+		User user = SecurityHelper.getUser();
+		if(announce.getUser() == null && announce.getAnnounceId() == 0)
+			announce.setUser(user);
 		
-		log.debug(item);
+		if( user.isAnonymous() || user.getUserId() != announce.getUser().getUserId() )
+			throw new UnAuthorizedException();
+				
+		Announce target ;
+		if( announce.getAnnounceId() > 0){
+			target = announceManager.getAnnounce(announce.getAnnounceId());
+		}else{
+			if( announce.getObjectType() == 30 && announce.getObjectId() == 0L ){
+				announce.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
+			}else if (announce.getObjectType() == 1 && announce.getObjectId() == 0L ){
+				announce.setObjectId(user.getCompanyId());		
+			}
+			target = announceManager.createAnnounce(user, announce.getObjectType() , announce.getObjectId());
+		}
 		
-		return null;
+		target.setSubject(announce.getSubject());
+		target.setBody(announce.getBody());	
+		target.setStartDate( announce.getStartDate());
+		target.setEndDate(announce.getEndDate());
+		if(target.getAnnounceId() > 0 ){
+			announceManager.updateAnnounce(target);		
+		}else{
+			announceManager.addAnnounce(target);
+		}		
+		return target;
 	}
 	
+	@Secured({"ROLE_USER"})
+	@RequestMapping(value="/announce/{announceId}/destory.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Boolean destoryAnnounce(@PathVariable Long announceId, NativeWebRequest request){
+		User user = SecurityHelper.getUser();
+			
+		
+		return true;
+	}
+	
+	@Secured({"ROLE_ANONYMOUS"})
 	@RequestMapping(value="/announce/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public AnnounceList  getAnnounceList (
@@ -165,206 +212,18 @@ public class CommunityDataController {
 		}
 		return new AnnounceList(announceManager.getAnnounces(objectType, objectId), getTotalAnnounceCount(objectType, objectId));
 	}
-	
-	public static class AnnounceForm {
 		
-		private Long announceId = 0L;
-		
-		private Integer objectType = 0;
-		
-		private String subject ;
-		
-		private String body;
-		
-		private Date startDate ;
-		
-		private Date endDate;
-
-		private Date modifiedDate;
-		
-		private Date creationDate;
-		
-		private User user;
-		
-		private Map properties;
-		
-		
-		/**
-		 * @return properties
-		 */
-		public Map getProperties() {
-			return properties;
-		}
-
-		/**
-		 * @param properties 설정할 properties
-		 */
-		public void setProperties(Map properties) {
-			this.properties = properties;
-		}
-
-		/**
-		 * @return user
-		 */
-		public User getUser() {
-			return user;
-		}
-
-		/**
-		 * @param user 설정할 user
-		 */
-		public void setUser(User user) {
-			this.user = user;
-		}
-
-		/**
-		 * @return announceId
-		 */
-		public Long getAnnounceId() {
-			return announceId;
-		}
-
-		/**
-		 * @param announceId 설정할 announceId
-		 */
-		public void setAnnounceId(Long announceId) {
-			this.announceId = announceId;
-		}
-
-		/**
-		 * @return objectType
-		 */
-		public Integer getObjectType() {
-			return objectType;
-		}
-
-		/**
-		 * @param objectType 설정할 objectType
-		 */
-		public void setObjectType(Integer objectType) {
-			this.objectType = objectType;
-		}
-
-		/**
-		 * @return subject
-		 */
-		public String getSubject() {
-			return subject;
-		}
-
-		/**
-		 * @param subject 설정할 subject
-		 */
-		public void setSubject(String subject) {
-			this.subject = subject;
-		}
-
-		/**
-		 * @return body
-		 */
-		public String getBody() {
-			return body;
-		}
-
-		/**
-		 * @param body 설정할 body
-		 */
-		public void setBody(String body) {
-			this.body = body;
-		}
-
-		/**
-		 * @return startDate
-		 */
-		public Date getStartDate() {
-			return startDate;
-		}
-
-		/**
-		 * @param startDate 설정할 startDate
-		 */
-		public void setStartDate(Date startDate) {
-			this.startDate = startDate;
-		}
-
-		/**
-		 * @return endDate
-		 */
-		public Date getEndDate() {
-			return endDate;
-		}
-
-		/**
-		 * @param endDate 설정할 endDate
-		 */
-		public void setEndDate(Date endDate) {
-			this.endDate = endDate;
-		}
-				
-
-		/**
-		 * @return modifiedDate
-		 */
-		public Date getModifiedDate() {
-			return modifiedDate;
-		}
-
-		/**
-		 * @param modifiedDate 설정할 modifiedDate
-		 */
-		public void setModifiedDate(Date modifiedDate) {
-			this.modifiedDate = modifiedDate;
-		}
-
-		/**
-		 * @return creationDate
-		 */
-		public Date getCreationDate() {
-			return creationDate;
-		}
-
-		/**
-		 * @param creationDate 설정할 creationDate
-		 */
-		public void setCreationDate(Date creationDate) {
-			this.creationDate = creationDate;
-		}
-
-		/* (비Javadoc)
-		 * @see java.lang.Object#toString()
-		 */
-		@Override
-		public String toString() {
-			StringBuilder builder = new StringBuilder();
-			builder.append("AnnounceForm [");
-			if (announceId != null)
-				builder.append("announceId=").append(announceId).append(", ");
-			if (objectType != null)
-				builder.append("objectType=").append(objectType).append(", ");
-			if (subject != null)
-				builder.append("subject=").append(subject).append(", ");
-			if (body != null)
-				builder.append("body=").append(body).append(", ");
-			if (startDate != null)
-				builder.append("startDate=").append(startDate).append(", ");
-			if (endDate != null)
-				builder.append("endDate=").append(endDate);
-			builder.append("]");
-			return builder.toString();
-		}
-	}
-	
-	
-	
 	private int getTotalAnnounceCount(int objectType, long objectId ){
 		Date now = Calendar.getInstance().getTime();		
 		return announceManager.getAnnounceCount(objectType, objectId, now);
 	}
 	
+	
+	
+	
 	public static class AnnounceList {
 		private List<Announce> announces ;
-		private int totalCount ;
-		
+		private int totalCount ;		
 		/**
 		 * @param announces
 		 * @param totalCount
