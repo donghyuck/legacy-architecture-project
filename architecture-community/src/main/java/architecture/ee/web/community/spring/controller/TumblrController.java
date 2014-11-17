@@ -24,6 +24,7 @@ import org.springframework.social.tumblr.api.BlogOperations;
 import org.springframework.social.tumblr.api.Following;
 import org.springframework.social.tumblr.api.Likes;
 import org.springframework.social.tumblr.api.Posts;
+import org.springframework.social.tumblr.api.PostsQuery;
 import org.springframework.social.tumblr.api.Tumblr;
 import org.springframework.social.tumblr.api.UserInfo;
 import org.springframework.social.tumblr.api.UserOperations;
@@ -83,9 +84,14 @@ public class TumblrController {
 
 	@RequestMapping(value="/dashboard.json", method=RequestMethod.POST)
 	@ResponseBody
-	public Posts dashboard() throws Exception {
+	public Posts dashboard(@RequestParam(value="sinceId", defaultValue="0", required=false ) Long sinceId) throws Exception {
 		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
-		Tumblr api = (Tumblr) account.getConnection().getApi();	
+		Tumblr api = (Tumblr) account.getConnection().getApi();			
+		if( sinceId > 0){
+			PostsQuery query = new PostsQuery();
+			query.setSinceId(sinceId);
+			return api.userOperations().dashboard(query);
+		}
 		return api.userOperations().dashboard();
 	}
 
