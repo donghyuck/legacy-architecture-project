@@ -42,7 +42,6 @@
 		<security:intercept-url pattern="/remoting/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  
 		<security:intercept-url pattern="/download/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
 		<security:intercept-url pattern="/connect/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
-		<security:intercept-url pattern="/data/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		
 		<security:intercept-url pattern="/community/**"		access="IS_AUTHENTICATED_ANONYMOUSLY" />         
 		<security:intercept-url pattern="/page.do*"				access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
