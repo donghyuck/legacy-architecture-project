@@ -15,18 +15,24 @@
  */
 package architecture.ee.web.spring.controller;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
@@ -219,6 +225,18 @@ public class WebDataController {
 		
 		return null;
 	}
+
+	@RequestMapping(value="/images/upload.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Image  uploadImage(@RequestBody ImageImpl newImage, NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();
+		
+		
+		//return imageManager.getImage(imageId);
+		
+		return null;
+	}
+	
 	
 	@RequestMapping(value="/images/link.json", method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -294,7 +312,63 @@ public class WebDataController {
 	}
 	
 	
+	@RequestMapping(value="/files/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public FileList  getFileList(
+			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
+			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
+			NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();		
+		return getFileList(objectType, startIndex, pageSize, request.getNativeRequest(HttpServletRequest.class));
+	}
 	
+	private FileList getFileList(int objectType, int startIndex, int pageSize, HttpServletRequest request) throws NotFoundException{			
+		User user = SecurityHelper.getUser();
+		long objectId = user.getUserId();		
+		if( objectType == 1 ){
+			objectId = user.getCompanyId();			
+		}else if ( objectType == 30){
+			objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
+		}				
+		FileList list = new FileList();		
+		list.setTotalCount(attachmentManager.getTotalAttachmentCount(objectType, objectId));
+		list.setFiles(attachmentManager.getAttachments(objectType, objectId));
+		
+		return list;
+	}
+	
+	public static class FileList {
+		
+		private List<Attachment> files ;
+		private int totalCount ;
+
+		/**
+		 * @return files
+		 */
+		public List<Attachment> getFiles() {
+			return files;
+		}
+		/**
+		 * @param files 설정할 files
+		 */
+		public void setFiles(List<Attachment> files) {
+			this.files = files;
+		}
+		/**
+		 * @return totalCount
+		 */
+		public int getTotalCount() {
+			return totalCount;
+		}
+		/**
+		 * @param totalCount 설정할 totalCount
+		 */
+		public void setTotalCount(int totalCount) {
+			this.totalCount = totalCount;
+		}	
+		
+	}
 	
 	@RequestMapping(value="/files/get.json}", method={RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
