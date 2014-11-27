@@ -15,28 +15,23 @@
  */
 package architecture.ee.web.spring.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.net.URL;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +51,6 @@ import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageLink;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.attachment.impl.ImageImpl;
-import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 
@@ -189,51 +183,56 @@ public class WebDataController {
 		return imageManager.getImage(imageId);
 	}
 
+	@PreAuthorize("hasAuthority('ROLE_USER')")
 	@RequestMapping(value="/images/update_with_media.json", method=RequestMethod.POST)
 	@ResponseBody
-	public Image  updateImageWithMedia(
+	public List<Image>  uploadImageWithMedia(
 			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
 			@RequestParam(value="imageId", defaultValue="0", required=false ) Long imageId, 
-			MultipartHttpServletRequest request) throws NotFoundException, IOException {		
-		
+			MultipartHttpServletRequest request) throws NotFoundException, IOException {				
 		User user = SecurityHelper.getUser();
-		Iterator<String> fileName =  request.getFileNames();
-		MultipartFile mpf = null;
-		while(fileName.hasNext()){			
-			mpf = request.getFile(fileName.next()); 
-			break;
-		}
-		
-		Image image;
-		if( imageId > 0 ){
-			image = imageManager.getImage(imageId);
-			image.setName(mpf.getOriginalFilename());
-			((ImageImpl)image).setSize( (int)mpf.getSize());
-			((ImageImpl)image).setInputStream(mpf.getInputStream());
-		}else{
-			image = imageManager.createImage(objectType, user.getUserId(), mpf.getOriginalFilename(), mpf.getContentType(), mpf.getInputStream());
-		}
-		log.debug(hasPermissions(image, user));
-		return imageManager.saveImage(image);
+		Iterator<String> names = request.getFileNames(); 
+		List<Image> list = new ArrayList<Image>();		
+		while(names.hasNext()){
+			String fileName = names.next();	
+			log.debug(fileName);
+			MultipartFile mpf = request.getFile(fileName);
+			InputStream is = mpf.getInputStream();
+			log.debug("imageId: " + imageId);
+			log.debug("file name: " + mpf.getOriginalFilename());
+			log.debug("file size: " + mpf.getSize());
+			log.debug("file type: " + mpf.getContentType());
+			log.debug("file class: " + is.getClass().getName());
+			
+			Image image;
+			if( imageId > 0 ){
+				image = imageManager.getImage(imageId);
+				image.setName(mpf.getOriginalFilename());				
+				((ImageImpl)image).setInputStream(is);
+				((ImageImpl)image).setSize((int)mpf.getSize());
+			}else{				
+				image = imageManager.createImage(objectType, user.getUserId(), mpf.getOriginalFilename(), mpf.getContentType(), is, (int)mpf.getSize());				
+			}
+			log.debug(hasPermissions(image, user));
+			imageManager.saveImage(image);
+			list.add(image);
+		}		
+		return list;	
 	}
 
 	@RequestMapping(value="/images/insert.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Image  updateImage(@RequestBody ImageImpl newImage, NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();
-		//return imageManager.getImage(imageId);
-		
+		//return imageManager.getImage(imageId);		
 		return null;
 	}
 
 	@RequestMapping(value="/images/upload.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Image  uploadImage(@RequestBody ImageImpl newImage, NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();
-		
-		
-		//return imageManager.getImage(imageId);
-		
+		User user = SecurityHelper.getUser();		
+		//return imageManager.getImage(imageId);		
 		return null;
 	}
 	
