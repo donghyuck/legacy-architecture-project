@@ -19,7 +19,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 import architecture.common.cache.CacheSizes;
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.ee.web.logo.LogoImage;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class DefaultLogoImage implements LogoImage {
 
@@ -188,6 +194,7 @@ public class DefaultLogoImage implements LogoImage {
 	/**
 	 * @return creationDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -195,6 +202,7 @@ public class DefaultLogoImage implements LogoImage {
 	/**
 	 * @param creationDate 설정할 creationDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
@@ -202,6 +210,7 @@ public class DefaultLogoImage implements LogoImage {
 	/**
 	 * @return modifiedDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
@@ -209,6 +218,7 @@ public class DefaultLogoImage implements LogoImage {
 	/**
 	 * @param modifiedDate 설정할 modifiedDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
@@ -234,6 +244,7 @@ public class DefaultLogoImage implements LogoImage {
 		return logoId;
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() + 
 				CacheSizes.sizeOfInt() + 
@@ -246,7 +257,6 @@ public class DefaultLogoImage implements LogoImage {
 				CacheSizes.sizeOfInt() +
 				CacheSizes.sizeOfDate() + CacheSizes.sizeOfDate() ;
 	}
-
 
 	@Override
 	public String toString() {
@@ -278,7 +288,4 @@ public class DefaultLogoImage implements LogoImage {
 		builder.append("]");
 		return builder.toString();
 	}
-	
-	
-	
 }

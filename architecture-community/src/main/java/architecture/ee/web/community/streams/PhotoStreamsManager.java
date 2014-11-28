@@ -18,6 +18,7 @@ package architecture.ee.web.community.streams;
 import java.util.List;
 
 import architecture.common.user.User;
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 
 public interface PhotoStreamsManager {
@@ -29,7 +30,7 @@ public interface PhotoStreamsManager {
 	
 	public List<Photo> getPhotosByImage(Image image);
 	
-	public Photo getPhotoById(String externalId) throws PhotoNotFoundException ;	
+	public Photo getPhotoById(String externalId) throws NotFoundException ;	
 	
 	public int getPhotoCount(int objectType, long objectId);
 	

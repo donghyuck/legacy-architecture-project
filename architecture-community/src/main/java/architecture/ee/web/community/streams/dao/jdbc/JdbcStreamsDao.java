@@ -20,9 +20,12 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.Photo;
@@ -62,9 +65,13 @@ public class JdbcStreamsDao extends ExtendedJdbcDaoSupport implements StreamsDao
 				String.class, new SqlParameterValue (Types.NUMERIC, objectType ), new SqlParameterValue (Types.NUMERIC, objectId ));	
 	}
 
-	public Photo getPhotoStream(String photoId) throws PhotoNotFoundException {
-		Photo photo = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_BY_ID").getSql(), photoMapper, new SqlParameterValue (Types.VARCHAR, photoId ));		
-		return photo;		
+	public Photo getPhotoStream(String photoId) throws NotFoundException {
+		try {
+			Photo photo = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_STREAM_PHOTO_BY_ID").getSql(), photoMapper, new SqlParameterValue (Types.VARCHAR, photoId ));		
+			return photo;
+		} catch (EmptyResultDataAccessException e) {
+			throw new NotFoundException(e);
+		}		
 	}
 
 	public void addPhoto(Photo photo) {

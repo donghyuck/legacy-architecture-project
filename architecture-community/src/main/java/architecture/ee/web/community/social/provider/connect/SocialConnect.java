@@ -20,11 +20,11 @@ import java.util.Date;
 import org.springframework.social.connect.Connection;
 import org.springframework.social.connect.ConnectionData;
 
-import architecture.common.model.PropertyAwareModelObject;
+import architecture.common.model.PropertyAware;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public interface SocialConnect extends PropertyAwareModelObject {
+public interface SocialConnect extends PropertyAware {
 	
 	public enum Media {
 		TWITTER, 

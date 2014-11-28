@@ -25,10 +25,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.model.json.UserDeserializer;
 import architecture.common.model.support.NoNamedEntityModelObjectSupport;
 import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.community.announce.Announce;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements Announce {
 
@@ -227,6 +234,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	/**
 	 * @return startDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -234,6 +242,8 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	/**
 	 * @param startDate 설정할 startDate
 	 */
+	
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setStartDate(Date startDate) {
 		if( startDate == null )
 			throw new NullPointerException("Start data cannot be null.");
@@ -253,6 +263,8 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	/**
 	 * @return endDate
 	 */
+	
+	@JsonSerialize(using = CustomJsonDateSerializer.class)	
 	public Date getEndDate() {
 		return endDate;
 	}
@@ -260,6 +272,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	/**
 	 * @param endDate 설정할 endDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setEndDate(Date endDate) {
 		
 		if( this.endDate != null && endDate != null && this.endDate.getTime() == endDate.getTime())
@@ -283,6 +296,8 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	/**
 	 * @param user 설정할 user
 	 */
+	
+	@JsonDeserialize(using = UserDeserializer.class)
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -295,14 +310,17 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 		return attachments.size(); 
 	}
 	
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return announceId;
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("ANNOUNCE");
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return 0;
 	}
@@ -310,6 +328,7 @@ public class DefaultAnnounce extends NoNamedEntityModelObjectSupport implements 
 	/* (비Javadoc)
 	 * @see java.lang.Object#toString()
 	 */
+	@JsonIgnore
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

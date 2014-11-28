@@ -84,12 +84,12 @@ public class TumblrController {
 
 	@RequestMapping(value="/dashboard.json", method=RequestMethod.POST)
 	@ResponseBody
-	public Posts dashboard(@RequestParam(value="sinceId", defaultValue="0", required=false ) Long sinceId) throws Exception {
+	public Posts dashboard(@RequestParam(value="offset", defaultValue="0", required=false ) Long offset) throws Exception {
 		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.TUMBLR );		
 		Tumblr api = (Tumblr) account.getConnection().getApi();			
-		if( sinceId > 0){
+		if( offset > 0){
 			PostsQuery query = new PostsQuery();
-			query.setSinceId(sinceId);
+			query.setSinceId(offset);
 			return api.userOperations().dashboard(query);
 		}
 		return api.userOperations().dashboard();
