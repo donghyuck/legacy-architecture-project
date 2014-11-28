@@ -17,6 +17,7 @@ package architecture.ee.web.community.streams.dao;
 
 import java.util.List;
 
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoNotFoundException;
@@ -37,7 +38,7 @@ public interface StreamsDao {
 	
 	public List<String> getPhotoIds (int objectType, long objectId, int startIndex, int maxResults ) ;
 	
-	public Photo getPhotoStream(String photoId ) throws PhotoNotFoundException ;
+	public Photo getPhotoStream(String photoId ) throws NotFoundException ;
 	
 	public void addPhoto(Photo photo) ;
 	

@@ -37,9 +37,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.util.StringUtils;
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.util.ApplicationHelper;
+import architecture.ee.web.attachment.Image;
+import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.profile.ProfileImage;
 import architecture.ee.web.community.profile.ProfileManager;
+import architecture.ee.web.community.streams.Photo;
+import architecture.ee.web.community.streams.PhotoNotFoundException;
+import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.logo.LogoImage;
 import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.site.WebSite;
@@ -50,6 +56,14 @@ import architecture.ee.web.site.WebSiteManager;
 public class DownloadController {
 
 	private static final Log log = LogFactory.getLog(DownloadController.class);
+	
+	@Inject
+	@Qualifier("imageManager")
+	private ImageManager imageManager ;
+
+	@Inject
+	@Qualifier("photoStreamsManager")
+	private PhotoStreamsManager photoStreamsManager ;
 	
 	@Inject
 	@Qualifier("profileManager")
@@ -71,7 +85,10 @@ public class DownloadController {
 	
 			
 	@Autowired private ServletContext servletContext;
-		
+	
+	
+	
+	
 	/**
 	 * @return companyManager
 	 */
@@ -126,6 +143,26 @@ public class DownloadController {
 	 */
 	public void setProfileManager(ProfileManager profileManager) {
 		this.profileManager = profileManager;
+	}
+
+	@RequestMapping(value = "/streams/photo/{linkId}", method = RequestMethod.GET)
+	@ResponseBody
+	public void handleStreamPhoto(@PathVariable("linkId") String linkId, HttpServletResponse response) throws IOException {
+		
+		try {
+			Photo photo = photoStreamsManager.getPhotoById(linkId);
+			Image image =imageManager.getImage(photo.getImageId());			
+			InputStream input = imageManager.getImageInputStream(image);
+			String contentType  = image.getContentType();
+			int contentLength = image.getSize();
+			
+			response.setContentType(contentType);
+			response.setContentLength(contentLength);	
+			IOUtils.copy(input, response.getOutputStream());					
+			response.flushBuffer();
+		} catch (NotFoundException e) {
+			response.sendError(404);
+		}				
 	}
 	
 	@RequestMapping(value = "/logo/{type}/{name}", method = RequestMethod.GET)

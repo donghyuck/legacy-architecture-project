@@ -15,30 +15,43 @@
  */
 package architecture.ee.web.community.spring.config;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+
+import architecture.ee.util.ApplicationHelper;
 
 @EnableWebMvc
 @ComponentScan(basePackages = {"architecture.ee.web.spring.controller", "architecture.ee.web.community.spring.controller"})
 @Configuration
-public class Config extends WebMvcConfigurerAdapter  {
-
-	public Config() {
+public class CommunityConfig extends WebMvcConfigurerAdapter  {
+	
+	private Log log = LogFactory.getLog(getClass());
+	
+	public CommunityConfig() {
 	}
 
 	@Override
-	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-
-	}
-
-	@Override
-	public void configureDefaultServletHandling(
-			DefaultServletHandlerConfigurer configurer) {
+	public void configureDefaultServletHandling( DefaultServletHandlerConfigurer configurer) {
 		configurer.enable();
 	}
 
+	@Bean
+	  public MultipartResolver multipartResolver() {
+		
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		// default size 10 mb;
+		log.debug("multipart resolver register ...");
+		long maxUploadSize = ApplicationHelper.getApplicationLongProperty("components.multipart.maxUploadSize",  52428800 );
+		resolver.setMaxUploadSize(maxUploadSize);
+		return resolver;
+	  }
+	
 }

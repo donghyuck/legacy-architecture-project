@@ -31,6 +31,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.authentication.AnonymousUser;
+import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.dao.StreamsDao;
 import architecture.ee.web.community.streams.impl.PhotoImpl;
@@ -48,7 +49,7 @@ public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 		photoStreamCache.remove(photo.getExternalId());
 	}
 
-	public Photo getPhotoById(String externalId) throws PhotoNotFoundException {
+	public Photo getPhotoById(String externalId) throws NotFoundException {
 		Photo photoToUse = getPhotoFromCache(externalId);
 		if( photoToUse == null ){
 			photoToUse = getStreamsDao().getPhotoStream(externalId);
@@ -165,7 +166,7 @@ public class DefaultPhotoStreamsManager implements PhotoStreamsManager {
 			try {
 				p = getPhotoById(id);
 				photos.add(p);
-			} catch (PhotoNotFoundException e) {
+			} catch (NotFoundException e) {
 			}			
 		}
 		return photos;

@@ -19,7 +19,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 import architecture.common.cache.CacheSizes;
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.user.User;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class DefaultProfileImage implements ProfileImage {
 
@@ -164,6 +169,7 @@ public class DefaultProfileImage implements ProfileImage {
 	/**
 	 * @return creationDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -171,6 +177,7 @@ public class DefaultProfileImage implements ProfileImage {
 	/**
 	 * @param creationDate 설정할 creationDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
@@ -178,6 +185,7 @@ public class DefaultProfileImage implements ProfileImage {
 	/**
 	 * @return modifiedDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
@@ -185,6 +193,7 @@ public class DefaultProfileImage implements ProfileImage {
 	/**
 	 * @param modifiedDate 설정할 modifiedDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}

@@ -15,11 +15,10 @@
  */
 package architecture.ee.web.community.profile;
 
-import java.util.Date;
-
 import architecture.common.cache.Cacheable;
+import architecture.common.model.DateAware;
 
-public interface ProfileImage extends Cacheable {
+public interface ProfileImage extends Cacheable, DateAware {
 	
 	public static final String DEFAULT_THUMBNAIL_CONTENT_TYPE ="image/png" ;
 	
@@ -46,23 +45,6 @@ public interface ProfileImage extends Cacheable {
 	public void setThumbnailContentType(String thumbnailContentType);
 	
 	public void setThumbnailSize(Integer thumbnailSize);
-	
-	public Date getCreationDate();
-
-	/**
-	 * @param creationDate 설정할 creationDate
-	 */
-	public void setCreationDate(Date creationDate);
-
-	/**
-	 * @return modifiedDate
-	 */
-	public Date getModifiedDate();
-
-	/**
-	 * @param modifiedDate 설정할 modifiedDate
-	 */
-	public void setModifiedDate(Date modifiedDate);
 	
 	public String getFilename();
 

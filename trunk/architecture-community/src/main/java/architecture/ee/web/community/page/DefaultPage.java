@@ -20,9 +20,14 @@ import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class DefaultPage implements Page {
 
@@ -194,6 +199,7 @@ public class DefaultPage implements Page {
 	/**
 	 * @return creationDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -201,6 +207,7 @@ public class DefaultPage implements Page {
 	/**
 	 * @param creationDate 설정할 creationDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
@@ -208,6 +215,7 @@ public class DefaultPage implements Page {
 	/**
 	 * @return modifiedDate
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}
@@ -215,6 +223,7 @@ public class DefaultPage implements Page {
 	/**
 	 * @param modifiedDate 설정할 modifiedDate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setModifiedDate(Date modifiedDate) {
 		this.modifiedDate = modifiedDate;
 	}
