@@ -70,7 +70,6 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
-
 import architecture.ee.web.community.social.provider.ServiceProviderHelper;
 import architecture.ee.web.community.social.provider.connect.ConnectNotFoundException;
 import architecture.ee.web.community.social.provider.connect.ConnectionFactoryLocator;

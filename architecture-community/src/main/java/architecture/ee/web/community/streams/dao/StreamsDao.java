@@ -20,7 +20,6 @@ import java.util.List;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.Photo;
-import architecture.ee.web.community.streams.PhotoNotFoundException;
 
 public interface StreamsDao {
 	

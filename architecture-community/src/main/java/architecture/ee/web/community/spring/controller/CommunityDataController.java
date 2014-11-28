@@ -48,7 +48,6 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
-import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;

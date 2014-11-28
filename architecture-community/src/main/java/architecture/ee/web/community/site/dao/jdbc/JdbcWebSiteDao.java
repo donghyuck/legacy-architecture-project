@@ -36,8 +36,6 @@ import architecture.ee.web.site.WebSiteDomainMapper;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.site.dao.WebSiteDao;
 
-import com.thoughtworks.xstream.mapper.Mapper;
-
 public class JdbcWebSiteDao extends ExtendedJdbcDaoSupport implements WebSiteDao  {
 
 	private ExtendedPropertyDao extendedPropertyDao;	

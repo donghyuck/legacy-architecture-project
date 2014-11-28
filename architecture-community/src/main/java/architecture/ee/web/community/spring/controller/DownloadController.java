@@ -44,7 +44,6 @@ import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.profile.ProfileImage;
 import architecture.ee.web.community.profile.ProfileManager;
 import architecture.ee.web.community.streams.Photo;
-import architecture.ee.web.community.streams.PhotoNotFoundException;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.logo.LogoImage;
 import architecture.ee.web.logo.LogoManager;
