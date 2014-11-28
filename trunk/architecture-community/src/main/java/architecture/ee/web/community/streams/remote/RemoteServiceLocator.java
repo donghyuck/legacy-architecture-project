@@ -15,9 +15,8 @@
  */
 package architecture.ee.web.community.streams.remote;
 
-import architecture.common.util.StringUtils;
-
 import architecture.common.exception.ComponentDisabledException;
+import architecture.common.util.StringUtils;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 

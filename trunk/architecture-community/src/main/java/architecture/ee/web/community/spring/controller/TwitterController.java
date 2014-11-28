@@ -36,8 +36,8 @@ import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.ee.web.community.social.provider.connect.ConnectNotFoundException;
 import architecture.ee.web.community.social.provider.connect.SocialConnect;
-import architecture.ee.web.community.social.provider.connect.SocialConnectManager;
 import architecture.ee.web.community.social.provider.connect.SocialConnect.Media;
+import architecture.ee.web.community.social.provider.connect.SocialConnectManager;
 
 @Controller 
 @RequestMapping("/connect/twitter")

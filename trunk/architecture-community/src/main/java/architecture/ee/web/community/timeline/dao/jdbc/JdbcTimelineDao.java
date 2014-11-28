@@ -26,8 +26,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
-import architecture.ee.web.community.announce.Announce;
-import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.timeline.DefaultMedia;
 import architecture.ee.web.community.timeline.DefaultTimeline;
 import architecture.ee.web.community.timeline.Timeline;

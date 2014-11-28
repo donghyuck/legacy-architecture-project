@@ -20,7 +20,6 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
@@ -29,7 +28,6 @@ import architecture.ee.exception.NotFoundException;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.community.streams.Photo;
-import architecture.ee.web.community.streams.PhotoNotFoundException;
 import architecture.ee.web.community.streams.dao.StreamsDao;
 import architecture.ee.web.community.streams.impl.PhotoImpl;
 

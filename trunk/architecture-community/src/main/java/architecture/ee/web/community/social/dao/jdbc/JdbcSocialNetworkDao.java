@@ -21,10 +21,10 @@ import java.sql.Types;
 import java.util.List;
 import java.util.Map;
 
-import architecture.common.util.StringUtils;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.SqlParameterValue;
 
+import architecture.common.util.StringUtils;
 import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.community.social.ServiceProviderFactory;
