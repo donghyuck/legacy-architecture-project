@@ -240,12 +240,6 @@ public class SocialConnectController implements InitializingBean  {
 					}else{
 						account =socialConnectManager.createSocialConnect(user, ServiceProviderHelper.toMedia(providerId));
 					}	
-					//try {
-					//	User foundUser = findUser(2, account.getProviderId(), account.getProviderUserId());
-					//	model.addAttribute("foundUser", foundUser );
-					//} catch (UserNotFoundException e) {
-					//}
-
 				}
 			}
 		}
