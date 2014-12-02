@@ -48,8 +48,8 @@
 		<header class="cloud">
 			<div class="container">
 				<div class="col-lg-12">	
-					<h2>${action.targetPage.title}</h2>
-					<h4><i class="fa fa-quote-left"></i>&nbsp;${action.targetPage.summary!} <i class="fa fa-quote-right"></i>&nbsp;</h4>
+					<h2>${action.builder.page.title}</h2>
+					<h4><i class="fa fa-quote-left"></i>&nbsp;${action.builder.page.summary!} <i class="fa fa-quote-right"></i>&nbsp;</h4>
 				</div>
 			</div>
 		</header>	
@@ -59,7 +59,7 @@
 			<div class="row">
 				<div class="col-sm-12">
 					<div class="page-header">
-						<h2>${action.targetPage.title}</h2>
+						<h2>${action.builder.page.title}</h2>
 					</div>				
 				</div>
 			</div>
