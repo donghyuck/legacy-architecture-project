@@ -1,4 +1,4 @@
-<#ftl encoding="UTF-8"/>
+
 <html decorator="homepage">
 	<head>
 		<title> ${action.targetPage.title}</title>
