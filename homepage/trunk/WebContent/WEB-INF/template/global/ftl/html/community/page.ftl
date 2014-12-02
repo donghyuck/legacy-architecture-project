@@ -1,7 +1,7 @@
 
 <html decorator="homepage">
 	<head>
-		<title> ${action.targetPage.title}</title>
+		<title> ${action.builder.page.title}</title>
 		<#compress>	
 		<script type="text/javascript">
 		<!--
