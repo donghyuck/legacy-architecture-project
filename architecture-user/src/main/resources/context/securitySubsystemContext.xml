@@ -42,7 +42,8 @@
 		<security:intercept-url pattern="/remoting/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  
 		<security:intercept-url pattern="/download/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
 		<security:intercept-url pattern="/connect/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
-		
+		<security:intercept-url pattern="/display/**"			access="IS_AUTHENTICATED_ANONYMOUSLY" />  		
+		<security:intercept-url pattern="/data/**"					access="IS_AUTHENTICATED_ANONYMOUSLY" />
 		<security:intercept-url pattern="/community/**"		access="IS_AUTHENTICATED_ANONYMOUSLY" />         
 		<security:intercept-url pattern="/page.do*"				access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
 		<security:intercept-url pattern="/about.do*"				access="IS_AUTHENTICATED_ANONYMOUSLY"/>    
@@ -51,6 +52,7 @@
 		<security:intercept-url pattern="/contact.do*"			access="IS_AUTHENTICATED_ANONYMOUSLY"/>  
 		<security:intercept-url pattern="/customers.do*"		access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 		<security:intercept-url pattern="/welcome.do*"			access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+		
 		<security:intercept-url pattern="/secure/**"				access="ROLE_SYSTEM, ROLE_ADMIN" />
 		<security:intercept-url pattern="/**"						access="ROLE_USER" />
 
