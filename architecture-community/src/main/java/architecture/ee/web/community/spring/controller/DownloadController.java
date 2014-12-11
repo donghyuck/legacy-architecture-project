@@ -208,17 +208,17 @@ public class DownloadController {
 		}		
 	}
 	
-	@RequestMapping(value = "/profile/{userName}", method = RequestMethod.GET)
+	@RequestMapping(value = "/profile/{username}", method = RequestMethod.GET)
 	@ResponseBody
-	public void handleProfile(@PathVariable("userName") String userName, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
+	public void handleProfile(@PathVariable("username") String username, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
 		
 		log.debug(" ------------------------------------------");
-		log.debug("userName:" + userName);
+		log.debug("userName:" + username);
 		log.debug("width:"+ width);
 		log.debug("height:" + height);
 		log.debug("------------------------------------------");					
 		try {			
-			ProfileImage image = profileManager.getProfileImageByUsername(userName);			
+			ProfileImage image = profileManager.getProfileImageByUsername(username);			
 			log.debug( "using profile image : " + image.getFilename()  );			
 			InputStream input ;
 			String contentType ;

@@ -72,23 +72,12 @@ public class PageController {
 	}
 
 	
-	@RequestMapping(value = "/display/{name}", method=RequestMethod.GET, params={"source"})
-	public String template(@PathVariable String name, @RequestParam(value="source") String view, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
-		User user = SecurityHelper.getUser();		
-		
-		String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		response.setContentType("text/html;charset=UTF-8");
-		log.debug("name:" + name);
-		log.debug("path:" + view 	);
-		
-		return view;
-	}
-	
 
-	@RequestMapping(value="/{name}", method=RequestMethod.GET)
-	public String page(@PathVariable String name, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
+
+	@RequestMapping(value="/{filename}", method=RequestMethod.GET)
+	public String page(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
 		User user = SecurityHelper.getUser();		
-		Page page = pageManager.getPage(name);		
+		Page page = pageManager.getPage(filename);		
 		
 		page.getObjectId();
 		page.getObjectType();
@@ -99,7 +88,22 @@ public class PageController {
 		response.setContentType("text/html;charset=UTF-8");
 		return DEFAULT_PAGE_TEMPLATE;
 	}
-
+	
+	@RequestMapping(value = "/{filename:.+}", method=RequestMethod.GET, params={"source"})
+	public String template(@PathVariable String filename, @RequestParam(value="source") String view, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
+		
+		User user = SecurityHelper.getUser();		
+		WebSite website = getCurrentWebSite(request);
+		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).user(user).build());
+		
+		String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		response.setContentType("text/html;charset=UTF-8");
+		log.debug("name:" + filename);
+		log.debug("path:" + view 	);
+		
+		return view;
+	}
+	
 	
 	private boolean hasPermissions(Page image, User user){		
 		
@@ -164,6 +168,10 @@ public class PageController {
 			}else{
 				throw new MenuNotFoundException();
 			}
+		}
+		
+		public boolean isSetPage(){
+			return this.builder != null;
 		}
 		
 		public boolean isSetNavigator (){
