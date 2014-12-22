@@ -32,6 +32,7 @@ public class DefaultRole extends BaseModelObjectSupport  implements Role  {
 	
 	private String description;
 	
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return getRoleId();
 	}
