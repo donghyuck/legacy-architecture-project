@@ -8,6 +8,7 @@ import java.util.Set;
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.support.BaseModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.Group;
@@ -17,6 +18,7 @@ import architecture.common.user.authentication.UnAuthorizedException;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 public class DefaultGroup extends BaseModelObjectSupport implements Group {
@@ -160,7 +162,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	/**
 	 * @return
 	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -177,7 +179,7 @@ public class DefaultGroup extends BaseModelObjectSupport implements Group {
 	/**
 	 * @return
 	 */
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 
 		return modifiedDate;
