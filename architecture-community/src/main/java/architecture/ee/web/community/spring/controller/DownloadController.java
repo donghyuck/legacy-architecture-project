@@ -50,7 +50,7 @@ import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 
-@Controller ("communityDownloadController")
+@Controller ("community-download-controller")
 @RequestMapping("/download")
 public class DownloadController {
 

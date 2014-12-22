@@ -50,11 +50,11 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.util.WebSiteUtils;
 
-@Controller ("communityPageController")
-@RequestMapping("/pages")
-public class PageController {
+@Controller ("community-display-controller")
+@RequestMapping("/display")
+public class DisplayController {
 	
-	private static final Log log = LogFactory.getLog(PageController.class);
+	private static final Log log = LogFactory.getLog(DisplayController.class);
 	
 	private static final String DEFAULT_PAGE_TEMPLATE = "/html/community/page";		
 	
@@ -68,10 +68,8 @@ public class PageController {
 	
 	@Autowired private ServletContext servletContext;
 	
-	public PageController() {
+	public DisplayController() {
 	}
-
-	
 
 
 	@RequestMapping(value="/{filename}", method=RequestMethod.GET)
@@ -89,7 +87,7 @@ public class PageController {
 		return DEFAULT_PAGE_TEMPLATE;
 	}
 	
-	@RequestMapping(value = "/{filename:.+}", method=RequestMethod.GET, params={"source"})
+	@RequestMapping(value = "/{filename}", method=RequestMethod.GET, params={"source"})
 	public String template(@PathVariable String filename, @RequestParam(value="source") String view, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
 		
 		User user = SecurityHelper.getUser();		

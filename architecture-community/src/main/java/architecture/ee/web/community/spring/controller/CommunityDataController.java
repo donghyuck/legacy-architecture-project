@@ -59,7 +59,7 @@ import architecture.ee.web.util.WebSiteUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@Controller ("communityDataController")
+@Controller ("community-data-controller")
 @RequestMapping("/data")
 public class CommunityDataController {
 	private static final Log log = LogFactory.getLog(CommunityDataController.class);
@@ -234,8 +234,18 @@ public class CommunityDataController {
 	@RequestMapping(value="/images/upload_by_url.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Image  uploadImageByUrl(@RequestBody UrlImageUploader uploader, NativeWebRequest request ) throws NotFoundException, IOException {		
-		User user = SecurityHelper.getUser();		
-		Image imageToUse = imageManager.createImage(2, user.getUserId(),  uploader.getFileName(),  uploader.getContentType(),  uploader.readFileFromUrl());
+		
+		User user = SecurityHelper.getUser();
+		int objectType = uploader.getObjectType();
+		long objectId = user.getUserId();		
+		if( objectType == 1 ){
+			objectId = user.getCompanyId();			
+		}else if ( objectType == 30){
+			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+		}	
+		
+		
+		Image imageToUse = imageManager.createImage(objectType, objectId,  uploader.getFileName(),  uploader.getContentType(),  uploader.readFileFromUrl());
 		imageToUse.getProperties().put("source", uploader.getSourceUrl().toString());
 		imageToUse.getProperties().put("url", uploader.getSourceUrl().toString());		
 		log.debug(imageToUse);
@@ -244,7 +254,10 @@ public class CommunityDataController {
 	
 	public static class UrlImageUploader {
 		
+		 private int objectType = 2;
+		 
 		 private URL sourceUrl ;		 
+		 
 		 private URL imageUrl ;
 		 
 		 @JsonIgnore
@@ -252,8 +265,24 @@ public class CommunityDataController {
 		/**
 		 * @return sourceUrl
 		 */
+		 
+		 
 		public URL getSourceUrl() {
 			return sourceUrl;
+		}
+
+		/**
+		 * @return objectType
+		 */
+		public int getObjectType() {
+			return objectType;
+		}
+
+		/**
+		 * @param objectType 설정할 objectType
+		 */
+		public void setObjectType(int objectType) {
+			this.objectType = objectType;
 		}
 
 		/**

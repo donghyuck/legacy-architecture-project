@@ -11,5 +11,5 @@
 	<model id="31" code="PAGE" />
 	<model id="32" code="PAGE_BODY" />
 	<model id="33" code="LOGO_IMAGE" />
-		
+	<model id="37" code="SOCIAL_CONNECT" />	
 </models>
