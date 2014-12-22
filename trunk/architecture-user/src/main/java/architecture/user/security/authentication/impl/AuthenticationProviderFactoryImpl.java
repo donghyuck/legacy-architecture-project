@@ -15,11 +15,14 @@
  */
 package architecture.user.security.authentication.impl;
 
+import java.util.Collection;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -117,6 +120,29 @@ public class AuthenticationProviderFactoryImpl implements AuthenticationProvider
 			HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
 			return request.getLocalName();
 		}
-		
+
+		private boolean isGranted(String role) {
+
+			Authentication auth = getAuthentication();
+			if ((auth == null) || (auth.getPrincipal() == null)) {
+				return false;
+			}
+			Collection<? extends GrantedAuthority> authorities = auth
+					.getAuthorities();
+			if (authorities == null) {
+				return false;
+			}
+			for (GrantedAuthority grantedAuthority : authorities) {
+				if (role.equals(grantedAuthority.getAuthority())) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public boolean isUserInRole(String role) {
+			return isGranted(role);
+		}
+
 	}
 }
