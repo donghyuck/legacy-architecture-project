@@ -47,6 +47,10 @@ public class SecurityHelperImpl implements Implementation {
 		return new AnonymousUser();
 	}
 	
+	
+	public boolean isUserInRole(String role){
+		return AuthenticationProviderFactory.getSecurityContextAuthenticationProvider().isUserInRole(role);
+	}
 
 	public void checkUserStatus(String username, Status status) {
 		
