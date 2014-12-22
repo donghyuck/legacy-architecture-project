@@ -17,8 +17,12 @@
         Define  Security 
 	]]>
 	</description>
-
-	<security:global-method-security secured-annotations="enabled" />
+	<security:global-method-security 
+		secured-annotations="enabled" 
+		jsr250-annotations="enabled"
+		pre-post-annotations="enabled"
+		proxy-target-class="true"
+	/>
 	
 	<security:http pattern="/favicon.ico"				security="none" />
 	<security:http pattern="/decorators/**"			security="none" /> 
