@@ -60,18 +60,18 @@
 		<security:intercept-url pattern="/secure/**"				access="ROLE_SYSTEM, ROLE_ADMIN" />
 		<security:intercept-url pattern="/**"						access="ROLE_USER" />
 
-        <security:request-cache ref="authenticationRequestCache" />        
-    	<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
-    	<security:form-login 
-    	    login-page="/accounts/login.do?ver=1" 
-    	    login-processing-url="/login" 
-    	    username-parameter="username" 
-    	    password-parameter="password" 
-    	    authentication-failure-handler-ref="authenticationFailureHandler" 
-    	    authentication-success-handler-ref="authenticationSuccessHandler" />
-    	<security:access-denied-handler error-page="/includes/jsp/unauthorized.jsp" />   
-    	<security:anonymous enabled="true" username="ANONYMOUS" />
-    	<security:session-management session-fixation-protection="newSession" />
+		<security:request-cache ref="authenticationRequestCache" />        
+		<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
+		<security:form-login 
+			login-page="/accounts/login.do?ver=1" 
+			login-processing-url="/login_auth" 
+			username-parameter="username" 
+			password-parameter="password" 
+			authentication-failure-handler-ref="authenticationFailureHandler" 
+			authentication-success-handler-ref="authenticationSuccessHandler" />
+		<security:access-denied-handler error-page="/includes/jsp/unauthorized.jsp" />   
+		<security:anonymous enabled="true" username="ANONYMOUS" />
+		<security:session-management session-fixation-protection="newSession" />
 	</security:http>
 
 	<security:authentication-manager>
@@ -86,9 +86,9 @@
 	
 	<bean id="nonAjaxRequestMatcher" class="architecture.ee.web.security.spring.util.NonAjaxRequestMatcher" />
 	
-    <bean id="authenticationRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache">
-	    <property name="requestMatcher" ref="nonAjaxRequestMatcher" />
-    </bean>
+	<bean id="authenticationRequestCache" class="org.springframework.security.web.savedrequest.HttpSessionRequestCache">
+		<property name="requestMatcher" ref="nonAjaxRequestMatcher" />
+	</bean>
 	
 	<bean id="authenticationEntryPoint" class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
 		<constructor-arg>
@@ -99,12 +99,9 @@
 		<property name="defaultEntryPoint" ref="ajaxAuthenticationEntryPoint" />
 	</bean>
 	
-	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" p:defaultTargetUrl="/main.do" />
-	
-	<bean id="authenticationFailureHandler"  class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" p:defaultFailureUrl="/includes/jsp/error.jsp" p:useForward="true" />
-	
+	<bean id="authenticationSuccessHandler" class="architecture.ee.web.security.spring.authentication.ExtendedAuthenticationSuccessHandler" p:defaultTargetUrl="/main.do" />	
+	<bean id="authenticationFailureHandler"  class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" p:defaultFailureUrl="/includes/jsp/error.jsp" p:useForward="true" />	
 	<bean id="daoAuthenticationProvider" class="architecture.user.security.spring.authentication.ExtendedAuthenticationProvider"  p:saltSource-ref="passwordSaltSource"  p:passwordEncoder-ref="passwordEncoder" p:userDetailsService-ref="userDetailsService" p:userManager-ref="userManager"/>
-
 	<bean id="userDetailsService" class="architecture.user.security.spring.userdetails.ExtendedUserDetailsService" p:userManager-ref="userManager" p:roleManager-ref="roleManager" />
   
 </beans>
