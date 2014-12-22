@@ -23,8 +23,12 @@ import org.springframework.security.core.userdetails.User;
 
 import architecture.common.user.authentication.AuthToken;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@SuppressWarnings("serial")
 public class ExtendedUserDetails extends User implements AuthToken {
 
+	@JsonIgnore
 	private final architecture.common.user.User user ;
 
 	public ExtendedUserDetails(architecture.common.user.User user) {
@@ -46,9 +50,9 @@ public class ExtendedUserDetails extends User implements AuthToken {
 	/** =========================================== **/
 	
     public architecture.common.user.User getUser()
-    {
-        return user;
-    }
+	{
+    	return user;
+	}
 
     public long getUserId()
     {

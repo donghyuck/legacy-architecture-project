@@ -59,11 +59,8 @@ public class ExtendedAuthenticationProvider extends DaoAuthenticationProvider {
 		} catch (Exception e) {
 			log.error("Unable to coerce user detail to ExtendedUserDetails.");
             throw new BadCredentialsException(messages.getMessage("AbstractUserDetailsAuthenticationProvider.badCredentials", "Bad credentials"));        
-		}
-		
-		
-		State state = ApplicationHelper.getState(); 
-		
+		}		
+		State state = ApplicationHelper.getState(); 		
 		log.debug(state);
 		try {
 			if(user.getUser() != null){

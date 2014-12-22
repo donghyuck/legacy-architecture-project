@@ -15,4 +15,6 @@ public interface AuthenticationProvider {
     
     public abstract boolean isSystemAdmin(); 
     
+    public abstract boolean isUserInRole(String role);
+    
 }
