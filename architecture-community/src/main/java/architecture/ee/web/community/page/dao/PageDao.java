@@ -37,8 +37,10 @@ public interface PageDao {
 	
 	public abstract Page getPageByTitle(int objectType, long objectId, String title);	
 	
+	
 	public abstract int getPageCount(int objectType, long objectId);
 	
 	public abstract List<Long> getPageIds(int objectType, long objectId);
 	
+	public abstract List<Long> getPageIds(int objectType, long objectId, int startIndex, int maxResults ) ;
 }
