@@ -33,6 +33,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,8 @@ import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.impl.DefaultAnnounce;
+import architecture.ee.web.community.page.Page;
+import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
@@ -79,6 +82,10 @@ public class CommunityDataController {
 	@Inject
 	@Qualifier("announceManager")
 	private AnnounceManager announceManager ;
+	
+	@Inject
+	@Qualifier("pageManager")
+	private PageManager pageManager;
 	
 	
 	/**
@@ -137,7 +144,66 @@ public class CommunityDataController {
 		this.attachmentManager = attachmentManager;
 	}
 	
-
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN,ROLE_SITE_ADMIN, ROLE_SYSTEM')")
+	@RequestMapping(value="/pages/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public PageList  getPageList(
+			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
+			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
+			NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();		
+		request.getNativeRequest(HttpServletRequest.class);
+				
+		long objectId = user.getUserId();		
+		if( objectType == 1 ){
+			objectId = user.getCompanyId();			
+		}else if ( objectType == 30){
+			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();
+		}	
+		
+		return getPageList(objectType, objectId, startIndex, pageSize);
+	}
+	
+	private PageList getPageList( int objectType, long objectId,  int startIndex, int pageSize){		
+		PageList list = new PageList();		
+		list.setPages( pageManager.getPages(objectType, objectId, startIndex, pageSize) );
+		list.setTotalCount(pageManager.getPageCount(objectType, objectId));
+		return list;
+	}
+	
+	public static class PageList {
+		
+		private List<Page> pages ;
+		private int totalCount ;
+		/**
+		 * @return pages
+		 */
+		public List<Page> getPages() {
+			return pages;
+		}
+		/**
+		 * @param pages 설정할 pages
+		 */
+		public void setPages(List<Page> pages) {
+			this.pages = pages;
+		}
+		/**
+		 * @return totalCount
+		 */
+		public int getTotalCount() {
+			return totalCount;
+		}
+		/**
+		 * @param totalCount 설정할 totalCount
+		 */
+		public void setTotalCount(int totalCount) {
+			this.totalCount = totalCount;
+		}
+		
+		
+	}
+	
 	/**
 	 * get streams photo by imageId
 	 * 
