@@ -40,11 +40,16 @@ import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 import architecture.user.spring.annotation.ActiveUser;
 
 
-@Controller ("security-user-controller")
+@Controller ("security-data-controller")
 @RequestMapping("/data")
 public class UserDataController {
 
 	private static final Log log = LogFactory.getLog(UserDataController.class);
+	
+	//private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
+	
+//	private static final String DEFAULT_LOGIN_TEMPLATE = "/html/accounts/login.ftl";		
+	
 	
 	@Inject
 	@Qualifier("userManager")
@@ -53,6 +58,9 @@ public class UserDataController {
 	
 	public UserDataController() {
 	}
+	
+/*	
+	*/
 	
 	@RequestMapping(value="/accounts/verify_credentials.json", method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
