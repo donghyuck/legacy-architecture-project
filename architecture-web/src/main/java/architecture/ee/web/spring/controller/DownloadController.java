@@ -35,6 +35,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.user.SecurityHelper;
+import architecture.common.user.User;
 import architecture.common.util.StringUtils;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
@@ -42,7 +44,7 @@ import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageManager;
 
-@Controller ("webDownloadController")
+@Controller ("web-download-controller")
 @RequestMapping("/download")
 public class DownloadController {
 
@@ -87,24 +89,39 @@ public class DownloadController {
 	
 	@RequestMapping(value = "/file/{attachmentId}/{filename:.+}", method = RequestMethod.GET)
 	@ResponseBody
-	public void handleFile( @PathVariable("attachmentId") Long attachmentId, @PathVariable("filename") String filename , HttpServletResponse response )throws IOException {
+	public void handleFile( 
+			@PathVariable("attachmentId") Long attachmentId, 
+			@PathVariable("filename") String filename , 
+			@RequestParam(value="thumbnail", defaultValue="false", required=false ) boolean thumbnail, 
+			@RequestParam(value="width", defaultValue="150", required=false ) Integer width, 
+			@RequestParam(value="height", defaultValue="150", required=false ) Integer height, HttpServletResponse response )throws IOException {
+		
 		log.debug(" ------------------------------------------");
 		log.debug("attachment:" + attachmentId);
 		log.debug("filename:"+ filename);
+		log.debug("thumbnail:"+ thumbnail);
 		log.debug("------------------------------------------");
 		try {
 			if( attachmentId > 0 && StringUtils.isNotEmpty(filename)){
-				Attachment attachment = attachmentManager.getAttachment(attachmentId);
-				if( StringUtils.equals(filename, attachment.getName() ) ){
-					InputStream input = attachmentManager.getAttachmentInputStream(attachment);
-					String contentType  = attachment.getContentType();
-					int contentLength = attachment.getSize();
+				Attachment attachment = attachmentManager.getAttachment(attachmentId);			
+				if( StringUtils.equals(filename, attachment.getName() ) ){					
 					
-					response.setContentType(contentType);
-					response.setContentLength(contentLength);			
-					response.setHeader("contentDisposition", "attachment;filename=" + getEncodedFileName(attachment) );
-					IOUtils.copy(input, response.getOutputStream());					
-					response.flushBuffer();					
+					if( thumbnail ){						
+						if( StringUtils.startsWithIgnoreCase(attachment.getContentType(), "image") || StringUtils.endsWithIgnoreCase(attachment.getContentType(), "pdf") ){							
+							InputStream input = attachmentManager.getAttachmentImageThumbnailInputStream(attachment, width, height);
+							response.setContentType(attachment.getThumbnailContentType());
+							response.setContentLength(attachment.getThumbnailSize());			
+							IOUtils.copy(input, response.getOutputStream());							
+							response.flushBuffer();			
+						}
+					} else{
+						InputStream input = attachmentManager.getAttachmentInputStream(attachment);			 						
+						response.setContentType(attachment.getContentType());
+						response.setContentLength(attachment.getSize());			
+						IOUtils.copy(input, response.getOutputStream());		
+						response.setHeader("contentDisposition", "attachment;filename=" + getEncodedFileName(attachment) );
+						response.flushBuffer();
+					}			
 				}else{
 					throw new NotFoundException();
 				}
@@ -124,10 +141,20 @@ public class DownloadController {
 			return attachment.getName();
 		}
 	}
+	
+	private boolean hasPermissions(Image image, User user){		
+		
+		 if (image.getObjectType() == ModelTypeFactory.getTypeIdFromCode("COMPANY") && image.getObjectId() != user.getCompanyId() ){
+			 return false;			
+		}else if (image.getObjectType() == ModelTypeFactory.getTypeIdFromCode("USER") && image.getObjectId() != user.getUserId()){
+			return false;			
+		}
+		return true;
+	}
 
 	@RequestMapping(value = "/image/{imageId}/{filename:.+}", method = RequestMethod.GET)
 	@ResponseBody
-	public void handleWebSiteImage(@PathVariable("imageId") Long imageId, @PathVariable("filename") String filename , @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
+	public void handleImage(@PathVariable("imageId") Long imageId, @PathVariable("filename") String filename , @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
 				
 		log.debug(" ------------------------------------------");
 		log.debug("imageId:" + imageId);
@@ -137,8 +164,8 @@ public class DownloadController {
 		try {
 			if( imageId > 0 && StringUtils.isNotEmpty(filename)){
 				Image image =imageManager.getImage(imageId);
-				int objectType = ModelTypeFactory.getTypeIdFromCode("WEBSITE");				
-				if( StringUtils.equals(filename, image.getName() )  && image.getObjectType() == objectType ){					
+				User user = SecurityHelper.getUser();
+				if(hasPermissions(image, user) && StringUtils.equals(filename, image.getName() ) ){
 					InputStream input ;
 					String contentType ;
 					int contentLength ;			
@@ -154,7 +181,7 @@ public class DownloadController {
 					response.setContentType(contentType);
 					response.setContentLength(contentLength);			
 					IOUtils.copy(input, response.getOutputStream());
-					response.flushBuffer();					
+					response.flushBuffer();							
 				}else{
 					throw new NotFoundException();
 				}				
@@ -168,7 +195,7 @@ public class DownloadController {
 	
 	@RequestMapping(value = "/image/{fileName}", method = RequestMethod.GET)
 	@ResponseBody
-	public void handleImage(@PathVariable("fileName") String fileName, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
+	public void handleImageByLink(@PathVariable("fileName") String fileName, @RequestParam(value="width", defaultValue="0", required=false ) Integer width, @RequestParam(value="height", defaultValue="0", required=false ) Integer height, HttpServletResponse response )throws IOException {
 		
 		
 		log.debug(" ------------------------------------------");

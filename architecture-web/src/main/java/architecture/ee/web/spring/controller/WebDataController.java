@@ -50,11 +50,12 @@ import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.Image;
 import architecture.ee.web.attachment.ImageLink;
 import architecture.ee.web.attachment.ImageManager;
+import architecture.ee.web.attachment.impl.AttachmentImpl;
 import architecture.ee.web.attachment.impl.ImageImpl;
 import architecture.ee.web.util.WebSiteUtils;
 import architecture.ee.web.ws.Property;
 
-@Controller ("webDataController")
+@Controller ("web-data-controller")
 @RequestMapping("/data")
 public class WebDataController {
 
@@ -191,6 +192,14 @@ public class WebDataController {
 			@RequestParam(value="imageId", defaultValue="0", required=false ) Long imageId, 
 			MultipartHttpServletRequest request) throws NotFoundException, IOException {				
 		User user = SecurityHelper.getUser();
+		long objectId = user.getUserId();		
+		if( objectType == 1 ){
+			objectId = user.getCompanyId();			
+		}else if ( objectType == 30){
+			objectId = WebSiteUtils.getWebSite(request).getWebSiteId();
+		}	
+		
+		
 		Iterator<String> names = request.getFileNames(); 
 		List<Image> list = new ArrayList<Image>();		
 		while(names.hasNext()){
@@ -211,7 +220,7 @@ public class WebDataController {
 				((ImageImpl)image).setInputStream(is);
 				((ImageImpl)image).setSize((int)mpf.getSize());
 			}else{				
-				image = imageManager.createImage(objectType, user.getUserId(), mpf.getOriginalFilename(), mpf.getContentType(), is, (int)mpf.getSize());				
+				image = imageManager.createImage(objectType, objectId, mpf.getOriginalFilename(), mpf.getContentType(), is, (int)mpf.getSize());				
 			}
 			log.debug(hasPermissions(image, user));
 			imageManager.saveImage(image);
@@ -310,6 +319,42 @@ public class WebDataController {
 		}
 	}
 	
+	@PreAuthorize("hasAuthority('ROLE_USER')")
+	@RequestMapping(value="/files/upload.json", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Attachment>  uploadFiles(
+			@RequestParam(value="objectType", defaultValue="2", required=false ) Integer objectType,
+			@RequestParam(value="fileId", defaultValue="0", required=false ) Long fileId, 
+			MultipartHttpServletRequest request) throws NotFoundException, IOException {				
+		User user = SecurityHelper.getUser();
+		Iterator<String> names = request.getFileNames(); 
+		List<Attachment> list = new ArrayList<Attachment>();		
+		while(names.hasNext()){
+			String fileName = names.next();	
+			log.debug(fileName);
+			MultipartFile mpf = request.getFile(fileName);
+			InputStream is = mpf.getInputStream();
+			log.debug("fileId: " + fileId);
+			log.debug("file name: " + mpf.getOriginalFilename());
+			log.debug("file size: " + mpf.getSize());
+			log.debug("file type: " + mpf.getContentType());
+			log.debug("file class: " + is.getClass().getName());
+			
+			Attachment attachment;
+			if( fileId > 0 ){
+				attachment = attachmentManager.getAttachment(fileId);
+				attachment.setName(mpf.getOriginalFilename());				
+				((AttachmentImpl)attachment).setInputStream(is);
+				((AttachmentImpl)attachment).setSize((int)mpf.getSize());
+			}else{				
+				attachment = attachmentManager.createAttachment(objectType, user.getUserId(), mpf.getOriginalFilename(), mpf.getContentType(), is, (int)mpf.getSize());				
+			}
+			
+			attachmentManager.saveAttachment(attachment);
+			list.add(attachment);
+		}		
+		return list;	
+	}
 	
 	@RequestMapping(value="/files/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
