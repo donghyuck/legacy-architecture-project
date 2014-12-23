@@ -154,9 +154,14 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>architecture.ee</groupId>
-			<artifactId>architecture-ee</artifactId>
+			<groupId>architecture.web</groupId>
+			<artifactId>architecture-web</artifactId>
 			<version>${project.build.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>		
 	</dependencies>
 </project>
