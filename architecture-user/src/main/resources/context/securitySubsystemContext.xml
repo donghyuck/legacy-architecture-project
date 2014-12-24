@@ -63,7 +63,7 @@
 		<security:request-cache ref="authenticationRequestCache" />        
 		<security:logout invalidate-session="true" logout-url="/logout" logout-success-url="/main.do" />
 		<security:form-login 
-			login-page="/accounts/login.do?ver=1" 
+			login-page="/accounts/login?ver=1" 
 			login-processing-url="/login_auth" 
 			username-parameter="username" 
 			password-parameter="password" 
@@ -72,6 +72,7 @@
 		<security:access-denied-handler error-page="/includes/jsp/unauthorized.jsp" />   
 		<security:anonymous enabled="true" username="ANONYMOUS" />
 		<security:session-management session-fixation-protection="newSession" />
+		
 	</security:http>
 
 	<security:authentication-manager>
