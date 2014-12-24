@@ -144,7 +144,7 @@ public class CommunityDataController {
 		this.attachmentManager = attachmentManager;
 	}
 	
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN,ROLE_SITE_ADMIN, ROLE_SYSTEM')")
+	@Secured({"ROLE_ADMIN", "ROLE_SITE_ADMIN", "ROLE_SYSTEM"})
 	@RequestMapping(value="/pages/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public PageList  getPageList(
