@@ -18,9 +18,11 @@ package architecture.ee.web.community.spring.controller;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.inject.Inject;
@@ -32,7 +34,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -53,12 +54,15 @@ import architecture.ee.web.community.announce.Announce;
 import architecture.ee.web.community.announce.AnnounceManager;
 import architecture.ee.web.community.announce.AnnounceNotFoundException;
 import architecture.ee.web.community.announce.impl.DefaultAnnounce;
+import architecture.ee.web.community.page.DefaultBodyContent;
+import architecture.ee.web.community.page.DefaultPage;
 import architecture.ee.web.community.page.Page;
 import architecture.ee.web.community.page.PageManager;
 import architecture.ee.web.community.streams.Photo;
 import architecture.ee.web.community.streams.PhotoStreamsManager;
 import architecture.ee.web.site.WebSiteNotFoundException;
 import architecture.ee.web.util.WebSiteUtils;
+import architecture.ee.web.ws.Property;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -144,7 +148,8 @@ public class CommunityDataController {
 		this.attachmentManager = attachmentManager;
 	}
 	
-	@Secured({"ROLE_ADMIN", "ROLE_SITE_ADMIN", "ROLE_SYSTEM"})
+
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_SITE_ADMIN' , 'ROLE_USER')")
 	@RequestMapping(value="/pages/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public PageList  getPageList(
@@ -152,9 +157,7 @@ public class CommunityDataController {
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="15", required=false ) Integer pageSize,
 			NativeWebRequest request ) throws NotFoundException {		
-		User user = SecurityHelper.getUser();		
-		request.getNativeRequest(HttpServletRequest.class);
-				
+		User user = SecurityHelper.getUser();						
 		long objectId = user.getUserId();		
 		if( objectType == 1 ){
 			objectId = user.getCompanyId();			
@@ -163,6 +166,115 @@ public class CommunityDataController {
 		}	
 		
 		return getPageList(objectType, objectId, startIndex, pageSize);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	@RequestMapping(value="/pages/update_state.json", method=RequestMethod.POST)
+	@ResponseBody
+	public String updatePageState(
+			@RequestBody DefaultPage page, 
+			NativeWebRequest request) throws NotFoundException{		
+		User user = SecurityHelper.getUser();
+		if(page.getUser() == null && page.getPageId() == 0)
+			page.setUser(user);
+		
+		if( user.isAnonymous() || user.getUserId() != page.getUser().getUserId() )
+			throw new UnAuthorizedException();
+				
+		Page target = pageManager.getPage(page.getPageId());
+	
+		
+		return target.getPageState().name();
+	}
+	
+	
+	@PreAuthorize("hasRole('ROLE_USER')")
+	@RequestMapping(value="/pages/update.json", method=RequestMethod.POST)
+	@ResponseBody
+	public Page updatePage(
+			@RequestBody DefaultPage page, 
+			NativeWebRequest request) throws NotFoundException{		
+		User user = SecurityHelper.getUser();
+		if(page.getUser() == null && page.getPageId() == 0)
+			page.setUser(user);
+		
+		if( user.isAnonymous() || user.getUserId() != page.getUser().getUserId() )
+			throw new UnAuthorizedException();
+				
+		Page target ;
+		if( page.getPageId() > 0){
+			target = pageManager.getPage(page.getPageId());
+		}else{
+			if( page.getObjectType() == 30 && page.getObjectId() == 0L ){
+				page.setObjectId(WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId());			
+			}else if (page.getObjectType() == 1 && page.getObjectId() == 0L ){
+				page.setObjectId(user.getCompanyId());		
+			}
+			target =  new DefaultPage(page.getObjectType(), page.getObjectId());
+			target.setUser(page.getUser());			
+			target.setBodyContent(new DefaultBodyContent());
+		}
+		
+		target.setName(page.getName());
+		target.setTitle(page.getTitle());
+		target.setSummary(page.getSummary());
+		target.setBodyText(page.getBodyContent().getBodyText());
+		
+		pageManager.updatePage(target);	
+		
+		return target;
+	}
+	
+	@RequestMapping(value="/pages/properties/list.json", method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<Property>  getImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();	
+		Page page = pageManager.getPage(pageId, versionId);
+		Map<String, String> properties = page.getProperties();
+		return toList(properties);
+	}
+		
+	@RequestMapping(value="/pages/properties/update.json", method=RequestMethod.POST)
+	@ResponseBody
+	public List<Property>  updateImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, @RequestBody List<Property> newProperties, NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();		
+		Page page = pageManager.getPage(pageId, versionId);
+		Map<String, String> properties = page.getProperties();		
+		// update or create
+		for (Property property : newProperties) {
+			properties.put(property.getName(), property.getValue().toString());
+		}		
+		if( newProperties.size() > 0){
+			pageManager.updatePage(page);
+		}	
+		return toList(properties);
+	}
+
+	@RequestMapping(value="/pages/properties/delete.json", method={RequestMethod.POST, RequestMethod.DELETE})
+	@ResponseBody
+	public List<Property>  deleteImageProperty(@RequestParam(value="imageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, @RequestBody List<Property> newProperties,  NativeWebRequest request ) throws NotFoundException {		
+		User user = SecurityHelper.getUser();		
+		Page page = pageManager.getPage(pageId, versionId);
+		Map<String, String> properties = page.getProperties();	
+		log.debug(properties);		
+		log.debug(newProperties);		
+		for (Property property : newProperties) {
+			properties.remove(property.getName());
+		}
+		if( newProperties.size() > 0){
+			log.debug(properties);
+			pageManager.updatePage(page);
+		}		
+		return toList(properties);
+	}
+	
+	protected List<Property> toList (Map<String, String> properties){
+		List<Property> list = new ArrayList<Property>();
+		for (String key : properties.keySet()) {
+			String value = properties.get(key);
+			list.add(new Property(key, value));
+		}
+		return list;
 	}
 	
 	private PageList getPageList( int objectType, long objectId,  int startIndex, int pageSize){		
@@ -258,6 +370,9 @@ public class CommunityDataController {
 		photoStreamsManager.deletePhotos(image, user);
 	}
 	
+	
+	
+	@PreAuthorize("permitAll")
 	@RequestMapping(value="/streams/photos/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public PhotoList  getStreamPhotoList(
@@ -430,7 +545,7 @@ public class CommunityDataController {
 	}
 
 	
-	@Secured({"ROLE_USER"})
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/announce/update.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Announce saveAnnounce(
@@ -467,7 +582,7 @@ public class CommunityDataController {
 		return target;
 	}
 	
-	@Secured({"ROLE_USER"})
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value="/announce/delete.json", method=RequestMethod.POST)
 	@ResponseBody
 	public Boolean destoryAnnounce(@RequestParam(value="announceId", defaultValue="0", required=true ) Long announceId, NativeWebRequest request){
@@ -477,7 +592,9 @@ public class CommunityDataController {
 		return true;
 	}
 	
-	@Secured({"ROLE_ANONYMOUS"})
+	
+	
+	@PreAuthorize("permitAll")
 	@RequestMapping(value="/announce/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public AnnounceList  getAnnounceList (
