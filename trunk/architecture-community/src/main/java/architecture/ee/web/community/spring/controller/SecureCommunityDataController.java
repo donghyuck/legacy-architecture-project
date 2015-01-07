@@ -44,7 +44,7 @@ import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.common.util.StringUtils;
 import architecture.ee.exception.NotFoundException;
-
+import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.ImageManager;
 import architecture.ee.web.community.announce.AnnounceManager;
@@ -56,10 +56,8 @@ import architecture.ee.web.navigator.Menu;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
-import architecture.ee.web.struts2.action.support.FinderActionSupport.FileInfo;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebSiteUtils;
-import architecture.ee.util.ApplicationHelper;
 
 @Controller ("secure-community-data-controller")
 @RequestMapping("/secure/data")
@@ -115,9 +113,7 @@ public class SecureCommunityDataController {
 			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
 			@RequestParam(value="path", defaultValue="", required=false ) String path,
 			@RequestParam(value="customized", defaultValue="false", required=false ) boolean customized,
-			NativeWebRequest request) throws NotFoundException {			
-		
-		
+			NativeWebRequest request) throws NotFoundException {					
 		WebSite webSite;		
 		if( siteId > 0 )
 			webSite = webSiteManager.getWebSiteById(siteId);
@@ -145,15 +141,48 @@ public class SecureCommunityDataController {
 		}
 		return list;
 	}
+	
+	@RequestMapping(value="/template/get.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public FileInfo  getTemplateContent(
+			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			@RequestParam(value="path", defaultValue="", required=false ) String path,
+			@RequestParam(value="customized", defaultValue="false", required=false ) boolean customized,
+			NativeWebRequest request) throws NotFoundException, IOException {					
+		WebSite webSite;		
+		if( siteId > 0 )
+			webSite = webSiteManager.getWebSiteById(siteId);
+		else 
+			webSite = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
+		
+		boolean customizedToUse = customized && isCustomizedEnabled();
+		File file = resourceLoader.getResource(getTemplateSrouceLocation(customizedToUse) + path ).getFile();
+		FileInfo fileInfo = new FileInfo( file );
+		fileInfo.setCustomized(customizedToUse);
+		fileInfo.setFileContent( file.isDirectory() ? "": FileUtils.readFileToString(file));
+		
+		return fileInfo;
+	}	
+	
+	protected String getTemplateFileContent(String path, boolean customized){		
+		try {
+			File targetFile = resourceLoader.getResource(getTemplateSrouceLocation(customized) + path).getFile();
+			if( !targetFile.isDirectory() ){
+				return FileUtils.readFileToString(targetFile);				
+			}
+		} catch (IOException e) {			
+		}
+		return "";
+	}
 
-    protected String getTemplateSrouceLocation(boolean customized){
-    	if(customized)
-    		return ApplicationHelper.getApplicationProperty("view.html.customize.source.location",  null );	
-    	else
-    		return ApplicationHelper.getApplicationProperty(WebApplicatioinConstants.VIEW_FREEMARKER_SOURCE_LOCATION, null);
-    }
-    
-    protected boolean isCustomizedEnabled(){		
+	protected String getTemplateSrouceLocation(boolean customized) {
+		if (customized)
+			return ApplicationHelper.getApplicationProperty("view.html.customize.source.location", null);
+		else
+			return ApplicationHelper.getApplicationProperty(WebApplicatioinConstants.VIEW_FREEMARKER_SOURCE_LOCATION, null);
+	}
+
+	protected boolean isCustomizedEnabled() {
 		return ApplicationHelper.getApplicationBooleanProperty("view.html.customize.enabled", false);
 	}
 
@@ -166,7 +195,7 @@ public class SecureCommunityDataController {
 		private String name;
 		private long size;
 		private Date lastModifiedDate;
-
+		private String fileContent;
 		/**
 		 * 
 		 */
@@ -203,6 +232,21 @@ public class SecureCommunityDataController {
 		public FileInfo(File root, File file, boolean customized) {
 			this(root, file);
 			this.customized = customized;
+		}
+
+		
+		/**
+		 * @return fileContent
+		 */
+		public String getFileContent() {
+			return fileContent;
+		}
+
+		/**
+		 * @param fileContent 설정할 fileContent
+		 */
+		public void setFileContent(String fileContent) {
+			this.fileContent = fileContent;
 		}
 
 		/**
