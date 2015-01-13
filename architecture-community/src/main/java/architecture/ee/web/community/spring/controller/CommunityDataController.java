@@ -34,6 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -602,6 +603,8 @@ public class CommunityDataController {
 		@RequestParam(value="objectId", defaultValue="0", required=false  ) Long objectId, 
 		@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 		@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
+		@RequestParam(value="startDate", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") Date startDate,
+		@RequestParam(value="endDate", required=false ) @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss") Date endDate,		
 		NativeWebRequest request ) throws NotFoundException {		
 		User user = SecurityHelper.getUser();		
 		if(!user.isAnonymous()){
@@ -613,16 +616,22 @@ public class CommunityDataController {
 		}else{
 			objectType = 30 ;
 			objectId = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class)).getWebSiteId();		
-		}
-		return new AnnounceList(announceManager.getAnnounces(objectType, objectId), getTotalAnnounceCount(objectType, objectId));
+		}		
+		
+		if( startDate == null )
+			startDate = Calendar.getInstance().getTime();
+		if (endDate == null)
+			endDate = Calendar.getInstance().getTime();
+		
+		return new AnnounceList(announceManager.getAnnounces(objectType, objectId, startDate, endDate), getTotalAnnounceCount(objectType, objectId, startDate, endDate));
 	}
 		
-	private int getTotalAnnounceCount(int objectType, long objectId ){
-		Date now = Calendar.getInstance().getTime();		
-		return announceManager.getAnnounceCount(objectType, objectId, now);
-	}
-	
-	
+	private int getTotalAnnounceCount(int objectType, long objectId , Date startDate, Date endDate){		
+		if(startDate != null ){
+			return announceManager.getAnnounceCount(objectType, objectId, startDate, endDate == null ? Calendar.getInstance().getTime() : endDate);
+		}
+		return announceManager.getAnnounceCount(objectType, objectId, endDate == null ? Calendar.getInstance().getTime() : endDate);
+	}	
 	
 	
 	public static class AnnounceList {
