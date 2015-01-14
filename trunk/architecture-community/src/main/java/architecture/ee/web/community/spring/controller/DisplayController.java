@@ -54,9 +54,13 @@ import architecture.ee.web.util.WebSiteUtils;
 @RequestMapping("/display")
 public class DisplayController {
 	
+	
+	
 	private static final Log log = LogFactory.getLog(DisplayController.class);
 	
 	private static final String DEFAULT_PAGE_TEMPLATE = "/html/community/page";		
+	
+	private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
 	
 	@Inject
 	@Qualifier("pageManager")
@@ -75,11 +79,9 @@ public class DisplayController {
 	@RequestMapping(value="/{filename}", method=RequestMethod.GET)
 	public String page(@PathVariable String filename, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
 		User user = SecurityHelper.getUser();		
-		Page page = pageManager.getPage(filename);		
-		
+		Page page = pageManager.getPage(filename);	
 		page.getObjectId();
-		page.getObjectType();
-		
+		page.getObjectType();		
 		WebSite website = getCurrentWebSite(request);
 		PageMaker.Builder builder = PageMaker.newBuilder().configuration(freeMarkerConfig.getConfiguration()).servletContext(servletContext).page(page).model(model).request(request);			
 		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).builder(builder).user(user).build());
@@ -92,19 +94,19 @@ public class DisplayController {
 		
 		User user = SecurityHelper.getUser();		
 		WebSite website = getCurrentWebSite(request);
-		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).user(user).build());
-		
-		String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-		response.setContentType("text/html;charset=UTF-8");
+		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).user(user).build());		
+		//String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		setContentType(response);
 		log.debug("name:" + filename);
-		log.debug("path:" + view 	);
-		
+		log.debug("path:" + view 	);		
 		return view;
 	}
 	
+	private void setContentType(HttpServletResponse response){
+		response.setContentType(DEFAULT_CONTENT_TYPE);
+	}
 	
-	private boolean hasPermissions(Page image, User user){		
-		
+	private boolean hasPermissions(Page image, User user){				
 		 if (image.getObjectType() == ModelTypeFactory.getTypeIdFromCode("COMPANY") && image.getObjectId() != user.getCompanyId() ){
 			 return false;			
 		}else if (image.getObjectType() == ModelTypeFactory.getTypeIdFromCode("USER") && image.getObjectId() != user.getUserId()){

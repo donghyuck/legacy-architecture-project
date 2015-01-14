@@ -250,7 +250,15 @@ public class JdbcAnnounceDao extends ExtendedJdbcDaoSupport implements AnnounceD
 				new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() :  endDate ));
 	}
 	
-	
+
+	public int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) {
+		return getExtendedJdbcTemplate().queryForInt(
+				getBoundSql("ARCHITECTURE_COMMUNITY.COUNT_ANNOUNCE_BY_OBJECT_TYPE_AND_OBJECT_ID_AND_START_DATE_AND_END_DATE").getSql(), 
+				new SqlParameterValue(Types.NUMERIC, objectType ),
+				new SqlParameterValue(Types.NUMERIC, objectId ),
+				new SqlParameterValue(Types.TIMESTAMP, startDate == null ? new Date(0x8000000000000000L) :  startDate ),
+				new SqlParameterValue(Types.TIMESTAMP, endDate == null ? Calendar.getInstance().getTime() :  endDate ));
+	}	
 	
 	
 }

@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -229,7 +230,11 @@ public class CommunityDataController {
 	@RequestMapping(value="/pages/properties/list.json", method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public List<Property>  getImageProperty(@RequestParam(value="pageId", defaultValue="0", required=true ) Long pageId, @RequestParam(value="versionId", defaultValue="1" ) Integer versionId, NativeWebRequest request ) throws NotFoundException {		
+		
 		User user = SecurityHelper.getUser();	
+		if(pageId <= 0){
+			return Collections.EMPTY_LIST;
+		}		
 		Page page = pageManager.getPage(pageId, versionId);
 		Map<String, String> properties = page.getProperties();
 		return toList(properties);

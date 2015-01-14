@@ -22,10 +22,14 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
+import architecture.common.model.json.UserDeserializer;
 import architecture.common.user.User;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
+import architecture.ee.web.community.page.json.BodyContentDeserializer;
+import architecture.ee.web.community.page.json.PageStateDeserializer;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -150,6 +154,9 @@ public class DefaultPage implements Page {
 	/**
 	 * @param pageState 설정할 pageState
 	 */
+	
+	
+	@JsonDeserialize(using = PageStateDeserializer.class)
 	public void setPageState(PageState pageState) {
 		this.pageState = pageState;
 	}
@@ -192,6 +199,7 @@ public class DefaultPage implements Page {
 	/**
 	 * @param bodyContent 설정할 bodyContent
 	 */
+	@JsonDeserialize(using = BodyContentDeserializer.class)
 	public void setBodyContent(BodyContent bodyContent) {
 		this.bodyContent = bodyContent;
 	}
@@ -258,14 +266,17 @@ public class DefaultPage implements Page {
 	/**
 	 * @param user 설정할 user
 	 */
+	@JsonDeserialize(using = UserDeserializer.class)
 	public void setUser(User user) {
 		this.user = user;
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return 0;
 	}
 
+	@JsonIgnore
 	public String getBodyText() {
 		if( bodyContent == null)
 			return null;
@@ -273,10 +284,12 @@ public class DefaultPage implements Page {
 			return bodyContent.getBodyText();
 	}
 
+	@JsonIgnore
 	public void setBodyText(String body) {
 		bodyContent.setBodyText(body);
 	}
 
+	
 	public boolean getBooleanProperty(String name, boolean defaultValue) {
 		String value = getProperties().get(name);		
 		String valueToUse = StringUtils.defaultString(value, Boolean.toString(defaultValue));

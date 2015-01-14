@@ -263,6 +263,19 @@ public class DefaultPageManager implements PageManager  {
 		return list;
 	}
 
+
+	public List<Page> getPages(int objectType, long objectId, int startIndex, int maxResults) {
+		List<Long> ids = pageDao.getPageIds(objectType, objectId, startIndex, maxResults);
+		ArrayList<Page> list = new ArrayList<Page>(ids.size());
+		for( Long pageId : ids ){
+			try {
+				list.add(getPage(pageId));
+			} catch (PageNotFoundException e) {
+			}		
+		}
+		return list;
+	}
+	
 	public int getPageCount(int objectType) {
 		return 0;
 	}
@@ -362,5 +375,7 @@ public class DefaultPageManager implements PageManager  {
 		}
 		return pv;
 	}
+
+
 	
 }
