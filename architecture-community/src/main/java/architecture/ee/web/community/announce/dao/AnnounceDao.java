@@ -45,4 +45,6 @@ public interface AnnounceDao {
 	
 	public abstract int getAnnounceCount ( int objectType, long objectId, Date endDate );
 	
+	public abstract int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) ;
+	
 }

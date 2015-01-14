@@ -47,5 +47,7 @@ public interface AnnounceManager {
 	public abstract int countAnnounce(int objectType, long objectId);
 	
 	public abstract int getAnnounceCount (int objectType, long objectId, Date endDate );
+	
+	public abstract int getAnnounceCount (int objectType, long objectId, Date startDate, Date endDate );
 		
 }

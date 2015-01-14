@@ -678,5 +678,17 @@ public class JdbcPageDao extends ExtendedJdbcDaoSupport  implements PageDao {
 				new SqlParameterValue(Types.NUMERIC, objectId )
 				);
 	}
+	
+	public List<Long> getPageIds(int objectType, long objectId, int startIndex, int maxResults) {
+		return getExtendedJdbcTemplate().queryScrollable(
+				getBoundSql("ARCHITECTURE_COMMUNITY.SELECT_PAGE_IDS_BY_OBJECT_TYPE_AND_OBJECT_ID").getSql(), 
+				startIndex, 
+				maxResults, 
+				new Object[ ] {objectType, objectId }, 
+				new int[] {Types.NUMERIC, Types.NUMERIC}, 
+				Long.class);
+	}
+	
+	
 
 }

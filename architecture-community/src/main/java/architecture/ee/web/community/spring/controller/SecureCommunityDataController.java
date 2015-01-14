@@ -18,6 +18,7 @@ package architecture.ee.web.community.spring.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,6 +40,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
@@ -187,6 +193,7 @@ public class SecureCommunityDataController {
 	}
 
 	public static class FileInfo {
+		
 		private boolean customized;
 		private boolean directory;
 		private String path;
@@ -342,6 +349,7 @@ public class SecureCommunityDataController {
 		/**
 		 * @return lastModifiedDate
 		 */
+		@JsonSerialize(using = CustomJsonDateSerializer.class)	
 		public Date getLastModifiedDate() {
 			return lastModifiedDate;
 		}
@@ -350,6 +358,7 @@ public class SecureCommunityDataController {
 		 * @param lastModifiedDate
 		 *            설정할 lastModifiedDate
 		 */
+		@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 		public void setLastModifiedDate(Date lastModifiedDate) {
 			this.lastModifiedDate = lastModifiedDate;
 		}

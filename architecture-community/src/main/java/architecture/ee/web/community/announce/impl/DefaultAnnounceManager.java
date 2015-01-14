@@ -210,8 +210,9 @@ public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 		for( Long announceId : announceIds ){
 			try {
 				Announce announce = getAnnounce(announceId);
+				log.debug("diff start date : " + announce.getStartDate() + " / " + startDate  );
+				log.debug("diff end date : " + announce.getEndDate() + " / " + endDate );
 				if( announce.getEndDate() == null){
-					
 					if( announce.getStartDate().getTime() <= startDate.getTime() )
 						list.add(announce);
 					
@@ -264,4 +265,7 @@ public class DefaultAnnounceManager implements AnnounceManager, EventSource {
 		return announceDao.getAnnounceCount(objectType, objectId, endDate);
 	}
 
+	public int getAnnounceCount(int objectType, long objectId, Date startDate, Date endDate) {
+		return announceDao.getAnnounceCount(objectType, objectId, startDate, endDate);
+	}
 }
