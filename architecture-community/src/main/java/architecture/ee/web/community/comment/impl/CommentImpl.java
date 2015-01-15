@@ -19,6 +19,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.User;
@@ -207,18 +209,26 @@ public class CommentImpl extends EntityModelObjectSupport implements Comment  {
 	public void setBodyText(String body) {
 		this.body = body;
 	}
+	
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return commentId;
 	}
+	
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("COMMENT");
 	}
+	
+	@JsonIgnore
 	public int getCachedSize() {
 		return 0;
 	}
+	
 	public User getUser() {
 		return user;
 	}
+	
 	public boolean isAnonymous() {
 		if( userId < 0 )
 			return true;

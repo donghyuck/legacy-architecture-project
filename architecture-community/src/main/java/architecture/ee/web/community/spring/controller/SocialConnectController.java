@@ -248,7 +248,9 @@ public class SocialConnectController implements InitializingBean  {
 			account =socialConnectManager.createSocialConnect(user, ServiceProviderHelper.toMedia(providerId));
 		}			
 		model.addAttribute("user", user);
-		model.addAttribute("connect", account);						
+		model.addAttribute("connect", account);			
+		
+		request.getNativeResponse(HttpServletResponse.class).setContentType("text/html;charset=UTF-8");		
 		return  "/html/connect/social-status";
 	}	
 
@@ -445,6 +447,7 @@ public class SocialConnectController implements InitializingBean  {
 			path = servletRequest.getServletPath() + path;
 		}
 		log.debug(path);		
+		request.getNativeResponse(HttpServletResponse.class).setContentType("text/html;charset=UTF-8");		
 		return new RedirectView(path, true);
 	}
 
