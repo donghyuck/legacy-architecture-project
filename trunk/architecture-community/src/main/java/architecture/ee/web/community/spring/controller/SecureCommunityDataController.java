@@ -370,6 +370,7 @@ public class SecureCommunityDataController {
 	@ResponseBody
 	public WebSite  getPageList(
 			@RequestParam(value="siteId", defaultValue="0", required=false ) Long siteId,
+			@RequestParam(value="refresh", defaultValue="false", required=false ) boolean refersh,
 			NativeWebRequest request) throws NotFoundException {				
 		WebSite webSite;
 		
@@ -377,6 +378,12 @@ public class SecureCommunityDataController {
 			webSite = webSiteManager.getWebSiteById(siteId);
 		else 
 			webSite = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
+		
+		if(refersh){
+			long webSiteId = webSite.getWebSiteId();
+			webSiteManager.refreshWebSite(webSite);
+			webSite = webSiteManager.getWebSiteById(webSiteId);
+		}
 		
 		return webSite;
 	}
