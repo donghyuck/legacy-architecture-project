@@ -285,11 +285,12 @@ public class DefaultWebSiteManager implements WebSiteManager {
 			webSite = webSiteDao.getWebSiteById(webSiteId);		
 			try {
 				((DefaultWebSite)webSite).setUser( userManager.getUser(webSite.getUser().getUserId()));
-				((DefaultWebSite)webSite).setCompany( companyManager.getCompany(webSite.getCompany().getCompanyId()));
+				((DefaultWebSite)webSite).setCompany( companyManager.getCompany(webSite.getCompany().getCompanyId()));				
 				if( webSite.getMenu().getMenuId() > 0 )
 					((DefaultWebSite)webSite).setMenu(WebSiteUtils.getMenu(webSite.getMenu().getMenuId()));
 				else
-					((DefaultWebSite)webSite).setMenu(WebSiteUtils.getDefaultMenu());				
+					((DefaultWebSite)webSite).setMenu(WebSiteUtils.getDefaultMenu());		
+				
 			} catch (MenuNotFoundException e){	
 			} catch (UserNotFoundException e) {
 			} catch (CompanyNotFoundException e) {
