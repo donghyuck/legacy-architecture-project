@@ -64,17 +64,18 @@
 		<dynamic>
 			select * from ${TABLE_NAME}
 	    </dynamic>
-	    <!-- 
+	    
 		<parameterMappings>
-			<parameterMapping index="1" name="EDU_USER_NAME"
+			<parameterMapping index="1" name="EDU_USER_NAME" mode="IN"
 				javaType="" encoding="" jdbcType="string" primary="true" />
-			<parameterMapping index="2" name="EDU_USER_NAME"
+			<parameterMapping index="2" name="EDU_USER_NAME" mode="OUT"
 				javaType="" encoding="" jdbcType="string" primary="true" />
 			<parameterMapping index="3" name="EDU_USER_NAME"
 				javaType="" encoding="" jdbcType="string" primary="true" />
 			<parameterMapping index="4" name="EDU_USER_NAME"
 				javaType="" encoding="" jdbcType="string" primary="true" />
 		</parameterMappings>
+		<!-- 
 		<resultMappings>
 			<resultMapping index="1" name="EDU_USER_NAME" javaType=""
 				encoding="" jdbcType="string" primary="true" />
