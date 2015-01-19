@@ -14,16 +14,10 @@
 	<!-- =================================================== -->
 	<!-- 1. DataSource                                       -->
 	<!-- =================================================== -->
-    <!-- 
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL =TCP)(HOST=222.122.63.132)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=222.122.63.130)(PORT=1521))(FAILOVER=on)(LOAD_BALANCE=off)(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ESPDB)))"
-		p:username="ienter" p:password="ienter00" p:initialSize="1" />-->
-		
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
 		destroy-method="close" p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@//222.122.63.138:1521/INKIUMDB"
-		p:username="fw_v1" p:password="inkium" p:initialSize="1" />
+		p:url=""
+		p:username="" p:password="" p:initialSize="1" />
 		
 	<!-- =================================================== -->
 	<!-- 2. URLDirectoryScanner                              -->
