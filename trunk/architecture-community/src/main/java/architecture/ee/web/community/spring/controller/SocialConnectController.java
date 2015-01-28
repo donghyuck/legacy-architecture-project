@@ -208,7 +208,7 @@ public class SocialConnectController implements InitializingBean  {
 	}
 
 	
-	
+
 	
 	/**
 	 * Render the status of the connections to the service provider to the user as HTML in their web browser.
@@ -217,6 +217,8 @@ public class SocialConnectController implements InitializingBean  {
 	//@ResponseBody
 	public Object connect(@PathVariable String providerId, NativeWebRequest request, Model model) {		
 		setNoCache(request);
+		setOutputFormat(request);
+		
 		User user = SecurityHelper.getUser();
 		SocialConnect account = null;		
 		if( ! user.isAnonymous() ){
@@ -475,7 +477,17 @@ public class SocialConnectController implements InitializingBean  {
 			response.addHeader("Cache-Control", "no-store");
 		}
 	}
-/*	
+	
+
+	
+	private void setOutputFormat(NativeWebRequest request){
+		HttpServletRequest httprequest = request.getNativeRequest(HttpServletRequest.class);
+		HttpServletResponse httpresponse = request.getNativeResponse(HttpServletResponse.class);		
+		httprequest.setAttribute("output", "json");
+	}
+	
+	
+	/*	
 
 
 	private String getViewPath() {
