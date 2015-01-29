@@ -69,11 +69,12 @@ public class SecureDisplayController {
 
 	}
 
-	@RequestMapping(value = "/{filename}", method=RequestMethod.GET)
+	@RequestMapping(value = "/{filename:.+}", method=RequestMethod.GET)
 	public String template(@PathVariable String filename, @RequestParam(value="source") String view, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
 		
 		User user = SecurityHelper.getUser();		
 		WebSite website = WebSiteUtils.getWebSite(request);
+		
 		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).user(user).build());		
 		//String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		setContentType(response);
