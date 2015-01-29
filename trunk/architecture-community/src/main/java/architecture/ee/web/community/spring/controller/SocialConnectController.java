@@ -217,7 +217,7 @@ public class SocialConnectController implements InitializingBean  {
 	//@ResponseBody
 	public Object connect(@PathVariable String providerId, NativeWebRequest request, Model model) {		
 		setNoCache(request);
-		setOutputFormat(request);
+		SocialConnectController.setOutputFormat(request);
 		
 		User user = SecurityHelper.getUser();
 		SocialConnect account = null;		
@@ -480,7 +480,7 @@ public class SocialConnectController implements InitializingBean  {
 	
 
 	
-	private void setOutputFormat(NativeWebRequest request){
+	protected static  void setOutputFormat(NativeWebRequest request){
 		HttpServletRequest httprequest = request.getNativeRequest(HttpServletRequest.class);
 		HttpServletResponse httpresponse = request.getNativeResponse(HttpServletResponse.class);		
 		httprequest.setAttribute("output", "json");

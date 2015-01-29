@@ -17,6 +17,9 @@ package architecture.ee.web.community.spring.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -33,6 +36,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.NativeWebRequest;
 
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
@@ -51,7 +55,7 @@ public class FacebookController {
 	public FacebookController() {
 	}
 
-
+	
 	@RequestMapping(value="/user/lookup.json", method=RequestMethod.POST)
 	@ResponseBody
 	public FacebookProfile  lookupUser(@RequestParam(value="userId", defaultValue="", required=false ) String userId) throws Exception  {		
@@ -96,7 +100,8 @@ public class FacebookController {
 
 	@RequestMapping(value="/homefeed.json", method=RequestMethod.POST)
 	@ResponseBody
-	public PagedList<Post> getHomeFeed() throws Exception {
+	public PagedList<Post> getHomeFeed(NativeWebRequest request) throws Exception {
+		SocialConnectController.setOutputFormat(request);
 		SocialConnect account = getSocialConnect(SecurityHelper.getUser(), Media.FACEBOOK );		
 		Facebook api = (Facebook) account.getConnection().getApi();	
 		return api.feedOperations().getHomeFeed();
@@ -112,6 +117,12 @@ public class FacebookController {
 	
 	protected SocialConnect getSocialConnect(User user, Media media) throws ConnectNotFoundException{
 		return socialConnectManager.getSocialConnect(user, media.name().toLowerCase());		 		
+	}
+	
+	private void setOutputFormat(NativeWebRequest request){
+		HttpServletRequest httprequest = request.getNativeRequest(HttpServletRequest.class);
+		HttpServletResponse httpresponse = request.getNativeResponse(HttpServletResponse.class);		
+		httprequest.setAttribute("output", "json");
 	}
 		
 }
