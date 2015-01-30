@@ -18,7 +18,6 @@ package architecture.ee.web.community.spring.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -39,9 +38,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import architecture.common.model.json.CustomJsonDateDeserializer;
 import architecture.common.model.json.CustomJsonDateSerializer;
@@ -64,6 +60,9 @@ import architecture.ee.web.site.WebSite;
 import architecture.ee.web.site.WebSiteManager;
 import architecture.ee.web.util.WebApplicatioinConstants;
 import architecture.ee.web.util.WebSiteUtils;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Controller ("secure-community-data-controller")
 @RequestMapping("/secure/data")
