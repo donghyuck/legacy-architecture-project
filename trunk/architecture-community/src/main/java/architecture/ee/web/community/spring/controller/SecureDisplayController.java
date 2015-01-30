@@ -26,13 +26,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import architecture.common.user.CompanyManager;
+import architecture.common.user.CompanyNotFoundException;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
@@ -69,16 +69,21 @@ public class SecureDisplayController {
 
 	}
 
-	@RequestMapping(value = "/{filename:.+}", method=RequestMethod.GET)
-	public String template(@PathVariable String filename, @RequestParam(value="source") String view, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
+	@RequestMapping(value = "/", method=RequestMethod.GET)
+	public String template(@RequestParam(value="source") String view, @RequestParam(value="companyId", defaultValue="0") Long companyId, HttpServletRequest request, HttpServletResponse response, Model model) throws NotFoundException, IOException {		
 		
 		User user = SecurityHelper.getUser();		
 		WebSite website = WebSiteUtils.getWebSite(request);
 		
-		model.addAttribute("action", PageActionAdaptor.newBuilder().webSite(website).user(user).build());		
-		//String restOfTheUrl = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		DisplayController.PageActionAdaptor.Builder builder = PageActionAdaptor.newBuilder();
+		if( companyId > 0 )
+			try {
+				builder.company(companyManager.getCompany(companyId));
+			} catch (CompanyNotFoundException e) {
+				// ignore
+			}		
+		model.addAttribute("action", builder.webSite(website).user(user).build());		
 		setContentType(response);
-		log.debug("name:" + filename);
 		log.debug("path:" + view 	);		
 		return view;
 	}

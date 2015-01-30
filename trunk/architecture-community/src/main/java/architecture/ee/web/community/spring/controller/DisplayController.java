@@ -33,10 +33,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfig;
 
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.user.Company;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
@@ -54,8 +54,7 @@ import architecture.ee.web.util.WebSiteUtils;
 @RequestMapping("/display")
 public class DisplayController {
 	
-	
-	
+		
 	private static final Log log = LogFactory.getLog(DisplayController.class);
 	
 	private static final String DEFAULT_PAGE_TEMPLATE = "/html/community/page";		
@@ -125,6 +124,8 @@ public class DisplayController {
 	public static class PageActionAdaptor {
 		
 		public static final String NAVIGATOR_SELECTED_NAME_KEY = "navigator.selected.name";
+		
+		private Company targetCompany ;
 		
 		private User user;
 		
@@ -212,6 +213,22 @@ public class DisplayController {
 
 
 		/**
+		 * @return targetCompany
+		 */
+		public Company getTargetCompany() {
+			if( targetCompany == null && user != null)
+				return user.getCompany();
+			return targetCompany;
+		}
+
+		/**
+		 * @param targetCompany 설정할 targetCompany
+		 */
+		public void setTargetCompany(Company company) {
+			this.targetCompany = company;
+		}
+
+		/**
 		 * @return webSite
 		 */
 		public WebSite getWebSite() {
@@ -239,8 +256,9 @@ public class DisplayController {
 			this.builder = builder;
 		}
 
-
+		
 		public static class Builder{
+			
 			PageActionAdaptor pageActionAdaptor = new PageActionAdaptor();
 			
 			public Builder webSite(WebSite webSite){
@@ -250,6 +268,11 @@ public class DisplayController {
 			
 			public Builder user(User user){
 				this.pageActionAdaptor.user = user;
+				return this;
+			} 
+
+			public Builder company(Company company){
+				this.pageActionAdaptor.targetCompany = company;
 				return this;
 			} 
 			
