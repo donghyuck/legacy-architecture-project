@@ -25,6 +25,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,17 +41,12 @@ import architecture.user.security.spring.userdetails.ExtendedUserDetails;
 import architecture.user.spring.annotation.ActiveUser;
 
 
-@Controller ("security-data-controller")
+@Controller ("user-data-controller")
 @RequestMapping("/data")
 public class UserDataController {
 
 	private static final Log log = LogFactory.getLog(UserDataController.class);
-	
-	//private static final String DEFAULT_CONTENT_TYPE = "text/html;charset=UTF-8";
-	
-//	private static final String DEFAULT_LOGIN_TEMPLATE = "/html/accounts/login.ftl";		
-	
-	
+		
 	@Inject
 	@Qualifier("userManager")
 	private UserManager userManager ;
@@ -61,13 +57,14 @@ public class UserDataController {
 	
 /*	
 	*/
-	
+	@PreAuthorize("permitAll")
 	@RequestMapping(value="/accounts/verify_credentials.json", method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public ExtendedUserDetails verifyCredentials(@ActiveUser ExtendedUserDetails activeUser){	
 		return activeUser;
 	}
 
+	@PreAuthorize("permitAll")
 	@RequestMapping(value="/accounts/get.json", method={RequestMethod.POST, RequestMethod.GET } )
 	@ResponseBody
 	public UserDetails getUserDetails(@ActiveUser ExtendedUserDetails activeUser, NativeWebRequest request ){				
@@ -121,6 +118,7 @@ public class UserDataController {
 	}
 	
 
+	@PreAuthorize("permitAll")
 	@RequestMapping(value="/users/lookup.json", method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public User getUserProfile(@RequestParam(value="id", defaultValue="0", required=false ) Long userId, @RequestParam(value="username", required=false ) String username, 	@RequestParam(value="email", required=false ) String email, 	NativeWebRequest request ){		
