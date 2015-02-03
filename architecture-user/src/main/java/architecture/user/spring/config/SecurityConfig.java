@@ -59,7 +59,7 @@ import architecture.user.security.spring.userdetails.ExtendedUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
-@EnableGlobalMethodSecurity(securedEnabled = true )
+@EnableGlobalMethodSecurity(jsr250Enabled = true, proxyTargetClass = true, securedEnabled = true, prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter  {
 
 	@Autowired 

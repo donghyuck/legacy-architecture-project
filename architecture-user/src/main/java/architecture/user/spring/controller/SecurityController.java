@@ -26,7 +26,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import architecture.common.user.SecurityHelper;
@@ -49,17 +48,16 @@ public class SecurityController {
 	
 	private static final String DEFAULT_LOGIN_TEMPLATE_KEY = "security.authentication.template";		
 	
-	private static final String DEFAULT_LOGIN_TEMPLATE = "/html/accounts/login.ftl";		
+	private static final String DEFAULT_LOGIN_TEMPLATE = "/html/accounts/login";		
 	
 	public SecurityController() {
 	}
 
 	@RequestMapping(value="/login", method={RequestMethod.POST, RequestMethod.GET } )
-	@ResponseBody
 	public String login(NativeWebRequest request, Model model ) throws NotFoundException, IOException {	
 		User user = SecurityHelper.getUser();		
 		WebSite website = getCurrentWebSite(request.getNativeRequest(HttpServletRequest.class));
-		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).build());	
+		model.addAttribute("action", ActionAdaptor.newBuilder().webSite(website).user(user).remoteAddr(request.getNativeRequest(HttpServletRequest.class).getRemoteAddr()).build());	
 		setContentType(request.getNativeResponse(HttpServletResponse.class));		
 		return ApplicationHelper.getApplicationProperty(DEFAULT_LOGIN_TEMPLATE_KEY, DEFAULT_LOGIN_TEMPLATE);
 	}
@@ -74,7 +72,7 @@ public class SecurityController {
 	
 public static class ActionAdaptor {
 		
-				
+		private String remoteAddr;		
 		private User user;
 		
 		private WebSite webSite;
@@ -95,6 +93,21 @@ public static class ActionAdaptor {
 			throw new MenuNotFoundException();
 		}
 		
+		
+		/**
+		 * @return remoteAddr
+		 */
+		public String getRemoteAddr() {
+			return remoteAddr;
+		}
+
+		/**
+		 * @param remoteAddr 설정할 remoteAddr
+		 */
+		public void setRemoteAddr(String remoteAddr) {
+			this.remoteAddr = remoteAddr;
+		}
+
 		/**
 		 * @return user
 		 */
@@ -135,10 +148,16 @@ public static class ActionAdaptor {
 			public Builder user(User user){
 				this.actionAdaptor.user = user;
 				return this;
-			} 
+			}
+			
+			public Builder remoteAddr(String remoteAddr){
+				this.actionAdaptor.remoteAddr = remoteAddr;
+				return this;
+			}
 			public ActionAdaptor build(){
 				return actionAdaptor;
 			}
+			
 		}
 		
 		public static Builder newBuilder(){
