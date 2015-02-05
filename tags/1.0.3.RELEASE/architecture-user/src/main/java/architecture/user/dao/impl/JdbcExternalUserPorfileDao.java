@@ -21,7 +21,7 @@ public class JdbcExternalUserPorfileDao extends ExtendedJdbcDaoSupport implement
 
 	public Map<String, Object> getProfile(long userId) {
 		try {
-			return getExtendedJdbcTemplate().queryForMap("SELECT_USER_PROFILE_BY_USER_ID", new SqlParameterValue(Types.INTEGER, userId ));
+			return getExtendedJdbcTemplate().queryForMap(getSql("SELECT_USER_PROFILE_BY_USER_ID"), new SqlParameterValue(Types.INTEGER, userId ));
 		} catch (DataAccessException e) {
 			return Collections.EMPTY_MAP;
 		}
