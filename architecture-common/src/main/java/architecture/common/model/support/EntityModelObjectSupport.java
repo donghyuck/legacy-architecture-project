@@ -19,8 +19,10 @@ import java.util.Date;
 
 import architecture.common.model.EntityModelObject;
 import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 
 public abstract class EntityModelObjectSupport extends PropertyModelSupport  implements EntityModelObject {
@@ -45,7 +47,7 @@ public abstract class EntityModelObjectSupport extends PropertyModelSupport  imp
 		this.name = name;
 	}
 	
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -55,7 +57,7 @@ public abstract class EntityModelObjectSupport extends PropertyModelSupport  imp
 		this.creationDate = creationDate;
 	}
 
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}

@@ -30,6 +30,8 @@ import architecture.common.lifecycle.ConfigService;
 import architecture.common.lifecycle.bootstrap.Bootstrap;
 import architecture.common.model.UserModel;
 import architecture.common.model.factory.ModelTypeFactory;
+import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 import architecture.common.model.support.EntityModelObjectSupport;
 import architecture.common.user.Company;
 import architecture.common.user.User;
@@ -37,6 +39,8 @@ import architecture.common.user.authentication.UnAuthorizedException;
 import architecture.common.util.StringUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * @author  donghyuck
@@ -503,6 +507,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @param password
 	 */
+    @JsonIgnore
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -570,6 +575,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @return
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getLastLoggedIn() {
 		return lastLoggedIn;
 	}
@@ -577,6 +583,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @param lastLoggedIn
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setLastLoggedIn(Date lastLoggedIn) {
 		this.lastLoggedIn = lastLoggedIn;
 	}
@@ -584,6 +591,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @return
 	 */
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getLastProfileUpdate() {
 		return lastProfileUpdate ;
 	}
@@ -591,6 +599,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @param lastProfileUpdate
 	 */
+	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
 	public void setLastProfileUpdate(Date lastProfileUpdate) {
 		this.lastProfileUpdate = lastProfileUpdate;
 	}
@@ -683,6 +692,7 @@ public class UserModelImpl extends EntityModelObjectSupport  implements UserMode
 	/**
 	 * @param passwordHash
 	 */
+	@JsonIgnore
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
 	}

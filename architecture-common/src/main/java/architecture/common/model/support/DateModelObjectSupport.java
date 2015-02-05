@@ -19,8 +19,10 @@ import java.util.Date;
 
 import architecture.common.model.DateModelObject;
 import architecture.common.model.json.CustomJsonDateDeserializer;
+import architecture.common.model.json.CustomJsonDateSerializer;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public abstract class DateModelObjectSupport implements DateModelObject {
 
@@ -29,7 +31,7 @@ public abstract class DateModelObjectSupport implements DateModelObject {
 	private Date modifiedDate = null;
 	
 
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getCreationDate() {
 		return creationDate;
 	}
@@ -39,7 +41,7 @@ public abstract class DateModelObjectSupport implements DateModelObject {
 		this.creationDate = creationDate;
 	}
 
-	@JsonDeserialize(using = CustomJsonDateDeserializer.class)
+	@JsonSerialize(using = CustomJsonDateSerializer.class)
 	public Date getModifiedDate() {
 		return modifiedDate;
 	}

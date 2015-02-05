@@ -28,6 +28,8 @@ public class SecurityHelper {
 		
 		public User getUser();
 		
+		public boolean isUserInRole(String role);
+		
 	}
 
 	private static Implementation impl = null;
@@ -48,5 +50,8 @@ public class SecurityHelper {
     public static User getUser(){
     	return impl.getUser();
     }    
-		
+
+    public static boolean isUserInRole(String role){
+    	return impl.isUserInRole(role);
+    }   
 }
