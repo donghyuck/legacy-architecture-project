@@ -240,6 +240,11 @@
 			<artifactId>moskito-aop</artifactId>
 			<version>${project.dependency.moskito.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>net.anotheria</groupId>
+			<artifactId>moskito-web</artifactId>
+			<version>${project.dependency.moskito.version}</version>
+		</dependency>			
 	</dependencies>
 
 	<build>
