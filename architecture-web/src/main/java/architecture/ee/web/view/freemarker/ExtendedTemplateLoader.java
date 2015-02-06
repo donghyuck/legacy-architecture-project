@@ -39,7 +39,7 @@ import freemarker.cache.FileTemplateLoader;
  * @author donghyuck
  * @todo : 캐쉬적용이 필요.
  */
-public class DatabaseTemplateLoader extends FileTemplateLoader {
+public class ExtendedTemplateLoader extends FileTemplateLoader {
 	
 	private Log log = LogFactory.getLog(getClass());
 	
@@ -47,15 +47,15 @@ public class DatabaseTemplateLoader extends FileTemplateLoader {
 	
 	private Cache templateListCache = null ;
 	
-	public DatabaseTemplateLoader() throws IOException {
+	public ExtendedTemplateLoader() throws IOException {
 		super();
 	}
 	
-	public DatabaseTemplateLoader(File baseDir, boolean allowLinking) throws IOException {
+	public ExtendedTemplateLoader(File baseDir, boolean allowLinking) throws IOException {
 		super(baseDir, allowLinking);
 	}
 
-	public DatabaseTemplateLoader(File baseDir) throws IOException {
+	public ExtendedTemplateLoader(File baseDir) throws IOException {
 		super(baseDir);
 	}
 

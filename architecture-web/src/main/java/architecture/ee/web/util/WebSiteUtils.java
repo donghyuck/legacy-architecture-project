@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import architecture.common.user.SecurityHelper;
 import architecture.common.util.StringUtils;
 import architecture.common.util.TextUtils;
 import architecture.ee.util.ApplicationHelper;
@@ -50,11 +51,13 @@ public class WebSiteUtils {
 	
 	public static WebSite getWebSite(HttpServletRequest request) throws WebSiteNotFoundException {
 		String localName = request.getLocalName();		
+		
 		log.debug("check: " + localName + " - " + ( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)) );
 		
 		if( StringUtils.isNotEmpty(localName) && !TextUtils.isValidIpAddress(localName) && TextUtils.isValidHostname(localName)){	
 			return getWebSiteManager().getWebSiteByUrl(localName);			
 		}
+		
 		return getDefaultWebSite();
 	}
 	
@@ -69,8 +72,7 @@ public class WebSiteUtils {
 	public static MenuRepository getMenuRepository(){
 		return ApplicationHelper.getComponent(MenuRepository.class);
 	}
-	
-
+		
 	
 	public static Long getDefaultMenuId(){
 		return ApplicationHelper.getApplicationLongProperty("components.menu.default.menuId", 1L);
@@ -91,8 +93,7 @@ public class WebSiteUtils {
 	public static MenuComponent getMenuComponent(String name, String child) throws MenuNotFoundException { 
 		return getMenuComponent(getDefaultMenu(), name, child);
 	}
-	
-	
+		
 	public static MenuComponent getMenuComponent(Menu menu, String name) throws MenuNotFoundException { 
 		if( menu != null ){
 			return getMenuRepository().getMenuComponent(menu, name);
@@ -101,6 +102,23 @@ public class WebSiteUtils {
 		}
 	}
 
+	public static MenuComponent getMenuComponent(MenuComponent menu, String name) throws MenuNotFoundException { 
+		for( MenuComponent childMenu : menu.getComponents() )
+		{
+			if( name.equals( childMenu.getName() ) ){
+				return childMenu;
+			}
+			if( childMenu.getComponents().size() > 0 ){
+				for( MenuComponent childMenu2 : childMenu.getComponents() ){
+					if( name.equals( childMenu2.getName() ) ){
+						return childMenu2;
+					}
+				}
+			}
+		}
+		throw new MenuNotFoundException();
+	}
+	
 	public static MenuComponent getMenuComponent(Menu menu, String name, String child) throws MenuNotFoundException { 
 		if( menu != null ){
 			MenuComponent parentMenu = getMenuComponent(menu, name);
@@ -125,6 +143,18 @@ public class WebSiteUtils {
 			throw new MenuNotFoundException();
 		}
 	}	
+
+	public static boolean isUserAccessAllowed(MenuComponent menu){
+		if(StringUtils.isNotEmpty(menu.getRoles())){			
+			for( String role : StringUtils.split(menu.getRoles(), ",")){
+				if( SecurityHelper.isUserInRole( role ) )
+					return true;
+			}			
+		}else{
+			return true;
+		}
+		return false;
+	}
 	
 	public static boolean isUserAccessAllowed(HttpServletRequest request, MenuComponent menu){
 		if(StringUtils.isNotEmpty(menu.getRoles())){			

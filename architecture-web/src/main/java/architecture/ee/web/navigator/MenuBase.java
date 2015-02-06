@@ -93,7 +93,8 @@ public abstract class MenuBase implements Serializable, Component {
     
     protected String category ;
     
-
+    protected String layout;
+    
     /**
      * Holds value of property module; a Struts module prefix that overrides the current module.
      *
@@ -228,8 +229,26 @@ public abstract class MenuBase implements Serializable, Component {
     public String getDescription() {
         return description;
     }
+    
+    
 
     /**
+	 * @return layout
+	 */
+	public String getLayout() {
+		return layout;
+	}
+
+
+	/**
+	 * @param layout 설정할 layout
+	 */
+	public void setLayout(String layout) {
+		this.layout = layout;
+	}
+
+
+	/**
      * Sets the forward.
      * @param forward The forward to set
      */

@@ -25,7 +25,7 @@ import architecture.common.user.User;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.template.Template;
 
-public class TemplateImpl extends EntityModelObjectSupport implements Template{
+public class DefaultTemplate extends EntityModelObjectSupport implements Template{
 
 	private long templateId;
 	

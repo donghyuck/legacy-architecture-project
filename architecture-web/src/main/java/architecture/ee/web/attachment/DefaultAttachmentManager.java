@@ -32,6 +32,9 @@ import net.sf.ehcache.Element;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.filefilter.FileFilterUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.pdfbox.pdmodel.PDPage;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -143,6 +146,18 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 		return attachment;
 	}
 	
+	public Attachment createAttachment(int objectType, long objectId, String name, String contentType, InputStream inputStream, int size) {
+		
+		AttachmentImpl attachment = new AttachmentImpl();
+		attachment.setObjectType(objectType);
+		attachment.setObjectId(objectId);
+		attachment.setName(name);
+		attachment.setContentType(contentType);
+		attachment.setInputStream(inputStream);		
+		attachment.setSize(size);
+		return attachment;
+	}
+
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public Attachment saveAttachment(Attachment attachment) {
 		
@@ -152,6 +167,9 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 			attachmentCache.remove(attachmentToUse.getAttachmentId());			
 			attachmentToUse.setModifiedDate(now);
 			attachmentDao.updateAttachment(attachmentToUse);			
+			
+			attachmentCache.remove(attachmentToUse.getAttachmentId());		
+			
 		}else{			
 			attachmentToUse.setCreationDate(now);
 			attachmentToUse.setModifiedDate(now);
@@ -244,33 +262,43 @@ public class DefaultAttachmentManager extends AbstractAttachmentManager implemen
 	}
 
 
-	protected File getThumbnailFromCacheIfExist(Attachment image,  int width, int height ) throws IOException{		
+	protected File getThumbnailFromCacheIfExist(Attachment attach,  int width, int height ) throws IOException{		
 		
 		log.debug( "thumbnail generation " + width + "x" + height );
-		File dir = getAttachmentCacheDir();
-		File file = new File(dir, toThumbnailFilename(image, width, height) );		
-		File originalFile = getAttachmentFromCacheIfExist( image );	
-		
+		File dir = getAttachmentCacheDir();		
+		File file = new File(dir, toThumbnailFilename(attach, width, height) );		
+		File originalFile = getAttachmentFromCacheIfExist( attach );			
 		log.debug( "source: " + originalFile.getAbsoluteFile() + ", " + originalFile.length() );
-		log.debug( "target:" + file.getAbsoluteFile());
+		log.debug( "thumbnail:" + file.getAbsoluteFile());
 		
 		if( file.exists() && file.length() > 0 ){
-			image.setThumbnailSize((int)file.length());
+			attach.setThumbnailSize((int)file.length());
 			return file;
+		}	
+		
+		if(StringUtils.endsWithIgnoreCase(attach.getContentType(), "pdf")){
+			PDDocument document = PDDocument.load(originalFile);			
+			List<PDPage> pages = document.getDocumentCatalog().getAllPages();
+			PDPage page = pages.get(0);
+			BufferedImage image = page.convertToImage(BufferedImage.TYPE_INT_RGB, 72);
+			ImageIO.write(Thumbnails.of(image).size(width, height).asBufferedImage(), "png", file );
+			attach.setThumbnailSize((int)file.length());			
+			return file;
+		}else 	if (StringUtils.startsWithIgnoreCase(attach.getContentType(), "image")){
+			BufferedImage originalImage = ImageIO.read(originalFile);		
+			if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
+				attach.setThumbnailSize(0);
+				return originalFile ;
+			}			
+			BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
+			ImageIO.write(thumbnail, "png", file );
+			attach.setThumbnailSize((int)file.length());			
+			return file;		
 		}
 		
-		BufferedImage originalImage = ImageIO.read(originalFile);		
-		if( originalImage.getHeight() < height || originalImage.getWidth() < width ){
-			image.setThumbnailSize(0);
-			return originalFile ;
-		}
-		
-		BufferedImage thumbnail = Thumbnails.of(originalImage).size(width, height).asBufferedImage();
-		ImageIO.write(thumbnail, "png", file );
-		image.setThumbnailSize((int)file.length());
-		
-		return file;		
+		return null;
 	}
+	
 
 	protected String toThumbnailFilename(Attachment image,  int width, int height){
 		StringBuilder sb = new StringBuilder();

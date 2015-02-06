@@ -23,7 +23,6 @@ public class FreeMarkerViewResolver extends
 
 	@Override
 	protected AbstractUrlBasedView buildView(String viewName) throws Exception {
-		// TODO 자동 생성된 메소드 스텁
 		return super.buildView(viewName);
 	}
 

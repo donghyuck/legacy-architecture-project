@@ -80,15 +80,15 @@ public class DefaultMenuRepository extends AbstractMenuRepository {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void updateMenu(Menu menu) {
 		Date now = new Date(System.currentTimeMillis());
-		if( menu.getMenuId() <1 ){		
-			
+		if( menu.getMenuId() <1 ){					
 			menu.setCreationDate(now);
 			menu.setModifiedDate(now);
 			menuDao.createMenu(menu);
 		}else{
 			holders.remove(menu.getName());
 			menu.setModifiedDate(now);
-			menuDao.updateMenu(menu);		
+			menuDao.updateMenu(menu);
+			clearMenuFromCache(menu);
 		}
 	}
 

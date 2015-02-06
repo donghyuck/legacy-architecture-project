@@ -17,13 +17,19 @@ package architecture.ee.web.spring.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 
 import net.sf.ehcache.Cache;
 
@@ -32,8 +38,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.task.TaskExecutor;
+import org.springframework.jdbc.support.JdbcUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -41,6 +50,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import architecture.common.jdbc.schema.Column;
+import architecture.common.jdbc.schema.Database;
+import architecture.common.jdbc.schema.Table;
 import architecture.common.license.License;
 import architecture.common.lifecycle.ApplicationProperties;
 import architecture.common.lifecycle.ConfigService;
@@ -55,10 +67,10 @@ import architecture.common.user.CompanyManager;
 import architecture.common.util.StringUtils;
 import architecture.ee.component.admin.AdminHelper;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.util.ApplicationConstants;
 import architecture.ee.util.ApplicationHelper;
 import architecture.ee.web.attachment.AttachmentManager;
 import architecture.ee.web.attachment.ImageManager;
-import architecture.ee.web.community.spring.controller.CommunityDataController;
 import architecture.ee.web.logo.LogoManager;
 import architecture.ee.web.navigator.MenuRepository;
 import architecture.ee.web.site.WebSite;
@@ -106,6 +118,10 @@ public class SecureWebDataController {
 	
 	@Autowired
 	private ResourceLoader resourceLoader;
+
+	@Inject
+	@Qualifier("taskExecutor")
+	private TaskExecutor taskExecutor;
 	
 	public SecureWebDataController() {
 	}
@@ -132,7 +148,42 @@ public class SecureWebDataController {
 	@ResponseBody
 	public List<DatabaseInfo>  getDatabaseInfos(NativeWebRequest request) throws NotFoundException {				
 		return systemInformationService.getDatabaseInfos();
+	}
+	
+	
+	private static final SchemaBrowserTask schemaBrowserTask = new SchemaBrowserTask();
+	
+	@RequestMapping(value="/stage/jdbc/schema/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public SchemaInfo  getDatabaseSchema(NativeWebRequest request) throws NotFoundException {		
+		if(schemaBrowserTask.getStatusCode() == 0 ){
+			schemaBrowserTask.catalogFilter = ApplicationHelper.getApplicationProperty("performance-monitoring.database.catalog", null);
+			schemaBrowserTask.schemaFilter = ApplicationHelper.getApplicationProperty("performance-monitoring.database.schema", null);		
+			schemaBrowserTask.dataSource = ApplicationHelper.getComponent("dataSource",  DataSource.class);
+			taskExecutor.execute(schemaBrowserTask);
+		}		
+		SchemaInfo schemaInfo = new SchemaInfo();
+		schemaInfo.status = schemaBrowserTask.getStatusCode();
+		if( schemaInfo.status == 2 ){
+			schemaInfo.catalog = schemaBrowserTask.database.getCatalog();
+			schemaInfo.schema = schemaBrowserTask.database.getSchema();
+			schemaInfo.tables = schemaBrowserTask.database.getTableNames();
+		}		
+		return schemaInfo;
 	}	
+
+	@RequestMapping(value="/stage/jdbc/schema/get.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public architecture.common.jdbc.schema.Table  getDatabaseTable(
+			@RequestParam(value="table", required=true ) String table,
+		NativeWebRequest request) throws NotFoundException {			
+		if( schemaBrowserTask.getStatusCode() == 2 ){
+			return schemaBrowserTask.database.getTable(table);		
+		}		
+		return null;
+	}	
+	
+	
 	
 	@RequestMapping(value="/stage/cache/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
@@ -167,7 +218,7 @@ public class SecureWebDataController {
 		else 
 			webSite = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
 		
-		boolean customizedToUse = customized && isCustomizedEnabled();
+		boolean customizedToUse = customized && isTemplateCustomizedEnabled();
 		
 		Resource root = resourceLoader.getResource(getTemplateSrouceLocation(customizedToUse));
 		List<FileInfo> list = new ArrayList<FileInfo>();
@@ -202,7 +253,7 @@ public class SecureWebDataController {
 		else 
 			webSite = WebSiteUtils.getWebSite(request.getNativeRequest(HttpServletRequest.class));
 		
-		boolean customizedToUse = customized && isCustomizedEnabled();
+		boolean customizedToUse = customized && isTemplateCustomizedEnabled();
 		File file = resourceLoader.getResource(getTemplateSrouceLocation(customizedToUse) + path ).getFile();
 		FileInfo fileInfo = new FileInfo( file );
 		fileInfo.setCustomized(customizedToUse);
@@ -229,7 +280,7 @@ public class SecureWebDataController {
 			return ApplicationHelper.getApplicationProperty(WebApplicatioinConstants.VIEW_FREEMARKER_SOURCE_LOCATION, null);
 	}
 
-	protected boolean isCustomizedEnabled() {
+	protected boolean isTemplateCustomizedEnabled() {
 		return ApplicationHelper.getApplicationBooleanProperty("view.html.customize.enabled", false);
 	}
 	
@@ -281,7 +332,267 @@ public class SecureWebDataController {
 	}
 	
 	
+	@RequestMapping(value="/mgmt/sql/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<FileInfo>  getSqlList(
+			@RequestParam(value="path", defaultValue="", required=false ) String path,
+			NativeWebRequest request) throws NotFoundException {					
+		
+		List<FileInfo> list = new ArrayList<FileInfo>();		
+		try {
+			File file = getRootSqlFile();			
+			if( StringUtils.isEmpty(path) ){
+				for( File child : file.listFiles()){
+					list.add(new FileInfo( file, child));
+				}			
+			}else{
+				File file2 = new File( file.getAbsolutePath() + path );
+				for( File child : file2.listFiles()){
+					list.add(new FileInfo( file , child));
+				}				
+			}
+		} catch (Exception e) {
+			log.error(e);
+		}		
+		return list;
+	}	
+
+	@RequestMapping(value="/mgmt/sql/get.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public FileInfo  getSql(
+			@RequestParam(value="path", required=true ) String path,
+			NativeWebRequest request) throws NotFoundException, IOException {	
+		File file = new File( getRootSqlFile().getAbsolutePath() + path );
+		FileInfo fileInfo = new FileInfo( file );
+		fileInfo.setFileContent( file.isDirectory() ? "": FileUtils.readFileToString(file));		
+		return fileInfo;
+	}	
 	
+	
+	protected Resource fileToResource( File file ){
+		return new FileSystemResource(file);
+	}
+	
+	protected File getRootSqlFile(){
+    	return AdminHelper.getRepository().getFile("sql");
+    }
+    
+    protected boolean isSqlCustomizedEnabled(){		
+    	if( StringUtils.isNotEmpty( ApplicationHelper.getApplicationProperty(ApplicationConstants.RESOURCE_SQL_LOCATION_PROP_NAME, null ))){
+    		return true;
+    	}
+    	return false;
+	}
+
+
+	public static class SchemaInfo{
+		private String schema;
+		private String catalog;
+		private String[] tables;
+		private int status;		
+		
+		
+		/**
+		 * 
+		 */
+		public SchemaInfo() {
+			status = 0 ;
+			catalog = null;
+			schema = null;
+			tables = new String[]{};		
+		}
+		/**
+		 * @return schema
+		 */
+		public String getSchema() {
+			return schema;
+		}
+		/**
+		 * @param schema 설정할 schema
+		 */
+		public void setSchema(String schema) {
+			this.schema = schema;
+		}
+		/**
+		 * @return catalog
+		 */
+		public String getCatalog() {
+			return catalog;
+		}
+		/**
+		 * @param catalog 설정할 catalog
+		 */
+		public void setCatalog(String catalog) {
+			this.catalog = catalog;
+		}
+		/**
+		 * @return tables
+		 */
+		public String[] getTables() {
+			return tables;
+		}
+		/**
+		 * @param tables 설정할 tables
+		 */
+		public void setTables(String[] tables) {
+			this.tables = tables;
+		}
+		/**
+		 * @return status
+		 */
+		public int getStatus() {
+			return status;
+		}
+		/**
+		 * @param status 설정할 status
+		 */
+		public void setStatus(int status) {
+			this.status = status;
+		}
+	}
+	
+    
+	public static class SchemaBrowserTask implements Runnable {
+		
+		private AtomicInteger status = new AtomicInteger(0); // none : 0 , running : 1 , done : 2 ;
+				
+		private String catalogFilter;
+		
+		private String schemaFilter;
+		
+		private DataSource dataSource;
+		
+		private Database database;
+		
+		public SchemaBrowserTask() {
+		}
+
+		public int getStatusCode(){
+			return status.get();
+		}
+		/**
+		 *  <OL>
+	     *	<LI><B>TABLE_CAT</B> String => table catalog (may be <code>null</code>)
+	     *	<LI><B>TABLE_SCHEM</B> String => table schema (may be <code>null</code>)
+	     *	<LI><B>TABLE_NAME</B> String => table name
+	     *	<LI><B>COLUMN_NAME</B> String => column name
+	     *	<LI><B>DATA_TYPE</B> int => SQL type from java.sql.Types
+	     *	<LI><B>TYPE_NAME</B> String => Data source dependent type name,
+	     *  for a UDT the type name is fully qualified
+	     *	<LI><B>COLUMN_SIZE</B> int => column size.  
+	     *	<LI><B>BUFFER_LENGTH</B> is not used.
+	     *	<LI><B>DECIMAL_DIGITS</B> int => the number of fractional digits. Null is returned for data types where  
+	     * DECIMAL_DIGITS is not applicable.
+	     *	<LI><B>NUM_PREC_RADIX</B> int => Radix (typically either 10 or 2)
+	     *	<LI><B>NULLABLE</B> int => is NULL allowed.
+	     *      <UL>
+	     *      <LI> columnNoNulls - might not allow <code>NULL</code> values
+	     *      <LI> columnNullable - definitely allows <code>NULL</code> values
+	     *      <LI> columnNullableUnknown - nullability unknown
+	     *      </UL>
+	     *	<LI><B>REMARKS</B> String => comment describing column (may be <code>null</code>)
+	     * 	<LI><B>COLUMN_DEF</B> String => default value for the column, which should be interpreted as a string when the value is enclosed in single quotes (may be <code>null</code>)
+	     *	<LI><B>SQL_DATA_TYPE</B> int => unused
+	     *	<LI><B>SQL_DATETIME_SUB</B> int => unused
+	     *	<LI><B>CHAR_OCTET_LENGTH</B> int => for char types the 
+	     *       maximum number of bytes in the column
+	     *	<LI><B>ORDINAL_POSITION</B> int	=> index of column in table 
+	     *      (starting at 1)
+	     *	<LI><B>IS_NULLABLE</B> String  => ISO rules are used to determine the nullability for a column.
+	     *       <UL>
+	     *       <LI> YES           --- if the parameter can include NULLs
+	     *       <LI> NO            --- if the parameter cannot include NULLs
+	     *       <LI> empty string  --- if the nullability for the 
+	     * parameter is unknown
+	     *       </UL>
+	     *  <LI><B>SCOPE_CATLOG</B> String => catalog of table that is the scope
+	     *      of a reference attribute (<code>null</code> if DATA_TYPE isn't REF)
+	     *  <LI><B>SCOPE_SCHEMA</B> String => schema of table that is the scope
+	     *      of a reference attribute (<code>null</code> if the DATA_TYPE isn't REF)
+	     *  <LI><B>SCOPE_TABLE</B> String => table name that this the scope
+	     *      of a reference attribure (<code>null</code> if the DATA_TYPE isn't REF)
+	     *  <LI><B>SOURCE_DATA_TYPE</B> short => source type of a distinct type or user-generated
+	     *      Ref type, SQL type from java.sql.Types (<code>null</code> if DATA_TYPE 
+	     *      isn't DISTINCT or user-generated REF)
+	     *   <LI><B>IS_AUTOINCREMENT</B> String  => Indicates whether this column is auto incremented
+	     *       <UL>
+	     *       <LI> YES           --- if the column is auto incremented
+	     *       <LI> NO            --- if the column is not auto incremented
+	     *       <LI> empty string  --- if it cannot be determined whether the column is auto incremented
+	     * parameter is unknown
+	     *       </UL>
+	     *  </OL>
+	     *  
+		 */
+		public void run() {
+			if( status.get() == 0){	
+				status.set(1);
+				Connection conn = null;
+				ResultSet rs = null;
+				this.database = new Database(catalogFilter, schemaFilter);		
+				try {	
+					conn = dataSource.getConnection();
+					DatabaseMetaData dbmd = conn.getMetaData();					
+					try{
+						rs = dbmd.getTables(catalogFilter, schemaFilter, null, new String[]{"TABLE"});					
+						while (rs.next()) {
+							String catalogName = rs.getString("TABLE_CAT");
+							String schemaName = rs.getString("TABLE_SCHEM");
+							String tableName = rs.getString("TABLE_NAME");							
+							Table table = database.getTable(tableName);
+							if (table == null) {
+								table = new Table(tableName);
+								table.setCatalog(catalogName);
+								table.setSchema(schemaName);
+								database.addTable(table);
+							}
+						}
+					} finally {
+						JdbcUtils.closeResultSet(rs);
+					}
+					
+					for( String tableName : database.getTableNames()){
+						try{
+							Table table = database.getTable(tableName);						
+							rs = dbmd.getColumns(catalogFilter, schemaFilter, table.getName(), null);
+							while (rs.next()) {								
+								String columnName = rs.getString("COLUMN_NAME");
+								String dataTypeName = rs.getString("TYPE_NAME");
+								int dataType = Integer.parseInt(rs.getString("DATA_TYPE"));
+								int columnSize = Integer.parseInt(rs.getString("COLUMN_SIZE"));
+								String comment = rs.getString("COLUMN_DEF");		
+								int ordinalPosition = Integer.parseInt(rs.getString("ORDINAL_POSITION"));
+								String nullable = rs.getString("IS_NULLABLE");								
+								table.addColumn(new Column(columnName, dataType, dataTypeName, columnSize, nullable, comment, ordinalPosition));							
+							}							
+						} finally {
+							JdbcUtils.closeResultSet(rs);
+						}
+					}
+					
+					for( String tableName : database.getTableNames()){
+						try{
+							Table table = database.getTable(tableName);						
+							rs = dbmd.getPrimaryKeys(catalogFilter, schemaFilter, table.getName());
+							while (rs.next()) {
+								String columnName = rs.getString("COLUMN_NAME");
+								//KEY_SEQ
+								table.setPrimaryKey(table.getColumn(columnName));
+								table.getColumn(columnName).setPrimaryKey(true);
+							}
+						} finally {
+							JdbcUtils.closeResultSet(rs);
+						}
+					}
+					status.set(2);
+				} catch (SQLException e) {
+					status.set(0);
+				} finally {
+					JdbcUtils.closeConnection(conn);
+				}				
+			}
+		}
+	}
 
 	public static class FileInfo {
 		

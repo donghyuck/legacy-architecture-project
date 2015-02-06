@@ -9,7 +9,7 @@
 	<packaging>jar</packaging>
 	<groupId>architecture.web</groupId>
 	<artifactId>architecture-web</artifactId>
-	<version>1.1.0.RELEASE</version>
+	<version>2.0.0.RELEASE</version>
 	<name>APPLICATION WEB ARCHITECTURE</name>
 	<description>웹 어플리케이션 개발을 위한 아키텍처</description>
 	<scm>
@@ -19,6 +19,17 @@
 		<name>INKIUM</name>
 		<url>http://www.inkium.com</url>
 	</organization>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<javac.src.version>1.6</javac.src.version>
+		<javac.target.version>1.6</javac.target.version>
+		<project.javadoc.docEncoding>UTF-8</project.javadoc.docEncoding>
+		<project.build.version>2.0.0.RELEASE</project.build.version>
+		<project.dependency.spring.version>4.1.0.RELEASE</project.dependency.spring.version>
+		<project.dependency.spring-security.version>3.2.5.RELEASE</project.dependency.spring-security.version>				
+	</properties>
+		
 	<build>
 		<plugins>
 			<plugin>
@@ -136,17 +147,17 @@
 		<dependency>
 			<groupId>architecture.ee</groupId>
 			<artifactId>architecture-ee</artifactId>
-			<version>1.0.5.RELEASE</version>
+			<version>${project.build.version}</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.2.1.RELEASE</version>			
+			<version>${project.dependency.spring.version}</version>			
 		</dependency>	
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context-support</artifactId>
-			<version>3.2.1.RELEASE</version>			
+			<version>${project.dependency.spring.version}</version>			
 		</dependency>		
 		<dependency>
 			<groupId>opensymphony</groupId>
@@ -154,11 +165,6 @@
 			<version>2.4.2</version>
 			<type>jar</type>
 			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>itextpdf</artifactId>
-			<version>5.3.1</version>
 		</dependency>
 		<dependency>
 			<groupId>log4j</groupId>
@@ -207,7 +213,27 @@
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
 			<version>2.2.2</version>
-		</dependency>	
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>1.8.7</version>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>5.5.3</version>
+		</dependency>
+		<dependency>
+			<groupId>com.drewnoakes</groupId>
+			<artifactId>metadata-extractor</artifactId>
+			<version>2.6.2</version>
+		</dependency>
 	</dependencies>
 
 	<distributionManagement>
