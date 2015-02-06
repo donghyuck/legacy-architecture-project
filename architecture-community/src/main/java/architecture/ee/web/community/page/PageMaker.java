@@ -61,6 +61,7 @@ public class PageMaker {
 	}
 	
 	public static class Builder {
+		
 		private PageMaker maker ;
 		private Model model;
 		private HttpServletRequest request;
