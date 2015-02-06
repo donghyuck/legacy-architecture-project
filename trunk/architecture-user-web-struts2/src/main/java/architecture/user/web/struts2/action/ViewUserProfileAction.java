@@ -15,9 +15,9 @@
  */
 package architecture.user.web.struts2.action;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class ViewUserProfileAction  extends FrameworkActionSupport  {
+public class ViewUserProfileAction  extends WebSiteActionSupport  {
     
     @Override
     public String execute() throws Exception {

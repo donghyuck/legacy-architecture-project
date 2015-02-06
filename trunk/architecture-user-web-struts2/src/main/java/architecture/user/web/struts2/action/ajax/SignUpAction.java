@@ -15,18 +15,19 @@
  */
 package architecture.user.web.struts2.action.ajax;
 
-import org.apache.commons.lang.StringUtils;
+
 
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
 import architecture.common.user.authentication.UnAuthorizedException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.common.util.StringUtils;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.user.util.CompanyUtils;
 
-public class SignUpAction extends  FrameworkActionSupport  {
+public class SignUpAction extends  WebSiteActionSupport  {
 	
 	private UserManager userManager ;
 	

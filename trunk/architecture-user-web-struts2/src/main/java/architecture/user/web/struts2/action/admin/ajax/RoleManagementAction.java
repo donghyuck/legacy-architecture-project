@@ -17,12 +17,12 @@ package architecture.user.web.struts2.action.admin.ajax;
 
 import java.util.List;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.user.Role;
 import architecture.user.RoleManager;
 import architecture.user.RoleNotFoundException;
 
-public class RoleManagementAction extends FrameworkActionSupport  {
+public class RoleManagementAction extends WebSiteActionSupport  {
 	
 	private Long roleId;
 	private Integer pageSize = 15;

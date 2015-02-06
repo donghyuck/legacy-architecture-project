@@ -15,11 +15,11 @@
  */
 package architecture.user.web.struts2.action;
 
-import org.apache.commons.lang.StringUtils;
+import architecture.common.util.StringUtils;
 
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class LoginAction  extends FrameworkActionSupport  {
+public class LoginAction  extends WebSiteActionSupport  {
 	
 	String ver = null ;
 	

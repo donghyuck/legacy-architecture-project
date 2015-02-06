@@ -22,9 +22,9 @@ import architecture.common.user.User;
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.attachment.Attachment;
 import architecture.ee.web.attachment.AttachmentManager;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class UserAttachementAction extends  FrameworkActionSupport {
+public class UserAttachementAction extends  WebSiteActionSupport {
 
 	private Long attachmentId = -1L;
 	
