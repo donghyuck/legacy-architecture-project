@@ -32,13 +32,13 @@ import architecture.ee.jdbc.property.dao.ExtendedPropertyDao;
 import architecture.ee.spring.jdbc.support.ExtendedJdbcDaoSupport;
 import architecture.ee.web.template.Template;
 import architecture.ee.web.template.dao.TemplateDao;
-import architecture.ee.web.template.impl.TemplateImpl;
+import architecture.ee.web.template.impl.DefaultTemplate;
 
 public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateDao {
 
-	private final RowMapper<TemplateImpl> templateMapper = new RowMapper<TemplateImpl>(){
-		public TemplateImpl mapRow(ResultSet rs, int rowNum) throws SQLException {
-			TemplateImpl impl = new TemplateImpl();			
+	private final RowMapper<DefaultTemplate> templateMapper = new RowMapper<DefaultTemplate>(){
+		public DefaultTemplate mapRow(ResultSet rs, int rowNum) throws SQLException {
+			DefaultTemplate impl = new DefaultTemplate();			
 			impl.setTemplateId(rs.getLong("TEMPLATE_ID"));
 			impl.setTitle(rs.getString("TITLE"));
 			impl.setTemplateType(rs.getString("TEMPLATE_TYPE"));
@@ -163,7 +163,7 @@ public class JdbcTemplateDao extends ExtendedJdbcDaoSupport implements TemplateD
 		saveTemplateBody(content);
 	}
 	public Template getTemplate(long contentId) {
-		TemplateImpl impl = null ;
+		DefaultTemplate impl = null ;
 		try {
 			
 			impl = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_TEMPLATE_BY_ID").getSql(), templateMapper, new SqlParameterValue(Types.NUMERIC, contentId ) );

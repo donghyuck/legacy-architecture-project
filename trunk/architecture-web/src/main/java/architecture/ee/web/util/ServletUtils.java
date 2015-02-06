@@ -26,10 +26,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import architecture.ee.util.OutputFormat;
 
 public class ServletUtils {
+	
+	private static Log log = LogFactory.getLog(ServletUtils.class);
 	
 	public static final String CONTEXT_ROOT_PATH = "";
 	
@@ -104,8 +108,14 @@ public class ServletUtils {
 		return thisPath;
 	}
 	
+	
+	
+	
 	public static OutputFormat getOutputFormat(HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse){
     	String formatString = ParamUtils.getParameter(httpservletrequest, "output", "html");
+    	if( StringUtils.isNotEmpty(ParamUtils.getAttribute(httpservletrequest, "output"))){
+    		formatString = ParamUtils.getAttribute(httpservletrequest, "output");
+    	}    	
     	OutputFormat format = OutputFormat.stingToOutputFormat(formatString);  
     	return format;
 	}

@@ -15,10 +15,10 @@
  */
 package architecture.ee.web.navigator;
 
-import architecture.ee.exception.ApplicationException;
+import architecture.ee.exception.NotFoundException;
 
 @SuppressWarnings("serial")
-public class MenuNotFoundException extends ApplicationException {
+public class MenuNotFoundException extends NotFoundException {
 
 	public MenuNotFoundException() {
 		super();

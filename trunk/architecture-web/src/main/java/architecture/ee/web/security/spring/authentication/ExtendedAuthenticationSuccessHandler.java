@@ -43,19 +43,14 @@ public class ExtendedAuthenticationSuccessHandler extends
 		if( output == OutputFormat.JSON )
 		{
 			// Token 		
-			String referer = request.getHeader("Referer");
-			
+			String referer = request.getHeader("Referer");			
 			Map model = new ModelMap();
 			Map<String, String> item = new java.util.HashMap<String, String>() ; 
 			item.put("success", "true");	
 			if( StringUtils.isNotEmpty(referer))
-				item.put("referer", referer );		
-			
-			model.put("item", item);		
-			
-			
-			request.setAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE, model);
-			
+				item.put("referer", referer );
+			model.put("item", item);			
+			request.setAttribute(WebApplicatioinConstants.MODEL_ATTRIBUTE, model);			
 			if(output == OutputFormat.JSON ){
 				JsonView view = new JsonView();		    
 				view.setModelKey("item");			

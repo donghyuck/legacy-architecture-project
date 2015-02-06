@@ -17,6 +17,8 @@ package architecture.ee.web.navigator;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import architecture.common.cache.CacheSizes;
 import architecture.common.model.factory.ModelTypeFactory;
 import architecture.common.model.support.EntityModelObjectSupport;
@@ -41,8 +43,6 @@ public class DefaultMenu  extends EntityModelObjectSupport implements Menu {
 		this.menuId = menuId;
 	}
 
-
-
 	public long getMenuId() {
 		return menuId;
 	}
@@ -55,10 +55,12 @@ public class DefaultMenu  extends EntityModelObjectSupport implements Menu {
 		this.location = location;
 	}
 
+	@JsonIgnore
 	public Serializable getPrimaryKeyObject() {
 		return menuId;
 	}
 
+	@JsonIgnore
 	public int getModelObjectType() {
 		return ModelTypeFactory.getTypeIdFromCode("MENU");
 	}
@@ -147,6 +149,7 @@ public class DefaultMenu  extends EntityModelObjectSupport implements Menu {
 		return builder.toString();
 	}
 
+	@JsonIgnore
 	public int getCachedSize() {
 		return CacheSizes.sizeOfLong() 
 				+ CacheSizes.sizeOfString(getName())
@@ -166,6 +169,5 @@ public class DefaultMenu  extends EntityModelObjectSupport implements Menu {
 	public void setMenuData(String data) {
 		this.menuData = data;
 	}
-
 	
 }

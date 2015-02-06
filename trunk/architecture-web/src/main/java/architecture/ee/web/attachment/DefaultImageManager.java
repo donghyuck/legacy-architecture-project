@@ -260,10 +260,10 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		image.setObjectId(objectId);
 		image.setContentType(contentType);
 		image.setName(name);
-		image.setImageId(-1L);
+		image.setImageId(-1L);		
 		
-		image.setSize( (int) FileUtils.sizeOf(file));
 		try {
+			image.setSize( (int) FileUtils.sizeOf(file));
 			image.setInputStream(FileUtils.openInputStream(file));
 		} catch (IOException e) {
 			log.debug(e);
@@ -281,19 +281,35 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 		image.setContentType(contentType);
 		image.setName(name);
 		image.setImageId(-1L);
-		image.setInputStream(inputStream);		
+		
 		try {
 			image.setSize( IOUtils.toByteArray(inputStream).length );
+			image.setInputStream(inputStream);		
 		} catch (IOException e) {
 			log.debug(e);
 		}
 		return image;
 	}
 
+	public Image createImage(int objectType, long objectId, String name, String contentType, InputStream inputStream, int size) {
+		Date now = new Date();
+		ImageImpl image = new ImageImpl();
+		image.setCreationDate(now);
+		image.setModifiedDate(now);
+		image.setObjectType(objectType);
+		image.setObjectId(objectId);
+		image.setContentType(contentType);
+		image.setName(name);
+		image.setImageId(-1L);
+		image.setInputStream(inputStream);		
+		image.setSize(size);
+		return image;
+	}
+	
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW )
 	public void saveOrUpdate(Image image) {
 		try {
-			if( image.getImageId() < 0 ){
+			if( image.getImageId() <= 0 ){
 				imageDao.createImage(image);
 				imageDao.saveImageInputStream(image, image.getInputStream());
 			}else{
@@ -319,9 +335,9 @@ public class DefaultImageManager extends AbstractAttachmentManager implements Im
 	public Image saveImage(Image image){
 		
 		try {
-			if( image.getImageId() < 0 ){
-				Image newImage = imageDao.createImage(image);
-				imageDao.saveImageInputStream(newImage, image.getInputStream());
+			if( image.getImageId() <= 0 ){
+				imageDao.createImage(image);				
+				imageDao.saveImageInputStream(image, image.getInputStream());
 			}else{
 				Date now = new Date();
 				((ImageImpl)image).setModifiedDate(now);

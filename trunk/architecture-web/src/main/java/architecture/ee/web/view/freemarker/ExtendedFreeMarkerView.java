@@ -13,22 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package architecture.ee;
+package architecture.ee.web.view.freemarker;
 
-import java.util.UUID;
+import java.util.Map;
 
-import org.apache.commons.lang3.RandomStringUtils;
-import org.junit.Test;
+import javax.servlet.http.HttpServletRequest;
 
-public class uuidTest {
+import org.springframework.web.servlet.view.freemarker.FreeMarkerView;
+
+import freemarker.ext.beans.BeansWrapper;
+
+public class ExtendedFreeMarkerView extends FreeMarkerView {
+
+	/**
+	 * 
+	 */
+	public ExtendedFreeMarkerView() {
+		super();
+	}
+
+	protected void exposeHelpers(Map<String, Object> model, HttpServletRequest request) throws Exception {
+		BeansWrapper b = (BeansWrapper)getObjectWrapper();		
+		FreeMarkerHelper.populateStatics(b, model);
+	}
 
 	
-	@Test
-	public void uuid(){
-		String str = "1" + '-' + "1" + "-" + "21";
-		
-		
-		System.out.println( RandomStringUtils.random(64, true, true) );
-		
-	}
 }

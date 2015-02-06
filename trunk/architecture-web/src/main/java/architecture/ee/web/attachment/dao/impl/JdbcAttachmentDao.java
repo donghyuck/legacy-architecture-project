@@ -208,7 +208,9 @@ public class JdbcAttachmentDao extends ExtendedJdbcDaoSupport implements Attachm
 	}
 
 	public Attachment getByAttachmentId(long attachmentId) {
-		return getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_ATTACHMENT_BY_ID").getSql(), attachmentMapper, new SqlParameterValue (Types.NUMERIC, attachmentId ));		
+		Attachment attach = getExtendedJdbcTemplate().queryForObject(getBoundSql("ARCHITECTURE_WEB.SELECT_ATTACHMENT_BY_ID").getSql(), attachmentMapper, new SqlParameterValue (Types.NUMERIC, attachmentId ));		
+		attach.setProperties(this.getAttachmentProperties(attachmentId));
+		return attach;
 	}
 
 	public List<Attachment> getByObjectTypeAndObjectId(int objectType, long objectId) {

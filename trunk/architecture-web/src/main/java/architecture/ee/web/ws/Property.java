@@ -29,12 +29,20 @@ public class Property implements java.io.Serializable {
     private String name;
     private Object value;
 
+
+    /**
+	 * 
+	 */
+	public Property() {
+	}
+	
     public Property(String name, Object value) {
         this.name = name;
         this.value = value;
     }
 
-    public String getName() {
+
+	public String getName() {
         return name;
     }
 

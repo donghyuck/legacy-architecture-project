@@ -22,6 +22,9 @@
 	p:timeToLive : 60 초 	
 	 -->	 
 	 
+	 <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" p:maxUploadSize="52428800" >
+	 </bean>
+	 
 	<bean id="monitoringCache" class="org.springframework.cache.ehcache.EhCacheFactoryBean" p:cacheName="monitoringCache" p:maxElementsInMemory="100"  p:diskPersistent="false" p:overflowToDisk="false"  p:timeToIdle="30"  p:timeToLive="3600" p:eternal="false"  p:diskExpiryThreadIntervalSeconds="0"  p:statisticsEnabled="true" />
 	
 	
@@ -44,6 +47,7 @@
     <bean id="passwordSaltSource" class="architecture.user.security.spring.authentication.encoding.SaltSourceFactory" />
 
 	<bean id="menuDao" class="architecture.ee.web.navigator.dao.impl.JdbcMenuDao" parent="jdbcDaoSupport"  depends-on="extendedPropertyDao" p:extendedPropertyDao-ref="extendedPropertyDao" />
+	
 	<bean id="menuRepository" class="architecture.ee.web.navigator.DefaultMenuRepository"  init-method="initialize" destroy-method="destory"  depends-on="menuDao, eventPublisher" 	p:menuDao-ref="menuDao" p:eventPublisher-ref="eventPublisher"  p:menuCache-ref="menuCache"  p:menuIdCache-ref="menuIdCache" />
 	
 	
