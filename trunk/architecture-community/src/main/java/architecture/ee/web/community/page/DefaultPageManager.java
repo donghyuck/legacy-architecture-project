@@ -37,8 +37,6 @@ public class DefaultPageManager implements PageManager  {
 	private Log log = LogFactory.getLog(getClass());
 	private UserManager userManager;
 	
-	//private PageVersionManager pageVersionManager;
-		
 	private PageDao pageDao ;
 	
 	private PageVersionDao pageVersionDao ;
