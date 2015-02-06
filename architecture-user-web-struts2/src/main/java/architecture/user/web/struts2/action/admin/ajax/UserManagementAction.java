@@ -29,14 +29,14 @@ import architecture.common.user.UserManager;
 import architecture.common.user.UserNotFoundException;
 import architecture.common.user.UserTemplate;
 import architecture.common.util.StringUtils;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 import architecture.ee.web.ws.Property;
 import architecture.user.GroupManager;
 import architecture.user.Role;
 import architecture.user.RoleManager;
 
-public class UserManagementAction  extends FrameworkActionSupport  {
+public class UserManagementAction  extends WebSiteActionSupport  {
 
 	private Long companyId = 1L ;
 	

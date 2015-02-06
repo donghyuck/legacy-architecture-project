@@ -20,10 +20,10 @@ import java.util.Map;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.common.user.UserTemplate;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.util.ParamUtils;
 
-public class SignUpMainAction  extends FrameworkActionSupport  {
+public class SignUpMainAction  extends WebSiteActionSupport  {
 	
 	private UserManager userManager ;
 	

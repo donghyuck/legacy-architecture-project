@@ -23,11 +23,12 @@ import org.springframework.security.core.GrantedAuthority;
 
 import architecture.common.user.User;
 import architecture.common.user.authentication.AuthToken;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 import architecture.ee.web.ws.Property;
 
-public class GetUserDetailsAction extends  FrameworkActionSupport {
-
+public class GetUserDetailsAction extends  WebSiteActionSupport {
+	
+	
 	public List<Property> getCurrentUserProperty() {
 		Map<String, String> properties = getCurrentUser().getProperties();
 		List<Property> list = new ArrayList<Property>();

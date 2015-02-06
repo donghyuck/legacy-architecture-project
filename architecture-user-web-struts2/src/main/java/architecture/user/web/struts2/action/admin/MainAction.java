@@ -18,9 +18,9 @@ package architecture.user.web.struts2.action.admin;
 import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.CompanyNotFoundException;
-import architecture.ee.web.struts2.action.support.FrameworkActionSupport;
+import architecture.ee.web.struts2.action.support.WebSiteActionSupport;
 
-public class MainAction extends FrameworkActionSupport  {
+public class MainAction extends WebSiteActionSupport  {
 
 	private Long targetCompanyId = -1L ;
 	
