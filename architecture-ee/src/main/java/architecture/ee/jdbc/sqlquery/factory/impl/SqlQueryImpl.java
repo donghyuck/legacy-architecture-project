@@ -444,6 +444,7 @@ public class SqlQueryImpl implements SqlQuery {
 		Map<String, Object> paramsToUse = new HashMap<String, Object>();
 		
 		// 메핑 파라메터에 따라 INPUT 과 OUTPU 을 설정한다.
+		
 		for( ParameterMapping mapping : sql.getParameterMappings()){
 			
 			mapping.getProperty(); 
