@@ -16,11 +16,16 @@
 package architecture.ee.web.spring.controller;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import net.anotheria.moskito.core.predefined.OSStats;
+import net.anotheria.moskito.core.producers.IStats;
 import net.anotheria.moskito.core.producers.IStatsProducer;
+import net.anotheria.moskito.core.registry.IProducerRegistry;
+import net.anotheria.moskito.core.registry.ProducerReference;
 import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
+import net.anotheria.moskito.core.stats.TimeUnit;
 import net.anotheria.moskito.web.session.SessionCountStats;
 
 import org.apache.commons.logging.Log;
@@ -33,6 +38,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.monitoring.moskito.ProducerObject;
+import architecture.ee.web.monitoring.moskito.StatLineObject;
+import architecture.ee.web.monitoring.moskito.StatValue;
 
 @Controller ("secure-moskito-data-controller")
 @RequestMapping("/secure/data")
@@ -44,77 +52,89 @@ public class SecureMoSKitoController {
 		// TODO 자동 생성된 생성자 스텁
 	}
 
-	public static class StatValue {
-		
-		private String name;
-		
-		private String value;
-		
-		/**
-		 * @param name
-		 * @param value
-		 */
-		public StatValue(String name, String value) {
-			super();
-			this.name = name;
-			this.value = value;
-		}
-		/**
-		 * @return name
-		 */
-		public String getName() {
-			return name;
-		}
-		/**
-		 * @param name 설정할 name
-		 */
-		public void setName(String name) {
-			this.name = name;
-		}
-		/**
-		 * @return value
-		 */
-		public String getValue() {
-			return value;
-		}
-		/**
-		 * @param value 설정할 value
-		 */
-		public void setValue(String value) {
-			this.value = value;
-		}		
-	}	
 
-	
-	@RequestMapping(value="/stage/os/stats.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@RequestMapping(value="/stage/producers/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
-	public List<StatValue> getOSStats(
-			@RequestParam(value="interval", defaultValue="1m", required=false ) String intervalName,
-			NativeWebRequest request) throws NotFoundException {		
-		IStatsProducer<OSStats> producer = ProducerRegistryFactory.getProducerRegistryInstance().getProducer("OS");		
-		OSStats stats = producer.getStats().get(0);
-		List<StatValue> list = new ArrayList<StatValue>(stats.getAvailableValueNames().size());
-		for( String name : stats.getAvailableValueNames()){
-			list.add( new StatValue( name, stats.getValueByNameAsString(name, intervalName, null) ) );
+	public List<ProducerObject> getProducers(
+		@RequestParam(value="interval", defaultValue="1m", required=false ) String intervalName,	
+		NativeWebRequest request) throws NotFoundException 	
+	{	
+		Collection<ProducerReference> allProducers = getIProducerRegistry().getProducerReferences() ;
+		List<ProducerObject> list = new ArrayList<ProducerObject>(allProducers.size());
+		for (ProducerReference ref : getIProducerRegistry().getProducerReferences() ){
+			IStatsProducer producer  = ref.get();		
+			log.debug(producer.getProducerId());
+			log.debug(producer.getClass().getName());
+			list.add(convertStatsProducerToPO( producer, intervalName, null, true, false));
 		}
 		return list;
 	}
-
+	
 	
 	@RequestMapping(value="/stage/os/stats.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
-	public List<List<StatValue>> getSessionCountByTld(
+	public ProducerObject getOSStats(
 			@RequestParam(value="interval", defaultValue="1m", required=false ) String intervalName,
 			NativeWebRequest request) throws NotFoundException {		
-		IStatsProducer<SessionCountStats> producer = ProducerRegistryFactory.getProducerRegistryInstance().getProducer("SessionCountByTld");		
-		
-		List<List<StatValue>> l = new ArrayList(producer.getStats().size());
-		for( SessionCountStats stats : producer.getStats()){
-			List<StatValue> list = new ArrayList<StatValue>(stats.getAvailableValueNames().size());
-			for( String name : stats.getAvailableValueNames()){
-				list.add( new StatValue( name, stats.getValueByNameAsString(name, intervalName, null) ) );
-			}
-		}
-		return l;
+		IStatsProducer<OSStats> producer = ProducerRegistryFactory.getProducerRegistryInstance().getProducer("OS");		
+		return convertStatsProducerToPO(producer, intervalName, null, true, false);
 	}
+
+	
+	@RequestMapping(value="/stage/session/stats.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ProducerObject getSessionCountByTld(
+			@RequestParam(value="interval", defaultValue="1m", required=false ) String intervalName,
+			NativeWebRequest request) throws NotFoundException {				
+		IStatsProducer<SessionCountStats> producer = getIProducerRegistry().getProducer("SessionCountByTld");
+		return convertStatsProducerToPO(producer, intervalName, null, false, true);
+	}
+	
+	protected ProducerObject convertStatsProducerToPO(IStatsProducer<? extends IStats> p, String intervalName, TimeUnit timeUnit, boolean createFirstStats, boolean createAllStats){
+		ProducerObject ao = new ProducerObject();
+		ao.setProducerId(p.getProducerId());
+		ao.setCategory(p.getCategory());
+		ao.setSubsystem(p.getSubsystem());
+		ao.setProducerClassName(p.getClass().getSimpleName());
+		ao.setFullProducerClassName(p.getClass().getName());
+		
+		if(createFirstStats){
+			IStats firstStats = p.getStats().get(0);
+			ao.setFirstStatsValues( getStatValues(firstStats, intervalName, timeUnit) );
+		}
+		if(createAllStats){
+			List<? extends IStats> allStats = p.getStats();
+			for (IStats statObject : allStats){
+				StatLineObject line = new StatLineObject();
+				line.setStatName(statObject.getName());
+				line.setValues(getStatValues(statObject, intervalName, timeUnit));
+				ao.addStatLine(line);
+			}			
+		}
+		return ao;
+	} 
+	
+	protected List<StatValue> getStatValues(IStats stat, String intervalName, TimeUnit timeUnit){
+		
+		log.debug("============================");
+		log.debug("stat:" + stat );
+		log.debug("stat value length :" + stat.getAvailableValueNames().size() );
+		
+		List<StatValue> row = new ArrayList<StatValue>(stat.getAvailableValueNames().size());
+		for( String name : stat.getAvailableValueNames()){			
+			log.debug("stat value: name=" +name + ", interval="+ intervalName + ", timeUnit="+ timeUnit );
+			try {
+				row.add( new architecture.ee.web.monitoring.moskito.StringValue( name, stat.getValueByNameAsString(name, intervalName, timeUnit) ) );
+			} catch (Exception e) {
+				row.add( new architecture.ee.web.monitoring.moskito.StringValue( name, "" ) );
+			}
+		}	
+		log.debug("============================");
+		return row;
+	}
+	
+	protected IProducerRegistry getIProducerRegistry(){
+		return ProducerRegistryFactory.getProducerRegistryInstance();
+	}
+	
 }
