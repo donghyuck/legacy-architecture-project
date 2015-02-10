@@ -212,11 +212,11 @@ public class SecureMoSKitoController {
 				}else if (StringUtils.equals(name, "Uptime") ){				
 					long value = Long.parseLong(stat.getValueByNameAsString(name, intervalName, timeUnit));
 					row.add( new architecture.ee.web.monitoring.moskito.LongValue( name, value ) );
-					row.add( new architecture.ee.web.monitoring.moskito.LongValue( "uphours", TimeUnit.SECONDS.toHours(value) ) );
-					row.add( new architecture.ee.web.monitoring.moskito.LongValue( "updays", TimeUnit.SECONDS.toDays(value) ) );
+					row.add( new architecture.ee.web.monitoring.moskito.LongValue( "Uphours", TimeUnit.SECONDS.toHours(value) ) );
+					row.add( new architecture.ee.web.monitoring.moskito.LongValue( "Updays", TimeUnit.SECONDS.toDays(value) ) );
 					
 				}else{
-					row.add( getLongStatValue(stat, name, intervalName, timeUnit ) );
+					row.add( new architecture.ee.web.monitoring.moskito.StringValue( name, stat.getValueByNameAsString(name, intervalName, timeUnit)) );
 				}
 			}			
 		}else{
