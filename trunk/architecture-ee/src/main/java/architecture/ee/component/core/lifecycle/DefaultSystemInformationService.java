@@ -26,6 +26,8 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
+
 import architecture.common.jdbc.JdbcUtils;
 import architecture.common.license.License;
 import architecture.common.license.LicenseManager;

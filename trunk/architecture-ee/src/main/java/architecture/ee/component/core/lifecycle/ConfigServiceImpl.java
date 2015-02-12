@@ -29,6 +29,8 @@ import javax.sql.DataSource;
 
 import architecture.common.util.StringUtils;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
+
 import org.apache.commons.lang3.time.FastDateFormat;
 import org.apache.commons.vfs2.FileObject;
 import org.springframework.transaction.annotation.Propagation;
@@ -48,6 +50,7 @@ import architecture.ee.util.ApplicationConstants;
 /**
  * @author   donghyuck
  */
+
 public class ConfigServiceImpl extends ComponentImpl implements ConfigService {
 
 	private ApplicationProperties setupProperties = null;
