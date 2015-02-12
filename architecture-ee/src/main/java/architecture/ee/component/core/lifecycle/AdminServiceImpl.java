@@ -17,7 +17,10 @@ package architecture.ee.component.core.lifecycle;
 
 import javax.servlet.ServletContext;
 
-import net.anotheria.moskito.aop.annotation.Monitor;
+import net.anotheria.moskito.core.threshold.ThresholdStatus;
+import net.anotheria.moskito.core.threshold.Thresholds;
+import net.anotheria.moskito.core.threshold.guard.GuardedDirection;
+import net.anotheria.moskito.core.threshold.guard.LongBarrierPassGuard;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
@@ -65,7 +68,7 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 		this.configService = null;
 		this.servletContext = null;
 		this.applicationContext = null;
-		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release_Candidate, 1 );
+		this.version = new Version(2, 0, 0, Version.ReleaseStatus.Release, 1 );
 	}
 	
 	public ConfigService getConfigService() {
@@ -134,20 +137,14 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 	}
 
 	@Override
-	protected void doStart(){		
-		
+	protected void doStart(){				
 		Thread currentThread = Thread.currentThread();
-        ClassLoader oldLoader = currentThread.getContextClassLoader();
+		ClassLoader oldLoader = currentThread.getContextClassLoader();
+		LicenseManager licenseManager = getBootstrapComponent(LicenseManager.class);
+		License license = licenseManager.getLicense();
+		log.info(license.toString());
         
-        LicenseManager licenseManager = getBootstrapComponent(LicenseManager.class);
-        License license = licenseManager.getLicense();
-        
-        log.info( 
-            license.toString()
-        );
-        
-       // MethodInvoker invoker = new MethodInvoker();
-        
+       // MethodInvoker invoker = new MethodInvoker();        
         // 플러그인 기능은 평가판 라이선스에서는 제공하지 않는다.
         if( AdminHelper.isSetupComplete() && license.getType() != License.Type.EVALUATION  ){
         	try {
@@ -156,26 +153,51 @@ public class AdminServiceImpl extends SpringLifecycleSupport implements SpringAd
 			} catch (Exception e) {
 				
 			}
-        }
-        
-        // 컨텐스트를 로드합니다
-        if(isSetServletContext() && isSetContextLoader()){
-			try{				
-				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());
-	        	//PluginService pluginService = getBootstrapComponent(PluginService.class);
-	        	//pluginService.activate();				
-				this.applicationContext.start();
-			}finally{
-				if(oldLoader != null)
-	               currentThread.setContextClassLoader(oldLoader);
+		}
+
+		// 컨텐스트를 로드합니다
+		if (isSetServletContext() && isSetContextLoader()) {
+			
+			if( configService.getApplicationBooleanProperty("performance-monitoring.moskito.thresholds-setup", false)){
+				log.debug("setup moskito threshold ...");
+				Thresholds.addMemoryThreshold(
+					"PermGenFree", "MemoryPool-PS Perm Gen-NonHeap", "Free", 
+					new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 5, GuardedDirection.UP), /* */
+					new LongBarrierPassGuard(ThresholdStatus.YELLOW, 1000 * 1000 * 5, GuardedDirection.DOWN), /* */
+					new LongBarrierPassGuard(ThresholdStatus.ORANGE, 1000 * 1000 * 2, GuardedDirection.DOWN), /* */
+					new LongBarrierPassGuard(ThresholdStatus.RED, 1000 * 1000 * 1, GuardedDirection.DOWN), /* */
+					new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000 * 1, GuardedDirection.DOWN) /* */	
+				);		
+				Thresholds.addMemoryThreshold(
+					"OldGenFree", "MemoryPool-PS Old Gen-Heap", "Free", /* */
+					new LongBarrierPassGuard(ThresholdStatus.GREEN, 1000 * 1000 * 100, GuardedDirection.UP), /* */
+					new LongBarrierPassGuard(ThresholdStatus.YELLOW, 1000 * 1000 * 50, GuardedDirection.DOWN), /* */
+					new LongBarrierPassGuard(ThresholdStatus.ORANGE, 1000 * 1000 * 10, GuardedDirection.DOWN), /* */
+					new LongBarrierPassGuard(ThresholdStatus.RED, 1000 * 1000 * 2, GuardedDirection.DOWN), /* */
+					new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000 * 1000 * 1, GuardedDirection.DOWN) /* */						
+				);				
+				Thresholds.addThreshold("ThreadCount", "ThreadCount", "ThreadCount", "Current", "default", new LongBarrierPassGuard(ThresholdStatus.GREEN, 200, GuardedDirection.DOWN),
+					new LongBarrierPassGuard(ThresholdStatus.YELLOW, 200, GuardedDirection.UP), new LongBarrierPassGuard(ThresholdStatus.ORANGE, 300, GuardedDirection.UP),
+					new LongBarrierPassGuard(ThresholdStatus.RED, 500, GuardedDirection.UP), new LongBarrierPassGuard(ThresholdStatus.PURPLE, 1000, GuardedDirection.UP)
+				);
+				
 			}
-		}        
+			
+			try {
+				this.applicationContext = (ConfigurableApplicationContext) getContextLoader().initWebApplicationContext(getServletContext());
+				this.applicationContext.start();
+			} finally {
+				if (oldLoader != null)
+					currentThread.setContextClassLoader(oldLoader);
+			}
+			
+			
+		}
 	}
 	
 	@Override
 	protected void doStop() {
-		if(isSetApplicationContext()){
-			
+		if(isSetApplicationContext()){			
 			this.applicationContext.stop();			
 			if( isSetServletContext() ){
 				contextLoader.closeWebApplicationContext(getServletContext());
