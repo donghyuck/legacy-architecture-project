@@ -23,6 +23,8 @@ import java.util.Map;
 
 import javax.sql.DataSource;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
+
 import org.apache.commons.collections.map.FixedSizeMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,6 +47,7 @@ import architecture.ee.spring.jdbc.support.MappedColumnMapRowMapper;
 /**
  * @author   donghyuck
  */
+@Monitor
 public class SqlQueryImpl implements SqlQuery {
 	
 	private Log log = LogFactory.getLog(getClass());
