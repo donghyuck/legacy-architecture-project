@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -62,6 +63,7 @@ import com.google.common.collect.Sets;
  * @author  <a href="mailto:donghyuck.son@gmail.com">Donghyuck Son </a>
  *
  */
+@Monitor
 public class MultiProviderUserManager implements UserManager, EventSource {
 
 	private Log log = LogFactory.getLog(getClass());
