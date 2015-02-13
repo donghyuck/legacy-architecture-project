@@ -82,7 +82,6 @@ public class SecureMoSKitoController {
 				bean.setLastValueDate( new Date(values.get(values.size()-1).getTimestamp()));
 			}else{
 				bean.setNumberOfValues(0);
-				bean.setLastValueDate(new Date(0L));
 			}
 			ret.add(bean);
 		}		
@@ -106,7 +105,7 @@ public class SecureMoSKitoController {
 			bean.setLastValueDate(new Date(values.get(values.size() - 1).getTimestamp()));
 		} else {
 			bean.setNumberOfValues(0);
-			bean.setLastValueDate(new Date(0L));
+			//bean.setLastValueDate(new Date(0L));
 		}
 		return bean;
 	}	
