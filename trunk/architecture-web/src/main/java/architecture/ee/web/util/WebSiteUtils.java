@@ -108,11 +108,21 @@ public class WebSiteUtils {
 			if( name.equals( childMenu.getName() ) ){
 				return childMenu;
 			}
-			if( childMenu.getComponents().size() > 0 ){
+			if( childMenu.getComponents().size() > 0 ){				
 				for( MenuComponent childMenu2 : childMenu.getComponents() ){
 					if( name.equals( childMenu2.getName() ) ){
 						return childMenu2;
 					}
+				}
+				for( MenuComponent childMenu2 : childMenu.getComponents() ){
+					if( childMenu2.getComponents().size() > 0){
+						for( MenuComponent childMenu3 : childMenu2.getComponents() ){
+							if( name.equals( childMenu3.getName() ) ){
+								return childMenu3;
+							}							
+						}
+					}
+
 				}
 			}
 		}
@@ -135,6 +145,17 @@ public class WebSiteUtils {
 							selectedMenu = childMenu2;		
 							break;
 						}
+					}
+					for( MenuComponent childMenu2 : childMenu.getComponents() ){
+						if( childMenu2.getComponents().size() > 0){
+							for( MenuComponent childMenu3 : childMenu2.getComponents() ){
+								if( child.equals( childMenu3.getName() ) ){
+									selectedMenu = childMenu3;
+									break;
+								}							
+							}
+						}
+
 					}
 				}
 			}
