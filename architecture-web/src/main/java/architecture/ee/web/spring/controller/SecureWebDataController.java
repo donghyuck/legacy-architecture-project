@@ -31,6 +31,10 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
+import net.anotheria.moskito.core.producers.IStatsProducer;
+import net.anotheria.moskito.core.registry.IProducerRegistry;
+import net.anotheria.moskito.core.registry.ProducerReference;
+import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
 import net.sf.ehcache.Cache;
 
 import org.apache.commons.io.FileUtils;
@@ -129,6 +133,21 @@ public class SecureWebDataController {
 	@RequestMapping(value="/stage/os/get.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public SystemInfo  getSystemInfo(NativeWebRequest request) throws NotFoundException {				
+		IProducerRegistry ipr = ProducerRegistryFactory.getProducerRegistryInstance();		
+		for (ProducerReference ref : ipr.getProducerReferences() ){
+			IStatsProducer producer  = ref.get();		
+			
+			
+			log.debug( "======================================");
+			log.debug( 
+					"category:" +producer.getCategory()+ 			
+					", subsystem:" +producer.getSubsystem() + 	
+					", producerId::" + producer.getProducerId()
+			);			
+
+		}
+		
+		
 		return systemInformationService.getSystemInfo();
 	}
 

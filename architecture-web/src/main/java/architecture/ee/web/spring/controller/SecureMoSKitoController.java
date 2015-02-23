@@ -15,10 +15,25 @@
  */
 package architecture.ee.web.spring.controller;
 
+import java.io.File;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
+
+import javax.management.BadAttributeValueExpException;
+import javax.management.BadBinaryOpValueExpException;
+import javax.management.BadStringOperationException;
+import javax.management.InvalidApplicationException;
+import javax.management.MBeanServer;
+import javax.management.MBeanServerFactory;
+import javax.management.ObjectInstance;
+import javax.management.ObjectName;
+import javax.management.QueryExp;
 
 import net.anotheria.moskito.core.accumulation.AccumulatedValue;
 import net.anotheria.moskito.core.accumulation.Accumulator;
@@ -34,7 +49,12 @@ import net.anotheria.moskito.core.registry.IProducerRegistry;
 import net.anotheria.moskito.core.registry.IProducerRegistryAPI;
 import net.anotheria.moskito.core.registry.ProducerRegistryAPIFactory;
 import net.anotheria.moskito.core.registry.ProducerRegistryFactory;
+import net.anotheria.moskito.core.threshold.Threshold;
+import net.anotheria.moskito.core.threshold.ThresholdRepository;
+import net.anotheria.moskito.core.threshold.alerts.AlertHistory;
+import net.anotheria.moskito.core.threshold.alerts.ThresholdAlert;
 import net.anotheria.moskito.web.session.SessionCountStats;
+import net.anotheria.util.maven.MavenVersionReader;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
@@ -48,11 +68,15 @@ import org.springframework.web.context.request.NativeWebRequest;
 
 import architecture.ee.exception.NotFoundException;
 import architecture.ee.web.monitoring.moskito.AccumulatedSingleGraphObject;
+import architecture.ee.web.monitoring.moskito.AccumulatedValueObject;
 import architecture.ee.web.monitoring.moskito.AccumulatorDefinitionObject;
 import architecture.ee.web.monitoring.moskito.AccumulatorObject;
+import architecture.ee.web.monitoring.moskito.LibraryObject;
 import architecture.ee.web.monitoring.moskito.ProducerObject;
 import architecture.ee.web.monitoring.moskito.StatLineObject;
 import architecture.ee.web.monitoring.moskito.StatValue;
+import architecture.ee.web.monitoring.moskito.ThresholdAlertObject;
+import architecture.ee.web.monitoring.moskito.ThresholdStatusObject;
 
 @Controller ("secure-moskito-data-controller")
 @RequestMapping("/secure/data")
@@ -63,7 +87,132 @@ public class SecureMoSKitoController {
 	
 	public SecureMoSKitoController() {
 	}
+	
+	@RequestMapping(value="/stage/more/list_library.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<LibraryObject> getLibraries(
+			NativeWebRequest request) throws Exception 	
+	{	
+		ArrayList<LibraryObject> aBeans = new ArrayList<LibraryObject>();
+		List<URL> classpath = getClassPathUrls(request.getContextPath());
+		for (URL url : classpath){
+			String fileName = url.getFile();
+			if (!fileName.endsWith(".jar"))
+				continue;
+			File f = new File(fileName);
+			LibraryObject bean = new LibraryObject();
+			int lastSlash = fileName.lastIndexOf('/');
+			try{
+				bean.setName(fileName.substring(lastSlash + 1));
+				bean.setMavenVersion(MavenVersionReader.readVersionFromJar(f));
+				if (bean.getMavenVersion()==null){
+					bean.setLastModified(new Date(f.lastModified()));
+				}
+			}catch(Exception e){
+				log.warn("couldn't obtain lib version, skipped this url "+url, e);
+			}
+			aBeans.add(bean);
+		}
+		
+		return aBeans;
+	}
+	
+	private List<URL> getClassPathUrls(final String context){
+		List<URL> forTomcat7 = getClassPathUrlsForTomcat(context, "context");
+		if (forTomcat7!=null && forTomcat7.size()>0)
+			return forTomcat7;
+		List<URL> forTomcat6 = getClassPathUrlsForTomcat(context, "path");
+		if (forTomcat6!=null && forTomcat6.size()>0)
+			return forTomcat6;
+		//add another lookup methods here.
+		return new ArrayList<URL>();
+	}
+	
+	private List<URL> getClassPathUrlsForTomcat(final String context, final String contextPropertyName) {
+		List<MBeanServer> servers = MBeanServerFactory.findMBeanServer(null);
+		for (MBeanServer s : servers) {
+			Set<ObjectInstance> instances = s.queryMBeans(null, new QueryExp() {
+				@Override
+				public boolean apply(ObjectName name)
+						throws BadStringOperationException,
+						BadBinaryOpValueExpException,
+						BadAttributeValueExpException,
+						InvalidApplicationException {
+					String type = name.getKeyProperty("type");
+					if (!type.equals("WebappClassLoader"))
+						return false;
+					if (!name.getDomain().equals("Catalina"))
+						return false;
+					if (!name.getKeyProperty(contextPropertyName).equals(
+							context))
+						return false;
+					return true;
+				}
 
+				@Override
+				public void setMBeanServer(MBeanServer s) {
+				}
+			});
+			if (instances.size() > 0) {
+				try {
+					URL[] urls = (URL[]) s.getAttribute(instances.iterator().next().getObjectName(), "URLs");
+					return Arrays.asList(urls);
+				} catch (Exception e) {
+				}
+
+			}
+		}
+		return null;
+	}
+	
+	
+	@RequestMapping(value="/stage/thresholds/alerts.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<ThresholdAlertObject> getAlerts(
+			NativeWebRequest request) throws Exception 	
+	{	
+		ArrayList<ThresholdAlertObject> aBeans = new ArrayList<ThresholdAlertObject>();
+		for (ThresholdAlert alert : AlertHistory.INSTANCE.getAlerts()){
+			ThresholdAlertObject alertBean = new ThresholdAlertObject();
+			alertBean.setId(alert.getThreshold().getId());
+			alertBean.setName(alert.getThreshold().getName());
+			alertBean.setOldColorCode(alert.getOldStatus().toString().toLowerCase());
+			alertBean.setOldStatus(alert.getOldStatus().toString());
+			alertBean.setOldValue(alert.getOldValue());
+			alertBean.setNewColorCode(alert.getNewStatus().toString().toLowerCase());
+			alertBean.setNewStatus(alert.getNewStatus().toString());
+			alertBean.setNewValue(alert.getNewValue());
+			alertBean.setUpdatedDate(new Date( alert.getTimestamp()));
+			aBeans.add(alertBean);
+		}
+		return aBeans;
+	}
+	
+	@RequestMapping(value="/stage/thresholds/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<ThresholdStatusObject> getThresholds(
+			NativeWebRequest request) throws Exception 	
+	{	
+		List<Threshold> thresholds = ThresholdRepository.getInstance().getThresholds();
+		ArrayList<ThresholdStatusObject> ret = new ArrayList<ThresholdStatusObject>();
+		for (Threshold t : thresholds){
+			ThresholdStatusObject status = new ThresholdStatusObject();
+			status.setName(t.getName());
+			status.setColorCode(t.getStatus().toString().toLowerCase());
+			status.setStatus(t.getStatus().toString().toLowerCase());
+			status.setDescription(t.getDefinition().describe());
+			status.setValue(t.getLastValue());
+			status.setPreviousColorCode(t.getPreviousStatus().toString().toLowerCase());
+			status.setPreviousStatus(t.getPreviousStatus().toString().toLowerCase());			
+			status.setUpdatedDate(t.getStatusChangeTimestamp() == 0 ? null : new Date(t.getStatusChangeTimestamp()));
+			status.setStatusForSorting(t.getStatus());
+			status.setId(t.getId());
+			status.setFlipCount(t.getFlipCount());
+			ret.add(status);
+		}
+		return ret;
+	}
+	
 	@RequestMapping(value="/stage/accumulators/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public List<AccumulatorDefinitionObject> getAccumulatorDefinitions (
@@ -113,13 +262,31 @@ public class SecureMoSKitoController {
 	@RequestMapping(value="/stage/accumulators/graph.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
 	public AccumulatedSingleGraphObject getAccumulatorGraphData(
-			@RequestParam(value="accumulator", required=true ) String accumulatorId,		
+			@RequestParam(value="accumulator", required=true ) String accumulatorId,
 			NativeWebRequest request) throws Exception 	
 	 {
 		Accumulator accumulator = AccumulatorRepository.getInstance().getById(accumulatorId);
 		AccumulatedSingleGraphObject singleGraphDataBean = new AccumulatedSingleGraphObject(accumulator.getName());
 		singleGraphDataBean.setData(new AccumulatorObject(accumulator).getValues());
 		return singleGraphDataBean;
+	}
+
+	@RequestMapping(value="/stage/accumulators/graph_data_only.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public List<AccumulatedValueObject> getAccumulatorGraphDataOnly(
+			@RequestParam(value="accumulator", required=true ) String accumulatorId,
+			NativeWebRequest request) throws Exception 	
+	 {
+		Accumulator accumulator = AccumulatorRepository.getInstance().getById(accumulatorId);
+		List<AccumulatedValueObject> values = new LinkedList<AccumulatedValueObject>();
+		for (AccumulatedValue v : accumulator.getValues()){
+			AccumulatedValueObject ao = new AccumulatedValueObject(new Date(v.getTimestamp()));
+			ao.setName(accumulator.getName());
+			ao.addValue(v.getValue());
+			values.add(ao);
+		}
+		
+		return values;
 	}
 	
 	@RequestMapping(value="/stage/producers/list.json",method={RequestMethod.POST, RequestMethod.GET} )
@@ -136,7 +303,7 @@ public class SecureMoSKitoController {
 	{	
 		List<IStatsProducer> producers = producerRegistryAPI.getAllProducers();		
 		List<ProducerObject> list = new ArrayList<ProducerObject>(producers.size());
-		for (IStatsProducer producer : producers ){
+		for (IStatsProducer<?> producer : producers ){
 			if( StringUtils.isNotEmpty(currentCategory) && !StringUtils.equals(producer.getCategory(), currentCategory)){
 				continue;
 			}			
@@ -202,7 +369,7 @@ public class SecureMoSKitoController {
 				return false;
 		}});
 		List<ProducerObject> list = new ArrayList<ProducerObject>(producers.size());
-		for (IStatsProducer producer : producers ){	
+		for (IStatsProducer<?> producer : producers ){	
 			list.add(convertStatsProducerToPO( producer, intervalName, net.anotheria.moskito.core.stats.TimeUnit.fromString(unit), true, false));
 		}
 		return list;
