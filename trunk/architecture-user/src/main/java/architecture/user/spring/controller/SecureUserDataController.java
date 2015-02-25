@@ -15,8 +15,6 @@
  */
 package architecture.user.spring.controller;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import org.apache.commons.logging.Log;
@@ -29,12 +27,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.NativeWebRequest;
 
-import architecture.common.user.Company;
 import architecture.common.user.CompanyManager;
 import architecture.common.user.SecurityHelper;
 import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.ee.exception.NotFoundException;
+import architecture.ee.web.spring.controller.WebDataController.ItemList;
+import architecture.user.GroupManager;
+import architecture.user.RoleManager;
 
 
 @Controller ("secure-user-data-controller")
@@ -43,10 +43,17 @@ public class SecureUserDataController {
 
 	private static final Log log = LogFactory.getLog(SecureUserDataController.class);
 	
+	@Inject
+	@Qualifier("roleManager")
+	private RoleManager roleManager ;
 	
 	@Inject
 	@Qualifier("userManager")
 	private UserManager userManager ;
+
+	@Inject
+	@Qualifier("groupManager")
+	private GroupManager groupManager ;
 	
 	@Inject
 	@Qualifier("companyManager")
@@ -57,10 +64,23 @@ public class SecureUserDataController {
 		// TODO 자동 생성된 생성자 스텁
 	}
 
-
-	@RequestMapping(value="/mgmt/company/list.json",method={RequestMethod.POST} )
+	@RequestMapping(value="/mgmt/role/list.json",method={RequestMethod.POST, RequestMethod.GET} )
 	@ResponseBody
-	public CompanyList getCompanyList(
+	public ItemList getRoleList(
+			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
+			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
+			NativeWebRequest request) throws NotFoundException {		
+		
+		User user = SecurityHelper.getUser();	
+		int totalCount = roleManager.getTotalRoleCount();		
+		return new ItemList( roleManager.getRoles(), totalCount );
+	
+	}
+	
+	
+	@RequestMapping(value="/mgmt/company/list.json",method={RequestMethod.POST, RequestMethod.GET} )
+	@ResponseBody
+	public ItemList getCompanyList(
 			@RequestParam(value="startIndex", defaultValue="0", required=false ) Integer startIndex,
 			@RequestParam(value="pageSize", defaultValue="0", required=false ) Integer pageSize,
 			NativeWebRequest request) throws NotFoundException {			
@@ -68,53 +88,10 @@ public class SecureUserDataController {
 		User user = SecurityHelper.getUser();	
 		int totalCount = companyManager.getTotalCompanyCount();
 		if( pageSize > 0 ){			
-			return new CompanyList( companyManager.getCompanies(startIndex, pageSize), totalCount );
+			return new ItemList( companyManager.getCompanies(startIndex, pageSize), totalCount );
 		}else{
-			return new CompanyList( companyManager.getCompanies(), totalCount );
+			return new ItemList( companyManager.getCompanies(), totalCount );
 		}
 	}
-
-
-	public static class CompanyList {
-		
-		private List<Company> companies ;
-		
-		private int totalCount ;
-
-		/**
-		 * @param companies
-		 * @param totalCount
-		 */
-		public CompanyList(List<Company> companies, int totalCount) {
-			super();
-			this.companies = companies;
-			this.totalCount = totalCount;
-		}
-		/**
-		 * @return companies
-		 */
-		public List<Company> getCompanies() {
-			return companies;
-		}
-		/**
-		 * @param companies 설정할 companies
-		 */
-		public void setCompanies(List<Company> companies) {
-			this.companies = companies;
-		}
-		/**
-		 * @return totalCount
-		 */
-		public int getTotalCount() {
-			return totalCount;
-		}
-		/**
-		 * @param totalCount 설정할 totalCount
-		 */
-		public void setTotalCount(int totalCount) {
-			this.totalCount = totalCount;
-		}	
-		
-	}	
 
 }
