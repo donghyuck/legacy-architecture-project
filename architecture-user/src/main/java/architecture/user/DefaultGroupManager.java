@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
+
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,7 @@ import com.google.common.collect.Sets;
 /**
  * @author  donghyuck
  */
+@Monitor
 public class DefaultGroupManager extends AbstractGroupManager {
 	
 	private GroupDao groupDao;
