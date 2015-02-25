@@ -17,11 +17,13 @@ package architecture.ee.web.monitoring.moskito;
 
 import java.util.Date;
 
+import net.anotheria.util.maven.MavenVersion;
+
+import org.configureme.util.DateUtils;
+
 import architecture.common.model.json.CustomJsonDateSerializer;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
-import net.anotheria.util.maven.MavenVersion;
 
 public class LibraryObject {
 	/**
@@ -64,8 +66,8 @@ public class LibraryObject {
 		this.mavenVersion = mavenVersion;
 	}
 
-	public Date getTimestamp() {
-		return mavenVersion == null ? lastModified : new Date( Long.parseLong( mavenVersion.getFileTimestamp() ) );
+	public String getTimestamp() {
+		return mavenVersion == null ? DateUtils.toISO8601String(lastModified) : mavenVersion.getFileTimestamp() ;
 	}
 
 	public String getGroup() {
@@ -82,7 +84,6 @@ public class LibraryObject {
 
 	@Override
 	public String toString() {
-		return "LibAO{" + "name='" + name + '\'' + ", mavenVersion="
-				+ mavenVersion + ", lastModified='" + lastModified.toString() + '\'' + '}';
+		return "LibraryObject{" + "name='" + name + '\'' + ", mavenVersion=" + mavenVersion + ", lastModified='" + getTimestamp() + '\'' + '}';
 	}
 }
