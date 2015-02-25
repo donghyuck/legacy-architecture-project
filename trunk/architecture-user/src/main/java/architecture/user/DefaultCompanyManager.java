@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
 import net.sf.ehcache.Element;
 
 import org.apache.commons.lang3.StringUtils;
@@ -36,6 +37,7 @@ import architecture.common.user.User;
 import architecture.common.user.UserManager;
 import architecture.user.dao.CompanyDao;
 
+@Monitor
 public class DefaultCompanyManager extends AbstractCompanyManager {
 
 	private CompanyDao companyDao;

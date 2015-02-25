@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.anotheria.moskito.aop.annotation.Monitor;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -25,6 +26,7 @@ import architecture.user.spi.ExtendedRoleManager;
 /**
  * @author  donghyuck
  */
+@Monitor
 public class DefaultRoleManager implements ExtendedRoleManager, EventSource {
 
 	private Log log = LogFactory.getLog(getClass());
